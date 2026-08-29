@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
 import { AthleteDashboard } from '@/features/dashboard/AthleteDashboard'
+import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
 import { isSupabaseConfigured, supabase } from '@/lib/supabase'
 
 /**
  * Einstiegspunkt.
  *
- * Solange keine Sitzung besteht, läuft das Dashboard mit Demodaten weiter —
- * das Layout ist damit ohne Login und ohne Backend-Zugang beurteilbar. Sobald
- * Auth und die Datenabfragen stehen, wird `demo` false und die Ansicht liest
- * aus Supabase.
+ * Ohne Sitzung erscheint der Willkommensbildschirm; von dort führt "Demo
+ * ansehen" ins Dashboard mit Demodaten, damit das Produkt ohne Konto
+ * beurteilbar bleibt. Sobald Auth steht, ersetzt die echte Sitzung diesen Weg.
  */
 export default function App() {
   const [hasSession, setHasSession] = useState(false)
+  const [demoRequested, setDemoRequested] = useState(false)
 
   useEffect(() => {
     if (!supabase) return
@@ -22,6 +23,9 @@ export default function App() {
     return () => listener.subscription.unsubscribe()
   }, [])
 
-  const demo = !isSupabaseConfigured || !hasSession
-  return <AthleteDashboard demo={demo} />
+  if (!hasSession && !demoRequested) {
+    return <WelcomeScreen onDemo={() => setDemoRequested(true)} />
+  }
+
+  return <AthleteDashboard demo={!isSupabaseConfigured || !hasSession} />
 }

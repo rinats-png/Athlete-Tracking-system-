@@ -8,7 +8,8 @@
     "tests": "Tests",
     "history": "History",
     "clients": "Clients",
-    "settings": "Settings"
+    "settings": "Settings",
+    "challenges": "Challenges"
   },
   "actions": {
     "startTest": "Start test",
@@ -83,7 +84,10 @@
     "breakdown": "Axes in detail",
     "demoNotice": "Demo data — no session connected yet.",
     "testCount_one": "{{count}} test",
-    "testCount_other": "{{count}} tests"
+    "testCount_other": "{{count}} tests",
+    "retestHint": "Recommended interval: 4 months",
+    "keyData": "Key data",
+    "strongestIs": "Strongest axis: {{dimension}}"
   },
   "table": {
     "dimension": "Axis",
@@ -103,5 +107,22 @@
   "units": {
     "percentile": "percentile",
     "percentOfBest": "% of best"
+  },
+  "welcome": {
+    "eyebrow": "Performance diagnostics",
+    "headline": "Measure what you actually train.",
+    "body": "Standardised tests, honest numbers, and a profile that shows over months where you are getting stronger — and where you are not.",
+    "continueEmail": "Continue with email",
+    "haveAccount": "I have an account",
+    "viewDemo": "View demo",
+    "legal": "By continuing you agree to the terms of use and the privacy policy."
+  },
+  "body": {
+    "figureLabel": "Body view with highlighted performance dimensions",
+    "index": "Baseline index",
+    "detail_population_one": "From {{count}} test, compared with trained adults of your age and sex.",
+    "detail_population_other": "From {{count}} tests, compared with trained adults of your age and sex.",
+    "detail_personalBest_one": "From {{count}} test, measured against your personal best.",
+    "detail_personalBest_other": "From {{count}} tests, measured against your personal best."
   }
 }

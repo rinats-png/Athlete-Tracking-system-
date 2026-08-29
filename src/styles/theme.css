@@ -37,13 +37,18 @@
   --line-strong:      #B4B5AA;
   --grid:             #E3E3DA;  /* Chart-Gitter */
 
-  /* Marke: Limette. Als Fläche in beiden Modi identisch (dunkle Schrift
-     darauf), als Textfarbe je Modus eigens gewählt. */
-  --accent:           #C8F531;
-  --accent-ink:       #10130F;  /* Schrift auf Akzentfläche */
-  --accent-text:      #4C6B00;  /* Akzent als Schriftfarbe */
-  --accent-quiet:     rgba(111, 158, 0, 0.12);
-  --focus:            #4C6B00;
+  /* Marke: weiches Chartreuse — ruhiger und hochwertiger als ein Neon-Grün,
+     hält aber dieselbe Signalwirkung. Ein Ramp, vier Rollen:
+       accent-glow  Lichtspitze in Verläufen und Glows
+       accent       Fläche (Buttons, aktive Zustände), immer mit dunkler Schrift
+       accent-text  Akzent als Schriftfarbe, je Modus eigens gewählt
+       accent-quiet flächige Einfärbung hinter Hinweisen */
+  --accent-glow:      #E6F5C4;
+  --accent:           #C8E68C;
+  --accent-ink:       #10130F;
+  --accent-text:      #4F6B14;
+  --accent-quiet:     rgba(122, 161, 45, 0.13);
+  --focus:            #4F6B14;
 
   /* Chart-Serien (validiert) */
   --series-1:         #6F9E00;  /* aktueller Testzeitpunkt */
@@ -63,6 +68,14 @@
   --font-display: "Saira Condensed", "Arial Narrow", system-ui, sans-serif;
   --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Milchglas. Eigene Rollen, weil eine Glasfläche nicht die Flächenfarbe
+     ist, sondern eine Aufhellung über dem, was dahinter liegt — nur so wirkt
+     der Weichzeichner. */
+  --glass:        rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.74);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-edge:   rgba(255, 255, 255, 0.9);
 
   /* Kanten: fast eckig. 2 px ist die einzige Rundung im System. */
   --radius: 2px;
@@ -85,11 +98,12 @@
     --line-strong:    #3C423D;
     --grid:           #232724;
 
-    --accent:         #C8F531;
+    --accent-glow:    #E6F5C4;
+    --accent:         #C8E68C;
     --accent-ink:     #10130F;
-    --accent-text:    #C8F531;
-    --accent-quiet:   rgba(200, 245, 49, 0.10);
-    --focus:          #C8F531;
+    --accent-text:    #C8E68C;
+    --accent-quiet:   rgba(200, 230, 140, 0.10);
+    --focus:          #C8E68C;
 
     --series-1:       #79A11D;
     --series-2:       #3987e5;
@@ -101,6 +115,11 @@
     --critical:       #d03b3b;
     --delta-up:       #0ca30c;
     --delta-down:     #e66767;
+
+    --glass:        rgba(255, 255, 255, 0.07);
+    --glass-strong: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-edge:   rgba(255, 255, 255, 0.28);
   }
 }
 
@@ -120,11 +139,12 @@
   --line-strong:    #3C423D;
   --grid:           #232724;
 
-  --accent:         #C8F531;
+  --accent-glow:    #E6F5C4;
+  --accent:         #C8E68C;
   --accent-ink:     #10130F;
-  --accent-text:    #C8F531;
-  --accent-quiet:   rgba(200, 245, 49, 0.10);
-  --focus:          #C8F531;
+  --accent-text:    #C8E68C;
+  --accent-quiet:   rgba(200, 230, 140, 0.10);
+  --focus:          #C8E68C;
 
   --series-1:       #79A11D;
   --series-2:       #3987e5;
@@ -136,6 +156,11 @@
   --critical:       #d03b3b;
   --delta-up:       #0ca30c;
   --delta-down:     #e66767;
+
+  --glass:    rgba(255, 255, 255, 0.07);
+  --glass-strong: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-edge:   rgba(255, 255, 255, 0.28);
 }
 
 /* Tailwind-Utilities aus denselben Rollen ableiten, damit es genau eine
@@ -151,6 +176,10 @@
   --color-line:           var(--line);
   --color-line-strong:    var(--line-strong);
   --color-accent:         var(--accent);
+  --color-accent-glow:    var(--accent-glow);
+  --color-glass:          var(--glass);
+  --color-glass-strong:   var(--glass-strong);
+  --color-glass-border:   var(--glass-border);
   --color-accent-ink:     var(--accent-ink);
   --color-accent-text:    var(--accent-text);
   --color-accent-quiet:   var(--accent-quiet);

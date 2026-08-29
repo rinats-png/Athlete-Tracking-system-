@@ -8,7 +8,8 @@
     "tests": "Tests",
     "history": "Verlauf",
     "clients": "Klienten",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "challenges": "Wettkämpfe"
   },
   "actions": {
     "startTest": "Test starten",
@@ -83,7 +84,10 @@
     "breakdown": "Achsen im Detail",
     "demoNotice": "Demodaten — noch keine Sitzung verbunden.",
     "testCount_one": "{{count}} Test",
-    "testCount_other": "{{count}} Tests"
+    "testCount_other": "{{count}} Tests",
+    "retestHint": "Empfohlener Abstand: 4 Monate",
+    "keyData": "Stammdaten",
+    "strongestIs": "Stärkste Achse: {{dimension}}"
   },
   "table": {
     "dimension": "Achse",
@@ -103,5 +107,22 @@
   "units": {
     "percentile": "Perzentil",
     "percentOfBest": "% Bestleistung"
+  },
+  "welcome": {
+    "eyebrow": "Leistungsdiagnostik",
+    "headline": "Miss, was du wirklich trainierst.",
+    "body": "Standardisierte Tests, ehrliche Zahlen, ein Profil, das über Monate zeigt, wo du stärker wirst — und wo nicht.",
+    "continueEmail": "Mit E-Mail starten",
+    "haveAccount": "Ich habe ein Konto",
+    "viewDemo": "Demo ansehen",
+    "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen und der Datenschutzerklärung zu."
+  },
+  "body": {
+    "figureLabel": "Körperdarstellung mit hervorgehobenen Leistungsdimensionen",
+    "index": "Baseline-Index",
+    "detail_population_one": "Aus {{count}} Test, verglichen mit trainierten Erwachsenen deines Alters und Geschlechts.",
+    "detail_population_other": "Aus {{count}} Tests, verglichen mit trainierten Erwachsenen deines Alters und Geschlechts.",
+    "detail_personalBest_one": "Aus {{count}} Test, gemessen an deiner bisherigen Bestleistung.",
+    "detail_personalBest_other": "Aus {{count}} Tests, gemessen an deiner bisherigen Bestleistung."
   }
 }

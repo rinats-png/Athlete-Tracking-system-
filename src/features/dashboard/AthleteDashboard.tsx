@@ -1,16 +1,18 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { CalendarClock, FileText, Play } from 'lucide-react'
+import { FileText, Play } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
-import { StatTile } from '@/components/ui/StatTile'
 import { RadarProfile } from '@/components/charts/RadarProfile'
 import { TrendChart } from '@/components/charts/TrendChart'
+import { BodyHero } from './BodyHero'
+import { KeyMetrics } from './KeyMetrics'
+import { BottomNav } from './BottomNav'
 import { DimensionBreakdown } from './DimensionBreakdown'
 import { RecentTests } from './RecentTests'
 import { AppHeader } from './AppHeader'
-import { ageFromBirthDate, formatDate, formatNumber, formatRelativeMonths } from '@/lib/format'
+import { formatDate, formatRelativeMonths } from '@/lib/format'
 import { addMonths } from 'date-fns'
 import {
   DEMO_ASSESSMENT_DATES,
@@ -43,15 +45,12 @@ export function AthleteDashboard({ demo }: { demo: boolean }) {
     ? addMonths(new Date(athlete.lastAssessmentOn), RETEST_INTERVAL_MONTHS).toISOString()
     : null
 
-  const age = ageFromBirthDate(athlete.birthDate)
-  const scoreSuffix =
-    mode === 'population' ? t('units.percentile') : t('units.percentOfBest')
 
   return (
-    <div className="min-h-dvh">
+    <div className="flex min-h-dvh flex-col">
       <AppHeader demo={demo} />
 
-      <main className="mx-auto max-w-6xl px-4 py-5 sm:px-6">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-5 sm:px-6">
         {/* Identität des Athleten und die beiden Hauptaktionen. */}
         <section className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -87,61 +86,18 @@ export function AthleteDashboard({ demo }: { demo: boolean }) {
           </p>
         )}
 
-        {/* Kennzahlenleiste: eine Reihe Zahlen, kein Diagramm — hier ist die
-            blosse Zahl die klarste Darstellung. */}
-        <section className="mb-4 grid grid-cols-2 gap-px bg-line md:grid-cols-4">
-          <Panel className="border-0">
-            <StatTile
-              label={t('dashboard.strongest')}
-              value={strongest ? formatNumber(strongest.score, locale, 0) : '—'}
-              unit={scoreSuffix}
-              emphasis
-              meta={strongest ? t(`dimensions.${strongest.dimension}`) : undefined}
-            />
-          </Panel>
-          <Panel className="border-0">
-            <StatTile
-              label={t('dashboard.weakest')}
-              value={weakest ? formatNumber(weakest.score, locale, 0) : '—'}
-              unit={scoreSuffix}
-              emphasis
-              meta={weakest ? t(`dimensions.${weakest.dimension}`) : undefined}
-            />
-          </Panel>
-          <Panel className="border-0">
-            <StatTile
-              label={t('dashboard.bodyWeight')}
-              value={formatNumber(athlete.bodyWeightKg, locale, 1)}
-              unit="kg"
-              meta={`${athlete.heightCm} cm · ${age} ${t('dashboard.years')}`}
-            />
-          </Panel>
-          <Panel className="border-0">
-            <StatTile
-              label={t('dashboard.nextDue')}
-              value={nextDue ? formatDate(nextDue, locale) : '—'}
-              meta={
-                <span className="inline-flex items-center gap-1">
-                  <CalendarClock size={12} aria-hidden />
-                  {t('dashboard.restingHr')} {athlete.restingHr} · {t('dashboard.maxHr')}{' '}
-                  {athlete.maxHr}
-                </span>
-              }
-            />
-          </Panel>
-        </section>
-
         <div className="grid gap-4 lg:grid-cols-5">
-          {/* Radar — das Herzstück, bekommt die grösste Fläche. */}
+          {/* Der Körper als Einstieg: zeigt vor jeder Zahl, wo die Reserve
+              liegt. Die Stammdaten stehen daneben, nicht darunter — auf dem
+              Desktop bleibt so alles Wesentliche über der Falz. */}
           <Panel ticked className="lg:col-span-3">
             <PanelHeader
-              title={t('radar.title')}
-              subtitle={t('radar.subtitle', {
-                mode:
-                  mode === 'population'
-                    ? t('radar.modePopulation')
-                    : t('radar.modePersonalBest'),
-              })}
+              title={t('body.index')}
+              subtitle={
+                mode === 'population'
+                  ? t('radar.modePopulation')
+                  : t('radar.modePersonalBest')
+              }
               action={
                 <SegmentedControl<ScoreMode>
                   label={t('radar.title')}
@@ -160,6 +116,40 @@ export function AthleteDashboard({ demo }: { demo: boolean }) {
                     },
                   ]}
                 />
+              }
+            />
+            <div className="px-3 pt-3">
+              <BodyHero axes={profile.current} mode={mode} locale={locale} />
+            </div>
+          </Panel>
+
+          <Panel className="lg:col-span-2">
+            <PanelHeader
+              title={t('dashboard.keyData')}
+              subtitle={t('dashboard.strongestIs', {
+                dimension: strongest ? t(`dimensions.${strongest.dimension}`) : '—',
+              })}
+            />
+            <KeyMetrics athlete={athlete} nextDueIso={nextDue} locale={locale} />
+          </Panel>
+        </div>
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-5">
+
+          {/* Radar — das Herzstück, bekommt die grösste Fläche. */}
+          <Panel ticked className="lg:col-span-3">
+            <PanelHeader
+              title={t('radar.title')}
+              subtitle={t('radar.subtitle', {
+                mode:
+                  mode === 'population'
+                    ? t('radar.modePopulation')
+                    : t('radar.modePersonalBest'),
+              })}
+              action={
+                <span className="label-tag">
+                  {weakest ? t(`dimensions.${weakest.dimension}`) : ''}
+                </span>
               }
             />
             <RadarProfile
@@ -215,6 +205,8 @@ export function AthleteDashboard({ demo }: { demo: boolean }) {
           </Panel>
         </div>
       </main>
+
+      <BottomNav />
     </div>
   )
 }
