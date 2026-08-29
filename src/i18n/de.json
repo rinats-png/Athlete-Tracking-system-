@@ -1,0 +1,107 @@
+{
+  "app": {
+    "name": "Baseline",
+    "tagline": "Leistungsdiagnostik"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "tests": "Tests",
+    "history": "Verlauf",
+    "clients": "Klienten",
+    "settings": "Einstellungen"
+  },
+  "actions": {
+    "startTest": "Test starten",
+    "newAssessment": "Neue Diagnostik",
+    "exportReport": "PDF-Report",
+    "showTable": "Als Tabelle",
+    "showChart": "Als Diagramm",
+    "compare": "Vergleichen",
+    "seeAll": "Alle ansehen"
+  },
+  "theme": {
+    "label": "Darstellung",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "system": "System"
+  },
+  "language": {
+    "label": "Sprache",
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "dimensions": {
+    "endurance": "Ausdauer",
+    "max_strength": "Maxkraft",
+    "relative_strength": "Relativkraft",
+    "strength_endurance": "Kraftausdauer",
+    "power": "Schnellkraft",
+    "agility": "Agilität"
+  },
+  "categories": {
+    "endurance": "Ausdauer",
+    "max_strength": "Maxkraft",
+    "strength_endurance": "Kraftausdauer / MetCon",
+    "power": "Schnellkraft",
+    "agility": "Agilität"
+  },
+  "radar": {
+    "title": "Leistungsprofil",
+    "subtitle": "Sechs Achsen, {{mode}}",
+    "modePersonalBest": "gegen persönliche Bestleistung",
+    "modePopulation": "gegen Referenzwerte",
+    "personalBest": "Bestleistung",
+    "population": "Referenz",
+    "current": "Aktuell",
+    "previous": "Vormessung",
+    "referenceMedian": "Median (P50)",
+    "noData": "Noch nicht getestet",
+    "axisUnitPersonalBest": "% der Bestleistung",
+    "axisUnitPopulation": "Perzentil",
+    "emptyTitle": "Noch kein Profil",
+    "emptyBody": "Absolviere mindestens einen Test je Achse, damit das Profil entsteht.",
+    "coverage": "{{count}} von 6 Achsen belegt",
+    "modeHintPersonalBest": "100 = deine bisher beste Leistung auf dieser Achse. Zeigt Form relativ zu dir selbst.",
+    "modeHintPopulation": "Perzentil gegenüber trainierten Erwachsenen deines Alters und Geschlechts."
+  },
+  "dashboard": {
+    "greeting": "Leistungsprofil",
+    "lastAssessment": "Letzte Diagnostik",
+    "nextDue": "Nächste Diagnostik empfohlen",
+    "testsLogged": "Tests erfasst",
+    "strongest": "Stärkste Achse",
+    "weakest": "Grösste Reserve",
+    "biometrics": "Biometrie",
+    "bodyWeight": "Körpergewicht",
+    "height": "Grösse",
+    "restingHr": "Ruhepuls",
+    "maxHr": "Max. Puls",
+    "age": "Alter",
+    "years": "Jahre",
+    "recentTests": "Letzte Ergebnisse",
+    "trend": "Verlauf",
+    "breakdown": "Achsen im Detail",
+    "demoNotice": "Demodaten — noch keine Sitzung verbunden.",
+    "testCount_one": "{{count}} Test",
+    "testCount_other": "{{count}} Tests"
+  },
+  "table": {
+    "dimension": "Achse",
+    "score": "Wert",
+    "tests": "Tests",
+    "lastTest": "Letzter Test",
+    "test": "Test",
+    "date": "Datum",
+    "result": "Ergebnis",
+    "change": "Veränderung",
+    "rpe": "RPE"
+  },
+  "badges": {
+    "personalBest": "Bestleistung",
+    "demo": "Demo"
+  },
+  "units": {
+    "percentile": "Perzentil",
+    "percentOfBest": "% Bestleistung"
+  }
+}

@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Baseline — Designsystem
+   --------------------------------------------------------------------------
+   Gestaltungsrichtung: "Instrument Panel". Die App ist ein Messgerät, kein
+   Motivations-Feed. Deshalb: harte Kanten statt weicher Karten, Haarlinien
+   statt Schlagschatten, Messwerte in Mono-Ziffern, Beschriftungen in
+   gesperrter Versal-Kondensschrift wie auf einer Anzeigetafel.
+
+   Farbrollen sind vollständig unter :root definiert (Light als Basis) und in
+   zwei Dark-Scopes überschrieben: der Media Query für die Systemeinstellung
+   und [data-theme] für den manuellen Umschalter, der in beide Richtungen
+   gewinnen muss.
+
+   Die Serienfarben der Charts sind mit dem Validator der dataviz-Methode
+   gegen genau diese Oberflächen geprüft (Helligkeitsband, Chroma, CVD-
+   Trennung, Normalsicht-Abstand, Kontrast) — nicht nach Augenmass gewählt.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Flächen */
+  --plane:            #EFEFE9;  /* Seitenhintergrund */
+  --surface:          #FBFBF8;  /* Karten, Chart-Fläche */
+  --surface-raised:   #FFFFFF;
+  --surface-sunken:   #E7E7E0;
+
+  /* Schrift */
+  --ink:              #0B0D0C;
+  --ink-secondary:    #4E524D;
+  --ink-muted:        #7C817A;
+
+  /* Linien */
+  --line:             #D6D6CD;  /* Rahmen, Haarlinien */
+  --line-strong:      #B4B5AA;
+  --grid:             #E3E3DA;  /* Chart-Gitter */
+
+  /* Marke: Limette. Als Fläche in beiden Modi identisch (dunkle Schrift
+     darauf), als Textfarbe je Modus eigens gewählt. */
+  --accent:           #C8F531;
+  --accent-ink:       #10130F;  /* Schrift auf Akzentfläche */
+  --accent-text:      #4C6B00;  /* Akzent als Schriftfarbe */
+  --accent-quiet:     rgba(111, 158, 0, 0.12);
+  --focus:            #4C6B00;
+
+  /* Chart-Serien (validiert) */
+  --series-1:         #6F9E00;  /* aktueller Testzeitpunkt */
+  --series-2:         #2a78d6;  /* Vergleichszeitpunkt */
+  --series-3:         #eb6834;  /* dritter Vergleich, selten */
+  --reference:        #7C817A;  /* Referenz-/Medianlinie */
+
+  /* Status. Bewusst getrennt von den Serienfarben, damit eine Statusfarbe
+     nie wie eine Datenreihe aussieht. Immer mit Icon oder Text kombiniert. */
+  --good:             #0ca30c;
+  --warning:          #fab219;
+  --critical:         #d03b3b;
+  --delta-up:         #006300;
+  --delta-down:       #b02a2a;
+
+  /* Typografie */
+  --font-display: "Saira Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Kanten: fast eckig. 2 px ist die einzige Rundung im System. */
+  --radius: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --plane:          #0B0D0C;
+    --surface:        #141715;
+    --surface-raised: #1B1F1C;
+    --surface-sunken:  #0F1210;
+
+    --ink:            #F4F5F1;
+    --ink-secondary:  #B6BAB2;
+    --ink-muted:      #82877E;
+
+    --line:           #292E2A;
+    --line-strong:    #3C423D;
+    --grid:           #232724;
+
+    --accent:         #C8F531;
+    --accent-ink:     #10130F;
+    --accent-text:    #C8F531;
+    --accent-quiet:   rgba(200, 245, 49, 0.10);
+    --focus:          #C8F531;
+
+    --series-1:       #79A11D;
+    --series-2:       #3987e5;
+    --series-3:       #d95926;
+    --reference:      #82877E;
+
+    --good:           #0ca30c;
+    --warning:        #fab219;
+    --critical:       #d03b3b;
+    --delta-up:       #0ca30c;
+    --delta-down:     #e66767;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --plane:          #0B0D0C;
+  --surface:        #141715;
+  --surface-raised: #1B1F1C;
+  --surface-sunken: #0F1210;
+
+  --ink:            #F4F5F1;
+  --ink-secondary:  #B6BAB2;
+  --ink-muted:      #82877E;
+
+  --line:           #292E2A;
+  --line-strong:    #3C423D;
+  --grid:           #232724;
+
+  --accent:         #C8F531;
+  --accent-ink:     #10130F;
+  --accent-text:    #C8F531;
+  --accent-quiet:   rgba(200, 245, 49, 0.10);
+  --focus:          #C8F531;
+
+  --series-1:       #79A11D;
+  --series-2:       #3987e5;
+  --series-3:       #d95926;
+  --reference:      #82877E;
+
+  --good:           #0ca30c;
+  --warning:        #fab219;
+  --critical:       #d03b3b;
+  --delta-up:       #0ca30c;
+  --delta-down:     #e66767;
+}
+
+/* Tailwind-Utilities aus denselben Rollen ableiten, damit es genau eine
+   Quelle der Wahrheit gibt. */
+@theme inline {
+  --color-plane:          var(--plane);
+  --color-surface:        var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-ink:            var(--ink);
+  --color-ink-secondary:  var(--ink-secondary);
+  --color-ink-muted:      var(--ink-muted);
+  --color-line:           var(--line);
+  --color-line-strong:    var(--line-strong);
+  --color-accent:         var(--accent);
+  --color-accent-ink:     var(--accent-ink);
+  --color-accent-text:    var(--accent-text);
+  --color-accent-quiet:   var(--accent-quiet);
+  --color-series-1:       var(--series-1);
+  --color-series-2:       var(--series-2);
+  --color-series-3:       var(--series-3);
+  --color-reference:      var(--reference);
+  --color-good:           var(--good);
+  --color-warning:        var(--warning);
+  --color-critical:       var(--critical);
+  --color-delta-up:       var(--delta-up);
+  --color-delta-down:     var(--delta-down);
+
+  --font-display: var(--font-display);
+  --font-body:    var(--font-body);
+  --font-mono:    var(--font-mono);
+
+  --radius-panel: var(--radius);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--plane);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  /* Feines Messraster im Hintergrund — Werkstatt-Millimeterpapier, kein Deko-Verlauf. */
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--line) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--line) 45%, transparent) 1px, transparent 1px);
+  background-size: 88px 88px;
+  background-position: -1px -1px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* --- Wiederkehrende Bausteine ------------------------------------------- */
+
+/* Gesperrte Versal-Kondensschrift: Achsen- und Feldbeschriftungen. */
+.label-tag {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* Messwerte. Tabellenziffern, damit Spalten und Verläufe nicht springen. */
+.readout {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* Eckmarken an den Panels — Fadenkreuz eines Messgeräts. */
+.panel-ticked {
+  position: relative;
+}
+.panel-ticked::before,
+.panel-ticked::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: var(--line-strong);
+  pointer-events: none;
+}
+.panel-ticked::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-color: var(--accent);
+}
+.panel-ticked::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

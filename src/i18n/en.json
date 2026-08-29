@@ -1,0 +1,107 @@
+{
+  "app": {
+    "name": "Baseline",
+    "tagline": "Performance diagnostics"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "tests": "Tests",
+    "history": "History",
+    "clients": "Clients",
+    "settings": "Settings"
+  },
+  "actions": {
+    "startTest": "Start test",
+    "newAssessment": "New assessment",
+    "exportReport": "PDF report",
+    "showTable": "Show table",
+    "showChart": "Show chart",
+    "compare": "Compare",
+    "seeAll": "See all"
+  },
+  "theme": {
+    "label": "Appearance",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "label": "Language",
+    "de": "Deutsch",
+    "en": "English"
+  },
+  "dimensions": {
+    "endurance": "Endurance",
+    "max_strength": "Max strength",
+    "relative_strength": "Relative strength",
+    "strength_endurance": "Strength endurance",
+    "power": "Power",
+    "agility": "Agility"
+  },
+  "categories": {
+    "endurance": "Endurance",
+    "max_strength": "Max strength",
+    "strength_endurance": "Strength endurance / MetCon",
+    "power": "Power",
+    "agility": "Agility"
+  },
+  "radar": {
+    "title": "Performance profile",
+    "subtitle": "Six axes, {{mode}}",
+    "modePersonalBest": "vs personal best",
+    "modePopulation": "vs reference data",
+    "personalBest": "Personal best",
+    "population": "Reference",
+    "current": "Current",
+    "previous": "Previous",
+    "referenceMedian": "Median (P50)",
+    "noData": "Not tested yet",
+    "axisUnitPersonalBest": "% of personal best",
+    "axisUnitPopulation": "Percentile",
+    "emptyTitle": "No profile yet",
+    "emptyBody": "Complete at least one test per axis to build the profile.",
+    "coverage": "{{count}} of 6 axes covered",
+    "modeHintPersonalBest": "100 = your best result on this axis so far. Shows form relative to yourself.",
+    "modeHintPopulation": "Percentile against trained adults of your age and sex."
+  },
+  "dashboard": {
+    "greeting": "Performance profile",
+    "lastAssessment": "Last assessment",
+    "nextDue": "Next assessment due",
+    "testsLogged": "Tests recorded",
+    "strongest": "Strongest axis",
+    "weakest": "Biggest gap",
+    "biometrics": "Biometrics",
+    "bodyWeight": "Body weight",
+    "height": "Height",
+    "restingHr": "Resting HR",
+    "maxHr": "Max HR",
+    "age": "Age",
+    "years": "years",
+    "recentTests": "Latest results",
+    "trend": "Trend",
+    "breakdown": "Axes in detail",
+    "demoNotice": "Demo data — no session connected yet.",
+    "testCount_one": "{{count}} test",
+    "testCount_other": "{{count}} tests"
+  },
+  "table": {
+    "dimension": "Axis",
+    "score": "Score",
+    "tests": "Tests",
+    "lastTest": "Last test",
+    "test": "Test",
+    "date": "Date",
+    "result": "Result",
+    "change": "Change",
+    "rpe": "RPE"
+  },
+  "badges": {
+    "personalBest": "Personal best",
+    "demo": "Demo"
+  },
+  "units": {
+    "percentile": "percentile",
+    "percentOfBest": "% of best"
+  }
+}
