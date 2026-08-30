@@ -710,5 +710,49 @@
     "soloTitle": "Trainermodus nicht aktiv",
     "soloBody": "Dieser Bereich zeigt mehrere betreute Athleten nebeneinander. Im Einzelmodus stünde hier eine Tabelle mit genau einer Zeile — das Dashboard sagt dasselbe besser.",
     "switchMode": "Modus umstellen"
+  },
+  "emphasis": {
+    "title": "Schwerpunkt",
+    "volume": "{{minSessions}}–{{maxSessions}} Einheiten pro Woche, Wiederholungsmessung nach {{minWeeks}}–{{maxWeeks}} Wochen",
+    "verifyWith": "Nachprüfen mit: {{tests}}",
+    "confidence": {
+      "high": "Gut belegt",
+      "medium": "Eingeschränkt belegt",
+      "low": "Schwach belegt"
+    },
+    "disclaimer": "Performance-Empfehlung, keine medizinische oder trainingsplanerische Beratung. Benannt sind die Qualitäten der Achse und ein Umfang als Bandbreite — keine Übungen, Sätze oder Wiederholungen. Die Zeitfenster sind eine Voreinstellung dieser App und keine Vorgabe aus der Literatur.",
+    "focus": {
+      "explosiveStrength": "Explosivkraft",
+      "jumpTechnique": "Sprungtechnik",
+      "rateOfForce": "Kraftanstiegsrate",
+      "changeOfDirection": "Richtungswechsel",
+      "deceleration": "Abbremsen",
+      "acceleration": "Beschleunigung",
+      "heavyCompound": "Schwere Grundübungen",
+      "technique": "Technik",
+      "progressiveOverload": "Progressive Belastungssteigerung",
+      "bodyweightStrength": "Kraft am eigenen Körpergewicht",
+      "strengthToMass": "Kraft-Masse-Verhältnis",
+      "repeatedEfforts": "Wiederholte Belastungen",
+      "lactateTolerance": "Laktattoleranz",
+      "pacing": "Krafteinteilung",
+      "aerobicBase": "Aerobe Grundlage",
+      "threshold": "Schwellenbereich",
+      "runningEconomy": "Laufökonomie"
+    }
+  },
+  "flags": {
+    "personal_best": "Neue Bestleistung",
+    "personal_best_change": "Neue Bestleistung — vorher {{previous}}, {{changePercent}} %",
+    "significant_improvement": "Deutliche Verbesserung: {{changePercent}} %",
+    "significant_regression": "Deutliche Verschlechterung: {{changePercent}} %",
+    "insufficient_data": "Erste Messung dieses Tests",
+    "submaximal_effort": "Nicht ausbelastet (RPE {{rpe}})",
+    "missing_context": "Angaben unvollständig",
+    "outlier": "Ungewöhnlicher Wert — bitte die Messung prüfen",
+    "efficiency_gain": "{{changePercent}} % mehr Leistung bei {{rpeDelta}} Punkten weniger empfundener Anstrengung",
+    "threshold": "Als deutlich gilt eine Veränderung ab 5 % gegenüber der vorherigen Messung desselben Tests. Die Schwelle ist gesetzt und nicht aus den Daten abgeleitet.",
+    "regressionTitle": "Grösste Verschlechterung",
+    "regressionNeutral": "Eine Verschlechterung wird hier genauso benannt wie eine Verbesserung. Sie kann viele Gründe haben — Tagesform, Krankheit, ein Trainingsblock mit anderem Schwerpunkt."
   }
 }

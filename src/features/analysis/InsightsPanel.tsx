@@ -158,6 +158,37 @@ function RecommendationRow({
       <p className="mt-1 text-[12px] text-ink-muted">
         {t(`insights.evidence.${recommendation.evidence}`)}
       </p>
+      {/* Trainingsschwerpunkt (§30). Ausdrücklich als Performance-Empfehlung
+          gekennzeichnet — was daraus für den Trainingsplan folgt, entscheidet
+          der Athlet oder sein Trainer. */}
+      {recommendation.emphasis && (
+        <div className="mt-2 border-l-2 border-accent bg-accent/8 px-3 py-2">
+          <p className="label-tag">{t('emphasis.title')}</p>
+          <p className="mt-1 text-[13px] leading-snug">
+            {recommendation.emphasis.focusKeys.map((key) => t(key)).join(' · ')}
+          </p>
+          <p className="mt-1 text-[12px] text-ink-secondary">
+            {t('emphasis.volume', {
+              minSessions: recommendation.emphasis.sessionsPerWeek[0],
+              maxSessions: recommendation.emphasis.sessionsPerWeek[1],
+              minWeeks: recommendation.emphasis.weeksToRetest[0],
+              maxWeeks: recommendation.emphasis.weeksToRetest[1],
+            })}
+          </p>
+          <p className="mt-1 text-[12px] text-ink-muted">
+            {t('emphasis.verifyWith', {
+              tests: recommendation.emphasis.verifyWith
+                .map((slug) => getTest(slug)?.shortName[locale] ?? slug)
+                .join(', '),
+            })}
+          </p>
+          <p className="mt-1.5 text-[11px] leading-relaxed text-ink-muted">
+            {t(`emphasis.confidence.${recommendation.emphasisConfidence}`)} ·{' '}
+            {t('emphasis.disclaimer')}
+          </p>
+        </div>
+      )}
+
       {suggested.length > 0 && (
         <ul className="mt-2 flex flex-wrap gap-2">
           {suggested.map((test) => (

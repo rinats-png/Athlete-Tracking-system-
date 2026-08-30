@@ -4,6 +4,7 @@ import { coveredDimensions } from '@/domain/assessment'
 import { assessQuality } from '@/domain/dataQuality'
 import { confidenceScore, testTrend } from '@/domain/analytics'
 import type { PerformanceDimension, RadarAxis } from '@/types/domain'
+import { emphasisConfidence, emphasisFor, type Emphasis } from '@/domain/emphasis'
 import type { StoredAssessment, StoredResult } from '@/lib/store/localStore'
 
 /**
@@ -139,6 +140,18 @@ export interface Recommendation {
   suggestedTestSlugs: string[]
   /** Betroffene Achse, sofern es eine gibt. */
   dimension: PerformanceDimension | null
+  /**
+   * Trainingsschwerpunkt (§30) — nur bei Hinweisen zu einer schwächeren
+   * Achse. Ausdrücklich eine Performance-Empfehlung und keine
+   * trainingsplanerische oder medizinische Beratung: benannt werden die
+   * Qualitäten, die die Achse ausmachen, ein Umfang als Bandbreite und die
+   * Tests, mit denen sich der Fortschritt nachprüfen lässt. Keine Übungen,
+   * keine Sätze, keine Wiederholungen — die App kennt weder Vorgeschichte
+   * noch Belastbarkeit des Athleten.
+   */
+  emphasis: Emphasis | null
+  /** Belastbarkeit des Schwerpunkts, geerbt von der Achse. */
+  emphasisConfidence: 'high' | 'medium' | 'low' | null
 }
 
 /** Ab wann eine Messung als veraltet gilt und wiederholt werden sollte. */
@@ -173,6 +186,8 @@ export function recommendations(
       values: {},
       suggestedTestSlugs: [],
       dimension: null,
+      emphasis: null,
+      emphasisConfidence: null,
     })
   }
 
@@ -187,6 +202,8 @@ export function recommendations(
       values: {},
       suggestedTestSlugs: testsForDimension(dimension).slice(0, 2),
       dimension,
+      emphasis: null,
+      emphasisConfidence: null,
     })
   }
 
@@ -210,6 +227,8 @@ export function recommendations(
       values: { days: ageDays },
       suggestedTestSlugs: [testSlug],
       dimension: getTest(testSlug)?.dimension ?? null,
+      emphasis: null,
+      emphasisConfidence: null,
     })
   }
 
@@ -224,6 +243,8 @@ export function recommendations(
       values: {},
       suggestedTestSlugs: testsForDimension(dimension).slice(0, 2),
       dimension,
+      emphasis: null,
+      emphasisConfidence: null,
     })
   }
 
@@ -237,6 +258,8 @@ export function recommendations(
       values: { count: questionable, total: scored.length },
       suggestedTestSlugs: [],
       dimension: null,
+      emphasis: null,
+      emphasisConfidence: null,
     })
   }
 
@@ -255,6 +278,10 @@ export function recommendations(
       },
       suggestedTestSlugs: [],
       dimension: limiter.dimension,
+      // Nur hier: der Schwerpunkt gehört zur inhaltlichen Beobachtung, nicht
+      // zu den Hinweisen auf die Datenlage.
+      emphasis: emphasisFor(limiter.dimension),
+      emphasisConfidence: emphasisConfidence(limiter.evidence),
     })
   }
 

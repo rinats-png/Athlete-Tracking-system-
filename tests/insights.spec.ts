@@ -161,8 +161,14 @@ test.describe('Hinweise', () => {
 
   test('kein Hinweis formuliert eine Trainings- oder Gesundheitsanweisung', () => {
     // Die Texte stehen in der Übersetzung; hier wird geprüft, dass der
-    // Datentyp gar keinen Platz für eine Anweisung vorsieht: nur Regelart,
-    // Belege und Testvorschläge aus dem eigenen Katalog.
+    // Datentyp gar keinen Platz für eine Anweisung vorsieht: Regelart,
+    // Belege, Testvorschläge aus dem eigenen Katalog — und seit §30 ein
+    // Trainingsschwerpunkt.
+    //
+    // Der Schwerpunkt weitet die Grenze NICHT auf: er nennt die Qualitäten
+    // der Achse und einen Umfang als Bandbreite, hat aber selbst kein Feld
+    // für Übungen, Sätze oder Wiederholungen. Das prüft
+    // `flags-emphasis.spec.ts` an seinem eigenen Datentyp.
     const list = recommendations(
       [axis('max_strength', 80), axis('power', 78), axis('endurance', 40)],
       [result('back_squat_1rm', '2026-04-20', 165)],
@@ -171,8 +177,23 @@ test.describe('Hinweise', () => {
     )
     for (const item of list) {
       expect(Object.keys(item).sort()).toEqual(
-        ['dimension', 'evidence', 'kind', 'priority', 'suggestedTestSlugs', 'values'].sort(),
+        [
+          'dimension',
+          'emphasis',
+          'emphasisConfidence',
+          'evidence',
+          'kind',
+          'priority',
+          'suggestedTestSlugs',
+          'values',
+        ].sort(),
       )
+      // Ein Schwerpunkt hängt ausschliesslich an der inhaltlichen
+      // Beobachtung, nie an einem Hinweis zur Datenlage.
+      if (item.kind !== 'address_limiter') {
+        expect(item.emphasis, item.kind).toBeNull()
+        expect(item.emphasisConfidence, item.kind).toBeNull()
+      }
       for (const slug of item.suggestedTestSlugs) {
         expect(testsForDimension(item.dimension!)).toContain(slug)
       }

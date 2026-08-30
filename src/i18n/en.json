@@ -710,5 +710,49 @@
     "soloTitle": "Coach mode is off",
     "soloBody": "This area shows several coached athletes side by side. In solo mode it would be a table with exactly one row — the dashboard says that better.",
     "switchMode": "Change mode"
+  },
+  "emphasis": {
+    "title": "Emphasis",
+    "volume": "{{minSessions}}–{{maxSessions}} sessions per week, re-test after {{minWeeks}}–{{maxWeeks}} weeks",
+    "verifyWith": "Verify with: {{tests}}",
+    "confidence": {
+      "high": "Well evidenced",
+      "medium": "Partly evidenced",
+      "low": "Weakly evidenced"
+    },
+    "disclaimer": "A performance recommendation, not medical or training-plan advice. What is named are the qualities of the axis and a volume as a range — no exercises, sets or repetitions. The time windows are a default of this app, not a prescription from the literature.",
+    "focus": {
+      "explosiveStrength": "Explosive strength",
+      "jumpTechnique": "Jump technique",
+      "rateOfForce": "Rate of force development",
+      "changeOfDirection": "Change of direction",
+      "deceleration": "Deceleration",
+      "acceleration": "Acceleration",
+      "heavyCompound": "Heavy compound lifts",
+      "technique": "Technique",
+      "progressiveOverload": "Progressive overload",
+      "bodyweightStrength": "Bodyweight strength",
+      "strengthToMass": "Strength-to-mass ratio",
+      "repeatedEfforts": "Repeated efforts",
+      "lactateTolerance": "Lactate tolerance",
+      "pacing": "Pacing",
+      "aerobicBase": "Aerobic base",
+      "threshold": "Threshold work",
+      "runningEconomy": "Running economy"
+    }
+  },
+  "flags": {
+    "personal_best": "New personal best",
+    "personal_best_change": "New personal best — previously {{previous}}, {{changePercent}} %",
+    "significant_improvement": "Marked improvement: {{changePercent}} %",
+    "significant_regression": "Marked decline: {{changePercent}} %",
+    "insufficient_data": "First measurement of this test",
+    "submaximal_effort": "Not taken to maximum (RPE {{rpe}})",
+    "missing_context": "Details incomplete",
+    "outlier": "Unusual value — please verify the measurement",
+    "efficiency_gain": "{{changePercent}} % more output at {{rpeDelta}} points lower perceived effort",
+    "threshold": "A change counts as marked from 5 % against the previous measurement of the same test. The threshold is set, not derived from the data.",
+    "regressionTitle": "Largest decline",
+    "regressionNeutral": "A decline is named here just as a improvement is. It can have many causes — daily form, illness, a training block with a different focus."
   }
 }

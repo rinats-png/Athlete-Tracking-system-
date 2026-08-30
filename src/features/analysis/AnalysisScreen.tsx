@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { ConfidencePanel } from './ConfidencePanel'
 import { CoveragePanel } from './CoveragePanel'
 import { InsightsPanel } from './InsightsPanel'
+import { FlagList } from './FlagList'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import {
   baselineComparisons,
@@ -19,6 +20,7 @@ import {
   type TrendLabel,
 } from '@/domain/analytics'
 import { coverageByDimension } from '@/domain/benchmark'
+import { flagsFor, largestRegression } from '@/domain/flags'
 import { buildInsights } from '@/domain/insights'
 import { radarProfile } from '@/lib/scoring'
 import { getTest } from '@/data/testCatalog'
@@ -54,6 +56,7 @@ export function AnalysisScreen() {
     [axes, data.results, data.assessments, data.profile],
   )
   const comparisons = useMemo(() => baselineComparisons(data.results), [data.results])
+  const regression = useMemo(() => largestRegression(data.results), [data.results])
 
   const completed = useMemo(
     () =>
@@ -150,6 +153,28 @@ export function AnalysisScreen() {
         </Panel>
       </div>
 
+      {/* §71: Regression wird genauso prominent behandelt wie Fortschritt.
+          Eine App, die nur Verbesserungen zeigt, ist ein Motivationswerkzeug
+          und keine Diagnostik. */}
+      {regression && (
+        <div className="mt-4 border-l-2 border-critical bg-critical/8 px-4 py-3">
+          <p className="label-tag">{t('flags.regressionTitle')}</p>
+          <p className="mt-1 text-[14px]">
+            {getTest(regression.result.testSlug)?.name[locale] ?? regression.result.testSlug}{' '}
+            <span className="readout tabular-nums">
+              {regression.changePercent.toFixed(1)} %
+            </span>{' '}
+            <span className="text-ink-secondary">
+              ({formatDate(regression.previous.performedAt, locale)} →{' '}
+              {formatDate(regression.result.performedAt, locale)})
+            </span>
+          </p>
+          <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
+            {t('flags.regressionNeutral')} {t('flags.threshold')}
+          </p>
+        </div>
+      )}
+
       <div className="mt-4">
         <InsightsPanel report={insights} locale={locale} />
       </div>
@@ -199,6 +224,10 @@ export function AnalysisScreen() {
                       </td>
                       <td className="px-4 py-2.5">
                         <TrendBadge trend={trend} />
+                        <FlagList
+                          flags={flagsFor(row.current, data.results)}
+                          className="mt-1"
+                        />
                       </td>
                     </tr>
                   )
