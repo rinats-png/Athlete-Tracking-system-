@@ -31,6 +31,10 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
+      // Die mitgelieferte Registrierung ruft nur einmal `register()` auf und
+      // fragt nie wieder nach einer neuen Fassung. Wir registrieren selbst,
+      // siehe src/lib/pwaUpdate.ts.
+      injectRegister: null,
       includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'],
       manifest: {
         name: 'Baseline — Sportdiagnostik',
