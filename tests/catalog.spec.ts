@@ -220,3 +220,50 @@ test.describe("Testbatterien", () => {
     expect(batteryDimensions(general).length).toBe(PERFORMANCE_DIMENSIONS.length);
   });
 });
+
+test.describe("Einheiten (§61)", () => {
+  test("Gewicht, Distanz und Höhe rechnen ins imperiale System um", async () => {
+    const { formatMeasurement } = await import("../src/lib/format");
+
+    expect(formatMeasurement(100, "kg", "de", "metric")).toEqual({ value: "100,0", unit: "kg" });
+    expect(formatMeasurement(100, "kg", "de", "imperial").unit).toBe("lb");
+    expect(Number(formatMeasurement(100, "kg", "en", "imperial").value)).toBeCloseTo(220.5, 0);
+
+    // Sprungweiten unter 10 m liest man in Zentimetern bzw. Zoll.
+    expect(formatMeasurement(2.4, "m", "de", "metric")).toEqual({ value: "240", unit: "cm" });
+    expect(formatMeasurement(2.4, "m", "de", "imperial").unit).toBe("in");
+
+    // Laufdistanzen bleiben Distanzen.
+    expect(formatMeasurement(3200, "m", "de", "metric").unit).toBe("m");
+    expect(formatMeasurement(3200, "m", "de", "imperial").unit).toBe("mi");
+
+    // Sprunghöhen in Zoll, nicht in Fuss — Fuss wäre unbrauchbar grob.
+    expect(formatMeasurement(42, "cm", "de", "metric")).toEqual({ value: "42", unit: "cm" });
+    expect(formatMeasurement(42, "cm", "de", "imperial").unit).toBe("in");
+  });
+
+  test("SI-Einheiten werden nicht umgerechnet", async () => {
+    const { formatMeasurement } = await import("../src/lib/format");
+    // «Pferdestärken pro Ruderschlag» braucht niemand.
+    expect(formatMeasurement(280, "W", "de", "imperial")).toEqual({ value: "280", unit: "W" });
+    expect(formatMeasurement(120, "kcal", "de", "imperial").unit).toBe("kcal");
+  });
+
+  test("Zeiten werden lesbar gesetzt statt als Sekundenzahl", async () => {
+    const { formatMeasurement } = await import("../src/lib/format");
+    expect(formatMeasurement(430, "s", "de", "metric").value).toContain(":");
+  });
+
+  test("jede Primäreinheit des Katalogs ist behandelt", async () => {
+    const { formatMeasurement } = await import("../src/lib/format");
+    const units = [...new Set(TEST_CATALOG.map((t) => t.primaryUnit))];
+    for (const unit of units) {
+      for (const system of ["metric", "imperial"] as const) {
+        const out = formatMeasurement(42, unit, "de", system);
+        // Kein Test darf einen leeren oder unsinnigen Wert liefern.
+        expect(out.value, `${unit}/${system}`).not.toBe("");
+        expect(out.value, `${unit}/${system}`).not.toContain("NaN");
+      }
+    }
+  });
+});

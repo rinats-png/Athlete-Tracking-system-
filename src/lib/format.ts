@@ -89,10 +89,46 @@ export function formatMeasurement(
       return units === 'imperial'
         ? { value: formatNumber(value / M_PER_MILE, locale, 2), unit: 'mi' }
         : { value: formatNumber(value, locale, 0), unit: 'm' }
+    case 'W':
+      // Watt ist eine SI-Einheit und wird nicht umgerechnet — «Pferdestärken
+      // pro Ruderschlag» braucht niemand.
+      return { value: formatNumber(value, locale, 0), unit: 'W' }
+
+    case 'kcal':
+      return { value: formatNumber(value, locale, 0), unit: 'kcal' }
+
+    case 'km':
+      return units === 'imperial'
+        ? { value: formatNumber(value / 1.609344, locale, 2), unit: 'mi' }
+        : { value: formatNumber(value, locale, 2), unit: 'km' }
+
+    case 'cm':
+      // Körpermasse: im imperialen System in Zoll, nicht in Fuss —
+      // Sprunghöhen in Fuss anzugeben wäre unbrauchbar grob.
+      return units === 'imperial'
+        ? { value: formatNumber(value / 2.54, locale, 1), unit: 'in' }
+        : { value: formatNumber(value, locale, 0), unit: 'cm' }
+
     default:
       return { value: formatNumber(value, locale, value < 10 ? 2 : 0), unit }
   }
 }
+
+/**
+ * Zusammengesetzte Einheiten (W/kg, kcal/min, ml/kg/min).
+ *
+ * Sie werden NICHT umgerechnet, auch nicht im imperialen System. Eine
+ * Angabe wie «ml/lb/min» gibt es in der Sportwissenschaft nicht, und eine
+ * erfundene Umrechnung wäre schlechter lesbar als die etablierte Einheit.
+ */
+export const NON_CONVERTED_UNITS = [
+  'ml/kg/min',
+  'W/kg',
+  'kcal/min',
+  'Sinclair',
+  '/min',
+  '× KG',
+] as const
 
 export function ageFromBirthDate(birthDate: string | null): number | null {
   if (!birthDate) return null
