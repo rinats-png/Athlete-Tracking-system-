@@ -1,5 +1,6 @@
 import { getTest } from '@/data/testCatalog'
 import { deltaPercent, isPersonalBest } from '@/lib/scoring'
+import { formatMeasurement, type UnitSystem } from '@/lib/format'
 import type { AppLocale, TestSummary } from '@/types/domain'
 import type { StoredResult } from '@/lib/store/localStore'
 
@@ -50,4 +51,23 @@ export function toSummaries(results: StoredResult[], locale: AppLocale): TestSum
       }
     })
     .filter((x): x is TestSummary => x !== null)
+}
+
+/**
+ * Primärwert eines Ergebnisses als fertige Zeichenkette mit Einheit.
+ *
+ * Setzt auf `formatMeasurement` auf statt selbst zu runden: dieselbe Zahl
+ * muss in der Diagnostik, im Verlauf und im Bericht identisch aussehen. Eine
+ * eigene Rundung an dieser Stelle hatte 2,4 m gezeigt, wo der Verlauf 240 cm
+ * schreibt — in einem Bericht für einen Kunden ist das ein Mangel.
+ */
+export function formatResultValue(
+  result: StoredResult,
+  locale: AppLocale,
+  units: UnitSystem = 'metric',
+): string {
+  const test = getTest(result.testSlug)
+  if (!test || result.score == null) return '—'
+  const { value, unit } = formatMeasurement(result.score, test.primaryUnit, locale, units)
+  return `${value}${unit ? `\u00a0${unit}` : ''}`
 }

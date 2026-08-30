@@ -53,6 +53,8 @@ const result = (
     ageYears: 34,
     sex: "male",
     assessmentId: null,
+    attempts: [],
+    attemptSelection: null,
     createdAt: "2026-05-01T09:05:00.000Z",
     ...overrides,
   }) as StoredResult;

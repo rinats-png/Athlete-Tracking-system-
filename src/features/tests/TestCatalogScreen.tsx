@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ChevronRight } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -14,6 +14,12 @@ type Filter = TestCategory | 'all'
 const FILTERS: Filter[] = ['all', 'endurance', 'max_strength', 'strength_endurance', 'power', 'agility']
 
 export function TestCatalogScreen() {
+  const [searchParams] = useSearchParams()
+  // Aus einer laufenden Diagnostik heraus geöffnet: der Termin wird an den
+  // Test weitergereicht, sonst landet das Ergebnis ausserhalb des Termins.
+  const assessmentId = searchParams.get('diagnostik')
+  const assessmentQuery = assessmentId ? `?diagnostik=${assessmentId}` : ''
+
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const [filter, setFilter] = useState<Filter>('all')
@@ -68,7 +74,7 @@ export function TestCatalogScreen() {
             return (
               <li key={test.slug}>
                 <Link
-                  to={`/tests/${test.slug}`}
+                  to={`/tests/${test.slug}${assessmentQuery}`}
                   // min-h-16 hält die Zeile über der 44-px-Grenze, auch wenn
                   // der Name nur einzeilig ist.
                   className="flex min-h-16 items-center gap-3 px-4 py-3 transition-colors hover:bg-accent-quiet"

@@ -31,10 +31,12 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
  */
 
 export const NAV_ITEMS = [
-  { key: 'dashboard', icon: House, path: '/' },
-  { key: 'tests', icon: ClipboardList, path: '/tests' },
-  { key: 'history', icon: BarChart3, path: '/verlauf' },
-  { key: 'profile', icon: User, path: '/profil' },
+  { key: 'dashboard', icon: House, path: '/', alsoMatches: [] },
+  // Der Testkatalog ist ein Unterbereich der Diagnostik: ein Einzeltest ohne
+  // Termin bleibt möglich, führt aber unter denselben Reiter.
+  { key: 'tests', icon: ClipboardList, path: '/diagnostik', alsoMatches: ['/tests'] },
+  { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: [] },
+  { key: 'profile', icon: User, path: '/profil', alsoMatches: [] },
 ] as const
 
 export type NavKey = (typeof NAV_ITEMS)[number]['key']
@@ -48,9 +50,11 @@ export function pathForNavKey(key: NavKey): string {
  * /tests/cooper_12min ebenfalls den Tab "Tests" markiert.
  */
 export function navKeyForPath(pathname: string): NavKey {
-  const match = [...NAV_ITEMS]
-    .filter((item) => item.path !== '/' && pathname.startsWith(item.path))
-    .sort((a, b) => b.path.length - a.path.length)[0]
+  const match = NAV_ITEMS.flatMap((item) =>
+    [item.path, ...item.alsoMatches]
+      .filter((path) => path !== '/' && pathname.startsWith(path))
+      .map((path) => ({ key: item.key, path })),
+  ).sort((a, b) => b.path.length - a.path.length)[0]
   return match?.key ?? 'dashboard'
 }
 
@@ -90,14 +94,15 @@ export function BottomNav({
           />
         ))}
 
-        {/* Der Testabruf sitzt mittig und erhöht: die einzige Aktion, die in
-            der Halle einhändig erreichbar sein muss. Er belegt eine eigene
-            Rasterspalte, damit er die Nachbarn nicht überdeckt. */}
+        {/* Eine Diagnostik zu starten sitzt mittig und erhöht: das ist die
+            Handlung, um die diese App gebaut ist, und die einzige, die in der
+            Halle einhändig erreichbar sein muss. Sie belegt eine eigene
+            Rasterspalte, damit sie die Nachbarn nicht überdeckt. */}
         <div className="flex items-center justify-center">
           <button
             type="button"
             onClick={onStartTest}
-            aria-label={t('actions.startTest')}
+            aria-label={t('actions.startAssessment')}
             className="-mt-6 flex h-14 w-14 items-center justify-center rounded-full border-4 border-plane bg-accent text-accent-ink transition-transform active:scale-95"
           >
             <Play size={20} strokeWidth={2.4} aria-hidden />

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft, Check, Info } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -7,11 +7,14 @@ import { Button } from '@/components/ui/Button'
 import { NumberField } from '@/components/ui/NumberField'
 import { DurationField } from '@/components/ui/DurationField'
 import { Timer } from './Timer'
+import { AttemptTable } from './AttemptTable'
+import { aggregateAttempts, attemptContextFor, defaultSelectionFor } from '@/domain/assessment'
 import { getTest } from '@/data/testCatalog'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { deriveMetrics } from '@/lib/metrics/derive'
 import { ageFromBirthDate, formatNumber } from '@/lib/format'
 import { hasErrors, issuesFor, validateTestInput } from '@/domain/validation'
+import type { AttemptSelection } from '@/lib/store/schema'
 import type { AppLocale } from '@/types/domain'
 
 /**
@@ -28,19 +31,43 @@ export function TestRunScreen() {
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const navigate = useNavigate()
   const { data, recordResult, bodyWeightAt } = useAppData()
+  const [searchParams] = useSearchParams()
+
+  // Läuft dieser Test innerhalb einer Diagnostik? Dann gehört das Ergebnis
+  // dem Termin, und der Rückweg führt dorthin und nicht in den Verlauf.
+  const assessmentId = searchParams.get('diagnostik')
+  const assessment = assessmentId
+    ? (data.assessments.find((a) => a.id === assessmentId) ?? null)
+    : null
 
   const test = getTest(slug)
   const [values, setValues] = useState<Record<string, number | null>>({})
-  const [performedOn, setPerformedOn] = useState(() => new Date().toISOString().slice(0, 10))
+  const [performedOn, setPerformedOn] = useState(() =>
+    assessment ? assessment.performedOn : new Date().toISOString().slice(0, 10),
+  )
+  const [attempts, setAttempts] = useState<Record<string, number>[]>([])
+  const [selection, setSelection] = useState<AttemptSelection>(() => defaultSelectionFor(slug))
+  const [notes, setNotes] = useState('')
   const [saved, setSaved] = useState(false)
 
-  const numericValues = useMemo(
-    () =>
-      Object.fromEntries(
-        Object.entries(values).filter(([, v]) => v != null && Number.isFinite(v)),
-      ) as Record<string, number>,
-    [values],
-  )
+  const attemptContext = attemptContextFor(slug)
+
+  /**
+   * Aus den Versuchen wird der gewertete Datensatz. Er überschreibt die
+   * Einzeleingabe des Leistungsfelds — sonst stünden zwei Wahrheiten
+   * nebeneinander und niemand wüsste, welche gespeichert wird.
+   */
+  const aggregated = useMemo(() => {
+    if (!attemptContext || attempts.length === 0) return null
+    return aggregateAttempts(attempts, selection, attemptContext)
+  }, [attempts, selection, attemptContext])
+
+  const numericValues = useMemo(() => {
+    const manual = Object.fromEntries(
+      Object.entries(values).filter(([, v]) => v != null && Number.isFinite(v)),
+    ) as Record<string, number>
+    return aggregated ? { ...manual, ...aggregated } : manual
+  }, [values, aggregated])
 
   const preview = useMemo(() => {
     if (!test) return {}
@@ -64,7 +91,7 @@ export function TestRunScreen() {
   }
 
   // Eine Quelle für alle Regeln: dieselbe Funktion prüft auch beim Import.
-  const issues = validateTestInput(test, values, {
+  const issues = validateTestInput(test, { ...values, ...numericValues }, {
     bodyWeightKg: bodyWeightAt(`${performedOn}T12:00:00.000Z`),
     performedOn,
   })
@@ -76,22 +103,34 @@ export function TestRunScreen() {
       testSlug: test.slug,
       performedAt: new Date(`${performedOn}T12:00:00`).toISOString(),
       values: numericValues,
+      assessmentId: assessment?.id ?? null,
+      attempts: aggregated ? attempts.filter((a) => Object.keys(a).length > 0) : [],
+      attemptSelection: aggregated ? selection : null,
+      notes: notes.trim() || undefined,
     })
     if (result) {
       setSaved(true)
-      // Kurz die Bestätigung zeigen, dann in den Verlauf.
-      window.setTimeout(() => navigate('/verlauf'), 700)
+      // Kurz die Bestätigung zeigen, dann zurück an die Stelle, von der der
+      // Test gestartet wurde.
+      const target = assessment ? `/diagnostik/${assessment.id}` : '/verlauf'
+      window.setTimeout(() => navigate(target), 700)
     }
   }
 
   return (
     <>
       <Button asChild variant="ghost" size="sm" className="mb-3 -ml-2">
-        <Link to="/tests">
+        <Link to={assessment ? `/diagnostik/${assessment.id}` : '/tests'}>
           <ArrowLeft size={14} aria-hidden />
-          {t('actions.backToCatalog')}
+          {assessment ? t('assessments.backToAssessment') : t('actions.backToCatalog')}
         </Link>
       </Button>
+
+      {assessment && (
+        <p className="mb-3 border-l-2 border-accent bg-accent/10 px-3 py-2 text-[13px] text-ink-secondary">
+          {t('assessments.partOf', { title: assessment.title ?? assessment.performedOn })}
+        </p>
+      )}
 
       <header className="mb-4">
         <span className="label-tag">{t(`dimensions.${test.dimension}`)}</span>
@@ -158,6 +197,19 @@ export function TestRunScreen() {
               ),
             )}
 
+            {/* Mehrfachversuche nur, wo das Protokoll sie vorsieht. Bei einem
+                Cooper-Test gibt es keinen zweiten Versuch. */}
+            {test.protocol.mode === 'attempts' && attemptContext && (
+              <AttemptTable
+                attempts={attempts}
+                onChange={setAttempts}
+                selection={selection}
+                onSelectionChange={setSelection}
+                valueKey={attemptContext.key}
+                unit={test.fields.find((f) => f.key === attemptContext.key)?.unit ?? null}
+              />
+            )}
+
             {/* Hinweise, die den ganzen Datensatz betreffen. Warnungen
                 blockieren nicht — sie sagen nur, wie belastbar der Wert ist. */}
             {issuesFor(issues, '*').map((issue) => (
@@ -192,6 +244,18 @@ export function TestRunScreen() {
                 </ul>
               </div>
             )}
+
+            <label className="block border-t border-line pt-3">
+              <span className="label-tag">{t('tests.notes')}</span>
+              <textarea
+                value={notes}
+                maxLength={2000}
+                rows={3}
+                placeholder={t('tests.notesHint')}
+                onChange={(e) => setNotes(e.target.value)}
+                className="mt-1.5 w-full resize-y border border-line bg-surface-sunken px-3 py-2 text-[14px]"
+              />
+            </label>
 
             <Button
               variant="primary"

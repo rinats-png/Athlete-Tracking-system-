@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 2
+export const CURRENT_SCHEMA_VERSION = 3
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -56,6 +56,16 @@ const biometricSchema = z.object({
   createdAt: isoDate,
 })
 
+/**
+ * Wie aus mehreren Versuchen ein Wert wird.
+ *
+ * Bewusst explizit gespeichert statt implizit „bester Versuch“: bei einem
+ * Maximalkrafttest zählt der beste, bei einem Sprint-Wiederholungstest der
+ * Mittelwert, und wer beides vergleicht, ohne zu wissen welches, vergleicht
+ * nichts.
+ */
+export const attemptSelectionSchema = z.enum(['best', 'worst', 'mean', 'median'])
+
 const resultSchema = z.object({
   id: z.string().min(1),
   testSlug: z.string().min(1),
@@ -67,6 +77,10 @@ const resultSchema = z.object({
   ageYears: finite.min(0).max(120).nullable().default(null),
   sex: sexSchema.nullable().default(null),
   assessmentId: z.string().nullable().default(null),
+  /** Alle Versuche im Rohzustand. Leer bei Tests mit nur einem Durchgang. */
+  attempts: z.array(z.record(z.string(), finite)).default([]),
+  /** Nach welcher Regel `values` aus `attempts` entstanden ist. */
+  attemptSelection: attemptSelectionSchema.nullable().default(null),
   notes: z.string().max(2000).optional(),
   createdAt: isoDate,
 })
@@ -96,6 +110,7 @@ export type ValidatedResult = z.infer<typeof resultSchema>
 export type ValidatedAssessment = z.infer<typeof assessmentSchema>
 export type ValidatedBiometric = z.infer<typeof biometricSchema>
 export type ValidatedProfile = z.infer<typeof profileSchema>
+export type AttemptSelection = z.infer<typeof attemptSelectionSchema>
 
 // --- Migrationen -------------------------------------------------------------
 
@@ -116,6 +131,20 @@ export const MIGRATIONS: Migration[] = [
       version: 2,
       assessments: [],
       results: (data.results ?? []).map((r: any) => ({ ...r, assessmentId: null })),
+    }),
+  },
+  {
+    from: 2,
+    to: 3,
+    describe: 'Mehrfachversuche je Test werden im Rohzustand mitgespeichert',
+    run: (data) => ({
+      ...data,
+      version: 3,
+      results: (data.results ?? []).map((r: any) => ({
+        ...r,
+        attempts: [],
+        attemptSelection: null,
+      })),
     }),
   },
 ]

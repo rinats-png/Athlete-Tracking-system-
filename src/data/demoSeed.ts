@@ -153,7 +153,9 @@ export function buildDemoData(): StoredData {
         bodyWeightKg: ctx.bodyWeightKg,
         ageYears: ctx.ageYears,
         sex: ctx.sex,
-        assessmentId: assessment.id,
+        attempts: [],
+      attemptSelection: null,
+      assessmentId: assessment.id,
         createdAt: iso,
       })
     }

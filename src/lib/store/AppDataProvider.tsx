@@ -23,7 +23,7 @@ import {
   type StoredData,
   type StoredResult,
 } from './localStore'
-import type { LoadReport } from './schema'
+import type { AttemptSelection, LoadReport } from './schema'
 
 /**
  * Zentraler Datenzugriff der App.
@@ -40,6 +40,9 @@ export interface RecordResultInput {
   performedAt: string
   values: Record<string, number>
   assessmentId?: string | null
+  /** Rohversuche, wenn das Protokoll mehrere vorsieht. */
+  attempts?: Record<string, number>[]
+  attemptSelection?: AttemptSelection | null
   notes?: string
 }
 
@@ -114,7 +117,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
   }, [])
 
   const recordResult = useCallback<AppDataValue['recordResult']>(
-    ({ testSlug, performedAt, values, assessmentId = null, notes }) => {
+    ({ testSlug, performedAt, values, assessmentId = null, attempts = [], attemptSelection = null, notes }) => {
       const test = getTest(testSlug)
       if (!test) return null
 
@@ -135,6 +138,8 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         ageYears: context.ageYears,
         sex: context.sex,
         assessmentId,
+        attempts,
+        attemptSelection,
         notes,
         createdAt: new Date().toISOString(),
       }

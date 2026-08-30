@@ -5,6 +5,10 @@ import { DashboardScreen } from '@/features/dashboard/DashboardScreen'
 import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
 import { TestRunScreen } from '@/features/tests/TestRunScreen'
 import { HistoryScreen } from '@/features/history/HistoryScreen'
+import { AssessmentListScreen } from '@/features/assessments/AssessmentListScreen'
+import { AssessmentCreateScreen } from '@/features/assessments/AssessmentCreateScreen'
+import { AssessmentDetailScreen } from '@/features/assessments/AssessmentDetailScreen'
+import { AssessmentSummaryScreen } from '@/features/assessments/AssessmentSummaryScreen'
 import { ProfileScreen } from '@/features/profile/ProfileScreen'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
 import { AppDataProvider, readMode, writeMode, type AppMode } from '@/lib/store/AppDataProvider'
@@ -27,6 +31,10 @@ const router = createBrowserRouter([
     element: <AppShell />,
     children: [
       { index: true, element: <DashboardScreen /> },
+      { path: 'diagnostik', element: <AssessmentListScreen /> },
+      { path: 'diagnostik/neu', element: <AssessmentCreateScreen /> },
+      { path: 'diagnostik/:id', element: <AssessmentDetailScreen /> },
+      { path: 'diagnostik/:id/abschluss', element: <AssessmentSummaryScreen /> },
       { path: 'tests', element: <TestCatalogScreen /> },
       { path: 'tests/:slug', element: <TestRunScreen /> },
       { path: 'verlauf', element: <HistoryScreen /> },

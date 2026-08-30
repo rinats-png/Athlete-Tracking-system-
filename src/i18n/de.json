@@ -6,12 +6,12 @@
   "nav": {
     "primary": "Hauptnavigation",
     "dashboard": "Dashboard",
-    "tests": "Tests",
+    "tests": "Diagnostik",
     "history": "Verlauf",
     "profile": "Profil",
     "short": {
       "dashboard": "Start",
-      "tests": "Tests",
+      "tests": "Diagnostik",
       "history": "Verlauf",
       "profile": "Profil"
     }
@@ -27,7 +27,8 @@
     "edit": "Bearbeiten",
     "cancel": "Abbrechen",
     "backToCatalog": "Zum Testkatalog",
-    "reportSoon": "PDF-Report kommt mit dem Trainer-Hub"
+    "reportSoon": "PDF-Report kommt mit dem Trainer-Hub",
+    "startAssessment": "Diagnostik starten"
   },
   "theme": {
     "label": "Darstellung",
@@ -111,7 +112,10 @@
     "date": "Datum",
     "result": "Ergebnis",
     "change": "Veränderung",
-    "rpe": "RPE"
+    "rpe": "RPE",
+    "value": "Wert",
+    "percentile": "Perzentil",
+    "quality": "Qualität"
   },
   "badges": {
     "personalBest": "Bestleistung",
@@ -182,7 +186,9 @@
     "start": "Start",
     "pause": "Pause",
     "reset": "Zurücksetzen",
-    "fixErrors": "Bitte die markierten Felder korrigieren"
+    "fixErrors": "Bitte die markierten Felder korrigieren",
+    "notes": "Notiz (optional)",
+    "notesHint": "Bedingungen, Auffälligkeiten, Abweichungen vom Protokoll."
   },
   "history": {
     "title": "Verlauf",
@@ -262,5 +268,106 @@
     "future": "Datum liegt in der Zukunft",
     "noBodyWeight": "Ohne Körpergewicht lässt sich die Relativkraft nicht berechnen.",
     "repsUnreliable": "Ab {{limit}} Wiederholungen streut die 1RM-Schätzung deutlich."
+  },
+  "assessments": {
+    "title": "Diagnostik",
+    "intro": "Ein Testtermin mit festem Umfang. Nur so lassen sich zwei Zeitpunkte später wirklich vergleichen.",
+    "new": "Neue Diagnostik",
+    "newTitle": "Neue Diagnostik",
+    "newIntro": "Wähle eine Vorlage oder stelle die Tests selbst zusammen. Rechts siehst du, welche Achsen der Termin abdeckt — eine Lücke lässt sich später nicht nachtragen, ohne den Vergleich zu verzerren.",
+    "all": "Alle Termine",
+    "count_one": "{{count}} Termin",
+    "count_other": "{{count}} Termine",
+    "back": "Zur Diagnostik",
+    "backToAssessment": "Zurück zum Termin",
+    "emptyTitle": "Noch keine Diagnostik",
+    "emptyBody": "Eine Diagnostik bündelt mehrere Tests zu einem Termin und hält fest, welcher Umfang gemessen wurde.",
+    "battery": "Vorlage",
+    "batteryHint": "Zusammenstellungen für ein Profil. Die Reihenfolge ist nach Ermüdungsempfindlichkeit sortiert.",
+    "tests": "Tests",
+    "testsHint_one": "{{count}} Test ausgewählt",
+    "testsHint_other": "{{count}} Tests ausgewählt",
+    "coverage": "Achsenabdeckung",
+    "details": "Termin",
+    "date": "Datum",
+    "titleField": "Bezeichnung (optional)",
+    "estimate_one": "Geschätzter Zeitbedarf: {{count}} Minute",
+    "estimate_other": "Geschätzter Zeitbedarf: {{count}} Minuten",
+    "start": "Diagnostik anlegen",
+    "minutes_one": "{{count}} Min.",
+    "minutes_other": "{{count}} Min.",
+    "testCount_one": "{{count}} Test",
+    "testCount_other": "{{count}} Tests",
+    "axisCount_one": "{{count}} Achse",
+    "axisCount_other": "{{count}} Achsen",
+    "missingAxes_one": "Eine Achse bleibt ungemessen. Das Profil ist danach unvollständig.",
+    "missingAxes_other": "{{count}} Achsen bleiben ungemessen. Das Profil ist danach unvollständig.",
+    "notFound": "Diese Diagnostik gibt es nicht (mehr).",
+    "plan": "Testplan",
+    "planHint": "Jeden Test einzeln starten. Zwischenstände bleiben erhalten.",
+    "progress": "Fortschritt",
+    "measure": "Messen",
+    "addTest": "Weiteren Test hinzufügen",
+    "unplanned": "nicht geplant",
+    "testsDone": "{{done}} von {{planned}} gemessen",
+    "finishTitle": "Abschluss",
+    "finish": "Diagnostik abschliessen",
+    "finishReady": "Alle geplanten Tests sind gemessen.",
+    "finishEarly_one": "Ein geplanter Test fehlt noch. Ein vorzeitiger Abschluss ist möglich, die Lücke wird im Bericht ausgewiesen.",
+    "finishEarly_other": "{{count}} geplante Tests fehlen noch. Ein vorzeitiger Abschluss ist möglich, die Lücken werden im Bericht ausgewiesen.",
+    "finishedHint": "Der Termin ist abgeschlossen. Er kann wieder geöffnet werden, um Werte nachzutragen.",
+    "showSummary": "Auswertung ansehen",
+    "reopen": "Wieder öffnen",
+    "delete": "Diagnostik löschen",
+    "deleteHint": "Der Termin wird gelöscht. Die gemessenen Ergebnisse bleiben erhalten und stehen weiter im Verlauf — sie verlieren nur die Zuordnung zum Termin.",
+    "deleteConfirm": "Endgültig löschen",
+    "summary": "Auswertung",
+    "results": "Ergebnisse",
+    "resultsHint": "Perzentil gegen die hinterlegte Referenz, sofern für Geschlecht und Alter vorhanden.",
+    "noResults": "Für diesen Termin wurde noch nichts gemessen.",
+    "summaryGaps": "Nicht gemessen: {{axes}}. Diese Achsen fehlen im Profil dieses Termins.",
+    "stillOpen": "Noch offen: {{tests}}",
+    "partOf": "Teil der Diagnostik „{{title}}“",
+    "disclaimer": "BASELINE ist keine medizinische Diagnostik. Die Werte beschreiben sportliche Leistung und sind weder eine Diagnose noch eine Therapieempfehlung. Die hinterlegten Referenzwerte sind vorläufige Platzhalter und noch nicht gegen eine publizierte Normstichprobe abgeglichen.",
+    "status": {
+      "planned": "Geplant",
+      "in_progress": "Laufend",
+      "completed": "Abgeschlossen",
+      "abandoned": "Abgebrochen"
+    },
+    "attempt": {
+      "best": "Bester",
+      "worst": "Schlechtester",
+      "mean": "Mittelwert",
+      "median": "Median"
+    }
+  },
+  "attempts": {
+    "title": "Versuche",
+    "add": "Versuch",
+    "hint": "Ohne Eintrag wird der oben erfasste Einzelwert gespeichert. Mit Versuchen wird daraus der gewertete Wert gebildet — alle Versuche bleiben erhalten.",
+    "value": "Versuch {{index}}",
+    "remove": "Versuch {{index}} entfernen",
+    "selection": "Wertung",
+    "explain": {
+      "best": "Der beste Versuch wird gewertet, mit allen Nebenwerten dieses Versuchs.",
+      "worst": "Der schlechteste Versuch wird gewertet — sinnvoll, wenn es auf Wiederholbarkeit ankommt.",
+      "mean": "Der Leistungswert wird gemittelt. Nebenwerte stammen vom Versuch, der dem Mittel am nächsten liegt, statt erfunden zu werden.",
+      "median": "Der mittlere Versuch wird gewertet. Robuster gegen einen einzelnen Ausrutscher als der Mittelwert."
+    }
+  },
+  "quality": {
+    "status": {
+      "valid": "Belastbar",
+      "questionable": "Mit Vorbehalt",
+      "incomplete": "Unvollständig"
+    },
+    "outlier": "Ausreisser",
+    "unknownTest": "Test nicht im Katalog",
+    "noScore": "Kein auswertbarer Wert",
+    "noBodyWeight": "Kein Körpergewicht hinterlegt — Relativkraft nicht berechenbar",
+    "noBenchmarkContext": "Geschlecht oder Alter fehlt — kein Perzentilvergleich möglich",
+    "submaximal": "RPE unter 8: nicht ausbelastet",
+    "estimatedFromManyReps": "1RM aus vielen Wiederholungen geschätzt — grössere Streuung"
   }
 }

@@ -6,12 +6,12 @@
   "nav": {
     "primary": "Main navigation",
     "dashboard": "Dashboard",
-    "tests": "Tests",
+    "tests": "Assessments",
     "history": "History",
     "profile": "Profile",
     "short": {
       "dashboard": "Home",
-      "tests": "Tests",
+      "tests": "Assess",
       "history": "History",
       "profile": "Profile"
     }
@@ -27,7 +27,8 @@
     "edit": "Edit",
     "cancel": "Cancel",
     "backToCatalog": "Back to catalog",
-    "reportSoon": "PDF report ships with the coach hub"
+    "reportSoon": "PDF report ships with the coach hub",
+    "startAssessment": "Start assessment"
   },
   "theme": {
     "label": "Appearance",
@@ -111,7 +112,10 @@
     "date": "Date",
     "result": "Result",
     "change": "Change",
-    "rpe": "RPE"
+    "rpe": "RPE",
+    "value": "Value",
+    "percentile": "Percentile",
+    "quality": "Quality"
   },
   "badges": {
     "personalBest": "Personal best",
@@ -182,7 +186,9 @@
     "start": "Start",
     "pause": "Pause",
     "reset": "Reset",
-    "fixErrors": "Please correct the highlighted fields"
+    "fixErrors": "Please correct the highlighted fields",
+    "notes": "Note (optional)",
+    "notesHint": "Conditions, anomalies, deviations from the protocol."
   },
   "history": {
     "title": "History",
@@ -262,5 +268,106 @@
     "future": "Date is in the future",
     "noBodyWeight": "Relative strength cannot be computed without body weight.",
     "repsUnreliable": "Above {{limit}} repetitions the 1RM estimate varies considerably."
+  },
+  "assessments": {
+    "title": "Assessments",
+    "intro": "A test session with a defined scope. Only that makes two points in time genuinely comparable.",
+    "new": "New assessment",
+    "newTitle": "New assessment",
+    "newIntro": "Pick a template or compose the tests yourself. On the right you see which axes the session covers — a gap cannot be filled in later without distorting the comparison.",
+    "all": "All sessions",
+    "count_one": "{{count}} session",
+    "count_other": "{{count}} sessions",
+    "back": "To assessments",
+    "backToAssessment": "Back to session",
+    "emptyTitle": "No assessment yet",
+    "emptyBody": "An assessment bundles several tests into one session and records what scope was measured.",
+    "battery": "Template",
+    "batteryHint": "Compositions for a profile. Ordered by sensitivity to fatigue.",
+    "tests": "Tests",
+    "testsHint_one": "{{count}} test selected",
+    "testsHint_other": "{{count}} tests selected",
+    "coverage": "Axis coverage",
+    "details": "Session",
+    "date": "Date",
+    "titleField": "Label (optional)",
+    "estimate_one": "Estimated time: {{count}} minute",
+    "estimate_other": "Estimated time: {{count}} minutes",
+    "start": "Create assessment",
+    "minutes_one": "{{count}} min",
+    "minutes_other": "{{count}} min",
+    "testCount_one": "{{count}} test",
+    "testCount_other": "{{count}} tests",
+    "axisCount_one": "{{count}} axis",
+    "axisCount_other": "{{count}} axes",
+    "missingAxes_one": "One axis stays unmeasured. The profile will be incomplete.",
+    "missingAxes_other": "{{count}} axes stay unmeasured. The profile will be incomplete.",
+    "notFound": "This assessment no longer exists.",
+    "plan": "Test plan",
+    "planHint": "Start each test individually. Partial progress is kept.",
+    "progress": "Progress",
+    "measure": "Measure",
+    "addTest": "Add another test",
+    "unplanned": "unplanned",
+    "testsDone": "{{done}} of {{planned}} measured",
+    "finishTitle": "Completion",
+    "finish": "Complete assessment",
+    "finishReady": "All planned tests are measured.",
+    "finishEarly_one": "One planned test is still missing. Completing early is possible; the gap is stated in the report.",
+    "finishEarly_other": "{{count}} planned tests are still missing. Completing early is possible; the gaps are stated in the report.",
+    "finishedHint": "The session is complete. It can be reopened to add values.",
+    "showSummary": "View summary",
+    "reopen": "Reopen",
+    "delete": "Delete assessment",
+    "deleteHint": "The session is deleted. The measured results are kept and stay in your history — they only lose their link to the session.",
+    "deleteConfirm": "Delete permanently",
+    "summary": "Summary",
+    "results": "Results",
+    "resultsHint": "Percentile against the stored reference, where one exists for sex and age.",
+    "noResults": "Nothing has been measured for this session yet.",
+    "summaryGaps": "Not measured: {{axes}}. These axes are missing from this session's profile.",
+    "stillOpen": "Still open: {{tests}}",
+    "partOf": "Part of the assessment “{{title}}”",
+    "disclaimer": "BASELINE is not medical diagnostics. The values describe athletic performance and are neither a diagnosis nor a treatment recommendation. The stored reference values are provisional placeholders and have not yet been reconciled against a published normative sample.",
+    "status": {
+      "planned": "Planned",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "abandoned": "Abandoned"
+    },
+    "attempt": {
+      "best": "Best",
+      "worst": "Worst",
+      "mean": "Mean",
+      "median": "Median"
+    }
+  },
+  "attempts": {
+    "title": "Attempts",
+    "add": "Attempt",
+    "hint": "With no entries the single value above is saved. With attempts, the scored value is derived from them — every attempt is kept.",
+    "value": "Attempt {{index}}",
+    "remove": "Remove attempt {{index}}",
+    "selection": "Scoring",
+    "explain": {
+      "best": "The best attempt is scored, with all secondary values from that attempt.",
+      "worst": "The worst attempt is scored — useful when repeatability is what matters.",
+      "mean": "The performance value is averaged. Secondary values come from the attempt closest to the mean rather than being invented.",
+      "median": "The middle attempt is scored. More robust against a single off attempt than the mean."
+    }
+  },
+  "quality": {
+    "status": {
+      "valid": "Reliable",
+      "questionable": "With caveats",
+      "incomplete": "Incomplete"
+    },
+    "outlier": "Outlier",
+    "unknownTest": "Test not in catalogue",
+    "noScore": "No usable value",
+    "noBodyWeight": "No body weight on file — relative strength cannot be computed",
+    "noBenchmarkContext": "Sex or age missing — no percentile comparison possible",
+    "submaximal": "RPE below 8: not taken to maximum",
+    "estimatedFromManyReps": "1RM estimated from many repetitions — wider spread"
   }
 }
