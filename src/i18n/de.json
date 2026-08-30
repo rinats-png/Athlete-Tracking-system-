@@ -54,7 +54,9 @@
     "max_strength": "Maxkraft",
     "strength_endurance": "Kraftausdauer / MetCon",
     "power": "Schnellkraft",
-    "agility": "Agilität"
+    "agility": "Agilität",
+    "speed": "Schnelligkeit",
+    "conditioning": "Conditioning"
   },
   "radar": {
     "title": "Leistungsprofil",
@@ -291,7 +293,11 @@
     "shuttle": "Shuttle",
     "avgHeartRate": "Ø Puls",
     "maxHeartRate": "Max. Puls",
-    "rpe": "RPE (1–10)"
+    "rpe": "RPE (1–10)",
+    "jumpHeightCm": "Sprunghöhe",
+    "jumpCount": "Anzahl Sprünge",
+    "totalHeightCm": "Summe der Sprunghöhen",
+    "addedLoadKg": "Zusatzgewicht"
   },
   "metrics": {
     "vo2max_ml_kg_min": "VO2max",
@@ -303,14 +309,23 @@
     "watts_per_kg": "Watt je kg",
     "total_reps": "Wiederholungen gesamt",
     "reps_per_minute": "Wdh. je Minute",
-    "calories_per_minute": "kcal je Minute"
+    "calories_per_minute": "kcal je Minute",
+    "avg_velocity_m_s": "Durchschnittsgeschwindigkeit",
+    "peak_power_w": "Spitzenleistung (geschätzt)",
+    "peak_power_w_per_kg": "Spitzenleistung je kg",
+    "avg_jump_height_cm": "Mittlere Sprunghöhe",
+    "total_load_kg": "Gesamtlast",
+    "total_load_bw": "Gesamtlast je Körpergewicht",
+    "avg_pace_s_per_km": "Pace je km"
   },
   "categoriesShort": {
     "endurance": "Ausdauer",
     "max_strength": "Maxkraft",
     "strength_endurance": "Kraftausdauer",
     "power": "Schnellkraft",
-    "agility": "Agilität"
+    "agility": "Agilität",
+    "speed": "Speed",
+    "conditioning": "Cond."
   },
   "validation": {
     "required": "Pflichtfeld",

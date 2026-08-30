@@ -24,13 +24,13 @@ test.describe('Diagnostik', () => {
     // 1. Termin aus einer Vorlage anlegen
     await page.goto('/diagnostik/neu', { waitUntil: 'domcontentloaded' })
     await page.getByRole('button', { name: /Maxkraft \(Big Three\)/ }).click()
-    await expect(page.getByText('3 Tests ausgewählt')).toBeVisible()
+    await expect(page.getByText('5 Tests ausgewählt')).toBeVisible()
     // Die Vorlage deckt nicht alles ab — das muss VOR dem Start dastehen.
     await expect(page.getByText(/Achsen bleiben ungemessen/)).toBeVisible()
 
     await page.getByRole('button', { name: 'Diagnostik anlegen' }).click()
     await page.waitForURL(/\/diagnostik\/[^/]+$/)
-    await expect(page.getByText('0 von 3 gemessen')).toBeVisible()
+    await expect(page.getByText('0 von 5 gemessen')).toBeVisible()
 
     // 2. Ersten Test aus dem Termin heraus messen
     await page.getByRole('link', { name: 'Messen' }).first().click()
@@ -42,10 +42,10 @@ test.describe('Diagnostik', () => {
 
     // Der Rückweg führt in den Termin, nicht in den Verlauf.
     await page.waitForURL(/\/diagnostik\/[^/]+$/)
-    await expect(page.getByText('1 von 3 gemessen')).toBeVisible()
+    await expect(page.getByText('1 von 5 gemessen')).toBeVisible()
 
     // 3. Vorzeitig abschliessen — mit ausgewiesener Lücke
-    await expect(page.getByText(/2 geplante Tests fehlen noch/)).toBeVisible()
+    await expect(page.getByText(/4 geplante Tests fehlen noch/)).toBeVisible()
     await page.getByRole('button', { name: 'Diagnostik abschliessen' }).click()
     await page.waitForURL(/\/abschluss$/)
 
@@ -67,9 +67,8 @@ test.describe('Diagnostik', () => {
     await page.waitForURL(/\/diagnostik\/[^/]+$/)
 
     await page.getByRole('link', { name: 'Messen' }).first().click()
-    // Sprungweite in Metern — 240 wäre über der Feldgrenze und würde
-    // (zu Recht) blockiert.
-    await page.getByLabel(/Sprungweite|Weite|Distanz/).first().fill('2.40')
+    // Erster Test der Allgemein-Batterie ist der Countermovement Jump.
+    await page.getByLabel(/Sprunghöhe/).first().fill('42')
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
     await page.waitForURL(/\/diagnostik\/[^/]+$/)
 
@@ -78,10 +77,8 @@ test.describe('Diagnostik', () => {
     await page.waitForURL('**/diagnostik')
 
     // Das Ergebnis überlebt den Termin — es verliert nur die Zuordnung.
-    // Angezeigt in Zentimetern: Sprungweiten liest man so, gespeichert wird
-    // metrisch in Metern.
     await page.goto('/verlauf', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByText(/240\s*cm/).first()).toBeVisible()
+    await expect(page.getByText(/42/).first()).toBeVisible()
   })
 })
 

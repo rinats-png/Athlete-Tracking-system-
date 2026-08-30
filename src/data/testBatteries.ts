@@ -26,8 +26,15 @@ export interface TestBattery {
 export const TEST_BATTERIES: TestBattery[] = [
   {
     slug: 'general_fitness',
-    testSlugs: ['standing_broad_jump', 'illinois_agility', 'back_squat_1rm', 'bench_press_1rm', 'cooper_12min'],
-    durationMinutes: 90,
+    testSlugs: [
+      'countermovement_jump',
+      'shuttle_5_10_5',
+      'back_squat_1rm',
+      'bench_press_1rm',
+      'pull_up_max_reps',
+      'cooper_12min',
+    ],
+    durationMinutes: 100,
     name: { de: 'Allgemeine Fitness', en: 'General fitness' },
     description: {
       de: 'Fünf Tests über alle sechs Achsen. Der schnellste Weg zu einem vollständigen Profil.',
@@ -36,8 +43,14 @@ export const TEST_BATTERIES: TestBattery[] = [
   },
   {
     slug: 'strength',
-    testSlugs: ['back_squat_1rm', 'deadlift_1rm', 'bench_press_1rm'],
-    durationMinutes: 75,
+    testSlugs: [
+      'back_squat_1rm',
+      'deadlift_1rm',
+      'bench_press_1rm',
+      'overhead_press_1rm',
+      'weighted_pull_up_1rm',
+    ],
+    durationMinutes: 105,
     name: { de: 'Maxkraft (Big Three)', en: 'Max strength (big three)' },
     description: {
       de: 'Kniebeuge, Kreuzheben, Bankdrücken. Liefert absolute Maxkraft und Relativkraft.',
@@ -46,8 +59,8 @@ export const TEST_BATTERIES: TestBattery[] = [
   },
   {
     slug: 'endurance',
-    testSlugs: ['cooper_12min', 'row_2000m'],
-    durationMinutes: 60,
+    testSlugs: ['cooper_12min', 'row_2000m', 'run_5k'],
+    durationMinutes: 90,
     name: { de: 'Ausdauer', en: 'Endurance' },
     description: {
       de: 'Cooper-Test und 2000 m Rudern. An verschiedenen Tagen durchführen.',
@@ -74,11 +87,12 @@ export const TEST_BATTERIES: TestBattery[] = [
   {
     slug: 'tactical',
     testSlugs: [
-      'illinois_agility',
+      'shuttle_5_10_5',
       'standing_broad_jump',
+      'pull_up_max_reps',
       'deadlift_1rm',
       'cindy_20min_amrap',
-      'cooper_12min',
+      'run_1_5_mile',
     ],
     durationMinutes: 120,
     name: { de: 'Tactical / Behörden', en: 'Tactical' },
@@ -89,8 +103,8 @@ export const TEST_BATTERIES: TestBattery[] = [
   },
   {
     slug: 'conditioning',
-    testSlugs: ['cindy_20min_amrap', 'assault_bike_10min_cal', 'row_2000m'],
-    durationMinutes: 75,
+    testSlugs: ['fran', 'grace', 'cindy_20min_amrap', 'assault_bike_10min_cal', 'row_2000m'],
+    durationMinutes: 110,
     name: { de: 'Conditioning / MetCon', en: 'Conditioning / MetCon' },
     description: {
       de: 'Drei Belastungsformen über unterschiedliche Zeitfenster.',
@@ -99,7 +113,14 @@ export const TEST_BATTERIES: TestBattery[] = [
   },
   {
     slug: 'power_agility',
-    testSlugs: ['standing_broad_jump', 'illinois_agility', 'snatch_1rm', 'clean_and_jerk_1rm'],
+    testSlugs: [
+      'countermovement_jump',
+      'squat_jump',
+      'standing_broad_jump',
+      'sprint_10m',
+      'sprint_30m',
+      'shuttle_5_10_5',
+    ],
     durationMinutes: 90,
     name: { de: 'Schnellkraft & Agilität', en: 'Power & agility' },
     description: {

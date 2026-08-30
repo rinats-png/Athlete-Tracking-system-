@@ -54,7 +54,9 @@
     "max_strength": "Max strength",
     "strength_endurance": "Strength endurance / MetCon",
     "power": "Power",
-    "agility": "Agility"
+    "agility": "Agility",
+    "speed": "Speed",
+    "conditioning": "Conditioning"
   },
   "radar": {
     "title": "Performance profile",
@@ -291,7 +293,11 @@
     "shuttle": "Shuttle",
     "avgHeartRate": "Avg HR",
     "maxHeartRate": "Max HR",
-    "rpe": "RPE (1–10)"
+    "rpe": "RPE (1–10)",
+    "jumpHeightCm": "Jump height",
+    "jumpCount": "Jump count",
+    "totalHeightCm": "Sum of jump heights",
+    "addedLoadKg": "Added weight"
   },
   "metrics": {
     "vo2max_ml_kg_min": "VO2max",
@@ -303,14 +309,23 @@
     "watts_per_kg": "Watts per kg",
     "total_reps": "Total reps",
     "reps_per_minute": "Reps per minute",
-    "calories_per_minute": "kcal per minute"
+    "calories_per_minute": "kcal per minute",
+    "avg_velocity_m_s": "Average velocity",
+    "peak_power_w": "Peak power (estimated)",
+    "peak_power_w_per_kg": "Peak power per kg",
+    "avg_jump_height_cm": "Average jump height",
+    "total_load_kg": "Total load",
+    "total_load_bw": "Total load per body weight",
+    "avg_pace_s_per_km": "Pace per km"
   },
   "categoriesShort": {
     "endurance": "Endurance",
     "max_strength": "Max strength",
     "strength_endurance": "Strength end.",
     "power": "Power",
-    "agility": "Agility"
+    "agility": "Agility",
+    "speed": "Speed",
+    "conditioning": "Cond."
   },
   "validation": {
     "required": "Required",

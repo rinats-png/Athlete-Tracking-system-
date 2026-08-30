@@ -8,6 +8,9 @@ import {
   vo2maxFromCooper,
   pacePer500m,
   rowingWatts,
+  peakPowerSayers,
+  averageVelocity,
+  pacePerKm,
 } from './index'
 
 export interface DeriveContext {
@@ -69,9 +72,55 @@ export function deriveMetrics(
       put('calories_per_minute', values.calories / 10)
       break
 
+    case 'repeated_jump_15s': {
+      // Der Mittelwert wird gebildet, nicht eingegeben: zwei Zahlen, die
+      // dasselbe beschreiben, könnten auseinanderlaufen.
+      const count = values.jumpCount
+      if (count != null && count > 0 && values.totalHeightCm != null) {
+        put('avg_jump_height_cm', values.totalHeightCm / count)
+      }
+      break
+    }
+
+    case 'weighted_pull_up_1rm': {
+      // Gewertet wird die bewegte Gesamtlast. Das Zusatzgewicht allein wäre
+      // ohne das Körpergewicht daneben nicht vergleichbar.
+      if (ctx.bodyWeightKg != null && values.addedLoadKg != null) {
+        const total = estimateOneRepMax(
+          ctx.bodyWeightKg + values.addedLoadKg,
+          values.reps ?? 1,
+          'epley',
+        )
+        put('total_load_kg', total)
+        put('total_load_bw', total / ctx.bodyWeightKg)
+      }
+      break
+    }
+
     default:
       break
   }
+
+  // Sprint: Geschwindigkeit über die im Protokoll hinterlegte Distanz.
+  if (test.category === 'speed' && test.protocol.targetDistanceM != null) {
+    put('avg_velocity_m_s', averageVelocity(test.protocol.targetDistanceM, values.durationSeconds))
+  }
+
+  // Laufstrecken mit fester Distanz: Pace je Kilometer.
+  if (
+    test.derivedMetrics.includes('avg_pace_s_per_km') &&
+    test.protocol.targetDistanceM != null
+  ) {
+    put('avg_pace_s_per_km', pacePerKm(values.durationSeconds, test.protocol.targetDistanceM))
+  }
+
+  // Sprungtests: geschätzte Spitzenleistung nach Sayers.
+  if (values.jumpHeightCm != null && ctx.bodyWeightKg != null) {
+    const watts = peakPowerSayers(values.jumpHeightCm, ctx.bodyWeightKg)
+    put('peak_power_w', watts)
+    if (watts != null) put('peak_power_w_per_kg', watts / ctx.bodyWeightKg)
+  }
+
 
   // Kraftmetriken gelten für jeden Test mit Last und Wiederholungen.
   if (values.loadKg != null && values.reps != null) {

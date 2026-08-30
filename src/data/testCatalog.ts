@@ -14,6 +14,16 @@ import type { PerformanceDimension, ScoringDirection, TestCategory } from '@/typ
  * über die Slugs.
  */
 
+import {
+  AGILITY_TESTS,
+  CONDITIONING_TESTS,
+  ENDURANCE_TESTS,
+  JUMP_TESTS,
+  REPEATED_JUMP,
+  SPEED_TESTS,
+  STRENGTH_TESTS,
+} from './testCatalogAdditions'
+
 export type FieldType = 'number' | 'integer' | 'duration' | 'rpe' | 'stages'
 
 export interface TestField {
@@ -347,6 +357,17 @@ export const TEST_CATALOG: TestDefinition[] = [
     },
     equipment: { de: 'Massband, rutschfeste Absprungmarkierung', en: 'Tape measure, non-slip take-off marking' },
   },
+
+  // Erweiterung (§12) — in einer eigenen Datei, damit dieser Katalog lesbar
+  // bleibt. Aufnahmekriterium und die Begründungen für bewusst weggelassene
+  // Tests stehen dort.
+  ...SPEED_TESTS,
+  ...AGILITY_TESTS,
+  ...JUMP_TESTS,
+  REPEATED_JUMP,
+  ...STRENGTH_TESTS,
+  ...ENDURANCE_TESTS,
+  ...CONDITIONING_TESTS,
 ]
 
 export const TEST_BY_SLUG = new Map(TEST_CATALOG.map((test) => [test.slug, test]))

@@ -21,7 +21,9 @@ export type TestCategory =
   | 'max_strength'
   | 'strength_endurance'
   | 'power'
+  | 'speed'
   | 'agility'
+  | 'conditioning'
 
 export type ScoringDirection = 'higher_is_better' | 'lower_is_better'
 export type ScoreMode = 'personal_best' | 'population'

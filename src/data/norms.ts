@@ -160,6 +160,48 @@ export const NORMS: NormRow[] = [
   row('standing_broad_jump', 'distanceM', 'male', 40, 120, [1.8, 2.0, 2.2, 2.4, 2.55, 2.8], 0.92),
   row('standing_broad_jump', 'distanceM', 'female', 18, 39, [1.4, 1.55, 1.75, 1.9, 2.05, 2.25]),
   row('standing_broad_jump', 'distanceM', 'female', 40, 120, [1.4, 1.55, 1.75, 1.9, 2.05, 2.25], 0.92),
+
+  // --- Erweiterung (§12) --------------------------------------------------
+  // Dieselbe Einordnung wie oben: experimentelle Referenz, an übliche
+  // Grössenordnungen für trainierte Erwachsene angelehnt, NICHT aus einer
+  // publizierten Normstudie. Aufgenommen wurden nur Tests, für die sich eine
+  // Einordnung überhaupt sinnvoll angeben lässt — für Murph, Fran und Grace
+  // etwa gibt es keine, weil Last- und Ausführungsvarianten die Zeiten nicht
+  // vergleichbar machen; dort bleibt das Perzentil bewusst leer.
+
+  // Sprint (Sekunden, weniger ist besser)
+  row('sprint_10m', 'durationSeconds', 'male', 18, 39, [2.15, 2.02, 1.90, 1.80, 1.72, 1.62]),
+  row('sprint_10m', 'durationSeconds', 'female', 18, 39, [2.40, 2.25, 2.10, 1.98, 1.89, 1.78]),
+  row('sprint_20m', 'durationSeconds', 'male', 18, 39, [3.60, 3.40, 3.20, 3.05, 2.94, 2.80]),
+  row('sprint_20m', 'durationSeconds', 'female', 18, 39, [4.05, 3.82, 3.60, 3.43, 3.30, 3.14]),
+  row('sprint_30m', 'durationSeconds', 'male', 18, 39, [5.05, 4.78, 4.50, 4.30, 4.15, 3.95]),
+  row('sprint_30m', 'durationSeconds', 'female', 18, 39, [5.70, 5.38, 5.06, 4.83, 4.66, 4.44]),
+  row('sprint_40yd', 'durationSeconds', 'male', 18, 39, [5.90, 5.55, 5.20, 4.95, 4.76, 4.50]),
+  row('sprint_40yd', 'durationSeconds', 'female', 18, 39, [6.70, 6.30, 5.90, 5.62, 5.40, 5.10]),
+
+  // Agilität (Sekunden, weniger ist besser)
+  row('shuttle_5_10_5', 'durationSeconds', 'male', 18, 39, [5.60, 5.30, 5.00, 4.78, 4.62, 4.40]),
+  row('shuttle_5_10_5', 'durationSeconds', 'female', 18, 39, [6.30, 5.96, 5.62, 5.38, 5.20, 4.95]),
+  row('t_test_agility', 'durationSeconds', 'male', 18, 39, [12.0, 11.2, 10.5, 9.9, 9.5, 9.0]),
+  row('t_test_agility', 'durationSeconds', 'female', 18, 39, [13.4, 12.5, 11.7, 11.1, 10.6, 10.0]),
+
+  // Sprung (cm, mehr ist besser)
+  row('countermovement_jump', 'jumpHeightCm', 'male', 18, 39, [26, 32, 38, 44, 50, 58]),
+  row('countermovement_jump', 'jumpHeightCm', 'female', 18, 39, [18, 23, 28, 33, 38, 45]),
+  row('squat_jump', 'jumpHeightCm', 'male', 18, 39, [23, 28, 34, 40, 45, 53]),
+  row('squat_jump', 'jumpHeightCm', 'female', 18, 39, [16, 20, 25, 30, 35, 41]),
+  row('vertical_jump_reach', 'jumpHeightCm', 'male', 18, 39, [40, 48, 56, 64, 71, 81]),
+  row('vertical_jump_reach', 'jumpHeightCm', 'female', 18, 39, [28, 34, 40, 46, 52, 60]),
+
+  // Klimmzüge (Wiederholungen, mehr ist besser)
+  row('pull_up_max_reps', 'reps', 'male', 18, 39, [3, 7, 12, 17, 22, 30]),
+  row('pull_up_max_reps', 'reps', 'female', 18, 39, [0, 1, 4, 8, 12, 18]),
+
+  // Laufen (Sekunden, weniger ist besser)
+  row('run_1_5_mile', 'durationSeconds', 'male', 18, 39, [810, 735, 660, 606, 570, 522]),
+  row('run_1_5_mile', 'durationSeconds', 'female', 18, 39, [960, 870, 780, 714, 672, 612]),
+  row('run_5k', 'durationSeconds', 'male', 18, 39, [1800, 1620, 1440, 1320, 1230, 1110]),
+  row('run_5k', 'durationSeconds', 'female', 18, 39, [2100, 1890, 1680, 1530, 1440, 1290]),
 ]
 
 /**
