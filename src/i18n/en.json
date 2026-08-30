@@ -9,7 +9,14 @@
     "history": "History",
     "clients": "Clients",
     "settings": "Settings",
-    "challenges": "Challenges"
+    "challenges": "Challenges",
+    "primary": "Main navigation",
+    "short": {
+      "dashboard": "Home",
+      "history": "History",
+      "challenges": "Compete",
+      "settings": "Profile"
+    }
   },
   "actions": {
     "startTest": "Start test",

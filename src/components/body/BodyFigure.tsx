@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import bodyAsset from '@/assets/body-figure.webp'
 import { cn } from '@/lib/utils'
 import type { PerformanceDimension } from '@/types/domain'
@@ -63,6 +64,8 @@ export function BodyFigure({
   ariaLabel,
   plain = false,
 }: BodyFigureProps) {
+  const { t } = useTranslation()
+
   return (
     <div className={cn('relative aspect-[640/1120]', className)}>
       <img
@@ -110,16 +113,23 @@ export function BodyFigure({
               <button
                 key={`hit-${dimension}-${cx}`}
                 type="button"
-                aria-label={dimension}
+                // Ohne Beschriftung wäre das eine unsichtbare, für
+                // Screenreader namenlose Fläche. Der Name ist derselbe wie am
+                // zugehörigen Knoten.
+                aria-label={t(`dimensions.${dimension}`)}
+                aria-pressed={highlighted === dimension}
                 onClick={() => onSelect(dimension)}
                 className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
                 style={{
                   left: `${cx}%`,
                   top: `${y}%`,
-                  // Trefferfläche grosszügiger als der Lichtfleck, damit sie
-                  // auch mit dem Daumen erreichbar ist.
+                  // Trefferfläche grosszügiger als der Lichtfleck — und nie
+                  // kleiner als 44 px, der kleinsten zuverlässig treffbaren
+                  // Fläche für einen Daumen.
                   width: `${Math.max(rx, 7) * 2}%`,
                   height: `${Math.max(ry, 5) * 2}%`,
+                  minWidth: 44,
+                  minHeight: 44,
                 }}
               />
             ))

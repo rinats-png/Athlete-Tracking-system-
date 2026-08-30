@@ -83,6 +83,11 @@
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-edge:   rgba(255, 255, 255, 0.9);
 
+  /* Höhe der Navigationsleiste. Eine fixierte Leiste nimmt keinen Platz im
+     Fluss ein — die App-Hülle reserviert ihn über genau diesen Wert, sonst
+     liegt der letzte Inhalt unerreichbar darunter. */
+  --bottom-nav-h: 60px;
+
   /* Kanten: fast eckig. 2 px ist die einzige Rundung im System. */
   --radius: 2px;
 }
@@ -206,6 +211,7 @@
   --font-mono:    var(--font-mono);
 
   --radius-panel: var(--radius);
+  --spacing-bottom-nav: var(--bottom-nav-h);
 }
 
 * {

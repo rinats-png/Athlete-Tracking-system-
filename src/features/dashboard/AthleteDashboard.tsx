@@ -50,7 +50,14 @@ export function AthleteDashboard({ demo }: { demo: boolean }) {
     <div className="flex min-h-dvh flex-col">
       <AppHeader demo={demo} />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-5 sm:px-6">
+      <main
+        className={
+          // Die fixierte Leiste nimmt keinen Platz im Fluss ein — hier wird er
+          // reserviert, damit der letzte Inhalt nicht darunter liegt.
+          'mx-auto w-full max-w-6xl flex-1 px-4 py-5 sm:px-6 ' +
+          'pb-[calc(var(--bottom-nav-h)+env(safe-area-inset-bottom)+1.25rem)] lg:pb-5'
+        }
+      >
         {/* Identität des Athleten und die beiden Hauptaktionen. */}
         <section className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>

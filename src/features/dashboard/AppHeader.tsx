@@ -1,12 +1,22 @@
 import { useTranslation } from 'react-i18next'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { NAV_ITEMS, type NavKey } from './BottomNav'
+import { cn } from '@/lib/utils'
 
 /**
  * Kopfzeile der App-Hülle. Bleibt beim Scrollen stehen, weil die
  * Moduswahl darunter ständig gebraucht wird.
  */
-export function AppHeader({ demo }: { demo: boolean }) {
+export function AppHeader({
+  demo,
+  active = 'dashboard',
+  onNavigate,
+}: {
+  demo: boolean
+  active?: NavKey
+  onNavigate?: (key: NavKey) => void
+}) {
   const { t } = useTranslation()
 
   return (
@@ -14,7 +24,32 @@ export function AppHeader({ demo }: { demo: boolean }) {
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
         <Wordmark />
         <div className="hidden min-w-0 flex-1 sm:block">
-          <span className="label-tag">{t('app.tagline')}</span>
+          <span className="label-tag lg:hidden">{t('app.tagline')}</span>
+
+          {/* Ab lg übernimmt die Kopfzeile die Navigation von der Leiste.
+              Unterhalb bleibt die Leiste zuständig — so gibt es auf jeder
+              Breite genau eine sichtbare Navigation. */}
+          <nav aria-label={t('nav.primary')} className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {NAV_ITEMS.map(({ key }) => (
+                <li key={key}>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate?.(key)}
+                    aria-current={active === key ? 'page' : undefined}
+                    className={cn(
+                      'flex min-h-11 items-center rounded-[2px] px-3 font-display text-[12px] font-semibold tracking-[0.1em] uppercase transition-colors',
+                      active === key
+                        ? 'text-ink'
+                        : 'text-ink-muted hover:text-ink',
+                    )}
+                  >
+                    {t(`nav.${key}`)}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
         <div className="ml-auto flex items-center gap-2">
           {demo && (

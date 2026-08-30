@@ -9,7 +9,14 @@
     "history": "Verlauf",
     "clients": "Klienten",
     "settings": "Einstellungen",
-    "challenges": "Wettkämpfe"
+    "challenges": "Wettkämpfe",
+    "primary": "Hauptnavigation",
+    "short": {
+      "dashboard": "Start",
+      "history": "Verlauf",
+      "challenges": "Wettkampf",
+      "settings": "Profil"
+    }
   },
   "actions": {
     "startTest": "Test starten",

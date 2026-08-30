@@ -154,7 +154,7 @@ export function BodyHero({
         {/* Detailkarte zur gewählten Achse — erscheint nur auf Anforderung,
             damit der Ruhezustand ruhig bleibt. */}
         {detail && (
-          <div className="absolute right-0 bottom-2 hidden w-[190px] border border-white/12 bg-display-raised/90 p-3 backdrop-blur-sm sm:block">
+          <div className="absolute inset-x-3 bottom-2 border border-white/12 bg-display-raised/92 p-3 backdrop-blur-sm sm:inset-x-auto sm:right-0 sm:w-[190px]">
             <span className="label-tag">{t(`dimensions.${detail.dimension}`)}</span>
             <p className="mt-1 flex items-baseline gap-1">
               <span className="readout text-[26px] leading-none">
