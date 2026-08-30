@@ -281,7 +281,9 @@ test.describe('Analyse-Bildschirm', () => {
 
     // Die Belastbarkeit steht nicht als nackte Zahl da, sondern mit ihren
     // vier Bestandteilen — sonst müsste man ihr blind glauben.
-    await expect(page.getByRole('meter', { name: 'Abdeckung' })).toBeVisible()
+    // exact: true — die Testabdeckung je Achse trägt einen Namen, der
+    // «Abdeckung» als Teilzeichenkette enthält.
+    await expect(page.getByRole('meter', { name: 'Abdeckung', exact: true })).toBeVisible()
     await expect(page.getByRole('meter', { name: 'Aktualität' })).toBeVisible()
     await expect(page.getByRole('meter', { name: 'Datenqualität' })).toBeVisible()
     await expect(page.getByRole('meter', { name: 'Messtiefe' })).toBeVisible()

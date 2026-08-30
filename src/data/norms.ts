@@ -13,6 +13,51 @@ import type { Sex } from '@/types/domain'
  */
 
 export const NORM_SOURCE = 'baseline_v0_placeholder'
+
+/**
+ * Herkunft der Referenzwerte, strukturiert (§15).
+ *
+ * Diese Angaben stehen im Bericht und in der Auswertung. Sie sind bewusst
+ * unangenehm ehrlich: `validated: false` heisst, dass diese Zahlen keine
+ * publizierte Normstichprobe hinter sich haben. Sobald belegte Daten
+ * eingespielt werden, wird dieser Block ersetzt — und erst dann darf
+ * irgendwo «Norm» statt «Referenz» stehen.
+ */
+export interface NormDatasetMeta {
+  id: string
+  /** Wie die Daten im Text genannt werden dürfen. */
+  label: { de: string; en: string }
+  population: { de: string; en: string }
+  method: { de: string; en: string }
+  ageRange: [number, number]
+  sexes: ('male' | 'female')[]
+  /** Stichprobengrösse. Null, solange keine erhoben wurde. */
+  sampleSize: number | null
+  year: number | null
+  /** Gegen eine publizierte Stichprobe abgeglichen? */
+  validated: boolean
+}
+
+export const NORM_DATASET: NormDatasetMeta = {
+  id: NORM_SOURCE,
+  label: {
+    de: 'BASELINE-Referenz (experimentell)',
+    en: 'BASELINE reference (experimental)',
+  },
+  population: {
+    de: 'Trainierte Erwachsene, 18–60 Jahre, nach Geschlecht und Altersgruppe getrennt',
+    en: 'Trained adults, 18–60 years, split by sex and age band',
+  },
+  method: {
+    de: 'Stützstellen für die Perzentile 10/25/50/75/90/99, dazwischen linear interpoliert, an den Rändern geklemmt statt extrapoliert. Die Werte sind an übliche Grössenordnungen angelehnt und nicht aus einer publizierten Normstudie übernommen.',
+    en: 'Anchors at the 10/25/50/75/90/99 percentiles, linearly interpolated between them and clamped at the edges rather than extrapolated. The values follow common orders of magnitude and are not taken from a published normative study.',
+  },
+  ageRange: [18, 120],
+  sexes: ['male', 'female'],
+  sampleSize: null,
+  year: null,
+  validated: false,
+}
 const PERCENTILES = [10, 25, 50, 75, 90, 99] as const
 
 export interface NormRow {

@@ -1,5 +1,5 @@
 import { getTest } from '@/data/testCatalog'
-import { normPercentile } from '@/data/norms'
+import { lookupPercentile } from '@/domain/benchmark'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { assessQuality } from '@/domain/dataQuality'
 import { coveredDimensions } from '@/domain/assessment'
@@ -369,11 +369,10 @@ export function performanceBalance(
 /**
  * Perzentil eines Ergebnisses gegen die Referenztabelle, sofern vorhanden.
  *
- * Ausgelagert, weil drei Bildschirme dieselbe Frage stellen und keiner davon
- * eine eigene Antwort geben darf.
+ * Nur noch eine Weiterleitung: die Auflösung liegt in `benchmark.ts`, weil
+ * die frühere Fassung hier stur unter der primären Kennzahl suchte und beim
+ * Cooper-Test deshalb nie etwas fand.
  */
 export function resultPercentile(result: StoredResult): number | null {
-  const test = getTest(result.testSlug)
-  if (!test || result.score == null) return null
-  return normPercentile(test.slug, test.primaryMetric, result.sex, result.ageYears, result.score)
+  return lookupPercentile(result)
 }

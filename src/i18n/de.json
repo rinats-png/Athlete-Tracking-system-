@@ -232,7 +232,52 @@
       "newer_version": "Die Datei stammt aus einer neueren Version von BASELINE. Aktualisiere die App, dann lässt sie sich einlesen — bis dahin bleibt dein Bestand unverändert.",
       "storage_full": "Der Gerätespeicher reicht nicht aus. Der bisherige Bestand ist unverändert.",
       "unknown": "Der Import ist fehlgeschlagen. Der bisherige Bestand ist unverändert."
-    }
+    },
+    "context": "Sportlicher Kontext",
+    "contextHint": "Alles freiwillig. Was hier steht, macht Berichte und Einordnungen genauer — geraten wäre schlechter als leer.",
+    "noAnswer": "Keine Angabe",
+    "performanceLevel": "Leistungsniveau",
+    "levelWhy": "Ordnet den Referenzvergleich ein. Ohne Angabe wird gegen trainierte Erwachsene verglichen.",
+    "level": {
+      "recreational": "Freizeitsport",
+      "trained": "Trainiert",
+      "advanced": "Fortgeschritten",
+      "competitive": "Wettkampf",
+      "elite": "Elite"
+    },
+    "levelHint": {
+      "recreational": "Regelmässig aktiv, ohne systematischen Trainingsplan.",
+      "trained": "Systematisches Training seit mindestens einem Jahr.",
+      "advanced": "Mehrjähriges strukturiertes Training, klare Leistungsentwicklung.",
+      "competitive": "Wettkampfsport auf regionaler oder nationaler Ebene.",
+      "elite": "Nationaler oder internationaler Spitzenbereich."
+    },
+    "sport": "Sportart",
+    "sportPlaceholder": "z. B. Functional Fitness, Judo, Einsatzdienst",
+    "position": "Position / Disziplin",
+    "positionPlaceholder": "z. B. Aussenverteidiger, -81 kg",
+    "trainingAge": "Trainingsalter (Jahre)",
+    "trainingAgeHint": "Jahre systematischen Trainings — nicht dein Lebensalter.",
+    "sessionsPerWeek": "Einheiten pro Woche",
+    "dominantSide": "Dominante Seite",
+    "side": {
+      "left": "Links",
+      "right": "Rechts",
+      "ambidextrous": "Beidseitig"
+    },
+    "goal": "Trainingsziel",
+    "goalPlaceholder": "z. B. Ausdauer ausbauen, Maxkraft halten",
+    "constraints": "Einschränkungen",
+    "constraintsPlaceholder": "z. B. Schulter links belastungsabhängig",
+    "constraintsHint": "Freitext für dich oder deinen Trainer. BASELINE bewertet keine Krankheitsbilder und leitet daraus nichts ab — das Feld dient allein dazu, dass beim Lesen der Werte der Zusammenhang bekannt ist.",
+    "composition": "Körperzusammensetzung",
+    "compositionEmpty": "Trag ein Körpergewicht ein, dann erscheint hier die Zusammensetzung.",
+    "compositionOn": "Stand {{date}}",
+    "bodyFat": "Körperfett",
+    "fatMass": "Fettmasse",
+    "fatFreeMass": "Fettfreie Masse",
+    "bmi": "BMI",
+    "bmiCaveat": "Fettmasse und fettfreie Masse werden aus Gewicht und Körperfettanteil gerechnet, nicht separat gespeichert. Der BMI unterscheidet nicht zwischen Muskel- und Fettmasse und ist bei trainierten Menschen wenig aussagekräftig."
   },
   "fields": {
     "distanceM": "Distanz",
@@ -533,5 +578,26 @@
   },
   "charts": {
     "unavailable": "Das Diagramm konnte nicht geladen werden. Die Werte stehen vollständig in der Tabellenansicht."
+  },
+  "coverage": {
+    "title": "Testabdeckung",
+    "overall": "{{percent}} % über alle Achsen",
+    "axisLabel": "Testabdeckung {{axis}}",
+    "explain": "Bezugsgrösse ist die Zahl der Tests im Katalog, die auf die jeweilige Achse einzahlen. Ein Gesamtwert von 82 bei 40 % Abdeckung ist eine andere Aussage als derselbe Wert bei 100 % — er beruht auf weniger."
+  },
+  "benchmark": {
+    "band": "Leistungsband",
+    "bandFrom": "aus Perzentil {{percentile}}",
+    "bandCaveat": "Das Band ist eine andere Darstellung desselben Perzentils, keine zusätzliche Erkenntnis. Die Schwellen (35 / 60 / 80 / 95) sind gesetzt und nicht aus den Daten abgeleitet.",
+    "population": "Vergleichskollektiv",
+    "mismatch": "Verglichen wird mit trainierten Erwachsenen. Nach deiner eigenen Angabe gehörst du einer anderen Gruppe an — lies das Perzentil entsprechend vorsichtig.",
+    "missing": {
+      "no_sex": "Ohne Geschlecht gibt es keinen Referenzvergleich.",
+      "no_age": "Ohne Geburtsdatum gibt es keinen Referenzvergleich.",
+      "no_reference": "Für diesen Test liegt keine Referenz vor."
+    },
+    "notValidated": "Experimentelle Referenz — nicht gegen eine publizierte Normstichprobe abgeglichen.",
+    "method": "Methodik",
+    "sampleUnknown": "Stichprobe nicht erhoben"
   }
 }

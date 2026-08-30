@@ -6,6 +6,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { Button } from '@/components/ui/Button'
 import { Link } from 'react-router-dom'
 import { ConfidencePanel } from './ConfidencePanel'
+import { CoveragePanel } from './CoveragePanel'
 import { InsightsPanel } from './InsightsPanel'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import {
@@ -17,6 +18,7 @@ import {
   testTrend,
   type TrendLabel,
 } from '@/domain/analytics'
+import { coverageByDimension } from '@/domain/benchmark'
 import { buildInsights } from '@/domain/insights'
 import { radarProfile } from '@/lib/scoring'
 import { getTest } from '@/data/testCatalog'
@@ -46,6 +48,7 @@ export function AnalysisScreen() {
   const confidence = useMemo(() => confidenceScore(data.results), [data.results])
   const axes = useMemo(() => radarProfile(data.results, 'population'), [data.results])
   const balance = useMemo(() => performanceBalance(axes), [axes])
+  const coverage = useMemo(() => coverageByDimension(data.results), [data.results])
   const insights = useMemo(
     () => buildInsights(axes, data.results, data.assessments, data.profile),
     [axes, data.results, data.assessments, data.profile],
@@ -93,8 +96,9 @@ export function AnalysisScreen() {
         </p>
       </header>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-3">
         <ConfidencePanel confidence={confidence} />
+        <CoveragePanel coverage={coverage} />
 
         <Panel>
           <PanelHeader title={t('analysis.balance')} subtitle={t('analysis.balanceHint')} />

@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { AthleteContext } from './AthleteContext'
+import { BodyCompositionPanel } from './BodyCompositionPanel'
 import { BrandingSettings } from './BrandingSettings'
 import { CoachSettings } from '@/features/coach/CoachSettings'
 import { downloadFile } from '@/lib/export/csv'
@@ -264,6 +266,10 @@ export function ProfileScreen() {
               </div>
             </div>
           </Panel>
+
+          <AthleteContext />
+
+          <BodyCompositionPanel locale={locale} />
 
           <CoachSettings locale={locale} />
 

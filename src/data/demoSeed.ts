@@ -94,6 +94,14 @@ export function buildDemoData(): StoredData {
     maxHr: 189,
     locale: 'de',
     unitSystem: 'metric',
+    sport: 'Functional Fitness',
+    position: '',
+    performanceLevel: 'advanced',
+    trainingAgeYears: 9,
+    sessionsPerWeek: 5,
+    dominantSide: 'right',
+    goal: 'Hybrid: Maxkraft halten, Ausdauer ausbauen',
+    constraints: '',
   }
 
   const biometrics: StoredBiometric[] = SESSIONS.map((s) => ({

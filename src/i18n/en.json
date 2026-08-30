@@ -232,7 +232,52 @@
       "newer_version": "The file comes from a newer version of BASELINE. Update the app to read it — until then your data stays unchanged.",
       "storage_full": "There is not enough device storage. Your existing data is unchanged.",
       "unknown": "The import failed. Your existing data is unchanged."
-    }
+    },
+    "context": "Athletic context",
+    "contextHint": "All optional. What you put here makes reports and comparisons more precise — guessing would be worse than leaving it blank.",
+    "noAnswer": "Not specified",
+    "performanceLevel": "Performance level",
+    "levelWhy": "Frames the reference comparison. Without it, the comparison is against trained adults.",
+    "level": {
+      "recreational": "Recreational",
+      "trained": "Trained",
+      "advanced": "Advanced",
+      "competitive": "Competitive",
+      "elite": "Elite"
+    },
+    "levelHint": {
+      "recreational": "Regularly active, without a systematic training plan.",
+      "trained": "Systematic training for at least a year.",
+      "advanced": "Several years of structured training with clear progression.",
+      "competitive": "Competing at regional or national level.",
+      "elite": "National or international top level."
+    },
+    "sport": "Sport",
+    "sportPlaceholder": "e.g. functional fitness, judo, tactical",
+    "position": "Position / discipline",
+    "positionPlaceholder": "e.g. full-back, -81 kg",
+    "trainingAge": "Training age (years)",
+    "trainingAgeHint": "Years of systematic training — not your age.",
+    "sessionsPerWeek": "Sessions per week",
+    "dominantSide": "Dominant side",
+    "side": {
+      "left": "Left",
+      "right": "Right",
+      "ambidextrous": "Both"
+    },
+    "goal": "Training goal",
+    "goalPlaceholder": "e.g. build endurance, maintain max strength",
+    "constraints": "Constraints",
+    "constraintsPlaceholder": "e.g. left shoulder sensitive under load",
+    "constraintsHint": "Free text for you or your coach. BASELINE does not assess medical conditions and derives nothing from this — the field exists so the context is known when reading the values.",
+    "composition": "Body composition",
+    "compositionEmpty": "Enter a body weight and the composition appears here.",
+    "compositionOn": "As of {{date}}",
+    "bodyFat": "Body fat",
+    "fatMass": "Fat mass",
+    "fatFreeMass": "Fat-free mass",
+    "bmi": "BMI",
+    "bmiCaveat": "Fat mass and fat-free mass are computed from weight and body-fat percentage, not stored separately. BMI does not distinguish muscle from fat and says little about trained people."
   },
   "fields": {
     "distanceM": "Distance",
@@ -533,5 +578,26 @@
   },
   "charts": {
     "unavailable": "The chart could not be loaded. The values are fully available in the table view."
+  },
+  "coverage": {
+    "title": "Test coverage",
+    "overall": "{{percent}} % across all axes",
+    "axisLabel": "Test coverage {{axis}}",
+    "explain": "The reference is the number of tests in the catalogue that feed each axis. An overall value of 82 at 40 % coverage is a different statement from the same value at 100 % — it rests on less."
+  },
+  "benchmark": {
+    "band": "Performance band",
+    "bandFrom": "from percentile {{percentile}}",
+    "bandCaveat": "The band is another rendering of the same percentile, not additional insight. The thresholds (35 / 60 / 80 / 95) are set, not derived from the data.",
+    "population": "Comparison group",
+    "mismatch": "The comparison is against trained adults. By your own account you belong to a different group — read the percentile with that in mind.",
+    "missing": {
+      "no_sex": "Without sex there is no reference comparison.",
+      "no_age": "Without a date of birth there is no reference comparison.",
+      "no_reference": "No reference exists for this test."
+    },
+    "notValidated": "Experimental reference — not reconciled against a published normative sample.",
+    "method": "Method",
+    "sampleUnknown": "sample not collected"
   }
 }

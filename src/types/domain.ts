@@ -82,3 +82,16 @@ export interface AthleteProfile {
   maxHr: number | null
   lastAssessmentOn: string | null
 }
+
+/** Leistungsniveau des Athleten. Reihenfolge = aufsteigende Einordnung. */
+export const PERFORMANCE_LEVELS = [
+  'recreational',
+  'trained',
+  'advanced',
+  'competitive',
+  'elite',
+] as const
+export type PerformanceLevel = (typeof PERFORMANCE_LEVELS)[number]
+
+export const DOMINANT_SIDES = ['left', 'right', 'ambidextrous'] as const
+export type DominantSide = (typeof DOMINANT_SIDES)[number]

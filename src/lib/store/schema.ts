@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 5
+export const CURRENT_SCHEMA_VERSION = 6
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -35,6 +35,22 @@ const dayString = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, 'Erwartet YYYY-MM-DD')
 
+/**
+ * Leistungsniveau. Grob und ehrlich gestuft: feinere Abstufungen liessen sich
+ * ohne belegte Referenzstichprobe nicht rechtfertigen, und eine Skala, die
+ * genauer aussieht, als sie ist, führt zu falschen Vergleichen.
+ */
+export const performanceLevelSchema = z.enum([
+  'recreational',
+  'trained',
+  'advanced',
+  'competitive',
+  'elite',
+])
+
+/** Dominante Seite — bei Sprung- und Wurftests für die Einordnung relevant. */
+export const dominantSideSchema = z.enum(['left', 'right', 'ambidextrous'])
+
 const profileSchema = z.object({
   firstName: z.string().max(80).default(''),
   lastName: z.string().max(80).nullable().default(null),
@@ -45,6 +61,28 @@ const profileSchema = z.object({
   maxHr: finite.min(100).max(240).nullable().default(null),
   locale: localeSchema.default('de'),
   unitSystem: unitSystemSchema.default('metric'),
+
+  // --- Sportlicher Kontext (§6) ------------------------------------------
+  // Alles freiwillig. Ein Pflichtfeld, das jemand nicht beantworten kann oder
+  // will, führt zu erfundenen Angaben — und erfundener Kontext ist schlimmer
+  // als fehlender, weil er unsichtbar in jede Einordnung einfliesst.
+  sport: z.string().max(60).default(''),
+  /** Position oder Disziplin innerhalb der Sportart. */
+  position: z.string().max(60).default(''),
+  performanceLevel: performanceLevelSchema.nullable().default(null),
+  /** Jahre systematischen Trainings — nicht das Lebensalter. */
+  trainingAgeYears: finite.min(0).max(70).nullable().default(null),
+  /** Einheiten je Woche. */
+  sessionsPerWeek: finite.min(0).max(21).nullable().default(null),
+  dominantSide: dominantSideSchema.nullable().default(null),
+  /** Trainingsziel in eigenen Worten. */
+  goal: z.string().max(300).default(''),
+  /**
+   * Einschränkungen in eigenen Worten. Ausdrücklich ein Freitextfeld und
+   * keine Liste von Diagnosen: BASELINE bewertet keine Krankheitsbilder und
+   * soll auch keine Gesundheitsdaten strukturiert sammeln (§50, §82).
+   */
+  constraints: z.string().max(300).default(''),
 })
 
 const biometricSchema = z.object({
@@ -239,6 +277,31 @@ export const MIGRATIONS: Migration[] = [
         ],
       }
     },
+  },
+  {
+    from: 5,
+    to: 6,
+    describe: 'Athletenprofil um sportlichen Kontext erweitert',
+    run: (data) => ({
+      ...data,
+      version: 6,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        profile: {
+          ...athlete.profile,
+          // Leer statt geraten: aus Alter und Geschlecht lässt sich weder
+          // Sportart noch Leistungsniveau ableiten.
+          sport: '',
+          position: '',
+          performanceLevel: null,
+          trainingAgeYears: null,
+          sessionsPerWeek: null,
+          dominantSide: null,
+          goal: '',
+          constraints: '',
+        },
+      })),
+    }),
   },
 ]
 
