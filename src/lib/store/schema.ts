@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 9
+export const CURRENT_SCHEMA_VERSION = 10
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -69,6 +69,17 @@ const profileSchema = z.object({
   sport: z.string().max(60).default(''),
   /** Position oder Disziplin innerhalb der Sportart. */
   position: z.string().max(60).default(''),
+  /**
+   * Ausgewählter Cluster und Disziplin aus `src/data/sportProfiles.ts`.
+   *
+   * Bewusst zusätzlich zu `sport`/`position` und nicht an deren Stelle: die
+   * Freitextfelder bleiben die Auffanglösung für alles, was die Liste nicht
+   * kennt, und bereits erfasste Angaben gehen nicht verloren. Beide Felder
+   * sind Kennungen, keine Anzeigetexte — die Benennung kommt aus der Liste,
+   * damit eine Umbenennung dort nicht am gespeicherten Bestand vorbeiläuft.
+   */
+  sportCategoryId: z.string().max(40).nullable().default(null),
+  disciplineId: z.string().max(40).nullable().default(null),
   performanceLevel: performanceLevelSchema.nullable().default(null),
   /** Jahre systematischen Trainings — nicht das Lebensalter. */
   trainingAgeYears: finite.min(0).max(70).nullable().default(null),
@@ -447,6 +458,27 @@ export const MIGRATIONS: Migration[] = [
         // Leer: rückwirkend lässt sich nicht rekonstruieren, wann was
         // geändert wurde, und ein erfundener Nachweis wäre wertlos.
         audit: [],
+      })),
+    }),
+  },
+  {
+    from: 9,
+    to: 10,
+    describe: 'Cluster und Disziplin als Auswahl statt nur als Freitext',
+    run: (data) => ({
+      ...data,
+      version: 10,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        profile: {
+          ...athlete.profile,
+          // Leer statt geraten: aus einem Freitext wie «Kampfsport» eine
+          // Disziplin abzuleiten hiesse, eine Angabe zu erfinden, die
+          // anschliessend die Testempfehlung steuert. Der Freitext bleibt
+          // erhalten und steht in der Oberfläche weiterhin da.
+          sportCategoryId: null,
+          disciplineId: null,
+        },
       })),
     }),
   },

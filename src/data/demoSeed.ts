@@ -96,6 +96,8 @@ export function buildDemoData(): StoredData {
     unitSystem: 'metric',
     sport: 'Functional Fitness',
     position: '',
+    sportCategoryId: 'hybrid',
+    disciplineId: 'functional_fitness',
     performanceLevel: 'advanced',
     trainingAgeYears: 9,
     sessionsPerWeek: 5,

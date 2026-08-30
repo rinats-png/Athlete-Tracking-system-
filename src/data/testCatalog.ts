@@ -52,6 +52,14 @@ export interface TestDefinition {
   fields: TestField[]
   protocol: { mode: ProtocolMode; durationSeconds?: number; targetDistanceM?: number; attempts?: number }
   requiresBodyWeight: boolean
+  /**
+   * `lab`: braucht Geräte oder Personal, die ausserhalb eines Instituts
+   * selten verfügbar sind (Ergometer mit Drehmomentmessung, Laktatanalyse).
+   * Solche Tests stehen zur Verfügung, sind aber nie Voraussetzung für ein
+   * vollständiges Profil — sonst wäre das Profil für die meisten Nutzer
+   * grundsätzlich unvollständig. Fehlt die Angabe, gilt `field`.
+   */
+  setting?: 'field' | 'lab'
   derivedMetrics: string[]
   sortOrder: number
   name: { de: string; en: string }

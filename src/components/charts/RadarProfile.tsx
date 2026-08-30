@@ -10,7 +10,7 @@ import { EChart } from './EChart'
 import { useChartTokens } from './useChartTokens'
 import { Button } from '@/components/ui/Button'
 import { formatNumber, formatDate } from '@/lib/format'
-import type { AppLocale, RadarAxis, ScoreMode } from '@/types/domain'
+import type { AppLocale, PerformanceDimension, RadarAxis, ScoreMode } from '@/types/domain'
 
 interface RadarProfileProps {
   axes: RadarAxis[]
@@ -19,6 +19,16 @@ interface RadarProfileProps {
   previousLabel?: string
   mode: ScoreMode
   locale: AppLocale
+  /**
+   * Anforderungskontur der gewählten Disziplin (Achsengewichte 0–1).
+   *
+   * Nur im Populationsmodus sinnvoll: dort ist die Skala ein Perzentil und
+   * die Kontur sagt «hier sollte ein Wettkämpfer dieser Disziplin liegen».
+   * Im Bestleistungsmodus wäre sie eine Linie ohne Bezug — genau wie die
+   * 50er-Referenz, die dort ebenfalls nicht gezeichnet wird.
+   */
+  disciplineWeights?: Partial<Record<PerformanceDimension, number>>
+  disciplineLabel?: string
 }
 
 /**
@@ -39,6 +49,8 @@ export function RadarProfile({
   previousLabel,
   mode,
   locale,
+  disciplineWeights,
+  disciplineLabel,
 }: RadarProfileProps) {
   const { t } = useTranslation()
   const tokens = useChartTokens()
@@ -108,6 +120,29 @@ export function RadarProfile({
       })
     }
 
+    if (mode === 'population' && disciplineWeights && disciplineLabel) {
+      series.push({
+        type: 'radar',
+        name: disciplineLabel,
+        symbol: 'none',
+        itemStyle: { color: tokens['series-3'] ?? tokens.reference },
+        lineStyle: { width: 1.5, color: tokens['series-3'] ?? tokens.reference, type: [8, 4] },
+        areaStyle: { opacity: 0 },
+        silent: true,
+        data: [
+          {
+            // Achsen ohne Anforderung bleiben leer statt auf null gesetzt:
+            // «keine Anforderung» ist etwas anderes als «Anforderung null».
+            value: axes.map((axis) => {
+              const weight = disciplineWeights[axis.dimension]
+              return weight == null ? null : Math.round(weight * 100)
+            }),
+            name: disciplineLabel,
+          },
+        ],
+      })
+    }
+
     return {
       backgroundColor: 'transparent',
       animationDuration: 400,
@@ -174,7 +209,7 @@ export function RadarProfile({
       },
       series,
     }
-  }, [axes, previousAxes, previousLabel, mode, tokens, t, axisUnit])
+  }, [axes, previousAxes, previousLabel, mode, tokens, t, axisUnit, disciplineWeights, disciplineLabel])
 
   const covered = axes.filter((axis) => axis.hasData).length
 
@@ -207,6 +242,11 @@ export function RadarProfile({
               <tr className="border-b border-line text-left">
                 <th className="label-tag py-2 pr-3 font-semibold">{t('table.dimension')}</th>
                 <th className="label-tag py-2 pr-3 text-right font-semibold">{t('table.score')}</th>
+                {disciplineWeights ? (
+                  <th className="label-tag py-2 pr-3 text-right font-semibold">
+                    {t('table.requirement')}
+                  </th>
+                ) : null}
                 <th className="label-tag py-2 pr-3 text-right font-semibold">{t('table.tests')}</th>
                 <th className="label-tag py-2 text-right font-semibold">{t('table.lastTest')}</th>
               </tr>
@@ -218,6 +258,13 @@ export function RadarProfile({
                   <td className="readout py-2 pr-3 text-right">
                     {axis.score == null ? '—' : formatNumber(axis.score, locale, 0)}
                   </td>
+                  {disciplineWeights ? (
+                    <td className="readout py-2 pr-3 text-right text-ink-secondary">
+                      {disciplineWeights[axis.dimension] == null
+                        ? '—'
+                        : formatNumber(disciplineWeights[axis.dimension]! * 100, locale, 0)}
+                    </td>
+                  ) : null}
                   <td className="readout py-2 pr-3 text-right text-ink-secondary">
                     {axis.testCount}
                   </td>

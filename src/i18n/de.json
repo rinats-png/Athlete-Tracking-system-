@@ -124,7 +124,8 @@
     "rpe": "RPE",
     "value": "Wert",
     "percentile": "Perzentil",
-    "quality": "Qualität"
+    "quality": "Qualität",
+    "requirement": "Anforderung"
   },
   "badges": {
     "personalBest": "Bestleistung",
@@ -197,7 +198,9 @@
     "reset": "Zurücksetzen",
     "fixErrors": "Bitte die markierten Felder korrigieren",
     "notes": "Notiz (optional)",
-    "notesHint": "Bedingungen, Auffälligkeiten, Abweichungen vom Protokoll."
+    "notesHint": "Bedingungen, Auffälligkeiten, Abweichungen vom Protokoll.",
+    "provisional": "vorläufig",
+    "provisionalHint": "Diese Zahl beruht auf einer Festlegung dieser App, nicht auf einer publizierten Formel. Sie wird ersetzt, sobald belegte Referenzwerte vorliegen."
   },
   "history": {
     "title": "Verlauf",
@@ -310,7 +313,12 @@
     "fatMass": "Fettmasse",
     "fatFreeMass": "Fettfreie Masse",
     "bmi": "BMI",
-    "bmiCaveat": "Fettmasse und fettfreie Masse werden aus Gewicht und Körperfettanteil gerechnet, nicht separat gespeichert. Der BMI unterscheidet nicht zwischen Muskel- und Fettmasse und ist bei trainierten Menschen wenig aussagekräftig."
+    "bmiCaveat": "Fettmasse und fettfreie Masse werden aus Gewicht und Körperfettanteil gerechnet, nicht separat gespeichert. Der BMI unterscheidet nicht zwischen Muskel- und Fettmasse und ist bei trainierten Menschen wenig aussagekräftig.",
+    "sportCategory": "Sportbereich",
+    "discipline": "Disziplin",
+    "disciplineNeedsCategory": "Zuerst einen Sportbereich wählen.",
+    "disciplineHint": "Steuert die vorgeschlagene Testbatterie. Freiwillig — ohne Auswahl bleibt der allgemeine Vorschlag.",
+    "disciplineResetConfirm": "Ein anderer Sportbereich löst die gewählte Disziplin. Fortfahren?"
   },
   "fields": {
     "distanceM": "Distanz",
@@ -471,7 +479,8 @@
     },
     "nextDate": "Nächster Termin",
     "nextFixed": "Von dir festgelegt. Diese Festlegung überschreibt den Vorschlag der App überall dort, wo der nächste Termin angezeigt wird.",
-    "nextSuggested": "Vorschlag der App auf Basis des üblichen Abstands. Sobald du ein Datum wählst, gilt deine Festlegung."
+    "nextSuggested": "Vorschlag der App auf Basis des üblichen Abstands. Sobald du ein Datum wählst, gilt deine Festlegung.",
+    "suggested": "Vorschlag"
   },
   "attempts": {
     "title": "Versuche",

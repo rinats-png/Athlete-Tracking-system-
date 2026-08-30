@@ -14,6 +14,7 @@ import { getTest } from '@/data/testCatalog'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { deriveMetrics } from '@/lib/metrics/derive'
 import { ageFromBirthDate, formatNumber } from '@/lib/format'
+import { formulaFor } from '@/domain/formulaRegistry'
 import { hasErrors, issuesFor, validateTestInput } from '@/domain/validation'
 import type { AttemptSelection, ValidatedContext } from '@/lib/store/schema'
 import type { AppLocale } from '@/types/domain'
@@ -239,8 +240,22 @@ export function TestRunScreen() {
                   {test.derivedMetrics
                     .filter((key) => preview[key] != null)
                     .map((key) => (
-                      <li key={key} className="flex justify-between text-[13px]">
-                        <span className="text-ink-secondary">{t(`metrics.${key}`)}</span>
+                      <li key={key} className="flex justify-between gap-3 text-[13px]">
+                        <span className="text-ink-secondary">
+                          {t(`metrics.${key}`)}
+                          {/* Kennzeichnet Werte, deren Formel diese App
+                              festgelegt hat und die noch durch eine belegte
+                              zu ersetzen ist (§81). Ohne die Kennzeichnung
+                              sähe eine gesetzte Zahl aus wie eine belegte. */}
+                          {formulaFor(key)?.source === 'provisional' ? (
+                            <span
+                              title={t('tests.provisionalHint')}
+                              className="ml-1.5 align-middle text-[10px] uppercase tracking-wide text-ink-muted"
+                            >
+                              {t('tests.provisional')}
+                            </span>
+                          ) : null}
+                        </span>
                         <span className="readout">{formatNumber(preview[key], locale, 2)}</span>
                       </li>
                     ))}

@@ -1,4 +1,5 @@
 import { TEST_CATALOG } from './testCatalog'
+import { disciplineById } from './sportProfiles'
 import type { PerformanceDimension } from '@/types/domain'
 
 /**
@@ -146,4 +147,40 @@ export function batteryDimensions(battery: TestBattery): PerformanceDimension[] 
     }
   }
   return [...dimensions]
+}
+
+/**
+ * Mittlere Dauer je Test inklusive Erklärung, Aufwärmen und Pause.
+ * Grobwert für die Planung, keine Messung — die Batterien oben tragen ihre
+ * eigenen, genauer geschätzten Zeiten.
+ */
+const MINUTES_PER_TEST = 15
+
+/**
+ * Batterie aus der gewählten Disziplin.
+ *
+ * Enthält deren Kerntests — die optionalen bleibt aussen vor, weil eine
+ * Batterie ein Vorschlag ist, den man abarbeitet, und ein Vorschlag mit
+ * Auswahlaufgabe darin keiner mehr ist. Die optionalen Tests stehen in der
+ * Testliste darunter weiterhin zur Verfügung.
+ *
+ * Enthält keine Labortests: sie sind nie Voraussetzung für ein vollständiges
+ * Profil, und in einer vorgeschlagenen Batterie stünden sie als solche da.
+ */
+export function disciplineBattery(disciplineId: string | null): TestBattery | null {
+  if (!disciplineId) return null
+  const discipline = disciplineById(disciplineId)
+  if (!discipline) return null
+  const testSlugs = discipline.coreTests.filter((slug) => {
+    const test = TEST_CATALOG.find((t) => t.slug === slug)
+    return test != null && test.setting !== 'lab'
+  })
+  if (testSlugs.length === 0) return null
+  return {
+    slug: `discipline:${discipline.id}`,
+    testSlugs,
+    durationMinutes: testSlugs.length * MINUTES_PER_TEST,
+    name: discipline.name,
+    description: discipline.rationale,
+  }
 }

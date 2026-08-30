@@ -15,6 +15,7 @@ import { DimensionBreakdown } from './DimensionBreakdown'
 import { RecentTests } from './RecentTests'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { disciplineById } from '@/data/sportProfiles'
 import { baselineIndex, radarProfile } from '@/lib/scoring'
 import { toSummaries } from '@/lib/resultView'
 import { getTest } from '@/data/testCatalog'
@@ -29,6 +30,8 @@ export function DashboardScreen() {
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const [mode, setMode] = useState<ScoreMode>('population')
   const { data } = useAppData()
+  // Anforderungskontur der Disziplin, sofern eine gewählt ist.
+  const discipline = disciplineById(data.profile.disciplineId ?? '')
 
   const current = useMemo(() => radarProfile(data.results, mode), [data.results, mode])
 
@@ -193,7 +196,14 @@ export function DashboardScreen() {
               </span>
             }
           />
-          <RadarProfile axes={current} previousAxes={previous} mode={mode} locale={locale} />
+          <RadarProfile
+            axes={current}
+            previousAxes={previous}
+            mode={mode}
+            locale={locale}
+            disciplineWeights={discipline?.dimensionWeights}
+            disciplineLabel={discipline?.name[locale]}
+          />
         </Panel>
 
         <Panel className="lg:col-span-2">

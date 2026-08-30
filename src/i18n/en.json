@@ -124,7 +124,8 @@
     "rpe": "RPE",
     "value": "Value",
     "percentile": "Percentile",
-    "quality": "Quality"
+    "quality": "Quality",
+    "requirement": "Requirement"
   },
   "badges": {
     "personalBest": "Personal best",
@@ -197,7 +198,9 @@
     "reset": "Reset",
     "fixErrors": "Please correct the highlighted fields",
     "notes": "Note (optional)",
-    "notesHint": "Conditions, anomalies, deviations from the protocol."
+    "notesHint": "Conditions, anomalies, deviations from the protocol.",
+    "provisional": "provisional",
+    "provisionalHint": "This number rests on a definition made by this app, not on a published formula. It will be replaced once documented reference values exist."
   },
   "history": {
     "title": "History",
@@ -310,7 +313,12 @@
     "fatMass": "Fat mass",
     "fatFreeMass": "Fat-free mass",
     "bmi": "BMI",
-    "bmiCaveat": "Fat mass and fat-free mass are computed from weight and body-fat percentage, not stored separately. BMI does not distinguish muscle from fat and says little about trained people."
+    "bmiCaveat": "Fat mass and fat-free mass are computed from weight and body-fat percentage, not stored separately. BMI does not distinguish muscle from fat and says little about trained people.",
+    "sportCategory": "Sport category",
+    "discipline": "Discipline",
+    "disciplineNeedsCategory": "Choose a sport category first.",
+    "disciplineHint": "Drives the suggested test battery. Optional — without a selection the general battery stays.",
+    "disciplineResetConfirm": "Changing the category clears the selected discipline. Continue?"
   },
   "fields": {
     "distanceM": "Distance",
@@ -471,7 +479,8 @@
     },
     "nextDate": "Next session",
     "nextFixed": "Set by you. This overrides the app's suggestion everywhere the next session is shown.",
-    "nextSuggested": "The app's suggestion based on the usual interval. As soon as you pick a date, your choice applies."
+    "nextSuggested": "The app's suggestion based on the usual interval. As soon as you pick a date, your choice applies.",
+    "suggested": "Suggested"
   },
   "attempts": {
     "title": "Attempts",

@@ -1,6 +1,6 @@
 import type { StoredAssessment, AthleteData, StoredResult } from '@/lib/store/localStore'
 import type { AttemptSelection } from '@/lib/store/schema'
-import { BATTERY_BY_SLUG } from '@/data/testBatteries'
+import { BATTERY_BY_SLUG, disciplineBattery } from '@/data/testBatteries'
 import { getTest } from '@/data/testCatalog'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import type { PerformanceDimension } from '@/types/domain'
@@ -81,7 +81,12 @@ export function defaultAssessmentTitle(
   performedOn: string,
   locale: 'de' | 'en',
 ): string {
-  const battery = batterySlug ? BATTERY_BY_SLUG.get(batterySlug) : undefined
+  // Disziplinbatterien stehen nicht in der Liste der festen Batterien —
+  // sie entstehen aus dem Profil. Ohne diesen Zweig hiesse ein solcher
+  // Termin nur nach dem Datum.
+  const battery = batterySlug
+    ? (BATTERY_BY_SLUG.get(batterySlug) ?? disciplineBattery(batterySlug.replace(/^discipline:/, '')))
+    : undefined
   const date = new Date(`${performedOn}T12:00:00`).toLocaleDateString(
     locale === 'en' ? 'en-GB' : 'de-DE',
     { month: 'short', year: 'numeric' },

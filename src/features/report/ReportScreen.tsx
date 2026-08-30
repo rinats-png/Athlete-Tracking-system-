@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ArrowLeft, Download, Printer } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { disciplineById } from '@/data/sportProfiles'
 import { resultsForAssessment, coveredDimensions, missingDimensions } from '@/domain/assessment'
 import { baselineComparisons, confidenceScore, resultPercentile, testTrend } from '@/domain/analytics'
 import { buildInsights } from '@/domain/insights'
@@ -40,6 +41,8 @@ export function ReportScreen() {
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const { data, athleteNotes } = useAppData()
+  // Anforderungskontur der Disziplin, sofern eine gewählt ist.
+  const discipline = disciplineById(data.profile.disciplineId ?? '')
   const [searchParams] = useSearchParams()
 
   const assessment = id ? (data.assessments.find((a) => a.id === id) ?? null) : null
@@ -221,7 +224,13 @@ export function ReportScreen() {
             beantworten «wo stehe ich» schlechter als ein Netz. Die
             Tabellenansicht liegt darunter und macht es ohne Diagramm
             lesbar. */}
-        <RadarProfile axes={axes} mode="population" locale={locale} />
+        <RadarProfile
+          axes={axes}
+          mode="population"
+          locale={locale}
+          disciplineWeights={discipline?.dimensionWeights}
+          disciplineLabel={discipline?.name[locale]}
+        />
       </Section>
 
       <Section title={t('coverage.title')}>

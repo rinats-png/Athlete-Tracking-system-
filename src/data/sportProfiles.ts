@@ -475,8 +475,12 @@ const CYCLING: Discipline[] = [
       en: 'Very short maximal efforts with full recovery. Peak power and its repeatability are the only relevant quantities; threshold hardly matters.',
     },
     dimensionWeights: { power: 1, max_strength: 0.7, strength_endurance: 0.5, endurance: 0.3 },
-    coreTests: ['peak_power_5s', 'wingate_30s', 'back_squat_1rm'],
-    optionalTests: ['countermovement_jump', 'ftp_20min'],
+    // Der Wingate-Test gehört fachlich hierher, steht aber unter den
+    // optionalen: er braucht ein Ergometer mit Drehmomentmessung. Ein
+    // Kerntest, den die meisten nicht durchführen können, macht jedes Profil
+    // dauerhaft unvollständig.
+    coreTests: ['peak_power_5s', 'back_squat_1rm', 'countermovement_jump'],
+    optionalTests: ['wingate_30s', 'ftp_20min'],
     eventDurationSeconds: [10, 300],
     typicalLimiter: 'power',
   },

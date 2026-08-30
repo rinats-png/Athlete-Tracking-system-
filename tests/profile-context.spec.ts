@@ -200,6 +200,64 @@ test.describe("Profil in der Oberfläche", () => {
     await expect(page.getByLabel("Trainingsalter (Jahre)")).toHaveValue("12");
   });
 
+  test("die Disziplin lässt sich erst nach dem Sportbereich wählen", async ({ page }) => {
+    await openGuest(page);
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+
+    const category = page.getByLabel("Sportbereich");
+    const discipline = page.getByLabel("Disziplin", { exact: true });
+
+    // Keine Vorauswahl: eine vorbelegte Sportart wäre eine Angabe, die
+    // niemand gemacht hat — und sie würde die Testempfehlung steuern.
+    await expect(category).toHaveValue("");
+    // Deaktiviert MIT Begründung statt versteckt.
+    await expect(discipline).toBeDisabled();
+    await expect(page.getByText("Zuerst einen Sportbereich wählen.")).toBeVisible();
+
+    await category.selectOption("combat");
+    await expect(discipline).toBeEnabled();
+    await discipline.selectOption("judo");
+
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(page.getByLabel("Sportbereich")).toHaveValue("combat");
+    await expect(page.getByLabel("Disziplin", { exact: true })).toHaveValue("judo");
+  });
+
+  test("der Wechsel des Sportbereichs löst die Disziplin erst nach Rückfrage", async ({
+    page,
+  }) => {
+    await openGuest(page);
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+    await page.getByLabel("Sportbereich").selectOption("combat");
+    await page.getByLabel("Disziplin", { exact: true }).selectOption("judo");
+
+    // Abgelehnt: nichts ändert sich.
+    page.once("dialog", (d) => d.dismiss());
+    await page.getByLabel("Sportbereich").selectOption("running");
+    await expect(page.getByLabel("Sportbereich")).toHaveValue("combat");
+    await expect(page.getByLabel("Disziplin", { exact: true })).toHaveValue("judo");
+
+    // Bestätigt: Bereich gewechselt, Disziplin gelöst statt still falsch.
+    page.once("dialog", (d) => d.accept());
+    await page.getByLabel("Sportbereich").selectOption("running");
+    await expect(page.getByLabel("Sportbereich")).toHaveValue("running");
+    await expect(page.getByLabel("Disziplin", { exact: true })).toHaveValue("");
+  });
+
+  test("die gewählte Disziplin steht als Vorschlag im Terminentwurf", async ({ page }) => {
+    await openGuest(page);
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+    await page.getByLabel("Sportbereich").selectOption("combat");
+    await page.getByLabel("Disziplin", { exact: true }).selectOption("judo");
+
+    await page.goto("/diagnostik/neu", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText("Vorschlag").first()).toBeVisible();
+    await expect(page.getByRole("button", { name: /Judo/ }).first()).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+  });
+
   test("kein Kontextfeld ist ein Pflichtfeld", async ({ page }) => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });

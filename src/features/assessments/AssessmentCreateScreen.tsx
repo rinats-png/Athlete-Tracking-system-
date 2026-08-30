@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { ArrowLeft, Check, Clock, TriangleAlert } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
-import { TEST_BATTERIES, batteryDimensions } from '@/data/testBatteries'
+import { TEST_BATTERIES, batteryDimensions, disciplineBattery } from '@/data/testBatteries'
 import { TEST_CATALOG, getTest } from '@/data/testCatalog'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -25,17 +25,31 @@ export function AssessmentCreateScreen() {
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const navigate = useNavigate()
-  const { saveAssessment } = useAppData()
+  const { data, saveAssessment } = useAppData()
 
-  const [batterySlug, setBatterySlug] = useState<string | null>('general_fitness')
+  // Die Batterie zur gewählten Disziplin steht vorn und ist vorausgewählt.
+  // Wer keine Disziplin angegeben hat, bekommt wie bisher die allgemeine —
+  // die Liste wird nicht kürzer, nur anders sortiert.
+  const suggested = useMemo(
+    () => disciplineBattery(data.profile.disciplineId),
+    [data.profile.disciplineId],
+  )
+  const batteries = useMemo(
+    () => (suggested ? [suggested, ...TEST_BATTERIES] : TEST_BATTERIES),
+    [suggested],
+  )
+  const initialSlug = suggested?.slug ?? 'general_fitness'
+
+  const [batterySlug, setBatterySlug] = useState<string | null>(initialSlug)
   const [selected, setSelected] = useState<string[]>(
-    () => TEST_BATTERIES.find((b) => b.slug === 'general_fitness')?.testSlugs ?? [],
+    () =>
+      (suggested ?? TEST_BATTERIES.find((b) => b.slug === 'general_fitness'))?.testSlugs ?? [],
   )
   const [performedOn, setPerformedOn] = useState(() => new Date().toISOString().slice(0, 10))
   const [title, setTitle] = useState('')
 
   const chooseBattery = (slug: string) => {
-    const battery = TEST_BATTERIES.find((b) => b.slug === slug)
+    const battery = batteries.find((b) => b.slug === slug)
     if (!battery) return
     setBatterySlug(slug)
     setSelected(battery.testSlugs)
@@ -47,7 +61,7 @@ export function AssessmentCreateScreen() {
         ? current.filter((s) => s !== slug)
         : [...current, slug]
       // Sobald von der Vorlage abgewichen wird, ist es keine Batterie mehr.
-      const battery = batterySlug ? TEST_BATTERIES.find((b) => b.slug === batterySlug) : null
+      const battery = batterySlug ? batteries.find((b) => b.slug === batterySlug) : null
       const matches =
         battery &&
         battery.testSlugs.length === next.length &&
@@ -72,10 +86,10 @@ export function AssessmentCreateScreen() {
   const estimatedMinutes = useMemo(
     () =>
       batterySlug
-        ? (TEST_BATTERIES.find((b) => b.slug === batterySlug)?.durationMinutes ?? 0)
+        ? (batteries.find((b) => b.slug === batterySlug)?.durationMinutes ?? 0)
         : // Ohne Vorlage grob geschätzt: 20 Minuten je Test inklusive Pause.
           selected.length * 20,
-    [batterySlug, selected.length],
+    [batterySlug, batteries, selected.length],
   )
 
   const start = () => {
@@ -120,7 +134,7 @@ export function AssessmentCreateScreen() {
           <Panel>
             <PanelHeader title={t('assessments.battery')} subtitle={t('assessments.batteryHint')} />
             <ul className="grid gap-px bg-line sm:grid-cols-2">
-              {TEST_BATTERIES.map((battery) => (
+              {batteries.map((battery) => (
                 <li key={battery.slug}>
                   <button
                     type="button"
@@ -133,7 +147,14 @@ export function AssessmentCreateScreen() {
                         : 'bg-plane hover:bg-surface-sunken',
                     )}
                   >
-                    <span className="text-[14px] font-semibold">{battery.name[locale]}</span>
+                    <span className="text-[14px] font-semibold">
+                      {battery.name[locale]}
+                      {battery.slug === suggested?.slug ? (
+                        <span className="ml-2 align-middle text-[10px] font-medium uppercase tracking-wide text-accent">
+                          {t('assessments.suggested')}
+                        </span>
+                      ) : null}
+                    </span>
                     <span className="text-[12px] leading-snug text-ink-secondary">
                       {battery.description[locale]}
                     </span>
