@@ -145,7 +145,18 @@
     "detail_personalBest_other": "From {{count}} tests, measured against your personal best."
   },
   "storage": {
-    "blocked": "Device storage is unavailable (private mode or full). Entries apply to this session only."
+    "blocked": "Device storage is unavailable (private mode or full). Entries apply to this session only.",
+    "migrated": "Your data comes from an older version (version {{from}}) and has been carried over. Nothing was lost.",
+    "newerVersion": "This data was saved by a newer version of BASELINE. It is left untouched until this app is updated — until then it is neither shown nor overwritten.",
+    "rejected_one": "One record could not be read and is missing from the analysis:",
+    "rejected_other": "{{count}} records could not be read and are missing from the analysis:",
+    "kind": {
+      "result": "Result",
+      "assessment": "Assessment",
+      "biometric": "Biometric entry",
+      "profile": "Profile",
+      "file": "File"
+    }
   },
   "tests": {
     "title": "Test catalog",
@@ -170,7 +181,8 @@
     "timer": "Timer",
     "start": "Start",
     "pause": "Pause",
-    "reset": "Reset"
+    "reset": "Reset",
+    "fixErrors": "Please correct the highlighted fields"
   },
   "history": {
     "title": "History",
@@ -241,5 +253,14 @@
     "strength_endurance": "Strength end.",
     "power": "Power",
     "agility": "Agility"
+  },
+  "validation": {
+    "required": "Required",
+    "min": "At least {{min}} {{unit}}",
+    "max": "At most {{max}} {{unit}}",
+    "integer": "Whole numbers only",
+    "future": "Date is in the future",
+    "noBodyWeight": "Relative strength cannot be computed without body weight.",
+    "repsUnreliable": "Above {{limit}} repetitions the 1RM estimate varies considerably."
   }
 }

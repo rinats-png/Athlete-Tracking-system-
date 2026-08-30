@@ -1,4 +1,6 @@
 import { useEffect, useId, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import type { ValidationIssue } from '@/domain/validation'
 
 /**
  * Zeiteingabe in Minuten und Sekunden.
@@ -12,13 +14,17 @@ export function DurationField({
   value,
   onChange,
   required = false,
+  issues = [],
 }: {
   label: string
   value: number | null
   onChange: (seconds: number | null) => void
   required?: boolean
+  issues?: ValidationIssue[]
 }) {
   const id = useId()
+  const { t } = useTranslation()
+  const errors = issues.filter((issue) => issue.severity === 'error')
   const [minutes, setMinutes] = useState('')
   const [seconds, setSeconds] = useState('')
 
@@ -75,6 +81,11 @@ export function DurationField({
           className="readout h-11 w-full border border-line bg-surface-sunken px-3 text-[16px] outline-none focus:border-accent"
         />
       </div>
+      {errors.length > 0 && (
+        <p role="alert" className="mt-1 text-[11px] text-critical">
+          {errors.map((issue) => t(issue.messageKey, issue.values)).join(' · ')}
+        </p>
+      )}
     </div>
   )
 }

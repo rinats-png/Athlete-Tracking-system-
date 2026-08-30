@@ -2,7 +2,7 @@ import { getTest, TEST_CATALOG } from '@/data/testCatalog'
 import { normPercentile } from '@/data/norms'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import type { PerformanceDimension, RadarAxis, ScoreMode, Sex } from '@/types/domain'
-import type { StoredResult } from '@/lib/store/types'
+import type { StoredResult } from '@/lib/store/localStore'
 
 /**
  * Scoring im Client.

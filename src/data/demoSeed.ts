@@ -1,7 +1,12 @@
 import { deriveMetrics, primaryValue } from '@/lib/metrics/derive'
 import { getTest } from '@/data/testCatalog'
-import { newId } from '@/lib/store/localStore'
-import type { StoredBiometric, StoredData, StoredResult } from '@/lib/store/types'
+import { CURRENT_SCHEMA_VERSION, newId } from '@/lib/store/localStore'
+import type {
+  StoredAssessment,
+  StoredBiometric,
+  StoredData,
+  StoredResult,
+} from '@/lib/store/localStore'
 
 /**
  * Demodatensatz.
@@ -108,8 +113,24 @@ export function buildDemoData(): StoredData {
     return years
   }
 
+  const assessments: StoredAssessment[] = []
   const results: StoredResult[] = []
+
   for (const session of SESSIONS) {
+    // Jeder Termin ist ein vollständiges Assessment — genau die Einheit, aus
+    // der später ein Report entsteht.
+    const assessment: StoredAssessment = {
+      id: newId(),
+      title: null,
+      batterySlug: 'hybrid',
+      performedOn: session.date,
+      status: 'completed',
+      plannedTestSlugs: Object.keys(session.values),
+      createdAt: new Date(`${session.date}T08:00:00Z`).toISOString(),
+      completedAt: new Date(`${session.date}T19:00:00Z`).toISOString(),
+    }
+    assessments.push(assessment)
+
     // Die Tests eines Termins liegen über wenige Tage verteilt, wie in echt.
     let dayOffset = 0
     for (const [slug, values] of Object.entries(session.values)) {
@@ -132,11 +153,13 @@ export function buildDemoData(): StoredData {
         bodyWeightKg: ctx.bodyWeightKg,
         ageYears: ctx.ageYears,
         sex: ctx.sex,
+        assessmentId: assessment.id,
         createdAt: iso,
       })
     }
   }
 
   results.sort((a, b) => new Date(b.performedAt).getTime() - new Date(a.performedAt).getTime())
-  return { version: 1, profile, biometrics, results }
+  assessments.sort((a, b) => (a.performedOn < b.performedOn ? 1 : -1))
+  return { version: CURRENT_SCHEMA_VERSION, profile, biometrics, assessments, results }
 }

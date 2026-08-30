@@ -6,47 +6,62 @@ import { ageFromBirthDate } from '@/lib/format'
 import {
   bodyWeightAt,
   clearData,
+  emptyData,
   exportData,
   importData,
   loadData,
   newId,
+  removeAssessment,
   removeResult,
   saveData,
+  upsertAssessment,
   upsertBiometric,
   upsertResult,
+  type ImportOutcome,
+  type StoredAssessment,
+  type StoredBiometric,
+  type StoredData,
+  type StoredResult,
 } from './localStore'
-import type { StoredBiometric, StoredData, StoredProfile, StoredResult } from './types'
+import type { LoadReport } from './schema'
 
 /**
  * Zentraler Datenzugriff der App.
  *
  * Alle Screens lesen und schreiben hierüber, nie direkt am Speicher. Dadurch
- * ist der Wechsel vom Gastmodus (lokal) auf ein Konto (Supabase) ein Austausch
+ * ist der Wechsel vom Gastmodus (lokal) auf ein Konto (Cloud) ein Austausch
  * dieser einen Schicht und nicht ein Umbau jedes Screens.
  */
 
 export type AppMode = 'guest' | 'demo'
 
+export interface RecordResultInput {
+  testSlug: string
+  performedAt: string
+  values: Record<string, number>
+  assessmentId?: string | null
+  notes?: string
+}
+
 interface AppDataValue {
   mode: AppMode
   data: StoredData
+  /** Befund des letzten Ladevorgangs: Migration, abgewiesene Datensätze. */
+  loadReport: LoadReport
   /** Körpergewicht zum Stichtag, für Relativkraft und Sinclair. */
   bodyWeightAt: (iso: string) => number | null
-  saveProfile: (patch: Partial<StoredProfile>) => void
+  saveProfile: (patch: Partial<StoredData['profile']>) => void
   saveBiometric: (entry: Omit<StoredBiometric, 'id' | 'createdAt'>) => void
   /** Legt ein Ergebnis an und rechnet die abgeleiteten Metriken gleich mit. */
-  recordResult: (input: {
-    testSlug: string
-    performedAt: string
-    values: Record<string, number>
-    notes?: string
-  }) => StoredResult | null
+  recordResult: (input: RecordResultInput) => StoredResult | null
   deleteResult: (id: string) => void
+  saveAssessment: (assessment: StoredAssessment) => void
+  deleteAssessment: (id: string) => void
   resetAll: () => void
   loadDemo: () => void
   exportJson: () => string
-  importJson: (json: string) => boolean
-  /** Meldet, ob der letzte Schreibvorgang gescheitert ist (volle oder gesperrte Ablage). */
+  importJson: (json: string) => ImportOutcome
+  /** Meldet, ob der letzte Schreibvorgang gescheitert ist. */
   storageBlocked: boolean
 }
 
@@ -72,32 +87,21 @@ export function writeMode(mode: AppMode | null) {
   }
 }
 
-export function AppDataProvider({
-  mode,
-  children,
-}: {
-  mode: AppMode
-  children: React.ReactNode
-}) {
+export function AppDataProvider({ mode, children }: { mode: AppMode; children: React.ReactNode }) {
   /**
    * Beim ersten Betreten des Demomodus einmalig befüllen — synchron beim
-   * ersten Rendern, nicht nachgeladen. Ein nachgereichter Datensatz liesse
-   * erst den Leerzustand erscheinen und würde das Layout verschieben, sobald
-   * er eintrifft; genau darauf gehen Fehlklicks zurück.
-   *
-   * Danach ist es ein ganz normaler Bestand, der sich bearbeiten und löschen
-   * lässt.
+   * ersten Rendern, nicht nachgeladen. Ein nachgereichter Bestand liesse erst
+   * den Leerzustand erscheinen und würde das Layout verschieben, sobald er
+   * eintrifft; genau darauf gehen Fehlklicks zurück.
    */
-  const [data, setData] = useState<StoredData>(() => {
-    const stored = loadData()
-    if (mode === 'demo' && stored.results.length === 0) return buildDemoData()
-    return stored
-  })
-  const [storageBlocked, setStorageBlocked] = useState(false)
+  const [initial] = useState(() => loadData())
+  const [data, setData] = useState<StoredData>(() =>
+    mode === 'demo' && initial.data.results.length === 0 ? buildDemoData() : initial.data,
+  )
+  const [storageBlocked, setStorageBlocked] = useState(initial.unavailable)
 
-  // Den erzeugten Demobestand einmalig festschreiben.
   useEffect(() => {
-    if (mode === 'demo' && loadData().results.length === 0 && data.results.length > 0) {
+    if (mode === 'demo' && initial.data.results.length === 0 && data.results.length > 0) {
       if (!saveData(data)) setStorageBlocked(true)
     }
     // Nur beim Moduswechsel, nicht bei jeder Änderung.
@@ -109,31 +113,17 @@ export function AppDataProvider({
     if (!saveData(next)) setStorageBlocked(true)
   }, [])
 
-  const saveProfile = useCallback(
-    (patch: Partial<StoredProfile>) =>
-      commit({ ...data, profile: { ...data.profile, ...patch } }),
-    [commit, data],
-  )
-
-  const saveBiometric = useCallback(
-    (entry: Omit<StoredBiometric, 'id' | 'createdAt'>) =>
-      commit(
-        upsertBiometric(data, { ...entry, id: newId(), createdAt: new Date().toISOString() }),
-      ),
-    [commit, data],
-  )
-
   const recordResult = useCallback<AppDataValue['recordResult']>(
-    ({ testSlug, performedAt, values, notes }) => {
+    ({ testSlug, performedAt, values, assessmentId = null, notes }) => {
       const test = getTest(testSlug)
       if (!test) return null
 
-      const ctx = {
+      const context = {
         bodyWeightKg: bodyWeightAt(data, performedAt),
         ageYears: ageFromBirthDate(data.profile.birthDate),
         sex: data.profile.sex,
       }
-      const metrics = deriveMetrics(test, values, ctx)
+      const metrics = deriveMetrics(test, values, context)
       const result: StoredResult = {
         id: newId(),
         testSlug,
@@ -141,9 +131,10 @@ export function AppDataProvider({
         values,
         metrics,
         score: primaryValue(test, values, metrics),
-        bodyWeightKg: ctx.bodyWeightKg,
-        ageYears: ctx.ageYears,
-        sex: ctx.sex,
+        bodyWeightKg: context.bodyWeightKg,
+        ageYears: context.ageYears,
+        sex: context.sex,
+        assessmentId,
         notes,
         createdAt: new Date().toISOString(),
       }
@@ -157,34 +148,37 @@ export function AppDataProvider({
     () => ({
       mode,
       data,
+      loadReport: initial.report,
       bodyWeightAt: (iso) => bodyWeightAt(data, iso),
-      saveProfile,
-      saveBiometric,
+      saveProfile: (patch) => commit({ ...data, profile: { ...data.profile, ...patch } }),
+      saveBiometric: (entry) =>
+        commit(upsertBiometric(data, { ...entry, id: newId(), createdAt: new Date().toISOString() })),
       recordResult,
       deleteResult: (id) => commit(removeResult(data, id)),
+      saveAssessment: (assessment) => commit(upsertAssessment(data, assessment)),
+      deleteAssessment: (id) => commit(removeAssessment(data, id)),
       resetAll: () => {
         clearData()
-        const empty = loadData()
-        setData(empty)
+        setData(emptyData())
         setStorageBlocked(false)
       },
       loadDemo: () => commit(buildDemoData()),
-      exportJson: exportData,
+      exportJson: () => exportData(data),
       importJson: (json) => {
-        const imported = importData(json)
-        if (imported) setData(imported)
-        return imported != null
+        const outcome = importData(json)
+        if (outcome.ok && outcome.data) setData(outcome.data)
+        return outcome
       },
       storageBlocked,
     }),
-    [mode, data, saveProfile, saveBiometric, recordResult, commit, storageBlocked],
+    [mode, data, initial.report, recordResult, commit, storageBlocked],
   )
 
   return <AppDataContext.Provider value={value}>{children}</AppDataContext.Provider>
 }
 
 export function useAppData() {
-  const ctx = useContext(AppDataContext)
-  if (!ctx) throw new Error('useAppData muss innerhalb von <AppDataProvider> benutzt werden')
-  return ctx
+  const context = useContext(AppDataContext)
+  if (!context) throw new Error('useAppData muss innerhalb von <AppDataProvider> benutzt werden')
+  return context
 }

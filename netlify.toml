@@ -23,14 +23,6 @@
   to = "/index.html"
   status = 200
 
-# Der Service Worker darf nicht aus dem Cache kommen, sonst hängt die App
-# nach einem Deploy auf der alten Version fest.
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# Sicherheits- und Cache-Regeln stehen in public/_headers, damit sie auch beim
+# manuellen Deploy per Drag-and-drop gelten — die netlify.toml wird dort nicht
+# ausgewertet. Doppelte Pflege wäre eine Fehlerquelle.

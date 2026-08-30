@@ -1,7 +1,7 @@
 import { getTest } from '@/data/testCatalog'
 import { deltaPercent, isPersonalBest } from '@/lib/scoring'
 import type { AppLocale, TestSummary } from '@/types/domain'
-import type { StoredResult } from '@/lib/store/types'
+import type { StoredResult } from '@/lib/store/localStore'
 
 /** Kurzformen der abgeleiteten Metriken für die Ergebnisliste. */
 const METRIC_UNITS: Record<string, string> = {

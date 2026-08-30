@@ -11,7 +11,7 @@ import { getTest } from '@/data/testCatalog'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { deriveMetrics } from '@/lib/metrics/derive'
 import { ageFromBirthDate, formatNumber } from '@/lib/format'
-import { REPS_RELIABLE_LIMIT } from '@/lib/metrics'
+import { hasErrors, issuesFor, validateTestInput } from '@/domain/validation'
 import type { AppLocale } from '@/types/domain'
 
 /**
@@ -63,14 +63,15 @@ export function TestRunScreen() {
     )
   }
 
-  const missing = test.fields
-    .filter((field) => field.required)
-    .filter((field) => numericValues[field.key] == null)
-
-  const needsBodyWeight =
-    test.requiresBodyWeight && bodyWeightAt(`${performedOn}T12:00:00.000Z`) == null
+  // Eine Quelle für alle Regeln: dieselbe Funktion prüft auch beim Import.
+  const issues = validateTestInput(test, values, {
+    bodyWeightKg: bodyWeightAt(`${performedOn}T12:00:00.000Z`),
+    performedOn,
+  })
+  const blocked = hasErrors(issues)
 
   const save = () => {
+    if (blocked) return
     const result = recordResult({
       testSlug: test.slug,
       performedAt: new Date(`${performedOn}T12:00:00`).toISOString(),
@@ -139,6 +140,7 @@ export function TestRunScreen() {
                   value={values[field.key] ?? null}
                   onChange={(v) => setValues((s) => ({ ...s, [field.key]: v }))}
                   required={field.required}
+                  issues={issuesFor(issues, field.key)}
                 />
               ) : (
                 <NumberField
@@ -151,27 +153,29 @@ export function TestRunScreen() {
                   max={field.max}
                   step={field.step ?? (field.type === 'integer' ? 1 : 0.1)}
                   required={field.required}
+                  issues={issuesFor(issues, field.key)}
                 />
               ),
             )}
 
-            {needsBodyWeight && (
-              <p className="flex gap-2 border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-snug text-ink-secondary">
+            {/* Hinweise, die den ganzen Datensatz betreffen. Warnungen
+                blockieren nicht — sie sagen nur, wie belastbar der Wert ist. */}
+            {issuesFor(issues, '*').map((issue) => (
+              <p
+                key={issue.messageKey}
+                className="flex gap-2 border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-snug text-ink-secondary"
+              >
                 <Info size={14} className="mt-px shrink-0" aria-hidden />
                 <span>
-                  {t('tests.needBodyWeight')}{' '}
-                  <Link to="/profil" className="underline">
-                    {t('tests.addBodyWeight')}
-                  </Link>
+                  {t(issue.messageKey, issue.values)}{' '}
+                  {issue.messageKey === 'validation.noBodyWeight' && (
+                    <Link to="/profil" className="underline">
+                      {t('tests.addBodyWeight')}
+                    </Link>
+                  )}
                 </span>
               </p>
-            )}
-
-            {(numericValues.reps ?? 0) > REPS_RELIABLE_LIMIT && (
-              <p className="border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-snug text-ink-secondary">
-                {t('tests.repsWarning', { limit: REPS_RELIABLE_LIMIT })}
-              </p>
-            )}
+            ))}
 
             {Object.keys(preview).length > 0 && (
               <div className="border-t border-line pt-3">
@@ -193,15 +197,15 @@ export function TestRunScreen() {
               variant="primary"
               size="md"
               className="w-full"
-              disabled={missing.length > 0 || saved}
+              disabled={blocked || saved}
               onClick={save}
             >
               <Check size={15} strokeWidth={2.5} aria-hidden />
               {saved ? t('tests.saved') : t('tests.save')}
             </Button>
-            {missing.length > 0 && (
-              <p className="text-center text-[12px] text-ink-muted">
-                {t('tests.missing', { fields: missing.map((f) => t(`fields.${f.key}`)).join(', ') })}
+            {blocked && (
+              <p className="text-center text-[12px] text-ink-muted" role="status">
+                {t('tests.fixErrors')}
               </p>
             )}
           </div>

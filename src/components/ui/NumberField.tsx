@@ -1,5 +1,7 @@
 import { useId } from 'react'
+import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
+import type { ValidationIssue } from '@/domain/validation'
 
 /**
  * Zahleneingabe für Messwerte.
@@ -17,6 +19,7 @@ export function NumberField({
   max,
   step = 0.1,
   required = false,
+  issues = [],
   className,
 }: {
   label: string
@@ -27,9 +30,14 @@ export function NumberField({
   max?: number
   step?: number
   required?: boolean
+  /** Meldungen zu genau diesem Feld. */
+  issues?: ValidationIssue[]
   className?: string
 }) {
   const id = useId()
+  const { t } = useTranslation()
+  const errorId = `${id}-error`
+  const errors = issues.filter((issue) => issue.severity === 'error')
 
   return (
     <div className={className}>
@@ -37,7 +45,12 @@ export function NumberField({
         {label}
         {required && <span aria-hidden> *</span>}
       </label>
-      <div className="mt-1.5 flex items-center border border-line bg-surface-sunken focus-within:border-accent">
+      <div
+        className={cn(
+          'mt-1.5 flex items-center border bg-surface-sunken focus-within:border-accent',
+          errors.length > 0 ? 'border-critical' : 'border-line',
+        )}
+      >
         <input
           id={id}
           type="number"
@@ -47,6 +60,8 @@ export function NumberField({
           max={max}
           step={step}
           required={required}
+          aria-invalid={errors.length > 0 || undefined}
+          aria-describedby={errors.length > 0 ? errorId : undefined}
           onChange={(e) => {
             const raw = e.target.value
             if (raw === '') return onChange(null)
@@ -60,10 +75,18 @@ export function NumberField({
         />
         {unit && <span className="px-3 text-[12px] text-ink-muted">{unit}</span>}
       </div>
-      {(min != null || max != null) && (
-        <p className="mt-1 text-[11px] text-ink-muted">
-          {min ?? '—'} – {max ?? '—'} {unit}
+      {errors.length > 0 ? (
+        // role="alert" statt stiller roter Rahmen: Farbe allein erreicht
+        // niemanden, der die Seite vorgelesen bekommt.
+        <p id={errorId} role="alert" className="mt-1 text-[11px] text-critical">
+          {errors.map((issue) => t(issue.messageKey, issue.values)).join(' · ')}
         </p>
+      ) : (
+        (min != null || max != null) && (
+          <p className="mt-1 text-[11px] text-ink-muted">
+            {min ?? '—'} – {max ?? '—'} {unit}
+          </p>
+        )
       )}
     </div>
   )

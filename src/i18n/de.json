@@ -145,7 +145,18 @@
     "detail_personalBest_other": "Aus {{count}} Tests, gemessen an deiner bisherigen Bestleistung."
   },
   "storage": {
-    "blocked": "Der Gerätespeicher ist nicht verfügbar (privater Modus oder voll). Eingaben gelten nur für diese Sitzung."
+    "blocked": "Der Gerätespeicher ist nicht verfügbar (privater Modus oder voll). Eingaben gelten nur für diese Sitzung.",
+    "migrated": "Deine Daten stammen aus einer älteren Version (Stand {{from}}) und wurden übernommen. Es ist nichts verloren gegangen.",
+    "newerVersion": "Diese Daten wurden mit einer neueren Version von BASELINE gespeichert. Sie bleiben unangetastet, bis diese App aktualisiert ist — bis dahin werden sie nicht angezeigt und nicht überschrieben.",
+    "rejected_one": "Ein Datensatz konnte nicht gelesen werden und fehlt in der Auswertung:",
+    "rejected_other": "{{count}} Datensätze konnten nicht gelesen werden und fehlen in der Auswertung:",
+    "kind": {
+      "result": "Ergebnis",
+      "assessment": "Testtermin",
+      "biometric": "Körperwert",
+      "profile": "Profil",
+      "file": "Datei"
+    }
   },
   "tests": {
     "title": "Testkatalog",
@@ -170,7 +181,8 @@
     "timer": "Timer",
     "start": "Start",
     "pause": "Pause",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "fixErrors": "Bitte die markierten Felder korrigieren"
   },
   "history": {
     "title": "Verlauf",
@@ -241,5 +253,14 @@
     "strength_endurance": "Kraftausdauer",
     "power": "Schnellkraft",
     "agility": "Agilität"
+  },
+  "validation": {
+    "required": "Pflichtfeld",
+    "min": "Mindestens {{min}} {{unit}}",
+    "max": "Höchstens {{max}} {{unit}}",
+    "integer": "Nur ganze Zahlen",
+    "future": "Datum liegt in der Zukunft",
+    "noBodyWeight": "Ohne Körpergewicht lässt sich die Relativkraft nicht berechnen.",
+    "repsUnreliable": "Ab {{limit}} Wiederholungen streut die 1RM-Schätzung deutlich."
   }
 }

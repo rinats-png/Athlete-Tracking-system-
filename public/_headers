@@ -1,6 +1,32 @@
-# Der Service Worker darf nicht aus dem Cache kommen, sonst hängt die App nach
-# einem Deploy auf der alten Version fest.
+# Sicherheits- und Cache-Regeln.
+#
+# Netlify liest diese Datei aus dem Publish-Verzeichnis — im Gegensatz zur
+# netlify.toml gilt sie auch beim manuellen Deploy per Drag-and-drop.
+
+/*
+  # Verhindert MIME-Sniffing: ein als Bild ausgeliefertes Skript bleibt Bild.
+  X-Content-Type-Options: nosniff
+  # Kein Einbetten in fremde Seiten (Clickjacking).
+  X-Frame-Options: DENY
+  # Beim Verlassen der Seite nur die Herkunft senden, nie den vollen Pfad —
+  # der könnte Athletenkennungen enthalten.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Die App braucht weder Kamera noch Mikrofon noch Standort.
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()
+  # HTTPS erzwingen, inklusive Subdomains.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  # Content Security Policy. Die App lädt zur Laufzeit nichts von Dritten:
+  # Schriften sind lokal gebündelt, Bilder liegen im Bundle. connect-src
+  # bleibt auf 'self', bis die Cloud-Anbindung kommt — dann kommt die
+  # Supabase-Domain hier ausdrücklich dazu.
+  # 'unsafe-inline' bei style-src ist nötig, weil die Diagramme Stile inline
+  # setzen; Skripte laufen ohne diese Ausnahme.
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
 /sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
   Cache-Control: public, max-age=0, must-revalidate
 
 /assets/*

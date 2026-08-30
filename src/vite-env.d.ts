@@ -10,3 +10,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+/** Wird von Vite über `define` gesetzt; siehe vite.config.ts. */
+declare const __APP_VERSION__: string

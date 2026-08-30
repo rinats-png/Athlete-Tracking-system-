@@ -4,7 +4,14 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import path from 'node:path'
 
+/**
+ * Die App-Version landet als Konstante im Bundle. Exportdateien tragen sie
+ * mit, damit eine Datei später einer App-Version zugeordnet werden kann.
+ */
+const appVersion = process.env.npm_package_version ?? '0.0.0'
+
 export default defineConfig({
+  define: { __APP_VERSION__: JSON.stringify(appVersion) },
   resolve: {
     alias: { '@': path.resolve(__dirname, './src') },
   },
@@ -15,7 +22,6 @@ export default defineConfig({
         // eigener Chunk, damit App-Updates ihn nicht invalidieren.
         manualChunks: {
           echarts: ['echarts', 'echarts/core', 'echarts/charts', 'echarts/components'],
-          supabase: ['@supabase/supabase-js'],
         },
       },
     },
@@ -25,7 +31,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'],
       manifest: {
         name: 'Baseline — Sportdiagnostik',
         short_name: 'Baseline',
@@ -38,15 +44,19 @@ export default defineConfig({
         background_color: '#0B0D0C',
         theme_color: '#0B0D0C',
         icons: [
-          { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
-          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          // Eigene Datei mit 20 % Sicherheitsrand: Android beschneidet
+          // maskable Icons, ein randloses Motiv würde dabei angeschnitten.
+          { src: '/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
         // Testdurchführung muss auch im Funkloch der Halle funktionieren.
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+        // webp gehörte anfangs nicht dazu — die Körperansicht fehlte offline.
+        globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2,webmanifest}'],
         navigateFallback: '/index.html',
+        cleanupOutdatedCaches: true,
       },
     }),
   ],
