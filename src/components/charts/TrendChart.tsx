@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { EChartsOption } from 'echarts'
 import type {
   CallbackDataParams,
@@ -33,6 +34,7 @@ export function TrendChart({
   /** Regressionsgerade einblenden. Erst ab drei Messungen sinnvoll. */
   showFit?: boolean
 }) {
+  const { t } = useTranslation()
   const tokens = useChartTokens()
 
   const option = useMemo<EChartsOption>(() => {
@@ -136,5 +138,12 @@ export function TrendChart({
     }
   }, [points, unit, locale, label, tokens, showFit])
 
-  return <EChart option={option} height={height} ariaLabel={label} />
+  return (
+    <EChart
+      option={option}
+      height={height}
+      ariaLabel={label}
+      unavailableLabel={t('charts.unavailable')}
+    />
+  )
 }

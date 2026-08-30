@@ -197,6 +197,7 @@ export function RadarProfile({
           option={option}
           height={380}
           ariaLabel={`${t('radar.title')} — ${axisUnit}`}
+          unavailableLabel={t('charts.unavailable')}
           className="px-2"
         />
       ) : (

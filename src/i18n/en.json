@@ -19,7 +19,6 @@
   "actions": {
     "startTest": "Start test",
     "newAssessment": "New assessment",
-    "exportReport": "PDF report",
     "showTable": "Show table",
     "showChart": "Show chart",
     "compare": "Compare",
@@ -27,7 +26,6 @@
     "edit": "Edit",
     "cancel": "Cancel",
     "backToCatalog": "Back to catalog",
-    "reportSoon": "PDF report ships with the coach hub",
     "startAssessment": "Start assessment",
     "back": "Back",
     "close": "Close"
@@ -525,5 +523,8 @@
     "deleteConfirm": "Delete permanently",
     "meta": "{{results}} measurements · {{assessments}} assessments · since {{since}}",
     "privacyNote": "BASELINE stores only what you enter about a coached athlete. No account, email address or invitation is needed. Everything stays on this device."
+  },
+  "charts": {
+    "unavailable": "The chart could not be loaded. The values are fully available in the table view."
   }
 }

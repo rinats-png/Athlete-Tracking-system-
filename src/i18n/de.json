@@ -19,7 +19,6 @@
   "actions": {
     "startTest": "Test starten",
     "newAssessment": "Neue Diagnostik",
-    "exportReport": "PDF-Report",
     "showTable": "Als Tabelle",
     "showChart": "Als Diagramm",
     "compare": "Vergleichen",
@@ -27,7 +26,6 @@
     "edit": "Bearbeiten",
     "cancel": "Abbrechen",
     "backToCatalog": "Zum Testkatalog",
-    "reportSoon": "PDF-Report kommt mit dem Trainer-Hub",
     "startAssessment": "Diagnostik starten",
     "back": "Zurück",
     "close": "Schliessen"
@@ -525,5 +523,8 @@
     "deleteConfirm": "Endgültig löschen",
     "meta": "{{results}} Messungen · {{assessments}} Diagnostiken · seit {{since}}",
     "privacyNote": "BASELINE speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät."
+  },
+  "charts": {
+    "unavailable": "Das Diagramm konnte nicht geladen werden. Die Werte stehen vollständig in der Tabellenansicht."
   }
 }

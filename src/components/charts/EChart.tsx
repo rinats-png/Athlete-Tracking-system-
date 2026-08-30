@@ -1,71 +1,106 @@
-import { useEffect, useRef } from 'react'
-import * as echarts from 'echarts/core'
-import { RadarChart, LineChart } from 'echarts/charts'
-import {
-  GridComponent,
-  LegendComponent,
-  TooltipComponent,
-  MarkLineComponent,
-} from 'echarts/components'
-import { CanvasRenderer } from 'echarts/renderers'
+import { Component, Suspense, lazy } from 'react'
+import type { ReactNode } from 'react'
 import type { EChartsOption } from 'echarts'
 
-echarts.use([
-  RadarChart,
-  LineChart,
-  GridComponent,
-  LegendComponent,
-  TooltipComponent,
-  MarkLineComponent,
-  CanvasRenderer,
-])
-
 /**
- * Dünner Wrapper um ECharts. Bewusst kein Fremd-Binding: die
- * React-19-Kompatibilität bleibt so unsere eigene Sache, und der Wrapper macht
- * nur drei Dinge — Instanz halten, Option setzen, auf Grössenänderung reagieren.
+ * Diagrammfläche — mit nachgeladener Bibliothek.
+ *
+ * ECharts sind rund 170 kB gepackt und damit der grösste einzelne Posten der
+ * Auslieferung. Sie werden erst geholt, wenn wirklich ein Diagramm gezeichnet
+ * wird; der erste Aufbau der Seite wartet nicht mehr darauf. Nach dem ersten
+ * Besuch liegt der Baustein im Cache des Service Workers und ist sofort da.
+ *
+ * Nachgeladen wird ausschliesslich die Zeichenfläche, nicht das ganze
+ * Diagramm-Panel: der Platzhalter hat dadurch exakt die Höhe des Diagramms,
+ * und Kopfzeile samt Umschalter auf die Tabellenansicht bleiben sofort
+ * bedienbar. Ein Nachladen, das anschliessend das Layout verschiebt,
+ * verursacht Fehlklicks — das war in dieser App schon einmal die Ursache und
+ * wird hier nicht neu eingebaut.
+ *
+ * Und: nachladen kann scheitern. Ohne Auffangnetz reisst ein fehlgeschlagener
+ * Abruf — abgebrochene Verbindung, geleerter Cache, blockierendes Netz — die
+ * gesamte Seite mit, weil die Ausnahme aus Suspense nach oben durchschlägt.
+ * Der Nutzer stünde dann vor einer weissen Seite, obwohl alle seine Daten da
+ * sind und die Tabellenansicht sie zeigen könnte. Deshalb fängt eine
+ * Fehlergrenze den Fall ab und weist auf die Tabelle hin.
  */
-export function EChart({
-  option,
-  height,
-  className,
-  ariaLabel,
-}: {
+
+const EChartCanvas = lazy(() =>
+  import('./EChartCanvas')
+    .then((m) => ({ default: m.EChartCanvas }))
+    // Scheitert der Abruf, wird nicht geworfen, sondern ein Ersatzbaustein
+    // geliefert. Eine Ausnahme aus `lazy` landet zwar in der Fehlergrenze,
+    // aber je nach Zeitpunkt des Abbruchs bleibt das Versprechen auch
+    // schlicht offen — dann sähe der Nutzer dauerhaft eine leere Fläche
+    // ohne Erklärung. So gibt es in jedem Fall eine Aussage.
+    .catch(() => ({ default: ChartUnavailableCanvas })),
+)
+
+export interface EChartProps {
   option: EChartsOption
   height: number | string
   className?: string
   ariaLabel: string
-}) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const chartRef = useRef<echarts.ECharts | null>(null)
+  /** Text, wenn die Bibliothek nicht geladen werden konnte. */
+  unavailableLabel: string
+}
 
-  useEffect(() => {
-    if (!containerRef.current) return
-    const chart = echarts.init(containerRef.current, undefined, { renderer: 'canvas' })
-    chartRef.current = chart
+/**
+ * Fehlergrenze um die nachgeladene Zeichenfläche.
+ *
+ * Bewusst als Klasse: Fehlergrenzen gibt es in React nur so, ein Hook dafür
+ * existiert nicht.
+ */
+class ChartBoundary extends Component<
+  { children: ReactNode; fallback: ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false }
 
-    const observer = new ResizeObserver(() => chart.resize())
-    observer.observe(containerRef.current)
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
 
-    return () => {
-      observer.disconnect()
-      chart.dispose()
-      chartRef.current = null
-    }
-  }, [])
+  render() {
+    return this.state.failed ? this.props.fallback : this.props.children
+  }
+}
 
-  useEffect(() => {
-    // notMerge, damit entfernte Serien nicht als Leichen im Chart bleiben.
-    chartRef.current?.setOption(option, { notMerge: true })
-  }, [option])
+/** Ersatz für die Zeichenfläche, wenn die Bibliothek nicht ankommt. */
+function ChartUnavailableCanvas(props: EChartProps) {
+  return <ChartUnavailable height={props.height} message={props.unavailableLabel} />
+}
 
+function ChartUnavailable({ height, message }: { height: number | string; message: string }) {
   return (
     <div
-      ref={containerRef}
-      role="img"
-      aria-label={ariaLabel}
-      className={className}
+      role="status"
+      className="flex items-center justify-center px-4 text-center text-[13px] text-ink-secondary"
       style={{ height, width: '100%' }}
-    />
+    >
+      {message}
+    </div>
+  )
+}
+
+export function EChart(props: EChartProps) {
+  return (
+    <ChartBoundary
+      fallback={<ChartUnavailable height={props.height} message={props.unavailableLabel} />}
+    >
+    <Suspense
+      fallback={
+        <div
+          // Für die Hilfstechnik gibt es hier noch nichts zu lesen; der
+          // Inhalt steht zusätzlich in der Tabellenansicht.
+          aria-hidden
+          className={props.className}
+          style={{ height: props.height, width: '100%' }}
+        />
+      }
+    >
+      <EChartCanvas {...props} />
+    </Suspense>
+    </ChartBoundary>
   )
 }

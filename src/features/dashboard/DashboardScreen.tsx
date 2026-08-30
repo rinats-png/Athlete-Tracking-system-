@@ -91,9 +91,9 @@ export function DashboardScreen() {
         body={t('dashboard.emptyBody')}
         action={
           <Button asChild variant="primary">
-            <Link to="/tests">
+            <Link to="/diagnostik/neu">
               <Play size={14} strokeWidth={2.5} aria-hidden />
-              {t('actions.startTest')}
+              {t('actions.startAssessment')}
             </Link>
           </Button>
         }
@@ -125,14 +125,16 @@ export function DashboardScreen() {
 
         <div className="flex gap-2">
           <Button asChild variant="primary" size="md">
-            <Link to="/tests">
+            <Link to="/diagnostik/neu">
               <Play size={14} strokeWidth={2.5} aria-hidden />
-              {t('actions.startTest')}
+              {t('actions.startAssessment')}
             </Link>
           </Button>
-          <Button variant="outline" size="md" disabled title={t('actions.reportSoon')}>
-            <FileText size={14} strokeWidth={2} aria-hidden />
-            {t('actions.exportReport')}
+          <Button asChild variant="outline" size="md">
+            <Link to="/bericht">
+              <FileText size={14} strokeWidth={2} aria-hidden />
+              {t('report.open')}
+            </Link>
           </Button>
         </div>
       </section>
