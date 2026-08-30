@@ -20,19 +20,18 @@ const NODES: {
   icon: typeof HeartPulse
   /**
    * Position des Knotens und Ankerpunkt am Körper, jeweils in Prozent der
-   * Hero-Fläche. Die Ankerwerte sind aus der Geometrie der Figur gerechnet
-   * (viewBox 240x580, 92 % der Höhe, Box-Seitenverhältnis 5/6) — deshalb
-   * treffen die Linien die Region, die der Knoten benennt.
+   * Hero-Fläche. Die Anker liegen auf der Muskelgruppe, die der Knoten
+   * benennt, und immer auf der Seite, auf der auch der Knoten sitzt.
    */
   node: [number, number]
   anchor: [number, number]
 }[] = [
-  { dimension: 'max_strength', icon: Dumbbell, node: [12, 17], anchor: [42.0, 22.4] },
-  { dimension: 'strength_endurance', icon: Flame, node: [9, 45], anchor: [46.4, 34.9] },
-  { dimension: 'agility', icon: Footprints, node: [13, 75], anchor: [44.7, 71.3] },
-  { dimension: 'endurance', icon: HeartPulse, node: [88, 21], anchor: [55.7, 26.5] },
-  { dimension: 'relative_strength', icon: Scale, node: [91, 49], anchor: [62.2, 35.7] },
-  { dimension: 'power', icon: Activity, node: [87, 73], anchor: [54.9, 54.0] },
+  { dimension: 'max_strength', icon: Dumbbell, node: [12, 17], anchor: [40.8, 22.5] },
+  { dimension: 'relative_strength', icon: Scale, node: [9, 45], anchor: [37.7, 29.5] },
+  { dimension: 'agility', icon: Footprints, node: [13, 75], anchor: [43.9, 69.5] },
+  { dimension: 'endurance', icon: HeartPulse, node: [88, 21], anchor: [54.4, 21.5] },
+  { dimension: 'strength_endurance', icon: Flame, node: [91, 49], anchor: [52.2, 31.5] },
+  { dimension: 'power', icon: Activity, node: [87, 73], anchor: [53.5, 51.5] },
 ]
 
 export function BodyHero({
@@ -69,7 +68,7 @@ export function BodyHero({
 
   return (
     <div className="relative">
-      <div className="relative mx-auto aspect-[3/4] w-full max-w-[520px] sm:aspect-[5/6]">
+      <div className="relative mx-auto aspect-[3/4] w-full max-w-[560px] sm:aspect-[10/11]">
         {/* Verbindungslinien. Eigenes Koordinatensystem 0–100, damit Knoten
             (HTML) und Linien (SVG) dieselben Prozentwerte teilen. */}
         <svg
@@ -106,7 +105,7 @@ export function BodyHero({
             onSelect={(dimension) =>
               setSelected((current) => (current === dimension ? null : dimension))
             }
-            className="h-[92%] w-auto"
+            className="h-[94%]"
             ariaLabel={t('body.figureLabel')}
           />
         </div>
@@ -155,7 +154,7 @@ export function BodyHero({
         {/* Detailkarte zur gewählten Achse — erscheint nur auf Anforderung,
             damit der Ruhezustand ruhig bleibt. */}
         {detail && (
-          <div className="absolute right-0 bottom-2 hidden w-[190px] border border-line bg-surface/90 p-3 backdrop-blur-sm sm:block">
+          <div className="absolute right-0 bottom-2 hidden w-[190px] border border-white/12 bg-display-raised/90 p-3 backdrop-blur-sm sm:block">
             <span className="label-tag">{t(`dimensions.${detail.dimension}`)}</span>
             <p className="mt-1 flex items-baseline gap-1">
               <span className="readout text-[26px] leading-none">

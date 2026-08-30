@@ -118,7 +118,9 @@ export function AthleteDashboard({ demo }: { demo: boolean }) {
                 />
               }
             />
-            <div className="px-3 pt-3">
+            {/* Eigene, in beiden Themes dunkle Anzeigefläche: die leuchtende
+                Figur funktioniert nur auf dunklem Grund. */}
+            <div className="bg-display px-3 pt-3 text-white/90">
               <BodyHero axes={profile.current} mode={mode} locale={locale} />
             </div>
           </Panel>

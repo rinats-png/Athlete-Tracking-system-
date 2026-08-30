@@ -29,18 +29,7 @@ export function Atmosphere({ className }: { className?: string }) {
       {/* Markenfigur als Wasserzeichen — verbindet den Einstieg mit dem
           Dashboard, ohne sich in den Vordergrund zu drängen. */}
       <div className="absolute inset-x-0 top-[9%] bottom-[4%] flex justify-center opacity-[0.16]">
-        <BodyFigure
-          scores={{
-            endurance: 82,
-            max_strength: 79,
-            relative_strength: 81,
-            strength_endurance: 78,
-            power: 79,
-            agility: 65,
-          }}
-          className="h-full w-auto"
-          ariaLabel=""
-        />
+        <BodyFigure scores={{}} plain className="h-full" ariaLabel="" />
       </div>
 
       {/* Filmkorn. Ohne das wirken grosse Verläufe auf OLED-Displays gebändert. */}

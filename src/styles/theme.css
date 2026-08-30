@@ -69,6 +69,12 @@
   --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 
+  /* Ton der Körperanzeige. In beiden Themes gleich dunkel: die leuchtende
+     Figur funktioniert nur auf dunklem Grund, und der Wert entspricht dem
+     Eckton des Bildes, damit dessen weiche Kante nahtlos ausläuft. */
+  --display:        #03090C;
+  --display-raised: #0A1416;
+
   /* Milchglas. Eigene Rollen, weil eine Glasfläche nicht die Flächenfarbe
      ist, sondern eine Aufhellung über dem, was dahinter liegt — nur so wirkt
      der Weichzeichner. */
@@ -177,6 +183,8 @@
   --color-line-strong:    var(--line-strong);
   --color-accent:         var(--accent);
   --color-accent-glow:    var(--accent-glow);
+  --color-display:        var(--display);
+  --color-display-raised: var(--display-raised);
   --color-glass:          var(--glass);
   --color-glass-strong:   var(--glass-strong);
   --color-glass-border:   var(--glass-border);
