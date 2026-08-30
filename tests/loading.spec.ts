@@ -98,8 +98,14 @@ test.describe('Aktualisierung der installierten App', () => {
     await openDemo(page)
 
     // Registrierung ist vorhanden …
+    //
+    // Grosszügige Frist: Installation und Aktivierung des Service Workers
+    // konkurrieren im vollen Lauf mit den übrigen Projekten um dieselbe
+    // Maschine. Bei 20 Sekunden ist dieser Fall genau dort einmal
+    // umgekippt, ohne dass an der App etwas falsch war — eine Frist, die
+    // von der Auslastung abhängt, prüft die Auslastung und nicht die App.
     await page.waitForFunction(() => navigator.serviceWorker.controller !== null, null, {
-      timeout: 20_000,
+      timeout: 90_000,
     })
 
     // … und die Aktualisierungsprüfung hängt an der Rückkehr zur Seite.
