@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { DecisionRow } from './DecisionRow'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FileText, Play } from 'lucide-react'
@@ -138,6 +139,10 @@ export function DashboardScreen() {
           </Button>
         </div>
       </section>
+
+      {/* Die vier Zahlen, wegen derer jemand dieses Dashboard öffnet. Sie
+          stehen vor dem Profil, nicht darunter. */}
+      <DecisionRow locale={locale} />
 
       <div className="grid gap-4 lg:grid-cols-5">
         <Panel ticked className="lg:col-span-3">

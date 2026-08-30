@@ -11,7 +11,16 @@ import type { AppLocale, TestCategory } from '@/types/domain'
 
 type Filter = TestCategory | 'all'
 
-const FILTERS: Filter[] = ['all', 'endurance', 'max_strength', 'strength_endurance', 'power', 'agility']
+const FILTERS: Filter[] = [
+  'all',
+  'endurance',
+  'max_strength',
+  'strength_endurance',
+  'power',
+  'speed',
+  'agility',
+  'conditioning',
+]
 
 export function TestCatalogScreen() {
   const [searchParams] = useSearchParams()
@@ -89,6 +98,17 @@ export function TestCatalogScreen() {
                   </div>
                   <ChevronRight size={16} className="shrink-0 text-ink-muted" aria-hidden />
                 </Link>
+                {/* Der Weg zur Detailseite liegt neben dem Weg zur Messung
+                    und nicht dahinter: wer wissen will, wie ein Test geht,
+                    will ihn nicht schon starten. */}
+                <div className="px-4 pb-2 -mt-1">
+                  <Link
+                    to={`/tests/${test.slug}/details`}
+                    className="inline-flex min-h-11 items-center text-[12px] text-ink-muted underline-offset-2 hover:text-ink hover:underline"
+                  >
+                    {t('testDetail.open')}
+                  </Link>
+                </div>
               </li>
             )
           })}

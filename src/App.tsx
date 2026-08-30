@@ -4,6 +4,7 @@ import { AppShell } from '@/routes/AppShell'
 import { DashboardScreen } from '@/features/dashboard/DashboardScreen'
 import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
 import { TestRunScreen } from '@/features/tests/TestRunScreen'
+import { TestDetailScreen } from '@/features/tests/TestDetailScreen'
 import { HistoryScreen } from '@/features/history/HistoryScreen'
 import { AnalysisScreen } from '@/features/analysis/AnalysisScreen'
 import { ReportScreen } from '@/features/report/ReportScreen'
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: 'diagnostik/:id/abschluss', element: <AssessmentSummaryScreen /> },
       { path: 'tests', element: <TestCatalogScreen /> },
       { path: 'tests/:slug', element: <TestRunScreen /> },
+      { path: 'tests/:slug/details', element: <TestDetailScreen /> },
       { path: 'verlauf', element: <HistoryScreen /> },
       { path: 'analyse', element: <AnalysisScreen /> },
       { path: 'bericht', element: <ReportScreen /> },

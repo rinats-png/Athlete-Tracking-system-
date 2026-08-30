@@ -103,7 +103,14 @@
     "anonymousAthlete": "Athlet",
     "emptyTitle": "Noch keine Messung",
     "emptyBody": "Absolviere den ersten Test, dann entsteht dein Leistungsprofil. Für Relativkraft und Perzentile brauchst du ausserdem Geschlecht, Geburtsdatum und Körpergewicht im Profil.",
-    "completeProfile": "Profil vervollständigen"
+    "completeProfile": "Profil vervollständigen",
+    "overall": "Gesamtleistung",
+    "overallNote": "Belastbarkeit {{confidence}} %",
+    "primaryLimiter": "Primärer Limiter",
+    "noLimiter": "Keine Achse fällt deutlich ab",
+    "biggestChange": "Grösste Veränderung",
+    "assessmentStatus": "Laufende Diagnostik",
+    "plannedAhead": "vorgeschlagen"
   },
   "table": {
     "dimension": "Achse",
@@ -655,5 +662,23 @@
     "equipmentPlaceholder": "z. B. Spikes, Gewichthebeschuhe",
     "trainingStatus": "Trainingsstand",
     "trainingStatusPlaceholder": "z. B. ausgeruht, im Aufbau, nach Wettkampf"
+  },
+  "testDetail": {
+    "open": "Details & Verlauf",
+    "run": "Test durchführen",
+    "standing": "Wo du stehst",
+    "latest": "Letzte Messung",
+    "personalBest": "Bestleistung",
+    "progression": "Entwicklung",
+    "history": "Alle Messungen",
+    "noResults": "Für diesen Test liegt noch keine Messung vor.",
+    "measures": "Misst",
+    "unit": "Einheit",
+    "direction": "Wertung",
+    "higher_is_better": "Mehr ist besser",
+    "lower_is_better": "Weniger ist besser",
+    "attempts": "Versuche laut Protokoll",
+    "needs": "Voraussetzung",
+    "bodyWeight": "Körpergewicht im Profil"
   }
 }

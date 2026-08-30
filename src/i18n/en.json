@@ -103,7 +103,14 @@
     "anonymousAthlete": "Athlete",
     "emptyTitle": "No measurements yet",
     "emptyBody": "Complete your first test and your performance profile starts building. Relative strength and percentiles also need sex, birth date and body weight in your profile.",
-    "completeProfile": "Complete profile"
+    "completeProfile": "Complete profile",
+    "overall": "Overall performance",
+    "overallNote": "Confidence {{confidence}} %",
+    "primaryLimiter": "Primary limiter",
+    "noLimiter": "No axis falls clearly behind",
+    "biggestChange": "Largest change",
+    "assessmentStatus": "Assessment in progress",
+    "plannedAhead": "suggested"
   },
   "table": {
     "dimension": "Axis",
@@ -655,5 +662,23 @@
     "equipmentPlaceholder": "e.g. spikes, lifting shoes",
     "trainingStatus": "Training status",
     "trainingStatusPlaceholder": "e.g. rested, in a build phase, post-competition"
+  },
+  "testDetail": {
+    "open": "Details & history",
+    "run": "Run test",
+    "standing": "Where you stand",
+    "latest": "Latest measurement",
+    "personalBest": "Personal best",
+    "progression": "Progression",
+    "history": "All measurements",
+    "noResults": "No measurement for this test yet.",
+    "measures": "Measures",
+    "unit": "Unit",
+    "direction": "Scoring",
+    "higher_is_better": "Higher is better",
+    "lower_is_better": "Lower is better",
+    "attempts": "Attempts per protocol",
+    "needs": "Requires",
+    "bodyWeight": "Body weight in profile"
   }
 }

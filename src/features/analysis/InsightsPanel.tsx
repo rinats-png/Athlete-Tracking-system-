@@ -164,7 +164,7 @@ function RecommendationRow({
             <li key={test.slug}>
               <Link
                 to={`/tests/${test.slug}`}
-                className="inline-flex min-h-9 items-center gap-1 border border-line px-2.5 text-[12px] transition-colors hover:bg-surface-sunken"
+                className="inline-flex min-h-11 items-center gap-1 border border-line px-2.5 text-[12px] transition-colors hover:bg-surface-sunken"
               >
                 {test.name[locale]}
                 <ChevronRight size={12} aria-hidden />
