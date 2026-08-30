@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 4
+export const CURRENT_SCHEMA_VERSION = 5
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -112,16 +112,53 @@ const brandingSchema = z.object({
   footer: z.string().max(200).default(''),
 })
 
+/**
+ * Ein Athlet mit seinem gesamten Bestand.
+ *
+ * Im Einzelmodus gibt es genau einen; im Trainermodus mehrere. Beide Fälle
+ * benutzen dieselbe Struktur — ein Trainer, der seinen eigenen Bestand in
+ * einem anderen Format führen müsste als den seiner Kunden, hätte zwei
+ * Wahrheiten zu pflegen.
+ *
+ * Kunden eines Trainers haben ausdrücklich kein Konto: `name` ist alles, was
+ * BASELINE über sie speichert, solange der Trainer nichts weiter einträgt.
+ */
+const athleteSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().max(120).default(''),
+  profile: profileSchema,
+  biometrics: z.array(biometricSchema).default([]),
+  assessments: z.array(assessmentSchema).default([]),
+  results: z.array(resultSchema).default([]),
+  /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
+  archived: z.boolean().default(false),
+  createdAt: isoDate,
+})
+
 export const storedDataSchema = z.object({
   version: z.literal(CURRENT_SCHEMA_VERSION),
   branding: brandingSchema.default(() => brandingSchema.parse({})),
-  profile: profileSchema,
-  biometrics: z.array(biometricSchema),
-  assessments: z.array(assessmentSchema),
-  results: z.array(resultSchema),
+  /** 'solo' = nur der eigene Bestand, 'coach' = mehrere betreute Athleten. */
+  role: z.enum(['solo', 'coach']).default('solo'),
+  athletes: z.array(athleteSchema).min(1),
+  activeAthleteId: z.string().min(1),
 })
 
 export type ValidatedData = z.infer<typeof storedDataSchema>
+export type ValidatedAthlete = z.infer<typeof athleteSchema>
+
+/**
+ * Sicht auf einen einzelnen Athleten in der Form, die alle Auswertungen
+ * erwarten. Damit bleibt jede Rechenfunktion athletenblind: sie bekommt einen
+ * Bestand, nicht einen Bestand plus die Frage, wessen er ist.
+ */
+export interface AthleteView {
+  branding: ValidatedBranding
+  profile: ValidatedProfile
+  biometrics: ValidatedBiometric[]
+  assessments: ValidatedAssessment[]
+  results: ValidatedResult[]
+}
 export type ValidatedResult = z.infer<typeof resultSchema>
 export type ValidatedAssessment = z.infer<typeof assessmentSchema>
 export type ValidatedBiometric = z.infer<typeof biometricSchema>
@@ -174,6 +211,35 @@ export const MIGRATIONS: Migration[] = [
       branding: { organisation: '', logoDataUrl: null, footer: '' },
     }),
   },
+  {
+    from: 4,
+    to: 5,
+    describe: 'Mehrere Athleten je Gerät; der bisherige Bestand wird der erste',
+    run: (data) => {
+      // Der vorhandene Bestand wird unverändert zum ersten Athleten. Der Name
+      // bleibt leer statt geraten — die UI zeigt dann den Vornamen aus dem
+      // Profil oder eine neutrale Bezeichnung.
+      const id = 'athlete-1'
+      return {
+        version: 5,
+        branding: data.branding ?? { organisation: '', logoDataUrl: null, footer: '' },
+        role: 'solo',
+        activeAthleteId: id,
+        athletes: [
+          {
+            id,
+            name: '',
+            profile: data.profile ?? {},
+            biometrics: data.biometrics ?? [],
+            assessments: data.assessments ?? [],
+            results: data.results ?? [],
+            archived: false,
+            createdAt: new Date().toISOString(),
+          },
+        ],
+      }
+    },
+  },
 ]
 
 export interface LoadReport {
@@ -192,14 +258,27 @@ export interface ParseOutcome {
 
 const emptyReport = (): LoadReport => ({ migratedFrom: null, fromNewerVersion: false, rejected: [] })
 
-export function emptyData(): ValidatedData {
+export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
   return {
-    version: CURRENT_SCHEMA_VERSION,
-    branding: brandingSchema.parse({}),
+    id,
+    name: '',
     profile: profileSchema.parse({}),
     biometrics: [],
     assessments: [],
     results: [],
+    archived: false,
+    createdAt: new Date().toISOString(),
+  }
+}
+
+export function emptyData(): ValidatedData {
+  const athlete = emptyAthlete()
+  return {
+    version: CURRENT_SCHEMA_VERSION,
+    branding: brandingSchema.parse({}),
+    role: 'solo',
+    athletes: [athlete],
+    activeAthleteId: athlete.id,
   }
 }
 
@@ -237,42 +316,77 @@ export function parseStoredData(raw: unknown): ParseOutcome {
   const whole = storedDataSchema.safeParse(working)
   if (whole.success) return { data: whole.data, report }
 
-  const profile = profileSchema.safeParse(working.profile ?? {})
   const branding = brandingSchema.safeParse(working.branding ?? {})
-  const salvaged: ValidatedData = {
-    version: CURRENT_SCHEMA_VERSION,
-    branding: branding.success ? branding.data : brandingSchema.parse({}),
-    profile: profile.success ? profile.data : profileSchema.parse({}),
-    biometrics: [],
-    assessments: [],
-    results: [],
-  }
-  if (!profile.success) {
-    report.rejected.push({ kind: 'profile', id: '-', reason: firstIssue(profile.error) })
-  }
 
   const collect = <T>(
     kind: 'biometric' | 'assessment' | 'result',
     list: unknown,
     schema: z.ZodType<T>,
-    target: T[],
-  ) => {
-    if (!Array.isArray(list)) return
+    athleteId: string,
+  ): T[] => {
+    const target: T[] = []
+    if (!Array.isArray(list)) return target
     for (const entry of list) {
       const parsed = schema.safeParse(entry)
       if (parsed.success) target.push(parsed.data)
       else
         report.rejected.push({
           kind,
-          id: String((entry as any)?.id ?? '?'),
+          id: `${athleteId}/${String((entry as any)?.id ?? '?')}`,
           reason: firstIssue(parsed.error),
         })
     }
+    return target
   }
 
-  collect('biometric', working.biometrics, biometricSchema, salvaged.biometrics)
-  collect('assessment', working.assessments, assessmentSchema, salvaged.assessments)
-  collect('result', working.results, resultSchema, salvaged.results)
+  // Athletenweise retten. Ein beschädigter Datensatz bei einem Kunden darf
+  // weder dessen übrige Historie noch die der anderen Kunden kosten.
+  const rawAthletes: unknown[] = Array.isArray(working.athletes) ? working.athletes : []
+  const athletes: ValidatedAthlete[] = []
+
+  for (const [index, raw] of rawAthletes.entries()) {
+    const entry = (raw ?? {}) as any
+    const id = typeof entry.id === 'string' && entry.id ? entry.id : `athlete-${index + 1}`
+    const profile = profileSchema.safeParse(entry.profile ?? {})
+    if (!profile.success) {
+      report.rejected.push({ kind: 'profile', id, reason: firstIssue(profile.error) })
+    }
+    // Über das Schema geparst statt zusammengesetzt: nur so greifen die
+    // Vorgabewerte der einzelnen Felder, und der Typ ist wirklich erfüllt.
+    athletes.push(
+      athleteSchema.parse({
+        id,
+        name: typeof entry.name === 'string' ? entry.name.slice(0, 120) : '',
+        profile: profile.success ? profile.data : profileSchema.parse({}),
+        biometrics: collect('biometric', entry.biometrics, biometricSchema, id),
+        assessments: collect('assessment', entry.assessments, assessmentSchema, id),
+        results: collect('result', entry.results, resultSchema, id),
+        archived: entry.archived === true,
+        createdAt:
+          typeof entry.createdAt === 'string' && !Number.isNaN(Date.parse(entry.createdAt))
+            ? entry.createdAt
+            : new Date().toISOString(),
+      }),
+    )
+  }
+
+  // Ein Bestand ohne Athleten wäre nicht darstellbar — lieber ein leerer
+  // Athlet als eine App, die auf einer weissen Seite stehen bleibt.
+  if (athletes.length === 0) athletes.push(emptyAthlete())
+
+  const activeId =
+    typeof working.activeAthleteId === 'string' &&
+    athletes.some((a) => a.id === working.activeAthleteId)
+      ? working.activeAthleteId
+      : athletes[0].id
+
+  const salvaged: ValidatedData = {
+    version: CURRENT_SCHEMA_VERSION,
+    branding: branding.success ? branding.data : brandingSchema.parse({}),
+    role: working.role === 'coach' ? 'coach' : 'solo',
+    athletes,
+    activeAthleteId: activeId,
+  }
 
   return { data: salvaged, report }
 }

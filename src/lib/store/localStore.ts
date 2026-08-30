@@ -4,7 +4,9 @@ import {
   parseStoredData,
   storedDataSchema,
   type LoadReport,
+  type AthleteView,
   type ValidatedAssessment,
+  type ValidatedAthlete,
   type ValidatedBiometric,
   type ValidatedData,
   type ValidatedResult,
@@ -28,6 +30,13 @@ import {
 const STORAGE_KEY = 'baseline.data.v1'
 
 export type StoredData = ValidatedData
+/**
+ * Bestand EINES Athleten. Alle Auswertungen und Screens arbeiten hierauf und
+ * bleiben dadurch athletenblind: sie bekommen einen Bestand, nicht einen
+ * Bestand plus die Frage, wessen er ist.
+ */
+export type AthleteData = AthleteView
+export type StoredAthlete = ValidatedAthlete
 export type StoredResult = ValidatedResult
 export type StoredAssessment = ValidatedAssessment
 export type StoredBiometric = ValidatedBiometric
@@ -165,25 +174,25 @@ export function newId(): string {
   return `id-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
 }
 
-export function upsertResult(data: StoredData, result: StoredResult): StoredData {
+export function upsertResult(data: AthleteData, result: StoredResult): AthleteData {
   const results = data.results.filter((r) => r.id !== result.id)
   results.push(result)
   results.sort((a, b) => new Date(b.performedAt).getTime() - new Date(a.performedAt).getTime())
   return { ...data, results }
 }
 
-export function removeResult(data: StoredData, id: string): StoredData {
+export function removeResult(data: AthleteData, id: string): AthleteData {
   return { ...data, results: data.results.filter((r) => r.id !== id) }
 }
 
-export function upsertAssessment(data: StoredData, assessment: StoredAssessment): StoredData {
+export function upsertAssessment(data: AthleteData, assessment: StoredAssessment): AthleteData {
   const assessments = data.assessments.filter((a) => a.id !== assessment.id)
   assessments.push(assessment)
   assessments.sort((a, b) => (a.performedOn < b.performedOn ? 1 : -1))
   return { ...data, assessments }
 }
 
-export function removeAssessment(data: StoredData, id: string): StoredData {
+export function removeAssessment(data: AthleteData, id: string): AthleteData {
   return {
     ...data,
     assessments: data.assessments.filter((a) => a.id !== id),
@@ -193,7 +202,7 @@ export function removeAssessment(data: StoredData, id: string): StoredData {
   }
 }
 
-export function upsertBiometric(data: StoredData, entry: StoredBiometric): StoredData {
+export function upsertBiometric(data: AthleteData, entry: StoredBiometric): AthleteData {
   // Ein Eintrag je Tag: eine spätere Messung am selben Tag ersetzt die frühere.
   const biometrics = data.biometrics.filter((b) => b.measuredOn !== entry.measuredOn)
   biometrics.push(entry)
@@ -202,7 +211,7 @@ export function upsertBiometric(data: StoredData, entry: StoredBiometric): Store
 }
 
 /** Das zum Zeitpunkt gültige Körpergewicht: der jüngste Eintrag davor. */
-export function bodyWeightAt(data: StoredData, iso: string): number | null {
+export function bodyWeightAt(data: AthleteData, iso: string): number | null {
   const day = iso.slice(0, 10)
   const before = data.biometrics
     .filter((b) => b.bodyWeightKg != null && b.measuredOn <= day)

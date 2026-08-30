@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BrandingSettings } from './BrandingSettings'
+import { CoachSettings } from '@/features/coach/CoachSettings'
 import { useTranslation } from 'react-i18next'
 import { Download, ShieldCheck, Trash2, Upload } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -252,6 +253,8 @@ export function ProfileScreen() {
               </div>
             </div>
           </Panel>
+
+          <CoachSettings locale={locale} />
 
           <BrandingSettings />
         </div>

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { AthleteSwitcher } from '@/features/coach/AthleteSwitcher'
 import { NAV_ITEMS, type NavKey } from './BottomNav'
 import { cn } from '@/lib/utils'
 
@@ -53,6 +54,7 @@ export function AppHeader({
           </nav>
         </div>
         <div className="ml-auto flex items-center gap-2">
+          <AthleteSwitcher />
           <span
             className="hidden border border-line px-2 py-1 font-display text-[10px] font-semibold tracking-[0.14em] uppercase text-ink-muted sm:inline-block"
             title={t(mode === 'demo' ? 'badges.demoHint' : 'badges.guestHint')}

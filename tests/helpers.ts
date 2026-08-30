@@ -1,3 +1,4 @@
+import { emptyData } from '../src/lib/store/schema'
 import type { Page } from '@playwright/test'
 
 /**
@@ -79,4 +80,23 @@ export async function headerNavVisible(page: Page) {
     const nav = [...document.querySelectorAll('nav[aria-label]')].find((n) => n.closest('header'))
     return !!nav && getComputedStyle(nav).display !== 'none'
   })
+}
+
+/**
+ * Leerer Bestand EINES Athleten.
+ *
+ * Die Auswertungen arbeiten auf dieser Sicht, nicht auf dem Gesamtbestand des
+ * Geräts — ein Test, der den Gesamtbestand hineinreicht, würde eine Struktur
+ * prüfen, die im Produktivcode nie bei diesen Funktionen ankommt.
+ */
+export function emptyAthleteView() {
+  const store = emptyData()
+  const athlete = store.athletes[0]
+  return {
+    branding: store.branding,
+    profile: athlete.profile,
+    biometrics: athlete.biometrics,
+    assessments: athlete.assessments,
+    results: athlete.results,
+  }
 }

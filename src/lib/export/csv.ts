@@ -2,7 +2,7 @@ import { getTest } from '@/data/testCatalog'
 import { resultPercentile } from '@/domain/analytics'
 import { assessQuality } from '@/domain/dataQuality'
 import type { AppLocale } from '@/types/domain'
-import type { StoredData } from '@/lib/store/localStore'
+import type { AthleteData } from '@/lib/store/localStore'
 
 /**
  * CSV-Export der Messwerte.
@@ -51,7 +51,7 @@ function escapeField(value: unknown): string {
   return text
 }
 
-export function resultsToCsv(data: StoredData, locale: AppLocale): string {
+export function resultsToCsv(data: AthleteData, locale: AppLocale): string {
   const titles = new Map(data.assessments.map((a) => [a.id, a.title ?? a.performedOn]))
 
   const rows = [...data.results]
@@ -87,7 +87,7 @@ export function resultsToCsv(data: StoredData, locale: AppLocale): string {
 }
 
 /** Körperwerte als eigene Datei — andere Zeilenbedeutung, andere Tabelle. */
-export function biometricsToCsv(data: StoredData): string {
+export function biometricsToCsv(data: AthleteData): string {
   const columns = ['measured_on', 'body_weight_kg', 'body_fat_percent', 'resting_hr']
   const rows = [...data.biometrics]
     .sort((a, b) => a.measuredOn.localeCompare(b.measuredOn))

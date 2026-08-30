@@ -29,7 +29,8 @@
     "backToCatalog": "Back to catalog",
     "reportSoon": "PDF report ships with the coach hub",
     "startAssessment": "Start assessment",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close"
   },
   "theme": {
     "label": "Appearance",
@@ -498,5 +499,31 @@
     "footer": "Footer",
     "footerPlaceholder": "e.g. contact details",
     "brandingNote": "These details stay on this device and appear only in the report. They change no measurement and no analysis."
+  },
+  "coach": {
+    "title": "Athletes you coach",
+    "hint": "Manage several people on one device.",
+    "role": "Mode",
+    "roleSolo": "Just me",
+    "roleCoach": "Coach",
+    "roleHint": {
+      "solo": "One record for you alone. No switcher, no one else's data.",
+      "coach": "Several athletes on this device, switchable from the header. Each has their own record, history and reports."
+    },
+    "athletes": "Athletes",
+    "addAthlete": "Add athlete",
+    "unnamed": "Unnamed",
+    "nameOf": "Name of {{name}}",
+    "active": "Active",
+    "select": "Switch",
+    "archive": "Archive",
+    "restore": "Restore",
+    "archived": "archived",
+    "delete": "Delete athlete",
+    "deleteHint_one": "“{{name}}” will be permanently deleted along with {{count}} measurement. This cannot be undone. To hide someone without losing data, use the archive.",
+    "deleteHint_other": "“{{name}}” will be permanently deleted along with {{count}} measurements. This cannot be undone. To hide someone without losing data, use the archive.",
+    "deleteConfirm": "Delete permanently",
+    "meta": "{{results}} measurements · {{assessments}} assessments · since {{since}}",
+    "privacyNote": "BASELINE stores only what you enter about a coached athlete. No account, email address or invitation is needed. Everything stays on this device."
   }
 }

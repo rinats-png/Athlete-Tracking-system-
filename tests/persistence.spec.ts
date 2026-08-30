@@ -59,6 +59,12 @@ const result = (
     ...overrides,
   }) as StoredResult;
 
+/** Bestand mit genau einem Athleten, der diese Ergebnisse trägt. */
+const storeWith = (results: StoredResult[] = []) => {
+  const base = emptyData();
+  return { ...base, athletes: [{ ...base.athletes[0], results }] };
+};
+
 test.describe("Migration", () => {
   test("die Kette ist lückenlos und endet auf der aktuellen Version", () => {
     let version = 1;
@@ -85,11 +91,17 @@ test.describe("Migration", () => {
     expect(report.migratedFrom).toBe(1);
     expect(report.rejected).toEqual([]);
     expect(data?.version).toBe(CURRENT_SCHEMA_VERSION);
-    expect(data?.results.map((r) => r.id)).toEqual(["r1", "r2"]);
-    // Das neue Feld existiert, ist aber leer statt geraten.
-    expect(data?.results.every((r) => r.assessmentId === null)).toBe(true);
-    expect(data?.assessments).toEqual([]);
-    expect(data?.profile.firstName).toBe("Ada");
+    // Vier Schemastände auf einmal: der Bestand landet als erster Athlet,
+    // vollständig und ohne dass irgendwo geraten wurde.
+    expect(data?.athletes).toHaveLength(1);
+    const athlete = data!.athletes[0];
+    expect(athlete.results.map((r) => r.id)).toEqual(["r1", "r2"]);
+    expect(athlete.results.every((r) => r.assessmentId === null)).toBe(true);
+    expect(athlete.results.every((r) => r.attempts.length === 0)).toBe(true);
+    expect(athlete.assessments).toEqual([]);
+    expect(athlete.profile.firstName).toBe("Ada");
+    expect(data?.role).toBe("solo");
+    expect(data?.activeAthleteId).toBe(athlete.id);
   });
 
   test("ein neuerer Bestand wird nicht angefasst, sondern gemeldet", () => {
@@ -109,55 +121,60 @@ test.describe("Migration", () => {
 test.describe("Rettung beschädigter Bestände", () => {
   test("ein kaputter Datensatz kostet nicht die ganze Historie", () => {
     const { data, report } = parseStoredData({
-      version: CURRENT_SCHEMA_VERSION,
-      profile: {},
-      biometrics: [],
-      assessments: [],
-      results: [
+      ...storeWith([
         result("gut"),
         result("kaputt", { performedAt: "gestern" }),
         result("auchGut"),
-      ],
+      ]),
     });
 
-    expect(data?.results.map((r) => r.id)).toEqual(["gut", "auchGut"]);
+    expect(data?.athletes[0].results.map((r) => r.id)).toEqual([
+      "gut",
+      "auchGut",
+    ]);
     expect(report.rejected).toHaveLength(1);
-    expect(report.rejected[0]).toMatchObject({ kind: "result", id: "kaputt" });
+    expect(report.rejected[0].kind).toBe("result");
+    // Die Kennung nennt den Athleten mit, sonst ist bei mehreren Kunden nicht
+    // erkennbar, wessen Datensatz fehlt.
+    expect(report.rejected[0].id).toContain("kaputt");
     expect(report.rejected[0].reason).toContain("performedAt");
   });
 
   test("NaN und Infinity aus einer manipulierten Datei werden abgewiesen", () => {
-    const { data } = parseStoredData({
-      version: CURRENT_SCHEMA_VERSION,
-      profile: {},
-      biometrics: [],
-      assessments: [],
-      results: [result("inf", { score: Number.POSITIVE_INFINITY })],
-    });
-    expect(data?.results).toEqual([]);
+    const { data } = parseStoredData(
+      storeWith([result("inf", { score: Number.POSITIVE_INFINITY })]),
+    );
+    expect(data?.athletes[0].results).toEqual([]);
   });
 });
 
 test.describe("Export und Import", () => {
   test("Rundlauf: exportiert und wieder eingelesen ergibt denselben Bestand", () => {
+    const base = emptyData();
     const original = {
-      ...emptyData(),
-      profile: {
-        ...emptyData().profile,
-        firstName: "Ada",
-        sex: "female" as const,
-      },
-      results: [result("r1")],
-      assessments: [
+      ...base,
+      athletes: [
         {
-          id: "a1",
-          title: "Frühjahrstest",
-          batterySlug: "general_fitness",
-          performedOn: "2026-05-01",
-          status: "completed" as const,
-          plannedTestSlugs: ["cooper_12min"],
-          createdAt: "2026-05-01T08:00:00.000Z",
-          completedAt: "2026-05-01T10:00:00.000Z",
+          ...base.athletes[0],
+          name: "Ada",
+          profile: {
+            ...base.athletes[0].profile,
+            firstName: "Ada",
+            sex: "female" as const,
+          },
+          results: [result("r1")],
+          assessments: [
+            {
+              id: "a1",
+              title: "Frühjahrstest",
+              batterySlug: "general_fitness",
+              performedOn: "2026-05-01",
+              status: "completed" as const,
+              plannedTestSlugs: ["cooper_12min"],
+              createdAt: "2026-05-01T08:00:00.000Z",
+              completedAt: "2026-05-01T10:00:00.000Z",
+            },
+          ],
         },
       ],
     };
@@ -172,10 +189,10 @@ test.describe("Export und Import", () => {
   });
 
   test("ein Export ohne Umschlag bleibt lesbar", () => {
-    const bare = JSON.stringify({ ...emptyData(), results: [result("r1")] });
+    const bare = JSON.stringify(storeWith([result("r1")]));
     const outcome = importData(bare);
     expect(outcome.ok).toBe(true);
-    expect(outcome.data?.results).toHaveLength(1);
+    expect(outcome.data?.athletes[0].results).toHaveLength(1);
   });
 
   test("unbrauchbare Dateien werden benannt statt still verworfen", () => {
@@ -191,10 +208,10 @@ test.describe("Export und Import", () => {
   });
 
   test("ein fehlgeschlagener Import lässt den vorhandenen Bestand stehen", () => {
-    const bestand = { ...emptyData(), results: [result("r1")] };
+    const bestand = storeWith([result("r1")]);
     importData(exportData(bestand, APP_VERSION));
 
     expect(importData("{kein json").ok).toBe(false);
-    expect(loadData().data.results.map((r) => r.id)).toEqual(["r1"]);
+    expect(loadData().data.athletes[0].results.map((r) => r.id)).toEqual(["r1"]);
   });
 });

@@ -29,7 +29,8 @@
     "backToCatalog": "Zum Testkatalog",
     "reportSoon": "PDF-Report kommt mit dem Trainer-Hub",
     "startAssessment": "Diagnostik starten",
-    "back": "Zurück"
+    "back": "Zurück",
+    "close": "Schliessen"
   },
   "theme": {
     "label": "Darstellung",
@@ -498,5 +499,31 @@
     "footer": "Fusszeile",
     "footerPlaceholder": "z. B. Kontaktdaten",
     "brandingNote": "Diese Angaben bleiben auf diesem Gerät und erscheinen nur im Bericht. Sie verändern keine Messwerte und keine Auswertung."
+  },
+  "coach": {
+    "title": "Betreute Athleten",
+    "hint": "Mehrere Personen auf einem Gerät führen.",
+    "role": "Modus",
+    "roleSolo": "Nur ich",
+    "roleCoach": "Trainer",
+    "roleHint": {
+      "solo": "Ein Bestand für dich allein. Kein Umschalter, keine fremden Daten.",
+      "coach": "Mehrere Athleten auf diesem Gerät, umschaltbar über die Kopfzeile. Jeder hat seinen eigenen Bestand, seine eigene Historie und seine eigenen Berichte."
+    },
+    "athletes": "Athleten",
+    "addAthlete": "Athlet hinzufügen",
+    "unnamed": "Ohne Namen",
+    "nameOf": "Name von {{name}}",
+    "active": "Aktiv",
+    "select": "Wechseln",
+    "archive": "Archivieren",
+    "restore": "Wiederherstellen",
+    "archived": "archiviert",
+    "delete": "Athlet löschen",
+    "deleteHint_one": "„{{name}}“ wird mit {{count}} Messung endgültig gelöscht. Das lässt sich nicht rückgängig machen. Zum Ausblenden ohne Datenverlust gibt es das Archiv.",
+    "deleteHint_other": "„{{name}}“ wird mit {{count}} Messungen endgültig gelöscht. Das lässt sich nicht rückgängig machen. Zum Ausblenden ohne Datenverlust gibt es das Archiv.",
+    "deleteConfirm": "Endgültig löschen",
+    "meta": "{{results}} Messungen · {{assessments}} Diagnostiken · seit {{since}}",
+    "privacyNote": "BASELINE speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät."
   }
 }

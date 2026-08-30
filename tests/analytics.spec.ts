@@ -8,8 +8,8 @@ import {
   performanceBalance,
   testTrend,
 } from '../src/domain/analytics'
-import type { StoredData, StoredResult } from '../src/lib/store/localStore'
-import { emptyData } from '../src/lib/store/schema'
+import type { AthleteData, StoredResult } from '../src/lib/store/localStore'
+import { emptyAthleteView } from './helpers'
 
 /**
  * Die Analytik trifft Aussagen über die Entwicklung eines Menschen. Jeder
@@ -153,8 +153,8 @@ test.describe('Erste gegen letzte Messung', () => {
 })
 
 test.describe('Terminvergleich', () => {
-  const data: StoredData = {
-    ...emptyData(),
+  const data: AthleteData = {
+    ...emptyAthleteView(),
     assessments: [
       {
         id: 'a1', title: 'Januar', batterySlug: null, performedOn: '2026-01-10',

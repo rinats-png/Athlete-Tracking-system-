@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test'
 import { openDemo, openGuest } from './helpers'
 import { resultsToCsv, biometricsToCsv } from '../src/lib/export/csv'
-import { emptyData } from '../src/lib/store/schema'
-import type { StoredData, StoredResult } from '../src/lib/store/localStore'
+import { emptyAthleteView } from './helpers'
+import type { AthleteData, StoredResult } from '../src/lib/store/localStore'
 
 /**
  * Der Bericht ist das Dokument, das ein Trainer einem zahlenden Kunden
@@ -29,7 +29,7 @@ const result = (overrides: Partial<StoredResult> = {}): StoredResult =>
   }) as StoredResult
 
 test.describe('CSV-Export', () => {
-  const data: StoredData = { ...emptyData(), results: [result()] }
+  const data: AthleteData = { ...emptyAthleteView(), results: [result()] }
 
   test('Kopfzeile und Werte stehen maschinenlesbar da', () => {
     const csv = resultsToCsv(data, 'de')

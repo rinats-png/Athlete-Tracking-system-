@@ -4,7 +4,7 @@ import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { assessQuality } from '@/domain/dataQuality'
 import { coveredDimensions } from '@/domain/assessment'
 import type { PerformanceDimension } from '@/types/domain'
-import type { StoredAssessment, StoredData, StoredResult } from '@/lib/store/localStore'
+import type { StoredAssessment, AthleteData, StoredResult } from '@/lib/store/localStore'
 
 /**
  * Auswertung über die Zeit.
@@ -182,7 +182,7 @@ export interface AssessmentComparisonRow {
  * die Schnittmenge bildet, lässt einen Termin besser aussehen, als er war.
  */
 export function compareAssessments(
-  data: StoredData,
+  data: AthleteData,
   beforeId: string,
   afterId: string,
 ): AssessmentComparisonRow[] {

@@ -2,6 +2,7 @@ import { deriveMetrics, primaryValue } from '@/lib/metrics/derive'
 import { getTest } from '@/data/testCatalog'
 import { CURRENT_SCHEMA_VERSION, newId } from '@/lib/store/localStore'
 import type {
+  AthleteData,
   StoredAssessment,
   StoredBiometric,
   StoredData,
@@ -83,7 +84,7 @@ const SESSIONS: Session[] = [
 ]
 
 export function buildDemoData(): StoredData {
-  const profile: StoredData['profile'] = {
+  const profile: AthleteData['profile'] = {
     firstName: 'Alex',
     lastName: 'Roth',
     sex: 'male',
@@ -167,9 +168,19 @@ export function buildDemoData(): StoredData {
     version: CURRENT_SCHEMA_VERSION,
     // Der Demobestand trägt bewusst keine fremde Marke.
     branding: { organisation: '', logoDataUrl: null, footer: '' },
-    profile,
-    biometrics,
-    assessments,
-    results,
+    role: 'solo',
+    activeAthleteId: 'demo-athlete',
+    athletes: [
+      {
+        id: 'demo-athlete',
+        name: '',
+        profile,
+        biometrics,
+        assessments,
+        results,
+        archived: false,
+        createdAt: new Date().toISOString(),
+      },
+    ],
   }
 }

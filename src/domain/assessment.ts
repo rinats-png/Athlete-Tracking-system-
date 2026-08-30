@@ -1,4 +1,4 @@
-import type { StoredAssessment, StoredData, StoredResult } from '@/lib/store/localStore'
+import type { StoredAssessment, AthleteData, StoredResult } from '@/lib/store/localStore'
 import type { AttemptSelection } from '@/lib/store/schema'
 import { BATTERY_BY_SLUG } from '@/data/testBatteries'
 import { getTest } from '@/data/testCatalog'
@@ -25,7 +25,7 @@ export interface AssessmentProgress {
   percent: number
 }
 
-export function resultsForAssessment(data: StoredData, assessmentId: string): StoredResult[] {
+export function resultsForAssessment(data: AthleteData, assessmentId: string): StoredResult[] {
   return data.results
     .filter((result) => result.assessmentId === assessmentId)
     .sort((a, b) => a.performedAt.localeCompare(b.performedAt))
