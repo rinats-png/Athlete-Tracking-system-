@@ -23,17 +23,40 @@ export function TrendChart({
   locale,
   label,
   height = 180,
+  showFit = false,
 }: {
   points: TrendPoint[]
   unit: string
   locale: AppLocale
   label: string
   height?: number
+  /** Regressionsgerade einblenden. Erst ab drei Messungen sinnvoll. */
+  showFit?: boolean
 }) {
   const tokens = useChartTokens()
 
   const option = useMemo<EChartsOption>(() => {
     const values = points.map((point) => point.value)
+
+    /**
+     * Ausgleichsgerade über die tatsächlichen Messzeitpunkte — nicht über den
+     * Index. Bei ungleichen Abständen (drei Tests in einer Woche, dann ein
+     * halbes Jahr Pause) läge eine Gerade über den Index schlicht falsch.
+     *
+     * Sie ist keine zweite Datenreihe, sondern eine Lesehilfe, und trägt
+     * deshalb eine gestrichelte neutrale Linie statt einer eigenen Serienfarbe.
+     */
+    const fit = (() => {
+      if (!showFit || points.length < 3) return null
+      const t = points.map((p) => new Date(p.performedAt).getTime() / 86_400_000)
+      const n = t.length
+      const meanX = t.reduce((a, b) => a + b, 0) / n
+      const meanY = values.reduce((a, b) => a + b, 0) / n
+      const sxx = t.reduce((sum, x) => sum + (x - meanX) ** 2, 0)
+      if (sxx === 0) return null
+      const slope = t.reduce((sum, x, i) => sum + (x - meanX) * (values[i] - meanY), 0) / sxx
+      return t.map((x) => Math.round((meanY + slope * (x - meanX)) * 1000) / 1000)
+    })()
 
     const formatValue = (value: number) =>
       unit === 's' ? formatDuration(value) : formatNumber(value, locale, value < 10 ? 2 : 0)
@@ -48,7 +71,11 @@ export function TrendChart({
         borderWidth: 1,
         textStyle: { color: tokens.ink, fontFamily: 'IBM Plex Sans, sans-serif', fontSize: 12 },
         formatter: (raw: TopLevelFormatterParams) => {
-          const first = (Array.isArray(raw) ? raw[0] : raw) as CallbackDataParams
+          // Die Ausgleichsgerade ist keine Messung — im Tooltip zählt der
+          // Punkt der echten Reihe.
+          const list = Array.isArray(raw) ? raw : [raw]
+          const first = ((list.find((p) => (p as CallbackDataParams).seriesName !== 'fit') ??
+            list[0]) as CallbackDataParams)
           const point = points[first.dataIndex]
           return `<div style="font-size:11px;opacity:.7">${formatDate(point.performedAt, locale)}</div>
                   <div style="font-family:IBM Plex Mono,monospace;font-size:14px">${formatValue(point.value)} ${unit === 's' ? '' : unit}</div>`
@@ -80,6 +107,20 @@ export function TrendChart({
         },
       },
       series: [
+        ...(fit
+          ? [
+              {
+                type: 'line' as const,
+                name: 'fit',
+                data: fit,
+                smooth: false,
+                symbol: 'none' as const,
+                silent: true,
+                lineStyle: { width: 1, type: 'dashed' as const, color: tokens['ink-muted'], opacity: 0.7 },
+                z: 1,
+              },
+            ]
+          : []),
         {
           type: 'line',
           name: label,
@@ -89,10 +130,11 @@ export function TrendChart({
           lineStyle: { width: 2, color: tokens['series-1'] },
           itemStyle: { color: tokens['series-1'], borderWidth: 2, borderColor: tokens.surface },
           areaStyle: { color: tokens['series-1'], opacity: 0.1 },
+          z: 2,
         },
       ],
     }
-  }, [points, unit, locale, label, tokens])
+  }, [points, unit, locale, label, tokens, showFit])
 
   return <EChart option={option} height={height} ariaLabel={label} />
 }

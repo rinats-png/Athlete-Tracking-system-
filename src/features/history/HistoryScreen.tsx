@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Trash2 } from 'lucide-react'
+import { Trash2, TrendingUp } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { TrendChart } from '@/components/charts/TrendChart'
@@ -48,14 +49,24 @@ export function HistoryScreen() {
 
   return (
     <>
-      <header className="mb-4">
-        <span className="label-tag">{t('nav.history')}</span>
-        <h1 className="mt-1 font-display text-[30px] leading-none font-bold sm:text-[38px]">
-          {t('history.title')}
-        </h1>
-        <p className="mt-1.5 text-[13px] text-ink-secondary">
-          {t('history.count', { count: data.results.length })}
-        </p>
+      <header className="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <span className="label-tag">{t('nav.history')}</span>
+          <h1 className="mt-1 font-display text-[30px] leading-none font-bold sm:text-[38px]">
+            {t('history.title')}
+          </h1>
+          <p className="mt-1.5 text-[13px] text-ink-secondary">
+            {t('history.count', { count: data.results.length })}
+          </p>
+        </div>
+        {/* Der Verlauf zeigt einzelne Messungen, die Analyse ihre
+            Entwicklung — zwei Fragen, zwei Bildschirme. */}
+        <Button asChild variant="outline" size="md">
+          <Link to="/analyse">
+            <TrendingUp size={15} aria-hidden />
+            {t('analysis.title')}
+          </Link>
+        </Button>
       </header>
 
       <div className="grid gap-4 lg:grid-cols-5">
@@ -83,6 +94,7 @@ export function HistoryScreen() {
             />
             <div className="px-2 py-3">
               <TrendChart
+            showFit
                 points={points}
                 unit={activeTest.primaryUnit}
                 locale={locale}

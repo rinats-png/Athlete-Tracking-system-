@@ -369,5 +369,63 @@
     "noBenchmarkContext": "Geschlecht oder Alter fehlt — kein Perzentilvergleich möglich",
     "submaximal": "RPE unter 8: nicht ausbelastet",
     "estimatedFromManyReps": "1RM aus vielen Wiederholungen geschätzt — grössere Streuung"
+  },
+  "analysis": {
+    "title": "Analyse",
+    "intro": "Was sich über die Zeit verändert hat — und wie belastbar diese Aussage ist. Die Reihenfolge ist Absicht: eine Veränderung von 4 % bei zwei Messungen im Abstand von zehn Tagen ist Rauschen.",
+    "emptyTitle": "Noch nichts auszuwerten",
+    "emptyBody": "Für eine Entwicklung braucht es mindestens zwei Messungen desselben Tests. Leg eine Diagnostik an und wiederhole sie nach einigen Wochen.",
+    "confidence": "Belastbarkeit",
+    "confidenceHint": "Wie gut ist dieses Profil belegt?",
+    "confidenceFormula": "Vier Anteile zu gleichen Teilen. Bewusst ungewichtet: eine Gewichtung, die sich nicht begründen lässt, wäre erfundene Genauigkeit.",
+    "component": {
+      "coverage": "Abdeckung",
+      "recency": "Aktualität",
+      "quality": "Datenqualität",
+      "depth": "Messtiefe"
+    },
+    "detail": {
+      "coverage": "{{covered}} von {{total}} Achsen",
+      "recency": "letzte Messung vor {{days}} Tagen",
+      "quality": "{{valid}} von {{total}} ohne Vorbehalt",
+      "depth": "{{deepEnough}} von {{total}} Achsen mehrfach gemessen"
+    },
+    "balance": "Ausgewogenheit",
+    "balanceHint": "Abstand zwischen stärkster und schwächster gemessener Achse.",
+    "balanceTooFew": "Dafür braucht es mindestens zwei belegte Achsen.",
+    "strongest": "Stärkste Achse",
+    "weakest": "Schwächste Achse",
+    "spread": "Abstand",
+    "points": "Punkte",
+    "unmeasuredNote": "Nicht in die Ausgewogenheit eingerechnet, weil nicht gemessen: {{axes}}. Ungemessen ist nicht dasselbe wie schwach.",
+    "sinceBaseline": "Seit der ersten Messung",
+    "sinceBaselineHint": "Erste gegen letzte Messung je Test, mit dem Zeitraum daneben — 4 % in acht Wochen und 4 % in zwei Jahren sind nicht dieselbe Aussage.",
+    "needTwoPerTest": "Noch kein Test wurde zweimal gemessen.",
+    "first": "Erste",
+    "latest": "Letzte",
+    "change": "Veränderung",
+    "changeHint": "Richtungsbereinigt: positiv heisst besser geworden, auch bei Zeitmessungen.",
+    "trend": "Trend",
+    "overDays_one": "über {{count}} Tag",
+    "overDays_other": "über {{count}} Tage",
+    "trendLabel": {
+      "improving": "Steigend",
+      "stable": "Stabil",
+      "declining": "Fallend",
+      "insufficient_one": "{{count}} Messung",
+      "insufficient_other": "{{count}} Messungen"
+    },
+    "trendInsufficientHint": "Ab drei Messungen wird eine Ausgleichsgerade gerechnet. Zwei Punkte ergeben immer eine perfekte Gerade — ein Trend ist das nicht.",
+    "trendBasis": "{{points}} Messungen, {{days}} Tage, R² {{r2}}",
+    "compareAssessments": "Zwei Termine vergleichen",
+    "compareHint": "Nur abgeschlossene Termine. Tests, die nur in einem der beiden vorkommen, werden gekennzeichnet statt weggelassen.",
+    "needTwoAssessments": "Dafür braucht es zwei abgeschlossene Diagnostiken.",
+    "before": "Vorher",
+    "after": "Nachher",
+    "samePair": "Bitte zwei verschiedene Termine wählen.",
+    "onlyIn": {
+      "before": "nur vorher gemessen",
+      "after": "nur nachher gemessen"
+    }
   }
 }

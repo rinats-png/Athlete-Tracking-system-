@@ -35,7 +35,7 @@ export const NAV_ITEMS = [
   // Der Testkatalog ist ein Unterbereich der Diagnostik: ein Einzeltest ohne
   // Termin bleibt möglich, führt aber unter denselben Reiter.
   { key: 'tests', icon: ClipboardList, path: '/diagnostik', alsoMatches: ['/tests'] },
-  { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: [] },
+  { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: ['/analyse'] },
   { key: 'profile', icon: User, path: '/profil', alsoMatches: [] },
 ] as const
 

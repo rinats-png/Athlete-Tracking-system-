@@ -5,6 +5,7 @@ import { DashboardScreen } from '@/features/dashboard/DashboardScreen'
 import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
 import { TestRunScreen } from '@/features/tests/TestRunScreen'
 import { HistoryScreen } from '@/features/history/HistoryScreen'
+import { AnalysisScreen } from '@/features/analysis/AnalysisScreen'
 import { AssessmentListScreen } from '@/features/assessments/AssessmentListScreen'
 import { AssessmentCreateScreen } from '@/features/assessments/AssessmentCreateScreen'
 import { AssessmentDetailScreen } from '@/features/assessments/AssessmentDetailScreen'
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
       { path: 'tests', element: <TestCatalogScreen /> },
       { path: 'tests/:slug', element: <TestRunScreen /> },
       { path: 'verlauf', element: <HistoryScreen /> },
+      { path: 'analyse', element: <AnalysisScreen /> },
       { path: 'profil', element: <ProfileScreen /> },
       { path: '*', element: <Navigate to="/" replace /> },
     ],

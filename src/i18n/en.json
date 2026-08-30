@@ -369,5 +369,63 @@
     "noBenchmarkContext": "Sex or age missing — no percentile comparison possible",
     "submaximal": "RPE below 8: not taken to maximum",
     "estimatedFromManyReps": "1RM estimated from many repetitions — wider spread"
+  },
+  "analysis": {
+    "title": "Analysis",
+    "intro": "What changed over time — and how much that statement can bear. The order is deliberate: a 4 % change across two measurements ten days apart is noise.",
+    "emptyTitle": "Nothing to analyse yet",
+    "emptyBody": "A development needs at least two measurements of the same test. Create an assessment and repeat it after a few weeks.",
+    "confidence": "Confidence",
+    "confidenceHint": "How well is this profile evidenced?",
+    "confidenceFormula": "Four parts in equal weight. Deliberately unweighted: a weighting that cannot be justified would be invented precision.",
+    "component": {
+      "coverage": "Coverage",
+      "recency": "Recency",
+      "quality": "Data quality",
+      "depth": "Depth"
+    },
+    "detail": {
+      "coverage": "{{covered}} of {{total}} axes",
+      "recency": "last measurement {{days}} days ago",
+      "quality": "{{valid}} of {{total}} without caveats",
+      "depth": "{{deepEnough}} of {{total}} axes measured more than once"
+    },
+    "balance": "Balance",
+    "balanceHint": "Gap between the strongest and weakest measured axis.",
+    "balanceTooFew": "This needs at least two evidenced axes.",
+    "strongest": "Strongest axis",
+    "weakest": "Weakest axis",
+    "spread": "Gap",
+    "points": "points",
+    "unmeasuredNote": "Not counted towards balance because not measured: {{axes}}. Unmeasured is not the same as weak.",
+    "sinceBaseline": "Since the first measurement",
+    "sinceBaselineHint": "First against latest measurement per test, with the time span alongside — 4 % in eight weeks and 4 % in two years are not the same statement.",
+    "needTwoPerTest": "No test has been measured twice yet.",
+    "first": "First",
+    "latest": "Latest",
+    "change": "Change",
+    "changeHint": "Direction-adjusted: positive means improved, including for timed tests.",
+    "trend": "Trend",
+    "overDays_one": "over {{count}} day",
+    "overDays_other": "over {{count}} days",
+    "trendLabel": {
+      "improving": "Improving",
+      "stable": "Stable",
+      "declining": "Declining",
+      "insufficient_one": "{{count}} measurement",
+      "insufficient_other": "{{count}} measurements"
+    },
+    "trendInsufficientHint": "A regression line is computed from three measurements onwards. Two points always make a perfect line — that is not a trend.",
+    "trendBasis": "{{points}} measurements, {{days}} days, R² {{r2}}",
+    "compareAssessments": "Compare two sessions",
+    "compareHint": "Completed sessions only. Tests present in just one of the two are marked rather than dropped.",
+    "needTwoAssessments": "This needs two completed assessments.",
+    "before": "Before",
+    "after": "After",
+    "samePair": "Please choose two different sessions.",
+    "onlyIn": {
+      "before": "measured before only",
+      "after": "measured after only"
+    }
   }
 }
