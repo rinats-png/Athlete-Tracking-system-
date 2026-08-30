@@ -110,7 +110,10 @@
     "noLimiter": "Keine Achse fällt deutlich ab",
     "biggestChange": "Grösste Veränderung",
     "assessmentStatus": "Laufende Diagnostik",
-    "plannedAhead": "vorgeschlagen"
+    "plannedAhead": "vorgeschlagen",
+    "sportScores": "Sportartspezifische Sammelwerte",
+    "sportScoresHint": "Aus mehreren Tests gebildet. Die Bestandteile sind gemessen, ihre Verrechnung ist eine Festlegung dieser App.",
+    "scoreBasis": "aus {{tests}}"
   },
   "table": {
     "dimension": "Achse",
@@ -359,7 +362,25 @@
     "strokeRate": "Zugfrequenz",
     "strokeLengthM": "Zuglänge",
     "bikeMinutes": "Radzeit",
-    "runDistanceM": "Laufdistanz"
+    "runDistanceM": "Laufdistanz",
+    "repsSet1": "Satz 1",
+    "repsSet2": "Satz 2",
+    "repsSet3": "Satz 3",
+    "repsSet4": "Satz 4",
+    "heightM": "Seilhöhe",
+    "breaks": "Unterbrechungen",
+    "stations": "Stationen",
+    "penalties": "Fehlversuche",
+    "elevationGainM": "Höhenmeter aufwärts",
+    "elevationLossM": "Höhenmeter abwärts",
+    "hrFirstHalf": "Puls erste Hälfte",
+    "hrSecondHalf": "Puls zweite Hälfte",
+    "targetPowerW": "Vorgegebene Leistung",
+    "cadence": "Trittfrequenz",
+    "lastSprintPowerW": "Leistung letzter Sprint",
+    "sprintCount": "Anzahl Sprints",
+    "strokeCount": "Zugzahl",
+    "poolLengthM": "Bahnlänge"
   },
   "metrics": {
     "vo2max_ml_kg_min": "VO2max",
@@ -388,7 +409,18 @@
     "ftp_watt_per_kg": "FTP je kg",
     "bike_threshold_score": "Schwellenwert Rad",
     "fatigue_index_percent": "Ermüdungsindex",
-    "swim_technique_score": "Technikwert Schwimmen"
+    "swim_technique_score": "Technikwert Schwimmen",
+    "swft_index": "SWFT-Index",
+    "climb_meters_total": "Steighöhe gesamt",
+    "seconds_per_station": "Sekunden je Station",
+    "vertical_speed_m_per_h": "Steigleistung",
+    "grade_percent": "Steigung",
+    "hr_drift_percent": "Herzfrequenzdrift",
+    "efficiency_w_per_bpm": "Watt je Herzschlag",
+    "strokes_per_100m": "Züge je 100 m",
+    "grip_score": "Griffwert",
+    "fight_endurance_score": "Kampfausdauer",
+    "run_economy_score": "Laufökonomie (Näherung)"
   },
   "categoriesShort": {
     "endurance": "Ausdauer",
@@ -483,7 +515,9 @@
     "nextDate": "Nächster Termin",
     "nextFixed": "Von dir festgelegt. Diese Festlegung überschreibt den Vorschlag der App überall dort, wo der nächste Termin angezeigt wird.",
     "nextSuggested": "Vorschlag der App auf Basis des üblichen Abstands. Sobald du ein Datum wählst, gilt deine Festlegung.",
-    "suggested": "Vorschlag"
+    "suggested": "Vorschlag",
+    "fromDocument": "aus der Quellliste",
+    "addedForDiscipline": "ergänzt"
   },
   "attempts": {
     "title": "Versuche",

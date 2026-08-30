@@ -110,7 +110,10 @@
     "noLimiter": "No axis falls clearly behind",
     "biggestChange": "Largest change",
     "assessmentStatus": "Assessment in progress",
-    "plannedAhead": "suggested"
+    "plannedAhead": "suggested",
+    "sportScores": "Sport-specific composite scores",
+    "sportScoresHint": "Formed from several tests. The components are measured; the way they are combined is a definition made by this app.",
+    "scoreBasis": "from {{tests}}"
   },
   "table": {
     "dimension": "Axis",
@@ -359,7 +362,25 @@
     "strokeRate": "Stroke rate",
     "strokeLengthM": "Stroke length",
     "bikeMinutes": "Bike time",
-    "runDistanceM": "Run distance"
+    "runDistanceM": "Run distance",
+    "repsSet1": "Set 1",
+    "repsSet2": "Set 2",
+    "repsSet3": "Set 3",
+    "repsSet4": "Set 4",
+    "heightM": "Rope height",
+    "breaks": "Breaks",
+    "stations": "Stations",
+    "penalties": "Failed attempts",
+    "elevationGainM": "Elevation gain",
+    "elevationLossM": "Elevation loss",
+    "hrFirstHalf": "HR first half",
+    "hrSecondHalf": "HR second half",
+    "targetPowerW": "Target power",
+    "cadence": "Cadence",
+    "lastSprintPowerW": "Power, last sprint",
+    "sprintCount": "Sprint count",
+    "strokeCount": "Stroke count",
+    "poolLengthM": "Pool length"
   },
   "metrics": {
     "vo2max_ml_kg_min": "VO2max",
@@ -388,7 +409,18 @@
     "ftp_watt_per_kg": "FTP per kg",
     "bike_threshold_score": "Bike threshold score",
     "fatigue_index_percent": "Fatigue index",
-    "swim_technique_score": "Swim technique score"
+    "swim_technique_score": "Swim technique score",
+    "swft_index": "SWFT index",
+    "climb_meters_total": "Total climbed height",
+    "seconds_per_station": "Seconds per station",
+    "vertical_speed_m_per_h": "Vertical speed",
+    "grade_percent": "Gradient",
+    "hr_drift_percent": "Heart rate drift",
+    "efficiency_w_per_bpm": "Watts per heartbeat",
+    "strokes_per_100m": "Strokes per 100 m",
+    "grip_score": "Grip score",
+    "fight_endurance_score": "Fight endurance",
+    "run_economy_score": "Run economy (approximation)"
   },
   "categoriesShort": {
     "endurance": "Endurance",
@@ -483,7 +515,9 @@
     "nextDate": "Next session",
     "nextFixed": "Set by you. This overrides the app's suggestion everywhere the next session is shown.",
     "nextSuggested": "The app's suggestion based on the usual interval. As soon as you pick a date, your choice applies.",
-    "suggested": "Suggested"
+    "suggested": "Suggested",
+    "fromDocument": "from the source list",
+    "addedForDiscipline": "added"
   },
   "attempts": {
     "title": "Attempts",

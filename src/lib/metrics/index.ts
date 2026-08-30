@@ -163,3 +163,20 @@ export function functionalThresholdPower(avgPowerW: number | null | undefined): 
   if (avgPowerW == null || !Number.isFinite(avgPowerW) || avgPowerW <= 0) return null
   return avgPowerW * FTP_FACTOR_20MIN
 }
+
+/**
+ * Herzfrequenzdrift in Prozent: Anstieg der zweiten gegenüber der ersten
+ * Hälfte einer gleichmässigen Dauerbelastung.
+ *
+ * Die Rechnung selbst ist trivial; ihre Aussagekraft hängt vollständig daran,
+ * dass das Tempo über beide Hälften gleich war. Deshalb steht diese Bedingung
+ * in der Testanleitung und nicht nur hier.
+ */
+export function hrDriftPercent(
+  firstHalf: number | null | undefined,
+  secondHalf: number | null | undefined,
+): number | null {
+  if (firstHalf == null || secondHalf == null) return null
+  if (!Number.isFinite(firstHalf) || !Number.isFinite(secondHalf) || firstHalf <= 0) return null
+  return ((secondHalf - firstHalf) / firstHalf) * 100
+}

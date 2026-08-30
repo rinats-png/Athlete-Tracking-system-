@@ -16,10 +16,11 @@ import { RecentTests } from './RecentTests'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { disciplineById } from '@/data/sportProfiles'
+import { sportScoresFor } from '@/domain/sportScores'
 import { baselineIndex, radarProfile } from '@/lib/scoring'
 import { toSummaries } from '@/lib/resultView'
 import { getTest } from '@/data/testCatalog'
-import { ageFromBirthDate, formatDate, formatRelativeMonths } from '@/lib/format'
+import { ageFromBirthDate, formatDate, formatNumber, formatRelativeMonths } from '@/lib/format'
 import type { AppLocale, ScoreMode } from '@/types/domain'
 
 /** Empfohlener Abstand zwischen zwei Diagnostikterminen. */
@@ -32,6 +33,13 @@ export function DashboardScreen() {
   const { data } = useAppData()
   // Anforderungskontur der Disziplin, sofern eine gewählt ist.
   const discipline = disciplineById(data.profile.disciplineId ?? '')
+  // Sammelwerte aus mehreren Tests. Sie entstehen nur, wenn alle Bestandteile
+  // vorliegen — ein hochgerechneter Sammelwert wäre ein einzelner Test unter
+  // anderem Namen.
+  const sportScores = useMemo(
+    () => sportScoresFor(data.results, data.profile.disciplineId),
+    [data.results, data.profile.disciplineId],
+  )
 
   const current = useMemo(() => radarProfile(data.results, mode), [data.results, mode])
 
@@ -205,6 +213,39 @@ export function DashboardScreen() {
             disciplineLabel={discipline?.name[locale]}
           />
         </Panel>
+
+        {sportScores.length > 0 && (
+          <Panel className="lg:col-span-3">
+            <PanelHeader
+              title={t('dashboard.sportScores')}
+              subtitle={t('dashboard.sportScoresHint')}
+            />
+            <ul className="grid gap-px bg-line sm:grid-cols-3">
+              {sportScores.map((score) => (
+                <li key={score.key} className="bg-plane px-4 py-3">
+                  <span className="label-tag">
+                    {t(`metrics.${score.key}`)}
+                    {/* Der Vermerk hängt am Wert, nicht an einer Fussnote:
+                        eine gesetzte Zahl sieht sonst aus wie eine gemessene. */}
+                    <span className="ml-1.5 normal-case text-ink-muted">
+                      · {t('tests.provisional')}
+                    </span>
+                  </span>
+                  <span className="readout mt-1 block text-[22px]">
+                    {formatNumber(score.value, locale, 0)}
+                  </span>
+                  <span className="mt-0.5 block text-[11px] leading-snug text-ink-muted">
+                    {t('dashboard.scoreBasis', {
+                      tests: score.basis
+                        .map((b) => getTest(b)?.shortName[locale] ?? t(`metrics.${b}`))
+                        .join(' + '),
+                    })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        )}
 
         <Panel className="lg:col-span-2">
           <PanelHeader title={t('dashboard.breakdown')} />

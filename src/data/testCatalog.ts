@@ -24,6 +24,7 @@ import {
   STRENGTH_TESTS,
 } from './testCatalogAdditions'
 import { SPORT_SPECIFIC_TESTS } from './testCatalogSportSpecific'
+import { DOCUMENT_TESTS } from './testCatalogDocument'
 
 export type FieldType = 'number' | 'integer' | 'duration' | 'rpe' | 'stages'
 
@@ -379,6 +380,9 @@ export const TEST_CATALOG: TestDefinition[] = [
   ...CONDITIONING_TESTS,
   // Sportartspezifische Tests zu den Disziplinen aus src/data/sportProfiles.ts.
   ...SPORT_SPECIFIC_TESTS,
+  // Namentlich im Zielgruppendokument genannte Verfahren; die Herkunft steht
+  // je Disziplin in src/data/documentCoverage.ts.
+  ...DOCUMENT_TESTS,
 ]
 
 export const TEST_BY_SLUG = new Map(TEST_CATALOG.map((test) => [test.slug, test]))

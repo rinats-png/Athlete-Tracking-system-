@@ -5,6 +5,7 @@ import { ArrowLeft, Check, Clock, TriangleAlert } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { TEST_BATTERIES, batteryDimensions, disciplineBattery } from '@/data/testBatteries'
+import { provenanceOf, additionReason } from '@/data/documentCoverage'
 import { TEST_CATALOG, getTest } from '@/data/testCatalog'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -39,6 +40,12 @@ export function AssessmentCreateScreen() {
     [suggested],
   )
   const initialSlug = suggested?.slug ?? 'general_fitness'
+
+  // Herkunft eines Tests bezogen auf die gewählte Disziplin. Ohne Disziplin
+  // gibt es keine Herkunft — dann steht bei keinem Test etwas.
+  const disciplineId = data.profile.disciplineId
+  const origin = (slug: string) =>
+    disciplineId ? provenanceOf(disciplineId, slug) : 'unknown'
 
   const [batterySlug, setBatterySlug] = useState<string | null>(initialSlug)
   const [selected, setSelected] = useState<string[]>(
@@ -189,6 +196,18 @@ export function AssessmentCreateScreen() {
                       <span className="block truncate text-[14px]">{test.name[locale]}</span>
                       <span className="block text-[11px] text-ink-muted">
                         {t(`dimensions.${test.dimension}`)}
+                        {/* Warum dieser Test bei dieser Disziplin steht.
+                            Ohne die Kennzeichnung sieht eine Ergänzung dieser
+                            App aus wie eine Vorgabe aus der Quelle. */}
+                        {origin(test.slug) === 'document' ? (
+                          <span className="ml-1.5 text-accent-text">
+                            · {t('assessments.fromDocument')}
+                          </span>
+                        ) : origin(test.slug) === 'addition' ? (
+                          <span className="ml-1.5" title={additionReason(disciplineId!, test.slug) ?? ''}>
+                            · {t('assessments.addedForDiscipline')}
+                          </span>
+                        ) : null}
                       </span>
                     </span>
                   </label>

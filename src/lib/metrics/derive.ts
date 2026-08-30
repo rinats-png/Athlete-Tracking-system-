@@ -16,6 +16,7 @@ import {
   functionalThresholdPower,
   bikeThresholdScore,
   swimTechniqueScore,
+  hrDriftPercent,
 } from './index'
 
 export interface DeriveContext {
@@ -163,6 +164,121 @@ export function deriveMetrics(
       if (runSeconds != null && runSeconds > 0) {
         put('avg_pace_s_per_km', pacePerKm(runSeconds, values.runDistanceM))
       }
+      break
+    }
+
+    case 'special_wrestling_fitness_test': {
+      // Gleiche Rechnung wie der SJFT, eigener Schlüssel: die Referenzwerte
+      // der beiden Tests sind nicht austauschbar.
+      const total = (values.throwsA ?? 0) + (values.throwsB ?? 0) + (values.throwsC ?? 0)
+      put('totalThrows', total)
+      put('swft_index', sjftIndex(total, values.hrEnd, values.hrAfter1min))
+      break
+    }
+
+    case 'uchi_komi_fitness_test':
+    case 'jjapt':
+    case 'punch_test_180s': {
+      // Abfall zwischen den ersten 30 s und dem hochgerechneten Rest.
+      const first = values.repsFirst30
+      const seconds = test.protocol.durationSeconds
+      if (first != null && first > 0 && values.reps != null && seconds != null && seconds > 30) {
+        const rest = values.reps - first
+        const restPer30 = rest / ((seconds - 30) / 30)
+        put('fatigue_index_percent', fatigueIndexPercent(first, Math.max(0, restPer30)))
+      }
+      if (values.reps != null && seconds) put('reps_per_minute', values.reps / (seconds / 60))
+      break
+    }
+
+    case 'fatigue_circuit_4x30s': {
+      const sets = [values.repsSet1, values.repsSet2, values.repsSet3, values.repsSet4].filter(
+        (v): v is number => v != null && Number.isFinite(v),
+      )
+      if (sets.length > 0) {
+        put('reps', sets.reduce((a, b) => a + b, 0))
+        put('fatigue_index_percent', fatigueIndexPercent(Math.max(...sets), Math.min(...sets)))
+      }
+      break
+    }
+
+    case 'grappling_circuit_5min': {
+      put('total_reps', (values.rounds ?? 0) * 3 + (values.partialReps ?? 0))
+      break
+    }
+
+    case 'rope_climb': {
+      if (values.reps != null && values.heightM != null) {
+        put('climb_meters_total', values.reps * values.heightM)
+      }
+      break
+    }
+
+    case 'rope_skipping_3min': {
+      if (values.reps != null) put('reps_per_minute', values.reps / 3)
+      break
+    }
+
+    case 'ski_erg_1000m': {
+      put('avg_pace_s_per_500m', pacePer500m(values.durationSeconds, 1000))
+      break
+    }
+
+    case 'obstacle_course_sim': {
+      if (values.durationSeconds != null && values.stations != null && values.stations > 0) {
+        put('seconds_per_station', values.durationSeconds / values.stations)
+      }
+      break
+    }
+
+    case 'uphill_run_test': {
+      // Steigleistung in Höhenmetern je Stunde — die Grösse, in der am Berg
+      // gerechnet wird. Die reine Zeit sagt ohne die Höhenmeter nichts.
+      if (values.elevationGainM != null && values.durationSeconds != null && values.durationSeconds > 0) {
+        put('vertical_speed_m_per_h', (values.elevationGainM / values.durationSeconds) * 3600)
+      }
+      if (values.elevationGainM != null && values.distanceM != null && values.distanceM > 0) {
+        put('grade_percent', (values.elevationGainM / values.distanceM) * 100)
+      }
+      break
+    }
+
+    case 'downhill_run_test': {
+      if (values.elevationLossM != null && values.distanceM != null && values.distanceM > 0) {
+        put('grade_percent', (values.elevationLossM / values.distanceM) * 100)
+      }
+      break
+    }
+
+    case 'hr_drift_test': {
+      put('hr_drift_percent', hrDriftPercent(values.hrFirstHalf, values.hrSecondHalf))
+      if (values.distanceM != null) {
+        put('avg_pace_s_per_km', pacePerKm(values.durationSeconds, values.distanceM))
+      }
+      break
+    }
+
+    case 'submax_efficiency_bike': {
+      // Watt je Herzschlag: steigt der Wert bei gleicher Wattzahl, ist die
+      // aerobe Grundlage besser geworden.
+      if (values.targetPowerW != null && values.avgHeartRate != null && values.avgHeartRate > 0) {
+        put('efficiency_w_per_bpm', values.targetPowerW / values.avgHeartRate)
+      }
+      if (values.targetPowerW != null && ctx.bodyWeightKg) {
+        put('watts_per_kg', values.targetPowerW / ctx.bodyWeightKg)
+      }
+      break
+    }
+
+    case 'repeated_sprint_bike': {
+      put('fatigue_index_percent', fatigueIndexPercent(values.peakPowerW, values.lastSprintPowerW))
+      break
+    }
+
+    case 'swim_100m_backstroke':
+    case 'swim_100m_breaststroke':
+    case 'swim_100m_butterfly': {
+      if (values.strokeCount != null) put('strokes_per_100m', values.strokeCount)
       break
     }
 
