@@ -11,6 +11,11 @@ import {
   peakPowerSayers,
   averageVelocity,
   pacePerKm,
+  sjftIndex,
+  fatigueIndexPercent,
+  functionalThresholdPower,
+  bikeThresholdScore,
+  swimTechniqueScore,
 } from './index'
 
 export interface DeriveContext {
@@ -51,10 +56,12 @@ export function deriveMetrics(
       put('vo2max_ml_kg_min', vo2maxFromBeepTest(values.level, ctx.ageYears ?? 30))
       break
 
-    case 'row_2000m': {
+    case 'row_2000m':
+    case 'row_1000m': {
       const seconds = values.durationSeconds
-      put('avg_pace_s_per_500m', pacePer500m(seconds, 2000))
-      const watts = rowingWatts(seconds, 2000)
+      const meters = test.protocol.targetDistanceM ?? 2000
+      put('avg_pace_s_per_500m', pacePer500m(seconds, meters))
+      const watts = rowingWatts(seconds, meters)
       put('avg_power_w', watts)
       if (watts != null && ctx.bodyWeightKg) put('watts_per_kg', watts / ctx.bodyWeightKg)
       break
@@ -97,6 +104,68 @@ export function deriveMetrics(
       break
     }
 
+    case 'special_judo_fitness_test': {
+      const total = (values.throwsA ?? 0) + (values.throwsB ?? 0) + (values.throwsC ?? 0)
+      put('totalThrows', total)
+      put('sjft_index', sjftIndex(total, values.hrEnd, values.hrAfter1min))
+      break
+    }
+
+    case 'grip_strength': {
+      if (ctx.bodyWeightKg && values.gripKg != null) {
+        put('grip_relative', values.gripKg / ctx.bodyWeightKg)
+      }
+      // Seitenunterschied nur, wenn beide Seiten gemessen wurden. Aus einer
+      // Seite eine Asymmetrie zu rechnen wäre eine erfundene Zahl.
+      if (values.gripKg != null && values.gripLeftKg != null) {
+        const best = Math.max(values.gripKg, values.gripLeftKg)
+        const worst = Math.min(values.gripKg, values.gripLeftKg)
+        put('grip_asymmetry_percent', fatigueIndexPercent(best, worst))
+      }
+      break
+    }
+
+    case 'punch_test_60s':
+    case 'kick_test_60s': {
+      // Abfall zwischen erster und zweiter halber Minute.
+      const first = values.repsFirst30
+      if (first != null && values.reps != null && first > 0) {
+        const second = values.reps - first
+        put('fatigue_index_percent', fatigueIndexPercent(first, Math.max(0, second)))
+      }
+      break
+    }
+
+    case 'ftp_20min': {
+      const ftp = functionalThresholdPower(values.avgPowerW)
+      put('ftp_watt', ftp)
+      if (ftp != null && ctx.bodyWeightKg) put('ftp_watt_per_kg', ftp / ctx.bodyWeightKg)
+      put('bike_threshold_score', bikeThresholdScore(ftp, ctx.bodyWeightKg))
+      break
+    }
+
+    case 'wingate_30s': {
+      put('fatigue_index_percent', fatigueIndexPercent(values.peakPowerW, values.minPowerW))
+      break
+    }
+
+    case 'swim_incremental': {
+      put('swim_technique_score', swimTechniqueScore(values.strokeLengthM, values.thresholdPaceS100))
+      break
+    }
+
+    case 'brick_bike_run': {
+      // Die Pace bezieht sich auf den Laufteil, nicht auf die Gesamtzeit.
+      const runSeconds =
+        values.durationSeconds != null && values.bikeMinutes != null
+          ? values.durationSeconds - values.bikeMinutes * 60
+          : null
+      if (runSeconds != null && runSeconds > 0) {
+        put('avg_pace_s_per_km', pacePerKm(runSeconds, values.runDistanceM))
+      }
+      break
+    }
+
     default:
       break
   }
@@ -112,6 +181,19 @@ export function deriveMetrics(
     test.protocol.targetDistanceM != null
   ) {
     put('avg_pace_s_per_km', pacePerKm(values.durationSeconds, test.protocol.targetDistanceM))
+  }
+
+  // Leistung je Körpergewicht, wo eine Leistung gemessen wurde.
+  if (test.derivedMetrics.includes('watts_per_kg') && ctx.bodyWeightKg && out.watts_per_kg == null) {
+    const watts = values.avgPowerW ?? values.peakPowerW
+    if (watts != null) put('watts_per_kg', watts / ctx.bodyWeightKg)
+  }
+
+  // Zusatzlast je Körpergewicht bei getragenen Aufgaben (Farmers Carry,
+  // Schlitten, Marsch): 60 kg sind für 60 kg Körpergewicht etwas anderes
+  // als für 100 kg.
+  if (test.derivedMetrics.includes('load_relative') && ctx.bodyWeightKg && values.loadKg != null) {
+    put('load_relative', values.loadKg / ctx.bodyWeightKg)
   }
 
   // Sprungtests: geschätzte Spitzenleistung nach Sayers.
@@ -130,8 +212,15 @@ export function deriveMetrics(
     if (ctx.bodyWeightKg && (ctx.sex === 'male' || ctx.sex === 'female')) {
       put('sinclair_points', sinclairPoints(oneRm, ctx.bodyWeightKg, ctx.sex))
     }
-  } else if (values.loadKg != null && ctx.bodyWeightKg) {
+  } else if (
+    values.loadKg != null &&
+    ctx.bodyWeightKg &&
+    test.derivedMetrics.includes('relative_strength_bw')
+  ) {
     // Bear Complex: Last ohne Wiederholungszahl, aber relativ bewertbar.
+    // Getragene Aufgaben (Farmers Carry, Schlitten) haben ebenfalls eine
+    // Last ohne Wiederholungen — dort ist sie aber keine Kraftfähigkeit,
+    // sondern eine Vorgabe. Deshalb nur, wo der Katalog es ausweist.
     put('relative_strength_bw', relativeStrength(values.loadKg, ctx.bodyWeightKg))
   }
 
