@@ -187,68 +187,70 @@ test.describe("Profil in der Oberfläche", () => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
 
-    await page.getByLabel("Sportart").fill("Judo");
-    await page.getByLabel("Position / Disziplin").fill("-81 kg");
+    await page.getByLabel("Andere Sportart").fill("Sportklettern");
+    await page.getByLabel("Position / Gewichtsklasse").fill("-81 kg");
     await page.getByLabel("Leistungsniveau").selectOption("competitive");
     await page.getByLabel("Trainingsalter (Jahre)").fill("12");
     await page.getByLabel("Einheiten pro Woche").fill("6");
     await page.getByLabel("Dominante Seite").selectOption("left");
 
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.getByLabel("Sportart")).toHaveValue("Judo");
+    await expect(page.getByLabel("Andere Sportart")).toHaveValue("Sportklettern");
     await expect(page.getByLabel("Leistungsniveau")).toHaveValue("competitive");
     await expect(page.getByLabel("Trainingsalter (Jahre)")).toHaveValue("12");
   });
 
-  test("die Disziplin lässt sich erst nach dem Sportbereich wählen", async ({ page }) => {
+  test("jede einzelne Sportart steht in einem Menü", async ({ page }) => {
+    // Vorher standen hier zwei Menüs, das zweite gesperrt bis zur Antwort auf
+    // das erste. Wer das Profil öffnete, sah sieben Oberbegriffe und keine
+    // einzige Sportart — «Kampfsport» ist aber nicht das, was jemand über sich
+    // sagen will.
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
 
-    const category = page.getByLabel("Sportbereich");
-    const discipline = page.getByLabel("Disziplin", { exact: true });
+    const menu = page.getByLabel("Sportart / Disziplin");
+    await expect(menu).toBeEnabled();
+    await expect(menu).toHaveValue("");
+    // Alle 39 Disziplinen plus «Keine Angabe».
+    await expect(menu.locator("option")).toHaveCount(40);
+    // Nach Bereichen gruppiert, damit die Liste sortiert bleibt.
+    await expect(menu.locator("optgroup")).toHaveCount(7);
+    await expect(menu.locator("option", { hasText: "Judo" })).toHaveCount(1);
+    await expect(menu.locator("option", { hasText: "Ringen" })).toHaveCount(1);
+    await expect(menu.locator("option", { hasText: "Bahnradsport" })).toHaveCount(1);
 
-    // Keine Vorauswahl: eine vorbelegte Sportart wäre eine Angabe, die
-    // niemand gemacht hat — und sie würde die Testempfehlung steuern.
-    await expect(category).toHaveValue("");
-    // Deaktiviert MIT Begründung statt versteckt.
-    await expect(discipline).toBeDisabled();
-    await expect(page.getByText("Zuerst einen Sportbereich wählen.")).toBeVisible();
-
-    await category.selectOption("combat");
-    await expect(discipline).toBeEnabled();
-    await discipline.selectOption("judo");
-
+    await menu.selectOption("judo");
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.getByLabel("Sportbereich")).toHaveValue("combat");
-    await expect(page.getByLabel("Disziplin", { exact: true })).toHaveValue("judo");
+    await expect(page.getByLabel("Sportart / Disziplin")).toHaveValue("judo");
   });
 
-  test("der Wechsel des Sportbereichs löst die Disziplin erst nach Rückfrage", async ({
-    page,
-  }) => {
+  test("die Auswahl zeigt sofort, welche Tests sie bedeutet", async ({ page }) => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    await page.getByLabel("Sportbereich").selectOption("combat");
-    await page.getByLabel("Disziplin", { exact: true }).selectOption("judo");
+    await page.getByLabel("Sportart / Disziplin").selectOption("judo");
 
-    // Abgelehnt: nichts ändert sich.
-    page.once("dialog", (d) => d.dismiss());
-    await page.getByLabel("Sportbereich").selectOption("running");
-    await expect(page.getByLabel("Sportbereich")).toHaveValue("combat");
-    await expect(page.getByLabel("Disziplin", { exact: true })).toHaveValue("judo");
+    // Ohne diese Liste wäre die Wahl eine Behauptung ohne sichtbare Folge.
+    await expect(page.getByText("Special Judo Fitness Test")).toBeVisible();
+    await expect(page.getByText(/Kerntests? für diese Disziplin/)).toBeVisible();
+    // Und je Zeile, woher der Test kommt.
+    await expect(page.getByText("aus der Quellliste").first()).toBeVisible();
+  });
 
-    // Bestätigt: Bereich gewechselt, Disziplin gelöst statt still falsch.
-    page.once("dialog", (d) => d.accept());
-    await page.getByLabel("Sportbereich").selectOption("running");
-    await expect(page.getByLabel("Sportbereich")).toHaveValue("running");
-    await expect(page.getByLabel("Disziplin", { exact: true })).toHaveValue("");
+  test("der Sportbereich wird abgeleitet und nicht gefragt", async ({ page }) => {
+    await openGuest(page);
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+    // Eine Angabe, die sich aus einer anderen ergibt, ist keine zweite Frage wert.
+    await expect(page.getByLabel("Sportbereich")).toHaveCount(0);
+    await page.getByLabel("Sportart / Disziplin").selectOption("marathon");
+    const stored = await page.evaluate(() => localStorage.getItem("baseline.data.v1"));
+    expect(stored).toContain('"sportCategoryId":"running"');
+    expect(stored).toContain('"disciplineId":"marathon"');
   });
 
   test("die gewählte Disziplin steht als Vorschlag im Terminentwurf", async ({ page }) => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    await page.getByLabel("Sportbereich").selectOption("combat");
-    await page.getByLabel("Disziplin", { exact: true }).selectOption("judo");
+    await page.getByLabel("Sportart / Disziplin").selectOption("judo");
 
     await page.goto("/diagnostik/neu", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Vorschlag").first()).toBeVisible();

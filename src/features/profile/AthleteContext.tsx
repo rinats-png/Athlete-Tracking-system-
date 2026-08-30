@@ -23,7 +23,7 @@ export function AthleteContext() {
   return (
     <Panel>
       <PanelHeader title={t('profile.context')} subtitle={t('profile.contextHint')} />
-      <div className="grid gap-4 px-4 py-4 sm:grid-cols-2">
+      <div className="grid gap-4 px-4 py-4 sm:grid-cols-2 [&>*]:min-w-0">
         <label className="block sm:col-span-2">
           <span className="label-tag">{t('profile.performanceLevel')}</span>
           <select
