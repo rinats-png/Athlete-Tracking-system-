@@ -1,6 +1,11 @@
 node_modules
 dist
 dist-ssr
+
+# Deploy-Paket für den manuellen Netlify-Upload. Entsteht aus `dist/` und
+# wird bei jedem Build neu erzeugt — im Verlauf wäre es ein Binary, das
+# sofort veraltet und die Historie dauerhaft aufbläht.
+baseline-netlify.zip
 .env
 .env.local
 .env.*.local
