@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 8
+export const CURRENT_SCHEMA_VERSION = 9
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -222,6 +222,32 @@ const brandingSchema = z.object({
  * Kunden eines Trainers haben ausdrücklich kein Konto: `name` ist alles, was
  * BASELINE über sie speichert, solange der Trainer nichts weiter einträgt.
  */
+/**
+ * Nachweis über Änderungen am Bestand (§57).
+ *
+ * Bewusst schlank: Zeitpunkt, Art, betroffener Datensatz. KEINE Kopie der
+ * geänderten Werte — ein Verlaufsspeicher mit allen alten Ständen wäre ein
+ * zweiter Datenbestand mit denselben personenbezogenen Daten, den niemand
+ * angefordert hat (§50). Der Nachweis beantwortet «wann ist was passiert»,
+ * nicht «was stand vorher drin».
+ *
+ * Die Liste ist begrenzt: sie soll nachvollziehbar machen, was zuletzt
+ * geschah, und nicht unbegrenzt mitwachsen.
+ */
+export const AUDIT_LIMIT = 200
+
+const auditSchema = z.object({
+  id: z.string().min(1),
+  at: isoDate,
+  action: z.enum(['created', 'edited', 'deleted', 'imported', 'exported']),
+  /** Worauf sich die Änderung bezieht. */
+  entity: z.enum(['result', 'assessment', 'biometric', 'profile', 'athlete', 'data']),
+  /** Kennung des betroffenen Datensatzes, sofern es eine gibt. */
+  entityId: z.string().max(80).nullable().default(null),
+  /** Kurze Bezeichnung für die Anzeige, z. B. der Testname. */
+  label: z.string().max(120).default(''),
+})
+
 const athleteSchema = z.object({
   id: z.string().min(1),
   name: z.string().max(120).default(''),
@@ -231,6 +257,10 @@ const athleteSchema = z.object({
   results: z.array(resultSchema).default([]),
   /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
   archived: z.boolean().default(false),
+  /** Notizen des Trainers zu dieser Person (§74). */
+  notes: z.string().max(4000).default(''),
+  /** Änderungsnachweis, neueste zuerst. */
+  audit: z.array(auditSchema).default([]),
   createdAt: isoDate,
 })
 
@@ -266,6 +296,7 @@ export type ValidatedBranding = z.infer<typeof brandingSchema>
 export type AttemptSelection = z.infer<typeof attemptSelectionSchema>
 export type ValidatedContext = z.infer<typeof contextSchema>
 export type ValidatedReadiness = z.infer<typeof readinessSchema>
+export type ValidatedAudit = z.infer<typeof auditSchema>
 
 // --- Migrationen -------------------------------------------------------------
 
@@ -403,6 +434,22 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 8,
+    to: 9,
+    describe: 'Notizen je Athlet und Änderungsnachweis',
+    run: (data) => ({
+      ...data,
+      version: 9,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        notes: '',
+        // Leer: rückwirkend lässt sich nicht rekonstruieren, wann was
+        // geändert wurde, und ein erfundener Nachweis wäre wertlos.
+        audit: [],
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -430,6 +477,8 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     assessments: [],
     results: [],
     archived: false,
+    notes: '',
+    audit: [],
     createdAt: new Date().toISOString(),
   }
 }

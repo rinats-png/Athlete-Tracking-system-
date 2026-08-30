@@ -598,7 +598,10 @@
     "logoUnreadable": "Die Datei konnte nicht gelesen werden.",
     "footer": "Fusszeile",
     "footerPlaceholder": "z. B. Kontaktdaten",
-    "brandingNote": "Diese Angaben bleiben auf diesem Gerät und erscheinen nur im Bericht. Sie verändern keine Messwerte und keine Auswertung."
+    "brandingNote": "Diese Angaben bleiben auf diesem Gerät und erscheinen nur im Bericht. Sie verändern keine Messwerte und keine Auswertung.",
+    "athlete": "Athlet",
+    "versusPrevious": "Gegenüber {{date}}",
+    "priority": "Priorität {{rank}}"
   },
   "coach": {
     "title": "Betreute Athleten",
@@ -782,5 +785,28 @@
     "threshold": "Als deutlich gilt eine Veränderung ab 5 % gegenüber der vorherigen Messung desselben Tests. Die Schwelle ist gesetzt und nicht aus den Daten abgeleitet.",
     "regressionTitle": "Grösste Verschlechterung",
     "regressionNeutral": "Eine Verschlechterung wird hier genauso benannt wie eine Verbesserung. Sie kann viele Gründe haben — Tagesform, Krankheit, ein Trainingsblock mit anderem Schwerpunkt."
+  },
+  "notes": {
+    "title": "Notizen",
+    "hint": "Freitext zu dieser Person. Wird von der App nicht ausgewertet.",
+    "placeholder": "z. B. Trainingsschwerpunkte, Absprachen, Beobachtungen",
+    "audit": "Letzte Änderungen",
+    "auditEmpty": "Noch keine Änderungen aufgezeichnet.",
+    "auditNote": "Der Nachweis hält fest, wann was passiert ist — nicht, was vorher drinstand. Ein Verlaufsspeicher mit allen alten Ständen wäre ein zweiter Datenbestand mit denselben personenbezogenen Daten.",
+    "action": {
+      "created": "Angelegt",
+      "edited": "Geändert",
+      "deleted": "Gelöscht",
+      "imported": "Importiert",
+      "exported": "Exportiert"
+    },
+    "entity": {
+      "result": "Messung",
+      "assessment": "Diagnostik",
+      "biometric": "Körperwert",
+      "profile": "Profil",
+      "athlete": "Athlet",
+      "data": "Bestand"
+    }
   }
 }

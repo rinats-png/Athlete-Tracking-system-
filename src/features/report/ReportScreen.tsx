@@ -14,6 +14,11 @@ import { ageFromBirthDate, formatDate } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { resultsToCsv, downloadFile } from '@/lib/export/csv'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
+import { RadarProfile } from '@/components/charts/RadarProfile'
+import { compareAssessments } from '@/domain/analytics'
+import { coverageByDimension } from '@/domain/benchmark'
+import { readinessScore } from '@/domain/readiness'
+import { getTest as lookupTest } from '@/data/testCatalog'
 import type { AppLocale } from '@/types/domain'
 import type { StoredResult } from '@/lib/store/localStore'
 
@@ -34,7 +39,7 @@ export function ReportScreen() {
   const { id } = useParams()
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
-  const { data } = useAppData()
+  const { data, athleteNotes } = useAppData()
   const [searchParams] = useSearchParams()
 
   const assessment = id ? (data.assessments.find((a) => a.id === id) ?? null) : null
@@ -54,6 +59,33 @@ export function ReportScreen() {
 
   const covered = coveredDimensions(results)
   const missing = missingDimensions(results)
+  const coverage = useMemo(() => coverageByDimension(data.results), [data.results])
+
+  /**
+   * Der vorherige abgeschlossene Termin (§33). Ohne ihn ist ein Bericht eine
+   * Momentaufnahme; mit ihm wird er eine Entwicklung.
+   */
+  const previousAssessment = useMemo(() => {
+    if (!assessment) return null
+    return (
+      data.assessments
+        .filter(
+          (a) =>
+            a.id !== assessment.id &&
+            a.status === 'completed' &&
+            a.performedOn < assessment.performedOn,
+        )
+        .sort((a, b) => b.performedOn.localeCompare(a.performedOn))[0] ?? null
+    )
+  }, [assessment, data.assessments])
+
+  const comparisonRows = useMemo(
+    () =>
+      assessment && previousAssessment
+        ? compareAssessments(data, previousAssessment.id, assessment.id)
+        : [],
+    [data, assessment, previousAssessment],
+  )
   const showInsights = searchParams.get('hinweise') !== 'aus'
 
   const athlete =
@@ -132,6 +164,37 @@ export function ReportScreen() {
         )}
       </header>
 
+      {/* Deckblatt: eine eigene Druckseite, damit der Bericht wie ein
+          Dokument beginnt und nicht wie ein Ausdruck einer Webseite. */}
+      <section className="report-cover">
+        <p className="font-display text-[11px] font-semibold tracking-[0.18em] uppercase text-ink-muted">
+          {data.branding.organisation || t('app.name')}
+        </p>
+        <h2 className="mt-2 font-display text-[22px] leading-tight font-bold">
+          {assessment ? t('report.assessmentTitle') : t('report.profileTitle')}
+        </h2>
+        <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1 text-[12px] sm:grid-cols-4">
+          <CoverField label={t('report.athlete')} value={athlete} />
+          <CoverField
+            label={t('report.date')}
+            value={
+              assessment
+                ? formatDate(assessment.performedOn, locale)
+                : formatDate(new Date().toISOString(), locale)
+            }
+          />
+          {data.profile.sport && (
+            <CoverField label={t('profile.sport')} value={data.profile.sport} />
+          )}
+          {data.profile.performanceLevel && (
+            <CoverField
+              label={t('profile.performanceLevel')}
+              value={t(`profile.level.${data.profile.performanceLevel}`)}
+            />
+          )}
+        </dl>
+      </section>
+
       <Section title={t('report.summary')}>
         <dl className="grid grid-cols-2 gap-x-6 gap-y-2 text-[13px] sm:grid-cols-4">
           <Figure label={t('report.testsMeasured')} value={String(results.length)} />
@@ -151,6 +214,40 @@ export function ReportScreen() {
             {t('report.gaps', { axes: missing.map((d) => t(`dimensions.${d}`)).join(', ') })}
           </p>
         )}
+      </Section>
+
+      <Section title={t('radar.title')}>
+        {/* Das Profil gehört in den Bericht: sechs Zahlen in einer Tabelle
+            beantworten «wo stehe ich» schlechter als ein Netz. Die
+            Tabellenansicht liegt darunter und macht es ohne Diagramm
+            lesbar. */}
+        <RadarProfile axes={axes} mode="population" locale={locale} />
+      </Section>
+
+      <Section title={t('coverage.title')}>
+        <table className="w-full text-[12px]">
+          <thead>
+            <tr className="border-b border-ink text-left">
+              <th scope="col" className="py-1.5 font-semibold">{t('table.dimension')}</th>
+              <th scope="col" className="py-1.5 font-semibold">{t('coverage.title')}</th>
+              <th scope="col" className="py-1.5 font-semibold">{t('report.testsMeasured')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {coverage.map((entry) => (
+              <tr key={entry.dimension} className="border-b border-line">
+                <th scope="row" className="py-1.5 pr-2 text-left font-normal">
+                  {t(`dimensions.${entry.dimension}`)}
+                </th>
+                <td className="readout py-1.5 pr-2 tabular-nums">{entry.percent} %</td>
+                <td className="py-1.5 tabular-nums">
+                  {entry.measured} / {entry.available}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">{t('coverage.explain')}</p>
       </Section>
 
       <Section title={t('report.measurements')}>
@@ -268,6 +365,118 @@ export function ReportScreen() {
         </Section>
       )}
 
+      {previousAssessment && comparisonRows.length > 0 && (
+        <Section
+          title={t('report.versusPrevious', {
+            date: formatDate(previousAssessment.performedOn, locale),
+          })}
+        >
+          <table className="w-full text-[12px]">
+            <thead>
+              <tr className="border-b border-ink text-left">
+                <th scope="col" className="py-1.5 font-semibold">{t('table.test')}</th>
+                <th scope="col" className="py-1.5 font-semibold">{t('analysis.before')}</th>
+                <th scope="col" className="py-1.5 font-semibold">{t('analysis.after')}</th>
+                <th scope="col" className="py-1.5 font-semibold">{t('analysis.change')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonRows.map((row) => (
+                <tr key={row.testSlug} className="border-b border-line">
+                  <th scope="row" className="py-1.5 pr-2 text-left font-normal">
+                    {lookupTest(row.testSlug)?.name[locale] ?? row.testSlug}
+                  </th>
+                  <td className="readout py-1.5 pr-2 tabular-nums">
+                    {row.before
+                      ? formatResultValue(row.before, locale, data.profile.unitSystem)
+                      : '—'}
+                  </td>
+                  <td className="readout py-1.5 pr-2 tabular-nums">
+                    {row.after
+                      ? formatResultValue(row.after, locale, data.profile.unitSystem)
+                      : '—'}
+                  </td>
+                  <td className="py-1.5 tabular-nums">
+                    {row.onlyIn
+                      ? t(`analysis.onlyIn.${row.onlyIn}`)
+                      : row.changePercent == null
+                        ? '—'
+                        : `${row.changePercent > 0 ? '+' : ''}${row.changePercent.toFixed(1)} %`}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Section>
+      )}
+
+      {assessment?.readiness && (
+        <Section title={t('readiness.title')}>
+          <p className="text-[12px]">
+            {t('readiness.score')}:{' '}
+            <span className="readout">{readinessScore(assessment.readiness).score} %</span>{' '}
+            <span className="text-ink-muted">
+              ({t('readiness.basis', {
+                answered: readinessScore(assessment.readiness).answered,
+                total: readinessScore(assessment.readiness).total,
+              })})
+            </span>
+          </p>
+          <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
+            {t('readiness.disclaimer')}
+          </p>
+        </Section>
+      )}
+
+      {showInsights && insights.recommendations.length > 0 && (
+        <Section title={t('insights.recommendations')}>
+          <ol className="space-y-2 text-[12px]">
+            {insights.recommendations.slice(0, 5).map((recommendation, index) => (
+              <li key={`${recommendation.kind}-${index}`}>
+                <strong className="font-semibold">
+                  {t('report.priority', { rank: index + 1 })}
+                </strong>{' '}
+                {t(`insights.recommendation.${recommendation.kind}`, {
+                  ...recommendation.values,
+                  dimension: recommendation.dimension
+                    ? t(`dimensions.${recommendation.dimension}`)
+                    : '',
+                  test: '',
+                })}
+                {recommendation.emphasis && (
+                  <span className="block text-ink-secondary">
+                    {recommendation.emphasis.focusKeys.map((key) => t(key)).join(' · ')} ·{' '}
+                    {t('emphasis.volume', {
+                      minSessions: recommendation.emphasis.sessionsPerWeek[0],
+                      maxSessions: recommendation.emphasis.sessionsPerWeek[1],
+                      minWeeks: recommendation.emphasis.weeksToRetest[0],
+                      maxWeeks: recommendation.emphasis.weeksToRetest[1],
+                    })}
+                  </span>
+                )}
+                <span className="block text-ink-muted">
+                  {t(`insights.evidence.${recommendation.evidence}`)}
+                </span>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">
+            {t('emphasis.disclaimer')}
+          </p>
+        </Section>
+      )}
+
+      {(assessment?.notes || athleteNotes) && (
+        <Section title={t('notes.title')}>
+          {assessment?.notes && (
+            <p className="text-[12px] leading-relaxed whitespace-pre-wrap">{assessment.notes}</p>
+          )}
+          {athleteNotes && (
+            <p className="mt-2 text-[12px] leading-relaxed whitespace-pre-wrap">{athleteNotes}</p>
+          )}
+        </Section>
+      )}
+
       <Section title={t('report.method')}>
         <ul className="space-y-1 text-[11px] leading-relaxed text-ink-secondary">
           <li>{t('report.methodConfidence')}</li>
@@ -292,6 +501,15 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       </h2>
       {children}
     </section>
+  )
+}
+
+function CoverField({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="text-[10px] tracking-[0.1em] uppercase text-ink-muted">{label}</dt>
+      <dd className="mt-0.5">{value}</dd>
+    </div>
   )
 }
 

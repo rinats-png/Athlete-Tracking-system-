@@ -190,6 +190,8 @@ export function buildDemoData(): StoredData {
         assessments,
         results,
         archived: false,
+        notes: '',
+        audit: [],
         createdAt: new Date().toISOString(),
       },
     ],

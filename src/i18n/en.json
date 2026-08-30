@@ -598,7 +598,10 @@
     "logoUnreadable": "The file could not be read.",
     "footer": "Footer",
     "footerPlaceholder": "e.g. contact details",
-    "brandingNote": "These details stay on this device and appear only in the report. They change no measurement and no analysis."
+    "brandingNote": "These details stay on this device and appear only in the report. They change no measurement and no analysis.",
+    "athlete": "Athlete",
+    "versusPrevious": "Versus {{date}}",
+    "priority": "Priority {{rank}}"
   },
   "coach": {
     "title": "Athletes you coach",
@@ -782,5 +785,28 @@
     "threshold": "A change counts as marked from 5 % against the previous measurement of the same test. The threshold is set, not derived from the data.",
     "regressionTitle": "Largest decline",
     "regressionNeutral": "A decline is named here just as a improvement is. It can have many causes — daily form, illness, a training block with a different focus."
+  },
+  "notes": {
+    "title": "Notes",
+    "hint": "Free text about this person. Not analysed by the app.",
+    "placeholder": "e.g. training focus, agreements, observations",
+    "audit": "Recent changes",
+    "auditEmpty": "No changes recorded yet.",
+    "auditNote": "The record captures when something happened — not what was there before. A history of all previous states would be a second data store holding the same personal data.",
+    "action": {
+      "created": "Created",
+      "edited": "Edited",
+      "deleted": "Deleted",
+      "imported": "Imported",
+      "exported": "Exported"
+    },
+    "entity": {
+      "result": "Measurement",
+      "assessment": "Assessment",
+      "biometric": "Biometric",
+      "profile": "Profile",
+      "athlete": "Athlete",
+      "data": "Data"
+    }
   }
 }

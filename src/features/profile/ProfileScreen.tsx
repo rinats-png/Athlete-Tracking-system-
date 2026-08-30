@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AthleteContext } from './AthleteContext'
 import { BodyCompositionPanel } from './BodyCompositionPanel'
 import { BrandingSettings } from './BrandingSettings'
+import { AthleteNotes } from '@/features/coach/AthleteNotes'
 import { CoachSettings } from '@/features/coach/CoachSettings'
 import { downloadFile } from '@/lib/export/csv'
 import { useTranslation } from 'react-i18next'
@@ -270,6 +271,8 @@ export function ProfileScreen() {
           <AthleteContext />
 
           <BodyCompositionPanel locale={locale} />
+
+          <AthleteNotes locale={locale} />
 
           <CoachSettings locale={locale} />
 

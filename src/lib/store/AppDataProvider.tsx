@@ -25,8 +25,13 @@ import {
   type StoredData,
   type StoredResult,
 } from './localStore'
-import { emptyAthlete } from './schema'
-import type { AttemptSelection, LoadReport, ValidatedContext } from './schema'
+import { AUDIT_LIMIT, emptyAthlete } from './schema'
+import type {
+  AttemptSelection,
+  LoadReport,
+  ValidatedAudit,
+  ValidatedContext,
+} from './schema'
 
 /** Leere Messbedingungen — nichts erfasst heisst nicht «unbekannt geraten». */
 const EMPTY_CONTEXT: ValidatedContext = {
@@ -86,6 +91,11 @@ interface AppDataValue {
   bodyWeightAt: (iso: string) => number | null
   saveProfile: (patch: Partial<AthleteData['profile']>) => void
   saveBranding: (patch: Partial<StoredData['branding']>) => void
+  /** Notizen des Trainers zum aktiven Athleten (§74). */
+  athleteNotes: string
+  saveAthleteNotes: (notes: string) => void
+  /** Änderungsnachweis des aktiven Athleten, neueste zuerst (§57). */
+  audit: ValidatedAudit[]
   saveBiometric: (entry: Omit<StoredBiometric, 'id' | 'createdAt'>) => void
   /** Legt ein Ergebnis an und rechnet die abgeleiteten Metriken gleich mit. */
   recordResult: (input: RecordResultInput) => StoredResult | null
@@ -167,9 +177,21 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
     [store.branding, active],
   )
 
-  /** Änderung am aktiven Athleten zurück in den Gesamtbestand schreiben. */
+  /**
+   * Änderung am aktiven Athleten zurück in den Gesamtbestand schreiben,
+   * zusammen mit einem Eintrag im Änderungsnachweis (§57).
+   *
+   * Der Nachweis hält fest, WANN WAS passiert ist — nicht, was vorher
+   * drinstand. Ein Verlaufsspeicher mit allen alten Ständen wäre ein
+   * zweiter Bestand mit denselben personenbezogenen Daten, den niemand
+   * angefordert hat.
+   */
   const commitAthlete = useCallback(
-    (next: AthleteData) => {
+    (next: AthleteData, event?: Omit<ValidatedAudit, 'id' | 'at'>) => {
+      const entry: ValidatedAudit | null = event
+        ? { ...event, id: newId(), at: new Date().toISOString() }
+        : null
+
       commitStore({
         ...store,
         branding: next.branding,
@@ -181,6 +203,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
                 biometrics: next.biometrics,
                 assessments: next.assessments,
                 results: next.results,
+                audit: entry ? [entry, ...athlete.audit].slice(0, AUDIT_LIMIT) : athlete.audit,
               }
             : athlete,
         ),
@@ -217,7 +240,12 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         notes,
         createdAt: new Date().toISOString(),
       }
-      commitAthlete(upsertResult(data, result))
+      commitAthlete(upsertResult(data, result), {
+        action: 'created',
+        entity: 'result',
+        entityId: result.id,
+        label: test.name.de,
+      })
       return result
     },
     [commitAthlete, data],
@@ -287,15 +315,44 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           upsertBiometric(data, { ...entry, id: newId(), createdAt: new Date().toISOString() }),
         ),
       recordResult,
-      deleteResult: (id) => commitAthlete(removeResult(data, id)),
-      saveAssessment: (assessment) => commitAthlete(upsertAssessment(data, assessment)),
-      deleteAssessment: (id) => commitAthlete(removeAssessment(data, id)),
+      deleteResult: (id) => {
+        const removed = data.results.find((r) => r.id === id)
+        commitAthlete(removeResult(data, id), {
+          action: 'deleted',
+          entity: 'result',
+          entityId: id,
+          label: removed ? (getTest(removed.testSlug)?.name.de ?? removed.testSlug) : '',
+        })
+      },
+      saveAssessment: (assessment) =>
+        commitAthlete(upsertAssessment(data, assessment), {
+          action: data.assessments.some((a) => a.id === assessment.id) ? 'edited' : 'created',
+          entity: 'assessment',
+          entityId: assessment.id,
+          label: assessment.title ?? assessment.performedOn,
+        }),
+      deleteAssessment: (id) =>
+        commitAthlete(removeAssessment(data, id), {
+          action: 'deleted',
+          entity: 'assessment',
+          entityId: id,
+          label: data.assessments.find((a) => a.id === id)?.title ?? '',
+        }),
       resetAll: () => {
         clearData()
         setStore(emptyData())
         setStorageBlocked(false)
       },
       loadDemo: () => commitStore(buildDemoData()),
+      athleteNotes: active.notes,
+      saveAthleteNotes: (notes) =>
+        commitStore({
+          ...store,
+          athletes: store.athletes.map((a) =>
+            a.id === active.id ? { ...a, notes: notes.slice(0, 4000) } : a,
+          ),
+        }),
+      audit: active.audit,
       exportJson: () => exportData(store),
       importJson: (json) => {
         const outcome = importData(json)

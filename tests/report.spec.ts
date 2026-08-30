@@ -135,7 +135,7 @@ test.describe('Bericht', () => {
 
     await expect(page.getByRole('button', { name: /Drucken/ })).toBeHidden()
     await expect(page.getByRole('navigation')).toBeHidden()
-    await expect(page.getByRole('heading', { name: 'Leistungsprofil' })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1, name: 'Leistungsprofil' })).toBeVisible()
     await expect(page.getByText('Messwerte').first()).toBeVisible()
 
     // Auf Papier wird schwarz auf weiss gedruckt, auch aus dem Dunkelmodus.
@@ -145,3 +145,47 @@ test.describe('Bericht', () => {
     expect(background).toBe('rgb(255, 255, 255)')
   })
 })
+
+test.describe("Bericht: Aufbau (§33)", () => {
+  test("Deckblatt, Profil, Abdeckung und Methodik stehen drin", async ({ page }) => {
+    await openDemo(page);
+    await page.goto("/bericht", { waitUntil: "domcontentloaded" });
+
+    // Deckblatt mit Athlet und Datum
+    await expect(page.getByText("Athlet", { exact: true }).first()).toBeVisible();
+
+    // Das Leistungsprofil gehört in den Bericht — sechs Zahlen in einer
+    // Tabelle beantworten «wo stehe ich» schlechter als ein Netz.
+    await expect(page.getByRole("heading", { name: /Leistungsprofil/ }).first()).toBeVisible();
+
+    await expect(page.getByRole("heading", { name: "Testabdeckung" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Zur Methode" })).toBeVisible();
+  });
+
+  test("das Profil bleibt ohne Diagrammbibliothek lesbar", async ({ page }) => {
+    // Im Druck ist das Diagramm ein Bild; die Tabellenansicht ist der Weg
+    // zu denselben Zahlen, wenn es nicht lädt.
+    await page.route(/\/assets\/echarts-[^/]*\.js$/, (route) => route.abort());
+    await openDemo(page);
+    await page.goto("/bericht", { waitUntil: "domcontentloaded" });
+
+    await page.getByRole("button", { name: /Als Tabelle/ }).first().click();
+    await expect(page.getByRole("columnheader", { name: "Achse" }).first()).toBeVisible();
+  });
+
+  test("ein Folgetermin wird gegen seinen Vorgänger gestellt", async ({ page }) => {
+    await openDemo(page);
+    await page.goto("/diagnostik", { waitUntil: "domcontentloaded" });
+
+    // Der Demobestand hat mehrere abgeschlossene Termine — der jüngste muss
+    // einen Vorgängervergleich zeigen.
+    await page.getByRole("link", { name: /Abgeschlossen/ }).first().click();
+    await page.waitForURL(/\/diagnostik\/[^/]+$/);
+    await page.getByRole("link", { name: "Auswertung ansehen" }).click();
+    await page.waitForURL(/\/abschluss$/);
+    await page.getByRole("link", { name: "Bericht" }).click();
+    await page.waitForURL(/\/bericht\//);
+
+    await expect(page.getByText(/Gegenüber \d/).first()).toBeVisible();
+  });
+});

@@ -376,3 +376,12 @@ body {
     print-color-adjust: exact;
   }
 }
+
+/* Das Deckblatt bekommt eine eigene Seite, damit der Bericht wie ein
+   Dokument beginnt und nicht wie der Ausdruck einer Webseite. */
+@media print {
+  .report-cover {
+    break-after: page;
+    padding-bottom: 24px;
+  }
+}
