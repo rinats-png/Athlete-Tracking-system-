@@ -427,5 +427,39 @@
       "before": "nur vorher gemessen",
       "after": "nur nachher gemessen"
     }
+  },
+  "insights": {
+    "findings": "Auffälligkeiten",
+    "findingsHint": "Achsen, die deutlich über oder unter deinen übrigen liegen.",
+    "noFindings": "Keine Achse liegt deutlich über oder unter den anderen. Für diese Aussage braucht es mindestens drei belegte Achsen — bei zweien ist die eine immer die schwächere.",
+    "findingsMethod": "Verglichen wird jede Achse gegen das Mittel der übrigen, nicht gegen das Gesamtmittel: sonst zieht eine schwache Achse ihren eigenen Bezugswert mit nach unten. Ab 10 Punkten Abstand wird sie hier genannt. Ungemessene Achsen erscheinen nicht — fehlende Messung ist keine schwache Leistung.",
+    "limiterGap": "liegt {{gap}} Punkte unter deinen übrigen Achsen",
+    "strengthGap": "liegt {{gap}} Punkte über deinen übrigen Achsen",
+    "basedOn_one": "{{count}} Messung",
+    "basedOn_other": "{{count}} Messungen",
+    "evidence": {
+      "strong": "gut belegt",
+      "moderate": "eingeschränkt belegt",
+      "weak": "schwach belegt — bisher nur eine Messung"
+    },
+    "nextAssessment": "Nächster Termin",
+    "nextNone": "Sobald eine Diagnostik abgeschlossen ist, steht hier ein Vorschlag.",
+    "overdue": "überfällig",
+    "nextBasis": {
+      "last_assessment": "{{days}} Tage nach der letzten abgeschlossenen Diagnostik. Der Abstand ist eine Voreinstellung dieser App, keine Vorgabe aus der Literatur: er ist so gewählt, dass zwischen zwei Terminen eine Veränderung entstehen kann, die grösser ist als die Messstreuung.",
+      "last_result": "{{days}} Tage nach deiner letzten Messung — es liegt noch keine abgeschlossene Diagnostik vor.",
+      "none": "Noch keine Grundlage für einen Vorschlag."
+    },
+    "recommendations": "Was das Profil aussagekräftiger macht",
+    "recommendationsHint": "Nach Nutzen für die Aussagekraft geordnet, nicht nach Trainingswichtigkeit.",
+    "noRecommendations": "Nichts offen — das Profil ist vollständig, aktuell und mehrfach belegt.",
+    "recommendation": {
+      "add_profile_data": "Geschlecht und Geburtsdatum ergänzen. Ohne beides gibt es keinen Vergleich mit einer Referenz, nur den Vergleich mit dir selbst.",
+      "measure_missing_axis": "{{dimension}} ist noch nicht gemessen. Solange diese Achse fehlt, ist das Profil ein Ausschnitt.",
+      "retest_stale": "Die letzte Messung liegt {{days}} Tage zurück. Sie beschreibt nicht mehr zwingend deinen heutigen Stand.",
+      "deepen_axis": "{{dimension}} beruht auf einer einzigen Messung. Ein zweiter Wert zeigt, ob der erste die Regel oder der Ausreisser war.",
+      "improve_data_quality": "{{count}} von {{total}} Messungen sind nur mit Vorbehalt lesbar — meist fehlt Körpergewicht oder der Test war nicht ausbelastet.",
+      "address_limiter": "{{dimension}} liegt {{gap}} Punkte unter deinen übrigen Achsen, auf Basis von {{measurements}} Messungen. BASELINE misst und ordnet ein; welche Schlüsse du fürs Training ziehst, entscheidest du oder dein Trainer."
+    }
   }
 }

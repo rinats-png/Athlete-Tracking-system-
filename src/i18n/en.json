@@ -427,5 +427,39 @@
       "before": "measured before only",
       "after": "measured after only"
     }
+  },
+  "insights": {
+    "findings": "Notable axes",
+    "findingsHint": "Axes clearly above or below your others.",
+    "noFindings": "No axis sits clearly above or below the others. This statement needs at least three evidenced axes — with two, one is always the weaker.",
+    "findingsMethod": "Each axis is compared against the mean of the others, not the overall mean: otherwise a weak axis drags down its own reference. It is named here from a gap of 10 points. Unmeasured axes do not appear — a missing measurement is not a weak performance.",
+    "limiterGap": "sits {{gap}} points below your other axes",
+    "strengthGap": "sits {{gap}} points above your other axes",
+    "basedOn_one": "{{count}} measurement",
+    "basedOn_other": "{{count}} measurements",
+    "evidence": {
+      "strong": "well evidenced",
+      "moderate": "partly evidenced",
+      "weak": "weakly evidenced — only one measurement so far"
+    },
+    "nextAssessment": "Next session",
+    "nextNone": "Once an assessment is completed, a suggestion appears here.",
+    "overdue": "overdue",
+    "nextBasis": {
+      "last_assessment": "{{days}} days after your last completed assessment. The interval is a default of this app, not a prescription from the literature: it is chosen so a change larger than measurement spread can occur between two sessions.",
+      "last_result": "{{days}} days after your last measurement — there is no completed assessment yet.",
+      "none": "No basis for a suggestion yet."
+    },
+    "recommendations": "What makes the profile more meaningful",
+    "recommendationsHint": "Ordered by value to the profile's meaningfulness, not by training importance.",
+    "noRecommendations": "Nothing outstanding — the profile is complete, current and evidenced more than once.",
+    "recommendation": {
+      "add_profile_data": "Add sex and date of birth. Without both there is no comparison against a reference, only against yourself.",
+      "measure_missing_axis": "{{dimension}} has not been measured. While this axis is missing, the profile is a fragment.",
+      "retest_stale": "The last measurement is {{days}} days old. It no longer necessarily describes where you stand today.",
+      "deepen_axis": "{{dimension}} rests on a single measurement. A second value shows whether the first was the rule or the outlier.",
+      "improve_data_quality": "{{count}} of {{total}} measurements read only with caveats — usually body weight is missing or the test was not taken to maximum.",
+      "address_limiter": "{{dimension}} sits {{gap}} points below your other axes, based on {{measurements}} measurements. BASELINE measures and contextualises; what you conclude for your training is up to you or your coach."
+    }
   }
 }

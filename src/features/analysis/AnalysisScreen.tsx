@@ -6,6 +6,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { Button } from '@/components/ui/Button'
 import { Link } from 'react-router-dom'
 import { ConfidencePanel } from './ConfidencePanel'
+import { InsightsPanel } from './InsightsPanel'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import {
   baselineComparisons,
@@ -16,6 +17,7 @@ import {
   testTrend,
   type TrendLabel,
 } from '@/domain/analytics'
+import { buildInsights } from '@/domain/insights'
 import { radarProfile } from '@/lib/scoring'
 import { getTest } from '@/data/testCatalog'
 import { formatDate } from '@/lib/format'
@@ -42,9 +44,11 @@ export function AnalysisScreen() {
   const { data } = useAppData()
 
   const confidence = useMemo(() => confidenceScore(data.results), [data.results])
-  const balance = useMemo(
-    () => performanceBalance(radarProfile(data.results, 'population')),
-    [data.results],
+  const axes = useMemo(() => radarProfile(data.results, 'population'), [data.results])
+  const balance = useMemo(() => performanceBalance(axes), [axes])
+  const insights = useMemo(
+    () => buildInsights(axes, data.results, data.assessments, data.profile),
+    [axes, data.results, data.assessments, data.profile],
   )
   const comparisons = useMemo(() => baselineComparisons(data.results), [data.results])
 
@@ -140,6 +144,10 @@ export function AnalysisScreen() {
             )}
           </div>
         </Panel>
+      </div>
+
+      <div className="mt-4">
+        <InsightsPanel report={insights} locale={locale} />
       </div>
 
       <Panel className="mt-4">
