@@ -55,6 +55,7 @@ const result = (
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     createdAt: "2026-05-01T09:05:00.000Z",
     ...overrides,
   }) as StoredResult;
@@ -171,6 +172,7 @@ test.describe("Export und Import", () => {
               performedOn: "2026-05-01",
               status: "completed" as const,
               plannedTestSlugs: ["cooper_12min"],
+              readiness: null,
               createdAt: "2026-05-01T08:00:00.000Z",
               completedAt: "2026-05-01T10:00:00.000Z",
             },

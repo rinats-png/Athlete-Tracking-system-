@@ -57,6 +57,7 @@ const result = (over: Partial<StoredResult> = {}): StoredResult =>
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     createdAt: "2026-04-01T09:00:00.000Z",
     ...over,
   }) as StoredResult;

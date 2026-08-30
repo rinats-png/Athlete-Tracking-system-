@@ -26,7 +26,16 @@ import {
   type StoredResult,
 } from './localStore'
 import { emptyAthlete } from './schema'
-import type { AttemptSelection, LoadReport } from './schema'
+import type { AttemptSelection, LoadReport, ValidatedContext } from './schema'
+
+/** Leere Messbedingungen — nichts erfasst heisst nicht «unbekannt geraten». */
+const EMPTY_CONTEXT: ValidatedContext = {
+  surface: '',
+  temperatureC: null,
+  timeOfDay: null,
+  equipment: '',
+  trainingStatus: '',
+}
 
 /**
  * Zentraler Datenzugriff der App.
@@ -46,6 +55,8 @@ export interface RecordResultInput {
   /** Rohversuche, wenn das Protokoll mehrere vorsieht. */
   attempts?: Record<string, number>[]
   attemptSelection?: AttemptSelection | null
+  /** Bedingungen der Messung. Fehlt, wenn nichts erfasst wurde. */
+  measurementContext?: Partial<ValidatedContext>
   notes?: string
 }
 
@@ -179,7 +190,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
   )
 
   const recordResult = useCallback<AppDataValue['recordResult']>(
-    ({ testSlug, performedAt, values, assessmentId = null, attempts = [], attemptSelection = null, notes }) => {
+    ({ testSlug, performedAt, values, assessmentId = null, attempts = [], attemptSelection = null, measurementContext, notes }) => {
       const test = getTest(testSlug)
       if (!test) return null
 
@@ -202,6 +213,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         assessmentId,
         attempts,
         attemptSelection,
+        context: { ...EMPTY_CONTEXT, ...measurementContext },
         notes,
         createdAt: new Date().toISOString(),
       }

@@ -8,13 +8,14 @@ import { NumberField } from '@/components/ui/NumberField'
 import { DurationField } from '@/components/ui/DurationField'
 import { Timer } from './Timer'
 import { AttemptTable } from './AttemptTable'
+import { ContextFields } from './ContextFields'
 import { aggregateAttempts, attemptContextFor, defaultSelectionFor } from '@/domain/assessment'
 import { getTest } from '@/data/testCatalog'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { deriveMetrics } from '@/lib/metrics/derive'
 import { ageFromBirthDate, formatNumber } from '@/lib/format'
 import { hasErrors, issuesFor, validateTestInput } from '@/domain/validation'
-import type { AttemptSelection } from '@/lib/store/schema'
+import type { AttemptSelection, ValidatedContext } from '@/lib/store/schema'
 import type { AppLocale } from '@/types/domain'
 
 /**
@@ -48,6 +49,7 @@ export function TestRunScreen() {
   const [attempts, setAttempts] = useState<Record<string, number>[]>([])
   const [selection, setSelection] = useState<AttemptSelection>(() => defaultSelectionFor(slug))
   const [notes, setNotes] = useState('')
+  const [measurementContext, setMeasurementContext] = useState<Partial<ValidatedContext>>({})
   const [saved, setSaved] = useState(false)
 
   const attemptContext = attemptContextFor(slug)
@@ -106,6 +108,7 @@ export function TestRunScreen() {
       assessmentId: assessment?.id ?? null,
       attempts: aggregated ? attempts.filter((a) => Object.keys(a).length > 0) : [],
       attemptSelection: aggregated ? selection : null,
+      measurementContext,
       notes: notes.trim() || undefined,
     })
     if (result) {
@@ -244,6 +247,11 @@ export function TestRunScreen() {
                 </ul>
               </div>
             )}
+
+            <ContextFields
+              value={measurementContext}
+              onChange={(patch) => setMeasurementContext((c) => ({ ...c, ...patch }))}
+            />
 
             <label className="block border-t border-line pt-3">
               <span className="label-tag">{t('tests.notes')}</span>

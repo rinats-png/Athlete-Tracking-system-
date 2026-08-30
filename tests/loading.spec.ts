@@ -18,7 +18,9 @@ test.describe('Auslieferung', () => {
     })
 
     await openGuest(page)
-    await page.goto('/profil', { waitUntil: 'networkidle' })
+    await page.goto('/profil', { waitUntil: 'domcontentloaded' })
+    // Kurz Gelegenheit geben, den Baustein zu holen — er darf es nicht.
+    await page.waitForTimeout(600)
 
     expect(requested, 'Diagrammbibliothek auf einer Seite ohne Diagramm').toEqual([])
   })
@@ -30,10 +32,12 @@ test.describe('Auslieferung', () => {
     })
 
     await openDemo(page)
-    await page.waitForLoadState('networkidle')
 
-    expect(requested.length).toBeGreaterThan(0)
+    // Auf das Diagramm warten statt auf `networkidle`: der Service Worker
+    // hält die Verbindung offen, und unter Volllast lief die Wartezeit ins
+    // Zeitlimit, obwohl das Diagramm längst da war.
     await expect(page.getByRole('img', { name: /Leistungsprofil/ })).toBeVisible()
+    expect(requested.length).toBeGreaterThan(0)
   })
 
   test('das Nachladen verschiebt das Layout nicht', async ({ page }) => {
@@ -44,7 +48,6 @@ test.describe('Auslieferung', () => {
     await probe.waitFor()
     const before = await probe.boundingBox()
 
-    await page.waitForLoadState('networkidle')
     await expect(page.getByRole('img', { name: /Leistungsprofil/ })).toBeVisible()
     const after = await probe.boundingBox()
 

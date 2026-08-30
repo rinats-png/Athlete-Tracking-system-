@@ -614,5 +614,46 @@
     "notValidated": "Experimental reference — not reconciled against a published normative sample.",
     "method": "Method",
     "sampleUnknown": "sample not collected"
+  },
+  "readiness": {
+    "title": "Self-assessment",
+    "optional": "Optional — it can be skipped.",
+    "notRecorded": "Not recorded",
+    "record": "Record",
+    "sleepDuration": "Sleep duration",
+    "sleepHint": "As 7:30 or as 7.5 — both are understood.",
+    "sleepInvalid": "Please use hours:minutes (7:30) or a decimal (7.5).",
+    "sleepQuality": "Sleep quality",
+    "fatigue": "Fatigue",
+    "stress": "Stress",
+    "soreness": "Soreness",
+    "motivation": "Motivation",
+    "scale": {
+      "sleepQuality": "1 = very poor, 10 = very good",
+      "fatigue": "1 = rested, 10 = completely spent",
+      "stress": "1 = relaxed, 10 = under heavy strain",
+      "soreness": "1 = none, 10 = severe",
+      "motivation": "1 = none, 10 = very high"
+    },
+    "score": "Readiness",
+    "basis": "{{answered}} of {{total}} questions answered",
+    "noAnswers": "No question answered yet.",
+    "save": "Apply",
+    "skip": "Skip",
+    "disclaimer": "All entries are self-assessments on one day, not measurements. Readiness is the unweighted mean of the questions answered — a weighting could not be justified. BASELINE derives no training clearance and no health assessment from this."
+  },
+  "context": {
+    "title": "Conditions",
+    "hint": "Surface, temperature, equipment — optional, but it helps later when placing an unusual value.",
+    "filled_one": "{{count}} entry",
+    "filled_other": "{{count}} entries",
+    "surface": "Surface",
+    "surfacePlaceholder": "e.g. track, wet grass, indoor",
+    "temperature": "Temperature (°C)",
+    "timeOfDay": "Time of day",
+    "equipment": "Equipment / shoes",
+    "equipmentPlaceholder": "e.g. spikes, lifting shoes",
+    "trainingStatus": "Training status",
+    "trainingStatusPlaceholder": "e.g. rested, in a build phase, post-competition"
   }
 }

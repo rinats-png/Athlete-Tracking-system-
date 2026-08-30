@@ -136,6 +136,7 @@ export function buildDemoData(): StoredData {
       status: 'completed',
       plannedTestSlugs: Object.keys(session.values),
       createdAt: new Date(`${session.date}T08:00:00Z`).toISOString(),
+      readiness: null,
       completedAt: new Date(`${session.date}T19:00:00Z`).toISOString(),
     }
     assessments.push(assessment)
@@ -164,6 +165,7 @@ export function buildDemoData(): StoredData {
         sex: ctx.sex,
         attempts: [],
       attemptSelection: null,
+      context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
       assessmentId: assessment.id,
         createdAt: iso,
       })

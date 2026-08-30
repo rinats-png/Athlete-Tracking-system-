@@ -89,6 +89,7 @@ export function AssessmentCreateScreen() {
       performedOn,
       status: 'in_progress',
       plannedTestSlugs: selected,
+      readiness: null,
       createdAt: now,
       completedAt: null,
     })

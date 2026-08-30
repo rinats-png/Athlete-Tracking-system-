@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft, Check, CircleCheck, Circle, Play, Trash2 } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
+import { ReadinessForm } from './ReadinessForm'
+import { readinessScore } from '@/domain/readiness'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import {
@@ -32,6 +34,7 @@ export function AssessmentDetailScreen() {
   const navigate = useNavigate()
   const { data, saveAssessment, deleteAssessment } = useAppData()
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [readinessOpen, setReadinessOpen] = useState(false)
 
   const assessment = data.assessments.find((a) => a.id === id)
   if (!assessment) {
@@ -100,6 +103,27 @@ export function AssessmentDetailScreen() {
       >
         <div className="h-full bg-accent transition-[width]" style={{ width: `${progress.percent}%` }} />
       </div>
+
+      {/* Selbsteinschätzung vor dem Testen. Sie steht vor dem Testplan,
+          weil sie danach nicht mehr ehrlich erhebbar ist — wer schon
+          gemessen hat, weiss, wie der Tag gelaufen ist. */}
+      {readinessOpen ? (
+        <div className="mb-4">
+          <ReadinessForm
+            value={assessment.readiness}
+            onSave={(readiness) => {
+              saveAssessment({ ...assessment, readiness })
+              setReadinessOpen(false)
+            }}
+            onSkip={() => setReadinessOpen(false)}
+          />
+        </div>
+      ) : (
+        <ReadinessSummary
+          readiness={assessment.readiness}
+          onOpen={() => setReadinessOpen(true)}
+        />
+      )}
 
       <div className="grid gap-4 lg:grid-cols-5">
         <Panel className="lg:col-span-3">
@@ -236,5 +260,41 @@ export function AssessmentDetailScreen() {
         </div>
       </div>
     </>
+  )
+}
+
+/**
+ * Zusammenfassung der Selbsteinschätzung, solange das Formular zu ist.
+ *
+ * Zeigt den Wert immer zusammen mit der Zahl der beantworteten Fragen: 82 %
+ * aus einer Antwort und 82 % aus sechs sind nicht dieselbe Aussage.
+ */
+function ReadinessSummary({
+  readiness,
+  onOpen,
+}: {
+  readiness: import('@/lib/store/localStore').StoredAssessment['readiness']
+  onOpen: () => void
+}) {
+  const { t } = useTranslation()
+  const score = readinessScore(readiness)
+
+  return (
+    <div className="mb-4 flex flex-wrap items-center gap-3 border border-line px-3 py-2.5">
+      <span className="label-tag">{t('readiness.title')}</span>
+      {score.score == null ? (
+        <span className="text-[13px] text-ink-secondary">{t('readiness.notRecorded')}</span>
+      ) : (
+        <span className="text-[13px]">
+          <span className="readout font-display text-[18px] font-bold">{score.score} %</span>{' '}
+          <span className="text-ink-muted">
+            {t('readiness.basis', { answered: score.answered, total: score.total })}
+          </span>
+        </span>
+      )}
+      <Button variant="ghost" size="sm" className="ml-auto" onClick={onOpen}>
+        {score.score == null ? t('readiness.record') : t('actions.edit')}
+      </Button>
+    </div>
   )
 }

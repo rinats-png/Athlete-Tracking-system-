@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 6
+export const CURRENT_SCHEMA_VERSION = 7
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -104,6 +104,54 @@ const biometricSchema = z.object({
  */
 export const attemptSelectionSchema = z.enum(['best', 'worst', 'mean', 'median'])
 
+/**
+ * Bedingungen, unter denen gemessen wurde (§27).
+ *
+ * Alles freiwillig. Der Zweck ist nicht, mehr Daten zu sammeln, sondern
+ * später erklären zu können, warum ein Wert aus der Reihe fällt: ein Sprint
+ * auf nassem Rasen und einer auf der Bahn sind zwei verschiedene Messungen,
+ * und ohne diese Angabe sieht der Unterschied wie Formverlust aus.
+ *
+ * Bewusst KEINE Gesundheitsdaten: Schlaf, Stress und Ermüdung stehen im
+ * Readiness-Block als Selbsteinschätzung auf einer Skala, nicht als
+ * medizinische Messwerte, und werden nirgends klinisch gedeutet (§82).
+ */
+const contextSchema = z.object({
+  /** Untergrund, Halle/Bahn/Rasen — freier Text, weil die Vielfalt gross ist. */
+  surface: z.string().max(60).default(''),
+  /** Temperatur in Grad Celsius. */
+  temperatureC: finite.min(-30).max(55).nullable().default(null),
+  /** Tageszeit als HH:MM. */
+  timeOfDay: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Erwartet HH:MM')
+    .nullable()
+    .default(null),
+  /** Schuhwerk oder Ausrüstung, sofern relevant. */
+  equipment: z.string().max(80).default(''),
+  /** Trainingsstand: ausgeruht, im Aufbau, im Wettkampf … */
+  trainingStatus: z.string().max(60).default(''),
+})
+
+/**
+ * Selbsteinschätzung vor dem Test (§28).
+ *
+ * Skalen von 1 bis 10, ausdrücklich subjektiv. Der Readiness-Wert wird
+ * daraus gebildet und nicht separat eingegeben — sonst stünden zwei Zahlen
+ * nebeneinander, die sich widersprechen können.
+ */
+const readinessSchema = z.object({
+  /** Schlafdauer in Minuten. */
+  sleepMinutes: finite.min(0).max(1080).nullable().default(null),
+  /** Schlafqualität 1–10. */
+  sleepQuality: finite.min(1).max(10).nullable().default(null),
+  fatigue: finite.min(1).max(10).nullable().default(null),
+  stress: finite.min(1).max(10).nullable().default(null),
+  soreness: finite.min(1).max(10).nullable().default(null),
+  motivation: finite.min(1).max(10).nullable().default(null),
+  recordedAt: isoDate,
+})
+
 const resultSchema = z.object({
   id: z.string().min(1),
   testSlug: z.string().min(1),
@@ -119,6 +167,8 @@ const resultSchema = z.object({
   attempts: z.array(z.record(z.string(), finite)).default([]),
   /** Nach welcher Regel `values` aus `attempts` entstanden ist. */
   attemptSelection: attemptSelectionSchema.nullable().default(null),
+  /** Bedingungen der Messung. Leer, solange nichts erfasst wurde. */
+  context: contextSchema.default(() => contextSchema.parse({})),
   notes: z.string().max(2000).optional(),
   createdAt: isoDate,
 })
@@ -131,6 +181,8 @@ const assessmentSchema = z.object({
   status: z.enum(['planned', 'in_progress', 'completed', 'abandoned']).default('in_progress'),
   plannedTestSlugs: z.array(z.string()).default([]),
   notes: z.string().max(4000).optional(),
+  /** Selbsteinschätzung vor dem Termin. Null, wenn übersprungen. */
+  readiness: readinessSchema.nullable().default(null),
   createdAt: isoDate,
   completedAt: isoDate.nullable().default(null),
 })
@@ -203,6 +255,8 @@ export type ValidatedBiometric = z.infer<typeof biometricSchema>
 export type ValidatedProfile = z.infer<typeof profileSchema>
 export type ValidatedBranding = z.infer<typeof brandingSchema>
 export type AttemptSelection = z.infer<typeof attemptSelectionSchema>
+export type ValidatedContext = z.infer<typeof contextSchema>
+export type ValidatedReadiness = z.infer<typeof readinessSchema>
 
 // --- Migrationen -------------------------------------------------------------
 
@@ -300,6 +354,25 @@ export const MIGRATIONS: Migration[] = [
           goal: '',
           constraints: '',
         },
+      })),
+    }),
+  },
+  {
+    from: 6,
+    to: 7,
+    describe: 'Messbedingungen je Ergebnis und Selbsteinschätzung je Termin',
+    run: (data) => ({
+      ...data,
+      version: 7,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        results: (athlete.results ?? []).map((r: any) => ({
+          ...r,
+          // Leer, nicht geraten: rückwirkend ist nicht bekannt, unter welchen
+          // Bedingungen gemessen wurde.
+          context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
+        })),
+        assessments: (athlete.assessments ?? []).map((a: any) => ({ ...a, readiness: null })),
       })),
     }),
   },

@@ -614,5 +614,46 @@
     "notValidated": "Experimentelle Referenz — nicht gegen eine publizierte Normstichprobe abgeglichen.",
     "method": "Methodik",
     "sampleUnknown": "Stichprobe nicht erhoben"
+  },
+  "readiness": {
+    "title": "Selbsteinschätzung",
+    "optional": "Freiwillig — sie lässt sich überspringen.",
+    "notRecorded": "Nicht erfasst",
+    "record": "Erfassen",
+    "sleepDuration": "Schlafdauer",
+    "sleepHint": "Als 7:30 oder als 7,5 — beides wird verstanden.",
+    "sleepInvalid": "Bitte als Stunden:Minuten (7:30) oder als Dezimalzahl (7,5).",
+    "sleepQuality": "Schlafqualität",
+    "fatigue": "Ermüdung",
+    "stress": "Stress",
+    "soreness": "Muskelkater",
+    "motivation": "Motivation",
+    "scale": {
+      "sleepQuality": "1 = sehr schlecht, 10 = sehr gut",
+      "fatigue": "1 = ausgeruht, 10 = völlig erschöpft",
+      "stress": "1 = entspannt, 10 = stark belastet",
+      "soreness": "1 = keiner, 10 = stark",
+      "motivation": "1 = keine, 10 = sehr hoch"
+    },
+    "score": "Bereitschaft",
+    "basis": "{{answered}} von {{total}} Fragen beantwortet",
+    "noAnswers": "Noch keine Frage beantwortet.",
+    "save": "Übernehmen",
+    "skip": "Überspringen",
+    "disclaimer": "Alle Angaben sind Selbsteinschätzungen an einem Tag, keine Messwerte. Die Bereitschaft ist das ungewichtete Mittel der beantworteten Fragen — eine Gewichtung liesse sich nicht begründen. BASELINE leitet daraus keine Trainingsfreigabe und keine gesundheitliche Bewertung ab."
+  },
+  "context": {
+    "title": "Bedingungen",
+    "hint": "Untergrund, Temperatur, Ausrüstung — freiwillig, hilft aber später beim Einordnen ungewöhnlicher Werte.",
+    "filled_one": "{{count}} Angabe",
+    "filled_other": "{{count}} Angaben",
+    "surface": "Untergrund",
+    "surfacePlaceholder": "z. B. Tartanbahn, Rasen nass, Halle",
+    "temperature": "Temperatur (°C)",
+    "timeOfDay": "Uhrzeit",
+    "equipment": "Ausrüstung / Schuhe",
+    "equipmentPlaceholder": "z. B. Spikes, Gewichthebeschuhe",
+    "trainingStatus": "Trainingsstand",
+    "trainingStatusPlaceholder": "z. B. ausgeruht, im Aufbau, nach Wettkampf"
   }
 }
