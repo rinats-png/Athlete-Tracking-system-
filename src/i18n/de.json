@@ -225,7 +225,14 @@
     "loadDemo": "Demodaten laden",
     "reset": "Alle Daten löschen",
     "resetConfirm": "Wirklich alles löschen?",
-    "resetYes": "Ja, löschen"
+    "resetYes": "Ja, löschen",
+    "importError": {
+      "invalid_json": "Die Datei ist kein gültiges JSON. Bitte die unveränderte Exportdatei wählen.",
+      "unknown_format": "Diese Datei ist kein BASELINE-Export. Der vorhandene Bestand wurde nicht angetastet.",
+      "newer_version": "Die Datei stammt aus einer neueren Version von BASELINE. Aktualisiere die App, dann lässt sie sich einlesen — bis dahin bleibt dein Bestand unverändert.",
+      "storage_full": "Der Gerätespeicher reicht nicht aus. Der bisherige Bestand ist unverändert.",
+      "unknown": "Der Import ist fehlgeschlagen. Der bisherige Bestand ist unverändert."
+    }
   },
   "fields": {
     "distanceM": "Distanz",

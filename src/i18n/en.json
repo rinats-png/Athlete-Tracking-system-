@@ -225,7 +225,14 @@
     "loadDemo": "Load demo data",
     "reset": "Delete all data",
     "resetConfirm": "Really delete everything?",
-    "resetYes": "Yes, delete"
+    "resetYes": "Yes, delete",
+    "importError": {
+      "invalid_json": "The file is not valid JSON. Please choose the unmodified export file.",
+      "unknown_format": "This file is not a BASELINE export. Your existing data was left untouched.",
+      "newer_version": "The file comes from a newer version of BASELINE. Update the app to read it — until then your data stays unchanged.",
+      "storage_full": "There is not enough device storage. Your existing data is unchanged.",
+      "unknown": "The import failed. Your existing data is unchanged."
+    }
   },
   "fields": {
     "distanceM": "Distance",

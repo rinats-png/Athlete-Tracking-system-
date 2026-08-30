@@ -215,3 +215,56 @@ test.describe("Export und Import", () => {
     expect(loadData().data.athletes[0].results.map((r) => r.id)).toEqual(["r1"]);
   });
 });
+
+test.describe("Import in der Oberfläche", () => {
+  test("eine unbrauchbare Datei wird benannt statt stillschweigend geschluckt", async ({
+    page,
+  }) => {
+    const { openGuest } = await import("./helpers");
+    await openGuest(page);
+
+    // Erst eigene Daten anlegen — sie müssen den misslungenen Import
+    // überstehen.
+    await page.goto("/tests/standing_broad_jump", {
+      waitUntil: "domcontentloaded",
+    });
+    await page
+      .getByLabel(/Sprungweite|Weite|Distanz/)
+      .first()
+      .fill("2.40");
+    await page.getByRole("button", { name: "Ergebnis speichern" }).click();
+    await page.waitForURL("**/verlauf");
+
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+    await page.getByLabel("Importieren").setInputFiles({
+      name: "kaputt.json",
+      mimeType: "application/json",
+      buffer: Buffer.from("{das ist kein json"),
+    });
+
+    // Der Grund steht da, nicht nur ein allgemeines Scheitern.
+    await expect(page.getByRole("alert")).toContainText(/kein gültiges JSON/);
+
+    // Und der eigene Bestand ist unversehrt.
+    await page.goto("/verlauf", { waitUntil: "domcontentloaded" });
+    await expect(
+      page
+        .getByText(/240\s*cm/)
+        .first(),
+    ).toBeVisible();
+  });
+
+  test("eine fremde JSON-Datei wird als solche erkannt", async ({ page }) => {
+    const { openGuest } = await import("./helpers");
+    await openGuest(page);
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+
+    await page.getByLabel("Importieren").setInputFiles({
+      name: "fremd.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify({ irgendwas: true })),
+    });
+
+    await expect(page.getByRole("alert")).toContainText(/kein BASELINE-Export/);
+  });
+});

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BrandingSettings } from './BrandingSettings'
 import { CoachSettings } from '@/features/coach/CoachSettings'
+import { downloadFile } from '@/lib/export/csv'
 import { useTranslation } from 'react-i18next'
 import { Download, ShieldCheck, Trash2, Upload } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -22,22 +23,26 @@ export function ProfileScreen() {
   const latestWeight = data.biometrics.find((b) => b.bodyWeightKg != null)
   const [weight, setWeight] = useState<number | null>(latestWeight?.bodyWeightKg ?? null)
   const [confirmReset, setConfirmReset] = useState(false)
-  const [importError, setImportError] = useState(false)
+  const [importError, setImportError] = useState<string | null>(null)
 
   const age = ageFromBirthDate(data.profile.birthDate)
 
-  const download = () => {
-    const blob = new Blob([exportJson()], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `baseline-export-${new Date().toISOString().slice(0, 10)}.json`
-    a.click()
-    URL.revokeObjectURL(url)
-  }
+  const download = () =>
+    downloadFile(
+      `baseline-export-${new Date().toISOString().slice(0, 10)}.json`,
+      exportJson(),
+      'application/json',
+    )
 
   const upload = (file: File) => {
-    void file.text().then((text) => setImportError(!importJson(text)))
+    void file.text().then((text) => {
+      // `importJson` liefert einen Befund, kein Wahrheitswert. Die frühere
+      // Prüfung `!importJson(text)` war auf ein Objekt immer falsch — ein
+      // fehlgeschlagener Import wurde damit stillschweigend geschluckt und
+      // der Nutzer glaubte, seine Datei sei eingelesen.
+      const outcome = importJson(text)
+      setImportError(outcome.ok ? null : `profile.importError.${outcome.error ?? 'unknown'}`)
+    })
   }
 
   return (
@@ -201,13 +206,17 @@ export function ProfileScreen() {
                   <input
                     type="file"
                     accept="application/json"
+                    aria-label={t('profile.import')}
                     className="sr-only"
                     onChange={(e) => {
                       const file = e.target.files?.[0]
                       if (file) upload(file)
                     }}
                   />
-                  <span className="inline-flex h-8 cursor-pointer items-center gap-2 border border-line-strong px-3 font-display text-[11px] font-semibold tracking-[0.1em] uppercase">
+                  {/* min-h-11 = 44 px: dieselbe Trefferfläche wie jeder
+                      Knopf. Als <span> im <label> entgeht das Element sonst
+                      der Messung. */}
+                  <span className="inline-flex min-h-11 cursor-pointer items-center gap-2 border border-line-strong px-3 font-display text-[11px] font-semibold tracking-[0.1em] uppercase">
                     <Upload size={14} aria-hidden />
                     {t('profile.import')}
                   </span>
@@ -221,7 +230,9 @@ export function ProfileScreen() {
               </div>
 
               {importError && (
-                <p className="text-[12px] text-critical">{t('profile.importFailed')}</p>
+                <p role="alert" className="text-[12px] text-critical">
+                  {t(importError)}
+                </p>
               )}
 
               <div className="border-t border-line pt-3">
