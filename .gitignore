@@ -14,3 +14,7 @@ baseline-netlify.zip
 .vite
 coverage
 *.tsbuildinfo
+
+# Playwright-Artefakte: Ergebnis eines Laufs, kein Quellstand.
+test-results/
+playwright-report/
