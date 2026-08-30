@@ -1,0 +1,4 @@
+# Single-Page-App: jede Route muss auf index.html zeigen, sonst liefert ein
+# Direktaufruf oder ein Reload eine 404. Gilt auch beim manuellen Deploy per
+# Drag-and-drop, wo netlify.toml nicht ausgewertet wird.
+/*  /index.html  200
