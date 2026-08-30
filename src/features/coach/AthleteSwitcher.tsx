@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Check, ChevronDown, Plus, Users } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Check, ChevronDown, LayoutList, Plus, Users } from 'lucide-react'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { cn } from '@/lib/utils'
 
@@ -85,6 +86,16 @@ export function AthleteSwitcher() {
                 </button>
               </li>
             ))}
+            <li className="border-t border-line">
+              <Link
+                to="/trainer"
+                onClick={() => setOpen(false)}
+                className="flex min-h-11 w-full items-center gap-2 px-3 text-left text-[14px] transition-colors hover:bg-surface-sunken"
+              >
+                <LayoutList size={14} className="shrink-0" aria-hidden />
+                {t('coachDash.title')}
+              </Link>
+            </li>
             <li className="border-t border-line">
               <button
                 type="button"

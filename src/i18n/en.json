@@ -680,5 +680,35 @@
     "attempts": "Attempts per protocol",
     "needs": "Requires",
     "bodyWeight": "Body weight in profile"
+  },
+  "coachDash": {
+    "title": "Coach area",
+    "intro": "One row per athlete, sorted by who needs attention. The list should set the work, not the alphabet.",
+    "athletes": "Athletes",
+    "thisMonth": "Assessments this month",
+    "needsAttention": "Needs attention",
+    "improving": "Improving",
+    "roster": "Athletes",
+    "sortedBy": "Whoever needs attention comes first.",
+    "filterAttention": "Flagged only",
+    "noneFlagged": "Nobody is flagged right now.",
+    "name": "Name",
+    "lastAssessment": "Last assessment",
+    "attention": "Flag",
+    "results_one": "{{count}} measurement",
+    "results_other": "{{count}} measurements",
+    "tooFew": "Too little data",
+    "reason": {
+      "overdue": "Assessment overdue",
+      "declining": "Trend declining",
+      "thin_data": "Thin data",
+      "no_assessment": "No measurement yet"
+    },
+    "method": "The trend is a majority decision across the tests for which one can be computed at all — deliberately not a mean of slopes, because percent per 30 days cannot be meaningfully averaged across different tests. “Needs attention” is not a judgement of the person but a pointer to one of the stated reasons.",
+    "emptyTitle": "No athletes yet",
+    "emptyBody": "Add the first person under “Athletes you coach” in your profile.",
+    "soloTitle": "Coach mode is off",
+    "soloBody": "This area shows several coached athletes side by side. In solo mode it would be a table with exactly one row — the dashboard says that better.",
+    "switchMode": "Change mode"
   }
 }

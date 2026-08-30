@@ -680,5 +680,35 @@
     "attempts": "Versuche laut Protokoll",
     "needs": "Voraussetzung",
     "bodyWeight": "Körpergewicht im Profil"
+  },
+  "coachDash": {
+    "title": "Trainerbereich",
+    "intro": "Eine Zeile je Athlet, sortiert nach Aufmerksamkeitsbedarf. Die Liste soll die Arbeit vorgeben, nicht das Alphabet.",
+    "athletes": "Athleten",
+    "thisMonth": "Diagnostiken diesen Monat",
+    "needsAttention": "Braucht Aufmerksamkeit",
+    "improving": "Steigend",
+    "roster": "Athleten",
+    "sortedBy": "Wer Aufmerksamkeit braucht, steht oben.",
+    "filterAttention": "Nur markierte",
+    "noneFlagged": "Zurzeit ist niemand markiert.",
+    "name": "Name",
+    "lastAssessment": "Letzte Diagnostik",
+    "attention": "Hinweis",
+    "results_one": "{{count}} Messung",
+    "results_other": "{{count}} Messungen",
+    "tooFew": "Zu wenig Daten",
+    "reason": {
+      "overdue": "Termin überfällig",
+      "declining": "Trend fallend",
+      "thin_data": "Datenlage dünn",
+      "no_assessment": "Noch keine Messung"
+    },
+    "method": "Der Trend ist ein Mehrheitsentscheid über die Tests, für die sich überhaupt einer rechnen lässt — bewusst kein Mittelwert der Steigungen, weil sich Prozent je 30 Tage über verschiedene Tests nicht sinnvoll mitteln lassen. «Braucht Aufmerksamkeit» ist keine Bewertung der Person, sondern ein Hinweis auf einen der genannten Gründe.",
+    "emptyTitle": "Noch keine Athleten",
+    "emptyBody": "Leg im Profil unter «Betreute Athleten» die erste Person an.",
+    "soloTitle": "Trainermodus nicht aktiv",
+    "soloBody": "Dieser Bereich zeigt mehrere betreute Athleten nebeneinander. Im Einzelmodus stünde hier eine Tabelle mit genau einer Zeile — das Dashboard sagt dasselbe besser.",
+    "switchMode": "Modus umstellen"
   }
 }

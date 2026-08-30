@@ -7,6 +7,7 @@ import { TestRunScreen } from '@/features/tests/TestRunScreen'
 import { TestDetailScreen } from '@/features/tests/TestDetailScreen'
 import { HistoryScreen } from '@/features/history/HistoryScreen'
 import { AnalysisScreen } from '@/features/analysis/AnalysisScreen'
+import { CoachScreen } from '@/features/coach/CoachScreen'
 import { ReportScreen } from '@/features/report/ReportScreen'
 import { AssessmentListScreen } from '@/features/assessments/AssessmentListScreen'
 import { AssessmentCreateScreen } from '@/features/assessments/AssessmentCreateScreen'
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
       { path: 'tests/:slug/details', element: <TestDetailScreen /> },
       { path: 'verlauf', element: <HistoryScreen /> },
       { path: 'analyse', element: <AnalysisScreen /> },
+      { path: 'trainer', element: <CoachScreen /> },
       { path: 'bericht', element: <ReportScreen /> },
       { path: 'bericht/:id', element: <ReportScreen /> },
       { path: 'profil', element: <ProfileScreen /> },
