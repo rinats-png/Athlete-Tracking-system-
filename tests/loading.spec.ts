@@ -43,6 +43,14 @@ test.describe('Auslieferung', () => {
   test('das Nachladen verschiebt das Layout nicht', async ({ page }) => {
     await openDemo(page)
 
+    // Erst die Schriften abwarten. Sie liegen lokal im Bündel, kommen unter
+    // Volllast aber später als das Diagramm; der Wechsel von der Ersatz- auf
+    // die Zielschrift verschiebt die Zeile um wenige Pixel. Gemessen werden
+    // soll die Verschiebung durch das Diagramm, nicht die durch den
+    // Schriftwechsel — sonst prüft der Fall unter Last etwas anderes als
+    // isoliert.
+    await page.evaluate(() => document.fonts.ready)
+
     // Position eines Elements UNTER dem Diagramm vor und nach dem Nachladen.
     const probe = page.getByRole('button', { name: /Als Tabelle/ }).first()
     await probe.waitFor()
@@ -99,14 +107,19 @@ test.describe('Aktualisierung der installierten App', () => {
 
     // Registrierung ist vorhanden …
     //
-    // Grosszügige Frist: Installation und Aktivierung des Service Workers
-    // konkurrieren im vollen Lauf mit den übrigen Projekten um dieselbe
-    // Maschine. Bei 20 Sekunden ist dieser Fall genau dort einmal
-    // umgekippt, ohne dass an der App etwas falsch war — eine Frist, die
-    // von der Auslastung abhängt, prüft die Auslastung und nicht die App.
-    await page.waitForFunction(() => navigator.serviceWorker.controller !== null, null, {
-      timeout: 90_000,
-    })
+    // Gewartet wird auf die aktive Registrierung, nicht darauf, dass der
+    // Service Worker die Seite bereits übernommen hat. Gebraucht wird für
+    // diesen Fall nur die Registrierung; die Übernahme kommt beim ersten
+    // Aufruf irgendwann danach und hing unter Volllast am Zeitlimit — damit
+    // hätte der Fall die Auslastung geprüft und nicht die App.
+    await page.waitForFunction(
+      async () => {
+        const registration = await navigator.serviceWorker.getRegistration()
+        return registration?.active != null
+      },
+      null,
+      { timeout: 90_000 },
+    )
 
     // … und die Aktualisierungsprüfung hängt an der Rückkehr zur Seite.
     const wired = await page.evaluate(async () => {
