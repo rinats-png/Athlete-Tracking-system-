@@ -9,6 +9,9 @@ import { RecentTests } from '@/features/dashboard/RecentTests'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { toSummaries } from '@/lib/resultView'
+import { HistoryFilters } from './HistoryFilters'
+import { PersonalBests } from './PersonalBests'
+import { EMPTY_QUERY, queryHistory, type HistoryQuery } from '@/domain/historyQuery'
 import { getTest } from '@/data/testCatalog'
 import { formatDate } from '@/lib/format'
 import type { AppLocale } from '@/types/domain'
@@ -18,8 +21,12 @@ export function HistoryScreen() {
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const { data, deleteResult } = useAppData()
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
+  const [query, setQuery] = useState<HistoryQuery>(EMPTY_QUERY)
 
-  const summaries = useMemo(() => toSummaries(data.results, locale), [data.results, locale])
+  /** Gefilterte Auswahl. Dieselbe Funktion nutzt auch der Bericht. */
+  const filtered = useMemo(() => queryHistory(data, query, locale), [data, query, locale])
+
+  const summaries = useMemo(() => toSummaries(filtered, locale), [filtered, locale])
 
   /** Nur Tests mit mindestens zwei Messungen ergeben einen Verlauf. */
   const trendable = useMemo(() => {
@@ -68,6 +75,15 @@ export function HistoryScreen() {
           </Link>
         </Button>
       </header>
+
+      <HistoryFilters
+        query={query}
+        onChange={(patch) => setQuery((q) => ({ ...q, ...patch }))}
+        assessments={data.assessments}
+        resultCount={filtered.length}
+      />
+
+      <PersonalBests results={data.results} locale={locale} />
 
       <div className="grid gap-4 lg:grid-cols-5">
         {activeTest && points.length >= 2 && (

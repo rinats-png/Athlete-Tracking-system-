@@ -4,6 +4,7 @@ import { ArrowLeft, FileText, TriangleAlert } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { nextAssessment } from '@/domain/insights'
 import {
   assessmentProgress,
   coveredDimensions,
@@ -30,7 +31,7 @@ export function AssessmentSummaryScreen() {
   const { id = '' } = useParams()
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
-  const { data } = useAppData()
+  const { data, saveAssessment } = useAppData()
 
   const assessment = data.assessments.find((a) => a.id === id)
   if (!assessment) {
@@ -148,6 +149,35 @@ export function AssessmentSummaryScreen() {
             </table>
           </div>
         )}
+      </Panel>
+
+      {/* §32: der nächste Termin wird festgelegt, nicht nur vorgeschlagen.
+          Der Vorschlag der App ist eine Voreinstellung, die Planung des
+          Athleten ist eine Entscheidung. */}
+      <Panel className="mt-4">
+        <PanelHeader title={t('insights.nextAssessment')} />
+        <div className="flex flex-wrap items-end gap-3 px-4 py-4">
+          <label className="block">
+            <span className="label-tag">{t('assessments.nextDate')}</span>
+            <input
+              type="date"
+              value={
+                assessment.nextAssessmentOn ??
+                nextAssessment(data.assessments, data.results).date ??
+                ''
+              }
+              onChange={(e) =>
+                saveAssessment({ ...assessment, nextAssessmentOn: e.target.value || null })
+              }
+              className="mt-1.5 h-11 border border-line bg-surface-sunken px-3 text-[15px]"
+            />
+          </label>
+          <p className="max-w-[46ch] flex-1 text-[12px] leading-relaxed text-ink-muted">
+            {assessment.nextAssessmentOn
+              ? t('assessments.nextFixed')
+              : t('assessments.nextSuggested')}
+          </p>
+        </div>
       </Panel>
 
       {progress.open.length > 0 && (

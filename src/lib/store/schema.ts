@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 7
+export const CURRENT_SCHEMA_VERSION = 8
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -183,6 +183,15 @@ const assessmentSchema = z.object({
   notes: z.string().max(4000).optional(),
   /** Selbsteinschätzung vor dem Termin. Null, wenn übersprungen. */
   readiness: readinessSchema.nullable().default(null),
+  /**
+   * Geplanter nächster Termin (§32).
+   *
+   * Gespeichert und nicht nur gerechnet: der Vorschlag der App ist eine
+   * Voreinstellung, die Planung des Athleten ist eine Entscheidung. Wer den
+   * Termin verschiebt, will das beim nächsten Öffnen wiederfinden und nicht
+   * den neu gerechneten Vorschlag.
+   */
+  nextAssessmentOn: dayString.nullable().default(null),
   createdAt: isoDate,
   completedAt: isoDate.nullable().default(null),
 })
@@ -373,6 +382,24 @@ export const MIGRATIONS: Migration[] = [
           context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
         })),
         assessments: (athlete.assessments ?? []).map((a: any) => ({ ...a, readiness: null })),
+      })),
+    }),
+  },
+  {
+    from: 7,
+    to: 8,
+    describe: 'Der nächste Termin kann festgelegt statt nur vorgeschlagen werden',
+    run: (data) => ({
+      ...data,
+      version: 8,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        assessments: (athlete.assessments ?? []).map((a: any) => ({
+          ...a,
+          // Leer: bisher hat niemand einen Termin festgelegt, und der
+          // gerechnete Vorschlag ist keine Entscheidung.
+          nextAssessmentOn: null,
+        })),
       })),
     }),
   },

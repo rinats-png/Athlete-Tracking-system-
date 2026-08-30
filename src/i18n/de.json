@@ -208,7 +208,31 @@
     "chooseTest": "Test wählen",
     "manage": "Einträge verwalten",
     "manageHint": "Einzelne Ergebnisse löschen",
-    "deleteResult": "{{test}} löschen"
+    "deleteResult": "{{test}} löschen",
+    "search": "Suche",
+    "searchPlaceholder": "Testname oder Notiz",
+    "category": "Kategorie",
+    "from": "Von",
+    "to": "Bis",
+    "sort": "Sortierung",
+    "sortBy": {
+      "newest": "Neueste zuerst",
+      "oldest": "Älteste zuerst",
+      "best": "Beste zuerst",
+      "worst": "Schwächste zuerst"
+    },
+    "sortNote": "«Bester» misst den Abstand zur eigenen Bestleistung dieses Tests — Rohwerte verschiedener Tests sind keine gemeinsame Skala.",
+    "reset": "Zurücksetzen",
+    "matching_one": "{{count}} Messung",
+    "matching_other": "{{count}} Messungen",
+    "personalBests": "Bestleistungen",
+    "personalBestsCount_one": "{{count}} Test",
+    "personalBestsCount_other": "{{count}} Tests",
+    "staleBest": "über ein Jahr alt",
+    "attempts_one": "{{count}} Messung",
+    "attempts_other": "{{count}} Messungen",
+    "showAll": "Alle {{count}} anzeigen",
+    "showFewer": "Weniger anzeigen"
   },
   "profile": {
     "title": "Profil",
@@ -414,7 +438,10 @@
       "worst": "Schlechtester",
       "mean": "Mittelwert",
       "median": "Median"
-    }
+    },
+    "nextDate": "Nächster Termin",
+    "nextFixed": "Von dir festgelegt. Diese Festlegung überschreibt den Vorschlag der App überall dort, wo der nächste Termin angezeigt wird.",
+    "nextSuggested": "Vorschlag der App auf Basis des üblichen Abstands. Sobald du ein Datum wählst, gilt deine Festlegung."
   },
   "attempts": {
     "title": "Versuche",
@@ -522,7 +549,8 @@
     "nextBasis": {
       "last_assessment": "{{days}} Tage nach der letzten abgeschlossenen Diagnostik. Der Abstand ist eine Voreinstellung dieser App, keine Vorgabe aus der Literatur: er ist so gewählt, dass zwischen zwei Terminen eine Veränderung entstehen kann, die grösser ist als die Messstreuung.",
       "last_result": "{{days}} Tage nach deiner letzten Messung — es liegt noch keine abgeschlossene Diagnostik vor.",
-      "none": "Noch keine Grundlage für einen Vorschlag."
+      "none": "Noch keine Grundlage für einen Vorschlag.",
+      "planned": "Von dir festgelegt."
     },
     "recommendations": "Was das Profil aussagekräftiger macht",
     "recommendationsHint": "Nach Nutzen für die Aussagekraft geordnet, nicht nach Trainingswichtigkeit.",

@@ -324,8 +324,8 @@ export interface NextAssessmentSuggestion {
   date: string | null
   /** Auf welchen Abstand sich der Vorschlag stützt. */
   intervalDays: number
-  /** Woraus der Vorschlag entstanden ist. */
-  basis: 'last_assessment' | 'last_result' | 'none'
+  /** Woraus der Termin stammt. `planned` = vom Nutzer festgelegt. */
+  basis: 'planned' | 'last_assessment' | 'last_result' | 'none'
   /** Liegt der Termin bereits in der Vergangenheit? */
   overdue: boolean
 }
@@ -347,6 +347,24 @@ export function nextAssessment(
   asOf: Date = new Date(),
   intervalDays: number = DEFAULT_RETEST_INTERVAL_DAYS,
 ): NextAssessmentSuggestion {
+  const today = asOf.toISOString().slice(0, 10)
+
+  // Eine Festlegung des Nutzers schlägt jeden gerechneten Vorschlag. Wer
+  // seinen Termin verschoben hat, will ihn wiederfinden und nicht die
+  // Voreinstellung der App.
+  const planned = assessments
+    .filter((a) => a.nextAssessmentOn != null)
+    .sort((a, b) => (b.nextAssessmentOn as string).localeCompare(a.nextAssessmentOn as string))[0]
+
+  if (planned?.nextAssessmentOn) {
+    return {
+      date: planned.nextAssessmentOn,
+      intervalDays,
+      basis: 'planned',
+      overdue: planned.nextAssessmentOn < today,
+    }
+  }
+
   const lastCompleted = assessments
     .filter((a) => a.status === 'completed')
     .sort((a, b) => b.performedOn.localeCompare(a.performedOn))[0]
@@ -368,7 +386,7 @@ export function nextAssessment(
   date.setUTCDate(date.getUTCDate() + intervalDays)
   const iso = date.toISOString().slice(0, 10)
 
-  return { date: iso, intervalDays, basis, overdue: iso < asOf.toISOString().slice(0, 10) }
+  return { date: iso, intervalDays, basis, overdue: iso < today }
 }
 
 // --- Gesamtbild --------------------------------------------------------------

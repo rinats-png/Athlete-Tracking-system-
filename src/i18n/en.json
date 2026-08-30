@@ -208,7 +208,31 @@
     "chooseTest": "Choose test",
     "manage": "Manage entries",
     "manageHint": "Delete individual results",
-    "deleteResult": "Delete {{test}}"
+    "deleteResult": "Delete {{test}}",
+    "search": "Search",
+    "searchPlaceholder": "Test name or note",
+    "category": "Category",
+    "from": "From",
+    "to": "To",
+    "sort": "Sort",
+    "sortBy": {
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "best": "Best first",
+      "worst": "Weakest first"
+    },
+    "sortNote": "“Best” measures the distance to your own best for that test — raw values across different tests are not one scale.",
+    "reset": "Reset",
+    "matching_one": "{{count}} measurement",
+    "matching_other": "{{count}} measurements",
+    "personalBests": "Personal bests",
+    "personalBestsCount_one": "{{count}} test",
+    "personalBestsCount_other": "{{count}} tests",
+    "staleBest": "over a year old",
+    "attempts_one": "{{count}} measurement",
+    "attempts_other": "{{count}} measurements",
+    "showAll": "Show all {{count}}",
+    "showFewer": "Show fewer"
   },
   "profile": {
     "title": "Profile",
@@ -414,7 +438,10 @@
       "worst": "Worst",
       "mean": "Mean",
       "median": "Median"
-    }
+    },
+    "nextDate": "Next session",
+    "nextFixed": "Set by you. This overrides the app's suggestion everywhere the next session is shown.",
+    "nextSuggested": "The app's suggestion based on the usual interval. As soon as you pick a date, your choice applies."
   },
   "attempts": {
     "title": "Attempts",
@@ -522,7 +549,8 @@
     "nextBasis": {
       "last_assessment": "{{days}} days after your last completed assessment. The interval is a default of this app, not a prescription from the literature: it is chosen so a change larger than measurement spread can occur between two sessions.",
       "last_result": "{{days}} days after your last measurement — there is no completed assessment yet.",
-      "none": "No basis for a suggestion yet."
+      "none": "No basis for a suggestion yet.",
+      "planned": "Set by you."
     },
     "recommendations": "What makes the profile more meaningful",
     "recommendationsHint": "Ordered by value to the profile's meaningfulness, not by training importance.",

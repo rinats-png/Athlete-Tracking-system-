@@ -137,6 +137,7 @@ export function buildDemoData(): StoredData {
       plannedTestSlugs: Object.keys(session.values),
       createdAt: new Date(`${session.date}T08:00:00Z`).toISOString(),
       readiness: null,
+      nextAssessmentOn: null,
       completedAt: new Date(`${session.date}T19:00:00Z`).toISOString(),
     }
     assessments.push(assessment)

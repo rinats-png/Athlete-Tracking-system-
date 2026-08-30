@@ -159,12 +159,12 @@ test.describe('Terminvergleich', () => {
     assessments: [
       {
         id: 'a1', title: 'Januar', batterySlug: null, performedOn: '2026-01-10',
-        status: 'completed', plannedTestSlugs: [], readiness: null, createdAt: day('2026-01-10'),
+        status: 'completed', plannedTestSlugs: [], readiness: null, nextAssessmentOn: null, createdAt: day('2026-01-10'),
         completedAt: day('2026-01-10'),
       },
       {
         id: 'a2', title: 'April', batterySlug: null, performedOn: '2026-04-10',
-        status: 'completed', plannedTestSlugs: [], readiness: null, createdAt: day('2026-04-10'),
+        status: 'completed', plannedTestSlugs: [], readiness: null, nextAssessmentOn: null, createdAt: day('2026-04-10'),
         completedAt: day('2026-04-10'),
       },
     ],

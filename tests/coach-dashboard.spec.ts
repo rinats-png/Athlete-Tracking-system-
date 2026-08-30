@@ -139,17 +139,17 @@ test.describe("Kennzahlen des Trainers", () => {
       assessments: [
         {
           id: "x1", title: null, batterySlug: null, performedOn: "2026-05-10",
-          status: "completed", plannedTestSlugs: [], readiness: null,
+          status: "completed", plannedTestSlugs: [], readiness: null, nextAssessmentOn: null,
           createdAt: "2026-05-10T09:00:00.000Z", completedAt: "2026-05-10T18:00:00.000Z",
         },
         {
           id: "x2", title: null, batterySlug: null, performedOn: "2026-05-20",
-          status: "in_progress", plannedTestSlugs: [], readiness: null,
+          status: "in_progress", plannedTestSlugs: [], readiness: null, nextAssessmentOn: null,
           createdAt: "2026-05-20T09:00:00.000Z", completedAt: null,
         },
         {
           id: "x3", title: null, batterySlug: null, performedOn: "2026-04-10",
-          status: "completed", plannedTestSlugs: [], readiness: null,
+          status: "completed", plannedTestSlugs: [], readiness: null, nextAssessmentOn: null,
           createdAt: "2026-04-10T09:00:00.000Z", completedAt: "2026-04-10T18:00:00.000Z",
         },
       ],

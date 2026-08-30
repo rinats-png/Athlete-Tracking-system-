@@ -209,7 +209,7 @@ test.describe('Nächster Termin', () => {
     performedOn: '2026-03-01',
     status: 'completed',
     plannedTestSlugs: [],
-    readiness: null,
+    readiness: null, nextAssessmentOn: null,
     createdAt: '2026-03-01T09:00:00.000Z',
     completedAt: '2026-03-01T18:00:00.000Z',
   }
