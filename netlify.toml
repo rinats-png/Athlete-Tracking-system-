@@ -1,0 +1,36 @@
+# Deployment-Konfiguration für Netlify.
+#
+# Anbinden: In Netlify das Projekt "baseline-diagnostics" öffnen →
+# "Import from Git" → dieses Repository, Branch
+# claude/sports-diagnostics-pwa-jnqy42. Build-Befehl und Publish-Verzeichnis
+# kommen aus dieser Datei, es ist nichts weiter einzutragen.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Der Publishable Key ist bewusst öffentlich — abgesichert wird über RLS in
+  # der Datenbank, nicht über Geheimhaltung des Clients.
+  VITE_SUPABASE_URL = "https://bsbionvnsvqghaqijmpl.supabase.co"
+  VITE_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_5HjIDmeWLD0lr1Gy9r4E8A_q-YHpSvE"
+
+# Single-Page-App: jede Route muss auf index.html zeigen, sonst liefert ein
+# Direktaufruf oder ein Reload eine 404.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Der Service Worker darf nicht aus dem Cache kommen, sonst hängt die App
+# nach einem Deploy auf der alten Version fest.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
