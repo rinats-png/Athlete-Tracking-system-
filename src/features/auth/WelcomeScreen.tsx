@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, PlayCircle, ShieldCheck } from 'lucide-react'
 import { Atmosphere } from './Atmosphere'
-import { LanguageToggle } from '@/components/ui/LanguageToggle'
-import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { cn } from '@/lib/utils'
 
 /**
@@ -21,14 +19,13 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
       <Atmosphere />
 
       <div className="relative flex min-h-dvh flex-col px-4 pt-4 pb-6 sm:px-6">
+        {/* Auch hier ohne Umschalter: die Sprache kommt aus dem Browser, das
+            Erscheinungsbild aus der Systemeinstellung. Wer etwas anderes will,
+            stellt es im Profil ein — einmal. */}
         <header className="flex items-center justify-between">
           <span className="font-display text-[17px] font-bold tracking-[0.18em] uppercase">
             Baseline
           </span>
-          <div className="flex items-center gap-2">
-            <LanguageToggle />
-            <ThemeToggle />
-          </div>
         </header>
 
         <div className="flex flex-1 items-end justify-center">

@@ -5,6 +5,7 @@ import { ArrowLeft, Download, Printer } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { disciplineById } from '@/data/sportProfiles'
+import { FORMULA_REGISTRY } from '@/domain/formulaRegistry'
 import { resultsForAssessment, coveredDimensions, missingDimensions } from '@/domain/assessment'
 import { baselineComparisons, confidenceScore, resultPercentile, testTrend } from '@/domain/analytics'
 import { buildInsights } from '@/domain/insights'
@@ -63,6 +64,10 @@ export function ReportScreen() {
   const covered = coveredDimensions(results)
   const missing = missingDimensions(results)
   const coverage = useMemo(() => coverageByDimension(data.results), [data.results])
+  const usedFormulas = useMemo(() => {
+    const keys = new Set(results.flatMap((r) => Object.keys(r.metrics ?? {})))
+    return FORMULA_REGISTRY.filter((f) => keys.has(f.metricKey))
+  }, [results])
 
   /**
    * Der vorherige abgeschlossene Termin (§33). Ohne ihn ist ein Bericht eine
@@ -493,6 +498,27 @@ export function ReportScreen() {
           <li>{t('report.methodDerived')}</li>
         </ul>
       </Section>
+
+      {/* Herkunft jeder gerechneten Zahl, die in diesem Bericht vorkommt.
+          Aufgeführt wird nur, was tatsächlich verwendet wurde — ein Register
+          fremder Formeln unter einem Bericht wäre Beiwerk, das Beleglage
+          vortäuscht. Vorläufige Rechnungen stehen mit dem Vermerk da, was
+          sie ersetzen müsste (§81). */}
+      {usedFormulas.length > 0 && (
+        <Section title={t('report.formulas')}>
+          <ul className="space-y-1.5 text-[11px] leading-relaxed text-ink-secondary">
+            {usedFormulas.map((f) => (
+              <li key={f.metricKey}>
+                <span className="font-semibold text-ink">{t(`metrics.${f.metricKey}`)}</span>{' '}
+                — {f.formula}.{' '}
+                {f.reference
+                  ? t('report.formulaSource', { source: f.reference })
+                  : t('report.formulaProvisional')}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
       <footer className="mt-6 border-t border-line pt-3 text-[10px] leading-relaxed text-ink-muted">
         <p>{t('assessments.disclaimer')}</p>

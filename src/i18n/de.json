@@ -318,7 +318,10 @@
     "discipline": "Disziplin",
     "disciplineNeedsCategory": "Zuerst einen Sportbereich wählen.",
     "disciplineHint": "Steuert die vorgeschlagene Testbatterie. Freiwillig — ohne Auswahl bleibt der allgemeine Vorschlag.",
-    "disciplineResetConfirm": "Ein anderer Sportbereich löst die gewählte Disziplin. Fortfahren?"
+    "disciplineResetConfirm": "Ein anderer Sportbereich löst die gewählte Disziplin. Fortfahren?",
+    "provisionalTitle": "Vorläufig gerechnete Werte",
+    "provisionalHint": "Diese Zahlen beruhen auf einer Festlegung dieser App, nicht auf einer publizierten Formel. Sie stehen hier, damit niemand sie für belegt hält.",
+    "provisionalWeights": "Ebenfalls vorläufig: die Anforderungsgewichte der Disziplinen. Sie sind aus der Belastungsstruktur der jeweiligen Disziplin abgeleitet — Wettkampfdauer, Pausenstruktur, dominante Arbeitsweise — und nicht aus einer Quelle übernommen."
   },
   "fields": {
     "distanceM": "Distanz",
@@ -640,7 +643,10 @@
     "brandingNote": "Diese Angaben bleiben auf diesem Gerät und erscheinen nur im Bericht. Sie verändern keine Messwerte und keine Auswertung.",
     "athlete": "Athlet",
     "versusPrevious": "Gegenüber {{date}}",
-    "priority": "Priorität {{rank}}"
+    "priority": "Priorität {{rank}}",
+    "formulas": "Herkunft der Rechenwerte",
+    "formulaSource": "Quelle: {{source}}.",
+    "formulaProvisional": "Vorläufig: von dieser App festgelegt, keine publizierte Formel."
   },
   "coach": {
     "title": "Betreute Athleten",

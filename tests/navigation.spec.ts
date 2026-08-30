@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { bottomBarBox, headerNavVisible, openDemo } from './helpers'
+import { bottomBarBox, headerNavVisible, openDemo, openGuest } from './helpers'
 
 /**
  * Die Zusage lautet: die Navigation ist immer erreichbar. Diese Datei prüft
@@ -107,3 +107,35 @@ test.describe('Navigation dauerhaft erreichbar', () => {
     expect(current.join(' ')).toMatch(/Verlauf/i)
   })
 })
+
+test.describe("Aufgeräumte Kopfzeile", () => {
+  test("Sprache und Erscheinungsbild stehen im Profil, nicht in der Kopfzeile", async ({
+    page,
+  }) => {
+    // Beides wird einmal eingestellt und danach jahrelang nicht angefasst.
+    // Eine Einstellung, die auf jedem Bildschirm Platz belegt, obwohl sie
+    // einmal im Jahr gebraucht wird, ist Ballast.
+    await openGuest(page);
+
+    const header = page.locator("header").first();
+    await expect(header.getByRole("radiogroup", { name: /Sprache|Language/ })).toHaveCount(0);
+    await expect(header.getByRole("radiogroup", { name: /Darstellung|Appearance/ })).toHaveCount(0);
+
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("radiogroup", { name: /Sprache|Language/ })).toBeVisible();
+    await expect(
+      page.getByRole("radiogroup", { name: /Darstellung|Appearance/ }),
+    ).toBeVisible();
+  });
+
+  test("die Einstellung bleibt nach dem Umschalten erhalten", async ({ page }) => {
+    await openGuest(page);
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+    await page.getByRole("radio", { name: /^Hell$|^Light$/ }).click();
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("radio", { name: /^Hell$|^Light$/ })).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
+  });
+});

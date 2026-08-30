@@ -13,6 +13,7 @@ import { NumberField } from '@/components/ui/NumberField'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { provisionalFormulas } from '@/domain/formulaRegistry'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { ageFromBirthDate, formatDate } from '@/lib/format'
 import type { AppLocale, Sex } from '@/types/domain'
@@ -180,6 +181,29 @@ export function ProfileScreen() {
                 </ul>
               )}
             </div>
+          </Panel>
+
+          {/* Offenlegung, welche Zahlen dieser App noch auf einer eigenen
+              Festlegung beruhen. Sie steht sichtbar in der App und nicht nur
+              im Code: eine gesetzte Zahl sieht sonst aus wie eine belegte
+              (§81). */}
+          <Panel>
+            <PanelHeader
+              title={t('profile.provisionalTitle')}
+              subtitle={t('profile.provisionalHint')}
+            />
+            <ul className="space-y-2.5 px-4 py-4">
+              {provisionalFormulas().map((f) => (
+                <li key={f.metricKey} className="text-[13px] leading-relaxed">
+                  <span className="font-semibold">{t(`metrics.${f.metricKey}`)}</span>
+                  <span className="block text-ink-secondary">{f.formula}.</span>
+                  <span className="block text-[12px] text-ink-muted">{f.note}</span>
+                </li>
+              ))}
+              <li className="border-t border-line pt-2.5 text-[12px] leading-relaxed text-ink-muted">
+                {t('profile.provisionalWeights')}
+              </li>
+            </ul>
           </Panel>
 
           <Panel>

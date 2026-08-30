@@ -318,7 +318,10 @@
     "discipline": "Discipline",
     "disciplineNeedsCategory": "Choose a sport category first.",
     "disciplineHint": "Drives the suggested test battery. Optional — without a selection the general battery stays.",
-    "disciplineResetConfirm": "Changing the category clears the selected discipline. Continue?"
+    "disciplineResetConfirm": "Changing the category clears the selected discipline. Continue?",
+    "provisionalTitle": "Provisionally calculated values",
+    "provisionalHint": "These numbers rest on a definition made by this app, not on a published formula. They are listed here so nobody mistakes them for documented ones.",
+    "provisionalWeights": "Also provisional: the requirement weights of the disciplines. They are derived from each discipline’s load structure — competition duration, rest pattern, dominant mode of work — and not taken from a source."
   },
   "fields": {
     "distanceM": "Distance",
@@ -640,7 +643,10 @@
     "brandingNote": "These details stay on this device and appear only in the report. They change no measurement and no analysis.",
     "athlete": "Athlete",
     "versusPrevious": "Versus {{date}}",
-    "priority": "Priority {{rank}}"
+    "priority": "Priority {{rank}}",
+    "formulas": "Origin of the calculated values",
+    "formulaSource": "Source: {{source}}.",
+    "formulaProvisional": "Provisional: defined by this app, not a published formula."
   },
   "coach": {
     "title": "Athletes you coach",

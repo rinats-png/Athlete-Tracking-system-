@@ -1,6 +1,4 @@
 import { useTranslation } from 'react-i18next'
-import { LanguageToggle } from '@/components/ui/LanguageToggle'
-import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { AthleteSwitcher } from '@/features/coach/AthleteSwitcher'
 import { NAV_ITEMS, type NavKey } from './BottomNav'
 import { cn } from '@/lib/utils'
@@ -8,6 +6,13 @@ import { cn } from '@/lib/utils'
 /**
  * Kopfzeile der App-Hülle. Bleibt beim Scrollen stehen, weil die
  * Moduswahl darunter ständig gebraucht wird.
+ *
+ * Sprache und Erscheinungsbild stehen bewusst NICHT hier, sondern im Profil.
+ * Beides wird einmal eingestellt und danach jahrelang nicht mehr angefasst —
+ * eine Einstellung, die auf jedem Bildschirm dauerhaft Platz belegt, obwohl
+ * sie einmal im Jahr gebraucht wird, ist Ballast. Die Kopfzeile trägt jetzt
+ * nur noch, was zur Arbeit mit den Daten gehört: Marke, Navigation, Athlet
+ * und der Hinweis, in welchem Modus die App läuft.
  */
 export function AppHeader({
   mode,
@@ -61,8 +66,6 @@ export function AppHeader({
           >
             {t(mode === 'demo' ? 'badges.demo' : 'badges.guest')}
           </span>
-          <LanguageToggle />
-          <ThemeToggle />
         </div>
       </div>
     </header>
