@@ -11,10 +11,14 @@ const button = cva(
         outline: 'border border-line-strong text-ink hover:bg-accent-quiet hover:border-accent',
         ghost: 'text-ink-secondary hover:text-ink hover:bg-accent-quiet',
       },
+      // Alle Grössen halten die 44-px-Untergrenze für Trefferflächen ein.
+      // Ein optisch kleinerer Knopf mit unsichtbar vergrösserter Fläche wäre
+      // für Tastatur und Screenreader nicht dasselbe.
       size: {
-        sm: 'h-8 px-3 text-[11px]',
-        md: 'h-10 px-4 text-xs',
-        icon: 'h-9 w-9',
+        sm: 'h-11 px-3 text-[11px]',
+        md: 'h-11 px-4 text-xs',
+        lg: 'h-12 px-5 text-[13px]',
+        icon: 'h-11 w-11',
       },
     },
     defaultVariants: { variant: 'outline', size: 'md' },

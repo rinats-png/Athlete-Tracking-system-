@@ -68,10 +68,13 @@ export function BodyFigure({
 
   return (
     <div className={cn('relative aspect-[640/1120]', className)}>
+      {/* Die Figur ist Darstellung, kein Bedienelement: ohne
+          pointer-events-none deckt sie als grösste Fläche der Seite alles
+          darunter ab und fängt Zeigereingaben ab, die ihr nicht gelten. */}
       <img
         src={bodyAsset}
         alt={ariaLabel}
-        className="absolute inset-0 h-full w-full object-contain"
+        className="pointer-events-none absolute inset-0 h-full w-full object-contain select-none"
         draggable={false}
       />
 
@@ -106,7 +109,10 @@ export function BodyFigure({
       )}
 
       {onSelect && (
-        <div className="absolute inset-0">
+        // pointer-events-none am Container: die Ebene spannt sich über die
+        // gesamte Figur und würde sonst als unsichtbare Fläche im Weg stehen.
+        // Zeigereingaben nimmt ausschliesslich der einzelne Knopf an.
+        <div className="pointer-events-none absolute inset-0">
           {DIMENSIONS.flatMap((dimension) => {
             const { x, y, rx, ry, mirrored } = REGIONS[dimension]
             return (mirrored ? [x, 100 - x] : [x]).map((cx) => (
@@ -119,7 +125,7 @@ export function BodyFigure({
                 aria-label={t(`dimensions.${dimension}`)}
                 aria-pressed={highlighted === dimension}
                 onClick={() => onSelect(dimension)}
-                className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
+                className="pointer-events-auto absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
                 style={{
                   left: `${cx}%`,
                   top: `${y}%`,

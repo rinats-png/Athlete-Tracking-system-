@@ -19,8 +19,12 @@ Tactical) und für Trainer, die Diagnostik als Dienstleistung anbieten.
 | Referenzwerte (Perzentile) | eingespielt, **Platzhalterdaten** — siehe unten |
 | Scoring-Funktionen (Radar, Delta) | stehen in der Datenbank |
 | Designsystem, Theme-Switch, i18n | steht |
-| Athlete-Dashboard | steht, läuft mit Demodaten |
-| Auth, Test-Engine, Trainer-Hub, PDF, Stripe | noch nicht begonnen |
+| Athlete-Dashboard | steht, rechnet aus echten Daten |
+| Gastmodus (ohne Konto, rein lokal) | steht |
+| Test-Engine (Katalog, Protokoll, Timer, Erfassung) | steht |
+| Verlauf, Profil, Export/Import | steht |
+| End-to-End-Tests (5 Geräteprofile) | 65 grün |
+| Auth, Trainer-Hub, PDF, Stripe | noch nicht begonnen |
 
 ## Loslegen
 
@@ -30,13 +34,53 @@ cp .env.example .env.local     # enthält bereits URL + Publishable Key
 npm run dev
 ```
 
-Ohne Sitzung läuft das Dashboard mit Demodaten (`src/data/demo.ts`) — das
-Layout ist also ohne Login beurteilbar.
+Zwei Wege hinein, beide ohne Konto und ohne Datenerfassung:
+
+* **Ohne Konto starten** — leerer Bestand. Profil anlegen, Tests erfassen, das
+  Leistungsprofil entsteht. Alles bleibt im `localStorage` des Geräts.
+* **Demo ansehen** — mitgelieferter Beispielsatz über drei Diagnostiktermine,
+  ebenfalls lokal und bearbeitbar.
+
+Anmeldung über E-Mail, Apple oder Google folgt später und ersetzt lediglich die
+Datenschicht (`src/lib/store/`).
+
+## Warum die Daten doppelt liegen
+
+Testkatalog (`src/data/testCatalog.ts`), Referenzwerte (`src/data/norms.ts`)
+und die Scoring-Logik (`src/lib/scoring.ts`) existieren sowohl im Client als
+auch in der Datenbank. Das ist Absicht: der Gastmodus muss ohne Netz und ohne
+Konto vollständig funktionieren, inklusive Perzentilvergleich.
+
+Einzige Quelle der Wahrheit bleiben die Migrationen. `tests/scoring.spec.ts`
+nagelt die Übereinstimmung an festen Beispielwerten fest — weichen beide
+Seiten ab, zeigen Gast- und Kontomodus unterschiedliche Zahlen für dieselbe
+Leistung.
+
+## Navigationsleiste
+
+Vier Festlegungen, jede gegen einen gemessenen Fehler:
+
+1. **`fixed`, nicht `sticky`.** Sticky hängt am Containing Block; gemessen
+   stand die Leiste je nach Layoutkontext mal am Viewportrand, mal bei y=1198
+   in einem 844 px hohen Viewport.
+2. **Verankerung am sichtbaren Viewport** (`useVisualViewportInset`).
+   `fixed; bottom: 0` verankert am initialen Containing Block. Fällt der mit
+   dem sichtbaren Bereich auseinander — offene Tastatur, Zoom, mobile
+   Emulation — sitzt die Leiste ausserhalb des Bildschirms. Gemessen auf einem
+   emulierten Pixel 7: Verankerung bei 1178 px, sichtbar 839 px, Leiste
+   339 px unterhalb des Randes. Das war der eigentliche Fehler.
+3. **`lg:hidden`, nicht `sm:hidden`.** Ein Telefon im Querformat ist 844 px
+   breit; beim Drehen verschwand die Navigation. Ab `lg` übernimmt die
+   Kopfzeile.
+4. **Platz reservieren.** Eine fixierte Leiste nimmt keinen Platz im Fluss
+   ein — die App-Hülle gibt ihn über `--bottom-nav-h` plus Safe Area.
 
 ```bash
-npm run build     # Produktionsbuild inkl. Service Worker
-npm run lint      # Typprüfung
-npm run db:types  # Supabase-Typen erzeugen (braucht supabase CLI + Link)
+npm run build      # Produktionsbuild inkl. Service Worker
+npm run lint       # Typprüfung
+npm test           # End-to-End über fünf Geräteprofile
+npm run test:phone # nur das Telefonprofil
+npm run db:types   # Supabase-Typen erzeugen (braucht supabase CLI + Link)
 ```
 
 ## Architektur
@@ -183,10 +227,9 @@ Werte gehen später in den PDF-Report.
 
 ## Nächste Schritte
 
-1. Auth (Magic Link + Passwort), Onboarding mit Rollenwahl und Biometrie
-2. Test-Engine: geführter Modus mit Timer, Stufentabelle, Ergebniserfassung
-3. Dashboard an echte Daten hängen (React-Query-Hooks auf die RPCs)
-4. Trainer-Hub: Klientenliste, Einladungen, Branding
+1. Auth (Magic Link + Passwort) und Übernahme des lokalen Bestands ins Konto
+2. Laktat-Stufentest: braucht eine eigene Stufentabelle in der Erfassung
+3. Trainer-Hub: Klientenliste, Einladungen, Branding
 5. PDF-Report als Edge Function (Delta-Vergleich, Trainingszonen, White-Label)
 6. Stripe: Einmalkauf B2C, Abo B2B, Webhook schreibt `entitlements`
 7. Health Connect / Apple Health für Herzfrequenzen

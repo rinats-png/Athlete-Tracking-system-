@@ -17,7 +17,7 @@ export function ThemeToggle() {
     <div
       role="radiogroup"
       aria-label={t('theme.label')}
-      className="inline-flex border border-line bg-surface-sunken p-[2px]"
+      className="inline-flex items-stretch border border-line bg-surface-sunken p-[2px]"
     >
       {OPTIONS.map(({ value, icon: Icon, labelKey }) => {
         const selected = preference === value
@@ -30,7 +30,8 @@ export function ThemeToggle() {
             title={t(labelKey)}
             onClick={() => setPreference(value)}
             className={cn(
-              'flex h-7 w-8 items-center justify-center transition-colors',
+              // 44 px Kantenlänge: die kleinste zuverlässig treffbare Fläche.
+              'flex h-11 w-11 items-center justify-center transition-colors',
               selected ? 'bg-accent text-accent-ink' : 'text-ink-muted hover:text-ink',
             )}
           >

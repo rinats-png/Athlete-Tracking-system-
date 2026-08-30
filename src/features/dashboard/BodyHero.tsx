@@ -38,10 +38,13 @@ export function BodyHero({
   axes,
   mode,
   locale,
+  index,
 }: {
   axes: RadarAxis[]
   mode: ScoreMode
   locale: AppLocale
+  /** Gesamtindex, zentral berechnet — die Ansicht rechnet nicht selbst. */
+  index: number | null
 }) {
   const { t } = useTranslation()
   const [selected, setSelected] = useState<PerformanceDimension | null>(null)
@@ -54,15 +57,7 @@ export function BodyHero({
     [axes],
   )
 
-  // Gesamtindex = Mittel der belegten Achsen. Bewusst nur aus vorhandenen
-  // Werten gebildet und zusammen mit der Abdeckung ausgewiesen — sonst sähe
-  // ein halb getestetes Profil aus wie ein schlechtes.
   const covered = axes.filter((axis) => axis.score != null)
-  const index =
-    covered.length === 0
-      ? null
-      : covered.reduce((sum, axis) => sum + (axis.score as number), 0) / covered.length
-
   const detail = selected ? axes.find((axis) => axis.dimension === selected) : null
   const unit = mode === 'population' ? t('units.percentile') : t('units.percentOfBest')
 

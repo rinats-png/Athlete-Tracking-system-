@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import { BarChart3, House, Play, Settings, Trophy } from 'lucide-react'
+import { BarChart3, ClipboardList, House, Play, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
 
 /**
  * Primäre Navigation auf Touch-Geräten.
@@ -22,16 +23,36 @@ import { cn } from '@/lib/utils'
  *    Betrag als Innenabstand, sonst liegt der letzte Inhalt unerreichbar
  *    unter der Leiste. Eine fixierte Leiste nimmt keinen Platz im Fluss ein —
  *    der Platz muss ihr gegeben werden.
+ *
+ * 4. Verankerung am sichtbaren Viewport. `fixed; bottom: 0` verankert am
+ *    Layout-Viewport; fallen beide auseinander (Tastatur, Zoom, mobile
+ *    Emulation), sitzt die Leiste ausserhalb des Bildschirms. Der gemessene
+ *    Abstand wird deshalb aufaddiert.
  */
 
 export const NAV_ITEMS = [
-  { key: 'dashboard', icon: House },
-  { key: 'history', icon: BarChart3 },
-  { key: 'challenges', icon: Trophy },
-  { key: 'settings', icon: Settings },
+  { key: 'dashboard', icon: House, path: '/' },
+  { key: 'tests', icon: ClipboardList, path: '/tests' },
+  { key: 'history', icon: BarChart3, path: '/verlauf' },
+  { key: 'profile', icon: User, path: '/profil' },
 ] as const
 
 export type NavKey = (typeof NAV_ITEMS)[number]['key']
+
+export function pathForNavKey(key: NavKey): string {
+  return NAV_ITEMS.find((item) => item.key === key)?.path ?? '/'
+}
+
+/**
+ * Aktiver Eintrag aus dem Pfad. Längster Treffer gewinnt, damit
+ * /tests/cooper_12min ebenfalls den Tab "Tests" markiert.
+ */
+export function navKeyForPath(pathname: string): NavKey {
+  const match = [...NAV_ITEMS]
+    .filter((item) => item.path !== '/' && pathname.startsWith(item.path))
+    .sort((a, b) => b.path.length - a.path.length)[0]
+  return match?.key ?? 'dashboard'
+}
 
 export function BottomNav({
   active = 'dashboard',
@@ -43,10 +64,13 @@ export function BottomNav({
   onStartTest?: () => void
 }) {
   const { t } = useTranslation()
+  const visualInset = useVisualViewportInset()
 
   return (
     <nav
       aria-label={t('nav.primary')}
+      style={visualInset > 0 ? { bottom: visualInset } : undefined}
+      data-visual-inset={visualInset || undefined}
       className={cn(
         'fixed inset-x-0 bottom-0 z-40 lg:hidden',
         'border-t border-line bg-plane/95 backdrop-blur-md',

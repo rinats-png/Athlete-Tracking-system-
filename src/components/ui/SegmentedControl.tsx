@@ -29,7 +29,7 @@ export function SegmentedControl<T extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className={cn('inline-flex border border-line bg-surface-sunken p-[2px]', className)}
+      className={cn('inline-flex items-stretch border border-line bg-surface-sunken p-[2px]', className)}
     >
       {options.map((option) => {
         const selected = option.value === value
@@ -42,7 +42,7 @@ export function SegmentedControl<T extends string>({
             title={option.hint}
             onClick={() => onChange(option.value)}
             className={cn(
-              'px-3 py-1.5 font-display text-[11px] font-semibold uppercase tracking-[0.1em] transition-colors',
+              'h-11 min-w-11 px-3 font-display text-[11px] font-semibold tracking-[0.1em] whitespace-nowrap uppercase transition-colors',
               selected
                 ? 'bg-accent text-accent-ink'
                 : 'text-ink-muted hover:text-ink',

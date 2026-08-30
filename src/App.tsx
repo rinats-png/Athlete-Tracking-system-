@@ -1,31 +1,56 @@
-import { useEffect, useState } from 'react'
-import { AthleteDashboard } from '@/features/dashboard/AthleteDashboard'
+import { useCallback, useState } from 'react'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import { AppShell } from '@/routes/AppShell'
+import { DashboardScreen } from '@/features/dashboard/DashboardScreen'
+import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
+import { TestRunScreen } from '@/features/tests/TestRunScreen'
+import { HistoryScreen } from '@/features/history/HistoryScreen'
+import { ProfileScreen } from '@/features/profile/ProfileScreen'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
-import { isSupabaseConfigured, supabase } from '@/lib/supabase'
+import { AppDataProvider, readMode, writeMode, type AppMode } from '@/lib/store/AppDataProvider'
 
 /**
  * Einstiegspunkt.
  *
- * Ohne Sitzung erscheint der Willkommensbildschirm; von dort führt "Demo
- * ansehen" ins Dashboard mit Demodaten, damit das Produkt ohne Konto
- * beurteilbar bleibt. Sobald Auth steht, ersetzt die echte Sitzung diesen Weg.
+ * Zwei Wege in die App, beide ohne Konto und ohne Datenerfassung:
+ *   'guest' — leerer Bestand, alles bleibt auf dem Gerät
+ *   'demo'  — mitgelieferter Beispielsatz, ebenfalls lokal und bearbeitbar
+ *
+ * Der gewählte Modus überlebt einen Reload, damit man nicht bei jedem Start
+ * wieder auf dem Willkommensbildschirm landet. Anmeldung über E-Mail, Apple
+ * oder Google folgt später und ersetzt lediglich die Datenschicht.
  */
-export default function App() {
-  const [hasSession, setHasSession] = useState(false)
-  const [demoRequested, setDemoRequested] = useState(false)
 
-  useEffect(() => {
-    if (!supabase) return
-    void supabase.auth.getSession().then(({ data }) => setHasSession(Boolean(data.session)))
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) =>
-      setHasSession(Boolean(session)),
-    )
-    return () => listener.subscription.unsubscribe()
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AppShell />,
+    children: [
+      { index: true, element: <DashboardScreen /> },
+      { path: 'tests', element: <TestCatalogScreen /> },
+      { path: 'tests/:slug', element: <TestRunScreen /> },
+      { path: 'verlauf', element: <HistoryScreen /> },
+      { path: 'profil', element: <ProfileScreen /> },
+      { path: '*', element: <Navigate to="/" replace /> },
+    ],
+  },
+])
+
+export default function App() {
+  const [mode, setMode] = useState<AppMode | null>(() => readMode())
+
+  const enter = useCallback((next: AppMode) => {
+    writeMode(next)
+    setMode(next)
   }, [])
 
-  if (!hasSession && !demoRequested) {
-    return <WelcomeScreen onDemo={() => setDemoRequested(true)} />
+  if (!mode) {
+    return <WelcomeScreen onEnter={enter} />
   }
 
-  return <AthleteDashboard demo={!isSupabaseConfigured || !hasSession} />
+  return (
+    <AppDataProvider mode={mode}>
+      <RouterProvider router={router} />
+    </AppDataProvider>
+  )
 }

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { ArrowRight, Apple, Mail } from 'lucide-react'
+import { ArrowRight, PlayCircle, ShieldCheck } from 'lucide-react'
 import { Atmosphere } from './Atmosphere'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
  * Wasserzeichen. Die Eingabefelder kommen erst nach der Wahl des Verfahrens —
  * der erste Bildschirm verkauft, er fragt noch nichts ab.
  */
-export function WelcomeScreen({ onDemo }: { onDemo: () => void }) {
+export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') => void }) {
   const { t } = useTranslation()
 
   return (
@@ -61,38 +61,30 @@ export function WelcomeScreen({ onDemo }: { onDemo: () => void }) {
               </p>
 
               <div className="mt-6 space-y-2">
-                <GlassButton variant="primary">
-                  <Mail size={15} strokeWidth={2} aria-hidden />
-                  {t('welcome.continueEmail')}
+                {/* Der Weg hinein führt ohne Konto und ohne Datenerfassung.
+                    Anmeldung folgt später und ersetzt nur die Datenschicht. */}
+                <GlassButton variant="primary" onClick={() => onEnter('guest')}>
+                  <ShieldCheck size={16} strokeWidth={2} aria-hidden />
+                  {t('welcome.startLocal')}
                 </GlassButton>
-                <div className="grid grid-cols-2 gap-2">
-                  <GlassButton>
-                    <Apple size={15} strokeWidth={2} aria-hidden />
-                    Apple
-                  </GlassButton>
-                  <GlassButton>
-                    <GoogleMark />
-                    Google
-                  </GlassButton>
-                </div>
+                <GlassButton onClick={() => onEnter('demo')}>
+                  <PlayCircle size={16} strokeWidth={2} aria-hidden />
+                  {t('welcome.viewDemo')}
+                </GlassButton>
               </div>
 
               <div
-                className="mt-5 flex items-center justify-between pt-4 text-[13px]"
+                className="mt-5 flex items-start gap-2 pt-4 text-[12px] leading-relaxed text-ink-secondary"
                 style={{ borderTop: '1px solid var(--glass-border)' }}
               >
-                <button type="button" className="text-ink-secondary hover:text-ink">
-                  {t('welcome.haveAccount')}
-                </button>
-                <button
-                  type="button"
-                  onClick={onDemo}
-                  className="inline-flex items-center gap-1.5 font-medium text-accent-text hover:opacity-80"
-                >
-                  {t('welcome.viewDemo')}
-                  <ArrowRight size={14} strokeWidth={2.2} aria-hidden />
-                </button>
+                <ShieldCheck size={15} className="mt-px shrink-0 text-accent-text" aria-hidden />
+                <span>{t('welcome.privacy')}</span>
               </div>
+
+              <p className="mt-3 flex items-center gap-1.5 text-[12px] text-ink-muted">
+                {t('welcome.accountLater')}
+                <ArrowRight size={13} strokeWidth={2} aria-hidden />
+              </p>
             </div>
 
             <p className="mt-4 px-1 text-center text-[11px] leading-relaxed text-ink-muted">
@@ -108,13 +100,16 @@ export function WelcomeScreen({ onDemo }: { onDemo: () => void }) {
 function GlassButton({
   children,
   variant = 'glass',
+  onClick,
 }: {
   children: React.ReactNode
   variant?: 'primary' | 'glass'
+  onClick?: () => void
 }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className={cn(
         'flex h-12 w-full items-center justify-center gap-2 rounded-[12px] font-display text-[13px] font-semibold tracking-[0.08em] uppercase transition-colors',
         variant === 'primary'
@@ -132,28 +127,3 @@ function GlassButton({
   )
 }
 
-function GoogleMark() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden>
-      <path
-        fill="currentColor"
-        d="M21.6 12.2c0-.7-.06-1.36-.18-2H12v3.79h5.38a4.6 4.6 0 0 1-2 3.02v2.5h3.24c1.89-1.74 2.98-4.3 2.98-7.31Z"
-      />
-      <path
-        fill="currentColor"
-        opacity=".75"
-        d="M12 22c2.7 0 4.96-.9 6.62-2.43l-3.24-2.51c-.9.6-2.05.96-3.38.96-2.6 0-4.8-1.76-5.59-4.12H3.06v2.6A10 10 0 0 0 12 22Z"
-      />
-      <path
-        fill="currentColor"
-        opacity=".55"
-        d="M6.41 13.9a6 6 0 0 1 0-3.8V7.5H3.06a10 10 0 0 0 0 9l3.35-2.6Z"
-      />
-      <path
-        fill="currentColor"
-        opacity=".85"
-        d="M12 5.98c1.47 0 2.79.5 3.83 1.5l2.87-2.87C16.95 2.99 14.7 2 12 2a10 10 0 0 0-8.94 5.5l3.35 2.6C7.2 7.74 9.4 5.98 12 5.98Z"
-      />
-    </svg>
-  )
-}

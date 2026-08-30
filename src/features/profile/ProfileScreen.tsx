@@ -1,0 +1,258 @@
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Download, ShieldCheck, Trash2, Upload } from 'lucide-react'
+import { Panel, PanelHeader } from '@/components/ui/Panel'
+import { Button } from '@/components/ui/Button'
+import { NumberField } from '@/components/ui/NumberField'
+import { SegmentedControl } from '@/components/ui/SegmentedControl'
+import { LanguageToggle } from '@/components/ui/LanguageToggle'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { useAppData } from '@/lib/store/AppDataProvider'
+import { ageFromBirthDate, formatDate } from '@/lib/format'
+import type { AppLocale, Sex } from '@/types/domain'
+
+export function ProfileScreen() {
+  const { t, i18n } = useTranslation()
+  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { data, saveProfile, saveBiometric, resetAll, loadDemo, exportJson, importJson, mode } =
+    useAppData()
+
+  const latestWeight = data.biometrics.find((b) => b.bodyWeightKg != null)
+  const [weight, setWeight] = useState<number | null>(latestWeight?.bodyWeightKg ?? null)
+  const [confirmReset, setConfirmReset] = useState(false)
+  const [importError, setImportError] = useState(false)
+
+  const age = ageFromBirthDate(data.profile.birthDate)
+
+  const download = () => {
+    const blob = new Blob([exportJson()], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `baseline-export-${new Date().toISOString().slice(0, 10)}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const upload = (file: File) => {
+    void file.text().then((text) => setImportError(!importJson(text)))
+  }
+
+  return (
+    <>
+      <header className="mb-4">
+        <span className="label-tag">{t('nav.profile')}</span>
+        <h1 className="mt-1 font-display text-[30px] leading-none font-bold sm:text-[38px]">
+          {t('profile.title')}
+        </h1>
+      </header>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Panel>
+          <PanelHeader title={t('profile.person')} subtitle={t('profile.personHint')} />
+          <div className="space-y-4 px-4 py-4">
+            <label className="block">
+              <span className="label-tag">{t('profile.firstName')}</span>
+              <input
+                value={data.profile.firstName}
+                onChange={(e) => saveProfile({ firstName: e.target.value })}
+                autoComplete="off"
+                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px] outline-none focus:border-accent"
+              />
+            </label>
+
+            <div>
+              <span className="label-tag">{t('profile.sex')}</span>
+              <div className="mt-1.5">
+                <SegmentedControl<Sex>
+                  label={t('profile.sex')}
+                  value={data.profile.sex ?? 'other'}
+                  onChange={(sex) => saveProfile({ sex })}
+                  options={[
+                    { value: 'male', label: t('profile.male') },
+                    { value: 'female', label: t('profile.female') },
+                    { value: 'other', label: t('profile.otherSex') },
+                  ]}
+                />
+              </div>
+              <p className="mt-1.5 text-[11px] leading-snug text-ink-muted">
+                {t('profile.sexHint')}
+              </p>
+            </div>
+
+            <label className="block">
+              <span className="label-tag">{t('profile.birthDate')}</span>
+              <input
+                type="date"
+                value={data.profile.birthDate ?? ''}
+                max={new Date().toISOString().slice(0, 10)}
+                onChange={(e) => saveProfile({ birthDate: e.target.value || null })}
+                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
+              />
+              {age != null && (
+                <span className="mt-1 block text-[11px] text-ink-muted">
+                  {age} {t('dashboard.years')}
+                </span>
+              )}
+            </label>
+
+            <NumberField
+              label={t('profile.height')}
+              unit="cm"
+              value={data.profile.heightCm}
+              onChange={(v) => saveProfile({ heightCm: v })}
+              min={80}
+              max={260}
+              step={1}
+            />
+            <NumberField
+              label={t('dashboard.restingHr')}
+              unit="bpm"
+              value={data.profile.restingHr}
+              onChange={(v) => saveProfile({ restingHr: v })}
+              min={20}
+              max={120}
+              step={1}
+            />
+            <NumberField
+              label={t('dashboard.maxHr')}
+              unit="bpm"
+              value={data.profile.maxHr}
+              onChange={(v) => saveProfile({ maxHr: v })}
+              min={100}
+              max={240}
+              step={1}
+            />
+          </div>
+        </Panel>
+
+        <div className="space-y-4">
+          <Panel>
+            <PanelHeader title={t('profile.bodyWeight')} subtitle={t('profile.bodyWeightHint')} />
+            <div className="space-y-3 px-4 py-4">
+              <NumberField
+                label={t('dashboard.bodyWeight')}
+                unit="kg"
+                value={weight}
+                onChange={setWeight}
+                min={20}
+                max={400}
+                step={0.1}
+              />
+              <Button
+                variant="primary"
+                size="md"
+                className="w-full"
+                disabled={weight == null}
+                onClick={() =>
+                  weight != null &&
+                  saveBiometric({
+                    measuredOn: new Date().toISOString().slice(0, 10),
+                    bodyWeightKg: weight,
+                    bodyFatPercent: null,
+                    restingHr: data.profile.restingHr,
+                  })
+                }
+              >
+                {t('profile.saveWeight')}
+              </Button>
+
+              {data.biometrics.length > 0 && (
+                <ul className="border-t border-line pt-2">
+                  {data.biometrics.slice(0, 5).map((entry) => (
+                    <li key={entry.id} className="flex justify-between py-1 text-[13px]">
+                      <span className="text-ink-secondary">
+                        {formatDate(entry.measuredOn, locale)}
+                      </span>
+                      <span className="readout">{entry.bodyWeightKg} kg</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </Panel>
+
+          <Panel>
+            <PanelHeader title={t('profile.appearance')} />
+            <div className="flex flex-wrap items-center gap-3 px-4 py-4">
+              <ThemeToggle />
+              <LanguageToggle />
+            </div>
+          </Panel>
+
+          <Panel>
+            <PanelHeader title={t('profile.data')} />
+            <div className="space-y-3 px-4 py-4">
+              <p className="flex gap-2 text-[13px] leading-relaxed text-ink-secondary">
+                <ShieldCheck size={16} className="mt-px shrink-0 text-accent-text" aria-hidden />
+                <span>{t('profile.privacy')}</span>
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                <Button variant="outline" size="sm" onClick={download}>
+                  <Download size={14} aria-hidden />
+                  {t('profile.export')}
+                </Button>
+
+                <label className="inline-flex">
+                  <span className="sr-only">{t('profile.import')}</span>
+                  <input
+                    type="file"
+                    accept="application/json"
+                    className="sr-only"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (file) upload(file)
+                    }}
+                  />
+                  <span className="inline-flex h-8 cursor-pointer items-center gap-2 border border-line-strong px-3 font-display text-[11px] font-semibold tracking-[0.1em] uppercase">
+                    <Upload size={14} aria-hidden />
+                    {t('profile.import')}
+                  </span>
+                </label>
+
+                {mode === 'guest' && data.results.length === 0 && (
+                  <Button variant="ghost" size="sm" onClick={loadDemo}>
+                    {t('profile.loadDemo')}
+                  </Button>
+                )}
+              </div>
+
+              {importError && (
+                <p className="text-[12px] text-critical">{t('profile.importFailed')}</p>
+              )}
+
+              <div className="border-t border-line pt-3">
+                {confirmReset ? (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[13px] text-ink-secondary">
+                      {t('profile.resetConfirm')}
+                    </span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        resetAll()
+                        setConfirmReset(false)
+                      }}
+                    >
+                      {t('profile.resetYes')}
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => setConfirmReset(false)}>
+                      {t('actions.cancel')}
+                    </Button>
+                  </div>
+                ) : (
+                  <Button variant="ghost" size="sm" onClick={() => setConfirmReset(true)}>
+                    <Trash2 size={14} aria-hidden />
+                    {t('profile.reset')}
+                  </Button>
+                )}
+              </div>
+            </div>
+          </Panel>
+        </div>
+      </div>
+    </>
+  )
+}

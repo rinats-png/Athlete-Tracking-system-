@@ -4,18 +4,16 @@
     "tagline": "Performance diagnostics"
   },
   "nav": {
+    "primary": "Main navigation",
     "dashboard": "Dashboard",
     "tests": "Tests",
     "history": "History",
-    "clients": "Clients",
-    "settings": "Settings",
-    "challenges": "Challenges",
-    "primary": "Main navigation",
+    "profile": "Profile",
     "short": {
       "dashboard": "Home",
+      "tests": "Tests",
       "history": "History",
-      "challenges": "Compete",
-      "settings": "Profile"
+      "profile": "Profile"
     }
   },
   "actions": {
@@ -25,7 +23,11 @@
     "showTable": "Show table",
     "showChart": "Show chart",
     "compare": "Compare",
-    "seeAll": "See all"
+    "seeAll": "See all",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "backToCatalog": "Back to catalog",
+    "reportSoon": "PDF report ships with the coach hub"
   },
   "theme": {
     "label": "Appearance",
@@ -94,7 +96,11 @@
     "testCount_other": "{{count}} tests",
     "retestHint": "Recommended interval: 4 months",
     "keyData": "Key data",
-    "strongestIs": "Strongest axis: {{dimension}}"
+    "strongestIs": "Strongest axis: {{dimension}}",
+    "anonymousAthlete": "Athlete",
+    "emptyTitle": "No measurements yet",
+    "emptyBody": "Complete your first test and your performance profile starts building. Relative strength and percentiles also need sex, birth date and body weight in your profile.",
+    "completeProfile": "Complete profile"
   },
   "table": {
     "dimension": "Axis",
@@ -109,7 +115,10 @@
   },
   "badges": {
     "personalBest": "Personal best",
-    "demo": "Demo"
+    "demo": "Demo",
+    "guest": "Local",
+    "demoHint": "Sample data. Changes stay on this device.",
+    "guestHint": "Your data stays on this device only."
   },
   "units": {
     "percentile": "percentile",
@@ -122,7 +131,10 @@
     "continueEmail": "Continue with email",
     "haveAccount": "I have an account",
     "viewDemo": "View demo",
-    "legal": "By continuing you agree to the terms of use and the privacy policy."
+    "legal": "By continuing you agree to the terms of use and the privacy policy.",
+    "startLocal": "Start without an account",
+    "privacy": "No account, no email address, no transfer. Your measurements stay on this device and can be exported or deleted at any time.",
+    "accountLater": "Accounts and sync are coming later"
   },
   "body": {
     "figureLabel": "Body view with highlighted performance dimensions",
@@ -131,5 +143,103 @@
     "detail_population_other": "From {{count}} tests, compared with trained adults of your age and sex.",
     "detail_personalBest_one": "From {{count}} test, measured against your personal best.",
     "detail_personalBest_other": "From {{count}} tests, measured against your personal best."
+  },
+  "storage": {
+    "blocked": "Device storage is unavailable (private mode or full). Entries apply to this session only."
+  },
+  "tests": {
+    "title": "Test catalog",
+    "intro": "Standardised tests with the protocol built in. After each run, 1RM, VO2max, relative strength and pace are computed automatically.",
+    "filter": "Category",
+    "all": "All",
+    "catalog": "All tests",
+    "count": "{{count}} tests",
+    "lastRun": "last {{date}}",
+    "neverRun": "not run yet",
+    "notFound": "This test does not exist.",
+    "protocol": "Protocol",
+    "enterResult": "Enter result",
+    "performedOn": "Date",
+    "derived": "Computed from this",
+    "save": "Save result",
+    "saved": "Saved",
+    "missing": "Still missing: {{fields}}",
+    "needBodyWeight": "Body weight is missing for relative strength.",
+    "addBodyWeight": "Add it in your profile",
+    "repsWarning": "Above {{limit}} repetitions the 1RM estimate becomes markedly less accurate.",
+    "timer": "Timer",
+    "start": "Start",
+    "pause": "Pause",
+    "reset": "Reset"
+  },
+  "history": {
+    "title": "History",
+    "count": "{{count}} results",
+    "emptyTitle": "No history yet",
+    "emptyBody": "Once you record tests, every result and per-test trend appears here.",
+    "allResults": "All results",
+    "chooseTest": "Choose test",
+    "manage": "Manage entries",
+    "manageHint": "Delete individual results",
+    "deleteResult": "Delete {{test}}"
+  },
+  "profile": {
+    "title": "Profile",
+    "person": "Person",
+    "personHint": "Sex and age are required for the reference values",
+    "firstName": "First name",
+    "sex": "Sex",
+    "male": "Male",
+    "female": "Female",
+    "otherSex": "Other",
+    "sexHint": "There are no sound reference tables for \"other\" — the percentile view stays empty, everything else works.",
+    "birthDate": "Date of birth",
+    "height": "Height",
+    "bodyWeight": "Body weight",
+    "bodyWeightHint": "Kept as a time series: relative strength needs the weight at test time",
+    "saveWeight": "Save weight",
+    "appearance": "Appearance",
+    "data": "Your data",
+    "privacy": "Everything lives in this browser only. Nothing is transmitted and no account is created. Clearing browser data also clears these values — that is what the export is for.",
+    "export": "Export",
+    "import": "Import",
+    "importFailed": "The file could not be read.",
+    "loadDemo": "Load demo data",
+    "reset": "Delete all data",
+    "resetConfirm": "Really delete everything?",
+    "resetYes": "Yes, delete"
+  },
+  "fields": {
+    "distanceM": "Distance",
+    "durationSeconds": "Time",
+    "loadKg": "Load",
+    "reps": "Repetitions",
+    "rounds": "Rounds",
+    "partialReps": "Partial reps",
+    "calories": "Calories",
+    "level": "Level",
+    "shuttle": "Shuttle",
+    "avgHeartRate": "Avg HR",
+    "maxHeartRate": "Max HR",
+    "rpe": "RPE (1–10)"
+  },
+  "metrics": {
+    "vo2max_ml_kg_min": "VO2max",
+    "one_rm_kg": "1RM",
+    "relative_strength_bw": "Relative strength",
+    "sinclair_points": "Sinclair points",
+    "avg_pace_s_per_500m": "Pace per 500 m",
+    "avg_power_w": "Avg power",
+    "watts_per_kg": "Watts per kg",
+    "total_reps": "Total reps",
+    "reps_per_minute": "Reps per minute",
+    "calories_per_minute": "kcal per minute"
+  },
+  "categoriesShort": {
+    "endurance": "Endurance",
+    "max_strength": "Max strength",
+    "strength_endurance": "Strength end.",
+    "power": "Power",
+    "agility": "Agility"
   }
 }

@@ -9,11 +9,12 @@ import { cn } from '@/lib/utils'
  * Moduswahl darunter ständig gebraucht wird.
  */
 export function AppHeader({
-  demo,
+  mode,
   active = 'dashboard',
   onNavigate,
 }: {
-  demo: boolean
+  /** 'guest' = lokale Daten ohne Konto, 'demo' = mitgelieferter Beispielsatz. */
+  mode: 'guest' | 'demo'
   active?: NavKey
   onNavigate?: (key: NavKey) => void
 }) {
@@ -52,11 +53,12 @@ export function AppHeader({
           </nav>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          {demo && (
-            <span className="hidden border border-line px-2 py-1 font-display text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted sm:inline-block">
-              {t('badges.demo')}
-            </span>
-          )}
+          <span
+            className="hidden border border-line px-2 py-1 font-display text-[10px] font-semibold tracking-[0.14em] uppercase text-ink-muted sm:inline-block"
+            title={t(mode === 'demo' ? 'badges.demoHint' : 'badges.guestHint')}
+          >
+            {t(mode === 'demo' ? 'badges.demo' : 'badges.guest')}
+          </span>
           <LanguageToggle />
           <ThemeToggle />
         </div>

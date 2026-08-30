@@ -9,7 +9,7 @@ export function LanguageToggle() {
     <div
       role="radiogroup"
       aria-label={t('language.label')}
-      className="inline-flex border border-line bg-surface-sunken p-[2px]"
+      className="inline-flex items-stretch border border-line bg-surface-sunken p-[2px]"
     >
       {(['de', 'en'] as const).map((code) => (
         <button
@@ -19,7 +19,7 @@ export function LanguageToggle() {
           aria-checked={active === code}
           onClick={() => void i18n.changeLanguage(code)}
           className={cn(
-            'h-7 px-2 font-display text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors',
+            'h-11 w-11 font-display text-[11px] font-semibold tracking-[0.12em] uppercase transition-colors',
             active === code ? 'bg-accent text-accent-ink' : 'text-ink-muted hover:text-ink',
           )}
         >

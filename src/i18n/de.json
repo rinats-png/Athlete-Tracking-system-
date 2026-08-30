@@ -4,18 +4,16 @@
     "tagline": "Leistungsdiagnostik"
   },
   "nav": {
+    "primary": "Hauptnavigation",
     "dashboard": "Dashboard",
     "tests": "Tests",
     "history": "Verlauf",
-    "clients": "Klienten",
-    "settings": "Einstellungen",
-    "challenges": "Wettkämpfe",
-    "primary": "Hauptnavigation",
+    "profile": "Profil",
     "short": {
       "dashboard": "Start",
+      "tests": "Tests",
       "history": "Verlauf",
-      "challenges": "Wettkampf",
-      "settings": "Profil"
+      "profile": "Profil"
     }
   },
   "actions": {
@@ -25,7 +23,11 @@
     "showTable": "Als Tabelle",
     "showChart": "Als Diagramm",
     "compare": "Vergleichen",
-    "seeAll": "Alle ansehen"
+    "seeAll": "Alle ansehen",
+    "edit": "Bearbeiten",
+    "cancel": "Abbrechen",
+    "backToCatalog": "Zum Testkatalog",
+    "reportSoon": "PDF-Report kommt mit dem Trainer-Hub"
   },
   "theme": {
     "label": "Darstellung",
@@ -94,7 +96,11 @@
     "testCount_other": "{{count}} Tests",
     "retestHint": "Empfohlener Abstand: 4 Monate",
     "keyData": "Stammdaten",
-    "strongestIs": "Stärkste Achse: {{dimension}}"
+    "strongestIs": "Stärkste Achse: {{dimension}}",
+    "anonymousAthlete": "Athlet",
+    "emptyTitle": "Noch keine Messung",
+    "emptyBody": "Absolviere den ersten Test, dann entsteht dein Leistungsprofil. Für Relativkraft und Perzentile brauchst du ausserdem Geschlecht, Geburtsdatum und Körpergewicht im Profil.",
+    "completeProfile": "Profil vervollständigen"
   },
   "table": {
     "dimension": "Achse",
@@ -109,7 +115,10 @@
   },
   "badges": {
     "personalBest": "Bestleistung",
-    "demo": "Demo"
+    "demo": "Demo",
+    "guest": "Lokal",
+    "demoHint": "Beispieldaten. Änderungen bleiben auf diesem Gerät.",
+    "guestHint": "Deine Daten liegen ausschliesslich auf diesem Gerät."
   },
   "units": {
     "percentile": "Perzentil",
@@ -122,7 +131,10 @@
     "continueEmail": "Mit E-Mail starten",
     "haveAccount": "Ich habe ein Konto",
     "viewDemo": "Demo ansehen",
-    "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen und der Datenschutzerklärung zu."
+    "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen und der Datenschutzerklärung zu.",
+    "startLocal": "Ohne Konto starten",
+    "privacy": "Kein Konto, keine E-Mail-Adresse, keine Übertragung. Deine Messwerte bleiben auf diesem Gerät und lassen sich jederzeit exportieren oder löschen.",
+    "accountLater": "Konto und Synchronisierung folgen später"
   },
   "body": {
     "figureLabel": "Körperdarstellung mit hervorgehobenen Leistungsdimensionen",
@@ -131,5 +143,103 @@
     "detail_population_other": "Aus {{count}} Tests, verglichen mit trainierten Erwachsenen deines Alters und Geschlechts.",
     "detail_personalBest_one": "Aus {{count}} Test, gemessen an deiner bisherigen Bestleistung.",
     "detail_personalBest_other": "Aus {{count}} Tests, gemessen an deiner bisherigen Bestleistung."
+  },
+  "storage": {
+    "blocked": "Der Gerätespeicher ist nicht verfügbar (privater Modus oder voll). Eingaben gelten nur für diese Sitzung."
+  },
+  "tests": {
+    "title": "Testkatalog",
+    "intro": "Standardisierte Tests mit hinterlegtem Protokoll. Nach der Durchführung werden 1RM, VO2max, Relativkraft und Pace automatisch berechnet.",
+    "filter": "Kategorie",
+    "all": "Alle",
+    "catalog": "Alle Tests",
+    "count": "{{count}} Tests",
+    "lastRun": "zuletzt {{date}}",
+    "neverRun": "noch nicht durchgeführt",
+    "notFound": "Diesen Test gibt es nicht.",
+    "protocol": "Protokoll",
+    "enterResult": "Ergebnis erfassen",
+    "performedOn": "Datum",
+    "derived": "Wird daraus berechnet",
+    "save": "Ergebnis speichern",
+    "saved": "Gespeichert",
+    "missing": "Fehlt noch: {{fields}}",
+    "needBodyWeight": "Für die Relativkraft fehlt das Körpergewicht.",
+    "addBodyWeight": "Im Profil eintragen",
+    "repsWarning": "Ab {{limit}} Wiederholungen wird die 1RM-Schätzung deutlich ungenauer.",
+    "timer": "Timer",
+    "start": "Start",
+    "pause": "Pause",
+    "reset": "Zurücksetzen"
+  },
+  "history": {
+    "title": "Verlauf",
+    "count": "{{count}} Ergebnisse",
+    "emptyTitle": "Noch kein Verlauf",
+    "emptyBody": "Sobald du Tests erfasst hast, erscheinen hier alle Ergebnisse und die Verläufe je Test.",
+    "allResults": "Alle Ergebnisse",
+    "chooseTest": "Test wählen",
+    "manage": "Einträge verwalten",
+    "manageHint": "Einzelne Ergebnisse löschen",
+    "deleteResult": "{{test}} löschen"
+  },
+  "profile": {
+    "title": "Profil",
+    "person": "Person",
+    "personHint": "Geschlecht und Alter werden für die Referenzwerte gebraucht",
+    "firstName": "Vorname",
+    "sex": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "otherSex": "Divers",
+    "sexHint": "Für „Divers\" gibt es keine belastbaren Referenztabellen — der Perzentilvergleich bleibt dann leer, alles andere funktioniert.",
+    "birthDate": "Geburtsdatum",
+    "height": "Körpergrösse",
+    "bodyWeight": "Körpergewicht",
+    "bodyWeightHint": "Als Zeitreihe: Relativkraft braucht das Gewicht zum Testzeitpunkt",
+    "saveWeight": "Gewicht speichern",
+    "appearance": "Darstellung",
+    "data": "Deine Daten",
+    "privacy": "Alles liegt ausschliesslich in diesem Browser. Es wird nichts übertragen und kein Konto angelegt. Beim Löschen der Browserdaten sind auch diese Werte weg — dafür der Export.",
+    "export": "Exportieren",
+    "import": "Importieren",
+    "importFailed": "Die Datei liess sich nicht lesen.",
+    "loadDemo": "Demodaten laden",
+    "reset": "Alle Daten löschen",
+    "resetConfirm": "Wirklich alles löschen?",
+    "resetYes": "Ja, löschen"
+  },
+  "fields": {
+    "distanceM": "Distanz",
+    "durationSeconds": "Zeit",
+    "loadKg": "Gewicht",
+    "reps": "Wiederholungen",
+    "rounds": "Runden",
+    "partialReps": "Angefangene Wdh.",
+    "calories": "Kalorien",
+    "level": "Stufe",
+    "shuttle": "Shuttle",
+    "avgHeartRate": "Ø Puls",
+    "maxHeartRate": "Max. Puls",
+    "rpe": "RPE (1–10)"
+  },
+  "metrics": {
+    "vo2max_ml_kg_min": "VO2max",
+    "one_rm_kg": "1RM",
+    "relative_strength_bw": "Relativkraft",
+    "sinclair_points": "Sinclair-Punkte",
+    "avg_pace_s_per_500m": "Pace je 500 m",
+    "avg_power_w": "Ø Leistung",
+    "watts_per_kg": "Watt je kg",
+    "total_reps": "Wiederholungen gesamt",
+    "reps_per_minute": "Wdh. je Minute",
+    "calories_per_minute": "kcal je Minute"
+  },
+  "categoriesShort": {
+    "endurance": "Ausdauer",
+    "max_strength": "Maxkraft",
+    "strength_endurance": "Kraftausdauer",
+    "power": "Schnellkraft",
+    "agility": "Agilität"
   }
 }
