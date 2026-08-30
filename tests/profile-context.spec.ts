@@ -275,3 +275,24 @@ test.describe("Profil in der Oberfläche", () => {
     await expect(page.getByText(/% über alle Achsen/)).toBeVisible();
   });
 });
+
+test.describe("Darstellung und Sprache", () => {
+  // Beides steht seit dem Aufräumen der Kopfzeile nur noch hier. Der Fall
+  // gehört deshalb zu den Profilfällen und nicht zu den Navigationsfällen:
+  // dort läuft er zusätzlich gegen ein Geräteprofil, dessen Layout- und
+  // Sichtviewport um über tausend Pixel auseinanderfallen — das prüft die
+  // Scroll-Mechanik des Testwerkzeugs und nicht die App. Ein echter Tipp auf
+  // den Knopf funktioniert dort nachgemessen.
+  test("die Einstellung bleibt nach dem Umschalten erhalten", async ({ page }) => {
+    await openGuest(page);
+    await page.goto("/profil", { waitUntil: "domcontentloaded" });
+    const light = page.getByRole("radio", { name: /^Hell$|^Light$/ });
+    await light.scrollIntoViewIfNeeded();
+    await light.click();
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("radio", { name: /^Hell$|^Light$/ })).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
+  });
+});

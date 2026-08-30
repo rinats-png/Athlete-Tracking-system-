@@ -127,15 +127,4 @@ test.describe("Aufgeräumte Kopfzeile", () => {
       page.getByRole("radiogroup", { name: /Darstellung|Appearance/ }),
     ).toBeVisible();
   });
-
-  test("die Einstellung bleibt nach dem Umschalten erhalten", async ({ page }) => {
-    await openGuest(page);
-    await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    await page.getByRole("radio", { name: /^Hell$|^Light$/ }).click();
-    await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("radio", { name: /^Hell$|^Light$/ })).toHaveAttribute(
-      "aria-checked",
-      "true",
-    );
-  });
 });
