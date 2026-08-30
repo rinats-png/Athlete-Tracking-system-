@@ -28,7 +28,8 @@
     "cancel": "Abbrechen",
     "backToCatalog": "Zum Testkatalog",
     "reportSoon": "PDF-Report kommt mit dem Trainer-Hub",
-    "startAssessment": "Diagnostik starten"
+    "startAssessment": "Diagnostik starten",
+    "back": "Zurück"
   },
   "theme": {
     "label": "Darstellung",
@@ -461,5 +462,41 @@
       "improve_data_quality": "{{count}} von {{total}} Messungen sind nur mit Vorbehalt lesbar — meist fehlt Körpergewicht oder der Test war nicht ausbelastet.",
       "address_limiter": "{{dimension}} liegt {{gap}} Punkte unter deinen übrigen Achsen, auf Basis von {{measurements}} Messungen. BASELINE misst und ordnet ein; welche Schlüsse du fürs Training ziehst, entscheidest du oder dein Trainer."
     }
+  },
+  "report": {
+    "open": "Bericht",
+    "print": "Drucken / als PDF sichern",
+    "printHint": "Der Bericht wird über die Druckfunktion deines Browsers zu einer PDF-Datei: Drucken → Ziel «Als PDF sichern». BASELINE bringt dafür bewusst keine eigene PDF-Bibliothek mit — Seitenumbruch, Schriftbild und auswählbarer Text kommen so von deinem System und funktionieren auch offline.",
+    "csv": "CSV exportieren",
+    "assessmentTitle": "Diagnostikbericht",
+    "profileTitle": "Leistungsprofil",
+    "anonymousAthlete": "Ohne Namen",
+    "age_one": "{{count}} Jahr",
+    "age_other": "{{count}} Jahre",
+    "generatedOn": "Erstellt am {{date}}",
+    "logoAlt": "Logo",
+    "summary": "Überblick",
+    "testsMeasured": "Messungen",
+    "axesCovered": "Achsen",
+    "gaps": "Nicht gemessen: {{axes}}. Diese Achsen fehlen im Profil und sind bei der Einordnung mitzudenken.",
+    "measurements": "Messwerte",
+    "date": "Datum",
+    "method": "Zur Methode",
+    "methodConfidence": "Die Belastbarkeit setzt sich zu gleichen Teilen aus Achsenabdeckung, Aktualität, Datenqualität und Messtiefe zusammen. Sie ist ungewichtet, weil sich eine Gewichtung nicht begründen liesse.",
+    "methodNorms": "Die Perzentile beruhen auf vorläufigen Referenzwerten dieser Anwendung (baseline_v0_placeholder). Sie sind noch nicht gegen eine publizierte Normstichprobe abgeglichen und daher als Einordnung, nicht als Normbefund zu lesen.",
+    "methodDerived": "Abgeleitete Werte: 1RM nach Epley, VO2max nach Cooper aus der Laufdistanz. Beides sind Schätzformeln; die Streuung nimmt mit der Zahl der Wiederholungen bzw. mit unebenem Gelände zu.",
+    "branding": "Bericht anpassen",
+    "brandingHint": "Name und Logo für ausgedruckte Berichte.",
+    "organisation": "Name / Praxis / Studio",
+    "logo": "Logo",
+    "noLogo": "Kein Logo hinterlegt",
+    "chooseLogo": "Logo wählen",
+    "removeLogo": "Logo entfernen",
+    "logoType": "Nur PNG, JPEG, SVG oder WebP.",
+    "logoTooLarge": "Das Logo ist zu gross (höchstens {{max}} kB). Ein grosses Bild bläht den lokalen Bestand auf.",
+    "logoUnreadable": "Die Datei konnte nicht gelesen werden.",
+    "footer": "Fusszeile",
+    "footerPlaceholder": "z. B. Kontaktdaten",
+    "brandingNote": "Diese Angaben bleiben auf diesem Gerät und erscheinen nur im Bericht. Sie verändern keine Messwerte und keine Auswertung."
   }
 }

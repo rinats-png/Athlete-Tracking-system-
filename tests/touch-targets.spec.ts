@@ -32,6 +32,11 @@ for (const route of ROUTES) {
           const r = el.getBoundingClientRect()
           // Verschachtelte Ziele zählen über den bedienbaren Vorfahren.
           if (el.closest('label') && el.tagName === 'INPUT') return false
+          // Ein Element, das weder fokussierbar noch für die Hilfstechnik
+          // sichtbar ist, ist kein Bedienziel — es wird von einem anderen
+          // ausgelöst (versteckter Datei-Input hinter einem Knopf).
+          if (el.getAttribute('aria-hidden') === 'true' && el.getAttribute('tabindex') === '-1')
+            return false
           return r.width < min || r.height < min
         })
         .map((el) => {

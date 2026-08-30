@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 3
+export const CURRENT_SCHEMA_VERSION = 4
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -97,8 +97,24 @@ const assessmentSchema = z.object({
   completedAt: isoDate.nullable().default(null),
 })
 
+/**
+ * White-Label-Angaben für Berichte.
+ *
+ * Bewusst rein lokal und rein kosmetisch: ein Name, ein Logo, eine
+ * Fusszeile. Nichts davon verlässt das Gerät, und nichts davon verändert
+ * eine Zahl im Bericht — ein Bericht, dessen Werte vom Absender abhängen,
+ * wäre wertlos.
+ */
+const brandingSchema = z.object({
+  organisation: z.string().max(80).default(''),
+  /** Data-URL. Begrenzt, weil sie mit dem Bestand gespeichert wird. */
+  logoDataUrl: z.string().max(400_000).nullable().default(null),
+  footer: z.string().max(200).default(''),
+})
+
 export const storedDataSchema = z.object({
   version: z.literal(CURRENT_SCHEMA_VERSION),
+  branding: brandingSchema.default(() => brandingSchema.parse({})),
   profile: profileSchema,
   biometrics: z.array(biometricSchema),
   assessments: z.array(assessmentSchema),
@@ -110,6 +126,7 @@ export type ValidatedResult = z.infer<typeof resultSchema>
 export type ValidatedAssessment = z.infer<typeof assessmentSchema>
 export type ValidatedBiometric = z.infer<typeof biometricSchema>
 export type ValidatedProfile = z.infer<typeof profileSchema>
+export type ValidatedBranding = z.infer<typeof brandingSchema>
 export type AttemptSelection = z.infer<typeof attemptSelectionSchema>
 
 // --- Migrationen -------------------------------------------------------------
@@ -147,6 +164,16 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 3,
+    to: 4,
+    describe: 'Berichte können mit eigenem Namen und Logo versehen werden',
+    run: (data) => ({
+      ...data,
+      version: 4,
+      branding: { organisation: '', logoDataUrl: null, footer: '' },
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -168,6 +195,7 @@ const emptyReport = (): LoadReport => ({ migratedFrom: null, fromNewerVersion: f
 export function emptyData(): ValidatedData {
   return {
     version: CURRENT_SCHEMA_VERSION,
+    branding: brandingSchema.parse({}),
     profile: profileSchema.parse({}),
     biometrics: [],
     assessments: [],
@@ -210,8 +238,10 @@ export function parseStoredData(raw: unknown): ParseOutcome {
   if (whole.success) return { data: whole.data, report }
 
   const profile = profileSchema.safeParse(working.profile ?? {})
+  const branding = brandingSchema.safeParse(working.branding ?? {})
   const salvaged: ValidatedData = {
     version: CURRENT_SCHEMA_VERSION,
+    branding: branding.success ? branding.data : brandingSchema.parse({}),
     profile: profile.success ? profile.data : profileSchema.parse({}),
     biometrics: [],
     assessments: [],

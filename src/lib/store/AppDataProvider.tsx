@@ -54,6 +54,7 @@ interface AppDataValue {
   /** Körpergewicht zum Stichtag, für Relativkraft und Sinclair. */
   bodyWeightAt: (iso: string) => number | null
   saveProfile: (patch: Partial<StoredData['profile']>) => void
+  saveBranding: (patch: Partial<StoredData['branding']>) => void
   saveBiometric: (entry: Omit<StoredBiometric, 'id' | 'createdAt'>) => void
   /** Legt ein Ergebnis an und rechnet die abgeleiteten Metriken gleich mit. */
   recordResult: (input: RecordResultInput) => StoredResult | null
@@ -156,6 +157,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       loadReport: initial.report,
       bodyWeightAt: (iso) => bodyWeightAt(data, iso),
       saveProfile: (patch) => commit({ ...data, profile: { ...data.profile, ...patch } }),
+      saveBranding: (patch) => commit({ ...data, branding: { ...data.branding, ...patch } }),
       saveBiometric: (entry) =>
         commit(upsertBiometric(data, { ...entry, id: newId(), createdAt: new Date().toISOString() })),
       recordResult,

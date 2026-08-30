@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeft, TriangleAlert } from 'lucide-react'
+import { ArrowLeft, FileText, TriangleAlert } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -58,7 +58,8 @@ export function AssessmentSummaryScreen() {
         </Link>
       </Button>
 
-      <header className="mb-4">
+      <header className="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <div>
         <span className="label-tag">{t('assessments.summary')}</span>
         <h1 className="mt-1 font-display text-[28px] leading-tight font-bold sm:text-[34px]">
           {assessment.title ?? formatDate(assessment.performedOn, locale)}
@@ -68,6 +69,13 @@ export function AssessmentSummaryScreen() {
           {t('assessments.testCount', { count: results.length })} ·{' '}
           {t('assessments.axisCount', { count: covered.length })}
         </p>
+        </div>
+        <Button asChild variant="outline" size="md">
+          <Link to={`/bericht/${assessment.id}`}>
+            <FileText size={15} aria-hidden />
+            {t('report.open')}
+          </Link>
+        </Button>
       </header>
 
       {missing.length > 0 && (

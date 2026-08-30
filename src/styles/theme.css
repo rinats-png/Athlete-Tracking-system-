@@ -304,3 +304,75 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- Druck -------------------------------------------------------------- */
+
+/*
+ * Der Bericht wird über die Druckfunktion des Browsers zu PDF. Das ersetzt
+ * eine PDF-Bibliothek vollständig: Seitenumbruch, Schriftbild und
+ * Textauswahl kommen von der Engine des Systems, nicht aus nachgebautem
+ * Code — und der Bericht bleibt am Bildschirm dieselbe Seite.
+ *
+ * Erzwungen wird hier ausschliesslich Helligkeit und Kontrast: ein Bericht,
+ * der im Dunkelmodus gedruckt wird, verbraucht eine Tonerpatrone und ist
+ * schlechter lesbar als das Original.
+ */
+@media print {
+  :root,
+  :root[data-theme='dark'] {
+    --plane: #ffffff;
+    --surface: #ffffff;
+    --surface-raised: #ffffff;
+    --surface-sunken: #ffffff;
+    --ink: #000000;
+    --ink-secondary: #333333;
+    --ink-muted: #555555;
+    --line: #cccccc;
+    --line-strong: #888888;
+  }
+
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  /* Bedienelemente gehören nicht auf Papier. */
+  .no-print,
+  header.sticky,
+  nav[aria-label] {
+    display: none !important;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  /* Ein Abschnitt soll nicht mitten in der Überschrift umbrechen. */
+  .report-section {
+    break-inside: auto;
+  }
+  .report-section h2 {
+    break-after: avoid;
+  }
+  .report-head {
+    break-after: avoid;
+  }
+  tr {
+    break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+
+  /* Hintergrundflächen (z. B. der Lückenhinweis) müssen mitgedruckt werden —
+     sonst verschwindet genau die Warnung, die im Bericht stehen muss. */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

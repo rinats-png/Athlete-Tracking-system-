@@ -28,7 +28,8 @@
     "cancel": "Cancel",
     "backToCatalog": "Back to catalog",
     "reportSoon": "PDF report ships with the coach hub",
-    "startAssessment": "Start assessment"
+    "startAssessment": "Start assessment",
+    "back": "Back"
   },
   "theme": {
     "label": "Appearance",
@@ -461,5 +462,41 @@
       "improve_data_quality": "{{count}} of {{total}} measurements read only with caveats — usually body weight is missing or the test was not taken to maximum.",
       "address_limiter": "{{dimension}} sits {{gap}} points below your other axes, based on {{measurements}} measurements. BASELINE measures and contextualises; what you conclude for your training is up to you or your coach."
     }
+  },
+  "report": {
+    "open": "Report",
+    "print": "Print / save as PDF",
+    "printHint": "The report becomes a PDF through your browser's print function: Print → destination “Save as PDF”. BASELINE deliberately ships no PDF library — page breaks, typography and selectable text come from your system this way, and it works offline.",
+    "csv": "Export CSV",
+    "assessmentTitle": "Assessment report",
+    "profileTitle": "Performance profile",
+    "anonymousAthlete": "Unnamed",
+    "age_one": "{{count}} year",
+    "age_other": "{{count}} years",
+    "generatedOn": "Generated on {{date}}",
+    "logoAlt": "Logo",
+    "summary": "Overview",
+    "testsMeasured": "Measurements",
+    "axesCovered": "Axes",
+    "gaps": "Not measured: {{axes}}. These axes are missing from the profile and must be kept in mind when interpreting it.",
+    "measurements": "Measurements",
+    "date": "Date",
+    "method": "On the method",
+    "methodConfidence": "Confidence is composed in equal parts of axis coverage, recency, data quality and depth. It is unweighted because a weighting could not be justified.",
+    "methodNorms": "Percentiles rest on provisional reference values of this application (baseline_v0_placeholder). They have not yet been reconciled against a published normative sample and should be read as context, not as a normative finding.",
+    "methodDerived": "Derived values: 1RM by Epley, VO2max by Cooper from running distance. Both are estimation formulas; their spread grows with the number of repetitions and with uneven terrain respectively.",
+    "branding": "Customise report",
+    "brandingHint": "Name and logo for printed reports.",
+    "organisation": "Name / practice / gym",
+    "logo": "Logo",
+    "noLogo": "No logo set",
+    "chooseLogo": "Choose logo",
+    "removeLogo": "Remove logo",
+    "logoType": "PNG, JPEG, SVG or WebP only.",
+    "logoTooLarge": "The logo is too large (at most {{max}} kB). A large image bloats the local store.",
+    "logoUnreadable": "The file could not be read.",
+    "footer": "Footer",
+    "footerPlaceholder": "e.g. contact details",
+    "brandingNote": "These details stay on this device and appear only in the report. They change no measurement and no analysis."
   }
 }

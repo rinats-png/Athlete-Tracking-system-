@@ -6,6 +6,7 @@ import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
 import { TestRunScreen } from '@/features/tests/TestRunScreen'
 import { HistoryScreen } from '@/features/history/HistoryScreen'
 import { AnalysisScreen } from '@/features/analysis/AnalysisScreen'
+import { ReportScreen } from '@/features/report/ReportScreen'
 import { AssessmentListScreen } from '@/features/assessments/AssessmentListScreen'
 import { AssessmentCreateScreen } from '@/features/assessments/AssessmentCreateScreen'
 import { AssessmentDetailScreen } from '@/features/assessments/AssessmentDetailScreen'
@@ -40,6 +41,8 @@ const router = createBrowserRouter([
       { path: 'tests/:slug', element: <TestRunScreen /> },
       { path: 'verlauf', element: <HistoryScreen /> },
       { path: 'analyse', element: <AnalysisScreen /> },
+      { path: 'bericht', element: <ReportScreen /> },
+      { path: 'bericht/:id', element: <ReportScreen /> },
       { path: 'profil', element: <ProfileScreen /> },
       { path: '*', element: <Navigate to="/" replace /> },
     ],

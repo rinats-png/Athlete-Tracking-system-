@@ -163,5 +163,13 @@ export function buildDemoData(): StoredData {
 
   results.sort((a, b) => new Date(b.performedAt).getTime() - new Date(a.performedAt).getTime())
   assessments.sort((a, b) => (a.performedOn < b.performedOn ? 1 : -1))
-  return { version: CURRENT_SCHEMA_VERSION, profile, biometrics, assessments, results }
+  return {
+    version: CURRENT_SCHEMA_VERSION,
+    // Der Demobestand trägt bewusst keine fremde Marke.
+    branding: { organisation: '', logoDataUrl: null, footer: '' },
+    profile,
+    biometrics,
+    assessments,
+    results,
+  }
 }
