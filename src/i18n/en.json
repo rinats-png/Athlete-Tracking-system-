@@ -113,7 +113,9 @@
     "plannedAhead": "suggested",
     "sportScores": "Sport-specific composite scores",
     "sportScoresHint": "Formed from several tests. The components are measured; the way they are combined is a definition made by this app.",
-    "scoreBasis": "from {{tests}}"
+    "scoreBasis": "from {{tests}}",
+    "noSportTitle": "Choose your sport",
+    "noSportHint": "BASELINE then suggests exactly the tests measured for your discipline."
   },
   "table": {
     "dimension": "Axis",
@@ -203,7 +205,21 @@
     "notes": "Note (optional)",
     "notesHint": "Conditions, anomalies, deviations from the protocol.",
     "provisional": "provisional",
-    "provisionalHint": "This number rests on a definition made by this app, not on a published formula. It will be replaced once documented reference values exist."
+    "provisionalHint": "This number rests on a definition made by this app, not on a published formula. It will be replaced once documented reference values exist.",
+    "yourSport": "Your sport",
+    "changeSport": "Change",
+    "chooseSport": "Choose your sport",
+    "chooseSportHint": "The tests measured for that discipline then appear here. Without a selection the full catalogue stays.",
+    "searchSport": "Search sport",
+    "searchSportPlaceholder": "Search — e.g. judo, marathon, firefighter",
+    "coreCount_one": "{{count}} core test",
+    "coreCount_other": "{{count}} core tests",
+    "noSportMatch": "No sport found for “{{query}}”. The full catalogue is below.",
+    "coreFor": "Core tests for {{sport}}",
+    "optionalFor": "Further tests for {{sport}}",
+    "optionalHint": "Useful, but not required for a complete profile.",
+    "otherTests": "Rest of the catalogue",
+    "labSetting": "lab"
   },
   "history": {
     "title": "History",

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { DecisionRow } from './DecisionRow'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { FileText, Play } from 'lucide-react'
+import { ChevronRight, FileText, Play } from 'lucide-react'
 import { addMonths } from 'date-fns'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
@@ -97,20 +97,35 @@ export function DashboardScreen() {
   }, [data.results])
 
   if (data.results.length === 0) {
+    // Der erste Schritt ist die Sportart, nicht der erste Test: ohne sie
+    // schlägt die App eine allgemeine Batterie vor, und der Nutzer misst
+    // Dinge, die für seine Disziplin wenig aussagen. Wer schon eine gewählt
+    // hat, wird direkt zur Messung geschickt.
     return (
       <EmptyState
-        title={t('dashboard.emptyTitle')}
-        body={t('dashboard.emptyBody')}
+        title={discipline ? t('dashboard.emptyTitle') : t('dashboard.noSportTitle')}
+        body={discipline ? t('dashboard.emptyBody') : t('dashboard.noSportHint')}
         action={
           <Button asChild variant="primary">
-            <Link to="/diagnostik/neu">
-              <Play size={14} strokeWidth={2.5} aria-hidden />
-              {t('actions.startAssessment')}
-            </Link>
+            {discipline ? (
+              <Link to="/diagnostik/neu">
+                <Play size={14} strokeWidth={2.5} aria-hidden />
+                {t('actions.startAssessment')}
+              </Link>
+            ) : (
+              <Link to="/tests">
+                <ChevronRight size={14} strokeWidth={2.5} aria-hidden />
+                {t('dashboard.noSportTitle')}
+              </Link>
+            )}
           </Button>
         }
         secondary={
-          ageFromBirthDate(data.profile.birthDate) == null ? (
+          !discipline ? (
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/diagnostik/neu">{t('actions.startAssessment')}</Link>
+            </Button>
+          ) : ageFromBirthDate(data.profile.birthDate) == null ? (
             <Button asChild variant="ghost" size="sm">
               <Link to="/profil">{t('dashboard.completeProfile')}</Link>
             </Button>
@@ -153,6 +168,24 @@ export function DashboardScreen() {
 
       {/* Die vier Zahlen, wegen derer jemand dieses Dashboard öffnet. Sie
           stehen vor dem Profil, nicht darunter. */}
+      {/* Ohne Sportart bleibt die Testempfehlung allgemein. Der Hinweis steht
+          dort, wo die App beginnt — nicht in einem Profilfeld, das niemand
+          aufsucht. */}
+      {!discipline && (
+        <Link
+          to="/tests"
+          className="mb-4 flex min-h-14 items-center justify-between gap-3 border border-accent/40 bg-accent/8 px-4 py-3 transition-colors hover:bg-accent/14"
+        >
+          <span className="min-w-0">
+            <span className="label-tag text-accent-text">{t('dashboard.noSportTitle')}</span>
+            <span className="mt-0.5 block text-[13px] leading-snug text-ink-secondary">
+              {t('dashboard.noSportHint')}
+            </span>
+          </span>
+          <ChevronRight size={18} className="shrink-0 text-accent-text" aria-hidden />
+        </Link>
+      )}
+
       <DecisionRow locale={locale} />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">

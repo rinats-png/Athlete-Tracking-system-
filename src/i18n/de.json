@@ -113,7 +113,9 @@
     "plannedAhead": "vorgeschlagen",
     "sportScores": "Sportartspezifische Sammelwerte",
     "sportScoresHint": "Aus mehreren Tests gebildet. Die Bestandteile sind gemessen, ihre Verrechnung ist eine Festlegung dieser App.",
-    "scoreBasis": "aus {{tests}}"
+    "scoreBasis": "aus {{tests}}",
+    "noSportTitle": "Sportart wählen",
+    "noSportHint": "Danach schlägt BASELINE genau die Tests vor, die für deine Disziplin gemessen werden."
   },
   "table": {
     "dimension": "Achse",
@@ -203,7 +205,21 @@
     "notes": "Notiz (optional)",
     "notesHint": "Bedingungen, Auffälligkeiten, Abweichungen vom Protokoll.",
     "provisional": "vorläufig",
-    "provisionalHint": "Diese Zahl beruht auf einer Festlegung dieser App, nicht auf einer publizierten Formel. Sie wird ersetzt, sobald belegte Referenzwerte vorliegen."
+    "provisionalHint": "Diese Zahl beruht auf einer Festlegung dieser App, nicht auf einer publizierten Formel. Sie wird ersetzt, sobald belegte Referenzwerte vorliegen.",
+    "yourSport": "Deine Sportart",
+    "changeSport": "Ändern",
+    "chooseSport": "Sportart wählen",
+    "chooseSportHint": "Danach stehen hier die Tests, die für diese Disziplin gemessen werden. Ohne Auswahl bleibt der vollständige Katalog.",
+    "searchSport": "Sportart suchen",
+    "searchSportPlaceholder": "Suchen — z. B. Judo, Marathon, Feuerwehr",
+    "coreCount_one": "{{count}} Kerntest",
+    "coreCount_other": "{{count}} Kerntests",
+    "noSportMatch": "Keine Sportart gefunden für «{{query}}». Der vollständige Katalog steht weiter unten.",
+    "coreFor": "Kerntests für {{sport}}",
+    "optionalFor": "Weitere Tests für {{sport}}",
+    "optionalHint": "Sinnvoll, aber nicht nötig für ein vollständiges Profil.",
+    "otherTests": "Übriger Katalog",
+    "labSetting": "Labor"
   },
   "history": {
     "title": "Verlauf",
