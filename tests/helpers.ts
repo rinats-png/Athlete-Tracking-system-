@@ -25,6 +25,10 @@ async function resetState(page: Page) {
     localStorage.clear()
     localStorage.setItem('baseline.theme', 'dark')
     localStorage.setItem('baseline.locale', 'de')
+    // Die Sportartfrage gilt als gestellt: sie steht vor allem anderen und
+    // würde sonst in jedem Fall zuerst beantwortet werden müssen. Die Fälle,
+    // die sie selbst prüfen, benutzen `openFirstRun`.
+    localStorage.setItem('baseline.sportAsked', '1')
   })
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
@@ -32,6 +36,23 @@ async function resetState(page: Page) {
 /** Startet die App im Gastmodus mit leerem Bestand. */
 export async function openGuest(page: Page) {
   await resetState(page)
+  await page.getByRole('button', { name: /Ohne Konto starten/ }).click()
+  await page.getByRole('heading', { level: 1 }).first().waitFor()
+}
+
+/**
+ * Erster Start ohne jede Vorbelegung — inklusive der Sportartfrage.
+ * Nur für die Fälle, die genau dieses Tor prüfen.
+ */
+export async function openFirstRun(page: Page) {
+  await blockFonts(page)
+  await page.goto('/', { waitUntil: 'domcontentloaded' })
+  await page.evaluate(() => {
+    localStorage.clear()
+    localStorage.setItem('baseline.theme', 'dark')
+    localStorage.setItem('baseline.locale', 'de')
+  })
+  await page.reload({ waitUntil: 'domcontentloaded' })
   await page.getByRole('button', { name: /Ohne Konto starten/ }).click()
   await page.getByRole('heading', { level: 1 }).first().waitFor()
 }

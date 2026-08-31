@@ -534,7 +534,22 @@
     "nextSuggested": "Vorschlag der App auf Basis des üblichen Abstands. Sobald du ein Datum wählst, gilt deine Festlegung.",
     "suggested": "Vorschlag",
     "fromDocument": "aus der Quellliste",
-    "addedForDiscipline": "ergänzt"
+    "addedForDiscipline": "ergänzt",
+    "forSport": "Tests für {{sport}}",
+    "moreForSport": "Weitere Tests für {{sport}}",
+    "moreForSportHint": "Sinnvoll, aber nicht nötig für ein vollständiges Profil.",
+    "core": "Kerntest",
+    "otherTests": "Weitere Tests hinzufügen",
+    "otherTestsHint": "Der übrige Katalog, nach Fähigkeiten geordnet.",
+    "showOther": "Anzeigen",
+    "generalBatteries": "Allgemeine Diagnostik",
+    "generalBatteriesHint": "Vorgefertigte Zusammenstellungen über alle Achsen — unabhängig von der Sportart. Eine Auswahl hier ersetzt die bisherige Testauswahl.",
+    "noSportTitle": "Keine Sportart gewählt",
+    "noSportHint": "Ohne Sportart gibt es keinen disziplinspezifischen Vorschlag. Die allgemeine Diagnostik weiter unten funktioniert trotzdem.",
+    "scope": "Umfang dieses Termins",
+    "testsWord": "Tests",
+    "axesWord": "Achsen",
+    "scopeHint": "Jeder zusätzliche Test erweitert die Grundlage: mehr abgedeckte Achsen bedeuten eine belastbarere Einordnung und einen vollständigeren Verlauf. Die Genauigkeit der einzelnen Messung ändert sich dadurch nicht."
   },
   "attempts": {
     "title": "Versuche",
@@ -904,5 +919,13 @@
       "athlete": "Athlet",
       "data": "Bestand"
     }
+  },
+  "gate": {
+    "step": "Schritt 1 von 1",
+    "title": "Welche Sportart?",
+    "body": "BASELINE schlägt danach genau die Tests vor, die für diese Disziplin gemessen werden — mit Protokoll und Begründung. Die Angabe bleibt auf diesem Gerät und lässt sich jederzeit ändern.",
+    "noMatch": "Keine Sportart gefunden für «{{query}}». Wähle unten «Allgemeine Diagnostik» — die Sportart lässt sich später nachtragen.",
+    "general": "Allgemeine Diagnostik",
+    "generalHint": "Ohne Sportart: eine Batterie über alle sechs Achsen. Jederzeit im Testbereich änderbar."
   }
 }

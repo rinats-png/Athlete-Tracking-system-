@@ -15,6 +15,7 @@ import { AssessmentDetailScreen } from '@/features/assessments/AssessmentDetailS
 import { AssessmentSummaryScreen } from '@/features/assessments/AssessmentSummaryScreen'
 import { ProfileScreen } from '@/features/profile/ProfileScreen'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
+import { SportGate, sportWasAsked } from '@/features/onboarding/SportGate'
 import { AppDataProvider, readMode, writeMode, type AppMode } from '@/lib/store/AppDataProvider'
 
 /**
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
 
 export default function App() {
   const [mode, setMode] = useState<AppMode | null>(() => readMode())
+  // Die Sportartfrage kommt einmal, direkt nach dem Eintritt. Gemerkt wird,
+  // dass gefragt wurde — nicht die Antwort: sonst stünde das Tor nach jedem
+  // Zurücksetzen der Sportart wieder da.
+  const [sportAsked, setSportAsked] = useState(() => sportWasAsked())
 
   const enter = useCallback((next: AppMode) => {
     writeMode(next)
@@ -67,7 +72,11 @@ export default function App() {
 
   return (
     <AppDataProvider mode={mode}>
-      <RouterProvider router={router} />
+      {sportAsked ? (
+        <RouterProvider router={router} />
+      ) : (
+        <SportGate onDone={() => setSportAsked(true)} />
+      )}
     </AppDataProvider>
   )
 }

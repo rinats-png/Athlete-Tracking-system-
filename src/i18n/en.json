@@ -534,7 +534,22 @@
     "nextSuggested": "The app's suggestion based on the usual interval. As soon as you pick a date, your choice applies.",
     "suggested": "Suggested",
     "fromDocument": "from the source list",
-    "addedForDiscipline": "added"
+    "addedForDiscipline": "added",
+    "forSport": "Tests for {{sport}}",
+    "moreForSport": "Further tests for {{sport}}",
+    "moreForSportHint": "Useful, but not required for a complete profile.",
+    "core": "core test",
+    "otherTests": "Add further tests",
+    "otherTestsHint": "The rest of the catalogue, ordered by capacity.",
+    "showOther": "Show",
+    "generalBatteries": "General assessment",
+    "generalBatteriesHint": "Prepared batteries across all axes — independent of sport. Choosing one here replaces the current test selection.",
+    "noSportTitle": "No sport chosen",
+    "noSportHint": "Without a sport there is no discipline-specific suggestion. The general assessment below works regardless.",
+    "scope": "Scope of this session",
+    "testsWord": "tests",
+    "axesWord": "axes",
+    "scopeHint": "Every additional test widens the basis: more covered axes mean a more dependable classification and a more complete history. It does not change the precision of the individual measurement."
   },
   "attempts": {
     "title": "Attempts",
@@ -904,5 +919,13 @@
       "athlete": "Athlete",
       "data": "Data"
     }
+  },
+  "gate": {
+    "step": "Step 1 of 1",
+    "title": "Which sport?",
+    "body": "BASELINE then suggests exactly the tests measured for that discipline — with protocol and reasoning. The entry stays on this device and can be changed at any time.",
+    "noMatch": "No sport found for “{{query}}”. Choose “General assessment” below — the sport can be added later.",
+    "general": "General assessment",
+    "generalHint": "Without a sport: one battery across all six axes. Changeable at any time in the test area."
   }
 }

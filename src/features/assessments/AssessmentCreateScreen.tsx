@@ -6,13 +6,28 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { TEST_BATTERIES, batteryDimensions, disciplineBattery } from '@/data/testBatteries'
 import { provenanceOf, additionReason } from '@/data/documentCoverage'
-import { TEST_CATALOG, getTest } from '@/data/testCatalog'
+import { TEST_CATALOG, getTest, type TestDefinition } from '@/data/testCatalog'
+import { disciplineById } from '@/data/sportProfiles'
+import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { newId } from '@/lib/store/localStore'
 import { defaultAssessmentTitle } from '@/domain/assessment'
 import { cn } from '@/lib/utils'
-import type { AppLocale, PerformanceDimension } from '@/types/domain'
+import type { AppLocale, PerformanceDimension, TestCategory } from '@/types/domain'
+
+type Filter = TestCategory | 'all'
+
+const FILTERS: Filter[] = [
+  'all',
+  'endurance',
+  'max_strength',
+  'strength_endurance',
+  'power',
+  'speed',
+  'agility',
+  'conditioning',
+]
 
 /**
  * Diagnostik anlegen.
@@ -21,6 +36,16 @@ import type { AppLocale, PerformanceDimension } from '@/types/domain'
  * niemand mehr beantworten kann: welche Achsen deckt dieser Termin ab? Eine
  * fehlende Achse ist danach nicht nachtragbar, ohne den Vergleich zu
  * verzerren — deshalb steht die Lücke hier und nicht im Ergebnis.
+ *
+ * REIHENFOLGE ALS AUSSAGE: erst die Tests der eigenen Sportart mit ihrer
+ * Begründung, dann die ergänzenden derselben Sportart, dann der übrige
+ * Katalog, zuletzt die allgemeinen Batterien. Vorher standen die allgemeinen
+ * Batterien und die Fähigkeitsgliederung ganz oben — damit sah der Bildschirm
+ * aus wie eine Auswahl aus einem Fitnesskatalog, und der Zusammenhang zur
+ * Sportart war nirgends sichtbar.
+ *
+ * Der allgemeine Weg bleibt vollwertig und ist erreichbar, ohne die
+ * Sportartauswahl rückgängig zu machen.
  */
 export function AssessmentCreateScreen() {
   const { t, i18n } = useTranslation()
@@ -52,6 +77,32 @@ export function AssessmentCreateScreen() {
     () =>
       (suggested ?? TEST_BATTERIES.find((b) => b.slug === 'general_fitness'))?.testSlugs ?? [],
   )
+  const discipline = disciplineId ? disciplineById(disciplineId) : undefined
+  const coreTests = useMemo(
+    () => (discipline?.coreTests ?? []).map(getTest).filter((x): x is TestDefinition => x != null),
+    [discipline],
+  )
+  const optionalTests = useMemo(
+    () =>
+      (discipline?.optionalTests ?? []).map(getTest).filter((x): x is TestDefinition => x != null),
+    [discipline],
+  )
+  const disciplineSlugs = useMemo(
+    () => new Set([...coreTests, ...optionalTests].map((test) => test.slug)),
+    [coreTests, optionalTests],
+  )
+  const otherTests = useMemo(
+    () =>
+      TEST_CATALOG.filter((test) => !disciplineSlugs.has(test.slug)).sort(
+        (a, b) => a.sortOrder - b.sortOrder,
+      ),
+    [disciplineSlugs],
+  )
+  // Aufgeklappt nur, wenn jemand danach fragt: der übrige Katalog ist lang,
+  // und er ist hier nicht die Hauptsache.
+  const [showOther, setShowOther] = useState(false)
+  const [filter, setFilter] = useState<Filter>('all')
+
   const [performedOn, setPerformedOn] = useState(() => new Date().toISOString().slice(0, 10))
   const [title, setTitle] = useState('')
 
@@ -99,6 +150,43 @@ export function AssessmentCreateScreen() {
     [batterySlug, batteries, selected.length],
   )
 
+  /**
+   * Eine Testzeile mit Kästchen, Begründung und Herkunft.
+   *
+   * Die Begründung steht direkt an der Zeile und nicht in einem Tooltip: wer
+   * entscheiden soll, ob er einen Test mitmacht, muss lesen können, wozu er
+   * dient — auf dem Telefon gibt es kein Überfahren mit der Maus.
+   */
+  const testRow = (test: TestDefinition, isCore: boolean) => {
+    const checked = selected.includes(test.slug)
+    const why = disciplineId ? additionReason(disciplineId, test.slug) : null
+    return (
+      <li key={test.slug} className="border-t border-line first:border-t-0">
+        <label className="flex cursor-pointer gap-3 px-4 py-3">
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={() => toggleTest(test.slug)}
+            className="mt-1 h-5 w-5 shrink-0 accent-[var(--accent)]"
+          />
+          <span className="min-w-0 flex-1">
+            <span className="block text-[15px] font-medium">{test.name[locale]}</span>
+            <span className="mt-0.5 block text-[11px] tracking-wide text-ink-muted uppercase">
+              {t(`dimensions.${test.dimension}`)}
+              {isCore && ` · ${t('assessments.core')}`}
+              {origin(test.slug) === 'document' && ` · ${t('assessments.fromDocument')}`}
+              {origin(test.slug) === 'addition' && ` · ${t('assessments.addedForDiscipline')}`}
+              {test.setting === 'lab' && ` · ${t('tests.labSetting')}`}
+            </span>
+            <span className="mt-1 block text-[12px] leading-relaxed text-ink-secondary">
+              {why ?? test.summary[locale]}
+            </span>
+          </span>
+        </label>
+      </li>
+    )
+  }
+
   const start = () => {
     if (selected.length === 0) return
     const id = newId()
@@ -138,8 +226,82 @@ export function AssessmentCreateScreen() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         <div className="space-y-4 md:col-span-2 lg:col-span-3">
+          {discipline ? (
+            <>
+              <Panel>
+                <PanelHeader
+                  title={t('assessments.forSport', { sport: discipline.name[locale] })}
+                  subtitle={discipline.rationale[locale]}
+                />
+                <ul>{coreTests.map((test) => testRow(test, true))}</ul>
+              </Panel>
+
+              {optionalTests.length > 0 && (
+                <Panel>
+                  <PanelHeader
+                    title={t('assessments.moreForSport', { sport: discipline.name[locale] })}
+                    subtitle={t('assessments.moreForSportHint')}
+                  />
+                  <ul>{optionalTests.map((test) => testRow(test, false))}</ul>
+                </Panel>
+              )}
+            </>
+          ) : (
+            <Panel>
+              <PanelHeader
+                title={t('assessments.noSportTitle')}
+                subtitle={t('assessments.noSportHint')}
+              />
+              <div className="px-4 py-3">
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/tests">{t('tests.chooseSport')}</Link>
+                </Button>
+              </div>
+            </Panel>
+          )}
+
+          {/* Der übrige Katalog: erreichbar, aber nicht die Hauptsache. Erst
+              hier taucht die Gliederung nach Fähigkeiten wieder auf. */}
           <Panel>
-            <PanelHeader title={t('assessments.battery')} subtitle={t('assessments.batteryHint')} />
+            <PanelHeader
+              title={t('assessments.otherTests')}
+              subtitle={t('assessments.otherTestsHint')}
+              action={
+                <Button variant="ghost" size="sm" onClick={() => setShowOther((v) => !v)}>
+                  {showOther ? t('actions.close') : t('assessments.showOther')}
+                </Button>
+              }
+            />
+            {showOther && (
+              <>
+                <div className="overflow-x-auto border-b border-line px-4 py-3">
+                  <SegmentedControl<Filter>
+                    label={t('tests.filter')}
+                    value={filter}
+                    onChange={setFilter}
+                    options={FILTERS.map((key) => ({
+                      value: key,
+                      label: key === 'all' ? t('tests.all') : t(`categoriesShort.${key}`),
+                    }))}
+                  />
+                </div>
+                <ul className="max-h-[420px] overflow-y-auto">
+                  {otherTests
+                    .filter((test) => filter === 'all' || test.category === filter)
+                    .map((test) => testRow(test, false))}
+                </ul>
+              </>
+            )}
+          </Panel>
+
+          {/* Die allgemeinen Batterien bleiben vollwertig — für alle, die
+              ihren Zustand über alle Achsen messen wollen statt für eine
+              Disziplin. */}
+          <Panel>
+            <PanelHeader
+              title={t('assessments.generalBatteries')}
+              subtitle={t('assessments.generalBatteriesHint')}
+            />
             <ul className="grid gap-px bg-line sm:grid-cols-2">
               {batteries.map((battery) => (
                 <li key={battery.slug}>
@@ -157,7 +319,7 @@ export function AssessmentCreateScreen() {
                     <span className="text-[14px] font-semibold">
                       {battery.name[locale]}
                       {battery.slug === suggested?.slug ? (
-                        <span className="ml-2 align-middle text-[10px] font-medium uppercase tracking-wide text-accent">
+                        <span className="ml-2 align-middle text-[10px] font-medium tracking-wide text-accent uppercase">
                           {t('assessments.suggested')}
                         </span>
                       ) : null}
@@ -176,48 +338,40 @@ export function AssessmentCreateScreen() {
               ))}
             </ul>
           </Panel>
-
-          <Panel>
-            <PanelHeader
-              title={t('assessments.tests')}
-              subtitle={t('assessments.testsHint', { count: selected.length })}
-            />
-            <ul className="max-h-[420px] overflow-y-auto">
-              {TEST_CATALOG.map((test) => (
-                <li key={test.slug} className="border-t border-line first:border-t-0">
-                  <label className="flex min-h-11 cursor-pointer items-center gap-3 px-4 py-2.5">
-                    <input
-                      type="checkbox"
-                      checked={selected.includes(test.slug)}
-                      onChange={() => toggleTest(test.slug)}
-                      className="h-4 w-4 shrink-0 accent-[var(--accent)]"
-                    />
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-[14px]">{test.name[locale]}</span>
-                      <span className="block text-[11px] text-ink-muted">
-                        {t(`dimensions.${test.dimension}`)}
-                        {/* Warum dieser Test bei dieser Disziplin steht.
-                            Ohne die Kennzeichnung sieht eine Ergänzung dieser
-                            App aus wie eine Vorgabe aus der Quelle. */}
-                        {origin(test.slug) === 'document' ? (
-                          <span className="ml-1.5 text-accent-text">
-                            · {t('assessments.fromDocument')}
-                          </span>
-                        ) : origin(test.slug) === 'addition' ? (
-                          <span className="ml-1.5" title={additionReason(disciplineId!, test.slug) ?? ''}>
-                            · {t('assessments.addedForDiscipline')}
-                          </span>
-                        ) : null}
-                      </span>
-                    </span>
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </Panel>
         </div>
 
         <div className="space-y-4 lg:col-span-2">
+          {/* Umfang des Termins. Der Satz darunter sagt, was zusätzliche Tests
+              bewirken — und was sie nicht bewirken: eine breitere Grundlage
+              macht die EINORDNUNG belastbarer, nicht die einzelne Messung
+              genauer. Der Unterschied ist wichtig, sonst verspricht die App
+              Präzision, die kein Test liefert. */}
+          <Panel ticked>
+            <PanelHeader title={t('assessments.scope')} />
+            <div className="flex items-baseline gap-4 px-4 pt-3">
+              <span>
+                <span className="readout font-display text-[30px] leading-none font-bold">
+                  {selected.length}
+                </span>
+                <span className="ml-1.5 text-[12px] text-ink-muted">
+                  {t('assessments.testsWord')}
+                </span>
+              </span>
+              <span>
+                <span className="readout font-display text-[30px] leading-none font-bold">
+                  {covered.size}
+                  <span className="text-[16px] text-ink-muted">/{PERFORMANCE_DIMENSIONS.length}</span>
+                </span>
+                <span className="ml-1.5 text-[12px] text-ink-muted">
+                  {t('assessments.axesWord')}
+                </span>
+              </span>
+            </div>
+            <p className="px-4 py-3 text-[12px] leading-relaxed text-ink-secondary">
+              {t('assessments.scopeHint')}
+            </p>
+          </Panel>
+
           <Panel>
             <PanelHeader title={t('assessments.coverage')} />
             <ul className="space-y-1.5 px-4 py-4">
