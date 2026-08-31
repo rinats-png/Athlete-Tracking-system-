@@ -103,7 +103,10 @@ export function DashboardScreen() {
     // hat, wird direkt zur Messung geschickt.
     return (
       <EmptyState
-        title={discipline ? t('dashboard.emptyTitle') : t('dashboard.noSportTitle')}
+        // Die Überschrift benennt den Zustand und bleibt deshalb stehen: es
+        // ist noch nichts gemessen. Der Hinweis auf die Sportart tritt
+        // daneben, nicht an seine Stelle.
+        title={t('dashboard.emptyTitle')}
         body={discipline ? t('dashboard.emptyBody') : t('dashboard.noSportHint')}
         action={
           <Button asChild variant="primary">
