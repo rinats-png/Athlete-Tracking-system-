@@ -219,7 +219,16 @@
     "optionalFor": "Further tests for {{sport}}",
     "optionalHint": "Useful, but not required for a complete profile.",
     "otherTests": "Rest of the catalogue",
-    "labSetting": "lab"
+    "labSetting": "lab",
+    "equipmentFilter": "What I have",
+    "equipmentFilterHint": "Select your equipment — the catalogue then shows what it can measure. With nothing selected, everything is listed.",
+    "equipmentShow": "Choose equipment",
+    "equipmentHide": "Close equipment selection",
+    "equipmentSelected": "{{count}} of {{total}} selected",
+    "equipmentClear": "Clear selection",
+    "equipmentMissing": "missing: {{items}}",
+    "equipmentDoable": "{{count}} of them with your equipment",
+    "equipmentNoneDoable": "Nothing here can be measured with this equipment. One more item and the catalogue fills up again."
   },
   "history": {
     "title": "History",

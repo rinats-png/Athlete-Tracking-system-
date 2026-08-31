@@ -10,6 +10,8 @@ import { provenanceOf } from '@/data/documentCoverage'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { formatDate } from '@/lib/format'
 import { SportSelector } from './SportSelector'
+import { EquipmentFilter, readOwnedEquipment } from './EquipmentFilter'
+import { EQUIPMENT_BY_ID, canPerform, missingFor, type EquipmentId } from '@/data/equipment'
 import type { AppLocale, TestCategory } from '@/types/domain'
 
 type Filter = TestCategory | 'all'
@@ -48,6 +50,7 @@ export function TestCatalogScreen() {
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const [filter, setFilter] = useState<Filter>('all')
+  const [owned, setOwned] = useState<Set<EquipmentId>>(() => readOwnedEquipment())
   const { data } = useAppData()
 
   const discipline = data.profile.disciplineId
@@ -82,13 +85,19 @@ export function TestCatalogScreen() {
     () =>
       TEST_CATALOG.filter((test) => filter === 'all' || test.category === filter)
         .filter((test) => !disciplineSlugs.has(test.slug))
+        // Der allgemeine Katalog richtet sich nach der Ausstattung. Die
+        // Tests der eigenen Sportart bleiben dagegen stehen: sie zu
+        // verstecken hiesse, jemandem seine Kernbatterie vorzuenthalten,
+        // weil ihm heute ein Gerät fehlt.
+        .filter((test) => canPerform(test.equipmentIds, owned))
         .sort((a, b) => a.sortOrder - b.sortOrder),
-    [filter, disciplineSlugs],
+    [filter, disciplineSlugs, owned],
   )
 
   const row = (test: TestDefinition) => {
     const last = lastByTest.get(test.slug)
     const origin = discipline ? provenanceOf(discipline.id, test.slug) : 'unknown'
+    const missing = missingFor(test.equipmentIds, owned)
     return (
       <li key={test.slug}>
         <Link
@@ -107,6 +116,17 @@ export function TestCatalogScreen() {
               {last && ` · ${t('tests.lastRun', { date: formatDate(last, locale) })}`}
               {!last && ` · ${t('tests.neverRun')}`}
             </p>
+            {missing.length > 0 && (
+              <p className="mt-0.5 text-[12px] text-ink-muted">
+                {t('tests.equipmentMissing', {
+                  items: missing
+                    .map((group) =>
+                      group.map((id) => EQUIPMENT_BY_ID.get(id)?.name[locale] ?? id).join(' / '),
+                    )
+                    .join(', '),
+                })}
+              </p>
+            )}
           </div>
           <ChevronRight size={16} className="shrink-0 text-ink-muted" aria-hidden />
         </Link>
@@ -139,6 +159,8 @@ export function TestCatalogScreen() {
         <SportSelector />
       </div>
 
+      <EquipmentFilter owned={owned} onChange={setOwned} locale={locale} />
+
       {discipline && (
         <>
           <Panel className="mb-4">
@@ -164,7 +186,11 @@ export function TestCatalogScreen() {
       <Panel>
         <PanelHeader
           title={discipline ? t('tests.otherTests') : t('tests.catalog')}
-          subtitle={t('tests.count', { count: rest.length })}
+          subtitle={
+            owned.size > 0
+              ? t('tests.equipmentDoable', { count: rest.length })
+              : t('tests.count', { count: rest.length })
+          }
         />
         <div className="-mx-px overflow-x-auto border-b border-line px-4 py-3">
           <SegmentedControl<Filter>
@@ -178,7 +204,13 @@ export function TestCatalogScreen() {
             }))}
           />
         </div>
-        <ul className="divide-y divide-line">{rest.map(row)}</ul>
+        {rest.length === 0 ? (
+          <p className="px-4 py-6 text-[13px] text-ink-secondary">
+            {t('tests.equipmentNoneDoable')}
+          </p>
+        ) : (
+          <ul className="divide-y divide-line">{rest.map(row)}</ul>
+        )}
       </Panel>
     </>
   )

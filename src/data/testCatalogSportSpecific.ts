@@ -1,4 +1,5 @@
 import type { TestBlueprint, TestField } from './testCatalog'
+import type { EquipmentId } from './equipment'
 import {
   bikeThresholdScore,
   fatigueIndexPercent,
@@ -45,6 +46,7 @@ const timeTrial = (
   instructionsEn: string,
   equipmentDe: string,
   equipmentEn: string,
+  equipmentIds: EquipmentId[][],
   derived: string[] = [],
 ): TestBlueprint => ({
   slug,
@@ -62,6 +64,7 @@ const timeTrial = (
   shortName: { de: shortName, en: shortName },
   summary: { de: summaryDe, en: summaryEn },
   instructions: { de: instructionsDe, en: instructionsEn },
+  equipmentIds,
   equipment: { de: equipmentDe, en: equipmentEn },
 })
 
@@ -100,6 +103,7 @@ export const COMBAT_TESTS: TestBlueprint[] = [
       de: 'Drei Serien Ippon-seoi-nage auf zwei Partner: 15 s, 30 s, 30 s, dazwischen jeweils 10 s Pause. Herzfrequenz direkt nach der letzten Serie und nach einer Minute Pause erfassen. Der Index ist die Summe beider Herzfrequenzen geteilt durch die Zahl aller Würfe — je kleiner, desto besser.',
       en: 'Three sets of ippon-seoi-nage on two partners: 15 s, 30 s, 30 s with 10 s rest between. Record heart rate immediately after the last set and after one minute of rest. The index is the sum of both heart rates divided by total throws — the lower the better.',
     },
+    equipmentIds: [['partner'], ['mat'], ['heart_rate_monitor']],
     equipment: { de: 'Zwei Partner ähnlicher Grösse, Matte, Pulsmesser', en: 'Two partners of similar size, mat, heart rate monitor' },
   },
   {
@@ -137,6 +141,7 @@ export const COMBAT_TESTS: TestBlueprint[] = [
       de: 'Aufrecht stehen, Arm am Körper, Ellenbogen 90 Grad. Drei Versuche je Hand mit einer Minute Pause. Wird die zweite Hand mit erfasst, weist die App die Seitendifferenz aus.',
       en: 'Stand upright, arm at the side, elbow at 90 degrees. Three attempts per hand with one minute rest. If the second hand is recorded, the app reports the side difference.',
     },
+    equipmentIds: [['hand_dynamometer']],
     equipment: { de: 'Handdynamometer', en: 'Hand dynamometer' },
   },
   {
@@ -161,6 +166,7 @@ export const COMBAT_TESTS: TestBlueprint[] = [
       de: 'Aus dem vollständigen Hang, Arme gestreckt, ohne Hilfsmittel. Gemessen wird bis zum Loslassen. Kein Wechsel des Griffs während der Messung.',
       en: 'From a full hang, arms extended, no straps. Timed until release. No re-gripping during the measurement.',
     },
+    equipmentIds: [['pull_up_bar']],
     equipment: { de: 'Klimmzugstange', en: 'Pull-up bar' },
   },
   {
@@ -185,6 +191,7 @@ export const COMBAT_TESTS: TestBlueprint[] = [
       de: 'Ein Partner, eine Wurftechnik, 30 Sekunden maximale Wiederholungszahl. Nur vollständig durchgeführte Würfe zählen. Technik und Partnergewicht in der Notiz festhalten, sonst sind zwei Messungen nicht vergleichbar.',
       en: 'One partner, one throwing technique, maximum repetitions in 30 seconds. Only completed throws count. Record technique and partner weight in the note, otherwise two measurements are not comparable.',
     },
+    equipmentIds: [['partner'], ['mat']],
     equipment: { de: 'Partner, Matte', en: 'Partner, mat' },
   },
   strikeTest({
@@ -235,6 +242,7 @@ export const COMBAT_TESTS: TestBlueprint[] = [
       de: 'Unterarme und Fussspitzen, Körper in einer Linie. Gemessen wird bis zum ersten sichtbaren Absinken der Hüfte, nicht bis zum Abbruch.',
       en: 'Forearms and toes, body in one line. Timed to the first visible drop of the hips, not to failure.',
     },
+    equipmentIds: [['mat'], ['stopwatch']],
     equipment: { de: 'Matte, Stoppuhr', en: 'Mat, stopwatch' },
   },
 ]
@@ -256,6 +264,7 @@ const loadedTask = (
   instructionsEn: string,
   equipmentDe: string,
   equipmentEn: string,
+  equipmentIds: EquipmentId[][],
 ): TestBlueprint => ({
   slug,
   primaryMetric: 'durationSeconds',
@@ -275,6 +284,7 @@ const loadedTask = (
   shortName: { de: shortName, en: shortName },
   summary: { de: summaryDe, en: summaryEn },
   instructions: { de: instructionsDe, en: instructionsEn },
+  equipmentIds,
   equipment: { de: equipmentDe, en: equipmentEn },
 })
 
@@ -287,6 +297,7 @@ export const LOADED_TESTS: TestBlueprint[] = [
     'Two equal weights, upright gait, no setting down. Load and distance must match between measurements, otherwise the time is not comparable.',
     'Zwei Kurzhanteln oder Farmers-Griffe, vermessene Strecke',
     'Two dumbbells or farmers handles, measured distance',
+      [['dumbbells'], ['measured_course']],
   ),
   loadedTask(
     'sled_push', 521, 'Sled Push', 'Sled push', 'Sled Push', 5, 600,
@@ -296,6 +307,7 @@ export const LOADED_TESTS: TestBlueprint[] = [
     'Push a sled with fixed load over a measured distance. Record the surface in the note — turf and concrete differ considerably.',
     'Schlitten, Gewichtsscheiben, vermessene Strecke',
     'Sled, plates, measured distance',
+      [['sled'], ['added_load'], ['measured_course']],
   ),
   loadedTask(
     'sled_drag', 522, 'Sled Drag / Ziehen', 'Sled drag', 'Sled Drag', 5, 600,
@@ -305,6 +317,7 @@ export const LOADED_TESTS: TestBlueprint[] = [
     'Drag the load over a measured distance without stopping. Direction of pull and surface belong in the note.',
     'Schlitten oder Gurtsystem, Gewichte, vermessene Strecke',
     'Sled or harness, weights, measured distance',
+      [['sled'], ['added_load'], ['measured_course']],
   ),
   loadedTask(
     'stair_climb', 523, 'Treppensteigen unter Last', 'Loaded stair climb', 'Treppe', 10, 1200,
@@ -314,6 +327,7 @@ export const LOADED_TESTS: TestBlueprint[] = [
     'A fixed number of floors with fixed load, without pause. Record floors, load and whether breathing apparatus was worn.',
     'Treppenhaus, Gewichtsweste oder Ausrüstung',
     'Stairwell, weight vest or equipment',
+      [['stairs'], ['added_load']],
   ),
   loadedTask(
     'loaded_march', 524, 'Marsch unter Last', 'Loaded march', 'Marsch', 600, 28800,
@@ -323,6 +337,7 @@ export const LOADED_TESTS: TestBlueprint[] = [
     'A fixed route with fixed load, as fast as possible. Load, distance and elevation must match between measurements.',
     'Rucksack mit definierter Last, vermessene Strecke',
     'Pack with defined load, measured route',
+      [['added_load'], ['measured_course']],
   ),
 ]
 
@@ -350,6 +365,7 @@ export const HYBRID_TESTS: TestBlueprint[] = [
       de: '75 Wiederholungen auf Zeit, volle Hocke und Zielhöhe erreichen. Ballgewicht und Zielhöhe festhalten — beides verändert die Zeit erheblich.',
       en: '75 repetitions for time, full squat and target height reached. Record ball weight and target height — both change the time considerably.',
     },
+    equipmentIds: [['wall_ball'], ['cones']],
     equipment: { de: 'Wall Ball, Zielmarkierung', en: 'Wall ball, target mark' },
   },
   {
@@ -374,6 +390,7 @@ export const HYBRID_TESTS: TestBlueprint[] = [
       de: '80 m im Wechsel aus Burpee und Weitsprung aus dem Stand, auf Zeit. Brust und Oberschenkel müssen den Boden berühren.',
       en: '80 m alternating burpee and standing broad jump, for time. Chest and thighs must touch the ground.',
     },
+    equipmentIds: [['measured_course']],
     equipment: { de: 'Vermessene Strecke von 80 m', en: 'Measured 80 m lane' },
   },
   {
@@ -399,6 +416,7 @@ export const HYBRID_TESTS: TestBlueprint[] = [
       de: 'Widerstand auf einen festen Wert einstellen und festhalten. 1000 m so schnell wie möglich, gleichmässig eingeteilt.',
       en: 'Set the damper to a fixed value and record it. 1000 m as fast as possible, evenly paced.',
     },
+    equipmentIds: [['rowing_erg']],
     equipment: { de: 'Ruderergometer', en: 'Rowing ergometer' },
   },
 ]
@@ -411,7 +429,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
     'Close to threshold over the whole distance. Whoever fades here usually has a threshold problem, not a maximal-oxygen-uptake problem.',
     'Vermessene flache Strecke oder Bahn, gleichmässig eingeteilt. An einem anderen Tag als andere Ausdauertests durchführen.',
     'Measured flat route or track, evenly paced. Perform on a different day from other endurance tests.',
-    'Vermessene Strecke, Stoppuhr', 'Measured route, stopwatch', ['avg_pace_s_per_km'],
+    'Vermessene Strecke, Stoppuhr', 'Measured route, stopwatch', [['measured_course'], ['stopwatch']], ['avg_pace_s_per_km'],
   ),
   {
     slug: 'threshold_run_30min',
@@ -446,6 +464,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
       de: 'Nach Aufwärmen 30 Minuten maximal gleichmässig laufen. Die mittlere Herzfrequenz der letzten 20 Minuten ist die gebräuchliche Schätzung der Schwellenherzfrequenz.',
       en: 'After warming up, run 30 minutes at a maximal steady effort. Mean heart rate over the last 20 minutes is the common estimate of threshold heart rate.',
     },
+    equipmentIds: [['track', 'measured_course'], ['heart_rate_monitor']],
     equipment: { de: 'Bahn oder vermessene Strecke, Pulsmesser', en: 'Track or measured route, heart rate monitor' },
   },
   {
@@ -477,6 +496,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
       de: 'Nach gründlichem Aufwärmen 20 Minuten maximal gleichmässig fahren. Die App rechnet 95 % daraus als FTP. Gleiches Rad und gleiche Position wie beim Vergleichswert.',
       en: 'After a thorough warm-up, ride 20 minutes at a maximal steady effort. The app takes 95 % of it as FTP. Same bike and position as the comparison value.',
     },
+    equipmentIds: [['power_meter', 'bike_erg']],
     equipment: { de: 'Leistungsmesser oder Smart-Trainer', en: 'Power meter or smart trainer' },
   },
   {
@@ -502,6 +522,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
       de: 'Stufen von einer Minute mit fester Steigerung bis zum Abbruch. Stufenhöhe in der Notiz festhalten — sie verändert das Ergebnis erheblich.',
       en: 'One-minute steps with a fixed increment until failure. Record the increment in the note — it changes the result considerably.',
     },
+    equipmentIds: [['bike_erg']],
     equipment: { de: 'Smart-Trainer oder Ergometer', en: 'Smart trainer or ergometer' },
   },
   {
@@ -526,6 +547,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
       de: 'Drei Versuche mit vollständiger Erholung dazwischen. Aus dem Rollen antreten, nicht aus dem Stand — sonst misst man die Anfahrt statt der Spitzenleistung.',
       en: 'Three attempts with full recovery between. Start from a roll, not from standstill — otherwise you measure the launch, not peak power.',
     },
+    equipmentIds: [['power_meter']],
     equipment: { de: 'Leistungsmesser', en: 'Power meter' },
   },
   {
@@ -556,6 +578,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
       de: 'Widerstand nach Körpergewicht einstellen, 30 Sekunden maximal. Sehr belastend — nicht am selben Tag wie andere Maximaltests.',
       en: 'Set resistance by body weight, 30 seconds maximal. Very taxing — not on the same day as other maximal tests.',
     },
+    equipmentIds: [['bike_erg']],
     equipment: { de: 'Ergometer mit definierbarem Widerstand', en: 'Ergometer with settable resistance' },
   },
   {
@@ -583,6 +606,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
       de: 'Stufen von 3–5 Minuten mit fester Steigerung, Blutentnahme am Ende jeder Stufe. Erfasst wird das Ergebnis der Auswertung: Geschwindigkeit an der Schwelle. Stufenlänge und Schwellenmodell in der Notiz festhalten — ohne sie sind zwei Tests nicht vergleichbar.',
       en: 'Steps of 3–5 minutes with a fixed increment, blood sample at the end of each step. Recorded here is the outcome of the analysis: speed at threshold. Note step length and threshold model — without them two tests are not comparable.',
     },
+    equipmentIds: [['lactate_analyser'], ['treadmill', 'track'], ['partner']],
     equipment: { de: 'Laktatmessgerät, Laufband oder Bahn, Betreuung', en: 'Lactate analyser, treadmill or track, supervision' },
   },
 ]
@@ -594,6 +618,7 @@ export const SWIM_TESTS: TestBlueprint[] = [
     'Aus dem Startsprung, maximale Zeit. Bahnlänge in der Notiz festhalten — Kurz- und Langbahn unterscheiden sich um mehrere Sekunden.',
     'From a dive start, maximal effort. Record the pool length — short and long course differ by several seconds.',
     'Schwimmbahn, Stoppuhr', 'Pool lane, stopwatch',
+      [['pool'], ['stopwatch']],
   ),
   timeTrial(
     'swim_400m', 561, 400, 200, 1500, '400 m Schwimmen', '400 m swim', '400 m', 'Die gebräuchlichste Distanz zur Beurteilung der Grundlagenausdauer im Wasser. Lang genug für einen klaren Schwellenanteil, kurz genug für eine regelmässige Wiederholung.',
@@ -601,6 +626,7 @@ export const SWIM_TESTS: TestBlueprint[] = [
     'Gleichmässig eingeteilt, maximale Zeit. Bahnlänge und ob mit Neoprenanzug geschwommen wurde gehören in die Notiz.',
     'Evenly paced, maximal effort. Pool length and whether a wetsuit was worn belong in the note.',
     'Schwimmbahn, Stoppuhr', 'Pool lane, stopwatch',
+      [['pool'], ['stopwatch']],
   ),
   {
     slug: 'swim_incremental',
@@ -630,6 +656,7 @@ export const SWIM_TESTS: TestBlueprint[] = [
       de: 'Stufen über je 100 oder 200 m mit fester Steigerung. Erfasst wird die Pace an der Schwelle je 100 m; Zugfrequenz und Zuglänge sind freiwillig, machen aber erst den Technikwert möglich.',
       en: 'Steps of 100 or 200 m each with a fixed increment. Recorded is threshold pace per 100 m; stroke rate and length are optional but are what make the technique measure possible.',
     },
+    equipmentIds: [['pool'], ['stopwatch'], ['counter']],
     equipment: { de: 'Schwimmbahn, Stoppuhr, Zähler für Zugzahl', en: 'Pool lane, stopwatch, stroke counter' },
   },
 ]
@@ -670,6 +697,7 @@ export const TRIATHLON_TESTS: TestBlueprint[] = [
       de: 'Feste Radbelastung in Dauer und Intensität, dann ohne Pause die Laufstrecke. Raddauer, Intensität und Laufstrecke müssen zwischen zwei Messungen gleich sein, sonst ist der Vergleich wertlos.',
       en: 'A fixed bike load in duration and intensity, then the run without pause. Bike duration, intensity and run distance must match between measurements, otherwise the comparison is worthless.',
     },
+    equipmentIds: [['bike_erg'], ['measured_course']],
     equipment: { de: 'Rad oder Ergometer, Laufstrecke', en: 'Bike or ergometer, running route' },
   },
 ]

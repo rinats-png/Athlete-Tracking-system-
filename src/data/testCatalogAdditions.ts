@@ -1,4 +1,5 @@
 import type { TestBlueprint, TestField } from './testCatalog'
+import type { EquipmentId } from './equipment'
 import { estimateOneRepMax } from '@/lib/metrics'
 
 /**
@@ -53,6 +54,7 @@ const sprint = (
     de: 'Gründlich aufwärmen, inklusive Steigerungsläufe. Start aus dem Stand ohne Anlauf, Zeitnahme bei der ersten Bewegung. Drei Versuche mit voller Pause dazwischen — ohne Pause misst man Ermüdung statt Schnelligkeit.',
     en: 'Warm up thoroughly, including build-ups. Standing start with no run-up, timing begins on first movement. Three attempts with full recovery between them — without it you measure fatigue, not speed.',
   },
+  equipmentIds: [['measured_course'], ['cones'], ['stopwatch']],
   equipment: {
     de: 'Gerade Strecke, Markierungen, Stoppuhr oder Lichtschranke',
     en: 'Straight track, markers, stopwatch or timing gates',
@@ -91,6 +93,7 @@ export const AGILITY_TESTS: TestBlueprint[] = [
       de: 'Drei Linien im Abstand von 4,57 m (5 Yards). Start mittig, erst 5 Yards zur einen Seite, 10 Yards zur anderen, 5 Yards zurück zur Mitte. Jede Linie muss mit der Hand berührt werden.',
       en: 'Three lines 4.57 m (5 yards) apart. Start in the middle, 5 yards one way, 10 yards the other, 5 yards back to the middle. Each line must be touched by hand.',
     },
+    equipmentIds: [['cones'], ['stopwatch']],
     equipment: { de: 'Drei Markierungen, Stoppuhr', en: 'Three markers, stopwatch' },
   },
   {
@@ -115,6 +118,7 @@ export const AGILITY_TESTS: TestBlueprint[] = [
       de: 'T-Form aus vier Markierungen: 9,14 m vorwärts, 4,57 m seitlich links, 9,14 m seitlich rechts, 4,57 m seitlich zurück, dann rückwärts zum Start. Seitwärts ohne Überkreuzen der Beine.',
       en: 'A T of four markers: 9.14 m forward, 4.57 m left, 9.14 m right, 4.57 m back to the centre, then backpedal to the start. Shuffle laterally without crossing the feet.',
     },
+    equipmentIds: [['cones'], ['stopwatch']],
     equipment: { de: 'Vier Markierungen, Stoppuhr', en: 'Four markers, stopwatch' },
   },
 ]
@@ -148,6 +152,7 @@ const jump = (
   shortName: { de: shortDe, en: shortDe },
   summary: { de: summaryDe, en: summaryEn },
   instructions: { de: instructionsDe, en: instructionsEn },
+  equipmentIds: [['jump_mat']],
   equipment: {
     de: 'Sprungmatte, Messsystem oder Videoanalyse',
     en: 'Jump mat, measurement system or video analysis',
@@ -221,6 +226,7 @@ export const REPEATED_JUMP: TestBlueprint = {
     de: 'Fünfzehn Sekunden lang ohne Pause maximal hoch springen, Bodenkontakt so kurz wie möglich, Hände in den Hüften. Erfasst werden die Zahl der Sprünge und die Summe der Sprunghöhen; die App bildet daraus den Mittelwert.',
     en: 'Jump maximally for fifteen seconds without pausing, ground contact as short as possible, hands on hips. Record the number of jumps and the sum of their heights; the app forms the average.',
   },
+  equipmentIds: [['jump_mat']],
   equipment: { de: 'Sprungmatte oder Messsystem', en: 'Jump mat or measurement system' },
 }
 
@@ -250,6 +256,7 @@ export const STRENGTH_TESTS: TestBlueprint[] = [
       de: 'Aus dem Stand, Hantel auf Höhe der Schlüsselbeine, ohne Beineinsatz nach oben drücken bis zur vollen Streckung. Kein Ausweichen ins Hohlkreuz.',
       en: 'Standing, bar at collarbone height, press overhead to full lockout without leg drive. No excessive back arch.',
     },
+    equipmentIds: [['barbell']],
     equipment: { de: 'Langhantel, Scheiben', en: 'Barbell, plates' },
   },
   {
@@ -275,6 +282,7 @@ export const STRENGTH_TESTS: TestBlueprint[] = [
       de: 'Aufwärmsätze, dann Steigerungsversuche bis zum Maximum. Gewertet wird nur ein sauber im Frontstütz aufgefangener und aufgestandener Versuch.',
       en: 'Warm-up sets, then increasing attempts to a maximum. Only a lift caught cleanly in the front rack and stood up counts.',
     },
+    equipmentIds: [['barbell']],
     equipment: { de: 'Olympische Langhantel, Bumper, Plattform', en: 'Olympic barbell, bumper plates, platform' },
   },
   {
@@ -299,6 +307,7 @@ export const STRENGTH_TESTS: TestBlueprint[] = [
       de: 'Aus dem vollständigen Hang, Kinn über die Stange, kontrolliert ablassen bis zur vollen Streckung. Kein Schwung aus der Hüfte. Gezählt wird bis zum ersten unsauberen Versuch.',
       en: 'From a full hang, chin over the bar, lower under control to full extension. No kipping. Count up to the first repetition that breaks form.',
     },
+    equipmentIds: [['pull_up_bar']],
     equipment: { de: 'Klimmzugstange', en: 'Pull-up bar' },
   },
   {
@@ -337,6 +346,7 @@ export const STRENGTH_TESTS: TestBlueprint[] = [
       de: 'Zusatzgewicht am Gürtel oder in der Weste. Aus dem vollständigen Hang, Kinn über die Stange. Ohne hinterlegtes Körpergewicht lässt sich die Gesamtlast nicht bilden.',
       en: 'Added weight on a belt or in a vest. From a full hang, chin over the bar. Without a stored body weight the total load cannot be formed.',
     },
+    equipmentIds: [['pull_up_bar'], ['added_load']],
     equipment: { de: 'Klimmzugstange, Dipgürtel oder Gewichtsweste', en: 'Pull-up bar, dip belt or weight vest' },
   },
 ]
@@ -366,6 +376,7 @@ export const ENDURANCE_TESTS: TestBlueprint[] = [
       de: 'Nach Aufwärmen die Strecke so schnell wie möglich laufen, gleichmässig einteilen. Bahn oder vermessene flache Strecke; Gelände und Wind verändern das Ergebnis deutlich.',
       en: 'After warming up, cover the distance as fast as possible, pacing evenly. Use a track or a measured flat route; terrain and wind change the result markedly.',
     },
+    equipmentIds: [['track', 'measured_course'], ['stopwatch']],
     equipment: { de: 'Laufbahn oder vermessene Strecke, Stoppuhr', en: 'Track or measured route, stopwatch' },
   },
   {
@@ -390,6 +401,7 @@ export const ENDURANCE_TESTS: TestBlueprint[] = [
       de: 'Vermessene flache Strecke oder Bahn, gleichmässige Einteilung. An einem anderen Tag als andere Ausdauertests durchführen.',
       en: 'Measured flat route or track, evenly paced. Perform on a different day from other endurance tests.',
     },
+    equipmentIds: [['measured_course'], ['stopwatch']],
     equipment: { de: 'Vermessene Strecke, Stoppuhr', en: 'Measured route, stopwatch' },
   },
 ]
@@ -410,6 +422,7 @@ const forTime = (
   instructionsEn: string,
   equipmentDe: string,
   equipmentEn: string,
+  equipmentIds: EquipmentId[][],
 ): TestBlueprint => ({
   slug,
   primaryMetric: 'durationSeconds',
@@ -426,6 +439,7 @@ const forTime = (
   shortName: { de: short, en: short },
   summary: { de: summaryDe, en: summaryEn },
   instructions: { de: instructionsDe, en: instructionsEn },
+  equipmentIds,
   equipment: { de: equipmentDe, en: equipmentEn },
 })
 
@@ -444,6 +458,7 @@ export const CONDITIONING_TESTS: TestBlueprint[] = [
     'Thrusters at 43 kg (men) or 30 kg (women) and pull-ups, 21, 15 and 9 repetitions with no prescribed rest. Only the standard load makes the result comparable — note any deviation.',
     'Langhantel, Scheiben, Klimmzugstange',
     'Barbell, plates, pull-up bar',
+      [['barbell'], ['pull_up_bar']],
   ),
   forTime(
     'grace',
@@ -459,6 +474,7 @@ export const CONDITIONING_TESTS: TestBlueprint[] = [
     'Thirty clean & jerks at 61 kg (men) or 43 kg (women), as fast as possible. A different load makes the value incomparable and belongs in the note.',
     'Langhantel, Bumper, Plattform',
     'Barbell, bumper plates, platform',
+      [['barbell']],
   ),
   forTime(
     'murph',
@@ -474,6 +490,7 @@ export const CONDITIONING_TESTS: TestBlueprint[] = [
     'In this order, repetitions may be partitioned freely. With or without a weight vest — record which variant was used, otherwise two results are not comparable.',
     'Klimmzugstange, Laufstrecke, optional Gewichtsweste',
     'Pull-up bar, running route, optional weight vest',
+      [['pull_up_bar'], ['measured_course']],
   ),
 ]
 

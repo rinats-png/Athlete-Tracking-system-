@@ -1,4 +1,5 @@
 import type { DeriveContext, PutMetric } from './testDerive'
+import type { EquipmentId } from './equipment'
 import { TEST_CLASSIFICATION, type TestClassification } from './testClassification'
 
 /**
@@ -100,6 +101,16 @@ export interface TestDefinition extends TestClassification {
   shortName: { de: string; en: string }
   summary: { de: string; en: string }
   instructions: { de: string; en: string }
+  /**
+   * Was zur Durchführung nötig ist, als Kennungen.
+   *
+   * Jede innere Liste ist eine Gruppe von Alternativen — eines davon genügt;
+   * alle Gruppen zusammen sind nötig. `[['track','measured_course'],
+   * ['stopwatch']]` heisst: Bahn ODER vermessene Strecke, UND eine Stoppuhr.
+   * Der Satz in `equipment` bleibt daneben stehen und nennt die
+   * Einzelheiten, die keine Kennung trägt.
+   */
+  equipmentIds: EquipmentId[][]
   equipment: { de: string; en: string }
 }
 
@@ -150,6 +161,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Nach lockerem Einlaufen 12 Minuten in gleichmässig maximalem Tempo laufen. Distanz auf 10 m genau erfassen.',
       en: 'After a light warm-up, run for 12 minutes at an evenly paced maximum effort. Record distance to the nearest 10 m.',
     },
+    equipmentIds: [['track', 'measured_course'], ['stopwatch']],
     equipment: { de: 'Laufbahn oder vermessene Strecke, Stoppuhr', en: 'Running track or measured course, stopwatch' },
   },
   {
@@ -178,6 +190,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Bei jedem Signalton die 20-m-Linie erreichen. Test endet, wenn die Linie zweimal in Folge verfehlt wird.',
       en: 'Reach the 20 m line on every beep. The test ends after missing the line twice in a row.',
     },
+    equipmentIds: [['measured_course'], ['audio_protocol']],
     equipment: { de: '20 m markierte Strecke, Audio-Protokoll', en: '20 m marked course, audio protocol' },
   },
   {
@@ -203,6 +216,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Damper 4–6, nach Einrudern 2000 m auf Zeit. Splits alle 500 m notieren.',
       en: 'Damper 4–6, row 2000 m for time after warm-up. Record 500 m splits.',
     },
+    equipmentIds: [['rowing_erg']],
     equipment: { de: 'Ruderergometer (Concept2 o. ä.)', en: 'Rowing ergometer (Concept2 or similar)' },
   },
   ...(
@@ -234,6 +248,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Nach Aufwärmsätzen in 2–5 Versuchen an das Maximum herantasten. Nur saubere Wiederholungen zählen.',
       en: 'After warm-up sets, work up to a maximum in 2–5 attempts. Only clean repetitions count.',
     },
+    equipmentIds: [['barbell']],
     equipment: { de: 'Langhantel, Rack, Scheiben', en: 'Barbell, rack, plates' },
   })),
   ...(
@@ -264,6 +279,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Aufwärmsätze, dann Steigerungsversuche bis zum Maximum. Nur gültige Versuche zählen.',
       en: 'Warm-up sets, then increasing attempts to a maximum. Only valid lifts count.',
     },
+    equipmentIds: [['barbell']],
     equipment: { de: 'Olympische Langhantel, Bumper, Plattform', en: 'Olympic barbell, bumper plates, platform' },
   })),
   {
@@ -285,6 +301,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Power Clean, Front Squat, Push Press, Back Squat, Push Press — ohne Absetzen.',
       en: 'Power clean, front squat, push press, back squat, push press — without setting the bar down.',
     },
+    equipmentIds: [['barbell']],
     equipment: { de: 'Langhantel, Scheiben', en: 'Barbell, plates' },
   },
   {
@@ -316,6 +333,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Durchgehend arbeiten, Pausen frei wählbar. Am Ende volle Runden plus angefangene Wiederholungen notieren.',
       en: 'Work continuously, rest as needed. Record full rounds plus partial repetitions at the buzzer.',
     },
+    equipmentIds: [['pull_up_bar'], ['stopwatch']],
     equipment: { de: 'Klimmzugstange, Zeitmesser', en: 'Pull-up bar, timer' },
   },
   {
@@ -340,6 +358,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Aus dem Stand starten, 10 Minuten maximal gleichmässig arbeiten.',
       en: 'Start from a standstill and work at an evenly paced maximum for 10 minutes.',
     },
+    equipmentIds: [['bike_erg']],
     equipment: { de: 'Assault Bike / Air Bike', en: 'Assault bike / air bike' },
   },
   {
@@ -364,6 +383,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Start in Bauchlage. Zeit auf Hundertstel erfassen. Zwei Versuche mit voller Pause.',
       en: 'Start lying prone. Time to hundredths. Two attempts with full recovery.',
     },
+    equipmentIds: [['cones'], ['stopwatch']],
     equipment: { de: '8 Markierungshütchen, Stoppuhr', en: '8 cones, stopwatch' },
   },
   {
@@ -388,6 +408,7 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
       de: 'Beidbeiniger Absprung ohne Anlauf, beidbeinige Landung ohne Rückfallen. Drei Versuche, der beste zählt.',
       en: 'Two-footed take-off without a run-up, two-footed landing. Three attempts, best counts.',
     },
+    equipmentIds: [['tape_measure'], ['cones']],
     equipment: { de: 'Massband, rutschfeste Absprungmarkierung', en: 'Tape measure, non-slip take-off marking' },
   },
 

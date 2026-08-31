@@ -1,5 +1,6 @@
 import type { TestBlueprint, TestField } from './testCatalog'
 import { deriveRepsFatigue, deriveStrikeSplit } from './testDeriveShared'
+import type { EquipmentId } from './equipment'
 
 /**
  * Parametrisierte Protokolle.
@@ -51,6 +52,7 @@ const ACTION_WORDS = {
     unit: 'Schläge',
     de: { plural: 'Schläge', place: 'am Sandsack', note: 'Halbe Schläge zählen nicht.' },
     en: { plural: 'punches', place: 'on the heavy bag', note: 'Half punches do not count.' },
+    equipmentIds: [['heavy_bag'], ['counter']] as EquipmentId[][],
     equipment: { de: 'Sandsack, Handschuhe, Zähler', en: 'Heavy bag, gloves, counter' },
   },
   kick: {
@@ -65,6 +67,7 @@ const ACTION_WORDS = {
       place: 'on pads or bag, alternating sides',
       note: 'Full execution with retraction; record the kick type in the note — a roundhouse and a front kick are not comparable.',
     },
+    equipmentIds: [['heavy_bag'], ['counter']] as EquipmentId[][],
     equipment: {
       de: 'Sandsack oder Pratzen, Partner, Zähler',
       en: 'Bag or pads, partner, counter',
@@ -128,6 +131,7 @@ export function strikeTest(params: StrikeTestParams): TestBlueprint {
       de: `${time.de} ${words.de.plural} ${words.de.place}, maximale Frequenz bei voller Ausführung. ${words.de.note} Die Zwischensumme nach 30 Sekunden ist freiwillig, macht das Ergebnis aber deutlich aussagekräftiger: gezählt wird die Zahl, nicht die Härte — Schlagkraft misst dieser Test ausdrücklich nicht.`,
       en: `${time.en} of ${words.en.plural} ${words.en.place}, maximal frequency with full execution. ${words.en.note} The 30-second subtotal is optional but makes the result markedly more informative: what is counted is the number, not the force — this test explicitly does not measure striking power.`,
     },
+    equipmentIds: words.equipmentIds,
     equipment: words.equipment,
   }
 }

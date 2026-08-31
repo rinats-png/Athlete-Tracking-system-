@@ -219,7 +219,16 @@
     "optionalFor": "Weitere Tests für {{sport}}",
     "optionalHint": "Sinnvoll, aber nicht nötig für ein vollständiges Profil.",
     "otherTests": "Übriger Katalog",
-    "labSetting": "Labor"
+    "labSetting": "Labor",
+    "equipmentFilter": "Was ich habe",
+    "equipmentFilterHint": "Ausrüstung auswählen — der Katalog zeigt dann, was sich damit messen lässt. Ohne Auswahl steht alles.",
+    "equipmentShow": "Ausrüstung wählen",
+    "equipmentHide": "Ausrüstungsauswahl schliessen",
+    "equipmentSelected": "{{count}} von {{total}} ausgewählt",
+    "equipmentClear": "Auswahl zurücksetzen",
+    "equipmentMissing": "fehlt: {{items}}",
+    "equipmentDoable": "{{count}} davon mit deiner Ausrüstung",
+    "equipmentNoneDoable": "Mit dieser Ausrüstung lässt sich hier nichts messen. Ein Stück mehr, und der Katalog füllt sich wieder."
   },
   "history": {
     "title": "Verlauf",

@@ -64,6 +64,7 @@ export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
       de: 'Drei Serien à 30 s Würfe an einem Partner gleicher Gewichtsklasse, dazwischen 30 s Pause. Herzfrequenz direkt nach der letzten Serie und nach einer Minute Pause erfassen. Der Index ist die Summe beider Herzfrequenzen geteilt durch die Gesamtzahl der Würfe. Nur mit diesem Protokoll und gleicher Wurftechnik über die Termine hinweg vergleichbar.',
       en: 'Three 30 s sets of throws on a partner of the same weight class, with 30 s rest between. Record heart rate immediately after the last set and after one minute of rest. The index is the sum of both heart rates divided by total throws. Comparable across sessions only with this protocol and the same throwing technique.',
     },
+    equipmentIds: [['partner'], ['mat'], ['heart_rate_monitor']],
     equipment: { de: 'Partner gleicher Gewichtsklasse, Matte, Pulsmesser', en: 'Partner of the same weight class, mat, heart rate monitor' },
   },
   {
@@ -91,6 +92,7 @@ export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
       de: 'Zwei Minuten Uchi-komi in gleichbleibender Technik an einem Partner ähnlicher Grösse; jede vollständige Eindrehung zählt. Die Wiederholungen der ersten 30 Sekunden getrennt notieren — der Abfall über die zwei Minuten ist die eigentliche Aussage. Technik nicht wechseln, sonst ist der Wert nicht vergleichbar.',
       en: 'Two minutes of uchi-komi with one constant technique on a partner of similar size; each complete entry counts. Note the first 30 seconds separately — the drop-off across the two minutes is the actual finding. Do not switch technique, or the value is not comparable.',
     },
+    equipmentIds: [['partner'], ['mat']],
     equipment: { de: 'Partner ähnlicher Grösse, Matte', en: 'Partner of similar size, mat' },
   },
   {
@@ -118,6 +120,7 @@ export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
       de: 'Drei Minuten wiederholte Aufnahme aus der Wächterposition mit vollständigem Positionswechsel; jeder abgeschlossene Wechsel zählt. Herzfrequenz direkt danach und nach einer Minute erfassen. Partner und Griffart über die Termine gleich halten.',
       en: 'Three minutes of repeated entries from guard with a complete position change; each completed change counts. Record heart rate immediately after and after one minute. Keep partner and grip type constant across sessions.',
     },
+    equipmentIds: [['partner'], ['mat'], ['heart_rate_monitor']],
     equipment: { de: 'Partner ähnlicher Grösse, Matte, Pulsmesser', en: 'Partner of similar size, mat, heart rate monitor' },
   },
   strikeTest({
@@ -160,6 +163,7 @@ export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
       de: 'Eine Runde: ein Wurf oder Takedown, ein vollständiger Positionswechsel am Boden, einmal Aufstehen. So viele vollständige Runden wie möglich in fünf Minuten. Partner, Wurf und Position über die Termine gleich halten — der Zirkel ist nur gegen sich selbst vergleichbar, nicht gegen andere Athleten.',
       en: 'One round: one throw or takedown, one complete position change on the ground, one stand-up. As many complete rounds as possible in five minutes. Keep partner, throw and position constant across sessions — the circuit compares against yourself, not against other athletes.',
     },
+    equipmentIds: [['partner'], ['mat'], ['heart_rate_monitor']],
     equipment: { de: 'Partner ähnlicher Grösse, Matte, Pulsmesser', en: 'Partner of similar size, mat, heart rate monitor' },
   },
   {
@@ -196,6 +200,7 @@ export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
       de: 'Vier Sätze à 30 s maximale technische Aktionen der eigenen Sportart (Schläge, Tritte, Eindrehungen, Antritte), dazwischen jeweils 30 s Pause. Jeden Satz einzeln zählen. Die gewählte Aktion über die Termine gleich halten — ein Wechsel macht den Verlauf wertlos.',
       en: 'Four 30 s sets of maximal technical actions from your own sport (punches, kicks, entries, bursts) with 30 s rest between. Count each set separately. Keep the chosen action constant across sessions — switching makes the trend worthless.',
     },
+    equipmentIds: [['stopwatch'], ['heavy_bag', 'partner']],
     equipment: { de: 'Stoppuhr, je nach Aktion Sandsack oder Partner', en: 'Stopwatch, bag or partner depending on the action' },
   },
   {
@@ -227,6 +232,7 @@ export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
       de: 'So viele vollständige Aufstiege wie möglich in fünf Minuten, ohne Beineinsatz gewertet nur, wenn ohne Beine geklettert wird — die gewählte Form über die Termine beibehalten. Höhe des Seils eintragen; die geleistete Steighöhe wird daraus gerechnet.',
       en: 'As many complete climbs as possible in five minutes. Legless only counts as legless if climbed without legs — keep the chosen form across sessions. Enter the rope height; total climbed height is computed from it.',
     },
+    equipmentIds: [['climbing_rope'], ['mat']],
     equipment: { de: 'Kletterseil mit bekannter Höhe, Matte', en: 'Climbing rope of known height, mat' },
   },
   {
@@ -256,6 +262,7 @@ export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
       de: 'Drei Minuten Seilspringen, einfache Durchschläge, maximale Zahl. Unterbrechungen zählen und eintragen — sie sind der aussagekräftigere Wert als die reine Sprungzahl.',
       en: 'Three minutes of skipping, single unders, maximum count. Count and enter the breaks — they are more informative than the raw jump count.',
     },
+    equipmentIds: [['skipping_rope'], ['open_space']],
     equipment: { de: 'Springseil, ebener Boden', en: 'Skipping rope, level floor' },
   },
 ]
@@ -289,6 +296,7 @@ export const DOCUMENT_TASK_TESTS: TestBlueprint[] = [
       de: 'Widerstand auf die gewohnte Einstellung setzen und notieren — eine andere Einstellung macht den Vergleich wertlos. 1000 m so schnell wie möglich.',
       en: 'Set the damper to your usual setting and note it — a different setting makes the comparison worthless. 1000 m as fast as possible.',
     },
+    equipmentIds: [['ski_erg']],
     equipment: { de: 'Ski-Ergometer', en: 'Ski ergometer' },
   },
   {
@@ -313,6 +321,7 @@ export const DOCUMENT_TASK_TESTS: TestBlueprint[] = [
       de: '30 m Bärengang oder Robben — die Form vorher festlegen und beibehalten. Bauch und Knie dürfen bei der Robbe den Boden berühren, beim Bärengang nicht.',
       en: '30 m bear crawl or low crawl — decide the form beforehand and keep it. In the low crawl, stomach and knees may touch the ground; in the bear crawl they may not.',
     },
+    equipmentIds: [['measured_course']],
     equipment: { de: 'Ebene Strecke, 30 m', en: 'Level course, 30 m' },
   },
   {
@@ -345,6 +354,7 @@ export const DOCUMENT_TASK_TESTS: TestBlueprint[] = [
       de: 'Die eigene Bahn einmal festlegen und ab dann unverändert lassen: dieselben Stationen, dieselbe Reihenfolge, dieselben Höhen. Zeit, Stationszahl und Fehlversuche eintragen. Der Wert ist ausdrücklich nicht gegen andere Athleten vergleichbar — nur gegen den eigenen Vorwert auf derselben Bahn.',
       en: 'Define your course once and leave it unchanged: same stations, same order, same heights. Record time, station count and failed attempts. The value is explicitly not comparable against other athletes — only against your own previous result on the same course.',
     },
+    equipmentIds: [['obstacle_course'], ['stopwatch']],
     equipment: { de: 'Feste Hindernisbahn, Stoppuhr', en: 'Fixed obstacle course, stopwatch' },
   },
 ]
@@ -387,6 +397,7 @@ export const DOCUMENT_RUNNING_TESTS: TestBlueprint[] = [
       de: 'Eine feste Steigung wählen und beibehalten. Distanz und Höhenmeter eintragen; daraus wird die Steigleistung gerechnet. Ein Wechsel der Strecke macht den Verlauf wertlos — die Steigung geht unmittelbar in das Ergebnis ein.',
       en: 'Choose one fixed climb and keep it. Enter distance and elevation gain; vertical speed is computed from them. Changing the course makes the trend worthless — gradient enters the result directly.',
     },
+    equipmentIds: [['measured_course'], ['stopwatch']],
     equipment: { de: 'Vermessene Steigung, Uhr mit Höhenmesser oder bekannte Höhenangabe', en: 'Measured climb, watch with altimeter or known elevation' },
   },
   {
@@ -418,7 +429,11 @@ export const DOCUMENT_RUNNING_TESTS: TestBlueprint[] = [
       de: 'Dieselbe Strecke wie beim Bergauflauf, in umgekehrter Richtung, kontrolliert schnell. Nicht in der Woche vor einem Wettkampf durchführen: die exzentrische Belastung braucht mehrere Tage Erholung. Bei Beschwerden abbrechen.',
       en: 'The same course as the uphill test, in reverse, controlled and fast. Do not run it in the week before a competition: eccentric load needs several days of recovery. Stop if it hurts.',
     },
-    equipment: { de: 'Dieselbe vermessene Strecke wie bergauf', en: 'The same measured course as uphill' },
+    equipmentIds: [['measured_course'], ['stopwatch']],
+    equipment: {
+      de: 'Dieselbe vermessene Strecke wie bergauf, Stoppuhr',
+      en: 'The same measured course as uphill, stopwatch',
+    },
   },
   {
     slug: 'hr_drift_test',
@@ -452,6 +467,7 @@ export const DOCUMENT_RUNNING_TESTS: TestBlueprint[] = [
       de: 'Mindestens 60 Minuten in gleichbleibendem, ruhigem Tempo. Mittlere Herzfrequenz der ersten und der zweiten Hälfte getrennt eintragen. Das Tempo muss über beide Hälften gleich bleiben — sonst misst der Wert die Tempoänderung, nicht die Drift. Nicht bei Hitze durchführen, wenn der Vorwert bei Kühle entstand.',
       en: 'At least 60 minutes at a constant, easy pace. Enter mean heart rate for the first and second half separately. Pace must stay equal across both halves — otherwise the value measures the pace change, not the drift. Do not run it in heat if the previous result was recorded in cool conditions.',
     },
+    equipmentIds: [['heart_rate_monitor'], ['measured_course', 'treadmill']],
     equipment: { de: 'Pulsgurt, ebene Strecke oder Laufband', en: 'Heart rate strap, flat course or treadmill' },
   },
 ]
@@ -493,6 +509,7 @@ export const DOCUMENT_CYCLING_TESTS: TestBlueprint[] = [
       de: 'Zehn Minuten bei fest eingestellter Leistung, ungefähr 70 % der Schwelle, nach 15 Minuten Einfahren. Mittlere Herzfrequenz der letzten fünf Minuten eintragen. Dieselbe Wattzahl über die Termine beibehalten — der Vergleich lebt davon. Nicht nach harten Einheiten und nicht bei Hitze durchführen.',
       en: 'Ten minutes at a fixed power, roughly 70 % of threshold, after 15 minutes of warm-up. Enter mean heart rate for the final five minutes. Keep the same wattage across sessions — the comparison depends on it. Do not perform it after hard sessions or in heat.',
     },
+    equipmentIds: [['power_meter', 'bike_erg'], ['heart_rate_monitor']],
     equipment: { de: 'Leistungsmesser oder Ergometer, Pulsgurt', en: 'Power meter or ergometer, heart rate strap' },
   },
   {
@@ -522,6 +539,7 @@ export const DOCUMENT_CYCLING_TESTS: TestBlueprint[] = [
       de: 'Sechs Sprints à 10 s aus dem Rollen, dazwischen 30 s locker. Höchste und niedrigste Spitzenleistung eintragen. Immer dieselbe Zahl an Sprints und dieselbe Pausenlänge — beides geht direkt in den Ermüdungsindex ein.',
       en: 'Six 10 s sprints from a rolling start with 30 s easy between. Enter the highest and the lowest peak power. Always the same number of sprints and the same rest — both enter the fatigue index directly.',
     },
+    equipmentIds: [['power_meter', 'bike_erg']],
     equipment: { de: 'Leistungsmesser oder Ergometer', en: 'Power meter or ergometer' },
   },
 ]
@@ -557,6 +575,7 @@ const strokeTimeTrial = (
     de: '100 m in der angegebenen Lage, maximal. Bahnlänge eintragen — eine 25-m-Bahn hat doppelt so viele Wenden wie eine 50-m-Bahn und ergibt dadurch eine schnellere Zeit. Zugzahl mitzählen lassen, wenn jemand am Beckenrand steht.',
     en: '100 m in the given stroke, maximal. Enter the pool length — a 25 m pool has twice the turns of a 50 m pool and therefore yields a faster time. Have someone count strokes from the poolside if possible.',
   },
+  equipmentIds: [['pool'], ['stopwatch']],
   equipment: { de: 'Schwimmbahn, Stoppuhr', en: 'Pool lane, stopwatch' },
 })
 
