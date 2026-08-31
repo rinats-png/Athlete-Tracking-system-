@@ -150,6 +150,17 @@ export function AssessmentCreateScreen() {
     [batterySlug, batteries, selected.length],
   )
 
+  // Ausgewählte Tests, die nicht schon in den Disziplinlisten stehen.
+  const extraSelected = useMemo(
+    () =>
+      selected
+        .filter((slug) => !disciplineSlugs.has(slug))
+        .map(getTest)
+        .filter((x): x is TestDefinition => x != null)
+        .sort((a, b) => a.sortOrder - b.sortOrder),
+    [selected, disciplineSlugs],
+  )
+
   /**
    * Eine Testzeile mit Kästchen, Begründung und Herkunft.
    *
@@ -257,6 +268,21 @@ export function AssessmentCreateScreen() {
                   <Link to="/tests">{t('tests.chooseSport')}</Link>
                 </Button>
               </div>
+            </Panel>
+          )}
+
+          {/* Was durch eine Batterie oder aus dem übrigen Katalog dazukam,
+              steht hier. Ohne diese Liste wäre nach dem Antippen einer
+              allgemeinen Batterie nirgends zu sehen, was der Termin
+              tatsächlich enthält — die Häkchen lägen in einem eingeklappten
+              Bereich. */}
+          {extraSelected.length > 0 && (
+            <Panel>
+              <PanelHeader
+                title={t('assessments.alsoIncluded')}
+                subtitle={t('assessments.alsoIncludedHint')}
+              />
+              <ul>{extraSelected.map((test) => testRow(test, false))}</ul>
             </Panel>
           )}
 

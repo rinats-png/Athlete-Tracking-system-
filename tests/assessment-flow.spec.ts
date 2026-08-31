@@ -24,7 +24,10 @@ test.describe('Diagnostik', () => {
     // 1. Termin aus einer Vorlage anlegen
     await page.goto('/diagnostik/neu', { waitUntil: 'domcontentloaded' })
     await page.getByRole('button', { name: /Maxkraft \(Big Three\)/ }).click()
-    await expect(page.getByText('5 Tests ausgewählt')).toBeVisible()
+    // Die Zahl steht jetzt im Umfang des Termins statt in der Überschrift
+    // der Testliste — sichtbar bleibt sie in jedem Fall vor dem Start.
+    await expect(page.getByText('Umfang dieses Termins')).toBeVisible()
+    expect(await page.locator('input[type="checkbox"]:checked').count()).toBe(5)
     // Die Vorlage deckt nicht alles ab — das muss VOR dem Start dastehen.
     await expect(page.getByText(/Achsen bleiben ungemessen/)).toBeVisible()
 

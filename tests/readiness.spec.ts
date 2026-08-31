@@ -120,14 +120,22 @@ test.describe("Bereitschaft im Ablauf", () => {
   });
 });
 
-/** Der Bestand im Speicher — die Nebenschlüssel (Modus, Thema, Sprache) sind
- *  keine Bestandsdaten und würden die Suche in die Irre führen. */
+/**
+ * Der Bestand im Speicher.
+ *
+ * Gesucht wird nach der FORM, nicht nach dem Namen: der Bestand ist der
+ * einzige Eintrag, dessen Wert ein JSON-Objekt ist. Eine Ausschlussliste von
+ * Nebenschlüsseln war zu spröde — mit «baseline.sportAsked» kam ein neuer
+ * hinzu, und der Fall las danach dessen Wert «1» statt der Daten.
+ */
 async function readStore(page: import("@playwright/test").Page) {
   return page.evaluate(() => {
-    const key = Object.keys(localStorage).find(
-      (k) => k.startsWith("baseline") && !["baseline.mode", "baseline.theme", "baseline.locale"].includes(k),
-    );
-    return key ? localStorage.getItem(key) : null;
+    for (const key of Object.keys(localStorage)) {
+      if (!key.startsWith("baseline")) continue;
+      const value = localStorage.getItem(key);
+      if (value?.trimStart().startsWith("{")) return value;
+    }
+    return null;
   });
 }
 

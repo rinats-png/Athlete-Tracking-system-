@@ -549,7 +549,9 @@
     "scope": "Umfang dieses Termins",
     "testsWord": "Tests",
     "axesWord": "Achsen",
-    "scopeHint": "Jeder zusätzliche Test erweitert die Grundlage: mehr abgedeckte Achsen bedeuten eine belastbarere Einordnung und einen vollständigeren Verlauf. Die Genauigkeit der einzelnen Messung ändert sich dadurch nicht."
+    "scopeHint": "Jeder zusätzliche Test erweitert die Grundlage: mehr abgedeckte Achsen bedeuten eine belastbarere Einordnung und einen vollständigeren Verlauf. Die Genauigkeit der einzelnen Messung ändert sich dadurch nicht.",
+    "alsoIncluded": "Ausserdem in diesem Termin",
+    "alsoIncludedHint": "Aus einer Batterie oder dem übrigen Katalog dazugenommen."
   },
   "attempts": {
     "title": "Versuche",

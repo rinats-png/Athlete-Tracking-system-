@@ -549,7 +549,9 @@
     "scope": "Scope of this session",
     "testsWord": "tests",
     "axesWord": "axes",
-    "scopeHint": "Every additional test widens the basis: more covered axes mean a more dependable classification and a more complete history. It does not change the precision of the individual measurement."
+    "scopeHint": "Every additional test widens the basis: more covered axes mean a more dependable classification and a more complete history. It does not change the precision of the individual measurement.",
+    "alsoIncluded": "Also in this session",
+    "alsoIncludedHint": "Added from a battery or the rest of the catalogue."
   },
   "attempts": {
     "title": "Attempts",
