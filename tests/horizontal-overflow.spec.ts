@@ -32,6 +32,22 @@ test.describe("Seitliches Überlaufen", () => {
     });
   }
 
+  test("auch mit aufgeklapptem Katalog bleibt der Terminentwurf in der Breite", async ({
+    page,
+  }) => {
+    // Eingeklappt war die breiteste Stelle der Seite unsichtbar: die Reihe der
+    // Fähigkeits-Chips. Der Fall öffnet sie deshalb ausdrücklich.
+    await openDemo(page);
+    await page.goto("/diagnostik/neu", { waitUntil: "domcontentloaded" });
+    await page.getByRole("button", { name: /^Anzeigen$/ }).click();
+    await page.waitForTimeout(200);
+    const { scrollWidth, clientWidth } = await page.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }));
+    expect(scrollWidth, `${scrollWidth} statt ${clientWidth}`).toBeLessThanOrEqual(clientWidth + 1);
+  });
+
   test("auch mit gewählter Disziplin bleibt das Profil in der Breite", async ({ page }) => {
     // Die Sportartauswahl führt die längsten Texte der App: Disziplinnamen,
     // Begründung und Testliste stehen dort untereinander.

@@ -236,7 +236,7 @@ export function AssessmentCreateScreen() {
       </header>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        <div className="space-y-4 md:col-span-2 lg:col-span-3">
+        <div className="min-w-0 space-y-4 md:col-span-2 lg:col-span-3">
           {discipline ? (
             <>
               <Panel>
@@ -300,7 +300,10 @@ export function AssessmentCreateScreen() {
             />
             {showOther && (
               <>
-                <div className="overflow-x-auto border-b border-line px-4 py-3">
+                {/* Die Chip-Reihe ist breiter als ein Telefon. Sie scrollt in
+                    sich; ohne min-w-0 an der Rasterspalte darüber hätte sie
+                    stattdessen die ganze Seite verbreitert. */}
+                <div className="min-w-0 overflow-x-auto border-b border-line px-4 py-3">
                   <SegmentedControl<Filter>
                     label={t('tests.filter')}
                     value={filter}
@@ -366,7 +369,7 @@ export function AssessmentCreateScreen() {
           </Panel>
         </div>
 
-        <div className="space-y-4 lg:col-span-2">
+        <div className="min-w-0 space-y-4 lg:col-span-2">
           {/* Umfang des Termins. Der Satz darunter sagt, was zusätzliche Tests
               bewirken — und was sie nicht bewirken: eine breitere Grundlage
               macht die EINORDNUNG belastbarer, nicht die einzelne Messung
