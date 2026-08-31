@@ -1,5 +1,5 @@
-import type { PerformanceDimension, ScoringDirection, TestCategory } from '@/types/domain'
 import type { DeriveContext, PutMetric } from './testDerive'
+import { TEST_CLASSIFICATION, type TestClassification } from './testClassification'
 
 /**
  * Testkatalog als Client-Daten.
@@ -43,13 +43,23 @@ export interface TestField {
 
 export type ProtocolMode = 'countdown' | 'stopwatch' | 'amrap' | 'attempts' | 'stages'
 
-export interface TestDefinition {
+/**
+ * Ein Test in drei Schichten (Befund 04).
+ *
+ *   Protokoll  — was der Athlet tut und welche Rohwerte dabei entstehen:
+ *                `fields`, `protocol`, `requiresBodyWeight`, `setting`,
+ *                `variant` und die Texte.
+ *   Kennzahlen — `derive` und `derivedMetrics`, unmittelbar neben den
+ *                Feldern, aus denen sie gebildet werden.
+ *   Einordnung — Achsenzuordnung und Richtung. Sie ändert sich am
+ *                häufigsten und steht deshalb geschlossen in
+ *                `testClassification.ts`, nicht zwischen den Anzeigetexten.
+ *
+ * `TestBlueprint` ist der Test ohne seine Einordnung — die Form, in der die
+ * Katalogdateien ihn aufschreiben. `TEST_CATALOG` fügt beides zusammen.
+ */
+export interface TestDefinition extends TestClassification {
   slug: string
-  category: TestCategory
-  dimension: PerformanceDimension
-  /** Achse -> Metrik, aus der der Achsenwert gebildet wird. */
-  dimensionMetrics: Partial<Record<PerformanceDimension, string>>
-  direction: ScoringDirection
   /** Metrik, die als Primärergebnis in der Liste erscheint. */
   primaryMetric: string
   primaryUnit: string
@@ -65,6 +75,12 @@ export interface TestDefinition {
    */
   setting?: 'field' | 'lab'
   derivedMetrics: string[]
+  /**
+   * Der Parametersatz, wenn dieser Test aus einem parametrisierten Protokoll
+   * entsteht (Dauer, Zielaktion, Lage). Steht hier, damit erkennbar bleibt,
+   * worin sich zwei Tests desselben Protokolls unterscheiden.
+   */
+  variant?: Record<string, string | number>
   /**
    * Kennzahlen dieses Tests aus seinen Rohwerten.
    *
@@ -87,19 +103,33 @@ export interface TestDefinition {
   equipment: { de: string; en: string }
 }
 
+/** Ein Test, wie ihn die Katalogdateien aufschreiben: ohne seine Einordnung. */
+export type TestBlueprint = Omit<TestDefinition, keyof TestClassification>
+
+/**
+ * Fügt einem Protokoll seine Einordnung hinzu.
+ *
+ * Fehlt sie, bricht der Aufbau ab, statt einen Test ohne Achsenzuordnung
+ * auszuliefern: ein solcher Test liesse sich messen, zahlte aber auf kein
+ * Profil ein — und das würde niemandem auffallen.
+ */
+function classify(blueprint: TestBlueprint): TestDefinition {
+  const classification = TEST_CLASSIFICATION[blueprint.slug]
+  if (!classification) {
+    throw new Error(`Test ohne Einordnung: ${blueprint.slug} (testClassification.ts)`)
+  }
+  return { ...blueprint, ...classification }
+}
+
 const HR_RPE: TestField[] = [
   { key: 'avgHeartRate', type: 'integer', unit: 'bpm', required: false, min: 30, max: 240 },
   { key: 'maxHeartRate', type: 'integer', unit: 'bpm', required: false, min: 30, max: 240 },
   { key: 'rpe', type: 'rpe', required: false, min: 1, max: 10 },
 ]
 
-export const TEST_CATALOG: TestDefinition[] = [
+const TEST_BLUEPRINTS: TestBlueprint[] = [
   {
     slug: 'cooper_12min',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'vo2max_ml_kg_min' },
-    direction: 'higher_is_better',
     primaryMetric: 'distanceM',
     primaryUnit: 'm',
     fields: [{ key: 'distanceM', type: 'number', unit: 'm', required: true, min: 500, max: 6000, step: 10 }, ...HR_RPE],
@@ -107,7 +137,7 @@ export const TEST_CATALOG: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['vo2max_ml_kg_min'],
     derive: (values, _ctx, put) => {
-    put('vo2max_ml_kg_min', vo2maxFromCooper(values.distanceM))
+      put('vo2max_ml_kg_min', vo2maxFromCooper(values.distanceM))
     },
     sortOrder: 10,
     name: { de: 'Cooper-Test (12 Minuten)', en: 'Cooper Test (12 minutes)' },
@@ -124,10 +154,6 @@ export const TEST_CATALOG: TestDefinition[] = [
   },
   {
     slug: 'beep_test_20m',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'vo2max_ml_kg_min' },
-    direction: 'higher_is_better',
     primaryMetric: 'level',
     primaryUnit: 'Level',
     fields: [
@@ -139,7 +165,7 @@ export const TEST_CATALOG: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['vo2max_ml_kg_min'],
     derive: (values, ctx, put) => {
-    put('vo2max_ml_kg_min', vo2maxFromBeepTest(values.level, ctx.ageYears ?? 30))
+      put('vo2max_ml_kg_min', vo2maxFromBeepTest(values.level, ctx.ageYears ?? 30))
     },
     sortOrder: 20,
     name: { de: '20 m Shuttle Run (Beep-Test)', en: '20 m Shuttle Run (Beep Test)' },
@@ -156,10 +182,6 @@ export const TEST_CATALOG: TestDefinition[] = [
   },
   {
     slug: 'row_2000m',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -189,12 +211,8 @@ export const TEST_CATALOG: TestDefinition[] = [
       ['deadlift_1rm', 'Kreuzheben (Deadlift) 1RM', 'Deadlift 1RM', 'Deadlift', 'Deadlift', 120, 450],
       ['bench_press_1rm', 'Bankdrücken (Bench Press) 1RM', 'Bench Press 1RM', 'Bench', 'Bench', 130, 300],
     ] as const
-  ).map<TestDefinition>(([slug, nameDe, nameEn, shortDe, shortEn, sort, maxLoad]) => ({
+  ).map<TestBlueprint>(([slug, nameDe, nameEn, shortDe, shortEn, sort, maxLoad]) => ({
     slug,
-    category: 'max_strength',
-    dimension: 'max_strength',
-    dimensionMetrics: { max_strength: 'one_rm_kg', relative_strength: 'relative_strength_bw' },
-    direction: 'higher_is_better',
     primaryMetric: 'one_rm_kg',
     primaryUnit: 'kg',
     fields: [
@@ -223,16 +241,8 @@ export const TEST_CATALOG: TestDefinition[] = [
       ['clean_and_jerk_1rm', 'Umsetzen und Stossen (Clean & Jerk)', 'Clean & Jerk 1RM', 'C&J', 140, 260],
       ['snatch_1rm', 'Reissen (Snatch)', 'Snatch 1RM', 'Snatch', 150, 200],
     ] as const
-  ).map<TestDefinition>(([slug, nameDe, nameEn, short, sort, maxLoad]) => ({
+  ).map<TestBlueprint>(([slug, nameDe, nameEn, short, sort, maxLoad]) => ({
     slug,
-    category: 'max_strength',
-    dimension: 'max_strength',
-    dimensionMetrics: {
-      max_strength: 'one_rm_kg',
-      relative_strength: 'relative_strength_bw',
-      power: 'relative_strength_bw',
-    },
-    direction: 'higher_is_better',
     primaryMetric: 'one_rm_kg',
     primaryUnit: 'kg',
     fields: [
@@ -258,10 +268,6 @@ export const TEST_CATALOG: TestDefinition[] = [
   })),
   {
     slug: 'bear_complex',
-    category: 'strength_endurance',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'loadKg', relative_strength: 'relative_strength_bw' },
-    direction: 'higher_is_better',
     primaryMetric: 'loadKg',
     primaryUnit: 'kg',
     fields: [{ key: 'loadKg', type: 'number', unit: 'kg', required: true, min: 20, max: 150, step: 2.5 }, ...HR_RPE],
@@ -283,10 +289,6 @@ export const TEST_CATALOG: TestDefinition[] = [
   },
   {
     slug: 'cindy_20min_amrap',
-    category: 'strength_endurance',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'total_reps' },
-    direction: 'higher_is_better',
     primaryMetric: 'rounds',
     primaryUnit: 'Runden',
     fields: [
@@ -298,10 +300,10 @@ export const TEST_CATALOG: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['total_reps', 'reps_per_minute'],
     derive: (values, _ctx, put) => {
-    // Eine Runde Cindy sind 5 + 10 + 15 = 30 Wiederholungen.
-    const total = (values.rounds ?? 0) * 30 + (values.partialReps ?? 0)
-    put('total_reps', total)
-    put('reps_per_minute', total / 20)
+      // Eine Runde Cindy sind 5 + 10 + 15 = 30 Wiederholungen.
+      const total = (values.rounds ?? 0) * 30 + (values.partialReps ?? 0)
+      put('total_reps', total)
+      put('reps_per_minute', total / 20)
     },
     sortOrder: 220,
     name: { de: 'Cindy (20 Min AMRAP)', en: 'Cindy (20 min AMRAP)' },
@@ -318,10 +320,6 @@ export const TEST_CATALOG: TestDefinition[] = [
   },
   {
     slug: 'assault_bike_10min_cal',
-    category: 'strength_endurance',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'calories', endurance: 'calories' },
-    direction: 'higher_is_better',
     primaryMetric: 'calories',
     primaryUnit: 'kcal',
     fields: [{ key: 'calories', type: 'number', unit: 'kcal', required: true, min: 20, max: 400, step: 1 }, ...HR_RPE],
@@ -329,7 +327,7 @@ export const TEST_CATALOG: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['calories_per_minute'],
     derive: (values, _ctx, put) => {
-    put('calories_per_minute', values.calories / 10)
+      put('calories_per_minute', values.calories / 10)
     },
     sortOrder: 230,
     name: { de: 'Assault Bike — 10 Minuten', en: 'Assault Bike — 10 minutes' },
@@ -346,10 +344,6 @@ export const TEST_CATALOG: TestDefinition[] = [
   },
   {
     slug: 'illinois_agility',
-    category: 'agility',
-    dimension: 'agility',
-    dimensionMetrics: { agility: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -374,10 +368,6 @@ export const TEST_CATALOG: TestDefinition[] = [
   },
   {
     slug: 'standing_broad_jump',
-    category: 'power',
-    dimension: 'power',
-    dimensionMetrics: { power: 'distanceM' },
-    direction: 'higher_is_better',
     primaryMetric: 'distanceM',
     primaryUnit: 'm',
     fields: [
@@ -417,6 +407,12 @@ export const TEST_CATALOG: TestDefinition[] = [
   // je Disziplin in src/data/documentCoverage.ts.
   ...DOCUMENT_TESTS,
 ]
+
+/**
+ * Der fertige Katalog: Protokoll und Kennzahlen aus den Katalogdateien,
+ * Einordnung aus `testClassification.ts`.
+ */
+export const TEST_CATALOG: TestDefinition[] = TEST_BLUEPRINTS.map(classify)
 
 export const TEST_BY_SLUG = new Map(TEST_CATALOG.map((test) => [test.slug, test]))
 

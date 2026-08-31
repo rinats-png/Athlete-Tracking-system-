@@ -1,4 +1,4 @@
-import type { TestDefinition, TestField } from './testCatalog'
+import type { TestBlueprint, TestField } from './testCatalog'
 import { estimateOneRepMax } from '@/lib/metrics'
 
 /**
@@ -31,12 +31,8 @@ const sprint = (
   nameDe: string,
   nameEn: string,
   maxSeconds: number,
-): TestDefinition => ({
+): TestBlueprint => ({
   slug,
-  category: 'speed',
-  dimension: 'power',
-  dimensionMetrics: { power: 'durationSeconds' },
-  direction: 'lower_is_better',
   primaryMetric: 'durationSeconds',
   primaryUnit: 's',
   fields: [
@@ -63,7 +59,7 @@ const sprint = (
   },
 })
 
-export const SPEED_TESTS: TestDefinition[] = [
+export const SPEED_TESTS: TestBlueprint[] = [
   sprint('sprint_10m', 10, 400, '10 m Sprint', '10 m sprint', 5),
   sprint('sprint_20m', 20, 401, '20 m Sprint', '20 m sprint', 8),
   sprint('sprint_30m', 30, 402, '30 m Sprint', '30 m sprint', 12),
@@ -72,13 +68,9 @@ export const SPEED_TESTS: TestDefinition[] = [
 
 // --- Agilität ----------------------------------------------------------------
 
-export const AGILITY_TESTS: TestDefinition[] = [
+export const AGILITY_TESTS: TestBlueprint[] = [
   {
     slug: 'shuttle_5_10_5',
-    category: 'agility',
-    dimension: 'agility',
-    dimensionMetrics: { agility: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -103,10 +95,6 @@ export const AGILITY_TESTS: TestDefinition[] = [
   },
   {
     slug: 't_test_agility',
-    category: 'agility',
-    dimension: 'agility',
-    dimensionMetrics: { agility: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -143,12 +131,8 @@ const jump = (
   summaryEn: string,
   instructionsDe: string,
   instructionsEn: string,
-): TestDefinition => ({
+): TestBlueprint => ({
   slug,
-  category: 'power',
-  dimension: 'power',
-  dimensionMetrics: { power: 'jumpHeightCm' },
-  direction: 'higher_is_better',
   primaryMetric: 'jumpHeightCm',
   primaryUnit: 'cm',
   fields: [
@@ -170,7 +154,7 @@ const jump = (
   },
 })
 
-export const JUMP_TESTS: TestDefinition[] = [
+export const JUMP_TESTS: TestBlueprint[] = [
   jump(
     'countermovement_jump',
     330,
@@ -206,12 +190,8 @@ export const JUMP_TESTS: TestDefinition[] = [
   ),
 ]
 
-export const REPEATED_JUMP: TestDefinition = {
+export const REPEATED_JUMP: TestBlueprint = {
   slug: 'repeated_jump_15s',
-  category: 'power',
-  dimension: 'power',
-  dimensionMetrics: { power: 'avg_jump_height_cm', strength_endurance: 'jumpCount' },
-  direction: 'higher_is_better',
   primaryMetric: 'avg_jump_height_cm',
   primaryUnit: 'cm',
   fields: [
@@ -223,12 +203,12 @@ export const REPEATED_JUMP: TestDefinition = {
   requiresBodyWeight: true,
   derivedMetrics: ['avg_jump_height_cm'],
   derive: (values, _ctx, put) => {
-  // Der Mittelwert wird gebildet, nicht eingegeben: zwei Zahlen, die
-  // dasselbe beschreiben, könnten auseinanderlaufen.
-  const count = values.jumpCount
-  if (count != null && count > 0 && values.totalHeightCm != null) {
-    put('avg_jump_height_cm', values.totalHeightCm / count)
-  }
+    // Der Mittelwert wird gebildet, nicht eingegeben: zwei Zahlen, die
+    // dasselbe beschreiben, könnten auseinanderlaufen.
+    const count = values.jumpCount
+    if (count != null && count > 0 && values.totalHeightCm != null) {
+      put('avg_jump_height_cm', values.totalHeightCm / count)
+    }
   },
   sortOrder: 333,
   name: { de: 'Wiederholungssprünge 15 s', en: 'Repeated jumps 15 s' },
@@ -246,13 +226,9 @@ export const REPEATED_JUMP: TestDefinition = {
 
 // --- Kraft -------------------------------------------------------------------
 
-export const STRENGTH_TESTS: TestDefinition[] = [
+export const STRENGTH_TESTS: TestBlueprint[] = [
   {
     slug: 'overhead_press_1rm',
-    category: 'max_strength',
-    dimension: 'max_strength',
-    dimensionMetrics: { max_strength: 'one_rm_kg', relative_strength: 'relative_strength_bw' },
-    direction: 'higher_is_better',
     primaryMetric: 'one_rm_kg',
     primaryUnit: 'kg',
     fields: [
@@ -278,14 +254,6 @@ export const STRENGTH_TESTS: TestDefinition[] = [
   },
   {
     slug: 'clean_1rm',
-    category: 'max_strength',
-    dimension: 'max_strength',
-    dimensionMetrics: {
-      max_strength: 'one_rm_kg',
-      relative_strength: 'relative_strength_bw',
-      power: 'relative_strength_bw',
-    },
-    direction: 'higher_is_better',
     primaryMetric: 'one_rm_kg',
     primaryUnit: 'kg',
     fields: [
@@ -311,10 +279,6 @@ export const STRENGTH_TESTS: TestDefinition[] = [
   },
   {
     slug: 'pull_up_max_reps',
-    category: 'strength_endurance',
-    dimension: 'relative_strength',
-    dimensionMetrics: { relative_strength: 'reps', strength_endurance: 'reps' },
-    direction: 'higher_is_better',
     primaryMetric: 'reps',
     primaryUnit: 'Wdh.',
     fields: [
@@ -339,10 +303,6 @@ export const STRENGTH_TESTS: TestDefinition[] = [
   },
   {
     slug: 'weighted_pull_up_1rm',
-    category: 'max_strength',
-    dimension: 'relative_strength',
-    dimensionMetrics: { relative_strength: 'total_load_bw', max_strength: 'total_load_kg' },
-    direction: 'higher_is_better',
     primaryMetric: 'total_load_kg',
     primaryUnit: 'kg',
     fields: [
@@ -354,17 +314,17 @@ export const STRENGTH_TESTS: TestDefinition[] = [
     requiresBodyWeight: true,
     derivedMetrics: ['total_load_kg', 'total_load_bw'],
     derive: (values, ctx, put) => {
-    // Gewertet wird die bewegte Gesamtlast. Das Zusatzgewicht allein wäre
-    // ohne das Körpergewicht daneben nicht vergleichbar.
-    if (ctx.bodyWeightKg != null && values.addedLoadKg != null) {
-      const total = estimateOneRepMax(
-        ctx.bodyWeightKg + values.addedLoadKg,
-        values.reps ?? 1,
-        'epley',
-      )
-      put('total_load_kg', total)
-      put('total_load_bw', total / ctx.bodyWeightKg)
-    }
+      // Gewertet wird die bewegte Gesamtlast. Das Zusatzgewicht allein wäre
+      // ohne das Körpergewicht daneben nicht vergleichbar.
+      if (ctx.bodyWeightKg != null && values.addedLoadKg != null) {
+        const total = estimateOneRepMax(
+          ctx.bodyWeightKg + values.addedLoadKg,
+          values.reps ?? 1,
+          'epley',
+        )
+        put('total_load_kg', total)
+        put('total_load_bw', total / ctx.bodyWeightKg)
+      }
     },
     sortOrder: 213,
     name: { de: 'Klimmzug mit Zusatzgewicht', en: 'Weighted pull-up 1RM' },
@@ -383,13 +343,9 @@ export const STRENGTH_TESTS: TestDefinition[] = [
 
 // --- Ausdauer ----------------------------------------------------------------
 
-export const ENDURANCE_TESTS: TestDefinition[] = [
+export const ENDURANCE_TESTS: TestBlueprint[] = [
   {
     slug: 'run_1_5_mile',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -414,10 +370,6 @@ export const ENDURANCE_TESTS: TestDefinition[] = [
   },
   {
     slug: 'run_5k',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -458,12 +410,8 @@ const forTime = (
   instructionsEn: string,
   equipmentDe: string,
   equipmentEn: string,
-): TestDefinition => ({
+): TestBlueprint => ({
   slug,
-  category: 'conditioning',
-  dimension: 'strength_endurance',
-  dimensionMetrics: { strength_endurance: 'durationSeconds' },
-  direction: 'lower_is_better',
   primaryMetric: 'durationSeconds',
   primaryUnit: 's',
   fields: [
@@ -481,7 +429,7 @@ const forTime = (
   equipment: { de: equipmentDe, en: equipmentEn },
 })
 
-export const CONDITIONING_TESTS: TestDefinition[] = [
+export const CONDITIONING_TESTS: TestBlueprint[] = [
   forTime(
     'fran',
     260,

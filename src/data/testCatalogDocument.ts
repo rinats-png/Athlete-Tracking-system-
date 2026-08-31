@@ -1,5 +1,6 @@
-import type { TestDefinition, TestField } from './testCatalog'
+import type { TestBlueprint, TestField } from './testCatalog'
 import { fatigueIndexPercent, hrDriftPercent, pacePer500m, pacePerKm, sjftIndex } from '@/lib/metrics'
+import { strikeTest } from './testProtocols'
 import { deriveRepsFatigue, deriveStrokeTimeTrial } from './testDeriveShared'
 
 /**
@@ -29,14 +30,10 @@ const HR_AFTER: TestField[] = [
 
 // --- Kampfsport: die drei publizierten Spezialtests ---------------------------
 
-export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
+export const DOCUMENT_COMBAT_TESTS: TestBlueprint[] = [
   {
     slug: 'special_wrestling_fitness_test',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'swft_index', power: 'totalThrows' },
     // Wie beim SJFT eine Belastungskennzahl: weniger ist besser.
-    direction: 'lower_is_better',
     primaryMetric: 'swft_index',
     primaryUnit: 'Index',
     fields: [
@@ -50,11 +47,11 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['swft_index', 'totalThrows'],
     derive: (values, _ctx, put) => {
-    // Gleiche Rechnung wie der SJFT, eigener Schlüssel: die Referenzwerte
-    // der beiden Tests sind nicht austauschbar.
-    const total = (values.throwsA ?? 0) + (values.throwsB ?? 0) + (values.throwsC ?? 0)
-    put('totalThrows', total)
-    put('swft_index', sjftIndex(total, values.hrEnd, values.hrAfter1min))
+      // Gleiche Rechnung wie der SJFT, eigener Schlüssel: die Referenzwerte
+      // der beiden Tests sind nicht austauschbar.
+      const total = (values.throwsA ?? 0) + (values.throwsB ?? 0) + (values.throwsC ?? 0)
+      put('totalThrows', total)
+      put('swft_index', sjftIndex(total, values.hrEnd, values.hrAfter1min))
     },
     sortOrder: 601,
     name: { de: 'Special Wrestling Fitness Test', en: 'Special wrestling fitness test' },
@@ -71,10 +68,6 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
   },
   {
     slug: 'uchi_komi_fitness_test',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'reps', power: 'repsFirst30' },
-    direction: 'higher_is_better',
     primaryMetric: 'reps',
     primaryUnit: 'Wdh.',
     fields: [
@@ -102,10 +95,6 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
   },
   {
     slug: 'jjapt',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'reps' },
-    direction: 'higher_is_better',
     primaryMetric: 'reps',
     primaryUnit: 'Wdh.',
     fields: [
@@ -131,43 +120,21 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     },
     equipment: { de: 'Partner ähnlicher Grösse, Matte, Pulsmesser', en: 'Partner of similar size, mat, heart rate monitor' },
   },
-  {
+  strikeTest({
     slug: 'punch_test_180s',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'reps' },
-    direction: 'higher_is_better',
-    primaryMetric: 'reps',
-    primaryUnit: 'Schläge',
-    fields: [
-      { key: 'reps', type: 'integer', unit: 'Schläge', required: true, min: 0, max: 900 },
-      { key: 'repsFirst30', type: 'integer', unit: 'Schläge', required: false, min: 0, max: 300 },
-      { key: 'maxHeartRate', type: 'integer', unit: 'bpm', required: false, min: 80, max: 240 },
-      RPE,
-    ],
-    protocol: { mode: 'countdown', durationSeconds: 180 },
-    requiresBodyWeight: false,
-    derivedMetrics: ['fatigue_index_percent', 'reps_per_minute'],
-    derive: deriveRepsFatigue,
     sortOrder: 604,
+    durationSeconds: 180,
+    action: 'punch',
+    maxReps: 900,
     name: { de: 'Schlagtest über 3 Minuten', en: 'Three-minute punch test' },
     shortName: { de: '3-min Schlag', en: '3-min punch' },
     summary: {
       de: 'Eine volle Runde statt einer Minute. Der Unterschied zum 60-Sekunden-Test ist die eigentliche Aussage: wer beide macht, sieht, ob die Frequenz oder die Ausdauer begrenzt.',
       en: 'A full round instead of one minute. The difference from the 60-second test is the actual finding: doing both shows whether frequency or endurance is the limit.',
     },
-    instructions: {
-      de: 'Drei Minuten Schläge am Sandsack in gleichbleibender Kombination, maximale Frequenz. Die Schläge der ersten 30 Sekunden getrennt notieren. Gezählt wird die Zahl, nicht die Härte — Schlagkraft misst dieser Test ausdrücklich nicht.',
-      en: 'Three minutes of punches on a bag with one constant combination, maximal frequency. Note the first 30 seconds separately. What is counted is the number, not the force — this test explicitly does not measure punching power.',
-    },
-    equipment: { de: 'Sandsack, Zähler oder Videoaufzeichnung', en: 'Heavy bag, counter or video recording' },
-  },
+  }),
   {
     slug: 'grappling_circuit_5min',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'rounds' },
-    direction: 'higher_is_better',
     primaryMetric: 'rounds',
     primaryUnit: 'Runden',
     fields: [
@@ -180,7 +147,7 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['total_reps'],
     derive: (values, _ctx, put) => {
-    put('total_reps', (values.rounds ?? 0) * 3 + (values.partialReps ?? 0))
+      put('total_reps', (values.rounds ?? 0) * 3 + (values.partialReps ?? 0))
     },
     sortOrder: 605,
     name: { de: 'Grappling-Zirkel 5 Minuten', en: 'Five-minute grappling circuit' },
@@ -197,10 +164,6 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
   },
   {
     slug: 'fatigue_circuit_4x30s',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'reps' },
-    direction: 'higher_is_better',
     primaryMetric: 'reps',
     primaryUnit: 'Wdh.',
     fields: [
@@ -214,13 +177,13 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['reps', 'fatigue_index_percent'],
     derive: (values, _ctx, put) => {
-    const sets = [values.repsSet1, values.repsSet2, values.repsSet3, values.repsSet4].filter(
-      (v): v is number => v != null && Number.isFinite(v),
-    )
-    if (sets.length > 0) {
-      put('reps', sets.reduce((a, b) => a + b, 0))
-      put('fatigue_index_percent', fatigueIndexPercent(Math.max(...sets), Math.min(...sets)))
-    }
+      const sets = [values.repsSet1, values.repsSet2, values.repsSet3, values.repsSet4].filter(
+        (v): v is number => v != null && Number.isFinite(v),
+      )
+      if (sets.length > 0) {
+        put('reps', sets.reduce((a, b) => a + b, 0))
+        put('fatigue_index_percent', fatigueIndexPercent(Math.max(...sets), Math.min(...sets)))
+      }
     },
     sortOrder: 606,
     name: { de: 'Ermüdungszirkel 4 × 30 s', en: 'Fatigue circuit 4 × 30 s' },
@@ -237,10 +200,6 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
   },
   {
     slug: 'rope_climb',
-    category: 'strength_endurance',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'reps', max_strength: 'reps' },
-    direction: 'higher_is_better',
     primaryMetric: 'reps',
     primaryUnit: 'Aufstiege',
     fields: [
@@ -253,9 +212,9 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     requiresBodyWeight: true,
     derivedMetrics: ['climb_meters_total'],
     derive: (values, _ctx, put) => {
-    if (values.reps != null && values.heightM != null) {
-      put('climb_meters_total', values.reps * values.heightM)
-    }
+      if (values.reps != null && values.heightM != null) {
+        put('climb_meters_total', values.reps * values.heightM)
+      }
     },
     sortOrder: 607,
     name: { de: 'Seilklettern', en: 'Rope climb' },
@@ -272,10 +231,6 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
   },
   {
     slug: 'rope_skipping_3min',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'reps', power: 'reps' },
-    direction: 'higher_is_better',
     primaryMetric: 'reps',
     primaryUnit: 'Sprünge',
     fields: [
@@ -288,7 +243,7 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['reps_per_minute'],
     derive: (values, _ctx, put) => {
-    if (values.reps != null) put('reps_per_minute', values.reps / 3)
+      if (values.reps != null) put('reps_per_minute', values.reps / 3)
     },
     sortOrder: 608,
     name: { de: 'Seilspringen 3 Minuten', en: 'Rope skipping, three minutes' },
@@ -307,13 +262,9 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
 
 // --- Hybrid, Tactical, Gelände ----------------------------------------------
 
-export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
+export const DOCUMENT_TASK_TESTS: TestBlueprint[] = [
   {
     slug: 'ski_erg_1000m',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'durationSeconds', strength_endurance: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -325,7 +276,7 @@ export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['avg_pace_s_per_500m'],
     derive: (values, _ctx, put) => {
-    put('avg_pace_s_per_500m', pacePer500m(values.durationSeconds, 1000))
+      put('avg_pace_s_per_500m', pacePer500m(values.durationSeconds, 1000))
     },
     sortOrder: 620,
     name: { de: 'Ski-Ergometer 1000 m', en: 'Ski erg 1000 m' },
@@ -342,10 +293,6 @@ export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
   },
   {
     slug: 'crawl_30m',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -370,10 +317,6 @@ export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
   },
   {
     slug: 'obstacle_course_sim',
-    category: 'conditioning',
-    dimension: 'strength_endurance',
-    dimensionMetrics: { strength_endurance: 'durationSeconds', endurance: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -387,9 +330,9 @@ export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
     requiresBodyWeight: true,
     derivedMetrics: ['seconds_per_station'],
     derive: (values, _ctx, put) => {
-    if (values.durationSeconds != null && values.stations != null && values.stations > 0) {
-      put('seconds_per_station', values.durationSeconds / values.stations)
-    }
+      if (values.durationSeconds != null && values.stations != null && values.stations > 0) {
+        put('seconds_per_station', values.durationSeconds / values.stations)
+      }
     },
     sortOrder: 622,
     name: { de: 'Hindernisbahn', en: 'Obstacle course' },
@@ -408,13 +351,9 @@ export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
 
 // --- Laufen im Gelände und über Stunden --------------------------------------
 
-export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
+export const DOCUMENT_RUNNING_TESTS: TestBlueprint[] = [
   {
     slug: 'uphill_run_test',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'durationSeconds', strength_endurance: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -428,14 +367,14 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['vertical_speed_m_per_h', 'grade_percent'],
     derive: (values, _ctx, put) => {
-    // Steigleistung in Höhenmetern je Stunde — die Grösse, in der am Berg
-    // gerechnet wird. Die reine Zeit sagt ohne die Höhenmeter nichts.
-    if (values.elevationGainM != null && values.durationSeconds != null && values.durationSeconds > 0) {
-      put('vertical_speed_m_per_h', (values.elevationGainM / values.durationSeconds) * 3600)
-    }
-    if (values.elevationGainM != null && values.distanceM != null && values.distanceM > 0) {
-      put('grade_percent', (values.elevationGainM / values.distanceM) * 100)
-    }
+      // Steigleistung in Höhenmetern je Stunde — die Grösse, in der am Berg
+      // gerechnet wird. Die reine Zeit sagt ohne die Höhenmeter nichts.
+      if (values.elevationGainM != null && values.durationSeconds != null && values.durationSeconds > 0) {
+        put('vertical_speed_m_per_h', (values.elevationGainM / values.durationSeconds) * 3600)
+      }
+      if (values.elevationGainM != null && values.distanceM != null && values.distanceM > 0) {
+        put('grade_percent', (values.elevationGainM / values.distanceM) * 100)
+      }
     },
     sortOrder: 630,
     name: { de: 'Bergauflauf', en: 'Uphill run test' },
@@ -452,10 +391,6 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
   },
   {
     slug: 'downhill_run_test',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'durationSeconds', power: 'durationSeconds' },
-    direction: 'lower_is_better',
     primaryMetric: 'durationSeconds',
     primaryUnit: 's',
     fields: [
@@ -468,9 +403,9 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['grade_percent'],
     derive: (values, _ctx, put) => {
-    if (values.elevationLossM != null && values.distanceM != null && values.distanceM > 0) {
-      put('grade_percent', (values.elevationLossM / values.distanceM) * 100)
-    }
+      if (values.elevationLossM != null && values.distanceM != null && values.distanceM > 0) {
+        put('grade_percent', (values.elevationLossM / values.distanceM) * 100)
+      }
     },
     sortOrder: 631,
     name: { de: 'Bergablauf', en: 'Downhill run test' },
@@ -487,11 +422,7 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
   },
   {
     slug: 'hr_drift_test',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'hr_drift_percent' },
     // Weniger Drift ist besser: die Herzfrequenz bleibt bei gleicher Leistung stabil.
-    direction: 'lower_is_better',
     primaryMetric: 'hr_drift_percent',
     primaryUnit: '%',
     fields: [
@@ -505,10 +436,10 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
     requiresBodyWeight: false,
     derivedMetrics: ['hr_drift_percent', 'avg_pace_s_per_km'],
     derive: (values, _ctx, put) => {
-    put('hr_drift_percent', hrDriftPercent(values.hrFirstHalf, values.hrSecondHalf))
-    if (values.distanceM != null) {
-      put('avg_pace_s_per_km', pacePerKm(values.durationSeconds, values.distanceM))
-    }
+      put('hr_drift_percent', hrDriftPercent(values.hrFirstHalf, values.hrSecondHalf))
+      if (values.distanceM != null) {
+        put('avg_pace_s_per_km', pacePerKm(values.durationSeconds, values.distanceM))
+      }
     },
     sortOrder: 632,
     name: { de: 'Herzfrequenzdrift', en: 'Heart rate drift' },
@@ -527,13 +458,9 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
 
 // --- Rad ---------------------------------------------------------------------
 
-export const DOCUMENT_CYCLING_TESTS: TestDefinition[] = [
+export const DOCUMENT_CYCLING_TESTS: TestBlueprint[] = [
   {
     slug: 'submax_efficiency_bike',
-    category: 'endurance',
-    dimension: 'endurance',
-    dimensionMetrics: { endurance: 'efficiency_w_per_bpm' },
-    direction: 'higher_is_better',
     primaryMetric: 'efficiency_w_per_bpm',
     primaryUnit: 'W/bpm',
     fields: [
@@ -546,14 +473,14 @@ export const DOCUMENT_CYCLING_TESTS: TestDefinition[] = [
     requiresBodyWeight: true,
     derivedMetrics: ['efficiency_w_per_bpm', 'watts_per_kg'],
     derive: (values, ctx, put) => {
-    // Watt je Herzschlag: steigt der Wert bei gleicher Wattzahl, ist die
-    // aerobe Grundlage besser geworden.
-    if (values.targetPowerW != null && values.avgHeartRate != null && values.avgHeartRate > 0) {
-      put('efficiency_w_per_bpm', values.targetPowerW / values.avgHeartRate)
-    }
-    if (values.targetPowerW != null && ctx.bodyWeightKg) {
-      put('watts_per_kg', values.targetPowerW / ctx.bodyWeightKg)
-    }
+      // Watt je Herzschlag: steigt der Wert bei gleicher Wattzahl, ist die
+      // aerobe Grundlage besser geworden.
+      if (values.targetPowerW != null && values.avgHeartRate != null && values.avgHeartRate > 0) {
+        put('efficiency_w_per_bpm', values.targetPowerW / values.avgHeartRate)
+      }
+      if (values.targetPowerW != null && ctx.bodyWeightKg) {
+        put('watts_per_kg', values.targetPowerW / ctx.bodyWeightKg)
+      }
     },
     sortOrder: 640,
     name: { de: 'Submaximaler Effizienztest', en: 'Submaximal efficiency test' },
@@ -570,10 +497,6 @@ export const DOCUMENT_CYCLING_TESTS: TestDefinition[] = [
   },
   {
     slug: 'repeated_sprint_bike',
-    category: 'conditioning',
-    dimension: 'power',
-    dimensionMetrics: { power: 'peakPowerW', strength_endurance: 'fatigue_index_percent' },
-    direction: 'higher_is_better',
     primaryMetric: 'peakPowerW',
     primaryUnit: 'W',
     fields: [
@@ -586,7 +509,7 @@ export const DOCUMENT_CYCLING_TESTS: TestDefinition[] = [
     requiresBodyWeight: true,
     derivedMetrics: ['fatigue_index_percent', 'watts_per_kg'],
     derive: (values, _ctx, put) => {
-    put('fatigue_index_percent', fatigueIndexPercent(values.peakPowerW, values.lastSprintPowerW))
+      put('fatigue_index_percent', fatigueIndexPercent(values.peakPowerW, values.lastSprintPowerW))
     },
     sortOrder: 641,
     name: { de: 'Wiederholter Sprint auf dem Rad', en: 'Repeated sprint, bike' },
@@ -612,12 +535,8 @@ const strokeTimeTrial = (
   nameEn: string,
   summaryDe: string,
   summaryEn: string,
-): TestDefinition => ({
+): TestBlueprint => ({
   slug,
-  category: 'endurance',
-  dimension: 'endurance',
-  dimensionMetrics: { endurance: 'durationSeconds' },
-  direction: 'lower_is_better',
   primaryMetric: 'durationSeconds',
   primaryUnit: 's',
   fields: [
@@ -641,7 +560,7 @@ const strokeTimeTrial = (
   equipment: { de: 'Schwimmbahn, Stoppuhr', en: 'Pool lane, stopwatch' },
 })
 
-export const DOCUMENT_SWIM_TESTS: TestDefinition[] = [
+export const DOCUMENT_SWIM_TESTS: TestBlueprint[] = [
   strokeTimeTrial(
     'swim_100m_backstroke',
     650,
@@ -668,7 +587,7 @@ export const DOCUMENT_SWIM_TESTS: TestDefinition[] = [
   ),
 ]
 
-export const DOCUMENT_TESTS: TestDefinition[] = [
+export const DOCUMENT_TESTS: TestBlueprint[] = [
   ...DOCUMENT_COMBAT_TESTS,
   ...DOCUMENT_TASK_TESTS,
   ...DOCUMENT_RUNNING_TESTS,
