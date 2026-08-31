@@ -32,7 +32,9 @@ import type { StoredAssessment, StoredResult } from '@/lib/store/localStore'
 export type Evidence = 'strong' | 'moderate' | 'weak'
 
 export interface AxisFinding {
-  dimension: PerformanceDimension
+  /** Kennung der Profilachse — bei sportartspezifischen Achsen die einzige Angabe. */
+  axisId: string
+  dimension: PerformanceDimension | null
   score: number
   /** Abstand zum Mittel der übrigen belegten Achsen, in Punkten. */
   gapToMean: number
@@ -106,8 +108,9 @@ function axisFindings(axes: RadarAxis[], results: StoredResult[]): AxisFinding[]
   return scored
     .map((axis): AxisFinding => {
       const othersMean = (total - axis.score) / (scored.length - 1)
-      const measurements = counts.get(axis.dimension) ?? 0
+      const measurements = axis.dimension ? (counts.get(axis.dimension) ?? 0) : axis.testCount
       return {
+        axisId: axis.axisId,
         dimension: axis.dimension,
         score: Math.round(axis.score * 10) / 10,
         gapToMean: Math.round((axis.score - othersMean) * 10) / 10,
@@ -266,7 +269,10 @@ export function recommendations(
   // 6. Erst zuletzt die inhaltliche Beobachtung — und nur, wenn sie über eine
   //    einzelne Messung hinaus belegt ist.
   for (const limiter of limiters(axes, scored)) {
-    const trend = trendForDimension(scored, limiter.dimension)
+    // Trend und Trainingsschwerpunkt hängen an einer der sechs Fähigkeiten.
+    // Eine sportartspezifische Achse wie «Laufökonomie» hat keine — der
+    // Hinweis erscheint dann ohne Schwerpunkt statt gar nicht.
+    const trend = limiter.dimension ? trendForDimension(scored, limiter.dimension) : null
     out.push({
       kind: 'address_limiter',
       priority: 5,
@@ -280,7 +286,7 @@ export function recommendations(
       dimension: limiter.dimension,
       // Nur hier: der Schwerpunkt gehört zur inhaltlichen Beobachtung, nicht
       // zu den Hinweisen auf die Datenlage.
-      emphasis: emphasisFor(limiter.dimension),
+      emphasis: limiter.dimension ? emphasisFor(limiter.dimension) : null,
       emphasisConfidence: emphasisConfidence(limiter.evidence),
     })
   }

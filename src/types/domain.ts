@@ -32,7 +32,14 @@ export type AppLocale = 'de' | 'en'
 
 /** Eine Achse des Spider-Web-Diagramms. */
 export interface RadarAxis {
-  dimension: PerformanceDimension
+  /** Kennung der Profilachse (siehe data/profileAxes.ts). */
+  axisId: string
+  /**
+   * Die zugehörige der sechs allgemeinen Fähigkeiten — oder null bei einer
+   * sportartspezifischen Kennzahlachse wie «Laufökonomie». Die Körperansicht
+   * zeigt nur Achsen mit Fähigkeit, weil nur die eine Körperregion haben.
+   */
+  dimension: PerformanceDimension | null
   /** 0–100. Bedeutung hängt vom Modus ab: % der Bestleistung oder Perzentil. */
   score: number | null
   testCount: number

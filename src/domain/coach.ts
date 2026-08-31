@@ -94,7 +94,7 @@ export function athleteRows(
     .filter((a) => !a.archived)
     .map((athlete): AthleteRow => {
       const data = toView(athlete)
-      const axes = radarProfile(data.results, 'population', asOf)
+      const axes = radarProfile(data.results, 'population', asOf, data.profile.disciplineId)
       const confidence = confidenceScore(data.results, asOf).score
       const trend = overallTrend(data)
       const limiter = limiters(axes, data.results)[0] ?? null

@@ -1,8 +1,24 @@
 import { getTest, TEST_CATALOG } from '@/data/testCatalog'
 import { normPercentile } from '@/data/norms'
-import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
+import { compareToReferences } from '@/data/references'
+import { GENERAL_AXIS_IDS, axisById } from '@/data/profileAxes'
+import { disciplineById } from '@/data/sportProfiles'
 import type { PerformanceDimension, RadarAxis, ScoreMode, Sex } from '@/types/domain'
 import type { StoredResult } from '@/lib/store/localStore'
+
+/**
+ * Welche Achsen ein Profil hat, hängt an der Disziplin.
+ *
+ * Ohne Disziplin sind es die sechs allgemeinen Fähigkeiten; mit Disziplin
+ * deren eigenes Set. Gemessen an den Kernbatterien deckte vorher KEINE
+ * Disziplin die sechs allgemeinen ab — der Marathon eine —, und die App
+ * meldete daraufhin ein unvollständiges Profil. Sie bestrafte damit, dass
+ * jemand ihrer eigenen Empfehlung gefolgt war.
+ */
+export function axisIdsFor(disciplineId: string | null | undefined): string[] {
+  const discipline = disciplineId ? disciplineById(disciplineId) : undefined
+  return discipline?.axisIds ?? GENERAL_AXIS_IDS
+}
 
 /**
  * Scoring im Client.
@@ -21,7 +37,9 @@ import type { StoredResult } from '@/lib/store/localStore'
 export const RADAR_WINDOW_MONTHS = 18
 
 interface Measurement {
-  dimension: PerformanceDimension
+  /** Kennung der Profilachse — bei den sechs allgemeinen gleich der Fähigkeit. */
+  axisId: string
+  dimension: PerformanceDimension | null
   testSlug: string
   metricKey: string
   value: number
@@ -31,26 +49,56 @@ interface Measurement {
   ageYears: number | null
 }
 
-/** Löst je Ergebnis alle Achsen auf, auf die es einzahlt. */
-function toMeasurements(results: StoredResult[]): Measurement[] {
+/**
+ * Löst je Ergebnis alle Achsen auf, auf die es einzahlt.
+ *
+ * Zwei Wege hinein: über die Achsenzuordnung des Tests (die sechs
+ * allgemeinen Fähigkeiten) und über Kennzahlen, an denen eine
+ * sportartspezifische Achse hängt — etwa die Laufökonomie oder der
+ * Griffwert. Eine Kennzahl kann in beiden auftauchen; das ist gewollt, die
+ * Achsen sind verschiedene Fragen an dieselbe Messung.
+ */
+function toMeasurements(results: StoredResult[], axisIds: string[]): Measurement[] {
   const out: Measurement[] = []
+  const metricAxes = axisIds
+    .map(axisById)
+    .filter((a) => a != null && a.source.kind === 'metric')
+
   for (const result of results) {
     const test = getTest(result.testSlug)
     if (!test) continue
     const source = { ...result.values, ...result.metrics }
+    const common = {
+      testSlug: test.slug,
+      performedAt: result.performedAt,
+      sex: result.sex ?? null,
+      ageYears: result.ageYears ?? null,
+    }
 
     for (const [dimension, metricKey] of Object.entries(test.dimensionMetrics)) {
       const value = source[metricKey as string]
       if (value == null || !Number.isFinite(value)) continue
       out.push({
+        ...common,
+        axisId: dimension,
         dimension: dimension as PerformanceDimension,
-        testSlug: test.slug,
         metricKey: metricKey as string,
         value,
-        performedAt: result.performedAt,
         direction: test.direction,
-        sex: result.sex ?? null,
-        ageYears: result.ageYears ?? null,
+      })
+    }
+
+    for (const axis of metricAxes) {
+      if (axis!.source.kind !== 'metric') continue
+      const value = source[axis!.source.metricKey]
+      if (value == null || !Number.isFinite(value)) continue
+      out.push({
+        ...common,
+        axisId: axis!.id,
+        dimension: null,
+        metricKey: axis!.source.metricKey,
+        value,
+        direction: axis!.source.direction,
       })
     }
   }
@@ -61,16 +109,18 @@ export function radarProfile(
   results: StoredResult[],
   mode: ScoreMode,
   asOf: Date = new Date(),
+  disciplineId: string | null = null,
 ): RadarAxis[] {
+  const axisIds = axisIdsFor(disciplineId)
   const cutoff = new Date(asOf)
   cutoff.setMonth(cutoff.getMonth() - RADAR_WINDOW_MONTHS)
 
-  const all = toMeasurements(results).filter((m) => new Date(m.performedAt) <= asOf)
+  const all = toMeasurements(results, axisIds).filter((m) => new Date(m.performedAt) <= asOf)
 
   // Bestleistung je Test und Achse über die gesamte Historie bis zum Stichtag.
   const best = new Map<string, number>()
   for (const m of all) {
-    const key = `${m.testSlug}|${m.dimension}|${m.metricKey}`
+    const key = `${m.testSlug}|${m.axisId}|${m.metricKey}`
     const current = best.get(key)
     const better =
       current == null
@@ -81,24 +131,50 @@ export function radarProfile(
     best.set(key, better)
   }
 
+  // Zahl der Messungen je Test und Achse — die Grundlage dafür, ob es
+  // überhaupt einen Bezug gibt.
+  const countPerKey = new Map<string, number>()
+  for (const m of all) {
+    const key = `${m.testSlug}|${m.axisId}|${m.metricKey}`
+    countPerKey.set(key, (countPerKey.get(key) ?? 0) + 1)
+  }
+
   // Aktuellster Wert je Test und Achse innerhalb des Fensters.
   const latest = new Map<string, Measurement>()
   for (const m of all) {
     if (new Date(m.performedAt) < cutoff) continue
-    const key = `${m.testSlug}|${m.dimension}`
+    const key = `${m.testSlug}|${m.axisId}`
     const current = latest.get(key)
     if (!current || new Date(m.performedAt) > new Date(current.performedAt)) latest.set(key, m)
   }
 
-  const byDimension = new Map<PerformanceDimension, { scores: number[]; latest: string }>()
+  const byAxis = new Map<string, { scores: number[]; latest: string; measured: number }>()
   for (const m of latest.values()) {
     let score: number | null = null
+    const key = `${m.testSlug}|${m.axisId}|${m.metricKey}`
 
     if (mode === 'population') {
-      score = normPercentile(m.testSlug, m.metricKey, m.sex, m.ageYears, m.value)
+      // Erst die belegten Referenzwerte, dann die alte Startbelegung. Eine
+      // Kohorte mit Quelle schlägt eine ohne.
+      const comparisons = compareToReferences(
+        m.testSlug,
+        m.metricKey,
+        m.value,
+        m.direction,
+        m.sex,
+        m.ageYears,
+        disciplineId,
+      ).filter((c) => c.percentile != null)
+      score =
+        comparisons[0]?.percentile ??
+        normPercentile(m.testSlug, m.metricKey, m.sex, m.ageYears, m.value)
     } else {
-      const reference = best.get(`${m.testSlug}|${m.dimension}|${m.metricKey}`)
-      if (reference != null && reference > 0 && m.value > 0) {
+      // Erst ab der zweiten Messung gibt es einen Bezug. Die erste wäre ihr
+      // eigener Massstab und stünde immer bei 100 % — ein volles Profil beim
+      // allerersten Termin, das nichts bedeutet.
+      const measurements = countPerKey.get(key) ?? 0
+      const reference = best.get(key)
+      if (measurements >= 2 && reference != null && reference > 0 && m.value > 0) {
         score =
           m.direction === 'higher_is_better'
             ? Math.min(100, (m.value / reference) * 100)
@@ -106,25 +182,44 @@ export function radarProfile(
       }
     }
 
-    if (score == null || !Number.isFinite(score)) continue
-    const entry = byDimension.get(m.dimension) ?? { scores: [], latest: m.performedAt }
-    entry.scores.push(score)
+    const entry = byAxis.get(m.axisId) ?? { scores: [], latest: m.performedAt, measured: 0 }
+    entry.measured += 1
     if (new Date(m.performedAt) > new Date(entry.latest)) entry.latest = m.performedAt
-    byDimension.set(m.dimension, entry)
+    if (score != null && Number.isFinite(score)) entry.scores.push(score)
+    byAxis.set(m.axisId, entry)
   }
 
-  return PERFORMANCE_DIMENSIONS.map((dimension) => {
-    const entry = byDimension.get(dimension)
+  return axisIds.map((axisId) => {
+    const axis = axisById(axisId)
+    const dimension = (axis?.source.kind === 'dimension'
+      ? axis.source.dimension
+      : null) as PerformanceDimension | null
+    const entry = byAxis.get(axisId)
     if (!entry) {
-      return { dimension, score: null, testCount: 0, latestPerformedAt: null, hasData: false }
+      return {
+        axisId,
+        dimension,
+        score: null,
+        testCount: 0,
+        latestPerformedAt: null,
+        hasData: false,
+      }
     }
-    const mean = entry.scores.reduce((a, b) => a + b, 0) / entry.scores.length
+    // Gemessen, aber ohne Einordnung: der Unterschied zwischen «nicht
+    // gemessen» und «gemessen, aber kein Bezug vorhanden» ist für den Nutzer
+    // wesentlich — im einen Fall fehlt ein Test, im anderen fehlen Daten der
+    // Wissenschaft.
+    const mean =
+      entry.scores.length > 0
+        ? entry.scores.reduce((a, b) => a + b, 0) / entry.scores.length
+        : null
     return {
+      axisId,
       dimension,
-      score: Math.round(mean * 10) / 10,
-      testCount: entry.scores.length,
+      score: mean == null ? null : Math.round(mean * 10) / 10,
+      testCount: entry.measured,
       latestPerformedAt: entry.latest,
-      hasData: true,
+      hasData: entry.measured > 0,
     }
   })
 }

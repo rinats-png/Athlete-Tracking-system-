@@ -50,6 +50,14 @@ export interface Discipline {
   eventDurationSeconds: [number, number] | null
   /** Achse, die erfahrungsgemäss zuerst begrenzt. */
   typicalLimiter: PerformanceDimension
+  /**
+   * Profilachsen dieser Disziplin (Kennungen aus `profileAxes.ts`).
+   *
+   * Sie ersetzen für diese Disziplin die sechs allgemeinen Achsen. Enthalten
+   * ist nur, was ihre Kerntests auch erreichen können — sonst stünde im
+   * Profil dauerhaft eine Lücke, die keine ist.
+   */
+  axisIds: string[]
 }
 
 export interface SportCategory {
@@ -169,6 +177,7 @@ const COMBAT: Discipline[] = [
     ],
     eventDurationSeconds: [240, 240],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'power', 'relative_strength', 'grip', 'fight_endurance'],
   },
   {
     id: 'wrestling',
@@ -201,6 +210,7 @@ const COMBAT: Discipline[] = [
     ],
     eventDurationSeconds: [360, 360],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'max_strength', 'relative_strength', 'power', 'grip'],
   },
   {
     id: 'bjj',
@@ -223,6 +233,7 @@ const COMBAT: Discipline[] = [
     optionalTests: ['plank_hold', 'deadlift_1rm', 'run_1_5_mile', 'cindy_20min_amrap'],
     eventDurationSeconds: [300, 600],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'relative_strength', 'max_strength', 'grip', 'fight_endurance'],
   },
   {
     id: 'boxing',
@@ -250,6 +261,7 @@ const COMBAT: Discipline[] = [
     ],
     eventDurationSeconds: [540, 720],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'power', 'fatigue_resistance', 'endurance'],
   },
   {
     id: 'kickboxing',
@@ -271,6 +283,7 @@ const COMBAT: Discipline[] = [
     optionalTests: ['plank_hold', 'standing_broad_jump', 'run_1_5_mile', 'assault_bike_10min_cal'],
     eventDurationSeconds: [540, 720],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'power', 'agility', 'fatigue_resistance'],
   },
   {
     id: 'taekwondo',
@@ -291,6 +304,7 @@ const COMBAT: Discipline[] = [
     optionalTests: ['standing_broad_jump', 't_test_agility', 'repeated_jump_15s', 'run_1_5_mile'],
     eventDurationSeconds: [360, 360],
     typicalLimiter: 'power',
+    axisIds: ['power', 'agility', 'strength_endurance', 'fatigue_resistance'],
   },
   {
     id: 'mma',
@@ -320,6 +334,7 @@ const COMBAT: Discipline[] = [
     ],
     eventDurationSeconds: [900, 1500],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'max_strength', 'relative_strength', 'power', 'endurance'],
   },
   {
     id: 'karate',
@@ -340,6 +355,7 @@ const COMBAT: Discipline[] = [
     optionalTests: ['standing_broad_jump', 't_test_agility', 'kick_test_60s', 'run_1_5_mile'],
     eventDurationSeconds: [180, 180],
     typicalLimiter: 'power',
+    axisIds: ['power', 'agility', 'strength_endurance', 'fatigue_resistance'],
   },
   {
     id: 'ju_jutsu',
@@ -367,6 +383,7 @@ const COMBAT: Discipline[] = [
     ],
     eventDurationSeconds: [180, 300],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'relative_strength', 'power', 'grip'],
   },
   {
     id: 'pencak_silat',
@@ -381,6 +398,7 @@ const COMBAT: Discipline[] = [
     optionalTests: ['plank_hold', 'standing_broad_jump', 'kick_test_60s', 'run_1_5_mile'],
     eventDurationSeconds: [180, 180],
     typicalLimiter: 'agility',
+    axisIds: ['agility', 'power', 'strength_endurance', 'fatigue_resistance'],
   },
   {
     id: 'fencing',
@@ -401,6 +419,7 @@ const COMBAT: Discipline[] = [
     ],
     eventDurationSeconds: [180, 540],
     typicalLimiter: 'agility',
+    axisIds: ['agility', 'power', 'strength_endurance', 'fatigue_resistance'],
   },
 ]
 
@@ -425,6 +444,7 @@ const HYBRID: Discipline[] = [
     ],
     eventDurationSeconds: [3600, 5400],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['endurance', 'strength_endurance', 'relative_strength', 'load_carriage'],
   },
   {
     id: 'functional_fitness',
@@ -453,6 +473,7 @@ const HYBRID: Discipline[] = [
     ],
     eventDurationSeconds: [300, 1800],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'endurance', 'max_strength', 'power'],
   },
   {
     id: 'ocr',
@@ -482,6 +503,7 @@ const HYBRID: Discipline[] = [
     ],
     eventDurationSeconds: [1800, 10800],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'relative_strength', 'grip', 'endurance', 'load_carriage'],
   },
 ]
 
@@ -499,6 +521,7 @@ const RUNNING: Discipline[] = [
     optionalTests: ['lactate_step_test', 'sprint_30m', 'countermovement_jump', 'beep_test_20m'],
     eventDurationSeconds: [840, 1800],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'run_economy', 'power'],
   },
   {
     id: 'run_10k_discipline',
@@ -513,6 +536,7 @@ const RUNNING: Discipline[] = [
     optionalTests: ['lactate_step_test', 'run_5k', 'beep_test_20m'],
     eventDurationSeconds: [1800, 3900],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'run_economy'],
   },
   {
     id: 'half_marathon',
@@ -527,6 +551,7 @@ const RUNNING: Discipline[] = [
     optionalTests: ['cooper_12min', 'plank_hold'],
     eventDurationSeconds: [3900, 9000],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'run_economy', 'durability'],
   },
   {
     id: 'marathon',
@@ -541,6 +566,7 @@ const RUNNING: Discipline[] = [
     optionalTests: ['lactate_step_test', 'run_10k', 'run_5k', 'plank_hold'],
     eventDurationSeconds: [7200, 21600],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'run_economy', 'durability'],
   },
   {
     id: 'trail_running',
@@ -561,6 +587,7 @@ const RUNNING: Discipline[] = [
     ],
     eventDurationSeconds: [3600, 43200],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['endurance', 'climbing', 'power', 'strength_endurance'],
   },
   {
     id: 'ultramarathon',
@@ -575,6 +602,7 @@ const RUNNING: Discipline[] = [
     optionalTests: ['plank_hold', 'run_5k', 'lactate_step_test', 'farmers_carry'],
     eventDurationSeconds: [14400, 172800],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'durability', 'strength_endurance'],
   },
 ]
 
@@ -592,6 +620,7 @@ const CYCLING: Discipline[] = [
     optionalTests: ['lactate_step_test', 'assault_bike_10min_cal', 'row_2000m'],
     eventDurationSeconds: [7200, 21600],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'bike_threshold', 'power'],
   },
   {
     id: 'time_trial',
@@ -606,6 +635,7 @@ const CYCLING: Discipline[] = [
     optionalTests: ['lactate_step_test', 'peak_power_5s', 'submax_efficiency_bike'],
     eventDurationSeconds: [1200, 3600],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'bike_threshold'],
   },
   {
     id: 'track_cycling',
@@ -630,6 +660,7 @@ const CYCLING: Discipline[] = [
     ],
     eventDurationSeconds: [10, 300],
     typicalLimiter: 'power',
+    axisIds: ['power', 'max_strength', 'strength_endurance'],
   },
   {
     id: 'mtb',
@@ -650,6 +681,7 @@ const CYCLING: Discipline[] = [
     ],
     eventDurationSeconds: [3600, 10800],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['endurance', 'bike_threshold', 'power', 'strength_endurance'],
   },
   {
     id: 'gravel',
@@ -664,6 +696,7 @@ const CYCLING: Discipline[] = [
     optionalTests: ['peak_power_5s', 'plank_hold', 'lactate_step_test'],
     eventDurationSeconds: [7200, 36000],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'bike_threshold', 'durability'],
   },
 ]
 
@@ -681,6 +714,7 @@ const SWIMMING: Discipline[] = [
     optionalTests: ['lactate_step_test', 'pull_up_max_reps', 'grip_strength', 'plank_hold'],
     eventDurationSeconds: [20, 900],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'swim_technique', 'power'],
   },
   {
     id: 'backstroke',
@@ -695,6 +729,7 @@ const SWIMMING: Discipline[] = [
     optionalTests: ['swim_100m', 'swim_400m', 'plank_hold', 'pull_up_max_reps'],
     eventDurationSeconds: [25, 300],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'swim_technique', 'strength_endurance'],
   },
   {
     id: 'breaststroke',
@@ -709,6 +744,7 @@ const SWIMMING: Discipline[] = [
     optionalTests: ['lactate_step_test', 'swim_100m', 'swim_400m', 'countermovement_jump'],
     eventDurationSeconds: [30, 330],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'swim_technique', 'power'],
   },
   {
     id: 'butterfly',
@@ -723,6 +759,7 @@ const SWIMMING: Discipline[] = [
     optionalTests: ['pull_up_max_reps', 'plank_hold', 'swim_400m', 'countermovement_jump'],
     eventDurationSeconds: [25, 130],
     typicalLimiter: 'strength_endurance',
+    axisIds: ['power', 'strength_endurance', 'endurance'],
   },
   {
     id: 'open_water',
@@ -737,6 +774,7 @@ const SWIMMING: Discipline[] = [
     optionalTests: ['swim_100m', 'threshold_run_30min'],
     eventDurationSeconds: [900, 14400],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'swim_technique', 'durability'],
   },
 ]
 
@@ -754,6 +792,7 @@ const TRIATHLON: Discipline[] = [
     optionalTests: ['ramp_test_bike'],
     eventDurationSeconds: [3300, 5400],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'bike_threshold', 'power'],
   },
   {
     id: 'triathlon_olympic',
@@ -768,6 +807,7 @@ const TRIATHLON: Discipline[] = [
     optionalTests: ['ramp_test_bike', 'swim_incremental'],
     eventDurationSeconds: [6600, 10800],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'bike_threshold', 'run_economy'],
   },
   {
     id: 'triathlon_70_3',
@@ -782,6 +822,7 @@ const TRIATHLON: Discipline[] = [
     optionalTests: ['lactate_step_test', 'plank_hold'],
     eventDurationSeconds: [14400, 28800],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'bike_threshold', 'run_economy', 'durability'],
   },
   {
     id: 'triathlon_ironman',
@@ -796,6 +837,7 @@ const TRIATHLON: Discipline[] = [
     optionalTests: ['lactate_step_test', 'plank_hold', 'farmers_carry', 'hr_drift_test'],
     eventDurationSeconds: [28800, 61200],
     typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'bike_threshold', 'durability', 'strength_endurance'],
   },
 ]
 
@@ -826,6 +868,7 @@ const TACTICAL: Discipline[] = [
     ],
     eventDurationSeconds: null,
     typicalLimiter: 'strength_endurance',
+    axisIds: ['endurance', 'strength_endurance', 'relative_strength', 'agility', 'load_carriage'],
   },
   {
     id: 'firefighter',
@@ -853,6 +896,7 @@ const TACTICAL: Discipline[] = [
     ],
     eventDurationSeconds: null,
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'max_strength', 'load_carriage', 'grip'],
   },
   {
     id: 'military',
@@ -880,6 +924,7 @@ const TACTICAL: Discipline[] = [
     ],
     eventDurationSeconds: null,
     typicalLimiter: 'strength_endurance',
+    axisIds: ['endurance', 'strength_endurance', 'relative_strength', 'load_carriage', 'power'],
   },
   {
     id: 'special_forces',
@@ -905,6 +950,7 @@ const TACTICAL: Discipline[] = [
     ],
     eventDurationSeconds: null,
     typicalLimiter: 'strength_endurance',
+    axisIds: ['endurance', 'strength_endurance', 'relative_strength', 'load_carriage', 'grip'],
   },
   {
     id: 'ems',
@@ -926,6 +972,7 @@ const TACTICAL: Discipline[] = [
     optionalTests: ['deadlift_1rm', 'grip_strength', 'plank_hold'],
     eventDurationSeconds: null,
     typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'relative_strength', 'load_carriage', 'agility'],
   },
 ]
 
