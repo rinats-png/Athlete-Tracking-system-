@@ -1,4 +1,5 @@
 import type { PerformanceDimension, ScoringDirection, TestCategory } from '@/types/domain'
+import type { DeriveContext, PutMetric } from './testDerive'
 
 /**
  * Testkatalog als Client-Daten.
@@ -25,6 +26,8 @@ import {
 } from './testCatalogAdditions'
 import { SPORT_SPECIFIC_TESTS } from './testCatalogSportSpecific'
 import { DOCUMENT_TESTS } from './testCatalogDocument'
+import { vo2maxFromBeepTest, vo2maxFromCooper } from '@/lib/metrics'
+import { deriveRowing } from './testDeriveShared'
 
 export type FieldType = 'number' | 'integer' | 'duration' | 'rpe' | 'stages'
 
@@ -62,6 +65,20 @@ export interface TestDefinition {
    */
   setting?: 'field' | 'lab'
   derivedMetrics: string[]
+  /**
+   * Kennzahlen dieses Tests aus seinen Rohwerten.
+   *
+   * Steht bewusst neben `fields`: die Kennzahl gehört zu den Feldern, aus
+   * denen sie entsteht. Was für jeden Test mit denselben Feldern gilt
+   * (Relativkraft, Pace, Watt je Kilogramm), rechnet `deriveMetrics`
+   * gemeinsam — hier steht nur, was diesen Test ausmacht.
+   */
+  derive?: (
+    values: Record<string, number>,
+    ctx: DeriveContext,
+    put: PutMetric,
+    test: TestDefinition,
+  ) => void
   sortOrder: number
   name: { de: string; en: string }
   shortName: { de: string; en: string }
@@ -89,6 +106,9 @@ export const TEST_CATALOG: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 720 },
     requiresBodyWeight: false,
     derivedMetrics: ['vo2max_ml_kg_min'],
+    derive: (values, _ctx, put) => {
+    put('vo2max_ml_kg_min', vo2maxFromCooper(values.distanceM))
+    },
     sortOrder: 10,
     name: { de: 'Cooper-Test (12 Minuten)', en: 'Cooper Test (12 minutes)' },
     shortName: { de: 'Cooper', en: 'Cooper' },
@@ -118,6 +138,9 @@ export const TEST_CATALOG: TestDefinition[] = [
     protocol: { mode: 'stages' },
     requiresBodyWeight: false,
     derivedMetrics: ['vo2max_ml_kg_min'],
+    derive: (values, ctx, put) => {
+    put('vo2max_ml_kg_min', vo2maxFromBeepTest(values.level, ctx.ageYears ?? 30))
+    },
     sortOrder: 20,
     name: { de: '20 m Shuttle Run (Beep-Test)', en: '20 m Shuttle Run (Beep Test)' },
     shortName: { de: 'Beep-Test', en: 'Beep Test' },
@@ -146,6 +169,7 @@ export const TEST_CATALOG: TestDefinition[] = [
     protocol: { mode: 'stopwatch', targetDistanceM: 2000 },
     requiresBodyWeight: true,
     derivedMetrics: ['avg_pace_s_per_500m', 'avg_power_w', 'watts_per_kg'],
+    derive: deriveRowing,
     sortOrder: 40,
     name: { de: '2000 m Rudern', en: '2000 m Row' },
     shortName: { de: '2k Row', en: '2k Row' },
@@ -273,6 +297,12 @@ export const TEST_CATALOG: TestDefinition[] = [
     protocol: { mode: 'amrap', durationSeconds: 1200 },
     requiresBodyWeight: false,
     derivedMetrics: ['total_reps', 'reps_per_minute'],
+    derive: (values, _ctx, put) => {
+    // Eine Runde Cindy sind 5 + 10 + 15 = 30 Wiederholungen.
+    const total = (values.rounds ?? 0) * 30 + (values.partialReps ?? 0)
+    put('total_reps', total)
+    put('reps_per_minute', total / 20)
+    },
     sortOrder: 220,
     name: { de: 'Cindy (20 Min AMRAP)', en: 'Cindy (20 min AMRAP)' },
     shortName: { de: 'Cindy', en: 'Cindy' },
@@ -298,6 +328,9 @@ export const TEST_CATALOG: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 600 },
     requiresBodyWeight: false,
     derivedMetrics: ['calories_per_minute'],
+    derive: (values, _ctx, put) => {
+    put('calories_per_minute', values.calories / 10)
+    },
     sortOrder: 230,
     name: { de: 'Assault Bike — 10 Minuten', en: 'Assault Bike — 10 minutes' },
     shortName: { de: 'Bike 10 Min', en: 'Bike 10 min' },

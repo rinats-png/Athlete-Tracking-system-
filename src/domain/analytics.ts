@@ -1,14 +1,10 @@
-import { getTest } from "@/data/testCatalog";
-import { lookupPercentile } from "@/domain/benchmark";
-import { PERFORMANCE_DIMENSIONS } from "@/types/domain";
-import { assessQuality } from "@/domain/dataQuality";
-import { coveredDimensions } from "@/domain/assessment";
-import type { PerformanceDimension } from "@/types/domain";
-import type {
-  StoredAssessment,
-  AthleteData,
-  StoredResult,
-} from "@/lib/store/localStore";
+import { getTest } from '@/data/testCatalog'
+import { lookupPercentile } from '@/domain/benchmark'
+import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
+import { assessQuality } from '@/domain/dataQuality'
+import { coveredDimensions } from '@/domain/assessment'
+import type { PerformanceDimension } from '@/types/domain'
+import type { StoredAssessment, AthleteData, StoredResult } from '@/lib/store/localStore'
 
 /**
  * Auswertung über die Zeit.
@@ -22,34 +18,34 @@ import type {
 
 // --- Trend -------------------------------------------------------------------
 
-export type TrendLabel = "improving" | "stable" | "declining" | "insufficient";
+export type TrendLabel = 'improving' | 'stable' | 'declining' | 'insufficient'
 
 export interface Trend {
-  label: TrendLabel;
+  label: TrendLabel
   /** Änderung in Prozent je 30 Tage, richtungsbereinigt (positiv = besser). */
-  percentPer30Days: number | null;
+  percentPer30Days: number | null
   /** Bestimmtheitsmass der Regression, 0–1. Niedrig = stark streuend. */
-  rSquared: number | null;
-  points: number;
-  spanDays: number;
-  firstPerformedAt: string | null;
-  lastPerformedAt: string | null;
+  rSquared: number | null
+  points: number
+  spanDays: number
+  firstPerformedAt: string | null
+  lastPerformedAt: string | null
 }
 
 /** Ab wie vielen Messungen eine Regression überhaupt etwas aussagt. */
-export const MIN_TREND_POINTS = 3;
+export const MIN_TREND_POINTS = 3
 /** Unterhalb dieser Änderung je 30 Tage gilt die Leistung als stabil. */
-export const TREND_STABLE_BAND_PERCENT = 0.5;
+export const TREND_STABLE_BAND_PERCENT = 0.5
 
 const emptyTrend = (points: number): Trend => ({
-  label: "insufficient",
+  label: 'insufficient',
   percentPer30Days: null,
   rSquared: null,
   points,
   spanDays: 0,
   firstPerformedAt: null,
   lastPerformedAt: null,
-});
+})
 
 /**
  * Trend eines Tests über seine Historie.
@@ -60,53 +56,44 @@ const emptyTrend = (points: number): Trend => ({
  * sichtbar bleibt, wie gut die Gerade die Punkte überhaupt beschreibt.
  */
 export function testTrend(results: StoredResult[], testSlug: string): Trend {
-  const test = getTest(testSlug);
+  const test = getTest(testSlug)
   const series = results
     .filter((r) => r.testSlug === testSlug && r.score != null)
-    .sort((a, b) => a.performedAt.localeCompare(b.performedAt));
+    .sort((a, b) => a.performedAt.localeCompare(b.performedAt))
 
-  if (!test || series.length < MIN_TREND_POINTS)
-    return emptyTrend(series.length);
+  if (!test || series.length < MIN_TREND_POINTS) return emptyTrend(series.length)
 
-  const t0 = new Date(series[0].performedAt).getTime();
-  const days = series.map(
-    (r) => (new Date(r.performedAt).getTime() - t0) / 86_400_000,
-  );
-  const values = series.map((r) => r.score as number);
+  const t0 = new Date(series[0].performedAt).getTime()
+  const days = series.map((r) => (new Date(r.performedAt).getTime() - t0) / 86_400_000)
+  const values = series.map((r) => r.score as number)
 
-  const spanDays = days[days.length - 1];
+  const spanDays = days[days.length - 1]
   // Alle Messungen am selben Tag: kein Zeitverlauf, also kein Trend.
-  if (spanDays <= 0) return emptyTrend(series.length);
+  if (spanDays <= 0) return emptyTrend(series.length)
 
-  const n = days.length;
-  const meanX = days.reduce((a, b) => a + b, 0) / n;
-  const meanY = values.reduce((a, b) => a + b, 0) / n;
-  const sxx = days.reduce((sum, x) => sum + (x - meanX) ** 2, 0);
-  const sxy = days.reduce(
-    (sum, x, i) => sum + (x - meanX) * (values[i] - meanY),
-    0,
-  );
-  if (sxx === 0 || meanY === 0) return emptyTrend(series.length);
+  const n = days.length
+  const meanX = days.reduce((a, b) => a + b, 0) / n
+  const meanY = values.reduce((a, b) => a + b, 0) / n
+  const sxx = days.reduce((sum, x) => sum + (x - meanX) ** 2, 0)
+  const sxy = days.reduce((sum, x, i) => sum + (x - meanX) * (values[i] - meanY), 0)
+  if (sxx === 0 || meanY === 0) return emptyTrend(series.length)
 
-  const slopePerDay = sxy / sxx;
-  const syy = values.reduce((sum, y) => sum + (y - meanY) ** 2, 0);
-  const rSquared =
-    syy === 0 ? 1 : Math.max(0, Math.min(1, (sxy * sxy) / (sxx * syy)));
+  const slopePerDay = sxy / sxx
+  const syy = values.reduce((sum, y) => sum + (y - meanY) ** 2, 0)
+  const rSquared = syy === 0 ? 1 : Math.max(0, Math.min(1, (sxy * sxy) / (sxx * syy)))
 
   // Steigung als Prozent des Mittelwerts, damit Sekunden und Kilogramm
   // vergleichbar werden. Bei „niedriger ist besser“ dreht das Vorzeichen.
-  const rawPercent = ((slopePerDay * 30) / Math.abs(meanY)) * 100;
+  const rawPercent = ((slopePerDay * 30) / Math.abs(meanY)) * 100
   const percentPer30Days =
-    Math.round(
-      (test.direction === "lower_is_better" ? -rawPercent : rawPercent) * 100,
-    ) / 100;
+    Math.round((test.direction === 'lower_is_better' ? -rawPercent : rawPercent) * 100) / 100
 
   const label: TrendLabel =
     Math.abs(percentPer30Days) < TREND_STABLE_BAND_PERCENT
-      ? "stable"
+      ? 'stable'
       : percentPer30Days > 0
-        ? "improving"
-        : "declining";
+        ? 'improving'
+        : 'declining'
 
   return {
     label,
@@ -116,18 +103,18 @@ export function testTrend(results: StoredResult[], testSlug: string): Trend {
     spanDays: Math.round(spanDays),
     firstPerformedAt: series[0].performedAt,
     lastPerformedAt: series[series.length - 1].performedAt,
-  };
+  }
 }
 
 // --- Baseline gegen aktuell --------------------------------------------------
 
 export interface BaselineComparison {
-  testSlug: string;
-  baseline: StoredResult;
-  current: StoredResult;
+  testSlug: string
+  baseline: StoredResult
+  current: StoredResult
   /** Richtungsbereinigt: positiv heisst besser geworden. */
-  changePercent: number | null;
-  daysBetween: number;
+  changePercent: number | null
+  daysBetween: number
 }
 
 /**
@@ -138,31 +125,27 @@ export interface BaselineComparison {
  * heute — und ausdrücklich mit dem Zeitraum daneben, denn 4 % in acht Wochen
  * und 4 % in zwei Jahren sind nicht dieselbe Aussage.
  */
-export function baselineComparisons(
-  results: StoredResult[],
-): BaselineComparison[] {
-  const bySlug = new Map<string, StoredResult[]>();
+export function baselineComparisons(results: StoredResult[]): BaselineComparison[] {
+  const bySlug = new Map<string, StoredResult[]>()
   for (const result of results) {
-    if (result.score == null) continue;
-    const list = bySlug.get(result.testSlug) ?? [];
-    list.push(result);
-    bySlug.set(result.testSlug, list);
+    if (result.score == null) continue
+    const list = bySlug.get(result.testSlug) ?? []
+    list.push(result)
+    bySlug.set(result.testSlug, list)
   }
 
-  const out: BaselineComparison[] = [];
+  const out: BaselineComparison[] = []
   for (const [testSlug, list] of bySlug) {
-    if (list.length < 2) continue;
-    const test = getTest(testSlug);
-    if (!test) continue;
-    const sorted = [...list].sort((a, b) =>
-      a.performedAt.localeCompare(b.performedAt),
-    );
-    const baseline = sorted[0];
-    const current = sorted[sorted.length - 1];
-    const from = baseline.score as number;
-    const to = current.score as number;
+    if (list.length < 2) continue
+    const test = getTest(testSlug)
+    if (!test) continue
+    const sorted = [...list].sort((a, b) => a.performedAt.localeCompare(b.performedAt))
+    const baseline = sorted[0]
+    const current = sorted[sorted.length - 1]
+    const from = baseline.score as number
+    const to = current.score as number
 
-    const raw = from === 0 ? null : ((to - from) / Math.abs(from)) * 100;
+    const raw = from === 0 ? null : ((to - from) / Math.abs(from)) * 100
     out.push({
       testSlug,
       baseline,
@@ -170,28 +153,25 @@ export function baselineComparisons(
       changePercent:
         raw == null
           ? null
-          : Math.round(
-              (test.direction === "lower_is_better" ? -raw : raw) * 10,
-            ) / 10,
+          : Math.round((test.direction === 'lower_is_better' ? -raw : raw) * 10) / 10,
       daysBetween: Math.round(
-        (new Date(current.performedAt).getTime() -
-          new Date(baseline.performedAt).getTime()) /
+        (new Date(current.performedAt).getTime() - new Date(baseline.performedAt).getTime()) /
           86_400_000,
       ),
-    });
+    })
   }
-  return out.sort((a, b) => (b.changePercent ?? 0) - (a.changePercent ?? 0));
+  return out.sort((a, b) => (b.changePercent ?? 0) - (a.changePercent ?? 0))
 }
 
 // --- Terminvergleich ---------------------------------------------------------
 
 export interface AssessmentComparisonRow {
-  testSlug: string;
-  before: StoredResult | null;
-  after: StoredResult | null;
-  changePercent: number | null;
+  testSlug: string
+  before: StoredResult | null
+  after: StoredResult | null
+  changePercent: number | null
   /** Nur in einem der beiden Termine gemessen — nicht vergleichbar. */
-  onlyIn: "before" | "after" | null;
+  onlyIn: 'before' | 'after' | null
 }
 
 /**
@@ -206,22 +186,20 @@ export function compareAssessments(
   beforeId: string,
   afterId: string,
 ): AssessmentComparisonRow[] {
-  const before = data.results.filter((r) => r.assessmentId === beforeId);
-  const after = data.results.filter((r) => r.assessmentId === afterId);
-  const slugs = [...new Set([...before, ...after].map((r) => r.testSlug))];
+  const before = data.results.filter((r) => r.assessmentId === beforeId)
+  const after = data.results.filter((r) => r.assessmentId === afterId)
+  const slugs = [...new Set([...before, ...after].map((r) => r.testSlug))]
 
   return slugs
     .map((testSlug): AssessmentComparisonRow => {
-      const test = getTest(testSlug);
-      const b = before.find((r) => r.testSlug === testSlug) ?? null;
-      const a = after.find((r) => r.testSlug === testSlug) ?? null;
+      const test = getTest(testSlug)
+      const b = before.find((r) => r.testSlug === testSlug) ?? null
+      const a = after.find((r) => r.testSlug === testSlug) ?? null
 
-      let changePercent: number | null = null;
+      let changePercent: number | null = null
       if (test && b?.score != null && a?.score != null && b.score !== 0) {
-        const raw = ((a.score - b.score) / Math.abs(b.score)) * 100;
-        changePercent =
-          Math.round((test.direction === "lower_is_better" ? -raw : raw) * 10) /
-          10;
+        const raw = ((a.score - b.score) / Math.abs(b.score)) * 100
+        changePercent = Math.round((test.direction === 'lower_is_better' ? -raw : raw) * 10) / 10
       }
 
       return {
@@ -229,12 +207,10 @@ export function compareAssessments(
         before: b,
         after: a,
         changePercent,
-        onlyIn: b && !a ? "before" : a && !b ? "after" : null,
-      };
+        onlyIn: b && !a ? 'before' : a && !b ? 'after' : null,
+      }
     })
-    .sort(
-      (x, y) => (y.changePercent ?? -Infinity) - (x.changePercent ?? -Infinity),
-    );
+    .sort((x, y) => (y.changePercent ?? -Infinity) - (x.changePercent ?? -Infinity))
 }
 
 /** Die beiden jüngsten abgeschlossenen Termine — der übliche Vergleich. */
@@ -242,31 +218,31 @@ export function latestComparablePair(
   assessments: StoredAssessment[],
 ): [StoredAssessment, StoredAssessment] | null {
   const completed = assessments
-    .filter((a) => a.status === "completed")
-    .sort((a, b) => b.performedOn.localeCompare(a.performedOn));
-  if (completed.length < 2) return null;
-  return [completed[1], completed[0]];
+    .filter((a) => a.status === 'completed')
+    .sort((a, b) => b.performedOn.localeCompare(a.performedOn))
+  if (completed.length < 2) return null
+  return [completed[1], completed[0]]
 }
 
 // --- Belastbarkeit des Profils ----------------------------------------------
 
 export interface ConfidenceComponent {
-  key: "coverage" | "recency" | "quality" | "depth";
+  key: 'coverage' | 'recency' | 'quality' | 'depth'
   /** 0–1. */
-  value: number;
+  value: number
   /** Menschenlesbarer Beleg, z. B. „4 von 6 Achsen“. */
-  detail: Record<string, number>;
+  detail: Record<string, number>
 }
 
 export interface ConfidenceScore {
   /** 0–100. Nur die Summe der offengelegten Komponenten, kein Geheimrezept. */
-  score: number;
-  components: ConfidenceComponent[];
+  score: number
+  components: ConfidenceComponent[]
 }
 
 /** Ab wann eine Messung als veraltet gilt (Monate). */
-export const RECENCY_FULL_DAYS = 90;
-export const RECENCY_ZERO_DAYS = 540;
+export const RECENCY_FULL_DAYS = 90
+export const RECENCY_ZERO_DAYS = 540
 
 /**
  * Wie belastbar ist das Profil?
@@ -280,89 +256,77 @@ export function confidenceScore(
   results: StoredResult[],
   asOf: Date = new Date(),
 ): ConfidenceScore {
-  const scored = results.filter((r) => r.score != null);
+  const scored = results.filter((r) => r.score != null)
 
   // 1. Abdeckung: wie viele der sechs Achsen sind überhaupt belegt?
-  const covered = coveredDimensions(scored).length;
-  const coverage = covered / PERFORMANCE_DIMENSIONS.length;
+  const covered = coveredDimensions(scored).length
+  const coverage = covered / PERFORMANCE_DIMENSIONS.length
 
   // 2. Aktualität: wie alt ist die jüngste Messung?
   const latest = scored.reduce<string | null>(
     (acc, r) => (acc == null || r.performedAt > acc ? r.performedAt : acc),
     null,
-  );
+  )
   const ageDays =
     latest == null
       ? Infinity
-      : Math.max(0, (asOf.getTime() - new Date(latest).getTime()) / 86_400_000);
+      : Math.max(0, (asOf.getTime() - new Date(latest).getTime()) / 86_400_000)
   const recency =
     ageDays <= RECENCY_FULL_DAYS
       ? 1
       : ageDays >= RECENCY_ZERO_DAYS
         ? 0
-        : 1 -
-          (ageDays - RECENCY_FULL_DAYS) /
-            (RECENCY_ZERO_DAYS - RECENCY_FULL_DAYS);
+        : 1 - (ageDays - RECENCY_FULL_DAYS) / (RECENCY_ZERO_DAYS - RECENCY_FULL_DAYS)
 
   // 3. Qualität: Anteil der Messungen ohne Vorbehalt.
-  const valid = scored.filter(
-    (r) => assessQuality(r).status === "valid",
-  ).length;
-  const quality = scored.length === 0 ? 0 : valid / scored.length;
+  const valid = scored.filter((r) => assessQuality(r).status === 'valid').length
+  const quality = scored.length === 0 ? 0 : valid / scored.length
 
   // 4. Tiefe: gibt es je Achse mehr als eine Messung? Ein einzelner Wert je
   //    Achse ist ein Schnappschuss, kein Profil.
-  const perDimension = new Map<PerformanceDimension, number>();
+  const perDimension = new Map<PerformanceDimension, number>()
   for (const result of scored) {
-    const test = getTest(result.testSlug);
-    if (!test) continue;
-    for (const dimension of Object.keys(
-      test.dimensionMetrics,
-    ) as PerformanceDimension[]) {
-      perDimension.set(dimension, (perDimension.get(dimension) ?? 0) + 1);
+    const test = getTest(result.testSlug)
+    if (!test) continue
+    for (const dimension of Object.keys(test.dimensionMetrics) as PerformanceDimension[]) {
+      perDimension.set(dimension, (perDimension.get(dimension) ?? 0) + 1)
     }
   }
-  const deepEnough = [...perDimension.values()].filter(
-    (count) => count >= 2,
-  ).length;
-  const depth = covered === 0 ? 0 : deepEnough / PERFORMANCE_DIMENSIONS.length;
+  const deepEnough = [...perDimension.values()].filter((count) => count >= 2).length
+  const depth = covered === 0 ? 0 : deepEnough / PERFORMANCE_DIMENSIONS.length
 
   const components: ConfidenceComponent[] = [
+    { key: 'coverage', value: coverage, detail: { covered, total: PERFORMANCE_DIMENSIONS.length } },
     {
-      key: "coverage",
-      value: coverage,
-      detail: { covered, total: PERFORMANCE_DIMENSIONS.length },
-    },
-    {
-      key: "recency",
+      key: 'recency',
       value: recency,
       detail: { days: Number.isFinite(ageDays) ? Math.round(ageDays) : -1 },
     },
-    { key: "quality", value: quality, detail: { valid, total: scored.length } },
+    { key: 'quality', value: quality, detail: { valid, total: scored.length } },
     {
-      key: "depth",
+      key: 'depth',
       value: depth,
       detail: { deepEnough, total: PERFORMANCE_DIMENSIONS.length },
     },
-  ];
+  ]
 
   const score = Math.round(
     (components.reduce((sum, c) => sum + c.value, 0) / components.length) * 100,
-  );
-  return { score, components };
+  )
+  return { score, components }
 }
 
 // --- Ausgewogenheit ----------------------------------------------------------
 
 export interface BalanceReport {
   /** 0–100. 100 = alle belegten Achsen gleich stark. */
-  balance: number | null;
-  strongest: { axisId: string; score: number } | null;
-  weakest: { axisId: string; score: number } | null;
+  balance: number | null
+  strongest: { axisId: string; score: number } | null
+  weakest: { axisId: string; score: number } | null
   /** Abstand zwischen stärkster und schwächster Achse in Punkten. */
-  spread: number | null;
+  spread: number | null
   /** Achsen ohne Daten — sie gehen NICHT in die Balance ein. */
-  unmeasured: string[];
+  unmeasured: string[]
 }
 
 /**
@@ -376,25 +340,17 @@ export interface BalanceReport {
 export function performanceBalance(
   axes: { axisId: string; score: number | null }[],
 ): BalanceReport {
-  const scored = axes.filter(
-    (a): a is { axisId: string; score: number } => a.score != null,
-  );
-  const unmeasured = axes.filter((a) => a.score == null).map((a) => a.axisId);
+  const scored = axes.filter((a): a is { axisId: string; score: number } => a.score != null)
+  const unmeasured = axes.filter((a) => a.score == null).map((a) => a.axisId)
 
   if (scored.length < 2) {
-    return {
-      balance: null,
-      strongest: null,
-      weakest: null,
-      spread: null,
-      unmeasured,
-    };
+    return { balance: null, strongest: null, weakest: null, spread: null, unmeasured }
   }
 
-  const sorted = [...scored].sort((a, b) => b.score - a.score);
-  const strongest = sorted[0];
-  const weakest = sorted[sorted.length - 1];
-  const spread = Math.round((strongest.score - weakest.score) * 10) / 10;
+  const sorted = [...scored].sort((a, b) => b.score - a.score)
+  const strongest = sorted[0]
+  const weakest = sorted[sorted.length - 1]
+  const spread = Math.round((strongest.score - weakest.score) * 10) / 10
 
   // Die Skala ist 0–100, ein Abstand von 100 ist das Maximum an Unwucht.
   return {
@@ -403,7 +359,7 @@ export function performanceBalance(
     weakest,
     spread,
     unmeasured,
-  };
+  }
 }
 
 // --- Perzentilverlauf --------------------------------------------------------
@@ -416,5 +372,5 @@ export function performanceBalance(
  * Cooper-Test deshalb nie etwas fand.
  */
 export function resultPercentile(result: StoredResult): number | null {
-  return lookupPercentile(result);
+  return lookupPercentile(result)
 }

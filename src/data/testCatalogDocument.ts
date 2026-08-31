@@ -1,4 +1,6 @@
 import type { TestDefinition, TestField } from './testCatalog'
+import { fatigueIndexPercent, hrDriftPercent, pacePer500m, pacePerKm, sjftIndex } from '@/lib/metrics'
+import { deriveRepsFatigue, deriveStrokeTimeTrial } from './testDeriveShared'
 
 /**
  * Tests, die das Zielgruppendokument namentlich nennt.
@@ -47,6 +49,13 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 90 },
     requiresBodyWeight: false,
     derivedMetrics: ['swft_index', 'totalThrows'],
+    derive: (values, _ctx, put) => {
+    // Gleiche Rechnung wie der SJFT, eigener Schlüssel: die Referenzwerte
+    // der beiden Tests sind nicht austauschbar.
+    const total = (values.throwsA ?? 0) + (values.throwsB ?? 0) + (values.throwsC ?? 0)
+    put('totalThrows', total)
+    put('swft_index', sjftIndex(total, values.hrEnd, values.hrAfter1min))
+    },
     sortOrder: 601,
     name: { de: 'Special Wrestling Fitness Test', en: 'Special wrestling fitness test' },
     shortName: { de: 'SWFT', en: 'SWFT' },
@@ -77,6 +86,7 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 120 },
     requiresBodyWeight: false,
     derivedMetrics: ['fatigue_index_percent', 'reps_per_minute'],
+    derive: deriveRepsFatigue,
     sortOrder: 602,
     name: { de: 'Uchi-komi Fitness Test', en: 'Uchi-komi fitness test' },
     shortName: { de: 'UFT', en: 'UFT' },
@@ -107,6 +117,7 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 180 },
     requiresBodyWeight: false,
     derivedMetrics: ['fatigue_index_percent'],
+    derive: deriveRepsFatigue,
     sortOrder: 603,
     name: { de: 'JJAPT (BJJ-Anaerobtest)', en: 'JJAPT (BJJ anaerobic test)' },
     shortName: { de: 'JJAPT', en: 'JJAPT' },
@@ -137,6 +148,7 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 180 },
     requiresBodyWeight: false,
     derivedMetrics: ['fatigue_index_percent', 'reps_per_minute'],
+    derive: deriveRepsFatigue,
     sortOrder: 604,
     name: { de: 'Schlagtest über 3 Minuten', en: 'Three-minute punch test' },
     shortName: { de: '3-min Schlag', en: '3-min punch' },
@@ -167,6 +179,9 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'amrap', durationSeconds: 300 },
     requiresBodyWeight: false,
     derivedMetrics: ['total_reps'],
+    derive: (values, _ctx, put) => {
+    put('total_reps', (values.rounds ?? 0) * 3 + (values.partialReps ?? 0))
+    },
     sortOrder: 605,
     name: { de: 'Grappling-Zirkel 5 Minuten', en: 'Five-minute grappling circuit' },
     shortName: { de: 'Grappling 5′', en: 'Grappling 5′' },
@@ -198,6 +213,15 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'attempts', attempts: 4 },
     requiresBodyWeight: false,
     derivedMetrics: ['reps', 'fatigue_index_percent'],
+    derive: (values, _ctx, put) => {
+    const sets = [values.repsSet1, values.repsSet2, values.repsSet3, values.repsSet4].filter(
+      (v): v is number => v != null && Number.isFinite(v),
+    )
+    if (sets.length > 0) {
+      put('reps', sets.reduce((a, b) => a + b, 0))
+      put('fatigue_index_percent', fatigueIndexPercent(Math.max(...sets), Math.min(...sets)))
+    }
+    },
     sortOrder: 606,
     name: { de: 'Ermüdungszirkel 4 × 30 s', en: 'Fatigue circuit 4 × 30 s' },
     shortName: { de: '4 × 30 s', en: '4 × 30 s' },
@@ -228,6 +252,11 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'amrap', durationSeconds: 300 },
     requiresBodyWeight: true,
     derivedMetrics: ['climb_meters_total'],
+    derive: (values, _ctx, put) => {
+    if (values.reps != null && values.heightM != null) {
+      put('climb_meters_total', values.reps * values.heightM)
+    }
+    },
     sortOrder: 607,
     name: { de: 'Seilklettern', en: 'Rope climb' },
     shortName: { de: 'Seil', en: 'Rope' },
@@ -258,6 +287,9 @@ export const DOCUMENT_COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 180 },
     requiresBodyWeight: false,
     derivedMetrics: ['reps_per_minute'],
+    derive: (values, _ctx, put) => {
+    if (values.reps != null) put('reps_per_minute', values.reps / 3)
+    },
     sortOrder: 608,
     name: { de: 'Seilspringen 3 Minuten', en: 'Rope skipping, three minutes' },
     shortName: { de: 'Seilspringen', en: 'Skipping' },
@@ -292,6 +324,9 @@ export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
     protocol: { mode: 'stopwatch', targetDistanceM: 1000 },
     requiresBodyWeight: false,
     derivedMetrics: ['avg_pace_s_per_500m'],
+    derive: (values, _ctx, put) => {
+    put('avg_pace_s_per_500m', pacePer500m(values.durationSeconds, 1000))
+    },
     sortOrder: 620,
     name: { de: 'Ski-Ergometer 1000 m', en: 'Ski erg 1000 m' },
     shortName: { de: 'Ski 1000', en: 'Ski 1000' },
@@ -351,6 +386,11 @@ export const DOCUMENT_TASK_TESTS: TestDefinition[] = [
     protocol: { mode: 'stopwatch' },
     requiresBodyWeight: true,
     derivedMetrics: ['seconds_per_station'],
+    derive: (values, _ctx, put) => {
+    if (values.durationSeconds != null && values.stations != null && values.stations > 0) {
+      put('seconds_per_station', values.durationSeconds / values.stations)
+    }
+    },
     sortOrder: 622,
     name: { de: 'Hindernisbahn', en: 'Obstacle course' },
     shortName: { de: 'Hindernisbahn', en: 'Obstacle' },
@@ -387,6 +427,16 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
     protocol: { mode: 'stopwatch' },
     requiresBodyWeight: false,
     derivedMetrics: ['vertical_speed_m_per_h', 'grade_percent'],
+    derive: (values, _ctx, put) => {
+    // Steigleistung in Höhenmetern je Stunde — die Grösse, in der am Berg
+    // gerechnet wird. Die reine Zeit sagt ohne die Höhenmeter nichts.
+    if (values.elevationGainM != null && values.durationSeconds != null && values.durationSeconds > 0) {
+      put('vertical_speed_m_per_h', (values.elevationGainM / values.durationSeconds) * 3600)
+    }
+    if (values.elevationGainM != null && values.distanceM != null && values.distanceM > 0) {
+      put('grade_percent', (values.elevationGainM / values.distanceM) * 100)
+    }
+    },
     sortOrder: 630,
     name: { de: 'Bergauflauf', en: 'Uphill run test' },
     shortName: { de: 'Bergauf', en: 'Uphill' },
@@ -417,6 +467,11 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
     protocol: { mode: 'stopwatch' },
     requiresBodyWeight: false,
     derivedMetrics: ['grade_percent'],
+    derive: (values, _ctx, put) => {
+    if (values.elevationLossM != null && values.distanceM != null && values.distanceM > 0) {
+      put('grade_percent', (values.elevationLossM / values.distanceM) * 100)
+    }
+    },
     sortOrder: 631,
     name: { de: 'Bergablauf', en: 'Downhill run test' },
     shortName: { de: 'Bergab', en: 'Downhill' },
@@ -449,6 +504,12 @@ export const DOCUMENT_RUNNING_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 3600 },
     requiresBodyWeight: false,
     derivedMetrics: ['hr_drift_percent', 'avg_pace_s_per_km'],
+    derive: (values, _ctx, put) => {
+    put('hr_drift_percent', hrDriftPercent(values.hrFirstHalf, values.hrSecondHalf))
+    if (values.distanceM != null) {
+      put('avg_pace_s_per_km', pacePerKm(values.durationSeconds, values.distanceM))
+    }
+    },
     sortOrder: 632,
     name: { de: 'Herzfrequenzdrift', en: 'Heart rate drift' },
     shortName: { de: 'HF-Drift', en: 'HR drift' },
@@ -484,6 +545,16 @@ export const DOCUMENT_CYCLING_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 600 },
     requiresBodyWeight: true,
     derivedMetrics: ['efficiency_w_per_bpm', 'watts_per_kg'],
+    derive: (values, ctx, put) => {
+    // Watt je Herzschlag: steigt der Wert bei gleicher Wattzahl, ist die
+    // aerobe Grundlage besser geworden.
+    if (values.targetPowerW != null && values.avgHeartRate != null && values.avgHeartRate > 0) {
+      put('efficiency_w_per_bpm', values.targetPowerW / values.avgHeartRate)
+    }
+    if (values.targetPowerW != null && ctx.bodyWeightKg) {
+      put('watts_per_kg', values.targetPowerW / ctx.bodyWeightKg)
+    }
+    },
     sortOrder: 640,
     name: { de: 'Submaximaler Effizienztest', en: 'Submaximal efficiency test' },
     shortName: { de: 'Submax Rad', en: 'Submax bike' },
@@ -514,6 +585,9 @@ export const DOCUMENT_CYCLING_TESTS: TestDefinition[] = [
     protocol: { mode: 'attempts', attempts: 6 },
     requiresBodyWeight: true,
     derivedMetrics: ['fatigue_index_percent', 'watts_per_kg'],
+    derive: (values, _ctx, put) => {
+    put('fatigue_index_percent', fatigueIndexPercent(values.peakPowerW, values.lastSprintPowerW))
+    },
     sortOrder: 641,
     name: { de: 'Wiederholter Sprint auf dem Rad', en: 'Repeated sprint, bike' },
     shortName: { de: 'Wdh.-Sprint', en: 'Rep. sprint' },
@@ -555,6 +629,7 @@ const strokeTimeTrial = (
   protocol: { mode: 'stopwatch', targetDistanceM: 100 },
   requiresBodyWeight: false,
   derivedMetrics: ['strokes_per_100m'],
+  derive: deriveStrokeTimeTrial,
   sortOrder,
   name: { de: nameDe, en: nameEn },
   shortName: { de: nameDe, en: nameEn },

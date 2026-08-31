@@ -1,4 +1,5 @@
 import type { TestDefinition, TestField } from './testCatalog'
+import { estimateOneRepMax } from '@/lib/metrics'
 
 /**
  * Erweiterung des Testkatalogs (§12).
@@ -221,6 +222,14 @@ export const REPEATED_JUMP: TestDefinition = {
   protocol: { mode: 'countdown', durationSeconds: 15 },
   requiresBodyWeight: true,
   derivedMetrics: ['avg_jump_height_cm'],
+  derive: (values, _ctx, put) => {
+  // Der Mittelwert wird gebildet, nicht eingegeben: zwei Zahlen, die
+  // dasselbe beschreiben, könnten auseinanderlaufen.
+  const count = values.jumpCount
+  if (count != null && count > 0 && values.totalHeightCm != null) {
+    put('avg_jump_height_cm', values.totalHeightCm / count)
+  }
+  },
   sortOrder: 333,
   name: { de: 'Wiederholungssprünge 15 s', en: 'Repeated jumps 15 s' },
   shortName: { de: '15-s-Sprünge', en: '15 s jumps' },
@@ -344,6 +353,19 @@ export const STRENGTH_TESTS: TestDefinition[] = [
     protocol: { mode: 'attempts', attempts: 5 },
     requiresBodyWeight: true,
     derivedMetrics: ['total_load_kg', 'total_load_bw'],
+    derive: (values, ctx, put) => {
+    // Gewertet wird die bewegte Gesamtlast. Das Zusatzgewicht allein wäre
+    // ohne das Körpergewicht daneben nicht vergleichbar.
+    if (ctx.bodyWeightKg != null && values.addedLoadKg != null) {
+      const total = estimateOneRepMax(
+        ctx.bodyWeightKg + values.addedLoadKg,
+        values.reps ?? 1,
+        'epley',
+      )
+      put('total_load_kg', total)
+      put('total_load_bw', total / ctx.bodyWeightKg)
+    }
+    },
     sortOrder: 213,
     name: { de: 'Klimmzug mit Zusatzgewicht', en: 'Weighted pull-up 1RM' },
     shortName: { de: 'Klimmzug +kg', en: 'Weighted pull-up' },

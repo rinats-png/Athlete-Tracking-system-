@@ -1,4 +1,13 @@
 import type { TestDefinition, TestField } from './testCatalog'
+import {
+  bikeThresholdScore,
+  fatigueIndexPercent,
+  functionalThresholdPower,
+  pacePerKm,
+  sjftIndex,
+  swimTechniqueScore,
+} from '@/lib/metrics'
+import { deriveRowing, deriveStrikeSplit } from './testDeriveShared'
 
 /**
  * Sportartspezifische Tests zur Zielgruppenliste.
@@ -83,6 +92,11 @@ export const COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 75 },
     requiresBodyWeight: false,
     derivedMetrics: ['sjft_index', 'totalThrows'],
+    derive: (values, _ctx, put) => {
+    const total = (values.throwsA ?? 0) + (values.throwsB ?? 0) + (values.throwsC ?? 0)
+    put('totalThrows', total)
+    put('sjft_index', sjftIndex(total, values.hrEnd, values.hrAfter1min))
+    },
     sortOrder: 500,
     name: { de: 'Special Judo Fitness Test', en: 'Special judo fitness test' },
     shortName: { de: 'SJFT', en: 'SJFT' },
@@ -112,6 +126,18 @@ export const COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'attempts', attempts: 3 },
     requiresBodyWeight: true,
     derivedMetrics: ['grip_relative', 'grip_asymmetry_percent'],
+    derive: (values, ctx, put) => {
+    if (ctx.bodyWeightKg && values.gripKg != null) {
+      put('grip_relative', values.gripKg / ctx.bodyWeightKg)
+    }
+    // Seitenunterschied nur, wenn beide Seiten gemessen wurden. Aus einer
+    // Seite eine Asymmetrie zu rechnen wäre eine erfundene Zahl.
+    if (values.gripKg != null && values.gripLeftKg != null) {
+      const best = Math.max(values.gripKg, values.gripLeftKg)
+      const worst = Math.min(values.gripKg, values.gripLeftKg)
+      put('grip_asymmetry_percent', fatigueIndexPercent(best, worst))
+    }
+    },
     sortOrder: 501,
     name: { de: 'Griffkraft (Handdynamometer)', en: 'Grip strength (dynamometer)' },
     shortName: { de: 'Griffkraft', en: 'Grip' },
@@ -197,6 +223,7 @@ export const COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 60 },
     requiresBodyWeight: false,
     derivedMetrics: ['fatigue_index_percent'],
+    derive: deriveStrikeSplit,
     sortOrder: 504,
     name: { de: 'Schlagtest 60 s', en: 'Punch test 60 s' },
     shortName: { de: 'Schläge 60 s', en: 'Punches 60 s' },
@@ -226,6 +253,7 @@ export const COMBAT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 60 },
     requiresBodyWeight: false,
     derivedMetrics: ['fatigue_index_percent'],
+    derive: deriveStrikeSplit,
     sortOrder: 505,
     name: { de: 'Tritttest 60 s', en: 'Kick test 60 s' },
     shortName: { de: 'Tritte 60 s', en: 'Kicks 60 s' },
@@ -433,6 +461,7 @@ export const HYBRID_TESTS: TestDefinition[] = [
     protocol: { mode: 'stopwatch', targetDistanceM: 1000 },
     requiresBodyWeight: true,
     derivedMetrics: ['avg_pace_s_per_500m', 'avg_power_w', 'watts_per_kg'],
+    derive: deriveRowing,
     sortOrder: 532,
     name: { de: '1000 m Rudern', en: '1000 m row' },
     shortName: { de: '1000 m Rudern', en: '1000 m row' },
@@ -476,6 +505,15 @@ export const ENDURANCE_SPORT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 1800 },
     requiresBodyWeight: false,
     derivedMetrics: ['avg_pace_s_per_km'],
+    derive: (values, _ctx, put, test) => {
+      // Die Pace kommt hier aus der Protokolldauer, nicht aus einem Feld: der
+      // Test läuft feste 30 Minuten, eingegeben wird nur die Distanz. Ohne
+      // diese Zeile kündigte der Test eine Kennzahl an, die er nie bildete.
+      const seconds = test.protocol.durationSeconds
+      if (seconds != null && values.distanceM != null && values.distanceM > 0) {
+        put('avg_pace_s_per_km', pacePerKm(seconds, values.distanceM))
+      }
+    },
     sortOrder: 541,
     name: { de: '30-Minuten-Schwellentest', en: '30-minute threshold test' },
     shortName: { de: 'Schwelle 30 min', en: 'Threshold 30 min' },
@@ -505,6 +543,12 @@ export const ENDURANCE_SPORT_TESTS: TestDefinition[] = [
     protocol: { mode: 'countdown', durationSeconds: 1200 },
     requiresBodyWeight: true,
     derivedMetrics: ['ftp_watt', 'ftp_watt_per_kg', 'bike_threshold_score'],
+    derive: (values, ctx, put) => {
+    const ftp = functionalThresholdPower(values.avgPowerW)
+    put('ftp_watt', ftp)
+    if (ftp != null && ctx.bodyWeightKg) put('ftp_watt_per_kg', ftp / ctx.bodyWeightKg)
+    put('bike_threshold_score', bikeThresholdScore(ftp, ctx.bodyWeightKg))
+    },
     sortOrder: 550,
     name: { de: 'FTP-Test (20 Minuten)', en: 'FTP test (20 minutes)' },
     shortName: { de: 'FTP 20 min', en: 'FTP 20 min' },
@@ -593,6 +637,9 @@ export const ENDURANCE_SPORT_TESTS: TestDefinition[] = [
     requiresBodyWeight: true,
     setting: 'lab',
     derivedMetrics: ['watts_per_kg', 'fatigue_index_percent'],
+    derive: (values, _ctx, put) => {
+    put('fatigue_index_percent', fatigueIndexPercent(values.peakPowerW, values.minPowerW))
+    },
     sortOrder: 553,
     name: { de: 'Wingate-Test (30 s)', en: 'Wingate test (30 s)' },
     shortName: { de: 'Wingate', en: 'Wingate' },
@@ -674,6 +721,9 @@ export const SWIM_TESTS: TestDefinition[] = [
     protocol: { mode: 'stages' },
     requiresBodyWeight: false,
     derivedMetrics: ['swim_technique_score'],
+    derive: (values, _ctx, put) => {
+    put('swim_technique_score', swimTechniqueScore(values.strokeLengthM, values.thresholdPaceS100))
+    },
     sortOrder: 562,
     name: { de: 'Inkrementeller Schwimmtest', en: 'Incremental swim test' },
     shortName: { de: 'Stufentest Schwimmen', en: 'Swim step test' },
@@ -708,6 +758,16 @@ export const TRIATHLON_TESTS: TestDefinition[] = [
     protocol: { mode: 'stopwatch' },
     requiresBodyWeight: false,
     derivedMetrics: ['avg_pace_s_per_km'],
+    derive: (values, _ctx, put) => {
+    // Die Pace bezieht sich auf den Laufteil, nicht auf die Gesamtzeit.
+    const runSeconds =
+      values.durationSeconds != null && values.bikeMinutes != null
+        ? values.durationSeconds - values.bikeMinutes * 60
+        : null
+    if (runSeconds != null && runSeconds > 0) {
+      put('avg_pace_s_per_km', pacePerKm(runSeconds, values.runDistanceM))
+    }
+    },
     sortOrder: 570,
     name: { de: 'Brick-Test (Rad auf Lauf)', en: 'Brick test (bike to run)' },
     shortName: { de: 'Brick', en: 'Brick' },
