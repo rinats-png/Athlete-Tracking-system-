@@ -5,6 +5,8 @@ import {
   disciplineById,
   disciplinesFor,
   type SportCategoryId,
+  coreSlugs,
+  optionalSlugs,
 } from '@/data/sportProfiles'
 import { getTest } from '@/data/testCatalog'
 import { provenanceOf } from '@/data/documentCoverage'
@@ -47,7 +49,7 @@ export function DisciplinePicker() {
 
   // Kerntests der Disziplin, damit die Auswahl unmittelbar zeigt, was sie
   // bewirkt. Ohne diese Liste ist die Wahl eine Behauptung ohne Folge.
-  const coreTests = selected?.coreTests.map((slug) => getTest(slug)).filter((x) => x != null) ?? []
+  const coreTests = (selected ? coreSlugs(selected) : []).map((slug) => getTest(slug)).filter((x) => x != null) ?? []
 
   return (
     <div className="min-w-0 sm:col-span-2">
@@ -104,7 +106,7 @@ export function DisciplinePicker() {
                 ))}
               </ul>
               <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">
-                {t('profile.disciplineTestsHint', { count: selected.optionalTests.length })}
+                {t('profile.disciplineTestsHint', { count: optionalSlugs(selected).length })}
               </p>
             </>
           ) : null}

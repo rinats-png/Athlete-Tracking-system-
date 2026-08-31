@@ -1,5 +1,5 @@
 import { TEST_CATALOG } from './testCatalog'
-import { disciplineById } from './sportProfiles'
+import { disciplineById, coreSlugs } from './sportProfiles'
 import type { PerformanceDimension } from '@/types/domain'
 
 /**
@@ -171,7 +171,7 @@ export function disciplineBattery(disciplineId: string | null): TestBattery | nu
   if (!disciplineId) return null
   const discipline = disciplineById(disciplineId)
   if (!discipline) return null
-  const testSlugs = discipline.coreTests.filter((slug) => {
+  const testSlugs = coreSlugs(discipline).filter((slug) => {
     const test = TEST_CATALOG.find((t) => t.slug === slug)
     return test != null && test.setting !== 'lab'
   })

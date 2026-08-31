@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { TEST_CATALOG, getTest, type TestDefinition } from '@/data/testCatalog'
-import { disciplineById } from '@/data/sportProfiles'
+import { disciplineById, coreSlugs, optionalSlugs } from '@/data/sportProfiles'
 import { provenanceOf } from '@/data/documentCoverage'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { formatDate } from '@/lib/format'
@@ -65,12 +65,12 @@ export function TestCatalogScreen() {
   }, [data.results])
 
   const core = useMemo(
-    () => (discipline?.coreTests ?? []).map(getTest).filter((x): x is TestDefinition => x != null),
+    () => (discipline ? coreSlugs(discipline) : []).map(getTest).filter((x): x is TestDefinition => x != null),
     [discipline],
   )
   const optional = useMemo(
     () =>
-      (discipline?.optionalTests ?? []).map(getTest).filter((x): x is TestDefinition => x != null),
+      (discipline ? optionalSlugs(discipline) : []).map(getTest).filter((x): x is TestDefinition => x != null),
     [discipline],
   )
   const disciplineSlugs = useMemo(

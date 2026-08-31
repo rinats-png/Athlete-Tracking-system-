@@ -5,6 +5,8 @@ import {
   SPORT_CATEGORIES,
   disciplineById,
   disciplinesFor,
+  coreSlugs,
+  optionalSlugs,
 } from "../src/data/sportProfiles";
 import { getTest } from "../src/data/testCatalog";
 import { disciplineBattery } from "../src/data/testBatteries";
@@ -38,7 +40,7 @@ test.describe("Disziplinen", () => {
 
   test("jeder verwiesene Test steht im Katalog", () => {
     for (const d of DISCIPLINES) {
-      for (const slug of [...d.coreTests, ...d.optionalTests]) {
+      for (const slug of d.tests.map((t) => t.slug)) {
         expect(getTest(slug), `${d.id} -> ${slug}`).toBeTruthy();
       }
     }
@@ -46,7 +48,7 @@ test.describe("Disziplinen", () => {
 
   test("kein Test steht gleichzeitig unter Kern- und Zusatztests", () => {
     for (const d of DISCIPLINES) {
-      const overlap = d.coreTests.filter((s) => d.optionalTests.includes(s));
+      const overlap = coreSlugs(d).filter((s) => optionalSlugs(d).includes(s));
       expect(overlap, d.id).toEqual([]);
     }
   });
@@ -55,7 +57,7 @@ test.describe("Disziplinen", () => {
     // Ein Kerntest, den nur ein Institut durchführen kann, macht das Profil
     // für alle anderen dauerhaft unvollständig.
     for (const d of DISCIPLINES) {
-      for (const slug of d.coreTests) {
+      for (const slug of coreSlugs(d)) {
         expect(getTest(slug)?.setting ?? "field", `${d.id} -> ${slug}`).toBe("field");
       }
     }

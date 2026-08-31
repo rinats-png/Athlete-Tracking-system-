@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Check, Search } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { SPORT_CATEGORIES, DISCIPLINES, disciplineById } from '@/data/sportProfiles'
+import { SPORT_CATEGORIES, DISCIPLINES, disciplineById, coreSlugs } from '@/data/sportProfiles'
 import { cn } from '@/lib/utils'
 
 /**
@@ -127,7 +127,7 @@ export function SportSelector({ compact = false }: { compact?: boolean }) {
                             {discipline.name[lang]}
                           </span>
                           <span className="block text-[12px] text-ink-muted">
-                            {t('tests.coreCount', { count: discipline.coreTests.length })}
+                            {t('tests.coreCount', { count: coreSlugs(discipline).length })}
                           </span>
                         </span>
                         {isSelected && (

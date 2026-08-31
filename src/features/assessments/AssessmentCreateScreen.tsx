@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { TEST_BATTERIES, batteryDimensions, disciplineBattery } from '@/data/testBatteries'
 import { provenanceOf, additionReason } from '@/data/documentCoverage'
 import { TEST_CATALOG, getTest, type TestDefinition } from '@/data/testCatalog'
-import { disciplineById } from '@/data/sportProfiles'
+import { disciplineById, coreSlugs, optionalSlugs } from '@/data/sportProfiles'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -79,12 +79,12 @@ export function AssessmentCreateScreen() {
   )
   const discipline = disciplineId ? disciplineById(disciplineId) : undefined
   const coreTests = useMemo(
-    () => (discipline?.coreTests ?? []).map(getTest).filter((x): x is TestDefinition => x != null),
+    () => (discipline ? coreSlugs(discipline) : []).map(getTest).filter((x): x is TestDefinition => x != null),
     [discipline],
   )
   const optionalTests = useMemo(
     () =>
-      (discipline?.optionalTests ?? []).map(getTest).filter((x): x is TestDefinition => x != null),
+      (discipline ? optionalSlugs(discipline) : []).map(getTest).filter((x): x is TestDefinition => x != null),
     [discipline],
   )
   const disciplineSlugs = useMemo(
