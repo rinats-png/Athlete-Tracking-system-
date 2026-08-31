@@ -51,7 +51,7 @@ export function HistoryFilters({
               value={query.search}
               placeholder={t('history.searchPlaceholder')}
               onChange={(e) => onChange({ search: e.target.value })}
-              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
             />
           </label>
         )}
@@ -61,7 +61,7 @@ export function HistoryFilters({
           <select
             value={query.category}
             onChange={(e) => onChange({ category: e.target.value as HistoryQuery['category'] })}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
           >
             <option value="all">{t('tests.all')}</option>
             {CATEGORIES.map((c) => (
@@ -77,7 +77,7 @@ export function HistoryFilters({
           <select
             value={query.dimension}
             onChange={(e) => onChange({ dimension: e.target.value as HistoryQuery['dimension'] })}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
           >
             <option value="all">{t('tests.all')}</option>
             {PERFORMANCE_DIMENSIONS.map((d) => (
@@ -94,7 +94,7 @@ export function HistoryFilters({
             <select
               value={query.assessmentId}
               onChange={(e) => onChange({ assessmentId: e.target.value })}
-              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
             >
               <option value="all">{t('tests.all')}</option>
               {assessments.map((a) => (
@@ -112,7 +112,7 @@ export function HistoryFilters({
             type="date"
             value={query.from}
             onChange={(e) => onChange({ from: e.target.value })}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
           />
         </label>
 
@@ -122,7 +122,7 @@ export function HistoryFilters({
             type="date"
             value={query.to}
             onChange={(e) => onChange({ to: e.target.value })}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
           />
         </label>
 
@@ -131,7 +131,7 @@ export function HistoryFilters({
           <select
             value={query.sort}
             onChange={(e) => onChange({ sort: e.target.value as HistoryQuery['sort'] })}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
           >
             {(['newest', 'oldest', 'best', 'worst'] as const).map((s) => (
               <option key={s} value={s}>

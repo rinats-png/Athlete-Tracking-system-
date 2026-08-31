@@ -34,7 +34,11 @@ export function AppShell() {
         className={
           // Die fixierte Leiste nimmt keinen Platz im Fluss ein — hier wird er
           // reserviert, damit der letzte Inhalt nicht darunter liegt.
-          'mx-auto w-full max-w-6xl flex-1 px-4 py-5 sm:px-6 ' +
+          // Seitliche sichere Bereiche: im Querformat liegen sonst die ersten
+          // Zeichen jeder Zeile unter der abgerundeten Ecke.
+          'mx-auto w-full max-w-6xl flex-1 py-5 ' +
+          'pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] ' +
+          'sm:pl-[max(1.5rem,env(safe-area-inset-left))] sm:pr-[max(1.5rem,env(safe-area-inset-right))] ' +
           'pb-[calc(var(--bottom-nav-h)+env(safe-area-inset-bottom)+1.5rem)] lg:pb-8'
         }
       >

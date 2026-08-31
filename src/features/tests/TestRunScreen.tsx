@@ -171,7 +171,7 @@ export function TestRunScreen() {
                 value={performedOn}
                 max={new Date().toISOString().slice(0, 10)}
                 onChange={(e) => setPerformedOn(e.target.value)}
-                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
               />
             </label>
 
@@ -276,7 +276,7 @@ export function TestRunScreen() {
                 rows={3}
                 placeholder={t('tests.notesHint')}
                 onChange={(e) => setNotes(e.target.value)}
-                className="mt-1.5 w-full resize-y border border-line bg-surface-sunken px-3 py-2 text-[14px]"
+                className="mt-1.5 w-full resize-y border border-line bg-surface-sunken px-3 py-2 text-[16px]"
               />
             </label>
 

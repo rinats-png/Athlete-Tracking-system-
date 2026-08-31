@@ -70,7 +70,7 @@ export function AttemptTable({
                         : { ...next[index], [valueKey]: parsed }
                     onChange(next)
                   }}
-                  className="h-11 min-w-0 flex-1 border border-line bg-surface-sunken px-3 text-[15px]"
+                  className="h-11 min-w-0 flex-1 border border-line bg-surface-sunken px-3 text-[16px]"
                 />
                 {unit && <span className="shrink-0 text-[12px] text-ink-muted">{unit}</span>}
                 <Button

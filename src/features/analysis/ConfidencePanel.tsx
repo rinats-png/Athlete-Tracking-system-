@@ -27,9 +27,12 @@ export function ConfidencePanel({ confidence }: { confidence: ConfidenceScore })
         <ul className="mt-4 space-y-3">
           {confidence.components.map((component) => (
             <li key={component.key}>
-              <div className="flex items-baseline justify-between gap-2 text-[13px]">
+              {/* flex-wrap statt shrink-0: auf 320 px passt Beschriftung und
+                  Beleg nicht in eine Zeile, und ein nicht schrumpfender Beleg
+                  schob die Seite seitlich aus dem Bildschirm. */}
+              <div className="flex flex-wrap items-baseline justify-between gap-x-2 text-[13px]">
                 <span>{t(`analysis.component.${component.key}`)}</span>
-                <span className="readout shrink-0 tabular-nums text-ink-secondary">
+                <span className="readout tabular-nums text-ink-secondary">
                   {t(`analysis.detail.${component.key}`, component.detail)}
                 </span>
               </div>

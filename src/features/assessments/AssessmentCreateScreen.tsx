@@ -136,8 +136,8 @@ export function AssessmentCreateScreen() {
         </p>
       </header>
 
-      <div className="grid gap-4 lg:grid-cols-5">
-        <div className="space-y-4 lg:col-span-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <div className="space-y-4 md:col-span-2 lg:col-span-3">
           <Panel>
             <PanelHeader title={t('assessments.battery')} subtitle={t('assessments.batteryHint')} />
             <ul className="grid gap-px bg-line sm:grid-cols-2">
@@ -253,7 +253,7 @@ export function AssessmentCreateScreen() {
                   type="date"
                   value={performedOn}
                   onChange={(e) => setPerformedOn(e.target.value)}
-                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
                 />
               </label>
               <label className="block">
@@ -264,7 +264,7 @@ export function AssessmentCreateScreen() {
                   maxLength={120}
                   placeholder={defaultAssessmentTitle(batterySlug, performedOn, locale)}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
                 />
               </label>
               <p className="text-[12px] text-ink-muted">

@@ -99,7 +99,7 @@ export function AnalysisScreen() {
         </p>
       </header>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <ConfidencePanel confidence={confidence} />
         <CoveragePanel coverage={coverage} />
 
@@ -253,7 +253,7 @@ export function AnalysisScreen() {
                 <select
                   value={beforeId}
                   onChange={(e) => setBeforeId(e.target.value)}
-                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
                 >
                   {completed.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -268,7 +268,7 @@ export function AnalysisScreen() {
                 <select
                   value={afterId}
                   onChange={(e) => setAfterId(e.target.value)}
-                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[14px]"
+                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-2 text-[16px]"
                 >
                   {completed.map((a) => (
                     <option key={a.id} value={a.id}>

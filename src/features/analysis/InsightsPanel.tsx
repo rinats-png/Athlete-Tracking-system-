@@ -25,7 +25,7 @@ export function InsightsPanel({
   const { t } = useTranslation()
 
   return (
-    <div className="grid gap-4 lg:grid-cols-2">
+    <div className="grid gap-4 md:grid-cols-2">
       <Panel>
         <PanelHeader title={t('insights.findings')} subtitle={t('insights.findingsHint')} />
         <div className="px-4 py-4">

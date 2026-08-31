@@ -26,9 +26,15 @@ export function AppHeader({
 }) {
   const { t } = useTranslation()
 
+  // Sichere Bereiche: als installierte App läuft die Seite unter die
+  // Statusleiste und — im Querformat — unter die abgerundeten Ecken und die
+  // Kameraaussparung. Ohne diese Abstände sitzt die Marke unter der Uhrzeit
+  // und der Athletenumschalter halb hinter der Notch.
   return (
-    <header className="sticky top-0 z-20 border-b border-line bg-plane/92 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
+    <header
+      className="sticky top-0 z-20 border-b border-line bg-plane/92 pt-[env(safe-area-inset-top)] backdrop-blur-sm"
+    >
+      <div className="mx-auto flex max-w-6xl items-center gap-3 py-3 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:pl-[max(1.5rem,env(safe-area-inset-left))] sm:pr-[max(1.5rem,env(safe-area-inset-right))]">
         <Wordmark />
         <div className="hidden min-w-0 flex-1 sm:block">
           <span className="label-tag lg:hidden">{t('app.tagline')}</span>

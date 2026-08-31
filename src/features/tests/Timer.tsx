@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { Pause, Play, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { formatDuration } from '@/lib/format'
+import { useWakeLock } from '@/lib/useWakeLock'
+import { playEndSignal, prepareEndSignal } from '@/lib/endSignal'
 
 /**
  * Countdown für Tests mit fester Dauer.
@@ -11,6 +13,11 @@ import { formatDuration } from '@/lib/format'
  * Intervall-Ticks: Browser drosseln Timer im Hintergrund, ein Zähler würde
  * beim Sperren des Telefons nachgehen. Bei einem 12-Minuten-Cooper-Test wäre
  * das ein ungültiger Test.
+ *
+ * Dazu zwei Dinge, die erst auf dem Telefon zählen: der Bildschirm bleibt
+ * während der Messung wach, und das Ende wird hörbar und spürbar gemeldet.
+ * Ohne beides läuft man an einem abgeschalteten Telefon vorbei zu weit — und
+ * merkt es nicht.
  */
 export function Timer({ seconds }: { seconds: number }) {
   const { t } = useTranslation()
@@ -18,13 +25,25 @@ export function Timer({ seconds }: { seconds: number }) {
   const [running, setRunning] = useState(false)
   const endsAt = useRef<number | null>(null)
 
+  // Solange die Uhr läuft, bleibt der Bildschirm an.
+  useWakeLock(running)
+  // Das Signal darf genau einmal kommen: zwischen dem Erreichen der Null und
+  // dem Abräumen des Intervalls kann noch ein weiterer Tick laufen.
+  const signalled = useRef(false)
+
   useEffect(() => {
     if (!running) return
     const tick = () => {
       if (endsAt.current == null) return
       const left = Math.max(0, (endsAt.current - Date.now()) / 1000)
       setRemaining(left)
-      if (left <= 0) setRunning(false)
+      if (left <= 0) {
+        setRunning(false)
+        if (!signalled.current) {
+          signalled.current = true
+          playEndSignal()
+        }
+      }
     }
     tick()
     const id = window.setInterval(tick, 200)
@@ -38,6 +57,10 @@ export function Timer({ seconds }: { seconds: number }) {
   }, [running])
 
   const start = useCallback(() => {
+    // Muss aus der Berührung heraus geschehen: iOS gibt den Ton sonst nicht
+    // frei, und das Ende bliebe stumm.
+    prepareEndSignal()
+    signalled.current = false
     endsAt.current = Date.now() + remaining * 1000
     setRunning(true)
   }, [remaining])
@@ -46,6 +69,7 @@ export function Timer({ seconds }: { seconds: number }) {
 
   const reset = useCallback(() => {
     setRunning(false)
+    signalled.current = false
     endsAt.current = null
     setRemaining(seconds)
   }, [seconds])

@@ -63,7 +63,7 @@ export function ContextFields({
               maxLength={60}
               placeholder={t('context.surfacePlaceholder')}
               onChange={(e) => onChange({ surface: e.target.value })}
-              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
             />
           </label>
 
@@ -80,7 +80,7 @@ export function ContextFields({
                 onChange={(e) =>
                   onChange({ temperatureC: e.target.value === '' ? null : Number(e.target.value) })
                 }
-                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
               />
             </label>
             <label className="block">
@@ -89,7 +89,7 @@ export function ContextFields({
                 type="time"
                 value={value.timeOfDay ?? ''}
                 onChange={(e) => onChange({ timeOfDay: e.target.value || null })}
-                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+                className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
               />
             </label>
           </div>
@@ -102,7 +102,7 @@ export function ContextFields({
               maxLength={80}
               placeholder={t('context.equipmentPlaceholder')}
               onChange={(e) => onChange({ equipment: e.target.value })}
-              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
             />
           </label>
 
@@ -114,7 +114,7 @@ export function ContextFields({
               maxLength={60}
               placeholder={t('context.trainingStatusPlaceholder')}
               onChange={(e) => onChange({ trainingStatus: e.target.value })}
-              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+              className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
             />
           </label>
         </div>

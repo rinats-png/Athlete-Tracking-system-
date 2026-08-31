@@ -72,7 +72,7 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
                         name: athlete.name || t('coach.unnamed'),
                       })}
                       onChange={(e) => renameAthlete(athlete.id, e.target.value)}
-                      className="h-11 min-w-0 flex-1 border border-line bg-surface-sunken px-2.5 text-[14px]"
+                      className="h-11 min-w-0 flex-1 border border-line bg-surface-sunken px-2.5 text-[16px]"
                     />
                     <Button
                       variant={athlete.id === activeAthleteId ? 'primary' : 'outline'}

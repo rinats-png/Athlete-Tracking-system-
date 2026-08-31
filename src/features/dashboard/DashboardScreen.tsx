@@ -155,8 +155,8 @@ export function DashboardScreen() {
           stehen vor dem Profil, nicht darunter. */}
       <DecisionRow locale={locale} />
 
-      <div className="grid gap-4 lg:grid-cols-5">
-        <Panel ticked className="lg:col-span-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <Panel ticked className="md:col-span-2 lg:col-span-3">
           <PanelHeader
             title={t('body.index')}
             subtitle={mode === 'population' ? t('radar.modePopulation') : t('radar.modePersonalBest')}
@@ -192,7 +192,7 @@ export function DashboardScreen() {
           <KeyMetrics athlete={athlete} nextDueIso={nextDue} locale={locale} />
         </Panel>
 
-        <Panel className="lg:col-span-3">
+        <Panel className="md:col-span-2 lg:col-span-3">
           <PanelHeader
             title={t('radar.title')}
             subtitle={t('radar.subtitle', {
@@ -215,7 +215,7 @@ export function DashboardScreen() {
         </Panel>
 
         {sportScores.length > 0 && (
-          <Panel className="lg:col-span-3">
+          <Panel className="md:col-span-2 lg:col-span-3">
             <PanelHeader
               title={t('dashboard.sportScores')}
               subtitle={t('dashboard.sportScoresHint')}
@@ -252,7 +252,7 @@ export function DashboardScreen() {
           <DimensionBreakdown current={current} previous={previous} locale={locale} />
         </Panel>
 
-        <Panel className="lg:col-span-3">
+        <Panel className="md:col-span-2 lg:col-span-3">
           <PanelHeader
             title={t('dashboard.recentTests')}
             action={

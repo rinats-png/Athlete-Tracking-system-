@@ -31,7 +31,7 @@ export function AthleteNotes({ locale }: { locale: AppLocale }) {
             rows={4}
             placeholder={t('notes.placeholder')}
             onChange={(e) => saveAthleteNotes(e.target.value)}
-            className="w-full resize-y border border-line bg-surface-sunken px-3 py-2 text-[14px]"
+            className="w-full resize-y border border-line bg-surface-sunken px-3 py-2 text-[16px]"
           />
         </label>
 

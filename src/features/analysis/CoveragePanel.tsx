@@ -25,9 +25,11 @@ export function CoveragePanel({ coverage }: { coverage: DimensionCoverage[] }) {
       <ul className="space-y-3 px-4 py-4">
         {coverage.map((entry) => (
           <li key={entry.dimension}>
-            <div className="flex items-baseline justify-between gap-2 text-[13px]">
+            {/* flex-wrap statt shrink-0: siehe ConfidencePanel — auf schmalen
+                Geräten passen Beschriftung und Beleg nicht nebeneinander. */}
+            <div className="flex flex-wrap items-baseline justify-between gap-x-2 text-[13px]">
               <span>{t(`dimensions.${entry.dimension}`)}</span>
-              <span className="readout shrink-0 tabular-nums text-ink-secondary">
+              <span className="readout tabular-nums text-ink-secondary">
                 {entry.measured} / {entry.available} · {entry.percent} %
               </span>
             </div>

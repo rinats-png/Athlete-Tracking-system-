@@ -97,7 +97,7 @@ export function HistoryScreen() {
                     aria-label={t('history.chooseTest')}
                     value={activeSlug ?? ''}
                     onChange={(e) => setSelectedSlug(e.target.value)}
-                    className="h-11 max-w-[190px] border border-line bg-surface-sunken px-2 text-[13px]"
+                    className="h-11 max-w-[190px] border border-line bg-surface-sunken px-2 text-[16px]"
                   >
                     {trendable.map((test) => (
                       <option key={test.slug} value={test.slug}>

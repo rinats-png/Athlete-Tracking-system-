@@ -66,7 +66,7 @@ export function ReadinessForm({
               setSleepError(e.target.value.trim() !== '' && minutes == null)
               setDraft((d) => ({ ...d, sleepMinutes: minutes }))
             }}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
           />
           {sleepError ? (
             <span id="sleep-error" role="alert" className="mt-1 block text-[12px] text-critical">

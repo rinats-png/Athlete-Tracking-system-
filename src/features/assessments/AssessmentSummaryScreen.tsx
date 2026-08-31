@@ -169,7 +169,7 @@ export function AssessmentSummaryScreen() {
               onChange={(e) =>
                 saveAssessment({ ...assessment, nextAssessmentOn: e.target.value || null })
               }
-              className="mt-1.5 h-11 border border-line bg-surface-sunken px-3 text-[15px]"
+              className="mt-1.5 h-11 border border-line bg-surface-sunken px-3 text-[16px]"
             />
           </label>
           <p className="max-w-[46ch] flex-1 text-[12px] leading-relaxed text-ink-muted">

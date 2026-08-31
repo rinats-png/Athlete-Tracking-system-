@@ -54,7 +54,7 @@ export function BrandingSettings() {
             maxLength={80}
             placeholder={t('app.name')}
             onChange={(e) => saveBranding({ organisation: e.target.value })}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
           />
         </label>
 
@@ -116,7 +116,7 @@ export function BrandingSettings() {
             maxLength={200}
             placeholder={t('report.footerPlaceholder')}
             onChange={(e) => saveBranding({ footer: e.target.value })}
-            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[15px]"
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
           />
         </label>
 

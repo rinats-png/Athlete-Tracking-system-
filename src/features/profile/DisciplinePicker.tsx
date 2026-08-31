@@ -61,7 +61,7 @@ export function DisciplinePicker() {
           aria-label={t('profile.discipline')}
           aria-describedby="discipline-hint"
           onChange={(e) => choose(e.target.value)}
-          className="mt-1.5 h-11 w-full min-w-0 border border-line bg-surface-sunken px-2.5 text-[15px]"
+          className="mt-1.5 h-11 w-full min-w-0 border border-line bg-surface-sunken px-2.5 text-[16px]"
         >
           <option value="">{t('profile.noAnswer')}</option>
           {SPORT_CATEGORIES.map((category) => (
