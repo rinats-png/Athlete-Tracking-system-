@@ -21,48 +21,69 @@
 :root {
   color-scheme: light;
 
-  /* Flächen */
-  --plane:            #EFEFE9;  /* Seitenhintergrund */
-  --surface:          #FBFBF8;  /* Karten, Chart-Fläche */
-  --surface-raised:   #FFFFFF;
-  --surface-sunken:   #E7E7E0;
+  /* Flächen — Mist White ist die Hauptfarbe der App. Die beiden helleren
+     Stufen sind Aufhellungen davon, die tiefere ist Mist White mit einem
+     Anteil Stone Path: die Palette hat fünf Töne, eine Oberfläche braucht
+     Abstufungen. */
+  --plane:            #EEF1EA;  /* Mist White — Seitenhintergrund */
+  --surface:          #F6F7F3;  /* Karten, Chart-Fläche */
+  --surface-raised:   #FBFCFA;
+  --surface-sunken:   #DFE0D8;
 
-  /* Schrift */
-  --ink:              #0B0D0C;
-  --ink-secondary:    #4E524D;
-  --ink-muted:        #7C817A;
+  /* Schrift. Geprüft gegen Mist White:
+       Sumi Ink       16,0:1
+       Moss Shadow     8,1:1
+       Garden Green    3,5:1  → NICHT als Fliesstext verwendbar, deshalb
+                                steht als ink-muted eine abgedunkelte
+                                Garden-Green-Stufe. Gemessen wird gegen die
+                                TIEFSTE Fläche (surface-sunken), nicht gegen
+                                Mist White: dort ist der Abstand am kleinsten,
+                                und dort muss er reichen. */
+  --ink:              #151515;  /* Sumi Ink */
+  --ink-secondary:    #3F4B3A;  /* Moss Shadow */
+  --ink-muted:        #57654F;  /* Garden Green, abgedunkelt */
 
-  /* Linien */
-  --line:             #D6D6CD;  /* Rahmen, Haarlinien */
-  --line-strong:      #B4B5AA;
-  --grid:             #E3E3DA;  /* Chart-Gitter */
+  /* Linien. Stone Path erreicht auf Mist White nur 2,2:1 und taugt damit
+     für Trennlinien, nicht für Text oder bedeutungstragende Symbole. */
+  --line:             #C8C7BE;
+  --line-strong:      #A8A49A;  /* Stone Path */
+  --grid:             #D6D6CE;
 
-  /* Marke: weiches Chartreuse — ruhiger und hochwertiger als ein Neon-Grün,
-     hält aber dieselbe Signalwirkung. Ein Ramp, vier Rollen:
+  /* Marke: Moss Shadow als Fläche, Mist White als Schrift darauf (8,1:1).
+     Garden Green wäre als Fläche ebenfalls möglich (4,6:1 mit Sumi Ink),
+     trägt aber weniger Gewicht — es bleibt die zweite Stimme in Diagrammen
+     und Verläufen.
        accent-glow  Lichtspitze in Verläufen und Glows
-       accent       Fläche (Buttons, aktive Zustände), immer mit dunkler Schrift
-       accent-text  Akzent als Schriftfarbe, je Modus eigens gewählt
+       accent       Fläche (Buttons, aktive Zustände)
+       accent-ink   Schrift auf dieser Fläche
+       accent-text  Akzent als Schriftfarbe auf hellem Grund
        accent-quiet flächige Einfärbung hinter Hinweisen */
-  --accent-glow:      #E6F5C4;
-  --accent:           #C8E68C;
-  --accent-ink:       #10130F;
-  --accent-text:      #4F6B14;
-  --accent-quiet:     rgba(122, 161, 45, 0.13);
-  --focus:            #4F6B14;
+  --accent-glow:      #C4CBBD;
+  --accent:           #3F4B3A;  /* Moss Shadow */
+  --accent-ink:       #EEF1EA;  /* Mist White */
+  --accent-text:      #3F4B3A;
+  --accent-quiet:     rgba(63, 75, 58, 0.12);
+  --focus:            #3F4B3A;
 
-  /* Chart-Serien (validiert) */
-  --series-1:         #6F9E00;  /* aktueller Testzeitpunkt */
-  --series-2:         #2a78d6;  /* Vergleichszeitpunkt */
-  --series-3:         #eb6834;  /* dritter Vergleich, selten */
-  --reference:        #7C817A;  /* Referenz-/Medianlinie */
+  /* Chart-Serien. Serie 1 ist die Marke; Serie 2 und 3 behalten ihre eigenen
+     Farbtöne, weil zwei Datenreihen unterscheidbar bleiben müssen — drei
+     Grünstufen wären auf einem Bildschirm bei Sonnenlicht nicht mehr zu
+     trennen, und bei Rot-Grün-Schwäche erst recht nicht. Alle drei liegen
+     über 3:1 gegen die Chart-Fläche. */
+  --series-1:         #3F4B3A;  /* Moss Shadow */
+  --series-2:         #2A6FB0;
+  --series-3:         #B4531F;
+  --reference:        #57654F;
 
-  /* Status. Bewusst getrennt von den Serienfarben, damit eine Statusfarbe
-     nie wie eine Datenreihe aussieht. Immer mit Icon oder Text kombiniert. */
-  --good:             #0ca30c;
-  --warning:          #fab219;
-  --critical:         #d03b3b;
-  --delta-up:         #006300;
-  --delta-down:       #b02a2a;
+  /* Status. Bewusst ausserhalb der Palette: eine Statusfarbe darf nie wie
+     die Marke oder wie eine Datenreihe aussehen. Alle fünf sind gegenüber
+     der Vorfassung abgedunkelt — «warning» stand bei 1,6:1 auf hellem Grund
+     und war als Schriftfarbe faktisch unlesbar. */
+  --good:             #0A6E0A;
+  --warning:          #7F5300;
+  --critical:         #B3261E;
+  --delta-up:         #146B14;
+  --delta-down:       #A81E1E;
 
   /* Typografie */
   --font-display: "Saira Condensed", "Arial Narrow", system-ui, sans-serif;
@@ -96,36 +117,44 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --plane:          #0B0D0C;
-    --surface:        #141715;
-    --surface-raised: #1B1F1C;
-    --surface-sunken:  #0F1210;
+    /* Sumi Ink trägt den dunklen Modus; die Flächen darüber sind mit einem
+       Anteil Moss Shadow aufgehellt, damit sie sich unterscheiden lassen. */
+    --plane:          #151515;  /* Sumi Ink */
+    --surface:        #20221E;
+    --surface-raised: #262B24;
+    --surface-sunken: #0E0E0E;
 
-    --ink:            #F4F5F1;
-    --ink-secondary:  #B6BAB2;
-    --ink-muted:      #82877E;
+    /* Geprüft gegen die Kartenfläche #20221E:
+         Mist White    14,1:1
+         Stone Path     6,5:1
+         Garden Green   4,1:1 → als ink-muted aufgehellt, damit der Wert
+                                auch auf der höchsten Fläche über 4,5:1
+                                bleibt. */
+    --ink:            #EEF1EA;  /* Mist White */
+    --ink-secondary:  #A8A49A;  /* Stone Path */
+    --ink-muted:      #8D9880;
 
-    --line:           #292E2A;
-    --line-strong:    #3C423D;
-    --grid:           #232724;
+    --line:           #3F4B3A;  /* Moss Shadow */
+    --line-strong:    #5E6657;
+    --grid:           #2A2E27;
 
-    --accent-glow:    #E6F5C4;
-    --accent:         #C8E68C;
-    --accent-ink:     #10130F;
-    --accent-text:    #C8E68C;
-    --accent-quiet:   rgba(200, 230, 140, 0.10);
-    --focus:          #C8E68C;
+    --accent-glow:    #C4CBBD;
+    --accent:         #75856A;  /* Garden Green, Fläche */
+    --accent-ink:     #151515;  /* Sumi Ink darauf, 4,6:1 */
+    --accent-text:    #9FAB97;  /* als Schrift auf dunklem Grund, 6,7:1 */
+    --accent-quiet:   rgba(117, 133, 106, 0.16);
+    --focus:          #9FAB97;
 
-    --series-1:       #79A11D;
-    --series-2:       #3987e5;
-    --series-3:       #d95926;
-    --reference:      #82877E;
+    --series-1:       #87957D;
+    --series-2:       #5FA8E8;
+    --series-3:       #E08A4E;
+    --reference:      #A8A49A;
 
-    --good:           #0ca30c;
-    --warning:        #fab219;
-    --critical:       #d03b3b;
-    --delta-up:       #0ca30c;
-    --delta-down:     #e66767;
+    --good:           #4FBF4F;
+    --warning:        #E9B23C;
+    --critical:       #F07A72;
+    --delta-up:       #5CC85C;
+    --delta-down:     #F08A82;
 
     --glass:        rgba(255, 255, 255, 0.07);
     --glass-strong: rgba(255, 255, 255, 0.12);
@@ -137,36 +166,42 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --plane:          #0B0D0C;
-  --surface:        #141715;
-  --surface-raised: #1B1F1C;
-  --surface-sunken: #0F1210;
+  /* Sumi Ink trägt den dunklen Modus; die Flächen darüber sind mit einem
+     Anteil Moss Shadow aufgehellt, damit sie sich unterscheiden lassen. */
+  --plane:          #151515;  /* Sumi Ink */
+  --surface:        #20221E;
+  --surface-raised: #262B24;
+  --surface-sunken: #0E0E0E;
 
-  --ink:            #F4F5F1;
-  --ink-secondary:  #B6BAB2;
-  --ink-muted:      #82877E;
+  /* Geprüft gegen die Kartenfläche #20221E:
+       Mist White    14,1:1
+       Stone Path     6,5:1
+       Garden Green   4,1:1 → als ink-muted leicht aufgehellt auf 4,5:1. */
+  --ink:            #EEF1EA;  /* Mist White */
+  --ink-secondary:  #A8A49A;  /* Stone Path */
+  --ink-muted:      #8D9880;
 
-  --line:           #292E2A;
-  --line-strong:    #3C423D;
-  --grid:           #232724;
+  --line:           #3F4B3A;  /* Moss Shadow */
+  --line-strong:    #5E6657;
+  --grid:           #2A2E27;
 
-  --accent-glow:    #E6F5C4;
-  --accent:         #C8E68C;
-  --accent-ink:     #10130F;
-  --accent-text:    #C8E68C;
-  --accent-quiet:   rgba(200, 230, 140, 0.10);
-  --focus:          #C8E68C;
+  --accent-glow:    #C4CBBD;
+  --accent:         #75856A;  /* Garden Green, Fläche */
+  --accent-ink:     #151515;  /* Sumi Ink darauf, 4,6:1 */
+  --accent-text:    #9FAB97;  /* als Schrift auf dunklem Grund, 6,7:1 */
+  --accent-quiet:   rgba(117, 133, 106, 0.16);
+  --focus:          #9FAB97;
 
-  --series-1:       #79A11D;
-  --series-2:       #3987e5;
-  --series-3:       #d95926;
-  --reference:      #82877E;
+  --series-1:       #87957D;
+  --series-2:       #5FA8E8;
+  --series-3:       #E08A4E;
+  --reference:      #A8A49A;
 
-  --good:           #0ca30c;
-  --warning:        #fab219;
-  --critical:       #d03b3b;
-  --delta-up:       #0ca30c;
-  --delta-down:     #e66767;
+  --good:           #4FBF4F;
+  --warning:        #E9B23C;
+  --critical:       #F07A72;
+  --delta-up:       #5CC85C;
+  --delta-down:     #F08A82;
 
   --glass:    rgba(255, 255, 255, 0.07);
   --glass-strong: rgba(255, 255, 255, 0.12);

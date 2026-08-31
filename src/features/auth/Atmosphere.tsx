@@ -12,18 +12,21 @@ import { cn } from '@/lib/utils'
 export function Atmosphere({ className }: { className?: string }) {
   return (
     <div className={cn('pointer-events-none absolute inset-0 overflow-hidden', className)} aria-hidden>
-      {/* Farbfelder. Grosszügig weichgezeichnet, damit keine Kanten entstehen. */}
+      {/* Farbfelder aus der Palette — Moss Shadow, die helle Grünspitze und
+          Stone Path. Vorher standen hier ein Türkis und ein Bernstein, die
+          zu keinem Ton der App gehörten; auf Mist White wirkten sie wie ein
+          fremdes Bild hinter der eigenen Oberfläche. */}
       <div
         className="absolute -top-[18%] -left-[22%] h-[75vh] w-[85vw] rounded-full opacity-60 blur-[110px]"
         style={{ background: 'radial-gradient(circle, var(--accent) 0%, transparent 68%)' }}
       />
       <div
         className="absolute top-[22%] -right-[28%] h-[70vh] w-[80vw] rounded-full opacity-45 blur-[120px]"
-        style={{ background: 'radial-gradient(circle, #2E6E7E 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)' }}
       />
       <div
         className="absolute -bottom-[25%] left-[8%] h-[65vh] w-[75vw] rounded-full opacity-38 blur-[120px]"
-        style={{ background: 'radial-gradient(circle, #B4761F 0%, transparent 72%)' }}
+        style={{ background: 'radial-gradient(circle, var(--line-strong) 0%, transparent 72%)' }}
       />
 
       {/* Markenfigur als Wasserzeichen — verbindet den Einstieg mit dem
