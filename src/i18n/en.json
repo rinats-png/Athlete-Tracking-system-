@@ -1628,5 +1628,15 @@
     "result": "Enter a result",
     "import": "Import from a spreadsheet",
     "session": "Create a session"
+  },
+  "spectrum": {
+    "higherBetter": "higher is better",
+    "lowerBetter": "lower is better"
+  },
+  "valueCard": {
+    "open": "Open: {{label}}"
+  },
+  "nextTest": {
+    "eyebrow": "Next test that makes sense"
   }
 }

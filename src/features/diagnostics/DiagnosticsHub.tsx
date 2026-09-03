@@ -45,21 +45,58 @@ export function DiagnosticsHub() {
     return [...(own ? [own] : []), ...forSports]
   }, [main, sports])
 
-  const entry = (to: string, title: string, hint: string, Icon: typeof Dumbbell, primary = false) => (
-    <li key={to}>
+  /**
+   * Die Kategorien als schwebende Karten in kontrollierter Asymmetrie.
+   *
+   * Die Breiten und Versätze sind FEST und nicht zufällig: eine Anordnung,
+   * die bei jedem Öffnen anders aussieht, verhindert, dass sich jemand die
+   * Lage merkt. Auf schmalen Bildschirmen fällt die Versetzung weg — dort
+   * ist kein Platz dafür, und Lesbarkeit geht vor.
+   *
+   * Die erste Karte (die eigene Sportart) trägt den Akzent als Fläche: sie
+   * ist der Weg, den die meisten hier nehmen sollen.
+   */
+  const entry = (
+    to: string,
+    title: string,
+    hint: string,
+    Icon: typeof Dumbbell,
+    primary = false,
+    offset = 0,
+    index = 0,
+  ) => (
+    <li key={to} className="sm:[margin-top:var(--offset)]" style={{ ['--offset' as string]: `${offset}px` }}>
       <Link
         to={to}
         className={cn(
-          'flex min-h-16 items-center gap-3 border px-4 py-3 transition-colors hover:bg-accent-quiet',
-          primary ? 'border-accent bg-accent-quiet' : 'border-line bg-surface',
+          'float-lift flex min-h-20 items-center gap-3 rounded-[var(--radius)] border px-4 py-3.5',
+          'rise shadow-elev-1',
+          primary
+            ? 'border-accent bg-accent text-accent-ink'
+            : 'border-line bg-surface-raised',
         )}
+        style={{ ['--rise-delay' as string]: `${index * 70}ms` }}
       >
-        <Icon size={20} className={cn('shrink-0', primary ? 'text-accent-text' : 'text-ink-muted')} aria-hidden />
+        <Icon
+          size={22}
+          className={cn('shrink-0', primary ? 'text-accent-ink' : 'text-accent-text')}
+          aria-hidden
+        />
         <span className="min-w-0 flex-1">
-          <span className="block font-display text-[15px] font-semibold uppercase tracking-[0.04em]">{title}</span>
-          <span className="block text-[12px] text-ink-secondary">{hint}</span>
+          <span className="block font-display text-[15px] font-semibold tracking-[0.06em] uppercase">
+            {title}
+          </span>
+          <span
+            className={cn('block text-[12px]', primary ? 'text-accent-ink/75' : 'text-ink-secondary')}
+          >
+            {hint}
+          </span>
         </span>
-        <ChevronRight size={16} className="shrink-0 text-ink-muted" aria-hidden />
+        <ChevronRight
+          size={16}
+          className={cn('shrink-0', primary ? 'text-accent-ink/70' : 'text-ink-muted')}
+          aria-hidden
+        />
       </Link>
     </li>
   )
@@ -72,14 +109,23 @@ export function DiagnosticsHub() {
         intro={t('diag.intro', { count: TEST_CATALOG.length })}
       />
 
-      <ul className="grid gap-2 sm:grid-cols-2">
+      <ul className="grid gap-3 sm:grid-cols-2">
         {main
-          ? entry(`/sport/${main.id}`, t('diag.mySport'), t('diag.mySportHint', { sport: main.name[locale] }), ListChecks, true)
-          : entry('/profil', t('diag.mySport'), t('diag.noSportHint'), ListChecks)}
-        {AREAS.map((area) =>
-          entry(`/diagnostik/bereich/${area}`, t(`diag.areas.${area}`), t(`diag.areaHints.${area}`), AREA_ICONS[area]),
+          ? entry(`/sport/${main.id}`, t('diag.mySport'), t('diag.mySportHint', { sport: main.name[locale] }), ListChecks, true, 0, 0)
+          : entry('/profil', t('diag.mySport'), t('diag.noSportHint'), ListChecks, false, 0, 0)}
+        {AREAS.map((area, i) =>
+          entry(
+            `/diagnostik/bereich/${area}`,
+            t(`diag.areas.${area}`),
+            t(`diag.areaHints.${area}`),
+            AREA_ICONS[area],
+            false,
+            // Versatz im Wechsel: rechte Spalte tiefer, linke höher.
+            [26, -8, 18, -4][i] ?? 0,
+            i + 1,
+          ),
         )}
-        {entry('/tests', t('diag.pick'), t('diag.pickHint'), ListChecks)}
+        {entry('/tests', t('diag.pick'), t('diag.pickHint'), ListChecks, false, 10, 5)}
       </ul>
 
       <section className="mt-6">

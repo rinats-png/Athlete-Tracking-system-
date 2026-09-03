@@ -8,6 +8,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { RatingScale, RatingWord } from '@/features/shared/RatingScale'
 import { BenchmarkRow, percentileLabel } from '@/features/shared/BenchmarkRow'
 import { GoalBlock } from '@/features/shared/GoalBlock'
+import { ReferenceSpectrum, type SpectrumMark } from '@/components/signature/ReferenceSpectrum'
 import { useLocale } from '@/features/shared/useLocale'
 import { ratingContextOf } from '@/features/shared/profileContext'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -84,10 +85,14 @@ export function ResultScreen() {
       <ScreenHeader eyebrow={t('result.eyebrow')} title={test.name[locale]} intro={t('result.measuredOn', { date: formatDate(result.performedAt, locale) })} />
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <Panel ticked>
+        <Panel ticked float className="rise">
           <PanelHeader title={t('result.yourValue')} />
-          <div className="px-4 py-4">
-            <p className="readout text-[44px] leading-none font-medium">{formatResultValue(result, locale)}</p>
+          <div className="px-4 py-5">
+            {/* Der Messwert ist der Held der Oberfläche — vor Überschrift,
+                Symbol und Fläche. Deshalb diese Grösse. */}
+            <p className="readout text-[64px] leading-[0.95] font-bold tabular-nums sm:text-[72px]">
+              {formatResultValue(result, locale)}
+            </p>
             {rating.metricKey && rating.metricKey !== test.primaryMetric && value(rating.metricKey) != null && (
               <p className="mt-2 text-[13px] text-ink-secondary">
                 {t(`metrics.${rating.metricKey}`)}: <span className="readout">{formatNumber(value(rating.metricKey)!, locale, 1)}</span>
@@ -130,6 +135,13 @@ export function ResultScreen() {
           {primary ? (
             <ComparisonBlock
               comparison={primary}
+              // Der Zahlenwert, der auf der Achse liegt — dieselbe Kennzahl
+              // wie die Referenz, sonst zeigte das Spektrum Äpfel neben Birnen.
+              ownValue={
+                rating.metricKey && value(rating.metricKey) != null
+                  ? value(rating.metricKey)!
+                  : (result.score ?? null)
+              }
               // Verglichen wird die Kennzahl der Referenz — beim Cooper-Test
               // die VO₂max, nicht die Distanz. Sonst stünde «3320 m» neben
               // «34,2 ± 2,8» und niemand wüsste, was womit verglichen wird.
@@ -200,10 +212,38 @@ export function ResultScreen() {
 }
 
 /** Dein Wert gegen Mittel, Untergrenze und Elitebereich der Gruppe. */
-function ComparisonBlock({ comparison, valueLabel }: { comparison: ReferenceComparison; valueLabel: string }) {
+function ComparisonBlock({
+  comparison,
+  valueLabel,
+  ownValue,
+}: {
+  comparison: ReferenceComparison
+  valueLabel: string
+  ownValue: number | null
+}) {
   const { t } = useTranslation()
   const locale = useLocale()
   const { entry } = comparison
+  const direction = getTest(entry.testSlug)?.direction ?? 'higher_is_better'
+
+  /**
+   * Die Marken des Spektrums. Nur was die Quelle wirklich hergibt: bei
+   * `mean_sd` lassen sich Mittel, Elitebereich und Untergrenze ableiten,
+   * bei einem blossen Median nicht. Eine erfundene Marke wäre hier
+   * besonders schädlich, weil eine Achse Genauigkeit suggeriert.
+   */
+  const marks: SpectrumMark[] = []
+  if (entry.method === 'mean_sd' && entry.mean != null && entry.sd != null) {
+    const sign = direction === 'lower_is_better' ? -1 : 1
+    marks.push({ key: 'cutoff', label: t('result.cutoff'), value: entry.mean - sign * entry.sd })
+    marks.push({ key: 'mean', label: t('result.groupMean', { group: '' }).trim(), value: entry.mean })
+    marks.push({ key: 'elite', label: t('result.elite'), value: entry.mean + sign * 2 * entry.sd })
+  } else if (entry.method === 'median' && entry.median != null) {
+    marks.push({ key: 'median', label: t('result.groupMedian'), value: entry.median })
+  }
+  if (ownValue != null && marks.length > 0) {
+    marks.push({ key: 'you', label: t('result.you'), value: ownValue, own: true })
+  }
   const rows: { label: string; value: string }[] = [{ label: t('result.you'), value: valueLabel }]
   if (entry.method === 'mean_sd' && entry.mean != null && entry.sd != null) {
     const direction = getTest(entry.testSlug)?.direction ?? 'higher_is_better'
@@ -227,6 +267,9 @@ function ComparisonBlock({ comparison, valueLabel }: { comparison: ReferenceComp
   }
   return (
     <div className="px-4 py-3">
+      {marks.length >= 2 && (
+        <ReferenceSpectrum marks={marks} direction={direction} className="mb-4" />
+      )}
       <dl className="space-y-1 text-[13px]">
         {rows.map((row) => (
           <div key={row.label} className="flex justify-between gap-3">

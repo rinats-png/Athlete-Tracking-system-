@@ -476,6 +476,41 @@ body {
   animation-delay: var(--rise-delay, 0ms);
 }
 
+/* Das Referenzspektrum: die Achse zeichnet sich, dann erscheinen die Marken.
+   Die Reihenfolge ist die Aussage — erst der Massstab, dann die Werte
+   darauf. Alles gleichzeitig einzublenden hiesse, dass die Marken ohne den
+   Massstab schon etwas bedeuteten. */
+@keyframes axis-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.spectrum-axis {
+  animation: axis-draw 800ms var(--ease-out) 200ms backwards;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.spectrum-mark {
+  animation: fade-in var(--motion-base) var(--ease-out) backwards;
+}
+
+/* Die Journey: dieselbe Ordnung, nur waagerecht über die Zeit. */
+.journey-line {
+  animation: axis-draw 1600ms var(--ease-out) 300ms backwards;
+}
+.journey-node {
+  animation: fade-in var(--motion-base) var(--ease-out) backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

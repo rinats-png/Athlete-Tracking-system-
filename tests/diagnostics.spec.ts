@@ -14,14 +14,24 @@ test.describe('Übersicht', () => {
     await expect(page.getByRole('link', { name: 'Test starten' })).toHaveCount(3)
   })
 
-  test('mit Messungen: Profil, Stärken, Potenzial, nächster Test, letzte Ergebnisse', async ({ page }) => {
+  test('mit Messungen: Orb, Stärken, Potenzial, nächster Test, letzte Ergebnisse', async ({ page }) => {
     await openDemo(page)
-    await expect(page.getByText('Performance-Profil')).toBeVisible()
+    // Das Leistungsprofil steht seit dem Umbau als Orb da, nicht als
+    // Balkenliste — die Aussage ist dieselbe, die Form eine andere.
+    await expect(page.getByRole('img', { name: /Leistungsprofil als Form/ })).toBeVisible()
     await expect(page.getByText('Deine Stärken')).toBeVisible()
     await expect(page.getByText('Grösstes Potenzial')).toBeVisible()
-    await expect(page.getByText('Nächster empfohlener Test')).toBeVisible()
-    await expect(page.getByText('Warum?')).toBeVisible()
+    await expect(page.getByText('Nächster sinnvoller Test')).toBeVisible()
     await expect(page.getByText('Letzte Ergebnisse')).toBeVisible()
+  })
+
+  test('die Empfehlung trägt ihre Begründung mit', async ({ page }) => {
+    await openDemo(page)
+    const karte = page.getByRole('link', { name: /Nächster sinnvoller Test/ })
+    await expect(karte).toBeVisible()
+    // Eine Empfehlung ohne «warum» ist von einer zufälligen Auswahl nicht
+    // zu unterscheiden.
+    await expect(karte).not.toHaveText(/^Nächster sinnvoller Test\s*\S+$/)
   })
 })
 

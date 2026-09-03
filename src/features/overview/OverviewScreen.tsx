@@ -23,6 +23,9 @@ import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { cn } from '@/lib/utils'
 import { ScoreSummary } from '@/features/shared/ScoreSummary'
+import { PerformanceOrb } from '@/components/signature/PerformanceOrb'
+import { ValueCard } from '@/components/signature/ValueCard'
+import { NextTestCard } from '@/components/signature/NextTestCard'
 import { performanceScore } from '@/domain/performanceScore'
 
 /**
@@ -82,6 +85,19 @@ export function OverviewScreen() {
           .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
           .slice(0, 2)
           .map((a) => ({ axisId: a.axisId, score: a.score as number }))
+  const score = useMemo(() => performanceScore(axes), [axes])
+  /**
+   * Die drei Achsen für die Wertkarten: belegte zuerst, stärkste oben.
+   * Eine unbelegte Achse steht nur dann in der Reihe, wenn es nicht genug
+   * belegte gibt — und sie sagt dann auch, dass sie unbelegt ist.
+   */
+  const topAxes = useMemo(
+    () =>
+      [...axes]
+        .sort((a, b) => (b.score ?? -1) - (a.score ?? -1))
+        .slice(0, 3),
+    [axes],
+  )
   const latestResults = data.results.filter((r) => r.score != null).slice(0, 5)
   const name = profile.firstName || (discipline?.name[locale] ?? t('overview.noSport'))
 
@@ -130,28 +146,43 @@ export function OverviewScreen() {
         </Link>
       )}
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <Panel ticked>
-          <PanelHeader title={t('overview.profileTitle')} subtitle={t('overview.profileHint')} />
-          <ScoreSummary score={performanceScore(axes)} axes={axes} />
-          <ul className="divide-y divide-line border-t border-line">
-            {axes.map((axis) => (
-              <li key={axis.axisId} className="flex items-center gap-3 px-4 py-2.5">
-                <span className="w-2/5 min-w-0 truncate text-[13px]">{axisLabel(axis.axisId, t, locale)}</span>
-                <div className="h-1.5 flex-1 bg-surface-sunken">
-                  {axis.score != null && <div className="h-full bg-accent" style={{ width: `${axis.score}%` }} />}
-                </div>
-                <span className="readout w-10 text-right text-[15px]">
-                  {axis.score != null ? formatNumber(axis.score, locale, 0) : '—'}
-                </span>
-              </li>
-            ))}
-          </ul>
-          {axes.some((a) => a.hasData && a.score == null) && (
-            <p className="border-t border-line px-4 py-2 text-[11px] text-ink-muted">{t('overview.axisNoRating')}</p>
-          )}
-        </Panel>
+      {/*
+       * Das Leistungsprofil als Orb — das Signature-Element. Darunter die
+       * drei bestbelegten Achsen als versetzte Wertkarten: die Versetzung
+       * ist kontrolliert (feste Offsets), nicht zufällig, damit die Gruppe
+       * lebendig wirkt und trotzdem lesbar bleibt.
+       */}
+      <section className="rise mb-4">
+        <PerformanceOrb axes={axes} score={score} />
 
+        <ul className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
+          {topAxes.map((axis, i) => (
+            <li key={axis.axisId} style={{ marginTop: [4, 22, 0][i] ?? 0 }}>
+              <ValueCard
+                className="rise"
+                style={{ ['--rise-delay' as string]: `${150 + i * 90}ms` }}
+                label={axisLabel(axis.axisId, t, locale)}
+                value={axis.score == null ? '—' : formatNumber(axis.score, locale, 0)}
+                delta={axis.score == null ? t('overview.axisNoRatingShort') : undefined}
+              />
+            </li>
+          ))}
+        </ul>
+
+        <ScoreSummary score={score} axes={axes} />
+      </section>
+
+      {next && nextTest && (
+        <NextTestCard
+          className="rise mb-4"
+          style={{ ['--rise-delay' as string]: '420ms' }}
+          title={nextTest.name[locale]}
+          reasons={next.reasons.slice(0, 2).map((r) => t(`overview.reasons.${r}`))}
+          to={`/tests/${nextTest.slug}`}
+        />
+      )}
+
+      <div className="grid gap-4 md:grid-cols-2">
         <div className="grid gap-4">
           <Panel>
             <PanelHeader title={t('overview.strengths')} />
@@ -196,38 +227,6 @@ export function OverviewScreen() {
             </div>
           </Panel>
         </div>
-
-        {next && nextTest && (
-          <Panel ticked>
-            <PanelHeader title={t('overview.nextTest')} />
-            <div className="px-4 py-3">
-              <p className="font-display text-[22px] leading-none font-bold">{nextTest.name[locale]}</p>
-              <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-[13px]">
-                <dt className="text-ink-muted">{t('overview.lastResult')}</dt>
-                <dd className="readout text-right">
-                  {(() => {
-                    const last = data.results.find((r) => r.testSlug === next.slug && r.score != null)
-                    return last ? formatResultValue(last, locale) : '—'
-                  })()}
-                </dd>
-                <dt className="text-ink-muted">{t('overview.lastTested')}</dt>
-                <dd className="text-right">
-                  {next.daysSince == null ? t('overview.neverTested') : t('overview.daysAgo', { count: next.daysSince })}
-                </dd>
-              </dl>
-              <p className="mt-3 text-[12px] leading-relaxed text-ink-secondary">
-                <span className="label-tag mr-1.5">{t('overview.why')}</span>
-                {next.reasons.slice(0, 2).map((r) => t(`overview.reasons.${r}`)).join(' ')}
-              </p>
-              <Button asChild variant="primary" size="sm" className="mt-3">
-                <Link to={`/tests/${nextTest.slug}`}>
-                  <Play size={13} strokeWidth={2.5} aria-hidden />
-                  {t('overview.testNow')}
-                </Link>
-              </Button>
-            </div>
-          </Panel>
-        )}
 
         <Panel>
           <PanelHeader

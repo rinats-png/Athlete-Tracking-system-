@@ -76,18 +76,59 @@ export function Timer({ seconds }: { seconds: number }) {
 
   const done = remaining <= 0
 
+  /**
+   * Der Ring: der Umfang als Strichmuster, der Rest als Versatz. Damit
+   * animiert genau EIN Zahlenwert, und zwar auf der GPU — eine Neuzeichnung
+   * des Kreises je Sekunde wäre auf einem älteren Telefon sichtbar ruckelig.
+   *
+   * Der Ring zeigt die verbleibende Zeit als Anteil, nicht als Fortschritt
+   * von null: unter Belastung will man wissen, wie viel noch KOMMT.
+   */
+  const R = 70
+  const CIRC = 2 * Math.PI * R
+  const left = seconds > 0 ? Math.max(0, Math.min(1, remaining / seconds)) : 0
+
   return (
     <div className="flex flex-col items-center gap-3">
       <span className="label-tag">{t('tests.timer')}</span>
-      <output
-        aria-live="polite"
-        className={
-          'readout text-[52px] leading-none font-medium tabular-nums ' +
-          (done ? 'text-accent-text' : '')
-        }
-      >
-        {formatDuration(Math.ceil(remaining))}
-      </output>
+
+      <div className="relative size-[180px]">
+        <svg viewBox="0 0 160 160" className="size-full -rotate-90" aria-hidden>
+          <circle
+            cx="80"
+            cy="80"
+            r={R}
+            fill="none"
+            stroke="var(--surface-sunken)"
+            strokeWidth="6"
+          />
+          <circle
+            cx="80"
+            cy="80"
+            r={R}
+            fill="none"
+            stroke="var(--accent)"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeDasharray={CIRC}
+            strokeDashoffset={CIRC * (1 - left)}
+            style={{
+              // Ohne Übergang springt der Ring im Takt des Intervalls von
+              // 200 ms — mit ihm läuft er durch.
+              transition: running ? 'stroke-dashoffset 200ms linear' : 'none',
+            }}
+          />
+        </svg>
+        <output
+          aria-live="polite"
+          className={
+            'readout absolute inset-0 flex items-center justify-center text-[46px] leading-none font-bold tabular-nums ' +
+            (done ? 'text-accent-text' : '')
+          }
+        >
+          {formatDuration(Math.ceil(remaining))}
+        </output>
+      </div>
       <div className="flex gap-2">
         {running ? (
           <Button variant="outline" size="sm" onClick={pause}>

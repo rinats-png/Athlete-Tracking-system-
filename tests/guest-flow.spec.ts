@@ -44,7 +44,9 @@ test.describe('Gastmodus', () => {
     // 5. Und in der Übersicht entsteht ein Profil
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Testperson')).toBeVisible()
-    await expect(page.getByText('Performance-Profil').first()).toBeVisible()
+    // Das Leistungsprofil steht als Orb da — seit dem Umbau auf «Performance
+    // OS» ist die Form die Aussage, nicht mehr eine Balkenliste.
+    await expect(page.getByRole('img', { name: /Leistungsprofil als Form/ })).toBeVisible()
 
     // 6. Daten überleben einen Reload — sie liegen lokal
     await page.reload({ waitUntil: 'domcontentloaded' })

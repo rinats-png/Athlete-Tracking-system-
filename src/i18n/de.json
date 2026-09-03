@@ -1628,5 +1628,15 @@
     "result": "Ergebnis eintragen",
     "import": "Aus Tabelle übernehmen",
     "session": "Termin anlegen"
+  },
+  "spectrum": {
+    "higherBetter": "höher ist besser",
+    "lowerBetter": "niedriger ist besser"
+  },
+  "valueCard": {
+    "open": "Öffnen: {{label}}"
+  },
+  "nextTest": {
+    "eyebrow": "Nächster sinnvoller Test"
   }
 }
