@@ -104,6 +104,11 @@ interface AppDataValue {
   deleteResult: (id: string) => void
   /** Belegbild an ein bestehendes Ergebnis hängen oder entfernen (§14). */
   setResultPhoto: (id: string, dataUrl: string | null) => void
+  /**
+   * Eine Station eines Gruppentests: ein Test, viele Athleten, ein
+   * Schreibvorgang. Gibt die Zahl der geschriebenen Ergebnisse zurück.
+   */
+  recordForGroup: (testSlug: string, performedAt: string, values: Record<string, number>[]) => number
   saveAssessment: (assessment: StoredAssessment) => void
   deleteAssessment: (id: string) => void
   resetAll: () => void
@@ -407,6 +412,73 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           upsertBiometric(current, { ...entry, id: newId(), createdAt: new Date().toISOString() }),
         ),
       recordResult,
+      /**
+       * Ein Test, viele Athleten, EIN Schreibvorgang.
+       *
+       * Athletenweise über `recordResult` zu gehen ginge nicht: die Aktion
+       * schreibt immer in den aktiven Athleten, und zwischen zwei Aufrufen
+       * zieht der Zustand nicht nach — die Werte überschrieben einander.
+       * Deshalb baut diese Aktion den gesamten Bestand in einem Zug.
+       */
+      recordForGroup: (testSlug, performedAt, values) => {
+        const test = getTest(testSlug)
+        if (!test) return 0
+        const source = storeRef.current
+        let written = 0
+        const athletes = source.athletes.map((athlete, index) => {
+          const input = values[index]
+          if (!input || Object.keys(input).length === 0) return athlete
+          const view = {
+            branding: source.branding,
+            profile: athlete.profile,
+            biometrics: athlete.biometrics,
+            assessments: athlete.assessments,
+            results: athlete.results,
+          }
+          const context = {
+            bodyWeightKg: bodyWeightAt(view, performedAt),
+            ageYears: ageFromBirthDate(athlete.profile.birthDate),
+            sex: athlete.profile.sex,
+          }
+          const metrics = deriveMetrics(test, input, context)
+          const result: StoredResult = {
+            id: newId(),
+            testSlug,
+            performedAt,
+            values: input,
+            metrics,
+            score: primaryValue(test, input, metrics),
+            bodyWeightKg: context.bodyWeightKg,
+            ageYears: context.ageYears,
+            sex: context.sex,
+            assessmentId: null,
+            attempts: [],
+            attemptSelection: null,
+            context: { ...EMPTY_CONTEXT },
+            notes: undefined,
+            photo: null,
+            createdAt: new Date().toISOString(),
+          }
+          written++
+          const entry: ValidatedAudit = {
+            id: newId(),
+            at: new Date().toISOString(),
+            action: 'created',
+            entity: 'result',
+            entityId: result.id,
+            label: test.name.de,
+          }
+          return {
+            ...athlete,
+            results: [result, ...athlete.results].sort((a, b) =>
+              b.performedAt.localeCompare(a.performedAt),
+            ),
+            audit: [entry, ...athlete.audit].slice(0, AUDIT_LIMIT),
+          }
+        })
+        if (written > 0) commitStore({ ...source, athletes })
+        return written
+      },
       setResultPhoto: (id, dataUrl) => {
         const target = data.results.find((r) => r.id === id)
         if (!target) return

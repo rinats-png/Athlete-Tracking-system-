@@ -231,6 +231,15 @@ export function ProfileScreen() {
 
               <p>
                 <Link
+                  to="/profil/import"
+                  className="-mx-2 inline-flex min-h-11 items-center px-2 text-[13px] underline underline-offset-2"
+                >
+                  {t('csvImport.title')}
+                </Link>
+              </p>
+
+              <p>
+                <Link
                   to="/preise"
                   className="-mx-2 inline-flex min-h-11 items-center px-2 text-[13px] underline underline-offset-2"
                 >

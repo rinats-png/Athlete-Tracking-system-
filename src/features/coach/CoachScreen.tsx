@@ -29,7 +29,12 @@ export function CoachScreen() {
       </header>
 
       {role === 'coach' ? (
-        <CoachDashboard locale={locale} />
+        <>
+          <Button asChild variant="outline" size="sm" className="mb-4">
+            <Link to="/trainer/gruppentest">{t('group.title')}</Link>
+          </Button>
+          <CoachDashboard locale={locale} />
+        </>
       ) : (
         <EmptyState
           title={t('coachDash.soloTitle')}
