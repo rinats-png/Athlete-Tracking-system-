@@ -70,6 +70,7 @@ const router = createBrowserRouter([
       { path: 'verlauf/kalender', element: screen(() => import('@/features/history/CalendarScreen'), 'CalendarScreen') },
       { path: 'verlauf/erinnerungen', element: screen(() => import('@/features/history/RemindersScreen'), 'RemindersScreen') },
       { path: 'analyse', element: screen(() => import('@/features/analysis/AnalysisHome'), 'AnalysisHome') },
+      { path: 'analyse/jahr', element: screen(() => import('@/features/analysis/YearReviewScreen'), 'YearReviewScreen') },
       { path: 'community', element: screen(() => import('@/features/analysis/CommunityScreen'), 'CommunityScreen') },
       { path: 'trainer', element: screen(() => import('@/features/coach/CoachScreen'), 'CoachScreen') },
       { path: 'trainer/gruppentest', element: screen(() => import('@/features/coach/GroupTestScreen'), 'GroupTestScreen') },

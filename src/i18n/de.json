@@ -1517,5 +1517,32 @@
     "nextStation": "Nächste Station",
     "soloTitle": "Der Gruppentest gehört zum Trainermodus",
     "soloBody": "Im Trainermodus verwaltest du mehrere Athleten und kannst sie an einer Station nacheinander testen."
+  },
+  "year": {
+    "title": "Dein Jahr {{year}}",
+    "intro": "Was in diesem Jahr gemessen wurde — und was sich davon belegen lässt.",
+    "emptyTitle": "Noch kein Jahr zum Zurückblicken",
+    "emptyBody": "Sobald du gemessen hast, entsteht hier eine Auswertung deines Jahres.",
+    "numbers": "In Zahlen",
+    "results": "Messungen",
+    "testsUsed": "verschiedene Tests",
+    "assessments": "abgeschlossene Termine",
+    "personalBests": "persönliche Bestwerte",
+    "activeMonths": "Monate mit Messung",
+    "ofTwelve": "{{count}} von 12",
+    "development": "Entwicklung",
+    "developmentHint": "Gezählt wird nur, was über deiner eigenen Schwankung liegt.",
+    "gain": "Grösster belegter Fortschritt: {{test}}, +{{percent}} %.",
+    "drop": "Grösster belegter Rückgang: {{test}}, −{{percent}} %.",
+    "noGain": "In diesem Jahr liegt keine Veränderung über deiner üblichen Schwankung. Das heisst nicht, dass nichts passiert ist — nur, dass es sich aus diesen Messungen nicht belegen lässt.",
+    "withinNoise": "{{count}} weitere Tests haben sich verändert, aber innerhalb deiner üblichen Schwankung.",
+    "generalProfile": "Allgemeines Profil",
+    "card": "Karte zum Weitergeben",
+    "cardHint": "Ohne Namen und Geburtsdatum — die Karte trägt Leistungswerte, keine Personendaten.",
+    "cardAlt": "Deine Leistungskarte als Bild",
+    "cardDownload": "Karte herunterladen",
+    "cardFooter": "{{results}} Messungen im Jahr {{year}}",
+    "cardCaveat": "Mittel der Perzentile der belegten Achsen. Keine medizinische Aussage und zwischen Sportarten nicht vergleichbar.",
+    "cardPrivacy": "Das Bild entsteht auf deinem Gerät und wird nirgends hochgeladen. Was du damit machst, entscheidest du."
   }
 }

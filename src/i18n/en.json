@@ -1517,5 +1517,32 @@
     "nextStation": "Next station",
     "soloTitle": "The group test belongs to coach mode",
     "soloBody": "In coach mode you manage several athletes and can test them at one station in turn."
+  },
+  "year": {
+    "title": "Your {{year}}",
+    "intro": "What was measured this year — and what of it can be established.",
+    "emptyTitle": "No year to look back on yet",
+    "emptyBody": "Once you have measured, a review of your year appears here.",
+    "numbers": "In numbers",
+    "results": "measurements",
+    "testsUsed": "different tests",
+    "assessments": "completed sessions",
+    "personalBests": "personal bests",
+    "activeMonths": "months with a measurement",
+    "ofTwelve": "{{count}} of 12",
+    "development": "Development",
+    "developmentHint": "Only what exceeds your own variation is counted.",
+    "gain": "Largest established gain: {{test}}, +{{percent}} %.",
+    "drop": "Largest established drop: {{test}}, −{{percent}} %.",
+    "noGain": "No change this year exceeds your usual variation. That does not mean nothing happened — only that these measurements cannot establish it.",
+    "withinNoise": "{{count}} further tests changed, but within your usual variation.",
+    "generalProfile": "General profile",
+    "card": "Card to pass on",
+    "cardHint": "Without name and birth date — the card carries performance values, not personal data.",
+    "cardAlt": "Your performance card as an image",
+    "cardDownload": "Download card",
+    "cardFooter": "{{results}} measurements in {{year}}",
+    "cardCaveat": "Mean of the percentiles of the sourced axes. Not a medical statement and not comparable across sports.",
+    "cardPrivacy": "The image is made on your device and uploaded nowhere. What you do with it is up to you."
   }
 }
