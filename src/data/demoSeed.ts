@@ -110,6 +110,7 @@ export function buildDemoData(): StoredData {
     onboardingCompletedAt: '2025-01-05T09:00:00.000Z',
     remindersEnabled: true,
     reminderIntervalDays: {},
+    testGoals: {},
   }
 
   const biometrics: StoredBiometric[] = SESSIONS.map((s) => ({

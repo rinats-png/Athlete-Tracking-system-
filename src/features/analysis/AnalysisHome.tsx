@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/Button'
 import { RadarProfile } from '@/components/charts/RadarProfile'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { RatingWord } from '@/features/shared/RatingScale'
+import { ScoreSummary } from '@/features/shared/ScoreSummary'
+import { performanceScore } from '@/domain/performanceScore'
 import { BenchmarkRow } from '@/features/shared/BenchmarkRow'
 import { useLocale } from '@/features/shared/useLocale'
 import { ratingContextOf, disciplineIdsOf } from '@/features/shared/profileContext'
@@ -213,6 +215,7 @@ function SportProfilePanel({ sportId, name }: { sportId: string; name: string })
   return (
     <Panel>
       <PanelHeader title={`${t('analysisHome.profiles')} · ${name}`} subtitle={t('analysisHome.profileNote')} />
+      <ScoreSummary score={performanceScore(axes)} axes={axes} />
       <ul className="grid grid-cols-2 gap-x-4 gap-y-1 px-4 py-3 text-[13px] sm:grid-cols-3">
         {axes.map((axis) => (
           <li key={axis.axisId} className="flex items-baseline justify-between gap-2 border-b border-line py-1">

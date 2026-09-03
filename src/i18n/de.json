@@ -33,7 +33,8 @@
     "backToCatalog": "Zum Testkatalog",
     "startAssessment": "Diagnostik starten",
     "back": "Zurück",
-    "close": "Schliessen"
+    "close": "Schliessen",
+    "save": "Speichern"
   },
   "theme": {
     "label": "Darstellung",
@@ -1445,5 +1446,24 @@
       "within_noise": "Zu wenig, um es von deiner üblichen Schwankung zu unterscheiden. Bei {{error}} % Schwankung in diesem Test (aus {{points}} Messungen) wäre eine Veränderung ab {{detectable}} % nachweisbar.",
       "unknown_error": "Wie stark deine Werte in diesem Test schwanken, ist noch nicht bekannt."
     }
+  },
+  "score": {
+    "title": "Zusammenfassung",
+    "coverage": "aus {{rated}} von {{total}} Achsen mit belegter Referenz",
+    "tooFew": "Für eine Zusammenfassung fehlen noch {{count}} Achsen mit belegter Referenz. Aus ein oder zwei Achsen wäre es keine Zusammenfassung, sondern diese Achsen unter anderem Namen.",
+    "measuredWithoutReference": "{{count}} weitere Achsen hast du gemessen, für sie gibt es aber keine belegte Referenz. Sie gehen nicht in die Zahl ein — als Null gezählt würden sie dich schlechter aussehen lassen, als du gemessen wurdest.",
+    "caveat": "Das Mittel der Perzentile deiner belegten Achsen. Kein Fitnesswert, keine Bewertung deiner Person, und zwischen Sportarten nicht vergleichbar — die Referenzgruppen sind verschieden."
+  },
+  "goal": {
+    "title": "Dein Ziel",
+    "none": "Für diesen Test hast du kein Ziel gesetzt.",
+    "set": "Ziel setzen",
+    "change": "Ziel ändern",
+    "remove": "Ziel entfernen",
+    "field": "Zielwert in {{unit}}",
+    "reversed": "Dieses Ziel liegt hinter deinem letzten Wert. Wenn du das so willst, ist es in Ordnung — bei Tests, wo weniger besser ist, verwechselt man aber leicht die Richtung.",
+    "reached": "erreicht",
+    "remaining": "noch {{amount}} {{unit}}",
+    "fromStart": "{{percent}} % der Strecke ab deiner ersten Messung ({{start}}). Ab null gerechnet stünde hier fast immer ein hoher Wert — das sagte nichts."
   }
 }

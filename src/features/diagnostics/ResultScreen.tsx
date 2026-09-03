@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { RatingScale, RatingWord } from '@/features/shared/RatingScale'
 import { BenchmarkRow, percentileLabel } from '@/features/shared/BenchmarkRow'
+import { GoalBlock } from '@/features/shared/GoalBlock'
 import { useLocale } from '@/features/shared/useLocale'
 import { ratingContextOf } from '@/features/shared/profileContext'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -117,6 +118,7 @@ export function ResultScreen() {
             {result.notes && <p className="mt-3 text-[12px] text-ink-secondary">{t('result.note')}: {result.notes}</p>}
           </div>
           <ChangeBlock change={change} missing={missingForError(data.results, result.testSlug)} />
+          <GoalBlock testSlug={result.testSlug} />
           <PhotoBlock
             photo={result.photo}
             onChange={(dataUrl) => setResultPhoto(result.id, dataUrl)}

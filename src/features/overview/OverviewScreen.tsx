@@ -22,6 +22,8 @@ import { buildDiagnosticProfile } from '@/domain/diagnosticProfile'
 import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { cn } from '@/lib/utils'
+import { ScoreSummary } from '@/features/shared/ScoreSummary'
+import { performanceScore } from '@/domain/performanceScore'
 
 /**
  * Die Übersicht (Konzept §6): nur das Wichtigste.
@@ -131,7 +133,8 @@ export function OverviewScreen() {
       <div className="grid gap-4 md:grid-cols-2">
         <Panel ticked>
           <PanelHeader title={t('overview.profileTitle')} subtitle={t('overview.profileHint')} />
-          <ul className="divide-y divide-line">
+          <ScoreSummary score={performanceScore(axes)} axes={axes} />
+          <ul className="divide-y divide-line border-t border-line">
             {axes.map((axis) => (
               <li key={axis.axisId} className="flex items-center gap-3 px-4 py-2.5">
                 <span className="w-2/5 min-w-0 truncate text-[13px]">{axisLabel(axis.axisId, t, locale)}</span>

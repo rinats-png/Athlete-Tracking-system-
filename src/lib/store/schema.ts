@@ -113,6 +113,15 @@ const profileSchema = z.object({
   remindersEnabled: z.boolean().default(false),
   /** Wiederholungsabstand je Test in Tagen. Fehlt ein Test, gilt die Vorgabe. */
   reminderIntervalDays: z.record(z.string(), finite.min(1).max(730)).default({}),
+  /**
+   * Selbst gesetzte Zielwerte je Test, in der Haupteinheit des Tests.
+   *
+   * Bewusst der eigene Zielwert und keine fremde Marke: ein Fortschrittsbalken
+   * auf «Elite» ist für die meisten unerreichbar und bei Jugendlichen ein
+   * Anreiz, den diese App nicht setzt. Ein selbst gesetztes Ziel ist
+   * erreichbar, und es ist eine Entscheidung des Athleten.
+   */
+  testGoals: z.record(z.string(), finite).default({}),
   performanceLevel: performanceLevelSchema.nullable().default(null),
   /** Jahre systematischen Trainings — nicht das Lebensalter. */
   trainingAgeYears: finite.min(0).max(70).nullable().default(null),
@@ -566,6 +575,7 @@ export const MIGRATIONS: Migration[] = [
               : null,
           remindersEnabled: false,
           reminderIntervalDays: {},
+          testGoals: {},
         },
       })),
     }),

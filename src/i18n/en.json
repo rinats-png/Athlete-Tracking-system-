@@ -33,7 +33,8 @@
     "backToCatalog": "Back to catalog",
     "startAssessment": "Start assessment",
     "back": "Back",
-    "close": "Close"
+    "close": "Close",
+    "save": "Save"
   },
   "theme": {
     "label": "Appearance",
@@ -1445,5 +1446,24 @@
       "within_noise": "Too little to tell apart from your usual variation. At {{error}} % variation in this test (from {{points}} measurements), a change would be detectable from {{detectable}} %.",
       "unknown_error": "How much your values in this test vary is not known yet."
     }
+  },
+  "score": {
+    "title": "Summary",
+    "coverage": "from {{rated}} of {{total}} axes with a sourced reference",
+    "tooFew": "A summary still needs {{count}} more axes with a sourced reference. From one or two axes it would not be a summary, just those axes under another name.",
+    "measuredWithoutReference": "You measured {{count}} further axes, but there is no sourced reference for them. They do not enter the number — counted as zero they would make you look worse than you were measured.",
+    "caveat": "The mean of the percentiles of your sourced axes. Not a fitness value, not a judgement of you, and not comparable across sports — the reference groups differ."
+  },
+  "goal": {
+    "title": "Your goal",
+    "none": "You have not set a goal for this test.",
+    "set": "Set a goal",
+    "change": "Change goal",
+    "remove": "Remove goal",
+    "field": "Goal value in {{unit}}",
+    "reversed": "This goal sits behind your last value. If that is what you want, fine — but in tests where less is better the direction is easily reversed.",
+    "reached": "reached",
+    "remaining": "{{amount}} {{unit}} to go",
+    "fromStart": "{{percent}} % of the way from your first measurement ({{start}}). Counted from zero this would nearly always be a high number — which says nothing."
   }
 }
