@@ -15,7 +15,7 @@ import { assessQuality, isOutlier } from '@/domain/dataQuality'
 import { getTest } from '@/data/testCatalog'
 import { formatDate } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
-import { normPercentile } from '@/data/norms'
+import { lookupPercentile } from '@/domain/benchmark'
 import { cn } from '@/lib/utils'
 import type { AppLocale } from '@/types/domain'
 
@@ -110,10 +110,7 @@ export function AssessmentSummaryScreen() {
                   const test = getTest(result.testSlug)
                   const quality = assessQuality(result)
                   const outlier = isOutlier(result, data.results)
-                  const percentile =
-                    test && result.score != null
-                      ? normPercentile(test.slug, test.primaryMetric, result.sex, result.ageYears, result.score)
-                      : null
+                  const percentile = test && result.score != null ? lookupPercentile(result) : null
                   return (
                     <tr key={result.id} className="border-b border-line last:border-b-0">
                       <th scope="row" className="px-4 py-2.5 text-left font-normal">

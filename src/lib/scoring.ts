@@ -1,5 +1,4 @@
 import { getTest, TEST_CATALOG } from '@/data/testCatalog'
-import { normPercentile } from '@/data/norms'
 import { compareToReferences } from '@/data/references'
 import { GENERAL_AXIS_IDS, axisById } from '@/data/profileAxes'
 import { disciplineById } from '@/data/sportProfiles'
@@ -154,8 +153,10 @@ export function radarProfile(
     const key = `${m.testSlug}|${m.axisId}|${m.metricKey}`
 
     if (mode === 'population') {
-      // Erst die belegten Referenzwerte, dann die alte Startbelegung. Eine
-      // Kohorte mit Quelle schlägt eine ohne.
+      // Ausschliesslich belegte Referenzwerte. Früher stand hier ein
+      // Rückfall auf eine unvalidierte Startbelegung; damit trug jede Achse
+      // eine Zahl, auch wo es keine Referenz gab. Eine Achse ohne Referenz
+      // bleibt jetzt leer, und die Oberfläche sagt warum.
       const comparisons = compareToReferences(
         m.testSlug,
         m.metricKey,
@@ -165,9 +166,7 @@ export function radarProfile(
         m.ageYears,
         disciplineId,
       ).filter((c) => c.percentile != null)
-      score =
-        comparisons[0]?.percentile ??
-        normPercentile(m.testSlug, m.metricKey, m.sex, m.ageYears, m.value)
+      score = comparisons[0]?.percentile ?? null
     } else {
       // Erst ab der zweiten Messung gibt es einen Bezug. Die erste wäre ihr
       // eigener Massstab und stünde immer bei 100 % — ein volles Profil beim

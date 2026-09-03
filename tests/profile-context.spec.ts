@@ -2,12 +2,8 @@ import { expect, test } from "@playwright/test";
 import { DISCIPLINES } from "../src/data/sportProfiles";
 import { openGuest, openDemo } from "./helpers";
 import { bodyComposition, compositionChange } from "../src/domain/bodyComposition";
-import {
-  BAND_THRESHOLDS,
-  benchmarkResult,
-  coverageByDimension,
-  performanceBand,
-} from "../src/domain/benchmark";
+import { coverageByDimension, lookupPercentile } from "../src/domain/benchmark";
+import { rateResult } from "../src/domain/rating";
 import { emptyData } from "../src/lib/store/schema";
 import type { AthleteData, StoredResult } from "../src/lib/store/localStore";
 
@@ -100,69 +96,56 @@ test.describe("Körperzusammensetzung", () => {
   });
 });
 
-test.describe("Leistungsband", () => {
-  test("die Bänder decken die ganze Skala lückenlos ab", () => {
-    for (let p = 0; p <= 100; p += 1) {
-      expect(performanceBand(p), `Perzentil ${p}`).not.toBeNull();
-    }
-    expect(BAND_THRESHOLDS[BAND_THRESHOLDS.length - 1].minPercentile).toBe(0);
-  });
-
-  test("die Zuordnung folgt den ausgewiesenen Schwellen", () => {
-    expect(performanceBand(34)).toBe("recreational");
-    expect(performanceBand(35)).toBe("trained");
-    expect(performanceBand(60)).toBe("advanced");
-    expect(performanceBand(80)).toBe("competitive");
-    expect(performanceBand(95)).toBe("elite");
-  });
-
-  test("ohne Perzentil gibt es kein Band", () => {
-    expect(performanceBand(null)).toBeNull();
-  });
-});
-
 test.describe("Einordnung eines Ergebnisses", () => {
   test("die Referenz wird auch gefunden, wenn sie nicht auf der Primärkennzahl liegt", () => {
     // Beim Cooper-Test ist die Primärkennzahl die Laufdistanz, die Referenz
     // liegt auf der VO2max. Eine Suche allein über die Primärkennzahl fand
     // hier nie etwas und zeigte still einen Strich.
-    const verdict = benchmarkResult(result(), view().profile);
-    expect(verdict.percentile).not.toBeNull();
-    expect(verdict.percentile).toBeGreaterThan(50);
-    expect(verdict.percentile).toBeLessThan(80);
+    const rating = rateResult(result(), { sex: "male", birthDate: null, disciplineIds: [] });
+    expect(rating.metricKey).toBe("vo2max_ml_kg_min");
+    expect(rating.comparison).not.toBeNull();
   });
 
-  test("die fehlende Angabe wird benannt, nicht nur weggelassen", () => {
-    const noSex = benchmarkResult(result({ sex: null }), view().profile);
-    expect(noSex.missingReason).toBe("no_sex");
-    expect(noSex.percentile).toBeNull();
-
-    const noAge = benchmarkResult(result({ ageYears: null }), view().profile);
-    expect(noAge.missingReason).toBe("no_age");
+  test("eine geschlechtsneutrale Kohorte gilt auch ohne Geschlechtsangabe", () => {
+    // Für die VO2max gibt es eine Referenz über beide Geschlechter. Wer sein
+    // Geschlecht nicht angibt, bekommt deshalb trotzdem eine Antwort — nur
+    // eben aus der Gruppe, die ohne diese Angabe passt.
+    const noSex = rateResult(result({ sex: null }), { sex: null, birthDate: null, disciplineIds: [] });
+    expect(noSex.level).not.toBeNull();
+    expect(noSex.comparison!.entry.sex).toBe("all");
   });
 
-  test("das Ergebnis trägt die Herkunft der Referenz mit", () => {
-    const verdict = benchmarkResult(result(), view().profile);
-    expect(verdict.percentile).not.toBeNull();
-    expect(verdict.band).not.toBeNull();
-    // Solange die Referenz nicht belegt ist, muss das an jeder Zahl hängen.
-    expect(verdict.validated).toBe(false);
-    expect(verdict.datasetId).toBe("baseline_v0_placeholder");
+  test("ohne Geschlecht und ohne neutrale Kohorte wird die Lücke benannt", () => {
+    // Die Griffkraft-Referenzen sind nach Geschlecht getrennt.
+    const noSex = rateResult(
+      result({ testSlug: "grip_strength", values: { gripKg: 50 }, metrics: {}, score: 50, sex: null }),
+      { sex: null, birthDate: null, disciplineIds: [] },
+    );
+    expect(noSex.level).toBeNull();
+    expect(noSex.gap).toBe("no_sex");
   });
 
-  test("ein abweichendes Leistungsniveau wird als solches gekennzeichnet", () => {
-    const base = view().profile;
-    expect(
-      benchmarkResult(result(), { ...base, performanceLevel: "elite" }).populationMismatch,
-    ).toBe(true);
-    expect(
-      benchmarkResult(result(), { ...base, performanceLevel: "recreational" })
-        .populationMismatch,
-    ).toBe(true);
-    // Das Kollektiv sind trainierte Erwachsene — dann passt es.
-    expect(
-      benchmarkResult(result(), { ...base, performanceLevel: "trained" }).populationMismatch,
-    ).toBe(false);
+  test("jede Einordnung trägt Kohorte, Quelle und Datenqualität mit", () => {
+    const rating = rateResult(result(), { sex: "male", birthDate: null, disciplineIds: [] });
+    const entry = rating.comparison!.entry;
+    expect(entry.cohortLabel.de.length).toBeGreaterThan(3);
+    expect(entry.source.study.length).toBeGreaterThan(3);
+    expect(["A", "B", "C", "D"]).toContain(entry.quality);
+  });
+
+  test("ein Median ergibt einen Abstand, aber keine Stufe", () => {
+    // Das FRIEND-Register nennt den Median je Dekade, keine Streuung.
+    const rating = rateResult(result(), { sex: "male", birthDate: null, disciplineIds: [] });
+    const median = [rating.comparison, ...rating.alternatives].find(
+      (c) => c?.entry.method === "median",
+    );
+    expect(median, "eine Median-Referenz für VO2max muss es geben").toBeTruthy();
+    expect(median!.percentFromMedian).not.toBeNull();
+    expect(median!.percentile).toBeNull();
+  });
+
+  test("ohne Referenz gibt es kein Perzentil im Export", () => {
+    expect(lookupPercentile(result({ testSlug: "plank_hold" }))).toBeNull();
   });
 });
 

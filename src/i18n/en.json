@@ -1060,7 +1060,8 @@
       "no_sex": "Without sex no reference group fits.",
       "no_age": "Without a birth date no age class fits.",
       "no_reference": "There is no robust reference for this test. The value stays comparable with yourself.",
-      "anchor_only": "The source names only a single anchor, no distribution — that shows a distance, not a level."
+      "anchor_only": "The source names only a single anchor, no distribution — that shows a distance, not a level.",
+      "median_only": "The source names only the group median, no spread — that shows a distance, not a level."
     },
     "basisPercentile": "from percentile {{percentile}} against {{group}}",
     "basisBand": "from the source's band \"{{band}}\", against {{group}}",
@@ -1074,6 +1075,7 @@
     "profileTitle": "Performance profile",
     "profileHint": "0–100 per axis, from the percentile against the matching reference. The measured value itself stays visible everywhere.",
     "axisNoRating": "No reliable rating possible",
+    "axisNoRatingShort": "no reference",
     "axisUnmeasured": "not measured yet",
     "strengths": "Your strengths",
     "noStrengths": "Strengths need at least three measured axes.",
@@ -1267,6 +1269,8 @@
     "band": "Band of the source",
     "sdFromMean": "{{sd}} SD from the group mean",
     "percentOfAnchor": "{{percent}} % of the anchor",
+    "groupMedian": "Group median",
+    "percentFromMedian": "{{percent}} % against the median",
     "percentile": "Percentile {{percentile}}",
     "society": "Population comparison",
     "societyHint": "Only when robust data exist. The app forces no artificial comparison.",

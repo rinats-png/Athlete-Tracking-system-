@@ -217,8 +217,8 @@ function SportProfilePanel({ sportId, name }: { sportId: string; name: string })
         {axes.map((axis) => (
           <li key={axis.axisId} className="flex items-baseline justify-between gap-2 border-b border-line py-1">
             <span className="truncate">{axisLabel(axis.axisId, t, locale)}</span>
-            <span className="readout shrink-0">
-              {axis.score != null ? `${formatNumber(axis.score, locale, 0)} / 100` : axis.hasData ? t('overview.axisNoRating') : '—'}
+            <span className="readout shrink-0" title={axis.hasData && axis.score == null ? t('overview.axisNoRating') : undefined}>
+              {axis.score != null ? `${formatNumber(axis.score, locale, 0)} / 100` : axis.hasData ? t('overview.axisNoRatingShort') : '—'}
             </span>
           </li>
         ))}

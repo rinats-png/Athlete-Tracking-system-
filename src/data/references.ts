@@ -30,6 +30,12 @@ import type { ScoringDirection, Sex } from '@/types/domain'
  *                  «very poor»). Kein Perzentil — die Quelle gibt keines her.
  *   `anchor`       Ein einzelner belegter Bezugswert, etwa der Altersgipfel der
  *                  Griffkraft. Zeigt den Abstand dazu, mehr nicht.
+ *   `median`       Der publizierte Median einer benannten Gruppe, ohne
+ *                  Streuung. Daraus folgt genau eine Aussage: darüber oder
+ *                  darunter, und um wie viel Prozent. KEINE Stufe — für
+ *                  «Sehr gut» bräuchte es eine Verteilung, und die gibt die
+ *                  Quelle nicht her. Das ist die häufigste Form, in der
+ *                  grosse Register ihre Werte berichten.
  *
  * ATHLETENKOHORTEN SIND SPORTARTGEBUNDEN. Ein Wert aus einer
  * Elite-MMA-Stichprobe gilt für MMA und nicht für Rudern. Deshalb schränkt
@@ -42,7 +48,7 @@ import type { ScoringDirection, Sex } from '@/types/domain'
  */
 
 export type ReferenceCohort = 'population' | 'athlete'
-export type ReferenceMethod = 'mean_sd' | 'percentiles' | 'bands' | 'anchor'
+export type ReferenceMethod = 'mean_sd' | 'percentiles' | 'bands' | 'anchor' | 'median'
 /** A = Normtabelle/Metaanalyse · B = gute Vergleichsstudie · C/D = Einzelstudie oder indirekt. */
 export type ReferenceQuality = 'A' | 'B' | 'C' | 'D'
 
@@ -85,6 +91,8 @@ export interface ReferenceEntry {
   bands?: ReferenceBand[]
   /** `anchor`: der Bezugswert selbst. */
   anchor?: number
+  /** `median`: der publizierte Median der Gruppe. */
+  median?: number
   source: ReferenceSource
   quality: ReferenceQuality
   /**
@@ -158,6 +166,252 @@ export const REFERENCES: ReferenceEntry[] = [
     source: { study: 'VO2max-Schätzungsvergleich, aktive gesunde Erwachsene', n: 99 },
     quality: 'B',
   },
+  // --- Aerobe Kapazität nach Alter und Geschlecht --------------------------
+  //
+  // Das FRIEND-Register ist die grösste Sammlung direkt gemessener
+  // Spiroergometrie-Werte. Die Arbeit berichtet den Median je Dekade und
+  // Geschlecht, aber keine Streuung — deshalb `median` und keine Stufe:
+  // «über dem Median deiner Altersgruppe» ist genau das, was die Zahl
+  // hergibt, und mehr zu behaupten hiesse, eine Verteilung zu erfinden.
+  //
+  // Belegt sind die Dekaden 20–29 und 70–79. Die vier dazwischen sind
+  // zwischen diesen Eckwerten fortgeschrieben; der dabei entstehende Abfall
+  // stimmt mit dem in der Arbeit genannten überein und ist an jedem Eintrag
+  // vermerkt.
+  //
+  // Die Fahrrad-Werte derselben Registerreihe stehen NICHT hier: dort ergäbe
+  // dieselbe Fortschreibung 14 % je Dekade, während die Arbeit rund 10 %
+  // berichtet. Wo die eigene Rechnung der Quelle widerspricht, gilt die
+  // Quelle — der Eintrag entfällt und steht in REFERENCE_GAPS.
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Männer 20–29 Jahre, FRIEND-Register (Laufband)',
+      en: 'Men aged 20–29, FRIEND registry (treadmill)',
+    },
+    sex: 'male',
+    ageMin: 20,
+    ageMax: 29,
+    method: 'median',
+    median: 49.5,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: LAB_NOTE,
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Männer 30–39 Jahre, FRIEND-Register (Laufband)',
+      en: 'Men aged 30–39, FRIEND registry (treadmill)',
+    },
+    sex: 'male',
+    ageMin: 30,
+    ageMax: 39,
+    method: 'median',
+    median: 45.0,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Männer 40–49 Jahre, FRIEND-Register (Laufband)',
+      en: 'Men aged 40–49, FRIEND registry (treadmill)',
+    },
+    sex: 'male',
+    ageMin: 40,
+    ageMax: 49,
+    method: 'median',
+    median: 40.9,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Männer 50–59 Jahre, FRIEND-Register (Laufband)',
+      en: 'Men aged 50–59, FRIEND registry (treadmill)',
+    },
+    sex: 'male',
+    ageMin: 50,
+    ageMax: 59,
+    method: 'median',
+    median: 37.2,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Männer 60–69 Jahre, FRIEND-Register (Laufband)',
+      en: 'Men aged 60–69, FRIEND registry (treadmill)',
+    },
+    sex: 'male',
+    ageMin: 60,
+    ageMax: 69,
+    method: 'median',
+    median: 33.9,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Männer 70–79 Jahre, FRIEND-Register (Laufband)',
+      en: 'Men aged 70–79, FRIEND registry (treadmill)',
+    },
+    sex: 'male',
+    ageMin: 70,
+    ageMax: 120,
+    method: 'median',
+    median: 30.8,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: LAB_NOTE,
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Frauen 20–29 Jahre, FRIEND-Register (Laufband)',
+      en: 'Women aged 20–29, FRIEND registry (treadmill)',
+    },
+    sex: 'female',
+    ageMin: 20,
+    ageMax: 29,
+    method: 'median',
+    median: 40.6,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: LAB_NOTE,
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Frauen 30–39 Jahre, FRIEND-Register (Laufband)',
+      en: 'Women aged 30–39, FRIEND registry (treadmill)',
+    },
+    sex: 'female',
+    ageMin: 30,
+    ageMax: 39,
+    method: 'median',
+    median: 36.8,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Frauen 40–49 Jahre, FRIEND-Register (Laufband)',
+      en: 'Women aged 40–49, FRIEND registry (treadmill)',
+    },
+    sex: 'female',
+    ageMin: 40,
+    ageMax: 49,
+    method: 'median',
+    median: 33.4,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Frauen 50–59 Jahre, FRIEND-Register (Laufband)',
+      en: 'Women aged 50–59, FRIEND registry (treadmill)',
+    },
+    sex: 'female',
+    ageMin: 50,
+    ageMax: 59,
+    method: 'median',
+    median: 30.4,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Frauen 60–69 Jahre, FRIEND-Register (Laufband)',
+      en: 'Women aged 60–69, FRIEND registry (treadmill)',
+    },
+    sex: 'female',
+    ageMin: 60,
+    ageMax: 69,
+    method: 'median',
+    median: 27.5,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: {
+      de: 'Median dieser Dekade zwischen den beiden publizierten Eckwerten (20–29 und 70–79) fortgeschrieben. Der so entstehende Abfall von 9,1 % je Dekade deckt sich mit dem in der Arbeit berichteten Wert von rund 9 %. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
+      en: 'Median for this decade carried forward between the two published endpoints (20–29 and 70–79). The resulting decline of 9.1 % per decade matches the roughly 9 % reported in the paper. Note also: the source measures on a laboratory treadmill; a field estimate such as Cooper or beep test is an approximation.',
+    },
+  },
+  {
+    testSlug: '*',
+    metricKey: 'vo2max_ml_kg_min',
+    cohort: 'population',
+    cohortLabel: {
+      de: 'Frauen 70–79 Jahre, FRIEND-Register (Laufband)',
+      en: 'Women aged 70–79, FRIEND registry (treadmill)',
+    },
+    sex: 'female',
+    ageMin: 70,
+    ageMax: 120,
+    method: 'median',
+    median: 25.0,
+    source: { study: 'Peterman et al. 2019, Mayo Clin Proc, FRIEND-I (Laufband)', n: 44007 },
+    quality: 'B',
+    protocolNote: LAB_NOTE,
+  },
+
   // Griffkraft: die Quellen geben Altersgipfel, keine Streuung. Deshalb
   // Bezugswert statt Perzentil — der Abstand zum Gipfel ist die Aussage.
   {
@@ -173,7 +427,7 @@ export const REFERENCES: ReferenceEntry[] = [
     ageMax: 49,
     method: 'anchor',
     anchor: 51,
-    source: { study: '12 British Studies, Handgrip über den Lebensverlauf', n: 60803 },
+    source: { study: 'Dodds et al. 2014, PLoS ONE, zwölf britische Bevölkerungsstudien', n: 49964 },
     quality: 'A',
   },
   {
@@ -189,7 +443,7 @@ export const REFERENCES: ReferenceEntry[] = [
     ageMax: 49,
     method: 'anchor',
     anchor: 31,
-    source: { study: '12 British Studies, Handgrip über den Lebensverlauf', n: 60803 },
+    source: { study: 'Dodds et al. 2014, PLoS ONE, zwölf britische Bevölkerungsstudien', n: 49964 },
     quality: 'A',
   },
   {
@@ -460,6 +714,26 @@ export const REFERENCES: ReferenceEntry[] = [
  */
 export const REFERENCE_GAPS: { subject: string; reason: string }[] = [
   {
+    subject: 'Counter Movement Jump — Bevölkerungsreferenz',
+    reason:
+      'Hildebrandt et al. 2015 (Knee Surg Sports Traumatol Arthrosc, doi:10.1007/s00167-015-3529-4) haben an 434 gesunden Personen aus Innsbruck Normwerte für den beidbeinigen CMJ nach Alter (10–14, 15–19, 20–29, 30–50) und Geschlecht erhoben und in fünf Stufen um den Mittelwert eingeteilt. Die Mittelwerte und Streuungen stehen nur in den Tabellen der Druckfassung, nicht im frei zugänglichen Volltext. Ohne diese Zahlen liesse sich eine Einordnung nur schätzen — deshalb bleibt der CMJ vorerst ohne Referenz und wird nur mit dir selbst verglichen.',
+  },
+  {
+    subject: 'Sprint 20 m — Bevölkerungsreferenz',
+    reason:
+      'Zum linearen Sprint über 5, 10, 20 oder 30 m gibt es viele Kohortenbeschreibungen einzelner Mannschaften, aber keine Erhebung an einer benannten Allgemeinbevölkerung mit Mittelwert und Streuung nach Alter und Geschlecht. Kohortenwerte einer Mannschaft als Bevölkerungsnorm auszugeben, wäre eine Aussage über Menschen, die die Quelle nicht deckt. Der Sprint bleibt deshalb ohne Referenz.',
+  },
+  {
+    subject: 'FRIEND-Register, Fahrradergometer (Kaminsky et al. 2016)',
+    reason:
+      'Belegt sind nur die Dekaden 20–29 und 70–79. Eine Fortschreibung dazwischen ergäbe 14 % Abfall je Dekade, die Arbeit berichtet rund 10 % — die eigene Rechnung widerspräche also der Quelle. Ausserdem bildet in dieser App kein Radtest die VO2max, sondern Leistung in Watt.',
+  },
+  {
+    subject: 'Griffkraft: Perzentilkurven statt Altersgipfel',
+    reason:
+      'Dodds et al. veröffentlichen Zentilkurven über den gesamten Lebensverlauf, die Kurzfassung nennt aber nur die Gipfelmediane (51 kg Männer, 31 kg Frauen) und die Schwelle für schwachen Griff (2,5 SD unter dem Gipfelmittel). Ohne die tabellierten Zentile bleibt es beim Bezugswert.',
+  },
+  {
     subject: 'Wrestling SWFT / SWPT, Medaillisten vs. Nicht-Medaillisten',
     reason:
       'Die Quelle berichtet nur Signifikanzen («National > Liga», «Medaillisten besser»), keine Mittelwerte oder Streuungen. Ohne Zahlen kein Referenzwert.',
@@ -521,6 +795,12 @@ export interface ReferenceComparison {
   band: ReferenceBand | null
   /** Nur bei `anchor`: Anteil am Bezugswert in Prozent. */
   percentOfAnchor: number | null
+  /**
+   * Nur bei `median`: Abstand zum Median in Prozent, vorzeichenrichtig zur
+   * Leistung. Positiv heisst besser als die Hälfte der Gruppe, auch bei
+   * Tests, bei denen ein kleinerer Wert besser ist.
+   */
+  percentFromMedian: number | null
 }
 
 function matches(
@@ -566,6 +846,7 @@ export function compareToReferences(
       let sdFromMean: number | null = null
       let band: ReferenceBand | null = null
       let percentOfAnchor: number | null = null
+      let percentFromMedian: number | null = null
 
       if (entry.method === 'mean_sd' && entry.mean != null && entry.sd) {
         // Vorzeichen zur Leistung drehen: bei «kleiner ist besser» liegt ein
@@ -579,9 +860,12 @@ export function compareToReferences(
         band = entry.bands.find((b) => b.upTo == null || value <= b.upTo) ?? null
       } else if (entry.method === 'anchor' && entry.anchor) {
         percentOfAnchor = (value / entry.anchor) * 100
+      } else if (entry.method === 'median' && entry.median) {
+        const raw = ((value - entry.median) / entry.median) * 100
+        percentFromMedian = direction === 'lower_is_better' ? -raw : raw
       }
 
-      return { entry, percentile, sdFromMean, band, percentOfAnchor }
+      return { entry, percentile, sdFromMean, band, percentOfAnchor, percentFromMedian }
     },
   )
 }

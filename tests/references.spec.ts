@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import {
   REFERENCES,
@@ -119,6 +120,36 @@ test.describe("Belegbarkeit der Einträge", () => {
     expect(REFERENCE_GAPS.length).toBeGreaterThan(0);
     for (const gap of REFERENCE_GAPS) {
       expect(gap.reason.length, gap.subject).toBeGreaterThan(60);
+    }
+  });
+});
+
+test.describe("Median als Bezug", () => {
+  test("ein Medianwert ergibt einen Abstand in Prozent, aber keine Stufe", () => {
+    const oben = compareToReferences("cooper_12min", "vo2max_ml_kg_min", 55, "higher_is_better", "male", 25, null);
+    const median = oben.find((c) => c.entry.method === "median");
+    expect(median, "FRIEND-I nennt einen Median für Männer 20–29").toBeTruthy();
+    expect(median!.percentile, "ohne Streuung gibt es kein Perzentil").toBeNull();
+    expect(median!.percentFromMedian!).toBeGreaterThan(0);
+    const unten = compareToReferences("cooper_12min", "vo2max_ml_kg_min", 40, "higher_is_better", "male", 25, null);
+    expect(unten.find((c) => c.entry.method === "median")!.percentFromMedian!).toBeLessThan(0);
+  });
+
+  test("jeder Medianeintrag nennt einen Median und eine Quelle", () => {
+    const medians = REFERENCES.filter((e) => e.method === "median");
+    expect(medians.length).toBeGreaterThan(0);
+    for (const e of medians) {
+      expect(e.median, e.cohortLabel.de).toBeGreaterThan(0);
+      expect(e.source.study.length, e.cohortLabel.de).toBeGreaterThan(10);
+    }
+  });
+
+  test("beide Sprachen benennen den Medianbezug", () => {
+    for (const file of ["de", "en"]) {
+      const dict = JSON.parse(readFileSync(new URL(`../src/i18n/${file}.json`, import.meta.url), "utf-8"));
+      expect(dict.rating.gap.median_only, file).toBeTruthy();
+      expect(dict.result.percentFromMedian, file).toContain("{{percent}}");
+      expect(dict.result.groupMedian, file).toBeTruthy();
     }
   });
 });

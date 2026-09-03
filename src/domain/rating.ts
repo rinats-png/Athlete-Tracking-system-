@@ -54,7 +54,7 @@ export const RATING_THRESHOLDS: { level: RatingLevel; minPercentile: number }[] 
 ]
 
 export type RatingBasis = 'percentile' | 'band' | 'none'
-export type RatingGap = 'no_value' | 'no_sex' | 'no_age' | 'no_reference' | 'anchor_only'
+export type RatingGap = 'no_value' | 'no_sex' | 'no_age' | 'no_reference' | 'anchor_only' | 'median_only'
 
 export interface Rating {
   level: RatingLevel | null
@@ -99,7 +99,12 @@ export function ratingFromBand(comparison: ReferenceComparison): RatingLevel | n
   return RATING_LEVELS[levelIndex]
 }
 
-/** Mittelwert, SD, Bänder und Stützstellen zählen; ein Anker allein nicht. */
+/**
+ * Was eine Stufe tragen kann: eine Verteilung (Mittelwert und Streuung oder
+ * Stützstellen) oder eine publizierte Klassifikation. Ein einzelner
+ * Bezugswert und ein Median können es nicht — aus «12 % über dem Median»
+ * folgt kein «Sehr gut», dafür bräuchte es die Streuung.
+ */
 function ratable(comparison: ReferenceComparison): boolean {
   return comparison.percentile != null || comparison.band != null
 }
@@ -122,6 +127,9 @@ function rank(comparison: ReferenceComparison, disciplineIds: string[]): number 
   }
   score += { A: 30, B: 20, C: 10, D: 0 }[entry.quality]
   if (ratable(comparison)) score += 5
+  // Ein Median sagt mehr als ein blosser Bezugswert: er verortet den Wert in
+  // der Gruppe, statt nur einen Abstand zu einem Gipfel zu zeigen.
+  else if (entry.method === 'median') score += 2
   return score
 }
 
@@ -199,7 +207,7 @@ export function rateResult(result: StoredResult, context: RatingContext): Rating
       basis: 'none',
       comparison: ordered[0],
       alternatives: ordered.slice(1),
-      gap: 'anchor_only',
+      gap: ordered[0].entry.method === 'median' ? 'median_only' : 'anchor_only',
       metricKey,
     }
   }

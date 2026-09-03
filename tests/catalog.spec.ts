@@ -1,7 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { TEST_CATALOG, getTest } from "../src/data/testCatalog";
 import { DELIBERATELY_OMITTED } from "../src/data/testCatalogAdditions";
-import { NORMS } from "../src/data/norms";
 import { deriveMetrics } from "../src/lib/metrics/derive";
 import {
   peakPowerSayers,
@@ -82,34 +81,6 @@ test.describe("Katalogstruktur", () => {
   test("Sortierreihenfolgen kollidieren nicht", () => {
     const orders = TEST_CATALOG.map((t) => t.sortOrder);
     expect(new Set(orders).size, "doppelte sortOrder").toBe(orders.length);
-  });
-
-  test("jede Referenzzeile gehört zu einem Test und zu einer seiner Kennzahlen", () => {
-    for (const norm of NORMS) {
-      const t = getTest(norm.testSlug);
-      expect(t, norm.testSlug).toBeTruthy();
-      const known = [
-        t!.primaryMetric,
-        ...Object.values(t!.dimensionMetrics),
-        ...t!.derivedMetrics,
-        ...t!.fields.map((f) => f.key),
-      ];
-      expect(known, `${norm.testSlug}: ${norm.metricKey}`).toContain(norm.metricKey);
-    }
-  });
-
-  test("die Referenzstützstellen laufen in die Richtung des Tests", () => {
-    for (const norm of NORMS) {
-      const t = getTest(norm.testSlug)!;
-      const values = norm.values;
-      // Die Stützstellen stehen aufsteigend nach Perzentil. Bei «mehr ist
-      // besser» müssen sie steigen, sonst fallen — eine vertauschte Zeile
-      // würde jede Einordnung dieses Tests umkehren.
-      const rising = values.every((v, i) => i === 0 || v >= values[i - 1]);
-      const falling = values.every((v, i) => i === 0 || v <= values[i - 1]);
-      const expected = t.direction === "higher_is_better" ? rising : falling;
-      expect(expected, `${norm.testSlug}/${norm.metricKey}/${norm.sex}`).toBe(true);
-    }
   });
 
   test("der Katalog deckt alle sechs Achsen ab", () => {

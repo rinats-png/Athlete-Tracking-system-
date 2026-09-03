@@ -1,8 +1,8 @@
-import { NORM_DATASET, normPercentile } from '@/data/norms'
-import { getTest, TEST_CATALOG } from '@/data/testCatalog'
+import { TEST_CATALOG } from '@/data/testCatalog'
+import { rateResult } from '@/domain/rating'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
-import type { PerformanceDimension, PerformanceLevel } from '@/types/domain'
-import type { AthleteData, StoredResult } from '@/lib/store/localStore'
+import type { PerformanceDimension } from '@/types/domain'
+import type { StoredResult } from '@/lib/store/localStore'
 
 /**
  * Einordnung eines Messwerts (§14, §15, §17).
@@ -15,113 +15,32 @@ import type { AthleteData, StoredResult } from '@/lib/store/localStore'
  */
 
 /**
- * Perzentilgrenzen der Leistungsbänder.
+ * Perzentil eines Ergebnisses gegen die BEVÖLKERUNG.
  *
- * Die Schwellen sind gesetzt, nicht abgeleitet — und das steht auch so in der
- * Oberfläche. Sie folgen der üblichen Aufteilung in Quartile mit einer
- * zusätzlichen Spitzengruppe; jede feinere Stufung wäre bei sechs
- * Stützstellen je Referenzzeile eine Genauigkeit, die die Daten nicht haben.
- */
-export const BAND_THRESHOLDS: { level: PerformanceLevel; minPercentile: number }[] = [
-  { level: 'elite', minPercentile: 95 },
-  { level: 'competitive', minPercentile: 80 },
-  { level: 'advanced', minPercentile: 60 },
-  { level: 'trained', minPercentile: 35 },
-  { level: 'recreational', minPercentile: 0 },
-]
-
-export function performanceBand(percentile: number | null): PerformanceLevel | null {
-  if (percentile == null || !Number.isFinite(percentile)) return null
-  return BAND_THRESHOLDS.find((b) => percentile >= b.minPercentile)?.level ?? 'recreational'
-}
-
-export interface BenchmarkVerdict {
-  percentile: number | null
-  band: PerformanceLevel | null
-  /** Warum es kein Perzentil gibt — damit die Leerstelle erklärt ist. */
-  missingReason: 'no_sex' | 'no_age' | 'no_reference' | null
-  /**
-   * Weicht das selbst angegebene Niveau vom Vergleichskollektiv ab? Dann ist
-   * das Perzentil zu optimistisch oder zu streng — und der Athlet muss das
-   * wissen, statt sich mit der falschen Gruppe zu vergleichen.
-   */
-  populationMismatch: boolean
-  datasetId: string
-  validated: boolean
-}
-
-/**
- * Perzentil eines Ergebnisses.
+ * WAS SICH HIER GEÄNDERT HAT
  *
- * Gesucht wird NICHT stur unter der primären Kennzahl des Tests: beim
- * Cooper-Test ist die primäre Kennzahl die Laufdistanz, die Referenz liegt
- * aber auf der daraus geschätzten VO2max. Eine Suche allein über
- * `primaryMetric` fand dort nie eine Referenz und zeigte still einen
- * Strich — obwohl eine vorhanden ist.
+ * Bis hierher kam dieser Wert aus `norms.ts`, einer Startbelegung, die über
+ * sich selbst `validated: false` sagte: an übliche Grössenordnungen
+ * angelehnt, aus keiner Normstudie übernommen. Diese Zahlen standen im
+ * Bericht, im CSV-Export und über den Rückfall in `radarProfile` auch im
+ * Leistungsprofil auf der Übersicht — als «Perzentil gegenüber der passenden
+ * Referenz». Ein erfundenes Perzentil ist schlimmer als eine leere Achse,
+ * und an der sichtbarsten Stelle der App war genau eines zu sehen.
  *
- * Deshalb: erst die primäre Kennzahl, dann die Kennzahlen, über die der Test
- * auf seine Achsen einzahlt. Der Wert kommt aus Rohwerten und abgeleiteten
- * Werten zusammen, genau wie beim Radar.
+ * Jetzt gibt es ein Perzentil nur dort, wo eine benannte Kohorte mit Quelle
+ * es hergibt. Sonst null, und die Oberfläche sagt warum.
+ *
+ * Bewusst ohne Sportartkohorte: der Bericht und der Export vergleichen mit
+ * der Allgemeinheit. Die sportartspezifische Einordnung leistet `rateResult`
+ * mit dem vollen Kontext.
  */
 export function lookupPercentile(result: StoredResult): number | null {
-  const test = getTest(result.testSlug)
-  if (!test || result.sex == null || result.sex === 'other' || result.ageYears == null) return null
-
-  const source: Record<string, number> = { ...result.values, ...result.metrics }
-  const candidates = [test.primaryMetric, ...Object.values(test.dimensionMetrics)]
-
-  for (const metricKey of candidates) {
-    if (!metricKey) continue
-    const value = metricKey === test.primaryMetric ? (result.score ?? source[metricKey]) : source[metricKey]
-    if (value == null || !Number.isFinite(value)) continue
-    const percentile = normPercentile(test.slug, metricKey, result.sex, result.ageYears, value)
-    if (percentile != null) return percentile
-  }
-  return null
-}
-
-export function benchmarkResult(
-  result: StoredResult,
-  profile: AthleteData['profile'],
-): BenchmarkVerdict {
-  const test = getTest(result.testSlug)
-  const base = {
-    datasetId: NORM_DATASET.id,
-    validated: NORM_DATASET.validated,
-    populationMismatch: false,
-  }
-
-  if (result.sex == null || result.sex === 'other') {
-    return { ...base, percentile: null, band: null, missingReason: 'no_sex' }
-  }
-  if (result.ageYears == null) {
-    return { ...base, percentile: null, band: null, missingReason: 'no_age' }
-  }
-  if (!test || result.score == null) {
-    return { ...base, percentile: null, band: null, missingReason: 'no_reference' }
-  }
-
-  const percentile = lookupPercentile(result)
-
-  if (percentile == null) {
-    return { ...base, percentile: null, band: null, missingReason: 'no_reference' }
-  }
-
-  // Das Vergleichskollektiv sind trainierte Erwachsene. Wer sich selbst im
-  // Freizeit- oder im Spitzenbereich verortet, vergleicht sich mit einer
-  // anderen Gruppe, als er angehört.
-  const mismatch =
-    profile.performanceLevel === 'recreational' ||
-    profile.performanceLevel === 'competitive' ||
-    profile.performanceLevel === 'elite'
-
-  return {
-    ...base,
-    percentile,
-    band: performanceBand(percentile),
-    missingReason: null,
-    populationMismatch: mismatch,
-  }
+  const rating = rateResult(result, {
+    sex: result.sex,
+    birthDate: null,
+    disciplineIds: [],
+  })
+  return rating.comparison?.percentile ?? null
 }
 
 // --- Testabdeckung je Achse (§17) -------------------------------------------

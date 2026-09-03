@@ -23,9 +23,13 @@ export function BenchmarkRow({ comparison }: { comparison: ReferenceComparison }
         : t('result.percentile', { percentile: percentileLabel(comparison.percentile, locale) })
       : comparison.band
         ? comparison.band.label[locale]
-        : comparison.percentOfAnchor != null
-          ? t('result.percentOfAnchor', { percent: formatNumber(comparison.percentOfAnchor, locale, 0) })
-          : '—'
+        : comparison.percentFromMedian != null
+          ? t('result.percentFromMedian', {
+              percent: `${comparison.percentFromMedian > 0 ? '+' : ''}${formatNumber(comparison.percentFromMedian, locale, 0)}`,
+            })
+          : comparison.percentOfAnchor != null
+            ? t('result.percentOfAnchor', { percent: formatNumber(comparison.percentOfAnchor, locale, 0) })
+            : '—'
   return (
     <li className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2.5">
       <span className="min-w-0">

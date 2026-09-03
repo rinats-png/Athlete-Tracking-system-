@@ -1060,7 +1060,8 @@
       "no_sex": "Ohne Geschlecht passt keine Referenzgruppe.",
       "no_age": "Ohne Geburtsdatum passt keine Altersklasse.",
       "no_reference": "Für diesen Test liegt keine belastbare Referenz vor. Der Wert bleibt vergleichbar mit dir selbst.",
-      "anchor_only": "Die Quelle nennt nur einen Bezugswert, keine Verteilung — daraus lässt sich ein Abstand zeigen, aber keine Stufe."
+      "anchor_only": "Die Quelle nennt nur einen Bezugswert, keine Verteilung — daraus lässt sich ein Abstand zeigen, aber keine Stufe.",
+      "median_only": "Die Quelle nennt nur den Median der Gruppe, keine Streuung — daraus lässt sich ein Abstand zeigen, aber keine Stufe."
     },
     "basisPercentile": "aus Perzentil {{percentile}} gegenüber {{group}}",
     "basisBand": "aus dem Band «{{band}}» der Quelle, gegenüber {{group}}",
@@ -1074,6 +1075,7 @@
     "profileTitle": "Performance-Profil",
     "profileHint": "0–100 je Achse, aus dem Perzentil gegenüber der passenden Referenz. Der Messwert selbst bleibt überall sichtbar.",
     "axisNoRating": "Keine zuverlässige Bewertung möglich",
+    "axisNoRatingShort": "keine Referenz",
     "axisUnmeasured": "noch nicht gemessen",
     "strengths": "Deine Stärken",
     "noStrengths": "Für Stärken braucht es mindestens drei belegte Achsen.",
@@ -1267,6 +1269,8 @@
     "band": "Band der Quelle",
     "sdFromMean": "{{sd}} SD vom Gruppenmittel",
     "percentOfAnchor": "{{percent}} % des Bezugswerts",
+    "groupMedian": "Median der Gruppe",
+    "percentFromMedian": "{{percent}} % gegenüber dem Median",
     "percentile": "Perzentil {{percentile}}",
     "society": "Gesellschaftsvergleich",
     "societyHint": "Nur, wenn belastbare Daten vorliegen. Die App erzwingt keinen künstlichen Vergleich.",

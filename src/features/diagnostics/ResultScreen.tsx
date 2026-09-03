@@ -208,6 +208,13 @@ function ComparisonBlock({ comparison, valueLabel }: { comparison: ReferenceComp
   if (entry.method === 'anchor' && entry.anchor != null) {
     rows.push({ label: t('testInfo.anchor', { anchor: formatNumber(entry.anchor, locale, 1) }), value: t('result.percentOfAnchor', { percent: formatNumber(comparison.percentOfAnchor ?? 0, locale, 0) }) })
   }
+  if (entry.method === 'median' && entry.median != null) {
+    const percent = comparison.percentFromMedian
+    rows.push({
+      label: t('result.groupMedian'),
+      value: `${formatNumber(entry.median, locale, 1)}${percent == null ? '' : ` · ${t('result.percentFromMedian', { percent: `${percent > 0 ? '+' : ''}${formatNumber(percent, locale, 0)}` })}`}`,
+    })
+  }
   return (
     <div className="px-4 py-3">
       <dl className="space-y-1 text-[13px]">
