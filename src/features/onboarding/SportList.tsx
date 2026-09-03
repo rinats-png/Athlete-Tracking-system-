@@ -74,7 +74,7 @@ export function SportList({
   }
 
   return (
-    <div className="flex min-h-0 flex-col">
+    <div className="flex h-full min-h-0 flex-col">
       <label className="flex h-12 shrink-0 items-center gap-2 border border-line bg-surface-sunken px-3">
         <Search size={16} className="shrink-0 text-ink-muted" aria-hidden />
         <span className="sr-only">{t('onboarding.sport.search')}</span>

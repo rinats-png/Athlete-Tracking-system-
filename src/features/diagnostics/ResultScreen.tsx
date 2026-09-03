@@ -6,11 +6,12 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { RatingScale, RatingWord } from '@/features/shared/RatingScale'
+import { BenchmarkRow, percentileLabel } from '@/features/shared/BenchmarkRow'
 import { useLocale } from '@/features/shared/useLocale'
 import { ratingContextOf } from '@/features/shared/profileContext'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { getTest } from '@/data/testCatalog'
-import { rateResult, ratingFromPercentile, ratingFromBand } from '@/domain/rating'
+import { rateResult } from '@/domain/rating'
 import { assessQuality } from '@/domain/dataQuality'
 import { nextTests } from '@/domain/nextTest'
 import { formulaFor } from '@/domain/formulaRegistry'
@@ -188,11 +189,6 @@ export function ResultScreen() {
   )
 }
 
-/** Perzentile über 99 werden nicht als «100» gezeigt: das Perzentil ist geklemmt, nicht gemessen. */
-function percentileLabel(percentile: number, locale: 'de' | 'en'): string {
-  return percentile >= 99.5 ? '>99' : formatNumber(percentile, locale, 0)
-}
-
 /** Dein Wert gegen Mittel, Untergrenze und Elitebereich der Gruppe. */
 function ComparisonBlock({ comparison, valueLabel }: { comparison: ReferenceComparison; valueLabel: string }) {
   const { t } = useTranslation()
@@ -228,40 +224,5 @@ function ComparisonBlock({ comparison, valueLabel }: { comparison: ReferenceComp
         {entry.protocolNote && <span className="block">{t('result.protocolNote', { note: entry.protocolNote[locale] })}</span>}
       </p>
     </div>
-  )
-}
-
-function BenchmarkRow({ comparison }: { comparison: ReferenceComparison }) {
-  const { t } = useTranslation()
-  const locale = useLocale()
-  const { entry } = comparison
-  const level = comparison.percentile != null ? ratingFromPercentile(comparison.percentile) : comparison.band ? ratingFromBand(comparison) : null
-  const figure =
-    comparison.percentile != null
-      ? comparison.percentile >= 99.5
-        ? t('result.percentileTop')
-        : t('result.percentile', { percentile: percentileLabel(comparison.percentile, locale) })
-      : comparison.band
-        ? comparison.band.label[locale]
-        : comparison.percentOfAnchor != null
-          ? t('result.percentOfAnchor', { percent: formatNumber(comparison.percentOfAnchor, locale, 0) })
-          : '—'
-  return (
-    <li className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2.5">
-      <span className="min-w-0">
-        <span className="label-tag">{t(`result.groups.${entry.cohort}`)}</span>
-        <span className="block text-[13px]">{entry.cohortLabel[locale]}</span>
-        <span className="block text-[11px] text-ink-muted">
-          {t('result.quality', { quality: entry.quality })} · {entry.source.study}
-        </span>
-      </span>
-      <span className="flex items-center gap-3">
-        {comparison.sdFromMean != null && (
-          <span className="text-[12px] text-ink-secondary">{t('result.sdFromMean', { sd: formatNumber(comparison.sdFromMean, locale, 1) })}</span>
-        )}
-        <span className="readout text-[14px]">{figure}</span>
-        <RatingWord level={level} />
-      </span>
-    </li>
   )
 }

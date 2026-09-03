@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { AthleteContext } from './AthleteContext'
+import { SportsPanel } from './SportsPanel'
+import { GoalPanel } from './GoalPanel'
+import { Link } from 'react-router-dom'
 import { BodyCompositionPanel } from './BodyCompositionPanel'
 import { BrandingSettings } from './BrandingSettings'
 import { AthleteNotes } from '@/features/coach/AthleteNotes'
@@ -289,6 +292,22 @@ export function ProfileScreen() {
                   </Button>
                 )}
               </div>
+            </div>
+          </Panel>
+
+          <SportsPanel />
+
+          <GoalPanel />
+
+          <Panel>
+            <PanelHeader title={t('historyHome.reminders')} />
+            <div className="flex flex-wrap gap-2 px-4 py-3">
+              <Button asChild variant="outline" size="sm">
+                <Link to="/verlauf/erinnerungen">{t('profile.remindersLink')}</Link>
+              </Button>
+              <Button asChild variant="outline" size="sm">
+                <Link to="/trainer">{t('profile.coachLink')}</Link>
+              </Button>
             </div>
           </Panel>
 

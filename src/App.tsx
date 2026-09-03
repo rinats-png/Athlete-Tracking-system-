@@ -11,7 +11,11 @@ import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
 import { TestRunScreen } from '@/features/tests/TestRunScreen'
 import { TestDetailScreen } from '@/features/tests/TestDetailScreen'
 import { HistoryScreen } from '@/features/history/HistoryScreen'
-import { AnalysisScreen } from '@/features/analysis/AnalysisScreen'
+import { HistoryHome } from '@/features/history/HistoryHome'
+import { CalendarScreen } from '@/features/history/CalendarScreen'
+import { RemindersScreen } from '@/features/history/RemindersScreen'
+import { AnalysisHome } from '@/features/analysis/AnalysisHome'
+import { CommunityScreen } from '@/features/analysis/CommunityScreen'
 import { CoachScreen } from '@/features/coach/CoachScreen'
 import { ReportScreen } from '@/features/report/ReportScreen'
 import { AssessmentListScreen } from '@/features/assessments/AssessmentListScreen'
@@ -53,8 +57,13 @@ const router = createBrowserRouter([
       { path: 'tests', element: <TestCatalogScreen /> },
       { path: 'tests/:slug', element: <TestRunScreen /> },
       { path: 'tests/:slug/details', element: <TestDetailScreen /> },
-      { path: 'verlauf', element: <HistoryScreen /> },
-      { path: 'analyse', element: <AnalysisScreen /> },
+      { path: 'verlauf', element: <HistoryHome /> },
+      { path: 'verlauf/test/:slug', element: <HistoryHome /> },
+      { path: 'verlauf/werte', element: <HistoryScreen /> },
+      { path: 'verlauf/kalender', element: <CalendarScreen /> },
+      { path: 'verlauf/erinnerungen', element: <RemindersScreen /> },
+      { path: 'analyse', element: <AnalysisHome /> },
+      { path: 'community', element: <CommunityScreen /> },
       { path: 'trainer', element: <CoachScreen /> },
       { path: 'bericht', element: <ReportScreen /> },
       { path: 'bericht/:id', element: <ReportScreen /> },

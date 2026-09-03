@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { PERFORMANCE_LEVELS, DOMINANT_SIDES } from '@/types/domain'
-import { DisciplinePicker } from './DisciplinePicker'
 
 /**
  * Sportlicher Kontext des Athleten.
@@ -48,8 +47,6 @@ export function AthleteContext() {
               : t('profile.levelWhy')}
           </span>
         </label>
-
-        <DisciplinePicker />
 
         <label className="block">
           <span className="label-tag">{t('profile.sport')}</span>

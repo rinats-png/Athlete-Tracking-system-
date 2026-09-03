@@ -2,9 +2,6 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowDown, ArrowRight, ArrowUp, Minus } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
-import { EmptyState } from '@/components/ui/EmptyState'
-import { Button } from '@/components/ui/Button'
-import { Link } from 'react-router-dom'
 import { ConfidencePanel } from './ConfidencePanel'
 import { CoveragePanel } from './CoveragePanel'
 import { InsightsPanel } from './InsightsPanel'
@@ -43,7 +40,7 @@ import type { AppLocale } from '@/types/domain'
  * Abstand von zehn Tagen ist Rauschen, und wer das erst hinterher erfährt,
  * hat die Zahl schon geglaubt.
  */
-export function AnalysisScreen() {
+export function AnalysisDeepDive() {
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const { data } = useAppData()
@@ -78,31 +75,8 @@ export function AnalysisScreen() {
     [data, beforeId, afterId],
   )
 
-  if (data.results.length === 0) {
-    return (
-      <EmptyState
-        title={t('analysis.emptyTitle')}
-        body={t('analysis.emptyBody')}
-        action={
-          <Button asChild variant="primary" size="md">
-            <Link to="/diagnostik/neu">{t('assessments.new')}</Link>
-          </Button>
-        }
-      />
-    )
-  }
-
   return (
     <>
-      <header className="mb-4">
-        <h1 className="font-display text-[28px] leading-tight font-bold sm:text-[34px]">
-          {t('analysis.title')}
-        </h1>
-        <p className="mt-1.5 max-w-[62ch] text-[14px] leading-relaxed text-ink-secondary">
-          {t('analysis.intro')}
-        </p>
-      </header>
-
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <ConfidencePanel confidence={confidence} />
         <CoveragePanel coverage={coverage} />
