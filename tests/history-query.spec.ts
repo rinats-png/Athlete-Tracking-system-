@@ -172,7 +172,7 @@ test.describe("Festgelegter Termin", () => {
 test.describe("In der Oberfläche", () => {
   test("Filter, Suche und Bestleistungen stehen im Verlauf", async ({ page }) => {
     await openDemo(page);
-    await page.goto("/verlauf", { waitUntil: "domcontentloaded" });
+    await page.goto("/verlauf/werte", { waitUntil: "domcontentloaded" });
 
     await expect(page.getByLabel("Suche")).toBeVisible();
     await expect(page.getByLabel("Kategorie")).toBeVisible();

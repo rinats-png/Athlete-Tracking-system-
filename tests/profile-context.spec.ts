@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { DISCIPLINES } from "../src/data/sportProfiles";
 import { openGuest, openDemo } from "./helpers";
 import { bodyComposition, compositionChange } from "../src/domain/bodyComposition";
 import {
@@ -200,48 +201,23 @@ test.describe("Profil in der Oberfläche", () => {
     await expect(page.getByLabel("Trainingsalter (Jahre)")).toHaveValue("12");
   });
 
-  test("jede einzelne Sportart steht in einem Menü", async ({ page }) => {
-    // Vorher standen hier zwei Menüs, das zweite gesperrt bis zur Antwort auf
-    // das erste. Wer das Profil öffnete, sah sieben Oberbegriffe und keine
-    // einzige Sportart — «Kampfsport» ist aber nicht das, was jemand über sich
-    // sagen will.
+  test("jede einzelne Sportart steht in der Liste — und die Wahl überlebt einen Reload", async ({ page }) => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-
-    const menu = page.getByLabel("Sportart / Disziplin");
-    await expect(menu).toBeEnabled();
-    await expect(menu).toHaveValue("");
-    // Alle 39 Disziplinen plus «Keine Angabe».
-    await expect(menu.locator("option")).toHaveCount(40);
-    // Nach Bereichen gruppiert, damit die Liste sortiert bleibt.
-    await expect(menu.locator("optgroup")).toHaveCount(7);
-    await expect(menu.locator("option", { hasText: "Judo" })).toHaveCount(1);
-    await expect(menu.locator("option", { hasText: "Ringen" })).toHaveCount(1);
-    await expect(menu.locator("option", { hasText: "Bahnradsport" })).toHaveCount(1);
-
-    await menu.selectOption("judo");
+    await page.getByRole("button", { name: "Hauptsportart ändern" }).click();
+    // Alle Disziplinen auf einmal, nach Bereichen gruppiert.
+    await expect(page.getByRole("button", { name: /Kerntests?$/ })).toHaveCount(DISCIPLINES.length);
+    await page.getByRole("button", { name: /^Judo/ }).click();
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.getByLabel("Sportart / Disziplin")).toHaveValue("judo");
-  });
-
-  test("die Auswahl zeigt sofort, welche Tests sie bedeutet", async ({ page }) => {
-    await openGuest(page);
-    await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    await page.getByLabel("Sportart / Disziplin").selectOption("judo");
-
-    // Ohne diese Liste wäre die Wahl eine Behauptung ohne sichtbare Folge.
-    await expect(page.getByText("Special Judo Fitness Test")).toBeVisible();
-    await expect(page.getByText(/Kerntests? für diese Disziplin/)).toBeVisible();
-    // Und je Zeile, woher der Test kommt.
-    await expect(page.getByText("aus der Quellliste").first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "Judo" })).toBeVisible();
   });
 
   test("der Sportbereich wird abgeleitet und nicht gefragt", async ({ page }) => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    // Eine Angabe, die sich aus einer anderen ergibt, ist keine zweite Frage wert.
     await expect(page.getByLabel("Sportbereich")).toHaveCount(0);
-    await page.getByLabel("Sportart / Disziplin").selectOption("marathon");
+    await page.getByRole("button", { name: "Hauptsportart ändern" }).click();
+    await page.getByRole("button", { name: /^Marathon/ }).click();
     const stored = await page.evaluate(() => localStorage.getItem("baseline.data.v1"));
     expect(stored).toContain('"sportCategoryId":"running"');
     expect(stored).toContain('"disciplineId":"marathon"');
@@ -250,7 +226,8 @@ test.describe("Profil in der Oberfläche", () => {
   test("die gewählte Disziplin steht als Vorschlag im Terminentwurf", async ({ page }) => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    await page.getByLabel("Sportart / Disziplin").selectOption("judo");
+    await page.getByRole("button", { name: "Hauptsportart ändern" }).click();
+    await page.getByRole("button", { name: /^Judo/ }).click();
 
     await page.goto("/diagnostik/neu", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Vorschlag").first()).toBeVisible();

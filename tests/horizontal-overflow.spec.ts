@@ -52,10 +52,13 @@ test.describe("Seitliches Überlaufen", () => {
     // Die Sportartauswahl führt die längsten Texte der App: Disziplinnamen,
     // Begründung und Testliste stehen dort untereinander.
     await openGuest(page);
+    await page.evaluate(() => {
+      const store = JSON.parse(localStorage.getItem("baseline.data.v1") ?? "{}");
+      Object.assign(store.athletes[0].profile, { disciplineId: "special_forces", sportCategoryId: "tactical" });
+      localStorage.setItem("baseline.data.v1", JSON.stringify(store));
+    });
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    await page
-      .getByLabel(/Sportart \/ Disziplin|Sport \/ discipline/)
-      .selectOption("special_forces");
+    await page.getByRole("button", { name: "Hauptsportart ändern" }).click();
     await page.waitForTimeout(200);
     const { scrollWidth, clientWidth } = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,

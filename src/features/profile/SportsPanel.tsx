@@ -46,7 +46,7 @@ export function SportsPanel() {
           <span className="label-tag">{t('profile.mainSport')}</span>
           <div className="mt-1 flex flex-wrap items-center justify-between gap-2">
             <span className="text-[16px] font-medium">
-              {main ? <Link to={`/sport/${main.id}`} className="hover:underline">{main.name[locale]}</Link> : '—'}
+              {main ? <Link to={`/sport/${main.id}`} className="inline-flex min-h-11 items-center hover:underline">{main.name[locale]}</Link> : '—'}
             </span>
             <Button variant="outline" size="sm" onClick={() => setEditing(editing === 'main' ? null : 'main')}>
               {editing === 'main' ? t('actions.cancel') : t('profile.changeMain')}
@@ -65,9 +65,9 @@ export function SportsPanel() {
           ) : (
             <ul className="mt-1 flex flex-wrap gap-2">
               {additional.map((d) => (
-                <li key={d.id} className="flex items-center gap-1 border border-line px-2 py-1 text-[13px]">
-                  <Link to={`/sport/${d.id}`} className="hover:underline">{d.name[locale]}</Link>
-                  <button type="button" aria-label={`${t('profile.remove')}: ${d.name[locale]}`} onClick={() => toggleAdditional(d.id)} className="ml-1 flex size-6 items-center justify-center text-ink-muted hover:text-ink">
+                <li key={d.id} className="flex items-center gap-1 border border-line pl-3 text-[13px]">
+                  <Link to={`/sport/${d.id}`} className="inline-flex min-h-11 items-center hover:underline">{d.name[locale]}</Link>
+                  <button type="button" aria-label={`${t('profile.remove')}: ${d.name[locale]}`} onClick={() => toggleAdditional(d.id)} className="ml-1 flex size-11 items-center justify-center text-ink-muted hover:text-ink">
                     <X size={12} aria-hidden />
                   </button>
                 </li>

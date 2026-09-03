@@ -56,7 +56,7 @@ test.describe('Navigation dauerhaft erreichbar', () => {
       nav?.setAttribute('data-probe', 'original')
     })
 
-    for (const label of [/^Diagnostik$/, /^Verlauf$/, /^Profil$/, /^Start$/]) {
+    for (const label of [/^Diagnostik$/, /^Verlauf$/, /^Profil$/, /^Übersicht$/]) {
       await page.getByRole('button', { name: label }).first().click()
       await page.waitForTimeout(150)
       const still = await page.evaluate(() => {

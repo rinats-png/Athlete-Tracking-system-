@@ -154,7 +154,7 @@ test.describe("Messbedingungen", () => {
 
     await page.getByLabel(/^Zeit|Dauer/).first().fill("4.2");
     await page.getByRole("button", { name: "Ergebnis speichern" }).click();
-    await page.waitForURL("**/verlauf");
+    await page.waitForURL("**/ergebnis/**");
 
     const raw = await readStore(page);
     expect(raw).toContain("Tartanbahn");
@@ -166,7 +166,7 @@ test.describe("Messbedingungen", () => {
     await page.goto("/tests/sprint_30m", { waitUntil: "domcontentloaded" });
     await page.getByLabel(/^Zeit|Dauer/).first().fill("4.2");
     await page.getByRole("button", { name: "Ergebnis speichern" }).click();
-    await page.waitForURL("**/verlauf");
+    await page.waitForURL("**/ergebnis/**");
 
     const raw = await readStore(page);
     expect(raw).toContain('"surface":""');

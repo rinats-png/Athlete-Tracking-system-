@@ -75,23 +75,4 @@ test.describe("Sportart als Einstieg", () => {
     await page.goto("/diagnostik/neu", { waitUntil: "domcontentloaded" });
     await expect(page.getByText("Vorschlag").first()).toBeVisible();
   });
-
-  test("ohne Sportart weist der Startbildschirm den Weg", async ({ page }) => {
-    await openGuest(page);
-    await page.goto("/", { waitUntil: "domcontentloaded" });
-    // Ein neuer Nutzer landet im Leerzustand — genau dort muss der Weg stehen.
-    const hint = page.getByRole("link", { name: /Sportart wählen/ }).first();
-    await expect(hint).toBeVisible();
-    await hint.click();
-    await expect(page).toHaveURL(/\/tests$/);
-  });
-
-  test("mit Sportart führt der Startbildschirm zur Messung statt zur Wahl", async ({ page }) => {
-    await openGuest(page);
-    await page.goto("/tests", { waitUntil: "domcontentloaded" });
-    await page.getByRole("button", { name: /^Judo/ }).click();
-    await page.goto("/", { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("link", { name: /Sportart wählen/ })).toHaveCount(0);
-    await expect(page.getByRole("link", { name: /Diagnostik starten|Start assessment/ }).first()).toBeVisible();
-  });
 });

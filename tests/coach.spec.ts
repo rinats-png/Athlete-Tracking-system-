@@ -28,7 +28,7 @@ test.describe('Trainermodus', () => {
     await page.goto('/tests/standing_broad_jump', { waitUntil: 'domcontentloaded' })
     await page.getByLabel(/Sprungweite|Weite|Distanz/).first().fill('2.40')
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
-    await page.waitForURL('**/verlauf')
+    await page.waitForURL('**/ergebnis/**')
     await expect(page.getByText(/240\s*cm/).first()).toBeVisible()
 
     // Zweiter Athlet: eigener, leerer Bestand.

@@ -278,7 +278,7 @@ test.describe('Analyse-Bildschirm', () => {
     await openDemo(page)
     await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
 
-    await expect(page.getByRole('heading', { name: 'Analyse', level: 1 })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1, name: /Wo bin ich stark/ })).toBeVisible()
 
     // Die Belastbarkeit steht nicht als nackte Zahl da, sondern mit ihren
     // vier Bestandteilen — sonst müsste man ihr blind glauben.

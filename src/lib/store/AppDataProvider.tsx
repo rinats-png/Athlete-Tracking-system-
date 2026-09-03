@@ -295,7 +295,14 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         }
       },
       addAthlete: (name) => {
-        const athlete = { ...emptyAthlete(newId()), name: name.trim().slice(0, 120) }
+        const base = emptyAthlete(newId())
+        // Ein vom Trainer angelegter Kunde gilt als eingerichtet: seine
+        // Angaben kommen aus dem Profil, nicht aus dem Einstieg.
+        const athlete = {
+          ...base,
+          name: name.trim().slice(0, 120),
+          profile: { ...base.profile, onboardingCompletedAt: new Date().toISOString() },
+        }
         // Ein neu angelegter Athlet wird sofort der aktive: alles andere wäre
         // ein zusätzlicher Klick für den einzigen sinnvollen nächsten Schritt.
         commitStore({

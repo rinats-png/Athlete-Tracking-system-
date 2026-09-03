@@ -32,16 +32,18 @@ test.describe('Auslieferung', () => {
     })
 
     await openDemo(page)
+    await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
 
     // Auf das Diagramm warten statt auf `networkidle`: der Service Worker
     // hält die Verbindung offen, und unter Volllast lief die Wartezeit ins
     // Zeitlimit, obwohl das Diagramm längst da war.
-    await expect(page.getByRole('img', { name: /Leistungsprofil/ })).toBeVisible()
+    await expect(page.getByRole('img', { name: /Leistungsprofil/ }).first()).toBeVisible()
     expect(requested.length).toBeGreaterThan(0)
   })
 
   test('das Nachladen verschiebt das Layout nicht', async ({ page }) => {
     await openDemo(page)
+    await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
 
     // Erst die Schriften abwarten. Sie liegen lokal im Bündel, kommen unter
     // Volllast aber später als das Diagramm; der Wechsel von der Ersatz- auf
@@ -56,7 +58,7 @@ test.describe('Auslieferung', () => {
     await probe.waitFor()
     const before = await probe.boundingBox()
 
-    await expect(page.getByRole('img', { name: /Leistungsprofil/ })).toBeVisible()
+    await expect(page.getByRole('img', { name: /Leistungsprofil/ }).first()).toBeVisible()
     const after = await probe.boundingBox()
 
     // Der Platzhalter hat exakt die Höhe des Diagramms — sonst wandern die
@@ -79,10 +81,11 @@ test.describe('Auslieferung', () => {
     // deshalb die Zusage, die in beiden Fällen gelten muss.
     await page.route(/\/assets\/echarts-[^/]*\.js$/, (route) => route.abort())
     await openDemo(page)
+    await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
 
     // Die Seite lebt.
     await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
-    await expect(page.getByText('Leistungsprofil').first()).toBeVisible()
+    await expect(page.getByText('Performance-Profil').first()).toBeVisible()
 
     // Und der Weg zu den Zahlen funktioniert ohne die Bibliothek.
     await page.getByRole('button', { name: /Als Tabelle/ }).first().click()

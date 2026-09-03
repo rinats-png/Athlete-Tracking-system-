@@ -57,8 +57,8 @@ test.describe('Diagnostik', () => {
     await expect(page.getByText(/Noch offen:/)).toBeVisible()
     await expect(page.getByRole('cell', { name: /165|180/ }).first()).toBeVisible()
 
-    // 5. Der Termin steht in der Übersicht
-    await page.goto('/diagnostik', { waitUntil: 'domcontentloaded' })
+    // 5. Der Termin steht in der Terminliste
+    await page.goto('/diagnostik/termine', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Abgeschlossen')).toBeVisible()
   })
 

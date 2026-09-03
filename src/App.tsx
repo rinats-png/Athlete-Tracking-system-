@@ -99,10 +99,12 @@ export default function App() {
  * und «alles löschen» führt ehrlich wieder durch den Einstieg.
  */
 function OnboardingGate() {
-  const { data } = useAppData()
+  const { data, role } = useAppData()
   const [target, setTarget] = useState<'overview' | 'tests' | null>(null)
 
-  if (data.profile.onboardingCompletedAt == null) {
+  // Im Trainermodus trägt der Trainer die Angaben seiner Kunden im Profil
+  // ein; ein Einstieg je Kunde wäre ein Fragebogen an die falsche Person.
+  if (role === 'solo' && data.profile.onboardingCompletedAt == null) {
     return <OnboardingFlow onDone={setTarget} />
   }
   if (target === 'tests' && window.location.pathname !== '/diagnostik') {

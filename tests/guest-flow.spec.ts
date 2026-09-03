@@ -11,8 +11,8 @@ test.describe('Gastmodus', () => {
   test('kompletter Durchlauf: Profil, Test, Verlauf, Löschen', async ({ page }) => {
     await openGuest(page)
 
-    // Leerzustand statt leerem Diagramm
-    await expect(page.getByText(/Noch keine Messung/)).toBeVisible()
+    // Leerzustand: die Tests zum Start statt eines leeren Diagramms
+    await expect(page.getByText('Zum Start empfohlen')).toBeVisible()
 
     // 1. Profil anlegen — für Relativkraft und Perzentile nötig
     await page.goto('/profil', { waitUntil: 'domcontentloaded' })
@@ -35,15 +35,16 @@ test.describe('Gastmodus', () => {
     await expect(page.getByText('Relativkraft')).toBeVisible()
 
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
-    await page.waitForURL('**/verlauf')
+    await page.waitForURL('**/ergebnis/**')
 
-    // 4. Ergebnis ist im Verlauf
+    // 4. Die Auswertung steht — mit dem Wert
     await expect(page.getByText('Kniebeuge (Back Squat) 1RM').first()).toBeVisible()
+    await expect(page.getByText('Dein Wert')).toBeVisible()
 
-    // 5. Und im Dashboard entsteht ein Profil
+    // 5. Und in der Übersicht entsteht ein Profil
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Testperson')).toBeVisible()
-    await expect(page.getByText(/Baseline-Index/i).first()).toBeVisible()
+    await expect(page.getByText('Performance-Profil').first()).toBeVisible()
 
     // 6. Daten überleben einen Reload — sie liegen lokal
     await page.reload({ waitUntil: 'domcontentloaded' })
@@ -53,8 +54,8 @@ test.describe('Gastmodus', () => {
     await page.goto('/profil', { waitUntil: 'domcontentloaded' })
     await page.getByRole('button', { name: 'Alle Daten löschen' }).click()
     await page.getByRole('button', { name: 'Ja, löschen' }).click()
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByText(/Noch keine Messung/)).toBeVisible()
+    // Ein leerer Bestand führt ehrlich wieder durch den Einstieg.
+    await expect(page.getByText('Schritt 2 von 6')).toBeVisible()
   })
 
   test('es werden keine Netzwerkanfragen an Fremdziele gestellt', async ({ page }) => {
@@ -70,7 +71,7 @@ test.describe('Gastmodus', () => {
     await page.goto('/tests/cooper_12min', { waitUntil: 'domcontentloaded' })
     await page.getByLabel(/^Distanz/).fill('3200')
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
-    await page.waitForURL('**/verlauf')
+    await page.waitForURL('**/ergebnis/**')
 
     // Die Zusage des Gastmodus: nichts verlässt das Gerät.
     expect(external, 'keine Übertragung an Dritte').toEqual([])

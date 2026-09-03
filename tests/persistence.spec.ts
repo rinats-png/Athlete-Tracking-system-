@@ -270,7 +270,7 @@ test.describe("Import in der Oberfläche", () => {
       .first()
       .fill("2.40");
     await page.getByRole("button", { name: "Ergebnis speichern" }).click();
-    await page.waitForURL("**/verlauf");
+    await page.waitForURL("**/ergebnis/**");
 
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
     await page.getByLabel("Importieren").setInputFiles({

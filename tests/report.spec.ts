@@ -175,7 +175,7 @@ test.describe("Bericht: Aufbau (§33)", () => {
 
   test("ein Folgetermin wird gegen seinen Vorgänger gestellt", async ({ page }) => {
     await openDemo(page);
-    await page.goto("/diagnostik", { waitUntil: "domcontentloaded" });
+    await page.goto("/diagnostik/termine", { waitUntil: "domcontentloaded" });
 
     // Der Demobestand hat mehrere abgeschlossene Termine — der jüngste muss
     // einen Vorgängervergleich zeigen.
