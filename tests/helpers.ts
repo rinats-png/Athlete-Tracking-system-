@@ -31,6 +31,10 @@ async function resetState(page: Page) {
     localStorage.clear()
     localStorage.setItem('baseline.theme', 'dark')
     localStorage.setItem('baseline.locale', 'de')
+    // Die Intro-Sequenz gehört zum Öffnen der App durch einen Menschen,
+    // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
+    // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
+    localStorage.setItem('baseline.intro', 'off')
     localStorage.setItem('baseline.data.v1', JSON.stringify(store))
   }, seeded)
   await page.reload({ waitUntil: 'domcontentloaded' })
@@ -54,6 +58,10 @@ export async function openFirstRun(page: Page) {
     localStorage.clear()
     localStorage.setItem('baseline.theme', 'dark')
     localStorage.setItem('baseline.locale', 'de')
+    // Die Intro-Sequenz gehört zum Öffnen der App durch einen Menschen,
+    // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
+    // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
+    localStorage.setItem('baseline.intro', 'off')
   })
   await page.reload({ waitUntil: 'domcontentloaded' })
   await page.getByRole('button', { name: /Ohne Konto starten/ }).click()

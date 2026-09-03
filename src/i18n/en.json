@@ -1648,5 +1648,13 @@
       "assessment": "Session",
       "now": "Today"
     }
+  },
+  "intro": {
+    "label": "Intro sequence",
+    "tagline": "Measure · Place · Understand · Develop",
+    "skip": "Skip",
+    "notMeasured": "not measured yet",
+    "setting": "Sequence on opening",
+    "settingHint": "The short intro sequence when the app starts. It runs at most once per session and can always be skipped."
   }
 }

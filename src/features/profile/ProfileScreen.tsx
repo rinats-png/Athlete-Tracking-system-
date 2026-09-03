@@ -18,6 +18,7 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { provisionalFormulas } from '@/domain/formulaRegistry'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { introEnabled, setIntroEnabled } from '@/features/intro/introPreference'
 import { ageFromBirthDate, formatDate } from '@/lib/format'
 import type { AppLocale, Sex } from '@/types/domain'
 
@@ -31,6 +32,7 @@ export function ProfileScreen() {
   const [weight, setWeight] = useState<number | null>(latestWeight?.bodyWeightKg ?? null)
   const [confirmReset, setConfirmReset] = useState(false)
   const [importError, setImportError] = useState<string | null>(null)
+  const [intro, setIntro] = useState(() => introEnabled())
 
   const age = ageFromBirthDate(data.profile.birthDate)
 
@@ -228,6 +230,24 @@ export function ProfileScreen() {
                 <ShieldCheck size={16} className="mt-px shrink-0 text-accent-text" aria-hidden />
                 <span>{t('profile.privacy')}</span>
               </p>
+
+              <label className="flex min-h-11 items-start gap-3 text-[13px]">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 size-5 shrink-0"
+                  checked={intro}
+                  onChange={(e) => {
+                    setIntroEnabled(e.target.checked)
+                    setIntro(e.target.checked)
+                  }}
+                />
+                <span>
+                  {t('intro.setting')}
+                  <span className="mt-1 block text-[12px] leading-relaxed text-ink-muted">
+                    {t('intro.settingHint')}
+                  </span>
+                </span>
+              </label>
 
               <p>
                 <Button

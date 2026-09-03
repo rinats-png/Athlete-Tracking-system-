@@ -6,6 +6,8 @@ import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
 import { OnboardingFlow } from '@/features/onboarding/OnboardingFlow'
 import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
+import { IntroSequence } from '@/features/intro/IntroSequence'
+import { introEnabled, introSeenThisSession, markIntroSeen } from '@/features/intro/introPreference'
 
 /**
  * Einstiegspunkt.
@@ -84,11 +86,28 @@ const router = createBrowserRouter([
 
 export default function App() {
   const [mode, setMode] = useState<AppMode | null>(() => readMode())
+  const [intro, setIntro] = useState(() => introEnabled() && !introSeenThisSession())
 
   const enter = useCallback((next: AppMode) => {
     writeMode(next)
     setMode(next)
   }, [])
+
+  /*
+   * Die Sequenz steht ganz vorn: vor der Wahl zwischen Gast und Demo, vor
+   * dem Einstieg, vor dem Router. Sie ist der Moment, in dem die App sagt,
+   * was sie ist — und danach ist man da, wo man ohne sie auch gewesen wäre.
+   */
+  if (intro) {
+    return (
+      <IntroSequence
+        onDone={() => {
+          markIntroSeen()
+          setIntro(false)
+        }}
+      />
+    )
+  }
 
   if (!mode) {
     return <WelcomeScreen onEnter={enter} />
