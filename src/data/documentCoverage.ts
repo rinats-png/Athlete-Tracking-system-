@@ -179,7 +179,7 @@ export function openGaps(): DocumentGap[] {
   return DOCUMENT_GAPS
 }
 
-export type Provenance = 'document' | 'addition' | 'unknown'
+export type Provenance = 'document' | 'concept' | 'addition' | 'unknown'
 
 /**
  * Woher kommt die Zuordnung dieses Tests zu dieser Disziplin?
@@ -197,10 +197,12 @@ export function additionReason(disciplineId: string, slug: string): string | nul
   return entry?.provenance === 'addition' ? (entry.reason ?? null) : null
 }
 
-/** Die Bezeichnung im Dokument, sofern der Test von dort stammt. */
+/** Die Bezeichnung in der Quelle, sofern der Test aus Dokument oder Konzept stammt. */
 export function documentLabelOf(disciplineId: string, slug: string): string | null {
   const entry = disciplineById(disciplineId)?.tests.find((t) => t.slug === slug)
-  return entry?.provenance === 'document' ? (entry.documentLabel ?? null) : null
+  return entry?.provenance === 'document' || entry?.provenance === 'concept'
+    ? (entry.documentLabel ?? null)
+    : null
 }
 
 /** Disziplinen, für die das Dokument Tests nennt, die die App nicht hat. */

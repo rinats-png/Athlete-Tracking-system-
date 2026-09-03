@@ -77,6 +77,41 @@ test.describe("Migration", () => {
     expect(version).toBe(CURRENT_SCHEMA_VERSION);
   });
 
+  test("ein v10-Bestand bekommt Onboarding-Stand und Erinnerungen, ohne zu raten", () => {
+    const athlete = (id: string, disciplineId: string | null, results: StoredResult[]) => ({
+      id,
+      name: "",
+      profile: { firstName: id, locale: "de", disciplineId, sportCategoryId: null },
+      biometrics: [],
+      assessments: [],
+      results,
+      archived: false,
+      notes: "",
+      audit: [],
+      createdAt: "2025-02-01T00:00:00.000Z",
+    });
+    const v10 = {
+      version: 10,
+      branding: { organisation: "", logoDataUrl: null, footer: "" },
+      role: "solo",
+      activeAthleteId: "a",
+      athletes: [athlete("a", "judo", []), athlete("b", null, []), athlete("c", null, [result("r1")])],
+    };
+    const { data, report } = parseStoredData(v10);
+    expect(report.migratedFrom).toBe(10);
+    expect(report.rejected).toEqual([]);
+    const [a, b, c] = data!.athletes;
+    // Wer schon eine Sportart hat oder gemessen hat, war eingerichtet.
+    expect(a.profile.onboardingCompletedAt).toBe("2025-02-01T00:00:00.000Z");
+    expect(c.profile.onboardingCompletedAt).toBe("2025-02-01T00:00:00.000Z");
+    // Ein leerer Bestand bekommt den Einstieg beim nächsten Start.
+    expect(b.profile.onboardingCompletedAt).toBeNull();
+    expect(a.profile.additionalDisciplineIds).toEqual([]);
+    expect(a.profile.goalKey).toBeNull();
+    expect(a.profile.remindersEnabled).toBe(false);
+    expect(a.profile.reminderIntervalDays).toEqual({});
+  });
+
   test("ein v1-Bestand wird angehoben, ohne Ergebnisse zu verlieren", () => {
     const v1 = {
       version: 1,

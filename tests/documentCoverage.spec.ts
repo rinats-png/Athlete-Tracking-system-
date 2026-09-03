@@ -46,7 +46,7 @@ test.describe('Dokumentabdeckung', () => {
   test('ein Dokumenttest nennt seine Bezeichnung im Dokument', () => {
     // Ohne sie liesse sich die Zeile im Dokument nicht wiederfinden, und die
     // Herkunftsangabe wäre eine Behauptung ohne Beleg.
-    for (const entry of allTests.filter((e) => e.provenance === 'document')) {
+    for (const entry of allTests.filter((e) => e.provenance === 'document' || e.provenance === 'concept')) {
       const label = documentLabelOf(entry.discipline, entry.slug)
       expect(label, `${entry.discipline} → ${entry.slug}`).toBeTruthy()
       expect(label!.length, `${entry.discipline} → ${entry.slug}`).toBeGreaterThan(2)
@@ -71,9 +71,10 @@ test.describe('Dokumentabdeckung', () => {
   })
 
   test('eine Ergänzung trägt kein Profil — sie schärft es', () => {
-    // Was ein Profil trägt, stammt aus dem Dokument. Fiele diese Zusage,
-    // stünde eine eigene Entscheidung an der Stelle einer belegten.
-    const carried = allTests.filter((e) => e.role === 'core' && e.provenance !== 'document')
+    // Was ein Profil trägt, stammt aus einer Quelle: dem Zielgruppendokument
+    // oder dem Produktkonzept. Fiele diese Zusage, stünde eine eigene
+    // Entscheidung an der Stelle einer belegten.
+    const carried = allTests.filter((e) => e.role === 'core' && e.provenance === 'addition')
     expect(carried.map((e) => `${e.discipline} → ${e.slug}`)).toEqual([])
   })
 

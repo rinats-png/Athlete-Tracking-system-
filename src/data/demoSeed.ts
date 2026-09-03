@@ -104,6 +104,12 @@ export function buildDemoData(): StoredData {
     dominantSide: 'right',
     goal: 'Hybrid: Maxkraft halten, Ausdauer ausbauen',
     constraints: '',
+    // Der Demobestand zeigt, wie zwei Sportarten nebeneinander aussehen.
+    additionalDisciplineIds: ['half_marathon'],
+    goalKey: 'general_performance',
+    onboardingCompletedAt: '2025-01-05T09:00:00.000Z',
+    remindersEnabled: true,
+    reminderIntervalDays: {},
   }
 
   const biometrics: StoredBiometric[] = SESSIONS.map((s) => ({

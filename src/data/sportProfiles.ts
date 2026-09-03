@@ -48,8 +48,14 @@ export type SportCategoryId =
 export interface DisciplineTest {
   slug: string
   role: 'core' | 'optional'
-  provenance: 'document' | 'addition'
-  /** Nur bei `document`: die Bezeichnung im Dokument. */
+  /**
+   * `document` — das Zielgruppendokument nennt den Test.
+   * `concept`  — das Produktkonzept nennt ihn (Allgemeine Fitness, universelle
+   *              Tests wie Handgrip, VO₂max, CMJ, Sprint).
+   * `addition` — später hinzugefügt, mit Grund. Trägt nie ein Profil.
+   */
+  provenance: 'document' | 'concept' | 'addition'
+  /** Bei `document` und `concept`: die Bezeichnung in der Quelle. */
   documentLabel?: string
   /** Nur bei `addition`: warum dieser Test hinzugekommen ist. */
   reason?: string
@@ -59,6 +65,12 @@ const docCore = (slug: string, documentLabel: string): DisciplineTest => ({
   slug,
   role: 'core',
   provenance: 'document',
+  documentLabel,
+})
+const conceptCore = (slug: string, documentLabel: string): DisciplineTest => ({
+  slug,
+  role: 'core',
+  provenance: 'concept',
   documentLabel,
 })
 const docOptional = (slug: string, documentLabel: string): DisciplineTest => ({
@@ -550,6 +562,31 @@ const HYBRID: Discipline[] = [
     eventDurationSeconds: [300, 1800],
     typicalLimiter: 'strength_endurance',
     axisIds: ['strength_endurance', 'endurance', 'max_strength', 'power'],
+  },
+  {
+    id: 'general_fitness',
+    categoryId: 'hybrid',
+    name: { de: 'Allgemeine Fitness', en: 'General fitness' },
+    aliases: ['Fitness', 'Gesundheitssport', 'Ohne Sportart'],
+    rationale: {
+      de: 'Kein Wettkampf, aber die Frage «Wo stehe ich?» — sportartübergreifend. Getestet werden die vier Grössen, für die es die belastbarsten Referenzwerte über alle Bevölkerungsgruppen gibt: Griffkraft, aerobe Kapazität, Sprungkraft und Antritt.',
+      en: 'No competition, but the question "where do I stand?" — across sports. Tested are the four quantities with the most robust reference values across the general population: grip strength, aerobic capacity, jump power and acceleration.',
+    },
+    dimensionWeights: { endurance: 0.8, max_strength: 0.7, relative_strength: 0.7, strength_endurance: 0.7, power: 0.7, agility: 0.6 },
+    tests: [
+      conceptCore('grip_strength', 'Handgrip Strength'),
+      conceptCore('cooper_12min', 'VO₂max'),
+      conceptCore('countermovement_jump', 'CMJ'),
+      conceptCore('sprint_10m', 'Sprint'),
+      addedOptional('back_squat_1rm', 'Maximalkraft der Beinstreckung als Bezugsgrösse für alle Sprung- und Antrittswerte.'),
+      addedOptional('pull_up_max_reps', 'Zugkraft am eigenen Körpergewicht — die verbreitetste Kraftausdauerprobe ohne Gerät.'),
+      addedOptional('shuttle_5_10_5', 'Richtungswechsel unter Zeitdruck, die einzige Agilitätsprobe ohne Halle.'),
+      addedOptional('plank_hold', 'Isometrische Rumpfleistung als messbare Form der Rumpfausdauer.'),
+      addedOptional('run_5k', 'Ausdauer über eine Strecke, die jeder kennt und vergleichen kann.'),
+    ],
+    eventDurationSeconds: null,
+    typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'max_strength', 'relative_strength', 'strength_endurance', 'power', 'agility'],
   },
   {
     id: 'ocr',

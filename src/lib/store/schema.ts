@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 10
+export const CURRENT_SCHEMA_VERSION = 11
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -51,6 +51,22 @@ export const performanceLevelSchema = z.enum([
 /** Dominante Seite — bei Sprung- und Wurftests für die Einordnung relevant. */
 export const dominantSideSchema = z.enum(['left', 'right', 'ambidextrous'])
 
+/**
+ * Ziel des Nutzers (Konzept §3, Schritt 5). Eine Auswahl, kein Freitext:
+ * das Ziel steuert die Gewichtung des nächsten Testvorschlags, und eine
+ * Steuerung braucht Kennungen. Der Freitext `goal` bleibt daneben bestehen.
+ */
+export const goalKeySchema = z.enum([
+  'general_performance',
+  'competition',
+  'diagnostics',
+  'elite',
+  'hyrox',
+  'fitness',
+  'orientation',
+])
+export const GOAL_KEYS = goalKeySchema.options
+
 const profileSchema = z.object({
   firstName: z.string().max(80).default(''),
   lastName: z.string().max(80).nullable().default(null),
@@ -80,6 +96,23 @@ const profileSchema = z.object({
    */
   sportCategoryId: z.string().max(40).nullable().default(null),
   disciplineId: z.string().max(40).nullable().default(null),
+  /**
+   * Weitere Sportarten (Konzept §27). Die Hauptsportart bestimmt die
+   * Darstellung; diese bleiben verfügbar, ohne die Übersicht zu überladen.
+   */
+  additionalDisciplineIds: z.array(z.string().max(40)).max(10).default([]),
+  goalKey: goalKeySchema.nullable().default(null),
+  /**
+   * Wann das Onboarding abgeschlossen wurde. Null heisst: die App führt
+   * beim nächsten Start durch die Schritte. Ein Zeitpunkt statt eines
+   * Schalters, damit erkennbar bleibt, wie alt die Angaben sind.
+   */
+  onboardingCompletedAt: isoDate.nullable().default(null),
+  /** Erinnerungen an fällige Tests (Konzept §24). Standard aus, weil eine
+   *  Erinnerung, die niemand bestellt hat, eine Störung ist. */
+  remindersEnabled: z.boolean().default(false),
+  /** Wiederholungsabstand je Test in Tagen. Fehlt ein Test, gilt die Vorgabe. */
+  reminderIntervalDays: z.record(z.string(), finite.min(1).max(730)).default({}),
   performanceLevel: performanceLevelSchema.nullable().default(null),
   /** Jahre systematischen Trainings — nicht das Lebensalter. */
   trainingAgeYears: finite.min(0).max(70).nullable().default(null),
@@ -308,6 +341,7 @@ export type AttemptSelection = z.infer<typeof attemptSelectionSchema>
 export type ValidatedContext = z.infer<typeof contextSchema>
 export type ValidatedReadiness = z.infer<typeof readinessSchema>
 export type ValidatedAudit = z.infer<typeof auditSchema>
+export type GoalKey = z.infer<typeof goalKeySchema>
 
 // --- Migrationen -------------------------------------------------------------
 
@@ -478,6 +512,32 @@ export const MIGRATIONS: Migration[] = [
           // erhalten und steht in der Oberfläche weiterhin da.
           sportCategoryId: null,
           disciplineId: null,
+        },
+      })),
+    }),
+  },
+  {
+    from: 10,
+    to: 11,
+    describe: 'Weitere Sportarten, Ziel, Onboarding-Stand und Erinnerungen im Profil',
+    run: (data) => ({
+      ...data,
+      version: 11,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        profile: {
+          ...athlete.profile,
+          additionalDisciplineIds: [],
+          goalKey: null,
+          // Wer schon eine Sportart gewählt oder gemessen hat, wird nicht
+          // noch einmal durch den Einstieg geführt: der Bestand IST der
+          // Nachweis, dass die App eingerichtet war.
+          onboardingCompletedAt:
+            athlete.profile?.disciplineId || (athlete.results ?? []).length > 0
+              ? (athlete.createdAt ?? new Date().toISOString())
+              : null,
+          remindersEnabled: false,
+          reminderIntervalDays: {},
         },
       })),
     }),

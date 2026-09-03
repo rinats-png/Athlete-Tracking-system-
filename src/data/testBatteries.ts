@@ -18,6 +18,8 @@ import type { PerformanceDimension } from '@/types/domain'
 export interface TestBattery {
   slug: string
   testSlugs: string[]
+  /** Für welche Disziplinen die Batterie gedacht ist. Fehlt: allgemein. */
+  disciplineIds?: string[]
   /** Grob geschätzte Netto-Dauer inklusive Pausen, in Minuten. */
   durationMinutes: number
   name: { de: string; en: string }
@@ -25,6 +27,64 @@ export interface TestBattery {
 }
 
 export const TEST_BATTERIES: TestBattery[] = [
+  // --- Sportart-Checks (Konzept §10) -------------------------------------
+  {
+    slug: 'judo_performance_check',
+    disciplineIds: ['judo'],
+    testSlugs: [
+      'special_judo_fitness_test',
+      'grip_hang_time',
+      'pull_up_max_reps',
+      'grip_strength',
+      'cooper_12min',
+    ],
+    durationMinutes: 95,
+    name: { de: 'Judo Performance Check', en: 'Judo performance check' },
+    description: {
+      de: 'SJFT-Index und Würfe, Griffhaltezeit, Klimmzüge, Griffkraft, aerobe Kapazität. Die fünf Grössen, für die es im Judo publizierte Referenzen gibt.',
+      en: 'SJFT index and throws, grip hang time, pull-ups, grip strength, aerobic capacity. The five quantities with published judo references.',
+    },
+  },
+  {
+    slug: 'combat_athlete_check',
+    disciplineIds: ['judo', 'wrestling', 'bjj', 'boxing', 'kickboxing', 'taekwondo', 'mma', 'karate', 'ju_jutsu', 'pencak_silat', 'fencing'],
+    testSlugs: [
+      'grip_strength',
+      'countermovement_jump',
+      'sprint_10m',
+      'pull_up_max_reps',
+      'fatigue_circuit_4x30s',
+      'cooper_12min',
+    ],
+    durationMinutes: 110,
+    name: { de: 'Combat Athlete Check', en: 'Combat athlete check' },
+    description: {
+      de: 'Sportartübergreifend für Kampfsport: Griff, Explosivität, Antritt, Zugkraft, Wiederholbarkeit, Ausdauer.',
+      en: 'Across combat sports: grip, explosiveness, acceleration, pulling strength, repeatability, endurance.',
+    },
+  },
+  {
+    slug: 'running_performance_check',
+    disciplineIds: ['half_marathon', 'marathon', 'trail_running', 'ultramarathon'],
+    testSlugs: ['run_5k', 'threshold_run_30min', 'hr_drift_test', 'countermovement_jump'],
+    durationMinutes: 120,
+    name: { de: 'Running Performance Check', en: 'Running performance check' },
+    description: {
+      de: 'Renntempo, Schwellenpace, Dauerbelastbarkeit und Sprungkraft. An drei Tagen durchführen.',
+      en: 'Race pace, threshold pace, durability and jump power. Spread over three days.',
+    },
+  },
+  {
+    slug: 'hyrox_performance_check',
+    disciplineIds: ['hyrox'],
+    testSlugs: ['row_1000m', 'ski_erg_1000m', 'sled_push', 'wall_balls_75', 'burpee_broad_jump_80m', 'run_5k'],
+    durationMinutes: 140,
+    name: { de: 'HYROX Performance Check', en: 'HYROX performance check' },
+    description: {
+      de: 'Die Stationen, die im Rennen die Zeit machen, einzeln gemessen. Auf zwei Termine verteilen.',
+      en: 'The stations that decide the race, measured one by one. Spread over two sessions.',
+    },
+  },
   {
     slug: 'general_fitness',
     testSlugs: [
