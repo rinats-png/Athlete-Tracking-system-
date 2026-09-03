@@ -1,18 +1,43 @@
 import { cn } from '@/lib/utils'
 
 /**
- * Grundfläche des Systems. Rechteckig, Haarlinie, keine Schatten — die
- * Anmutung eines Messgerätegehäuses statt einer Material-Karte.
+ * Grundfläche des Systems.
+ *
+ * Drei Zustände, und jeder sagt etwas über den Inhalt:
+ *
+ *   (nichts)  Ebene 1 — die Fläche trägt Kontext und liegt ruhig.
+ *   float     Ebene 2 — die Fläche trägt einen Messwert und hebt sich ab.
+ *   lift      sie reagiert auf Berührung, weil sie anklickbar IST.
+ *
+ * `lift` ohne eine tatsächliche Aktion wäre eine Lüge über die
+ * Bedienbarkeit: eine Fläche, die sich hebt und nichts tut, wird angetippt.
  */
 export function Panel({
   className,
   ticked = false,
+  float = false,
+  lift = false,
   ...props
-}: React.HTMLAttributes<HTMLDivElement> & { ticked?: boolean }) {
+}: React.HTMLAttributes<HTMLDivElement> & {
+  ticked?: boolean
+  float?: boolean
+  lift?: boolean
+}) {
   // min-w-0: eine Fläche ist fast immer Kind eines Rasters. Ohne die Angabe
   // bestimmt ihr breitester Inhalt die Spaltenbreite, und ein einziger langer
   // Satz schiebt die ganze Seite seitlich aus dem Bildschirm.
-  return <div className={cn('panel min-w-0', ticked && 'panel-ticked', className)} {...props} />
+  return (
+    <div
+      className={cn(
+        'panel min-w-0',
+        ticked && 'panel-ticked',
+        float && 'float',
+        lift && 'float-lift',
+        className,
+      )}
+      {...props}
+    />
+  )
 }
 
 export function PanelHeader({

@@ -19,12 +19,17 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
  *    breit und lag damit über dem sm-Breakpoint — beim Drehen verschwand die
  *    Navigation. Ab lg übernimmt die Kopfzeile, darunter bleibt die Leiste.
  *
- * 3. Feste Höhe über `--bottom-nav-h`. Die App-Hülle reserviert exakt diesen
+ * 3. Pillenform, schwebend, Milchglas (Designsystem: Floating Navigation).
+ *    Der aktive Anzeiger wandert per `transform` zur neuen Position, statt
+ *    umzuspringen: die Bewegung sagt, woher man kommt. `transform` und nicht
+ *    `left`, damit die Leiste dabei kein Layout neu berechnet.
+ *
+ * 4. Feste Höhe über `--bottom-nav-h`. Die App-Hülle reserviert exakt diesen
  *    Betrag als Innenabstand, sonst liegt der letzte Inhalt unerreichbar
  *    unter der Leiste. Eine fixierte Leiste nimmt keinen Platz im Fluss ein —
  *    der Platz muss ihr gegeben werden.
  *
- * 4. Verankerung am sichtbaren Viewport. `fixed; bottom: 0` verankert am
+ * 5. Verankerung am sichtbaren Viewport. `fixed; bottom: 0` verankert am
  *    Layout-Viewport; fallen beide auseinander (Tastatur, Zoom, mobile
  *    Emulation), sitzt die Leiste ausserhalb des Bildschirms. Der gemessene
  *    Abstand wird deshalb aufaddiert.
@@ -72,6 +77,11 @@ export function BottomNav({
   const { t } = useTranslation()
   const visualInset = useVisualViewportInset()
 
+  const index = Math.max(
+    0,
+    NAV_ITEMS.findIndex((item) => item.key === active),
+  )
+
   return (
     <nav
       aria-label={t('nav.primary')}
@@ -79,13 +89,38 @@ export function BottomNav({
       data-visual-inset={visualInset || undefined}
       className={cn(
         'fixed inset-x-0 bottom-0 z-40 lg:hidden',
-        'border-t border-line bg-plane/95 backdrop-blur-md',
-        // Der Bereich unterhalb der Leiste (Home-Indikator) bekommt dieselbe
-        // Fläche, damit dort nichts durchscheint.
-        'pb-[env(safe-area-inset-bottom)]',
+        // Die Leiste schwebt: sie sitzt nicht auf der Kante, sondern darüber.
+        // Der Abstand nach unten kommt aus dem sicheren Bereich plus 10 px.
+        'px-3 pb-[calc(env(safe-area-inset-bottom)+10px)]',
+        'pointer-events-none',
       )}
     >
-      <div className="relative mx-auto grid h-[var(--bottom-nav-h)] max-w-md grid-cols-5 items-center px-1">
+      <div
+        className={cn(
+          'pointer-events-auto relative mx-auto grid max-w-md grid-cols-5 items-center',
+          'h-[var(--bottom-nav-h)] rounded-pill border border-line px-1',
+          // Milchglas: was darunter durchläuft, bleibt erkennbar. Ohne den
+          // Weichzeichner wäre die Leiste entweder undurchsichtig (und
+          // verdeckte Inhalt) oder unlesbar.
+          'bg-glass-strong shadow-elev-2 backdrop-blur-xl',
+        )}
+      >
+        {/*
+         * Der aktive Anzeiger WANDERT — er wird nicht neu gezeichnet.
+         * Die Bewegung sagt, woher man kommt und wohin man geht; ein
+         * Umspringen sagt nur, dass sich etwas geändert hat.
+         *
+         * `transform` statt `left`: nur so läuft das auf der GPU und
+         * erzwingt kein Neu-Layout der ganzen Leiste.
+         */}
+        <span
+          aria-hidden
+          className="absolute top-1.5 bottom-1.5 left-1 w-[calc((100%-0.5rem)/5)] rounded-pill bg-accent-quiet"
+          style={{
+            transform: `translateX(${index * 100}%)`,
+            transition: 'transform var(--motion-base) var(--ease-out)',
+          }}
+        />
         {NAV_ITEMS.map(({ key, icon }) => (
           <NavItem
             key={key}
@@ -119,7 +154,8 @@ function NavItem({
       // min-h-11 = 44 px: die kleinste Fläche, die sich zuverlässig mit dem
       // Daumen treffen lässt.
       className={cn(
-        'flex min-h-11 w-full min-w-0 flex-col items-center justify-center gap-0.5 rounded-[2px] px-0.5 transition-colors',
+        'relative z-10 flex min-h-11 w-full min-w-0 flex-col items-center justify-center gap-0.5 rounded-pill px-0.5',
+        'transition-colors duration-[var(--motion-fast)]',
         active ? 'text-accent-text' : 'text-ink-muted',
       )}
     >

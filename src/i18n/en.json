@@ -1615,5 +1615,18 @@
     "cardFooter": "{{results}} measurements in {{year}}",
     "cardCaveat": "Mean of the percentiles of the sourced axes. Not a medical statement and not comparable across sports.",
     "cardPrivacy": "The image is made on your device and uploaded nowhere. What you do with it is up to you."
+  },
+  "orb": {
+    "alt": "Performance profile as a shape: value {{score}}, from {{rated}} of {{total}} axes with a sourced reference.",
+    "altNoScore": "Performance profile as a shape. A summary still needs more sourced axes.",
+    "noScore": "No summary yet"
+  },
+  "actionOrb": {
+    "open": "Open quick actions",
+    "close": "Close quick actions",
+    "test": "Run a test",
+    "result": "Enter a result",
+    "import": "Import from a spreadsheet",
+    "session": "Create a session"
   }
 }

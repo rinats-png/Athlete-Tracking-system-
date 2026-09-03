@@ -1615,5 +1615,18 @@
     "cardFooter": "{{results}} Messungen im Jahr {{year}}",
     "cardCaveat": "Mittel der Perzentile der belegten Achsen. Keine medizinische Aussage und zwischen Sportarten nicht vergleichbar.",
     "cardPrivacy": "Das Bild entsteht auf deinem Gerät und wird nirgends hochgeladen. Was du damit machst, entscheidest du."
+  },
+  "orb": {
+    "alt": "Leistungsprofil als Form: Wert {{score}}, aus {{rated}} von {{total}} Achsen mit belegter Referenz.",
+    "altNoScore": "Leistungsprofil als Form. Für eine Zusammenfassung fehlen noch belegte Achsen.",
+    "noScore": "Noch keine Zusammenfassung"
+  },
+  "actionOrb": {
+    "open": "Schnellaktionen öffnen",
+    "close": "Schnellaktionen schliessen",
+    "test": "Test durchführen",
+    "result": "Ergebnis eintragen",
+    "import": "Aus Tabelle übernehmen",
+    "session": "Termin anlegen"
   }
 }

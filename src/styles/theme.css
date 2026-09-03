@@ -3,10 +3,23 @@
 /* ==========================================================================
    Baseline — Designsystem
    --------------------------------------------------------------------------
-   Gestaltungsrichtung: "Instrument Panel". Die App ist ein Messgerät, kein
-   Motivations-Feed. Deshalb: harte Kanten statt weicher Karten, Haarlinien
-   statt Schlagschatten, Messwerte in Mono-Ziffern, Beschriftungen in
-   gesperrter Versal-Kondensschrift wie auf einer Anzeigetafel.
+   Gestaltungsrichtung: "Performance OS". Die App bleibt ein Messgerät — die
+   Messwerte in Mono-Ziffern und die gesperrte Versal-Kondensschrift für
+   Beschriftungen tragen das weiter. Was sich geändert hat, ist der RAUM:
+   Informationen liegen nicht mehr flach nebeneinander in einem Raster,
+   sondern auf Ebenen mit einer erkennbaren Ordnung.
+
+   Vier Ebenen, und jede hat eine Bedeutung — nicht nur einen Schatten:
+
+     Ebene 0  der Grund, das Messraster
+     Ebene 1  Flächen, die Kontext tragen (ruhig, tief liegend)
+     Ebene 2  Karten, die einen Messwert tragen (angehoben)
+     Ebene 3  was gerade im Zugriff ist (Navigation, geöffnete Karte)
+
+   Eine Karte steigt eine Ebene, wenn sie in den Fokus rückt, und fällt
+   zurück, wenn sie ihn verliert. Damit ist die Tiefe eine Aussage über
+   Zustand, keine Dekoration — und genau deshalb gibt es sie nur in diesen
+   vier Stufen und nicht in beliebigen Schattenwerten.
 
    Farbrollen sind vollständig unter :root definiert (Light als Basis) und in
    zwei Dark-Scopes überschrieben: der Media Query für die Systemeinstellung
@@ -26,6 +39,10 @@
      Anteil Stone Path: die Palette hat fünf Töne, eine Oberfläche braucht
      Abstufungen. */
   --plane:            #EEF1EA;  /* Mist White — Seitenhintergrund */
+  /* Zwei Aufhellungen von Mist White für den Grundverlauf. Keine neuen
+     Farben: beide liegen auf der Achse Mist White → Stone Path. */
+  --plane-glow-1:     #E9EDE2;
+  --plane-glow-2:     #E2E7DA;
   --surface:          #F6F7F3;  /* Karten, Chart-Fläche */
   --surface-raised:   #FBFCFA;
   --surface-sunken:   #DFE0D8;
@@ -109,8 +126,42 @@
      liegt der letzte Inhalt unerreichbar darunter. */
   --bottom-nav-h: 60px;
 
-  /* Kanten: fast eckig. 2 px ist die einzige Rundung im System. */
-  --radius: 2px;
+  /* Kanten. Eine Karte, die schwebt, braucht eine weiche Kante — eine
+     scharfe Ecke liegt optisch auf dem Grund auf. Die Skala ist klein
+     gehalten: drei Werte, damit Grössenunterschiede zwischen Karten aus
+     ihrer Fläche kommen und nicht aus verschiedenen Rundungen. */
+  --radius:       22px;  /* Karten, Kategorien  (r-lg der Spezifikation) */
+  --radius-md:    16px;  /* Wertkarten, Chips, Eingabefelder (r-md) */
+  --radius-pill: 999px;  /* Navigation, Orb, Filterchips */
+
+  /* Tiefe. Zwei Schatten je Stufe: ein enger, dunkler für die Kante, ein
+     weiter, weicher für den Abstand zum Grund. Ein einzelner Schatten sieht
+     entweder aufgeklebt oder verwaschen aus.
+
+     Die Werte sind bewusst zurückhaltend — sichtbar, aber nicht dramatisch.
+     Was hier Aufmerksamkeit erzeugt, ist der UNTERSCHIED zwischen den
+     Stufen, nicht ihre absolute Stärke. */
+  --shadow-hue: 63 75 58;  /* Moss Shadow: der Schatten trägt die Markenfarbe */
+  --elev-1: 0 8px 24px rgb(var(--shadow-hue) / 0.10),
+            0 1px 3px  rgb(var(--shadow-hue) / 0.08);
+  --elev-2: 0 18px 44px rgb(var(--shadow-hue) / 0.16),
+            0 2px 6px   rgb(var(--shadow-hue) / 0.08);
+  --elev-3: 0 26px 60px rgb(var(--shadow-hue) / 0.22),
+            0 3px 8px   rgb(var(--shadow-hue) / 0.10);
+
+  /* Bewegung. Kurz, weich, vorhersehbar: eine Animation ist hier ein Hinweis
+     darauf, WOHIN etwas gegangen ist, keine Vorstellung.
+
+     Die Kurve hat kein Überschwingen. Ein Bounce sagt «schau her»; das ist
+     bei einem Messwert die falsche Aussage. */
+  --motion-fast: 250ms;
+  --motion-base: 450ms;
+  --motion-slow: 700ms;
+  /* Die Standardkurve der Spezifikation: weich, physikalisch, ohne
+     Überschwingen. Ein Bounce sagt «schau her» — bei einem Messwert ist das
+     die falsche Aussage. */
+  --ease-out: cubic-bezier(0.3, 0.85, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.3, 0.85, 0.3, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -120,6 +171,8 @@
     /* Sumi Ink trägt den dunklen Modus; die Flächen darüber sind mit einem
        Anteil Moss Shadow aufgehellt, damit sie sich unterscheiden lassen. */
     --plane:          #151515;  /* Sumi Ink */
+    --plane-glow-1:   #1B1E19;
+    --plane-glow-2:   #191C17;
     --surface:        #20221E;
     --surface-raised: #262B24;
     --surface-sunken: #0E0E0E;
@@ -169,6 +222,8 @@
   /* Sumi Ink trägt den dunklen Modus; die Flächen darüber sind mit einem
      Anteil Moss Shadow aufgehellt, damit sie sich unterscheiden lassen. */
   --plane:          #151515;  /* Sumi Ink */
+  --plane-glow-1:   #1B1E19;
+  --plane-glow-2:   #191C17;
   --surface:        #20221E;
   --surface-raised: #262B24;
   --surface-sunken: #0E0E0E;
@@ -207,6 +262,11 @@
   --glass-strong: rgba(255, 255, 255, 0.12);
   --glass-border: rgba(255, 255, 255, 0.14);
   --glass-edge:   rgba(255, 255, 255, 0.28);
+
+  --shadow-hue: 0 0 0;
+  --elev-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3);
+  --elev-2: 0 1px 2px rgb(0 0 0 / 0.45), 0 6px 18px rgb(0 0 0 / 0.42);
+  --elev-3: 0 2px 4px rgb(0 0 0 / 0.5), 0 14px 34px rgb(0 0 0 / 0.55);
 }
 
 /* Tailwind-Utilities aus denselben Rollen ableiten, damit es genau eine
@@ -246,6 +306,11 @@
   --font-mono:    var(--font-mono);
 
   --radius-panel: var(--radius);
+  --radius-soft:  var(--radius-md);
+  --radius-pill:  var(--radius-pill);
+  --shadow-elev-1: var(--elev-1);
+  --shadow-elev-2: var(--elev-2);
+  --shadow-elev-3: var(--elev-3);
   --spacing-bottom-nav: var(--bottom-nav-h);
 }
 
@@ -266,11 +331,18 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   /* Feines Messraster im Hintergrund — Werkstatt-Millimeterpapier, kein Deko-Verlauf. */
+  /* Das Messraster tritt zurück: unter schwebenden Karten konkurriert ein
+     kräftiges Raster mit den Schatten, und beide verlieren. Dazu ein sehr
+     flacher Lichtschein von oben, der den Karten eine Richtung gibt —
+     ohne ihn sähen die Schatten aus wie aufgemalt. */
+  /* Zwei weiche Ellipsen aus der Palette geben dem Grund eine Richtung —
+     ohne sie sähen die Schatten der Karten aus wie aufgemalt. Das frühere
+     Messraster ist entfallen: unter schwebenden Karten konkurriert es mit
+     den Schatten, und beide verlieren. */
   background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--line) 45%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--line) 45%, transparent) 1px, transparent 1px);
-  background-size: 88px 88px;
-  background-position: -1px -1px;
+    radial-gradient(ellipse at 20% 10%, var(--plane-glow-1) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 85%, var(--plane-glow-2) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
 :focus-visible {
@@ -297,37 +369,111 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* --- Flächen und Ebenen -------------------------------------------------
+ *
+ * `.panel` ist die Grundfläche. Sie liegt auf Ebene 1: eine Linie, ein
+ * kaum wahrnehmbarer Schatten. Sie trägt Kontext.
+ *
+ * `.float` hebt sie auf Ebene 2. Das ist die Karte, die einen Messwert
+ * trägt — sie soll sich vom Grund lösen.
+ *
+ * `.float-lift` hebt sie beim Zeigen und Fokussieren eine weitere Stufe.
+ * Nur für Flächen, die tatsächlich anklickbar sind: eine Karte, die sich
+ * hebt und nichts tut, ist eine Lüge über ihre Bedienbarkeit.
+ */
 .panel {
+  /* `relative`, damit die Lichtkante von `.float` und der Akzentbalken von
+     `.panel-ticked` einen Bezugsrahmen haben. */
+  position: relative;
   background-color: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  box-shadow: var(--elev-1);
 }
 
-/* Eckmarken an den Panels — Fadenkreuz eines Messgeräts. */
+.float {
+  background-color: var(--surface-raised);
+  box-shadow: var(--elev-2);
+}
+
+/* Die obere Kante fängt Licht — auf dunklem Grund ist das der einzige
+   Hinweis auf Höhe, weil ein Schatten dort nicht sichtbar wird. */
+.float::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklab, var(--glass-edge) 60%, transparent),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.float-lift {
+  transition:
+    box-shadow var(--motion-base) var(--ease-out),
+    transform var(--motion-base) var(--ease-out);
+}
+@media (hover: hover) {
+  .float-lift:hover {
+    box-shadow: var(--elev-3);
+    transform: translateY(-2px);
+  }
+}
+.float-lift:focus-within {
+  box-shadow: var(--elev-3);
+}
+/* Beim Drücken sinkt die Karte zurück auf den Grund: eine physische
+   Antwort auf die Berührung, nicht nur ein Farbwechsel. */
+.float-lift:active {
+  box-shadow: var(--elev-1);
+  transform: translateY(0);
+}
+
+/* Der Akzentbalken ersetzt die früheren Eckmarken: an einer gerundeten Ecke
+   sassen zwei Winkel wie ein Fremdkörper. Der Balken sagt dasselbe — «diese
+   Fläche ist die wichtigste hier» — und folgt der Kante. */
 .panel-ticked {
   position: relative;
+  overflow: hidden;
 }
-.panel-ticked::before,
 .panel-ticked::after {
   content: "";
   position: absolute;
-  width: 7px;
-  height: 7px;
-  border-color: var(--line-strong);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: var(--accent);
   pointer-events: none;
 }
-.panel-ticked::before {
-  top: -1px;
-  left: -1px;
-  border-top: 1px solid;
-  border-left: 1px solid;
-  border-color: var(--accent);
+
+/* --- Eintreten ----------------------------------------------------------
+ *
+ * Karten erscheinen nicht schlagartig, sondern steigen kurz von unten ein.
+ * `--rise-delay` staffelt eine Reihe von Karten; ohne Staffelung wirkt eine
+ * Gruppe wie EIN Block und nicht wie mehrere Objekte.
+ *
+ * Bewusst nur beim ERSTEN Erscheinen und nie länger als eine Viertelsekunde:
+ * wer die Übersicht zehnmal am Tag öffnet, will nicht zehnmal warten.
+ */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
-.panel-ticked::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 1px solid;
-  border-right: 1px solid;
+.rise {
+  animation: rise var(--motion-slow) var(--ease-out) backwards;
+  animation-delay: var(--rise-delay, 0ms);
 }
 
 @media (prefers-reduced-motion: reduce) {

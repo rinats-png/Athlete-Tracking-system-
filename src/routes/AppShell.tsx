@@ -2,6 +2,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AppHeader } from '@/features/dashboard/AppHeader'
 import { BottomNav, navKeyForPath, pathForNavKey } from '@/features/dashboard/BottomNav'
 import { DataLoadNotice } from '@/features/dashboard/DataLoadNotice'
+import { ActionOrb } from '@/components/signature/ActionOrb'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useTranslation } from 'react-i18next'
 
@@ -51,6 +52,7 @@ export function AppShell() {
         <Outlet />
       </main>
 
+      <ActionOrb />
       <BottomNav active={active} onNavigate={(key) => navigate(pathForNavKey(key))} />
     </div>
   )
