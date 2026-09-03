@@ -3,8 +3,6 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { AppShell } from '@/routes/AppShell'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
 import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
-import { TestRunScreen } from '@/features/tests/TestRunScreen'
-import { HistoryHome } from '@/features/history/HistoryHome'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
 import { OnboardingFlow } from '@/features/onboarding/OnboardingFlow'
 import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
@@ -62,10 +60,10 @@ const router = createBrowserRouter([
       { path: 'diagnostik/:id', element: screen(() => import('@/features/assessments/AssessmentDetailScreen'), 'AssessmentDetailScreen') },
       { path: 'diagnostik/:id/abschluss', element: screen(() => import('@/features/assessments/AssessmentSummaryScreen'), 'AssessmentSummaryScreen') },
       { path: 'tests', element: screen(() => import('@/features/tests/TestCatalogScreen'), 'TestCatalogScreen') },
-      { path: 'tests/:slug', element: <TestRunScreen /> },
+      { path: 'tests/:slug', element: screen(() => import('@/features/tests/TestRunScreen'), 'TestRunScreen') },
       { path: 'tests/:slug/details', element: screen(() => import('@/features/tests/TestDetailScreen'), 'TestDetailScreen') },
-      { path: 'verlauf', element: <HistoryHome /> },
-      { path: 'verlauf/test/:slug', element: <HistoryHome /> },
+      { path: 'verlauf', element: screen(() => import('@/features/history/HistoryHome'), 'HistoryHome') },
+      { path: 'verlauf/test/:slug', element: screen(() => import('@/features/history/HistoryHome'), 'HistoryHome') },
       { path: 'verlauf/werte', element: screen(() => import('@/features/history/HistoryScreen'), 'HistoryScreen') },
       { path: 'verlauf/kalender', element: screen(() => import('@/features/history/CalendarScreen'), 'CalendarScreen') },
       { path: 'verlauf/erinnerungen', element: screen(() => import('@/features/history/RemindersScreen'), 'RemindersScreen') },

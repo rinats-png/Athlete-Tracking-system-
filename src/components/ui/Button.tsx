@@ -3,7 +3,10 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const button = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[2px] font-display font-semibold uppercase tracking-[0.1em] transition-colors disabled:pointer-events-none disabled:opacity-45',
+    // Pillenform und eine spürbare Antwort auf die Berührung: der Knopf sinkt
+  // kurz ein. Ohne diese Rückmeldung wirkt eine schwebende Oberfläche
+  // unbeteiligt — man tippt und weiss nicht, ob es angekommen ist.
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-pill font-display font-semibold uppercase tracking-[0.1em] transition-[background-color,color,border-color,transform] duration-[var(--motion-fast)] active:scale-[0.97] disabled:pointer-events-none disabled:opacity-45',
   {
     variants: {
       variant: {
