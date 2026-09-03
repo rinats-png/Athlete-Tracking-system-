@@ -18,3 +18,4 @@ coverage
 # Playwright-Artefakte: Ergebnis eines Laufs, kein Quellstand.
 test-results/
 playwright-report/
+baseline-netlify.zip
