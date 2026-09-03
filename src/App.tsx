@@ -1,7 +1,12 @@
 import { useCallback, useState } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { AppShell } from '@/routes/AppShell'
-import { DashboardScreen } from '@/features/dashboard/DashboardScreen'
+import { OverviewScreen } from '@/features/overview/OverviewScreen'
+import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
+import { AreaScreen } from '@/features/diagnostics/AreaScreen'
+import { SportScreen } from '@/features/diagnostics/SportScreen'
+import { BatteryScreen } from '@/features/diagnostics/BatteryScreen'
+import { ResultScreen } from '@/features/diagnostics/ResultScreen'
 import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
 import { TestRunScreen } from '@/features/tests/TestRunScreen'
 import { TestDetailScreen } from '@/features/tests/TestDetailScreen'
@@ -35,8 +40,13 @@ const router = createBrowserRouter([
     path: '/',
     element: <AppShell />,
     children: [
-      { index: true, element: <DashboardScreen /> },
-      { path: 'diagnostik', element: <AssessmentListScreen /> },
+      { index: true, element: <OverviewScreen /> },
+      { path: 'diagnostik', element: <DiagnosticsHub /> },
+      { path: 'diagnostik/bereich/:area', element: <AreaScreen /> },
+      { path: 'diagnostik/termine', element: <AssessmentListScreen /> },
+      { path: 'sport/:id', element: <SportScreen /> },
+      { path: 'batterie/:slug', element: <BatteryScreen /> },
+      { path: 'ergebnis/:id', element: <ResultScreen /> },
       { path: 'diagnostik/neu', element: <AssessmentCreateScreen /> },
       { path: 'diagnostik/:id', element: <AssessmentDetailScreen /> },
       { path: 'diagnostik/:id/abschluss', element: <AssessmentSummaryScreen /> },

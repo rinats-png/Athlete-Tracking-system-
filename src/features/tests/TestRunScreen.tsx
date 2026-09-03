@@ -114,9 +114,10 @@ export function TestRunScreen() {
     })
     if (result) {
       setSaved(true)
-      // Kurz die Bestätigung zeigen, dann zurück an die Stelle, von der der
-      // Test gestartet wurde.
-      const target = assessment ? `/diagnostik/${assessment.id}` : '/verlauf'
+      // Kurz die Bestätigung zeigen, dann weiter: innerhalb eines Termins
+      // zurück zum Termin, sonst direkt in die Auswertung (Konzept §14:
+      // «Speichern & auswerten»).
+      const target = assessment ? `/diagnostik/${assessment.id}` : `/ergebnis/${result.id}`
       window.setTimeout(() => navigate(target), 700)
     }
   }
