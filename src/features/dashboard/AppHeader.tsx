@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils'
  */
 export function AppHeader({
   mode,
-  active = 'dashboard',
+  active = 'overview',
   onNavigate,
 }: {
   /** 'guest' = lokale Daten ohne Konto, 'demo' = mitgelieferter Beispielsatz. */
@@ -37,7 +37,6 @@ export function AppHeader({
       <div className="mx-auto flex max-w-6xl items-center gap-3 py-3 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] sm:pl-[max(1.5rem,env(safe-area-inset-left))] sm:pr-[max(1.5rem,env(safe-area-inset-right))]">
         <Wordmark />
         <div className="hidden min-w-0 flex-1 sm:block">
-          <span className="label-tag lg:hidden">{t('app.tagline')}</span>
 
           {/* Ab lg übernimmt die Kopfzeile die Navigation von der Leiste.
               Unterhalb bleibt die Leiste zuständig — so gibt es auf jeder
@@ -92,8 +91,9 @@ function Wordmark() {
           strokeLinecap="square"
         />
       </svg>
-      <span className="font-display text-[19px] font-bold uppercase tracking-[0.16em]">
-        Baseline
+      <span className="flex flex-col leading-none">
+        <span className="font-display text-[19px] font-bold uppercase tracking-[0.16em]">Baseline</span>
+        <span className="label-tag mt-0.5 text-[9px] tracking-[0.18em]">Leistungsdiagnose</span>
       </span>
     </div>
   )

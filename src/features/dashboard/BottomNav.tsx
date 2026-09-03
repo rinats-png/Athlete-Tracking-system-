@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { BarChart3, ClipboardList, House, Play, User } from 'lucide-react'
+import { Activity, BarChart3, ClipboardList, House, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
 
@@ -30,13 +30,17 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
  *    Abstand wird deshalb aufaddiert.
  */
 
+/**
+ * Die fünf Hauptbereiche (Konzept §5): Übersicht, Diagnostik, Analyse,
+ * Verlauf, Profil. Der Testkatalog und die Einzeltests gehören zur
+ * Diagnostik; Bericht und Trainer-Ansicht liegen unter Analyse bzw. Profil.
+ */
 export const NAV_ITEMS = [
-  { key: 'dashboard', icon: House, path: '/', alsoMatches: [] },
-  // Der Testkatalog ist ein Unterbereich der Diagnostik: ein Einzeltest ohne
-  // Termin bleibt möglich, führt aber unter denselben Reiter.
-  { key: 'tests', icon: ClipboardList, path: '/diagnostik', alsoMatches: ['/tests'] },
-  { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: ['/analyse', '/bericht', '/trainer'] },
-  { key: 'profile', icon: User, path: '/profil', alsoMatches: [] },
+  { key: 'overview', icon: House, path: '/', alsoMatches: [] },
+  { key: 'diagnostics', icon: ClipboardList, path: '/diagnostik', alsoMatches: ['/tests', '/sport', '/batterie'] },
+  { key: 'analysis', icon: Activity, path: '/analyse', alsoMatches: ['/bericht', '/community'] },
+  { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: ['/werte', '/kalender'] },
+  { key: 'profile', icon: User, path: '/profil', alsoMatches: ['/trainer'] },
 ] as const
 
 export type NavKey = (typeof NAV_ITEMS)[number]['key']
@@ -55,17 +59,15 @@ export function navKeyForPath(pathname: string): NavKey {
       .filter((path) => path !== '/' && pathname.startsWith(path))
       .map((path) => ({ key: item.key, path })),
   ).sort((a, b) => b.path.length - a.path.length)[0]
-  return match?.key ?? 'dashboard'
+  return match?.key ?? 'overview'
 }
 
 export function BottomNav({
-  active = 'dashboard',
+  active = 'overview',
   onNavigate,
-  onStartTest,
 }: {
   active?: NavKey
   onNavigate?: (key: NavKey) => void
-  onStartTest?: () => void
 }) {
   const { t } = useTranslation()
   const visualInset = useVisualViewportInset()
@@ -84,32 +86,7 @@ export function BottomNav({
       )}
     >
       <div className="relative mx-auto grid h-[var(--bottom-nav-h)] max-w-md grid-cols-5 items-center px-1">
-        {NAV_ITEMS.slice(0, 2).map(({ key, icon }) => (
-          <NavItem
-            key={key}
-            icon={icon}
-            label={t(`nav.short.${key}`)}
-            active={active === key}
-            onClick={() => onNavigate?.(key)}
-          />
-        ))}
-
-        {/* Eine Diagnostik zu starten sitzt mittig und erhöht: das ist die
-            Handlung, um die diese App gebaut ist, und die einzige, die in der
-            Halle einhändig erreichbar sein muss. Sie belegt eine eigene
-            Rasterspalte, damit sie die Nachbarn nicht überdeckt. */}
-        <div className="flex items-center justify-center">
-          <button
-            type="button"
-            onClick={onStartTest}
-            aria-label={t('actions.startAssessment')}
-            className="-mt-6 flex h-14 w-14 items-center justify-center rounded-full border-4 border-plane bg-accent text-accent-ink transition-transform active:scale-95"
-          >
-            <Play size={20} strokeWidth={2.4} aria-hidden />
-          </button>
-        </div>
-
-        {NAV_ITEMS.slice(2).map(({ key, icon }) => (
+        {NAV_ITEMS.map(({ key, icon }) => (
           <NavItem
             key={key}
             icon={icon}

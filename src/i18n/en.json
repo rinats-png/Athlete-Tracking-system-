@@ -1,7 +1,8 @@
 {
   "app": {
     "name": "Baseline",
-    "tagline": "Performance diagnostics"
+    "tagline": "Performance diagnostics",
+    "fullName": "BASELINE – Performance diagnostics"
   },
   "nav": {
     "primary": "Main navigation",
@@ -10,11 +11,15 @@
     "history": "History",
     "profile": "Profile",
     "short": {
-      "dashboard": "Home",
-      "tests": "Assess",
+      "overview": "Overview",
+      "diagnostics": "Diagnostics",
+      "analysis": "Analysis",
       "history": "History",
       "profile": "Profile"
-    }
+    },
+    "overview": "Overview",
+    "diagnostics": "Diagnostics",
+    "analysis": "Analysis"
   },
   "actions": {
     "startTest": "Start test",
@@ -144,16 +149,22 @@
     "percentOfBest": "% of best"
   },
   "welcome": {
-    "eyebrow": "Performance diagnostics",
-    "headline": "Measure what you actually train.",
-    "body": "Standardised tests, honest numbers, and a profile that shows over months where you are getting stronger — and where you are not.",
+    "eyebrow": "BASELINE – Performance diagnostics",
+    "headline": "Find out where you really stand.",
+    "body": "Sport-specific tests, scientific reference values, a performance profile and the next sensible test — no training log, no calorie counter.",
     "continueEmail": "Continue with email",
     "haveAccount": "I have an account",
     "viewDemo": "View demo",
     "legal": "By continuing you agree to the terms of use and the privacy policy.",
     "startLocal": "Start without an account",
     "privacy": "No account, no email address, no transfer. Your measurements stay on this device and can be exported or deleted at any time.",
-    "accountLater": "Accounts and sync are coming later"
+    "accountLater": "Accounts and sync are coming later",
+    "points": [
+      "Sport-specific diagnostics",
+      "Reference values with sources",
+      "Performance benchmarking",
+      "Personal development"
+    ]
   },
   "body": {
     "figureLabel": "Body view with highlighted performance dimensions",
@@ -938,5 +949,86 @@
     "noMatch": "No sport found for “{{query}}”. Choose “General assessment” below — the sport can be added later.",
     "general": "General assessment",
     "generalHint": "Without a sport: one battery across all six axes. Changeable at any time in the test area."
+  },
+  "onboarding": {
+    "stepOf": "Step {{step}} of {{total}}",
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "finish": "Create diagnostic profile",
+    "toOverview": "To the overview",
+    "allTests": "See all tests",
+    "profile": {
+      "title": "Your profile",
+      "body": "Age, sex and body data decide which reference groups your values are compared with. Everything stays on this device.",
+      "required": "Required",
+      "optional": "Optional",
+      "weight": "Body weight",
+      "ageClass": "Age class",
+      "age": "Age",
+      "years": "years",
+      "trainingYears": "Training years",
+      "sessionsPerWeek": "Sessions per week",
+      "level": "Experience level",
+      "levelNone": "Not specified",
+      "missing": "Still missing: {{fields}}"
+    },
+    "sport": {
+      "title": "Your main sport",
+      "body": "It decides which tests are suggested first and which athlete groups you are compared with. Further sports come in the next step.",
+      "search": "Search sport",
+      "searchPlaceholder": "Search — e.g. judo, marathon, firefighter",
+      "noMatch": "No sport found for \"{{query}}\". \"General fitness\" fits everything not on the list.",
+      "selected": "Selected: {{name}}"
+    },
+    "additional": {
+      "title": "Further sports",
+      "body": "Optional. Every further sport gets its own tests, references and profile — the overview stays with the main sport.",
+      "count": "{{count}} selected",
+      "none": "No further sport"
+    },
+    "goal": {
+      "title": "Your goal",
+      "body": "Optional. The goal weights the next test suggestion — nothing more. It changes no measurement and no reference.",
+      "options": {
+        "general_performance": "General performance improvement",
+        "competition": "Competition preparation",
+        "diagnostics": "Performance diagnostics",
+        "elite": "Elite / squad level",
+        "hyrox": "HYROX goal",
+        "fitness": "Improve fitness",
+        "orientation": "Just find out where I stand"
+      }
+    },
+    "existing": {
+      "title": "Existing values",
+      "body": "Optional. If you have results from earlier tests, enter them here — they go straight into your profile with today's date.",
+      "none": "There are no single-value tests for this selection.",
+      "hint": "Only tests with a single measured value. Everything else can be recorded later with the full protocol."
+    },
+    "result": {
+      "eyebrow": "Your diagnostic profile",
+      "title": "Your {{sport}} diagnostics",
+      "titleGeneral": "Your diagnostics",
+      "found": "{{count}} relevant tests found",
+      "start": "Recommended to start",
+      "further": "Further relevant tests",
+      "reasons": {
+        "core": "carries the profile",
+        "reference": "reference available",
+        "field": "no lab needed",
+        "not_measured": "not measured yet",
+        "universal": "across sports"
+      },
+      "body": "You decide whether to follow the recommendation or look at all tests. The selection adapts as soon as the first results are in."
+    }
+  },
+  "ageClass": {
+    "u20": "U20",
+    "20s": "20–29",
+    "30s": "30–39",
+    "40s": "40–49",
+    "50s": "50–59",
+    "60plus": "60+"
   }
 }

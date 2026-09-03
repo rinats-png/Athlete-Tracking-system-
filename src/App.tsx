@@ -15,8 +15,8 @@ import { AssessmentDetailScreen } from '@/features/assessments/AssessmentDetailS
 import { AssessmentSummaryScreen } from '@/features/assessments/AssessmentSummaryScreen'
 import { ProfileScreen } from '@/features/profile/ProfileScreen'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
-import { SportGate, sportWasAsked } from '@/features/onboarding/SportGate'
-import { AppDataProvider, readMode, writeMode, type AppMode } from '@/lib/store/AppDataProvider'
+import { OnboardingFlow } from '@/features/onboarding/OnboardingFlow'
+import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
 
 /**
  * Einstiegspunkt.
@@ -56,10 +56,6 @@ const router = createBrowserRouter([
 
 export default function App() {
   const [mode, setMode] = useState<AppMode | null>(() => readMode())
-  // Die Sportartfrage kommt einmal, direkt nach dem Eintritt. Gemerkt wird,
-  // dass gefragt wurde — nicht die Antwort: sonst stünde das Tor nach jedem
-  // Zurücksetzen der Sportart wieder da.
-  const [sportAsked, setSportAsked] = useState(() => sportWasAsked())
 
   const enter = useCallback((next: AppMode) => {
     writeMode(next)
@@ -72,11 +68,28 @@ export default function App() {
 
   return (
     <AppDataProvider mode={mode}>
-      {sportAsked ? (
-        <RouterProvider router={router} />
-      ) : (
-        <SportGate onDone={() => setSportAsked(true)} />
-      )}
+      <OnboardingGate />
     </AppDataProvider>
   )
+}
+
+/**
+ * Der Einstieg (Konzept §3) kommt genau dann, wenn das Profil ihn noch nicht
+ * abgeschlossen hat. Der Stand liegt IM Bestand, nicht in einem eigenen
+ * Schalter: ein importierter Bestand bringt seinen Einrichtungsstand mit,
+ * und «alles löschen» führt ehrlich wieder durch den Einstieg.
+ */
+function OnboardingGate() {
+  const { data } = useAppData()
+  const [target, setTarget] = useState<'overview' | 'tests' | null>(null)
+
+  if (data.profile.onboardingCompletedAt == null) {
+    return <OnboardingFlow onDone={setTarget} />
+  }
+  if (target === 'tests' && window.location.pathname !== '/diagnostik') {
+    // Der Ablauf endet ausserhalb des Routers; der Zielpfad wird einmal
+    // gesetzt, bevor der Router übernimmt.
+    window.history.replaceState(null, '', '/diagnostik')
+  }
+  return <RouterProvider router={router} />
 }

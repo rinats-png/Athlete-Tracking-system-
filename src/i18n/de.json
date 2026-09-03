@@ -1,7 +1,8 @@
 {
   "app": {
     "name": "Baseline",
-    "tagline": "Leistungsdiagnostik"
+    "tagline": "Leistungsdiagnose",
+    "fullName": "BASELINE – Leistungsdiagnose"
   },
   "nav": {
     "primary": "Hauptnavigation",
@@ -10,11 +11,15 @@
     "history": "Verlauf",
     "profile": "Profil",
     "short": {
-      "dashboard": "Start",
-      "tests": "Diagnostik",
+      "overview": "Übersicht",
+      "diagnostics": "Diagnostik",
+      "analysis": "Analyse",
       "history": "Verlauf",
       "profile": "Profil"
-    }
+    },
+    "overview": "Übersicht",
+    "diagnostics": "Diagnostik",
+    "analysis": "Analyse"
   },
   "actions": {
     "startTest": "Test starten",
@@ -144,16 +149,22 @@
     "percentOfBest": "% Bestleistung"
   },
   "welcome": {
-    "eyebrow": "Leistungsdiagnostik",
-    "headline": "Miss, was du wirklich trainierst.",
-    "body": "Standardisierte Tests, ehrliche Zahlen, ein Profil, das über Monate zeigt, wo du stärker wirst — und wo nicht.",
+    "eyebrow": "BASELINE – Leistungsdiagnose",
+    "headline": "Finde heraus, wo du wirklich stehst.",
+    "body": "Sportartspezifische Tests, wissenschaftliche Referenzwerte, ein Leistungsprofil und der nächste sinnvolle Test — kein Trainingstagebuch, kein Kalorienzähler.",
     "continueEmail": "Mit E-Mail starten",
     "haveAccount": "Ich habe ein Konto",
     "viewDemo": "Demo ansehen",
     "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen und der Datenschutzerklärung zu.",
     "startLocal": "Ohne Konto starten",
     "privacy": "Kein Konto, keine E-Mail-Adresse, keine Übertragung. Deine Messwerte bleiben auf diesem Gerät und lassen sich jederzeit exportieren oder löschen.",
-    "accountLater": "Konto und Synchronisierung folgen später"
+    "accountLater": "Konto und Synchronisierung folgen später",
+    "points": [
+      "Sportartspezifische Diagnostik",
+      "Referenzwerte mit Quelle",
+      "Leistungsbenchmarking",
+      "Persönliche Entwicklung"
+    ]
   },
   "body": {
     "figureLabel": "Körperdarstellung mit hervorgehobenen Leistungsdimensionen",
@@ -938,5 +949,86 @@
     "noMatch": "Keine Sportart gefunden für «{{query}}». Wähle unten «Allgemeine Diagnostik» — die Sportart lässt sich später nachtragen.",
     "general": "Allgemeine Diagnostik",
     "generalHint": "Ohne Sportart: eine Batterie über alle sechs Achsen. Jederzeit im Testbereich änderbar."
+  },
+  "onboarding": {
+    "stepOf": "Schritt {{step}} von {{total}}",
+    "next": "Weiter",
+    "back": "Zurück",
+    "skip": "Überspringen",
+    "finish": "Diagnostikprofil erstellen",
+    "toOverview": "Zur Übersicht",
+    "allTests": "Alle Tests ansehen",
+    "profile": {
+      "title": "Dein Profil",
+      "body": "Alter, Geschlecht und Körperdaten bestimmen, mit welchen Referenzgruppen deine Werte verglichen werden. Alles bleibt auf diesem Gerät.",
+      "required": "Pflichtangaben",
+      "optional": "Freiwillig",
+      "weight": "Körpergewicht",
+      "ageClass": "Altersklasse",
+      "age": "Alter",
+      "years": "Jahre",
+      "trainingYears": "Trainingsjahre",
+      "sessionsPerWeek": "Einheiten pro Woche",
+      "level": "Erfahrungslevel",
+      "levelNone": "Keine Angabe",
+      "missing": "Es fehlt noch: {{fields}}"
+    },
+    "sport": {
+      "title": "Deine Hauptsportart",
+      "body": "Sie bestimmt, welche Tests zuerst vorgeschlagen werden und gegen welche Athletengruppen verglichen wird. Weitere Sportarten kommen im nächsten Schritt.",
+      "search": "Sportart suchen",
+      "searchPlaceholder": "Suchen — z. B. Judo, Marathon, Feuerwehr",
+      "noMatch": "Keine Sportart gefunden für «{{query}}». «Allgemeine Fitness» passt für alles, was nicht in der Liste steht.",
+      "selected": "Gewählt: {{name}}"
+    },
+    "additional": {
+      "title": "Weitere Sportarten",
+      "body": "Freiwillig. Jede weitere Sportart bekommt eigene Tests, Referenzen und ein eigenes Profil — die Übersicht bleibt bei der Hauptsportart.",
+      "count": "{{count}} gewählt",
+      "none": "Keine weitere Sportart"
+    },
+    "goal": {
+      "title": "Dein Ziel",
+      "body": "Freiwillig. Das Ziel gewichtet den nächsten Testvorschlag — mehr nicht. Es ändert keinen Messwert und keine Referenz.",
+      "options": {
+        "general_performance": "Allgemeine Leistungssteigerung",
+        "competition": "Wettkampfvorbereitung",
+        "diagnostics": "Leistungsdiagnostik",
+        "elite": "Elite-/Kaderniveau",
+        "hyrox": "HYROX-Ziel",
+        "fitness": "Fitness verbessern",
+        "orientation": "Einfach herausfinden, wo ich stehe"
+      }
+    },
+    "existing": {
+      "title": "Bereits vorhandene Werte",
+      "body": "Freiwillig. Wenn du Ergebnisse aus früheren Tests hast, trag sie hier ein — sie landen direkt im Profil, mit dem heutigen Datum.",
+      "none": "Für diese Auswahl gibt es keine Tests mit einem einzelnen Wert.",
+      "hint": "Nur Tests mit einem einzelnen Messwert. Alles andere lässt sich später mit vollem Protokoll erfassen."
+    },
+    "result": {
+      "eyebrow": "Dein Diagnostikprofil",
+      "title": "Deine {{sport}}-Diagnostik",
+      "titleGeneral": "Deine Diagnostik",
+      "found": "{{count}} relevante Tests gefunden",
+      "start": "Zum Start empfohlen",
+      "further": "Weitere relevante Tests",
+      "reasons": {
+        "core": "trägt das Profil",
+        "reference": "Referenz vorhanden",
+        "field": "ohne Labor",
+        "not_measured": "noch nicht gemessen",
+        "universal": "sportartübergreifend"
+      },
+      "body": "Du entscheidest, ob du der Empfehlung folgst oder alle Tests ansiehst. Die Auswahl passt sich an, sobald erste Ergebnisse da sind."
+    }
+  },
+  "ageClass": {
+    "u20": "U20",
+    "20s": "20–29",
+    "30s": "30–39",
+    "40s": "40–49",
+    "50s": "50–59",
+    "60plus": "60+"
   }
 }

@@ -21,15 +21,18 @@ export async function blockFonts(page: Page) {
 async function resetState(page: Page) {
   await blockFonts(page)
   await page.goto('/', { waitUntil: 'domcontentloaded' })
-  await page.evaluate(() => {
+  // Ein eingerichteter, aber leerer Bestand: der Einstieg (Konzept §3) gilt
+  // als durchlaufen, damit nicht jeder Fall zuerst sechs Schritte
+  // beantworten muss. Die Fälle, die den Einstieg selbst prüfen, benutzen
+  // `openFirstRun`.
+  const seeded = emptyData()
+  seeded.athletes[0].profile.onboardingCompletedAt = '2026-01-01T00:00:00.000Z'
+  await page.evaluate((store) => {
     localStorage.clear()
     localStorage.setItem('baseline.theme', 'dark')
     localStorage.setItem('baseline.locale', 'de')
-    // Die Sportartfrage gilt als gestellt: sie steht vor allem anderen und
-    // würde sonst in jedem Fall zuerst beantwortet werden müssen. Die Fälle,
-    // die sie selbst prüfen, benutzen `openFirstRun`.
-    localStorage.setItem('baseline.sportAsked', '1')
-  })
+    localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+  }, seeded)
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
 
@@ -41,8 +44,8 @@ export async function openGuest(page: Page) {
 }
 
 /**
- * Erster Start ohne jede Vorbelegung — inklusive der Sportartfrage.
- * Nur für die Fälle, die genau dieses Tor prüfen.
+ * Erster Start ohne jede Vorbelegung — inklusive des Einstiegs.
+ * Nur für die Fälle, die genau diesen Ablauf prüfen.
  */
 export async function openFirstRun(page: Page) {
   await blockFonts(page)

@@ -51,11 +51,7 @@ export function AppShell() {
         <Outlet />
       </main>
 
-      <BottomNav
-        active={active}
-        onNavigate={(key) => navigate(pathForNavKey(key))}
-        onStartTest={() => navigate('/diagnostik/neu')}
-      />
+      <BottomNav active={active} onNavigate={(key) => navigate(pathForNavKey(key))} />
     </div>
   )
 }

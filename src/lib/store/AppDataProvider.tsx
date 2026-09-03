@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { buildDemoData } from '@/data/demoSeed'
 import { deriveMetrics, primaryValue } from '@/lib/metrics/derive'
 import { getTest } from '@/data/testCatalog'
@@ -144,6 +144,18 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
     mode === 'demo' && countResults(initial.data) === 0 ? buildDemoData() : initial.data,
   )
   const [storageBlocked, setStorageBlocked] = useState(initial.unavailable)
+  /**
+   * Der jeweils letzte geschriebene Stand, synchron.
+   *
+   * DER FEHLER, DEN DAS BEHEBT: Drei Schreibvorgänge hintereinander im
+   * selben Ereignis — Profil, Gewicht, Ergebnis — bauten alle auf demselben
+   * alten Bestand auf, weil der Zustand von React erst beim nächsten Rendern
+   * nachzieht. Der letzte gewann, die beiden ersten waren weg: ein Einstieg,
+   * der Profil und Ergebnis speichert, verlor das Profil. Die Referenz hält
+   * den Stand fest, sobald er geschrieben ist, nicht erst, sobald er
+   * gerendert ist.
+   */
+  const storeRef = useRef<StoredData>(store)
 
   useEffect(() => {
     if (mode === 'demo' && countResults(initial.data) === 0 && countResults(store) > 0) {
@@ -154,9 +166,22 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
   }, [mode])
 
   const commitStore = useCallback((next: StoredData) => {
+    storeRef.current = next
     setStore(next)
     if (!saveData(next)) setStorageBlocked(true)
   }, [])
+
+  /** Sicht auf den aktiven Athleten eines beliebigen Stands. */
+  const viewOf = (source: StoredData): AthleteData => {
+    const athlete = source.athletes.find((a) => a.id === source.activeAthleteId) ?? source.athletes[0]
+    return {
+      branding: source.branding,
+      profile: athlete.profile,
+      biometrics: athlete.biometrics,
+      assessments: athlete.assessments,
+      results: athlete.results,
+    }
+  }
 
   /**
    * Der aktive Athlet. Fällt die Kennung ins Leere — etwa nach einem Import
@@ -187,16 +212,21 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
    * angefordert hat.
    */
   const commitAthlete = useCallback(
-    (next: AthleteData, event?: Omit<ValidatedAudit, 'id' | 'at'>) => {
+    (update: (current: AthleteData) => AthleteData, event?: Omit<ValidatedAudit, 'id' | 'at'>) => {
       const entry: ValidatedAudit | null = event
         ? { ...event, id: newId(), at: new Date().toISOString() }
         : null
+      const source = storeRef.current
+      const activeId = source.athletes.some((a) => a.id === source.activeAthleteId)
+        ? source.activeAthleteId
+        : source.athletes[0].id
+      const next = update(viewOf(source))
 
       commitStore({
-        ...store,
+        ...source,
         branding: next.branding,
-        athletes: store.athletes.map((athlete) =>
-          athlete.id === active.id
+        athletes: source.athletes.map((athlete) =>
+          athlete.id === activeId
             ? {
                 ...athlete,
                 profile: next.profile,
@@ -209,7 +239,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         ),
       })
     },
-    [commitStore, store, active.id],
+    [commitStore],
   )
 
   const recordResult = useCallback<AppDataValue['recordResult']>(
@@ -240,7 +270,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         notes,
         createdAt: new Date().toISOString(),
       }
-      commitAthlete(upsertResult(data, result), {
+      commitAthlete((current) => upsertResult(current, result), {
         action: 'created',
         entity: 'result',
         entityId: result.id,
@@ -308,16 +338,17 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       },
       loadReport: initial.report,
       bodyWeightAt: (iso) => bodyWeightAt(data, iso),
-      saveProfile: (patch) => commitAthlete({ ...data, profile: { ...data.profile, ...patch } }),
+      saveProfile: (patch) =>
+        commitAthlete((current) => ({ ...current, profile: { ...current.profile, ...patch } })),
       saveBranding: (patch) => commitStore({ ...store, branding: { ...store.branding, ...patch } }),
       saveBiometric: (entry) =>
-        commitAthlete(
-          upsertBiometric(data, { ...entry, id: newId(), createdAt: new Date().toISOString() }),
+        commitAthlete((current) =>
+          upsertBiometric(current, { ...entry, id: newId(), createdAt: new Date().toISOString() }),
         ),
       recordResult,
       deleteResult: (id) => {
         const removed = data.results.find((r) => r.id === id)
-        commitAthlete(removeResult(data, id), {
+        commitAthlete((current) => removeResult(current, id), {
           action: 'deleted',
           entity: 'result',
           entityId: id,
@@ -325,14 +356,14 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         })
       },
       saveAssessment: (assessment) =>
-        commitAthlete(upsertAssessment(data, assessment), {
+        commitAthlete((current) => upsertAssessment(current, assessment), {
           action: data.assessments.some((a) => a.id === assessment.id) ? 'edited' : 'created',
           entity: 'assessment',
           entityId: assessment.id,
           label: assessment.title ?? assessment.performedOn,
         }),
       deleteAssessment: (id) =>
-        commitAthlete(removeAssessment(data, id), {
+        commitAthlete((current) => removeAssessment(current, id), {
           action: 'deleted',
           entity: 'assessment',
           entityId: id,
@@ -340,7 +371,9 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         }),
       resetAll: () => {
         clearData()
-        setStore(emptyData())
+        const fresh = emptyData()
+        storeRef.current = fresh
+        setStore(fresh)
         setStorageBlocked(false)
       },
       loadDemo: () => commitStore(buildDemoData()),
@@ -356,7 +389,10 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       exportJson: () => exportData(store),
       importJson: (json) => {
         const outcome = importData(json)
-        if (outcome.ok && outcome.data) setStore(outcome.data)
+        if (outcome.ok && outcome.data) {
+          storeRef.current = outcome.data
+          setStore(outcome.data)
+        }
         return outcome
       },
       storageBlocked,
