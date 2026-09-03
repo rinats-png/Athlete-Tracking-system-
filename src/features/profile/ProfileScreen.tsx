@@ -230,6 +230,20 @@ export function ProfileScreen() {
               </p>
 
               <p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="-ml-2"
+                  onClick={() => saveProfile({ onboardingCompletedAt: null, onboardingStep: 0 })}
+                >
+                  {t('profile.redoOnboarding')}
+                </Button>
+                <span className="block text-[12px] leading-relaxed text-ink-muted">
+                  {t('profile.redoOnboardingHint')}
+                </span>
+              </p>
+
+              <p>
                 <Link
                   to="/profil/import"
                   className="-mx-2 inline-flex min-h-11 items-center px-2 text-[13px] underline underline-offset-2"

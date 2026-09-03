@@ -111,6 +111,7 @@ export function buildDemoData(): StoredData {
     remindersEnabled: true,
     reminderIntervalDays: {},
     testGoals: {},
+    onboardingStep: 0,
   }
 
   const biometrics: StoredBiometric[] = SESSIONS.map((s) => ({

@@ -122,6 +122,15 @@ const profileSchema = z.object({
    * erreichbar, und es ist eine Entscheidung des Athleten.
    */
   testGoals: z.record(z.string(), finite).default({}),
+  /**
+   * Wie weit der Einstieg gekommen ist.
+   *
+   * Ohne diesen Stand verlöre jemand, der den Einstieg auf Schritt sechs
+   * unterbricht, alles — und liefe beim nächsten Öffnen wieder von vorn los.
+   * Beim Abschluss wird zurückgesetzt, damit ein erneuter Durchlauf wieder
+   * am Anfang beginnt.
+   */
+  onboardingStep: z.number().int().min(0).max(20).default(0),
   performanceLevel: performanceLevelSchema.nullable().default(null),
   /** Jahre systematischen Trainings — nicht das Lebensalter. */
   trainingAgeYears: finite.min(0).max(70).nullable().default(null),
@@ -576,6 +585,7 @@ export const MIGRATIONS: Migration[] = [
           remindersEnabled: false,
           reminderIntervalDays: {},
           testGoals: {},
+          onboardingStep: 0,
         },
       })),
     }),

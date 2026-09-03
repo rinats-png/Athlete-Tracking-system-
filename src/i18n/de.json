@@ -383,7 +383,9 @@
     "goalNone": "Kein Ziel gewählt",
     "done": "Fertig",
     "remindersLink": "Erinnerungen und Abstände",
-    "coachLink": "Trainer-Ansicht öffnen"
+    "coachLink": "Trainer-Ansicht öffnen",
+    "redoOnboarding": "Einstieg erneut durchlaufen",
+    "redoOnboardingHint": "Führt dich noch einmal durch die Einrichtung. Deine Messwerte bleiben dabei erhalten — es ändern sich nur die Angaben, die du neu machst."
   },
   "fields": {
     "distanceM": "Distanz",
@@ -995,7 +997,9 @@
       "sessionsPerWeek": "Einheiten pro Woche",
       "level": "Erfahrungslevel",
       "levelNone": "Keine Angabe",
-      "missing": "Es fehlt noch: {{fields}}"
+      "missing": "Es fehlt noch: {{fields}}",
+      "birthDateWhy": "Ohne Geburtsdatum passt keine Altersklasse — und fast jede Referenz ist nach Alter gegliedert.",
+      "weightWhy": "Das Gewicht wird für Relativkraft und für Tests gebraucht, deren Kennzahl auf das Körpergewicht bezogen ist."
     },
     "sport": {
       "title": "Deine Hauptsportart",
@@ -1003,7 +1007,10 @@
       "search": "Sportart suchen",
       "searchPlaceholder": "Suchen — z. B. Judo, Marathon, Feuerwehr",
       "noMatch": "Keine Sportart gefunden für «{{query}}». «Allgemeine Fitness» passt für alles, was nicht in der Liste steht.",
-      "selected": "Gewählt: {{name}}"
+      "selected": "Gewählt: {{name}}",
+      "main": "Hauptsportart",
+      "more": "Weitere Sportarten",
+      "change": "Ändern"
     },
     "additional": {
       "title": "Weitere Sportarten",
@@ -1028,7 +1035,11 @@
       "title": "Bereits vorhandene Werte",
       "body": "Freiwillig. Wenn du Ergebnisse aus früheren Tests hast, trag sie hier ein — sie landen direkt im Profil, mit dem heutigen Datum.",
       "none": "Für diese Auswahl gibt es keine Tests mit einem einzelnen Wert.",
-      "hint": "Nur Tests mit einem einzelnen Messwert. Alles andere lässt sich später mit vollem Protokoll erfassen."
+      "hint": "Nur Tests mit einem einzelnen Messwert. Alles andere lässt sich später mit vollem Protokoll erfassen.",
+      "fromTable": "Aus einer Tabelle",
+      "byHand": "Von Hand eintragen",
+      "csvFound": "{{count}} Werte erkannt. Sie werden übernommen, wenn du weitergehst.",
+      "csvNone": "In dieser Datei wurden keine Werte erkannt. Im Profil gibt es den vollständigen Import, bei dem du die Spalten selbst zuordnest."
     },
     "result": {
       "eyebrow": "Dein Diagnostikprofil",
@@ -1045,6 +1056,66 @@
         "universal": "sportartübergreifend"
       },
       "body": "Du entscheidest, ob du der Empfehlung folgst oder alle Tests ansiehst. Die Auswahl passt sich an, sobald erste Ergebnisse da sind."
+    },
+    "intro": {
+      "title": "Was BASELINE ist",
+      "body": "Bevor du Angaben machst: was diese App tut, und was sie ausdrücklich nicht tut.",
+      "points": {
+        "measures": "Sie misst deine Leistungsfähigkeit mit Tests, die ein festes Protokoll haben — damit derselbe Test in einem Jahr denselben Wert bedeutet.",
+        "compares": "Sie ordnet deine Werte in benannte Referenzgruppen ein, mit Quelle und Datenqualität an jedem Vergleich. Wo es keine belegte Referenz gibt, sagt sie das, statt eine Zahl zu erfinden.",
+        "notPlan": "Sie ist kein Trainingsplan und kein Workout-Tracker. Sie sagt dir, wo du stehst — nicht, was du trainieren sollst.",
+        "notMedical": "Sie ist keine medizinische Diagnostik. Keine Diagnosen, keine Therapieempfehlungen, keine Bewertung von Krankheiten.",
+        "onDevice": "Alles bleibt auf diesem Gerät. Kein Konto, keine Übertragung, und der Export deiner Daten ist immer vollständig und kostenlos."
+      }
+    },
+    "role": {
+      "title": "Für dich oder für andere?",
+      "body": "Das entscheidet den ganzen weiteren Weg. Ändern lässt es sich später jederzeit im Profil.",
+      "options": {
+        "solo": {
+          "label": "Für mich selbst",
+          "hint": "Du misst dich und verfolgst deine eigene Entwicklung."
+        },
+        "coach": {
+          "label": "Ich betreue andere",
+          "hint": "Du testest Athleten, verwaltest ihre Profile und wertest Gruppen aus."
+        }
+      }
+    },
+    "person": {
+      "title": "Deine Angaben",
+      "body": "Jede dieser Angaben entscheidet, mit welcher Gruppe du verglichen wirst. Ohne sie lässt sich ein Wert speichern, aber nicht einordnen — und Einordnen ist, wofür diese App gebaut ist."
+    },
+    "equipment": {
+      "title": "Wo testest du?",
+      "body": "Daraus folgt, welche Tests du überhaupt durchführen kannst. Mehrfachauswahl — wer im Verein und im Studio misst, wählt beides.",
+      "hint": "Eine Näherung, kein Vertrag: im Testkatalog lässt sich die Ausrüstung jederzeit genauer einstellen. Wer nichts wählt, bekommt den vollständigen Katalog — ein leerer Filter versteckt nichts."
+    },
+    "rhythm": {
+      "title": "Wie oft willst du dich messen?",
+      "body": "Der Abstand bestimmt, wann ein Test wieder als fällig gilt. Er lässt sich je Test nachjustieren.",
+      "interval": "Abstand zwischen zwei Messungen",
+      "monthly": "4 Wochen",
+      "sixWeeks": "6 Wochen",
+      "quarterly": "3 Monate",
+      "halfYear": "6 Monate",
+      "remind": "Erinnere mich, wenn ein Test fällig ist"
+    },
+    "athletes": {
+      "title": "Deine Athleten",
+      "body": "Lege an, wen du betreust. Namen reichen — Geschlecht, Geburtsdatum und Sportart trägst du je Athlet im Profil nach, wenn du sie hast.",
+      "name": "Name",
+      "add": "Hinzufügen",
+      "none": "Noch niemand angelegt. Du kannst das auch später im Trainerbereich tun.",
+      "firstIsYou": "Der bereits vorhandene erste Eintrag bleibt bestehen — du kannst ihn im Trainerbereich umbenennen oder archivieren.",
+      "hint": "Bis zu 10 Athleten sind in der Trainerstufe enthalten. Jeder Athlet behält seinen eigenen Bestand und seinen eigenen Export."
+    },
+    "plan": {
+      "coachBody": "Der Einstieg ist damit fertig. Im Trainerbereich siehst du alle Betreuten auf einen Blick und kannst eine Gruppe an einer Station nacheinander testen.",
+      "coachHint": "Ein Athlet, den du anlegst, durchläuft diesen Einstieg nicht noch einmal — das wäre ein Fragebogen an die falsche Person.",
+      "startFirst": "Ersten Termin anlegen",
+      "firstTitle": "Erste Diagnostik",
+      "toCoach": "Zum Trainerbereich"
     }
   },
   "ageClass": {

@@ -110,18 +110,20 @@ export default function App() {
  * und «alles löschen» führt ehrlich wieder durch den Einstieg.
  */
 function OnboardingGate() {
-  const { data, role } = useAppData()
-  const [target, setTarget] = useState<'overview' | 'tests' | null>(null)
+  const { data } = useAppData()
+  const [target, setTarget] = useState<string | null>(null)
 
-  // Im Trainermodus trägt der Trainer die Angaben seiner Kunden im Profil
-  // ein; ein Einstieg je Kunde wäre ein Fragebogen an die falsche Person.
-  if (role === 'solo' && data.profile.onboardingCompletedAt == null) {
+  // Die Rolle wird IM Einstieg gewählt — er läuft deshalb für beide. Ein
+  // Athlet, den ein Trainer anlegt, gilt als eingerichtet und kommt hier gar
+  // nicht an: ein Einstieg je Kunde wäre ein Fragebogen an die falsche
+  // Person.
+  if (data.profile.onboardingCompletedAt == null) {
     return <OnboardingFlow onDone={setTarget} />
   }
-  if (target === 'tests' && window.location.pathname !== '/diagnostik') {
+  if (target && window.location.pathname !== target) {
     // Der Ablauf endet ausserhalb des Routers; der Zielpfad wird einmal
     // gesetzt, bevor der Router übernimmt.
-    window.history.replaceState(null, '', '/diagnostik')
+    window.history.replaceState(null, '', target)
   }
   return <RouterProvider router={router} />
 }

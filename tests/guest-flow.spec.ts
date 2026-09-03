@@ -55,7 +55,7 @@ test.describe('Gastmodus', () => {
     await page.getByRole('button', { name: 'Alle Daten löschen' }).click()
     await page.getByRole('button', { name: 'Ja, löschen' }).click()
     // Ein leerer Bestand führt ehrlich wieder durch den Einstieg.
-    await expect(page.getByText('Schritt 2 von 6')).toBeVisible()
+    await expect(page.getByText('Schritt 1 von 9')).toBeVisible()
   })
 
   test('es werden keine Netzwerkanfragen an Fremdziele gestellt', async ({ page }) => {

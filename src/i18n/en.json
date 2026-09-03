@@ -383,7 +383,9 @@
     "goalNone": "No goal chosen",
     "done": "Done",
     "remindersLink": "Reminders and intervals",
-    "coachLink": "Open coach view"
+    "coachLink": "Open coach view",
+    "redoOnboarding": "Run the setup again",
+    "redoOnboardingHint": "Takes you through the setup once more. Your measurements are kept — only the details you enter anew change."
   },
   "fields": {
     "distanceM": "Distance",
@@ -995,7 +997,9 @@
       "sessionsPerWeek": "Sessions per week",
       "level": "Experience level",
       "levelNone": "Not specified",
-      "missing": "Still missing: {{fields}}"
+      "missing": "Still missing: {{fields}}",
+      "birthDateWhy": "Without a birth date no age class fits — and nearly every reference is grouped by age.",
+      "weightWhy": "Weight is needed for relative strength and for tests whose metric is relative to body mass."
     },
     "sport": {
       "title": "Your main sport",
@@ -1003,7 +1007,10 @@
       "search": "Search sport",
       "searchPlaceholder": "Search — e.g. judo, marathon, firefighter",
       "noMatch": "No sport found for \"{{query}}\". \"General fitness\" fits everything not on the list.",
-      "selected": "Selected: {{name}}"
+      "selected": "Selected: {{name}}",
+      "main": "Main sport",
+      "more": "Further sports",
+      "change": "Change"
     },
     "additional": {
       "title": "Further sports",
@@ -1028,7 +1035,11 @@
       "title": "Existing values",
       "body": "Optional. If you have results from earlier tests, enter them here — they go straight into your profile with today's date.",
       "none": "There are no single-value tests for this selection.",
-      "hint": "Only tests with a single measured value. Everything else can be recorded later with the full protocol."
+      "hint": "Only tests with a single measured value. Everything else can be recorded later with the full protocol.",
+      "fromTable": "From a spreadsheet",
+      "byHand": "Enter by hand",
+      "csvFound": "{{count}} values recognised. They will be imported when you continue.",
+      "csvNone": "No values were recognised in this file. The profile holds the full import, where you assign the columns yourself."
     },
     "result": {
       "eyebrow": "Your diagnostic profile",
@@ -1045,6 +1056,66 @@
         "universal": "across sports"
       },
       "body": "You decide whether to follow the recommendation or look at all tests. The selection adapts as soon as the first results are in."
+    },
+    "intro": {
+      "title": "What BASELINE is",
+      "body": "Before you enter anything: what this app does, and what it expressly does not.",
+      "points": {
+        "measures": "It measures your performance with tests that follow a fixed protocol — so the same test means the same thing a year from now.",
+        "compares": "It places your values in named reference groups, with source and data quality on every comparison. Where no sourced reference exists, it says so instead of inventing a number.",
+        "notPlan": "It is not a training plan and not a workout tracker. It tells you where you stand — not what to train.",
+        "notMedical": "It is not medical diagnostics. No diagnoses, no therapy recommendations, no assessment of illness.",
+        "onDevice": "Everything stays on this device. No account, no transfer, and the export of your data is always complete and free."
+      }
+    },
+    "role": {
+      "title": "For you or for others?",
+      "body": "This decides the whole path ahead. You can change it any time in the profile.",
+      "options": {
+        "solo": {
+          "label": "For myself",
+          "hint": "You measure yourself and follow your own development."
+        },
+        "coach": {
+          "label": "I coach others",
+          "hint": "You test athletes, manage their profiles and analyse groups."
+        }
+      }
+    },
+    "person": {
+      "title": "Your details",
+      "body": "Each of these decides which group you are compared with. Without them a value can be stored but not placed — and placing values is what this app is built for."
+    },
+    "equipment": {
+      "title": "Where do you test?",
+      "body": "This decides which tests you can actually perform. Multiple choice — if you measure at the club and at the gym, pick both.",
+      "hint": "An approximation, not a contract: the test catalogue lets you set the equipment precisely at any time. Choose nothing and you get the full catalogue — an empty filter hides nothing."
+    },
+    "rhythm": {
+      "title": "How often do you want to measure?",
+      "body": "The interval decides when a test counts as due again. It can be adjusted per test.",
+      "interval": "Interval between two measurements",
+      "monthly": "4 weeks",
+      "sixWeeks": "6 weeks",
+      "quarterly": "3 months",
+      "halfYear": "6 months",
+      "remind": "Remind me when a test is due"
+    },
+    "athletes": {
+      "title": "Your athletes",
+      "body": "Add the people you coach. Names are enough — sex, birth date and sport you fill in per athlete later, when you have them.",
+      "name": "Name",
+      "add": "Add",
+      "none": "Nobody added yet. You can also do this later in the coach area.",
+      "firstIsYou": "The existing first entry stays — you can rename or archive it in the coach area.",
+      "hint": "Up to 10 athletes are included in the coach tier. Every athlete keeps their own data and their own export."
+    },
+    "plan": {
+      "coachBody": "The setup is done. In the coach area you see everyone you coach at a glance and can test a group at one station in turn.",
+      "coachHint": "An athlete you add does not run through this setup again — that would be a questionnaire for the wrong person.",
+      "startFirst": "Create the first session",
+      "firstTitle": "First assessment",
+      "toCoach": "To the coach area"
     }
   },
   "ageClass": {

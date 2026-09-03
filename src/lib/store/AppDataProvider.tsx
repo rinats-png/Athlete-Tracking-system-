@@ -81,7 +81,12 @@ interface AppDataValue {
   athletes: StoredAthlete[]
   activeAthleteId: string
   switchAthlete: (id: string) => void
-  addAthlete: (name: string) => string
+  /**
+   * Legt einen betreuten Athleten an. `activate` steuert, ob er sofort der
+   * aktive wird — im Einstieg darf er das NICHT, sonst wechselt der Bestand
+   * unter dem laufenden Ablauf weg.
+   */
+  addAthlete: (name: string, options?: { activate?: boolean }) => string
   renameAthlete: (id: string, name: string) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
   archiveAthlete: (id: string, archived: boolean) => void
@@ -353,7 +358,12 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           commitStore({ ...store, activeAthleteId: id })
         }
       },
-      addAthlete: (name) => {
+      addAthlete: (name, options) => {
+        const activate = options?.activate ?? true
+        // Der jeweils letzte geschriebene Stand, nicht der zuletzt
+        // gerenderte: zwei Athleten kurz hintereinander angelegt, und der
+        // erste wäre sonst wieder weg.
+        const source = storeRef.current
         const base = emptyAthlete(newId())
         // Ein vom Trainer angelegter Kunde gilt als eingerichtet: seine
         // Angaben kommen aus dem Profil, nicht aus dem Einstieg.
@@ -365,9 +375,9 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         // Ein neu angelegter Athlet wird sofort der aktive: alles andere wäre
         // ein zusätzlicher Klick für den einzigen sinnvollen nächsten Schritt.
         commitStore({
-          ...store,
-          athletes: [...store.athletes, athlete],
-          activeAthleteId: athlete.id,
+          ...source,
+          athletes: [...source.athletes, athlete],
+          activeAthleteId: activate ? athlete.id : source.activeAthleteId,
         })
         return athlete.id
       },

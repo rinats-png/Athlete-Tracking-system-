@@ -30,7 +30,7 @@ export function readOwnedEquipment(): Set<EquipmentId> {
   }
 }
 
-function writeOwnedEquipment(owned: Set<EquipmentId>) {
+export function writeOwnedEquipment(owned: Set<EquipmentId>) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...owned]))
   } catch {
