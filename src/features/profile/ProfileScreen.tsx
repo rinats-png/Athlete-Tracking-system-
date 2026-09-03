@@ -24,7 +24,7 @@ import type { AppLocale, Sex } from '@/types/domain'
 export function ProfileScreen() {
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
-  const { data, saveProfile, saveBiometric, resetAll, loadDemo, exportJson, importJson, mode } =
+  const { data, saveProfile, saveBiometric, resetAll, loadDemo, exportJson, importJson, mode, backupDue, markExported, recoveredAt } =
     useAppData()
 
   const latestWeight = data.biometrics.find((b) => b.bodyWeightKg != null)
@@ -34,12 +34,16 @@ export function ProfileScreen() {
 
   const age = ageFromBirthDate(data.profile.birthDate)
 
-  const download = () =>
+  const download = () => {
     downloadFile(
       `baseline-export-${new Date().toISOString().slice(0, 10)}.json`,
       exportJson(),
       'application/json',
     )
+    // Erst nach dem Erzeugen der Datei — sonst zählte ein abgebrochener
+    // Klick als Sicherung.
+    markExported()
+  }
 
   const upload = (file: File) => {
     void file.text().then((text) => {
@@ -224,6 +228,27 @@ export function ProfileScreen() {
                 <ShieldCheck size={16} className="mt-px shrink-0 text-accent-text" aria-hidden />
                 <span>{t('profile.privacy')}</span>
               </p>
+
+              {recoveredAt != null && (
+                <p
+                  className="rounded-md border border-line bg-sunken px-3 py-2 text-[13px] leading-relaxed"
+                  role="status"
+                >
+                  {t('profile.recovered', { date: formatDate(recoveredAt, locale) })}
+                </p>
+              )}
+
+              {backupDue.due && (
+                <p
+                  className="rounded-md border border-warning/40 bg-sunken px-3 py-2 text-[13px] leading-relaxed"
+                  role="status"
+                >
+                  {t(`profile.backupDue.${backupDue.reason}`, {
+                    count: backupDue.unsavedResults,
+                    days: backupDue.daysSinceExport ?? 0,
+                  })}
+                </p>
+              )}
 
               <div className="flex flex-wrap gap-2">
                 <Button variant="outline" size="sm" onClick={download}>

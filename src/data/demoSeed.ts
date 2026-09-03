@@ -187,6 +187,7 @@ export function buildDemoData(): StoredData {
     version: CURRENT_SCHEMA_VERSION,
     // Der Demobestand trägt bewusst keine fremde Marke.
     branding: { organisation: '', logoDataUrl: null, footer: '' },
+    lastExportAt: null,
     role: 'solo',
     activeAthleteId: 'demo-athlete',
     athletes: [

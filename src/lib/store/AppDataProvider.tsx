@@ -1,4 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { clearBackup, recoverFromBackup, writeBackup } from './backup'
+import { backupReminder, type BackupReminder } from '@/domain/backupReminder'
 import { buildDemoData } from '@/data/demoSeed'
 import { deriveMetrics, primaryValue } from '@/lib/metrics/derive'
 import { getTest } from '@/data/testCatalog'
@@ -108,6 +110,15 @@ interface AppDataValue {
   importJson: (json: string) => ImportOutcome
   /** Meldet, ob der letzte Schreibvorgang gescheitert ist. */
   storageBlocked: boolean
+  /** Ob und warum eine Sicherung fällig ist (§32). */
+  backupDue: BackupReminder
+  /** Der Export ist erfolgt — Grundlage der nächsten Erinnerung. */
+  markExported: () => void
+  /**
+   * Der Bestand kam aus der Zweitschrift zurück, weil der Gerätespeicher
+   * geräumt worden war. Trägt den Zeitpunkt der Zweitschrift.
+   */
+  recoveredAt: string | null
 }
 
 const AppDataContext = createContext<AppDataValue | null>(null)
@@ -156,6 +167,38 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
    * gerendert ist.
    */
   const storeRef = useRef<StoredData>(store)
+  const [recoveredAt, setRecoveredAt] = useState<string | null>(null)
+
+  /**
+   * Wiederherstellung nach einer Räumung des Gerätespeichers.
+   *
+   * Nur wenn der `localStorage` gar nichts hergab UND noch nichts gemessen
+   * wurde, darf die Zweitschrift einspringen. Sonst überschriebe eine alte
+   * Sicherung einen frischen Bestand — genau der Datenverlust, den sie
+   * verhindern soll.
+   */
+  useEffect(() => {
+    if (mode === 'demo') return
+    if (initial.unavailable) return
+    // Lag ein Eintrag vor, ist er die Wahrheit — auch ein leerer. Sonst
+    // überschriebe eine alte Sicherung einen absichtlich geleerten Bestand.
+    if (!initial.absent) return
+    let abgebrochen = false
+    void recoverFromBackup().then((recovery) => {
+      if (abgebrochen || !recovery) return
+      // In der Zwischenzeit wurde schon geschrieben: dann gilt das Neue.
+      if (storeRef.current !== initial.data) return
+      storeRef.current = recovery.data
+      setStore(recovery.data)
+      setRecoveredAt(recovery.savedAt)
+      saveData(recovery.data)
+    })
+    return () => {
+      abgebrochen = true
+    }
+    // Einmal beim Start, nicht bei jeder Änderung.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode])
 
   useEffect(() => {
     if (mode === 'demo' && countResults(initial.data) === 0 && countResults(store) > 0) {
@@ -165,11 +208,17 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode])
 
-  const commitStore = useCallback((next: StoredData) => {
-    storeRef.current = next
-    setStore(next)
-    if (!saveData(next)) setStorageBlocked(true)
-  }, [])
+  const commitStore = useCallback(
+    (next: StoredData) => {
+      storeRef.current = next
+      setStore(next)
+      if (!saveData(next)) setStorageBlocked(true)
+      // Die Zweitschrift läuft nebenher: sie darf die Eingabe nicht bremsen,
+      // und ihr Scheitern ist kein Fehler der Sitzung.
+      if (mode !== 'demo') void writeBackup(next)
+    },
+    [mode],
+  )
 
   /** Sicht auf den aktiven Athleten eines beliebigen Stands. */
   const viewOf = (source: StoredData): AthleteData => {
@@ -378,6 +427,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         }),
       resetAll: () => {
         clearData()
+        void clearBackup()
         const fresh = emptyData()
         storeRef.current = fresh
         setStore(fresh)
@@ -394,6 +444,9 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         }),
       audit: active.audit,
       exportJson: () => exportData(store),
+      backupDue: backupReminder(store),
+      markExported: () => commitStore({ ...store, lastExportAt: new Date().toISOString() }),
+      recoveredAt,
       importJson: (json) => {
         const outcome = importData(json)
         if (outcome.ok && outcome.data) {
@@ -404,7 +457,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       },
       storageBlocked,
     }),
-    [mode, data, store, active.id, initial.report, recordResult, commitAthlete, commitStore, storageBlocked],
+    [mode, data, store, active.id, initial.report, recordResult, commitAthlete, commitStore, storageBlocked, recoveredAt],
   )
 
   return <AppDataContext.Provider value={value}>{children}</AppDataContext.Provider>

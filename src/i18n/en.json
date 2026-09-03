@@ -293,6 +293,12 @@
     "saveWeight": "Save weight",
     "appearance": "Appearance",
     "data": "Your data",
+    "recovered": "This data came back from the device's second copy, saved on {{date}}. The browser had cleared the main storage.",
+    "backupDue": {
+      "never_exported": "You have {{count}} measurements and have never exported. The data lives on this device only — an export makes it yours without it.",
+      "many_new_results": "{{count}} measurements have been added since the last export. A new export takes one click.",
+      "long_ago": "The last export was {{days}} days ago, and {{count}} measurements have been added since."
+    },
     "privacy": "Everything lives in this browser only. Nothing is transmitted and no account is created. Clearing browser data also clears these values — that is what the export is for.",
     "export": "Export",
     "import": "Import",

@@ -16,7 +16,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 11
+export const CURRENT_SCHEMA_VERSION = 12
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -311,6 +311,13 @@ const athleteSchema = z.object({
 export const storedDataSchema = z.object({
   version: z.literal(CURRENT_SCHEMA_VERSION),
   branding: brandingSchema.default(() => brandingSchema.parse({})),
+  /**
+   * Wann zuletzt exportiert wurde. Grundlage der Sicherungserinnerung — die
+   * Daten liegen auf einem Gerät, und ein Gerät geht verloren. Der Export ist
+   * die einzige Sicherung, die dem Nutzer selbst gehört (§32), deshalb steht
+   * hier ein Datum und keine Zählung von Klicks.
+   */
+  lastExportAt: isoDate.nullable().default(null),
   /** 'solo' = nur der eigene Bestand, 'coach' = mehrere betreute Athleten. */
   role: z.enum(['solo', 'coach']).default('solo'),
   athletes: z.array(athleteSchema).min(1),
@@ -542,6 +549,18 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 11,
+    to: 12,
+    describe: 'Zeitpunkt des letzten Exports für die Sicherungserinnerung',
+    run: (data) => ({
+      ...data,
+      version: 12,
+      // Kein erfundenes Datum: wer noch nie exportiert hat, wird beim
+      // nächsten Mal erinnert, und das ist richtig so.
+      lastExportAt: null,
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -580,6 +599,7 @@ export function emptyData(): ValidatedData {
   return {
     version: CURRENT_SCHEMA_VERSION,
     branding: brandingSchema.parse({}),
+    lastExportAt: null,
     role: 'solo',
     athletes: [athlete],
     activeAthleteId: athlete.id,
@@ -687,6 +707,10 @@ export function parseStoredData(raw: unknown): ParseOutcome {
   const salvaged: ValidatedData = {
     version: CURRENT_SCHEMA_VERSION,
     branding: branding.success ? branding.data : brandingSchema.parse({}),
+    lastExportAt:
+      typeof working.lastExportAt === 'string' && !Number.isNaN(Date.parse(working.lastExportAt))
+        ? working.lastExportAt
+        : null,
     role: working.role === 'coach' ? 'coach' : 'solo',
     athletes,
     activeAthleteId: activeId,

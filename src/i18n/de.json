@@ -293,6 +293,12 @@
     "saveWeight": "Gewicht speichern",
     "appearance": "Darstellung",
     "data": "Deine Daten",
+    "recovered": "Dieser Bestand kam aus der Zweitschrift auf dem Gerät zurück, gesichert am {{date}}. Der Browser hatte den Hauptspeicher geräumt.",
+    "backupDue": {
+      "never_exported": "Du hast {{count}} Messungen und noch nie exportiert. Die Daten liegen nur auf diesem Gerät — mit einem Export gehören sie dir auch ohne es.",
+      "many_new_results": "Seit dem letzten Export sind {{count}} Messungen dazugekommen. Ein neuer Export dauert einen Klick.",
+      "long_ago": "Der letzte Export ist {{days}} Tage her, seitdem sind {{count}} Messungen dazugekommen."
+    },
     "privacy": "Alles liegt ausschliesslich in diesem Browser. Es wird nichts übertragen und kein Konto angelegt. Beim Löschen der Browserdaten sind auch diese Werte weg — dafür der Export.",
     "export": "Exportieren",
     "import": "Importieren",

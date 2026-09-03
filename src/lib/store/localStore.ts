@@ -46,6 +46,13 @@ export interface LoadResult {
   report: LoadReport
   /** Der Speicher war nicht lesbar (privater Modus, gesperrt). */
   unavailable: boolean
+  /**
+   * Es lag gar kein Eintrag vor. Das ist der Fall beim ersten Start — und der
+   * Fall nach einer Räumung durch den Browser. Beide sehen im Bestand gleich
+   * aus, deshalb steht die Unterscheidung hier und nicht in den Daten: nur
+   * dann darf die Zweitschrift einspringen.
+   */
+  absent: boolean
 }
 
 /**
@@ -58,10 +65,10 @@ export function loadData(): LoadResult {
   try {
     raw = localStorage.getItem(STORAGE_KEY)
   } catch {
-    return { data: emptyData(), report: emptyReport(), unavailable: true }
+    return { data: emptyData(), report: emptyReport(), unavailable: true, absent: true }
   }
 
-  if (!raw) return { data: emptyData(), report: emptyReport(), unavailable: false }
+  if (!raw) return { data: emptyData(), report: emptyReport(), unavailable: false, absent: true }
 
   let parsedJson: unknown
   try {
@@ -71,11 +78,14 @@ export function loadData(): LoadResult {
       data: emptyData(),
       report: { ...emptyReport(), rejected: [{ kind: 'file', id: '-', reason: 'Kein gültiges JSON' }] },
       unavailable: false,
+      // Ein beschädigter Eintrag ist so gut wie keiner: die Zweitschrift ist
+      // die bessere Quelle.
+      absent: true,
     }
   }
 
   const { data, report } = parseStoredData(parsedJson)
-  return { data: data ?? emptyData(), report, unavailable: false }
+  return { data: data ?? emptyData(), report, unavailable: false, absent: data == null }
 }
 
 function emptyReport(): LoadReport {
