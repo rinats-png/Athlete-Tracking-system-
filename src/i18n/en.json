@@ -239,7 +239,8 @@
     "equipmentClear": "Clear selection",
     "equipmentMissing": "missing: {{items}}",
     "equipmentDoable": "{{count}} of them with your equipment",
-    "equipmentNoneDoable": "Nothing here can be measured with this equipment. One more item and the catalogue fills up again."
+    "equipmentNoneDoable": "Nothing here can be measured with this equipment. One more item and the catalogue fills up again.",
+    "attachToOpen": "Count towards the open session \"{{title}}\". Unchecked, the result stays a single test and the session stays open."
   },
   "history": {
     "title": "History",
@@ -1410,5 +1411,11 @@
     "noSuggestion": "A suggestion appears from three measurements on.",
     "dueOn": "due on {{date}}",
     "default": "Default"
+  },
+  "stages": {
+    "up": "One stage up",
+    "down": "One stage back",
+    "reset": "Reset",
+    "hint": "The counter tracks the stages reached and runs from the first one. The signal tones come from your protocol's audio — the app deliberately sets no beat of its own, which would be a different load under the same name."
   }
 }

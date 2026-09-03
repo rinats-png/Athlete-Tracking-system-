@@ -239,7 +239,8 @@
     "equipmentClear": "Auswahl zurücksetzen",
     "equipmentMissing": "fehlt: {{items}}",
     "equipmentDoable": "{{count}} davon mit deiner Ausrüstung",
-    "equipmentNoneDoable": "Mit dieser Ausrüstung lässt sich hier nichts messen. Ein Stück mehr, und der Katalog füllt sich wieder."
+    "equipmentNoneDoable": "Mit dieser Ausrüstung lässt sich hier nichts messen. Ein Stück mehr, und der Katalog füllt sich wieder.",
+    "attachToOpen": "Zum laufenden Termin «{{title}}» zählen. Ohne Haken bleibt das Ergebnis ein Einzeltest und der Termin offen."
   },
   "history": {
     "title": "Verlauf",
@@ -1410,5 +1411,11 @@
     "noSuggestion": "Ein Vorschlag entsteht ab drei Messungen.",
     "dueOn": "fällig am {{date}}",
     "default": "Vorgabe"
+  },
+  "stages": {
+    "up": "Eine Stufe weiter",
+    "down": "Eine Stufe zurück",
+    "reset": "Zurücksetzen",
+    "hint": "Der Zähler zählt die erreichten Stufen mit und läuft ab der ersten mit. Die Signaltöne kommen aus der Aufnahme deines Protokolls — einen eigenen Takt gibt die App bewusst nicht vor, sonst wäre es eine andere Belastung unter demselben Namen."
   }
 }

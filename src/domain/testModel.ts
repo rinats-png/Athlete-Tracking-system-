@@ -29,10 +29,29 @@ export type TestMode = 'manual' | 'timer' | 'series' | 'external'
  *              speichert und deutet ihn.
  *   manual   — draussen durchführen, Ergebnis eintragen.
  */
+/**
+ * Zählt dieser Test Stufen, die ein Mensch mitzählen kann?
+ *
+ * Das Kennzeichen ist die Einheit «Level» an der Hauptkennzahl: dort ist die
+ * Stufe selbst das Ergebnis. Wo die Hauptkennzahl Watt oder eine Pace ist,
+ * kommt der Wert vom Gerät.
+ */
+export function hasStageLevel(test: TestDefinition): boolean {
+  if (test.protocol.mode !== 'stages') return false
+  const field = test.fields.find((f) => f.key === test.primaryMetric)
+  return field?.unit === 'Level'
+}
+
 export function testMode(test: TestDefinition): TestMode {
   if (test.setting === 'lab') return 'external'
   if (test.protocol.mode === 'countdown' || test.protocol.mode === 'amrap') return 'timer'
-  if (test.protocol.mode === 'attempts' || test.protocol.mode === 'stages') return 'series'
+  if (test.protocol.mode === 'attempts') return 'series'
+  // Ein Stufenprotokoll allein macht noch keine begleitete Serie. Beim
+  // Rampentest auf dem Ergometer und beim Stufenschwimmen ist das Ergebnis
+  // eine Wattzahl beziehungsweise eine Pace — die liest man am Gerät oder an
+  // der Uhr ab, und die App kann dabei nichts führen. Begleitet wird nur,
+  // wo tatsächlich Stufen gezählt werden.
+  if (test.protocol.mode === 'stages') return hasStageLevel(test) ? 'series' : 'manual'
   // Tests, deren Ergebnis ein Leistungsmesser oder Ergometer ausgibt.
   const devices = new Set(['power_meter', 'rowing_erg', 'ski_erg', 'bike_erg'])
   if (test.equipmentIds.some((group) => group.every((id) => devices.has(id)))) return 'external'

@@ -112,3 +112,51 @@ test.describe('Ergebnis', () => {
     await expect(page.getByText('Keine belastbare Gesellschaftsreferenz verfügbar.')).toBeVisible()
   })
 })
+
+/**
+ * EIN WEG ZU MESSEN.
+ *
+ * Gemessener Fehler: wer eine Batterie laufen hatte und den Test aus dem
+ * Katalog startete, bekam ein Ergebnis, das nirgends dazugehörte — der
+ * Termin blieb offen, obwohl gemessen worden war. Der laufende Termin wird
+ * jetzt vorgeschlagen, sichtbar und abwählbar.
+ */
+test.describe('Ein Weg zu messen', () => {
+  test('ein Einzeltest wird dem laufenden Termin zugeschlagen, sichtbar und abwählbar', async ({
+    page,
+  }) => {
+    await openGuest(page)
+    await page.evaluate(() => {
+      const raw = localStorage.getItem('baseline.data.v1')!
+      const store = JSON.parse(raw)
+      store.athletes[0].assessments = [
+        {
+          id: 'a1',
+          title: 'Grundlagen',
+          batterySlug: null,
+          performedOn: new Date().toISOString().slice(0, 10),
+          status: 'in_progress',
+          plannedTestSlugs: ['plank_hold'],
+          readiness: null,
+          nextAssessmentOn: null,
+          createdAt: new Date().toISOString(),
+          completedAt: null,
+        },
+      ]
+      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+    })
+    await page.goto('/tests/plank_hold', { waitUntil: 'domcontentloaded' })
+
+    const box = page.getByRole('checkbox', { name: /Grundlagen/ })
+    await expect(box, 'die Zuordnung muss sichtbar sein, nicht still').toBeVisible()
+    await expect(box).toBeChecked()
+    await box.uncheck()
+    await expect(box).not.toBeChecked()
+  })
+
+  test('ohne laufenden Termin fragt nichts danach', async ({ page }) => {
+    await openGuest(page)
+    await page.goto('/tests/plank_hold', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByRole('checkbox', { name: /Termin/ })).toHaveCount(0)
+  })
+})

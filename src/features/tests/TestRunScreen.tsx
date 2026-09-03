@@ -8,8 +8,10 @@ import { NumberField } from '@/components/ui/NumberField'
 import { DurationField } from '@/components/ui/DurationField'
 import { Timer } from './Timer'
 import { AttemptTable } from './AttemptTable'
+import { StageCounter } from './StageCounter'
 import { ContextFields } from './ContextFields'
 import { aggregateAttempts, attemptContextFor, defaultSelectionFor } from '@/domain/assessment'
+import { hasStageLevel } from '@/domain/testModel'
 import { getTest } from '@/data/testCatalog'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { deriveMetrics } from '@/lib/metrics/derive'
@@ -38,9 +40,28 @@ export function TestRunScreen() {
   // Läuft dieser Test innerhalb einer Diagnostik? Dann gehört das Ergebnis
   // dem Termin, und der Rückweg führt dorthin und nicht in den Verlauf.
   const assessmentId = searchParams.get('diagnostik')
-  const assessment = assessmentId
+  const namedAssessment = assessmentId
     ? (data.assessments.find((a) => a.id === assessmentId) ?? null)
     : null
+
+  /**
+   * EIN WEG ZU MESSEN.
+   *
+   * Bisher gab es zwei: innerhalb eines Termins, und als Einzeltest daneben.
+   * Wer eine Batterie laufen hatte und den Test aus dem Katalog startete,
+   * bekam ein Ergebnis, das nirgends dazugehörte — der Termin blieb offen,
+   * obwohl gemessen worden war. Deshalb schlägt die App den laufenden Termin
+   * vor, wenn er diesen Test überhaupt vorsieht. Sichtbar und abwählbar: die
+   * Zuordnung ist eine Entscheidung, keine stille Rechnung.
+   */
+  const openAssessment =
+    namedAssessment == null
+      ? (data.assessments.find(
+          (a) => a.status === 'in_progress' && a.plannedTestSlugs.includes(slug),
+        ) ?? null)
+      : null
+  const [useOpen, setUseOpen] = useState(true)
+  const assessment = namedAssessment ?? (useOpen ? openAssessment : null)
 
   const test = getTest(slug)
   const [values, setValues] = useState<Record<string, number | null>>({})
@@ -54,6 +75,12 @@ export function TestRunScreen() {
   const [saved, setSaved] = useState(false)
 
   const attemptContext = attemptContextFor(slug)
+  // Der Zähler erscheint nur, wo wirklich Stufen gezählt werden — nicht bei
+  // einem Rampentest, dessen Ergebnis das Ergometer ausgibt.
+  const stageField =
+    test && hasStageLevel(test)
+      ? (test.fields.find((f) => f.key === test.primaryMetric) ?? null)
+      : null
 
   /**
    * Aus den Versuchen wird der gewertete Datensatz. Er überschreibt die
@@ -131,9 +158,25 @@ export function TestRunScreen() {
         </Link>
       </Button>
 
-      {assessment && (
+      {openAssessment && (
+        <label className="mb-3 flex items-start gap-3 border-l-2 border-accent bg-accent/10 px-3 py-2 text-[13px] text-ink-secondary">
+          <input
+            type="checkbox"
+            className="mt-0.5 size-5 shrink-0"
+            checked={useOpen}
+            onChange={(e) => setUseOpen(e.target.checked)}
+          />
+          <span>
+            {t('tests.attachToOpen', {
+              title: openAssessment.title ?? openAssessment.performedOn,
+            })}
+          </span>
+        </label>
+      )}
+
+      {namedAssessment && (
         <p className="mb-3 border-l-2 border-accent bg-accent/10 px-3 py-2 text-[13px] text-ink-secondary">
-          {t('assessments.partOf', { title: assessment.title ?? assessment.performedOn })}
+          {t('assessments.partOf', { title: namedAssessment.title ?? namedAssessment.performedOn })}
         </p>
       )}
 
@@ -160,6 +203,20 @@ export function TestRunScreen() {
                 <Timer seconds={test.protocol.durationSeconds} />
               </div>
             )}
+
+          {/* Stufentests zählen mit, statt die Endstufe erst hinterher
+              abzufragen. Das Feld im Formular bleibt: wer den Wert schon
+              kennt, trägt ihn dort ein. */}
+          {stageField && (
+            <StageCounter
+              value={values[stageField.key] ?? null}
+              step={stageField.step ?? 1}
+              min={stageField.min ?? 1}
+              max={stageField.max ?? 99}
+              label={t(`fields.${stageField.key}`)}
+              onChange={(next) => setValues((current) => ({ ...current, [stageField.key]: next }))}
+            />
+          )}
         </Panel>
 
         <Panel className="lg:col-span-2">
