@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft, Download } from 'lucide-react'
@@ -50,13 +50,15 @@ export function YearReviewScreen() {
   const score = performanceScore(axes)
   const sport = data.profile.disciplineId ? disciplineById(data.profile.disciplineId) : null
 
-  if (data.results.length === 0) {
-    return <EmptyState title={t('year.emptyTitle')} body={t('year.emptyBody')} />
-  }
-
-  const download = () => {
+  /**
+   * Die Karte wird GEZEICHNET, sobald sie zu sehen ist — nicht erst beim
+   * Herunterladen. Vorher stand an der Stelle ein leerer Rahmen, und wer
+   * eine Vorschau erwartet, sah einen Fehler. Wer sie weitergibt, soll
+   * vorher wissen, was daraufsteht.
+   */
+  const paint = useCallback(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas) return false
     drawPerformanceCard(canvas, {
       title: sport?.name[locale] ?? t('year.generalProfile'),
       score: score.value,
@@ -64,12 +66,23 @@ export function YearReviewScreen() {
       rows: score.parts
         .slice(0, 5)
         .map((part) => ({ label: axisLabel(part.axisId, t, locale), value: part.score })),
-      footer: t('year.cardFooter', {
-        results: review.results,
-        year: review.year,
-      }),
+      footer: t('year.cardFooter', { results: review.results, year: review.year }),
       caveat: t('year.cardCaveat'),
     })
+    return true
+  }, [locale, review.results, review.year, score, sport, t])
+
+  useEffect(() => {
+    paint()
+  }, [paint])
+
+  if (data.results.length === 0) {
+    return <EmptyState title={t('year.emptyTitle')} body={t('year.emptyBody')} />
+  }
+
+  const download = () => {
+    const canvas = canvasRef.current
+    if (!paint() || !canvas) return
     const link = document.createElement('a')
     link.download = `baseline-${review.year}.png`
     link.href = canvas.toDataURL('image/png')

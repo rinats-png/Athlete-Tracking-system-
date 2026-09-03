@@ -19,3 +19,8 @@ coverage
 test-results/
 playwright-report/
 baseline-netlify.zip
+
+# Mockup-Aufnahmen: Bilder, keine Quelltexte.
+mockups/out/
+mockups/web/
+baseline-mockups.zip
