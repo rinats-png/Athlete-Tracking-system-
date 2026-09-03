@@ -22,10 +22,11 @@ import { buildInsights } from '@/domain/insights'
 import { radarProfile } from '@/lib/scoring'
 import { axisLabel } from '@/data/profileAxes'
 import { getTest } from '@/data/testCatalog'
-import { formatDate } from '@/lib/format'
+import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { cn } from '@/lib/utils'
 import type { AppLocale } from '@/types/domain'
+import { DETECTION_FACTOR, typicalErrorPercent } from '@/domain/change'
 
 /**
  * Auswertung über die Zeit.
@@ -199,6 +200,20 @@ export function AnalysisDeepDive() {
                       </td>
                       <td className="px-4 py-2.5">
                         <ChangeBadge value={row.changePercent} />
+                        {/* Ohne dieses Mass sähe eine Tagesschwankung genauso
+                            aus wie eine Entwicklung über ein Jahr. */}
+                        {(() => {
+                          const error = typicalErrorPercent(data.results, row.testSlug)
+                          if (error == null || row.changePercent == null) return null
+                          const belegt = Math.abs(row.changePercent) > error * DETECTION_FACTOR
+                          return (
+                            <span className="mt-0.5 block text-[11px] text-ink-muted">
+                              {t(belegt ? 'analysis.beyondNoise' : 'analysis.withinNoise', {
+                                error: formatNumber(error, locale, 1),
+                              })}
+                            </span>
+                          )
+                        })()}
                       </td>
                       <td className="px-4 py-2.5">
                         <TrendBadge trend={trend} />

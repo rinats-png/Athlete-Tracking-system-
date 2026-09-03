@@ -678,7 +678,9 @@
     "onlyIn": {
       "before": "nur vorher gemessen",
       "after": "nur nachher gemessen"
-    }
+    },
+    "beyondNoise": "über deiner Schwankung von {{error}} %",
+    "withinNoise": "im Bereich deiner Schwankung von {{error}} %"
   },
   "insights": {
     "findings": "Auffälligkeiten",
@@ -1431,5 +1433,17 @@
     "promiseExport": "Der Export deiner Daten ist vollständig und kostenlos — auch ohne Abo. Deine Messwerte gehören dir, nicht dem Abo.",
     "promiseOffline": "Messen und Auswerten auf dem eigenen Gerät funktioniert ohne Konto. Bezahlt wird für Synchronisierung, Betreuung mehrerer Athleten und Berichte.",
     "promiseNoAds": "Keine Werbung, kein Weiterverkauf von Daten, keine Auswertung deiner Werte für andere Zwecke."
+  },
+  "change": {
+    "title": "Veränderung",
+    "first": "Das ist deine erste Messung in diesem Test. Ab der zweiten steht hier die Veränderung.",
+    "sincePrevious": "gegenüber der Messung vor {{days}} Tagen",
+    "unknownError": "Wie stark deine Werte in diesem Test von Tag zu Tag schwanken, ist noch nicht bekannt. Ab {{count}} weiteren Messungen kann die App sagen, ob eine Veränderung grösser ist als diese Schwankung.",
+    "verdict": {
+      "better": "Das ist mehr als nötig, um eine echte Veränderung nachzuweisen: bei deiner üblichen Schwankung von {{error}} % in diesem Test (aus {{points}} Messungen) zählt ab {{detectable}} %. Die Verbesserung ist belegt.",
+      "worse": "Das ist mehr als nötig, um eine echte Veränderung nachzuweisen: bei deiner üblichen Schwankung von {{error}} % (aus {{points}} Messungen) zählt ab {{detectable}} %. Der Rückgang liegt also nicht am Messrauschen.",
+      "within_noise": "Zu wenig, um es von deiner üblichen Schwankung zu unterscheiden. Bei {{error}} % Schwankung in diesem Test (aus {{points}} Messungen) wäre eine Veränderung ab {{detectable}} % nachweisbar.",
+      "unknown_error": "Wie stark deine Werte in diesem Test schwanken, ist noch nicht bekannt."
+    }
   }
 }

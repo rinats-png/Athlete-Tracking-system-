@@ -678,7 +678,9 @@
     "onlyIn": {
       "before": "measured before only",
       "after": "measured after only"
-    }
+    },
+    "beyondNoise": "beyond your {{error}} % variation",
+    "withinNoise": "within your {{error}} % variation"
   },
   "insights": {
     "findings": "Notable axes",
@@ -1431,5 +1433,17 @@
     "promiseExport": "The export of your data is complete and free — with or without a subscription. Your measurements are yours, not the subscription's.",
     "promiseOffline": "Measuring and analysing on your own device works without an account. You pay for sync, coaching several athletes, and reports.",
     "promiseNoAds": "No advertising, no reselling of data, no analysis of your values for other purposes."
+  },
+  "change": {
+    "title": "Change",
+    "first": "This is your first measurement in this test. From the second one on, the change appears here.",
+    "sincePrevious": "against the measurement {{days}} days ago",
+    "unknownError": "How much your values in this test vary from day to day is not known yet. After {{count}} more measurements the app can tell whether a change exceeds that variation.",
+    "verdict": {
+      "better": "That is more than needed to establish a real change: with your usual variation of {{error}} % in this test (from {{points}} measurements), it counts from {{detectable}} %. The improvement holds.",
+      "worse": "That is more than needed to establish a real change: with your usual variation of {{error}} % (from {{points}} measurements), it counts from {{detectable}} %. So the drop is not measurement noise.",
+      "within_noise": "Too little to tell apart from your usual variation. At {{error}} % variation in this test (from {{points}} measurements), a change would be detectable from {{detectable}} %.",
+      "unknown_error": "How much your values in this test vary is not known yet."
+    }
   }
 }

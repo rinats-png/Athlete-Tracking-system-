@@ -14,6 +14,7 @@ import { getTest } from '@/data/testCatalog'
 import { rateResult } from '@/domain/rating'
 import { assessQuality } from '@/domain/dataQuality'
 import { nextTests } from '@/domain/nextTest'
+import { changeReport, missingForError, type ChangeReport } from '@/domain/change'
 import { formulaFor } from '@/domain/formulaRegistry'
 import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
@@ -64,6 +65,7 @@ export function ResultScreen() {
     )
   }
 
+  const change = changeReport(data.results, result)
   const primary = rating.comparison
   const all = [...(primary ? [primary] : []), ...rating.alternatives]
   const next = suggestions.find((s) => s.slug !== test.slug) ?? null
@@ -114,6 +116,7 @@ export function ResultScreen() {
             )}
             {result.notes && <p className="mt-3 text-[12px] text-ink-secondary">{t('result.note')}: {result.notes}</p>}
           </div>
+          <ChangeBlock change={change} missing={missingForError(data.results, result.testSlug)} />
           <PhotoBlock
             photo={result.photo}
             onChange={(dataUrl) => setResultPhoto(result.id, dataUrl)}
@@ -308,6 +311,59 @@ function PhotoBlock({
           {t(`result.photoError.${error}`)}
         </p>
       )}
+    </div>
+  )
+}
+
+
+/**
+ * Die Veränderung gegenüber der letzten Messung — und ob sie etwas bedeutet.
+ *
+ * Der Satz «+8 % gegenüber deinem letzten Test» ist ohne die eigene Streuung
+ * wertlos: liegt die typische Abweichung dieses Athleten in diesem Test bei
+ * 6 %, sind 8 % kaum mehr als ein guter Tag. Deshalb steht die Streuung immer
+ * daneben, und solange sie unbekannt ist, sagt der Block das, statt die
+ * Prozentzahl allein zu feiern.
+ */
+function ChangeBlock({ change, missing }: { change: ChangeReport; missing: number }) {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  if (change.verdict === 'first') {
+    return (
+      <div className="border-t border-line px-4 py-3">
+        <span className="label-tag">{t('change.title')}</span>
+        <p className="mt-1 text-[13px] text-ink-secondary">{t('change.first')}</p>
+      </div>
+    )
+  }
+
+  const percent = change.changePercent ?? 0
+  const signed = `${percent > 0 ? '+' : ''}${formatNumber(percent, locale, 1)} %`
+  const tone =
+    change.verdict === 'better'
+      ? 'text-good'
+      : change.verdict === 'worse'
+        ? 'text-critical'
+        : 'text-ink-secondary'
+
+  return (
+    <div className="border-t border-line px-4 py-3">
+      <span className="label-tag">{t('change.title')}</span>
+      <p className="mt-1 flex items-baseline gap-2">
+        <span className={`readout text-[22px] tabular-nums ${tone}`}>{signed}</span>
+        <span className="text-[12px] text-ink-muted">
+          {t('change.sincePrevious', { days: change.daysSincePrevious ?? 0 })}
+        </span>
+      </p>
+      <p className="mt-1 text-[13px] leading-relaxed text-ink-secondary">
+        {change.typicalErrorPercent == null
+          ? t('change.unknownError', { count: missing })
+          : t(`change.verdict.${change.verdict}`, {
+              error: formatNumber(change.typicalErrorPercent, locale, 1),
+              detectable: formatNumber(change.detectablePercent ?? 0, locale, 1),
+              points: change.points,
+            })}
+      </p>
     </div>
   )
 }
