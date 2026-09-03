@@ -53,6 +53,7 @@ export function RemindersScreen() {
               />
               {t('reminders.enable')}
             </label>
+            <p className="mt-2 text-[12px] leading-relaxed text-ink-muted">{t('reminders.noPush')}</p>
           </div>
           <PanelHeader title={t('reminders.overdue')} className="border-t" />
           {!settings.remindersEnabled || overdue.length === 0 ? (

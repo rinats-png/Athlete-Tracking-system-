@@ -1298,7 +1298,18 @@
     "derived": "Derived metrics",
     "note": "Note",
     "dataQuality": "Data quality",
-    "percentileTop": "Percentile >99"
+    "percentileTop": "Percentile >99",
+    "photoAdd": "Photograph or choose a record",
+    "photoWorking": "Shrinking image …",
+    "photoRemove": "Remove record",
+    "photoAlt": "Record of the measurement",
+    "photoAdded": "added on {{date}}",
+    "photoHint": "One image per result — the timer display, the scale readout. It is downsized and stays on this device; it is not transmitted and not analysed.",
+    "photoError": {
+      "not_an_image": "That is not an image file.",
+      "unreadable": "The image could not be read.",
+      "too_large": "The image is still too large after downsizing. A crop of the display is enough."
+    }
   },
   "analysisHome": {
     "eyebrow": "Analysis",
@@ -1384,6 +1395,7 @@
     "eyebrow": "History",
     "title": "Reminders",
     "intro": "Local, no server: the app knows when you last measured. Reminders are off until you switch them on.",
+    "noPush": "The reminder appears inside the app when you open it. BASELINE sends no notification to your device: that would need a server knowing who you are and when you last measured — and there deliberately is none.",
     "enable": "Enable reminders",
     "enabled": "Reminders are on",
     "disabled": "Reminders are off",

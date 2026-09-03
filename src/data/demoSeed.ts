@@ -174,6 +174,7 @@ export function buildDemoData(): StoredData {
         sex: ctx.sex,
         attempts: [],
       attemptSelection: null,
+      photo: null,
       context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
       assessmentId: assessment.id,
         createdAt: iso,

@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { openGuest } from './helpers'
 import { expect, test } from '@playwright/test'
 import { dueTests, overdueTests, suggestedIntervalDays, SUGGESTED_INTERVAL_BOUNDS } from '../src/domain/reminders'
 import { monthCalendar } from '../src/domain/calendar'
@@ -21,6 +23,7 @@ const result = (testSlug: string, performedAt: string): StoredResult =>
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    photo: null,
     context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     createdAt: performedAt,
   }) as StoredResult
@@ -81,5 +84,25 @@ test.describe('Kalender', () => {
     const twentieth = month.weeks.flat().find((d) => d.date === '2026-03-20')!
     expect(tenth.results).toHaveLength(1)
     expect(twentieth.due).toEqual(['cooper_12min'])
+  })
+})
+
+/**
+ * Eine Erinnerung, die nicht kommt, ist ein gebrochenes Versprechen. BASELINE
+ * hat keinen Server, der Mitteilungen schicken könnte — also muss der Text
+ * das sagen, bevor jemand sich darauf verlässt.
+ */
+test.describe('Was die Erinnerung leisten kann', () => {
+  test('der Bildschirm sagt, dass keine Mitteilung aufs Gerät geht', async ({ page }) => {
+    await openGuest(page)
+    await page.goto('/verlauf/erinnerungen', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByText(/keine Mitteilung auf dein Gerät/i)).toBeVisible()
+  })
+
+  test('kein Text verspricht eine Benachrichtigung', () => {
+    const de = JSON.parse(readFileSync(new URL('../src/i18n/de.json', import.meta.url), 'utf-8'))
+    // Nur die Texte, nicht die Schlüssel: `noPush` heisst so, verspricht aber nichts.
+    const werbend = Object.values(de.reminders).join(' ').match(/Push|benachrichtig/i)
+    expect(werbend, 'sonst erwartet jemand eine Mitteilung, die nie kommt').toBeNull()
   })
 })

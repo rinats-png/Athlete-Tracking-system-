@@ -196,6 +196,12 @@ const readinessSchema = z.object({
   recordedAt: isoDate,
 })
 
+/**
+ * Obergrenze eines Belegbilds als Base64-Zeichen (~250 KB Bild). Passt
+ * mehrfach in die Quote eines Browsers und reicht für ein lesbares Display.
+ */
+export const MAX_PHOTO_CHARS = 340_000
+
 const resultSchema = z.object({
   id: z.string().min(1),
   testSlug: z.string().min(1),
@@ -214,6 +220,21 @@ const resultSchema = z.object({
   /** Bedingungen der Messung. Leer, solange nichts erfasst wurde. */
   context: contextSchema.default(() => contextSchema.parse({})),
   notes: z.string().max(2000).optional(),
+  /**
+   * Ein Beleg zur Messung (§14): das Display der Zeitmessung, die Anzeige der
+   * Waage, der Zettel mit den Runden. Er beantwortet später die Frage «woher
+   * kommt diese Zahl», die keine Notiz beantwortet.
+   *
+   * Absichtlich eng gefasst: genau ein Bild je Ergebnis, verkleinert und als
+   * JPEG abgelegt. Der Grenzwert ist die Speicherquote des Geräts — ein
+   * ungeprüftes Kamerabild von 4 MB würde den gesamten Bestand
+   * unspeicherbar machen, und der Verlust träfe alle Messwerte, nicht nur
+   * das Bild.
+   */
+  photo: z
+    .object({ dataUrl: z.string().min(1).max(MAX_PHOTO_CHARS), addedAt: isoDate })
+    .nullable()
+    .default(null),
   createdAt: isoDate,
 })
 

@@ -19,6 +19,7 @@ const result = (testSlug: string, performedAt: string, values: Record<string, nu
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    photo: null,
     context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     createdAt: performedAt,
   }) as StoredResult

@@ -1,28 +1,10 @@
-import { useCallback, useState } from 'react'
+import { Suspense, lazy, useCallback, useState, type ComponentType } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { AppShell } from '@/routes/AppShell'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
 import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
-import { AreaScreen } from '@/features/diagnostics/AreaScreen'
-import { SportScreen } from '@/features/diagnostics/SportScreen'
-import { BatteryScreen } from '@/features/diagnostics/BatteryScreen'
-import { ResultScreen } from '@/features/diagnostics/ResultScreen'
-import { TestCatalogScreen } from '@/features/tests/TestCatalogScreen'
 import { TestRunScreen } from '@/features/tests/TestRunScreen'
-import { TestDetailScreen } from '@/features/tests/TestDetailScreen'
-import { HistoryScreen } from '@/features/history/HistoryScreen'
 import { HistoryHome } from '@/features/history/HistoryHome'
-import { CalendarScreen } from '@/features/history/CalendarScreen'
-import { RemindersScreen } from '@/features/history/RemindersScreen'
-import { AnalysisHome } from '@/features/analysis/AnalysisHome'
-import { CommunityScreen } from '@/features/analysis/CommunityScreen'
-import { CoachScreen } from '@/features/coach/CoachScreen'
-import { ReportScreen } from '@/features/report/ReportScreen'
-import { AssessmentListScreen } from '@/features/assessments/AssessmentListScreen'
-import { AssessmentCreateScreen } from '@/features/assessments/AssessmentCreateScreen'
-import { AssessmentDetailScreen } from '@/features/assessments/AssessmentDetailScreen'
-import { AssessmentSummaryScreen } from '@/features/assessments/AssessmentSummaryScreen'
-import { ProfileScreen } from '@/features/profile/ProfileScreen'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
 import { OnboardingFlow } from '@/features/onboarding/OnboardingFlow'
 import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
@@ -39,6 +21,31 @@ import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '
  * oder Google folgt später und ersetzt lediglich die Datenschicht.
  */
 
+
+/**
+ * Bildschirme, die nicht auf jedem Weg gebraucht werden, kommen erst beim
+ * Aufruf.
+ *
+ * DER GEMESSENE GRUND: das Startpaket war 1,0 MB. Bezahlt hat das jeder
+ * Start — auch der, bei dem jemand nur einen Wert einträgt. Übersicht,
+ * Diagnostik, Testdurchführung und Verlauf bleiben deshalb fest eingebunden;
+ * alles Übrige wird nachgeladen. Offline bleibt es trotzdem verfügbar: der
+ * Service Worker legt die Teilpakete beim ersten Besuch mit ab.
+ */
+function screen<T extends Record<string, ComponentType>>(
+  load: () => Promise<T>,
+  name: keyof T & string,
+) {
+  const Lazy = lazy(() => load().then((module) => ({ default: module[name] as ComponentType })))
+  return (
+    // Ohne sichtbaren Platzhalter: die Teilpakete sind klein, und ein
+    // aufblitzender Ladehinweis wäre unruhiger als ein kurzer Moment Leere.
+    <Suspense fallback={<div aria-busy="true" className="min-h-[50vh]" />}>
+      <Lazy />
+    </Suspense>
+  )
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -46,28 +53,28 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <OverviewScreen /> },
       { path: 'diagnostik', element: <DiagnosticsHub /> },
-      { path: 'diagnostik/bereich/:area', element: <AreaScreen /> },
-      { path: 'diagnostik/termine', element: <AssessmentListScreen /> },
-      { path: 'sport/:id', element: <SportScreen /> },
-      { path: 'batterie/:slug', element: <BatteryScreen /> },
-      { path: 'ergebnis/:id', element: <ResultScreen /> },
-      { path: 'diagnostik/neu', element: <AssessmentCreateScreen /> },
-      { path: 'diagnostik/:id', element: <AssessmentDetailScreen /> },
-      { path: 'diagnostik/:id/abschluss', element: <AssessmentSummaryScreen /> },
-      { path: 'tests', element: <TestCatalogScreen /> },
+      { path: 'diagnostik/bereich/:area', element: screen(() => import('@/features/diagnostics/AreaScreen'), 'AreaScreen') },
+      { path: 'diagnostik/termine', element: screen(() => import('@/features/assessments/AssessmentListScreen'), 'AssessmentListScreen') },
+      { path: 'sport/:id', element: screen(() => import('@/features/diagnostics/SportScreen'), 'SportScreen') },
+      { path: 'batterie/:slug', element: screen(() => import('@/features/diagnostics/BatteryScreen'), 'BatteryScreen') },
+      { path: 'ergebnis/:id', element: screen(() => import('@/features/diagnostics/ResultScreen'), 'ResultScreen') },
+      { path: 'diagnostik/neu', element: screen(() => import('@/features/assessments/AssessmentCreateScreen'), 'AssessmentCreateScreen') },
+      { path: 'diagnostik/:id', element: screen(() => import('@/features/assessments/AssessmentDetailScreen'), 'AssessmentDetailScreen') },
+      { path: 'diagnostik/:id/abschluss', element: screen(() => import('@/features/assessments/AssessmentSummaryScreen'), 'AssessmentSummaryScreen') },
+      { path: 'tests', element: screen(() => import('@/features/tests/TestCatalogScreen'), 'TestCatalogScreen') },
       { path: 'tests/:slug', element: <TestRunScreen /> },
-      { path: 'tests/:slug/details', element: <TestDetailScreen /> },
+      { path: 'tests/:slug/details', element: screen(() => import('@/features/tests/TestDetailScreen'), 'TestDetailScreen') },
       { path: 'verlauf', element: <HistoryHome /> },
       { path: 'verlauf/test/:slug', element: <HistoryHome /> },
-      { path: 'verlauf/werte', element: <HistoryScreen /> },
-      { path: 'verlauf/kalender', element: <CalendarScreen /> },
-      { path: 'verlauf/erinnerungen', element: <RemindersScreen /> },
-      { path: 'analyse', element: <AnalysisHome /> },
-      { path: 'community', element: <CommunityScreen /> },
-      { path: 'trainer', element: <CoachScreen /> },
-      { path: 'bericht', element: <ReportScreen /> },
-      { path: 'bericht/:id', element: <ReportScreen /> },
-      { path: 'profil', element: <ProfileScreen /> },
+      { path: 'verlauf/werte', element: screen(() => import('@/features/history/HistoryScreen'), 'HistoryScreen') },
+      { path: 'verlauf/kalender', element: screen(() => import('@/features/history/CalendarScreen'), 'CalendarScreen') },
+      { path: 'verlauf/erinnerungen', element: screen(() => import('@/features/history/RemindersScreen'), 'RemindersScreen') },
+      { path: 'analyse', element: screen(() => import('@/features/analysis/AnalysisHome'), 'AnalysisHome') },
+      { path: 'community', element: screen(() => import('@/features/analysis/CommunityScreen'), 'CommunityScreen') },
+      { path: 'trainer', element: screen(() => import('@/features/coach/CoachScreen'), 'CoachScreen') },
+      { path: 'bericht', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
+      { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
+      { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },

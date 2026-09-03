@@ -102,6 +102,8 @@ interface AppDataValue {
   /** Legt ein Ergebnis an und rechnet die abgeleiteten Metriken gleich mit. */
   recordResult: (input: RecordResultInput) => StoredResult | null
   deleteResult: (id: string) => void
+  /** Belegbild an ein bestehendes Ergebnis hängen oder entfernen (§14). */
+  setResultPhoto: (id: string, dataUrl: string | null) => void
   saveAssessment: (assessment: StoredAssessment) => void
   deleteAssessment: (id: string) => void
   resetAll: () => void
@@ -317,6 +319,9 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         attemptSelection,
         context: { ...EMPTY_CONTEXT, ...measurementContext },
         notes,
+        // Ein Beleg kommt nach dem Eintragen dazu, nicht währenddessen: die
+        // Zahl ist der Zweck, das Bild ist die Absicherung.
+        photo: null,
         createdAt: new Date().toISOString(),
       }
       commitAthlete((current) => upsertResult(current, result), {
@@ -402,6 +407,26 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           upsertBiometric(current, { ...entry, id: newId(), createdAt: new Date().toISOString() }),
         ),
       recordResult,
+      setResultPhoto: (id, dataUrl) => {
+        const target = data.results.find((r) => r.id === id)
+        if (!target) return
+        commitAthlete(
+          (current) => ({
+            ...current,
+            results: current.results.map((r) =>
+              r.id === id
+                ? { ...r, photo: dataUrl ? { dataUrl, addedAt: new Date().toISOString() } : null }
+                : r,
+            ),
+          }),
+          {
+            action: 'edited',
+            entity: 'result',
+            entityId: id,
+            label: getTest(target.testSlug)?.name.de ?? target.testSlug,
+          },
+        )
+      },
       deleteResult: (id) => {
         const removed = data.results.find((r) => r.id === id)
         commitAthlete((current) => removeResult(current, id), {

@@ -1,3 +1,4 @@
+import { readdirSync, statSync } from "node:fs";
 import { expect, test } from '@playwright/test'
 import { openDemo, openGuest } from './helpers'
 
@@ -159,4 +160,30 @@ test.describe('Aktualisierung der installierten App', () => {
     await openDemo(page)
     expect(requested).toEqual([])
   })
+})
+
+/**
+ * Was jeder Start kostet.
+ *
+ * Gemessener Anlass: das Startpaket war 1,0 MB — bezahlt von jedem Aufruf,
+ * auch dem, bei dem jemand nur einen Wert einträgt. Selten gebrauchte
+ * Bildschirme und die zweite Sprache kommen deshalb erst beim Aufruf. Diese
+ * Grenze hält den Stand fest; sie darf steigen, aber nicht unbemerkt.
+ */
+test.describe("Grösse des Startpakets", () => {
+  const BUDGET_KB = 850;
+
+  test(`das Hauptpaket bleibt unter ${BUDGET_KB} KB`, () => {
+    const dir = new URL("../dist/assets/", import.meta.url);
+    const entry = readdirSync(dir).find((f) => /^index-.*\.js$/.test(f));
+    expect(entry, "kein gebautes Hauptpaket gefunden").toBeTruthy();
+    const kb = statSync(new URL(entry!, dir)).size / 1024;
+    expect(Math.round(kb), `${entry} ist ${Math.round(kb)} KB`).toBeLessThanOrEqual(BUDGET_KB);
+  });
+
+  test("die zweite Sprache liegt in einem eigenen Paket", () => {
+    const dir = new URL("../dist/assets/", import.meta.url);
+    const files = readdirSync(dir);
+    expect(files.some((f) => /^en-.*\.js$/.test(f)), "en.json wird nicht mehr mitgeliefert").toBe(true);
+  });
 })

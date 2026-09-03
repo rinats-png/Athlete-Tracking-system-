@@ -55,6 +55,7 @@ const result = (
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    photo: null,
     context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     createdAt: "2026-05-01T09:05:00.000Z",
     ...overrides,

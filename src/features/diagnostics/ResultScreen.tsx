@@ -1,7 +1,7 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeft, ArrowRight, Play } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Camera, Play, Trash2 } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
@@ -17,6 +17,7 @@ import { nextTests } from '@/domain/nextTest'
 import { formulaFor } from '@/domain/formulaRegistry'
 import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
+import { preparePhoto, type PhotoError } from '@/lib/photo'
 import type { ReferenceComparison } from '@/data/references'
 
 /**
@@ -32,7 +33,7 @@ export function ResultScreen() {
   const { id = '' } = useParams()
   const { t } = useTranslation()
   const locale = useLocale()
-  const { data } = useAppData()
+  const { data, setResultPhoto } = useAppData()
   const result = data.results.find((r) => r.id === id) ?? null
   const test = result ? getTest(result.testSlug) : undefined
   const context = ratingContextOf(data.profile)
@@ -113,6 +114,10 @@ export function ResultScreen() {
             )}
             {result.notes && <p className="mt-3 text-[12px] text-ink-secondary">{t('result.note')}: {result.notes}</p>}
           </div>
+          <PhotoBlock
+            photo={result.photo}
+            onChange={(dataUrl) => setResultPhoto(result.id, dataUrl)}
+          />
         </Panel>
 
         <Panel>
@@ -230,6 +235,79 @@ function ComparisonBlock({ comparison, valueLabel }: { comparison: ReferenceComp
         {entry.source.n != null && ` · ${t('testInfo.n', { n: entry.source.n })}`}
         {entry.protocolNote && <span className="block">{t('result.protocolNote', { note: entry.protocolNote[locale] })}</span>}
       </p>
+    </div>
+  )
+}
+
+
+/**
+ * Der Beleg zur Messung (§14).
+ *
+ * Ein Bild vom Display der Zeitmessung beantwortet Monate später die Frage
+ * «woher kommt diese Zahl» — die eine Notiz nicht beantwortet. Genau eines je
+ * Ergebnis, verkleinert vor dem Speichern, und es bleibt auf dem Gerät.
+ */
+function PhotoBlock({
+  photo,
+  onChange,
+}: {
+  photo: { dataUrl: string; addedAt: string } | null
+  onChange: (dataUrl: string | null) => void
+}) {
+  const { t } = useTranslation()
+  const [error, setError] = useState<PhotoError | null>(null)
+  const [busy, setBusy] = useState(false)
+
+  const pick = async (file: File) => {
+    setBusy(true)
+    setError(null)
+    const outcome = await preparePhoto(file)
+    setBusy(false)
+    if (outcome.dataUrl) onChange(outcome.dataUrl)
+    else setError(outcome.error)
+  }
+
+  return (
+    <div className="border-t border-line px-4 py-3">
+      {photo ? (
+        <div className="space-y-2">
+          <img
+            src={photo.dataUrl}
+            alt={t('result.photoAlt')}
+            className="max-h-64 w-auto rounded-md border border-line"
+          />
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" size="sm" onClick={() => onChange(null)}>
+              <Trash2 size={14} aria-hidden />
+              {t('result.photoRemove')}
+            </Button>
+            <span className="text-[11px] text-ink-muted">
+              {t('result.photoAdded', { date: formatDate(photo.addedAt, 'de') })}
+            </span>
+          </div>
+        </div>
+      ) : (
+        <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-[13px] text-ink-secondary">
+          <Camera size={16} aria-hidden />
+          <span>{busy ? t('result.photoWorking') : t('result.photoAdd')}</span>
+          <input
+            type="file"
+            accept="image/*"
+            aria-label={t('result.photoAdd')}
+            className="sr-only"
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              if (file) void pick(file)
+            }}
+          />
+        </label>
+      )}
+      <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">{t('result.photoHint')}</p>
+      {error && (
+        <p role="alert" className="mt-1 text-[12px] text-critical">
+          {t(`result.photoError.${error}`)}
+        </p>
+      )}
     </div>
   )
 }

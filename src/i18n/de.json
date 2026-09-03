@@ -1298,7 +1298,18 @@
     "derived": "Abgeleitete Kennzahlen",
     "note": "Notiz",
     "dataQuality": "Datenqualität",
-    "percentileTop": "Perzentil >99"
+    "percentileTop": "Perzentil >99",
+    "photoAdd": "Beleg fotografieren oder wählen",
+    "photoWorking": "Bild wird verkleinert …",
+    "photoRemove": "Beleg entfernen",
+    "photoAlt": "Beleg zur Messung",
+    "photoAdded": "hinzugefügt am {{date}}",
+    "photoHint": "Ein Bild je Ergebnis — das Display der Zeitmessung, die Anzeige der Waage. Es wird verkleinert und bleibt auf diesem Gerät; es wird nicht übertragen und nicht ausgewertet.",
+    "photoError": {
+      "not_an_image": "Das ist keine Bilddatei.",
+      "unreadable": "Das Bild liess sich nicht lesen.",
+      "too_large": "Das Bild bleibt auch verkleinert zu gross. Ein Ausschnitt des Displays reicht."
+    }
   },
   "analysisHome": {
     "eyebrow": "Analyse",
@@ -1384,6 +1395,7 @@
     "eyebrow": "Verlauf",
     "title": "Erinnerungen",
     "intro": "Lokal, ohne Server: die App weiss, wann zuletzt gemessen wurde. Erinnerungen sind aus, bis du sie einschaltest.",
+    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest. BASELINE schickt keine Mitteilung auf dein Gerät: dafür bräuchte es einen Server, der weiss, wer du bist und wann du zuletzt gemessen hast — und den gibt es bewusst nicht.",
     "enable": "Erinnerungen aktivieren",
     "enabled": "Erinnerungen sind aktiv",
     "disabled": "Erinnerungen sind aus",
