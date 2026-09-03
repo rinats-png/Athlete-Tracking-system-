@@ -90,8 +90,13 @@ export function AnalysisHome() {
     <>
       <ScreenHeader eyebrow={t('analysisHome.eyebrow')} title={t('analysisHome.title')} intro={t('analysisHome.intro')} />
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Panel>
+      {/*
+       * Das Analyse-Trio: Stärken, Potenzial, Empfehlung als drei versetzte
+       * schwebende Karten. Die Potenzial-Karte trägt den Akzent als Fläche —
+       * sie ist die Aussage, wegen der jemand hierherkommt.
+       */}
+      <div className="grid gap-4 md:grid-cols-3 md:items-start">
+        <Panel float className="rise" style={{ ['--rise-delay' as string]: '0ms' }}>
           <PanelHeader title={t('overview.strengths')} />
           <ul className="divide-y divide-line">
             {shownStrengths.map((f) => (
@@ -103,22 +108,32 @@ export function AnalysisHome() {
             {shownStrengths.length === 0 && <li className="px-4 py-3 text-[13px] text-ink-secondary">{t('overview.noStrengths')}</li>}
           </ul>
         </Panel>
-        <Panel>
-          <PanelHeader title={t('overview.potential')} />
+        <Panel
+          float
+          className="rise bg-accent text-accent-ink md:mt-6"
+          style={{ ['--rise-delay' as string]: '90ms' }}
+        >
+          {/* Auf der Akzentfläche trägt die Beschriftung die Schrift der
+              Fläche — `label-tag` steht sonst in ink-muted und käme auf
+              Moss Shadow auf 1,4:1. */}
+          <PanelHeader
+            title={t('overview.potential')}
+            className="border-accent-ink/20 [&_h2]:text-accent-ink/70"
+          />
           <div className="px-4 py-3">
             {potential ? (
               <>
                 <p className="font-display text-[22px] leading-none font-bold">{axisLabel(potential.axisId, t, locale)}</p>
-                <p className="mt-1.5 text-[13px] text-ink-secondary">
+                <p className="mt-1.5 text-[13px] text-accent-ink/75">
                   {'hasData' in potential && !potential.hasData ? t('overview.potentialUnmeasured') : t('overview.potentialBody')}
                 </p>
               </>
             ) : (
-              <p className="text-[13px] text-ink-secondary">{t('insights.noFindings')}</p>
+              <p className="text-[13px] text-accent-ink/75">{t('insights.noFindings')}</p>
             )}
           </div>
         </Panel>
-        <Panel ticked>
+        <Panel ticked float className="rise md:mt-12" style={{ ['--rise-delay' as string]: '180ms' }}>
           <PanelHeader title={t('analysisHome.recommendation')} />
           {suggestion && suggestedTest ? (
             <div className="px-4 py-3">

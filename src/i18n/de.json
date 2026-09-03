@@ -1638,5 +1638,15 @@
   },
   "nextTest": {
     "eyebrow": "Nächster sinnvoller Test"
+  },
+  "journey": {
+    "title": "Deine Journey",
+    "hint": "Was passiert ist — Anfang, Bestwerte, abgeschlossene Termine, heute.",
+    "kind": {
+      "start": "Erste Messung",
+      "personal_best": "Bestwert",
+      "assessment": "Termin",
+      "now": "Heute"
+    }
   }
 }

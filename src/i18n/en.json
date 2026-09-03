@@ -1638,5 +1638,15 @@
   },
   "nextTest": {
     "eyebrow": "Next test that makes sense"
+  },
+  "journey": {
+    "title": "Your journey",
+    "hint": "What happened — the start, personal bests, completed sessions, today.",
+    "kind": {
+      "start": "First measurement",
+      "personal_best": "Personal best",
+      "assessment": "Session",
+      "now": "Today"
+    }
   }
 }

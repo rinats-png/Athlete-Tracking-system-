@@ -10,6 +10,8 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { getTest } from '@/data/testCatalog'
+import { journey } from '@/domain/journey'
+import { PerformanceJourney } from '@/components/signature/PerformanceJourney'
 import { formatDate, formatMeasurement, formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
@@ -32,6 +34,10 @@ export function HistoryHome() {
   const { data } = useAppData()
   const [range, setRange] = useState<Range>('all')
   const [selected, setSelected] = useState<string | null>(routeSlug ?? null)
+  const nodes = useMemo(
+    () => journey(data.results, data.assessments),
+    [data.results, data.assessments],
+  )
 
   const measured = useMemo(() => {
     const counts = new Map<string, number>()
@@ -73,6 +79,15 @@ export function HistoryHome() {
   return (
     <>
       <ScreenHeader eyebrow={t('historyHome.eyebrow')} title={t('historyHome.title')} intro={t('historyHome.intro')} />
+
+      {/* Die Journey steht vor den Zahlen: sie beantwortet «was ist
+          passiert», die Kurve darunter «wie genau». */}
+      {nodes.length >= 2 && (
+        <Panel float className="rise mb-4">
+          <PanelHeader title={t('journey.title')} subtitle={t('journey.hint')} />
+          <PerformanceJourney nodes={nodes} className="px-4 pt-4 pb-5" />
+        </Panel>
+      )}
 
       <Panel ticked>
         <PanelHeader

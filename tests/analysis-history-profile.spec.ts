@@ -37,8 +37,10 @@ test.describe('Verlauf', () => {
     for (const label of ['1 Monat', '3 Monate', '6 Monate', '1 Jahr', 'Gesamt']) {
       await expect(page.getByRole('radio', { name: label })).toBeVisible()
     }
-    await expect(page.getByText('Erste')).toBeVisible()
-    await expect(page.getByText('Letzte')).toBeVisible()
+    // Genau: die Journey darüber trägt einen Knoten «Erste Messung», und
+    // gemeint sind hier die Beschriftungen der Kennzahlen darunter.
+    await expect(page.getByText('Erste', { exact: true })).toBeVisible()
+    await expect(page.getByText('Letzte', { exact: true })).toBeVisible()
     await expect(page.getByText(/Verbessert|Verschlechtert|Stabil|Noch zu wenige/)).toBeVisible()
     // Ein enger Zeitraum ohne Messung sagt das, statt ein leeres Diagramm zu zeigen.
     await page.getByRole('radio', { name: '1 Monat' }).click()

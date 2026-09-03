@@ -153,3 +153,73 @@ test.describe('Action Orb', () => {
     ).toBeLessThanOrEqual(navBox!.y + 2)
   })
 })
+
+test.describe('Performance Journey', () => {
+  test('sie zeigt Ereignisse, nicht jede Messung', async () => {
+    const { journey, MAX_NODES } = await import('../src/domain/journey')
+    const base = {
+      testSlug: 'grip_strength',
+      values: {},
+      metrics: {},
+      bodyWeightKg: null,
+      ageYears: null,
+      sex: null,
+      assessmentId: null,
+      attempts: [],
+      attemptSelection: null,
+      context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
+      photo: null,
+    }
+    // Zwanzig Messungen, jede besser als die vorige: zwanzig Bestwerte.
+    const results = Array.from({ length: 20 }, (_, i) => ({
+      ...base,
+      id: `r${i}`,
+      performedAt: new Date(Date.UTC(2026, 0, 5 + i * 14)).toISOString(),
+      score: 40 + i,
+      createdAt: '2026-01-01T00:00:00.000Z',
+    }))
+    const nodes = journey(results as never, [])
+    expect(nodes.length, 'eine Achse mit zwanzig Punkten ist eine Liste').toBeLessThanOrEqual(
+      MAX_NODES,
+    )
+    expect(nodes[0].kind, 'der Anfang bleibt immer stehen').toBe('start')
+    expect(nodes[nodes.length - 1].kind).toBe('now')
+  })
+
+  test('die allererste Messung ist ein Anfang, kein Bestwert', async () => {
+    const { journey } = await import('../src/domain/journey')
+    const one = [
+      {
+        id: 'r0',
+        testSlug: 'grip_strength',
+        performedAt: '2026-02-01T10:00:00.000Z',
+        values: {},
+        metrics: {},
+        score: 50,
+        bodyWeightKg: null,
+        ageYears: null,
+        sex: null,
+        assessmentId: null,
+        attempts: [],
+        attemptSelection: null,
+        context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
+        photo: null,
+        createdAt: '2026-02-01T10:00:00.000Z',
+      },
+    ]
+    const nodes = journey(one as never, [])
+    expect(nodes.filter((n) => n.kind === 'personal_best')).toHaveLength(0)
+  })
+
+  test('ohne Messungen gibt es keine Journey statt einer leeren Achse', async () => {
+    const { journey } = await import('../src/domain/journey')
+    expect(journey([], [])).toHaveLength(0)
+  })
+
+  test('im Verlauf steht sie vor den Zahlen', async ({ page }) => {
+    await openDemo(page)
+    await page.goto('/verlauf', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByText('Deine Journey')).toBeVisible()
+    await expect(page.getByText('Heute').first()).toBeVisible()
+  })
+})
