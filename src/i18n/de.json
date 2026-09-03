@@ -1417,5 +1417,19 @@
     "down": "Eine Stufe zurück",
     "reset": "Zurücksetzen",
     "hint": "Der Zähler zählt die erreichten Stufen mit und läuft ab der ersten mit. Die Signaltöne kommen aus der Aufnahme deines Protokolls — einen eigenen Takt gibt die App bewusst nicht vor, sonst wäre es eine andere Belastung unter demselben Namen."
+  },
+  "pricing": {
+    "eyebrow": "Profil",
+    "title": "Preise",
+    "intro": "Was BASELINE kosten wird, und was in jeder Stufe enthalten ist.",
+    "notYet": "Noch kann nichts gekauft werden: es gibt keine Zahlungsabwicklung und keinen Vertrag. Diese Seite sagt, was geplant ist — sie ist keine Bestellung.",
+    "perMonth": "{{amount}} € im Monat",
+    "free": "kostenlos",
+    "onRequest": "nach Vereinbarung",
+    "yourCoachCost": "Für deine {{count}} Athleten wären das {{amount}} € im Monat.",
+    "promises": "Was in jeder Stufe gilt",
+    "promiseExport": "Der Export deiner Daten ist vollständig und kostenlos — auch ohne Abo. Deine Messwerte gehören dir, nicht dem Abo.",
+    "promiseOffline": "Messen und Auswerten auf dem eigenen Gerät funktioniert ohne Konto. Bezahlt wird für Synchronisierung, Betreuung mehrerer Athleten und Berichte.",
+    "promiseNoAds": "Keine Werbung, kein Weiterverkauf von Daten, keine Auswertung deiner Werte für andere Zwecke."
   }
 }

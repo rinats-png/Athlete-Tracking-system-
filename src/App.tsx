@@ -75,6 +75,7 @@ const router = createBrowserRouter([
       { path: 'bericht', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
+      { path: 'preise', element: screen(() => import('@/features/profile/PricingScreen'), 'PricingScreen') },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },

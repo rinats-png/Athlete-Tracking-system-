@@ -1417,5 +1417,19 @@
     "down": "One stage back",
     "reset": "Reset",
     "hint": "The counter tracks the stages reached and runs from the first one. The signal tones come from your protocol's audio — the app deliberately sets no beat of its own, which would be a different load under the same name."
+  },
+  "pricing": {
+    "eyebrow": "Profile",
+    "title": "Pricing",
+    "intro": "What BASELINE will cost, and what each tier includes.",
+    "notYet": "Nothing can be bought yet: there is no payment processing and no contract. This page states what is planned — it is not an order.",
+    "perMonth": "{{amount}} € per month",
+    "free": "free",
+    "onRequest": "on request",
+    "yourCoachCost": "For your {{count}} athletes that would be {{amount}} € per month.",
+    "promises": "What holds in every tier",
+    "promiseExport": "The export of your data is complete and free — with or without a subscription. Your measurements are yours, not the subscription's.",
+    "promiseOffline": "Measuring and analysing on your own device works without an account. You pay for sync, coaching several athletes, and reports.",
+    "promiseNoAds": "No advertising, no reselling of data, no analysis of your values for other purposes."
   }
 }

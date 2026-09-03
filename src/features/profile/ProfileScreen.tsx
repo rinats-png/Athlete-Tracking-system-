@@ -229,6 +229,15 @@ export function ProfileScreen() {
                 <span>{t('profile.privacy')}</span>
               </p>
 
+              <p>
+                <Link
+                  to="/preise"
+                  className="-mx-2 inline-flex min-h-11 items-center px-2 text-[13px] underline underline-offset-2"
+                >
+                  {t('pricing.title')}
+                </Link>
+              </p>
+
               {recoveredAt != null && (
                 <p
                   className="rounded-md border border-line bg-sunken px-3 py-2 text-[13px] leading-relaxed"
