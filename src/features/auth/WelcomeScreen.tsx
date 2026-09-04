@@ -156,14 +156,21 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
               <article
                 key={card.key}
                 data-reveal="card"
-                className="corner-brackets relative aspect-4/5 overflow-hidden rounded-md border border-line/50 bg-surface/20"
+                className="group corner-brackets relative aspect-4/5 overflow-hidden rounded-md border border-line/50 bg-surface/20"
               >
+                {/*
+                 * Das Bild liegt VERKLEINERT in der Karte und wächst beim
+                 * Überfahren. In der Vorlage macht das eine Feder mit
+                 * Ruhelage 0,65 und Ziel 0,95; hier genügt ein Übergang —
+                 * eine Feder je Karte und Bild wäre ein eigener Rechenlauf
+                 * für einen Unterschied, den niemand benennen kann.
+                 */}
                 <img
                   src={card.image}
                   alt=""
                   aria-hidden
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover opacity-60 transition-opacity duration-700 hover:opacity-90"
+                  className="absolute inset-0 h-full w-full scale-[0.68] object-cover opacity-70 transition-[transform,opacity] duration-700 ease-[var(--ease-halo)] group-hover:scale-95 group-hover:opacity-95"
                 />
                 <span className="readout absolute top-4 left-4 z-20 text-[10px] tracking-[0.1em] text-ink-muted">
                   [{i + 1}]

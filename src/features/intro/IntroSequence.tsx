@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import bodyAsset from '@/assets/body-figure.webp'
 import { HaloField } from '@/components/signature/HaloField'
+import { ParticleSphere } from '@/components/signature/ParticleSphere'
 import { useLocale } from '@/features/shared/useLocale'
 import { loadData } from '@/lib/store/localStore'
 import { ratingContextOf } from '@/features/shared/profileContext'
@@ -9,35 +9,36 @@ import { introScenes, type IntroCallout } from '@/domain/introScenes'
 import { formatResultValue } from '@/lib/resultView'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import type { PerformanceDimension } from '@/types/domain'
 
 /**
  * Die Intro-Sequenz beim Öffnen der App.
  *
- * Die Choreografie folgt der Vorlage: die Figur kommt unscharf herein und
+ * Die Choreografie folgt der Vorlage: die Szene kommt unscharf herein und
  * zieht scharf (blurIn), die Messpunkte erscheinen versetzt, die Balken
- * laufen ein, dann geht die Szene wieder unscharf hinaus (blurOut). Am Ende
- * die Wortmarke mit dem Leitsatz.
+ * laufen ein, dann geht sie wieder unscharf hinaus (blurOut). Darunter der
+ * wechselnde Systemtext, darüber die Zählung der Szenen. Am Ende die
+ * Wortmarke mit dem Leitsatz.
  *
- * DREI ANPASSUNGEN GEGENÜBER DER VORLAGE, jede aus einem Grund:
+ * KEINE FIGUR MEHR. Vorher stand hier eine gezeichnete Person, je Szene
+ * anders angeschnitten. Sie behauptete einen Körper, der nicht der des
+ * Betrachters ist, und stand als Bild vor Zahlen, die zu ihr nicht gehören.
+ * An ihrer Stelle steht jetzt die Partikelsphäre der Vorlage.
+ *
+ * ZWEI ANPASSUNGEN GEGENÜBER DER VORLAGE, jede aus einem Grund:
  *
  * 1. DIE ZAHLEN SIND ECHT. Die Vorlage trägt erfundene Werte («Impakt
  *    1.240 N»). Wer die App öffnet, sähe Zahlen, die aussehen wie seine
  *    eigenen — das darf nicht sein. Die Callouts kommen deshalb aus dem
  *    Bestand; ohne Messungen zeigen sie, WAS gemessen wird, ohne Zahl.
+ *    Aus demselben Grund fehlt der Ladezähler «000 % … 100 %»: es lädt
+ *    nichts. Rechts oben steht stattdessen die Szene, bei der die Sequenz
+ *    gerade ist — eine Zahl, die stimmt.
  *
  * 2. DIE LÄNGE. Die Vorlage läuft rund 14 Sekunden und dann in einer
  *    Schleife weiter. Als Start einer App, die jemand zehnmal die Woche
  *    öffnet, um einen Wert einzutragen, wäre das eine Zumutung. Drei Szenen,
  *    zusammen gut fünf Sekunden, einmal je Sitzung — und jederzeit
  *    abbrechbar.
- *
- * 3. DIE FIGUR. Die fünf Posen der Vorlage (`assets/press-l.png` und so
- *    weiter) liegen nicht bei. Bis sie da sind, trägt die vorhandene
- *    Körperfigur die Szenen und wird je Szene anders angeschnitten — der
- *    Ausschnitt folgt der Körperregion, die der Callout misst. Sobald
- *    Bilder in `src/assets/intro/` liegen, treten sie an ihre Stelle,
- *    ohne dass hier etwas geändert werden muss (siehe das README dort).
  */
 
 /** Zeiten der Vorlage, gekürzt. Summe je Szene: 1,43 s. */
@@ -46,33 +47,6 @@ const HOLD = 550
 const EXIT = 380
 const GAP = 80
 const FINALE_HOLD = 1400
-
-/**
- * Bildausschnitt je Körperregion, in Prozent — dieselben Regionen, die auch
- * die Körperansicht benutzt. Damit «scannt» jede Szene eine andere Stelle.
- */
-const FRAME: Record<PerformanceDimension, string> = {
-  max_strength: '50% 22%',
-  endurance: '50% 24%',
-  relative_strength: '45% 32%',
-  strength_endurance: '50% 34%',
-  power: '50% 56%',
-  agility: '50% 72%',
-}
-
-/**
- * Die Posenbilder der Vorlage, sofern sie im Projekt liegen.
- *
- * `import.meta.glob` mit `eager` löst das beim Bauen auf: liegt der Ordner
- * leer da, entsteht ein leeres Objekt und kein Fehler. Damit genügt es,
- * die Dateien abzulegen — Code ändert sich nicht. Sortiert wird nach
- * Dateiname, deshalb die Ziffern in `src/assets/intro/README.md`.
- */
-const POSES: string[] = Object.entries(
-  import.meta.glob<{ default: string }>('@/assets/intro/*.{webp,png}', { eager: true }),
-)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([, module]) => module.default)
 
 function prefersReducedMotion(): boolean {
   if (typeof window === 'undefined' || !window.matchMedia) return false
@@ -99,6 +73,23 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
       formatResultValue(r, locale, athlete.profile.unitSystem),
     )
   }, [locale])
+
+  /**
+   * Der wechselnde Systemtext unten. Er läuft schneller als die Szenen —
+   * in der Vorlage alle 400 ms — und benennt, was die App tut.
+   */
+  const stages = t('intro.stages', { returnObjects: true }) as string[]
+  const [stage, setStage] = useState(stages[0] ?? '')
+  useEffect(() => {
+    if (prefersReducedMotion()) return
+    let at = 0
+    const timer = window.setInterval(() => {
+      at = (at + 1) % stages.length
+      setStage(stages[at])
+    }, 700)
+    return () => window.clearInterval(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   /** −1 = noch nichts, 0…n−1 = Szene, n = Finale. */
   const [index, setIndex] = useState(-1)
@@ -169,39 +160,33 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
       aria-label={t('intro.label')}
     >
       <HaloField className="opacity-80" />
-      <div className="relative flex flex-1 items-center justify-center">
-        {/* Die Messlinie der Vorlage: ein einzelner heller Strich, der die
-            Szene als Messung markiert. */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute right-[8vw] bottom-[10vh] left-[8vw] h-px opacity-50"
-          style={{
-            background: 'linear-gradient(90deg, transparent, var(--line-strong), transparent)',
-          }}
-        />
 
+      {/* Kopfzeile der Vorlage. Rechts steht, bei welcher Szene die Sequenz
+          ist — kein Ladebalken, sondern eine Zahl, die stimmt. */}
+      <div className="relative flex items-start justify-between px-6 pt-[max(1.5rem,env(safe-area-inset-top))] sm:px-10">
+        <span className="readout text-[10px] tracking-[0.4em] text-ink-muted uppercase">
+          [ {t('intro.system')} ]
+        </span>
+        <span className="readout text-[10px] tracking-[0.4em] text-ink uppercase">
+          {atFinale
+            ? 'BASELINE'
+            : `${String(Math.max(1, index + 1)).padStart(3, '0')} / ${String(scenes.length).padStart(3, '0')}`}
+        </span>
+      </div>
+
+      <div className="relative flex flex-1 items-center justify-center">
         {scenes.map((scene, i) => (
           <div
             key={scene.key}
             aria-hidden={index !== i}
             className={cn(
-              'absolute flex aspect-[2/3] h-[62vh] max-h-[80vw] items-center justify-center',
+              'absolute flex aspect-square h-[52vh] max-h-[86vw] items-center justify-center',
               index === i ? 'opacity-100' : 'pointer-events-none opacity-0',
               index === i && phase === 'enter' && 'intro-blur-in',
               index === i && phase === 'exit' && 'intro-blur-out',
             )}
           >
-            <img
-              src={POSES[i] ?? bodyAsset}
-              alt=""
-              aria-hidden
-              className="h-full w-full object-contain opacity-90"
-              style={
-                // Der Ausschnitt gilt nur für die Ersatzfigur: ein Posenbild
-                // ist schon der Ausschnitt und soll ganz zu sehen sein.
-                POSES[i] ? undefined : { objectPosition: FRAME[scene.callouts[0].dimension] }
-              }
-            />
+            {index === i && <ParticleSphere className="absolute inset-0" />}
             {scene.callouts.map((callout, c) => (
               <Callout
                 key={callout.label}
@@ -230,6 +215,12 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
           </p>
         </div>
       </div>
+
+      {/* Der wechselnde Systemtext der Vorlage — er benennt, was die App
+          tut, nicht was sie gerade lädt. */}
+      <p className="relative mb-3 text-center text-[11px] tracking-[0.5em] text-ink uppercase">
+        / {stage}
+      </p>
 
       <button
         type="button"

@@ -4,24 +4,26 @@ import { cn } from '@/lib/utils'
 /**
  * Der Halo — der leuchtende Partikelring aus der Vorlage.
  *
- * WARUM NICHT DIE VORLAGE 1:1: die trägt 160 000 GPU-Partikel über Three.js
- * von einem CDN. Drei Gründe sprechen dagegen, und keiner davon ist Aufwand:
- * eine Fremdabhängigkeit von rund 600 kB gegen ein Bündelbudget von 850 kB;
- * eine Quelle, die unsere CSP (`connect-src 'self'`) nicht erlaubt und die
- * offline gar nicht da wäre; und eine Dauerlast auf der GPU eines Telefons,
- * das in der Halle gerade eine Messung mitschreiben soll.
+ * WIE DIE DICHTE ZUSTANDE KOMMT. Die Vorlage zeichnet 160 000 Punkte je Bild
+ * auf der GPU. Auf einem 2D-Canvas ist das je Bild nicht zu bezahlen — aber
+ * es muss auch nicht je Bild sein: der Ring ist rotationssymmetrisch und
+ * verändert sich zwischen zwei Bildern kaum. Er wird deshalb EINMAL in einen
+ * Zwischenspeicher gezeichnet, mit der vollen Zahl Punkte, und danach nur
+ * noch als Bild gedreht, skaliert und verschoben. Das kostet je Bild einen
+ * einzigen Kopiervorgang.
  *
- * Nachgebaut ist deshalb die FORM, nicht die Technik: dieselbe Geometrie
- * (Ring mit gaussisch aufgeweichtem Rand, Tiefe in z), dieselbe Lichtrampe
- * von unten nach oben, derselbe gestaffelte Einflug über 3,2 s, dieselbe
- * Zeigerparallaxe — auf einem 2D-Canvas mit additivem Zeichnen und ein paar
- * tausend Punkten. Auf Armlänge ist der Unterschied das Rauschen im Rand.
+ * Darüber liegt eine dünne Schicht Punkte, die tatsächlich je Bild neu
+ * gezeichnet wird — das Flimmern, das ein starres Bild nicht hat.
  *
- * Der Ring zeigt NICHTS AN. Er ist Grund, keine Darstellung von Daten —
- * deshalb steht hier auch keine Zahl aus dem Bestand drin.
+ * Warum nicht Three.js wie in der Vorlage: das wären rund 600 kB
+ * Fremdabhängigkeit gegen ein Bündelbudget von 850 kB, eine Quelle, die
+ * unsere CSP nicht erlaubt und die offline fehlt, und Dauerlast auf der GPU
+ * eines Telefons, das in der Halle eine Messung mitschreiben soll.
+ *
+ * Der Ring zeigt NICHTS AN. Er ist Grund, keine Darstellung von Daten.
  */
 
-/** Die Lichtrampe der Vorlage, aus dem Vertex-Shader übernommen. */
+/** Die Lichtrampe aus dem Vertex-Shader der Vorlage. */
 const DEEP_MOSS = [26, 38, 23] as const /* vec3(0.10, 0.15, 0.09) */
 const MID_GREEN = [82, 112, 74] as const /* vec3(0.32, 0.44, 0.29) */
 const HOT_MIST = [237, 245, 230] as const /* vec3(0.93, 0.96, 0.90) */
@@ -29,15 +31,11 @@ const HOT_MIST = [237, 245, 230] as const /* vec3(0.93, 0.96, 0.90) */
 /** 3,2 s Einflug — der Wert der Vorlage. */
 const ENTRANCE_MS = 3200
 
-interface Particle {
-  theta: number
-  r: number
-  z: number
-  scale: number
-  seed: number
-}
+/** So viele Punkte stehen im Zwischenspeicher, so viele flimmern live. */
+const BAKED_DESKTOP = 150_000
+const BAKED_PHONE = 70_000
+const LIVE = 2600
 
-/** Box–Muller, wie in der Vorlage. */
 function gaussian(): number {
   let u = 0
   let v = 0
@@ -46,27 +44,64 @@ function gaussian(): number {
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v)
 }
 
-function build(count: number): Particle[] {
-  const out: Particle[] = []
-  for (let i = 0; i < count; i++) {
-    out.push({
-      theta: Math.random() * Math.PI * 2,
-      r: 0.95 + Math.abs(gaussian()) * 0.9 * 0.35 + Math.random() * 0.12,
-      z: gaussian() * 0.18,
-      scale: 0.5 + Math.random() * 1.6,
-      seed: Math.random(),
-    })
-  }
-  return out
+function smoothstep(edge0: number, edge1: number, x: number): number {
+  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)))
+  return t * t * (3 - 2 * t)
 }
 
 function mix(a: readonly number[], b: readonly number[], t: number): [number, number, number] {
   return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]
 }
 
-function smoothstep(edge0: number, edge1: number, x: number): number {
-  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)))
-  return t * t * (3 - 2 * t)
+/** Die Farbe eines Punktes aus seiner Höhe im Ring. */
+function shade(vertical: number): string {
+  const topGlow = smoothstep(0.55, 1, vertical)
+  let col = mix(DEEP_MOSS, MID_GREEN, smoothstep(0, 0.7, vertical))
+  col = mix(col, HOT_MIST, topGlow * 0.9)
+  return `rgb(${col[0] | 0} ${col[1] | 0} ${col[2] | 0})`
+}
+
+/**
+ * Den Ring einmal zeichnen.
+ *
+ * Geometrie wie in der Vorlage: Winkel gleichverteilt, Radius mit einem
+ * gaussisch aufgeweichten Rand nach aussen, Tiefe in z. Die Tiefe geht in
+ * Grösse und Helligkeit ein — daher die Räumlichkeit.
+ */
+function bake(size: number, count: number): HTMLCanvasElement {
+  const canvas = document.createElement('canvas')
+  canvas.width = size
+  canvas.height = size
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return canvas
+  ctx.globalCompositeOperation = 'lighter'
+
+  const centre = size / 2
+  const radius = size * 0.29
+
+  for (let i = 0; i < count; i++) {
+    const theta = Math.random() * Math.PI * 2
+    const r = 0.95 + Math.abs(gaussian()) * 0.9 * 0.55 + Math.random() * 0.15
+    const z = gaussian() * 0.18
+    const scale = 0.5 + Math.random() * 1.6
+
+    const perspective = 1000 / (1000 + z * radius)
+    const x = Math.cos(theta) * r
+    const y = Math.sin(theta) * r
+    const px = centre + x * radius * perspective
+    const py = centre + y * radius * perspective
+
+    /* Licht von oben: auf dem Canvas zeigt y nach unten. */
+    const vertical = Math.min(1, Math.max(0, -y * 0.5 + 0.5))
+    const spark = 0.55 + Math.random() * 0.5
+    const intensity = (0.3 + 0.7 * vertical) * spark
+
+    ctx.globalAlpha = Math.min(1, intensity * 0.6)
+    ctx.fillStyle = shade(vertical)
+    const dot = Math.max(0.7, scale * perspective)
+    ctx.fillRect(px, py, dot, dot)
+  }
+  return canvas
 }
 
 function prefersReducedMotion(): boolean {
@@ -82,17 +117,22 @@ export function HaloField({ className }: { className?: string }) {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
-
     const parent = canvas.parentElement as HTMLElement
-    /*
-     * Die Vorlage zeichnet 160 000 Punkte auf der GPU. Auf einem 2D-Canvas
-     * sind so viele nicht drin — aber unter etwa zwanzigtausend zerfällt der
-     * Ring in ein Sternenfeld: es fehlt die Dichte, aus der das Leuchten
-     * überhaupt erst entsteht. Diese Zahlen sind gemessen, nicht geraten.
-     */
-    const count = parent.clientWidth < 768 ? 14000 : 30000
-    const particles = build(count)
     const still = prefersReducedMotion()
+
+    const phone = parent.clientWidth < 768
+    /* Kantenlänge des Zwischenspeichers: gross genug, dass einzelne Punkte
+       beim Skalieren nicht zu Klötzchen werden. */
+    const bakedSize = phone ? 1400 : 2000
+    const baked = bake(bakedSize, phone ? BAKED_PHONE : BAKED_DESKTOP)
+
+    /* Die live gezeichnete Schicht — nur Position und Startphase. */
+    const live = Array.from({ length: LIVE }, () => ({
+      theta: Math.random() * Math.PI * 2,
+      r: 0.95 + Math.abs(gaussian()) * 0.9 * 0.55,
+      seed: Math.random(),
+      scale: 0.6 + Math.random() * 1.4,
+    }))
 
     let width = 0
     let height = 0
@@ -108,7 +148,7 @@ export function HaloField({ className }: { className?: string }) {
     }
     resize()
 
-    /* Zeigerparallaxe: dieselben Werte wie in der Vorlage (±0,3 rad, lerp 0,04). */
+    /* Zeigerparallaxe wie in der Vorlage: ±0,3 rad, Nachlauf 0,04. */
     const target = { x: 0, y: 0 }
     const pointer = { x: 0, y: 0 }
     const onPointer = (event: PointerEvent) => {
@@ -127,74 +167,71 @@ export function HaloField({ className }: { className?: string }) {
       const elapsed = now - start
       const time = elapsed / 1000
       const progress = still ? 1 : Math.min(1, elapsed / ENTRANCE_MS)
+      /* Einflug: von aussen und unscharf herein, mit derselben Kurve wie im
+         Shader (1 - (1-t)^4). */
+      const entrance = 1 - Math.pow(1 - progress, 4)
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, width, height)
-      /* Additiv: übereinanderliegende Punkte addieren sich zu Licht — genau
-         das macht aus vielen schwachen Punkten einen glühenden Rand. */
       ctx.globalCompositeOperation = 'lighter'
 
       pointer.x += (target.x - pointer.x) * 0.04
       pointer.y += (target.y - pointer.y) * 0.04
 
-      const cx = width / 2
-      const cy = height * 0.46
-      const radius = Math.min(width, height) * 0.38
+      const cx = width / 2 + pointer.x * width * 0.06
+      /*
+       * Der Mittelpunkt liegt TIEF, deutlich unter der Bildmitte. Dadurch
+       * steht der obere Bogen des Rings im oberen Drittel, sein weicher
+       * Aussenrand füllt alles darüber mit Staub — und darunter liegt die
+       * dunkle Leere, auf der die Überschrift steht. Genau diese Aufteilung
+       * macht das Bild der Vorlage aus.
+       */
+      const cy = height * 0.66 + pointer.y * height * 0.05
+      /* Der Ring füllt die Breite: auf dem Telefon ist er höher als breit
+         angeschnitten, genau wie in der Vorlage. */
+      const reach = Math.max(width, height * 0.9)
       const spin = still ? 0 : time * 0.05
+      const breathe = still ? 1 : 1 + 0.015 * Math.sin(time * 0.6)
+      const expand = (2.4 + (1 - 2.4) * entrance) * breathe
 
-      for (const p of particles) {
-        /* Gestaffelter Einflug, wie im Shader. */
-        const lp = Math.min(1, Math.max(0, (progress - p.seed * 0.45) / 0.55))
-        const entrance = 1 - Math.pow(1 - lp, 4)
-        if (entrance <= 0) continue
+      /* Der gebackene Ring, gedreht und skaliert. */
+      const drawn = reach * 1.6 * expand
+      ctx.globalAlpha = entrance
+      ctx.save()
+      ctx.translate(cx, cy)
+      ctx.rotate(spin + (1 - entrance) * 4.5)
+      ctx.drawImage(baked, -drawn / 2, -drawn / 2, drawn, drawn)
+      ctx.restore()
 
-        const expand = 2.4 + (1 - 2.4) * entrance
-        const swirl = (1 - entrance) * 4.5
-        const breathe = still ? 1 : 1 + 0.015 * Math.sin(time * 0.6 + p.seed * 6.28)
-        /* Statt Simplex-Rauschen ein billiger Drift je Punkt: auf einem
-           2D-Canvas ist echtes 3D-Rauschen je Punkt und Bild zu teuer, und
-           sichtbar ist ohnehin nur, DASS der Rand lebt. */
-        const drift = still ? 0 : 0.05 * Math.sin(time * 0.18 + p.seed * 6.28)
-
-        const angle = p.theta + spin + swirl + pointer.x * 0.6
-        const r = (p.r + drift) * expand * breathe
-        const x = Math.cos(angle) * r
-        const y = Math.sin(angle) * r
-        const z = p.z + (1 - entrance) * 3.4
-
-        /* Perspektive wie in der Vorlage: 1000 / (1000 + z·radius). */
-        const perspective = 1000 / (1000 + z * radius)
-        const px = cx + x * radius * perspective
-        const py = cy + (y + pointer.y * 0.35) * radius * perspective
-        if (px < -8 || px > width + 8 || py < -8 || py > height + 8) continue
-
-        /* Licht von unten nach oben — auf dem Canvas ist y nach unten
-           positiv, deshalb das Vorzeichen. */
-        const vertical = Math.min(1, Math.max(0, -y * 0.5 + 0.5))
-        const topGlow = smoothstep(0.55, 1, vertical)
-        let col = mix(DEEP_MOSS, MID_GREEN, smoothstep(0, 0.7, vertical))
-        col = mix(col, HOT_MIST, topGlow * 0.9)
-        const spark = 0.6 + 0.4 * Math.sin(p.seed * 40 + time * 0.4)
-        const intensity = (0.35 + 0.65 * vertical) * spark * entrance
-
-        /* Kleine Punkte: ab etwa zwei Pixeln liest das Auge Klötzchen. */
-        const size = Math.max(0.6, p.scale * perspective * 0.9)
-        ctx.globalAlpha = Math.min(1, intensity * 0.62)
-        ctx.fillStyle = `rgb(${col[0] | 0} ${col[1] | 0} ${col[2] | 0})`
-        ctx.fillRect(px, py, size, size)
+      /* Die flimmernde Schicht darüber. */
+      if (!still) {
+        const radius = reach * 0.29 * 1.6 * expand
+        for (const p of live) {
+          const angle = p.theta + spin
+          const wobble = 1 + 0.05 * Math.sin(time * 0.9 + p.seed * 6.28)
+          const x = Math.cos(angle) * p.r * wobble
+          const y = Math.sin(angle) * p.r * wobble
+          const px = cx + x * radius
+          const py = cy + y * radius
+          if (px < 0 || px > width || py < 0 || py > height) continue
+          const vertical = Math.min(1, Math.max(0, -y * 0.5 + 0.5))
+          const twinkle = 0.35 + 0.65 * Math.abs(Math.sin(time * 1.6 + p.seed * 12.9))
+          ctx.globalAlpha = Math.min(1, (0.25 + 0.75 * vertical) * twinkle * entrance * 0.7)
+          ctx.fillStyle = shade(vertical)
+          const dot = Math.max(0.8, p.scale)
+          ctx.fillRect(px, py, dot, dot)
+        }
       }
 
       ctx.globalAlpha = 1
       ctx.globalCompositeOperation = 'source-over'
-
-      /* Ohne Bewegung genügt ein einziges Bild. */
       if (!still) frame = requestAnimationFrame(draw)
     }
     frame = requestAnimationFrame(draw)
 
     const observer = new ResizeObserver(resize)
     observer.observe(parent)
-    /* Im Hintergrund nicht rechnen: ein Ring, den niemand sieht, kostet nur Akku. */
+    /* Im Hintergrund nicht rechnen: ein Ring, den niemand sieht, kostet Akku. */
     const onVisibility = () => {
       if (document.hidden) {
         running = false

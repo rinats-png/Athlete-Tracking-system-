@@ -1693,6 +1693,14 @@
     "skip": "Überspringen",
     "notMeasured": "noch nicht gemessen",
     "setting": "Sequenz beim Öffnen",
-    "settingHint": "Die kurze Einführungssequenz beim Start der App. Sie läuft höchstens einmal je Sitzung und lässt sich immer abbrechen."
+    "settingHint": "Die kurze Einführungssequenz beim Start der App. Sie läuft höchstens einmal je Sitzung und lässt sich immer abbrechen.",
+    "system": "System bereit",
+    "stages": [
+      "Leistungsdiagnose",
+      "Testprotokolle",
+      "Sechs Achsen",
+      "Referenzvergleich",
+      "Baseline"
+    ]
   }
 }
