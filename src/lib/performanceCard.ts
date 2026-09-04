@@ -24,10 +24,14 @@ export interface CardContent {
   caveat: string
 }
 
-const INK = '#151515'
-const MUTED = '#57654F'
-const PAPER = '#EEF1EA'
-const ACCENT = '#3F4B3A'
+/* Die Karte wird gezeichnet, nicht gestylt — deshalb stehen die Farben hier
+   als Werte. Es sind dieselben fünf der Palette: Deep Brown, Olive Shadow,
+   Cream Paper. Die Karte ist immer hell, auch wenn die App dunkel steht: sie
+   wird weitergegeben und oft gedruckt. */
+const INK = '#34251D'
+const MUTED = '#5D6040'
+const PAPER = '#F6ECD3'
+const ACCENT = '#5F6241'
 
 export function drawPerformanceCard(canvas: HTMLCanvasElement, content: CardContent): void {
   const ctx = canvas.getContext('2d')

@@ -17,15 +17,16 @@ const theme = () => readFileSync(new URL('../src/styles/theme.css', import.meta.
 test.describe('Farbwelt bleibt', () => {
   test('die fünf Töne der Palette stehen unverändert im System', () => {
     const css = theme()
-    for (const hex of ['#EEF1EA', '#151515', '#3F4B3A', '#75856A', '#A8A49A']) {
+    // Cream Paper, Deep Brown, Olive Shadow, Dirty Butter, Dust Gray.
+    for (const hex of ['#F6ECD3', '#34251D', '#5F6241', '#D9B85F', '#9E968A']) {
       expect(css, `${hex} fehlt`).toContain(hex)
     }
   })
 
   test('der Schatten trägt die Markenfarbe, keine neue', () => {
-    // Moss Shadow als RGB: der Schatten ist eine Transparenz der Palette,
+    // Deep Brown als RGB: der Schatten ist eine Transparenz der Palette,
     // keine erfundene Grauabstufung.
-    expect(theme()).toContain('--shadow-hue: 63 75 58')
+    expect(theme()).toContain('--shadow-hue: 52 37 29')
   })
 })
 
