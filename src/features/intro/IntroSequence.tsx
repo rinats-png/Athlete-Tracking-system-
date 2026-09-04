@@ -148,13 +148,12 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
 
   return (
     /*
-     * `ink-scope`: die Sequenz läuft immer auf dunklem Grund, wie die
-     * Landing. Die Körperfigur ist für dunklen Grund gezeichnet, und der
-     * Halo dahinter gibt es nur dort — fünf Sekunden Kino sind kein
-     * Bildschirm, auf dem jemand einen Messwert abliest.
+     * Die Sequenz folgt dem Thema: auf Cream Paper läuft sie hell, auf Deep
+     * Brown dunkel. Halo und Sphäre lesen ihre Farben aus denselben Rollen
+     * wie die App, deshalb genügt hier der normale Grund.
      */
     <div
-      className="ink-scope fixed inset-0 z-[60] flex flex-col overflow-hidden bg-plane text-ink"
+      className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-plane text-ink"
       onPointerDown={finish}
       role="dialog"
       aria-label={t('intro.label')}
@@ -175,6 +174,18 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
       </div>
 
       <div className="relative flex flex-1 items-center justify-center">
+        {/*
+         * Die Sphäre steht EINMAL da und läuft durch. Vorher wurde sie je
+         * Szene neu aufgebaut — dann fing sie jedes Mal wieder bei einem
+         * Fünftel ihrer Grösse an und war während der Blende kaum zu sehen.
+         * Sie ist der Körper der Sequenz; was wechselt, sind die Messpunkte.
+         */}
+        <ParticleSphere
+          className={cn(
+            'absolute aspect-square h-[52vh] max-h-[86vw] transition-opacity duration-500',
+            atFinale ? 'opacity-0' : 'opacity-100',
+          )}
+        />
         {scenes.map((scene, i) => (
           <div
             key={scene.key}
@@ -186,7 +197,6 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
               index === i && phase === 'exit' && 'intro-blur-out',
             )}
           >
-            {index === i && <ParticleSphere className="absolute inset-0" />}
             {scene.callouts.map((callout, c) => (
               <Callout
                 key={callout.label}

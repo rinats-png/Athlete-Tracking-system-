@@ -23,10 +23,27 @@ import { cn } from '@/lib/utils'
  * Der Ring zeigt NICHTS AN. Er ist Grund, keine Darstellung von Daten.
  */
 
-/** Die Lichtrampe aus dem Vertex-Shader der Vorlage. */
-const DEEP_MOSS = [26, 38, 23] as const /* vec3(0.10, 0.15, 0.09) */
-const MID_GREEN = [82, 112, 74] as const /* vec3(0.32, 0.44, 0.29) */
-const HOT_MIST = [237, 245, 230] as const /* vec3(0.93, 0.96, 0.90) */
+/**
+ * Die Lichtrampe. Zwei Fassungen, weil ein Leuchten auf hellem Papier kein
+ * Leuchten ist.
+ *
+ * DUNKEL: wie in der Vorlage — von tiefem Braun über Olive nach Cream Paper,
+ * additiv gezeichnet. Übereinanderliegende Punkte addieren sich zu Licht.
+ *
+ * HELL: umgekehrt. Der Staub liegt als SCHATTEN auf dem Papier, von Dust
+ * Gray über Olive nach Deep Brown, normal gezeichnet. Additiv wäre er auf
+ * Cream Paper unsichtbar — man kann Creme nicht heller machen.
+ */
+const RAMP_DARK = [
+  [36, 26, 19], /* Deep Brown, abgedunkelt */
+  [95, 98, 65], /* Olive Shadow */
+  [246, 236, 211], /* Cream Paper */
+] as const
+const RAMP_LIGHT = [
+  [190, 182, 165], /* Dust Gray, aufgehellt */
+  [143, 148, 99], /* Olive, aufgehellt */
+  [52, 37, 29], /* Deep Brown */
+] as const
 
 /** 3,2 s Einflug — der Wert der Vorlage. */
 const ENTRANCE_MS = 3200
@@ -54,11 +71,29 @@ function mix(a: readonly number[], b: readonly number[], t: number): [number, nu
 }
 
 /** Die Farbe eines Punktes aus seiner Höhe im Ring. */
-function shade(vertical: number): string {
+function shade(vertical: number, dark: boolean): string {
+  const ramp = dark ? RAMP_DARK : RAMP_LIGHT
   const topGlow = smoothstep(0.55, 1, vertical)
-  let col = mix(DEEP_MOSS, MID_GREEN, smoothstep(0, 0.7, vertical))
-  col = mix(col, HOT_MIST, topGlow * 0.9)
+  let col = mix(ramp[0], ramp[1], smoothstep(0, 0.7, vertical))
+  col = mix(col, ramp[2], topGlow * 0.9)
   return `rgb(${col[0] | 0} ${col[1] | 0} ${col[2] | 0})`
+}
+
+/**
+ * Ob der Grund gerade dunkel ist — gelesen aus der Fläche selbst, nicht aus
+ * einer Einstellung. Damit stimmt es auch dort, wo ein Bereich sein eigenes
+ * Thema setzt, und es ändert sich mit, wenn jemand umschaltet.
+ */
+function groundIsDark(el: HTMLElement): boolean {
+  const value = getComputedStyle(el).getPropertyValue('--plane').trim()
+  const probe = document.createElement('span')
+  probe.style.color = value
+  document.body.appendChild(probe)
+  const parts = getComputedStyle(probe).color.match(/\d+(\.\d+)?/g) ?? []
+  probe.remove()
+  const [r, g, b] = parts.map(Number)
+  if (![r, g, b].every((n) => Number.isFinite(n))) return true
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b < 128
 }
 
 /**
@@ -68,13 +103,13 @@ function shade(vertical: number): string {
  * gaussisch aufgeweichten Rand nach aussen, Tiefe in z. Die Tiefe geht in
  * Grösse und Helligkeit ein — daher die Räumlichkeit.
  */
-function bake(size: number, count: number): HTMLCanvasElement {
+function bake(size: number, count: number, dark: boolean): HTMLCanvasElement {
   const canvas = document.createElement('canvas')
   canvas.width = size
   canvas.height = size
   const ctx = canvas.getContext('2d')
   if (!ctx) return canvas
-  ctx.globalCompositeOperation = 'lighter'
+  if (dark) ctx.globalCompositeOperation = 'lighter'
 
   const centre = size / 2
   const radius = size * 0.29
@@ -96,8 +131,10 @@ function bake(size: number, count: number): HTMLCanvasElement {
     const spark = 0.55 + Math.random() * 0.5
     const intensity = (0.3 + 0.7 * vertical) * spark
 
-    ctx.globalAlpha = Math.min(1, intensity * 0.6)
-    ctx.fillStyle = shade(vertical)
+    /* Auf hellem Grund darf der Staub nicht so dicht werden: dort deckt
+       jeder Punkt, statt sich zu addieren. */
+    ctx.globalAlpha = Math.min(1, intensity * (dark ? 0.6 : 0.34))
+    ctx.fillStyle = shade(vertical, dark)
     const dot = Math.max(0.7, scale * perspective)
     ctx.fillRect(px, py, dot, dot)
   }
@@ -119,12 +156,13 @@ export function HaloField({ className }: { className?: string }) {
     if (!ctx) return
     const parent = canvas.parentElement as HTMLElement
     const still = prefersReducedMotion()
+    const dark = groundIsDark(parent)
 
     const phone = parent.clientWidth < 768
     /* Kantenlänge des Zwischenspeichers: gross genug, dass einzelne Punkte
        beim Skalieren nicht zu Klötzchen werden. */
     const bakedSize = phone ? 1400 : 2000
-    const baked = bake(bakedSize, phone ? BAKED_PHONE : BAKED_DESKTOP)
+    const baked = bake(bakedSize, phone ? BAKED_PHONE : BAKED_DESKTOP, dark)
 
     /* Die live gezeichnete Schicht — nur Position und Startphase. */
     const live = Array.from({ length: LIVE }, () => ({
@@ -173,7 +211,7 @@ export function HaloField({ className }: { className?: string }) {
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, width, height)
-      ctx.globalCompositeOperation = 'lighter'
+      if (dark) ctx.globalCompositeOperation = 'lighter'
 
       pointer.x += (target.x - pointer.x) * 0.04
       pointer.y += (target.y - pointer.y) * 0.04
@@ -216,8 +254,11 @@ export function HaloField({ className }: { className?: string }) {
           if (px < 0 || px > width || py < 0 || py > height) continue
           const vertical = Math.min(1, Math.max(0, -y * 0.5 + 0.5))
           const twinkle = 0.35 + 0.65 * Math.abs(Math.sin(time * 1.6 + p.seed * 12.9))
-          ctx.globalAlpha = Math.min(1, (0.25 + 0.75 * vertical) * twinkle * entrance * 0.7)
-          ctx.fillStyle = shade(vertical)
+          ctx.globalAlpha = Math.min(
+            1,
+            (0.25 + 0.75 * vertical) * twinkle * entrance * (dark ? 0.7 : 0.4),
+          )
+          ctx.fillStyle = shade(vertical, dark)
           const dot = Math.max(0.8, p.scale)
           ctx.fillRect(px, py, dot, dot)
         }
@@ -259,7 +300,7 @@ export function HaloField({ className }: { className?: string }) {
       style={{
         /* Die Wolke hinter dem Ring — der Wert der Vorlage. */
         background:
-          'radial-gradient(60% 50% at 50% 22%, rgba(117,133,106,0.18), rgba(63,75,58,0.05) 40%, transparent 70%)',
+          'radial-gradient(60% 50% at 50% 22%, var(--halo-plume-1), var(--halo-plume-2) 40%, transparent 70%)',
       }}
     >
       <canvas ref={canvasRef} className="block h-full w-full" />

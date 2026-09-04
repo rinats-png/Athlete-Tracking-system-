@@ -86,7 +86,11 @@ function Wordmark() {
         <path
           d="M5 21h4l4-11 4 16 4-13 2 8h4"
           fill="none"
-          stroke="var(--accent)"
+          /* Die Welle ist aus der Kachel AUSGESCHNITTEN: sie trägt die Farbe
+             des Seitengrunds. Vorher stand hier der Akzent — mit Deep Brown
+             als Akzentfläche im hellen Thema war die Welle auf der ebenso
+             dunklen Kachel unsichtbar. */
+          stroke="var(--plane)"
           strokeWidth="2.2"
           strokeLinecap="square"
         />

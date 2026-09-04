@@ -34,68 +34,71 @@
 :root {
   color-scheme: light;
 
-  /* Flächen — Mist White ist die Hauptfarbe der App. Die beiden helleren
-     Stufen sind Aufhellungen davon, die tiefere ist Mist White mit einem
-     Anteil Stone Path: die Palette hat fünf Töne, eine Oberfläche braucht
-     Abstufungen. */
-  --plane:            #EEF1EA;  /* Mist White — Seitenhintergrund */
-  /* Zwei Aufhellungen von Mist White für den Grundverlauf. Keine neuen
-     Farben: beide liegen auf der Achse Mist White → Stone Path. */
-  --plane-glow-1:     #E9EDE2;
-  --plane-glow-2:     #E2E7DA;
-  --surface:          #F6F7F3;  /* Karten, Chart-Fläche */
-  --surface-raised:   #FBFCFA;
-  --surface-sunken:   #DFE0D8;
+  /* ------------------------------------------------------------------
+     Die Palette. Fünf Farben, jede mit einer Aufgabe:
 
-  /* Schrift. Geprüft gegen Mist White:
-       Sumi Ink       16,0:1
-       Moss Shadow     8,1:1
-       Garden Green    3,5:1  → NICHT als Fliesstext verwendbar, deshalb
-                                steht als ink-muted eine abgedunkelte
-                                Garden-Green-Stufe. Gemessen wird gegen die
-                                TIEFSTE Fläche (surface-sunken), nicht gegen
-                                Mist White: dort ist der Abstand am kleinsten,
-                                und dort muss er reichen. */
-  --ink:              #151515;  /* Sumi Ink */
-  --ink-secondary:    #3F4B3A;  /* Moss Shadow */
-  --ink-muted:        #57654F;  /* Garden Green, abgedunkelt */
+       Cream Paper   #F6ECD3   der Grund, auf dem alles liegt
+       Deep Brown    #34251D   Schrift und die tragende Fläche
+       Olive Shadow  #5F6241   die zweite Stimme: Linien, Daten, Akzentschrift
+       Dirty Butter  #D9B85F   die Lichtspitze — Glanzkanten, Verläufe, Halo
+       Dust Gray     #9E968A   Linien und alles, was zurücktreten soll
 
-  /* Linien. Stone Path erreicht auf Mist White nur 2,2:1 und taugt damit
-     für Trennlinien, nicht für Text oder bedeutungstragende Symbole. */
-  --line:             #C8C7BE;
-  --line-strong:      #A8A49A;  /* Stone Path */
-  --grid:             #D6D6CE;
+     Die Abstufungen sind KEINE neuen Farben: jede Fläche liegt auf einer
+     Achse zwischen zwei dieser fünf Töne oder zwischen einem Ton und Weiss.
 
-  /* Marke: Moss Shadow als Fläche, Mist White als Schrift darauf (8,1:1).
-     Garden Green wäre als Fläche ebenfalls möglich (4,6:1 mit Sumi Ink),
-     trägt aber weniger Gewicht — es bleibt die zweite Stimme in Diagrammen
-     und Verläufen.
-       accent-glow  Lichtspitze in Verläufen und Glows
-       accent       Fläche (Buttons, aktive Zustände)
-       accent-ink   Schrift auf dieser Fläche
-       accent-text  Akzent als Schriftfarbe auf hellem Grund
-       accent-quiet flächige Einfärbung hinter Hinweisen */
-  --accent-glow:      #C4CBBD;
-  --accent:           #3F4B3A;  /* Moss Shadow */
-  --accent-ink:       #EEF1EA;  /* Mist White */
-  --accent-text:      #3F4B3A;
-  --accent-quiet:     rgba(63, 75, 58, 0.12);
-  --focus:            #3F4B3A;
+     Jeder Wert unten ist gegen die vier Flächen gerechnet (WCAG 2.1 AA:
+     4,5:1 für Fliesstext, 3:1 für Bedienelemente und Diagrammlinien) und
+     wird bei jedem Testlauf nachgemessen.
+     ------------------------------------------------------------------ */
 
-  /* Chart-Serien. Serie 1 ist die Marke; Serie 2 und 3 behalten ihre eigenen
+  /* Flächen — Cream Paper ist der Grund; nach oben mit Weiss aufgehellt,
+     nach unten mit Dust Gray abgetönt. */
+  --plane:            #F6ECD3;  /* Cream Paper */
+  --plane-glow-1:     #F1E6C9;
+  --plane-glow-2:     #EDE1C1;
+  --surface:          #FAF5E7;
+  --surface-raised:   #FDFAF4;
+  --surface-sunken:   #E3D9C3;
+
+  /* Schrift. Gemessen wird gegen die TIEFSTE Fläche (surface-sunken) —
+     dort ist der Abstand am kleinsten, und dort muss er reichen.
+       Deep Brown    12,4:1
+       Olive dunkel   5,4:1
+     Olive Shadow selbst erreicht auf der tiefsten Fläche nur 4,2:1 und
+     steht deshalb als abgedunkelte Stufe. */
+  --ink:              #34251D;  /* Deep Brown */
+  --ink-secondary:    #545639;  /* Olive Shadow, abgedunkelt */
+  --ink-muted:        #5D6040;
+
+  /* Linien. Dust Gray trägt keine Bedeutung — genau dafür ist er da. */
+  --line:             #CDC3AE;
+  --line-strong:      #9E968A;  /* Dust Gray */
+  --grid:             #DCD2BC;
+
+  /* Marke. Deep Brown ist die Fläche («dark anchor for premium depth»),
+     Cream Paper die Schrift darauf (12,4:1). Olive trägt den Akzent als
+     SCHRIFT auf hellem Grund, Dirty Butter die Lichtspitze — als
+     Schriftfarbe wäre Butter auf Creme unlesbar (1,8:1), als Glanzkante in
+     einem Verlauf ist er genau richtig. */
+  --accent-glow:      #D9B85F;  /* Dirty Butter */
+  --accent:           #34251D;  /* Deep Brown */
+  --accent-ink:       #F6ECD3;  /* Cream Paper */
+  --accent-text:      #56583A;  /* Olive Shadow, abgedunkelt */
+  --accent-quiet:     rgba(95, 98, 65, 0.12);
+  --focus:            #5F6241;
+
+  /* Chart-Serien. Serie 1 ist die Marke; Serie 2 und 3 behalten eigene
      Farbtöne, weil zwei Datenreihen unterscheidbar bleiben müssen — drei
-     Grünstufen wären auf einem Bildschirm bei Sonnenlicht nicht mehr zu
-     trennen, und bei Rot-Grün-Schwäche erst recht nicht. Alle drei liegen
-     über 3:1 gegen die Chart-Fläche. */
-  --series-1:         #3F4B3A;  /* Moss Shadow */
+     Olivstufen wären bei Sonnenlicht eine Linie, und bei Rot-Grün-Schwäche
+     erst recht. Alle drei liegen über 3:1 gegen jede Fläche, und ihr
+     wahrnehmbarer Abstand (ΔE) liegt paarweise über 25. */
+  --series-1:         #5A5D3E;  /* Olive Shadow */
   --series-2:         #2A6FB0;
-  --series-3:         #B4531F;
-  --reference:        #57654F;
+  --series-3:         #A33B12;
+  --reference:        #5D6040;
 
   /* Status. Bewusst ausserhalb der Palette: eine Statusfarbe darf nie wie
-     die Marke oder wie eine Datenreihe aussehen. Alle fünf sind gegenüber
-     der Vorfassung abgedunkelt — «warning» stand bei 1,6:1 auf hellem Grund
-     und war als Schriftfarbe faktisch unlesbar. */
+     die Marke oder wie eine Datenreihe aussehen. */
   --good:             #0A6E0A;
   --warning:          #7F5300;
   --critical:         #B3261E;
@@ -110,16 +113,24 @@
   /* Ton der Körperanzeige. In beiden Themes gleich dunkel: die leuchtende
      Figur funktioniert nur auf dunklem Grund, und der Wert entspricht dem
      Eckton des Bildes, damit dessen weiche Kante nahtlos ausläuft. */
-  --display:        #03090C;
-  --display-raised: #0A1416;
+  --display:        #120C08;
+  --display-raised: #1F1610;
 
   /* Milchglas. Eigene Rollen, weil eine Glasfläche nicht die Flächenfarbe
-     ist, sondern eine Aufhellung über dem, was dahinter liegt — nur so wirkt
-     der Weichzeichner. */
-  --glass:        rgba(255, 255, 255, 0.58);
-  --glass-strong: rgba(255, 255, 255, 0.74);
+     ist, sondern eine Aufhellung über dem, was dahinter liegt. */
+  --glass:        rgba(255, 253, 246, 0.58);
+  --glass-strong: rgba(255, 253, 246, 0.74);
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-edge:   rgba(255, 255, 255, 0.9);
+
+  /* Die Wolke hinter dem Halo. Hell ein warmer Schatten, dunkel ein
+     Schimmer — beide Male derselbe Verlauf der Vorlage. */
+  /* Der Schein um die grossen Versalzeilen. Hell ist er ein Schatten, der
+     die Zeile vom Staub abhebt; dunkel ein Leuchten. */
+  --headline-glow: rgba(52, 37, 29, 0.35);
+  --headline-glow-strong: rgba(52, 37, 29, 0.45);
+  --halo-plume-1: rgba(52, 37, 29, 0.10);
+  --halo-plume-2: rgba(95, 98, 65, 0.05);
 
   /* Höhe der Navigationsleiste. Eine fixierte Leiste nimmt keinen Platz im
      Fluss ein — die App-Hülle reserviert ihn über genau diesen Wert, sonst
@@ -141,7 +152,7 @@
      Die Werte sind bewusst zurückhaltend — sichtbar, aber nicht dramatisch.
      Was hier Aufmerksamkeit erzeugt, ist der UNTERSCHIED zwischen den
      Stufen, nicht ihre absolute Stärke. */
-  --shadow-hue: 63 75 58;  /* Moss Shadow: der Schatten trägt die Markenfarbe */
+  --shadow-hue: 52 37 29;  /* Deep Brown: der Schatten trägt die Markenfarbe */
   --elev-1: 0 8px 24px rgb(var(--shadow-hue) / 0.10),
             0 1px 3px  rgb(var(--shadow-hue) / 0.08);
   --elev-2: 0 18px 44px rgb(var(--shadow-hue) / 0.16),
@@ -168,114 +179,135 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    /* Sumi Ink trägt den dunklen Modus; die Flächen darüber sind mit einem
-       Anteil Moss Shadow aufgehellt, damit sie sich unterscheiden lassen. */
-    --plane:          #151515;  /* Sumi Ink */
-    --plane-glow-1:   #1B1E19;
-    --plane-glow-2:   #191C17;
-    --surface:        #20221E;
-    --surface-raised: #262B24;
-    --surface-sunken: #0E0E0E;
+    /* Deep Brown trägt den dunklen Modus. Der Grund ist eine abgedunkelte
+       Stufe davon, die Flächen darüber führen zurück auf Deep Brown selbst —
+       so bleibt auch im Dunkeln die Palette der fünf Farben. */
+    --plane:          #1A120D;
+    --plane-glow-1:   #241A13;
+    --plane-glow-2:   #20170F;
+    --surface:        #2A1E16;
+    --surface-raised: #34251D;  /* Deep Brown */
+    --surface-sunken: #120C08;
 
-    /* Geprüft gegen die Kartenfläche #20221E:
-         Mist White    14,1:1
-         Stone Path     6,5:1
-         Garden Green   4,1:1 → als ink-muted aufgehellt, damit der Wert
-                                auch auf der höchsten Fläche über 4,5:1
-                                bleibt. */
-    --ink:            #EEF1EA;  /* Mist White */
-    --ink-secondary:  #A8A49A;  /* Stone Path */
-    --ink-muted:      #8D9880;
+    /* Geprüft gegen die höchste Fläche #34251D:
+         Cream Paper   12,4:1
+         Dust hell      7,0:1
+       Dust Gray selbst käme auf 5,3:1 und wäre tragbar, wirkt aber neben
+       Cream Paper stumpf — deshalb beide Stufen leicht aufgehellt. */
+    --ink:            #F6ECD3;  /* Cream Paper */
+    --ink-secondary:  #B4AC9C;
+    --ink-muted:      #A29A8E;
 
-    --line:           #3F4B3A;  /* Moss Shadow */
-    --line-strong:    #5E6657;
-    --grid:           #2A2E27;
+    --line:           #4A3A2C;
+    --line-strong:    #6E5C48;
+    --grid:           #2E2118;
 
-    --accent-glow:    #C4CBBD;
-    --accent:         #75856A;  /* Garden Green, Fläche */
-    --accent-ink:     #151515;  /* Sumi Ink darauf, 4,6:1 */
-    --accent-text:    #9FAB97;  /* als Schrift auf dunklem Grund, 6,7:1 */
-    --accent-quiet:   rgba(117, 133, 106, 0.16);
-    --focus:          #9FAB97;
+    /* Im Dunkeln kann Deep Brown die Fläche nicht tragen — er IST der
+       Grund. Die Akzentfläche ist deshalb ein aufgehelltes Olive mit Deep
+       Brown als Schrift darauf (5,1:1). Dirty Butter bleibt die Lichtspitze
+       und führt als Serie 1 die Diagramme.
 
-    --series-1:       #87957D;
+       Warum nicht Butter als Akzentfläche: die Warnfarbe ist ein Bernstein.
+       Auf Butter wäre sie nicht mehr von der Marke zu unterscheiden — und
+       eine Statusfarbe, die aussieht wie die Marke, sagt nichts mehr aus. */
+    --accent-glow:    #D9B85F;  /* Dirty Butter */
+    --accent:         #8F9463;
+    --accent-ink:     #34251D;  /* Deep Brown */
+    --accent-text:    #A9AF7C;
+    --accent-quiet:   rgba(143, 148, 99, 0.16);
+    --focus:          #A9AF7C;
+
+    --series-1:       #D9B85F;  /* Dirty Butter */
     --series-2:       #5FA8E8;
-    --series-3:       #E08A4E;
-    --reference:      #A8A49A;
+    --series-3:       #E08A8A;
+    --reference:      #B0A799;
 
     --good:           #4FBF4F;
     --warning:        #E9B23C;
-    --critical:       #F07A72;
+    --critical:       #F58B82;
     --delta-up:       #5CC85C;
     --delta-down:     #F08A82;
 
-    --glass:        rgba(255, 255, 255, 0.07);
-    --glass-strong: rgba(255, 255, 255, 0.12);
-    --glass-border: rgba(255, 255, 255, 0.14);
-    --glass-edge:   rgba(255, 255, 255, 0.28);
+    --display:        #120C08;
+    --display-raised: #1F1610;
+
+    --glass:        rgba(246, 236, 211, 0.07);
+    --glass-strong: rgba(246, 236, 211, 0.12);
+    --glass-border: rgba(246, 236, 211, 0.14);
+    --glass-edge:   rgba(246, 236, 211, 0.28);
+
+  --headline-glow: rgba(246, 236, 211, 0.20);
+  --headline-glow-strong: rgba(246, 236, 211, 0.30);
+  --halo-plume-1: rgba(217, 184, 95, 0.14);
+  --halo-plume-2: rgba(95, 98, 65, 0.06);
+
+    --headline-glow: rgba(246, 236, 211, 0.20);
+    --headline-glow-strong: rgba(246, 236, 211, 0.30);
+    --halo-plume-1: rgba(217, 184, 95, 0.14);
+    --halo-plume-2: rgba(95, 98, 65, 0.06);
   }
 }
 
-/*
- * Der Dunkelmodus — und derselbe Satz Rollen als BEREICH.
- *
- * `.ink-scope` färbt einen Ausschnitt der Seite dunkel, unabhängig von der
- * Einstellung des Menschen. Genau ein Ort benutzt das: der Einstieg. Die
- * Halo-Gestaltung lebt vom dunklen Grund — ein leuchtender Ring auf hellem
- * Papier ist kein Ring, sondern ein Fleck. Für einen Bildschirm, auf dem
- * niemand einen Messwert abliest, ist das vertretbar; für die App selbst
- * wäre es das nicht, deshalb endet der Bereich am Einstieg.
- *
- * Es sind dieselben geprüften Werte wie im Dunkelmodus, nicht neue Farben:
- * der Selektor hängt an derselben Regel.
- */
-:root[data-theme="dark"],
-.ink-scope {
-  color-scheme: dark;
+/* Der Dunkelmodus über den Umschalter — dieselben Werte wie oben. */
+:root[data-theme="dark"] {
+    color-scheme: dark;
 
-  /* Sumi Ink trägt den dunklen Modus; die Flächen darüber sind mit einem
-     Anteil Moss Shadow aufgehellt, damit sie sich unterscheiden lassen. */
-  --plane:          #151515;  /* Sumi Ink */
-  --plane-glow-1:   #1B1E19;
-  --plane-glow-2:   #191C17;
-  --surface:        #20221E;
-  --surface-raised: #262B24;
-  --surface-sunken: #0E0E0E;
+  /* Deep Brown trägt den dunklen Modus. Der Grund ist eine abgedunkelte
+     Stufe davon, die Flächen darüber führen zurück auf Deep Brown selbst —
+     so bleibt auch im Dunkeln die Palette der fünf Farben. */
+  --plane:          #1A120D;
+  --plane-glow-1:   #241A13;
+  --plane-glow-2:   #20170F;
+  --surface:        #2A1E16;
+  --surface-raised: #34251D;  /* Deep Brown */
+  --surface-sunken: #120C08;
 
-  /* Geprüft gegen die Kartenfläche #20221E:
-       Mist White    14,1:1
-       Stone Path     6,5:1
-       Garden Green   4,1:1 → als ink-muted leicht aufgehellt auf 4,5:1. */
-  --ink:            #EEF1EA;  /* Mist White */
-  --ink-secondary:  #A8A49A;  /* Stone Path */
-  --ink-muted:      #8D9880;
+  /* Geprüft gegen die höchste Fläche #34251D:
+       Cream Paper   12,4:1
+       Dust hell      7,0:1
+     Dust Gray selbst käme auf 5,3:1 und wäre tragbar, wirkt aber neben
+     Cream Paper stumpf — deshalb beide Stufen leicht aufgehellt. */
+  --ink:            #F6ECD3;  /* Cream Paper */
+  --ink-secondary:  #B4AC9C;
+  --ink-muted:      #A29A8E;
 
-  --line:           #3F4B3A;  /* Moss Shadow */
-  --line-strong:    #5E6657;
-  --grid:           #2A2E27;
+  --line:           #4A3A2C;
+  --line-strong:    #6E5C48;
+  --grid:           #2E2118;
 
-  --accent-glow:    #C4CBBD;
-  --accent:         #75856A;  /* Garden Green, Fläche */
-  --accent-ink:     #151515;  /* Sumi Ink darauf, 4,6:1 */
-  --accent-text:    #9FAB97;  /* als Schrift auf dunklem Grund, 6,7:1 */
-  --accent-quiet:   rgba(117, 133, 106, 0.16);
-  --focus:          #9FAB97;
+  /* Im Dunkeln kann Deep Brown die Fläche nicht tragen — er IST der
+     Grund. Die Akzentfläche ist deshalb ein aufgehelltes Olive mit Deep
+     Brown als Schrift darauf (5,1:1). Dirty Butter bleibt die Lichtspitze
+     und führt als Serie 1 die Diagramme.
 
-  --series-1:       #87957D;
+     Warum nicht Butter als Akzentfläche: die Warnfarbe ist ein Bernstein.
+     Auf Butter wäre sie nicht mehr von der Marke zu unterscheiden — und
+     eine Statusfarbe, die aussieht wie die Marke, sagt nichts mehr aus. */
+  --accent-glow:    #D9B85F;  /* Dirty Butter */
+  --accent:         #8F9463;
+  --accent-ink:     #34251D;  /* Deep Brown */
+  --accent-text:    #A9AF7C;
+  --accent-quiet:   rgba(143, 148, 99, 0.16);
+  --focus:          #A9AF7C;
+
+  --series-1:       #D9B85F;  /* Dirty Butter */
   --series-2:       #5FA8E8;
-  --series-3:       #E08A4E;
-  --reference:      #A8A49A;
+  --series-3:       #E08A8A;
+  --reference:      #B0A799;
 
   --good:           #4FBF4F;
   --warning:        #E9B23C;
-  --critical:       #F07A72;
+  --critical:       #F58B82;
   --delta-up:       #5CC85C;
   --delta-down:     #F08A82;
 
-  --glass:    rgba(255, 255, 255, 0.07);
-  --glass-strong: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.14);
-  --glass-edge:   rgba(255, 255, 255, 0.28);
+  --display:        #120C08;
+  --display-raised: #1F1610;
+
+  --glass:        rgba(246, 236, 211, 0.07);
+  --glass-strong: rgba(246, 236, 211, 0.12);
+  --glass-border: rgba(246, 236, 211, 0.14);
+  --glass-edge:   rgba(246, 236, 211, 0.28);
 
   --shadow-hue: 0 0 0;
   --elev-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3);

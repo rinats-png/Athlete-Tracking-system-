@@ -20,10 +20,10 @@ import { cn } from '@/lib/utils'
  *
  * ZWEI ENTSCHEIDUNGEN, DIE HIER ZÄHLEN:
  *
- * 1. DER GRUND IST IMMER DUNKEL (`ink-scope`), auch wenn jemand hell
- *    eingestellt hat. Der Halo lebt vom dunklen Grund. Der Bereich endet an
- *    diesem Bildschirm — in der App selbst, wo Messwerte abgelesen werden,
- *    gilt weiter die Einstellung des Menschen.
+ * 1. DER GRUND FOLGT DER EINSTELLUNG. Vorher war dieser Bildschirm immer
+ *    dunkel, weil der Halo als LEUCHTEN gedacht war. Mit Cream Paper als
+ *    Grundfarbe gibt es ihn in beiden Fassungen: dunkel leuchtet der Staub,
+ *    hell liegt er als Schatten auf dem Papier. Beides ist derselbe Ring.
  *
  * 2. DAS LAUFBAND TRÄGT KEINE VEREINSNAMEN. Die Vorlage lässt dort
  *    «Judo Bund», «Olympia-Stützpunkt» und «Sportklinik» vorbeilaufen. Das
@@ -44,7 +44,7 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
   ] as const
 
   return (
-    <div ref={page} className="ink-scope relative min-h-dvh overflow-x-hidden bg-plane text-ink">
+    <div ref={page} className="relative min-h-dvh overflow-x-hidden bg-plane text-ink">
       {/* Der Ring liegt fest hinter allem und scrollt nicht mit. */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <HaloField />
@@ -88,14 +88,14 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
               [ {t('welcome.eyebrow')} ]
             </p>
             <h1 className="font-display text-[12vw] leading-[0.9] font-bold tracking-[-0.025em] uppercase lg:text-[6vw]">
-              <span className="mask-r block [filter:drop-shadow(0_0_15px_rgba(238,241,234,0.2))]">
+              <span className="mask-r block [filter:drop-shadow(0_0_15px_var(--headline-glow))]">
                 <SplitText>{headline[0]}</SplitText>
               </span>
-              <span className="block [filter:drop-shadow(0_0_20px_rgba(238,241,234,0.3))]">
+              <span className="block [filter:drop-shadow(0_0_20px_var(--headline-glow-strong))]">
                 <DiamondStar />
                 <SplitText delay={0.5}>{headline[1]}</SplitText>
               </span>
-              <span className="mask-l block [filter:drop-shadow(0_0_15px_rgba(238,241,234,0.2))]">
+              <span className="mask-l block [filter:drop-shadow(0_0_15px_var(--headline-glow))]">
                 <SplitText delay={1}>{headline[2]}</SplitText>
               </span>
             </h1>
@@ -208,7 +208,7 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
                 {/* Wort und Stern zusammen: sonst rutscht der Stern allein in
                     die nächste Zeile und steht dort ohne Bezug. */}
                 <span className="inline-block whitespace-nowrap">
-                  <span className="mask-r inline-block [filter:drop-shadow(0_0_15px_rgba(238,241,234,0.2))]">
+                  <span className="mask-r inline-block [filter:drop-shadow(0_0_15px_var(--headline-glow))]">
                     <SplitText delay={0.5}>{t('welcome.halo.missionB')}</SplitText>
                   </span>
                   <DiamondStar />

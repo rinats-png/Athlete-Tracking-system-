@@ -24,6 +24,17 @@ interface Point {
   bright: boolean
 }
 
+/**
+ * Die beiden Farben der Sphäre, aus den Rollen gelesen: die Schriftfarbe für
+ * die hellen Punkte, die Akzentschrift für die dunkleren. Damit stimmt die
+ * Kugel in beiden Themes — auf Cream Paper sind ihre Punkte dunkel, auf Deep
+ * Brown hell —, ohne dass hier eine Farbe steht.
+ */
+function palette(el: HTMLElement): [string, string] {
+  const style = getComputedStyle(el)
+  return [style.getPropertyValue('--ink').trim(), style.getPropertyValue('--accent-text').trim()]
+}
+
 function build(): Point[] {
   const points: Point[] = []
   for (let i = 0; i < COUNT; i++) {
@@ -58,6 +69,7 @@ export function ParticleSphere({ className }: { className?: string }) {
     const parent = canvas.parentElement as HTMLElement
     const points = build()
     const still = prefersReducedMotion()
+    const [brightColor, quietColor] = palette(parent)
 
     let width = 0
     let height = 0
@@ -104,7 +116,7 @@ export function ParticleSphere({ className }: { className?: string }) {
         const perspective = 1000 / (1000 + rz * radius)
         ctx.beginPath()
         ctx.arc(rx * radius * perspective, p.y * radius * perspective, p.size * perspective, 0, Math.PI * 2)
-        ctx.fillStyle = p.bright ? '#EEF1EA' : '#3F4B3A'
+        ctx.fillStyle = p.bright ? brightColor : quietColor
         ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha * grow * perspective))
         ctx.fill()
       }
