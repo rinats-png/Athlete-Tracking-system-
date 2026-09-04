@@ -216,7 +216,21 @@
   }
 }
 
-:root[data-theme="dark"] {
+/*
+ * Der Dunkelmodus — und derselbe Satz Rollen als BEREICH.
+ *
+ * `.ink-scope` färbt einen Ausschnitt der Seite dunkel, unabhängig von der
+ * Einstellung des Menschen. Genau ein Ort benutzt das: der Einstieg. Die
+ * Halo-Gestaltung lebt vom dunklen Grund — ein leuchtender Ring auf hellem
+ * Papier ist kein Ring, sondern ein Fleck. Für einen Bildschirm, auf dem
+ * niemand einen Messwert abliest, ist das vertretbar; für die App selbst
+ * wäre es das nicht, deshalb endet der Bereich am Einstieg.
+ *
+ * Es sind dieselben geprüften Werte wie im Dunkelmodus, nicht neue Farben:
+ * der Selektor hängt an derselben Regel.
+ */
+:root[data-theme="dark"],
+.ink-scope {
   color-scheme: dark;
 
   /* Sumi Ink trägt den dunklen Modus; die Flächen darüber sind mit einem
@@ -547,6 +561,168 @@ body {
   animation: fade-in var(--motion-base) var(--ease-out) backwards;
 }
 
+/* --- Halo-Gestaltung ----------------------------------------------------
+ *
+ * Aus der Vorlage «Baseline Halo» übernommen: der Einstieg als Landing mit
+ * einem leuchtenden Partikelring, grossen Versalzeilen, die zeichenweise
+ * scharf ziehen, Eckklammern statt Rahmen und Mono-Marken in eckigen
+ * Klammern.
+ *
+ * NICHT übernommen, jeweils aus einem Grund:
+ *
+ *   Der eigene Mauszeiger. Ein Punkt statt des Systemzeigers ist auf einem
+ *   Telefon unsichtbar und auf dem Rechner eine Verschlechterung für alle,
+ *   die auf den echten Zeiger angewiesen sind.
+ *
+ *   Das Scroll-Hijacking. Ein nachgebautes Scrollen bricht Tastatur,
+ *   Bildschirmleser und die Gestensteuerung der Systeme.
+ *
+ *   Die 160 000 GPU-Partikel über Three.js von einem CDN. Das wären eine
+ *   Fremdabhängigkeit, ein gerissenes Bündelbudget und eine gesperrte
+ *   Quelle in unserer CSP. Der Ring ist auf einem 2D-Canvas nachgebaut —
+ *   dieselbe Form, dieselbe Palette, ein Bruchteil der Kosten.
+ */
+
+/* Die Kurve der Vorlage: sehr schnell heraus, sehr lange auslaufend. */
+:root {
+  --ease-halo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/*
+ * Einlaufende Elemente. Aus y+100, gekippt, verkleinert und unscharf in die
+ * Ruhelage. Die Verzögerung setzt der Aufrufer über --reveal-delay, damit
+ * eine Gruppe gestaffelt hereinkommt, ohne dass jede Karte eine eigene
+ * Regel braucht.
+ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(100px) rotateX(15deg) scale(0.9);
+  filter: blur(10px);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 800ms var(--ease-halo) var(--reveal-delay, 0ms),
+    transform 800ms var(--ease-halo) var(--reveal-delay, 0ms),
+    filter 800ms var(--ease-halo) var(--reveal-delay, 0ms);
+}
+[data-reveal='card'] {
+  transition-duration: 1600ms;
+}
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* Zeichenweises Scharfziehen. Die Wortumbrüche stehen im Bauteil. */
+.te-seg {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  filter: blur(12px);
+  transition:
+    opacity 600ms var(--ease-halo) var(--te-delay, 0ms),
+    filter 800ms var(--ease-halo) var(--te-delay, 0ms);
+}
+.in .te-seg,
+.te-seg.in {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/*
+ * Eckklammern. Zwei Ecken, nicht vier: ein geschlossener Rahmen macht aus
+ * einer Fläche eine Schachtel, zwei Ecken markieren sie nur.
+ */
+.corner-brackets {
+  position: relative;
+}
+.corner-brackets::before,
+.corner-brackets::after {
+  content: '';
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none;
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+.corner-brackets::before {
+  top: 0;
+  right: 0;
+  border-top: 2px solid color-mix(in oklab, var(--ink) 40%, transparent);
+  border-right: 2px solid color-mix(in oklab, var(--ink) 40%, transparent);
+  border-top-right-radius: 3px;
+}
+.corner-brackets::after {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid color-mix(in oklab, var(--ink) 40%, transparent);
+  border-left: 2px solid color-mix(in oklab, var(--ink) 40%, transparent);
+  border-bottom-left-radius: 3px;
+}
+@media (hover: hover) {
+  .corner-brackets:hover::before,
+  .corner-brackets:hover::after {
+    transform: scale(1.1);
+  }
+}
+
+/* Der Diamantstern der Vorlage, um die eigene Achse. */
+@keyframes star-spin {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+.star-spin {
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: star-spin 3s linear infinite;
+}
+
+/* Der pulsende Punkt: «das System misst». */
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.soft-pulse {
+  animation: soft-pulse 2s ease-in-out infinite;
+}
+
+/*
+ * Laufband. Der Inhalt steht zweimal im Markup, deshalb ist -50 % genau eine
+ * Runde. Beim Überfahren hält es an — wer lesen will, soll lesen können.
+ */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 40s linear infinite;
+}
+@media (hover: hover) {
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Kantenmasken der Überschriften: die Zeile läuft ins Nichts aus. */
+.mask-r {
+  mask-image: linear-gradient(to right, rgb(0 0 0 / 0.15), black 85%);
+}
+.mask-l {
+  mask-image: linear-gradient(to right, black 15%, rgb(0 0 0 / 0.15));
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -554,6 +730,17 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /*
+   * Wichtig: einlaufende Elemente stehen sonst UNSICHTBAR da. Ohne Bewegung
+   * gibt es kein «in» — also gibt es auch keinen Anfangszustand.
+   */
+  [data-reveal],
+  .te-seg {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
 

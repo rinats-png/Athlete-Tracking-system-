@@ -165,7 +165,45 @@
       "Referenzwerte mit Quelle",
       "Leistungsbenchmarking",
       "Persönliche Entwicklung"
-    ]
+    ],
+    "halo": {
+      "version": "Leistungsdiagnose · v1",
+      "navLabel": "Seitennavigation",
+      "nav": {
+        "what": "Was gemessen wird",
+        "how": "Haltung",
+        "privacy": "Datenschutz"
+      },
+      "lines": [
+        "Finde heraus,",
+        "wo du wirklich",
+        "stehst."
+      ],
+      "since": "ohne Konto",
+      "aboutLabel": "über baseline",
+      "aboutHeadline": "Baseline misst, ordnet ein und zeigt, was sich verändert hat — und was nur Tagesform war.",
+      "aboutBody": "Sportartspezifische Testprotokolle, Referenzwerte mit Quelle, ein Leistungsprofil über sechs Achsen und der nächste sinnvolle Test. Kein Trainingstagebuch, kein Kalorienzähler, keine medizinische Aussage.",
+      "cards": {
+        "protocol": {
+          "title": "Testprotokolle",
+          "body": "Jeder Test mit Ablauf, Einheit und Bedingungen — damit die nächste Messung mit der letzten vergleichbar ist."
+        },
+        "dimensions": {
+          "title": "Sechs Achsen",
+          "body": "Maxkraft, Relativkraft, Kraftausdauer, Ausdauer, Schnellkraft, Agilität — einzeln bewertet, gemeinsam gelesen."
+        },
+        "reference": {
+          "title": "Referenz & Veränderung",
+          "body": "Dein Perzentil, wo eine belegte Referenz vorliegt — und eine Veränderung erst dann, wenn sie über deiner eigenen Schwankung liegt."
+        }
+      },
+      "claim": "Messwerte statt Gefühl",
+      "missionLabel": "haltung:",
+      "missionA": "Diagnostik für jede",
+      "missionB": "Ambition",
+      "systemNote": "Messsysteme für moderne Athleten.",
+      "missionBody": "Wir verwandeln rohe Messwerte in klare Profile — vom Testprotokoll über das Leistungsprofil bis zur Langzeitentwicklung. Was sich nicht belegen lässt, behaupten wir nicht: ohne belegte Referenz gibt es kein Perzentil, und unter dem eigenen Messfehler gibt es keine Veränderung."
+    }
   },
   "body": {
     "figureLabel": "Körperdarstellung mit hervorgehobenen Leistungsdimensionen",

@@ -165,7 +165,45 @@
       "Reference values with sources",
       "Performance benchmarking",
       "Personal development"
-    ]
+    ],
+    "halo": {
+      "version": "Performance diagnostics · v1",
+      "navLabel": "Page navigation",
+      "nav": {
+        "what": "What is measured",
+        "how": "Approach",
+        "privacy": "Privacy"
+      },
+      "lines": [
+        "Find out",
+        "where you really",
+        "stand."
+      ],
+      "since": "no account",
+      "aboutLabel": "about baseline",
+      "aboutHeadline": "Baseline measures, puts it in context and shows what actually changed — and what was just a good day.",
+      "aboutBody": "Sport-specific test protocols, reference values with sources, a performance profile across six axes and the next sensible test. No training log, no calorie counter, no medical statement.",
+      "cards": {
+        "protocol": {
+          "title": "Test protocols",
+          "body": "Every test with procedure, unit and conditions — so the next measurement is comparable to the last."
+        },
+        "dimensions": {
+          "title": "Six axes",
+          "body": "Maximal strength, relative strength, strength endurance, endurance, power, agility — rated separately, read together."
+        },
+        "reference": {
+          "title": "Reference & change",
+          "body": "Your percentile where a documented reference exists — and a change only once it exceeds your own variation."
+        }
+      },
+      "claim": "Measurements, not feelings",
+      "missionLabel": "approach:",
+      "missionA": "Diagnostics for every",
+      "missionB": "ambition",
+      "systemNote": "Measurement systems for modern athletes.",
+      "missionBody": "We turn raw measurements into clear profiles — from the test protocol through the performance profile to long-term development. We do not claim what cannot be shown: without a documented reference there is no percentile, and below your own typical error there is no change."
+    }
   },
   "body": {
     "figureLabel": "Body view with highlighted performance dimensions",

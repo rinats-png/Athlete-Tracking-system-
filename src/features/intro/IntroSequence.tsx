@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import bodyAsset from '@/assets/body-figure.webp'
+import { HaloField } from '@/components/signature/HaloField'
 import { useLocale } from '@/features/shared/useLocale'
 import { loadData } from '@/lib/store/localStore'
 import { ratingContextOf } from '@/features/shared/profileContext'
@@ -155,12 +156,19 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
   const atFinale = index >= scenes.length
 
   return (
+    /*
+     * `ink-scope`: die Sequenz läuft immer auf dunklem Grund, wie die
+     * Landing. Die Körperfigur ist für dunklen Grund gezeichnet, und der
+     * Halo dahinter gibt es nur dort — fünf Sekunden Kino sind kein
+     * Bildschirm, auf dem jemand einen Messwert abliest.
+     */
     <div
-      className="fixed inset-0 z-[60] flex flex-col overflow-hidden bg-plane"
+      className="ink-scope fixed inset-0 z-[60] flex flex-col overflow-hidden bg-plane text-ink"
       onPointerDown={finish}
       role="dialog"
       aria-label={t('intro.label')}
     >
+      <HaloField className="opacity-80" />
       <div className="relative flex flex-1 items-center justify-center">
         {/* Die Messlinie der Vorlage: ein einzelner heller Strich, der die
             Szene als Messung markiert. */}
