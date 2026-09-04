@@ -1,0 +1,1317 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baseline — 20 Farbvorschläge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  :root { color-scheme: light; --page:#E8E8E6; --pageink:#1A1A18; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--page); color:var(--pageink);
+    font:15px/1.55 "IBM Plex Sans", system-ui, sans-serif; }
+  header { padding:56px 32px 24px; max-width:1180px; margin:0 auto; }
+  h1 { font:700 30px/1.1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.06em; text-transform:uppercase; margin:0 0 10px; }
+  header p { max-width:74ch; margin:0; opacity:.75; }
+  section { max-width:1180px; margin:0 auto; padding:40px 32px 56px; border-top:1px solid rgba(0,0,0,.12); }
+  h2 { font:700 24px/1.1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.05em; text-transform:uppercase; margin:0 0 6px; }
+  .why { max-width:78ch; margin:0 0 22px; opacity:.75; font-size:14px; }
+  .swatches { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:26px; }
+  .sw { width:132px; border-radius:10px; overflow:hidden; border:1px solid rgba(0,0,0,.12); background:#fff; }
+  .sw i { display:block; height:52px; }
+  .sw b { display:block; font-size:11px; padding:6px 8px 0; letter-spacing:.04em; text-transform:uppercase; }
+  .sw span { display:block; font:11px/1.6 "IBM Plex Mono", monospace; padding:0 8px 7px; opacity:.6; }
+  .pair { display:flex; gap:26px; flex-wrap:wrap; }
+  .phone { width:340px; border-radius:26px; overflow:hidden; border:1px solid rgba(0,0,0,.18);
+    box-shadow:0 18px 44px rgba(0,0,0,.18); }
+  .mode { font:11px/1 "IBM Plex Mono", monospace; letter-spacing:.2em; text-transform:uppercase; opacity:.55; margin:0 0 8px; }
+
+  /* --- Der nachgebaute Bildschirm ------------------------------------ */
+  .app { background:var(--plane); color:var(--ink); padding-bottom:14px; }
+  .bar { display:flex; align-items:center; gap:9px; padding:13px 14px; border-bottom:1px solid var(--line); }
+  .tile { width:24px; height:24px; border-radius:5px; background:var(--ink); display:grid; place-items:center; }
+  .tile svg { width:17px; height:17px; }
+  .brand { font:700 15px/1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.13em; text-transform:uppercase; }
+  .brand small { display:block; font-size:8px; letter-spacing:.18em; opacity:.6; margin-top:2px; }
+  .body { padding:16px 14px 0; }
+  .eyebrow { font:11px/1 "IBM Plex Mono", monospace; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+  .name { font:700 30px/1 "Saira Condensed", system-ui, sans-serif; margin:9px 0 3px; }
+  .sport { font-size:12px; color:var(--secondary); }
+  .cta { float:right; margin-top:-46px; background:var(--accent); color:var(--accent-ink);
+    border-radius:999px; padding:10px 16px; font:700 11px/1 "Saira Condensed", system-ui, sans-serif;
+    letter-spacing:.14em; text-transform:uppercase; }
+  .due { margin:16px 0 0; padding:11px 13px; border-radius:12px; background:var(--sunken);
+    display:flex; justify-content:space-between; font-size:12.5px; }
+  .orbwrap { display:grid; place-items:center; padding:16px 0 6px; }
+  .cards { display:flex; gap:9px; align-items:flex-start; }
+  .card { flex:1; background:var(--raised); border:1px solid var(--line); border-radius:14px; padding:10px 11px; }
+  .card:nth-child(2) { margin-top:16px; }
+  .card:nth-child(3) { margin-top:6px; }
+  .card b { display:block; font:11px/1 "IBM Plex Mono", monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+  .card i { display:block; font:700 25px/1 "IBM Plex Mono", monospace; font-style:normal; margin-top:8px; }
+  .card u { display:block; text-decoration:none; font-size:10.5px; color:var(--muted); margin-top:6px; }
+  .next { margin-top:14px; border-radius:14px; padding:12px 13px; background:var(--accent); color:var(--accent-ink); }
+  .next b { display:block; font:11px/1 "IBM Plex Mono", monospace; letter-spacing:.14em; text-transform:uppercase; opacity:.75; }
+  .next p { margin:7px 0 0; font:700 15px/1.2 "Saira Condensed", system-ui, sans-serif; letter-spacing:.02em; }
+  .rows { margin-top:14px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--surface); }
+  .row { display:flex; justify-content:space-between; padding:10px 12px; font-size:12.5px; border-top:1px solid var(--line); }
+  .row:first-child { border-top:0; }
+  .row span { font:12.5px/1 "IBM Plex Mono", monospace; }
+  .row em { display:block; font-style:normal; font-size:10.5px; color:var(--muted); margin-top:3px; }
+  .nav { margin:14px 10px 0; border-radius:999px; background:var(--raised); border:1px solid var(--line);
+    display:flex; justify-content:space-around; padding:8px 0; font:9px/1 "IBM Plex Mono", monospace;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+  .nav b { color:var(--ink); }
+  /* Hero der Landing */
+  .hero { background:var(--plane); color:var(--ink); padding:26px 16px 22px; border-top:1px solid var(--line); position:relative; overflow:hidden; }
+  .hero canvas { position:absolute; inset:0; width:100%; height:100%; }
+  .hero > * { position:relative; }
+  .hero h3 { margin:8px 0 0; font:700 27px/.92 "Saira Condensed", system-ui, sans-serif; text-transform:uppercase; letter-spacing:-.01em; }
+  .hero h3 span { opacity:.45; }
+  .btn { display:inline-block; margin-top:14px; border:1px solid var(--strong); border-radius:3px;
+    padding:9px 15px; font:11px/1 "IBM Plex Sans", sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Baseline — 20 Farbvorschläge</h1>
+  <p>Zwanzig Paletten, jede in hell und dunkel. Der Bildschirm ist die Übersicht, nachgebaut mit
+     denselben Abständen und Schriften wie die App — nur die Farben wechseln. Jede Fassung ist
+     gerechnet, nicht geschätzt: Fliesstext über 4,5:1, Bedienelemente über 3:1 gegen alle vier
+     Flächen. Die fünf Felder über jedem Paar sind die Ausgangstöne; alle übrigen Werte sind
+     daraus abgeleitet.</p>
+  <p style="margin-top:14px"><b>Wie man das liest:</b> die Marke trägt Knopf und Karte «Nächster Test»,
+     das Signal ist der Ring um das Profil — die eine Farbe, die etwas bedeutet. Wenn dir an einer
+     Palette nur ein Ton nicht passt, sag welcher, dann tausche ich ihn.</p>
+</header>
+<div id="out"></div>
+
+<script>
+const WAVE = '<svg viewBox="0 0 32 32" fill="none"><path d="M5 21h4l4-11 4 16 4-13 2 8h4" stroke="var(--plane)" stroke-width="2.4" stroke-linecap="square"/></svg>'
+
+const PALETTES = [
+ {
+  "name": "Kreide & Graphit",
+  "why": "Papierweiss mit einem Stich ins Warme, Graphit als Fläche, ein einziger Signalton: gebranntes Rostrot. Herkunft ist das Laborheft — nichts leuchtet, alles ist ablesbar.",
+  "tones": [
+   [
+    "Papier",
+    "#F1EFE9"
+   ],
+   [
+    "Tinte",
+    "#1B1B19"
+   ],
+   [
+    "Marke",
+    "#24262B"
+   ],
+   [
+    "Signal",
+    "#B7532A"
+   ],
+   [
+    "Neutral",
+    "#A6A29A"
+   ]
+  ],
+  "light": {
+   "plane": "#F1EFE9",
+   "surface": "#F7F6F3",
+   "surface-raised": "#FCFBFA",
+   "surface-sunken": "#E0DED8",
+   "ink": "#1B1B19",
+   "ink-secondary": "#1F2025",
+   "ink-muted": "#222429",
+   "accent": "#24262B",
+   "accent-ink": "#F1EFE9",
+   "accent-text": "#202227",
+   "glow": "#B7532A",
+   "line": "#C8C5BE",
+   "strong": "#A6A29A"
+  },
+  "dark": {
+   "plane": "#10100E",
+   "surface": "#1F1F1E",
+   "surface-raised": "#2D2D2B",
+   "surface-sunken": "#0A0A09",
+   "ink": "#F1EFE9",
+   "ink-secondary": "#B9B5AE",
+   "ink-muted": "#AAA69E",
+   "accent": "#808184",
+   "accent-ink": "#10100E",
+   "accent-text": "#949597",
+   "glow": "#C06844",
+   "line": "#383836",
+   "strong": "#61605D"
+  }
+ },
+ {
+  "name": "Alpin",
+  "why": "Schneegrau, Petrolblau, Gletscher. Die Sprache der Diagnostik: Ultraschall, Röntgen, Höhenmesser. Rot-Grün-Schwäche tastet Blau nicht an.",
+  "tones": [
+   [
+    "Papier",
+    "#F2F4F5"
+   ],
+   [
+    "Tinte",
+    "#14181B"
+   ],
+   [
+    "Marke",
+    "#24505F"
+   ],
+   [
+    "Signal",
+    "#8FB6C6"
+   ],
+   [
+    "Neutral",
+    "#9AA6AB"
+   ]
+  ],
+  "light": {
+   "plane": "#F2F4F5",
+   "surface": "#F8F9FA",
+   "surface-raised": "#FCFCFC",
+   "surface-sunken": "#DFE3E5",
+   "ink": "#14181B",
+   "ink-secondary": "#1F4451",
+   "ink-muted": "#224C5A",
+   "accent": "#24505F",
+   "accent-ink": "#F2F4F5",
+   "accent-text": "#204856",
+   "glow": "#8FB6C6",
+   "line": "#C2C9CC",
+   "strong": "#9AA6AB"
+  },
+  "dark": {
+   "plane": "#0C0E10",
+   "surface": "#1C1E20",
+   "surface-raised": "#2A2C2D",
+   "surface-sunken": "#08090A",
+   "ink": "#F2F4F5",
+   "ink-secondary": "#B0BABE",
+   "ink-muted": "#9EAAAF",
+   "accent": "#63828D",
+   "accent-ink": "#0C0E10",
+   "accent-text": "#819AA3",
+   "glow": "#9CBFCD",
+   "line": "#353739",
+   "strong": "#5F6162"
+  }
+ },
+ {
+  "name": "Feldbuch",
+  "why": "Haferpapier, Nussbaum, Waldgrün, Ocker als Lichtkante. Die warme Richtung, aber ohne dass das Gelb die halbe Oberfläche trägt.",
+  "tones": [
+   [
+    "Papier",
+    "#EFE9DC"
+   ],
+   [
+    "Tinte",
+    "#241F19"
+   ],
+   [
+    "Marke",
+    "#43503F"
+   ],
+   [
+    "Signal",
+    "#B98A2E"
+   ],
+   [
+    "Neutral",
+    "#A79E8B"
+   ]
+  ],
+  "light": {
+   "plane": "#EFE9DC",
+   "surface": "#F6F3EC",
+   "surface-raised": "#FBFAF6",
+   "surface-sunken": "#DFD8CA",
+   "ink": "#241F19",
+   "ink-secondary": "#394436",
+   "ink-muted": "#404C3C",
+   "accent": "#43503F",
+   "accent-ink": "#EFE9DC",
+   "accent-text": "#3C4839",
+   "glow": "#B98A2E",
+   "line": "#C7C0AF",
+   "strong": "#A79E8B"
+  },
+  "dark": {
+   "plane": "#15120E",
+   "surface": "#24211D",
+   "surface-raised": "#312E29",
+   "surface-sunken": "#0E0C09",
+   "ink": "#EFE9DC",
+   "ink-secondary": "#B9B19F",
+   "ink-muted": "#ABA28F",
+   "accent": "#798276",
+   "accent-ink": "#15120E",
+   "accent-text": "#939A91",
+   "glow": "#C19847",
+   "line": "#3C3933",
+   "strong": "#635F58"
+  }
+ },
+ {
+  "name": "Beton & Signal",
+  "why": "Sichtbeton und Baustellenorange. Die Farbwelt der Ingenieure: ein neutraler Grund, auf dem genau eine Farbe etwas bedeutet.",
+  "tones": [
+   [
+    "Papier",
+    "#EDEDEB"
+   ],
+   [
+    "Tinte",
+    "#1C1C1C"
+   ],
+   [
+    "Marke",
+    "#3A3A38"
+   ],
+   [
+    "Signal",
+    "#D2610E"
+   ],
+   [
+    "Neutral",
+    "#A2A29E"
+   ]
+  ],
+  "light": {
+   "plane": "#EDEDEB",
+   "surface": "#F5F5F4",
+   "surface-raised": "#FAFAFA",
+   "surface-sunken": "#DCDCDA",
+   "ink": "#1C1C1C",
+   "ink-secondary": "#313130",
+   "ink-muted": "#373735",
+   "accent": "#3A3A38",
+   "accent-ink": "#EDEDEB",
+   "accent-text": "#343432",
+   "glow": "#D2610E",
+   "line": "#C4C4C1",
+   "strong": "#A2A29E"
+  },
+  "dark": {
+   "plane": "#101010",
+   "surface": "#202020",
+   "surface-raised": "#2D2D2D",
+   "surface-sunken": "#0B0B0B",
+   "ink": "#EDEDEB",
+   "ink-secondary": "#B5B5B1",
+   "ink-muted": "#A6A6A2",
+   "accent": "#80807F",
+   "accent-ink": "#101010",
+   "accent-text": "#979796",
+   "glow": "#D7742B",
+   "line": "#383838",
+   "strong": "#60605F"
+  }
+ },
+ {
+  "name": "Leinen & Eisengallus",
+  "why": "Leinenweiss und Eisengallustinte — das Blauschwarz alter Handschriften. Ein Blau, das keine Software-Marke ist, weil es aus dem Tintenfass kommt.",
+  "tones": [
+   [
+    "Papier",
+    "#F0EEE6"
+   ],
+   [
+    "Tinte",
+    "#1A1E2A"
+   ],
+   [
+    "Marke",
+    "#26304A"
+   ],
+   [
+    "Signal",
+    "#7C6A46"
+   ],
+   [
+    "Neutral",
+    "#A5A49B"
+   ]
+  ],
+  "light": {
+   "plane": "#F0EEE6",
+   "surface": "#F7F6F1",
+   "surface-raised": "#FBFBF9",
+   "surface-sunken": "#E0DED6",
+   "ink": "#1A1E2A",
+   "ink-secondary": "#20293F",
+   "ink-muted": "#242E46",
+   "accent": "#26304A",
+   "accent-ink": "#F0EEE6",
+   "accent-text": "#222B43",
+   "glow": "#7C6A46",
+   "line": "#C7C5BD",
+   "strong": "#A5A49B"
+  },
+  "dark": {
+   "plane": "#0F1118",
+   "surface": "#1F2127",
+   "surface-raised": "#2C2E33",
+   "surface-sunken": "#0A0B10",
+   "ink": "#F0EEE6",
+   "ink-secondary": "#B8B6AE",
+   "ink-muted": "#A9A89F",
+   "accent": "#7A8190",
+   "accent-ink": "#0F1118",
+   "accent-text": "#959AA7",
+   "glow": "#8C7C5C",
+   "line": "#38393D",
+   "strong": "#606162"
+  }
+ },
+ {
+  "name": "Schiefer & Kalk",
+  "why": "Kalkweiss auf Schiefergrau mit einem Ziegelton. Die Farben eines alten Sportplatzes: Linien, Stein, gebrannter Ton.",
+  "tones": [
+   [
+    "Papier",
+    "#EFEFEC"
+   ],
+   [
+    "Tinte",
+    "#1F2224"
+   ],
+   [
+    "Marke",
+    "#3C4448"
+   ],
+   [
+    "Signal",
+    "#A5482F"
+   ],
+   [
+    "Neutral",
+    "#9EA3A4"
+   ]
+  ],
+  "light": {
+   "plane": "#EFEFEC",
+   "surface": "#F6F6F5",
+   "surface-raised": "#FBFBFA",
+   "surface-sunken": "#DDDEDC",
+   "ink": "#1F2224",
+   "ink-secondary": "#333A3D",
+   "ink-muted": "#394144",
+   "accent": "#3C4448",
+   "accent-ink": "#EFEFEC",
+   "accent-text": "#363D41",
+   "glow": "#A5482F",
+   "line": "#C2C5C4",
+   "strong": "#9EA3A4"
+  },
+  "dark": {
+   "plane": "#121415",
+   "surface": "#212324",
+   "surface-raised": "#2F3031",
+   "surface-sunken": "#0C0D0E",
+   "ink": "#EFEFEC",
+   "ink-secondary": "#B2B6B6",
+   "ink-muted": "#A2A7A8",
+   "accent": "#7B8083",
+   "accent-ink": "#121415",
+   "accent-text": "#989C9E",
+   "glow": "#B05E48",
+   "line": "#3A3B3C",
+   "strong": "#626362"
+  }
+ },
+ {
+  "name": "Espresso",
+  "why": "Ecru und dunkles Röstbraun, dazu Kupfer. Warm ohne Gelb — die Wärme kommt aus dem Braun, nicht aus einem Goldton.",
+  "tones": [
+   [
+    "Papier",
+    "#F1EAE0"
+   ],
+   [
+    "Tinte",
+    "#2A211B"
+   ],
+   [
+    "Marke",
+    "#3A2C24"
+   ],
+   [
+    "Signal",
+    "#A9662F"
+   ],
+   [
+    "Neutral",
+    "#AAA093"
+   ]
+  ],
+  "light": {
+   "plane": "#F1EAE0",
+   "surface": "#F7F3EE",
+   "surface-raised": "#FCFAF7",
+   "surface-sunken": "#E1DACF",
+   "ink": "#2A211B",
+   "ink-secondary": "#31251F",
+   "ink-muted": "#372A22",
+   "accent": "#3A2C24",
+   "accent-ink": "#F1EAE0",
+   "accent-text": "#342820",
+   "glow": "#A9662F",
+   "line": "#CAC1B6",
+   "strong": "#AAA093"
+  },
+  "dark": {
+   "plane": "#181310",
+   "surface": "#28221E",
+   "surface-raised": "#352F2B",
+   "surface-sunken": "#100C0A",
+   "ink": "#F1EAE0",
+   "ink-secondary": "#BCB2A6",
+   "ink-muted": "#AEA497",
+   "accent": "#877E79",
+   "accent-ink": "#181310",
+   "accent-text": "#9F9894",
+   "glow": "#B37848",
+   "line": "#3F3A35",
+   "strong": "#66605B"
+  }
+ },
+ {
+  "name": "Salbei",
+  "why": "Knochenweiss, Salbei, Terrakotta. Ruhig und pflanzlich, ohne ins Mintgrüne zu kippen, das jede zweite App trägt.",
+  "tones": [
+   [
+    "Papier",
+    "#EFEFE7"
+   ],
+   [
+    "Tinte",
+    "#22261F"
+   ],
+   [
+    "Marke",
+    "#4A5A4A"
+   ],
+   [
+    "Signal",
+    "#B26346"
+   ],
+   [
+    "Neutral",
+    "#A3A79A"
+   ]
+  ],
+  "light": {
+   "plane": "#EFEFE7",
+   "surface": "#F6F6F2",
+   "surface-raised": "#FBFBF9",
+   "surface-sunken": "#DEDFD6",
+   "ink": "#22261F",
+   "ink-secondary": "#3F4C3F",
+   "ink-muted": "#465646",
+   "accent": "#4A5A4A",
+   "accent-ink": "#EFEFE7",
+   "accent-text": "#435143",
+   "glow": "#B26346",
+   "line": "#C5C7BD",
+   "strong": "#A3A79A"
+  },
+  "dark": {
+   "plane": "#141612",
+   "surface": "#232521",
+   "surface-raised": "#30322E",
+   "surface-sunken": "#0D0E0C",
+   "ink": "#EFEFE7",
+   "ink-secondary": "#B6B9AD",
+   "ink-muted": "#A7AB9E",
+   "accent": "#778377",
+   "accent-ink": "#141612",
+   "accent-text": "#97A097",
+   "glow": "#BB765C",
+   "line": "#3B3D38",
+   "strong": "#63645F"
+  }
+ },
+ {
+  "name": "Nordlicht",
+  "why": "Kühles Papiergrau, Stahlblau, ein gedämpfter Bernstein als einzige warme Stelle. Wintermorgen statt Neonlicht.",
+  "tones": [
+   [
+    "Papier",
+    "#EEF0F1"
+   ],
+   [
+    "Tinte",
+    "#181C20"
+   ],
+   [
+    "Marke",
+    "#2E3E4C"
+   ],
+   [
+    "Signal",
+    "#B98C3E"
+   ],
+   [
+    "Neutral",
+    "#9DA4A9"
+   ]
+  ],
+  "light": {
+   "plane": "#EEF0F1",
+   "surface": "#F6F7F7",
+   "surface-raised": "#FBFBFC",
+   "surface-sunken": "#DCDFE1",
+   "ink": "#181C20",
+   "ink-secondary": "#273541",
+   "ink-muted": "#2C3B48",
+   "accent": "#2E3E4C",
+   "accent-ink": "#EEF0F1",
+   "accent-text": "#293844",
+   "glow": "#B98C3E",
+   "line": "#C1C6C9",
+   "strong": "#9DA4A9"
+  },
+  "dark": {
+   "plane": "#0E1013",
+   "surface": "#1E2022",
+   "surface-raised": "#2B2D2F",
+   "surface-sunken": "#090B0C",
+   "ink": "#EEF0F1",
+   "ink-secondary": "#B1B7BB",
+   "ink-muted": "#A1A8AD",
+   "accent": "#79838C",
+   "accent-ink": "#0E1013",
+   "accent-text": "#9099A0",
+   "glow": "#C19A55",
+   "line": "#36393B",
+   "strong": "#5F6163"
+  }
+ },
+ {
+  "name": "Rost & Asche",
+  "why": "Asche und Eisenoxid. Zwei Töne, die aus demselben Vorgang stammen — Metall, das arbeitet. Kein Zierrat, keine dritte Farbe.",
+  "tones": [
+   [
+    "Papier",
+    "#EDEBE7"
+   ],
+   [
+    "Tinte",
+    "#1E1C1A"
+   ],
+   [
+    "Marke",
+    "#4A3A32"
+   ],
+   [
+    "Signal",
+    "#9C4A24"
+   ],
+   [
+    "Neutral",
+    "#A39D96"
+   ]
+  ],
+  "light": {
+   "plane": "#EDEBE7",
+   "surface": "#F5F4F2",
+   "surface-raised": "#FAFAF9",
+   "surface-sunken": "#DDDAD5",
+   "ink": "#1E1C1A",
+   "ink-secondary": "#3F312A",
+   "ink-muted": "#463730",
+   "accent": "#4A3A32",
+   "accent-ink": "#EDEBE7",
+   "accent-text": "#43342D",
+   "glow": "#9C4A24",
+   "line": "#C4C0BA",
+   "strong": "#A39D96"
+  },
+  "dark": {
+   "plane": "#11100F",
+   "surface": "#21201E",
+   "surface-raised": "#2E2D2B",
+   "surface-sunken": "#0B0B0A",
+   "ink": "#EDEBE7",
+   "ink-secondary": "#B6B0AA",
+   "ink-muted": "#A7A19A",
+   "accent": "#8B807B",
+   "accent-ink": "#11100F",
+   "accent-text": "#9F9792",
+   "glow": "#A8603E",
+   "line": "#393836",
+   "strong": "#605F5D"
+  }
+ },
+ {
+  "name": "Tabak",
+  "why": "Cremeweiss, Tabakbraun, Oliv. Die Palette eines Notizbuchs aus Leder — gebraucht, nicht dekoriert.",
+  "tones": [
+   [
+    "Papier",
+    "#F0EADE"
+   ],
+   [
+    "Tinte",
+    "#241E17"
+   ],
+   [
+    "Marke",
+    "#4C3B28"
+   ],
+   [
+    "Signal",
+    "#8A7A3E"
+   ],
+   [
+    "Neutral",
+    "#ABA290"
+   ]
+  ],
+  "light": {
+   "plane": "#F0EADE",
+   "surface": "#F7F3ED",
+   "surface-raised": "#FBFAF7",
+   "surface-sunken": "#E1DACD",
+   "ink": "#241E17",
+   "ink-secondary": "#413222",
+   "ink-muted": "#483826",
+   "accent": "#4C3B28",
+   "accent-ink": "#F0EADE",
+   "accent-text": "#443524",
+   "glow": "#8A7A3E",
+   "line": "#CAC2B3",
+   "strong": "#ABA290"
+  },
+  "dark": {
+   "plane": "#15110D",
+   "surface": "#24211C",
+   "surface-raised": "#312E28",
+   "surface-sunken": "#0E0B09",
+   "ink": "#F0EADE",
+   "ink-secondary": "#BCB4A4",
+   "ink-muted": "#AEA694",
+   "accent": "#8C8175",
+   "accent-ink": "#15110D",
+   "accent-text": "#A0978D",
+   "glow": "#988A55",
+   "line": "#3C3833",
+   "strong": "#645F58"
+  }
+ },
+ {
+  "name": "Marine",
+  "why": "Segeltuch, Marineblau, Messing. Blau als Handwerksfarbe, nicht als Technologiefarbe — der Unterschied liegt im Messing.",
+  "tones": [
+   [
+    "Papier",
+    "#EFEEE9"
+   ],
+   [
+    "Tinte",
+    "#151A22"
+   ],
+   [
+    "Marke",
+    "#1F2C42"
+   ],
+   [
+    "Signal",
+    "#A8843C"
+   ],
+   [
+    "Neutral",
+    "#A1A39F"
+   ]
+  ],
+  "light": {
+   "plane": "#EFEEE9",
+   "surface": "#F6F6F3",
+   "surface-raised": "#FBFBFA",
+   "surface-sunken": "#DEDED9",
+   "ink": "#151A22",
+   "ink-secondary": "#1A2538",
+   "ink-muted": "#1D2A3F",
+   "accent": "#1F2C42",
+   "accent-ink": "#EFEEE9",
+   "accent-text": "#1C283B",
+   "glow": "#A8843C",
+   "line": "#C4C5C0",
+   "strong": "#A1A39F"
+  },
+  "dark": {
+   "plane": "#0C0F14",
+   "surface": "#1C1F23",
+   "surface-raised": "#2A2C2F",
+   "surface-sunken": "#080A0D",
+   "ink": "#EFEEE9",
+   "ink-secondary": "#B4B6B2",
+   "ink-muted": "#A5A7A3",
+   "accent": "#767E8C",
+   "accent-ink": "#0C0F14",
+   "accent-text": "#9298A3",
+   "glow": "#B29353",
+   "line": "#35373A",
+   "strong": "#5E5F61"
+  }
+ },
+ {
+  "name": "Granit",
+  "why": "Warmweiss, Granitgrau, Moos. Der Stein trägt, das Grün markiert. Zwei Neutralfarben und ein Akzent, sonst nichts.",
+  "tones": [
+   [
+    "Papier",
+    "#EFEEEA"
+   ],
+   [
+    "Tinte",
+    "#1D1F1D"
+   ],
+   [
+    "Marke",
+    "#414640"
+   ],
+   [
+    "Signal",
+    "#5E7A4E"
+   ],
+   [
+    "Neutral",
+    "#A4A49F"
+   ]
+  ],
+  "light": {
+   "plane": "#EFEEEA",
+   "surface": "#F6F6F3",
+   "surface-raised": "#FBFBFA",
+   "surface-sunken": "#DEDEDA",
+   "ink": "#1D1F1D",
+   "ink-secondary": "#373C36",
+   "ink-muted": "#3E423D",
+   "accent": "#414640",
+   "accent-ink": "#EFEEEA",
+   "accent-text": "#3A3F3A",
+   "glow": "#5E7A4E",
+   "line": "#C6C5C1",
+   "strong": "#A4A49F"
+  },
+  "dark": {
+   "plane": "#111211",
+   "surface": "#202120",
+   "surface-raised": "#2E2F2D",
+   "surface-sunken": "#0B0C0B",
+   "ink": "#EFEEEA",
+   "ink-secondary": "#B7B6B2",
+   "ink-muted": "#A8A8A3",
+   "accent": "#7E827E",
+   "accent-ink": "#111211",
+   "accent-text": "#969996",
+   "glow": "#718A63",
+   "line": "#393A38",
+   "strong": "#61615F"
+  }
+ },
+ {
+  "name": "Sand & Basalt",
+  "why": "Wüstensand auf Basaltschwarz mit Siena. Hoher Helligkeitsabstand — für Bildschirme, die in der Halle unter Flutlicht abgelesen werden.",
+  "tones": [
+   [
+    "Papier",
+    "#EFE8DA"
+   ],
+   [
+    "Tinte",
+    "#17171A"
+   ],
+   [
+    "Marke",
+    "#2B2B30"
+   ],
+   [
+    "Signal",
+    "#B06A2C"
+   ],
+   [
+    "Neutral",
+    "#ABA292"
+   ]
+  ],
+  "light": {
+   "plane": "#EFE8DA",
+   "surface": "#F6F2EB",
+   "surface-raised": "#FBF9F6",
+   "surface-sunken": "#E0D9CA",
+   "ink": "#17171A",
+   "ink-secondary": "#252529",
+   "ink-muted": "#29292E",
+   "accent": "#2B2B30",
+   "accent-ink": "#EFE8DA",
+   "accent-text": "#27272B",
+   "glow": "#B06A2C",
+   "line": "#CAC2B2",
+   "strong": "#ABA292"
+  },
+  "dark": {
+   "plane": "#0D0D0F",
+   "surface": "#1D1D1D",
+   "surface-raised": "#2B2A29",
+   "surface-sunken": "#09090A",
+   "ink": "#EFE8DA",
+   "ink-secondary": "#BCB4A4",
+   "ink-muted": "#AEA696",
+   "accent": "#7D7D81",
+   "accent-ink": "#0D0D0F",
+   "accent-text": "#939396",
+   "glow": "#B97C45",
+   "line": "#363534",
+   "strong": "#5F5C58"
+  }
+ },
+ {
+  "name": "Papyrus",
+  "why": "Warmes Papier, Sepia, ein tiefes Blaugrün als Akzent. Der Kontrast von altem Papier und einer kühlen Marke.",
+  "tones": [
+   [
+    "Papier",
+    "#F1EADD"
+   ],
+   [
+    "Tinte",
+    "#2B241B"
+   ],
+   [
+    "Marke",
+    "#22423E"
+   ],
+   [
+    "Signal",
+    "#9A7340"
+   ],
+   [
+    "Neutral",
+    "#ACA292"
+   ]
+  ],
+  "light": {
+   "plane": "#F1EADD",
+   "surface": "#F7F3EC",
+   "surface-raised": "#FCFAF6",
+   "surface-sunken": "#E2DACC",
+   "ink": "#2B241B",
+   "ink-secondary": "#1D3835",
+   "ink-muted": "#203F3B",
+   "accent": "#22423E",
+   "accent-ink": "#F1EADD",
+   "accent-text": "#1F3B38",
+   "glow": "#9A7340",
+   "line": "#CBC2B4",
+   "strong": "#ACA292"
+  },
+  "dark": {
+   "plane": "#191510",
+   "surface": "#28241E",
+   "surface-raised": "#35312A",
+   "surface-sunken": "#100E0A",
+   "ink": "#F1EADD",
+   "ink-secondary": "#BDB4A5",
+   "ink-muted": "#AFA696",
+   "accent": "#718583",
+   "accent-ink": "#191510",
+   "accent-text": "#8F9F9D",
+   "glow": "#A68457",
+   "line": "#403B35",
+   "strong": "#67625A"
+  }
+ },
+ {
+  "name": "Bauhaus",
+  "why": "Kalkweiss, Kohle, Zitron. Ein Gelb, das aus der Werkstatt kommt und nicht aus dem Farbverlauf — deshalb sitzt es nur auf kleinen Flächen.",
+  "tones": [
+   [
+    "Papier",
+    "#EFEFEB"
+   ],
+   [
+    "Tinte",
+    "#141414"
+   ],
+   [
+    "Marke",
+    "#2C2C2A"
+   ],
+   [
+    "Signal",
+    "#C8A415"
+   ],
+   [
+    "Neutral",
+    "#A3A39E"
+   ]
+  ],
+  "light": {
+   "plane": "#EFEFEB",
+   "surface": "#F6F6F4",
+   "surface-raised": "#FBFBFA",
+   "surface-sunken": "#DEDEDA",
+   "ink": "#141414",
+   "ink-secondary": "#252524",
+   "ink-muted": "#2A2A28",
+   "accent": "#2C2C2A",
+   "accent-ink": "#EFEFEB",
+   "accent-text": "#282826",
+   "glow": "#C8A415",
+   "line": "#C5C5C1",
+   "strong": "#A3A39E"
+  },
+  "dark": {
+   "plane": "#0C0C0C",
+   "surface": "#1C1C1B",
+   "surface-raised": "#292929",
+   "surface-sunken": "#080808",
+   "ink": "#EFEFEB",
+   "ink-secondary": "#B6B6B1",
+   "ink-muted": "#A7A7A2",
+   "accent": "#7E7E7D",
+   "accent-ink": "#0C0C0C",
+   "accent-text": "#949493",
+   "glow": "#CFAF31",
+   "line": "#353534",
+   "strong": "#5D5D5C"
+  }
+ },
+ {
+  "name": "Moor",
+  "why": "Birkenhell, Torfbraun, Heidekraut. Gedämpft und norddeutsch; das Heidekraut ist der einzige Ton mit Sättigung.",
+  "tones": [
+   [
+    "Papier",
+    "#EEEBE3"
+   ],
+   [
+    "Tinte",
+    "#211D19"
+   ],
+   [
+    "Marke",
+    "#3D342C"
+   ],
+   [
+    "Signal",
+    "#8A5C6A"
+   ],
+   [
+    "Neutral",
+    "#A6A197"
+   ]
+  ],
+  "light": {
+   "plane": "#EEEBE3",
+   "surface": "#F6F4F0",
+   "surface-raised": "#FBFAF8",
+   "surface-sunken": "#DEDBD2",
+   "ink": "#211D19",
+   "ink-secondary": "#342C25",
+   "ink-muted": "#3A312A",
+   "accent": "#3D342C",
+   "accent-ink": "#EEEBE3",
+   "accent-text": "#372F28",
+   "glow": "#8A5C6A",
+   "line": "#C6C2B9",
+   "strong": "#A6A197"
+  },
+  "dark": {
+   "plane": "#13110E",
+   "surface": "#22201D",
+   "surface-raised": "#302D2A",
+   "surface-sunken": "#0C0B09",
+   "ink": "#EEEBE3",
+   "ink-secondary": "#B8B4AA",
+   "ink-muted": "#AAA59B",
+   "accent": "#827C77",
+   "accent-ink": "#13110E",
+   "accent-text": "#9C9894",
+   "glow": "#98707C",
+   "line": "#3B3835",
+   "strong": "#625F5B"
+  }
+ },
+ {
+  "name": "Stahlbeton",
+  "why": "Kühler Beton, Stahlblau, Signalgelb. Die Kombination von Baustelle und Werkhalle: nüchtern, aber nicht leblos.",
+  "tones": [
+   [
+    "Papier",
+    "#ECEEEF"
+   ],
+   [
+    "Tinte",
+    "#181A1C"
+   ],
+   [
+    "Marke",
+    "#2F3E4A"
+   ],
+   [
+    "Signal",
+    "#D0A400"
+   ],
+   [
+    "Neutral",
+    "#9EA3A6"
+   ]
+  ],
+  "light": {
+   "plane": "#ECEEEF",
+   "surface": "#F5F6F6",
+   "surface-raised": "#FAFBFB",
+   "surface-sunken": "#DBDEDF",
+   "ink": "#181A1C",
+   "ink-secondary": "#28353F",
+   "ink-muted": "#2D3B46",
+   "accent": "#2F3E4A",
+   "accent-ink": "#ECEEEF",
+   "accent-text": "#2A3843",
+   "glow": "#D0A400",
+   "line": "#C1C5C7",
+   "strong": "#9EA3A6"
+  },
+  "dark": {
+   "plane": "#0E0F10",
+   "surface": "#1D1F20",
+   "surface-raised": "#2B2C2D",
+   "surface-sunken": "#090A0B",
+   "ink": "#ECEEEF",
+   "ink-secondary": "#B2B6B8",
+   "ink-muted": "#A2A7AA",
+   "accent": "#79838B",
+   "accent-ink": "#0E0F10",
+   "accent-text": "#91999F",
+   "glow": "#D6AF1F",
+   "line": "#363738",
+   "strong": "#5E5F60"
+  }
+ },
+ {
+  "name": "Zeder",
+  "why": "Sandpapier, Zedernholz, Salbeigrün. Zwei warme Töne mit einem kühlen dazwischen — dadurch kippt die Oberfläche nicht ins Gelbe.",
+  "tones": [
+   [
+    "Papier",
+    "#F0EBE1"
+   ],
+   [
+    "Tinte",
+    "#251F1A"
+   ],
+   [
+    "Marke",
+    "#5A3E2B"
+   ],
+   [
+    "Signal",
+    "#71856A"
+   ],
+   [
+    "Neutral",
+    "#ABA396"
+   ]
+  ],
+  "light": {
+   "plane": "#F0EBE1",
+   "surface": "#F7F4EE",
+   "surface-raised": "#FBFAF8",
+   "surface-sunken": "#E1DBD0",
+   "ink": "#251F1A",
+   "ink-secondary": "#4C3525",
+   "ink-muted": "#563B29",
+   "accent": "#5A3E2B",
+   "accent-ink": "#F0EBE1",
+   "accent-text": "#513827",
+   "glow": "#71856A",
+   "line": "#CAC3B8",
+   "strong": "#ABA396"
+  },
+  "dark": {
+   "plane": "#15120F",
+   "surface": "#25211E",
+   "surface-raised": "#322E2A",
+   "surface-sunken": "#0E0C0A",
+   "ink": "#F0EBE1",
+   "ink-secondary": "#BCB5A9",
+   "ink-muted": "#AEA79A",
+   "accent": "#8F7C70",
+   "accent-ink": "#15120F",
+   "accent-text": "#A4948A",
+   "glow": "#82947C",
+   "line": "#3D3935",
+   "strong": "#64605B"
+  }
+ },
+ {
+  "name": "Porzellan",
+  "why": "Porzellanweiss, Tiefgrau, Preiselbeere. Zurückhaltend bis zur Strenge; die Beere kommt nur an einer Stelle vor und meint dann auch etwas.",
+  "tones": [
+   [
+    "Papier",
+    "#F2F1EF"
+   ],
+   [
+    "Tinte",
+    "#1A1A1C"
+   ],
+   [
+    "Marke",
+    "#33343A"
+   ],
+   [
+    "Signal",
+    "#8E3A4A"
+   ],
+   [
+    "Neutral",
+    "#A5A5A6"
+   ]
+  ],
+  "light": {
+   "plane": "#F2F1EF",
+   "surface": "#F8F7F6",
+   "surface-raised": "#FCFCFB",
+   "surface-sunken": "#E1E0DF",
+   "ink": "#1A1A1C",
+   "ink-secondary": "#2B2C31",
+   "ink-muted": "#303137",
+   "accent": "#33343A",
+   "accent-ink": "#F2F1EF",
+   "accent-text": "#2E2F34",
+   "glow": "#8E3A4A",
+   "line": "#C8C7C7",
+   "strong": "#A5A5A6"
+  },
+  "dark": {
+   "plane": "#0F0F10",
+   "surface": "#1F1F20",
+   "surface-raised": "#2D2C2D",
+   "surface-sunken": "#0A0A0B",
+   "ink": "#F2F1EF",
+   "ink-secondary": "#B8B8B8",
+   "ink-muted": "#A9A9AA",
+   "accent": "#7C7C80",
+   "accent-ink": "#0F0F10",
+   "accent-text": "#97989B",
+   "glow": "#9C5260",
+   "line": "#383838",
+   "strong": "#616060"
+  }
+ }
+]
+
+/** Der Orb: dieselbe Form wie in der App — sechs Achsen, offene Punkte ohne Referenz. */
+function orb(p) {
+  const R = 62, C = 76, vals = [0.86, 0.62, 0.74, null, 0.55, 0.7]
+  const pts = vals.map((v, i) => {
+    const a = (Math.PI * 2 * i) / 6 - Math.PI / 2
+    const r = 22 + (v ?? 0) * (R - 22)
+    return [C + Math.cos(a) * r, C + Math.sin(a) * r, v]
+  })
+  const d = pts.map(([x, y], i) => (i ? `L${x.toFixed(1)} ${y.toFixed(1)}` : `M${x.toFixed(1)} ${y.toFixed(1)}`)).join(' ') + ' Z'
+  const dots = pts.map(([x, y, v]) =>
+    `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.2" fill="${v == null ? 'none' : p.accent}" stroke="${p.accent}" stroke-width="1.4"/>`).join('')
+  const grid = [1, 0.66, 0.33].map(f =>
+    `<circle cx="${C}" cy="${C}" r="${(22 + f * (R - 22)).toFixed(1)}" fill="none" stroke="${p.line}" stroke-width="1"/>`).join('')
+  return `<svg width="152" height="152" viewBox="0 0 152 152">${grid}
+    <path d="${d}" fill="${p.accent}" fill-opacity=".16" stroke="${p.accent}" stroke-width="1.8"/>
+    <circle cx="${C}" cy="${C}" r="${R + 8}" fill="none" stroke="${p.glow}" stroke-width="1.2" stroke-opacity=".55"/>
+    ${dots}</svg>`
+}
+
+function screen(p) {
+  return `
+  <div class="app">
+    <div class="bar"><div class="tile">${WAVE}</div><div class="brand">Baseline<small>Leistungsdiagnose</small></div></div>
+    <div class="body">
+      <div class="eyebrow">Deine Leistung</div>
+      <div class="name">Alex</div>
+      <div class="sport">Functional Fitness</div>
+      <div class="cta">Jetzt testen</div>
+      <div class="due"><span>3 Tests fällig</span><span>→</span></div>
+      <div class="orbwrap">${orb(p)}</div>
+      <div class="cards">
+        <div class="card"><b>Ausdauer</b><i>72</i><u>Perzentil</u></div>
+        <div class="card"><b>Maxkraft</b><i>—</i><u>keine Referenz</u></div>
+        <div class="card"><b>Schnellkraft</b><i>58</i><u>Perzentil</u></div>
+      </div>
+      <div class="next"><b>Nächster Test</b><p>Cooper-Test (12 Minuten) →</p></div>
+      <div class="rows">
+        <div class="row"><div>Cooper-Test<em>14. Juni 2026</em></div><span>3.320 m</span></div>
+        <div class="row"><div>Bankdrücken 1RM<em>14. Juni 2026</em></div><span>122,5 kg</span></div>
+        <div class="row"><div>Illinois Agility<em>13. Juni 2026</em></div><span>0:16.4</span></div>
+      </div>
+      <div class="nav"><b>Übersicht</b><span>Diagnostik</span><span>Analyse</span><span>Verlauf</span><span>Profil</span></div>
+    </div>
+    <div class="hero">
+      <canvas></canvas>
+      <div class="eyebrow">[ Baseline — Leistungsdiagnose ]</div>
+      <h3><span>Finde heraus,</span><br>wo du wirklich<br>stehst.</h3>
+      <div class="btn">Ohne Konto starten</div>
+    </div>
+  </div>`
+}
+
+const vars = p => Object.entries(p).map(([k, v]) => `--${k}:${v}`).join(';')
+
+document.getElementById('out').innerHTML = PALETTES.map(pal => `
+  <section>
+    <h2>${pal.name}</h2>
+    <p class="why">${pal.why}</p>
+    <div class="swatches">${pal.tones.map(([n, h]) =>
+      `<div class="sw"><i style="background:${h}"></i><b>${n}</b><span>${h}</span></div>`).join('')}</div>
+    <div class="pair">
+      <div><p class="mode">Hell</p><div class="phone" style="${vars(pal.light)}">${screen(pal.light)}</div></div>
+      <div><p class="mode">Dunkel</p><div class="phone" style="${vars(pal.dark)}">${screen(pal.dark)}</div></div>
+    </div>
+  </section>`).join('')
+
+/* Der Halo im Hero-Streifen, in derselben Machart wie in der App: dunkel
+   additiv, hell deckend. */
+document.querySelectorAll('.hero').forEach(hero => {
+  const cv = hero.querySelector('canvas')
+  const style = getComputedStyle(hero)
+  const plane = style.getPropertyValue('--plane').trim()
+  const toRgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16))
+  const [pr, pg, pb] = toRgb(plane)
+  const dark = 0.2126 * pr + 0.7152 * pg + 0.0722 * pb < 128
+  const ramp = dark
+    ? [toRgb(style.getPropertyValue('--sunken').trim()), toRgb(style.getPropertyValue('--accent').trim()), toRgb(style.getPropertyValue('--ink').trim())]
+    : [toRgb(style.getPropertyValue('--strong').trim()), toRgb(style.getPropertyValue('--accent').trim()), toRgb(style.getPropertyValue('--ink').trim())]
+  const w = hero.clientWidth, h = hero.clientHeight, dpr = 2
+  cv.width = w * dpr; cv.height = h * dpr
+  const ctx = cv.getContext('2d'); ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+  if (dark) ctx.globalCompositeOperation = 'lighter'
+  const g = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v) }
+  const mix = (a, b, t) => a.map((x, i) => x + (b[i] - x) * t)
+  const cy = h * 0.66, radius = Math.max(w, h * 0.9) * 0.29 * 1.6
+  for (let i = 0; i < 26000; i++) {
+    const th = Math.random() * Math.PI * 2
+    const r = 0.95 + Math.abs(g()) * 0.9 * 0.55 + Math.random() * 0.15
+    const x = Math.cos(th) * r, y = Math.sin(th) * r
+    const px = w / 2 + x * radius, py = cy + y * radius
+    if (px < 0 || px > w || py < 0 || py > h) continue
+    const vert = Math.min(1, Math.max(0, -y * 0.5 + 0.5))
+    const s = Math.min(1, Math.max(0, (vert - 0.55) / 0.45))
+    let col = mix(ramp[0], ramp[1], Math.min(1, vert / 0.7))
+    col = mix(col, ramp[2], s * s * (3 - 2 * s) * 0.9)
+    ctx.globalAlpha = Math.min(1, (0.3 + 0.7 * vert) * (0.55 + Math.random() * 0.5) * (dark ? 0.55 : 0.3))
+    ctx.fillStyle = `rgb(${col.map(c => c | 0).join(' ')})`
+    ctx.fillRect(px, py, 1, 1)
+  }
+})
+</script>
+</body>
+</html>
