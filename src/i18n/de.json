@@ -81,7 +81,8 @@
     "emptyBody": "Absolviere mindestens einen Test je Achse, damit das Profil entsteht.",
     "coverage": "{{count}} von 6 Achsen belegt",
     "modeHintPersonalBest": "100 = deine bisher beste Leistung auf dieser Achse. Zeigt Form relativ zu dir selbst.",
-    "modeHintPopulation": "Perzentil gegenüber trainierten Erwachsenen deines Alters und Geschlechts."
+    "modeHintPopulation": "Perzentil gegenüber trainierten Erwachsenen deines Alters und Geschlechts.",
+    "hatchMeaning": "Schraffur: nicht belegt"
   },
   "dashboard": {
     "greeting": "Leistungsprofil",
@@ -828,7 +829,8 @@
     "privacyNote": "BASELINE speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät."
   },
   "charts": {
-    "unavailable": "Das Diagramm konnte nicht geladen werden. Die Werte stehen vollständig in der Tabellenansicht."
+    "unavailable": "Das Diagramm konnte nicht geladen werden. Die Werte stehen vollständig in der Tabellenansicht.",
+    "gapHint": "Schraffur: Zeitraum ohne Messung"
   },
   "coverage": {
     "title": "Testabdeckung",

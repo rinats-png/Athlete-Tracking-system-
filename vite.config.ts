@@ -21,7 +21,6 @@ export default defineConfig({
         // ECharts ist der mit Abstand grösste Brocken und ändert sich selten —
         // eigener Chunk, damit App-Updates ihn nicht invalidieren.
         manualChunks: {
-          echarts: ['echarts', 'echarts/core', 'echarts/charts', 'echarts/components'],
         },
       },
     },

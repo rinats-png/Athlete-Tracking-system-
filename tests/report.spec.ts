@@ -176,10 +176,10 @@ test.describe("Bericht: Aufbau (§33)", () => {
     await expect(page.getByRole("heading", { name: "Zur Methode" })).toBeVisible();
   });
 
-  test("das Profil bleibt ohne Diagrammbibliothek lesbar", async ({ page }) => {
-    // Im Druck ist das Diagramm ein Bild; die Tabellenansicht ist der Weg
-    // zu denselben Zahlen, wenn es nicht lädt.
-    await page.route(/\/assets\/echarts-[^/]*\.js$/, (route) => route.abort());
+  test("das Profil ist auch als Tabelle lesbar", async ({ page }) => {
+    // Das Diagramm steht im Markup — es gibt nichts mehr, das scheitern
+    // könnte. Die Tabellenansicht bleibt trotzdem: sie ist der Weg zu
+    // denselben Zahlen für jeden, der die Form nicht lesen will.
     await openDemo(page);
     await page.goto("/bericht", { waitUntil: "domcontentloaded" });
 

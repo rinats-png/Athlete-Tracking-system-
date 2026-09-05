@@ -64,12 +64,26 @@ export function ReferenceSpectrum({
         {t(direction === 'lower_is_better' ? 'spectrum.lowerBetter' : 'spectrum.higherBetter')}
       </p>
       <div className="relative h-16">
-        {/* Die Achse zeichnet sich von links: die Bewegung führt das Auge
-            in die Leserichtung, bevor die Marken erscheinen. */}
+        {/*
+          Die Achse ist ein Streifenfeld, keine Linie.
+          
+          Eine durchgezogene Linie las sich wie ein Fortschrittsbalken: ein
+          Weg von links nach rechts, an dessen Ende man ankommt. Ein Messwert
+          liegt aber zwischen benannten Gruppen, er ist nicht auf dem Weg
+          irgendwohin. Die Streifen sind eine Skala und kein Weg — und sie
+          gehören zu derselben Familie wie das Profil und der Verlauf.
+          
+          Sie zeichnet sich von links: die Bewegung führt das Auge in die
+          Leserichtung, bevor die Marken erscheinen.
+        */}
         <span
           aria-hidden
-          className="spectrum-axis absolute top-7 right-[2%] left-[2%] h-px origin-left"
-          style={{ background: 'linear-gradient(90deg, var(--accent), var(--line-strong))' }}
+          className="spectrum-axis absolute top-[22px] right-[2%] left-[2%] h-3 origin-left"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 4px)',
+            opacity: 0.75,
+          }}
         />
         {marks.map((mark, i) => (
           <span
@@ -91,10 +105,11 @@ export function ReferenceSpectrum({
             <span
               aria-hidden
               className={cn(
-                'mx-auto block w-px',
+                'mx-auto block',
                 mark.own
-                  ? 'mt-3.5 h-5 bg-accent ring-3 ring-accent-quiet'
-                  : 'mt-5 h-3 bg-line-strong',
+                  ? // Der eigene Wert ist der eine kräftige Strich im Feld.
+                    'mt-2.5 h-7 w-[3px] bg-accent'
+                  : 'mt-2.5 h-7 w-px bg-ink',
               )}
             />
             <span

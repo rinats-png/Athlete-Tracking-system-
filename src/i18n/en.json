@@ -81,7 +81,8 @@
     "emptyBody": "Complete at least one test per axis to build the profile.",
     "coverage": "{{count}} of 6 axes covered",
     "modeHintPersonalBest": "100 = your best result on this axis so far. Shows form relative to yourself.",
-    "modeHintPopulation": "Percentile against trained adults of your age and sex."
+    "modeHintPopulation": "Percentile against trained adults of your age and sex.",
+    "hatchMeaning": "Hatched: not covered"
   },
   "dashboard": {
     "greeting": "Performance profile",
@@ -828,7 +829,8 @@
     "privacyNote": "BASELINE stores only what you enter about a coached athlete. No account, email address or invitation is needed. Everything stays on this device."
   },
   "charts": {
-    "unavailable": "The chart could not be loaded. The values are fully available in the table view."
+    "unavailable": "The chart could not be loaded. The values are fully available in the table view.",
+    "gapHint": "Hatched: period without a measurement"
   },
   "coverage": {
     "title": "Test coverage",

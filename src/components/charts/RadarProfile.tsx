@@ -1,14 +1,8 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { EChartsOption, RadarSeriesOption } from 'echarts'
-import type {
-  CallbackDataParams,
-  TopLevelFormatterParams,
-} from 'echarts/types/dist/shared'
 import { Table2, Radar as RadarIcon } from 'lucide-react'
-import { EChart } from './EChart'
-import { useChartTokens } from './useChartTokens'
 import { Button } from '@/components/ui/Button'
+import { HatchPattern, stripeFan, useHatchId } from './marks'
 import { formatNumber, formatDate } from '@/lib/format'
 import { axisLabel } from '@/data/profileAxes'
 import type { AppLocale, PerformanceDimension, RadarAxis, ScoreMode } from '@/types/domain'
@@ -25,24 +19,52 @@ interface RadarProfileProps {
    *
    * Nur im Populationsmodus sinnvoll: dort ist die Skala ein Perzentil und
    * die Kontur sagt «hier sollte ein Wettkämpfer dieser Disziplin liegen».
-   * Im Bestleistungsmodus wäre sie eine Linie ohne Bezug — genau wie die
-   * 50er-Referenz, die dort ebenfalls nicht gezeichnet wird.
+   * Im Bestleistungsmodus wäre sie eine Linie ohne Bezug.
    */
   disciplineWeights?: Partial<Record<PerformanceDimension, number>>
   disciplineLabel?: string
 }
 
+/*
+ * Breiter als hoch: die Beschriftungen links und rechts brauchen Platz, sonst
+ * schneidet der Rahmen «SCHNELLKRAFT» in der Mitte durch. Ein quadratischer
+ * Ausschnitt sah im Entwurf richtig aus und war im Betrieb falsch.
+ */
+const VIEW_W = 480
+const VIEW_H = 330
+const CX = VIEW_W / 2
+const CY = VIEW_H / 2 - 4
+/*
+ * Der Kreis nimmt bewusst nicht die volle Breite: links und rechts steht je
+ * eine Beschriftung wie «KRAFTAUSDAUER», und die braucht rund 110 px. Ein
+ * grösserer Radius sah im Entwurf besser aus und schnitt im Betrieb die
+ * Wörter ab.
+ */
+const RADIUS = 96
+
 /**
- * Das Spider-Web-Diagramm der App.
+ * Das Leistungsprofil.
  *
- * Zur Form: sechs feste Kategorien, ein bis zwei Serien, gleiche Skala auf
- * allen Achsen (0–100) — das ist der Fall, für den ein Radar-Chart die
- * richtige Wahl ist. Er zeigt die *Gestalt* eines Profils, nicht den exakten
- * Wert; die Zahlen stehen deshalb zusätzlich als Direktbeschriftung an den
- * Punkten und vollständig in der Tabellenansicht.
+ * WARUM KEIN GEZEICHNETES NETZ MEHR
  *
- * Die Achsenskala bedeutet je nach Modus etwas anderes — deshalb steht die
- * Einheit immer sichtbar am Diagramm und nicht nur im Umschalter.
+ * Vorher war das ein Radar-Chart aus einer Diagrammbibliothek: eine gefüllte
+ * Fläche über sechs Achsen. Die Fläche behauptete zweierlei, was nicht stimmt
+ * — dass zwischen zwei Achsen etwas liegt (da liegt nichts, es sind sechs
+ * getrennte Fähigkeiten), und dass alle sechs gleich gut belegt sind.
+ *
+ * Jetzt ist jede Achse ein FÄCHER AUS STREIFEN: seine Länge ist der Wert,
+ * und er endet dort, wo die Messung endet. Nichts verbindet zwei Achsen, weil
+ * nichts sie verbindet.
+ *
+ * Die LÜCKE ZUR ANFORDERUNG wird schraffiert. Wer unter der Kontur seiner
+ * Disziplin liegt, sieht nicht nur einen kürzeren Strahl, sondern die
+ * fehlende Strecke als eigene Gestalt. Eine ungemessene Achse ist ganz
+ * schraffiert — eine fehlende Messung ist keine schwache Leistung, und beides
+ * darf nicht gleich aussehen.
+ *
+ * Die Zahlen stehen an den Strahlen, nicht in einer Legende: im Bericht wird
+ * über einzelne Werte gesprochen, und dafür muss die Zahl dort stehen, wo
+ * gemessen wurde.
  */
 export function RadarProfile({
   axes,
@@ -55,163 +77,41 @@ export function RadarProfile({
 }: RadarProfileProps) {
   const { t } = useTranslation()
   const lang = locale
-  const tokens = useChartTokens()
   const [view, setView] = useState<'chart' | 'table'>('chart')
+  const hatch = useHatchId()
 
-  const axisUnit =
-    mode === 'population' ? t('radar.axisUnitPopulation') : t('radar.axisUnitPersonalBest')
+  const axisUnit = mode === 'population' ? t('radar.unitPercentile') : t('radar.unitPersonalBest')
 
-  const option = useMemo<EChartsOption>(() => {
-    const names = axes.map((axis) => axisLabel(axis.axisId, t, lang))
-    const currentValues = axes.map((axis) => axis.score)
-    const previousValues = previousAxes?.map((axis) => axis.score)
+  const geometry = useMemo(() => {
+    const n = Math.max(1, axes.length)
+    return axes.map((axis, i) => {
+      const angle = -Math.PI / 2 + (i * 2 * Math.PI) / n
+      const value = axis.score ?? 0
+      const required =
+        mode === 'population' && axis.dimension && disciplineWeights?.[axis.dimension] != null
+          ? disciplineWeights[axis.dimension]! * 100
+          : null
+      const previous = previousAxes?.find((p) => p.axisId === axis.axisId)?.score ?? null
+      return { axis, angle, value, required, previous }
+    })
+  }, [axes, previousAxes, mode, disciplineWeights])
 
-    const series: RadarSeriesOption[] = [
-      {
-        type: 'radar',
-        name: t('radar.current'),
-        symbolSize: 8,
-        lineStyle: { width: 2, color: tokens['series-1'] },
-        itemStyle: { color: tokens['series-1'], borderWidth: 2, borderColor: tokens.surface },
-        areaStyle: { color: tokens['series-1'], opacity: 0.16 },
-        data: [
-          {
-            value: currentValues,
-            name: t('radar.current'),
-            // Direktbeschriftung nur auf der aktuellen Serie: sechs Werte sind
-            // lesbar, zwölf wären ein Zahlenteppich.
-            label: {
-              show: true,
-              color: tokens.ink,
-              fontFamily: 'IBM Plex Mono, monospace',
-              fontSize: 11,
-              formatter: (params: CallbackDataParams) =>
-                typeof params.value === 'number' ? String(Math.round(params.value)) : '',
-            },
-          },
-        ],
-      },
-    ]
+  const point = (angle: number, fraction: number) => ({
+    x: CX + Math.cos(angle) * RADIUS * fraction,
+    y: CY + Math.sin(angle) * RADIUS * fraction,
+  })
 
-    if (previousValues) {
-      series.push({
-        type: 'radar',
-        name: previousLabel ?? t('radar.previous'),
-        symbolSize: 6,
-        lineStyle: { width: 2, color: tokens['series-2'], type: [6, 4] },
-        itemStyle: { color: tokens['series-2'] },
-        areaStyle: { opacity: 0 },
-        data: [{ value: previousValues, name: previousLabel ?? t('radar.previous') }],
-      })
-    }
-
-    // Im Populationsmodus ist die 50er-Linie der Median der Referenzgruppe und
-    // damit eine echte Bezugsgrösse. Im Bestleistungsmodus wäre sie bedeutungslos.
-    if (mode === 'population') {
-      series.push({
-        type: 'radar',
-        name: t('radar.referenceMedian'),
-        symbol: 'none',
-        // itemStyle steuert zusätzlich das Legendensymbol — ohne das erbt die
-        // Legende die Farbe der vorherigen Serie.
-        itemStyle: { color: tokens.reference },
-        lineStyle: { width: 1, color: tokens.reference, type: [3, 3] },
-        areaStyle: { opacity: 0 },
-        silent: true,
-        data: [{ value: axes.map(() => 50), name: t('radar.referenceMedian') }],
-      })
-    }
-
-    if (mode === 'population' && disciplineWeights && disciplineLabel) {
-      series.push({
-        type: 'radar',
-        name: disciplineLabel,
-        symbol: 'none',
-        itemStyle: { color: tokens['series-3'] ?? tokens.reference },
-        lineStyle: { width: 1.5, color: tokens['series-3'] ?? tokens.reference, type: [8, 4] },
-        areaStyle: { opacity: 0 },
-        silent: true,
-        data: [
-          {
-            // Achsen ohne Anforderung bleiben leer statt auf null gesetzt:
-            // «keine Anforderung» ist etwas anderes als «Anforderung null».
-            value: axes.map((axis) => {
-              const weight = axis.dimension ? disciplineWeights[axis.dimension] : null
-              return weight == null ? null : Math.round(weight * 100)
-            }),
-            name: disciplineLabel,
-          },
-        ],
-      })
-    }
-
-    return {
-      backgroundColor: 'transparent',
-      animationDuration: 400,
-      legend: {
-        bottom: 0,
-        icon: 'roundRect',
-        itemWidth: 12,
-        itemHeight: 3,
-        textStyle: { color: tokens['ink-secondary'], fontFamily: 'IBM Plex Sans, sans-serif', fontSize: 12 },
-        inactiveColor: tokens['ink-muted'],
-      },
-      tooltip: {
-        trigger: 'item',
-        backgroundColor: tokens.surface,
-        borderColor: tokens['line-strong'],
-        borderWidth: 1,
-        padding: [8, 10],
-        textStyle: { color: tokens.ink, fontFamily: 'IBM Plex Sans, sans-serif', fontSize: 12 },
-        formatter: (raw: TopLevelFormatterParams) => {
-          const params = (Array.isArray(raw) ? raw[0] : raw) as CallbackDataParams
-          const values = (params.value ?? []) as (number | null)[]
-          const rows = names
-            .map((name, index) => {
-              const value = values[index]
-              const text = value == null ? t('radar.noData') : `${Math.round(value)}`
-              return `<div style="display:flex;justify-content:space-between;gap:16px">
-                        <span>${name}</span>
-                        <span style="font-family:IBM Plex Mono,monospace">${text}</span>
-                      </div>`
-            })
-            .join('')
-          return `<div style="font-weight:600;margin-bottom:6px">${params.name}</div>${rows}
-                  <div style="margin-top:6px;opacity:.6;font-size:11px">${axisUnit}</div>`
-        },
-      },
-      radar: {
-        shape: 'polygon',
-        splitNumber: 4,
-        radius: '62%',
-        center: ['50%', '48%'],
-        // Abstand der Achsenbeschriftung zum Aussenring: ohne ihn überlagert
-        // ein Wert von 100 den Achsennamen.
-        axisNameGap: 24,
-        indicator: axes.map((axis) => ({
-          name: axisLabel(axis.axisId, t, lang),
-          max: 100,
-          min: 0,
-        })),
-        axisName: {
-          color: tokens['ink-secondary'],
-          fontFamily: 'Saira Condensed, sans-serif',
-          fontSize: 12,
-          fontWeight: 600,
-          padding: [0, 2],
-          formatter: (name?: string) => {
-            if (!name) return ''
-            const axis = axes.find((item) => axisLabel(item.axisId, t, lang) === name)
-            return axis?.hasData ? name.toUpperCase() : `${name.toUpperCase()} ·`
-          },
-        },
-        axisLine: { lineStyle: { color: tokens.grid } },
-        splitLine: { lineStyle: { color: tokens.grid } },
-        splitArea: { show: false },
-      },
-      series,
-    }
-  }, [axes, previousAxes, previousLabel, mode, tokens, t, axisUnit, disciplineWeights, disciplineLabel])
+  /**
+   * Beschriftungen am Rand ausrichten, nicht immer mittig: rechts steht der
+   * Text linksbündig, links rechtsbündig. Sonst ragt er über den Rahmen
+   * hinaus und wird abgeschnitten.
+   */
+  const anchorFor = (angle: number) => {
+    const c = Math.cos(angle)
+    if (c > 0.3) return 'start' as const
+    if (c < -0.3) return 'end' as const
+    return 'middle' as const
+  }
 
   const covered = axes.filter((axis) => axis.hasData).length
 
@@ -232,13 +132,205 @@ export function RadarProfile({
       </div>
 
       {view === 'chart' ? (
-        <EChart
-          option={option}
-          height={380}
-          ariaLabel={`${t('radar.title')} — ${axisUnit}`}
-          unavailableLabel={t('charts.unavailable')}
-          className="px-2"
-        />
+        <div className="px-2 pt-1">
+          <svg
+            viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+            className="mx-auto block w-full max-w-[460px]"
+            role="img"
+            aria-label={`${t('radar.title')} — ${axisUnit}`}
+          >
+            <HatchPattern id={hatch} />
+
+            {/* Zwei ruhige Hilfsringe. Mehr wäre Gitter, weniger wäre haltlos. */}
+            {[0.5, 1].map((g) => (
+              <circle
+                key={g}
+                cx={CX}
+                cy={CY}
+                r={RADIUS * g}
+                fill="none"
+                stroke="var(--line)"
+                strokeWidth={0.7}
+              />
+            ))}
+
+            {geometry.map(({ axis, angle, value, required, previous }) => {
+              const end = point(angle, 1)
+              const label = point(angle, 1.14)
+              const anchor = anchorFor(angle)
+              const nx = -Math.sin(angle)
+              const ny = Math.cos(angle)
+
+              // Ungemessene Achse: ganz schraffiert, kein Strahl.
+              if (!axis.hasData) {
+                const a = point(angle - 0.16, 1)
+                const b = point(angle + 0.16, 1)
+                return (
+                  <g key={axis.axisId}>
+                    <path
+                      d={`M${CX},${CY} L${a.x},${a.y} A${RADIUS},${RADIUS} 0 0 1 ${b.x},${b.y} Z`}
+                      fill={`url(#${hatch})`}
+                      stroke="none"
+                    />
+                    <text
+                      x={label.x + (anchorFor(angle) === 'start' ? 8 : anchorFor(angle) === 'end' ? -8 : 0)}
+                      y={label.y + 3}
+                      textAnchor={anchorFor(angle)}
+                      className="label-tag"
+                      fontSize={9}
+                      fill="var(--ink-muted)"
+                    >
+                      {axisLabel(axis.axisId, t, lang)}
+                    </text>
+                  </g>
+                )
+              }
+
+              const shortfall = required != null && required > value
+              return (
+                <g key={axis.axisId}>
+                  <title>{`${axisLabel(axis.axisId, t, lang)}: ${formatNumber(value, locale, 0)}`}</title>
+
+                  {/* Die Fehlstelle zwischen Messung und Anforderung. */}
+                  {shortfall && (
+                    <path
+                      d={(() => {
+                        // Nicht im Mittelpunkt beginnen: sonst laufen die
+                        // Schraffuren zweier gegenüberliegender Achsen zu
+                        // einem Balken quer durchs Bild zusammen.
+                        const v = point(angle, Math.max(value / 100, 0.1))
+                        const r = point(angle, required / 100)
+                        const w = 5
+                        return `M${v.x - nx * w},${v.y - ny * w} L${r.x - nx * w},${r.y - ny * w} L${r.x + nx * w},${r.y + ny * w} L${v.x + nx * w},${v.y + ny * w} Z`
+                      })()}
+                      fill={`url(#${hatch})`}
+                      stroke="none"
+                    />
+                  )}
+
+                  {/*
+                    Eine gemessene Null bekommt eine eigene Marke.
+                    Ohne sie wäre ein Fächer der Länge null unsichtbar — und
+                    «gemessen, Wert null» sähe genauso aus wie «nie gemessen».
+                    Das sind zwei verschiedene Aussagen.
+                  */}
+                  {value <= 0 && (
+                    <line
+                      x1={CX - nx * 7}
+                      y1={CY - ny * 7}
+                      x2={CX + nx * 7}
+                      y2={CY + ny * 7}
+                      stroke="var(--accent)"
+                      strokeWidth={2}
+                    />
+                  )}
+
+                  {/* Der Fächer: das Gemessene. */}
+                  {stripeFan(CX, CY, angle, RADIUS * (value / 100)).map((l, k) => (
+                    <line
+                      key={k}
+                      x1={l.x1}
+                      y1={l.y1}
+                      x2={l.x2}
+                      y2={l.y2}
+                      stroke="var(--accent)"
+                      strokeWidth={0.9}
+                      opacity={l.opacity}
+                    />
+                  ))}
+
+                  {/* Anforderung der Disziplin: ein kräftiger Querstrich. */}
+                  {required != null && (
+                    <line
+                      x1={point(angle, required / 100).x - nx * 9}
+                      y1={point(angle, required / 100).y - ny * 9}
+                      x2={point(angle, required / 100).x + nx * 9}
+                      y2={point(angle, required / 100).y + ny * 9}
+                      stroke="var(--ink)"
+                      strokeWidth={1.6}
+                    />
+                  )}
+
+                  {/* Der frühere Stand: eine feine Marke, keine zweite Fläche. */}
+                  {previous != null && (
+                    <line
+                      x1={point(angle, previous / 100).x - nx * 6}
+                      y1={point(angle, previous / 100).y - ny * 6}
+                      x2={point(angle, previous / 100).x + nx * 6}
+                      y2={point(angle, previous / 100).y + ny * 6}
+                      stroke="var(--ink-muted)"
+                      strokeWidth={1}
+                      strokeDasharray="2 2"
+                    />
+                  )}
+
+                  {/*
+                    Die Zahl am Maß — an der Spitze des Fächers, QUER zur
+                    Achse versetzt. Auf der Achse selbst stiess sie mit der
+                    Achsenbeschriftung zusammen, und bei mehreren Achsen nahe
+                    null lagen die Ziffern alle im Mittelpunkt aufeinander.
+                  */}
+                  <text
+                    x={point(angle, Math.max(value / 100, 0.12)).x - nx * 14}
+                    y={point(angle, Math.max(value / 100, 0.12)).y - ny * 14 + 3}
+                    textAnchor="middle"
+                    className="readout"
+                    fontSize={10}
+                    fill="var(--ink)"
+                    fontWeight={700}
+                  >
+                    {formatNumber(value, locale, 0)}
+                  </text>
+
+                  <text
+                    x={label.x + (anchor === 'start' ? 8 : anchor === 'end' ? -8 : 0)}
+                    y={label.y + 3}
+                    textAnchor={anchor}
+                    className="label-tag"
+                    fontSize={9}
+                    fill="var(--ink-secondary)"
+                  >
+                    {axisLabel(axis.axisId, t, lang)}
+                  </text>
+                  <line
+                    x1={end.x}
+                    y1={end.y}
+                    x2={point(angle, 1.08).x}
+                    y2={point(angle, 1.08).y}
+                    stroke="var(--line)"
+                    strokeWidth={0.7}
+                  />
+                </g>
+              )
+            })}
+          </svg>
+
+          <p className="mt-1 flex flex-wrap justify-center gap-x-4 gap-y-1 px-4 text-[11px] text-ink-muted">
+            {disciplineLabel && (
+              <span>
+                <span aria-hidden className="mr-1 inline-block h-2 w-px align-middle bg-ink" />
+                {disciplineLabel}
+              </span>
+            )}
+            {previousLabel && (
+              <span>
+                <span
+                  aria-hidden
+                  className="mr-1 inline-block h-px w-3 align-middle border-t border-dashed border-ink-muted"
+                />
+                {previousLabel}
+              </span>
+            )}
+            <span>
+              <span
+                aria-hidden
+                className="mr-1 inline-block h-2 w-2 align-middle border border-line-strong"
+                style={{ backgroundImage: 'repeating-linear-gradient(45deg,var(--line-strong) 0 1px,transparent 1px 3px)' }}
+              />
+              {t('radar.hatchMeaning')}
+            </span>
+          </p>
+        </div>
       ) : (
         <div className="overflow-x-auto px-4 py-3">
           <table className="w-full min-w-[420px] border-collapse text-[13px]">

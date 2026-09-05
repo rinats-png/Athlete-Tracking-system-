@@ -1,94 +1,76 @@
-import { readdirSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
 import { expect, test } from '@playwright/test'
-import { openDemo, openGuest } from './helpers'
+import { openDemo } from './helpers'
 
 /**
  * Was beim ersten Aufruf über die Leitung geht, entscheidet darüber, ob die
- * App in der Halle mit schlechtem Empfang benutzbar ist. Die Diagrammbiblio-
- * thek ist der grösste Einzelposten — sie darf nur laden, wenn wirklich ein
- * Diagramm gezeichnet wird.
+ * App in der Halle mit schlechtem Empfang benutzbar ist.
+ *
+ * BIS HIERHER war die Diagrammbibliothek der grösste Einzelposten — rund
+ * 500 KB, nachgeladen, sobald irgendwo ein Diagramm stand. Diese Fälle
+ * prüften, dass sie nur dann kam. Jetzt sind die Diagramme aus Streifen und
+ * Schraffur gebaut und stecken im Markup: es gibt nichts mehr nachzuladen,
+ * nichts, das scheitern kann, und keine Fläche, die erst später ihre Höhe
+ * bekommt. Die Fälle prüfen deshalb die stärkere Zusage.
  */
 
-const isEcharts = (url: string) => /\/assets\/echarts-[^/]*\.js$/.test(url)
-
 test.describe('Auslieferung', () => {
-  test('ohne Diagramm wird die Diagrammbibliothek nicht geladen', async ({ page }) => {
-    const requested: string[] = []
-    page.on('request', (request) => {
-      if (isEcharts(request.url())) requested.push(request.url())
-    })
+  test('es wird überhaupt keine Diagrammbibliothek ausgeliefert', () => {
+    // Geprüft wird die Abhängigkeit selbst, nicht ein Dateiname: gebaute
+    // Bausteine tragen zufällige Kennungen, und ein Suchmuster darauf trifft
+    // früher oder später etwas Falsches.
+    const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
+    const alle = { ...pkg.dependencies, ...pkg.devDependencies }
+    const diagramm = Object.keys(alle).filter((name) =>
+      /^(echarts|chart\.js|d3|plotly|recharts|victory|nivo|@nivo)/.test(name),
+    )
+    expect(diagramm, 'die Diagramme kommen ohne Bibliothek aus').toEqual([])
 
-    await openGuest(page)
-    await page.goto('/profil', { waitUntil: 'domcontentloaded' })
-    // Kurz Gelegenheit geben, den Baustein zu holen — er darf es nicht.
-    await page.waitForTimeout(600)
-
-    expect(requested, 'Diagrammbibliothek auf einer Seite ohne Diagramm').toEqual([])
+    // Und kein ausgelieferter Baustein hat die Grössenordnung einer solchen
+    // Bibliothek. Die Sprachdatei und das Hauptpaket sind die Ausnahmen.
+    const dir = new URL('../dist/assets/', import.meta.url)
+    const gross = readdirSync(dir)
+      .filter((f) => f.endsWith('.js') && !/^(index|en)-/.test(f))
+      .filter((f) => statSync(new URL(f, dir)).size > 200 * 1024)
+    expect(gross, 'kein Baustein in der Grössenordnung einer Diagrammbibliothek').toEqual([])
   })
 
-  test('mit Diagramm wird sie nachgeladen und das Diagramm erscheint', async ({ page }) => {
-    const requested: string[] = []
-    page.on('request', (request) => {
-      if (isEcharts(request.url())) requested.push(request.url())
-    })
-
+  test('das Profil steht sofort, ohne einen zweiten Ladevorgang', async ({ page }) => {
+    const scripts: string[] = []
     await openDemo(page)
+    page.on('request', (r) => {
+      if (r.resourceType() === 'script') scripts.push(r.url())
+    })
     await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
-
-    // Auf das Diagramm warten statt auf `networkidle`: der Service Worker
-    // hält die Verbindung offen, und unter Volllast lief die Wartezeit ins
-    // Zeitlimit, obwohl das Diagramm längst da war.
     await expect(page.getByRole('img', { name: /Leistungsprofil/ }).first()).toBeVisible()
-    expect(requested.length).toBeGreaterThan(0)
+    // Der Bildschirm selbst wird nachgeladen; ein eigener Baustein für das
+    // Diagramm darf nicht dabei sein.
+    expect(scripts.filter((u) => /echarts/.test(u))).toEqual([])
   })
 
-  test('das Nachladen verschiebt das Layout nicht', async ({ page }) => {
+  test('das Diagramm verschiebt das Layout nicht', async ({ page }) => {
     await openDemo(page)
     await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
-
-    // Erst die Schriften abwarten. Sie liegen lokal im Bündel, kommen unter
-    // Volllast aber später als das Diagramm; der Wechsel von der Ersatz- auf
-    // die Zielschrift verschiebt die Zeile um wenige Pixel. Gemessen werden
-    // soll die Verschiebung durch das Diagramm, nicht die durch den
-    // Schriftwechsel — sonst prüft der Fall unter Last etwas anderes als
-    // isoliert.
     await page.evaluate(() => document.fonts.ready)
 
-    // Position eines Elements UNTER dem Diagramm vor und nach dem Nachladen.
     const probe = page.getByRole('button', { name: /Als Tabelle/ }).first()
     await probe.waitFor()
     const before = await probe.boundingBox()
-
     await expect(page.getByRole('img', { name: /Leistungsprofil/ }).first()).toBeVisible()
+    await page.waitForTimeout(400)
     const after = await probe.boundingBox()
 
-    // Der Platzhalter hat exakt die Höhe des Diagramms — sonst wandern die
-    // Bedienelemente unter dem Finger weg und es kommt zu Fehlklicks.
+    // Ein Diagramm im Markup hat seine Höhe von Anfang an — es kann gar nicht
+    // mehr nachträglich Platz nehmen.
     expect(Math.abs((after?.y ?? 0) - (before?.y ?? 0))).toBeLessThanOrEqual(1)
   })
 
-  test('ein fehlgeschlagenes Nachladen reisst die Seite nicht mit', async ({ page }) => {
-    // Abgebrochene Verbindung, geleerter Cache, blockierendes Netz: die
-    // Diagrammfläche bleibt dann leer — aber die Seite muss stehen und die
-    // Zahlen müssen erreichbar bleiben. Ohne Auffangnetz schlüge die Ausnahme
-    // aus Suspense nach oben durch und der Nutzer stünde vor einer weissen
-    // Seite, obwohl alle seine Daten da sind.
-    //
-    // Anmerkung zur Reichweite dieser Prüfung: `route.abort()` unterbricht
-    // hier einen Teilbaustein, den der nachgeladene Baustein statisch
-    // einbindet; das Versprechen bleibt in dieser Emulation offen, statt
-    // abgelehnt zu werden. Der erklärende Hinweistext, den der Code für den
-    // Ablehnungsfall vorhält, lässt sich damit nicht auslösen. Geprüft wird
-    // deshalb die Zusage, die in beiden Fällen gelten muss.
-    await page.route(/\/assets\/echarts-[^/]*\.js$/, (route) => route.abort())
+  test('der Weg zu den Zahlen bleibt', async ({ page }) => {
+    // Diese Zusage galt schon, als sie das Auffangnetz für eine gescheiterte
+    // Bibliothek war, und sie gilt weiter: wer das Diagramm nicht lesen kann
+    // oder will, kommt an dieselben Zahlen.
     await openDemo(page)
     await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
-
-    // Die Seite lebt.
-    await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
-    await expect(page.getByText('Performance-Profil').first()).toBeVisible()
-
-    // Und der Weg zu den Zahlen funktioniert ohne die Bibliothek.
     await page.getByRole('button', { name: /Als Tabelle/ }).first().click()
     await expect(page.getByRole('columnheader', { name: 'Achse' }).first()).toBeVisible()
     await expect(page.getByRole('cell', { name: /Ausdauer/ }).first()).toBeVisible()
