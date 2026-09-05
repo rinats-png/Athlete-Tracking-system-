@@ -5,10 +5,10 @@ import { blockFonts } from '../tests/helpers'
 /**
  * Das Tor in seinen Zuständen.
  *
- * Die Partikel wandern in gut anderthalb Sekunden von der Kugel auf den
- * Umriss. Die Aufnahmen greifen deshalb an drei Stellen: unterwegs, fertig,
- * und beim Zerfall nach dem Absenden. Ein einzelnes Bild vom fertigen
- * Zustand würde das Wesentliche verschweigen — die Bewegung IST der Entwurf.
+ * Die Kugel steht kurz, dann wandern die Punkte auf den Umriss, dann
+ * erscheint der Inhalt. Die Aufnahmen greifen an vier Stellen: Kugel,
+ * unterwegs, fertig, Zerfall. Ein einzelnes Bild vom fertigen Zustand würde
+ * das Wesentliche verschweigen — die Bewegung IST der Entwurf.
  */
 
 const OUT = 'mockups/out/auth'
@@ -34,31 +34,36 @@ test.describe('Anmeldung', () => {
       await page.reload({ waitUntil: 'domcontentloaded' })
       await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
 
-      // Unterwegs: die Punkte sind noch auf dem Weg zum Umriss.
-      await page.waitForTimeout(500)
-      await page.screenshot({ path: `${OUT}/${p}/01-${theme}-partikel-unterwegs.png` })
+      // Die Kugel: die Animation der App, bevor sie zum Tor wird.
+      await page.waitForTimeout(450)
+      await page.screenshot({ path: `${OUT}/${p}/01-${theme}-kugel.png` })
+
+      // Unterwegs: die Punkte wandern auf den Umriss, der Inhalt ist noch nicht da.
+      await page.waitForTimeout(700)
+      await page.screenshot({ path: `${OUT}/${p}/02-${theme}-partikel-unterwegs.png` })
 
       // Fertig: der Umriss steht, die Anmeldung ist bedienbar.
-      await page.waitForTimeout(1600)
-      await page.screenshot({ path: `${OUT}/${p}/02-${theme}-anmeldung.png` })
+      await expect(page.locator('[data-state="formed"]')).toBeAttached({ timeout: 10_000 })
+      await page.waitForTimeout(900)
+      await page.screenshot({ path: `${OUT}/${p}/03-${theme}-anmeldung.png` })
 
       // Registrierung: Rolle, dann Stufe.
       await page.getByRole('tab', { name: 'Konto anlegen' }).click()
       await page.waitForTimeout(400)
-      await page.screenshot({ path: `${OUT}/${p}/03-${theme}-rolle.png` })
+      await page.screenshot({ path: `${OUT}/${p}/04-${theme}-rolle.png` })
 
       await page.getByRole('button', { name: /Ich betreue andere/ }).click()
       await page.waitForTimeout(400)
-      await page.screenshot({ path: `${OUT}/${p}/04-${theme}-stufen-trainer.png` })
+      await page.screenshot({ path: `${OUT}/${p}/05-${theme}-stufen-trainer.png` })
 
       await page.getByRole('button', { name: 'Zurück' }).click()
       await page.getByRole('button', { name: /Für mich selbst/ }).click()
       await page.waitForTimeout(400)
-      await page.screenshot({ path: `${OUT}/${p}/05-${theme}-stufen-athlet.png` })
+      await page.screenshot({ path: `${OUT}/${p}/06-${theme}-stufen-athlet.png` })
 
       await page.getByRole('button', { name: 'Später entscheiden' }).click()
       await page.waitForTimeout(400)
-      await page.screenshot({ path: `${OUT}/${p}/06-${theme}-zugang.png` })
+      await page.screenshot({ path: `${OUT}/${p}/07-${theme}-zugang.png` })
 
       // Der Zerfall: nach dem Absenden lösen sich die Punkte nach aussen auf.
       await page.getByLabel('Name').fill('Mira Sand')
@@ -66,7 +71,7 @@ test.describe('Anmeldung', () => {
       await page.getByLabel('Passwort').fill('egal')
       await page.getByRole('button', { name: 'Konto anlegen' }).click()
       await page.waitForTimeout(420)
-      await page.screenshot({ path: `${OUT}/${p}/07-${theme}-zerfall.png` })
+      await page.screenshot({ path: `${OUT}/${p}/08-${theme}-zerfall.png` })
     }
   })
 })

@@ -26,8 +26,18 @@ import { useEffect, useRef } from 'react'
 export type GatePhase = 'gather' | 'hold' | 'scatter'
 
 const COUNT = 520
+/**
+ * Wie lange die Kugel steht, bevor die Wanderung beginnt.
+ *
+ * Ohne diese Pause wären die Punkte schon unterwegs, bevor jemand erkannt
+ * hat, WAS da unterwegs ist — und der Übergang «aus der Sphäre der App wird
+ * ihr Tor» hätte keinen Anfang. Sie rotiert in dieser Zeit sichtbar.
+ */
+export const HOLD_SECONDS = 0.8
 /** Sekunden für den Weg von der Kugel auf den Umriss. */
 const GATHER_SECONDS = 1.5
+/** Ab hier steht die Fläche: Pause plus Weg plus der letzte Nachzügler. */
+export const FORMED_SECONDS = HOLD_SECONDS + GATHER_SECONDS
 /** Sekunden, bis die Auflösung durch ist. */
 const SCATTER_SECONDS = 1.1
 
@@ -172,8 +182,12 @@ export function ParticleGate({
 
       // Wie weit ist die Wanderung? 0 = Kugel, 1 = Umriss.
       const settled =
-        still || current !== 'gather' ? 1 : Math.min(1, time / GATHER_SECONDS)
+        still || current !== 'gather'
+          ? 1
+          : Math.max(0, Math.min(1, (time - HOLD_SECONDS) / GATHER_SECONDS))
       const away = current === 'scatter' ? Math.min(1, time / SCATTER_SECONDS) : 0
+      // Sie dreht sich, solange sie Kugel ist — und kommt zur Ruhe, während
+      // die Punkte den Umriss annehmen.
       if (!still && current === 'gather') rotation += 0.006 * (1 - settled)
 
       const radius = Math.min(width, height) * 0.3
@@ -203,7 +217,9 @@ export function ParticleGate({
           y += p.dy * breath
         }
 
-        let alpha = p.alpha * (0.35 + 0.65 * eased)
+        // In der Kugelphase sind die Punkte schon voll da: sie sind die
+        // Animation, nicht deren Vorschau.
+        let alpha = p.alpha * (0.75 + 0.25 * eased)
         if (away > 0) {
           const flight = easeInOut(away)
           x += p.dx * flight * Math.max(width, height) * 0.55

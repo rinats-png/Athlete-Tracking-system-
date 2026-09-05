@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Check } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { ParticleGate, type GatePhase } from '@/components/signature/ParticleGate'
+import { FORMED_SECONDS, ParticleGate, type GatePhase } from '@/components/signature/ParticleGate'
 import { plansForRole, writeAccount, type Account, type AccountRole } from './account'
 
 /**
@@ -27,6 +27,11 @@ import { plansForRole, writeAccount, type Account, type AccountRole } from './ac
  * wären weder bedienbar noch vorlesbar.
  */
 
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined' || !window.matchMedia) return false
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 type Pane = 'signin' | 'register'
 type Step = 'role' | 'plan' | 'details'
 
@@ -35,6 +40,23 @@ export function AuthScreen({ onSignedIn }: { onSignedIn: (account: Account) => v
   const cardRef = useRef<HTMLDivElement>(null)
   const [phase, setPhase] = useState<GatePhase>('gather')
   const [pane, setPane] = useState<Pane>('signin')
+  /*
+   * Der Inhalt erscheint ERST, wenn die Punkte den Umriss erreicht haben.
+   *
+   * Stünde das Formular schon da, während die Punkte noch fliegen, sammelten
+   * sie sich nur um etwas Fertiges herum — die Anmeldung setzt sich dann
+   * nicht aus ihnen zusammen, sie bekommt einen Rahmen dazu. Der Unterschied
+   * ist der ganze Entwurf.
+   *
+   * Bei reduzierter Bewegung steht beides sofort: dort gibt es keine
+   * Wanderung, auf die zu warten wäre.
+   */
+  const [formed, setFormed] = useState(() => prefersReducedMotion())
+  useEffect(() => {
+    if (formed) return
+    const timer = window.setTimeout(() => setFormed(true), FORMED_SECONDS * 1000)
+    return () => window.clearTimeout(timer)
+  }, [formed])
 
   /**
    * Erst zerfallen, dann weitergeben. Die Auflösung ist kein Schmuck nach der
@@ -57,9 +79,15 @@ export function AuthScreen({ onSignedIn }: { onSignedIn: (account: Account) => v
         ref={cardRef}
         // Der Inhalt verschwindet beim Zerfall etwas früher als die Punkte:
         // sonst stünde Schrift in einem Rahmen, den es nicht mehr gibt.
-        className={`relative w-full max-w-[26rem] transition-opacity duration-500 ${
-          leaving ? 'opacity-0' : 'opacity-100'
+        className={`relative w-full max-w-[26rem] transition-opacity duration-700 ${
+          leaving || !formed ? 'opacity-0' : 'opacity-100'
         }`}
+        // Solange die Fläche unsichtbar ist, ist sie auch nicht bedienbar:
+        // ein Feld, in das man tippen kann, ohne es zu sehen, wäre eine Falle.
+        inert={!formed || leaving}
+        // Für Prüfungen und Aufnahmen: der Zustand des Übergangs ist von
+        // aussen ablesbar, ohne auf eine Zeitspanne zu wetten.
+        data-state={leaving ? 'leaving' : formed ? 'formed' : 'forming'}
       >
         <div className="px-6 py-8 sm:px-8">
           <p className="label-tag">{t('auth.eyebrow')}</p>

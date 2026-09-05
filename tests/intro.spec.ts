@@ -90,6 +90,8 @@ test.describe('Ablauf beim Öffnen', () => {
 
   /** Durch das Tor. Geprüft wird nichts — es gibt keinen Server. */
   async function signIn(page: import('@playwright/test').Page) {
+    // Die Fläche sagt selbst, wann sie steht — vorher ist sie nicht bedienbar.
+    await expect(page.locator('[data-state="formed"]')).toBeAttached({ timeout: 10_000 })
     await page.getByLabel('E-Mail').fill('pruef@baseline.test')
     await page.getByLabel('Passwort').fill('egal')
     await page.getByRole('button', { name: 'Anmelden' }).click()

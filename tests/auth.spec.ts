@@ -5,6 +5,17 @@ import { COACH_TIERS, REPORT_BUNDLES } from '../src/data/pricing'
 import { openColdStart } from './helpers'
 
 /**
+ * Warten, bis die Punkte den Umriss erreicht haben und der Inhalt steht.
+ *
+ * Nicht auf eine Zeitspanne gewettet: die Fläche sagt selbst, wo im Übergang
+ * sie ist. Vorher ist sie ausdrücklich nicht bedienbar — ein Feld, in das man
+ * tippen kann, ohne es zu sehen, wäre eine Falle.
+ */
+async function formed(page: import('@playwright/test').Page) {
+  await expect(page.locator('[data-state="formed"]')).toBeAttached({ timeout: 10_000 })
+}
+
+/**
  * Das Tor.
  *
  * DER TEUERSTE FEHLER AN EINEM ANMELDEBILDSCHIRM wäre nicht ein falsches
@@ -18,6 +29,7 @@ import { openColdStart } from './helpers'
 test.describe('Was der Bildschirm über sich sagt', () => {
   test('er nennt, dass nichts geprüft und nichts gespeichert wird', async ({ page }) => {
     await openColdStart(page)
+    await formed(page)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
     await expect(page.getByText(/Es gibt noch keinen Server/)).toBeVisible()
     await expect(page.getByText(/Wird nicht gespeichert und nicht gesendet/).first()).toBeVisible()
@@ -25,10 +37,11 @@ test.describe('Was der Bildschirm über sich sagt', () => {
 
   test('kein Passwort landet im Gerät', async ({ page }) => {
     await openColdStart(page)
+    await formed(page)
     await page.getByLabel('E-Mail').fill('mensch@example.org')
     await page.getByLabel('Passwort').fill('einSehrGeheimesWort')
     await page.getByRole('button', { name: 'Anmelden' }).click()
-    await page.waitForTimeout(1400)
+    await page.waitForTimeout(1600)
 
     const gespeichert = await page.evaluate(() => JSON.stringify(localStorage))
     expect(gespeichert).toContain('mensch@example.org')
@@ -47,6 +60,7 @@ test.describe('Was der Bildschirm über sich sagt', () => {
 test.describe('Ohne Konto kommt niemand weiter', () => {
   test('der Kaltstart zeigt das Tor, nicht die App', async ({ page }) => {
     await openColdStart(page)
+    await formed(page)
     await expect(page.getByRole('tab', { name: 'Anmelden' })).toBeVisible()
     // Die App liegt dahinter — kein Weg daran vorbei.
     await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toHaveCount(0)
@@ -54,6 +68,7 @@ test.describe('Ohne Konto kommt niemand weiter', () => {
 
   test('ein direkter Aufruf einer Route führt trotzdem zum Tor', async ({ page }) => {
     await openColdStart(page)
+    await formed(page)
     await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
   })
@@ -62,6 +77,7 @@ test.describe('Ohne Konto kommt niemand weiter', () => {
 test.describe('Registrierung', () => {
   test('Rolle, Stufe, Zugang — in dieser Reihenfolge', async ({ page }) => {
     await openColdStart(page)
+    await formed(page)
     await page.getByRole('tab', { name: 'Konto anlegen' }).click()
 
     await expect(page.getByText('Wofür benutzt du BASELINE?')).toBeVisible()
@@ -78,7 +94,7 @@ test.describe('Registrierung', () => {
     await page.getByLabel('E-Mail').fill('sam@example.org')
     await page.getByLabel('Passwort').fill('egal')
     await page.getByRole('button', { name: 'Konto anlegen' }).click()
-    await page.waitForTimeout(1400)
+    await page.waitForTimeout(1600)
 
     const konto = await page.evaluate(() => localStorage.getItem('baseline.account.v1'))
     expect(konto).toContain('Sam Trainer')
@@ -89,6 +105,7 @@ test.describe('Registrierung', () => {
     // Eine erzwungene Kaufentscheidung vor dem ersten Messwert wäre eine
     // Zumutung — zumal nichts abgerechnet wird.
     await openColdStart(page)
+    await formed(page)
     await page.getByRole('tab', { name: 'Konto anlegen' }).click()
     await page.getByRole('button', { name: /Für mich selbst/ }).click()
     await page.getByRole('button', { name: 'Später entscheiden' }).click()
@@ -114,8 +131,10 @@ test.describe('Stufen und Rollen', () => {
 test.describe('Der Übergang', () => {
   test('nach der Anmeldung kommt die Sequenz, dann der Einstieg', async ({ page }) => {
     await openColdStart(page)
+    await formed(page)
     await page.evaluate(() => localStorage.setItem('baseline.intro', 'on'))
     await page.reload({ waitUntil: 'domcontentloaded' })
+    await formed(page)
     await page.getByLabel('E-Mail').fill('mensch@example.org')
     await page.getByLabel('Passwort').fill('egal')
     await page.getByRole('button', { name: 'Anmelden' }).click()
@@ -160,6 +179,7 @@ test.describe('Abmelden', () => {
 test.describe('Die Rolle aus der Registrierung', () => {
   test('wer sich als Trainer anmeldet, findet den Trainerbereich vor', async ({ page }) => {
     await openColdStart(page)
+    await formed(page)
     await page.evaluate(() =>
       localStorage.setItem(
         'baseline.account.v1',
