@@ -3,13 +3,23 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { AppShell } from '@/routes/AppShell'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
 import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
-import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
+
 /*
  * Der Einstieg läuft genau einmal je Bestand. Er liegt deshalb in einem
  * eigenen Paket: mit den Sportmotiven in der Auswahlliste wäre er sonst der
  * Posten, der das Startpaket über sein Budget hebt — für neun Schritte, die
  * die allermeisten Starts gar nicht sehen.
  */
+/*
+ * Der Halo-Landeschirm kommt erst NACH dem Tor: bis dahin ist er totes
+ * Gewicht im Startpaket, und mit ihm drin sass das Paket punktgenau auf
+ * seiner Grenze. Wer die App oeffnet, laedt jetzt die Anmeldung, nicht die
+ * Landeseite dahinter.
+ */
+const WelcomeScreen = lazy(() =>
+  import('@/features/auth/WelcomeScreen').then((m) => ({ default: m.WelcomeScreen })),
+)
+
 const OnboardingFlow = lazy(() =>
   import('@/features/onboarding/OnboardingFlow').then((m) => ({ default: m.OnboardingFlow })),
 )
@@ -148,7 +158,11 @@ export default function App() {
 
   // 3. Welcher Bestand: der eigene oder der Beispielsatz.
   if (!mode) {
-    return <WelcomeScreen onEnter={enter} />
+    return (
+      <Suspense fallback={null}>
+        <WelcomeScreen onEnter={enter} />
+      </Suspense>
+    )
   }
 
   return (
