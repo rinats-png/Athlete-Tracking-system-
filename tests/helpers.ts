@@ -27,7 +27,7 @@ async function resetState(page: Page) {
   // `openFirstRun`.
   const seeded = emptyData()
   seeded.athletes[0].profile.onboardingCompletedAt = '2026-01-01T00:00:00.000Z'
-  await page.evaluate((store) => {
+  await page.evaluate(({ store, account }) => {
     localStorage.clear()
     localStorage.setItem('baseline.theme', 'dark')
     localStorage.setItem('baseline.locale', 'de')
@@ -35,15 +35,45 @@ async function resetState(page: Page) {
     // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
     // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
     localStorage.setItem('baseline.intro', 'off')
+    // Angemeldet: die Anmeldung ist ein gestaltetes Tor ohne Pruefung, und
+    // sie durch jeden der ~2400 Faelle zu klicken wuerde nur Zeit kosten,
+    // ohne etwas zu belegen. Der eigene Fall dafuer geht durch das Tor.
+    localStorage.setItem('baseline.account.v1', JSON.stringify(account))
     localStorage.setItem('baseline.data.v1', JSON.stringify(store))
-  }, seeded)
+  }, { store: seeded, account: SEEDED_ACCOUNT })
+  await page.reload({ waitUntil: 'domcontentloaded' })
+}
+
+/** Das Konto, mit dem die Faelle das Tor passieren. */
+const SEEDED_ACCOUNT = {
+  name: 'Prueflauf',
+  email: 'pruef@baseline.test',
+  role: 'athlete',
+  planId: null,
+  createdAt: '2026-01-01T00:00:00.000Z',
+}
+
+/**
+ * Kaltstart: kein Konto, keine Vorbelegung. Genau der Zustand, in dem ein
+ * Mensch die App zum ersten Mal oeffnet — nur fuer die Faelle, die das Tor
+ * selbst pruefen.
+ */
+export async function openColdStart(page: Page) {
+  await blockFonts(page)
+  await page.goto('/', { waitUntil: 'domcontentloaded' })
+  await page.evaluate(() => {
+    localStorage.clear()
+    localStorage.setItem('baseline.theme', 'dark')
+    localStorage.setItem('baseline.locale', 'de')
+    localStorage.setItem('baseline.intro', 'off')
+  })
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
 
 /** Startet die App im Gastmodus mit leerem Bestand. */
 export async function openGuest(page: Page) {
   await resetState(page)
-  await page.getByRole('button', { name: /Ohne Konto starten/ }).click()
+  await page.getByRole('button', { name: /Mit leerem Bestand starten/ }).click()
   await page.getByRole('heading', { level: 1 }).first().waitFor()
 }
 
@@ -62,9 +92,19 @@ export async function openFirstRun(page: Page) {
     // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
     // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
     localStorage.setItem('baseline.intro', 'off')
+    localStorage.setItem(
+      'baseline.account.v1',
+      JSON.stringify({
+        name: 'Prueflauf',
+        email: 'pruef@baseline.test',
+        role: 'athlete',
+        planId: null,
+        createdAt: '2026-01-01T00:00:00.000Z',
+      }),
+    )
   })
   await page.reload({ waitUntil: 'domcontentloaded' })
-  await page.getByRole('button', { name: /Ohne Konto starten/ }).click()
+  await page.getByRole('button', { name: /Mit leerem Bestand starten/ }).click()
   await page.getByRole('heading', { level: 1 }).first().waitFor()
 }
 

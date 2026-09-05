@@ -25,9 +25,15 @@
  *
  *   1. Der Export der eigenen Daten ist immer vollständig und kostenlos (§32).
  *      Daten gehören dem Nutzer, nicht dem Kontingent.
- *   2. Messen und Auswerten auf dem eigenen Gerät funktioniert ohne Konto.
+ *   2. Messen und Auswerten kostet nichts und läuft auf dem eigenen Gerät.
  *      Bezahlt wird für den Report, für Synchronisierung und für die Betreuung
  *      mehrerer Athleten — nicht für den Zugang zu den eigenen Werten.
+ *
+ *      Bis zur Entscheidung für den Pflicht-Login stand hier «funktioniert
+ *      ohne Konto». Das stimmt nicht mehr, seit die App hinter einer
+ *      Anmeldung liegt, und eine Zusage, die nicht mehr gilt, wird
+ *      umgeschrieben statt stehen gelassen. Die Substanz bleibt: das Messen
+ *      selbst ist kostenlos.
  *   3. Ein gekaufter Report verfällt nicht, und wer nur einen gekauft hat,
  *      behält seinen Bestand vollständig.
  */

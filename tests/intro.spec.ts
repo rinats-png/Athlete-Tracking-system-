@@ -67,7 +67,15 @@ test.describe('Inhalte der Sequenz', () => {
 })
 
 test.describe('Ablauf beim Öffnen', () => {
-  /** Wie ein Mensch die App öffnet: mit eingeschalteter Sequenz. */
+  /**
+   * Wie ein Mensch die App öffnet: Kaltstart, durch das Tor, dann die
+   * Sequenz.
+   *
+   * Sie lief früher beim Programmstart. Seit die App hinter einer Anmeldung
+   * liegt, gehört sie zur ANMELDUNG: die Anmeldefläche zerfällt in Partikel,
+   * und daraus wird die Sequenz. Ein Neuladen führt deshalb nicht mehr durch
+   * sie hindurch — man ist dann schon drin.
+   */
   async function openWithIntro(page: import('@playwright/test').Page) {
     await blockFonts(page)
     await page.goto('/', { waitUntil: 'domcontentloaded' })
@@ -77,6 +85,14 @@ test.describe('Ablauf beim Öffnen', () => {
       sessionStorage.clear()
     })
     await page.reload({ waitUntil: 'domcontentloaded' })
+    await signIn(page)
+  }
+
+  /** Durch das Tor. Geprüft wird nichts — es gibt keinen Server. */
+  async function signIn(page: import('@playwright/test').Page) {
+    await page.getByLabel('E-Mail').fill('pruef@baseline.test')
+    await page.getByLabel('Passwort').fill('egal')
+    await page.getByRole('button', { name: 'Anmelden' }).click()
   }
 
   test('sie läuft beim Öffnen und lässt sich abbrechen', async ({ page }) => {
@@ -88,17 +104,17 @@ test.describe('Ablauf beim Öffnen', () => {
     await page.getByRole('button', { name: 'Überspringen' }).click()
     await expect(dialog).toHaveCount(0)
     // Danach steht die App — nicht eine leere Seite.
-    await expect(page.getByRole('button', { name: /Ohne Konto starten/ })).toBeVisible()
+    await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toBeVisible()
   })
 
-  test('in derselben Sitzung kommt sie nicht wieder', async ({ page }) => {
+  test('ein Neuladen führt nicht wieder durch sie hindurch', async ({ page }) => {
+    // Die Sequenz gehört zur Anmeldung, nicht zum Programmstart. Wer nur die
+    // Seite neu lädt, ist bereits angemeldet und soll nicht warten — zehnmal
+    // am Tag dieselbe Animation wäre eine Zumutung.
     await openWithIntro(page)
     await page.getByRole('button', { name: 'Überspringen' }).click()
     await page.reload({ waitUntil: 'domcontentloaded' })
-    await expect(
-      page.getByRole('dialog', { name: 'Einführungssequenz' }),
-      'zehnmal am Tag dieselbe Animation wäre eine Zumutung',
-    ).toHaveCount(0)
+    await expect(page.getByRole('dialog', { name: 'Einführungssequenz' })).toHaveCount(0)
   })
 
   test('abgeschaltet läuft sie gar nicht', async ({ page }) => {
@@ -110,6 +126,7 @@ test.describe('Ablauf beim Öffnen', () => {
       sessionStorage.clear()
     })
     await page.reload({ waitUntil: 'domcontentloaded' })
+    await signIn(page)
     await expect(page.getByRole('dialog', { name: 'Einführungssequenz' })).toHaveCount(0)
   })
 
@@ -119,7 +136,7 @@ test.describe('Ablauf beim Öffnen', () => {
     await openWithIntro(page)
     // Der Leitsatz steht sofort, ohne Szenenfolge davor.
     await expect(page.getByText(/Messen · Einordnen/)).toBeVisible()
-    await expect(page.getByRole('button', { name: /Ohne Konto starten/ })).toBeVisible({
+    await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toBeVisible({
       timeout: 4000,
     })
     await ctx.close()

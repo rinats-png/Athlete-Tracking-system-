@@ -1,4 +1,4 @@
-import { Suspense, lazy, useCallback, useState, type ComponentType } from 'react'
+import { Suspense, lazy, useCallback, useEffect, useRef, useState, type ComponentType } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { AppShell } from '@/routes/AppShell'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
@@ -15,18 +15,30 @@ const OnboardingFlow = lazy(() =>
 )
 import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
 import { IntroSequence } from '@/features/intro/IntroSequence'
-import { introEnabled, introSeenThisSession, markIntroSeen } from '@/features/intro/introPreference'
+import { introEnabled, markIntroSeen } from '@/features/intro/introPreference'
+import { AuthScreen } from '@/features/auth/AuthScreen'
+import { readAccount, type Account } from '@/features/auth/account'
 
 /**
  * Einstiegspunkt.
  *
- * Zwei Wege in die App, beide ohne Konto und ohne Datenerfassung:
+ * DER ABLAUF, VON GANZ VORN:
+ *
+ *   1. Anmeldung — Partikel bilden den Umriss der Fläche, die Fläche steht,
+ *      nach dem Absenden zerfällt sie wieder in Partikel.
+ *   2. Sequenz — die Auflösung geht in die Intro über. Sie läuft nach JEDER
+ *      Anmeldung, nicht nur beim ersten Mal.
+ *   3. Einstieg — die neun Schritte, solange der Bestand sie nicht kennt.
+ *   4. Die App.
+ *
+ * Die Anmeldung prüft nichts (siehe `features/auth/account.ts`): es gibt
+ * keinen Server. Sie ordnet den Einstieg und sagt das auch. Der Bestand
+ * bleibt davon unberührt lokal — angemeldet oder nicht, gemessen wird auf
+ * diesem Gerät.
+ *
+ * Zwei Bestandsarten hinter der Anmeldung:
  *   'guest' — leerer Bestand, alles bleibt auf dem Gerät
  *   'demo'  — mitgelieferter Beispielsatz, ebenfalls lokal und bearbeitbar
- *
- * Der gewählte Modus überlebt einen Reload, damit man nicht bei jedem Start
- * wieder auf dem Willkommensbildschirm landet. Anmeldung über E-Mail, Apple
- * oder Google folgt später und ersetzt lediglich die Datenschicht.
  */
 
 
@@ -93,18 +105,35 @@ const router = createBrowserRouter([
 ])
 
 export default function App() {
+  const [account, setAccount] = useState<Account | null>(() => readAccount())
   const [mode, setMode] = useState<AppMode | null>(() => readMode())
-  const [intro, setIntro] = useState(() => introEnabled() && !introSeenThisSession())
+  /*
+   * Die Sequenz gehört zur Anmeldung, nicht zum Programmstart: sie läuft, wenn
+   * jemand sich gerade angemeldet hat. Wer nur die Seite neu lädt, ist schon
+   * drin und soll nicht warten — sonst stünde zwischen jedem Reload eine
+   * Animation.
+   */
+  const [intro, setIntro] = useState(false)
 
   const enter = useCallback((next: AppMode) => {
     writeMode(next)
     setMode(next)
   }, [])
 
+  const signedIn = useCallback((next: Account) => {
+    setAccount(next)
+    setIntro(introEnabled())
+  }, [])
+
+  // 1. Das Tor. Ohne Konto kommt niemand weiter.
+  if (!account) {
+    return <AuthScreen onSignedIn={signedIn} />
+  }
+
   /*
-   * Die Sequenz steht ganz vorn: vor der Wahl zwischen Gast und Demo, vor
-   * dem Einstieg, vor dem Router. Sie ist der Moment, in dem die App sagt,
-   * was sie ist — und danach ist man da, wo man ohne sie auch gewesen wäre.
+   * 2. Die Sequenz. Sie schliesst unmittelbar an die Auflösung der
+   * Anmeldefläche an: dieselben Partikel, dieselbe Bewegung — erst dort
+   * bekommt der Übergang seinen Sinn.
    */
   if (intro) {
     return (
@@ -117,15 +146,36 @@ export default function App() {
     )
   }
 
+  // 3. Welcher Bestand: der eigene oder der Beispielsatz.
   if (!mode) {
     return <WelcomeScreen onEnter={enter} />
   }
 
   return (
     <AppDataProvider mode={mode}>
+      <RoleFromAccount role={account.role} />
       <OnboardingGate />
     </AppDataProvider>
   )
+}
+
+/**
+ * Wer sich als Trainer registriert hat, findet den Trainerbereich vor.
+ *
+ * Nur EINMAL und nur in eine Richtung: wer die Rolle später im Profil
+ * umstellt, soll sie nicht beim nächsten Start zurückgesetzt bekommen. Die
+ * Registrierung gibt den Anfangszustand vor, nicht die Wahrheit über alle
+ * Zeit — sonst wäre der Schalter im Profil eine Attrappe.
+ */
+function RoleFromAccount({ role }: { role: Account['role'] }) {
+  const { role: current, setRole } = useAppData()
+  const applied = useRef(false)
+  useEffect(() => {
+    if (applied.current) return
+    applied.current = true
+    if (role === 'coach' && current === 'solo') setRole('coach')
+  }, [role, current, setRole])
+  return null
 }
 
 /**

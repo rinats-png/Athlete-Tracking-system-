@@ -157,7 +157,7 @@
     "haveAccount": "Ich habe ein Konto",
     "viewDemo": "Demo ansehen",
     "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen und der Datenschutzerklärung zu.",
-    "startLocal": "Ohne Konto starten",
+    "startLocal": "Mit leerem Bestand starten",
     "privacy": "Kein Konto, keine E-Mail-Adresse, keine Übertragung. Deine Messwerte bleiben auf diesem Gerät und lassen sich jederzeit exportieren oder löschen.",
     "accountLater": "Konto und Synchronisierung folgen später",
     "points": [
@@ -1566,7 +1566,7 @@
     "enquiryNoAthleteData": "In der Anfrage stehen keine Angaben zu einzelnen Athleten — nur Anzahl und Art der Nutzung.",
     "promises": "Was immer gilt",
     "promiseExport": "Der Export deiner Daten ist vollständig und kostenlos — auch ohne gekauften Report. Deine Messwerte gehören dir.",
-    "promiseOffline": "Messen und Auswerten auf dem eigenen Gerät funktioniert ohne Konto. Bezahlt wird für den Report, für Synchronisierung und für die Betreuung mehrerer Athleten.",
+    "promiseOffline": "Messen und Auswerten kostet nichts und läuft auf dem eigenen Gerät, auch ohne Verbindung. Bezahlt wird für den Report, für Synchronisierung und für die Betreuung mehrerer Athleten — nicht für den Zugang zu den eigenen Werten.",
     "promiseNoExpiry": "Ein gekaufter Report verfällt nicht. Kein Abo, keine Kündigungsfrist, kein Guthaben, das ausläuft.",
     "promiseNoAds": "Keine Werbung, kein Weiterverkauf von Daten, keine Auswertung deiner Werte für andere Zwecke.",
     "onRequestShort": "auf Anfrage"
@@ -1768,5 +1768,37 @@
     "notATrainingPlan": "BASELINE misst und ordnet ein. Übungen, Sätze und Trainingspläne stehen hier bewusst nicht — der Satz oben ist deiner, die App fügt nichts hinzu und wertet ihn nicht aus.",
     "reportTitle": "Trainingsschwerpunkte",
     "reportIntro": "Vom Trainer gesetzt. Die Bewertung daneben ist gemessen, nicht eingeschätzt."
+  },
+  "auth": {
+    "eyebrow": "Anmeldung",
+    "claim": "Leistungsdiagnostik, die sagt, was sie weiss — und was nicht.",
+    "noBackend": "Es gibt noch keinen Server: die Eingabe wird nicht geprüft, dein Passwort wird nicht gespeichert und nichts übertragen. Diese Anmeldung ordnet den Einstieg, sie schützt noch nichts.",
+    "signIn": "Anmelden",
+    "register": "Konto anlegen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "passwordNotStored": "Wird nicht gespeichert und nicht gesendet. Nimm hier bitte kein Passwort, das anderswo etwas schützt.",
+    "name": "Name",
+    "defaultName": "Athlet",
+    "createAccount": "Konto anlegen",
+    "next": "Weiter",
+    "back": "Zurück",
+    "roleQuestion": "Wofür benutzt du BASELINE?",
+    "role": {
+      "athlete": "Für mich selbst",
+      "coach": "Ich betreue andere"
+    },
+    "roleHint": {
+      "athlete": "Deine eigenen Werte, dein Verlauf, deine Reports.",
+      "coach": "Mehrere Athleten, Gruppentests, Trainingsschwerpunkte je Person."
+    },
+    "planQuestion": "Welche Stufe passt? Du kannst das später jederzeit ändern.",
+    "planNotYet": "Noch kann nichts gekauft werden: es gibt keine Zahlungsabwicklung. Die Wahl wird gemerkt und prägt, was die App anbietet — sie ist keine Bestellung.",
+    "planSkip": "Später entscheiden",
+    "signOut": "Abmelden",
+    "signedInAs": "Angemeldet als {{name}}",
+    "planChosen": "Gewählte Stufe: {{plan}}",
+    "planNone": "Noch keine Stufe gewählt.",
+    "signOutKeepsData": "Abmelden räumt nur das Konto. Deine Messwerte bleiben auf diesem Gerät — sie gehören dir, nicht der Anmeldung."
   }
 }
