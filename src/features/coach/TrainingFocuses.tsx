@@ -212,6 +212,9 @@ function FocusRow({
           type="button"
           size="sm"
           variant="ghost"
+          // Ein Knopf mit nur einem Zeichen wird sonst 38 px breit und ist
+          // auf dem Telefon zu klein zum sicheren Treffen.
+          className="min-w-11 justify-center"
           aria-label={t('focus.delete')}
           onClick={onDelete}
         >
