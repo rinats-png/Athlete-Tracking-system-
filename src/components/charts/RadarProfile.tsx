@@ -222,6 +222,8 @@ export function RadarProfile({
         <Button
           variant="ghost"
           size="sm"
+          // Bedienelement: auf Papier hat ein Umschalter nichts verloren.
+          className="no-print"
           onClick={() => setView(view === 'chart' ? 'table' : 'chart')}
         >
           {view === 'chart' ? <Table2 size={14} aria-hidden /> : <RadarIcon size={14} aria-hidden />}

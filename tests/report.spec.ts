@@ -138,11 +138,22 @@ test.describe('Bericht', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'Leistungsprofil' })).toBeVisible()
     await expect(page.getByText('Messwerte').first()).toBeVisible()
 
-    // Auf Papier wird schwarz auf weiss gedruckt, auch aus dem Dunkelmodus.
-    const background = await page.evaluate(
-      () => getComputedStyle(document.body).backgroundColor,
-    )
-    expect(background).toBe('rgb(255, 255, 255)')
+    /*
+     * Der Bericht folgt der gewählten Fassung.
+     *
+     * Bis hierher wurde er im Druck auf Reinweiss gezogen — auch aus dem
+     * Dunkelmodus. Gut gemeint, aber es hatte eine Folge, die niemand wollte:
+     * die helle und die dunkle Fassung ergaben DASSELBE Dokument. Zwei
+     * Themes, ein Ergebnis. Jetzt bleibt jede Fassung sie selbst; der Hinweis
+     * am Druckknopf sagt, dass sich für Papier die helle lohnt.
+     */
+    // Die Prüfläufe starten im Dunkelmodus — also zuerst diese Fassung.
+    const dunkel = await page.evaluate(() => getComputedStyle(document.body).backgroundColor)
+    expect(dunkel, 'die dunkle Fassung bleibt dunkel').not.toBe('rgb(255, 255, 255)')
+
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'))
+    const hell = await page.evaluate(() => getComputedStyle(document.body).backgroundColor)
+    expect(hell, 'die helle Fassung druckt auf Weiss').toBe('rgb(255, 255, 255)')
   })
 })
 
@@ -151,8 +162,11 @@ test.describe("Bericht: Aufbau (§33)", () => {
     await openDemo(page);
     await page.goto("/bericht", { waitUntil: "domcontentloaded" });
 
-    // Deckblatt mit Athlet und Datum
-    await expect(page.getByText("Athlet", { exact: true }).first()).toBeVisible();
+    // Deckblatt: der Name in Auszeichnungsgrösse, darüber die Dokumentart.
+    // Der Name stand vorher als Feld «Athlet: …» da — auf einem Dokument, das
+    // einem Menschen gehört, ist das die falsche Rangfolge.
+    await expect(page.getByText("Alex Roth").first()).toBeVisible();
+    await expect(page.getByText("Datum", { exact: true }).first()).toBeVisible();
 
     // Das Leistungsprofil gehört in den Bericht — sechs Zahlen in einer
     // Tabelle beantworten «wo stehe ich» schlechter als ein Netz.

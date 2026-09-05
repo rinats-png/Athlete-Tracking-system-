@@ -798,7 +798,8 @@
     "priority": "Priority {{rank}}",
     "formulas": "Origin of the calculated values",
     "formulaSource": "Source: {{source}}.",
-    "formulaProvisional": "Provisional: defined by this app, not a published formula."
+    "formulaProvisional": "Provisional: defined by this app, not a published formula.",
+    "themeHint": "The report follows the chosen appearance: dark stays dark, light stays light. For paper, the light version is worth it — it saves toner and reads better on white."
   },
   "coach": {
     "title": "Athletes you coach",

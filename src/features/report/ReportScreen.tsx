@@ -19,6 +19,7 @@ import { formatResultValue } from '@/lib/resultView'
 import { resultsToCsv, downloadFile } from '@/lib/export/csv'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { RadarProfile } from '@/components/charts/RadarProfile'
+import { SportArt } from '@/components/signature/SportArt'
 import { compareAssessments } from '@/domain/analytics'
 import { coverageByDimension } from '@/domain/benchmark'
 import { readinessScore } from '@/domain/readiness'
@@ -107,6 +108,13 @@ export function ReportScreen() {
     t('report.anonymousAthlete')
   const age = ageFromBirthDate(data.profile.birthDate)
 
+  /*
+   * Laufende Nummer der Abschnitte. Sie wird bei jedem Rendern neu bei null
+   * begonnen und beim Ausgeben hochgezählt — ein Abschnitt, den der Bestand
+   * nicht hergibt, hinterlässt damit keine Lücke in der Reihe.
+   */
+  let sectionNo = 0
+
   return (
     <div className="report mx-auto max-w-[820px]">
       {/* Bedienleiste — im Druck ausgeblendet. */}
@@ -142,74 +150,103 @@ export function ReportScreen() {
         {t('report.printHint')}
       </p>
 
+      <p className="no-print mb-5 border-l-2 border-accent bg-accent-quiet px-3 py-2 text-[12px] leading-relaxed text-ink-secondary">
+        {t('report.themeHint')}
+      </p>
+
       {/* --- Der Bericht ------------------------------------------------- */}
 
-      <header className="report-head flex items-start justify-between gap-6 border-b-2 border-ink pb-4">
-        <div>
-          <p className="font-display text-[11px] font-semibold tracking-[0.18em] uppercase text-ink-muted">
-            {data.branding.organisation || t('app.name')}
-          </p>
-          <h1 className="mt-1 font-display text-[26px] leading-tight font-bold">
+      {/*
+        Deckblatt: eine eigene Druckseite.
+        
+        Es trägt den NAMEN in Auszeichnungsgrösse, nicht die Dokumentart — das
+        Papier gehört einem Menschen, und «Diagnostikbericht» in 22 px als
+        grösstes Element machte daraus ein Formular. Die Dokumentart steht als
+        Zeile darüber, die Eckwerte als Ableseleiste darunter, und das Motiv
+        der Sportart liegt ruhig im Hintergrund. Alles aus den Rollenfarben —
+        deshalb sieht die dunkle Fassung wirklich dunkel aus und nicht wie
+        dieselbe Seite in Grau.
+      */}
+      <section className="report-cover corner-brackets">
+        {data.profile.disciplineId && (
+          <SportArt
+            disciplineId={data.profile.disciplineId}
+            categoryId={data.profile.sportCategoryId}
+            className="report-motif"
+            position="50% 30%"
+          />
+        )}
+
+        <div className="relative flex items-center justify-between gap-4">
+          <p className="label-tag">{data.branding.organisation || t('app.name')}</p>
+          {data.branding.logoDataUrl ? (
+            /* Das Logo steht auf dem Deckblatt und nicht mehr nur im
+               Bildschirmkopf — der wird im Ausdruck ausgeblendet, und eine
+               Marke, die beim Drucken verschwindet, ist keine.
+               Nutzerlogo aus dem lokalen Bestand, nie von fremder Quelle. */
+            <img
+              src={data.branding.logoDataUrl}
+              alt={data.branding.organisation || t('report.logoAlt')}
+              className="max-h-10 max-w-[120px] object-contain"
+            />
+          ) : (
+            <p className="font-display text-[12px] font-bold tracking-[0.22em] uppercase text-ink-muted">
+              {t('app.name')}
+            </p>
+          )}
+        </div>
+
+        <div className="relative">
+          {/*
+            Die Dokumentart ist die Überschrift des Dokuments, der Name seine
+            Auszeichnung. Umgekehrt — «Diagnostikbericht» als grösstes Element —
+            las sich das Deckblatt wie ein Formular, und der Mensch, um den es
+            geht, kam als Kleingedrucktes vor.
+          */}
+          <h1 className="label-tag">
             {assessment
               ? (assessment.title ?? t('report.assessmentTitle'))
               : t('report.profileTitle')}
           </h1>
-          <p className="mt-1 text-[13px] text-ink-secondary">
-            {athlete}
-            {age != null && ` · ${t('report.age', { count: age })}`}
-            {/* `profile.sex` ist die Feldbeschriftung, nicht der Namensraum
-                der Werte — die Werte liegen flach daneben. */}
-            {data.profile.sex &&
-              ` · ${t(data.profile.sex === 'other' ? 'profile.otherSex' : `profile.${data.profile.sex}`)}`}
-          </p>
-          <p className="text-[12px] text-ink-muted">
-            {assessment
-              ? formatDate(assessment.performedOn, locale)
-              : t('report.generatedOn', { date: formatDate(new Date().toISOString(), locale) })}
+          <p className="report-name mt-1.5">{athlete}</p>
+          <p className="mt-2 text-[13px] leading-relaxed text-ink-secondary">
+            {[
+              discipline?.name[locale] ?? data.profile.sport,
+              data.profile.performanceLevel &&
+                t(`profile.level.${data.profile.performanceLevel}`),
+              age != null && t('report.age', { count: age }),
+              // `profile.sex` ist die Feldbeschriftung, nicht der Namensraum
+              // der Werte — die Werte liegen flach daneben.
+              data.profile.sex &&
+                t(data.profile.sex === 'other' ? 'profile.otherSex' : `profile.${data.profile.sex}`),
+            ]
+              .filter(Boolean)
+              .join(' · ')}
           </p>
         </div>
-        {data.branding.logoDataUrl && (
-          // Nutzerlogo aus dem lokalen Bestand — nie von einer fremden Quelle.
-          <img
-            src={data.branding.logoDataUrl}
-            alt={data.branding.organisation || t('report.logoAlt')}
-            className="max-h-16 max-w-[160px] object-contain"
-          />
-        )}
-      </header>
 
-      {/* Deckblatt: eine eigene Druckseite, damit der Bericht wie ein
-          Dokument beginnt und nicht wie ein Ausdruck einer Webseite. */}
-      <section className="report-cover">
-        <p className="font-display text-[11px] font-semibold tracking-[0.18em] uppercase text-ink-muted">
-          {data.branding.organisation || t('app.name')}
-        </p>
-        <h2 className="mt-2 font-display text-[22px] leading-tight font-bold">
-          {assessment ? t('report.assessmentTitle') : t('report.profileTitle')}
-        </h2>
-        <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-1 text-[12px] sm:grid-cols-4">
-          <CoverField label={t('report.athlete')} value={athlete} />
-          <CoverField
-            label={t('report.date')}
-            value={
-              assessment
-                ? formatDate(assessment.performedOn, locale)
-                : formatDate(new Date().toISOString(), locale)
-            }
-          />
-          {data.profile.sport && (
-            <CoverField label={t('profile.sport')} value={data.profile.sport} />
-          )}
-          {data.profile.performanceLevel && (
+        <div className="relative">
+          <div className="report-rule mb-3" aria-hidden />
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
             <CoverField
-              label={t('profile.performanceLevel')}
-              value={t(`profile.level.${data.profile.performanceLevel}`)}
+              label={t('report.date')}
+              value={
+                assessment
+                  ? formatDate(assessment.performedOn, locale)
+                  : formatDate(new Date().toISOString(), locale)
+              }
             />
-          )}
-        </dl>
+            <CoverField label={t('report.testsMeasured')} value={String(results.length)} />
+            <CoverField
+              label={t('report.axesCovered')}
+              value={`${covered.length} / ${PERFORMANCE_DIMENSIONS.length}`}
+            />
+            <CoverField label={t('analysis.confidence')} value={`${confidence.score} / 100`} />
+          </dl>
+        </div>
       </section>
 
-      <Section title={t('report.summary')}>
+      <Section no={++sectionNo} title={t('report.summary')}>
         <dl className="grid grid-cols-2 gap-x-6 gap-y-2 text-[13px] sm:grid-cols-4">
           <Figure label={t('report.testsMeasured')} value={String(results.length)} />
           <Figure
@@ -230,7 +267,7 @@ export function ReportScreen() {
         )}
       </Section>
 
-      <Section title={t('radar.title')}>
+      <Section no={++sectionNo} title={t('radar.title')}>
         {/* Das Profil gehört in den Bericht: sechs Zahlen in einer Tabelle
             beantworten «wo stehe ich» schlechter als ein Netz. Die
             Tabellenansicht liegt darunter und macht es ohne Diagramm
@@ -244,23 +281,23 @@ export function ReportScreen() {
         />
       </Section>
 
-      <Section title={t('coverage.title')}>
-        <table className="w-full text-[12px]">
+      <Section no={++sectionNo} title={t('coverage.title')}>
+        <table className="report-table text-[12px]">
           <thead>
-            <tr className="border-b border-ink text-left">
-              <th scope="col" className="py-1.5 font-semibold">{t('table.dimension')}</th>
-              <th scope="col" className="py-1.5 font-semibold">{t('coverage.title')}</th>
-              <th scope="col" className="py-1.5 font-semibold">{t('report.testsMeasured')}</th>
+            <tr>
+              <th scope="col">{t('table.dimension')}</th>
+              <th scope="col">{t('coverage.title')}</th>
+              <th scope="col">{t('report.testsMeasured')}</th>
             </tr>
           </thead>
           <tbody>
             {coverage.map((entry) => (
-              <tr key={entry.dimension} className="border-b border-line">
-                <th scope="row" className="py-1.5 pr-2 text-left font-normal">
+              <tr key={entry.dimension}>
+                <th scope="row" className="text-left font-normal">
                   {t(`dimensions.${entry.dimension}`)}
                 </th>
-                <td className="readout py-1.5 pr-2 tabular-nums">{entry.percent} %</td>
-                <td className="py-1.5 tabular-nums">
+                <td className="num">{entry.percent} %</td>
+                <td className="num">
                   {entry.measured} / {entry.available}
                 </td>
               </tr>
@@ -270,15 +307,15 @@ export function ReportScreen() {
         <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">{t('coverage.explain')}</p>
       </Section>
 
-      <Section title={t('report.measurements')}>
-        <table className="w-full text-[12px]">
+      <Section no={++sectionNo} title={t('report.measurements')}>
+        <table className="report-table text-[12px]">
           <thead>
-            <tr className="border-b border-ink text-left">
-              <th scope="col" className="py-1.5 font-semibold">{t('table.test')}</th>
-              <th scope="col" className="py-1.5 font-semibold">{t('report.date')}</th>
-              <th scope="col" className="py-1.5 font-semibold">{t('table.value')}</th>
-              <th scope="col" className="py-1.5 font-semibold">{t('table.percentile')}</th>
-              <th scope="col" className="py-1.5 font-semibold">{t('table.quality')}</th>
+            <tr>
+              <th scope="col">{t('table.test')}</th>
+              <th scope="col">{t('report.date')}</th>
+              <th scope="col">{t('table.value')}</th>
+              <th scope="col">{t('table.percentile')}</th>
+              <th scope="col">{t('table.quality')}</th>
             </tr>
           </thead>
           <tbody>
@@ -287,20 +324,20 @@ export function ReportScreen() {
               const percentile = resultPercentile(result)
               const quality = assessQuality(result)
               return (
-                <tr key={result.id} className="border-b border-line">
-                  <th scope="row" className="py-1.5 pr-2 text-left font-normal">
+                <tr key={result.id}>
+                  <th scope="row" className="text-left font-normal">
                     {test?.name[locale] ?? result.testSlug}
                   </th>
-                  <td className="py-1.5 pr-2 tabular-nums">
+                  <td className="num">
                     {formatDate(result.performedAt, locale)}
                   </td>
-                  <td className="readout py-1.5 pr-2 tabular-nums">
+                  <td className="num">
                     {formatResultValue(result, locale, data.profile.unitSystem)}
                   </td>
-                  <td className="py-1.5 pr-2 tabular-nums">
+                  <td className="num">
                     {percentile != null ? `P${Math.round(percentile)}` : '—'}
                   </td>
-                  <td className="py-1.5">{t(`quality.status.${quality.status}`)}</td>
+                  <td>{t(`quality.status.${quality.status}`)}</td>
                 </tr>
               )
             })}
@@ -312,37 +349,37 @@ export function ReportScreen() {
       </Section>
 
       {comparisons.length > 0 && (
-        <Section title={t('analysis.sinceBaseline')}>
-          <table className="w-full text-[12px]">
+        <Section no={++sectionNo} title={t('analysis.sinceBaseline')}>
+          <table className="report-table text-[12px]">
             <thead>
-              <tr className="border-b border-ink text-left">
-                <th scope="col" className="py-1.5 font-semibold">{t('table.test')}</th>
-                <th scope="col" className="py-1.5 font-semibold">{t('analysis.first')}</th>
-                <th scope="col" className="py-1.5 font-semibold">{t('analysis.latest')}</th>
-                <th scope="col" className="py-1.5 font-semibold">{t('analysis.change')}</th>
-                <th scope="col" className="py-1.5 font-semibold">{t('analysis.trend')}</th>
+              <tr>
+                <th scope="col">{t('table.test')}</th>
+                <th scope="col">{t('analysis.first')}</th>
+                <th scope="col">{t('analysis.latest')}</th>
+                <th scope="col">{t('analysis.change')}</th>
+                <th scope="col">{t('analysis.trend')}</th>
               </tr>
             </thead>
             <tbody>
               {comparisons.map((row) => {
                 const trend = testTrend(data.results, row.testSlug)
                 return (
-                  <tr key={row.testSlug} className="border-b border-line">
-                    <th scope="row" className="py-1.5 pr-2 text-left font-normal">
+                  <tr key={row.testSlug}>
+                    <th scope="row" className="text-left font-normal">
                       {getTest(row.testSlug)?.name[locale] ?? row.testSlug}
                     </th>
-                    <td className="readout py-1.5 pr-2 tabular-nums">
+                    <td className="num">
                       {formatResultValue(row.baseline, locale, data.profile.unitSystem)}
                     </td>
-                    <td className="readout py-1.5 pr-2 tabular-nums">
+                    <td className="num">
                       {formatResultValue(row.current, locale, data.profile.unitSystem)}
                     </td>
-                    <td className="py-1.5 pr-2 tabular-nums">
+                    <td className="num">
                       {row.changePercent == null
                         ? '—'
                         : `${row.changePercent > 0 ? '+' : ''}${row.changePercent.toFixed(1)} % (${t('analysis.overDays', { count: row.daysBetween })})`}
                     </td>
-                    <td className="py-1.5">
+                    <td>
                       {trend.label === 'insufficient'
                         ? t('analysis.trendLabel.insufficient', { count: trend.points })
                         : `${t(`analysis.trendLabel.${trend.label}`)} · R² ${(trend.rSquared ?? 0).toFixed(2)}`}
@@ -356,7 +393,7 @@ export function ReportScreen() {
       )}
 
       {showInsights && (insights.limiters.length > 0 || insights.strengths.length > 0) && (
-        <Section title={t('insights.findings')}>
+        <Section no={++sectionNo} title={t('insights.findings')}>
           <ul className="space-y-1.5 text-[13px]">
             {insights.limiters.map((finding) => (
               <li key={`l-${finding.dimension}`}>
@@ -391,32 +428,32 @@ export function ReportScreen() {
             date: formatDate(previousAssessment.performedOn, locale),
           })}
         >
-          <table className="w-full text-[12px]">
+          <table className="report-table text-[12px]">
             <thead>
-              <tr className="border-b border-ink text-left">
-                <th scope="col" className="py-1.5 font-semibold">{t('table.test')}</th>
-                <th scope="col" className="py-1.5 font-semibold">{t('analysis.before')}</th>
-                <th scope="col" className="py-1.5 font-semibold">{t('analysis.after')}</th>
-                <th scope="col" className="py-1.5 font-semibold">{t('analysis.change')}</th>
+              <tr>
+                <th scope="col">{t('table.test')}</th>
+                <th scope="col">{t('analysis.before')}</th>
+                <th scope="col">{t('analysis.after')}</th>
+                <th scope="col">{t('analysis.change')}</th>
               </tr>
             </thead>
             <tbody>
               {comparisonRows.map((row) => (
-                <tr key={row.testSlug} className="border-b border-line">
-                  <th scope="row" className="py-1.5 pr-2 text-left font-normal">
+                <tr key={row.testSlug}>
+                  <th scope="row" className="text-left font-normal">
                     {lookupTest(row.testSlug)?.name[locale] ?? row.testSlug}
                   </th>
-                  <td className="readout py-1.5 pr-2 tabular-nums">
+                  <td className="num">
                     {row.before
                       ? formatResultValue(row.before, locale, data.profile.unitSystem)
                       : '—'}
                   </td>
-                  <td className="readout py-1.5 pr-2 tabular-nums">
+                  <td className="num">
                     {row.after
                       ? formatResultValue(row.after, locale, data.profile.unitSystem)
                       : '—'}
                   </td>
-                  <td className="py-1.5 tabular-nums">
+                  <td className="num">
                     {row.onlyIn
                       ? t(`analysis.onlyIn.${row.onlyIn}`)
                       : row.changePercent == null
@@ -431,7 +468,7 @@ export function ReportScreen() {
       )}
 
       {assessment?.readiness && (
-        <Section title={t('readiness.title')}>
+        <Section no={++sectionNo} title={t('readiness.title')}>
           <p className="text-[12px]">
             {t('readiness.score')}:{' '}
             <span className="readout">{readinessScore(assessment.readiness).score} %</span>{' '}
@@ -449,7 +486,7 @@ export function ReportScreen() {
       )}
 
       {showInsights && insights.recommendations.length > 0 && (
-        <Section title={t('insights.recommendations')}>
+        <Section no={++sectionNo} title={t('insights.recommendations')}>
           <ol className="space-y-2 text-[12px]">
             {insights.recommendations.slice(0, 5).map((recommendation, index) => (
               <li key={`${recommendation.kind}-${index}`}>
@@ -492,14 +529,14 @@ export function ReportScreen() {
           eine Einschätzung. Ein Schwerpunkt ohne Nachmessung sagt das auch —
           er wird nicht als Erfolg gezeigt, nur weil er gesetzt wurde. */}
       {openFocuses.length > 0 && (
-        <Section title={t('focus.reportTitle')}>
+        <Section no={++sectionNo} title={t('focus.reportTitle')}>
           <p className="mb-2 text-[11px] leading-relaxed text-ink-muted">{t('focus.reportIntro')}</p>
-          <table className="w-full border-collapse text-[11px] leading-relaxed">
+          <table className="report-table text-[11px] leading-relaxed">
             <thead>
-              <tr className="border-b border-line text-left text-ink-muted">
-                <th scope="col" className="py-1 pr-3 font-medium">{t('focus.priorityLabel')}</th>
-                <th scope="col" className="py-1 pr-3 font-medium">{t('focus.axis')}</th>
-                <th scope="col" className="py-1 pr-3 font-medium">{t('focus.note')}</th>
+              <tr>
+                <th scope="col">{t('focus.priorityLabel')}</th>
+                <th scope="col">{t('focus.axis')}</th>
+                <th scope="col">{t('focus.note')}</th>
                 <th scope="col" className="py-1 font-medium">{t('focus.reviewAt')}</th>
               </tr>
             </thead>
@@ -521,16 +558,16 @@ export function ReportScreen() {
                             date: formatDate(outcome.result.performedAt, locale),
                           })
                 return (
-                  <tr key={focus.id} className="border-b border-line align-top last:border-b-0">
-                    <td className="py-1.5 pr-3 whitespace-nowrap">
+                  <tr key={focus.id}>
+                    <td className="whitespace-nowrap">
                       {t(`focus.priority.${focus.priority}`)}
                     </td>
-                    <td className="py-1.5 pr-3">{axisLabel(focus.axisId, t, locale)}</td>
-                    <td className="py-1.5 pr-3">
+                    <td>{axisLabel(focus.axisId, t, locale)}</td>
+                    <td>
                       <span className="whitespace-pre-wrap">{focus.note}</span>
                       <span className="mt-0.5 block text-ink-muted">{measured}</span>
                     </td>
-                    <td className="py-1.5 tabular-nums whitespace-nowrap">
+                    <td className="num">
                       {focus.reviewAt ? formatDate(focus.reviewAt, locale) : '—'}
                     </td>
                   </tr>
@@ -545,7 +582,7 @@ export function ReportScreen() {
       )}
 
       {(assessment?.notes || athleteNotes) && (
-        <Section title={t('notes.title')}>
+        <Section no={++sectionNo} title={t('notes.title')}>
           {assessment?.notes && (
             <p className="text-[12px] leading-relaxed whitespace-pre-wrap">{assessment.notes}</p>
           )}
@@ -555,7 +592,7 @@ export function ReportScreen() {
         </Section>
       )}
 
-      <Section title={t('report.method')}>
+      <Section no={++sectionNo} title={t('report.method')}>
         <ul className="space-y-1 text-[11px] leading-relaxed text-ink-secondary">
           <li>{t('report.methodConfidence')}</li>
           <li>{t('report.methodNorms')}</li>
@@ -569,7 +606,7 @@ export function ReportScreen() {
           vortäuscht. Vorläufige Rechnungen stehen mit dem Vermerk da, was
           sie ersetzen müsste (§81). */}
       {usedFormulas.length > 0 && (
-        <Section title={t('report.formulas')}>
+        <Section no={++sectionNo} title={t('report.formulas')}>
           <ul className="space-y-1.5 text-[11px] leading-relaxed text-ink-secondary">
             {usedFormulas.map((f) => (
               <li key={f.metricKey}>
@@ -584,20 +621,48 @@ export function ReportScreen() {
         </Section>
       )}
 
-      <footer className="mt-6 border-t border-line pt-3 text-[10px] leading-relaxed text-ink-muted">
+      <footer className="mt-7 border-t border-line pt-3 text-[10px] leading-relaxed text-ink-muted">
         <p>{t('assessments.disclaimer')}</p>
         {data.branding.footer && <p className="mt-1">{data.branding.footer}</p>}
+        {/* Das Wortzeichen schliesst das Dokument, wie es die Landeseite tut —
+            leise, in der Farbe der Linien, ohne Werbeanspruch. */}
+        <p
+          aria-hidden
+          className="font-display mt-4 text-center text-[8vw] leading-none font-bold tracking-[0.14em] whitespace-nowrap text-ink/10 uppercase select-none sm:text-[52px]"
+        >
+          {t('app.name')}
+        </p>
       </footer>
     </div>
   )
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+/**
+ * Abschnitt mit nummeriertem Kopf.
+ *
+ * Die Nummer ist keine Zierde: ein Bericht über mehrere Seiten wird
+ * besprochen («zu Punkt 3»), und dafür braucht es etwas, worauf man zeigen
+ * kann. Sie wird beim Rendern durchgezählt, damit ein weggelassener
+ * Abschnitt keine Lücke in der Reihe hinterlässt.
+ */
+function Section({
+  title,
+  no,
+  children,
+}: {
+  title: string
+  no?: number
+  children: React.ReactNode
+}) {
   return (
-    <section className="report-section mt-6">
-      <h2 className="mb-2 font-display text-[12px] font-semibold tracking-[0.14em] uppercase text-ink-muted">
-        {title}
-      </h2>
+    <section className="report-section mt-7">
+      <div className="report-head mb-2.5">
+        {no != null && <span className="report-head-no">{String(no).padStart(2, '0')}</span>}
+        <h2 className="font-display text-[12px] font-semibold tracking-[0.14em] uppercase">
+          {title}
+        </h2>
+        <span className="report-head-line" aria-hidden />
+      </div>
       {children}
     </section>
   )
@@ -606,17 +671,17 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function CoverField({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-[10px] tracking-[0.1em] uppercase text-ink-muted">{label}</dt>
-      <dd className="mt-0.5">{value}</dd>
+      <dt className="label-tag">{label}</dt>
+      <dd className="readout mt-1 text-[15px]">{value}</dd>
     </div>
   )
 }
 
 function Figure({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <dt className="text-[10px] tracking-[0.1em] uppercase text-ink-muted">{label}</dt>
-      <dd className="readout mt-0.5 font-display text-[18px] font-bold tabular-nums">{value}</dd>
+    <div className="report-figure">
+      <dt className="label-tag">{label}</dt>
+      <dd className="report-figure-value mt-1">{value}</dd>
     </div>
   )
 }

@@ -798,7 +798,8 @@
     "priority": "Priorität {{rank}}",
     "formulas": "Herkunft der Rechenwerte",
     "formulaSource": "Quelle: {{source}}.",
-    "formulaProvisional": "Vorläufig: von dieser App festgelegt, keine publizierte Formel."
+    "formulaProvisional": "Vorläufig: von dieser App festgelegt, keine publizierte Formel.",
+    "themeHint": "Der Bericht folgt der gewählten Darstellung: in der dunklen Fassung bleibt er dunkel, in der hellen hell. Für Papier lohnt die helle Fassung — sie spart Toner und ist auf Weiss besser zu lesen."
   },
   "coach": {
     "title": "Betreute Athleten",

@@ -54,6 +54,8 @@ export function ActionOrb() {
     <div
       ref={root}
       className={cn(
+        // Ein schwebender Knopf im Ausdruck ist ein Fleck auf dem Papier.
+        'no-print',
         'fixed right-4 z-50',
         // Über der schwebenden Leiste, nicht darauf: die Leiste ist
         // 60 px hoch und schwebt selbst 10 px über dem sicheren Bereich.

@@ -51,6 +51,12 @@ test.describe('Report', () => {
         format: 'A4',
         printBackground: true,
       })
+      // Dieselbe Seite im Druckmodus als Bild: ein PDF lässt sich hier nicht
+      // öffnen, und was im Druck anders aussieht, soll trotzdem prüfbar sein.
+      await page.screenshot({
+        path: `${OUT}/druckansicht-${theme}.png`,
+        fullPage: true,
+      })
       await page.emulateMedia({ media: 'screen' })
 
       // Dazu die Bildschirmfassung, damit die Galerie beides zeigt.
