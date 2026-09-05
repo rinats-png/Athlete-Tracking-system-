@@ -406,7 +406,12 @@ body {
      Lichtsituation — fest hinter allem. */
   background-image: var(--atmo);
   background-attachment: fixed;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  /* Der Grund wechselt OHNE Übergang. Die Vorlage sieht 0,5 s vor; ein
+     Übergang startet aber aus dem Zustand VOR der Änderung — auch beim
+     Wechsel in die Druckansicht, und dort stünde dann für eine halbe
+     Sekunde ein Zwischenton statt Weiss. Die Schrift blendet; der Grund
+     springt. */
+  transition: color 0.5s ease;
 }
 
 :focus-visible {
@@ -809,6 +814,9 @@ body {
 @media print {
   :root,
   :root[data-theme='dark'] {
+    /* Auf Papier gibt es keine Atmosphäre: der Grund ist weiss. */
+    --atmo: none;
+    --glow: transparent;
     --plane: #ffffff;
     --surface: #ffffff;
     --surface-raised: #ffffff;

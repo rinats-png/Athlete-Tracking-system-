@@ -248,11 +248,11 @@ test.describe("Darstellung und Sprache", () => {
   test("die Einstellung bleibt nach dem Umschalten erhalten", async ({ page }) => {
     await openGuest(page);
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    const light = page.getByRole("radio", { name: /^Hell$|^Light$/ });
+    const light = page.getByRole("radio", { name: /Mondstein/ });
     await light.scrollIntoViewIfNeeded();
     await light.click();
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("radio", { name: /^Hell$|^Light$/ })).toHaveAttribute(
+    await expect(page.getByRole("radio", { name: /Mondstein/ })).toHaveAttribute(
       "aria-checked",
       "true",
     );
