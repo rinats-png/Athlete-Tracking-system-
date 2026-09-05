@@ -98,12 +98,25 @@ test.describe("Körperzusammensetzung", () => {
 
 test.describe("Einordnung eines Ergebnisses", () => {
   test("die Referenz wird auch gefunden, wenn sie nicht auf der Primärkennzahl liegt", () => {
-    // Beim Cooper-Test ist die Primärkennzahl die Laufdistanz, die Referenz
-    // liegt auf der VO2max. Eine Suche allein über die Primärkennzahl fand
-    // hier nie etwas und zeigte still einen Strich.
+    // Beim Cooper-Test ist die Primärkennzahl die Laufdistanz. Eine Suche
+    // allein über die Primärkennzahl fand die Referenzen auf der daraus
+    // geschätzten VO2max nie und zeigte still einen Strich.
+    //
+    // Seit den Cooper-Originalnormen von 1968 trägt die Distanz selbst eine
+    // Referenz — und weil das die passendste ist, die es für diesen Test
+    // gibt, führt sie. Die abgeleitete Kennzahl muss trotzdem gefunden
+    // werden; sie steht als zweiter Vergleich daneben. Genau das prüft
+    // dieser Fall.
     const rating = rateResult(result(), { sex: "male", birthDate: null, disciplineIds: [] });
-    expect(rating.metricKey).toBe("vo2max_ml_kg_min");
     expect(rating.comparison).not.toBeNull();
+    const all = [rating.comparison, ...rating.alternatives];
+    expect(
+      all.some((c) => c?.entry.metricKey === "vo2max_ml_kg_min"),
+      "die Referenz auf der abgeleiteten Kennzahl fehlt",
+    ).toBe(true);
+    // Und die gemeldete Kennzahl gehört zum führenden Vergleich, nicht zur
+    // ersten, die überhaupt gepasst hat.
+    expect(rating.metricKey).toBe(rating.comparison!.entry.metricKey);
   });
 
   test("eine geschlechtsneutrale Kohorte gilt auch ohne Geschlechtsangabe", () => {

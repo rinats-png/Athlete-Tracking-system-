@@ -43,9 +43,21 @@ test.describe('Testmodell', () => {
   })
 
   test('ohne Referenz gibt es keine Evidenzstufe — und keine erfundene', () => {
-    const model = describeTest('plank_hold')!
+    // Beispiel war der Unterarmstütz; er hat inzwischen einen Bezugswert aus
+    // dem US Army Fitness Test. Der Seilklettergang hat keinen.
+    const model = describeTest('rope_climb')!
     expect(model.references).toEqual([])
     expect(model.evidence.quality).toBeNull()
+    expect(model.hasPopulationReference).toBe(false)
+  })
+
+  test('ein Bezugswert allein ist eine Evidenzstufe, aber keine Bevölkerungsreferenz', () => {
+    // Der Unterarmstütz hat jetzt genau das: den Höchstwert des US Army
+    // Fitness Test, gebunden an die Behördendisziplinen. Er trägt eine
+    // Datenqualität, aber er sagt nichts über die Allgemeinbevölkerung.
+    const model = describeTest('plank_hold')!
+    expect(model.references.length).toBeGreaterThan(0)
+    expect(model.evidence.quality).not.toBeNull()
     expect(model.hasPopulationReference).toBe(false)
   })
 
