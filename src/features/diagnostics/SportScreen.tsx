@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { RadarProfile } from '@/components/charts/RadarProfile'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { SportArt } from '@/components/signature/SportArt'
 import { TestCard } from '@/features/shared/TestCard'
 import { RatingWord } from '@/features/shared/RatingScale'
 import { useLocale } from '@/features/shared/useLocale'
@@ -86,6 +87,22 @@ export function SportScreen() {
           {t('diag.eyebrow')}
         </Link>
       </Button>
+      {/* Das Motiv der Sportart als Kopfbild: das Gesicht liegt oben im
+          Bild, deshalb der hohe Ausschnitt. Der Verlauf führt in den Grund,
+          damit der Titel darunter nicht an einer harten Kante steht. */}
+      <div className="relative -mx-4 mb-4 sm:mx-0 sm:overflow-hidden sm:rounded-[var(--radius)]">
+        <SportArt
+          disciplineId={sport.id}
+          categoryId={sport.categoryId}
+          className="aspect-[16/9] w-full sm:aspect-[21/9]"
+          position="50% 22%"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3"
+          style={{ background: 'linear-gradient(to bottom, transparent, var(--plane))' }}
+        />
+      </div>
       <ScreenHeader
         eyebrow={isMain ? t('sport.isMain') : t('sport.isAdditional')}
         title={sport.name[locale]}

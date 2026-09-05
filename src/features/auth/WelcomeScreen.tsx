@@ -5,7 +5,7 @@ import { SplitText } from '@/components/signature/SplitText'
 import { useReveal } from '@/features/shared/useReveal'
 import { useLocale } from '@/features/shared/useLocale'
 import { DISCIPLINES } from '@/data/sportProfiles'
-import karteMessung from '@/assets/landing/karte-messung.webp'
+import { SportArt } from '@/components/signature/SportArt'
 import karteAnalyse from '@/assets/landing/karte-analyse.webp'
 import karteNorm from '@/assets/landing/karte-norm.webp'
 import { cn } from '@/lib/utils'
@@ -37,8 +37,10 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
   const page = useReveal<HTMLDivElement>()
 
   const headline = t('welcome.halo.lines', { returnObjects: true }) as string[]
+  /* Die erste Karte trägt ein Sportmotiv in beiden Fassungen; die beiden
+     anderen zeigen Diagramm und Referenzkurve, die es nur einmal gibt. */
   const cards = [
-    { image: karteMessung, key: 'protocol' },
+    { image: null, key: 'protocol' },
     { image: karteAnalyse, key: 'dimensions' },
     { image: karteNorm, key: 'reference' },
   ] as const
@@ -165,13 +167,22 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
                  * eine Feder je Karte und Bild wäre ein eigener Rechenlauf
                  * für einen Unterschied, den niemand benennen kann.
                  */}
-                <img
-                  src={card.image}
-                  alt=""
-                  aria-hidden
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full scale-[0.68] object-cover opacity-70 transition-[transform,opacity] duration-700 ease-[var(--ease-halo)] group-hover:scale-95 group-hover:opacity-95"
-                />
+                {card.image ? (
+                  <img
+                    src={card.image}
+                    alt=""
+                    aria-hidden
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full scale-[0.68] object-cover opacity-70 transition-[transform,opacity] duration-700 ease-[var(--ease-halo)] group-hover:scale-95 group-hover:opacity-95"
+                  />
+                ) : (
+                  <SportArt
+                    disciplineId="judo"
+                    categoryId="combat"
+                    className="absolute inset-0 scale-[0.68] opacity-70 transition-[transform,opacity] duration-700 ease-[var(--ease-halo)] group-hover:scale-95 group-hover:opacity-95"
+                    position="50% 30%"
+                  />
+                )}
                 <span className="readout absolute top-4 left-4 z-20 text-[10px] tracking-[0.1em] text-ink-muted">
                   [{i + 1}]
                 </span>

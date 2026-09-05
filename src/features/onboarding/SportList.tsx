@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Check, Search } from 'lucide-react'
 import { SPORT_CATEGORIES, DISCIPLINES, coreSlugs, type Discipline } from '@/data/sportProfiles'
 import { cn } from '@/lib/utils'
+import { SportArt } from '@/components/signature/SportArt'
 
 /**
  * Die Sportartenliste — alle Disziplinen, nach Bereichen gruppiert, mit
@@ -63,6 +64,12 @@ export function SportList({
                 {active && <Check size={13} strokeWidth={3} />}
               </span>
             )}
+            <SportArt
+              disciplineId={discipline.id}
+              categoryId={discipline.categoryId}
+              className="size-10 shrink-0 rounded-[10px]"
+              position="50% 40%"
+            />
             <span className="truncate text-[15px] font-medium">{discipline.name[lang]}</span>
           </span>
           <span className="shrink-0 text-[12px] text-ink-muted">

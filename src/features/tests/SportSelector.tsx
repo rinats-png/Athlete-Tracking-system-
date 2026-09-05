@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { SPORT_CATEGORIES, DISCIPLINES, disciplineById, coreSlugs } from '@/data/sportProfiles'
 import { cn } from '@/lib/utils'
+import { SportArt } from '@/components/signature/SportArt'
 
 /**
  * Sportartwahl als Einstieg in den Testbereich.
@@ -122,6 +123,12 @@ export function SportSelector({ compact = false }: { compact?: boolean }) {
                           isSelected ? 'bg-accent/12' : 'hover:bg-accent-quiet',
                         )}
                       >
+                        <SportArt
+                          disciplineId={discipline.id}
+                          categoryId={discipline.categoryId}
+                          className="size-10 shrink-0 rounded-[10px]"
+                          position="50% 40%"
+                        />
                         <span className="min-w-0 flex-1">
                           <span className="block text-[15px] font-medium">
                             {discipline.name[lang]}

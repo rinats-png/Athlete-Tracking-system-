@@ -4,7 +4,15 @@ import { AppShell } from '@/routes/AppShell'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
 import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
 import { WelcomeScreen } from '@/features/auth/WelcomeScreen'
-import { OnboardingFlow } from '@/features/onboarding/OnboardingFlow'
+/*
+ * Der Einstieg läuft genau einmal je Bestand. Er liegt deshalb in einem
+ * eigenen Paket: mit den Sportmotiven in der Auswahlliste wäre er sonst der
+ * Posten, der das Startpaket über sein Budget hebt — für neun Schritte, die
+ * die allermeisten Starts gar nicht sehen.
+ */
+const OnboardingFlow = lazy(() =>
+  import('@/features/onboarding/OnboardingFlow').then((m) => ({ default: m.OnboardingFlow })),
+)
 import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
 import { IntroSequence } from '@/features/intro/IntroSequence'
 import { introEnabled, introSeenThisSession, markIntroSeen } from '@/features/intro/introPreference'
@@ -135,7 +143,11 @@ function OnboardingGate() {
   // nicht an: ein Einstieg je Kunde wäre ein Fragebogen an die falsche
   // Person.
   if (data.profile.onboardingCompletedAt == null) {
-    return <OnboardingFlow onDone={setTarget} />
+    return (
+      <Suspense fallback={null}>
+        <OnboardingFlow onDone={setTarget} />
+      </Suspense>
+    )
   }
   if (target && window.location.pathname !== target) {
     // Der Ablauf endet ausserhalb des Routers; der Zielpfad wird einmal

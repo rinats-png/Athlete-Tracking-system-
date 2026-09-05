@@ -799,6 +799,21 @@ body {
   }
 }
 
+/* --- Bilder je Thema ------------------------------------------------------
+ *
+ * Ein Bild kann nicht umgefärbt werden wie eine Fläche. Wo es ein Motiv in
+ * beiden Fassungen gibt, stehen beide im Markup, und dieselben Selektoren,
+ * die die Farbrollen umschalten, entscheiden, welches zu sehen ist.
+ */
+.only-light { display: block; }
+.only-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .only-light { display: none; }
+  :root:not([data-theme="light"]) .only-dark { display: block; }
+}
+:root[data-theme="dark"] .only-light { display: none; }
+:root[data-theme="dark"] .only-dark { display: block; }
+
 /* --- Druck -------------------------------------------------------------- */
 
 /*

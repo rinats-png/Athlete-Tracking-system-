@@ -5,6 +5,7 @@ import { ArrowRight, Play } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { SportArt } from '@/components/signature/SportArt'
 import { RatingWord } from '@/features/shared/RatingScale'
 import { TestCard } from '@/features/shared/TestCard'
 import { useLocale } from '@/features/shared/useLocale'
@@ -127,6 +128,15 @@ export function OverviewScreen() {
         eyebrow={t('overview.eyebrow')}
         title={name}
         intro={discipline ? discipline.name[locale] : undefined}
+        art={
+          discipline && (
+            <SportArt
+              disciplineId={discipline.id}
+              categoryId={discipline.categoryId}
+              className="float size-16 shrink-0 rounded-[var(--radius-md)]"
+            />
+          )
+        }
         action={
           nextTest && (
             <Button asChild variant="primary">
