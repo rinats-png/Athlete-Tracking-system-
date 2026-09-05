@@ -287,6 +287,7 @@ export function ReportScreen() {
             <tr>
               <th scope="col">{t('table.dimension')}</th>
               <th scope="col">{t('coverage.title')}</th>
+              <th scope="col" aria-hidden />
               <th scope="col">{t('report.testsMeasured')}</th>
             </tr>
           </thead>
@@ -297,6 +298,15 @@ export function ReportScreen() {
                   {t(`dimensions.${entry.dimension}`)}
                 </th>
                 <td className="num">{entry.percent} %</td>
+                <td>
+                  {/* Dieselben zwei Zeichen wie in den Diagrammen: Streifen
+                      für das Belegte, Schraffur für das Fehlende. */}
+                  <span
+                    aria-hidden
+                    className="coverage-bar"
+                    style={{ '--coverage': `${entry.percent}%` } as React.CSSProperties}
+                  />
+                </td>
                 <td className="num">
                   {entry.measured} / {entry.available}
                 </td>

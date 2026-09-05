@@ -32,11 +32,20 @@ export function ReferenceSpectrum({
   direction,
   digits = 1,
   className,
+  ripple = false,
 }: {
   marks: SpectrumMark[]
   direction: 'higher_is_better' | 'lower_is_better'
   digits?: number
   className?: string
+  /**
+   * Wellen um den eigenen Wert.
+   *
+   * Nur dort einsetzen, wo ein Wert ZUM ERSTEN MAL erscheint — auf dem
+   * Ergebnisbildschirm nach einer Messung. Eine Welle ist ein Ereignis; in
+   * einer Liste oder im Bericht wäre sie Schmuck und würde sich abnutzen.
+   */
+  ripple?: boolean
 }) {
   const { t } = useTranslation()
   const locale = useLocale()
@@ -51,6 +60,8 @@ export function ReferenceSpectrum({
   const lo = min - span * 0.12
   const hi = max + span * 0.12
 
+  const ownMark = marks.find((m) => m.own) ?? null
+
   const position = (value: number) => {
     const raw = ((value - lo) / (hi - lo)) * 100
     // Bei «weniger ist besser» läuft die Achse andersherum: links steht das
@@ -64,6 +75,18 @@ export function ReferenceSpectrum({
         {t(direction === 'lower_is_better' ? 'spectrum.lowerBetter' : 'spectrum.higherBetter')}
       </p>
       <div className="relative h-16">
+        {/*
+          Die Wellen: der Wert schlägt ein und läuft aus. Sie liegen HINTER
+          den Marken und tragen keine Information — die Zahl steht daneben.
+          Bei reduzierter Bewegung stehen sie still.
+        */}
+        {ripple && ownMark != null && (
+          <span
+            aria-hidden
+            className="spectrum-ripple pointer-events-none absolute top-[10px] h-9 w-9 -translate-x-1/2"
+            style={{ left: `${Math.max(2, Math.min(98, position(ownMark.value)))}%` }}
+          />
+        )}
         {/*
           Die Achse ist ein Streifenfeld, keine Linie.
           

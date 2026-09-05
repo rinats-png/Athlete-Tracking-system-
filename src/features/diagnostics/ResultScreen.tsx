@@ -268,7 +268,7 @@ function ComparisonBlock({
   return (
     <div className="px-4 py-3">
       {marks.length >= 2 && (
-        <ReferenceSpectrum marks={marks} direction={direction} className="mb-4" />
+        <ReferenceSpectrum marks={marks} direction={direction} className="mb-4" ripple />
       )}
       <dl className="space-y-1 text-[13px]">
         {rows.map((row) => (
