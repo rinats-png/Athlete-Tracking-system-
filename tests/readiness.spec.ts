@@ -129,14 +129,10 @@ test.describe("Bereitschaft im Ablauf", () => {
  * hinzu, und der Fall las danach dessen Wert «1» statt der Daten.
  */
 async function readStore(page: import("@playwright/test").Page) {
-  return page.evaluate(() => {
-    for (const key of Object.keys(localStorage)) {
-      if (!key.startsWith("baseline")) continue;
-      const value = localStorage.getItem(key);
-      if (value?.trimStart().startsWith("{")) return value;
-    }
-    return null;
-  });
+  // Der Schluessel wird benannt, nicht gesucht: es liegen mehrere
+  // JSON-Eintraege unter `baseline.*` (Bestand, Konto), und "der erste, der
+  // mit { beginnt" traf irgendwann den falschen.
+  return page.evaluate(() => localStorage.getItem("baseline.data.v1"));
 }
 
 test.describe("Messbedingungen", () => {
