@@ -86,8 +86,11 @@ test.describe('Diagnostik', () => {
   })
 
   test('ohne Referenz sagt die Detailseite das — und erfindet keine', async ({ page }) => {
+    // Beispiel war der Unterarmstütz; der hat inzwischen einen Bezugswert
+    // aus dem US Army Fitness Test. Der Seilklettergang hat keinen — und
+    // genau darum geht es hier: die Seite darf keinen erfinden.
     await openGuest(page)
-    await page.goto('/tests/plank_hold/details', { waitUntil: 'domcontentloaded' })
+    await page.goto('/tests/rope_climb/details', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText(/keine publizierte Referenz/)).toBeVisible()
   })
 })
