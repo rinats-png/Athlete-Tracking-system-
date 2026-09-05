@@ -18,12 +18,18 @@ import { openDemo } from '../tests/helpers'
  *
  * Läuft nur im Schreibtisch-Profil: ein A4-Satz aus einem Telefonlayout wäre
  * ein anderes Dokument, und `page.pdf()` gibt es nur in Chromium.
+ *
+ * Der Bericht ist mit dem Demobestand VIER Seiten lang, nicht zwei. Er wird
+ * dafür nicht gekürzt: was wegfiele, wäre Testabdeckung, Herkunft der
+ * Referenzwerte und die Formelherkunft — also genau das, was den Bericht von
+ * einem Werbeblatt unterscheidet. Die Länge folgt dem Bestand, nicht einer
+ * vorher gesetzten Seitenzahl.
  */
 
 const OUT = 'mockups/out/report'
 
 test.describe('Report', () => {
-  test('zwei Seiten A4, hell und dunkel gesetzt', async ({ page }, testInfo) => {
+  test('A4 aus dem Druckpfad, hell und dunkel gesetzt', async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== 'desktop', 'A4 wird aus dem Schreibtischlayout gesetzt')
     mkdirSync(OUT, { recursive: true })
 
