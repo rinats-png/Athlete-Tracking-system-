@@ -1,0 +1,429 @@
+const KONZEPTE = [
+ {
+  "name": "A · Umkehrung",
+  "style": "inverted",
+  "why": "Der Grund trägt die Marke, die Karten sind das Papier. Damit ist der Bildschirm nicht eine weisse Seite mit Farbe darauf, sondern eine dunkle Fläche, aus der die Messwerte herausleuchten. Die «helle» Fassung ist hier nur eine hellere Bühne, kein Papierblatt.",
+  "tones": [
+   "#20302C",
+   "#F3EFE6",
+   "#C4703A",
+   "#8FA79B",
+   "#12201D"
+  ],
+  "light": {
+   "plane": "#2C4039",
+   "surface": "#F3EFE6",
+   "surface-raised": "#FBF8F1",
+   "surface-sunken": "#223129",
+   "ink": "#F3EFE6",
+   "ink-secondary": "#CFD9CF",
+   "ink-muted": "#B9C6BB",
+   "accent": "#A45525",
+   "accent-ink": "#FBF6EF",
+   "accent-text": "#E8A268",
+   "card-ink": "#1B2622",
+   "card-secondary": "#3E4E47",
+   "card-muted": "#4C5C54",
+   "card-accent-text": "#8A4318",
+   "glow": "#E8A268",
+   "line": "#4A5F55",
+   "strong": "#7E958A"
+  },
+  "dark": {
+   "plane": "#111B18",
+   "surface": "#E9E5DB",
+   "surface-raised": "#F6F2EA",
+   "surface-sunken": "#0A100E",
+   "ink": "#F3EFE6",
+   "ink-secondary": "#B7C4B9",
+   "ink-muted": "#9FB0A3",
+   "accent": "#A45525",
+   "accent-ink": "#FBF6EF",
+   "accent-text": "#E8A268",
+   "card-ink": "#141D1A",
+   "card-secondary": "#3B4A43",
+   "card-muted": "#4A5A52",
+   "card-accent-text": "#8A4318",
+   "glow": "#E8A268",
+   "line": "#2A3A34",
+   "strong": "#5D7268"
+  },
+  "cardOnPaper": true
+ },
+ {
+  "name": "B · Duoton",
+  "style": "duotone",
+  "why": "Zwei Farben, sonst nichts: jede Fläche, jede Linie, jede Schriftstufe ist eine Mischung aus Tinte und Papier. Kein Grau, kein dritter Ton, kein Akzent. Die Aufmerksamkeit entsteht allein aus Umkehrung — dunkel auf hell oder hell auf dunkel.",
+  "tones": [
+   "#122A3F",
+   "#F2ECDD",
+   "#122A3F",
+   "#7C8B93",
+   "#0B1926"
+  ],
+  "light": {
+   "plane": "#F2ECDD",
+   "surface": "#F8F6EE",
+   "surface-raised": "#FCFBF8",
+   "surface-sunken": "#DEDBCF",
+   "ink": "#122A3F",
+   "ink-secondary": "#3F515F",
+   "ink-muted": "#4C5C68",
+   "accent": "#122A3F",
+   "accent-ink": "#F2ECDD",
+   "accent-text": "#2D4152",
+   "glow": "#8D9596",
+   "line": "#AFB2AE",
+   "strong": "#868F91"
+  },
+  "dark": {
+   "plane": "#0B1926",
+   "surface": "#1B2833",
+   "surface-raised": "#29343E",
+   "surface-sunken": "#060F17",
+   "ink": "#F2ECDD",
+   "ink-secondary": "#B1B1AA",
+   "ink-muted": "#9A9C97",
+   "accent": "#C8C6BC",
+   "accent-ink": "#0B1926",
+   "accent-text": "#BFBEB5",
+   "glow": "#8A8D8B",
+   "line": "#353F47",
+   "strong": "#63696C"
+  }
+ },
+ {
+  "name": "C · Grau & ein Signal",
+  "style": "signal",
+  "why": "Alle Flächen sind vollständig unbunt — kein warmer, kein kalter Stich. Dafür gibt es EINEN grellen Signalton, der auf höchstens zwei Prozent der Fläche vorkommt: der nächste Test, der Messring, ein Alarm. Der Kontrast ist so gross, dass die Farbe eine Aussage wird statt Dekoration.",
+  "tones": [
+   "#EDEDED",
+   "#111111",
+   "#111111",
+   "#FF4A1C",
+   "#9A9A9A"
+  ],
+  "light": {
+   "plane": "#EDEDED",
+   "surface": "#F6F6F6",
+   "surface-raised": "#FCFCFC",
+   "surface-sunken": "#DCDCDC",
+   "ink": "#111111",
+   "ink-secondary": "#3D3D3D",
+   "ink-muted": "#525252",
+   "accent": "#111111",
+   "accent-ink": "#EDEDED",
+   "accent-text": "#333333",
+   "glow": "#FF4A1C",
+   "line": "#C9C9C9",
+   "strong": "#9A9A9A"
+  },
+  "dark": {
+   "plane": "#0F0F0F",
+   "surface": "#1A1A1A",
+   "surface-raised": "#232323",
+   "surface-sunken": "#070707",
+   "ink": "#F2F2F2",
+   "ink-secondary": "#B4B4B4",
+   "ink-muted": "#9E9E9E",
+   "accent": "#F2F2F2",
+   "accent-ink": "#0F0F0F",
+   "accent-text": "#E8E8E8",
+   "glow": "#FF5A2E",
+   "line": "#2E2E2E",
+   "strong": "#565656"
+  },
+  "loudSignal": true
+ },
+ {
+  "name": "D · Farbiger Grund",
+  "style": "colorground",
+  "why": "Nicht weiss, nicht schwarz: die Seite selbst hat eine Farbe, und zwar eine kräftige. Die Karten sind hellere Stufen derselben Farbe, die Schrift ist gebrochenes Weiss. Das ist die Fassung mit dem höchsten Wiedererkennungswert — und die einzige, bei der jemand die App am Farbton erkennt, ohne das Logo zu sehen.",
+  "tones": [
+   "#3B4C2E",
+   "#F2F0E4",
+   "#D8C271",
+   "#8A9A76",
+   "#1E2A17"
+  ],
+  "light": {
+   "plane": "#445735",
+   "surface": "#4B603B",
+   "surface-raised": "#4E6540",
+   "surface-sunken": "#38492B",
+   "ink": "#F4F2E7",
+   "ink-secondary": "#DDE2D1",
+   "ink-muted": "#D8DECC",
+   "accent": "#D8C271",
+   "accent-ink": "#2A3720",
+   "accent-text": "#F0E3AB",
+   "glow": "#F0E2A8",
+   "line": "#677C53",
+   "strong": "#93A57F"
+  },
+  "dark": {
+   "plane": "#1E2A17",
+   "surface": "#27351D",
+   "surface-raised": "#324226",
+   "surface-sunken": "#141C0F",
+   "ink": "#EFEEE1",
+   "ink-secondary": "#BBC5A9",
+   "ink-muted": "#A6B294",
+   "accent": "#D8C271",
+   "accent-ink": "#1E2A17",
+   "accent-text": "#DCC97E",
+   "glow": "#F0E2A8",
+   "line": "#3A4B2C",
+   "strong": "#61754C"
+  },
+  "cardOnPaper": false
+ },
+ {
+  "name": "E · Riso",
+  "style": "riso",
+  "why": "Zwei flache Druckfarben auf Naturpapier, wie im Risodruck: kein Schatten, keine Verläufe, keine Rundungen über zwei Pixel. Flächen liegen nebeneinander statt übereinander. Wirkt gedruckt statt gerendert — und ist die einzige Fassung, die auf einem Schwarzweiss-Ausdruck genauso funktioniert.",
+  "tones": [
+   "#F4F1E8",
+   "#151515",
+   "#1B3FCB",
+   "#F2402B",
+   "#B7B2A3"
+  ],
+  "light": {
+   "plane": "#F4F1E8",
+   "surface": "#F4F1E8",
+   "surface-raised": "#FBF9F3",
+   "surface-sunken": "#E6E1D2",
+   "ink": "#151515",
+   "ink-secondary": "#3A3A3A",
+   "ink-muted": "#4E4E4E",
+   "accent": "#1B3FCB",
+   "accent-ink": "#F4F1E8",
+   "accent-text": "#1B3FCB",
+   "glow": "#F2402B",
+   "line": "#151515",
+   "strong": "#151515"
+  },
+  "dark": {
+   "plane": "#151515",
+   "surface": "#151515",
+   "surface-raised": "#1F1F1F",
+   "surface-sunken": "#0B0B0B",
+   "ink": "#F4F1E8",
+   "ink-secondary": "#C6C2B6",
+   "ink-muted": "#ADA99E",
+   "accent": "#5B77E8",
+   "accent-ink": "#0B0B0B",
+   "accent-text": "#8AA0F2",
+   "glow": "#FF6A56",
+   "line": "#F4F1E8",
+   "strong": "#F4F1E8"
+  },
+  "flat": true
+ },
+ {
+  "name": "F · Duplex",
+  "style": "duplex",
+  "why": "Ein einziger Farbton, über die ganze Skala durchgezogen — wie ein selentonter Abzug. Es gibt keine zweite Farbe, auch nicht in den Diagrammen; Unterschiede entstehen ausschliesslich aus Helligkeit. Am ruhigsten von allen, und die Fassung, die Zahlen am stärksten in den Vordergrund stellt.",
+  "tones": [
+   "#EFEAE4",
+   "#2A211C",
+   "#5E4B3F",
+   "#9B8577",
+   "#171110"
+  ],
+  "light": {
+   "plane": "#EFEAE4",
+   "surface": "#F5F1EC",
+   "surface-raised": "#FAF8F5",
+   "surface-sunken": "#DED5CB",
+   "ink": "#2A211C",
+   "ink-secondary": "#4E4038",
+   "ink-muted": "#5E4E44",
+   "accent": "#5E4B3F",
+   "accent-ink": "#F5F1EC",
+   "accent-text": "#584639",
+   "glow": "#9B8577",
+   "line": "#CFC3B8",
+   "strong": "#A2938A"
+  },
+  "dark": {
+   "plane": "#171110",
+   "surface": "#221A17",
+   "surface-raised": "#2D231E",
+   "surface-sunken": "#0E0A09",
+   "ink": "#F0E9E2",
+   "ink-secondary": "#C0AFA3",
+   "ink-muted": "#AB998C",
+   "accent": "#B39C8C",
+   "accent-ink": "#171110",
+   "accent-text": "#C7B2A2",
+   "glow": "#D8C6B6",
+   "line": "#3A2D26",
+   "strong": "#6B564A"
+  }
+ },
+ {
+  "name": "G · Blockfarben",
+  "style": "blocks",
+  "why": "Die Karten sind farbige Blöcke aus einem kleinen, festen Satz. Farbe schmückt hier nicht, sie ordnet zu: Ausdauer ist immer derselbe Block, Kraft immer ein anderer. Man findet die Zahl über die Farbe, bevor man die Beschriftung liest — das ist ein Vorteil auf einem Bildschirm, den jemand in der Halle mit Blick von oben abliest.",
+  "tones": [
+   "#F0EEE9",
+   "#16181A",
+   "#2F5D50",
+   "#C1601F",
+   "#8C93A0"
+  ],
+  "light": {
+   "plane": "#F0EEE9",
+   "surface": "#F7F6F3",
+   "surface-raised": "#FCFBF9",
+   "surface-sunken": "#DEDBD3",
+   "ink": "#16181A",
+   "ink-secondary": "#3B4045",
+   "ink-muted": "#4C5257",
+   "accent": "#2F5D50",
+   "accent-ink": "#F0EEE9",
+   "accent-text": "#2C574B",
+   "glow": "#C1601F",
+   "line": "#CFCCC5",
+   "strong": "#9A9A94"
+  },
+  "dark": {
+   "plane": "#101214",
+   "surface": "#191C1F",
+   "surface-raised": "#232729",
+   "surface-sunken": "#0A0B0D",
+   "ink": "#EEEFEF",
+   "ink-secondary": "#B2B7BB",
+   "ink-muted": "#9CA2A7",
+   "accent": "#6FA795",
+   "accent-ink": "#101214",
+   "accent-text": "#7FB6A4",
+   "glow": "#E08540",
+   "line": "#2A2E31",
+   "strong": "#535A5F"
+  },
+  "blocks": true
+ },
+ {
+  "name": "H · Haarlinie",
+  "style": "hairline",
+  "why": "Fast farblos und ohne Flächen: keine Karten, keine Schatten, nur Haarlinien und Weissraum. Der Akzent kommt ausschliesslich als 1-Pixel-Linie und als Ziffernfarbe vor. Die stillste Fassung — sie lebt davon, dass die Messwerte gross und die Beschriftungen klein sind.",
+  "tones": [
+   "#F7F6F3",
+   "#1C1C1B",
+   "#7A3B2E",
+   "#B0ADA6",
+   "#121211"
+  ],
+  "light": {
+   "plane": "#F7F6F3",
+   "surface": "#F7F6F3",
+   "surface-raised": "#FFFFFF",
+   "surface-sunken": "#EDEBE6",
+   "ink": "#1C1C1B",
+   "ink-secondary": "#43423F",
+   "ink-muted": "#55534F",
+   "accent": "#7A3B2E",
+   "accent-ink": "#F7F6F3",
+   "accent-text": "#7A3B2E",
+   "glow": "#A85B45",
+   "line": "#DCD9D2",
+   "strong": "#B0ADA6"
+  },
+  "dark": {
+   "plane": "#121211",
+   "surface": "#121211",
+   "surface-raised": "#1A1A18",
+   "surface-sunken": "#0A0A09",
+   "ink": "#F2F1ED",
+   "ink-secondary": "#B7B5AF",
+   "ink-muted": "#A19F99",
+   "accent": "#C2705C",
+   "accent-ink": "#121211",
+   "accent-text": "#CE8271",
+   "glow": "#D98F79",
+   "line": "#2A2A27",
+   "strong": "#4E4D49"
+  },
+  "hairline": true
+ }
+]
+
+const WAVE = '<svg viewBox="0 0 32 32" fill="none"><path d="M5 21h4l4-11 4 16 4-13 2 8h4" stroke="var(--plane)" stroke-width="2.4" stroke-linecap="square"/></svg>'
+
+/**
+ * Der Orb. Er nimmt drei Farben aus dem System: die Linie, die Füllung und
+ * den Ring. Bei «Duplex» gibt es keinen zweiten Ton — dann ist der Ring
+ * dieselbe Tonleiter; bei «Signal» ist der Ring die laute Farbe.
+ */
+function orb(p, style) {
+  const R = 62, C = 76, vals = [0.86, 0.62, 0.74, null, 0.55, 0.7]
+  const stroke = style === 'signal' ? p.ink : p.accent
+  const ring = style === 'duplex' ? p.strong : p.glow
+  const pts = vals.map((v, i) => {
+    const a = (Math.PI * 2 * i) / 6 - Math.PI / 2
+    const r = 22 + (v ?? 0) * (R - 22)
+    return [C + Math.cos(a) * r, C + Math.sin(a) * r, v]
+  })
+  const d = pts.map(([x, y], i) => (i ? `L${x.toFixed(1)} ${y.toFixed(1)}` : `M${x.toFixed(1)} ${y.toFixed(1)}`)).join(' ') + ' Z'
+  const dots = pts.map(([x, y, v]) =>
+    `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.2" fill="${v == null ? 'none' : stroke}" stroke="${stroke}" stroke-width="1.4"/>`).join('')
+  const grid = [1, 0.66, 0.33].map(f =>
+    `<circle cx="${C}" cy="${C}" r="${(22 + f * (R - 22)).toFixed(1)}" fill="none" stroke="${p.line}" stroke-width="1"/>`).join('')
+  return `<svg width="152" height="152" viewBox="0 0 152 152">${grid}
+    <path d="${d}" fill="${stroke}" fill-opacity="${style === 'riso' ? '.9' : '.15'}" stroke="${stroke}" stroke-width="1.8"/>
+    <circle cx="${C}" cy="${C}" r="${R + 8}" fill="none" stroke="${ring}" stroke-width="${style === 'signal' ? 2.5 : 1.2}" stroke-opacity="${style === 'signal' ? 1 : .6}"/>
+    ${dots}</svg>`
+}
+
+function screen(p, k) {
+  return `
+  <div class="app">
+    <div class="bar"><div class="tile">${WAVE}</div><div class="brand">Baseline<small>Leistungsdiagnose</small></div></div>
+    <div class="body">
+      <div class="eyebrow">Deine Leistung</div>
+      <div class="name">Alex</div>
+      <div class="sport">Functional Fitness</div>
+      <div class="cta">Jetzt testen</div>
+      <div class="due"><span>3 Tests fällig</span><span>→</span></div>
+      <div class="orbwrap">${orb(p, k.style)}</div>
+      <div class="cards">
+        <div class="card"><b>Ausdauer</b><i>72</i><u>Perzentil</u></div>
+        <div class="card"><b>Maxkraft</b><i>—</i><u>keine Referenz</u></div>
+        <div class="card"><b>Schnellkraft</b><i>58</i><u>Perzentil</u></div>
+      </div>
+      <div class="next"><b>Nächster Test</b><p>Cooper-Test (12 Minuten) →</p></div>
+      <div class="rows">
+        <div class="row"><div>Cooper-Test<em>14. Juni 2026</em></div><span>3.320 m</span></div>
+        <div class="row"><div>Bankdrücken 1RM<em>14. Juni 2026</em></div><span>122,5 kg</span></div>
+        <div class="row"><div>Illinois Agility<em>13. Juni 2026</em></div><span>0:16.4</span></div>
+      </div>
+      <div class="nav"><b>Übersicht</b><span>Diagnostik</span><span>Analyse</span><span>Verlauf</span><span>Profil</span></div>
+    </div>
+  </div>`
+}
+
+/** Die Blockfarben für System G — drei flache Felder aus dem eigenen Satz. */
+const BLOCKS = {
+  light: { '--block-1': '#2F5D50', '--block-2': '#8C93A0', '--block-3': '#C1601F', '--block-ink': '#F7F6F3' },
+  dark:  { '--block-1': '#2F5D50', '--block-2': '#3D4650', '--block-3': '#A34F16', '--block-ink': '#F2F2F0' },
+}
+
+const vars = (p, k, mode) => {
+  const base = Object.entries(p).map(([key, v]) => `--${key}:${v}`)
+  if (k.blocks) base.push(...Object.entries(BLOCKS[mode]).map(([key, v]) => `${key}:${v}`))
+  return base.join(';')
+}
+
+document.getElementById('out').innerHTML = KONZEPTE.map(k => `
+  <section>
+    <h2>${k.name}</h2>
+    <p class="why">${k.why}</p>
+    <div class="tones">${k.tones.map(t => `<div class="tone" style="background:${t}" title="${t}"></div>`).join('')}</div>
+    <div class="pair">
+      <div><p class="mode">Hell</p><div class="phone ${k.style}" style="${vars(k.light, k, 'light')}">${screen(k.light, k)}</div></div>
+      <div><p class="mode">Dunkel</p><div class="phone ${k.style}" style="${vars(k.dark, k, 'dark')}">${screen(k.dark, k)}</div></div>
+    </div>
+  </section>`).join('')
