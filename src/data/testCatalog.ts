@@ -27,6 +27,7 @@ import {
 } from './testCatalogAdditions'
 import { SPORT_SPECIFIC_TESTS } from './testCatalogSportSpecific'
 import { DOCUMENT_TESTS } from './testCatalogDocument'
+import { EXTENDED_TESTS } from './testCatalogExtended'
 import { vo2maxFromBeepTest, vo2maxFromCooper } from '@/lib/metrics'
 import { deriveRowing } from './testDeriveShared'
 
@@ -427,6 +428,8 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
   // Namentlich im Zielgruppendokument genannte Verfahren; die Herkunft steht
   // je Disziplin in src/data/documentCoverage.ts.
   ...DOCUMENT_TESTS,
+  // Aus der erweiterten Quelltabelle; Aufnahmekriterium steht dort.
+  ...EXTENDED_TESTS,
 ]
 
 /**

@@ -1,4 +1,6 @@
 import type { ScoringDirection, Sex } from '@/types/domain'
+import { P_ANCHORS, type ReferenceBand, type ReferenceEntry } from './referenceModel'
+import { EXTENDED_REFERENCES } from './referencesExtended'
 
 /**
  * Referenzwerte aus publizierten Quellen.
@@ -47,63 +49,15 @@ import type { ScoringDirection, Sex } from '@/types/domain'
  * Die betroffenen Zeilen stehen in `REFERENCE_GAPS` mit Grund.
  */
 
-export type ReferenceCohort = 'population' | 'athlete'
-export type ReferenceMethod = 'mean_sd' | 'percentiles' | 'bands' | 'anchor' | 'median'
-/** A = Normtabelle/Metaanalyse · B = gute Vergleichsstudie · C/D = Einzelstudie oder indirekt. */
-export type ReferenceQuality = 'A' | 'B' | 'C' | 'D'
+export type {
+  ReferenceCohort,
+  ReferenceMethod,
+  ReferenceQuality,
+  ReferenceSource,
+  ReferenceBand,
+  ReferenceEntry,
+} from './referenceModel'
 
-export interface ReferenceSource {
-  /** Kurzbezeichnung der Arbeit, wie sie im Bericht erscheint. */
-  study: string
-  /** Stichprobengrösse, soweit angegeben. */
-  n: number | null
-}
-
-export interface ReferenceBand {
-  /** Obergrenze dieses Bandes; null = nach oben offen. */
-  upTo: number | null
-  label: { de: string; en: string }
-}
-
-export interface ReferenceEntry {
-  testSlug: string
-  metricKey: string
-  cohort: ReferenceCohort
-  /** Wie die Gruppe dem Nutzer genannt wird — der wichtigste Teil des Eintrags. */
-  cohortLabel: { de: string; en: string }
-  /** Nur bei Athletenkohorten: für welche Disziplinen der Eintrag gilt. */
-  disciplineIds?: string[]
-  sex: Exclude<Sex, 'other'> | 'all'
-  ageMin: number
-  ageMax: number
-  method: ReferenceMethod
-  /** `mean_sd` */
-  mean?: number
-  sd?: number
-  /**
-   * `percentiles`: Werte zu 10/25/50/75/90/99, in der Richtung der Kennzahl
-   * selbst notiert. Bei «kleiner ist besser» ist die Reihe also absteigend
-   * (P10 = langsamste Zeit). Die Zuordnung Wert → Perzentil steckt damit
-   * schon in den Stützstellen; sie wird nicht noch einmal gedreht.
-   */
-  values?: number[]
-  /** `bands`: aufsteigend nach `upTo`. */
-  bands?: ReferenceBand[]
-  /** `anchor`: der Bezugswert selbst. */
-  anchor?: number
-  /** `median`: der publizierte Median der Gruppe. */
-  median?: number
-  source: ReferenceSource
-  quality: ReferenceQuality
-  /**
-   * Abweichungen zwischen dem Protokoll der Quelle und dem der App. Steht in
-   * der Oberfläche am Vergleich — ohne diesen Hinweis wäre ein Feldwert
-   * stillschweigend mit einem Laborwert verglichen.
-   */
-  protocolNote?: { de: string; en: string }
-}
-
-const P_ANCHORS = [10, 25, 50, 75, 90, 99] as const
 
 // --- Wiederkehrende Kohortenbezeichnungen -----------------------------------
 
@@ -120,7 +74,7 @@ const LAB_NOTE = {
   en: 'The source measures in a laboratory (spiroergometry). A field estimate such as Cooper or beep test is an approximation and deviates systematically.',
 }
 
-export const REFERENCES: ReferenceEntry[] = [
+const BASE_REFERENCES: ReferenceEntry[] = [
   // ======================= BEVÖLKERUNG =====================================
   {
     testSlug: '*',
@@ -490,12 +444,17 @@ export const REFERENCES: ReferenceEntry[] = [
     },
     disciplineIds: ['judo'],
     sex: 'male',
-    ageMin: 14,
+    ageMin: 21,
     ageMax: 120,
     method: 'bands',
     // Kleinerer Index ist besser; die Quelle nennt die beiden äusseren
     // Stufen. Was dazwischen liegt, benennt sie nicht — deshalb steht dort
     // «mittlerer Bereich» und keine erfundene Zwischenstufe.
+    //
+    // AB 21, NICHT MEHR AB 14: für Kadetten und Junioren liegen jetzt eigene
+    // Tabellen vor (`referencesExtended.ts`). Ein Sechzehnjähriger wurde
+    // vorher an einer Erwachsenenklassifikation gemessen — richtig gerechnet,
+    // falsch verglichen.
     bands: [
       { upTo: 11.73, label: { de: 'Excellent', en: 'Excellent' } },
       { upTo: 14.84, label: { de: 'Mittlerer Bereich', en: 'Middle range' } },
@@ -712,6 +671,13 @@ export const REFERENCES: ReferenceEntry[] = [
  * Sie stehen hier, damit die Lücke benannt ist statt zu verschwinden — und
  * damit man beim nächsten Quellenzuwachs sieht, wo etwas fehlt.
  */
+/**
+ * Alle Referenzwerte: der Grundbestand und die Ergänzungen aus der
+ * erweiterten Quelltabelle. Eine Liste, weil die Auswertung nicht wissen
+ * muss, aus welcher Datei ein Eintrag stammt — die Quelle steht am Eintrag.
+ */
+export const REFERENCES: ReferenceEntry[] = [...BASE_REFERENCES, ...EXTENDED_REFERENCES]
+
 export const REFERENCE_GAPS: { subject: string; reason: string }[] = [
   {
     subject: 'Counter Movement Jump — Bevölkerungsreferenz',
@@ -739,9 +705,39 @@ export const REFERENCE_GAPS: { subject: string; reason: string }[] = [
       'Die Quelle berichtet nur Signifikanzen («National > Liga», «Medaillisten besser»), keine Mittelwerte oder Streuungen. Ohne Zahlen kein Referenzwert.',
   },
   {
-    subject: 'Boxen: Schlagkraft (Peak/Mean Force, RFD)',
+    subject: 'Boxen: Schlagkraft (Peak Force, W/kg)',
     reason:
-      'Werte sind protokollabhängig und nur als Reliabilitätsmasse angegeben. Ausserdem fehlt der App der Test — Schlagkraft braucht eine Kraftmessplatte.',
+      'Für die Schlagkraft liegen inzwischen bezifferte Werte vor (Olympiaboxer Cross 3.427 ± 811 N; Elite über 3.000 N; PowerKube-Leistungen getrennt nach Schlagart und Geschlecht). Sie sind aber ausdrücklich nur innerhalb desselben Messgeräts vergleichbar — dieselbe Quelle nennt für den Jab je nach Gerät 1.212 N und 2.577 N. Ein Vergleich ohne festgehaltenes Messgerät wäre deshalb keine Einordnung, sondern ein Gerätevergleich. Der Test kommt, sobald die App Messgerät und Protokoll als Pflichtangabe am Ergebnis führen kann; bis dahin bleibt die Schlagkraft aussen vor.',
+  },
+  {
+    subject: 'US Army Fitness Test: Kreuzheben (Maximum Deadlift)',
+    reason:
+      'Der Höchstwert von 350 lbs (158,8 kg) gilt für ein DREI-Wiederholungs-Maximum am Hex-Bar. Diese App führt das Einer-Maximum am Langhantel-Kreuzheben. Beide Zahlen heissen «Kreuzheben» und sind nicht dasselbe: ein Dreier-Maximum liegt rund zehn Prozent unter dem Einer-Maximum, und der Hex-Bar hebt das Ergebnis noch einmal. Der Bezugswert kommt, sobald die App das Dreier-Maximum als eigenen Test führt.',
+  },
+  {
+    subject: 'Ringen: SWPT-Index (Indexspalte der Sieben-Stufen-Tabelle)',
+    reason:
+      'Die Wurfspalte derselben Tabelle ist übernommen. Die Indexspalte ist mit «SWPT-Index» überschrieben; ob dieser Index nach derselben Formel gebildet wird wie der Index dieser App (Summe beider Herzfrequenzen geteilt durch die Wurfzahl), geht aus der Quelle nicht hervor. Zwei gleich benannte Indizes aus verschiedenen Protokollen zu vergleichen, wäre schlimmer als kein Vergleich.',
+  },
+  {
+    subject: 'Judogi-Klimmzug (isometrisch und dynamisch)',
+    reason:
+      'Die Quelle nennt Fünf-Stufen-Tabellen, die vorliegende Zusammenfassung gibt davon nur die Excellent-Schwellen wieder (Kadetten 90 s isometrisch / 32 Wiederholungen, Junioren 76 s / 31). Ohne die übrigen Stufen bliebe eine Klassifikation, die nur «Excellent» und «alles andere» kennt — dafür fehlt der App ausserdem der Test.',
+  },
+  {
+    subject: 'Karate KSAT und Taekwondo TAAA-Test',
+    reason:
+      'Beide Tests sind validiert und ihre Kennwerte beziffert (KSAT: Ausbelastungszeit 896 ± 133 s). Die vorliegende Quelle beschreibt die Protokolle aber nicht in der Genauigkeit, die eine wiederholbare Anleitung braucht — und ein Test, dessen Ablauf zwei Menschen verschieden ausführen, misst die Ausführung statt der Leistung. Die VO2max-Werte der jeweiligen Kohorten sind übernommen.',
+  },
+  {
+    subject: 'HYROX-Gesamtzeit und Triathlon-Zielzeiten',
+    reason:
+      'Für beide liegen umfangreiche Verteilungen vor (HYROX aus über 700.000 Ergebnissen, Triathlon nach Distanz und Altersklasse). Es sind aber Wettkampfergebnisse und keine Testwerte: Streckenprofil, Wetter, Feld und Wechselzeiten gehen mit ein. Diese App misst Tests unter festgelegten Bedingungen; eine Rennzeit als Testwert zu führen, hiesse eine Vergleichbarkeit zu behaupten, die es nicht gibt.',
+  },
+  {
+    subject: 'Fechten: Reaktionszeit',
+    reason:
+      'Die Quelle beziffert den Unterschied (Elite reagiert im Mittel 66 ms schneller, d = 0,989) und die Gesamtantwortzeit eines Ausfalls (~753 ms), nennt aber keine Gruppenmittelwerte mit Streuung für die Reaktionszeit selbst. Ausserdem braucht der Test ein Reaktionsmessgerät, das die App nicht führt.',
   },
   {
     subject: 'Taekwondo TAIKT, Fechten FET, HYROX-Segmentzeiten',
@@ -855,7 +851,7 @@ export function compareToReferences(
         sdFromMean = direction === 'lower_is_better' ? -raw : raw
         percentile = Math.min(99.9, Math.max(0.1, normalCdf(sdFromMean) * 100))
       } else if (entry.method === 'percentiles' && entry.values) {
-        percentile = interpolate(entry.values, value)
+        percentile = interpolate(entry.values, value, entry.percentileAnchors)
       } else if (entry.method === 'bands' && entry.bands) {
         band = entry.bands.find((b) => b.upTo == null || value <= b.upTo) ?? null
       } else if (entry.method === 'anchor' && entry.anchor) {
@@ -870,16 +866,31 @@ export function compareToReferences(
   )
 }
 
-/** Lineare Interpolation zwischen Stützstellen, an den Rändern geklemmt. */
-function interpolate(values: number[], value: number): number | null {
-  const anchors = values.map((v, i) => ({ value: v, percentile: P_ANCHORS[i] as number }))
+/**
+ * Lineare Interpolation zwischen Stützstellen.
+ *
+ * AN DEN RÄNDERN GILT ZWEIERLEI, und der Unterschied ist wichtig:
+ *
+ * Die Standardreihe (10 … 99) umspannt die Verteilung. Ein Wert darunter
+ * oder darüber wird geklemmt — «bei oder unter dem 10. Perzentil» ist eine
+ * richtige Aussage, und die Ungenauigkeit ist an den Rändern eingesperrt.
+ *
+ * Eine Reihe mit EIGENEN Stützstellen kann bei P50 anfangen, wie die
+ * ACSM-Tabellen. Dort hiesse Klemmen: wer unter dem Median liegt, bekäme den
+ * Median gemeldet — ein unterdurchschnittlicher Wert würde als Mittelmass
+ * ausgewiesen. Ausserhalb der belegten Reihe gibt es deshalb kein Perzentil,
+ * sondern nichts; andere Referenzen beantworten die Frage dann weiter.
+ */
+function interpolate(values: number[], value: number, points?: number[]): number | null {
+  const scale = points ?? (P_ANCHORS as readonly number[])
+  const anchors = values.map((v, i) => ({ value: v, percentile: scale[i] as number }))
   const sorted = [...anchors].sort((a, b) => a.value - b.value)
   const lower = [...sorted].reverse().find((a) => a.value <= value)
   const upper = sorted.find((a) => a.value >= value)
   if (!lower && !upper) return null
 
-  if (!lower) return upper!.percentile
-  if (!upper) return lower.percentile
+  if (!lower) return points ? null : upper!.percentile
+  if (!upper) return points ? null : lower.percentile
   if (upper.value === lower.value) return Math.max(lower.percentile, upper.percentile)
   const share = (value - lower.value) / (upper.value - lower.value)
   return lower.percentile + share * (upper.percentile - lower.percentile)

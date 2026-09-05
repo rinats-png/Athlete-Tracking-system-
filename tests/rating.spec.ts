@@ -49,9 +49,14 @@ test.describe('Einordnung', () => {
   })
 
   test('Mittelwert der Athletenkohorte ergibt «Gut» an der Grenze zu Durchschnitt', () => {
-    // MMA: VO₂max 63,23 ± 5,50. Der Mittelwert ist P50 — die Untergrenze von «Gut».
+    // MMA: VO₂max 55,5 ± 7,3 (Schick et al. 2010). Der Mittelwert ist P50 —
+    // die Untergrenze von «Gut».
+    //
+    // Vorher stand hier die ältere Elitekohorte mit 63,23 ± 5,50. Sie gibt es
+    // weiterhin, sie steht als zweiter Vergleich daneben; führend ist jetzt
+    // die benannte Studie mit Datenqualität B statt C.
     const rating = rateResult(
-      result('cooper_12min', { distanceM: 3000 }, { vo2max_ml_kg_min: 63.23 }),
+      result('cooper_12min', { distanceM: 3000 }, { vo2max_ml_kg_min: 55.5 }),
       male(['mma']),
     )
     expect(rating.basis).toBe('percentile')
@@ -63,8 +68,9 @@ test.describe('Einordnung', () => {
   })
 
   test('zwei Standardabweichungen über dem Athletenmittel sind Elite, zwei darunter schwach', () => {
-    const high = rateResult(result('cooper_12min', { distanceM: 3500 }, { vo2max_ml_kg_min: 74.5 }), male(['mma']))
-    const low = rateResult(result('cooper_12min', { distanceM: 2000 }, { vo2max_ml_kg_min: 52 }), male(['mma']))
+    // 55,5 ± 7,3 → zwei Standardabweichungen sind 70,1 und 40,9.
+    const high = rateResult(result('cooper_12min', { distanceM: 3500 }, { vo2max_ml_kg_min: 70.1 }), male(['mma']))
+    const low = rateResult(result('cooper_12min', { distanceM: 2000 }, { vo2max_ml_kg_min: 40.9 }), male(['mma']))
     expect(high.level).toBe('elite')
     expect(low.level).toBe('weak')
   })

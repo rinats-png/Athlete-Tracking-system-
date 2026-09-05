@@ -40,7 +40,26 @@ export function lookupPercentile(result: StoredResult): number | null {
     birthDate: null,
     disciplineIds: [],
   })
-  return rating.comparison?.percentile ?? null
+  /*
+   * Der führende Vergleich muss kein Perzentil haben.
+   *
+   * Eine publizierte Klassifikation steht in der Rangfolge oben — beim
+   * Cooper-Test etwa die Originalnormtabelle von 1968, die höchste
+   * Datenqualität, die es für diesen Test gibt. Sie liefert aber eine Stufe
+   * («Überdurchschnittlich») und ausdrücklich kein Perzentil; die Quelle gibt
+   * keines her.
+   *
+   * Vorher wäre hier in genau diesem Fall `null` herausgekommen — der Test
+   * wäre im Bericht, im Export und im Leistungsprofil als «ohne Referenz»
+   * erschienen, OBWOHL er die bestbelegte Referenz der ganzen App hat. Statt
+   * dessen wird die Reihe weiter durchgegangen: der beste Vergleich, der ein
+   * Perzentil hergibt. Die Rangfolge bleibt dieselbe, es wird nur nicht beim
+   * ersten Eintrag aufgehört.
+   */
+  for (const comparison of [rating.comparison, ...rating.alternatives]) {
+    if (comparison?.percentile != null) return comparison.percentile
+  }
+  return null
 }
 
 // --- Testabdeckung je Achse (§17) -------------------------------------------

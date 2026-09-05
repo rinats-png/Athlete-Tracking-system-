@@ -168,8 +168,19 @@ export function rateResult(result: StoredResult, context: RatingContext): Rating
   const sex = result.sex ?? context.sex
   const age = result.ageYears ?? ageFromBirthDate(context.birthDate)
 
-  const comparisons: ReferenceComparison[] = []
-  let metricKey: string | null = null
+  /*
+   * Zu welcher Kennzahl ein Vergleich gehört, wird MITGEFÜHRT.
+   *
+   * Vorher galt die erste Kennzahl, die überhaupt einen Vergleich lieferte,
+   * als die des Ergebnisses. Solange ein Test nur zu einer Kennzahl
+   * Referenzen hatte, fiel das nicht auf. Mit den Cooper-Originalnormen hat
+   * der Cooper-Test nun zwei: eine Bevölkerungsklassifikation auf der
+   * Distanz und eine Athletenkohorte auf der geschätzten VO2max. Die
+   * Distanz kam zuerst — gezeigt wurde aber die Einordnung der VO2max.
+   * Die Oberfläche hätte die Stufe der einen Kennzahl unter dem Namen der
+   * anderen ausgewiesen.
+   */
+  const found: { comparison: ReferenceComparison; key: string }[] = []
   for (const key of metricKeysFor(test)) {
     const value = result.metrics[key] ?? result.values[key] ?? null
     if (value == null) continue
@@ -184,11 +195,15 @@ export function rateResult(result: StoredResult, context: RatingContext): Rating
         disciplineId,
       )) {
         // Derselbe Eintrag kann über zwei Sportarten zweimal passen.
-        if (!comparisons.some((c) => c.entry === comparison.entry)) comparisons.push(comparison)
+        if (!found.some((f) => f.comparison.entry === comparison.entry)) {
+          found.push({ comparison, key })
+        }
       }
     }
-    if (comparisons.length > 0 && metricKey == null) metricKey = key
   }
+  const comparisons = found.map((f) => f.comparison)
+  const keyOf = (comparison: ReferenceComparison): string | null =>
+    found.find((f) => f.comparison === comparison)?.key ?? null
 
   if (comparisons.length === 0) {
     if (result.score == null) return empty('no_value')
@@ -208,9 +223,10 @@ export function rateResult(result: StoredResult, context: RatingContext): Rating
       comparison: ordered[0],
       alternatives: ordered.slice(1),
       gap: ordered[0].entry.method === 'median' ? 'median_only' : 'anchor_only',
-      metricKey,
+      metricKey: keyOf(ordered[0]),
     }
   }
+  const metricKey = keyOf(primary)
 
   const level = primary.percentile != null ? ratingFromPercentile(primary.percentile) : ratingFromBand(primary)
   return {

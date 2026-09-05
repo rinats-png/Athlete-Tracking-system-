@@ -60,6 +60,8 @@ export type EquipmentId =
   | 'wall_ball'
   | 'counter'
   | 'open_space'
+  | 'gi'
+  | 'kettlebell'
 
 export interface EquipmentItem {
   id: EquipmentId
@@ -250,6 +252,16 @@ export const EQUIPMENT: EquipmentItem[] = [
     id: 'open_space',
     name: { de: 'Ebene Fläche', en: 'Level ground' },
     keywords: ['ebener boden', 'freie fläche', 'level ground'],
+  },
+  {
+    id: 'gi',
+    name: { de: 'Judogi oder Gi', en: 'Judogi or gi' },
+    keywords: ['judogi', 'gi', 'kimono', 'anzug', 'jacke'],
+  },
+  {
+    id: 'kettlebell',
+    name: { de: 'Kettlebells', en: 'Kettlebells' },
+    keywords: ['kettlebell', 'kugelhantel'],
   },
 ]
 

@@ -95,7 +95,19 @@ test.describe("Belegbarkeit der Einträge", () => {
       }
       if (e.method === "bands") expect(e.bands!.length).toBeGreaterThan(1);
       if (e.method === "anchor") expect(e.anchor).toBeGreaterThan(0);
-      if (e.method === "percentiles") expect(e.values!.length).toBe(6);
+      if (e.method === "percentiles") {
+        // Sechs Stützstellen, wenn der Eintrag die Standardreihe benutzt —
+        // sonst genau so viele Werte, wie er Perzentile benennt. Eine Reihe
+        // mit vier Werten und sechs Perzentilen wäre still verschoben.
+        expect(e.values!.length).toBe(e.percentileAnchors?.length ?? 6);
+        if (e.percentileAnchors) {
+          expect(e.percentileAnchors.length).toBeGreaterThan(1);
+          const rising = e.percentileAnchors.every(
+            (p, i, all) => i === 0 || p > all[i - 1],
+          );
+          expect(rising, "Perzentile müssen aufsteigen").toBe(true);
+        }
+      }
     }
   });
 

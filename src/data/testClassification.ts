@@ -512,4 +512,38 @@ export const TEST_CLASSIFICATION: Record<string, TestClassification> = {
     dimensionMetrics: { endurance: 'durationSeconds' },
     direction: 'lower_is_better',
   },
+  // --- Aus der erweiterten Quelltabelle ------------------------------------
+  swim_css_test: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'css_pace_s_100m' },
+    direction: 'lower_is_better',
+  },
+  gi_grip_hang: {
+    category: 'strength_endurance',
+    dimension: 'strength_endurance',
+    dimensionMetrics: { strength_endurance: 'durationSeconds' },
+    direction: 'higher_is_better',
+  },
+  hand_release_push_up: {
+    category: 'strength_endurance',
+    dimension: 'strength_endurance',
+    dimensionMetrics: { strength_endurance: 'reps' },
+    direction: 'higher_is_better',
+  },
+  // Der Sprint-Drag-Carry belastet Kraft und Ausdauer im selben Durchgang;
+  // als Achse trägt er die Kraftausdauer — die Zeit steht und fällt mit dem
+  // Schlittenabschnitt, nicht mit den beiden Sprints.
+  sprint_drag_carry: {
+    category: 'conditioning',
+    dimension: 'strength_endurance',
+    dimensionMetrics: { strength_endurance: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
+  run_2_mile: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
 }
