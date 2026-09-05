@@ -25,13 +25,13 @@ export interface CardContent {
 }
 
 /* Die Karte wird gezeichnet, nicht gestylt — deshalb stehen die Farben hier
-   als Werte. Es sind dieselben fünf der Palette: Deep Brown, Olive Shadow,
-   Cream Paper. Die Karte ist immer hell, auch wenn die App dunkel steht: sie
+   als Werte. Es sind die Töne von Mondstein: kühle Tinte, tiefes
+   Silbergrün, silbriger Nebel. Die Karte ist immer hell, auch wenn die App dunkel steht: sie
    wird weitergegeben und oft gedruckt. */
-const INK = '#34251D'
-const MUTED = '#5D6040'
-const PAPER = '#F6ECD3'
-const ACCENT = '#5F6241'
+const INK = '#1B2523'
+const MUTED = '#536360'
+const PAPER = '#F0F4F4'
+const ACCENT = '#5E7470'
 
 export function drawPerformanceCard(canvas: HTMLCanvasElement, content: CardContent): void {
   const ctx = canvas.getContext('2d')

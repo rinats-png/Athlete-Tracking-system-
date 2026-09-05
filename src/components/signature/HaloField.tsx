@@ -34,15 +34,17 @@ import { cn } from '@/lib/utils'
  * Gray über Olive nach Deep Brown, normal gezeichnet. Additiv wäre er auf
  * Cream Paper unsichtbar — man kann Creme nicht heller machen.
  */
+/* Mondlicht: aus der Tinte über Moos ins Silber — kaltes Licht von oben. */
 const RAMP_DARK = [
-  [36, 26, 19], /* Deep Brown, abgedunkelt */
-  [95, 98, 65], /* Olive Shadow */
-  [246, 236, 211], /* Cream Paper */
+  [25, 32, 37], /* Tinte, die Fläche */
+  [117, 133, 106], /* Moos — die Brücke */
+  [237, 241, 242], /* Nebelweiss */
 ] as const
+/* Mondstein: aus dem Silber über das tiefe Silbergrün in die Tinte. */
 const RAMP_LIGHT = [
-  [190, 182, 165], /* Dust Gray, aufgehellt */
-  [143, 148, 99], /* Olive, aufgehellt */
-  [52, 37, 29], /* Deep Brown */
+  [185, 199, 188], /* Silber */
+  [94, 116, 112], /* tiefes Silbergrün */
+  [27, 37, 35], /* kühle Tinte */
 ] as const
 
 /** 3,2 s Einflug — der Wert der Vorlage. */

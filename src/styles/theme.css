@@ -35,70 +35,64 @@
   color-scheme: light;
 
   /* ------------------------------------------------------------------
-     Die Palette. Fünf Farben, jede mit einer Aufgabe:
+     MONDSTEIN — Mondlicht bei Tag.
 
-       Cream Paper   #F6ECD3   der Grund, auf dem alles liegt
-       Deep Brown    #34251D   Schrift und die tragende Fläche
-       Olive Shadow  #5F6241   die zweite Stimme: Linien, Daten, Akzentschrift
-       Dirty Butter  #D9B85F   die Lichtspitze — Glanzkanten, Verläufe, Halo
-       Dust Gray     #9E968A   Linien und alles, was zurücktreten soll
+     Dieselbe kühle Präzision wie im Dunkeln, aber hell: silbriger Nebel
+     wird zur Fläche, die Tinte bleibt kühl und dunkel. Sternkarten, bei
+     Tageslicht gelesen.
 
-     Die Abstufungen sind KEINE neuen Farben: jede Fläche liegt auf einer
-     Achse zwischen zwei dieser fünf Töne oder zwischen einem Ton und Weiss.
+     Die beiden Themes sind ein umgekehrtes Paar mit EINER Akzentlogik:
+     im Mondlicht ist Silber (#B9C7BC) das Hellste und trägt den Akzent;
+     im Mondstein ist dasselbe Silber auf hellem Grund zu blass — dort
+     trägt sein tiefes Gegenstück (#5E7470), und Silber bleibt als zweite
+     Verlaufsstufe und als Glühen. Moos (#75856A) ist die Brücke.
 
-     Jeder Wert unten ist gegen die vier Flächen gerechnet (WCAG 2.1 AA:
-     4,5:1 für Fliesstext, 3:1 für Bedienelemente und Diagrammlinien) und
-     wird bei jedem Testlauf nachgemessen.
+     Ergänzt gegenüber der Vorlage, jeweils nachgerechnet gegen die vier
+     Flächen (WCAG 2.1 AA, 4,5:1 Text, 3:1 Bedienelemente): die stille
+     Schriftstufe der Vorlage (#72817D) erreicht auf der tiefsten Fläche
+     nur 3,3:1 und steht deshalb dunkler; die Akzentschrift ebenso.
      ------------------------------------------------------------------ */
 
-  /* Flächen — Cream Paper ist der Grund; nach oben mit Weiss aufgehellt,
-     nach unten mit Dust Gray abgetönt. */
-  --plane:            #F6ECD3;  /* Cream Paper */
-  --plane-glow-1:     #F1E6C9;
-  --plane-glow-2:     #EDE1C1;
-  --surface:          #FAF5E7;
-  --surface-raised:   #FDFAF4;
-  --surface-sunken:   #E3D9C3;
+  /* Flächen. Der Grund ist silbriger Nebel, nie reines Weiss — reines
+     Weiss ist den Karten vorbehalten, damit sie sich vom Nebel abheben. */
+  --plane:            #F0F4F4;
+  --plane-glow-1:     #E8EDEF;
+  --plane-glow-2:     #DFE7E9;
+  --surface:          #FFFFFF;
+  --surface-raised:   #FFFFFF;
+  --surface-sunken:   #DFE7E9;
 
-  /* Schrift. Gemessen wird gegen die TIEFSTE Fläche (surface-sunken) —
-     dort ist der Abstand am kleinsten, und dort muss er reichen.
-       Deep Brown    12,4:1
-       Olive dunkel   5,4:1
-     Olive Shadow selbst erreicht auf der tiefsten Fläche nur 4,2:1 und
-     steht deshalb als abgedunkelte Stufe. */
-  --ink:              #34251D;  /* Deep Brown */
-  --ink-secondary:    #545639;  /* Olive Shadow, abgedunkelt */
-  --ink-muted:        #5D6040;
+  /* Schrift: kühle Tinte. Gegen die tiefste Fläche (#DFE7E9):
+       Tinte        13,1:1
+       zweite Stufe  6,4:1
+       stille Stufe  5,0:1 */
+  --ink:              #1B2523;
+  --ink-secondary:    #4A5A56;
+  --ink-muted:        #536360;
 
-  /* Linien. Dust Gray trägt keine Bedeutung — genau dafür ist er da. */
-  --line:             #CDC3AE;
-  --line-strong:      #9E968A;  /* Dust Gray */
-  --grid:             #DCD2BC;
+  /* Linien: silbrig, ohne Bedeutung. */
+  --line:             #CFD6D5;
+  --line-strong:      #A9B5B2;
+  --grid:             #DCE3E3;
 
-  /* Marke. Deep Brown ist die Fläche («dark anchor for premium depth»),
-     Cream Paper die Schrift darauf (12,4:1). Olive trägt den Akzent als
-     SCHRIFT auf hellem Grund, Dirty Butter die Lichtspitze — als
-     Schriftfarbe wäre Butter auf Creme unlesbar (1,8:1), als Glanzkante in
-     einem Verlauf ist er genau richtig. */
-  --accent-glow:      #D9B85F;  /* Dirty Butter */
-  --accent:           #34251D;  /* Deep Brown */
-  --accent-ink:       #F6ECD3;  /* Cream Paper */
-  --accent-text:      #56583A;  /* Olive Shadow, abgedunkelt */
-  --accent-quiet:     rgba(95, 98, 65, 0.12);
-  --focus:            #5F6241;
+  /* Marke. Der tiefe Silbergrün-Ton trägt Fläche und Schrift, das helle
+     Silber ist Verlaufsende und Glühen. */
+  --accent-glow:      #A9BDB5;  /* accent-2 der Vorlage */
+  --accent:           #5E7470;
+  --accent-ink:       #F4F7F6;
+  --accent-text:      #4E625E;
+  --accent-quiet:     rgba(94, 116, 112, 0.12);
+  --focus:            #5E7470;
+  --brand-bridge:     #75856A;  /* Moos — in beiden Themes gleich */
 
-  /* Chart-Serien. Serie 1 ist die Marke; Serie 2 und 3 behalten eigene
-     Farbtöne, weil zwei Datenreihen unterscheidbar bleiben müssen — drei
-     Olivstufen wären bei Sonnenlicht eine Linie, und bei Rot-Grün-Schwäche
-     erst recht. Alle drei liegen über 3:1 gegen jede Fläche, und ihr
-     wahrnehmbarer Abstand (ΔE) liegt paarweise über 25. */
-  --series-1:         #5A5D3E;  /* Olive Shadow */
+  /* Chart-Serien: Serie 1 ist die Marke, 2 und 3 bleiben unterscheidbar
+     (ΔE paarweise über 25, alle über 3:1 gegen jede Fläche). */
+  --series-1:         #5E7470;
   --series-2:         #2A6FB0;
-  --series-3:         #A33B12;
-  --reference:        #5D6040;
+  --series-3:         #B4531F;
+  --reference:        #536360;
 
-  /* Status. Bewusst ausserhalb der Palette: eine Statusfarbe darf nie wie
-     die Marke oder wie eine Datenreihe aussehen. */
+  /* Status. Ausserhalb der Palette, damit nichts wie die Marke aussieht. */
   --good:             #0A6E0A;
   --warning:          #7F5300;
   --critical:         #B3261E;
@@ -110,27 +104,33 @@
   --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 
-  /* Ton der Körperanzeige. In beiden Themes gleich dunkel: die leuchtende
-     Figur funktioniert nur auf dunklem Grund, und der Wert entspricht dem
-     Eckton des Bildes, damit dessen weiche Kante nahtlos ausläuft. */
-  --display:        #120C08;
-  --display-raised: #1F1610;
+  /* Ton der Körperanzeige: in beiden Themes dunkel. */
+  --display:        #0D1013;
+  --display-raised: #192025;
 
-  /* Milchglas. Eigene Rollen, weil eine Glasfläche nicht die Flächenfarbe
-     ist, sondern eine Aufhellung über dem, was dahinter liegt. */
-  --glass:        rgba(255, 253, 246, 0.58);
-  --glass-strong: rgba(255, 253, 246, 0.74);
+  /* Milchglas über dem Nebel. */
+  --glass:        rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.74);
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-edge:   rgba(255, 255, 255, 0.9);
 
-  /* Die Wolke hinter dem Halo. Hell ein warmer Schatten, dunkel ein
-     Schimmer — beide Male derselbe Verlauf der Vorlage. */
-  /* Der Schein um die grossen Versalzeilen. Hell ist er ein Schatten, der
-     die Zeile vom Staub abhebt; dunkel ein Leuchten. */
-  --headline-glow: rgba(52, 37, 29, 0.35);
-  --headline-glow-strong: rgba(52, 37, 29, 0.45);
-  --halo-plume-1: rgba(52, 37, 29, 0.10);
-  --halo-plume-2: rgba(95, 98, 65, 0.05);
+  /* Das Glühen der Karten: auf dem Nebel stärker als auf der Tinte —
+     dort ersetzt es, was auf dunklem Grund der Schlagschatten tut. */
+  --glow:         rgba(185, 199, 188, 0.50);
+
+  /* Der Schein um die grossen Versalzeilen und die Wolke hinter dem Halo. */
+  --headline-glow: rgba(27, 37, 35, 0.30);
+  --headline-glow-strong: rgba(27, 37, 35, 0.40);
+  --halo-plume-1: rgba(94, 116, 112, 0.14);
+  --halo-plume-2: rgba(169, 189, 181, 0.10);
+
+  /* Die Atmosphäre: silbriges Aufblühen oben, zwei kühle Nebelbecken
+     unten — der Grund ist nie eine flache Farbe. */
+  --atmo:
+    radial-gradient(65% 50% at 50% 12%, rgba(255, 255, 255, 0.85), transparent 62%),
+    radial-gradient(50% 40% at 20% 85%, rgba(160, 175, 180, 0.35), transparent 60%),
+    radial-gradient(45% 35% at 85% 75%, rgba(185, 199, 188, 0.40), transparent 58%),
+    linear-gradient(180deg, #E8EDEF, #DFE7E9 55%, #CFDADD);
 
   /* Höhe der Navigationsleiste. Eine fixierte Leiste nimmt keinen Platz im
      Fluss ein — die App-Hülle reserviert ihn über genau diesen Wert, sonst
@@ -141,9 +141,10 @@
      scharfe Ecke liegt optisch auf dem Grund auf. Die Skala ist klein
      gehalten: drei Werte, damit Grössenunterschiede zwischen Karten aus
      ihrer Fläche kommen und nicht aus verschiedenen Rundungen. */
-  --radius:       22px;  /* Karten, Kategorien  (r-lg der Spezifikation) */
-  --radius-md:    16px;  /* Wertkarten, Chips, Eingabefelder (r-md) */
-  --radius-pill: 999px;  /* Navigation, Orb, Filterchips */
+  --radius:       16px;  /* Karten, Bildschirmrahmen (r-lg) */
+  --radius-md:    10px;  /* innere Felder, Wertkarten (r-md) */
+  --radius-sm:     4px;  /* Chips, kleine Felder (r-sm) */
+  --radius-pill: 999px;  /* Navigation, Orb, Knöpfe */
 
   /* Tiefe. Zwei Schatten je Stufe: ein enger, dunkler für die Kante, ein
      weiter, weicher für den Abstand zum Grund. Ein einzelner Schatten sieht
@@ -152,13 +153,17 @@
      Die Werte sind bewusst zurückhaltend — sichtbar, aber nicht dramatisch.
      Was hier Aufmerksamkeit erzeugt, ist der UNTERSCHIED zwischen den
      Stufen, nicht ihre absolute Stärke. */
-  --shadow-hue: 52 37 29;  /* Deep Brown: der Schatten trägt die Markenfarbe */
+  /* Der Schatten trägt die Tinte, und jede Stufe bekommt dazu das
+     Silberglühen der Vorlage: Schlagschatten UND Halo, in beiden Themes. */
+  --shadow-hue: 27 37 35;
   --elev-1: 0 8px 24px rgb(var(--shadow-hue) / 0.10),
-            0 1px 3px  rgb(var(--shadow-hue) / 0.08);
+            0 1px 3px  rgb(var(--shadow-hue) / 0.08),
+            0 0 40px -16px var(--glow);
   --elev-2: 0 18px 44px rgb(var(--shadow-hue) / 0.16),
-            0 2px 6px   rgb(var(--shadow-hue) / 0.08);
-  --elev-3: 0 26px 60px rgb(var(--shadow-hue) / 0.22),
-            0 3px 8px   rgb(var(--shadow-hue) / 0.10);
+            0 2px 6px   rgb(var(--shadow-hue) / 0.08),
+            0 0 80px -20px var(--glow);
+  --elev-3: 0 50px 100px -20px rgb(0 0 0 / 0.55),
+            0 0 80px -20px var(--glow);
 
   /* Bewegung. Kurz, weich, vorhersehbar: eine Animation ist hier ein Hinweis
      darauf, WOHIN etwas gegangen ist, keine Vorstellung.
@@ -179,72 +184,80 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    /* Deep Brown trägt den dunklen Modus. Der Grund ist eine abgedunkelte
-       Stufe davon, die Flächen darüber führen zurück auf Deep Brown selbst —
-       so bleibt auch im Dunkeln die Palette der fünf Farben. */
-    --plane:          #1A120D;
-    --plane-glow-1:   #241A13;
-    --plane-glow-2:   #20170F;
-    --surface:        #2A1E16;
-    --surface-raised: #34251D;  /* Deep Brown */
-    --surface-sunken: #120C08;
+    /* ----------------------------------------------------------------
+       MONDLICHT — Mitternacht über dem Steingarten.
 
-    /* Geprüft gegen die höchste Fläche #34251D:
-         Cream Paper   12,4:1
-         Dust hell      7,0:1
-       Dust Gray selbst käme auf 5,3:1 und wäre tragbar, wirkt aber neben
-       Cream Paper stumpf — deshalb beide Stufen leicht aufgehellt. */
-    --ink:            #F6ECD3;  /* Cream Paper */
-    --ink-secondary:  #B4AC9C;
-    --ink-muted:      #A29A8E;
+       Kühle, blaugetönte Tinte als Grund, nie reines Schwarz; silbriger
+       Nebel wird zur Lichtquelle und trägt fast alles — Werte, Diagramme,
+       Akzente. Moos zieht sich in den Schatten zurück. Ruhig, präzise,
+       fast klinisch: Daten wie Sternkarten.
+       ---------------------------------------------------------------- */
+    --plane:          #12161A;
+    --plane-glow-1:   #141A1E;
+    --plane-glow-2:   #0D1013;
+    --surface:        #192025;
+    --surface-raised: #1F282E;
+    --surface-sunken: #0D1013;
 
-    --line:           #4A3A2C;
-    --line-strong:    #6E5C48;
-    --grid:           #2E2118;
+    /* Gegen die höchste Fläche (#1F282E):
+         Nebelweiss   13,4:1
+         zweite Stufe  8,0:1
+         stille Stufe  4,9:1 */
+    --ink:            #EDF1F2;
+    --ink-secondary:  #B8C3C6;
+    --ink-muted:      #8B989C;
 
-    /* Im Dunkeln kann Deep Brown die Fläche nicht tragen — er IST der
-       Grund. Die Akzentfläche ist deshalb ein aufgehelltes Olive mit Deep
-       Brown als Schrift darauf (5,1:1). Dirty Butter bleibt die Lichtspitze
-       und führt als Serie 1 die Diagramme.
+    --line:           #2B3438;
+    --line-strong:    #3D474C;
+    --grid:           #1C2327;
 
-       Warum nicht Butter als Akzentfläche: die Warnfarbe ist ein Bernstein.
-       Auf Butter wäre sie nicht mehr von der Marke zu unterscheiden — und
-       eine Statusfarbe, die aussieht wie die Marke, sagt nichts mehr aus. */
-    --accent-glow:    #D9B85F;  /* Dirty Butter */
-    --accent:         #8F9463;
-    --accent-ink:     #34251D;  /* Deep Brown */
-    --accent-text:    #A9AF7C;
-    --accent-quiet:   rgba(143, 148, 99, 0.16);
-    --focus:          #A9AF7C;
+    /* Silber trägt den Akzent: es glüht gegen den dunklen Grund. */
+    --accent-glow:    #B9C7BC;
+    --accent:         #B9C7BC;
+    --accent-ink:     #12161A;
+    --accent-text:    #B9C7BC;
+    --accent-quiet:   rgba(185, 199, 188, 0.14);
+    --focus:          #B9C7BC;
+    --brand-bridge:   #75856A;
 
-    --series-1:       #D9B85F;  /* Dirty Butter */
+    --series-1:       #B9C7BC;
     --series-2:       #5FA8E8;
-    --series-3:       #E08A8A;
-    --reference:      #B0A799;
+    --series-3:       #E08A4E;
+    --reference:      #8B989C;
 
+    /* Die Warnfarbe steht dunkler als üblich: auf Silber als Akzentfläche
+       wäre ein helles Bernstein nicht mehr von der Marke zu trennen. */
     --good:           #4FBF4F;
-    --warning:        #E9B23C;
-    --critical:       #F58B82;
+    --warning:        #D9A23A;
+    --critical:       #F07A72;
     --delta-up:       #5CC85C;
     --delta-down:     #F08A82;
 
-    --display:        #120C08;
-    --display-raised: #1F1610;
+    --display:        #0D1013;
+    --display-raised: #192025;
 
-    --glass:        rgba(246, 236, 211, 0.07);
-    --glass-strong: rgba(246, 236, 211, 0.12);
-    --glass-border: rgba(246, 236, 211, 0.14);
-    --glass-edge:   rgba(246, 236, 211, 0.28);
+    --glass:        rgba(237, 241, 242, 0.07);
+    --glass-strong: rgba(237, 241, 242, 0.12);
+    --glass-border: rgba(237, 241, 242, 0.14);
+    --glass-edge:   rgba(237, 241, 242, 0.28);
 
-  --headline-glow: rgba(246, 236, 211, 0.20);
-  --headline-glow-strong: rgba(246, 236, 211, 0.30);
-  --halo-plume-1: rgba(217, 184, 95, 0.14);
-  --halo-plume-2: rgba(95, 98, 65, 0.06);
+    --glow:         rgba(185, 199, 188, 0.32);
 
-    --headline-glow: rgba(246, 236, 211, 0.20);
-    --headline-glow-strong: rgba(246, 236, 211, 0.30);
-    --halo-plume-1: rgba(217, 184, 95, 0.14);
-    --halo-plume-2: rgba(95, 98, 65, 0.06);
+    --headline-glow: rgba(237, 241, 242, 0.20);
+    --headline-glow-strong: rgba(237, 241, 242, 0.30);
+    --halo-plume-1: rgba(185, 199, 188, 0.18);
+    --halo-plume-2: rgba(60, 70, 75, 0.10);
+
+    /* Mondlichtbecken von oben, kühle Tiefe von unten. */
+    --atmo:
+      radial-gradient(60% 45% at 50% 8%, rgba(185, 199, 188, 0.22), transparent 60%),
+      radial-gradient(70% 50% at 50% 115%, rgba(60, 70, 75, 0.25), transparent 60%),
+      linear-gradient(180deg, #141A1E, #12161A 55%, #0D1013);
+
+    --shadow-hue: 0 0 0;
+    --elev-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3), 0 0 40px -16px var(--glow);
+    --elev-2: 0 1px 2px rgb(0 0 0 / 0.45), 0 6px 18px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);
+    --elev-3: 0 50px 100px -20px rgb(0 0 0 / 0.55), 0 0 80px -20px var(--glow);
   }
 }
 
@@ -252,67 +265,80 @@
 :root[data-theme="dark"] {
     color-scheme: dark;
 
-  /* Deep Brown trägt den dunklen Modus. Der Grund ist eine abgedunkelte
-     Stufe davon, die Flächen darüber führen zurück auf Deep Brown selbst —
-     so bleibt auch im Dunkeln die Palette der fünf Farben. */
-  --plane:          #1A120D;
-  --plane-glow-1:   #241A13;
-  --plane-glow-2:   #20170F;
-  --surface:        #2A1E16;
-  --surface-raised: #34251D;  /* Deep Brown */
-  --surface-sunken: #120C08;
+  /* ----------------------------------------------------------------
+     MONDLICHT — Mitternacht über dem Steingarten.
 
-  /* Geprüft gegen die höchste Fläche #34251D:
-       Cream Paper   12,4:1
-       Dust hell      7,0:1
-     Dust Gray selbst käme auf 5,3:1 und wäre tragbar, wirkt aber neben
-     Cream Paper stumpf — deshalb beide Stufen leicht aufgehellt. */
-  --ink:            #F6ECD3;  /* Cream Paper */
-  --ink-secondary:  #B4AC9C;
-  --ink-muted:      #A29A8E;
+     Kühle, blaugetönte Tinte als Grund, nie reines Schwarz; silbriger
+     Nebel wird zur Lichtquelle und trägt fast alles — Werte, Diagramme,
+     Akzente. Moos zieht sich in den Schatten zurück. Ruhig, präzise,
+     fast klinisch: Daten wie Sternkarten.
+     ---------------------------------------------------------------- */
+  --plane:          #12161A;
+  --plane-glow-1:   #141A1E;
+  --plane-glow-2:   #0D1013;
+  --surface:        #192025;
+  --surface-raised: #1F282E;
+  --surface-sunken: #0D1013;
 
-  --line:           #4A3A2C;
-  --line-strong:    #6E5C48;
-  --grid:           #2E2118;
+  /* Gegen die höchste Fläche (#1F282E):
+       Nebelweiss   13,4:1
+       zweite Stufe  8,0:1
+       stille Stufe  4,9:1 */
+  --ink:            #EDF1F2;
+  --ink-secondary:  #B8C3C6;
+  --ink-muted:      #8B989C;
 
-  /* Im Dunkeln kann Deep Brown die Fläche nicht tragen — er IST der
-     Grund. Die Akzentfläche ist deshalb ein aufgehelltes Olive mit Deep
-     Brown als Schrift darauf (5,1:1). Dirty Butter bleibt die Lichtspitze
-     und führt als Serie 1 die Diagramme.
+  --line:           #2B3438;
+  --line-strong:    #3D474C;
+  --grid:           #1C2327;
 
-     Warum nicht Butter als Akzentfläche: die Warnfarbe ist ein Bernstein.
-     Auf Butter wäre sie nicht mehr von der Marke zu unterscheiden — und
-     eine Statusfarbe, die aussieht wie die Marke, sagt nichts mehr aus. */
-  --accent-glow:    #D9B85F;  /* Dirty Butter */
-  --accent:         #8F9463;
-  --accent-ink:     #34251D;  /* Deep Brown */
-  --accent-text:    #A9AF7C;
-  --accent-quiet:   rgba(143, 148, 99, 0.16);
-  --focus:          #A9AF7C;
+  /* Silber trägt den Akzent: es glüht gegen den dunklen Grund. */
+  --accent-glow:    #B9C7BC;
+  --accent:         #B9C7BC;
+  --accent-ink:     #12161A;
+  --accent-text:    #B9C7BC;
+  --accent-quiet:   rgba(185, 199, 188, 0.14);
+  --focus:          #B9C7BC;
+  --brand-bridge:   #75856A;
 
-  --series-1:       #D9B85F;  /* Dirty Butter */
+  --series-1:       #B9C7BC;
   --series-2:       #5FA8E8;
-  --series-3:       #E08A8A;
-  --reference:      #B0A799;
+  --series-3:       #E08A4E;
+  --reference:      #8B989C;
 
+  /* Die Warnfarbe steht dunkler als üblich: auf Silber als Akzentfläche
+     wäre ein helles Bernstein nicht mehr von der Marke zu trennen. */
   --good:           #4FBF4F;
-  --warning:        #E9B23C;
-  --critical:       #F58B82;
+  --warning:        #D9A23A;
+  --critical:       #F07A72;
   --delta-up:       #5CC85C;
   --delta-down:     #F08A82;
 
-  --display:        #120C08;
-  --display-raised: #1F1610;
+  --display:        #0D1013;
+  --display-raised: #192025;
 
-  --glass:        rgba(246, 236, 211, 0.07);
-  --glass-strong: rgba(246, 236, 211, 0.12);
-  --glass-border: rgba(246, 236, 211, 0.14);
-  --glass-edge:   rgba(246, 236, 211, 0.28);
+  --glass:        rgba(237, 241, 242, 0.07);
+  --glass-strong: rgba(237, 241, 242, 0.12);
+  --glass-border: rgba(237, 241, 242, 0.14);
+  --glass-edge:   rgba(237, 241, 242, 0.28);
 
-  --shadow-hue: 0 0 0;
-  --elev-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3);
-  --elev-2: 0 1px 2px rgb(0 0 0 / 0.45), 0 6px 18px rgb(0 0 0 / 0.42);
-  --elev-3: 0 2px 4px rgb(0 0 0 / 0.5), 0 14px 34px rgb(0 0 0 / 0.55);
+  --glow:         rgba(185, 199, 188, 0.32);
+
+  --headline-glow: rgba(237, 241, 242, 0.20);
+  --headline-glow-strong: rgba(237, 241, 242, 0.30);
+  --halo-plume-1: rgba(185, 199, 188, 0.18);
+  --halo-plume-2: rgba(60, 70, 75, 0.10);
+
+  /* Mondlichtbecken von oben, kühle Tiefe von unten. */
+  --atmo:
+    radial-gradient(60% 45% at 50% 8%, rgba(185, 199, 188, 0.22), transparent 60%),
+    radial-gradient(70% 50% at 50% 115%, rgba(60, 70, 75, 0.25), transparent 60%),
+    linear-gradient(180deg, #141A1E, #12161A 55%, #0D1013);
+
+    --shadow-hue: 0 0 0;
+  --elev-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3), 0 0 40px -16px var(--glow);
+  --elev-2: 0 1px 2px rgb(0 0 0 / 0.45), 0 6px 18px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);
+  --elev-3: 0 50px 100px -20px rgb(0 0 0 / 0.55), 0 0 80px -20px var(--glow);
 }
 
 /* Tailwind-Utilities aus denselben Rollen ableiten, damit es genau eine
@@ -376,19 +402,11 @@ body {
   font-size: 15px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  /* Feines Messraster im Hintergrund — Werkstatt-Millimeterpapier, kein Deko-Verlauf. */
-  /* Das Messraster tritt zurück: unter schwebenden Karten konkurriert ein
-     kräftiges Raster mit den Schatten, und beide verlieren. Dazu ein sehr
-     flacher Lichtschein von oben, der den Karten eine Richtung gibt —
-     ohne ihn sähen die Schatten aus wie aufgemalt. */
-  /* Zwei weiche Ellipsen aus der Palette geben dem Grund eine Richtung —
-     ohne sie sähen die Schatten der Karten aus wie aufgemalt. Das frühere
-     Messraster ist entfallen: unter schwebenden Karten konkurriert es mit
-     den Schatten, und beide verlieren. */
-  background-image:
-    radial-gradient(ellipse at 20% 10%, var(--plane-glow-1) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 85%, var(--plane-glow-2) 0%, transparent 50%);
+  /* Die Atmosphäre: kein flacher Grund, sondern eine geschichtete
+     Lichtsituation — fest hinter allem. */
+  background-image: var(--atmo);
   background-attachment: fixed;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 :focus-visible {

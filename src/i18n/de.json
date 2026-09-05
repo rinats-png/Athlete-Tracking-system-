@@ -38,8 +38,8 @@
   },
   "theme": {
     "label": "Darstellung",
-    "light": "Hell",
-    "dark": "Dunkel",
+    "light": "Mondstein (hell)",
+    "dark": "Mondlicht (dunkel)",
     "system": "System"
   },
   "language": {

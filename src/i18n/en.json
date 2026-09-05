@@ -38,8 +38,8 @@
   },
   "theme": {
     "label": "Appearance",
-    "light": "Light",
-    "dark": "Dark",
+    "light": "Mondstein (light)",
+    "dark": "Mondlicht (dark)",
     "system": "System"
   },
   "language": {

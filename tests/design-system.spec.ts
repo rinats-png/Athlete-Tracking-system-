@@ -17,16 +17,16 @@ const theme = () => readFileSync(new URL('../src/styles/theme.css', import.meta.
 test.describe('Farbwelt bleibt', () => {
   test('die fünf Töne der Palette stehen unverändert im System', () => {
     const css = theme()
-    // Cream Paper, Deep Brown, Olive Shadow, Dirty Butter, Dust Gray.
-    for (const hex of ['#F6ECD3', '#34251D', '#5F6241', '#D9B85F', '#9E968A']) {
+    // Mondlicht: Tinte, Silber, Moos, Nebelweiss — Mondstein: Nebel, tiefes Silbergrün, kühle Tinte.
+    for (const hex of ['#12161A', '#B9C7BC', '#75856A', '#EDF1F2', '#F0F4F4', '#5E7470', '#1B2523']) {
       expect(css, `${hex} fehlt`).toContain(hex)
     }
   })
 
   test('der Schatten trägt die Markenfarbe, keine neue', () => {
-    // Deep Brown als RGB: der Schatten ist eine Transparenz der Palette,
-    // keine erfundene Grauabstufung.
-    expect(theme()).toContain('--shadow-hue: 52 37 29')
+    // Die kühle Tinte als RGB: der Schatten ist eine Transparenz der
+    // Palette, keine erfundene Grauabstufung.
+    expect(theme()).toContain('--shadow-hue: 27 37 35')
   })
 })
 
