@@ -28,6 +28,7 @@ function athlete(id: string, name: string, values: number[]): StoredAthlete {
     })) as StoredAthlete['results'],
     archived: false,
     notes: '',
+    focuses: [],
     audit: [],
     createdAt: '2026-01-01T00:00:00.000Z',
   }

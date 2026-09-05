@@ -25,9 +25,11 @@ import {
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
+  type StoredFocus,
   type StoredResult,
 } from './localStore'
 import { AUDIT_LIMIT, emptyAthlete } from './schema'
+import { FOCUS_HARD_LIMIT } from '@/domain/trainingFocus'
 import type {
   AttemptSelection,
   LoadReport,
@@ -101,6 +103,17 @@ interface AppDataValue {
   /** Notizen des Trainers zum aktiven Athleten (§74). */
   athleteNotes: string
   saveAthleteNotes: (notes: string) => void
+  /**
+   * Trainingsschwerpunkte des aktiven Athleten (§74).
+   *
+   * Der Text kommt vom Trainer; die App wertet ihn nie aus und erzeugt ihn
+   * nie. Angelegt und geschlossen wird ausdrücklich von Hand — ein
+   * Schwerpunkt, den die App selbst setzt, wäre eine Trainingsempfehlung.
+   */
+  focuses: StoredFocus[]
+  saveFocus: (focus: StoredFocus) => void
+  closeFocus: (id: string, closed: boolean) => void
+  deleteFocus: (id: string) => void
   /** Änderungsnachweis des aktiven Athleten, neueste zuerst (§57). */
   audit: ValidatedAudit[]
   saveBiometric: (entry: Omit<StoredBiometric, 'id' | 'createdAt'>) => void
@@ -345,6 +358,48 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
     [commitAthlete, data],
   )
 
+
+  /**
+   * Schwerpunkte schreiben.
+   *
+   * Eigener Weg statt `commitAthlete`, weil Schwerpunkte nicht Teil der
+   * Athletensicht sind: die Auswertungen rechnen mit Messwerten, und ein
+   * Trainersatz darf in keine Rechnung geraten. Der Nachweis hält fest, DASS
+   * etwas geändert wurde, nicht was drinstand (§57).
+   */
+  const commitFocuses = useCallback(
+    (
+      update: (current: StoredFocus[]) => StoredFocus[],
+      event: { action: ValidatedAudit['action']; id: string },
+    ) => {
+      const source = storeRef.current
+      const activeId = source.athletes.some((a) => a.id === source.activeAthleteId)
+        ? source.activeAthleteId
+        : source.athletes[0].id
+      const entry: ValidatedAudit = {
+        id: newId(),
+        at: new Date().toISOString(),
+        action: event.action,
+        entity: 'focus',
+        entityId: event.id,
+        label: '',
+      }
+      commitStore({
+        ...source,
+        athletes: source.athletes.map((athlete) =>
+          athlete.id === activeId
+            ? {
+                ...athlete,
+                focuses: update(athlete.focuses).slice(0, FOCUS_HARD_LIMIT),
+                audit: [entry, ...athlete.audit].slice(0, AUDIT_LIMIT),
+              }
+            : athlete,
+        ),
+      })
+    },
+    [commitStore],
+  )
+
   const value = useMemo<AppDataValue>(
     () => ({
       mode,
@@ -541,6 +596,25 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         setStorageBlocked(false)
       },
       loadDemo: () => commitStore(buildDemoData()),
+      focuses: active.focuses,
+      saveFocus: (focus) =>
+        commitFocuses(
+          (current) =>
+            current.some((f) => f.id === focus.id)
+              ? current.map((f) => (f.id === focus.id ? focus : f))
+              : [...current, focus],
+          { action: active.focuses.some((f) => f.id === focus.id) ? 'edited' : 'created', id: focus.id },
+        ),
+      closeFocus: (id, closed) =>
+        commitFocuses(
+          (list) =>
+            list.map((f) =>
+              f.id === id ? { ...f, closedAt: closed ? new Date().toISOString() : null } : f,
+            ),
+          { action: 'edited', id },
+        ),
+      deleteFocus: (id) =>
+        commitFocuses((list) => list.filter((f) => f.id !== id), { action: 'deleted', id }),
       athleteNotes: active.notes,
       saveAthleteNotes: (notes) =>
         commitStore({
@@ -564,7 +638,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       },
       storageBlocked,
     }),
-    [mode, data, store, active.id, initial.report, recordResult, commitAthlete, commitStore, storageBlocked, recoveredAt],
+    [mode, data, store, active.id, active.focuses, initial.report, recordResult, commitAthlete, commitFocuses, commitStore, storageBlocked, recoveredAt],
   )
 
   return <AppDataContext.Provider value={value}>{children}</AppDataContext.Provider>

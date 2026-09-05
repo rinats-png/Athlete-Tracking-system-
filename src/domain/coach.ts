@@ -1,4 +1,5 @@
 import { getTest } from '@/data/testCatalog'
+import { activeFocuses } from '@/domain/trainingFocus'
 import { radarProfile, baselineIndex } from '@/lib/scoring'
 import { confidenceScore, testTrend } from '@/domain/analytics'
 import { limiters } from '@/domain/insights'
@@ -33,6 +34,13 @@ export interface AthleteRow {
   lastAssessmentOn: string | null
   nextAssessmentOn: string | null
   resultCount: number
+  /** Offene Trainingsschwerpunkte. */
+  openFocuses: number
+  /**
+   * Wann die nächste Nachmessung eines Schwerpunkts ansteht — die früheste
+   * offene. Null, wenn keiner ein Datum trägt.
+   */
+  nextFocusReviewOn: string | null
   /** Warum diese Person Aufmerksamkeit braucht. Leer = alles im Lot. */
   attention: AttentionReason[]
 }
@@ -104,6 +112,12 @@ export function athleteRows(
         .sort((a, b) => b.performedOn.localeCompare(a.performedOn))
       const next = nextAssessment(data.assessments, data.results, asOf)
 
+      const open = activeFocuses(athlete.focuses)
+      const reviews = open
+        .map((focus) => focus.reviewAt)
+        .filter((date): date is string => date != null)
+        .sort()
+
       const attention: AttentionReason[] = []
       if (data.results.length === 0) attention.push('no_assessment')
       else {
@@ -122,6 +136,8 @@ export function athleteRows(
         lastAssessmentOn: completed[0]?.performedOn ?? null,
         nextAssessmentOn: next.date,
         resultCount: data.results.length,
+        openFocuses: open.length,
+        nextFocusReviewOn: reviews[0] ?? null,
         attention,
       }
     })

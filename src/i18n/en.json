@@ -937,7 +937,8 @@
     "emptyBody": "Add the first person under “Athletes you coach” in your profile.",
     "soloTitle": "Coach mode is off",
     "soloBody": "This area shows several coached athletes side by side. In solo mode it would be a table with exactly one row — the dashboard says that better.",
-    "switchMode": "Change mode"
+    "switchMode": "Change mode",
+    "focusCount": "{{count}} open"
   },
   "emphasis": {
     "title": "Emphasis",
@@ -1003,7 +1004,8 @@
       "biometric": "Biometric",
       "profile": "Profile",
       "athlete": "Athlete",
-      "data": "Data"
+      "data": "Data",
+      "focus": "Focus"
     }
   },
   "gate": {
@@ -1533,16 +1535,41 @@
   "pricing": {
     "eyebrow": "Profile",
     "title": "Pricing",
-    "intro": "What BASELINE will cost, and what each tier includes.",
+    "intro": "What BASELINE will cost, and what is included.",
     "notYet": "Nothing can be bought yet: there is no payment processing and no contract. This page states what is planned — it is not an order.",
+    "reportsTitle": "Reports",
+    "reportsIntro": "A report is the print-ready analysis of one test round. Bundles do not expire, there is no subscription and nothing to cancel.",
+    "reportsWhy": "Performance diagnostics is periodic: two to four test rounds a year is the usual rhythm. So you pay per report, not per month.",
+    "perReport": "{{amount}} € per report",
+    "bundlePrice": "{{amount}} €",
+    "saving": "{{percent}} % less than buying singly",
+    "coachTitle": "Coach",
+    "coachIntro": "A seat in your list includes that athlete's reports. Anyone you coach buys nothing on top.",
     "perMonth": "{{amount}} € per month",
-    "free": "free",
-    "onRequest": "on request",
-    "yourCoachCost": "For your {{count}} athletes that would be {{amount}} € per month.",
-    "promises": "What holds in every tier",
-    "promiseExport": "The export of your data is complete and free — with or without a subscription. Your measurements are yours, not the subscription's.",
-    "promiseOffline": "Measuring and analysing on your own device works without an account. You pay for sync, coaching several athletes, and reports.",
-    "promiseNoAds": "No advertising, no reselling of data, no analysis of your values for other purposes."
+    "athleteSlots": "{{count}} athlete seats",
+    "perAthlete": "{{amount}} € per seat and month",
+    "yourTier": "For your {{count}} athletes {{tier}} is enough — {{amount}} € per month.",
+    "yourTierNone": "For your {{count}} athletes the tiers are not enough. Talk to us rather than extrapolating a price.",
+    "institutionTitle": "Clubs and institutions",
+    "institutionIntro": "At this size the price is agreed, not listed. Which track applies depends not on size but on whether money is made with the diagnostics.",
+    "institutionNoJudgement": "The app classifies nobody. It names the criteria — verification happens in conversation, against documents.",
+    "enquiryTitle": "Pricing enquiry",
+    "enquiryIntro": "The app sends nothing. It assembles the text you send yourself — so you see beforehand what you disclose.",
+    "enquiryOrg": "Organisation",
+    "enquiryAthletes": "Athletes",
+    "enquiryCoaches": "Coaches",
+    "enquiryNote": "Anything else we should know",
+    "enquiryBuild": "Assemble text",
+    "enquiryCopy": "Copy text",
+    "enquiryCopied": "Copied.",
+    "enquiryMail": "Open as email",
+    "enquiryNoAthleteData": "The enquiry contains no details about individual athletes — only counts and the type of use.",
+    "promises": "What always applies",
+    "promiseExport": "The export of your data is complete and free — even without a purchased report. Your measurements are yours.",
+    "promiseOffline": "Measuring and analysing on your own device works without an account. You pay for the report, for sync and for coaching several athletes.",
+    "promiseNoExpiry": "A purchased report does not expire. No subscription, no notice period, no credit that runs out.",
+    "promiseNoAds": "No advertising, no reselling of data, no analysis of your values for other purposes.",
+    "onRequestShort": "on request"
   },
   "change": {
     "title": "Change",
@@ -1702,5 +1729,44 @@
       "Reference comparison",
       "Baseline"
     ]
+  },
+  "focus": {
+    "title": "Training focuses",
+    "hint": "A finding from the diagnostics, a priority and your sentence on it. Not a training plan.",
+    "empty": "No focus set yet. A focus records what is being worked on and when it will be measured again.",
+    "add": "Set a focus",
+    "limit": "No more than {{count}} open focuses. A list of twelve priorities has none.",
+    "closed": "Closed ({{count}})",
+    "close": "Close",
+    "reopen": "Reopen",
+    "delete": "Delete",
+    "axis": "Area",
+    "unmeasured": "not measured yet",
+    "allAxesTaken": "Every area already has an open focus.",
+    "priorityLabel": "Priority",
+    "priority": {
+      "1": "First",
+      "2": "Next",
+      "3": "Alongside"
+    },
+    "note": "Your instruction",
+    "notePlaceholder": "In your own words: what is being worked on and what to watch for.",
+    "reviewAt": "Measure again on",
+    "reviewOn": "Review {{date}}",
+    "save": "Save focus",
+    "cancel": "Cancel",
+    "notYetMeasured": "Not measured again since.",
+    "firstMeasure": "Measured on {{date}} — no earlier measurement to compare against.",
+    "noTests": "No tests are mapped to this area. You decide the follow-up measurement yourself.",
+    "verdict": {
+      "better": "Measured {{amount}} % better since ({{date}}) — beyond your own spread.",
+      "worse": "Measured {{amount}} % lower since ({{date}}) — beyond your own spread.",
+      "within_noise": "{{amount}} % difference since ({{date}}) — within your own spread, no demonstrated progress.",
+      "unknown_error": "Measured again on {{date}}. Too few measurements to state the spread.",
+      "first": "Measured on {{date}} — no earlier measurement to compare against."
+    },
+    "notATrainingPlan": "BASELINE measures and classifies. Exercises, sets and training plans are deliberately absent — the sentence above is yours, the app adds nothing and does not analyse it.",
+    "reportTitle": "Training focuses",
+    "reportIntro": "Set by the coach. The assessment beside it is measured, not estimated."
   }
 }

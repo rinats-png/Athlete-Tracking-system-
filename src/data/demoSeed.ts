@@ -6,6 +6,7 @@ import type {
   StoredAssessment,
   StoredBiometric,
   StoredData,
+  StoredFocus,
   StoredResult,
 } from '@/lib/store/localStore'
 
@@ -21,6 +22,51 @@ import type {
  * Metriken laufen durch dieselbe Ableitung. Der Demomodus ist damit kein
  * Sonderweg, sondern ein normaler, bearbeitbarer Bestand.
  */
+
+
+/**
+ * Trainingsschwerpunkte des Demobestands.
+ *
+ * Angelegt nach dem zweiten Termin (Januar 2026), damit der dritte Termin
+ * (Juni 2026) sie tatsächlich beantwortet — genau so soll der Kreis in echt
+ * laufen: Befund, Anweisung, Nachmessung.
+ *
+ * Die Sätze stammen von einem Trainer und nicht von der App. Sie stehen hier
+ * als Beispieltexte, damit der Bericht mit Demodaten zeigt, wie ein
+ * ausgefüllter Schwerpunkt aussieht — sie sind keine Empfehlung an irgendwen.
+ */
+const DEMO_FOCUSES: StoredFocus[] = [
+  {
+    id: 'demo-focus-1',
+    axisId: 'endurance',
+    dimension: 'endurance',
+    priority: 1,
+    note: 'Grundlage steht hinter der Kraft zurück. Zwei ruhige Einheiten pro Woche, Wettkampfhärte erst ab April.',
+    reviewAt: '2026-06-14',
+    createdAt: '2026-01-20T09:00:00.000Z',
+    closedAt: null,
+  },
+  {
+    id: 'demo-focus-2',
+    axisId: 'relative_strength',
+    dimension: 'relative_strength',
+    priority: 2,
+    note: 'Absolutkraft ist gestiegen, das Körpergewicht mit. Gewicht halten, Last weiter aufbauen.',
+    reviewAt: '2026-06-14',
+    createdAt: '2026-01-20T09:05:00.000Z',
+    closedAt: null,
+  },
+  {
+    id: 'demo-focus-3',
+    axisId: 'agility',
+    dimension: 'agility',
+    priority: 3,
+    note: 'Richtungswechsel wirkt langsam. Vor jeder Einheit zehn Minuten Technik, keine zusätzliche Belastung.',
+    reviewAt: '2026-09-30',
+    createdAt: '2026-01-20T09:10:00.000Z',
+    closedAt: null,
+  },
+]
 
 interface Session {
   date: string
@@ -203,6 +249,7 @@ export function buildDemoData(): StoredData {
         results,
         archived: false,
         notes: '',
+        focuses: DEMO_FOCUSES,
         audit: [],
         createdAt: new Date().toISOString(),
       },

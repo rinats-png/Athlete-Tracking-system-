@@ -1,4 +1,6 @@
 import { z } from 'zod'
+import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
+import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
 
 /**
  * Schema, Validierung und Migration des lokalen Bestands.
@@ -16,7 +18,7 @@ import { z } from 'zod'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 12
+export const CURRENT_SCHEMA_VERSION = 13
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -324,11 +326,60 @@ const auditSchema = z.object({
   at: isoDate,
   action: z.enum(['created', 'edited', 'deleted', 'imported', 'exported']),
   /** Worauf sich die Änderung bezieht. */
-  entity: z.enum(['result', 'assessment', 'biometric', 'profile', 'athlete', 'data']),
+  entity: z.enum(['result', 'assessment', 'biometric', 'profile', 'athlete', 'data', 'focus']),
   /** Kennung des betroffenen Datensatzes, sofern es eine gibt. */
   entityId: z.string().max(80).nullable().default(null),
   /** Kurze Bezeichnung für die Anzeige, z. B. der Testname. */
   label: z.string().max(120).default(''),
+})
+
+
+/**
+ * Trainingsschwerpunkt (§74).
+ *
+ * WAS DAS IST — UND WAS NICHT
+ *
+ * Ein Schwerpunkt verbindet einen BEFUND aus der Diagnostik mit einer
+ * PRIORITÄT und EINEM SATZ DES TRAINERS in seinen eigenen Worten, plus einem
+ * Datum, an dem nachgemessen wird. Mehr nicht.
+ *
+ * Es ist ausdrücklich KEIN Trainingsplan: es gibt keine Übungen, keine Sätze,
+ * keine Wiederholungen, keine Videos und keine Vorschläge der App. Was hier
+ * nicht im Modell steht, kann später auch nicht hineinrutschen — deshalb ist
+ * die Liste der Felder kurz und bleibt es.
+ *
+ * DIE APP SCHREIBT KEINEN INHALT. `note` ist leer, bis der Trainer etwas
+ * hineinschreibt, und wird von der App nie ausgewertet. Damit kann an dieser
+ * Stelle auch keine scheinwissenschaftliche Aussage entstehen (§81): die App
+ * behauptet nichts, sie hält fest, was ein Mensch entschieden hat.
+ *
+ * DER KREIS SCHLIESST SICH ÜBER DIE NÄCHSTE MESSUNG, nicht über ein Häkchen.
+ * Ob ein Schwerpunkt gewirkt hat, sagt die gemessene Veränderung mit ihrem
+ * typischen Fehler — dieselbe Rechnung wie überall sonst. Ein Abhaken wäre
+ * Selbstauskunft, und Punkte oder Serien wären künstliche Gamification.
+ */
+const trainingFocusSchema = z.object({
+  id: z.string().min(1),
+  /**
+   * Profilachse, auf die sich der Befund bezieht. Kennung aus
+   * `data/profileAxes.ts` — deckt allgemeine Fähigkeiten und
+   * sportartspezifische Kennzahlachsen gleichermassen ab.
+   */
+  axisId: z.string().max(60),
+  /** Die zugehörige der sechs allgemeinen Fähigkeiten, sofern es eine gibt. */
+  dimension: z.enum(PERFORMANCE_DIMENSIONS).nullable().default(null),
+  /**
+   * Genau drei Stufen. Eine feinere Skala liesse sich nicht begründen, und
+   * eine Liste mit zwölf Prioritäten hat keine.
+   */
+  priority: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+  /** Der Satz des Trainers. Kurz gehalten, damit er im Bericht ganz steht. */
+  note: z.string().max(FOCUS_NOTE_MAX).default(''),
+  /** Wann nachgemessen wird. Null heisst: noch nicht festgelegt. */
+  reviewAt: dayString.nullable().default(null),
+  createdAt: isoDate,
+  /** Abgeschlossen. Der Eintrag bleibt erhalten — er ist Teil des Verlaufs. */
+  closedAt: isoDate.nullable().default(null),
 })
 
 const athleteSchema = z.object({
@@ -342,6 +393,12 @@ const athleteSchema = z.object({
   archived: z.boolean().default(false),
   /** Notizen des Trainers zu dieser Person (§74). */
   notes: z.string().max(4000).default(''),
+  /**
+   * Trainingsschwerpunkte. Bewusst neben `notes` und nicht an deren Stelle:
+   * die Notiz ist unstrukturierter Freitext über den Menschen, ein
+   * Schwerpunkt ist eine strukturierte Zuordnung zu einem gemessenen Bereich.
+   */
+  focuses: z.array(trainingFocusSchema).max(FOCUS_HARD_LIMIT).default([]),
   /** Änderungsnachweis, neueste zuerst. */
   audit: z.array(auditSchema).default([]),
   createdAt: isoDate,
@@ -387,6 +444,7 @@ export type AttemptSelection = z.infer<typeof attemptSelectionSchema>
 export type ValidatedContext = z.infer<typeof contextSchema>
 export type ValidatedReadiness = z.infer<typeof readinessSchema>
 export type ValidatedAudit = z.infer<typeof auditSchema>
+export type ValidatedFocus = z.infer<typeof trainingFocusSchema>
 export type GoalKey = z.infer<typeof goalKeySchema>
 
 // --- Migrationen -------------------------------------------------------------
@@ -602,6 +660,21 @@ export const MIGRATIONS: Migration[] = [
       lastExportAt: null,
     }),
   },
+  {
+    from: 12,
+    to: 13,
+    describe: 'Trainingsschwerpunkte je Athlet',
+    run: (data) => ({
+      ...data,
+      version: 13,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        // Leer, nicht erfunden: ein Schwerpunkt ist die Entscheidung eines
+        // Trainers, und die kann eine Migration nicht nachholen.
+        focuses: [],
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -630,6 +703,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     results: [],
     archived: false,
     notes: '',
+    focuses: [],
     audit: [],
     createdAt: new Date().toISOString(),
   }

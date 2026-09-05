@@ -8,6 +8,7 @@ import {
   type ValidatedAssessment,
   type ValidatedAthlete,
   type ValidatedBiometric,
+  type ValidatedFocus,
   type ValidatedData,
   type ValidatedResult,
 } from './schema'
@@ -40,6 +41,8 @@ export type StoredAthlete = ValidatedAthlete
 export type StoredResult = ValidatedResult
 export type StoredAssessment = ValidatedAssessment
 export type StoredBiometric = ValidatedBiometric
+/** Trainingsschwerpunkt: ein Befund plus die Anweisung des Trainers dazu. */
+export type StoredFocus = ValidatedFocus
 
 export interface LoadResult {
   data: StoredData

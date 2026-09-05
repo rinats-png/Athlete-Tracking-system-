@@ -79,6 +79,7 @@ export function CoachDashboard({ locale }: { locale: AppLocale }) {
                 <th scope="col" className="px-4 py-2 font-medium">{t('analysis.trend')}</th>
                 <th scope="col" className="px-4 py-2 font-medium">{t('dashboard.primaryLimiter')}</th>
                 <th scope="col" className="px-4 py-2 font-medium">{t('coachDash.lastAssessment')}</th>
+                <th scope="col" className="px-4 py-2 font-medium">{t('focus.title')}</th>
                 <th scope="col" className="px-4 py-2 font-medium">{t('coachDash.attention')}</th>
               </tr>
             </thead>
@@ -164,6 +165,17 @@ function Row({
       </td>
       <td className="px-4 py-2.5 tabular-nums">
         {row.lastAssessmentOn ? formatDate(row.lastAssessmentOn, locale) : '—'}
+      </td>
+      <td className="px-4 py-2.5">
+        {row.openFocuses === 0 ? (
+          <span className="text-[12px] text-ink-muted">—</span>
+        ) : (
+          <span className="text-[12px] text-ink-secondary">
+            {t('coachDash.focusCount', { count: row.openFocuses })}
+            {row.nextFocusReviewOn &&
+              ` · ${t('focus.reviewOn', { date: formatDate(row.nextFocusReviewOn, locale) })}`}
+          </span>
+        )}
       </td>
       <td className="px-4 py-2.5">
         {row.attention.length === 0 ? (

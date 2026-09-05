@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { BodyCompositionPanel } from './BodyCompositionPanel'
 import { BrandingSettings } from './BrandingSettings'
 import { AthleteNotes } from '@/features/coach/AthleteNotes'
+import { TrainingFocuses } from '@/features/coach/TrainingFocuses'
 import { CoachSettings } from '@/features/coach/CoachSettings'
 import { downloadFile } from '@/lib/export/csv'
 import { useTranslation } from 'react-i18next'
@@ -391,6 +392,8 @@ export function ProfileScreen() {
           <AthleteContext />
 
           <BodyCompositionPanel locale={locale} />
+
+          <TrainingFocuses locale={locale} />
 
           <AthleteNotes locale={locale} />
 

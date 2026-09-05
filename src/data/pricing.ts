@@ -1,119 +1,221 @@
 /**
- * Die Preisstufen.
+ * Was BASELINE kostet.
  *
- * Hier stehen nur die Zahlen und was in einer Stufe enthalten ist. Es wird
- * nichts abgerechnet: es gibt keine Zahlungsabwicklung, keinen Anbieter und
- * keinen Vertrag. Solange das so ist, sagt der Bildschirm es auch — eine
- * Preisliste, die nach einem Kauf aussieht, ohne einen zu ermöglichen, wäre
- * eine Täuschung.
+ * Hier stehen nur die Zahlen und was darin enthalten ist. Es wird nichts
+ * abgerechnet: es gibt keine Zahlungsabwicklung, keinen Anbieter und keinen
+ * Vertrag. Solange das so ist, sagt der Bildschirm es auch — eine Preisliste,
+ * die nach einem Kauf aussieht, ohne einen zu ermöglichen, wäre eine Täuschung.
  *
- * Zwei Zusagen gelten über allen Stufen und dürfen nie eingeschränkt werden:
+ * WARUM KONTINGENTE UND KEIN ATHLETEN-ABO
  *
- *   1. Der Export der eigenen Daten ist in jeder Stufe vollständig und
- *      kostenlos (§32). Daten gehören dem Nutzer, nicht dem Abo.
+ * Leistungsdiagnostik ist periodisch, nicht täglich: zwei bis vier Testrunden
+ * im Jahr sind der normale Rhythmus. Ein Monats- oder Jahresabo für etwas, das
+ * man viermal im Jahr benutzt, rechnet sich für den Nutzer nie — bei 29,90 €
+ * je Report und 149,90 € im Jahr läge der Bruchpunkt bei sechs Reports, also
+ * jenseits jeder realistischen Nutzung. Wer rechnen kann, abonniert dann nicht,
+ * und wer nicht rechnet, fühlt sich hinterher betrogen.
+ *
+ * Deshalb: Reports als Kontingent, degressiv im Preis, ohne Verfall und ohne
+ * Kündigung. Damit erledigt sich auch die Anrechnung eines zuerst gekauften
+ * Einzelreports auf ein späteres Abo — es gibt kein Abo, der erste Report ist
+ * einfach der erste aus dem Kontingent. Kein Guthaben, keine Frist, keine
+ * Sonderregel, die man erklären müsste.
+ *
+ * DREI ZUSAGEN, DIE ÜBER ALLEM STEHEN UND NIE EINGESCHRÄNKT WERDEN
+ *
+ *   1. Der Export der eigenen Daten ist immer vollständig und kostenlos (§32).
+ *      Daten gehören dem Nutzer, nicht dem Kontingent.
  *   2. Messen und Auswerten auf dem eigenen Gerät funktioniert ohne Konto.
- *      Bezahlt wird für Synchronisierung, Betreuung mehrerer Athleten und
- *      Berichte — nicht für den Zugang zu den eigenen Werten.
+ *      Bezahlt wird für den Report, für Synchronisierung und für die Betreuung
+ *      mehrerer Athleten — nicht für den Zugang zu den eigenen Werten.
+ *   3. Ein gekaufter Report verfällt nicht, und wer nur einen gekauft hat,
+ *      behält seinen Bestand vollständig.
  */
 
-export type PlanId = 'free' | 'solo' | 'coach' | 'club'
+// --- Report-Kontingente ------------------------------------------------------
 
-export interface Plan {
-  id: PlanId
-  /** Monatspreis in Euro. `null` bei der Vereinsstufe: sie wird vereinbart. */
-  monthlyEur: number | null
-  /** Enthaltene Athleten. `null` = unbegrenzt beziehungsweise vereinbart. */
-  includedAthletes: number | null
-  /** Preis je weiterem Athleten und Monat. */
-  extraAthleteEur: number | null
+export interface ReportBundle {
+  id: 'single' | 'four' | 'ten'
+  /** Enthaltene Reports. */
+  reports: number
+  /** Gesamtpreis in Euro. */
+  priceEur: number
   name: { de: string; en: string }
-  /** Was diese Stufe leistet. Jede Zeile eine Zusage, keine Werbung. */
-  features: { de: string; en: string }[]
 }
 
-export const PLANS: Plan[] = [
+export const REPORT_BUNDLES: ReportBundle[] = [
+  { id: 'single', reports: 1, priceEur: 29.9, name: { de: 'Einzelreport', en: 'Single report' } },
+  { id: 'four', reports: 4, priceEur: 89, name: { de: 'Vier Reports', en: 'Four reports' } },
+  { id: 'ten', reports: 10, priceEur: 179, name: { de: 'Zehn Reports', en: 'Ten reports' } },
+]
+
+/** Preis je Report in einem Kontingent. Grundlage der Ersparnisangabe. */
+export function pricePerReportEur(bundle: ReportBundle): number {
+  return bundle.priceEur / bundle.reports
+}
+
+/**
+ * Ersparnis gegenüber dem Einzelkauf, in Prozent. Null beim Einzelreport
+ * selbst — er ist der Bezugspunkt und kann sich nicht mit sich vergleichen.
+ */
+export function savingPercent(bundle: ReportBundle): number {
+  const single = REPORT_BUNDLES[0].priceEur
+  if (bundle.reports === 1) return 0
+  return Math.round((1 - pricePerReportEur(bundle) / single) * 100)
+}
+
+// --- Trainerstufen -----------------------------------------------------------
+
+export interface CoachTier {
+  id: 'coach_s' | 'coach_m' | 'coach_l'
+  monthlyEur: number
+  /** Enthaltene Athletenplätze. */
+  athletes: number
+  name: { de: string; en: string }
+}
+
+/**
+ * Degressiv gestaffelt: der Preis je Platz sinkt sichtbar mit der Grösse.
+ * Ein Platz kostet den Trainer weniger als der Selbstzahler für dieselbe
+ * Menge Reports zahlen würde — das ist der Anreiz, Athleten in die Betreuung
+ * zu nehmen, statt sie einzeln kaufen zu lassen.
+ */
+export const COACH_TIERS: CoachTier[] = [
+  { id: 'coach_s', monthlyEur: 39, athletes: 8, name: { de: 'Coach S', en: 'Coach S' } },
+  { id: 'coach_m', monthlyEur: 79, athletes: 20, name: { de: 'Coach M', en: 'Coach M' } },
+  { id: 'coach_l', monthlyEur: 149, athletes: 50, name: { de: 'Coach L', en: 'Coach L' } },
+]
+
+/** Preis je Athletenplatz und Monat. */
+export function perAthleteEur(tier: CoachTier): number {
+  return tier.monthlyEur / tier.athletes
+}
+
+/**
+ * Die kleinste Stufe, die diese Zahl Athleten trägt. `null` heisst: mehr, als
+ * die Stufen abdecken — dann führt der Weg zur Anfrage, nicht zu einem
+ * hochgerechneten Preis, den niemand zugesagt hat.
+ */
+export function coachTierFor(athletes: number): CoachTier | null {
+  return COACH_TIERS.find((tier) => athletes <= tier.athletes) ?? null
+}
+
+/**
+ * Athleten in einer Trainerliste brauchen KEIN eigenes Kontingent: ihre
+ * Reports sind im Platz enthalten. Sonst zahlte dieselbe Person zweimal.
+ */
+export const COACH_INCLUDES_ATHLETE_REPORTS = true
+
+// --- Vereine und Einrichtungen ----------------------------------------------
+
+/**
+ * Zwei Wege, beide auf Anfrage.
+ *
+ * Der Unterschied ist nicht die Grösse, sondern ob mit der Diagnostik Geld
+ * verdient wird. Ein Landesstützpunkt mit 300 Athleten und ehrenamtlichen
+ * Trainern ist etwas anderes als ein Studio mit 40 Kunden, das
+ * Leistungsdiagnostik als Dienstleistung verkauft.
+ *
+ * DIE EINSTUFUNG NIMMT DIE APP NICHT VOR. Sie nennt die Merkmale, die
+ * Anfragende selbst zuordnen; geprüft wird im Gespräch anhand von Unterlagen
+ * (Vereinsregister, Freistellungsbescheid). Eine Software, die aufgrund
+ * eingetippter Angaben entscheidet, wer gemeinnützig ist, würde eine
+ * Rechtsfrage zu einer Formularfrage machen.
+ */
+export type InstitutionTrack = 'nonprofit' | 'commercial'
+
+export interface InstitutionProfile {
+  track: InstitutionTrack
+  name: { de: string; en: string }
+  /** Woran man erkennt, dass dieser Weg der richtige ist. */
+  criteria: { de: string; en: string }[]
+}
+
+export const INSTITUTION_PROFILES: InstitutionProfile[] = [
   {
-    id: 'free',
-    monthlyEur: 0,
-    includedAthletes: 1,
-    extraAthleteEur: null,
-    name: { de: 'Ohne Konto', en: 'No account' },
-    features: [
+    track: 'nonprofit',
+    name: { de: 'Verein und Verband', en: 'Club and federation' },
+    criteria: [
       {
-        de: 'Alle Tests, alle Referenzwerte, die vollständige Auswertung — auf diesem Gerät.',
-        en: 'All tests, all reference values, the full analysis — on this device.',
+        de: 'Eingetragener Verein oder Verband, als gemeinnützig anerkannt.',
+        en: 'Registered club or federation, recognised as non-profit.',
       },
       {
-        de: 'Export deiner Daten, jederzeit und vollständig.',
-        en: 'Export of your data, any time and complete.',
+        de: 'Die Betreuung liegt überwiegend bei ehrenamtlichen oder nebenberuflichen Trainern.',
+        en: 'Coaching is mostly done by volunteer or part-time coaches.',
       },
       {
-        de: 'Keine Synchronisierung zwischen Geräten; geht das Gerät verloren, hilft nur der Export.',
-        en: 'No sync between devices; if the device is lost, only the export helps.',
+        de: 'Die Diagnostik wird nicht als eigene Leistung verkauft — sie gehört zum Training.',
+        en: 'Diagnostics is not sold as a service of its own — it belongs to training.',
       },
     ],
   },
   {
-    id: 'solo',
-    monthlyEur: 9.9,
-    includedAthletes: 1,
-    extraAthleteEur: null,
-    name: { de: 'Einzelnutzer', en: 'Individual' },
-    features: [
+    track: 'commercial',
+    name: { de: 'Gewerbliche Nutzung', en: 'Commercial use' },
+    criteria: [
       {
-        de: 'Deine Werte auf allen Geräten, gesichert ausserhalb des Telefons.',
-        en: 'Your values on every device, backed up beyond the phone.',
-      },
-      { de: 'Bericht als PDF zu jedem Termin.', en: 'PDF report for every session.' },
-      { de: 'Verlauf ohne Begrenzung.', en: 'History without a limit.' },
-    ],
-  },
-  {
-    id: 'coach',
-    monthlyEur: 99.9,
-    includedAthletes: 10,
-    extraAthleteEur: 4.99,
-    name: { de: 'Trainer', en: 'Coach' },
-    features: [
-      {
-        de: 'Bis zu 10 betreute Athleten, jeder weitere 4,99 € im Monat.',
-        en: 'Up to 10 athletes, each further one 4.99 € per month.',
+        de: 'Studio, Leistungszentrum, Praxis oder Agentur mit hauptamtlichem Personal.',
+        en: 'Studio, performance centre, practice or agency with full-time staff.',
       },
       {
-        de: 'Übersicht über alle Betreuten, Termine planen, Berichte je Athlet.',
-        en: 'Overview of everyone you coach, plan sessions, reports per athlete.',
+        de: 'Leistungsdiagnostik wird Kunden gegen Entgelt angeboten.',
+        en: 'Performance diagnostics is offered to clients for a fee.',
       },
       {
-        de: 'Jeder Athlet behält seinen eigenen Export.',
-        en: 'Every athlete keeps their own export.',
-      },
-    ],
-  },
-  {
-    id: 'club',
-    monthlyEur: null,
-    includedAthletes: null,
-    extraAthleteEur: null,
-    name: { de: 'Verein', en: 'Club' },
-    features: [
-      {
-        de: 'Mehrere Trainer, gemeinsame Athletenliste, Vereinsbericht.',
-        en: 'Several coaches, a shared athlete list, a club report.',
-      },
-      {
-        de: 'Preis nach Grösse des Vereins — im Gespräch vereinbart.',
-        en: 'Price by club size — agreed in conversation.',
+        de: 'Der Report geht mit eigenem Logo an zahlende Kunden.',
+        en: 'The report goes to paying clients under your own branding.',
       },
     ],
   },
 ]
 
-export const PLAN_BY_ID = new Map(PLANS.map((plan) => [plan.id, plan]))
+/**
+ * Angaben, aus denen die Anfrage besteht. Bewusst wenige und bewusst keine
+ * personenbezogenen über Athleten (§50): für ein Preisgespräch genügt, wer
+ * fragt, wie viele Plätze gebraucht werden und welcher Weg gemeint ist.
+ */
+export interface EnquiryDraft {
+  track: InstitutionTrack
+  organisation: string
+  athletes: number | null
+  coaches: number | null
+  note: string
+}
 
-/** Monatspreis der Trainerstufe für eine Anzahl Athleten. */
-export function coachMonthlyEur(athletes: number): number {
-  const plan = PLAN_BY_ID.get('coach')!
-  const included = plan.includedAthletes ?? 0
-  const extra = Math.max(0, athletes - included)
-  return (plan.monthlyEur ?? 0) + extra * (plan.extraAthleteEur ?? 0)
+export const ENQUIRY_EMAIL = 'preise@baseline.app'
+
+/**
+ * Aus den Angaben einen Text bauen, den der Anfragende selbst verschickt.
+ *
+ * Kein Versand aus der App heraus: es gibt keinen Server, an den sie senden
+ * könnte, und ein Formular, das nur so tut, als ginge etwas raus, wäre die
+ * schlimmere Lösung. Der Text wird kopiert oder in die eigene Mail eingefügt —
+ * damit sieht der Absender vorher, was er über sich preisgibt.
+ */
+export function buildEnquiryText(draft: EnquiryDraft, locale: 'de' | 'en'): string {
+  const profile = INSTITUTION_PROFILES.find((p) => p.track === draft.track)!
+  const lines =
+    locale === 'de'
+      ? [
+          'Preisanfrage BASELINE',
+          '',
+          `Art der Nutzung: ${profile.name.de}`,
+          `Organisation: ${draft.organisation || '—'}`,
+          `Athleten: ${draft.athletes ?? '—'}`,
+          `Trainer: ${draft.coaches ?? '—'}`,
+          '',
+          draft.note || '',
+        ]
+      : [
+          'BASELINE pricing enquiry',
+          '',
+          `Type of use: ${profile.name.en}`,
+          `Organisation: ${draft.organisation || '—'}`,
+          `Athletes: ${draft.athletes ?? '—'}`,
+          `Coaches: ${draft.coaches ?? '—'}`,
+          '',
+          draft.note || '',
+        ]
+  return lines.join('\n').trim()
 }

@@ -12,7 +12,9 @@ import { buildInsights } from '@/domain/insights'
 import { assessQuality } from '@/domain/dataQuality'
 import { radarProfile } from '@/lib/scoring'
 import { getTest } from '@/data/testCatalog'
-import { ageFromBirthDate, formatDate } from '@/lib/format'
+import { ageFromBirthDate, formatDate, formatNumber } from '@/lib/format'
+import { axisLabel } from '@/data/profileAxes'
+import { activeFocuses, focusOutcome } from '@/domain/trainingFocus'
 import { formatResultValue } from '@/lib/resultView'
 import { resultsToCsv, downloadFile } from '@/lib/export/csv'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
@@ -41,7 +43,7 @@ export function ReportScreen() {
   const { id } = useParams()
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
-  const { data, athleteNotes } = useAppData()
+  const { data, athleteNotes, focuses } = useAppData()
   // Anforderungskontur der Disziplin, sofern eine gewählt ist.
   const discipline = disciplineById(data.profile.disciplineId ?? '')
   const [searchParams] = useSearchParams()
@@ -61,6 +63,7 @@ export function ReportScreen() {
     () => buildInsights(axes, data.results, data.assessments, data.profile),
     [axes, data.results, data.assessments, data.profile],
   )
+  const openFocuses = useMemo(() => activeFocuses(focuses), [focuses])
   const confidence = useMemo(() => confidenceScore(data.results), [data.results])
   const comparisons = useMemo(() => baselineComparisons(data.results), [data.results])
 
@@ -479,6 +482,64 @@ export function ReportScreen() {
           </ol>
           <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">
             {t('emphasis.disclaimer')}
+          </p>
+        </Section>
+      )}
+
+      {/* Trainingsschwerpunkte.
+          Der Satz des Trainers steht wörtlich da und wird nicht ausgewertet;
+          daneben steht die GEMESSENE Antwort mit dem typischen Fehler, nicht
+          eine Einschätzung. Ein Schwerpunkt ohne Nachmessung sagt das auch —
+          er wird nicht als Erfolg gezeigt, nur weil er gesetzt wurde. */}
+      {openFocuses.length > 0 && (
+        <Section title={t('focus.reportTitle')}>
+          <p className="mb-2 text-[11px] leading-relaxed text-ink-muted">{t('focus.reportIntro')}</p>
+          <table className="w-full border-collapse text-[11px] leading-relaxed">
+            <thead>
+              <tr className="border-b border-line text-left text-ink-muted">
+                <th scope="col" className="py-1 pr-3 font-medium">{t('focus.priorityLabel')}</th>
+                <th scope="col" className="py-1 pr-3 font-medium">{t('focus.axis')}</th>
+                <th scope="col" className="py-1 pr-3 font-medium">{t('focus.note')}</th>
+                <th scope="col" className="py-1 font-medium">{t('focus.reviewAt')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {openFocuses.map((focus) => {
+                const outcome = focusOutcome(focus, data.results)
+                const change = outcome.change
+                const measured =
+                  !focus.dimension
+                    ? t('focus.noTests')
+                    : !outcome.result || !change
+                      ? t('focus.notYetMeasured')
+                      : change.changePercent == null || change.verdict === 'first'
+                        ? t('focus.firstMeasure', {
+                            date: formatDate(outcome.result.performedAt, locale),
+                          })
+                        : t(`focus.verdict.${change.verdict}`, {
+                            amount: formatNumber(Math.abs(change.changePercent), locale, 1),
+                            date: formatDate(outcome.result.performedAt, locale),
+                          })
+                return (
+                  <tr key={focus.id} className="border-b border-line align-top last:border-b-0">
+                    <td className="py-1.5 pr-3 whitespace-nowrap">
+                      {t(`focus.priority.${focus.priority}`)}
+                    </td>
+                    <td className="py-1.5 pr-3">{axisLabel(focus.axisId, t, locale)}</td>
+                    <td className="py-1.5 pr-3">
+                      <span className="whitespace-pre-wrap">{focus.note}</span>
+                      <span className="mt-0.5 block text-ink-muted">{measured}</span>
+                    </td>
+                    <td className="py-1.5 tabular-nums whitespace-nowrap">
+                      {focus.reviewAt ? formatDate(focus.reviewAt, locale) : '—'}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+          <p className="mt-2 text-[10px] leading-relaxed text-ink-muted">
+            {t('focus.notATrainingPlan')}
           </p>
         </Section>
       )}
