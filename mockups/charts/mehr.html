@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>BASELINE — Grafiksysteme II</title>
+<style>
+:root{--plane:#F0F4F4;--surface:#FFFFFF;--surface-sunken:#DFE7E9;
+ --ink:#1B2523;--ink-secondary:#4A5A56;--ink-muted:#536360;
+ --line:#CFD6D5;--line-strong:#A9B5B2;--accent:#5E7470;--accent-text:#4E625E;
+ --accent-glow:#A9BDB5;--accent-quiet:rgba(94,116,112,0.12);--warning:#7F5300;
+ --font-display:'DejaVu Sans','Helvetica Neue',sans-serif;--font-mono:'DejaVu Sans Mono',monospace}
+html[data-theme=dark]{--plane:#12161A;--surface:#192025;--surface-sunken:#0D1013;
+ --ink:#EDF1F2;--ink-secondary:#B8C3C6;--ink-muted:#8B989C;--line:#2B3438;--line-strong:#3D474C;
+ --accent:#B9C7BC;--accent-text:#B9C7BC;--accent-glow:#B9C7BC;--accent-quiet:rgba(185,199,188,0.14);--warning:#D9A23A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);font-family:var(--font-display);padding:40px 32px 56px}
+h1{font-size:22px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 4px}
+.sub{font-size:13px;color:var(--ink-secondary);margin:0 0 12px;max-width:80ch;line-height:1.6}
+.sys{border-top:1px solid var(--line);padding-top:16px;margin-top:26px}
+.hd{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.hd .no{font-family:var(--font-mono);font-size:11px;color:var(--accent-text)}
+.hd h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0}
+.desc{font-size:11.5px;line-height:1.6;color:var(--ink-muted);max-width:96ch;margin:0 0 12px}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.cell{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
+.cap{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+</style></head><body>
+<h1>BASELINE — Grafiksysteme II</h1>
+<p class="sub">Sechs weitere Denkweisen. Jede ist über Profil, Verlauf und Referenzspektrum durchgezogen; die Daten sind überall dieselben wie im ersten Bogen.</p>
+<div id="out"></div>
+<script>
+const AX=[{n:'Ausdauer',v:41,r:50},{n:'Maxkraft',v:78,r:50},{n:'Relativkraft',v:62,r:50},
+ {n:'Kraftausdauer',v:71,r:50},{n:'Schnellkraft',v:35,r:50},{n:'Agilität',v:54,r:50}];
+const TR=[{d:'08/25',v:3080},{d:'10/25',v:3010},{d:'01/26',v:2960},{d:'03/26',v:3120},{d:'06/26',v:3320},{d:'09/26',v:3290}];
+const SP=[{l:'Untrainiert',v:1800},{l:'Durchschnitt',v:2400},{l:'Gut',v:2800},{l:'Sehr gut',v:3200},{l:'Elite',v:3700}];
+const OWN=3320, NS='http://www.w3.org/2000/svg';
+const el=(t,a={})=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+const svg=(w,h)=>el('svg',{viewBox:`0 0 ${w} ${h}`});
+const txt=(s,x,y,c,sz=7.5,anc='middle',w=400)=>{const t=el('text',{x,y,'text-anchor':anc,'font-size':sz,fill:c,'font-weight':w});t.textContent=s;s2:0;return t};
+const RW=240,RH=210,CX=120,CY=100,R=74;
+const ang=i=>-Math.PI/2+i*2*Math.PI/AX.length;
+const px=(i,f)=>CX+Math.cos(ang(i))*R*f, py=(i,f)=>CY+Math.sin(ang(i))*R*f;
+function labels(s){AX.forEach((a,i)=>s.appendChild(txt(a.n.toUpperCase(),
+  CX+Math.cos(ang(i))*(R+24),CY+Math.sin(ang(i))*(R+24)+3,'var(--ink-muted)')))}
+const TW=240,TH=140,PAD=18,lo=2850,hi=3400;
+const tx=i=>PAD+i*(TW-2*PAD)/(TR.length-1), ty=v=>TH-26-((v-lo)/(hi-lo))*(TH-52);
+function tbase(s){s.appendChild(el('line',{x1:PAD,y1:TH-24,x2:TW-PAD,y2:TH-24,stroke:'var(--line)','stroke-width':.8}));
+  TR.forEach((p,i)=>s.appendChild(txt(p.d,tx(i),TH-12,'var(--ink-muted)',7)))}
+const SW=240,SH=70,smin=1600,smax=3900;
+const sx=v=>16+((v-smin)/(smax-smin))*(SW-32);
+function smarks(s,y=44,ly=56){SP.forEach(m=>{s.appendChild(el('line',{x1:sx(m.v),y1:y,x2:sx(m.v),y2:y+5,stroke:'var(--line-strong)','stroke-width':.8}));
+  s.appendChild(txt(m.l,sx(m.v),ly+6,'var(--ink-muted)',6.5))})}
+function own(s,y=14){s.appendChild(txt('3 320 m',sx(OWN),y,'var(--ink)',9,'middle',700))}
+
+/* ============ E · HÖHENLINIEN ============ */
+function e_radar(){const s=svg(RW,RH);
+ [1,.8,.6,.4,.2].forEach((k,j)=>{const pts=AX.map((a,i)=>`${px(i,a.v/100*k)},${py(i,a.v/100*k)}`).join(' ');
+   s.appendChild(el('polygon',{points:pts,fill:'none',stroke:'var(--accent)','stroke-width':j===0?1.6:0.8,opacity:j===0?1:0.45}))});
+ const rp=AX.map((a,i)=>`${px(i,a.r/100)},${py(i,a.r/100)}`).join(' ');
+ s.appendChild(el('polygon',{points:rp,fill:'none',stroke:'var(--ink-muted)','stroke-width':1,'stroke-dasharray':'3 3'}));
+ labels(s);return s}
+function e_trend(){const s=svg(TW,TH);tbase(s);
+ const d=TR.map((p,i)=>`${i?'L':'M'}${tx(i)},${ty(p.v)}`).join(' ');
+ for(let k=1;k<=6;k++){const yy=TH-24-(TH-50)*k/7;
+   s.appendChild(el('path',{d:d,fill:'none',stroke:'var(--accent)','stroke-width':.7,opacity:.28,
+     transform:`translate(0,${(TH-24-yy)*0.0}) scale(1)`}))}
+ // echte Höhenlinien: verschobene Kopien der Kurve
+ for(let k=1;k<=6;k++){const dd=TR.map((p,i)=>`${i?'L':'M'}${tx(i)},${ty(p.v)+k*7}`).join(' ');
+   s.appendChild(el('path',{d:dd,fill:'none',stroke:'var(--accent)','stroke-width':.7,opacity:.32-k*0.03}))}
+ s.appendChild(el('path',{d,fill:'none',stroke:'var(--accent)','stroke-width':1.8}));
+ return s}
+function e_spec(){const s=svg(SW,SH);
+ // Ein Geländeschnitt: der eigene Wert ist der Gipfel, die Linien darunter
+ // sind seine Höhenstufen. Die Marken liegen als Grundlinie darunter.
+ for(let k=0;k<7;k++){const h=26-k*3.4;
+  let d='';for(let x=16;x<=SW-16;x+=3){
+   const t=(x-sx(OWN))/46, y=40-Math.max(0,h*Math.exp(-t*t));
+   d+=(x===16?'M':'L')+x+','+y}
+  s.appendChild(el('path',{d,fill:'none',stroke:'var(--accent)','stroke-width':k===0?1.5:.7,
+    opacity:k===0?1:.5-k*.05}))}
+ smarks(s,42,48);own(s,12);return s}
+
+/* ============ F · STREIFEN ============ */
+function f_radar(){const s=svg(RW,RH);
+ AX.forEach((a,i)=>{const A=ang(i),n=[-Math.sin(A),Math.cos(A)];
+  for(let k=-7;k<=7;k++){const off=k*2.1,len=R*(a.v/100)*(1-Math.abs(k)/9);
+   s.appendChild(el('line',{x1:CX+n[0]*off,y1:CY+n[1]*off,
+     x2:CX+Math.cos(A)*len+n[0]*off,y2:CY+Math.sin(A)*len+n[1]*off,
+     stroke:'var(--accent)','stroke-width':.9,opacity:.85-Math.abs(k)*.07}))}
+  const rf=a.r/100;
+  s.appendChild(el('line',{x1:CX+Math.cos(A)*R*rf-n[0]*8,y1:CY+Math.sin(A)*R*rf-n[1]*8,
+    x2:CX+Math.cos(A)*R*rf+n[0]*8,y2:CY+Math.sin(A)*R*rf+n[1]*8,stroke:'var(--ink)','stroke-width':1.2}))});
+ labels(s);return s}
+function f_trend(){const s=svg(TW,TH);tbase(s);
+ for(let x=PAD;x<=TW-PAD;x+=3){
+   const i=(x-PAD)/((TW-2*PAD)/(TR.length-1)); const i0=Math.floor(i),f=i-i0;
+   const v=i0>=TR.length-1?TR[TR.length-1].v:TR[i0].v+(TR[i0+1].v-TR[i0].v)*f;
+   s.appendChild(el('line',{x1:x,y1:TH-24,x2:x,y2:ty(v),stroke:'var(--accent)','stroke-width':1,opacity:.45}))}
+ TR.forEach((p,i)=>s.appendChild(el('line',{x1:tx(i),y1:TH-24,x2:tx(i),y2:ty(p.v)-5,
+   stroke:'var(--ink)','stroke-width':1.8})));
+ return s}
+function f_spec(){const s=svg(SW,SH);
+ for(let x=16;x<=SW-16;x+=2.6)s.appendChild(el('line',{x1:x,y1:24,x2:x,y2:40,
+   stroke:'var(--line-strong)','stroke-width':.9,opacity:x<=sx(OWN)?.75:.28}));
+ s.appendChild(el('line',{x1:sx(OWN),y1:18,x2:sx(OWN),y2:46,stroke:'var(--accent)','stroke-width':2.6}));
+ smarks(s,46,52);own(s,12);return s}
+
+/* ============ G · KERBEN ============ */
+function notch(s,x,y,A,len,col,w){const n=[-Math.sin(A),Math.cos(A)];
+ s.appendChild(el('line',{x1:x-n[0]*len,y1:y-n[1]*len,x2:x+n[0]*len,y2:y+n[1]*len,stroke:col,'stroke-width':w}))}
+function g_radar(){const s=svg(RW,RH);
+ AX.forEach((a,i)=>{const A=ang(i);
+  s.appendChild(el('line',{x1:CX,y1:CY,x2:px(i,1),y2:py(i,1),stroke:'var(--line)','stroke-width':.6}));
+  const N=Math.round(a.v/5);
+  for(let k=1;k<=N;k++){const f=k/20;
+   notch(s,CX+Math.cos(A)*R*f,CY+Math.sin(A)*R*f,A,k%5===0?6:3.6,'var(--accent)',k%5===0?1.8:1.1)}
+  notch(s,px(i,a.r/100),py(i,a.r/100),A,7,'var(--ink)',1.6)});
+ labels(s);return s}
+function g_trend(){const s=svg(TW,TH);tbase(s);
+ TR.forEach((p,i)=>{const N=Math.round((p.v-2900)/40);
+  for(let k=0;k<N;k++)s.appendChild(el('line',{x1:tx(i)-5,y1:TH-28-k*4.4,x2:tx(i)+5,y2:TH-28-k*4.4,
+    stroke:'var(--accent)','stroke-width':1.6}))});
+ return s}
+function g_spec(){const s=svg(SW,SH);
+ s.appendChild(el('line',{x1:16,y1:34,x2:SW-16,y2:34,stroke:'var(--line-strong)','stroke-width':1}));
+ for(let x=16;x<=SW-16;x+=6.5)s.appendChild(el('line',{x1:x,y1:30,x2:x,y2:34,stroke:'var(--line)','stroke-width':1}));
+ for(let x=16;x<=sx(OWN);x+=6.5)s.appendChild(el('line',{x1:x,y1:26,x2:x,y2:34,stroke:'var(--accent)','stroke-width':1.6}));
+ s.appendChild(el('line',{x1:sx(OWN)-6,y1:20,x2:sx(OWN)+6,y2:20,stroke:'var(--ink)','stroke-width':2}));
+ smarks(s,38,46);own(s,12);return s}
+
+/* ============ H · INTERFERENZ ============ */
+function h_radar(){const s=svg(RW,RH);const seg=Math.PI*2/AX.length, gap=0.10;
+ AX.forEach((a,i)=>{const a0=ang(i)-seg/2+gap,a1=ang(i)+seg/2-gap;
+  for(let k=1;k<=13;k++){const rr=R*k/13,on=k/13<=a.v/100;
+   const x0=CX+Math.cos(a0)*rr,y0=CY+Math.sin(a0)*rr,x1=CX+Math.cos(a1)*rr,y1=CY+Math.sin(a1)*rr;
+   s.appendChild(el('path',{d:`M${x0},${y0} A${rr},${rr} 0 0 1 ${x1},${y1}`,fill:'none',
+     stroke:on?'var(--accent)':'var(--line-strong)','stroke-width':on?2:.7,opacity:on?.95:.3}))}
+  // Referenz als Radiusmarke am Sektorrand
+  const rr=R*a.r/100,A=ang(i),n=[-Math.sin(A),Math.cos(A)];
+  s.appendChild(el('line',{x1:CX+Math.cos(A)*rr-n[0]*9,y1:CY+Math.sin(A)*rr-n[1]*9,
+    x2:CX+Math.cos(A)*rr+n[0]*9,y2:CY+Math.sin(A)*rr+n[1]*9,stroke:'var(--ink)','stroke-width':1.3}))});
+ labels(s);return s}
+function h_trend(){const s=svg(TW,TH);tbase(s);
+ TR.forEach((p,i)=>{for(let k=1;k<=4;k++)
+  s.appendChild(el('circle',{cx:tx(i),cy:ty(p.v),r:k*4.2,fill:'none',stroke:'var(--accent)',
+    'stroke-width':.8,opacity:.5-k*.09}))});
+ const d=TR.map((p,i)=>`${i?'L':'M'}${tx(i)},${ty(p.v)}`).join(' ');
+ s.appendChild(el('path',{d,fill:'none',stroke:'var(--accent)','stroke-width':1.2,opacity:.8}));
+ TR.forEach((p,i)=>s.appendChild(el('circle',{cx:tx(i),cy:ty(p.v),r:2.4,fill:'var(--accent)'})));
+ return s}
+function h_spec(){const s=svg(SW,SH);
+ const clip=el('defs');const cp=el('clipPath',{id:'cs'});
+ cp.appendChild(el('rect',{x:16,y:18,width:SW-32,height:28}));clip.appendChild(cp);s.appendChild(clip);
+ const g=el('g',{'clip-path':'url(#cs)'});
+ for(let k=1;k<=16;k++)g.appendChild(el('ellipse',{cx:sx(OWN),cy:32,rx:k*7,ry:13,fill:'none',
+   stroke:'var(--accent)','stroke-width':.8,opacity:Math.max(0,.65-k*.038)}));
+ s.appendChild(g);
+ s.appendChild(el('circle',{cx:sx(OWN),cy:32,r:3,fill:'var(--accent)'}));
+ smarks(s,46,52);own(s,12);return s}
+
+/* ============ I · BLUEPRINT ============ */
+function arrow(s,x1,y1,x2,y2,c){s.appendChild(el('line',{x1,y1,x2,y2,stroke:c,'stroke-width':.8}));
+ const a=Math.atan2(y2-y1,x2-x1);
+ [[x1,y1,a],[x2,y2,a+Math.PI]].forEach(([x,y,aa])=>
+  s.appendChild(el('path',{d:`M${x},${y} L${x+Math.cos(aa+.4)*4},${y+Math.sin(aa+.4)*4} L${x+Math.cos(aa-.4)*4},${y+Math.sin(aa-.4)*4} Z`,fill:c})))}
+function i_radar(){const s=svg(RW,RH);
+ AX.forEach((a,i)=>{const A=ang(i);
+  s.appendChild(el('line',{x1:CX,y1:CY,x2:px(i,1),y2:py(i,1),stroke:'var(--line)','stroke-width':.5,'stroke-dasharray':'2 2'}))});
+ const pts=AX.map((a,i)=>`${px(i,a.v/100)},${py(i,a.v/100)}`).join(' ');
+ s.appendChild(el('polygon',{points:pts,fill:'none',stroke:'var(--accent)','stroke-width':1.6}));
+ AX.forEach((a,i)=>{const A=ang(i);
+  arrow(s,CX,CY,px(i,a.v/100),py(i,a.v/100),'var(--ink-muted)');
+  const mx=CX+Math.cos(A)*R*a.v/100*0.58, my=CY+Math.sin(A)*R*a.v/100*0.58;
+  s.appendChild(el('rect',{x:mx-9,y:my-5,width:18,height:10,fill:'var(--surface)'}));
+  s.appendChild(txt(String(a.v),mx,my+3,'var(--ink)',7.5,'middle',700))});
+ labels(s);return s}
+function i_trend(){const s=svg(TW,TH);tbase(s);
+ for(let x=PAD;x<TW-PAD;x+=5)s.appendChild(el('line',{x1:x,y1:TH-24,x2:x+5,y2:TH-30,
+   stroke:'var(--line)','stroke-width':.5}));
+ const d=TR.map((p,i)=>`${i?'L':'M'}${tx(i)},${ty(p.v)}`).join(' ');
+ s.appendChild(el('path',{d,fill:'none',stroke:'var(--accent)','stroke-width':1.6}));
+ TR.forEach((p,i)=>s.appendChild(el('rect',{x:tx(i)-2,y:ty(p.v)-2,width:4,height:4,fill:'var(--accent)'})));
+ arrow(s,tx(0),20,tx(TR.length-1),20,'var(--ink-muted)');
+ s.appendChild(el('rect',{x:TW/2-20,y:14,width:40,height:11,fill:'var(--surface)'}));
+ s.appendChild(txt('+ 6,8 %',TW/2,22,'var(--ink)',8,'middle',700));
+ return s}
+function i_spec(){const s=svg(SW,SH);
+ // Bemaßungskette: jede Stufe ist ein Maß, der eigene Wert eine Kote darin.
+ s.appendChild(el('line',{x1:16,y1:36,x2:SW-16,y2:36,stroke:'var(--line-strong)','stroke-width':.8}));
+ SP.forEach(m=>s.appendChild(el('line',{x1:sx(m.v),y1:30,x2:sx(m.v),y2:48,
+   stroke:'var(--line-strong)','stroke-width':.8})));
+ for(let i=0;i<SP.length-1;i++){arrow(s,sx(SP[i].v),36,sx(SP[i+1].v),36,'var(--ink-muted)');
+  s.appendChild(txt(SP[i].l,(sx(SP[i].v)+sx(SP[i+1].v))/2,58,'var(--ink-muted)',6.5))}
+ s.appendChild(txt(SP[4].l,sx(SP[4].v),58,'var(--ink-muted)',6.5));
+ s.appendChild(el('rect',{x:sx(OWN)-2.5,y:24,width:5,height:18,fill:'var(--accent)'}));
+ s.appendChild(el('line',{x1:sx(OWN),y1:24,x2:sx(OWN),y2:18,stroke:'var(--accent)','stroke-width':1}));
+ own(s,14);return s}
+
+/* ============ J · FEHLSTELLE ============ */
+function j_radar(){const s=svg(RW,RH);
+ const defs=el('defs');const pt=el('pattern',{id:'hatch',width:5,height:5,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+ pt.appendChild(el('line',{x1:0,y1:0,x2:0,y2:5,stroke:'var(--line-strong)','stroke-width':1,opacity:.55}));
+ defs.appendChild(pt);s.appendChild(defs);
+ const outer=AX.map((a,i)=>`${px(i,1)},${py(i,1)}`).join(' ');
+ const inner=AX.map((a,i)=>`${px(i,a.v/100)},${py(i,a.v/100)}`).join(' ');
+ const path=el('path',{d:`M${outer.split(' ').join(' L')} Z M${inner.split(' ').reverse().join(' L')} Z`,
+   fill:'url(#hatch)','fill-rule':'evenodd',stroke:'none'});
+ s.appendChild(path);
+ s.appendChild(el('polygon',{points:inner,fill:'var(--surface)',stroke:'var(--accent)','stroke-width':1.8}));
+ s.appendChild(el('polygon',{points:outer,fill:'none',stroke:'var(--line-strong)','stroke-width':.8}));
+ labels(s);return s}
+function j_trend(){const s=svg(TW,TH);tbase(s);
+ const defs=el('defs');const pt=el('pattern',{id:'hatch2',width:5,height:5,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+ pt.appendChild(el('line',{x1:0,y1:0,x2:0,y2:5,stroke:'var(--line-strong)','stroke-width':.9,opacity:.4}));
+ defs.appendChild(pt);s.appendChild(defs);
+ // Lücken zwischen den Messungen als Fehlstelle
+ for(let i=0;i<TR.length-1;i++){const w=tx(i+1)-tx(i);
+  if(i===2||i===4)s.appendChild(el('rect',{x:tx(i),y:20,width:w,height:TH-46,fill:'url(#hatch2)'}))}
+ const d=TR.map((p,i)=>`${i?'L':'M'}${tx(i)},${ty(p.v)}`).join(' ');
+ s.appendChild(el('path',{d,fill:'none',stroke:'var(--accent)','stroke-width':1.6,'stroke-dasharray':'1 0'}));
+ TR.forEach((p,i)=>s.appendChild(el('circle',{cx:tx(i),cy:ty(p.v),r:3,fill:'var(--surface)',stroke:'var(--accent)','stroke-width':1.6})));
+ return s}
+function j_spec(){const s=svg(SW,SH);
+ const defs=el('defs');const pt=el('pattern',{id:'hatch3',width:5,height:5,patternUnits:'userSpaceOnUse',patternTransform:'rotate(45)'});
+ pt.appendChild(el('line',{x1:0,y1:0,x2:0,y2:5,stroke:'var(--line-strong)','stroke-width':.9,opacity:.45}));
+ defs.appendChild(pt);s.appendChild(defs);
+ s.appendChild(el('rect',{x:16,y:26,width:SW-32,height:14,fill:'url(#hatch3)'}));
+ s.appendChild(el('rect',{x:sx(SP[3].v),y:26,width:sx(SP[4].v)-sx(SP[3].v),height:14,fill:'var(--surface)',
+   stroke:'var(--accent)','stroke-width':1.4}));
+ s.appendChild(el('line',{x1:sx(OWN),y1:22,x2:sx(OWN),y2:44,stroke:'var(--accent)','stroke-width':2.4}));
+ smarks(s,44,50);own(s,14);return s}
+
+const SYS=[
+ {no:'E',name:'Höhenlinien',d:'Das Profil als Karte: die Werteform wird nach innen mehrfach wiederholt, wie Höhenlinien um einen Gipfel. Der Abstand der Linien zeigt das Gefälle — wo sie eng liegen, fällt die Leistung schnell ab. Beim Verlauf entsteht dasselbe Bild als Geländeschnitt. Passt zum Namen: eine Baseline ist eine Grundlinie im Gelände.',f:[e_radar,e_trend,e_spec]},
+ {no:'F',name:'Streifen',d:'Alles ist aus feinen Strichen gebaut, deren Länge oder Dichte den Wert trägt. Sehr typografisch, druckt hervorragend, funktioniert auch in Graustufen. Der Verlauf liest sich wie ein Seismogramm — was zum Gegenstand passt: einzelne Ereignisse, keine glatte Kurve.',f:[f_radar,f_trend,f_spec]},
+ {no:'G',name:'Kerben',d:'Werte werden gekerbt, nicht gezeichnet: fünf Kerben, dann eine längere. Es ist die ehrlichste Form für etwas, das GEZÄHLT wird — und BASELINE zählt Messungen. Ganz ohne Fläche, ohne Glanz, körperlich. Für feine Unterschiede zu grob.',f:[g_radar,g_trend,g_spec]},
+ {no:'H',name:'Interferenz',d:'Konzentrische Wellen statt Punkte. Jede Messung wirft einen Ring, der Wert ist, wie weit die Ringe reichen. Näher an der Anfangssequenz als jede Linie, aber ruhiger als das Sternenfeld — die Bewegung ist eingefroren, nicht simuliert.',f:[h_radar,h_trend,h_spec]},
+ {no:'I',name:'Konstruktionszeichnung',d:'Die Grafik gibt sich als technische Zeichnung: Maßpfeile, Bemaßung, Schraffur, Zahlen direkt am Maß. Der Wert steht nicht in einer Legende, sondern dort, wo gemessen wurde. Sehr sachlich, sehr eigen — und die Zahl ist immer lesbar, auch klein gedruckt.',f:[i_radar,i_trend,i_spec]},
+ {no:'J',name:'Fehlstelle',d:'Die Umkehr: gezeichnet wird, was NICHT belegt ist. Die schraffierte Fläche ist die Lücke zwischen Messung und Referenz, der Verlauf zeigt die ungemessenen Zeiträume als Schraffur. Das ist die Haltung der App als Bild — sie benennt zuerst, was sie nicht weiß.',f:[j_radar,j_trend,j_spec]},
+];
+const CAPS=['Leistungsprofil','Verlauf eines Tests','Referenzspektrum'];
+const out=document.getElementById('out');
+SYS.forEach(sy=>{
+ const w=document.createElement('div');w.className='sys';
+ w.innerHTML=`<div class="hd"><span class="no">${sy.no}</span><h2>${sy.name}</h2></div><p class="desc">${sy.d}</p>`;
+ const r=document.createElement('div');r.className='row';
+ sy.f.forEach((fn,i)=>{const c=document.createElement('div');c.className='cell';
+  c.innerHTML=`<div class="cap">${CAPS[i]}</div>`;c.appendChild(fn());r.appendChild(c)});
+ w.appendChild(r);out.appendChild(w);
+});
+</script></body></html>
