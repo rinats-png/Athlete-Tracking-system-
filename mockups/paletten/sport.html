@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baseline — Premium-Sport</title>
+<style>
+  :root { --page:#E6E6E6; --pageink:#141414; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--page); color:var(--pageink); font:15px/1.55 "IBM Plex Sans", system-ui, sans-serif; }
+  header, section { max-width:1240px; margin:0 auto; padding:0 32px; }
+  header { padding-top:56px; padding-bottom:26px; }
+  h1 { font:700 32px/1.1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.06em; text-transform:uppercase; margin:0 0 12px; }
+  header p { max-width:80ch; margin:0 0 10px; opacity:.8; }
+  section { padding-top:38px; padding-bottom:52px; border-top:1px solid rgba(0,0,0,.14); }
+  h2 { font:700 26px/1.1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.05em; text-transform:uppercase; margin:0 0 8px; }
+  .why { max-width:82ch; margin:0 0 22px; font-size:14px; opacity:.8; }
+  .tones { display:flex; gap:8px; margin-bottom:24px; }
+  .tone { width:74px; height:44px; border-radius:6px; border:1px solid rgba(0,0,0,.14); }
+  .pair { display:flex; gap:28px; flex-wrap:wrap; }
+  .mode { font:11px/1 "IBM Plex Mono", monospace; letter-spacing:.2em; text-transform:uppercase; opacity:.55; margin:0 0 8px; }
+  .phone { width:352px; border-radius:24px; overflow:hidden; border:1px solid rgba(0,0,0,.2); box-shadow:0 16px 40px rgba(0,0,0,.16); }
+
+  /* ---------- Bildschirm im Aufbau einer Sportmarke ---------- */
+  .app { background:var(--plane); color:var(--ink); padding-bottom:14px; font-size:14px; }
+  .bar { display:flex; align-items:center; justify-content:space-between; padding:14px 16px; }
+  .brand { font:800 18px/1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+  .brand i { display:inline-block; width:8px; height:8px; background:var(--accent); margin-right:8px; vertical-align:2px; }
+  .avatar { width:26px; height:26px; border-radius:999px; background:var(--surface-sunken); }
+  /* Der Markenblock: die Marke als grosse Fläche mit grosser Schrift. */
+  .hero { margin:6px 12px 0; background:var(--accent); color:var(--accent-ink); border-radius:18px; padding:18px 16px 16px; }
+  .hero .eyebrow { color:var(--accent-ink); opacity:.75; }
+  .hero .big { font:800 64px/.9 "Saira Condensed", system-ui, sans-serif; letter-spacing:-.01em; margin-top:10px; }
+  .hero .big small { font:600 15px/1 "IBM Plex Mono", monospace; letter-spacing:.06em; margin-left:6px; vertical-align:22px; }
+  .hero .sub { margin-top:8px; font-size:12.5px; opacity:.85; }
+  .hero .cov { margin-top:12px; height:5px; border-radius:999px; background:rgba(0,0,0,.18); overflow:hidden; }
+  .hero .cov i { display:block; width:60%; height:100%; background:var(--accent-ink); opacity:.9; }
+  .eyebrow { font:11px/1 "IBM Plex Mono", monospace; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-muted); }
+  .body { padding:16px 12px 0; }
+  .namerow { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .name { font:800 30px/1 "Saira Condensed", system-ui, sans-serif; text-transform:uppercase; letter-spacing:.01em; }
+  .name em { font-style:normal; color:var(--accent-text); }
+  .cta { flex:none; background:var(--ink); color:var(--plane); border-radius:999px; padding:11px 16px;
+    font:700 11px/1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+  .cards { display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:8px; margin-top:16px; }
+  .card { min-width:0; background:var(--surface); border-radius:14px; padding:11px 9px 12px; }
+  .card b { display:block; font:10px/1 "IBM Plex Mono", monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted); }
+  .card i { display:block; font:800 28px/1 "Saira Condensed", system-ui, sans-serif; font-style:normal; margin-top:9px; }
+  .card u { display:block; text-decoration:none; font-size:10.5px; color:var(--ink-muted); margin-top:5px; }
+  .card.hot { background:var(--ink); color:var(--plane); }
+  .card.hot b, .card.hot u { color:var(--plane); opacity:.7; }
+  .card.hot i { color:var(--glow); }
+  .orbrow { display:flex; align-items:center; gap:14px; margin-top:16px; background:var(--surface); border-radius:14px; padding:12px; }
+  .orbrow p { margin:0; font-size:12.5px; color:var(--ink-secondary); }
+  .orbrow p b { display:block; color:var(--ink); font:700 14px/1.2 "Saira Condensed", system-ui, sans-serif; text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+  .rows { margin-top:12px; }
+  .row { display:flex; justify-content:space-between; padding:11px 2px; font-size:13px; border-top:1px solid var(--line); }
+  .row span { font:700 15px/1 "Saira Condensed", system-ui, sans-serif; letter-spacing:.02em; }
+  .row em { display:block; font-style:normal; font-size:10.5px; color:var(--ink-muted); margin-top:3px; }
+  .nav { margin:14px 0 0; display:flex; justify-content:space-around; padding:10px 0 2px; border-top:1px solid var(--line);
+    font:9px/1 "IBM Plex Mono", monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-muted); }
+  .nav b { color:var(--ink); border-bottom:2px solid var(--accent); padding-bottom:5px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sechs Markenfarben — Premium-Sport</h1>
+  <p>Schwarz und Weiss als Grund, in beiden Fassungen gleichwertig; kein getöntes Papier. <b>Eine</b> Markenfarbe,
+     die gross eingesetzt wird — als Block mit grosser Schrift, nicht als Akzentpunkt. Grosse Ziffern in der Display-Schrift.
+     Die Frage ist hier nur noch: welche Farbe.</p>
+  <p>Wo die Marke auf Weiss zu hell ist, um Text zu tragen (Volt, Orange, Smaragd), bleibt sie Fläche und die Schrift ist
+     schwarz — das ist gerechnet, nicht geschätzt.</p>
+</header>
+<div id="out"></div>
+<script src="sport.js"></script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+[
+ {
+  "name": "Volt",
+  "brand": "#D3F73A",
+  "ink_on_brand": "#0A0A0A",
+  "darkbrand": "#D3F73A",
+  "why": "Elektrisches Gelbgrün auf Schwarz und Weiss. Die Farbe des Trikots unter Flutlicht — sie ist nicht schön, sie ist sichtbar. Auf Weiss trägt sie nur Flächen, nie Text; auf Schwarz leuchtet sie.",
+  "light": {
+   "plane": "#FFFFFF",
+   "surface": "#F3F3F3",
+   "surface-raised": "#FFFFFF",
+   "surface-sunken": "#E6E6E6",
+   "ink": "#0A0A0A",
+   "ink-secondary": "#3A3A3A",
+   "ink-muted": "#5C5C5C",
+   "accent": "#D3F73A",
+   "accent-ink": "#0A0A0A",
+   "glow": "#D3F73A",
+   "line": "#DADADA",
+   "strong": "#9A9A9A",
+   "accent-text": "#0A0A0A"
+  },
+  "dark": {
+   "plane": "#0A0A0A",
+   "surface": "#161616",
+   "surface-raised": "#1F1F1F",
+   "surface-sunken": "#000000",
+   "ink": "#FFFFFF",
+   "ink-secondary": "#C4C4C4",
+   "ink-muted": "#A3A3A3",
+   "accent": "#D3F73A",
+   "accent-ink": "#0A0A0A",
+   "glow": "#D3F73A",
+   "line": "#2A2A2A",
+   "strong": "#5A5A5A",
+   "accent-text": "#D3F73A"
+  },
+  "tones": [
+   "#FFFFFF",
+   "#0A0A0A",
+   "#D3F73A"
+  ]
+ },
+ {
+  "name": "Kobalt",
+  "brand": "#1F3BFF",
+  "ink_on_brand": "#FFFFFF",
+  "darkbrand": "#4D63FF",
+  "why": "Ein tiefes, gesättigtes Blau — nicht das Software-Hellblau, sondern Kobalt wie auf einer Rennmaschine. Trägt Text in Weiss und funktioniert als grosse Fläche, ohne zu schreien.",
+  "light": {
+   "plane": "#FFFFFF",
+   "surface": "#F3F3F3",
+   "surface-raised": "#FFFFFF",
+   "surface-sunken": "#E6E6E6",
+   "ink": "#0A0A0A",
+   "ink-secondary": "#3A3A3A",
+   "ink-muted": "#5C5C5C",
+   "accent": "#1F3BFF",
+   "accent-ink": "#FFFFFF",
+   "glow": "#1F3BFF",
+   "line": "#DADADA",
+   "strong": "#9A9A9A",
+   "accent-text": "#1F3BFF"
+  },
+  "dark": {
+   "plane": "#0A0A0A",
+   "surface": "#161616",
+   "surface-raised": "#1F1F1F",
+   "surface-sunken": "#000000",
+   "ink": "#FFFFFF",
+   "ink-secondary": "#C4C4C4",
+   "ink-muted": "#A3A3A3",
+   "accent": "#4D63FF",
+   "accent-ink": "#FFFFFF",
+   "glow": "#4D63FF",
+   "line": "#2A2A2A",
+   "strong": "#5A5A5A",
+   "accent-text": "#FFFFFF"
+  },
+  "tones": [
+   "#FFFFFF",
+   "#0A0A0A",
+   "#1F3BFF"
+  ]
+ },
+ {
+  "name": "Orange",
+  "brand": "#FF6A00",
+  "ink_on_brand": "#0A0A0A",
+  "darkbrand": "#FF7A1A",
+  "why": "Reines Orange, kein Rot: Energie ohne Alarm. Die Statusfarbe für Verschlechterung bleibt davon getrennt. Auf Schwarz die wärmste der sechs, auf Weiss die lauteste.",
+  "light": {
+   "plane": "#FFFFFF",
+   "surface": "#F3F3F3",
+   "surface-raised": "#FFFFFF",
+   "surface-sunken": "#E6E6E6",
+   "ink": "#0A0A0A",
+   "ink-secondary": "#3A3A3A",
+   "ink-muted": "#5C5C5C",
+   "accent": "#FF6A00",
+   "accent-ink": "#0A0A0A",
+   "glow": "#FF6A00",
+   "line": "#DADADA",
+   "strong": "#9A9A9A",
+   "accent-text": "#0A0A0A"
+  },
+  "dark": {
+   "plane": "#0A0A0A",
+   "surface": "#161616",
+   "surface-raised": "#1F1F1F",
+   "surface-sunken": "#000000",
+   "ink": "#FFFFFF",
+   "ink-secondary": "#C4C4C4",
+   "ink-muted": "#A3A3A3",
+   "accent": "#FF7A1A",
+   "accent-ink": "#0A0A0A",
+   "glow": "#FF7A1A",
+   "line": "#2A2A2A",
+   "strong": "#5A5A5A",
+   "accent-text": "#FF7A1A"
+  },
+  "tones": [
+   "#FFFFFF",
+   "#0A0A0A",
+   "#FF6A00"
+  ]
+ },
+ {
+  "name": "Magenta",
+  "brand": "#D61A62",
+  "ink_on_brand": "#FFFFFF",
+  "darkbrand": "#FF3D85",
+  "dark_ink": "#0A0A0A",
+  "why": "Kaltes Pink, weit weg von Rosa. Im Sport selten und deshalb sofort zuzuordnen — die Farbe, die man von zehn Apps auf einem Homescreen als erste findet.",
+  "light": {
+   "plane": "#FFFFFF",
+   "surface": "#F3F3F3",
+   "surface-raised": "#FFFFFF",
+   "surface-sunken": "#E6E6E6",
+   "ink": "#0A0A0A",
+   "ink-secondary": "#3A3A3A",
+   "ink-muted": "#5C5C5C",
+   "accent": "#D61A62",
+   "accent-ink": "#FFFFFF",
+   "glow": "#D61A62",
+   "line": "#DADADA",
+   "strong": "#9A9A9A",
+   "accent-text": "#D61A62"
+  },
+  "dark": {
+   "plane": "#0A0A0A",
+   "surface": "#161616",
+   "surface-raised": "#1F1F1F",
+   "surface-sunken": "#000000",
+   "ink": "#FFFFFF",
+   "ink-secondary": "#C4C4C4",
+   "ink-muted": "#A3A3A3",
+   "accent": "#FF3D85",
+   "accent-ink": "#0A0A0A",
+   "glow": "#FF3D85",
+   "line": "#2A2A2A",
+   "strong": "#5A5A5A",
+   "accent-text": "#FF3D85"
+  },
+  "tones": [
+   "#FFFFFF",
+   "#0A0A0A",
+   "#D61A62"
+  ]
+ },
+ {
+  "name": "Smaragd",
+  "brand": "#00A868",
+  "ink_on_brand": "#0A0A0A",
+  "darkbrand": "#19C97F",
+  "why": "Ein sattes Grün ohne Gelbanteil und ohne Mint. Steht für Form und Fortschritt, ohne dass die App wie eine Bank oder ein Wellness-Produkt aussieht.",
+  "light": {
+   "plane": "#FFFFFF",
+   "surface": "#F3F3F3",
+   "surface-raised": "#FFFFFF",
+   "surface-sunken": "#E6E6E6",
+   "ink": "#0A0A0A",
+   "ink-secondary": "#3A3A3A",
+   "ink-muted": "#5C5C5C",
+   "accent": "#00A868",
+   "accent-ink": "#0A0A0A",
+   "glow": "#00A868",
+   "line": "#DADADA",
+   "strong": "#9A9A9A",
+   "accent-text": "#0A0A0A"
+  },
+  "dark": {
+   "plane": "#0A0A0A",
+   "surface": "#161616",
+   "surface-raised": "#1F1F1F",
+   "surface-sunken": "#000000",
+   "ink": "#FFFFFF",
+   "ink-secondary": "#C4C4C4",
+   "ink-muted": "#A3A3A3",
+   "accent": "#19C97F",
+   "accent-ink": "#0A0A0A",
+   "glow": "#19C97F",
+   "line": "#2A2A2A",
+   "strong": "#5A5A5A",
+   "accent-text": "#19C97F"
+  },
+  "tones": [
+   "#FFFFFF",
+   "#0A0A0A",
+   "#00A868"
+  ]
+ },
+ {
+  "name": "Kobalt + Volt",
+  "brand": "#1F3BFF",
+  "ink_on_brand": "#FFFFFF",
+  "darkbrand": "#4D63FF",
+  "second": "#D3F73A",
+  "why": "Zwei Farben wie ein Trikot: Kobalt trägt die Flächen, Volt markiert Messpunkte und den einen Wert, der gerade zählt. Die einzige Fassung mit zwei Markenfarben — und die mit dem grössten Wiedererkennungswert.",
+  "light": {
+   "plane": "#FFFFFF",
+   "surface": "#F3F3F3",
+   "surface-raised": "#FFFFFF",
+   "surface-sunken": "#E6E6E6",
+   "ink": "#0A0A0A",
+   "ink-secondary": "#3A3A3A",
+   "ink-muted": "#5C5C5C",
+   "accent": "#1F3BFF",
+   "accent-ink": "#FFFFFF",
+   "glow": "#D3F73A",
+   "line": "#DADADA",
+   "strong": "#9A9A9A",
+   "accent-text": "#1F3BFF"
+  },
+  "dark": {
+   "plane": "#0A0A0A",
+   "surface": "#161616",
+   "surface-raised": "#1F1F1F",
+   "surface-sunken": "#000000",
+   "ink": "#FFFFFF",
+   "ink-secondary": "#C4C4C4",
+   "ink-muted": "#A3A3A3",
+   "accent": "#4D63FF",
+   "accent-ink": "#FFFFFF",
+   "glow": "#D3F73A",
+   "line": "#2A2A2A",
+   "strong": "#5A5A5A",
+   "accent-text": "#FFFFFF"
+  },
+  "tones": [
+   "#FFFFFF",
+   "#0A0A0A",
+   "#1F3BFF",
+   "#D3F73A"
+  ]
+ }
+]
