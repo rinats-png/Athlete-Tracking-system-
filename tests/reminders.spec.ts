@@ -1,5 +1,4 @@
-import { readFileSync } from 'node:fs'
-import { openGuest } from './helpers'
+import { openGuest, readDict } from './helpers'
 import { expect, test } from '@playwright/test'
 import { dueTests, overdueTests, suggestedIntervalDays, SUGGESTED_INTERVAL_BOUNDS } from '../src/domain/reminders'
 import { monthCalendar } from '../src/domain/calendar'
@@ -100,7 +99,7 @@ test.describe('Was die Erinnerung leisten kann', () => {
   })
 
   test('kein Text verspricht eine Meldung, die bei geschlossener App käme', () => {
-    const de = JSON.parse(readFileSync(new URL('../src/i18n/de.json', import.meta.url), 'utf-8'))
+    const de = readDict('de')
 
     // Seit die App eine Systemmeldung zeigen KANN, solange sie offen ist, ist
     // «benachrichtigen» kein verbotenes Wort mehr — es wäre sonst die

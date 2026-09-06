@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readDict } from "./helpers";
 import { expect, test } from "@playwright/test";
 import {
   REFERENCES,
@@ -158,7 +158,7 @@ test.describe("Median als Bezug", () => {
 
   test("beide Sprachen benennen den Medianbezug", () => {
     for (const file of ["de", "en"]) {
-      const dict = JSON.parse(readFileSync(new URL(`../src/i18n/${file}.json`, import.meta.url), "utf-8"));
+      const dict = readDict(file as "de" | "en");
       expect(dict.rating.gap.median_only, file).toBeTruthy();
       expect(dict.result.percentFromMedian, file).toContain("{{percent}}");
       expect(dict.result.groupMedian, file).toBeTruthy();

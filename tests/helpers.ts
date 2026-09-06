@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { emptyData } from '../src/lib/store/schema'
 import type { Page } from '@playwright/test'
 
@@ -214,4 +215,18 @@ export async function stubAuth(
     // Alles Übrige gilt als Fehler im Prüfaufbau, nicht als Netzzugriff.
     return route.abort()
   })
+}
+
+/**
+ * Das Wörterbuch einer Sprache, so wie die App es zur Laufzeit sieht.
+ *
+ * Kern und Zusatzteil zusammen: seit der Zusatzteil erst mit dem ersten
+ * nachgeladenen Bildschirm kommt, liegt ein Teil der Texte nicht mehr in
+ * `de.json`. Eine Prüfung, die nur die Kerndatei liest, prüfte ab da die
+ * halbe Wahrheit.
+ */
+export function readDict(lang: 'de' | 'en'): Record<string, any> {
+  const read = (name: string) =>
+    JSON.parse(readFileSync(new URL(`../src/i18n/${name}`, import.meta.url), 'utf-8'))
+  return { ...read(`${lang}.json`), ...read(`${lang}.extra.json`) }
 }

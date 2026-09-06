@@ -237,7 +237,10 @@ test.describe('Was bewusst draussen blieb', () => {
   test('jede weggelassene Zeile nennt ihren Grund', () => {
     for (const subject of [
       'Schlagkraft',
-      'SWPT-Index',
+      // «SWPT-Index» stand hier, solange die Indexspalte der
+      // Sieben-Stufen-Tabelle unbelegt war. Das Referenzhandbuch nennt sie
+      // jetzt neben der Wurfspalte derselben Tabelle — die Lücke ist
+      // geschlossen und der Eintrag deshalb kein Lückeneintrag mehr.
       'Kreuzheben',
       'KSAT',
       'HYROX',

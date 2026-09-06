@@ -1,6 +1,7 @@
 import type { ScoringDirection, Sex } from '@/types/domain'
 import { P_ANCHORS, type ReferenceBand, type ReferenceEntry } from './referenceModel'
 import { EXTENDED_REFERENCES } from './referencesExtended'
+import { HANDBOOK_REFERENCES } from './referencesHandbook'
 
 /**
  * Referenzwerte aus publizierten Quellen.
@@ -676,7 +677,11 @@ const BASE_REFERENCES: ReferenceEntry[] = [
  * erweiterten Quelltabelle. Eine Liste, weil die Auswertung nicht wissen
  * muss, aus welcher Datei ein Eintrag stammt — die Quelle steht am Eintrag.
  */
-export const REFERENCES: ReferenceEntry[] = [...BASE_REFERENCES, ...EXTENDED_REFERENCES]
+export const REFERENCES: ReferenceEntry[] = [
+  ...BASE_REFERENCES,
+  ...EXTENDED_REFERENCES,
+  ...HANDBOOK_REFERENCES,
+]
 
 /**
  * Eine Lücke in der Belegung — und was über sie bekannt ist.
@@ -731,11 +736,6 @@ export const REFERENCE_GAPS: ReferenceGap[] = [
     subject: 'US Army Fitness Test: Kreuzheben (Maximum Deadlift)',
     reason:
       'Der Höchstwert von 350 lbs (158,8 kg) gilt für ein DREI-Wiederholungs-Maximum am Hex-Bar. Diese App führt das Einer-Maximum am Langhantel-Kreuzheben. Beide Zahlen heissen «Kreuzheben» und sind nicht dasselbe: ein Dreier-Maximum liegt rund zehn Prozent unter dem Einer-Maximum, und der Hex-Bar hebt das Ergebnis noch einmal. Der Bezugswert kommt, sobald die App das Dreier-Maximum als eigenen Test führt.',
-  },
-  {
-    subject: 'Ringen: SWPT-Index (Indexspalte der Sieben-Stufen-Tabelle)',
-    reason:
-      'Die Wurfspalte derselben Tabelle ist übernommen. Die Indexspalte ist mit «SWPT-Index» überschrieben; ob dieser Index nach derselben Formel gebildet wird wie der Index dieser App (Summe beider Herzfrequenzen geteilt durch die Wurfzahl), geht aus der Quelle nicht hervor. Zwei gleich benannte Indizes aus verschiedenen Protokollen zu vergleichen, wäre schlimmer als kein Vergleich.',
   },
   {
     subject: 'Judogi-Klimmzug (isometrisch und dynamisch)',

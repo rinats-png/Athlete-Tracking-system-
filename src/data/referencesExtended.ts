@@ -587,8 +587,8 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     source: { study: 'Coggan/Allen-Leistungsprofil, Kategoriegrenzen der Praxis', n: null },
     quality: 'D',
     protocolNote: {
-      de: 'Praxisstandard ohne Begutachtung, und geschlechtsunabhängig notiert — die zugrunde liegende Profiltabelle führt für Frauen eigene Bänder rund 0,4 bis 0,5 W/kg darunter. Für Frauen ist die Einordnung deshalb zu streng.',
-      en: 'A practice standard without peer review, noted without sex separation — the underlying profile table lists separate bands for women roughly 0.4 to 0.5 W/kg lower. The rating is therefore too strict for women.',
+      de: 'Praxisstandard ohne peer-review-geprüfte Normbasis, und geschlechtsunabhängig notiert — die zugrunde liegende Profiltabelle führt für Frauen eigene Bänder rund 0,4 bis 0,5 W/kg darunter. Für Frauen ist die Einordnung deshalb zu streng. Oberhalb der Kategorie A nennt das Referenzhandbuch weitere Stufen (Pro Continental 5,8–6,4 W/kg, World Tour ab 6,4); der Bereich zwischen 4,6 und 5,8 W/kg ist dort nicht belegt und bleibt ohne eigene Stufe. Die FTP hängt zudem am Messgerät und am Herleitungsmodell.',
+      en: 'A practice standard without a peer-reviewed normative basis, noted without sex separation — the underlying profile table lists separate bands for women roughly 0.4 to 0.5 W/kg lower, so the rating is too strict for women. Above category A the reference handbook names further tiers (Pro Continental 5.8–6.4 W/kg, World Tour from 6.4); the range between 4.6 and 5.8 W/kg is not covered there and gets no tier of its own. FTP also depends on the power meter and the derivation model.',
     },
   },
   // ======================= SCHWIMMEN — CSS-LEISTUNGSSTUFEN =================

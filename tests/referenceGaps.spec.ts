@@ -75,3 +75,58 @@ test.describe('Am Test sichtbar', () => {
     await expect(page.getByText('Bekannte Lücke')).toHaveCount(0)
   })
 })
+
+test.describe('Referenzen aus dem Referenzhandbuch', () => {
+  test('jede übernommene Zeile trägt eine Zahl, eine Gruppe und eine Quelle', async () => {
+    const { HANDBOOK_REFERENCES } = await import('../src/data/referencesHandbook')
+    expect(HANDBOOK_REFERENCES.length).toBeGreaterThan(0)
+
+    for (const entry of HANDBOOK_REFERENCES) {
+      const label = entry.cohortLabel.de
+      expect(label.length, label).toBeGreaterThan(10)
+      expect(entry.source.study.length, label).toBeGreaterThan(20)
+
+      // Eine Zeile ohne Zahl ordnet niemanden ein. Das Handbuch schreibt an
+      // solche Zeilen selbst «keine Norm» — sie gehören nicht hierher.
+      const hasNumber =
+        entry.mean != null ||
+        entry.median != null ||
+        entry.anchor != null ||
+        (entry.bands?.length ?? 0) > 0 ||
+        (entry.values?.length ?? 0) > 0
+      expect(hasNumber, label).toBe(true)
+    }
+  })
+
+  test('der SWFT-Index ist jetzt belegt und nicht mehr als Lücke geführt', async () => {
+    const { REFERENCES, REFERENCE_GAPS } = await import('../src/data/references')
+
+    const index = REFERENCES.filter(
+      (e) => e.testSlug === 'special_wrestling_fitness_test' && e.metricKey === 'swft_index',
+    )
+    expect(index).toHaveLength(1)
+    expect(index[0].bands).toHaveLength(7)
+
+    // Die Lücke war benannt, solange die Indexspalte unbelegt war. Sie darf
+    // nicht stehen bleiben, wenn sie geschlossen ist — sonst meldet die App
+    // eine Lücke, die es nicht mehr gibt.
+    expect(REFERENCE_GAPS.some((g) => g.subject.includes('SWPT-Index'))).toBe(false)
+  })
+
+  test('ein Praxisstandard ist als solcher gekennzeichnet — und nicht doppelt', async () => {
+    const { REFERENCES } = await import('../src/data/references')
+    const ftp = REFERENCES.filter(
+      (e) => e.testSlug === 'ftp_20min' && e.metricKey === 'ftp_watt_per_kg',
+    )
+    // Die Praxiseinteilung stand schon in der App. Das Handbuch nennt sie
+    // ebenfalls — sie ein zweites Mal einzutragen hiesse, dieselbe Quelle
+    // als zwei Belege auszugeben.
+    expect(ftp).toHaveLength(1)
+    // Das Handbuch schreibt dazu ausdrücklich: nicht als wissenschaftliche
+    // Norm behandeln. Qualität D ist genau diese Aussage im Datenmodell.
+    expect(ftp[0].quality).toBe('D')
+    expect(ftp[0].protocolNote?.de).toMatch(/ohne peer-review/i)
+    // Und die nicht belegte Spanne wird benannt statt gefüllt.
+    expect(ftp[0].protocolNote?.de).toMatch(/nicht belegt/)
+  })
+})
