@@ -39,9 +39,10 @@ test.describe('Bedingungen des Testtags', () => {
     await page.getByRole('link', { name: /An dieser Station erfassen/ }).first().click()
     await page.waitForURL('**/gruppentest?**')
 
-    const felder = page.getByRole('spinbutton')
-    await felder.nth(0).fill('40')
-    await felder.nth(1).fill('35')
+    // Nach Namen statt nach Position: auf dem Tablet und am Rechner steht die
+    // Eingabe anders, und ein Positionsindex traf dort das falsche Feld.
+    await page.getByLabel('Athlet A').fill('40')
+    await page.getByLabel('Athlet B').fill('35')
     await page.getByRole('button', { name: /speichern/i }).first().click()
 
     const bestand = JSON.parse(
