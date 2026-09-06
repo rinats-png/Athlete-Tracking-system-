@@ -1891,5 +1891,40 @@
     "origin": "Nach: {{origin}}",
     "genericTag": "allgemein",
     "genericHint": "Für diesen Test ist noch keine eigene Vorschrift hinterlegt. Was hier steht, folgt aus dem Testmodus und ist allgemeiner als ein geprüftes Protokoll."
+  },
+  "compare": {
+    "title": "Athletenvergleich",
+    "intro": "Verglichen wird nur, was denselben Test trägt. Neben jeder Zahl steht, wie viele der Ausgewählten ihn überhaupt gemessen haben.",
+    "select": "Wer wird verglichen?",
+    "selected": "{{count}} ausgewählt",
+    "needTwo": "Wähle mindestens zwei Athleten aus.",
+    "noCommon": "Die Ausgewählten haben keinen Test gemeinsam. Ein Vergleich bräuchte mindestens einen Test, den zwei von ihnen gemessen haben.",
+    "axes": "Profilachsen",
+    "axesHint": "Anteil an der eigenen Bestleistung, nicht an einer Norm. Zwei Athleten mit 100 sind beide auf ihrem eigenen Höchststand — nicht gleich stark.",
+    "tests": "Gemeinsame Tests",
+    "coverage": "{{covered}} von {{selected}}",
+    "notMeasured": "nicht gemessen",
+    "rank": "Rang",
+    "value": "Wert",
+    "date": "Gemessen am",
+    "shareOfBest": "% des besten Werts",
+    "gapsTitle": "Mit Vorbehalt",
+    "gaps": {
+      "surface": "Die Messungen fanden auf verschiedenem Untergrund statt.",
+      "equipment": "Es wurde verschiedene Ausrüstung festgehalten.",
+      "time_of_day": "Die Messungen fanden zu verschiedenen Tageszeiten statt.",
+      "age_spread": "Zwischen der ältesten und der jüngsten Messung liegen {{days}} Tage."
+    },
+    "group": {
+      "title": "Gruppenbericht",
+      "intro": "Die Gruppe als Verteilung, nicht als Rangliste. Wer wo steht, sagt der Vergleich.",
+      "median": "Median",
+      "range": "Spanne",
+      "covered": "Belegt",
+      "noData": "Für diese Achse liegt in der Gruppe keine Messung vor.",
+      "print": "Bericht drucken",
+      "generated": "Erstellt am {{date}}",
+      "medianHint": "Median statt Mittelwert: ein einzelner Ausreisser verschiebt den Mittelwert um mehr, als eine Trainingsperiode die Gruppe bewegt."
+    }
   }
 }

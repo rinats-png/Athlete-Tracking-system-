@@ -1891,5 +1891,40 @@
     "origin": "Following: {{origin}}",
     "genericTag": "general",
     "genericHint": "No dedicated procedure is stored for this test yet. What follows comes from the test mode and is more general than a validated protocol."
+  },
+  "compare": {
+    "title": "Athlete comparison",
+    "intro": "Only the same test is compared. Next to every figure is how many of the selected athletes have measured it at all.",
+    "select": "Who is being compared?",
+    "selected": "{{count}} selected",
+    "needTwo": "Select at least two athletes.",
+    "noCommon": "The selected athletes share no test. A comparison needs at least one test measured by two of them.",
+    "axes": "Profile axes",
+    "axesHint": "Share of personal best, not of a norm. Two athletes at 100 are both at their own peak — not equally strong.",
+    "tests": "Shared tests",
+    "coverage": "{{covered}} of {{selected}}",
+    "notMeasured": "not measured",
+    "rank": "Rank",
+    "value": "Value",
+    "date": "Measured on",
+    "shareOfBest": "% of best value",
+    "gapsTitle": "With reservations",
+    "gaps": {
+      "surface": "The measurements were taken on different surfaces.",
+      "equipment": "Different equipment was recorded.",
+      "time_of_day": "The measurements were taken at different times of day.",
+      "age_spread": "There are {{days}} days between the oldest and the most recent measurement."
+    },
+    "group": {
+      "title": "Group report",
+      "intro": "The group as a distribution, not a ranking. Who stands where is what the comparison says.",
+      "median": "Median",
+      "range": "Range",
+      "covered": "Covered",
+      "noData": "No measurement for this axis exists in the group.",
+      "print": "Print report",
+      "generated": "Created on {{date}}",
+      "medianHint": "Median rather than mean: a single outlier shifts the mean by more than a training block shifts the group."
+    }
   }
 }

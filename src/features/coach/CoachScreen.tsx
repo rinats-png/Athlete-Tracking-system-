@@ -30,9 +30,17 @@ export function CoachScreen() {
 
       {role === 'coach' ? (
         <>
-          <Button asChild variant="outline" size="sm" className="mb-4">
-            <Link to="/trainer/gruppentest">{t('group.title')}</Link>
-          </Button>
+          <div className="mb-4 flex flex-wrap gap-2">
+            <Button asChild variant="outline" size="sm">
+              <Link to="/trainer/gruppentest">{t('group.title')}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/trainer/vergleich">{t('compare.title')}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/trainer/gruppenbericht">{t('compare.group.title')}</Link>
+            </Button>
+          </div>
           <CoachDashboard locale={locale} />
         </>
       ) : (
