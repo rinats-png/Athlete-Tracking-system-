@@ -23,7 +23,9 @@ test.describe('Der Satz zum Wert', () => {
     await page.waitForURL('**/ergebnis/**')
 
     await expect(page.getByText('Was bedeutet das?')).toBeVisible()
-    await expect(page.getByText(/erste Messung in diesem Test/).first()).toBeVisible()
+    // Bewusst NICHT derselbe Satz wie im Veränderungspanel daneben: zwei
+    // Panels, die dasselbe sagen, sind eine Dopplung auf dem Bildschirm.
+    await expect(page.getByText(/Noch keine Vormessung/)).toBeVisible()
   })
 
   test('er nennt die Bedingung, unter der die nächste Messung vergleichbar ist', async ({

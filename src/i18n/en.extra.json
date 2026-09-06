@@ -208,7 +208,7 @@
     "percentile": "Of 100 people from the group “{{group}}”, roughly {{below}} would be below your value and {{above}} above it.",
     "band": "The source assigns this value to the band “{{band}}”, relative to {{group}}. It yields no percentile.",
     "noReference": "There is no published comparison group for this test. The value says something about you compared with yourself — and the app claims nothing more here.",
-    "changeFirst": "This is your first measurement in this test. A change needs a second one; from the fourth, the app also knows your measurement spread.",
+    "changeFirst": "No previous measurement yet: a change appears from the second one. From the fourth the app also knows your measurement spread and can separate real change from it.",
     "changeUnknown": "{{points}} measurements so far. For a sound statement about change the app needs at least four — below that, real progress cannot be separated from measurement spread.",
     "changeNoise": "{{percent}} % difference from the last measurement {{days}} days ago. Your measurement spread is {{detectable}} % — the difference cannot be separated from it and does not count as a change.",
     "changeBetter": "{{percent}} % better than {{days}} days ago. That exceeds your measurement spread of {{detectable}} % and is therefore a real change.",

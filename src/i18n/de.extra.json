@@ -208,7 +208,7 @@
     "percentile": "Von 100 Personen aus der Gruppe «{{group}}» lägen rund {{below}} unter deinem Wert und {{above}} darüber.",
     "band": "Die Quelle ordnet diesen Wert dem Band «{{band}}» zu, bezogen auf {{group}}. Ein Perzentil gibt sie nicht her.",
     "noReference": "Für diesen Test gibt es keine publizierte Vergleichsgruppe. Der Wert sagt etwas über dich im Vergleich zu dir selbst — und mehr behauptet die App hier nicht.",
-    "changeFirst": "Das ist deine erste Messung in diesem Test. Eine Veränderung gibt es erst ab der zweiten; ab der vierten kennt die App auch deine Messstreuung.",
+    "changeFirst": "Noch keine Vormessung: eine Veränderung entsteht ab der zweiten. Ab der vierten kennt die App zusätzlich deine Messstreuung und kann echte Veränderung von ihr trennen.",
     "changeUnknown": "Bisher {{points}} Messungen. Für eine belastbare Aussage über Veränderung braucht die App mindestens vier — vorher lässt sich echter Fortschritt nicht von Messstreuung trennen.",
     "changeNoise": "{{percent}} % Unterschied zur letzten Messung vor {{days}} Tagen. Deine Messstreuung liegt bei {{detectable}} % — der Unterschied ist damit nicht von ihr zu trennen und zählt nicht als Veränderung.",
     "changeBetter": "{{percent}} % besser als vor {{days}} Tagen. Das liegt über deiner Messstreuung von {{detectable}} % und ist damit eine echte Veränderung.",

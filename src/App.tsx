@@ -34,8 +34,12 @@ const WelcomeScreen = lazy(() =>
   import('@/features/auth/WelcomeScreen').then((m) => ({ default: m.WelcomeScreen })),
 )
 
+// Der Zusatzteil des Wörterbuchs gehört dazu: der Einstieg zeigt
+// Profiltexte, und ohne ihn stünden dort die Schlüsselnamen.
 const OnboardingFlow = lazy(() =>
-  import('@/features/onboarding/OnboardingFlow').then((m) => ({ default: m.OnboardingFlow })),
+  Promise.all([import('@/features/onboarding/OnboardingFlow'), loadExtra()]).then(([m]) => ({
+    default: m.OnboardingFlow,
+  })),
 )
 import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
 import { loadExtra } from '@/i18n'
