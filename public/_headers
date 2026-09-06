@@ -16,12 +16,16 @@
   # HTTPS erzwingen, inklusive Subdomains.
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   # Content Security Policy. Die App lädt zur Laufzeit nichts von Dritten:
-  # Schriften sind lokal gebündelt, Bilder liegen im Bundle. connect-src
-  # bleibt auf 'self', bis die Cloud-Anbindung kommt — dann kommt die
-  # Supabase-Domain hier ausdrücklich dazu.
+  # Schriften sind lokal gebündelt, Bilder liegen im Bundle.
+  #
+  # connect-src nennt genau EINE fremde Herkunft: das Supabase-Projekt. Kein
+  # Platzhalter, keine Wildcard über *.supabase.co — dann dürfte jedes fremde
+  # Projekt angesprochen werden, und die Regel schützte nichts mehr. Die
+  # wss-Zeile ist für die Echtzeitverbindung des Dienstes; ohne sie bräche
+  # sie still ab.
   # 'unsafe-inline' bei style-src ist nötig, weil die Diagramme Stile inline
   # setzen; Skripte laufen ohne diese Ausnahme.
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://bsbionvnsvqghaqijmpl.supabase.co wss://bsbionvnsvqghaqijmpl.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate

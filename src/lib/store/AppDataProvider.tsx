@@ -110,6 +110,17 @@ interface AppDataValue {
    * nie. Angelegt und geschlossen wird ausdrücklich von Hand — ein
    * Schwerpunkt, den die App selbst setzt, wäre eine Trainingsempfehlung.
    */
+  /** Der gesamte Bestand — für Export, Sicherung und Abgleich. */
+  store: StoredData
+  /**
+   * Athleten aus einer Zweitschrift übernehmen.
+   *
+   * NUR HINZUFÜGEN, nie ersetzen: ein Abgleich, der einen lokalen Athleten
+   * überschreibt, wäre genau der Datenverlust, den §89 verbietet. Wer schon
+   * hier ist, bleibt unangetastet; über abweichende Stände entscheidet der
+   * Nutzer im Profil.
+   */
+  mergeAthletes: (incoming: StoredAthlete[]) => void
   focuses: StoredFocus[]
   saveFocus: (focus: StoredFocus) => void
   closeFocus: (id: string, closed: boolean) => void
@@ -596,6 +607,13 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         setStorageBlocked(false)
       },
       loadDemo: () => commitStore(buildDemoData()),
+      store,
+      mergeAthletes: (incoming) => {
+        const known = new Set(store.athletes.map((a) => a.id))
+        const fresh = incoming.filter((a) => a && !known.has(a.id))
+        if (fresh.length === 0) return
+        commitStore({ ...store, athletes: [...store.athletes, ...fresh] })
+      },
       focuses: active.focuses,
       saveFocus: (focus) =>
         commitFocuses(

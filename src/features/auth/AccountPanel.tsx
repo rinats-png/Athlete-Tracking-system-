@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { clearAccount, plansForRole, readAccount } from './account'
+import { signOut } from '@/lib/supabase/auth'
+import { clearSyncState } from '@/lib/supabase/sync'
 
 /**
  * Wer angemeldet ist — und der Weg hinaus.
@@ -34,7 +36,12 @@ export function AccountPanel() {
           type="button"
           size="sm"
           variant="outline"
-          onClick={() => {
+          onClick={async () => {
+            // Auch die Sitzung beim Dienst beenden, nicht nur die lokale
+            // Marke: sonst wäre man beim nächsten Start wieder angemeldet,
+            // ohne es gewollt zu haben.
+            await signOut()
+            clearSyncState()
             clearAccount()
             // Neu laden statt den Zustand zu drehen: der Ablauf beginnt beim
             // Tor, und das ist ein Programmstart, kein Bildschirmwechsel.

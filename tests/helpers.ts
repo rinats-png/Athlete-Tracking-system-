@@ -172,3 +172,46 @@ export function emptyAthleteView() {
     results: athlete.results,
   }
 }
+
+/**
+ * Den Anmeldedienst abfangen.
+ *
+ * ZWEI GRÜNDE, WARUM DAS SEIN MUSS: ein Prüflauf mit 2 500 Fällen darf keinen
+ * echten Dienst ansprechen — das wäre langsam, kostet fremde Kontingente und
+ * macht das Ergebnis von einem Netz abhängig, das nichts mit dem Code zu tun
+ * hat. Und ein Fall, der ein echtes Konto anlegt, hinterlässt Spuren, die
+ * niemand aufräumt.
+ *
+ * Abgefangen wird die HERKUNFT, nicht einzelne Pfade: was hier nicht
+ * beschrieben ist, wird abgewiesen statt durchgelassen. Ein vergessener
+ * Endpunkt fällt so als Fehler auf und nicht als stiller Netzzugriff.
+ */
+export async function stubAuth(
+  page: Page,
+  options: { signIn?: 'ok' | 'invalid'; signUp?: 'confirm' | 'taken'; user?: boolean } = {},
+) {
+  const user = { id: '00000000-0000-4000-8000-000000000001', email: 'pruef@baseline.test' }
+  await page.route('**/*.supabase.co/**', async (route) => {
+    const url = route.request().url()
+    const json = (status: number, body: unknown) =>
+      route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(body) })
+
+    if (url.includes('/auth/v1/token')) {
+      return options.signIn === 'invalid'
+        ? json(400, { error: 'invalid_grant', error_description: 'Invalid login credentials' })
+        : json(200, { access_token: 'stub', token_type: 'bearer', expires_in: 3600, refresh_token: 'stub', user })
+    }
+    if (url.includes('/auth/v1/signup')) {
+      return options.signUp === 'taken'
+        ? json(400, { message: 'User already registered' })
+        : json(200, { user, session: null })
+    }
+    if (url.includes('/auth/v1/user')) {
+      return options.user === false ? json(401, { message: 'unauthorized' }) : json(200, user)
+    }
+    if (url.includes('/auth/v1/recover') || url.includes('/auth/v1/logout')) return json(200, {})
+    if (url.includes('/rest/v1/athlete_documents')) return json(200, [])
+    // Alles Übrige gilt als Fehler im Prüfaufbau, nicht als Netzzugriff.
+    return route.abort()
+  })
+}

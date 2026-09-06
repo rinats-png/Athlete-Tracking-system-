@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 import { plansForRole, planBelongsToRole } from '../src/features/auth/account'
 import { COACH_TIERS, REPORT_BUNDLES } from '../src/data/pricing'
-import { openColdStart } from './helpers'
+import { openColdStart, stubAuth } from './helpers'
 
 /**
  * Warten, bis die Punkte den Umriss erreicht haben und der Inhalt steht.
@@ -31,17 +31,20 @@ test.describe('Was der Bildschirm über sich sagt', () => {
     await openColdStart(page)
     await formed(page)
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
-    await expect(page.getByText(/Es gibt noch keinen Server/)).toBeVisible()
-    await expect(page.getByText(/Wird nicht gespeichert und nicht gesendet/).first()).toBeVisible()
+    // Seit es einen Server gibt, sagt der Bildschirm etwas anderes — aber
+    // dieselbe Sache: was mit den Eingaben passiert und was nicht.
+    await expect(page.getByText(/Deine Anmeldung läuft über unseren Dienstleister/)).toBeVisible()
+    await expect(page.getByText(/nicht auf diesem Gerät gespeichert/).first()).toBeVisible()
   })
 
   test('kein Passwort landet im Gerät', async ({ page }) => {
+    await stubAuth(page)
     await openColdStart(page)
     await formed(page)
     await page.getByLabel('E-Mail').fill('mensch@example.org')
     await page.getByLabel('Passwort').fill('einSehrGeheimesWort')
     await page.getByRole('button', { name: 'Anmelden' }).click()
-    await page.waitForTimeout(1600)
+    await page.waitForTimeout(2000)
 
     const gespeichert = await page.evaluate(() => JSON.stringify(localStorage))
     expect(gespeichert).toContain('mensch@example.org')
@@ -76,6 +79,8 @@ test.describe('Ohne Konto kommt niemand weiter', () => {
 
 test.describe('Registrierung', () => {
   test('Rolle, Stufe, Zugang — in dieser Reihenfolge', async ({ page }) => {
+    // Ohne Bestätigungslage: der Dienst gibt hier eine Sitzung zurück.
+    await stubAuth(page)
     await openColdStart(page)
     await formed(page)
     await page.getByRole('tab', { name: 'Konto anlegen' }).click()
@@ -92,13 +97,13 @@ test.describe('Registrierung', () => {
 
     await page.getByLabel('Name').fill('Sam Trainer')
     await page.getByLabel('E-Mail').fill('sam@example.org')
-    await page.getByLabel('Passwort').fill('egal')
+    await page.getByLabel('Passwort').fill('einLangesPasswort')
     await page.getByRole('button', { name: 'Konto anlegen' }).click()
-    await page.waitForTimeout(1600)
 
-    const konto = await page.evaluate(() => localStorage.getItem('baseline.account.v1'))
-    expect(konto).toContain('Sam Trainer')
-    expect(konto).toContain('coach_m')
+    // Der Dienst schickt eine Bestätigungsmail und gibt KEINE Sitzung zurück.
+    // Das ist der normale Weg, und der Bildschirm sagt es.
+    await expect(page.getByRole('heading', { name: 'Bestätige deine E-Mail' })).toBeVisible()
+    await expect(page.getByText(/sam@example.org/)).toBeVisible()
   })
 
   test('die Stufe lässt sich überspringen', async ({ page }) => {
@@ -130,13 +135,14 @@ test.describe('Stufen und Rollen', () => {
 
 test.describe('Der Übergang', () => {
   test('nach der Anmeldung kommt die Sequenz, dann der Einstieg', async ({ page }) => {
+    await stubAuth(page)
     await openColdStart(page)
     await formed(page)
     await page.evaluate(() => localStorage.setItem('baseline.intro', 'on'))
     await page.reload({ waitUntil: 'domcontentloaded' })
     await formed(page)
     await page.getByLabel('E-Mail').fill('mensch@example.org')
-    await page.getByLabel('Passwort').fill('egal')
+    await page.getByLabel('Passwort').fill('einLangesPasswort')
     await page.getByRole('button', { name: 'Anmelden' }).click()
 
     // Die Auflösung der Fläche geht in die Sequenz über.
@@ -197,5 +203,33 @@ test.describe('Die Rolle aus der Registrierung', () => {
     await page.waitForTimeout(600)
     const bestand = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
     expect(bestand).toContain('"role":"coach"')
+  })
+})
+
+test.describe('Der Anmeldedienst', () => {
+  test('ein falsches Passwort wird benannt, nicht durchgewinkt', async ({ page }) => {
+    await stubAuth(page, { signIn: 'invalid' })
+    await openColdStart(page)
+    await formed(page)
+    await page.getByLabel('E-Mail').fill('mensch@example.org')
+    await page.getByLabel('Passwort').fill('falsch')
+    await page.getByRole('button', { name: 'Anmelden' }).click()
+
+    await expect(page.getByRole('alert')).toContainText('E-Mail oder Passwort stimmt nicht')
+    // Und niemand kommt trotzdem hinein.
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
+  })
+
+  test('eine bereits vergebene E-Mail wird benannt', async ({ page }) => {
+    await stubAuth(page, { signUp: 'taken' })
+    await openColdStart(page)
+    await formed(page)
+    await page.getByRole('tab', { name: 'Konto anlegen' }).click()
+    await page.getByRole('button', { name: /Für mich selbst/ }).click()
+    await page.getByRole('button', { name: 'Später entscheiden' }).click()
+    await page.getByLabel('E-Mail').fill('schon@da.example')
+    await page.getByLabel('Passwort').fill('einLangesPasswort')
+    await page.getByRole('button', { name: 'Konto anlegen' }).click()
+    await expect(page.getByRole('alert')).toContainText('schon ein Konto')
   })
 })

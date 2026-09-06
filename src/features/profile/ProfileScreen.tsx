@@ -9,6 +9,7 @@ import { AthleteNotes } from '@/features/coach/AthleteNotes'
 import { TrainingFocuses } from '@/features/coach/TrainingFocuses'
 import { CoachSettings } from '@/features/coach/CoachSettings'
 import { AccountPanel } from '@/features/auth/AccountPanel'
+import { SyncPanel } from './SyncPanel'
 import { downloadFile } from '@/lib/export/csv'
 import { useTranslation } from 'react-i18next'
 import { Download, ShieldCheck, Trash2, Upload } from 'lucide-react'
@@ -399,6 +400,8 @@ export function ProfileScreen() {
           <AthleteNotes locale={locale} />
 
           <AccountPanel />
+
+          <SyncPanel />
 
           <CoachSettings locale={locale} />
 

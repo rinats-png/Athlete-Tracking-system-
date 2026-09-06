@@ -3,6 +3,14 @@ import { useTranslation } from 'react-i18next'
 import { ArrowRight, Check } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { FORMED_SECONDS, ParticleGate, type GatePhase } from '@/components/signature/ParticleGate'
+import { isSupabaseConfigured } from '@/lib/supabase/client'
+import {
+  MIN_PASSWORD_LENGTH,
+  requestPasswordReset,
+  signIn,
+  signUp,
+  type AuthOutcome,
+} from '@/lib/supabase/auth'
 import { plansForRole, writeAccount, type Account, type AccountRole } from './account'
 
 /**
@@ -100,9 +108,11 @@ export function AuthScreen({ onSignedIn }: { onSignedIn: (account: Account) => v
 
           <div
             role="status"
-            className="mt-4 border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-relaxed text-ink-secondary"
+            className={`mt-4 border-l-2 px-3 py-2 text-[12px] leading-relaxed text-ink-secondary ${
+              isSupabaseConfigured() ? 'border-accent bg-accent-quiet' : 'border-warning bg-warning/10'
+            }`}
           >
-            {t('auth.noBackend')}
+            {isSupabaseConfigured() ? t('auth.backendNote') : t('auth.noBackend')}
           </div>
 
           <div className="mt-5 flex gap-2" role="tablist" aria-label={t('auth.eyebrow')}>
@@ -137,30 +147,66 @@ export function AuthScreen({ onSignedIn }: { onSignedIn: (account: Account) => v
 
 const field = 'w-full border border-line bg-surface-sunken px-3 py-2 text-[16px]'
 
+/**
+ * Fehler des Anmeldedienstes in einen Satz übersetzen.
+ *
+ * Die Kennung kommt aus der Datenschicht, die Formulierung aus der
+ * Sprachdatei — ein fertiger Satz im Netzwerkcode wäre in der zweiten Sprache
+ * nicht zu übersetzen.
+ */
+function useAuthError() {
+  const { t } = useTranslation()
+  return (reason: AuthOutcome['reason']) => (reason ? t(`auth.error.${reason}`) : null)
+}
+
 function SignInPane({ onDone }: { onDone: (account: Account) => void }) {
   const { t } = useTranslation()
+  const message = useAuthError()
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [notice, setNotice] = useState<string | null>(null)
+
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setError(null)
+    setNotice(null)
+
+    /*
+     * Ohne hinterlegtes Projekt bleibt es beim gestalteten Tor: die App läuft
+     * dann vollständig auf dem Gerät weiter. Ein Anmeldebildschirm, der ohne
+     * Server gar nicht mehr weiterlässt, wäre eine Sperre ohne Zweck.
+     */
+    if (!isSupabaseConfigured()) {
+      onDone({
+        name: email.split('@')[0] || t('auth.defaultName'),
+        email,
+        role: 'athlete',
+        planId: null,
+        createdAt: new Date().toISOString(),
+      })
+      return
+    }
+
+    setBusy(true)
+    const outcome = await signIn(email, password)
+    setBusy(false)
+    if (!outcome.ok) {
+      setError(message(outcome.reason))
+      return
+    }
+    onDone({
+      name: email.split('@')[0] || t('auth.defaultName'),
+      email,
+      role: 'athlete',
+      planId: null,
+      createdAt: new Date().toISOString(),
+    })
+  }
 
   return (
-    <form
-      className="mt-5 space-y-3"
-      onSubmit={(event) => {
-        event.preventDefault()
-        /*
-         * Der Name wird aus dem Teil vor dem @ gebildet, nicht abgefragt:
-         * wer sich anmeldet, hat seinen Namen bei der Registrierung schon
-         * genannt, und ein zweites Mal danach zu fragen wäre eine Frage ohne
-         * Empfänger. Das Passwort geht nirgendwohin (siehe `account.ts`).
-         */
-        onDone({
-          name: email.split('@')[0] || t('auth.defaultName'),
-          email,
-          role: 'athlete',
-          planId: null,
-          createdAt: new Date().toISOString(),
-        })
-      }}
-    >
+    <form className="mt-5 space-y-3" onSubmit={submit}>
       <label className="block">
         <span className="label-tag">{t('auth.email')}</span>
         <input
@@ -174,15 +220,52 @@ function SignInPane({ onDone }: { onDone: (account: Account) => void }) {
       </label>
       <label className="block">
         <span className="label-tag">{t('auth.password')}</span>
-        <input className={field} type="password" autoComplete="current-password" required />
+        <input
+          className={field}
+          type="password"
+          autoComplete="current-password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <span className="mt-1 block text-[11px] leading-relaxed text-ink-muted">
           {t('auth.passwordNotStored')}
         </span>
       </label>
-      <Button type="submit" size="lg" variant="primary" className="w-full justify-center">
-        {t('auth.signIn')}
-        <ArrowRight size={15} aria-hidden />
+
+      {error && (
+        <p role="alert" className="border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-relaxed">
+          {error}
+        </p>
+      )}
+      {notice && (
+        <p role="status" className="text-[12px] leading-relaxed text-ink-secondary">
+          {notice}
+        </p>
+      )}
+
+      <Button type="submit" size="lg" variant="primary" className="w-full justify-center" disabled={busy}>
+        {busy ? t('auth.working') : t('auth.signIn')}
+        {!busy && <ArrowRight size={15} aria-hidden />}
       </Button>
+
+      {isSupabaseConfigured() && (
+        <Button
+          type="button"
+          size="sm"
+          variant="ghost"
+          className="w-full justify-center"
+          onClick={async () => {
+            setError(null)
+            // Immer dieselbe Antwort, ob es das Konto gibt oder nicht: sonst
+            // liesse sich über dieses Formular herausfinden, wer registriert ist.
+            await requestPasswordReset(email)
+            setNotice(t('auth.resetSent'))
+          }}
+        >
+          {t('auth.forgotPassword')}
+        </Button>
+      )}
     </form>
   )
 }
@@ -200,8 +283,6 @@ function RegisterPane({ onDone }: { onDone: (account: Account) => void }) {
   const [step, setStep] = useState<Step>('role')
   const [role, setRole] = useState<AccountRole>('athlete')
   const [planId, setPlanId] = useState<string | null>(null)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
 
   if (step === 'role') {
     return (
@@ -276,20 +357,90 @@ function RegisterPane({ onDone }: { onDone: (account: Account) => void }) {
     )
   }
 
+  return <RegisterDetails role={role} planId={planId} onBack={() => setStep('plan')} onDone={onDone} />
+}
+
+/**
+ * Der letzte Schritt: Zugang anlegen.
+ *
+ * Bei hinterlegtem Projekt legt er ein echtes Konto an. Supabase schickt dann
+ * eine Bestätigungsmail und gibt KEINE Sitzung zurück — das ist kein Fehler,
+ * sondern der richtige Weg, und der Bildschirm sagt es, statt jemanden vor
+ * einem Formular warten zu lassen, das schon alles getan hat.
+ */
+function RegisterDetails({
+  role,
+  planId,
+  onBack,
+  onDone,
+}: {
+  role: AccountRole
+  planId: string | null
+  onBack: () => void
+  onDone: (account: Account) => void
+}) {
+  const { t } = useTranslation()
+  const message = useAuthError()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [confirmFor, setConfirmFor] = useState<string | null>(null)
+
+  if (confirmFor) {
+    return (
+      <div className="mt-5 space-y-3">
+        <h2 className="font-display text-[17px] font-bold">{t('auth.confirmTitle')}</h2>
+        <p className="text-[13px] leading-relaxed text-ink-secondary">
+          {t('auth.confirmBody', { email: confirmFor })}
+        </p>
+        <Button type="button" size="sm" variant="outline" onClick={() => setConfirmFor(null)}>
+          {t('auth.backToSignIn')}
+        </Button>
+      </div>
+    )
+  }
+
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setError(null)
+    const account: Account = {
+      name: name.trim() || t('auth.defaultName'),
+      email,
+      role,
+      planId,
+      createdAt: new Date().toISOString(),
+    }
+
+    if (!isSupabaseConfigured()) {
+      onDone(account)
+      return
+    }
+
+    setBusy(true)
+    const outcome = await signUp({
+      email,
+      password,
+      displayName: account.name,
+      role,
+      planId,
+    })
+    setBusy(false)
+
+    if (outcome.reason === 'needs_confirmation') {
+      setConfirmFor(email)
+      return
+    }
+    if (!outcome.ok) {
+      setError(message(outcome.reason))
+      return
+    }
+    onDone(account)
+  }
+
   return (
-    <form
-      className="mt-5 space-y-3"
-      onSubmit={(event) => {
-        event.preventDefault()
-        onDone({
-          name: name.trim() || t('auth.defaultName'),
-          email,
-          role,
-          planId,
-          createdAt: new Date().toISOString(),
-        })
-      }}
-    >
+    <form className="mt-5 space-y-3" onSubmit={submit}>
       <label className="block">
         <span className="label-tag">{t('auth.name')}</span>
         <input
@@ -313,20 +464,36 @@ function RegisterPane({ onDone }: { onDone: (account: Account) => void }) {
       </label>
       <label className="block">
         <span className="label-tag">{t('auth.password')}</span>
-        <input className={field} type="password" autoComplete="new-password" required />
+        <input
+          className={field}
+          type="password"
+          autoComplete="new-password"
+          required
+          minLength={MIN_PASSWORD_LENGTH}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <span className="mt-1 block text-[11px] leading-relaxed text-ink-muted">
-          {t('auth.passwordNotStored')}
+          {t('auth.passwordRule', { count: MIN_PASSWORD_LENGTH })} {t('auth.passwordNotStored')}
         </span>
       </label>
+
+      {error && (
+        <p role="alert" className="border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-relaxed">
+          {error}
+        </p>
+      )}
+
       <div className="flex gap-2">
-        <Button type="submit" size="lg" variant="primary" className="justify-center">
-          {t('auth.createAccount')}
-          <ArrowRight size={15} aria-hidden />
+        <Button type="submit" size="lg" variant="primary" className="justify-center" disabled={busy}>
+          {busy ? t('auth.working') : t('auth.createAccount')}
+          {!busy && <ArrowRight size={15} aria-hidden />}
         </Button>
-        <Button type="button" size="lg" variant="ghost" onClick={() => setStep('plan')}>
+        <Button type="button" size="lg" variant="ghost" onClick={onBack}>
           {t('auth.back')}
         </Button>
       </div>
     </form>
   )
+
 }

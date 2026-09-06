@@ -1775,12 +1775,12 @@
   "auth": {
     "eyebrow": "Anmeldung",
     "claim": "Leistungsdiagnostik, die sagt, was sie weiss — und was nicht.",
-    "noBackend": "Es gibt noch keinen Server: die Eingabe wird nicht geprüft, dein Passwort wird nicht gespeichert und nichts übertragen. Diese Anmeldung ordnet den Einstieg, sie schützt noch nichts.",
+    "noBackend": "Für dieses Gerät ist noch kein Projekt hinterlegt: die Eingabe wird nicht geprüft und nichts übertragen. Diese Anmeldung ordnet den Einstieg, sie schützt noch nichts.",
     "signIn": "Anmelden",
     "register": "Konto anlegen",
     "email": "E-Mail",
     "password": "Passwort",
-    "passwordNotStored": "Wird nicht gespeichert und nicht gesendet. Nimm hier bitte kein Passwort, das anderswo etwas schützt.",
+    "passwordNotStored": "Wird verschlüsselt an den Anmeldedienst übergeben und nicht auf diesem Gerät gespeichert.",
     "name": "Name",
     "defaultName": "Athlet",
     "createAccount": "Konto anlegen",
@@ -1802,6 +1802,42 @@
     "signedInAs": "Angemeldet als {{name}}",
     "planChosen": "Gewählte Stufe: {{plan}}",
     "planNone": "Noch keine Stufe gewählt.",
-    "signOutKeepsData": "Abmelden räumt nur das Konto. Deine Messwerte bleiben auf diesem Gerät — sie gehören dir, nicht der Anmeldung."
+    "signOutKeepsData": "Abmelden räumt nur das Konto. Deine Messwerte bleiben auf diesem Gerät — sie gehören dir, nicht der Anmeldung.",
+    "backendNote": "Deine Anmeldung läuft über unseren Dienstleister. Gemessen und ausgewertet wird weiter auf diesem Gerät; übertragen wird erst, wenn du die Synchronisierung einschaltest.",
+    "passwordRule": "Mindestens {{count}} Zeichen.",
+    "confirmTitle": "Bestätige deine E-Mail",
+    "confirmBody": "Wir haben eine Nachricht an {{email}} geschickt. Öffne den Link darin, dann kannst du dich anmelden.",
+    "backToSignIn": "Zurück zur Anmeldung",
+    "forgotPassword": "Passwort vergessen?",
+    "resetSent": "Wenn es ein Konto zu dieser Adresse gibt, ist eine Nachricht unterwegs.",
+    "working": "Einen Moment …",
+    "error": {
+      "invalid_credentials": "E-Mail oder Passwort stimmt nicht.",
+      "email_taken": "Zu dieser E-Mail gibt es schon ein Konto. Melde dich an oder setze das Passwort zurück.",
+      "weak_password": "Das Passwort ist zu kurz.",
+      "needs_confirmation": "Diese E-Mail ist noch nicht bestätigt. Der Link steht in deinem Postfach.",
+      "offline": "Keine Verbindung. Du kannst weiter auf diesem Gerät messen — die Anmeldung geht später.",
+      "not_configured": "Für dieses Gerät ist kein Projekt hinterlegt.",
+      "unknown": "Das hat nicht geklappt. Versuch es später noch einmal."
+    }
+  },
+  "sync": {
+    "title": "Synchronisierung",
+    "hint": "Deine Messwerte als Zweitschrift auf dem Server — damit sie einen Geräteverlust überleben und auf einem zweiten Gerät erscheinen.",
+    "offNotice": "Aus. Alles bleibt auf diesem Gerät. Der Export ist dann deine einzige Sicherung.",
+    "signedOut": "Dafür musst du angemeldet sein.",
+    "enable": "Synchronisierung einschalten",
+    "disable": "Ausschalten",
+    "now": "Jetzt abgleichen",
+    "working": "Gleicht ab …",
+    "last": "Zuletzt abgeglichen: {{date}}",
+    "never": "Noch nie abgeglichen.",
+    "result": "{{pushed}} hochgeladen, {{pulled}} geholt.",
+    "offline": "Keine Verbindung. Der Abgleich holt es nach, sobald du wieder online bist.",
+    "conflictTitle": "Abweichender Stand",
+    "conflictBody": "Dieser Athlet wurde auf einem anderen Gerät geändert. BASELINE hat nichts überschrieben — beide Stände sind unversehrt. Sichere zuerst deinen Export, dann entscheide.",
+    "conflictKeepLocal": "Diesen Bestand hochladen",
+    "conflictExplain": "Der Serverstand wird dabei ersetzt. Der andere Weg — den Serverstand holen — führt über Export, «alles löschen» und einen neuen Abgleich.",
+    "whatLeaves": "Übertragen werden Messwerte, Profilangaben, Notizen und Trainingsschwerpunkte. Nicht übertragen wird dein Passwort."
   }
 }

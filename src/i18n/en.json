@@ -1775,12 +1775,12 @@
   "auth": {
     "eyebrow": "Sign in",
     "claim": "Performance diagnostics that states what it knows — and what it does not.",
-    "noBackend": "There is no server yet: your input is not verified, your password is not stored and nothing is transmitted. This sign-in orders the entry, it does not yet protect anything.",
+    "noBackend": "No project is configured for this device: your input is not verified and nothing is transmitted. This sign-in orders the entry, it does not yet protect anything.",
     "signIn": "Sign in",
     "register": "Create account",
     "email": "Email",
     "password": "Password",
-    "passwordNotStored": "Not stored and not sent. Please do not use a password that protects something elsewhere.",
+    "passwordNotStored": "Passed to the sign-in service encrypted and not stored on this device.",
     "name": "Name",
     "defaultName": "Athlete",
     "createAccount": "Create account",
@@ -1802,6 +1802,42 @@
     "signedInAs": "Signed in as {{name}}",
     "planChosen": "Chosen tier: {{plan}}",
     "planNone": "No tier chosen yet.",
-    "signOutKeepsData": "Signing out only clears the account. Your measurements stay on this device — they are yours, not the sign-in’s."
+    "signOutKeepsData": "Signing out only clears the account. Your measurements stay on this device — they are yours, not the sign-in’s.",
+    "backendNote": "Your sign-in runs through our service provider. Measuring and analysis stay on this device; data is transmitted only once you turn on sync.",
+    "passwordRule": "At least {{count}} characters.",
+    "confirmTitle": "Confirm your email",
+    "confirmBody": "We sent a message to {{email}}. Open the link in it, then you can sign in.",
+    "backToSignIn": "Back to sign in",
+    "forgotPassword": "Forgot your password?",
+    "resetSent": "If an account exists for that address, a message is on its way.",
+    "working": "One moment …",
+    "error": {
+      "invalid_credentials": "Email or password is not right.",
+      "email_taken": "An account already exists for this email. Sign in or reset the password.",
+      "weak_password": "The password is too short.",
+      "needs_confirmation": "This email is not confirmed yet. The link is in your inbox.",
+      "offline": "No connection. You can keep measuring on this device — signing in can wait.",
+      "not_configured": "No project is configured for this device.",
+      "unknown": "That did not work. Please try again later."
+    }
+  },
+  "sync": {
+    "title": "Sync",
+    "hint": "Your measurements as a second copy on the server — so they survive a lost device and appear on a second one.",
+    "offNotice": "Off. Everything stays on this device. The export is then your only backup.",
+    "signedOut": "You need to be signed in for this.",
+    "enable": "Turn on sync",
+    "disable": "Turn off",
+    "now": "Sync now",
+    "working": "Syncing …",
+    "last": "Last synced: {{date}}",
+    "never": "Never synced.",
+    "result": "{{pushed}} uploaded, {{pulled}} fetched.",
+    "offline": "No connection. The sync will catch up once you are online again.",
+    "conflictTitle": "Diverging state",
+    "conflictBody": "This athlete was changed on another device. BASELINE overwrote nothing — both states are intact. Save your export first, then decide.",
+    "conflictKeepLocal": "Upload this record",
+    "conflictExplain": "The server state is replaced. The other direction — fetching the server state — goes through export, “delete everything” and a fresh sync.",
+    "whatLeaves": "Transmitted are measurements, profile details, notes and training focuses. Your password is not transmitted."
   }
 }
