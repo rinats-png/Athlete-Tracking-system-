@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>BASELINE · Instagram · Kontaktbogen</title>
+<style>
+@font-face { font-family: "Saira Condensed"; font-weight: 600; font-style: normal; font-display: block; src: url("../fonts/saira-condensed-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Saira Condensed"; font-weight: 700; font-style: normal; font-display: block; src: url("../fonts/saira-condensed-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-style: normal; font-display: block; src: url("../fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 500; font-style: normal; font-display: block; src: url("../fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-style: normal; font-display: block; src: url("../fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-style: normal; font-display: block; src: url("../fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-style: normal; font-display: block; src: url("../fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+:root {
+  color-scheme: light;
+  --plane: #F0F4F4; --plane-glow-1: #E8EDEF; --plane-glow-2: #DFE7E9;
+  --surface: #FFFFFF; --surface-raised: #FFFFFF; --surface-sunken: #DFE7E9;
+  --ink: #1B2523; --ink-secondary: #4A5A56; --ink-muted: #536360;
+  --line: #CFD6D5; --line-strong: #A9B5B2; --grid: #DCE3E3;
+  --accent-glow: #A9BDB5; --accent: #5E7470; --accent-ink: #F4F7F6; --accent-text: #4E625E;
+  --accent-quiet: rgba(94, 116, 112, 0.12); --brand-bridge: #75856A;
+  --series-1: #5E7470; --series-2: #2A6FB0; --series-3: #B4531F; --reference: #536360;
+  --good: #0A6E0A; --warning: #7F5300; --critical: #B3261E; --delta-up: #146B14; --delta-down: #A81E1E;
+  --glass-edge: rgba(255, 255, 255, 0.9);
+  --glow: rgba(94, 116, 112, 0.22);
+  --atmo:
+    radial-gradient(65% 50% at 50% 12%, rgba(255, 255, 255, 0.85), transparent 62%),
+    radial-gradient(50% 40% at 20% 85%, rgba(160, 175, 180, 0.35), transparent 60%),
+    radial-gradient(45% 35% at 85% 75%, rgba(185, 199, 188, 0.40), transparent 58%),
+    linear-gradient(180deg, #E8EDEF, #DFE7E9 55%, #CFDADD);
+  --radius: 16px; --radius-md: 10px; --radius-sm: 4px;
+  --shadow-hue: 27 37 35;
+  --elev-1: 0 8px 24px rgb(var(--shadow-hue) / 0.10), 0 1px 3px rgb(var(--shadow-hue) / 0.08), 0 0 40px -16px var(--glow);
+  --elev-2: 0 18px 44px rgb(var(--shadow-hue) / 0.16), 0 2px 6px rgb(var(--shadow-hue) / 0.08), 0 0 80px -20px var(--glow);
+  --font-display: "Saira Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --plane: #12161A; --plane-glow-1: #141A1E; --plane-glow-2: #0D1013;
+  --surface: #192025; --surface-raised: #1F282E; --surface-sunken: #0D1013;
+  --ink: #EDF1F2; --ink-secondary: #B8C3C6; --ink-muted: #8B989C;
+  --line: #2B3438; --line-strong: #3D474C; --grid: #1C2327;
+  --accent-glow: #B9C7BC; --accent: #B9C7BC; --accent-ink: #12161A; --accent-text: #B9C7BC;
+  --accent-quiet: rgba(185, 199, 188, 0.14); --brand-bridge: #75856A;
+  --series-1: #B9C7BC; --series-2: #5FA8E8; --series-3: #E08A4E; --reference: #8B989C;
+  --good: #4FBF4F; --warning: #D9A23A; --critical: #F07A72; --delta-up: #5CC85C; --delta-down: #F08A82;
+  --glass-edge: rgba(237, 241, 242, 0.28);
+  --glow: rgba(185, 199, 188, 0.32);
+  --atmo:
+    radial-gradient(60% 45% at 50% 8%, rgba(185, 199, 188, 0.22), transparent 60%),
+    radial-gradient(70% 50% at 50% 115%, rgba(60, 70, 75, 0.25), transparent 60%),
+    linear-gradient(180deg, #141A1E, #12161A 55%, #0D1013);
+  --shadow-hue: 0 0 0;
+  --elev-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3), 0 0 40px -16px var(--glow);
+  --elev-2: 0 1px 2px rgb(0 0 0 / 0.45), 0 6px 18px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 40px; background: var(--plane); background-image: var(--atmo); background-attachment: fixed;
+  color: var(--ink); font-family: var(--font-body); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 40px; margin: 0 0 6px; }
+.sub { color: var(--ink-muted); margin: 0 0 32px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(216px, 1fr)); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--elev-1); overflow: hidden; }
+.card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.card .meta { padding: 10px 12px 12px; }
+.card .mark { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 12px; color: var(--ink-muted); }
+.card .t { font-size: 14px; line-height: 1.3; margin-top: 2px; }
+.card .lt { font-family: var(--font-display); font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-top: 4px; }
+</style>
+</head>
+<body>
+<h1>BASELINE · 50 Posts</h1>
+<p class="sub">1080 × 1350 px · Mondlicht 30 · Mondstein 20</p>
+<div class="grid">
+  <a class="card" href="png/01-guter-tag.png"><img src="png/01-guter-tag.png" alt="+2 cm im Sprung. Oder ein guter Tag." loading="lazy"><div class="meta"><div class="mark">[ 01 / 50 ]</div><div class="t">+2 cm im Sprung. Oder ein guter Tag.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/02-42-tage.png"><img src="png/02-42-tage.png" alt="Was 42 Tage sind" loading="lazy"><div class="meta"><div class="mark">[ 02 / 50 ]</div><div class="t">Was 42 Tage sind</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/03-griffkraft.png"><img src="png/03-griffkraft.png" alt="Vier Wochen Griffkraft" loading="lazy"><div class="meta"><div class="mark">[ 03 / 50 ]</div><div class="t">Vier Wochen Griffkraft</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/04-wo-nicht-wie.png"><img src="png/04-wo-nicht-wie.png" alt="Sie sagt dir, wo." loading="lazy"><div class="meta"><div class="mark">[ 04 / 50 ]</div><div class="t">Sie sagt dir, wo.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/05-ausser-fussball.png"><img src="png/05-ausser-fussball.png" alt="Für alles ausser Fussball." loading="lazy"><div class="meta"><div class="mark">[ 05 / 50 ]</div><div class="t">Für alles ausser Fussball.</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/06-wettkampf-14-juni.png"><img src="png/06-wettkampf-14-juni.png" alt="Die Form weisst du am 14. Juni" loading="lazy"><div class="meta"><div class="mark">[ 06 / 50 ]</div><div class="t">Die Form weisst du am 14. Juni</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/07-29-90.png"><img src="png/07-29-90.png" alt="29,90 €. Kein Abo." loading="lazy"><div class="meta"><div class="mark">[ 07 / 50 ]</div><div class="t">29,90 €. Kein Abo.</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/08-kein-perzentil.png"><img src="png/08-kein-perzentil.png" alt="Kein Perzentil, kein erfundenes" loading="lazy"><div class="meta"><div class="mark">[ 08 / 50 ]</div><div class="t">Kein Perzentil, kein erfundenes</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/09-14-von-20.png"><img src="png/09-14-von-20.png" alt="14 von 20. Das ist ein Plan." loading="lazy"><div class="meta"><div class="mark">[ 09 / 50 ]</div><div class="t">14 von 20. Das ist ein Plan.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/10-neuzugang.png"><img src="png/10-neuzugang.png" alt="Neuer Athlet. Ein Termin." loading="lazy"><div class="meta"><div class="mark">[ 10 / 50 ]</div><div class="t">Neuer Athlet. Ein Termin.</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/11-zwei-werte.png"><img src="png/11-zwei-werte.png" alt="Zwei Werte sind eine Differenz." loading="lazy"><div class="meta"><div class="mark">[ 11 / 50 ]</div><div class="t">Zwei Werte sind eine Differenz.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/12-median.png"><img src="png/12-median.png" alt="Der Mittelwert der Gruppe" loading="lazy"><div class="meta"><div class="mark">[ 12 / 50 ]</div><div class="t">Der Mittelwert der Gruppe</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/13-tartan-rasen.png"><img src="png/13-tartan-rasen.png" alt="Tartan und Rasen" loading="lazy"><div class="meta"><div class="mark">[ 13 / 50 ]</div><div class="t">Tartan und Rasen</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/14-eine-zahl.png"><img src="png/14-eine-zahl.png" alt="Eine Zahl aus einer Achse" loading="lazy"><div class="meta"><div class="mark">[ 14 / 50 ]</div><div class="t">Eine Zahl aus einer Achse</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/15-10-punkte.png"><img src="png/15-10-punkte.png" alt="Erst ab 10 Punkten" loading="lazy"><div class="meta"><div class="mark">[ 15 / 50 ]</div><div class="t">Erst ab 10 Punkten</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/16-120-tage.png"><img src="png/16-120-tage.png" alt="Nach 120 Tagen eine Erinnerung" loading="lazy"><div class="meta"><div class="mark">[ 16 / 50 ]</div><div class="t">Nach 120 Tagen eine Erinnerung</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/17-frankfurt.png"><img src="png/17-frankfurt.png" alt="Frankfurt oder dein Gerät" loading="lazy"><div class="meta"><div class="mark">[ 17 / 50 ]</div><div class="t">Frankfurt oder dein Gerät</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/18-karte-ohne-name.png"><img src="png/18-karte-ohne-name.png" alt="Die Karte ohne Namen" loading="lazy"><div class="meta"><div class="mark">[ 18 / 50 ]</div><div class="t">Die Karte ohne Namen</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/19-trainerwechsel.png"><img src="png/19-trainerwechsel.png" alt="Trainerwechsel" loading="lazy"><div class="meta"><div class="mark">[ 19 / 50 ]</div><div class="t">Trainerwechsel</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/20-nicht-freigegeben.png"><img src="png/20-nicht-freigegeben.png" alt="Ausgeruht heisst nicht freigegeben." loading="lazy"><div class="meta"><div class="mark">[ 20 / 50 ]</div><div class="t">Ausgeruht heisst nicht freigegeben.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/21-dienstag.png"><img src="png/21-dienstag.png" alt="Der grösste Fortschritt war ein Dienstag" loading="lazy"><div class="meta"><div class="mark">[ 21 / 50 ]</div><div class="t">Der grösste Fortschritt war ein Dienstag</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/22-4-88.png"><img src="png/22-4-88.png" alt="4,88 € je Athlet" loading="lazy"><div class="meta"><div class="mark">[ 22 / 50 ]</div><div class="t">4,88 € je Athlet</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/23-vorstand.png"><img src="png/23-vorstand.png" alt="Eine Seite für den Vorstand" loading="lazy"><div class="meta"><div class="mark">[ 23 / 50 ]</div><div class="t">Eine Seite für den Vorstand</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/24-hyrox.png"><img src="png/24-hyrox.png" alt="HYROX: eine Achse fällt zurück" loading="lazy"><div class="meta"><div class="mark">[ 24 / 50 ]</div><div class="t">HYROX: eine Achse fällt zurück</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/25-ck-wert.png"><img src="png/25-ck-wert.png" alt="Der CK-Wert bekommt keine Note." loading="lazy"><div class="meta"><div class="mark">[ 25 / 50 ]</div><div class="t">Der CK-Wert bekommt keine Note.</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/26-mit-17.png"><img src="png/26-mit-17.png" alt="Mit 17 reicht das eigene Ja nicht." loading="lazy"><div class="meta"><div class="mark">[ 26 / 50 ]</div><div class="t">Mit 17 reicht das eigene Ja nicht.</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/27-rpe-6.png"><img src="png/27-rpe-6.png" alt="Maximaltest bei RPE 6" loading="lazy"><div class="meta"><div class="mark">[ 27 / 50 ]</div><div class="t">Maximaltest bei RPE 6</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/28-zwoelf-wiederholungen.png"><img src="png/28-zwoelf-wiederholungen.png" alt="Zwölf Wiederholungen und das 1RM" loading="lazy"><div class="meta"><div class="mark">[ 28 / 50 ]</div><div class="t">Zwölf Wiederholungen und das 1RM</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/29-sechs-je-station.png"><img src="png/29-sechs-je-station.png" alt="Sechs je Station" loading="lazy"><div class="meta"><div class="mark">[ 29 / 50 ]</div><div class="t">Sechs je Station</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/30-drei-schwerpunkte.png"><img src="png/30-drei-schwerpunkte.png" alt="Drei Schwerpunkte. Nicht zwölf." loading="lazy"><div class="meta"><div class="mark">[ 30 / 50 ]</div><div class="t">Drei Schwerpunkte. Nicht zwölf.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/31-18-monate.png"><img src="png/31-18-monate.png" alt="Das Profil zeigt 18 Monate" loading="lazy"><div class="meta"><div class="mark">[ 31 / 50 ]</div><div class="t">Das Profil zeigt 18 Monate</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/32-82-tests.png"><img src="png/32-82-tests.png" alt="82 Tests. Am Anfang drei." loading="lazy"><div class="meta"><div class="mark">[ 32 / 50 ]</div><div class="t">82 Tests. Am Anfang drei.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/33-programm-wechseln.png"><img src="png/33-programm-wechseln.png" alt="Alle drei Wochen das Programm" loading="lazy"><div class="meta"><div class="mark">[ 33 / 50 ]</div><div class="t">Alle drei Wochen das Programm</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/34-triathlon.png"><img src="png/34-triathlon.png" alt="Triathlon: eine Achse fällt zurück" loading="lazy"><div class="meta"><div class="mark">[ 34 / 50 ]</div><div class="t">Triathlon: eine Achse fällt zurück</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/35-sagt-nichts.png"><img src="png/35-sagt-nichts.png" alt="Der Athlet, der fällt, sagt nichts." loading="lazy"><div class="meta"><div class="mark">[ 35 / 50 ]</div><div class="t">Der Athlet, der fällt, sagt nichts.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/36-zwoelf-minuten.png"><img src="png/36-zwoelf-minuten.png" alt="Zwölf Minuten auf der Bahn" loading="lazy"><div class="meta"><div class="mark">[ 36 / 50 ]</div><div class="t">Zwölf Minuten auf der Bahn</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/37-zehn-ergebnisse.png"><img src="png/37-zehn-ergebnisse.png" alt="Zehn Ergebnisse ohne Sicherung." loading="lazy"><div class="meta"><div class="mark">[ 37 / 50 ]</div><div class="t">Zehn Ergebnisse ohne Sicherung.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/38-drei-vier.png"><img src="png/38-drei-vier.png" alt="Ab drei ein Trend, ab vier eine Streuung" loading="lazy"><div class="meta"><div class="mark">[ 38 / 50 ]</div><div class="t">Ab drei ein Trend, ab vier eine Streuung</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/39-feuerwehr.png"><img src="png/39-feuerwehr.png" alt="Feuerwehr: die Anforderung bleibt" loading="lazy"><div class="meta"><div class="mark">[ 39 / 50 ]</div><div class="t">Feuerwehr: die Anforderung bleibt</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/40-kein-fitnesswert.png"><img src="png/40-kein-fitnesswert.png" alt="Kein Fitnesswert." loading="lazy"><div class="meta"><div class="mark">[ 40 / 50 ]</div><div class="t">Kein Fitnesswert.</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/41-vier-fuer-89.png"><img src="png/41-vier-fuer-89.png" alt="Vier Reports für 89 €" loading="lazy"><div class="meta"><div class="mark">[ 41 / 50 ]</div><div class="t">Vier Reports für 89 €</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/42-herkunft.png"><img src="png/42-herkunft.png" alt="Die Herkunft der Referenz reist mit." loading="lazy"><div class="meta"><div class="mark">[ 42 / 50 ]</div><div class="t">Die Herkunft der Referenz reist mit.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/43-boxen.png"><img src="png/43-boxen.png" alt="Boxen: 88. und 41. Perzentil" loading="lazy"><div class="meta"><div class="mark">[ 43 / 50 ]</div><div class="t">Boxen: 88. und 41. Perzentil</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/44-nur-einer.png"><img src="png/44-nur-einer.png" alt="Ein Test, den nur einer hat" loading="lazy"><div class="meta"><div class="mark">[ 44 / 50 ]</div><div class="t">Ein Test, den nur einer hat</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/45-21-40.png"><img src="png/45-21-40.png" alt="5 km in 21:40" loading="lazy"><div class="meta"><div class="mark">[ 45 / 50 ]</div><div class="t">5 km in 21:40</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/46-jede-dritte.png"><img src="png/46-jede-dritte.png" alt="Jede dritte Tagesschwankung" loading="lazy"><div class="meta"><div class="mark">[ 46 / 50 ]</div><div class="t">Jede dritte Tagesschwankung</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/47-vereinswechsel.png"><img src="png/47-vereinswechsel.png" alt="Ihre Historie auch." loading="lazy"><div class="meta"><div class="mark">[ 47 / 50 ]</div><div class="t">Ihre Historie auch.</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/48-export.png"><img src="png/48-export.png" alt="Export ohne Kontingent" loading="lazy"><div class="meta"><div class="mark">[ 48 / 50 ]</div><div class="t">Export ohne Kontingent</div><div class="lt">Mondstein</div></div></a>
+  <a class="card" href="png/49-sechs-achsen.png"><img src="png/49-sechs-achsen.png" alt="Ohne Sportart sechs Achsen" loading="lazy"><div class="meta"><div class="mark">[ 49 / 50 ]</div><div class="t">Ohne Sportart sechs Achsen</div><div class="lt">Mondlicht</div></div></a>
+  <a class="card" href="png/50-mit-paragraf.png"><img src="png/50-mit-paragraf.png" alt="Mit Paragraf." loading="lazy"><div class="meta"><div class="mark">[ 50 / 50 ]</div><div class="t">Mit Paragraf.</div><div class="lt">Mondlicht</div></div></a>
+</div>
+</body>
+</html>
