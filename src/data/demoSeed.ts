@@ -244,6 +244,7 @@ export function buildDemoData(): StoredData {
   assessments.sort((a, b) => (a.performedOn < b.performedOn ? 1 : -1))
   return {
     version: CURRENT_SCHEMA_VERSION,
+    testDays: [],
     // Der Demobestand trägt bewusst keine fremde Marke.
     branding: { organisation: '', logoDataUrl: null, footer: '' },
     lastExportAt: null,

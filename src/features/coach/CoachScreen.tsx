@@ -31,6 +31,9 @@ export function CoachScreen() {
       {role === 'coach' ? (
         <>
           <div className="mb-4 flex flex-wrap gap-2">
+            <Button asChild variant="primary" size="sm">
+              <Link to="/trainer/testtag">{t('testDay.plural')}</Link>
+            </Button>
             <Button asChild variant="outline" size="sm">
               <Link to="/trainer/gruppentest">{t('group.title')}</Link>
             </Button>

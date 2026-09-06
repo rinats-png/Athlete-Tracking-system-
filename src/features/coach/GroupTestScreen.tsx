@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft, Check } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -31,8 +31,17 @@ export function GroupTestScreen() {
   const locale = useLocale()
   const { role, athletes, recordForGroup } = useAppData()
 
-  const [slug, setSlug] = useState('')
-  const [day, setDay] = useState(() => new Date().toISOString().slice(0, 10))
+  // Aus dem Testtag heraus stehen Station und Termin schon fest. Wer an der
+  // Station steht, soll sie nicht noch einmal aus zwei Listen heraussuchen —
+  // dabei greift man daneben, und die Messung landet am falschen Test.
+  const [params] = useSearchParams()
+  const [slug, setSlug] = useState(() => {
+    const wanted = params.get('test')
+    return wanted && getTest(wanted) ? wanted : ''
+  })
+  const [day, setDay] = useState(
+    () => params.get('tag') ?? new Date().toISOString().slice(0, 10),
+  )
   const [entries, setEntries] = useState<Record<string, number | null>>({})
   const [written, setWritten] = useState<number | null>(null)
 

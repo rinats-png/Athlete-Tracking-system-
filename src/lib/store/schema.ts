@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 13
+export const CURRENT_SCHEMA_VERSION = 14
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -382,6 +382,34 @@ const trainingFocusSchema = z.object({
   closedAt: isoDate.nullable().default(null),
 })
 
+/**
+ * Ein Testtag: mehrere Athleten, mehrere Stationen, ein Termin.
+ *
+ * Steht bewusst NEBEN den Athleten und nicht in einem von ihnen: ein Testtag
+ * gehört keinem Einzelnen. Läge er im aktiven Athleten, verschwände er beim
+ * Umschalten — und genau während des Testtags wird ständig umgeschaltet.
+ *
+ * Er speichert die Planung, nicht die Messwerte. Die Ergebnisse landen dort,
+ * wo alle Ergebnisse landen: beim jeweiligen Athleten. Ein Testtag, der seine
+ * eigenen Messwerte hielte, wäre eine zweite Wahrheit neben dem Bestand.
+ */
+const testDaySchema = z.object({
+  id: z.string().min(1),
+  title: z.string().max(120).default(''),
+  /** YYYY-MM-DD. Der geplante Tag; die Messungen tragen ihren eigenen Zeitpunkt. */
+  plannedOn: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  /** Aus welcher Batterie die Stationen stammen. Null bei freier Auswahl. */
+  batterySlug: z.string().max(80).nullable().default(null),
+  /** Die Stationen in ihrer Reihenfolge. */
+  testSlugs: z.array(z.string().min(1)).max(20).default([]),
+  /** Wer teilnimmt. Kennungen betreuter Athleten. */
+  athleteIds: z.array(z.string().min(1)).max(60).default([]),
+  /** Veranschlagte Minuten je Station und Gruppe. */
+  stationMinutes: z.number().int().min(5).max(120).default(20),
+  createdAt: isoDate,
+  completedAt: isoDate.nullable().default(null),
+})
+
 const athleteSchema = z.object({
   id: z.string().min(1),
   name: z.string().max(120).default(''),
@@ -418,10 +446,13 @@ export const storedDataSchema = z.object({
   role: z.enum(['solo', 'coach']).default('solo'),
   athletes: z.array(athleteSchema).min(1),
   activeAthleteId: z.string().min(1),
+  /** Geplante und durchgeführte Testtage. Gehören dem Gerät, nicht einem Athleten. */
+  testDays: z.array(testDaySchema).default([]),
 })
 
 export type ValidatedData = z.infer<typeof storedDataSchema>
 export type ValidatedAthlete = z.infer<typeof athleteSchema>
+export type ValidatedTestDay = z.infer<typeof testDaySchema>
 
 /**
  * Sicht auf einen einzelnen Athleten in der Form, die alle Auswertungen
@@ -675,6 +706,19 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 13,
+    to: 14,
+    describe: 'Testtage als eigene Einheit neben den Athleten',
+    run: (data) => ({
+      ...data,
+      version: 14,
+      // Leer: rückwirkend lässt sich aus einzelnen Ergebnissen nicht
+      // rekonstruieren, ob sie an einem gemeinsamen Testtag entstanden sind.
+      // Ein erfundener Testtag würde eine Planung behaupten, die es nie gab.
+      testDays: [],
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -713,6 +757,7 @@ export function emptyData(): ValidatedData {
   const athlete = emptyAthlete()
   return {
     version: CURRENT_SCHEMA_VERSION,
+    testDays: [],
     branding: brandingSchema.parse({}),
     lastExportAt: null,
     role: 'solo',
@@ -821,6 +866,7 @@ export function parseStoredData(raw: unknown): ParseOutcome {
 
   const salvaged: ValidatedData = {
     version: CURRENT_SCHEMA_VERSION,
+    testDays: [],
     branding: branding.success ? branding.data : brandingSchema.parse({}),
     lastExportAt:
       typeof working.lastExportAt === 'string' && !Number.isNaN(Date.parse(working.lastExportAt))

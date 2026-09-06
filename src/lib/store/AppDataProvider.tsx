@@ -22,6 +22,7 @@ import {
   type AthleteData,
   type ImportOutcome,
   type StoredAssessment,
+  type StoredTestDay,
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
@@ -161,6 +162,10 @@ interface AppDataValue {
    */
   recordForGroup: (testSlug: string, performedAt: string, values: Record<string, number>[]) => number
   saveAssessment: (assessment: StoredAssessment) => void
+  /** Testtage des Geräts. Gehören keinem einzelnen Athleten. */
+  testDays: StoredTestDay[]
+  saveTestDay: (day: StoredTestDay) => void
+  deleteTestDay: (id: string) => void
   deleteAssessment: (id: string) => void
   resetAll: () => void
   loadDemo: () => void
@@ -640,6 +645,23 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           entityId: id,
           label: removed ? (getTest(removed.testSlug)?.name.de ?? removed.testSlug) : '',
         })
+      },
+      testDays: store.testDays,
+      saveTestDay: (day) => {
+        const current = storeRef.current
+        const exists = current.testDays.some((d) => d.id === day.id)
+        commitStore({
+          ...current,
+          testDays: exists
+            ? current.testDays.map((d) => (d.id === day.id ? day : d))
+            : [...current.testDays, day],
+        })
+      },
+      deleteTestDay: (id) => {
+        const current = storeRef.current
+        // Nur die Planung verschwindet. Die Messwerte des Tages liegen bei den
+        // Athleten und bleiben — ein gelöschter Plan darf keine Daten mitnehmen.
+        commitStore({ ...current, testDays: current.testDays.filter((d) => d.id !== id) })
       },
       saveAssessment: (assessment) =>
         commitAthlete((current) => upsertAssessment(current, assessment), {

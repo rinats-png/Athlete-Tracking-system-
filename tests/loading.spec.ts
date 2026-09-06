@@ -73,7 +73,9 @@ test.describe('Auslieferung', () => {
     await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
     await page.getByRole('button', { name: /Als Tabelle/ }).first().click()
     await expect(page.getByRole('columnheader', { name: 'Achse' }).first()).toBeVisible()
-    await expect(page.getByRole('cell', { name: /Ausdauer/ }).first()).toBeVisible()
+    // Eine Achse des Demoprofils (Judo). Der Name steht hier ausdrücklich
+    // und nicht als weites Muster: fiele die Achse weg, soll das auffallen.
+    await expect(page.getByRole('cell', { name: /Kampfausdauer/ }).first()).toBeVisible()
   })
 })
 
