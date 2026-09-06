@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowUpRight, ShieldCheck } from 'lucide-react'
 import { HaloField } from '@/components/signature/HaloField'
@@ -288,17 +287,23 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
           */}
           <p className="mx-auto max-w-[52ch] text-center text-[11px] leading-relaxed text-ink-muted">
             {t('welcome.legal')}{' '}
-            <Link to="/nutzungsbedingungen" className="underline underline-offset-2">
+            {/*
+              Gewöhnliche Verweise, kein Router-Link: dieser Bildschirm steht
+              VOR dem Router. Ein <Link> ohne Router-Kontext wirft, und die
+              Landeseite bliebe leer — genau das ist beim ersten Versuch
+              passiert.
+            */}
+            <a href="/nutzungsbedingungen" className="underline underline-offset-2">
               {t('welcome.legalTerms')}
-            </Link>{' '}
+            </a>{' '}
             ·{' '}
-            <Link to="/datenschutz" className="underline underline-offset-2">
+            <a href="/datenschutz" className="underline underline-offset-2">
               {t('welcome.legalPrivacy')}
-            </Link>{' '}
+            </a>{' '}
             ·{' '}
-            <Link to="/impressum" className="underline underline-offset-2">
+            <a href="/impressum" className="underline underline-offset-2">
               {t('legal.imprint.title')}
-            </Link>
+            </a>
           </p>
           <p
             aria-hidden

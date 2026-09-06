@@ -16,6 +16,20 @@ import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
  * seiner Grenze. Wer die App oeffnet, laedt jetzt die Anmeldung, nicht die
  * Landeseite dahinter.
  */
+/**
+ * Die Rechtsseiten stehen VOR allen Toren.
+ *
+ * DER GRUND: zugestimmt wird auf der Landeseite und bei der Registrierung —
+ * also bevor es einen Bestand, eine Rolle oder einen Router gibt. Ein Verweis
+ * auf Nutzungsbedingungen, der erst nach der Anmeldung funktioniert, führt
+ * genau dann ins Leere, wenn er gebraucht wird.
+ */
+const LEGAL_ROUTES: Record<string, 'ImprintScreen' | 'PrivacyScreen' | 'TermsScreen'> = {
+  '/impressum': 'ImprintScreen',
+  '/datenschutz': 'PrivacyScreen',
+  '/nutzungsbedingungen': 'TermsScreen',
+}
+
 const WelcomeScreen = lazy(() =>
   import('@/features/auth/WelcomeScreen').then((m) => ({ default: m.WelcomeScreen })),
 )
@@ -139,6 +153,16 @@ export default function App() {
     setAccount(next)
     setIntro(introEnabled())
   }, [])
+
+  // 0. Rechtstexte — vor jedem Tor, siehe LEGAL_ROUTES.
+  const legal = typeof window === 'undefined' ? undefined : LEGAL_ROUTES[window.location.pathname]
+  if (legal) {
+    return (
+      <main className="mx-auto max-w-3xl px-4 py-8">
+        {screen(() => import('@/features/legal/LegalScreen'), legal)}
+      </main>
+    )
+  }
 
   // 1. Das Tor. Ohne Konto kommt niemand weiter.
   if (!account) {

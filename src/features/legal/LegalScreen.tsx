@@ -1,4 +1,3 @@
-import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -144,7 +143,10 @@ function Frame({
   children: React.ReactNode
 }) {
   const { t } = useTranslation()
-  const { pathname } = useLocation()
+  // Der Pfad direkt aus der Adresse: diese Seiten werden auch VOR dem Router
+  // gezeigt (aus der Anmeldung und von der Landeseite heraus), und dort gibt
+  // es kein `useLocation`.
+  const pathname = typeof window === 'undefined' ? '' : window.location.pathname
   const links = [
     { to: '/impressum', label: t('legal.imprint.title') },
     { to: '/datenschutz', label: t('legal.privacy.title') },
@@ -153,10 +155,10 @@ function Frame({
   return (
     <>
       <Button asChild variant="ghost" size="sm" className="mb-3 -ml-2">
-        <Link to="/profil">
+        <a href="/">
           <ArrowLeft size={14} aria-hidden />
-          {t('nav.profile')}
-        </Link>
+          {t('legal.back')}
+        </a>
       </Button>
       <ScreenHeader eyebrow={t('legal.eyebrow')} title={title} intro={intro} />
       <nav aria-label={t('legal.eyebrow')} className="mb-5 flex flex-wrap gap-2">
@@ -167,7 +169,7 @@ function Frame({
             size="sm"
             variant={pathname === link.to ? 'primary' : 'outline'}
           >
-            <Link to={link.to}>{link.label}</Link>
+            <a href={link.to}>{link.label}</a>
           </Button>
         ))}
       </nav>
