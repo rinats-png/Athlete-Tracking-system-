@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Bell, CalendarDays, ChevronRight, ListOrdered } from 'lucide-react'
+import { Activity, Bell, CalendarDays, ChevronRight, ListOrdered } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { TrendChart } from '@/components/charts/TrendChart'
@@ -161,6 +161,7 @@ export function HistoryHome() {
           { to: '/verlauf/werte', icon: ListOrdered, title: t('historyHome.values'), hint: t('historyHome.valuesHint') },
           { to: '/verlauf/kalender', icon: CalendarDays, title: t('historyHome.calendar'), hint: t('historyHome.calendarHint') },
           { to: '/verlauf/erinnerungen', icon: Bell, title: t('historyHome.reminders'), hint: t('historyHome.remindersHint') },
+          { to: '/beobachtung', icon: Activity, title: t('historyHome.observations'), hint: t('historyHome.observationsHint') },
         ].map(({ to, icon: Icon, title, hint }) => (
           <li key={to}>
             <Link to={to} className="panel flex min-h-16 items-center gap-3 px-4 py-3 hover:bg-accent-quiet">

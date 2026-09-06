@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 17
+export const CURRENT_SCHEMA_VERSION = 18
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -453,6 +453,28 @@ const testDaySchema = z.object({
   completedAt: isoDate.nullable().default(null),
 })
 
+/**
+ * Ein Beobachtungswert: erfasst, im Verlauf gezeigt, nie bewertet.
+ *
+ * Steht bewusst NEBEN `results` und nicht darin: ein Ergebnis trägt einen
+ * Score, eine Achse und eine Einordnung. Ein Beobachtungswert trägt nichts
+ * davon — läge er im selben Topf, würde er früher oder später mitgerechnet.
+ */
+const observationSchema = z.object({
+  id: z.string().min(1),
+  /** Kennung aus `src/data/observations.ts`. */
+  key: z.string().min(1).max(60),
+  observedAt: isoDate,
+  value: finite,
+  /**
+   * Womit gemessen wurde. Bei Sensor- und Laborwerten entscheidend: zwei
+   * Geräte liefern verschiedene Zahlen für dasselbe.
+   */
+  device: z.string().max(80).default(''),
+  note: z.string().max(500).default(''),
+  createdAt: isoDate,
+})
+
 const athleteSchema = z.object({
   id: z.string().min(1),
   name: z.string().max(120).default(''),
@@ -460,6 +482,11 @@ const athleteSchema = z.object({
   biometrics: z.array(biometricSchema).default([]),
   assessments: z.array(assessmentSchema).default([]),
   results: z.array(resultSchema).default([]),
+  /**
+   * Beobachtungswerte (Erholung, Umgebung, Sensorik, Körper, Screening).
+   * Zahlen mit Datum — ohne Einordnung, ohne Achse, ohne Score.
+   */
+  observations: z.array(observationSchema).default([]),
   /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
   archived: z.boolean().default(false),
   /** Notizen des Trainers zu dieser Person (§74). */
@@ -523,6 +550,7 @@ export const storedDataSchema = z.object({
 export type ValidatedData = z.infer<typeof storedDataSchema>
 export type ValidatedAthlete = z.infer<typeof athleteSchema>
 export type ValidatedTestDay = z.infer<typeof testDaySchema>
+export type ValidatedObservation = z.infer<typeof observationSchema>
 
 /**
  * Sicht auf einen einzelnen Athleten in der Form, die alle Auswertungen
@@ -840,6 +868,19 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 17,
+    to: 18,
+    describe: 'Beobachtungswerte neben den Messergebnissen',
+    run: (data) => ({
+      ...data,
+      version: 18,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        observations: [],
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -866,6 +907,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     biometrics: [],
     assessments: [],
     results: [],
+    observations: [],
     archived: false,
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

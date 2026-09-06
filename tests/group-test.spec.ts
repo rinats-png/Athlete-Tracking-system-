@@ -27,6 +27,7 @@ function athlete(id: string, name: string, values: number[]): StoredAthlete {
       score,
     })) as StoredAthlete['results'],
     archived: false,
+    observations: [],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
     focuses: [],

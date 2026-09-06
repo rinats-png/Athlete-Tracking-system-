@@ -38,6 +38,7 @@ const OnboardingFlow = lazy(() =>
   import('@/features/onboarding/OnboardingFlow').then((m) => ({ default: m.OnboardingFlow })),
 )
 import { AppDataProvider, readMode, writeMode, useAppData, type AppMode } from '@/lib/store/AppDataProvider'
+import { loadExtra } from '@/i18n'
 import { IntroSequence } from '@/features/intro/IntroSequence'
 import { introEnabled, markIntroSeen } from '@/features/intro/introPreference'
 import { AuthScreen } from '@/features/auth/AuthScreen'
@@ -80,7 +81,13 @@ function screen<T extends Record<string, ComponentType>>(
   load: () => Promise<T>,
   name: keyof T & string,
 ) {
-  const Lazy = lazy(() => load().then((module) => ({ default: module[name] as ComponentType })))
+  // Der Zusatzteil des Wörterbuchs kommt mit dem ersten nachgeladenen
+  // Bildschirm — vor dem Rendern, sonst stünden dort kurz die Schlüssel.
+  const Lazy = lazy(() =>
+    Promise.all([load(), loadExtra()]).then(([module]) => ({
+      default: module[name] as ComponentType,
+    })),
+  )
   return (
     // Ohne sichtbaren Platzhalter: die Teilpakete sind klein, und ein
     // aufblitzender Ladehinweis wäre unruhiger als ein kurzer Moment Leere.
@@ -123,6 +130,7 @@ const router = createBrowserRouter([
       { path: 'trainer/vergleich', element: screen(() => import('@/features/coach/AthleteCompare'), 'AthleteCompare') },
       { path: 'trainer/gruppenbericht', element: screen(() => import('@/features/coach/GroupReportScreen'), 'GroupReportScreen') },
       { path: 'bericht', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
+      { path: 'beobachtung', element: screen(() => import('@/features/observations/ObservationScreen'), 'ObservationScreen') },
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },

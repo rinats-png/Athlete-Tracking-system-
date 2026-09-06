@@ -25,6 +25,7 @@ import {
   type ImportOutcome,
   type StoredAssessment,
   type StoredTestDay,
+  type StoredObservation,
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
@@ -93,6 +94,13 @@ interface AppDataValue {
    */
   addAthlete: (name: string, options?: { activate?: boolean }) => string
   renameAthlete: (id: string, name: string) => void
+  /**
+   * Beobachtungswerte des aktiven Athleten. Sie tragen KEINEN Score und
+   * KEINE Achse — deshalb stehen sie neben `data.results` und nicht darin.
+   */
+  observations: StoredObservation[]
+  addObservation: (entry: { key: string; observedAt: string; value: number; device: string; note: string }) => void
+  deleteObservation: (id: string) => void
   /** Einwilligung eines Athleten setzen. */
   setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
@@ -498,6 +506,36 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             a.id === id ? { ...a, name: name.slice(0, 120) } : a,
           ),
         }),
+      observations:
+        store.athletes.find((a) => a.id === store.activeAthleteId)?.observations ?? [],
+      addObservation: (entry) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) =>
+            a.id === current.activeAthleteId
+              ? {
+                  ...a,
+                  observations: [
+                    ...a.observations,
+                    { id: newId(), createdAt: new Date().toISOString(), ...entry },
+                  ],
+                }
+              : a,
+          ),
+        })
+      },
+      deleteObservation: (id) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) =>
+            a.id === current.activeAthleteId
+              ? { ...a, observations: a.observations.filter((o) => o.id !== id) }
+              : a,
+          ),
+        })
+      },
       setConsent: (id, consent) =>
         commitStore({
           ...storeRef.current,
