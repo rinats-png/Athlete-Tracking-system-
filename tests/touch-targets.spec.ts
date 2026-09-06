@@ -15,8 +15,16 @@ for (const route of ROUTES) {
     await openDemo(page)
     if (route !== '/') {
       await page.goto(route, { waitUntil: 'domcontentloaded' })
-      await page.waitForTimeout(400)
+      // Nach dem Neuladen steht der Startbildschirm so lange, bis der
+      // Bestand geladen ist. Eine feste Wartezeit hat ihn gelegentlich noch
+      // erwischt und dann seine Knöpfe mitten in der Einblendung gemessen —
+      // gemessen wurde also die Animation, nicht die Fläche.
+      await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toHaveCount(0)
+      await page.getByRole('heading', { level: 1 }).first().waitFor()
     }
+    // Eine laufende Einblendung skaliert ihr Element; erst danach ist die
+    // Trefferfläche die, die jemand antippt.
+    await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== 'running'))
 
     const report = await page.evaluate((min) => {
       const interactive = [...document.querySelectorAll('button, a[href], input, select')].filter(
