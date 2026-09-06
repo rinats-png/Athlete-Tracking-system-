@@ -97,7 +97,10 @@ export function groupHeatmap(athletes: StoredAthlete[], asOf: Date = new Date())
         if (row?.requirement != null) requirement = row.requirement
         if (score != null) covered++
         if (open) openCount++
-        cells.push({ athleteId: athlete.id, axisId, score, open, measured: score != null })
+        // Gemessen und eingeordnet sind zwei Aussagen: eine Achse kann
+        // Messungen tragen, aber keine Referenz haben — dann steht dort
+        // «ohne Referenz», nicht der Strich für «nichts gemessen».
+        cells.push({ athleteId: athlete.id, axisId, score, open, measured: (row?.measurements ?? 0) > 0 })
       }
       const openShare = covered === 0 ? null : Math.round((openCount / covered) * 100) / 100
       return {

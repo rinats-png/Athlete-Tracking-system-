@@ -61,8 +61,17 @@ const measured = (slug: string, day: string, values: Record<string, number>): St
   const metrics = deriveMetrics(test, values, { bodyWeightKg: 80, ageYears: 28, sex: 'male' })
   return { ...result(slug, day, primaryValue(test, values, metrics) as number), values, metrics }
 }
-/** Ein Ausdauerwert, der in der Referenz tief liegt; einer, der hoch liegt. */
-const lowCooper = (day = '2026-04-10') => measured('cooper_12min', day, { distanceM: 1900, maxHeartRate: 185, rpe: 9 })
+/**
+ * Ein Cooper-Wert, der in der Bevölkerungsreferenz tief liegt; einer, der
+ * hoch liegt. Ein Perzentil gegen die Bevölkerung gibt es in dieser App
+ * nur, wo eine Kohorte mit Streuung publiziert ist — beim VO₂max, also
+ * beim Cooper-Test. Griffkraft hat eine Ankerreferenz ohne Streuung und
+ * bleibt deshalb ohne Perzentil («ohne Referenz» in der Heatmap, nicht
+ * «nicht gemessen»). Die Ausdauer ist beim 5-km-Lauf die Achse mit
+ * Anforderung 1,0; beim Judo wäre sie gar keine Achse.
+ */
+const RUNNER = { disciplineId: 'run_5k_discipline', sportCategoryId: 'running' } as const
+const lowCooper = (day = '2026-04-10') => measured('cooper_12min', day, { distanceM: 1500, maxHeartRate: 185, rpe: 9 })
 const highCooper = (day = '2026-04-10') => measured('cooper_12min', day, { distanceM: 3400, maxHeartRate: 185, rpe: 9 })
 
 test.describe('Gruppen-Heatmap', () => {
@@ -79,24 +88,24 @@ test.describe('Gruppen-Heatmap', () => {
   test('der Spaltenfuss trägt den Nenner: offen von eingeordnet', () => {
     const groups = groupHeatmap(
       [
-        athlete('a', { results: [lowCooper()] }),
-        athlete('b', { results: [highCooper()] }),
-        athlete('c'), // nichts gemessen
+        athlete('a', { results: [lowCooper()] }, RUNNER),
+        athlete('b', { results: [highCooper()] }, RUNNER),
+        athlete('c', {}, RUNNER), // nichts gemessen
       ],
       asOf,
     )
     const covered = groups[0].columns.filter((c) => c.covered > 0)
-    expect(covered.length, 'der Cooper-Test zahlt auf mindestens eine Judo-Achse ein').toBeGreaterThan(0)
+    expect(covered.length, 'der Cooper-Test zahlt auf die Ausdauer ein, die Achse des 5-km-Laufs').toBeGreaterThan(0)
     for (const column of covered) expect(column.covered).toBe(2)
     // Ungemessen ist kein Befund — c zählt in keinen der beiden Zähler.
     expect(groups[0].cells.filter((cell) => cell.athleteId === 'c').every((cell) => !cell.measured)).toBe(true)
   })
 
   test('ein Muster braucht Mindestzahl UND Anteil', () => {
-    const many = Array.from({ length: PATTERN_MIN_ATHLETES }, (_, i) => athlete(`low-${i}`, { results: [lowCooper()] }))
+    const many = Array.from({ length: PATTERN_MIN_ATHLETES }, (_, i) => athlete(`low-${i}`, { results: [lowCooper()] }, RUNNER))
     const groups = groupHeatmap(many, asOf)
     const open = groups[0].columns.filter((c) => c.openCount > 0)
-    expect(open.length, '1900 m im Cooper liegen unter der Referenzmitte').toBeGreaterThan(0)
+    expect(open.length, '1500 m im Cooper liegen unter der Referenzmitte').toBeGreaterThan(0)
     // Vier von vier offen: ein Muster. Drei von drei: unter der Mindestzahl.
     for (const column of open) {
       expect(column.openCount).toBe(PATTERN_MIN_ATHLETES)

@@ -117,12 +117,18 @@ function CheckpointRow({ checkpoint, isNext }: { checkpoint: Checkpoint; isNext:
             {t('competition.weeksBefore', { count: checkpoint.weeksBefore })} · {t(`competition.status.${checkpoint.status}`)}
           </span>
         </p>
-        <p className="mt-0.5 flex flex-wrap gap-x-2 text-[12px] text-ink-secondary">
+        {/* Als Chips, nicht als Fliesstextlinks: eine Tippfläche braucht
+            44 px, und ein Testname hat sie nicht. */}
+        <p className="mt-1 flex flex-wrap gap-1.5 text-[12px] text-ink-secondary">
           {checkpoint.slugs.map((slug) => {
             const test = getTest(slug)
             if (!test) return null
             return (
-              <Link key={slug} to={`/tests/${slug}`} className="underline-offset-2 hover:underline">
+              <Link
+                key={slug}
+                to={`/tests/${slug}`}
+                className="inline-flex min-h-11 min-w-11 items-center rounded-[var(--radius-sm)] border border-line px-2.5 hover:border-accent hover:bg-accent-quiet"
+              >
                 {test.shortName[locale]}
               </Link>
             )
