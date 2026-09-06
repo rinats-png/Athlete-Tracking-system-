@@ -152,6 +152,8 @@ export function buildDemoData(): StoredData {
     unitSystem: 'metric',
     sport: 'Judo',
     position: '',
+    weightClass: '-81 kg',
+    maturityStage: null,
     sportCategoryId: 'combat',
     disciplineId: 'judo',
     performanceLevel: 'advanced',

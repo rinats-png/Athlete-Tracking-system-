@@ -73,6 +73,42 @@ export function AthleteContext() {
         </label>
 
         <label className="block">
+          <span className="label-tag">{t('profile.weightClass')}</span>
+          <input
+            type="text"
+            value={p.weightClass}
+            maxLength={20}
+            aria-label={t('profile.weightClass')}
+            placeholder={t('profile.weightClassPlaceholder')}
+            onChange={(e) => saveProfile({ weightClass: e.target.value })}
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
+          />
+          <span className="mt-1 block text-[11px] text-ink-muted">
+            {t('profile.weightClassHint')}
+          </span>
+        </label>
+
+        <label className="block">
+          <span className="label-tag">{t('profile.maturity')}</span>
+          <select
+            aria-label={t('profile.maturity')}
+            value={p.maturityStage ?? ''}
+            onChange={(e) =>
+              saveProfile({
+                maturityStage: (e.target.value || null) as typeof p.maturityStage,
+              })
+            }
+            className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
+          >
+            <option value="">{t('profile.maturityStage.none')}</option>
+            <option value="pre_phv">{t('profile.maturityStage.pre_phv')}</option>
+            <option value="circa_phv">{t('profile.maturityStage.circa_phv')}</option>
+            <option value="post_phv">{t('profile.maturityStage.post_phv')}</option>
+          </select>
+          <span className="mt-1 block text-[11px] text-ink-muted">{t('profile.maturityHint')}</span>
+        </label>
+
+        <label className="block">
           <span className="label-tag">{t('profile.trainingAge')}</span>
           <input
             type="number"

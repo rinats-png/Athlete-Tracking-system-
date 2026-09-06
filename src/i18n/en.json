@@ -429,7 +429,18 @@
     "redoOnboarding": "Run the setup again",
     "redoOnboardingHint": "Takes you through the setup once more. Your measurements are kept — only the details you enter anew change.",
     "legalTitle": "Legal",
-    "legalBody": "Imprint, privacy policy and terms of use."
+    "legalBody": "Imprint, privacy policy and terms of use.",
+    "weightClass": "Weight class",
+    "weightClassPlaceholder": "e.g. −81 kg",
+    "weightClassHint": "Where classes exist: combat sports, strength sports.",
+    "maturity": "Biological age",
+    "maturityHint": "In adolescents, maturity shifts the result more than chronological age. The app does not estimate it — enter it if you know it.",
+    "maturityStage": {
+      "none": "Not stated",
+      "pre_phv": "Before the growth spurt",
+      "circa_phv": "During the growth spurt",
+      "post_phv": "After the growth spurt"
+    }
   },
   "fields": {
     "distanceM": "Distance",

@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 16
+export const CURRENT_SCHEMA_VERSION = 17
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -85,8 +85,35 @@ const profileSchema = z.object({
   // will, führt zu erfundenen Angaben — und erfundener Kontext ist schlimmer
   // als fehlender, weil er unsichtbar in jede Einordnung einfliesst.
   sport: z.string().max(60).default(''),
-  /** Position oder Disziplin innerhalb der Sportart. */
+  /**
+   * Position oder Disziplin innerhalb der Sportart.
+   *
+   * Im Mannschaftssport ist das keine Nebenangabe: ein Innenverteidiger und
+   * ein Flügelspieler haben verschiedene Anforderungsprofile, und ein
+   * Vergleich, der sie gleichsetzt, ordnet beide falsch ein.
+   */
   position: z.string().max(60).default(''),
+  /**
+   * Gewichtsklasse, wo es sie gibt — Kampfsport und Kraftsport.
+   *
+   * Freitext und keine Liste: die Klassen unterscheiden sich je Verband und
+   * ändern sich, und eine veraltete Liste zwänge zu einer falschen Angabe.
+   */
+  weightClass: z.string().max(20).default(''),
+  /**
+   * Biologisches Alter relativ zum Wachstumsschub (PHV).
+   *
+   * WARUM DAS NEBEN DEM GEBURTSDATUM STEHT: bei Jugendlichen verschiebt die
+   * Reife das Ergebnis stärker als das Lebensalter. Eine Norm nach
+   * Lebensalter ordnet spät entwickelte Jugendliche deshalb systematisch zu
+   * schlecht ein — und genau die verlieren daraufhin die Lust.
+   *
+   * Die App LEITET DIESEN WERT NICHT AB. Verfahren dafür gibt es, sie
+   * brauchen aber Sitzhöhe und Elterngrösse und haben eine Streuung von rund
+   * einem Jahr. Ein geschätzter Reifegrad, der wie eine Messung aussieht,
+   * wäre schlimmer als ein leeres Feld (§81). Wer ihn kennt, trägt ihn ein.
+   */
+  maturityStage: z.enum(['pre_phv', 'circa_phv', 'post_phv']).nullable().default(null),
   /**
    * Ausgewählter Cluster und Disziplin aus `src/data/sportProfiles.ts`.
    *
@@ -791,6 +818,25 @@ export const MIGRATIONS: Migration[] = [
         // wäre eine erfundene Rechtsgrundlage — der gefährlichste denkbare
         // Standardwert an dieser Stelle.
         consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
+      })),
+    }),
+  },
+  {
+    from: 16,
+    to: 17,
+    describe: 'Gewichtsklasse und biologisches Alter am Profil',
+    run: (data) => ({
+      ...data,
+      version: 17,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        profile: {
+          ...athlete.profile,
+          // Leer statt geschätzt: ein abgeleiteter Reifegrad sähe aus wie
+          // eine Messung und flösse unsichtbar in jede Einordnung ein.
+          weightClass: '',
+          maturityStage: null,
+        },
       })),
     }),
   },

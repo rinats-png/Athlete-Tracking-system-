@@ -1,3 +1,4 @@
+import { ADDITIONAL_CATEGORIES, TABLE_DISCIPLINES } from './sportProfilesAdditions'
 import type { PerformanceDimension } from '@/types/domain'
 
 /**
@@ -32,6 +33,11 @@ export type SportCategoryId =
   | 'swimming'
   | 'triathlon'
   | 'tactical'
+  // Aus der Mastertabelle (siehe sportProfilesAdditions.ts).
+  | 'team'
+  | 'athletics'
+  | 'rowing'
+  | 'strength'
 
 /**
  * Ein Test in der Liste einer Disziplin, mit seiner Herkunft.
@@ -54,7 +60,13 @@ export interface DisciplineTest {
    *              Tests wie Handgrip, VO₂max, CMJ, Sprint).
    * `addition` — später hinzugefügt, mit Grund. Trägt nie ein Profil.
    */
-  provenance: 'document' | 'concept' | 'addition'
+  provenance: 'document' | 'concept' | 'addition' | 'master_table'
+  /**
+   * `master_table` — aus der Mastertabelle des Auftraggebers. Eigene
+   * Herkunftsstufe, damit sichtbar bleibt, welche Zeile woher kommt: das
+   * Zielgruppendokument und die Mastertabelle sind zwei verschiedene Quellen
+   * mit verschiedener Belegkraft.
+   */
   /** Bei `document` und `concept`: die Bezeichnung in der Quelle. */
   documentLabel?: string
   /** Nur bei `addition`: warum dieser Test hinzugekommen ist. */
@@ -183,6 +195,8 @@ export const SPORT_CATEGORIES: SportCategory[] = [
     name: { de: 'Tactical / Behörden', en: 'Tactical / duty' },
     buildPriority: 7,
   },
+  // Aus der Mastertabelle (siehe sportProfilesAdditions.ts).
+  ...ADDITIONAL_CATEGORIES,
 ]
 
 // --- Disziplinen -------------------------------------------------------------
@@ -1035,6 +1049,9 @@ export const DISCIPLINES: Discipline[] = [
   ...SWIMMING,
   ...TRIATHLON,
   ...TACTICAL,
+  // Aus der Mastertabelle. Eigene Datei, weil sie aus einer anderen Quelle
+  // stammen als die ursprünglichen vierzig.
+  ...TABLE_DISCIPLINES,
 ]
 
 export const DISCIPLINE_BY_ID = new Map(DISCIPLINES.map((d) => [d.id, d]))

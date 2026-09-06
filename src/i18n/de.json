@@ -429,7 +429,18 @@
     "redoOnboarding": "Einstieg erneut durchlaufen",
     "redoOnboardingHint": "Führt dich noch einmal durch die Einrichtung. Deine Messwerte bleiben dabei erhalten — es ändern sich nur die Angaben, die du neu machst.",
     "legalTitle": "Rechtliches",
-    "legalBody": "Impressum, Datenschutzerklärung und Nutzungsbedingungen."
+    "legalBody": "Impressum, Datenschutzerklärung und Nutzungsbedingungen.",
+    "weightClass": "Gewichtsklasse",
+    "weightClassPlaceholder": "z. B. −81 kg",
+    "weightClassHint": "Wo es Klassen gibt: Kampfsport, Kraftsport.",
+    "maturity": "Biologisches Alter",
+    "maturityHint": "Bei Jugendlichen verschiebt die Reife das Ergebnis stärker als das Lebensalter. Die App schätzt das nicht — wer es kennt, trägt es ein.",
+    "maturityStage": {
+      "none": "Nicht angegeben",
+      "pre_phv": "Vor dem Wachstumsschub",
+      "circa_phv": "Im Wachstumsschub",
+      "post_phv": "Nach dem Wachstumsschub"
+    }
   },
   "fields": {
     "distanceM": "Distanz",

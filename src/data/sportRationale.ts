@@ -197,6 +197,42 @@ export const RATIONALE_BY_ID: Record<string, { de: string; en: string }> = {
     de: 'Tragen und Heben unter Zeitdruck, oft in engen Räumen und über Treppen. Die Belastung ist kurz und hoch, die Erholung dazwischen unplanbar.',
     en: 'Carrying and lifting under time pressure, often in confined spaces and up stairs. The effort is short and high, the recovery between unplannable.',
   },
+  basketball: {
+    de: 'Sprungkraft und wiederholte Richtungswechsel über vier Viertel. Gemessen wird, was die Reichhöhe am Korb und den ersten Schritt entscheidet — nicht die Wurfquote.',
+    en: 'Jump height and repeated changes of direction across four quarters. What is measured is what decides reach at the rim and the first step — not shooting percentage.',
+  },
+  handball: {
+    de: 'Antritt, Richtungswechsel und Wurfarm unter Zweikampfbelastung über sechzig Minuten. Die Griffkraft steht dabei, weil sie im Zweikampf zuerst nachlässt.',
+    en: 'Acceleration, change of direction and throwing arm under contact over sixty minutes. Grip strength is included because it is the first thing to fade in contact.',
+  },
+  volleyball: {
+    de: 'Sprunghöhe, wiederholt über einen langen Satz. Der Unterschied zwischen Sprung mit und ohne Ausholbewegung sagt, wie gut der Dehnungs-Verkürzungs-Zyklus genutzt wird.',
+    en: 'Jump height, repeated across a long set. The gap between jumps with and without a countermovement shows how well the stretch-shortening cycle is used.',
+  },
+  rugby: {
+    de: 'Kraft im Kontakt, Antritt über kurze Distanz und die Fähigkeit, beides achtzig Minuten lang zu wiederholen. Die Position verschiebt das Anforderungsprofil erheblich.',
+    en: 'Strength in contact, acceleration over short distances, and the ability to repeat both for eighty minutes. Position shifts the demand profile considerably.',
+  },
+  cricket: {
+    de: 'Kurze maximale Antritte zwischen langen Phasen ohne Belastung, über einen ganzen Tag. Gemessen wird der Antritt und die Fähigkeit, ihn nach Stunden zu wiederholen.',
+    en: 'Short maximal sprints between long passive phases, across a whole day. What is measured is the sprint and the ability to repeat it hours later.',
+  },
+  long_jump: {
+    de: 'Anlaufgeschwindigkeit und Absprungkraft. Beides einzeln zu messen sagt mehr als die Weite allein, denn dieselbe Weite entsteht aus sehr verschiedenen Anteilen.',
+    en: 'Run-up speed and take-off power. Measuring both separately says more than the distance alone, since the same distance arises from very different components.',
+  },
+  sprint_athletics: {
+    de: 'Antritt, Beschleunigung und Höchstgeschwindigkeit als drei getrennte Grössen. Wer nur die Endzeit misst, weiss nicht, welcher Abschnitt sie bestimmt.',
+    en: 'Acceleration over the first metres, over the next, and top speed as three separate quantities. Measuring only the final time leaves open which section decides it.',
+  },
+  rowing: {
+    de: 'Ausdauer unter hoher Kraftanforderung über sechs bis acht Minuten. Die Ergometerzeit ist der Kern; die Kraftwerte daneben sagen, woran sie hängt.',
+    en: 'Endurance under high force demand over six to eight minutes. Ergometer time is the core; the strength values beside it say what it depends on.',
+  },
+  powerlifting: {
+    de: 'Drei Einer-Maxima. Gemessen wird die Last und ihr Verhältnis zum Körpergewicht — der Wettkampf entscheidet über die Summe, das Training über die einzelne Übung.',
+    en: 'Three one-rep maxima. Load and its ratio to body weight are measured — competition decides on the total, training on the single lift.',
+  },
 }
 
 /** Die Begründung zu einer Disziplin. Null, wenn keine hinterlegt ist. */

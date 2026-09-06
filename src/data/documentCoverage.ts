@@ -179,7 +179,7 @@ export function openGaps(): DocumentGap[] {
   return DOCUMENT_GAPS
 }
 
-export type Provenance = 'document' | 'concept' | 'addition' | 'unknown'
+export type Provenance = 'document' | 'concept' | 'addition' | 'master_table' | 'unknown'
 
 /**
  * Woher kommt die Zuordnung dieses Tests zu dieser Disziplin?
