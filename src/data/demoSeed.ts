@@ -260,6 +260,7 @@ export function buildDemoData(): StoredData {
         results,
         archived: false,
         notes: '',
+    consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
         focuses: DEMO_FOCUSES,
         audit: [],
         createdAt: new Date().toISOString(),

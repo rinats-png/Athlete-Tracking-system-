@@ -7,6 +7,7 @@ import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { formatDate } from '@/lib/format'
 import { downloadFile } from '@/lib/export/csv'
+import { ConsentForm, ConsentPanel } from './ConsentPanel'
 import type { HandoverOutcome } from '@/lib/store/handover'
 import type { AppLocale } from '@/types/domain'
 
@@ -29,6 +30,7 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
     exportAthleteJson,
     importAthleteJson,
     renameAthlete,
+    setConsent,
     archiveAthlete,
     deleteAthlete,
   } = useAppData()
@@ -109,6 +111,12 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
                       <Trash2 size={14} aria-hidden />
                     </Button>
                   </div>
+
+                  <ConsentPanel
+                    athlete={athlete}
+                    onChange={(consent) => setConsent(athlete.id, consent)}
+                  />
+                  <ConsentForm athlete={athlete} />
 
                   <div className="mt-1 flex flex-wrap items-center gap-2">
                     <Button

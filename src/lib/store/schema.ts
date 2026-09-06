@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 15
+export const CURRENT_SCHEMA_VERSION = 16
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -438,6 +438,33 @@ const athleteSchema = z.object({
   /** Notizen des Trainers zu dieser Person (§74). */
   notes: z.string().max(4000).default(''),
   /**
+   * Einwilligung in die Verarbeitung — bei Minderjährigen die der
+   * Erziehungsberechtigten.
+   *
+   * WARUM DAS IM PRODUKT STEHT UND NICHT NUR IM VERTRAG: ein Trainer, der
+   * fremde Messwerte führt, verarbeitet personenbezogene Daten anderer
+   * Menschen. Bei Minderjährigen genügt deren eigenes Einverständnis nicht.
+   * Solange das nur in den Nutzungsbedingungen steht, hakt es niemand ab —
+   * und ein Verein, der es ernst nimmt, kann die App nicht einsetzen.
+   *
+   * Die App speichert AUSDRÜCKLICH nur, DASS und WANN eingewilligt wurde,
+   * und von wem dem Namen nach. Keine Unterschrift, kein Dokument, keine
+   * Anschrift der Eltern (§50): der Nachweis liegt beim Trainer, hier steht
+   * nur der Haken.
+   */
+  consent: z
+    .object({
+      /** Null = nicht erteilt. Sonst der Zeitpunkt. */
+      grantedAt: isoDate.nullable().default(null),
+      /** Wer eingewilligt hat — der Athlet selbst oder eine benannte Person. */
+      grantedBy: z.string().max(120).default(''),
+      /** Ob die Einwilligung für eine minderjährige Person erteilt wurde. */
+      forMinor: z.boolean().default(false),
+      /** Zurückgezogen am. Der Eintrag bleibt — ein Widerruf ist Teil der Geschichte. */
+      withdrawnAt: isoDate.nullable().default(null),
+    })
+    .default(() => ({ grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null })),
+  /**
    * Trainingsschwerpunkte. Bewusst neben `notes` und nicht an deren Stelle:
    * die Notiz ist unstrukturierter Freitext über den Menschen, ein
    * Schwerpunkt ist eine strukturierte Zuordnung zu einem gemessenen Bereich.
@@ -751,6 +778,22 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 15,
+    to: 16,
+    describe: 'Einwilligung je Athlet, besonders für Minderjährige',
+    run: (data) => ({
+      ...data,
+      version: 16,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        // Nicht erteilt, nicht geraten: eine rückwirkend gesetzte Einwilligung
+        // wäre eine erfundene Rechtsgrundlage — der gefährlichste denkbare
+        // Standardwert an dieser Stelle.
+        consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -779,6 +822,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     results: [],
     archived: false,
     notes: '',
+    consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
     focuses: [],
     audit: [],
     createdAt: new Date().toISOString(),

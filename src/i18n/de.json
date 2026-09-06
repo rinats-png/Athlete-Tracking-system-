@@ -2066,5 +2066,39 @@
     "noData": "Für diesen Athleten liegen noch keine Messwerte vor.",
     "disclaimer": "BASELINE ist keine medizinische Diagnostik. Dieser Bericht stellt keine Diagnose, gibt keine Therapieempfehlung und bewertet kein Krankheitsbild. Referenzwerte sind eine Vergleichsgrundlage und kein physiologischer Grenzwert; wo keine publizierte Referenz vorliegt, steht das an der Zeile.",
     "generated": "Erstellt am {{date}} mit BASELINE"
+  },
+  "consent": {
+    "title": "Einwilligung",
+    "hint": "Wer fremde Messwerte führt, verarbeitet personenbezogene Daten. Bei Minderjährigen braucht es die Einwilligung der Erziehungsberechtigten. Die App hält nur fest, DASS und WANN eingewilligt wurde — der Nachweis bleibt bei dir.",
+    "state": {
+      "missing": "Keine Einwilligung erfasst",
+      "granted": "Einwilligung liegt vor",
+      "withdrawn": "Einwilligung zurückgezogen",
+      "outgrown": "Als Minderjähriger erteilt, inzwischen volljährig — eigene Einwilligung nötig"
+    },
+    "grant": "Einwilligung erfassen",
+    "withdraw": "Widerruf erfassen",
+    "restore": "Widerruf zurücknehmen",
+    "by": "Erteilt von",
+    "byHint": "Der Athlet selbst oder die einwilligende Person. Mehr als der Name wird nicht gespeichert.",
+    "forMinor": "Für eine minderjährige Person",
+    "grantedOn": "Erfasst am {{date}}",
+    "withdrawnOn": "Zurückgezogen am {{date}}",
+    "needsGuardian": "Nach dem Geburtsdatum minderjährig — es braucht die Einwilligung Erziehungsberechtigter.",
+    "noBirthDate": "Ohne Geburtsdatum geht die App vom Schutzbedarf aus und verlangt die Einwilligung Erziehungsberechtigter.",
+    "blocked": "Ohne Einwilligung erfasst diese App für {{name}} keine Messwerte.",
+    "todo": "{{count}} Athleten ohne gültige Einwilligung",
+    "todoNone": "Für alle Athleten liegt eine Einwilligung vor.",
+    "form": "Vordruck ausdrucken",
+    "formHint": "Ein Blatt zum Unterschreiben. Es bleibt bei dir — die App speichert es nicht.",
+    "noAdvice": "Was im Einzelfall nötig ist, sagt ein Anwalt. Diese App gibt keine Rechtsberatung.",
+    "formTitle": "Einwilligung in die Leistungsdiagnostik",
+    "formBody": "Ich willige ein, dass die unten genannte Person an sportmotorischen Leistungstests teilnimmt und dass die dabei entstehenden Messwerte zum Zweck der Trainingsauswertung gespeichert und ausgewertet werden. Die Einwilligung kann jederzeit ohne Angabe von Gründen für die Zukunft widerrufen werden. Es handelt sich nicht um eine medizinische Untersuchung.",
+    "formAthlete": "Name des Athleten / der Athletin",
+    "formBirth": "Geburtsdatum",
+    "formGuardian": "Name der einwilligenden Person",
+    "formRelation": "Verhältnis zur Person (bei Minderjährigen)",
+    "formPlaceDate": "Ort, Datum",
+    "formSignature": "Unterschrift"
   }
 }

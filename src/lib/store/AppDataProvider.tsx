@@ -93,6 +93,8 @@ interface AppDataValue {
    */
   addAthlete: (name: string, options?: { activate?: boolean }) => string
   renameAthlete: (id: string, name: string) => void
+  /** Einwilligung eines Athleten setzen. */
+  setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
   archiveAthlete: (id: string, archived: boolean) => void
   /** Endgültig, mit allem Bestand. Nur auf ausdrückliche Bestätigung. */
@@ -495,6 +497,11 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           athletes: store.athletes.map((a) =>
             a.id === id ? { ...a, name: name.slice(0, 120) } : a,
           ),
+        }),
+      setConsent: (id, consent) =>
+        commitStore({
+          ...storeRef.current,
+          athletes: storeRef.current.athletes.map((a) => (a.id === id ? { ...a, consent } : a)),
         }),
       archiveAthlete: (id, archived) => {
         const remaining = store.athletes.filter((a) => a.id !== id && !a.archived)

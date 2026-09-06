@@ -130,10 +130,10 @@ export const NON_CONVERTED_UNITS = [
   '× KG',
 ] as const
 
-export function ageFromBirthDate(birthDate: string | null): number | null {
+export function ageFromBirthDate(birthDate: string | null, asOf: Date = new Date()): number | null {
   if (!birthDate) return null
   const born = new Date(birthDate)
-  const now = new Date()
+  const now = asOf
   let age = now.getFullYear() - born.getFullYear()
   const monthDiff = now.getMonth() - born.getMonth()
   if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < born.getDate())) age -= 1

@@ -9,6 +9,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { consentStatus } from '@/domain/consent'
 import { TEST_CATALOG, getTest } from '@/data/testCatalog'
 import { groupStats, MIN_FOR_SPREAD } from '@/domain/groupStats'
 import { formatNumber } from '@/lib/format'
@@ -75,6 +76,9 @@ export function GroupTestScreen() {
     // schreibt athletenweise in EINEM Vorgang.
     const values = athletes.map((athlete) => {
       const value = entries[athlete.id]
+      // Ohne Einwilligung wird nicht geschrieben — auch nicht "aus Versehen"
+      // im Zug einer Gruppe, wo es niemandem auffiele.
+      if (!consentStatus(athlete).mayRecord) return {}
       return value == null ? {} : { [test.primaryMetric]: value }
     })
     // Die Bedingungen des Testtags gelten für jeden Wert dieses Tages. Ohne

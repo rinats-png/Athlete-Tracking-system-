@@ -15,6 +15,7 @@ import { aggregateAttempts, attemptContextFor, defaultSelectionFor } from '@/dom
 import { hasStageLevel } from '@/domain/testModel'
 import { getTest } from '@/data/testCatalog'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { consentStatus } from '@/domain/consent'
 import { deriveMetrics } from '@/lib/metrics/derive'
 import { ageFromBirthDate, formatNumber } from '@/lib/format'
 import { formulaFor } from '@/domain/formulaRegistry'
@@ -35,7 +36,7 @@ export function TestRunScreen() {
   const { t, i18n } = useTranslation()
   const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
   const navigate = useNavigate()
-  const { data, recordResult, bodyWeightAt } = useAppData()
+  const { data, recordResult, bodyWeightAt, role, athletes, activeAthleteId } = useAppData()
   const [searchParams] = useSearchParams()
 
   // Läuft dieser Test innerhalb einer Diagnostik? Dann gehört das Ergebnis
@@ -126,7 +127,13 @@ export function TestRunScreen() {
     bodyWeightKg: bodyWeightAt(`${performedOn}T12:00:00.000Z`),
     performedOn,
   })
-  const blocked = hasErrors(issues)
+  // Ohne Einwilligung werden im Trainermodus keine fremden Messwerte
+  // erfasst. Im Einzelmodus misst jemand sich selbst — dort wäre die Frage
+  // nach einer Einwilligung an sich selbst albern.
+  const activeAthlete = athletes.find((a) => a.id === activeAthleteId) ?? null
+  const consent = activeAthlete ? consentStatus(activeAthlete) : null
+  const consentMissing = role === 'coach' && consent != null && !consent.mayRecord
+  const blocked = hasErrors(issues) || consentMissing
 
   const save = () => {
     if (blocked) return
@@ -340,6 +347,14 @@ export function TestRunScreen() {
                 className="mt-1.5 w-full resize-y border border-line bg-surface-sunken px-3 py-2 text-[16px]"
               />
             </label>
+
+            {consentMissing && (
+              <p className="mb-2 border-l-2 border-critical bg-critical/10 px-3 py-2 text-[13px] leading-snug text-ink-secondary">
+                {t('consent.blocked', {
+                  name: activeAthlete?.name || activeAthlete?.profile.firstName || '',
+                })}
+              </p>
+            )}
 
             <Button
               variant="primary"

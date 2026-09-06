@@ -2066,5 +2066,39 @@
     "noData": "No measurements exist for this athlete yet.",
     "disclaimer": "BASELINE is not medical diagnostics. This report makes no diagnosis, gives no therapeutic recommendation and assesses no clinical condition. Reference values are a basis for comparison, not a physiological limit; where no published reference exists, the row says so.",
     "generated": "Created on {{date}} with BASELINE"
+  },
+  "consent": {
+    "title": "Consent",
+    "hint": "Whoever keeps other people’s measurements processes personal data. For minors, the consent of a legal guardian is required. The app only records THAT and WHEN consent was given — the evidence stays with you.",
+    "state": {
+      "missing": "No consent recorded",
+      "granted": "Consent on file",
+      "withdrawn": "Consent withdrawn",
+      "outgrown": "Given as a minor, now of age — own consent required"
+    },
+    "grant": "Record consent",
+    "withdraw": "Record withdrawal",
+    "restore": "Undo withdrawal",
+    "by": "Given by",
+    "byHint": "The athlete themselves or the consenting person. Nothing beyond the name is stored.",
+    "forMinor": "For a minor",
+    "grantedOn": "Recorded on {{date}}",
+    "withdrawnOn": "Withdrawn on {{date}}",
+    "needsGuardian": "A minor by date of birth — a guardian’s consent is required.",
+    "noBirthDate": "Without a date of birth the app assumes the need for protection and requires a guardian’s consent.",
+    "blocked": "Without consent this app records no measurements for {{name}}.",
+    "todo": "{{count}} athletes without valid consent",
+    "todoNone": "Consent is on file for every athlete.",
+    "form": "Print consent form",
+    "formHint": "A sheet to sign. It stays with you — the app does not store it.",
+    "noAdvice": "What is required in an individual case is a lawyer’s call. This app gives no legal advice.",
+    "formTitle": "Consent to performance testing",
+    "formBody": "I consent to the person named below taking part in sports-motor performance tests and to the resulting measurements being stored and analysed for the purpose of training evaluation. Consent may be withdrawn at any time for the future without giving reasons. This is not a medical examination.",
+    "formAthlete": "Name of the athlete",
+    "formBirth": "Date of birth",
+    "formGuardian": "Name of the consenting person",
+    "formRelation": "Relationship to the person (for minors)",
+    "formPlaceDate": "Place, date",
+    "formSignature": "Signature"
   }
 }
