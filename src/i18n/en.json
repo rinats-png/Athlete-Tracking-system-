@@ -1978,5 +1978,28 @@
     "needStations": "Select at least one station.",
     "needParticipants": "Select at least one participant.",
     "notFound": "This test day does not exist."
+  },
+  "meaning": {
+    "title": "What does this mean?",
+    "hint": "Four sentences, all computed from your own data. None of them is a medical statement.",
+    "percentile": "Of 100 people from the group “{{group}}”, roughly {{below}} would be below your value and {{above}} above it.",
+    "band": "The source assigns this value to the band “{{band}}”, relative to {{group}}. It yields no percentile.",
+    "noReference": "There is no published comparison group for this test. The value says something about you compared with yourself — and the app claims nothing more here.",
+    "changeFirst": "This is your first measurement in this test. A change needs a second one; from the fourth, the app also knows your measurement spread.",
+    "changeUnknown": "{{points}} measurements so far. For a sound statement about change the app needs at least four — below that, real progress cannot be separated from measurement spread.",
+    "changeNoise": "{{percent}} % difference from the last measurement {{days}} days ago. Your measurement spread is {{detectable}} % — the difference cannot be separated from it and does not count as a change.",
+    "changeBetter": "{{percent}} % better than {{days}} days ago. That exceeds your measurement spread of {{detectable}} % and is therefore a real change.",
+    "changeWorse": "{{percent}} % weaker than {{days}} days ago. That exceeds your measurement spread of {{detectable}} % and is therefore a real change — not a measurement error.",
+    "limit": "So the next measurement stays comparable: {{text}}",
+    "limitGeneric": "No dedicated procedure is stored for this test yet. In general: {{text}}",
+    "next": "Sensible to measure next: {{test}}. What is trained as a result is a coach’s decision — not this app’s.",
+    "nextGo": "Open test",
+    "group": {
+      "title": "In your group",
+      "hint": "Not a scientific reference value, but the comparison with the athletes who did the same station. It works where no published norm exists.",
+      "rank": "Rank {{rank}} of {{count}}",
+      "median": "Group median: {{median}}",
+      "alone": "Nobody else in the roster has measured this test yet. From two measurements, a comparison appears here."
+    }
   }
 }

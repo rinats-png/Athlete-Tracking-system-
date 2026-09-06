@@ -1978,5 +1978,28 @@
     "needStations": "Wähle mindestens eine Station.",
     "needParticipants": "Wähle mindestens einen Teilnehmer.",
     "notFound": "Diesen Testtag gibt es nicht."
+  },
+  "meaning": {
+    "title": "Was bedeutet das?",
+    "hint": "Vier Sätze, alle aus deinen eigenen Daten gerechnet. Keiner davon ist eine medizinische Aussage.",
+    "percentile": "Von 100 Personen aus der Gruppe «{{group}}» lägen rund {{below}} unter deinem Wert und {{above}} darüber.",
+    "band": "Die Quelle ordnet diesen Wert dem Band «{{band}}» zu, bezogen auf {{group}}. Ein Perzentil gibt sie nicht her.",
+    "noReference": "Für diesen Test gibt es keine publizierte Vergleichsgruppe. Der Wert sagt etwas über dich im Vergleich zu dir selbst — und mehr behauptet die App hier nicht.",
+    "changeFirst": "Das ist deine erste Messung in diesem Test. Eine Veränderung gibt es erst ab der zweiten; ab der vierten kennt die App auch deine Messstreuung.",
+    "changeUnknown": "Bisher {{points}} Messungen. Für eine belastbare Aussage über Veränderung braucht die App mindestens vier — vorher lässt sich echter Fortschritt nicht von Messstreuung trennen.",
+    "changeNoise": "{{percent}} % Unterschied zur letzten Messung vor {{days}} Tagen. Deine Messstreuung liegt bei {{detectable}} % — der Unterschied ist damit nicht von ihr zu trennen und zählt nicht als Veränderung.",
+    "changeBetter": "{{percent}} % besser als vor {{days}} Tagen. Das liegt über deiner Messstreuung von {{detectable}} % und ist damit eine echte Veränderung.",
+    "changeWorse": "{{percent}} % schwächer als vor {{days}} Tagen. Das liegt über deiner Messstreuung von {{detectable}} % und ist damit eine echte Veränderung — kein Messfehler.",
+    "limit": "Damit die nächste Messung vergleichbar ist: {{text}}",
+    "limitGeneric": "Für diesen Test ist noch keine eigene Vorschrift hinterlegt. Allgemein gilt: {{text}}",
+    "next": "Als Nächstes sinnvoll zu messen: {{test}}. Was daraufhin trainiert wird, entscheidet ein Trainer — nicht diese App.",
+    "nextGo": "Test öffnen",
+    "group": {
+      "title": "In deiner Gruppe",
+      "hint": "Kein wissenschaftlicher Referenzwert, sondern der Vergleich mit den Athleten, die dieselbe Station gemacht haben. Er trägt auch dort, wo es keine publizierte Norm gibt.",
+      "rank": "Rang {{rank}} von {{count}}",
+      "median": "Median der Gruppe: {{median}}",
+      "alone": "Bisher hat niemand sonst im Kader diesen Test gemessen. Ab zwei Messungen steht hier ein Vergleich."
+    }
   }
 }

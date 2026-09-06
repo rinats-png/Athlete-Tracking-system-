@@ -14,6 +14,7 @@ import { ratingContextOf } from '@/features/shared/profileContext'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { getTest } from '@/data/testCatalog'
 import { rateResult } from '@/domain/rating'
+import { GroupStandingPanel, MeaningPanel } from './MeaningPanel'
 import { assessQuality } from '@/domain/dataQuality'
 import { nextTests } from '@/domain/nextTest'
 import { changeReport, missingForError, type ChangeReport } from '@/domain/change'
@@ -161,6 +162,9 @@ export function ResultScreen() {
             <p className="px-4 py-3 text-[13px] text-ink-secondary">{t(`rating.gap.${rating.gap ?? 'no_reference'}`)}</p>
           )}
         </Panel>
+
+        <MeaningPanel result={result} rating={rating} />
+        <GroupStandingPanel result={result} />
 
         <Panel ticked className="lg:col-span-2">
           <PanelHeader title={t('rating.title')} action={<RatingWord level={rating.level} />} />
