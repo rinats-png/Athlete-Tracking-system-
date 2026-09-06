@@ -76,6 +76,20 @@ export interface TestDefinition extends TestClassification {
    * grundsätzlich unvollständig. Fehlt die Angabe, gilt `field`.
    */
   setting?: 'field' | 'lab'
+  /**
+   * Wie stark das Ergebnis am Messgerät hängt (Mastertabelle: «Geräte-/
+   * Protokollabhängigkeit»).
+   *
+   * `critical` heisst: zwei Geräte liefern für dieselbe Leistung Zahlen, die
+   * nicht ineinander umzurechnen sind. Die Mastertabelle nennt dafür ein
+   * Beispiel, das für sich spricht — für den Jab stehen dort je nach Gerät
+   * 1.212 N und 2.577 N. Ohne festgehaltenes Gerät wäre ein Vergleich kein
+   * Leistungsvergleich, sondern ein Gerätevergleich; das Feld wird deshalb
+   * zur Pflichtangabe.
+   *
+   * Fehlt die Angabe, gilt `none`.
+   */
+  deviceBound?: 'none' | 'high' | 'critical'
   derivedMetrics: string[]
   /**
    * Der Parametersatz, wenn dieser Test aus einem parametrisierten Protokoll

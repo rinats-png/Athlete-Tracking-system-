@@ -130,6 +130,7 @@ export const COMBAT_TESTS: TestBlueprint[] = [
         put('grip_asymmetry_percent', fatigueIndexPercent(best, worst))
       }
     },
+    deviceBound: 'critical',
     sortOrder: 501,
     name: { de: 'Griffkraft (Handdynamometer)', en: 'Grip strength (dynamometer)' },
     shortName: { de: 'Griffkraft', en: 'Grip' },
@@ -485,6 +486,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
       if (ftp != null && ctx.bodyWeightKg) put('ftp_watt_per_kg', ftp / ctx.bodyWeightKg)
       put('bike_threshold_score', bikeThresholdScore(ftp, ctx.bodyWeightKg))
     },
+    deviceBound: 'high',
     sortOrder: 550,
     name: { de: 'FTP-Test (20 Minuten)', en: 'FTP test (20 minutes)' },
     shortName: { de: 'FTP 20 min', en: 'FTP 20 min' },
@@ -511,6 +513,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
     protocol: { mode: 'stages' },
     requiresBodyWeight: true,
     derivedMetrics: ['watts_per_kg'],
+    deviceBound: 'high',
     sortOrder: 551,
     name: { de: 'Rampentest (Rad)', en: 'Ramp test (bike)' },
     shortName: { de: 'Rampentest', en: 'Ramp test' },
@@ -536,6 +539,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
     protocol: { mode: 'attempts', attempts: 3 },
     requiresBodyWeight: true,
     derivedMetrics: ['watts_per_kg'],
+    deviceBound: 'high',
     sortOrder: 552,
     name: { de: 'Spitzenleistung 5 s', en: 'Peak power 5 s' },
     shortName: { de: 'Peak Power', en: 'Peak power' },
@@ -567,6 +571,7 @@ export const ENDURANCE_SPORT_TESTS: TestBlueprint[] = [
     derive: (values, _ctx, put) => {
       put('fatigue_index_percent', fatigueIndexPercent(values.peakPowerW, values.minPowerW))
     },
+    deviceBound: 'high',
     sortOrder: 553,
     name: { de: 'Wingate-Test (30 s)', en: 'Wingate test (30 s)' },
     shortName: { de: 'Wingate', en: 'Wingate' },

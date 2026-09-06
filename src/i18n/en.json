@@ -432,7 +432,8 @@
     "integer": "Whole numbers only",
     "future": "Date is in the future",
     "noBodyWeight": "Relative strength cannot be computed without body weight.",
-    "repsUnreliable": "Above {{limit}} repetitions the 1RM estimate varies considerably."
+    "repsUnreliable": "Above {{limit}} repetitions the 1RM estimate varies considerably.",
+    "deviceRequired": "For this test the result depends on the device. Record what was used — otherwise the value is not comparable later."
   },
   "attempts": {
     "title": "Attempts",

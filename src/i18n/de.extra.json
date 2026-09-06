@@ -856,5 +856,12 @@
     "history": "Verlauf",
     "seeResult": "Auswertung öffnen",
     "knownGap": "Bekannte Lücke"
+  },
+  "evidence": {
+    "title": "Methodenbeleg",
+    "hint": "Kein Referenzwert. Eine Registereintragung belegt, dass ein Verfahren in angemeldeter Forschung so gemessen wird — nicht, dass es einen Normwert dafür gibt, und auch nichts über die Qualität oder Wirksamkeit der Studie.",
+    "outcomes": "Registrierte Messgrössen",
+    "caveat": "Zu beachten",
+    "open": "Studie öffnen"
   }
 }

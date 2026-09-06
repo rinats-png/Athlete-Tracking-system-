@@ -126,6 +126,7 @@ export function TestRunScreen() {
   const issues = validateTestInput(test, { ...values, ...numericValues }, {
     bodyWeightKg: bodyWeightAt(`${performedOn}T12:00:00.000Z`),
     performedOn,
+    equipment: measurementContext.equipment,
   })
   // Ohne Einwilligung werden im Trainermodus keine fremden Messwerte
   // erfasst. Im Einzelmodus misst jemand sich selbst — dort wäre die Frage

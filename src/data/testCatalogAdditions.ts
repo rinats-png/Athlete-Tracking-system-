@@ -42,6 +42,8 @@ const sprint = (
   ],
   protocol: { mode: 'attempts', attempts: 3, targetDistanceM: meters },
   requiresBodyWeight: false,
+  // Handstoppung und Lichtschranke ergeben systematisch verschiedene Zeiten.
+  deviceBound: 'high',
   derivedMetrics: ['avg_velocity_m_s'],
   sortOrder,
   name: { de: nameDe, en: nameEn },
@@ -137,6 +139,8 @@ const jump = (
   instructionsEn: string,
 ): TestBlueprint => ({
   slug,
+  // Matte, Reichhöhe und Video ergeben verschiedene Werte für denselben Sprung.
+  deviceBound: 'high',
   primaryMetric: 'jumpHeightCm',
   primaryUnit: 'cm',
   fields: [

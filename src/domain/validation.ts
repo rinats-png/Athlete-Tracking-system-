@@ -32,9 +32,16 @@ export const REPS_RELIABLE_LIMIT = 10
 export function validateTestInput(
   test: TestDefinition,
   values: Record<string, number | null | undefined>,
-  context: { bodyWeightKg?: number | null; performedOn?: string } = {},
+  context: { bodyWeightKg?: number | null; performedOn?: string; equipment?: string } = {},
 ): ValidationIssue[] {
   const issues: ValidationIssue[] = []
+
+  // Bei geräteabhängigen Messungen ist das Gerät Teil des Messwerts. Ohne es
+  // liesse sich das Ergebnis später mit einem anderen Gerät vergleichen —
+  // und das wäre ein Gerätevergleich, kein Leistungsvergleich.
+  if (test.deviceBound === 'critical' && !(context.equipment ?? '').trim()) {
+    issues.push({ field: 'equipment', severity: 'error', messageKey: 'validation.deviceRequired' })
+  }
 
   for (const field of test.fields) {
     const raw = values[field.key]

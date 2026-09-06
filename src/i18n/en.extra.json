@@ -856,5 +856,12 @@
     "history": "History",
     "seeResult": "Open evaluation",
     "knownGap": "Known gap"
+  },
+  "evidence": {
+    "title": "Method evidence",
+    "hint": "Not a reference value. A registry entry documents that a method is measured this way in registered research — not that a norm exists for it, and nothing about the study’s quality or efficacy.",
+    "outcomes": "Registered measures",
+    "caveat": "To note",
+    "open": "Open study"
   }
 }

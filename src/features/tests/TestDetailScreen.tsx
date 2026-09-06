@@ -17,6 +17,7 @@ import { ProcedurePanel } from './ProcedurePanel'
 import { formatDate, formatDuration, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { gapsForTest } from '@/data/references'
+import { evidenceForTest } from '@/data/methodEvidence'
 import type { ReferenceEntry } from '@/data/references'
 
 /**
@@ -139,6 +140,38 @@ export function TestDetailScreen() {
           </Panel>
 
           <ProcedurePanel test={test} />
+
+          {/* Getrennt von den Referenzwerten, und zwar ausdrücklich: ein
+              NCT-Verweis neben einer Norm würde als wissenschaftliche
+              Absicherung gelesen, die er nicht ist. */}
+          {evidenceForTest(test.slug).length > 0 && (
+            <Panel>
+              <PanelHeader title={t('evidence.title')} subtitle={t('evidence.hint')} />
+              <ul className="divide-y divide-line">
+                {evidenceForTest(test.slug).map((entry) => (
+                  <li key={entry.nct} className="px-4 py-3">
+                    <p className="text-[13px] font-medium">{entry.study[locale]}</p>
+                    <p className="mt-1 text-[12px] leading-relaxed text-ink-secondary">
+                      <span className="label-tag mr-1">{t('evidence.outcomes')}</span>
+                      {entry.outcomes[locale]}
+                    </p>
+                    <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
+                      <span className="label-tag mr-1">{t('evidence.caveat')}</span>
+                      {entry.caveat[locale]}
+                    </p>
+                    <a
+                      href={`https://clinicaltrials.gov/study/${entry.nct}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-1.5 inline-flex min-h-11 items-center text-[12px] underline underline-offset-2"
+                    >
+                      {entry.nct} · {t('evidence.open')}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+          )}
 
           <Panel>
             <PanelHeader title={t('testInfo.science')} subtitle={t('testInfo.scienceHint')} />
