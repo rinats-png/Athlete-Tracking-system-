@@ -19,7 +19,8 @@
     },
     "overview": "Übersicht",
     "diagnostics": "Diagnostik",
-    "analysis": "Analyse"
+    "analysis": "Analyse",
+    "skipToContent": "Zum Inhalt springen"
   },
   "actions": {
     "startTest": "Test starten",
@@ -1531,7 +1532,18 @@
     "apply": "Übernehmen",
     "noSuggestion": "Ein Vorschlag entsteht ab drei Messungen.",
     "dueOn": "fällig am {{date}}",
-    "default": "Vorgabe"
+    "default": "Vorgabe",
+    "calendar": "Kalenderdatei laden",
+    "calendarHint": "Ein ganztägiger Termin je fälliger Nachmessung, mit Voralarm drei Tage vorher. Funktioniert in jedem Kalender, offline und ohne Konto — das ist der zuverlässige Weg.",
+    "calendarEmpty": "Es ist noch keine Nachmessung fällig. Sobald ein Test wiederholt werden soll, steht die Datei hier bereit.",
+    "notify": "Systembenachrichtigung erlauben",
+    "notifyOn": "Systembenachrichtigung ist erlaubt",
+    "notifyDenied": "Systembenachrichtigungen sind für diese Seite abgelehnt. Das lässt sich nur in den Browsereinstellungen ändern.",
+    "notifyUnsupported": "Dieser Browser kennt keine Systembenachrichtigungen.",
+    "notifyLimit": "Die App kann nur benachrichtigen, während sie geöffnet ist — sie hat keinen Server, der im Hintergrund etwas verschickt. Für eine Erinnerung, die dich auch ohne die App erreicht, nimm die Kalenderdatei.",
+    "notifyTitle": "Nachmessung fällig",
+    "notifyBody_one": "{{test}} ist zur Nachmessung fällig.",
+    "notifyBody_other": "{{count}} Tests sind zur Nachmessung fällig."
   },
   "stages": {
     "up": "Eine Stufe weiter",

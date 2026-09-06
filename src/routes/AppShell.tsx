@@ -5,6 +5,7 @@ import { DataLoadNotice } from '@/features/dashboard/DataLoadNotice'
 import { ActionOrb } from '@/components/signature/ActionOrb'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useTranslation } from 'react-i18next'
+import { useOverdueNotice } from '@/features/shared/useOverdueNotice'
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -19,11 +20,21 @@ export function AppShell() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  useOverdueNotice()
   const { mode, storageBlocked } = useAppData()
   const active = navKeyForPath(pathname)
 
   return (
     <div className="flex min-h-dvh flex-col">
+      {/* Ohne diesen Sprung tabbt sich jemand auf JEDER Seite erneut durch
+          die gesamte Navigation, bevor er beim Inhalt ankommt. Sichtbar wird
+          er erst, wenn er den Fokus hat — für alle anderen ist er nicht da. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:border focus:border-[var(--line-strong)] focus:bg-plane focus:px-3 focus:py-2 focus:text-[13px]"
+      >
+        {t('nav.skipToContent')}
+      </a>
       <AppHeader
         mode={mode}
         active={active}

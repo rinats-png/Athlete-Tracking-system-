@@ -1,7 +1,7 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Bell, CalendarArrowDown } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { NumberField } from '@/components/ui/NumberField'
@@ -13,6 +13,10 @@ import { dueTests, suggestedIntervalDays } from '@/domain/reminders'
 import { DEFAULT_RETEST_DAYS } from '@/domain/nextTest'
 import { getTest } from '@/data/testCatalog'
 import { formatDate } from '@/lib/format'
+import { downloadFile } from '@/lib/export/csv'
+import { buildIcs } from '@/lib/export/ics'
+import { notifyPermission, requestNotifyPermission } from '@/lib/notify'
+import type { NotifyPermission } from '@/lib/notify'
 
 /** Erinnerungen (Konzept §24): einschalten, fällige Tests, Abstände je Test. */
 export function RemindersScreen() {
@@ -22,6 +26,11 @@ export function RemindersScreen() {
   const settings = reminderSettingsOf(data.profile)
   const due = useMemo(() => dueTests(data.results, settings), [data.results, settings])
   const overdue = due.filter((d) => d.overdueDays >= 0)
+  const [permission, setPermission] = useState<NotifyPermission>(() => notifyPermission())
+
+  const loadCalendar = () => {
+    downloadFile('baseline-nachmessungen.ics', buildIcs(due, locale), 'text/calendar')
+  }
 
   const setInterval = (slug: string, days: number | null) => {
     const next = { ...data.profile.reminderIntervalDays }
@@ -54,6 +63,48 @@ export function RemindersScreen() {
               {t('reminders.enable')}
             </label>
             <p className="mt-2 text-[12px] leading-relaxed text-ink-muted">{t('reminders.noPush')}</p>
+          </div>
+
+          {/* Der zuverlässige Weg zuerst: ein Kalendereintrag erreicht
+              jemanden auch dann, wenn er die App monatelang nicht öffnet. */}
+          <div className="border-t border-line px-4 py-3">
+            <span className="label-tag">{t('reminders.calendar')}</span>
+            <p className="mt-1 text-[12px] leading-relaxed text-ink-secondary">
+              {t('reminders.calendarHint')}
+            </p>
+            {due.length === 0 ? (
+              <p className="mt-2 text-[12px] text-ink-muted">{t('reminders.calendarEmpty')}</p>
+            ) : (
+              <Button variant="outline" size="sm" className="mt-2" onClick={loadCalendar}>
+                <CalendarArrowDown size={14} aria-hidden />
+                {t('reminders.calendar')}
+              </Button>
+            )}
+          </div>
+
+          {/* Und danach die Zugabe — mit der Grenze daneben, nicht darunter. */}
+          <div className="border-t border-line px-4 py-3">
+            <span className="label-tag">{t('reminders.notify')}</span>
+            <p className="mt-1 text-[12px] leading-relaxed text-ink-secondary">
+              {t('reminders.notifyLimit')}
+            </p>
+            {permission === 'granted' ? (
+              <p className="mt-2 text-[12px] text-ink-muted">{t('reminders.notifyOn')}</p>
+            ) : permission === 'denied' ? (
+              <p className="mt-2 text-[12px] text-ink-muted">{t('reminders.notifyDenied')}</p>
+            ) : permission === 'unsupported' ? (
+              <p className="mt-2 text-[12px] text-ink-muted">{t('reminders.notifyUnsupported')}</p>
+            ) : (
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-2"
+                onClick={() => void requestNotifyPermission().then(setPermission)}
+              >
+                <Bell size={14} aria-hidden />
+                {t('reminders.notify')}
+              </Button>
+            )}
           </div>
           <PanelHeader title={t('reminders.overdue')} className="border-t" />
           {!settings.remindersEnabled || overdue.length === 0 ? (

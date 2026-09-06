@@ -19,7 +19,8 @@
     },
     "overview": "Overview",
     "diagnostics": "Diagnostics",
-    "analysis": "Analysis"
+    "analysis": "Analysis",
+    "skipToContent": "Skip to content"
   },
   "actions": {
     "startTest": "Start test",
@@ -1531,7 +1532,18 @@
     "apply": "Apply",
     "noSuggestion": "A suggestion appears from three measurements on.",
     "dueOn": "due on {{date}}",
-    "default": "Default"
+    "default": "Default",
+    "calendar": "Download calendar file",
+    "calendarHint": "One all-day event per due re-test, with an alarm three days ahead. Works in any calendar, offline and without an account — this is the reliable route.",
+    "calendarEmpty": "No re-test is due yet. As soon as a test should be repeated, the file will be ready here.",
+    "notify": "Allow system notifications",
+    "notifyOn": "System notifications are allowed",
+    "notifyDenied": "System notifications are blocked for this site. Only browser settings can change that.",
+    "notifyUnsupported": "This browser has no system notifications.",
+    "notifyLimit": "The app can only notify you while it is open — it has no server sending anything in the background. For a reminder that reaches you without the app, use the calendar file.",
+    "notifyTitle": "Re-test due",
+    "notifyBody_one": "{{test}} is due for a re-test.",
+    "notifyBody_other": "{{count}} tests are due for a re-test."
   },
   "stages": {
     "up": "One stage up",

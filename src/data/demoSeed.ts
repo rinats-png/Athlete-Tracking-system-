@@ -18,6 +18,14 @@ import type {
  * Ausdauerblock. Dadurch zeigt das Radar in beiden Modi eine sinnvolle Form —
  * im Bestleistungsmodus den Formstand, im Referenzmodus Stärken und Schwächen.
  *
+ * WARUM JUDO: der Demobestand lief vorher auf Functional Fitness — einer
+ * Disziplin, für die KEIN einziger ihrer Tests eine publizierte Referenz
+ * trägt. Wer die Demo öffnete, sah die App also von ihrer schwächsten Seite:
+ * ein Profil ohne jede Einordnung. Judo ist die am besten belegte Disziplin
+ * im Katalog; sieben ihrer Tests haben eine Referenz mit Quelle. Damit zeigt
+ * die Demo, was die App kann — und an Kreuzheben und Richtungswechsel
+ * zugleich ehrlich, wo sie nichts sagen kann.
+ *
  * Erzeugt wird derselbe Datensatz, den auch der Gastmodus schreibt: die
  * Metriken laufen durch dieselbe Ableitung. Der Demomodus ist damit kein
  * Sonderweg, sondern ein normaler, bearbeitbarer Bestand.
@@ -38,10 +46,10 @@ import type {
 const DEMO_FOCUSES: StoredFocus[] = [
   {
     id: 'demo-focus-1',
-    axisId: 'endurance',
+    axisId: 'fight_endurance',
     dimension: 'endurance',
     priority: 1,
-    note: 'Grundlage steht hinter der Kraft zurück. Zwei ruhige Einheiten pro Woche, Wettkampfhärte erst ab April.',
+    note: 'Grundlage steht hinter der Kraft zurück, der Cooper ist gefallen. Zwei ruhige Einheiten pro Woche, Wettkampfhärte erst ab April.',
     reviewAt: '2026-06-14',
     createdAt: '2026-01-20T09:00:00.000Z',
     closedAt: null,
@@ -58,10 +66,10 @@ const DEMO_FOCUSES: StoredFocus[] = [
   },
   {
     id: 'demo-focus-3',
-    axisId: 'agility',
-    dimension: 'agility',
+    axisId: 'grip',
+    dimension: 'strength_endurance',
     priority: 3,
-    note: 'Richtungswechsel wirkt langsam. Vor jeder Einheit zehn Minuten Technik, keine zusätzliche Belastung.',
+    note: 'Griff hält im Training, in der fünften Minute nicht mehr. Am Anzug hängen statt an der Stange, zweimal pro Woche.',
     reviewAt: '2026-09-30',
     createdAt: '2026-01-20T09:10:00.000Z',
     closedAt: null,
@@ -78,53 +86,55 @@ interface Session {
 const SESSIONS: Session[] = [
   {
     date: '2025-08-20',
-    bodyWeightKg: 82.0,
+    bodyWeightKg: 79.4,
     restingHr: 52,
     values: {
-      cooper_12min: { distanceM: 3080, maxHeartRate: 188, rpe: 9 },
-      row_2000m: { durationSeconds: 424, maxHeartRate: 190, rpe: 10 },
-      back_squat_1rm: { loadKg: 150, reps: 1, rpe: 9 },
-      deadlift_1rm: { loadKg: 190, reps: 1, rpe: 9.5 },
-      bench_press_1rm: { loadKg: 112.5, reps: 1, rpe: 9 },
-      bear_complex: { loadKg: 72.5, rpe: 9 },
-      cindy_20min_amrap: { rounds: 13, partialReps: 0, rpe: 10 },
-      assault_bike_10min_cal: { calories: 141, rpe: 9.5 },
-      illinois_agility: { durationSeconds: 17.42, rpe: 8 },
-      standing_broad_jump: { distanceM: 2.3, rpe: 7 },
+      special_judo_fitness_test: { throwsA: 5, throwsB: 9, throwsC: 9, hrEnd: 184, hrAfter1min: 152 },
+      grip_hang_time: { durationSeconds: 62, rpe: 9 },
+      gi_grip_hang: { durationSeconds: 44, rpe: 9 },
+      pull_up_max_reps: { reps: 14, rpe: 10 },
+      grip_strength: { gripKg: 52.5 },
+      countermovement_jump: { jumpHeightCm: 39.4, rpe: 7 },
+      sprint_10m: { durationSeconds: 1.84, rpe: 8 },
+      deadlift_1rm: { loadKg: 175, reps: 1, rpe: 9 },
+      cooper_12min: { distanceM: 2860, maxHeartRate: 188, rpe: 9 },
+      shuttle_5_10_5: { durationSeconds: 4.92, rpe: 8 },
     },
   },
   {
     date: '2026-01-18',
-    bodyWeightKg: 85.6,
+    bodyWeightKg: 82.1,
     restingHr: 50,
     values: {
-      cooper_12min: { distanceM: 2960, maxHeartRate: 189, rpe: 9.5 },
-      row_2000m: { durationSeconds: 428, maxHeartRate: 191, rpe: 10 },
-      back_squat_1rm: { loadKg: 172.5, reps: 1, rpe: 9.5 },
-      deadlift_1rm: { loadKg: 215, reps: 1, rpe: 10 },
-      bench_press_1rm: { loadKg: 127.5, reps: 1, rpe: 9.5 },
-      bear_complex: { loadKg: 87.5, rpe: 9.5 },
-      cindy_20min_amrap: { rounds: 13, partialReps: 15, rpe: 10 },
-      assault_bike_10min_cal: { calories: 148, rpe: 9.5 },
-      illinois_agility: { durationSeconds: 17.05, rpe: 8 },
-      standing_broad_jump: { distanceM: 2.38, rpe: 7 },
+      special_judo_fitness_test: { throwsA: 6, throwsB: 10, throwsC: 9, hrEnd: 182, hrAfter1min: 150 },
+      grip_hang_time: { durationSeconds: 71, rpe: 9 },
+      gi_grip_hang: { durationSeconds: 52, rpe: 9 },
+      pull_up_max_reps: { reps: 16, rpe: 10 },
+      grip_strength: { gripKg: 57.0 },
+      countermovement_jump: { jumpHeightCm: 41.2, rpe: 7 },
+      sprint_10m: { durationSeconds: 1.81, rpe: 8 },
+      deadlift_1rm: { loadKg: 200, reps: 1, rpe: 9.5 },
+      // Der Kraftblock hat Masse gekostet: die Ausdauer faellt, obwohl nichts
+      // schiefgelaufen ist. Genau dafuer gibt es die Schwerpunkte weiter oben.
+      cooper_12min: { distanceM: 2740, maxHeartRate: 189, rpe: 9.5 },
+      shuttle_5_10_5: { durationSeconds: 4.96, rpe: 8 },
     },
   },
   {
     date: '2026-06-14',
-    bodyWeightKg: 83.2,
+    bodyWeightKg: 80.3,
     restingHr: 48,
     values: {
-      cooper_12min: { distanceM: 3320, maxHeartRate: 189, rpe: 9.5 },
-      row_2000m: { durationSeconds: 402, maxHeartRate: 192, rpe: 10 },
-      back_squat_1rm: { loadKg: 165, reps: 1, rpe: 9 },
-      deadlift_1rm: { loadKg: 207.5, reps: 1, rpe: 9.5 },
-      bench_press_1rm: { loadKg: 122.5, reps: 1, rpe: 9 },
-      bear_complex: { loadKg: 82.5, rpe: 9 },
-      cindy_20min_amrap: { rounds: 14, partialReps: 25, rpe: 10 },
-      assault_bike_10min_cal: { calories: 158, rpe: 9.5 },
-      illinois_agility: { durationSeconds: 16.42, rpe: 8 },
-      standing_broad_jump: { distanceM: 2.44, rpe: 7 },
+      special_judo_fitness_test: { throwsA: 6, throwsB: 11, throwsC: 10, hrEnd: 178, hrAfter1min: 141 },
+      grip_hang_time: { durationSeconds: 78, rpe: 9 },
+      gi_grip_hang: { durationSeconds: 58, rpe: 9 },
+      pull_up_max_reps: { reps: 18, rpe: 10 },
+      grip_strength: { gripKg: 58.5 },
+      countermovement_jump: { jumpHeightCm: 42.0, rpe: 7 },
+      sprint_10m: { durationSeconds: 1.78, rpe: 8 },
+      deadlift_1rm: { loadKg: 197.5, reps: 1, rpe: 9 },
+      cooper_12min: { distanceM: 3010, maxHeartRate: 187, rpe: 9.5 },
+      shuttle_5_10_5: { durationSeconds: 4.83, rpe: 8 },
     },
   },
 ]
@@ -140,18 +150,18 @@ export function buildDemoData(): StoredData {
     maxHr: 189,
     locale: 'de',
     unitSystem: 'metric',
-    sport: 'Functional Fitness',
+    sport: 'Judo',
     position: '',
-    sportCategoryId: 'hybrid',
-    disciplineId: 'functional_fitness',
+    sportCategoryId: 'combat',
+    disciplineId: 'judo',
     performanceLevel: 'advanced',
     trainingAgeYears: 9,
     sessionsPerWeek: 5,
     dominantSide: 'right',
-    goal: 'Hybrid: Maxkraft halten, Ausdauer ausbauen',
+    goal: 'Griffkraft und Kampfausdauer halten, Grundlage aufbauen',
     constraints: '',
     // Der Demobestand zeigt, wie zwei Sportarten nebeneinander aussehen.
-    additionalDisciplineIds: ['half_marathon'],
+    additionalDisciplineIds: ['bjj'],
     goalKey: 'general_performance',
     onboardingCompletedAt: '2025-01-05T09:00:00.000Z',
     remindersEnabled: true,
@@ -187,7 +197,7 @@ export function buildDemoData(): StoredData {
     const assessment: StoredAssessment = {
       id: newId(),
       title: null,
-      batterySlug: 'hybrid',
+      batterySlug: 'judo_performance_check',
       performedOn: session.date,
       status: 'completed',
       plannedTestSlugs: Object.keys(session.values),
