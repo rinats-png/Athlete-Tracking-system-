@@ -8,6 +8,7 @@ import { TEST_BATTERIES, batteryDimensions, disciplineBattery } from '@/data/tes
 import { provenanceOf, additionReason } from '@/data/documentCoverage'
 import { TEST_CATALOG, getTest, type TestDefinition } from '@/data/testCatalog'
 import { disciplineById, coreSlugs, optionalSlugs } from '@/data/sportProfiles'
+import { rationaleFor } from '@/data/sportRationale'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -242,7 +243,7 @@ export function AssessmentCreateScreen() {
               <Panel>
                 <PanelHeader
                   title={t('assessments.forSport', { sport: discipline.name[locale] })}
-                  subtitle={discipline.rationale[locale]}
+                  subtitle={rationaleFor(discipline.id)?.[locale] ?? ''}
                 />
                 <ul>{coreTests.map((test) => testRow(test, true))}</ul>
               </Panel>
@@ -354,7 +355,7 @@ export function AssessmentCreateScreen() {
                       ) : null}
                     </span>
                     <span className="text-[12px] leading-snug text-ink-secondary">
-                      {battery.description[locale]}
+                      {battery.description?.[locale] ?? rationaleFor(battery.slug.replace(/^discipline:/, ''))?.[locale] ?? ''}
                     </span>
                     <span className="mt-1 flex items-center gap-1 text-[11px] text-ink-muted">
                       <Clock size={12} aria-hidden />

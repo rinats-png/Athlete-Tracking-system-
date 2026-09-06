@@ -6,6 +6,7 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { TEST_CATALOG, getTest, type TestDefinition } from '@/data/testCatalog'
 import { disciplineById, coreSlugs, optionalSlugs } from '@/data/sportProfiles'
+import { rationaleFor } from '@/data/sportRationale'
 import { provenanceOf } from '@/data/documentCoverage'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { formatDate } from '@/lib/format'
@@ -166,7 +167,7 @@ export function TestCatalogScreen() {
           <Panel className="mb-4">
             <PanelHeader
               title={t('tests.coreFor', { sport: discipline.name[locale] })}
-              subtitle={discipline.rationale[locale]}
+              subtitle={rationaleFor(discipline.id)?.[locale] ?? ''}
             />
             <ul className="divide-y divide-line">{core.map(row)}</ul>
           </Panel>

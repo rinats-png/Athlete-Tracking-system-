@@ -8,6 +8,7 @@ import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { newId } from '@/lib/store/localStore'
 import { BATTERY_BY_SLUG, disciplineBattery } from '@/data/testBatteries'
+import { rationaleFor } from '@/data/sportRationale'
 import { getTest } from '@/data/testCatalog'
 import { DEFAULT_RETEST_DAYS } from '@/domain/nextTest'
 import { formatDate } from '@/lib/format'
@@ -77,7 +78,7 @@ export function BatteryScreen() {
           {t('diag.eyebrow')}
         </Link>
       </Button>
-      <ScreenHeader eyebrow={t('battery.eyebrow')} title={battery.name[locale]} intro={battery.description[locale]} />
+      <ScreenHeader eyebrow={t('battery.eyebrow')} title={battery.name[locale]} intro={battery.description?.[locale] ?? rationaleFor(battery.slug.replace(/^discipline:/, ''))?.[locale] ?? ''} />
 
       <Panel ticked className="max-w-2xl">
         <PanelHeader

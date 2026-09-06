@@ -23,7 +23,12 @@ export interface TestBattery {
   /** Grob geschätzte Netto-Dauer inklusive Pausen, in Minuten. */
   durationMinutes: number
   name: { de: string; en: string }
-  description: { de: string; en: string }
+  /**
+   * Fehlt bei einer Batterie, die aus einer Disziplin entsteht: ihre
+   * Begründung ist der Disziplintext, und der wird erst dort geladen, wo
+   * jemand ihn liest (siehe sportRationale.ts).
+   */
+  description?: { de: string; en: string }
 }
 
 export const TEST_BATTERIES: TestBattery[] = [
@@ -241,6 +246,5 @@ export function disciplineBattery(disciplineId: string | null): TestBattery | nu
     testSlugs,
     durationMinutes: testSlugs.length * MINUTES_PER_TEST,
     name: discipline.name,
-    description: discipline.rationale,
   }
 }

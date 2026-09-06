@@ -14,6 +14,7 @@ import { useLocale } from '@/features/shared/useLocale'
 import { ratingContextOf, reminderSettingsOf } from '@/features/shared/profileContext'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { disciplineById, coreSlugs } from '@/data/sportProfiles'
+import { rationaleFor } from '@/data/sportRationale'
 import { getTest } from '@/data/testCatalog'
 import { TEST_BATTERIES, disciplineBattery } from '@/data/testBatteries'
 import { additionReason } from '@/data/documentCoverage'
@@ -106,7 +107,7 @@ export function SportScreen() {
       <ScreenHeader
         eyebrow={isMain ? t('sport.isMain') : t('sport.isAdditional')}
         title={sport.name[locale]}
-        intro={sport.rationale[locale]}
+        intro={rationaleFor(sport.id)?.[locale] ?? ''}
         action={
           !isMain && (
             <Button
