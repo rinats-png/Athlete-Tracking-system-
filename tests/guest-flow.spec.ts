@@ -32,7 +32,7 @@ test.describe('Gastmodus', () => {
     await page.getByLabel(/^Wiederholungen/).fill('1')
 
     // Die abgeleiteten Werte erscheinen noch vor dem Speichern.
-    await expect(page.getByText('Relativkraft')).toBeVisible()
+    await expect(page.getByText('Relativkraft', { exact: true })).toBeVisible()
 
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
     await page.waitForURL('**/ergebnis/**')

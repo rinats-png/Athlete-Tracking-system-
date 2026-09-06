@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { introScenes, MAX_SCENES } from '../src/domain/introScenes'
 import type { StoredResult } from '../src/lib/store/localStore'
-import { blockFonts } from './helpers'
+import { blockFonts, stubAuth } from './helpers'
 
 /**
  * Die Intro-Sequenz.
@@ -78,6 +78,9 @@ test.describe('Ablauf beim Öffnen', () => {
    */
   async function openWithIntro(page: import('@playwright/test').Page) {
     await blockFonts(page)
+    // Seit die Anmeldung echt ist, führt der Weg zur Sequenz durch das Tor.
+    // Ein Prüflauf darf dafür kein Konto anlegen (§41) — deshalb der Stub.
+    await stubAuth(page)
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await page.evaluate(() => {
       localStorage.clear()
@@ -93,7 +96,7 @@ test.describe('Ablauf beim Öffnen', () => {
     // Die Fläche sagt selbst, wann sie steht — vorher ist sie nicht bedienbar.
     await expect(page.locator('[data-state="formed"]')).toBeAttached({ timeout: 10_000 })
     await page.getByLabel('E-Mail').fill('pruef@baseline.test')
-    await page.getByLabel('Passwort').fill('egal')
+    await page.getByLabel('Passwort').fill('pruefwort')
     await page.getByRole('button', { name: 'Anmelden' }).click()
   }
 
