@@ -41,11 +41,21 @@ export function EditResultPanel({ result }: { result: StoredResult }) {
 
   if (!open) {
     return (
-      <div className="no-print">
+      <div className="no-print flex flex-wrap items-center gap-3">
         <Button type="button" size="sm" variant="ghost" onClick={() => setOpen(true)}>
           <Pencil size={14} aria-hidden />
           {t('editResult.open')}
         </Button>
+        {/*
+          Die Bestätigung steht HIER und nicht im Formular. Sie stand dort, und
+          weil das Formular beim Speichern zuklappt, verschwand sie im selben
+          Augenblick — die Korrektur wurde gespeichert und niemand erfuhr es.
+        */}
+        {saved && (
+          <span role="status" className="text-[12px] text-accent-text">
+            {t('editResult.saved')}
+          </span>
+        )}
       </div>
     )
   }
@@ -111,11 +121,6 @@ export function EditResultPanel({ result }: { result: StoredResult }) {
           </Button>
         </div>
       </form>
-      {saved && (
-        <p role="status" className="border-t border-line px-4 py-2 text-[12px] text-accent-text">
-          {t('editResult.saved')}
-        </p>
-      )}
     </Panel>
   )
 }
