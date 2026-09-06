@@ -406,6 +406,23 @@ export function ProfileScreen() {
           <CoachSettings locale={locale} />
 
           <BrandingSettings />
+
+          {/* Rechtliches gehört an eine Stelle, die man findet, ohne zu
+              suchen — und in die Fusszeile der Landeseite. */}
+          <Panel>
+            <PanelHeader title={t('profile.legalTitle')} subtitle={t('profile.legalBody')} />
+            <div className="flex flex-wrap gap-2 px-4 py-4">
+              <Button asChild size="sm" variant="outline">
+                <Link to="/impressum">{t('legal.imprint.title')}</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <Link to="/datenschutz">{t('legal.privacy.title')}</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <Link to="/nutzungsbedingungen">{t('legal.terms.title')}</Link>
+              </Button>
+            </div>
+          </Panel>
         </div>
       </div>
     </>

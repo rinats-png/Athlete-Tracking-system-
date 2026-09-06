@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowUpRight, ShieldCheck } from 'lucide-react'
 import { HaloField } from '@/components/signature/HaloField'
@@ -279,8 +280,25 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
             * demselben Namen auf einer Seite — für einen Bildschirmleser
             * nicht unterscheidbar. Die Seite ist kurz genug für einen Knopf.
             */}
-          <p className="mx-auto max-w-[46ch] text-center text-[11px] leading-relaxed text-ink-muted">
-            {t('welcome.legal')}
+          {/*
+            Die Zusage verweist jetzt auf Dokumente, die es gibt. Bis hierher
+            stand hier «du stimmst den Nutzungsbedingungen zu» — ohne
+            Nutzungsbedingungen und ohne Weg dorthin. Eine Zustimmung zu
+            nichts ist rechtlich wertlos und praktisch eine Falschaussage.
+          */}
+          <p className="mx-auto max-w-[52ch] text-center text-[11px] leading-relaxed text-ink-muted">
+            {t('welcome.legal')}{' '}
+            <Link to="/nutzungsbedingungen" className="underline underline-offset-2">
+              {t('welcome.legalTerms')}
+            </Link>{' '}
+            ·{' '}
+            <Link to="/datenschutz" className="underline underline-offset-2">
+              {t('welcome.legalPrivacy')}
+            </Link>{' '}
+            ·{' '}
+            <Link to="/impressum" className="underline underline-offset-2">
+              {t('legal.imprint.title')}
+            </Link>
           </p>
           <p
             aria-hidden

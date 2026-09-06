@@ -157,9 +157,9 @@
     "continueEmail": "Mit E-Mail starten",
     "haveAccount": "Ich habe ein Konto",
     "viewDemo": "Demo ansehen",
-    "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen und der Datenschutzerklärung zu.",
+    "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen zu und bestätigst, die Datenschutzerklärung gelesen zu haben.",
     "startLocal": "Mit leerem Bestand starten",
-    "privacy": "Kein Konto, keine E-Mail-Adresse, keine Übertragung. Deine Messwerte bleiben auf diesem Gerät und lassen sich jederzeit exportieren oder löschen.",
+    "privacy": "Gemessen und ausgewertet wird auf deinem Gerät. Für die Anmeldung brauchen wir deine E-Mail-Adresse; deine Messwerte werden erst übertragen, wenn du die Synchronisierung einschaltest — und lassen sich jederzeit vollständig exportieren.",
     "accountLater": "Konto und Synchronisierung folgen später",
     "points": [
       "Sportartspezifische Diagnostik",
@@ -204,7 +204,9 @@
       "missionB": "Ambition",
       "systemNote": "Messsysteme für moderne Athleten.",
       "missionBody": "Wir verwandeln rohe Messwerte in klare Profile — vom Testprotokoll über das Leistungsprofil bis zur Langzeitentwicklung. Was sich nicht belegen lässt, behaupten wir nicht: ohne belegte Referenz gibt es kein Perzentil, und unter dem eigenen Messfehler gibt es keine Veränderung."
-    }
+    },
+    "legalTerms": "Nutzungsbedingungen",
+    "legalPrivacy": "Datenschutzerklärung"
   },
   "body": {
     "figureLabel": "Körperdarstellung mit hervorgehobenen Leistungsdimensionen",
@@ -340,7 +342,7 @@
       "many_new_results": "Seit dem letzten Export sind {{count}} Messungen dazugekommen. Ein neuer Export dauert einen Klick.",
       "long_ago": "Der letzte Export ist {{days}} Tage her, seitdem sind {{count}} Messungen dazugekommen."
     },
-    "privacy": "Alles liegt ausschliesslich in diesem Browser. Es wird nichts übertragen und kein Konto angelegt. Beim Löschen der Browserdaten sind auch diese Werte weg — dafür der Export.",
+    "privacy": "Deine Messwerte liegen in diesem Browser. Übertragen werden sie nur, wenn du die Synchronisierung einschaltest. Beim Löschen der Browserdaten ist der lokale Bestand weg — dagegen hilft der Export oder die Synchronisierung.",
     "export": "Exportieren",
     "import": "Importieren",
     "importFailed": "Die Datei liess sich nicht lesen.",
@@ -424,7 +426,9 @@
     "remindersLink": "Erinnerungen und Abstände",
     "coachLink": "Trainer-Ansicht öffnen",
     "redoOnboarding": "Einstieg erneut durchlaufen",
-    "redoOnboardingHint": "Führt dich noch einmal durch die Einrichtung. Deine Messwerte bleiben dabei erhalten — es ändern sich nur die Angaben, die du neu machst."
+    "redoOnboardingHint": "Führt dich noch einmal durch die Einrichtung. Deine Messwerte bleiben dabei erhalten — es ändern sich nur die Angaben, die du neu machst.",
+    "legalTitle": "Rechtliches",
+    "legalBody": "Impressum, Datenschutzerklärung und Nutzungsbedingungen."
   },
   "fields": {
     "distanceM": "Distanz",
@@ -1839,5 +1843,30 @@
     "conflictKeepLocal": "Diesen Bestand hochladen",
     "conflictExplain": "Der Serverstand wird dabei ersetzt. Der andere Weg — den Serverstand holen — führt über Export, «alles löschen» und einen neuen Abgleich.",
     "whatLeaves": "Übertragen werden Messwerte, Profilangaben, Notizen und Trainingsschwerpunkte. Nicht übertragen wird dein Passwort."
+  },
+  "legal": {
+    "eyebrow": "Rechtliches",
+    "processors": "Empfänger deiner Daten",
+    "imprint": {
+      "title": "Impressum",
+      "intro": "Wer für dieses Angebot verantwortlich ist.",
+      "provider": "Anbieter",
+      "name": "Name",
+      "address": "Anschrift",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "represented": "Vertreten durch",
+      "register": "Registereintrag",
+      "vat": "Umsatzsteuer-ID",
+      "missing": "noch nicht hinterlegt",
+      "incomplete": "Dieses Impressum ist unvollständig: {{fields}} fehlt noch. Vor dem öffentlichen Betrieb müssen diese Angaben eingetragen sein — ohne sie ist das Angebot nicht rechtskonform.",
+      "note": "Angaben ohne Eintrag sind nicht vorhanden, nicht verborgen. Sie stehen in src/data/operator.ts und werden dort gepflegt."
+    },
+    "privacy": {
+      "title": "Datenschutz"
+    },
+    "terms": {
+      "title": "Nutzungsbedingungen"
+    }
   }
 }

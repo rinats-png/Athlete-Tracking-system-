@@ -109,6 +109,11 @@ const router = createBrowserRouter([
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
       { path: 'preise', element: screen(() => import('@/features/profile/PricingScreen'), 'PricingScreen') },
       { path: 'profil/import', element: screen(() => import('@/features/profile/CsvImportScreen'), 'CsvImportScreen') },
+      // Rechtstexte: eigener Baustein, weil sie selten gelesen werden und
+      // nicht in jedem Programmstart mitbezahlt werden sollen.
+      { path: 'impressum', element: screen(() => import('@/features/legal/LegalScreen'), 'ImprintScreen') },
+      { path: 'datenschutz', element: screen(() => import('@/features/legal/LegalScreen'), 'PrivacyScreen') },
+      { path: 'nutzungsbedingungen', element: screen(() => import('@/features/legal/LegalScreen'), 'TermsScreen') },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },

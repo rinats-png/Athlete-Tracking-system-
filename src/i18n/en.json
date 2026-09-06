@@ -157,9 +157,9 @@
     "continueEmail": "Continue with email",
     "haveAccount": "I have an account",
     "viewDemo": "View demo",
-    "legal": "By continuing you agree to the terms of use and the privacy policy.",
+    "legal": "By continuing you agree to the terms of use and confirm that you have read the privacy policy.",
     "startLocal": "Start with an empty record",
-    "privacy": "No account, no email address, no transfer. Your measurements stay on this device and can be exported or deleted at any time.",
+    "privacy": "Measuring and analysis happen on your device. Signing in needs your email address; your measurements are transmitted only once you turn on sync — and can be exported in full at any time.",
     "accountLater": "Accounts and sync are coming later",
     "points": [
       "Sport-specific diagnostics",
@@ -204,7 +204,9 @@
       "missionB": "ambition",
       "systemNote": "Measurement systems for modern athletes.",
       "missionBody": "We turn raw measurements into clear profiles — from the test protocol through the performance profile to long-term development. We do not claim what cannot be shown: without a documented reference there is no percentile, and below your own typical error there is no change."
-    }
+    },
+    "legalTerms": "Terms of use",
+    "legalPrivacy": "Privacy policy"
   },
   "body": {
     "figureLabel": "Body view with highlighted performance dimensions",
@@ -340,7 +342,7 @@
       "many_new_results": "{{count}} measurements have been added since the last export. A new export takes one click.",
       "long_ago": "The last export was {{days}} days ago, and {{count}} measurements have been added since."
     },
-    "privacy": "Everything lives in this browser only. Nothing is transmitted and no account is created. Clearing browser data also clears these values — that is what the export is for.",
+    "privacy": "Your measurements live in this browser. They are transmitted only if you turn on sync. Clearing browser data removes the local record — the export or sync protects against that.",
     "export": "Export",
     "import": "Import",
     "importFailed": "The file could not be read.",
@@ -424,7 +426,9 @@
     "remindersLink": "Reminders and intervals",
     "coachLink": "Open coach view",
     "redoOnboarding": "Run the setup again",
-    "redoOnboardingHint": "Takes you through the setup once more. Your measurements are kept — only the details you enter anew change."
+    "redoOnboardingHint": "Takes you through the setup once more. Your measurements are kept — only the details you enter anew change.",
+    "legalTitle": "Legal",
+    "legalBody": "Imprint, privacy policy and terms of use."
   },
   "fields": {
     "distanceM": "Distance",
@@ -1839,5 +1843,30 @@
     "conflictKeepLocal": "Upload this record",
     "conflictExplain": "The server state is replaced. The other direction — fetching the server state — goes through export, “delete everything” and a fresh sync.",
     "whatLeaves": "Transmitted are measurements, profile details, notes and training focuses. Your password is not transmitted."
+  },
+  "legal": {
+    "eyebrow": "Legal",
+    "processors": "Recipients of your data",
+    "imprint": {
+      "title": "Imprint",
+      "intro": "Who is responsible for this service.",
+      "provider": "Provider",
+      "name": "Name",
+      "address": "Address",
+      "email": "Email",
+      "phone": "Phone",
+      "represented": "Represented by",
+      "register": "Register entry",
+      "vat": "VAT ID",
+      "missing": "not yet provided",
+      "incomplete": "This imprint is incomplete: {{fields}} still missing. These details must be filled in before public operation — without them the service is not compliant.",
+      "note": "Entries without a value are absent, not hidden. They live in src/data/operator.ts."
+    },
+    "privacy": {
+      "title": "Privacy"
+    },
+    "terms": {
+      "title": "Terms of use"
+    }
   }
 }
