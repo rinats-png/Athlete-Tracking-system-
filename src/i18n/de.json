@@ -1869,5 +1869,15 @@
       "title": "Nutzungsbedingungen"
     },
     "back": "Zurück"
+  },
+  "editResult": {
+    "open": "Wert korrigieren",
+    "title": "Wert korrigieren",
+    "hint": "Für einen Vertipper. Datum, Bedingungen, Beleg und die Zuordnung zum Termin bleiben erhalten.",
+    "day": "Messtag",
+    "recalculates": "Abgeleitete Werte werden neu gerechnet — auch Körpergewicht und Alter zum Messtag. Dass hier etwas geändert wurde, hält der Änderungsnachweis fest.",
+    "save": "Korrektur speichern",
+    "cancel": "Abbrechen",
+    "saved": "Gespeichert."
   }
 }

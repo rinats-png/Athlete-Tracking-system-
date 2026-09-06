@@ -21,6 +21,7 @@ import { formulaFor } from '@/domain/formulaRegistry'
 import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { preparePhoto, type PhotoError } from '@/lib/photo'
+import { EditResultPanel } from './EditResultPanel'
 import type { ReferenceComparison } from '@/data/references'
 
 /**
@@ -128,6 +129,11 @@ export function ResultScreen() {
             photo={result.photo}
             onChange={(dataUrl) => setResultPhoto(result.id, dataUrl)}
           />
+          {/* Die Korrektur steht am Fuss der Wertkarte und ist zugeklappt:
+              ein Messwert soll die Regel sein und das Ändern die Ausnahme. */}
+          <div className="border-t border-line px-4 py-2">
+            <EditResultPanel result={result} />
+          </div>
         </Panel>
 
         <Panel>

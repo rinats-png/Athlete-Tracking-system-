@@ -1869,5 +1869,15 @@
       "title": "Terms of use"
     },
     "back": "Back"
+  },
+  "editResult": {
+    "open": "Correct value",
+    "title": "Correct value",
+    "hint": "For a typo. Date, conditions, evidence photo and the link to the session are kept.",
+    "day": "Measurement day",
+    "recalculates": "Derived values are recalculated — including body weight and age on the measurement day. The audit trail records that something was changed here.",
+    "save": "Save correction",
+    "cancel": "Cancel",
+    "saved": "Saved."
   }
 }

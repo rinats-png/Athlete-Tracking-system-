@@ -131,6 +131,28 @@ interface AppDataValue {
   /** Legt ein Ergebnis an und rechnet die abgeleiteten Metriken gleich mit. */
   recordResult: (input: RecordResultInput) => StoredResult | null
   deleteResult: (id: string) => void
+  /**
+   * Einen Messwert korrigieren.
+   *
+   * DIE LÜCKE, DIE DAS SCHLIESST: bisher liess sich ein Ergebnis nur löschen.
+   * Wer 172,5 statt 127,5 eintippte, musste es wegwerfen und neu erfassen —
+   * und verlor dabei Datum, Bedingungen, Beleg und die Zuordnung zum Termin.
+   * Der häufigste Handgriff war der einzige, den die App nicht konnte.
+   *
+   * Abgeleitete Werte werden NEU GERECHNET, nicht mitgeschleppt: eine
+   * korrigierte Last mit dem alten Relativkraftwert daneben wäre ein stiller
+   * Rechenfehler (§89). Auch Körpergewicht und Alter zum — womöglich
+   * geänderten — Messtag werden neu bestimmt.
+   */
+  editResult: (
+    id: string,
+    patch: {
+      values?: Record<string, number>
+      performedAt?: string
+      measurementContext?: Partial<ValidatedContext>
+      notes?: string
+    },
+  ) => StoredResult | null
   /** Belegbild an ein bestehendes Ergebnis hängen oder entfernen (§14). */
   setResultPhoto: (id: string, dataUrl: string | null) => void
   /**
@@ -574,6 +596,41 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             label: getTest(target.testSlug)?.name.de ?? target.testSlug,
           },
         )
+      },
+      editResult: (id, patch) => {
+        const previous = data.results.find((r) => r.id === id)
+        if (!previous) return null
+        const test = getTest(previous.testSlug)
+        if (!test) return null
+
+        const performedAt = patch.performedAt ?? previous.performedAt
+        const values = patch.values ?? previous.values
+        const context = {
+          bodyWeightKg: bodyWeightAt(data, performedAt),
+          ageYears: ageFromBirthDate(data.profile.birthDate),
+          sex: data.profile.sex,
+        }
+        const metrics = deriveMetrics(test, values, context)
+        const next: StoredResult = {
+          ...previous,
+          performedAt,
+          values,
+          metrics,
+          score: primaryValue(test, values, metrics),
+          bodyWeightKg: context.bodyWeightKg,
+          ageYears: context.ageYears,
+          sex: context.sex,
+          context: { ...previous.context, ...patch.measurementContext },
+          notes: patch.notes ?? previous.notes,
+        }
+
+        commitAthlete((current) => upsertResult(current, next), {
+          action: 'edited',
+          entity: 'result',
+          entityId: id,
+          label: test.name.de,
+        })
+        return next
       },
       deleteResult: (id) => {
         const removed = data.results.find((r) => r.id === id)
