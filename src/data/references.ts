@@ -678,16 +678,34 @@ const BASE_REFERENCES: ReferenceEntry[] = [
  */
 export const REFERENCES: ReferenceEntry[] = [...BASE_REFERENCES, ...EXTENDED_REFERENCES]
 
-export const REFERENCE_GAPS: { subject: string; reason: string }[] = [
+/**
+ * Eine Lücke in der Belegung — und was über sie bekannt ist.
+ *
+ * `testSlugs` und `source` sind später dazugekommen und deshalb freiwillig.
+ * Sie machen den Unterschied zwischen zwei sehr verschiedenen Sätzen:
+ *
+ *   «Für diesen Test liegt keine Referenz vor.»
+ *   «Für diesen Test gibt es eine publizierte Referenz — sie steht dort,
+ *    und sie ist noch nicht eingepflegt, weil …»
+ *
+ * Der zweite Satz ist derselbe Befund, aber er führt weiter. Er verlangt
+ * allerdings, dass die genannte Arbeit wirklich existiert: `source` trägt
+ * deshalb einen DOI und keine Beschreibung aus dem Gedächtnis.
+ */
+export interface ReferenceGap {
+  subject: string
+  reason: string
+  /** Für welche Tests diese Lücke gilt — dort wird sie angezeigt. */
+  testSlugs?: string[]
+  /** Die Arbeit, die Normwerte enthält, aber nicht eingepflegt ist. */
+  source?: { study: string; doi: string }
+}
+
+export const REFERENCE_GAPS: ReferenceGap[] = [
   {
     subject: 'Counter Movement Jump — Bevölkerungsreferenz',
     reason:
       'Hildebrandt et al. 2015 (Knee Surg Sports Traumatol Arthrosc, doi:10.1007/s00167-015-3529-4) haben an 434 gesunden Personen aus Innsbruck Normwerte für den beidbeinigen CMJ nach Alter (10–14, 15–19, 20–29, 30–50) und Geschlecht erhoben und in fünf Stufen um den Mittelwert eingeteilt. Die Mittelwerte und Streuungen stehen nur in den Tabellen der Druckfassung, nicht im frei zugänglichen Volltext. Ohne diese Zahlen liesse sich eine Einordnung nur schätzen — deshalb bleibt der CMJ vorerst ohne Referenz und wird nur mit dir selbst verglichen.',
-  },
-  {
-    subject: 'Sprint 20 m — Bevölkerungsreferenz',
-    reason:
-      'Zum linearen Sprint über 5, 10, 20 oder 30 m gibt es viele Kohortenbeschreibungen einzelner Mannschaften, aber keine Erhebung an einer benannten Allgemeinbevölkerung mit Mittelwert und Streuung nach Alter und Geschlecht. Kohortenwerte einer Mannschaft als Bevölkerungsnorm auszugeben, wäre eine Aussage über Menschen, die die Quelle nicht deckt. Der Sprint bleibt deshalb ohne Referenz.',
   },
   {
     subject: 'FRIEND-Register, Fahrradergometer (Kaminsky et al. 2016)',
@@ -763,6 +781,48 @@ export const REFERENCE_GAPS: { subject: string; reason: string }[] = [
     subject: 'Tactical: Behördentests',
     reason:
       'Die Quelle hält ausdrücklich fest, dass es keinen einheitlichen Standardtest gibt und Anforderungen je Organisation festgelegt werden.',
+  },
+  // --- Belegte Lücken: die Norm existiert, die Zahlen fehlen ---------------
+  // Recherchiert über PubMed. Jeder Eintrag trägt einen DOI, damit die Angabe
+  // nachprüfbar ist und nicht aus dem Gedächtnis stammt.
+  {
+    subject: 'Beep-Test (20 m Shuttle Run) — internationale Kinder- und Jugendnormen',
+    testSlugs: ['beep_test_20m'],
+    reason:
+      'Für den 20-m-Shuttle-Run gibt es die grösste Normerhebung, die dieser Katalog kennt: 1.142.026 Kinder und Jugendliche von 9 bis 17 Jahren aus 50 Ländern, mit geschlechts- und altersgetrennten Zentilen. Die Zentiltabellen stehen nur in der Druckfassung; ein frei zugänglicher Volltext liegt nicht vor. Abgeschriebene oder geschätzte Zentile wären erfundene Werte mit einem echten Quellennamen darüber — das ist schlimmer als eine Lücke. Die Norm gilt ausserdem nur bis 17 Jahre; für Erwachsene beantwortet sie die Frage nicht.',
+    source: {
+      study:
+        'Tomkinson et al. 2017, Br J Sports Med 51(21):1545–1554 — internationale 20-m-Shuttle-Run-Normen, n = 1.142.026',
+      doi: '10.1136/bjsports-2016-095987',
+    },
+  },
+  {
+    subject: 'Sprint 20/30 m — Normen nur für Kohorten, die diese App nicht führt',
+    testSlugs: ['sprint_10m', 'sprint_20m', 'sprint_30m', 'sprint_40yd'],
+    reason:
+      'Zentile für 5 m und 30 m liegen vor, erhoben an 1.745 Datenpunkten männlicher Nachwuchsspieler (U11–U19) — und zwar im Fussball, einer Disziplin, die diese App ausdrücklich nicht führt. Die Arbeit zeigt zudem, dass die biologische Reife das Ergebnis stärker verschiebt als das Lebensalter: eine Norm nach Lebensalter ordnet spät entwickelte Jugendliche systematisch falsch ein. Eine Zentiltabelle einer Sportart, die es hier nicht gibt, auf alle Sprinter zu übertragen, wäre eine Aussage über Menschen, die die Quelle nicht deckt.',
+    source: {
+      study:
+        'Ruf et al. 2024, Pediatr Exerc Sci 36(4):192–200 — Sprintzentile nach chronologischem und skelettalem Alter',
+      doi: '10.1123/pes.2023-0186',
+    },
+  },
+  {
+    subject: 'Kraftdreikampf (Kniebeuge, Bankdrücken, Kreuzheben) — keine belegte Normerhebung',
+    testSlugs: ['back_squat_1rm', 'bench_press_1rm', 'deadlift_1rm'],
+    reason:
+      'Gesucht wurde nach einer publizierten Normerhebung für das Einer-Maximum dieser drei Übungen an einer benannten Gruppe. Gefunden wurde nur eine Arbeit zu Para-Powerlifting, die Wettkampfdaten auswertet — ein anderer Sport mit anderen Klassen und anderem Bankdrück-Protokoll. Die grossen frei zugänglichen Bestände (Wettkampfdatenbanken) sind Register von Wettkämpfern, keine Erhebung an einer beschriebenen Grundgesamtheit: wer dort steht, hat sich zum Wettkampf angemeldet. Ein Perzentil daraus sagt, wo jemand unter Wettkämpfern steht, und nicht, wo er steht — solange das nicht danebensteht, wäre es irreführend.',
+    source: {
+      study:
+        'Latella et al. 2026, Int J Sports Physiol Perform — normative Kraftwerte im Para-Powerlifting (anderer Sport, hier nicht übertragbar)',
+      doi: '10.1123/ijspp.2026-0062',
+    },
+  },
+  {
+    subject: 'Rudern 2000 m — keine publizierte Normerhebung gefunden',
+    testSlugs: ['row_2000m', 'row_1000m', 'ski_erg_1000m'],
+    reason:
+      'Eine Suche nach Referenzwerten für die 2000-m-Ergometerzeit an einer benannten Gruppe blieb ohne Treffer. Was es gibt, sind Herstellerranglisten: grosse Bestände selbst eingetragener Zeiten ohne Prüfung, ohne beschriebene Grundgesamtheit und mit einer offensichtlichen Verzerrung — wer eine schlechte Zeit rudert, trägt sie seltener ein. Daraus ein Perzentil zu bilden hiesse, eine Selbstauswahl als Bevölkerung auszugeben.',
   },
 ]
 
@@ -894,4 +954,15 @@ function interpolate(values: number[], value: number, points?: number[]): number
   if (upper.value === lower.value) return Math.max(lower.percentile, upper.percentile)
   const share = (value - lower.value) / (upper.value - lower.value)
   return lower.percentile + share * (upper.percentile - lower.percentile)
+}
+
+/**
+ * Die belegten Lücken zu einem Test.
+ *
+ * Damit steht am Test nicht nur «keine Referenz vorhanden», sondern auch,
+ * ob es eine Norm gibt und warum sie nicht eingepflegt ist. Der Unterschied
+ * ist gross: das eine ist ein Ende, das andere ein Hinweis, wo es weitergeht.
+ */
+export function gapsForTest(testSlug: string): ReferenceGap[] {
+  return REFERENCE_GAPS.filter((gap) => gap.testSlugs?.includes(testSlug))
 }

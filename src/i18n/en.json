@@ -1383,7 +1383,8 @@
     "standing": "Your standing",
     "run": "Perform test",
     "history": "History",
-    "seeResult": "Open evaluation"
+    "seeResult": "Open evaluation",
+    "knownGap": "Known gap"
   },
   "result": {
     "eyebrow": "Evaluation",

@@ -16,6 +16,7 @@ import { EQUIPMENT_BY_ID } from '@/data/equipment'
 import { ProcedurePanel } from './ProcedurePanel'
 import { formatDate, formatDuration, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
+import { gapsForTest } from '@/data/references'
 import type { ReferenceEntry } from '@/data/references'
 
 /**
@@ -109,6 +110,32 @@ export function TestDetailScreen() {
                 </p>
               </div>
             )}
+            {/* «Es gibt keine Norm» und «die Norm gibt es, sie ist nicht
+                eingepflegt» sind zwei verschiedene Aussagen. Die zweite führt
+                weiter — und sie braucht eine nachprüfbare Quelle. Sie steht
+                auch dann da, wenn der Test über eine abgeleitete Kennzahl
+                schon eingeordnet werden kann: die Lücke im Test selbst
+                bleibt davon unberührt. */}
+            {gapsForTest(test.slug).map((gap) => (
+              <div key={gap.subject} className="border-t border-line px-4 py-3">
+                <span className="label-tag">{t('testInfo.knownGap')}</span>
+                <p className="mt-1 text-[13px] font-medium">{gap.subject}</p>
+                <p className="mt-1 text-[12px] leading-relaxed text-ink-secondary">{gap.reason}</p>
+                {gap.source && (
+                  <p className="mt-1.5 text-[12px] text-ink-muted">
+                    {gap.source.study} ·{' '}
+                    <a
+                      href={`https://doi.org/${gap.source.doi}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline underline-offset-2"
+                    >
+                      doi:{gap.source.doi}
+                    </a>
+                  </p>
+                )}
+              </div>
+            ))}
           </Panel>
 
           <ProcedurePanel test={test} />
@@ -118,6 +145,7 @@ export function TestDetailScreen() {
             {model.references.length === 0 ? (
               <p className="px-4 py-3 text-[13px] text-ink-secondary">{t('testInfo.noScience')}</p>
             ) : (
+
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[640px] border-collapse text-[12px]">
                   <thead>

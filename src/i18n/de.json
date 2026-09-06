@@ -1383,7 +1383,8 @@
     "standing": "Dein Stand",
     "run": "Test durchführen",
     "history": "Verlauf",
-    "seeResult": "Auswertung öffnen"
+    "seeResult": "Auswertung öffnen",
+    "knownGap": "Bekannte Lücke"
   },
   "result": {
     "eyebrow": "Auswertung",
