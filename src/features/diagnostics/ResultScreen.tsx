@@ -15,6 +15,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { getTest } from '@/data/testCatalog'
 import { rateResult } from '@/domain/rating'
 import { GroupStandingPanel, MeaningPanel } from './MeaningPanel'
+import { MetricMeaning, ShareLine, TargetPanel } from './TargetAndShare'
 import { assessQuality } from '@/domain/dataQuality'
 import { nextTests } from '@/domain/nextTest'
 import { changeReport, missingForError, type ChangeReport } from '@/domain/change'
@@ -164,6 +165,15 @@ export function ResultScreen() {
         </Panel>
 
         <MeaningPanel result={result} rating={rating} />
+        <TargetPanel
+          test={test}
+          rating={rating}
+          ownValue={
+            rating.metricKey && value(rating.metricKey) != null
+              ? value(rating.metricKey)!
+              : (result.score ?? null)
+          }
+        />
         <GroupStandingPanel result={result} />
 
         <Panel ticked className="lg:col-span-2">
@@ -179,6 +189,7 @@ export function ResultScreen() {
             </p>
             <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">{t('rating.caveat')}</p>
           </div>
+          <MetricMeaning metricKey={rating.metricKey} />
         </Panel>
 
         <Panel className="lg:col-span-2">
@@ -199,6 +210,7 @@ export function ResultScreen() {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
+        <ShareLine result={result} test={test} rating={rating} />
         <Button asChild variant="outline" size="sm">
           <Link to={`/verlauf/test/${test.slug}`}>{t('result.toHistory')}</Link>
         </Button>

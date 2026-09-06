@@ -1433,7 +1433,15 @@
       "not_an_image": "Das ist keine Bilddatei.",
       "unreadable": "Das Bild liess sich nicht lesen.",
       "too_large": "Das Bild bleibt auch verkleinert zu gross. Ein Ausschnitt des Displays reicht."
-    }
+    },
+    "target": "Bis zur nächsten Stufe",
+    "targetLine": "Für «{{level}}» verlangt diese Referenz {{value}} — {{distance}} mehr als jetzt.",
+    "targetLineLower": "Für «{{level}}» verlangt diese Referenz {{value}} — {{distance}} schneller als jetzt.",
+    "targetHint": "Umkehrung derselben Referenz, mit denselben Annahmen. Keine Aussage darüber, ob oder wie dieser Wert erreichbar ist.",
+    "metricTitle": "Was diese Kennzahl ist",
+    "share": "Zeile kopieren",
+    "shared": "Kopiert.",
+    "shareHint": "Eine Zeile zum Weitergeben — Datum, Test, Wert und, falls vorhanden, die Einordnung."
   },
   "analysisHome": {
     "eyebrow": "Analyse",
@@ -2001,5 +2009,20 @@
       "median": "Median der Gruppe: {{median}}",
       "alone": "Bisher hat niemand sonst im Kader diesen Test gemessen. Ab zwei Messungen steht hier ein Vergleich."
     }
+  },
+  "metricMeaning": {
+    "avg_velocity_m_s": "Die mittlere Geschwindigkeit über die Strecke. Bei kurzen Sprints steckt darin auch die Beschleunigungsphase.",
+    "fatigue_index_percent": "Der Leistungsabfall über die Belastung, in Prozent. Er beschreibt den Verlauf innerhalb dieses einen Tests, nicht die Ermüdbarkeit allgemein.",
+    "ftp_watt": "Die Leistung, die über längere Zeit gehalten werden kann, geschätzt aus einem 20-Minuten-Abschnitt. Sie hängt am verwendeten Messgerät.",
+    "grip_asymmetry_percent": "Der Unterschied zwischen beiden Händen in Prozent. Eine Seitendifferenz ist eine Beobachtung, keine Diagnose.",
+    "grip_relative": "Griffkraft je Kilogramm Körpergewicht. Vergleichbar nur bei gleichem Gerät und gleicher Armhaltung.",
+    "hr_drift_percent": "Wie stark die Herzfrequenz bei gleichbleibendem Tempo ansteigt. Hitze, Flüssigkeit und Tagesform verschieben den Wert unabhängig von der Ausdauer.",
+    "one_rm_kg": "Die Last, die einmal bewegt werden kann. Aus mehreren Wiederholungen geschätzt, ist sie ein Rechenwert und kein gehobenes Gewicht.",
+    "relative_strength_bw": "Die Last im Verhältnis zum eigenen Körpergewicht. Sie steigt auch dann, wenn nur das Körpergewicht sinkt — deshalb steht sie neben der absoluten Last und nicht an ihrer Stelle.",
+    "sinclair_points": "Ein Faktor aus dem Gewichtheben, der Leistungen verschiedener Körpergewichte vergleichbar macht. Er sagt nichts über Technik oder Wettkampffähigkeit.",
+    "sjft_index": "Der Index des Special Judo Fitness Test: beide Herzfrequenzen geteilt durch die Zahl der Würfe. Kleiner ist besser.",
+    "swft_index": "Der Index des Special Wrestling Fitness Test, nach derselben Bauart wie der SJFT. Kleiner ist besser.",
+    "vo2max_ml_kg_min": "Die geschätzte Sauerstoffaufnahme je Kilogramm Körpergewicht und Minute. Aus einem Feldtest wird sie über eine Formel geschätzt, nicht gemessen — ein Laborwert wäre ein anderer.",
+    "watts_per_kg": "Leistung je Kilogramm Körpergewicht. Für alles, wobei das eigene Gewicht mitbewegt wird, sagt sie mehr als die reine Wattzahl."
   }
 }

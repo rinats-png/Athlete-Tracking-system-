@@ -1433,7 +1433,15 @@
       "not_an_image": "That is not an image file.",
       "unreadable": "The image could not be read.",
       "too_large": "The image is still too large after downsizing. A crop of the display is enough."
-    }
+    },
+    "target": "To the next level",
+    "targetLine": "For “{{level}}” this reference requires {{value}} — {{distance}} more than now.",
+    "targetLineLower": "For “{{level}}” this reference requires {{value}} — {{distance}} faster than now.",
+    "targetHint": "The same reference, inverted, with the same assumptions. No statement about whether or how this value is reachable.",
+    "metricTitle": "What this metric is",
+    "share": "Copy line",
+    "shared": "Copied.",
+    "shareHint": "One line to pass on — date, test, value and, where available, the classification."
   },
   "analysisHome": {
     "eyebrow": "Analysis",
@@ -2001,5 +2009,20 @@
       "median": "Group median: {{median}}",
       "alone": "Nobody else in the roster has measured this test yet. From two measurements, a comparison appears here."
     }
+  },
+  "metricMeaning": {
+    "avg_velocity_m_s": "Mean velocity over the distance. In short sprints it also contains the acceleration phase.",
+    "fatigue_index_percent": "The drop in performance across the effort, in percent. It describes the course within this one test, not fatigability in general.",
+    "ftp_watt": "The power sustainable over a longer period, estimated from a 20-minute segment. It depends on the power meter used.",
+    "grip_asymmetry_percent": "The difference between both hands, in percent. A side difference is an observation, not a diagnosis.",
+    "grip_relative": "Grip strength per kilogram of body weight. Comparable only with the same device and the same arm position.",
+    "hr_drift_percent": "How much heart rate rises at constant pace. Heat, hydration and daily form shift the value independently of endurance.",
+    "one_rm_kg": "The load that can be moved once. Estimated from several repetitions, it is a computed value, not a lifted weight.",
+    "relative_strength_bw": "Load relative to body weight. It also rises when only body weight falls — which is why it stands beside the absolute load, not in its place.",
+    "sinclair_points": "A weightlifting factor that makes performances at different body weights comparable. It says nothing about technique or competition ability.",
+    "sjft_index": "The Special Judo Fitness Test index: both heart rates divided by the number of throws. Lower is better.",
+    "swft_index": "The Special Wrestling Fitness Test index, built the same way as the SJFT. Lower is better.",
+    "vo2max_ml_kg_min": "Estimated oxygen uptake per kilogram of body weight per minute. From a field test it is estimated by formula, not measured — a laboratory value would differ.",
+    "watts_per_kg": "Power per kilogram of body weight. Wherever your own weight is moved, it says more than raw watts."
   }
 }
