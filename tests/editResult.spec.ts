@@ -17,23 +17,33 @@ import { openGuest } from './helpers'
 test.describe('Korrektur eines Messwerts', () => {
   test('der Wert lässt sich ändern und die Ableitung wandert mit', async ({ page }) => {
     await openGuest(page)
-    // Kniebeuge: die Relativkraft hängt an der Last, also wandert sie mit.
-    await page.goto('/tests/back_squat_1rm', { waitUntil: 'domcontentloaded' })
-    await page.getByLabel(/^Last/).fill('100')
+    // Cooper: die geschätzte VO2max hängt an der Distanz, also muss sie
+    // mitwandern. Ein korrigierter Wert mit der alten Ableitung daneben wäre
+    // ein stiller Rechenfehler (§89).
+    await page.goto('/tests/cooper_12min', { waitUntil: 'domcontentloaded' })
+    await page.getByLabel(/^Distanz/).fill('2400')
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
     await page.waitForURL('**/ergebnis/**')
 
-    const vorher = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
-    expect(vorher).toContain('"loadKg":100')
+    const vorher = JSON.parse(
+      (await page.evaluate(() => localStorage.getItem('baseline.data.v1'))) ?? '{}',
+    )
+    const ergebnisVorher = vorher.athletes[0].results[0]
+    expect(ergebnisVorher.values.distanceM).toBe(2400)
+    const vo2Vorher = ergebnisVorher.metrics.vo2max_ml_kg_min
 
     await page.getByRole('button', { name: 'Wert korrigieren' }).click()
-    await page.getByLabel(/^Last/).fill('127.5')
+    await page.getByLabel(/^Distanz/).fill('3200')
     await page.getByRole('button', { name: 'Korrektur speichern' }).click()
-
     await expect(page.getByText('Gespeichert.')).toBeVisible()
-    const nachher = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
-    expect(nachher).toContain('"loadKg":127.5')
-    expect(nachher, 'der alte Wert ist ersetzt, nicht ergänzt').not.toContain('"loadKg":100')
+
+    const nachher = JSON.parse(
+      (await page.evaluate(() => localStorage.getItem('baseline.data.v1'))) ?? '{}',
+    )
+    const ergebnisNachher = nachher.athletes[0].results[0]
+    expect(ergebnisNachher.values.distanceM).toBe(3200)
+    expect(ergebnisNachher.metrics.vo2max_ml_kg_min).not.toBe(vo2Vorher)
+    expect(ergebnisNachher.score).toBe(3200)
   })
 
   test('die Zuordnung und die Kennung bleiben — es entsteht kein zweiter Eintrag', async ({ page }) => {
