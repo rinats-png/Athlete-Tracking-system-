@@ -19,6 +19,8 @@ import { getTest } from '@/data/testCatalog'
 import { axisLabel } from '@/data/profileAxes'
 import { radarProfile } from '@/lib/scoring'
 import { limiters, strengths } from '@/domain/insights'
+import { requirementGap } from '@/domain/requirementGap'
+import { LeverPanel } from '@/features/overview/LeverPanel'
 import { nextTests } from '@/domain/nextTest'
 import { rateResult, ratingFromPercentile } from '@/domain/rating'
 import { formatNumber } from '@/lib/format'
@@ -41,6 +43,7 @@ export function AnalysisHome() {
   const axes = useMemo(() => radarProfile(data.results, 'population', new Date(), profile.disciplineId), [data.results, profile.disciplineId])
   const strong = useMemo(() => strengths(axes, data.results), [axes, data.results])
   const weak = useMemo(() => limiters(axes, data.results), [axes, data.results])
+  const gap = useMemo(() => requirementGap(axes, profile.disciplineId), [axes, profile.disciplineId])
   const suggestion = useMemo(
     () =>
       nextTests({
@@ -160,6 +163,8 @@ export function AnalysisHome() {
           <SportProfilePanel key={sport.id} sportId={sport.id} name={sport.name[locale]} />
         ))}
       </section>
+
+      <LeverPanel gap={gap} className="mt-4" />
 
       <Panel className="mt-4">
         <PanelHeader

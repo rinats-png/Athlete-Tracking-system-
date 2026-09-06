@@ -18,7 +18,8 @@
       "environment": "Environment",
       "sensor": "Sensors",
       "body": "Body",
-      "screening": "Screening"
+      "screening": "Screening",
+      "load": "Load"
     },
     "sources": {
       "self": "Can be recorded yourself, without a device.",
@@ -36,7 +37,9 @@
       "fat_mass_percent": "Body fat percentage",
       "lean_mass_kg": "Lean body mass",
       "y_balance_composite": "Y-Balance (composite)",
-      "fms_total": "Functional Movement Screen (total)"
+      "fms_total": "Functional Movement Screen (total)",
+      "sleep_h": "Sleep duration",
+      "srpe_load_au": "Weekly load (sRPE)"
     },
     "meaning": {
       "ck_u_l": "An enzyme whose blood level rises after unaccustomed load. Variation between people is very large — it is comparable only with yourself.",
@@ -48,7 +51,9 @@
       "fat_mass_percent": "The fat share of body mass. DEXA, BIA and skinfolds give markedly different numbers.",
       "lean_mass_kg": "Fat-free mass in kilograms, by the same method as the fat percentage.",
       "y_balance_composite": "A single-leg reach test as a share of leg length. A movement-control screening, not a performance measure.",
-      "fms_total": "Seven movement tasks scored 0 to 3 each. A movement-quality screening, not an injury prediction."
+      "fms_total": "Seven movement tasks scored 0 to 3 each. A movement-quality screening, not an injury prediction.",
+      "sleep_h": "Hours of sleep the night before, self-estimated. Not a recovery score — a number that sits next to the next measurement.",
+      "srpe_load_au": "A week's load as the sum of effort (RPE 1–10) times minutes per session. Comparable only with yourself — and the most common explanation for a bad test day."
     }
   },
   "procedure": {
@@ -361,7 +366,53 @@
     "soloTitle": "Coach mode is off",
     "soloBody": "This area shows several coached athletes side by side. In solo mode it would be a table with exactly one row — the dashboard says that better.",
     "switchMode": "Change mode",
-    "focusCount": "{{count}} open"
+    "focusCount": "{{count}} open",
+    "heatmap": {
+      "title": "Group heatmap",
+      "intro": "Athletes × axes, against the discipline's requirement. Where half the group sits below the requirement, it appears above as a pattern.",
+      "open": "open",
+      "pattern": "Pattern of the group",
+      "patternBody": "{{open}} of {{covered}} sit below the requirement on “{{axis}}”. Those are not {{open}} individual findings — that is a statement about the programme.",
+      "noPattern": "No pattern: no axis where at least {{min}} athletes and half of those rated sit below the requirement.",
+      "noReference": "no reference",
+      "general": "No discipline",
+      "athletes_one": "{{count}} athlete",
+      "athletes_other": "{{count}} athletes",
+      "method": "Open means: requirement of the discipline from {{req}} and percentile below {{score}}. Pattern from {{min}} athletes and half of those rated. The denominator always stands next to it. The heatmap shows the pattern; what to do with it is the coach's call.",
+      "empty": "Once two athletes are measured, the heatmap appears here."
+    },
+    "proof": {
+      "title": "Proof of effect",
+      "intro": "All athletes: what can be proven — and what stayed within variation.",
+      "window": "{{from}} to {{to}}",
+      "measured": "athletes measured",
+      "withGain": "with proven gain",
+      "gains": "proven gains",
+      "drops": "proven drops",
+      "withinNoise": "within variation",
+      "unknown": "variation unknown",
+      "medianGain": "median of gains",
+      "perAthlete": "Per athlete",
+      "perTest": "Per test",
+      "compared": "compared",
+      "bestGain": "Largest proven gain",
+      "print": "Print proof",
+      "caveat": "Proven means: larger than the athlete's own variation in this test times {{factor}}. That something changed while someone was coached is an observation — not a cause. The drops are listed for the same reason as the gains.",
+      "empty": "Without two measurements of the same test within twelve months there is nothing to prove."
+    },
+    "signals": {
+      "availability": "Availability",
+      "availabilityIntro": "Self-assessment across sessions. A reason for a conversation — not a clearance, not a ban.",
+      "declining": "{{name}}: {{latest}} after {{baseline}} before — {{drop}} points below their own line, two sessions in a row.",
+      "steady": "Nobody currently sits below their own line.",
+      "insufficient": "A trend needs three self-assessments per athlete.",
+      "newcomers": "Newcomers",
+      "newcomersIntro": "Placed after one session — not after six months of watching.",
+      "newcomer": "for {{days}} days · {{results}} measurements · {{covered}} of {{total}} axes covered",
+      "lever": "Largest leverage against the requirement: {{axis}}",
+      "limiter": "Falls behind the other axes: {{axis}}",
+      "noNewcomers": "No newcomer at the moment — nobody with a first measurement in the last {{days}} days."
+    }
   },
   "coach": {
     "title": "Athletes you coach",
@@ -521,6 +572,14 @@
       "pre_phv": "Before the growth spurt",
       "circa_phv": "During the growth spurt",
       "post_phv": "After the growth spurt"
+    },
+    "competition": {
+      "title": "Competition",
+      "hint": "Name and day. From it come three checkpoints and the projection of your measurements onto the day.",
+      "name": "Name",
+      "namePlaceholder": "e.g. regional championship",
+      "date": "Date",
+      "clear": "Remove competition"
     }
   },
   "assessments": {

@@ -195,6 +195,49 @@ export function ProfileScreen() {
             </div>
           </Panel>
 
+          <Panel data-testid="competition-settings">
+            <PanelHeader title={t('profile.competition.title')} subtitle={t('profile.competition.hint')} />
+            <div className="grid gap-3 px-4 py-4 sm:grid-cols-2">
+              <label className="block">
+                <span className="label-tag">{t('profile.competition.name')}</span>
+                <input
+                  type="text"
+                  value={data.profile.competition?.name ?? ''}
+                  placeholder={t('profile.competition.namePlaceholder')}
+                  maxLength={80}
+                  disabled={!data.profile.competition}
+                  onChange={(e) =>
+                    data.profile.competition &&
+                    saveProfile({ competition: { ...data.profile.competition, name: e.target.value } })
+                  }
+                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px] disabled:opacity-50"
+                />
+              </label>
+              <label className="block">
+                <span className="label-tag">{t('profile.competition.date')}</span>
+                <input
+                  type="date"
+                  value={data.profile.competition?.on ?? ''}
+                  onChange={(e) =>
+                    saveProfile({
+                      competition: e.target.value
+                        ? { name: data.profile.competition?.name ?? '', on: e.target.value }
+                        : null,
+                    })
+                  }
+                  className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
+                />
+              </label>
+            </div>
+            {data.profile.competition && (
+              <div className="border-t border-line px-4 py-3">
+                <Button variant="ghost" size="sm" onClick={() => saveProfile({ competition: null })}>
+                  {t('profile.competition.clear')}
+                </Button>
+              </div>
+            )}
+          </Panel>
+
           {/* Offenlegung, welche Zahlen dieser App noch auf einer eigenen
               Festlegung beruhen. Sie steht sichtbar in der App und nicht nur
               im Code: eine gesetzte Zahl sieht sonst aus wie eine belegte

@@ -24,6 +24,11 @@
 
 export type ObservationGroup =
   | 'recovery'
+  /**
+   * Belastung zwischen den Testrunden — Schlaf und Trainingslast als
+   * Selbstauskunft. Sie bewerten nichts; sie erklären den nächsten Testtag.
+   */
+  | 'load'
   | 'environment'
   | 'sensor'
   | 'body'
@@ -92,6 +97,32 @@ export const OBSERVATIONS: ObservationDefinition[] = [
     max: 300,
     step: 1,
     source: 'device',
+    direction: 'neutral',
+  },
+  // --- Belastung -----------------------------------------------------------
+  // Die beiden Werte, die ohne Gerät wöchentlich erfasst werden können und
+  // die nächste Messung lesbar machen: wie viel geschlafen, wie viel
+  // trainiert. Die Belastung als Session-RPE mal Minuten (sRPE, in AU) —
+  // das verbreitetste Mass ohne Sensor, und eines, das nur mit sich selbst
+  // verglichen wird.
+  {
+    key: 'sleep_h',
+    group: 'load',
+    unit: 'h',
+    min: 0,
+    max: 16,
+    step: 0.25,
+    source: 'self',
+    direction: 'neutral',
+  },
+  {
+    key: 'srpe_load_au',
+    group: 'load',
+    unit: 'AU',
+    min: 0,
+    max: 20000,
+    step: 10,
+    source: 'self',
     direction: 'neutral',
   },
   // --- Umgebung ------------------------------------------------------------

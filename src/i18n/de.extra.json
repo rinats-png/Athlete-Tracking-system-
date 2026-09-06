@@ -18,7 +18,8 @@
       "environment": "Umgebung",
       "sensor": "Sensorik",
       "body": "Körper",
-      "screening": "Screening"
+      "screening": "Screening",
+      "load": "Belastung"
     },
     "sources": {
       "self": "Ohne Gerät selbst zu erheben.",
@@ -36,7 +37,9 @@
       "fat_mass_percent": "Körperfettanteil",
       "lean_mass_kg": "Fettfreie Masse",
       "y_balance_composite": "Y-Balance (Gesamtwert)",
-      "fms_total": "Functional Movement Screen (Gesamtpunkte)"
+      "fms_total": "Functional Movement Screen (Gesamtpunkte)",
+      "sleep_h": "Schlafdauer",
+      "srpe_load_au": "Belastung der Woche (sRPE)"
     },
     "meaning": {
       "ck_u_l": "Ein Enzym, dessen Blutspiegel nach ungewohnter Belastung steigt. Die Streuung zwischen Menschen ist sehr gross — vergleichbar ist er nur mit dir selbst.",
@@ -48,7 +51,9 @@
       "fat_mass_percent": "Der Fettanteil an der Körpermasse. DEXA, BIA und Faltenmessung ergeben deutlich verschiedene Zahlen.",
       "lean_mass_kg": "Die fettfreie Masse in Kilogramm, nach demselben Verfahren wie der Fettanteil.",
       "y_balance_composite": "Ein Reichweitentest im Einbeinstand, als Anteil der Beinlänge. Ein Screening zur Bewegungskontrolle, keine Leistungsmessung.",
-      "fms_total": "Sieben Bewegungsaufgaben mit je 0 bis 3 Punkten. Ein Screening zur Bewegungsqualität, keine Verletzungsvorhersage."
+      "fms_total": "Sieben Bewegungsaufgaben mit je 0 bis 3 Punkten. Ein Screening zur Bewegungsqualität, keine Verletzungsvorhersage.",
+      "sleep_h": "Stunden Schlaf in der Nacht davor, selbst geschätzt. Kein Erholungswert — eine Zahl, die neben der nächsten Messung steht.",
+      "srpe_load_au": "Belastung einer Woche als Summe aus Anstrengung (RPE 1–10) mal Minuten je Einheit. Nur mit dir selbst vergleichbar — und die häufigste Erklärung für einen schlechten Testtag."
     }
   },
   "procedure": {
@@ -361,7 +366,53 @@
     "soloTitle": "Trainermodus nicht aktiv",
     "soloBody": "Dieser Bereich zeigt mehrere betreute Athleten nebeneinander. Im Einzelmodus stünde hier eine Tabelle mit genau einer Zeile — das Dashboard sagt dasselbe besser.",
     "switchMode": "Modus umstellen",
-    "focusCount": "{{count}} offen"
+    "focusCount": "{{count}} offen",
+    "heatmap": {
+      "title": "Gruppen-Heatmap",
+      "intro": "Athleten × Achsen, gegen die Anforderung der Disziplin. Wo die halbe Gruppe unter der Anforderung liegt, steht es oben als Muster.",
+      "open": "offen",
+      "pattern": "Muster der Gruppe",
+      "patternBody": "{{open}} von {{covered}} liegen auf «{{axis}}» unter der Anforderung. Das sind nicht {{open}} Einzelbefunde — das ist eine Aussage über das Programm.",
+      "noPattern": "Kein Muster: keine Achse, auf der mindestens {{min}} Athleten und die Hälfte der Eingeordneten unter der Anforderung liegen.",
+      "noReference": "ohne Referenz",
+      "general": "Ohne Disziplin",
+      "athletes_one": "{{count}} Athlet",
+      "athletes_other": "{{count}} Athleten",
+      "method": "Offen heisst: Anforderung der Disziplin ab {{req}} und Perzentil unter {{score}}. Muster ab {{min}} Athleten und der Hälfte der Eingeordneten. Der Nenner steht immer daneben. Die Heatmap zeigt das Muster; was damit zu tun ist, entscheidet der Trainer.",
+      "empty": "Sobald zwei Athleten gemessen sind, entsteht hier die Heatmap."
+    },
+    "proof": {
+      "title": "Wirksamkeitsnachweis",
+      "intro": "Alle Athleten: was sich belegen lässt — und was innerhalb der Schwankung blieb.",
+      "window": "{{from}} bis {{to}}",
+      "measured": "Athleten gemessen",
+      "withGain": "mit belegter Verbesserung",
+      "gains": "belegte Verbesserungen",
+      "drops": "belegte Rückgänge",
+      "withinNoise": "innerhalb der Schwankung",
+      "unknown": "Streuung unbekannt",
+      "medianGain": "Median der Verbesserungen",
+      "perAthlete": "Je Athlet",
+      "perTest": "Je Test",
+      "compared": "verglichen",
+      "bestGain": "Grösste belegte Verbesserung",
+      "print": "Nachweis drucken",
+      "caveat": "Belegt heisst: grösser als die eigene Streuung des Athleten in diesem Test mal {{factor}}. Dass sich etwas verändert hat, während jemand betreut wurde, ist eine Beobachtung — keine Ursache. Die Rückgänge stehen aus demselben Grund dabei wie die Verbesserungen.",
+      "empty": "Ohne zwei Messungen desselben Tests in zwölf Monaten gibt es nichts zu belegen."
+    },
+    "signals": {
+      "availability": "Verfügbarkeit",
+      "availabilityIntro": "Selbsteinschätzung über die Termine. Ein Anlass für ein Gespräch — keine Freigabe, keine Sperre.",
+      "declining": "{{name}}: {{latest}} nach zuvor {{baseline}} — {{drop}} Punkte unter der eigenen Linie, zwei Termine in Folge.",
+      "steady": "Niemand liegt zurzeit unter seiner eigenen Linie.",
+      "insufficient": "Für einen Trend braucht es drei Selbsteinschätzungen je Athlet.",
+      "newcomers": "Neuzugänge",
+      "newcomersIntro": "Nach einem Termin eingeordnet — nicht nach sechs Monaten Hinschauen.",
+      "newcomer": "seit {{days}} Tagen · {{results}} Messungen · {{covered}} von {{total}} Achsen belegt",
+      "lever": "Grösster Hebel gegenüber der Anforderung: {{axis}}",
+      "limiter": "Fällt gegenüber den übrigen Achsen ab: {{axis}}",
+      "noNewcomers": "Zurzeit kein Neuzugang — niemand mit erster Messung in den letzten {{days}} Tagen."
+    }
   },
   "coach": {
     "title": "Betreute Athleten",
@@ -521,6 +572,14 @@
       "pre_phv": "Vor dem Wachstumsschub",
       "circa_phv": "Im Wachstumsschub",
       "post_phv": "Nach dem Wachstumsschub"
+    },
+    "competition": {
+      "title": "Wettkampf",
+      "hint": "Name und Tag. Daraus entstehen drei Kontrollpunkte und die Hochrechnung deiner Messungen auf den Tag.",
+      "name": "Bezeichnung",
+      "namePlaceholder": "z. B. Landesmeisterschaft",
+      "date": "Datum",
+      "clear": "Wettkampf entfernen"
     }
   },
   "assessments": {

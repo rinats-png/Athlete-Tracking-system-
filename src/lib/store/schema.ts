@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 18
+export const CURRENT_SCHEMA_VERSION = 19
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -174,6 +174,18 @@ const profileSchema = z.object({
    * soll auch keine Gesundheitsdaten strukturiert sammeln (§50, §82).
    */
   constraints: z.string().max(300).default(''),
+  /**
+   * Der nächste Wettkampf — Name und Tag.
+   *
+   * Er ist der Rahmen, in den sich die Diagnostik einordnet: rückwärts vom
+   * Tag entstehen drei Kontrollpunkte (seasonPlan.ts), und die Messungen
+   * werden auf den Tag hochgerechnet (formProjection.ts). Ohne Datum gibt
+   * es beides nicht — die App erfindet keinen Wettkampf.
+   */
+  competition: z
+    .object({ name: z.string().max(80).default(''), on: dayString })
+    .nullable()
+    .default(null),
 })
 
 const biometricSchema = z.object({
@@ -878,6 +890,21 @@ export const MIGRATIONS: Migration[] = [
       athletes: (data.athletes ?? []).map((athlete: any) => ({
         ...athlete,
         observations: [],
+      })),
+    }),
+  },
+  {
+    from: 18,
+    to: 19,
+    describe: 'Wettkampfdatum am Profil',
+    run: (data) => ({
+      ...data,
+      version: 19,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        // Kein Wettkampf, solange keiner eingetragen ist: ein geratenes
+        // Datum wuerde einen Saisonplan erzeugen, den niemand bestellt hat.
+        profile: { ...athlete.profile, competition: null },
       })),
     }),
   },

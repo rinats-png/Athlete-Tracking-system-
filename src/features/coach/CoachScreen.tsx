@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { CoachDashboard } from './CoachDashboard'
+import { CoachSignals } from './CoachSignals'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import type { AppLocale } from '@/types/domain'
 
@@ -43,7 +44,14 @@ export function CoachScreen() {
             <Button asChild variant="outline" size="sm">
               <Link to="/trainer/gruppenbericht">{t('compare.group.title')}</Link>
             </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/trainer/heatmap">{t('coachDash.heatmap.title')}</Link>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/trainer/nachweis">{t('coachDash.proof.title')}</Link>
+            </Button>
           </div>
+          <CoachSignals />
           <CoachDashboard locale={locale} />
         </>
       ) : (

@@ -14,7 +14,7 @@ import { axisLabel } from '@/data/profileAxes'
 import { radarProfile } from '@/lib/scoring'
 import { performanceScore } from '@/domain/performanceScore'
 import { yearReview } from '@/domain/yearReview'
-import { drawPerformanceCard } from '@/lib/performanceCard'
+import { CARD_HEIGHT, CARD_WIDTH, drawPerformanceCard } from '@/lib/performanceCard'
 import { formatNumber } from '@/lib/format'
 
 /**
@@ -59,18 +59,36 @@ export function YearReviewScreen() {
   const paint = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return false
+    const gain = review.biggestGain
+    const sentence = gain
+      ? t('year.cardSentenceGain', {
+          test: getTest(gain.testSlug)?.shortName[locale] ?? gain.testSlug,
+          percent: formatNumber(gain.changePercent, locale, 1),
+        })
+      : t('year.cardSentenceNone')
     drawPerformanceCard(canvas, {
       title: sport?.name[locale] ?? t('year.generalProfile'),
+      subtitle: String(review.year),
       score: score.value,
       coverage: t('score.coverage', { rated: score.ratedAxes, total: score.totalAxes }),
-      rows: score.parts
-        .slice(0, 5)
-        .map((part) => ({ label: axisLabel(part.axisId, t, locale), value: part.score })),
+      axes: axes.map((axis) => ({ label: axisLabel(axis.axisId, t, locale), score: axis.score })),
+      changes: review.changes.slice(0, 6).map((change) => ({
+        label: getTest(change.testSlug)?.shortName[locale] ?? change.testSlug,
+        percent: change.changePercent,
+        proven: change.proven === true,
+      })),
+      sentence,
       footer: t('year.cardFooter', { results: review.results, year: review.year }),
       caveat: t('year.cardCaveat'),
+      labels: {
+        proven: t('year.cardProven'),
+        withinNoise: t('year.cardWithinNoise'),
+        profile: t('year.cardProfile'),
+        changes: t('year.development'),
+      },
     })
     return true
-  }, [locale, review.results, review.year, score, sport, t])
+  }, [axes, locale, review, score, sport, t])
 
   useEffect(() => {
     paint()
@@ -170,8 +188,8 @@ export function YearReviewScreen() {
         <div className="px-4 py-4">
           <canvas
             ref={canvasRef}
-            width={640}
-            height={800}
+            width={CARD_WIDTH}
+            height={CARD_HEIGHT}
             className="max-w-full border border-line"
             aria-label={t('year.cardAlt')}
           />

@@ -1071,7 +1071,12 @@
       "worse": "That is more than needed to establish a real change: with your usual variation of {{error}} % (from {{points}} measurements), it counts from {{detectable}} %. So the drop is not measurement noise.",
       "within_noise": "Too little to tell apart from your usual variation. At {{error}} % variation in this test (from {{points}} measurements), a change would be detectable from {{detectable}} %.",
       "unknown_error": "How much your values in this test vary is not known yet."
-    }
+    },
+    "provenTitle": "Proven change",
+    "provenBody": "This is more than a good day. That is what the report is for: the change recorded with variation, reference and provenance — for you, your coach or the club.",
+    "toReport": "Record in report",
+    "toPricing": "Bundles",
+    "noiseAdvantage": "The advantage of knowing this: those who don't change their programme now — over a number that looks different tomorrow."
   },
   "score": {
     "title": "Summary",
@@ -1142,7 +1147,12 @@
     "cardDownload": "Download card",
     "cardFooter": "{{results}} measurements in {{year}}",
     "cardCaveat": "Mean of the percentiles of the sourced axes. Not a medical statement and not comparable across sports.",
-    "cardPrivacy": "The image is made on your device and uploaded nowhere. What you do with it is up to you."
+    "cardPrivacy": "The image is made on your device and uploaded nowhere. What you do with it is up to you.",
+    "cardSentenceGain": "{{test}}: +{{percent}} % — beyond your own variation.",
+    "cardSentenceNone": "No change beyond your own variation. And none invented.",
+    "cardProven": "proven",
+    "cardWithinNoise": "within variation",
+    "cardProfile": "Profile"
   },
   "orb": {
     "alt": "Performance profile as a shape: value {{score}}, from {{rated}} of {{total}} axes with a sourced reference.",
@@ -1309,5 +1319,62 @@
     "save": "Save correction",
     "cancel": "Cancel",
     "saved": "Saved."
+  },
+  "lever": {
+    "title": "Requirement gap",
+    "intro": "Where eight weeks buy the most: your discipline's requirement against your measured profile, axis by axis.",
+    "requirement": "Requirement",
+    "yours": "You",
+    "open": "open",
+    "leverValue": "Leverage {{value}}",
+    "evidence_one": "from {{count}} measurement",
+    "evidence_other": "from {{count}} measurements",
+    "noDiscipline": "Without a chosen discipline there is no requirement to read the profile against. Choose one in your profile.",
+    "tooFew": "As soon as one axis of your discipline is covered, this shows where the time belongs.",
+    "unmeasured": "Not measured yet — the biggest unknown, not a finding:",
+    "unweighted": "Metric axes without a requirement level, so not ranked:",
+    "where": "The app says where the time belongs. What to do there is your call — with your coach.",
+    "all": "Full ranking",
+    "method": "Leverage = the discipline's requirement level (0–1, a default of this app, not a literature value) × headroom (100 − percentile). “Open” means: requirement from {{req}} and percentile below {{score}}."
+  },
+  "competition": {
+    "title": "Your competition",
+    "noneBody": "With a date, diagnostics becomes a frame: three checkpoints counted back from the day, and your measurements projected onto it.",
+    "setInProfile": "Enter the competition in your profile",
+    "daysToGo_one": "in {{count}} day",
+    "daysToGo_other": "in {{count}} days",
+    "past": "has passed",
+    "kind": {
+      "foundation": "Foundation",
+      "specific": "Specific",
+      "form": "Form check"
+    },
+    "weeksBefore_one": "{{count}} week before",
+    "weeksBefore_other": "{{count}} weeks before",
+    "status": {
+      "done": "measured",
+      "due": "due now",
+      "upcoming": "planned",
+      "missed": "skipped"
+    },
+    "projection": "Form on competition day",
+    "latest": "latest",
+    "points": "from {{count}} measurements over {{days}} days",
+    "goalOutlook": {
+      "reaches": "Goal {{goal}} within reach",
+      "misses": "Goal {{goal}} out of reach",
+      "unclear": "Goal {{goal}} open — the band straddles it"
+    },
+    "noProjection": "A projection needs three measurements over time per test — and the day must not be further away than the measurements carry.",
+    "assumption": "The projection assumes nothing changes. That is exactly its statement: this is where it ends if nothing changes. The band is your own variation."
+  },
+  "between": {
+    "title": "Between tests",
+    "recent_one": "{{count}} entry in the last 14 days",
+    "recent_other": "{{count}} entries in the last 14 days",
+    "none": "No entry yet.",
+    "last": "last {{date}}",
+    "add": "Add",
+    "why": "Sleep, load, body: not performance, but they make the next measurement readable. A jump at three kilos more body weight means something else. Nothing is rated."
   }
 }

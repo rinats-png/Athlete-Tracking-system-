@@ -1071,7 +1071,12 @@
       "worse": "Das ist mehr als nötig, um eine echte Veränderung nachzuweisen: bei deiner üblichen Schwankung von {{error}} % (aus {{points}} Messungen) zählt ab {{detectable}} %. Der Rückgang liegt also nicht am Messrauschen.",
       "within_noise": "Zu wenig, um es von deiner üblichen Schwankung zu unterscheiden. Bei {{error}} % Schwankung in diesem Test (aus {{points}} Messungen) wäre eine Veränderung ab {{detectable}} % nachweisbar.",
       "unknown_error": "Wie stark deine Werte in diesem Test schwanken, ist noch nicht bekannt."
-    }
+    },
+    "provenTitle": "Belegte Veränderung",
+    "provenBody": "Das ist mehr als Tagesform. Genau dafür ist der Bericht: die Veränderung mit Streuung, Referenz und Herkunft festgehalten — für dich, deinen Trainer oder den Verein.",
+    "toReport": "Im Bericht festhalten",
+    "toPricing": "Kontingent",
+    "noiseAdvantage": "Der Vorteil daran, das zu wissen: wer es nicht weiss, ändert jetzt sein Programm — wegen einer Zahl, die morgen anders aussieht."
   },
   "score": {
     "title": "Zusammenfassung",
@@ -1142,7 +1147,12 @@
     "cardDownload": "Karte herunterladen",
     "cardFooter": "{{results}} Messungen im Jahr {{year}}",
     "cardCaveat": "Mittel der Perzentile der belegten Achsen. Keine medizinische Aussage und zwischen Sportarten nicht vergleichbar.",
-    "cardPrivacy": "Das Bild entsteht auf deinem Gerät und wird nirgends hochgeladen. Was du damit machst, entscheidest du."
+    "cardPrivacy": "Das Bild entsteht auf deinem Gerät und wird nirgends hochgeladen. Was du damit machst, entscheidest du.",
+    "cardSentenceGain": "{{test}}: +{{percent}} % — über die eigene Schwankung hinaus.",
+    "cardSentenceNone": "Keine Veränderung über der eigenen Schwankung. Und keine erfunden.",
+    "cardProven": "belegt",
+    "cardWithinNoise": "innerhalb der Schwankung",
+    "cardProfile": "Profil"
   },
   "orb": {
     "alt": "Leistungsprofil als Form: Wert {{score}}, aus {{rated}} von {{total}} Achsen mit belegter Referenz.",
@@ -1309,5 +1319,62 @@
     "save": "Korrektur speichern",
     "cancel": "Abbrechen",
     "saved": "Gespeichert."
+  },
+  "lever": {
+    "title": "Anforderungslücke",
+    "intro": "Wo acht Wochen am meisten bringen: die Anforderung deiner Disziplin gegen dein gemessenes Profil, Achse für Achse.",
+    "requirement": "Anforderung",
+    "yours": "Du",
+    "open": "offen",
+    "leverValue": "Hebel {{value}}",
+    "evidence_one": "aus {{count}} Messung",
+    "evidence_other": "aus {{count}} Messungen",
+    "noDiscipline": "Ohne gewählte Disziplin gibt es keine Anforderung, gegen die sich das Profil lesen liesse. Wähle sie im Profil.",
+    "tooFew": "Sobald eine Achse deiner Disziplin belegt ist, steht hier, wo die Zeit hingehört.",
+    "unmeasured": "Noch nicht gemessen — die grösste Unbekannte, kein Befund:",
+    "unweighted": "Kennzahlachsen ohne Anforderungshöhe, deshalb nicht eingereiht:",
+    "where": "Die App sagt, wo die Zeit hingehört. Was dort zu tun ist, entscheidest du — mit deinem Trainer.",
+    "all": "Ganze Rangfolge",
+    "method": "Hebel = Anforderungshöhe der Disziplin (0–1, eine Voreinstellung dieser App, kein Literaturwert) × Luft nach oben (100 − Perzentil). «Offen» heisst: Anforderung ab {{req}} und Perzentil unter {{score}}."
+  },
+  "competition": {
+    "title": "Dein Wettkampf",
+    "noneBody": "Mit einem Datum wird die Diagnostik zum Rahmen: drei Kontrollpunkte rückwärts vom Tag, und deine Messungen hochgerechnet auf den Tag.",
+    "setInProfile": "Wettkampf im Profil eintragen",
+    "daysToGo_one": "in {{count}} Tag",
+    "daysToGo_other": "in {{count}} Tagen",
+    "past": "liegt zurück",
+    "kind": {
+      "foundation": "Grundlage",
+      "specific": "Spezifisch",
+      "form": "Formcheck"
+    },
+    "weeksBefore_one": "{{count}} Woche vorher",
+    "weeksBefore_other": "{{count}} Wochen vorher",
+    "status": {
+      "done": "gemessen",
+      "due": "jetzt fällig",
+      "upcoming": "geplant",
+      "missed": "ausgelassen"
+    },
+    "projection": "Form am Wettkampftag",
+    "latest": "zuletzt",
+    "points": "aus {{count}} Messungen über {{days}} Tage",
+    "goalOutlook": {
+      "reaches": "Ziel {{goal}} in Reichweite",
+      "misses": "Ziel {{goal}} ausser Reichweite",
+      "unclear": "Ziel {{goal}} offen — das Band liegt beidseits"
+    },
+    "noProjection": "Für eine Hochrechnung braucht es je Test drei Messungen über die Zeit — und der Tag darf nicht weiter weg sein, als die Messungen tragen.",
+    "assumption": "Die Hochrechnung nimmt an, dass nichts anders wird. Genau das ist ihre Aussage: so endet es, wenn nichts anders wird. Das Band ist deine eigene Streuung."
+  },
+  "between": {
+    "title": "Zwischen den Tests",
+    "recent_one": "{{count}} Eintrag in den letzten 14 Tagen",
+    "recent_other": "{{count}} Einträge in den letzten 14 Tagen",
+    "none": "Noch kein Eintrag.",
+    "last": "zuletzt {{date}}",
+    "add": "Eintragen",
+    "why": "Schlaf, Belastung, Körper: keine Leistung, aber sie machen die nächste Messung lesbar. Ein Sprung bei drei Kilo mehr Körpergewicht bedeutet etwas anderes. Bewertet wird nichts."
   }
 }

@@ -10,7 +10,7 @@ import { OBSERVATIONS, observationByKey } from '@/data/observations'
 import type { ObservationGroup } from '@/data/observations'
 import { formatDate, formatNumber } from '@/lib/format'
 
-const GROUPS: ObservationGroup[] = ['recovery', 'environment', 'sensor', 'body', 'screening']
+const GROUPS: ObservationGroup[] = ['recovery', 'load', 'environment', 'sensor', 'body', 'screening']
 
 /**
  * Beobachtungswerte erfassen und im Verlauf sehen.

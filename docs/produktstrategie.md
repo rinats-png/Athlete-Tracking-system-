@@ -1,8 +1,7 @@
 # Produktstrategie — Gestaltung, Bindung, Vorteil
 
 Festgehaltene Entscheidungen und Befunde aus der Durchsicht des
-Auslieferungsstands. Kein Umsetzungsstand: was hier steht, ist noch nicht
-gebaut, sofern nicht ausdrücklich anders vermerkt.
+Auslieferungsstands — und der Umsetzungsstand dazu (Abschnitt 5).
 
 ---
 
@@ -35,13 +34,21 @@ hundertmal.
 - Intro-Sequenz: fünf Sekunden **je Sitzung** bei einer App, die man öffnet,
   um eine Zahl einzutragen.
 
-### Regel (beschlossen, noch nicht umgesetzt)
+### Regel — und die Korrektur des Befunds
 
 - **Signature-Momente** — Anmeldung, Intro, Jahresrückblick, Berichtsdeckblatt
   — behalten die volle Halo-Sprache.
 - **Arbeitsbildschirme** bekommen nur `.rise`: 16 px von unten, keine
   Rotation, keine Unschärfe, 450 ms.
-- Intro einmal **je Gerät** statt je Sitzung.
+
+**Nachgeprüft im Code:** die Regel gilt bereits. `[data-reveal]` mit
+Rotation und Unschärfe wird ausschliesslich im Willkommensbildschirm
+(`features/auth/WelcomeScreen.tsx`) verwendet; jeder Arbeitsbildschirm nutzt
+`.rise`. Die Intro-Sequenz läuft nicht «je Sitzung», sondern nur nach einer
+ausdrücklichen Anmeldung — das Konto wird beim Öffnen aus dem Speicher
+gelesen, und dann läuft keine Sequenz. Der ursprüngliche Befund war in
+diesen zwei Punkten zu scharf. Geändert wurde deshalb nichts; die Regel
+steht hier, damit sie beim nächsten Umbau nicht verloren geht.
 
 ### Beobachtung zur Alterung
 
@@ -188,3 +195,29 @@ Punkt 4 ist der Burggraben, braucht aber die Kohorte — also später.
 1. `src/data/operator.ts` — Name, Anschrift, E-Mail fehlen (§5 DDG).
 2. Rechtstexte anwaltlich prüfen lassen.
 3. Fussball: entschieden, bleibt ausgeschlossen (`BLOCKED_DISCIPLINES`).
+
+---
+
+## 5. Umsetzungsstand
+
+Gebaut, mit Prüffällen, auf dem Branch:
+
+| Vorhaben | Wo | Regel, die es einhält |
+|---|---|---|
+| Anforderungslücke | `domain/requirementGap.ts`, Übersicht (kompakt), Analyse (ganz) | Sagt WO, nicht WAS (§81). Ungemessen ≠ schwach. Kennzahlachsen ohne Gewicht werden nicht eingereiht. |
+| Wettkampf als Rahmen | Schema v19 `profile.competition`, `domain/seasonPlan.ts`, Profil, Übersicht | 12 / 6 / 2 Wochen als offene Produktentscheidung; ein Testplan, kein Trainingsplan. |
+| Formvorhersage | `domain/formProjection.ts`, Übersicht | Gerade + eigenes Streuungsband; nie über den doppelten Messzeitraum, nie über ein Jahr. Zielaussage nur, wenn das ganze Band auf einer Seite liegt. |
+| Report im Moment der Veränderung | `ResultScreen` (`ChangeBlock`) | Angebot nur bei belegter Veränderung. Innerhalb der Schwankung wird der Vorteil benannt. |
+| Zwischen den Tests | `data/observations.ts` (Schlaf, sRPE-Belastung), Übersicht | Erfasst, nie bewertet. |
+| Performance Card | `lib/performanceCard.ts` (1080 × 1350, Radar, belegte Veränderungen, ein Satz) | Ohne Name, ohne Geburtsdatum. Abdeckung und Vorbehalt stehen immer drauf. |
+| Gruppen-Heatmap | `domain/groupHeatmap.ts`, `/trainer/heatmap` | Nenner immer daneben. Muster ab 4 Athleten UND halber Gruppe. |
+| Wirksamkeitsnachweis | `domain/coachProof.ts`, `/trainer/nachweis` (druckbar) | Derselbe Massstab wie am Ergebnis (2,77 × eigene Streuung). Rückgänge stehen gleich gross dabei. Beobachtung, keine Ursache. |
+| Verfügbarkeit, Neuzugang | `domain/availability.ts`, Trainerbereich | Gesprächsanlass, keine Freigabe (§82). Zwei Termine unter der Linie, nicht einer. |
+
+Nicht gebaut, mit Grund:
+
+- **Kohortenvergleich (Community-Benchmark).** Braucht eine anonymisierte
+  Kohorte auf dem Server mit Mindestzahl je Zelle, Opt-in und Konfidenz.
+  Das ist eine eigene Etappe mit Schema, RLS und Rechtstext — nicht etwas,
+  das nebenbei entsteht. Der Bildschirm sagt weiterhin, dass er leer ist.
+- **Trainingsempfehlung aus dem Limiter.** Verworfen, §81 (siehe oben).

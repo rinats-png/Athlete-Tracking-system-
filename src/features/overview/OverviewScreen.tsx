@@ -28,6 +28,10 @@ import { PerformanceOrb } from '@/components/signature/PerformanceOrb'
 import { ValueCard } from '@/components/signature/ValueCard'
 import { NextTestCard } from '@/components/signature/NextTestCard'
 import { performanceScore } from '@/domain/performanceScore'
+import { requirementGap } from '@/domain/requirementGap'
+import { LeverPanel } from './LeverPanel'
+import { CompetitionPanel } from './CompetitionPanel'
+import { BetweenTestsPanel } from './BetweenTestsPanel'
 
 /**
  * Die Übersicht (Konzept §6): nur das Wichtigste.
@@ -45,7 +49,7 @@ import { performanceScore } from '@/domain/performanceScore'
 export function OverviewScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { data } = useAppData()
+  const { data, observations } = useAppData()
   const profile = data.profile
   const discipline = disciplineById(profile.disciplineId)
   const context = ratingContextOf(profile)
@@ -87,6 +91,7 @@ export function OverviewScreen() {
           .slice(0, 2)
           .map((a) => ({ axisId: a.axisId, score: a.score as number }))
   const score = useMemo(() => performanceScore(axes), [axes])
+  const gap = useMemo(() => requirementGap(axes, profile.disciplineId), [axes, profile.disciplineId])
   /**
    * Die drei Achsen für die Wertkarten: belegte zuerst, stärkste oben.
    * Eine unbelegte Achse steht nur dann in der Reihe, wenn es nicht genug
@@ -192,6 +197,16 @@ export function OverviewScreen() {
         />
       )}
 
+      {/*
+       * Der unfaire Vorteil, in zwei Flächen: WO die Zeit hingehört (die
+       * Anforderungslücke) und WANN sie gemessen wird (der Wettkampf als
+       * Rahmen). Beides sagt nicht, WAS zu tun ist — §81.
+       */}
+      <div className="mb-4 grid gap-4 md:grid-cols-2 md:items-start">
+        <LeverPanel gap={gap} compact className="rise" style={{ ['--rise-delay' as string]: '520ms' }} />
+        <CompetitionPanel data={data} className="rise" style={{ ['--rise-delay' as string]: '600ms' }} />
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2">
         <div className="grid gap-4">
           <Panel>
@@ -236,6 +251,8 @@ export function OverviewScreen() {
               </Button>
             </div>
           </Panel>
+
+          <BetweenTestsPanel observations={observations} />
         </div>
 
         <Panel>

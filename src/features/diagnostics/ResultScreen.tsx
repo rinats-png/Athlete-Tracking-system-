@@ -431,6 +431,32 @@ function ChangeBlock({ change, missing }: { change: ChangeReport; missing: numbe
               points: change.points,
             })}
       </p>
+
+      {/*
+       * Der Vorteil wird benannt, nicht nur gerechnet. Innerhalb der
+       * Schwankung: wer das nicht weiss, ändert jetzt sein Programm. Darüber:
+       * das ist der Moment, in dem ein Bericht etwas festhält, das es wert
+       * ist — nicht die Preisliste im Profil.
+       */}
+      {change.verdict === 'within_noise' && (
+        <p className="mt-2 text-[12px] leading-relaxed text-ink-muted" data-testid="noise-advantage">
+          {t('change.noiseAdvantage')}
+        </p>
+      )}
+      {(change.verdict === 'better' || change.verdict === 'worse') && (
+        <div className="mt-3 border-l-2 border-accent bg-accent-quiet px-3 py-2.5" data-testid="proven-offer">
+          <span className="label-tag text-accent-text">{t('change.provenTitle')}</span>
+          <p className="mt-1 text-[13px] leading-relaxed text-ink-secondary">{t('change.provenBody')}</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <Button asChild variant="primary" size="sm">
+              <Link to="/bericht">{t('change.toReport')}</Link>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/preise">{t('change.toPricing')}</Link>
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
