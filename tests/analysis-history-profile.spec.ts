@@ -15,8 +15,8 @@ test.describe('Analyse', () => {
     await expect(page.getByRole('heading', { name: 'Empfehlung', exact: true })).toBeVisible()
     await expect(page.getByText('Begründung')).toBeVisible()
     // Ein Profil je Sportart: Hauptsportart und die weitere aus dem Demobestand.
-    await expect(page.getByText(/Performance-Profil · Functional Fitness/)).toBeVisible()
-    await expect(page.getByText(/Performance-Profil · Halbmarathon/)).toBeVisible()
+    await expect(page.getByText(/Performance-Profil · Judo/)).toBeVisible()
+    await expect(page.getByText(/Performance-Profil · Brazilian Jiu-Jitsu/)).toBeVisible()
     await expect(page.getByText('Benchmarking')).toBeVisible()
     await expect(page.getByText('Vertiefung')).toBeVisible()
   })

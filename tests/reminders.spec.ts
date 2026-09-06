@@ -93,16 +93,35 @@ test.describe('Kalender', () => {
  * das sagen, bevor jemand sich darauf verlässt.
  */
 test.describe('Was die Erinnerung leisten kann', () => {
-  test('der Bildschirm sagt, dass keine Mitteilung aufs Gerät geht', async ({ page }) => {
+  test('der Bildschirm sagt, dass bei geschlossener App nichts kommt', async ({ page }) => {
     await openGuest(page)
     await page.goto('/verlauf/erinnerungen', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByText(/keine Mitteilung auf dein Gerät/i)).toBeVisible()
+    await expect(page.getByText(/Während BASELINE geschlossen ist, kommt nichts/i)).toBeVisible()
   })
 
-  test('kein Text verspricht eine Benachrichtigung', () => {
+  test('kein Text verspricht eine Meldung, die bei geschlossener App käme', () => {
     const de = JSON.parse(readFileSync(new URL('../src/i18n/de.json', import.meta.url), 'utf-8'))
-    // Nur die Texte, nicht die Schlüssel: `noPush` heisst so, verspricht aber nichts.
-    const werbend = Object.values(de.reminders).join(' ').match(/Push|benachrichtig/i)
-    expect(werbend, 'sonst erwartet jemand eine Mitteilung, die nie kommt').toBeNull()
+
+    // Seit die App eine Systemmeldung zeigen KANN, solange sie offen ist, ist
+    // «benachrichtigen» kein verbotenes Wort mehr — es wäre sonst die
+    // Fähigkeit verschwiegen. Verboten bleibt die Zusage, die sie ohne
+    // Push-Server nicht halten kann.
+    const notify = Object.entries(de.reminders)
+      .filter(([key]) => key.startsWith('notify'))
+      .map(([, value]) => String(value))
+      .join(' ')
+    expect(notify.length, 'die Texte müssen es überhaupt geben').toBeGreaterThan(50)
+    // «im Hintergrund» steht in der Verneinung («sie hat keinen Server, der
+    // im Hintergrund etwas verschickt») und darf deshalb NICHT verboten sein:
+    // sonst zwänge die Prüfung dazu, die Grenze unschärfer zu formulieren.
+    // Verboten sind die Zusagen selbst.
+    expect(
+      notify.match(/zuverlässig|auch wenn (die App |sie )?geschlossen|selbst wenn/i),
+      'sonst erwartet jemand eine Mitteilung, die nie kommt',
+    ).toBeNull()
+
+    // Und die Grenze muss ausdrücklich dastehen, nicht bloss nicht bestritten.
+    expect(de.reminders.notifyLimit).toMatch(/geöffnet/)
+    expect(de.reminders.noPush).toMatch(/geschlossen/)
   })
 })

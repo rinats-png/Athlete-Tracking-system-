@@ -1519,7 +1519,7 @@
     "eyebrow": "Verlauf",
     "title": "Erinnerungen",
     "intro": "Lokal, ohne Server: die App weiss, wann zuletzt gemessen wurde. Erinnerungen sind aus, bis du sie einschaltest.",
-    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest. BASELINE schickt keine Mitteilung auf dein Gerät: dafür bräuchte es einen Server, der weiss, wer du bist und wann du zuletzt gemessen hast — und den gibt es bewusst nicht.",
+    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest — und, wenn du es erlaubst, in diesem Moment zusätzlich als Systemmeldung. Während BASELINE geschlossen ist, kommt nichts: dafür bräuchte es einen Server, der weiss, wer du bist und wann du zuletzt gemessen hast, und den gibt es bewusst nicht. Wer auch ohne die App erinnert werden will, nimmt die Kalenderdatei.",
     "enable": "Erinnerungen aktivieren",
     "enabled": "Erinnerungen sind aktiv",
     "disabled": "Erinnerungen sind aus",

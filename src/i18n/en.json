@@ -1519,7 +1519,7 @@
     "eyebrow": "History",
     "title": "Reminders",
     "intro": "Local, no server: the app knows when you last measured. Reminders are off until you switch them on.",
-    "noPush": "The reminder appears inside the app when you open it. BASELINE sends no notification to your device: that would need a server knowing who you are and when you last measured — and there deliberately is none.",
+    "noPush": "The reminder appears inside the app when you open it — and, if you allow it, as a system notification at that moment. While BASELINE is closed, nothing arrives: that would need a server knowing who you are and when you last measured, and there deliberately is none. To be reminded without the app, use the calendar file.",
     "enable": "Enable reminders",
     "enabled": "Reminders are on",
     "disabled": "Reminders are off",

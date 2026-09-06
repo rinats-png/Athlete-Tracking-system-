@@ -45,6 +45,13 @@ for (const route of ROUTES) {
           // ausgelöst (versteckter Datei-Input hinter einem Knopf).
           if (el.getAttribute('aria-hidden') === 'true' && el.getAttribute('tabindex') === '-1')
             return false
+          // Ein weggeblendetes Element (clip-path/clip auf 1 px) ist keine
+          // Tippfläche, sondern eine Tastaturhilfe — der Sprung zum Inhalt
+          // etwa. Ob es fokussiert gross genug ist, prüft a11y.spec.ts.
+          const clipped =
+            getComputedStyle(el).clipPath === 'inset(50%)' ||
+            getComputedStyle(el).clip === 'rect(0px, 0px, 0px, 0px)'
+          if (clipped && el !== document.activeElement) return false
           return r.width < min || r.height < min
         })
         .map((el) => {

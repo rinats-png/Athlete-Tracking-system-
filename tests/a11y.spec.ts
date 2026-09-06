@@ -107,6 +107,11 @@ test.describe('Für eine Hilfstechnik lesbar', () => {
     // Und er ist erst sichtbar, wenn er den Fokus hat.
     await expect(sprung).toBeVisible()
 
+    // Er ist weggeblendet, bis er den Fokus hat — dann muss er aber eine
+    // Fläche haben, die man auch treffen kann.
+    const box = await sprung.boundingBox()
+    expect(box?.height ?? 0).toBeGreaterThanOrEqual(44)
+
     await page.keyboard.press('Enter')
     expect(new URL(page.url()).hash).toBe('#main')
   })

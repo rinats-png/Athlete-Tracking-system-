@@ -31,7 +31,7 @@ export function AppShell() {
           er erst, wenn er den Fokus hat — für alle anderen ist er nicht da. */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:border focus:border-[var(--line-strong)] focus:bg-plane focus:px-3 focus:py-2 focus:text-[13px]"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:border focus:border-[var(--line-strong)] focus:bg-plane focus:inline-flex focus:min-h-11 focus:items-center focus:px-4 focus:text-[13px]"
       >
         {t('nav.skipToContent')}
       </a>
