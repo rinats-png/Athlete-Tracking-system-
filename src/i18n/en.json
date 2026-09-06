@@ -2024,5 +2024,27 @@
     "swft_index": "The Special Wrestling Fitness Test index, built the same way as the SJFT. Lower is better.",
     "vo2max_ml_kg_min": "Estimated oxygen uptake per kilogram of body weight per minute. From a field test it is estimated by formula, not measured — a laboratory value would differ.",
     "watts_per_kg": "Power per kilogram of body weight. Wherever your own weight is moved, it says more than raw watts."
+  },
+  "onePager": {
+    "title": "One-pager",
+    "intro": "One page to pass on — to parents, to a board, to the next coach. The full report remains alongside it.",
+    "print": "Print one-pager",
+    "for": "For",
+    "date": "As of",
+    "discipline": "Discipline",
+    "by": "Created by",
+    "profile": "Performance profile",
+    "axis": "Axis",
+    "value": "Value",
+    "coverage": "Covered",
+    "measured": "Measured",
+    "rating": "Classification",
+    "change": "Change",
+    "noChange": "First measurement — a change exists from the second one.",
+    "summary": "In short",
+    "summaryLine": "{{measured}} of {{planned}} axes covered. Profile confidence: {{confidence}} %.",
+    "noData": "No measurements exist for this athlete yet.",
+    "disclaimer": "BASELINE is not medical diagnostics. This report makes no diagnosis, gives no therapeutic recommendation and assesses no clinical condition. Reference values are a basis for comparison, not a physiological limit; where no published reference exists, the row says so.",
+    "generated": "Created on {{date}} with BASELINE"
   }
 }

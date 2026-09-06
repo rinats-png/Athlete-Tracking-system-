@@ -123,6 +123,7 @@ const router = createBrowserRouter([
       { path: 'trainer/vergleich', element: screen(() => import('@/features/coach/AthleteCompare'), 'AthleteCompare') },
       { path: 'trainer/gruppenbericht', element: screen(() => import('@/features/coach/GroupReportScreen'), 'GroupReportScreen') },
       { path: 'bericht', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
+      { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
       { path: 'preise', element: screen(() => import('@/features/profile/PricingScreen'), 'PricingScreen') },

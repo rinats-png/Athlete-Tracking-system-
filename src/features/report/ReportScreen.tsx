@@ -140,6 +140,9 @@ export function ReportScreen() {
           <Download size={15} aria-hidden />
           {t('report.csv')}
         </Button>
+        <Button asChild variant="outline" size="md">
+          <Link to="/einseiter">{t('onePager.title')}</Link>
+        </Button>
         <Button variant="primary" size="md" onClick={() => window.print()}>
           <Printer size={15} aria-hidden />
           {t('report.print')}
