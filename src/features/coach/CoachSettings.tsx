@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Archive, ArchiveRestore, Plus, Trash2 } from 'lucide-react'
+import { Archive, ArchiveRestore, Download, Plus, Trash2, Upload } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { formatDate } from '@/lib/format'
+import { downloadFile } from '@/lib/export/csv'
+import type { HandoverOutcome } from '@/lib/store/handover'
 import type { AppLocale } from '@/types/domain'
 
 /**
@@ -24,11 +26,14 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
     activeAthleteId,
     switchAthlete,
     addAthlete,
+    exportAthleteJson,
+    importAthleteJson,
     renameAthlete,
     archiveAthlete,
     deleteAthlete,
   } = useAppData()
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
+  const [handover, setHandover] = useState<HandoverOutcome | null>(null)
 
   return (
     <Panel>
@@ -105,6 +110,25 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
                     </Button>
                   </div>
 
+                  <div className="mt-1 flex flex-wrap items-center gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        const json = exportAthleteJson(athlete.id)
+                        if (json)
+                          downloadFile(
+                            `baseline-athlet-${athlete.id.slice(0, 8)}.json`,
+                            json,
+                            'application/json',
+                          )
+                      }}
+                    >
+                      <Upload size={13} aria-hidden />
+                      {t('coach.handoverExport')}
+                    </Button>
+                  </div>
+
                   <p className="mt-1 text-[11px] text-ink-muted">
                     {t('coach.meta', {
                       results: athlete.results.length,
@@ -142,6 +166,43 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
                 </li>
               ))}
             </ul>
+
+            {/* --- Aufnehmen ------------------------------------------- */}
+            <div className="mt-3 border border-line px-3 py-3">
+              <span className="label-tag">{t('coach.handover')}</span>
+              <p className="mt-1 text-[12px] leading-relaxed text-ink-secondary">
+                {t('coach.handoverHint')}
+              </p>
+              <p className="mt-1 text-[11px] text-ink-muted">{t('coach.handoverAdded')}</p>
+              <label className="mt-2 inline-flex min-h-11 cursor-pointer items-center gap-2 border border-line px-3 text-[13px]">
+                <Download size={13} aria-hidden />
+                {t('coach.handoverImport')}
+                <input
+                  type="file"
+                  accept="application/json,.json"
+                  className="sr-only"
+                  onChange={async (event) => {
+                    const file = event.target.files?.[0]
+                    event.target.value = ''
+                    if (!file) return
+                    const outcome = importAthleteJson(await file.text())
+                    setHandover(outcome)
+                  }}
+                />
+              </label>
+              {handover && (
+                <p className="mt-2 text-[12px] text-ink-secondary">
+                  {handover.ok
+                    ? t('coach.handoverDone', {
+                        name:
+                          athletes.find((a) => a.id === handover.athleteId)?.name ||
+                          t('coach.unnamed'),
+                        results: handover.results,
+                      })
+                    : t(`coach.handoverError.${handover.error ?? 'unknown_format'}`)}
+                </p>
+              )}
+            </div>
 
             <p className="mt-2 text-[12px] leading-relaxed text-ink-muted">
               {t('coach.privacyNote')}

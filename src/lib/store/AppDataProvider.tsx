@@ -3,6 +3,8 @@ import { clearBackup, recoverFromBackup, writeBackup } from './backup'
 import { backupReminder, type BackupReminder } from '@/domain/backupReminder'
 import { buildDemoData } from '@/data/demoSeed'
 import { deriveMetrics, primaryValue } from '@/lib/metrics/derive'
+import { exportAthlete, importAthlete } from '@/lib/store/handover'
+import type { HandoverOutcome } from '@/lib/store/handover'
 import { getTest } from '@/data/testCatalog'
 import { ageFromBirthDate } from '@/lib/format'
 import {
@@ -174,6 +176,10 @@ interface AppDataValue {
   /** Testtage des Geräts. Gehören keinem einzelnen Athleten. */
   testDays: StoredTestDay[]
   saveTestDay: (day: StoredTestDay) => void
+  /** Einen einzelnen Athleten zur Übergabe ausgeben. Null, wenn es ihn nicht gibt. */
+  exportAthleteJson: (athleteId: string) => string | null
+  /** Einen übergebenen Athleten aufnehmen — ergänzend, nie ersetzend. */
+  importAthleteJson: (json: string) => HandoverOutcome
   deleteTestDay: (id: string) => void
   deleteAssessment: (id: string) => void
   resetAll: () => void
@@ -671,6 +677,12 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         // Nur die Planung verschwindet. Die Messwerte des Tages liegen bei den
         // Athleten und bleiben — ein gelöschter Plan darf keine Daten mitnehmen.
         commitStore({ ...current, testDays: current.testDays.filter((d) => d.id !== id) })
+      },
+      exportAthleteJson: (athleteId) => exportAthlete(storeRef.current, athleteId),
+      importAthleteJson: (json) => {
+        const outcome = importAthlete(json, storeRef.current)
+        if (outcome.ok && outcome.data) commitStore(outcome.data)
+        return outcome
       },
       saveAssessment: (assessment) =>
         commitAthlete((current) => upsertAssessment(current, assessment), {

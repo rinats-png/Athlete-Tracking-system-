@@ -831,7 +831,19 @@
     "deleteHint_other": "“{{name}}” will be permanently deleted along with {{count}} measurements. This cannot be undone. To hide someone without losing data, use the archive.",
     "deleteConfirm": "Delete permanently",
     "meta": "{{results}} measurements · {{assessments}} assessments · since {{since}}",
-    "privacyNote": "BASELINE stores only what you enter about a coached athlete. No account, email address or invitation is needed. Everything stays on this device."
+    "privacyNote": "BASELINE stores only what you enter about a coached athlete. No account, email address or invitation is needed. Everything stays on this device.",
+    "handover": "Handover",
+    "handoverHint": "An athlete moves club or coach: their history belongs to them, not to this device. The file contains only this one athlete — without your branding and without the others.",
+    "handoverExport": "Export athlete",
+    "handoverImport": "Take on athlete",
+    "handoverDone": "{{name}} taken on, with {{results}} measurements.",
+    "handoverAdded": "Taking on is additive — existing athletes stay untouched.",
+    "handoverError": {
+      "invalid_json": "The file is not valid JSON.",
+      "unknown_format": "This is not a BASELINE handover file.",
+      "newer_version": "The file comes from a newer version of the app. Update first.",
+      "no_athlete": "The file contains no athlete."
+    }
   },
   "charts": {
     "unavailable": "The chart could not be loaded. The values are fully available in the table view.",

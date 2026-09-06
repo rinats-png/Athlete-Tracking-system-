@@ -831,7 +831,19 @@
     "deleteHint_other": "„{{name}}“ wird mit {{count}} Messungen endgültig gelöscht. Das lässt sich nicht rückgängig machen. Zum Ausblenden ohne Datenverlust gibt es das Archiv.",
     "deleteConfirm": "Endgültig löschen",
     "meta": "{{results}} Messungen · {{assessments}} Diagnostiken · seit {{since}}",
-    "privacyNote": "BASELINE speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät."
+    "privacyNote": "BASELINE speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät.",
+    "handover": "Übergabe",
+    "handoverHint": "Ein Athlet wechselt Verein oder Trainer: seine Historie gehört ihm und nicht diesem Gerät. Die Datei enthält nur diesen einen Athleten — ohne deine Marke und ohne die übrigen.",
+    "handoverExport": "Athlet ausgeben",
+    "handoverImport": "Athlet aufnehmen",
+    "handoverDone": "{{name}} aufgenommen, mit {{results}} Messwerten.",
+    "handoverAdded": "Aufgenommen wird ergänzend — vorhandene Athleten bleiben unverändert.",
+    "handoverError": {
+      "invalid_json": "Die Datei ist keine gültige JSON-Datei.",
+      "unknown_format": "Das ist keine Übergabedatei von BASELINE.",
+      "newer_version": "Die Datei stammt aus einer neueren Fassung der App. Aktualisiere zuerst.",
+      "no_athlete": "In der Datei steht kein Athlet."
+    }
   },
   "charts": {
     "unavailable": "Das Diagramm konnte nicht geladen werden. Die Werte stehen vollständig in der Tabellenansicht.",
