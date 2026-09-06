@@ -10,6 +10,7 @@ import { Timer } from './Timer'
 import { AttemptTable } from './AttemptTable'
 import { StageCounter } from './StageCounter'
 import { ContextFields } from './ContextFields'
+import { ProcedureDetails } from './ProcedurePanel'
 import { aggregateAttempts, attemptContextFor, defaultSelectionFor } from '@/domain/assessment'
 import { hasStageLevel } from '@/domain/testModel'
 import { getTest } from '@/data/testCatalog'
@@ -196,6 +197,8 @@ export function TestRunScreen() {
           <p className="px-4 py-3 text-[14px] leading-relaxed text-ink-secondary">
             {test.instructions[locale]}
           </p>
+
+          <ProcedureDetails test={test} />
 
           {(test.protocol.mode === 'countdown' || test.protocol.mode === 'amrap') &&
             test.protocol.durationSeconds != null && (

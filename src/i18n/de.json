@@ -1879,5 +1879,17 @@
     "save": "Korrektur speichern",
     "cancel": "Abbrechen",
     "saved": "Gespeichert."
+  },
+  "procedure": {
+    "title": "Durchführung",
+    "intro": "Damit zwei Messungen vergleichbar sind, muss das Vorgehen gleich bleiben. Was hier steht, ist keine medizinische Empfehlung.",
+    "prepare": "Vorbereitung",
+    "attempts": "Versuche und Pausen",
+    "valid": "Wann ein Versuch zählt",
+    "abort": "Abbruch",
+    "standardise": "Was gleich bleiben muss",
+    "origin": "Nach: {{origin}}",
+    "genericTag": "allgemein",
+    "genericHint": "Für diesen Test ist noch keine eigene Vorschrift hinterlegt. Was hier steht, folgt aus dem Testmodus und ist allgemeiner als ein geprüftes Protokoll."
   }
 }

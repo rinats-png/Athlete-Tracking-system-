@@ -1879,5 +1879,17 @@
     "save": "Save correction",
     "cancel": "Cancel",
     "saved": "Saved."
+  },
+  "procedure": {
+    "title": "How to perform it",
+    "intro": "Two measurements are only comparable if the procedure stays the same. Nothing here is a medical recommendation.",
+    "prepare": "Preparation",
+    "attempts": "Attempts and rest",
+    "valid": "When an attempt counts",
+    "abort": "Stopping",
+    "standardise": "What has to stay the same",
+    "origin": "Following: {{origin}}",
+    "genericTag": "general",
+    "genericHint": "No dedicated procedure is stored for this test yet. What follows comes from the test mode and is more general than a validated protocol."
   }
 }

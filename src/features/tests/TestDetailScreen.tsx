@@ -13,6 +13,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { describeTest } from '@/domain/testModel'
 import { rateResult } from '@/domain/rating'
 import { EQUIPMENT_BY_ID } from '@/data/equipment'
+import { ProcedurePanel } from './ProcedurePanel'
 import { formatDate, formatDuration, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import type { ReferenceEntry } from '@/data/references'
@@ -109,6 +110,8 @@ export function TestDetailScreen() {
               </div>
             )}
           </Panel>
+
+          <ProcedurePanel test={test} />
 
           <Panel>
             <PanelHeader title={t('testInfo.science')} subtitle={t('testInfo.scienceHint')} />
