@@ -50,6 +50,7 @@ export function TestDayScreen() {
       testSlugs: stations,
       athleteIds: picked,
       stationMinutes,
+      conditions: { surface: '', temperatureC: null, equipment: '' },
       createdAt: new Date().toISOString(),
       completedAt: null,
     })

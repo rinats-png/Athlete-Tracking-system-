@@ -113,6 +113,59 @@ export function TestDayDetailScreen() {
         </div>
       </Panel>
 
+      {/* --- Bedingungen des Tages ------------------------------------- */}
+      <Panel className="mb-4 no-print">
+        <PanelHeader title={t('testDay.conditions')} subtitle={t('testDay.conditionsHint')} />
+        <div className="grid gap-3 px-4 py-3 sm:grid-cols-3">
+          <label className="text-[13px]">
+            <span className="label-tag">{t('testDay.surface')}</span>
+            <input
+              type="text"
+              value={day.conditions.surface}
+              onChange={(e) =>
+                saveTestDay({ ...day, conditions: { ...day.conditions, surface: e.target.value } })
+              }
+              className="mt-1 min-h-11 w-full border border-line bg-transparent px-3 text-[14px]"
+            />
+          </label>
+          <label className="text-[13px]">
+            <span className="label-tag">{t('testDay.temperature')}</span>
+            <input
+              type="number"
+              min={-30}
+              max={55}
+              value={day.conditions.temperatureC ?? ''}
+              onChange={(e) =>
+                saveTestDay({
+                  ...day,
+                  conditions: {
+                    ...day.conditions,
+                    temperatureC: e.target.value === '' ? null : Number(e.target.value),
+                  },
+                })
+              }
+              className="mt-1 min-h-11 w-full border border-line bg-transparent px-3 text-[14px]"
+            />
+          </label>
+          <label className="text-[13px]">
+            <span className="label-tag">{t('testDay.equipmentField')}</span>
+            <input
+              type="text"
+              value={day.conditions.equipment}
+              onChange={(e) =>
+                saveTestDay({ ...day, conditions: { ...day.conditions, equipment: e.target.value } })
+              }
+              className="mt-1 min-h-11 w-full border border-line bg-transparent px-3 text-[14px]"
+            />
+          </label>
+        </div>
+        <p className="border-t border-line px-4 py-2 text-[12px] text-ink-muted">
+          {day.conditions.surface || day.conditions.equipment || day.conditions.temperatureC != null
+            ? t('testDay.conditionsApplied')
+            : t('testDay.conditionsMissing')}
+        </p>
+      </Panel>
+
       {/* --- Stationen mit Fortschritt --------------------------------- */}
       <Panel className="mb-4 no-print">
         <PanelHeader title={t('testDay.stations')} subtitle={t('testDay.sheetsHint')} />

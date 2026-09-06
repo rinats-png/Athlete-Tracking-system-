@@ -160,7 +160,16 @@ interface AppDataValue {
    * Eine Station eines Gruppentests: ein Test, viele Athleten, ein
    * Schreibvorgang. Gibt die Zahl der geschriebenen Ergebnisse zurück.
    */
-  recordForGroup: (testSlug: string, performedAt: string, values: Record<string, number>[]) => number
+  /**
+   * `conditions` gilt für ALLE geschriebenen Werte: an einem Testtag sind
+   * Untergrund, Temperatur und Ausrüstung für jeden dieselben.
+   */
+  recordForGroup: (
+    testSlug: string,
+    performedAt: string,
+    values: Record<string, number>[],
+    conditions?: { surface: string; temperatureC: number | null; equipment: string },
+  ) => number
   saveAssessment: (assessment: StoredAssessment) => void
   /** Testtage des Geräts. Gehören keinem einzelnen Athleten. */
   testDays: StoredTestDay[]
@@ -523,7 +532,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
        * zieht der Zustand nicht nach — die Werte überschrieben einander.
        * Deshalb baut diese Aktion den gesamten Bestand in einem Zug.
        */
-      recordForGroup: (testSlug, performedAt, values) => {
+      recordForGroup: (testSlug, performedAt, values, conditions) => {
         const test = getTest(testSlug)
         if (!test) return 0
         const source = storeRef.current
@@ -557,7 +566,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             assessmentId: null,
             attempts: [],
             attemptSelection: null,
-            context: { ...EMPTY_CONTEXT },
+            context: { ...EMPTY_CONTEXT, ...(conditions ?? {}) },
             notes: undefined,
             photo: null,
             createdAt: new Date().toISOString(),

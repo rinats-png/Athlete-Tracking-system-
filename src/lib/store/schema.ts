@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 14
+export const CURRENT_SCHEMA_VERSION = 15
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -406,6 +406,22 @@ const testDaySchema = z.object({
   athleteIds: z.array(z.string().min(1)).max(60).default([]),
   /** Veranschlagte Minuten je Station und Gruppe. */
   stationMinutes: z.number().int().min(5).max(120).default(20),
+  /**
+   * Die Bedingungen, die für ALLE an diesem Tag gelten.
+   *
+   * Untergrund, Temperatur und Ausrüstung sind an einem Testtag für jeden
+   * dieselben — fünfzehnmal dasselbe einzutippen macht niemand, und deshalb
+   * blieben diese Felder bisher leer. Genau sie entscheiden aber, ob zwei
+   * Messungen vergleichbar sind. Die Tageszeit steht NICHT hier: sie
+   * unterscheidet sich je Station und Runde.
+   */
+  conditions: z
+    .object({
+      surface: z.string().max(60).default(''),
+      temperatureC: finite.min(-30).max(55).nullable().default(null),
+      equipment: z.string().max(80).default(''),
+    })
+    .default(() => ({ surface: '', temperatureC: null, equipment: '' })),
   createdAt: isoDate,
   completedAt: isoDate.nullable().default(null),
 })
@@ -717,6 +733,22 @@ export const MIGRATIONS: Migration[] = [
       // rekonstruieren, ob sie an einem gemeinsamen Testtag entstanden sind.
       // Ein erfundener Testtag würde eine Planung behaupten, die es nie gab.
       testDays: [],
+    }),
+  },
+  {
+    from: 14,
+    to: 15,
+    describe: 'Bedingungen einmal je Testtag statt je Messwert',
+    run: (data) => ({
+      ...data,
+      version: 15,
+      testDays: (data.testDays ?? []).map((day: any) => ({
+        ...day,
+        // Leer: welche Bedingungen an einem vergangenen Testtag herrschten,
+        // weiss niemand mehr. Ein geratener Untergrund wäre schlimmer als
+        // ein leeres Feld, weil er die Vergleichbarkeitsprüfung fütterte.
+        conditions: { surface: '', temperatureC: null, equipment: '' },
+      })),
     }),
   },
 ]

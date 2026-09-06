@@ -1985,7 +1985,15 @@
     "needCoach": "Testtage gibt es im Trainermodus. Im Einzelmodus gibt es nur einen Teilnehmer.",
     "needStations": "Wähle mindestens eine Station.",
     "needParticipants": "Wähle mindestens einen Teilnehmer.",
-    "notFound": "Diesen Testtag gibt es nicht."
+    "notFound": "Diesen Testtag gibt es nicht.",
+    "conditions": "Bedingungen des Tages",
+    "conditionsHint": "Einmal für alle. Untergrund, Temperatur und Ausrüstung sind an einem Testtag für jeden dieselben — und genau sie entscheiden, ob zwei Messungen vergleichbar sind.",
+    "surface": "Untergrund",
+    "temperature": "Temperatur",
+    "equipmentField": "Ausrüstung, Zeitnahme",
+    "conditionsSaved": "Gespeichert.",
+    "conditionsApplied": "Wird auf jede Messung dieses Tages geschrieben.",
+    "conditionsMissing": "Noch nichts eingetragen. Ohne diese Angaben kann die App später nicht sagen, ob zwei Messungen vergleichbar sind."
   },
   "meaning": {
     "title": "Was bedeutet das?",

@@ -1985,7 +1985,15 @@
     "needCoach": "Test days exist in coach mode. In solo mode there is only one participant.",
     "needStations": "Select at least one station.",
     "needParticipants": "Select at least one participant.",
-    "notFound": "This test day does not exist."
+    "notFound": "This test day does not exist.",
+    "conditions": "Conditions of the day",
+    "conditionsHint": "Once for everyone. Surface, temperature and equipment are the same for all on a test day — and they are exactly what decides whether two measurements are comparable.",
+    "surface": "Surface",
+    "temperature": "Temperature",
+    "equipmentField": "Equipment, timing",
+    "conditionsSaved": "Saved.",
+    "conditionsApplied": "Written to every measurement of this day.",
+    "conditionsMissing": "Nothing entered yet. Without it the app cannot later say whether two measurements are comparable."
   },
   "meaning": {
     "title": "What does this mean?",

@@ -29,7 +29,7 @@ import { formatNumber } from '@/lib/format'
 export function GroupTestScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { role, athletes, recordForGroup } = useAppData()
+  const { role, athletes, recordForGroup, testDays } = useAppData()
 
   // Aus dem Testtag heraus stehen Station und Termin schon fest. Wer an der
   // Station steht, soll sie nicht noch einmal aus zwei Listen heraussuchen —
@@ -77,7 +77,11 @@ export function GroupTestScreen() {
       const value = entries[athlete.id]
       return value == null ? {} : { [test.primaryMetric]: value }
     })
-    setWritten(recordForGroup(test.slug, performedAt, values))
+    // Die Bedingungen des Testtags gelten für jeden Wert dieses Tages. Ohne
+    // sie stünde später an jedem Vergleich «Bedingungen unbekannt», obwohl
+    // sie einmal erfasst wurden.
+    const dayPlan = testDays.find((d) => d.plannedOn === day && d.testSlugs.includes(test.slug))
+    setWritten(recordForGroup(test.slug, performedAt, values, dayPlan?.conditions))
   }
 
   return (
