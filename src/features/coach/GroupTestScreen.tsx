@@ -76,8 +76,9 @@ export function GroupTestScreen() {
     // schreibt athletenweise in EINEM Vorgang.
     const values = athletes.map((athlete) => {
       const value = entries[athlete.id]
-      // Ohne Einwilligung wird nicht geschrieben — auch nicht "aus Versehen"
-      // im Zug einer Gruppe, wo es niemandem auffiele.
+      // Bei einem nachweislich minderjaehrigen Athleten ohne Einwilligung
+      // wird nicht geschrieben — auch nicht "aus Versehen" im Zug einer
+      // Gruppe, wo es niemandem auffiele.
       if (!consentStatus(athlete).mayRecord) return {}
       return value == null ? {} : { [test.primaryMetric]: value }
     })

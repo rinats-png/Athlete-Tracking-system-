@@ -133,6 +133,7 @@ export function TestRunScreen() {
   const activeAthlete = athletes.find((a) => a.id === activeAthleteId) ?? null
   const consent = activeAthlete ? consentStatus(activeAthlete) : null
   const consentMissing = role === 'coach' && consent != null && !consent.mayRecord
+  const consentWarn = role === 'coach' && consent != null && consent.warn && consent.mayRecord
   const blocked = hasErrors(issues) || consentMissing
 
   const save = () => {
@@ -351,6 +352,13 @@ export function TestRunScreen() {
             {consentMissing && (
               <p className="mb-2 border-l-2 border-critical bg-critical/10 px-3 py-2 text-[13px] leading-snug text-ink-secondary">
                 {t('consent.blocked', {
+                  name: activeAthlete?.name || activeAthlete?.profile.firstName || '',
+                })}
+              </p>
+            )}
+            {consentWarn && (
+              <p className="mb-2 border-l-2 border-line px-3 py-2 text-[12px] leading-snug text-ink-secondary">
+                {t('consent.warn', {
                   name: activeAthlete?.name || activeAthlete?.profile.firstName || '',
                 })}
               </p>

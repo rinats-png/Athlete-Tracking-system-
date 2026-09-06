@@ -30,10 +30,22 @@ const athlete = (over: Partial<StoredAthlete> = {}, birthDate: string | null = '
   }) as unknown as StoredAthlete
 
 test.describe('Zustand der Einwilligung', () => {
-  test('ohne Eintrag darf nicht gemessen werden', () => {
+  test('ohne Eintrag wird gewarnt — bei Erwachsenen aber nicht gesperrt', () => {
     const status = consentStatus(athlete(), asOf)
     expect(status.state).toBe('missing')
-    expect(status.mayRecord).toBe(false)
+    expect(status.warn).toBe(true)
+    // Ein Riegel fuer jeden Erwachsenen machte den Trainermodus im
+    // Auslieferungszustand unbenutzbar — und eine weggeklickte Einwilligung
+    // ist keine.
+    expect(status.mayRecord).toBe(true)
+  })
+
+  test('bei einer nachweislich minderjährigen Person wird gesperrt', () => {
+    // Hier ist die Anforderung eindeutig, der Schaden am groessten, und die
+    // App weiss genug, um sie durchzusetzen.
+    const minor = consentStatus(athlete({}, '2012-01-01'), asOf)
+    expect(minor.ageYears).toBeLessThan(ADULT_AGE)
+    expect(minor.mayRecord).toBe(false)
   })
 
   test('ohne Geburtsdatum wird vom Schutzbedarf ausgegangen', () => {
@@ -55,7 +67,7 @@ test.describe('Zustand der Einwilligung', () => {
       asOf,
     )
     expect(status.state).toBe('withdrawn')
-    expect(status.mayRecord).toBe(false)
+    expect(status.warn).toBe(true)
   })
 
   test('wer volljährig wird, entscheidet selbst', () => {
@@ -106,6 +118,8 @@ test.describe('Im Bildschirm', () => {
     await page.goto('/profil', { waitUntil: 'domcontentloaded' })
     await page.getByRole('radio', { name: 'Trainer' }).click()
     await page.getByRole('textbox', { name: /^Name von/ }).first().fill('Athlet A')
+    // Nachweislich minderjährig — erst dann sperrt die App.
+    await page.getByLabel(/Geburtsdatum/).first().fill('2012-05-04')
 
     await page.goto('/tests/cooper_12min', { waitUntil: 'domcontentloaded' })
     await page.getByLabel(/^Distanz/).fill('2800')
@@ -114,11 +128,28 @@ test.describe('Im Bildschirm', () => {
     await expect(page.getByRole('button', { name: 'Ergebnis speichern' })).toBeDisabled()
   })
 
+  test('bei einem Erwachsenen ohne Einwilligung steht ein Hinweis statt eines Riegels', async ({
+    page,
+  }) => {
+    await openGuest(page)
+    await page.goto('/profil', { waitUntil: 'domcontentloaded' })
+    await page.getByRole('radio', { name: 'Trainer' }).click()
+    await page.getByRole('textbox', { name: /^Name von/ }).first().fill('Athlet A')
+    await page.getByLabel(/Geburtsdatum/).first().fill('1994-05-04')
+
+    await page.goto('/tests/cooper_12min', { waitUntil: 'domcontentloaded' })
+    await page.getByLabel(/^Distanz/).fill('2800')
+
+    await expect(page.getByText(/noch keine Einwilligung erfasst/)).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Ergebnis speichern' })).toBeEnabled()
+  })
+
   test('nach dem Erfassen der Einwilligung geht es', async ({ page }) => {
     await openGuest(page)
     await page.goto('/profil', { waitUntil: 'domcontentloaded' })
     await page.getByRole('radio', { name: 'Trainer' }).click()
     await page.getByRole('textbox', { name: /^Name von/ }).first().fill('Athlet A')
+    await page.getByLabel(/Geburtsdatum/).first().fill('2012-05-04')
 
     await page.getByLabel(/^Erteilt von/).first().fill('Erziehungsberechtigte')
     await page.getByRole('button', { name: 'Einwilligung erfassen' }).first().click()

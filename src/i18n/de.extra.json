@@ -177,7 +177,8 @@
     "formGuardian": "Name der einwilligenden Person",
     "formRelation": "Verhältnis zur Person (bei Minderjährigen)",
     "formPlaceDate": "Ort, Datum",
-    "formSignature": "Unterschrift"
+    "formSignature": "Unterschrift",
+    "warn": "Für {{name}} ist noch keine Einwilligung erfasst. Messen geht, aber der Nachweis fehlt — bei Minderjährigen sperrt die App die Erfassung."
   },
   "onePager": {
     "title": "Einseiter",

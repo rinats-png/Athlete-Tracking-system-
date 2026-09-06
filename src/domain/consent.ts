@@ -40,8 +40,25 @@ export interface ConsentStatus {
   needsGuardian: boolean
   /** Alter zum Stichtag, sofern das Geburtsdatum bekannt ist. */
   ageYears: number | null
-  /** Ob Messwerte für diese Person erhoben werden dürfen. */
+  /**
+   * Ob Messwerte für diese Person erhoben werden dürfen.
+   *
+   * GESPERRT WIRD NUR BEI EINER NACHWEISLICH MINDERJÄHRIGEN PERSON. Für alle
+   * anderen steht ein Hinweis, aber kein Riegel — und das ist eine bewusste
+   * Abwägung, keine Bequemlichkeit:
+   *
+   * Ein Riegel ohne bekanntes Geburtsdatum träfe jeden neu angelegten
+   * Athleten und machte den Trainermodus im Auslieferungszustand
+   * unbenutzbar. Wer dann messen will, trägt irgendetwas ein, um
+   * weiterzukommen — und eine weggeklickte Einwilligung ist keine.
+   *
+   * Beim bekannten Minderjährigen liegt der Fall anders: dort ist die
+   * Anforderung eindeutig, der Schaden am grössten, und die App weiss
+   * genug, um sie durchzusetzen.
+   */
   mayRecord: boolean
+  /** Ob eine Einwilligung fehlt oder zurückgezogen ist — auch ohne Sperre. */
+  warn: boolean
 }
 
 export function consentStatus(athlete: StoredAthlete, asOf: Date = new Date()): ConsentStatus {
@@ -52,18 +69,21 @@ export function consentStatus(athlete: StoredAthlete, asOf: Date = new Date()): 
   const needsGuardian = ageYears == null || ageYears < ADULT_AGE
   const consent = athlete.consent
 
+  // Nachweislich minderjährig: Geburtsdatum bekannt UND darunter.
+  const knownMinor = ageYears != null && ageYears < ADULT_AGE
+
   if (consent.withdrawnAt) {
-    return { state: 'withdrawn', needsGuardian, ageYears, mayRecord: false }
+    return { state: 'withdrawn', needsGuardian, ageYears, mayRecord: !knownMinor, warn: true }
   }
   if (!consent.grantedAt) {
-    return { state: 'missing', needsGuardian, ageYears, mayRecord: false }
+    return { state: 'missing', needsGuardian, ageYears, mayRecord: !knownMinor, warn: true }
   }
   // Wer als Minderjähriger eingewilligt bekam und inzwischen volljährig ist,
   // entscheidet selbst. Die alte Einwilligung trägt das nicht weiter.
   if (consent.forMinor && ageYears != null && ageYears >= ADULT_AGE) {
-    return { state: 'outgrown', needsGuardian: false, ageYears, mayRecord: true }
+    return { state: 'outgrown', needsGuardian: false, ageYears, mayRecord: true, warn: true }
   }
-  return { state: 'granted', needsGuardian, ageYears, mayRecord: true }
+  return { state: 'granted', needsGuardian, ageYears, mayRecord: true, warn: false }
 }
 
 /** Athleten, bei denen etwas zu tun ist. Für die Trainerübersicht. */

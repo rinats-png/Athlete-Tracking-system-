@@ -177,7 +177,8 @@
     "formGuardian": "Name of the consenting person",
     "formRelation": "Relationship to the person (for minors)",
     "formPlaceDate": "Place, date",
-    "formSignature": "Signature"
+    "formSignature": "Signature",
+    "warn": "No consent is on file for {{name}} yet. Measuring works, but the record is missing — for minors the app blocks recording."
   },
   "onePager": {
     "title": "One-pager",
