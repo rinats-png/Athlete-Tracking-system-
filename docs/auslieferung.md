@@ -15,9 +15,10 @@ Danach baut jeder Push den Stand neu.
 
 ## Weg 2 — Paket von Hand hochladen
 
-`baseline-netlify.zip` entpacken und den Inhalt auf
-**Netlify → Deploys → Drag and drop** ziehen. Das Paket enthält den fertigen
-Build; es wird nichts kompiliert.
+`baseline-netlify.zip` auf **Netlify → Deploys → Drag and drop** ziehen —
+die ZIP-Datei selbst, Netlify packt sie aus. Wer lieber einen Ordner zieht,
+entpackt sie vorher und zieht den entstandenen Ordner. Das Paket enthält den
+fertigen Build; es wird nichts kompiliert.
 
 Die Sicherheits- und Cache-Regeln liegen bewusst in `_headers` **im Paket**
 und nicht nur in `netlify.toml`: beim Drag-and-drop-Deploy wird die
@@ -32,6 +33,7 @@ und nicht nur in `netlify.toml`: beim Drag-and-drop-Deploy wird die
 | Fremde Verbindungen | genau eine — das Supabase-Projekt, namentlich in der CSP |
 | Schriften und Bilder | im Paket, keine Fremdabrufe zur Laufzeit |
 | Offlinebetrieb | Service Worker mit Vorabspeicher |
+| Sprachen | acht; Deutsch im Startpaket, die übrigen sieben als eigene Pakete |
 
 ## Was VOR dem öffentlichen Betrieb noch fehlt
 
@@ -57,5 +59,6 @@ Nach dem Deploy diese vier Dinge ansehen:
 - Im Browser die Entwicklerwerkzeuge öffnen, Netzwerk ansehen: ausser dem
   eigenen Host und Supabase darf nichts erscheinen.
 - Die App einmal offline neu laden — sie muss stehen.
-- Sprache auf Englisch stellen: die Texte müssen nachladen, nicht als
-  Schlüssel erscheinen.
+- Im Profil eine andere Sprache wählen — etwa Svenska: Navigation UND
+  Testnamen müssen umschalten. Bleiben die Testnamen deutsch, ist die
+  Inhaltstabelle nicht mitgekommen.
