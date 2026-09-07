@@ -129,7 +129,7 @@ export function TestDetailScreen() {
                     <a
                       href={`https://doi.org/${gap.source.doi}`}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noreferrer noopener"
                       className="underline underline-offset-2"
                     >
                       doi:{gap.source.doi}
@@ -163,7 +163,7 @@ export function TestDetailScreen() {
                     <a
                       href={`https://clinicaltrials.gov/study/${entry.nct}`}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noreferrer noopener"
                       className="mt-1.5 inline-flex min-h-11 items-center text-[12px] underline underline-offset-2"
                     >
                       {entry.nct} · {t('evidence.open')}

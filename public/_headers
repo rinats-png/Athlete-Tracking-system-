@@ -15,6 +15,12 @@
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()
   # HTTPS erzwingen, inklusive Subdomains.
   Strict-Transport-Security: max-age=31536000; includeSubDomains
+  # Ein von hier geoeffnetes Fenster bekommt keinen Griff auf dieses zurueck.
+  # Betrifft auch das Umgekehrte: eine fremde Seite, die uns oeffnet, teilt
+  # sich keine Browsergruppe mehr mit uns.
+  Cross-Origin-Opener-Policy: same-origin
+  # Unsere Dateien duerfen nicht von fremden Seiten eingebunden werden.
+  Cross-Origin-Resource-Policy: same-origin
   # Content Security Policy. Die App lädt zur Laufzeit nichts von Dritten:
   # Schriften sind lokal gebündelt, Bilder liegen im Bundle.
   #
@@ -25,7 +31,7 @@
   # sie still ab.
   # 'unsafe-inline' bei style-src ist nötig, weil die Diagramme Stile inline
   # setzen; Skripte laufen ohne diese Ausnahme.
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://bsbionvnsvqghaqijmpl.supabase.co wss://bsbionvnsvqghaqijmpl.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://bsbionvnsvqghaqijmpl.supabase.co wss://bsbionvnsvqghaqijmpl.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate

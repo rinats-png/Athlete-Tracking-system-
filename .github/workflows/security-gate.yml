@@ -1,0 +1,85 @@
+# Das Sicherheitstor vor der Auslieferung.
+#
+# Die Reihenfolge ist nicht beliebig: sie geht von billig nach teuer, damit
+# ein Tippfehler nicht erst nach acht Minuten Browsertests auffällt. Und sie
+# bricht ab, statt zu warnen — ein Tor, das man durchgehen kann, ist ein
+# Schild.
+#
+# WAS HIER NICHT STEHT: ein automatisches Deployment. Die App wird von Hand
+# als Paket zu Netlify gebracht (docs/auslieferung.md). Dieses Tor entscheidet
+# deshalb nicht ÜBER die Auslieferung, sondern sagt, ob das Paket eines sein
+# darf. Wer das Paket ohne grünen Lauf hochlädt, umgeht kein System, sondern
+# eine Zusage — das ist ausdrücklich so dokumentiert und nicht versehentlich.
+name: Security Gate
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  # Abhängigkeiten altern ohne Zutun: eine Lücke entsteht auch in einer Woche
+  # ohne einen einzigen Commit.
+  schedule:
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        # `npm ci` und nicht `npm install`: es hält sich strikt an die
+        # Sperrdatei. `npm install` dürfte auflösen, was es für passend hält —
+        # dann prüft die Pipeline eine andere Zusammenstellung als die, die
+        # ausgeliefert wird.
+        run: npm ci
+
+      - name: Typprüfung
+        run: npx tsc -b --noEmit
+
+      - name: Sprachdateien vollständig
+        run: |
+          for lang in en fr es sv da nb nl; do
+            node scripts/checkLocale.mjs "$lang"
+          done
+
+      - name: Zugriffsregeln der Datenbank
+        run: node scripts/auditPolicies.mjs
+
+      - name: Bekannte Schwachstellen in Abhängigkeiten
+        # `--audit-level=high` bricht bei hoch und kritisch ab. Moderate und
+        # niedrige Befunde erscheinen im Protokoll, halten aber nicht auf:
+        # sonst steht die Pipeline wochenlang wegen eines Werkzeugs, das nie
+        # in den Browser gelangt, und dann schaltet sie jemand ab.
+        run: npm audit --audit-level=high
+
+      - name: Paket bauen
+        run: npm run build
+
+      - name: Zugangsdaten im Quelltext und im Paket
+        # Nach dem Bau, nicht davor: ein Schlüssel, der über eine
+        # Umgebungsvariable ins Bündel gelangt, steht im Quelltext nirgends.
+        run: node scripts/scanSecrets.mjs
+
+      - name: Browser bereitstellen
+        run: npx playwright install --with-deps chromium
+
+      - name: Tests
+        run: npx playwright test --project=desktop --project=phone
+
+      - name: Prüfbericht bei Fehlschlag sichern
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
