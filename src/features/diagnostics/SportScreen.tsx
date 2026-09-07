@@ -24,6 +24,7 @@ import { rateResult } from '@/domain/rating'
 import { radarProfile } from '@/lib/scoring'
 import { formatDate } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Sport-Detailseite (Konzept §9): aktueller Stand, empfohlene Tests,
@@ -106,8 +107,8 @@ export function SportScreen() {
       </div>
       <ScreenHeader
         eyebrow={isMain ? t('sport.isMain') : t('sport.isAdditional')}
-        title={sport.name[locale]}
-        intro={rationaleFor(sport.id)?.[locale] ?? ''}
+        title={pick(sport.name, locale)}
+        intro={pick(rationaleFor(sport.id), locale) ?? ''}
         action={
           !isMain && (
             <Button
@@ -144,7 +145,7 @@ export function SportScreen() {
                   <li key={result.id}>
                     <Link to={`/ergebnis/${result.id}`} className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-accent-quiet">
                       <span className="min-w-0">
-                        <span className="block truncate text-[14px] font-medium">{test.name[locale]}</span>
+                        <span className="block truncate text-[14px] font-medium">{pick(test.name, locale)}</span>
                         <span className="block text-[11px] text-ink-muted">{formatDate(result.performedAt, locale)}</span>
                       </span>
                       <span className="flex shrink-0 items-center gap-3">
@@ -161,8 +162,8 @@ export function SportScreen() {
         </Panel>
 
         <Panel>
-          <PanelHeader title={t('sport.profileTitle', { sport: sport.name[locale] })} subtitle={t('overview.profileHint')} />
-          <RadarProfile axes={axes} mode="population" locale={locale} disciplineWeights={sport.dimensionWeights} disciplineLabel={sport.name[locale]} />
+          <PanelHeader title={t('sport.profileTitle', { sport: pick(sport.name, locale) })} subtitle={t('overview.profileHint')} />
+          <RadarProfile axes={axes} mode="population" locale={locale} disciplineWeights={sport.dimensionWeights} disciplineLabel={pick(sport.name, locale)} />
         </Panel>
       </div>
 
@@ -185,7 +186,7 @@ export function SportScreen() {
 
       <section className="mt-6">
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="label-tag">{t('sport.allTests', { sport: sport.name[locale] })}</h2>
+          <h2 className="label-tag">{t('sport.allTests', { sport: pick(sport.name, locale) })}</h2>
           <div className="max-w-full overflow-x-auto">
             <SegmentedControl<SportFilter>
               label={t('sport.filter')}
@@ -211,13 +212,13 @@ export function SportScreen() {
 
       {batteries.length > 0 && (
         <section className="mt-6">
-          <h2 className="label-tag mb-2">{t('sport.batteries', { sport: sport.name[locale] })}</h2>
+          <h2 className="label-tag mb-2">{t('sport.batteries', { sport: pick(sport.name, locale) })}</h2>
           <ul className="grid gap-2 sm:grid-cols-2">
             {batteries.map((battery) => (
               <li key={battery.slug}>
                 <Link to={`/batterie/${encodeURIComponent(battery.slug)}`} className="panel flex items-center justify-between gap-3 px-4 py-3 hover:bg-accent-quiet">
                   <span className="min-w-0">
-                    <span className="block text-[14px] font-medium">{battery.name[locale]}</span>
+                    <span className="block text-[14px] font-medium">{pick(battery.name, locale)}</span>
                     <span className="block text-[11px] text-ink-muted">
                       {t('diag.testCount', { count: battery.testSlugs.length })} · {battery.durationMinutes} min
                     </span>

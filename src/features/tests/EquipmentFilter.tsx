@@ -4,6 +4,7 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { EQUIPMENT, type EquipmentId } from '@/data/equipment'
 import type { AppLocale } from '@/types/domain'
+import { pick } from '@/i18n/pick'
 
 const STORAGE_KEY = 'baseline.equipment'
 
@@ -87,7 +88,7 @@ export function EquipmentFilter({ owned, onChange, locale }: EquipmentFilterProp
                       checked={owned.has(item.id)}
                       onChange={() => toggle(item.id)}
                     />
-                    <span className="min-w-0">{item.name[locale]}</span>
+                    <span className="min-w-0">{pick(item.name, locale)}</span>
                   </label>
                 </li>
               ))}

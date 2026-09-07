@@ -4,9 +4,11 @@ import { useLocale } from './useLocale'
 import { ratingFromBand, ratingFromPercentile } from '@/domain/rating'
 import { formatNumber } from '@/lib/format'
 import type { ReferenceComparison } from '@/data/references'
+import type { AppLocale } from '@/i18n/locales'
+import { pick } from '@/i18n/pick'
 
 /** Perzentile über 99 werden nicht als «100» gezeigt: das Perzentil ist geklemmt, nicht gemessen. */
-export function percentileLabel(percentile: number, locale: 'de' | 'en'): string {
+export function percentileLabel(percentile: number, locale: AppLocale): string {
   return percentile >= 99.5 ? '>99' : formatNumber(percentile, locale, 0)
 }
 
@@ -22,7 +24,7 @@ export function BenchmarkRow({ comparison }: { comparison: ReferenceComparison }
         ? t('result.percentileTop')
         : t('result.percentile', { percentile: percentileLabel(comparison.percentile, locale) })
       : comparison.band
-        ? comparison.band.label[locale]
+        ? pick(comparison.band.label, locale)
         : comparison.percentFromMedian != null
           ? t('result.percentFromMedian', {
               percent: `${comparison.percentFromMedian > 0 ? '+' : ''}${formatNumber(comparison.percentFromMedian, locale, 0)}`,
@@ -34,7 +36,7 @@ export function BenchmarkRow({ comparison }: { comparison: ReferenceComparison }
     <li className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-2.5">
       <span className="min-w-0">
         <span className="label-tag">{t(`result.groups.${entry.cohort}`)}</span>
-        <span className="block text-[13px]">{entry.cohortLabel[locale]}</span>
+        <span className="block text-[13px]">{pick(entry.cohortLabel, locale)}</span>
         <span className="block text-[11px] text-ink-muted">
           {t('result.quality', { quality: entry.quality })} · {entry.source.study}
         </span>

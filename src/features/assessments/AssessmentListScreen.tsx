@@ -7,7 +7,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { assessmentProgress, resultsForAssessment } from '@/domain/assessment'
 import { formatDate } from '@/lib/format'
-import type { AppLocale } from '@/types/domain'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Übersicht aller Diagnostiken.
@@ -17,8 +17,8 @@ import type { AppLocale } from '@/types/domain'
  * beides steht mit einer Datumsliste sofort da.
  */
 export function AssessmentListScreen() {
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { data } = useAppData()
 
   const assessments = [...data.assessments].sort((a, b) =>

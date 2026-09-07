@@ -10,6 +10,7 @@ import { formatResultValue } from '@/lib/resultView'
 import type { Rating } from '@/domain/rating'
 import type { TestDefinition } from '@/data/testCatalog'
 import type { StoredResult } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /**
  * Was die nächste Stufe verlangt.
@@ -92,7 +93,7 @@ export function ShareLine({
 
   const line = [
     formatDate(result.performedAt, locale),
-    test.name[locale],
+    pick(test.name, locale),
     formatResultValue(result, locale),
     rating.level ? t(`rating.levels.${rating.level}`) : null,
   ]

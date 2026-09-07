@@ -4,6 +4,8 @@ import { BATTERY_BY_SLUG, disciplineBattery } from '@/data/testBatteries'
 import { getTest } from '@/data/testCatalog'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import type { PerformanceDimension } from '@/types/domain'
+import type { AppLocale } from '@/i18n/locales'
+import { pick } from '@/i18n/pick'
 
 /**
  * Diagnostik als Vorgang, nicht als Sammlung von Einzelwerten.
@@ -79,7 +81,7 @@ export function missingDimensions(results: StoredResult[]): PerformanceDimension
 export function defaultAssessmentTitle(
   batterySlug: string | null,
   performedOn: string,
-  locale: 'de' | 'en',
+  locale: AppLocale,
 ): string {
   // Disziplinbatterien stehen nicht in der Liste der festen Batterien —
   // sie entstehen aus dem Profil. Ohne diesen Zweig hiesse ein solcher
@@ -88,10 +90,10 @@ export function defaultAssessmentTitle(
     ? (BATTERY_BY_SLUG.get(batterySlug) ?? disciplineBattery(batterySlug.replace(/^discipline:/, '')))
     : undefined
   const date = new Date(`${performedOn}T12:00:00`).toLocaleDateString(
-    locale === 'en' ? 'en-GB' : 'de-DE',
+    locale,
     { month: 'short', year: 'numeric' },
   )
-  return battery ? `${battery.name[locale]} · ${date}` : date
+  return battery ? `${pick(battery.name, locale)} · ${date}` : date
 }
 
 // --- Mehrfachversuche --------------------------------------------------------

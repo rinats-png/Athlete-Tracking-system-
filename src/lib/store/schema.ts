@@ -23,7 +23,7 @@ export const CURRENT_SCHEMA_VERSION = 19
 // --- Bausteine ---------------------------------------------------------------
 
 const sexSchema = z.enum(['male', 'female', 'other'])
-const localeSchema = z.enum(['de', 'en'])
+const localeSchema = z.enum(['de', 'en', 'fr', 'es', 'sv', 'da', 'nb', 'nl'])
 const unitSystemSchema = z.enum(['metric', 'imperial'])
 
 /** Endliche Zahl. Verhindert NaN und Infinity aus manipulierten Dateien. */

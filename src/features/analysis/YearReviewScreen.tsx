@@ -16,6 +16,7 @@ import { performanceScore } from '@/domain/performanceScore'
 import { yearReview } from '@/domain/yearReview'
 import { CARD_HEIGHT, CARD_WIDTH, drawPerformanceCard } from '@/lib/performanceCard'
 import { formatNumber } from '@/lib/format'
+import { pick } from '@/i18n/pick'
 
 /**
  * Der Jahresrückblick und die Karte zum Weitergeben.
@@ -62,18 +63,18 @@ export function YearReviewScreen() {
     const gain = review.biggestGain
     const sentence = gain
       ? t('year.cardSentenceGain', {
-          test: getTest(gain.testSlug)?.shortName[locale] ?? gain.testSlug,
+          test: pick(getTest(gain.testSlug)?.shortName, locale) ?? gain.testSlug,
           percent: formatNumber(gain.changePercent, locale, 1),
         })
       : t('year.cardSentenceNone')
     drawPerformanceCard(canvas, {
-      title: sport?.name[locale] ?? t('year.generalProfile'),
+      title: pick(sport?.name, locale) ?? t('year.generalProfile'),
       subtitle: String(review.year),
       score: score.value,
       coverage: t('score.coverage', { rated: score.ratedAxes, total: score.totalAxes }),
       axes: axes.map((axis) => ({ label: axisLabel(axis.axisId, t, locale), score: axis.score })),
       changes: review.changes.slice(0, 6).map((change) => ({
-        label: getTest(change.testSlug)?.shortName[locale] ?? change.testSlug,
+        label: pick(getTest(change.testSlug)?.shortName, locale) ?? change.testSlug,
         percent: change.changePercent,
         proven: change.proven === true,
       })),
@@ -157,7 +158,7 @@ export function YearReviewScreen() {
             {review.biggestGain ? (
               <p className="text-good">
                 {t('year.gain', {
-                  test: getTest(review.biggestGain.testSlug)?.name[locale],
+                  test: pick(getTest(review.biggestGain.testSlug)?.name, locale),
                   percent: formatNumber(review.biggestGain.changePercent, locale, 1),
                 })}
               </p>
@@ -167,7 +168,7 @@ export function YearReviewScreen() {
             {review.biggestDrop && (
               <p className="mt-2 text-critical">
                 {t('year.drop', {
-                  test: getTest(review.biggestDrop.testSlug)?.name[locale],
+                  test: pick(getTest(review.biggestDrop.testSlug)?.name, locale),
                   percent: formatNumber(Math.abs(review.biggestDrop.changePercent), locale, 1),
                 })}
               </p>

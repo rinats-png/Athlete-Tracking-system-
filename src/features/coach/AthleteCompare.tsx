@@ -14,6 +14,7 @@ import type { TestComparison } from '@/domain/groupCompare'
 import { axisById } from '@/data/profileAxes'
 import { formatDate, formatMeasurement } from '@/lib/format'
 import type { AppLocale } from '@/types/domain'
+import { pick } from '@/i18n/pick'
 
 /**
  * Athleten nebeneinander (§37, §38).
@@ -123,7 +124,7 @@ export function AthleteCompare() {
                 <tbody>
                   {axes.map((axis) => (
                     <tr key={axis.axisId} className="border-b border-line/60">
-                      <td className="px-3 py-2">{axisById(axis.axisId)?.name[locale] ?? axis.axisId}</td>
+                      <td className="px-3 py-2">{pick(axisById(axis.axisId)?.name, locale) ?? axis.axisId}</td>
                       {axis.scores.map((s) => (
                         <td key={s.athleteId} className="px-3 py-2">
                           {s.score == null ? (
@@ -163,7 +164,7 @@ function TestBlock({ comparison, locale }: { comparison: TestComparison; locale:
   return (
     <Panel>
       <PanelHeader
-        title={test.name[locale]}
+        title={pick(test.name, locale)}
         subtitle={t('compare.coverage', {
           covered: comparison.covered,
           selected: comparison.selected,

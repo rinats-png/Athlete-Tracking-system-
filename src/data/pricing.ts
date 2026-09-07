@@ -1,3 +1,4 @@
+import type { AppLocale } from '@/i18n/locales'
 /**
  * Was BASELINE kostet.
  *
@@ -199,7 +200,7 @@ export const ENQUIRY_EMAIL = 'preise@baseline.app'
  * schlimmere Lösung. Der Text wird kopiert oder in die eigene Mail eingefügt —
  * damit sieht der Absender vorher, was er über sich preisgibt.
  */
-export function buildEnquiryText(draft: EnquiryDraft, locale: 'de' | 'en'): string {
+export function buildEnquiryText(draft: EnquiryDraft, locale: AppLocale): string {
   const profile = INSTITUTION_PROFILES.find((p) => p.track === draft.track)!
   const lines =
     locale === 'de'

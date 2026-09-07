@@ -5,7 +5,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { CoachDashboard } from './CoachDashboard'
 import { CoachSignals } from './CoachSignals'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import type { AppLocale } from '@/types/domain'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Trainerbereich.
@@ -14,8 +14,8 @@ import type { AppLocale } from '@/types/domain'
  * mit genau einer Zeile — die Dashboard-Ansicht sagt dasselbe besser.
  */
 export function CoachScreen() {
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { role } = useAppData()
 
   return (

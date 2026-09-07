@@ -13,6 +13,7 @@ import {
 import { useLocale } from '@/features/shared/useLocale'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Anforderungslücke als Fläche.
@@ -93,7 +94,7 @@ function LeverRow({ row, rank }: { row: RequirementRow; rank: number }) {
   const locale = useLocale()
   const requirementPercent = Math.round((row.requirement ?? 0) * 100)
   const score = Math.round(row.score ?? 0)
-  const meaning = axisById(row.axisId)?.meaning[locale]
+  const meaning = pick(axisById(row.axisId)?.meaning, locale)
 
   return (
     <li className="px-4 py-3">

@@ -21,7 +21,8 @@ import { ageFromBirthDate, formatNumber } from '@/lib/format'
 import { formulaFor } from '@/domain/formulaRegistry'
 import { hasErrors, issuesFor, validateTestInput } from '@/domain/validation'
 import type { AttemptSelection, ValidatedContext } from '@/lib/store/schema'
-import type { AppLocale } from '@/types/domain'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Geführte Testdurchführung.
@@ -33,8 +34,8 @@ import type { AppLocale } from '@/types/domain'
  */
 export function TestRunScreen() {
   const { slug = '' } = useParams()
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const navigate = useNavigate()
   const { data, recordResult, bodyWeightAt, role, athletes, activeAthleteId } = useAppData()
   const [searchParams] = useSearchParams()
@@ -193,18 +194,18 @@ export function TestRunScreen() {
       <header className="mb-4">
         <span className="label-tag">{t(`dimensions.${test.dimension}`)}</span>
         <h1 className="mt-1 font-display text-[28px] leading-tight font-bold sm:text-[34px]">
-          {test.name[locale]}
+          {pick(test.name, locale)}
         </h1>
         <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed text-ink-secondary">
-          {test.summary[locale]}
+          {pick(test.summary, locale)}
         </p>
       </header>
 
       <div className="grid gap-4 lg:grid-cols-5">
         <Panel className="lg:col-span-3">
-          <PanelHeader title={t('tests.protocol')} subtitle={test.equipment[locale]} />
+          <PanelHeader title={t('tests.protocol')} subtitle={pick(test.equipment, locale)} />
           <p className="px-4 py-3 text-[14px] leading-relaxed text-ink-secondary">
-            {test.instructions[locale]}
+            {pick(test.instructions, locale)}
           </p>
 
           <ProcedureDetails test={test} />

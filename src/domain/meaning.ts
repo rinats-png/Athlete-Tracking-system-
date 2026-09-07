@@ -5,6 +5,8 @@ import { nextTests } from '@/domain/nextTest'
 import type { NextTestInput } from '@/domain/nextTest'
 import type { Rating } from '@/domain/rating'
 import type { StoredResult } from '@/lib/store/localStore'
+import type { AppLocale } from '@/i18n/locales'
+import { pick } from '@/i18n/pick'
 
 /**
  * Was ein Messwert bedeutet — in Sätzen statt in Fachbegriffen.
@@ -44,7 +46,7 @@ export interface MeaningInput {
   rating: Rating
   /** Alle Ergebnisse dieses Athleten — für Streuung und nächsten Test. */
   results: StoredResult[]
-  locale: 'de' | 'en'
+  locale: AppLocale
   nextInput: NextTestInput
 }
 
@@ -73,13 +75,13 @@ export function meaningLines(input: MeaningInput): MeaningLine[] {
       params: {
         below: ofHundred(primary.percentile),
         above: 100 - ofHundred(primary.percentile),
-        group: primary.entry.cohortLabel[locale],
+        group: pick(primary.entry.cohortLabel, locale),
       },
     })
   } else if (primary?.band) {
     lines.push({
       key: 'band',
-      params: { band: primary.band.label[locale], group: primary.entry.cohortLabel[locale] },
+      params: { band: pick(primary.band.label, locale), group: pick(primary.entry.cohortLabel, locale) },
     })
   } else {
     // Keine Referenz ist auch eine Auskunft — und die häufigste.
@@ -116,7 +118,7 @@ export function meaningLines(input: MeaningInput): MeaningLine[] {
   const { procedure, source } = procedureFor(test)
   const limit = procedure.standardise[0]
   if (limit) {
-    lines.push({ key: source === 'specific' ? 'limit' : 'limitGeneric', text: limit[locale] })
+    lines.push({ key: source === 'specific' ? 'limit' : 'limitGeneric', text: pick(limit, locale) })
   }
 
   // --- 4. Was als Nächstes zu messen ist -----------------------------------
@@ -125,7 +127,7 @@ export function meaningLines(input: MeaningInput): MeaningLine[] {
   if (next && nextTest) {
     lines.push({
       key: 'next',
-      params: { test: nextTest.name[locale] },
+      params: { test: pick(nextTest.name, locale) },
       to: `/tests/${next.slug}`,
     })
   }

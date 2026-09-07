@@ -3,6 +3,7 @@ import { deltaPercent, isPersonalBest } from '@/lib/scoring'
 import { formatMeasurement, type UnitSystem } from '@/lib/format'
 import type { AppLocale, TestSummary } from '@/types/domain'
 import type { StoredResult } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /** Kurzformen der abgeleiteten Metriken für die Ergebnisliste. */
 const METRIC_UNITS: Record<string, string> = {
@@ -35,7 +36,7 @@ export function toSummaries(results: StoredResult[], locale: AppLocale): TestSum
       return {
         id: result.id,
         slug: test.slug,
-        name: test.name[locale],
+        name: pick(test.name, locale),
         category: test.category,
         dimension: test.dimension,
         performedAt: result.performedAt,

@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { AxisFinding, InsightReport, Recommendation } from '@/domain/insights'
 import type { AppLocale } from '@/types/domain'
+import { pick } from '@/i18n/pick'
 
 /**
  * Hinweise aus dem Profil.
@@ -152,7 +153,7 @@ function RecommendationRow({
         {t(`insights.recommendation.${recommendation.kind}`, {
           ...recommendation.values,
           dimension: dimensionName,
-          test: suggested[0]?.name[locale] ?? '',
+          test: pick(suggested[0]?.name, locale) ?? '',
         })}
       </p>
       <p className="mt-1 text-[12px] text-ink-muted">
@@ -178,7 +179,7 @@ function RecommendationRow({
           <p className="mt-1 text-[12px] text-ink-muted">
             {t('emphasis.verifyWith', {
               tests: recommendation.emphasis.verifyWith
-                .map((slug) => getTest(slug)?.shortName[locale] ?? slug)
+                .map((slug) => pick(getTest(slug)?.shortName, locale) ?? slug)
                 .join(', '),
             })}
           </p>
@@ -197,7 +198,7 @@ function RecommendationRow({
                 to={`/tests/${test.slug}`}
                 className="inline-flex min-h-11 items-center gap-1 border border-line px-2.5 text-[12px] transition-colors hover:bg-surface-sunken"
               >
-                {test.name[locale]}
+                {pick(test.name, locale)}
                 <ChevronRight size={12} aria-hidden />
               </Link>
             </li>

@@ -25,6 +25,7 @@ import { nextTests } from '@/domain/nextTest'
 import { rateResult, ratingFromPercentile } from '@/domain/rating'
 import { formatNumber } from '@/lib/format'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Analyse (Konzept §19–§20): Stärken, Potenzial, die Empfehlung mit
@@ -140,7 +141,7 @@ export function AnalysisHome() {
           <PanelHeader title={t('analysisHome.recommendation')} />
           {suggestion && suggestedTest ? (
             <div className="px-4 py-3">
-              <p className="font-display text-[22px] leading-none font-bold">{suggestedTest.name[locale]}</p>
+              <p className="font-display text-[22px] leading-none font-bold">{pick(suggestedTest.name, locale)}</p>
               <p className="mt-2 text-[12px] leading-relaxed text-ink-secondary">
                 <span className="label-tag mr-1.5">{t('analysisHome.reasonLabel')}</span>
                 {suggestion.reasons.slice(0, 3).map((r) => t(`overview.reasons.${r}`)).join(' ')}
@@ -160,7 +161,7 @@ export function AnalysisHome() {
 
       <section className="mt-4 grid gap-4 lg:grid-cols-2">
         {sports.map((sport) => (
-          <SportProfilePanel key={sport.id} sportId={sport.id} name={sport.name[locale]} />
+          <SportProfilePanel key={sport.id} sportId={sport.id} name={pick(sport.name, locale)} />
         ))}
       </section>
 
@@ -180,7 +181,7 @@ export function AnalysisHome() {
               >
                 {measuredSlugs.map((slug) => (
                   <option key={slug} value={slug}>
-                    {getTest(slug)!.name[locale]}
+                    {pick(getTest(slug)!.name, locale)}
                   </option>
                 ))}
               </select>

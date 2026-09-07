@@ -13,6 +13,7 @@ import { getTest } from '@/data/testCatalog'
 import { DEFAULT_RETEST_DAYS } from '@/domain/nextTest'
 import { formatDate } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
+import { pick } from '@/i18n/pick'
 
 /**
  * Eine Testbatterie (Konzept §10) als Checkliste.
@@ -57,7 +58,7 @@ export function BatteryScreen() {
     const today = new Date().toISOString().slice(0, 10)
     saveAssessment({
       id,
-      title: battery.name[locale],
+      title: pick(battery.name, locale),
       batterySlug: battery.slug,
       performedOn: today,
       status: 'in_progress',
@@ -78,7 +79,7 @@ export function BatteryScreen() {
           {t('diag.eyebrow')}
         </Link>
       </Button>
-      <ScreenHeader eyebrow={t('battery.eyebrow')} title={battery.name[locale]} intro={battery.description?.[locale] ?? rationaleFor(battery.slug.replace(/^discipline:/, ''))?.[locale] ?? ''} />
+      <ScreenHeader eyebrow={t('battery.eyebrow')} title={pick(battery.name, locale)} intro={pick(battery.description, locale) ?? pick(rationaleFor(battery.slug.replace(/^discipline:/, '')), locale) ?? ''} />
 
       <Panel ticked className="max-w-2xl">
         <PanelHeader
@@ -101,7 +102,7 @@ export function BatteryScreen() {
                 )}
                 <span className="min-w-0 flex-1">
                   <Link to={`/tests/${testSlug}/details`} className="block truncate text-[14px] font-medium hover:underline">
-                    {test.name[locale]}
+                    {pick(test.name, locale)}
                   </Link>
                   <span className="block text-[11px] text-ink-muted">
                     {latest ? `${formatResultValue(latest, locale)} · ${formatDate(latest.performedAt, locale)}` : t('testCard.noValue')}

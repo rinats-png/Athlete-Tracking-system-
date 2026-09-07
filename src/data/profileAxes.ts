@@ -1,4 +1,6 @@
 import { PERFORMANCE_DIMENSIONS, type PerformanceDimension, type ScoringDirection } from '@/types/domain'
+import type { AppLocale } from '@/i18n/locales'
+import { pick } from '@/i18n/pick'
 
 /**
  * Profilachsen je Sportart.
@@ -198,10 +200,10 @@ export function axisById(id: string): ProfileAxis | undefined {
 export function axisLabel(
   axisId: string,
   translate: (key: string) => string,
-  lang: 'de' | 'en',
+  lang: AppLocale,
 ): string {
   const axis = PROFILE_AXES[axisId]
   if (!axis) return axisId
   if (axis.source.kind === 'dimension') return translate(`dimensions.${axis.source.dimension}`)
-  return axis.name[lang]
+  return pick(axis.name, lang)
 }

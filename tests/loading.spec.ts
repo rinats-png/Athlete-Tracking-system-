@@ -155,7 +155,11 @@ test.describe('Aktualisierung der installierten App', () => {
  * Grenze hält den Stand fest; sie darf steigen, aber nicht unbemerkt.
  */
 test.describe("Grösse des Startpakets", () => {
-  const BUDGET_KB = 850;
+  // 850 → 900 (Sept. 2026): Anforderungslücke, Wettkampfrahmen und die
+  // Sprachlogik für acht Sprachen liegen auf der Übersicht bzw. im Kern und
+  // damit im Startpaket — rund 25 KB, bewusst hier statt hinter einem
+  // weiteren Nachlade-Schritt, den die Übersicht bei jedem Öffnen zahlte.
+  const BUDGET_KB = 900;
 
   test(`das Hauptpaket bleibt unter ${BUDGET_KB} KB`, () => {
     const dir = new URL("../dist/assets/", import.meta.url);

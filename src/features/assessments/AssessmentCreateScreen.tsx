@@ -15,7 +15,9 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { newId } from '@/lib/store/localStore'
 import { defaultAssessmentTitle } from '@/domain/assessment'
 import { cn } from '@/lib/utils'
-import type { AppLocale, PerformanceDimension, TestCategory } from '@/types/domain'
+import type { PerformanceDimension, TestCategory } from '@/types/domain'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 type Filter = TestCategory | 'all'
 
@@ -49,8 +51,8 @@ const FILTERS: Filter[] = [
  * Sportartauswahl rückgängig zu machen.
  */
 export function AssessmentCreateScreen() {
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const navigate = useNavigate()
   const { data, saveAssessment } = useAppData()
 
@@ -182,7 +184,7 @@ export function AssessmentCreateScreen() {
             className="mt-1 h-5 w-5 shrink-0 accent-[var(--accent)]"
           />
           <span className="min-w-0 flex-1">
-            <span className="block text-[15px] font-medium">{test.name[locale]}</span>
+            <span className="block text-[15px] font-medium">{pick(test.name, locale)}</span>
             <span className="mt-0.5 block text-[11px] tracking-wide text-ink-muted uppercase">
               {t(`dimensions.${test.dimension}`)}
               {isCore && ` · ${t('assessments.core')}`}
@@ -191,7 +193,7 @@ export function AssessmentCreateScreen() {
               {test.setting === 'lab' && ` · ${t('tests.labSetting')}`}
             </span>
             <span className="mt-1 block text-[12px] leading-relaxed text-ink-secondary">
-              {why ?? test.summary[locale]}
+              {why ?? pick(test.summary, locale)}
             </span>
           </span>
         </label>
@@ -242,8 +244,8 @@ export function AssessmentCreateScreen() {
             <>
               <Panel>
                 <PanelHeader
-                  title={t('assessments.forSport', { sport: discipline.name[locale] })}
-                  subtitle={rationaleFor(discipline.id)?.[locale] ?? ''}
+                  title={t('assessments.forSport', { sport: pick(discipline.name, locale) })}
+                  subtitle={pick(rationaleFor(discipline.id), locale) ?? ''}
                 />
                 <ul>{coreTests.map((test) => testRow(test, true))}</ul>
               </Panel>
@@ -251,7 +253,7 @@ export function AssessmentCreateScreen() {
               {optionalTests.length > 0 && (
                 <Panel>
                   <PanelHeader
-                    title={t('assessments.moreForSport', { sport: discipline.name[locale] })}
+                    title={t('assessments.moreForSport', { sport: pick(discipline.name, locale) })}
                     subtitle={t('assessments.moreForSportHint')}
                   />
                   <ul>{optionalTests.map((test) => testRow(test, false))}</ul>
@@ -347,7 +349,7 @@ export function AssessmentCreateScreen() {
                     )}
                   >
                     <span className="text-[14px] font-semibold">
-                      {battery.name[locale]}
+                      {pick(battery.name, locale)}
                       {battery.slug === suggested?.slug ? (
                         <span className="ml-2 align-middle text-[10px] font-medium tracking-wide text-accent uppercase">
                           {t('assessments.suggested')}
@@ -355,7 +357,7 @@ export function AssessmentCreateScreen() {
                       ) : null}
                     </span>
                     <span className="text-[12px] leading-snug text-ink-secondary">
-                      {battery.description?.[locale] ?? rationaleFor(battery.slug.replace(/^discipline:/, ''))?.[locale] ?? ''}
+                      {pick(battery.description, locale) ?? pick(rationaleFor(battery.slug.replace(/^discipline:/, '')), locale) ?? ''}
                     </span>
                     <span className="mt-1 flex items-center gap-1 text-[11px] text-ink-muted">
                       <Clock size={12} aria-hidden />

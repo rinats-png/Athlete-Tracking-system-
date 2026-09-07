@@ -6,6 +6,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { SPORT_CATEGORIES, DISCIPLINES, disciplineById, coreSlugs } from '@/data/sportProfiles'
 import { cn } from '@/lib/utils'
 import { SportArt } from '@/components/signature/SportArt'
+import { pick } from '@/i18n/pick'
 
 /**
  * Sportartwahl als Einstieg in den Testbereich.
@@ -68,7 +69,7 @@ export function SportSelector({ compact = false }: { compact?: boolean }) {
         <div className="min-w-0">
           <span className="label-tag">{t('tests.yourSport')}</span>
           <p className="mt-0.5 font-display text-[20px] leading-none font-bold uppercase">
-            {selected.name[lang]}
+            {pick(selected.name, lang)}
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
@@ -107,7 +108,7 @@ export function SportSelector({ compact = false }: { compact?: boolean }) {
               {/* Die Cluster ordnen die Liste, sie versperren sie nicht:
                   jede Sportart ist ohne weiteren Schritt antippbar. */}
               <h3 className="label-tag sticky top-0 border-y border-line bg-surface-sunken px-4 py-1.5">
-                {category.name[lang]}
+                {pick(category.name, lang)}
               </h3>
               <ul>
                 {inCategory.map((discipline) => {
@@ -131,7 +132,7 @@ export function SportSelector({ compact = false }: { compact?: boolean }) {
                         />
                         <span className="min-w-0 flex-1">
                           <span className="block text-[15px] font-medium">
-                            {discipline.name[lang]}
+                            {pick(discipline.name, lang)}
                           </span>
                           <span className="block text-[12px] text-ink-muted">
                             {t('tests.coreCount', { count: coreSlugs(discipline).length })}

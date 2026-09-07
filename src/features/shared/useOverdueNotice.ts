@@ -6,6 +6,7 @@ import { reminderSettingsOf } from '@/features/shared/profileContext'
 import { notifyOverdue } from '@/lib/notify'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useLocale } from '@/features/shared/useLocale'
+import { pick } from '@/i18n/pick'
 
 /**
  * Sagt beim Öffnen, was inzwischen fällig geworden ist.
@@ -27,7 +28,7 @@ export function useOverdueNotice(): void {
   useEffect(() => {
     const overdue = overdueTests(data.results, reminderSettingsOf(data.profile))
     if (overdue.length === 0) return
-    const first = getTest(overdue[0].slug)?.name[locale] ?? overdue[0].slug
+    const first = pick(getTest(overdue[0].slug)?.name, locale) ?? overdue[0].slug
     notifyOverdue(
       t('reminders.notifyTitle'),
       t('reminders.notifyBody', { count: overdue.length, test: first }),

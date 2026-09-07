@@ -14,6 +14,7 @@ import { groupHeatmap, PATTERN_MIN_ATHLETES, type HeatmapGroup } from '@/domain/
 import { OPEN_AXIS_MAX_SCORE, OPEN_AXIS_MIN_REQUIREMENT } from '@/domain/requirementGap'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 /**
  * Gruppen-Heatmap.
@@ -85,7 +86,7 @@ function GroupBlock({ group }: { group: HeatmapGroup }) {
 
       <Panel>
         <PanelHeader
-          title={discipline?.name[locale] ?? t('coachDash.heatmap.general')}
+          title={pick(discipline?.name, locale) ?? t('coachDash.heatmap.general')}
           subtitle={t('coachDash.heatmap.athletes', { count: group.athletes.length })}
         />
         <div className="overflow-x-auto">

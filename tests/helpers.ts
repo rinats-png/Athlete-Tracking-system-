@@ -225,7 +225,7 @@ export async function stubAuth(
  * `de.json`. Eine Prüfung, die nur die Kerndatei liest, prüfte ab da die
  * halbe Wahrheit.
  */
-export function readDict(lang: 'de' | 'en'): Record<string, any> {
+export function readDict(lang: string): Record<string, any> {
   const read = (name: string) =>
     JSON.parse(readFileSync(new URL(`../src/i18n/${name}`, import.meta.url), 'utf-8'))
   return { ...read(`${lang}.json`), ...read(`${lang}.extra.json`) }

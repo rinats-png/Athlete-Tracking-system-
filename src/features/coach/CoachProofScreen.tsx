@@ -13,6 +13,7 @@ import { coachProof } from '@/domain/coachProof'
 import { DETECTION_FACTOR } from '@/domain/change'
 import { formatDate, formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 /**
  * Wirksamkeitsnachweis — für den Druck gebaut, wie der Bericht.
@@ -92,7 +93,7 @@ export function CoachProofScreen() {
                         <td className="readout px-2 py-2 text-right tabular-nums text-ink-secondary">{a.withinNoise}</td>
                         <td className="px-3 py-2 text-[12px] text-ink-secondary">
                           {a.bestGain
-                            ? `${getTest(a.bestGain.testSlug)?.shortName[locale] ?? a.bestGain.testSlug} +${formatNumber(a.bestGain.changePercent, locale, 1)} %`
+                            ? `${pick(getTest(a.bestGain.testSlug)?.shortName, locale) ?? a.bestGain.testSlug} +${formatNumber(a.bestGain.changePercent, locale, 1)} %`
                             : '—'}
                         </td>
                       </tr>
@@ -118,7 +119,7 @@ export function CoachProofScreen() {
                   <tbody>
                     {proof.tests.map((row) => (
                       <tr key={row.testSlug} className="border-b border-line last:border-b-0">
-                        <th scope="row" className="px-3 py-2 text-left font-normal">{getTest(row.testSlug)?.shortName[locale] ?? row.testSlug}</th>
+                        <th scope="row" className="px-3 py-2 text-left font-normal">{pick(getTest(row.testSlug)?.shortName, locale) ?? row.testSlug}</th>
                         <td className="readout px-2 py-2 text-right tabular-nums">{row.compared}</td>
                         <td className="readout px-2 py-2 text-right tabular-nums text-good">{row.gains}</td>
                         <td className={cn('readout px-2 py-2 text-right tabular-nums', row.drops > 0 && 'text-critical')}>{row.drops}</td>

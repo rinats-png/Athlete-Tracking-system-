@@ -6,6 +6,8 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { OPERATOR, PROCESSORS, missingOperatorFields } from '@/data/operator'
 import { privacyDocument, termsDocument, type LegalDocument } from './texts'
+import { pick } from '@/i18n/pick'
+import { LEGAL_LOCALES } from '@/i18n/locales'
 
 /**
  * Impressum, Datenschutzerklärung, Nutzungsbedingungen.
@@ -37,6 +39,7 @@ export function ImprintScreen() {
 
   return (
     <Frame title={t('legal.imprint.title')} intro={t('legal.imprint.intro')}>
+      <LanguageNote />
       {missing.length > 0 && (
         <p
           role="alert"
@@ -76,8 +79,8 @@ export function PrivacyScreen() {
           {PROCESSORS.map((processor) => (
             <li key={processor.name} className="px-4 py-3 text-[13px] leading-relaxed">
               <p className="font-medium">{processor.name}</p>
-              <p className="text-ink-secondary">{processor.purpose[locale]}</p>
-              <p className="text-ink-muted">{processor.location[locale]}</p>
+              <p className="text-ink-secondary">{pick(processor.purpose, locale)}</p>
+              <p className="text-ink-muted">{pick(processor.location, locale)}</p>
               <a
                 href={processor.privacyUrl}
                 target="_blank"
@@ -108,6 +111,7 @@ function DocumentScreen({
 }) {
   return (
     <Frame title={document.title} intro={document.intro}>
+      <LanguageNote />
       <p className="readout mb-4 text-[12px] text-ink-muted">{document.updated}</p>
       <div className="space-y-4">
         {document.sections.map((section) => (
@@ -130,6 +134,26 @@ function DocumentScreen({
       </div>
       {children}
     </Frame>
+  )
+}
+
+/**
+ * Die Rechtstexte gibt es nur deutsch und englisch. In jeder anderen
+ * Sprache steht das oben auf der Seite — eine englische Datenschutzerklärung
+ * unter schwedischer Navigation soll nicht aussehen wie ein Versehen.
+ */
+function LanguageNote() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  if (LEGAL_LOCALES.includes(locale)) return null
+  return (
+    <p
+      role="note"
+      data-testid="legal-language-note"
+      className="mb-4 border-l-2 border-warning bg-warning/10 px-3 py-2 text-[13px] leading-relaxed text-ink-secondary"
+    >
+      {t('legal.languageNote')}
+    </p>
   )
 }
 

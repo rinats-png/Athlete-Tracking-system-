@@ -25,8 +25,9 @@ import { getTest } from '@/data/testCatalog'
 import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { cn } from '@/lib/utils'
-import type { AppLocale } from '@/types/domain'
 import { DETECTION_FACTOR, typicalErrorPercent } from '@/domain/change'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Auswertung über die Zeit.
@@ -42,8 +43,8 @@ import { DETECTION_FACTOR, typicalErrorPercent } from '@/domain/change'
  * hat die Zahl schon geglaubt.
  */
 export function AnalysisDeepDive() {
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { data } = useAppData()
 
   const confidence = useMemo(() => confidenceScore(data.results), [data.results])
@@ -139,7 +140,7 @@ export function AnalysisDeepDive() {
         <div className="mt-4 border-l-2 border-critical bg-critical/8 px-4 py-3">
           <p className="label-tag">{t('flags.regressionTitle')}</p>
           <p className="mt-1 text-[14px]">
-            {getTest(regression.result.testSlug)?.name[locale] ?? regression.result.testSlug}{' '}
+            {pick(getTest(regression.result.testSlug)?.name, locale) ?? regression.result.testSlug}{' '}
             <span className="readout tabular-nums">
               {regression.changePercent.toFixed(1)} %
             </span>{' '}
@@ -181,7 +182,7 @@ export function AnalysisDeepDive() {
                   return (
                     <tr key={row.testSlug} className="border-b border-line last:border-b-0">
                       <th scope="row" className="px-4 py-2.5 text-left font-normal">
-                        {test?.name[locale] ?? row.testSlug}
+                        {pick(test?.name, locale) ?? row.testSlug}
                         <span className="block text-[11px] text-ink-muted">
                           {t('analysis.overDays', { count: row.daysBetween })}
                         </span>
@@ -289,7 +290,7 @@ export function AnalysisDeepDive() {
                     {comparisonRows.map((row) => (
                       <tr key={row.testSlug} className="border-b border-line last:border-b-0">
                         <th scope="row" className="px-4 py-2.5 text-left font-normal">
-                          {getTest(row.testSlug)?.name[locale] ?? row.testSlug}
+                          {pick(getTest(row.testSlug)?.name, locale) ?? row.testSlug}
                         </th>
                         <td className="readout px-4 py-2.5 tabular-nums text-ink-secondary">
                           {row.before

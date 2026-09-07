@@ -19,6 +19,7 @@ import { formatResultValue } from '@/lib/resultView'
 import { gapsForTest } from '@/data/references'
 import { evidenceForTest } from '@/data/methodEvidence'
 import type { ReferenceEntry } from '@/data/references'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Testdetailseite (Konzept §12).
@@ -68,8 +69,8 @@ export function TestDetailScreen() {
       </Button>
       <ScreenHeader
         eyebrow={`${t(`categories.${test.category}`)} · ${t(`dimensions.${test.dimension}`)}`}
-        title={test.name[locale]}
-        intro={test.summary[locale]}
+        title={pick(test.name, locale)}
+        intro={pick(test.summary, locale)}
         action={
           <Button asChild variant="primary">
             <Link to={`/tests/${test.slug}`}>
@@ -84,7 +85,7 @@ export function TestDetailScreen() {
         <div className="space-y-4 lg:col-span-3">
           <Panel>
             <PanelHeader title={t('testInfo.protocol')} />
-            <p className="px-4 py-3 text-[14px] leading-relaxed text-ink-secondary">{test.instructions[locale]}</p>
+            <p className="px-4 py-3 text-[14px] leading-relaxed text-ink-secondary">{pick(test.instructions, locale)}</p>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-line px-4 py-3 text-[13px] sm:grid-cols-4">
               <Fact label={t('testInfo.duration')} value={duration} />
               <Fact label={t('testInfo.unit')} value={test.primaryUnit} />
@@ -94,9 +95,9 @@ export function TestDetailScreen() {
             <p className="border-t border-line px-4 py-2 text-[12px] text-ink-muted">{t(`testInfo.modeHint.${model.mode}`)}</p>
             <div className="border-t border-line px-4 py-3">
               <span className="label-tag">{t('testInfo.equipment')}</span>
-              <p className="mt-1 text-[13px]">{test.equipment[locale]}</p>
+              <p className="mt-1 text-[13px]">{pick(test.equipment, locale)}</p>
               <p className="mt-1 text-[11px] text-ink-muted">
-                {test.equipmentIds.map((group) => group.map((id) => EQUIPMENT_BY_ID.get(id)?.name[locale] ?? id).join(' / ')).join(' + ')}
+                {test.equipmentIds.map((group) => group.map((id) => pick(EQUIPMENT_BY_ID.get(id)?.name, locale) ?? id).join(' / ')).join(' + ')}
               </p>
             </div>
             {model.sports.length > 0 && (
@@ -105,7 +106,7 @@ export function TestDetailScreen() {
                 <p className="mt-1 text-[13px] text-ink-secondary">
                   {model.sports.map((s) => (
                     <Link key={s.disciplineId} to={`/sport/${s.disciplineId}`} className="mr-2 underline-offset-2 hover:underline">
-                      {s.name[locale]}
+                      {pick(s.name, locale)}
                     </Link>
                   ))}
                 </p>
@@ -150,14 +151,14 @@ export function TestDetailScreen() {
               <ul className="divide-y divide-line">
                 {evidenceForTest(test.slug).map((entry) => (
                   <li key={entry.nct} className="px-4 py-3">
-                    <p className="text-[13px] font-medium">{entry.study[locale]}</p>
+                    <p className="text-[13px] font-medium">{pick(entry.study, locale)}</p>
                     <p className="mt-1 text-[12px] leading-relaxed text-ink-secondary">
                       <span className="label-tag mr-1">{t('evidence.outcomes')}</span>
-                      {entry.outcomes[locale]}
+                      {pick(entry.outcomes, locale)}
                     </p>
                     <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
                       <span className="label-tag mr-1">{t('evidence.caveat')}</span>
-                      {entry.caveat[locale]}
+                      {pick(entry.caveat, locale)}
                     </p>
                     <a
                       href={`https://clinicaltrials.gov/study/${entry.nct}`}
@@ -225,7 +226,7 @@ export function TestDetailScreen() {
             <Panel>
               <PanelHeader title={t('testInfo.history')} subtitle={test.primaryUnit} />
               <div className="px-2 py-3">
-                <TrendChart points={points} unit={test.primaryUnit} locale={locale} label={test.name[locale]} showFit />
+                <TrendChart points={points} unit={test.primaryUnit} locale={locale} label={pick(test.name, locale)} showFit />
               </div>
               <Button asChild variant="ghost" size="sm" className="m-2">
                 <Link to={`/verlauf/test/${test.slug}`}>{t('result.toHistory')}</Link>
@@ -254,21 +255,21 @@ function ReferenceRow({ entry }: { entry: ReferenceEntry }) {
     entry.method === 'mean_sd'
       ? t('testInfo.meanSd', { mean: formatNumber(entry.mean ?? 0, locale, 1), sd: formatNumber(entry.sd ?? 0, locale, 1) })
       : entry.method === 'bands'
-        ? t('testInfo.bands', { bands: (entry.bands ?? []).map((b) => `${b.label[locale]}${b.upTo != null ? ` ≤ ${formatNumber(b.upTo, locale, 2)}` : ''}`).join(' · ') })
+        ? t('testInfo.bands', { bands: (entry.bands ?? []).map((b) => `${pick(b.label, locale)}${b.upTo != null ? ` ≤ ${formatNumber(b.upTo, locale, 2)}` : ''}`).join(' · ') })
         : entry.method === 'anchor'
           ? t('testInfo.anchor', { anchor: formatNumber(entry.anchor ?? 0, locale, 1) })
           : t('testInfo.percentiles', { values: (entry.values ?? []).map((v) => formatNumber(v, locale, 1)).join(' / ') })
   return (
     <tr className="border-b border-line align-top last:border-0">
       <td className="px-3 py-2">
-        <span className="block">{entry.cohortLabel[locale]}</span>
+        <span className="block">{pick(entry.cohortLabel, locale)}</span>
         <span className="label-tag">{t(`result.groups.${entry.cohort}`)}</span>
       </td>
       <td className="px-3 py-2">{entry.sex === 'all' ? t('testInfo.sexAll') : t(`profile.${entry.sex}`)}</td>
       <td className="readout px-3 py-2">{entry.ageMin}–{entry.ageMax >= 120 ? '' : entry.ageMax}</td>
       <td className="px-3 py-2">
         {values}
-        {entry.protocolNote && <span className="mt-1 block text-[11px] text-ink-muted">{entry.protocolNote[locale]}</span>}
+        {entry.protocolNote && <span className="mt-1 block text-[11px] text-ink-muted">{pick(entry.protocolNote, locale)}</span>}
       </td>
       <td className="px-3 py-2" title={t(`testInfo.qualityHint.${entry.quality}`)}>
         <span className="label-tag text-ink">{entry.quality}</span>

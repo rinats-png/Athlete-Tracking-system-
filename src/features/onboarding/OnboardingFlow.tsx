@@ -20,6 +20,7 @@ import { DEFAULT_RETEST_DAYS } from '@/domain/nextTest'
 import { buildDiagnosticProfile, type RankedTest } from '@/domain/diagnosticProfile'
 import { parseCsv, previewImport, suggestRoles } from '@/lib/csvImport'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 /**
  * Der Einstieg (Konzept §3).
@@ -339,7 +340,7 @@ export function OnboardingFlow({ onDone }: { onDone: (path: string) => void }) {
               <div className="flex flex-wrap items-center justify-between gap-3 border border-accent bg-accent-quiet px-4 py-3">
                 <span className="text-[15px]">
                   <span className="label-tag block">{t('onboarding.sport.main')}</span>
-                  {disciplineById(draft.disciplineId)?.name[lang]}
+                  {pick(disciplineById(draft.disciplineId)?.name, lang)}
                 </span>
                 <Button
                   variant="ghost"
@@ -439,9 +440,9 @@ export function OnboardingFlow({ onDone }: { onDone: (path: string) => void }) {
                           : 'border-line hover:bg-accent-quiet',
                       )}
                     >
-                      <span className="text-[15px] font-medium">{preset.name[lang]}</span>
+                      <span className="text-[15px] font-medium">{pick(preset.name, lang)}</span>
                       <span className="text-[12px] leading-snug text-ink-secondary">
-                        {preset.hint[lang]}
+                        {pick(preset.hint, lang)}
                       </span>
                     </button>
                   </li>
@@ -529,14 +530,14 @@ export function OnboardingFlow({ onDone }: { onDone: (path: string) => void }) {
                   return field.type === 'duration' ? (
                     <DurationField
                       key={test.slug}
-                      label={test.name[lang]}
+                      label={pick(test.name, lang)}
                       value={value}
                       onChange={set}
                     />
                   ) : (
                     <NumberField
                       key={test.slug}
-                      label={test.name[lang]}
+                      label={pick(test.name, lang)}
                       unit={field.unit}
                       value={value}
                       onChange={set}
@@ -818,7 +819,7 @@ function PlanStep({
           <span className="readout w-6 shrink-0 text-[20px] leading-none text-accent-text">{position}</span>
         )}
         <div className="min-w-0">
-          <p className="font-medium">{test.name[lang]}</p>
+          <p className="font-medium">{pick(test.name, lang)}</p>
           <p className="mt-0.5 text-[12px] text-ink-muted">
             {entry.reasons.map((r) => t(`onboarding.result.reasons.${r}`)).join(' · ')}
           </p>
@@ -833,7 +834,7 @@ function PlanStep({
         <span className="label-tag">{t('onboarding.result.eyebrow')}</span>
         <h1 className="mt-1.5 font-display text-[30px] leading-none font-bold uppercase sm:text-[40px]">
           {discipline
-            ? t('onboarding.result.title', { sport: discipline.name[lang] })
+            ? t('onboarding.result.title', { sport: pick(discipline.name, lang) })
             : t('onboarding.result.titleGeneral')}
         </h1>
         <p className="mt-2.5 text-[14px] text-ink-secondary">

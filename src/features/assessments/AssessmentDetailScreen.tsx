@@ -17,7 +17,8 @@ import { getTest } from '@/data/testCatalog'
 import { formatDate } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { cn } from '@/lib/utils'
-import type { AppLocale } from '@/types/domain'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Laufende Diagnostik.
@@ -29,8 +30,8 @@ import type { AppLocale } from '@/types/domain'
  */
 export function AssessmentDetailScreen() {
   const { id = '' } = useParams()
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const navigate = useNavigate()
   const { data, saveAssessment, deleteAssessment } = useAppData()
   const [confirmDelete, setConfirmDelete] = useState(false)
@@ -142,7 +143,7 @@ export function AssessmentDetailScreen() {
                       <Circle size={18} className="shrink-0 text-ink-muted" aria-hidden />
                     )}
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-[14px] font-medium">{test.name[locale]}</span>
+                      <span className="block truncate text-[14px] font-medium">{pick(test.name, locale)}</span>
                       <span className="block text-[11px] text-ink-muted">
                         {t(`dimensions.${test.dimension}`)}
                         {progress.additional.includes(slug) && ` · ${t('assessments.unplanned')}`}

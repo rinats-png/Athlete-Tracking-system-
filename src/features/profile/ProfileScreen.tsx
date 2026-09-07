@@ -23,11 +23,12 @@ import { provisionalFormulas } from '@/domain/formulaRegistry'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { introEnabled, setIntroEnabled } from '@/features/intro/introPreference'
 import { ageFromBirthDate, formatDate } from '@/lib/format'
-import type { AppLocale, Sex } from '@/types/domain'
+import type { Sex } from '@/types/domain'
+import { useLocale } from '@/features/shared/useLocale'
 
 export function ProfileScreen() {
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { data, saveProfile, saveBiometric, resetAll, loadDemo, exportJson, importJson, mode, backupDue, markExported, recoveredAt } =
     useAppData()
 

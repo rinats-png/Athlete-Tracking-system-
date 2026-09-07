@@ -20,7 +20,10 @@
 
 import type { ProtocolMode, TestDefinition } from './testCatalog'
 
-export type Bilingual = { de: string; en: string }
+import type { Localized } from '@/i18n/pick'
+
+/** Historischer Name — die Objekte tragen inzwischen alle Sprachen der App. */
+export type Bilingual = Localized
 
 export type TestProcedure = {
   /** Was vor dem ersten Versuch passiert. */

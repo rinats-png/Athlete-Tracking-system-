@@ -11,6 +11,7 @@ import { formatDate } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { AppLocale } from '@/types/domain'
 import { useMemo } from 'react'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die vier Zahlen, wegen derer jemand das Dashboard öffnet (§64).
@@ -82,7 +83,7 @@ export function DecisionRow({ locale }: { locale: AppLocale }) {
         label={t('dashboard.biggestChange')}
         value={
           biggestGain
-            ? (getTest(biggestGain.testSlug)?.shortName[locale] ?? biggestGain.testSlug)
+            ? (pick(getTest(biggestGain.testSlug)?.shortName, locale) ?? biggestGain.testSlug)
             : '—'
         }
         note={

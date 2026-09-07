@@ -17,7 +17,8 @@ import { formatDate } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { lookupPercentile } from '@/domain/benchmark'
 import { cn } from '@/lib/utils'
-import type { AppLocale } from '@/types/domain'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Abschluss einer Diagnostik.
@@ -29,8 +30,8 @@ import type { AppLocale } from '@/types/domain'
  */
 export function AssessmentSummaryScreen() {
   const { id = '' } = useParams()
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { data, saveAssessment } = useAppData()
 
   const assessment = data.assessments.find((a) => a.id === id)
@@ -114,7 +115,7 @@ export function AssessmentSummaryScreen() {
                   return (
                     <tr key={result.id} className="border-b border-line last:border-b-0">
                       <th scope="row" className="px-4 py-2.5 text-left font-normal">
-                        {test?.name[locale] ?? result.testSlug}
+                        {pick(test?.name, locale) ?? result.testSlug}
                         {result.attemptSelection && (
                           <span className="ml-1.5 text-[11px] text-ink-muted">
                             ({t(`assessments.attempt.${result.attemptSelection}`)})
@@ -180,7 +181,7 @@ export function AssessmentSummaryScreen() {
       {progress.open.length > 0 && (
         <p className="mt-4 text-[13px] text-ink-muted">
           {t('assessments.stillOpen', {
-            tests: progress.open.map((s) => getTest(s)?.name[locale] ?? s).join(', '),
+            tests: progress.open.map((s) => pick(getTest(s)?.name, locale) ?? s).join(', '),
           })}
         </p>
       )}

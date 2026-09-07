@@ -13,6 +13,7 @@ import { TEST_BATTERIES } from '@/data/testBatteries'
 import { getTest } from '@/data/testCatalog'
 import { runPlan } from '@/domain/testDay'
 import { formatDate } from '@/lib/format'
+import { pick } from '@/i18n/pick'
 
 /**
  * Testtage anlegen und wiederfinden.
@@ -114,7 +115,7 @@ export function TestDayScreen() {
                 <option value="">{t('testDay.batteryFree')}</option>
                 {TEST_BATTERIES.map((b) => (
                   <option key={b.slug} value={b.slug}>
-                    {b.name[locale]}
+                    {pick(b.name, locale)}
                   </option>
                 ))}
               </select>
@@ -165,7 +166,7 @@ export function TestDayScreen() {
               <p className="text-[12px] text-ink-muted">{t('testDay.needStations')}</p>
             ) : (
               <p className="text-[12px] text-ink-secondary">
-                {stations.map((slug) => getTest(slug)?.shortName[locale] ?? slug).join(' · ')}
+                {stations.map((slug) => pick(getTest(slug)?.shortName, locale) ?? slug).join(' · ')}
               </p>
             )}
             {picked.length === 0 && (

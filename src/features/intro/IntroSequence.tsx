@@ -9,6 +9,7 @@ import { introScenes, type IntroCallout } from '@/domain/introScenes'
 import { formatResultValue } from '@/lib/resultView'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import type { AppLocale } from '@/i18n/locales'
 
 /**
  * Die Intro-Sequenz beim Öffnen der App.
@@ -254,7 +255,7 @@ function Callout({
   side: 'left' | 'right'
   active: boolean
   delay: number
-  locale: 'de' | 'en'
+  locale: AppLocale
 }) {
   const { t } = useTranslation()
   return (

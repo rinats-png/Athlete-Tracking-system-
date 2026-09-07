@@ -13,7 +13,9 @@ import { formatDate } from '@/lib/format'
 import { SportSelector } from './SportSelector'
 import { EquipmentFilter, readOwnedEquipment } from './EquipmentFilter'
 import { EQUIPMENT_BY_ID, canPerform, missingFor, type EquipmentId } from '@/data/equipment'
-import type { AppLocale, TestCategory } from '@/types/domain'
+import type { TestCategory } from '@/types/domain'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 type Filter = TestCategory | 'all'
 
@@ -48,8 +50,8 @@ export function TestCatalogScreen() {
   const assessmentId = searchParams.get('diagnostik')
   const assessmentQuery = assessmentId ? `?diagnostik=${assessmentId}` : ''
 
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const [filter, setFilter] = useState<Filter>('all')
   const [owned, setOwned] = useState<Set<EquipmentId>>(() => readOwnedEquipment())
   const { data } = useAppData()
@@ -108,7 +110,7 @@ export function TestCatalogScreen() {
           className="flex min-h-16 items-center gap-3 px-4 py-3 transition-colors hover:bg-accent-quiet"
         >
           <div className="min-w-0 flex-1">
-            <p className="font-medium">{test.name[locale]}</p>
+            <p className="font-medium">{pick(test.name, locale)}</p>
             <p className="mt-0.5 text-[12px] text-ink-muted">
               {t(`dimensions.${test.dimension}`)}
               {origin === 'document' && ` · ${t('assessments.fromDocument')}`}
@@ -122,7 +124,7 @@ export function TestCatalogScreen() {
                 {t('tests.equipmentMissing', {
                   items: missing
                     .map((group) =>
-                      group.map((id) => EQUIPMENT_BY_ID.get(id)?.name[locale] ?? id).join(' / '),
+                      group.map((id) => pick(EQUIPMENT_BY_ID.get(id)?.name, locale) ?? id).join(' / '),
                     )
                     .join(', '),
                 })}
@@ -166,8 +168,8 @@ export function TestCatalogScreen() {
         <>
           <Panel className="mb-4">
             <PanelHeader
-              title={t('tests.coreFor', { sport: discipline.name[locale] })}
-              subtitle={rationaleFor(discipline.id)?.[locale] ?? ''}
+              title={t('tests.coreFor', { sport: pick(discipline.name, locale) })}
+              subtitle={pick(rationaleFor(discipline.id), locale) ?? ''}
             />
             <ul className="divide-y divide-line">{core.map(row)}</ul>
           </Panel>
@@ -175,7 +177,7 @@ export function TestCatalogScreen() {
           {optional.length > 0 && (
             <Panel className="mb-4">
               <PanelHeader
-                title={t('tests.optionalFor', { sport: discipline.name[locale] })}
+                title={t('tests.optionalFor', { sport: pick(discipline.name, locale) })}
                 subtitle={t('tests.optionalHint')}
               />
               <ul className="divide-y divide-line">{optional.map(row)}</ul>

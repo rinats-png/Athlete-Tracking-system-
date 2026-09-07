@@ -24,8 +24,9 @@ import { compareAssessments } from '@/domain/analytics'
 import { coverageByDimension } from '@/domain/benchmark'
 import { readinessScore } from '@/domain/readiness'
 import { getTest as lookupTest } from '@/data/testCatalog'
-import type { AppLocale } from '@/types/domain'
 import type { StoredResult } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Diagnostikbericht.
@@ -42,8 +43,8 @@ import type { StoredResult } from '@/lib/store/localStore'
  */
 export function ReportScreen() {
   const { id } = useParams()
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { data, athleteNotes, focuses } = useAppData()
   // Anforderungskontur der Disziplin, sofern eine gewählt ist.
   const discipline = disciplineById(data.profile.disciplineId ?? '')
@@ -214,7 +215,7 @@ export function ReportScreen() {
           <p className="report-name mt-1.5">{athlete}</p>
           <p className="mt-2 text-[13px] leading-relaxed text-ink-secondary">
             {[
-              discipline?.name[locale] ?? data.profile.sport,
+              pick(discipline?.name, locale) ?? data.profile.sport,
               data.profile.performanceLevel &&
                 t(`profile.level.${data.profile.performanceLevel}`),
               age != null && t('report.age', { count: age }),
@@ -280,7 +281,7 @@ export function ReportScreen() {
           mode="population"
           locale={locale}
           disciplineWeights={discipline?.dimensionWeights}
-          disciplineLabel={discipline?.name[locale]}
+          disciplineLabel={pick(discipline?.name, locale)}
         />
       </Section>
 
@@ -339,7 +340,7 @@ export function ReportScreen() {
               return (
                 <tr key={result.id}>
                   <th scope="row" className="text-left font-normal">
-                    {test?.name[locale] ?? result.testSlug}
+                    {pick(test?.name, locale) ?? result.testSlug}
                   </th>
                   <td className="num">
                     {formatDate(result.performedAt, locale)}
@@ -379,7 +380,7 @@ export function ReportScreen() {
                 return (
                   <tr key={row.testSlug}>
                     <th scope="row" className="text-left font-normal">
-                      {getTest(row.testSlug)?.name[locale] ?? row.testSlug}
+                      {pick(getTest(row.testSlug)?.name, locale) ?? row.testSlug}
                     </th>
                     <td className="num">
                       {formatResultValue(row.baseline, locale, data.profile.unitSystem)}
@@ -454,7 +455,7 @@ export function ReportScreen() {
               {comparisonRows.map((row) => (
                 <tr key={row.testSlug}>
                   <th scope="row" className="text-left font-normal">
-                    {lookupTest(row.testSlug)?.name[locale] ?? row.testSlug}
+                    {pick(lookupTest(row.testSlug)?.name, locale) ?? row.testSlug}
                   </th>
                   <td className="num">
                     {row.before

@@ -1,6 +1,7 @@
 import { getTest, TEST_CATALOG } from '@/data/testCatalog'
 import type { AppLocale, PerformanceDimension, TestCategory } from '@/types/domain'
 import type { AthleteData, StoredResult } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /**
  * Filtern, Suchen und Sortieren der Historie (§66, §67, §68).
@@ -88,8 +89,8 @@ export function queryHistory(
 
     if (needle) {
       const haystack = [
-        test.name[locale],
-        test.shortName[locale],
+        pick(test.name, locale),
+        pick(test.shortName, locale),
         test.name.de,
         test.name.en,
         result.notes ?? '',

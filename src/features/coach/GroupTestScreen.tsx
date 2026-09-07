@@ -13,6 +13,8 @@ import { consentStatus } from '@/domain/consent'
 import { TEST_CATALOG, getTest } from '@/data/testCatalog'
 import { groupStats, MIN_FOR_SPREAD } from '@/domain/groupStats'
 import { formatNumber } from '@/lib/format'
+import type { AppLocale } from '@/i18n/locales'
+import { pick } from '@/i18n/pick'
 
 /**
  * Ein Test, alle Athleten nacheinander (Konzept §37).
@@ -116,7 +118,7 @@ export function GroupTestScreen() {
               <option value="">{t('group.chooseTest')}</option>
               {TEST_CATALOG.map((entry) => (
                 <option key={entry.slug} value={entry.slug}>
-                  {entry.name[locale]}
+                  {pick(entry.name, locale)}
                 </option>
               ))}
             </select>
@@ -145,7 +147,7 @@ export function GroupTestScreen() {
       {test && active.length > 0 && written == null && (
         <Panel className="mt-4">
           <PanelHeader
-            title={`${test.name[locale]} · ${test.primaryUnit}`}
+            title={`${pick(test.name, locale)} · ${test.primaryUnit}`}
             subtitle={t('group.rowHint')}
           />
           <ul className="divide-y divide-line">
@@ -215,7 +217,7 @@ export function GroupTestScreen() {
   )
 }
 
-const fmt = (value: number | null, locale: 'de' | 'en') =>
+const fmt = (value: number | null, locale: AppLocale) =>
   value == null ? '—' : formatNumber(value, locale, 2)
 
 function Row({ label, value }: { label: string; value: string }) {

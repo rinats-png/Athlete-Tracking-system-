@@ -9,6 +9,7 @@ import { SportArt } from '@/components/signature/SportArt'
 import karteAnalyse from '@/assets/landing/karte-analyse.webp'
 import karteNorm from '@/assets/landing/karte-norm.webp'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 /**
  * Der Einstieg — nach der Vorlage «Baseline Halo».
@@ -262,7 +263,7 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
                       key={discipline.id}
                       className="mx-8 inline-block text-[28px] font-bold tracking-[-0.05em] text-ink/20 transition-colors md:mx-16 md:text-[42px]"
                     >
-                      {discipline.name[locale]}
+                      {pick(discipline.name, locale)}
                     </span>
                   ))}
                 </span>

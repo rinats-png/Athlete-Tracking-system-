@@ -14,6 +14,7 @@ import { journey } from '@/domain/journey'
 import { PerformanceJourney } from '@/components/signature/PerformanceJourney'
 import { formatDate, formatMeasurement, formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 type Range = '1m' | '3m' | '6m' | '1y' | 'all'
 const RANGES: Range[] = ['1m', '3m', '6m', '1y', 'all']
@@ -91,7 +92,7 @@ export function HistoryHome() {
 
       <Panel ticked>
         <PanelHeader
-          title={test?.name[locale] ?? ''}
+          title={pick(test?.name, locale) ?? ''}
           subtitle={test?.primaryUnit}
           action={
             measured.length > 1 ? (
@@ -103,7 +104,7 @@ export function HistoryHome() {
               >
                 {measured.map((m) => (
                   <option key={m.slug} value={m.slug}>
-                    {m.name[locale]}
+                    {pick(m.name, locale)}
                   </option>
                 ))}
               </select>
@@ -124,7 +125,7 @@ export function HistoryHome() {
           <>
             {test && (
               <div className="px-2 py-3">
-                <TrendChart points={points} unit={test.primaryUnit} locale={locale} label={test.name[locale]} height={220} showFit />
+                <TrendChart points={points} unit={test.primaryUnit} locale={locale} label={pick(test.name, locale)} height={220} showFit />
               </div>
             )}
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-line px-4 py-3 text-[13px] sm:grid-cols-4">

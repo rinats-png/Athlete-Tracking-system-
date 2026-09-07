@@ -32,6 +32,7 @@ import { requirementGap } from '@/domain/requirementGap'
 import { LeverPanel } from './LeverPanel'
 import { CompetitionPanel } from './CompetitionPanel'
 import { BetweenTestsPanel } from './BetweenTestsPanel'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Übersicht (Konzept §6): nur das Wichtigste.
@@ -105,7 +106,7 @@ export function OverviewScreen() {
     [axes],
   )
   const latestResults = data.results.filter((r) => r.score != null).slice(0, 5)
-  const name = profile.firstName || (discipline?.name[locale] ?? t('overview.noSport'))
+  const name = profile.firstName || (pick(discipline?.name, locale) ?? t('overview.noSport'))
 
   if (data.results.length === 0) {
     const plan = buildDiagnosticProfile({
@@ -116,7 +117,7 @@ export function OverviewScreen() {
     })
     return (
       <>
-        <ScreenHeader eyebrow={t('overview.eyebrow')} title={discipline?.name[locale] ?? t('overview.title')} intro={t('overview.emptyBody')} />
+        <ScreenHeader eyebrow={t('overview.eyebrow')} title={pick(discipline?.name, locale) ?? t('overview.title')} intro={t('overview.emptyBody')} />
         <h2 className="label-tag mb-2">{t('overview.startTests')}</h2>
         <div className="grid gap-3 md:grid-cols-3">
           {plan.recommendedStart.map((entry) => (
@@ -132,7 +133,7 @@ export function OverviewScreen() {
       <ScreenHeader
         eyebrow={t('overview.eyebrow')}
         title={name}
-        intro={discipline ? discipline.name[locale] : undefined}
+        intro={discipline ? pick(discipline.name, locale) : undefined}
         art={
           discipline && (
             <SportArt
@@ -191,7 +192,7 @@ export function OverviewScreen() {
         <NextTestCard
           className="rise mb-4"
           style={{ ['--rise-delay' as string]: '420ms' }}
-          title={nextTest.name[locale]}
+          title={pick(nextTest.name, locale)}
           reasons={next.reasons.slice(0, 2).map((r) => t(`overview.reasons.${r}`))}
           to={`/tests/${nextTest.slug}`}
         />
@@ -237,7 +238,7 @@ export function OverviewScreen() {
                     {'hasData' in potential && !potential.hasData ? t('overview.potentialUnmeasured') : t('overview.potentialBody')}
                   </p>
                   {axisById(potential.axisId) && (
-                    <p className="mt-1 text-[12px] text-ink-muted">{axisById(potential.axisId)!.meaning[locale]}</p>
+                    <p className="mt-1 text-[12px] text-ink-muted">{pick(axisById(potential.axisId)!.meaning, locale)}</p>
                   )}
                 </>
               ) : (
@@ -272,7 +273,7 @@ export function OverviewScreen() {
                 <li key={result.id}>
                   <Link to={`/ergebnis/${result.id}`} className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-accent-quiet">
                     <span className="min-w-0">
-                      <span className="block truncate text-[14px] font-medium">{test.name[locale]}</span>
+                      <span className="block truncate text-[14px] font-medium">{pick(test.name, locale)}</span>
                       <span className="block text-[11px] text-ink-muted">{formatDate(result.performedAt, locale)}</span>
                     </span>
                     <span className={cn('readout shrink-0 text-[16px]')}>{formatResultValue(result, locale)}</span>

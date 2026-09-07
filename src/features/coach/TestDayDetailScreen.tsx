@@ -14,6 +14,7 @@ import { procedureFor } from '@/data/testProcedure'
 import { formatDate } from '@/lib/format'
 import type { AppLocale } from '@/types/domain'
 import type { StoredTestDay } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /**
  * Ein Testtag in der Durchführung.
@@ -101,7 +102,7 @@ export function TestDayDetailScreen() {
                       const station = stationForGroup(plan, groupIndex + 1, round)
                       return (
                         <td key={groupIndex} className="px-3 py-2">
-                          {station ? getTest(station.slug)?.shortName[locale] ?? station.slug : '—'}
+                          {station ? pick(getTest(station.slug)?.shortName, locale) ?? station.slug : '—'}
                         </td>
                       )
                     })}
@@ -178,7 +179,7 @@ export function TestDayDetailScreen() {
                 <div>
                   <p className="text-[14px] font-medium">
                     <span className="readout mr-2">{station.number}</span>
-                    {getTest(station.slug)?.name[locale] ?? station.slug}
+                    {pick(getTest(station.slug)?.name, locale) ?? station.slug}
                   </p>
                   <p className="text-[12px] text-ink-muted">
                     {t('testDay.progress')}:{' '}
@@ -277,15 +278,15 @@ function StationSheet({
         {day.title || t('testDay.title')} · {day.plannedOn}
       </p>
       <h2 className="font-display mt-1 text-[22px] font-bold">
-        {t('testDay.sheetTitle', { n: number, test: test.name[locale] })}
+        {t('testDay.sheetTitle', { n: number, test: pick(test.name, locale) })}
       </h2>
-      <p className="mt-1 text-[12px]">{test.equipment[locale]}</p>
+      <p className="mt-1 text-[12px]">{pick(test.equipment, locale)}</p>
 
       <dl className="mt-3 border-t border-line pt-2 text-[11px] leading-relaxed">
         <dt className="font-semibold">{t('procedure.attempts')}</dt>
-        <dd className="mb-1">{procedure.attempts[locale]}</dd>
+        <dd className="mb-1">{pick(procedure.attempts, locale)}</dd>
         <dt className="font-semibold">{t('procedure.valid')}</dt>
-        <dd>{procedure.valid.map((v) => v[locale]).join(' ')}</dd>
+        <dd>{procedure.valid.map((v) => pick(v, locale)).join(' ')}</dd>
       </dl>
 
       <table className="mt-4 w-full border-collapse text-[12px]">

@@ -15,6 +15,7 @@ import {
   type ColumnRole,
   type CsvTable,
 } from '@/lib/csvImport'
+import { pick } from '@/i18n/pick'
 
 /**
  * Werte aus einer Tabelle übernehmen (Excel-Export als CSV).
@@ -148,7 +149,7 @@ export function CsvImportScreen() {
                     <option value="date">{t('csvImport.roleDate')}</option>
                     {TEST_CATALOG.map((test) => (
                       <option key={test.slug} value={test.slug}>
-                        {test.name[locale]}
+                        {pick(test.name, locale)}
                       </option>
                     ))}
                   </select>
@@ -195,7 +196,7 @@ export function CsvImportScreen() {
                     {preview.rows.slice(0, 8).map((row, i) => (
                       <tr key={`${row.line}-${row.testSlug}-${i}`} className="border-b border-line last:border-b-0">
                         <td className="readout py-1.5 pr-3 tabular-nums">{row.day}</td>
-                        <td className="py-1.5 pr-3">{getTest(row.testSlug)?.name[locale]}</td>
+                        <td className="py-1.5 pr-3">{pick(getTest(row.testSlug)?.name, locale)}</td>
                         <td className="readout py-1.5 tabular-nums">{row.value}</td>
                       </tr>
                     ))}

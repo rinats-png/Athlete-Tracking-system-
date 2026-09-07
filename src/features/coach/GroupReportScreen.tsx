@@ -11,6 +11,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { groupAxisStats } from '@/domain/groupCompare'
 import { athleteRows } from '@/domain/coach'
 import { formatDate } from '@/lib/format'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Gruppe als Verteilung (§37, §38).
@@ -84,7 +85,7 @@ export function GroupReportScreen() {
             <tbody>
               {stats.map((axis) => (
                 <tr key={axis.axisId} className="border-b border-line/60">
-                  <td className="px-3 py-2">{axis.label?.[locale] ?? axis.axisId}</td>
+                  <td className="px-3 py-2">{pick(axis.label, locale) ?? axis.axisId}</td>
                   <td className="px-3 py-2">
                     <span
                       className="coverage-bar mr-2 align-middle"

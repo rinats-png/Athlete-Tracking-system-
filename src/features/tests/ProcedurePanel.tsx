@@ -4,6 +4,8 @@ import { useLocale } from '@/features/shared/useLocale'
 import { procedureFor } from '@/data/testProcedure'
 import type { Bilingual } from '@/data/testProcedure'
 import type { TestDefinition } from '@/data/testCatalog'
+import { pick } from '@/i18n/pick'
+import type { AppLocale } from '@/i18n/locales'
 
 /**
  * Die Durchführungsvorschrift zu einem Test.
@@ -79,7 +81,7 @@ function ProcedureBody({ test }: { test: TestDefinition }) {
   )
 }
 
-function Block({ label, items, locale }: { label: string; items: Bilingual[]; locale: 'de' | 'en' }) {
+function Block({ label, items, locale }: { label: string; items: Bilingual[]; locale: AppLocale }) {
   return (
     <div className="px-4 py-3">
       <dt className="label-tag">{label}</dt>
@@ -88,7 +90,7 @@ function Block({ label, items, locale }: { label: string; items: Bilingual[]; lo
           {items.map((item, i) => (
             <li key={i} className="flex gap-2">
               <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-[var(--line-strong)]" />
-              <span>{item[locale]}</span>
+              <span>{pick(item, locale)}</span>
             </li>
           ))}
         </ul>

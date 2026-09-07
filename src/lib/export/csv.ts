@@ -3,6 +3,7 @@ import { resultPercentile } from '@/domain/analytics'
 import { assessQuality } from '@/domain/dataQuality'
 import type { AppLocale } from '@/types/domain'
 import type { AthleteData } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /**
  * CSV-Export der Messwerte.
@@ -65,7 +66,7 @@ export function resultsToCsv(data: AthleteData, locale: AppLocale): string {
         result.assessmentId ? (titles.get(result.assessmentId) ?? '') : '',
         result.performedAt,
         result.testSlug,
-        test?.name[locale] ?? '',
+        pick(test?.name, locale) ?? '',
         test?.dimension ?? '',
         test?.primaryMetric ?? '',
         result.score ?? '',

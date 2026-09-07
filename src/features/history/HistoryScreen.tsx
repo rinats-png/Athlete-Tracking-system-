@@ -14,11 +14,12 @@ import { PersonalBests } from './PersonalBests'
 import { EMPTY_QUERY, queryHistory, type HistoryQuery } from '@/domain/historyQuery'
 import { getTest } from '@/data/testCatalog'
 import { formatDate } from '@/lib/format'
-import type { AppLocale } from '@/types/domain'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 export function HistoryScreen() {
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { data, deleteResult } = useAppData()
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const [query, setQuery] = useState<HistoryQuery>(EMPTY_QUERY)
@@ -90,7 +91,7 @@ export function HistoryScreen() {
           <Panel className="lg:col-span-5">
             <PanelHeader
               title={t('dashboard.trend')}
-              subtitle={`${activeTest.name[locale]} · ${activeTest.primaryUnit}`}
+              subtitle={`${pick(activeTest.name, locale)} · ${activeTest.primaryUnit}`}
               action={
                 trendable.length > 1 ? (
                   <select
@@ -101,7 +102,7 @@ export function HistoryScreen() {
                   >
                     {trendable.map((test) => (
                       <option key={test.slug} value={test.slug}>
-                        {test.name[locale]}
+                        {pick(test.name, locale)}
                       </option>
                     ))}
                   </select>
@@ -114,7 +115,7 @@ export function HistoryScreen() {
                 points={points}
                 unit={activeTest.primaryUnit}
                 locale={locale}
-                label={activeTest.name[locale]}
+                label={pick(activeTest.name, locale)}
                 height={220}
               />
             </div>
@@ -134,7 +135,7 @@ export function HistoryScreen() {
               return (
                 <li key={result.id} className="flex items-center gap-3 px-4 py-2.5">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-[13px]">{test?.name[locale] ?? result.testSlug}</p>
+                    <p className="truncate text-[13px]">{pick(test?.name, locale) ?? result.testSlug}</p>
                     <p className="text-[11px] text-ink-muted">
                       {formatDate(result.performedAt, locale)}
                     </p>
@@ -143,7 +144,7 @@ export function HistoryScreen() {
                     variant="ghost"
                     size="icon"
                     aria-label={t('history.deleteResult', {
-                      test: test?.name[locale] ?? result.testSlug,
+                      test: pick(test?.name, locale) ?? result.testSlug,
                     })}
                     onClick={() => deleteResult(result.id)}
                   >

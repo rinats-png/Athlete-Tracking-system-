@@ -28,7 +28,7 @@ export type TestCategory =
 export type ScoringDirection = 'higher_is_better' | 'lower_is_better'
 export type ScoreMode = 'personal_best' | 'population'
 export type Sex = 'male' | 'female' | 'other'
-export type AppLocale = 'de' | 'en'
+export type { AppLocale } from '@/i18n/locales'
 
 /** Eine Achse des Spider-Web-Diagramms. */
 export interface RadarAxis {

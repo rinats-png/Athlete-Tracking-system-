@@ -25,6 +25,7 @@ import { formatResultValue } from '@/lib/resultView'
 import { preparePhoto, type PhotoError } from '@/lib/photo'
 import { EditResultPanel } from './EditResultPanel'
 import type { ReferenceComparison } from '@/data/references'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Ergebnisanalyse (Konzept §15–§18).
@@ -82,10 +83,10 @@ export function ResultScreen() {
       <Button asChild variant="ghost" size="sm" className="mb-3 -ml-2">
         <Link to={`/tests/${test.slug}/details`}>
           <ArrowLeft size={14} aria-hidden />
-          {test.name[locale]}
+          {pick(test.name, locale)}
         </Link>
       </Button>
-      <ScreenHeader eyebrow={t('result.eyebrow')} title={test.name[locale]} intro={t('result.measuredOn', { date: formatDate(result.performedAt, locale) })} />
+      <ScreenHeader eyebrow={t('result.eyebrow')} title={pick(test.name, locale)} intro={t('result.measuredOn', { date: formatDate(result.performedAt, locale) })} />
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Panel ticked float className="rise">
@@ -139,7 +140,7 @@ export function ResultScreen() {
         </Panel>
 
         <Panel>
-          <PanelHeader title={t('result.comparison')} subtitle={primary ? primary.entry.cohortLabel[locale] : undefined} />
+          <PanelHeader title={t('result.comparison')} subtitle={primary ? pick(primary.entry.cohortLabel, locale) : undefined} />
           {primary ? (
             <ComparisonBlock
               comparison={primary}
@@ -183,8 +184,8 @@ export function ResultScreen() {
             <p className="mt-3 text-[12px] leading-relaxed text-ink-secondary">
               {rating.level && primary
                 ? primary.percentile != null
-                  ? t('rating.basisPercentile', { percentile: percentileLabel(primary.percentile, locale), group: primary.entry.cohortLabel[locale] })
-                  : t('rating.basisBand', { band: primary.band?.label[locale] ?? '', group: primary.entry.cohortLabel[locale] })
+                  ? t('rating.basisPercentile', { percentile: percentileLabel(primary.percentile, locale), group: pick(primary.entry.cohortLabel, locale) })
+                  : t('rating.basisBand', { band: pick(primary.band?.label, locale) ?? '', group: pick(primary.entry.cohortLabel, locale) })
                 : `${t('rating.none')} ${t(`rating.gap.${rating.gap ?? 'no_reference'}`)}`}
             </p>
             <p className="mt-2 text-[11px] leading-relaxed text-ink-muted">{t('rating.caveat')}</p>
@@ -223,7 +224,7 @@ export function ResultScreen() {
         {nextTest && (
           <Button asChild variant="primary" size="sm">
             <Link to={`/tests/${nextTest.slug}`}>
-              {t('result.next')}: {nextTest.name[locale]}
+              {t('result.next')}: {pick(nextTest.name, locale)}
               <ArrowRight size={13} aria-hidden />
             </Link>
           </Button>
@@ -275,7 +276,7 @@ function ComparisonBlock({
     rows.push({ label: t('result.cutoff'), value: formatNumber(entry.mean - sign * entry.sd, locale, 1) })
   }
   if (entry.method === 'bands' && entry.bands) {
-    rows.push({ label: t('result.band'), value: entry.bands.map((b) => `${b.label[locale]}${b.upTo != null ? ` ≤ ${formatNumber(b.upTo, locale, 2)}` : ''}`).join(' · ') })
+    rows.push({ label: t('result.band'), value: entry.bands.map((b) => `${pick(b.label, locale)}${b.upTo != null ? ` ≤ ${formatNumber(b.upTo, locale, 2)}` : ''}`).join(' · ') })
   }
   if (entry.method === 'anchor' && entry.anchor != null) {
     rows.push({ label: t('testInfo.anchor', { anchor: formatNumber(entry.anchor, locale, 1) }), value: t('result.percentOfAnchor', { percent: formatNumber(comparison.percentOfAnchor ?? 0, locale, 0) }) })
@@ -303,7 +304,7 @@ function ComparisonBlock({
       <p className="mt-3 text-[11px] leading-relaxed text-ink-muted">
         {t('result.quality', { quality: entry.quality })} · {t('result.source', { study: entry.source.study })}
         {entry.source.n != null && ` · ${t('testInfo.n', { n: entry.source.n })}`}
-        {entry.protocolNote && <span className="block">{t('result.protocolNote', { note: entry.protocolNote[locale] })}</span>}
+        {entry.protocolNote && <span className="block">{t('result.protocolNote', { note: pick(entry.protocolNote, locale) })}</span>}
       </p>
     </div>
   )

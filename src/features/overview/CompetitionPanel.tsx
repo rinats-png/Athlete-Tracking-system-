@@ -11,6 +11,7 @@ import { useLocale } from '@/features/shared/useLocale'
 import { formatDate, formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { AthleteData } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /**
  * Der Wettkampf als Rahmen: drei Kontrollpunkte rückwärts vom Tag, und die
@@ -129,7 +130,7 @@ function CheckpointRow({ checkpoint, isNext }: { checkpoint: Checkpoint; isNext:
                 to={`/tests/${slug}`}
                 className="inline-flex min-h-11 min-w-11 items-center rounded-[var(--radius-sm)] border border-line px-2.5 hover:border-accent hover:bg-accent-quiet"
               >
-                {test.shortName[locale]}
+                {pick(test.shortName, locale)}
               </Link>
             )
           })}
@@ -148,7 +149,7 @@ function ProjectionRow({ projection }: { projection: FormProjection }) {
   return (
     <li className="text-[13px]" data-testid="projection-row">
       <div className="flex items-baseline justify-between gap-3">
-        <span className="min-w-0 truncate font-medium">{test.shortName[locale]}</span>
+        <span className="min-w-0 truncate font-medium">{pick(test.shortName, locale)}</span>
         <span className="readout shrink-0 tabular-nums">
           {formatNumber(projection.projected, locale, 1)} {unit}
           {projection.band && (

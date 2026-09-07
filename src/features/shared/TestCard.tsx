@@ -12,6 +12,7 @@ import { formatResultValue } from '@/lib/resultView'
 import { intervalFor, type ReminderSettings } from '@/domain/reminders'
 import type { StoredResult } from '@/lib/store/localStore'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 export type TestStatus = 'open' | 'measured' | 'overdue' | 'questionable'
 
@@ -73,7 +74,7 @@ export function TestCard({
           </span>
           <h3 className="mt-0.5 text-[16px] leading-tight font-semibold">
             <Link to={`/tests/${slug}/details`} className="hover:underline">
-              {test.name[locale]}
+              {pick(test.name, locale)}
             </Link>
           </h3>
         </div>
@@ -91,7 +92,7 @@ export function TestCard({
       </div>
 
       <p className="mt-1.5 px-4 text-[12px] leading-relaxed text-ink-secondary">
-        {reason ?? test.summary[locale]}
+        {reason ?? pick(test.summary, locale)}
       </p>
 
       <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 border-t border-line px-4 py-2.5 text-[12px]">

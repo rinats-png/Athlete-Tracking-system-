@@ -321,9 +321,10 @@ const termsEn: LegalDocument = {
 }
 
 export function privacyDocument(locale: AppLocale): LegalDocument {
-  return locale === 'en' ? privacyEn : privacyDe
+  // Nur Deutsch und Englisch — die übrigen Sprachen lesen Englisch (siehe locales.ts).
+  return locale === 'de' ? privacyDe : privacyEn
 }
 
 export function termsDocument(locale: AppLocale): LegalDocument {
-  return locale === 'en' ? termsEn : termsDe
+  return locale === 'de' ? termsDe : termsEn
 }

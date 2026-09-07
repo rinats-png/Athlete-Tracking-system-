@@ -21,14 +21,16 @@ import { baselineIndex, radarProfile } from '@/lib/scoring'
 import { toSummaries } from '@/lib/resultView'
 import { getTest } from '@/data/testCatalog'
 import { ageFromBirthDate, formatDate, formatNumber, formatRelativeMonths } from '@/lib/format'
-import type { AppLocale, ScoreMode } from '@/types/domain'
+import type { ScoreMode } from '@/types/domain'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 /** Empfohlener Abstand zwischen zwei Diagnostikterminen. */
 const RETEST_INTERVAL_MONTHS = 4
 
 export function DashboardScreen() {
-  const { t, i18n } = useTranslation()
-  const locale: AppLocale = i18n.resolvedLanguage === 'en' ? 'en' : 'de'
+  const { t } = useTranslation()
+  const locale = useLocale()
   const [mode, setMode] = useState<ScoreMode>('population')
   const { data } = useAppData()
   // Anforderungskontur der Disziplin, sofern eine gewählt ist.
@@ -250,7 +252,7 @@ export function DashboardScreen() {
             mode={mode}
             locale={locale}
             disciplineWeights={discipline?.dimensionWeights}
-            disciplineLabel={discipline?.name[locale]}
+            disciplineLabel={pick(discipline?.name, locale)}
           />
         </Panel>
 
@@ -277,7 +279,7 @@ export function DashboardScreen() {
                   <span className="mt-0.5 block text-[11px] leading-snug text-ink-muted">
                     {t('dashboard.scoreBasis', {
                       tests: score.basis
-                        .map((b) => getTest(b)?.shortName[locale] ?? t(`metrics.${b}`))
+                        .map((b) => pick(getTest(b)?.shortName, locale) ?? t(`metrics.${b}`))
                         .join(' + '),
                     })}
                   </span>
@@ -308,14 +310,14 @@ export function DashboardScreen() {
           <Panel className="lg:col-span-2">
             <PanelHeader
               title={t('dashboard.trend')}
-              subtitle={`${trend.test.name[locale]} · ${trend.test.primaryUnit}`}
+              subtitle={`${pick(trend.test.name, locale)} · ${trend.test.primaryUnit}`}
             />
             <div className="px-2 py-3">
               <TrendChart
                 points={trend.points}
                 unit={trend.test.primaryUnit === 's' ? 's' : trend.test.primaryUnit}
                 locale={locale}
-                label={trend.test.name[locale]}
+                label={pick(trend.test.name, locale)}
               />
             </div>
           </Panel>

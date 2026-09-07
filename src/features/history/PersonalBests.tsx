@@ -11,6 +11,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { cn } from '@/lib/utils'
 import type { AppLocale } from '@/types/domain'
 import type { StoredResult } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /**
  * Bestleistungen je Test (§69).
@@ -54,7 +55,7 @@ export function PersonalBests({
                 to={`/tests/${best.testSlug}/details`}
                 className="flex min-h-16 flex-col justify-center gap-0.5 px-4 py-3 transition-colors hover:bg-surface-sunken"
               >
-                <span className="truncate text-[13px]">{test?.name[locale] ?? best.testSlug}</span>
+                <span className="truncate text-[13px]">{pick(test?.name, locale) ?? best.testSlug}</span>
                 <span className="readout font-display text-[19px] leading-tight font-bold tabular-nums">
                   {formatResultValue(best.result, locale, data.profile.unitSystem)}
                 </span>

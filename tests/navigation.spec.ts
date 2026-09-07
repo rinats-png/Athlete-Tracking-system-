@@ -118,11 +118,12 @@ test.describe("Aufgeräumte Kopfzeile", () => {
     await openGuest(page);
 
     const header = page.locator("header").first();
-    await expect(header.getByRole("radiogroup", { name: /Sprache|Language/ })).toHaveCount(0);
+    // Die Sprachwahl ist seit acht Sprachen eine Auswahlliste, kein Knopfpaar.
+    await expect(header.getByRole("combobox", { name: /Sprache|Language/ })).toHaveCount(0);
     await expect(header.getByRole("radiogroup", { name: /Darstellung|Appearance/ })).toHaveCount(0);
 
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("radiogroup", { name: /Sprache|Language/ })).toBeVisible();
+    await expect(page.getByRole("combobox", { name: /Sprache|Language/ })).toBeVisible();
     await expect(
       page.getByRole("radiogroup", { name: /Darstellung|Appearance/ }),
     ).toBeVisible();

@@ -13,6 +13,7 @@ import { getTest } from '@/data/testCatalog'
 import { formatDate } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 /** Kalender (Konzept §23): wann getestet wurde, was, und was fällig ist. */
 export function CalendarScreen() {
@@ -110,7 +111,7 @@ export function CalendarScreen() {
               {day.results.map((r) => (
                 <li key={r.id}>
                   <Link to={`/ergebnis/${r.id}`} className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-accent-quiet">
-                    <span className="text-[14px]">{getTest(r.testSlug)?.name[locale] ?? r.testSlug}</span>
+                    <span className="text-[14px]">{pick(getTest(r.testSlug)?.name, locale) ?? r.testSlug}</span>
                     <span className="readout">{formatResultValue(r, locale)}</span>
                   </Link>
                 </li>
@@ -118,7 +119,7 @@ export function CalendarScreen() {
               {day.due.map((slug) => (
                 <li key={slug}>
                   <Link to={`/tests/${slug}`} className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-accent-quiet">
-                    <span className="text-[14px]">{getTest(slug)?.name[locale] ?? slug}</span>
+                    <span className="text-[14px]">{pick(getTest(slug)?.name, locale) ?? slug}</span>
                     <span className="label-tag text-warning">{t('calendar.due')}</span>
                   </Link>
                 </li>

@@ -12,6 +12,7 @@ import { TEST_CATALOG } from '@/data/testCatalog'
 import { TEST_BATTERIES, disciplineBattery } from '@/data/testBatteries'
 import { AREAS, type Area } from '@/domain/areas'
 import { cn } from '@/lib/utils'
+import { pick } from '@/i18n/pick'
 
 const AREA_ICONS: Record<Area, typeof Dumbbell> = {
   strength: Dumbbell,
@@ -111,7 +112,7 @@ export function DiagnosticsHub() {
 
       <ul className="grid gap-3 sm:grid-cols-2">
         {main
-          ? entry(`/sport/${main.id}`, t('diag.mySport'), t('diag.mySportHint', { sport: main.name[locale] }), ListChecks, true, 0, 0)
+          ? entry(`/sport/${main.id}`, t('diag.mySport'), t('diag.mySportHint', { sport: pick(main.name, locale) }), ListChecks, true, 0, 0)
           : entry('/profil', t('diag.mySport'), t('diag.noSportHint'), ListChecks, false, 0, 0)}
         {AREAS.map((area, i) =>
           entry(
@@ -154,7 +155,7 @@ export function DiagnosticsHub() {
               <li key={battery.slug}>
                 <Link to={`/batterie/${encodeURIComponent(battery.slug)}`} className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-accent-quiet">
                   <span className="min-w-0">
-                    <span className="block text-[14px] font-medium">{battery.name[locale]}</span>
+                    <span className="block text-[14px] font-medium">{pick(battery.name, locale)}</span>
                     <span className="block text-[11px] text-ink-muted">
                       {t('diag.testCount', { count: battery.testSlugs.length })} · {battery.durationMinutes} min
                     </span>
@@ -190,7 +191,7 @@ export function SportCard({ sport, isMain }: { sport: Discipline; isMain: boolea
       <Link to={`/sport/${sport.id}`} className={cn('panel flex min-h-[7.5rem] flex-col justify-between px-4 py-3 transition-colors hover:bg-accent-quiet', isMain && 'panel-ticked')}>
         <div>
           <span className="label-tag">{isMain ? t('sport.isMain') : t('sport.isAdditional')}</span>
-          <span className="mt-0.5 block font-display text-[20px] leading-tight font-bold">{sport.name[locale]}</span>
+          <span className="mt-0.5 block font-display text-[20px] leading-tight font-bold">{pick(sport.name, locale)}</span>
         </div>
         <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-[12px] text-ink-secondary">
           <span>

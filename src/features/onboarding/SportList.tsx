@@ -4,6 +4,7 @@ import { Check, Search } from 'lucide-react'
 import { SPORT_CATEGORIES, DISCIPLINES, coreSlugs, type Discipline } from '@/data/sportProfiles'
 import { cn } from '@/lib/utils'
 import { SportArt } from '@/components/signature/SportArt'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Sportartenliste — alle Disziplinen, nach Bereichen gruppiert, mit
@@ -70,7 +71,7 @@ export function SportList({
               className="size-10 shrink-0 rounded-[10px]"
               position="50% 40%"
             />
-            <span className="truncate text-[15px] font-medium">{discipline.name[lang]}</span>
+            <span className="truncate text-[15px] font-medium">{pick(discipline.name, lang)}</span>
           </span>
           <span className="shrink-0 text-[12px] text-ink-muted">
             {t('tests.coreCount', { count: coreSlugs(discipline).length })}
@@ -102,7 +103,7 @@ export function SportList({
           return (
             <section key={category.id}>
               <h3 className="label-tag sticky top-0 border-y border-line bg-surface-sunken px-4 py-1.5 first:border-t-0">
-                {category.name[lang]}
+                {pick(category.name, lang)}
               </h3>
               <ul>{inCategory.map(row)}</ul>
             </section>

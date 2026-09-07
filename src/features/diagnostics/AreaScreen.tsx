@@ -9,6 +9,7 @@ import { ratingContextOf, reminderSettingsOf } from '@/features/shared/profileCo
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { disciplineById } from '@/data/sportProfiles'
 import { AREAS, testsForArea, type Area } from '@/domain/areas'
+import { pick } from '@/i18n/pick'
 
 /** Ein Leistungsbereich (Konzept §7): erst die Tests der eigenen Sportart, dann alle. */
 export function AreaScreen() {
@@ -39,7 +40,7 @@ export function AreaScreen() {
       {main && (
         <section className="mb-6">
           <h2 className="label-tag mb-2">
-            {t('diag.forYourSport')} · {main.name[locale]}
+            {t('diag.forYourSport')} · {pick(main.name, locale)}
           </h2>
           {own.length === 0 ? (
             <p className="text-[13px] text-ink-secondary">{t('diag.noneInArea')}</p>

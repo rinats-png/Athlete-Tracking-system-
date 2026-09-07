@@ -17,6 +17,7 @@ import { downloadFile } from '@/lib/export/csv'
 import { buildIcs } from '@/lib/export/ics'
 import { notifyPermission, requestNotifyPermission } from '@/lib/notify'
 import type { NotifyPermission } from '@/lib/notify'
+import { pick } from '@/i18n/pick'
 
 /** Erinnerungen (Konzept §24): einschalten, fällige Tests, Abstände je Test. */
 export function RemindersScreen() {
@@ -115,7 +116,7 @@ export function RemindersScreen() {
                 <li key={d.slug} className="flex items-center justify-between gap-3 px-4 py-2.5">
                   <span className="text-[13px]">
                     {t('reminders.overdueLine', {
-                      test: getTest(d.slug)?.name[locale] ?? d.slug,
+                      test: pick(getTest(d.slug)?.name, locale) ?? d.slug,
                       weeks: Math.floor((d.overdueDays + d.intervalDays) / 7),
                     })}
                   </span>
@@ -136,7 +137,7 @@ export function RemindersScreen() {
               const own = data.profile.reminderIntervalDays[d.slug] ?? null
               return (
                 <li key={d.slug} className="px-4 py-3">
-                  <p className="text-[14px] font-medium">{getTest(d.slug)?.name[locale] ?? d.slug}</p>
+                  <p className="text-[14px] font-medium">{pick(getTest(d.slug)?.name, locale) ?? d.slug}</p>
                   <p className="text-[11px] text-ink-muted">{t('reminders.dueOn', { date: formatDate(d.dueOn, locale) })}</p>
                   <div className="mt-2 flex flex-wrap items-end gap-2">
                     <NumberField

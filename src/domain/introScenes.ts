@@ -3,6 +3,8 @@ import { UNIVERSAL_TEST_SLUGS } from '@/domain/diagnosticProfile'
 import { rateResult, type RatingContext } from '@/domain/rating'
 import type { PerformanceDimension } from '@/types/domain'
 import type { StoredResult } from '@/lib/store/localStore'
+import type { AppLocale } from '@/i18n/locales'
+import { pick } from '@/i18n/pick'
 
 /**
  * Was die Intro-Sequenz zeigt.
@@ -48,7 +50,7 @@ export const MAX_SCENES = 3
 export function introScenes(
   results: StoredResult[],
   context: RatingContext,
-  locale: 'de' | 'en',
+  locale: AppLocale,
   formatValue: (result: StoredResult) => string,
 ): IntroScene[] {
   const measured = results.filter((r) => r.score != null)
@@ -66,7 +68,7 @@ export function introScenes(
     if (!test) continue
     const rating = rateResult(result, context)
     callouts.push({
-      label: test.shortName[locale],
+      label: pick(test.shortName, locale),
       value: formatValue(result),
       unit: null,
       // Nur ein belegtes Perzentil füllt den Balken. Ohne Referenz bleibt er
@@ -81,9 +83,9 @@ export function introScenes(
     for (const slug of UNIVERSAL_TEST_SLUGS) {
       if (callouts.length >= MAX_SCENES * 2) break
       const test = getTest(slug)
-      if (!test || callouts.some((c) => c.label === test.shortName[locale])) continue
+      if (!test || callouts.some((c) => c.label === pick(test.shortName, locale))) continue
       callouts.push({
-        label: test.shortName[locale],
+        label: pick(test.shortName, locale),
         value: null,
         unit: test.primaryUnit,
         fill: null,

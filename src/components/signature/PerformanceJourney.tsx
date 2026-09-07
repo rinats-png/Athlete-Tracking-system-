@@ -4,6 +4,7 @@ import { getTest } from '@/data/testCatalog'
 import { formatDate, formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { JourneyNode } from '@/domain/journey'
+import { pick } from '@/i18n/pick'
 
 /**
  * Die Performance Journey — das dritte Signature-Element.
@@ -66,7 +67,7 @@ export function PerformanceJourney({
               </span>
               {test && (
                 <span className="readout mt-0.5 block text-[9px] text-accent-text">
-                  {test.shortName[locale]}
+                  {pick(test.shortName, locale)}
                   {node.value != null && ` · ${formatNumber(node.value, locale, 1)}`}
                 </span>
               )}

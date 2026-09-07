@@ -17,6 +17,7 @@ import { disciplineById } from '@/data/sportProfiles'
 import { formatDate, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import type { StoredResult } from '@/lib/store/localStore'
+import { pick } from '@/i18n/pick'
 
 /** So viele Messwerte passen auf eine Seite, ohne dass sie zwei wird. */
 const MAX_ROWS = 8
@@ -95,7 +96,7 @@ export function OnePagerScreen() {
           <h1 className="report-name font-display mt-1 text-[30px] leading-none font-bold">{name}</h1>
           <dl className="mt-2 grid grid-cols-2 gap-x-6 gap-y-1 text-[12px] sm:grid-cols-3">
             <Fact label={t('onePager.date')} value={formatDate(new Date().toISOString(), locale)} />
-            <Fact label={t('onePager.discipline')} value={discipline?.name[locale] ?? '—'} />
+            <Fact label={t('onePager.discipline')} value={pick(discipline?.name, locale) ?? '—'} />
             <Fact label={t('onePager.by')} value={data.branding.organisation || '—'} />
           </dl>
         </header>
@@ -163,7 +164,7 @@ export function OnePagerScreen() {
                 const change = changeReport(data.results, result)
                 return (
                   <tr key={result.id} className="border-b border-line/50">
-                    <td className="py-1 pr-2">{test?.name[locale] ?? result.testSlug}</td>
+                    <td className="py-1 pr-2">{pick(test?.name, locale) ?? result.testSlug}</td>
                     <td className="readout py-1 pr-2">{formatResultValue(result, locale)}</td>
                     <td className="py-1 pr-2">
                       {rating.level ? t(`rating.levels.${rating.level}`) : '—'}

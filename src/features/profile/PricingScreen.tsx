@@ -20,6 +20,7 @@ import {
   type InstitutionTrack,
 } from '@/data/pricing'
 import { formatNumber } from '@/lib/format'
+import { pick } from '@/i18n/pick'
 
 /**
  * Was BASELINE kosten wird.
@@ -65,7 +66,7 @@ export function PricingScreen() {
         {REPORT_BUNDLES.map((bundle) => (
           <Panel key={bundle.id} float={bundle.id === 'four'}>
             <PanelHeader
-              title={bundle.name[locale]}
+              title={pick(bundle.name, locale)}
               subtitle={t('pricing.bundlePrice', { amount: eur(bundle.priceEur) })}
             />
             <div className="px-4 py-3 text-[13px] leading-relaxed">
@@ -91,7 +92,7 @@ export function PricingScreen() {
         {COACH_TIERS.map((coach) => (
           <Panel key={coach.id}>
             <PanelHeader
-              title={coach.name[locale]}
+              title={pick(coach.name, locale)}
               subtitle={t('pricing.perMonth', { amount: eur(coach.monthlyEur) })}
             />
             <div className="px-4 py-3 text-[13px] leading-relaxed">
@@ -108,7 +109,7 @@ export function PricingScreen() {
           {tier
             ? t('pricing.yourTier', {
                 count: athletes.length,
-                tier: tier.name[locale],
+                tier: pick(tier.name, locale),
                 amount: eur(tier.monthlyEur),
               })
             : t('pricing.yourTierNone', { count: athletes.length })}
@@ -125,12 +126,12 @@ export function PricingScreen() {
       <div className="grid gap-4 sm:grid-cols-2">
         {INSTITUTION_PROFILES.map((profile) => (
           <Panel key={profile.track}>
-            <PanelHeader title={profile.name[locale]} subtitle={t('pricing.onRequestShort')} />
+            <PanelHeader title={pick(profile.name, locale)} subtitle={t('pricing.onRequestShort')} />
             <ul className="space-y-2 px-4 py-3 text-[13px] leading-relaxed">
               {profile.criteria.map((criterion) => (
                 <li key={criterion.de} className="flex gap-2">
                   <Check size={15} className="mt-px shrink-0 text-accent-text" aria-hidden />
-                  <span>{criterion[locale]}</span>
+                  <span>{pick(criterion, locale)}</span>
                 </li>
               ))}
             </ul>
@@ -206,7 +207,7 @@ function EnquiryForm() {
                 setCopied(false)
               }}
             >
-              {profile.name[locale]}
+              {pick(profile.name, locale)}
             </Button>
           ))}
         </fieldset>
