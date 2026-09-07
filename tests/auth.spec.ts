@@ -164,7 +164,10 @@ test.describe('Abmelden', () => {
     const vorher = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
     expect(vorher).not.toBeNull()
 
-    await page.getByRole('button', { name: 'Abmelden' }).click()
+    // `exact`, weil daneben «Abmelden und Gerät leeren» steht — der Weg für
+    // geteilte Geräte. Ohne die genaue Übereinstimmung träfe die Suche beide,
+    // und ausgerechnet dieser Fall prüft, dass der Bestand bleibt.
+    await page.getByRole('button', { name: 'Abmelden', exact: true }).click()
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
 
     const konto = await page.evaluate(() => localStorage.getItem('baseline.account.v1'))
