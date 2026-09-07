@@ -1156,8 +1156,7 @@
   },
   "orb": {
     "alt": "Prestasjonsprofil som form: verdi {{score}}, fra {{rated}} av {{total}} akser med kildebelagt referanse.",
-    "altNoScore": "Prestasjonsprofil som form. Et sammendrag trenger fortsatt flere kildebelagte akser.",
-    "noScore": "Ikke noe sammendrag ennå"
+    "altNoScore": "Prestasjonsprofil som form. Et sammendrag trenger fortsatt flere kildebelagte akser."
   },
   "actionOrb": {
     "open": "Åpne hurtighandlinger",

@@ -77,6 +77,72 @@ test.describe('Performance Orb', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await expect(page.getByRole('img', { name: /Leistungsprofil als Form/ })).toHaveCount(0)
   })
+
+  /*
+   * Die Zusage des Bauteils: «Der Abstand jedes Knotens vom Mittelpunkt IST
+   * sein Wert.» Sie galt nicht: die Kurve lief über die MITTELPUNKTE
+   * zwischen den Knoten, und bei einem Profil mit einer starken und vier
+   * unbelegten Achsen — dem Regelfall am Anfang — erreichte sie den starken
+   * Knoten nie. Der Punkt schwebte sichtbar neben der Fläche.
+   */
+  test('die Form läuft durch jeden Knoten, nicht daran vorbei', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' })
+    const page = await context.newPage()
+    await openDemo(page)
+    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.getByRole('img', { name: /Leistungsprofil als Form/ }).waitFor()
+
+    const offPath = await page.evaluate(() => {
+      const svg = document.querySelector('svg[role="img"]')!
+      const path = svg.querySelector('path') as SVGPathElement
+      return [...svg.querySelectorAll('[data-orb-node]')]
+        .filter((node) => {
+          const point = new DOMPoint(
+            Number(node.getAttribute('cx')),
+            Number(node.getAttribute('cy')),
+          )
+          return !path.isPointInStroke(point)
+        })
+        .map((node) => node.getAttribute('data-orb-node'))
+    })
+    expect(offPath, 'diese Knoten liegen nicht auf der Umrisslinie').toEqual([])
+    await context.close()
+  })
+
+  /*
+   * Die Beschriftungen hingen früher am Knoten und wanderten mit kleinem
+   * Wert nach innen — dort schoben sie sich übereinander und über den Text
+   * in der Mitte. Jetzt liegen sie auf einem festen Ring; dieser Fall hält
+   * fest, dass sie einander nicht mehr berühren.
+   */
+  test('die Achsenbeschriftungen überlappen einander nicht', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' })
+    const page = await context.newPage()
+    await openDemo(page)
+    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.getByRole('img', { name: /Leistungsprofil als Form/ }).waitFor()
+
+    const collisions = await page.evaluate(() => {
+      const labels = [...document.querySelectorAll('[data-orb-label]')] as SVGTextElement[]
+      const boxes = labels.map((el) => ({
+        name: el.getAttribute('data-orb-label')!,
+        box: el.getBBox(),
+      }))
+      const hits: string[] = []
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          const a = boxes[i].box
+          const b = boxes[j].box
+          const overlaps =
+            a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height
+          if (overlaps) hits.push(`${boxes[i].name} / ${boxes[j].name}`)
+        }
+      }
+      return hits
+    })
+    expect(collisions, 'diese Beschriftungen liegen übereinander').toEqual([])
+    await context.close()
+  })
 })
 
 /**

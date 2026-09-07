@@ -1156,8 +1156,7 @@
   },
   "orb": {
     "alt": "Prestationsprofil som form: värde {{score}}, från {{rated}} av {{total}} axlar med källbelagd referens.",
-    "altNoScore": "Prestationsprofil som form. En sammanfattning kräver fler källbelagda axlar.",
-    "noScore": "Ingen sammanfattning ännu"
+    "altNoScore": "Prestationsprofil som form. En sammanfattning kräver fler källbelagda axlar."
   },
   "actionOrb": {
     "open": "Öppna snabbåtgärder",

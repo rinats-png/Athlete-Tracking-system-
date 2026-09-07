@@ -44,9 +44,14 @@ for (const part of ['', '.extra']) {
   console.log(`${file}: ${Object.keys(ref).length} Schlüssel geprüft`)
 }
 
+// Deutsch und Englisch brauchen keine Inhaltstabelle: beide stehen im Code,
+// und Englisch IST die Ausweichsprache der Inhalte. `content/en.json` ist der
+// Export, gegen den die übrigen Sprachen geprüft werden — keine Übersetzung.
 const exportFile = process.argv[3] ?? 'src/i18n/content/en.json'
 const contentFile = `src/i18n/content/${lang}.json`
-if (!existsSync(contentFile)) fail(`${contentFile} fehlt`)
+if (lang === 'de' || lang === 'en') {
+  console.log(`${lang}: keine Inhaltstabelle nötig — die Inhalte stehen im Code`)
+} else if (!existsSync(contentFile)) fail(`${contentFile} fehlt`)
 else {
   const source = read(exportFile)
   const table = read(contentFile)

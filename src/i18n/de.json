@@ -1156,8 +1156,7 @@
   },
   "orb": {
     "alt": "Leistungsprofil als Form: Wert {{score}}, aus {{rated}} von {{total}} Achsen mit belegter Referenz.",
-    "altNoScore": "Leistungsprofil als Form. Für eine Zusammenfassung fehlen noch belegte Achsen.",
-    "noScore": "Noch keine Zusammenfassung"
+    "altNoScore": "Leistungsprofil als Form. Für eine Zusammenfassung fehlen noch belegte Achsen."
   },
   "actionOrb": {
     "open": "Schnellaktionen öffnen",

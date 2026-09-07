@@ -1,40 +1,76 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocale } from '@/features/shared/useLocale'
 import { axisLabel } from '@/data/profileAxes'
-import { formatNumber } from '@/lib/format'
 import type { PerformanceScore } from '@/domain/performanceScore'
 
 /**
  * Der Performance Orb — das Signature-Element des Systems.
  *
- * Ein organisch geschlossener Weg durch die Dimensionsknoten. Der Abstand
- * jedes Knotens vom Mittelpunkt IST sein Wert; die Form des Orbs ist damit
- * das Leistungsprofil und keine Illustration davon. Wer in einer Dimension
- * besser wird, sieht die Form dort nach aussen gehen.
+ * Ein organisch geschlossener Weg DURCH die Achsenknoten. Der Abstand jedes
+ * Knotens vom Mittelpunkt IST sein Wert; die Form des Orbs ist damit das
+ * Leistungsprofil und keine Illustration davon.
  *
- * DREI ENTSCHEIDUNGEN, DIE HIER WICHTIG SIND:
+ * VIER ENTSCHEIDUNGEN, DIE HIER WICHTIG SIND:
  *
  * 1. Achsen OHNE belegte Referenz liegen auf einem festen kleinen Radius und
  *    tragen einen offenen Knoten. Sie als Null zu zeichnen hiesse, eine
  *    fehlende Referenz als schlechte Leistung darzustellen — das ist die
  *    gefährlichste Lüge, die dieses Bild erzählen könnte.
  *
- * 2. Die Atmung ist winzig (±2,2 px) und langsam. Sie sagt «das ist ein
+ * 2. Die Kurve läuft durch die Knoten. Vorher führte sie über die
+ *    MITTELPUNKTE zwischen ihnen (quadratische Bögen). Das sah weich aus,
+ *    war aber falsch: bei einem Profil mit einer starken und vier
+ *    unbelegten Achsen erreichte die Form den starken Knoten nie, und der
+ *    Punkt schwebte sichtbar neben der Fläche. Jetzt ist es eine
+ *    geschlossene Catmull-Rom-Kurve — sie geht durch jeden Punkt, und die
+ *    Zusage des ersten Absatzes stimmt wieder.
+ *
+ * 3. Die Beschriftungen liegen auf einem RING um die Form, nicht am Knoten.
+ *    Am Knoten wanderten sie mit dem Wert nach innen und schoben sich über
+ *    die Zahl in der Mitte; auf dem Ring stehen sie immer aussen. Ihre
+ *    Ausrichtung folgt der Seite: rechts linksbündig, links rechtsbündig,
+ *    oben und unten mittig — so wachsen sie vom Bild weg statt darüber.
+ *
+ *    Dazu gehört der MASSSTAB: zwei blasse Kreise bei 50 und 100 und eine
+ *    Speiche je Achse. Ohne ihn stand eine kleine Form in der Mitte und die
+ *    Beschriftungen weit draussen im Nichts — der Abstand sah aus wie ein
+ *    Fehler im Satz. Mit ihm ist derselbe Abstand die Aussage: so weit ist
+ *    diese Achse vom oberen Ende der Skala entfernt.
+ *
+ * 4. Die Atmung ist winzig (±2 px) und langsam. Sie sagt «das ist ein
  *    lebendes Profil», nicht «schau her». Bei `prefers-reduced-motion`
  *    steht sie still — die Form bleibt trotzdem korrekt, weil die Ruhelage
  *    die Daten sind und die Bewegung nur eine Auslenkung davon.
  *
- * 3. Gezeichnet wird auf `requestAnimationFrame` mit direkten
- *    Attributschreibungen, nicht über den Zustand von React. Ein
- *    Zustandswechsel je Bild würde den ganzen Bildschirm neu rendern.
+ * WAS HIER NICHT MEHR STEHT: die Zusammenfassungszahl in der Mitte. Ein
+ * grosser Zahlenblock im Zentrum setzt voraus, dass der innere Radius frei
+ * ist — bei diesem Datenmodell ist er es gerade dann nicht, wenn es darauf
+ * ankommt: eine Achse ohne belegte Referenz liegt auf dem Grundradius, also
+ * nah am Mittelpunkt, und ihr Knoten lag dann in der Zahl. Die Zahl steht
+ * mit ihrer Abdeckung, ihrem Balken und ihrem Vorbehalt unmittelbar unter
+ * dem Orb (`ScoreSummary`); zweimal gehörte sie ohnehin nie hin. Der Orb
+ * zeigt die FORM, die Zusammenfassung zeigt die ZAHL.
+ *
+ * Gezeichnet wird auf `requestAnimationFrame` mit direkten
+ * Attributschreibungen, nicht über den Zustand von React: ein
+ * Zustandswechsel je Bild würde den ganzen Bildschirm neu rendern. Nur die
+ * Form und die Knoten atmen; die Beschriftungen stehen fest, sonst
+ * zitterten sie mit.
  */
 
+/** Zeichenfläche. Breiter als hoch, weil die Beschriftungen seitlich Platz brauchen. */
+const W = 320
+const H = 212
+const CX = 160
+const CY = 106
 /** Radius bei Wert 0. Auch ein leeres Profil ist eine Form, kein Punkt. */
-const BASE = 32
-const SCALE = 0.6
-const CX = 112
-const CY = 112
+const BASE = 26
+const SCALE = 0.46
+/** Radius bei Wert 100 — der äussere Massstabsring. */
+const FULL_R = BASE + 100 * SCALE
+/** Ring der Beschriftungen, knapp ausserhalb des Massstabs. */
+const LABEL_R = FULL_R + 12
 
 export interface OrbAxis {
   axisId: string
@@ -47,70 +83,53 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-/** Der geschlossene Weg durch die Punkte, weich über Quadratbögen geführt. */
-function pathThrough(points: { x: number; y: number }[]): string {
-  if (points.length < 3) return ''
-  const mid = (a: { x: number; y: number }, b: { x: number; y: number }) => ({
-    x: (a.x + b.x) / 2,
-    y: (a.y + b.y) / 2,
-  })
-  const start = mid(points[0], points[1])
-  let d = `M ${start.x.toFixed(2)} ${start.y.toFixed(2)}`
-  for (let i = 1; i <= points.length; i++) {
-    const current = points[i % points.length]
-    const next = points[(i + 1) % points.length]
-    const end = mid(current, next)
-    d += ` Q ${current.x.toFixed(2)} ${current.y.toFixed(2)} ${end.x.toFixed(2)} ${end.y.toFixed(2)}`
+/**
+ * Geschlossene Catmull-Rom-Kurve, als kubische Bézier geschrieben.
+ *
+ * Sie läuft durch JEDEN Punkt. Die Spannung ist leicht unter 1 gesetzt: bei
+ * einem grossen Sprung zwischen zwei Nachbarn — eine starke Achse neben
+ * vier unbelegten — wölbt sich eine volle Catmull-Rom über den Knoten
+ * hinaus, und die Form behauptete dort mehr, als gemessen wurde.
+ */
+function closedSpline(points: { x: number; y: number }[], tension = 0.82): string {
+  const n = points.length
+  if (n < 3) return ''
+  const f = (v: number) => v.toFixed(2)
+  let d = `M ${f(points[0].x)} ${f(points[0].y)}`
+  for (let i = 0; i < n; i++) {
+    const p0 = points[(i - 1 + n) % n]
+    const p1 = points[i]
+    const p2 = points[(i + 1) % n]
+    const p3 = points[(i + 2) % n]
+    const c1x = p1.x + ((p2.x - p0.x) / 6) * tension
+    const c1y = p1.y + ((p2.y - p0.y) / 6) * tension
+    const c2x = p2.x - ((p3.x - p1.x) / 6) * tension
+    const c2y = p2.y - ((p3.y - p1.y) / 6) * tension
+    d += ` C ${f(c1x)} ${f(c1y)}, ${f(c2x)} ${f(c2y)}, ${f(p2.x)} ${f(p2.y)}`
   }
   return `${d} Z`
 }
 
+/** Winkel der i-ten Achse, im Bogenmass. Die erste steht oben. */
+const angleOf = (i: number, count: number) => ((-90 + (i * 360) / count) * Math.PI) / 180
+
 export function PerformanceOrb({
   axes,
   score,
-  delta,
   className,
 }: {
   axes: OrbAxis[]
   score: PerformanceScore
-  /** Satz unter dem Wert, z. B. «+6 seit deinem ersten Test». Optional. */
-  delta?: string | null
   className?: string
 }) {
   const { t } = useTranslation()
   const locale = useLocale()
   const pathRef = useRef<SVGPathElement>(null)
-  const nodesRef = useRef<(SVGGElement | null)[]>([])
-  const [shown, setShown] = useState(score.value == null ? null : 0)
+  const nodesRef = useRef<(SVGCircleElement | null)[]>([])
 
   // Höchstens sechs Achsen: mehr Knoten machen die Form unlesbar, und die
   // Spezifikation nennt sechs Dimensionen.
   const dims = useMemo(() => axes.slice(0, 6), [axes])
-
-  /**
-   * Der Zähler des Werts. Kubisch auslaufend, damit er ankommt statt
-   * abzubrechen — und nur einmal je Wert, nicht bei jedem Rendern.
-   */
-  useEffect(() => {
-    if (score.value == null) {
-      setShown(null)
-      return
-    }
-    const target = score.value
-    if (prefersReducedMotion()) {
-      setShown(target)
-      return
-    }
-    let raf = 0
-    const started = performance.now()
-    const tick = (now: number) => {
-      const p = Math.min((now - started) / 1300, 1)
-      setShown(Math.round(target * (1 - Math.pow(1 - p, 3))))
-      if (p < 1) raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [score.value])
 
   /** Form und Knoten. Läuft ausserhalb von React, Bild für Bild. */
   useEffect(() => {
@@ -123,23 +142,19 @@ export function PerformanceOrb({
 
     const draw = () => {
       const points = dims.map((dim, i) => {
-        const angle = ((-90 + (i * 360) / dims.length) * Math.PI) / 180
+        const angle = angleOf(i, dims.length)
         // Eine Achse ohne Referenz bekommt den Grundradius — nicht null.
         const value = dim.score ?? 0
-        const breathe = still ? 0 : Math.sin(phase + i * 1.1) * 2.2
+        const breathe = still ? 0 : Math.sin(phase + i * 1.1) * 2
         const r = BASE + value * SCALE + breathe
-        return { x: CX + Math.cos(angle) * r, y: CY + Math.sin(angle) * r, angle, r }
+        return { x: CX + Math.cos(angle) * r, y: CY + Math.sin(angle) * r }
       })
-      path.setAttribute('d', pathThrough(points))
+      path.setAttribute('d', closedSpline(points))
       points.forEach((p, i) => {
         const node = nodesRef.current[i]
         if (!node) return
-        node.setAttribute('transform', `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)})`)
-        const label = node.querySelector('text')
-        if (label) {
-          label.setAttribute('x', (Math.cos(p.angle) * 17).toFixed(2))
-          label.setAttribute('y', (Math.sin(p.angle) * 17 + 3).toFixed(2))
-        }
+        node.setAttribute('cx', p.x.toFixed(2))
+        node.setAttribute('cy', p.y.toFixed(2))
       })
       if (!still) {
         phase += 0.007
@@ -150,73 +165,103 @@ export function PerformanceOrb({
     return () => cancelAnimationFrame(raf)
   }, [dims])
 
-  const label = (axisId: string) => axisLabel(axisId, t, locale)
+  /**
+   * Die Beschriftungen auf dem Ring — einmal gerechnet, nicht je Bild.
+   * `anchor` hält sie vom Bild weg, `dy` setzt die Grundlinie: oben über
+   * den Punkt, unten darunter, seitlich auf halbe Zeilenhöhe.
+   */
+  const labels = useMemo(
+    () =>
+      dims.map((dim, i) => {
+        const angle = angleOf(i, dims.length)
+        const cos = Math.cos(angle)
+        const sin = Math.sin(angle)
+        const anchor: 'start' | 'end' | 'middle' =
+          cos > 0.3 ? 'start' : cos < -0.3 ? 'end' : 'middle'
+        return {
+          axisId: dim.axisId,
+          x: CX + cos * LABEL_R,
+          y: CY + sin * LABEL_R,
+          anchor,
+          dy: sin < -0.7 ? -2 : sin > 0.7 ? 9 : 3.2,
+        }
+      }),
+    [dims],
+  )
 
   return (
     <div className={className}>
-      <div className="relative mx-auto aspect-square w-full max-w-[240px]">
-        <svg
-          viewBox="0 0 224 224"
-          className="absolute inset-0 overflow-visible"
-          role="img"
-          aria-label={
-            score.value == null
-              ? t('orb.altNoScore')
-              : t('orb.alt', { score: score.value, rated: score.ratedAxes, total: score.totalAxes })
-          }
-        >
-          <path
-            ref={pathRef}
-            fill="color-mix(in oklab, var(--accent-glow) 55%, transparent)"
-            stroke="var(--accent)"
-            strokeWidth={1.4}
-          />
-          {dims.map((dim, i) => (
-            <g
-              key={dim.axisId}
-              ref={(el) => {
-                nodesRef.current[i] = el
-              }}
-            >
-              {/* Ein offener Kreis heisst: gemessen, aber ohne belegte
-                  Referenz. Gefüllt heisst: eingeordnet. */}
-              <circle
-                r={4.5}
-                fill={dim.score == null ? 'var(--surface)' : 'var(--accent)'}
-                stroke="var(--accent)"
-                strokeWidth={dim.score == null ? 1.4 : 0}
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        className="mx-auto block w-full max-w-[360px]"
+        role="img"
+        aria-label={
+          score.value == null
+            ? t('orb.altNoScore')
+            : t('orb.alt', { score: score.value, rated: score.ratedAxes, total: score.totalAxes })
+        }
+      >
+        {/* Der Massstab, blass und ohne Beschriftung: er ordnet ein, er
+            konkurriert nicht mit den Daten. */}
+        <g stroke="var(--grid)" fill="none" aria-hidden>
+          <circle cx={CX} cy={CY} r={FULL_R} />
+          <circle cx={CX} cy={CY} r={BASE + 50 * SCALE} />
+          {dims.map((dim, i) => {
+            const angle = angleOf(i, dims.length)
+            return (
+              <line
+                key={dim.axisId}
+                x1={CX}
+                y1={CY}
+                x2={CX + Math.cos(angle) * FULL_R}
+                y2={CY + Math.sin(angle) * FULL_R}
               />
-              <text
-                fontSize={7.5}
-                letterSpacing={1}
-                textAnchor="middle"
-                fill="var(--ink-muted)"
-                className="uppercase"
-              >
-                {label(dim.axisId)}
-              </text>
-            </g>
-          ))}
-        </svg>
+            )
+          })}
+        </g>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          {shown == null ? (
-            <p className="max-w-[9rem] text-[12px] leading-snug text-ink-secondary">
-              {t('orb.noScore')}
-            </p>
-          ) : (
-            <>
-              <span className="readout text-[48px] leading-none font-bold tabular-nums">
-                {formatNumber(shown, locale, 0)}
-              </span>
-              <span className="label-tag mt-1.5">{t('score.title')}</span>
-            </>
-          )}
-          <span className="readout mt-2 rounded-pill bg-accent-quiet px-2.5 py-1 text-[10px] whitespace-nowrap text-accent-text">
-            {delta ?? t('score.coverage', { rated: score.ratedAxes, total: score.totalAxes })}
-          </span>
-        </div>
-      </div>
+        <path
+          ref={pathRef}
+          fill="color-mix(in oklab, var(--accent-glow) 55%, transparent)"
+          stroke="var(--accent)"
+          strokeWidth={1.4}
+        />
+
+        {/* Ein offener Kreis heisst: gemessen, aber ohne belegte Referenz.
+            Gefüllt heisst: eingeordnet. */}
+        {dims.map((dim, i) => (
+          <circle
+            key={dim.axisId}
+            ref={(el) => {
+              nodesRef.current[i] = el
+            }}
+            r={4.5}
+            data-orb-node={dim.axisId}
+            fill={dim.score == null ? 'var(--surface)' : 'var(--accent)'}
+            stroke="var(--accent)"
+            strokeWidth={dim.score == null ? 1.4 : 0}
+          />
+        ))}
+
+        {labels.map((label) => (
+          <text
+            key={label.axisId}
+            x={label.x}
+            y={label.y}
+            dy={label.dy}
+            textAnchor={label.anchor}
+            fontFamily="var(--font-display)"
+            fontSize={9}
+            fontWeight={600}
+            letterSpacing={0.9}
+            fill="var(--ink-muted)"
+            data-orb-label={label.axisId}
+          >
+            {axisLabel(label.axisId, t, locale).toUpperCase()}
+          </text>
+        ))}
+
+      </svg>
     </div>
   )
 }

@@ -1156,8 +1156,7 @@
   },
   "orb": {
     "alt": "Perfil de rendimiento como forma: valor {{score}}, de {{rated}} de {{total}} ejes con referencia documentada.",
-    "altNoScore": "Perfil de rendimiento como forma. Un resumen necesita todavía más ejes con referencia.",
-    "noScore": "Aún sin resumen"
+    "altNoScore": "Perfil de rendimiento como forma. Un resumen necesita todavía más ejes con referencia."
   },
   "actionOrb": {
     "open": "Abrir acciones rápidas",

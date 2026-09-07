@@ -1156,8 +1156,7 @@
   },
   "orb": {
     "alt": "Profil de performance sous forme de figure : valeur {{score}}, d'après {{rated}} axes sur {{total}} avec référence sourcée.",
-    "altNoScore": "Profil de performance sous forme de figure. Une synthèse demande encore d'autres axes sourcés.",
-    "noScore": "Pas encore de synthèse"
+    "altNoScore": "Profil de performance sous forme de figure. Une synthèse demande encore d'autres axes sourcés."
   },
   "actionOrb": {
     "open": "Ouvrir les actions rapides",

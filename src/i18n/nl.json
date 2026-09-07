@@ -1156,8 +1156,7 @@
   },
   "orb": {
     "alt": "Prestatieprofiel als vorm: waarde {{score}}, uit {{rated}} van {{total}} assen met een gedocumenteerde referentie.",
-    "altNoScore": "Prestatieprofiel als vorm. Een samenvatting vereist nog meer gedocumenteerde assen.",
-    "noScore": "Nog geen samenvatting"
+    "altNoScore": "Prestatieprofiel als vorm. Een samenvatting vereist nog meer gedocumenteerde assen."
   },
   "actionOrb": {
     "open": "Snelle acties openen",

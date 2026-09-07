@@ -1156,8 +1156,7 @@
   },
   "orb": {
     "alt": "Præstationsprofil som form: værdi {{score}}, fra {{rated}} af {{total}} akser med kildebelagt reference.",
-    "altNoScore": "Præstationsprofil som form. En sammenfatning kræver stadig flere kildebelagte akser.",
-    "noScore": "Ingen sammenfatning endnu"
+    "altNoScore": "Præstationsprofil som form. En sammenfatning kræver stadig flere kildebelagte akser."
   },
   "actionOrb": {
     "open": "Åbn hurtige handlinger",
