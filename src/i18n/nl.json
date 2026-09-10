@@ -1273,6 +1273,17 @@
     "wipeConfirmBody": "Metingen, profielen en instellingen van deze app worden van dit apparaat verwijderd — definitief. Een gesynchroniseerde kopie op de server blijft bestaan. Zonder synchronisatie is een eerdere export de enige kopie.",
     "wipeConfirm": "Definitief verwijderen",
     "wipeCancel": "Annuleren",
+    "deleteAccount": "Account definitief verwijderen",
+    "deleteAccountHint": "Verwijdert het account en alle gegevens die ermee op de server zijn opgeslagen. Exporteer eerst wat u wilt bewaren.",
+    "deleteConfirmTitle": "Account en alle gegevens verwijderen?",
+    "deleteConfirmBody": "Het account, de serverkopie en alle metingen worden verwijderd. Cliënten die u begeleidt zonder eigen account worden ook verwijderd; cliënten met een eigen account behouden hun gegevens. Deze stap kan niet ongedaan worden gemaakt.",
+    "deleteConfirm": "Definitief verwijderen",
+    "deleteFailed": {
+      "not_configured": "Zonder account valt er op een server niets te verwijderen.",
+      "offline": "Geen verbinding. Probeer het later opnieuw.",
+      "unauthorized": "De sessie is verlopen. Meld u opnieuw aan en probeer het nogmaals.",
+      "failed": "Verwijderen is mislukt. Er is niets verwijderd."
+    },
     "signedInAs": "Aangemeld als {{name}}",
     "planChosen": "Gekozen niveau: {{plan}}",
     "planNone": "Nog geen niveau gekozen.",
@@ -1290,6 +1301,7 @@
       "email_taken": "Voor dit e-mailadres bestaat al een account. Meld je aan of reset het wachtwoord.",
       "weak_password": "Het wachtwoord is te kort.",
       "needs_confirmation": "Dit e-mailadres is nog niet bevestigd. De link staat in je inbox.",
+      "too_many_attempts": "Te veel mislukte pogingen. Wacht even en probeer het opnieuw.",
       "offline": "Geen verbinding. Je kunt op dit apparaat blijven meten — aanmelden kan wachten.",
       "not_configured": "Voor dit apparaat is geen project geconfigureerd.",
       "unknown": "Dat is niet gelukt. Probeer het later opnieuw."

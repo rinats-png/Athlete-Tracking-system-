@@ -94,7 +94,10 @@ test.describe('Trainermodus', () => {
     await expect(page.getByText(/endgültig gelöscht/)).toBeVisible()
     await expect(page.getByText(/Archiv/)).toBeVisible()
 
-    await page.getByRole('button', { name: 'Endgültig löschen' }).click()
+    // `exact`, weil im Profil daneben «Konto endgültig löschen» steht — ein
+    // anderer Weg mit anderer Tragweite. Ohne die genaue Übereinstimmung
+    // träfe die Suche beide.
+    await page.getByRole('button', { name: 'Endgültig löschen', exact: true }).click()
     await expect(page.getByRole('textbox', { name: /^Name von/ })).toHaveCount(1)
   })
 })

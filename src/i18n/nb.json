@@ -1273,6 +1273,17 @@
     "wipeConfirmBody": "Måleverdier, profiler og innstillinger i denne appen fjernes fra enheten — permanent. En synkronisert kopi på serveren beholdes. Uten synkronisering er en tidligere eksport den eneste kopien.",
     "wipeConfirm": "Slett permanent",
     "wipeCancel": "Avbryt",
+    "deleteAccount": "Slett kontoen permanent",
+    "deleteAccountHint": "Sletter kontoen og alle data som er lagret med den på serveren. Eksportér først det du vil beholde.",
+    "deleteConfirmTitle": "Slette kontoen og alle data?",
+    "deleteConfirmBody": "Kontoen, serverkopien og alle måleverdier fjernes. Utøvere du følger opp uten egen konto slettes også; de med egen konto beholder dataene sine. Dette trinnet kan ikke angres.",
+    "deleteConfirm": "Slett permanent",
+    "deleteFailed": {
+      "not_configured": "Uten konto finnes det ingenting å slette på en server.",
+      "offline": "Ingen forbindelse. Prøv igjen senere.",
+      "unauthorized": "Økten er utløpt. Logg inn på nytt og prøv igjen.",
+      "failed": "Slettingen mislyktes. Ingenting ble fjernet."
+    },
     "signedInAs": "Logget inn som {{name}}",
     "planChosen": "Valgt nivå: {{plan}}",
     "planNone": "Ikke noe nivå valgt ennå.",
@@ -1290,6 +1301,7 @@
       "email_taken": "Det finnes allerede en konto for denne e-posten. Logg inn eller tilbakestill passordet.",
       "weak_password": "Passordet er for kort.",
       "needs_confirmation": "Denne e-posten er ikke bekreftet ennå. Lenken ligger i innboksen din.",
+      "too_many_attempts": "For mange mislykkede forsøk. Vent et øyeblikk, og prøv igjen.",
       "offline": "Ingen tilkobling. Du kan fortsette å måle på denne enheten — innloggingen kan vente.",
       "not_configured": "Ingen prosjekt er konfigurert for denne enheten.",
       "unknown": "Det gikk ikke. Prøv igjen senere."

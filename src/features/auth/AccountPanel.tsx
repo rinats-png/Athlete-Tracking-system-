@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { clearAccount, plansForRole, readAccount } from './account'
-import { signOut } from '@/lib/supabase/auth'
+import { deleteAccount, signOut } from '@/lib/supabase/auth'
 import { clearSyncState } from '@/lib/supabase/sync'
 import { wipeDevice } from '@/lib/store/wipeDevice'
 
@@ -27,6 +27,8 @@ import { wipeDevice } from '@/lib/store/wipeDevice'
 export function AccountPanel() {
   const { t } = useTranslation()
   const [askWipe, setAskWipe] = useState(false)
+  const [askDelete, setAskDelete] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
   const account = readAccount()
   if (!account) return null
@@ -74,6 +76,69 @@ export function AccountPanel() {
             {t('auth.signOutAndWipe')}
           </Button>
         </div>
+
+        {/* Die Kontolöschung steht abgesetzt und zuletzt. Sie trifft nicht nur
+            dieses Gerät, sondern den Serverstand — und sie ist der einzige
+            Weg hier, den niemand rückgängig machen kann. */}
+        <div className="mt-4 border-t border-line pt-3">
+          <p className="text-[12px] text-ink-muted">{t('auth.deleteAccountHint')}</p>
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            className="mt-2"
+            data-testid="delete-account"
+            onClick={() => {
+              setDeleteError(null)
+              setAskDelete(true)
+            }}
+          >
+            {t('auth.deleteAccount')}
+          </Button>
+        </div>
+
+        {askDelete && (
+          <div className="panel mt-3 space-y-3 border border-critical p-3" role="alertdialog">
+            <p className="text-[13px] font-semibold">{t('auth.deleteConfirmTitle')}</p>
+            <p className="text-[12px] text-ink-secondary">{t('auth.deleteConfirmBody')}</p>
+            {deleteError && (
+              <p role="alert" className="text-[12px] text-critical">
+                {deleteError}
+              </p>
+            )}
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                data-testid="delete-account-confirm"
+                disabled={busy}
+                onClick={async () => {
+                  setBusy(true)
+                  setDeleteError(null)
+                  const outcome = await deleteAccount()
+                  if (!outcome.ok) {
+                    // Nichts lokal anfassen, solange der Server nicht bestätigt
+                    // hat: sonst stünde jemand ohne seine Daten da, dessen
+                    // Konto noch existiert.
+                    setBusy(false)
+                    setDeleteError(t(`auth.deleteFailed.${outcome.reason}`))
+                    return
+                  }
+                  await wipeDevice()
+                  clearSyncState()
+                  clearAccount()
+                  window.location.assign('/')
+                }}
+              >
+                {t('auth.deleteConfirm')}
+              </Button>
+              <Button type="button" size="sm" variant="ghost" onClick={() => setAskDelete(false)}>
+                {t('auth.wipeCancel')}
+              </Button>
+            </div>
+          </div>
+        )}
 
         {askWipe && (
           <div className="panel mt-3 space-y-3 border border-line p-3" role="alertdialog" aria-live="polite">

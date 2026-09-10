@@ -1273,6 +1273,17 @@
     "wipeConfirmBody": "Mätvärden, profiler och inställningar i den här appen tas bort från enheten — permanent. En synkroniserad kopia på servern finns kvar. Utan synkronisering är en tidigare export den enda kopian.",
     "wipeConfirm": "Radera permanent",
     "wipeCancel": "Avbryt",
+    "deleteAccount": "Radera kontot permanent",
+    "deleteAccountHint": "Raderar kontot och alla data som sparats med det på servern. Exportera först det du vill behålla.",
+    "deleteConfirmTitle": "Radera kontot och alla data?",
+    "deleteConfirmBody": "Kontot, serverkopian och alla mätvärden tas bort. Adepter du hanterar utan eget konto raderas också; de med eget konto behåller sina data. Steget går inte att ångra.",
+    "deleteConfirm": "Radera permanent",
+    "deleteFailed": {
+      "not_configured": "Utan konto finns det inget att radera på en server.",
+      "offline": "Ingen anslutning. Försök igen senare.",
+      "unauthorized": "Sessionen har gått ut. Logga in igen och försök på nytt.",
+      "failed": "Raderingen misslyckades. Inget togs bort."
+    },
     "signedInAs": "Inloggad som {{name}}",
     "planChosen": "Vald nivå: {{plan}}",
     "planNone": "Ingen nivå vald ännu.",
@@ -1290,6 +1301,7 @@
       "email_taken": "Ett konto finns redan för den här e-posten. Logga in eller återställ lösenordet.",
       "weak_password": "Lösenordet är för kort.",
       "needs_confirmation": "E-posten är inte bekräftad ännu. Länken finns i din inkorg.",
+      "too_many_attempts": "För många misslyckade försök. Vänta en stund och försök igen.",
       "offline": "Ingen anslutning. Du kan fortsätta mäta på enheten — inloggningen kan vänta.",
       "not_configured": "Inget projekt är konfigurerat för den här enheten.",
       "unknown": "Det gick inte. Försök igen senare."

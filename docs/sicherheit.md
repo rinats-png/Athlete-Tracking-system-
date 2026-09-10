@@ -4,8 +4,15 @@ Diese Datei beantwortet die *Security Master Checkliste für KI-/Vibe-Coded
 Apps* für BASELINE. Sie ist kein Werbetext: wo etwas offen ist, steht es
 offen da, mit Grund und mit dem, was stattdessen gilt.
 
-**Stand:** 7. September 2026 · Fassung 0.1.0 · geprüft an Zweig
+**Stand:** 10. September 2026 · Fassung 0.1.0 · geprüft an Zweig
 `claude/sports-diagnostics-pwa-jnqy42`
+
+Zwei Durchgänge: der erste gegen die *Security Master Checkliste*
+(7. September), der zweite gegen den Standard aus
+[`nerajlal/Website-Security-`](https://github.com/nerajlal/Website-Security-)
+(10. September). Der zweite Durchgang brachte den Befund B-05, den der erste
+nicht gefunden hatte — dazu unten mehr, denn das ist der interessanteste Teil
+dieser Datei.
 
 ---
 
@@ -30,7 +37,7 @@ Zugriffsregeln liegt und nicht auf Eingabevalidierung im Browser.
 
 ## Auditbericht
 
-Vier Befunde, alle geschlossen. Format nach Abschnitt 24 der Checkliste.
+Sechs Befunde, alle geschlossen. Format nach Abschnitt 24 der Checkliste.
 
 ### B-01 — Zugriff auf beliebige fremde Athleten
 
@@ -147,6 +154,80 @@ Datei.
 
 ---
 
+### B-05 — Kontolöschung hätte die Daten nicht gelöscht
+
+| | |
+|---|---|
+| **Schwachstelle** | Unvollständige Löschung (DSGVO Art. 17), verwaiste Datensätze |
+| **Severity** | **HIGH** |
+| **Komponente** | `20260829120100_identity.sql`, `athletes.user_id`/`created_by` |
+
+**Gefunden durch** Abschnitt 10 des Website-Security-Standards
+(«Foreign keys must use proper constraints … preventing orphaned records»).
+Die erste Checkliste fragt nach einem Löschkonzept und nach Fremdschlüsseln,
+aber nicht danach, was beim Löschen eines Kontos mit den *Kindsätzen* passiert
+— und genau dort lag es.
+
+**Angriffsszenario.** Kein Angriff, sondern der Normalfall: Ein Athlet löscht
+sein Konto. Beide Spalten stehen auf `on delete set null`. Der Auth-Eintrag
+fällt, `profiles` kaskadiert — der **Athletendatensatz bleibt stehen**: Vorname,
+Nachname, Geburtsdatum, Geschlecht, Kontakt-E-Mail, Notizen. Und weil alles
+Fachliche per `on delete cascade` an *ihm* hängt und nicht am Konto, bleibt
+auch die vollständige Messhistorie samt Biometrie.
+
+**Auswirkung.** `can_view_athlete()` prüft `user_id = auth.uid()`, und NULL ist
+nie gleich irgendetwas: der Betroffene selbst käme nicht mehr an seine Daten,
+auch wenn er wollte. Ein Trainer mit bestehender Verknüpfung dagegen sieht sie
+weiter. Gelöscht werden sie nie, weil niemand sie mehr sieht, um sie zu
+löschen.
+
+Das ist die schlimmste Sorte Fehler in einem Löschweg: **er sieht von aussen
+aus wie ein Löschen.** Das Konto ist weg, die Anmeldung schlägt fehl, der
+Mensch hält seine Daten für gelöscht — und sie liegen vollständig da. Art. 17
+DSGVO wäre nicht erfüllt gewesen, sondern nur so aussehend.
+
+Der Befund kam zur richtigen Zeit: Ich war im selben Durchgang dabei, den
+Löschknopf zu bauen, den es bis dahin nicht gab. Ohne B-05 hätte dieser Knopf
+genau die Täuschung erzeugt, gegen die er gedacht war.
+
+**Fix.** `20260910100000_account_deletion.sql`: `delete_account_data()` räumt
+ausdrücklich und in einer Transaktion, statt sich auf Kaskaden zu verlassen —
+die tun, was das Schema zufällig sagt, nicht was gemeint ist. Dazu
+`purge_orphaned_athletes()` für das, was vor dieser Migration liegen blieb.
+
+**Regression Test.** `tests/security.spec.ts` → «die Löschfunktion nimmt keine
+Kennung aus dem Anfragekörper»; die vollständige Wirkung braucht eine
+Testinstanz (`tests/authz-live.spec.ts`).
+
+**Verbleibendes Risiko.** Die Edge Function ist geschrieben, aber noch nicht
+ausgerollt. Bis dahin gibt es weiterhin keinen Selbstbedienungsweg.
+
+---
+
+### B-06 — Registrierung verrät bestehende Konten
+
+| | |
+|---|---|
+| **Schwachstelle** | Account Enumeration |
+| **Severity** | **LOW** |
+| **Komponente** | `src/lib/supabase/auth.ts`, `classify()` → `email_taken` |
+
+**Angriffsszenario.** Wer eine E-Mail-Adresse in die Registrierung tippt,
+erfuhr «Zu dieser E-Mail gibt es schon ein Konto» — eine Auskunft über einen
+fremden Menschen an jemanden, der sie nicht haben soll. Bei einer App mit
+Gesundheitsbezug ist schon die Mitgliedschaft eine Information.
+
+**Fix, und seine Grenze.** Die Antwort ist jetzt dieselbe wie bei einer
+erfolgreichen Registrierung («sieh in dein Postfach»). **Das nimmt die
+Auskunft aus der Oberfläche, nicht aus der Leitung:** die Unterscheidung
+steckt in der Antwort des Dienstes, und wer enumeriert, liest den
+Netzwerkverkehr mit. Die wirksame Massnahme ist die Bestätigungspflicht per
+E-Mail in den Supabase-Einstellungen — sie steht unten unter *Was der
+Betreiber einrichten muss*. Die Codeänderung ist Beiwerk, und der Kommentar
+an der Stelle sagt das auch.
+
+---
+
 ## Die Checkliste, Abschnitt für Abschnitt
 
 Legende: **✓** erfüllt · **–** nicht zutreffend, mit Grund · **offen** noch
@@ -181,6 +262,13 @@ Hashing, Salts, Reset-Tokens und Ratenbegrenzung liegen beim Dienst. Die App
 legt eine **strengere** Mindestlänge fest als der Dienst (8 statt 6,
 `MIN_PASSWORD_LENGTH`). Das Passwort verlässt das Eingabefeld nur Richtung
 Dienst; es landet nie im lokalen Speicher.
+**Account Enumeration** ist aus der Oberfläche entfernt (B-06) — mit der dort
+genannten Grenze. Eine **Anmeldebremse** wächst nach drei Fehlversuchen von
+2 s auf höchstens 60 s und endet mit dem ersten Erfolg; sie wirkt gegen das
+Durchprobieren von Hand an einem fremden Gerät, **nicht** gegen ein Skript,
+das diese Seite nie lädt. Die Begrenzung, die auch gegen ein Skript wirkt,
+gehört zum Dienst und steht unten als einzurichtender Punkt.
+
 **offen:** MFA für Trainerkonten ist nicht eingerichtet. Begründung: es gibt
 noch keine Konten mit erhöhten Rechten — «Trainer» ist Selbstauskunft. Sobald
 es eine Betreiberrolle gibt, wird MFA für sie zur Voraussetzung.
@@ -241,10 +329,16 @@ CORS ist Sache des Dienstes und nicht auf `*` gestellt.
 Buckets begrenzen Grösse und erlaubte MIME-Typen serverseitig
 (Berichte 25 MB, nur PDF; Logos 2 MB). Pfade sind konventioniert und werden
 in der Policy geprüft, nicht vom Client bestimmt.
-**Anmerkung:** `image/svg+xml` ist im Branding-Bucket erlaubt. SVG kann
-Skripte tragen. Das ist tragbar, weil der Bucket nicht öffentlich ist und die
-CSP `object-src 'none'` setzt — aber es ist eine Stelle, die man bei einer
-Erweiterung im Auge behalten muss.
+`image/svg+xml` ist im Branding-Bucket **nicht mehr erlaubt**: SVG ist kein
+Bild, sondern ein Dokument, das Skripte tragen kann. Es war nie eine offene
+Tür — der Bucket ist privat, die CSP setzt `object-src 'none'` — aber eine
+angelehnte, und ein Vereinslogo gibt es auch als PNG. Bereits hochgeladene
+SVG-Dateien bleiben liegen; die Grenze wirkt beim Hochladen. Der Betreiber
+sollte sie einmal durchsehen.
+
+Dateinamen kommen nie vom Nutzer: die Pfade folgen einer Konvention aus
+Kennungen (`reports/{athlete_id}/{report_id}.pdf`), und die Policy prüft das
+erste Segment. Path Traversal hat damit keinen Angriffspunkt.
 
 ### 13 Fehlerbehandlung — ✓
 Fehler des Dienstes werden in eigene **Kennungen** übersetzt
@@ -253,23 +347,52 @@ Stacktrace, kein SQL-Fehler, kein Pfad erreicht die Oberfläche. Was nicht
 erkannt wird, ist `unknown` — ein falsch einsortierter Fehler wäre schlimmer
 als ein unspezifischer. Keine Quellkarten im Paket.
 
-### 14 Logging & Monitoring — **offen**
-Es gibt keine eigene Protokollierung. Anmeldungen und Fehlversuche
-protokolliert Supabase; niemand wertet sie aus, es gibt keine Alarme. Das ist
-für den heutigen Stand vertretbar (kein Wirkbetrieb) und **nicht** für den
-Start. Positiv: die App protokolliert auch nichts Sensibles, weil sie gar
-nicht protokolliert.
+### 14 Logging & Monitoring — ✓ (war offen)
+`security_events` ist ein **anhängendes** Protokoll der
+Berechtigungsänderungen: Rollenwechsel, entstandene, geänderte und entzogene
+Verknüpfungen, gelöschte Athleten. Geschrieben ausschliesslich von Triggern
+(`SECURITY DEFINER`), nicht von der App — ein Client, der sein eigenes
+Protokoll schreibt, protokolliert, was er zugeben möchte. Es gibt keine
+Policy für UPDATE und keine für DELETE: auch der Verursacher kann seine Spur
+nicht ändern.
 
-### 15 Datenschutz & Nutzerdaten — ✓, mit einer offenen Stelle
+Was **nicht** hineingeht, steht als Bedingung in der Tabelle und nicht als
+Vorsatz im Code: keine Passwörter, keine Token, keine E-Mail-Adressen, keine
+Messwerte. Nur Kennungen und Ereignisnamen, gedeckelt auf 2 KB je Zeile. Ein
+Protokoll ist selbst ein Ort, an dem Daten liegen — und einer, den man beim
+Löschkonzept gern vergisst; deshalb hat es eine eigene Frist.
+
+Lesen darf, wen es betrifft. Das ist Art. 15 DSGVO: wer wissen will, wer
+Zugriff auf seine Daten hatte, bekommt hier die Antwort.
+
+**offen:** Alarme. Das Protokoll wird geschrieben, aber niemand wird geweckt.
+Ohne Wirkbetrieb ist das vertretbar, ab dem Start nicht.
+
+### 15 Datenschutz & Nutzerdaten — ✓ (war teils offen)
 Datenminimierung ist die Grundeinstellung: ohne Konto verlässt nichts das
 Gerät. Der Export ist immer vollständig und kostenlos (§32). Löschen des
-lokalen Bestands geht sofort und vollständig (neu: auch beim Abmelden).
-**offen:** Das **Löschen des Kontos** braucht den Dienstschlüssel und geht
-darum nicht aus dem Browser. Der Code sagt das ausdrücklich
-(`ACCOUNT_DELETION_NEEDS_SERVER`), statt einen Knopf anzubieten, der nichts
-tut; bis dahin führt der Weg über eine Mitteilung an den Betreiber. Für den
-Start muss daraus eine serverseitige Funktion werden — Art. 17 DSGVO ist
-keine Absichtserklärung. Aufbewahrungsfristen sind nicht definiert.
+lokalen Bestands geht sofort, auch beim Abmelden auf geteilten Geräten.
+
+**Kontolöschung** gibt es jetzt — über eine Edge Function, weil der
+Auth-Eintrag nur mit dem Dienstschlüssel fällt und der nie ins Frontend
+gehört. Sie löscht **das Konto des Aufrufers und sonst keins**: welche
+Kennung gemeint ist, entscheidet das geprüfte Token, nie der Anfragekörper.
+Was dabei fällt und was bewusst stehen bleibt, steht ausgeschrieben in
+`delete_account_data()` — insbesondere, dass betreute Klienten **mit** eigenem
+Konto ihre Daten behalten, weil das andere Menschen sind.
+
+Die Reihenfolge ist Absicht: erst die Fachdaten in einer Transaktion, dann
+der Auth-Eintrag. Ein Abbruch dazwischen lässt jemanden mit gelöschten Daten
+und funktionierender Anmeldung zurück — unangenehm, aber harmlos und
+wiederholbar. Andersherum wäre er ausgesperrt und seine Daten lägen weiter da.
+
+**Aufbewahrungsfristen** sind definiert, jede mit einem Grund statt einer
+runden Zahl: Protokoll 365 Tage, abgelaufene Einladungen 30 Tage nach Ablauf
+(sie tragen eine E-Mail-Adresse), entzogene Verknüpfungen 90 Tage. Dazu ein
+Kehraus für Athletendatensätze, die vor B-05 verwaist zurückblieben.
+`purge_expired()` erledigt alles zusammen — sie ist bewusst **nicht**
+automatisch verplant; ein Zeitplan, der Daten löscht, gehört ausdrücklich
+eingerichtet und nicht als Nebenwirkung einer Migration.
 
 ### 16 Dependencies & Supply Chain — ✓
 `npm ci` gegen die Sperrdatei, `npm audit --audit-level=high` im Tor,
@@ -319,13 +442,21 @@ inhaltlich wichtigste Fall aus diesem Durchgang: Die Regeln wurden **enger**
 gemacht, obwohl der lockere Zustand funktionierte — der Preis dafür ist
 null, weil die App an dieser Stelle ohnehin nichts schreibt.
 
-### 22 Security Testing — teils ✓, teils **offen**
+### 22 Security Testing — ✓ statisch, **einsatzbereit** am lebenden System
 Automatisiert und im Tor: Regelprüfung, Geheimnis-Scan, Abhängigkeiten,
-XSS-Flächen, Header, Löschen auf geteilten Geräten (22 Fälle in
-`tests/security.spec.ts`).
-**offen:** Die negativen Autorisierungstests am lebenden System — Nutzer A
-gegen Nutzer B, Trainer gegen fremden Athleten. Siehe *Restrisiken*, das ist
-die wichtigste offene Position.
+XSS-Flächen, Header, Löschen auf geteilten Geräten, Anmeldebremse,
+Kontolöschung (28 Fälle in `tests/security.spec.ts`).
+
+`tests/authz-live.spec.ts` enthält jetzt die negativen Autorisierungstests
+gegen echte Konten: A gegen B, gezielter Abruf über eine bekannte Kennung
+(IDOR), der vollständige Rechteausweitungspfad aus B-01, Lesen *und*
+Schreiben fremder Messwerte, fremder Bestand, und alles ohne Anmeldung.
+
+Sie laufen nur mit Zugangsdaten und **überspringen sich sonst mit sichtbarer
+Begründung**, statt grün zu melden. Ein Autorisierungstest, der ohne
+Datenbank «bestanden» sagt, ist schlimmer als keiner: er beweist nichts und
+behauptet das Gegenteil. Was noch fehlt, ist nicht der Test, sondern die
+Instanz, gegen die er laufen darf — siehe Restrisiko 1.
 
 ### 23 Release Gate
 Nach heutigem Stand:
@@ -351,30 +482,46 @@ vor dem öffentlichen Start abzuarbeiten — sie sind keine Nachbesserung.
 
 Nach Dringlichkeit, nicht nach Aufwand.
 
-1. **Die Autorisierung ist gelesen, nicht erprobt.** Die statische Prüfung
-   fängt die Fehlerklasse, die man beim Schreiben von Policies macht. Sie
-   beantwortet nicht, ob `can_edit_athlete()` in jedem Zustand das Richtige
-   tut. Nötig: zwei echte Konten, ein Athlet je Konto, und der ausdrückliche
-   Nachweis, dass A nichts von B sieht, in beide Richtungen und über jede
-   Tabelle. Das braucht eine Testinstanz — und damit die Trennung von
-   Produktion und Entwicklung, die es heute nicht gibt.
+1. **Die Autorisierung ist gelesen, nicht erprobt.** Der Test dafür ist jetzt
+   geschrieben (`tests/authz-live.spec.ts`) und deckt alle sechs Fragen ab,
+   die zählen. Was fehlt, ist die **Instanz**, gegen die er laufen darf — und
+   das ist Punkt 2. Bis dahin bleibt der Nachweis offen, und der Test sagt
+   das bei jedem Lauf, statt es zu verschweigen.
 
 2. **Ein einziges Supabase-Projekt.** Produktion und Entwicklung teilen sich
    die Datenbank. Jede Migration wird am Wirkbestand ausprobiert, und ein
-   Fehler dort ist ein Fehler an echten Daten. Das ist der Punkt, der die
-   meisten anderen offenen Punkte blockiert.
+   Fehler dort ist ein Fehler an echten Daten. Das blockiert Punkt 1 und ist
+   damit der teuerste offene Punkt: **eine zweite Instanz löst zwei
+   Probleme.**
 
-3. **Kontolöschung geht nicht ohne Betreiber.** Aus dem Browser unmöglich
-   (der Dienstschlüssel darf nicht dorthin, §41). Bis es eine serverseitige
-   Funktion gibt, ist Art. 17 DSGVO ein manueller Vorgang. Für den Start zu
-   wenig.
+3. **Die Kontolöschung ist gebaut, aber nicht ausgerollt.** Migration und
+   Edge Function liegen im Zweig; bis beide eingespielt sind, gibt es
+   weiterhin keinen Selbstbedienungsweg — und die vor B-05 verwaisten
+   Datensätze liegen weiter da.
 
-Dazu, kleiner: keine Protokollauswertung und keine Alarme (14); MFA für
-Betreiberkonten, sobald es sie gibt (4); Ratenbegrenzung des Dienstes nicht
-selbst konfiguriert (8); Wiederherstellung nie geprobt (6); Branch Protection
-nicht eingerichtet (17); Aufbewahrungsfristen undefiniert (15).
+Dazu, kleiner: keine Alarme auf dem Protokoll (14); MFA für Betreiberkonten,
+sobald es sie gibt (4); Ratenbegrenzung des Dienstes nicht selbst
+konfiguriert (8); Wiederherstellung nie geprobt (6); Branch Protection nicht
+eingerichtet (17).
 
 ---
+
+## Was der Betreiber einrichten muss
+
+Diese Punkte lassen sich nicht im Code erledigen. Sie stehen hier, damit sie
+nicht als erledigt gelten, nur weil der Code sie vorbereitet.
+
+| Was | Wo | Warum |
+|---|---|---|
+| Migrationen einspielen | `20260907120000`, `20260910090000`, `20260910100000` | ohne sie gilt im Backend der alte Stand — inklusive der kritischen Lücke B-01 |
+| Edge Function ausrollen | `supabase functions deploy delete-account` | sonst gibt es keine Kontolöschung |
+| `APP_ORIGIN` setzen | Function-Umgebung | sonst greift die Vorgabe; eine Wildcard gibt es nicht |
+| **Bestätigungspflicht per E-Mail** | Auth → Sign-up | die eigentliche Massnahme gegen Account Enumeration (B-06) |
+| Ratenbegrenzung | Auth → Rate limits | die einzige, die gegen ein Skript wirkt |
+| `purge_expired()` verplanen | pg_cron, täglich | Aufbewahrungsfristen wirken sonst nicht |
+| SVG-Bestand durchsehen | Bucket `branding` | die neue Grenze wirkt nur beim Hochladen |
+| Wiederherstellung proben | einmalig | eine ungeprobte Sicherung ist eine Vermutung |
+| Branch Protection | GitHub | damit das Sicherheitstor nicht umgehbar ist |
 
 ## Was man selbst laufen lassen kann
 
@@ -383,6 +530,11 @@ npm run security          # Typprüfung + Regeln + Geheimnisse + Abhängigkeiten
 npm run audit:policies    # nur die Zugriffsregeln
 npm run audit:secrets     # nur die Suche nach Zugangsdaten
 npx playwright test tests/security.spec.ts
+
+# Nur mit Testinstanz — sonst übersprungen, nie stillschweigend grün:
+E2E_SUPABASE_URL=... E2E_SUPABASE_KEY=... \
+E2E_USER_A=... E2E_PASS_A=... E2E_USER_B=... E2E_PASS_B=... \
+npx playwright test tests/authz-live.spec.ts --project=desktop
 ```
 
 Der Regel-Prüfer hat einen Selbsttest: nimmt man die Migration vom 07.09.

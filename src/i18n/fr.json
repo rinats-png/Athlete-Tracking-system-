@@ -1273,6 +1273,17 @@
     "wipeConfirmBody": "Les mesures, profils et réglages de cette application seront supprimés de cet appareil — définitivement. Une copie synchronisée sur le serveur est conservée. Sans synchronisation, un export antérieur est la seule copie.",
     "wipeConfirm": "Supprimer définitivement",
     "wipeCancel": "Annuler",
+    "deleteAccount": "Supprimer définitivement le compte",
+    "deleteAccountHint": "Supprime le compte et toutes les données conservées avec lui sur le serveur. Exportez d'abord ce que vous voulez garder.",
+    "deleteConfirmTitle": "Supprimer le compte et toutes les données ?",
+    "deleteConfirmBody": "Le compte, la copie sur le serveur et toutes les mesures seront supprimés. Les clients que vous suivez sans compte propre sont supprimés également ; ceux qui ont leur propre compte conservent leurs données. Cette étape est irréversible.",
+    "deleteConfirm": "Supprimer définitivement",
+    "deleteFailed": {
+      "not_configured": "Sans compte, il n'y a rien à supprimer sur un serveur.",
+      "offline": "Pas de connexion. Veuillez réessayer plus tard.",
+      "unauthorized": "La session a expiré. Reconnectez-vous puis réessayez.",
+      "failed": "La suppression a échoué. Rien n'a été supprimé."
+    },
     "signedInAs": "Connecté en tant que {{name}}",
     "planChosen": "Offre choisie : {{plan}}",
     "planNone": "Aucune offre choisie pour l'instant.",
@@ -1290,6 +1301,7 @@
       "email_taken": "Un compte existe déjà pour cet e-mail. Connecte-toi ou réinitialise le mot de passe.",
       "weak_password": "Le mot de passe est trop court.",
       "needs_confirmation": "Cet e-mail n'est pas encore confirmé. Le lien est dans ta boîte de réception.",
+      "too_many_attempts": "Trop de tentatives échouées. Patientez un instant, puis réessayez.",
       "offline": "Pas de connexion. Tu peux continuer à mesurer sur cet appareil — la connexion peut attendre.",
       "not_configured": "Aucun projet n'est configuré pour cet appareil.",
       "unknown": "Cela n'a pas fonctionné. Réessaie plus tard."

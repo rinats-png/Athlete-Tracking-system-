@@ -1273,6 +1273,17 @@
     "wipeConfirmBody": "Las mediciones, los perfiles y los ajustes de esta aplicación se eliminarán de este dispositivo, de forma definitiva. La copia sincronizada en el servidor se conserva. Sin sincronización, una exportación anterior es la única copia.",
     "wipeConfirm": "Borrar definitivamente",
     "wipeCancel": "Cancelar",
+    "deleteAccount": "Eliminar la cuenta definitivamente",
+    "deleteAccountHint": "Elimina la cuenta y todos los datos guardados con ella en el servidor. Exporta antes lo que quieras conservar.",
+    "deleteConfirmTitle": "¿Eliminar la cuenta y todos los datos?",
+    "deleteConfirmBody": "Se eliminarán la cuenta, la copia del servidor y todas las mediciones. Los clientes que gestionas sin cuenta propia también se eliminan; los que tienen cuenta propia conservan sus datos. Este paso no se puede deshacer.",
+    "deleteConfirm": "Eliminar definitivamente",
+    "deleteFailed": {
+      "not_configured": "Sin cuenta no hay nada que eliminar en un servidor.",
+      "offline": "Sin conexión. Inténtalo de nuevo más tarde.",
+      "unauthorized": "La sesión ha caducado. Inicia sesión de nuevo e inténtalo otra vez.",
+      "failed": "La eliminación ha fallado. No se ha eliminado nada."
+    },
     "signedInAs": "Sesión iniciada como {{name}}",
     "planChosen": "Nivel elegido: {{plan}}",
     "planNone": "Aún no se ha elegido nivel.",
@@ -1290,6 +1301,7 @@
       "email_taken": "Ya existe una cuenta con este correo. Inicia sesión o restablece la contraseña.",
       "weak_password": "La contraseña es demasiado corta.",
       "needs_confirmation": "Este correo aún no está confirmado. El enlace está en tu bandeja de entrada.",
+      "too_many_attempts": "Demasiados intentos fallidos. Espera un momento y vuelve a intentarlo.",
       "offline": "Sin conexión. Puedes seguir midiendo en este dispositivo — iniciar sesión puede esperar.",
       "not_configured": "No hay ningún proyecto configurado para este dispositivo.",
       "unknown": "No ha funcionado. Inténtalo de nuevo más tarde."

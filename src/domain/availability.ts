@@ -112,6 +112,16 @@ export function availabilitySignals(athletes: StoredAthlete[]): AvailabilitySign
     .sort((a, b) => (b.drop ?? -1) - (a.drop ?? -1))
 }
 
+/** Der Kalendertag eines Zeitpunkts, in UTC — dieselbe Zeitzone wie die Messwerte. */
+function toDayString(at: Date): string {
+  return at.toISOString().slice(0, 10)
+}
+
+/** Ganze Kalendertage zwischen zwei Tagesangaben (YYYY-MM-DD). */
+function daysBetween(from: string, to: string): number {
+  return Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000)
+}
+
 export function newcomerSignals(athletes: StoredAthlete[], asOf: Date = new Date()): NewcomerSignal[] {
   const out: NewcomerSignal[] = []
   for (const athlete of athletes) {
@@ -119,7 +129,18 @@ export function newcomerSignals(athletes: StoredAthlete[], asOf: Date = new Date
     const scored = athlete.results.filter((r) => r.score != null)
     if (scored.length === 0) continue
     const firstAt = scored.map((r) => r.performedAt).sort()[0]
-    const daysSinceFirst = Math.floor((asOf.getTime() - new Date(firstAt).getTime()) / 86_400_000)
+    // In KALENDERTAGEN, nicht in Millisekunden.
+    //
+    // Eine Messung wird auf 12:00 UTC ihres Tages normiert. Die Differenz in
+    // Millisekunden gegen «jetzt» ist deshalb am Vormittag NEGATIV — eine
+    // Messung von heute früh läge scheinbar in der Zukunft, und die Prüfung
+    // auf `< 0` warf sie hinaus. Ein Trainer, der morgens misst, sah seinen
+    // Neuzugang nicht; nachmittags schon. Ein Fehler, der sich nach der
+    // Uhrzeit richtet, ist der unangenehmste: er ist nicht reproduzierbar,
+    // solange man zur falschen Zeit hinschaut.
+    //
+    // Gemeint war immer der Kalendertag: heute gemessen heisst 0 Tage.
+    const daysSinceFirst = daysBetween(firstAt.slice(0, 10), toDayString(asOf))
     if (daysSinceFirst < 0 || daysSinceFirst > NEWCOMER_DAYS) continue
 
     const disciplineId = athlete.profile.disciplineId

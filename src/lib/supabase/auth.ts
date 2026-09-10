@@ -1,4 +1,5 @@
 import { getSupabase, isSupabaseConfigured } from './client'
+import { noteFailure, noteSuccess, remainingDelayMs } from './throttle'
 
 /**
  * Anmeldung gegen das Projekt.
@@ -39,7 +40,10 @@ export interface AuthOutcome {
     | 'email_taken'
     | 'weak_password'
     | 'needs_confirmation'
+    | 'too_many_attempts'
     | 'unknown'
+  /** Nur bei `too_many_attempts`: wie lange noch. */
+  retryInMs?: number
 }
 
 /** Mindestlänge des Passworts. Strenger als die Vorgabe des Dienstes (6). */
@@ -95,7 +99,28 @@ export async function signUp(params: {
       },
     },
   })
-  if (error) return { ok: false, user: null, reason: classify(error.message, error.status) }
+  if (error) {
+    const reason = classify(error.message, error.status)
+    // ACCOUNT ENUMERATION, und was hier wirklich möglich ist:
+    //
+    // «Zu dieser E-Mail gibt es schon ein Konto» ist eine Auskunft über einen
+    // fremden Menschen an jemanden, der sie nicht haben soll. Deshalb geht
+    // sie hier nicht mehr an den Bildschirm, sondern läuft in dieselbe
+    // Antwort wie ein erfolgreicher Versuch: «sieh in dein Postfach». Wer
+    // das Konto wirklich hat, bekommt vom Dienst eine Mail und weiss dann
+    // Bescheid; wer nur probiert, erfährt nichts.
+    //
+    // WAS DAS NICHT LEISTET, und das gehört dazu: Die Unterscheidung steckt
+    // in der ANTWORT DES DIENSTES. Wer den Netzwerkverkehr mitliest — und
+    // wer enumeriert, tut genau das — sieht sie weiterhin. Diese Zeile
+    // nimmt die Auskunft aus der Oberfläche, nicht aus der Leitung. Die
+    // wirksame Massnahme ist die Bestätigungspflicht per E-Mail beim Dienst
+    // selbst; sie steht in `docs/sicherheit.md` als einzurichtender Punkt.
+    if (reason === 'email_taken') {
+      return { ok: false, user: null, reason: 'needs_confirmation' }
+    }
+    return { ok: false, user: null, reason }
+  }
 
   // Ohne Sitzung ist die Bestätigungsmail unterwegs. Das ist kein Fehler,
   // sondern der normale Weg — und der Bildschirm muss es sagen, sonst wartet
@@ -104,13 +129,34 @@ export async function signUp(params: {
   return { ok: true, user: asUser(data.user), reason: null }
 }
 
+/**
+ * Anmelden.
+ *
+ * Vor dem Versuch steht die Bremse: nach drei Fehlversuchen wächst die
+ * Wartezeit. Sie wirkt gegen das Durchprobieren VON HAND an einem fremden
+ * Gerät — nicht gegen ein Skript, das diese Seite nie lädt. Die Begrenzung,
+ * die auch gegen ein Skript wirkt, gehört zum Dienst und ist dort
+ * einzustellen; `docs/sicherheit.md` sagt das an derselben Stelle noch
+ * einmal, damit diese Bremse nicht für mehr gehalten wird, als sie ist.
+ */
 export async function signIn(email: string, password: string): Promise<AuthOutcome> {
   if (!isSupabaseConfigured()) return { ok: false, user: null, reason: 'not_configured' }
+  const wait = remainingDelayMs()
+  if (wait > 0) return { ok: false, user: null, reason: 'too_many_attempts', retryInMs: wait }
+
   const supabase = await getSupabase()
   if (!supabase) return { ok: false, user: null, reason: 'offline' }
 
   const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-  if (error) return { ok: false, user: null, reason: classify(error.message, error.status) }
+  if (error) {
+    const reason = classify(error.message, error.status)
+    // Nur ein abgelehntes Passwort zählt. Ein Funkloch ist kein Fehlversuch,
+    // und wer im Zug die Verbindung verliert, soll sich danach nicht erst
+    // eine Minute lang gedulden müssen.
+    if (reason === 'invalid_credentials') noteFailure()
+    return { ok: false, user: null, reason }
+  }
+  noteSuccess()
   return { ok: true, user: asUser(data.user), reason: null }
 }
 
@@ -144,10 +190,39 @@ export async function requestPasswordReset(email: string): Promise<boolean> {
 /**
  * Das Konto endgültig löschen.
  *
- * Geht vom Browser aus NICHT: dafür braucht es den Dienstschlüssel, und der
- * gehört nie ins Frontend (§41). Die Funktion sagt das ehrlich, statt einen
- * Knopf anzubieten, der nichts tut. Bis es eine serverseitige Funktion dafür
- * gibt, führt der Weg über eine Mitteilung an den Betreiber — und das Löschen
- * des lokalen Bestands funktioniert unabhängig davon sofort.
+ * Läuft über eine Edge Function, weil der Auth-Eintrag nur mit dem
+ * Dienstschlüssel fällt und der nie ins Frontend gehört (§41). Der Browser
+ * schickt seine Sitzung mit und sonst NICHTS: welche Kennung gelöscht wird,
+ * bestimmt der Server aus dem geprüften Token. Eine Kennung im Anfragekörper
+ * gäbe es hier nicht zu setzen, und die Funktion läse sie auch nicht.
+ *
+ * WICHTIG ZUR REIHENFOLGE AUF DIESER SEITE: Erst wenn der Server bestätigt
+ * hat, wird lokal geräumt. Andersherum stünde jemand ohne seine Daten da,
+ * dessen Konto noch existiert — und ohne den Export, den er vielleicht noch
+ * gebraucht hätte.
  */
-export const ACCOUNT_DELETION_NEEDS_SERVER = true
+export type DeleteAccountOutcome =
+  | { ok: true }
+  | { ok: false; reason: 'not_configured' | 'offline' | 'unauthorized' | 'failed' }
+
+export async function deleteAccount(): Promise<DeleteAccountOutcome> {
+  if (!isSupabaseConfigured()) return { ok: false, reason: 'not_configured' }
+  const supabase = await getSupabase()
+  if (!supabase) return { ok: false, reason: 'offline' }
+
+  try {
+    const { data, error } = await supabase.functions.invoke('delete-account', { method: 'POST' })
+    if (error) {
+      // Ein 401 heisst: die Sitzung trägt nicht mehr. Das ist etwas anderes
+      // als ein Fehler auf dem Server, und der Bildschirm sagt etwas anderes
+      // dazu — anmelden statt es später versuchen.
+      const status = (error as { context?: { status?: number } }).context?.status
+      return { ok: false, reason: status === 401 ? 'unauthorized' : 'failed' }
+    }
+    return (data as { ok?: boolean } | null)?.ok === true
+      ? { ok: true }
+      : { ok: false, reason: 'failed' }
+  } catch {
+    return { ok: false, reason: 'offline' }
+  }
+}

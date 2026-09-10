@@ -6,6 +6,14 @@ import { auditPolicies } from '../scripts/auditPolicies.mjs'
 // @ts-expect-error — siehe oben.
 import { scanSecrets } from '../scripts/scanSecrets.mjs'
 import { openGuest, readDict } from './helpers'
+import {
+  FREE_ATTEMPTS,
+  MAX_DELAY_MS,
+  delayForAttempt,
+  noteFailure,
+  noteSuccess,
+  remainingDelayMs,
+} from '../src/lib/supabase/throttle'
 
 interface Finding {
   severity: string
@@ -199,5 +207,80 @@ test.describe('Gerät leeren beim Abmelden', () => {
     await page.getByRole('button', { name: readDict('de').auth.signOut, exact: true }).click()
     await page.waitForURL('**/')
     expect(await page.evaluate(() => localStorage.getItem('baseline.data.v1'))).not.toBeNull()
+  })
+})
+
+/**
+ * Die Bremse gegen Durchprobieren.
+ *
+ * Geprüft wird die Rechnung, nicht der Bildschirm: ab wann gewartet wird, dass
+ * die Wartezeit wächst, dass sie gedeckelt ist und dass ein Erfolg die Reihe
+ * beendet. Der Bildschirm dazu ist eine Fehlermeldung wie jede andere.
+ */
+test.describe('Anmeldebremse', () => {
+  test('die Wartezeit wächst, ist gedeckelt und endet nicht in einer Sperre', () => {
+    // Die reine Rechnung, ohne Browser und ohne Speicher.
+    expect(delayForAttempt(FREE_ATTEMPTS), 'die ersten Fehlversuche kosten nichts').toBe(0)
+    const first = delayForAttempt(FREE_ATTEMPTS + 1)
+    const second = delayForAttempt(FREE_ATTEMPTS + 2)
+    expect(first, 'nach den freien Versuchen wird gewartet').toBeGreaterThan(0)
+    expect(second, 'die Wartezeit wächst').toBeGreaterThan(first)
+    // Gedeckelt: eine Bremse, die ins Unendliche wächst, ist eine Sperre —
+    // und die trifft am Ende fast immer den Rechtmässigen.
+    expect(delayForAttempt(FREE_ATTEMPTS + 50)).toBe(MAX_DELAY_MS)
+  })
+
+  test('ein Erfolg beendet die Reihe', () => {
+    // `noteFailure`/`noteSuccess` brauchen einen Speicher; hier steht der
+    // kleinste, der die Zusage der Schnittstelle erfüllt.
+    const store = new Map<string, string>()
+    ;(globalThis as { localStorage?: unknown }).localStorage = {
+      getItem: (k: string) => store.get(k) ?? null,
+      setItem: (k: string, v: string) => void store.set(k, v),
+      removeItem: (k: string) => void store.delete(k),
+    }
+    const now = Date.now()
+    for (let i = 0; i <= FREE_ATTEMPTS + 2; i++) noteFailure(now)
+    expect(remainingDelayMs(now), 'nach genug Fehlversuchen wird gewartet').toBeGreaterThan(0)
+    noteSuccess()
+    expect(remainingDelayMs(now), 'ein Erfolg räumt die Reihe').toBe(0)
+    delete (globalThis as { localStorage?: unknown }).localStorage
+  })
+
+  test('eine fehlende Verbindung ist kein Fehlversuch', () => {
+    // Wer im Zug die Verbindung verliert, soll sich danach nicht erst eine
+    // Minute gedulden müssen. Die Bremse zählt nur abgelehnte Passwörter.
+    const source = readFileSync('src/lib/supabase/auth.ts', 'utf-8')
+    expect(source).toContain("if (reason === 'invalid_credentials') noteFailure()")
+  })
+})
+
+test.describe('Kontolöschung', () => {
+  test('der Dienstschlüssel steht nirgends im Frontend', () => {
+    // Die Edge Function ist der einzige Ort, an dem er vorkommen darf — und
+    // sie wird nicht ins Bündel gebaut.
+    const walk = (dir: string): string[] => {
+      const out: string[] = []
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const full = `${dir}/${entry.name}`
+        if (entry.isDirectory()) out.push(...walk(full))
+        else if (/\.tsx?$/.test(entry.name)) out.push(full)
+      }
+      return out
+    }
+    const hits = walk('src').filter((f) =>
+      /SERVICE_ROLE|service_role/.test(readFileSync(f, 'utf-8')),
+    )
+    expect(hits, 'diese Dateien im Frontend nennen den Dienstschlüssel').toEqual([])
+  })
+
+  test('die Löschfunktion nimmt keine Kennung aus dem Anfragekörper', () => {
+    // Der Kern ihrer Sicherheit: WEN sie löscht, entscheidet das geprüfte
+    // Token, nie der Aufrufer. Stünde hier ein Lesen des Körpers, wäre sie
+    // ein Endpunkt zum Löschen fremder Konten.
+    const fn = readFileSync('supabase/functions/delete-account/index.ts', 'utf-8')
+    expect(fn).toContain('auth.getUser()')
+    expect(fn, 'die Funktion liest den Anfragekörper').not.toMatch(/req\.json\(\)/)
+    expect(fn, 'CORS steht auf einer Wildcard').not.toContain("'Access-Control-Allow-Origin': '*'")
   })
 })

@@ -1273,6 +1273,17 @@
     "wipeConfirmBody": "Measurements, profiles and settings of this app will be removed from this device — permanently. A synced copy on the server remains. Without sync, an earlier export is the only copy.",
     "wipeConfirm": "Delete permanently",
     "wipeCancel": "Cancel",
+    "deleteAccount": "Delete account permanently",
+    "deleteAccountHint": "Deletes the account and all data stored with it on the server. Export anything you want to keep first.",
+    "deleteConfirmTitle": "Delete account and all data?",
+    "deleteConfirmBody": "The account, the server copy and all measurements will be removed. Clients you manage without their own account are deleted too; clients with their own account keep their data. This step cannot be undone.",
+    "deleteConfirm": "Delete permanently",
+    "deleteFailed": {
+      "not_configured": "Without an account there is nothing on a server to delete.",
+      "offline": "No connection. Please try again later.",
+      "unauthorized": "The session has expired. Please sign in again and retry.",
+      "failed": "Deletion failed. Nothing was removed."
+    },
     "signedInAs": "Signed in as {{name}}",
     "planChosen": "Chosen tier: {{plan}}",
     "planNone": "No tier chosen yet.",
@@ -1290,6 +1301,7 @@
       "email_taken": "An account already exists for this email. Sign in or reset the password.",
       "weak_password": "The password is too short.",
       "needs_confirmation": "This email is not confirmed yet. The link is in your inbox.",
+      "too_many_attempts": "Too many failed attempts. Please wait a moment and try again.",
       "offline": "No connection. You can keep measuring on this device — signing in can wait.",
       "not_configured": "No project is configured for this device.",
       "unknown": "That did not work. Please try again later."

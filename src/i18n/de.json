@@ -1273,6 +1273,17 @@
     "wipeConfirmBody": "Messwerte, Profile und Einstellungen dieser App werden von diesem Gerät entfernt — endgültig. Ein Serverstand aus der Synchronisierung bleibt bestehen. Ohne Synchronisierung ist ein vorheriger Export die einzige Kopie.",
     "wipeConfirm": "Endgültig löschen",
     "wipeCancel": "Abbrechen",
+    "deleteAccount": "Konto endgültig löschen",
+    "deleteAccountHint": "Löscht das Konto und alle damit gespeicherten Daten auf dem Server. Exportiere vorher, was du behalten willst.",
+    "deleteConfirmTitle": "Konto und alle Daten löschen?",
+    "deleteConfirmBody": "Das Konto, der Serverstand und alle Messwerte werden entfernt. Von Ihnen betreute Klienten ohne eigenes Konto werden mitgelöscht; Klienten mit eigenem Konto behalten ihre Daten. Dieser Schritt lässt sich nicht rückgängig machen.",
+    "deleteConfirm": "Konto endgültig löschen",
+    "deleteFailed": {
+      "not_configured": "Ohne Konto gibt es nichts auf einem Server zu löschen.",
+      "offline": "Keine Verbindung. Bitte später erneut versuchen.",
+      "unauthorized": "Die Sitzung ist abgelaufen. Bitte neu anmelden und erneut versuchen.",
+      "failed": "Das Löschen ist fehlgeschlagen. Es wurde nichts entfernt."
+    },
     "signedInAs": "Angemeldet als {{name}}",
     "planChosen": "Gewählte Stufe: {{plan}}",
     "planNone": "Noch keine Stufe gewählt.",
@@ -1290,6 +1301,7 @@
       "email_taken": "Zu dieser E-Mail gibt es schon ein Konto. Melde dich an oder setze das Passwort zurück.",
       "weak_password": "Das Passwort ist zu kurz.",
       "needs_confirmation": "Diese E-Mail ist noch nicht bestätigt. Der Link steht in deinem Postfach.",
+      "too_many_attempts": "Zu viele Fehlversuche. Bitte einen Moment warten und es dann erneut versuchen.",
       "offline": "Keine Verbindung. Du kannst weiter auf diesem Gerät messen — die Anmeldung geht später.",
       "not_configured": "Für dieses Gerät ist kein Projekt hinterlegt.",
       "unknown": "Das hat nicht geklappt. Versuch es später noch einmal."

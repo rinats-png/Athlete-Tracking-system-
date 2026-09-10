@@ -223,7 +223,7 @@ test.describe('Der Anmeldedienst', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
   })
 
-  test('eine bereits vergebene E-Mail wird benannt', async ({ page }) => {
+  test('eine bereits vergebene E-Mail wird NICHT benannt (Account Enumeration)', async ({ page }) => {
     await stubAuth(page, { signUp: 'taken' })
     await openColdStart(page)
     await formed(page)
@@ -233,6 +233,13 @@ test.describe('Der Anmeldedienst', () => {
     await page.getByLabel('E-Mail').fill('schon@da.example')
     await page.getByLabel('Passwort').fill('einLangesPasswort')
     await page.getByRole('button', { name: 'Konto anlegen' }).click()
-    await expect(page.getByRole('alert')).toContainText('schon ein Konto')
+
+    // Bis zum 10.09. stand hier «Zu dieser E-Mail gibt es schon ein Konto».
+    // Das ist eine Auskunft über einen fremden Menschen an jemanden, der sie
+    // nicht haben soll — bei einer App mit Gesundheitsbezug ist schon die
+    // Mitgliedschaft eine Information. Der Bildschirm zeigt jetzt dieselbe
+    // Antwort wie bei einer erfolgreichen Registrierung.
+    await expect(page.getByRole('heading', { name: /Bestätige deine E-Mail/ })).toBeVisible()
+    await expect(page.locator('body')).not.toContainText('schon ein Konto')
   })
 })
