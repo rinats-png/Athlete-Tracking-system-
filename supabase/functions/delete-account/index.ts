@@ -28,29 +28,56 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 // @ts-expect-error — Deno steht nur zur Laufzeit der Edge Function bereit.
 const env = (key: string): string => Deno.env.get(key) ?? ''
 
-const CORS = {
-  // Der Aufruf kommt aus der App, nicht von beliebigen Seiten. Eine Wildcard
-  // stünde hier billig da und würde jeder fremden Seite erlauben, den Aufruf
-  // im Namen eines angemeldeten Nutzers zu versuchen.
-  'Access-Control-Allow-Origin': env('APP_ORIGIN') || 'https://baseline-diagnostics.netlify.app',
-  'Access-Control-Allow-Headers': 'authorization, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Vary': 'Origin',
+/**
+ * Erlaubte Herkünfte. Eine Liste und keine Wildcard: Eine Wildcard stünde
+ * hier billig da und würde jeder fremden Seite erlauben, den Aufruf im Namen
+ * eines angemeldeten Nutzers zu versuchen.
+ *
+ * Drei Einträge, jeder mit Grund: die eigene Domain, ihre www-Form (falls
+ * jemand sie so aufruft, bevor die Umleitung greift) und die Netlify-Adresse,
+ * über die die App bis zur Umstellung des DNS erreichbar bleibt. `APP_ORIGIN`
+ * ergänzt eine weitere — etwa eine Vorschau-Umgebung — ohne die Datei
+ * anzufassen.
+ */
+const ALLOWED_ORIGINS = new Set(
+  [
+    'https://kydon.app',
+    'https://www.kydon.app',
+    'https://baseline-diagnostics.netlify.app',
+    env('APP_ORIGIN'),
+  ].filter(Boolean),
+)
+
+/**
+ * Antwortkopf je Anfrage. Der Origin wird nur dann zurückgegeben, wenn er
+ * auf der Liste steht — sonst bekommt der Browser keinen und verweigert die
+ * Antwort seinerseits. `Vary: Origin` sagt jedem Zwischenspeicher, dass die
+ * Antwort von der Herkunft abhängt.
+ */
+function corsFor(req: Request): Record<string, string> {
+  const origin = req.headers.get('Origin') ?? ''
+  const headers: Record<string, string> = {
+    'Access-Control-Allow-Headers': 'authorization, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    Vary: 'Origin',
+  }
+  if (ALLOWED_ORIGINS.has(origin)) headers['Access-Control-Allow-Origin'] = origin
+  return headers
 }
 
-const json = (body: unknown, status: number) =>
+const json = (req: Request, body: unknown, status: number) =>
   new Response(JSON.stringify(body), {
     status,
-    headers: { ...CORS, 'Content-Type': 'application/json' },
+    headers: { ...corsFor(req), 'Content-Type': 'application/json' },
   })
 
 // @ts-expect-error — Deno-Laufzeit.
 Deno.serve(async (req: Request) => {
-  if (req.method === 'OPTIONS') return new Response(null, { headers: CORS })
-  if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405)
+  if (req.method === 'OPTIONS') return new Response(null, { headers: corsFor(req) })
+  if (req.method !== 'POST') return json(req, { error: 'method_not_allowed' }, 405)
 
   const auth = req.headers.get('Authorization') ?? ''
-  if (!auth.startsWith('Bearer ')) return json({ error: 'unauthorized' }, 401)
+  if (!auth.startsWith('Bearer ')) return json(req, { error: 'unauthorized' }, 401)
 
   const url = env('SUPABASE_URL')
   const serviceKey = env('SUPABASE_SERVICE_ROLE_KEY')
@@ -58,7 +85,7 @@ Deno.serve(async (req: Request) => {
     // Nie sagen, WELCHE Einstellung fehlt: das ist eine Auskunft über den
     // Server an jemanden, der sie nicht braucht.
     console.error('delete-account: Umgebung unvollständig')
-    return json({ error: 'server_misconfigured' }, 500)
+    return json(req, { error: 'server_misconfigured' }, 500)
   }
 
   // Zwei Clients mit klar getrennten Aufgaben. Der erste hat nur die Rechte
@@ -70,7 +97,7 @@ Deno.serve(async (req: Request) => {
   })
   const { data: userData, error: userError } = await asCaller.auth.getUser()
   const userId: string | undefined = userData?.user?.id
-  if (userError || !userId) return json({ error: 'unauthorized' }, 401)
+  if (userError || !userId) return json(req, { error: 'unauthorized' }, 401)
 
   const admin = createClient(url, serviceKey, { auth: { persistSession: false } })
 
@@ -79,7 +106,7 @@ Deno.serve(async (req: Request) => {
   })
   if (dataError) {
     console.error('delete-account: Fachdaten', dataError.message)
-    return json({ error: 'delete_failed' }, 500)
+    return json(req, { error: 'delete_failed' }, 500)
   }
 
   const { error: authError } = await admin.auth.admin.deleteUser(userId)
@@ -88,8 +115,8 @@ Deno.serve(async (req: Request) => {
     // Mensch kann sich noch anmelden — er muss erfahren, dass ein zweiter
     // Anlauf nötig ist, statt ein «erledigt» zu lesen.
     console.error('delete-account: Auth-Eintrag', authError.message)
-    return json({ error: 'auth_delete_failed', removed }, 500)
+    return json(req, { error: 'auth_delete_failed', removed }, 500)
   }
 
-  return json({ ok: true, removed }, 200)
+  return json(req, { ok: true, removed }, 200)
 })

@@ -24,6 +24,40 @@ Die Sicherheits- und Cache-Regeln liegen bewusst in `_headers` **im Paket**
 und nicht nur in `netlify.toml`: beim Drag-and-drop-Deploy wird die
 `netlify.toml` nicht ausgewertet, die `_headers` schon.
 
+## Eigene Domain: kydon.app
+
+Die App läuft bis zur Umstellung unter `baseline-diagnostics.netlify.app`.
+Die eigene Domain kommt in dieser Reihenfolge dazu — und die Reihenfolge ist
+kein Detail, weil jeder Schritt den vorigen voraussetzt:
+
+1. **Netlify → Domain management → Add a domain** → `kydon.app`. Netlify
+   nennt daraufhin die DNS-Einträge, die es erwartet. Am einfachsten ist es,
+   die Nameserver der Domain auf Netlify DNS zu stellen; sonst beim Registrar
+   einen `A`/`ALIAS`-Eintrag für die Apex-Domain und ein `CNAME` für `www`
+   auf das Netlify-Ziel.
+2. **HTTPS** stellt Netlify automatisch über Let's Encrypt aus, sobald der
+   DNS-Eintrag greift — das kann bis zu einer Stunde dauern. Die `.app`-Endung
+   steht auf der HSTS-Preload-Liste der Browser: sie ist **nur** über HTTPS
+   erreichbar, ein Aufruf ohne Zertifikat scheitert nicht weich, sondern hart.
+   Also erst DNS, dann Zertifikat abwarten, dann verlinken.
+3. **Primäre Domain** auf `kydon.app` setzen. Netlify leitet `www.kydon.app`
+   und die Netlify-Adresse dann dorthin um — die alte Adresse bleibt
+   erreichbar, sie ist nur nicht mehr die Hauptadresse.
+4. **Supabase → Authentication → URL Configuration:** *Site URL* auf
+   `https://kydon.app`, und unter *Redirect URLs* `https://kydon.app/**`
+   eintragen. Ohne diesen Schritt läuft das Zurücksetzen des Passworts ins
+   Leere: die App nennt als Rücksprungadresse ihre eigene Herkunft, und
+   Supabase lehnt jede Adresse ab, die nicht auf der Liste steht.
+5. Die Edge Function `delete-account` kennt `kydon.app` bereits (siehe
+   `ALLOWED_ORIGINS` in ihrem Quelltext). Braucht eine weitere Herkunft
+   Zugriff — eine Vorschau-Umgebung etwa —, kommt sie über die
+   Umgebungsvariable `APP_ORIGIN` dazu, ohne die Datei anzufassen.
+
+**Zur E-Mail:** Eine Domain bringt keinen Posteingang mit. `preise@kydon.app`
+steht in der App als Kontaktadresse; damit dort etwas ankommt, braucht die
+Domain entweder einen Mail-Dienst oder eine Weiterleitung beim Registrar —
+beides ist in wenigen Minuten eingerichtet, aber es ist ein eigener Schritt.
+
 ## Was in der Auslieferung steckt
 
 | | |

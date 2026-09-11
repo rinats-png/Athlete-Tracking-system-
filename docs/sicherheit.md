@@ -515,7 +515,8 @@ nicht als erledigt gelten, nur weil der Code sie vorbereitet.
 |---|---|---|
 | Migrationen einspielen | `20260907120000`, `20260910090000`, `20260910100000` | ohne sie gilt im Backend der alte Stand — inklusive der kritischen Lücke B-01 |
 | Edge Function ausrollen | `supabase functions deploy delete-account` | sonst gibt es keine Kontolöschung |
-| `APP_ORIGIN` setzen | Function-Umgebung | sonst greift die Vorgabe; eine Wildcard gibt es nicht |
+| Supabase Site URL + Redirect URLs auf `kydon.app` | Auth → URL Configuration | sonst läuft das Zurücksetzen des Passworts ins Leere |
+| `APP_ORIGIN` nur für zusätzliche Herkünfte | Function-Umgebung | `kydon.app` ist fest hinterlegt; eine Wildcard gibt es nicht |
 | **Bestätigungspflicht per E-Mail** | Auth → Sign-up | die eigentliche Massnahme gegen Account Enumeration (B-06) |
 | Ratenbegrenzung | Auth → Rate limits | die einzige, die gegen ein Skript wirkt |
 | `purge_expired()` verplanen | pg_cron, täglich | Aufbewahrungsfristen wirken sonst nicht |
