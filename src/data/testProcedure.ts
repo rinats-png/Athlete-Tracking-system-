@@ -5,7 +5,7 @@
  * `instructions` im Katalog sagt in ein bis zwei Sätzen, was zu tun ist. Das
  * genügt, um einen Test einmal durchzuführen — aber nicht, um ihn ein
  * halbes Jahr später unter denselben Bedingungen zu wiederholen. Genau daran
- * hängt in BASELINE alles: eine Veränderung ist nur dann eine Veränderung,
+ * hängt in KYDON alles: eine Veränderung ist nur dann eine Veränderung,
  * wenn nicht das Vorgehen sich geändert hat.
  *
  * Deshalb steht hier je Test, was `instructions` offen lässt:

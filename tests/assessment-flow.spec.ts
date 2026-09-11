@@ -5,7 +5,7 @@ import { aggregateAttempts } from '../src/domain/assessment'
 /**
  * Der Diagnostik-Durchlauf ist der Kern des Produkts: Termin anlegen, Tests
  * einzeln messen, abschliessen, Auswertung lesen. Bricht dieser Weg, ist
- * BASELINE ein Verlaufslogbuch — genau das, was es nicht sein soll.
+ * KYDON ein Verlaufslogbuch — genau das, was es nicht sein soll.
  */
 
 test.describe('Diagnostik', () => {

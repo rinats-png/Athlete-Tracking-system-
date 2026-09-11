@@ -30,7 +30,7 @@ import {
  * Validierung und Migration liegen in `schema.ts` und laufen bei jedem Laden.
  */
 
-const STORAGE_KEY = 'baseline.data.v1'
+const STORAGE_KEY = 'kydon.data.v1'
 
 export type StoredData = ValidatedData
 /**
@@ -118,9 +118,19 @@ export function clearData(): void {
   }
 }
 
-/** Exportformat. Der Umschlag macht die Datei ohne Kontext lesbar. */
+/**
+ * Exportformat. Der Umschlag macht die Datei ohne Kontext lesbar.
+ *
+ * Geschrieben wird die neue Kennung. Gelesen werden BEIDE: Exporte aus der
+ * Zeit vor der Umbenennung tragen `BASELINE_DATA_EXPORT`, und ein Export, der
+ * nach einem Update nicht mehr einlesbar wäre, bräche das Versprechen, dass
+ * der Export immer die vollständige Rettung ist (§32).
+ */
+export const EXPORT_FORMAT = 'KYDON_DATA_EXPORT'
+export const LEGACY_EXPORT_FORMATS: readonly string[] = ['BASELINE_DATA_EXPORT']
+
 export interface ExportEnvelope {
-  format: 'BASELINE_DATA_EXPORT'
+  format: typeof EXPORT_FORMAT | 'BASELINE_DATA_EXPORT'
   schemaVersion: number
   appVersion: string
   createdAt: string
@@ -129,7 +139,7 @@ export interface ExportEnvelope {
 
 export function exportData(data: StoredData, appVersion = __APP_VERSION__): string {
   const envelope: ExportEnvelope = {
-    format: 'BASELINE_DATA_EXPORT',
+    format: EXPORT_FORMAT,
     schemaVersion: CURRENT_SCHEMA_VERSION,
     appVersion,
     createdAt: new Date().toISOString(),
@@ -161,7 +171,10 @@ export function importData(json: string): ImportOutcome {
   }
 
   const candidate =
-    parsed && typeof parsed === 'object' && (parsed as ExportEnvelope).format === 'BASELINE_DATA_EXPORT'
+    parsed &&
+    typeof parsed === 'object' &&
+    ((parsed as ExportEnvelope).format === EXPORT_FORMAT ||
+      LEGACY_EXPORT_FORMATS.includes((parsed as ExportEnvelope).format))
       ? (parsed as ExportEnvelope).data
       : parsed
 

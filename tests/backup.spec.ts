@@ -106,7 +106,7 @@ test.describe('Zweitschrift auf dem Gerät', () => {
         page.evaluate(
           () =>
             new Promise<string | null>((resolve) => {
-              const open = indexedDB.open('baseline', 1)
+              const open = indexedDB.open('kydon', 1)
               open.onsuccess = () => {
                 const db = open.result
                 const get = db.transaction('snapshots', 'readonly').objectStore('snapshots').get('current')
@@ -132,7 +132,7 @@ test.describe('Zweitschrift auf dem Gerät', () => {
 
     // Genau das, was ein Browser unter Speicherdruck tut: localStorage weg,
     // IndexedDB bleibt.
-    await page.evaluate(() => localStorage.removeItem('baseline.data.v1'))
+    await page.evaluate(() => localStorage.removeItem('kydon.data.v1'))
     await page.reload({ waitUntil: 'domcontentloaded' })
 
     await expect(page.getByLabel(/Vorname/)).toHaveValue('Jonas')

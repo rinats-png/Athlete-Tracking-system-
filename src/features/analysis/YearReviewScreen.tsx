@@ -103,7 +103,7 @@ export function YearReviewScreen() {
     const canvas = canvasRef.current
     if (!paint() || !canvas) return
     const link = document.createElement('a')
-    link.download = `baseline-${review.year}.png`
+    link.download = `kydon-${review.year}.png`
     link.href = canvas.toDataURL('image/png')
     link.click()
   }

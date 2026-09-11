@@ -46,7 +46,7 @@ test.describe('Bedingungen des Testtags', () => {
     await page.getByRole('button', { name: /speichern/i }).first().click()
 
     const bestand = JSON.parse(
-      (await page.evaluate(() => localStorage.getItem('baseline.data.v1'))) ?? '{}',
+      (await page.evaluate(() => localStorage.getItem('kydon.data.v1'))) ?? '{}',
     )
     const alle = bestand.athletes.flatMap((a: { results: unknown[] }) => a.results) as {
       context: { surface: string; temperatureC: number | null }

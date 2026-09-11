@@ -41,7 +41,7 @@ const STAND_EN = 'Last updated: 6 September 2026'
 const privacyDe: LegalDocument = {
   title: 'Datenschutzerklärung',
   intro:
-    'BASELINE ist so gebaut, dass möglichst wenig über dich anfällt. Diese Erklärung beschreibt, was tatsächlich passiert — nicht, was rechtlich gerade noch zulässig wäre.',
+    'KYDON ist so gebaut, dass möglichst wenig über dich anfällt. Diese Erklärung beschreibt, was tatsächlich passiert — nicht, was rechtlich gerade noch zulässig wäre.',
   updated: STAND_DE,
   sections: [
     {
@@ -80,7 +80,7 @@ const privacyDe: LegalDocument = {
       heading: 'Wenn du Athleten betreust',
       body: [
         'Trägst du als Trainer Daten anderer Personen ein, bist du für diese Daten verantwortlich. Du brauchst dafür eine eigene Rechtsgrundlage — in der Regel die Einwilligung der betreffenden Person, bei Minderjährigen die der Erziehungsberechtigten.',
-        'BASELINE speichert zu betreuten Athleten nur, was du einträgst. Es gibt für sie kein eigenes Konto, keine Einladung und keine E-Mail-Adresse.',
+        'KYDON speichert zu betreuten Athleten nur, was du einträgst. Es gibt für sie kein eigenes Konto, keine Einladung und keine E-Mail-Adresse.',
       ],
     },
     {
@@ -116,7 +116,7 @@ const privacyDe: LegalDocument = {
     {
       heading: 'Keine medizinische Datenverarbeitung',
       body: [
-        'BASELINE ist kein Medizinprodukt und erhebt keine Gesundheitsdaten zu diagnostischen Zwecken. Die erfassten Werte sind sportliche Leistungsdaten. Trägst du freiwillig Angaben ein, die Rückschlüsse auf deine Gesundheit zulassen, behandeln wir sie mit derselben Sorgfalt wie alle übrigen Daten — die App leitet daraus jedoch keine gesundheitlichen Aussagen ab.',
+        'KYDON ist kein Medizinprodukt und erhebt keine Gesundheitsdaten zu diagnostischen Zwecken. Die erfassten Werte sind sportliche Leistungsdaten. Trägst du freiwillig Angaben ein, die Rückschlüsse auf deine Gesundheit zulassen, behandeln wir sie mit derselben Sorgfalt wie alle übrigen Daten — die App leitet daraus jedoch keine gesundheitlichen Aussagen ab.',
       ],
     },
   ],
@@ -125,7 +125,7 @@ const privacyDe: LegalDocument = {
 const privacyEn: LegalDocument = {
   title: 'Privacy policy',
   intro:
-    'BASELINE is built so that as little as possible about you is processed. This policy describes what actually happens — not what would still be legally permissible.',
+    'KYDON is built so that as little as possible about you is processed. This policy describes what actually happens — not what would still be legally permissible.',
   updated: STAND_EN,
   sections: [
     {
@@ -164,7 +164,7 @@ const privacyEn: LegalDocument = {
       heading: 'If you coach athletes',
       body: [
         'If you enter other people’s data as a coach, you are the controller for that data. You need your own legal basis — usually the consent of the person concerned, or of a guardian for minors.',
-        'BASELINE stores only what you enter about coached athletes. They have no account of their own, no invitation and no email address.',
+        'KYDON stores only what you enter about coached athletes. They have no account of their own, no invitation and no email address.',
       ],
     },
     { heading: 'Recipients', body: ['We use two processors. Data processing agreements under Art. 28 GDPR are in place with both.'] },
@@ -195,7 +195,7 @@ const privacyEn: LegalDocument = {
     {
       heading: 'No medical data processing',
       body: [
-        'BASELINE is not a medical device and does not collect health data for diagnostic purposes. The values recorded are sports performance data. If you voluntarily enter details that allow conclusions about your health, we treat them with the same care as all other data — but the app derives no health statements from them.',
+        'KYDON is not a medical device and does not collect health data for diagnostic purposes. The values recorded are sports performance data. If you voluntarily enter details that allow conclusions about your health, we treat them with the same care as all other data — but the app derives no health statements from them.',
       ],
     },
   ],
@@ -205,19 +205,19 @@ const privacyEn: LegalDocument = {
 
 const termsDe: LegalDocument = {
   title: 'Nutzungsbedingungen',
-  intro: 'Was du von BASELINE erwarten kannst und was BASELINE von dir erwartet.',
+  intro: 'Was du von KYDON erwarten kannst und was KYDON von dir erwartet.',
   updated: STAND_DE,
   sections: [
     {
-      heading: 'Was BASELINE ist',
+      heading: 'Was KYDON ist',
       body: [
-        'BASELINE ist ein Werkzeug zur sportlichen Leistungsdiagnostik. Es erfasst Messwerte, ordnet sie — soweit belegte Referenzwerte vorliegen — in Vergleichsgruppen ein und stellt ihre Entwicklung dar.',
+        'KYDON ist ein Werkzeug zur sportlichen Leistungsdiagnostik. Es erfasst Messwerte, ordnet sie — soweit belegte Referenzwerte vorliegen — in Vergleichsgruppen ein und stellt ihre Entwicklung dar.',
       ],
     },
     {
-      heading: 'Was BASELINE ausdrücklich nicht ist',
+      heading: 'Was KYDON ausdrücklich nicht ist',
       body: [
-        'Keine medizinische Diagnostik. BASELINE stellt keine Diagnosen, gibt keine Therapieempfehlungen und bewertet keine Krankheiten.',
+        'Keine medizinische Diagnostik. KYDON stellt keine Diagnosen, gibt keine Therapieempfehlungen und bewertet keine Krankheiten.',
         'Keine trainingsplanerische Beratung. Die App erzeugt keine Trainingspläne, Übungen oder Belastungsvorgaben.',
         'Bei Beschwerden, Schmerzen oder gesundheitlichen Fragen wende dich an eine Ärztin oder einen Arzt.',
       ],
@@ -266,19 +266,19 @@ const termsDe: LegalDocument = {
 
 const termsEn: LegalDocument = {
   title: 'Terms of use',
-  intro: 'What you can expect from BASELINE, and what BASELINE expects from you.',
+  intro: 'What you can expect from KYDON, and what KYDON expects from you.',
   updated: STAND_EN,
   sections: [
     {
-      heading: 'What BASELINE is',
+      heading: 'What KYDON is',
       body: [
-        'BASELINE is a tool for sports performance diagnostics. It records measurements, classifies them against comparison groups where documented reference values exist, and shows their development.',
+        'KYDON is a tool for sports performance diagnostics. It records measurements, classifies them against comparison groups where documented reference values exist, and shows their development.',
       ],
     },
     {
-      heading: 'What BASELINE explicitly is not',
+      heading: 'What KYDON explicitly is not',
       body: [
-        'Not medical diagnostics. BASELINE makes no diagnoses, gives no therapy recommendations and assesses no illnesses.',
+        'Not medical diagnostics. KYDON makes no diagnoses, gives no therapy recommendations and assesses no illnesses.',
         'Not training advice. The app produces no training plans, exercises or load prescriptions.',
         'If you have complaints, pain or health questions, consult a doctor.',
       ],

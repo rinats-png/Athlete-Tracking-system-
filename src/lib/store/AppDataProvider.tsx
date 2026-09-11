@@ -211,7 +211,7 @@ interface AppDataValue {
 
 const AppDataContext = createContext<AppDataValue | null>(null)
 
-const MODE_KEY = 'baseline.mode'
+const MODE_KEY = 'kydon.mode'
 
 export function readMode(): AppMode | null {
   try {

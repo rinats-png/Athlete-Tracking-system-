@@ -77,7 +77,7 @@ test.describe('Übergabedatei', () => {
     // Ein vollständiger Export ERSETZT beim Einlesen den ganzen Bestand.
     // Ihn hier durchzulassen hiesse, dem Trainer seine Athleten zu nehmen.
     const outcome = importAthlete(
-      JSON.stringify({ format: 'BASELINE_DATA_EXPORT', schemaVersion: 15, data: {} }),
+      JSON.stringify({ format: 'KYDON_DATA_EXPORT', schemaVersion: 15, data: {} }),
       store(athlete('x', 'Xenia', 1)),
     )
     expect(outcome.ok).toBe(false)

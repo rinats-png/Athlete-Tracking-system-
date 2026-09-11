@@ -121,7 +121,7 @@ export const DOCUMENT_GAPS: DocumentGap[] = [
     label: 'fuel management',
     kind: 'no_protocol',
     reason:
-      'Verpflegungsverträglichkeit ist eine Ernährungsfrage und keine Leistungsmessung. BASELINE gibt keine Ernährungsempfehlungen ab; ein Testergebnis dazu hätte hier keine Folge.',
+      'Verpflegungsverträglichkeit ist eine Ernährungsfrage und keine Leistungsmessung. KYDON gibt keine Ernährungsempfehlungen ab; ein Testergebnis dazu hätte hier keine Folge.',
   },
   {
     disciplineId: 'time_trial',
@@ -163,14 +163,14 @@ export const DOCUMENT_GAPS: DocumentGap[] = [
     label: 'nutrition tolerance',
     kind: 'no_protocol',
     reason:
-      'Verpflegungsverträglichkeit ist eine Ernährungsfrage und keine Leistungsmessung; BASELINE gibt dazu keine Empfehlungen ab.',
+      'Verpflegungsverträglichkeit ist eine Ernährungsfrage und keine Leistungsmessung; KYDON gibt dazu keine Empfehlungen ab.',
   },
   {
     disciplineId: 'triathlon_ironman',
     label: 'nutrition tolerance',
     kind: 'no_protocol',
     reason:
-      'Verpflegungsverträglichkeit ist eine Ernährungsfrage und keine Leistungsmessung; BASELINE gibt dazu keine Empfehlungen ab.',
+      'Verpflegungsverträglichkeit ist eine Ernährungsfrage und keine Leistungsmessung; KYDON gibt dazu keine Empfehlungen ab.',
   },
 ]
 

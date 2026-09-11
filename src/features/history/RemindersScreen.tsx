@@ -30,7 +30,7 @@ export function RemindersScreen() {
   const [permission, setPermission] = useState<NotifyPermission>(() => notifyPermission())
 
   const loadCalendar = () => {
-    downloadFile('baseline-nachmessungen.ics', buildIcs(due, locale), 'text/calendar')
+    downloadFile('kydon-nachmessungen.ics', buildIcs(due, locale), 'text/calendar')
   }
 
   const setInterval = (slug: string, days: number | null) => {

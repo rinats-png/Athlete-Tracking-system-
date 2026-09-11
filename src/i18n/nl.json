@@ -1,8 +1,8 @@
 {
   "app": {
-    "name": "Baseline",
+    "name": "Kydon",
     "tagline": "Prestatiediagnostiek",
-    "fullName": "BASELINE – Prestatiediagnostiek"
+    "fullName": "KYDON – Performance Diagnostics"
   },
   "nav": {
     "primary": "Hoofdnavigatie",
@@ -123,7 +123,7 @@
     "sportScoresHint": "Gevormd uit meerdere tests. De onderdelen zijn gemeten; de manier van combineren is een definitie van deze app.",
     "scoreBasis": "uit {{tests}}",
     "noSportTitle": "Kies je sport",
-    "noSportHint": "BASELINE stelt dan precies de tests voor die voor jouw discipline gemeten worden."
+    "noSportHint": "KYDON stelt dan precies de tests voor die voor jouw discipline gemeten worden."
   },
   "table": {
     "dimension": "As",
@@ -152,7 +152,7 @@
     "percentOfBest": "% van record"
   },
   "welcome": {
-    "eyebrow": "BASELINE – Prestatiediagnostiek",
+    "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Ontdek waar je werkelijk staat.",
     "body": "Sportspecifieke tests, wetenschappelijke referentiewaarden, een prestatieprofiel en de volgende zinvolle test — geen trainingslogboek, geen calorieteller.",
     "continueEmail": "Doorgaan met e-mail",
@@ -169,7 +169,7 @@
       "Persoonlijke ontwikkeling"
     ],
     "halo": {
-      "version": "Prestatiediagnostiek · v1",
+      "version": "Performance Diagnostics · v1",
       "navLabel": "Paginanavigatie",
       "nav": {
         "what": "Wat gemeten wordt",
@@ -182,8 +182,8 @@
         "staat."
       ],
       "since": "geen account",
-      "aboutLabel": "over baseline",
-      "aboutHeadline": "Baseline meet, plaatst het in context en toont wat werkelijk veranderd is — en wat gewoon een goede dag was.",
+      "aboutLabel": "over kydon",
+      "aboutHeadline": "Kydon meet, plaatst het in context en toont wat werkelijk veranderd is — en wat gewoon een goede dag was.",
       "aboutBody": "Sportspecifieke testprotocollen, referentiewaarden met bronnen, een prestatieprofiel over zes assen en de volgende zinvolle test. Geen trainingslogboek, geen calorieteller, geen medische uitspraak.",
       "cards": {
         "protocol": {
@@ -199,7 +199,7 @@
           "body": "Je percentiel waar een gedocumenteerde referentie bestaat — en een verandering pas zodra die je eigen variatie overstijgt."
         }
       },
-      "claim": "Metingen, geen gevoel",
+      "claim": "Measure. Benchmark. Develop.",
       "missionLabel": "aanpak:",
       "missionA": "Diagnostiek voor elke",
       "missionB": "ambitie",
@@ -211,7 +211,7 @@
   },
   "body": {
     "figureLabel": "Lichaamsweergave met gemarkeerde prestatiedimensies",
-    "index": "Baseline-index",
+    "index": "Kydon-index",
     "detail_population_one": "Uit {{count}} test, vergeleken met getrainde volwassenen van jouw leeftijd en geslacht.",
     "detail_population_other": "Uit {{count}} tests, vergeleken met getrainde volwassenen van jouw leeftijd en geslacht.",
     "detail_personalBest_one": "Uit {{count}} test, afgezet tegen je persoonlijk record.",
@@ -220,7 +220,7 @@
   "storage": {
     "blocked": "Apparaatopslag is niet beschikbaar (privémodus of vol). Invoer geldt alleen voor deze sessie.",
     "migrated": "Je gegevens komen uit een oudere versie (versie {{from}}) en zijn overgenomen. Er is niets verloren gegaan.",
-    "newerVersion": "Deze gegevens zijn opgeslagen door een nieuwere versie van BASELINE. Ze blijven onaangeroerd tot deze app is bijgewerkt — tot dan worden ze getoond noch overschreven.",
+    "newerVersion": "Deze gegevens zijn opgeslagen door een nieuwere versie van KYDON. Ze blijven onaangeroerd tot deze app is bijgewerkt — tot dan worden ze getoond noch overschreven.",
     "rejected_one": "Eén record kon niet worden gelezen en ontbreekt in de analyse:",
     "rejected_other": "{{count}} records konden niet worden gelezen en ontbreken in de analyse:",
     "kind": {
@@ -495,7 +495,7 @@
       "retest_stale": "De laatste meting is {{days}} dagen oud. Ze beschrijft niet noodzakelijk meer waar je vandaag staat.",
       "deepen_axis": "{{dimension}} berust op één meting. Een tweede waarde laat zien of de eerste de regel was of de uitschieter.",
       "improve_data_quality": "{{count}} van {{total}} metingen zijn alleen met voorbehoud te lezen — meestal ontbreekt het lichaamsgewicht of is de test niet tot het maximum uitgevoerd.",
-      "address_limiter": "{{dimension}} ligt {{gap}} punten onder je andere assen, op basis van {{measurements}} metingen. BASELINE meet en plaatst in context; wat je daaruit voor je training concludeert, is aan jou of je trainer."
+      "address_limiter": "{{dimension}} ligt {{gap}} punten onder je andere assen, op basis van {{measurements}} metingen. KYDON meet en plaatst in context; wat je daaruit voor je training concludeert, is aan jou of je trainer."
     }
   },
   "charts": {
@@ -548,7 +548,7 @@
     "noAnswers": "Nog geen vraag beantwoord.",
     "save": "Toepassen",
     "skip": "Overslaan",
-    "disclaimer": "Alle invoer bestaat uit zelfbeoordelingen op één dag, geen metingen. Gereedheid is het ongewogen gemiddelde van de beantwoorde vragen — een weging was niet te verantwoorden. BASELINE leidt hieruit geen trainingsvrijgave en geen gezondheidsoordeel af."
+    "disclaimer": "Alle invoer bestaat uit zelfbeoordelingen op één dag, geen metingen. Gereedheid is het ongewogen gemiddelde van de beantwoorde vragen — een weging was niet te verantwoorden. KYDON leidt hieruit geen trainingsvrijgave en geen gezondheidsoordeel af."
   },
   "context": {
     "title": "Omstandigheden",
@@ -653,7 +653,7 @@
   "gate": {
     "step": "Stap 1 van 1",
     "title": "Welke sport?",
-    "body": "BASELINE stelt dan precies de tests voor die voor die discipline gemeten worden — met protocol en onderbouwing. De invoer blijft op dit apparaat en is altijd te wijzigen.",
+    "body": "KYDON stelt dan precies de tests voor die voor die discipline gemeten worden — met protocol en onderbouwing. De invoer blijft op dit apparaat en is altijd te wijzigen.",
     "noMatch": "Geen sport gevonden voor “{{query}}”. Kies hieronder “Algemene diagnostiek” — de sport kan later worden toegevoegd.",
     "general": "Algemene diagnostiek",
     "generalHint": "Zonder sport: één batterij over alle zes assen. Altijd te wijzigen in het testgedeelte."
@@ -740,7 +740,7 @@
       "body": "Jij bepaalt of je de aanbeveling volgt of alle tests bekijkt. De selectie past zich aan zodra de eerste resultaten binnen zijn."
     },
     "intro": {
-      "title": "Wat BASELINE is",
+      "title": "Wat KYDON is",
       "body": "Voordat je iets invoert: wat deze app doet, en wat uitdrukkelijk niet.",
       "points": {
         "measures": "Ze meet je prestatie met tests die een vast protocol volgen — zodat dezelfde test over een jaar hetzelfde betekent.",
@@ -1199,7 +1199,7 @@
       "Testprotocollen",
       "Zes assen",
       "Referentievergelijking",
-      "Baseline"
+      "Kydon"
     ]
   },
   "focus": {
@@ -1237,13 +1237,13 @@
       "unknown_error": "Opnieuw gemeten op {{date}}. Te weinig metingen om de spreiding te bepalen.",
       "first": "Gemeten op {{date}} — geen eerdere meting om mee te vergelijken."
     },
-    "notATrainingPlan": "BASELINE meet en classificeert. Oefeningen, sets en trainingsschema's ontbreken bewust — de zin hierboven is van jou, de app voegt niets toe en analyseert hem niet.",
+    "notATrainingPlan": "KYDON meet en classificeert. Oefeningen, sets en trainingsschema's ontbreken bewust — de zin hierboven is van jou, de app voegt niets toe en analyseert hem niet.",
     "reportTitle": "Trainingsfocus",
     "reportIntro": "Gesteld door de trainer. De beoordeling ernaast is gemeten, niet geschat."
   },
   "auth": {
     "eyebrow": "Aanmelden",
-    "claim": "Prestatiediagnostiek die zegt wat ze weet — en wat niet.",
+    "claim": "Measure. Benchmark. Develop.",
     "noBackend": "Voor dit apparaat is geen project geconfigureerd: je invoer wordt niet geverifieerd en niets wordt verzonden. Deze aanmelding ordent de toegang, ze beschermt nog niets.",
     "signIn": "Aanmelden",
     "register": "Account aanmaken",
@@ -1255,7 +1255,7 @@
     "createAccount": "Account aanmaken",
     "next": "Volgende",
     "back": "Terug",
-    "roleQuestion": "Waarvoor gebruik je BASELINE?",
+    "roleQuestion": "Waarvoor gebruik je KYDON?",
     "role": {
       "athlete": "Voor mezelf",
       "coach": "Ik train anderen"
@@ -1321,7 +1321,7 @@
     "result": "{{pushed}} geüpload, {{pulled}} opgehaald.",
     "offline": "Geen verbinding. De synchronisatie haalt het in zodra je weer online bent.",
     "conflictTitle": "Afwijkende toestand",
-    "conflictBody": "Deze atleet is op een ander apparaat gewijzigd. BASELINE heeft niets overschreven — beide toestanden zijn intact. Sla eerst je export op, beslis dan.",
+    "conflictBody": "Deze atleet is op een ander apparaat gewijzigd. KYDON heeft niets overschreven — beide toestanden zijn intact. Sla eerst je export op, beslis dan.",
     "conflictKeepLocal": "Dit dossier uploaden",
     "conflictExplain": "De servertoestand wordt vervangen. De andere richting — de servertoestand ophalen — loopt via export, “alles verwijderen” en een nieuwe synchronisatie.",
     "whatLeaves": "Verzonden worden metingen, profielgegevens, notities en trainingsfocus. Je wachtwoord wordt niet verzonden."

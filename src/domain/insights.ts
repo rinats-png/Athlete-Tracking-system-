@@ -22,7 +22,7 @@ import type { StoredAssessment, StoredResult } from '@/lib/store/localStore'
  *    Aussage ohne nachvollziehbare Herleitung und keinen Verweis auf Studien,
  *    die hier nicht hinterlegt sind.
  *
- * 3. KEIN TRAININGSPLAN. BASELINE misst und ordnet ein. Ein Hinweis lautet
+ * 3. KEIN TRAININGSPLAN. KYDON misst und ordnet ein. Ein Hinweis lautet
  *    «diese Achse liegt deutlich unter deinen übrigen» — nicht «mach dreimal
  *    die Woche Intervalle».
  */

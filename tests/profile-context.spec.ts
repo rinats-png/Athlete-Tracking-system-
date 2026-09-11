@@ -214,7 +214,7 @@ test.describe("Profil in der Oberfläche", () => {
     await expect(page.getByLabel("Sportbereich")).toHaveCount(0);
     await page.getByRole("button", { name: "Hauptsportart ändern" }).click();
     await page.getByRole("button", { name: /^Marathon/ }).click();
-    const stored = await page.evaluate(() => localStorage.getItem("baseline.data.v1"));
+    const stored = await page.evaluate(() => localStorage.getItem("kydon.data.v1"));
     expect(stored).toContain('"sportCategoryId":"running"');
     expect(stored).toContain('"disciplineId":"marathon"');
   });

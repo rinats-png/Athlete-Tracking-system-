@@ -18,7 +18,7 @@ async function coldStart(page: Page) {
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   await page.evaluate(() => {
     localStorage.clear()
-    localStorage.setItem('baseline.locale', 'de')
+    localStorage.setItem('kydon.locale', 'de')
   })
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
@@ -30,9 +30,9 @@ test.describe('Anmeldung', () => {
 
     for (const theme of ['dark', 'light'] as const) {
       await coldStart(page)
-      await page.evaluate((value) => localStorage.setItem('baseline.theme', value), theme)
+      await page.evaluate((value) => localStorage.setItem('kydon.theme', value), theme)
       await page.reload({ waitUntil: 'domcontentloaded' })
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('KYDON')
 
       // Die Kugel: die Animation der App, bevor sie zum Tor wird.
       await page.waitForTimeout(450)

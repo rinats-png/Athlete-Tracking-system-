@@ -1,14 +1,20 @@
-# Baseline — Sportdiagnostik-PWA
+# Kydon — Performance Diagnostics
+
+**Measure. Benchmark. Develop.**
 
 Progressive Web App für **periodische Sporttests und Leistungsdiagnostik**. Kein
 Workout-Tracker: die App wird alle paar Wochen oder Monate benutzt, um Leistung
 messbar zu machen — für ambitionierte Athleten (Functional Fitness, Kampfsport,
 Tactical) und für Trainer, die Diagnostik als Dienstleistung anbieten.
 
-> **Arbeitstitel:** „Baseline“ ist ein Platzhaltername (passt zu „eine Baseline
-> setzen“ und funktioniert in DE und EN). Er steckt in `package.json`, im
-> Manifest, im Wortmarken-SVG und im Namen des Supabase-Projekts — Umbenennen
-> ist an diesen vier Stellen erledigt.
+> **Name.** Die App hiess in der Entwicklung «Baseline»; seit dem 11. September
+> 2026 heisst sie **Kydon**. Der alte Name lebt an drei Stellen bewusst weiter:
+> im Supabase-Projektnamen `baseline-diagnostics` (eine Kennung, kein Text),
+> in der Quellenangabe `baseline_v0_placeholder` der Referenzwerte (eine
+> Datenkennung, die in bestehenden Zeilen steht) und als *Statistikbegriff*
+> im Code (`baselineIndex`, `sinceBaseline` — die Ausgangsmessung eines
+> Athleten, nichts mit der Marke). Speicherschlüssel und Exportformate wurden
+> umgezogen; alte Exporte bleiben einlesbar.
 
 ## Stand
 

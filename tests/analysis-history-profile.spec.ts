@@ -78,7 +78,7 @@ test.describe('Profil', () => {
     await page.getByRole('button', { name: 'Sportart hinzufügen' }).click()
     await page.getByRole('button', { name: /^Marathon/ }).click()
     await expect(page.getByRole('link', { name: 'Marathon' })).toBeVisible()
-    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('baseline.data.v1') ?? '{}').athletes[0].profile)
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') ?? '{}').athletes[0].profile)
     expect(stored.disciplineId).toBe('boxing')
     expect(stored.additionalDisciplineIds).toEqual(['marathon'])
   })

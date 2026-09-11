@@ -15,7 +15,7 @@ import type { AppLocale } from '@/types/domain'
  * Rolle des Geräts und Verwaltung der betreuten Athleten.
  *
  * Kunden eines Trainers haben ausdrücklich kein Konto und keine E-Mail: ein
- * Name genügt. Alles Weitere wäre eine personenbezogene Angabe, die BASELINE
+ * Name genügt. Alles Weitere wäre eine personenbezogene Angabe, die KYDON
  * für seine Aufgabe nicht braucht.
  */
 export function CoachSettings({ locale }: { locale: AppLocale }) {
@@ -126,7 +126,7 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
                         const json = exportAthleteJson(athlete.id)
                         if (json)
                           downloadFile(
-                            `baseline-athlet-${athlete.id.slice(0, 8)}.json`,
+                            `kydon-athlet-${athlete.id.slice(0, 8)}.json`,
                             json,
                             'application/json',
                           )

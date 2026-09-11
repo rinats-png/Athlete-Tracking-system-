@@ -41,15 +41,15 @@ async function openSeeded(page: Page, results: StoredResult[]) {
   await page.evaluate(
     ({ store }) => {
       localStorage.clear()
-      localStorage.setItem('baseline.theme', 'dark')
-      localStorage.setItem('baseline.locale', 'de')
-      localStorage.setItem('baseline.intro', 'off')
+      localStorage.setItem('kydon.theme', 'dark')
+      localStorage.setItem('kydon.locale', 'de')
+      localStorage.setItem('kydon.intro', 'off')
       localStorage.setItem(
-        'baseline.account.v1',
+        'kydon.account.v1',
         JSON.stringify({ name: 'Prueflauf', email: 'pruef@baseline.test', role: 'athlete', planId: null, createdAt: '2026-01-01T00:00:00.000Z' }),
       )
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
-      localStorage.setItem('baseline.mode', 'guest')
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.mode', 'guest')
     },
     { store: seeded },
   )

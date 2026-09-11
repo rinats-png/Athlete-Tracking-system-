@@ -12,8 +12,8 @@
  * Installieren.
  */
 
-const ENABLED_KEY = 'baseline.intro'
-const SEEN_KEY = 'baseline.intro.seen'
+const ENABLED_KEY = 'kydon.intro'
+const SEEN_KEY = 'kydon.intro.seen'
 
 export function introEnabled(): boolean {
   try {

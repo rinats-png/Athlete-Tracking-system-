@@ -3,7 +3,7 @@
     "title": "Beobachtungswerte",
     "intro": "Zahlen, die keine Leistung sind: Erholung, Umgebung, Sensorik, Körper, Screening. Sie werden erfasst und im Verlauf gezeigt — aber nie bewertet und nie im Leistungsprofil verrechnet.",
     "why": "Für keinen dieser Werte liegt eine belastbare Norm vor. Eine Stufe von «Schwach» bis «Elite» daraufzusetzen wäre erfunden — und an dieser Stelle mit gesundheitlichen Folgen.",
-    "noMedical": "BASELINE deutet diese Werte nicht. Was ein Laborwert bedeutet, sagt eine Ärztin oder ein Arzt, kein Sportprogramm.",
+    "noMedical": "KYDON deutet diese Werte nicht. Was ein Laborwert bedeutet, sagt eine Ärztin oder ein Arzt, kein Sportprogramm.",
     "add": "Wert erfassen",
     "value": "Wert",
     "device": "Gerät",
@@ -204,8 +204,8 @@
     "summary": "Kurz gefasst",
     "summaryLine": "{{measured}} von {{planned}} Achsen belegt. Belastbarkeit des Profils: {{confidence}} %.",
     "noData": "Für diesen Athleten liegen noch keine Messwerte vor.",
-    "disclaimer": "BASELINE ist keine medizinische Diagnostik. Dieser Bericht stellt keine Diagnose, gibt keine Therapieempfehlung und bewertet kein Krankheitsbild. Referenzwerte sind eine Vergleichsgrundlage und kein physiologischer Grenzwert; wo keine publizierte Referenz vorliegt, steht das an der Zeile.",
-    "generated": "Erstellt am {{date}} mit BASELINE"
+    "disclaimer": "KYDON ist keine medizinische Diagnostik. Dieser Bericht stellt keine Diagnose, gibt keine Therapieempfehlung und bewertet kein Krankheitsbild. Referenzwerte sind eine Vergleichsgrundlage und kein physiologischer Grenzwert; wo keine publizierte Referenz vorliegt, steht das an der Zeile.",
+    "generated": "Erstellt am {{date}} mit KYDON"
   },
   "meaning": {
     "title": "Was bedeutet das?",
@@ -248,7 +248,7 @@
   "pricing": {
     "eyebrow": "Profil",
     "title": "Preise",
-    "intro": "Was BASELINE kosten wird, und was darin enthalten ist.",
+    "intro": "Was KYDON kosten wird, und was darin enthalten ist.",
     "notYet": "Noch kann nichts gekauft werden: es gibt keine Zahlungsabwicklung und keinen Vertrag. Diese Seite sagt, was geplant ist — sie ist keine Bestellung.",
     "reportsTitle": "Reports",
     "reportsIntro": "Ein Report ist die druckfertige Auswertung einer Testrunde. Kontingente verfallen nicht, es gibt kein Abo und nichts zu kündigen.",
@@ -439,7 +439,7 @@
     "deleteHint_other": "„{{name}}“ wird mit {{count}} Messungen endgültig gelöscht. Das lässt sich nicht rückgängig machen. Zum Ausblenden ohne Datenverlust gibt es das Archiv.",
     "deleteConfirm": "Endgültig löschen",
     "meta": "{{results}} Messungen · {{assessments}} Diagnostiken · seit {{since}}",
-    "privacyNote": "BASELINE speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät.",
+    "privacyNote": "KYDON speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät.",
     "handover": "Übergabe",
     "handoverHint": "Ein Athlet wechselt Verein oder Trainer: seine Historie gehört ihm und nicht diesem Gerät. Die Datei enthält nur diesen einen Athleten — ohne deine Marke und ohne die übrigen.",
     "handoverExport": "Athlet ausgeben",
@@ -448,7 +448,7 @@
     "handoverAdded": "Aufgenommen wird ergänzend — vorhandene Athleten bleiben unverändert.",
     "handoverError": {
       "invalid_json": "Die Datei ist keine gültige JSON-Datei.",
-      "unknown_format": "Das ist keine Übergabedatei von BASELINE.",
+      "unknown_format": "Das ist keine Übergabedatei von KYDON.",
       "newer_version": "Die Datei stammt aus einer neueren Fassung der App. Aktualisiere zuerst.",
       "no_athlete": "In der Datei steht kein Athlet."
     }
@@ -486,8 +486,8 @@
     "resetYes": "Ja, löschen",
     "importError": {
       "invalid_json": "Die Datei ist kein gültiges JSON. Bitte die unveränderte Exportdatei wählen.",
-      "unknown_format": "Diese Datei ist kein BASELINE-Export. Der vorhandene Bestand wurde nicht angetastet.",
-      "newer_version": "Die Datei stammt aus einer neueren Version von BASELINE. Aktualisiere die App, dann lässt sie sich einlesen — bis dahin bleibt dein Bestand unverändert.",
+      "unknown_format": "Diese Datei ist kein KYDON-Export. Der vorhandene Bestand wurde nicht angetastet.",
+      "newer_version": "Die Datei stammt aus einer neueren Version von KYDON. Aktualisiere die App, dann lässt sie sich einlesen — bis dahin bleibt dein Bestand unverändert.",
       "storage_full": "Der Gerätespeicher reicht nicht aus. Der bisherige Bestand ist unverändert.",
       "unknown": "Der Import ist fehlgeschlagen. Der bisherige Bestand ist unverändert."
     },
@@ -527,7 +527,7 @@
     "goalPlaceholder": "z. B. Ausdauer ausbauen, Maxkraft halten",
     "constraints": "Einschränkungen",
     "constraintsPlaceholder": "z. B. Schulter links belastungsabhängig",
-    "constraintsHint": "Freitext für dich oder deinen Trainer. BASELINE bewertet keine Krankheitsbilder und leitet daraus nichts ab — das Feld dient allein dazu, dass beim Lesen der Werte der Zusammenhang bekannt ist.",
+    "constraintsHint": "Freitext für dich oder deinen Trainer. KYDON bewertet keine Krankheitsbilder und leitet daraus nichts ab — das Feld dient allein dazu, dass beim Lesen der Werte der Zusammenhang bekannt ist.",
     "composition": "Körperzusammensetzung",
     "compositionEmpty": "Trag ein Körpergewicht ein, dann erscheint hier die Zusammensetzung.",
     "compositionOn": "Stand {{date}}",
@@ -642,7 +642,7 @@
     "summaryGaps": "Nicht gemessen: {{axes}}. Diese Achsen fehlen im Profil dieses Termins.",
     "stillOpen": "Noch offen: {{tests}}",
     "partOf": "Teil der Diagnostik „{{title}}“",
-    "disclaimer": "BASELINE ist keine medizinische Diagnostik. Die Werte beschreiben sportliche Leistung und sind weder eine Diagnose noch eine Therapieempfehlung. Die hinterlegten Referenzwerte sind vorläufige Platzhalter und noch nicht gegen eine publizierte Normstichprobe abgeglichen.",
+    "disclaimer": "KYDON ist keine medizinische Diagnostik. Die Werte beschreiben sportliche Leistung und sind weder eine Diagnose noch eine Therapieempfehlung. Die hinterlegten Referenzwerte sind vorläufige Platzhalter und noch nicht gegen eine publizierte Normstichprobe abgeglichen.",
     "status": {
       "planned": "Geplant",
       "in_progress": "Laufend",
@@ -682,7 +682,7 @@
   "report": {
     "open": "Bericht",
     "print": "Drucken / als PDF sichern",
-    "printHint": "Der Bericht wird über die Druckfunktion deines Browsers zu einer PDF-Datei: Drucken → Ziel «Als PDF sichern». BASELINE bringt dafür bewusst keine eigene PDF-Bibliothek mit — Seitenumbruch, Schriftbild und auswählbarer Text kommen so von deinem System und funktionieren auch offline.",
+    "printHint": "Der Bericht wird über die Druckfunktion deines Browsers zu einer PDF-Datei: Drucken → Ziel «Als PDF sichern». KYDON bringt dafür bewusst keine eigene PDF-Bibliothek mit — Seitenumbruch, Schriftbild und auswählbarer Text kommen so von deinem System und funktionieren auch offline.",
     "csv": "CSV exportieren",
     "assessmentTitle": "Diagnostikbericht",
     "profileTitle": "Leistungsprofil",
@@ -750,8 +750,8 @@
     "spread": "Abstand",
     "points": "Punkte",
     "unmeasuredNote": "Nicht in die Ausgewogenheit eingerechnet, weil nicht gemessen: {{axes}}. Ungemessen ist nicht dasselbe wie schwach.",
-    "sinceBaseline": "Seit der ersten Messung",
-    "sinceBaselineHint": "Erste gegen letzte Messung je Test, mit dem Zeitraum daneben — 4 % in acht Wochen und 4 % in zwei Jahren sind nicht dieselbe Aussage.",
+    "sinceKydon": "Seit der ersten Messung",
+    "sinceKydonHint": "Erste gegen letzte Messung je Test, mit dem Zeitraum daneben — 4 % in acht Wochen und 4 % in zwei Jahren sind nicht dieselbe Aussage.",
     "needTwoPerTest": "Noch kein Test wurde zweimal gemessen.",
     "first": "Erste",
     "latest": "Letzte",
@@ -843,7 +843,7 @@
     "eyebrow": "Verlauf",
     "title": "Erinnerungen",
     "intro": "Lokal, ohne Server: die App weiss, wann zuletzt gemessen wurde. Erinnerungen sind aus, bis du sie einschaltest.",
-    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest — und, wenn du es erlaubst, in diesem Moment zusätzlich als Systemmeldung. Während BASELINE geschlossen ist, kommt nichts: dafür bräuchte es einen Server, der weiss, wer du bist und wann du zuletzt gemessen hast, und den gibt es bewusst nicht. Wer auch ohne die App erinnert werden will, nimmt die Kalenderdatei.",
+    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest — und, wenn du es erlaubst, in diesem Moment zusätzlich als Systemmeldung. Während KYDON geschlossen ist, kommt nichts: dafür bräuchte es einen Server, der weiss, wer du bist und wann du zuletzt gemessen hast, und den gibt es bewusst nicht. Wer auch ohne die App erinnert werden will, nimmt die Kalenderdatei.",
     "enable": "Erinnerungen aktivieren",
     "enabled": "Erinnerungen sind aktiv",
     "disabled": "Erinnerungen sind aus",

@@ -35,7 +35,7 @@ test.describe('Report', () => {
 
     for (const theme of ['light', 'dark'] as const) {
       await openDemo(page)
-      await page.evaluate((value) => localStorage.setItem('baseline.theme', value), theme)
+      await page.evaluate((value) => localStorage.setItem('kydon.theme', value), theme)
       await page.goto('/bericht', { waitUntil: 'domcontentloaded' })
       await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible({ timeout: 15_000 })
       // Die Schwerpunkte sind der neue Block — ohne sie wäre die Aufnahme

@@ -42,7 +42,7 @@ export function ProfileScreen() {
 
   const download = () => {
     downloadFile(
-      `baseline-export-${new Date().toISOString().slice(0, 10)}.json`,
+      `kydon-export-${new Date().toISOString().slice(0, 10)}.json`,
       exportJson(),
       'application/json',
     )

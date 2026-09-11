@@ -1,4 +1,5 @@
 import { clearBackup } from './backup'
+import { LEGACY_PREFIX, STORAGE_PREFIX } from './migrateStorage'
 
 /**
  * Alles löschen, was diese App auf diesem Gerät abgelegt hat.
@@ -27,8 +28,8 @@ import { clearBackup } from './backup'
  * Gerät, nicht über das Konto.
  */
 
-/** Gemeinsames Präfix aller Schlüssel dieser App. */
-export const STORAGE_PREFIX = 'baseline.'
+/** Gemeinsames Präfix aller Schlüssel dieser App — an einer Stelle definiert. */
+export { STORAGE_PREFIX } from './migrateStorage'
 
 /** Was gelöscht wurde — für die Rückmeldung an den Nutzer und für die Tests. */
 export interface WipeReport {
@@ -44,7 +45,8 @@ export async function wipeDevice(): Promise<WipeReport> {
     // zweite Schlüssel stehen.
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i)
-      if (key?.startsWith(STORAGE_PREFIX)) keys.push(key)
+      // Auch Reste des alten Namens, falls der Umzug sie je übersehen hat.
+      if (key?.startsWith(STORAGE_PREFIX) || key?.startsWith(LEGACY_PREFIX)) keys.push(key)
     }
     for (const key of keys) localStorage.removeItem(key)
   } catch {

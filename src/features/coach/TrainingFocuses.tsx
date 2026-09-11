@@ -30,7 +30,7 @@ import type { StoredFocus } from '@/lib/store/localStore'
  *
  * Ein Schwerpunkt verbindet einen Befund aus der Diagnostik mit einer
  * Priorität und einem Satz des Trainers. Es gibt hier keine Übungen, keine
- * Sätze und Wiederholungen, keine Videos und keinen Trainingsplan — BASELINE
+ * Sätze und Wiederholungen, keine Videos und keinen Trainingsplan — KYDON
  * misst und ordnet ein, sie trainiert nicht.
  *
  * DIE ZEILEN KOMMEN AUS DER DIAGNOSTIK, NICHT AUS EINEM LEEREN BLATT. Zur

@@ -91,7 +91,7 @@ export function OnePagerScreen() {
         {/* --- Kopf ------------------------------------------------------ */}
         <header className="border-b border-line pb-3">
           <p className="readout text-[10px] tracking-[0.2em] uppercase text-ink-muted">
-            BASELINE · {t('onePager.title')}
+            KYDON · {t('onePager.title')}
           </p>
           <h1 className="report-name font-display mt-1 text-[30px] leading-none font-bold">{name}</h1>
           <dl className="mt-2 grid grid-cols-2 gap-x-6 gap-y-1 text-[12px] sm:grid-cols-3">

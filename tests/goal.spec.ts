@@ -81,7 +81,7 @@ test.describe('Zielwerte', () => {
   test('ein Ziel lässt sich am Ergebnis setzen und wieder entfernen', async ({ page }) => {
     await openGuest(page)
     await page.evaluate(() => {
-      const store = JSON.parse(localStorage.getItem('baseline.data.v1')!)
+      const store = JSON.parse(localStorage.getItem('kydon.data.v1')!)
       store.athletes[0].results = [
         {
           id: 'r1',
@@ -101,7 +101,7 @@ test.describe('Zielwerte', () => {
           createdAt: '2026-02-01T10:00:00.000Z',
         },
       ]
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
     })
     await page.goto('/ergebnis/r1', { waitUntil: 'domcontentloaded' })
 

@@ -132,7 +132,7 @@ export function ReportScreen() {
           size="md"
           onClick={() =>
             downloadFile(
-              `baseline-${assessment?.performedOn ?? new Date().toISOString().slice(0, 10)}.csv`,
+              `kydon-${assessment?.performedOn ?? new Date().toISOString().slice(0, 10)}.csv`,
               resultsToCsv(data, locale),
               'text/csv',
             )

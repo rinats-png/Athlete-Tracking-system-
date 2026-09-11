@@ -70,7 +70,7 @@ test.describe('Erinnerungen im Bildschirm', () => {
     const laden = page.getByRole('button', { name: 'Kalenderdatei laden' })
     await expect(laden).toBeVisible()
     const [download] = await Promise.all([page.waitForEvent('download'), laden.click()])
-    expect(download.suggestedFilename()).toBe('baseline-nachmessungen.ics')
+    expect(download.suggestedFilename()).toBe('kydon-nachmessungen.ics')
   })
 
   test('die Grenze der Systembenachrichtigung steht daneben, nicht im Kleingedruckten', async ({

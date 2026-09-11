@@ -132,7 +132,7 @@ async function readStore(page: import("@playwright/test").Page) {
   // Der Schluessel wird benannt, nicht gesucht: es liegen mehrere
   // JSON-Eintraege unter `baseline.*` (Bestand, Konto), und "der erste, der
   // mit { beginnt" traf irgendwann den falschen.
-  return page.evaluate(() => localStorage.getItem("baseline.data.v1"));
+  return page.evaluate(() => localStorage.getItem("kydon.data.v1"));
 }
 
 test.describe("Messbedingungen", () => {

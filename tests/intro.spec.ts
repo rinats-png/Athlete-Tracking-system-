@@ -84,7 +84,7 @@ test.describe('Ablauf beim Öffnen', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await page.evaluate(() => {
       localStorage.clear()
-      localStorage.setItem('baseline.locale', 'de')
+      localStorage.setItem('kydon.locale', 'de')
       sessionStorage.clear()
     })
     await page.reload({ waitUntil: 'domcontentloaded' })
@@ -127,7 +127,7 @@ test.describe('Ablauf beim Öffnen', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await page.evaluate(() => {
       localStorage.clear()
-      localStorage.setItem('baseline.intro', 'off')
+      localStorage.setItem('kydon.intro', 'off')
       sessionStorage.clear()
     })
     await page.reload({ waitUntil: 'domcontentloaded' })
@@ -154,6 +154,6 @@ test.describe('Ablauf beim Öffnen', () => {
     const box = page.getByLabel(/Sequenz beim Öffnen/)
     await expect(box).toBeVisible()
     await box.uncheck()
-    expect(await page.evaluate(() => localStorage.getItem('baseline.intro'))).toBe('off')
+    expect(await page.evaluate(() => localStorage.getItem('kydon.intro'))).toBe('off')
   })
 })

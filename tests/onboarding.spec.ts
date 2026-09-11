@@ -18,7 +18,7 @@ const weiter = (page: Page) => page.getByRole('button', { name: 'Weiter' })
 
 /** Von Schritt 1 bis zu den Angaben zur Person. */
 async function bisPerson(page: Page) {
-  await weiter(page).click() // Was BASELINE ist
+  await weiter(page).click() // Was KYDON ist
   await page.getByRole('button', { name: /Für mich selbst/ }).click()
   await weiter(page).click() // Rolle
 }
@@ -31,7 +31,7 @@ async function fillProfile(page: Page) {
 }
 
 const store = (page: Page) =>
-  page.evaluate(() => JSON.parse(localStorage.getItem('baseline.data.v1') ?? '{}'))
+  page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') ?? '{}'))
 
 test.describe('Einstieg', () => {
   test('der erste Schritt sagt, was die App nicht ist', async ({ page }) => {
@@ -124,7 +124,7 @@ test.describe('Einstieg', () => {
     expect(athlete.assessments[0].status).toBe('in_progress')
     expect(athlete.assessments[0].plannedTestSlugs.length).toBeGreaterThan(0)
 
-    const equipment = await page.evaluate(() => localStorage.getItem('baseline.equipment'))
+    const equipment = await page.evaluate(() => localStorage.getItem('kydon.equipment'))
     expect(equipment, 'die Ortswahl füllt den Ausrüstungsfilter vor').toContain('barbell')
   })
 

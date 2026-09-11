@@ -169,7 +169,7 @@ export function IntroSequence({ onDone }: { onDone: () => void }) {
         </span>
         <span className="readout text-[10px] tracking-[0.4em] text-ink uppercase">
           {atFinale
-            ? 'BASELINE'
+            ? 'KYDON'
             : `${String(Math.max(1, index + 1)).padStart(3, '0')} / ${String(scenes.length).padStart(3, '0')}`}
         </span>
       </div>

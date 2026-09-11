@@ -100,9 +100,9 @@ test.describe('Ergebnis', () => {
     await openGuest(page)
     // Profil für eine Referenz: männlich, 28, Judo.
     await page.evaluate(() => {
-      const store = JSON.parse(localStorage.getItem('baseline.data.v1') ?? '{}')
+      const store = JSON.parse(localStorage.getItem('kydon.data.v1') ?? '{}')
       Object.assign(store.athletes[0].profile, { sex: 'male', birthDate: '1998-01-01', disciplineId: 'judo', sportCategoryId: 'combat' })
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
     })
     await page.goto('/tests/sprint_10m', { waitUntil: 'domcontentloaded' })
     await page.getByLabel(/^Zeit/).first().fill('1.9')
@@ -140,7 +140,7 @@ test.describe('Ein Weg zu messen', () => {
   }) => {
     await openGuest(page)
     await page.evaluate(() => {
-      const raw = localStorage.getItem('baseline.data.v1')!
+      const raw = localStorage.getItem('kydon.data.v1')!
       const store = JSON.parse(raw)
       store.athletes[0].assessments = [
         {
@@ -156,7 +156,7 @@ test.describe('Ein Weg zu messen', () => {
           completedAt: null,
         },
       ]
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
     })
     await page.goto('/tests/plank_hold', { waitUntil: 'domcontentloaded' })
 

@@ -158,7 +158,7 @@ void i18n
     interpolation: { escapeValue: false },
     detection: {
       order: ['localStorage', 'navigator'],
-      lookupLocalStorage: 'baseline.locale',
+      lookupLocalStorage: 'kydon.locale',
       caches: ['localStorage'],
       convertDetectedLanguage: (lng: string) => toAppLocale(lng),
     },

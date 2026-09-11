@@ -96,7 +96,7 @@ test.describe('Veränderung im Bildschirm', () => {
   test('die erste Messung verspricht keine Entwicklung', async ({ page }) => {
     await openGuest(page)
     await page.evaluate(() => {
-      const store = JSON.parse(localStorage.getItem('baseline.data.v1')!)
+      const store = JSON.parse(localStorage.getItem('kydon.data.v1')!)
       store.athletes[0].results = [
         {
           id: 'r1',
@@ -116,7 +116,7 @@ test.describe('Veränderung im Bildschirm', () => {
           createdAt: '2026-02-01T10:00:00.000Z',
         },
       ]
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
     })
     await page.goto('/ergebnis/r1', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText(/erste Messung in diesem Test/)).toBeVisible()
@@ -125,7 +125,7 @@ test.describe('Veränderung im Bildschirm', () => {
   test('mit zwei Messungen steht die Zahl da, aber ohne Deutung', async ({ page }) => {
     await openGuest(page)
     await page.evaluate(() => {
-      const store = JSON.parse(localStorage.getItem('baseline.data.v1')!)
+      const store = JSON.parse(localStorage.getItem('kydon.data.v1')!)
       const base = {
         testSlug: 'plank_hold',
         values: { durationSeconds: 90 },
@@ -143,7 +143,7 @@ test.describe('Veränderung im Bildschirm', () => {
         { ...base, id: 'r0', performedAt: '2026-01-01T10:00:00.000Z', score: 80, createdAt: '2026-01-01T10:00:00.000Z' },
         { ...base, id: 'r1', performedAt: '2026-02-01T10:00:00.000Z', score: 90, createdAt: '2026-02-01T10:00:00.000Z' },
       ]
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
     })
     await page.goto('/ergebnis/r1', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('+12,5 %')).toBeVisible()

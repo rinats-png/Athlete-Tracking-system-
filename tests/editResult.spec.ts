@@ -26,7 +26,7 @@ test.describe('Korrektur eines Messwerts', () => {
     await page.waitForURL('**/ergebnis/**')
 
     const vorher = JSON.parse(
-      (await page.evaluate(() => localStorage.getItem('baseline.data.v1'))) ?? '{}',
+      (await page.evaluate(() => localStorage.getItem('kydon.data.v1'))) ?? '{}',
     )
     const ergebnisVorher = vorher.athletes[0].results[0]
     expect(ergebnisVorher.values.distanceM).toBe(2400)
@@ -38,7 +38,7 @@ test.describe('Korrektur eines Messwerts', () => {
     await expect(page.getByText('Gespeichert.')).toBeVisible()
 
     const nachher = JSON.parse(
-      (await page.evaluate(() => localStorage.getItem('baseline.data.v1'))) ?? '{}',
+      (await page.evaluate(() => localStorage.getItem('kydon.data.v1'))) ?? '{}',
     )
     const ergebnisNachher = nachher.athletes[0].results[0]
     expect(ergebnisNachher.values.distanceM).toBe(3200)
@@ -61,7 +61,7 @@ test.describe('Korrektur eines Messwerts', () => {
 
     // Dieselbe Seite, dieselbe Kennung: eine Korrektur ist kein neuer Wert.
     expect(page.url()).toBe(url)
-    const store = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
+    const store = await page.evaluate(() => localStorage.getItem('kydon.data.v1'))
     const anzahl = (store?.match(/"testSlug":"cooper_12min"/g) ?? []).length
     expect(anzahl, 'genau ein Ergebnis, nicht zwei').toBe(1)
   })

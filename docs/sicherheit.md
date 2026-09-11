@@ -1,7 +1,7 @@
 # Sicherheit
 
 Diese Datei beantwortet die *Security Master Checkliste für KI-/Vibe-Coded
-Apps* für BASELINE. Sie ist kein Werbetext: wo etwas offen ist, steht es
+Apps* für KYDON. Sie ist kein Werbetext: wo etwas offen ist, steht es
 offen da, mit Grund und mit dem, was stattdessen gilt.
 
 **Stand:** 10. September 2026 · Fassung 0.1.0 · geprüft an Zweig
@@ -20,7 +20,7 @@ dieser Datei.
 
 Zwei Sätze, aus denen sich fast alles andere ergibt:
 
-1. **BASELINE läuft ohne Konto vollständig.** Der Normalfall ist eine App,
+1. **KYDON läuft ohne Konto vollständig.** Der Normalfall ist eine App,
    die alle Daten auf dem Gerät hält und mit niemandem spricht. Ein Konto ist
    ein Zusatz für Abgleich und Trainerbetrieb. Das verkleinert die
    Angriffsfläche drastisch — es gibt für die meisten Nutzer keinen Server,
@@ -430,7 +430,7 @@ mit Rückfrage vor dem endgültigen. Offline umgeht nichts: ohne Verbindung
 gibt es keinen Serverzugriff, den man umgehen könnte.
 
 ### 20 Falls die App selbst KI verwendet — *nicht zutreffend*
-BASELINE ruft **kein** Sprachmodell auf, weder im Browser noch serverseitig.
+KYDON ruft **kein** Sprachmodell auf, weder im Browser noch serverseitig.
 Es gibt keine Prompts, keine Werkzeugaufrufe, keine Handlungsvollmacht.
 Das ist eine bewusste Produktentscheidung und keine Auslassung: die App gibt
 diagnostische Aussagen aus Messwerten und Referenzen, und dafür wäre ein

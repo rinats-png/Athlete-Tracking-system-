@@ -1,3 +1,7 @@
+// ZUERST, vor allem anderen: der Umzug der Speicherschlüssel. Das Modul hat
+// keine Importe und läuft damit fertig, bevor `./i18n` seinen Sprachschlüssel
+// liest. Die Position ist Teil der Korrektheit — siehe die Datei selbst.
+import './lib/store/migrateStorage'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 // Schriften lokal gebündelt statt von Google Fonts geladen.

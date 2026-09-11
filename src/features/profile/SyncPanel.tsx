@@ -22,7 +22,7 @@ import { readSyncState, resolveWithLocal, syncOnce, type SyncReport } from '@/li
  * bleiben unversehrt, und die Entscheidung trifft ein Mensch (§89).
  */
 
-const ENABLED_KEY = 'baseline.sync.enabled'
+const ENABLED_KEY = 'kydon.sync.enabled'
 
 function readEnabled(): boolean {
   try {

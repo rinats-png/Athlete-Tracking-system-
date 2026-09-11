@@ -19,7 +19,7 @@
  * Rechtmässigen fast nichts.
  */
 
-const KEY = 'baseline.auth.attempts'
+const KEY = 'kydon.auth.attempts'
 
 /** Ab dem wievielten Fehlversuch überhaupt gewartet wird. */
 export const FREE_ATTEMPTS = 3

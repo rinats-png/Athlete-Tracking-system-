@@ -22,7 +22,7 @@ const OUT = 'mockups/out'
 const GROUP = ['Alex Roth', 'Mira Sand', 'Jonas Feld']
 
 async function setTheme(page: Page, theme: 'light' | 'dark') {
-  await page.evaluate((value) => localStorage.setItem('baseline.theme', value), theme)
+  await page.evaluate((value) => localStorage.setItem('kydon.theme', value), theme)
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
 
@@ -78,21 +78,21 @@ test.describe('Mockups', () => {
     // ---------- 2. Willkommen und Intro ----------
     await page.evaluate(() => {
       localStorage.clear()
-      localStorage.setItem('baseline.locale', 'de')
-      localStorage.setItem('baseline.intro', 'off')
+      localStorage.setItem('kydon.locale', 'de')
+      localStorage.setItem('kydon.intro', 'off')
     })
     await setTheme(page, theme)
     await shot(page, p, '01-willkommen', false)
 
     await page.evaluate(() => {
-      localStorage.setItem('baseline.intro', 'on')
-      sessionStorage.removeItem('baseline.intro.seen')
+      localStorage.setItem('kydon.intro', 'on')
+      sessionStorage.removeItem('kydon.intro.seen')
     })
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     // Mitten in der ersten Szene, wenn die Messpunkte stehen.
     await page.waitForTimeout(800)
     await page.screenshot({ path: `${OUT}/${p}/00-intro.png` })
-    await page.evaluate(() => localStorage.setItem('baseline.intro', 'off'))
+    await page.evaluate(() => localStorage.setItem('kydon.intro', 'off'))
 
     // ---------- 3. Der Bestand ----------
     await openDemo(page)
@@ -101,7 +101,7 @@ test.describe('Mockups', () => {
     await shot(page, p, '03-uebersicht')
 
     const ids = await page.evaluate(() => {
-      const raw = localStorage.getItem('baseline.data.v1')
+      const raw = localStorage.getItem('kydon.data.v1')
       const data = JSON.parse(raw as string)
       const athlete = data.athletes[0]
       const latest = [...athlete.results].sort((a: any, b: any) =>
@@ -185,7 +185,7 @@ test.describe('Mockups', () => {
 
     // ---------- 4. Trainerbereich ----------
     await page.evaluate((names) => {
-      const data = JSON.parse(localStorage.getItem('baseline.data.v1') as string)
+      const data = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
       const base = data.athletes[0]
       // Die Termine des Demofalls, jüngster zuerst.
       const sessions = [...base.assessments].sort((a: any, b: any) =>
@@ -208,7 +208,7 @@ test.describe('Mockups', () => {
         }
       })
       data.activeAthleteId = data.athletes[0].id
-      localStorage.setItem('baseline.data.v1', JSON.stringify(data))
+      localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     }, GROUP)
 
     await go(page, '/trainer')

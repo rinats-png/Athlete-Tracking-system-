@@ -303,6 +303,6 @@ test.describe("Import in der Oberfläche", () => {
       buffer: Buffer.from(JSON.stringify({ irgendwas: true })),
     });
 
-    await expect(page.getByRole("alert")).toContainText(/kein BASELINE-Export/);
+    await expect(page.getByRole("alert")).toContainText(/kein KYDON-Export/);
   });
 });

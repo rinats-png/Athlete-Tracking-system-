@@ -30,7 +30,7 @@ test.describe('Was der Bildschirm über sich sagt', () => {
   test('er nennt, dass nichts geprüft und nichts gespeichert wird', async ({ page }) => {
     await openColdStart(page)
     await formed(page)
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('KYDON')
     // Seit es einen Server gibt, sagt der Bildschirm etwas anderes — aber
     // dieselbe Sache: was mit den Eingaben passiert und was nicht.
     await expect(page.getByText(/Deine Anmeldung läuft über unseren Dienstleister/)).toBeVisible()
@@ -73,7 +73,7 @@ test.describe('Ohne Konto kommt niemand weiter', () => {
     await openColdStart(page)
     await formed(page)
     await page.goto('/analyse', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('KYDON')
   })
 })
 
@@ -85,7 +85,7 @@ test.describe('Registrierung', () => {
     await formed(page)
     await page.getByRole('tab', { name: 'Konto anlegen' }).click()
 
-    await expect(page.getByText('Wofür benutzt du BASELINE?')).toBeVisible()
+    await expect(page.getByText('Wofür benutzt du KYDON?')).toBeVisible()
     await page.getByRole('button', { name: /Ich betreue andere/ }).click()
 
     // Der Trainer sieht Trainerstufen, nicht Report-Kontingente.
@@ -138,7 +138,7 @@ test.describe('Der Übergang', () => {
     await stubAuth(page)
     await openColdStart(page)
     await formed(page)
-    await page.evaluate(() => localStorage.setItem('baseline.intro', 'on'))
+    await page.evaluate(() => localStorage.setItem('kydon.intro', 'on'))
     await page.reload({ waitUntil: 'domcontentloaded' })
     await formed(page)
     await page.getByLabel('E-Mail').fill('mensch@example.org')
@@ -161,17 +161,17 @@ test.describe('Abmelden', () => {
     const { openDemo } = await import('./helpers')
     await openDemo(page)
     await page.goto('/profil', { waitUntil: 'domcontentloaded' })
-    const vorher = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
+    const vorher = await page.evaluate(() => localStorage.getItem('kydon.data.v1'))
     expect(vorher).not.toBeNull()
 
     // `exact`, weil daneben «Abmelden und Gerät leeren» steht — der Weg für
     // geteilte Geräte. Ohne die genaue Übereinstimmung träfe die Suche beide,
     // und ausgerechnet dieser Fall prüft, dass der Bestand bleibt.
     await page.getByRole('button', { name: 'Abmelden', exact: true }).click()
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('KYDON')
 
-    const konto = await page.evaluate(() => localStorage.getItem('baseline.account.v1'))
-    const bestand = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
+    const konto = await page.evaluate(() => localStorage.getItem('kydon.account.v1'))
+    const bestand = await page.evaluate(() => localStorage.getItem('kydon.data.v1'))
     expect(konto).toBeNull()
     expect(bestand, 'der Bestand überlebt das Abmelden').toBe(vorher)
   })
@@ -191,7 +191,7 @@ test.describe('Die Rolle aus der Registrierung', () => {
     await formed(page)
     await page.evaluate(() =>
       localStorage.setItem(
-        'baseline.account.v1',
+        'kydon.account.v1',
         JSON.stringify({
           name: 'Sam',
           email: 'sam@example.org',
@@ -204,7 +204,7 @@ test.describe('Die Rolle aus der Registrierung', () => {
     await page.reload({ waitUntil: 'domcontentloaded' })
     await page.getByRole('button', { name: /Mit leerem Bestand starten/ }).click()
     await page.waitForTimeout(600)
-    const bestand = await page.evaluate(() => localStorage.getItem('baseline.data.v1'))
+    const bestand = await page.evaluate(() => localStorage.getItem('kydon.data.v1'))
     expect(bestand).toContain('"role":"coach"')
   })
 })
@@ -220,7 +220,7 @@ test.describe('Der Anmeldedienst', () => {
 
     await expect(page.getByRole('alert')).toContainText('E-Mail oder Passwort stimmt nicht')
     // Und niemand kommt trotzdem hinein.
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('BASELINE')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('KYDON')
   })
 
   test('eine bereits vergebene E-Mail wird NICHT benannt (Account Enumeration)', async ({ page }) => {

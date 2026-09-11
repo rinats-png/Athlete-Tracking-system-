@@ -70,7 +70,7 @@ test.describe('Neue Felder am Athleten', () => {
     await page.getByLabel('Biologisches Alter', { exact: true }).selectOption('circa_phv')
 
     const bestand = JSON.parse(
-      (await page.evaluate(() => localStorage.getItem('baseline.data.v1'))) ?? '{}',
+      (await page.evaluate(() => localStorage.getItem('kydon.data.v1'))) ?? '{}',
     )
     expect(bestand.athletes[0].profile.weightClass).toBe('-73 kg')
     expect(bestand.athletes[0].profile.maturityStage).toBe('circa_phv')

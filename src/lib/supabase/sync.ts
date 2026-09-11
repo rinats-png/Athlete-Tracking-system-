@@ -23,7 +23,7 @@ import type { StoredAthlete, StoredData } from '@/lib/store/localStore'
  * Datenschutzerklärung beschreibt genau das; ohne Anmeldung passiert es nicht.
  */
 
-const STATE_KEY = 'baseline.sync.v1'
+const STATE_KEY = 'kydon.sync.v1'
 
 export interface SyncState {
   /** Zeitstempel des Servers je Athlet, wie zuletzt gesehen. */
@@ -72,7 +72,7 @@ export function clearSyncState(): void {
  */
 function deviceId(): string {
   try {
-    const key = 'baseline.device'
+    const key = 'kydon.device'
     let id = localStorage.getItem(key)
     if (!id) {
       id = Math.random().toString(36).slice(2, 10)

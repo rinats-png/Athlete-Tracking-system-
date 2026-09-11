@@ -3,7 +3,7 @@
     "title": "Observaties",
     "intro": "Getallen die geen prestatie zijn: herstel, omgeving, sensoren, lichaam, screening. Ze worden vastgelegd en in de tijd getoond — maar nooit beoordeeld en nooit meegeteld in het prestatieprofiel.",
     "why": "Voor geen van deze waarden bestaat een deugdelijke norm. Er een schaal van “zwak” tot “elite” op zetten zou verzonnen zijn — en hier zou dat gevolgen voor de gezondheid kunnen hebben.",
-    "noMedical": "BASELINE interpreteert deze waarden niet. Wat een laboratoriumwaarde betekent, is aan een arts, niet aan een sportapp.",
+    "noMedical": "KYDON interpreteert deze waarden niet. Wat een laboratoriumwaarde betekent, is aan een arts, niet aan een sportapp.",
     "add": "Waarde vastleggen",
     "value": "Waarde",
     "device": "Apparaat",
@@ -204,8 +204,8 @@
     "summary": "In het kort",
     "summaryLine": "{{measured}} van {{planned}} assen gedekt. Profielbetrouwbaarheid: {{confidence}} %.",
     "noData": "Voor deze atleet bestaan nog geen metingen.",
-    "disclaimer": "BASELINE is geen medische diagnostiek. Dit rapport stelt geen diagnose, geeft geen therapeutisch advies en beoordeelt geen klinische toestand. Referentiewaarden zijn een vergelijkingsbasis, geen fysiologische grens; waar geen gepubliceerde referentie bestaat, zegt de rij dat.",
-    "generated": "Aangemaakt op {{date}} met BASELINE"
+    "disclaimer": "KYDON is geen medische diagnostiek. Dit rapport stelt geen diagnose, geeft geen therapeutisch advies en beoordeelt geen klinische toestand. Referentiewaarden zijn een vergelijkingsbasis, geen fysiologische grens; waar geen gepubliceerde referentie bestaat, zegt de rij dat.",
+    "generated": "Aangemaakt op {{date}} met KYDON"
   },
   "meaning": {
     "title": "Wat betekent dit?",
@@ -248,7 +248,7 @@
   "pricing": {
     "eyebrow": "Profiel",
     "title": "Prijzen",
-    "intro": "Wat BASELINE gaat kosten, en wat inbegrepen is.",
+    "intro": "Wat KYDON gaat kosten, en wat inbegrepen is.",
     "notYet": "Er kan nog niets worden gekocht: er is geen betalingsverwerking en geen contract. Deze pagina zegt wat gepland is — het is geen bestelling.",
     "reportsTitle": "Rapporten",
     "reportsIntro": "Een rapport is de drukklare analyse van één testronde. Bundels verlopen niet, er is geen abonnement en niets om op te zeggen.",
@@ -439,7 +439,7 @@
     "deleteHint_other": "“{{name}}” wordt definitief verwijderd samen met {{count}} metingen. Dit kan niet ongedaan worden gemaakt. Om iemand te verbergen zonder gegevens te verliezen, gebruik je het archief.",
     "deleteConfirm": "Definitief verwijderen",
     "meta": "{{results}} metingen · {{assessments}} testsessies · sinds {{since}}",
-    "privacyNote": "BASELINE slaat alleen op wat jij over een getrainde atleet invoert. Geen account, e-mailadres of uitnodiging nodig. Alles blijft op dit apparaat.",
+    "privacyNote": "KYDON slaat alleen op wat jij over een getrainde atleet invoert. Geen account, e-mailadres of uitnodiging nodig. Alles blijft op dit apparaat.",
     "handover": "Overdracht",
     "handoverHint": "Een atleet wisselt van club of trainer: de historie is van hem of haar, niet van dit apparaat. Het bestand bevat alleen deze ene atleet — zonder jouw huisstijl en zonder de anderen.",
     "handoverExport": "Atleet exporteren",
@@ -448,7 +448,7 @@
     "handoverAdded": "Overnemen is additief — bestaande atleten blijven onaangeroerd.",
     "handoverError": {
       "invalid_json": "Het bestand is geen geldige JSON.",
-      "unknown_format": "Dit is geen BASELINE-overdrachtsbestand.",
+      "unknown_format": "Dit is geen KYDON-overdrachtsbestand.",
       "newer_version": "Het bestand komt uit een nieuwere versie van de app. Werk eerst bij.",
       "no_athlete": "Het bestand bevat geen atleet."
     }
@@ -486,8 +486,8 @@
     "resetYes": "Ja, verwijderen",
     "importError": {
       "invalid_json": "Het bestand is geen geldige JSON. Kies het ongewijzigde exportbestand.",
-      "unknown_format": "Dit bestand is geen BASELINE-export. Je bestaande gegevens zijn onaangeroerd gebleven.",
-      "newer_version": "Het bestand komt uit een nieuwere versie van BASELINE. Werk de app bij om het te lezen — tot dan blijven je gegevens ongewijzigd.",
+      "unknown_format": "Dit bestand is geen KYDON-export. Je bestaande gegevens zijn onaangeroerd gebleven.",
+      "newer_version": "Het bestand komt uit een nieuwere versie van KYDON. Werk de app bij om het te lezen — tot dan blijven je gegevens ongewijzigd.",
       "storage_full": "Er is te weinig apparaatopslag. Je bestaande gegevens zijn ongewijzigd.",
       "unknown": "De import is mislukt. Je bestaande gegevens zijn ongewijzigd."
     },
@@ -527,7 +527,7 @@
     "goalPlaceholder": "bijv. uithoudingsvermogen opbouwen, maximaalkracht behouden",
     "constraints": "Beperkingen",
     "constraintsPlaceholder": "bijv. linkerschouder gevoelig onder belasting",
-    "constraintsHint": "Vrije tekst voor jou of je trainer. BASELINE beoordeelt geen medische aandoeningen en leidt hier niets uit af — het veld bestaat zodat de context bekend is bij het lezen van de waarden.",
+    "constraintsHint": "Vrije tekst voor jou of je trainer. KYDON beoordeelt geen medische aandoeningen en leidt hier niets uit af — het veld bestaat zodat de context bekend is bij het lezen van de waarden.",
     "composition": "Lichaamssamenstelling",
     "compositionEmpty": "Voer een lichaamsgewicht in en de samenstelling verschijnt hier.",
     "compositionOn": "Stand per {{date}}",
@@ -642,7 +642,7 @@
     "summaryGaps": "Niet gemeten: {{axes}}. Deze assen ontbreken in het profiel van deze sessie.",
     "stillOpen": "Nog open: {{tests}}",
     "partOf": "Onderdeel van de testsessie “{{title}}”",
-    "disclaimer": "BASELINE is geen medische diagnostiek. De waarden beschrijven sportieve prestaties en zijn diagnose noch behandeladvies. De opgeslagen referentiewaarden zijn voorlopige plaatshouders en zijn nog niet afgestemd op een gepubliceerde normsteekproef.",
+    "disclaimer": "KYDON is geen medische diagnostiek. De waarden beschrijven sportieve prestaties en zijn diagnose noch behandeladvies. De opgeslagen referentiewaarden zijn voorlopige plaatshouders en zijn nog niet afgestemd op een gepubliceerde normsteekproef.",
     "status": {
       "planned": "Gepland",
       "in_progress": "Lopend",
@@ -682,7 +682,7 @@
   "report": {
     "open": "Rapport",
     "print": "Afdrukken / opslaan als PDF",
-    "printHint": "Het rapport wordt een PDF via de afdrukfunctie van je browser: Afdrukken → bestemming “Opslaan als PDF”. BASELINE levert bewust geen PDF-bibliotheek mee — pagina-einden, typografie en selecteerbare tekst komen zo van je systeem, en het werkt offline.",
+    "printHint": "Het rapport wordt een PDF via de afdrukfunctie van je browser: Afdrukken → bestemming “Opslaan als PDF”. KYDON levert bewust geen PDF-bibliotheek mee — pagina-einden, typografie en selecteerbare tekst komen zo van je systeem, en het werkt offline.",
     "csv": "CSV exporteren",
     "assessmentTitle": "Rapport testsessie",
     "profileTitle": "Prestatieprofiel",
@@ -750,8 +750,8 @@
     "spread": "Verschil",
     "points": "punten",
     "unmeasuredNote": "Niet meegeteld in de balans omdat niet gemeten: {{axes}}. Ongemeten is niet hetzelfde als zwak.",
-    "sinceBaseline": "Sinds de eerste meting",
-    "sinceBaselineHint": "Eerste tegenover laatste meting per test, met de tijdspanne ernaast — 4 % in acht weken en 4 % in twee jaar zijn niet dezelfde uitspraak.",
+    "sinceKydon": "Sinds de eerste meting",
+    "sinceKydonHint": "Eerste tegenover laatste meting per test, met de tijdspanne ernaast — 4 % in acht weken en 4 % in twee jaar zijn niet dezelfde uitspraak.",
     "needTwoPerTest": "Nog geen test is twee keer gemeten.",
     "first": "Eerste",
     "latest": "Laatste",
@@ -843,7 +843,7 @@
     "eyebrow": "Historie",
     "title": "Herinneringen",
     "intro": "Lokaal, geen server: de app weet wanneer je het laatst hebt gemeten. Herinneringen staan uit tot je ze inschakelt.",
-    "noPush": "De herinnering verschijnt in de app wanneer je die opent — en, als je het toestaat, op dat moment als systeemmelding. Zolang BASELINE gesloten is, komt er niets: dat zou een server vereisen die weet wie je bent en wanneer je het laatst hebt gemeten, en die is er bewust niet. Om zonder de app herinnerd te worden, gebruik je het kalenderbestand.",
+    "noPush": "De herinnering verschijnt in de app wanneer je die opent — en, als je het toestaat, op dat moment als systeemmelding. Zolang KYDON gesloten is, komt er niets: dat zou een server vereisen die weet wie je bent en wanneer je het laatst hebt gemeten, en die is er bewust niet. Om zonder de app herinnerd te worden, gebruik je het kalenderbestand.",
     "enable": "Herinneringen inschakelen",
     "enabled": "Herinneringen staan aan",
     "disabled": "Herinneringen staan uit",

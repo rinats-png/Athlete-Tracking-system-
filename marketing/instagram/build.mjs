@@ -345,7 +345,7 @@ const POSTS = [
   {
     slug: '42-tage', theme: 'light', title: 'Was 42 Tage sind',
     h: 'Was 42 Tage sind: der Abstand, ab dem ein zweiter Test etwas anderes misst als den ersten.',
-    s: 'BASELINE setzt den nächsten Termin auf 42 Tage nach dem letzten. Wer früher wiederholt, misst Tagesform.',
+    s: 'KYDON setzt den nächsten Termin auf 42 Tage nach dem letzten. Wer früher wiederholt, misst Tagesform.',
     cap: 'Wiederholungsabstand · Voreinstellung',
     viz: spectrum({ left: 'Letzter Test', right: 'Tag 60', ticks: 6, band: [0.7, 1], marks: [{ t: 0, label: 'Tag 0', sub: 'gemessen' }, { t: 0.7, label: 'Tag 42', sub: 'fällig' }] }),
   },
@@ -711,7 +711,7 @@ function page(p, i) {
 </head>
 <body>
 <div class="post">
-  <div class="head"><span class="mark readout">[ ${nn} / 50 ]</span><span class="brand">Baseline</span></div>
+  <div class="head"><span class="mark readout">[ ${nn} / 50 ]</span><span class="brand">Kydon</span></div>
   <h1 style="font-size:${headlineSize(p.h)}px">${p.h}</h1>
   <p class="solution">${p.s}</p>
   <div class="viz">${body}</div>
@@ -735,7 +735,7 @@ const index = `<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>BASELINE · Instagram · Kontaktbogen</title>
+<title>KYDON · Instagram · Kontaktbogen</title>
 <style>${FONTS}${TOKENS}
 * { box-sizing: border-box; }
 body { margin: 0; padding: 40px; background: var(--plane); background-image: var(--atmo); background-attachment: fixed;
@@ -752,7 +752,7 @@ h1 { font-family: var(--font-display); font-weight: 700; font-size: 40px; margin
 </style>
 </head>
 <body>
-<h1>BASELINE · 50 Posts</h1>
+<h1>KYDON · 50 Posts</h1>
 <p class="sub">1080 × 1350 px · Mondlicht ${names.filter((n) => n.theme === 'dark').length} · Mondstein ${names.filter((n) => n.theme === 'light').length}</p>
 <div class="grid">
 ${names.map((n, i) => `  <a class="card" href="png/${n.name}.png"><img src="png/${n.name}.png" alt="${n.title}" loading="lazy"><div class="meta"><div class="mark">[ ${String(i + 1).padStart(2, '0')} / 50 ]</div><div class="t">${n.title}</div><div class="lt">${n.theme === 'dark' ? 'Mondlicht' : 'Mondstein'}</div></div></a>`).join('\n')}

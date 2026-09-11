@@ -68,7 +68,7 @@ export function buildIcs(due: DueTest[], locale: AppLocale, now: Date = new Date
   const lines: string[] = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//BASELINE//Leistungsdiagnose//DE',
+    'PRODID:-//KYDON//Performance Diagnostics//DE',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
   ]

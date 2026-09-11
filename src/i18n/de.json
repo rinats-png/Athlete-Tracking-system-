@@ -1,8 +1,8 @@
 {
   "app": {
-    "name": "Baseline",
+    "name": "Kydon",
     "tagline": "Leistungsdiagnose",
-    "fullName": "BASELINE – Leistungsdiagnose"
+    "fullName": "KYDON – Performance Diagnostics"
   },
   "nav": {
     "primary": "Hauptnavigation",
@@ -123,7 +123,7 @@
     "sportScoresHint": "Aus mehreren Tests gebildet. Die Bestandteile sind gemessen, ihre Verrechnung ist eine Festlegung dieser App.",
     "scoreBasis": "aus {{tests}}",
     "noSportTitle": "Sportart wählen",
-    "noSportHint": "Danach schlägt BASELINE genau die Tests vor, die für deine Disziplin gemessen werden."
+    "noSportHint": "Danach schlägt KYDON genau die Tests vor, die für deine Disziplin gemessen werden."
   },
   "table": {
     "dimension": "Achse",
@@ -152,7 +152,7 @@
     "percentOfBest": "% Bestleistung"
   },
   "welcome": {
-    "eyebrow": "BASELINE – Leistungsdiagnose",
+    "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Finde heraus, wo du wirklich stehst.",
     "body": "Sportartspezifische Tests, wissenschaftliche Referenzwerte, ein Leistungsprofil und der nächste sinnvolle Test — kein Trainingstagebuch, kein Kalorienzähler.",
     "continueEmail": "Mit E-Mail starten",
@@ -169,7 +169,7 @@
       "Persönliche Entwicklung"
     ],
     "halo": {
-      "version": "Leistungsdiagnose · v1",
+      "version": "Performance Diagnostics · v1",
       "navLabel": "Seitennavigation",
       "nav": {
         "what": "Was gemessen wird",
@@ -182,8 +182,8 @@
         "stehst."
       ],
       "since": "ohne Konto",
-      "aboutLabel": "über baseline",
-      "aboutHeadline": "Baseline misst, ordnet ein und zeigt, was sich verändert hat — und was nur Tagesform war.",
+      "aboutLabel": "über kydon",
+      "aboutHeadline": "Kydon misst, ordnet ein und zeigt, was sich verändert hat — und was nur Tagesform war.",
       "aboutBody": "Sportartspezifische Testprotokolle, Referenzwerte mit Quelle, ein Leistungsprofil über sechs Achsen und der nächste sinnvolle Test. Kein Trainingstagebuch, kein Kalorienzähler, keine medizinische Aussage.",
       "cards": {
         "protocol": {
@@ -199,7 +199,7 @@
           "body": "Dein Perzentil, wo eine belegte Referenz vorliegt — und eine Veränderung erst dann, wenn sie über deiner eigenen Schwankung liegt."
         }
       },
-      "claim": "Messwerte statt Gefühl",
+      "claim": "Measure. Benchmark. Develop.",
       "missionLabel": "haltung:",
       "missionA": "Diagnostik für jede",
       "missionB": "Ambition",
@@ -211,7 +211,7 @@
   },
   "body": {
     "figureLabel": "Körperdarstellung mit hervorgehobenen Leistungsdimensionen",
-    "index": "Baseline-Index",
+    "index": "Kydon-Index",
     "detail_population_one": "Aus {{count}} Test, verglichen mit trainierten Erwachsenen deines Alters und Geschlechts.",
     "detail_population_other": "Aus {{count}} Tests, verglichen mit trainierten Erwachsenen deines Alters und Geschlechts.",
     "detail_personalBest_one": "Aus {{count}} Test, gemessen an deiner bisherigen Bestleistung.",
@@ -220,7 +220,7 @@
   "storage": {
     "blocked": "Der Gerätespeicher ist nicht verfügbar (privater Modus oder voll). Eingaben gelten nur für diese Sitzung.",
     "migrated": "Deine Daten stammen aus einer älteren Version (Stand {{from}}) und wurden übernommen. Es ist nichts verloren gegangen.",
-    "newerVersion": "Diese Daten wurden mit einer neueren Version von BASELINE gespeichert. Sie bleiben unangetastet, bis diese App aktualisiert ist — bis dahin werden sie nicht angezeigt und nicht überschrieben.",
+    "newerVersion": "Diese Daten wurden mit einer neueren Version von KYDON gespeichert. Sie bleiben unangetastet, bis diese App aktualisiert ist — bis dahin werden sie nicht angezeigt und nicht überschrieben.",
     "rejected_one": "Ein Datensatz konnte nicht gelesen werden und fehlt in der Auswertung:",
     "rejected_other": "{{count}} Datensätze konnten nicht gelesen werden und fehlen in der Auswertung:",
     "kind": {
@@ -495,7 +495,7 @@
       "retest_stale": "Die letzte Messung liegt {{days}} Tage zurück. Sie beschreibt nicht mehr zwingend deinen heutigen Stand.",
       "deepen_axis": "{{dimension}} beruht auf einer einzigen Messung. Ein zweiter Wert zeigt, ob der erste die Regel oder der Ausreisser war.",
       "improve_data_quality": "{{count}} von {{total}} Messungen sind nur mit Vorbehalt lesbar — meist fehlt Körpergewicht oder der Test war nicht ausbelastet.",
-      "address_limiter": "{{dimension}} liegt {{gap}} Punkte unter deinen übrigen Achsen, auf Basis von {{measurements}} Messungen. BASELINE misst und ordnet ein; welche Schlüsse du fürs Training ziehst, entscheidest du oder dein Trainer."
+      "address_limiter": "{{dimension}} liegt {{gap}} Punkte unter deinen übrigen Achsen, auf Basis von {{measurements}} Messungen. KYDON misst und ordnet ein; welche Schlüsse du fürs Training ziehst, entscheidest du oder dein Trainer."
     }
   },
   "charts": {
@@ -548,7 +548,7 @@
     "noAnswers": "Noch keine Frage beantwortet.",
     "save": "Übernehmen",
     "skip": "Überspringen",
-    "disclaimer": "Alle Angaben sind Selbsteinschätzungen an einem Tag, keine Messwerte. Die Bereitschaft ist das ungewichtete Mittel der beantworteten Fragen — eine Gewichtung liesse sich nicht begründen. BASELINE leitet daraus keine Trainingsfreigabe und keine gesundheitliche Bewertung ab."
+    "disclaimer": "Alle Angaben sind Selbsteinschätzungen an einem Tag, keine Messwerte. Die Bereitschaft ist das ungewichtete Mittel der beantworteten Fragen — eine Gewichtung liesse sich nicht begründen. KYDON leitet daraus keine Trainingsfreigabe und keine gesundheitliche Bewertung ab."
   },
   "context": {
     "title": "Bedingungen",
@@ -653,7 +653,7 @@
   "gate": {
     "step": "Schritt 1 von 1",
     "title": "Welche Sportart?",
-    "body": "BASELINE schlägt danach genau die Tests vor, die für diese Disziplin gemessen werden — mit Protokoll und Begründung. Die Angabe bleibt auf diesem Gerät und lässt sich jederzeit ändern.",
+    "body": "KYDON schlägt danach genau die Tests vor, die für diese Disziplin gemessen werden — mit Protokoll und Begründung. Die Angabe bleibt auf diesem Gerät und lässt sich jederzeit ändern.",
     "noMatch": "Keine Sportart gefunden für «{{query}}». Wähle unten «Allgemeine Diagnostik» — die Sportart lässt sich später nachtragen.",
     "general": "Allgemeine Diagnostik",
     "generalHint": "Ohne Sportart: eine Batterie über alle sechs Achsen. Jederzeit im Testbereich änderbar."
@@ -740,7 +740,7 @@
       "body": "Du entscheidest, ob du der Empfehlung folgst oder alle Tests ansiehst. Die Auswahl passt sich an, sobald erste Ergebnisse da sind."
     },
     "intro": {
-      "title": "Was BASELINE ist",
+      "title": "Was KYDON ist",
       "body": "Bevor du Angaben machst: was diese App tut, und was sie ausdrücklich nicht tut.",
       "points": {
         "measures": "Sie misst deine Leistungsfähigkeit mit Tests, die ein festes Protokoll haben — damit derselbe Test in einem Jahr denselben Wert bedeutet.",
@@ -1199,7 +1199,7 @@
       "Testprotokolle",
       "Sechs Achsen",
       "Referenzvergleich",
-      "Baseline"
+      "Kydon"
     ]
   },
   "focus": {
@@ -1237,13 +1237,13 @@
       "unknown_error": "Am {{date}} nachgemessen. Für eine Aussage über die Streuung fehlen noch Messungen.",
       "first": "Am {{date}} gemessen — noch keine Vormessung für einen Vergleich."
     },
-    "notATrainingPlan": "BASELINE misst und ordnet ein. Übungen, Sätze und Trainingspläne stehen hier bewusst nicht — der Satz oben ist deiner, die App fügt nichts hinzu und wertet ihn nicht aus.",
+    "notATrainingPlan": "KYDON misst und ordnet ein. Übungen, Sätze und Trainingspläne stehen hier bewusst nicht — der Satz oben ist deiner, die App fügt nichts hinzu und wertet ihn nicht aus.",
     "reportTitle": "Trainingsschwerpunkte",
     "reportIntro": "Vom Trainer gesetzt. Die Bewertung daneben ist gemessen, nicht eingeschätzt."
   },
   "auth": {
     "eyebrow": "Anmeldung",
-    "claim": "Leistungsdiagnostik, die sagt, was sie weiss — und was nicht.",
+    "claim": "Measure. Benchmark. Develop.",
     "noBackend": "Für dieses Gerät ist noch kein Projekt hinterlegt: die Eingabe wird nicht geprüft und nichts übertragen. Diese Anmeldung ordnet den Einstieg, sie schützt noch nichts.",
     "signIn": "Anmelden",
     "register": "Konto anlegen",
@@ -1255,7 +1255,7 @@
     "createAccount": "Konto anlegen",
     "next": "Weiter",
     "back": "Zurück",
-    "roleQuestion": "Wofür benutzt du BASELINE?",
+    "roleQuestion": "Wofür benutzt du KYDON?",
     "role": {
       "athlete": "Für mich selbst",
       "coach": "Ich betreue andere"
@@ -1321,7 +1321,7 @@
     "result": "{{pushed}} hochgeladen, {{pulled}} geholt.",
     "offline": "Keine Verbindung. Der Abgleich holt es nach, sobald du wieder online bist.",
     "conflictTitle": "Abweichender Stand",
-    "conflictBody": "Dieser Athlet wurde auf einem anderen Gerät geändert. BASELINE hat nichts überschrieben — beide Stände sind unversehrt. Sichere zuerst deinen Export, dann entscheide.",
+    "conflictBody": "Dieser Athlet wurde auf einem anderen Gerät geändert. KYDON hat nichts überschrieben — beide Stände sind unversehrt. Sichere zuerst deinen Export, dann entscheide.",
     "conflictKeepLocal": "Diesen Bestand hochladen",
     "conflictExplain": "Der Serverstand wird dabei ersetzt. Der andere Weg — den Serverstand holen — führt über Export, «alles löschen» und einen neuen Abgleich.",
     "whatLeaves": "Übertragen werden Messwerte, Profilangaben, Notizen und Trainingsschwerpunkte. Nicht übertragen wird dein Passwort."

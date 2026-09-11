@@ -119,7 +119,7 @@ test.describe('Import im Bildschirm', () => {
     // Vor dem Klick darf nichts im Bestand stehen.
     expect(
       await page.evaluate(() => {
-        const raw = localStorage.getItem('baseline.data.v1')
+        const raw = localStorage.getItem('kydon.data.v1')
         return raw ? JSON.parse(raw).athletes[0].results.length : 0
       }),
       'die Vorschau darf nichts schreiben',
@@ -129,7 +129,7 @@ test.describe('Import im Bildschirm', () => {
     await expect(page.getByText('2 Werte übernommen.')).toBeVisible()
     expect(
       await page.evaluate(
-        () => JSON.parse(localStorage.getItem('baseline.data.v1')!).athletes[0].results.length,
+        () => JSON.parse(localStorage.getItem('kydon.data.v1')!).athletes[0].results.length,
       ),
     ).toBe(2)
   })

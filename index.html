@@ -6,23 +6,11 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#F0F4F4" />
-    <meta name="description" content="Periodische Sporttests, Leistungsdiagnostik und Benchmarking für Athleten und Trainer." />
+    <meta name="description" content="Kydon — Leistungsdiagnostik für Athleten und Trainer. Measure. Benchmark. Develop." />
 
-    <title>Baseline — Sportdiagnostik</title>
+    <title>Kydon — Performance Diagnostics</title>
 
-    <script>
-      // Theme vor dem ersten Paint setzen, damit es nicht kurz aufblitzt.
-      (function () {
-        try {
-          var stored = localStorage.getItem('baseline.theme');
-          if (stored === 'light' || stored === 'dark') {
-            document.documentElement.setAttribute('data-theme', stored);
-          }
-        } catch (e) {
-          /* Private Mode o. ä. — dann gilt die Systemeinstellung. */
-        }
-      })();
-    </script>
+    <script src="/theme-init.js"></script>
   </head>
   <body>
     <div id="root"></div>

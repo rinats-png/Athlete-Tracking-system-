@@ -3,7 +3,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 /**
  * Zugang zum Supabase-Projekt — optional, nie Voraussetzung.
  *
- * BASELINE funktioniert vollständig ohne Konto: alles liegt auf dem Gerät.
+ * KYDON funktioniert vollständig ohne Konto: alles liegt auf dem Gerät.
  * Ein Konto ist ein Zusatz für die Synchronisierung zwischen Geräten und für
  * den Trainermodus. Deshalb gilt hier eine Regel ohne Ausnahme: **fehlende
  * Zugangsdaten sind kein Fehler.** Ist nichts gesetzt, gibt `getSupabase()`
@@ -75,7 +75,7 @@ export function getSupabase(): Promise<SupabaseClient | null> {
           autoRefreshToken: true,
           // Der Anmeldezustand gehört in denselben Speicher wie der Bestand:
           // ein Gerät, ein Ort.
-          storageKey: 'baseline.auth',
+          storageKey: 'kydon.auth',
         },
       })
       return client

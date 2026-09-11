@@ -82,7 +82,7 @@ test.describe('Gruppentest im Bildschirm', () => {
   test('eine Station schreibt in einem Zug bei allen Athleten', async ({ page }) => {
     await openGuest(page)
     await page.evaluate(() => {
-      const store = JSON.parse(localStorage.getItem('baseline.data.v1')!)
+      const store = JSON.parse(localStorage.getItem('kydon.data.v1')!)
       const vorlage = store.athletes[0]
       store.role = 'coach'
       store.athletes = ['Mara', 'Jonas', 'Ines'].map((name, i) => ({
@@ -93,7 +93,7 @@ test.describe('Gruppentest im Bildschirm', () => {
         audit: [],
       }))
       store.activeAthleteId = 'athlete-1'
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
     })
     await page.goto('/trainer/gruppentest', { waitUntil: 'domcontentloaded' })
 
@@ -107,7 +107,7 @@ test.describe('Gruppentest im Bildschirm', () => {
     await expect(page.getByText('2 von 3')).toBeVisible()
 
     const zahlen = await page.evaluate(() =>
-      JSON.parse(localStorage.getItem('baseline.data.v1')!).athletes.map(
+      JSON.parse(localStorage.getItem('kydon.data.v1')!).athletes.map(
         (a: { results: unknown[] }) => a.results.length,
       ),
     )

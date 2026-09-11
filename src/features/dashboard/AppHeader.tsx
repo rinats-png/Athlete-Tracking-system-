@@ -96,8 +96,8 @@ function Wordmark() {
         />
       </svg>
       <span className="flex flex-col leading-none">
-        <span className="font-display text-[19px] font-bold uppercase tracking-[0.16em]">Baseline</span>
-        <span className="label-tag mt-0.5 text-[9px] tracking-[0.18em]">Leistungsdiagnose</span>
+        <span className="font-display text-[19px] font-bold uppercase tracking-[0.16em]">Kydon</span>
+        <span className="label-tag mt-0.5 text-[9px] tracking-[0.18em]">Performance Diagnostics</span>
       </span>
     </div>
   )

@@ -82,15 +82,15 @@ async function openIn(page: import('@playwright/test').Page, lang: string) {
   await page.evaluate(
     ({ store, lang }) => {
       localStorage.clear()
-      localStorage.setItem('baseline.theme', 'dark')
-      localStorage.setItem('baseline.locale', lang)
-      localStorage.setItem('baseline.intro', 'off')
+      localStorage.setItem('kydon.theme', 'dark')
+      localStorage.setItem('kydon.locale', lang)
+      localStorage.setItem('kydon.intro', 'off')
       localStorage.setItem(
-        'baseline.account.v1',
+        'kydon.account.v1',
         JSON.stringify({ name: 'Prueflauf', email: 'pruef@baseline.test', role: 'athlete', planId: null, createdAt: '2026-01-01T00:00:00.000Z' }),
       )
-      localStorage.setItem('baseline.data.v1', JSON.stringify(store))
-      localStorage.setItem('baseline.mode', 'guest')
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
+      localStorage.setItem('kydon.mode', 'guest')
     },
     { store: seeded, lang },
   )

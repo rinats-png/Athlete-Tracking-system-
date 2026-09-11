@@ -87,7 +87,7 @@ test.describe('Kalender', () => {
 })
 
 /**
- * Eine Erinnerung, die nicht kommt, ist ein gebrochenes Versprechen. BASELINE
+ * Eine Erinnerung, die nicht kommt, ist ein gebrochenes Versprechen. KYDON
  * hat keinen Server, der Mitteilungen schicken könnte — also muss der Text
  * das sagen, bevor jemand sich darauf verlässt.
  */
@@ -95,7 +95,7 @@ test.describe('Was die Erinnerung leisten kann', () => {
   test('der Bildschirm sagt, dass bei geschlossener App nichts kommt', async ({ page }) => {
     await openGuest(page)
     await page.goto('/verlauf/erinnerungen', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByText(/Während BASELINE geschlossen ist, kommt nichts/i)).toBeVisible()
+    await expect(page.getByText(/Während KYDON geschlossen ist, kommt nichts/i)).toBeVisible()
   })
 
   test('kein Text verspricht eine Meldung, die bei geschlossener App käme', () => {

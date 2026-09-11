@@ -19,7 +19,9 @@ import type { StoredData } from './localStore'
  * halten, nicht ein zweites Datenmodell werden.
  */
 
-const DB_NAME = 'baseline'
+const DB_NAME = 'kydon'
+/** Der Name bis September 2026. Wird einmal umgezogen, dann gelöscht. */
+const LEGACY_DB_NAME = 'baseline'
 const DB_VERSION = 1
 const STORE = 'snapshots'
 const KEY = 'current'
@@ -29,12 +31,12 @@ function available(): boolean {
   return typeof indexedDB !== 'undefined'
 }
 
-function openDb(): Promise<IDBDatabase | null> {
+function openDb(name: string = DB_NAME): Promise<IDBDatabase | null> {
   if (!available()) return Promise.resolve(null)
   return new Promise((resolve) => {
     let request: IDBOpenDBRequest
     try {
-      request = indexedDB.open(DB_NAME, DB_VERSION)
+      request = indexedDB.open(name, DB_VERSION)
     } catch {
       resolve(null)
       return
@@ -48,6 +50,53 @@ function openDb(): Promise<IDBDatabase | null> {
     // Ein blockierter Upgrade darf nicht ewig hängen bleiben.
     request.onblocked = () => resolve(null)
   })
+}
+
+function readRecord(db: IDBDatabase): Promise<BackupRecord | null> {
+  return new Promise((resolve) => {
+    try {
+      const request = db.transaction(STORE, 'readonly').objectStore(STORE).get(KEY)
+      request.onsuccess = () => {
+        const value = request.result as BackupRecord | undefined
+        resolve(value && typeof value === 'object' && 'data' in value ? value : null)
+      }
+      request.onerror = () => resolve(null)
+    } catch {
+      resolve(null)
+    }
+  })
+}
+
+function deleteDatabase(name: string): Promise<void> {
+  return new Promise((resolve) => {
+    try {
+      const request = indexedDB.deleteDatabase(name)
+      request.onsuccess = () => resolve()
+      request.onerror = () => resolve()
+      request.onblocked = () => resolve()
+    } catch {
+      resolve()
+    }
+  })
+}
+
+/**
+ * Umzug der Zweitschrift vom alten Namen «baseline».
+ *
+ * Läuft nur, wenn die neue Datenbank noch keine Zweitschrift hat — also genau
+ * dann, wenn der Umzug etwas zu tun hätte. Ein Öffnen legt eine Datenbank an,
+ * die es nicht gab; deshalb wird die alte danach in jedem Fall gelöscht:
+ * entweder war sie leer und ist damit nur ein Artefakt des Nachsehens, oder
+ * ihr Inhalt liegt jetzt unter dem neuen Namen.
+ */
+async function migrateLegacyBackup(): Promise<BackupRecord | null> {
+  const legacy = await openDb(LEGACY_DB_NAME)
+  if (!legacy) return null
+  const record = await readRecord(legacy)
+  legacy.close()
+  if (record) await writeBackup(record.data)
+  await deleteDatabase(LEGACY_DB_NAME)
+  return record
 }
 
 export interface BackupRecord {
@@ -90,23 +139,11 @@ export async function writeBackup(data: StoredData): Promise<boolean> {
 export async function readBackup(): Promise<BackupRecord | null> {
   const db = await openDb()
   if (!db) return null
-  return new Promise((resolve) => {
-    try {
-      const request = db.transaction(STORE, 'readonly').objectStore(STORE).get(KEY)
-      request.onsuccess = () => {
-        db.close()
-        const value = request.result as BackupRecord | undefined
-        resolve(value && typeof value === 'object' && 'data' in value ? value : null)
-      }
-      request.onerror = () => {
-        db.close()
-        resolve(null)
-      }
-    } catch {
-      db.close()
-      resolve(null)
-    }
-  })
+  const record = await readRecord(db)
+  db.close()
+  if (record) return record
+  // Nichts unter dem neuen Namen — vielleicht liegt es noch unter dem alten.
+  return migrateLegacyBackup()
 }
 
 export async function clearBackup(): Promise<void> {
@@ -119,6 +156,8 @@ export async function clearBackup(): Promise<void> {
   } catch {
     db.close()
   }
+  // Ein Gerät zu leeren heisst auch: nichts unter dem alten Namen zurücklassen.
+  await deleteDatabase(LEGACY_DB_NAME)
 }
 
 export interface Recovery {

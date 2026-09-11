@@ -36,10 +36,10 @@ export default defineConfig({
       injectRegister: null,
       includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png'],
       manifest: {
-        name: 'Baseline — Sportdiagnostik',
-        short_name: 'Baseline',
+        name: 'Kydon — Performance Diagnostics',
+        short_name: 'Kydon',
         description:
-          'Periodische Sporttests, Leistungsdiagnostik und Benchmarking für Athleten und Trainer.',
+          'Leistungsdiagnostik für Athleten und Trainer. Measure. Benchmark. Develop.',
         lang: 'de',
         start_url: '/',
         display: 'standalone',

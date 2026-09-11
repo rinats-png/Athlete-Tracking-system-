@@ -1,6 +1,6 @@
 import type { AppLocale } from '@/i18n/locales'
 /**
- * Was BASELINE kostet.
+ * Was KYDON kostet.
  *
  * Hier stehen nur die Zahlen und was darin enthalten ist. Es wird nichts
  * abgerechnet: es gibt keine Zahlungsabwicklung, keinen Anbieter und keinen
@@ -190,7 +190,7 @@ export interface EnquiryDraft {
   note: string
 }
 
-export const ENQUIRY_EMAIL = 'preise@baseline.app'
+export const ENQUIRY_EMAIL = 'preise@kydon.app'
 
 /**
  * Aus den Angaben einen Text bauen, den der Anfragende selbst verschickt.
@@ -205,7 +205,7 @@ export function buildEnquiryText(draft: EnquiryDraft, locale: AppLocale): string
   const lines =
     locale === 'de'
       ? [
-          'Preisanfrage BASELINE',
+          'Preisanfrage KYDON',
           '',
           `Art der Nutzung: ${profile.name.de}`,
           `Organisation: ${draft.organisation || '—'}`,
@@ -215,7 +215,7 @@ export function buildEnquiryText(draft: EnquiryDraft, locale: AppLocale): string
           draft.note || '',
         ]
       : [
-          'BASELINE pricing enquiry',
+          'KYDON pricing enquiry',
           '',
           `Type of use: ${profile.name.en}`,
           `Organisation: ${draft.organisation || '—'}`,

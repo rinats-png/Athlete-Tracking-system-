@@ -97,7 +97,7 @@ test.describe('Die Datenschutzerklärung beschreibt, was der Code tut', () => {
 })
 
 test.describe('Die Nutzungsbedingungen halten die Grenzen ein', () => {
-  test('sie sagen ausdrücklich, dass BASELINE keine Medizin ist (§82)', () => {
+  test('sie sagen ausdrücklich, dass KYDON keine Medizin ist (§82)', () => {
     const text = termsDocument('de')
       .sections.flatMap((s) => [s.heading, ...s.body])
       .join(' ')
@@ -119,10 +119,10 @@ test.describe('Die Landeseite verweist auf die Dokumente', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await page.evaluate(() => {
       localStorage.clear()
-      localStorage.setItem('baseline.locale', 'de')
-      localStorage.setItem('baseline.intro', 'off')
+      localStorage.setItem('kydon.locale', 'de')
+      localStorage.setItem('kydon.intro', 'off')
       localStorage.setItem(
-        'baseline.account.v1',
+        'kydon.account.v1',
         JSON.stringify({ name: 'P', email: 'p@x.de', role: 'athlete', planId: null, createdAt: '2026-01-01T00:00:00.000Z' }),
       )
     })

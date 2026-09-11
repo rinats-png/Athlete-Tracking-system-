@@ -33,7 +33,7 @@ import { pick } from '@/i18n/pick'
  *
  * Neun Schritte für den Einzelnutzer:
  *
- *   1  Was BASELINE ist — und was nicht (§82)
+ *   1  Was KYDON ist — und was nicht (§82)
  *   2  Für dich oder für andere? — die Weiche Solo/Trainer
  *   3  Person       — Pflicht: Geschlecht, Geburtsdatum, Grösse, Gewicht
  *   4  Sportart     — eine Hauptsportart, dazu beliebig viele weitere

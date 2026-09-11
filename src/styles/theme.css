@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Baseline — Designsystem
+   Kydon — Designsystem
    --------------------------------------------------------------------------
    Gestaltungsrichtung: "Performance OS". Die App bleibt ein Messgerät — die
    Messwerte in Mono-Ziffern und die gesperrte Versal-Kondensschrift für
@@ -618,7 +618,7 @@ body {
 
 /* --- Halo-Gestaltung ----------------------------------------------------
  *
- * Aus der Vorlage «Baseline Halo» übernommen: der Einstieg als Landing mit
+ * Aus der Vorlage «Kydon Halo» übernommen: der Einstieg als Landing mit
  * einem leuchtenden Partikelring, grossen Versalzeilen, die zeichenweise
  * scharf ziehen, Eckklammern statt Rahmen und Mono-Marken in eckigen
  * Klammern.
@@ -920,7 +920,7 @@ body {
 
 /* --- Bericht -------------------------------------------------------------
  *
- * Der Bericht ist das einzige Stück BASELINE, das das Haus verlässt: er wird
+ * Der Bericht ist das einzige Stück KYDON, das das Haus verlässt: er wird
  * ausgedruckt, weitergegeben, in eine Akte geheftet. Er soll deshalb wie die
  * App aussehen und nicht wie ein Ausdruck einer Webseite — dieselben
  * Rollenfarben, dieselbe Auszeichnung, dieselben Ecken.

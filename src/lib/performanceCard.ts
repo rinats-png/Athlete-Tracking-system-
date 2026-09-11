@@ -98,7 +98,7 @@ export function drawPerformanceCard(canvas: HTMLCanvasElement, content: CardCont
   ctx.fillText('[ ' + content.subtitle + ' ]', m, m + 18)
   ctx.font = `600 22px ${DISPLAY}`
   ctx.textAlign = 'right'
-  drawTracked(ctx, 'BASELINE', w - m, m + 18, 0.14)
+  drawTracked(ctx, 'KYDON', w - m, m + 18, 0.14)
   ctx.textAlign = 'left'
 
   // Titel.

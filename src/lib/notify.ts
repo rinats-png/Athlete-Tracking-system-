@@ -17,7 +17,7 @@ export type NotifyPermission = 'unsupported' | 'default' | 'granted' | 'denied'
 /** Wie oft höchstens benachrichtigt wird, in Millisekunden. */
 export const NOTIFY_COOLDOWN_MS = 20 * 60 * 60 * 1000
 
-const LAST_SHOWN_KEY = 'baseline.notify.lastShown'
+const LAST_SHOWN_KEY = 'kydon.notify.lastShown'
 
 export function notifyPermission(): NotifyPermission {
   if (typeof window === 'undefined' || !('Notification' in window)) return 'unsupported'

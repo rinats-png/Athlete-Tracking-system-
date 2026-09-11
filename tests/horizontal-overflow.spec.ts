@@ -53,9 +53,9 @@ test.describe("Seitliches Überlaufen", () => {
     // Begründung und Testliste stehen dort untereinander.
     await openGuest(page);
     await page.evaluate(() => {
-      const store = JSON.parse(localStorage.getItem("baseline.data.v1") ?? "{}");
+      const store = JSON.parse(localStorage.getItem("kydon.data.v1") ?? "{}");
       Object.assign(store.athletes[0].profile, { disciplineId: "special_forces", sportCategoryId: "tactical" });
-      localStorage.setItem("baseline.data.v1", JSON.stringify(store));
+      localStorage.setItem("kydon.data.v1", JSON.stringify(store));
     });
     await page.goto("/profil", { waitUntil: "domcontentloaded" });
     await page.getByRole("button", { name: "Hauptsportart ändern" }).click();

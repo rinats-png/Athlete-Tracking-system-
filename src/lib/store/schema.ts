@@ -170,7 +170,7 @@ const profileSchema = z.object({
   goal: z.string().max(300).default(''),
   /**
    * Einschränkungen in eigenen Worten. Ausdrücklich ein Freitextfeld und
-   * keine Liste von Diagnosen: BASELINE bewertet keine Krankheitsbilder und
+   * keine Liste von Diagnosen: KYDON bewertet keine Krankheitsbilder und
    * soll auch keine Gesundheitsdaten strukturiert sammeln (§50, §82).
    */
   constraints: z.string().max(300).default(''),
@@ -344,7 +344,7 @@ const brandingSchema = z.object({
  * Wahrheiten zu pflegen.
  *
  * Kunden eines Trainers haben ausdrücklich kein Konto: `name` ist alles, was
- * BASELINE über sie speichert, solange der Trainer nichts weiter einträgt.
+ * KYDON über sie speichert, solange der Trainer nichts weiter einträgt.
  */
 /**
  * Nachweis über Änderungen am Bestand (§57).

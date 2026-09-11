@@ -100,7 +100,7 @@ export function AuthScreen({ onSignedIn }: { onSignedIn: (account: Account) => v
         <div className="px-6 py-8 sm:px-8">
           <p className="label-tag">{t('auth.eyebrow')}</p>
           <h1 className="font-display mt-2 text-[30px] leading-none font-bold tracking-[0.1em] uppercase">
-            BASELINE
+            KYDON
           </h1>
           <p className="mt-2 max-w-[36ch] text-[13px] leading-relaxed text-ink-secondary">
             {t('auth.claim')}

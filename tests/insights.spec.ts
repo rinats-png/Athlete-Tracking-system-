@@ -12,7 +12,7 @@ import type { RadarAxis } from '../src/types/domain'
 import type { StoredAssessment, StoredResult } from '../src/lib/store/localStore'
 
 /**
- * Diese Datei bewacht drei Grenzen, die BASELINE nicht überschreiten darf:
+ * Diese Datei bewacht drei Grenzen, die KYDON nicht überschreiten darf:
  * keine medizinische Aussage, keine erfundene Wissenschaft, kein
  * Trainingsplan. Sie prüft ausserdem, dass jeder Hinweis nur so stark
  * auftritt, wie er belegt ist.

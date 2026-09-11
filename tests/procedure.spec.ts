@@ -7,7 +7,7 @@ import { openGuest } from './helpers'
  * DIE LÜCKE, DIE DAS SCHLIESST: der Katalog sagte in ein bis zwei Sätzen,
  * was zu tun ist. Das genügt, um einen Test einmal durchzuführen — nicht,
  * um ihn ein halbes Jahr später unter denselben Bedingungen zu wiederholen.
- * Genau daran hängt in BASELINE alles: eine Veränderung ist nur dann eine
+ * Genau daran hängt in KYDON alles: eine Veränderung ist nur dann eine
  * Veränderung, wenn nicht das Vorgehen sich geändert hat.
  *
  * Der teuerste Fehler wäre, eine aus dem Testmodus abgeleitete Vorschrift

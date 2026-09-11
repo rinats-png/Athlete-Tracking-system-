@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 import { pick } from '@/i18n/pick'
 
 /**
- * Der Einstieg — nach der Vorlage «Baseline Halo».
+ * Der Einstieg — nach der Vorlage «Kydon Halo».
  *
  * Der erste Bildschirm ist kein Formular, sondern eine Seite: der leuchtende
  * Ring als Grund, eine grosse Versalzeile, die zeichenweise scharf zieht,
@@ -58,7 +58,7 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
         <header className="flex items-start justify-between px-6 py-6 sm:px-10">
           <div className="flex flex-col gap-1.5">
             <span className="font-display text-[22px] leading-none font-bold tracking-[0.12em] uppercase sm:text-[26px]">
-              Baseline
+              Kydon
             </span>
             <span className="readout text-[10px] tracking-[0.2em] text-ink-muted uppercase">
               [ {t('welcome.halo.version')} ]
@@ -205,7 +205,7 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
           <div className="grid border-b border-line/60 md:grid-cols-4">
             <div className="flex min-h-[200px] flex-col justify-between border-b border-line/60 p-8 md:border-b-0">
               <span className="font-display text-[20px] font-bold tracking-[0.08em] uppercase opacity-80">
-                Baseline
+                Kydon
               </span>
               <span className="readout text-[9px] tracking-[0.3em] text-ink-muted uppercase">
                 [ {t('welcome.halo.claim')} ]
@@ -310,7 +310,7 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
             aria-hidden
             className="font-display mt-10 text-center text-[13.5vw] leading-none font-bold tracking-[0.06em] whitespace-nowrap text-ink/15 uppercase select-none"
           >
-            Baseline
+            Kydon
           </p>
         </footer>
       </div>

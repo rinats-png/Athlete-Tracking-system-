@@ -1,4 +1,4 @@
-# Instagram — 50 Posts für BASELINE
+# Instagram — 50 Posts für KYDON
 
 Werbung für die App als 4:5-Karten (1080 × 1350 px). Jeder Post: ein Problem als
 Headline, die Lösung durch die App in ein bis zwei Sätzen, ein Bild-Element.

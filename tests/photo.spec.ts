@@ -34,7 +34,7 @@ async function seedResult(page: import('@playwright/test').Page) {
     } as never,
   ]
   await page.evaluate((data) => {
-    localStorage.setItem('baseline.data.v1', JSON.stringify(data))
+    localStorage.setItem('kydon.data.v1', JSON.stringify(data))
   }, store)
   await page.goto('/ergebnis/r1', { waitUntil: 'domcontentloaded' })
 }
@@ -69,7 +69,7 @@ async function attachGeneratedImage(page: import('@playwright/test').Page, edge:
 
 function storedPhoto(page: import('@playwright/test').Page) {
   return page.evaluate(() => {
-    const raw = localStorage.getItem('baseline.data.v1')
+    const raw = localStorage.getItem('kydon.data.v1')
     if (!raw) return null
     const store = JSON.parse(raw) as {
       athletes: { results: { photo: { dataUrl: string } | null }[] }[]

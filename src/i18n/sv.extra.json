@@ -3,7 +3,7 @@
     "title": "Observationer",
     "intro": "Siffror som inte är prestation: återhämtning, miljö, sensorer, kropp, screening. De registreras och visas över tid — men bedöms aldrig och räknas aldrig in i prestationsprofilen.",
     "why": "Det finns ingen hållbar norm för något av dessa värden. Att lägga en skala från ”svag” till ”elit” på dem vore påhittat — och här kan det få hälsokonsekvenser.",
-    "noMedical": "BASELINE tolkar inte dessa värden. Vad ett laboratorievärde betyder avgör en läkare, inte en idrottsapp.",
+    "noMedical": "KYDON tolkar inte dessa värden. Vad ett laboratorievärde betyder avgör en läkare, inte en idrottsapp.",
     "add": "Registrera värde",
     "value": "Värde",
     "device": "Utrustning",
@@ -204,8 +204,8 @@
     "summary": "I korthet",
     "summaryLine": "{{measured}} av {{planned}} axlar täckta. Profilkonfidens: {{confidence}} %.",
     "noData": "Inga mätningar finns för den här atleten ännu.",
-    "disclaimer": "BASELINE är ingen medicinsk diagnostik. Rapporten ställer ingen diagnos, ger ingen terapeutisk rekommendation och bedömer inget kliniskt tillstånd. Referensvärden är en jämförelsegrund, inte en fysiologisk gräns; där ingen publicerad referens finns anger raden det.",
-    "generated": "Skapad {{date}} med BASELINE"
+    "disclaimer": "KYDON är ingen medicinsk diagnostik. Rapporten ställer ingen diagnos, ger ingen terapeutisk rekommendation och bedömer inget kliniskt tillstånd. Referensvärden är en jämförelsegrund, inte en fysiologisk gräns; där ingen publicerad referens finns anger raden det.",
+    "generated": "Skapad {{date}} med KYDON"
   },
   "meaning": {
     "title": "Vad betyder det här?",
@@ -248,7 +248,7 @@
   "pricing": {
     "eyebrow": "Profil",
     "title": "Priser",
-    "intro": "Vad BASELINE kommer att kosta, och vad som ingår.",
+    "intro": "Vad KYDON kommer att kosta, och vad som ingår.",
     "notYet": "Inget kan köpas ännu: det finns ingen betalningshantering och inget avtal. Sidan anger vad som planeras — den är ingen beställning.",
     "reportsTitle": "Rapporter",
     "reportsIntro": "En rapport är den utskriftsklara analysen av en testomgång. Paket förfaller inte, det finns ingen prenumeration och inget att säga upp.",
@@ -439,7 +439,7 @@
     "deleteHint_other": "”{{name}}” raderas permanent tillsammans med {{count}} mätningar. Det kan inte ångras. För att dölja någon utan att förlora data, använd arkivet.",
     "deleteConfirm": "Radera permanent",
     "meta": "{{results}} mätningar · {{assessments}} testtillfällen · sedan {{since}}",
-    "privacyNote": "BASELINE lagrar bara det du anger om en tränad atlet. Inget konto, ingen e-postadress eller inbjudan krävs. Allt stannar på den här enheten.",
+    "privacyNote": "KYDON lagrar bara det du anger om en tränad atlet. Inget konto, ingen e-postadress eller inbjudan krävs. Allt stannar på den här enheten.",
     "handover": "Överlämning",
     "handoverHint": "En atlet byter klubb eller tränare: historiken tillhör hen, inte den här enheten. Filen innehåller bara den atleten — utan din profilering och utan de andra.",
     "handoverExport": "Exportera atlet",
@@ -448,7 +448,7 @@
     "handoverAdded": "Övertagning är additiv — befintliga atleter berörs inte.",
     "handoverError": {
       "invalid_json": "Filen är inte giltig JSON.",
-      "unknown_format": "Det här är ingen BASELINE-överlämningsfil.",
+      "unknown_format": "Det här är ingen KYDON-överlämningsfil.",
       "newer_version": "Filen kommer från en nyare version av appen. Uppdatera först.",
       "no_athlete": "Filen innehåller ingen atlet."
     }
@@ -486,8 +486,8 @@
     "resetYes": "Ja, radera",
     "importError": {
       "invalid_json": "Filen är inte giltig JSON. Välj den oförändrade exportfilen.",
-      "unknown_format": "Filen är ingen BASELINE-export. Dina befintliga data lämnades orörda.",
-      "newer_version": "Filen kommer från en nyare version av BASELINE. Uppdatera appen för att läsa den — tills dess förblir dina data oförändrade.",
+      "unknown_format": "Filen är ingen KYDON-export. Dina befintliga data lämnades orörda.",
+      "newer_version": "Filen kommer från en nyare version av KYDON. Uppdatera appen för att läsa den — tills dess förblir dina data oförändrade.",
       "storage_full": "Det finns inte tillräckligt med lagringsutrymme. Dina befintliga data är oförändrade.",
       "unknown": "Importen misslyckades. Dina befintliga data är oförändrade."
     },
@@ -527,7 +527,7 @@
     "goalPlaceholder": "t.ex. bygga uthållighet, behålla maxstyrka",
     "constraints": "Begränsningar",
     "constraintsPlaceholder": "t.ex. vänster axel känslig under belastning",
-    "constraintsHint": "Fritext för dig eller din tränare. BASELINE bedömer inga medicinska tillstånd och härleder inget ur detta — fältet finns så att sammanhanget är känt när värdena läses.",
+    "constraintsHint": "Fritext för dig eller din tränare. KYDON bedömer inga medicinska tillstånd och härleder inget ur detta — fältet finns så att sammanhanget är känt när värdena läses.",
     "composition": "Kroppssammansättning",
     "compositionEmpty": "Ange en kroppsvikt så visas sammansättningen här.",
     "compositionOn": "Per {{date}}",
@@ -642,7 +642,7 @@
     "summaryGaps": "Inte mätt: {{axes}}. Dessa axlar saknas i tillfällets profil.",
     "stillOpen": "Fortfarande öppet: {{tests}}",
     "partOf": "Del av testtillfället ”{{title}}”",
-    "disclaimer": "BASELINE är ingen medicinsk diagnostik. Värdena beskriver idrottslig prestation och är varken diagnos eller behandlingsrekommendation. De lagrade referensvärdena är preliminära platshållare och har ännu inte stämts av mot ett publicerat normativt urval.",
+    "disclaimer": "KYDON är ingen medicinsk diagnostik. Värdena beskriver idrottslig prestation och är varken diagnos eller behandlingsrekommendation. De lagrade referensvärdena är preliminära platshållare och har ännu inte stämts av mot ett publicerat normativt urval.",
     "status": {
       "planned": "Planerat",
       "in_progress": "Pågår",
@@ -682,7 +682,7 @@
   "report": {
     "open": "Rapport",
     "print": "Skriv ut / spara som PDF",
-    "printHint": "Rapporten blir en PDF via webbläsarens utskriftsfunktion: Skriv ut → mål ”Spara som PDF”. BASELINE levererar medvetet inget PDF-bibliotek — sidbrytningar, typografi och markerbar text kommer då från ditt system, och det fungerar offline.",
+    "printHint": "Rapporten blir en PDF via webbläsarens utskriftsfunktion: Skriv ut → mål ”Spara som PDF”. KYDON levererar medvetet inget PDF-bibliotek — sidbrytningar, typografi och markerbar text kommer då från ditt system, och det fungerar offline.",
     "csv": "Exportera CSV",
     "assessmentTitle": "Testrapport",
     "profileTitle": "Prestationsprofil",
@@ -750,8 +750,8 @@
     "spread": "Gap",
     "points": "poäng",
     "unmeasuredNote": "Räknas inte in i balansen eftersom de inte mätts: {{axes}}. Omätt är inte detsamma som svag.",
-    "sinceBaseline": "Sedan första mätningen",
-    "sinceBaselineHint": "Första mot senaste mätning per test, med tidsspannet bredvid — 4 % på åtta veckor och 4 % på två år är inte samma utsaga.",
+    "sinceKydon": "Sedan första mätningen",
+    "sinceKydonHint": "Första mot senaste mätning per test, med tidsspannet bredvid — 4 % på åtta veckor och 4 % på två år är inte samma utsaga.",
     "needTwoPerTest": "Inget test har mätts två gånger ännu.",
     "first": "Första",
     "latest": "Senaste",
@@ -843,7 +843,7 @@
     "eyebrow": "Historik",
     "title": "Påminnelser",
     "intro": "Lokalt, ingen server: appen vet när du senast mätte. Påminnelser är av tills du slår på dem.",
-    "noPush": "Påminnelsen visas i appen när du öppnar den — och, om du tillåter det, som en systemnotis i det ögonblicket. När BASELINE är stängd kommer inget: det skulle kräva en server som vet vem du är och när du senast mätte, och en sådan finns medvetet inte. För att påminnas utan appen, använd kalenderfilen.",
+    "noPush": "Påminnelsen visas i appen när du öppnar den — och, om du tillåter det, som en systemnotis i det ögonblicket. När KYDON är stängd kommer inget: det skulle kräva en server som vet vem du är och när du senast mätte, och en sådan finns medvetet inte. För att påminnas utan appen, använd kalenderfilen.",
     "enable": "Aktivera påminnelser",
     "enabled": "Påminnelser är på",
     "disabled": "Påminnelser är av",

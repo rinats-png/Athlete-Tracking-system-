@@ -15,10 +15,12 @@ import type { StoredAthlete, StoredData } from '@/lib/store/localStore'
  * die dürfen dabei nicht verschwinden.
  */
 
-export const HANDOVER_FORMAT = 'BASELINE_ATHLETE_HANDOVER'
+export const HANDOVER_FORMAT = 'KYDON_ATHLETE_HANDOVER'
+/** Übergabedateien aus der Zeit vor der Umbenennung bleiben einlesbar. */
+const LEGACY_HANDOVER_FORMATS: readonly string[] = ['BASELINE_ATHLETE_HANDOVER']
 
 export interface HandoverEnvelope {
-  format: typeof HANDOVER_FORMAT
+  format: typeof HANDOVER_FORMAT | 'BASELINE_ATHLETE_HANDOVER'
   schemaVersion: number
   createdAt: string
   athlete: StoredAthlete
@@ -82,7 +84,11 @@ export function importAthlete(json: string, store: StoredData): HandoverOutcome 
   }
 
   const envelope = parsed as Partial<HandoverEnvelope>
-  if (!envelope || envelope.format !== HANDOVER_FORMAT) return fail('unknown_format')
+  if (
+    !envelope ||
+    (envelope.format !== HANDOVER_FORMAT && !LEGACY_HANDOVER_FORMATS.includes(envelope.format ?? ''))
+  )
+    return fail('unknown_format')
   if (typeof envelope.schemaVersion !== 'number') return fail('unknown_format')
   if (envelope.schemaVersion > CURRENT_SCHEMA_VERSION) return fail('newer_version')
   if (!envelope.athlete || typeof envelope.athlete !== 'object') return fail('no_athlete')

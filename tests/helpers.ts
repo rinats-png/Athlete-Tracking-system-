@@ -30,17 +30,17 @@ async function resetState(page: Page) {
   seeded.athletes[0].profile.onboardingCompletedAt = '2026-01-01T00:00:00.000Z'
   await page.evaluate(({ store, account }) => {
     localStorage.clear()
-    localStorage.setItem('baseline.theme', 'dark')
-    localStorage.setItem('baseline.locale', 'de')
+    localStorage.setItem('kydon.theme', 'dark')
+    localStorage.setItem('kydon.locale', 'de')
     // Die Intro-Sequenz gehört zum Öffnen der App durch einen Menschen,
     // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
     // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
-    localStorage.setItem('baseline.intro', 'off')
+    localStorage.setItem('kydon.intro', 'off')
     // Angemeldet: die Anmeldung ist ein gestaltetes Tor ohne Pruefung, und
     // sie durch jeden der ~2400 Faelle zu klicken wuerde nur Zeit kosten,
     // ohne etwas zu belegen. Der eigene Fall dafuer geht durch das Tor.
-    localStorage.setItem('baseline.account.v1', JSON.stringify(account))
-    localStorage.setItem('baseline.data.v1', JSON.stringify(store))
+    localStorage.setItem('kydon.account.v1', JSON.stringify(account))
+    localStorage.setItem('kydon.data.v1', JSON.stringify(store))
   }, { store: seeded, account: SEEDED_ACCOUNT })
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
@@ -64,9 +64,9 @@ export async function openColdStart(page: Page) {
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   await page.evaluate(() => {
     localStorage.clear()
-    localStorage.setItem('baseline.theme', 'dark')
-    localStorage.setItem('baseline.locale', 'de')
-    localStorage.setItem('baseline.intro', 'off')
+    localStorage.setItem('kydon.theme', 'dark')
+    localStorage.setItem('kydon.locale', 'de')
+    localStorage.setItem('kydon.intro', 'off')
   })
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
@@ -87,14 +87,14 @@ export async function openFirstRun(page: Page) {
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   await page.evaluate(() => {
     localStorage.clear()
-    localStorage.setItem('baseline.theme', 'dark')
-    localStorage.setItem('baseline.locale', 'de')
+    localStorage.setItem('kydon.theme', 'dark')
+    localStorage.setItem('kydon.locale', 'de')
     // Die Intro-Sequenz gehört zum Öffnen der App durch einen Menschen,
     // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
     // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
-    localStorage.setItem('baseline.intro', 'off')
+    localStorage.setItem('kydon.intro', 'off')
     localStorage.setItem(
-      'baseline.account.v1',
+      'kydon.account.v1',
       JSON.stringify({
         name: 'Prueflauf',
         email: 'pruef@baseline.test',

@@ -1,8 +1,8 @@
 {
   "app": {
-    "name": "Baseline",
+    "name": "Kydon",
     "tagline": "Prestasjonsdiagnostikk",
-    "fullName": "BASELINE – Prestasjonsdiagnostikk"
+    "fullName": "KYDON – Performance Diagnostics"
   },
   "nav": {
     "primary": "Hovednavigasjon",
@@ -123,7 +123,7 @@
     "sportScoresHint": "Satt sammen av flere tester. Komponentene er målt; måten de kombineres på er en definisjon gjort av denne appen.",
     "scoreBasis": "fra {{tests}}",
     "noSportTitle": "Velg idretten din",
-    "noSportHint": "BASELINE foreslår da nøyaktig de testene som måles for din disiplin."
+    "noSportHint": "KYDON foreslår da nøyaktig de testene som måles for din disiplin."
   },
   "table": {
     "dimension": "Akse",
@@ -152,7 +152,7 @@
     "percentOfBest": "% av beste"
   },
   "welcome": {
-    "eyebrow": "BASELINE – Prestasjonsdiagnostikk",
+    "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Finn ut hvor du faktisk står.",
     "body": "Idrettsspesifikke tester, vitenskapelige referanseverdier, en prestasjonsprofil og den neste fornuftige testen — ingen treningsdagbok, ingen kaloriteller.",
     "continueEmail": "Fortsett med e-post",
@@ -169,7 +169,7 @@
       "Personlig utvikling"
     ],
     "halo": {
-      "version": "Prestasjonsdiagnostikk · v1",
+      "version": "Performance Diagnostics · v1",
       "navLabel": "Sidenavigasjon",
       "nav": {
         "what": "Hva som måles",
@@ -182,8 +182,8 @@
         "står."
       ],
       "since": "ingen konto",
-      "aboutLabel": "om baseline",
-      "aboutHeadline": "Baseline måler, setter det i kontekst og viser hva som faktisk endret seg — og hva som bare var en god dag.",
+      "aboutLabel": "om kydon",
+      "aboutHeadline": "Kydon måler, setter det i kontekst og viser hva som faktisk endret seg — og hva som bare var en god dag.",
       "aboutBody": "Idrettsspesifikke testprotokoller, referanseverdier med kilder, en prestasjonsprofil over seks akser og den neste fornuftige testen. Ingen treningsdagbok, ingen kaloriteller, ingen medisinsk uttalelse.",
       "cards": {
         "protocol": {
@@ -199,7 +199,7 @@
           "body": "Din persentil der en dokumentert referanse finnes — og en endring først når den overstiger din egen variasjon."
         }
       },
-      "claim": "Målinger, ikke følelser",
+      "claim": "Measure. Benchmark. Develop.",
       "missionLabel": "tilnærming:",
       "missionA": "Diagnostikk for enhver",
       "missionB": "ambisjon",
@@ -211,7 +211,7 @@
   },
   "body": {
     "figureLabel": "Kroppsvisning med uthevede prestasjonsdimensjoner",
-    "index": "Baseline-indeks",
+    "index": "Kydon-indeks",
     "detail_population_one": "Fra {{count}} test, sammenlignet med trente voksne med din alder og ditt kjønn.",
     "detail_population_other": "Fra {{count}} tester, sammenlignet med trente voksne med din alder og ditt kjønn.",
     "detail_personalBest_one": "Fra {{count}} test, målt mot din personlige rekord.",
@@ -220,7 +220,7 @@
   "storage": {
     "blocked": "Lagring på enheten er utilgjengelig (privat modus eller full). Oppføringer gjelder kun denne økten.",
     "migrated": "Dataene dine kommer fra en eldre versjon (versjon {{from}}) og er overført. Ingenting gikk tapt.",
-    "newerVersion": "Disse dataene ble lagret av en nyere versjon av BASELINE. De røres ikke før denne appen er oppdatert — inntil da vises de verken eller overskrives.",
+    "newerVersion": "Disse dataene ble lagret av en nyere versjon av KYDON. De røres ikke før denne appen er oppdatert — inntil da vises de verken eller overskrives.",
     "rejected_one": "Én post kunne ikke leses og mangler i analysen:",
     "rejected_other": "{{count}} poster kunne ikke leses og mangler i analysen:",
     "kind": {
@@ -495,7 +495,7 @@
       "retest_stale": "Siste måling er {{days}} dager gammel. Den beskriver ikke nødvendigvis lenger hvor du står i dag.",
       "deepen_axis": "{{dimension}} bygger på én enkelt måling. En andre verdi viser om den første var regelen eller unntaket.",
       "improve_data_quality": "{{count}} av {{total}} målinger leses bare med forbehold — vanligvis mangler kroppsvekt, eller testen ble ikke tatt til maksimum.",
-      "address_limiter": "{{dimension}} ligger {{gap}} poeng under dine andre akser, basert på {{measurements}} målinger. BASELINE måler og setter i kontekst; hva du slutter av det for treningen, er opp til deg eller treneren din."
+      "address_limiter": "{{dimension}} ligger {{gap}} poeng under dine andre akser, basert på {{measurements}} målinger. KYDON måler og setter i kontekst; hva du slutter av det for treningen, er opp til deg eller treneren din."
     }
   },
   "charts": {
@@ -548,7 +548,7 @@
     "noAnswers": "Ingen spørsmål besvart ennå.",
     "save": "Bruk",
     "skip": "Hopp over",
-    "disclaimer": "Alle oppføringer er egenvurderinger på én dag, ikke målinger. Dagsform er det uvektede snittet av de besvarte spørsmålene — en vekting lot seg ikke begrunne. BASELINE utleder verken treningsklarering eller helsevurdering av dette."
+    "disclaimer": "Alle oppføringer er egenvurderinger på én dag, ikke målinger. Dagsform er det uvektede snittet av de besvarte spørsmålene — en vekting lot seg ikke begrunne. KYDON utleder verken treningsklarering eller helsevurdering av dette."
   },
   "context": {
     "title": "Forhold",
@@ -653,7 +653,7 @@
   "gate": {
     "step": "Steg 1 av 1",
     "title": "Hvilken idrett?",
-    "body": "BASELINE foreslår da nøyaktig de testene som måles for den disiplinen — med protokoll og begrunnelse. Valget blir på denne enheten og kan endres når som helst.",
+    "body": "KYDON foreslår da nøyaktig de testene som måles for den disiplinen — med protokoll og begrunnelse. Valget blir på denne enheten og kan endres når som helst.",
     "noMatch": "Ingen idrett funnet for «{{query}}». Velg «Generell testøkt» nedenfor — idretten kan legges til senere.",
     "general": "Generell testøkt",
     "generalHint": "Uten idrett: ett batteri over alle seks akser. Kan endres når som helst i testområdet."
@@ -740,7 +740,7 @@
       "body": "Du bestemmer om du følger anbefalingen eller ser på alle tester. Utvalget tilpasser seg så snart de første resultatene er inne."
     },
     "intro": {
-      "title": "Hva BASELINE er",
+      "title": "Hva KYDON er",
       "body": "Før du legger inn noe: hva denne appen gjør, og hva den uttrykkelig ikke gjør.",
       "points": {
         "measures": "Den måler prestasjonen din med tester som følger en fast protokoll — slik at samme test betyr det samme om ett år.",
@@ -1199,7 +1199,7 @@
       "Testprotokoller",
       "Seks akser",
       "Referansesammenligning",
-      "Baseline"
+      "Kydon"
     ]
   },
   "focus": {
@@ -1237,13 +1237,13 @@
       "unknown_error": "Målt igjen {{date}}. For få målinger til å angi spredningen.",
       "first": "Målt {{date}} — ingen tidligere måling å sammenligne med."
     },
-    "notATrainingPlan": "BASELINE måler og klassifiserer. Øvelser, sett og treningsplaner er bevisst utelatt — setningen over er din, appen legger ikke til noe og analyserer den ikke.",
+    "notATrainingPlan": "KYDON måler og klassifiserer. Øvelser, sett og treningsplaner er bevisst utelatt — setningen over er din, appen legger ikke til noe og analyserer den ikke.",
     "reportTitle": "Treningsfokus",
     "reportIntro": "Satt av treneren. Vurderingen ved siden av er målt, ikke anslått."
   },
   "auth": {
     "eyebrow": "Logg inn",
-    "claim": "Prestasjonsdiagnostikk som sier hva den vet — og hva den ikke vet.",
+    "claim": "Measure. Benchmark. Develop.",
     "noBackend": "Ingen prosjekt er konfigurert for denne enheten: det du skriver inn, kontrolleres ikke, og ingenting overføres. Denne innloggingen ordner inngangen, den beskytter ennå ingenting.",
     "signIn": "Logg inn",
     "register": "Opprett konto",
@@ -1255,7 +1255,7 @@
     "createAccount": "Opprett konto",
     "next": "Neste",
     "back": "Tilbake",
-    "roleQuestion": "Hva bruker du BASELINE til?",
+    "roleQuestion": "Hva bruker du KYDON til?",
     "role": {
       "athlete": "For meg selv",
       "coach": "Jeg trener andre"
@@ -1321,7 +1321,7 @@
     "result": "{{pushed}} lastet opp, {{pulled}} hentet.",
     "offline": "Ingen tilkobling. Synkroniseringen tar igjen når du er på nett igjen.",
     "conflictTitle": "Avvikende tilstand",
-    "conflictBody": "Denne utøveren ble endret på en annen enhet. BASELINE overskrev ingenting — begge tilstander er intakte. Lagre eksporten din først, og bestem deretter.",
+    "conflictBody": "Denne utøveren ble endret på en annen enhet. KYDON overskrev ingenting — begge tilstander er intakte. Lagre eksporten din først, og bestem deretter.",
     "conflictKeepLocal": "Last opp denne journalen",
     "conflictExplain": "Servertilstanden erstattes. Den andre veien — å hente servertilstanden — går via eksport, «slett alt» og en ny synkronisering.",
     "whatLeaves": "Det som overføres, er målinger, profilopplysninger, notater og treningsfokus. Passordet ditt overføres ikke."

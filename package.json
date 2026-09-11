@@ -1,9 +1,9 @@
 {
-  "name": "baseline-diagnostics",
+  "name": "kydon",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Progressive Web App f\u00fcr periodische Sportdiagnostik, Leistungssimulation und White-Label-Reporting.",
+  "description": "Kydon \u2014 Progressive Web App f\u00fcr periodische Leistungsdiagnostik. Measure. Benchmark. Develop.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

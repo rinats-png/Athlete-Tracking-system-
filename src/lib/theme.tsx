@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 
 export type ThemePreference = 'system' | 'light' | 'dark'
 
-const STORAGE_KEY = 'baseline.theme'
+const STORAGE_KEY = 'kydon.theme'
 
 interface ThemeContextValue {
   preference: ThemePreference

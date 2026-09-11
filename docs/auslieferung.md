@@ -15,7 +15,7 @@ Danach baut jeder Push den Stand neu.
 
 ## Weg 2 — Paket von Hand hochladen
 
-`baseline-netlify.zip` auf **Netlify → Deploys → Drag and drop** ziehen —
+`kydon-netlify.zip` auf **Netlify → Deploys → Drag and drop** ziehen —
 die ZIP-Datei selbst, Netlify packt sie aus. Wer lieber einen Ordner zieht,
 entpackt sie vorher und zieht den entstandenen Ordner. Das Paket enthält den
 fertigen Build; es wird nichts kompiliert.

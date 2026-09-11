@@ -6,7 +6,7 @@ import { EQUIPMENT, type EquipmentId } from '@/data/equipment'
 import type { AppLocale } from '@/types/domain'
 import { pick } from '@/i18n/pick'
 
-const STORAGE_KEY = 'baseline.equipment'
+const STORAGE_KEY = 'kydon.equipment'
 
 /**
  * Was jemand an Ausrüstung hat.

@@ -78,7 +78,7 @@ test.describe('Im Bildschirm', () => {
     await page.getByRole('button', { name: 'Wert erfassen' }).click()
 
     const bestand = JSON.parse(
-      (await page.evaluate(() => localStorage.getItem('baseline.data.v1'))) ?? '{}',
+      (await page.evaluate(() => localStorage.getItem('kydon.data.v1'))) ?? '{}',
     )
     const athlet = bestand.athletes[0]
     // Er liegt neben den Ergebnissen, nicht darin — sonst würde er früher

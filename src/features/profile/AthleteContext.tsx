@@ -187,7 +187,7 @@ export function AthleteContext() {
             onChange={(e) => saveProfile({ constraints: e.target.value })}
             className="mt-1.5 h-11 w-full border border-line bg-surface-sunken px-3 text-[16px]"
           />
-          {/* Ausdrücklich Freitext und keine Diagnoseliste: BASELINE bewertet
+          {/* Ausdrücklich Freitext und keine Diagnoseliste: KYDON bewertet
               keine Krankheitsbilder und sammelt keine Gesundheitsdaten. */}
           <span className="mt-1 block text-[12px] leading-relaxed text-ink-muted">
             {t('profile.constraintsHint')}

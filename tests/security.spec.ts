@@ -169,10 +169,10 @@ test.describe('Gerät leeren beim Abmelden', () => {
     await page.evaluate(() => {
       // Ein Bestand, wie ihn ein Nutzungstag hinterlässt — quer über die
       // Module, nicht nur der eine Schlüssel, an den man zuerst denkt.
-      localStorage.setItem('baseline.equipment', '["barbell"]')
-      localStorage.setItem('baseline.sync.v1', '{"seen":{},"lastSyncedAt":null,"conflicts":[]}')
-      localStorage.setItem('baseline.device', 'abc12345')
-      localStorage.setItem('baseline.notify.lastShown', '1')
+      localStorage.setItem('kydon.equipment', '["barbell"]')
+      localStorage.setItem('kydon.sync.v1', '{"seen":{},"lastSyncedAt":null,"conflicts":[]}')
+      localStorage.setItem('kydon.device', 'abc12345')
+      localStorage.setItem('kydon.notify.lastShown', '1')
     })
     // Über die Navigation statt per `goto`: der Profilbildschirm wird
     // nachgeladen, und ein direkter Aufruf misst dann den Ladezustand.
@@ -180,22 +180,22 @@ test.describe('Gerät leeren beim Abmelden', () => {
 
     await page.getByTestId('sign-out-wipe').click()
     // Ohne Bestätigung passiert nichts: der Weg ist unumkehrbar.
-    expect(await page.evaluate(() => localStorage.getItem('baseline.data.v1'))).not.toBeNull()
+    expect(await page.evaluate(() => localStorage.getItem('kydon.data.v1'))).not.toBeNull()
 
     await page.getByTestId('sign-out-wipe-confirm').click()
     await page.waitForURL('**/')
 
     const left = await page.evaluate(() =>
-      Object.keys(localStorage).filter((k) => k.startsWith('baseline.')),
+      Object.keys(localStorage).filter((k) => k.startsWith('kydon.')),
     )
     // `baseline.locale` steht danach wieder da, und zwar zu Recht: das
     // Löschen entfernt sie, die Spracherkennung schreibt beim folgenden
     // Neustart die Sprache des Browsers hinein. Das ist kein Rückstand des
     // vorherigen Nutzers, sondern eine Eigenschaft des Geräts — und sie
     // enthält nichts über ihn. Alles andere muss weg sein.
-    expect(left.filter((k) => k !== 'baseline.locale'), 'diese Schlüssel haben das Löschen überlebt')
+    expect(left.filter((k) => k !== 'kydon.locale'), 'diese Schlüssel haben das Löschen überlebt')
       .toEqual([])
-    const locale = await page.evaluate(() => localStorage.getItem('baseline.locale'))
+    const locale = await page.evaluate(() => localStorage.getItem('kydon.locale'))
     expect(locale, 'die verbliebene Sprachmarke ist ein reines Sprachkürzel').toMatch(/^[a-z]{2}$/)
   })
 
@@ -206,7 +206,7 @@ test.describe('Gerät leeren beim Abmelden', () => {
     await page.getByRole('button', { name: 'PROFIL' }).click()
     await page.getByRole('button', { name: readDict('de').auth.signOut, exact: true }).click()
     await page.waitForURL('**/')
-    expect(await page.evaluate(() => localStorage.getItem('baseline.data.v1'))).not.toBeNull()
+    expect(await page.evaluate(() => localStorage.getItem('kydon.data.v1'))).not.toBeNull()
   })
 })
 

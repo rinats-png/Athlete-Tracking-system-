@@ -5,7 +5,7 @@ import { COACH_TIERS, REPORT_BUNDLES } from '@/data/pricing'
  *
  * WAS DAS IST — UND WAS ES AUSDRÜCKLICH NICHT IST
  *
- * BASELINE hat keinen Server. `src/lib/supabase/client.ts` liegt bereit, wird
+ * KYDON hat keinen Server. `src/lib/supabase/client.ts` liegt bereit, wird
  * aber nirgends aufgerufen, und die CSP steht auf `connect-src 'self'` — es
  * gibt nichts, wogegen geprüft werden könnte. Diese Anmeldung ist deshalb ein
  * GESTALTETES TOR, keine Sicherung: sie ordnet den Einstieg, sie schützt
@@ -25,7 +25,7 @@ import { COACH_TIERS, REPORT_BUNDLES } from '@/data/pricing'
 export type AccountRole = 'athlete' | 'coach'
 
 export interface Account {
-  /** Anzeigename. Alles, was BASELINE über die Person festhält. */
+  /** Anzeigename. Alles, was KYDON über die Person festhält. */
   name: string
   /**
    * E-Mail, nur als Kennung der Anmeldung. Sie wird nirgendwohin geschickt —
@@ -42,7 +42,7 @@ export interface Account {
   createdAt: string
 }
 
-const KEY = 'baseline.account.v1'
+const KEY = 'kydon.account.v1'
 
 /** Alle Stufen, die bei der Registrierung wählbar sind. */
 export function plansForRole(role: AccountRole): { id: string; label: string; price: string }[] {

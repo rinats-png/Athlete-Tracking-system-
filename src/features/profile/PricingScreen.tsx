@@ -23,7 +23,7 @@ import { formatNumber } from '@/lib/format'
 import { pick } from '@/i18n/pick'
 
 /**
- * Was BASELINE kosten wird.
+ * Was KYDON kosten wird.
  *
  * Bewusst als Auskunft und nicht als Kaufabschluss: es gibt keine
  * Zahlungsabwicklung. Der Bildschirm sagt das oben, bevor jemand nach einem

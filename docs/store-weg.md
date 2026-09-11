@@ -1,12 +1,12 @@
 # Der Weg in den App Store und zu Google Play
 
-Ziel ist BASELINE als richtige App in beiden Stores. Dieses Dokument hält
+Ziel ist KYDON als richtige App in beiden Stores. Dieses Dokument hält
 fest, wie das geht, was es kostet und was dabei gegen die Zusagen der App
 verstiesse — damit die Entscheidung später nicht unter Zeitdruck fällt.
 
 ## Der Weg: Capacitor um die bestehende PWA
 
-BASELINE ist eine React-Anwendung, die vollständig auf dem Gerät läuft.
+KYDON ist eine React-Anwendung, die vollständig auf dem Gerät läuft.
 Capacitor legt eine native Hülle darum: das gebaute `dist/` wird in ein
 Xcode- und ein Android-Studio-Projekt eingebettet und läuft dort in einer
 WebView. Der Anwendungscode bleibt derselbe, die Datenschicht bleibt
@@ -19,7 +19,7 @@ Gewinn stünde in keinem Verhältnis.
 
 ```
 npm install @capacitor/core @capacitor/cli
-npx cap init "BASELINE" de.baseline.app --web-dir=dist
+npx cap init "KYDON" app.kydon.diagnostics --web-dir=dist
 npm install @capacitor/ios @capacitor/android
 npm run build && npx cap add ios && npx cap add android
 npx cap sync            # nach jedem Build
@@ -43,7 +43,7 @@ schlechter als nicht vorhanden.
 ## Was die Stores von dieser App verlangen werden
 
 **Keine medizinischen Aussagen.** Beide Stores prüfen Gesundheits-Apps
-strenger. BASELINE macht keine Diagnosen, gibt keine Therapieempfehlungen
+strenger. KYDON macht keine Diagnosen, gibt keine Therapieempfehlungen
 und bewertet keine Krankheiten (§82) — das muss auch in der
 Store-Beschreibung so stehen. Formulierungen wie «erkennt
 Übertraining» oder «zeigt Gesundheitsrisiken» wären ein Ablehnungsgrund
