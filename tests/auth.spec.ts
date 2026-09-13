@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 import { plansForRole, planBelongsToRole } from '../src/features/auth/account'
-import { COACH_TIERS, REPORT_BUNDLES } from '../src/data/pricing'
+import { ATHLETE_PLANS, COACH_TIERS } from '../src/data/pricing'
 import { openColdStart, stubAuth } from './helpers'
 
 /**
@@ -92,7 +92,7 @@ test.describe('Registrierung', () => {
     await expect(page.getByText('Coach S')).toBeVisible()
     await expect(page.getByText('Einzelreport')).toHaveCount(0)
     await expect(page.getByText(/Noch kann nichts gekauft werden/)).toBeVisible()
-    await page.getByRole('button', { name: /Coach M/ }).click()
+    await page.getByRole('button', { name: /Coach Team/ }).click()
     await page.getByRole('button', { name: 'Weiter' }).click()
 
     await page.getByLabel('Name').fill('Sam Trainer')
@@ -120,15 +120,15 @@ test.describe('Registrierung', () => {
 
 test.describe('Stufen und Rollen', () => {
   test('jede Rolle sieht nur ihre eigenen Stufen', () => {
-    expect(plansForRole('athlete').map((p) => p.id)).toEqual(REPORT_BUNDLES.map((b) => b.id))
+    expect(plansForRole('athlete').map((p) => p.id)).toEqual(ATHLETE_PLANS.map((b) => b.id))
     expect(plansForRole('coach').map((p) => p.id)).toEqual(COACH_TIERS.map((t) => t.id))
   })
 
   test('eine Stufe der anderen Rolle gilt nicht', () => {
     // Sonst stünde beim Athleten eine Trainerstufe — etwa nach einem von
     // Hand veränderten Speicher.
-    expect(planBelongsToRole('coach_m', 'athlete')).toBe(false)
-    expect(planBelongsToRole('four', 'athlete')).toBe(true)
+    expect(planBelongsToRole('coach_team', 'athlete')).toBe(false)
+    expect(planBelongsToRole('plus', 'athlete')).toBe(true)
     expect(planBelongsToRole(null, 'coach')).toBe(true)
   })
 })
@@ -196,7 +196,7 @@ test.describe('Die Rolle aus der Registrierung', () => {
           name: 'Sam',
           email: 'sam@example.org',
           role: 'coach',
-          planId: 'coach_s',
+          planId: 'coach_start',
           createdAt: '2026-01-01T00:00:00.000Z',
         }),
       ),

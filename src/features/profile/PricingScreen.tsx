@@ -8,16 +8,22 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import {
+  ATHLETE_PLANS,
   COACH_TIERS,
+  FREE_CORE,
   INSTITUTION_PROFILES,
-  REPORT_BUNDLES,
+  athletesMeasuredInWindow,
   buildEnquiryText,
   coachTierFor,
-  perAthleteEur,
-  pricePerReportEur,
-  savingPercent,
+  extraFeatures,
+  perAthleteYearEur,
+  yearlyCostOfMonthly,
+  yearlyCostOfMonthlyCoach,
   ENQUIRY_EMAIL,
+  type AthletePlan,
+  type CoachTier,
   type InstitutionTrack,
+  type PlanFeature,
 } from '@/data/pricing'
 import { formatNumber } from '@/lib/format'
 import { pick } from '@/i18n/pick'
@@ -28,13 +34,29 @@ import { pick } from '@/i18n/pick'
  * Bewusst als Auskunft und nicht als Kaufabschluss: es gibt keine
  * Zahlungsabwicklung. Der Bildschirm sagt das oben, bevor jemand nach einem
  * Knopf sucht, den es nicht gibt.
+ *
+ * AUFBAU. Zuerst der kostenlose Kern als eigene Liste — nicht als leere
+ * Spalte in einer Vergleichstabelle. Eine Tabelle mit Häkchen und Lücken
+ * erzählt «dir fehlt etwas»; eine Liste erzählt «das hast du». Beides ist
+ * wahr, aber nur das zweite stimmt mit der Haltung dieses Produkts überein.
+ *
+ * Danach, was die bezahlten Stufen ZUSÄTZLICH bringen. Auch das bewusst:
+ * neben «Plus» nochmals die sechs kostenlosen Merkmale zu wiederholen, sähe
+ * nach mehr aus und sagte weniger.
  */
 export function PricingScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
   const { athletes, role } = useAppData()
   const eur = (value: number, digits = 2) => formatNumber(value, locale, digits)
-  const tier = coachTierFor(athletes.length)
+  /** Ganze Beträge ohne Nachkommastellen: 29 € liest sich besser als 29,00 €. */
+  const money = (value: number) => eur(value, Number.isInteger(value) ? 0 : 2)
+
+  // Die eigene Einstufung aus echten Messdaten, nicht aus der Listenlänge.
+  const measured = useMemo(() => athletesMeasuredInWindow(athletes), [athletes])
+  const tier = coachTierFor(measured)
+
+  const featureName = (feature: PlanFeature) => t(`pricing.feature.${feature}`)
 
   return (
     <>
@@ -57,62 +79,67 @@ export function PricingScreen() {
         {t('pricing.notYet')}
       </p>
 
-      {/* --- Reports ------------------------------------------------------ */}
-      <h2 className="font-display mb-1 text-[19px] font-bold">{t('pricing.reportsTitle')}</h2>
+      {/* --- Der kostenlose Kern ------------------------------------------ */}
+      <Panel float>
+        <PanelHeader title={t('pricing.freeTitle')} subtitle={t('pricing.freeSubtitle')} />
+        <div className="px-4 py-3">
+          <p className="max-w-[62ch] text-[13px] leading-relaxed text-ink-secondary">
+            {t('pricing.freeIntro')}
+          </p>
+          <ul className="mt-3 grid gap-2 text-[13px] leading-relaxed sm:grid-cols-2">
+            {FREE_CORE.map((feature) => (
+              <li key={feature} className="flex gap-2">
+                <Check size={15} className="mt-px shrink-0 text-accent-text" aria-hidden />
+                <span>{featureName(feature)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Panel>
+
+      {/* --- Einzelnutzung ------------------------------------------------- */}
+      <h2 className="font-display mt-8 mb-1 text-[19px] font-bold">{t('pricing.athleteTitle')}</h2>
       <p className="mb-3 max-w-[62ch] text-[13px] leading-relaxed text-ink-secondary">
-        {t('pricing.reportsIntro')} {t('pricing.reportsWhy')}
+        {t('pricing.athleteIntro')}
       </p>
-      <div className="grid gap-4 sm:grid-cols-3">
-        {REPORT_BUNDLES.map((bundle) => (
-          <Panel key={bundle.id} float={bundle.id === 'four'}>
-            <PanelHeader
-              title={pick(bundle.name, locale)}
-              subtitle={t('pricing.bundlePrice', { amount: eur(bundle.priceEur) })}
-            />
-            <div className="px-4 py-3 text-[13px] leading-relaxed">
-              <p className="readout tabular-nums">
-                {t('pricing.perReport', { amount: eur(pricePerReportEur(bundle)) })}
-              </p>
-              {savingPercent(bundle) > 0 && (
-                <p className="mt-1 text-ink-secondary">
-                  {t('pricing.saving', { percent: savingPercent(bundle) })}
-                </p>
-              )}
-            </div>
-          </Panel>
+      <div className="grid gap-4 sm:grid-cols-2">
+        {ATHLETE_PLANS.filter((plan) => plan.billing !== 'free').map((plan) => (
+          <AthletePlanCard
+            key={plan.id}
+            plan={plan}
+            money={money}
+            featureName={featureName}
+            locale={locale}
+          />
         ))}
       </div>
 
-      {/* --- Trainer ------------------------------------------------------ */}
+      {/* --- Trainer ------------------------------------------------------- */}
       <h2 className="font-display mt-8 mb-1 text-[19px] font-bold">{t('pricing.coachTitle')}</h2>
       <p className="mb-3 max-w-[62ch] text-[13px] leading-relaxed text-ink-secondary">
-        {t('pricing.coachIntro')}
+        {t('pricing.coachIntro')} {t('pricing.coachCounting')}
       </p>
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {COACH_TIERS.map((coach) => (
-          <Panel key={coach.id}>
-            <PanelHeader
-              title={pick(coach.name, locale)}
-              subtitle={t('pricing.perMonth', { amount: eur(coach.monthlyEur) })}
-            />
-            <div className="px-4 py-3 text-[13px] leading-relaxed">
-              <p>{t('pricing.athleteSlots', { count: coach.athletes })}</p>
-              <p className="readout mt-1 tabular-nums text-ink-secondary">
-                {t('pricing.perAthlete', { amount: eur(perAthleteEur(coach)) })}
-              </p>
-            </div>
-          </Panel>
+          <CoachTierCard
+            key={coach.id}
+            tier={coach}
+            money={money}
+            featureName={featureName}
+            locale={locale}
+            current={tier?.id === coach.id}
+          />
         ))}
       </div>
       {role === 'coach' && (
         <p className="mt-3 text-[13px] leading-relaxed text-ink-secondary">
           {tier
             ? t('pricing.yourTier', {
-                count: athletes.length,
+                count: measured,
                 tier: pick(tier.name, locale),
-                amount: eur(tier.monthlyEur),
+                amount: tier.yearlyEur == null ? t('pricing.free') : `${money(tier.yearlyEur)} €`,
               })
-            : t('pricing.yourTierNone', { count: athletes.length })}
+            : t('pricing.yourTierNone', { count: measured })}
         </p>
       )}
 
@@ -145,12 +172,149 @@ export function PricingScreen() {
         <PanelHeader title={t('pricing.promises')} />
         <ul className="space-y-2 px-4 py-3 text-[13px] leading-relaxed">
           <li>{t('pricing.promiseExport')}</li>
-          <li>{t('pricing.promiseOffline')}</li>
-          <li>{t('pricing.promiseNoExpiry')}</li>
+          <li>{t('pricing.promiseMeasure')}</li>
+          <li>{t('pricing.promiseHistory')}</li>
           <li>{t('pricing.promiseNoAds')}</li>
         </ul>
       </Panel>
     </>
+  )
+}
+
+function AthletePlanCard({
+  plan,
+  money,
+  featureName,
+  locale,
+}: {
+  plan: AthletePlan
+  money: (value: number) => string
+  featureName: (feature: PlanFeature) => string
+  locale: ReturnType<typeof useLocale>
+}) {
+  const { t } = useTranslation()
+  const monthlyYear = yearlyCostOfMonthly(plan)
+
+  return (
+    <Panel float={plan.id === 'plus'}>
+      <PanelHeader
+        title={pick(plan.name, locale)}
+        subtitle={
+          plan.billing === 'once'
+            ? t('pricing.once', { amount: money(plan.onceEur!) })
+            : t('pricing.perYear', { amount: money(plan.yearlyEur!) })
+        }
+      />
+      <div className="px-4 py-3 text-[13px] leading-relaxed">
+        <p className="text-ink-secondary">{t(`pricing.athletePlan.${plan.id}`)}</p>
+
+        {plan.monthlyEur != null && monthlyYear != null && (
+          // Der Monatspreis steht mit seinem Jahreswert daneben. Wer monatlich
+          // zahlen will, soll das können — aber er soll sehen, was es kostet.
+          <p className="readout mt-2 tabular-nums text-ink-muted">
+            {t('pricing.orMonthly', {
+              amount: money(plan.monthlyEur),
+              year: money(monthlyYear),
+            })}
+          </p>
+        )}
+        {plan.billing === 'once' && (
+          <p className="mt-2 text-ink-muted">{t('pricing.terminScope')}</p>
+        )}
+
+        <p className="label-tag mt-3">{t('pricing.onTop')}</p>
+        <ul className="mt-1 space-y-1.5">
+          {extraFeatures(plan).map((feature) => (
+            <li key={feature} className="flex gap-2">
+              <Check size={15} className="mt-px shrink-0 text-accent-text" aria-hidden />
+              <span>{featureName(feature)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Panel>
+  )
+}
+
+function CoachTierCard({
+  tier,
+  money,
+  featureName,
+  locale,
+  current,
+}: {
+  tier: CoachTier
+  money: (value: number) => string
+  featureName: (feature: PlanFeature) => string
+  locale: ReturnType<typeof useLocale>
+  current: boolean
+}) {
+  const { t } = useTranslation()
+  const perAthlete = perAthleteYearEur(tier)
+  const monthlyYear = yearlyCostOfMonthlyCoach(tier)
+  // Gegenüber der jeweils kleineren Stufe — so steht in jeder Karte nur das,
+  // was diese Stufe hinzufügt, statt viermal derselben Liste.
+  const index = COACH_TIERS.indexOf(tier)
+  const previous = index > 0 ? COACH_TIERS[index - 1] : null
+  const added = previous
+    ? tier.features.filter((feature) => !previous.features.includes(feature))
+    : []
+
+  return (
+    <Panel float={current}>
+      <PanelHeader
+        title={pick(tier.name, locale)}
+        subtitle={
+          tier.yearlyEur == null
+            ? t('pricing.free')
+            : t('pricing.perYear', { amount: money(tier.yearlyEur) })
+        }
+      />
+      <div className="px-4 py-3 text-[13px] leading-relaxed">
+        <p>{t('pricing.athletesMeasured', { count: tier.athletesPerYear })}</p>
+        {perAthlete != null && (
+          <p className="readout mt-1 tabular-nums text-ink-secondary">
+            {t('pricing.perAthleteYear', { amount: money(perAthlete) })}
+          </p>
+        )}
+        {tier.monthlyEur != null && monthlyYear != null && (
+          <p className="readout mt-1 tabular-nums text-ink-muted">
+            {t('pricing.orMonthly', { amount: money(tier.monthlyEur), year: money(monthlyYear) })}
+          </p>
+        )}
+        {tier.coachSeats > 1 && (
+          <p className="mt-1 text-ink-secondary">{t('pricing.seats', { count: tier.coachSeats })}</p>
+        )}
+        {previous == null ? (
+          <ul className="mt-3 space-y-1.5">
+            {(['groupTest', 'csvImport', 'coachProof', 'unlimitedReports'] as PlanFeature[]).map(
+              (feature) => (
+                <li key={feature} className="flex gap-2">
+                  <Check size={15} className="mt-px shrink-0 text-accent-text" aria-hidden />
+                  <span>{featureName(feature)}</span>
+                </li>
+              ),
+            )}
+          </ul>
+        ) : added.length > 0 ? (
+          <>
+            <p className="label-tag mt-3">{t('pricing.onTopOf', { tier: pick(previous.name, locale) })}</p>
+            <ul className="mt-1 space-y-1.5">
+              {added.map((feature) => (
+                <li key={feature} className="flex gap-2">
+                  <Check size={15} className="mt-px shrink-0 text-accent-text" aria-hidden />
+                  <span>{featureName(feature)}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="mt-3 text-ink-secondary">
+            {t('pricing.sameAs', { tier: pick(previous.name, locale) })}
+          </p>
+        )}
+      </div>
+    </Panel>
   )
 }
 

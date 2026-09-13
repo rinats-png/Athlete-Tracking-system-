@@ -1,4 +1,4 @@
-import { COACH_TIERS, REPORT_BUNDLES } from '@/data/pricing'
+import { ATHLETE_PLANS, COACH_TIERS } from '@/data/pricing'
 
 /**
  * Das Konto dieses Geräts.
@@ -44,19 +44,34 @@ export interface Account {
 
 const KEY = 'kydon.account.v1'
 
-/** Alle Stufen, die bei der Registrierung wählbar sind. */
+/**
+ * Alle Stufen, die bei der Registrierung wählbar sind.
+ *
+ * Die kostenlose Stufe steht mit dabei und zuerst — nicht als Restposten
+ * hinter den bezahlten. Wer sich anmeldet, soll sehen dürfen, dass er nichts
+ * zahlen muss, statt es erst nach dem Scrollen zu finden. Abgerechnet wird
+ * ohnehin nichts; die Wahl prägt nur, was die App anbietet.
+ */
 export function plansForRole(role: AccountRole): { id: string; label: string; price: string }[] {
   if (role === 'coach') {
     return COACH_TIERS.map((tier) => ({
       id: tier.id,
       label: tier.name.de,
-      price: `${tier.monthlyEur} € / Monat · ${tier.athletes} Plätze`,
+      price:
+        tier.yearlyEur == null
+          ? `kostenlos · bis ${tier.athletesPerYear} gemessene Athleten im Jahr`
+          : `${tier.yearlyEur} € / Jahr · bis ${tier.athletesPerYear} gemessene Athleten`,
     }))
   }
-  return REPORT_BUNDLES.map((bundle) => ({
-    id: bundle.id,
-    label: bundle.name.de,
-    price: `${bundle.priceEur} €`,
+  return ATHLETE_PLANS.map((plan) => ({
+    id: plan.id,
+    label: plan.name.de,
+    price:
+      plan.billing === 'free'
+        ? 'kostenlos, dauerhaft'
+        : plan.billing === 'once'
+          ? `${plan.onceEur} € einmalig · bis zum Termin`
+          : `${plan.yearlyEur} € / Jahr`,
   }))
 }
 

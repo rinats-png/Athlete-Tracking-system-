@@ -190,6 +190,22 @@ Punkt 4 ist der Burggraben, braucht aber die Kohorte — also später.
 
 ---
 
+## 3a. Preise
+
+Das Preismodell wurde am 13.09.2026 vollständig ersetzt und hat eine eigene
+Datei: **[`docs/preise.md`](preise.md)**. Der Kern in drei Zeilen:
+
+* Athleten: kostenloser Kern dauerhaft · Plus 29 €/Jahr · Termin 49 € einmalig.
+* Trainer: 149/349/699 € im Jahr für 25/75/250 **gemessene** Athleten — der
+  Bestand ist unbegrenzt und kostenlos.
+* Der Paywall liegt nie bei der Ehrlichkeit: Messfehlerband, eigener Verlauf
+  und vollständiger Export bleiben in jeder Stufe frei.
+
+Der Befund, der Plus geprägt hat: Nur **vier** Tests im Katalog haben eine
+Bevölkerungsreferenz. Ein Plus, das auf dem Perzentil steht, hätte den meisten
+nichts gezeigt — deshalb trägt es auf Prognose, Saisonplan und
+Anforderungslücke, die bei jedem Test wirken.
+
 ## 4. Offen vor dem öffentlichen Betrieb
 
 1. `src/data/operator.ts` — Name, Anschrift, E-Mail fehlen (§5 DDG).
