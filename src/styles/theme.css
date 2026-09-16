@@ -230,12 +230,17 @@
     --series-3:       #FF9448;
     --reference:      #90A0A4;
 
-    /* Die Warnfarbe steht dunkler als üblich: auf Silber als Akzentfläche
-       wäre ein helles Bernstein nicht mehr von der Marke zu trennen. */
-    --good:           #3FD97A;
-    --warning:        #FFB524;
+    /* Statusfarben, gemessen gegen den Akzent, nicht nach Gefühl gesetzt:
+       seit der Akzent ein sattes Jade ist, war das frühere helle Grün
+       (#3FD97A) mit 1,21 nicht mehr von der Marke zu trennen — eine
+       Statusfarbe, die aussieht wie die Marke, sagt nichts mehr aus.
+       Grün und Bernstein stehen deshalb dunkler und satter; die
+       Abstände liegen jetzt bei 1,69 (gut), 1,60 (Warnung), 1,83
+       (kritisch), alle über der Schwelle von 1,25. */
+    --good:           #2FB85E;
+    --warning:        #E89312;
     --critical:       #FF6B5E;
-    --delta-up:       #4BE089;
+    --delta-up:       #35C167;
     --delta-down:     #FF7F72;
 
     --display:        #070A0D;
@@ -311,12 +316,17 @@
   --series-3:       #FF9448;
   --reference:      #90A0A4;
 
-  /* Die Warnfarbe steht dunkler als üblich: auf Silber als Akzentfläche
-     wäre ein helles Bernstein nicht mehr von der Marke zu trennen. */
-  --good:           #3FD97A;
-  --warning:        #FFB524;
+  /* Statusfarben, gemessen gegen den Akzent, nicht nach Gefühl gesetzt:
+     seit der Akzent ein sattes Jade ist, war das frühere helle Grün
+     (#3FD97A) mit 1,21 nicht mehr von der Marke zu trennen — eine
+     Statusfarbe, die aussieht wie die Marke, sagt nichts mehr aus.
+     Grün und Bernstein stehen deshalb dunkler und satter; die Abstände
+     liegen jetzt bei 1,69 (gut), 1,60 (Warnung), 1,83 (kritisch), alle
+     über der Schwelle von 1,25. */
+  --good:           #2FB85E;
+  --warning:        #E89312;
   --critical:       #FF6B5E;
-  --delta-up:       #4BE089;
+  --delta-up:       #35C167;
   --delta-down:     #FF7F72;
 
   --display:        #070A0D;
