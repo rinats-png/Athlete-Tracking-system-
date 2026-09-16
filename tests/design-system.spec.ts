@@ -17,8 +17,10 @@ const theme = () => readFileSync(new URL('../src/styles/theme.css', import.meta.
 test.describe('Farbwelt bleibt', () => {
   test('die fünf Töne der Palette stehen unverändert im System', () => {
     const css = theme()
-    // Mondlicht: Tinte, Silber, Moos, Nebelweiss — Mondstein: Nebel, tiefes Silbergrün, kühle Tinte.
-    for (const hex of ['#12161A', '#B9C7BC', '#75856A', '#EDF1F2', '#F0F4F4', '#5E7470', '#1B2523']) {
+    // Mondlicht: Tinte, Jade, Moos, Nebelweiss — Mondstein: Nebel, tiefes Jade, kühle Tinte.
+    // Angehoben am 16.09.2026: die frühere Silberfamilie war chromaarm und
+    // las sich auf beiden Gründen als Grau. Hue gleich, Chroma höher.
+    for (const hex of ['#0B1014', '#7FE5B5', '#5E9B57', '#F2F7F8', '#EAF1F0', '#1E7D63', '#101A18']) {
       expect(css, `${hex} fehlt`).toContain(hex)
     }
   })
@@ -26,7 +28,7 @@ test.describe('Farbwelt bleibt', () => {
   test('der Schatten trägt die Markenfarbe, keine neue', () => {
     // Die kühle Tinte als RGB: der Schatten ist eine Transparenz der
     // Palette, keine erfundene Grauabstufung.
-    expect(theme()).toContain('--shadow-hue: 27 37 35')
+    expect(theme()).toContain('--shadow-hue: 16 26 24')
   })
 })
 

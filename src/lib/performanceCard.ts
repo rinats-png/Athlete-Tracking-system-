@@ -56,15 +56,15 @@ export const CARD_HEIGHT = 1350
    als Werte. Es sind die Töne von Mondstein: kühle Tinte, tiefes Silbergrün,
    silbriger Nebel. Die Karte ist immer hell, auch wenn die App dunkel steht:
    sie wird weitergegeben und oft gedruckt. */
-const INK = '#1B2523'
-const INK_SECONDARY = '#4A5A56'
-const MUTED = '#536360'
-const PAPER = '#F0F4F4'
+const INK = '#101A18'
+const INK_SECONDARY = '#41544F'
+const MUTED = '#4B5E5A'
+const PAPER = '#EAF1F0'
 const SURFACE = '#FFFFFF'
-const LINE = '#CFD6D5'
-const GRID = '#DCE3E3'
-const ACCENT = '#5E7470'
-const ACCENT_GLOW = '#A9BDB5'
+const LINE = '#C3D2CF'
+const GRID = '#D3E0DE'
+const ACCENT = '#1E7D63'
+const ACCENT_GLOW = '#3FBF93'
 const GOOD = '#0A6E0A'
 const CRITICAL = '#B3261E'
 

@@ -17,13 +17,13 @@
 @font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-style: normal; font-display: block; src: url("../fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
 :root {
   color-scheme: light;
-  --plane: #F0F4F4; --plane-glow-1: #E8EDEF; --plane-glow-2: #DFE7E9;
-  --surface: #FFFFFF; --surface-raised: #FFFFFF; --surface-sunken: #DFE7E9;
-  --ink: #1B2523; --ink-secondary: #4A5A56; --ink-muted: #536360;
-  --line: #CFD6D5; --line-strong: #A9B5B2; --grid: #DCE3E3;
-  --accent-glow: #A9BDB5; --accent: #5E7470; --accent-ink: #F4F7F6; --accent-text: #4E625E;
-  --accent-quiet: rgba(94, 116, 112, 0.12); --brand-bridge: #75856A;
-  --series-1: #5E7470; --series-2: #2A6FB0; --series-3: #B4531F; --reference: #536360;
+  --plane: #EAF1F0; --plane-glow-1: #E1EBEA; --plane-glow-2: #D6E3E2;
+  --surface: #FFFFFF; --surface-raised: #FFFFFF; --surface-sunken: #D6E3E2;
+  --ink: #101A18; --ink-secondary: #41544F; --ink-muted: #4B5E5A;
+  --line: #C3D2CF; --line-strong: #93A8A3; --grid: #D3E0DE;
+  --accent-glow: #3FBF93; --accent: #1E7D63; --accent-ink: #F4FBF8; --accent-text: #17614D;
+  --accent-quiet: rgba(30, 125, 99, 0.14); --brand-bridge: #5E9B57;
+  --series-1: #1E7D63; --series-2: #0B5FB0; --series-3: #A93C06; --reference: #4B5E5A;
   --good: #0A6E0A; --warning: #7F5300; --critical: #B3261E; --delta-up: #146B14; --delta-down: #A81E1E;
   --glass-edge: rgba(255, 255, 255, 0.9);
   --glow: rgba(94, 116, 112, 0.22);
@@ -31,7 +31,7 @@
     radial-gradient(65% 50% at 50% 12%, rgba(255, 255, 255, 0.85), transparent 62%),
     radial-gradient(50% 40% at 20% 85%, rgba(160, 175, 180, 0.35), transparent 60%),
     radial-gradient(45% 35% at 85% 75%, rgba(185, 199, 188, 0.40), transparent 58%),
-    linear-gradient(180deg, #E8EDEF, #DFE7E9 55%, #CFDADD);
+    linear-gradient(180deg, #E1EBEA, #D6E3E2 55%, #BFD5D2);
   --radius: 16px; --radius-md: 10px; --radius-sm: 4px;
   --shadow-hue: 27 37 35;
   --elev-1: 0 8px 24px rgb(var(--shadow-hue) / 0.10), 0 1px 3px rgb(var(--shadow-hue) / 0.08), 0 0 40px -16px var(--glow);
@@ -42,20 +42,20 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --plane: #12161A; --plane-glow-1: #141A1E; --plane-glow-2: #0D1013;
-  --surface: #192025; --surface-raised: #1F282E; --surface-sunken: #0D1013;
-  --ink: #EDF1F2; --ink-secondary: #B8C3C6; --ink-muted: #8B989C;
-  --line: #2B3438; --line-strong: #3D474C; --grid: #1C2327;
-  --accent-glow: #B9C7BC; --accent: #B9C7BC; --accent-ink: #12161A; --accent-text: #B9C7BC;
-  --accent-quiet: rgba(185, 199, 188, 0.14); --brand-bridge: #75856A;
-  --series-1: #B9C7BC; --series-2: #5FA8E8; --series-3: #E08A4E; --reference: #8B989C;
+  --plane: #0B1014; --plane-glow-1: #0E1418; --plane-glow-2: #070A0D;
+  --surface: #141C21; --surface-raised: #1B252B; --surface-sunken: #070A0D;
+  --ink: #F2F7F8; --ink-secondary: #BFCCD0; --ink-muted: #90A0A4;
+  --line: #2F3A3F; --line-strong: #46555B; --grid: #1B2429;
+  --accent-glow: #A6F0CE; --accent: #7FE5B5; --accent-ink: #06100B; --accent-text: #7FE5B5;
+  --accent-quiet: rgba(127, 229, 181, 0.18); --brand-bridge: #5E9B57;
+  --series-1: #7FE5B5; --series-2: #4FB6FF; --series-3: #FF9448; --reference: #90A0A4;
   --good: #4FBF4F; --warning: #D9A23A; --critical: #F07A72; --delta-up: #5CC85C; --delta-down: #F08A82;
   --glass-edge: rgba(237, 241, 242, 0.28);
   --glow: rgba(185, 199, 188, 0.32);
   --atmo:
     radial-gradient(60% 45% at 50% 8%, rgba(185, 199, 188, 0.22), transparent 60%),
     radial-gradient(70% 50% at 50% 115%, rgba(60, 70, 75, 0.25), transparent 60%),
-    linear-gradient(180deg, #141A1E, #12161A 55%, #0D1013);
+    linear-gradient(180deg, #0E1418, #0B1014 55%, #070A0D);
   --shadow-hue: 0 0 0;
   --elev-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 2px 8px rgb(0 0 0 / 0.3), 0 0 40px -16px var(--glow);
   --elev-2: 0 1px 2px rgb(0 0 0 / 0.45), 0 6px 18px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);

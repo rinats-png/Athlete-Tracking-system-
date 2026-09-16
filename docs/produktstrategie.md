@@ -18,6 +18,13 @@ Der statische Teil des Systems ist belastbar und wird gut altern:
   Diese Typografie sagt «Messgerät», bevor ein Wert gelesen ist — die
   stärkste Einzelentscheidung im System.
 - Mondlicht/Mondstein als umgekehrtes Paar mit EINER Akzentlogik.
+- Seit dem 16.09.2026 mit angehobener Sättigung: die ursprüngliche
+  Silberfamilie (#B9C7BC hell / #5E7470 tief) war so chromaarm, dass der
+  Akzent auf beiden Gründen als Grauton las — die Marke war da, aber nicht
+  zu sehen. Der Farbton ist geblieben, das Chroma ist gestiegen (#7FE5B5 /
+  #1E7D63), der Grund im Dunkeln ist tiefer (#0B1014), und alle Textwerte
+  sind gegen die vier Flächen neu nachgerechnet; der niedrigste steht bei
+  4,78:1. Ehrlichkeit des Systems heisst nicht Blässe.
 
 ### Was zu viel ist
 
