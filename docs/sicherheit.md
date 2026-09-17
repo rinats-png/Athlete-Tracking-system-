@@ -513,8 +513,10 @@ nicht als erledigt gelten, nur weil der Code sie vorbereitet.
 
 | Was | Wo | Warum |
 |---|---|---|
-| Migrationen einspielen | `20260907120000`, `20260910090000`, `20260910100000` | ohne sie gilt im Backend der alte Stand — inklusive der kritischen Lücke B-01 |
+| ~~Migrationen einspielen~~ | erledigt am 17.09.2026 | alle 18 Migrationen sind im Projekt `bsbionvnsvqghaqijmpl`; B-01 ist auch live geschlossen |
 | Edge Function ausrollen | `supabase functions deploy delete-account` | sonst gibt es keine Kontolöschung |
+| **Projekt wach halten** | Supabase-Stufe oder wöchentlicher Zugriff | die kostenlose Stufe pausiert nach rund einer Woche ohne Zugriff — dann schlägt jede Anmeldung mit «Keine Verbindung» fehl |
+| Leaked Password Protection | Auth → Passwords | Supabase prüft gegen HaveIBeenPwned; steht derzeit auf aus |
 | Supabase Site URL + Redirect URLs auf `kydon.app` | Auth → URL Configuration | sonst läuft das Zurücksetzen des Passworts ins Leere |
 | `APP_ORIGIN` nur für zusätzliche Herkünfte | Function-Umgebung | `kydon.app` ist fest hinterlegt; eine Wildcard gibt es nicht |
 | **Bestätigungspflicht per E-Mail** | Auth → Sign-up | die eigentliche Massnahme gegen Account Enumeration (B-06) |
@@ -523,6 +525,40 @@ nicht als erledigt gelten, nur weil der Code sie vorbereitet.
 | SVG-Bestand durchsehen | Bucket `branding` | die neue Grenze wirkt nur beim Hochladen |
 | Wiederherstellung proben | einmalig | eine ungeprobte Sicherung ist eine Vermutung |
 | Branch Protection | GitHub | damit das Sicherheitstor nicht umgehbar ist |
+
+## Betriebsbefunde vom 17.09.2026
+
+Beim Nachgehen einer gescheiterten Anmeldung aufgefallen — beides Betrieb, nicht Code:
+
+**B-07 (hoch, behoben). Das Supabase-Projekt war pausiert.** Status `INACTIVE`.
+Die kostenlose Stufe pausiert ein Projekt nach etwa einer Woche ohne Zugriff.
+Für die App ist das nicht von einem Ausfall zu unterscheiden: sie meldet
+«Keine Verbindung», und jede Registrierung und Anmeldung schlägt fehl. Der
+lokale Betrieb lief weiter — genau so, wie §32 es vorsieht. Reaktiviert.
+
+**B-08 (hoch, behoben). Fünf Migrationen waren nie eingespielt.** Das Projekt
+stand auf dem Stand vom 29.08.2026. Es fehlten `drop_placeholder_norms`,
+`baseline_core`, `harden_coach_links`, `audit_retention` und
+`account_deletion` — also die Tabelle `athlete_documents`, in der die
+Synchronisierung den Bestand ablegt, die Schliessung der kritischen Lücke
+B-01, das Sicherheitsprotokoll und der Löschweg. Ein angemeldeter Nutzer
+hätte seine Daten nicht ablegen können, und die Rechteausweitung stand im
+Code repariert und im Betrieb offen. Alle fünf sind eingespielt; die
+Kontozeile des bestehenden Nutzers ist nachgetragen, weil der Trigger nur
+bei der Registrierung greift.
+
+**B-09 (gering, behoben). Triggerfunktionen standen als RPC-Endpunkt.**
+`touch_updated_at`, `handle_new_user`, `link_creator_as_coach`,
+`set_updated_at` und die drei Protokollfunktionen waren über
+`/rest/v1/rpc/...` aufrufbar, teils für `anon`. Aufrufbar heisst hier nicht
+ausnutzbar — ohne Triggerkontext brechen sie ab —, aber eine Funktion, die
+niemand aufrufen soll, gehört auch nicht angeboten. `execute` entzogen.
+
+**Was hier NICHT geprüft werden konnte.** Der Netzwerkproxy der
+Entwicklungsumgebung lässt keine Verbindung zu `*.supabase.co` zu. Der
+Durchlauf Registrieren → Ablegen → Abmelden → Anmelden ist deshalb NUR
+serverseitig belegt (Schema, Regeln, Trigger), nicht als echter Durchlauf
+über die App. Er gehört einmal von Hand gemacht.
 
 ## Was man selbst laufen lassen kann
 
