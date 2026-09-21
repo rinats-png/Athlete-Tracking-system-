@@ -538,6 +538,7 @@ ein benutzbares Produkt steht.
 | **S3 Cockpit, Decision-Log** | **gebaut**, 21.09.2026 | `src/domain/cockpit.ts`, `src/features/cockpit/`, Schema v22 |
 | **S4 Ernährung** | **gebaut**, 21.09.2026 | `src/data/foods.ts`, `src/lib/openFoodFacts.ts`, `src/domain/nutrition.ts`, `src/features/nutrition/`, Schema v23 |
 | **Etappe 0 Tabellentrennung** | **gebaut**, 21.09.2026 | `supabase/migrations/20260921120000_athlete_series.sql`, `src/lib/supabase/series.ts`, `src/lib/supabase/sync.ts` |
+| **Etappe 4 Stufen und Bezahlweg** | **gebaut**, 21.09.2026 — scharf erst mit `VITE_BILLING=on` | `src/data/pricing.ts`, `src/domain/entitlement.ts`, `src/lib/billing.ts`, `src/features/billing/`, `supabase/functions/{create-checkout,stripe-webhook,billing-portal}`, Migrationen `billing_products`, `billing` |
 | S5 Gesundheit | offen | |
 
 **Eine bewusste Abweichung vom Plan, offen benannt.** Etappe 0 sah vor, die
@@ -660,9 +661,52 @@ er weh tut, ist keiner mehr — deshalb steht das hier und nicht im Code.
   nicht gegen den Server durchlaufen werden (Proxy) — die Regeln sind ohne
   Netz geprüft, der Durchlauf selbst steht als Betriebsprüfung aus.
 
-**Offen, unverändert:** der Bezahlweg (Etappe 4), die Lizenzfrage zu ODbL
-(Abschnitt 7), ein kuratierter Ausbau des Kerns aus BLS oder USDA, und
-ein echter Zwei-Geräte-Abgleich am lebenden System.
+**Was Etappe 4 geworden ist (Stufen und Bezahlweg):**
+
+- **Vier Athletenstufen im Code:** Frei (mit Tagebuch light), Plus 49 €
+  (+ volles Tagebuch, Trainingslog, Belastung), Pro 99 € (+ Ernährung,
+  Cockpit, Decision-Log), Termin 69 € einmalig (Plus + Zielwerte + Report;
+  von 49 auf 69, weil er über einem Jahr Plus bleiben muss — sonst wäre er
+  ein kürzeres Plus). **Elite fehlt absichtlich:** kein Merkmal in
+  `pricing.ts` ist ein Versprechen auf später, und S5 ist nicht gebaut.
+  Trainerstufen unverändert 149/349/699.
+- **Stripe, ohne SDK:** drei Edge Functions. `create-checkout` legt eine
+  Kasse an (wer kauft: aus dem Token; was: aus dem Körper; Preis-Kennung:
+  aus der Umgebung, nie aus dem Aufruf). `stripe-webhook` prüft die
+  Signatur (HMAC, fünf Minuten Toleranz, konstante Zeit) und schreibt als
+  Einziger in `entitlements`. `billing-portal` öffnet Stripes Kundenportal
+  (kündigen, Rechnungen). Kartendaten sieht die App nie.
+- **Die Rechnung «wer darf was» steht in `src/domain/entitlement.ts`**, ohne
+  Netz prüfbar: höchste Freischaltung zählt, abgelaufen/gekündigt trägt
+  nicht, Probe trägt, der Trainer-Zuschuss gibt Plus (Server-RPC
+  `my_coach_plan_grant`), ein zahlender Trainer hat die volle Tiefe. Der
+  kostenlose Kern ist in keinem Pfad sperrbar.
+- **Die Schranke (`Gate`) sagt «Teil von Plus», nie «gesperrt»**, nennt den
+  Preis, führt zur Preisseite — und hält Merkmale zurück, nie Daten:
+  Eingetragenes bleibt im Bestand und im Export (§32). Schranken sitzen an
+  den Routen (Training, Cockpit, Ernährung, Jahresrückblick, Heatmap) und
+  in Panels (Anforderungslücke, Wettkampf/Prognose, Abgleich, Tagebuch-
+  Zusatzfelder).
+- **Scharf erst mit `VITE_BILLING=on`.** Bis dahin keine Schranke und der
+  alte Hinweis auf der Preisseite. Sperren und Kaufen kommen in einem Zug.
+- **Serverseitig** verlangen Report-Erzeugung und Report-Ablage jetzt «eine
+  bezahlte Trainerstufe» (`has_coach_plan`) statt nur coach_pro. Auf
+  `entitlements` gibt es weiterhin keine Schreib-Policy.
+- **Rechtstexte** um Zahlungen (Stripe als eigener Verantwortlicher) und
+  bezahlte Stufen (Laufzeit, Kündigung, Widerruf, Daten bleiben) ergänzt —
+  anwaltlich zu prüfen wie der Rest.
+- **Was der Betreiber tun muss, bevor `VITE_BILLING=on` gesetzt wird:** bei
+  Stripe sechs Produkte mit Preisen anlegen (je jährlich und monatlich,
+  Termin einmalig), die Edge Functions ausrollen (`stripe-webhook` ohne
+  JWT-Prüfung), Secrets setzen (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`,
+  `STRIPE_PRICE_…`, `SUPABASE_SERVICE_ROLE_KEY`), den Webhook bei Stripe auf
+  `checkout.session.completed`, `customer.subscription.updated`,
+  `customer.subscription.deleted` zeigen lassen, das Kundenportal in Stripe
+  aktivieren, Bestandskunden zu 29 € als eigene Preis-Kennung weiterführen.
+
+**Offen, unverändert:** die Lizenzfrage zu ODbL (Abschnitt 7), ein
+kuratierter Ausbau des Kerns aus BLS oder USDA, ein echter Zwei-Geräte-
+Abgleich und ein echter Testkauf am lebenden System, Elite mit S5.
 
 ## 14. Zusammenfassung in drei Sätzen
 

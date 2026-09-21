@@ -1754,5 +1754,30 @@
     "links": {
       "why": "Gewicht kommt aus dem Tagebuch; eine Entscheidung zur Ernährung hält das Cockpit fest."
     }
+  },
+  "billing": {
+    "partOf": "Teil von {{plan}}",
+    "unlock": "Freischalten",
+    "allPlans": "Alle Stufen",
+    "dataStays": "Was du schon eingetragen hast, bleibt in deinem Bestand und im Export — eine Stufe hält Merkmale zurück, nie Daten.",
+    "perYear": "{{amount}} € im Jahr",
+    "once": "{{amount}} € einmalig",
+    "manage": "Abo verwalten",
+    "manageHint": "Kündigen, Rechnungen und Zahlungsmittel — bei Stripe, unserem Zahlungsdienstleister.",
+    "yourPlan": "Deine Stufe: {{plan}}",
+    "yourPlanFree": "Deine Stufe: kostenlos",
+    "viaCoach": "Plus über deinen Trainer",
+    "checkoutSuccess": "Danke. Die Freischaltung kommt in den nächsten Sekunden vom Server — falls nicht, einmal «Stand prüfen».",
+    "checkoutCancel": "Abgebrochen. Nichts wurde belastet.",
+    "signInFirst": "Zum Kaufen musst du angemeldet sein — die Freischaltung gehört zu deinem Konto, nicht zu diesem Gerät.",
+    "chooseYearly": "{{plan}} wählen · {{amount}} € im Jahr",
+    "chooseMonthly": "monatlich · {{amount}} €",
+    "chooseOnce": "{{plan}} kaufen · {{amount}} € einmalig",
+    "unavailable": "Diese Stufe ist noch nicht kaufbar.",
+    "failed": "Die Kasse konnte nicht geöffnet werden. Versuch es noch einmal.",
+    "offline": "Keine Verbindung. Zum Kaufen braucht es Netz.",
+    "refresh": "Stand prüfen",
+    "stripeNote": "Die Zahlung läuft bei Stripe; Kartendaten sieht KYDON nie. Abos sind jederzeit kündbar und laufen bis zum Ende des bezahlten Zeitraums.",
+    "current": "aktuell"
   }
 }

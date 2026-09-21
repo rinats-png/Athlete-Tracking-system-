@@ -279,7 +279,8 @@
     "athleteIntro": "La version gratuite vous dit où vous étiez. Ces formules vous disent où vous en êtes et où mène la courbe.",
     "athletePlan": {
       "plus": "Pour celles et ceux qui mesurent sur des années et veulent savoir où ils se situent et où cela va.",
-      "termin": "Pour un concours d'entrée à date fixe — police, pompiers, armée, douanes."
+      "termin": "Pour un concours d'entrée à date fixe — police, pompiers, armée, douanes.",
+      "pro": "Pour celles et ceux qui saisissent chaque jour et veulent savoir si une décision a agi — avec nutrition, cockpit et journal de décisions."
     },
     "perYear": "{{amount}} € par an",
     "once": "{{amount}} € en une fois",
@@ -318,7 +319,14 @@
       "targetStandards": "Valeurs cibles du concours d'entrée concerné",
       "unlimitedReports": "Rapports sans plafond",
       "whiteLabel": "Votre logo sur le rapport",
-      "yearReview": "Bilan de l'année"
+      "yearReview": "Bilan de l'année",
+      "diaryLight": "Journal léger : poids, sommeil, énergie, séances",
+      "diaryFull": "Journal complet : qualité du sommeil, stress, courbatures, pas, adhérence, note",
+      "trainingLog": "Carnet d'entraînement avec séries, e1RM et volume musculaire",
+      "loadMonitoring": "Charge : charge hebdomadaire, ratio 7:28, comparaison de blocs",
+      "nutrition": "Nutrition : repas, macros, dépense de référence, Open Food Facts",
+      "decisionLog": "Journal de décisions avec vérification de l'effet",
+      "cockpit": "Cockpit avec signaux et seuils réglables"
     }
   },
   "legal": {

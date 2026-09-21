@@ -582,6 +582,25 @@ Datentabelle dazugekommen: `athlete_series`, eine Zeile je Eintrag, Nutzlast
   ohne `execute` für `anon` und `authenticated`.
 - `scripts/auditPolicies.mjs` kennt die Tabelle und meldet keine Befunde.
 
+## Bezahlweg vom 21.09.2026
+
+- **Nur der Webhook schreibt Freischaltungen.** `stripe-webhook` läuft ohne
+  JWT-Prüfung (Stripe hat keins) und akzeptiert nur Aufrufe mit gültiger
+  Signatur: HMAC-SHA256 über `t.body` mit dem Webhook-Geheimnis, Vergleich
+  in konstanter Zeit, Zeitstempel höchstens fünf Minuten alt (Replay).
+  Ohne Signatur: 400, kein Eintrag. Der Prüffall dazu steht in
+  `tests/billing.spec.ts`.
+- **Wer kauft, kommt aus dem Token.** `create-checkout` nimmt `user_id`
+  nie aus dem Körper; die Preis-Kennung kommt aus der Umgebung. Rücksprung-
+  adressen nur aus der Herkunftsliste, nie aus dem Aufruf.
+- **Das Gerät kann sich nicht selbst freischalten.** Der lokale Stand
+  (`kydon.billing.v1`) ist eine Kopie für die Anzeige; serverseitige
+  Schranken (Reports, Branding) fragen die Tabelle über `has_coach_plan`.
+  Wer den Speicher fälscht, sieht Knöpfe — und bekommt vom Server 403.
+- **Kartendaten** sieht KYDON nie; die Kasse ist eine Seite von Stripe.
+- **Secrets** (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`) liegen nur als
+  Edge-Function-Secrets, nie im Frontend oder im Repo.
+
 ## Was man selbst laufen lassen kann
 
 ```bash

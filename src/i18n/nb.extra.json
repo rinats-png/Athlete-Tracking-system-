@@ -279,7 +279,8 @@
     "athleteIntro": "Gratisversjonen forteller hvor du var. Disse nivåene forteller hvor du står, og hvor kurven peker.",
     "athletePlan": {
       "plus": "For alle som måler over år og vil vite hvor de står, og hvor det bærer hen.",
-      "termin": "For en opptaksprøve med fast dato — politi, brannvesen, forsvar, toll."
+      "termin": "For en opptaksprøve med fast dato — politi, brannvesen, forsvar, toll.",
+      "pro": "For deg som logger daglig og vil vite om en beslutning virket — med ernæring, cockpit og beslutningslogg."
     },
     "perYear": "{{amount}} € i året",
     "once": "{{amount}} € én gang",
@@ -318,7 +319,14 @@
       "targetStandards": "Målverdier for det aktuelle opptakstesten",
       "unlimitedReports": "Rapporter uten tak",
       "whiteLabel": "Egen logo i rapporten",
-      "yearReview": "Året som gikk"
+      "yearReview": "Året som gikk",
+      "diaryLight": "Dagbok light: vekt, søvn, energi, økter",
+      "diaryFull": "Full dagbok: søvnkvalitet, stress, stølhet, skritt, etterlevelse, notat",
+      "trainingLog": "Treningslogg med sett, e1RM og muskelvolum",
+      "loadMonitoring": "Belastning: ukesbelastning, forhold 7:28, blokksammenligning",
+      "nutrition": "Ernæring: måltider, makroer, referanseforbruk, Open Food Facts",
+      "decisionLog": "Beslutningslogg med effektsjekk",
+      "cockpit": "Cockpit med signaler og justerbare terskler"
     }
   },
   "legal": {

@@ -47,6 +47,8 @@ import { IntroSequence } from '@/features/intro/IntroSequence'
 import { introEnabled, markIntroSeen } from '@/features/intro/introPreference'
 import { AuthScreen } from '@/features/auth/AuthScreen'
 import { readAccount, type Account } from '@/features/auth/account'
+import { BillingProvider } from '@/features/billing/BillingProvider'
+import { Gate } from '@/features/billing/Gate'
 
 /**
  * Einstiegspunkt.
@@ -125,7 +127,7 @@ const router = createBrowserRouter([
       { path: 'verlauf/kalender', element: screen(() => import('@/features/history/CalendarScreen'), 'CalendarScreen') },
       { path: 'verlauf/erinnerungen', element: screen(() => import('@/features/history/RemindersScreen'), 'RemindersScreen') },
       { path: 'analyse', element: screen(() => import('@/features/analysis/AnalysisHome'), 'AnalysisHome') },
-      { path: 'analyse/jahr', element: screen(() => import('@/features/analysis/YearReviewScreen'), 'YearReviewScreen') },
+      { path: 'analyse/jahr', element: <Gate feature="yearReview">{screen(() => import('@/features/analysis/YearReviewScreen'), 'YearReviewScreen')}</Gate> },
       { path: 'community', element: screen(() => import('@/features/analysis/CommunityScreen'), 'CommunityScreen') },
       { path: 'trainer', element: screen(() => import('@/features/coach/CoachScreen'), 'CoachScreen') },
       { path: 'trainer/gruppentest', element: screen(() => import('@/features/coach/GroupTestScreen'), 'GroupTestScreen') },
@@ -133,14 +135,16 @@ const router = createBrowserRouter([
       { path: 'trainer/testtag/:id', element: screen(() => import('@/features/coach/TestDayDetailScreen'), 'TestDayDetailScreen') },
       { path: 'trainer/vergleich', element: screen(() => import('@/features/coach/AthleteCompare'), 'AthleteCompare') },
       { path: 'trainer/gruppenbericht', element: screen(() => import('@/features/coach/GroupReportScreen'), 'GroupReportScreen') },
-      { path: 'trainer/heatmap', element: screen(() => import('@/features/coach/GroupHeatmapScreen'), 'GroupHeatmapScreen') },
+      { path: 'trainer/heatmap', element: <Gate feature="heatmap">{screen(() => import('@/features/coach/GroupHeatmapScreen'), 'GroupHeatmapScreen')}</Gate> },
       { path: 'trainer/nachweis', element: screen(() => import('@/features/coach/CoachProofScreen'), 'CoachProofScreen') },
       { path: 'bericht', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'beobachtung', element: screen(() => import('@/features/observations/ObservationScreen'), 'ObservationScreen') },
       { path: 'tagebuch', element: screen(() => import('@/features/diary/DiaryScreen'), 'DiaryScreen') },
-      { path: 'training', element: screen(() => import('@/features/training/TrainingScreen'), 'TrainingScreen') },
-      { path: 'cockpit', element: screen(() => import('@/features/cockpit/CockpitScreen'), 'CockpitScreen') },
-      { path: 'ernaehrung', element: screen(() => import('@/features/nutrition/NutritionScreen'), 'NutritionScreen') },
+      // Die Schranken sitzen an der Route, nicht im Bildschirm: so kann kein
+      // Bildschirm sie vergessen, und ohne Bezahlweg rendern sie nur den Inhalt.
+      { path: 'training', element: <Gate feature="trainingLog">{screen(() => import('@/features/training/TrainingScreen'), 'TrainingScreen')}</Gate> },
+      { path: 'cockpit', element: <Gate feature="decisionLog">{screen(() => import('@/features/cockpit/CockpitScreen'), 'CockpitScreen')}</Gate> },
+      { path: 'ernaehrung', element: <Gate feature="nutrition">{screen(() => import('@/features/nutrition/NutritionScreen'), 'NutritionScreen')}</Gate> },
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
@@ -219,8 +223,10 @@ export default function App() {
 
   return (
     <AppDataProvider mode={mode}>
-      <RoleFromAccount role={account.role} />
-      <OnboardingGate />
+      <BillingProvider>
+        <RoleFromAccount role={account.role} />
+        <OnboardingGate />
+      </BillingProvider>
     </AppDataProvider>
   )
 }

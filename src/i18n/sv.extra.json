@@ -279,7 +279,8 @@
     "athleteIntro": "Gratisversionen säger var du var. De här nivåerna säger var du står och vart kurvan pekar.",
     "athletePlan": {
       "plus": "För alla som mäter över år och vill veta var de står och vart det går.",
-      "termin": "För ett antagningstest med fast datum — polis, räddningstjänst, försvar, tull."
+      "termin": "För ett antagningstest med fast datum — polis, räddningstjänst, försvar, tull.",
+      "pro": "För dig som för in dagligen och vill veta om ett beslut gav effekt — med kost, cockpit och beslutslogg."
     },
     "perYear": "{{amount}} € per år",
     "once": "{{amount}} € en gång",
@@ -318,7 +319,14 @@
       "targetStandards": "Målvärden för det aktuella antagningstestet",
       "unlimitedReports": "Rapporter utan tak",
       "whiteLabel": "Egen logotyp i rapporten",
-      "yearReview": "Årssammanfattning"
+      "yearReview": "Årssammanfattning",
+      "diaryLight": "Dagbok light: vikt, sömn, energi, pass",
+      "diaryFull": "Full dagbok: sömnkvalitet, stress, träningsvärk, steg, följsamhet, anteckning",
+      "trainingLog": "Träningslogg med set, e1RM och muskelvolym",
+      "loadMonitoring": "Belastning: veckobelastning, kvot 7:28, blockjämförelse",
+      "nutrition": "Kost: måltider, makron, referensförbrukning, Open Food Facts",
+      "decisionLog": "Beslutslogg med effektkontroll",
+      "cockpit": "Cockpit med signaler och justerbara trösklar"
     }
   },
   "legal": {

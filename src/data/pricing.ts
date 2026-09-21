@@ -8,12 +8,24 @@ import type { AppLocale } from '@/i18n/locales'
  * Vertrag. Solange das so ist, sagt der Bildschirm es auch — eine Preisliste,
  * die nach einem Kauf aussieht, ohne einen zu ermöglichen, wäre eine Täuschung.
  *
- * WICHTIG ZUM VERSTÄNDNIS DIESER DATEI: Sie BESCHREIBT die Stufen, sie
- * ERZWINGT sie nicht. Es gibt keine Sperre im Code, die einem Nutzer ohne Plus
- * etwas wegnimmt. Das ist kein Versäumnis, sondern die einzige richtige
- * Reihenfolge: Eine Sperre ohne Bezahlweg nähme allen etwas weg und gäbe
- * niemandem die Möglichkeit, es zurückzukaufen. Die Sperren kommen mit der
- * Zahlung, in einem Zug — vorher nicht.
+ * SEIT ETAPPE 4 (21.09.2026) GIBT ES DEN BEZAHLWEG: Stripe über die Edge
+ * Functions create-checkout, stripe-webhook und billing-portal; die
+ * Freischaltungen liegen in `entitlements`, und `src/domain/entitlement.ts`
+ * rechnet daraus, wer was darf. Die Schranken sind aber nur SCHARF, wenn der
+ * Bezahlweg eingeschaltet ist (`billingEnabled()` in src/lib/billing.ts) —
+ * also wenn Stripe eingerichtet ist und die Preise dort liegen. Vorher gilt
+ * weiter: Eine Sperre ohne Kaufmöglichkeit nähme allen etwas weg und gäbe
+ * niemandem einen Weg zurück. Sperren und Kaufen kommen in einem Zug.
+ *
+ * VIER ATHLETENSTUFEN SEIT DEM AUSBAU (docs/ausbau.md §10): Frei, Plus (49),
+ * Pro (99), Termin (49 einmalig). Elite (199, Gesundheitsschicht, Peak Week)
+ * steht im Plan, aber nicht hier: kein Merkmal auf dieser Liste ist ein
+ * Versprechen auf später, und S5 ist nicht gebaut. Elite kommt mit S5.
+ *
+ * PLUS VON 29 AUF 49 €: Plus hat mit Tagebuch, Trainingslog und Belastung
+ * erheblich mehr Substanz als bei 29 €. Wer bereits zu 29 € zahlt, behält
+ * den Preis, solange er zahlt — das regelt die Preis-Kennung bei Stripe,
+ * nicht diese Datei.
  *
  * =============================================================================
  * WARUM DAS MODELL AM 13.09.2026 VOLLSTÄNDIG ERSETZT WURDE
@@ -114,6 +126,7 @@ export type PlanFeature =
   | 'ownProfile' // Sechs Achsen gegen die eigene Bestleistung
   | 'export' // Vollständiger Export, immer (§32)
   | 'reminders' // Wiederholungstermine und Kalenderdatei
+  | 'diaryLight' // Tagebuch light: Gewicht, Schlaf, Energie, Einheiten
   // --- Plus ------------------------------------------------------------------
   | 'forecast' // Formprognose auf ein Datum, mit Unsicherheitsband
   | 'seasonPlan' // Kontrollpunkte bis zum Wettkampf
@@ -123,6 +136,13 @@ export type PlanFeature =
   | 'card' // Performance Card zum Teilen
   | 'yearReview' // Jahresrückblick
   | 'multiAthlete' // Mehrere Athleten in einem Konto
+  | 'diaryFull' // Volles Tagebuch: alle zuschaltbaren Felder
+  | 'trainingLog' // Einheiten mit Sätzen, e1RM, Muskelvolumen
+  | 'loadMonitoring' // Wochenlast, Verhältnis 7:28, Blockvergleich
+  // --- Pro -------------------------------------------------------------------
+  | 'nutrition' // Mahlzeiten, Makros, Referenzumsatz, Open Food Facts
+  | 'decisionLog' // Entscheidungen mit Wirkungsprüfung
+  | 'cockpit' // Signale mit einstellbaren Schwellen
   // --- Termin ----------------------------------------------------------------
   | 'targetStandards' // Zielwerte des konkreten Einstellungstests
   | 'reportPdf' // Druckfertiger Report
@@ -144,13 +164,20 @@ export const FREE_CORE: readonly PlanFeature[] = [
   'ownProfile',
   'export',
   'reminders',
+  'diaryLight',
 ]
+
+/**
+ * Das Produkt, das der Bezahlweg für eine Stufe kennt — der Wert in
+ * `entitlements.product`. Die kostenlosen Stufen haben keins.
+ */
+export type EntitlementProduct = 'athlete_plus' | 'athlete_pro' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro'
 
 // =============================================================================
 // Einzelnutzung
 // =============================================================================
 
-export type AthletePlanId = 'free' | 'plus' | 'termin'
+export type AthletePlanId = 'free' | 'plus' | 'pro' | 'termin'
 
 export interface AthletePlan {
   id: AthletePlanId
@@ -170,21 +197,40 @@ export interface AthletePlan {
   athletes: number
   name: Localized
   features: readonly PlanFeature[]
+  /** Was der Bezahlweg dafür freischaltet. null = nicht kaufbar (kostenlos). */
+  product: EntitlementProduct | null
 }
 
 /**
- * 29 € im Jahr, und nicht 29,90 €.
+ * 49 € im Jahr, und nicht 49,90 €.
  *
  * Runde Zahlen passen zu einer Marke, die Präzision verkauft; krumme Preise
- * signalisieren Rabattlogik. Der Betrag selbst liegt bewusst auf Höhe von My
- * Jump Lab (29,99 €/Jahr) — darüber verliert der erste Vergleich, darunter
- * entwertet er die Referenzarbeit.
+ * signalisieren Rabattlogik. Plus lag bei 29 € auf Höhe von My Jump Lab
+ * (29,99 €/Jahr); mit Tagebuch, Trainingslog und Belastung ist es ein
+ * anderes Produkt und steht bei 49 €. Pro (99 €) legt Ernährung, Cockpit und
+ * Decision-Log darauf — das ist die Stufe für den, der täglich einträgt.
  *
- * Der Termin-Pass ist teurer als das ganze Jahr, und das ist richtig: Er ist
+ * Der Termin-Pass (69 €) ist teurer als das ganze Jahr Plus (49 €), und
+ * das ist richtig: Er ist
  * kein kürzeres Plus, sondern ein anderes Bündel. Wer in acht Wochen zur
  * Einstellungsprüfung antritt, vergleicht nicht mit einer Fitness-App, sondern
  * mit einem Vorbereitungskurs für 150 €.
  */
+const PLUS_FEATURES: readonly PlanFeature[] = [
+  ...FREE_CORE,
+  'forecast',
+  'seasonPlan',
+  'requirementGap',
+  'percentile',
+  'sync',
+  'card',
+  'yearReview',
+  'multiAthlete',
+  'diaryFull',
+  'trainingLog',
+  'loadMonitoring',
+]
+
 export const ATHLETE_PLANS: readonly AthletePlan[] = [
   {
     id: 'free',
@@ -195,48 +241,40 @@ export const ATHLETE_PLANS: readonly AthletePlan[] = [
     athletes: 1,
     name: { de: 'Kydon', en: 'Kydon' },
     features: FREE_CORE,
+    product: null,
   },
   {
     id: 'plus',
     billing: 'yearly',
-    yearlyEur: 29,
-    monthlyEur: 3.9,
+    yearlyEur: 49,
+    monthlyEur: 4.9,
     onceEur: null,
     athletes: 3,
     name: { de: 'Kydon Plus', en: 'Kydon Plus' },
-    features: [
-      ...FREE_CORE,
-      'forecast',
-      'seasonPlan',
-      'requirementGap',
-      'percentile',
-      'sync',
-      'card',
-      'yearReview',
-      'multiAthlete',
-    ],
+    features: PLUS_FEATURES,
+    product: 'athlete_plus',
+  },
+  {
+    id: 'pro',
+    billing: 'yearly',
+    yearlyEur: 99,
+    monthlyEur: 9.9,
+    onceEur: null,
+    athletes: 3,
+    name: { de: 'Kydon Pro', en: 'Kydon Pro' },
+    features: [...PLUS_FEATURES, 'nutrition', 'decisionLog', 'cockpit'],
+    product: 'athlete_pro',
   },
   {
     id: 'termin',
     billing: 'once',
     yearlyEur: null,
     monthlyEur: null,
-    onceEur: 49,
+    onceEur: 69,
     athletes: 3,
     name: { de: 'Kydon Termin', en: 'Kydon Date' },
-    features: [
-      ...FREE_CORE,
-      'forecast',
-      'seasonPlan',
-      'requirementGap',
-      'percentile',
-      'sync',
-      'card',
-      'yearReview',
-      'multiAthlete',
-      'targetStandards',
-      'reportPdf',
-    ],
+    features: [...PLUS_FEATURES, 'targetStandards', 'reportPdf'],
+    product: 'athlete_termin',
   },
 ]
 
@@ -290,6 +328,8 @@ export interface CoachTier {
   coachSeats: number
   name: Localized
   features: readonly PlanFeature[]
+  /** Was der Bezahlweg dafür freischaltet. null bei der kostenlosen Stufe. */
+  product: EntitlementProduct | null
 }
 
 const COACH_BASE: readonly PlanFeature[] = [
@@ -299,6 +339,7 @@ const COACH_BASE: readonly PlanFeature[] = [
   'ownProfile',
   'export',
   'reminders',
+  'diaryLight',
   'groupTest',
   'csvImport',
   'coachProof',
@@ -330,6 +371,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     coachSeats: 1,
     name: { de: 'Coach Free', en: 'Coach Free' },
     features: COACH_BASE,
+    product: null,
   },
   {
     id: 'coach_start',
@@ -339,6 +381,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     coachSeats: 1,
     name: { de: 'Coach Start', en: 'Coach Start' },
     features: [...COACH_BASE, 'heatmap', 'plusForAthletes'],
+    product: 'coach_start',
   },
   {
     id: 'coach_team',
@@ -348,6 +391,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     coachSeats: 3,
     name: { de: 'Coach Team', en: 'Coach Team' },
     features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
+    product: 'coach_team',
   },
   {
     id: 'coach_pro',
@@ -357,8 +401,18 @@ export const COACH_TIERS: readonly CoachTier[] = [
     coachSeats: 10,
     name: { de: 'Coach Pro', en: 'Coach Pro' },
     features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
+    product: 'coach_pro',
   },
 ]
+
+export function coachTier(id: CoachTierId): CoachTier {
+  return COACH_TIERS.find((tier) => tier.id === id)!
+}
+
+/** Das Produkt zu einer Stufe — null, wenn sie nichts kostet. */
+export function productOfPlan(id: AthletePlanId | CoachTierId): EntitlementProduct | null {
+  return ATHLETE_PLANS.find((p) => p.id === id)?.product ?? COACH_TIERS.find((c) => c.id === id)?.product ?? null
+}
 
 /** Preis je gemessenem Athleten und Jahr. Null bei der kostenlosen Stufe. */
 export function perAthleteYearEur(tier: CoachTier): number | null {

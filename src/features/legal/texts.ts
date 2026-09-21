@@ -33,8 +33,8 @@ export interface LegalDocument {
   sections: LegalSection[]
 }
 
-const STAND_DE = 'Stand: 6. September 2026'
-const STAND_EN = 'Last updated: 6 September 2026'
+const STAND_DE = 'Stand: 21. September 2026'
+const STAND_EN = 'Last updated: 21 September 2026'
 
 // --- Datenschutz -------------------------------------------------------------
 
@@ -111,6 +111,13 @@ const privacyDe: LegalDocument = {
         'Keine Cookies zu Werbe- oder Analysezwecken. Die App setzt überhaupt keine Cookies; der Anmeldezustand liegt im lokalen Speicher.',
         'Keine Reichweitenmessung, kein Fingerprinting, keine Profilbildung, keine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO.',
         'Keine Übermittlung an Werbenetzwerke, keine eingebetteten Inhalte Dritter, keine externen Schriftarten.',
+      ],
+    },
+    {
+      heading: 'Zahlungen',
+      body: [
+        'Bezahlte Stufen werden über Stripe Payments Europe, Ltd. (Dublin, Irland) abgewickelt. Beim Kauf verlässt du die App und gibst Zahlungsdaten auf einer Seite von Stripe ein; KYDON sieht weder Kartennummer noch Kontodaten. Stripe erhält von uns deine E-Mail-Adresse und eine Kontokennung, damit die Zahlung deinem Konto zugeordnet werden kann.',
+        'Wir speichern, welche Stufe freigeschaltet ist, seit wann, bis wann und die Kundennummer bei Stripe — nicht mehr. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertrag); für Rechnungsdaten gelten die gesetzlichen Aufbewahrungsfristen. Stripe ist eigener Verantwortlicher für die Zahlungsabwicklung; seine Datenschutzhinweise findest du unter stripe.com/privacy.',
       ],
     },
     {
@@ -193,6 +200,13 @@ const privacyEn: LegalDocument = {
       ],
     },
     {
+      heading: 'Payments',
+      body: [
+        'Paid plans are processed by Stripe Payments Europe, Ltd. (Dublin, Ireland). When you buy, you leave the app and enter payment details on a page served by Stripe; KYDON never sees card or account numbers. Stripe receives your e-mail address and an account identifier from us so the payment can be matched to your account.',
+        'We store which plan is unlocked, since when, until when, and the Stripe customer number — nothing more. The legal basis is Art. 6(1)(b) GDPR (contract); invoice data is kept for the statutory retention period. Stripe is an independent controller for payment processing; see stripe.com/privacy.',
+      ],
+    },
+    {
       heading: 'No medical data processing',
       body: [
         'KYDON is not a medical device and does not collect health data for diagnostic purposes. The values recorded are sports performance data. If you voluntarily enter details that allow conclusions about your health, we treat them with the same care as all other data — but the app derives no health statements from them.',
@@ -256,6 +270,14 @@ const termsDe: LegalDocument = {
       ],
     },
     {
+      heading: 'Bezahlte Stufen',
+      body: [
+        'Die kostenlose Version umfasst Messen, Verlauf, Messfehlerband, das eigene Profil, den vollständigen Export und Erinnerungen — dauerhaft. Bezahlte Stufen schalten zusätzliche Merkmale frei; die Preisseite nennt sie. Eine Stufe hält Merkmale zurück, nie Daten: Was du eingetragen hast, bleibt in deinem Bestand und im Export, auch nach Ablauf.',
+        'Abos laufen ein Jahr oder einen Monat und verlängern sich um denselben Zeitraum, wenn sie nicht vor Ablauf gekündigt werden. Kündigen kannst du jederzeit im Kundenportal (Profil → Abo verwalten); die Stufe bleibt bis zum Ende des bezahlten Zeitraums. Der Termin-Pass ist ein Einmalkauf ohne Verlängerung.',
+        'Verbraucher haben ein vierzehntägiges Widerrufsrecht. Verlangst du, dass die Stufe sofort freigeschaltet wird, und nutzt sie, schuldest du bei Widerruf den Wert der bis dahin erbrachten Leistung. Preise verstehen sich inklusive der gesetzlichen Umsatzsteuer.',
+      ],
+    },
+    {
       heading: 'Änderungen',
       body: [
         'Diese Bedingungen können sich ändern. Wesentliche Änderungen werden in der App angekündigt.',
@@ -314,6 +336,14 @@ const termsEn: LegalDocument = {
       heading: 'Liability',
       body: [
         'Liability for damage to life, body or health, and in cases of intent and gross negligence, follows statutory provisions. Otherwise liability is limited to foreseeable damage typical for this kind of contract.',
+      ],
+    },
+    {
+      heading: 'Paid plans',
+      body: [
+        'The free version includes measuring, history, the error band, your own profile, the complete export and reminders — permanently. Paid plans unlock additional features, listed on the pricing page. A plan holds back features, never data: whatever you have entered stays in your data and in your export, also after a plan ends.',
+        'Subscriptions run for one year or one month and renew for the same period unless cancelled before the end. You can cancel any time in the customer portal (Profile → Manage subscription); the plan remains until the end of the paid period. The Date pass is a one-off purchase without renewal.',
+        'Consumers have a fourteen-day right of withdrawal. If you ask for the plan to be unlocked immediately and use it, you owe the value of the service provided up to the withdrawal. Prices include statutory VAT.',
       ],
     },
     { heading: 'Changes', body: ['These terms may change. Material changes will be announced in the app.'] },

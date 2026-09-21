@@ -1754,5 +1754,30 @@
     "links": {
       "why": "Vikten kommer från dagboken; ett kostbeslut antecknas i cockpiten."
     }
+  },
+  "billing": {
+    "partOf": "Ingår i {{plan}}",
+    "unlock": "Lås upp",
+    "allPlans": "Alla nivåer",
+    "dataStays": "Det du redan har fört in stannar i dina data och i din export — en nivå håller tillbaka funktioner, aldrig data.",
+    "perYear": "{{amount}} € per år",
+    "once": "{{amount}} € en gång",
+    "manage": "Hantera prenumeration",
+    "manageHint": "Säg upp, fakturor och betalsätt — hos Stripe, vår betalleverantör.",
+    "yourPlan": "Din nivå: {{plan}}",
+    "yourPlanFree": "Din nivå: gratis",
+    "viaCoach": "Plus via din tränare",
+    "checkoutSuccess": "Tack. Upplåsningen kommer från servern inom några sekunder — annars, tryck på «Kontrollera status».",
+    "checkoutCancel": "Avbrutet. Inget har debiterats.",
+    "signInFirst": "Du måste vara inloggad för att köpa — upplåsningen hör till ditt konto, inte till den här enheten.",
+    "chooseYearly": "Välj {{plan}} · {{amount}} € per år",
+    "chooseMonthly": "månadsvis · {{amount}} €",
+    "chooseOnce": "Köp {{plan}} · {{amount}} € en gång",
+    "unavailable": "Den här nivån går inte att köpa ännu.",
+    "failed": "Kassan kunde inte öppnas. Försök igen.",
+    "offline": "Ingen anslutning. Köp kräver nätverk.",
+    "refresh": "Kontrollera status",
+    "stripeNote": "Betalningen sker hos Stripe; KYDON ser aldrig kortuppgifter. Prenumerationer kan sägas upp när som helst och löper till slutet av den betalda perioden.",
+    "current": "nuvarande"
   }
 }

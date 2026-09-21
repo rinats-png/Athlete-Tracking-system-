@@ -1754,5 +1754,30 @@
     "links": {
       "why": "Gewicht komt uit het dagboek; een voedingsbesluit wordt in de cockpit vastgelegd."
     }
+  },
+  "billing": {
+    "partOf": "Onderdeel van {{plan}}",
+    "unlock": "Vrijschakelen",
+    "allPlans": "Alle niveaus",
+    "dataStays": "Wat je al hebt ingevoerd, blijft in je gegevens en in je export — een niveau houdt functies tegen, nooit gegevens.",
+    "perYear": "{{amount}} € per jaar",
+    "once": "{{amount}} € eenmalig",
+    "manage": "Abonnement beheren",
+    "manageHint": "Opzeggen, facturen en betaalmiddel — bij Stripe, onze betaalprovider.",
+    "yourPlan": "Jouw niveau: {{plan}}",
+    "yourPlanFree": "Jouw niveau: gratis",
+    "viaCoach": "Plus via je coach",
+    "checkoutSuccess": "Dank je. De vrijschakeling komt binnen enkele seconden van de server — zo niet, tik op «Status controleren».",
+    "checkoutCancel": "Geannuleerd. Er is niets afgeschreven.",
+    "signInFirst": "Om te kopen moet je ingelogd zijn — de vrijschakeling hoort bij je account, niet bij dit apparaat.",
+    "chooseYearly": "{{plan}} kiezen · {{amount}} € per jaar",
+    "chooseMonthly": "maandelijks · {{amount}} €",
+    "chooseOnce": "{{plan}} kopen · {{amount}} € eenmalig",
+    "unavailable": "Dit niveau is nog niet te koop.",
+    "failed": "De kassa kon niet worden geopend. Probeer het opnieuw.",
+    "offline": "Geen verbinding. Kopen vereist netwerk.",
+    "refresh": "Status controleren",
+    "stripeNote": "De betaling loopt via Stripe; KYDON ziet nooit kaartgegevens. Abonnementen zijn altijd opzegbaar en lopen tot het einde van de betaalde periode.",
+    "current": "huidig"
   }
 }

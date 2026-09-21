@@ -279,7 +279,8 @@
     "athleteIntro": "De gratis versie zegt waar je was. Deze pakketten zeggen waar je staat en waar de curve heen wijst.",
     "athletePlan": {
       "plus": "Voor iedereen die jarenlang meet en wil weten waar hij staat en waar het heen gaat.",
-      "termin": "Voor een toelatingstest met een vaste datum — politie, brandweer, krijgsmacht, douane."
+      "termin": "Voor een toelatingstest met een vaste datum — politie, brandweer, krijgsmacht, douane.",
+      "pro": "Voor wie dagelijks bijhoudt en wil weten of een beslissing werkte — met voeding, cockpit en beslissingslog."
     },
     "perYear": "{{amount}} € per jaar",
     "once": "{{amount}} € eenmalig",
@@ -318,7 +319,14 @@
       "targetStandards": "Streefwaarden van de concrete toelatingstest",
       "unlimitedReports": "Rapporten zonder limiet",
       "whiteLabel": "Eigen logo op het rapport",
-      "yearReview": "Jaaroverzicht"
+      "yearReview": "Jaaroverzicht",
+      "diaryLight": "Dagboek light: gewicht, slaap, energie, sessies",
+      "diaryFull": "Volledig dagboek: slaapkwaliteit, stress, spierpijn, stappen, therapietrouw, notitie",
+      "trainingLog": "Trainingslog met sets, e1RM en spiervolume",
+      "loadMonitoring": "Belasting: weekbelasting, verhouding 7:28, blokvergelijking",
+      "nutrition": "Voeding: maaltijden, macro's, referentieverbruik, Open Food Facts",
+      "decisionLog": "Beslissingslog met effectcontrole",
+      "cockpit": "Cockpit met signalen en instelbare drempels"
     }
   },
   "legal": {

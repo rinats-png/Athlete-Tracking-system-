@@ -279,7 +279,8 @@
     "athleteIntro": "The free version tells you where you were. These plans tell you where you stand and where the curve is heading.",
     "athletePlan": {
       "plus": "For everyone who measures over years and wants to know where they stand and where it is going.",
-      "termin": "For an entrance test with a fixed date — police, fire service, armed forces, customs."
+      "termin": "For an entrance test with a fixed date — police, fire service, armed forces, customs.",
+      "pro": "For those who log daily and want to know whether a decision worked — with nutrition, cockpit and decision log."
     },
     "perYear": "{{amount}} € per year",
     "once": "{{amount}} € once",
@@ -318,7 +319,14 @@
       "targetStandards": "Target values of the specific entrance test",
       "unlimitedReports": "Reports without a cap",
       "whiteLabel": "Your own logo on the report",
-      "yearReview": "Year in review"
+      "yearReview": "Year in review",
+      "diaryLight": "Diary light: weight, sleep, energy, sessions",
+      "diaryFull": "Full diary: sleep quality, stress, soreness, steps, adherence, note",
+      "trainingLog": "Training log with sets, e1RM and muscle volume",
+      "loadMonitoring": "Load: weekly load, 7:28 ratio, block comparison",
+      "nutrition": "Nutrition: meals, macros, reference expenditure, Open Food Facts",
+      "decisionLog": "Decision log with effect check",
+      "cockpit": "Cockpit with signals and adjustable thresholds"
     }
   },
   "legal": {

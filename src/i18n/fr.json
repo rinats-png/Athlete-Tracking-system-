@@ -1754,5 +1754,30 @@
     "links": {
       "why": "Le poids vient du journal ; une décision sur la nutrition se consigne dans le cockpit."
     }
+  },
+  "billing": {
+    "partOf": "Inclus dans {{plan}}",
+    "unlock": "Débloquer",
+    "allPlans": "Toutes les formules",
+    "dataStays": "Ce que tu as déjà saisi reste dans tes données et dans ton export — une formule retient des fonctions, jamais des données.",
+    "perYear": "{{amount}} € par an",
+    "once": "{{amount}} € une fois",
+    "manage": "Gérer l'abonnement",
+    "manageHint": "Résilier, factures et moyen de paiement — chez Stripe, notre prestataire de paiement.",
+    "yourPlan": "Ta formule : {{plan}}",
+    "yourPlanFree": "Ta formule : gratuite",
+    "viaCoach": "Plus via ton entraîneur",
+    "checkoutSuccess": "Merci. Le déblocage arrive du serveur en quelques secondes — sinon, touche « Vérifier l'état ».",
+    "checkoutCancel": "Annulé. Rien n'a été débité.",
+    "signInFirst": "Pour acheter, tu dois être connecté — le déblocage appartient à ton compte, pas à cet appareil.",
+    "chooseYearly": "Choisir {{plan}} · {{amount}} € par an",
+    "chooseMonthly": "mensuel · {{amount}} €",
+    "chooseOnce": "Acheter {{plan}} · {{amount}} € une fois",
+    "unavailable": "Cette formule n'est pas encore disponible à l'achat.",
+    "failed": "La caisse n'a pas pu s'ouvrir. Réessaie.",
+    "offline": "Pas de connexion. Acheter nécessite le réseau.",
+    "refresh": "Vérifier l'état",
+    "stripeNote": "Le paiement passe par Stripe ; KYDON ne voit jamais les données de carte. Les abonnements sont résiliables à tout moment et courent jusqu'à la fin de la période payée.",
+    "current": "actuelle"
   }
 }

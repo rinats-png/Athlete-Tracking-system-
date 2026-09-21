@@ -71,9 +71,11 @@ test.describe('Der kostenlose Kern', () => {
 
 test.describe('Einzelnutzung', () => {
   test('die Zahlen stehen so, wie sie vereinbart sind', () => {
-    expect(athletePlan('plus').yearlyEur).toBe(29)
-    expect(athletePlan('plus').monthlyEur).toBe(3.9)
-    expect(athletePlan('termin').onceEur).toBe(49)
+    // Seit dem Ausbau (docs/ausbau.md §10): Plus 49, Pro 99, Termin 69 einmalig.
+    expect(athletePlan('plus').yearlyEur).toBe(49)
+    expect(athletePlan('plus').monthlyEur).toBe(4.9)
+    expect(athletePlan('pro').yearlyEur).toBe(99)
+    expect(athletePlan('termin').onceEur).toBe(69)
   })
 
   test('monatlich zahlen ist teurer als das Jahr — sichtbar, nicht versteckt', () => {
@@ -222,8 +224,10 @@ test.describe('Der Bildschirm', () => {
   test('die Preise stehen so da, wie sie vereinbart sind', async ({ page }) => {
     await openGuest(page)
     await page.goto('/preise', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByText('29 € im Jahr')).toBeVisible()
-    await expect(page.getByText('49 € einmalig')).toBeVisible()
+    // Plus (49) steht auch im Monatsvergleich («… im Jahr») — deshalb die Karte, nicht der Text.
+    await expect(page.getByTestId('plan-plus')).toContainText('49 € im Jahr')
+    await expect(page.getByTestId('plan-pro')).toContainText('99 € im Jahr')
+    await expect(page.getByText('69 € einmalig')).toBeVisible()
     await expect(page.getByText('149 € im Jahr')).toBeVisible()
     await expect(page.getByText('349 € im Jahr')).toBeVisible()
     await expect(page.getByText('699 € im Jahr')).toBeVisible()

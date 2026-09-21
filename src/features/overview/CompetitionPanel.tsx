@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { GateNotice } from '@/features/billing/Gate'
+import { useBilling } from '@/features/billing/BillingProvider'
 import { ArrowRight, Check, Circle, CircleDot, Minus } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
@@ -31,6 +33,7 @@ export function CompetitionPanel({
 }) {
   const { t } = useTranslation()
   const locale = useLocale()
+  const billing = useBilling()
   const competition = data.profile.competition
 
   const plan = useMemo(
@@ -41,6 +44,8 @@ export function CompetitionPanel({
     () => (competition ? projectableTests(data.results, competition.on, data.profile.testGoals).slice(0, 3) : []),
     [competition, data.results, data.profile.testGoals],
   )
+
+  if (!billing.can('forecast')) return <GateNotice feature="forecast" />
 
   if (!competition || !plan) {
     return (

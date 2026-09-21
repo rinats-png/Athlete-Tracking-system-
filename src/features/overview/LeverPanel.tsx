@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { GateNotice } from '@/features/billing/Gate'
+import { useBilling } from '@/features/billing/BillingProvider'
 import { ArrowRight } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
@@ -38,7 +40,9 @@ export function LeverPanel({
 }) {
   const { t } = useTranslation()
   const locale = useLocale()
+  const billing = useBilling()
   const rows = compact ? gap.ranked.slice(0, 3) : gap.ranked
+  if (!billing.can('requirementGap')) return <GateNotice feature="requirementGap" />
 
   return (
     <Panel ticked className={className} style={style} data-testid="lever-panel">

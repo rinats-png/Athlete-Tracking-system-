@@ -279,7 +279,8 @@
     "athleteIntro": "La versión gratuita te dice dónde estabas. Estos planes te dicen dónde estás y hacia dónde apunta la curva.",
     "athletePlan": {
       "plus": "Para quienes miden durante años y quieren saber dónde están y hacia dónde va.",
-      "termin": "Para una prueba de acceso con fecha fija: policía, bomberos, fuerzas armadas, aduanas."
+      "termin": "Para una prueba de acceso con fecha fija: policía, bomberos, fuerzas armadas, aduanas.",
+      "pro": "Para quienes registran a diario y quieren saber si una decisión funcionó — con nutrición, cockpit y registro de decisiones."
     },
     "perYear": "{{amount}} € al año",
     "once": "{{amount}} € un solo pago",
@@ -318,7 +319,14 @@
       "targetStandards": "Valores objetivo de la prueba de acceso concreta",
       "unlimitedReports": "Informes sin límite",
       "whiteLabel": "Tu propio logotipo en el informe",
-      "yearReview": "Resumen del año"
+      "yearReview": "Resumen del año",
+      "diaryLight": "Diario ligero: peso, sueño, energía, sesiones",
+      "diaryFull": "Diario completo: calidad del sueño, estrés, agujetas, pasos, adherencia, nota",
+      "trainingLog": "Registro de entrenamiento con series, e1RM y volumen muscular",
+      "loadMonitoring": "Carga: carga semanal, ratio 7:28, comparación de bloques",
+      "nutrition": "Nutrición: comidas, macros, gasto de referencia, Open Food Facts",
+      "decisionLog": "Registro de decisiones con comprobación del efecto",
+      "cockpit": "Cockpit con señales y umbrales ajustables"
     }
   },
   "legal": {

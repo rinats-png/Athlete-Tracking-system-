@@ -279,7 +279,8 @@
     "athleteIntro": "Die kostenlose Version sagt dir, wo du warst. Diese Stufen sagen dir, wo du stehst und wohin die Kurve zeigt.",
     "athletePlan": {
       "plus": "Für alle, die über Jahre messen und wissen wollen, wo sie im Vergleich stehen und wohin es geht.",
-      "termin": "Für eine Einstellungsprüfung mit festem Datum — Polizei, Feuerwehr, Bundeswehr, Zoll."
+      "termin": "Für eine Einstellungsprüfung mit festem Datum — Polizei, Feuerwehr, Bundeswehr, Zoll.",
+      "pro": "Für alle, die täglich eintragen und wissen wollen, ob eine Entscheidung gewirkt hat — mit Ernährung, Cockpit und Decision-Log."
     },
     "perYear": "{{amount}} € im Jahr",
     "once": "{{amount}} € einmalig",
@@ -318,7 +319,14 @@
       "targetStandards": "Zielwerte des konkreten Einstellungstests",
       "unlimitedReports": "Reports ohne Deckel",
       "whiteLabel": "Eigenes Logo im Report",
-      "yearReview": "Jahresrückblick"
+      "yearReview": "Jahresrückblick",
+      "diaryLight": "Tagebuch light: Gewicht, Schlaf, Energie, Einheiten",
+      "diaryFull": "Volles Tagebuch: Schlafqualität, Stress, Muskelkater, Schritte, Adhärenz, Notiz",
+      "trainingLog": "Trainingslog mit Sätzen, e1RM und Muskelvolumen",
+      "loadMonitoring": "Belastung: Wochenlast, Verhältnis 7:28, Blockvergleich",
+      "nutrition": "Ernährung: Mahlzeiten, Makros, Referenzumsatz, Open Food Facts",
+      "decisionLog": "Decision-Log mit Wirkungsprüfung",
+      "cockpit": "Cockpit mit Signalen und einstellbaren Schwellen"
     }
   },
   "legal": {

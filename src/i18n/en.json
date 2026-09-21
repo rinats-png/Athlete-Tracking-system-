@@ -1754,5 +1754,30 @@
     "links": {
       "why": "Weight comes from the diary; a nutrition decision is recorded in the cockpit."
     }
+  },
+  "billing": {
+    "partOf": "Part of {{plan}}",
+    "unlock": "Unlock",
+    "allPlans": "All plans",
+    "dataStays": "Anything you have already entered stays in your data and in your export — a plan holds back features, never data.",
+    "perYear": "{{amount}} € per year",
+    "once": "{{amount}} € once",
+    "manage": "Manage subscription",
+    "manageHint": "Cancel, invoices and payment method — at Stripe, our payment provider.",
+    "yourPlan": "Your plan: {{plan}}",
+    "yourPlanFree": "Your plan: free",
+    "viaCoach": "Plus via your coach",
+    "checkoutSuccess": "Thank you. The unlock arrives from the server within seconds — if not, tap “Check status”.",
+    "checkoutCancel": "Cancelled. Nothing was charged.",
+    "signInFirst": "You need to be signed in to buy — the unlock belongs to your account, not to this device.",
+    "chooseYearly": "Choose {{plan}} · {{amount}} € per year",
+    "chooseMonthly": "monthly · {{amount}} €",
+    "chooseOnce": "Buy {{plan}} · {{amount}} € once",
+    "unavailable": "This plan cannot be bought yet.",
+    "failed": "The checkout could not be opened. Please try again.",
+    "offline": "No connection. Buying needs a network.",
+    "refresh": "Check status",
+    "stripeNote": "Payment runs through Stripe; KYDON never sees card details. Subscriptions can be cancelled any time and run until the end of the paid period.",
+    "current": "current"
   }
 }

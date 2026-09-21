@@ -13,7 +13,7 @@ was sie trägt.
 
 | | alt | neu |
 |---|---|---|
-| Athleten | Report-Kontingente, 29,90 € je Report | Frei · Plus 29 €/Jahr · Termin 49 € einmalig |
+| Athleten | Report-Kontingente, 29,90 € je Report | Frei · Plus 49 €/Jahr · Pro 99 €/Jahr · Termin 69 € einmalig (seit dem Ausbau, docs/ausbau.md §10; vorher Plus 29 / Termin 49) |
 | Trainer | 39/79/149 € im Monat für 8/20/50 **Listenplätze** | 149/349/699 € im Jahr für 25/75/250 **gemessene** Athleten |
 
 **1. Der Report war an die falsche Zielgruppe gepreist.** Was zahlt ein Athlet

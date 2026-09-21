@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GateNotice } from '@/features/billing/Gate'
+import { useBilling } from '@/features/billing/BillingProvider'
 import { ArrowRight, ChevronLeft, ChevronRight, Plus, Trash2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -62,6 +64,7 @@ export function DiaryScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
   const { diary, saveDiaryEntry, diaryFields, setDiaryFields, role } = useAppData()
+  const billing = useBilling()
   const today = toDay(new Date())
   const [day, setDay] = useState(today)
   const entry = useMemo(() => entryOn(diary, day), [diary, day])
@@ -314,8 +317,13 @@ export function DiaryScreen() {
               <ArrowRight size={14} aria-hidden />
             </Link>
           </Button>
+          {!billing.can('diaryFull') && (
+            <div className="mt-2">
+              <GateNotice feature="diaryFull" compact />
+            </div>
+          )}
           <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={t('diary.more.title')}>
-            {DIARY_OPTIONAL_FIELDS.map((field) => (
+            {DIARY_OPTIONAL_FIELDS.filter((field) => billing.can('diaryFull') || enabled(field)).map((field) => (
               <button
                 key={field}
                 type="button"

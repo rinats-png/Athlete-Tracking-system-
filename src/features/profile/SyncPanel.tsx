@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GateNotice } from '@/features/billing/Gate'
+import { useBilling } from '@/features/billing/BillingProvider'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -36,6 +38,7 @@ export function SyncPanel() {
   const { t } = useTranslation()
   const locale = useLocale()
   const { store, mergeAthletes, mergeSeriesRows, athletes } = useAppData()
+  const billing = useBilling()
   const [enabled, setEnabled] = useState(readEnabled)
   const [signedIn, setSignedIn] = useState<boolean | null>(null)
   const [busy, setBusy] = useState(false)
@@ -65,6 +68,8 @@ export function SyncPanel() {
   }
 
   const nameOf = (id: string) => athletes.find((a) => a.id === id)?.name || id
+
+  if (!billing.can('sync')) return <GateNotice feature="sync" />
 
   return (
     <Panel>

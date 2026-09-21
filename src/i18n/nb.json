@@ -1754,5 +1754,30 @@
     "links": {
       "why": "Vekten kommer fra dagboken; en kostholdsbeslutning noteres i cockpiten."
     }
+  },
+  "billing": {
+    "partOf": "Del av {{plan}}",
+    "unlock": "Lås opp",
+    "allPlans": "Alle nivåer",
+    "dataStays": "Det du allerede har lagt inn, blir i dataene dine og i eksporten — et nivå holder tilbake funksjoner, aldri data.",
+    "perYear": "{{amount}} € per år",
+    "once": "{{amount}} € én gang",
+    "manage": "Administrer abonnement",
+    "manageHint": "Si opp, fakturaer og betalingsmiddel — hos Stripe, vår betalingsleverandør.",
+    "yourPlan": "Ditt nivå: {{plan}}",
+    "yourPlanFree": "Ditt nivå: gratis",
+    "viaCoach": "Plus via treneren din",
+    "checkoutSuccess": "Takk. Opplåsingen kommer fra serveren i løpet av sekunder — hvis ikke, trykk «Sjekk status».",
+    "checkoutCancel": "Avbrutt. Ingenting er belastet.",
+    "signInFirst": "Du må være logget inn for å kjøpe — opplåsingen hører til kontoen din, ikke til denne enheten.",
+    "chooseYearly": "Velg {{plan}} · {{amount}} € per år",
+    "chooseMonthly": "månedlig · {{amount}} €",
+    "chooseOnce": "Kjøp {{plan}} · {{amount}} € én gang",
+    "unavailable": "Dette nivået kan ikke kjøpes ennå.",
+    "failed": "Kassen kunne ikke åpnes. Prøv igjen.",
+    "offline": "Ingen tilkobling. Kjøp krever nett.",
+    "refresh": "Sjekk status",
+    "stripeNote": "Betalingen går via Stripe; KYDON ser aldri kortopplysninger. Abonnementer kan sies opp når som helst og løper til slutten av den betalte perioden.",
+    "current": "nåværende"
   }
 }

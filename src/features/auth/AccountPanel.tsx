@@ -6,6 +6,11 @@ import { clearAccount, plansForRole, readAccount } from './account'
 import { deleteAccount, signOut } from '@/lib/supabase/auth'
 import { clearSyncState } from '@/lib/supabase/sync'
 import { wipeDevice } from '@/lib/store/wipeDevice'
+import { useBilling } from '@/features/billing/BillingProvider'
+import { openBillingPortal } from '@/lib/billing'
+import { athletePlan, coachTier } from '@/data/pricing'
+import { pick } from '@/i18n/pick'
+import { useLocale } from '@/features/shared/useLocale'
 
 /**
  * Wer angemeldet ist — und der Weg hinaus.
@@ -30,8 +35,25 @@ export function AccountPanel() {
   const [askDelete, setAskDelete] = useState(false)
   const [deleteError, setDeleteError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
+  const billing = useBilling()
+  const locale = useLocale()
+  const [portalError, setPortalError] = useState<string | null>(null)
   const account = readAccount()
   if (!account) return null
+
+  // Die tatsächliche Stufe kommt aus den Freischaltungen, nicht aus der
+  // Wahl bei der Registrierung — die war eine Absicht, das hier ist der Stand.
+  const hasPaid = billing.state.entitlements.some((e) => e.status === 'active' || e.status === 'trialing' || e.status === 'past_due')
+  const currentName =
+    account.role === 'coach'
+      ? billing.access.coachTier === 'coach_free'
+        ? null
+        : pick(coachTier(billing.access.coachTier).name, locale)
+      : billing.access.athletePlan === 'free'
+        ? null
+        : billing.state.coachGrant && billing.access.athletePlan === 'plus' && !hasPaid
+          ? t('billing.viaCoach')
+          : pick(athletePlan(billing.access.athletePlan).name, locale)
 
   const plan = account.planId
     ? (plansForRole(account.role).find((p) => p.id === account.planId)?.label ?? null)
@@ -44,8 +66,28 @@ export function AccountPanel() {
         <p>{t('auth.signedInAs', { name: account.name })}</p>
         {account.email && <p className="readout text-ink-secondary">{account.email}</p>}
         <p className="text-ink-secondary">
-          {plan ? t('auth.planChosen', { plan }) : t('auth.planNone')}
+          {billing.enabled ? (currentName ? t('billing.yourPlan', { plan: currentName }) : t('billing.yourPlanFree')) : plan ? t('auth.planChosen', { plan }) : t('auth.planNone')}
         </p>
+        {billing.enabled && hasPaid && (
+          <div>
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              disabled={busy}
+              onClick={async () => {
+                setPortalError(null)
+                const r = await openBillingPortal()
+                if (r.ok) window.location.assign(r.url)
+                else setPortalError(t(`billing.${r.reason === 'offline' ? 'offline' : r.reason === 'not_signed_in' ? 'signInFirst' : 'failed'}`))
+              }}
+            >
+              {t('billing.manage')}
+            </Button>
+            <p className="mt-1 text-[12px] text-ink-muted">{t('billing.manageHint')}</p>
+            {portalError && <p role="alert" className="mt-1 text-[12px] text-warning">{portalError}</p>}
+          </div>
+        )}
         <p className="text-[12px] text-ink-muted">{t('auth.signOutKeepsData')}</p>
         <div className="flex flex-wrap gap-2 pt-1">
           <Button

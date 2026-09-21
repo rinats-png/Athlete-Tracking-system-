@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft, Check } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -27,6 +27,9 @@ import {
 } from '@/data/pricing'
 import { formatNumber } from '@/lib/format'
 import { pick } from '@/i18n/pick'
+import { useBilling } from '@/features/billing/BillingProvider'
+import { startCheckout, type CheckoutInterval } from '@/lib/billing'
+import { currentUser } from '@/lib/supabase/auth'
 
 /**
  * Was KYDON kosten wird.
@@ -57,6 +60,9 @@ export function PricingScreen() {
   const tier = coachTierFor(measured)
 
   const featureName = (feature: PlanFeature) => t(`pricing.feature.${feature}`)
+  // Von einer Schranke hierher: die genannte Stufe steht hervorgehoben.
+  const [params] = useSearchParams()
+  const wanted = params.get('plan')
 
   return (
     <>
@@ -72,12 +78,7 @@ export function PricingScreen() {
         intro={t('pricing.intro')}
       />
 
-      <p
-        role="status"
-        className="mb-4 border-l-2 border-warning bg-warning/10 px-3 py-2 text-[13px] leading-relaxed text-ink-secondary"
-      >
-        {t('pricing.notYet')}
-      </p>
+      <BillingStatus />
 
       {/* --- Der kostenlose Kern ------------------------------------------ */}
       <Panel float>
@@ -110,6 +111,7 @@ export function PricingScreen() {
             money={money}
             featureName={featureName}
             locale={locale}
+            highlight={wanted === plan.id}
           />
         ))}
       </div>
@@ -186,17 +188,19 @@ function AthletePlanCard({
   money,
   featureName,
   locale,
+  highlight = false,
 }: {
   plan: AthletePlan
   money: (value: number) => string
   featureName: (feature: PlanFeature) => string
   locale: ReturnType<typeof useLocale>
+  highlight?: boolean
 }) {
   const { t } = useTranslation()
   const monthlyYear = yearlyCostOfMonthly(plan)
 
   return (
-    <Panel float={plan.id === 'plus'}>
+    <Panel float={plan.id === 'plus' || highlight} data-testid={`plan-${plan.id}`}>
       <PanelHeader
         title={pick(plan.name, locale)}
         subtitle={
@@ -231,8 +235,137 @@ function AthletePlanCard({
             </li>
           ))}
         </ul>
+        <BuyButtons id={plan.id} name={pick(plan.name, locale)} yearly={plan.yearlyEur} monthly={plan.monthlyEur} once={plan.onceEur} money={money} />
       </div>
     </Panel>
+  )
+}
+
+/**
+ * Was der Bezahlweg gerade sagt — ganz oben, vor den Karten.
+ *
+ * Ohne Bezahlweg: der alte Hinweis, dass nichts gekauft werden kann. Mit:
+ * die eigene Stufe, das Ergebnis einer Rückkehr von der Kasse
+ * (?checkout=success|cancel) und der Hinweis, dass man angemeldet sein
+ * muss. Nach «success» wird der Stand einmal frisch geholt — der Webhook
+ * ist meist schneller als der Mensch, aber nicht immer; dafür der Knopf.
+ */
+function BillingStatus() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  const billing = useBilling()
+  const [params] = useSearchParams()
+  const checkout = params.get('checkout')
+  const [signedIn, setSignedIn] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (!billing.enabled) return
+    let alive = true
+    void currentUser().then((u) => {
+      if (alive) setSignedIn(u != null)
+    })
+    if (checkout === 'success') void billing.refresh()
+    return () => {
+      alive = false
+    }
+    // Einmal beim Öffnen und bei Rückkehr von der Kasse — nicht bei jeder Änderung des Stands.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [billing.enabled, checkout])
+
+  if (!billing.enabled) {
+    return (
+      <p role="status" className="mb-4 border-l-2 border-warning bg-warning/10 px-3 py-2 text-[13px] leading-relaxed text-ink-secondary">
+        {t('pricing.notYet')}
+      </p>
+    )
+  }
+
+  const { access, state } = billing
+  const name =
+    access.role === 'coach'
+      ? access.coachTier === 'coach_free'
+        ? null
+        : pick(COACH_TIERS.find((c) => c.id === access.coachTier)!.name, locale)
+      : access.athletePlan === 'free'
+        ? null
+        : state.coachGrant && access.athletePlan === 'plus' && state.entitlements.length === 0
+          ? t('billing.viaCoach')
+          : pick(ATHLETE_PLANS.find((p) => p.id === access.athletePlan)!.name, locale)
+
+  return (
+    <div className="mb-4 space-y-2 text-[13px] leading-relaxed" data-testid="billing-status">
+      {checkout === 'success' && (
+        <p role="status" className="border-l-2 border-good bg-good/10 px-3 py-2 text-ink-secondary">
+          {t('billing.checkoutSuccess')}
+        </p>
+      )}
+      {checkout === 'cancel' && (
+        <p role="status" className="border-l-2 border-line-strong px-3 py-2 text-ink-secondary">
+          {t('billing.checkoutCancel')}
+        </p>
+      )}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <p className="readout">{name ? t('billing.yourPlan', { plan: name }) : t('billing.yourPlanFree')}</p>
+        <Button variant="ghost" size="sm" className="-ml-3" onClick={() => void billing.refresh()}>
+          {t('billing.refresh')}
+        </Button>
+      </div>
+      {signedIn === false && <p className="text-ink-secondary">{t('billing.signInFirst')}</p>}
+      <p className="text-[12px] text-ink-muted">{t('billing.stripeNote')}</p>
+    </div>
+  )
+}
+
+/**
+ * Die Kaufknöpfe einer Karte. Nur mit Bezahlweg; die Karte ist sonst eine
+ * Auskunft. Ein Tipp legt bei Stripe eine Kasse an und geht dorthin —
+ * Kartendaten sieht diese App nie.
+ */
+function BuyButtons({ id, name, yearly, monthly, once, money }: { id: string; name: string; yearly: number | null; monthly: number | null; once: number | null; money: (v: number) => string }) {
+  const { t } = useTranslation()
+  const billing = useBilling()
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  if (!billing.enabled) return null
+  const isCurrent = billing.access.athletePlan === id || billing.access.coachTier === id
+
+  const go = async (interval: CheckoutInterval) => {
+    setBusy(true)
+    setError(null)
+    const r = await startCheckout(id as never, interval)
+    setBusy(false)
+    if (r.ok) {
+      window.location.assign(r.url)
+      return
+    }
+    setError(t(`billing.${r.reason === 'not_signed_in' ? 'signInFirst' : r.reason === 'offline' ? 'offline' : r.reason === 'unavailable' ? 'unavailable' : 'failed'}`))
+  }
+
+  return (
+    <div className="mt-3 space-y-2">
+      {isCurrent && <p className="label-tag">{t('billing.current')}</p>}
+      <div className="flex flex-wrap gap-2">
+        {once != null ? (
+          <Button variant="primary" size="sm" disabled={busy || isCurrent} onClick={() => void go('once')}>
+            {t('billing.chooseOnce', { plan: name, amount: money(once) })}
+          </Button>
+        ) : yearly != null ? (
+          <Button variant="primary" size="sm" disabled={busy || isCurrent} onClick={() => void go('yearly')}>
+            {t('billing.chooseYearly', { plan: name, amount: money(yearly) })}
+          </Button>
+        ) : null}
+        {monthly != null && (
+          <Button variant="outline" size="sm" disabled={busy || isCurrent} onClick={() => void go('monthly')}>
+            {t('billing.chooseMonthly', { amount: money(monthly) })}
+          </Button>
+        )}
+      </div>
+      {error && (
+        <p role="alert" className="text-[12px] text-warning">
+          {error}
+        </p>
+      )}
+    </div>
   )
 }
 
@@ -313,6 +446,7 @@ function CoachTierCard({
             {t('pricing.sameAs', { tier: pick(previous.name, locale) })}
           </p>
         )}
+        {tier.yearlyEur != null && <BuyButtons id={tier.id} name={pick(tier.name, locale)} yearly={tier.yearlyEur} monthly={tier.monthlyEur} once={null} money={money} />}
       </div>
     </Panel>
   )
