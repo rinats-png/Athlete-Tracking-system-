@@ -731,9 +731,22 @@ Bestand ist ein kuratierter Kern aus BLS oder USDA. Dazu: Ratenbegrenzung
 nach der API-Dokumentation, App-Kennung an jeder Abfrage, Open Food Facts
 als externer Dienst in der Datenschutzerklärung.
 
-**Offen, unverändert:** ein kuratierter Ausbau des Kerns aus BLS oder
-USDA, ein echter Zwei-Geräte-Abgleich und ein echter Testkauf am lebenden
-System, Elite mit S5 — und die Anwaltsgespräche aus der Rechtsprüfung.
+**Kuratierter Kern entschieden (21.09.2026, `docs/lebensmitteldaten.md`):**
+Der BLS wäre fachlich die erste Wahl, ist aber kostenpflichtig und im
+offenen Quelltext nicht weitergabefähig — **USDA FoodData Central** ist
+gemeinfrei und darf mitgeliefert werden, taugt aber nur für Rohware.
+Gebaut sind: Quelle je Eintrag mit Lizenz und Datenstand, die Zusammen-
+führung v4 plus USDA (eine Quelle je Eintrag, nie gemischt), das Werkzeug
+`scripts/buildFoodCore.mjs` mit Prüfung jeder Nährstoffkennung gegen Name
+und Einheit, 56 Suchbegriffe für die Einträge ohne Mikronährstoffe.
+**Gefüllt ist der USDA-Bestand nicht:** die Entwicklungsumgebung hat
+keinen Zugang zu `fdc.nal.usda.gov`, und Nährwerte aus dem Gedächtnis
+wären genau der Fehler, den §89 verbietet.
+
+**Offen, unverändert:** die Kuratierung des USDA-Kerns durch einen
+Menschen mit Netzzugang, ein echter Zwei-Geräte-Abgleich und ein echter
+Testkauf am lebenden System, Elite mit S5 — und die Anwaltsgespräche aus
+der Rechtsprüfung.
 
 ## 14. Zusammenfassung in drei Sätzen
 

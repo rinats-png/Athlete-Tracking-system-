@@ -347,7 +347,17 @@
       "incomplete": "Uppgifterna är ofullständiga: {{fields}} saknas fortfarande. De måste fyllas i före offentlig drift — utan dem uppfyller tjänsten inte kraven.",
       "note": "Poster utan värde saknas, de är inte dolda. De finns i src/data/operator.ts.",
       "sources": "Datakällor och licenser",
-      "sourcesIntro": "Vad appen hämtar från externa databaser — med erkännande, som licensen kräver."
+      "sourcesIntro": "Vad appen hämtar från externa databaser — med erkännande, som licensen kräver.",
+      "source": {
+        "v4": {
+          "licence": "Eget bestånd, hämtat från coachingsystemet.",
+          "quality": "Makron kontrollerade för alla poster; mikronäringsämnen bara där de fanns registrerade."
+        },
+        "usda": {
+          "licence": "Fri (verk av en amerikansk federal myndighet); erkännande önskas.",
+          "quality": "Analyserade värden med datum per post. Avser den amerikanska marknaden — ovidkommande för råvaror, inte för bearbetade livsmedel."
+        }
+      }
     },
     "privacy": {
       "title": "Integritet"

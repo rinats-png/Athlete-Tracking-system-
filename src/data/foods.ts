@@ -17,6 +17,9 @@
  * Hand pflegen, sondern dort ändern und neu erzeugen.
  */
 
+import type { FoodSourceId } from "@/data/foodSources";
+import { USDA_FOODS } from "@/data/foodsUsda";
+
 export type FoodCategory = string;
 
 export interface Per100 {
@@ -46,15 +49,26 @@ export interface CoreFood {
   key: string;
   name: string;
   category: FoodCategory;
+  /** Woher die Werte stammen — eine Quelle je Eintrag (src/data/foodSources.ts). */
+  source: FoodSourceId;
+  /** Kennung beim Herausgeber, etwa «FDC 169705». Leer beim eigenen Bestand. */
+  sourceRef?: string;
+  /** Datenstand beim Herausgeber. SR Legacy wird nicht mehr gepflegt — das gehört an den Eintrag. */
+  sourceDate?: string;
   per100: Per100;
   micro?: Micro;
 }
 
-export const CORE_FOODS: CoreFood[] = [
+/**
+ * Der Bestand aus dem Coaching-System v4. Er ist die eine Haelfte des Kerns;
+ * die andere kommt aus USDA FoodData Central und steht in foodsUsda.ts.
+ */
+export const V4_FOODS: CoreFood[] = [
   {
     key: "haferflocken_zart",
     name: "Haferflocken (zart)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 372,
       protein: 13.5,
@@ -81,6 +95,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "haferflocken_kernig",
     name: "Haferflocken (kernig)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 372,
       protein: 13.5,
@@ -107,6 +122,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "reis_weiss_roh",
     name: "Reis, weiß (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 354,
       protein: 7.0,
@@ -133,6 +149,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "reis_basmati_roh",
     name: "Reis, Basmati (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 351,
       protein: 8.0,
@@ -159,6 +176,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "reis_vollkorn_roh",
     name: "Reis, Vollkorn (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 352,
       protein: 7.2,
@@ -185,6 +203,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "reis_jasmin_roh",
     name: "Reis, Jasmin (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 356,
       protein: 7.0,
@@ -199,6 +218,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "reis_weiss_gekocht",
     name: "Reis, weiß (gekocht)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 130,
       protein: 2.7,
@@ -213,6 +233,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "nudeln_hartweizen_roh",
     name: "Nudeln, Hartweizen (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 352,
       protein: 12.0,
@@ -239,6 +260,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "nudeln_vollkorn_roh",
     name: "Nudeln, Vollkorn (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 340,
       protein: 13.0,
@@ -265,6 +287,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "nudeln_gekocht",
     name: "Nudeln, gekocht",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 158,
       protein: 5.8,
@@ -279,6 +302,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "reiswaffeln",
     name: "Reiswaffeln",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 387,
       protein: 8.0,
@@ -293,6 +317,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "couscous_roh",
     name: "Couscous (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 354,
       protein: 12.5,
@@ -307,6 +332,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "bulgur_roh",
     name: "Bulgur (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 342,
       protein: 12.3,
@@ -333,6 +359,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "quinoa_roh",
     name: "Quinoa (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 368,
       protein: 14.1,
@@ -359,6 +386,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "hirse_roh",
     name: "Hirse (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 378,
       protein: 11.0,
@@ -385,6 +413,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "buchweizen_roh",
     name: "Buchweizen (roh)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 343,
       protein: 13.3,
@@ -411,6 +440,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "dinkel_korn",
     name: "Dinkel (Korn)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 338,
       protein: 14.6,
@@ -437,6 +467,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "cornflakes_ungesuesst",
     name: "Cornflakes (ungesüßt)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 357,
       protein: 7.5,
@@ -451,6 +482,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "muesli_basis_ungesuesst",
     name: "Müsli, Basis (ungesüßt)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 360,
       protein: 11.0,
@@ -465,6 +497,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "brot_vollkorn",
     name: "Brot, Vollkorn",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 250,
       protein: 9.0,
@@ -491,6 +524,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "brot_weizen_toast",
     name: "Brot, Weizen (Toast)",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 265,
       protein: 8.5,
@@ -517,6 +551,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "brot_roggen",
     name: "Brot, Roggen",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 230,
       protein: 7.0,
@@ -543,6 +578,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "brot_dinkel_vollkorn",
     name: "Brot, Dinkel-Vollkorn",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 245,
       protein: 10.0,
@@ -557,6 +593,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "broetchen_weizen",
     name: "Brötchen, Weizen",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 280,
       protein: 9.0,
@@ -571,6 +608,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "knaeckebrot",
     name: "Knäckebrot",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 334,
       protein: 10.0,
@@ -597,6 +635,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tortilla_weizen",
     name: "Tortilla, Weizen",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 300,
       protein: 8.0,
@@ -611,6 +650,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "wraps_vollkorn",
     name: "Wraps, Vollkorn",
     category: "Getreide",
+    source: "v4",
     per100: {
       kcal: 280,
       protein: 9.0,
@@ -625,6 +665,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kartoffeln_roh",
     name: "Kartoffeln (roh)",
     category: "Kartoffeln",
+    source: "v4",
     per100: {
       kcal: 70,
       protein: 2.0,
@@ -651,6 +692,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kartoffeln_gekocht",
     name: "Kartoffeln (gekocht)",
     category: "Kartoffeln",
+    source: "v4",
     per100: {
       kcal: 72,
       protein: 1.9,
@@ -677,6 +719,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "suesskartoffel_roh",
     name: "Süßkartoffel (roh)",
     category: "Kartoffeln",
+    source: "v4",
     per100: {
       kcal: 86,
       protein: 1.6,
@@ -703,6 +746,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "suesskartoffel_gebacken",
     name: "Süßkartoffel (gebacken)",
     category: "Kartoffeln",
+    source: "v4",
     per100: {
       kcal: 90,
       protein: 2.0,
@@ -717,6 +761,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "pommes_frites_backofen",
     name: "Pommes frites (Backofen)",
     category: "Kartoffeln",
+    source: "v4",
     per100: {
       kcal: 180,
       protein: 3.0,
@@ -731,6 +776,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kartoffelpueree_fertig",
     name: "Kartoffelpüree (fertig)",
     category: "Kartoffeln",
+    source: "v4",
     per100: {
       kcal: 90,
       protein: 2.0,
@@ -745,6 +791,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mais_dose",
     name: "Mais (Dose)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 80,
       protein: 2.5,
@@ -759,6 +806,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "linsen_rot_roh",
     name: "Linsen, rot (roh)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 352,
       protein: 25.0,
@@ -785,6 +833,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "linsen_braun_roh",
     name: "Linsen, braun (roh)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 340,
       protein: 24.0,
@@ -799,6 +848,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "linsen_gekocht",
     name: "Linsen (gekocht)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 116,
       protein: 9.0,
@@ -825,6 +875,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kichererbsen_roh",
     name: "Kichererbsen (roh)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 364,
       protein: 19.0,
@@ -851,6 +902,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kichererbsen_dose",
     name: "Kichererbsen (Dose)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 139,
       protein: 7.0,
@@ -877,6 +929,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kidneybohnen_dose",
     name: "Kidneybohnen (Dose)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 110,
       protein: 7.0,
@@ -903,6 +956,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "schwarze_bohnen_gekocht",
     name: "Schwarze Bohnen (gekocht)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 132,
       protein: 8.9,
@@ -929,6 +983,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "weisse_bohnen_dose",
     name: "Weiße Bohnen (Dose)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 100,
       protein: 6.5,
@@ -943,6 +998,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "edamame_gekocht",
     name: "Edamame (gekocht)",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 122,
       protein: 11.9,
@@ -969,6 +1025,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tofu_natur",
     name: "Tofu, natur",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 76,
       protein: 8.0,
@@ -995,6 +1052,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tofu_geraeuchert",
     name: "Tofu, geräuchert",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 150,
       protein: 16.0,
@@ -1009,6 +1067,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tempeh",
     name: "Tempeh",
     category: "Hülsenfrüchte",
+    source: "v4",
     per100: {
       kcal: 192,
       protein: 20.3,
@@ -1035,6 +1094,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "erbsen_tk",
     name: "Erbsen, TK",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 81,
       protein: 5.4,
@@ -1061,6 +1121,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "haehnchenbrust_roh",
     name: "Hähnchenbrust (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 110,
       protein: 23.0,
@@ -1087,6 +1148,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "haehnchenbrust_gegart",
     name: "Hähnchenbrust (gegart)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 165,
       protein: 31.0,
@@ -1113,6 +1175,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "haehnchenschenkel_ohne_haut_roh",
     name: "Hähnchenschenkel ohne Haut (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 120,
       protein: 19.0,
@@ -1127,6 +1190,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "haehnchenschenkel_mit_haut_roh",
     name: "Hähnchenschenkel mit Haut (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 210,
       protein: 17.0,
@@ -1141,6 +1205,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "putenbrust_roh",
     name: "Putenbrust (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 105,
       protein: 24.0,
@@ -1167,6 +1232,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "putenhackfleisch_roh",
     name: "Putenhackfleisch (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 150,
       protein: 19.0,
@@ -1193,6 +1259,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rinderhackfleisch_5_fett_roh",
     name: "Rinderhackfleisch 5 % Fett (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 137,
       protein: 21.0,
@@ -1219,6 +1286,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rinderhackfleisch_10_fett_roh",
     name: "Rinderhackfleisch 10 % Fett (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 176,
       protein: 20.0,
@@ -1245,6 +1313,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rinderhackfleisch_20_fett_roh",
     name: "Rinderhackfleisch 20 % Fett (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 254,
       protein: 17.0,
@@ -1259,6 +1328,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rinderfilet_roh",
     name: "Rinderfilet (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 120,
       protein: 21.0,
@@ -1285,6 +1355,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rindersteak_rumpsteak_roh",
     name: "Rindersteak, Rumpsteak (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 150,
       protein: 21.0,
@@ -1311,6 +1382,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rinderhuefte_roh",
     name: "Rinderhüfte (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 120,
       protein: 21.5,
@@ -1325,6 +1397,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rindergulasch_roh",
     name: "Rindergulasch (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 130,
       protein: 21.0,
@@ -1339,6 +1412,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "schweinefilet_roh",
     name: "Schweinefilet (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 110,
       protein: 22.0,
@@ -1365,6 +1439,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "schweinelachs_kotelett_mager_roh",
     name: "Schweinelachs / Kotelett mager (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 140,
       protein: 21.0,
@@ -1379,6 +1454,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "schweinehackfleisch_roh",
     name: "Schweinehackfleisch (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 260,
       protein: 17.0,
@@ -1393,6 +1469,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "schweinebauch_roh",
     name: "Schweinebauch (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 400,
       protein: 12.0,
@@ -1407,6 +1484,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "lammfilet_roh",
     name: "Lammfilet (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 125,
       protein: 20.5,
@@ -1433,6 +1511,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kalbsschnitzel_roh",
     name: "Kalbsschnitzel (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 100,
       protein: 21.0,
@@ -1459,6 +1538,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "wild_hirsch_roh",
     name: "Wild, Hirsch (roh)",
     category: "Fleisch",
+    source: "v4",
     per100: {
       kcal: 120,
       protein: 22.0,
@@ -1473,6 +1553,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "schinken_gekocht",
     name: "Schinken, gekocht",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 120,
       protein: 20.0,
@@ -1499,6 +1580,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "putenbrust_aufschnitt",
     name: "Putenbrust-Aufschnitt",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 105,
       protein: 21.0,
@@ -1525,6 +1607,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "schinken_roh_serrano_parma",
     name: "Schinken, roh (Serrano/Parma)",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 250,
       protein: 30.0,
@@ -1539,6 +1622,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "salami",
     name: "Salami",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 380,
       protein: 20.0,
@@ -1553,6 +1637,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "bacon_roh",
     name: "Bacon (roh)",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 400,
       protein: 13.0,
@@ -1567,6 +1652,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "bratwurst",
     name: "Bratwurst",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 300,
       protein: 12.0,
@@ -1581,6 +1667,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "wiener_wuerstchen",
     name: "Wiener Würstchen",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 290,
       protein: 12.0,
@@ -1595,6 +1682,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "corned_beef",
     name: "Corned Beef",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 125,
       protein: 22.0,
@@ -1609,6 +1697,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "beef_jerky",
     name: "Beef Jerky",
     category: "Wurst",
+    source: "v4",
     per100: {
       kcal: 290,
       protein: 45.0,
@@ -1623,6 +1712,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "lachs_roh",
     name: "Lachs (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 200,
       protein: 20.0,
@@ -1649,6 +1739,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "lachs_geraeuchert",
     name: "Lachs, geräuchert",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 180,
       protein: 22.0,
@@ -1675,6 +1766,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "thunfisch_roh",
     name: "Thunfisch (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 110,
       protein: 24.0,
@@ -1701,6 +1793,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "thunfisch_dose_in_wasser",
     name: "Thunfisch (Dose, in Wasser)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 105,
       protein: 24.0,
@@ -1727,6 +1820,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "thunfisch_dose_in_oel_abgetropft",
     name: "Thunfisch (Dose, in Öl, abgetropft)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 190,
       protein: 26.0,
@@ -1741,6 +1835,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kabeljau_roh",
     name: "Kabeljau (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 80,
       protein: 17.5,
@@ -1767,6 +1862,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "seelachs_roh",
     name: "Seelachs (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 80,
       protein: 18.0,
@@ -1793,6 +1889,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "forelle_roh",
     name: "Forelle (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 105,
       protein: 19.0,
@@ -1819,6 +1916,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "makrele_roh",
     name: "Makrele (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 190,
       protein: 19.0,
@@ -1845,6 +1943,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "hering_roh",
     name: "Hering (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 190,
       protein: 18.0,
@@ -1871,6 +1970,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sardinen_dose_in_oel_abgetropft",
     name: "Sardinen (Dose, in Öl, abgetropft)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 210,
       protein: 25.0,
@@ -1897,6 +1997,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "garnelen_roh",
     name: "Garnelen (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 85,
       protein: 20.0,
@@ -1923,6 +2024,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tintenfisch_roh",
     name: "Tintenfisch (roh)",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 80,
       protein: 16.0,
@@ -1937,6 +2039,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "fischstaebchen",
     name: "Fischstäbchen",
     category: "Fisch",
+    source: "v4",
     per100: {
       kcal: 220,
       protein: 12.0,
@@ -1951,6 +2054,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "ei_groesse_m_ca_58_g_pro_100_g",
     name: "Ei, Größe M (ca. 58 g) – pro 100 g",
     category: "Eier",
+    source: "v4",
     per100: {
       kcal: 155,
       protein: 12.5,
@@ -1977,6 +2081,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "eiweiss_eiklar",
     name: "Eiweiß (Eiklar)",
     category: "Eier",
+    source: "v4",
     per100: {
       kcal: 50,
       protein: 11.0,
@@ -2003,6 +2108,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "eigelb",
     name: "Eigelb",
     category: "Eier",
+    source: "v4",
     per100: {
       kcal: 350,
       protein: 16.0,
@@ -2029,6 +2135,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "milch_1_5",
     name: "Milch 1,5 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 47,
       protein: 3.4,
@@ -2055,6 +2162,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "milch_3_5",
     name: "Milch 3,5 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 64,
       protein: 3.3,
@@ -2081,6 +2189,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "milch_0_1",
     name: "Milch 0,1 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 35,
       protein: 3.5,
@@ -2095,6 +2204,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "buttermilch",
     name: "Buttermilch",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 36,
       protein: 3.5,
@@ -2121,6 +2231,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "magerquark",
     name: "Magerquark",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 67,
       protein: 12.0,
@@ -2147,6 +2258,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "speisequark_20",
     name: "Speisequark 20 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 110,
       protein: 12.5,
@@ -2173,6 +2285,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "speisequark_40",
     name: "Speisequark 40 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 160,
       protein: 11.0,
@@ -2187,6 +2300,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "skyr_natur",
     name: "Skyr, natur",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 63,
       protein: 11.0,
@@ -2213,6 +2327,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "griechischer_joghurt_0",
     name: "Griechischer Joghurt 0 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 57,
       protein: 10.0,
@@ -2239,6 +2354,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "griechischer_joghurt_2",
     name: "Griechischer Joghurt 2 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 73,
       protein: 9.5,
@@ -2265,6 +2381,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "griechischer_joghurt_10",
     name: "Griechischer Joghurt 10 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 130,
       protein: 4.5,
@@ -2279,6 +2396,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "joghurt_natur_1_5",
     name: "Joghurt, natur 1,5 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 50,
       protein: 3.9,
@@ -2305,6 +2423,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "joghurt_natur_3_5",
     name: "Joghurt, natur 3,5 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 67,
       protein: 3.8,
@@ -2331,6 +2450,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "huettenkaese_koerniger_frischkaese",
     name: "Hüttenkäse (körniger Frischkäse)",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 98,
       protein: 12.5,
@@ -2357,6 +2477,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "frischkaese_doppelrahm",
     name: "Frischkäse, Doppelrahm",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 290,
       protein: 6.0,
@@ -2371,6 +2492,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "frischkaese_light",
     name: "Frischkäse, light",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 150,
       protein: 9.0,
@@ -2385,6 +2507,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "gouda_jung",
     name: "Gouda (jung)",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 350,
       protein: 24.0,
@@ -2411,6 +2534,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "emmentaler",
     name: "Emmentaler",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 380,
       protein: 28.0,
@@ -2437,6 +2561,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "edamer",
     name: "Edamer",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 330,
       protein: 25.0,
@@ -2451,6 +2576,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mozzarella",
     name: "Mozzarella",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 250,
       protein: 18.0,
@@ -2477,6 +2603,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mozzarella_light",
     name: "Mozzarella, light",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 160,
       protein: 20.0,
@@ -2491,6 +2618,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "parmesan",
     name: "Parmesan",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 400,
       protein: 36.0,
@@ -2517,6 +2645,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "feta",
     name: "Feta",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 260,
       protein: 17.0,
@@ -2543,6 +2672,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "cheddar",
     name: "Cheddar",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 400,
       protein: 25.0,
@@ -2557,6 +2687,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "harzer_kaese",
     name: "Harzer Käse",
     category: "Käse",
+    source: "v4",
     per100: {
       kcal: 125,
       protein: 30.0,
@@ -2583,6 +2714,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "butter",
     name: "Butter",
     category: "Fette",
+    source: "v4",
     per100: {
       kcal: 740,
       protein: 0.7,
@@ -2609,6 +2741,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sahne_30",
     name: "Sahne 30 %",
     category: "Milch",
+    source: "v4",
     per100: {
       kcal: 290,
       protein: 2.5,
@@ -2623,6 +2756,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "molkenprotein_whey_isolat",
     name: "Molkenprotein (Whey), Isolat",
     category: "Supplement",
+    source: "v4",
     per100: {
       kcal: 370,
       protein: 88.0,
@@ -2649,6 +2783,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "molkenprotein_whey_konzentrat",
     name: "Molkenprotein (Whey), Konzentrat",
     category: "Supplement",
+    source: "v4",
     per100: {
       kcal: 390,
       protein: 78.0,
@@ -2675,6 +2810,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "casein_pulver",
     name: "Casein-Pulver",
     category: "Supplement",
+    source: "v4",
     per100: {
       kcal: 365,
       protein: 80.0,
@@ -2689,6 +2825,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "veganes_proteinpulver_erbse_reis",
     name: "Veganes Proteinpulver (Erbse/Reis)",
     category: "Supplement",
+    source: "v4",
     per100: {
       kcal: 380,
       protein: 75.0,
@@ -2703,6 +2840,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "proteinriegel_durchschnitt",
     name: "Proteinriegel (Durchschnitt)",
     category: "Supplement",
+    source: "v4",
     per100: {
       kcal: 360,
       protein: 30.0,
@@ -2717,6 +2855,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "maltodextrin",
     name: "Maltodextrin",
     category: "Supplement",
+    source: "v4",
     per100: {
       kcal: 380,
       protein: 0.0,
@@ -2731,6 +2870,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "olivenoel",
     name: "Olivenöl",
     category: "Fette",
+    source: "v4",
     per100: {
       kcal: 884,
       protein: 0.0,
@@ -2757,6 +2897,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rapsoel",
     name: "Rapsöl",
     category: "Fette",
+    source: "v4",
     per100: {
       kcal: 884,
       protein: 0.0,
@@ -2783,6 +2924,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kokosoel",
     name: "Kokosöl",
     category: "Fette",
+    source: "v4",
     per100: {
       kcal: 892,
       protein: 0.0,
@@ -2809,6 +2951,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "leinoel",
     name: "Leinöl",
     category: "Fette",
+    source: "v4",
     per100: {
       kcal: 884,
       protein: 0.0,
@@ -2835,6 +2978,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "margarine",
     name: "Margarine",
     category: "Fette",
+    source: "v4",
     per100: {
       kcal: 720,
       protein: 0.2,
@@ -2849,6 +2993,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "erdnussbutter",
     name: "Erdnussbutter",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 600,
       protein: 25.0,
@@ -2875,6 +3020,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mandelmus",
     name: "Mandelmus",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 620,
       protein: 21.0,
@@ -2889,6 +3035,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mandeln",
     name: "Mandeln",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 600,
       protein: 21.0,
@@ -2915,6 +3062,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "walnuesse",
     name: "Walnüsse",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 670,
       protein: 15.0,
@@ -2941,6 +3089,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "cashewkerne",
     name: "Cashewkerne",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 570,
       protein: 18.0,
@@ -2967,6 +3116,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "haselnuesse",
     name: "Haselnüsse",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 640,
       protein: 15.0,
@@ -2993,6 +3143,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "erdnuesse_geroestet",
     name: "Erdnüsse, geröstet",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 600,
       protein: 26.0,
@@ -3019,6 +3170,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "pistazien",
     name: "Pistazien",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 560,
       protein: 20.0,
@@ -3033,6 +3185,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "paranuesse",
     name: "Paranüsse",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 660,
       protein: 14.0,
@@ -3047,6 +3200,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kuerbiskerne",
     name: "Kürbiskerne",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 560,
       protein: 30.0,
@@ -3073,6 +3227,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sonnenblumenkerne",
     name: "Sonnenblumenkerne",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 580,
       protein: 21.0,
@@ -3099,6 +3254,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "chiasamen",
     name: "Chiasamen",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 486,
       protein: 17.0,
@@ -3125,6 +3281,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "leinsamen",
     name: "Leinsamen",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 530,
       protein: 18.0,
@@ -3151,6 +3308,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sesam",
     name: "Sesam",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 570,
       protein: 17.7,
@@ -3177,6 +3335,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kokosraspeln",
     name: "Kokosraspeln",
     category: "Nüsse",
+    source: "v4",
     per100: {
       kcal: 660,
       protein: 7.0,
@@ -3191,6 +3350,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "avocado",
     name: "Avocado",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 160,
       protein: 2.0,
@@ -3217,6 +3377,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "oliven_gruen",
     name: "Oliven, grün",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 145,
       protein: 1.0,
@@ -3231,6 +3392,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "brokkoli_roh",
     name: "Brokkoli (roh)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 34,
       protein: 2.8,
@@ -3257,6 +3419,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "blumenkohl_roh",
     name: "Blumenkohl (roh)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 25,
       protein: 1.9,
@@ -3283,6 +3446,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "spinat_roh",
     name: "Spinat (roh)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 23,
       protein: 2.9,
@@ -3309,6 +3473,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "gruenkohl_roh",
     name: "Grünkohl (roh)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 49,
       protein: 4.3,
@@ -3335,6 +3500,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rosenkohl_roh",
     name: "Rosenkohl (roh)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 43,
       protein: 3.4,
@@ -3361,6 +3527,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "zucchini_roh",
     name: "Zucchini (roh)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 17,
       protein: 1.2,
@@ -3387,6 +3554,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "gurke",
     name: "Gurke",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 15,
       protein: 0.7,
@@ -3413,6 +3581,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tomate",
     name: "Tomate",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 18,
       protein: 0.9,
@@ -3439,6 +3608,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tomaten_passiert",
     name: "Tomaten, passiert",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 30,
       protein: 1.5,
@@ -3453,6 +3623,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "tomaten_gehackt_dose",
     name: "Tomaten, gehackt (Dose)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 25,
       protein: 1.2,
@@ -3467,6 +3638,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "paprika_rot",
     name: "Paprika, rot",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 31,
       protein: 1.0,
@@ -3493,6 +3665,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "paprika_gruen",
     name: "Paprika, grün",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 20,
       protein: 0.9,
@@ -3507,6 +3680,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "karotte",
     name: "Karotte",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 41,
       protein: 0.9,
@@ -3533,6 +3707,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "zwiebel",
     name: "Zwiebel",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 40,
       protein: 1.1,
@@ -3559,6 +3734,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "knoblauch",
     name: "Knoblauch",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 149,
       protein: 6.4,
@@ -3573,6 +3749,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "lauch",
     name: "Lauch",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 61,
       protein: 1.5,
@@ -3587,6 +3764,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "champignons",
     name: "Champignons",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 22,
       protein: 3.1,
@@ -3613,6 +3791,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "aubergine",
     name: "Aubergine",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 25,
       protein: 1.0,
@@ -3627,6 +3806,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "gruene_bohnen",
     name: "Grüne Bohnen",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 31,
       protein: 1.8,
@@ -3653,6 +3833,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "spargel_gruen",
     name: "Spargel, grün",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 20,
       protein: 2.2,
@@ -3667,6 +3848,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kuerbis_hokkaido",
     name: "Kürbis (Hokkaido)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 30,
       protein: 1.0,
@@ -3681,6 +3863,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rote_bete",
     name: "Rote Bete",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 43,
       protein: 1.6,
@@ -3707,6 +3890,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sellerie_stange",
     name: "Sellerie (Stange)",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 16,
       protein: 0.7,
@@ -3721,6 +3905,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kohlrabi",
     name: "Kohlrabi",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 27,
       protein: 1.7,
@@ -3735,6 +3920,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "weisskohl",
     name: "Weißkohl",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 25,
       protein: 1.3,
@@ -3761,6 +3947,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sauerkraut",
     name: "Sauerkraut",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 19,
       protein: 0.9,
@@ -3775,6 +3962,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "salat_eisberg",
     name: "Salat, Eisberg",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 14,
       protein: 0.9,
@@ -3789,6 +3977,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "salat_rucola",
     name: "Salat, Rucola",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 25,
       protein: 2.6,
@@ -3815,6 +4004,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "feldsalat",
     name: "Feldsalat",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 21,
       protein: 2.0,
@@ -3841,6 +4031,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kopfsalat",
     name: "Kopfsalat",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 15,
       protein: 1.4,
@@ -3855,6 +4046,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "gemuesemischung_tk",
     name: "Gemüsemischung, TK",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 50,
       protein: 2.5,
@@ -3869,6 +4061,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rettich_radieschen",
     name: "Rettich / Radieschen",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 16,
       protein: 0.7,
@@ -3883,6 +4076,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "fenchel",
     name: "Fenchel",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 31,
       protein: 1.2,
@@ -3897,6 +4091,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "ingwer",
     name: "Ingwer",
     category: "Gemüse",
+    source: "v4",
     per100: {
       kcal: 80,
       protein: 1.8,
@@ -3911,6 +4106,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "apfel",
     name: "Apfel",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 52,
       protein: 0.3,
@@ -3937,6 +4133,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "banane",
     name: "Banane",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 89,
       protein: 1.1,
@@ -3963,6 +4160,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "orange",
     name: "Orange",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 47,
       protein: 0.9,
@@ -3989,6 +4187,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mandarine",
     name: "Mandarine",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 53,
       protein: 0.8,
@@ -4003,6 +4202,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "erdbeeren",
     name: "Erdbeeren",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 32,
       protein: 0.7,
@@ -4029,6 +4229,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "blaubeeren",
     name: "Blaubeeren",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 57,
       protein: 0.7,
@@ -4055,6 +4256,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "himbeeren",
     name: "Himbeeren",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 52,
       protein: 1.2,
@@ -4081,6 +4283,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "beerenmischung_tk",
     name: "Beerenmischung, TK",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 45,
       protein: 0.9,
@@ -4095,6 +4298,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "weintrauben",
     name: "Weintrauben",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 69,
       protein: 0.7,
@@ -4109,6 +4313,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kiwi",
     name: "Kiwi",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 61,
       protein: 1.1,
@@ -4135,6 +4340,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "ananas",
     name: "Ananas",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 50,
       protein: 0.5,
@@ -4161,6 +4367,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mango",
     name: "Mango",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 60,
       protein: 0.8,
@@ -4187,6 +4394,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "wassermelone",
     name: "Wassermelone",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 30,
       protein: 0.6,
@@ -4213,6 +4421,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "honigmelone",
     name: "Honigmelone",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 36,
       protein: 0.5,
@@ -4227,6 +4436,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "birne",
     name: "Birne",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 57,
       protein: 0.4,
@@ -4241,6 +4451,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "pfirsich",
     name: "Pfirsich",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 39,
       protein: 0.9,
@@ -4255,6 +4466,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "pflaume",
     name: "Pflaume",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 46,
       protein: 0.7,
@@ -4269,6 +4481,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kirschen",
     name: "Kirschen",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 63,
       protein: 1.1,
@@ -4283,6 +4496,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "datteln_getrocknet",
     name: "Datteln, getrocknet",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 282,
       protein: 2.5,
@@ -4309,6 +4523,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "rosinen",
     name: "Rosinen",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 299,
       protein: 3.1,
@@ -4335,6 +4550,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "aprikosen_getrocknet",
     name: "Aprikosen, getrocknet",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 241,
       protein: 3.4,
@@ -4361,6 +4577,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "feigen_getrocknet",
     name: "Feigen, getrocknet",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 249,
       protein: 3.3,
@@ -4375,6 +4592,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "granatapfel",
     name: "Granatapfel",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 83,
       protein: 1.7,
@@ -4389,6 +4607,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "zitrone",
     name: "Zitrone",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 29,
       protein: 1.1,
@@ -4403,6 +4622,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "apfelmus_ungesuesst",
     name: "Apfelmus, ungesüßt",
     category: "Obst",
+    source: "v4",
     per100: {
       kcal: 42,
       protein: 0.2,
@@ -4417,6 +4637,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "honig",
     name: "Honig",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 304,
       protein: 0.3,
@@ -4443,6 +4664,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "ahornsirup",
     name: "Ahornsirup",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 260,
       protein: 0.0,
@@ -4457,6 +4679,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "zucker",
     name: "Zucker",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 400,
       protein: 0.0,
@@ -4483,6 +4706,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "marmelade",
     name: "Marmelade",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 250,
       protein: 0.4,
@@ -4497,6 +4721,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "nutella_nuss_nougat_creme",
     name: "Nutella / Nuss-Nougat-Creme",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 539,
       protein: 6.3,
@@ -4511,6 +4736,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "zartbitterschokolade_70",
     name: "Zartbitterschokolade 70 %",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 580,
       protein: 8.0,
@@ -4537,6 +4763,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "vollmilchschokolade",
     name: "Vollmilchschokolade",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 535,
       protein: 7.5,
@@ -4563,6 +4790,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "gummibaerchen",
     name: "Gummibärchen",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 343,
       protein: 6.9,
@@ -4577,6 +4805,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "eiscreme_vanille",
     name: "Eiscreme, Vanille",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 207,
       protein: 3.5,
@@ -4591,6 +4820,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kekse_butterkekse",
     name: "Kekse, Butterkekse",
     category: "Süßes",
+    source: "v4",
     per100: {
       kcal: 460,
       protein: 7.0,
@@ -4605,6 +4835,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "chips_kartoffel",
     name: "Chips, Kartoffel",
     category: "Snacks",
+    source: "v4",
     per100: {
       kcal: 540,
       protein: 6.0,
@@ -4619,6 +4850,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "popcorn_luft_ungesalzen",
     name: "Popcorn (Luft, ungesalzen)",
     category: "Snacks",
+    source: "v4",
     per100: {
       kcal: 387,
       protein: 12.9,
@@ -4633,6 +4865,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "reiscracker",
     name: "Reiscracker",
     category: "Snacks",
+    source: "v4",
     per100: {
       kcal: 380,
       protein: 8.0,
@@ -4647,6 +4880,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kakaopulver_entoelt",
     name: "Kakaopulver, entölt",
     category: "Sonstiges",
+    source: "v4",
     per100: {
       kcal: 350,
       protein: 22.0,
@@ -4673,6 +4907,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "backpulver",
     name: "Backpulver",
     category: "Sonstiges",
+    source: "v4",
     per100: {
       kcal: 90,
       protein: 0.0,
@@ -4687,6 +4922,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "hafermilch",
     name: "Hafermilch",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 45,
       protein: 1.0,
@@ -4713,6 +4949,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mandelmilch_ungesuesst",
     name: "Mandelmilch, ungesüßt",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 15,
       protein: 0.5,
@@ -4739,6 +4976,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sojamilch_ungesuesst",
     name: "Sojamilch, ungesüßt",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 38,
       protein: 3.3,
@@ -4765,6 +5003,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kokosmilch_dose",
     name: "Kokosmilch (Dose)",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 190,
       protein: 2.0,
@@ -4791,6 +5030,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "orangensaft",
     name: "Orangensaft",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 45,
       protein: 0.7,
@@ -4817,6 +5057,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "apfelsaft",
     name: "Apfelsaft",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 46,
       protein: 0.1,
@@ -4831,6 +5072,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "cola",
     name: "Cola",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 42,
       protein: 0.0,
@@ -4845,6 +5087,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "cola_zero_light",
     name: "Cola Zero / Light",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 0,
       protein: 0.0,
@@ -4859,6 +5102,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "bier_5",
     name: "Bier (5 %)",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 43,
       protein: 0.5,
@@ -4873,6 +5117,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "wein_rot",
     name: "Wein, rot",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 85,
       protein: 0.1,
@@ -4887,6 +5132,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "kaffee_schwarz",
     name: "Kaffee, schwarz",
     category: "Getränke",
+    source: "v4",
     per100: {
       kcal: 2,
       protein: 0.1,
@@ -4901,6 +5147,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "sojasauce",
     name: "Sojasauce",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 60,
       protein: 8.0,
@@ -4915,6 +5162,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "ketchup",
     name: "Ketchup",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 100,
       protein: 1.2,
@@ -4929,6 +5177,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "senf",
     name: "Senf",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 85,
       protein: 5.0,
@@ -4943,6 +5192,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mayonnaise",
     name: "Mayonnaise",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 700,
       protein: 1.0,
@@ -4957,6 +5207,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "mayonnaise_light",
     name: "Mayonnaise, light",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 250,
       protein: 1.0,
@@ -4971,6 +5222,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "hummus",
     name: "Hummus",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 180,
       protein: 7.0,
@@ -4985,6 +5237,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "pesto_basilikum",
     name: "Pesto (Basilikum)",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 450,
       protein: 5.0,
@@ -4999,6 +5252,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "balsamico_essig",
     name: "Balsamico-Essig",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 88,
       protein: 0.5,
@@ -5013,6 +5267,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "salz",
     name: "Salz",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 0,
       protein: 0.0,
@@ -5027,6 +5282,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "gemuesebruehe_zubereitet",
     name: "Gemüsebrühe (zubereitet)",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 5,
       protein: 0.3,
@@ -5041,6 +5297,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "currypaste_rot",
     name: "Currypaste, rot",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 120,
       protein: 2.0,
@@ -5055,6 +5312,7 @@ export const CORE_FOODS: CoreFood[] = [
     key: "erdnusssauce",
     name: "Erdnusssauce",
     category: "Würzmittel",
+    source: "v4",
     per100: {
       kcal: 300,
       protein: 10.0,
@@ -5089,6 +5347,19 @@ export const FOOD_CATEGORIES: string[] = [
   "Würzmittel",
 ];
 
+/**
+ * Der Kern: v4 plus USDA. Ein USDA-Eintrag mit demselben Schluessel ERSETZT
+ * den v4-Eintrag vollstaendig — nie teilweise. Makros aus der einen und
+ * Mikronaehrstoffe aus der anderen Tabelle ergaeben einen Eintrag, dessen
+ * Zahlen aus zwei Laboren stammen (docs/lebensmitteldaten.md §4).
+ */
+export const CORE_FOODS: CoreFood[] = (() => {
+  const byKey = new Map<string, CoreFood>();
+  for (const f of V4_FOODS) byKey.set(f.key, f);
+  for (const f of USDA_FOODS) byKey.set(f.key, f);
+  return [...byKey.values()];
+})();
+
 const byKey = new Map(CORE_FOODS.map((f) => [f.key, f]));
 export function coreFoodByKey(key: string): CoreFood | null {
   return byKey.get(key) ?? null;
@@ -5103,6 +5374,16 @@ function fold(s: string): string {
 }
 
 /** Suche im Kern; Treffer am Wortanfang zuerst, dann Teiltreffer. */
+/**
+ * Alle Quellen, die im Bestand tatsaechlich vorkommen — fuer das Impressum.
+ * Nicht das Register, sondern die Wirklichkeit.
+ */
+export function usedFoodSources(foods: CoreFood[] = CORE_FOODS): FoodSourceId[] {
+  const seen = new Set<FoodSourceId>();
+  for (const f of foods) seen.add(f.source);
+  return [...seen];
+}
+
 export function searchCoreFoods(query: string, limit = 12): CoreFood[] {
   const q = fold(query.trim());
   if (!q) return [];

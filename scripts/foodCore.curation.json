@@ -1,0 +1,5 @@
+{
+  "_hinweis": "Bestaetigte Zuordnungen Kydon-Schluessel -> USDA FoodData Central. Jede Zeile hat ein Mensch geprueft: Beschreibung passt zum deutschen Namen, Zubereitungszustand stimmt (roh/gekocht), Anreicherung beachtet. Aus dieser Datei erzeugt `node scripts/buildFoodCore.mjs --build` die Datei src/data/foodsUsda.ts. Ein Eintrag hier ERSETZT einen gleichnamigen v4-Eintrag vollstaendig.",
+  "_stand": "2026-09-21",
+  "entries": {}
+}

@@ -11,6 +11,8 @@ import { readAccount } from '@/features/auth/account'
 import { acceptDpa, fetchDpaState } from '@/lib/supabase/dpa'
 import { formatDate } from '@/lib/format'
 import { OFF_NOTICE } from '@/lib/offNotice'
+import { FOOD_SOURCES, type FoodSourceId } from '@/data/foodSources'
+import { USDA_FOODS } from '@/data/foodsUsda'
 import { pick } from '@/i18n/pick'
 import { LEGAL_LOCALES } from '@/i18n/locales'
 
@@ -71,6 +73,21 @@ export function ImprintScreen() {
       <Panel className="mt-4" data-testid="imprint-sources">
         <PanelHeader title={t('legal.imprint.sources')} subtitle={t('legal.imprint.sourcesIntro')} />
         <ul className="divide-y divide-line">
+          {/* Nur Quellen, die im Bestand tatsaechlich vorkommen — nicht das
+              ganze Register. Eine Quelle zu nennen, aus der kein Wert stammt,
+              waere so falsch wie eine zu verschweigen. */}
+          {(['v4', ...(USDA_FOODS.length > 0 ? (['usda'] as const) : [])] as FoodSourceId[]).map((id) => (
+            <li key={id} className="px-4 py-3 text-[13px] leading-relaxed">
+              <p className="font-medium">{FOOD_SOURCES[id].name}</p>
+              <p className="text-ink-secondary">{t(`legal.imprint.source.${id}.licence`)}</p>
+              <p className="text-ink-muted">{t(`legal.imprint.source.${id}.quality`)}</p>
+              {FOOD_SOURCES[id].url && (
+                <a href={FOOD_SOURCES[id].url} target="_blank" rel="noreferrer noopener" className="text-[12px] underline underline-offset-2">
+                  {FOOD_SOURCES[id].url}
+                </a>
+              )}
+            </li>
+          ))}
           <li className="px-4 py-3 text-[13px] leading-relaxed">
             <p className="font-medium">Open Food Facts</p>
             <p className="text-ink-secondary">{OFF_NOTICE}</p>

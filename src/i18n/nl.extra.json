@@ -347,7 +347,17 @@
       "incomplete": "Dit colofon is onvolledig: {{fields}} ontbreekt nog. Deze gegevens moeten vóór openbaar gebruik worden ingevuld — zonder deze voldoet de dienst niet aan de regels.",
       "note": "Vermeldingen zonder waarde ontbreken, ze zijn niet verborgen. Ze staan in src/data/operator.ts.",
       "sources": "Gegevensbronnen en licenties",
-      "sourcesIntro": "Wat de app uit externe databanken haalt — met naamsvermelding, zoals de licentie vereist."
+      "sourcesIntro": "Wat de app uit externe databanken haalt — met naamsvermelding, zoals de licentie vereist.",
+      "source": {
+        "v4": {
+          "licence": "Eigen bestand, overgenomen uit het coachingsysteem.",
+          "quality": "Macro's voor elke vermelding gecontroleerd; micronutriënten alleen waar ze waren vastgelegd."
+        },
+        "usda": {
+          "licence": "Publiek domein (werk van een Amerikaanse federale instantie); naamsvermelding gevraagd.",
+          "quality": "Geanalyseerde waarden met datum per vermelding. Gericht op de Amerikaanse markt — niet van belang bij rauwe producten, wel bij bewerkte."
+        }
+      }
     },
     "privacy": {
       "title": "Privacy"

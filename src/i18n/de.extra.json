@@ -347,7 +347,17 @@
       "incomplete": "Dieses Impressum ist unvollständig: {{fields}} fehlt noch. Vor dem öffentlichen Betrieb müssen diese Angaben eingetragen sein — ohne sie ist das Angebot nicht rechtskonform.",
       "note": "Angaben ohne Eintrag sind nicht vorhanden, nicht verborgen. Sie stehen in src/data/operator.ts und werden dort gepflegt.",
       "sources": "Datenquellen und Lizenzen",
-      "sourcesIntro": "Was die App aus fremden Datenbanken bezieht — mit Namensnennung, wie die Lizenz es verlangt."
+      "sourcesIntro": "Was die App aus fremden Datenbanken bezieht — mit Namensnennung, wie die Lizenz es verlangt.",
+      "source": {
+        "v4": {
+          "licence": "Eigener Bestand, aus dem Coaching-System übernommen.",
+          "quality": "Makros für alle Einträge geprüft; Mikronährstoffe nur dort, wo sie hinterlegt waren."
+        },
+        "usda": {
+          "licence": "Gemeinfrei (Werk einer US-Bundesbehörde); Namensnennung erbeten.",
+          "quality": "Analysierte Werte mit Datenstand je Eintrag. Auf den US-Markt bezogen — bei Rohware unerheblich, bei verarbeiteten Lebensmitteln nicht."
+        }
+      }
     },
     "privacy": {
       "title": "Datenschutz"

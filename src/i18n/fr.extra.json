@@ -347,7 +347,17 @@
       "incomplete": "Ces mentions sont incomplètes : {{fields}} manque(nt) encore. Ces informations doivent être renseignées avant toute exploitation publique — sans elles, le service n'est pas conforme.",
       "note": "Les entrées sans valeur sont absentes, pas masquées. Elles se trouvent dans src/data/operator.ts.",
       "sources": "Sources de données et licences",
-      "sourcesIntro": "Ce que l'application tire de bases de données externes — avec attribution, comme l'exige la licence."
+      "sourcesIntro": "Ce que l'application tire de bases de données externes — avec attribution, comme l'exige la licence.",
+      "source": {
+        "v4": {
+          "licence": "Fonds propre, repris du système de coaching.",
+          "quality": "Macros vérifiées pour chaque entrée ; micronutriments uniquement là où ils étaient renseignés."
+        },
+        "usda": {
+          "licence": "Domaine public (œuvre d'une agence fédérale américaine) ; attribution demandée.",
+          "quality": "Valeurs analysées avec une date par entrée. Rapportées au marché américain — sans importance pour les produits bruts, pas pour les transformés."
+        }
+      }
     },
     "privacy": {
       "title": "Confidentialité"

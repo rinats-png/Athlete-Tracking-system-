@@ -4,6 +4,7 @@ import { Globe, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useLocale } from '@/features/shared/useLocale'
 import { searchCoreFoods, type CoreFood } from '@/data/foods'
+import { foodSource } from '@/data/foodSources'
 import { lookupBarcode, searchOpenFoodFacts, OFF_ATTRIBUTION, type OffFood } from '@/lib/openFoodFacts'
 import { formatNumber } from '@/lib/format'
 import { newId } from '@/lib/store/localStore'
@@ -129,8 +130,18 @@ export function FoodSearch({ onAdd }: { onAdd: (item: StoredMealItem) => void })
         <div className="mt-3 border border-line bg-surface-sunken p-3" data-testid="food-picked">
           <p className="text-[14px]">
             {picked.kind === 'core' ? picked.food.name : `${picked.food.name}${picked.food.brand ? ` (${picked.food.brand})` : ''}`}
-            <span className="ml-2 text-[11px] tracking-wide text-ink-muted uppercase">{picked.kind === 'core' ? t('nutrition.source.core') : t('nutrition.source.off')}</span>
+            <span className="ml-2 text-[11px] tracking-wide text-ink-muted uppercase" data-testid="food-source">
+              {picked.kind === 'core' ? (picked.food.source === 'v4' ? t('nutrition.source.core') : foodSource(picked.food.source).short) : t('nutrition.source.off')}
+            </span>
           </p>
+          {picked.kind === 'core' && picked.food.sourceRef && (
+            // Herkunft am Eintrag: Kennung und Datenstand beim Herausgeber.
+            // SR Legacy wird nicht mehr gepflegt — das gehoert sichtbar hin.
+            <p className="text-[11px] text-ink-muted">
+              {picked.food.sourceRef}
+              {picked.food.sourceDate ? ` · ${picked.food.sourceDate}` : ''}
+            </p>
+          )}
           <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={t('nutrition.search.portion')}>
             {GRAM_CHIPS.map((g) => (
               <button key={g} type="button" aria-pressed={grams === g} onClick={() => setGrams(g)} className={cn('readout min-h-11 rounded-pill border px-3 text-[13px]', grams === g ? 'border-accent bg-accent text-accent-ink' : 'border-line hover:border-accent')}>

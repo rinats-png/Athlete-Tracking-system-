@@ -1,0 +1,286 @@
+{
+  "_hinweis": "Suchbegriffe fuer scripts/buildFoodCore.mjs --propose. NUR Rohware und einfache Zubereitungen: bei verarbeiteten und deutschen Marktprodukten taugen USDA-Werte nicht (docs/lebensmitteldaten.md §3). Der Begriff ist ein Vorschlag fuer die Suche, KEINE bestaetigte Zuordnung — bestaetigt wird in foodCore.curation.json.",
+  "_stand": "2026-09-21",
+  "entries": {
+    "reis_jasmin_roh": {
+      "name": "Reis, Jasmin (roh)",
+      "category": "Getreide",
+      "query": "rice white long-grain raw"
+    },
+    "reis_weiss_gekocht": {
+      "name": "Reis, weiß (gekocht)",
+      "category": "Getreide",
+      "query": "rice white long-grain cooked"
+    },
+    "nudeln_gekocht": {
+      "name": "Nudeln, gekocht",
+      "category": "Getreide",
+      "query": "pasta cooked enriched"
+    },
+    "couscous_roh": {
+      "name": "Couscous (roh)",
+      "category": "Getreide",
+      "query": "couscous dry"
+    },
+    "suesskartoffel_gebacken": {
+      "name": "Süßkartoffel (gebacken)",
+      "category": "Kartoffeln",
+      "query": "sweet potato baked in skin"
+    },
+    "linsen_braun_roh": {
+      "name": "Linsen, braun (roh)",
+      "category": "Hülsenfrüchte",
+      "query": "lentils raw"
+    },
+    "weisse_bohnen_dose": {
+      "name": "Weiße Bohnen (Dose)",
+      "category": "Hülsenfrüchte",
+      "query": "beans white mature seeds canned"
+    },
+    "haehnchenschenkel_ohne_haut_roh": {
+      "name": "Hähnchenschenkel ohne Haut (roh)",
+      "category": "Fleisch",
+      "query": "chicken thigh meat only raw"
+    },
+    "haehnchenschenkel_mit_haut_roh": {
+      "name": "Hähnchenschenkel mit Haut (roh)",
+      "category": "Fleisch",
+      "query": "chicken thigh meat and skin raw"
+    },
+    "rinderhackfleisch_20_fett_roh": {
+      "name": "Rinderhackfleisch 20 % Fett (roh)",
+      "category": "Fleisch",
+      "query": "beef ground 80% lean 20% fat raw"
+    },
+    "rinderhuefte_roh": {
+      "name": "Rinderhüfte (roh)",
+      "category": "Fleisch",
+      "query": "beef round top sirloin separable lean raw"
+    },
+    "rindergulasch_roh": {
+      "name": "Rindergulasch (roh)",
+      "category": "Fleisch",
+      "query": "beef chuck stew meat separable lean raw"
+    },
+    "schweinelachs_kotelett_mager_roh": {
+      "name": "Schweinelachs / Kotelett mager (roh)",
+      "category": "Fleisch",
+      "query": "pork loin chops separable lean only raw"
+    },
+    "schweinehackfleisch_roh": {
+      "name": "Schweinehackfleisch (roh)",
+      "category": "Fleisch",
+      "query": "pork ground raw"
+    },
+    "schweinebauch_roh": {
+      "name": "Schweinebauch (roh)",
+      "category": "Fleisch",
+      "query": "pork belly raw"
+    },
+    "wild_hirsch_roh": {
+      "name": "Wild, Hirsch (roh)",
+      "category": "Fleisch",
+      "query": "game meat deer raw"
+    },
+    "tintenfisch_roh": {
+      "name": "Tintenfisch (roh)",
+      "category": "Fisch",
+      "query": "squid mixed species raw"
+    },
+    "milch_0_1": {
+      "name": "Milch 0,1 %",
+      "category": "Milch",
+      "query": "milk nonfat fluid skim"
+    },
+    "edamer": {
+      "name": "Edamer",
+      "category": "Käse",
+      "query": "cheese gouda"
+    },
+    "mozzarella_light": {
+      "name": "Mozzarella, light",
+      "category": "Käse",
+      "query": "cheese mozzarella part skim"
+    },
+    "cheddar": {
+      "name": "Cheddar",
+      "category": "Käse",
+      "query": "cheese cheddar"
+    },
+    "sahne_30": {
+      "name": "Sahne 30 %",
+      "category": "Milch",
+      "query": "cream fluid heavy whipping"
+    },
+    "mandelmus": {
+      "name": "Mandelmus",
+      "category": "Nüsse",
+      "query": "nuts almond butter plain"
+    },
+    "pistazien": {
+      "name": "Pistazien",
+      "category": "Nüsse",
+      "query": "nuts pistachio raw"
+    },
+    "paranuesse": {
+      "name": "Paranüsse",
+      "category": "Nüsse",
+      "query": "nuts brazilnuts dried unblanched"
+    },
+    "kokosraspeln": {
+      "name": "Kokosraspeln",
+      "category": "Nüsse",
+      "query": "nuts coconut meat dried desiccated not sweetened"
+    },
+    "mais_dose": {
+      "name": "Mais (Dose)",
+      "category": "Gemüse",
+      "query": "corn sweet yellow canned drained"
+    },
+    "oliven_gruen": {
+      "name": "Oliven, grün",
+      "category": "Gemüse",
+      "query": "olives pickled canned green"
+    },
+    "tomaten_passiert": {
+      "name": "Tomaten, passiert",
+      "category": "Gemüse",
+      "query": "tomato puree canned"
+    },
+    "tomaten_gehackt_dose": {
+      "name": "Tomaten, gehackt (Dose)",
+      "category": "Gemüse",
+      "query": "tomatoes crushed canned"
+    },
+    "paprika_gruen": {
+      "name": "Paprika, grün",
+      "category": "Gemüse",
+      "query": "peppers sweet green raw"
+    },
+    "knoblauch": {
+      "name": "Knoblauch",
+      "category": "Gemüse",
+      "query": "garlic raw"
+    },
+    "lauch": {
+      "name": "Lauch",
+      "category": "Gemüse",
+      "query": "leeks bulb raw"
+    },
+    "aubergine": {
+      "name": "Aubergine",
+      "category": "Gemüse",
+      "query": "eggplant raw"
+    },
+    "spargel_gruen": {
+      "name": "Spargel, grün",
+      "category": "Gemüse",
+      "query": "asparagus raw"
+    },
+    "kuerbis_hokkaido": {
+      "name": "Kürbis (Hokkaido)",
+      "category": "Gemüse",
+      "query": "squash winter raw"
+    },
+    "sellerie_stange": {
+      "name": "Sellerie (Stange)",
+      "category": "Gemüse",
+      "query": "celery raw"
+    },
+    "kohlrabi": {
+      "name": "Kohlrabi",
+      "category": "Gemüse",
+      "query": "kohlrabi raw"
+    },
+    "sauerkraut": {
+      "name": "Sauerkraut",
+      "category": "Gemüse",
+      "query": "sauerkraut canned solids and liquids"
+    },
+    "salat_eisberg": {
+      "name": "Salat, Eisberg",
+      "category": "Gemüse",
+      "query": "lettuce iceberg raw"
+    },
+    "kopfsalat": {
+      "name": "Kopfsalat",
+      "category": "Gemüse",
+      "query": "lettuce butterhead raw"
+    },
+    "rettich_radieschen": {
+      "name": "Rettich / Radieschen",
+      "category": "Gemüse",
+      "query": "radishes raw"
+    },
+    "fenchel": {
+      "name": "Fenchel",
+      "category": "Gemüse",
+      "query": "fennel bulb raw"
+    },
+    "ingwer": {
+      "name": "Ingwer",
+      "category": "Gemüse",
+      "query": "ginger root raw"
+    },
+    "mandarine": {
+      "name": "Mandarine",
+      "category": "Obst",
+      "query": "tangerines mandarin oranges raw"
+    },
+    "weintrauben": {
+      "name": "Weintrauben",
+      "category": "Obst",
+      "query": "grapes red green raw"
+    },
+    "honigmelone": {
+      "name": "Honigmelone",
+      "category": "Obst",
+      "query": "melons honeydew raw"
+    },
+    "birne": {
+      "name": "Birne",
+      "category": "Obst",
+      "query": "pears raw"
+    },
+    "pfirsich": {
+      "name": "Pfirsich",
+      "category": "Obst",
+      "query": "peaches raw"
+    },
+    "pflaume": {
+      "name": "Pflaume",
+      "category": "Obst",
+      "query": "plums raw"
+    },
+    "kirschen": {
+      "name": "Kirschen",
+      "category": "Obst",
+      "query": "cherries sweet raw"
+    },
+    "feigen_getrocknet": {
+      "name": "Feigen, getrocknet",
+      "category": "Obst",
+      "query": "figs dried uncooked"
+    },
+    "granatapfel": {
+      "name": "Granatapfel",
+      "category": "Obst",
+      "query": "pomegranates raw"
+    },
+    "zitrone": {
+      "name": "Zitrone",
+      "category": "Obst",
+      "query": "lemons raw without peel"
+    },
+    "apfelmus_ungesuesst": {
+      "name": "Apfelmus, ungesüßt",
+      "category": "Obst",
+      "query": "applesauce canned unsweetened"
+    },
+    "popcorn_luft_ungesalzen": {
+      "name": "Popcorn (Luft, ungesalzen)",
+      "category": "Snacks",
+      "query": "snacks popcorn air-popped"
+    }
+  }
+}

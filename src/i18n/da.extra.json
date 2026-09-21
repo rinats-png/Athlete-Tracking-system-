@@ -347,7 +347,17 @@
       "incomplete": "Denne kolofon er ufuldstændig: {{fields}} mangler stadig. Disse oplysninger skal udfyldes før offentlig drift — uden dem er tjenesten ikke i overensstemmelse med reglerne.",
       "note": "Poster uden værdi er fraværende, ikke skjulte. De ligger i src/data/operator.ts.",
       "sources": "Datakilder og licenser",
-      "sourcesIntro": "Hvad appen henter fra eksterne databaser — med kildeangivelse, som licensen kræver."
+      "sourcesIntro": "Hvad appen henter fra eksterne databaser — med kildeangivelse, som licensen kræver.",
+      "source": {
+        "v4": {
+          "licence": "Egen bestand, overtaget fra coachingsystemet.",
+          "quality": "Makroer kontrolleret for alle poster; mikronæringsstoffer kun hvor de var registreret."
+        },
+        "usda": {
+          "licence": "Offentligt ejendom (værk af en amerikansk føderal myndighed); kildeangivelse ønskes.",
+          "quality": "Analyserede værdier med datastand pr. post. Baseret på det amerikanske marked — uden betydning for råvarer, ikke for forarbejdede fødevarer."
+        }
+      }
     },
     "privacy": {
       "title": "Privatliv"

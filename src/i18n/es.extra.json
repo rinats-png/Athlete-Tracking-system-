@@ -347,7 +347,17 @@
       "incomplete": "Este aviso legal está incompleto: falta todavía {{fields}}. Estos datos deben completarse antes de la operación pública — sin ellos el servicio no cumple la normativa.",
       "note": "Las entradas sin valor están ausentes, no ocultas. Viven en src/data/operator.ts.",
       "sources": "Fuentes de datos y licencias",
-      "sourcesIntro": "Lo que la app obtiene de bases de datos externas — con atribución, como exige la licencia."
+      "sourcesIntro": "Lo que la app obtiene de bases de datos externas — con atribución, como exige la licencia.",
+      "source": {
+        "v4": {
+          "licence": "Fondo propio, tomado del sistema de coaching.",
+          "quality": "Macros verificados en todas las entradas; micronutrientes solo donde estaban registrados."
+        },
+        "usda": {
+          "licence": "Dominio público (obra de una agencia federal de EE. UU.); se solicita atribución.",
+          "quality": "Valores analizados con fecha de datos por entrada. Referidos al mercado estadounidense — irrelevante en alimentos crudos, no en procesados."
+        }
+      }
     },
     "privacy": {
       "title": "Privacidad"

@@ -91,8 +91,9 @@ gebaut**, aus drei Gründen:
    ein Telefon mit Netz.
 
 Wenn später doch ein grösserer Offline-Bestand gewünscht ist, ist der
-richtige Weg ein **kuratierter Kern aus BLS oder USDA** (eigene Lizenzen,
-bessere Qualität), nicht ein OFF-Auszug.
+richtige Weg ein **kuratierter Kern aus USDA FoodData Central** — gemeinfrei,
+analysiert, ohne Share-alike. Das ist entschieden und vorbereitet:
+`docs/lebensmitteldaten.md`.
 
 ---
 

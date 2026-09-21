@@ -347,7 +347,17 @@
       "incomplete": "Denne utgiverinformasjonen er ufullstendig: {{fields}} mangler fortsatt. Disse opplysningene må fylles ut før offentlig drift — uten dem oppfyller tjenesten ikke kravene.",
       "note": "Oppføringer uten verdi er fraværende, ikke skjult. De ligger i src/data/operator.ts.",
       "sources": "Datakilder og lisenser",
-      "sourcesIntro": "Hva appen henter fra eksterne databaser — med navngivelse, slik lisensen krever."
+      "sourcesIntro": "Hva appen henter fra eksterne databaser — med navngivelse, slik lisensen krever.",
+      "source": {
+        "v4": {
+          "licence": "Egen beholdning, hentet fra coachingsystemet.",
+          "quality": "Makroer kontrollert for alle oppføringer; mikronæringsstoffer bare der de var registrert."
+        },
+        "usda": {
+          "licence": "Fri (verk av et amerikansk føderalt organ); navngivning ønskes.",
+          "quality": "Analyserte verdier med datostempel per oppføring. Knyttet til det amerikanske markedet — uten betydning for råvarer, ikke for bearbeidede matvarer."
+        }
+      }
     },
     "privacy": {
       "title": "Personvern"
