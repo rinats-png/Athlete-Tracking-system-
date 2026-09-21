@@ -391,6 +391,12 @@ export function DiaryScreen() {
               <ArrowRight size={14} aria-hidden />
             </Link>
           </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link to="/ernaehrung">
+              {t('nutrition.title')}
+              <ArrowRight size={14} aria-hidden />
+            </Link>
+          </Button>
         </div>
       </Panel>
     </>

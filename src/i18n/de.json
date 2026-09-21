@@ -1675,5 +1675,83 @@
       "adherenceBelow": "Adhärenz unter",
       "minCompletenessPct": "Vollständigkeit unter"
     }
+  },
+  "nutrition": {
+    "eyebrow": "Was gegessen wurde",
+    "title": "Ernährung",
+    "intro": "Mahlzeiten mit Gramm und Energie. Darunter eine Referenz mit Formel, Quelle und Fehler — kein Ziel. Was du isst, entscheidest du.",
+    "introCoach": "Die Mahlzeiten des aktiven Athleten. Die Referenz ist eine Rechnung, keine Vorgabe.",
+    "slots": {
+      "breakfast": "Frühstück",
+      "lunch": "Mittag",
+      "dinner": "Abend",
+      "snack": "Snack",
+      "pre": "Vor der Einheit",
+      "intra": "Während der Einheit",
+      "post": "Nach der Einheit"
+    },
+    "macros": {
+      "protein": "Protein",
+      "carbs": "Kohlenhydrate",
+      "fat": "Fett"
+    },
+    "day": {
+      "kcal": "Energie heute",
+      "fiber": "Ballaststoffe {{g}} g",
+      "coverage": "Mikronährstoffe belegt für {{covered}} von {{total}} Positionen — eine Aussage über die Daten, nicht über das Essen.",
+      "empty": "Noch nichts eingetragen."
+    },
+    "meal": {
+      "sum": "{{kcal}} kcal · P {{protein}} · KH {{carbs}} · F {{fat}}",
+      "addFood": "Lebensmittel hinzufügen",
+      "remove": "Entfernen",
+      "newSlot": "Mahlzeit anlegen"
+    },
+    "search": {
+      "label": "Lebensmittel suchen",
+      "placeholder": "Haferflocken, Skyr, Reis … oder Barcode",
+      "core": "Aus dem Kern",
+      "noneCore": "Im Kern nichts gefunden — online suchen oder anders schreiben.",
+      "online": "Online suchen (Open Food Facts)",
+      "loading": "Suche bei Open Food Facts …",
+      "offline": "Keine Verbindung — der Kern bleibt, Open Food Facts nicht.",
+      "error": "Open Food Facts ist gerade nicht erreichbar.",
+      "offResults": "Von Open Food Facts",
+      "noneOff": "Dort auch nichts gefunden.",
+      "offQuality": "Nutzerangaben, teils unvollständig — ohne Mikronährstoffe.",
+      "grams": "Gramm",
+      "preview": "{{kcal}} kcal · Protein {{protein}} g · KH {{carbs}} g · Fett {{fat}} g",
+      "add": "Übernehmen"
+    },
+    "source": {
+      "core": "Kern",
+      "off": "Open Food Facts",
+      "custom": "frei"
+    },
+    "reference": {
+      "title": "Referenz, kein Ziel",
+      "why": "Gemessen schlägt geschätzt: der beobachtete Umsatz steht vor dem berechneten.",
+      "observed": "Beobachteter Umsatz",
+      "observedMeta": "aus {{days}} Tagen Zufuhr und {{delta}} kg Gewichtsänderung über 28 Tage",
+      "observedNeeds": "braucht {{days}} Tage mit Mahlzeiten und Gewicht am Anfang und Ende",
+      "tdee": "Berechneter Umsatz",
+      "tdeeMeta": "Grundumsatz {{bmr}} kcal × PAL {{pal}}",
+      "missing": "braucht Gewicht (Tagebuch), Grösse, Geburtsdatum und Geschlecht (Profil)",
+      "intake": "Ø Zufuhr 28 Tage",
+      "intakeMeta": "an {{n}} Tagen mit Mahlzeiten",
+      "pal": "Aktivitätsniveau (PAL), Selbstauskunft",
+      "palLevels": {
+        "1_2": "Sitzend",
+        "1_375": "Leicht aktiv",
+        "1_55": "Mässig aktiv",
+        "1_725": "Sehr aktiv",
+        "1_9": "Extrem aktiv"
+      },
+      "formula": "Grundumsatz nach Mifflin-St Jeor 1990: 10·kg + 6,25·cm − 5·Jahre ± Konstante. Schätzfehler etwa ±{{error}} %. Der PAL ist eine Selbstauskunft, keine Messung.",
+      "noTarget": "Das ist ein Massstab, kein Ziel. Die App sagt nicht, was du essen sollst."
+    },
+    "links": {
+      "why": "Gewicht kommt aus dem Tagebuch; eine Entscheidung zur Ernährung hält das Cockpit fest."
+    }
   }
 }

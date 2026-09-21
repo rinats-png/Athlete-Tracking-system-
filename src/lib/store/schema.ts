@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 22
+export const CURRENT_SCHEMA_VERSION = 23
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -654,6 +654,47 @@ const cockpitThresholdsSchema = z.object({
   minCompletenessPct: finite.min(0).max(100).default(70),
 })
 
+/**
+ * Eine Position einer Mahlzeit (Schicht S4).
+ *
+ * Die Nährwerte je 100 g stehen IN der Position, nicht nur als Verweis: ein
+ * Eintrag von Open Food Facts kann sich dort ändern oder verschwinden, und
+ * ein Kern-Eintrag kann in einer späteren Version korrigiert werden. Was
+ * jemand gegessen hat, darf sich rückwirkend nicht ändern (§89).
+ */
+const mealItemSchema = z.object({
+  id: z.string().min(1),
+  /** Kennung im Kern (data/foods.ts), null bei Open Food Facts oder frei. */
+  foodKey: z.string().max(80).nullable().default(null),
+  name: z.string().min(1).max(160),
+  source: z.enum(['core', 'off', 'custom']).default('custom'),
+  grams: finite.min(0).max(5000),
+  per100: z.object({
+    kcal: finite.min(0).max(1000),
+    protein: finite.min(0).max(100),
+    fat: finite.min(0).max(100),
+    carbs: finite.min(0).max(100),
+    fiber: finite.min(0).max(100).default(0),
+  }),
+  barcode: z.string().max(20).nullable().default(null),
+})
+
+const mealSchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  /** Pre/Intra/Post: an Einheiten gebunden, wie im Client-Tracker v4. */
+  slot: z.enum(['breakfast', 'lunch', 'dinner', 'snack', 'pre', 'intra', 'post']).default('snack'),
+  items: z.array(mealItemSchema).max(40).default([]),
+  note: z.string().max(300).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+/** Selbstauskunft zum Aktivitätsniveau (PAL) — Parameter der Referenz, kein Ziel. */
+const nutritionSettingsSchema = z.object({
+  pal: finite.min(1.2).max(1.9).default(1.55),
+})
+
 export const DIARY_OPTIONAL_FIELDS = ['sleepQuality', 'stress', 'soreness', 'steps', 'adherence', 'note'] as const
 export type DiaryOptionalField = (typeof DIARY_OPTIONAL_FIELDS)[number]
 const diaryFieldSchema = z.enum(DIARY_OPTIONAL_FIELDS)
@@ -680,6 +721,9 @@ const athleteSchema = z.object({
   decisions: z.array(decisionSchema).default([]),
   /** Schwellen des Cockpits für diesen Athleten. */
   cockpit: cockpitThresholdsSchema.default(() => cockpitThresholdsSchema.parse({})),
+  /** Mahlzeiten (Schicht S4), mehrere je Tag. */
+  meals: z.array(mealSchema).default([]),
+  nutrition: nutritionSettingsSchema.default(() => nutritionSettingsSchema.parse({})),
   /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
   archived: z.boolean().default(false),
   /** Notizen des Trainers zu dieser Person (§74). */
@@ -751,6 +795,9 @@ export type ValidatedWorkoutExercise = z.infer<typeof workoutExerciseSchema>
 export type ValidatedWorkoutSet = z.infer<typeof workoutSetSchema>
 export type ValidatedDecision = z.infer<typeof decisionSchema>
 export type ValidatedCockpit = z.infer<typeof cockpitThresholdsSchema>
+export type ValidatedMeal = z.infer<typeof mealSchema>
+export type ValidatedMealItem = z.infer<typeof mealItemSchema>
+export type ValidatedNutrition = z.infer<typeof nutritionSettingsSchema>
 export type DecisionTrigger = (typeof DECISION_TRIGGERS)[number]
 export type DecisionArea = (typeof DECISION_AREAS)[number]
 
@@ -1141,6 +1188,16 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 22,
+    to: 23,
+    describe: 'Mahlzeiten und Aktivitätsniveau je Athlet (Schicht S4)',
+    run: (data) => ({
+      ...data,
+      version: 23,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, meals: [], nutrition: { pal: 1.55 } })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1173,6 +1230,8 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     workouts: [],
     decisions: [],
     cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
+    meals: [],
+    nutrition: { pal: 1.55 },
     archived: false,
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

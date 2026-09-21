@@ -1675,5 +1675,83 @@
       "adherenceBelow": "Adherence below",
       "minCompletenessPct": "Completeness below"
     }
+  },
+  "nutrition": {
+    "eyebrow": "What was eaten",
+    "title": "Nutrition",
+    "intro": "Meals with grams and energy. Below, a reference with formula, source and error — not a target. What you eat is your decision.",
+    "introCoach": "The active athlete's meals. The reference is a computation, not an instruction.",
+    "slots": {
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "snack": "Snack",
+      "pre": "Before the session",
+      "intra": "During the session",
+      "post": "After the session"
+    },
+    "macros": {
+      "protein": "Protein",
+      "carbs": "Carbohydrates",
+      "fat": "Fat"
+    },
+    "day": {
+      "kcal": "Energy today",
+      "fiber": "Fibre {{g}} g",
+      "coverage": "Micronutrients documented for {{covered}} of {{total}} items — a statement about the data, not the food.",
+      "empty": "Nothing entered yet."
+    },
+    "meal": {
+      "sum": "{{kcal}} kcal · P {{protein}} · C {{carbs}} · F {{fat}}",
+      "addFood": "Add food",
+      "remove": "Remove",
+      "newSlot": "Add meal"
+    },
+    "search": {
+      "label": "Search food",
+      "placeholder": "oats, skyr, rice … or barcode",
+      "core": "From the core",
+      "noneCore": "Nothing in the core — search online or spell differently.",
+      "online": "Search online (Open Food Facts)",
+      "loading": "Searching Open Food Facts …",
+      "offline": "No connection — the core stays, Open Food Facts does not.",
+      "error": "Open Food Facts is not reachable right now.",
+      "offResults": "From Open Food Facts",
+      "noneOff": "Nothing there either.",
+      "offQuality": "User entries, partly incomplete — without micronutrients.",
+      "grams": "Grams",
+      "preview": "{{kcal}} kcal · protein {{protein}} g · carbs {{carbs}} g · fat {{fat}} g",
+      "add": "Add"
+    },
+    "source": {
+      "core": "core",
+      "off": "Open Food Facts",
+      "custom": "custom"
+    },
+    "reference": {
+      "title": "Reference, not a target",
+      "why": "Measured beats estimated: the observed expenditure comes before the computed one.",
+      "observed": "Observed expenditure",
+      "observedMeta": "from {{days}} days of intake and {{delta}} kg weight change over 28 days",
+      "observedNeeds": "needs {{days}} days with meals and weight at start and end",
+      "tdee": "Computed expenditure",
+      "tdeeMeta": "BMR {{bmr}} kcal × PAL {{pal}}",
+      "missing": "needs weight (diary), height, birth date and sex (profile)",
+      "intake": "Avg intake 28 days",
+      "intakeMeta": "on {{n}} days with meals",
+      "pal": "Activity level (PAL), self-reported",
+      "palLevels": {
+        "1_2": "Sedentary",
+        "1_375": "Lightly active",
+        "1_55": "Moderately active",
+        "1_725": "Very active",
+        "1_9": "Extremely active"
+      },
+      "formula": "BMR by Mifflin-St Jeor 1990: 10·kg + 6.25·cm − 5·years ± constant. Estimation error about ±{{error}} %. The PAL is self-reported, not measured.",
+      "noTarget": "This is a yardstick, not a target. The app does not say what you should eat."
+    },
+    "links": {
+      "why": "Weight comes from the diary; a nutrition decision is recorded in the cockpit."
+    }
   }
 }

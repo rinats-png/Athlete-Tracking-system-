@@ -1675,5 +1675,83 @@
       "adherenceBelow": "Adhérence sous",
       "minCompletenessPct": "Complétude sous"
     }
+  },
+  "nutrition": {
+    "eyebrow": "Ce qui a été mangé",
+    "title": "Nutrition",
+    "intro": "Repas avec grammes et énergie. En dessous, une référence avec formule, source et erreur — pas un objectif. Ce que vous mangez, vous le décidez.",
+    "introCoach": "Les repas de l'athlète actif. La référence est un calcul, pas une consigne.",
+    "slots": {
+      "breakfast": "Petit-déjeuner",
+      "lunch": "Déjeuner",
+      "dinner": "Dîner",
+      "snack": "Collation",
+      "pre": "Avant la séance",
+      "intra": "Pendant la séance",
+      "post": "Après la séance"
+    },
+    "macros": {
+      "protein": "Protéines",
+      "carbs": "Glucides",
+      "fat": "Lipides"
+    },
+    "day": {
+      "kcal": "Énergie aujourd'hui",
+      "fiber": "Fibres {{g}} g",
+      "coverage": "Micronutriments documentés pour {{covered}} positions sur {{total}} — une information sur les données, pas sur l'alimentation.",
+      "empty": "Rien de saisi pour l'instant."
+    },
+    "meal": {
+      "sum": "{{kcal}} kcal · P {{protein}} · G {{carbs}} · L {{fat}}",
+      "addFood": "Ajouter un aliment",
+      "remove": "Retirer",
+      "newSlot": "Ajouter un repas"
+    },
+    "search": {
+      "label": "Rechercher un aliment",
+      "placeholder": "flocons d'avoine, skyr, riz … ou code-barres",
+      "core": "Depuis le noyau",
+      "noneCore": "Rien dans le noyau — cherchez en ligne ou écrivez autrement.",
+      "online": "Chercher en ligne (Open Food Facts)",
+      "loading": "Recherche sur Open Food Facts …",
+      "offline": "Pas de connexion — le noyau reste, Open Food Facts non.",
+      "error": "Open Food Facts n'est pas joignable pour le moment.",
+      "offResults": "Depuis Open Food Facts",
+      "noneOff": "Rien là non plus.",
+      "offQuality": "Saisies d'utilisateurs, parfois incomplètes — sans micronutriments.",
+      "grams": "Grammes",
+      "preview": "{{kcal}} kcal · protéines {{protein}} g · glucides {{carbs}} g · lipides {{fat}} g",
+      "add": "Ajouter"
+    },
+    "source": {
+      "core": "noyau",
+      "off": "Open Food Facts",
+      "custom": "libre"
+    },
+    "reference": {
+      "title": "Référence, pas objectif",
+      "why": "Mesuré bat estimé : la dépense observée passe avant la dépense calculée.",
+      "observed": "Dépense observée",
+      "observedMeta": "à partir de {{days}} jours d'apport et {{delta}} kg de variation de poids sur 28 jours",
+      "observedNeeds": "nécessite {{days}} jours avec repas et poids au début et à la fin",
+      "tdee": "Dépense calculée",
+      "tdeeMeta": "MB {{bmr}} kcal × PAL {{pal}}",
+      "missing": "nécessite poids (journal), taille, date de naissance et sexe (profil)",
+      "intake": "Apport moyen 28 j",
+      "intakeMeta": "sur {{n}} jours avec repas",
+      "pal": "Niveau d'activité (PAL), auto-déclaré",
+      "palLevels": {
+        "1_2": "Sédentaire",
+        "1_375": "Légèrement actif",
+        "1_55": "Modérément actif",
+        "1_725": "Très actif",
+        "1_9": "Extrêmement actif"
+      },
+      "formula": "Métabolisme de base selon Mifflin-St Jeor 1990 : 10·kg + 6,25·cm − 5·années ± constante. Erreur d'estimation d'environ ±{{error}} %. Le PAL est auto-déclaré, pas mesuré.",
+      "noTarget": "C'est une échelle, pas un objectif. L'app ne dit pas ce que vous devez manger."
+    },
+    "links": {
+      "why": "Le poids vient du journal ; une décision sur la nutrition se consigne dans le cockpit."
+    }
   }
 }

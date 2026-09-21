@@ -24,14 +24,15 @@
   # Content Security Policy. Die App lädt zur Laufzeit nichts von Dritten:
   # Schriften sind lokal gebündelt, Bilder liegen im Bundle.
   #
-  # connect-src nennt genau EINE fremde Herkunft: das Supabase-Projekt. Kein
-  # Platzhalter, keine Wildcard über *.supabase.co — dann dürfte jedes fremde
-  # Projekt angesprochen werden, und die Regel schützte nichts mehr. Die
-  # wss-Zeile ist für die Echtzeitverbindung des Dienstes; ohne sie bräche
-  # sie still ab.
+  # connect-src nennt genau ZWEI fremde Herkünfte, beide beim Namen: das
+  # Supabase-Projekt und Open Food Facts (Lebensmittelsuche, Schicht S4).
+  # Kein Platzhalter, keine Wildcard über *.supabase.co — dann dürfte jedes
+  # fremde Projekt angesprochen werden, und die Regel schützte nichts mehr.
+  # Die wss-Zeile ist für die Echtzeitverbindung des Dienstes; ohne sie
+  # bräche sie still ab.
   # 'unsafe-inline' bei style-src ist nötig, weil die Diagramme Stile inline
   # setzen; Skripte laufen ohne diese Ausnahme.
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://bsbionvnsvqghaqijmpl.supabase.co wss://bsbionvnsvqghaqijmpl.supabase.co; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://bsbionvnsvqghaqijmpl.supabase.co wss://bsbionvnsvqghaqijmpl.supabase.co https://world.openfoodfacts.org; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate

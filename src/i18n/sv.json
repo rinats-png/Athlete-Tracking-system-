@@ -1675,5 +1675,83 @@
       "adherenceBelow": "Följsamhet under",
       "minCompletenessPct": "Fullständighet under"
     }
+  },
+  "nutrition": {
+    "eyebrow": "Vad som åts",
+    "title": "Kost",
+    "intro": "Måltider med gram och energi. Under det en referens med formel, källa och fel — inget mål. Vad du äter bestämmer du.",
+    "introCoach": "Den aktiva idrottarens måltider. Referensen är en beräkning, inte en anvisning.",
+    "slots": {
+      "breakfast": "Frukost",
+      "lunch": "Lunch",
+      "dinner": "Middag",
+      "snack": "Mellanmål",
+      "pre": "Före passet",
+      "intra": "Under passet",
+      "post": "Efter passet"
+    },
+    "macros": {
+      "protein": "Protein",
+      "carbs": "Kolhydrater",
+      "fat": "Fett"
+    },
+    "day": {
+      "kcal": "Energi i dag",
+      "fiber": "Fibrer {{g}} g",
+      "coverage": "Mikronäringsämnen dokumenterade för {{covered}} av {{total}} poster — ett påstående om datan, inte om maten.",
+      "empty": "Inget registrerat ännu."
+    },
+    "meal": {
+      "sum": "{{kcal}} kcal · P {{protein}} · K {{carbs}} · F {{fat}}",
+      "addFood": "Lägg till livsmedel",
+      "remove": "Ta bort",
+      "newSlot": "Lägg till måltid"
+    },
+    "search": {
+      "label": "Sök livsmedel",
+      "placeholder": "havregryn, skyr, ris … eller streckkod",
+      "core": "Från kärnan",
+      "noneCore": "Inget i kärnan — sök online eller stava annorlunda.",
+      "online": "Sök online (Open Food Facts)",
+      "loading": "Söker på Open Food Facts …",
+      "offline": "Ingen anslutning — kärnan finns kvar, Open Food Facts inte.",
+      "error": "Open Food Facts går inte att nå just nu.",
+      "offResults": "Från Open Food Facts",
+      "noneOff": "Inget där heller.",
+      "offQuality": "Användaruppgifter, delvis ofullständiga — utan mikronäringsämnen.",
+      "grams": "Gram",
+      "preview": "{{kcal}} kcal · protein {{protein}} g · kolhydrater {{carbs}} g · fett {{fat}} g",
+      "add": "Lägg till"
+    },
+    "source": {
+      "core": "kärna",
+      "off": "Open Food Facts",
+      "custom": "egen"
+    },
+    "reference": {
+      "title": "Referens, inget mål",
+      "why": "Uppmätt slår uppskattat: den observerade förbrukningen står före den beräknade.",
+      "observed": "Observerad förbrukning",
+      "observedMeta": "från {{days}} dagars intag och {{delta}} kg viktförändring över 28 dagar",
+      "observedNeeds": "kräver {{days}} dagar med måltider och vikt i början och slutet",
+      "tdee": "Beräknad förbrukning",
+      "tdeeMeta": "BMR {{bmr}} kcal × PAL {{pal}}",
+      "missing": "kräver vikt (dagbok), längd, födelsedatum och kön (profil)",
+      "intake": "Medelintag 28 d",
+      "intakeMeta": "på {{n}} dagar med måltider",
+      "pal": "Aktivitetsnivå (PAL), självskattad",
+      "palLevels": {
+        "1_2": "Stillasittande",
+        "1_375": "Lätt aktiv",
+        "1_55": "Måttligt aktiv",
+        "1_725": "Mycket aktiv",
+        "1_9": "Extremt aktiv"
+      },
+      "formula": "Basalmetabolism enligt Mifflin-St Jeor 1990: 10·kg + 6,25·cm − 5·år ± konstant. Skattningsfel omkring ±{{error}} %. PAL är självskattad, inte uppmätt.",
+      "noTarget": "Det är en måttstock, inget mål. Appen säger inte vad du ska äta."
+    },
+    "links": {
+      "why": "Vikten kommer från dagboken; ett kostbeslut antecknas i cockpiten."
+    }
   }
 }

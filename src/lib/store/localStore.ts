@@ -18,6 +18,9 @@ import {
   type ValidatedWorkoutSet,
   type ValidatedDecision,
   type ValidatedCockpit,
+  type ValidatedMeal,
+  type ValidatedMealItem,
+  type ValidatedNutrition,
   type ValidatedData,
   type ValidatedResult,
 } from './schema'
@@ -61,6 +64,9 @@ export type StoredWorkoutExercise = ValidatedWorkoutExercise
 export type StoredWorkoutSet = ValidatedWorkoutSet
 export type StoredDecision = ValidatedDecision
 export type StoredCockpit = ValidatedCockpit
+export type StoredMeal = ValidatedMeal
+export type StoredMealItem = ValidatedMealItem
+export type StoredNutrition = ValidatedNutrition
 
 export interface LoadResult {
   data: StoredData

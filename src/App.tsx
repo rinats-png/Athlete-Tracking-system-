@@ -140,6 +140,7 @@ const router = createBrowserRouter([
       { path: 'tagebuch', element: screen(() => import('@/features/diary/DiaryScreen'), 'DiaryScreen') },
       { path: 'training', element: screen(() => import('@/features/training/TrainingScreen'), 'TrainingScreen') },
       { path: 'cockpit', element: screen(() => import('@/features/cockpit/CockpitScreen'), 'CockpitScreen') },
+      { path: 'ernaehrung', element: screen(() => import('@/features/nutrition/NutritionScreen'), 'NutritionScreen') },
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },

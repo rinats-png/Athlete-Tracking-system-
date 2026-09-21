@@ -30,6 +30,8 @@ import {
   type StoredWorkout,
   type StoredDecision,
   type StoredCockpit,
+  type StoredMeal,
+  type StoredNutrition,
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
@@ -138,6 +140,12 @@ interface AppDataValue {
   saveDecision: (decision: StoredDecision) => void
   cockpit: StoredCockpit
   saveCockpit: (patch: Partial<StoredCockpit>) => void
+  /** Mahlzeiten und Aktivitätsniveau des aktiven Athleten (Schicht S4). */
+  meals: StoredMeal[]
+  saveMeal: (meal: StoredMeal) => void
+  deleteMeal: (id: string) => void
+  nutrition: StoredNutrition
+  saveNutrition: (patch: Partial<StoredNutrition>) => void
   /** Einwilligung eines Athleten setzen. */
   setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
@@ -650,6 +658,29 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         commitStore({
           ...current,
           athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, cockpit: { ...a.cockpit, ...patch } } : a)),
+        })
+      },
+      meals: store.athletes.find((a) => a.id === store.activeAthleteId)?.meals ?? [],
+      saveMeal: (meal) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, meals: [...a.meals.filter((m) => m.id !== meal.id), meal] } : a)),
+        })
+      },
+      deleteMeal: (id) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, meals: a.meals.filter((m) => m.id !== id) } : a)),
+        })
+      },
+      nutrition: store.athletes.find((a) => a.id === store.activeAthleteId)?.nutrition ?? { pal: 1.55 },
+      saveNutrition: (patch) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, nutrition: { ...a.nutrition, ...patch } } : a)),
         })
       },
       deleteWorkout: (id) => {

@@ -1675,5 +1675,83 @@
       "adherenceBelow": "Plantrouw onder",
       "minCompletenessPct": "Volledigheid onder"
     }
+  },
+  "nutrition": {
+    "eyebrow": "Wat er gegeten is",
+    "title": "Voeding",
+    "intro": "Maaltijden met grammen en energie. Daaronder een referentie met formule, bron en fout — geen doel. Wat je eet, beslis jij.",
+    "introCoach": "De maaltijden van de actieve atleet. De referentie is een berekening, geen instructie.",
+    "slots": {
+      "breakfast": "Ontbijt",
+      "lunch": "Lunch",
+      "dinner": "Avondeten",
+      "snack": "Tussendoortje",
+      "pre": "Voor de sessie",
+      "intra": "Tijdens de sessie",
+      "post": "Na de sessie"
+    },
+    "macros": {
+      "protein": "Eiwit",
+      "carbs": "Koolhydraten",
+      "fat": "Vet"
+    },
+    "day": {
+      "kcal": "Energie vandaag",
+      "fiber": "Vezels {{g}} g",
+      "coverage": "Micronutriënten gedocumenteerd voor {{covered}} van {{total}} posities — een uitspraak over de data, niet over het eten.",
+      "empty": "Nog niets ingevoerd."
+    },
+    "meal": {
+      "sum": "{{kcal}} kcal · E {{protein}} · KH {{carbs}} · V {{fat}}",
+      "addFood": "Voedingsmiddel toevoegen",
+      "remove": "Verwijderen",
+      "newSlot": "Maaltijd toevoegen"
+    },
+    "search": {
+      "label": "Voedingsmiddel zoeken",
+      "placeholder": "havermout, skyr, rijst … of barcode",
+      "core": "Uit de kern",
+      "noneCore": "Niets in de kern — zoek online of spel anders.",
+      "online": "Online zoeken (Open Food Facts)",
+      "loading": "Zoeken bij Open Food Facts …",
+      "offline": "Geen verbinding — de kern blijft, Open Food Facts niet.",
+      "error": "Open Food Facts is nu niet bereikbaar.",
+      "offResults": "Van Open Food Facts",
+      "noneOff": "Daar ook niets.",
+      "offQuality": "Gebruikersgegevens, deels onvolledig — zonder micronutriënten.",
+      "grams": "Gram",
+      "preview": "{{kcal}} kcal · eiwit {{protein}} g · KH {{carbs}} g · vet {{fat}} g",
+      "add": "Toevoegen"
+    },
+    "source": {
+      "core": "kern",
+      "off": "Open Food Facts",
+      "custom": "eigen"
+    },
+    "reference": {
+      "title": "Referentie, geen doel",
+      "why": "Gemeten wint van geschat: het waargenomen verbruik staat vóór het berekende.",
+      "observed": "Waargenomen verbruik",
+      "observedMeta": "uit {{days}} dagen inname en {{delta}} kg gewichtsverandering over 28 dagen",
+      "observedNeeds": "vereist {{days}} dagen met maaltijden en gewicht aan begin en eind",
+      "tdee": "Berekend verbruik",
+      "tdeeMeta": "BMR {{bmr}} kcal × PAL {{pal}}",
+      "missing": "vereist gewicht (dagboek), lengte, geboortedatum en geslacht (profiel)",
+      "intake": "Gem. inname 28 d",
+      "intakeMeta": "op {{n}} dagen met maaltijden",
+      "pal": "Activiteitsniveau (PAL), zelf opgegeven",
+      "palLevels": {
+        "1_2": "Zittend",
+        "1_375": "Licht actief",
+        "1_55": "Matig actief",
+        "1_725": "Zeer actief",
+        "1_9": "Extreem actief"
+      },
+      "formula": "Basaal metabolisme volgens Mifflin-St Jeor 1990: 10·kg + 6,25·cm − 5·jaar ± constante. Schattingsfout ongeveer ±{{error}} %. De PAL is zelf opgegeven, niet gemeten.",
+      "noTarget": "Dit is een maatstaf, geen doel. De app zegt niet wat je moet eten."
+    },
+    "links": {
+      "why": "Gewicht komt uit het dagboek; een voedingsbesluit wordt in de cockpit vastgelegd."
+    }
   }
 }
