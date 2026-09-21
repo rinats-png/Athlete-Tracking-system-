@@ -118,14 +118,16 @@ ausgeschlossen, und daran ändert diese Prüfung nichts.
    den Moment: ein einzelner Laborwert rechtfertigt keine eigene
    Einwilligungsmechanik, und er kehrt mit S5 an der richtigen Stelle
    zurück. Bestehende CK-Einträge bleiben im Bestand und im Export (§89,
-   §32); nur die Eingabe neuer entfällt. *Das ist eine Entscheidung, die
-   dir gehört — ich habe sie nicht umgesetzt.*
+   §32); nur die Eingabe neuer entfällt. *Entschieden und umgesetzt am
+   21.09.2026: `retired: 'art9'` in `src/data/observations.ts`.*
 2. **Die Datenschutzerklärung** sollte sagen, was stimmt: Die App
    verarbeitet keine Gesundheitsdaten **zu medizinischen Zwecken** und
    bewertet keine; einzelne Werte (HRV, Körperzusammensetzung,
    Wellness-Angaben) **können** Gesundheitsdaten sein und werden nur auf
    dem Gerät bzw. mit Synchronisierung unter der eigenen Einwilligung
    verarbeitet. Der Satz «erhebt keine Gesundheitsdaten» ist zu absolut.
+   *Umgesetzt am 21.09.2026 in `src/features/legal/texts.ts` (de/en);
+   anwaltlich zu prüfen wie der Rest.*
 3. **Ein Auftragsverarbeitungsvertrag mit Trainern fehlt.** Ein Trainer,
    der Athleten in KYDON führt, ist Verantwortlicher für deren Daten; KYDON
    verarbeitet sie in seinem Auftrag. Art. 28 verlangt dafür einen Vertrag
@@ -349,8 +351,8 @@ Nur wenn du es so entscheidest — hier steht, was es wäre:
 
 | Massnahme | Umfang | Wann |
 |---|---|---|
-| CK-Eingabe aussetzen (Bestand bleibt) | `src/data/observations.ts`: Eintrag entfernen; Schema und Verlauf lesen ihn weiter | jetzt, klein |
-| Datenschutzerklärung präzisieren | `src/features/legal/texts.ts`, Abschnitt «Keine medizinische Datenverarbeitung» | jetzt, klein |
+| CK-Eingabe aussetzen (Bestand bleibt) | `src/data/observations.ts`: `retired: 'art9'`; Verlauf und Export lesen ihn weiter | **erledigt** 21.09.2026 |
+| Datenschutzerklärung präzisieren | `src/features/legal/texts.ts`, Abschnitt «Keine medizinische Datenverarbeitung» | **erledigt** 21.09.2026 |
 | AV-Vertrag für Trainerkonten | Nutzungsbedingungen + Anlage; Text vom Anwalt | vor dem öffentlichen Betrieb mit Trainern |
 | DSFA-Dokument anlegen | `docs/dsfa.md` nach dem Muster der Aufsicht | vor S5 |
 | `health_entries`, `health_consents`, `health_shares` mit RLS, Ende-zu-Ende-Verschlüsselung, Protokollereignisse | Migration + `src/lib/health/` | S5 |

@@ -123,7 +123,9 @@ const privacyDe: LegalDocument = {
     {
       heading: 'Keine medizinische Datenverarbeitung',
       body: [
-        'KYDON ist kein Medizinprodukt und erhebt keine Gesundheitsdaten zu diagnostischen Zwecken. Die erfassten Werte sind sportliche Leistungsdaten. Trägst du freiwillig Angaben ein, die Rückschlüsse auf deine Gesundheit zulassen, behandeln wir sie mit derselben Sorgfalt wie alle übrigen Daten — die App leitet daraus jedoch keine gesundheitlichen Aussagen ab.',
+        'KYDON ist kein Medizinprodukt. Die App stellt keine Diagnosen, bewertet keine Krankheiten und leitet aus keinem Wert eine gesundheitliche Aussage ab. Die erfassten Werte sind sportliche Leistungsdaten und werden zu keinem medizinischen Zweck verarbeitet.',
+        'Einzelne Angaben können dennoch Gesundheitsdaten im Sinne von Art. 9 DSGVO sein oder werden — etwa die Herzratenvariabilität, die Körperzusammensetzung oder ein Verlauf von Schlaf, Stress und Muskelkater über längere Zeit. Solche Angaben trägst du freiwillig ein; sie bleiben auf deinem Gerät und verlassen es nur, wenn du die Synchronisierung einschaltest. Diese Verarbeitung beruht auf deiner Einwilligung (Art. 6 Abs. 1 lit. a und Art. 9 Abs. 2 lit. a DSGVO), die du jederzeit widerrufst, indem du die Angaben löschst oder die Synchronisierung ausschaltest.',
+        'Laborwerte nimmt die App derzeit nicht entgegen. Die Erfassung der Kreatinkinase ist ausgesetzt, bis eine ausdrückliche Einwilligung je Datenkategorie eingeführt ist; bereits eingetragene Werte bleiben für dich sichtbar und im Export enthalten. Die Selbsteinschätzung vor einem Testtermin und die Hinweise im Cockpit sind Statistik über deine eigenen Trainingsdaten, keine Aussage über deinen Gesundheitszustand.',
       ],
     },
   ],
@@ -209,7 +211,9 @@ const privacyEn: LegalDocument = {
     {
       heading: 'No medical data processing',
       body: [
-        'KYDON is not a medical device and does not collect health data for diagnostic purposes. The values recorded are sports performance data. If you voluntarily enter details that allow conclusions about your health, we treat them with the same care as all other data — but the app derives no health statements from them.',
+        'KYDON is not a medical device. The app makes no diagnoses, assesses no illnesses and derives no health statement from any value. The values recorded are sports performance data and are not processed for any medical purpose.',
+        'Some entries can nevertheless be, or become, health data within the meaning of Art. 9 GDPR — for example heart rate variability, body composition, or a long-term record of sleep, stress and soreness. You enter such details voluntarily; they stay on your device and only leave it if you switch on synchronisation. This processing is based on your consent (Art. 6(1)(a) and Art. 9(2)(a) GDPR), which you withdraw at any time by deleting the entries or switching synchronisation off.',
+        'The app currently does not accept laboratory values. Entry of creatine kinase is suspended until explicit consent per data category has been introduced; values already entered remain visible to you and included in your export. The pre-test self-assessment and the cockpit signals are statistics about your own training data, not statements about your health.',
       ],
     },
   ],

@@ -606,7 +606,7 @@ Datentabelle dazugekommen: `athlete_series`, eine Zeile je Eintrag, Nutzlast
 Die Entscheidungsvorlage zu Gesundheitsdaten und Medizinprodukterecht steht
 in `docs/rechtspruefung-art9-mdr.md`. Für dieses Dokument relevant: CK ist
 ein Laborwert und damit ein Art.-9-Datum, das heute ohne ausdrückliche
-Einwilligung erfasst werden kann (Empfehlung: Eingabe aussetzen bis S5);
+Einwilligung erfasst werden konnte — die Eingabe ist seit 21.09.2026 ausgesetzt (`retired: 'art9'`), bestehende Werte bleiben lesbar und im Export; die Datenschutzerklärung ist entsprechend präzisiert;
 ein Auftragsverarbeitungsvertrag für Trainerkonten fehlt (Art. 28); für S5
 sind Ende-zu-Ende-Verschlüsselung mit nutzergehaltenem Schlüssel, getrennte
 Tabellen mit Einwilligung und Freigabe je Kategorie und eine DSFA

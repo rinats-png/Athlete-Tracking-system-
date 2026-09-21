@@ -57,6 +57,11 @@ export interface ObservationDefinition {
   source: ObservationSource
   /** Ob ein grösserer Wert für sich genommen «mehr» heisst — NICHT «besser». */
   direction: 'higher' | 'lower' | 'neutral'
+  /**
+   * Ausgesetzt: keine neue Eingabe, bestehende Eintraege bleiben lesbar
+   * und im Export (§89, §32). Der Wert nennt den Grund.
+   */
+  retired?: 'art9'
 }
 
 /**
@@ -69,6 +74,11 @@ export interface ObservationDefinition {
  */
 export const OBSERVATIONS: ObservationDefinition[] = [
   // --- Erholung ------------------------------------------------------------
+  // Kreatinkinase ist ein Laborwert und damit ein Gesundheitsdatum nach
+  // Art. 9 DSGVO — ohne ausdrueckliche Einwilligung je Kategorie darf die App
+  // ihn nicht neu entgegennehmen (docs/rechtspruefung-art9-mdr.md §3). Die
+  // Eingabe ist ausgesetzt, bis die Gesundheitsschicht (S5) die Einwilligung
+  // mitbringt. Was schon eingetragen ist, bleibt sichtbar und im Export.
   {
     key: 'ck_u_l',
     group: 'recovery',
@@ -78,6 +88,7 @@ export const OBSERVATIONS: ObservationDefinition[] = [
     step: 1,
     source: 'medical',
     direction: 'neutral',
+    retired: 'art9',
   },
   {
     key: 'doms',
@@ -202,6 +213,9 @@ export const OBSERVATIONS: ObservationDefinition[] = [
 ]
 
 export const OBSERVATION_BY_KEY = new Map(OBSERVATIONS.map((o) => [o.key, o]))
+
+/** Nur, was neu eingetragen werden darf. Ausgesetzte Werte bleiben ueber observationByKey lesbar. */
+export const ACTIVE_OBSERVATIONS: ObservationDefinition[] = OBSERVATIONS.filter((o) => !o.retired)
 
 export function observationByKey(key: string): ObservationDefinition | undefined {
   return OBSERVATION_BY_KEY.get(key)

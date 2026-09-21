@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { openGuest } from './helpers'
-import { OBSERVATIONS, observationByKey } from '../src/data/observations'
+import { OBSERVATIONS, observationByKey, ACTIVE_OBSERVATIONS } from '../src/data/observations'
 import { radarProfile } from '../src/lib/scoring'
 
 /**
@@ -37,8 +37,13 @@ test.describe('Der Katalog der Beobachtungswerte', () => {
     }
   })
 
-  test('ein Blutwert ist als ärztliche Leistung gekennzeichnet', () => {
+  test('ein Blutwert ist als ärztliche Leistung gekennzeichnet — und seine Eingabe ausgesetzt (Art. 9)', () => {
+    // Kreatinkinase ist ein Laborwert: ein Gesundheitsdatum ohne Einwilligung
+    // je Kategorie. Bestehende Einträge bleiben lesbar, neue gibt es erst mit S5.
     expect(observationByKey('ck_u_l')?.source).toBe('medical')
+    expect(observationByKey('ck_u_l')?.retired).toBe('art9')
+    expect(ACTIVE_OBSERVATIONS.some((o) => o.key === 'ck_u_l')).toBe(false)
+    expect(ACTIVE_OBSERVATIONS.some((o) => o.source === 'medical')).toBe(false)
   })
 })
 
@@ -59,15 +64,16 @@ test.describe('Im Bildschirm', () => {
   test('er wird nirgends bewertet', async ({ page }) => {
     await openGuest(page)
     await page.goto('/beobachtung', { waitUntil: 'domcontentloaded' })
-    await page.getByLabel('Beobachtungswerte', { exact: true }).selectOption('ck_u_l')
-    await page.getByLabel('Wert', { exact: true }).fill('420')
+    await page.getByLabel('Beobachtungswerte', { exact: true }).selectOption('hrv_rmssd_ms')
+    await page.getByLabel('Wert', { exact: true }).fill('68')
     await page.getByRole('button', { name: 'Wert erfassen' }).click()
 
     // Keine Stufe, kein Perzentil, keine Deutung.
     for (const wort of ['Schwach', 'Durchschnitt', 'Sehr gut', 'Elite', 'Perzentil']) {
       await expect(page.getByText(wort, { exact: true })).toHaveCount(0)
     }
-    await expect(page.getByText(/sagt eine Ärztin oder ein Arzt/)).toBeVisible()
+    // Der Laborwert ist nicht mehr wählbar (Art. 9, siehe Katalog).
+    await expect(page.getByRole('option', { name: /Kreatinkinase/ })).toHaveCount(0)
   })
 
   test('er zahlt auf keine Profilachse ein', async ({ page }) => {
@@ -91,9 +97,6 @@ test.describe('Im Bildschirm', () => {
   test('welches Gerät oder welche Fachperson nötig ist, steht dabei', async ({ page }) => {
     await openGuest(page)
     await page.goto('/beobachtung', { waitUntil: 'domcontentloaded' })
-    await page.getByLabel('Beobachtungswerte', { exact: true }).selectOption('ck_u_l')
-    await expect(page.getByText(/Blutentnahme und ärztliche Befundung/)).toBeVisible()
-
     await page.getByLabel('Beobachtungswerte', { exact: true }).selectOption('mip_cm_h2o')
     await expect(page.getByText(/Fachgerät oder ein Labor/)).toBeVisible()
   })

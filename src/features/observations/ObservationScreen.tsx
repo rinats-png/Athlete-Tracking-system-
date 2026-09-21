@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { OBSERVATIONS, observationByKey } from '@/data/observations'
+import { ACTIVE_OBSERVATIONS, observationByKey } from '@/data/observations'
 import type { ObservationGroup } from '@/data/observations'
 import { formatDate, formatNumber } from '@/lib/format'
 
@@ -29,7 +29,7 @@ export function ObservationScreen() {
   const locale = useLocale()
   const { observations, addObservation, deleteObservation } = useAppData()
 
-  const [key, setKey] = useState(OBSERVATIONS[0].key)
+  const [key, setKey] = useState(ACTIVE_OBSERVATIONS[0].key)
   const [value, setValue] = useState('')
   const [observedAt, setObservedAt] = useState(() => new Date().toISOString().slice(0, 10))
   const [device, setDevice] = useState('')
@@ -87,7 +87,7 @@ export function ObservationScreen() {
             >
               {GROUPS.map((group) => (
                 <optgroup key={group} label={t(`observation.groups.${group}`)}>
-                  {OBSERVATIONS.filter((o) => o.group === group).map((o) => (
+                  {ACTIVE_OBSERVATIONS.filter((o) => o.group === group).map((o) => (
                     <option key={o.key} value={o.key}>
                       {t(`observation.keys.${o.key}`)}
                     </option>
