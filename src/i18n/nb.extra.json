@@ -345,7 +345,9 @@
       "vat": "MVA-nummer",
       "missing": "ikke oppgitt ennå",
       "incomplete": "Denne utgiverinformasjonen er ufullstendig: {{fields}} mangler fortsatt. Disse opplysningene må fylles ut før offentlig drift — uten dem oppfyller tjenesten ikke kravene.",
-      "note": "Oppføringer uten verdi er fraværende, ikke skjult. De ligger i src/data/operator.ts."
+      "note": "Oppføringer uten verdi er fraværende, ikke skjult. De ligger i src/data/operator.ts.",
+      "sources": "Datakilder og lisenser",
+      "sourcesIntro": "Hva appen henter fra eksterne databaser — med navngivelse, slik lisensen krever."
     },
     "privacy": {
       "title": "Personvern"

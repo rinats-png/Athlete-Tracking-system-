@@ -345,7 +345,9 @@
       "vat": "NIF-IVA",
       "missing": "aún no indicado",
       "incomplete": "Este aviso legal está incompleto: falta todavía {{fields}}. Estos datos deben completarse antes de la operación pública — sin ellos el servicio no cumple la normativa.",
-      "note": "Las entradas sin valor están ausentes, no ocultas. Viven en src/data/operator.ts."
+      "note": "Las entradas sin valor están ausentes, no ocultas. Viven en src/data/operator.ts.",
+      "sources": "Fuentes de datos y licencias",
+      "sourcesIntro": "Lo que la app obtiene de bases de datos externas — con atribución, como exige la licencia."
     },
     "privacy": {
       "title": "Privacidad"

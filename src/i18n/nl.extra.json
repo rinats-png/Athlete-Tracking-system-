@@ -345,7 +345,9 @@
       "vat": "Btw-nummer",
       "missing": "nog niet opgegeven",
       "incomplete": "Dit colofon is onvolledig: {{fields}} ontbreekt nog. Deze gegevens moeten vóór openbaar gebruik worden ingevuld — zonder deze voldoet de dienst niet aan de regels.",
-      "note": "Vermeldingen zonder waarde ontbreken, ze zijn niet verborgen. Ze staan in src/data/operator.ts."
+      "note": "Vermeldingen zonder waarde ontbreken, ze zijn niet verborgen. Ze staan in src/data/operator.ts.",
+      "sources": "Gegevensbronnen en licenties",
+      "sourcesIntro": "Wat de app uit externe databanken haalt — met naamsvermelding, zoals de licentie vereist."
     },
     "privacy": {
       "title": "Privacy"

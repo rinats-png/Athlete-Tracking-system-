@@ -49,7 +49,7 @@ const privacyDe: LegalDocument = {
       body: [
         'Messen und Auswerten passiert vollständig in deinem Browser. Solange du die Synchronisierung nicht einschaltest, verlässt kein Messwert dein Gerät.',
         'Ein Konto brauchst du, um die App zu benutzen. Dafür verarbeiten wir deine E-Mail-Adresse und dein Passwort — mehr nicht.',
-        'Es gibt keine Werbung, kein Tracking, keine Analysedienste, keine Weitergabe an Dritte zu Werbezwecken und keine externen Schriften oder Skripte.',
+        'Es gibt keine Werbung, kein Tracking, keine Analysedienste, keine Weitergabe an Dritte zu Werbezwecken und keine externen Schriften oder Skripte. Der einzige externe Dienst, den die App aufruft, ist die Lebensmittelsuche bei Open Food Facts — und nur, wenn du sie antippst (siehe unten).',
       ],
     },
     {
@@ -115,6 +115,13 @@ const privacyDe: LegalDocument = {
       ],
     },
     {
+      heading: 'Lebensmittelsuche (auf Tipp)',
+      body: [
+        'In der Ernährung kannst du Lebensmittel bei Open Food Facts suchen — einer offenen Datenbank des Vereins Open Food Facts (Frankreich). Das passiert nur, wenn du «Online suchen» antippst oder einen Barcode eingibst, nie beim Tippen und nie im Hintergrund. Dabei erhält Open Food Facts deinen Suchbegriff oder Barcode, deine IP-Adresse und die Kennung der App. Es werden keine Messwerte, kein Name und keine Mahlzeiten übertragen.',
+        'Open Food Facts ist dafür eigener Verantwortlicher; seine Datenschutzhinweise findest du unter openfoodfacts.org. Rechtsgrundlage ist deine Einwilligung durch den Tipp (Art. 6 Abs. 1 lit. a DSGVO). Übernommene Nährwerte werden in deiner Mahlzeit gespeichert und tragen die Herkunft; die Daten stehen unter der Open Database License (ODbL).',
+      ],
+    },
+    {
       heading: 'Zahlungen',
       body: [
         'Bezahlte Stufen werden über Stripe Payments Europe, Ltd. (Dublin, Irland) abgewickelt. Beim Kauf verlässt du die App und gibst Zahlungsdaten auf einer Seite von Stripe ein; KYDON sieht weder Kartennummer noch Kontodaten. Stripe erhält von uns deine E-Mail-Adresse und eine Kontokennung, damit die Zahlung deinem Konto zugeordnet werden kann.',
@@ -143,7 +150,7 @@ const privacyEn: LegalDocument = {
       body: [
         'Measuring and analysis happen entirely in your browser. As long as you do not turn on sync, no measurement leaves your device.',
         'You need an account to use the app. For that we process your email address and your password — nothing else.',
-        'There is no advertising, no tracking, no analytics, no sharing with third parties for advertising, and no external fonts or scripts.',
+        'There is no advertising, no tracking, no analytics, no sharing with third parties for advertising, and no external fonts or scripts. The only external service the app calls is the food search at Open Food Facts — and only when you tap it (see below).',
       ],
     },
     {
@@ -201,6 +208,13 @@ const privacyEn: LegalDocument = {
         'No cookies for advertising or analytics. The app sets no cookies at all; the sign-in state lives in local storage.',
         'No reach measurement, no fingerprinting, no profiling, no automated decision-making within the meaning of Art. 22 GDPR.',
         'No transmission to ad networks, no embedded third-party content, no external fonts.',
+      ],
+    },
+    {
+      heading: 'Food search (on tap)',
+      body: [
+        'In nutrition you can search foods at Open Food Facts — an open database run by the Open Food Facts association (France). This happens only when you tap “Search online” or enter a barcode, never while typing and never in the background. Open Food Facts then receives your search term or barcode, your IP address and the app identifier. No measurements, no name and no meals are transmitted.',
+        'Open Food Facts is an independent controller for this; see openfoodfacts.org for its privacy notice. The legal basis is your consent by tapping (Art. 6(1)(a) GDPR). Adopted nutrition values are stored in your meal and carry their origin; the data is licensed under the Open Database License (ODbL).',
       ],
     },
     {

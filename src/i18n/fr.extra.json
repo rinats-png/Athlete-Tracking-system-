@@ -345,7 +345,9 @@
       "vat": "Numéro de TVA",
       "missing": "pas encore renseigné",
       "incomplete": "Ces mentions sont incomplètes : {{fields}} manque(nt) encore. Ces informations doivent être renseignées avant toute exploitation publique — sans elles, le service n'est pas conforme.",
-      "note": "Les entrées sans valeur sont absentes, pas masquées. Elles se trouvent dans src/data/operator.ts."
+      "note": "Les entrées sans valeur sont absentes, pas masquées. Elles se trouvent dans src/data/operator.ts.",
+      "sources": "Sources de données et licences",
+      "sourcesIntro": "Ce que l'application tire de bases de données externes — avec attribution, comme l'exige la licence."
     },
     "privacy": {
       "title": "Confidentialité"

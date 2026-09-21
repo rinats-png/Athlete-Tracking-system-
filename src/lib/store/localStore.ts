@@ -1,3 +1,4 @@
+import { OFF_NOTICE } from '@/lib/offNotice'
 import {
   CURRENT_SCHEMA_VERSION,
   emptyData,
@@ -165,7 +166,16 @@ export function exportData(data: StoredData, appVersion = __APP_VERSION__): stri
     createdAt: new Date().toISOString(),
     data,
   }
-  return JSON.stringify(envelope, null, 2)
+  // Namensnennung nach ODbL §4.3, sobald eine Mahlzeit einen Wert aus Open
+  // Food Facts traegt (docs/odbl.md). Der Import ignoriert das Feld.
+  const notices = exportNotices(data)
+  return JSON.stringify(notices.length > 0 ? { ...envelope, notices } : envelope, null, 2)
+}
+
+/** Die Notizen, die ein Export tragen muss — heute nur die zu Open Food Facts. */
+export function exportNotices(data: StoredData): string[] {
+  const hasOff = data.athletes.some((a) => (a.meals ?? []).some((m) => m.items.some((i) => i.source === 'off')))
+  return hasOff ? [OFF_NOTICE] : []
 }
 
 export interface ImportOutcome {

@@ -722,10 +722,18 @@ nicht gebaut: die Red-Flag-Triage und das REDs-Screening.
 Vertrag zur Auftragsverarbeitung für Trainerkonten mit Annahme je Fassung
 auf dem Server (`/auftragsverarbeitung`, `accounts.dpa_accepted_at`).
 
-**Offen, unverändert:** die Lizenzfrage zu ODbL (Abschnitt 7), ein
-kuratierter Ausbau des Kerns aus BLS oder USDA, ein echter Zwei-Geräte-
-Abgleich und ein echter Testkauf am lebenden System, Elite mit S5 — und
-die Anwaltsgespräche aus der Rechtsprüfung.
+**Lizenzfrage ODbL geklärt (21.09.2026, `docs/odbl.md`):** Abfragen und
+Anzeigen ist ein «Produced Work» mit Notizpflicht, kein Share-alike; die
+Namensnennung steht unter jeder Trefferliste, an jeder Position, im
+Impressum und im Export. Ein Offline-Auszug wäre eine weitergegebene
+abgeleitete Datenbank und wird nicht gebaut; der Weg zu mehr Offline-
+Bestand ist ein kuratierter Kern aus BLS oder USDA. Dazu: Ratenbegrenzung
+nach der API-Dokumentation, App-Kennung an jeder Abfrage, Open Food Facts
+als externer Dienst in der Datenschutzerklärung.
+
+**Offen, unverändert:** ein kuratierter Ausbau des Kerns aus BLS oder
+USDA, ein echter Zwei-Geräte-Abgleich und ein echter Testkauf am lebenden
+System, Elite mit S5 — und die Anwaltsgespräche aus der Rechtsprüfung.
 
 ## 14. Zusammenfassung in drei Sätzen
 

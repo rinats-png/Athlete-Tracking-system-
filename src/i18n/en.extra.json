@@ -345,7 +345,9 @@
       "vat": "VAT ID",
       "missing": "not yet provided",
       "incomplete": "This imprint is incomplete: {{fields}} still missing. These details must be filled in before public operation — without them the service is not compliant.",
-      "note": "Entries without a value are absent, not hidden. They live in src/data/operator.ts."
+      "note": "Entries without a value are absent, not hidden. They live in src/data/operator.ts.",
+      "sources": "Data sources and licences",
+      "sourcesIntro": "What the app draws from external databases — with attribution, as the licence requires."
     },
     "privacy": {
       "title": "Privacy"

@@ -16,16 +16,63 @@
  * LOKAL ZUERST: Ohne Verbindung liefert die Suche nichts und sagt das. Die
  * App bleibt benutzbar; der Kern kennt 245 Lebensmittel ohne Netz.
  *
- * LIZENZ, offen benannt: ODbL verlangt Namensnennung und — für WEITER-
- * GEGEBENE abgeleitete Datenbanken — Share-alike. Die App zeigt Werte an
- * und verteilt keinen Auszug. Ob das reicht, gehört einmal rechtlich
- * geklärt (docs/ausbau.md, Abschnitt 7); bis dahin bleibt es beim Anzeigen.
+ * LIZENZ (geklärt, docs/odbl.md): ODbL verlangt Namensnennung und — für
+ * WEITERGEGEBENE abgeleitete Datenbanken — Share-alike. Die App fragt ab,
+ * zeigt an (ein «Produced Work» mit Notiz) und verteilt keinen Auszug;
+ * damit bleibt es bei der Namensnennung: unter jeder Trefferliste, an
+ * jeder Position, im Impressum und im Export. Ein Offline-Auszug wird
+ * nicht gebaut — er wäre eine weitergegebene abgeleitete Datenbank.
+ *
+ * FAIRER UMGANG MIT DER API: Open Food Facts bittet um eine Kennung der
+ * App und um höchstens 10 Suchen und 100 Produktabfragen je Minute. Ein
+ * Browser kann den User-Agent nicht setzen; die Kennung geht als
+ * Parameter mit. Die Rate hält ein gleitendes Fenster je Abfrageart —
+ * eine Abfrage darüber wartet, statt abgewiesen zu werden.
  */
 
 import type { Per100 } from '@/data/foods'
+import { OFF_NOTICE } from '@/lib/offNotice'
 
 export const OFF_ORIGIN = 'https://world.openfoodfacts.org'
 export const OFF_ATTRIBUTION = 'Open Food Facts · ODbL · openfoodfacts.org'
+/** Die Notiz nach ODbL §4.3, wie sie im Export und im Impressum steht. */
+export { OFF_NOTICE }
+
+/** Kennung der App an der API — was Open Food Facts an Stelle eines User-Agent bekommt. */
+const APP_ID = `app_name=kydon&app_version=${encodeURIComponent(typeof __APP_VERSION__ === 'string' ? __APP_VERSION__ : 'dev')}`
+
+/** Die Grenzen aus der API-Dokumentation von Open Food Facts, je Minute. */
+export const OFF_RATE = { search: 10, product: 100, windowMs: 60_000 } as const
+
+/**
+ * Gleitendes Fenster je Abfrageart. Gibt zurück, wie lange zu warten ist,
+ * bis die nächste Abfrage im Rahmen liegt — 0, wenn sofort. Reine Rechnung
+ * über Zeitstempel, damit sie ohne Netz prüfbar ist.
+ */
+export function rateDelay(recent: number[], limit: number, now: number, windowMs: number = OFF_RATE.windowMs): number {
+  const inWindow = recent.filter((t) => now - t < windowMs)
+  if (inWindow.length < limit) return 0
+  const oldest = Math.min(...inWindow)
+  return Math.max(0, oldest + windowMs - now)
+}
+
+const recent: Record<'search' | 'product', number[]> = { search: [], product: [] }
+
+async function respectRate(kind: 'search' | 'product', signal?: AbortSignal): Promise<void> {
+  const now = Date.now()
+  recent[kind] = recent[kind].filter((t) => now - t < OFF_RATE.windowMs)
+  const wait = rateDelay(recent[kind], OFF_RATE[kind], now)
+  if (wait > 0) {
+    await new Promise<void>((resolve, reject) => {
+      const timer = setTimeout(resolve, wait)
+      signal?.addEventListener('abort', () => {
+        clearTimeout(timer)
+        reject(new DOMException('aborted', 'AbortError'))
+      })
+    })
+  }
+  recent[kind].push(Date.now())
+}
 
 export interface OffFood {
   /** Barcode (EAN), die stabile Kennung eines Produkts. */
@@ -90,7 +137,8 @@ export async function searchOpenFoodFacts(query: string, signal?: AbortSignal): 
   if (!q) return { ok: true, foods: [] }
   if (typeof navigator !== 'undefined' && navigator.onLine === false) return { ok: false, reason: 'offline' }
   try {
-    const url = `${OFF_ORIGIN}/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=10&fields=${FIELDS}`
+    await respectRate('search', signal)
+    const url = `${OFF_ORIGIN}/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=10&fields=${FIELDS}&${APP_ID}`
     const res = await fetch(url, { signal, headers: { Accept: 'application/json' } })
     if (!res.ok) return { ok: false, reason: 'error' }
     const body = (await res.json()) as { products?: OffProduct[] }
@@ -107,7 +155,8 @@ export async function lookupBarcode(code: string, signal?: AbortSignal): Promise
   if (c.length < 8) return { ok: true, foods: [] }
   if (typeof navigator !== 'undefined' && navigator.onLine === false) return { ok: false, reason: 'offline' }
   try {
-    const res = await fetch(`${OFF_ORIGIN}/api/v2/product/${c}?fields=${FIELDS}`, { signal, headers: { Accept: 'application/json' } })
+    await respectRate('product', signal)
+    const res = await fetch(`${OFF_ORIGIN}/api/v2/product/${c}?fields=${FIELDS}&${APP_ID}`, { signal, headers: { Accept: 'application/json' } })
     if (!res.ok) return { ok: false, reason: 'error' }
     const body = (await res.json()) as { product?: OffProduct }
     const food = body.product ? fromOffProduct(body.product) : null

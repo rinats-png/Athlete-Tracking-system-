@@ -345,7 +345,9 @@
       "vat": "Momsregistreringsnummer",
       "missing": "inte angivet ännu",
       "incomplete": "Uppgifterna är ofullständiga: {{fields}} saknas fortfarande. De måste fyllas i före offentlig drift — utan dem uppfyller tjänsten inte kraven.",
-      "note": "Poster utan värde saknas, de är inte dolda. De finns i src/data/operator.ts."
+      "note": "Poster utan värde saknas, de är inte dolda. De finns i src/data/operator.ts.",
+      "sources": "Datakällor och licenser",
+      "sourcesIntro": "Vad appen hämtar från externa databaser — med erkännande, som licensen kräver."
     },
     "privacy": {
       "title": "Integritet"

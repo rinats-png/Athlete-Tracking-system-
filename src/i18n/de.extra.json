@@ -345,7 +345,9 @@
       "vat": "Umsatzsteuer-ID",
       "missing": "noch nicht hinterlegt",
       "incomplete": "Dieses Impressum ist unvollständig: {{fields}} fehlt noch. Vor dem öffentlichen Betrieb müssen diese Angaben eingetragen sein — ohne sie ist das Angebot nicht rechtskonform.",
-      "note": "Angaben ohne Eintrag sind nicht vorhanden, nicht verborgen. Sie stehen in src/data/operator.ts und werden dort gepflegt."
+      "note": "Angaben ohne Eintrag sind nicht vorhanden, nicht verborgen. Sie stehen in src/data/operator.ts und werden dort gepflegt.",
+      "sources": "Datenquellen und Lizenzen",
+      "sourcesIntro": "Was die App aus fremden Datenbanken bezieht — mit Namensnennung, wie die Lizenz es verlangt."
     },
     "privacy": {
       "title": "Datenschutz"

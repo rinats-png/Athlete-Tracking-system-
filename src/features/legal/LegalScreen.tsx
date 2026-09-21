@@ -10,6 +10,7 @@ import { DPA_VERSION, dpaDocument, privacyDocument, termsDocument, type LegalDoc
 import { readAccount } from '@/features/auth/account'
 import { acceptDpa, fetchDpaState } from '@/lib/supabase/dpa'
 import { formatDate } from '@/lib/format'
+import { OFF_NOTICE } from '@/lib/offNotice'
 import { pick } from '@/i18n/pick'
 import { LEGAL_LOCALES } from '@/i18n/locales'
 
@@ -66,6 +67,22 @@ export function ImprintScreen() {
             </div>
           ))}
         </dl>
+      </Panel>
+      <Panel className="mt-4" data-testid="imprint-sources">
+        <PanelHeader title={t('legal.imprint.sources')} subtitle={t('legal.imprint.sourcesIntro')} />
+        <ul className="divide-y divide-line">
+          <li className="px-4 py-3 text-[13px] leading-relaxed">
+            <p className="font-medium">Open Food Facts</p>
+            <p className="text-ink-secondary">{OFF_NOTICE}</p>
+            <a href="https://world.openfoodfacts.org" target="_blank" rel="noreferrer noopener" className="text-[12px] underline underline-offset-2">
+              https://world.openfoodfacts.org
+            </a>
+            <span className="ml-2 text-[12px] text-ink-muted">·</span>
+            <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noreferrer noopener" className="ml-2 text-[12px] underline underline-offset-2">
+              ODbL 1.0
+            </a>
+          </li>
+        </ul>
       </Panel>
       <p className="mt-4 text-[12px] leading-relaxed text-ink-muted">{t('legal.imprint.note')}</p>
     </Frame>

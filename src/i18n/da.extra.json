@@ -345,7 +345,9 @@
       "vat": "Momsnummer",
       "missing": "endnu ikke angivet",
       "incomplete": "Denne kolofon er ufuldstændig: {{fields}} mangler stadig. Disse oplysninger skal udfyldes før offentlig drift — uden dem er tjenesten ikke i overensstemmelse med reglerne.",
-      "note": "Poster uden værdi er fraværende, ikke skjulte. De ligger i src/data/operator.ts."
+      "note": "Poster uden værdi er fraværende, ikke skjulte. De ligger i src/data/operator.ts.",
+      "sources": "Datakilder og licenser",
+      "sourcesIntro": "Hvad appen henter fra eksterne databaser — med kildeangivelse, som licensen kræver."
     },
     "privacy": {
       "title": "Privatliv"
