@@ -601,6 +601,17 @@ Datentabelle dazugekommen: `athlete_series`, eine Zeile je Eintrag, Nutzlast
 - **Secrets** (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`) liegen nur als
   Edge-Function-Secrets, nie im Frontend oder im Repo.
 
+## Rechtsprüfung Art. 9 und MDR (21.09.2026)
+
+Die Entscheidungsvorlage zu Gesundheitsdaten und Medizinprodukterecht steht
+in `docs/rechtspruefung-art9-mdr.md`. Für dieses Dokument relevant: CK ist
+ein Laborwert und damit ein Art.-9-Datum, das heute ohne ausdrückliche
+Einwilligung erfasst werden kann (Empfehlung: Eingabe aussetzen bis S5);
+ein Auftragsverarbeitungsvertrag für Trainerkonten fehlt (Art. 28); für S5
+sind Ende-zu-Ende-Verschlüsselung mit nutzergehaltenem Schlüssel, getrennte
+Tabellen mit Einwilligung und Freigabe je Kategorie und eine DSFA
+vorgesehen.
+
 ## Was man selbst laufen lassen kann
 
 ```bash

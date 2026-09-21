@@ -539,7 +539,8 @@ ein benutzbares Produkt steht.
 | **S4 Ernährung** | **gebaut**, 21.09.2026 | `src/data/foods.ts`, `src/lib/openFoodFacts.ts`, `src/domain/nutrition.ts`, `src/features/nutrition/`, Schema v23 |
 | **Etappe 0 Tabellentrennung** | **gebaut**, 21.09.2026 | `supabase/migrations/20260921120000_athlete_series.sql`, `src/lib/supabase/series.ts`, `src/lib/supabase/sync.ts` |
 | **Etappe 4 Stufen und Bezahlweg** | **gebaut**, 21.09.2026 — scharf erst mit `VITE_BILLING=on` | `src/data/pricing.ts`, `src/domain/entitlement.ts`, `src/lib/billing.ts`, `src/features/billing/`, `supabase/functions/{create-checkout,stripe-webhook,billing-portal}`, Migrationen `billing_products`, `billing` |
-| S5 Gesundheit | offen | |
+| **Etappe 6 Rechtsprüfung Art. 9 / MDR** | **Vorlage erstellt**, 21.09.2026 — Entscheidung und Anwaltsgespräch offen | `docs/rechtspruefung-art9-mdr.md` |
+| S5 Gesundheit | offen, Umfang in der Rechtsprüfung empfohlen | |
 
 **Eine bewusste Abweichung vom Plan, offen benannt.** Etappe 0 sah vor, die
 Zeitreihen *vor* S1 in eigene Servertabellen zu ziehen. S1 legt das Tagebuch
@@ -704,9 +705,22 @@ er weh tut, ist keiner mehr — deshalb steht das hier und nicht im Code.
   `customer.subscription.deleted` zeigen lassen, das Kundenportal in Stripe
   aktivieren, Bestandskunden zu 29 € als eigene Preis-Kennung weiterführen.
 
+**Was Etappe 6 geworden ist (Rechtsprüfung):** eine Entscheidungsvorlage
+in `docs/rechtspruefung-art9-mdr.md` — Bestandsaufnahme der heute
+verarbeiteten Daten mit Art.-9-Einordnung, die Anforderungen an die
+S5-Architektur, jedes S5-Merkmal einzeln gegen die MDR (MDCG 2019-11,
+Regel 11), eine Empfehlung zum Umfang von S5 und die Fragen für die zwei
+Anwaltsgespräche. Drei Befunde, die S5 nicht abwarten: CK ist ein
+Laborwert und damit heute schon ein Gesundheitsdatum ohne ausdrückliche
+Einwilligung; die Datenschutzerklärung ist im Satz «keine Gesundheitsdaten»
+zu absolut; ein Auftragsverarbeitungsvertrag für Trainerkonten fehlt. Zwei
+S5-Merkmale sind nach der Einordnung Medizinprodukte-Software und werden
+nicht gebaut: die Red-Flag-Triage und das REDs-Screening.
+
 **Offen, unverändert:** die Lizenzfrage zu ODbL (Abschnitt 7), ein
 kuratierter Ausbau des Kerns aus BLS oder USDA, ein echter Zwei-Geräte-
-Abgleich und ein echter Testkauf am lebenden System, Elite mit S5.
+Abgleich und ein echter Testkauf am lebenden System, Elite mit S5 — und
+die Entscheidungen aus der Rechtsprüfung.
 
 ## 14. Zusammenfassung in drei Sätzen
 
