@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowLeft } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -5,7 +6,10 @@ import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { OPERATOR, PROCESSORS, missingOperatorFields } from '@/data/operator'
-import { privacyDocument, termsDocument, type LegalDocument } from './texts'
+import { DPA_VERSION, dpaDocument, privacyDocument, termsDocument, type LegalDocument } from './texts'
+import { readAccount } from '@/features/auth/account'
+import { acceptDpa, fetchDpaState } from '@/lib/supabase/dpa'
+import { formatDate } from '@/lib/format'
 import { pick } from '@/i18n/pick'
 import { LEGAL_LOCALES } from '@/i18n/locales'
 
@@ -102,6 +106,79 @@ export function TermsScreen() {
   return <DocumentScreen document={termsDocument(locale)} />
 }
 
+/**
+ * Der Vertrag zur Auftragsverarbeitung — mit der Annahme darunter.
+ *
+ * Die Annahme ist eine Handlung des Trainers, kein Haken in den AGB: eigener
+ * Knopf, eigene Fassung, eigenes Datum. Der Serverstand ist die Wahrheit
+ * (fetchDpaState holt ihn beim Öffnen); ohne Anmeldung gibt es nichts
+ * anzunehmen, und der Bildschirm sagt das. Athleten sehen den Vertrag nur.
+ */
+export function DpaScreen() {
+  const locale = useLocale()
+  const { t } = useTranslation()
+  const account = readAccount()
+  const [state, setState] = useState(() => ({ acceptedAt: account?.dpaAcceptedAt ?? null, version: account?.dpaVersion ?? null }))
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let alive = true
+    void fetchDpaState().then((remote) => {
+      if (alive && remote) setState(remote)
+    })
+    return () => {
+      alive = false
+    }
+  }, [])
+
+  const current = state.acceptedAt != null && state.version === DPA_VERSION
+  const outdated = state.acceptedAt != null && state.version !== DPA_VERSION
+
+  return (
+    <DocumentScreen document={dpaDocument(locale)}>
+      <Panel className="mt-4" data-testid="dpa-acceptance">
+        <PanelHeader title={t('legal.dpa.acceptTitle')} subtitle={t('legal.dpa.version', { version: DPA_VERSION })} />
+        <div className="space-y-2 px-4 py-3 text-[13px] leading-relaxed">
+          {account?.role !== 'coach' ? (
+            <p className="text-ink-secondary">{t('legal.dpa.coachOnly')}</p>
+          ) : current ? (
+            <p role="status" className="text-ink-secondary">
+              {t('legal.dpa.accepted', { date: formatDate(state.acceptedAt!, locale), version: state.version })}
+            </p>
+          ) : (
+            <>
+              <p className="text-ink-secondary">{outdated ? t('legal.dpa.outdated', { version: state.version }) : t('legal.dpa.notYet')}</p>
+              <p className="text-[12px] text-ink-muted">{t('legal.dpa.howTo')}</p>
+              <Button
+                type="button"
+                variant="primary"
+                size="sm"
+                disabled={busy}
+                onClick={async () => {
+                  setBusy(true)
+                  setError(null)
+                  const r = await acceptDpa(DPA_VERSION)
+                  setBusy(false)
+                  if (r.ok) setState({ acceptedAt: r.acceptedAt, version: DPA_VERSION })
+                  else setError(t(`legal.dpa.${r.reason}`))
+                }}
+              >
+                {t('legal.dpa.accept')}
+              </Button>
+              {error && (
+                <p role="alert" className="text-[12px] text-warning">
+                  {error}
+                </p>
+              )}
+            </>
+          )}
+        </div>
+      </Panel>
+    </DocumentScreen>
+  )
+}
+
 function DocumentScreen({
   document,
   children,
@@ -175,6 +252,7 @@ function Frame({
     { to: '/impressum', label: t('legal.imprint.title') },
     { to: '/datenschutz', label: t('legal.privacy.title') },
     { to: '/nutzungsbedingungen', label: t('legal.terms.title') },
+    { to: '/auftragsverarbeitung', label: t('legal.dpa.title') },
   ]
   return (
     <>

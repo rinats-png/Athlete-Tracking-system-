@@ -185,6 +185,8 @@ function SignInPane({ onDone }: { onDone: (account: Account) => void }) {
         role: 'athlete',
         planId: null,
         createdAt: new Date().toISOString(),
+        dpaAcceptedAt: null,
+        dpaVersion: null,
       })
       return
     }
@@ -202,6 +204,8 @@ function SignInPane({ onDone }: { onDone: (account: Account) => void }) {
       role: 'athlete',
       planId: null,
       createdAt: new Date().toISOString(),
+      dpaAcceptedAt: null,
+      dpaVersion: null,
     })
   }
 
@@ -411,6 +415,8 @@ function RegisterDetails({
       role,
       planId,
       createdAt: new Date().toISOString(),
+      dpaAcceptedAt: null,
+      dpaVersion: null,
     }
 
     if (!isSupabaseConfigured()) {

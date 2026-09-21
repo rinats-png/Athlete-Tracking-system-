@@ -52,6 +52,8 @@ const SEEDED_ACCOUNT = {
   role: 'athlete',
   planId: null,
   createdAt: '2026-01-01T00:00:00.000Z',
+  dpaAcceptedAt: null,
+  dpaVersion: null,
 }
 
 /**
@@ -101,6 +103,8 @@ export async function openFirstRun(page: Page) {
         role: 'athlete',
         planId: null,
         createdAt: '2026-01-01T00:00:00.000Z',
+  dpaAcceptedAt: null,
+  dpaVersion: null,
       }),
     )
   })

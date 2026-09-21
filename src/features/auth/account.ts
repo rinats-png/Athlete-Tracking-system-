@@ -40,6 +40,14 @@ export interface Account {
    */
   planId: string | null
   createdAt: string
+  /**
+   * Annahme des Vertrags zur Auftragsverarbeitung (nur Trainerkonten):
+   * Zeitpunkt und angenommene Fassung. null = nicht angenommen. Der
+   * Serverstand in `accounts` ist die Wahrheit; das hier ist die Kopie
+   * für das Gerät, damit der Hinweis auch ohne Netz richtig steht.
+   */
+  dpaAcceptedAt: string | null
+  dpaVersion: string | null
 }
 
 const KEY = 'kydon.account.v1'
@@ -101,6 +109,8 @@ export function readAccount(): Account | null {
           ? parsed.planId
           : null,
       createdAt: typeof parsed.createdAt === 'string' ? parsed.createdAt : new Date().toISOString(),
+      dpaAcceptedAt: typeof parsed.dpaAcceptedAt === 'string' ? parsed.dpaAcceptedAt : null,
+      dpaVersion: typeof parsed.dpaVersion === 'string' ? parsed.dpaVersion : null,
     }
   } catch {
     // Ein beschädigter Eintrag führt zur Anmeldung, nicht zu einem Absturz.
@@ -122,4 +132,11 @@ export function clearAccount(): void {
   } catch {
     /* Nichts zu räumen. */
   }
+}
+
+/** Die Annahme des AV-Vertrags am Konto festhalten (Gerätekopie). */
+export function writeDpaAcceptance(acceptedAt: string | null, version: string | null): void {
+  const account = readAccount()
+  if (!account) return
+  writeAccount({ ...account, dpaAcceptedAt: acceptedAt, dpaVersion: version })
 }

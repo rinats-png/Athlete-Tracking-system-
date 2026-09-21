@@ -155,6 +155,7 @@ const router = createBrowserRouter([
       { path: 'impressum', element: screen(() => import('@/features/legal/LegalScreen'), 'ImprintScreen') },
       { path: 'datenschutz', element: screen(() => import('@/features/legal/LegalScreen'), 'PrivacyScreen') },
       { path: 'nutzungsbedingungen', element: screen(() => import('@/features/legal/LegalScreen'), 'TermsScreen') },
+      { path: 'auftragsverarbeitung', element: screen(() => import('@/features/legal/LegalScreen'), 'DpaScreen') },
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },

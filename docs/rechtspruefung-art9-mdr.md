@@ -128,7 +128,11 @@ ausgeschlossen, und daran ändert diese Prüfung nichts.
    verarbeitet. Der Satz «erhebt keine Gesundheitsdaten» ist zu absolut.
    *Umgesetzt am 21.09.2026 in `src/features/legal/texts.ts` (de/en);
    anwaltlich zu prüfen wie der Rest.*
-3. **Ein Auftragsverarbeitungsvertrag mit Trainern fehlt.** Ein Trainer,
+3. **Ein Auftragsverarbeitungsvertrag mit Trainern fehlte.** *Gebaut am
+   21.09.2026: Vertragstext (Art. 28 Abs. 3, Aufbau nach den Standard-
+   vertragsklauseln 2021/915), Seite `/auftragsverarbeitung`, Annahme je
+   Fassung mit Zeitpunkt im Konto auf dem Server, Hinweis im Trainerbereich.
+   Der Text ist anwaltlich zu prüfen.* Ein Trainer,
    der Athleten in KYDON führt, ist Verantwortlicher für deren Daten; KYDON
    verarbeitet sie in seinem Auftrag. Art. 28 verlangt dafür einen Vertrag
    — schon für Leistungsdaten, für Art.-9-Daten erst recht. Das gehört in
@@ -353,7 +357,7 @@ Nur wenn du es so entscheidest — hier steht, was es wäre:
 |---|---|---|
 | CK-Eingabe aussetzen (Bestand bleibt) | `src/data/observations.ts`: `retired: 'art9'`; Verlauf und Export lesen ihn weiter | **erledigt** 21.09.2026 |
 | Datenschutzerklärung präzisieren | `src/features/legal/texts.ts`, Abschnitt «Keine medizinische Datenverarbeitung» | **erledigt** 21.09.2026 |
-| AV-Vertrag für Trainerkonten | Nutzungsbedingungen + Anlage; Text vom Anwalt | vor dem öffentlichen Betrieb mit Trainern |
+| AV-Vertrag für Trainerkonten | `dpaDocument` in `src/features/legal/texts.ts`, Seite `/auftragsverarbeitung`, Annahme mit Fassung und Datum in `accounts` (Migration `dpa_acceptance`), Hinweis im Trainerbereich | **gebaut** 21.09.2026 — Text anwaltlich zu prüfen |
 | DSFA-Dokument anlegen | `docs/dsfa.md` nach dem Muster der Aufsicht | vor S5 |
 | `health_entries`, `health_consents`, `health_shares` mit RLS, Ende-zu-Ende-Verschlüsselung, Protokollereignisse | Migration + `src/lib/health/` | S5 |
 | Altersgrenze 18 für S5 | Schranke wie bei Stufen | S5 |

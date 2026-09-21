@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { readAccount } from '@/features/auth/account'
+import { DPA_VERSION } from '@/features/legal/dpaVersion'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -31,6 +33,7 @@ export function CoachScreen() {
 
       {role === 'coach' ? (
         <>
+          <DpaNotice />
           <div className="mb-4 flex flex-wrap gap-2">
             <Button asChild variant="primary" size="sm">
               <Link to="/trainer/testtag">{t('testDay.plural')}</Link>
@@ -69,5 +72,28 @@ export function CoachScreen() {
         />
       )}
     </>
+  )
+}
+
+/**
+ * Der Hinweis auf den ausstehenden Vertrag zur Auftragsverarbeitung.
+ *
+ * Er steht oben im Trainerbereich, solange keine gültige Fassung angenommen
+ * ist — und sperrt nichts: Wer Athleten führt, ohne den Vertrag angenommen
+ * zu haben, hat ein Datenschutzproblem, kein Bedienproblem. Der Weg zur
+ * Lösung ist ein Tipp.
+ */
+function DpaNotice() {
+  const { t } = useTranslation()
+  const account = readAccount()
+  if (!account || account.role !== 'coach') return null
+  if (account.dpaAcceptedAt && account.dpaVersion === DPA_VERSION) return null
+  return (
+    <p role="status" data-testid="dpa-notice" className="mb-4 border-l-2 border-warning bg-warning/10 px-3 py-2 text-[13px] leading-relaxed text-ink-secondary">
+      {account.dpaAcceptedAt ? t('coachDash.dpa.outdated') : t('coachDash.dpa.missing')}{' '}
+      <Link to="/auftragsverarbeitung" className="underline underline-offset-2">
+        {t('coachDash.dpa.open')}
+      </Link>
+    </p>
   )
 }

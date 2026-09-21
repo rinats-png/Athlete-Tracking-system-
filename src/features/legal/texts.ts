@@ -80,6 +80,7 @@ const privacyDe: LegalDocument = {
       heading: 'Wenn du Athleten betreust',
       body: [
         'Trägst du als Trainer Daten anderer Personen ein, bist du für diese Daten verantwortlich. Du brauchst dafür eine eigene Rechtsgrundlage — in der Regel die Einwilligung der betreffenden Person, bei Minderjährigen die der Erziehungsberechtigten.',
+        'KYDON verarbeitet diese Daten in deinem Auftrag. Dafür gilt der Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO, den du in deinem Trainerkonto annimmst; er ist unter /auftragsverarbeitung einsehbar.',
         'KYDON speichert zu betreuten Athleten nur, was du einträgst. Es gibt für sie kein eigenes Konto, keine Einladung und keine E-Mail-Adresse.',
       ],
     },
@@ -173,6 +174,7 @@ const privacyEn: LegalDocument = {
       heading: 'If you coach athletes',
       body: [
         'If you enter other people’s data as a coach, you are the controller for that data. You need your own legal basis — usually the consent of the person concerned, or of a guardian for minors.',
+        'KYDON processes this data on your behalf. The data processing agreement under Art. 28 GDPR, which you accept in your coach account, applies; it is available at /auftragsverarbeitung.',
         'KYDON stores only what you enter about coached athletes. They have no account of their own, no invitation and no email address.',
       ],
     },
@@ -361,4 +363,240 @@ export function privacyDocument(locale: AppLocale): LegalDocument {
 
 export function termsDocument(locale: AppLocale): LegalDocument {
   return locale === 'de' ? termsDe : termsEn
+}
+
+// --- Auftragsverarbeitung (Art. 28 DSGVO) ------------------------------------
+//
+// WARUM ES DAS BRAUCHT: Ein Trainer, der Athleten in KYDON führt, ist
+// Verantwortlicher für deren Daten; KYDON verarbeitet sie in seinem Auftrag
+// (Anmeldung, Zweitschrift, Freigaben). Art. 28 Abs. 3 verlangt dafür einen
+// Vertrag mit festem Mindestinhalt. Der Text folgt dem Aufbau der
+// Standardvertragsklauseln der Kommission (Durchführungsbeschluss (EU)
+// 2021/915) und beschreibt, was der Code tut — nicht, was üblich ist.
+//
+// DIE FASSUNG IST TEIL DES VERTRAGS: wer annimmt, nimmt eine Fassung an.
+// Ändert sich der Text, ändert sich die Fassung, und der Trainer sieht, dass
+// eine neue Annahme aussteht.
+
+import { DPA_VERSION } from './dpaVersion'
+export { DPA_VERSION }
+
+const dpaDe: LegalDocument = {
+  title: 'Vertrag zur Auftragsverarbeitung',
+  intro:
+    'Für Trainerkonten: Was KYDON mit den Daten deiner Athleten tut, wenn du sie in deinem Auftrag hier führst — nach Art. 28 DSGVO. Nimmst du den Vertrag in deinem Konto an, gilt er zwischen dir als Verantwortlichem und dem Betreiber als Auftragsverarbeiter.',
+  updated: `Fassung ${DPA_VERSION}`,
+  sections: [
+    {
+      heading: '1. Gegenstand und Dauer',
+      body: [
+        'Der Auftragsverarbeiter (Betreiber von KYDON, siehe Impressum) verarbeitet personenbezogene Daten von Athleten im Auftrag des Verantwortlichen (Inhaber des Trainerkontos), soweit der Verantwortliche diese Daten in KYDON einträgt und die Synchronisierung einschaltet oder Athleten mit seinem Konto verknüpft.',
+        'Dieser Vertrag gilt, solange das Trainerkonto besteht. Er endet mit der Löschung des Kontos; die Löschung der Daten regelt Abschnitt 9.',
+      ],
+    },
+    {
+      heading: '2. Art und Zweck der Verarbeitung, Datenkategorien, betroffene Personen',
+      body: [
+        'Zweck: Speicherung einer Zweitschrift der Daten (Synchronisierung), Bereitstellung über mehrere Geräte, Verknüpfung von Athletenkonten mit dem Trainerkonto, Erzeugung von Reports im Auftrag des Verantwortlichen.',
+        'Art der Verarbeitung: Speichern, Abrufen, Übermitteln an das Gerät des Verantwortlichen oder des Athleten, Löschen. Der Auftragsverarbeiter wertet die Daten nicht aus; jede Berechnung erfolgt auf dem Gerät des Nutzers.',
+      ],
+      list: [
+        'Datenkategorien: Name oder Kürzel, Geburtsdatum, Geschlecht, Körpergrösse, Gewicht, Disziplin, sportliche Messwerte mit Datum und Bedingungen, Tagebuch- und Trainingsangaben (Schlaf, Energie, Stress, Muskelkater, Einheiten, Sätze), Mahlzeiten, Entscheidungen und Notizen des Verantwortlichen, Einwilligungsvermerke (Datum und Name der einwilligenden Person).',
+        'Besondere Kategorien (Art. 9): Einzelne Angaben können Gesundheitsdaten sein oder werden (etwa Herzratenvariabilität, Körperzusammensetzung, langfristige Wellness-Verläufe). Laborwerte nimmt KYDON derzeit nicht entgegen. Der Verantwortliche stellt sicher, dass für solche Angaben eine ausdrückliche Einwilligung der betroffenen Person vorliegt.',
+        'Betroffene Personen: Athleten des Verantwortlichen, einschliesslich Minderjähriger, sofern der Verantwortliche die Einwilligung der Erziehungsberechtigten eingeholt hat.',
+      ],
+    },
+    {
+      heading: '3. Weisungen',
+      body: [
+        'Der Auftragsverarbeiter verarbeitet die Daten nur auf dokumentierte Weisung des Verantwortlichen. Weisungen sind die Funktionen von KYDON, die der Verantwortliche auslöst: Eintragen, Synchronisieren, Verknüpfen, Freigeben, Exportieren, Löschen. Weitergehende Weisungen erteilt der Verantwortliche in Textform an die im Impressum genannte Adresse.',
+        'Hält der Auftragsverarbeiter eine Weisung für rechtswidrig, teilt er dies dem Verantwortlichen unverzüglich mit.',
+      ],
+    },
+    {
+      heading: '4. Vertraulichkeit',
+      body: [
+        'Personen, die beim Auftragsverarbeiter Zugang zu den Daten haben, sind zur Vertraulichkeit verpflichtet. Der Zugang ist auf das Notwendige beschränkt: Der Dienstschlüssel der Datenbank läuft ausschliesslich in serverseitigen Funktionen (Kontolöschung, Zahlungsabgleich) und nie in der Anwendung.',
+      ],
+    },
+    {
+      heading: '5. Sicherheit der Verarbeitung (Art. 32 DSGVO)',
+      body: [
+        'Der Auftragsverarbeiter trifft die folgenden technischen und organisatorischen Massnahmen. Sie sind im Sicherheitsdokument des Projekts (docs/sicherheit.md) im Einzelnen beschrieben und werden mit jeder Änderung des Codes fortgeschrieben.',
+      ],
+      list: [
+        'Zugriffsregeln auf Zeilenebene in der Datenbank: Jeder Nutzer sieht ausschliesslich eigene Daten und die der mit ihm verknüpften Athleten; die Regeln werden automatisiert geprüft.',
+        'Transportverschlüsselung (TLS) für jede Verbindung; Verschlüsselung der Daten im Ruhezustand beim Unterauftragsverarbeiter.',
+        'Passwörter als Hash beim Anmeldedienst; Anmeldebremse gegen Ausprobieren; keine Auskunft über bestehende Konten.',
+        'Content-Security-Policy ohne externe Skripte, Schriften oder Analysedienste.',
+        'Sicherheitsprotokoll für Berechtigungsänderungen und Löschungen mit Aufbewahrung von 365 Tagen.',
+        'Löschkonzept mit festen Fristen; Kontolöschung räumt Fachdaten und Anmeldekonto in dieser Reihenfolge.',
+        'Vollständiger Export der Daten jederzeit, damit der Verantwortliche seiner Rechenschaftspflicht nachkommen kann.',
+      ],
+    },
+    {
+      heading: '6. Unterauftragsverarbeiter',
+      body: [
+        'Der Verantwortliche erteilt eine allgemeine Genehmigung für die Einschaltung der unten aufgeführten Unterauftragsverarbeiter. Der Auftragsverarbeiter verpflichtet sie vertraglich auf dieselben Datenschutzpflichten, die in diesem Vertrag stehen.',
+        'Beabsichtigt der Auftragsverarbeiter, einen Unterauftragsverarbeiter hinzuzufügen oder zu ersetzen, teilt er dies dem Verantwortlichen mindestens 30 Tage vorher in der Anwendung mit. Der Verantwortliche kann innerhalb dieser Frist widersprechen; bleibt eine Einigung aus, kann er den Vertrag kündigen und seine Daten exportieren und löschen.',
+      ],
+      list: [
+        'Supabase, Inc. — Datenbank, Anmeldung, serverseitige Funktionen. Rechenzentrum Frankfurt am Main (AWS eu-central-1). Vertrag zur Auftragsverarbeitung mit Standardvertragsklauseln.',
+        'Netlify, Inc. — Auslieferung der Anwendung. Verarbeitet technische Zugriffsdaten (IP-Adresse), keine Athletendaten.',
+        'Stripe Payments Europe, Ltd. — Zahlungsabwicklung für das Trainerkonto. Verarbeitet keine Athletendaten.',
+      ],
+    },
+    {
+      heading: '7. Unterstützung bei Rechten der betroffenen Personen',
+      body: [
+        'Der Auftragsverarbeiter unterstützt den Verantwortlichen bei Auskunft, Berichtigung, Löschung, Einschränkung und Datenübertragbarkeit durch die Funktionen der Anwendung: Jeder Datensatz lässt sich vollständig exportieren, korrigieren und löschen. Wendet sich eine betroffene Person direkt an den Auftragsverarbeiter, leitet er das Anliegen unverzüglich an den Verantwortlichen weiter.',
+      ],
+    },
+    {
+      heading: '8. Unterstützung bei Sicherheit, Verletzungen und Folgenabschätzung',
+      body: [
+        'Der Auftragsverarbeiter meldet dem Verantwortlichen jede Verletzung des Schutzes personenbezogener Daten, die ihn betrifft, unverzüglich nach Kenntnis — mit Art der Verletzung, betroffenen Kategorien, wahrscheinlichen Folgen und ergriffenen Massnahmen, soweit bekannt. Die Frist des Verantwortlichen nach Art. 33 DSGVO beginnt mit dieser Meldung.',
+        'Er unterstützt den Verantwortlichen bei einer Datenschutz-Folgenabschätzung und bei der Konsultation der Aufsichtsbehörde mit den Informationen, die nur ihm vorliegen.',
+      ],
+    },
+    {
+      heading: '9. Löschung und Rückgabe',
+      body: [
+        'Nach Ende des Vertrags löscht der Auftragsverarbeiter die Daten des Verantwortlichen, sofern keine gesetzliche Aufbewahrungspflicht besteht. Die Löschung erfolgt durch die Kontolöschung in der Anwendung: Sie entfernt Athletendaten, Zweitschriften, Zeitreihen und Verknüpfungen und danach das Anmeldekonto. Vorher kann der Verantwortliche alle Daten vollständig exportieren.',
+        'Sicherungskopien des Unterauftragsverarbeiters werden nach dessen Zyklus überschrieben; bis dahin bleiben sie gesperrt.',
+      ],
+    },
+    {
+      heading: '10. Nachweise und Überprüfungen',
+      body: [
+        'Der Auftragsverarbeiter stellt dem Verantwortlichen die Informationen zur Verfügung, die zum Nachweis der Einhaltung dieses Vertrags nötig sind: das Sicherheitsdokument, die Zugriffsregeln (öffentlich im Quelltext), das Ergebnis der automatisierten Regelprüfung und die Zertifizierungen der Unterauftragsverarbeiter. Überprüfungen vor Ort sind nach Ankündigung und in angemessenem Umfang möglich, soweit die Informationen nicht auf anderem Weg beigebracht werden können.',
+      ],
+    },
+    {
+      heading: '11. Übermittlung in Drittländer',
+      body: [
+        'Die Daten werden in der Europäischen Union gespeichert (Frankfurt am Main). Soweit ein Unterauftragsverarbeiter seinen Sitz ausserhalb der EU hat, stützt sich die Übermittlung auf einen Angemessenheitsbeschluss (EU-US Data Privacy Framework) und ergänzend auf Standardvertragsklauseln.',
+      ],
+    },
+    {
+      heading: '12. Annahme, Fassung, Schluss',
+      body: [
+        'Der Vertrag wird angenommen, indem der Inhaber des Trainerkontos ihn in der Anwendung bestätigt. Datum und Fassung der Annahme werden im Konto gespeichert und sind dort einsehbar. Bei einer neuen Fassung ist eine erneute Annahme nötig; bis dahin gilt die zuletzt angenommene Fassung.',
+        'Im Übrigen gelten die Nutzungsbedingungen. Dieser Vertrag geht ihnen vor, soweit er die Verarbeitung im Auftrag betrifft. Es gilt deutsches Recht.',
+        'Dieser Text ist nach bestem Wissen aus dem tatsächlichen Verhalten der Anwendung geschrieben und vor dem öffentlichen Betrieb anwaltlich zu prüfen.',
+      ],
+    },
+  ],
+}
+
+const dpaEn: LegalDocument = {
+  title: 'Data processing agreement',
+  intro:
+    'For coach accounts: what KYDON does with your athletes’ data when you manage them here on your behalf — under Art. 28 GDPR. By accepting the agreement in your account, it applies between you as controller and the operator as processor.',
+  updated: `Version ${DPA_VERSION}`,
+  sections: [
+    {
+      heading: '1. Subject matter and duration',
+      body: [
+        'The processor (operator of KYDON, see imprint) processes personal data of athletes on behalf of the controller (holder of the coach account) insofar as the controller enters this data in KYDON and switches on synchronisation or links athletes to their account.',
+        'This agreement applies for as long as the coach account exists. It ends with the deletion of the account; deletion of data is governed by section 9.',
+      ],
+    },
+    {
+      heading: '2. Nature and purpose of processing, data categories, data subjects',
+      body: [
+        'Purpose: storing a second copy of the data (synchronisation), making it available across devices, linking athlete accounts to the coach account, generating reports on behalf of the controller.',
+        'Nature: storing, retrieving, transmitting to the device of the controller or the athlete, deleting. The processor does not evaluate the data; every calculation runs on the user’s device.',
+      ],
+      list: [
+        'Data categories: name or initials, date of birth, sex, height, weight, discipline, sports measurements with date and conditions, diary and training entries (sleep, energy, stress, soreness, sessions, sets), meals, decisions and notes of the controller, consent records (date and name of the consenting person).',
+        'Special categories (Art. 9): individual entries can be, or become, health data (e.g. heart rate variability, body composition, long-term wellness records). KYDON currently does not accept laboratory values. The controller ensures that explicit consent of the data subject exists for such entries.',
+        'Data subjects: athletes of the controller, including minors where the controller has obtained the consent of the legal guardians.',
+      ],
+    },
+    {
+      heading: '3. Instructions',
+      body: [
+        'The processor processes the data only on documented instructions from the controller. Instructions are the functions of KYDON the controller triggers: entering, synchronising, linking, sharing, exporting, deleting. Further instructions are given in text form to the address in the imprint.',
+        'If the processor considers an instruction unlawful, it informs the controller without delay.',
+      ],
+    },
+    {
+      heading: '4. Confidentiality',
+      body: [
+        'Persons with access to the data at the processor are bound to confidentiality. Access is limited to what is necessary: the database service key runs exclusively in server-side functions (account deletion, payment reconciliation) and never in the application.',
+      ],
+    },
+    {
+      heading: '5. Security of processing (Art. 32 GDPR)',
+      body: [
+        'The processor implements the following technical and organisational measures. They are described in detail in the project’s security document (docs/sicherheit.md) and updated with every change of the code.',
+      ],
+      list: [
+        'Row-level access rules in the database: every user sees only their own data and that of athletes linked to them; the rules are checked automatically.',
+        'Transport encryption (TLS) for every connection; encryption at rest at the sub-processor.',
+        'Passwords hashed at the authentication service; sign-in throttling; no disclosure of existing accounts.',
+        'Content Security Policy without external scripts, fonts or analytics.',
+        'Security log for permission changes and deletions, retained for 365 days.',
+        'Deletion concept with fixed periods; account deletion removes business data and then the sign-in account.',
+        'Complete export of the data at any time, so the controller can meet its accountability obligation.',
+      ],
+    },
+    {
+      heading: '6. Sub-processors',
+      body: [
+        'The controller grants general authorisation for the engagement of the sub-processors listed below. The processor binds them contractually to the same data protection obligations set out in this agreement.',
+        'If the processor intends to add or replace a sub-processor, it informs the controller in the application at least 30 days in advance. The controller may object within this period; failing agreement, the controller may terminate the agreement and export and delete their data.',
+      ],
+      list: [
+        'Supabase, Inc. — database, authentication, server-side functions. Data centre Frankfurt am Main (AWS eu-central-1). Data processing agreement with standard contractual clauses.',
+        'Netlify, Inc. — delivery of the application. Processes technical access data (IP address), no athlete data.',
+        'Stripe Payments Europe, Ltd. — payment processing for the coach account. Processes no athlete data.',
+      ],
+    },
+    {
+      heading: '7. Assistance with data subject rights',
+      body: [
+        'The processor assists the controller with access, rectification, erasure, restriction and portability through the functions of the application: every record can be fully exported, corrected and deleted. If a data subject contacts the processor directly, the processor forwards the request to the controller without delay.',
+      ],
+    },
+    {
+      heading: '8. Assistance with security, breaches and impact assessments',
+      body: [
+        'The processor notifies the controller of any personal data breach affecting it without undue delay after becoming aware — with the nature of the breach, categories concerned, likely consequences and measures taken, as far as known. The controller’s deadline under Art. 33 GDPR starts with this notification.',
+        'It assists the controller with a data protection impact assessment and with consulting the supervisory authority, providing the information only it holds.',
+      ],
+    },
+    {
+      heading: '9. Deletion and return',
+      body: [
+        'At the end of the agreement the processor deletes the controller’s data unless a statutory retention obligation applies. Deletion is performed by account deletion in the application: it removes athlete data, second copies, time series and links, and then the sign-in account. Beforehand the controller can export all data completely.',
+        'Backups of the sub-processor are overwritten according to its cycle; until then they remain locked.',
+      ],
+    },
+    {
+      heading: '10. Evidence and audits',
+      body: [
+        'The processor makes available to the controller the information necessary to demonstrate compliance with this agreement: the security document, the access rules (public in the source code), the result of the automated rule check and the certifications of the sub-processors. On-site audits are possible after notice and to a reasonable extent, where the information cannot be provided otherwise.',
+      ],
+    },
+    {
+      heading: '11. Transfers to third countries',
+      body: [
+        'The data is stored in the European Union (Frankfurt am Main). Where a sub-processor is established outside the EU, the transfer relies on an adequacy decision (EU-US Data Privacy Framework) and, in addition, on standard contractual clauses.',
+      ],
+    },
+    {
+      heading: '12. Acceptance, version, final provisions',
+      body: [
+        'The agreement is accepted when the holder of the coach account confirms it in the application. Date and version of acceptance are stored in the account and visible there. A new version requires renewed acceptance; until then the last accepted version applies.',
+        'Otherwise the terms of use apply. This agreement prevails insofar as it concerns processing on behalf. German law applies.',
+        'This text is written to the best of our knowledge from the actual behaviour of the application and must be reviewed by a lawyer before public operation.',
+      ],
+    },
+  ],
+}
+
+export function dpaDocument(locale: AppLocale): LegalDocument {
+  return locale === 'de' ? dpaDe : dpaEn
 }

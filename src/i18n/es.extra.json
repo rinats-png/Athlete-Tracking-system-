@@ -354,7 +354,22 @@
       "title": "Condiciones de uso"
     },
     "languageNote": "Los textos legales están disponibles en alemán e inglés. Lo que lees aquí es la versión inglesa — una traducción sin revisión jurídica no sería un texto legal.",
-    "back": "Atrás"
+    "back": "Atrás",
+    "dpa": {
+      "title": "Encargo de tratamiento",
+      "acceptTitle": "Aceptación",
+      "version": "Versión {{version}}",
+      "coachOnly": "Este contrato afecta a las cuentas de entrenador. Como atleta no necesitas aceptarlo — puedes leerlo para ver qué ocurre con tus datos cuando un entrenador los gestiona.",
+      "accepted": "Aceptado el {{date}}, versión {{version}}. La aceptación está guardada en tu cuenta en el servidor.",
+      "notYet": "Aún no aceptado. Mientras gestiones atletas en KYDON necesitas este contrato — es la base según el art. 28 RGPD.",
+      "outdated": "Aceptaste la versión {{version}}. El texto ha cambiado desde entonces; acepta la versión actual.",
+      "howTo": "Al tocar aceptas el contrato en la versión indicada arriba. Fecha y versión se guardan en tu cuenta y se pueden consultar aquí en cualquier momento. Debes haber iniciado sesión.",
+      "accept": "Aceptar contrato",
+      "not_configured": "Sin servidor no se puede guardar la aceptación.",
+      "offline": "Sin conexión. La aceptación necesita red porque se guarda en el servidor.",
+      "not_signed_in": "Debes haber iniciado sesión.",
+      "failed": "No se pudo guardar la aceptación. Inténtalo de nuevo."
+    }
   },
   "group": {
     "title": "Test de grupo",
@@ -458,6 +473,11 @@
       "lever": "Mayor palanca frente a la exigencia: {{axis}}",
       "limiter": "Se queda atrás respecto a los otros ejes: {{axis}}",
       "noNewcomers": "Ningún recién llegado ahora — nadie con una primera medición en los últimos {{days}} días."
+    },
+    "dpa": {
+      "missing": "El contrato de encargo de tratamiento aún no se ha aceptado. Quien gestione atletas en KYDON lo necesita (art. 28 RGPD).",
+      "outdated": "El contrato de encargo de tratamiento tiene una nueva versión.",
+      "open": "Leer y aceptar el contrato"
     }
   },
   "coach": {

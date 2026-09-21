@@ -354,7 +354,22 @@
       "title": "Gebruiksvoorwaarden"
     },
     "back": "Terug",
-    "languageNote": "De juridische teksten bestaan in het Duits en het Engels. Wat je hier leest is de Engelse versie — een vertaling zonder juridische toetsing zou geen rechtstekst zijn."
+    "languageNote": "De juridische teksten bestaan in het Duits en het Engels. Wat je hier leest is de Engelse versie — een vertaling zonder juridische toetsing zou geen rechtstekst zijn.",
+    "dpa": {
+      "title": "Verwerkersovereenkomst",
+      "acceptTitle": "Aanvaarding",
+      "version": "Versie {{version}}",
+      "coachOnly": "Deze overeenkomst betreft coachaccounts. Als atleet hoef je haar niet te aanvaarden — je kunt haar lezen om te zien wat er met je gegevens gebeurt als een coach ze beheert.",
+      "accepted": "Aanvaard op {{date}}, versie {{version}}. De aanvaarding is opgeslagen in je account op de server.",
+      "notYet": "Nog niet aanvaard. Zolang je atleten in KYDON beheert, heb je deze overeenkomst nodig — zij is de grondslag volgens art. 28 AVG.",
+      "outdated": "Je hebt versie {{version}} aanvaard. De tekst is sindsdien gewijzigd; aanvaard de huidige versie.",
+      "howTo": "Door te tikken aanvaard je de overeenkomst in de hierboven genoemde versie. Datum en versie worden in je account opgeslagen en zijn hier altijd in te zien. Je moet ingelogd zijn.",
+      "accept": "Overeenkomst aanvaarden",
+      "not_configured": "Zonder server kan de aanvaarding niet worden opgeslagen.",
+      "offline": "Geen verbinding. De aanvaarding heeft netwerk nodig omdat ze op de server wordt opgeslagen.",
+      "not_signed_in": "Je moet ingelogd zijn.",
+      "failed": "De aanvaarding kon niet worden opgeslagen. Probeer het opnieuw."
+    }
   },
   "group": {
     "title": "Groepstest",
@@ -458,6 +473,11 @@
       "lever": "Grootste hefboom tegenover de eis: {{axis}}",
       "limiter": "Blijft achter bij de andere assen: {{axis}}",
       "noNewcomers": "Momenteel geen nieuwkomer — niemand met een eerste meting in de laatste {{days}} dagen."
+    },
+    "dpa": {
+      "missing": "De verwerkersovereenkomst is nog niet aanvaard. Wie atleten in KYDON beheert, heeft haar nodig (art. 28 AVG).",
+      "outdated": "De verwerkersovereenkomst heeft een nieuwe versie.",
+      "open": "Overeenkomst lezen en aanvaarden"
     }
   },
   "coach": {

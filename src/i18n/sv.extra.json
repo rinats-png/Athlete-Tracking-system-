@@ -354,7 +354,22 @@
       "title": "Användarvillkor"
     },
     "languageNote": "De juridiska texterna finns på tyska och engelska. Det du läser här är den engelska versionen — en översättning utan juridisk granskning vore ingen juridisk text.",
-    "back": "Tillbaka"
+    "back": "Tillbaka",
+    "dpa": {
+      "title": "Personuppgiftsbiträde",
+      "acceptTitle": "Godkännande",
+      "version": "Version {{version}}",
+      "coachOnly": "Det här avtalet gäller tränarkonton. Som idrottare behöver du inte godkänna det — du kan läsa det för att se vad som händer med dina uppgifter när en tränare hanterar dem.",
+      "accepted": "Godkänt {{date}}, version {{version}}. Godkännandet är lagrat i ditt konto på servern.",
+      "notYet": "Inte godkänt ännu. Så länge du hanterar idrottare i KYDON behöver du det här avtalet — det är grunden enligt art. 28 GDPR.",
+      "outdated": "Du har godkänt version {{version}}. Texten har ändrats sedan dess; godkänn den aktuella versionen.",
+      "howTo": "Genom att trycka godkänner du avtalet i versionen ovan. Datum och version sparas i ditt konto och kan ses här när som helst. Du måste vara inloggad.",
+      "accept": "Godkänn avtalet",
+      "not_configured": "Utan server kan godkännandet inte lagras.",
+      "offline": "Ingen anslutning. Godkännandet kräver nätverk eftersom det lagras på servern.",
+      "not_signed_in": "Du måste vara inloggad.",
+      "failed": "Godkännandet kunde inte sparas. Försök igen."
+    }
   },
   "group": {
     "title": "Grupptest",
@@ -458,6 +473,11 @@
       "lever": "Största hävstång mot kravet: {{axis}}",
       "limiter": "Ligger efter de övriga axlarna: {{axis}}",
       "noNewcomers": "Ingen nykomling just nu — ingen med en första mätning de senaste {{days}} dagarna."
+    },
+    "dpa": {
+      "missing": "Personuppgiftsbiträdesavtalet är inte godkänt ännu. Den som hanterar idrottare i KYDON behöver det (art. 28 GDPR).",
+      "outdated": "Personuppgiftsbiträdesavtalet har en ny version.",
+      "open": "Läs och godkänn avtalet"
     }
   },
   "coach": {

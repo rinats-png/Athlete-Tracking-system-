@@ -354,7 +354,22 @@
       "title": "Terms of use"
     },
     "back": "Back",
-    "languageNote": "The legal texts are available in German and English. What you read here is the English version — a translation without legal review would not be a legal text."
+    "languageNote": "The legal texts are available in German and English. What you read here is the English version — a translation without legal review would not be a legal text.",
+    "dpa": {
+      "title": "Data processing",
+      "acceptTitle": "Acceptance",
+      "version": "Version {{version}}",
+      "coachOnly": "This agreement concerns coach accounts. As an athlete you do not need to accept it — you can read it to see what happens to your data when a coach manages it.",
+      "accepted": "Accepted on {{date}}, version {{version}}. The acceptance is stored in your account on the server.",
+      "notYet": "Not yet accepted. As long as you manage athletes in KYDON you need this agreement — it is the basis under Art. 28 GDPR.",
+      "outdated": "You accepted version {{version}}. The text has changed since; please accept the current version.",
+      "howTo": "By tapping you accept the agreement in the version stated above. Date and version are stored in your account and visible here at any time. You need to be signed in.",
+      "accept": "Accept agreement",
+      "not_configured": "Without a server the acceptance cannot be stored.",
+      "offline": "No connection. Acceptance needs a network because it is stored on the server.",
+      "not_signed_in": "You need to be signed in.",
+      "failed": "The acceptance could not be saved. Please try again."
+    }
   },
   "group": {
     "title": "Group test",
@@ -458,6 +473,11 @@
       "lever": "Largest leverage against the requirement: {{axis}}",
       "limiter": "Falls behind the other axes: {{axis}}",
       "noNewcomers": "No newcomer at the moment — nobody with a first measurement in the last {{days}} days."
+    },
+    "dpa": {
+      "missing": "The data processing agreement has not been accepted yet. Anyone managing athletes in KYDON needs it (Art. 28 GDPR).",
+      "outdated": "The data processing agreement has a new version.",
+      "open": "Read and accept the agreement"
     }
   },
   "coach": {

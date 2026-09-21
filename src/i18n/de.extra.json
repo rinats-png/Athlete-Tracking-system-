@@ -354,7 +354,22 @@
       "title": "Nutzungsbedingungen"
     },
     "back": "Zurück",
-    "languageNote": "Die Rechtstexte liegen auf Deutsch und Englisch vor. Was hier steht, ist die englische Fassung — eine Übersetzung ohne juristische Prüfung wäre kein Rechtstext."
+    "languageNote": "Die Rechtstexte liegen auf Deutsch und Englisch vor. Was hier steht, ist die englische Fassung — eine Übersetzung ohne juristische Prüfung wäre kein Rechtstext.",
+    "dpa": {
+      "title": "Auftragsverarbeitung",
+      "acceptTitle": "Annahme",
+      "version": "Fassung {{version}}",
+      "coachOnly": "Dieser Vertrag betrifft Trainerkonten. Als Athlet brauchst du ihn nicht anzunehmen — du kannst ihn lesen, um zu sehen, was mit deinen Daten geschieht, wenn ein Trainer sie führt.",
+      "accepted": "Angenommen am {{date}}, Fassung {{version}}. Die Annahme ist in deinem Konto auf dem Server hinterlegt.",
+      "notYet": "Noch nicht angenommen. Solange du Athleten in KYDON führst, brauchst du diesen Vertrag — er ist die Grundlage nach Art. 28 DSGVO.",
+      "outdated": "Du hast die Fassung {{version}} angenommen. Der Text hat sich seitdem geändert; bitte nimm die aktuelle Fassung an.",
+      "howTo": "Mit dem Antippen nimmst du den Vertrag in der oben genannten Fassung an. Datum und Fassung werden in deinem Konto gespeichert und sind hier jederzeit einsehbar. Dafür musst du angemeldet sein.",
+      "accept": "Vertrag annehmen",
+      "not_configured": "Ohne Server kann die Annahme nicht hinterlegt werden.",
+      "offline": "Keine Verbindung. Die Annahme braucht Netz, weil sie auf dem Server liegt.",
+      "not_signed_in": "Dafür musst du angemeldet sein.",
+      "failed": "Die Annahme konnte nicht gespeichert werden. Versuch es noch einmal."
+    }
   },
   "group": {
     "title": "Gruppentest",
@@ -458,6 +473,11 @@
       "lever": "Grösster Hebel gegenüber der Anforderung: {{axis}}",
       "limiter": "Fällt gegenüber den übrigen Achsen ab: {{axis}}",
       "noNewcomers": "Zurzeit kein Neuzugang — niemand mit erster Messung in den letzten {{days}} Tagen."
+    },
+    "dpa": {
+      "missing": "Der Vertrag zur Auftragsverarbeitung ist noch nicht angenommen. Wer Athleten in KYDON führt, braucht ihn (Art. 28 DSGVO).",
+      "outdated": "Der Vertrag zur Auftragsverarbeitung hat eine neue Fassung.",
+      "open": "Vertrag lesen und annehmen"
     }
   },
   "coach": {

@@ -354,7 +354,22 @@
       "title": "Conditions d'utilisation"
     },
     "back": "Retour",
-    "languageNote": "Les textes juridiques existent en allemand et en anglais. Ce que tu lis ici est la version anglaise — une traduction sans vérification juridique ne serait pas un texte juridique."
+    "languageNote": "Les textes juridiques existent en allemand et en anglais. Ce que tu lis ici est la version anglaise — une traduction sans vérification juridique ne serait pas un texte juridique.",
+    "dpa": {
+      "title": "Sous-traitance",
+      "acceptTitle": "Acceptation",
+      "version": "Version {{version}}",
+      "coachOnly": "Ce contrat concerne les comptes entraîneur. En tant qu'athlète, tu n'as pas à l'accepter — tu peux le lire pour voir ce qu'il advient de tes données lorsqu'un entraîneur les gère.",
+      "accepted": "Accepté le {{date}}, version {{version}}. L'acceptation est enregistrée dans ton compte sur le serveur.",
+      "notYet": "Pas encore accepté. Tant que tu gères des athlètes dans KYDON, ce contrat est nécessaire — c'est la base selon l'art. 28 RGPD.",
+      "outdated": "Tu as accepté la version {{version}}. Le texte a changé depuis ; merci d'accepter la version actuelle.",
+      "howTo": "En touchant, tu acceptes le contrat dans la version indiquée ci-dessus. Date et version sont enregistrées dans ton compte et consultables ici à tout moment. Tu dois être connecté.",
+      "accept": "Accepter le contrat",
+      "not_configured": "Sans serveur, l'acceptation ne peut pas être enregistrée.",
+      "offline": "Pas de connexion. L'acceptation nécessite le réseau car elle est stockée sur le serveur.",
+      "not_signed_in": "Tu dois être connecté.",
+      "failed": "L'acceptation n'a pas pu être enregistrée. Réessaie."
+    }
   },
   "group": {
     "title": "Test de groupe",
@@ -458,6 +473,11 @@
       "lever": "Plus grand levier face à l'exigence : {{axis}}",
       "limiter": "En retrait par rapport aux autres axes : {{axis}}",
       "noNewcomers": "Aucun nouveau pour l'instant — personne avec une première mesure dans les {{days}} derniers jours."
+    },
+    "dpa": {
+      "missing": "Le contrat de sous-traitance n'a pas encore été accepté. Toute personne gérant des athlètes dans KYDON en a besoin (art. 28 RGPD).",
+      "outdated": "Le contrat de sous-traitance a une nouvelle version.",
+      "open": "Lire et accepter le contrat"
     }
   },
   "coach": {

@@ -354,7 +354,22 @@
       "title": "Bruksvilkår"
     },
     "back": "Tilbake",
-    "languageNote": "De juridiske tekstene finnes på tysk og engelsk. Det som står her, er den engelske versjonen — en oversettelse uten juridisk gjennomgang ville ikke vært en juridisk tekst."
+    "languageNote": "De juridiske tekstene finnes på tysk og engelsk. Det som står her, er den engelske versjonen — en oversettelse uten juridisk gjennomgang ville ikke vært en juridisk tekst.",
+    "dpa": {
+      "title": "Databehandleravtale",
+      "acceptTitle": "Godkjenning",
+      "version": "Versjon {{version}}",
+      "coachOnly": "Denne avtalen gjelder trenerkontoer. Som utøver trenger du ikke godta den — du kan lese den for å se hva som skjer med dataene dine når en trener håndterer dem.",
+      "accepted": "Godtatt {{date}}, versjon {{version}}. Godkjenningen er lagret i kontoen din på serveren.",
+      "notYet": "Ikke godtatt ennå. Så lenge du håndterer utøvere i KYDON trenger du denne avtalen — den er grunnlaget etter art. 28 GDPR.",
+      "outdated": "Du har godtatt versjon {{version}}. Teksten er endret siden; godta den gjeldende versjonen.",
+      "howTo": "Ved å trykke godtar du avtalen i versjonen over. Dato og versjon lagres i kontoen din og kan ses her når som helst. Du må være logget inn.",
+      "accept": "Godta avtalen",
+      "not_configured": "Uten server kan godkjenningen ikke lagres.",
+      "offline": "Ingen tilkobling. Godkjenningen krever nett fordi den lagres på serveren.",
+      "not_signed_in": "Du må være logget inn.",
+      "failed": "Godkjenningen kunne ikke lagres. Prøv igjen."
+    }
   },
   "group": {
     "title": "Gruppetest",
@@ -458,6 +473,11 @@
       "lever": "Største hevstang mot kravet: {{axis}}",
       "limiter": "Ligger bak de andre aksene: {{axis}}",
       "noNewcomers": "Ingen nykommer for øyeblikket — ingen med første måling de siste {{days}} dagene."
+    },
+    "dpa": {
+      "missing": "Databehandleravtalen er ikke godtatt ennå. Den som håndterer utøvere i KYDON trenger den (art. 28 GDPR).",
+      "outdated": "Databehandleravtalen har en ny versjon.",
+      "open": "Les og godta avtalen"
     }
   },
   "coach": {

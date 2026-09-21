@@ -717,10 +717,15 @@ zu absolut; ein Auftragsverarbeitungsvertrag für Trainerkonten fehlt. Zwei
 S5-Merkmale sind nach der Einordnung Medizinprodukte-Software und werden
 nicht gebaut: die Red-Flag-Triage und das REDs-Screening.
 
+**Aus der Rechtsprüfung umgesetzt (21.09.2026):** CK-Eingabe ausgesetzt
+(`retired: 'art9'`), Datenschutzerklärung zu Gesundheitsdaten präzisiert,
+Vertrag zur Auftragsverarbeitung für Trainerkonten mit Annahme je Fassung
+auf dem Server (`/auftragsverarbeitung`, `accounts.dpa_accepted_at`).
+
 **Offen, unverändert:** die Lizenzfrage zu ODbL (Abschnitt 7), ein
 kuratierter Ausbau des Kerns aus BLS oder USDA, ein echter Zwei-Geräte-
 Abgleich und ein echter Testkauf am lebenden System, Elite mit S5 — und
-die Entscheidungen aus der Rechtsprüfung.
+die Anwaltsgespräche aus der Rechtsprüfung.
 
 ## 14. Zusammenfassung in drei Sätzen
 

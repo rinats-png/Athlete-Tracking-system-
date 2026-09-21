@@ -354,7 +354,22 @@
       "title": "Brugsbetingelser"
     },
     "back": "Tilbage",
-    "languageNote": "Retsteksterne findes på tysk og engelsk. Det, du læser her, er den engelske version — en oversættelse uden juridisk gennemgang ville ikke være en retstekst."
+    "languageNote": "Retsteksterne findes på tysk og engelsk. Det, du læser her, er den engelske version — en oversættelse uden juridisk gennemgang ville ikke være en retstekst.",
+    "dpa": {
+      "title": "Databehandleraftale",
+      "acceptTitle": "Accept",
+      "version": "Version {{version}}",
+      "coachOnly": "Denne aftale gælder trænerkonti. Som atlet behøver du ikke at acceptere den — du kan læse den for at se, hvad der sker med dine data, når en træner administrerer dem.",
+      "accepted": "Accepteret {{date}}, version {{version}}. Accepten er gemt i din konto på serveren.",
+      "notYet": "Endnu ikke accepteret. Så længe du administrerer atleter i KYDON, har du brug for denne aftale — den er grundlaget efter art. 28 GDPR.",
+      "outdated": "Du har accepteret version {{version}}. Teksten er ændret siden; accepter venligst den aktuelle version.",
+      "howTo": "Ved at trykke accepterer du aftalen i versionen ovenfor. Dato og version gemmes i din konto og kan ses her når som helst. Du skal være logget ind.",
+      "accept": "Accepter aftalen",
+      "not_configured": "Uden server kan accepten ikke gemmes.",
+      "offline": "Ingen forbindelse. Accepten kræver netværk, fordi den gemmes på serveren.",
+      "not_signed_in": "Du skal være logget ind.",
+      "failed": "Accepten kunne ikke gemmes. Prøv igen."
+    }
   },
   "group": {
     "title": "Gruppetest",
@@ -458,6 +473,11 @@
       "lever": "Største løftestang mod kravet: {{axis}}",
       "limiter": "Ligger bag de øvrige akser: {{axis}}",
       "noNewcomers": "Ingen nye i øjeblikket — ingen med en første måling i de seneste {{days}} dage."
+    },
+    "dpa": {
+      "missing": "Databehandleraftalen er endnu ikke accepteret. Den, der administrerer atleter i KYDON, har brug for den (art. 28 GDPR).",
+      "outdated": "Databehandleraftalen har en ny version.",
+      "open": "Læs og accepter aftalen"
     }
   },
   "coach": {
