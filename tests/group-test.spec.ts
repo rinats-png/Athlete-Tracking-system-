@@ -28,6 +28,8 @@ function athlete(id: string, name: string, values: number[]): StoredAthlete {
     })) as StoredAthlete['results'],
     archived: false,
     observations: [],
+    diary: [],
+    diaryFields: [],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
     focuses: [],

@@ -1392,5 +1392,103 @@
     "last": "sist {{date}}",
     "add": "Legg til",
     "why": "Søvn, belastning, kropp: ikke prestasjon, men de gjør neste måling lesbar. Et hopp med tre kilo mer kroppsvekt betyr noe annet. Ingenting vurderes."
+  },
+  "diary": {
+    "eyebrow": "Hver kveld",
+    "title": "Dagbok",
+    "intro": "Vekt, søvn, energi, økter. Ingen vurdering — bare tallene som gjør neste testdag lesbar.",
+    "introCoach": "Dagboken til den aktive utøveren. Bytt utøver i toppfeltet.",
+    "today": "I dag",
+    "yesterday": "I går",
+    "backToToday": "Tilbake til i dag",
+    "prevDay": "Forrige dag",
+    "nextDay": "Neste dag",
+    "fields": {
+      "weightKg": "Vekt",
+      "sleepHours": "Søvn",
+      "sleepQuality": "Søvnkvalitet",
+      "energy": "Energi",
+      "stress": "Stress",
+      "soreness": "Stølhet",
+      "steps": "Skritt",
+      "adherence": "Plan fulgt",
+      "note": "Notat"
+    },
+    "scale": {
+      "low": "tom",
+      "high": "full",
+      "poor": "urolig",
+      "deep": "dyp",
+      "calm": "rolig",
+      "tense": "anspent",
+      "none": "ingen",
+      "strong": "sterk",
+      "offPlan": "utenfor planen",
+      "onPlan": "som planlagt",
+      "easy": "lett",
+      "maximal": "maksimal"
+    },
+    "sessions": {
+      "title": "Økter",
+      "new": "Legg til økt",
+      "add": "Lagre økt",
+      "remove": "Fjern økt",
+      "kind": "Type",
+      "duration": "Varighet",
+      "rpe": "Anstrengelse (RPE 1–10)",
+      "rpeHint": "Hvor hard var økten som helhet? Velg først, lagre så.",
+      "loadPreview": "Øktbelastning: {{load}} AU — varighet ganger anstrengelse (Foster, sRPE).",
+      "dayLoad": "Dagsbelastning {{load}} AU",
+      "kinds": {
+        "strength": "Styrke",
+        "endurance": "Utholdenhet",
+        "sport": "Sport",
+        "mobility": "Bevegelighet",
+        "other": "Annet"
+      }
+    },
+    "more": {
+      "title": "Registrer mer",
+      "why": "Kjernen forblir liten. Det du slår på her, ser du hver dag — det du ikke slår på, aldri."
+    },
+    "strip": {
+      "title": "Fjorten dager",
+      "why": "Prikker er dagsverdier, søyler er belastning. Skravert er en dag uten oppføring — den mangler, den er ikke null.",
+      "summary": "{{n}} av {{days}} dager registrert",
+      "none": "ingenting registrert ennå",
+      "gap": "ingen oppføring"
+    },
+    "metrics": {
+      "load": "Dagsbelastning (AU)",
+      "weightKg": "Vekt (kg)",
+      "sleepHours": "Søvn (t)",
+      "energy": "Energi (1–5)",
+      "stress": "Stress (1–5)",
+      "soreness": "Stølhet (1–5)",
+      "steps": "Skritt"
+    },
+    "stats": {
+      "title": "Nøkkeltall",
+      "why": "Sju dager, beskrevet, ikke vurdert.",
+      "weight7": "Snittvekt 7 dager",
+      "sleep7": "Snittsøvn 7 dager",
+      "load7": "Ukebelastning",
+      "trend": "Vekttrend",
+      "onDays": "på {{n}} dager",
+      "noData": "ingen verdier ennå",
+      "trendMeta": "7-dagers snitt mot de 7 før",
+      "trendNeeds": "krever 3 veiinger i hver av to uker",
+      "ratio": "Belastningsforhold {{ratio}} (7 mot 28 dager)",
+      "ratioNeeds": "forhold fra 14 registrerte dager av 28",
+      "completeness": "{{pct}} % av de siste 14 dagene registrert",
+      "noJudgement": "Ingenting her er en anbefaling."
+    },
+    "card": {
+      "title": "I dag",
+      "ask": "Hvordan var dagen? Ett trykk holder.",
+      "done": "I dag er registrert.",
+      "more": "Registrer mer",
+      "open": "Åpne dagboken"
+    }
   }
 }

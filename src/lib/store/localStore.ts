@@ -11,6 +11,8 @@ import {
   type ValidatedFocus,
   type ValidatedTestDay,
   type ValidatedObservation,
+  type ValidatedDiaryEntry,
+  type ValidatedDiarySession,
   type ValidatedData,
   type ValidatedResult,
 } from './schema'
@@ -47,6 +49,8 @@ export type StoredBiometric = ValidatedBiometric
 export type StoredFocus = ValidatedFocus
 export type StoredTestDay = ValidatedTestDay
 export type StoredObservation = ValidatedObservation
+export type StoredDiaryEntry = ValidatedDiaryEntry
+export type StoredDiarySession = ValidatedDiarySession
 
 export interface LoadResult {
   data: StoredData

@@ -6,6 +6,7 @@ import type {
   StoredAssessment,
   StoredBiometric,
   StoredData,
+  StoredDiaryEntry,
   StoredFocus,
   StoredResult,
 } from '@/lib/store/localStore'
@@ -43,6 +44,58 @@ import type {
  * als Beispieltexte, damit der Bericht mit Demodaten zeigt, wie ein
  * ausgefüllter Schwerpunkt aussieht — sie sind keine Empfehlung an irgendwen.
  */
+/**
+ * Vierzehn Tagebuchtage vor heute — deterministisch, kein Zufall.
+ *
+ * Ein plausibler Verlauf mit einer eingebauten Lücke (Tag −6 fehlt): der
+ * Bildschirm soll im Demobestand zeigen, dass eine Lücke eine Lücke bleibt
+ * und nicht stillschweigend als Null gezeichnet wird.
+ */
+function demoDiary(): StoredDiaryEntry[] {
+  const out: StoredDiaryEntry[] = []
+  const today = new Date()
+  const pattern = [
+    { w: 83.4, s: 7.5, e: 4, st: 2, so: 2, sess: [{ k: 'strength', d: 75, r: 7 }] },
+    { w: 83.1, s: 6.5, e: 3, st: 3, so: 3, sess: [{ k: 'endurance', d: 40, r: 5 }] },
+    { w: 83.3, s: 8, e: 4, st: 2, so: 2, sess: [] },
+    { w: 82.9, s: 7, e: 4, st: 2, so: 3, sess: [{ k: 'strength', d: 80, r: 8 }] },
+    { w: 83.0, s: 7.25, e: 3, st: 3, so: 4, sess: [{ k: 'sport', d: 90, r: 7 }] },
+    { w: 82.7, s: 6, e: 2, st: 4, so: 4, sess: [] },
+    null,
+    { w: 82.8, s: 8, e: 4, st: 2, so: 2, sess: [{ k: 'strength', d: 70, r: 7 }] },
+    { w: 82.6, s: 7.5, e: 4, st: 2, so: 2, sess: [{ k: 'endurance', d: 45, r: 6 }] },
+    { w: 82.9, s: 7, e: 3, st: 3, so: 3, sess: [] },
+    { w: 82.5, s: 7.5, e: 4, st: 2, so: 3, sess: [{ k: 'strength', d: 80, r: 8 }] },
+    { w: 82.4, s: 6.75, e: 3, st: 3, so: 4, sess: [{ k: 'sport', d: 100, r: 8 }] },
+    { w: 82.6, s: 8.5, e: 5, st: 1, so: 2, sess: [] },
+    { w: 82.3, s: 7.5, e: 4, st: 2, so: 2, sess: [{ k: 'strength', d: 75, r: 7 }] },
+  ] as const
+  pattern.forEach((p, i) => {
+    if (!p) return
+    const at = new Date(today.getTime() - (13 - i) * 86_400_000)
+    const day = at.toISOString().slice(0, 10)
+    const iso = `${day}T20:00:00.000Z`
+    out.push({
+      id: `demo-diary-${day}`,
+      day,
+      weightKg: p.w,
+      sleepHours: p.s,
+      sleepQuality: null,
+      energy: p.e,
+      stress: p.st,
+      soreness: p.so,
+      steps: null,
+      adherence: null,
+      sessions: p.sess.map((x, j) => ({ id: `demo-sess-${day}-${j}`, kind: x.k, durationMin: x.d, rpe: x.r, note: '' })),
+      note: '',
+      createdAt: iso,
+      updatedAt: iso,
+    })
+  })
+  return out
+}
+const DEMO_DIARY = demoDiary()
+
 const DEMO_FOCUSES: StoredFocus[] = [
   {
     id: 'demo-focus-1',
@@ -265,6 +318,8 @@ export function buildDemoData(): StoredData {
         results,
         archived: false,
         observations: [],
+        diary: DEMO_DIARY,
+        diaryFields: ['stress', 'soreness'],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
         focuses: DEMO_FOCUSES,

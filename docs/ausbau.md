@@ -4,7 +4,7 @@ Wie das Coaching-System v4.0.0 (drei Arbeitsmappen, 84 Blätter, 1.960
 Eingabefeldgruppen, 44.394 Formeln) in Kydon aufgeht — und was davon
 ausdrücklich **nicht** hineingeht.
 
-**Stand:** 21. September 2026. Planung, nichts gebaut.
+**Stand:** 21. September 2026. S1 gebaut (siehe Abschnitt 15); alles Weitere Planung.
 
 ---
 
@@ -528,6 +528,43 @@ ein benutzbares Produkt steht.
    Trainern, die das System schon nutzen.
 
 ---
+
+## 15. Umsetzungsstand
+
+| Schicht | Stand | Wo |
+|---|---|---|
+| **S1 Tagebuch** | **gebaut**, 21.09.2026 | `src/domain/diary.ts`, `src/features/diary/`, `src/features/overview/DiaryTodayCard.tsx`, Schema v20 |
+| S2 Trainingslog | offen | |
+| S3 Cockpit, Decision-Log | offen | |
+| S4 Ernährung | offen | |
+| S5 Gesundheit | offen | |
+
+**Eine bewusste Abweichung vom Plan, offen benannt.** Etappe 0 sah vor, die
+Zeitreihen *vor* S1 in eigene Servertabellen zu ziehen. S1 legt das Tagebuch
+stattdessen **im Athletendokument** ab. Der Grund ist die Rechnung aus
+Abschnitt 6: ein Tagebuchtag wiegt rund 400 Byte, ein Jahr rund 150 kB —
+das Dokument trägt das jahrelang, und das lokale Modell (ein Bestand, ein
+Export, eine Migration) bleibt unangetastet. Die Tabellentrennung wird
+nötig, sobald S2 (Sätze) oder S4 (Mahlzeiten) dazukommen; sie steht als
+erste Aufgabe **vor** S2, nicht danach. Ein Umbau, den man aufschiebt, bis
+er weh tut, ist keiner mehr — deshalb steht das hier und nicht im Code.
+
+**Was S1 geworden ist:**
+
+- Ein Eintrag je Tag: Gewicht, Schlaf, Energie, Einheiten (Kern) — plus
+  Schlafqualität, Stress, Muskelkater, Schritte, Plan-Adhärenz, Notiz als
+  einzeln zuschaltbare Felder («mehr erfassen»). Der Feldsatz-Mechanismus
+  aus Etappe 0 ist damit gebaut: ein Einsteiger sieht vier Felder.
+- Keine Art.-9-Daten. Schmerz, Zyklus, Ruhepuls, HRV sind im Schema nicht
+  vorhanden; ein Import, der sie mitbringt, verliert sie beim Prüfen.
+- Bedienung ohne Tabellen: Tipp-Skalen (1–5, 1–10) statt Regler für Stufen,
+  Regler nur für Minuten, Einheiten als Chips, ein Tag pro Bildschirm.
+- Rechnung geprüft gegen den Testbericht v4.0.0: Session-Last 525 und 120,
+  Wochenlast 2.100, Tageslast 540, Vollständigkeit 0,9643. Belastungs-
+  verhältnis 7:28 nur beschreibend, erst ab 14 erfassten Tagen; Gewichts-
+  trend erst ab drei Wägungen je Woche.
+- Die Übersicht nimmt den Tag mit einem Tipp entgegen — auch bei leerem
+  Bestand, denn dort beginnt die Gewohnheit.
 
 ## 14. Zusammenfassung in drei Sätzen
 

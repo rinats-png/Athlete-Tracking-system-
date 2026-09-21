@@ -32,6 +32,7 @@ import { requirementGap } from '@/domain/requirementGap'
 import { LeverPanel } from './LeverPanel'
 import { CompetitionPanel } from './CompetitionPanel'
 import { BetweenTestsPanel } from './BetweenTestsPanel'
+import { DiaryTodayCard } from './DiaryTodayCard'
 import { pick } from '@/i18n/pick'
 
 /**
@@ -124,6 +125,9 @@ export function OverviewScreen() {
             <TestCard key={entry.slug} slug={entry.slug} results={data.results} context={context} reminders={reminders} />
           ))}
         </div>
+        {/* Der leere Bestand ist der Moment, in dem die tägliche Gewohnheit
+            beginnt — nicht erst nach der ersten Messung. */}
+        <DiaryTodayCard className="mt-4 md:max-w-sm" />
       </>
     )
   }
@@ -253,6 +257,7 @@ export function OverviewScreen() {
             </div>
           </Panel>
 
+          <DiaryTodayCard />
           <BetweenTestsPanel observations={observations} />
         </div>
 

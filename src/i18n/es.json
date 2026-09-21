@@ -1392,5 +1392,103 @@
     "last": "última {{date}}",
     "add": "Añadir",
     "why": "Sueño, carga, cuerpo: no es rendimiento, pero hace legible la siguiente medición. Un salto con tres kilos más de peso corporal significa otra cosa. Nada se valora."
+  },
+  "diary": {
+    "eyebrow": "Cada noche",
+    "title": "Diario",
+    "intro": "Peso, sueño, energía, sesiones. Sin valoraciones: solo las cifras que hacen legible el próximo día de test.",
+    "introCoach": "El diario del atleta activo. Cambia de atleta en la cabecera.",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "backToToday": "Volver a hoy",
+    "prevDay": "Día anterior",
+    "nextDay": "Día siguiente",
+    "fields": {
+      "weightKg": "Peso",
+      "sleepHours": "Sueño",
+      "sleepQuality": "Calidad del sueño",
+      "energy": "Energía",
+      "stress": "Estrés",
+      "soreness": "Agujetas",
+      "steps": "Pasos",
+      "adherence": "Plan cumplido",
+      "note": "Nota"
+    },
+    "scale": {
+      "low": "vacío",
+      "high": "lleno",
+      "poor": "inquieto",
+      "deep": "profundo",
+      "calm": "tranquilo",
+      "tense": "tenso",
+      "none": "ninguna",
+      "strong": "fuertes",
+      "offPlan": "fuera del plan",
+      "onPlan": "según el plan",
+      "easy": "fácil",
+      "maximal": "máximo"
+    },
+    "sessions": {
+      "title": "Sesiones",
+      "new": "Añadir sesión",
+      "add": "Guardar sesión",
+      "remove": "Quitar sesión",
+      "kind": "Tipo",
+      "duration": "Duración",
+      "rpe": "Esfuerzo (RPE 1–10)",
+      "rpeHint": "¿Cuánto costó la sesión en su conjunto? Elige primero y luego guarda.",
+      "loadPreview": "Carga de la sesión: {{load}} AU — duración por esfuerzo (Foster, sRPE).",
+      "dayLoad": "Carga del día {{load}} AU",
+      "kinds": {
+        "strength": "Fuerza",
+        "endurance": "Resistencia",
+        "sport": "Deporte",
+        "mobility": "Movilidad",
+        "other": "Otro"
+      }
+    },
+    "more": {
+      "title": "Registrar más",
+      "why": "El núcleo sigue siendo pequeño. Lo que actives aquí lo verás cada día; lo demás, nunca."
+    },
+    "strip": {
+      "title": "Catorce días",
+      "why": "Los puntos son valores diarios, las barras son cargas. Rayado es un día sin registro: falta, no es cero.",
+      "summary": "{{n}} de {{days}} días registrados",
+      "none": "todavía nada registrado",
+      "gap": "sin registro"
+    },
+    "metrics": {
+      "load": "Carga del día (AU)",
+      "weightKg": "Peso (kg)",
+      "sleepHours": "Sueño (h)",
+      "energy": "Energía (1–5)",
+      "stress": "Estrés (1–5)",
+      "soreness": "Agujetas (1–5)",
+      "steps": "Pasos"
+    },
+    "stats": {
+      "title": "Cifras",
+      "why": "Siete días, descritos, no valorados.",
+      "weight7": "Peso medio 7 días",
+      "sleep7": "Sueño medio 7 días",
+      "load7": "Carga semanal",
+      "trend": "Tendencia del peso",
+      "onDays": "en {{n}} días",
+      "noData": "aún sin valores",
+      "trendMeta": "media de 7 días frente a los 7 anteriores",
+      "trendNeeds": "necesita 3 pesajes en cada una de dos semanas",
+      "ratio": "Relación de carga {{ratio}} (7 frente a 28 días)",
+      "ratioNeeds": "relación a partir de 14 días registrados de 28",
+      "completeness": "{{pct}} % de los últimos 14 días registrados",
+      "noJudgement": "Nada de esto es una recomendación."
+    },
+    "card": {
+      "title": "Hoy",
+      "ask": "¿Cómo fue el día? Con un toque basta.",
+      "done": "Hoy ya está registrado.",
+      "more": "Registrar más",
+      "open": "Abrir diario"
+    }
   }
 }

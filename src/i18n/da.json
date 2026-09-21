@@ -1392,5 +1392,103 @@
     "last": "senest {{date}}",
     "add": "Tilføj",
     "why": "Søvn, belastning, krop: ikke præstation, men de gør den næste måling læsbar. Et spring med tre kilo mere kropsvægt betyder noget andet. Intet vurderes."
+  },
+  "diary": {
+    "eyebrow": "Hver aften",
+    "title": "Dagbog",
+    "intro": "Vægt, søvn, energi, pas. Ingen vurdering — kun de tal, der gør den næste testdag læselig.",
+    "introCoach": "Den aktive atlets dagbog. Skift atlet i sidehovedet.",
+    "today": "I dag",
+    "yesterday": "I går",
+    "backToToday": "Tilbage til i dag",
+    "prevDay": "Forrige dag",
+    "nextDay": "Næste dag",
+    "fields": {
+      "weightKg": "Vægt",
+      "sleepHours": "Søvn",
+      "sleepQuality": "Søvnkvalitet",
+      "energy": "Energi",
+      "stress": "Stress",
+      "soreness": "Ømhed",
+      "steps": "Skridt",
+      "adherence": "Plan overholdt",
+      "note": "Note"
+    },
+    "scale": {
+      "low": "tom",
+      "high": "fuld",
+      "poor": "urolig",
+      "deep": "dyb",
+      "calm": "rolig",
+      "tense": "anspændt",
+      "none": "ingen",
+      "strong": "stærk",
+      "offPlan": "uden for planen",
+      "onPlan": "som planlagt",
+      "easy": "let",
+      "maximal": "maksimal"
+    },
+    "sessions": {
+      "title": "Pas",
+      "new": "Tilføj pas",
+      "add": "Gem pas",
+      "remove": "Fjern pas",
+      "kind": "Type",
+      "duration": "Varighed",
+      "rpe": "Anstrengelse (RPE 1–10)",
+      "rpeHint": "Hvor hårdt var passet som helhed? Vælg først, gem derefter.",
+      "loadPreview": "Pasbelastning: {{load}} AU — varighed gange anstrengelse (Foster, sRPE).",
+      "dayLoad": "Dagsbelastning {{load}} AU",
+      "kinds": {
+        "strength": "Styrke",
+        "endurance": "Udholdenhed",
+        "sport": "Sport",
+        "mobility": "Mobilitet",
+        "other": "Andet"
+      }
+    },
+    "more": {
+      "title": "Registrér mere",
+      "why": "Kernen forbliver lille. Det, du slår til her, ser du hver dag — det, du ikke gør, aldrig."
+    },
+    "strip": {
+      "title": "Fjorten dage",
+      "why": "Prikker er dagsværdier, søjler er belastning. Skraveret er en dag uden post — den mangler, den er ikke nul.",
+      "summary": "{{n}} af {{days}} dage registreret",
+      "none": "intet registreret endnu",
+      "gap": "ingen post"
+    },
+    "metrics": {
+      "load": "Dagsbelastning (AU)",
+      "weightKg": "Vægt (kg)",
+      "sleepHours": "Søvn (t)",
+      "energy": "Energi (1–5)",
+      "stress": "Stress (1–5)",
+      "soreness": "Ømhed (1–5)",
+      "steps": "Skridt"
+    },
+    "stats": {
+      "title": "Nøgletal",
+      "why": "Syv dage, beskrevet, ikke vurderet.",
+      "weight7": "Gns. vægt 7 dage",
+      "sleep7": "Gns. søvn 7 dage",
+      "load7": "Ugebelastning",
+      "trend": "Vægttendens",
+      "onDays": "på {{n}} dage",
+      "noData": "ingen værdier endnu",
+      "trendMeta": "7-dages gennemsnit mod de 7 før",
+      "trendNeeds": "kræver 3 vejninger i hver af to uger",
+      "ratio": "Belastningsforhold {{ratio}} (7 mod 28 dage)",
+      "ratioNeeds": "forhold fra 14 registrerede dage af 28",
+      "completeness": "{{pct}} % af de sidste 14 dage registreret",
+      "noJudgement": "Intet her er en anbefaling."
+    },
+    "card": {
+      "title": "I dag",
+      "ask": "Hvordan var dagen? Ét tryk er nok.",
+      "done": "I dag er registreret.",
+      "more": "Registrér mere",
+      "open": "Åbn dagbogen"
+    }
   }
 }

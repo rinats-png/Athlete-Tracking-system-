@@ -1392,5 +1392,103 @@
     "last": "last {{date}}",
     "add": "Add",
     "why": "Sleep, load, body: not performance, but they make the next measurement readable. A jump at three kilos more body weight means something else. Nothing is rated."
+  },
+  "diary": {
+    "eyebrow": "Every evening",
+    "title": "Diary",
+    "intro": "Weight, sleep, energy, sessions. No judgement — just the numbers that make the next test day readable.",
+    "introCoach": "The active athlete's diary. Switch athletes in the header.",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "backToToday": "Back to today",
+    "prevDay": "Previous day",
+    "nextDay": "Next day",
+    "fields": {
+      "weightKg": "Weight",
+      "sleepHours": "Sleep",
+      "sleepQuality": "Sleep quality",
+      "energy": "Energy",
+      "stress": "Stress",
+      "soreness": "Soreness",
+      "steps": "Steps",
+      "adherence": "Stuck to plan",
+      "note": "Note"
+    },
+    "scale": {
+      "low": "empty",
+      "high": "full",
+      "poor": "restless",
+      "deep": "deep",
+      "calm": "calm",
+      "tense": "tense",
+      "none": "none",
+      "strong": "strong",
+      "offPlan": "off plan",
+      "onPlan": "as planned",
+      "easy": "easy",
+      "maximal": "maximal"
+    },
+    "sessions": {
+      "title": "Sessions",
+      "new": "Add session",
+      "add": "Save session",
+      "remove": "Remove session",
+      "kind": "Type",
+      "duration": "Duration",
+      "rpe": "Effort (RPE 1–10)",
+      "rpeHint": "How hard was the session as a whole? Choose first, then save.",
+      "loadPreview": "Session load: {{load}} AU — duration times effort (Foster, sRPE).",
+      "dayLoad": "Day load {{load}} AU",
+      "kinds": {
+        "strength": "Strength",
+        "endurance": "Endurance",
+        "sport": "Sport",
+        "mobility": "Mobility",
+        "other": "Other"
+      }
+    },
+    "more": {
+      "title": "Track more",
+      "why": "The core stays small. What you switch on here you see every day — what you don't, never."
+    },
+    "strip": {
+      "title": "Fourteen days",
+      "why": "Dots are daily values, bars are loads. Hatched is a day without an entry — it is missing, not zero.",
+      "summary": "{{n}} of {{days}} days recorded",
+      "none": "nothing recorded yet",
+      "gap": "no entry"
+    },
+    "metrics": {
+      "load": "Day load (AU)",
+      "weightKg": "Weight (kg)",
+      "sleepHours": "Sleep (h)",
+      "energy": "Energy (1–5)",
+      "stress": "Stress (1–5)",
+      "soreness": "Soreness (1–5)",
+      "steps": "Steps"
+    },
+    "stats": {
+      "title": "Figures",
+      "why": "Seven days, described, not judged.",
+      "weight7": "Avg weight 7 days",
+      "sleep7": "Avg sleep 7 days",
+      "load7": "Weekly load",
+      "trend": "Weight trend",
+      "onDays": "on {{n}} days",
+      "noData": "no values yet",
+      "trendMeta": "7-day mean vs the 7 before",
+      "trendNeeds": "needs 3 weigh-ins in each of two weeks",
+      "ratio": "Load ratio {{ratio}} (7 vs 28 days)",
+      "ratioNeeds": "ratio from 14 recorded days of 28",
+      "completeness": "{{pct}} % of the last 14 days recorded",
+      "noJudgement": "Nothing here is a recommendation."
+    },
+    "card": {
+      "title": "Today",
+      "ask": "How was the day? One tap is enough.",
+      "done": "Today is recorded.",
+      "more": "Add more",
+      "open": "Open diary"
+    }
   }
 }

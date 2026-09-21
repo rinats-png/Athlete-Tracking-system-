@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 19
+export const CURRENT_SCHEMA_VERSION = 20
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -487,6 +487,73 @@ const observationSchema = z.object({
   createdAt: isoDate,
 })
 
+/** Eine Stufe von 1 bis 5 — Selbstauskunft, keine Messung. */
+const scale5 = z.number().int().min(1).max(5)
+
+/**
+ * Eine Trainingseinheit im Tagebuch.
+ *
+ * Bewusst KEINE Übungen, Sätze oder Gewichte — das ist das Trainingslog
+ * (Schicht S2) und kommt eigens. Hier steht nur, was für die Belastung des
+ * Tages zählt: wie lang, wie anstrengend. Daraus entsteht die Session-Last
+ * nach der sRPE-Methode (Foster et al.), siehe `domain/diary.ts`.
+ */
+const diarySessionSchema = z.object({
+  id: z.string().min(1),
+  kind: z.enum(['strength', 'endurance', 'sport', 'mobility', 'other']).default('other'),
+  durationMin: z.number().int().min(1).max(600),
+  /** Session-RPE 1–10 (Borg CR-10). Ganze Zahlen — Zehntel wären Scheingenauigkeit. */
+  rpe: z.number().int().min(1).max(10),
+  note: z.string().max(200).default(''),
+})
+
+/**
+ * Ein Tagebucheintrag: ein Tag, ein Eintrag (Schicht S1 aus docs/ausbau.md).
+ *
+ * WAS HIER STEHT UND WAS NICHT. Gewicht, Schlaf, Energie, Stress, Muskelkater,
+ * Schritte, Einheiten, Adhärenz. Das ist der Client-Tracker ohne Ernährung —
+ * die Zahlen, die den nächsten Testtag lesbar machen und die tägliche
+ * Gewohnheit tragen.
+ *
+ * NICHT hier: Verletzung, Schmerzgrad, Zyklus, Libido, Körperbild, Blutdruck,
+ * Ruhepuls, HRV. Das sind Gesundheitsdaten nach Art. 9 DSGVO und gehören in
+ * die getrennte Gesundheitsschicht (S5) mit eigener Einwilligung — nie in
+ * dieselbe Zeile wie ein Trainingstag.
+ *
+ * JEDES FELD IST FREIWILLIG. Ein leeres Feld heisst «nicht erfasst», nie
+ * null Stunden Schlaf (§89: leer ist nicht 0). Der Eintrag existiert schon,
+ * wenn nur ein Feld gefüllt ist.
+ */
+const diaryEntrySchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  weightKg: finite.min(20).max(400).nullable().default(null),
+  sleepHours: finite.min(0).max(24).nullable().default(null),
+  sleepQuality: scale5.nullable().default(null),
+  energy: scale5.nullable().default(null),
+  stress: scale5.nullable().default(null),
+  soreness: scale5.nullable().default(null),
+  steps: z.number().int().min(0).max(200000).nullable().default(null),
+  /** Wie gut der Plan eingehalten wurde — Selbstauskunft, 1–5. */
+  adherence: scale5.nullable().default(null),
+  sessions: z.array(diarySessionSchema).max(6).default([]),
+  note: z.string().max(500).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+/**
+ * Welche freiwilligen Felder dieser Athlet im Tagebuch sehen will.
+ *
+ * DER MECHANISMUS AUS ETAPPE 0: ein Einsteiger darf nie vierzig Felder sehen.
+ * Der Kern (Gewicht, Schlaf, Energie, Einheiten) steht immer; alles andere
+ * schaltet man einzeln dazu und sieht es sonst nicht. Wer nie mehr als
+ * Gewicht und Schlaf einträgt, sieht nie mehr als zwei Felder.
+ */
+export const DIARY_OPTIONAL_FIELDS = ['sleepQuality', 'stress', 'soreness', 'steps', 'adherence', 'note'] as const
+export type DiaryOptionalField = (typeof DIARY_OPTIONAL_FIELDS)[number]
+const diaryFieldSchema = z.enum(DIARY_OPTIONAL_FIELDS)
+
 const athleteSchema = z.object({
   id: z.string().min(1),
   name: z.string().max(120).default(''),
@@ -499,6 +566,10 @@ const athleteSchema = z.object({
    * Zahlen mit Datum — ohne Einordnung, ohne Achse, ohne Score.
    */
   observations: z.array(observationSchema).default([]),
+  /** Tagebuch, ein Eintrag je Tag. Zeitlich sortiert wird beim Lesen, nie beim Schreiben. */
+  diary: z.array(diaryEntrySchema).default([]),
+  /** Freiwillige Tagebuchfelder, die dieser Athlet eingeschaltet hat. */
+  diaryFields: z.array(diaryFieldSchema).default([]),
   /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
   archived: z.boolean().default(false),
   /** Notizen des Trainers zu dieser Person (§74). */
@@ -563,6 +634,8 @@ export type ValidatedData = z.infer<typeof storedDataSchema>
 export type ValidatedAthlete = z.infer<typeof athleteSchema>
 export type ValidatedTestDay = z.infer<typeof testDaySchema>
 export type ValidatedObservation = z.infer<typeof observationSchema>
+export type ValidatedDiaryEntry = z.infer<typeof diaryEntrySchema>
+export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
 
 /**
  * Sicht auf einen einzelnen Athleten in der Form, die alle Auswertungen
@@ -908,6 +981,23 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 19,
+    to: 20,
+    describe: 'Tagebuch je Athlet (Schicht S1), leer; Feldsatz auf dem Kern',
+    run: (data) => ({
+      ...data,
+      version: 20,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        // Leer, nicht zurückgerechnet: aus Beobachtungswerten liesse sich
+        // ein Tagebuch zusammensetzen, aber ein Eintrag, den niemand an
+        // diesem Tag gemacht hat, wäre eine erfundene Gewohnheit.
+        diary: [],
+        diaryFields: [],
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -935,6 +1025,8 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     assessments: [],
     results: [],
     observations: [],
+    diary: [],
+    diaryFields: [],
     archived: false,
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

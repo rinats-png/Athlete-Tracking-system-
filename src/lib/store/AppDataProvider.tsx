@@ -26,13 +26,15 @@ import {
   type StoredAssessment,
   type StoredTestDay,
   type StoredObservation,
+  type StoredDiaryEntry,
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
   type StoredFocus,
   type StoredResult,
 } from './localStore'
-import { AUDIT_LIMIT, emptyAthlete } from './schema'
+import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
+import { isEmptyEntry } from '@/domain/diary'
 import { FOCUS_HARD_LIMIT } from '@/domain/trainingFocus'
 import type {
   AttemptSelection,
@@ -101,6 +103,18 @@ interface AppDataValue {
   observations: StoredObservation[]
   addObservation: (entry: { key: string; observedAt: string; value: number; device: string; note: string }) => void
   deleteObservation: (id: string) => void
+  /**
+   * Tagebuch des aktiven Athleten (Schicht S1). Ein Eintrag je Tag.
+   *
+   * `saveDiaryEntry` legt den Tag an oder ergänzt ihn — ein Feld nach dem
+   * anderen, so wie es abends eingetippt wird. Wird der Eintrag dadurch
+   * leer, verschwindet er: ein leerer Tag ist kein Tag, sondern eine Lücke.
+   */
+  diary: StoredDiaryEntry[]
+  saveDiaryEntry: (day: string, patch: Partial<Omit<StoredDiaryEntry, 'id' | 'day' | 'createdAt' | 'updatedAt'>>) => void
+  /** Welche freiwilligen Felder dieser Athlet im Tagebuch sieht. */
+  diaryFields: DiaryOptionalField[]
+  setDiaryFields: (fields: DiaryOptionalField[]) => void
   /** Einwilligung eines Athleten setzen. */
   setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
@@ -522,6 +536,49 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
                   ],
                 }
               : a,
+          ),
+        })
+      },
+      diary: store.athletes.find((a) => a.id === store.activeAthleteId)?.diary ?? [],
+      saveDiaryEntry: (day, patch) => {
+        const current = storeRef.current
+        const now = new Date().toISOString()
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => {
+            if (a.id !== current.activeAthleteId) return a
+            const existing = a.diary.find((e) => e.day === day)
+            const merged: StoredDiaryEntry = existing
+              ? { ...existing, ...patch, updatedAt: now }
+              : {
+                  id: newId(),
+                  day,
+                  weightKg: null,
+                  sleepHours: null,
+                  sleepQuality: null,
+                  energy: null,
+                  stress: null,
+                  soreness: null,
+                  steps: null,
+                  adherence: null,
+                  sessions: [],
+                  note: '',
+                  ...patch,
+                  createdAt: now,
+                  updatedAt: now,
+                }
+            const rest = a.diary.filter((e) => e.day !== day)
+            return { ...a, diary: isEmptyEntry(merged) ? rest : [...rest, merged] }
+          }),
+        })
+      },
+      diaryFields: store.athletes.find((a) => a.id === store.activeAthleteId)?.diaryFields ?? [],
+      setDiaryFields: (fields) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) =>
+            a.id === current.activeAthleteId ? { ...a, diaryFields: fields } : a,
           ),
         })
       },

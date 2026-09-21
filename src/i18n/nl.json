@@ -1392,5 +1392,103 @@
     "last": "laatst {{date}}",
     "add": "Toevoegen",
     "why": "Slaap, belasting, lichaam: geen prestatie, maar ze maken de volgende meting leesbaar. Een sprong met drie kilo meer lichaamsgewicht betekent iets anders. Niets wordt beoordeeld."
+  },
+  "diary": {
+    "eyebrow": "Elke avond",
+    "title": "Dagboek",
+    "intro": "Gewicht, slaap, energie, sessies. Geen oordeel — alleen de cijfers die de volgende testdag leesbaar maken.",
+    "introCoach": "Het dagboek van de actieve atleet. Wissel van atleet in de kop.",
+    "today": "Vandaag",
+    "yesterday": "Gisteren",
+    "backToToday": "Terug naar vandaag",
+    "prevDay": "Vorige dag",
+    "nextDay": "Volgende dag",
+    "fields": {
+      "weightKg": "Gewicht",
+      "sleepHours": "Slaap",
+      "sleepQuality": "Slaapkwaliteit",
+      "energy": "Energie",
+      "stress": "Stress",
+      "soreness": "Spierpijn",
+      "steps": "Stappen",
+      "adherence": "Plan gevolgd",
+      "note": "Notitie"
+    },
+    "scale": {
+      "low": "leeg",
+      "high": "vol",
+      "poor": "onrustig",
+      "deep": "diep",
+      "calm": "rustig",
+      "tense": "gespannen",
+      "none": "geen",
+      "strong": "sterk",
+      "offPlan": "naast het plan",
+      "onPlan": "volgens plan",
+      "easy": "licht",
+      "maximal": "maximaal"
+    },
+    "sessions": {
+      "title": "Sessies",
+      "new": "Sessie toevoegen",
+      "add": "Sessie opslaan",
+      "remove": "Sessie verwijderen",
+      "kind": "Soort",
+      "duration": "Duur",
+      "rpe": "Inspanning (RPE 1–10)",
+      "rpeHint": "Hoe zwaar was de sessie als geheel? Eerst kiezen, dan opslaan.",
+      "loadPreview": "Sessiebelasting: {{load}} AU — duur maal inspanning (Foster, sRPE).",
+      "dayLoad": "Dagbelasting {{load}} AU",
+      "kinds": {
+        "strength": "Kracht",
+        "endurance": "Uithouding",
+        "sport": "Sport",
+        "mobility": "Mobiliteit",
+        "other": "Overig"
+      }
+    },
+    "more": {
+      "title": "Meer bijhouden",
+      "why": "De kern blijft klein. Wat je hier inschakelt zie je elke dag — wat niet, nooit."
+    },
+    "strip": {
+      "title": "Veertien dagen",
+      "why": "Punten zijn dagwaarden, balken zijn belasting. Gearceerd is een dag zonder invoer — die ontbreekt, is niet nul.",
+      "summary": "{{n}} van {{days}} dagen vastgelegd",
+      "none": "nog niets vastgelegd",
+      "gap": "geen invoer"
+    },
+    "metrics": {
+      "load": "Dagbelasting (AU)",
+      "weightKg": "Gewicht (kg)",
+      "sleepHours": "Slaap (u)",
+      "energy": "Energie (1–5)",
+      "stress": "Stress (1–5)",
+      "soreness": "Spierpijn (1–5)",
+      "steps": "Stappen"
+    },
+    "stats": {
+      "title": "Kengetallen",
+      "why": "Zeven dagen, beschreven, niet beoordeeld.",
+      "weight7": "Gem. gewicht 7 dagen",
+      "sleep7": "Gem. slaap 7 dagen",
+      "load7": "Weekbelasting",
+      "trend": "Gewichtstrend",
+      "onDays": "op {{n}} dagen",
+      "noData": "nog geen waarden",
+      "trendMeta": "7-daags gemiddelde tegen de 7 ervoor",
+      "trendNeeds": "vereist 3 wegingen in elk van twee weken",
+      "ratio": "Belastingsverhouding {{ratio}} (7 tegen 28 dagen)",
+      "ratioNeeds": "verhouding vanaf 14 vastgelegde dagen van 28",
+      "completeness": "{{pct}} % van de laatste 14 dagen vastgelegd",
+      "noJudgement": "Niets hier is een aanbeveling."
+    },
+    "card": {
+      "title": "Vandaag",
+      "ask": "Hoe was de dag? Eén tik is genoeg.",
+      "done": "Vandaag is vastgelegd.",
+      "more": "Meer invoeren",
+      "open": "Dagboek openen"
+    }
   }
 }

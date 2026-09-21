@@ -1392,5 +1392,103 @@
     "last": "senast {{date}}",
     "add": "Lägg till",
     "why": "Sömn, belastning, kropp: ingen prestation, men de gör nästa mätning läsbar. Ett hopp vid tre kilo mer kroppsvikt betyder något annat. Inget bedöms."
+  },
+  "diary": {
+    "eyebrow": "Varje kväll",
+    "title": "Dagbok",
+    "intro": "Vikt, sömn, energi, pass. Ingen bedömning — bara siffrorna som gör nästa testdag läsbar.",
+    "introCoach": "Den aktiva idrottarens dagbok. Byt idrottare i sidhuvudet.",
+    "today": "I dag",
+    "yesterday": "I går",
+    "backToToday": "Tillbaka till i dag",
+    "prevDay": "Föregående dag",
+    "nextDay": "Nästa dag",
+    "fields": {
+      "weightKg": "Vikt",
+      "sleepHours": "Sömn",
+      "sleepQuality": "Sömnkvalitet",
+      "energy": "Energi",
+      "stress": "Stress",
+      "soreness": "Träningsvärk",
+      "steps": "Steg",
+      "adherence": "Följt planen",
+      "note": "Anteckning"
+    },
+    "scale": {
+      "low": "tom",
+      "high": "full",
+      "poor": "orolig",
+      "deep": "djup",
+      "calm": "lugn",
+      "tense": "spänd",
+      "none": "ingen",
+      "strong": "stark",
+      "offPlan": "utanför planen",
+      "onPlan": "som planerat",
+      "easy": "lätt",
+      "maximal": "maximal"
+    },
+    "sessions": {
+      "title": "Pass",
+      "new": "Lägg till pass",
+      "add": "Spara pass",
+      "remove": "Ta bort pass",
+      "kind": "Typ",
+      "duration": "Längd",
+      "rpe": "Ansträngning (RPE 1–10)",
+      "rpeHint": "Hur ansträngande var passet som helhet? Välj först, spara sedan.",
+      "loadPreview": "Passbelastning: {{load}} AU — längd gånger ansträngning (Foster, sRPE).",
+      "dayLoad": "Dagsbelastning {{load}} AU",
+      "kinds": {
+        "strength": "Styrka",
+        "endurance": "Uthållighet",
+        "sport": "Sport",
+        "mobility": "Rörlighet",
+        "other": "Övrigt"
+      }
+    },
+    "more": {
+      "title": "Registrera mer",
+      "why": "Kärnan förblir liten. Det du slår på här ser du varje dag — det du inte slår på, aldrig."
+    },
+    "strip": {
+      "title": "Fjorton dagar",
+      "why": "Punkter är dagsvärden, staplar är belastning. Skrafferat är en dag utan post — den saknas, den är inte noll.",
+      "summary": "{{n}} av {{days}} dagar registrerade",
+      "none": "inget registrerat ännu",
+      "gap": "ingen post"
+    },
+    "metrics": {
+      "load": "Dagsbelastning (AU)",
+      "weightKg": "Vikt (kg)",
+      "sleepHours": "Sömn (h)",
+      "energy": "Energi (1–5)",
+      "stress": "Stress (1–5)",
+      "soreness": "Träningsvärk (1–5)",
+      "steps": "Steg"
+    },
+    "stats": {
+      "title": "Nyckeltal",
+      "why": "Sju dagar, beskrivna, inte bedömda.",
+      "weight7": "Medelvikt 7 dagar",
+      "sleep7": "Medelsömn 7 dagar",
+      "load7": "Veckobelastning",
+      "trend": "Vikttrend",
+      "onDays": "på {{n}} dagar",
+      "noData": "inga värden ännu",
+      "trendMeta": "7-dagarsmedel mot de 7 innan",
+      "trendNeeds": "kräver 3 vägningar i var och en av två veckor",
+      "ratio": "Belastningskvot {{ratio}} (7 mot 28 dagar)",
+      "ratioNeeds": "kvot från 14 registrerade dagar av 28",
+      "completeness": "{{pct}} % av de senaste 14 dagarna registrerade",
+      "noJudgement": "Inget här är en rekommendation."
+    },
+    "card": {
+      "title": "I dag",
+      "ask": "Hur var dagen? Ett tryck räcker.",
+      "done": "I dag är registrerad.",
+      "more": "Registrera mer",
+      "open": "Öppna dagboken"
+    }
   }
 }

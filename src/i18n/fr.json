@@ -1392,5 +1392,103 @@
     "last": "dernière {{date}}",
     "add": "Ajouter",
     "why": "Sommeil, charge, corps : pas de la performance, mais ils rendent la mesure suivante lisible. Un saut avec trois kilos de plus signifie autre chose. Rien n'est évalué."
+  },
+  "diary": {
+    "eyebrow": "Chaque soir",
+    "title": "Journal",
+    "intro": "Poids, sommeil, énergie, séances. Aucun jugement — seulement les chiffres qui rendent le prochain jour de test lisible.",
+    "introCoach": "Le journal de l'athlète actif. Changez d'athlète dans l'en-tête.",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "backToToday": "Revenir à aujourd'hui",
+    "prevDay": "Jour précédent",
+    "nextDay": "Jour suivant",
+    "fields": {
+      "weightKg": "Poids",
+      "sleepHours": "Sommeil",
+      "sleepQuality": "Qualité du sommeil",
+      "energy": "Énergie",
+      "stress": "Stress",
+      "soreness": "Courbatures",
+      "steps": "Pas",
+      "adherence": "Plan respecté",
+      "note": "Note"
+    },
+    "scale": {
+      "low": "vide",
+      "high": "plein",
+      "poor": "agité",
+      "deep": "profond",
+      "calm": "calme",
+      "tense": "tendu",
+      "none": "aucune",
+      "strong": "fortes",
+      "offPlan": "hors plan",
+      "onPlan": "comme prévu",
+      "easy": "facile",
+      "maximal": "maximal"
+    },
+    "sessions": {
+      "title": "Séances",
+      "new": "Ajouter une séance",
+      "add": "Enregistrer la séance",
+      "remove": "Retirer la séance",
+      "kind": "Type",
+      "duration": "Durée",
+      "rpe": "Effort (RPE 1–10)",
+      "rpeHint": "Quelle a été la difficulté de la séance dans son ensemble ? Choisissez d'abord, puis enregistrez.",
+      "loadPreview": "Charge de séance : {{load}} AU — durée fois effort (Foster, sRPE).",
+      "dayLoad": "Charge du jour {{load}} AU",
+      "kinds": {
+        "strength": "Force",
+        "endurance": "Endurance",
+        "sport": "Sport",
+        "mobility": "Mobilité",
+        "other": "Autre"
+      }
+    },
+    "more": {
+      "title": "Suivre davantage",
+      "why": "Le cœur reste petit. Ce que vous activez ici, vous le voyez chaque jour — le reste, jamais."
+    },
+    "strip": {
+      "title": "Quatorze jours",
+      "why": "Les points sont des valeurs journalières, les barres des charges. Hachuré : un jour sans entrée — il manque, il n'est pas zéro.",
+      "summary": "{{n}} jours sur {{days}} saisis",
+      "none": "rien de saisi pour l'instant",
+      "gap": "pas d'entrée"
+    },
+    "metrics": {
+      "load": "Charge du jour (AU)",
+      "weightKg": "Poids (kg)",
+      "sleepHours": "Sommeil (h)",
+      "energy": "Énergie (1–5)",
+      "stress": "Stress (1–5)",
+      "soreness": "Courbatures (1–5)",
+      "steps": "Pas"
+    },
+    "stats": {
+      "title": "Indicateurs",
+      "why": "Sept jours, décrits, pas jugés.",
+      "weight7": "Poids moyen 7 jours",
+      "sleep7": "Sommeil moyen 7 jours",
+      "load7": "Charge hebdomadaire",
+      "trend": "Tendance du poids",
+      "onDays": "sur {{n}} jours",
+      "noData": "pas encore de valeurs",
+      "trendMeta": "moyenne 7 jours contre les 7 précédents",
+      "trendNeeds": "nécessite 3 pesées dans chacune des deux semaines",
+      "ratio": "Rapport de charge {{ratio}} (7 vs 28 jours)",
+      "ratioNeeds": "rapport à partir de 14 jours saisis sur 28",
+      "completeness": "{{pct}} % des 14 derniers jours saisis",
+      "noJudgement": "Rien ici n'est une recommandation."
+    },
+    "card": {
+      "title": "Aujourd'hui",
+      "ask": "Comment s'est passée la journée ? Un geste suffit.",
+      "done": "Aujourd'hui est saisi.",
+      "more": "Saisir plus",
+      "open": "Ouvrir le journal"
+    }
   }
 }

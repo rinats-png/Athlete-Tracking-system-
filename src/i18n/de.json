@@ -1392,5 +1392,103 @@
     "last": "zuletzt {{date}}",
     "add": "Eintragen",
     "why": "Schlaf, Belastung, Körper: keine Leistung, aber sie machen die nächste Messung lesbar. Ein Sprung bei drei Kilo mehr Körpergewicht bedeutet etwas anderes. Bewertet wird nichts."
+  },
+  "diary": {
+    "eyebrow": "Jeden Abend",
+    "title": "Tagebuch",
+    "intro": "Gewicht, Schlaf, Energie, Einheiten. Keine Bewertung — nur die Zahlen, die den nächsten Testtag lesbar machen.",
+    "introCoach": "Das Tagebuch des aktiven Athleten. Umschalten oben in der Kopfzeile.",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "backToToday": "Zu heute",
+    "prevDay": "Vortag",
+    "nextDay": "Nächster Tag",
+    "fields": {
+      "weightKg": "Gewicht",
+      "sleepHours": "Schlaf",
+      "sleepQuality": "Schlafqualität",
+      "energy": "Energie",
+      "stress": "Stress",
+      "soreness": "Muskelkater",
+      "steps": "Schritte",
+      "adherence": "Plan eingehalten",
+      "note": "Notiz"
+    },
+    "scale": {
+      "low": "leer",
+      "high": "voll",
+      "poor": "unruhig",
+      "deep": "tief",
+      "calm": "ruhig",
+      "tense": "angespannt",
+      "none": "keiner",
+      "strong": "stark",
+      "offPlan": "daneben",
+      "onPlan": "wie geplant",
+      "easy": "leicht",
+      "maximal": "maximal"
+    },
+    "sessions": {
+      "title": "Einheiten",
+      "new": "Einheit hinzufügen",
+      "add": "Einheit eintragen",
+      "remove": "Einheit entfernen",
+      "kind": "Art",
+      "duration": "Dauer",
+      "rpe": "Anstrengung (RPE 1–10)",
+      "rpeHint": "Wie anstrengend war die Einheit als Ganzes? Erst wählen, dann eintragen.",
+      "loadPreview": "Session-Last: {{load}} AU — Dauer mal Anstrengung (Foster, sRPE).",
+      "dayLoad": "Tageslast {{load}} AU",
+      "kinds": {
+        "strength": "Kraft",
+        "endurance": "Ausdauer",
+        "sport": "Sport",
+        "mobility": "Beweglichkeit",
+        "other": "Sonstiges"
+      }
+    },
+    "more": {
+      "title": "Mehr erfassen",
+      "why": "Der Kern bleibt klein. Was du hier einschaltest, siehst du jeden Tag — was nicht, nie."
+    },
+    "strip": {
+      "title": "Vierzehn Tage",
+      "why": "Punkte sind Tageswerte, Balken sind Lasten. Schraffiert ist ein Tag ohne Eintrag — er fehlt, er ist nicht null.",
+      "summary": "{{n}} von {{days}} Tagen erfasst",
+      "none": "noch nichts erfasst",
+      "gap": "kein Eintrag"
+    },
+    "metrics": {
+      "load": "Tageslast (AU)",
+      "weightKg": "Gewicht (kg)",
+      "sleepHours": "Schlaf (h)",
+      "energy": "Energie (1–5)",
+      "stress": "Stress (1–5)",
+      "soreness": "Muskelkater (1–5)",
+      "steps": "Schritte"
+    },
+    "stats": {
+      "title": "Kennzahlen",
+      "why": "Sieben Tage, beschrieben, nicht bewertet.",
+      "weight7": "Ø Gewicht 7 Tage",
+      "sleep7": "Ø Schlaf 7 Tage",
+      "load7": "Wochenlast",
+      "trend": "Gewichtstrend",
+      "onDays": "an {{n}} Tagen",
+      "noData": "noch keine Werte",
+      "trendMeta": "7-Tage-Mittel gegen die 7 davor",
+      "trendNeeds": "braucht je 3 Wägungen in zwei Wochen",
+      "ratio": "Belastungsverhältnis {{ratio}} (7 zu 28 Tage)",
+      "ratioNeeds": "Verhältnis ab 14 erfassten Tagen von 28",
+      "completeness": "{{pct}} % der letzten 14 Tage erfasst",
+      "noJudgement": "Nichts hier ist eine Empfehlung."
+    },
+    "card": {
+      "title": "Heute",
+      "ask": "Wie war der Tag? Ein Tipp genügt.",
+      "done": "Heute ist erfasst.",
+      "more": "Mehr eintragen",
+      "open": "Tagebuch öffnen"
+    }
   }
 }

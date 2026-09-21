@@ -137,6 +137,7 @@ const router = createBrowserRouter([
       { path: 'trainer/nachweis', element: screen(() => import('@/features/coach/CoachProofScreen'), 'CoachProofScreen') },
       { path: 'bericht', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'beobachtung', element: screen(() => import('@/features/observations/ObservationScreen'), 'ObservationScreen') },
+      { path: 'tagebuch', element: screen(() => import('@/features/diary/DiaryScreen'), 'DiaryScreen') },
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
