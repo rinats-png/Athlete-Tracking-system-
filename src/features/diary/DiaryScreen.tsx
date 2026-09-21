@@ -384,6 +384,14 @@ export function DiaryScreen() {
         <p className="border-t border-line px-4 py-3 text-[12px] leading-relaxed text-ink-muted">
           {t('diary.stats.completeness', { pct: Math.round(full * 100) })} · {t('diary.stats.noJudgement')}
         </p>
+        <div className="border-t border-line px-4 py-3">
+          <Button asChild variant="ghost" size="sm" className="-ml-3">
+            <Link to="/cockpit">
+              {t('cockpit.title')}
+              <ArrowRight size={14} aria-hidden />
+            </Link>
+          </Button>
+        </div>
       </Panel>
     </>
   )

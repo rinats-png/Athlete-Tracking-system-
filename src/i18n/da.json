@@ -1576,5 +1576,104 @@
       "why": "Søvn, vægt og energi står i dagbogen — dér lander belastningen fra disse pas også.",
       "open": "Åbn dagbogen"
     }
+  },
+  "cockpit": {
+    "eyebrow": "Syv dage mod otteogtyve",
+    "title": "Cockpit",
+    "intro": "Hvad der har flyttet sig, og hvad du besluttede som svar — med effekten, beregnet mod din egen udsving. Intet her er et råd.",
+    "introCoach": "Den aktive atlets cockpit. Signaler at se på, beslutninger med effekt.",
+    "overview": {
+      "title": "Syv mod otteogtyve",
+      "why": "Ugegennemsnittet ved siden af fireugersgennemsnittet. Beskrevet, ikke vurderet.",
+      "sleep": "Gns. søvn 7 d",
+      "energy": "Gns. energi 7 d",
+      "weight": "Gns. vægt 7 d",
+      "load": "Belastning 7 d",
+      "vs28": "Gns. 28 d: {{value}}",
+      "noBase": "endnu ingen 28-dages basis",
+      "completeness": "{{pct}} % af de sidste 14 dage registreret"
+    },
+    "signals": {
+      "title": "Værd at se på",
+      "why": "Reglerne fra coach-cockpittet: syv dage mod otteogtyve, hver tærskel sætter du selv nedenfor. Et signal betyder se — ikke handle.",
+      "none": "Intet over tærsklerne. Det er en beskrivelse, ikke ros.",
+      "noAdvice": "Intet signal er en anbefaling. Hvad der følger, beslutter du — og noterer det nedenfor.",
+      "reviewDue": "Opfølgning forfalden siden {{date}}: »{{decision}}«",
+      "sleep_below_baseline": "Søvn: gns7 {{recent}} t ligger {{pct}} % under gns28 {{base}} t.",
+      "energy_below_baseline": "Energi: gns7 {{recent}} ligger {{pct}} % under gns28 {{base}}.",
+      "stress_above_baseline": "Stress: gns7 {{recent}} ligger {{pct}} % over gns28 {{base}}.",
+      "weight_change_fast": "Vægt: {{kg}} kg på syv dage ({{pct}} %), uden for den satte ramme på {{limit}} % pr. uge.",
+      "adherence_low": "Planoverholdelse: gns7 {{recent}} af 5, under den satte tærskel {{limit}}.",
+      "plateau": "{{exercise}}: e1RM de sidste fire uger ({{current}} kg) uændret i forhold til de fire før ({{previous}} kg).",
+      "data_thin": "Fuldstændighed {{pct}} % af de sidste 14 dage, under de satte {{limit}} %."
+    },
+    "decision": {
+      "new": "Ny beslutning",
+      "record": "Notér beslutning",
+      "trigger": "Anledning",
+      "area": "Område",
+      "observation": "Observation",
+      "decision": "Beslutning",
+      "rationale": "Begrundelse",
+      "expected": "Forventet effekt",
+      "actual": "Faktisk effekt",
+      "decidedOn": "Besluttet den",
+      "reviewOn": "Følg op den",
+      "metric": "Mål",
+      "noMetric": "intet — kun notere",
+      "metricWhy": "Angiver du et mål, beregner appen efter opfølgningsdatoen gennemsnittet efter mod gennemsnittet før — mod dit eget udsving, med samme faktor som ved et testresultat. Om beslutningen var årsagen, siger den ikke.",
+      "save": "Gem beslutning",
+      "edit": "Redigér",
+      "review": "Følg op",
+      "markReviewed": "Arkivér som fulgt op",
+      "discard": "Forkast"
+    },
+    "log": {
+      "title": "Beslutninger",
+      "why": "Åbne først. Forkastes, slettes aldrig — en log, der mister poster, beviser intet.",
+      "empty": "Ingen beslutning endnu. Den første kommer fra et signal ovenfor eller i hånden."
+    },
+    "status": {
+      "open": "åben",
+      "reviewed": "fulgt op",
+      "discarded": "forkastet"
+    },
+    "effect": {
+      "insufficient": "Effekt kan endnu ikke beregnes: {{before}} værdier før, {{after}} efter (kræver 4 og 2).",
+      "within_noise": "før gns. {{before}}, efter gns. {{after}} — {{pct}} %, inden for udsvinget (±{{noise}} %).",
+      "above_noise_up": "før gns. {{before}}, efter gns. {{after}} — +{{pct}} %, uden for udsvinget (±{{noise}} %).",
+      "above_noise_down": "før gns. {{before}}, efter gns. {{after}} — −{{pct}} %, uden for udsvinget (±{{noise}} %)."
+    },
+    "triggers": {
+      "sleep_below_baseline": "Søvn under basis",
+      "energy_below_baseline": "Energi under basis",
+      "stress_above_baseline": "Stress over basis",
+      "weight_change_fast": "Vægt ændrer sig hurtigt",
+      "adherence_low": "Lav overholdelse",
+      "plateau": "e1RM uændret",
+      "data_thin": "Tyndt datagrundlag",
+      "test_result": "Testresultat",
+      "competition": "Konkurrence",
+      "other": "Andet"
+    },
+    "areas": {
+      "nutrition": "Ernæring",
+      "training": "Træning",
+      "cardio": "Kondition",
+      "recovery": "Restitution",
+      "competition": "Konkurrence",
+      "organisation": "Organisation",
+      "other": "Andet"
+    },
+    "thresholds": {
+      "title": "Tærskler",
+      "why": "Startværdierne stammer fra coachingsystemet v4. De er parametre, ikke sandheder — indstil dem, så de giver mening for denne person.",
+      "sleepDropPct": "Søvn under basis fra",
+      "energyDropPct": "Energi under basis fra",
+      "stressRisePct": "Stress over basis fra",
+      "weightChangePctWeek": "Vægtændring pr. uge fra",
+      "adherenceBelow": "Overholdelse under",
+      "minCompletenessPct": "Fuldstændighed under"
+    }
   }
 }

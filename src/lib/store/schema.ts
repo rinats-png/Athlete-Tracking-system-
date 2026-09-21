@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 21
+export const CURRENT_SCHEMA_VERSION = 22
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -593,6 +593,67 @@ const workoutSchema = z.object({
   updatedAt: isoDate,
 })
 
+/**
+ * Eine Entscheidung im Decision-Log (Schicht S3).
+ *
+ * Aus dem Coach-System v4: Anlass, Bereich, Beobachtung, Entscheidung,
+ * Begründung, erwartete Wirkung, Überprüfungsdatum, tatsächliche Wirkung,
+ * Status. Dazu — und das kann Excel nicht — die MESSGRÖSSE, an der sich die
+ * Entscheidung messen lassen will: ein Tagebuchfeld, der e1RM einer Übung
+ * oder ein Test. Daraus rechnet die App die Wirkung gegen die Schwankung.
+ *
+ * ALLE TEXTE KOMMEN VOM MENSCHEN. Die App füllt kein Feld vor, das eine
+ * Aussage enthält; sie schlägt keinen Anlass vor, den es nicht als Signal
+ * gab, und keine Entscheidung je (§81). Sie hält fest, was jemand
+ * entschieden hat — und rechnet nach, was danach geschah.
+ */
+export const DECISION_TRIGGERS = [
+  'sleep_below_baseline',
+  'energy_below_baseline',
+  'stress_above_baseline',
+  'weight_change_fast',
+  'adherence_low',
+  'plateau',
+  'data_thin',
+  'test_result',
+  'competition',
+  'other',
+] as const
+export const DECISION_AREAS = ['nutrition', 'training', 'cardio', 'recovery', 'competition', 'organisation', 'other'] as const
+
+const decisionMetricSchema = z.object({
+  kind: z.enum(['diary', 'exercise', 'test']),
+  key: z.string().min(1).max(80),
+})
+
+const decisionSchema = z.object({
+  id: z.string().min(1),
+  decidedOn: dayString,
+  trigger: z.enum(DECISION_TRIGGERS).default('other'),
+  area: z.enum(DECISION_AREAS).default('other'),
+  observation: z.string().max(600).default(''),
+  decision: z.string().max(600),
+  rationale: z.string().max(600).default(''),
+  expected: z.string().max(600).default(''),
+  reviewOn: dayString.nullable().default(null),
+  actual: z.string().max(600).default(''),
+  status: z.enum(['open', 'reviewed', 'discarded']).default('open'),
+  metric: decisionMetricSchema.nullable().default(null),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+  reviewedAt: isoDate.nullable().default(null),
+})
+
+/** Schwellen des Cockpits — Parameter, die ein Mensch setzt (v4: Athleten-Profil). */
+const cockpitThresholdsSchema = z.object({
+  sleepDropPct: finite.min(1).max(60).default(15),
+  energyDropPct: finite.min(1).max(60).default(15),
+  stressRisePct: finite.min(1).max(100).default(25),
+  weightChangePctWeek: finite.min(0.1).max(5).default(1),
+  adherenceBelow: finite.min(1).max(5).default(4),
+  minCompletenessPct: finite.min(0).max(100).default(70),
+})
+
 export const DIARY_OPTIONAL_FIELDS = ['sleepQuality', 'stress', 'soreness', 'steps', 'adherence', 'note'] as const
 export type DiaryOptionalField = (typeof DIARY_OPTIONAL_FIELDS)[number]
 const diaryFieldSchema = z.enum(DIARY_OPTIONAL_FIELDS)
@@ -615,6 +676,10 @@ const athleteSchema = z.object({
   diaryFields: z.array(diaryFieldSchema).default([]),
   /** Trainingslog: Einheiten mit Sätzen (Schicht S2). */
   workouts: z.array(workoutSchema).default([]),
+  /** Decision-Log (Schicht S3): was entschieden wurde, und was danach geschah. */
+  decisions: z.array(decisionSchema).default([]),
+  /** Schwellen des Cockpits für diesen Athleten. */
+  cockpit: cockpitThresholdsSchema.default(() => cockpitThresholdsSchema.parse({})),
   /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
   archived: z.boolean().default(false),
   /** Notizen des Trainers zu dieser Person (§74). */
@@ -684,6 +749,10 @@ export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
 export type ValidatedWorkout = z.infer<typeof workoutSchema>
 export type ValidatedWorkoutExercise = z.infer<typeof workoutExerciseSchema>
 export type ValidatedWorkoutSet = z.infer<typeof workoutSetSchema>
+export type ValidatedDecision = z.infer<typeof decisionSchema>
+export type ValidatedCockpit = z.infer<typeof cockpitThresholdsSchema>
+export type DecisionTrigger = (typeof DECISION_TRIGGERS)[number]
+export type DecisionArea = (typeof DECISION_AREAS)[number]
 
 /**
  * Sicht auf einen einzelnen Athleten in der Form, die alle Auswertungen
@@ -1056,6 +1125,22 @@ export const MIGRATIONS: Migration[] = [
       athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, workouts: [] })),
     }),
   },
+  {
+    from: 21,
+    to: 22,
+    describe: 'Decision-Log und Cockpit-Schwellen je Athlet (Schicht S3)',
+    run: (data) => ({
+      ...data,
+      version: 22,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        decisions: [],
+        // Die Vorgaben aus v4 — Startwerte. Wer sie nie anfasst, hat sie
+        // nicht «gesetzt», und das Cockpit sagt das auch.
+        cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1086,6 +1171,8 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     diary: [],
     diaryFields: [],
     workouts: [],
+    decisions: [],
+    cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
     archived: false,
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

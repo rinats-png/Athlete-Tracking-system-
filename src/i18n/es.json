@@ -1576,5 +1576,104 @@
       "why": "Sueño, peso y energía están en el diario; la carga de estas sesiones también llega allí.",
       "open": "Abrir diario"
     }
+  },
+  "cockpit": {
+    "eyebrow": "Siete días frente a veintiocho",
+    "title": "Cockpit",
+    "intro": "Qué ha cambiado y qué decidiste en respuesta, con el efecto calculado frente a tu propia fluctuación. Nada aquí es un consejo.",
+    "introCoach": "El cockpit del atleta activo. Señales para mirar, decisiones con su efecto.",
+    "overview": {
+      "title": "Siete frente a veintiocho",
+      "why": "La media semanal junto a la media de cuatro semanas. Descrito, no valorado.",
+      "sleep": "Sueño medio 7 d",
+      "energy": "Energía media 7 d",
+      "weight": "Peso medio 7 d",
+      "load": "Carga 7 d",
+      "vs28": "Media 28 d: {{value}}",
+      "noBase": "aún sin base de 28 días",
+      "completeness": "{{pct}} % de los últimos 14 días registrados"
+    },
+    "signals": {
+      "title": "Para mirar",
+      "why": "Las reglas del cockpit del coach: siete días frente a veintiocho, cada umbral lo fijas tú abajo. Una señal significa mirar, no actuar.",
+      "none": "Nada por encima de los umbrales. Es una descripción, no un elogio.",
+      "noAdvice": "Ninguna señal es una recomendación. Lo que sigue lo decides tú, y lo anotas abajo.",
+      "reviewDue": "Revisión pendiente desde {{date}}: «{{decision}}»",
+      "sleep_below_baseline": "Sueño: media7 {{recent}} h está {{pct}} % por debajo de media28 {{base}} h.",
+      "energy_below_baseline": "Energía: media7 {{recent}} está {{pct}} % por debajo de media28 {{base}}.",
+      "stress_above_baseline": "Estrés: media7 {{recent}} está {{pct}} % por encima de media28 {{base}}.",
+      "weight_change_fast": "Peso: {{kg}} kg en siete días ({{pct}} %), fuera del marco fijado de {{limit}} % por semana.",
+      "adherence_low": "Adherencia al plan: media7 {{recent}} de 5, por debajo del umbral fijado {{limit}}.",
+      "plateau": "{{exercise}}: e1RM de las últimas cuatro semanas ({{current}} kg) sin cambio frente a las cuatro anteriores ({{previous}} kg).",
+      "data_thin": "Completitud {{pct}} % de los últimos 14 días, por debajo del {{limit}} % fijado."
+    },
+    "decision": {
+      "new": "Nueva decisión",
+      "record": "Anotar decisión",
+      "trigger": "Motivo",
+      "area": "Ámbito",
+      "observation": "Observación",
+      "decision": "Decisión",
+      "rationale": "Justificación",
+      "expected": "Efecto esperado",
+      "actual": "Efecto real",
+      "decidedOn": "Decidido el",
+      "reviewOn": "Revisar el",
+      "metric": "Medida",
+      "noMetric": "ninguna, solo anotar",
+      "metricWhy": "Si nombras una medida, la app calcula tras la fecha de revisión la media después frente a la media antes, contra tu propia fluctuación y con el mismo factor que en un resultado de test. Si la causa fue la decisión, no lo dice.",
+      "save": "Guardar decisión",
+      "edit": "Editar",
+      "review": "Revisar",
+      "markReviewed": "Archivar como revisada",
+      "discard": "Descartar"
+    },
+    "log": {
+      "title": "Decisiones",
+      "why": "Abiertas primero. Se descartan, nunca se borran: un registro que pierde entradas no prueba nada.",
+      "empty": "Aún no hay decisiones. La primera nace de una señal arriba o a mano."
+    },
+    "status": {
+      "open": "abierta",
+      "reviewed": "revisada",
+      "discarded": "descartada"
+    },
+    "effect": {
+      "insufficient": "Efecto aún no calculable: {{before}} valores antes, {{after}} después (hacen falta 4 y 2).",
+      "within_noise": "antes media {{before}}, después media {{after}} — {{pct}} %, dentro de la fluctuación (±{{noise}} %).",
+      "above_noise_up": "antes media {{before}}, después media {{after}} — +{{pct}} %, fuera de la fluctuación (±{{noise}} %).",
+      "above_noise_down": "antes media {{before}}, después media {{after}} — −{{pct}} %, fuera de la fluctuación (±{{noise}} %)."
+    },
+    "triggers": {
+      "sleep_below_baseline": "Sueño bajo la base",
+      "energy_below_baseline": "Energía bajo la base",
+      "stress_above_baseline": "Estrés sobre la base",
+      "weight_change_fast": "Peso cambia rápido",
+      "adherence_low": "Adherencia baja",
+      "plateau": "e1RM sin cambio",
+      "data_thin": "Datos escasos",
+      "test_result": "Resultado de test",
+      "competition": "Competición",
+      "other": "Otro"
+    },
+    "areas": {
+      "nutrition": "Nutrición",
+      "training": "Entrenamiento",
+      "cardio": "Cardio",
+      "recovery": "Recuperación",
+      "competition": "Competición",
+      "organisation": "Organización",
+      "other": "Otro"
+    },
+    "thresholds": {
+      "title": "Umbrales",
+      "why": "Los valores iniciales vienen del sistema de coaching v4. Son parámetros, no verdades: ajústalos como tengan sentido para esta persona.",
+      "sleepDropPct": "Sueño bajo la base a partir de",
+      "energyDropPct": "Energía bajo la base a partir de",
+      "stressRisePct": "Estrés sobre la base a partir de",
+      "weightChangePctWeek": "Cambio de peso por semana a partir de",
+      "adherenceBelow": "Adherencia por debajo de",
+      "minCompletenessPct": "Completitud por debajo de"
+    }
   }
 }

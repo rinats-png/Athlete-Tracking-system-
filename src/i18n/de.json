@@ -1576,5 +1576,104 @@
       "why": "Schlaf, Gewicht und Energie stehen im Tagebuch — dort landet auch die Last dieser Einheiten.",
       "open": "Zum Tagebuch"
     }
+  },
+  "cockpit": {
+    "eyebrow": "Sieben Tage gegen achtundzwanzig",
+    "title": "Cockpit",
+    "intro": "Was sich verschoben hat, und was du daraufhin entschieden hast — mit der Wirkung, gerechnet gegen deine eigene Schwankung. Nichts hier ist ein Rat.",
+    "introCoach": "Das Cockpit des aktiven Athleten. Signale zum Hinschauen, Entscheidungen mit Wirkung.",
+    "overview": {
+      "title": "Sieben gegen achtundzwanzig",
+      "why": "Der Wochenmittelwert neben dem Vierwochenmittel. Beschrieben, nicht bewertet.",
+      "sleep": "Ø Schlaf 7 Tage",
+      "energy": "Ø Energie 7 Tage",
+      "weight": "Ø Gewicht 7 Tage",
+      "load": "Last 7 Tage",
+      "vs28": "Ø 28 Tage: {{value}}",
+      "noBase": "noch keine 28-Tage-Basis",
+      "completeness": "{{pct}} % der letzten 14 Tage erfasst"
+    },
+    "signals": {
+      "title": "Zum Hinschauen",
+      "why": "Die Regeln aus dem Coach-Cockpit: sieben Tage gegen achtundzwanzig, jede Schwelle stellst du unten selbst ein. Ein Signal heisst hinschauen — nicht handeln.",
+      "none": "Nichts über den Schwellen. Das ist eine Beschreibung, kein Lob.",
+      "noAdvice": "Kein Signal ist eine Empfehlung. Was daraus folgt, entscheidest du — und hältst es unten fest.",
+      "reviewDue": "Überprüfung fällig seit {{date}}: «{{decision}}»",
+      "sleep_below_baseline": "Schlaf: Ø7 {{recent}} h liegt {{pct}} % unter Ø28 {{base}} h.",
+      "energy_below_baseline": "Energie: Ø7 {{recent}} liegt {{pct}} % unter Ø28 {{base}}.",
+      "stress_above_baseline": "Stress: Ø7 {{recent}} liegt {{pct}} % über Ø28 {{base}}.",
+      "weight_change_fast": "Gewicht: {{kg}} kg in sieben Tagen ({{pct}} %), über dem gesetzten Rahmen von {{limit}} % je Woche.",
+      "adherence_low": "Plan-Adhärenz: Ø7 {{recent}} von 5, unter der gesetzten Schwelle {{limit}}.",
+      "plateau": "{{exercise}}: e1RM der letzten vier Wochen ({{current}} kg) unverändert gegenüber den vier davor ({{previous}} kg).",
+      "data_thin": "Vollständigkeit {{pct}} % der letzten 14 Tage, unter den gesetzten {{limit}} %."
+    },
+    "decision": {
+      "new": "Neue Entscheidung",
+      "record": "Entscheidung festhalten",
+      "trigger": "Anlass",
+      "area": "Bereich",
+      "observation": "Beobachtung",
+      "decision": "Entscheidung",
+      "rationale": "Begründung",
+      "expected": "Erwartete Wirkung",
+      "actual": "Tatsächliche Wirkung",
+      "decidedOn": "Entschieden am",
+      "reviewOn": "Überprüfen am",
+      "metric": "Messgrösse",
+      "noMetric": "keine — nur festhalten",
+      "metricWhy": "Nennst du eine Messgrösse, rechnet die App nach der Frist das Mittel danach gegen das Mittel davor — gegen deine eigene Schwankung, mit demselben Faktor wie am Testergebnis. Ob es an der Entscheidung lag, sagt sie nicht.",
+      "save": "Entscheidung speichern",
+      "edit": "Bearbeiten",
+      "review": "Überprüfen",
+      "markReviewed": "Als überprüft ablegen",
+      "discard": "Verwerfen"
+    },
+    "log": {
+      "title": "Entscheidungen",
+      "why": "Offene zuerst. Verworfen wird, nie gelöscht — ein Log, aus dem Einträge verschwinden, beweist nichts.",
+      "empty": "Noch keine Entscheidung. Die erste entsteht aus einem Signal oben oder von Hand."
+    },
+    "status": {
+      "open": "offen",
+      "reviewed": "überprüft",
+      "discarded": "verworfen"
+    },
+    "effect": {
+      "insufficient": "Wirkung noch nicht rechenbar: {{before}} Werte davor, {{after}} danach (nötig: 4 und 2).",
+      "within_noise": "davor Ø {{before}}, danach Ø {{after}} — {{pct}} %, innerhalb der Schwankung (±{{noise}} %).",
+      "above_noise_up": "davor Ø {{before}}, danach Ø {{after}} — +{{pct}} %, ausserhalb der Schwankung (±{{noise}} %).",
+      "above_noise_down": "davor Ø {{before}}, danach Ø {{after}} — −{{pct}} %, ausserhalb der Schwankung (±{{noise}} %)."
+    },
+    "triggers": {
+      "sleep_below_baseline": "Schlaf unter Baseline",
+      "energy_below_baseline": "Energie unter Baseline",
+      "stress_above_baseline": "Stress über Baseline",
+      "weight_change_fast": "Gewicht ändert sich schnell",
+      "adherence_low": "Adhärenz niedrig",
+      "plateau": "e1RM unverändert",
+      "data_thin": "Datenlage dünn",
+      "test_result": "Testergebnis",
+      "competition": "Wettkampf",
+      "other": "Sonstiges"
+    },
+    "areas": {
+      "nutrition": "Ernährung",
+      "training": "Training",
+      "cardio": "Cardio",
+      "recovery": "Erholung",
+      "competition": "Wettkampf",
+      "organisation": "Organisation",
+      "other": "Sonstiges"
+    },
+    "thresholds": {
+      "title": "Schwellen",
+      "why": "Die Startwerte stammen aus dem Coaching-System v4. Sie sind Parameter, keine Wahrheiten — stell sie so, wie sie für diesen Menschen Sinn ergeben.",
+      "sleepDropPct": "Schlaf unter Baseline ab",
+      "energyDropPct": "Energie unter Baseline ab",
+      "stressRisePct": "Stress über Baseline ab",
+      "weightChangePctWeek": "Gewichtsänderung je Woche ab",
+      "adherenceBelow": "Adhärenz unter",
+      "minCompletenessPct": "Vollständigkeit unter"
+    }
   }
 }

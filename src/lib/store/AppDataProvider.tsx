@@ -28,6 +28,8 @@ import {
   type StoredObservation,
   type StoredDiaryEntry,
   type StoredWorkout,
+  type StoredDecision,
+  type StoredCockpit,
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
@@ -127,6 +129,15 @@ interface AppDataValue {
   workouts: StoredWorkout[]
   saveWorkout: (workout: StoredWorkout) => void
   deleteWorkout: (id: string) => void
+  /**
+   * Decision-Log und Cockpit-Schwellen des aktiven Athleten (Schicht S3).
+   * Entscheidungen werden nie gelöscht, nur verworfen: ein Log, aus dem
+   * Einträge verschwinden, beweist nichts.
+   */
+  decisions: StoredDecision[]
+  saveDecision: (decision: StoredDecision) => void
+  cockpit: StoredCockpit
+  saveCockpit: (patch: Partial<StoredCockpit>) => void
   /** Einwilligung eines Athleten setzen. */
   setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
@@ -618,6 +629,27 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             const saved: StoredWorkout = { ...workout, diarySessionId: wantsSession ? sessionId : null, updatedAt: now }
             return { ...a, diary, workouts: [...a.workouts.filter((w) => w.id !== workout.id), saved] }
           }),
+        })
+      },
+      decisions: store.athletes.find((a) => a.id === store.activeAthleteId)?.decisions ?? [],
+      saveDecision: (decision) => {
+        const current = storeRef.current
+        const now = new Date().toISOString()
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) =>
+            a.id === current.activeAthleteId
+              ? { ...a, decisions: [...a.decisions.filter((d) => d.id !== decision.id), { ...decision, updatedAt: now }] }
+              : a,
+          ),
+        })
+      },
+      cockpit: store.athletes.find((a) => a.id === store.activeAthleteId)?.cockpit ?? { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
+      saveCockpit: (patch) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, cockpit: { ...a.cockpit, ...patch } } : a)),
         })
       },
       deleteWorkout: (id) => {

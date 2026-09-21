@@ -1576,5 +1576,104 @@
       "why": "Slaap, gewicht en energie staan in het dagboek — daar komt ook de belasting van deze sessies terecht.",
       "open": "Dagboek openen"
     }
+  },
+  "cockpit": {
+    "eyebrow": "Zeven dagen tegen achtentwintig",
+    "title": "Cockpit",
+    "intro": "Wat is verschoven, en wat je daarop besloot — met het effect, berekend tegen je eigen schommeling. Niets hier is advies.",
+    "introCoach": "De cockpit van de actieve atleet. Signalen om naar te kijken, besluiten met effect.",
+    "overview": {
+      "title": "Zeven tegen achtentwintig",
+      "why": "Het weekgemiddelde naast het vierwekengemiddelde. Beschreven, niet beoordeeld.",
+      "sleep": "Gem. slaap 7 d",
+      "energy": "Gem. energie 7 d",
+      "weight": "Gem. gewicht 7 d",
+      "load": "Belasting 7 d",
+      "vs28": "Gem. 28 d: {{value}}",
+      "noBase": "nog geen basis van 28 dagen",
+      "completeness": "{{pct}} % van de laatste 14 dagen vastgelegd"
+    },
+    "signals": {
+      "title": "Om naar te kijken",
+      "why": "De regels uit de coach-cockpit: zeven dagen tegen achtentwintig, elke drempel stel je hieronder zelf in. Een signaal betekent kijken — niet handelen.",
+      "none": "Niets boven de drempels. Dat is een beschrijving, geen lof.",
+      "noAdvice": "Geen enkel signaal is een aanbeveling. Wat volgt, beslis jij — en leg je hieronder vast.",
+      "reviewDue": "Herziening verschuldigd sinds {{date}}: „{{decision}}”",
+      "sleep_below_baseline": "Slaap: gem7 {{recent}} u ligt {{pct}} % onder gem28 {{base}} u.",
+      "energy_below_baseline": "Energie: gem7 {{recent}} ligt {{pct}} % onder gem28 {{base}}.",
+      "stress_above_baseline": "Stress: gem7 {{recent}} ligt {{pct}} % boven gem28 {{base}}.",
+      "weight_change_fast": "Gewicht: {{kg}} kg in zeven dagen ({{pct}} %), buiten het ingestelde kader van {{limit}} % per week.",
+      "adherence_low": "Plantrouw: gem7 {{recent}} van 5, onder de ingestelde drempel {{limit}}.",
+      "plateau": "{{exercise}}: e1RM van de laatste vier weken ({{current}} kg) onveranderd tegenover de vier ervoor ({{previous}} kg).",
+      "data_thin": "Volledigheid {{pct}} % van de laatste 14 dagen, onder de ingestelde {{limit}} %."
+    },
+    "decision": {
+      "new": "Nieuw besluit",
+      "record": "Besluit vastleggen",
+      "trigger": "Aanleiding",
+      "area": "Gebied",
+      "observation": "Observatie",
+      "decision": "Besluit",
+      "rationale": "Onderbouwing",
+      "expected": "Verwacht effect",
+      "actual": "Werkelijk effect",
+      "decidedOn": "Besloten op",
+      "reviewOn": "Herzien op",
+      "metric": "Meetwaarde",
+      "noMetric": "geen — alleen vastleggen",
+      "metricWhy": "Noem je een meetwaarde, dan berekent de app na de herzieningsdatum het gemiddelde erna tegen het gemiddelde ervoor — tegen je eigen schommeling, met dezelfde factor als bij een testresultaat. Of het besluit de oorzaak was, zegt ze niet.",
+      "save": "Besluit opslaan",
+      "edit": "Bewerken",
+      "review": "Herzien",
+      "markReviewed": "Als herzien archiveren",
+      "discard": "Verwerpen"
+    },
+    "log": {
+      "title": "Besluiten",
+      "why": "Open eerst. Verworpen, nooit verwijderd — een logboek dat items verliest, bewijst niets.",
+      "empty": "Nog geen besluit. Het eerste komt uit een signaal hierboven of met de hand."
+    },
+    "status": {
+      "open": "open",
+      "reviewed": "herzien",
+      "discarded": "verworpen"
+    },
+    "effect": {
+      "insufficient": "Effect nog niet berekenbaar: {{before}} waarden ervoor, {{after}} erna (nodig: 4 en 2).",
+      "within_noise": "ervoor gem. {{before}}, erna gem. {{after}} — {{pct}} %, binnen de schommeling (±{{noise}} %).",
+      "above_noise_up": "ervoor gem. {{before}}, erna gem. {{after}} — +{{pct}} %, buiten de schommeling (±{{noise}} %).",
+      "above_noise_down": "ervoor gem. {{before}}, erna gem. {{after}} — −{{pct}} %, buiten de schommeling (±{{noise}} %)."
+    },
+    "triggers": {
+      "sleep_below_baseline": "Slaap onder basis",
+      "energy_below_baseline": "Energie onder basis",
+      "stress_above_baseline": "Stress boven basis",
+      "weight_change_fast": "Gewicht verandert snel",
+      "adherence_low": "Lage plantrouw",
+      "plateau": "e1RM onveranderd",
+      "data_thin": "Weinig data",
+      "test_result": "Testresultaat",
+      "competition": "Wedstrijd",
+      "other": "Overig"
+    },
+    "areas": {
+      "nutrition": "Voeding",
+      "training": "Training",
+      "cardio": "Cardio",
+      "recovery": "Herstel",
+      "competition": "Wedstrijd",
+      "organisation": "Organisatie",
+      "other": "Overig"
+    },
+    "thresholds": {
+      "title": "Drempels",
+      "why": "De startwaarden komen uit het coachingsysteem v4. Het zijn parameters, geen waarheden — stel ze in zoals ze voor deze persoon zinvol zijn.",
+      "sleepDropPct": "Slaap onder basis vanaf",
+      "energyDropPct": "Energie onder basis vanaf",
+      "stressRisePct": "Stress boven basis vanaf",
+      "weightChangePctWeek": "Gewichtsverandering per week vanaf",
+      "adherenceBelow": "Plantrouw onder",
+      "minCompletenessPct": "Volledigheid onder"
+    }
   }
 }

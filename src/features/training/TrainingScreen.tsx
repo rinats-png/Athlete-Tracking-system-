@@ -178,12 +178,20 @@ export function TrainingScreen() {
           <Panel>
             <div className="px-4 py-3">
               <p className="text-[12px] leading-relaxed text-ink-secondary">{t('training.diaryLink.why')}</p>
-              <Button asChild variant="outline" size="sm" className="mt-2">
-                <Link to="/tagebuch">
-                  {t('training.diaryLink.open')}
-                  <ArrowRight size={14} aria-hidden />
-                </Link>
-              </Button>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/tagebuch">
+                    {t('training.diaryLink.open')}
+                    <ArrowRight size={14} aria-hidden />
+                  </Link>
+                </Button>
+                <Button asChild variant="ghost" size="sm">
+                  <Link to="/cockpit">
+                    {t('cockpit.title')}
+                    <ArrowRight size={14} aria-hidden />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </Panel>
         </div>

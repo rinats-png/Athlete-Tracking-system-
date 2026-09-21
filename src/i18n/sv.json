@@ -1576,5 +1576,104 @@
       "why": "Sömn, vikt och energi finns i dagboken — dit går även belastningen från dessa pass.",
       "open": "Öppna dagboken"
     }
+  },
+  "cockpit": {
+    "eyebrow": "Sju dagar mot tjugoåtta",
+    "title": "Cockpit",
+    "intro": "Vad som har förskjutits, och vad du beslutade som svar — med effekten, räknad mot din egen variation. Inget här är ett råd.",
+    "introCoach": "Den aktiva idrottarens cockpit. Signaler att titta på, beslut med effekt.",
+    "overview": {
+      "title": "Sju mot tjugoåtta",
+      "why": "Veckomedel bredvid fyraveckorsmedel. Beskrivet, inte bedömt.",
+      "sleep": "Medelsömn 7 d",
+      "energy": "Medelenergi 7 d",
+      "weight": "Medelvikt 7 d",
+      "load": "Belastning 7 d",
+      "vs28": "Medel 28 d: {{value}}",
+      "noBase": "ingen 28-dagarsbas ännu",
+      "completeness": "{{pct}} % av de senaste 14 dagarna registrerade"
+    },
+    "signals": {
+      "title": "Värt en titt",
+      "why": "Reglerna från coach-cockpiten: sju dagar mot tjugoåtta, varje tröskel ställer du in nedan. En signal betyder titta — inte agera.",
+      "none": "Inget över trösklarna. Det är en beskrivning, inte beröm.",
+      "noAdvice": "Ingen signal är en rekommendation. Vad som följer är ditt beslut — anteckna det nedan.",
+      "reviewDue": "Uppföljning förfallen sedan {{date}}: ”{{decision}}”",
+      "sleep_below_baseline": "Sömn: medel7 {{recent}} h ligger {{pct}} % under medel28 {{base}} h.",
+      "energy_below_baseline": "Energi: medel7 {{recent}} ligger {{pct}} % under medel28 {{base}}.",
+      "stress_above_baseline": "Stress: medel7 {{recent}} ligger {{pct}} % över medel28 {{base}}.",
+      "weight_change_fast": "Vikt: {{kg}} kg på sju dagar ({{pct}} %), utanför den satta ramen {{limit}} % per vecka.",
+      "adherence_low": "Planföljsamhet: medel7 {{recent}} av 5, under den satta tröskeln {{limit}}.",
+      "plateau": "{{exercise}}: e1RM senaste fyra veckorna ({{current}} kg) oförändrat mot de fyra innan ({{previous}} kg).",
+      "data_thin": "Fullständighet {{pct}} % av de senaste 14 dagarna, under satta {{limit}} %."
+    },
+    "decision": {
+      "new": "Nytt beslut",
+      "record": "Anteckna beslut",
+      "trigger": "Anledning",
+      "area": "Område",
+      "observation": "Observation",
+      "decision": "Beslut",
+      "rationale": "Motivering",
+      "expected": "Förväntad effekt",
+      "actual": "Faktisk effekt",
+      "decidedOn": "Beslutat den",
+      "reviewOn": "Följ upp den",
+      "metric": "Mått",
+      "noMetric": "inget — bara anteckna",
+      "metricWhy": "Anger du ett mått räknar appen efter uppföljningsdatumet medlet efter mot medlet före — mot din egen variation, med samma faktor som vid ett testresultat. Om beslutet var orsaken säger den inte.",
+      "save": "Spara beslut",
+      "edit": "Redigera",
+      "review": "Följ upp",
+      "markReviewed": "Arkivera som uppföljt",
+      "discard": "Förkasta"
+    },
+    "log": {
+      "title": "Beslut",
+      "why": "Öppna först. Förkastas, raderas aldrig — en logg som tappar poster bevisar inget.",
+      "empty": "Inget beslut ännu. Det första kommer från en signal ovan eller för hand."
+    },
+    "status": {
+      "open": "öppet",
+      "reviewed": "uppföljt",
+      "discarded": "förkastat"
+    },
+    "effect": {
+      "insufficient": "Effekt ännu inte beräkningsbar: {{before}} värden före, {{after}} efter (kräver 4 och 2).",
+      "within_noise": "före medel {{before}}, efter medel {{after}} — {{pct}} %, inom variationen (±{{noise}} %).",
+      "above_noise_up": "före medel {{before}}, efter medel {{after}} — +{{pct}} %, utanför variationen (±{{noise}} %).",
+      "above_noise_down": "före medel {{before}}, efter medel {{after}} — −{{pct}} %, utanför variationen (±{{noise}} %)."
+    },
+    "triggers": {
+      "sleep_below_baseline": "Sömn under bas",
+      "energy_below_baseline": "Energi under bas",
+      "stress_above_baseline": "Stress över bas",
+      "weight_change_fast": "Vikt ändras snabbt",
+      "adherence_low": "Låg följsamhet",
+      "plateau": "e1RM oförändrat",
+      "data_thin": "Tunt dataunderlag",
+      "test_result": "Testresultat",
+      "competition": "Tävling",
+      "other": "Övrigt"
+    },
+    "areas": {
+      "nutrition": "Kost",
+      "training": "Träning",
+      "cardio": "Kondition",
+      "recovery": "Återhämtning",
+      "competition": "Tävling",
+      "organisation": "Organisation",
+      "other": "Övrigt"
+    },
+    "thresholds": {
+      "title": "Trösklar",
+      "why": "Startvärdena kommer från coachingsystemet v4. De är parametrar, inte sanningar — ställ in dem så de passar den här personen.",
+      "sleepDropPct": "Sömn under bas från",
+      "energyDropPct": "Energi under bas från",
+      "stressRisePct": "Stress över bas från",
+      "weightChangePctWeek": "Viktändring per vecka från",
+      "adherenceBelow": "Följsamhet under",
+      "minCompletenessPct": "Fullständighet under"
+    }
   }
 }

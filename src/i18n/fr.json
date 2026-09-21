@@ -1576,5 +1576,104 @@
       "why": "Sommeil, poids et énergie sont dans le journal — la charge de ces séances y arrive aussi.",
       "open": "Ouvrir le journal"
     }
+  },
+  "cockpit": {
+    "eyebrow": "Sept jours contre vingt-huit",
+    "title": "Cockpit",
+    "intro": "Ce qui a bougé, et ce que vous avez décidé en réponse — avec l'effet, calculé contre votre propre fluctuation. Rien ici n'est un conseil.",
+    "introCoach": "Le cockpit de l'athlète actif. Des signaux à regarder, des décisions avec leur effet.",
+    "overview": {
+      "title": "Sept contre vingt-huit",
+      "why": "La moyenne hebdomadaire à côté de la moyenne sur quatre semaines. Décrit, pas jugé.",
+      "sleep": "Sommeil moyen 7 j",
+      "energy": "Énergie moyenne 7 j",
+      "weight": "Poids moyen 7 j",
+      "load": "Charge 7 j",
+      "vs28": "Moy. 28 j : {{value}}",
+      "noBase": "pas encore de base sur 28 jours",
+      "completeness": "{{pct}} % des 14 derniers jours saisis"
+    },
+    "signals": {
+      "title": "À regarder",
+      "why": "Les règles du cockpit coach : sept jours contre vingt-huit, chaque seuil réglé par vous ci-dessous. Un signal veut dire regarder — pas agir.",
+      "none": "Rien au-dessus des seuils. C'est une description, pas un compliment.",
+      "noAdvice": "Aucun signal n'est une recommandation. La suite est votre décision — notez-la ci-dessous.",
+      "reviewDue": "Revue due depuis le {{date}} : « {{decision}} »",
+      "sleep_below_baseline": "Sommeil : moy7 {{recent}} h est {{pct}} % sous moy28 {{base}} h.",
+      "energy_below_baseline": "Énergie : moy7 {{recent}} est {{pct}} % sous moy28 {{base}}.",
+      "stress_above_baseline": "Stress : moy7 {{recent}} est {{pct}} % au-dessus de moy28 {{base}}.",
+      "weight_change_fast": "Poids : {{kg}} kg en sept jours ({{pct}} %), au-delà du cadre fixé de {{limit}} % par semaine.",
+      "adherence_low": "Respect du plan : moy7 {{recent}} sur 5, sous le seuil fixé {{limit}}.",
+      "plateau": "{{exercise}} : e1RM des quatre dernières semaines ({{current}} kg) inchangé par rapport aux quatre précédentes ({{previous}} kg).",
+      "data_thin": "Complétude {{pct}} % des 14 derniers jours, sous les {{limit}} % fixés."
+    },
+    "decision": {
+      "new": "Nouvelle décision",
+      "record": "Consigner la décision",
+      "trigger": "Déclencheur",
+      "area": "Domaine",
+      "observation": "Observation",
+      "decision": "Décision",
+      "rationale": "Justification",
+      "expected": "Effet attendu",
+      "actual": "Effet réel",
+      "decidedOn": "Décidé le",
+      "reviewOn": "Revoir le",
+      "metric": "Mesure",
+      "noMetric": "aucune — seulement consigner",
+      "metricWhy": "Si vous nommez une mesure, l'app calcule après la date de revue la moyenne après contre la moyenne avant — contre votre propre fluctuation, avec le même facteur qu'à un résultat de test. Si la décision en est la cause, elle ne le dit pas.",
+      "save": "Enregistrer la décision",
+      "edit": "Modifier",
+      "review": "Revoir",
+      "markReviewed": "Classer comme revue",
+      "discard": "Écarter"
+    },
+    "log": {
+      "title": "Décisions",
+      "why": "Ouvertes d'abord. Écartées, jamais supprimées — un journal qui perd des entrées ne prouve rien.",
+      "empty": "Pas encore de décision. La première vient d'un signal ci-dessus ou à la main."
+    },
+    "status": {
+      "open": "ouverte",
+      "reviewed": "revue",
+      "discarded": "écartée"
+    },
+    "effect": {
+      "insufficient": "Effet pas encore calculable : {{before}} valeurs avant, {{after}} après (il en faut 4 et 2).",
+      "within_noise": "avant moy {{before}}, après moy {{after}} — {{pct}} %, dans la fluctuation (±{{noise}} %).",
+      "above_noise_up": "avant moy {{before}}, après moy {{after}} — +{{pct}} %, au-delà de la fluctuation (±{{noise}} %).",
+      "above_noise_down": "avant moy {{before}}, après moy {{after}} — −{{pct}} %, au-delà de la fluctuation (±{{noise}} %)."
+    },
+    "triggers": {
+      "sleep_below_baseline": "Sommeil sous la base",
+      "energy_below_baseline": "Énergie sous la base",
+      "stress_above_baseline": "Stress au-dessus de la base",
+      "weight_change_fast": "Poids qui change vite",
+      "adherence_low": "Adhérence faible",
+      "plateau": "e1RM inchangé",
+      "data_thin": "Données maigres",
+      "test_result": "Résultat de test",
+      "competition": "Compétition",
+      "other": "Autre"
+    },
+    "areas": {
+      "nutrition": "Nutrition",
+      "training": "Entraînement",
+      "cardio": "Cardio",
+      "recovery": "Récupération",
+      "competition": "Compétition",
+      "organisation": "Organisation",
+      "other": "Autre"
+    },
+    "thresholds": {
+      "title": "Seuils",
+      "why": "Les valeurs de départ viennent du système de coaching v4. Ce sont des paramètres, pas des vérités — réglez-les comme ils ont du sens pour cette personne.",
+      "sleepDropPct": "Sommeil sous la base à partir de",
+      "energyDropPct": "Énergie sous la base à partir de",
+      "stressRisePct": "Stress au-dessus de la base à partir de",
+      "weightChangePctWeek": "Variation de poids par semaine à partir de",
+      "adherenceBelow": "Adhérence sous",
+      "minCompletenessPct": "Complétude sous"
+    }
   }
 }

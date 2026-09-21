@@ -50,6 +50,9 @@ export function CoachScreen() {
             <Button asChild variant="outline" size="sm">
               <Link to="/trainer/nachweis">{t('coachDash.proof.title')}</Link>
             </Button>
+            <Button asChild variant="outline" size="sm">
+              <Link to="/cockpit">{t('cockpit.title')}</Link>
+            </Button>
           </div>
           <CoachSignals />
           <CoachDashboard locale={locale} />

@@ -1576,5 +1576,104 @@
       "why": "Sleep, weight and energy live in the diary — the load of these sessions lands there too.",
       "open": "Open diary"
     }
+  },
+  "cockpit": {
+    "eyebrow": "Seven days against twenty-eight",
+    "title": "Cockpit",
+    "intro": "What has shifted, and what you decided in response — with the effect, computed against your own fluctuation. Nothing here is advice.",
+    "introCoach": "The active athlete's cockpit. Signals to look at, decisions with their effect.",
+    "overview": {
+      "title": "Seven against twenty-eight",
+      "why": "The weekly mean next to the four-week mean. Described, not judged.",
+      "sleep": "Avg sleep 7 days",
+      "energy": "Avg energy 7 days",
+      "weight": "Avg weight 7 days",
+      "load": "Load 7 days",
+      "vs28": "Avg 28 days: {{value}}",
+      "noBase": "no 28-day baseline yet",
+      "completeness": "{{pct}} % of the last 14 days recorded"
+    },
+    "signals": {
+      "title": "Worth a look",
+      "why": "The rules from the coach cockpit: seven days against twenty-eight, each threshold set by you below. A signal means look — not act.",
+      "none": "Nothing above the thresholds. That is a description, not praise.",
+      "noAdvice": "No signal is a recommendation. What follows is your decision — record it below.",
+      "reviewDue": "Review due since {{date}}: “{{decision}}”",
+      "sleep_below_baseline": "Sleep: avg7 {{recent}} h is {{pct}} % below avg28 {{base}} h.",
+      "energy_below_baseline": "Energy: avg7 {{recent}} is {{pct}} % below avg28 {{base}}.",
+      "stress_above_baseline": "Stress: avg7 {{recent}} is {{pct}} % above avg28 {{base}}.",
+      "weight_change_fast": "Weight: {{kg}} kg in seven days ({{pct}} %), beyond the set frame of {{limit}} % per week.",
+      "adherence_low": "Plan adherence: avg7 {{recent}} of 5, below the set threshold {{limit}}.",
+      "plateau": "{{exercise}}: e1RM of the last four weeks ({{current}} kg) unchanged versus the four before ({{previous}} kg).",
+      "data_thin": "Completeness {{pct}} % of the last 14 days, below the set {{limit}} %."
+    },
+    "decision": {
+      "new": "New decision",
+      "record": "Record decision",
+      "trigger": "Trigger",
+      "area": "Area",
+      "observation": "Observation",
+      "decision": "Decision",
+      "rationale": "Rationale",
+      "expected": "Expected effect",
+      "actual": "Actual effect",
+      "decidedOn": "Decided on",
+      "reviewOn": "Review on",
+      "metric": "Metric",
+      "noMetric": "none — just record",
+      "metricWhy": "If you name a metric, the app computes after the review date the mean after against the mean before — against your own fluctuation, with the same factor as at a test result. Whether the decision caused it, it does not say.",
+      "save": "Save decision",
+      "edit": "Edit",
+      "review": "Review",
+      "markReviewed": "File as reviewed",
+      "discard": "Discard"
+    },
+    "log": {
+      "title": "Decisions",
+      "why": "Open first. Discarded, never deleted — a log that loses entries proves nothing.",
+      "empty": "No decision yet. The first comes from a signal above or by hand."
+    },
+    "status": {
+      "open": "open",
+      "reviewed": "reviewed",
+      "discarded": "discarded"
+    },
+    "effect": {
+      "insufficient": "Effect not computable yet: {{before}} values before, {{after}} after (needs 4 and 2).",
+      "within_noise": "before avg {{before}}, after avg {{after}} — {{pct}} %, within the fluctuation (±{{noise}} %).",
+      "above_noise_up": "before avg {{before}}, after avg {{after}} — +{{pct}} %, beyond the fluctuation (±{{noise}} %).",
+      "above_noise_down": "before avg {{before}}, after avg {{after}} — −{{pct}} %, beyond the fluctuation (±{{noise}} %)."
+    },
+    "triggers": {
+      "sleep_below_baseline": "Sleep below baseline",
+      "energy_below_baseline": "Energy below baseline",
+      "stress_above_baseline": "Stress above baseline",
+      "weight_change_fast": "Weight changing fast",
+      "adherence_low": "Adherence low",
+      "plateau": "e1RM unchanged",
+      "data_thin": "Data thin",
+      "test_result": "Test result",
+      "competition": "Competition",
+      "other": "Other"
+    },
+    "areas": {
+      "nutrition": "Nutrition",
+      "training": "Training",
+      "cardio": "Cardio",
+      "recovery": "Recovery",
+      "competition": "Competition",
+      "organisation": "Organisation",
+      "other": "Other"
+    },
+    "thresholds": {
+      "title": "Thresholds",
+      "why": "Starting values come from the coaching system v4. They are parameters, not truths — set them the way they make sense for this person.",
+      "sleepDropPct": "Sleep below baseline from",
+      "energyDropPct": "Energy below baseline from",
+      "stressRisePct": "Stress above baseline from",
+      "weightChangePctWeek": "Weight change per week from",
+      "adherenceBelow": "Adherence below",
+      "minCompletenessPct": "Completeness below"
+    }
   }
 }
