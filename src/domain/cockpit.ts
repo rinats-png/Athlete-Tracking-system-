@@ -136,9 +136,12 @@ export function cockpitSignals(
     }
   }
 
+  // Erst, wenn das Tagebuch mindestens vierzehn Tage alt ist: wer gestern
+  // angefangen hat, hat keine dünne Datenlage, sondern eine junge.
   const full = completeness(diary, today, 14) * 100
-  const hasAny = diary.some((e) => diaryWindow([e], today, 28).some((w) => w.entry))
-  if (hasAny && full < thresholds.minCompletenessPct) {
+  const oldest = diary.reduce<string | null>((m, e) => (m == null || e.day < m ? e.day : m), null)
+  const matured = oldest != null && daysBetween(oldest, today) >= 13
+  if (matured && full < thresholds.minCompletenessPct) {
     out.push({ key: 'data_thin', values: { pct: full, limit: thresholds.minCompletenessPct } })
   }
 
@@ -258,6 +261,10 @@ export function decisionEffect(
   const before = series.filter((p) => p.day >= start && p.day < decision.decidedOn).map((p) => p.value)
   const after = series.filter((p) => p.day >= decision.decidedOn && p.day <= end).map((p) => p.value)
   return effectReport(before, after)
+}
+
+function daysBetween(from: string, to: string): number {
+  return Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000)
 }
 
 function shiftDay(day: string, delta: number): string {

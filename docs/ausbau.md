@@ -4,7 +4,7 @@ Wie das Coaching-System v4.0.0 (drei Arbeitsmappen, 84 Blätter, 1.960
 Eingabefeldgruppen, 44.394 Formeln) in Kydon aufgeht — und was davon
 ausdrücklich **nicht** hineingeht.
 
-**Stand:** 21. September 2026. S1 und S2 gebaut (siehe Abschnitt 15); alles Weitere Planung.
+**Stand:** 21. September 2026. S1, S2 und S3 gebaut (siehe Abschnitt 15); alles Weitere Planung.
 
 ---
 
@@ -535,7 +535,7 @@ ein benutzbares Produkt steht.
 |---|---|---|
 | **S1 Tagebuch** | **gebaut**, 21.09.2026 | `src/domain/diary.ts`, `src/features/diary/`, `src/features/overview/DiaryTodayCard.tsx`, Schema v20 |
 | **S2 Trainingslog** | **gebaut**, 21.09.2026 | `src/data/exercises.ts`, `src/domain/training.ts`, `src/features/training/`, Schema v21 |
-| S3 Cockpit, Decision-Log | offen | |
+| **S3 Cockpit, Decision-Log** | **gebaut**, 21.09.2026 | `src/domain/cockpit.ts`, `src/features/cockpit/`, Schema v22 |
 | S4 Ernährung | offen | |
 | S5 Gesundheit | offen | |
 
@@ -583,8 +583,26 @@ er weh tut, ist keiner mehr — deshalb steht das hier und nicht im Code.
 - Der e1RM bleibt eine Schätzung mit Namen — er wandert nicht ins
   Leistungsprofil neben einen gemessenen 1RM.
 
-**Vor S3 fällig, unverändert:** die Tabellentrennung auf dem Server. Mit
-Sätzen wächst das Dokument spürbar schneller als mit Tagebuchtagen.
+**Was S3 geworden ist:**
+
+- Die Signale des Coach-Cockpits v4 als Hinweise: Schlaf, Energie und
+  Stress sieben gegen achtundzwanzig Tage, Gewichtsänderung je Woche,
+  Adhärenz, e1RM-Block unverändert, Datenlage dünn — jede Schwelle ein
+  Regler am Athleten, Startwerte aus v4. Ein Signal heisst hinschauen,
+  nicht handeln; keine Farbe, keine Rangfolge.
+- Das Decision-Log mit den Feldern aus v4 (Anlass, Bereich, Beobachtung,
+  Entscheidung, Begründung, Erwartung, Überprüfen am, tatsächliche Wirkung,
+  Status) — und dazu die **Messgrösse**: Tagebuchfeld, e1RM einer Übung
+  oder Test. Verworfen wird, nie gelöscht.
+- Die Wirkung: Mittel danach gegen Mittel davor, gegen die eigene
+  Schwankung der Grösse bei diesem Menschen, mit `DETECTION_FACTOR` wie am
+  Testergebnis. «Ausserhalb der Schwankung» oder «innerhalb» — nie «hat
+  gewirkt». Das Warum bleibt beim Menschen.
+- Ein Befund aus den Prüffällen: «Datenlage dünn» feuerte bei einem Tagebuch
+  von zwei Tagen. Jetzt erst ab vierzehn Tagen Alter — jung ist nicht dünn.
+
+**Vor S4 fällig, unverändert:** die Tabellentrennung auf dem Server; und
+der Bezahlweg (Etappe 4), denn nach S1–S3 ist der Wert da.
 
 ## 14. Zusammenfassung in drei Sätzen
 

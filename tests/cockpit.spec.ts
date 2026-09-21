@@ -37,9 +37,15 @@ test.describe('Signale — die Cockpit-Regeln aus v4', () => {
     expect(Number(sleep!.values.pct)).toBeCloseTo(20, 1)
   })
 
-  test('ohne Substanz in beiden Fenstern gibt es kein Signal', () => {
+  test('ohne Substanz in beiden Fenstern gibt es kein Signal — auch kein «Datenlage dünn»', () => {
+    // Ein Tagebuch von zwei Tagen ist nicht dünn, sondern jung.
     const diary = [entry(day(0), { sleepHours: 4 }), entry(day(-1), { sleepHours: 4 })]
     expect(cockpitSignals(diary, [], DEFAULT_THRESHOLDS, '2026-03-31')).toEqual([])
+  })
+
+  test('«Datenlage dünn» erst bei einem Tagebuch, das vierzehn Tage alt ist', () => {
+    const diary = [entry(day(-20), { sleepHours: 7 }), entry(day(0), { sleepHours: 7 })]
+    expect(cockpitSignals(diary, [], DEFAULT_THRESHOLDS, '2026-03-31').map((s) => s.key)).toEqual(['data_thin'])
   })
 
   test('Adhärenz unter 4 von 5 im Sieben-Tage-Mittel (v4: Compliance unter 80 %)', () => {
