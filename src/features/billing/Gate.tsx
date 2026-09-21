@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Lock } from 'lucide-react'
@@ -9,6 +9,7 @@ import { athletePlan, coachTier, type PlanFeature } from '@/data/pricing'
 import { smallestPlanWith } from '@/domain/entitlement'
 import { pick } from '@/i18n/pick'
 import { formatNumber } from '@/lib/format'
+import { loadExtra } from '@/i18n'
 import { useBilling } from './BillingProvider'
 
 /**
@@ -33,6 +34,18 @@ export function GateNotice({ feature, compact = false }: { feature: PlanFeature;
   const { t } = useTranslation()
   const locale = useLocale()
   const { access } = useBilling()
+  // Die Merkmalstexte liegen im Zusatzwörterbuch, das sonst der Bildschirm
+  // nachlädt — die Schranke steht aber VOR dem Bildschirm.
+  const [extraReady, setExtraReady] = useState(false)
+  useEffect(() => {
+    let alive = true
+    void loadExtra().then(() => {
+      if (alive) setExtraReady(true)
+    })
+    return () => {
+      alive = false
+    }
+  }, [])
   const planId = smallestPlanWith(feature, access.role)
   const plan = planId == null ? null : planId.startsWith('coach_') ? coachTier(planId as never) : athletePlan(planId as never)
   const name = plan ? pick(plan.name, locale) : ''
@@ -54,7 +67,7 @@ export function GateNotice({ feature, compact = false }: { feature: PlanFeature;
     <Panel float data-testid={`gate-${feature}`}>
       <PanelHeader title={t('billing.partOf', { plan: name })} subtitle={price} />
       <div className="px-4 py-3 text-[13px] leading-relaxed">
-        <p className="max-w-[62ch] text-ink-secondary">{t(`pricing.feature.${feature}`)}</p>
+        <p className="max-w-[62ch] text-ink-secondary">{extraReady ? t(`pricing.feature.${feature}`) : ''}</p>
         <p className="mt-2 max-w-[62ch] text-ink-muted">{t('billing.dataStays')}</p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button asChild variant="primary" size="sm">
