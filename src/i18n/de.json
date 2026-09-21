@@ -1721,7 +1721,8 @@
       "offQuality": "Nutzerangaben, teils unvollständig — ohne Mikronährstoffe.",
       "grams": "Gramm",
       "preview": "{{kcal}} kcal · Protein {{protein}} g · KH {{carbs}} g · Fett {{fat}} g",
-      "add": "Übernehmen"
+      "add": "Übernehmen",
+      "portion": "Portion"
     },
     "source": {
       "core": "Kern",

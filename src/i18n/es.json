@@ -1721,7 +1721,8 @@
       "offQuality": "Datos de usuarios, en parte incompletos, sin micronutrientes.",
       "grams": "Gramos",
       "preview": "{{kcal}} kcal · proteína {{protein}} g · CH {{carbs}} g · grasa {{fat}} g",
-      "add": "Añadir"
+      "add": "Añadir",
+      "portion": "Porción"
     },
     "source": {
       "core": "núcleo",

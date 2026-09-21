@@ -1721,7 +1721,8 @@
       "offQuality": "Saisies d'utilisateurs, parfois incomplètes — sans micronutriments.",
       "grams": "Grammes",
       "preview": "{{kcal}} kcal · protéines {{protein}} g · glucides {{carbs}} g · lipides {{fat}} g",
-      "add": "Ajouter"
+      "add": "Ajouter",
+      "portion": "Portion"
     },
     "source": {
       "core": "noyau",

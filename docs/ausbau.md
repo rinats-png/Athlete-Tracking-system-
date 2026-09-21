@@ -4,7 +4,7 @@ Wie das Coaching-System v4.0.0 (drei Arbeitsmappen, 84 Blätter, 1.960
 Eingabefeldgruppen, 44.394 Formeln) in Kydon aufgeht — und was davon
 ausdrücklich **nicht** hineingeht.
 
-**Stand:** 21. September 2026. S1, S2 und S3 gebaut (siehe Abschnitt 15); alles Weitere Planung.
+**Stand:** 21. September 2026. S1 bis S4 gebaut (siehe Abschnitt 15); alles Weitere Planung.
 
 ---
 
@@ -536,7 +536,7 @@ ein benutzbares Produkt steht.
 | **S1 Tagebuch** | **gebaut**, 21.09.2026 | `src/domain/diary.ts`, `src/features/diary/`, `src/features/overview/DiaryTodayCard.tsx`, Schema v20 |
 | **S2 Trainingslog** | **gebaut**, 21.09.2026 | `src/data/exercises.ts`, `src/domain/training.ts`, `src/features/training/`, Schema v21 |
 | **S3 Cockpit, Decision-Log** | **gebaut**, 21.09.2026 | `src/domain/cockpit.ts`, `src/features/cockpit/`, Schema v22 |
-| S4 Ernährung | offen | |
+| **S4 Ernährung** | **gebaut**, 21.09.2026 | `src/data/foods.ts`, `src/lib/openFoodFacts.ts`, `src/domain/nutrition.ts`, `src/features/nutrition/`, Schema v23 |
 | S5 Gesundheit | offen | |
 
 **Eine bewusste Abweichung vom Plan, offen benannt.** Etappe 0 sah vor, die
@@ -601,8 +601,33 @@ er weh tut, ist keiner mehr — deshalb steht das hier und nicht im Code.
 - Ein Befund aus den Prüffällen: «Datenlage dünn» feuerte bei einem Tagebuch
   von zwei Tagen. Jetzt erst ab vierzehn Tagen Alter — jung ist nicht dünn.
 
-**Vor S4 fällig, unverändert:** die Tabellentrennung auf dem Server; und
-der Bezahlweg (Etappe 4), denn nach S1–S3 ist der Wert da.
+**Was S4 geworden ist:**
+
+- Lebensmittelkern: die 245 Einträge der v4-Lebensmittel-DB, 132 davon mit
+  Mikronährstoffen, generiert aus `food_db.py` und `micro_db.py`. Er
+  antwortet ohne Netz und steht in der Suche oben.
+- Open Food Facts als zweite Quelle — erst auf ausdrücklichen Tipp, nur mit
+  Netz, mit Herkunft am Eintrag («Open Food Facts, Nutzerangabe»), ohne
+  Mikronährstoffe. Ein Produkt ohne Energie und ohne alle drei Makros wird
+  nicht übernommen; kJ wird umgerechnet, nicht ignoriert. Scheitert der
+  Aufruf, sagt die App das. CSP nennt die Herkunft beim Namen, keine
+  Wildcard.
+- Nährwerte je 100 g liegen IN der Position: was gegessen wurde, ändert
+  sich nicht rückwirkend, wenn die Quelle sich ändert (§89).
+- Referenz statt Ziel (Abschnitt 4 eingelöst): Grundumsatz Mifflin-St Jeor
+  mit Quelle und ±10 %, Gesamtumsatz mit PAL als Selbstauskunft, und der
+  **beobachtete Umsatz** aus Zufuhr und Gewicht ab 14 Tagen — gemessen
+  schlägt geschätzt. Der Bildschirm sagt «kein Ziel», und der Prüffall
+  sucht nach «Ziel», «solltest», «iss».
+- Geprüft gegen den Testbericht: 1.892,5 (Mifflin), 3.265 (PAL 1,725),
+  2.909 (beobachteter Umsatz), 297,6 (Tag 1!D22), Mikro-Abdeckung.
+- Für «other» als Geschlecht gibt es keine belegte Mifflin-Konstante: dann
+  keine Zahl statt einer erfundenen.
+
+**Offen, unverändert:** die Tabellentrennung auf dem Server (jetzt mit
+Sätzen UND Mahlzeiten dringlicher), der Bezahlweg (Etappe 4), die Lizenz-
+frage zu ODbL (Abschnitt 7), und ein kuratierter Ausbau des Kerns aus BLS
+oder USDA.
 
 ## 14. Zusammenfassung in drei Sätzen
 

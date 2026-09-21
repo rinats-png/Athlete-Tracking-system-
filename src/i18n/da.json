@@ -1721,7 +1721,8 @@
       "offQuality": "Brugerdata, delvist ufuldstændige — uden mikronæringsstoffer.",
       "grams": "Gram",
       "preview": "{{kcal}} kcal · protein {{protein}} g · kulhydrater {{carbs}} g · fedt {{fat}} g",
-      "add": "Tilføj"
+      "add": "Tilføj",
+      "portion": "Portion"
     },
     "source": {
       "core": "kerne",

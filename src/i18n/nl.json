@@ -1721,7 +1721,8 @@
       "offQuality": "Gebruikersgegevens, deels onvolledig — zonder micronutriënten.",
       "grams": "Gram",
       "preview": "{{kcal}} kcal · eiwit {{protein}} g · KH {{carbs}} g · vet {{fat}} g",
-      "add": "Toevoegen"
+      "add": "Toevoegen",
+      "portion": "Portie"
     },
     "source": {
       "core": "kern",

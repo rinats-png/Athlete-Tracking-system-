@@ -131,7 +131,7 @@ export function FoodSearch({ onAdd }: { onAdd: (item: StoredMealItem) => void })
             {picked.kind === 'core' ? picked.food.name : `${picked.food.name}${picked.food.brand ? ` (${picked.food.brand})` : ''}`}
             <span className="ml-2 text-[11px] tracking-wide text-ink-muted uppercase">{picked.kind === 'core' ? t('nutrition.source.core') : t('nutrition.source.off')}</span>
           </p>
-          <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={t('nutrition.search.grams')}>
+          <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={t('nutrition.search.portion')}>
             {GRAM_CHIPS.map((g) => (
               <button key={g} type="button" aria-pressed={grams === g} onClick={() => setGrams(g)} className={cn('readout min-h-11 rounded-pill border px-3 text-[13px]', grams === g ? 'border-accent bg-accent text-accent-ink' : 'border-line hover:border-accent')}>
                 {g} g

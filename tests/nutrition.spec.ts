@@ -114,7 +114,7 @@ test.describe('Im Bildschirm', () => {
     await page.getByRole('button', { name: '+ Frühstück' }).click()
     await page.getByLabel('Lebensmittel suchen').fill('hafer')
     await page.getByRole('option', { name: /Haferflocken \(zart\)/ }).click()
-    await page.getByRole('button', { name: '50 g' }).click()
+    await page.getByRole('button', { name: '50 g', exact: true }).click()
     await page.getByLabel('Gramm', { exact: true }).fill('80')
     // 80 g Haferflocken (zart) = 297,6 kcal — Tag 1!D22.
     await expect(page.getByTestId('food-preview')).toContainText('298 kcal')
@@ -144,7 +144,7 @@ test.describe('Im Bildschirm', () => {
     await page.getByRole('button', { name: 'Online suchen (Open Food Facts)' }).click()
     await page.getByRole('option', { name: /Skyr natur/ }).click()
     await expect(page.getByTestId('food-picked')).toContainText('Open Food Facts')
-    await page.getByRole('button', { name: '200 g' }).click()
+    await page.getByRole('button', { name: '200 g', exact: true }).click()
     await page.getByRole('button', { name: 'Übernehmen' }).click()
     await expect(page.getByTestId('meal-snack')).toContainText('Skyr natur (Arla)')
     await expect(page.getByTestId('meal-snack')).toContainText('200 g · 126 kcal')

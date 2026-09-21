@@ -1721,7 +1721,8 @@
       "offQuality": "User entries, partly incomplete — without micronutrients.",
       "grams": "Grams",
       "preview": "{{kcal}} kcal · protein {{protein}} g · carbs {{carbs}} g · fat {{fat}} g",
-      "add": "Add"
+      "add": "Add",
+      "portion": "Portion"
     },
     "source": {
       "core": "core",

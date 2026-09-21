@@ -1721,7 +1721,8 @@
       "offQuality": "Användaruppgifter, delvis ofullständiga — utan mikronäringsämnen.",
       "grams": "Gram",
       "preview": "{{kcal}} kcal · protein {{protein}} g · kolhydrater {{carbs}} g · fett {{fat}} g",
-      "add": "Lägg till"
+      "add": "Lägg till",
+      "portion": "Portion"
     },
     "source": {
       "core": "kärna",
