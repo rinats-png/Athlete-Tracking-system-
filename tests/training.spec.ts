@@ -85,6 +85,18 @@ test.describe('Rechnung, geprüft gegen den Testbericht v4.0.0', () => {
     expect(s[0].sessions).toBe(2)
     expect(s[0].best).toBeCloseTo(82.5 * (1 + 10 / 30), 5)
   })
+
+  test('Körpergewichtsübungen ohne Last haben keinen e1RM und stehen nicht in den Bestwerten', () => {
+    const s = exerciseSummary([
+      workout('2026-01-05', 'pull_up', [[0, 8, 2], [0, 7, 1]]),
+      workout('2026-01-08', 'bench_press', [[80, 8, 2]]),
+    ])
+    expect(s.map((x) => x.exerciseKey)).toEqual(['bench_press'])
+    // Mit Zusatzlast zählt der Klimmzug wieder — die Last ist das Kriterium, nicht die Übung.
+    const weighted = exerciseSummary([workout('2026-01-05', 'pull_up', [[20, 5, 1]])])
+    expect(weighted[0]?.exerciseKey).toBe('pull_up')
+    expect(weighted[0].best).toBeCloseTo(20 * (1 + 6 / 30), 5)
+  })
 })
 
 test.describe('Übungskatalog', () => {

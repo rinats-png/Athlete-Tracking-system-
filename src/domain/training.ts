@@ -47,9 +47,19 @@ export function workoutSetCount(workout: Pick<StoredWorkout, 'exercises'>): numb
   return workout.exercises.reduce((sum, ex) => sum + ex.sets.length, 0)
 }
 
-/** Bester e1RM einer Übung innerhalb einer Einheit, oder null ohne Sätze. */
+/**
+ * Ein e1RM braucht eine Last. Ein Satz mit 0 kg — Klimmzüge, Liegestütze,
+ * Box Jumps — hat keinen: «0,0 kg e1RM» wäre eine Zahl ohne Aussage. Solche
+ * Sätze zählen weiter als Sätze (Volumen je Muskel, Arbeitssätze), nur
+ * nicht als Bestwert.
+ */
+export function hasLoad(set: Pick<StoredWorkoutSet, 'weightKg'>): boolean {
+  return set.weightKg > 0
+}
+
+/** Bester e1RM einer Übung innerhalb einer Einheit, oder null ohne belastete Sätze. */
 export function bestE1rmInWorkout(workout: StoredWorkout, exerciseKey: string): number | null {
-  const sets = workout.exercises.filter((e) => e.exerciseKey === exerciseKey).flatMap((e) => e.sets)
+  const sets = workout.exercises.filter((e) => e.exerciseKey === exerciseKey).flatMap((e) => e.sets).filter(hasLoad)
   if (sets.length === 0) return null
   return Math.max(...sets.map(e1rm))
 }
@@ -62,15 +72,20 @@ export function e1rmHistory(workouts: StoredWorkout[], exerciseKey: string): Tre
     .filter((p): p is TrendPoint => p.value != null)
 }
 
-/** Alle Übungen, die je trainiert wurden, mit bestem e1RM und Anzahl Einheiten. */
+/**
+ * Alle Übungen mit belasteten Sätzen, mit bestem e1RM und Anzahl Einheiten.
+ * Körpergewichtsübungen ohne Zusatzlast stehen nicht hier — sie haben
+ * keinen Bestwert, nur Sätze.
+ */
 export function exerciseSummary(workouts: StoredWorkout[]): { exerciseKey: string; customName: string; best: number; sessions: number }[] {
   const map = new Map<string, { customName: string; best: number; sessions: number }>()
   for (const w of workouts) {
     const seen = new Set<string>()
     for (const ex of w.exercises) {
-      if (ex.sets.length === 0) continue
+      const loaded = ex.sets.filter(hasLoad)
+      if (loaded.length === 0) continue
       const key = ex.exerciseKey === 'custom' ? `custom:${ex.customName}` : ex.exerciseKey
-      const best = Math.max(...ex.sets.map(e1rm))
+      const best = Math.max(...loaded.map(e1rm))
       const current = map.get(key)
       map.set(key, {
         customName: ex.customName,
