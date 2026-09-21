@@ -1318,13 +1318,13 @@
     "working": "Sincronizando …",
     "last": "Última sincronización: {{date}}",
     "never": "Nunca sincronizado.",
-    "result": "{{pushed}} subidos, {{pulled}} descargados.",
+    "result": "{{pushed}} subidos, {{pulled}} descargados, {{series}} entradas sincronizadas.",
     "offline": "Sin conexión. La sincronización se pondrá al día cuando vuelvas a estar en línea.",
     "conflictTitle": "Estado divergente",
     "conflictBody": "Este atleta se modificó en otro dispositivo. KYDON no ha sobrescrito nada — ambos estados están intactos. Guarda primero tu exportación y luego decide.",
     "conflictKeepLocal": "Subir este registro",
     "conflictExplain": "El estado del servidor se sustituye. La otra dirección — descargar el estado del servidor — pasa por exportar, «borrar todo» y una sincronización nueva.",
-    "whatLeaves": "Se transmiten mediciones, datos del perfil, notas y focos de entrenamiento. Tu contraseña no se transmite."
+    "whatLeaves": "Se transfieren mediciones, datos de perfil, notas, enfoques de entrenamiento, además de diario, sesiones, decisiones y comidas — estas últimas como entradas individuales, no como un documento completo. Tu contraseña nunca se transfiere."
   },
   "editResult": {
     "open": "Corregir valor",

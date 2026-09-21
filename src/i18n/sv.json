@@ -1318,13 +1318,13 @@
     "working": "Synkroniserar …",
     "last": "Senast synkroniserat: {{date}}",
     "never": "Aldrig synkroniserat.",
-    "result": "{{pushed}} uppladdade, {{pulled}} hämtade.",
+    "result": "{{pushed}} uppladdade, {{pulled}} hämtade, {{series}} poster synkade.",
     "offline": "Ingen anslutning. Synkroniseringen kommer ikapp när du är online igen.",
     "conflictTitle": "Avvikande tillstånd",
     "conflictBody": "Den här atleten ändrades på en annan enhet. KYDON skrev inte över något — båda tillstånden är intakta. Spara din export först, bestäm sedan.",
     "conflictKeepLocal": "Ladda upp den här posten",
     "conflictExplain": "Servertillståndet ersätts. Andra riktningen — att hämta servertillståndet — går via export, ”radera allt” och en ny synkronisering.",
-    "whatLeaves": "Det som överförs är mätningar, profiluppgifter, anteckningar och träningsfokus. Ditt lösenord överförs inte."
+    "whatLeaves": "Överförs: mätvärden, profiluppgifter, anteckningar, träningsfokus samt dagbok, pass, beslut och måltider — de senare som enskilda poster, inte som ett helt dokument. Ditt lösenord överförs aldrig."
   },
   "editResult": {
     "open": "Rätta värde",

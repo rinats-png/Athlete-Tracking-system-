@@ -1318,13 +1318,13 @@
     "working": "Synkroniserer …",
     "last": "Senest synkroniseret: {{date}}",
     "never": "Aldrig synkroniseret.",
-    "result": "{{pushed}} sendt, {{pulled}} hentet.",
+    "result": "{{pushed}} sendt, {{pulled}} hentet, {{series}} poster synkroniseret.",
     "offline": "Ingen forbindelse. Synkroniseringen indhenter det, når du er online igen.",
     "conflictTitle": "Afvigende tilstand",
     "conflictBody": "Denne atlet blev ændret på en anden enhed. KYDON har intet overskrevet — begge tilstande er intakte. Gem først din eksport, og beslut derefter.",
     "conflictKeepLocal": "Send denne journal",
     "conflictExplain": "Serverens tilstand erstattes. Den anden vej — at hente serverens tilstand — går via eksport, “slet alt” og en ny synkronisering.",
-    "whatLeaves": "Der sendes målinger, profiloplysninger, noter og træningsfokus. Din adgangskode sendes ikke."
+    "whatLeaves": "Overføres: målinger, profiloplysninger, noter, træningsfokus samt dagbog, pas, beslutninger og måltider — de sidste som enkelte poster, ikke som ét helt dokument. Din adgangskode overføres aldrig."
   },
   "editResult": {
     "open": "Ret værdi",

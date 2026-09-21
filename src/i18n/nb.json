@@ -1318,13 +1318,13 @@
     "working": "Synkroniserer …",
     "last": "Sist synkronisert: {{date}}",
     "never": "Aldri synkronisert.",
-    "result": "{{pushed}} lastet opp, {{pulled}} hentet.",
+    "result": "{{pushed}} lastet opp, {{pulled}} hentet, {{series}} oppføringer synkronisert.",
     "offline": "Ingen tilkobling. Synkroniseringen tar igjen når du er på nett igjen.",
     "conflictTitle": "Avvikende tilstand",
     "conflictBody": "Denne utøveren ble endret på en annen enhet. KYDON overskrev ingenting — begge tilstander er intakte. Lagre eksporten din først, og bestem deretter.",
     "conflictKeepLocal": "Last opp denne journalen",
     "conflictExplain": "Servertilstanden erstattes. Den andre veien — å hente servertilstanden — går via eksport, «slett alt» og en ny synkronisering.",
-    "whatLeaves": "Det som overføres, er målinger, profilopplysninger, notater og treningsfokus. Passordet ditt overføres ikke."
+    "whatLeaves": "Overføres: målinger, profilopplysninger, notater, treningsfokus samt dagbok, økter, beslutninger og måltider — de siste som enkeltoppføringer, ikke som ett helt dokument. Passordet ditt overføres aldri."
   },
   "editResult": {
     "open": "Korriger verdi",

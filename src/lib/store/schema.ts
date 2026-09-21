@@ -1216,6 +1216,17 @@ export interface ParseOutcome {
 
 const emptyReport = (): LoadReport => ({ migratedFrom: null, fromNewerVersion: false, rejected: [] })
 
+/**
+ * Einen einzelnen Athleten aus fremder Quelle pruefen — etwa ein Dokument vom
+ * Server. Fehlende Felder bekommen ihre Vorgaben (ein Dokument von vor der
+ * Tabellentrennung traegt keine `meals`), Unbekanntes faellt weg. Null,
+ * wenn der Kern nicht stimmt.
+ */
+export function parseAthlete(raw: unknown): ValidatedAthlete | null {
+  const parsed = athleteSchema.safeParse(raw)
+  return parsed.success ? parsed.data : null
+}
+
 export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
   return {
     id,

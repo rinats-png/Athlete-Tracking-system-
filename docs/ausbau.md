@@ -537,6 +537,7 @@ ein benutzbares Produkt steht.
 | **S2 Trainingslog** | **gebaut**, 21.09.2026 | `src/data/exercises.ts`, `src/domain/training.ts`, `src/features/training/`, Schema v21 |
 | **S3 Cockpit, Decision-Log** | **gebaut**, 21.09.2026 | `src/domain/cockpit.ts`, `src/features/cockpit/`, Schema v22 |
 | **S4 Ernährung** | **gebaut**, 21.09.2026 | `src/data/foods.ts`, `src/lib/openFoodFacts.ts`, `src/domain/nutrition.ts`, `src/features/nutrition/`, Schema v23 |
+| **Etappe 0 Tabellentrennung** | **gebaut**, 21.09.2026 | `supabase/migrations/20260921120000_athlete_series.sql`, `src/lib/supabase/series.ts`, `src/lib/supabase/sync.ts` |
 | S5 Gesundheit | offen | |
 
 **Eine bewusste Abweichung vom Plan, offen benannt.** Etappe 0 sah vor, die
@@ -624,10 +625,44 @@ er weh tut, ist keiner mehr — deshalb steht das hier und nicht im Code.
 - Für «other» als Geschlecht gibt es keine belegte Mifflin-Konstante: dann
   keine Zahl statt einer erfundenen.
 
-**Offen, unverändert:** die Tabellentrennung auf dem Server (jetzt mit
-Sätzen UND Mahlzeiten dringlicher), der Bezahlweg (Etappe 4), die Lizenz-
-frage zu ODbL (Abschnitt 7), und ein kuratierter Ausbau des Kerns aus BLS
-oder USDA.
+**Was die Tabellentrennung geworden ist (Etappe 0, nachgeholt):**
+
+- **Eine Tabelle statt vier.** Der Plan nannte `daily_entries`,
+  `training_sets`, `decisions`, `meals`. Gebaut ist `athlete_series` mit
+  einer Spalte `kind` — die vier Arten haben dieselbe Form (Eigentümer,
+  Athlet, Kennung, Tag, Nutzlast, Zeitstempel) und dieselben Zugriffs-
+  regeln. Vier Tabellen wären vier Kopien derselben Policy, jede ein Ort
+  für eine Lücke. Die Gesundheitsschicht (S5, Art. 9) bekommt trotzdem
+  ihre eigene Tabelle mit eigener Einwilligung; sie gehört nicht hier hinein.
+- **Der Server versteht die Daten weiterhin nicht.** Nutzlast `jsonb`,
+  lokal gegen Zod geprüft, auf dem Server nur als Objekt und in der Grösse
+  (256 kB) begrenzt. In eigene Spalten wandert, was der Abgleich braucht:
+  Kennung, Tag, Zeitstempel, Gerät.
+- **Ein Eintrag, eine Zeile, ein Schreibvorgang.** Der Abgleich holt «alles
+  seit dem letzten Mal» in einer Abfrage und schreibt nur Einträge, deren
+  eigenes `updatedAt` jünger ist als der letzte Abgleich. Ein Tagebuchtag
+  von 400 Byte löst jetzt 400 Byte aus, nicht das ganze Dokument.
+- **Zwischen Geräten gewinnt der jüngere Eintrag.** Kein Konflikt zur
+  Rückfrage — ein Tag, der abends am Telefon und morgens am Rechner
+  ergänzt wurde, ist zwei Ergänzungen, kein Streitfall. Das Dokument
+  (Profil, Messwerte) behält seinen Vergleich-und-Setze mit Konfliktmeldung.
+- **Löschen ist ein Grabstein.** `deleted_at` statt DELETE, damit ein
+  zweites Gerät vom Löschen erfährt; nach 90 Tagen räumt `purge_expired()`.
+  Lokal braucht es keine Löschliste: was der Server vor dem letzten Abgleich
+  hatte und lokal fehlt, wurde gelöscht.
+- **Übergang ohne Verlust (§89).** Dokumente von vor der Trennung tragen
+  die Zeitreihen noch im Dokument. Beim ersten Holen werden sie übernommen,
+  beim nächsten Schreiben geht das Dokument ohne sie hoch und die Zeilen
+  einzeln. Der Prüffall dazu steht in `tests/sync-series.spec.ts`.
+- **Live eingespielt** auf dem Supabase-Projekt am 21.09.2026; Kontolöschung
+  nimmt die Zeilen mit; der Policy-Audit (`scripts/auditPolicies.mjs`)
+  meldet keine Befunde. Der Abgleich konnte aus der Entwicklungsumgebung
+  nicht gegen den Server durchlaufen werden (Proxy) — die Regeln sind ohne
+  Netz geprüft, der Durchlauf selbst steht als Betriebsprüfung aus.
+
+**Offen, unverändert:** der Bezahlweg (Etappe 4), die Lizenzfrage zu ODbL
+(Abschnitt 7), ein kuratierter Ausbau des Kerns aus BLS oder USDA, und
+ein echter Zwei-Geräte-Abgleich am lebenden System.
 
 ## 14. Zusammenfassung in drei Sätzen
 

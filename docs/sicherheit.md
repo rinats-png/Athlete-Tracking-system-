@@ -560,6 +560,28 @@ Durchlauf Registrieren → Ablegen → Abmelden → Anmelden ist deshalb NUR
 serverseitig belegt (Schema, Regeln, Trigger), nicht als echter Durchlauf
 über die App. Er gehört einmal von Hand gemacht.
 
+## Zeitreihen-Tabelle vom 21.09.2026
+
+Mit Tagebuch, Trainingslog, Decision-Log und Ernährung ist eine zweite
+Datentabelle dazugekommen: `athlete_series`, eine Zeile je Eintrag, Nutzlast
+`jsonb`. Was dafür gilt:
+
+- **Zugriff nur für den Eigentümer.** Vier Regeln (select, insert, update,
+  delete), alle auf `(select auth.uid()) = owner_id`. Kein Trainerzugriff —
+  Trainer sehen Zeitreihen ihrer Athleten heute nicht; kommt das, ist es
+  eine eigene Regel mit eigenem Prüffall, nicht eine Erweiterung dieser.
+- **Der Server prüft Form, nicht Inhalt.** Nutzlast muss ein Objekt sein und
+  höchstens 256 kB wiegen; Kennungen höchstens 80 Zeichen; `kind` aus vier
+  Werten. Alles Weitere prüft der Client gegen Zod (Schema v23). Damit kann
+  ein Angreifer mit gültigem Token seine eigenen Zeilen mit Unsinn füllen —
+  und nur seine.
+- **Löschen ist ein Grabstein** (`deleted_at`), 90 Tage, dann räumt
+  `purge_expired()`. Für die DSGVO-Löschung zählt die Kontolöschung:
+  `delete_account_data` löscht die Zeilen hart, ohne Grabstein.
+- **Kein neuer RPC-Endpunkt.** Beide Funktionen bleiben `security definer`
+  ohne `execute` für `anon` und `authenticated`.
+- `scripts/auditPolicies.mjs` kennt die Tabelle und meldet keine Befunde.
+
 ## Was man selbst laufen lassen kann
 
 ```bash

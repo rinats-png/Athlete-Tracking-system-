@@ -1318,13 +1318,13 @@
     "working": "Syncing …",
     "last": "Last synced: {{date}}",
     "never": "Never synced.",
-    "result": "{{pushed}} uploaded, {{pulled}} fetched.",
+    "result": "{{pushed}} uploaded, {{pulled}} fetched, {{series}} entries synced.",
     "offline": "No connection. The sync will catch up once you are online again.",
     "conflictTitle": "Diverging state",
     "conflictBody": "This athlete was changed on another device. KYDON overwrote nothing — both states are intact. Save your export first, then decide.",
     "conflictKeepLocal": "Upload this record",
     "conflictExplain": "The server state is replaced. The other direction — fetching the server state — goes through export, “delete everything” and a fresh sync.",
-    "whatLeaves": "Transmitted are measurements, profile details, notes and training focuses. Your password is not transmitted."
+    "whatLeaves": "Transferred: measurements, profile details, notes, training focus, plus diary, workouts, decisions and meals — the latter as individual entries, not one whole document. Your password is never transferred."
   },
   "editResult": {
     "open": "Correct value",

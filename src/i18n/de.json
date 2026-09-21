@@ -1318,13 +1318,13 @@
     "working": "Gleicht ab …",
     "last": "Zuletzt abgeglichen: {{date}}",
     "never": "Noch nie abgeglichen.",
-    "result": "{{pushed}} hochgeladen, {{pulled}} geholt.",
+    "result": "{{pushed}} hochgeladen, {{pulled}} geholt, {{series}} Einträge abgeglichen.",
     "offline": "Keine Verbindung. Der Abgleich holt es nach, sobald du wieder online bist.",
     "conflictTitle": "Abweichender Stand",
     "conflictBody": "Dieser Athlet wurde auf einem anderen Gerät geändert. KYDON hat nichts überschrieben — beide Stände sind unversehrt. Sichere zuerst deinen Export, dann entscheide.",
     "conflictKeepLocal": "Diesen Bestand hochladen",
     "conflictExplain": "Der Serverstand wird dabei ersetzt. Der andere Weg — den Serverstand holen — führt über Export, «alles löschen» und einen neuen Abgleich.",
-    "whatLeaves": "Übertragen werden Messwerte, Profilangaben, Notizen und Trainingsschwerpunkte. Nicht übertragen wird dein Passwort."
+    "whatLeaves": "Übertragen werden Messwerte, Profilangaben, Notizen, Trainingsschwerpunkte sowie Tagebuch, Einheiten, Entscheidungen und Mahlzeiten — Letztere als einzelne Einträge, nicht als ganzes Dokument. Nicht übertragen wird dein Passwort."
   },
   "editResult": {
     "open": "Wert korrigieren",

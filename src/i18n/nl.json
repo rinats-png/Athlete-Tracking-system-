@@ -1318,13 +1318,13 @@
     "working": "Synchroniseren …",
     "last": "Laatst gesynchroniseerd: {{date}}",
     "never": "Nooit gesynchroniseerd.",
-    "result": "{{pushed}} geüpload, {{pulled}} opgehaald.",
+    "result": "{{pushed}} geüpload, {{pulled}} opgehaald, {{series}} items gesynchroniseerd.",
     "offline": "Geen verbinding. De synchronisatie haalt het in zodra je weer online bent.",
     "conflictTitle": "Afwijkende toestand",
     "conflictBody": "Deze atleet is op een ander apparaat gewijzigd. KYDON heeft niets overschreven — beide toestanden zijn intact. Sla eerst je export op, beslis dan.",
     "conflictKeepLocal": "Dit dossier uploaden",
     "conflictExplain": "De servertoestand wordt vervangen. De andere richting — de servertoestand ophalen — loopt via export, “alles verwijderen” en een nieuwe synchronisatie.",
-    "whatLeaves": "Verzonden worden metingen, profielgegevens, notities en trainingsfocus. Je wachtwoord wordt niet verzonden."
+    "whatLeaves": "Overgedragen worden meetwaarden, profielgegevens, notities, trainingsaccenten plus dagboek, sessies, beslissingen en maaltijden — die laatste als losse items, niet als één heel document. Je wachtwoord wordt nooit overgedragen."
   },
   "editResult": {
     "open": "Waarde corrigeren",

@@ -40,6 +40,7 @@ import {
 } from './localStore'
 import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
 import { isEmptyEntry } from '@/domain/diary'
+import { mergeSeries, type SeriesRow } from '@/lib/supabase/series'
 import { FOCUS_HARD_LIMIT } from '@/domain/trainingFocus'
 import type {
   AttemptSelection,
@@ -179,6 +180,12 @@ interface AppDataValue {
    * Nutzer im Profil.
    */
   mergeAthletes: (incoming: StoredAthlete[]) => void
+  /**
+   * Fremde Zeitreihen-Zeilen (Tagebuch, Einheiten, Entscheidungen,
+   * Mahlzeiten) in die vorhandenen Athleten einarbeiten. Der juengere
+   * Eintrag gewinnt; ein Grabstein loescht. Siehe lib/supabase/series.ts.
+   */
+  mergeSeriesRows: (rows: SeriesRow[]) => number
   focuses: StoredFocus[]
   saveFocus: (focus: StoredFocus) => void
   closeFocus: (id: string, closed: boolean) => void
@@ -928,10 +935,22 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       loadDemo: () => commitStore(buildDemoData()),
       store,
       mergeAthletes: (incoming) => {
-        const known = new Set(store.athletes.map((a) => a.id))
+        const current = storeRef.current
+        const known = new Set(current.athletes.map((a) => a.id))
         const fresh = incoming.filter((a) => a && !known.has(a.id))
         if (fresh.length === 0) return
-        commitStore({ ...store, athletes: [...store.athletes, ...fresh] })
+        commitStore({ ...current, athletes: [...current.athletes, ...fresh] })
+      },
+      mergeSeriesRows: (rows) => {
+        const current = storeRef.current
+        let changed = 0
+        const athletes = current.athletes.map((a) => {
+          const r = mergeSeries(a, rows)
+          changed += r.changed
+          return r.athlete
+        })
+        if (changed > 0) commitStore({ ...current, athletes })
+        return changed
       },
       focuses: active.focuses,
       saveFocus: (focus) =>

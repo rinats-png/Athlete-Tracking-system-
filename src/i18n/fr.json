@@ -1318,13 +1318,13 @@
     "working": "Synchronisation …",
     "last": "Dernière synchronisation : {{date}}",
     "never": "Jamais synchronisé.",
-    "result": "{{pushed}} envoyés, {{pulled}} récupérés.",
+    "result": "{{pushed}} envoyés, {{pulled}} récupérés, {{series}} entrées synchronisées.",
     "offline": "Pas de connexion. La synchronisation rattrapera dès que tu seras en ligne.",
     "conflictTitle": "États divergents",
     "conflictBody": "Cet athlète a été modifié sur un autre appareil. KYDON n'a rien écrasé — les deux états sont intacts. Sauvegarde d'abord ton export, puis décide.",
     "conflictKeepLocal": "Envoyer ce dossier",
     "conflictExplain": "L'état du serveur est remplacé. L'autre sens — récupérer l'état du serveur — passe par l'export, « tout supprimer » et une nouvelle synchronisation.",
-    "whatLeaves": "Sont transmis : mesures, détails du profil, notes et priorités d'entraînement. Ton mot de passe n'est pas transmis."
+    "whatLeaves": "Sont transférés : mesures, profil, notes, priorités d'entraînement, ainsi que journal, séances, décisions et repas — ces derniers entrée par entrée, pas en un seul document. Votre mot de passe n'est jamais transféré."
   },
   "editResult": {
     "open": "Corriger la valeur",

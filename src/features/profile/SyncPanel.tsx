@@ -35,7 +35,7 @@ function readEnabled(): boolean {
 export function SyncPanel() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { store, mergeAthletes, athletes } = useAppData()
+  const { store, mergeAthletes, mergeSeriesRows, athletes } = useAppData()
   const [enabled, setEnabled] = useState(readEnabled)
   const [signedIn, setSignedIn] = useState<boolean | null>(null)
   const [busy, setBusy] = useState(false)
@@ -58,7 +58,7 @@ export function SyncPanel() {
 
   const run = async () => {
     setBusy(true)
-    const outcome = await syncOnce(store, mergeAthletes)
+    const outcome = await syncOnce(store, mergeAthletes, mergeSeriesRows)
     setBusy(false)
     setReport(outcome)
     setState(readSyncState())
@@ -104,7 +104,7 @@ export function SyncPanel() {
             {report?.reason === 'offline' && <p className="text-ink-secondary">{t('sync.offline')}</p>}
             {report && report.reason == null && (
               <p className="text-ink-secondary">
-                {t('sync.result', { pushed: report.pushed, pulled: report.pulled })}
+                {t('sync.result', { pushed: report.pushed, pulled: report.pulled, series: report.seriesPushed + report.seriesPulled })}
               </p>
             )}
 
