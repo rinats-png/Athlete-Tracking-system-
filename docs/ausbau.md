@@ -4,7 +4,7 @@ Wie das Coaching-System v4.0.0 (drei Arbeitsmappen, 84 Blätter, 1.960
 Eingabefeldgruppen, 44.394 Formeln) in Kydon aufgeht — und was davon
 ausdrücklich **nicht** hineingeht.
 
-**Stand:** 21. September 2026. S1 gebaut (siehe Abschnitt 15); alles Weitere Planung.
+**Stand:** 21. September 2026. S1 und S2 gebaut (siehe Abschnitt 15); alles Weitere Planung.
 
 ---
 
@@ -534,7 +534,7 @@ ein benutzbares Produkt steht.
 | Schicht | Stand | Wo |
 |---|---|---|
 | **S1 Tagebuch** | **gebaut**, 21.09.2026 | `src/domain/diary.ts`, `src/features/diary/`, `src/features/overview/DiaryTodayCard.tsx`, Schema v20 |
-| S2 Trainingslog | offen | |
+| **S2 Trainingslog** | **gebaut**, 21.09.2026 | `src/data/exercises.ts`, `src/domain/training.ts`, `src/features/training/`, Schema v21 |
 | S3 Cockpit, Decision-Log | offen | |
 | S4 Ernährung | offen | |
 | S5 Gesundheit | offen | |
@@ -565,6 +565,26 @@ er weh tut, ist keiner mehr — deshalb steht das hier und nicht im Code.
   trend erst ab drei Wägungen je Woche.
 - Die Übersicht nimmt den Tag mit einem Tipp entgegen — auch bei leerem
   Bestand, denn dort beginnt die Gewohnheit.
+
+**Was S2 geworden ist:**
+
+- Übungskatalog aus der Übungs-DB v4 (70 Übungen, Primärmuskel, Gerät),
+  Suche über Umlaute und Sprachen, freie Übungen ohne Muskelzuordnung —
+  ehrlicher als ein geratener Muskel.
+- Eine Einheit = Übungen mit Sätzen (kg, Wdh, RIR). Editor ohne Tabelle:
+  Ziffernblock für kg, Plus/Minus für Wdh, Tipp-Skala 0–5 für RIR, e1RM
+  sofort neben dem Satz, «Satz wiederholen» kopiert den letzten.
+- Rechnung geprüft gegen den Testbericht: e1RM Epley mit RIR 108 kg
+  (`Trainingslog!J5`), Sätze je Primärmuskel 6 (`Muskelvolumen!V5`).
+  Blockvergleich 4 gegen 4 Wochen sagt «unverändert», nie «Plateau brechen».
+- Eine Wahrheit für die Last: Dauer und RPE der Einheit erzeugen die
+  Session-Last im Tagebuch desselben Tages (verknüpft über
+  `diarySessionId`); Löschen nimmt sie mit.
+- Der e1RM bleibt eine Schätzung mit Namen — er wandert nicht ins
+  Leistungsprofil neben einen gemessenen 1RM.
+
+**Vor S3 fällig, unverändert:** die Tabellentrennung auf dem Server. Mit
+Sätzen wächst das Dokument spürbar schneller als mit Tagebuchtagen.
 
 ## 14. Zusammenfassung in drei Sätzen
 
