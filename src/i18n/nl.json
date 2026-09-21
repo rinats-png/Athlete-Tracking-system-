@@ -1445,7 +1445,8 @@
         "sport": "Sport",
         "mobility": "Mobiliteit",
         "other": "Overig"
-      }
+      },
+      "toTraining": "Sets in het trainingslogboek"
     },
     "more": {
       "title": "Meer bijhouden",
@@ -1488,6 +1489,91 @@
       "ask": "Hoe was de dag? Eén tik is genoeg.",
       "done": "Vandaag is vastgelegd.",
       "more": "Meer invoeren",
+      "open": "Dagboek openen"
+    }
+  },
+  "training": {
+    "eyebrow": "Sets, gewicht, herhalingen",
+    "title": "Training",
+    "intro": "Wat er gebeurde: oefening, gewicht, herhalingen, reserve. De e1RM is een schatting en heet zo. Niets hier is een plan.",
+    "introCoach": "Het trainingslogboek van de actieve atleet. Wissel van atleet in de kop.",
+    "new": "Nieuwe sessie",
+    "untitled": "Sessie",
+    "editor": {
+      "title": "Naam",
+      "titlePlaceholder": "bijv. Bovenlichaam A",
+      "day": "Dag",
+      "addExercise": "Oefening toevoegen",
+      "searchPlaceholder": "Zoeken: bankdrukken, squat, roeien …",
+      "results": "Resultaten",
+      "custom": "Eigen oefening",
+      "customName": "Eigen naam",
+      "addCustom": "Als eigen toevoegen",
+      "removeExercise": "Oefening verwijderen",
+      "set": "Set",
+      "weight": "Gewicht",
+      "reps": "Herh.",
+      "fewerReps": "minder herhalingen",
+      "moreReps": "meer herhalingen",
+      "removeSet": "Set verwijderen",
+      "repeatSet": "Set herhalen",
+      "newSet": "Lege set",
+      "e1rmUnsure": "(minder nauwkeurig boven 12 herh.)",
+      "duration": "Duur",
+      "rpe": "Inspanning (RPE 1–10)",
+      "toDiary": "Gaat in het dagboek van die dag als sessie met {{load}} AU.",
+      "toDiaryHint": "Met duur en inspanning verschijnt de sessie als belasting in het dagboek — zonder beide blijft ze alleen hier.",
+      "save": "Sessie opslaan"
+    },
+    "list": {
+      "title": "Sessies",
+      "why": "Nieuwste eerst. Tik om te openen.",
+      "empty": "Nog geen sessie. De eerste duurt een minuut: oefening zoeken, gewicht, herhalingen, klaar.",
+      "edit": "Bewerken",
+      "delete": "Verwijderen",
+      "sets_one": "{{count}} set",
+      "sets_other": "{{count}} sets"
+    },
+    "best": {
+      "title": "Records",
+      "why": "Beste e1RM per oefening, met verloop. Geschat via Epley met RIR — geen gemeten 1RM.",
+      "empty": "Records ontstaan met de eerste sessie.",
+      "sessions_one": "{{count}} sessie",
+      "sessions_other": "{{count}} sessies",
+      "trend": "e1RM per sessie",
+      "block": {
+        "up": "laatste 4 weken {{delta}} % boven de 4 ervoor",
+        "down": "laatste 4 weken {{delta}} % onder de 4 ervoor",
+        "unchanged": "laatste 4 weken onveranderd tegenover de 4 ervoor"
+      }
+    },
+    "week": {
+      "title": "Deze week",
+      "why": "Zeven dagen, geteld, niet beoordeeld.",
+      "sets": "Werksets",
+      "volume": "Volume"
+    },
+    "muscles": {
+      "title": "Sets per spiergroep",
+      "none": "Deze week nog geen set.",
+      "names": {
+        "legs": "Benen",
+        "glutes": "Bilspieren",
+        "calves": "Kuiten",
+        "back": "Rug",
+        "lower_back": "Onderrug",
+        "chest": "Borst",
+        "shoulders": "Schouders",
+        "neck": "Nek",
+        "biceps": "Biceps",
+        "triceps": "Triceps",
+        "core": "Romp",
+        "full_body": "Hele lichaam",
+        "cardio": "Cardio"
+      }
+    },
+    "diaryLink": {
+      "why": "Slaap, gewicht en energie staan in het dagboek — daar komt ook de belasting van deze sessies terecht.",
       "open": "Dagboek openen"
     }
   }

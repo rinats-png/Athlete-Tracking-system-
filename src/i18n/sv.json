@@ -1445,7 +1445,8 @@
         "sport": "Sport",
         "mobility": "Rörlighet",
         "other": "Övrigt"
-      }
+      },
+      "toTraining": "Set i träningsloggen"
     },
     "more": {
       "title": "Registrera mer",
@@ -1488,6 +1489,91 @@
       "ask": "Hur var dagen? Ett tryck räcker.",
       "done": "I dag är registrerad.",
       "more": "Registrera mer",
+      "open": "Öppna dagboken"
+    }
+  },
+  "training": {
+    "eyebrow": "Set, vikt, repetitioner",
+    "title": "Träning",
+    "intro": "Vad som hände: övning, vikt, repetitioner, reserv. e1RM är en uppskattning och kallas så. Inget här är en plan.",
+    "introCoach": "Den aktiva idrottarens träningslogg. Byt idrottare i sidhuvudet.",
+    "new": "Nytt pass",
+    "untitled": "Pass",
+    "editor": {
+      "title": "Namn",
+      "titlePlaceholder": "t.ex. Överkropp A",
+      "day": "Dag",
+      "addExercise": "Lägg till övning",
+      "searchPlaceholder": "Sök: bänkpress, squat, rodd …",
+      "results": "Träffar",
+      "custom": "Egen övning",
+      "customName": "Eget namn",
+      "addCustom": "Lägg till som egen",
+      "removeExercise": "Ta bort övning",
+      "set": "Set",
+      "weight": "Vikt",
+      "reps": "Rep",
+      "fewerReps": "färre repetitioner",
+      "moreReps": "fler repetitioner",
+      "removeSet": "Ta bort set",
+      "repeatSet": "Upprepa set",
+      "newSet": "Tomt set",
+      "e1rmUnsure": "(mindre exakt över 12 rep)",
+      "duration": "Längd",
+      "rpe": "Ansträngning (RPE 1–10)",
+      "toDiary": "Går in i dagens dagbok som pass med {{load}} AU.",
+      "toDiaryHint": "Med längd och ansträngning syns passet som belastning i dagboken — utan båda stannar det bara här.",
+      "save": "Spara pass"
+    },
+    "list": {
+      "title": "Pass",
+      "why": "Nyaste först. Tryck för att öppna.",
+      "empty": "Inget pass ännu. Det första tar en minut: hitta övningen, vikt, repetitioner, klart.",
+      "edit": "Redigera",
+      "delete": "Ta bort",
+      "sets_one": "{{count}} set",
+      "sets_other": "{{count}} set"
+    },
+    "best": {
+      "title": "Rekord",
+      "why": "Bästa e1RM per övning, med historik. Uppskattat med Epley och RIR — inte ett uppmätt 1RM.",
+      "empty": "Rekord dyker upp med första passet.",
+      "sessions_one": "{{count}} pass",
+      "sessions_other": "{{count}} pass",
+      "trend": "e1RM per pass",
+      "block": {
+        "up": "senaste 4 veckorna {{delta}} % över de 4 innan",
+        "down": "senaste 4 veckorna {{delta}} % under de 4 innan",
+        "unchanged": "senaste 4 veckorna oförändrade mot de 4 innan"
+      }
+    },
+    "week": {
+      "title": "Den här veckan",
+      "why": "Sju dagar, räknade, inte bedömda.",
+      "sets": "Arbetsset",
+      "volume": "Volym"
+    },
+    "muscles": {
+      "title": "Set per muskelgrupp",
+      "none": "Inga set ännu den här veckan.",
+      "names": {
+        "legs": "Ben",
+        "glutes": "Säte",
+        "calves": "Vader",
+        "back": "Rygg",
+        "lower_back": "Ländrygg",
+        "chest": "Bröst",
+        "shoulders": "Axlar",
+        "neck": "Nacke",
+        "biceps": "Biceps",
+        "triceps": "Triceps",
+        "core": "Bål",
+        "full_body": "Helkropp",
+        "cardio": "Kondition"
+      }
+    },
+    "diaryLink": {
+      "why": "Sömn, vikt och energi finns i dagboken — dit går även belastningen från dessa pass.",
       "open": "Öppna dagboken"
     }
   }

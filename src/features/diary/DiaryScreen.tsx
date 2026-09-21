@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ChevronLeft, ChevronRight, Plus, Trash2 } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight, Plus, Trash2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { NumberField } from '@/components/ui/NumberField'
@@ -307,6 +308,12 @@ export function DiaryScreen() {
         <div className="border-t border-line px-4 py-3">
           <span className="label-tag">{t('diary.more.title')}</span>
           <p className="mt-1 text-[12px] text-ink-secondary">{t('diary.more.why')}</p>
+          <Button asChild variant="ghost" size="sm" className="mt-1 -ml-3">
+            <Link to="/training">
+              {t('diary.sessions.toTraining')}
+              <ArrowRight size={14} aria-hidden />
+            </Link>
+          </Button>
           <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={t('diary.more.title')}>
             {DIARY_OPTIONAL_FIELDS.map((field) => (
               <button

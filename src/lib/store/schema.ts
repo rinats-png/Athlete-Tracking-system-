@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 20
+export const CURRENT_SCHEMA_VERSION = 21
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -550,6 +550,49 @@ const diaryEntrySchema = z.object({
  * schaltet man einzeln dazu und sieht es sonst nicht. Wer nie mehr als
  * Gewicht und Schlaf einträgt, sieht nie mehr als zwei Felder.
  */
+/**
+ * Ein Arbeitssatz im Trainingslog (Schicht S2).
+ *
+ * Gewicht, Wiederholungen, RIR — mehr nicht. Kein Tempo, kein Pausenfeld,
+ * keine «geplanten» Werte: das Log hält fest, was war. Ein Plan ist etwas
+ * anderes und steht nicht im Bestand (§81).
+ */
+const workoutSetSchema = z.object({
+  id: z.string().min(1),
+  weightKg: finite.min(0).max(1000),
+  reps: z.number().int().min(1).max(100),
+  /** Reps in Reserve, 0–5. Null: nicht eingeschätzt — dann rechnet der e1RM mit 0. */
+  rir: z.number().int().min(0).max(5).nullable().default(null),
+})
+
+const workoutExerciseSchema = z.object({
+  id: z.string().min(1),
+  /** Kennung aus `data/exercises.ts` oder 'custom' für eine freie Übung. */
+  exerciseKey: z.string().min(1).max(60),
+  customName: z.string().max(80).default(''),
+  sets: z.array(workoutSetSchema).max(20).default([]),
+})
+
+/**
+ * Eine Trainingseinheit mit Sätzen.
+ *
+ * Sie steht NEBEN den Tagebuch-Einheiten und ist mit ihnen über
+ * `diarySessionId` verbunden: trägt sie Dauer und RPE, entsteht daraus die
+ * Session-Last im Tagebuch — an genau einer Stelle, nicht an zweien.
+ */
+const workoutSchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  title: z.string().max(60).default(''),
+  exercises: z.array(workoutExerciseSchema).max(20).default([]),
+  durationMin: z.number().int().min(1).max(600).nullable().default(null),
+  rpe: z.number().int().min(1).max(10).nullable().default(null),
+  diarySessionId: z.string().nullable().default(null),
+  note: z.string().max(500).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
 export const DIARY_OPTIONAL_FIELDS = ['sleepQuality', 'stress', 'soreness', 'steps', 'adherence', 'note'] as const
 export type DiaryOptionalField = (typeof DIARY_OPTIONAL_FIELDS)[number]
 const diaryFieldSchema = z.enum(DIARY_OPTIONAL_FIELDS)
@@ -570,6 +613,8 @@ const athleteSchema = z.object({
   diary: z.array(diaryEntrySchema).default([]),
   /** Freiwillige Tagebuchfelder, die dieser Athlet eingeschaltet hat. */
   diaryFields: z.array(diaryFieldSchema).default([]),
+  /** Trainingslog: Einheiten mit Sätzen (Schicht S2). */
+  workouts: z.array(workoutSchema).default([]),
   /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
   archived: z.boolean().default(false),
   /** Notizen des Trainers zu dieser Person (§74). */
@@ -636,6 +681,9 @@ export type ValidatedTestDay = z.infer<typeof testDaySchema>
 export type ValidatedObservation = z.infer<typeof observationSchema>
 export type ValidatedDiaryEntry = z.infer<typeof diaryEntrySchema>
 export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
+export type ValidatedWorkout = z.infer<typeof workoutSchema>
+export type ValidatedWorkoutExercise = z.infer<typeof workoutExerciseSchema>
+export type ValidatedWorkoutSet = z.infer<typeof workoutSetSchema>
 
 /**
  * Sicht auf einen einzelnen Athleten in der Form, die alle Auswertungen
@@ -998,6 +1046,16 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 20,
+    to: 21,
+    describe: 'Trainingslog je Athlet (Schicht S2), leer',
+    run: (data) => ({
+      ...data,
+      version: 21,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, workouts: [] })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1027,6 +1085,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     observations: [],
     diary: [],
     diaryFields: [],
+    workouts: [],
     archived: false,
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

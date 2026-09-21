@@ -1445,7 +1445,8 @@
         "sport": "Sport",
         "mobility": "Mobilité",
         "other": "Autre"
-      }
+      },
+      "toTraining": "Séries dans le journal d'entraînement"
     },
     "more": {
       "title": "Suivre davantage",
@@ -1488,6 +1489,91 @@
       "ask": "Comment s'est passée la journée ? Un geste suffit.",
       "done": "Aujourd'hui est saisi.",
       "more": "Saisir plus",
+      "open": "Ouvrir le journal"
+    }
+  },
+  "training": {
+    "eyebrow": "Séries, charge, répétitions",
+    "title": "Entraînement",
+    "intro": "Ce qui a été fait : exercice, charge, répétitions, réserve. Le e1RM est une estimation et s'appelle ainsi. Rien ici n'est un plan.",
+    "introCoach": "Le journal d'entraînement de l'athlète actif. Changez d'athlète dans l'en-tête.",
+    "new": "Nouvelle séance",
+    "untitled": "Séance",
+    "editor": {
+      "title": "Nom",
+      "titlePlaceholder": "p. ex. Haut du corps A",
+      "day": "Jour",
+      "addExercise": "Ajouter un exercice",
+      "searchPlaceholder": "Rechercher : développé, squat, rowing …",
+      "results": "Résultats",
+      "custom": "Exercice libre",
+      "customName": "Nom personnalisé",
+      "addCustom": "Ajouter en libre",
+      "removeExercise": "Retirer l'exercice",
+      "set": "Série",
+      "weight": "Charge",
+      "reps": "Rép.",
+      "fewerReps": "moins de répétitions",
+      "moreReps": "plus de répétitions",
+      "removeSet": "Retirer la série",
+      "repeatSet": "Répéter la série",
+      "newSet": "Série vide",
+      "e1rmUnsure": "(moins précis au-delà de 12 rép.)",
+      "duration": "Durée",
+      "rpe": "Effort (RPE 1–10)",
+      "toDiary": "Entre dans le journal de ce jour comme séance de {{load}} AU.",
+      "toDiaryHint": "Avec durée et effort, la séance apparaît comme charge dans le journal — sans les deux, elle reste ici.",
+      "save": "Enregistrer la séance"
+    },
+    "list": {
+      "title": "Séances",
+      "why": "Les plus récentes d'abord. Touchez pour ouvrir.",
+      "empty": "Pas encore de séance. La première prend une minute : exercice, charge, répétitions, terminé.",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "sets_one": "{{count}} série",
+      "sets_other": "{{count}} séries"
+    },
+    "best": {
+      "title": "Records",
+      "why": "Meilleur e1RM par exercice, avec l'historique. Estimé par Epley avec RIR — pas un 1RM mesuré.",
+      "empty": "Les records apparaissent avec la première séance.",
+      "sessions_one": "{{count}} séance",
+      "sessions_other": "{{count}} séances",
+      "trend": "e1RM par séance",
+      "block": {
+        "up": "4 dernières semaines {{delta}} % au-dessus des 4 précédentes",
+        "down": "4 dernières semaines {{delta}} % en dessous des 4 précédentes",
+        "unchanged": "4 dernières semaines inchangées par rapport aux 4 précédentes"
+      }
+    },
+    "week": {
+      "title": "Cette semaine",
+      "why": "Sept jours, comptés, pas jugés.",
+      "sets": "Séries de travail",
+      "volume": "Volume"
+    },
+    "muscles": {
+      "title": "Séries par groupe musculaire",
+      "none": "Pas encore de série cette semaine.",
+      "names": {
+        "legs": "Jambes",
+        "glutes": "Fessiers",
+        "calves": "Mollets",
+        "back": "Dos",
+        "lower_back": "Bas du dos",
+        "chest": "Pectoraux",
+        "shoulders": "Épaules",
+        "neck": "Nuque",
+        "biceps": "Biceps",
+        "triceps": "Triceps",
+        "core": "Tronc",
+        "full_body": "Corps entier",
+        "cardio": "Cardio"
+      }
+    },
+    "diaryLink": {
+      "why": "Sommeil, poids et énergie sont dans le journal — la charge de ces séances y arrive aussi.",
       "open": "Ouvrir le journal"
     }
   }

@@ -1445,7 +1445,8 @@
         "sport": "Sport",
         "mobility": "Mobility",
         "other": "Other"
-      }
+      },
+      "toTraining": "Sets in the training log"
     },
     "more": {
       "title": "Track more",
@@ -1488,6 +1489,91 @@
       "ask": "How was the day? One tap is enough.",
       "done": "Today is recorded.",
       "more": "Add more",
+      "open": "Open diary"
+    }
+  },
+  "training": {
+    "eyebrow": "Sets, weight, reps",
+    "title": "Training",
+    "intro": "What happened: exercise, weight, reps, reserve. The e1RM is an estimate and is called one. Nothing here is a plan.",
+    "introCoach": "The active athlete's training log. Switch athletes in the header.",
+    "new": "New session",
+    "untitled": "Session",
+    "editor": {
+      "title": "Name",
+      "titlePlaceholder": "e.g. Upper body A",
+      "day": "Day",
+      "addExercise": "Add exercise",
+      "searchPlaceholder": "Search: bench, squat, row …",
+      "results": "Matches",
+      "custom": "Custom exercise",
+      "customName": "Custom name",
+      "addCustom": "Add as custom",
+      "removeExercise": "Remove exercise",
+      "set": "Set",
+      "weight": "Weight",
+      "reps": "Reps",
+      "fewerReps": "fewer reps",
+      "moreReps": "more reps",
+      "removeSet": "Remove set",
+      "repeatSet": "Repeat set",
+      "newSet": "Empty set",
+      "e1rmUnsure": "(less precise above 12 reps)",
+      "duration": "Duration",
+      "rpe": "Effort (RPE 1–10)",
+      "toDiary": "Goes into that day's diary as a session with {{load}} AU.",
+      "toDiaryHint": "With duration and effort the session shows up as load in the diary — without both it stays here only.",
+      "save": "Save session"
+    },
+    "list": {
+      "title": "Sessions",
+      "why": "Newest first. Tap to open.",
+      "empty": "No session yet. The first takes a minute: find the exercise, weight, reps, done.",
+      "edit": "Edit",
+      "delete": "Delete",
+      "sets_one": "{{count}} set",
+      "sets_other": "{{count}} sets"
+    },
+    "best": {
+      "title": "Bests",
+      "why": "Best e1RM per exercise, with its history. Estimated by Epley with RIR — not a measured 1RM.",
+      "empty": "Bests appear with the first session.",
+      "sessions_one": "{{count}} session",
+      "sessions_other": "{{count}} sessions",
+      "trend": "e1RM per session",
+      "block": {
+        "up": "last 4 weeks {{delta}} % above the 4 before",
+        "down": "last 4 weeks {{delta}} % below the 4 before",
+        "unchanged": "last 4 weeks unchanged versus the 4 before"
+      }
+    },
+    "week": {
+      "title": "This week",
+      "why": "Seven days, counted, not judged.",
+      "sets": "Working sets",
+      "volume": "Volume"
+    },
+    "muscles": {
+      "title": "Sets per muscle group",
+      "none": "No sets yet this week.",
+      "names": {
+        "legs": "Legs",
+        "glutes": "Glutes",
+        "calves": "Calves",
+        "back": "Back",
+        "lower_back": "Lower back",
+        "chest": "Chest",
+        "shoulders": "Shoulders",
+        "neck": "Neck",
+        "biceps": "Biceps",
+        "triceps": "Triceps",
+        "core": "Core",
+        "full_body": "Full body",
+        "cardio": "Cardio"
+      }
+    },
+    "diaryLink": {
+      "why": "Sleep, weight and energy live in the diary — the load of these sessions lands there too.",
       "open": "Open diary"
     }
   }

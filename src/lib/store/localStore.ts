@@ -13,6 +13,9 @@ import {
   type ValidatedObservation,
   type ValidatedDiaryEntry,
   type ValidatedDiarySession,
+  type ValidatedWorkout,
+  type ValidatedWorkoutExercise,
+  type ValidatedWorkoutSet,
   type ValidatedData,
   type ValidatedResult,
 } from './schema'
@@ -51,6 +54,9 @@ export type StoredTestDay = ValidatedTestDay
 export type StoredObservation = ValidatedObservation
 export type StoredDiaryEntry = ValidatedDiaryEntry
 export type StoredDiarySession = ValidatedDiarySession
+export type StoredWorkout = ValidatedWorkout
+export type StoredWorkoutExercise = ValidatedWorkoutExercise
+export type StoredWorkoutSet = ValidatedWorkoutSet
 
 export interface LoadResult {
   data: StoredData

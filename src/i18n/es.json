@@ -1445,7 +1445,8 @@
         "sport": "Deporte",
         "mobility": "Movilidad",
         "other": "Otro"
-      }
+      },
+      "toTraining": "Series en el registro de entrenamiento"
     },
     "more": {
       "title": "Registrar más",
@@ -1488,6 +1489,91 @@
       "ask": "¿Cómo fue el día? Con un toque basta.",
       "done": "Hoy ya está registrado.",
       "more": "Registrar más",
+      "open": "Abrir diario"
+    }
+  },
+  "training": {
+    "eyebrow": "Series, peso, repeticiones",
+    "title": "Entrenamiento",
+    "intro": "Lo que pasó: ejercicio, peso, repeticiones, reserva. El e1RM es una estimación y así se llama. Nada aquí es un plan.",
+    "introCoach": "El registro de entrenamiento del atleta activo. Cambia de atleta en la cabecera.",
+    "new": "Nueva sesión",
+    "untitled": "Sesión",
+    "editor": {
+      "title": "Nombre",
+      "titlePlaceholder": "p. ej. Tren superior A",
+      "day": "Día",
+      "addExercise": "Añadir ejercicio",
+      "searchPlaceholder": "Buscar: press, squat, remo …",
+      "results": "Resultados",
+      "custom": "Ejercicio libre",
+      "customName": "Nombre propio",
+      "addCustom": "Añadir como libre",
+      "removeExercise": "Quitar ejercicio",
+      "set": "Serie",
+      "weight": "Peso",
+      "reps": "Rep.",
+      "fewerReps": "menos repeticiones",
+      "moreReps": "más repeticiones",
+      "removeSet": "Quitar serie",
+      "repeatSet": "Repetir serie",
+      "newSet": "Serie vacía",
+      "e1rmUnsure": "(menos preciso por encima de 12 rep.)",
+      "duration": "Duración",
+      "rpe": "Esfuerzo (RPE 1–10)",
+      "toDiary": "Entra en el diario de ese día como sesión de {{load}} AU.",
+      "toDiaryHint": "Con duración y esfuerzo la sesión aparece como carga en el diario; sin ambos, se queda solo aquí.",
+      "save": "Guardar sesión"
+    },
+    "list": {
+      "title": "Sesiones",
+      "why": "Las más recientes primero. Toca para abrir.",
+      "empty": "Aún no hay sesiones. La primera lleva un minuto: ejercicio, peso, repeticiones, listo.",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "sets_one": "{{count}} serie",
+      "sets_other": "{{count}} series"
+    },
+    "best": {
+      "title": "Marcas",
+      "why": "Mejor e1RM por ejercicio, con su historial. Estimado por Epley con RIR; no es un 1RM medido.",
+      "empty": "Las marcas aparecen con la primera sesión.",
+      "sessions_one": "{{count}} sesión",
+      "sessions_other": "{{count}} sesiones",
+      "trend": "e1RM por sesión",
+      "block": {
+        "up": "últimas 4 semanas {{delta}} % por encima de las 4 anteriores",
+        "down": "últimas 4 semanas {{delta}} % por debajo de las 4 anteriores",
+        "unchanged": "últimas 4 semanas sin cambio frente a las 4 anteriores"
+      }
+    },
+    "week": {
+      "title": "Esta semana",
+      "why": "Siete días, contados, no valorados.",
+      "sets": "Series efectivas",
+      "volume": "Volumen"
+    },
+    "muscles": {
+      "title": "Series por grupo muscular",
+      "none": "Todavía ninguna serie esta semana.",
+      "names": {
+        "legs": "Piernas",
+        "glutes": "Glúteos",
+        "calves": "Gemelos",
+        "back": "Espalda",
+        "lower_back": "Zona lumbar",
+        "chest": "Pecho",
+        "shoulders": "Hombros",
+        "neck": "Cuello",
+        "biceps": "Bíceps",
+        "triceps": "Tríceps",
+        "core": "Core",
+        "full_body": "Cuerpo entero",
+        "cardio": "Cardio"
+      }
+    },
+    "diaryLink": {
+      "why": "Sueño, peso y energía están en el diario; la carga de estas sesiones también llega allí.",
       "open": "Abrir diario"
     }
   }

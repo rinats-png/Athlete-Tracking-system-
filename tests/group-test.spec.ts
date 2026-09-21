@@ -30,6 +30,7 @@ function athlete(id: string, name: string, values: number[]): StoredAthlete {
     observations: [],
     diary: [],
     diaryFields: [],
+    workouts: [],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
     focuses: [],

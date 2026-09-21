@@ -1445,7 +1445,8 @@
         "sport": "Sport",
         "mobility": "Bevegelighet",
         "other": "Annet"
-      }
+      },
+      "toTraining": "Sett i treningsloggen"
     },
     "more": {
       "title": "Registrer mer",
@@ -1488,6 +1489,91 @@
       "ask": "Hvordan var dagen? Ett trykk holder.",
       "done": "I dag er registrert.",
       "more": "Registrer mer",
+      "open": "Åpne dagboken"
+    }
+  },
+  "training": {
+    "eyebrow": "Sett, vekt, repetisjoner",
+    "title": "Trening",
+    "intro": "Det som skjedde: øvelse, vekt, repetisjoner, reserve. e1RM er et anslag og kalles det. Ingenting her er en plan.",
+    "introCoach": "Treningsloggen til den aktive utøveren. Bytt utøver i toppfeltet.",
+    "new": "Ny økt",
+    "untitled": "Økt",
+    "editor": {
+      "title": "Navn",
+      "titlePlaceholder": "f.eks. Overkropp A",
+      "day": "Dag",
+      "addExercise": "Legg til øvelse",
+      "searchPlaceholder": "Søk: benkpress, squat, roing …",
+      "results": "Treff",
+      "custom": "Egen øvelse",
+      "customName": "Eget navn",
+      "addCustom": "Legg til som egen",
+      "removeExercise": "Fjern øvelse",
+      "set": "Sett",
+      "weight": "Vekt",
+      "reps": "Rep",
+      "fewerReps": "færre repetisjoner",
+      "moreReps": "flere repetisjoner",
+      "removeSet": "Fjern sett",
+      "repeatSet": "Gjenta sett",
+      "newSet": "Tomt sett",
+      "e1rmUnsure": "(mindre presist over 12 rep)",
+      "duration": "Varighet",
+      "rpe": "Anstrengelse (RPE 1–10)",
+      "toDiary": "Går inn i dagens dagbok som økt med {{load}} AU.",
+      "toDiaryHint": "Med varighet og anstrengelse vises økten som belastning i dagboken — uten begge blir den bare her.",
+      "save": "Lagre økt"
+    },
+    "list": {
+      "title": "Økter",
+      "why": "Nyeste først. Trykk for å åpne.",
+      "empty": "Ingen økt ennå. Den første tar ett minutt: finn øvelsen, vekt, repetisjoner, ferdig.",
+      "edit": "Rediger",
+      "delete": "Slett",
+      "sets_one": "{{count}} sett",
+      "sets_other": "{{count}} sett"
+    },
+    "best": {
+      "title": "Rekorder",
+      "why": "Beste e1RM per øvelse, med forløp. Anslått etter Epley med RIR — ikke en målt 1RM.",
+      "empty": "Rekorder oppstår med første økt.",
+      "sessions_one": "{{count}} økt",
+      "sessions_other": "{{count}} økter",
+      "trend": "e1RM per økt",
+      "block": {
+        "up": "siste 4 uker {{delta}} % over de 4 før",
+        "down": "siste 4 uker {{delta}} % under de 4 før",
+        "unchanged": "siste 4 uker uendret mot de 4 før"
+      }
+    },
+    "week": {
+      "title": "Denne uken",
+      "why": "Sju dager, telt, ikke vurdert.",
+      "sets": "Arbeidssett",
+      "volume": "Volum"
+    },
+    "muscles": {
+      "title": "Sett per muskelgruppe",
+      "none": "Ingen sett ennå denne uken.",
+      "names": {
+        "legs": "Bein",
+        "glutes": "Sete",
+        "calves": "Legger",
+        "back": "Rygg",
+        "lower_back": "Korsrygg",
+        "chest": "Bryst",
+        "shoulders": "Skuldre",
+        "neck": "Nakke",
+        "biceps": "Biceps",
+        "triceps": "Triceps",
+        "core": "Kjerne",
+        "full_body": "Hele kroppen",
+        "cardio": "Kondisjon"
+      }
+    },
+    "diaryLink": {
+      "why": "Søvn, vekt og energi står i dagboken — dit går også belastningen fra disse øktene.",
       "open": "Åpne dagboken"
     }
   }

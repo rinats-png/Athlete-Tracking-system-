@@ -27,6 +27,7 @@ import {
   type StoredTestDay,
   type StoredObservation,
   type StoredDiaryEntry,
+  type StoredWorkout,
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
@@ -115,6 +116,17 @@ interface AppDataValue {
   /** Welche freiwilligen Felder dieser Athlet im Tagebuch sieht. */
   diaryFields: DiaryOptionalField[]
   setDiaryFields: (fields: DiaryOptionalField[]) => void
+  /**
+   * Trainingslog des aktiven Athleten (Schicht S2).
+   *
+   * Eine Einheit mit Dauer und RPE schreibt ihre Session-Last ins Tagebuch
+   * desselben Tages — als Tagebuch-Einheit mit fester Kennung, damit ein
+   * zweites Speichern sie ersetzt und ein Löschen sie mitnimmt. Eine Last,
+   * die an zwei Stellen stünde, wäre zwei Wahrheiten.
+   */
+  workouts: StoredWorkout[]
+  saveWorkout: (workout: StoredWorkout) => void
+  deleteWorkout: (id: string) => void
   /** Einwilligung eines Athleten setzen. */
   setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
@@ -580,6 +592,48 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           athletes: current.athletes.map((a) =>
             a.id === current.activeAthleteId ? { ...a, diaryFields: fields } : a,
           ),
+        })
+      },
+      workouts: store.athletes.find((a) => a.id === store.activeAthleteId)?.workouts ?? [],
+      saveWorkout: (workout) => {
+        const current = storeRef.current
+        const now = new Date().toISOString()
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => {
+            if (a.id !== current.activeAthleteId) return a
+            const previous = a.workouts.find((w) => w.id === workout.id) ?? null
+            const sessionId = workout.diarySessionId ?? previous?.diarySessionId ?? newId()
+            const wantsSession = workout.durationMin != null && workout.rpe != null
+            // Die alte Tagebuch-Einheit weicht — auch wenn der Tag gewechselt hat.
+            let diary = a.diary.map((e) => ({ ...e, sessions: e.sessions.filter((s) => s.id !== sessionId) }))
+            if (wantsSession) {
+              const existing = diary.find((e) => e.day === workout.day)
+              const session = { id: sessionId, kind: 'strength' as const, durationMin: workout.durationMin!, rpe: workout.rpe!, note: workout.title.slice(0, 200) }
+              diary = existing
+                ? diary.map((e) => (e.day === workout.day ? { ...e, sessions: [...e.sessions, session], updatedAt: now } : e))
+                : [...diary, { id: newId(), day: workout.day, weightKg: null, sleepHours: null, sleepQuality: null, energy: null, stress: null, soreness: null, steps: null, adherence: null, sessions: [session], note: '', createdAt: now, updatedAt: now }]
+            }
+            diary = diary.filter((e) => !isEmptyEntry(e))
+            const saved: StoredWorkout = { ...workout, diarySessionId: wantsSession ? sessionId : null, updatedAt: now }
+            return { ...a, diary, workouts: [...a.workouts.filter((w) => w.id !== workout.id), saved] }
+          }),
+        })
+      },
+      deleteWorkout: (id) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => {
+            if (a.id !== current.activeAthleteId) return a
+            const gone = a.workouts.find((w) => w.id === id)
+            const diary = gone?.diarySessionId
+              ? a.diary
+                  .map((e) => ({ ...e, sessions: e.sessions.filter((s) => s.id !== gone.diarySessionId) }))
+                  .filter((e) => !isEmptyEntry(e))
+              : a.diary
+            return { ...a, diary, workouts: a.workouts.filter((w) => w.id !== id) }
+          }),
         })
       },
       deleteObservation: (id) => {

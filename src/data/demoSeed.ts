@@ -320,6 +320,7 @@ export function buildDemoData(): StoredData {
         observations: [],
         diary: DEMO_DIARY,
         diaryFields: ['stress', 'soreness'],
+        workouts: [],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
         focuses: DEMO_FOCUSES,

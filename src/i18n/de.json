@@ -1445,7 +1445,8 @@
         "sport": "Sport",
         "mobility": "Beweglichkeit",
         "other": "Sonstiges"
-      }
+      },
+      "toTraining": "Sätze im Trainingslog"
     },
     "more": {
       "title": "Mehr erfassen",
@@ -1489,6 +1490,91 @@
       "done": "Heute ist erfasst.",
       "more": "Mehr eintragen",
       "open": "Tagebuch öffnen"
+    }
+  },
+  "training": {
+    "eyebrow": "Sätze, Gewicht, Wiederholungen",
+    "title": "Training",
+    "intro": "Was war: Übung, Gewicht, Wiederholungen, Reserve. Der e1RM ist eine Schätzung und heisst so. Nichts hier ist ein Plan.",
+    "introCoach": "Das Trainingslog des aktiven Athleten. Umschalten oben in der Kopfzeile.",
+    "new": "Neue Einheit",
+    "untitled": "Einheit",
+    "editor": {
+      "title": "Bezeichnung",
+      "titlePlaceholder": "z. B. Oberkörper A",
+      "day": "Tag",
+      "addExercise": "Übung hinzufügen",
+      "searchPlaceholder": "Suchen: Bankdrücken, squat, Rudern …",
+      "results": "Treffer",
+      "custom": "Freie Übung",
+      "customName": "Eigener Name",
+      "addCustom": "Frei eintragen",
+      "removeExercise": "Übung entfernen",
+      "set": "Satz",
+      "weight": "Gewicht",
+      "reps": "Wdh",
+      "fewerReps": "weniger Wiederholungen",
+      "moreReps": "mehr Wiederholungen",
+      "removeSet": "Satz entfernen",
+      "repeatSet": "Satz wiederholen",
+      "newSet": "Leerer Satz",
+      "e1rmUnsure": "(über 12 Wdh ungenauer)",
+      "duration": "Dauer",
+      "rpe": "Anstrengung (RPE 1–10)",
+      "toDiary": "Fliesst als Einheit mit {{load}} AU ins Tagebuch dieses Tages.",
+      "toDiaryHint": "Mit Dauer und Anstrengung erscheint die Einheit als Last im Tagebuch — ohne beides bleibt sie nur hier.",
+      "save": "Einheit speichern"
+    },
+    "list": {
+      "title": "Einheiten",
+      "why": "Neueste zuerst. Antippen öffnet die Einheit.",
+      "empty": "Noch keine Einheit. Die erste dauert eine Minute: Übung suchen, Gewicht, Wiederholungen, fertig.",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "sets_one": "{{count}} Satz",
+      "sets_other": "{{count}} Sätze"
+    },
+    "best": {
+      "title": "Bestwerte",
+      "why": "Bester e1RM je Übung, mit Verlauf. Geschätzt nach Epley mit RIR — kein gemessener 1RM.",
+      "empty": "Bestwerte entstehen mit der ersten Einheit.",
+      "sessions_one": "{{count}} Einheit",
+      "sessions_other": "{{count}} Einheiten",
+      "trend": "e1RM je Einheit",
+      "block": {
+        "up": "letzte 4 Wochen {{delta}} % über den 4 davor",
+        "down": "letzte 4 Wochen {{delta}} % unter den 4 davor",
+        "unchanged": "letzte 4 Wochen unverändert gegenüber den 4 davor"
+      }
+    },
+    "week": {
+      "title": "Diese Woche",
+      "why": "Sieben Tage, gezählt, nicht bewertet.",
+      "sets": "Arbeitssätze",
+      "volume": "Volumen"
+    },
+    "muscles": {
+      "title": "Sätze je Muskelgruppe",
+      "none": "Diese Woche noch kein Satz.",
+      "names": {
+        "legs": "Beine",
+        "glutes": "Gesäss",
+        "calves": "Waden",
+        "back": "Rücken",
+        "lower_back": "Unterer Rücken",
+        "chest": "Brust",
+        "shoulders": "Schultern",
+        "neck": "Nacken",
+        "biceps": "Bizeps",
+        "triceps": "Trizeps",
+        "core": "Rumpf",
+        "full_body": "Ganzkörper",
+        "cardio": "Cardio"
+      }
+    },
+    "diaryLink": {
+      "why": "Schlaf, Gewicht und Energie stehen im Tagebuch — dort landet auch die Last dieser Einheiten.",
+      "open": "Zum Tagebuch"
     }
   }
 }

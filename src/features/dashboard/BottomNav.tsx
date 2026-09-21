@@ -41,7 +41,7 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
  * Diagnostik; Bericht und Trainer-Ansicht liegen unter Analyse bzw. Profil.
  */
 export const NAV_ITEMS = [
-  { key: 'overview', icon: House, path: '/', alsoMatches: ['/tagebuch'] },
+  { key: 'overview', icon: House, path: '/', alsoMatches: ['/tagebuch', '/training'] },
   { key: 'diagnostics', icon: ClipboardList, path: '/diagnostik', alsoMatches: ['/tests', '/sport', '/batterie'] },
   { key: 'analysis', icon: Activity, path: '/analyse', alsoMatches: ['/bericht', '/community'] },
   { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: ['/werte', '/kalender'] },

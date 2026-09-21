@@ -1445,7 +1445,8 @@
         "sport": "Sport",
         "mobility": "Mobilitet",
         "other": "Andet"
-      }
+      },
+      "toTraining": "Sæt i træningsloggen"
     },
     "more": {
       "title": "Registrér mere",
@@ -1488,6 +1489,91 @@
       "ask": "Hvordan var dagen? Ét tryk er nok.",
       "done": "I dag er registreret.",
       "more": "Registrér mere",
+      "open": "Åbn dagbogen"
+    }
+  },
+  "training": {
+    "eyebrow": "Sæt, vægt, gentagelser",
+    "title": "Træning",
+    "intro": "Hvad der skete: øvelse, vægt, gentagelser, reserve. e1RM er et skøn og kaldes sådan. Intet her er en plan.",
+    "introCoach": "Den aktive atlets træningslog. Skift atlet i sidehovedet.",
+    "new": "Nyt pas",
+    "untitled": "Pas",
+    "editor": {
+      "title": "Navn",
+      "titlePlaceholder": "f.eks. Overkrop A",
+      "day": "Dag",
+      "addExercise": "Tilføj øvelse",
+      "searchPlaceholder": "Søg: bænkpres, squat, roning …",
+      "results": "Resultater",
+      "custom": "Egen øvelse",
+      "customName": "Eget navn",
+      "addCustom": "Tilføj som egen",
+      "removeExercise": "Fjern øvelse",
+      "set": "Sæt",
+      "weight": "Vægt",
+      "reps": "Gent.",
+      "fewerReps": "færre gentagelser",
+      "moreReps": "flere gentagelser",
+      "removeSet": "Fjern sæt",
+      "repeatSet": "Gentag sæt",
+      "newSet": "Tomt sæt",
+      "e1rmUnsure": "(mindre præcis over 12 gent.)",
+      "duration": "Varighed",
+      "rpe": "Anstrengelse (RPE 1–10)",
+      "toDiary": "Indgår i dagens dagbog som pas med {{load}} AU.",
+      "toDiaryHint": "Med varighed og anstrengelse vises passet som belastning i dagbogen — uden begge bliver det kun her.",
+      "save": "Gem pas"
+    },
+    "list": {
+      "title": "Pas",
+      "why": "Nyeste først. Tryk for at åbne.",
+      "empty": "Intet pas endnu. Det første tager et minut: find øvelsen, vægt, gentagelser, færdig.",
+      "edit": "Redigér",
+      "delete": "Slet",
+      "sets_one": "{{count}} sæt",
+      "sets_other": "{{count}} sæt"
+    },
+    "best": {
+      "title": "Rekorder",
+      "why": "Bedste e1RM pr. øvelse, med forløb. Skønnet efter Epley med RIR — ikke en målt 1RM.",
+      "empty": "Rekorder opstår med det første pas.",
+      "sessions_one": "{{count}} pas",
+      "sessions_other": "{{count}} pas",
+      "trend": "e1RM pr. pas",
+      "block": {
+        "up": "seneste 4 uger {{delta}} % over de 4 før",
+        "down": "seneste 4 uger {{delta}} % under de 4 før",
+        "unchanged": "seneste 4 uger uændret i forhold til de 4 før"
+      }
+    },
+    "week": {
+      "title": "Denne uge",
+      "why": "Syv dage, talt, ikke vurderet.",
+      "sets": "Arbejdssæt",
+      "volume": "Volumen"
+    },
+    "muscles": {
+      "title": "Sæt pr. muskelgruppe",
+      "none": "Ingen sæt endnu i denne uge.",
+      "names": {
+        "legs": "Ben",
+        "glutes": "Balder",
+        "calves": "Lægge",
+        "back": "Ryg",
+        "lower_back": "Lænd",
+        "chest": "Bryst",
+        "shoulders": "Skuldre",
+        "neck": "Nakke",
+        "biceps": "Biceps",
+        "triceps": "Triceps",
+        "core": "Core",
+        "full_body": "Hele kroppen",
+        "cardio": "Kondition"
+      }
+    },
+    "diaryLink": {
+      "why": "Søvn, vægt og energi står i dagbogen — dér lander belastningen fra disse pas også.",
       "open": "Åbn dagbogen"
     }
   }
