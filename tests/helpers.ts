@@ -234,3 +234,29 @@ export function readDict(lang: string): Record<string, any> {
     JSON.parse(readFileSync(new URL(`../src/i18n/${name}`, import.meta.url), 'utf-8'))
   return { ...read(`${lang}.json`), ...read(`${lang}.extra.json`) }
 }
+
+/**
+ * Prüft, ob im Chiffrat Klartext steht — richtig herum.
+ *
+ * DER FEHLER, DEN DAS BEHEBT. Der erste Versuch suchte die Wörter im
+ * BASE64-TEXT des Chiffrats. Das ist aus zwei Gründen falsch:
+ *
+ *   1. Base64 verwischt die Bytegrenzen. Ein Wort, das wirklich im Chiffrat
+ *      stünde, wäre dort je nach Versatz gar nicht als Zeichenfolge zu
+ *      sehen — der Fall hätte ein echtes Leck durchgehen lassen.
+ *   2. Umgekehrt enthält zufälliges Base64 kurze Folgen ständig. «48» stand
+ *      im Lauf vom 22.09.2026 als «…jiq48x…» im Chiffrat und liess den Fall
+ *      scheitern, obwohl nichts durchgesickert war.
+ *
+ * Deshalb: erst zurück in die Bytes, dann suchen — und nur nach Wörtern, die
+ * lang genug sind, um ein Beleg zu sein. Eine zwei Zeichen lange Folge ist
+ * in 200 Byte Zufall kein Fund, sondern eine Münze.
+ */
+export function cipherBytes(blob: string): string {
+  const parts = blob.split('.')
+  const body = parts.length === 3 ? parts[2] : blob
+  return Buffer.from(body, 'base64').toString('latin1').toLowerCase()
+}
+
+/** Kürzer als das ist kein Beleg, sondern Zufall. */
+export const MIN_EVIDENCE_LENGTH = 4

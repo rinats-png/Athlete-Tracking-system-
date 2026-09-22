@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
+import { MIN_EVIDENCE_LENGTH, cipherBytes } from './helpers'
 import { photoDays, photosOfDay, withdrawConsent } from '../src/domain/health'
 import { deriveKey, encryptJson, newSalt, opaqueId } from '../src/lib/health/crypto'
 import { healthRecords, planHealthPush, type RemoteHealthRow } from '../src/lib/health/sync'
@@ -95,8 +96,11 @@ test.describe('Was der Server von den Fotos sieht', () => {
   test('das Chiffrat enthält weder das Bild noch die Art', async () => {
     const keys = (await deriveKey(PHRASE, newSalt()))!
     const blob = (await encryptJson(keys, { e: 'photo:p1', d: photo('p1', '2026-09-01', 'frontRelaxed') }))!
+    // In den Bytes suchen, nicht im Base64-Text — siehe cipherBytes().
+    const bytes = cipherBytes(blob)
     for (const wort of ['photo', 'pose', 'frontrelaxed', 'jpeg', 'image', 'dataurl', '2026-09-01']) {
-      expect(blob.toLowerCase(), wort).not.toContain(wort)
+      expect(wort.length, `«${wort}» ist zu kurz, um ein Beleg zu sein`).toBeGreaterThanOrEqual(MIN_EVIDENCE_LENGTH)
+      expect(bytes, wort).not.toContain(wort)
     }
   })
 

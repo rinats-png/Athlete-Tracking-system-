@@ -16,7 +16,7 @@ import {
 import { hasHealthData, healthRecords, mergeHealth, planHealthPush, type IncomingHealth, type RemoteHealthRow } from '../src/lib/health/sync'
 import { emptyAthlete } from '../src/lib/store/schema'
 import type { StoredAthlete, StoredLabEntry } from '../src/lib/store/localStore'
-import { openGuest } from './helpers'
+import { MIN_EVIDENCE_LENGTH, cipherBytes, openGuest } from './helpers'
 
 /**
  * Ende-zu-Ende-Verschlüsselung der Gesundheitsschicht.
@@ -127,8 +127,13 @@ test.describe('Verschlüsselung', () => {
     const key = (await deriveKey('K7M2-9XQR-ABCD-EFGH-JKLM-NPQR', newSalt()))!
     const entry = lab('l1', '2026-09-01', '2026-09-01T08:00:00.000Z')
     const blob = (await encryptJson(key, { kind: 'lab', ...entry }))!
-    for (const wort of ['ferritin', 'lab', 'Labor Nord', '2026-09-01', '48', 'cycle', 'symptom']) {
-      expect(blob.toLowerCase(), wort).not.toContain(wort.toLowerCase())
+    // Gesucht wird in den BYTES, nicht im Base64-Text: Base64 verwischt die
+    // Bytegrenzen (ein echtes Leck wäre dort je nach Versatz unsichtbar) und
+    // enthält zugleich kurze Folgen rein zufällig.
+    const bytes = cipherBytes(blob)
+    for (const wort of ['ferritin', 'labor nord', '2026-09-01', 'cycle', 'symptom', 'createdat']) {
+      expect(wort.length, `«${wort}» ist zu kurz, um ein Beleg zu sein`).toBeGreaterThanOrEqual(MIN_EVIDENCE_LENGTH)
+      expect(bytes, wort).not.toContain(wort)
     }
   })
 })

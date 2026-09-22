@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { MIN_EVIDENCE_LENGTH, cipherBytes } from './helpers'
 import {
   generateEnvelopeKeys,
   importPublicKey,
@@ -106,8 +107,11 @@ test.describe('Der Umschlag', () => {
   test('das Chiffrat der Abschrift trägt den Wert nicht im Klartext', async () => {
     const shareKey = (await newShareKey())!
     const payload = (await sealPayload(shareKey, sharePayload(health([lab('l1', '2026-09-01T10:00:00.000Z')]), 'lab', '2026-09-02T08:00:00.000Z')))!
-    for (const wort of ['ferritin', 'labor nord', '2026-09-01', 'lab']) {
-      expect(payload.toLowerCase(), wort).not.toContain(wort)
+    // In den Bytes suchen, nicht im Base64-Text — siehe cipherBytes().
+    const bytes = cipherBytes(payload)
+    for (const wort of ['ferritin', 'labor nord', '2026-09-01', 'takenat', 'entries']) {
+      expect(wort.length, `«${wort}» ist zu kurz, um ein Beleg zu sein`).toBeGreaterThanOrEqual(MIN_EVIDENCE_LENGTH)
+      expect(bytes, wort).not.toContain(wort)
     }
   })
 })
