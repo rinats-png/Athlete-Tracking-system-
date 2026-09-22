@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 24
+export const CURRENT_SCHEMA_VERSION = 25
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -861,6 +861,13 @@ const healthSchema = z.object({
    * Energieverfuegbarkeit, denn die App misst keinen Trainingsumsatz.
    */
   trainingKcalPerDay: finite.min(0).max(5000).nullable().default(null),
+  /**
+   * Wann zuletzt etwas an dieser Schicht geaendert wurde — gesetzt vom
+   * Provider bei jeder Aenderung. Der verschluesselte Abgleich braucht einen
+   * Zeitstempel fuer Einwilligungen und Einstellungen; die Eintraege tragen
+   * ihren eigenen.
+   */
+  updatedAt: isoDate.nullable().default(null),
 })
 
 /** Die Abschnitte einer Peak Week, in der Reihenfolge des Ablaufs. */
@@ -1420,8 +1427,21 @@ export const MIGRATIONS: Migration[] = [
       version: 24,
       athletes: (data.athletes ?? []).map((athlete: any) => ({
         ...athlete,
-        health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+        health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null },
         peakWeeks: [],
+      })),
+    }),
+  },
+  {
+    from: 24,
+    to: 25,
+    describe: 'Zeitstempel an der Gesundheitsschicht fuer den verschluesselten Abgleich',
+    run: (data: any) => ({
+      ...data,
+      version: 25,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        health: { ...athlete.health, updatedAt: null },
       })),
     }),
   },
@@ -1470,7 +1490,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
     meals: [],
     nutrition: { pal: 1.55 },
-    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null },
     peakWeeks: [],
     archived: false,
     notes: '',

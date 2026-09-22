@@ -1,4 +1,4 @@
-import { clearBackup } from './backup'
+import { clearBackup, clearHealthKeys } from './backup'
 import { LEGACY_PREFIX, STORAGE_PREFIX } from './migrateStorage'
 
 /**
@@ -59,6 +59,9 @@ export async function wipeDevice(): Promise<WipeReport> {
   let backupCleared = false
   try {
     await clearBackup()
+    // Der Schluessel der Gesundheitsschicht geht mit: bliebe er stehen,
+    // koennte das naechste Konto auf diesem Geraet ihn benutzen.
+    await clearHealthKeys()
     backupCleared = true
   } catch {
     /* Kein IndexedDB in diesem Browser. */

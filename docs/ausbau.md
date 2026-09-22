@@ -756,12 +756,11 @@ wären genau der Fehler, den §89 verbietet.
   vermeidet die Frage nach der Einwilligung Erziehungsberechtigter in
   Art.-9-Daten, statt sie halb zu beantworten. Ohne Geburtsdatum bleibt der
   Bereich zu.
-- **Diese Daten verlassen das Gerät nicht.** Der Abgleich trägt sie nicht
-  mit (`stripHealth` in `src/lib/supabase/series.ts`, an genau einer
-  Stelle, damit es keinen Weg daran vorbei gibt). Eine Zweitschrift auf dem
-  Server kommt erst mit Ende-zu-Ende-Verschlüsselung — die ist **nicht**
-  gebaut, und damit entfällt vorerst auch die Kollision zwischen §89 und
-  dem Verlust einer Wiederherstellungsphrase. Der Export enthält alles (§32).
+- **Diese Daten stehen nie im Klartext auf dem Server.** Das
+  Athletendokument trägt sie nicht (`stripHealth` in
+  `src/lib/supabase/series.ts`, an genau einer Stelle). Seit dem 22.09.2026
+  gibt es eine Zweitschrift — **Ende-zu-Ende verschlüsselt** (siehe unten).
+  Der Export enthält alles im Klartext (§32), denn er gehört dem Nutzer.
 - **Laborwerte mit abgeschriebenem Referenzbereich.** Der Katalog
   (`labMarkers.ts`) bringt Namen und übliche Einheiten mit — und
   **keine Referenzbereiche**. Sie gehören dem Labor, das gemessen hat. Die
@@ -783,13 +782,35 @@ wären genau der Fehler, den §89 verbietet.
   wenn ein Symptom mit der höchsten Stärke erfasst ist. Die App liest die
   Einträge nicht, um zu entscheiden, was sie sagt.
 
+**Was die Verschlüsselung geworden ist (22.09.2026):**
+
+- **AES-GCM-256, Schlüssel aus einer Phrase.** Sechs Gruppen zu vier
+  Zeichen, 120 Bit, aus einem Alphabet ohne I, O, 0 und 1. Daraus über
+  PBKDF2-SHA256 mit 600.000 Runden ein Schlüssel, der auf dem Gerät bleibt
+  und nicht auslesbar ist (`extractable: false`, in IndexedDB).
+- **Die Phrase kommt nicht aus dem Passwort**, mit Absicht: ein Passwort
+  lässt sich zurücksetzen, ein Schlüssel nicht. Käme er aus dem Passwort,
+  wäre jedes Zurücksetzen ein stiller Datenverlust.
+- **Der Server sieht nichts Sprechendes.** `health_entries` hat kein
+  `kind` und kein `day` — anders als `athlete_series`. Dass jemand
+  Zyklusdaten führt, ist selbst eine Information und bleibt im Chiffrat.
+  Am Konto liegen nur ein Salz und eine Probe, beide ohne die Phrase
+  nutzlos.
+- **Die Kollision mit §89 ist aufgelöst, nicht weggeredet.** Wer die Phrase
+  verliert, aber das Gerät hat, erzeugt eine neue: alles wird neu
+  verschlüsselt, der alte Serverstand ersetzt. Nur Phrase **und** Gerät
+  zusammen zu verlieren kostet die Zweitschrift — dafür drängt der
+  Bildschirm vor der ersten Eingabe auf den Export.
+- **Ein Prüffall durchsucht das Chiffrat** nach dem Wert, dem Labornamen,
+  dem Tag und der Kategorie. Nichts davon steht drin.
+
 **Offen, unverändert:** die Kuratierung des USDA-Kerns durch einen
 Menschen mit Netzzugang, ein echter Zwei-Geräte-Abgleich und ein echter
 Testkauf am lebenden System — und die Anwaltsgespräche aus der
 Rechtsprüfung, die vor dem öffentlichen Betrieb von S5 geführt sein
-müssen. **Neu offen:** Ende-zu-Ende-Verschlüsselung für die
-Gesundheitsschicht (dann Fotos und Zweitschrift), Trainerfreigabe je
-Kategorie, die Sportmodule.
+müssen. **Neu offen:** Fotos (jetzt technisch möglich, noch nicht gebaut),
+Trainerfreigabe je Kategorie über einen Schlüsselumschlag, die
+Sportmodule.
 
 ## 14. Zusammenfassung in drei Sätzen
 

@@ -106,7 +106,9 @@ test.describe('Zweitschrift auf dem Gerät', () => {
         page.evaluate(
           () =>
             new Promise<string | null>((resolve) => {
-              const open = indexedDB.open('kydon', 1)
+              // Ohne Versionsangabe: die Fassung der Datenbank gehört der App,
+              // und der Prüffall soll nicht mitwandern, wenn sie steigt.
+              const open = indexedDB.open('kydon')
               open.onsuccess = () => {
                 const db = open.result
                 const get = db.transaction('snapshots', 'readonly').objectStore('snapshots').get('current')

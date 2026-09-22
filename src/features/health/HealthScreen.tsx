@@ -8,6 +8,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { ageAllows, hasConsent } from '@/domain/health'
 import { HEALTH_MIN_AGE } from '@/lib/store/schema'
 import { ConsentPanel } from './ConsentPanel'
+import { KeyPanel } from './KeyPanel'
 import { LabPanel } from './LabPanel'
 import { CyclePanel, SelfImagePanel, SymptomPanel } from './DailyPanels'
 import { MedsPanel } from './MedsPanel'
@@ -56,6 +57,7 @@ export function HealthScreen() {
       ) : (
         <div className="space-y-4">
           <ConsentPanel />
+          <KeyPanel />
           {hasConsent(health, 'lab') && <LabPanel />}
           {hasConsent(health, 'symptoms') && <SymptomPanel />}
           {hasConsent(health, 'cycle') && <CyclePanel />}

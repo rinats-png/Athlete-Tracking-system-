@@ -22,8 +22,14 @@ import type { StoredData } from './localStore'
 const DB_NAME = 'kydon'
 /** Der Name bis September 2026. Wird einmal umgezogen, dann gelöscht. */
 const LEGACY_DB_NAME = 'baseline'
-const DB_VERSION = 1
+const DB_VERSION = 2
 const STORE = 'snapshots'
+/**
+ * Der abgeleitete Schluessel der Gesundheitsschicht. Er liegt hier und nicht
+ * im localStorage, weil ein CryptoKey dort nicht ablegbar waere — und weil er
+ * als `extractable: false` erzeugt wird: benutzbar, aber nicht auslesbar.
+ */
+const KEY_STORE = 'healthKeys'
 const KEY = 'current'
 
 /** IndexedDB fehlt im privaten Modus mancher Browser und in Testumgebungen. */
@@ -44,6 +50,7 @@ function openDb(name: string = DB_NAME): Promise<IDBDatabase | null> {
     request.onupgradeneeded = () => {
       const db = request.result
       if (!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE)
+      if (!db.objectStoreNames.contains(KEY_STORE)) db.createObjectStore(KEY_STORE)
     }
     request.onsuccess = () => resolve(request.result)
     request.onerror = () => resolve(null)
@@ -180,4 +187,72 @@ export async function recoverFromBackup(): Promise<Recovery | null> {
   const { data, report } = parseStoredData(record.data)
   if (!data) return null
   return { data, report, savedAt: record.savedAt }
+}
+
+// =============================================================================
+// Schluessel der Gesundheitsschicht
+// =============================================================================
+//
+// Der Schluessel entsteht aus einer Phrase, die der Mensch verwahrt
+// (src/lib/health/crypto.ts). Damit er nicht bei jedem Start neu eingetippt
+// werden muss, liegt er hier — je Konto einer, und beim Abmelden oder
+// Geraeteleeren ist er weg.
+//
+// WAS DAS SCHUETZT UND WAS NICHT: Er ist nicht auslesbar, auch nicht vom
+// eigenen Code. Wer das entsperrte Geraet in die Hand bekommt, kann die
+// Daten trotzdem sehen — dagegen hilft nur die Geraetesperre. Geschuetzt ist
+// der Weg ueber den Server: dort liegt nur Chiffrat.
+
+export async function putHealthKey(userId: string, key: CryptoKey): Promise<boolean> {
+  const db = await openDb()
+  if (!db) return false
+  try {
+    return await new Promise<boolean>((resolve) => {
+      const tx = db.transaction(KEY_STORE, 'readwrite')
+      tx.oncomplete = () => resolve(true)
+      tx.onerror = () => resolve(false)
+      tx.onabort = () => resolve(false)
+      tx.objectStore(KEY_STORE).put(key, userId)
+    })
+  } catch {
+    return false
+  } finally {
+    db.close()
+  }
+}
+
+export async function getHealthKey(userId: string): Promise<CryptoKey | null> {
+  const db = await openDb()
+  if (!db) return null
+  try {
+    return await new Promise<CryptoKey | null>((resolve) => {
+      try {
+        const request = db.transaction(KEY_STORE, 'readonly').objectStore(KEY_STORE).get(userId)
+        request.onsuccess = () => resolve((request.result as CryptoKey | undefined) ?? null)
+        request.onerror = () => resolve(null)
+      } catch {
+        resolve(null)
+      }
+    })
+  } finally {
+    db.close()
+  }
+}
+
+export async function clearHealthKeys(): Promise<void> {
+  const db = await openDb()
+  if (!db) return
+  try {
+    await new Promise<void>((resolve) => {
+      const tx = db.transaction(KEY_STORE, 'readwrite')
+      tx.oncomplete = () => resolve()
+      tx.onerror = () => resolve()
+      tx.onabort = () => resolve()
+      tx.objectStore(KEY_STORE).clear()
+    })
+  } catch {
+    /* Ohne IndexedDB gibt es nichts zu raeumen. */
+  } finally {
+    db.close()
+  }
 }

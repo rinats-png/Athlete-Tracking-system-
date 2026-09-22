@@ -43,6 +43,7 @@ import {
 import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
 import { isEmptyEntry } from '@/domain/diary'
 import { mergeSeries, type SeriesRow } from '@/lib/supabase/series'
+import { mergeHealth, type IncomingHealth } from '@/lib/health/sync'
 import { FOCUS_HARD_LIMIT } from '@/domain/trainingFocus'
 import type {
   AttemptSelection,
@@ -161,6 +162,8 @@ interface AppDataValue {
   peakWeeks: StoredPeakWeek[]
   savePeakWeek: (week: StoredPeakWeek) => void
   deletePeakWeek: (id: string) => void
+  /** Verschluesselte Datensaetze vom Server einarbeiten (S5). Gibt zurueck, wie viele wirkten. */
+  mergeHealthRecords: (athleteId: string, incoming: IncomingHealth[]) => number
   /** Einwilligung eines Athleten setzen. */
   setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
@@ -697,12 +700,16 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         })
       },
       nutrition: store.athletes.find((a) => a.id === store.activeAthleteId)?.nutrition ?? { pal: 1.55 },
-      health: store.athletes.find((a) => a.id === store.activeAthleteId)?.health ?? { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+      health: store.athletes.find((a) => a.id === store.activeAthleteId)?.health ?? { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null },
       updateHealth: (fn) => {
         const current = storeRef.current
+        // Der Zeitstempel wird HIER gesetzt, an der einen Stelle, durch die
+        // jede Aenderung laeuft: der verschluesselte Abgleich braucht ihn fuer
+        // Einwilligungen und Einstellungen, die selbst keinen tragen.
+        const at = new Date().toISOString()
         commitStore({
           ...current,
-          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, health: fn(a.health) } : a)),
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, health: { ...fn(a.health), updatedAt: at } } : a)),
         })
       },
       peakWeeks: store.athletes.find((a) => a.id === store.activeAthleteId)?.peakWeeks ?? [],
@@ -714,6 +721,20 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             a.id === current.activeAthleteId ? { ...a, peakWeeks: [...a.peakWeeks.filter((w) => w.id !== week.id), week] } : a,
           ),
         })
+      },
+      mergeHealthRecords: (athleteId, incoming) => {
+        const current = storeRef.current
+        let total = 0
+        const athletes = current.athletes.map((a) => {
+          if (a.id !== athleteId) return a
+          const { athlete, changed } = mergeHealth(a, incoming)
+          total += changed
+          return athlete
+        })
+        // Nur schreiben, wenn wirklich etwas anders ist: sonst entstuende bei
+        // jedem Abgleich ein neuer Stand ohne Aenderung.
+        if (total > 0) commitStore({ ...current, athletes })
+        return total
       },
       deletePeakWeek: (id) => {
         const current = storeRef.current

@@ -33,7 +33,7 @@ import { openGuest } from './helpers'
  *      Vorhersage. Der letzte Fall durchsucht den ganzen Bildschirm danach.
  */
 
-const emptyHealth = (): StoredHealth => ({ consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null })
+const emptyHealth = (): StoredHealth => ({ consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null })
 
 const lab = (day: string, marker: string, value: number, ref: [number | null, number | null] = [null, null]): StoredLabEntry => ({
   id: `l-${marker}-${day}`,

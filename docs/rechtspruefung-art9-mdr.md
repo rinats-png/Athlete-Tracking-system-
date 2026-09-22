@@ -276,14 +276,15 @@ Wechselwirkungshinweise, jede Schwelle mit Krankheitsbezug, PEDs.
 Einwilligung stellen; Datenschutzerklärung präzisieren; AV-Vertrag für
 Trainerkonten; DSFA anlegen; Frage Datenschutzbeauftragter klären.
 
-**Nachtrag 22.09.2026.** S5 ist im oben empfohlenen Umfang gebaut worden —
-mit einer Abweichung, die den Rahmen enger zieht statt weiter: **Die
-Gesundheitsschicht synchronisiert nicht.** Statt Ende-zu-Ende-
-Verschlüsselung mit nutzergehaltener Phrase (Abschnitt 4) bleiben die
-Daten auf dem Gerät und im Export. Das ist die datensparsamste Variante,
-sie braucht keine Schlüsselverwaltung, und sie löst die Kollision mit §89
-auf, indem sie sie vermeidet. Fotos fehlen aus demselben Grund. Die
-Verschlüsselung bleibt die Voraussetzung für beides.
+**Nachtrag 22.09.2026.** S5 ist im oben empfohlenen Umfang gebaut worden,
+zuerst ohne Synchronisierung — und noch am selben Tag mit
+**Ende-zu-Ende-Verschlüsselung** nachgezogen (Abschnitt 4 eingelöst):
+AES-GCM-256, Schlüssel aus einer nutzergehaltenen Phrase über PBKDF2 mit
+600.000 Runden, Salz und Probe am Konto, `health_entries` **ohne** jede
+sprechende Spalte. Die Kollision mit §89 ist aufgelöst: Solange das Gerät
+die Daten trägt, erzeugt «Neue Phrase» einen neuen Schlüssel und
+verschlüsselt alles neu. Fotos sind damit technisch möglich, aber noch
+nicht gebaut.
 
 **Die Fragen in Abschnitt 8 sind weiterhin offen.** Sie waren vor dem Bau
 zu stellen; gebaut wurde auf ausdrückliche Entscheidung des Betreibers,
@@ -375,4 +376,5 @@ Nur wenn du es so entscheidest — hier steht, was es wäre:
 | Gesundheitsschicht mit Einwilligung je Kategorie, lokal statt auf dem Server | `src/lib/store/schema.ts` (v24), `src/domain/health.ts`, `src/features/health/` | **gebaut** 22.09.2026 |
 | Altersgrenze 18 für S5 | `ageAllows` in `src/domain/health.ts`, Tor im `HealthScreen` | **gebaut** 22.09.2026 |
 | Regel in den Prüffällen: kein Signal, kein Text mit Krankheits-, Verletzungs- oder Risikonamen | `tests/health.spec.ts` | **gebaut** 22.09.2026 |
-| Serverseitige Ablage mit RLS, Ende-zu-Ende-Verschlüsselung, Trainerfreigabe je Kategorie, Protokollereignisse | Migration + `src/lib/health/` | **offen** — bis dahin bleiben die Daten auf dem Gerät |
+| Serverseitige Ablage mit RLS und Ende-zu-Ende-Verschlüsselung | `supabase/migrations/…health_entries.sql`, `src/lib/health/crypto.ts`, `src/lib/supabase/healthSync.ts` | **gebaut** 22.09.2026 |
+| Trainerfreigabe je Kategorie (Schlüsselumschlag), Protokollereignisse | `src/lib/health/` | **offen** |
