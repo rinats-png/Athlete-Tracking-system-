@@ -417,7 +417,9 @@
     "strokes_per_100m": "Strokes per 100 m",
     "grip_score": "Grip score",
     "fight_endurance_score": "Fight endurance",
-    "run_economy_score": "Run economy (approximation)"
+    "run_economy_score": "Run economy (approximation)",
+    "css_speed_m_s": "Critical swim speed",
+    "css_pace_s_100m": "CSS pace per 100 m"
   },
   "categoriesShort": {
     "endurance": "Endurance",
@@ -1782,5 +1784,24 @@
     "refresh": "Check status",
     "stripeNote": "Payment runs through Stripe; KYDON never sees card details. Subscriptions can be cancelled any time and run until the end of the paid period.",
     "current": "current"
+  },
+  "sportModule": {
+    "eyebrow": "Sport module",
+    "title": "The numbers of your sport",
+    "intro": "The figures your sport hangs on — in one place instead of spread over nine test cards.",
+    "scope": "The maths happened at the test. Here you only see which figures belong to this sport and how they have changed. Whether a change exceeds the measurement error is answered by the history; whether a number is good, this app does not say.",
+    "figures": "Figures",
+    "coverage": "{{measured}} of {{total}} measured",
+    "notMeasured": "Not measured yet",
+    "measureIt": "Measure",
+    "sincePrevious": "since {{date}}",
+    "noCategory": "No sport in the profile",
+    "noCategoryBody": "A sport module needs a sport. Enter it in the profile and your figures will appear here.",
+    "criticalSpeed": "Critical speed",
+    "criticalSpeedSub": "From two maximal runs of different duration.",
+    "criticalSpeedPace": "{{pace}} per km",
+    "reserve": "Distance reserve {{meters}} m",
+    "fromTwoRuns": "From {{first}} and {{second}}.",
+    "toHistory": "Whether a change exceeds the measurement error is shown in each individual test’s history."
   }
 }

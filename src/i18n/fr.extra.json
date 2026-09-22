@@ -329,7 +329,8 @@
       "decisionLog": "Journal de décisions avec vérification de l'effet",
       "cockpit": "Cockpit avec signaux et seuils réglables",
       "health": "Couche santé : historique de laboratoire, symptômes, cycle, médication (art. 9)",
-      "peakWeek": "Peak Week sous forme de journal"
+      "peakWeek": "Peak Week sous forme de journal",
+      "sportModule": "Les indicateurs de ton sport au même endroit"
     }
   },
   "legal": {

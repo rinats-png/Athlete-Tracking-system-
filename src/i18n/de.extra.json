@@ -329,7 +329,8 @@
       "decisionLog": "Decision-Log mit Wirkungsprüfung",
       "cockpit": "Cockpit mit Signalen und einstellbaren Schwellen",
       "health": "Gesundheitsschicht: Laborverlauf, Symptome, Zyklus, Medikation (Art. 9)",
-      "peakWeek": "Peak Week als Protokoll"
+      "peakWeek": "Peak Week als Protokoll",
+      "sportModule": "Die Kennzahlen der eigenen Sportart an einer Stelle"
     }
   },
   "legal": {

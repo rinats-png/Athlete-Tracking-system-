@@ -329,7 +329,8 @@
       "decisionLog": "Beslissingslog met effectcontrole",
       "cockpit": "Cockpit met signalen en instelbare drempels",
       "health": "Gezondheidslaag: laboratoriumverloop, klachten, cyclus, medicatie (art. 9)",
-      "peakWeek": "Peak Week als logboek"
+      "peakWeek": "Peak Week als logboek",
+      "sportModule": "De kerncijfers van je eigen sport op één plek"
     }
   },
   "legal": {

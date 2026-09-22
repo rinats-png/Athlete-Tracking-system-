@@ -417,7 +417,9 @@
     "strokes_per_100m": "Züge je 100 m",
     "grip_score": "Griffwert",
     "fight_endurance_score": "Kampfausdauer",
-    "run_economy_score": "Laufökonomie (Näherung)"
+    "run_economy_score": "Laufökonomie (Näherung)",
+    "css_speed_m_s": "Kritische Schwimmgeschwindigkeit",
+    "css_pace_s_100m": "CSS-Tempo je 100 m"
   },
   "categoriesShort": {
     "endurance": "Ausdauer",
@@ -1782,5 +1784,24 @@
     "refresh": "Stand prüfen",
     "stripeNote": "Die Zahlung läuft bei Stripe; Kartendaten sieht KYDON nie. Abos sind jederzeit kündbar und laufen bis zum Ende des bezahlten Zeitraums.",
     "current": "aktuell"
+  },
+  "sportModule": {
+    "eyebrow": "Sportmodul",
+    "title": "Die Zahlen deiner Sportart",
+    "intro": "Die Kennzahlen, an denen deine Sportart hängt — an einer Stelle statt über neun Testkarten verteilt.",
+    "scope": "Gerechnet wurde beim Test. Hier steht nur, welche Zahlen zu dieser Sportart gehören und wie sie sich verändert haben. Ob eine Veränderung über dem Messfehler liegt, sagt der Verlauf; ob eine Zahl gut ist, sagt diese App nicht.",
+    "figures": "Kennzahlen",
+    "coverage": "{{measured}} von {{total}} gemessen",
+    "notMeasured": "Noch nicht gemessen",
+    "measureIt": "Messen",
+    "sincePrevious": "seit {{date}}",
+    "noCategory": "Keine Sportart im Profil",
+    "noCategoryBody": "Ein Sportmodul braucht eine Sportart. Trag sie im Profil ein, dann stehen hier deine Kennzahlen.",
+    "criticalSpeed": "Kritische Geschwindigkeit",
+    "criticalSpeedSub": "Aus zwei maximalen Läufen verschiedener Dauer.",
+    "criticalSpeedPace": "{{pace}} je km",
+    "reserve": "Distanzreserve {{meters}} m",
+    "fromTwoRuns": "Aus {{first}} und {{second}}.",
+    "toHistory": "Ob eine Veränderung über dem Messfehler liegt, steht im Verlauf des einzelnen Tests."
   }
 }

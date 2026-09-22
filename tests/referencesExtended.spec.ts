@@ -206,7 +206,7 @@ test.describe('Neue Tests', () => {
       },
       run,
     )
-    expect(out.avg_pace_s_km).toBeCloseTo(805 / 3.21869, 2)
+    expect(out.avg_pace_s_per_km).toBeCloseTo(805 / 3.21869, 2)
   })
 
   test('die Griffausdauer am Anzug ist ein eigener Test, nicht eine Variante des Hangs', () => {

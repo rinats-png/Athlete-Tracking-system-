@@ -176,12 +176,12 @@ export const EXTENDED_TESTS: TestBlueprint[] = [
     ],
     protocol: { mode: 'stopwatch' },
     requiresBodyWeight: false,
-    derivedMetrics: ['avg_pace_s_km'],
+    derivedMetrics: ['avg_pace_s_per_km'],
     derive: (values, _ctx, put) => {
       const seconds = values.durationSeconds
       if (seconds == null) return
       // Zwei Meilen sind 3,219 km.
-      put('avg_pace_s_km', seconds / 3.21869)
+      put('avg_pace_s_per_km', seconds / 3.21869)
     },
     sortOrder: 703,
     name: { de: '2-Meilen-Lauf', en: 'Two-mile run' },

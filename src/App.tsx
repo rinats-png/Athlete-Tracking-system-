@@ -149,6 +149,7 @@ const router = createBrowserRouter([
       // Bildschirm, die Einwilligung je Kategorie darin (S5, Art. 9).
       { path: 'gesundheit', element: <Gate feature="health">{screen(() => import('@/features/health/HealthScreen'), 'HealthScreen')}</Gate> },
       { path: 'peakweek', element: <Gate feature="peakWeek">{screen(() => import('@/features/health/PeakWeekScreen'), 'PeakWeekScreen')}</Gate> },
+      { path: 'sportmodul', element: <Gate feature="sportModule">{screen(() => import('@/features/sport/SportModuleScreen'), 'SportModuleScreen')}</Gate> },
       // Die Trainerseite der Gesundheitsschicht. KEINE Bezahlschranke: Der
       // Trainer liest hier nur, was ein Athlet ihm ausdrücklich freigegeben
       // hat. Eine Schranke davor hiesse, dass der Athlet eine Freigabe

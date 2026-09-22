@@ -417,7 +417,9 @@
     "strokes_per_100m": "Tag pr. 100 m",
     "grip_score": "Grebsscore",
     "fight_endurance_score": "Kampudholdenhed",
-    "run_economy_score": "Løbeøkonomi (tilnærmelse)"
+    "run_economy_score": "Løbeøkonomi (tilnærmelse)",
+    "css_speed_m_s": "Kritisk svømmehastighed",
+    "css_pace_s_100m": "CSS-tempo pr. 100 m"
   },
   "categoriesShort": {
     "endurance": "Udholdenhed",
@@ -1782,5 +1784,24 @@
     "refresh": "Tjek status",
     "stripeNote": "Betalingen foregår hos Stripe; KYDON ser aldrig kortoplysninger. Abonnementer kan opsiges når som helst og løber til udgangen af den betalte periode.",
     "current": "nuværende"
+  },
+  "sportModule": {
+    "eyebrow": "Sportmodul",
+    "title": "Tallene i din sport",
+    "intro": "De nøgletal, din sport hænger på — ét sted i stedet for spredt over ni testkort.",
+    "scope": "Regningen skete ved testen. Her står kun, hvilke tal der hører til denne sport, og hvordan de har ændret sig. Om en ændring overstiger måleusikkerheden, siger forløbet; om et tal er godt, siger denne app ikke.",
+    "figures": "Nøgletal",
+    "coverage": "{{measured}} af {{total}} målt",
+    "notMeasured": "Endnu ikke målt",
+    "measureIt": "Mål",
+    "sincePrevious": "siden {{date}}",
+    "noCategory": "Ingen sport i profilen",
+    "noCategoryBody": "Et sportmodul har brug for en sport. Skriv den i profilen, så står dine tal her.",
+    "criticalSpeed": "Kritisk hastighed",
+    "criticalSpeedSub": "Ud fra to maksimale løb af forskellig varighed.",
+    "criticalSpeedPace": "{{pace}} pr. km",
+    "reserve": "Distancereserve {{meters}} m",
+    "fromTwoRuns": "Ud fra {{first}} og {{second}}.",
+    "toHistory": "Om en ændring overstiger måleusikkerheden, ses i den enkelte tests forløb."
   }
 }

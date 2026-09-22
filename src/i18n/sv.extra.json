@@ -329,7 +329,8 @@
       "decisionLog": "Beslutslogg med effektkontroll",
       "cockpit": "Cockpit med signaler och justerbara trösklar",
       "health": "Hälsodel: labbförlopp, symtom, cykel, medicinering (art. 9)",
-      "peakWeek": "Peak Week som logg"
+      "peakWeek": "Peak Week som logg",
+      "sportModule": "Nyckeltalen i din egen sport på ett ställe"
     }
   },
   "legal": {

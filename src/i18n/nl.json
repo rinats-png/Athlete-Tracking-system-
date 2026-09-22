@@ -417,7 +417,9 @@
     "strokes_per_100m": "Slagen per 100 m",
     "grip_score": "Gripscore",
     "fight_endurance_score": "Wedstrijduithoudingsvermogen",
-    "run_economy_score": "Loopeconomie (benadering)"
+    "run_economy_score": "Loopeconomie (benadering)",
+    "css_speed_m_s": "Kritische zwemsnelheid",
+    "css_pace_s_100m": "CSS-tempo per 100 m"
   },
   "categoriesShort": {
     "endurance": "Uithouding",
@@ -1782,5 +1784,24 @@
     "refresh": "Status controleren",
     "stripeNote": "De betaling loopt via Stripe; KYDON ziet nooit kaartgegevens. Abonnementen zijn altijd opzegbaar en lopen tot het einde van de betaalde periode.",
     "current": "huidig"
+  },
+  "sportModule": {
+    "eyebrow": "Sportmodule",
+    "title": "De cijfers van jouw sport",
+    "intro": "De kerncijfers waar jouw sport aan hangt — op één plek in plaats van verspreid over negen testkaarten.",
+    "scope": "Het rekenwerk gebeurde bij de test. Hier staat alleen welke cijfers bij deze sport horen en hoe ze zijn veranderd. Of een verandering boven de meetfout uitkomt, zegt het verloop; of een cijfer goed is, zegt deze app niet.",
+    "figures": "Kerncijfers",
+    "coverage": "{{measured}} van {{total}} gemeten",
+    "notMeasured": "Nog niet gemeten",
+    "measureIt": "Meten",
+    "sincePrevious": "sinds {{date}}",
+    "noCategory": "Geen sport in het profiel",
+    "noCategoryBody": "Een sportmodule heeft een sport nodig. Vul die in het profiel in, dan staan je cijfers hier.",
+    "criticalSpeed": "Kritische snelheid",
+    "criticalSpeedSub": "Uit twee maximale runs van verschillende duur.",
+    "criticalSpeedPace": "{{pace}} per km",
+    "reserve": "Afstandsreserve {{meters}} m",
+    "fromTwoRuns": "Uit {{first}} en {{second}}.",
+    "toHistory": "Of een verandering boven de meetfout uitkomt, zie je in het verloop van de losse test."
   }
 }

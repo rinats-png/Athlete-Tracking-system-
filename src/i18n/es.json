@@ -417,7 +417,9 @@
     "strokes_per_100m": "Brazadas por 100 m",
     "grip_score": "Puntuación de prensión",
     "fight_endurance_score": "Resistencia de combate",
-    "run_economy_score": "Economía de carrera (aproximación)"
+    "run_economy_score": "Economía de carrera (aproximación)",
+    "css_speed_m_s": "Velocidad crítica de nado",
+    "css_pace_s_100m": "Ritmo CSS por 100 m"
   },
   "categoriesShort": {
     "endurance": "Resistencia",
@@ -1782,5 +1784,24 @@
     "refresh": "Comprobar estado",
     "stripeNote": "El pago se realiza en Stripe; KYDON nunca ve los datos de la tarjeta. Las suscripciones se pueden cancelar en cualquier momento y duran hasta el final del periodo pagado.",
     "current": "actual"
+  },
+  "sportModule": {
+    "eyebrow": "Módulo de deporte",
+    "title": "Las cifras de tu deporte",
+    "intro": "Los indicadores de los que depende tu deporte, en un solo sitio en vez de repartidos por nueve fichas de test.",
+    "scope": "El cálculo ocurrió en el test. Aquí solo está qué cifras pertenecen a este deporte y cómo han cambiado. Si un cambio supera el error de medición lo dice el historial; si una cifra es buena, esta app no lo dice.",
+    "figures": "Indicadores",
+    "coverage": "{{measured}} de {{total}} medidos",
+    "notMeasured": "Todavía sin medir",
+    "measureIt": "Medir",
+    "sincePrevious": "desde el {{date}}",
+    "noCategory": "Sin deporte en el perfil",
+    "noCategoryBody": "Un módulo de deporte necesita un deporte. Anótalo en el perfil y aquí aparecerán tus cifras.",
+    "criticalSpeed": "Velocidad crítica",
+    "criticalSpeedSub": "A partir de dos carreras máximas de distinta duración.",
+    "criticalSpeedPace": "{{pace}} por km",
+    "reserve": "Reserva de distancia {{meters}} m",
+    "fromTwoRuns": "A partir de {{first}} y {{second}}.",
+    "toHistory": "Si un cambio supera el error de medición se ve en el historial de cada test."
   }
 }

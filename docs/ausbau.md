@@ -817,7 +817,21 @@ Schlüsselumschlag ist seit 22.09.2026 gebaut:** Schlüsselpaar je Konto,
 Abschrift je Kategorie, Entzug durch Löschen, Trainerseite unter
 `/freigaben`. Dabei fiel auf, dass `coach_athlete_links.athlete_id` auf eine
 Athletenzeile zeigt und nicht auf ein Konto — die Regel brauchte die Brücke
-über `athletes.user_id`. **Neu offen:** die Sportmodule.
+über `athletes.user_id`. **Die Sportmodule sind seit 22.09.2026 gebaut:**
+elf Module, eines je Kategorie, unter `/sportmodul` hinter der Stufe Elite.
+Ein Modul ist eine Auswahl und eine Reihenfolge, keine neue Rechnung — die
+Kennzahlen entstehen weiterhin am Test. Die einzige Ausnahme ist die
+kritische Geschwindigkeit beim Laufen: Sie braucht zwei Tests und kann
+deshalb in keiner Testdefinition stehen; sie trägt ihre Quelle mit (Monod &
+Scherrer 1965). Ein Bautest verlangt, dass jede Kennzahl eines Moduls von
+jedem genannten Test auch wirklich gebildet wird — er fand dabei, dass
+`run_2_mile` das Tempo unter `avg_pace_s_km` ablegte und alle anderen unter
+`avg_pace_s_per_km`; jeder Tempoverlauf riss an diesem Test ab. Behoben.
+
+**Offen bleibt damit nur, was ohne Netzzugang oder ohne Anwalt nicht geht:**
+die Kuratierung des USDA-Kerns, der Zwei-Geräte-Abgleich und der Testkauf am
+lebenden System, die Anwaltsgespräche aus der Rechtsprüfung — und die
+Protokollereignisse der Gesundheitsschicht (wer wann was freigegeben hat).
 
 ## 14. Zusammenfassung in drei Sätzen
 

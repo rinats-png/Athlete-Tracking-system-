@@ -151,6 +151,7 @@ export type PlanFeature =
   // --- Elite -----------------------------------------------------------------
   | 'health' // Gesundheitsschicht: Laborverlauf, Symptome, Zyklus, Medikation (Art. 9)
   | 'peakWeek' // Peak Week als Protokoll
+  | 'sportModule' // Die Kennzahlen der eigenen Sportart an einer Stelle
   // --- Termin ----------------------------------------------------------------
   | 'targetStandards' // Zielwerte des konkreten Einstellungstests
   | 'reportPdf' // Druckfertiger Report
@@ -283,7 +284,7 @@ export const ATHLETE_PLANS: readonly AthletePlan[] = [
     onceEur: null,
     athletes: 3,
     name: { de: 'Kydon Elite', en: 'Kydon Elite' },
-    features: [...PRO_FEATURES, 'health', 'peakWeek'],
+    features: [...PRO_FEATURES, 'health', 'peakWeek', 'sportModule'],
     product: 'athlete_elite',
   },
   {

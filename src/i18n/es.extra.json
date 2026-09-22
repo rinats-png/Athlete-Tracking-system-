@@ -329,7 +329,8 @@
       "decisionLog": "Registro de decisiones con comprobación del efecto",
       "cockpit": "Cockpit con señales y umbrales ajustables",
       "health": "Capa de salud: historial de laboratorio, síntomas, ciclo, medicación (art. 9)",
-      "peakWeek": "Peak Week como registro"
+      "peakWeek": "Peak Week como registro",
+      "sportModule": "Las cifras de tu deporte en un solo sitio"
     }
   },
   "legal": {

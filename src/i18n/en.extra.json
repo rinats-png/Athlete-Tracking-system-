@@ -329,7 +329,8 @@
       "decisionLog": "Decision log with effect check",
       "cockpit": "Cockpit with signals and adjustable thresholds",
       "health": "Health layer: laboratory record, symptoms, cycle, medication (Art. 9)",
-      "peakWeek": "Peak week as a log"
+      "peakWeek": "Peak week as a log",
+      "sportModule": "The figures of your own sport in one place"
     }
   },
   "legal": {

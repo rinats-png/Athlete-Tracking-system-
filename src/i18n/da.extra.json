@@ -329,7 +329,8 @@
       "decisionLog": "Beslutningslog med effekttjek",
       "cockpit": "Cockpit med signaler og justerbare tærskler",
       "health": "Helbredslag: laboratorieforløb, symptomer, cyklus, medicinering (art. 9)",
-      "peakWeek": "Peak Week som log"
+      "peakWeek": "Peak Week som log",
+      "sportModule": "Nøgletallene i din egen sport ét sted"
     }
   },
   "legal": {
