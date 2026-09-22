@@ -808,9 +808,12 @@ wären genau der Fehler, den §89 verbietet.
 Menschen mit Netzzugang, ein echter Zwei-Geräte-Abgleich und ein echter
 Testkauf am lebenden System — und die Anwaltsgespräche aus der
 Rechtsprüfung, die vor dem öffentlichen Betrieb von S5 geführt sein
-müssen. **Neu offen:** Fotos (jetzt technisch möglich, noch nicht gebaut),
-Trainerfreigabe je Kategorie über einen Schlüsselumschlag, die
-Sportmodule.
+müssen. **Fotos sind seit 22.09.2026 gebaut:** sechste Einwilligungs-
+kategorie, Aufnahme auf 900 px und 160.000 Zeichen normiert, Vergleich nur
+innerhalb einer Pose, Zweitschrift nur verschlüsselt. Dabei fiel auf, dass
+`entry_id` die Kategorie im Klartext trug — das ist behoben, die Kennung ist
+jetzt der HMAC der lokalen Kennung. **Neu offen:** Trainerfreigabe je
+Kategorie über einen Schlüsselumschlag, die Sportmodule.
 
 ## 14. Zusammenfassung in drei Sätzen
 

@@ -29,6 +29,7 @@ import {
   type ValidatedCycleEntry,
   type ValidatedSelfImageEntry,
   type ValidatedMedEntry,
+  ValidatedPhotoEntry,
   type ValidatedPeakWeek,
   type ValidatedPeakDay,
   type ValidatedData,
@@ -84,6 +85,7 @@ export type StoredSymptomEntry = ValidatedSymptomEntry
 export type StoredCycleEntry = ValidatedCycleEntry
 export type StoredSelfImageEntry = ValidatedSelfImageEntry
 export type StoredMedEntry = ValidatedMedEntry
+export type StoredPhotoEntry = ValidatedPhotoEntry
 export type StoredPeakWeek = ValidatedPeakWeek
 export type StoredPeakDay = ValidatedPeakDay
 

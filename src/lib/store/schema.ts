@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 25
+export const CURRENT_SCHEMA_VERSION = 26
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -722,7 +722,7 @@ const diaryFieldSchema = z.enum(DIARY_OPTIONAL_FIELDS)
 //      speichern und darstellen ja, erkennen und einstufen nein.
 
 /** Die Kategorien, fuer die einzeln eingewilligt wird. */
-export const HEALTH_CATEGORIES = ['lab', 'symptoms', 'cycle', 'selfImage', 'meds'] as const
+export const HEALTH_CATEGORIES = ['lab', 'symptoms', 'cycle', 'selfImage', 'meds', 'photos'] as const
 export type HealthCategory = (typeof HEALTH_CATEGORIES)[number]
 
 /**
@@ -848,6 +848,53 @@ const medEntrySchema = z.object({
   updatedAt: isoDate,
 })
 
+/**
+ * Posen eines Vergleichsfotos. Eine Liste von NAMEN, damit zwei Fotos
+ * ueberhaupt vergleichbar sind — dieselbe Pose, derselbe Abstand, dasselbe
+ * Licht. Keine Pose bedeutet etwas, keine wird bewertet.
+ */
+export const PHOTO_POSES = ['frontRelaxed', 'frontPose', 'backPose', 'sidePose', 'other'] as const
+export type PhotoPose = (typeof PHOTO_POSES)[number]
+
+/**
+ * Obergrenze fuer ein Gesundheitsfoto — kleiner als {@link MAX_PHOTO_CHARS}
+ * beim Belegbild, und zwar aus einem Grund, der nichts mit dem Geraet zu tun
+ * hat: Diese Bilder gehen VERSCHLUESSELT auf den Server, und `health_entries`
+ * laesst 256 KB je Zeile zu. Ein Chiffrat ist in Base64 rund ein Drittel
+ * groesser als sein Klartext, also muss der Klartext deutlich darunter
+ * bleiben. 160 000 Zeichen Data-URL sind rund 120 KB Bild und werden
+ * verschluesselt zu rund 213 KB.
+ */
+export const MAX_HEALTH_PHOTO_CHARS = 160_000
+
+/**
+ * Ein Vergleichsfoto.
+ *
+ * DAS EMPFINDLICHSTE, was diese App speichert. Ein Koerperfoto ist ein
+ * Gesundheitsdatum nach Art. 9 (Koerperbild) und faellt zugleich in die Naehe
+ * der Essstoerungsdiagnostik. Deshalb gelten hier drei Regeln, die sonst
+ * nirgends gelten:
+ *
+ *   1. NIE UNVERSCHLUESSELT. Auf dem Server liegt nur ein Chiffrat, das mit
+ *      der Phrase des Nutzers geoeffnet wird (docs/rechtspruefung-art9-mdr.md
+ *      §6). Ohne Zweitschrift bleibt das Bild auf dem Geraet.
+ *   2. KEINE ERKENNUNG. Die App vermisst nichts, vergleicht nichts und
+ *      schaetzt keinen Koerperfettanteil. Sie legt zwei Bilder nebeneinander
+ *      und sagt kein Wort dazu (§81, §82).
+ *   3. KEIN GESICHT NOETIG. Der Hinweis im Bildschirm sagt es; die App
+ *      erkennt keine Gesichter und erzeugt keine biometrischen Merkmale —
+ *      damit bleibt es ausserhalb der biometrischen Identifizierung.
+ */
+const photoEntrySchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  pose: z.enum(PHOTO_POSES).default('frontRelaxed'),
+  dataUrl: z.string().min(1).max(MAX_HEALTH_PHOTO_CHARS),
+  note: z.string().max(400).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
 const healthSchema = z.object({
   consents: z.array(healthConsentSchema).max(HEALTH_CATEGORIES.length).default([]),
   labs: z.array(labEntrySchema).default([]),
@@ -855,6 +902,7 @@ const healthSchema = z.object({
   cycle: z.array(cycleEntrySchema).default([]),
   selfImage: z.array(selfImageEntrySchema).default([]),
   meds: z.array(medEntrySchema).default([]),
+  photos: z.array(photoEntrySchema).max(400).default([]),
   /**
    * Geschaetzter Trainingsumsatz je Tag in kcal — eine Selbstauskunft wie
    * PAL bei der Ernaehrung, keine Messung. Ohne sie gibt es keine
@@ -1006,6 +1054,7 @@ export type ValidatedSymptomEntry = z.infer<typeof symptomEntrySchema>
 export type ValidatedCycleEntry = z.infer<typeof cycleEntrySchema>
 export type ValidatedSelfImageEntry = z.infer<typeof selfImageEntrySchema>
 export type ValidatedMedEntry = z.infer<typeof medEntrySchema>
+export type ValidatedPhotoEntry = z.infer<typeof photoEntrySchema>
 export type ValidatedPeakWeek = z.infer<typeof peakWeekSchema>
 export type ValidatedPeakDay = z.infer<typeof peakDaySchema>
 export type ValidatedWorkoutExercise = z.infer<typeof workoutExerciseSchema>
@@ -1427,7 +1476,7 @@ export const MIGRATIONS: Migration[] = [
       version: 24,
       athletes: (data.athletes ?? []).map((athlete: any) => ({
         ...athlete,
-        health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null },
+        health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null },
         peakWeeks: [],
       })),
     }),
@@ -1442,6 +1491,19 @@ export const MIGRATIONS: Migration[] = [
       athletes: (data.athletes ?? []).map((athlete: any) => ({
         ...athlete,
         health: { ...athlete.health, updatedAt: null },
+      })),
+    }),
+  },
+  {
+    from: 25,
+    to: 26,
+    describe: 'Vergleichsfotos als sechste Kategorie der Gesundheitsschicht',
+    run: (data: any) => ({
+      ...data,
+      version: 26,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        health: { ...athlete.health, photos: [] },
       })),
     }),
   },
@@ -1490,7 +1552,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
     meals: [],
     nutrition: { pal: 1.55 },
-    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null },
+    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null },
     peakWeeks: [],
     archived: false,
     notes: '',

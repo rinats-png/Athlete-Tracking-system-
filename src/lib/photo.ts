@@ -1,4 +1,4 @@
-import { MAX_PHOTO_CHARS } from '@/lib/store/schema'
+import { MAX_HEALTH_PHOTO_CHARS, MAX_PHOTO_CHARS } from '@/lib/store/schema'
 
 /**
  * Ein Belegbild aufnehmefertig machen.
@@ -44,13 +44,31 @@ function loadImage(file: File): Promise<HTMLImageElement | null> {
   })
 }
 
-export async function preparePhoto(file: File): Promise<PhotoOutcome> {
+export interface PhotoLimits {
+  /** Längste Kante nach dem Verkleinern. */
+  maxEdge: number
+  /** Obergrenze der Data-URL in Zeichen. */
+  maxChars: number
+}
+
+/** Belegbild am Ergebnis: bleibt auf dem Gerät, darf grösser sein. */
+export const RESULT_LIMITS: PhotoLimits = { maxEdge: MAX_EDGE, maxChars: MAX_PHOTO_CHARS }
+
+/**
+ * Vergleichsfoto der Gesundheitsschicht: kleiner, weil es verschlüsselt auf
+ * den Server geht und `health_entries` 256 KB je Zeile zulässt. Die längste
+ * Kante von 900 px reicht, um eine Veränderung zu sehen — mehr Pixel machen
+ * das Bild nicht ehrlicher, nur schwerer.
+ */
+export const HEALTH_LIMITS: PhotoLimits = { maxEdge: 900, maxChars: MAX_HEALTH_PHOTO_CHARS }
+
+export async function preparePhoto(file: File, limits: PhotoLimits = RESULT_LIMITS): Promise<PhotoOutcome> {
   if (!file.type.startsWith('image/')) return { dataUrl: null, error: 'not_an_image' }
 
   const image = await loadImage(file)
   if (!image || image.naturalWidth === 0) return { dataUrl: null, error: 'unreadable' }
 
-  const scale = Math.min(1, MAX_EDGE / Math.max(image.naturalWidth, image.naturalHeight))
+  const scale = Math.min(1, limits.maxEdge / Math.max(image.naturalWidth, image.naturalHeight))
   const canvas = document.createElement('canvas')
   canvas.width = Math.max(1, Math.round(image.naturalWidth * scale))
   canvas.height = Math.max(1, Math.round(image.naturalHeight * scale))
@@ -60,7 +78,7 @@ export async function preparePhoto(file: File): Promise<PhotoOutcome> {
 
   for (const quality of QUALITIES) {
     const dataUrl = canvas.toDataURL('image/jpeg', quality)
-    if (dataUrl.length <= MAX_PHOTO_CHARS) return { dataUrl, error: null }
+    if (dataUrl.length <= limits.maxChars) return { dataUrl, error: null }
   }
   return { dataUrl: null, error: 'too_large' }
 }

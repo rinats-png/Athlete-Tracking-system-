@@ -1,6 +1,6 @@
 import { getSupabase, isSupabaseConfigured } from './client'
 import { getHealthKey, putHealthKey } from '@/lib/store/backup'
-import { checkVerifier, decryptJson, deriveKey, encryptJson, makeVerifier, newSalt } from '@/lib/health/crypto'
+import { checkVerifier, decryptJson, deriveKey, encryptJson, makeVerifier, newSalt, opaqueId, type HealthKeys } from '@/lib/health/crypto'
 import { healthRecords, mergeHealth, planHealthPush, type IncomingHealth, type RemoteHealthRow } from '@/lib/health/sync'
 import type { StoredData } from '@/lib/store/localStore'
 
@@ -11,6 +11,14 @@ import type { StoredData } from '@/lib/store/localStore'
  * schreiben, Grabsteine setzen. Der Unterschied steckt in zwei Zeilen: vor
  * dem Schreiben wird verschlüsselt, nach dem Holen entschlüsselt. Was der
  * Server sieht, ist eine Kennung, ein Zeitstempel und ein Block Chiffrat.
+ *
+ * DIE KENNUNG IST STUMM. Lokal heisst ein Datensatz `photo:3f2a…`; auf dem
+ * Server steht dort der HMAC davon. Sonst verriete schon die Tabelle, dass
+ * jemand Körperfotos oder Zyklusdaten führt — selbst ein Datum nach Art. 9.
+ * Weil ein HMAC nicht umkehrbar ist, reist die lokale Kennung IM Chiffrat
+ * mit: verschlüsselt wird `{ e: Kennung, d: Datensatz }`. Auch ein Grabstein
+ * behält deshalb seine Nutzlast — ohne sie wüsste kein zweites Gerät, was
+ * gelöscht wurde.
  *
  * OHNE SCHLÜSSEL PASSIERT NICHTS. Kein Teilabgleich, kein «wir schieben schon
  * mal die Metadaten hoch». Wer die Phrase nicht eingegeben hat, gleicht
@@ -26,7 +34,7 @@ export type KeyState =
   | { state: 'none' }
   /** Auf dem Server liegt ein Salz, auf diesem Gerät kein Schlüssel. */
   | { state: 'locked'; salt: string }
-  | { state: 'unlocked'; key: CryptoKey; userId: string }
+  | { state: 'unlocked'; key: HealthKeys; userId: string }
 
 interface Account {
   id: string
@@ -59,7 +67,7 @@ export async function keyState(): Promise<KeyState> {
   return { state: 'locked', salt: acc.salt }
 }
 
-export type KeyOutcome = { ok: true; key: CryptoKey } | { ok: false; reason: 'unavailable' | 'not_signed_in' | 'wrong_phrase' | 'exists' | 'failed' }
+export type KeyOutcome = { ok: true; key: HealthKeys } | { ok: false; reason: 'unavailable' | 'not_signed_in' | 'wrong_phrase' | 'exists' | 'failed' }
 
 /**
  * Einen Schlüssel anlegen: Salz erzeugen, ableiten, Probe schreiben.
@@ -189,7 +197,7 @@ function deviceId(): string {
  * einen Befund eingetragen hat, soll ihn sehen, bevor sein eigener Stand
  * hochgeht.
  */
-export async function syncHealthOnce(store: StoredData, key: CryptoKey, onMerge: (athleteId: string, incoming: IncomingHealth[]) => number): Promise<HealthSyncReport> {
+export async function syncHealthOnce(store: StoredData, key: HealthKeys, onMerge: (athleteId: string, incoming: IncomingHealth[]) => number): Promise<HealthSyncReport> {
   if (!isSupabaseConfigured()) return fail('unavailable')
   const supabase = await getSupabase()
   if (!supabase) return fail('unavailable')
@@ -213,14 +221,9 @@ export async function syncHealthOnce(store: StoredData, key: CryptoKey, onMerge:
   // --- 2. Entschlüsseln und einarbeiten ------------------------------------
   const byAthlete = new Map<string, IncomingHealth[]>()
   for (const row of remote.filter((r) => r.device_id !== device)) {
-    if (row.deleted_at) {
-      const list = byAthlete.get(row.athlete_id) ?? []
-      list.push({ entryId: row.entry_id, deleted: true, data: null })
-      byAthlete.set(row.athlete_id, list)
-      continue
-    }
     const plain = await decryptJson(key, row.payload)
-    if (plain == null) {
+    const envelope = plain as { e?: unknown; d?: unknown } | null
+    if (!envelope || typeof envelope.e !== 'string') {
       // Ein fremder Schlüssel oder ein beschädigter Block. Nicht abbrechen:
       // die übrigen Zeilen sind davon unberührt, und der Bildschirm nennt
       // die Zahl, statt sie zu verschweigen.
@@ -228,7 +231,7 @@ export async function syncHealthOnce(store: StoredData, key: CryptoKey, onMerge:
       continue
     }
     const list = byAthlete.get(row.athlete_id) ?? []
-    list.push({ entryId: row.entry_id, deleted: false, data: plain })
+    list.push({ entryId: envelope.e, deleted: Boolean(row.deleted_at), data: row.deleted_at ? null : envelope.d })
     byAthlete.set(row.athlete_id, list)
   }
   for (const [athleteId, incoming] of byAthlete) pulled += onMerge(athleteId, incoming)
@@ -236,13 +239,19 @@ export async function syncHealthOnce(store: StoredData, key: CryptoKey, onMerge:
   // --- 3. Schreiben ---------------------------------------------------------
   for (const athlete of store.athletes) {
     const merged = mergeHealth(athlete, byAthlete.get(athlete.id) ?? []).athlete
-    const plan = planHealthPush(healthRecords(merged), remote, athlete.id, since)
+    const records = []
+    for (const record of healthRecords(merged)) {
+      const remoteId = await opaqueId(key, record.entryId)
+      if (!remoteId) return { ok: false, pushed, pulled, unreadable, reason: 'failed' }
+      records.push({ ...record, remoteId })
+    }
+    const plan = planHealthPush(records, remote, athlete.id, since)
 
     const batch: { owner_id: string; athlete_id: string; entry_id: string; payload: string; device_id: string; deleted_at: null }[] = []
     for (const record of plan.upserts) {
-      const payload = await encryptJson(key, record.data)
+      const payload = await encryptJson(key, { e: record.entryId, d: record.data })
       if (!payload) return { ok: false, pushed, pulled, unreadable, reason: 'failed' }
-      batch.push({ owner_id: uid, athlete_id: athlete.id, entry_id: record.entryId, payload, device_id: device, deleted_at: null })
+      batch.push({ owner_id: uid, athlete_id: athlete.id, entry_id: record.remoteId ?? record.entryId, payload, device_id: device, deleted_at: null })
     }
     for (let i = 0; i < batch.length; i += 100) {
       const { error: upsertError } = await supabase.from('health_entries').upsert(batch.slice(i, i + 100), { onConflict: 'owner_id,athlete_id,entry_id' })

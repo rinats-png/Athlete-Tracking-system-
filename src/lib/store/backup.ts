@@ -1,3 +1,4 @@
+import type { HealthKeys } from '@/lib/health/crypto'
 import { parseStoredData, type LoadReport } from './schema'
 import type { StoredData } from './localStore'
 
@@ -203,7 +204,7 @@ export async function recoverFromBackup(): Promise<Recovery | null> {
 // Daten trotzdem sehen — dagegen hilft nur die Geraetesperre. Geschuetzt ist
 // der Weg ueber den Server: dort liegt nur Chiffrat.
 
-export async function putHealthKey(userId: string, key: CryptoKey): Promise<boolean> {
+export async function putHealthKey(userId: string, key: HealthKeys): Promise<boolean> {
   const db = await openDb()
   if (!db) return false
   try {
@@ -221,14 +222,14 @@ export async function putHealthKey(userId: string, key: CryptoKey): Promise<bool
   }
 }
 
-export async function getHealthKey(userId: string): Promise<CryptoKey | null> {
+export async function getHealthKey(userId: string): Promise<HealthKeys | null> {
   const db = await openDb()
   if (!db) return null
   try {
-    return await new Promise<CryptoKey | null>((resolve) => {
+    return await new Promise<HealthKeys | null>((resolve) => {
       try {
         const request = db.transaction(KEY_STORE, 'readonly').objectStore(KEY_STORE).get(userId)
-        request.onsuccess = () => resolve((request.result as CryptoKey | undefined) ?? null)
+        request.onsuccess = () => resolve((request.result as HealthKeys | undefined) ?? null)
         request.onerror = () => resolve(null)
       } catch {
         resolve(null)

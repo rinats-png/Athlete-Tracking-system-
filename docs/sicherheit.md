@@ -625,15 +625,30 @@ DSGVO. Für dieses Dokument die drei Punkte, die zählen:
   Schlüssel entsteht auf dem Gerät und geht nie zum Server; dort liegen nur
   ein Salz und eine Probe, beide ohne die Phrase nutzlos.
 - **Die Tabelle trägt keine Semantik.** Kein `kind`, kein `day`, kein Wert —
-  anders als `athlete_series`. Dass jemand überhaupt Zyklusdaten führt, ist
-  selbst eine Information und bleibt im Chiffrat. Sichtbar sind Eigentümer,
-  Athlet, eine undurchsichtige Kennung und ein Zeitstempel.
+  anders als `athlete_series`. Dass jemand überhaupt Zyklusdaten oder
+  Körperfotos führt, ist selbst eine Information und bleibt im Chiffrat.
+  Sichtbar sind Eigentümer, Athlet, eine undurchsichtige Kennung und ein
+  Zeitstempel. Seit 22.09.2026 ist die Kennung wirklich undurchsichtig: Sie
+  stand bis dahin als `lab:…`, `cycle:…` im Klartext in `entry_id` und
+  verriet damit genau die Kategorie, die das Chiffrat schützen sollte. Jetzt
+  steht dort der HMAC-SHA256 der lokalen Kennung unter einem zweiten
+  Schlüssel aus derselben Phrase (ein PBKDF2-Durchlauf, 64 Byte, geteilt in
+  Chiffrier- und Kennungsschlüssel); die lokale Kennung reist im Chiffrat
+  mit. Die Zeilen im alten Format wurden gelöscht
+  (`20260922140000_health_opaque_entry_ids.sql`, zu dem Zeitpunkt null
+  Zeilen); die Geräte schreiben sie im neuen Format neu.
 - **Kein Trainerzugriff**, auch nicht über `can_view_athlete`. Eine Freigabe
   je Kategorie bräuchte einen Umschlag mit dem Schlüssel des Trainers; der
   ist nicht gebaut, und bis dahin gibt es keinen Weg.
-- **Einwilligung je Kategorie, Widerruf löscht.** Fünf Kategorien, jede
+- **Einwilligung je Kategorie, Widerruf löscht.** Sechs Kategorien, jede
   mit Zeitpunkt und Textfassung. Der Widerruf entfernt die Einträge der
   Kategorie sofort aus dem Bestand; der Vermerk bleibt als Nachweis.
+- **Vergleichsfotos (seit 22.09.2026).** Die sechste Kategorie und die
+  empfindlichste: eigene Einwilligung, längste Kante 900 px, höchstens
+  160.000 Zeichen Data-URL — kleiner als beim Belegbild, damit das Chiffrat
+  unter der Zeilengrenze von 256 KB bleibt. Die App vermisst nichts und
+  vergleicht nichts; sie legt zwei Bilder derselben Pose nebeneinander. Kein
+  Gesicht nötig, keine Gesichtserkennung, keine biometrischen Merkmale.
 - **Ab achtzehn.** Ohne Geburtsdatum im Profil bleibt der Bereich zu.
 
 Restrisiken, offen benannt:

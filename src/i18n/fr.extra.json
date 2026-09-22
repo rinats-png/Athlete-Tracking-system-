@@ -1030,21 +1030,23 @@
       "withdraw": "Retirer",
       "confirm": "Cela supprime définitivement {{count}} entrées de cette catégorie. Un export préalable est ta seule copie.",
       "confirmYes": "Retirer et supprimer",
-      "local": "Ces données restent sur ton appareil. La synchronisation ne les emporte pas — il faudrait pour cela un chiffrement de bout en bout, et il n'est pas en place. Ton export les contient intégralement."
+      "local": "Ces données restent sur ton appareil. Elles ne rejoignent la copie de sécurité que chiffrées de bout en bout avec ta phrase — sans la phrase, rien ne quitte cet appareil. Ton export les contient intégralement."
     },
     "categories": {
       "lab": "Valeurs de laboratoire",
       "symptoms": "Symptômes et blessures",
       "cycle": "Cycle",
       "selfImage": "Image du corps et libido",
-      "meds": "Compléments et médicaments"
+      "meds": "Compléments et médicaments",
+      "photos": "Photos de comparaison"
     },
     "consentText": {
       "lab": "Les valeurs de ton compte rendu avec l'intervalle de référence du laboratoire et les circonstances de la mesure.",
       "symptoms": "Les troubles en auto-déclaration de 0 à 3, dans le temps.",
       "cycle": "La phase en auto-déclaration. Aucune prévision, aucune fenêtre de fertilité.",
       "selfImage": "Deux échelles pour l'image du corps et la libido. Enregistrées, jamais évaluées.",
-      "meds": "Une liste de ce que tu prends, avec la dose dans tes propres mots."
+      "meds": "Une liste de ce que tu prends, avec la dose dans tes propres mots.",
+      "photos": "Des photos de ton corps que tu prends toi-même. Stockées chiffrées, jamais interprétées."
     },
     "lab": {
       "title": "Valeurs de laboratoire",
@@ -1230,6 +1232,35 @@
       "dropConfirm": "La seconde copie chiffrée est entièrement retirée du serveur, avec le sel et la valeur de contrôle. Tes données sur cet appareil restent intactes.",
       "dropYes": "Supprimer du serveur",
       "failed": "Cela n'a pas fonctionné. Réessaie."
+    },
+    "poses": {
+      "frontRelaxed": "Face, détendu",
+      "frontPose": "Face, posé",
+      "backPose": "Dos, posé",
+      "sidePose": "Profil, posé",
+      "other": "Autre"
+    },
+    "photos": {
+      "title": "Photos de comparaison",
+      "subtitle": "Même pose, deux jours.",
+      "add": "Photo",
+      "empty": "Aucune photo pour l’instant.",
+      "pose": "Pose",
+      "choose": "Choisir une photo",
+      "working": "Réduction …",
+      "preview": "Photo choisie",
+      "remove": "Retirer",
+      "compare": "Deux jours côte à côte",
+      "left": "Gauche",
+      "right": "Droite",
+      "alt": "{{pose}}, {{date}}",
+      "safety": "L’app ne mesure rien et ne compare rien. Elle place deux images côte à côte et n’en dit pas un mot — pas de taux de masse grasse, pas de progression en pourcentage. Ce que tu vois, tu l’interprètes toi-même.",
+      "method": "Pour que deux photos soient comparables : même distance, même lumière, même pose, même heure. Ton visage n’a pas besoin d’être dans le cadre. Les photos ne rejoignent la copie de sécurité que chiffrées ; sans la phrase, elles restent sur cet appareil.",
+      "error": {
+        "not_an_image": "Ce n’est pas un fichier image.",
+        "unreadable": "L’image n’a pas pu être lue.",
+        "too_large": "L’image reste trop volumineuse même réduite. Choisis-en une plus petite."
+      }
     }
   },
   "peak": {

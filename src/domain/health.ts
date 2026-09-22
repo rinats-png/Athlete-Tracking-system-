@@ -1,6 +1,6 @@
-import { HEALTH_CATEGORIES, HEALTH_CONSENT_VERSION, HEALTH_MIN_AGE, type HealthCategory } from '@/lib/store/schema'
+import { HEALTH_CATEGORIES, HEALTH_CONSENT_VERSION, HEALTH_MIN_AGE, PHOTO_POSES, type HealthCategory } from '@/lib/store/schema'
 import { ageFromBirthDate } from '@/lib/format'
-import type { StoredHealth, StoredLabEntry, StoredPeakWeek, StoredSymptomEntry } from '@/lib/store/localStore'
+import type { StoredHealth, StoredLabEntry, StoredPeakWeek, StoredPhotoEntry, StoredSymptomEntry } from '@/lib/store/localStore'
 
 /**
  * Die Gesundheitsschicht (S5) — die Rechnung dahinter.
@@ -58,6 +58,7 @@ const LIST_OF: Record<HealthCategory, keyof StoredHealth> = {
   cycle: 'cycle',
   selfImage: 'selfImage',
   meds: 'meds',
+  photos: 'photos',
 }
 
 /**
@@ -217,4 +218,20 @@ export function peakSummary(week: StoredPeakWeek, today = new Date().toISOString
 /** Die Tage eines Abschnitts, älteste zuerst. */
 export function daysOfStage(week: StoredPeakWeek, stage: string) {
   return week.days.filter((d) => d.stage === stage).sort((a, b) => a.day.localeCompare(b.day))
+}
+
+/**
+ * Die Fotos eines Tages, in der Reihenfolge der Posen.
+ *
+ * Sortiert wird beim LESEN, nie beim Schreiben — und nach der Pose, damit
+ * zwei Tage nebeneinander dieselbe Reihenfolge zeigen. Sonst verglichen man
+ * Vorderansicht mit Rückenansicht und hielte das für eine Veränderung.
+ */
+export function photosOfDay(photos: StoredPhotoEntry[], day: string): StoredPhotoEntry[] {
+  return photos.filter((p) => p.day === day).sort((a, b) => PHOTO_POSES.indexOf(a.pose) - PHOTO_POSES.indexOf(b.pose))
+}
+
+/** Die Tage mit Fotos, jüngster zuerst. */
+export function photoDays(photos: StoredPhotoEntry[]): string[] {
+  return [...new Set(photos.map((p) => p.day))].sort((a, b) => b.localeCompare(a))
 }

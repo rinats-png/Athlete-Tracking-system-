@@ -33,7 +33,7 @@ import { openGuest } from './helpers'
  *      Vorhersage. Der letzte Fall durchsucht den ganzen Bildschirm danach.
  */
 
-const emptyHealth = (): StoredHealth => ({ consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null })
+const emptyHealth = (): StoredHealth => ({ consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null })
 
 const lab = (day: string, marker: string, value: number, ref: [number | null, number | null] = [null, null]): StoredLabEntry => ({
   id: `l-${marker}-${day}`,
@@ -322,7 +322,9 @@ test.describe('Im Bildschirm', () => {
   test('die App bewertet nichts — kein Wort auf dem Bildschirm stuft ein', async ({ page }) => {
     await asElite(page)
     await page.goto('/gesundheit', { waitUntil: 'domcontentloaded' })
-    for (const category of ['lab', 'symptoms', 'cycle', 'selfImage', 'meds']) {
+    // Alle Kategorien, nicht eine Auswahl: Eine neue Kategorie muss durch
+    // denselben Filter, sonst wächst die Schicht an der Prüfung vorbei.
+    for (const category of HEALTH_CATEGORIES) {
       await page.getByTestId(`consent-${category}`).getByRole('button', { name: 'Einwilligen' }).click()
     }
     const text = await page.locator('main').innerText()
@@ -330,6 +332,26 @@ test.describe('Im Bildschirm', () => {
       expect(text, `«${wort}» wäre eine Einstufung`).not.toContain(wort)
     }
     await expect(page.getByTestId('health-scope')).toContainText('keine Diagnose')
+  })
+
+  test('Fotos erscheinen erst mit eigener Einwilligung', async ({ page }) => {
+    await asElite(page)
+    await page.goto('/gesundheit', { waitUntil: 'domcontentloaded' })
+
+    // Laborwerte freigeben heisst nicht, Körperfotos freizugeben.
+    await page.getByTestId('consent-lab').getByRole('button', { name: 'Einwilligen' }).click()
+    await expect(page.getByTestId('lab-panel')).toBeVisible()
+    await expect(page.getByTestId('photo-panel')).toHaveCount(0)
+
+    await page.getByTestId('consent-photos').getByRole('button', { name: 'Einwilligen' }).click()
+    const panel = page.getByTestId('photo-panel')
+    await expect(panel).toBeVisible()
+    await expect(panel.getByTestId('photo-safety')).toContainText('vermisst nichts')
+
+    // Und der Widerruf nimmt den Abschnitt wieder mit.
+    await page.getByTestId('consent-photos').getByRole('button', { name: 'Widerrufen' }).click()
+    await page.getByRole('button', { name: 'Widerrufen und löschen' }).click()
+    await expect(page.getByTestId('photo-panel')).toHaveCount(0)
   })
 
   test('Peak Week protokolliert, ohne etwas vorzugeben', async ({ page }) => {

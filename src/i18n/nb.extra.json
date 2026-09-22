@@ -1030,21 +1030,23 @@
       "withdraw": "Trekk tilbake",
       "confirm": "Dermed slettes {{count}} oppføringer i denne kategorien endelig. Eksporten på forhånd er din eneste kopi.",
       "confirmYes": "Trekk tilbake og slett",
-      "local": "Disse dataene blir liggende på enheten din. Synkroniseringen tar dem ikke med — det ville kreve ende-til-ende-kryptering, og den er ikke bygget. Eksporten din inneholder dem i sin helhet."
+      "local": "Disse dataene blir på enheten din. De når andrekopien bare ende-til-ende-kryptert med frasen din — uten frasen forlater ingenting av det denne enheten. Eksporten din inneholder dem fullstendig."
     },
     "categories": {
       "lab": "Laboratorieverdier",
       "symptoms": "Symptomer og skader",
       "cycle": "Syklus",
       "selfImage": "Kroppsbilde og libido",
-      "meds": "Kosttilskudd og legemidler"
+      "meds": "Kosttilskudd og legemidler",
+      "photos": "Sammenligningsbilder"
     },
     "consentText": {
       "lab": "Verdier fra prøvesvaret ditt med laboratoriets referanseområde og omstendighetene rundt målingen.",
       "symptoms": "Plager som egenrapport fra 0 til 3, over tid.",
       "cycle": "Fasen som egenrapport. Ingen prediksjon, ingen fruktbarhetsvindu.",
       "selfImage": "To skalaer for kroppsbilde og libido. Registrert, aldri vurdert.",
-      "meds": "En liste over det du tar, med dose som din egen tekst."
+      "meds": "En liste over det du tar, med dose som din egen tekst.",
+      "photos": "Bilder av kroppen din som du tar selv. Lagret kryptert, aldri tolket."
     },
     "lab": {
       "title": "Laboratorieverdier",
@@ -1230,6 +1232,35 @@
       "dropConfirm": "Den krypterte andrekopien fjernes helt fra serveren, sammen med salt og kontrollverdi. Dataene dine på denne enheten røres ikke.",
       "dropYes": "Slett fra serveren",
       "failed": "Det gikk ikke. Prøv igjen."
+    },
+    "poses": {
+      "frontRelaxed": "Forfra, avslappet",
+      "frontPose": "Forfra, posert",
+      "backPose": "Bakfra, posert",
+      "sidePose": "Fra siden, posert",
+      "other": "Annen"
+    },
+    "photos": {
+      "title": "Sammenligningsbilder",
+      "subtitle": "Samme positur, to dager.",
+      "add": "Bilde",
+      "empty": "Ingen bilder ennå.",
+      "pose": "Positur",
+      "choose": "Velg bilde",
+      "working": "Forminsker …",
+      "preview": "Valgt bilde",
+      "remove": "Fjern",
+      "compare": "To dager ved siden av hverandre",
+      "left": "Venstre",
+      "right": "Høyre",
+      "alt": "{{pose}}, {{date}}",
+      "safety": "Appen måler ingenting og sammenligner ingenting. Den legger to bilder ved siden av hverandre og sier ikke et ord om dem — ingen fettprosent, ingen framgang i prosent. Det du ser, tolker du selv.",
+      "method": "For at to bilder skal kunne sammenlignes: samme avstand, samme lys, samme positur, samme tid på dagen. Ansiktet ditt trenger ikke være med. Bilder når andrekopien bare kryptert; uten frasen blir de på denne enheten.",
+      "error": {
+        "not_an_image": "Dette er ikke en bildefil.",
+        "unreadable": "Bildet kunne ikke leses.",
+        "too_large": "Bildet er for stort selv etter forminsking. Velg et mindre."
+      }
     }
   },
   "peak": {

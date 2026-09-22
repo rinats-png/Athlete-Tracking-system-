@@ -700,7 +700,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         })
       },
       nutrition: store.athletes.find((a) => a.id === store.activeAthleteId)?.nutrition ?? { pal: 1.55 },
-      health: store.athletes.find((a) => a.id === store.activeAthleteId)?.health ?? { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null },
+      health: store.athletes.find((a) => a.id === store.activeAthleteId)?.health ?? { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null },
       updateHealth: (fn) => {
         const current = storeRef.current
         // Der Zeitstempel wird HIER gesetzt, an der einen Stelle, durch die

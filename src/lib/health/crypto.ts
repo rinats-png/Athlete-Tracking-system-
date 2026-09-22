@@ -20,10 +20,16 @@
  *
  * WAS DER SERVER SIEHT: eine Kennung, einen Zeitstempel und einen Block
  * Chiffrat. KEINE Kategorie, KEINEN Tag. Dass jemand überhaupt Zyklusdaten
- * führt, ist selbst eine Information — sie bleibt im Chiffrat.
+ * oder Körperfotos führt, ist selbst eine Information — sie bleibt im
+ * Chiffrat. Auch die Kennung verrät sie nicht: Sie ist der HMAC der lokalen
+ * Kennung unter einem zweiten Schlüssel (siehe {@link opaqueId}), also für
+ * den Server eine Zeichenkette ohne Struktur, und für zwei Geräte desselben
+ * Nutzers dieselbe — genau das braucht ein Abgleich.
  *
  * VERFAHREN: PBKDF2-SHA256 mit 600.000 Runden auf einen zufälligen Salz,
- * daraus ein AES-GCM-256-Schlüssel. Je Datensatz ein frischer Zufallsvektor.
+ * daraus 64 Byte: die ersten 32 werden der AES-GCM-256-Schlüssel, die
+ * zweiten 32 der HMAC-Schlüssel für die Kennungen. Ein Durchlauf, zwei
+ * Schlüssel — der zweite kostet nichts und hält die Kennung stumm. Je Datensatz ein frischer Zufallsvektor.
  * Die Phrase trägt 120 Bit Zufall; die Runden schützen nicht vor dem
  * Erraten der Phrase (das ist aussichtslos), sondern gegen eine schwache
  * Phrase, die jemand von Hand einträgt.
@@ -106,27 +112,57 @@ export function newSalt(): string {
  * auch nicht vom eigenen Code. Er kann in IndexedDB liegen und benutzt
  * werden, aber nicht herausgetragen.
  */
-export async function deriveKey(phrase: string, saltB64: string): Promise<CryptoKey | null> {
+export interface HealthKeys {
+  /** Verschlüsselt und entschlüsselt die Nutzlast. */
+  cipher: CryptoKey
+  /** Macht aus einer lokalen Kennung eine stumme (siehe {@link opaqueId}). */
+  tag: CryptoKey
+}
+
+export async function deriveKey(phrase: string, saltB64: string): Promise<HealthKeys | null> {
   const s = subtle()
   if (!s) return null
-  const material = await s.importKey('raw', enc.encode(normalizePhrase(phrase)), 'PBKDF2', false, ['deriveKey'])
-  return s.deriveKey(
+  const material = await s.importKey('raw', enc.encode(normalizePhrase(phrase)), 'PBKDF2', false, ['deriveBits'])
+  const bits = await s.deriveBits(
     { name: 'PBKDF2', salt: fromBase64(saltB64) as unknown as BufferSource, iterations: KDF_ITERATIONS, hash: 'SHA-256' },
     material,
-    { name: 'AES-GCM', length: 256 },
-    false,
-    ['encrypt', 'decrypt'],
+    512,
   )
+  const raw = new Uint8Array(bits)
+  const cipher = await s.importKey('raw', raw.slice(0, 32) as unknown as BufferSource, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt'])
+  const tag = await s.importKey('raw', raw.slice(32, 64) as unknown as BufferSource, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign'])
+  return { cipher, tag }
+}
+
+/**
+ * Aus `photo:3f2a…` wird eine Zeichenkette ohne Struktur.
+ *
+ * WARUM DAS NÖTIG IST: Die Nutzlast ist verschlüsselt, die Kennung war es
+ * nicht. Ein Blick in die Tabelle hätte gereicht, um zu sehen, dass jemand
+ * Zyklusdaten oder Körperfotos führt — und genau das ist selbst schon ein
+ * Datum nach Art. 9. Der HMAC ist deterministisch (zwei Geräte derselben
+ * Phrase bilden dieselbe Kennung, sonst gäbe es keinen Abgleich) und für
+ * den Server nicht umkehrbar, weil ihm der Schlüssel fehlt.
+ */
+export async function opaqueId(keys: HealthKeys, entryId: string): Promise<string | null> {
+  const s = subtle()
+  if (!s) return null
+  try {
+    const mac = await s.sign('HMAC', keys.tag, enc.encode(entryId) as unknown as BufferSource)
+    return toBase64(new Uint8Array(mac)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+  } catch {
+    return null
+  }
 }
 
 /** Ein Wert als Chiffrat: `v1.<Vektor>.<Geheimtext>`, beides Base64. */
-export async function encryptJson(key: CryptoKey, value: unknown): Promise<string | null> {
+export async function encryptJson(keys: HealthKeys, value: unknown): Promise<string | null> {
   const s = subtle()
   if (!s) return null
   const iv = new Uint8Array(IV_BYTES)
   globalThis.crypto.getRandomValues(iv)
   const data = enc.encode(JSON.stringify(value))
-  const cipher = await s.encrypt({ name: 'AES-GCM', iv: iv as unknown as BufferSource }, key, data as unknown as BufferSource)
+  const cipher = await s.encrypt({ name: 'AES-GCM', iv: iv as unknown as BufferSource }, keys.cipher, data as unknown as BufferSource)
   return `v1.${toBase64(iv)}.${toBase64(new Uint8Array(cipher))}`
 }
 
@@ -135,7 +171,7 @@ export async function encryptJson(key: CryptoKey, value: unknown): Promise<strin
  * oder fremdem Format — GCM merkt jede Veränderung, und ein Fehlschlag ist
  * hier ein normaler Fall, kein Absturz.
  */
-export async function decryptJson(key: CryptoKey, blob: string): Promise<unknown | null> {
+export async function decryptJson(keys: HealthKeys, blob: string): Promise<unknown | null> {
   const s = subtle()
   if (!s) return null
   const parts = blob.split('.')
@@ -143,7 +179,7 @@ export async function decryptJson(key: CryptoKey, blob: string): Promise<unknown
   try {
     const plain = await s.decrypt(
       { name: 'AES-GCM', iv: fromBase64(parts[1]) as unknown as BufferSource },
-      key,
+      keys.cipher,
       fromBase64(parts[2]) as unknown as BufferSource,
     )
     return JSON.parse(dec.decode(plain))
@@ -157,10 +193,10 @@ export async function decryptJson(key: CryptoKey, blob: string): Promise<unknown
  * zweites Gerät prüft daran, ob die eingetippte Phrase stimmt — ohne dass
  * irgendwo die Phrase oder der Schlüssel liegen müsste.
  */
-export async function makeVerifier(key: CryptoKey): Promise<string | null> {
-  return encryptJson(key, VERIFIER_PLAINTEXT)
+export async function makeVerifier(keys: HealthKeys): Promise<string | null> {
+  return encryptJson(keys, VERIFIER_PLAINTEXT)
 }
 
-export async function checkVerifier(key: CryptoKey, verifier: string): Promise<boolean> {
-  return (await decryptJson(key, verifier)) === VERIFIER_PLAINTEXT
+export async function checkVerifier(keys: HealthKeys, verifier: string): Promise<boolean> {
+  return (await decryptJson(keys, verifier)) === VERIFIER_PLAINTEXT
 }

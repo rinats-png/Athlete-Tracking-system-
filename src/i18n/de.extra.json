@@ -1030,21 +1030,23 @@
       "withdraw": "Widerrufen",
       "confirm": "Damit werden {{count}} Einträge dieser Kategorie endgültig gelöscht. Der Export vorher ist deine einzige Kopie.",
       "confirmYes": "Widerrufen und löschen",
-      "local": "Diese Daten bleiben auf deinem Gerät. Die Synchronisierung trägt sie nicht mit — dafür bräuchte es Ende-zu-Ende-Verschlüsselung, und die ist nicht gebaut. Dein Export enthält sie vollständig."
+      "local": "Diese Daten bleiben auf deinem Gerät. In die Zweitschrift gehen sie nur Ende-zu-Ende-verschlüsselt mit deiner Phrase — ohne Phrase verlässt nichts davon dieses Gerät. Dein Export enthält sie vollständig."
     },
     "categories": {
       "lab": "Laborwerte",
       "symptoms": "Symptome und Verletzungen",
       "cycle": "Zyklus",
       "selfImage": "Körperbild und Libido",
-      "meds": "Supplemente und Medikamente"
+      "meds": "Supplemente und Medikamente",
+      "photos": "Vergleichsfotos"
     },
     "consentText": {
       "lab": "Werte aus deinem Befund mit Referenzbereich des Labors und den Umständen der Messung.",
       "symptoms": "Beschwerden als Selbstangabe von 0 bis 3, über die Zeit.",
       "cycle": "Die Phase als Selbstangabe. Keine Vorhersage, kein Fruchtbarkeitsfenster.",
       "selfImage": "Zwei Skalen zu Körperbild und Libido. Erfasst, nie bewertet.",
-      "meds": "Eine Liste dessen, was du nimmst, mit Dosis als deinem Text."
+      "meds": "Eine Liste dessen, was du nimmst, mit Dosis als deinem Text.",
+      "photos": "Fotos deines Körpers, die du selbst aufnimmst. Verschlüsselt abgelegt, nie gedeutet."
     },
     "lab": {
       "title": "Laborwerte",
@@ -1230,6 +1232,35 @@
       "dropConfirm": "Die verschlüsselte Zweitschrift wird vollständig vom Server entfernt, samt Salz und Probe. Deine Daten auf diesem Gerät bleiben unberührt.",
       "dropYes": "Vom Server löschen",
       "failed": "Das hat nicht geklappt. Versuch es noch einmal."
+    },
+    "poses": {
+      "frontRelaxed": "Vorne, entspannt",
+      "frontPose": "Vorne, Pose",
+      "backPose": "Rücken, Pose",
+      "sidePose": "Seite, Pose",
+      "other": "Andere"
+    },
+    "photos": {
+      "title": "Vergleichsfotos",
+      "subtitle": "Dieselbe Pose, zwei Tage.",
+      "add": "Foto",
+      "empty": "Noch kein Foto.",
+      "pose": "Pose",
+      "choose": "Foto wählen",
+      "working": "Wird verkleinert …",
+      "preview": "Gewähltes Foto",
+      "remove": "Entfernen",
+      "compare": "Zwei Tage nebeneinander",
+      "left": "Links",
+      "right": "Rechts",
+      "alt": "{{pose}}, {{date}}",
+      "safety": "Die App vermisst nichts und vergleicht nichts. Sie legt zwei Bilder nebeneinander und sagt kein Wort dazu — kein Körperfettanteil, kein Fortschritt in Prozent. Was du siehst, deutest du selbst.",
+      "method": "Damit zwei Fotos vergleichbar sind: gleicher Abstand, gleiches Licht, gleiche Pose, gleiche Tageszeit. Dein Gesicht braucht nicht aufs Bild. Fotos gehen nur verschlüsselt in die Zweitschrift; ohne Phrase bleiben sie auf diesem Gerät.",
+      "error": {
+        "not_an_image": "Das ist keine Bilddatei.",
+        "unreadable": "Das Bild liess sich nicht lesen.",
+        "too_large": "Das Bild bleibt auch verkleinert zu gross. Bitte ein kleineres wählen."
+      }
     }
   },
   "peak": {

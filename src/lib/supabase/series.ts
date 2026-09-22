@@ -90,7 +90,7 @@ function withList(athlete: StoredAthlete, kind: SeriesKind, list: SeriesEntry[])
 export function stripHealth(athlete: StoredAthlete): StoredAthlete {
   return {
     ...athlete,
-    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null, updatedAt: null },
+    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null },
     peakWeeks: [],
   }
 }

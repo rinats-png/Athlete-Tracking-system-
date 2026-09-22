@@ -1030,21 +1030,23 @@
       "withdraw": "Intrekken",
       "confirm": "Daarmee worden {{count}} gegevens van deze categorie definitief verwijderd. De export vooraf is je enige kopie.",
       "confirmYes": "Intrekken en verwijderen",
-      "local": "Deze gegevens blijven op je apparaat. De synchronisatie neemt ze niet mee — daarvoor zou eind-tot-eindversleuteling nodig zijn, en die is niet gebouwd. Je export bevat ze volledig."
+      "local": "Deze gegevens blijven op je apparaat. Ze bereiken de tweede kopie alleen end-to-end versleuteld met jouw zin — zonder die zin verlaat er niets dit apparaat. Je export bevat ze volledig."
     },
     "categories": {
       "lab": "Laboratoriumwaarden",
       "symptoms": "Klachten en blessures",
       "cycle": "Cyclus",
       "selfImage": "Lichaamsbeeld en libido",
-      "meds": "Supplementen en medicijnen"
+      "meds": "Supplementen en medicijnen",
+      "photos": "Vergelijkingsfoto's"
     },
     "consentText": {
       "lab": "Waarden uit je uitslag met het referentiebereik van het laboratorium en de omstandigheden van de meting.",
       "symptoms": "Klachten als eigen opgave van 0 tot 3, in de tijd.",
       "cycle": "De fase als eigen opgave. Geen voorspelling, geen vruchtbare periode.",
       "selfImage": "Twee schalen voor lichaamsbeeld en libido. Vastgelegd, nooit beoordeeld.",
-      "meds": "Een lijst van wat je neemt, met de dosis als je eigen tekst."
+      "meds": "Een lijst van wat je neemt, met de dosis als je eigen tekst.",
+      "photos": "Foto’s van je lichaam die je zelf maakt. Versleuteld opgeslagen, nooit geduid."
     },
     "lab": {
       "title": "Laboratoriumwaarden",
@@ -1230,6 +1232,35 @@
       "dropConfirm": "De versleutelde tweede kopie wordt volledig van de server verwijderd, samen met salt en controlewaarde. Je gegevens op dit apparaat blijven onaangeroerd.",
       "dropYes": "Van de server verwijderen",
       "failed": "Dat is niet gelukt. Probeer het opnieuw."
+    },
+    "poses": {
+      "frontRelaxed": "Voorkant, ontspannen",
+      "frontPose": "Voorkant, in pose",
+      "backPose": "Rug, in pose",
+      "sidePose": "Zijkant, in pose",
+      "other": "Andere"
+    },
+    "photos": {
+      "title": "Vergelijkingsfoto's",
+      "subtitle": "Dezelfde pose, twee dagen.",
+      "add": "Foto",
+      "empty": "Nog geen foto.",
+      "pose": "Pose",
+      "choose": "Foto kiezen",
+      "working": "Wordt verkleind …",
+      "preview": "Gekozen foto",
+      "remove": "Verwijderen",
+      "compare": "Twee dagen naast elkaar",
+      "left": "Links",
+      "right": "Rechts",
+      "alt": "{{pose}}, {{date}}",
+      "safety": "De app meet niets en vergelijkt niets. Ze legt twee beelden naast elkaar en zegt er geen woord over — geen vetpercentage, geen voortgang in procenten. Wat je ziet, duid je zelf.",
+      "method": "Om twee foto’s vergelijkbaar te maken: dezelfde afstand, hetzelfde licht, dezelfde pose, hetzelfde tijdstip. Je gezicht hoeft er niet op. Foto’s bereiken de tweede kopie alleen versleuteld; zonder de zin blijven ze op dit apparaat.",
+      "error": {
+        "not_an_image": "Dat is geen afbeeldingsbestand.",
+        "unreadable": "De afbeelding kon niet worden gelezen.",
+        "too_large": "De afbeelding blijft ook verkleind te groot. Kies een kleinere."
+      }
     }
   },
   "peak": {

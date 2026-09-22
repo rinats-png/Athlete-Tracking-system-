@@ -1,4 +1,4 @@
-import type { StoredAthlete, StoredCycleEntry, StoredLabEntry, StoredMedEntry, StoredPeakWeek, StoredSelfImageEntry, StoredSymptomEntry } from '@/lib/store/localStore'
+import type { StoredAthlete, StoredCycleEntry, StoredLabEntry, StoredMedEntry, StoredPeakWeek, StoredPhotoEntry, StoredSelfImageEntry, StoredSymptomEntry } from '@/lib/store/localStore'
 
 /**
  * Der verschlüsselte Abgleich der Gesundheitsschicht — die reine Logik.
@@ -13,6 +13,7 @@ import type { StoredAthlete, StoredCycleEntry, StoredLabEntry, StoredMedEntry, S
  *   lab:<id>       Laborbefund        symptom:<id>   Symptomtag
  *   cycle:<id>     Zyklustag          self:<id>      Körperbild und Libido
  *   med:<id>       Supplement         peak:<id>      Peak Week
+ *   photo:<id>     Vergleichsfoto
  *   meta           Einwilligungen und Einstellungen
  *
  * Die Art steht IM Datensatz und damit im Chiffrat — auf dem Server ist die
@@ -21,11 +22,17 @@ import type { StoredAthlete, StoredCycleEntry, StoredLabEntry, StoredMedEntry, S
  * `athlete_series`, wo `kind` in einer eigenen Spalte steht.
  */
 
-export type HealthKind = 'lab' | 'symptom' | 'cycle' | 'self' | 'med' | 'peak' | 'meta'
+export type HealthKind = 'lab' | 'symptom' | 'cycle' | 'self' | 'med' | 'peak' | 'photo' | 'meta'
 
 export interface HealthRecord {
-  /** `<art>:<id>`, bei meta nur `meta`. Geht als entry_id auf den Server. */
+  /** `<art>:<id>`, bei meta nur `meta`. Nur lokal — und im Chiffrat. */
   entryId: string
+  /**
+   * Die stumme Kennung, die als entry_id auf den Server geht: der HMAC von
+   * {@link entryId}. Sie wird erst gebildet, wenn ein Schlüssel da ist,
+   * deshalb ist sie hier optional; ohne sie gilt {@link entryId}.
+   */
+  remoteId?: string
   kind: HealthKind
   /** Für die Auswahl beim Schreiben. Steht auch in `data`. */
   updatedAt: string | null
@@ -53,6 +60,7 @@ export function healthRecords(athlete: StoredAthlete): HealthRecord[] {
   add('cycle', h.cycle)
   add('self', h.selfImage)
   add('med', h.meds)
+  add('photo', h.photos)
   add('peak', athlete.peakWeeks)
   return out
 }
@@ -85,7 +93,7 @@ export function planHealthPush(
   athleteId: string,
   lastSyncedAt: string | null,
 ): { upserts: HealthRecord[]; tombstones: string[] } {
-  const localIds = new Set(records.map((r) => r.entryId))
+  const localIds = new Set(records.map((r) => r.remoteId ?? r.entryId))
   const upserts = records.filter((r) => lastSyncedAt == null || r.updatedAt == null || r.updatedAt > lastSyncedAt)
   const tombstones = remote
     .filter((r) => r.athlete_id === athleteId && !r.deleted_at && !localIds.has(r.entry_id))
@@ -106,20 +114,21 @@ function parts(entryId: string): { kind: HealthKind; id: string } | null {
   const i = entryId.indexOf(':')
   if (i <= 0) return null
   const kind = entryId.slice(0, i) as HealthKind
-  if (!['lab', 'symptom', 'cycle', 'self', 'med', 'peak'].includes(kind)) return null
+  if (!['lab', 'symptom', 'cycle', 'self', 'med', 'peak', 'photo'].includes(kind)) return null
   return { kind, id: entryId.slice(i + 1) }
 }
 
-type ListKey = 'labs' | 'symptoms' | 'cycle' | 'selfImage' | 'meds'
+type ListKey = 'labs' | 'symptoms' | 'cycle' | 'selfImage' | 'meds' | 'photos'
 const LIST_OF: Record<Exclude<HealthKind, 'meta' | 'peak'>, ListKey> = {
   lab: 'labs',
   symptom: 'symptoms',
   cycle: 'cycle',
   self: 'selfImage',
   med: 'meds',
+  photo: 'photos',
 }
 
-type AnyEntry = StoredLabEntry | StoredSymptomEntry | StoredCycleEntry | StoredSelfImageEntry | StoredMedEntry
+type AnyEntry = StoredLabEntry | StoredSymptomEntry | StoredCycleEntry | StoredSelfImageEntry | StoredMedEntry | StoredPhotoEntry
 
 /**
  * Fremde Datensätze in einen Athleten einarbeiten.

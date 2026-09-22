@@ -1030,21 +1030,23 @@
       "withdraw": "Retirar",
       "confirm": "Con esto se borran definitivamente {{count}} entradas de esta categoría. Exportar antes es tu única copia.",
       "confirmYes": "Retirar y borrar",
-      "local": "Estos datos permanecen en tu dispositivo. La sincronización no los lleva consigo — haría falta cifrado de extremo a extremo, y no está implementado. Tu exportación los contiene por completo."
+      "local": "Estos datos se quedan en tu dispositivo. Solo llegan a la copia de seguridad cifrados de extremo a extremo con tu frase: sin la frase nada sale de este dispositivo. Tu exportación los contiene por completo."
     },
     "categories": {
       "lab": "Valores de laboratorio",
       "symptoms": "Síntomas y lesiones",
       "cycle": "Ciclo",
       "selfImage": "Imagen corporal y libido",
-      "meds": "Suplementos y medicamentos"
+      "meds": "Suplementos y medicamentos",
+      "photos": "Fotos de comparación"
     },
     "consentText": {
       "lab": "Valores de tu informe con el intervalo de referencia del laboratorio y las circunstancias de la medición.",
       "symptoms": "Las molestias como autoinforme de 0 a 3, a lo largo del tiempo.",
       "cycle": "La fase como autoinforme. Sin predicción, sin ventana fértil.",
       "selfImage": "Dos escalas sobre imagen corporal y libido. Registradas, nunca valoradas.",
-      "meds": "Una lista de lo que tomas, con la dosis en tus propias palabras."
+      "meds": "Una lista de lo que tomas, con la dosis en tus propias palabras.",
+      "photos": "Fotos de tu cuerpo que haces tú mismo. Guardadas cifradas, nunca interpretadas."
     },
     "lab": {
       "title": "Valores de laboratorio",
@@ -1230,6 +1232,35 @@
       "dropConfirm": "La segunda copia cifrada se elimina por completo del servidor, junto con la sal y el valor de comprobación. Tus datos en este dispositivo no se tocan.",
       "dropYes": "Eliminar del servidor",
       "failed": "No ha funcionado. Inténtalo de nuevo."
+    },
+    "poses": {
+      "frontRelaxed": "Frente, relajado",
+      "frontPose": "Frente, en pose",
+      "backPose": "Espalda, en pose",
+      "sidePose": "Perfil, en pose",
+      "other": "Otra"
+    },
+    "photos": {
+      "title": "Fotos de comparación",
+      "subtitle": "La misma pose, dos días.",
+      "add": "Foto",
+      "empty": "Todavía no hay ninguna foto.",
+      "pose": "Pose",
+      "choose": "Elegir foto",
+      "working": "Reduciendo …",
+      "preview": "Foto elegida",
+      "remove": "Quitar",
+      "compare": "Dos días uno al lado del otro",
+      "left": "Izquierda",
+      "right": "Derecha",
+      "alt": "{{pose}}, {{date}}",
+      "safety": "La app no mide nada ni compara nada. Pone dos imágenes una al lado de la otra y no dice ni una palabra al respecto: ningún porcentaje de grasa corporal, ningún progreso en por ciento. Lo que ves, lo interpretas tú.",
+      "method": "Para que dos fotos sean comparables: misma distancia, misma luz, misma pose, misma hora del día. Tu cara no tiene que salir en la imagen. Las fotos llegan a la copia de seguridad solo cifradas; sin la frase se quedan en este dispositivo.",
+      "error": {
+        "not_an_image": "Eso no es un archivo de imagen.",
+        "unreadable": "No se pudo leer la imagen.",
+        "too_large": "La imagen sigue siendo demasiado grande incluso reducida. Elige una más pequeña."
+      }
     }
   },
   "peak": {

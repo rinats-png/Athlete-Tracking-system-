@@ -12,6 +12,7 @@ import { KeyPanel } from './KeyPanel'
 import { LabPanel } from './LabPanel'
 import { CyclePanel, SelfImagePanel, SymptomPanel } from './DailyPanels'
 import { MedsPanel } from './MedsPanel'
+import { PhotoPanel } from './PhotoPanel'
 import { EnergyPanel } from './EnergyPanel'
 
 /**
@@ -63,6 +64,7 @@ export function HealthScreen() {
           {hasConsent(health, 'cycle') && <CyclePanel />}
           {hasConsent(health, 'selfImage') && <SelfImagePanel />}
           {hasConsent(health, 'meds') && <MedsPanel />}
+          {hasConsent(health, 'photos') && <PhotoPanel />}
           <EnergyPanel />
           <Panel>
             <div className="px-4 py-3">

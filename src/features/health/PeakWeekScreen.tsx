@@ -10,7 +10,7 @@ import { useLocale } from '@/features/shared/useLocale'
 import { formatDate, formatNumber } from '@/lib/format'
 import { newId } from '@/lib/store/localStore'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { peakSummary } from '@/domain/health'
+import { hasConsent, peakSummary, photosOfDay } from '@/domain/health'
 import { PEAK_STAGES } from '@/lib/store/schema'
 import type { StoredPeakDay, StoredPeakWeek } from '@/lib/store/localStore'
 import { cn } from '@/lib/utils'
@@ -34,7 +34,7 @@ import { cn } from '@/lib/utils'
 export function PeakWeekScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { peakWeeks, savePeakWeek, deletePeakWeek } = useAppData()
+  const { health, peakWeeks, savePeakWeek, deletePeakWeek } = useAppData()
   const [openId, setOpenId] = useState<string | null>(peakWeeks[0]?.id ?? null)
   const [creating, setCreating] = useState(false)
   const sorted = [...peakWeeks].sort((a, b) => b.eventDate.localeCompare(a.eventDate))
@@ -189,7 +189,8 @@ export function PeakWeekScreen() {
             {days.length === 0 && !adding && <p className="text-[13px] text-ink-secondary">{t('peak.noDays')}</p>}
             <ul className="divide-y divide-line">
               {days.map((d) => (
-                <li key={d.id} className="flex flex-wrap items-baseline gap-x-2 py-2 text-[13px]" data-testid={`peak-day-${d.day}`}>
+                <li key={d.id} className="py-2 text-[13px]" data-testid={`peak-day-${d.day}`}>
+                  <div className="flex flex-wrap items-baseline gap-x-2">
                   <span className="label-tag">{t(`peak.stages.${d.stage}`)}</span>
                   <span>{formatDate(d.day, locale)}</span>
                   {d.weightKg != null && <span className="readout tabular-nums">{formatNumber(d.weightKg, locale, 1)} kg</span>}
@@ -200,11 +201,38 @@ export function PeakWeekScreen() {
                   <button type="button" aria-label={t('actions.delete')} className="ml-auto text-ink-muted hover:text-warning" onClick={() => removeDay(d.id)}>
                     <Trash2 size={13} aria-hidden />
                   </button>
+                  </div>
+                  <DayPhotos day={d.day} />
                 </li>
               ))}
             </ul>
           </div>
         </Panel>
+      </div>
+    )
+  }
+
+  /**
+   * Die Fotos dieses Tages, falls es welche gibt.
+   *
+   * Aufgenommen werden sie in der Gesundheitsschicht, nicht hier — ein
+   * zweiter Aufnahmeweg hiesse ein zweiter Ort, an dem die Einwilligung
+   * geprueft werden muss. Hier stehen sie nur, weil der Tag vor dem
+   * Wettkampf der Tag ist, an dem man sie ansieht. Ohne Einwilligung fuer
+   * die Kategorie erscheint nichts.
+   */
+  function DayPhotos({ day }: { day: string }) {
+    if (!hasConsent(health, 'photos')) return null
+    const photos = photosOfDay(health.photos, day)
+    if (photos.length === 0) return null
+    return (
+      <div className="mt-2 flex flex-wrap gap-2" data-testid={`peak-photos-${day}`}>
+        {photos.map((photo) => (
+          <figure key={photo.id} className="w-[96px]">
+            <img src={photo.dataUrl} alt={t('health.photos.alt', { pose: t(`health.poses.${photo.pose}`), date: formatDate(day, locale) })} className="w-full border border-line" />
+            <figcaption className="mt-1 text-[11px] text-ink-muted">{t(`health.poses.${photo.pose}`)}</figcaption>
+          </figure>
+        ))}
       </div>
     )
   }

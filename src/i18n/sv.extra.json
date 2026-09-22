@@ -1030,21 +1030,23 @@
       "withdraw": "Återkalla",
       "confirm": "Därmed raderas {{count}} poster i den här kategorin slutgiltigt. Exporten dessförinnan är din enda kopia.",
       "confirmYes": "Återkalla och radera",
-      "local": "Dessa uppgifter stannar på din enhet. Synkroniseringen tar dem inte med — det skulle kräva totalsträckskryptering, och den är inte byggd. Din export innehåller dem fullständigt."
+      "local": "De här uppgifterna stannar på din enhet. De når andrakopian bara totalsträckskrypterade med din fras — utan frasen lämnar ingenting den här enheten. Din export innehåller dem fullständigt."
     },
     "categories": {
       "lab": "Labbvärden",
       "symptoms": "Symtom och skador",
       "cycle": "Cykel",
       "selfImage": "Kroppsbild och libido",
-      "meds": "Kosttillskott och läkemedel"
+      "meds": "Kosttillskott och läkemedel",
+      "photos": "Jämförelsefoton"
     },
     "consentText": {
       "lab": "Värden ur ditt provsvar med laboratoriets referensintervall och omständigheterna vid mätningen.",
       "symptoms": "Besvär som egen uppgift från 0 till 3, över tid.",
       "cycle": "Fasen som egen uppgift. Ingen prognos, inget fertilt fönster.",
       "selfImage": "Två skalor för kroppsbild och libido. Registrerat, aldrig bedömt.",
-      "meds": "En lista över det du tar, med dosen som din egen text."
+      "meds": "En lista över det du tar, med dosen som din egen text.",
+      "photos": "Foton av din kropp som du tar själv. Lagras krypterade, tolkas aldrig."
     },
     "lab": {
       "title": "Labbvärden",
@@ -1230,6 +1232,35 @@
       "dropConfirm": "Den krypterade andrakopian tas bort helt från servern, tillsammans med salt och kontrollvärde. Dina uppgifter på den här enheten rörs inte.",
       "dropYes": "Radera från servern",
       "failed": "Det gick inte. Försök igen."
+    },
+    "poses": {
+      "frontRelaxed": "Framifrån, avslappnad",
+      "frontPose": "Framifrån, poserad",
+      "backPose": "Bakifrån, poserad",
+      "sidePose": "Från sidan, poserad",
+      "other": "Annan"
+    },
+    "photos": {
+      "title": "Jämförelsefoton",
+      "subtitle": "Samma pose, två dagar.",
+      "add": "Foto",
+      "empty": "Inget foto ännu.",
+      "pose": "Pose",
+      "choose": "Välj foto",
+      "working": "Förminskar …",
+      "preview": "Valt foto",
+      "remove": "Ta bort",
+      "compare": "Två dagar bredvid varandra",
+      "left": "Vänster",
+      "right": "Höger",
+      "alt": "{{pose}}, {{date}}",
+      "safety": "Appen mäter ingenting och jämför ingenting. Den lägger två bilder bredvid varandra och säger inte ett ord om dem — ingen fettprocent, inga framsteg i procent. Det du ser tolkar du själv.",
+      "method": "För att två foton ska gå att jämföra: samma avstånd, samma ljus, samma pose, samma tid på dygnet. Ditt ansikte behöver inte vara med i bild. Foton når andrakopian bara krypterade; utan frasen stannar de på den här enheten.",
+      "error": {
+        "not_an_image": "Det där är ingen bildfil.",
+        "unreadable": "Bilden gick inte att läsa.",
+        "too_large": "Bilden är för stor även efter förminskning. Välj en mindre."
+      }
     }
   },
   "peak": {

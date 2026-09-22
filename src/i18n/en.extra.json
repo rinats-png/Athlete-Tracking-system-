@@ -1030,21 +1030,23 @@
       "withdraw": "Withdraw",
       "confirm": "This permanently deletes {{count}} entries in this category. An export beforehand is your only copy.",
       "confirmYes": "Withdraw and delete",
-      "local": "This data stays on your device. Synchronisation does not carry it — that would need end-to-end encryption, and it is not built. Your export contains it in full."
+      "local": "This data stays on your device. It only reaches the second copy end-to-end encrypted with your phrase — without the phrase none of it leaves this device. Your export contains it in full."
     },
     "categories": {
       "lab": "Laboratory values",
       "symptoms": "Symptoms and injuries",
       "cycle": "Cycle",
       "selfImage": "Body image and libido",
-      "meds": "Supplements and medication"
+      "meds": "Supplements and medication",
+      "photos": "Comparison photos"
     },
     "consentText": {
       "lab": "Values from your report with the laboratory’s reference range and the circumstances of the measurement.",
       "symptoms": "Complaints as a self-report from 0 to 3, over time.",
       "cycle": "The phase as a self-report. No prediction, no fertility window.",
       "selfImage": "Two scales for body image and libido. Recorded, never judged.",
-      "meds": "A list of what you take, with the dose in your own words."
+      "meds": "A list of what you take, with the dose in your own words.",
+      "photos": "Photos of your body that you take yourself. Stored encrypted, never interpreted."
     },
     "lab": {
       "title": "Laboratory values",
@@ -1230,6 +1232,35 @@
       "dropConfirm": "The encrypted second copy is removed from the server entirely, along with the salt and check value. Your data on this device is untouched.",
       "dropYes": "Delete from server",
       "failed": "That did not work. Please try again."
+    },
+    "poses": {
+      "frontRelaxed": "Front, relaxed",
+      "frontPose": "Front, posed",
+      "backPose": "Back, posed",
+      "sidePose": "Side, posed",
+      "other": "Other"
+    },
+    "photos": {
+      "title": "Comparison photos",
+      "subtitle": "Same pose, two days.",
+      "add": "Photo",
+      "empty": "No photo yet.",
+      "pose": "Pose",
+      "choose": "Choose photo",
+      "working": "Resizing …",
+      "preview": "Chosen photo",
+      "remove": "Remove",
+      "compare": "Two days side by side",
+      "left": "Left",
+      "right": "Right",
+      "alt": "{{pose}}, {{date}}",
+      "safety": "The app measures nothing and compares nothing. It places two images side by side and says not a word about them — no body fat percentage, no progress in percent. What you see, you read yourself.",
+      "method": "For two photos to be comparable: same distance, same light, same pose, same time of day. Your face does not need to be in the frame. Photos reach the second copy only encrypted; without the phrase they stay on this device.",
+      "error": {
+        "not_an_image": "That is not an image file.",
+        "unreadable": "The image could not be read.",
+        "too_large": "The image is still too large even after resizing. Please choose a smaller one."
+      }
     }
   },
   "peak": {

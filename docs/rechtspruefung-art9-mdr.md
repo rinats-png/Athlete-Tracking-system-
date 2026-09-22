@@ -283,8 +283,19 @@ AES-GCM-256, Schlüssel aus einer nutzergehaltenen Phrase über PBKDF2 mit
 600.000 Runden, Salz und Probe am Konto, `health_entries` **ohne** jede
 sprechende Spalte. Die Kollision mit §89 ist aufgelöst: Solange das Gerät
 die Daten trägt, erzeugt «Neue Phrase» einen neuen Schlüssel und
-verschlüsselt alles neu. Fotos sind damit technisch möglich, aber noch
-nicht gebaut.
+verschlüsselt alles neu.
+
+**Fotos, gebaut am 22.09.2026.** Die Zeile aus Abschnitt 7 ist eingelöst:
+sechste Kategorie mit eigener Einwilligung, standardisierte Aufnahme (900 px
+längste Kante, feste Posen, Vergleich nur innerhalb einer Pose), Zweitschrift
+ausschliesslich Ende-zu-Ende-verschlüsselt. Die App vermisst nichts und
+schätzt nichts — kein Körperfettanteil, keine Symmetrie, kein Fortschritt in
+Prozent; damit bleibt es Dokumentation und kein Medizinprodukt. Nicht
+biometrisch, weil weder Gesichtserkennung noch ein Merkmal erzeugt wird und
+das Gesicht nicht ins Bild muss. Beim Bau fiel ein Mangel der
+Verschlüsselung vom Vortag auf: `entry_id` trug die Kategorie im Klartext,
+womit die Tabelle verriet, DASS jemand Zyklusdaten oder Körperfotos führt —
+selbst ein Art.-9-Datum. Die Kennung ist seitdem ein HMAC.
 
 **Die Fragen in Abschnitt 8 sind weiterhin offen.** Sie waren vor dem Bau
 zu stellen; gebaut wurde auf ausdrückliche Entscheidung des Betreibers,
