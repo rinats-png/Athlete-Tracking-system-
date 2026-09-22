@@ -1261,6 +1261,44 @@
         "unreadable": "L’image n’a pas pu être lue.",
         "too_large": "L’image reste trop volumineuse même réduite. Choisis-en une plus petite."
       }
+    },
+    "share": {
+      "title": "Partage avec un entraîneur",
+      "subtitle": "Par catégorie, une à une, révocable à tout moment.",
+      "intro": "Un partage est une copie de l’état du jour, chiffrée pour cet entraîneur précis. Les nouvelles entrées ne lui parviennent qu’après actualisation.",
+      "checking": "Vérification …",
+      "locked": "Saisis d’abord ta phrase. Sans elle, l’app ne peut rien chiffrer qu’un autre pourrait ouvrir.",
+      "noCoach": "Aucun compte entraîneur lié. Un partage ne va qu’à quelqu’un avec qui tu es lié.",
+      "noConsent": "Aucune catégorie consentie pour l’instant. Tu ne peux partager que ce qui existe dans tes données.",
+      "coachHasNoKey": "Cet entraîneur n’a pas encore créé de clé. Il doit se connecter une fois avec sa phrase.",
+      "unnamedCoach": "Compte entraîneur sans nom",
+      "give": "Partager",
+      "refresh": "Actualiser",
+      "revoke": "Retirer",
+      "since": "Copie du {{date}}",
+      "stale": "Quelque chose a changé depuis",
+      "revokeWarning": "La copie est supprimée et l’entraîneur ne la voit plus. Ce qu’il a lu ou recopié avant, aucune app ne le reprend.",
+      "revokeYes": "Retirer",
+      "nature": "L’exploitant ne peut lire aucun partage : la copie est verrouillée pour la clé de l’entraîneur, et lui seul l’a. Un partage pour une catégorie n’ouvre que celle-là.",
+      "error": {
+        "unavailable": "Pas de connexion.",
+        "not_signed_in": "Non connecté.",
+        "no_envelope": "Ta paire de clés n’a pas pu être créée.",
+        "no_coach_key": "La clé de cet entraîneur est inaccessible.",
+        "failed": "Cela n’a pas fonctionné."
+      }
+    },
+    "shared": {
+      "eyebrow": "Espace entraîneur",
+      "title": "Partagé avec moi",
+      "intro": "Ce que des athlètes t’ont partagé de leur couche santé.",
+      "scope": "Des chiffres et des entrées tels que l’athlète les a saisis. L’app ne classe rien, n’avertit de rien et ne pose aucun diagnostic — c’est le rôle d’un médecin.",
+      "locked": "Saisis ta phrase. Les partages sont verrouillés pour ta clé et restent fermés sans elle.",
+      "empty": "Rien de partagé pour l’instant.",
+      "noEntries": "Cette catégorie était vide lors du partage.",
+      "unreadable": "Ce partage appartient à une paire de clés antérieure et ne peut plus être ouvert. L’athlète doit le réaccorder.",
+      "takenAt": "Copie du {{date}}",
+      "reload": "Recharger"
     }
   },
   "peak": {

@@ -1261,6 +1261,44 @@
         "unreadable": "No se pudo leer la imagen.",
         "too_large": "La imagen sigue siendo demasiado grande incluso reducida. Elige una más pequeña."
       }
+    },
+    "share": {
+      "title": "Compartir con un entrenador",
+      "subtitle": "Por categoría, una a una, revocable en cualquier momento.",
+      "intro": "Compartir es una copia del estado de hoy, cifrada para ese entrenador concreto. Las entradas nuevas le llegan solo cuando la actualizas.",
+      "checking": "Comprobando …",
+      "locked": "Introduce primero tu frase. Sin ella la app no puede cifrar nada que otra persona pueda abrir.",
+      "noCoach": "No hay ninguna cuenta de entrenador vinculada. Solo se comparte con alguien con quien estás vinculado.",
+      "noConsent": "Todavía no has consentido ninguna categoría. Solo puedes compartir lo que existe en tus datos.",
+      "coachHasNoKey": "Este entrenador aún no ha creado una clave. Tiene que entrar una vez con su frase.",
+      "unnamedCoach": "Cuenta de entrenador sin nombre",
+      "give": "Compartir",
+      "refresh": "Actualizar",
+      "revoke": "Retirar",
+      "since": "Copia del {{date}}",
+      "stale": "Desde entonces ha cambiado algo",
+      "revokeWarning": "La copia se borra y el entrenador deja de verla. Lo que haya leído o copiado antes, ninguna app lo recupera.",
+      "revokeYes": "Retirar",
+      "nature": "El operador no puede leer ningún compartido: la copia está cerrada para la clave del entrenador, y solo él la tiene. Un compartido de una categoría abre solo esa.",
+      "error": {
+        "unavailable": "Sin conexión.",
+        "not_signed_in": "No has iniciado sesión.",
+        "no_envelope": "No se pudo crear tu par de claves.",
+        "no_coach_key": "La clave de este entrenador no está disponible.",
+        "failed": "No ha funcionado."
+      }
+    },
+    "shared": {
+      "eyebrow": "Área de entrenador",
+      "title": "Compartido conmigo",
+      "intro": "Lo que los atletas te han compartido de su capa de salud.",
+      "scope": "Cifras y entradas tal como las anotó el atleta. La app no clasifica nada, no avisa de nada y no hace ningún diagnóstico: eso lo hace un médico.",
+      "locked": "Introduce tu frase. Los compartidos están cerrados para tu clave y sin ella siguen cerrados.",
+      "empty": "Todavía no hay nada compartido.",
+      "noEntries": "Esta categoría estaba vacía al compartirla.",
+      "unreadable": "Este compartido pertenece a un par de claves anterior y ya no se puede abrir. El atleta tiene que concederlo de nuevo.",
+      "takenAt": "Copia del {{date}}",
+      "reload": "Recargar"
     }
   },
   "peak": {

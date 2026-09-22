@@ -1261,6 +1261,44 @@
         "unreadable": "Bildet kunne ikke leses.",
         "too_large": "Bildet er for stort selv etter forminsking. Velg et mindre."
       }
+    },
+    "share": {
+      "title": "Deling med en trener",
+      "subtitle": "Per kategori, én om gangen, kan trekkes tilbake når som helst.",
+      "intro": "En deling er en avskrift av dagens stand, kryptert for nettopp den treneren. Nye oppføringer når først fram når du frisker den opp.",
+      "checking": "Kontrollerer …",
+      "locked": "Skriv inn frasen din først. Uten den kan appen ikke kryptere noe en annen kan åpne.",
+      "noCoach": "Ingen trenerkonto koblet. En deling går bare til noen du er koblet til.",
+      "noConsent": "Ingen kategori samtykket ennå. Du kan bare dele det som finnes i dataene dine.",
+      "coachHasNoKey": "Denne treneren har ennå ingen nøkkel. Vedkommende må logge inn én gang med frasen sin.",
+      "unnamedCoach": "Trenerkonto uten navn",
+      "give": "Del",
+      "refresh": "Frisk opp",
+      "revoke": "Trekk tilbake",
+      "since": "Avskrift fra {{date}}",
+      "stale": "Noe har endret seg siden da",
+      "revokeWarning": "Avskriften slettes, og treneren ser den ikke lenger. Det vedkommende har lest eller skrevet av før, henter ingen app tilbake.",
+      "revokeYes": "Trekk tilbake",
+      "nature": "Leverandøren kan ikke lese noen deling: avskriften er låst for trenerens nøkkel, og bare vedkommende har den. En deling av én kategori åpner bare den.",
+      "error": {
+        "unavailable": "Ingen forbindelse.",
+        "not_signed_in": "Ikke innlogget.",
+        "no_envelope": "Nøkkelparet ditt kunne ikke opprettes.",
+        "no_coach_key": "Nøkkelen til denne treneren er ikke tilgjengelig.",
+        "failed": "Det gikk ikke."
+      }
+    },
+    "shared": {
+      "eyebrow": "Trenerområde",
+      "title": "Delt med meg",
+      "intro": "Det utøvere har delt med deg fra helselaget sitt.",
+      "scope": "Tall og oppføringer akkurat slik utøveren skrev dem. Appen klassifiserer ingenting, advarer ikke og stiller ingen diagnose — det gjør en lege.",
+      "locked": "Skriv inn frasen din. Delingene er låst for nøkkelen din og forblir lukket uten den.",
+      "empty": "Ingenting delt ennå.",
+      "noEntries": "Denne kategorien var tom ved delingen.",
+      "unreadable": "Denne delingen hører til et tidligere nøkkelpar og kan ikke lenger åpnes. Utøveren må gi den på nytt.",
+      "takenAt": "Avskrift fra {{date}}",
+      "reload": "Last inn på nytt"
     }
   },
   "peak": {

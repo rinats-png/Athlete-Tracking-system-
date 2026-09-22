@@ -1261,6 +1261,44 @@
         "unreadable": "De afbeelding kon niet worden gelezen.",
         "too_large": "De afbeelding blijft ook verkleind te groot. Kies een kleinere."
       }
+    },
+    "share": {
+      "title": "Delen met een trainer",
+      "subtitle": "Per categorie, één voor één, altijd in te trekken.",
+      "intro": "Delen is een afschrift van de stand van vandaag, versleuteld voor precies die trainer. Nieuwe items bereiken hem pas als je het ververst.",
+      "checking": "Wordt gecontroleerd …",
+      "locked": "Voer eerst je zin in. Zonder die zin kan de app niets versleutelen dat een ander kan openen.",
+      "noCoach": "Geen trainersaccount gekoppeld. Delen gaat alleen naar iemand met wie je gekoppeld bent.",
+      "noConsent": "Nog geen categorie toegestaan. Je kunt alleen delen wat in je gegevens staat.",
+      "coachHasNoKey": "Deze trainer heeft nog geen sleutel aangemaakt. Hij moet één keer inloggen met zijn zin.",
+      "unnamedCoach": "Trainersaccount zonder naam",
+      "give": "Delen",
+      "refresh": "Verversen",
+      "revoke": "Intrekken",
+      "since": "Afschrift van {{date}}",
+      "stale": "Sindsdien is er iets veranderd",
+      "revokeWarning": "Het afschrift wordt verwijderd en de trainer ziet het niet meer. Wat hij eerder las of overschreef, haalt geen app terug.",
+      "revokeYes": "Intrekken",
+      "nature": "De aanbieder kan geen enkele deling lezen: het afschrift is vergrendeld voor de sleutel van de trainer, en alleen hij heeft die. Een deling van één categorie opent alleen die ene.",
+      "error": {
+        "unavailable": "Geen verbinding.",
+        "not_signed_in": "Niet ingelogd.",
+        "no_envelope": "Je sleutelpaar kon niet worden aangemaakt.",
+        "no_coach_key": "De sleutel van deze trainer is niet bereikbaar.",
+        "failed": "Dat is niet gelukt."
+      }
+    },
+    "shared": {
+      "eyebrow": "Trainersgedeelte",
+      "title": "Met mij gedeeld",
+      "intro": "Wat sporters met je hebben gedeeld uit hun gezondheidslaag.",
+      "scope": "Cijfers en items precies zoals de sporter ze noteerde. De app deelt niets in, waarschuwt nergens voor en stelt geen diagnose — dat doet een arts.",
+      "locked": "Voer je zin in. De delingen zijn vergrendeld voor jouw sleutel en blijven zonder die zin dicht.",
+      "empty": "Nog niets gedeeld.",
+      "noEntries": "Deze categorie was leeg bij het delen.",
+      "unreadable": "Deze deling hoort bij een eerder sleutelpaar en kan niet meer worden geopend. De sporter moet hem opnieuw geven.",
+      "takenAt": "Afschrift van {{date}}",
+      "reload": "Opnieuw laden"
     }
   },
   "peak": {

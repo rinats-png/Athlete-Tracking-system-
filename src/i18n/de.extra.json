@@ -1261,6 +1261,44 @@
         "unreadable": "Das Bild liess sich nicht lesen.",
         "too_large": "Das Bild bleibt auch verkleinert zu gross. Bitte ein kleineres wählen."
       }
+    },
+    "share": {
+      "title": "Freigabe an einen Trainer",
+      "subtitle": "Je Kategorie, einzeln, jederzeit widerrufbar.",
+      "intro": "Eine Freigabe ist eine Abschrift vom heutigen Stand, verschlüsselt für genau diesen Trainer. Neue Einträge sieht er erst, wenn du auffrischst.",
+      "checking": "Wird geprüft …",
+      "locked": "Gib zuerst deine Phrase ein. Ohne sie kann die App nichts verschlüsseln, was ein anderer öffnen könnte.",
+      "noCoach": "Kein Trainerkonto verknüpft. Eine Freigabe geht nur an einen Menschen, mit dem du verknüpft bist.",
+      "noConsent": "Noch keine Kategorie eingewilligt. Freigeben kannst du nur, was es in deinem Bestand gibt.",
+      "coachHasNoKey": "Dieser Trainer hat noch keinen Schlüssel angelegt. Er muss sich einmal mit seiner Phrase anmelden.",
+      "unnamedCoach": "Trainerkonto ohne Namen",
+      "give": "Freigeben",
+      "refresh": "Auffrischen",
+      "revoke": "Zurückziehen",
+      "since": "Abschrift vom {{date}}",
+      "stale": "Seitdem hat sich etwas geändert",
+      "revokeWarning": "Die Abschrift wird gelöscht und der Trainer sieht sie nicht mehr. Was er vorher gelesen oder abgeschrieben hat, holt keine App zurück.",
+      "revokeYes": "Zurückziehen",
+      "nature": "Der Betreiber kann keine Freigabe lesen: Die Abschrift ist für den Schlüssel des Trainers verschlossen, und den hat nur er. Eine Freigabe je Kategorie öffnet auch nur diese eine.",
+      "error": {
+        "unavailable": "Keine Verbindung.",
+        "not_signed_in": "Nicht angemeldet.",
+        "no_envelope": "Dein Schlüsselpaar liess sich nicht anlegen.",
+        "no_coach_key": "Der Schlüssel dieses Trainers ist nicht erreichbar.",
+        "failed": "Hat nicht geklappt."
+      }
+    },
+    "shared": {
+      "eyebrow": "Trainerbereich",
+      "title": "Mir freigegeben",
+      "intro": "Was Athleten dir aus ihrer Gesundheitsschicht freigegeben haben.",
+      "scope": "Zahlen und Einträge, so wie der Athlet sie eingetragen hat. Die App stuft nichts ein, warnt nicht und stellt keine Diagnose — das tut eine Ärztin.",
+      "locked": "Gib deine Phrase ein. Die Freigaben sind für deinen Schlüssel verschlossen, und ohne ihn bleiben sie zu.",
+      "empty": "Noch nichts freigegeben.",
+      "noEntries": "Diese Kategorie war bei der Freigabe leer.",
+      "unreadable": "Diese Freigabe gehört zu einem früheren Schlüsselpaar und lässt sich nicht mehr öffnen. Der Athlet muss sie neu erteilen.",
+      "takenAt": "Abschrift vom {{date}}",
+      "reload": "Neu laden"
     }
   },
   "peak": {

@@ -1261,6 +1261,44 @@
         "unreadable": "The image could not be read.",
         "too_large": "The image is still too large even after resizing. Please choose a smaller one."
       }
+    },
+    "share": {
+      "title": "Sharing with a coach",
+      "subtitle": "Per category, one at a time, revocable whenever.",
+      "intro": "Sharing means a copy of today’s state, encrypted for this one coach. New entries only reach them once you refresh it.",
+      "checking": "Checking …",
+      "locked": "Enter your phrase first. Without it the app cannot encrypt anything another person could open.",
+      "noCoach": "No coach account linked. Sharing only goes to someone you are linked with.",
+      "noConsent": "No category consented to yet. You can only share what exists in your data.",
+      "coachHasNoKey": "This coach has not created a key yet. They need to sign in with their phrase once.",
+      "unnamedCoach": "Coach account without a name",
+      "give": "Share",
+      "refresh": "Refresh",
+      "revoke": "Withdraw",
+      "since": "Copy from {{date}}",
+      "stale": "Something has changed since then",
+      "revokeWarning": "The copy is deleted and the coach no longer sees it. What they read or wrote down before, no app can take back.",
+      "revokeYes": "Withdraw",
+      "nature": "The operator cannot read any share: the copy is locked for the coach’s key, and only they have it. A share for one category opens only that one.",
+      "error": {
+        "unavailable": "No connection.",
+        "not_signed_in": "Not signed in.",
+        "no_envelope": "Your key pair could not be created.",
+        "no_coach_key": "This coach’s key is not reachable.",
+        "failed": "That did not work."
+      }
+    },
+    "shared": {
+      "eyebrow": "Coach area",
+      "title": "Shared with me",
+      "intro": "What athletes have shared with you from their health layer.",
+      "scope": "Numbers and entries exactly as the athlete recorded them. The app classifies nothing, warns about nothing and makes no diagnosis — a doctor does that.",
+      "locked": "Enter your phrase. The shares are locked for your key, and without it they stay closed.",
+      "empty": "Nothing shared yet.",
+      "noEntries": "This category was empty when it was shared.",
+      "unreadable": "This share belongs to an earlier key pair and can no longer be opened. The athlete has to grant it again.",
+      "takenAt": "Copy from {{date}}",
+      "reload": "Reload"
     }
   },
   "peak": {

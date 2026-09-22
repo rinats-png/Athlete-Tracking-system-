@@ -1261,6 +1261,44 @@
         "unreadable": "Bilden gick inte att läsa.",
         "too_large": "Bilden är för stor även efter förminskning. Välj en mindre."
       }
+    },
+    "share": {
+      "title": "Dela med en tränare",
+      "subtitle": "Per kategori, en i taget, går att dra tillbaka när som helst.",
+      "intro": "En delning är en avskrift av dagens läge, krypterad för just den tränaren. Nya poster når hen först när du uppdaterar den.",
+      "checking": "Kontrollerar …",
+      "locked": "Skriv in din fras först. Utan den kan appen inte kryptera något som någon annan kan öppna.",
+      "noCoach": "Inget tränarkonto kopplat. En delning går bara till någon du är kopplad till.",
+      "noConsent": "Ingen kategori samtyckt till ännu. Du kan bara dela det som finns i dina data.",
+      "coachHasNoKey": "Den här tränaren har ännu ingen nyckel. Hen måste logga in en gång med sin fras.",
+      "unnamedCoach": "Tränarkonto utan namn",
+      "give": "Dela",
+      "refresh": "Uppdatera",
+      "revoke": "Dra tillbaka",
+      "since": "Avskrift från {{date}}",
+      "stale": "Något har ändrats sedan dess",
+      "revokeWarning": "Avskriften raderas och tränaren ser den inte längre. Det hen läst eller skrivit av innan tar ingen app tillbaka.",
+      "revokeYes": "Dra tillbaka",
+      "nature": "Leverantören kan inte läsa någon delning: avskriften är låst för tränarens nyckel, och bara hen har den. En delning av en kategori öppnar bara den.",
+      "error": {
+        "unavailable": "Ingen anslutning.",
+        "not_signed_in": "Inte inloggad.",
+        "no_envelope": "Ditt nyckelpar kunde inte skapas.",
+        "no_coach_key": "Den här tränarens nyckel går inte att nå.",
+        "failed": "Det gick inte."
+      }
+    },
+    "shared": {
+      "eyebrow": "Tränarområde",
+      "title": "Delat med mig",
+      "intro": "Det idrottare har delat med dig ur sitt hälsolager.",
+      "scope": "Siffror och poster precis som idrottaren skrev in dem. Appen klassificerar ingenting, varnar inte och ställer ingen diagnos — det gör en läkare.",
+      "locked": "Skriv in din fras. Delningarna är låsta för din nyckel och förblir stängda utan den.",
+      "empty": "Inget delat ännu.",
+      "noEntries": "Den här kategorin var tom vid delningen.",
+      "unreadable": "Den här delningen hör till ett tidigare nyckelpar och går inte längre att öppna. Idrottaren måste ge den på nytt.",
+      "takenAt": "Avskrift från {{date}}",
+      "reload": "Ladda om"
     }
   },
   "peak": {

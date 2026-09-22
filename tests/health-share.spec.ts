@@ -170,3 +170,39 @@ test.describe('Die Abschrift', () => {
     expect(staleShares(h, [{ category: 'cycle', takenAt: '2026-09-02T08:00:00.000Z' }])).toEqual([])
   })
 })
+
+test.describe('Im Bildschirm', () => {
+  test('ohne Konto gibt es keine Freigabe — und der Bildschirm behauptet nichts anderes', async ({ page }) => {
+    const { openGuest } = await import('./helpers')
+    await openGuest(page)
+    await page.evaluate(() => {
+      localStorage.setItem('kydon.billing.mode', 'on')
+      localStorage.setItem(
+        'kydon.billing.v1',
+        JSON.stringify({ entitlements: [{ product: 'athlete_elite', status: 'active', currentPeriodEnd: null }], coachGrant: false, checkedAt: null }),
+      )
+      const store = JSON.parse(localStorage.getItem('kydon.data.v1')!)
+      store.athletes[0].profile.birthDate = '1996-01-15'
+      localStorage.setItem('kydon.data.v1', JSON.stringify(store))
+    })
+
+    // Ohne angemeldetes Konto gibt es niemanden, dem man etwas freigeben
+    // könnte. Der Abschnitt erscheint dann gar nicht — statt eines
+    // Knopfes, der nichts tut.
+    await page.goto('/gesundheit', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('health-consent')).toBeVisible()
+    await expect(page.getByTestId('health-share')).toHaveCount(0)
+  })
+
+  test('die Trainerseite sagt ohne Schlüssel, woran es liegt', async ({ page }) => {
+    const { openGuest } = await import('./helpers')
+    await openGuest(page)
+    await page.goto('/freigaben', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('shared-scope')).toContainText('keine Diagnose')
+    // Und sie stuft nichts ein — dieselbe Linie wie die Athletenseite.
+    const text = await page.locator('main').innerText()
+    for (const wort of ['auffällig', 'Verdacht', 'Mangel', 'zu niedrig', 'zu hoch', 'erhöht', 'Therapie', 'Screening']) {
+      expect(text, `«${wort}» wäre eine Einstufung`).not.toContain(wort)
+    }
+  })
+})

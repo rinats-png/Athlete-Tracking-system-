@@ -812,8 +812,12 @@ müssen. **Fotos sind seit 22.09.2026 gebaut:** sechste Einwilligungs-
 kategorie, Aufnahme auf 900 px und 160.000 Zeichen normiert, Vergleich nur
 innerhalb einer Pose, Zweitschrift nur verschlüsselt. Dabei fiel auf, dass
 `entry_id` die Kategorie im Klartext trug — das ist behoben, die Kennung ist
-jetzt der HMAC der lokalen Kennung. **Neu offen:** Trainerfreigabe je
-Kategorie über einen Schlüsselumschlag, die Sportmodule.
+jetzt der HMAC der lokalen Kennung. **Die Trainerfreigabe über den
+Schlüsselumschlag ist seit 22.09.2026 gebaut:** Schlüsselpaar je Konto,
+Abschrift je Kategorie, Entzug durch Löschen, Trainerseite unter
+`/freigaben`. Dabei fiel auf, dass `coach_athlete_links.athlete_id` auf eine
+Athletenzeile zeigt und nicht auf ein Konto — die Regel brauchte die Brücke
+über `athletes.user_id`. **Neu offen:** die Sportmodule.
 
 ## 14. Zusammenfassung in drei Sätzen
 

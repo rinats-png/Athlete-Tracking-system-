@@ -13,6 +13,7 @@ import { LabPanel } from './LabPanel'
 import { CyclePanel, SelfImagePanel, SymptomPanel } from './DailyPanels'
 import { MedsPanel } from './MedsPanel'
 import { PhotoPanel } from './PhotoPanel'
+import { SharePanel } from './SharePanel'
 import { EnergyPanel } from './EnergyPanel'
 
 /**
@@ -66,6 +67,7 @@ export function HealthScreen() {
           {hasConsent(health, 'meds') && <MedsPanel />}
           {hasConsent(health, 'photos') && <PhotoPanel />}
           <EnergyPanel />
+          <SharePanel />
           <Panel>
             <div className="px-4 py-3">
               <p className="text-[13px] leading-relaxed text-ink-secondary">{t('health.toPeak')}</p>

@@ -190,7 +190,17 @@ und die App verlangt vor der ersten Art.-9-Eingabe einen Export;
 (3) Trainings- und Leistungsdaten sind von der Phrase unabhängig. Wer das
 nicht will, kann S5 auch ohne Synchronisierung nutzen — nur auf dem Gerät.
 
-**Trainerzugriff je Kategorie.** `can_view_athlete` sieht heute alles.
+**Trainerzugriff je Kategorie — gebaut am 22.09.2026.** Der Absatz
+darunter beschrieb den Bauauftrag; er ist eingelöst. `health_entries`
+bleibt für jeden ausser dem Eigentümer zu; die Freigabe läuft über eine
+zweite Ablage `health_shares` mit einer Abschrift je Kategorie, einem
+frischen Freigabeschlüssel und dem Umschlag für den öffentlichen Schlüssel
+des Trainers. Der Entzug löscht die Zeile. Was offen bleibt: die
+Protokollereignisse — wer wann was freigegeben und entzogen hat, steht
+heute nur in der Zeile selbst und nicht in einem Protokoll.
+
+**Trainerzugriff je Kategorie (der ursprüngliche Auftrag).**
+`can_view_athlete` sieht heute alles.
 Für `health_entries` braucht es eine eigene Freigabe je Kategorie durch
 den Athleten (`health_shares`), mit sofortigem Entzug. Bei
 Ende-zu-Ende-Verschlüsselung heisst Freigabe: der Kategorieschlüssel wird
@@ -388,4 +398,5 @@ Nur wenn du es so entscheidest — hier steht, was es wäre:
 | Altersgrenze 18 für S5 | `ageAllows` in `src/domain/health.ts`, Tor im `HealthScreen` | **gebaut** 22.09.2026 |
 | Regel in den Prüffällen: kein Signal, kein Text mit Krankheits-, Verletzungs- oder Risikonamen | `tests/health.spec.ts` | **gebaut** 22.09.2026 |
 | Serverseitige Ablage mit RLS und Ende-zu-Ende-Verschlüsselung | `supabase/migrations/…health_entries.sql`, `src/lib/health/crypto.ts`, `src/lib/supabase/healthSync.ts` | **gebaut** 22.09.2026 |
-| Trainerfreigabe je Kategorie (Schlüsselumschlag), Protokollereignisse | `src/lib/health/` | **offen** |
+| Trainerfreigabe je Kategorie (Schlüsselumschlag) | `src/lib/health/envelope.ts`, `share.ts`, `health_shares` | **gebaut** 22.09.2026 |
+| Protokollereignisse der Gesundheitsschicht | `src/lib/health/` | **offen** |

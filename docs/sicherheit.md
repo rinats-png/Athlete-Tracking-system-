@@ -637,9 +637,25 @@ DSGVO. Für dieses Dokument die drei Punkte, die zählen:
   mit. Die Zeilen im alten Format wurden gelöscht
   (`20260922140000_health_opaque_entry_ids.sql`, zu dem Zeitpunkt null
   Zeilen); die Geräte schreiben sie im neuen Format neu.
-- **Kein Trainerzugriff**, auch nicht über `can_view_athlete`. Eine Freigabe
-  je Kategorie bräuchte einen Umschlag mit dem Schlüssel des Trainers; der
-  ist nicht gebaut, und bis dahin gibt es keinen Weg.
+- **Kein Trainerzugriff auf `health_entries`**, auch nicht über
+  `can_view_athlete` — diese Regel bleibt unverändert. Seit 22.09.2026 gibt
+  es stattdessen eine zweite Ablage, `health_shares`, und darin je Athlet,
+  Trainer und Kategorie eine **Abschrift**: verschlüsselt mit einem frisch
+  gewürfelten Freigabeschlüssel, daneben dieser Schlüssel im Umschlag,
+  RSA-OAEP-verschlossen für den öffentlichen Schlüssel des Trainers. Jedes
+  Konto hat dafür ein Schlüsselpaar; der private Teil liegt eingewickelt in
+  den Schlüssel aus der eigenen Phrase. Der Betreiber sieht zwei Chiffrate
+  und kann keines öffnen. Der Trainer darf **lesen, nie schreiben**, und nur
+  solange die Verknüpfung aktiv ist — zwei Bedingungen, die gleichzeitig ja
+  sagen müssen: die Zugriffsregel und der Umschlag.
+  Drei Eigenschaften, die bewusst so sind: Eine Freigabe ist eine **Abschrift
+  mit Datum**, kein Dauerfenster (der Athlet frischt von Hand auf, und der
+  Bildschirm zeigt, wo sich seitdem etwas geändert hat). Der **Entzug
+  löscht** die Zeile — was der Trainer vorher gelesen hat, holt niemand
+  zurück, und der Bildschirm verspricht es auch nicht. Und **je Kategorie
+  getrennt**: ein Umschlag für Laborwerte öffnet keine Zyklusdaten.
+  `delete_account_data` nimmt Freigaben in beide Richtungen mit;
+  `purge_expired` entfernt Freigaben ohne aktive Verknüpfung.
 - **Einwilligung je Kategorie, Widerruf löscht.** Sechs Kategorien, jede
   mit Zeitpunkt und Textfassung. Der Widerruf entfernt die Einträge der
   Kategorie sofort aus dem Bestand; der Vermerk bleibt als Nachweis.
