@@ -35,7 +35,10 @@
     "startAssessment": "Start testøkt",
     "back": "Tilbake",
     "close": "Lukk",
-    "save": "Lagre"
+    "save": "Lagre",
+    "yes": "Ja",
+    "no": "Nei",
+    "delete": "Slett"
   },
   "theme": {
     "label": "Utseende",

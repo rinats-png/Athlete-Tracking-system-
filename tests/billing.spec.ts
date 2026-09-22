@@ -19,14 +19,17 @@ import { openGuest } from './helpers'
 const ent = (product: Entitlement['product'], status: Entitlement['status'] = 'active', end: string | null = null): Entitlement => ({ product, status, currentPeriodEnd: end })
 
 test.describe('Stufen', () => {
-  test('vier Athletenstufen, jede mit dem ganzen Kern, jede mit Export', () => {
-    expect(ATHLETE_PLANS.map((p) => p.id)).toEqual(['free', 'plus', 'pro', 'termin'])
+  test('fünf Athletenstufen, jede mit dem ganzen Kern, jede mit Export', () => {
+    // Elite kam mit S5 dazu (22.09.2026) — vorher stand sie mit Absicht nicht
+    // in der Liste: kein Merkmal darin ist ein Versprechen auf später.
+    expect(ATHLETE_PLANS.map((p) => p.id)).toEqual(['free', 'plus', 'pro', 'elite', 'termin'])
     for (const plan of [...ATHLETE_PLANS, ...COACH_TIERS]) {
       for (const f of FREE_CORE) expect(plan.features, `${plan.id} ohne ${f}`).toContain(f)
     }
     expect(FREE_CORE).toContain('diaryLight')
     expect(athletePlan('plus').yearlyEur).toBe(49)
     expect(athletePlan('pro').yearlyEur).toBe(99)
+    expect(athletePlan('elite').yearlyEur).toBe(199)
     // Pro enthält alles aus Plus — eine höhere Stufe nimmt nichts weg.
     for (const f of athletePlan('plus').features) expect(athletePlan('pro').features).toContain(f)
   })

@@ -17,10 +17,15 @@ import type { AppLocale } from '@/i18n/locales'
  * weiter: Eine Sperre ohne Kaufmöglichkeit nähme allen etwas weg und gäbe
  * niemandem einen Weg zurück. Sperren und Kaufen kommen in einem Zug.
  *
- * VIER ATHLETENSTUFEN SEIT DEM AUSBAU (docs/ausbau.md §10): Frei, Plus (49),
- * Pro (99), Termin (49 einmalig). Elite (199, Gesundheitsschicht, Peak Week)
- * steht im Plan, aber nicht hier: kein Merkmal auf dieser Liste ist ein
- * Versprechen auf später, und S5 ist nicht gebaut. Elite kommt mit S5.
+ * FÜNF ATHLETENSTUFEN (docs/ausbau.md §10): Frei, Plus (49), Pro (99),
+ * Elite (199), Termin (69 einmalig). Elite kam am 22.09.2026 dazu, als S5
+ * gebaut wurde — vorher stand sie mit Absicht NICHT hier: kein Merkmal auf
+ * dieser Liste ist ein Versprechen auf später.
+ *
+ * ELITE IST DIE EINZIGE STUFE MIT EIGENEM RECHTSRAHMEN: Sie schaltet die
+ * Gesundheitsschicht frei (Art. 9 DSGVO), verlangt eine eigene Einwilligung
+ * je Datenkategorie und gilt erst ab achtzehn. Das ist keine Vorsicht,
+ * sondern eine andere Rechtsklasse (docs/rechtspruefung-art9-mdr.md).
  *
  * PLUS VON 29 AUF 49 €: Plus hat mit Tagebuch, Trainingslog und Belastung
  * erheblich mehr Substanz als bei 29 €. Wer bereits zu 29 € zahlt, behält
@@ -143,6 +148,9 @@ export type PlanFeature =
   | 'nutrition' // Mahlzeiten, Makros, Referenzumsatz, Open Food Facts
   | 'decisionLog' // Entscheidungen mit Wirkungsprüfung
   | 'cockpit' // Signale mit einstellbaren Schwellen
+  // --- Elite -----------------------------------------------------------------
+  | 'health' // Gesundheitsschicht: Laborverlauf, Symptome, Zyklus, Medikation (Art. 9)
+  | 'peakWeek' // Peak Week als Protokoll
   // --- Termin ----------------------------------------------------------------
   | 'targetStandards' // Zielwerte des konkreten Einstellungstests
   | 'reportPdf' // Druckfertiger Report
@@ -171,13 +179,13 @@ export const FREE_CORE: readonly PlanFeature[] = [
  * Das Produkt, das der Bezahlweg für eine Stufe kennt — der Wert in
  * `entitlements.product`. Die kostenlosen Stufen haben keins.
  */
-export type EntitlementProduct = 'athlete_plus' | 'athlete_pro' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro'
+export type EntitlementProduct = 'athlete_plus' | 'athlete_pro' | 'athlete_elite' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro'
 
 // =============================================================================
 // Einzelnutzung
 // =============================================================================
 
-export type AthletePlanId = 'free' | 'plus' | 'pro' | 'termin'
+export type AthletePlanId = 'free' | 'plus' | 'pro' | 'elite' | 'termin'
 
 export interface AthletePlan {
   id: AthletePlanId
@@ -231,6 +239,8 @@ const PLUS_FEATURES: readonly PlanFeature[] = [
   'loadMonitoring',
 ]
 
+const PRO_FEATURES: readonly PlanFeature[] = [...PLUS_FEATURES, 'nutrition', 'decisionLog', 'cockpit']
+
 export const ATHLETE_PLANS: readonly AthletePlan[] = [
   {
     id: 'free',
@@ -262,8 +272,19 @@ export const ATHLETE_PLANS: readonly AthletePlan[] = [
     onceEur: null,
     athletes: 3,
     name: { de: 'Kydon Pro', en: 'Kydon Pro' },
-    features: [...PLUS_FEATURES, 'nutrition', 'decisionLog', 'cockpit'],
+    features: PRO_FEATURES,
     product: 'athlete_pro',
+  },
+  {
+    id: 'elite',
+    billing: 'yearly',
+    yearlyEur: 199,
+    monthlyEur: 19.9,
+    onceEur: null,
+    athletes: 3,
+    name: { de: 'Kydon Elite', en: 'Kydon Elite' },
+    features: [...PRO_FEATURES, 'health', 'peakWeek'],
+    product: 'athlete_elite',
   },
   {
     id: 'termin',

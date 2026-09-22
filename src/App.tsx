@@ -145,6 +145,10 @@ const router = createBrowserRouter([
       { path: 'training', element: <Gate feature="trainingLog">{screen(() => import('@/features/training/TrainingScreen'), 'TrainingScreen')}</Gate> },
       { path: 'cockpit', element: <Gate feature="decisionLog">{screen(() => import('@/features/cockpit/CockpitScreen'), 'CockpitScreen')}</Gate> },
       { path: 'ernaehrung', element: <Gate feature="nutrition">{screen(() => import('@/features/nutrition/NutritionScreen'), 'NutritionScreen')}</Gate> },
+      // Die Gesundheitsschicht hat drei Tore: die Stufe hier, das Alter im
+      // Bildschirm, die Einwilligung je Kategorie darin (S5, Art. 9).
+      { path: 'gesundheit', element: <Gate feature="health">{screen(() => import('@/features/health/HealthScreen'), 'HealthScreen')}</Gate> },
+      { path: 'peakweek', element: <Gate feature="peakWeek">{screen(() => import('@/features/health/PeakWeekScreen'), 'PeakWeekScreen')}</Gate> },
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },

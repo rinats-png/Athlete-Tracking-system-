@@ -75,9 +75,29 @@ function withList(athlete: StoredAthlete, kind: SeriesKind, list: SeriesEntry[])
   }
 }
 
-/** Das Dokument OHNE Zeitreihen — das, was in athlete_documents liegt. */
+/**
+ * Die Gesundheitsschicht (S5) aus einem Dokument entfernen.
+ *
+ * DIESE DATEN VERLASSEN DAS GERAET NICHT. Sie sind besondere Kategorien nach
+ * Art. 9 DSGVO; eine Zweitschrift auf dem Server braucht Ende-zu-Ende-
+ * Verschluesselung mit einem Schluessel, den der Nutzer haelt, und die ist
+ * nicht gebaut (docs/rechtspruefung-art9-mdr.md §4). Bis dahin bleiben sie
+ * lokal — und der Export bleibt die Sicherung, die dem Nutzer gehoert (§32).
+ *
+ * Das steht hier und nicht im Bildschirm, damit es KEINEN Weg gibt, sie
+ * versehentlich mitzuschicken: jeder Schreibvorgang geht durch diese Stelle.
+ */
+export function stripHealth(athlete: StoredAthlete): StoredAthlete {
+  return {
+    ...athlete,
+    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+    peakWeeks: [],
+  }
+}
+
+/** Das Dokument OHNE Zeitreihen und OHNE Gesundheitsschicht — das, was in athlete_documents liegt. */
 export function stripSeries(athlete: StoredAthlete): StoredAthlete {
-  return { ...athlete, diary: [], workouts: [], decisions: [], meals: [] }
+  return stripHealth({ ...athlete, diary: [], workouts: [], decisions: [], meals: [] })
 }
 
 /** Alle Zeilen eines Athleten, so wie sie lokal liegen. */

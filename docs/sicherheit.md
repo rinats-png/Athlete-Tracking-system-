@@ -612,6 +612,26 @@ sind Ende-zu-Ende-Verschlüsselung mit nutzergehaltenem Schlüssel, getrennte
 Tabellen mit Einwilligung und Freigabe je Kategorie und eine DSFA
 vorgesehen.
 
+## Gesundheitsschicht vom 22.09.2026
+
+Mit S5 verarbeitet die App Daten der besonderen Kategorien nach Art. 9
+DSGVO. Für dieses Dokument die drei Punkte, die zählen:
+
+- **Sie liegen nur auf dem Gerät.** `stripHealth` entfernt sie aus jedem
+  Dokument, das zur Synchronisierung geht — an genau einer Stelle, durch
+  die jeder Schreibvorgang läuft. Auf dem Server gibt es keine Tabelle
+  dafür, und es soll keine geben, bevor Ende-zu-Ende-Verschlüsselung mit
+  nutzergehaltenem Schlüssel gebaut ist.
+- **Einwilligung je Kategorie, Widerruf löscht.** Fünf Kategorien, jede
+  mit Zeitpunkt und Textfassung. Der Widerruf entfernt die Einträge der
+  Kategorie sofort aus dem Bestand; der Vermerk bleibt als Nachweis.
+- **Ab achtzehn.** Ohne Geburtsdatum im Profil bleibt der Bereich zu.
+
+Restrisiko, offen benannt: Ein Gerät, das mehrere Menschen benutzen, und
+ein Browser ohne Geräteverschlüsselung schützen diese Daten nicht. Die App
+kann das nicht lösen; der Hinweis auf Geräteverschlüsselung und
+Bildschirmsperre gehört in die Betreiberliste.
+
 ## Was man selbst laufen lassen kann
 
 ```bash

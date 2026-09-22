@@ -54,7 +54,7 @@ export function activeProducts(entitlements: readonly Entitlement[], now: Date =
 }
 
 /** Rangfolge der Athletenstufen — die höchste vorhandene zählt. */
-const ATHLETE_RANK: AthletePlanId[] = ['free', 'plus', 'termin', 'pro']
+const ATHLETE_RANK: AthletePlanId[] = ['free', 'plus', 'termin', 'pro', 'elite']
 const COACH_RANK: CoachTierId[] = ['coach_free', 'coach_start', 'coach_team', 'coach_pro']
 
 export function athletePlanOf(products: ReadonlySet<EntitlementProduct>, coachGrant = false): AthletePlanId {
@@ -85,6 +85,12 @@ export function accessFor(role: Access['role'], entitlements: readonly Entitleme
 }
 
 /** Was ein zahlender Trainer für seine Athleten mitbringt: alles, was Pro hat. */
+/**
+ * Was ein zahlender Trainer für seine Athleten mitbringt: die volle
+ * Datentiefe — aber NICHT die Gesundheitsschicht. Die ist an eine eigene
+ * Einwilligung des Athleten gebunden und an sein Alter; ein Trainerabo kann
+ * sie nicht mitkaufen (docs/rechtspruefung-art9-mdr.md §4).
+ */
 const FULL_DEPTH: readonly PlanFeature[] = athletePlan('pro').features
 
 export function canUse(feature: PlanFeature, access: Access): boolean {

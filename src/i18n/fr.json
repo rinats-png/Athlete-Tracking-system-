@@ -35,7 +35,10 @@
     "startAssessment": "Lancer le bilan",
     "back": "Retour",
     "close": "Fermer",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "yes": "Oui",
+    "no": "Non",
+    "delete": "Supprimer"
   },
   "theme": {
     "label": "Apparence",

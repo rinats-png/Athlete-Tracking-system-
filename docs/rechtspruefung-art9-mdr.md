@@ -276,6 +276,19 @@ Wechselwirkungshinweise, jede Schwelle mit Krankheitsbezug, PEDs.
 Einwilligung stellen; Datenschutzerklärung präzisieren; AV-Vertrag für
 Trainerkonten; DSFA anlegen; Frage Datenschutzbeauftragter klären.
 
+**Nachtrag 22.09.2026.** S5 ist im oben empfohlenen Umfang gebaut worden —
+mit einer Abweichung, die den Rahmen enger zieht statt weiter: **Die
+Gesundheitsschicht synchronisiert nicht.** Statt Ende-zu-Ende-
+Verschlüsselung mit nutzergehaltener Phrase (Abschnitt 4) bleiben die
+Daten auf dem Gerät und im Export. Das ist die datensparsamste Variante,
+sie braucht keine Schlüsselverwaltung, und sie löst die Kollision mit §89
+auf, indem sie sie vermeidet. Fotos fehlen aus demselben Grund. Die
+Verschlüsselung bleibt die Voraussetzung für beides.
+
+**Die Fragen in Abschnitt 8 sind weiterhin offen.** Sie waren vor dem Bau
+zu stellen; gebaut wurde auf ausdrückliche Entscheidung des Betreibers,
+und sie sind vor dem öffentlichen Betrieb von S5 zu beantworten.
+
 **Was das für Elite bedeutet.** Elite verkauft dann Ordnung und Verlauf
 für Daten, die der Nutzer und sein Arzt beurteilen — nicht Diagnostik. Das
 ist weniger, als v4 als Excel beim Trainer tun konnte, und mehr, als eine
@@ -359,6 +372,7 @@ Nur wenn du es so entscheidest — hier steht, was es wäre:
 | Datenschutzerklärung präzisieren | `src/features/legal/texts.ts`, Abschnitt «Keine medizinische Datenverarbeitung» | **erledigt** 21.09.2026 |
 | AV-Vertrag für Trainerkonten | `dpaDocument` in `src/features/legal/texts.ts`, Seite `/auftragsverarbeitung`, Annahme mit Fassung und Datum in `accounts` (Migration `dpa_acceptance`), Hinweis im Trainerbereich | **gebaut** 21.09.2026 — Text anwaltlich zu prüfen |
 | DSFA-Dokument anlegen | `docs/dsfa.md` nach dem Muster der Aufsicht | vor S5 |
-| `health_entries`, `health_consents`, `health_shares` mit RLS, Ende-zu-Ende-Verschlüsselung, Protokollereignisse | Migration + `src/lib/health/` | S5 |
-| Altersgrenze 18 für S5 | Schranke wie bei Stufen | S5 |
-| Regel in den Prüffällen: kein Signal, kein Text mit Krankheits-, Verletzungs- oder Risikonamen | `tests/health.spec.ts`, wie der «kein Ziel»-Fall in `nutrition.spec.ts` | S5 |
+| Gesundheitsschicht mit Einwilligung je Kategorie, lokal statt auf dem Server | `src/lib/store/schema.ts` (v24), `src/domain/health.ts`, `src/features/health/` | **gebaut** 22.09.2026 |
+| Altersgrenze 18 für S5 | `ageAllows` in `src/domain/health.ts`, Tor im `HealthScreen` | **gebaut** 22.09.2026 |
+| Regel in den Prüffällen: kein Signal, kein Text mit Krankheits-, Verletzungs- oder Risikonamen | `tests/health.spec.ts` | **gebaut** 22.09.2026 |
+| Serverseitige Ablage mit RLS, Ende-zu-Ende-Verschlüsselung, Trainerfreigabe je Kategorie, Protokollereignisse | Migration + `src/lib/health/` | **offen** — bis dahin bleiben die Daten auf dem Gerät |

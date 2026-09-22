@@ -530,6 +530,8 @@ export function buildDemoData(): StoredData {
         cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
         meals: DEMO_MEALS,
         nutrition: { pal: 1.55 },
+    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+    peakWeeks: [],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
         focuses: DEMO_FOCUSES,

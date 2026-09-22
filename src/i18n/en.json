@@ -35,7 +35,10 @@
     "startAssessment": "Start assessment",
     "back": "Back",
     "close": "Close",
-    "save": "Save"
+    "save": "Save",
+    "yes": "Yes",
+    "no": "No",
+    "delete": "Delete"
   },
   "theme": {
     "label": "Appearance",

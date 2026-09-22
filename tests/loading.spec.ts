@@ -159,7 +159,12 @@ test.describe("Grösse des Startpakets", () => {
   // Sprachlogik für acht Sprachen liegen auf der Übersicht bzw. im Kern und
   // damit im Startpaket — rund 25 KB, bewusst hier statt hinter einem
   // weiteren Nachlade-Schritt, den die Übersicht bei jedem Öffnen zahlte.
-  const BUDGET_KB = 900;
+  //
+  // 900 → 950 (22.09.2026, S5): Die Prüfregeln der Gesundheitsschicht und der
+  // Peak Week liegen in schema.ts, und schema.ts läuft beim Start — der
+  // Bestand wird vor dem ersten Bild geprüft. Die Bildschirme dazu werden
+  // nachgeladen, die Regeln können es nicht.
+  const BUDGET_KB = 950;
 
   test(`das Hauptpaket bleibt unter ${BUDGET_KB} KB`, () => {
     const dir = new URL("../dist/assets/", import.meta.url);

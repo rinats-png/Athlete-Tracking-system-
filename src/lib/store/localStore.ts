@@ -22,6 +22,15 @@ import {
   type ValidatedMeal,
   type ValidatedMealItem,
   type ValidatedNutrition,
+  type ValidatedHealth,
+  type ValidatedHealthConsent,
+  type ValidatedLabEntry,
+  type ValidatedSymptomEntry,
+  type ValidatedCycleEntry,
+  type ValidatedSelfImageEntry,
+  type ValidatedMedEntry,
+  type ValidatedPeakWeek,
+  type ValidatedPeakDay,
   type ValidatedData,
   type ValidatedResult,
 } from './schema'
@@ -68,6 +77,15 @@ export type StoredCockpit = ValidatedCockpit
 export type StoredMeal = ValidatedMeal
 export type StoredMealItem = ValidatedMealItem
 export type StoredNutrition = ValidatedNutrition
+export type StoredHealth = ValidatedHealth
+export type StoredHealthConsent = ValidatedHealthConsent
+export type StoredLabEntry = ValidatedLabEntry
+export type StoredSymptomEntry = ValidatedSymptomEntry
+export type StoredCycleEntry = ValidatedCycleEntry
+export type StoredSelfImageEntry = ValidatedSelfImageEntry
+export type StoredMedEntry = ValidatedMedEntry
+export type StoredPeakWeek = ValidatedPeakWeek
+export type StoredPeakDay = ValidatedPeakDay
 
 export interface LoadResult {
   data: StoredData

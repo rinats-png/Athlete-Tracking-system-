@@ -35,7 +35,10 @@
     "startAssessment": "Diagnostik starten",
     "back": "Zurück",
     "close": "Schliessen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "yes": "Ja",
+    "no": "Nein",
+    "delete": "Löschen"
   },
   "theme": {
     "label": "Darstellung",

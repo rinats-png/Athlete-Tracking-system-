@@ -35,7 +35,10 @@
     "startAssessment": "Testsessie starten",
     "back": "Terug",
     "close": "Sluiten",
-    "save": "Opslaan"
+    "save": "Opslaan",
+    "yes": "Ja",
+    "no": "Nee",
+    "delete": "Verwijderen"
   },
   "theme": {
     "label": "Weergave",

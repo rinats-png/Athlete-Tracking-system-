@@ -214,6 +214,12 @@ export function NutritionScreen() {
                 <ArrowRight size={14} aria-hidden />
               </Link>
             </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/gesundheit">
+                {t('health.title')}
+                <ArrowRight size={14} aria-hidden />
+              </Link>
+            </Button>
           </div>
         </div>
       </Panel>

@@ -8,14 +8,14 @@
  * Teile (Signatur, Zuordnung) aus den Prüffällen heraus geprüft werden können.
  */
 
-export type Product = 'athlete_plus' | 'athlete_pro' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro'
+export type Product = 'athlete_plus' | 'athlete_pro' | 'athlete_elite' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro'
 export type Interval = 'yearly' | 'monthly' | 'once'
 
-const PRODUCTS: Product[] = ['athlete_plus', 'athlete_pro', 'athlete_termin', 'coach_start', 'coach_team', 'coach_pro']
+const PRODUCTS: Product[] = ['athlete_plus', 'athlete_pro', 'athlete_elite', 'athlete_termin', 'coach_start', 'coach_team', 'coach_pro']
 
 /** Plan-Kennung der App → Produkt. Termin ist ein Einmalkauf, alles andere ein Abo. */
 export function productOf(plan: unknown, interval: unknown): { product: Product; interval: Interval } | null {
-  const map: Record<string, Product> = { plus: 'athlete_plus', pro: 'athlete_pro', termin: 'athlete_termin', coach_start: 'coach_start', coach_team: 'coach_team', coach_pro: 'coach_pro' }
+  const map: Record<string, Product> = { plus: 'athlete_plus', pro: 'athlete_pro', elite: 'athlete_elite', termin: 'athlete_termin', coach_start: 'coach_start', coach_team: 'coach_team', coach_pro: 'coach_pro' }
   if (typeof plan !== 'string' || !(plan in map)) return null
   const product = map[plan]
   if (product === 'athlete_termin') return interval === 'once' ? { product, interval: 'once' } : null

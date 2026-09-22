@@ -35,7 +35,10 @@
     "startAssessment": "Starta testtillfälle",
     "back": "Tillbaka",
     "close": "Stäng",
-    "save": "Spara"
+    "save": "Spara",
+    "yes": "Ja",
+    "no": "Nej",
+    "delete": "Radera"
   },
   "theme": {
     "label": "Utseende",

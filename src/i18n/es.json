@@ -35,7 +35,10 @@
     "startAssessment": "Iniciar evaluación",
     "back": "Atrás",
     "close": "Cerrar",
-    "save": "Guardar"
+    "save": "Guardar",
+    "yes": "Sí",
+    "no": "No",
+    "delete": "Borrar"
   },
   "theme": {
     "label": "Apariencia",

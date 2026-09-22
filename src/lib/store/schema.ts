@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 23
+export const CURRENT_SCHEMA_VERSION = 24
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -699,6 +699,203 @@ export const DIARY_OPTIONAL_FIELDS = ['sleepQuality', 'stress', 'soreness', 'ste
 export type DiaryOptionalField = (typeof DIARY_OPTIONAL_FIELDS)[number]
 const diaryFieldSchema = z.enum(DIARY_OPTIONAL_FIELDS)
 
+// =============================================================================
+// Schicht S5: Gesundheit und Peak Week (Art. 9 DSGVO)
+// =============================================================================
+//
+// WAS HIER ANDERS IST ALS IM REST DES BESTANDS. Diese Daten sind besondere
+// Kategorien nach Art. 9 DSGVO. Daraus folgen drei Regeln, die der Code
+// durchhalten muss und die docs/rechtspruefung-art9-mdr.md begruendet:
+//
+//   1. EINWILLIGUNG JE KATEGORIE, nicht pauschal. Ohne Einwilligung ist die
+//      Kategorie in der Oberflaeche nicht vorhanden — nicht ausgegraut. Der
+//      Widerruf loescht die Kategorie sofort und vollstaendig.
+//   2. DIESE DATEN VERLASSEN DAS GERAET NICHT. Die Synchronisierung traegt
+//      sie nicht mit (siehe stripHealth in src/lib/supabase/series.ts); der
+//      Export enthaelt sie, denn er gehoert dem Nutzer (§32). Eine
+//      Zweitschrift auf dem Server kommt erst mit Ende-zu-Ende-
+//      Verschluesselung, und die ist nicht gebaut.
+//   3. DIE APP BEWERTET NICHTS. Kein Grenzwert, keine Ampel, keine Triage,
+//      keine Vorhersage. Ein Laborreferenzbereich steht nur da, wenn der
+//      Nutzer ihn aus seinem Befund abgeschrieben hat — die App bringt
+//      keinen mit. Das ist zugleich die Linie zur MDR (MDCG 2019-11):
+//      speichern und darstellen ja, erkennen und einstufen nein.
+
+/** Die Kategorien, fuer die einzeln eingewilligt wird. */
+export const HEALTH_CATEGORIES = ['lab', 'symptoms', 'cycle', 'selfImage', 'meds'] as const
+export type HealthCategory = (typeof HEALTH_CATEGORIES)[number]
+
+/**
+ * Fassung des Einwilligungstextes. Aendert sich der Text, aendert sich die
+ * Fassung — und die App fragt erneut, statt eine alte Zustimmung
+ * weiterzuverwenden.
+ */
+export const HEALTH_CONSENT_VERSION = '2026-09-22'
+
+/** Ab diesem Alter ist die Gesundheitsschicht freigeschaltet. */
+export const HEALTH_MIN_AGE = 18
+
+const healthConsentSchema = z.object({
+  category: z.enum(HEALTH_CATEGORIES),
+  /** Null = nie erteilt. */
+  grantedAt: isoDate.nullable().default(null),
+  /** Zurueckgezogen am. Beim Widerruf werden die Eintraege der Kategorie geloescht. */
+  withdrawnAt: isoDate.nullable().default(null),
+  /** Welche Fassung des Textes angenommen wurde. */
+  version: z.string().max(20).default(''),
+})
+
+/** Phase des Zyklus — Selbstangabe, nie berechnet und nie vorhergesagt. */
+export const CYCLE_PHASES = ['menstruation', 'follicular', 'ovulation', 'luteal', 'unknown'] as const
+
+/**
+ * Ein Laborwert, wie er im Befund steht.
+ *
+ * Der Referenzbereich ist ABGESCHRIEBEN, nicht mitgeliefert: Er gehoert dem
+ * Labor, das gemessen hat, und unterscheidet sich zwischen Laboren. Eine App,
+ * die eigene Bereiche mitbrachte oder Werte als «auffaellig» markierte,
+ * wuerde interpretieren — und waere damit ein Medizinprodukt.
+ */
+const labEntrySchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  /** Kennung aus data/labMarkers.ts oder freier Text. */
+  marker: z.string().min(1).max(60),
+  value: finite.min(0).max(1_000_000),
+  unit: z.string().max(20).default(''),
+  refLow: finite.min(0).max(1_000_000).nullable().default(null),
+  refHigh: finite.min(0).max(1_000_000).nullable().default(null),
+  lab: z.string().max(80).default(''),
+  // --- Praeanalytik: was den Wert erklaert, ohne ihn zu deuten -------------
+  time: z.string().max(5).default(''),
+  fasting: z.boolean().nullable().default(null),
+  trainingDayBefore: z.boolean().nullable().default(null),
+  cyclePhase: z.enum(CYCLE_PHASES).nullable().default(null),
+  infection: z.boolean().nullable().default(null),
+  note: z.string().max(400).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+/** Was erfasst werden kann. Eine Liste von Namen — keine Bedeutung, keine Schwelle. */
+export const SYMPTOM_KEYS = [
+  'nausea',
+  'reflux',
+  'bloating',
+  'cramps',
+  'stoolUrgency',
+  'headache',
+  'dizziness',
+  'palpitations',
+  'fever',
+  'injury',
+] as const
+
+const symptomEntrySchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  /** Je Symptom eine Staerke 0–3 als Selbstangabe. Was fehlt, wurde nicht erfasst. */
+  items: z
+    .array(z.object({ key: z.enum(SYMPTOM_KEYS), severity: z.number().int().min(0).max(3) }))
+    .max(SYMPTOM_KEYS.length)
+    .default([]),
+  note: z.string().max(400).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+const cycleEntrySchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  phase: z.enum(CYCLE_PHASES).default('unknown'),
+  /** Blutungsstaerke 0–3, Selbstangabe. */
+  bleeding: z.number().int().min(0).max(3).nullable().default(null),
+  note: z.string().max(400).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+/**
+ * Koerperbild und Libido — Selbstangaben auf einer Skala.
+ *
+ * Erfasst, nie bewertet. Diese Werte liegen nahe an der Essstoerungs- und
+ * Sexualdiagnostik; die App zeichnet sie auf und sagt kein Wort dazu.
+ */
+const selfImageEntrySchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  bodyImage: z.number().int().min(1).max(10).nullable().default(null),
+  libido: z.number().int().min(1).max(10).nullable().default(null),
+  note: z.string().max(400).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+/**
+ * Supplement oder Medikament als LISTE — ohne Wechselwirkungs- oder
+ * Dosishinweis. Ein Hinweis waere eine Bewertung und damit ein
+ * Medizinprodukt; die Dosis steht als Text des Nutzers da.
+ */
+const medEntrySchema = z.object({
+  id: z.string().min(1),
+  kind: z.enum(['supplement', 'medication']).default('supplement'),
+  name: z.string().min(1).max(120),
+  dose: z.string().max(60).default(''),
+  from: dayString,
+  to: dayString.nullable().default(null),
+  note: z.string().max(400).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+const healthSchema = z.object({
+  consents: z.array(healthConsentSchema).max(HEALTH_CATEGORIES.length).default([]),
+  labs: z.array(labEntrySchema).default([]),
+  symptoms: z.array(symptomEntrySchema).default([]),
+  cycle: z.array(cycleEntrySchema).default([]),
+  selfImage: z.array(selfImageEntrySchema).default([]),
+  meds: z.array(medEntrySchema).default([]),
+  /**
+   * Geschaetzter Trainingsumsatz je Tag in kcal — eine Selbstauskunft wie
+   * PAL bei der Ernaehrung, keine Messung. Ohne sie gibt es keine
+   * Energieverfuegbarkeit, denn die App misst keinen Trainingsumsatz.
+   */
+  trainingKcalPerDay: finite.min(0).max(5000).nullable().default(null),
+})
+
+/** Die Abschnitte einer Peak Week, in der Reihenfolge des Ablaufs. */
+export const PEAK_STAGES = ['baseline', 'mock', 'peak', 'show', 'post'] as const
+
+/**
+ * Ein Tag im Protokoll. NUR Beobachtung: Gewicht, Selbsteinschaetzung,
+ * Verdauungskomfort, Posing-Minuten. KEINE Vorgaben fuer Wasser, Natrium
+ * oder Kohlenhydrate — die haetten ein echtes gesundheitliches Risiko und
+ * waeren eine Empfehlung (§81).
+ */
+const peakDaySchema = z.object({
+  id: z.string().min(1),
+  day: dayString,
+  stage: z.enum(PEAK_STAGES).default('peak'),
+  weightKg: finite.min(20).max(400).nullable().default(null),
+  /** «Look» als ausdrueckliche Heuristik, 1–10. Keine Korrelation, kein Urteil. */
+  lookIndex: z.number().int().min(1).max(10).nullable().default(null),
+  giComfort: z.number().int().min(0).max(3).nullable().default(null),
+  posingMin: z.number().int().min(0).max(600).nullable().default(null),
+  note: z.string().max(400).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+const peakWeekSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().max(80).default(''),
+  eventDate: dayString,
+  days: z.array(peakDaySchema).max(60).default([]),
+  note: z.string().max(600).default(''),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
 const athleteSchema = z.object({
   id: z.string().min(1),
   name: z.string().max(120).default(''),
@@ -724,6 +921,10 @@ const athleteSchema = z.object({
   /** Mahlzeiten (Schicht S4), mehrere je Tag. */
   meals: z.array(mealSchema).default([]),
   nutrition: nutritionSettingsSchema.default(() => nutritionSettingsSchema.parse({})),
+  /** Gesundheitsschicht (S5, Art. 9). Verlaesst das Geraet nicht. */
+  health: healthSchema.default(() => healthSchema.parse({})),
+  /** Peak Week: Protokolle je Wettkampf (S5). */
+  peakWeeks: z.array(peakWeekSchema).max(50).default([]),
   /** Archiviert: bleibt vollständig erhalten, taucht nur nicht mehr auf. */
   archived: z.boolean().default(false),
   /** Notizen des Trainers zu dieser Person (§74). */
@@ -791,6 +992,15 @@ export type ValidatedObservation = z.infer<typeof observationSchema>
 export type ValidatedDiaryEntry = z.infer<typeof diaryEntrySchema>
 export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
 export type ValidatedWorkout = z.infer<typeof workoutSchema>
+export type ValidatedHealth = z.infer<typeof healthSchema>
+export type ValidatedHealthConsent = z.infer<typeof healthConsentSchema>
+export type ValidatedLabEntry = z.infer<typeof labEntrySchema>
+export type ValidatedSymptomEntry = z.infer<typeof symptomEntrySchema>
+export type ValidatedCycleEntry = z.infer<typeof cycleEntrySchema>
+export type ValidatedSelfImageEntry = z.infer<typeof selfImageEntrySchema>
+export type ValidatedMedEntry = z.infer<typeof medEntrySchema>
+export type ValidatedPeakWeek = z.infer<typeof peakWeekSchema>
+export type ValidatedPeakDay = z.infer<typeof peakDaySchema>
 export type ValidatedWorkoutExercise = z.infer<typeof workoutExerciseSchema>
 export type ValidatedWorkoutSet = z.infer<typeof workoutSetSchema>
 export type ValidatedDecision = z.infer<typeof decisionSchema>
@@ -1198,6 +1408,23 @@ export const MIGRATIONS: Migration[] = [
       athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, meals: [], nutrition: { pal: 1.55 } })),
     }),
   },
+  {
+    from: 23,
+    to: 24,
+    describe: 'Gesundheitsschicht und Peak Week (S5, Art. 9)',
+    // Die Gesundheitsschicht beginnt leer und OHNE Einwilligung. Ein Bestand
+    // von vorher kann keine Art.-9-Daten tragen, und eine Einwilligung
+    // vorwegzunehmen waere das Gegenteil ihres Zwecks.
+    run: (data: any) => ({
+      ...data,
+      version: 24,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+        peakWeeks: [],
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1243,6 +1470,8 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
     meals: [],
     nutrition: { pal: 1.55 },
+    health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+    peakWeeks: [],
     archived: false,
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

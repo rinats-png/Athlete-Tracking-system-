@@ -35,7 +35,10 @@
     "startAssessment": "Start testrunde",
     "back": "Tilbage",
     "close": "Luk",
-    "save": "Gem"
+    "save": "Gem",
+    "yes": "Ja",
+    "no": "Nej",
+    "delete": "Slet"
   },
   "theme": {
     "label": "Udseende",

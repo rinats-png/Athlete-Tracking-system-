@@ -540,7 +540,7 @@ ein benutzbares Produkt steht.
 | **Etappe 0 Tabellentrennung** | **gebaut**, 21.09.2026 | `supabase/migrations/20260921120000_athlete_series.sql`, `src/lib/supabase/series.ts`, `src/lib/supabase/sync.ts` |
 | **Etappe 4 Stufen und Bezahlweg** | **gebaut**, 21.09.2026 — scharf erst mit `VITE_BILLING=on` | `src/data/pricing.ts`, `src/domain/entitlement.ts`, `src/lib/billing.ts`, `src/features/billing/`, `supabase/functions/{create-checkout,stripe-webhook,billing-portal}`, Migrationen `billing_products`, `billing` |
 | **Etappe 6 Rechtsprüfung Art. 9 / MDR** | **Vorlage erstellt**, 21.09.2026 — Entscheidung und Anwaltsgespräch offen | `docs/rechtspruefung-art9-mdr.md` |
-| S5 Gesundheit | offen, Umfang in der Rechtsprüfung empfohlen | |
+| **S5 Gesundheit, Peak Week** | **gebaut**, 22.09.2026 — im Umfang der Rechtsprüfung | `src/domain/health.ts`, `src/features/health/`, `src/data/labMarkers.ts`, Schema v24, Stufe Elite |
 
 **Eine bewusste Abweichung vom Plan, offen benannt.** Etappe 0 sah vor, die
 Zeitreihen *vor* S1 in eigene Servertabellen zu ziehen. S1 legt das Tagebuch
@@ -743,10 +743,53 @@ und Einheit, 56 Suchbegriffe für die Einträge ohne Mikronährstoffe.
 keinen Zugang zu `fdc.nal.usda.gov`, und Nährwerte aus dem Gedächtnis
 wären genau der Fehler, den §89 verbietet.
 
+**Was S5 geworden ist (22.09.2026):**
+
+- **Fünf Kategorien mit eigener Einwilligung:** Laborwerte, Symptome,
+  Zyklus, Körperbild und Libido, Supplemente und Medikation. Ohne Haken ist
+  die Kategorie in der Oberfläche **nicht vorhanden**, nicht ausgegraut.
+  Der Widerruf löscht die Einträge dieser Kategorie sofort und
+  vollständig; der Vermerk über den Widerruf bleibt. Die Einwilligung
+  trägt eine Fassung — ändert sich der Text, fragt die App erneut.
+- **Drei Tore vor dem Bildschirm:** die Stufe Elite (199 €/Jahr, neu), das
+  Alter ab achtzehn, die Einwilligung je Kategorie. Die Altersgrenze
+  vermeidet die Frage nach der Einwilligung Erziehungsberechtigter in
+  Art.-9-Daten, statt sie halb zu beantworten. Ohne Geburtsdatum bleibt der
+  Bereich zu.
+- **Diese Daten verlassen das Gerät nicht.** Der Abgleich trägt sie nicht
+  mit (`stripHealth` in `src/lib/supabase/series.ts`, an genau einer
+  Stelle, damit es keinen Weg daran vorbei gibt). Eine Zweitschrift auf dem
+  Server kommt erst mit Ende-zu-Ende-Verschlüsselung — die ist **nicht**
+  gebaut, und damit entfällt vorerst auch die Kollision zwischen §89 und
+  dem Verlust einer Wiederherstellungsphrase. Der Export enthält alles (§32).
+- **Laborwerte mit abgeschriebenem Referenzbereich.** Der Katalog
+  (`labMarkers.ts`) bringt Namen und übliche Einheiten mit — und
+  **keine Referenzbereiche**. Sie gehören dem Labor, das gemessen hat. Die
+  Präanalytik (Uhrzeit, nüchtern, Training am Vortag, Zyklusphase, Infekt)
+  steht am Wert, weil sie ihn erklärt, ohne ihn zu deuten.
+- **Energieverfügbarkeit ohne Schwelle**, mit Formel und Quelle. Der
+  Trainingsumsatz ist eine Selbstauskunft wie der PAL bei der Ernährung —
+  die App misst ihn nicht und schätzt ihn nicht.
+- **Peak Week als Protokoll**: Abschnitte von Baseline bis Post-Contest,
+  je Tag Gewicht, Look als ausdrückliche Heuristik, Verdauungskomfort,
+  Posing-Minuten. Keine Vorgaben für Wasser, Natrium oder Kohlenhydrate.
+- **Nicht gebaut, wie entschieden:** Red-Flag-Triage, REDs-Screening,
+  Zyklusvorhersage, Wechselwirkungs- und Dosishinweise, jede Schwelle mit
+  Krankheitsbezug, PEDs. Fotos fehlen ebenfalls: Körperfotos sind das
+  sensibelste Stück und warten auf die Verschlüsselung.
+- **Ein Prüffall durchsucht den ganzen Bildschirm** nach «auffällig»,
+  «Verdacht», «Mangel», «zu niedrig», «erhöht», «Therapie», «Screening» —
+  und ein zweiter belegt, dass der Sicherheitshinweis derselbe bleibt, auch
+  wenn ein Symptom mit der höchsten Stärke erfasst ist. Die App liest die
+  Einträge nicht, um zu entscheiden, was sie sagt.
+
 **Offen, unverändert:** die Kuratierung des USDA-Kerns durch einen
 Menschen mit Netzzugang, ein echter Zwei-Geräte-Abgleich und ein echter
-Testkauf am lebenden System, Elite mit S5 — und die Anwaltsgespräche aus
-der Rechtsprüfung.
+Testkauf am lebenden System — und die Anwaltsgespräche aus der
+Rechtsprüfung, die vor dem öffentlichen Betrieb von S5 geführt sein
+müssen. **Neu offen:** Ende-zu-Ende-Verschlüsselung für die
+Gesundheitsschicht (dann Fotos und Zweitschrift), Trainerfreigabe je
+Kategorie, die Sportmodule.
 
 ## 14. Zusammenfassung in drei Sätzen
 

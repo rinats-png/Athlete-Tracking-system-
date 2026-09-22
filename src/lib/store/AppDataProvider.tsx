@@ -32,6 +32,8 @@ import {
   type StoredCockpit,
   type StoredMeal,
   type StoredNutrition,
+  type StoredHealth,
+  type StoredPeakWeek,
   type StoredAthlete,
   type StoredBiometric,
   type StoredData,
@@ -147,6 +149,18 @@ interface AppDataValue {
   deleteMeal: (id: string) => void
   nutrition: StoredNutrition
   saveNutrition: (patch: Partial<StoredNutrition>) => void
+  /**
+   * Gesundheitsschicht (S5, Art. 9). Bewusst EIN Zugang statt zehn
+   * Speicherfunktionen: die Regeln stehen in domain/health.ts und geben
+   * jeweils ein neues Objekt zurück — der Provider legt es nur ab. So kann
+   * kein Bildschirm die Einwilligung umgehen, indem er eine Liste direkt
+   * beschreibt.
+   */
+  health: StoredHealth
+  updateHealth: (fn: (health: StoredHealth) => StoredHealth) => void
+  peakWeeks: StoredPeakWeek[]
+  savePeakWeek: (week: StoredPeakWeek) => void
+  deletePeakWeek: (id: string) => void
   /** Einwilligung eines Athleten setzen. */
   setConsent: (id: string, consent: StoredAthlete['consent']) => void
   /** Archiviert statt gelöscht — Messwerte gehen nie verloren. */
@@ -683,6 +697,31 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         })
       },
       nutrition: store.athletes.find((a) => a.id === store.activeAthleteId)?.nutrition ?? { pal: 1.55 },
+      health: store.athletes.find((a) => a.id === store.activeAthleteId)?.health ?? { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], trainingKcalPerDay: null },
+      updateHealth: (fn) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, health: fn(a.health) } : a)),
+        })
+      },
+      peakWeeks: store.athletes.find((a) => a.id === store.activeAthleteId)?.peakWeeks ?? [],
+      savePeakWeek: (week) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) =>
+            a.id === current.activeAthleteId ? { ...a, peakWeeks: [...a.peakWeeks.filter((w) => w.id !== week.id), week] } : a,
+          ),
+        })
+      },
+      deletePeakWeek: (id) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, peakWeeks: a.peakWeeks.filter((w) => w.id !== id) } : a)),
+        })
+      },
       saveNutrition: (patch) => {
         const current = storeRef.current
         commitStore({
