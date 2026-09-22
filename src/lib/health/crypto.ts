@@ -157,13 +157,22 @@ export async function opaqueId(keys: HealthKeys, entryId: string): Promise<strin
 
 /** Ein Wert als Chiffrat: `v1.<Vektor>.<Geheimtext>`, beides Base64. */
 export async function encryptJson(keys: HealthKeys, value: unknown): Promise<string | null> {
+  return encryptRaw(keys.cipher, value)
+}
+
+/**
+ * Dasselbe mit einem blossen AES-Schlüssel statt dem Schlüsselpaar aus der
+ * Phrase. Der Umschlag (envelope.ts) braucht das: dort verschlüsselt ein
+ * frisch gewürfelter Freigabeschlüssel, der nichts mit der Phrase zu tun hat.
+ */
+export async function encryptRaw(cipher: CryptoKey, value: unknown): Promise<string | null> {
   const s = subtle()
   if (!s) return null
   const iv = new Uint8Array(IV_BYTES)
   globalThis.crypto.getRandomValues(iv)
   const data = enc.encode(JSON.stringify(value))
-  const cipher = await s.encrypt({ name: 'AES-GCM', iv: iv as unknown as BufferSource }, keys.cipher, data as unknown as BufferSource)
-  return `v1.${toBase64(iv)}.${toBase64(new Uint8Array(cipher))}`
+  const blob = await s.encrypt({ name: 'AES-GCM', iv: iv as unknown as BufferSource }, cipher, data as unknown as BufferSource)
+  return `v1.${toBase64(iv)}.${toBase64(new Uint8Array(blob))}`
 }
 
 /**
@@ -172,6 +181,11 @@ export async function encryptJson(keys: HealthKeys, value: unknown): Promise<str
  * hier ein normaler Fall, kein Absturz.
  */
 export async function decryptJson(keys: HealthKeys, blob: string): Promise<unknown | null> {
+  return decryptRaw(keys.cipher, blob)
+}
+
+/** Gegenstück zu {@link encryptRaw}. */
+export async function decryptRaw(cipher: CryptoKey, blob: string): Promise<unknown | null> {
   const s = subtle()
   if (!s) return null
   const parts = blob.split('.')
@@ -179,7 +193,7 @@ export async function decryptJson(keys: HealthKeys, blob: string): Promise<unkno
   try {
     const plain = await s.decrypt(
       { name: 'AES-GCM', iv: fromBase64(parts[1]) as unknown as BufferSource },
-      keys.cipher,
+      cipher,
       fromBase64(parts[2]) as unknown as BufferSource,
     )
     return JSON.parse(dec.decode(plain))
