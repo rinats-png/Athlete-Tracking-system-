@@ -20,6 +20,7 @@ import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { AnalyticsConsentSetting } from '@/features/shared/AnalyticsConsent'
+import { AdminLink } from '@/features/admin/AdminLink'
 import { provisionalFormulas } from '@/domain/formulaRegistry'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { introEnabled, setIntroEnabled } from '@/features/intro/introPreference'
@@ -262,6 +263,8 @@ export function ProfileScreen() {
               </li>
             </ul>
           </Panel>
+
+          <AdminLink />
 
           <Panel>
             <PanelHeader title={t('profile.appearance')} />
