@@ -452,6 +452,17 @@
       "worst": "Det svakeste forsøket teller — nyttig når repeterbarhet er det som betyr noe.",
       "mean": "Prestasjonsverdien er et gjennomsnitt. Sekundærverdier hentes fra forsøket nærmest snittet i stedet for å finnes opp.",
       "median": "Det midterste forsøket teller. Mer robust mot ett avvikende forsøk enn snittet."
+    },
+    "valid": "Gyldig",
+    "validity": "Gyldighet forsøk {{index}}",
+    "invalid": {
+      "depth": "Ugyldig: dybde",
+      "technique": "Ugyldig: teknikk",
+      "assisted": "Ugyldig: med hjelp",
+      "false_start": "Ugyldig: tyvstart",
+      "line_missed": "Ugyldig: linje ikke nådd",
+      "equipment": "Ugyldig: utstyr",
+      "other": "Ugyldig: annen årsak"
     }
   },
   "quality": {
@@ -1817,6 +1828,30 @@
       "on": "På — du hjelper oss.",
       "off": "Av — ingenting telles.",
       "unset": "Ikke bestemt ennå — ingenting telles."
+    }
+  },
+  "protocol": {
+    "title": "Protokoll",
+    "version": "Protokoll v{{version}}",
+    "unknown": "Protokoll ukjent — målt før protokoll v1.0 ble innført.",
+    "method": "Målemetode",
+    "tester": "Testleder",
+    "testerPlaceholder": "Navn på personen som målte",
+    "deviation": "Avvik fra protokollen",
+    "deviationPlaceholder": "La stå tomt hvis det ble målt etter protokollen",
+    "abortReason": "Årsak til avbrudd",
+    "abortPlaceholder": "Fyll bare ut hvis testen ble avbrutt",
+    "invalidCount_one": "{{count}} ugyldig forsøk, telles ikke",
+    "invalidCount_other": "{{count}} ugyldige forsøk, telles ikke",
+    "methods": {
+      "direct_1rm": "Direkte testet (makslast)",
+      "estimated_e1rm": "Estimert 1RM (Epley)",
+      "hand_stopwatch": "Håndtidtaking",
+      "light_gate": "Fotocelle",
+      "ergometer_display": "Ergometervisning",
+      "tape_measure": "Målebånd",
+      "audio_protocol": "Lydprotokoll",
+      "rep_count": "Repetisjoner telt"
     }
   }
 }

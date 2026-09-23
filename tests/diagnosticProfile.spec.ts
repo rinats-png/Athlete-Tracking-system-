@@ -21,6 +21,7 @@ const result = (testSlug: string): StoredResult =>
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
     photo: null,
     context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     createdAt: '2026-05-01T09:00:00.000Z',

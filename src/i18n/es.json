@@ -452,6 +452,17 @@
       "worst": "Se puntúa el peor intento — útil cuando lo que importa es la repetibilidad.",
       "mean": "Se promedia el valor de rendimiento. Los valores secundarios vienen del intento más cercano a la media, no se inventan.",
       "median": "Se puntúa el intento central. Más robusto que la media frente a un intento fallido."
+    },
+    "valid": "Válido",
+    "validity": "Validez del intento {{index}}",
+    "invalid": {
+      "depth": "No válido: profundidad",
+      "technique": "No válido: técnica",
+      "assisted": "No válido: con ayuda",
+      "false_start": "No válido: salida falsa",
+      "line_missed": "No válido: línea no alcanzada",
+      "equipment": "No válido: equipo",
+      "other": "No válido: otro motivo"
     }
   },
   "quality": {
@@ -1817,6 +1828,30 @@
       "on": "Activadas: nos estás ayudando.",
       "off": "Desactivadas: no se cuenta nada.",
       "unset": "Sin decidir: no se cuenta nada."
+    }
+  },
+  "protocol": {
+    "title": "Protocolo",
+    "version": "Protocolo v{{version}}",
+    "unknown": "Protocolo desconocido — medido antes de introducir el protocolo v1.0.",
+    "method": "Método de medición",
+    "tester": "Evaluador",
+    "testerPlaceholder": "Nombre de la persona que midió",
+    "deviation": "Desviación del protocolo",
+    "deviationPlaceholder": "Dejar vacío si se midió según el protocolo",
+    "abortReason": "Motivo de interrupción",
+    "abortPlaceholder": "Rellenar solo si se interrumpió la prueba",
+    "invalidCount_one": "{{count}} intento no válido, no contabilizado",
+    "invalidCount_other": "{{count}} intentos no válidos, no contabilizados",
+    "methods": {
+      "direct_1rm": "Probado directamente (carga máx.)",
+      "estimated_e1rm": "1RM estimado (Epley)",
+      "hand_stopwatch": "Cronómetro manual",
+      "light_gate": "Fotocélulas",
+      "ergometer_display": "Pantalla del ergómetro",
+      "tape_measure": "Cinta métrica",
+      "audio_protocol": "Protocolo de audio",
+      "rep_count": "Repeticiones contadas"
     }
   }
 }

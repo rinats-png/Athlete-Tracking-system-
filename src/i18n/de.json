@@ -452,6 +452,17 @@
       "worst": "Der schlechteste Versuch wird gewertet — sinnvoll, wenn es auf Wiederholbarkeit ankommt.",
       "mean": "Der Leistungswert wird gemittelt. Nebenwerte stammen vom Versuch, der dem Mittel am nächsten liegt, statt erfunden zu werden.",
       "median": "Der mittlere Versuch wird gewertet. Robuster gegen einen einzelnen Ausrutscher als der Mittelwert."
+    },
+    "valid": "Gültig",
+    "validity": "Gültigkeit Versuch {{index}}",
+    "invalid": {
+      "depth": "Ungültig: Tiefe",
+      "technique": "Ungültig: Technik",
+      "assisted": "Ungültig: mit Hilfe",
+      "false_start": "Ungültig: Fehlstart",
+      "line_missed": "Ungültig: Linie verfehlt",
+      "equipment": "Ungültig: Gerät",
+      "other": "Ungültig: anderer Grund"
     }
   },
   "quality": {
@@ -1817,6 +1828,30 @@
       "on": "Eingeschaltet — du hilfst uns.",
       "off": "Ausgeschaltet — es wird nichts gezählt.",
       "unset": "Noch nicht entschieden — es wird nichts gezählt."
+    }
+  },
+  "protocol": {
+    "title": "Protokoll",
+    "version": "Protokoll v{{version}}",
+    "unknown": "Protokoll unbekannt — gemessen vor Einführung von Protokoll v1.0.",
+    "method": "Messmethode",
+    "tester": "Testleiter",
+    "testerPlaceholder": "Name der Person, die gemessen hat",
+    "deviation": "Abweichung vom Protokoll",
+    "deviationPlaceholder": "Leer lassen, wenn nach Protokoll gemessen wurde",
+    "abortReason": "Abbruchgrund",
+    "abortPlaceholder": "Nur ausfüllen, wenn der Test abgebrochen wurde",
+    "invalidCount_one": "{{count}} ungültiger Versuch, nicht gewertet",
+    "invalidCount_other": "{{count}} ungültige Versuche, nicht gewertet",
+    "methods": {
+      "direct_1rm": "Direkt getestet (Maximallast)",
+      "estimated_e1rm": "Geschätztes 1RM (Epley)",
+      "hand_stopwatch": "Handstoppung",
+      "light_gate": "Lichtschranke",
+      "ergometer_display": "Ergometer-Anzeige",
+      "tape_measure": "Massband",
+      "audio_protocol": "Audio-Protokoll",
+      "rep_count": "Wiederholungen gezählt"
     }
   }
 }

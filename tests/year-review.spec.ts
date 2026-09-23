@@ -24,6 +24,7 @@ function result(slug: string, iso: string, score: number, i: number): StoredResu
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
     context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     photo: null,
     createdAt: iso,

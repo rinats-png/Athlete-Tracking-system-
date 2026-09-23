@@ -51,6 +51,7 @@ import type {
   LoadReport,
   ValidatedAudit,
   ValidatedContext,
+  ProtocolInfo,
 } from './schema'
 
 /** Leere Messbedingungen — nichts erfasst heisst nicht «unbekannt geraten». */
@@ -60,6 +61,16 @@ const EMPTY_CONTEXT: ValidatedContext = {
   timeOfDay: null,
   equipment: '',
   trainingStatus: '',
+}
+
+/** Keine Protokollangaben — «Protokoll unbekannt». */
+const EMPTY_PROTOCOL: ProtocolInfo = {
+  version: null,
+  method: null,
+  tester: '',
+  deviation: '',
+  abortReason: '',
+  invalidAttempts: [],
 }
 
 /**
@@ -82,6 +93,8 @@ export interface RecordResultInput {
   attemptSelection?: AttemptSelection | null
   /** Bedingungen der Messung. Fehlt, wenn nichts erfasst wurde. */
   measurementContext?: Partial<ValidatedContext>
+  /** Protokollangaben (v1.0). Fehlt bei Eingängen ohne Protokoll. */
+  protocol?: Partial<ProtocolInfo>
   notes?: string
 }
 
@@ -233,6 +246,7 @@ export interface AppDataValue {
       values?: Record<string, number>
       performedAt?: string
       measurementContext?: Partial<ValidatedContext>
+      protocol?: Partial<ProtocolInfo>
       notes?: string
     },
   ) => StoredResult | null
@@ -450,7 +464,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
   )
 
   const recordResult = useCallback<AppDataValue['recordResult']>(
-    ({ testSlug, performedAt, values, assessmentId = null, attempts = [], attemptSelection = null, measurementContext, notes }) => {
+    ({ testSlug, performedAt, values, assessmentId = null, attempts = [], attemptSelection = null, measurementContext, protocol, notes }) => {
       const test = getTest(testSlug)
       if (!test) return null
 
@@ -474,6 +488,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         attempts,
         attemptSelection,
         context: { ...EMPTY_CONTEXT, ...measurementContext },
+        protocol: { ...EMPTY_PROTOCOL, ...protocol },
         notes,
         // Ein Beleg kommt nach dem Eintragen dazu, nicht währenddessen: die
         // Zahl ist der Zweck, das Bild ist die Absicherung.
@@ -860,6 +875,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             attempts: [],
             attemptSelection: null,
             context: { ...EMPTY_CONTEXT, ...(conditions ?? {}) },
+            protocol: EMPTY_PROTOCOL,
             notes: undefined,
             photo: null,
             createdAt: new Date().toISOString(),
@@ -928,6 +944,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           ageYears: context.ageYears,
           sex: context.sex,
           context: { ...previous.context, ...patch.measurementContext },
+          protocol: { ...previous.protocol, ...patch.protocol },
           notes: patch.notes ?? previous.notes,
         }
 

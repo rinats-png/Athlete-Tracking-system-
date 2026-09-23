@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/Button'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { formatNumber } from '@/lib/format'
 import type { AttemptSelection } from '@/lib/store/schema'
+import { INVALID_REASONS } from '@/data/protocolV1'
+import { cn } from '@/lib/utils'
 import type { AppLocale } from '@/types/domain'
 
 /**
@@ -21,9 +23,14 @@ export function AttemptTable({
   onSelectionChange,
   valueKey,
   unit,
+  invalid = {},
+  onInvalidChange,
 }: {
   attempts: Record<string, number>[]
   onChange: (next: Record<string, number>[]) => void
+  /** Index -> Grund. Ungültige Versuche bleiben stehen, zählen aber nicht. */
+  invalid?: Record<number, string>
+  onInvalidChange?: (next: Record<number, string>) => void
   selection: AttemptSelection
   onSelectionChange: (next: AttemptSelection) => void
   valueKey: string
@@ -77,10 +84,45 @@ export function AttemptTable({
                   variant="ghost"
                   size="icon"
                   aria-label={t('attempts.remove', { index: index + 1 })}
-                  onClick={() => onChange(attempts.filter((_, i) => i !== index))}
+                  onClick={() => {
+                    onChange(attempts.filter((_, i) => i !== index))
+                    // Markierungen hinter dem gelöschten Versuch rücken nach.
+                    if (onInvalidChange) {
+                      const next: Record<number, string> = {}
+                      for (const [key, reason] of Object.entries(invalid)) {
+                        const i = Number(key)
+                        if (i < index) next[i] = reason
+                        else if (i > index) next[i - 1] = reason
+                      }
+                      onInvalidChange(next)
+                    }
+                  }}
                 >
                   <Trash2 size={14} aria-hidden />
                 </Button>
+                {onInvalidChange && (
+                  <select
+                    value={invalid[index] ?? ''}
+                    aria-label={t('attempts.validity', { index: index + 1 })}
+                    onChange={(e) => {
+                      const next = { ...invalid }
+                      if (e.target.value === '') delete next[index]
+                      else next[index] = e.target.value
+                      onInvalidChange(next)
+                    }}
+                    className={cn(
+                      'h-11 w-28 shrink-0 border border-line bg-surface-sunken px-2 text-[13px]',
+                      invalid[index] != null && 'border-critical text-critical',
+                    )}
+                  >
+                    <option value="">{t('attempts.valid')}</option>
+                    {INVALID_REASONS.map((r) => (
+                      <option key={r} value={r}>
+                        {t(`attempts.invalid.${r}`)}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </li>
             ))}
           </ul>

@@ -237,6 +237,27 @@ const contextSchema = z.object({
 })
 
 /**
+ * Protokollangaben einer Messung (Standardisierte Testdokumentation v1.0).
+ *
+ * `version: null` heisst «Protokoll unbekannt» — so stehen alle Ergebnisse
+ * von vor v1.0 da. Das ist keine Abwertung, nur die ehrliche Angabe, dass
+ * die Durchführung nicht dokumentiert ist.
+ *
+ * Ungültige Versuche bleiben in `attempts` stehen (nichts wird gelöscht)
+ * und werden hier mit Index und Grund markiert; gewertet werden sie nicht.
+ */
+export const protocolInfoSchema = z.object({
+  version: z.string().max(10).nullable().default(null),
+  method: z.string().max(40).nullable().default(null),
+  tester: z.string().max(80).default(''),
+  deviation: z.string().max(300).default(''),
+  abortReason: z.string().max(300).default(''),
+  invalidAttempts: z
+    .array(z.object({ index: z.number().int().min(0).max(50), reason: z.string().max(120) }))
+    .default([]),
+})
+
+/**
  * Selbsteinschätzung vor dem Test (§28).
  *
  * Skalen von 1 bis 10, ausdrücklich subjektiv. Der Readiness-Wert wird
@@ -278,6 +299,8 @@ const resultSchema = z.object({
   attemptSelection: attemptSelectionSchema.nullable().default(null),
   /** Bedingungen der Messung. Leer, solange nichts erfasst wurde. */
   context: contextSchema.default(() => contextSchema.parse({})),
+  /** Protokollversion, Methode, Tester, Abweichung, Abbruch, ungültige Versuche. */
+  protocol: protocolInfoSchema.default(() => protocolInfoSchema.parse({})),
   notes: z.string().max(2000).optional(),
   /**
    * Ein Beleg zur Messung (§14): das Display der Zeitmessung, die Anzeige der
@@ -1085,6 +1108,7 @@ export type ValidatedBiometric = z.infer<typeof biometricSchema>
 export type ValidatedProfile = z.infer<typeof profileSchema>
 export type ValidatedBranding = z.infer<typeof brandingSchema>
 export type AttemptSelection = z.infer<typeof attemptSelectionSchema>
+export type ProtocolInfo = z.infer<typeof protocolInfoSchema>
 export type ValidatedContext = z.infer<typeof contextSchema>
 export type ValidatedReadiness = z.infer<typeof readinessSchema>
 export type ValidatedAudit = z.infer<typeof auditSchema>

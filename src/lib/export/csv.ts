@@ -33,6 +33,12 @@ const COLUMNS = [
   'sex',
   'attempt_selection',
   'attempt_count',
+  'protocol_version',
+  'measurement_method',
+  'tester',
+  'protocol_deviation',
+  'abort_reason',
+  'invalid_attempts',
   'notes',
 ] as const
 
@@ -79,6 +85,13 @@ export function resultsToCsv(data: AthleteData, locale: AppLocale): string {
         result.sex ?? '',
         result.attemptSelection ?? '',
         result.attempts.length,
+        // «unknown» statt leer: vor v1.0 gab es kein Protokoll am Ergebnis.
+        result.protocol?.version ?? 'unknown',
+        result.protocol?.method ?? '',
+        result.protocol?.tester ?? '',
+        result.protocol?.deviation ?? '',
+        result.protocol?.abortReason ?? '',
+        (result.protocol?.invalidAttempts ?? []).map((a) => `${a.index + 1}:${a.reason}`).join(' '),
         result.notes ?? '',
       ].map(escapeField)
     })

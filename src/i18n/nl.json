@@ -452,6 +452,17 @@
       "worst": "De slechtste poging wordt gescoord — nuttig als herhaalbaarheid telt.",
       "mean": "De prestatiewaarde wordt gemiddeld. Nevenwaarden komen uit de poging die het dichtst bij het gemiddelde ligt, in plaats van verzonnen te worden.",
       "median": "De middelste poging wordt gescoord. Robuuster tegen één afwijkende poging dan het gemiddelde."
+    },
+    "valid": "Geldig",
+    "validity": "Geldigheid poging {{index}}",
+    "invalid": {
+      "depth": "Ongeldig: diepte",
+      "technique": "Ongeldig: techniek",
+      "assisted": "Ongeldig: met hulp",
+      "false_start": "Ongeldig: valse start",
+      "line_missed": "Ongeldig: lijn gemist",
+      "equipment": "Ongeldig: materiaal",
+      "other": "Ongeldig: andere reden"
     }
   },
   "quality": {
@@ -1817,6 +1828,30 @@
       "on": "Aan — je helpt ons.",
       "off": "Uit — er wordt niets geteld.",
       "unset": "Nog niet besloten — er wordt niets geteld."
+    }
+  },
+  "protocol": {
+    "title": "Protocol",
+    "version": "Protocol v{{version}}",
+    "unknown": "Protocol onbekend — gemeten vóór de invoering van protocol v1.0.",
+    "method": "Meetmethode",
+    "tester": "Testleider",
+    "testerPlaceholder": "Naam van de persoon die heeft gemeten",
+    "deviation": "Afwijking van het protocol",
+    "deviationPlaceholder": "Leeg laten als volgens protocol is gemeten",
+    "abortReason": "Reden van afbreken",
+    "abortPlaceholder": "Alleen invullen als de test is afgebroken",
+    "invalidCount_one": "{{count}} ongeldige poging, niet meegeteld",
+    "invalidCount_other": "{{count}} ongeldige pogingen, niet meegeteld",
+    "methods": {
+      "direct_1rm": "Direct getest (maximale last)",
+      "estimated_e1rm": "Geschat 1RM (Epley)",
+      "hand_stopwatch": "Handstopwatch",
+      "light_gate": "Lichtpoort",
+      "ergometer_display": "Ergometerdisplay",
+      "tape_measure": "Meetlint",
+      "audio_protocol": "Audioprotocol",
+      "rep_count": "Herhalingen geteld"
     }
   }
 }

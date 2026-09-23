@@ -24,6 +24,7 @@ const result = (slug: string, day: string, score: number): StoredResult =>
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
     context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     photo: null,
     createdAt: `${day}T09:00:00.000Z`,

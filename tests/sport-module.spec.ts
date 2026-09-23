@@ -31,6 +31,7 @@ const result = (testSlug: string, performedAt: string, metrics: Record<string, n
   assessmentId: null,
   attempts: [],
   attemptSelection: null,
+  protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
   context: { equipment: '', surface: '', temperatureC: null, timeOfDay: null, trainingStatus: '' },
   photo: null,
   createdAt: performedAt,

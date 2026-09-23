@@ -452,6 +452,17 @@
       "worst": "La moins bonne tentative est retenue — utile quand c'est la répétabilité qui compte.",
       "mean": "La valeur de performance est moyennée. Les valeurs secondaires viennent de la tentative la plus proche de la moyenne, elles ne sont pas inventées.",
       "median": "La tentative médiane est retenue. Plus robuste qu'une moyenne face à une tentative ratée."
+    },
+    "valid": "Valide",
+    "validity": "Validité de l’essai {{index}}",
+    "invalid": {
+      "depth": "Invalide : profondeur",
+      "technique": "Invalide : technique",
+      "assisted": "Invalide : avec aide",
+      "false_start": "Invalide : faux départ",
+      "line_missed": "Invalide : ligne manquée",
+      "equipment": "Invalide : matériel",
+      "other": "Invalide : autre motif"
     }
   },
   "quality": {
@@ -1817,6 +1828,30 @@
       "on": "Activées — tu nous aides.",
       "off": "Désactivées — rien n’est compté.",
       "unset": "Pas encore décidé — rien n’est compté."
+    }
+  },
+  "protocol": {
+    "title": "Protocole",
+    "version": "Protocole v{{version}}",
+    "unknown": "Protocole inconnu — mesuré avant l’introduction du protocole v1.0.",
+    "method": "Méthode de mesure",
+    "tester": "Évaluateur",
+    "testerPlaceholder": "Nom de la personne qui a mesuré",
+    "deviation": "Écart au protocole",
+    "deviationPlaceholder": "Laisser vide si la mesure suit le protocole",
+    "abortReason": "Motif d’arrêt",
+    "abortPlaceholder": "À remplir uniquement si le test a été arrêté",
+    "invalidCount_one": "{{count}} essai invalide, non compté",
+    "invalidCount_other": "{{count}} essais invalides, non comptés",
+    "methods": {
+      "direct_1rm": "Testé directement (charge max.)",
+      "estimated_e1rm": "1RM estimé (Epley)",
+      "hand_stopwatch": "Chronomètre manuel",
+      "light_gate": "Cellules photoélectriques",
+      "ergometer_display": "Affichage de l’ergomètre",
+      "tape_measure": "Mètre ruban",
+      "audio_protocol": "Protocole audio",
+      "rep_count": "Répétitions comptées"
     }
   }
 }

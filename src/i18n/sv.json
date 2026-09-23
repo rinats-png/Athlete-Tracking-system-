@@ -452,6 +452,17 @@
       "worst": "Sämsta försöket värderas — användbart när repeterbarhet är det som räknas.",
       "mean": "Prestationsvärdet är ett medelvärde. Sekundärvärden hämtas från försöket närmast medelvärdet i stället för att hittas på.",
       "median": "Det mittersta försöket värderas. Mer robust mot ett enstaka avvikande försök än medelvärdet."
+    },
+    "valid": "Giltigt",
+    "validity": "Giltighet försök {{index}}",
+    "invalid": {
+      "depth": "Ogiltigt: djup",
+      "technique": "Ogiltigt: teknik",
+      "assisted": "Ogiltigt: med hjälp",
+      "false_start": "Ogiltigt: tjuvstart",
+      "line_missed": "Ogiltigt: missad linje",
+      "equipment": "Ogiltigt: utrustning",
+      "other": "Ogiltigt: annan orsak"
     }
   },
   "quality": {
@@ -1817,6 +1828,30 @@
       "on": "På — du hjälper oss.",
       "off": "Av — ingenting räknas.",
       "unset": "Inte bestämt ännu — ingenting räknas."
+    }
+  },
+  "protocol": {
+    "title": "Protokoll",
+    "version": "Protokoll v{{version}}",
+    "unknown": "Protokoll okänt — mätt innan protokoll v1.0 infördes.",
+    "method": "Mätmetod",
+    "tester": "Testledare",
+    "testerPlaceholder": "Namn på personen som mätte",
+    "deviation": "Avvikelse från protokollet",
+    "deviationPlaceholder": "Lämna tomt om mätningen följde protokollet",
+    "abortReason": "Orsak till avbrott",
+    "abortPlaceholder": "Fyll bara i om testet avbröts",
+    "invalidCount_one": "{{count}} ogiltigt försök, räknas inte",
+    "invalidCount_other": "{{count}} ogiltiga försök, räknas inte",
+    "methods": {
+      "direct_1rm": "Direkt testat (maxlast)",
+      "estimated_e1rm": "Uppskattat 1RM (Epley)",
+      "hand_stopwatch": "Handtidtagning",
+      "light_gate": "Fotocell",
+      "ergometer_display": "Ergometerdisplay",
+      "tape_measure": "Måttband",
+      "audio_protocol": "Ljudprotokoll",
+      "rep_count": "Räknade repetitioner"
     }
   }
 }

@@ -10,6 +10,8 @@ import { Timer } from './Timer'
 import { AttemptTable } from './AttemptTable'
 import { StageCounter } from './StageCounter'
 import { ContextFields } from './ContextFields'
+import { ProtocolFields } from './ProtocolFields'
+import { PROTOCOL_VERSION, protocolSpecFor } from '@/data/protocolV1'
 import { ProcedureDetails } from './ProcedurePanel'
 import { aggregateAttempts, attemptContextFor, defaultSelectionFor } from '@/domain/assessment'
 import { hasStageLevel } from '@/domain/testModel'
@@ -20,7 +22,7 @@ import { deriveMetrics } from '@/lib/metrics/derive'
 import { ageFromBirthDate, formatNumber } from '@/lib/format'
 import { formulaFor } from '@/domain/formulaRegistry'
 import { hasErrors, issuesFor, validateTestInput } from '@/domain/validation'
-import type { AttemptSelection, ValidatedContext } from '@/lib/store/schema'
+import type { AttemptSelection, ProtocolInfo, ValidatedContext } from '@/lib/store/schema'
 import { pick } from '@/i18n/pick'
 import { useLocale } from '@/features/shared/useLocale'
 
@@ -76,6 +78,10 @@ export function TestRunScreen() {
   const [notes, setNotes] = useState('')
   const [measurementContext, setMeasurementContext] = useState<Partial<ValidatedContext>>({})
   const [saved, setSaved] = useState(false)
+  const protocolSpec = protocolSpecFor(slug)
+  const [protocol, setProtocol] = useState<Partial<ProtocolInfo>>({})
+  /** Index des Versuchs -> Grund, warum er nicht zählt. */
+  const [invalid, setInvalid] = useState<Record<number, string>>({})
 
   const attemptContext = attemptContextFor(slug)
   // Der Zähler erscheint nur, wo wirklich Stufen gezählt werden — nicht bei
@@ -92,8 +98,13 @@ export function TestRunScreen() {
    */
   const aggregated = useMemo(() => {
     if (!attemptContext || attempts.length === 0) return null
-    return aggregateAttempts(attempts, selection, attemptContext)
-  }, [attempts, selection, attemptContext])
+    // Ungültige Versuche bleiben stehen, werden aber nicht gewertet.
+    return aggregateAttempts(
+      attempts.filter((_, i) => invalid[i] == null),
+      selection,
+      attemptContext,
+    )
+  }, [attempts, selection, attemptContext, invalid])
 
   const numericValues = useMemo(() => {
     const manual = Object.fromEntries(
@@ -140,14 +151,33 @@ export function TestRunScreen() {
 
   const save = () => {
     if (blocked) return
+    // Gespeichert werden nur ausgefüllte Versuche; die Markierung der
+    // ungültigen folgt ihrem neuen Index.
+    const kept = attempts
+      .map((attempt, index) => ({ attempt, index }))
+      .filter(({ attempt }) => Object.keys(attempt).length > 0)
     const result = recordResult({
       testSlug: test.slug,
       performedAt: new Date(`${performedOn}T12:00:00`).toISOString(),
       values: numericValues,
       assessmentId: assessment?.id ?? null,
-      attempts: aggregated ? attempts.filter((a) => Object.keys(a).length > 0) : [],
+      attempts: aggregated ? kept.map((k) => k.attempt) : [],
       attemptSelection: aggregated ? selection : null,
       measurementContext,
+      protocol: protocolSpec
+        ? {
+            version: PROTOCOL_VERSION,
+            method: protocol.method ?? protocolSpec.methods[0],
+            tester: protocol.tester?.trim() ?? '',
+            deviation: protocol.deviation?.trim() ?? '',
+            abortReason: protocol.abortReason?.trim() ?? '',
+            invalidAttempts: aggregated
+              ? kept.flatMap((k, i) =>
+                  invalid[k.index] != null ? [{ index: i, reason: invalid[k.index] }] : [],
+                )
+              : [],
+          }
+        : undefined,
       notes: notes.trim() || undefined,
     })
     if (result) {
@@ -278,6 +308,8 @@ export function TestRunScreen() {
               <AttemptTable
                 attempts={attempts}
                 onChange={setAttempts}
+                invalid={invalid}
+                onInvalidChange={setInvalid}
                 selection={selection}
                 onSelectionChange={setSelection}
                 valueKey={attemptContext.key}
@@ -332,6 +364,14 @@ export function TestRunScreen() {
                     ))}
                 </ul>
               </div>
+            )}
+
+            {protocolSpec && (
+              <ProtocolFields
+                spec={protocolSpec}
+                value={protocol}
+                onChange={(patch) => setProtocol((p) => ({ ...p, ...patch }))}
+              />
             )}
 
             <ContextFields

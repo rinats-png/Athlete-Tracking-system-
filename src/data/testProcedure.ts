@@ -19,6 +19,7 @@
  */
 
 import type { ProtocolMode, TestDefinition } from './testCatalog'
+import { protocolSpecFor } from './protocolV1'
 
 import type { Localized } from '@/i18n/pick'
 
@@ -976,6 +977,23 @@ export function procedureFor(test: TestDefinition): {
   source: ProcedureSource
 } {
   const specific = TEST_PROCEDURES[test.slug]
-  if (specific) return { procedure: specific, source: 'specific' }
-  return { procedure: GENERIC[test.protocol.mode], source: 'generic' }
+  if (specific) return { procedure: withProtocolV1(test.slug, specific), source: 'specific' }
+  return { procedure: withProtocolV1(test.slug, GENERIC[test.protocol.mode]), source: 'generic' }
+}
+
+/**
+ * Hängt die Entscheidungen aus Protokoll v1.0 an die Vorschrift an. Die
+ * Grundvorschrift bleibt stehen; v1.0 präzisiert sie, ersetzt sie nicht.
+ */
+function withProtocolV1(slug: string, base: TestProcedure): TestProcedure {
+  const spec = protocolSpecFor(slug)
+  if (!spec) return base
+  return {
+    ...base,
+    attempts: spec.attempts
+      ? { de: `${base.attempts.de} ${spec.attempts.de}`, en: `${base.attempts.en} ${spec.attempts.en}` }
+      : base.attempts,
+    valid: [...base.valid, ...(spec.valid ?? [])],
+    standardise: [...base.standardise, ...(spec.standardise ?? [])],
+  }
 }

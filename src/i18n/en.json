@@ -452,6 +452,17 @@
       "worst": "The worst attempt is scored — useful when repeatability is what matters.",
       "mean": "The performance value is averaged. Secondary values come from the attempt closest to the mean rather than being invented.",
       "median": "The middle attempt is scored. More robust against a single off attempt than the mean."
+    },
+    "valid": "Valid",
+    "validity": "Validity of attempt {{index}}",
+    "invalid": {
+      "depth": "Invalid: depth",
+      "technique": "Invalid: technique",
+      "assisted": "Invalid: assisted",
+      "false_start": "Invalid: false start",
+      "line_missed": "Invalid: line missed",
+      "equipment": "Invalid: equipment",
+      "other": "Invalid: other reason"
     }
   },
   "quality": {
@@ -1817,6 +1828,30 @@
       "on": "On — you are helping us.",
       "off": "Off — nothing is counted.",
       "unset": "Not decided yet — nothing is counted."
+    }
+  },
+  "protocol": {
+    "title": "Protocol",
+    "version": "Protocol v{{version}}",
+    "unknown": "Protocol unknown — measured before protocol v1.0 was introduced.",
+    "method": "Measurement method",
+    "tester": "Tester",
+    "testerPlaceholder": "Name of the person who measured",
+    "deviation": "Protocol deviation",
+    "deviationPlaceholder": "Leave empty if measured according to protocol",
+    "abortReason": "Abort reason",
+    "abortPlaceholder": "Only fill in if the test was stopped",
+    "invalidCount_one": "{{count}} invalid attempt, not counted",
+    "invalidCount_other": "{{count}} invalid attempts, not counted",
+    "methods": {
+      "direct_1rm": "Directly tested (max load)",
+      "estimated_e1rm": "Estimated 1RM (Epley)",
+      "hand_stopwatch": "Hand stopwatch",
+      "light_gate": "Light gate",
+      "ergometer_display": "Ergometer display",
+      "tape_measure": "Tape measure",
+      "audio_protocol": "Audio protocol",
+      "rep_count": "Repetitions counted"
     }
   }
 }

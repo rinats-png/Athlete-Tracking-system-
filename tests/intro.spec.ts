@@ -29,6 +29,7 @@ function result(slug: string, score: number, i: number): StoredResult {
     assessmentId: null,
     attempts: [],
     attemptSelection: null,
+    protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
     context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
     photo: null,
     createdAt: '2026-01-01T00:00:00.000Z',

@@ -33,6 +33,7 @@ function series(slug: string, values: number[]): StoredResult[] {
         assessmentId: null,
         attempts: [],
         attemptSelection: null,
+        protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
         context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
         photo: null,
         createdAt: '2026-01-01T10:00:00.000Z',
@@ -111,6 +112,7 @@ test.describe('Veränderung im Bildschirm', () => {
           assessmentId: null,
           attempts: [],
           attemptSelection: null,
+          protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
           context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
           photo: null,
           createdAt: '2026-02-01T10:00:00.000Z',
@@ -136,6 +138,7 @@ test.describe('Veränderung im Bildschirm', () => {
         assessmentId: null,
         attempts: [],
         attemptSelection: null,
+        protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
         context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
         photo: null,
       }

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import type { StoredResult } from '@/lib/store/localStore'
 import { ArrowLeft, ArrowRight, Camera, Play, Trash2 } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
@@ -125,6 +126,7 @@ export function ResultScreen() {
               </dl>
             )}
             {result.notes && <p className="mt-3 text-[12px] text-ink-secondary">{t('result.note')}: {result.notes}</p>}
+            <ProtocolLine protocol={result.protocol} />
           </div>
           <ChangeBlock change={change} missing={missingForError(data.results, result.testSlug)} />
           <GoalBlock testSlug={result.testSlug} />
@@ -457,6 +459,42 @@ function ChangeBlock({ change, missing }: { change: ChangeReport; missing: numbe
             </Button>
           </div>
         </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * Unter welchem Protokoll gemessen wurde. «Protokoll unbekannt» ist keine
+ * Abwertung, nur die ehrliche Angabe für Ergebnisse von vor v1.0.
+ */
+function ProtocolLine({ protocol }: { protocol: StoredResult['protocol'] | undefined }) {
+  const { t } = useTranslation()
+  if (!protocol?.version) {
+    return <p className="mt-3 text-[12px] text-ink-muted" data-testid="result-protocol">{t('protocol.unknown')}</p>
+  }
+  const parts = [
+    t('protocol.version', { version: protocol.version }),
+    protocol.method ? t(`protocol.methods.${protocol.method}`) : null,
+    protocol.tester ? `${t('protocol.tester')}: ${protocol.tester}` : null,
+  ].filter(Boolean)
+  return (
+    <div className="mt-3 space-y-1 text-[12px] text-ink-secondary" data-testid="result-protocol">
+      <p>{parts.join(' · ')}</p>
+      {protocol.deviation && (
+        <p>
+          {t('protocol.deviation')}: {protocol.deviation}
+        </p>
+      )}
+      {protocol.abortReason && (
+        <p>
+          {t('protocol.abortReason')}: {protocol.abortReason}
+        </p>
+      )}
+      {protocol.invalidAttempts.length > 0 && (
+        <p>
+          {t('protocol.invalidCount', { count: protocol.invalidAttempts.length })}
+        </p>
       )}
     </div>
   )

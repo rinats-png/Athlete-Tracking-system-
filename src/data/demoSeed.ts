@@ -495,6 +495,7 @@ export function buildDemoData(): StoredData {
         sex: ctx.sex,
         attempts: [],
       attemptSelection: null,
+      protocol: { version: null, method: null, tester: '', deviation: '', abortReason: '', invalidAttempts: [] },
       photo: null,
       context: { surface: '', temperatureC: null, timeOfDay: null, equipment: '', trainingStatus: '' },
       assessmentId: assessment.id,
