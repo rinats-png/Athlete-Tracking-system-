@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { useOverdueNotice } from '@/features/shared/useOverdueNotice'
 import { usePageTracking } from '@/features/shared/usePageTracking'
 import { AnalyticsConsentStrip } from '@/features/shared/AnalyticsConsent'
+import { AdminBar } from '@/features/admin/AdminLink'
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -63,6 +64,7 @@ export function AppShell() {
           </p>
         )}
         <DataLoadNotice />
+        <AdminBar />
         <AnalyticsConsentStrip />
         <Outlet />
       </main>

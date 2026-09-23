@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, Gauge } from 'lucide-react'
-import { checkAdmin } from '@/lib/supabase/analyticsAdmin'
+import { useIsAdmin } from './useIsAdmin'
 
 /**
  * Der Weg zum Dashboard — sichtbar nur für den Admin.
@@ -11,14 +10,7 @@ import { checkAdmin } from '@/lib/supabase/analyticsAdmin'
  * aufruft, bekommt keine Daten, weil jede Auswertung serverseitig prüft.
  */
 export function AdminLink() {
-  const [admin, setAdmin] = useState(false)
-  useEffect(() => {
-    let alive = true
-    void checkAdmin().then((r) => alive && setAdmin(r === 'admin'))
-    return () => {
-      alive = false
-    }
-  }, [])
+  const admin = useIsAdmin()
   if (!admin) return null
   return (
     <Link
@@ -34,6 +26,31 @@ export function AdminLink() {
         </span>
       </span>
       <ArrowRight size={16} className="text-ink-muted" aria-hidden />
+    </Link>
+  )
+}
+
+/**
+ * Hinweisleiste über jeder Seite, nur für den Admin: der Weg ins Dashboard
+ * soll nicht unter den Profileinstellungen versteckt sein.
+ */
+export function AdminBar() {
+  const admin = useIsAdmin()
+  const { pathname } = useLocation()
+  if (!admin || pathname.startsWith('/admin')) return null
+  return (
+    <Link
+      to="/admin/analytics"
+      data-testid="admin-bar"
+      className="mb-4 flex min-h-11 items-center justify-between gap-3 border border-line bg-accent-quiet px-3 py-2 text-[13px]"
+    >
+      <span className="flex items-center gap-2">
+        <Gauge size={16} aria-hidden />
+        <span>
+          <span className="font-medium">Admin</span> · Nutzungsstatistik öffnen
+        </span>
+      </span>
+      <ArrowRight size={14} aria-hidden />
     </Link>
   )
 }
