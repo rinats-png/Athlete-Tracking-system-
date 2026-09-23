@@ -711,3 +711,36 @@ ob sie etwas findet, ist keine.
 4. `node scripts/auditPolicies.mjs` laufen lassen. Meldet er nichts, heisst
    das: kein *bekanntes* Muster verletzt. Es heisst nicht, dass die Regel
    richtig ist.
+
+## Nutzungsstatistik vom 23.09.2026
+
+Eine eigene Ereignistabelle statt eines Drittanbieters — kein weiterer
+Empfänger personenbezogener Daten, kein weiterer AV-Vertrag.
+
+- **Nur mit Einwilligung** (§ 25 TDDDG, Art. 6 Abs. 1 lit. a DSGVO). Ohne Ja
+  legt der Browser keine Sitzungskennung an und schickt nichts ab — geprüft,
+  indem die Prüffälle `sendBeacon` abfangen und mitzählen. «Ja» und «Nein»
+  sind gleich gross; der Widerruf im Profil löscht die Kennung sofort.
+- **Kein Client liest oder schreibt `analytics_events`.** RLS an, keine
+  Regel, und das Standard-Tabellenrecht von `anon`/`authenticated` entzogen.
+  Geschrieben wird nur über die Edge Function `track` mit dem
+  Dienstschlüssel.
+- **`track` läuft ohne `verify_jwt`**, begründet: `sendBeacon` kann keinen
+  `Authorization`-Kopf setzen. Die Funktion prüft selbst Herkunft (Liste,
+  keine Wildcard), Grösse (8 KB) und Form. Die Kontokennung kommt nur aus
+  einem geprüften Token im Körper; eine `user_id` im Körper wird nicht
+  gelesen. Restrisiko, offen benannt: Jeder kann anonyme Ereignisse
+  einliefern und damit die Statistik verfälschen, nicht aber fremde Konten
+  betreffen oder etwas lesen. Eine Drosselung je Herkunft fehlt noch.
+- **Nichts aus der Gesundheitsschicht**, doppelt: Der Client schickt auf
+  `/gesundheit`, `/peakweek`, `/freigaben` nichts, und der Server verwirft
+  jedes Ereignis, das einen dieser Pfade irgendwo trägt.
+- **Keine Inhalte.** Schlüssel wie `email`, `weight`, `note`, `value` werden
+  serverseitig entfernt, in jeder Schreibweise. Keine Spalte für IP oder
+  User-Agent.
+- **Auswertung nur für `info@kydon.app` mit bestätigter Adresse** —
+  geprüft in jeder Datenbankfunktion (`analytics_guard`, sonst 42501/403),
+  gelesen aus `auth.users` statt aus dem Token. Die Route `/admin/analytics`
+  prüft zusätzlich, aber nur als Bequemlichkeit.
+- **90 Tage** über `purge_expired()`; die Kontolöschung nimmt alle
+  Ereignisse des Kontos und seiner Sitzungen mit.

@@ -11,6 +11,7 @@ import { pick } from '@/i18n/pick'
 import { formatNumber } from '@/lib/format'
 import { loadExtra } from '@/i18n'
 import { useBilling } from './BillingProvider'
+import { trackEvent } from '@/lib/analytics'
 
 /**
  * Die Schranke.
@@ -46,6 +47,11 @@ export function GateNotice({ feature, compact = false }: { feature: PlanFeature;
       alive = false
     }
   }, [])
+  // Wer an eine Schranke stösst, will offenbar das Merkmal dahinter — die
+  // ehrlichste Auskunft darüber, was Leute an der App interessiert.
+  useEffect(() => {
+    trackEvent('gate_shown', { feature })
+  }, [feature])
   const planId = smallestPlanWith(feature, access.role)
   const plan = planId == null ? null : planId.startsWith('coach_') ? coachTier(planId as never) : athletePlan(planId as never)
   const name = plan ? pick(plan.name, locale) : ''

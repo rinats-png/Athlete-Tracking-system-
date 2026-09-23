@@ -45,6 +45,7 @@ import { isEmptyEntry } from '@/domain/diary'
 import { mergeSeries, type SeriesRow } from '@/lib/supabase/series'
 import { mergeHealth, type IncomingHealth } from '@/lib/health/sync'
 import { FOCUS_HARD_LIMIT } from '@/domain/trainingFocus'
+import { withTracking } from './trackedActions'
 import type {
   AttemptSelection,
   LoadReport,
@@ -84,7 +85,7 @@ export interface RecordResultInput {
   notes?: string
 }
 
-interface AppDataValue {
+export interface AppDataValue {
   mode: AppMode
   /**
    * Bestand des AKTIVEN Athleten. Jeder Screen liest hierauf und muss deshalb
@@ -1057,7 +1058,11 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
     [mode, data, store, active.id, active.focuses, initial.report, recordResult, commitAthlete, commitFocuses, commitStore, storageBlocked, recoveredAt],
   )
 
-  return <AppDataContext.Provider value={value}>{children}</AppDataContext.Provider>
+  // Die Zählung hängt an den Aktionen, nicht an den Bildschirmen — siehe
+  // trackedActions.ts. Ohne Einwilligung ist jede Hülle ein Durchreichen.
+  const tracked = useMemo(() => withTracking(value), [value])
+
+  return <AppDataContext.Provider value={tracked}>{children}</AppDataContext.Provider>
 }
 
 /** Messungen über alle Athleten — nur zur Frage «ist der Bestand leer?». */

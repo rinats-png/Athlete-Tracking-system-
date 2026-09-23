@@ -155,6 +155,9 @@ const router = createBrowserRouter([
       // hat. Eine Schranke davor hiesse, dass der Athlet eine Freigabe
       // erteilen kann, die beim Empfänger nicht ankommt.
       { path: 'freigaben', element: screen(() => import('@/features/health/SharedWithMeScreen'), 'SharedWithMeScreen') },
+      // Nur für info@kydon.app. Die Seite prüft beim Laden; geschützt sind
+      // die Daten aber in der Datenbank selbst (analytics_guard).
+      { path: 'admin/analytics', element: screen(() => import('@/features/admin/AnalyticsDashboard'), 'AnalyticsDashboard') },
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },

@@ -19,6 +19,7 @@ import { NumberField } from '@/components/ui/NumberField'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { AnalyticsConsentSetting } from '@/features/shared/AnalyticsConsent'
 import { provisionalFormulas } from '@/domain/formulaRegistry'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { introEnabled, setIntroEnabled } from '@/features/intro/introPreference'
@@ -273,6 +274,7 @@ export function ProfileScreen() {
           <Panel>
             <PanelHeader title={t('profile.data')} />
             <div className="space-y-3 px-4 py-4">
+              <AnalyticsConsentSetting />
               <p className="flex gap-2 text-[13px] leading-relaxed text-ink-secondary">
                 <ShieldCheck size={16} className="mt-px shrink-0 text-accent-text" aria-hidden />
                 <span>{t('profile.privacy')}</span>

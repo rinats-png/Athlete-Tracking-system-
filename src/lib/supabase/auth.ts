@@ -1,5 +1,6 @@
 import { getSupabase, isSupabaseConfigured } from './client'
 import { noteFailure, noteSuccess, remainingDelayMs } from './throttle'
+import { trackEvent } from '@/lib/analytics'
 
 /**
  * Anmeldung gegen das Projekt.
@@ -125,6 +126,9 @@ export async function signUp(params: {
   // Ohne Sitzung ist die Bestätigungsmail unterwegs. Das ist kein Fehler,
   // sondern der normale Weg — und der Bildschirm muss es sagen, sonst wartet
   // jemand vor einem Formular, das schon alles getan hat.
+  // Beide Ausgänge sind eine Registrierung; die Rolle sagt, ob Athlet oder
+  // Trainer — nie die Adresse.
+  trackEvent('signup', { role: params.role, confirmationPending: !data.session })
   if (!data.session) return { ok: false, user: asUser(data.user), reason: 'needs_confirmation' }
   return { ok: true, user: asUser(data.user), reason: null }
 }
@@ -157,10 +161,12 @@ export async function signIn(email: string, password: string): Promise<AuthOutco
     return { ok: false, user: null, reason }
   }
   noteSuccess()
+  trackEvent('login')
   return { ok: true, user: asUser(data.user), reason: null }
 }
 
 export async function signOut(): Promise<void> {
+  trackEvent('logout')
   const supabase = await getSupabase()
   await supabase?.auth.signOut()
 }

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { ChevronDown, Languages } from 'lucide-react'
 import { APP_LOCALES, LOCALE_NAMES, toAppLocale } from '@/i18n/locales'
+import { trackEvent } from '@/lib/analytics'
 
 /**
  * Die Sprachwahl.
@@ -25,7 +26,10 @@ export function LanguageToggle() {
       <span className="sr-only">{t('language.label')}</span>
       <select
         value={active}
-        onChange={(e) => void i18n.changeLanguage(e.target.value)}
+        onChange={(e) => {
+          void i18n.changeLanguage(e.target.value)
+          trackEvent('language_changed', { lang: e.target.value })
+        }}
         aria-label={t('language.label')}
         className="min-h-11 appearance-none bg-transparent pr-6 font-display text-[12px] font-semibold tracking-[0.08em] uppercase text-ink outline-none"
         data-testid="language-select"

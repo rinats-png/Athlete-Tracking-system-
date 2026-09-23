@@ -6,6 +6,8 @@ import { ActionOrb } from '@/components/signature/ActionOrb'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useTranslation } from 'react-i18next'
 import { useOverdueNotice } from '@/features/shared/useOverdueNotice'
+import { usePageTracking } from '@/features/shared/usePageTracking'
+import { AnalyticsConsentStrip } from '@/features/shared/AnalyticsConsent'
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -21,6 +23,7 @@ export function AppShell() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   useOverdueNotice()
+  usePageTracking(pathname)
   const { mode, storageBlocked } = useAppData()
   const active = navKeyForPath(pathname)
 
@@ -60,6 +63,7 @@ export function AppShell() {
           </p>
         )}
         <DataLoadNotice />
+        <AnalyticsConsentStrip />
         <Outlet />
       </main>
 

@@ -1803,5 +1803,20 @@
     "reserve": "Distance reserve {{meters}} m",
     "fromTwoRuns": "From {{first}} and {{second}}.",
     "toHistory": "Whether a change exceeds the measurement error is shown in each individual test’s history."
+  },
+  "analytics": {
+    "consent": {
+      "title": "Will you help us make KYDON better?",
+      "body": "If you say yes, we count which screens you open, how long you stay and which features you use. Never your measurements, never your health data, no IP address, no advertising. Everything is deleted after 90 days. You can change this in your profile at any time.",
+      "yes": "Yes, happy to",
+      "no": "No, thanks",
+      "more": "Privacy"
+    },
+    "setting": {
+      "title": "Usage statistics",
+      "on": "On — you are helping us.",
+      "off": "Off — nothing is counted.",
+      "unset": "Not decided yet — nothing is counted."
+    }
   }
 }

@@ -1803,5 +1803,20 @@
     "reserve": "Distansereserve {{meters}} m",
     "fromTwoRuns": "Fra {{first}} og {{second}}.",
     "toHistory": "Om en endring overstiger måleusikkerheten, vises i den enkelte testens forløp."
+  },
+  "analytics": {
+    "consent": {
+      "title": "Vil du hjelpe oss å gjøre KYDON bedre?",
+      "body": "Sier du ja, teller vi hvilke skjermer du åpner, hvor lenge du blir og hvilke funksjoner du bruker. Aldri måleverdiene dine, aldri helsedataene dine, ingen IP-adresse, ingen reklame. Alt slettes etter 90 dager. Du kan endre det i profilen når som helst.",
+      "yes": "Ja, gjerne",
+      "no": "Nei takk",
+      "more": "Personvern"
+    },
+    "setting": {
+      "title": "Bruksstatistikk",
+      "on": "På — du hjelper oss.",
+      "off": "Av — ingenting telles.",
+      "unset": "Ikke bestemt ennå — ingenting telles."
+    }
   }
 }

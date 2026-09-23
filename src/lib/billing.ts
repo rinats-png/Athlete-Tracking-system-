@@ -1,6 +1,7 @@
 import { getSupabase, isSupabaseConfigured } from '@/lib/supabase/client'
 import type { Entitlement } from '@/domain/entitlement'
 import type { AthletePlanId, CoachTierId, EntitlementProduct } from '@/data/pricing'
+import { trackEvent } from '@/lib/analytics'
 
 /**
  * Der Bezahlweg aus Sicht des Geräts.
@@ -133,6 +134,7 @@ export async function startCheckout(plan: AthletePlanId | CoachTierId, interval:
   if (!supabase) return { ok: false, reason: 'offline' }
   const { data: auth } = await supabase.auth.getUser()
   if (!auth.user) return { ok: false, reason: 'not_signed_in' }
+  trackEvent('checkout_started', { plan, interval })
   try {
     const { data, error } = await supabase.functions.invoke('create-checkout', { method: 'POST', body: { plan, interval } })
     if (error) {

@@ -1803,5 +1803,20 @@
     "reserve": "Afstandsreserve {{meters}} m",
     "fromTwoRuns": "Uit {{first}} en {{second}}.",
     "toHistory": "Of een verandering boven de meetfout uitkomt, zie je in het verloop van de losse test."
+  },
+  "analytics": {
+    "consent": {
+      "title": "Help je ons KYDON beter te maken?",
+      "body": "Als je ja zegt, tellen we welke schermen je opent, hoe lang je blijft en welke functies je gebruikt. Nooit je meetwaarden, nooit je gezondheidsgegevens, geen IP-adres, geen reclame. Na 90 dagen wordt alles gewist. Je kunt het altijd wijzigen in je profiel.",
+      "yes": "Ja, graag",
+      "no": "Nee, bedankt",
+      "more": "Privacy"
+    },
+    "setting": {
+      "title": "Gebruiksstatistieken",
+      "on": "Aan — je helpt ons.",
+      "off": "Uit — er wordt niets geteld.",
+      "unset": "Nog niet besloten — er wordt niets geteld."
+    }
   }
 }

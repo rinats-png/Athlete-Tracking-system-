@@ -33,8 +33,8 @@ export interface LegalDocument {
   sections: LegalSection[]
 }
 
-const STAND_DE = 'Stand: 21. September 2026'
-const STAND_EN = 'Last updated: 21 September 2026'
+const STAND_DE = 'Stand: 23. September 2026'
+const STAND_EN = 'Last updated: 23 September 2026'
 
 // --- Datenschutz -------------------------------------------------------------
 
@@ -49,7 +49,8 @@ const privacyDe: LegalDocument = {
       body: [
         'Messen und Auswerten passiert vollständig in deinem Browser. Solange du die Synchronisierung nicht einschaltest, verlässt kein Messwert dein Gerät.',
         'Ein Konto brauchst du, um die App zu benutzen. Dafür verarbeiten wir deine E-Mail-Adresse und dein Passwort — mehr nicht.',
-        'Es gibt keine Werbung, kein Tracking, keine Analysedienste, keine Weitergabe an Dritte zu Werbezwecken und keine externen Schriften oder Skripte. Der einzige externe Dienst, den die App aufruft, ist die Lebensmittelsuche bei Open Food Facts — und nur, wenn du sie antippst (siehe unten).',
+        'Es gibt keine Werbung, keine Analysedienste Dritter, keine Weitergabe an Dritte zu Werbezwecken und keine externen Schriften oder Skripte. Der einzige externe Dienst, den die App aufruft, ist die Lebensmittelsuche bei Open Food Facts — und nur, wenn du sie antippst (siehe unten).',
+        'Eine eigene Nutzungsstatistik gibt es — aber nur, wenn du ausdrücklich «Ja» sagst. Ohne dein Ja wird nichts gezählt und nichts gespeichert. Einzelheiten im Abschnitt «Nutzungsstatistik».',
       ],
     },
     {
@@ -95,6 +96,7 @@ const privacyDe: LegalDocument = {
       body: [
         'Daten auf deinem Gerät bleiben, bis du sie löschst.',
         'Kontodaten bleiben, bis du das Konto löschen lässt. Synchronisierte Datensätze werden mit dem Konto gelöscht.',
+        'Ereignisse der Nutzungsstatistik: 90 Tage, danach automatisch gelöscht. Mit deinem Konto werden auch die ihm zugeordneten Ereignisse gelöscht.',
         'Serverseitige Zugriffsprotokolle unseres Hosters werden nach dessen Vorgaben kurzfristig gelöscht.',
       ],
     },
@@ -107,10 +109,21 @@ const privacyDe: LegalDocument = {
       ],
     },
     {
+      heading: 'Nutzungsstatistik (nur mit Einwilligung)',
+      body: [
+        'Beim ersten Öffnen fragt die App, ob du bei der Verbesserung helfen möchtest. «Ja» und «Nein» sind gleich gross, und die App funktioniert in beiden Fällen vollständig. Deine Antwort kannst du im Profil unter «Daten» jederzeit ändern.',
+        'Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Erst nach deinem Ja legt die App eine zufällige Sitzungskennung im Speicher deines Browsers an.',
+        'Gezählt wird, welche Bildschirme du öffnest und wie lange du dort bleibst, welche Funktionen du benutzt (etwa dass ein Test gespeichert wurde — welcher Test, aber nie der Messwert), an welche Bezahlschranken du stösst, ob du ein Konto anlegst und ob du die App installierst. Bist du angemeldet, wird das Ereignis deinem Konto zugeordnet; die Kennung dafür prüft der Server selbst.',
+        'Nie gezählt werden: Messwerte, Tagebuch- und Trainingsinhalte, Ernährungsangaben, E-Mail-Adresse, Name — und nichts aus der Gesundheitsschicht, auch nicht, dass du sie öffnest. Die IP-Adresse und die Browserkennung werden nicht gespeichert; die Tabelle hat dafür keine Spalte.',
+        'Die Ereignisse liegen in unserer eigenen Datenbank bei Supabase (siehe «Empfänger») — es gibt keinen weiteren Empfänger. Einsehen kann sie nur der Betreiber. Nach 90 Tagen werden sie automatisch gelöscht.',
+        'Widerruf: «Nein» im Profil. Die Sitzungskennung wird sofort gelöscht, und es wird nichts mehr gezählt. Bereits erfasste Ereignisse laufen nach 90 Tagen ab; auf Wunsch löschen wir sie früher.',
+      ],
+    },
+    {
       heading: 'Was die App nicht tut',
       body: [
         'Keine Cookies zu Werbe- oder Analysezwecken. Die App setzt überhaupt keine Cookies; der Anmeldezustand liegt im lokalen Speicher.',
-        'Keine Reichweitenmessung, kein Fingerprinting, keine Profilbildung, keine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO.',
+        'Kein Fingerprinting, keine Profilbildung zu Werbezwecken, keine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO. Eine Nutzungsstatistik gibt es nur mit deiner Einwilligung (siehe «Nutzungsstatistik»).',
         'Keine Übermittlung an Werbenetzwerke, keine eingebetteten Inhalte Dritter, keine externen Schriftarten.',
       ],
     },
@@ -150,7 +163,8 @@ const privacyEn: LegalDocument = {
       body: [
         'Measuring and analysis happen entirely in your browser. As long as you do not turn on sync, no measurement leaves your device.',
         'You need an account to use the app. For that we process your email address and your password — nothing else.',
-        'There is no advertising, no tracking, no analytics, no sharing with third parties for advertising, and no external fonts or scripts. The only external service the app calls is the food search at Open Food Facts — and only when you tap it (see below).',
+        'There is no advertising, no third-party analytics, no sharing with third parties for advertising, and no external fonts or scripts. The only external service the app calls is the food search at Open Food Facts — and only when you tap it (see below).',
+        'There is an in-house usage statistic — but only if you explicitly say yes. Without your yes nothing is counted and nothing is stored. Details under «Usage statistics».',
       ],
     },
     {
@@ -191,6 +205,7 @@ const privacyEn: LegalDocument = {
       body: [
         'Data on your device stays until you delete it.',
         'Account data stays until you have the account deleted. Synced records are deleted with the account.',
+        'Usage statistics events: 90 days, then deleted automatically. Events linked to your account are deleted together with the account.',
         'Server-side access logs of our host are deleted shortly, per their policy.',
       ],
     },
@@ -203,10 +218,21 @@ const privacyEn: LegalDocument = {
       ],
     },
     {
+      heading: 'Usage statistics (only with consent)',
+      body: [
+        'When you first open the app it asks whether you want to help improve it. «Yes» and «No» are the same size, and the app works fully either way. You can change your answer at any time in your profile under «Data».',
+        'The legal basis is your consent (Art. 6(1)(a) GDPR, § 25(1) TDDDG). Only after your yes does the app create a random session identifier in your browser storage.',
+        'We count which screens you open and how long you stay, which features you use (for example that a test was saved — which test, but never the measured value), which paywalls you run into, whether you create an account and whether you install the app. If you are signed in, the event is linked to your account; the server determines that identifier itself.',
+        'Never counted: measurements, diary and training content, nutrition entries, email address, name — and nothing from the health layer, not even that you open it. The IP address and browser identifier are not stored; the table has no column for them.',
+        'The events live in our own database at Supabase (see «Recipients») — there is no other recipient. Only the operator can view them. They are deleted automatically after 90 days.',
+        'Withdrawal: «No» in your profile. The session identifier is deleted immediately and nothing more is counted. Events already recorded expire after 90 days; on request we delete them sooner.',
+      ],
+    },
+    {
       heading: 'What the app does not do',
       body: [
         'No cookies for advertising or analytics. The app sets no cookies at all; the sign-in state lives in local storage.',
-        'No reach measurement, no fingerprinting, no profiling, no automated decision-making within the meaning of Art. 22 GDPR.',
+        'No fingerprinting, no profiling for advertising, no automated decision-making within the meaning of Art. 22 GDPR. Usage statistics only with your consent (see «Usage statistics»).',
         'No transmission to ad networks, no embedded third-party content, no external fonts.',
       ],
     },

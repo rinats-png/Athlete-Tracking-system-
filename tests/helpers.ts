@@ -36,6 +36,10 @@ async function resetState(page: Page) {
     // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
     // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
     localStorage.setItem('kydon.intro', 'off')
+    // Die Frage nach der Nutzungsstatistik gehört wie die Intro zum ersten
+    // Öffnen durch einen Menschen. Beantwortet mit «Nein» — so schickt auch
+    // kein Prüflauf je ein Ereignis ab. Der eigene Fall prüft die Frage.
+    localStorage.setItem('kydon.analytics.consent.v1', JSON.stringify({ state: 'denied', at: '2026-01-01T00:00:00.000Z' }))
     // Angemeldet: die Anmeldung ist ein gestaltetes Tor ohne Pruefung, und
     // sie durch jeden der ~2400 Faelle zu klicken wuerde nur Zeit kosten,
     // ohne etwas zu belegen. Der eigene Fall dafuer geht durch das Tor.
@@ -69,6 +73,10 @@ export async function openColdStart(page: Page) {
     localStorage.setItem('kydon.theme', 'dark')
     localStorage.setItem('kydon.locale', 'de')
     localStorage.setItem('kydon.intro', 'off')
+    // Die Frage nach der Nutzungsstatistik gehört wie die Intro zum ersten
+    // Öffnen durch einen Menschen. Beantwortet mit «Nein» — so schickt auch
+    // kein Prüflauf je ein Ereignis ab. Der eigene Fall prüft die Frage.
+    localStorage.setItem('kydon.analytics.consent.v1', JSON.stringify({ state: 'denied', at: '2026-01-01T00:00:00.000Z' }))
   })
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
@@ -95,6 +103,10 @@ export async function openFirstRun(page: Page) {
     // nicht zu einem Prüflauf: sie liefe sonst vor jedem einzelnen Fall.
     // Der eigene Fall dafür schaltet sie ausdrücklich wieder ein.
     localStorage.setItem('kydon.intro', 'off')
+    // Die Frage nach der Nutzungsstatistik gehört wie die Intro zum ersten
+    // Öffnen durch einen Menschen. Beantwortet mit «Nein» — so schickt auch
+    // kein Prüflauf je ein Ereignis ab. Der eigene Fall prüft die Frage.
+    localStorage.setItem('kydon.analytics.consent.v1', JSON.stringify({ state: 'denied', at: '2026-01-01T00:00:00.000Z' }))
     localStorage.setItem(
       'kydon.account.v1',
       JSON.stringify({

@@ -1803,5 +1803,20 @@
     "reserve": "Reserva de distancia {{meters}} m",
     "fromTwoRuns": "A partir de {{first}} y {{second}}.",
     "toHistory": "Si un cambio supera el error de medición se ve en el historial de cada test."
+  },
+  "analytics": {
+    "consent": {
+      "title": "¿Nos ayudas a mejorar KYDON?",
+      "body": "Si aceptas, contamos qué pantallas abres, cuánto tiempo te quedas y qué funciones usas. Nunca tus mediciones, nunca tus datos de salud, sin dirección IP, sin publicidad. Todo se borra a los 90 días. Puedes cambiarlo en el perfil cuando quieras.",
+      "yes": "Sí, claro",
+      "no": "No, gracias",
+      "more": "Privacidad"
+    },
+    "setting": {
+      "title": "Estadísticas de uso",
+      "on": "Activadas: nos estás ayudando.",
+      "off": "Desactivadas: no se cuenta nada.",
+      "unset": "Sin decidir: no se cuenta nada."
+    }
   }
 }
