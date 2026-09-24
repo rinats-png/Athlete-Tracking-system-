@@ -923,7 +923,7 @@
   "reminders": {
     "eyebrow": "Historique",
     "title": "Rappels",
-    "intro": "Local, sans serveur : l'app sait quand tu as mesuré pour la dernière fois. Les rappels sont désactivés tant que tu ne les actives pas.",
+    "intro": "L’app sait quand tu as mesuré pour la dernière fois et calcule l’échéance sur ton appareil. Les rappels sont désactivés tant que tu ne les actives pas — avec un compte, aussi par push.",
     "noPush": "Le rappel apparaît dans l’app quand tu l’ouvres. Avec un compte, tu peux aussi activer le push : KYDON te prévient alors même quand l’app est fermée. Le serveur ne connaît pour cela que la date de la prochaine échéance. Sans compte, le fichier calendrier reste la voie fiable.",
     "enable": "Activer les rappels",
     "enabled": "Les rappels sont activés",

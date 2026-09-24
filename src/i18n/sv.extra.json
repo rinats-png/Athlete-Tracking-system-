@@ -923,7 +923,7 @@
   "reminders": {
     "eyebrow": "Historik",
     "title": "Påminnelser",
-    "intro": "Lokalt, ingen server: appen vet när du senast mätte. Påminnelser är av tills du slår på dem.",
+    "intro": "Appen vet när du senast mätte och räknar ut på din enhet vad som är dags. Påminnelser är av tills du slår på dem – med konto även via push.",
     "noPush": "Påminnelsen visas i appen när du öppnar den. Med ett konto kan du också slå på push: då hör KYDON av sig även när appen är stängd. Servern får då bara veta datumet för nästa mätning. Utan konto är kalenderfilen fortfarande det pålitliga sättet.",
     "enable": "Aktivera påminnelser",
     "enabled": "Påminnelser är på",

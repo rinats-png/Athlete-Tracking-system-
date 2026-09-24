@@ -923,7 +923,7 @@
   "reminders": {
     "eyebrow": "Historik",
     "title": "Påmindelser",
-    "intro": "Lokalt, ingen server: appen ved, hvornår du sidst målte. Påmindelser er slået fra, indtil du slår dem til.",
+    "intro": "Appen ved, hvornår du sidst målte, og beregner på din enhed, hvad der er tid til. Påmindelser er slået fra, indtil du slår dem til – med en konto også via push.",
     "noPush": "Påmindelsen vises i appen, når du åbner den. Med en konto kan du også slå push til: så giver KYDON besked, selv når appen er lukket. Serveren får kun datoen for den næste måling at vide. Uden konto er kalenderfilen stadig den pålidelige vej.",
     "enable": "Slå påmindelser til",
     "enabled": "Påmindelser er slået til",

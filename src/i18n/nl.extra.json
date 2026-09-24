@@ -923,7 +923,7 @@
   "reminders": {
     "eyebrow": "Historie",
     "title": "Herinneringen",
-    "intro": "Lokaal, geen server: de app weet wanneer je het laatst hebt gemeten. Herinneringen staan uit tot je ze inschakelt.",
+    "intro": "De app weet wanneer je het laatst hebt gemeten en berekent op je apparaat wat er gepland staat. Herinneringen staan uit tot je ze inschakelt — met een account ook via push.",
     "noPush": "De herinnering verschijnt in de app wanneer je die opent. Met een account kun je ook push inschakelen: dan meldt KYDON zich ook als de app gesloten is. De server kent daarvoor alleen de datum van de volgende hermeting. Zonder account blijft het agendabestand de betrouwbare weg.",
     "enable": "Herinneringen inschakelen",
     "enabled": "Herinneringen staan aan",

@@ -923,7 +923,7 @@
   "reminders": {
     "eyebrow": "History",
     "title": "Reminders",
-    "intro": "Local, no server: the app knows when you last measured. Reminders are off until you switch them on.",
+    "intro": "The app knows when you last measured and works out what is due on your device. Reminders are off until you switch them on — with an account, also by push.",
     "noPush": "The reminder appears in the app when you open it. With an account you can also turn on push: KYDON then notifies you even when the app is closed. For this the server only learns the date of the next retest. Without an account, the calendar file remains the reliable way.",
     "enable": "Enable reminders",
     "enabled": "Reminders are on",

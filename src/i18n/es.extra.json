@@ -923,7 +923,7 @@
   "reminders": {
     "eyebrow": "Historial",
     "title": "Recordatorios",
-    "intro": "Local, sin servidor: la app sabe cuándo mediste por última vez. Los recordatorios están desactivados hasta que los actives.",
+    "intro": "La app sabe cuándo mediste por última vez y calcula el vencimiento en tu dispositivo. Los recordatorios están desactivados hasta que los actives; con una cuenta, también por push.",
     "noPush": "El recordatorio aparece en la app cuando la abres. Con una cuenta también puedes activar el push: KYDON te avisa aunque la app esté cerrada. Para ello el servidor solo conoce la fecha del próximo vencimiento. Sin cuenta, el archivo de calendario sigue siendo la vía fiable.",
     "enable": "Activar recordatorios",
     "enabled": "Recordatorios activados",
