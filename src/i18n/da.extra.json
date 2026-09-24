@@ -924,7 +924,7 @@
     "eyebrow": "Historik",
     "title": "Påmindelser",
     "intro": "Lokalt, ingen server: appen ved, hvornår du sidst målte. Påmindelser er slået fra, indtil du slår dem til.",
-    "noPush": "Påmindelsen vises inde i appen, når du åbner den — og, hvis du tillader det, som systemnotifikation i samme øjeblik. Mens KYDON er lukket, kommer intet: det ville kræve en server, der ved, hvem du er, og hvornår du sidst målte, og den findes bevidst ikke. Brug kalenderfilen for at blive mindet om det uden appen.",
+    "noPush": "Påmindelsen vises i appen, når du åbner den. Med en konto kan du også slå push til: så giver KYDON besked, selv når appen er lukket. Serveren får kun datoen for den næste måling at vide. Uden konto er kalenderfilen stadig den pålidelige vej.",
     "enable": "Slå påmindelser til",
     "enabled": "Påmindelser er slået til",
     "disabled": "Påmindelser er slået fra",
@@ -946,7 +946,7 @@
     "notifyOn": "Systemnotifikationer er tilladt",
     "notifyDenied": "Systemnotifikationer er blokeret for dette websted. Kun browserindstillingerne kan ændre det.",
     "notifyUnsupported": "Denne browser har ingen systemnotifikationer.",
-    "notifyLimit": "Appen kan kun notificere dig, mens den er åben — den har ingen server, der sender noget i baggrunden. Brug kalenderfilen til en påmindelse, der når dig uden appen.",
+    "notifyLimit": "Denne systemnotifikation vises kun, mens appen er åben. For påmindelser, når appen er lukket, slå push til nedenfor.",
     "notifyTitle": "Gentest forfalden",
     "notifyBody_one": "{{test}} forfalder til gentest.",
     "notifyBody_other": "{{count}} tests forfalder til gentest."

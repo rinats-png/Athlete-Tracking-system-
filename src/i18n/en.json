@@ -1853,5 +1853,32 @@
       "audio_protocol": "Audio protocol",
       "rep_count": "Repetitions counted"
     }
+  },
+  "push": {
+    "title": "Push notifications",
+    "hint": "Reminds you of due retests even when KYDON is closed, and delivers messages from your coach. For this the server only learns the date of the next retest – no tests, no values. Delivery runs through your browser’s push service (e.g. Google, Apple or Mozilla).",
+    "enable": "Turn on push",
+    "disable": "Turn off push",
+    "test": "Send test notification",
+    "testSent": "Test notification sent.",
+    "on": "Push is on for this device.",
+    "failed": "That didn’t work. Please try again later.",
+    "state": {
+      "unsupported": "This browser does not support push notifications.",
+      "needs_install": "On iPhone, push only works from the installed app: in Safari tap “Share → Add to Home Screen”, then open KYDON from there.",
+      "signed_out": "Push needs an account. Sign in, then you can turn it on here.",
+      "denied": "Notifications are blocked in your browser. Allow them in the site settings."
+    },
+    "coach": {
+      "title": "Message your athletes",
+      "hint": "Sent by push to linked athletes with their own account. At most three messages per athlete per day.",
+      "message": "Message",
+      "placeholder": "e.g. Test day on Saturday, 9 am, hall 2",
+      "noPush": "no push",
+      "send": "Send",
+      "sent_one": "Sent to {{count}} athlete.",
+      "sent_other": "Sent to {{count}} athletes.",
+      "limit": "Daily limit reached for these athletes."
+    }
   }
 }

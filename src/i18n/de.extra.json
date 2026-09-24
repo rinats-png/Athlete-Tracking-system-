@@ -924,7 +924,7 @@
     "eyebrow": "Verlauf",
     "title": "Erinnerungen",
     "intro": "Lokal, ohne Server: die App weiss, wann zuletzt gemessen wurde. Erinnerungen sind aus, bis du sie einschaltest.",
-    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest — und, wenn du es erlaubst, in diesem Moment zusätzlich als Systemmeldung. Während KYDON geschlossen ist, kommt nichts: dafür bräuchte es einen Server, der weiss, wer du bist und wann du zuletzt gemessen hast, und den gibt es bewusst nicht. Wer auch ohne die App erinnert werden will, nimmt die Kalenderdatei.",
+    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest. Mit Konto kannst du zusätzlich Push einschalten: dann meldet sich KYDON auch, wenn die App geschlossen ist. Der Server erfährt dafür nur das Datum der nächsten Fälligkeit. Ohne Konto bleibt die Kalenderdatei der verlässliche Weg.",
     "enable": "Erinnerungen aktivieren",
     "enabled": "Erinnerungen sind aktiv",
     "disabled": "Erinnerungen sind aus",
@@ -946,7 +946,7 @@
     "notifyOn": "Systembenachrichtigung ist erlaubt",
     "notifyDenied": "Systembenachrichtigungen sind für diese Seite abgelehnt. Das lässt sich nur in den Browsereinstellungen ändern.",
     "notifyUnsupported": "Dieser Browser kennt keine Systembenachrichtigungen.",
-    "notifyLimit": "Die App kann nur benachrichtigen, während sie geöffnet ist — sie hat keinen Server, der im Hintergrund etwas verschickt. Für eine Erinnerung, die dich auch ohne die App erreicht, nimm die Kalenderdatei.",
+    "notifyLimit": "Diese Systemmeldung erscheint nur, während die App geöffnet ist. Für Erinnerungen bei geschlossener App schalte unten Push ein.",
     "notifyTitle": "Nachmessung fällig",
     "notifyBody_one": "{{test}} ist zur Nachmessung fällig.",
     "notifyBody_other": "{{count}} Tests sind zur Nachmessung fällig."

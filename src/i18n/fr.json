@@ -1853,5 +1853,32 @@
       "audio_protocol": "Protocole audio",
       "rep_count": "Répétitions comptées"
     }
+  },
+  "push": {
+    "title": "Notifications push",
+    "hint": "Te rappelle les nouvelles mesures à faire, même quand KYDON est fermé, et transmet les messages de ton entraîneur. Le serveur ne connaît pour cela que la date de la prochaine échéance – ni tests, ni valeurs. L’envoi passe par le service push de ton navigateur (p. ex. Google, Apple ou Mozilla).",
+    "enable": "Activer le push",
+    "disable": "Désactiver le push",
+    "test": "Envoyer une notification test",
+    "testSent": "Notification test envoyée.",
+    "on": "Le push est activé sur cet appareil.",
+    "failed": "Cela n’a pas fonctionné. Réessaie plus tard.",
+    "state": {
+      "unsupported": "Ce navigateur ne prend pas en charge les notifications push.",
+      "needs_install": "Sur iPhone, le push ne fonctionne que depuis l’app installée : dans Safari « Partager → Sur l’écran d’accueil », puis ouvre KYDON depuis là.",
+      "signed_out": "Le push nécessite un compte. Connecte-toi, puis active-le ici.",
+      "denied": "Les notifications sont bloquées dans ton navigateur. Autorise-les dans les réglages du site."
+    },
+    "coach": {
+      "title": "Message à tes athlètes",
+      "hint": "Envoyé par push aux athlètes liés qui ont leur propre compte. Trois messages maximum par athlète et par jour.",
+      "message": "Message",
+      "placeholder": "p. ex. Journée de tests samedi, 9 h, salle 2",
+      "noPush": "pas de push",
+      "send": "Envoyer",
+      "sent_one": "Envoyé à {{count}} athlète.",
+      "sent_other": "Envoyé à {{count}} athlètes.",
+      "limit": "Limite quotidienne atteinte pour ces athlètes."
+    }
   }
 }

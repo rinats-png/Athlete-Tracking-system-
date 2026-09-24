@@ -924,7 +924,7 @@
     "eyebrow": "Historikk",
     "title": "Påminnelser",
     "intro": "Lokalt, ingen server: appen vet når du sist målte. Påminnelser er av til du slår dem på.",
-    "noPush": "Påminnelsen vises inne i appen når du åpner den — og, hvis du tillater det, som systemvarsel i det øyeblikket. Mens KYDON er lukket, kommer ingenting: det ville krevd en server som vet hvem du er og når du sist målte, og det finnes bevisst ingen. For å bli minnet på uten appen, bruk kalenderfilen.",
+    "noPush": "Påminnelsen vises i appen når du åpner den. Med en konto kan du også slå på push: da gir KYDON beskjed selv når appen er lukket. Serveren får bare vite datoen for neste måling. Uten konto er kalenderfilen fortsatt den pålitelige veien.",
     "enable": "Slå på påminnelser",
     "enabled": "Påminnelser er på",
     "disabled": "Påminnelser er av",
@@ -946,7 +946,7 @@
     "notifyOn": "Systemvarsler er tillatt",
     "notifyDenied": "Systemvarsler er blokkert for dette nettstedet. Bare nettleserinnstillingene kan endre det.",
     "notifyUnsupported": "Denne nettleseren har ingen systemvarsler.",
-    "notifyLimit": "Appen kan bare varsle deg mens den er åpen — den har ingen server som sender noe i bakgrunnen. For en påminnelse som når deg uten appen, bruk kalenderfilen.",
+    "notifyLimit": "Dette systemvarselet vises bare mens appen er åpen. For påminnelser når appen er lukket, slå på push nedenfor.",
     "notifyTitle": "Retest forfalt",
     "notifyBody_one": "{{test}} er klar for retest.",
     "notifyBody_other": "{{count}} tester er klare for retest."

@@ -33,8 +33,8 @@ export interface LegalDocument {
   sections: LegalSection[]
 }
 
-const STAND_DE = 'Stand: 23. September 2026'
-const STAND_EN = 'Last updated: 23 September 2026'
+const STAND_DE = 'Stand: 24. September 2026'
+const STAND_EN = 'Last updated: 24 September 2026'
 
 // --- Datenschutz -------------------------------------------------------------
 
@@ -97,6 +97,7 @@ const privacyDe: LegalDocument = {
         'Daten auf deinem Gerät bleiben, bis du sie löschst.',
         'Kontodaten bleiben, bis du das Konto löschen lässt. Synchronisierte Datensätze werden mit dem Konto gelöscht.',
         'Ereignisse der Nutzungsstatistik: 90 Tage, danach automatisch gelöscht. Mit deinem Konto werden auch die ihm zugeordneten Ereignisse gelöscht.',
+        'Push-Abonnements und das nächste Fälligkeitsdatum: bis du Push ausschaltest oder dein Konto löschst; nicht mehr erreichbare Geräte entfernen wir automatisch. Das Versandprotokoll (wer wann wem eine Nachricht geschickt hat, ohne Inhalt): 90 Tage.',
         'Serverseitige Zugriffsprotokolle unseres Hosters werden nach dessen Vorgaben kurzfristig gelöscht.',
       ],
     },
@@ -117,6 +118,16 @@ const privacyDe: LegalDocument = {
         'Nie gezählt werden: Messwerte, Tagebuch- und Trainingsinhalte, Ernährungsangaben, E-Mail-Adresse, Name — und nichts aus der Gesundheitsschicht, auch nicht, dass du sie öffnest. Die IP-Adresse und die Browserkennung werden nicht gespeichert; die Tabelle hat dafür keine Spalte.',
         'Die Ereignisse liegen in unserer eigenen Datenbank bei Supabase (siehe «Empfänger») — es gibt keinen weiteren Empfänger. Einsehen kann sie nur der Betreiber. Nach 90 Tagen werden sie automatisch gelöscht.',
         'Widerruf: «Nein» im Profil. Die Sitzungskennung wird sofort gelöscht, und es wird nichts mehr gezählt. Bereits erfasste Ereignisse laufen nach 90 Tagen ab; auf Wunsch löschen wir sie früher.',
+      ],
+    },
+    {
+      heading: 'Push-Benachrichtigungen (nur wenn du sie einschaltest)',
+      body: [
+        'Mit Konto kannst du unter «Erinnerungen» Push einschalten. Dein Browser fragt dann um Erlaubnis. Ohne dein Einschalten wird nichts gespeichert und nichts verschickt. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG).',
+        'Gespeichert werden die Push-Adresse deines Geräts mit den zugehörigen Schlüsseln, deine Sprache und — für Erinnerungen an Nachmessungen — nur das Datum der nächsten Fälligkeit. Welcher Test fällig ist und alle Messwerte bleiben auf deinem Gerät.',
+        'Nachrichten gibt es aus drei Anlässen: eine fällige Nachmessung, eine Mitteilung des Betreibers an alle mit eingeschaltetem Push, und eine Nachricht eines Trainers, mit dem du aktiv verbunden bist (höchstens drei pro Tag).',
+        'Zugestellt wird über den Push-Dienst deines Browsers (bei Chrome Google, bei Safari Apple, bei Firefox Mozilla). Der Inhalt ist auf dem Weg dorthin Ende-zu-Ende verschlüsselt; der Dienst sieht Zeitpunkt und Grösse, nicht den Text.',
+        'Ausschalten: unter «Erinnerungen» oder in den Browser-Einstellungen. Beim Ausschalten in der App löschen wir Adresse und Fälligkeitsdatum sofort.',
       ],
     },
     {
@@ -206,6 +217,7 @@ const privacyEn: LegalDocument = {
         'Data on your device stays until you delete it.',
         'Account data stays until you have the account deleted. Synced records are deleted with the account.',
         'Usage statistics events: 90 days, then deleted automatically. Events linked to your account are deleted together with the account.',
+        'Push subscriptions and the next due date: until you turn push off or delete your account; unreachable devices are removed automatically. The send log (who sent a message to whom and when, without content): 90 days.',
         'Server-side access logs of our host are deleted shortly, per their policy.',
       ],
     },
@@ -215,6 +227,16 @@ const privacyEn: LegalDocument = {
         'You have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction (Art. 18), data portability (Art. 20) and objection (Art. 21). You may also complain to a supervisory authority.',
         'The app fulfils portability directly: the complete export in your profile is free, available in every tier and machine-readable. It is never behind a paywall.',
         'For access and erasure a message to the address in the imprint is enough.',
+      ],
+    },
+    {
+      heading: 'Push notifications (only if you turn them on)',
+      body: [
+        'With an account you can turn on push under «Reminders». Your browser then asks for permission. Unless you turn it on, nothing is stored and nothing is sent. The legal basis is your consent (Art. 6(1)(a) GDPR, § 25(1) TDDDG).',
+        'We store your device’s push address with its keys, your language and — for retest reminders — only the date of the next retest. Which test is due and all measurements stay on your device.',
+        'Messages come from three sources: a due retest, an announcement by the operator to everyone with push on, and a message from a coach you are actively linked with (at most three per day).',
+        'Delivery runs through your browser’s push service (Google for Chrome, Apple for Safari, Mozilla for Firefox). The content is end-to-end encrypted on the way; the service sees time and size, not the text.',
+        'Turning it off: under «Reminders» or in your browser settings. When you turn it off in the app, we delete the address and due date immediately.',
       ],
     },
     {

@@ -924,7 +924,7 @@
     "eyebrow": "History",
     "title": "Reminders",
     "intro": "Local, no server: the app knows when you last measured. Reminders are off until you switch them on.",
-    "noPush": "The reminder appears inside the app when you open it — and, if you allow it, as a system notification at that moment. While KYDON is closed, nothing arrives: that would need a server knowing who you are and when you last measured, and there deliberately is none. To be reminded without the app, use the calendar file.",
+    "noPush": "The reminder appears in the app when you open it. With an account you can also turn on push: KYDON then notifies you even when the app is closed. For this the server only learns the date of the next retest. Without an account, the calendar file remains the reliable way.",
     "enable": "Enable reminders",
     "enabled": "Reminders are on",
     "disabled": "Reminders are off",
@@ -946,7 +946,7 @@
     "notifyOn": "System notifications are allowed",
     "notifyDenied": "System notifications are blocked for this site. Only browser settings can change that.",
     "notifyUnsupported": "This browser has no system notifications.",
-    "notifyLimit": "The app can only notify you while it is open — it has no server sending anything in the background. For a reminder that reaches you without the app, use the calendar file.",
+    "notifyLimit": "This system notification only appears while the app is open. For reminders when the app is closed, turn on push below.",
     "notifyTitle": "Re-test due",
     "notifyBody_one": "{{test}} is due for a re-test.",
     "notifyBody_other": "{{count}} tests are due for a re-test."

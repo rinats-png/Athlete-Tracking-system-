@@ -924,7 +924,7 @@
     "eyebrow": "Historial",
     "title": "Recordatorios",
     "intro": "Local, sin servidor: la app sabe cuándo mediste por última vez. Los recordatorios están desactivados hasta que los actives.",
-    "noPush": "El recordatorio aparece dentro de la app al abrirla — y, si lo permites, como notificación del sistema en ese momento. Mientras KYDON está cerrada, no llega nada: eso necesitaría un servidor que supiera quién eres y cuándo mediste, y deliberadamente no lo hay. Para recibir avisos sin la app, usa el archivo de calendario.",
+    "noPush": "El recordatorio aparece en la app cuando la abres. Con una cuenta también puedes activar el push: KYDON te avisa aunque la app esté cerrada. Para ello el servidor solo conoce la fecha del próximo vencimiento. Sin cuenta, el archivo de calendario sigue siendo la vía fiable.",
     "enable": "Activar recordatorios",
     "enabled": "Recordatorios activados",
     "disabled": "Recordatorios desactivados",
@@ -946,7 +946,7 @@
     "notifyOn": "Notificaciones del sistema permitidas",
     "notifyDenied": "Las notificaciones del sistema están bloqueadas para este sitio. Solo la configuración del navegador puede cambiarlo.",
     "notifyUnsupported": "Este navegador no tiene notificaciones del sistema.",
-    "notifyLimit": "La app solo puede avisarte mientras está abierta — no tiene servidor que envíe nada en segundo plano. Para un recordatorio que te llegue sin la app, usa el archivo de calendario.",
+    "notifyLimit": "Esta notificación del sistema solo aparece mientras la app está abierta. Para recordatorios con la app cerrada, activa el push abajo.",
     "notifyTitle": "Retest pendiente",
     "notifyBody_one": "{{test}} está pendiente de retest.",
     "notifyBody_other": "{{count}} tests están pendientes de retest."

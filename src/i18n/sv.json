@@ -1853,5 +1853,32 @@
       "audio_protocol": "Ljudprotokoll",
       "rep_count": "Räknade repetitioner"
     }
+  },
+  "push": {
+    "title": "Pushnotiser",
+    "hint": "Påminner dig om nya mätningar även när KYDON är stängt och levererar meddelanden från din tränare. Servern får då bara veta datumet för nästa mätning – inga tester, inga värden. Leveransen går via din webbläsares pushtjänst (t.ex. Google, Apple eller Mozilla).",
+    "enable": "Slå på push",
+    "disable": "Stäng av push",
+    "test": "Skicka testnotis",
+    "testSent": "Testnotis skickad.",
+    "on": "Push är på för den här enheten.",
+    "failed": "Det fungerade inte. Försök igen senare.",
+    "state": {
+      "unsupported": "Den här webbläsaren stöder inte pushnotiser.",
+      "needs_install": "På iPhone fungerar push bara från den installerade appen: i Safari ”Dela → Lägg till på hemskärmen”, öppna sedan KYDON därifrån.",
+      "signed_out": "Push kräver ett konto. Logga in, så kan du slå på det här.",
+      "denied": "Notiser är blockerade i webbläsaren. Tillåt dem i webbplatsinställningarna."
+    },
+    "coach": {
+      "title": "Meddelande till dina idrottare",
+      "hint": "Skickas som push till kopplade idrottare med eget konto. Högst tre meddelanden per idrottare och dag.",
+      "message": "Meddelande",
+      "placeholder": "t.ex. Testdag på lördag kl. 9, hall 2",
+      "noPush": "ingen push",
+      "send": "Skicka",
+      "sent_one": "Skickat till {{count}} idrottare.",
+      "sent_other": "Skickat till {{count}} idrottare.",
+      "limit": "Dagsgränsen är nådd för de här idrottarna."
+    }
   }
 }

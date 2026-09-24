@@ -1853,5 +1853,32 @@
       "audio_protocol": "Protocolo de audio",
       "rep_count": "Repeticiones contadas"
     }
+  },
+  "push": {
+    "title": "Notificaciones push",
+    "hint": "Te recuerda las nuevas mediciones pendientes aunque KYDON esté cerrado y te entrega los mensajes de tu entrenador. Para ello el servidor solo conoce la fecha del próximo vencimiento: ni pruebas ni valores. La entrega pasa por el servicio push de tu navegador (p. ej. Google, Apple o Mozilla).",
+    "enable": "Activar push",
+    "disable": "Desactivar push",
+    "test": "Enviar notificación de prueba",
+    "testSent": "Notificación de prueba enviada.",
+    "on": "El push está activado en este dispositivo.",
+    "failed": "No ha funcionado. Inténtalo de nuevo más tarde.",
+    "state": {
+      "unsupported": "Este navegador no admite notificaciones push.",
+      "needs_install": "En iPhone, el push solo funciona desde la app instalada: en Safari «Compartir → Añadir a pantalla de inicio» y abre KYDON desde allí.",
+      "signed_out": "El push necesita una cuenta. Inicia sesión y actívalo aquí.",
+      "denied": "Las notificaciones están bloqueadas en tu navegador. Permítelas en la configuración del sitio."
+    },
+    "coach": {
+      "title": "Mensaje a tus atletas",
+      "hint": "Se envía por push a los atletas vinculados con cuenta propia. Como máximo tres mensajes por atleta y día.",
+      "message": "Mensaje",
+      "placeholder": "p. ej. Día de pruebas el sábado, 9 h, pabellón 2",
+      "noPush": "sin push",
+      "send": "Enviar",
+      "sent_one": "Enviado a {{count}} atleta.",
+      "sent_other": "Enviado a {{count}} atletas.",
+      "limit": "Límite diario alcanzado para estos atletas."
+    }
   }
 }

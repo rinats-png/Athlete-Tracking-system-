@@ -924,7 +924,7 @@
     "eyebrow": "Historie",
     "title": "Herinneringen",
     "intro": "Lokaal, geen server: de app weet wanneer je het laatst hebt gemeten. Herinneringen staan uit tot je ze inschakelt.",
-    "noPush": "De herinnering verschijnt in de app wanneer je die opent — en, als je het toestaat, op dat moment als systeemmelding. Zolang KYDON gesloten is, komt er niets: dat zou een server vereisen die weet wie je bent en wanneer je het laatst hebt gemeten, en die is er bewust niet. Om zonder de app herinnerd te worden, gebruik je het kalenderbestand.",
+    "noPush": "De herinnering verschijnt in de app wanneer je die opent. Met een account kun je ook push inschakelen: dan meldt KYDON zich ook als de app gesloten is. De server kent daarvoor alleen de datum van de volgende hermeting. Zonder account blijft het agendabestand de betrouwbare weg.",
     "enable": "Herinneringen inschakelen",
     "enabled": "Herinneringen staan aan",
     "disabled": "Herinneringen staan uit",
@@ -946,7 +946,7 @@
     "notifyOn": "Systeemmeldingen zijn toegestaan",
     "notifyDenied": "Systeemmeldingen zijn voor deze site geblokkeerd. Alleen de browserinstellingen kunnen dat wijzigen.",
     "notifyUnsupported": "Deze browser heeft geen systeemmeldingen.",
-    "notifyLimit": "De app kan je alleen waarschuwen zolang ze open is — ze heeft geen server die op de achtergrond iets verstuurt. Voor een herinnering die je zonder de app bereikt, gebruik je het kalenderbestand.",
+    "notifyLimit": "Deze systeemmelding verschijnt alleen terwijl de app open is. Voor herinneringen bij een gesloten app schakel je hieronder push in.",
     "notifyTitle": "Hertest verschuldigd",
     "notifyBody_one": "{{test}} is toe aan een hertest.",
     "notifyBody_other": "{{count}} tests zijn toe aan een hertest."

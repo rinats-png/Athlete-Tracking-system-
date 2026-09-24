@@ -1853,5 +1853,32 @@
       "audio_protocol": "Audioprotocol",
       "rep_count": "Herhalingen geteld"
     }
+  },
+  "push": {
+    "title": "Pushmeldingen",
+    "hint": "Herinnert je aan geplande hermetingen, ook als KYDON gesloten is, en bezorgt berichten van je trainer. De server kent daarvoor alleen de datum van de volgende hermeting – geen tests, geen waarden. Bezorging loopt via de pushdienst van je browser (bijv. Google, Apple of Mozilla).",
+    "enable": "Push inschakelen",
+    "disable": "Push uitschakelen",
+    "test": "Testmelding sturen",
+    "testSent": "Testmelding verstuurd.",
+    "on": "Push staat aan op dit apparaat.",
+    "failed": "Dat is niet gelukt. Probeer het later opnieuw.",
+    "state": {
+      "unsupported": "Deze browser ondersteunt geen pushmeldingen.",
+      "needs_install": "Op de iPhone werkt push alleen vanuit de geïnstalleerde app: in Safari „Deel → Zet op beginscherm”, open KYDON daarna vanaf daar.",
+      "signed_out": "Voor push heb je een account nodig. Log in, dan kun je het hier inschakelen.",
+      "denied": "Meldingen zijn in je browser geblokkeerd. Sta ze toe in de website-instellingen."
+    },
+    "coach": {
+      "title": "Bericht aan je atleten",
+      "hint": "Wordt per push verstuurd naar gekoppelde atleten met een eigen account. Hoogstens drie berichten per atleet per dag.",
+      "message": "Bericht",
+      "placeholder": "bijv. Testdag zaterdag, 9 uur, zaal 2",
+      "noPush": "geen push",
+      "send": "Versturen",
+      "sent_one": "Verstuurd naar {{count}} atleet.",
+      "sent_other": "Verstuurd naar {{count}} atleten.",
+      "limit": "Daglimiet bereikt voor deze atleten."
+    }
   }
 }

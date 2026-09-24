@@ -60,6 +60,8 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2,webmanifest}'],
         navigateFallback: '/index.html',
         cleanupOutdatedCaches: true,
+        // Empfang und Anzeige von Push-Nachrichten (public/push-sw.js).
+        importScripts: ['push-sw.js'],
       },
     }),
   ],

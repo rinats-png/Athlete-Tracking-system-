@@ -924,7 +924,7 @@
     "eyebrow": "Historique",
     "title": "Rappels",
     "intro": "Local, sans serveur : l'app sait quand tu as mesuré pour la dernière fois. Les rappels sont désactivés tant que tu ne les actives pas.",
-    "noPush": "Le rappel apparaît dans l'app quand tu l'ouvres — et, si tu l'autorises, comme notification système à ce moment-là. Tant que KYDON est fermée, rien n'arrive : il faudrait un serveur qui sache qui tu es et quand tu as mesuré pour la dernière fois, et il n'y en a volontairement pas. Pour être rappelé sans l'app, utilise le fichier calendrier.",
+    "noPush": "Le rappel apparaît dans l’app quand tu l’ouvres. Avec un compte, tu peux aussi activer le push : KYDON te prévient alors même quand l’app est fermée. Le serveur ne connaît pour cela que la date de la prochaine échéance. Sans compte, le fichier calendrier reste la voie fiable.",
     "enable": "Activer les rappels",
     "enabled": "Les rappels sont activés",
     "disabled": "Les rappels sont désactivés",
@@ -946,7 +946,7 @@
     "notifyOn": "Les notifications système sont autorisées",
     "notifyDenied": "Les notifications système sont bloquées pour ce site. Seuls les réglages du navigateur peuvent changer cela.",
     "notifyUnsupported": "Ce navigateur n'a pas de notifications système.",
-    "notifyLimit": "L'app ne peut te notifier que lorsqu'elle est ouverte — elle n'a pas de serveur qui envoie quoi que ce soit en arrière-plan. Pour un rappel qui t'atteint sans l'app, utilise le fichier calendrier.",
+    "notifyLimit": "Cette notification système n’apparaît que lorsque l’app est ouverte. Pour des rappels quand l’app est fermée, active le push ci-dessous.",
     "notifyTitle": "Retest dû",
     "notifyBody_one": "{{test}} est à retester.",
     "notifyBody_other": "{{count}} tests sont à retester."

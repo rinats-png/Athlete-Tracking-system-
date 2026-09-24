@@ -924,7 +924,7 @@
     "eyebrow": "Historik",
     "title": "Påminnelser",
     "intro": "Lokalt, ingen server: appen vet när du senast mätte. Påminnelser är av tills du slår på dem.",
-    "noPush": "Påminnelsen visas i appen när du öppnar den — och, om du tillåter det, som en systemnotis i det ögonblicket. När KYDON är stängd kommer inget: det skulle kräva en server som vet vem du är och när du senast mätte, och en sådan finns medvetet inte. För att påminnas utan appen, använd kalenderfilen.",
+    "noPush": "Påminnelsen visas i appen när du öppnar den. Med ett konto kan du också slå på push: då hör KYDON av sig även när appen är stängd. Servern får då bara veta datumet för nästa mätning. Utan konto är kalenderfilen fortfarande det pålitliga sättet.",
     "enable": "Aktivera påminnelser",
     "enabled": "Påminnelser är på",
     "disabled": "Påminnelser är av",
@@ -946,7 +946,7 @@
     "notifyOn": "Systemnotiser är tillåtna",
     "notifyDenied": "Systemnotiser är blockerade för den här webbplatsen. Bara webbläsarinställningarna kan ändra det.",
     "notifyUnsupported": "Den här webbläsaren har inga systemnotiser.",
-    "notifyLimit": "Appen kan bara notifiera dig medan den är öppen — den har ingen server som skickar något i bakgrunden. För en påminnelse som når dig utan appen, använd kalenderfilen.",
+    "notifyLimit": "Den här systemnotisen visas bara medan appen är öppen. För påminnelser när appen är stängd, slå på push nedan.",
     "notifyTitle": "Omtest aktuellt",
     "notifyBody_one": "{{test}} är aktuellt för omtest.",
     "notifyBody_other": "{{count}} tester är aktuella för omtest."

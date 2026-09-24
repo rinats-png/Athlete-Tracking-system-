@@ -16,6 +16,7 @@ import { formatDate } from '@/lib/format'
 import { downloadFile } from '@/lib/export/csv'
 import { buildIcs } from '@/lib/export/ics'
 import { notifyPermission, requestNotifyPermission } from '@/lib/notify'
+import { PushPanel } from '@/features/push/PushPanel'
 import type { NotifyPermission } from '@/lib/notify'
 import { pick } from '@/i18n/pick'
 
@@ -107,6 +108,7 @@ export function RemindersScreen() {
               </Button>
             )}
           </div>
+          <PushPanel />
           <PanelHeader title={t('reminders.overdue')} className="border-t" />
           {!settings.remindersEnabled || overdue.length === 0 ? (
             <p className="px-4 py-3 text-[13px] text-ink-secondary">{t('reminders.overdueEmpty')}</p>

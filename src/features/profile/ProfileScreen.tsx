@@ -21,6 +21,7 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { AnalyticsConsentSetting } from '@/features/shared/AnalyticsConsent'
 import { AdminLink } from '@/features/admin/AdminLink'
+import { CoachPushPanel } from '@/features/push/CoachPushPanel'
 import { provisionalFormulas } from '@/domain/formulaRegistry'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { introEnabled, setIntroEnabled } from '@/features/intro/introPreference'
@@ -453,6 +454,8 @@ export function ProfileScreen() {
           <SyncPanel />
 
           <CoachSettings locale={locale} />
+
+          <CoachPushPanel />
 
           <BrandingSettings />
 

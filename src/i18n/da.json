@@ -1853,5 +1853,32 @@
       "audio_protocol": "Lydprotokol",
       "rep_count": "Gentagelser talt"
     }
+  },
+  "push": {
+    "title": "Push-notifikationer",
+    "hint": "Minder dig om nye målinger, også når KYDON er lukket, og leverer beskeder fra din træner. Serveren får kun datoen for den næste måling at vide – ingen tests, ingen værdier. Leveringen går via din browsers push-tjeneste (f.eks. Google, Apple eller Mozilla).",
+    "enable": "Slå push til",
+    "disable": "Slå push fra",
+    "test": "Send testnotifikation",
+    "testSent": "Testnotifikation sendt.",
+    "on": "Push er slået til på denne enhed.",
+    "failed": "Det lykkedes ikke. Prøv igen senere.",
+    "state": {
+      "unsupported": "Denne browser understøtter ikke push-notifikationer.",
+      "needs_install": "På iPhone virker push kun fra den installerede app: i Safari „Del → Føj til hjemmeskærm“, og åbn så KYDON derfra.",
+      "signed_out": "Push kræver en konto. Log ind, så kan du slå det til her.",
+      "denied": "Notifikationer er blokeret i din browser. Tillad dem i webstedets indstillinger."
+    },
+    "coach": {
+      "title": "Besked til dine atleter",
+      "hint": "Sendes som push til tilknyttede atleter med egen konto. Højst tre beskeder pr. atlet pr. dag.",
+      "message": "Besked",
+      "placeholder": "f.eks. Testdag lørdag kl. 9, hal 2",
+      "noPush": "ingen push",
+      "send": "Send",
+      "sent_one": "Sendt til {{count}} atlet.",
+      "sent_other": "Sendt til {{count}} atleter.",
+      "limit": "Dagsgrænsen er nået for disse atleter."
+    }
   }
 }

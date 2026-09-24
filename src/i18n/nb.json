@@ -1853,5 +1853,32 @@
       "audio_protocol": "Lydprotokoll",
       "rep_count": "Repetisjoner telt"
     }
+  },
+  "push": {
+    "title": "Push-varsler",
+    "hint": "Minner deg på nye målinger også når KYDON er lukket, og leverer meldinger fra treneren din. Serveren får bare vite datoen for neste måling – ingen tester, ingen verdier. Leveringen går via nettleserens push-tjeneste (f.eks. Google, Apple eller Mozilla).",
+    "enable": "Slå på push",
+    "disable": "Slå av push",
+    "test": "Send testvarsel",
+    "testSent": "Testvarsel sendt.",
+    "on": "Push er slått på for denne enheten.",
+    "failed": "Det gikk ikke. Prøv igjen senere.",
+    "state": {
+      "unsupported": "Denne nettleseren støtter ikke push-varsler.",
+      "needs_install": "På iPhone fungerer push bare fra den installerte appen: i Safari «Del → Legg til på Hjem-skjerm», og åpne KYDON derfra.",
+      "signed_out": "Push krever en konto. Logg inn, så kan du slå det på her.",
+      "denied": "Varsler er blokkert i nettleseren. Tillat dem i nettstedsinnstillingene."
+    },
+    "coach": {
+      "title": "Melding til utøverne dine",
+      "hint": "Sendes som push til tilknyttede utøvere med egen konto. Maks tre meldinger per utøver per dag.",
+      "message": "Melding",
+      "placeholder": "f.eks. Testdag lørdag kl. 9, hall 2",
+      "noPush": "ingen push",
+      "send": "Send",
+      "sent_one": "Sendt til {{count}} utøver.",
+      "sent_other": "Sendt til {{count}} utøvere.",
+      "limit": "Dagsgrensen er nådd for disse utøverne."
+    }
   }
 }

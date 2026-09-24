@@ -9,6 +9,7 @@ import { useOverdueNotice } from '@/features/shared/useOverdueNotice'
 import { usePageTracking } from '@/features/shared/usePageTracking'
 import { AnalyticsConsentStrip } from '@/features/shared/AnalyticsConsent'
 import { AdminBar } from '@/features/admin/AdminLink'
+import { usePushDueSync } from '@/features/push/usePushDueSync'
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -24,6 +25,7 @@ export function AppShell() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   useOverdueNotice()
+  usePushDueSync()
   usePageTracking(pathname)
   const { mode, storageBlocked } = useAppData()
   const active = navKeyForPath(pathname)

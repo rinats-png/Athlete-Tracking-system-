@@ -81,6 +81,6 @@ test.describe('Erinnerungen im Bildschirm', () => {
 
     // «erinnert dich zuverlässig» wäre eine Behauptung, die die App ohne
     // Push-Server nicht einlösen kann (§81).
-    await expect(page.getByText(/nur benachrichtigen, während sie geöffnet ist/)).toBeVisible()
+    await expect(page.getByText(/nur, während die App geöffnet ist/)).toBeVisible()
   })
 })
