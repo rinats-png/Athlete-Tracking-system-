@@ -1,0 +1,367 @@
+/* ==========================================================================
+   KYDON Landing — Aufbau der Vorlage (Dantora), Farben und Schrift der App.
+   Hell = Mondstein, Dunkel = Mondlicht; dieselben Werte wie src/styles/theme.css.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+  --plane: #eaf1f0;
+  --panel: #e1ebea;
+  --panel-deep: #d6e3e2;
+  --surface: #ffffff;
+  --ink: #101a18;
+  --ink-secondary: #41544f;
+  --ink-muted: #4b5e5a;
+  --line: #c3d2cf;
+  --accent: #1e7d63;
+  --accent-text: #17614d;
+  --accent-ink: #f4fbf8;
+  --accent-glow: #3fbf93;
+  --accent-quiet: rgba(30, 125, 99, 0.12);
+  --glass: rgba(255, 255, 255, 0.58);
+  --glass-strong: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glow: rgba(63, 191, 147, 0.32);
+  --shadow: 0 18px 44px rgb(16 26 24 / 0.14), 0 2px 6px rgb(16 26 24 / 0.08), 0 0 80px -20px var(--glow);
+  --door-app-bg: #1e7d63;
+  --door-app-ink: #f4fbf8;
+  --door-merch-bg: #101a18;
+  --door-merch-ink: #eaf1f0;
+
+  --font-display: 'Saira Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --radius-section: 48px;
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --ease: cubic-bezier(0.3, 0.85, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --plane: #0b1014;
+    --panel: #0e1418;
+    --panel-deep: #141c21;
+    --surface: #1b252b;
+    --ink: #f2f7f8;
+    --ink-secondary: #bfccd0;
+    --ink-muted: #90a0a4;
+    --line: #2f3a3f;
+    --accent: #7fe5b5;
+    --accent-text: #7fe5b5;
+    --accent-ink: #06100b;
+    --accent-glow: #a6f0ce;
+    --accent-quiet: rgba(127, 229, 181, 0.14);
+    --glass: rgba(237, 241, 242, 0.07);
+    --glass-strong: rgba(20, 28, 33, 0.82);
+    --glass-border: rgba(237, 241, 242, 0.14);
+    --glow: rgba(127, 229, 181, 0.36);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 32px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);
+    --door-app-bg: #7fe5b5;
+    --door-app-ink: #06100b;
+    --door-merch-bg: #d6e3e2;
+    --door-merch-ink: #0b1014;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --plane: #0b1014;
+  --panel: #0e1418;
+  --panel-deep: #141c21;
+  --surface: #1b252b;
+  --ink: #f2f7f8;
+  --ink-secondary: #bfccd0;
+  --ink-muted: #90a0a4;
+  --line: #2f3a3f;
+  --accent: #7fe5b5;
+  --accent-text: #7fe5b5;
+  --accent-ink: #06100b;
+  --accent-glow: #a6f0ce;
+  --accent-quiet: rgba(127, 229, 181, 0.14);
+  --glass: rgba(237, 241, 242, 0.07);
+  --glass-strong: rgba(20, 28, 33, 0.82);
+  --glass-border: rgba(237, 241, 242, 0.14);
+  --glow: rgba(127, 229, 181, 0.36);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 32px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);
+  --door-app-bg: #7fe5b5;
+  --door-app-ink: #06100b;
+  --door-merch-bg: #d6e3e2;
+  --door-merch-ink: #0b1014;
+}
+
+/* Bilder je Theme: beide liegen im Markup, eines ist sichtbar. */
+.shot--dark { display: none; }
+:root[data-theme='dark'] .shot--light { display: none; }
+:root[data-theme='dark'] .shot--dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .shot--light { display: none; }
+  :root:not([data-theme='light']) .shot--dark { display: block; }
+}
+:root[data-theme='dark'] .theme-toggle .icon-moon,
+:root:not([data-theme='dark']) .theme-toggle .icon-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme]) .theme-toggle .icon-moon { display: none; }
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+body {
+  margin: 0;
+  background: var(--plane);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3, p { margin: 0; }
+
+.visually-hidden,
+.skip:not(:focus) {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.skip:focus { position: fixed; top: 12px; left: 12px; z-index: 100; background: var(--surface); padding: 8px 14px; border-radius: 8px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* --- Typo-Bausteine ------------------------------------------------------ */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 84px);
+  line-height: 0.98;
+  letter-spacing: 0.005em;
+  margin-top: 18px;
+  text-transform: uppercase;
+}
+.muted { color: var(--ink-muted); }
+.section-lead { margin-top: 24px; max-width: 620px; color: var(--ink-secondary); font-size: 18px; font-weight: 300; }
+
+/* --- Knöpfe -------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 52px; padding: 0 28px; border-radius: var(--radius-pill);
+  font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: 0.14em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid transparent;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.25s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 40px -10px var(--glow); }
+.btn--secondary { background: var(--glass); color: var(--ink); border-color: var(--line); backdrop-filter: blur(10px); }
+.btn--small { height: 40px; padding: 0 18px; font-size: 14px; }
+
+/* --- Kopfzeile ----------------------------------------------------------- */
+.site-header { position: fixed; inset: 16px 16px auto; z-index: 50; display: flex; justify-content: center; pointer-events: none; }
+.site-header__shell {
+  pointer-events: auto; width: min(1360px, 100%);
+  display: flex; align-items: center; gap: 24px; justify-content: space-between;
+  padding: 8px 8px 8px 20px; border-radius: var(--radius-pill);
+  background: var(--glass); border: 1px solid var(--glass-border); backdrop-filter: blur(14px) saturate(1.2);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.site-header.is-scrolled .site-header__shell { background: var(--glass-strong); box-shadow: var(--shadow); }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand__mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 7px; background: var(--ink); color: var(--plane); }
+.brand__mark svg { width: 20px; height: 20px; }
+.brand__name { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 0.28em; }
+.site-nav { display: flex; gap: 30px; }
+.site-nav a { text-decoration: none; font-size: 15px; color: var(--ink-secondary); transition: color 0.2s; }
+.site-nav a:hover { color: var(--ink); }
+.site-header__actions { display: flex; align-items: center; gap: 8px; }
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ink);
+  display: grid; place-items: center; cursor: pointer;
+}
+.theme-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+/* --- Hero ---------------------------------------------------------------- */
+.hero {
+  position: relative; height: 100svh; min-height: 640px; overflow: hidden;
+  border-radius: 0 0 var(--radius-section) var(--radius-section);
+  background: var(--plane);
+  display: grid; grid-template-rows: 1fr auto; align-items: end;
+  padding: 0 40px 40px;
+}
+.hero__scene { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s var(--ease); }
+.scene-ready .hero__scene { opacity: 1; }
+.no-webgl .hero::before {
+  content: 'KYDON'; position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 22vw; letter-spacing: 0.12em; color: var(--accent);
+}
+.hero__copy { position: relative; z-index: 2; max-width: 560px; align-self: end; }
+.hero__claim {
+  margin-top: 14px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(34px, 4.4vw, 60px); line-height: 1; letter-spacing: 0.02em;
+}
+.hero__lead { margin-top: 18px; color: var(--ink-secondary); font-weight: 300; font-size: 18px; max-width: 470px; }
+.hero__chips {
+  position: absolute; z-index: 2; right: 40px; bottom: 40px; list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 520px;
+}
+.hero__chips li {
+  padding: 12px 22px; border-radius: var(--radius-pill); font-size: 15px;
+  background: var(--glass); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);
+}
+.hero__scroll { position: absolute; z-index: 2; left: 50%; bottom: 28px; transform: translateX(-50%); width: 26px; height: 42px; border: 1.5px solid var(--ink-muted); border-radius: 14px; }
+.hero__scroll span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; margin-left: -1.5px; border-radius: 2px; background: var(--accent); animation: scroll-dot 1.8s var(--ease) infinite; }
+@keyframes scroll-dot { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(14px); opacity: 0; } 100% { opacity: 0; } }
+
+/* --- Die zwei Türen -------------------------------------------------------- */
+.doors { padding: 120px 40px 120px; max-width: 1440px; margin: 0 auto; }
+.doors__grid { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.door {
+  position: relative; overflow: hidden; min-height: 360px; padding: 36px; border-radius: var(--radius-card);
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; text-decoration: none;
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+.door:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.door--app { background: var(--door-app-bg); color: var(--door-app-ink); }
+.door--merch { background: var(--door-merch-bg); color: var(--door-merch-ink); }
+.door::before {
+  content: ''; position: absolute; inset: -40% -20% auto auto; width: 70%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.28), transparent 65%); pointer-events: none;
+  transition: transform 0.8s var(--ease);
+}
+.door--merch::before { background: radial-gradient(circle, rgba(127, 229, 181, 0.32), transparent 65%); }
+.door:hover::before { transform: translate(-10%, 12%) scale(1.15); }
+.door__label { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; font-size: 14px; opacity: 0.8; }
+.door__title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(44px, 5.4vw, 80px); line-height: 0.95; }
+.door__text { max-width: 420px; font-weight: 300; font-size: 17px; opacity: 0.9; }
+.door__arrow {
+  position: absolute; top: 28px; right: 28px; width: 56px; height: 56px; border-radius: 50%;
+  display: grid; place-items: center; border: 1.5px solid currentColor; transition: transform 0.45s var(--ease);
+}
+.door__arrow svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.door:hover .door__arrow { transform: rotate(45deg); }
+.door.is-soon::after {
+  content: attr(data-soon); position: absolute; top: 34px; left: 36px; padding: 6px 14px; border-radius: var(--radius-pill);
+  font-family: var(--font-display); letter-spacing: 0.18em; text-transform: uppercase; font-size: 13px; background: var(--accent); color: var(--accent-ink);
+}
+
+/* --- Flächen (Panels mit runden Kanten, wie in der Vorlage) ------------------ */
+.panel { background: var(--panel); border-radius: var(--radius-section); margin: 0 16px; }
+
+/* --- Warum ------------------------------------------------------------------ */
+.why { padding: 110px 40px; }
+.why__head { max-width: 1000px; }
+.why__grid { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.why-card { padding: 28px; border-radius: var(--radius-card); background: var(--glass-strong); border: 1px solid var(--glass-border); display: flex; flex-direction: column; gap: 14px; }
+.why-card__num { font-family: var(--font-display); font-weight: 600; color: var(--accent-text); letter-spacing: 0.18em; }
+.why-card h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 26px; line-height: 1.05; }
+.why-card p { color: var(--ink-secondary); font-size: 16px; font-weight: 300; }
+
+/* --- Funktionen ----------------------------------------------------------------- */
+.features { padding: 130px 40px 80px; max-width: 1360px; margin: 0 auto; }
+.feature {
+  display: grid; grid-template-columns: minmax(0, 560px) 300px; justify-content: space-around; align-items: center; gap: 80px;
+  padding: 72px 0; border-bottom: 1px solid var(--line);
+}
+.feature:first-of-type { margin-top: 40px; }
+.feature--flip { grid-template-columns: 300px minmax(0, 560px); }
+.feature--flip .phone { order: -1; }
+.feature__copy { max-width: 520px; }
+.feature__copy h3 { margin-top: 14px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(32px, 3.6vw, 52px); line-height: 1; }
+.feature__copy p:not(.eyebrow) { margin-top: 18px; color: var(--ink-secondary); font-weight: 300; font-size: 18px; }
+.phone {
+  margin: 0; width: 300px; aspect-ratio: 412 / 915; border-radius: 40px; overflow: hidden;
+  border: 8px solid var(--ink); background: var(--ink); box-shadow: var(--shadow);
+  transform: perspective(1400px) rotateY(-6deg) rotateX(2deg); transition: transform 0.8s var(--ease);
+}
+.feature--flip .phone { transform: perspective(1400px) rotateY(6deg) rotateX(2deg); }
+.phone:hover { transform: perspective(1400px) rotateY(0) rotateX(0); }
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+:root[data-theme='dark'] .phone { border-color: #2f3a3f; }
+.feature-list { list-style: none; margin: 72px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; }
+.feature-list li { background: var(--plane); padding: 28px; display: flex; flex-direction: column; gap: 6px; }
+.feature-list strong { font-family: var(--font-display); font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: 0.02em; }
+.feature-list span { color: var(--ink-secondary); font-weight: 300; font-size: 16px; }
+
+/* --- Sportarten ------------------------------------------------------------------- */
+.sports { padding: 110px 40px; }
+.sports__grid { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.sport { position: relative; aspect-ratio: 1; border-radius: var(--radius-card); overflow: hidden; background: var(--panel-deep); }
+.sport img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.sport:hover img { transform: scale(1.06); }
+.sport::after { content: ''; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgba(7, 10, 13, 0.72)); }
+.sport__name, .sport__more { position: absolute; left: 20px; z-index: 1; color: #f2f7f8; }
+.sport__name { bottom: 40px; font-family: var(--font-display); font-weight: 700; font-size: 26px; text-transform: uppercase; letter-spacing: 0.03em; }
+.sport__more { bottom: 18px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-display); opacity: 0.8; }
+
+/* --- Trainer ------------------------------------------------------------------------ */
+.coaches { padding: 130px 40px; max-width: 1360px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 640px) 300px; justify-content: space-around; gap: 80px; align-items: center; }
+.checks { list-style: none; padding: 0; margin: 28px 0 36px; display: grid; gap: 12px; }
+.checks li { display: flex; gap: 12px; align-items: baseline; font-size: 17px; }
+.checks li::before { content: ''; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--glow); transform: translateY(-1px); }
+
+/* --- Abschluss ------------------------------------------------------------------------ */
+.closing { padding: 130px 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px; background: var(--panel-deep); }
+.closing__title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(48px, 8vw, 128px); line-height: 0.92; }
+.closing__actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
+
+/* --- Fuss ------------------------------------------------------------------------------ */
+.site-footer { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding: 40px; color: var(--ink-muted); }
+.site-footer .brand__name { color: var(--ink); font-size: 18px; }
+.site-footer__claim { font-family: var(--font-display); letter-spacing: 0.2em; text-transform: uppercase; font-size: 13px; }
+.site-footer nav { margin-left: auto; display: flex; gap: 22px; }
+.site-footer nav a { text-decoration: none; font-size: 14px; }
+.site-footer nav a:hover { color: var(--ink); }
+
+/* --- Einblenden ---------------------------------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero__scroll span { animation: none; }
+}
+
+/* --- Schmal ------------------------------------------------------------------------------ */
+@media (max-width: 1100px) {
+  .why__grid { grid-template-columns: 1fr 1fr; }
+  .sports__grid { grid-template-columns: repeat(3, 1fr); }
+  .feature-list { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .site-nav { display: none; }
+  .hero { padding: 0 20px 32px; }
+  .hero__chips { position: relative; right: auto; bottom: auto; justify-content: flex-start; margin-top: 24px; }
+  .hero { grid-template-rows: 1fr auto auto; }
+  .hero__scroll { display: none; }
+  .doors, .features, .coaches { padding-left: 20px; padding-right: 20px; }
+  .why, .sports, .closing { padding: 80px 20px; }
+  .panel { margin: 0 8px; border-radius: 32px; }
+  .doors { padding-top: 80px; padding-bottom: 80px; }
+  .doors__grid { grid-template-columns: 1fr; }
+  .door { min-height: 280px; padding: 28px; }
+  .feature, .feature--flip, .coaches { grid-template-columns: 1fr; gap: 40px; justify-items: center; }
+  .feature--flip .phone { order: 0; }
+  .feature__copy { justify-self: start; }
+  .phone { width: min(280px, 80vw); }
+  .sports__grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .sport__name { font-size: 20px; bottom: 34px; left: 14px; }
+  .sport__more { left: 14px; bottom: 14px; font-size: 11px; }
+  .feature-list { grid-template-columns: 1fr; }
+  .site-footer { padding: 32px 20px; }
+  .site-footer nav { margin-left: 0; width: 100%; }
+}
+@media (max-width: 560px) {
+  .why__grid { grid-template-columns: 1fr; }
+  .site-header { inset: 10px 10px auto; }
+  .brand__name { font-size: 18px; }
+}
