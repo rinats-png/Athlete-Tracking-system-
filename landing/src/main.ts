@@ -39,8 +39,8 @@ const grid = document.querySelector<HTMLUListElement>('[data-sports]')
 if (grid) {
   grid.innerHTML = SPORTS.map(
     (s) => `<li class="sport reveal">
-      <img class="shot--light" src="/sport/${s.motif}-hell.webp" alt="" loading="lazy" width="400" height="400" />
-      <img class="shot--dark" src="/sport/${s.motif}-dunkel.webp" alt="" loading="lazy" width="400" height="400" />
+      <img class="shot--light" src="sport/${s.motif}-hell.webp" alt="" loading="lazy" width="400" height="400" />
+      <img class="shot--dark" src="sport/${s.motif}-dunkel.webp" alt="" loading="lazy" width="400" height="400" />
       <span class="sport__name">${s.name}</span>
       <span class="sport__more">${s.covers}</span>
     </li>`,
