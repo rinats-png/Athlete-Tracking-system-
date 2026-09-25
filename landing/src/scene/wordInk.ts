@@ -32,13 +32,13 @@ interface Palette {
 const PALETTES: Record<Theme, Palette> = {
   light: {
     bg: '#EAF1F0',
-    coreA: '#17614D',
-    coreB: '#1E7D63',
-    inkCore: '#3FBF93',
-    inkMid: '#90A0A4',
-    inkEdge: '#1E7D63',
-    coreOpacity: 1.5,
-    inkOpacity: 0.38,
+    coreA: '#062F24',
+    coreB: '#0E4F3D',
+    inkCore: '#1E7D63',
+    inkMid: '#41544F',
+    inkEdge: '#17614D',
+    coreOpacity: 2.6,
+    inkOpacity: 0.6,
   },
   dark: {
     bg: '#0B1014',
@@ -47,7 +47,7 @@ const PALETTES: Record<Theme, Palette> = {
     inkCore: '#7FE5B5',
     inkMid: '#3FBF93',
     inkEdge: '#90A0A4',
-    coreOpacity: 0.95,
+    coreOpacity: 1.4,
     inkOpacity: 0.16,
   },
 }
