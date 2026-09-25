@@ -20,6 +20,7 @@ import {
   yearlyCostOfMonthly,
   yearlyCostOfMonthlyCoach,
   ENQUIRY_EMAIL,
+  FOUNDER_OFFER,
   type AthletePlan,
   type CoachTier,
   type InstitutionTrack,
@@ -119,9 +120,14 @@ export function PricingScreen() {
       {/* --- Trainer ------------------------------------------------------- */}
       <h2 className="font-display mt-8 mb-1 text-[19px] font-bold">{t('pricing.coachTitle')}</h2>
       <p className="mb-3 max-w-[62ch] text-[13px] leading-relaxed text-ink-secondary">
-        {t('pricing.coachIntro')} {t('pricing.coachCounting')}
+        {t('pricing.coachIntro')} {t('pricing.coachCounting')} {t('pricing.coachUpgrade')}
       </p>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {import.meta.env?.VITE_FOUNDER_OFFER === 'on' && (
+        <p className="mb-3 border-l-2 border-accent px-3 py-2 text-[13px] leading-relaxed" data-testid="founder-offer">
+          {t('pricing.founder', { percent: FOUNDER_OFFER.percentOff, count: FOUNDER_OFFER.firstCoaches })}
+        </p>
+      )}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {COACH_TIERS.map((coach) => (
           <CoachTierCard
             key={coach.id}
@@ -328,6 +334,22 @@ function BuyButtons({ id, name, yearly, monthly, once, money }: { id: string; na
   const [error, setError] = useState<string | null>(null)
   if (!billing.enabled) return null
   const isCurrent = billing.access.athletePlan === id || billing.access.coachTier === id
+
+  // Wer schon ein Trainer-Abo hat, wechselt — er kauft kein zweites. Der
+  // Wechsel rechnet anteilig ab und steht im Profil (CoachPlanPanel).
+  if (id.startsWith('coach_') && billing.coach?.hasSubscription && billing.coach.isOwner) {
+    return (
+      <div className="mt-3 space-y-2">
+        {isCurrent ? (
+          <p className="label-tag">{t('billing.current')}</p>
+        ) : (
+          <Button asChild variant="outline" size="sm">
+            <Link to="/profil#stufe">{t('pricing.switchTo', { plan: name })}</Link>
+          </Button>
+        )}
+      </div>
+    )
+  }
 
   const go = async (interval: CheckoutInterval) => {
     setBusy(true)

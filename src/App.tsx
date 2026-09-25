@@ -161,6 +161,7 @@ const router = createBrowserRouter([
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
+      { path: 'team/beitreten', element: screen(() => import('@/features/coach/JoinTeamScreen'), 'JoinTeamScreen') },
       { path: 'preise', element: screen(() => import('@/features/profile/PricingScreen'), 'PricingScreen') },
       { path: 'profil/import', element: screen(() => import('@/features/profile/CsvImportScreen'), 'CsvImportScreen') },
       // Rechtstexte: eigener Baustein, weil sie selten gelesen werden und

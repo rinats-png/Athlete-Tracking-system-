@@ -118,10 +118,30 @@ test.describe('Trainerstufen', () => {
   test('die Zahlen stehen so, wie sie vereinbart sind', () => {
     expect(COACH_TIERS.map((t) => [t.yearlyEur, t.athletesPerYear])).toEqual([
       [null, 3],
-      [149, 25],
-      [349, 75],
-      [699, 250],
+      [149, 10],
+      [349, 30],
+      [649, 75],
+      [999, 150],
     ])
+    expect(COACH_TIERS.map((t) => t.coachSeats)).toEqual([1, 1, 2, 3, 5])
+  })
+
+  test('keine Stufe ist mehr als dreimal so gross wie die davor, und der Preis wächst langsamer', () => {
+    // Die Regel hinter der Staffel vom 25.09.2026: kein Sprung, an dem ein
+    // einziger Athlet mehr den Preis verdoppelt.
+    const bezahlt = COACH_TIERS.filter((t) => t.yearlyEur != null)
+    for (let i = 1; i < bezahlt.length; i++) {
+      const athletes = bezahlt[i].athletesPerYear / bezahlt[i - 1].athletesPerYear
+      const price = bezahlt[i].yearlyEur! / bezahlt[i - 1].yearlyEur!
+      expect(athletes, bezahlt[i].id).toBeLessThanOrEqual(3)
+      expect(price, bezahlt[i].id).toBeLessThan(athletes)
+    }
+  })
+
+  test('der Einstieg kostet mehr als Athlete Pro für eine einzelne Person', () => {
+    // Zehn betreute Athleten mit Reports und Gruppentest dürfen nicht
+    // gleich viel kosten wie EIN Athlet mit Pro.
+    expect(COACH_TIERS[1].yearlyEur!).toBeGreaterThan(athletePlan('pro').yearlyEur!)
   })
 
   test('je Athlet wird es mit jeder Stufe günstiger', () => {
@@ -129,9 +149,9 @@ test.describe('Trainerstufen', () => {
     for (let i = 1; i < bezahlt.length; i++) {
       expect(perAthleteYearEur(bezahlt[i])!).toBeLessThan(perAthleteYearEur(bezahlt[i - 1])!)
     }
-    // Und der Einstieg bleibt unter zehn Prozent einer einzigen
-    // Diagnostiksitzung (80–150 €) — darüber rechnet ein Trainer nach.
-    expect(perAthleteYearEur(COACH_TIERS[1])!).toBeLessThan(8)
+    // Und der Einstieg bleibt je Athlet und Jahr unter zehn Prozent einer
+    // Diagnostiksitzung zu 150 € — darüber rechnet ein Trainer nach.
+    expect(perAthleteYearEur(COACH_TIERS[1])!).toBeLessThan(15)
   })
 
   test('der Wirksamkeitsnachweis ist in jeder Stufe, auch der kostenlosen', () => {
@@ -147,10 +167,14 @@ test.describe('Trainerstufen', () => {
   test('die Stufe richtet sich nach gemessenen Athleten, nicht nach dem Bestand', () => {
     expect(coachTierFor(3)!.id).toBe('coach_free')
     expect(coachTierFor(4)!.id).toBe('coach_start')
-    expect(coachTierFor(25)!.id).toBe('coach_start')
-    expect(coachTierFor(26)!.id).toBe('coach_team')
-    expect(coachTierFor(250)!.id).toBe('coach_pro')
-    expect(coachTierFor(251)).toBeNull()
+    expect(coachTierFor(10)!.id).toBe('coach_start')
+    expect(coachTierFor(11)!.id).toBe('coach_team')
+    expect(coachTierFor(30)!.id).toBe('coach_team')
+    expect(coachTierFor(31)!.id).toBe('coach_pro')
+    expect(coachTierFor(75)!.id).toBe('coach_pro')
+    expect(coachTierFor(76)!.id).toBe('coach_club')
+    expect(coachTierFor(150)!.id).toBe('coach_club')
+    expect(coachTierFor(151)).toBeNull()
   })
 })
 
@@ -230,7 +254,8 @@ test.describe('Der Bildschirm', () => {
     await expect(page.getByText('69 € einmalig')).toBeVisible()
     await expect(page.getByText('149 € im Jahr')).toBeVisible()
     await expect(page.getByText('349 € im Jahr')).toBeVisible()
-    await expect(page.getByText('699 € im Jahr')).toBeVisible()
+    await expect(page.getByText('649 € im Jahr')).toBeVisible()
+    await expect(page.getByText('999 € im Jahr')).toBeVisible()
   })
 
   test('der kostenlose Kern steht oben und nennt das Messfehlerband', async ({ page }) => {

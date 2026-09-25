@@ -41,6 +41,7 @@ import {
   type StoredResult,
 } from './localStore'
 import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
+import { isBlankPlaceholder } from './placeholder'
 import { isEmptyEntry } from '@/domain/diary'
 import { mergeSeries, type SeriesRow } from '@/lib/supabase/series'
 import { mergeHealth, type IncomingHealth } from '@/lib/health/sync'
@@ -211,6 +212,8 @@ export interface AppDataValue {
    * Nutzer im Profil.
    */
   mergeAthletes: (incoming: StoredAthlete[]) => void
+  /** Den Bestand auf diesem Gerät durch einen leeren ersetzen (Teamwechsel). */
+  replacePool: () => StoredData
   /**
    * Fremde Zeitreihen-Zeilen (Tagebuch, Einheiten, Entscheidungen,
    * Mahlzeiten) in die vorhandenen Athleten einarbeiten. Der juengere
@@ -1017,7 +1020,20 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         const known = new Set(current.athletes.map((a) => a.id))
         const fresh = incoming.filter((a) => a && !known.has(a.id))
         if (fresh.length === 0) return
-        commitStore({ ...current, athletes: [...current.athletes, ...fresh] })
+        // Ein leerer Platzhalter (frischer Bestand) weicht, sobald echte
+        // Athleten kommen — sonst stünde neben dem Teambestand ein namenloser.
+        const kept = current.athletes.filter((a) => !isBlankPlaceholder(a))
+        const athletes = [...kept, ...fresh]
+        const activeAthleteId = athletes.some((a) => a.id === current.activeAthleteId) ? current.activeAthleteId : athletes[0].id
+        commitStore({ ...current, athletes, activeAthleteId })
+      },
+      replacePool: () => {
+        // Der Bestand eines anderen Kontos verlässt dieses Gerät — Rolle,
+        // Branding und Exportdatum bleiben, sie gehören dem Gerät.
+        const current = storeRef.current
+        const fresh = { ...emptyData(), role: current.role, branding: current.branding, lastExportAt: current.lastExportAt }
+        commitStore(fresh)
+        return fresh
       },
       mergeSeriesRows: (rows) => {
         const current = storeRef.current

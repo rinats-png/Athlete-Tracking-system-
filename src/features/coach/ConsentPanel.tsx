@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { useBilling } from '@/features/billing/BillingProvider'
 import { Printer } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useLocale } from '@/features/shared/useLocale'
@@ -125,11 +126,19 @@ export function ConsentPanel({
 export function ConsentForm({ athlete }: { athlete: StoredAthlete }) {
   const { t } = useTranslation()
   const locale = useLocale()
+  // Im Team sehen mehrere Trainer dieselben Werte. Das muss auf dem Blatt
+  // stehen, das unterschrieben wird — nicht nur in der App.
+  const team = useBilling().coach?.team ?? null
 
   return (
     <section className="hidden break-after-page px-2 py-6 print:block">
       <h2 className="font-display text-[22px] font-bold">{t('consent.formTitle')}</h2>
       <p className="mt-3 max-w-[70ch] text-[12px] leading-relaxed">{t('consent.formBody')}</p>
+      {team && (
+        <p className="mt-2 max-w-[70ch] text-[12px] leading-relaxed">
+          {t('consent.formTeam', { team: team.name || '—', count: team.members.length })}
+        </p>
+      )}
 
       <dl className="mt-6 space-y-6 text-[12px]">
         {[

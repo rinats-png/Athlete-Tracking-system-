@@ -8,6 +8,8 @@ import { BrandingSettings } from './BrandingSettings'
 import { AthleteNotes } from '@/features/coach/AthleteNotes'
 import { TrainingFocuses } from '@/features/coach/TrainingFocuses'
 import { CoachSettings } from '@/features/coach/CoachSettings'
+import { CoachPlanPanel } from '@/features/billing/CoachPlanPanel'
+import { TeamPanel } from '@/features/coach/TeamPanel'
 import { AccountPanel } from '@/features/auth/AccountPanel'
 import { SyncPanel } from './SyncPanel'
 import { downloadFile } from '@/lib/export/csv'
@@ -454,6 +456,10 @@ export function ProfileScreen() {
           <SyncPanel />
 
           <CoachSettings locale={locale} />
+
+          <CoachPlanPanel />
+
+          <TeamPanel />
 
           <CoachPushPanel />
 

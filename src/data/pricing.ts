@@ -180,7 +180,15 @@ export const FREE_CORE: readonly PlanFeature[] = [
  * Das Produkt, das der Bezahlweg für eine Stufe kennt — der Wert in
  * `entitlements.product`. Die kostenlosen Stufen haben keins.
  */
-export type EntitlementProduct = 'athlete_plus' | 'athlete_pro' | 'athlete_elite' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro'
+export type EntitlementProduct =
+  | 'athlete_plus'
+  | 'athlete_pro'
+  | 'athlete_elite'
+  | 'athlete_termin'
+  | 'coach_start'
+  | 'coach_team'
+  | 'coach_pro'
+  | 'coach_club'
 
 // =============================================================================
 // Einzelnutzung
@@ -335,7 +343,7 @@ export function yearlyCostOfMonthly(plan: AthletePlan): number | null {
 // Trainer
 // =============================================================================
 
-export type CoachTierId = 'coach_free' | 'coach_start' | 'coach_team' | 'coach_pro'
+export type CoachTierId = 'coach_free' | 'coach_start' | 'coach_team' | 'coach_pro' | 'coach_club'
 
 export interface CoachTier {
   id: CoachTierId
@@ -370,19 +378,32 @@ const COACH_BASE: readonly PlanFeature[] = [
 ]
 
 /**
- * Die Staffel ist degressiv: 5,96 € je Athlet bei Start, 4,65 € bei Team,
- * 2,80 € bei Pro — jeweils für ein ganzes Jahr.
+ * FÜNF STUFEN STATT DREI (25.09.2026). Vorher 25 / 75 / 250 Athleten zu
+ * 149 / 349 / 699 €. Zwei Fehler: Der Einstieg verlangte Plätze, die ein
+ * anfangender Trainer nie füllt, und zwischen 75 und 250 lag ein Sprung um
+ * das Dreieinhalbfache — wer 76 Athleten misst, zahlt das Doppelte für einen
+ * einzigen mehr. An genau so einer Schwelle springen Kunden ab.
  *
- * Der Massstab dahinter ist die Rechnung des Trainers, nicht unsere: Er
- * verkauft eine Diagnostiksitzung für 80 bis 150 €. Bleibt der Anteil unter
- * zehn Prozent, rechnet niemand nach. Bei Start sind es rund sechs Prozent
- * einer einzigen Sitzung — pro Athlet und Jahr.
+ * DIE REGEL DAHINTER: Von Stufe zu Stufe wächst die Athletenzahl um höchstens
+ * das Dreifache, und der Preis wächst jedes Mal WENIGER als die Zahl. So wird
+ * jeder Athlet mit jeder Stufe günstiger (14,90 → 11,63 → 8,65 → 6,66 €),
+ * ohne dass eine Stufe wie eine Strafe für Wachstum aussieht.
  *
- * Zum Vergleich: TeamBuildr verlangt 90 $ im Monat für 50 Athleten im BESTAND,
- * also über 1.000 $ im Jahr. Ein Trainer mit hundert Klienten, der sechzig
- * davon jährlich misst, zahlt dort das Dreifache von Team — und misst mit
- * Kydon, während er dort programmiert. Die Stufen gewinnen überall dort, wo
- * EPISODISCH gemessen wird, und das ist bei Diagnostik immer der Fall.
+ * WARUM DER EINSTIEG NICHT BEI 99 € LIEGT: Das wäre der Preis von Athlete
+ * Pro für EINE Person — ein Trainer mit zehn Athleten, Reports und
+ * Gruppentest darf nicht gleich viel kosten. Coach Start enthält ausserdem
+ * Plus für alle betreuten Athleten; einzeln wären das 10 × 49 €. Zum Start
+ * gibt es stattdessen den Gründerpreis (FOUNDER_OFFER): ein Rabatt lässt
+ * sich beenden, ein zu niedriger Listenpreis kaum anheben.
+ *
+ * Der Massstab bleibt die Rechnung des Trainers: Er verkauft eine
+ * Diagnostiksitzung für 80 bis 150 €. Coach Start kostet damit pro Jahr
+ * ungefähr eine einzige Sitzung.
+ *
+ * TEAMS AB COACH TEAM: eigenes Logo und weitere Trainer im selben Konto.
+ * Gezählt wird dann für das ganze Team (src/domain/team.ts) — ein Trainer,
+ * der dreissig eigene Athleten mitbringt und misst, ändert den Preis, und
+ * zwar anteilig (src/domain/upgrade.ts).
  */
 export const COACH_TIERS: readonly CoachTier[] = [
   {
@@ -399,7 +420,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     id: 'coach_start',
     yearlyEur: 149,
     monthlyEur: 15,
-    athletesPerYear: 25,
+    athletesPerYear: 10,
     coachSeats: 1,
     name: { de: 'Coach Start', en: 'Coach Start' },
     features: [...COACH_BASE, 'heatmap', 'plusForAthletes'],
@@ -409,23 +430,47 @@ export const COACH_TIERS: readonly CoachTier[] = [
     id: 'coach_team',
     yearlyEur: 349,
     monthlyEur: 35,
-    athletesPerYear: 75,
-    coachSeats: 3,
+    athletesPerYear: 30,
+    coachSeats: 2,
     name: { de: 'Coach Team', en: 'Coach Team' },
     features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
     product: 'coach_team',
   },
   {
     id: 'coach_pro',
-    yearlyEur: 699,
-    monthlyEur: 69,
-    athletesPerYear: 250,
-    coachSeats: 10,
+    yearlyEur: 649,
+    monthlyEur: 65,
+    athletesPerYear: 75,
+    coachSeats: 3,
     name: { de: 'Coach Pro', en: 'Coach Pro' },
     features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
     product: 'coach_pro',
   },
+  {
+    id: 'coach_club',
+    yearlyEur: 999,
+    monthlyEur: 99,
+    athletesPerYear: 150,
+    coachSeats: 5,
+    name: { de: 'Coach Club', en: 'Coach Club' },
+    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
+    product: 'coach_club',
+  },
 ]
+
+/** Rangfolge der Trainerstufen, klein nach gross. */
+export const COACH_RANK: readonly CoachTierId[] = COACH_TIERS.map((tier) => tier.id)
+
+/**
+ * Der Gründerpreis: dreissig Prozent auf das erste Jahr, für die ersten
+ * hundert Trainer.
+ *
+ * Die Zahl der Einlösungen zählt NICHT diese App, sondern Stripe (der
+ * Gutschein trägt `max_redemptions`). Deshalb erscheint der Hinweis nur, wenn
+ * der Bau ihn ausdrücklich einschaltet (VITE_FOUNDER_OFFER=on) — ein Angebot
+ * zu nennen, das an der Kasse nicht mehr gilt, wäre eine Täuschung.
+ */
+export const FOUNDER_OFFER = { percentOff: 30, firstCoaches: 100 } as const
 
 export function coachTier(id: CoachTierId): CoachTier {
   return COACH_TIERS.find((tier) => tier.id === id)!

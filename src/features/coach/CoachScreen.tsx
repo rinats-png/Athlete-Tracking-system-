@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { CoachDashboard } from './CoachDashboard'
 import { CoachSignals } from './CoachSignals'
+import { useBilling } from '@/features/billing/BillingProvider'
+import { LimitNotice } from '@/features/billing/CoachPlanPanel'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useLocale } from '@/features/shared/useLocale'
 
@@ -34,6 +36,7 @@ export function CoachScreen() {
       {role === 'coach' ? (
         <>
           <DpaNotice />
+          <CoachLimitLine />
           <div className="mb-4 flex flex-wrap gap-2">
             <Button asChild variant="primary" size="sm">
               <Link to="/trainer/testtag">{t('testDay.plural')}</Link>
@@ -95,5 +98,16 @@ function DpaNotice() {
         {t('coachDash.dpa.open')}
       </Link>
     </p>
+  )
+}
+
+/** Stufe überschritten? Dann steht es hier, über allem — mit dem Weg zum Wechsel. */
+function CoachLimitLine() {
+  const { limit } = useBilling()
+  if (!limit) return null
+  return (
+    <div className="mb-4">
+      <LimitNotice limit={limit} compact />
+    </div>
   )
 }

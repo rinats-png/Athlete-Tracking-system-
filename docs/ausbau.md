@@ -444,7 +444,7 @@ zahlt; das ist billiger als der Vertrauensverlust.
 
 ### Trainerstufen
 
-Unverändert 149 / 349 / 699 € im Jahr für 25 / 75 / 250 gemessene Athleten.
+Seit 25.09.2026: 149 / 349 / 649 / 999 € im Jahr für 10 / 30 / 75 / 150 gemessene Athleten, Teams ab Coach Team, anteiliger Wechsel (docs/preise.md).
 **Die Achse bleibt die Anzahl betreuter Athleten, nicht die Datentiefe** —
 sonst konkurrieren Elite und Coach Team miteinander. Jede Trainerstufe
 enthält die volle Datentiefe für die betreuten Athleten; was die Stufen

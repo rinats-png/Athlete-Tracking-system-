@@ -8,14 +8,14 @@
  * Teile (Signatur, Zuordnung) aus den Prüffällen heraus geprüft werden können.
  */
 
-export type Product = 'athlete_plus' | 'athlete_pro' | 'athlete_elite' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro'
+export type Product = 'athlete_plus' | 'athlete_pro' | 'athlete_elite' | 'athlete_termin' | 'coach_start' | 'coach_team' | 'coach_pro' | 'coach_club'
 export type Interval = 'yearly' | 'monthly' | 'once'
 
-const PRODUCTS: Product[] = ['athlete_plus', 'athlete_pro', 'athlete_elite', 'athlete_termin', 'coach_start', 'coach_team', 'coach_pro']
+const PRODUCTS: Product[] = ['athlete_plus', 'athlete_pro', 'athlete_elite', 'athlete_termin', 'coach_start', 'coach_team', 'coach_pro', 'coach_club']
 
 /** Plan-Kennung der App → Produkt. Termin ist ein Einmalkauf, alles andere ein Abo. */
 export function productOf(plan: unknown, interval: unknown): { product: Product; interval: Interval } | null {
-  const map: Record<string, Product> = { plus: 'athlete_plus', pro: 'athlete_pro', elite: 'athlete_elite', termin: 'athlete_termin', coach_start: 'coach_start', coach_team: 'coach_team', coach_pro: 'coach_pro' }
+  const map: Record<string, Product> = { plus: 'athlete_plus', pro: 'athlete_pro', elite: 'athlete_elite', termin: 'athlete_termin', coach_start: 'coach_start', coach_team: 'coach_team', coach_pro: 'coach_pro', coach_club: 'coach_club' }
   if (typeof plan !== 'string' || !(plan in map)) return null
   const product = map[plan]
   if (product === 'athlete_termin') return interval === 'once' ? { product, interval: 'once' } : null
@@ -102,6 +102,111 @@ export async function stripePost(path: string, secretKey: string, fields: Record
   })
   const json = (await res.json().catch(() => ({}))) as Record<string, unknown>
   return { ok: res.ok, status: res.status, body: json }
+}
+
+/** Ein lesender Aufruf gegen die Stripe-API. */
+export async function stripeGet(path: string, secretKey: string): Promise<{ ok: boolean; status: number; body: Record<string, unknown> }> {
+  const res = await fetch(`https://api.stripe.com/v1/${path}`, { headers: { Authorization: `Bearer ${secretKey}` } })
+  const json = (await res.json().catch(() => ({}))) as Record<string, unknown>
+  return { ok: res.ok, status: res.status, body: json }
+}
+
+// =============================================================================
+// Stufenwechsel der Trainer (change-plan)
+// =============================================================================
+
+/** Die Trainerstufen in ihrer Rangfolge — dieselbe wie COACH_RANK in pricing.ts. */
+export const COACH_PRODUCTS: Product[] = ['coach_start', 'coach_team', 'coach_pro', 'coach_club']
+
+export function isCoachProduct(value: unknown): value is Product {
+  return typeof value === 'string' && (COACH_PRODUCTS as string[]).includes(value)
+}
+
+/** Rang einer Trainerstufe; −1 für alles andere. */
+export function coachRank(product: unknown): number {
+  return COACH_PRODUCTS.indexOf(product as Product)
+}
+
+/** Plätze je Stufe — dieselben wie coach_seats() in der Datenbank. */
+export function coachSeats(product: Product | null): number {
+  return product === 'coach_club' ? 5 : product === 'coach_pro' ? 3 : product === 'coach_team' ? 2 : 1
+}
+
+/**
+ * Die Felder einer HOCHSTUFUNG: Preis tauschen, sofort anteilig abrechnen und
+ * nur wechseln, wenn die Zahlung durchgeht. `always_invoice` stellt die
+ * Differenz für den Rest des Zeitraums sofort in Rechnung;
+ * `error_if_incomplete` lässt den ganzen Wechsel scheitern, wenn die Karte
+ * ablehnt — eine höhere Stufe ohne Zahlung gibt es nicht.
+ */
+export function upgradeFields(itemId: string, price: string, product: Product): Record<string, string> {
+  return {
+    'items[0][id]': itemId,
+    'items[0][price]': price,
+    proration_behavior: 'always_invoice',
+    payment_behavior: 'error_if_incomplete',
+    'metadata[product]': product,
+  }
+}
+
+/** Die Vorschau derselben Hochstufung — ohne sie auszuführen. */
+export function previewFields(customer: string, subscription: string, itemId: string, price: string, at: number): Record<string, string> {
+  return {
+    customer,
+    subscription,
+    'subscription_details[items][0][id]': itemId,
+    'subscription_details[items][0][price]': price,
+    'subscription_details[proration_behavior]': 'always_invoice',
+    'subscription_details[proration_date]': String(at),
+  }
+}
+
+/**
+ * Die Felder einer HERABSTUFUNG als Abo-Plan: Phase 1 läuft mit dem alten
+ * Preis bis zum Ende des bezahlten Zeitraums, Phase 2 beginnt mit dem neuen.
+ * Keine Anteilsrechnung (`none`) — Herabstufen erstattet nichts. Danach gibt
+ * der Plan das Abo wieder frei (`release`); es läuft normal weiter.
+ */
+export function downgradePhaseFields(
+  currentPrice: string,
+  phaseStart: number,
+  phaseEnd: number,
+  newPrice: string,
+  newProduct: Product,
+  userId: string,
+): Record<string, string> {
+  return {
+    end_behavior: 'release',
+    proration_behavior: 'none',
+    'phases[0][items][0][price]': currentPrice,
+    'phases[0][items][0][quantity]': '1',
+    'phases[0][start_date]': String(phaseStart),
+    'phases[0][end_date]': String(phaseEnd),
+    'phases[1][items][0][price]': newPrice,
+    'phases[1][items][0][quantity]': '1',
+    'phases[1][metadata][product]': newProduct,
+    'phases[1][metadata][user_id]': userId,
+  }
+}
+
+/** Stripe-Intervall → unsere Kennung. */
+export function intervalOf(stripeInterval: unknown): 'yearly' | 'monthly' | null {
+  return stripeInterval === 'year' ? 'yearly' : stripeInterval === 'month' ? 'monthly' : null
+}
+
+/**
+ * Laufzeit eines Abos lesen. Seit der Stripe-API vom März 2025 steht der
+ * Zeitraum am Abo-Posten, nicht mehr am Abo — beides wird gelesen, damit ein
+ * Versionswechsel im Stripe-Konto die Freischaltung nicht still ausser Kraft
+ * setzt.
+ */
+export function periodOf(subscription: Record<string, unknown>): { start: number | null; end: number | null } {
+  const item = (subscription.items as { data?: Record<string, unknown>[] } | undefined)?.data?.[0] ?? {}
+  const num = (v: unknown) => (typeof v === 'number' ? v : null)
+  return {
+    start: num(subscription.current_period_start) ?? num(item.current_period_start),
+    end: num(subscription.current_period_end) ?? num(item.current_period_end),
+  }
 }
 
 /**

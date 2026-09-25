@@ -203,7 +203,7 @@ Das Preismodell wurde am 13.09.2026 vollständig ersetzt und hat eine eigene
 Datei: **[`docs/preise.md`](preise.md)**. Der Kern in drei Zeilen:
 
 * Athleten: kostenloser Kern dauerhaft · Plus 29 €/Jahr · Termin 49 € einmalig.
-* Trainer: 149/349/699 € im Jahr für 25/75/250 **gemessene** Athleten — der
+* Trainer: 149/349/649/999 € im Jahr für 10/30/75/150 **gemessene** Athleten — der
   Bestand ist unbegrenzt und kostenlos.
 * Der Paywall liegt nie bei der Ehrlichkeit: Messfehlerband, eigener Verlauf
   und vollständiger Export bleiben in jeder Stufe frei.

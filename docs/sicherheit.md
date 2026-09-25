@@ -255,7 +255,22 @@ Trainerbetrieb ist ein Produktmodus, kein Vertrauensrang. Entscheidend ist,
 dass diese Selbstauskunft **keinerlei Zugriff auf Fremde** verschafft; genau
 das war B-01, und genau das ist geschlossen. Bezahlschranken (`coach_pro`)
 hängen an `entitlements`, und diese Tabelle ist für Endnutzer **nur lesbar** —
-geschrieben wird ausschliesslich vom Zahlungs-Webhook mit `service_role`.
+geschrieben wird ausschliesslich vom Zahlungs-Webhook und von `change-plan`
+mit `service_role`.
+
+**Teams (seit 25.09.2026).** Trainer eines Teams arbeiten im Bestand des
+Inhabers. `athlete_documents` und `athlete_series` fragen deshalb
+`can_use_pool(owner_id)`: im eigenen Bestand immer, in einem fremden nur als
+Mitglied des Teams dieses Inhabers **und** nur, solange dessen Stufe mehrere
+Trainer trägt. Löschen bleibt beim Inhaber. Mitgliedschaft entsteht
+ausschliesslich über `accept_team_invite` (Code 244 Bit, nur als SHA-256
+gespeichert, optional an eine E-Mail gebunden, Platzprüfung unter Sperre); es
+gibt keine Schreibregel auf `teams`, `team_members`, `team_invites` oder
+`coach_usage`. Beitritt, Austritt, Entfernung und Auflösung stehen im
+Sicherheitsprotokoll. Verlässt ein Trainer das Team, leert sein Gerät den
+Teambestand vor jedem Schreiben — sonst trüge er ihn in sein eigenes Konto.
+Restrisiko: Ein Gerät, das nach der Entfernung nie wieder abgleicht, behält
+seine lokale Kopie; Zugriff auf den Server hat es nicht mehr.
 
 ### 4 Authentifizierung & Passwörter — ✓ (durch Supabase GoTrue)
 Hashing, Salts, Reset-Tokens und Ratenbegrenzung liegen beim Dienst. Die App

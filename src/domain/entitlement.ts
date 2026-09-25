@@ -1,5 +1,6 @@
 import {
   ATHLETE_PLANS,
+  COACH_RANK,
   COACH_TIERS,
   FREE_CORE,
   athletePlan,
@@ -55,7 +56,6 @@ export function activeProducts(entitlements: readonly Entitlement[], now: Date =
 
 /** Rangfolge der Athletenstufen — die höchste vorhandene zählt. */
 const ATHLETE_RANK: AthletePlanId[] = ['free', 'plus', 'termin', 'pro', 'elite']
-const COACH_RANK: CoachTierId[] = ['coach_free', 'coach_start', 'coach_team', 'coach_pro']
 
 export function athletePlanOf(products: ReadonlySet<EntitlementProduct>, coachGrant = false): AthletePlanId {
   let best: AthletePlanId = coachGrant ? 'plus' : 'free'
@@ -65,8 +65,15 @@ export function athletePlanOf(products: ReadonlySet<EntitlementProduct>, coachGr
   return best
 }
 
-export function coachTierOf(products: ReadonlySet<EntitlementProduct>): CoachTierId {
-  let best: CoachTierId = 'coach_free'
+/**
+ * Die Trainerstufe aus den eigenen Freischaltungen — oder aus dem Team.
+ *
+ * Wer als Trainer in einem Team arbeitet, hat selbst keine Freischaltung:
+ * die gehört dem Inhaber, der zahlt. Die Stufe des Teams kommt vom Server
+ * (`my_team_context`), und die höhere von beiden zählt.
+ */
+export function coachTierOf(products: ReadonlySet<EntitlementProduct>, teamTier: CoachTierId | null = null): CoachTierId {
+  let best: CoachTierId = teamTier ?? 'coach_free'
   for (const tier of COACH_TIERS) {
     if (tier.product && products.has(tier.product) && COACH_RANK.indexOf(tier.id) > COACH_RANK.indexOf(best)) best = tier.id
   }
@@ -79,12 +86,17 @@ export interface Access {
   coachTier: CoachTierId
 }
 
-export function accessFor(role: Access['role'], entitlements: readonly Entitlement[], coachGrant = false, now: Date = new Date()): Access {
+export function accessFor(
+  role: Access['role'],
+  entitlements: readonly Entitlement[],
+  coachGrant = false,
+  now: Date = new Date(),
+  teamTier: CoachTierId | null = null,
+): Access {
   const products = activeProducts(entitlements, now)
-  return { role, athletePlan: athletePlanOf(products, coachGrant), coachTier: coachTierOf(products) }
+  return { role, athletePlan: athletePlanOf(products, coachGrant), coachTier: coachTierOf(products, teamTier) }
 }
 
-/** Was ein zahlender Trainer für seine Athleten mitbringt: alles, was Pro hat. */
 /**
  * Was ein zahlender Trainer für seine Athleten mitbringt: die volle
  * Datentiefe — aber NICHT die Gesundheitsschicht. Die ist an eine eigene

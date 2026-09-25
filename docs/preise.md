@@ -5,7 +5,7 @@ selbst stehen in `src/data/pricing.ts`; hier steht die Begründung, damit
 niemand — auch nicht wir in einem Jahr — an einer Zahl dreht, ohne zu wissen,
 was sie trägt.
 
-**Stand:** 13. September 2026. Ersetzt das erste Modell vollständig.
+**Stand:** 25. September 2026 (Trainerstaffel, Hochstufung, Teams). Das Grundmodell vom 13. September 2026 gilt weiter.
 
 ---
 
@@ -14,7 +14,7 @@ was sie trägt.
 | | alt | neu |
 |---|---|---|
 | Athleten | Report-Kontingente, 29,90 € je Report | Frei · Plus 49 €/Jahr · Pro 99 €/Jahr · Termin 69 € einmalig (seit dem Ausbau, docs/ausbau.md §10; vorher Plus 29 / Termin 49) |
-| Trainer | 39/79/149 € im Monat für 8/20/50 **Listenplätze** | 149/349/699 € im Jahr für 25/75/250 **gemessene** Athleten |
+| Trainer | 39/79/149 € im Monat für 8/20/50 **Listenplätze** | 149/349/649/999 € im Jahr für 10/30/75/150 **gemessene** Athleten (bis 24.09.2026: 149/349/699 € für 25/75/250) |
 
 **1. Der Report war an die falsche Zielgruppe gepreist.** Was zahlt ein Athlet
 für ein PDF seiner eigenen Zahlen? Fünf Euro, wenn es hoch kommt. Was zahlt ein
@@ -149,17 +149,90 @@ erzwingen, würde die einzige Eigenschaft beschädigen, für die diese App
 
 ## Trainer: die Rechnung dahinter
 
-| Stufe | Preis | gemessene Athleten | je Athlet und Jahr |
-|---|---|---|---|
-| Coach Free | 0 € | 3 | — |
-| Coach Start | 149 € | 25 | **5,96 €** |
-| Coach Team | 349 € | 75 | **4,65 €** |
-| Coach Pro | 699 € | 250 | **2,80 €** |
+| Stufe | Preis | gemessene Athleten | Trainer | je Athlet und Jahr |
+|---|---|---|---|---|
+| Coach Free | 0 € | 3 | 1 | — |
+| Coach Start | 149 € | 10 | 1 | **14,90 €** |
+| Coach Team | 349 € | 30 | 2 | **11,63 €** |
+| Coach Pro | 649 € | 75 | 3 | **8,65 €** |
+| Coach Club | 999 € | 150 | 5 | **6,66 €** |
+| Verein / Einrichtung | Anfrage | über 150 | nach Bedarf | — |
 
-Der Massstab ist die Rechnung des Trainers, nicht unsere: Er verkauft eine
-Diagnostiksitzung für 80–150 €. Bleibt der Anteil unter zehn Prozent, rechnet
-niemand nach — bei *Start* sind es rund sechs Prozent **einer einzigen Sitzung**,
-pro Athlet und Jahr.
+Monatlich: 15 / 35 / 65 / 99 €.
+
+**Warum fünf Stufen statt drei (25.09.2026).** Die alte Staffel (25/75/250)
+hatte zwei Fehler. Der Einstieg verlangte Plätze, die ein anfangender Trainer
+nie füllt — die meisten betreuen fünf bis fünfzehn Leute. Und zwischen 75 und
+250 lag ein Sprung um das Dreieinhalbfache: Wer 76 Athleten misst, zahlte das
+Doppelte für einen einzigen mehr. An so einer Schwelle springen Kunden ab. Die
+Regel jetzt: Von Stufe zu Stufe wächst die Athletenzahl um höchstens das
+Dreifache, und der Preis wächst jedes Mal **weniger** als die Zahl — so wird
+jeder Athlet mit jeder Stufe günstiger. Ein Prüffall hält das fest
+(`tests/pricing.spec.ts`).
+
+**Warum der Einstieg nicht bei 99 € liegt.** 99 € ist Athlete Pro — für
+*eine* Person. Ein Trainer mit zehn Athleten, Reports und Gruppentest darf
+nicht gleich viel kosten. Coach Start enthält ausserdem Plus für alle betreuten
+Athleten; einzeln wären das 10 × 49 €. Zum Start gibt es stattdessen den
+**Gründerpreis**: −30 % auf das erste Jahr für die ersten 100 Trainer, als
+Stripe-Gutschein mit `max_redemptions` (Umgebung `STRIPE_COUPON_FOUNDER`, Hinweis
+im Bau mit `VITE_FOUNDER_OFFER=on`). Ein Rabatt lässt sich beenden, ein zu
+niedriger Listenpreis kaum anheben.
+
+Der Massstab bleibt die Rechnung des Trainers: Er verkauft eine
+Diagnostiksitzung für 80–150 €. Coach Start kostet im Jahr ungefähr **eine**
+Sitzung, je Athlet unter zehn Prozent einer Sitzung.
+
+## Stufe überschritten: Frist und anteiliger Wechsel
+
+Gezählt wird im **laufenden Abojahr** (Jahresabo: Beginn des bezahlten
+Zeitraums; Monatsabo: Jahrestag des Abobeginns; ohne Abo: die letzten zwölf
+Monate). Mit jeder Verlängerung beginnt die Zählung neu. Die Zählung macht der
+Server aus den Dokumenten des Bestands (`my_coach_status`), nicht das Gerät.
+
+1. **Nie mitten am Testtag sperren.** Wer den elften Athleten misst, misst ihn.
+2. **Vierzehn Tage Frist** ab dem Moment, in dem der Server die Überschreitung
+   zum ersten Mal sieht. Danach sind nur noch Athleten messbar, die im
+   laufenden Abojahr schon gezählt sind; neue erst nach dem Wechsel.
+3. **Hochstufen kostet die anteilige Differenz** für den Rest des Zeitraums —
+   zur Hälfte des Jahres von Pro zu Club (999 − 649) / 2 = 175 €. Stripe rechnet
+   das auf die Sekunde (`proration_behavior=always_invoice`) und wechselt nur,
+   wenn die Zahlung durchgeht (`payment_behavior=error_if_incomplete`).
+   Mollie kann das bei Abos nicht selbst; deshalb Stripe.
+4. **Herabstufen erstattet nichts** und gilt ab der nächsten Verlängerung
+   (Stripe-Abo-Plan mit zwei Phasen). Hat das Team mehr Trainer, als die
+   kleinere Stufe Plätze hat, müssen erst Trainer gehen.
+5. **Automatisch hochstufen** nur, wenn der Inhaber es selbst einschaltet —
+   einmal je Überschreitung. Eine Mehrzahlung ohne Bestätigung ist nicht die
+   Voreinstellung.
+
+Code: `src/domain/upgrade.ts` (Regeln), `supabase/functions/change-plan`
+(Stripe), `src/features/billing/CoachPlanPanel.tsx` (Oberfläche).
+
+## Teams (ab Coach Team)
+
+Ein Team gehört einem **Inhaber** (zahlt, lädt ein, entfernt); die anderen sind
+**Trainer** (messen, sehen dieselben Athleten, erstellen Reports). Plätze:
+Team 2, Pro 3, Club 5 — der Inhaber zählt mit.
+
+- **Ein Bestand.** Die Trainer arbeiten im Bestand des Inhabers
+  (`athlete_documents.owner_id`). Deshalb gibt es keinen zweiten Bestand, in dem
+  man am Preis vorbei messen könnte: Bringt ein Trainer dreissig eigene
+  Athleten mit und misst sie, zählen sie für das Team — und die Frist aus dem
+  vorigen Abschnitt greift.
+- **Einladung** per Link mit 244 Bit Zufall im Fragment (`#…`), gespeichert
+  nur als SHA-256. Optional an eine E-Mail gebunden. Eine offene Einladung
+  belegt einen Platz. Gültig 14 Tage.
+- **Beitritt:** Der Trainer entscheidet, ob sein bisheriger Bestand ins Team
+  geht (dann zählt er dort) oder im eigenen Konto bleibt.
+- **Austritt / Entfernung:** Die Athleten bleiben beim Team; das Gerät leert
+  den Teambestand beim nächsten Abgleich.
+- **Stufe fällt unter Team** (Start, Ablauf): Der Zugriff der Trainer endet von
+  selbst (`can_use_pool`), die Daten bleiben beim Inhaber.
+- **Löschen** im gemeinsamen Bestand darf nur der Inhaber — sonst liesse sich
+  die Zählung drücken.
+- **Einwilligung:** Der Vordruck nennt das Team und die Zahl der Trainer, die
+  die Werte sehen.
 
 **Gegen TeamBuildr** (90 $/Monat für 50 Athleten im *Bestand*, über 1.000 $ im
 Jahr): Ein Trainer mit hundert Klienten, der sechzig davon jährlich misst, zahlt

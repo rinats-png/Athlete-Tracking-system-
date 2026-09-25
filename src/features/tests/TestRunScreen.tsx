@@ -18,6 +18,8 @@ import { hasStageLevel } from '@/domain/testModel'
 import { getTest } from '@/data/testCatalog'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { consentStatus } from '@/domain/consent'
+import { useBilling } from '@/features/billing/BillingProvider'
+import { LimitNotice } from '@/features/billing/CoachPlanPanel'
 import { deriveMetrics } from '@/lib/metrics/derive'
 import { ageFromBirthDate, formatNumber } from '@/lib/format'
 import { formulaFor } from '@/domain/formulaRegistry'
@@ -147,7 +149,12 @@ export function TestRunScreen() {
   const consent = activeAthlete ? consentStatus(activeAthlete) : null
   const consentMissing = role === 'coach' && consent != null && !consent.mayRecord
   const consentWarn = role === 'coach' && consent != null && consent.warn && consent.mayRecord
-  const blocked = hasErrors(issues) || consentMissing
+  // Stufe überschritten und Frist vorbei: ein Athlet, der im laufenden
+  // Abojahr noch nicht gemessen wurde, erst nach dem Wechsel. Wer schon
+  // gezählt ist, bleibt messbar (src/domain/upgrade.ts).
+  const billing = useBilling()
+  const overLimit = role === 'coach' && activeAthlete != null && !billing.mayMeasure(activeAthlete)
+  const blocked = hasErrors(issues) || consentMissing || overLimit
 
   const save = () => {
     if (blocked) return
@@ -391,6 +398,11 @@ export function TestRunScreen() {
               />
             </label>
 
+            {overLimit && billing.limit && (
+              <div className="mb-2">
+                <LimitNotice limit={billing.limit} compact />
+              </div>
+            )}
             {consentMissing && (
               <p className="mb-2 border-l-2 border-critical bg-critical/10 px-3 py-2 text-[13px] leading-snug text-ink-secondary">
                 {t('consent.blocked', {

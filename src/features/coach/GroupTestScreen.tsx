@@ -10,6 +10,8 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { consentStatus } from '@/domain/consent'
+import { useBilling } from '@/features/billing/BillingProvider'
+import { LimitNotice } from '@/features/billing/CoachPlanPanel'
 import { TEST_CATALOG, getTest } from '@/data/testCatalog'
 import { groupStats, MIN_FOR_SPREAD } from '@/domain/groupStats'
 import { formatNumber } from '@/lib/format'
@@ -33,6 +35,7 @@ export function GroupTestScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
   const { role, athletes, recordForGroup, testDays } = useAppData()
+  const billing = useBilling()
 
   // Aus dem Testtag heraus stehen Station und Termin schon fest. Wer an der
   // Station steht, soll sie nicht noch einmal aus zwei Listen heraussuchen —
@@ -82,6 +85,9 @@ export function GroupTestScreen() {
       // wird nicht geschrieben — auch nicht "aus Versehen" im Zug einer
       // Gruppe, wo es niemandem auffiele.
       if (!consentStatus(athlete).mayRecord) return {}
+      // Nach abgelaufener Frist: neue Athleten erst nach dem Stufenwechsel.
+      // Wer im Abojahr schon gezählt ist, wird weiter gemessen.
+      if (!billing.mayMeasure(athlete)) return {}
       return value == null ? {} : { [test.primaryMetric]: value }
     })
     // Die Bedingungen des Testtags gelten für jeden Wert dieses Tages. Ohne
@@ -100,6 +106,11 @@ export function GroupTestScreen() {
         </Link>
       </Button>
       <ScreenHeader eyebrow={t('coachDash.title')} title={t('group.title')} intro={t('group.intro')} />
+      {billing.limit && (
+        <div className="mb-4">
+          <LimitNotice limit={billing.limit} compact />
+        </div>
+      )}
 
       <Panel>
         <PanelHeader title={t('group.station')} subtitle={t('group.stationHint')} />

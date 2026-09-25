@@ -17,7 +17,7 @@
 
 // @ts-expect-error — Deno-Modulauflösung.
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { isProduct, statusOf, verifyStripeSignature } from '../_shared/stripe.ts'
+import { intervalOf, isProduct, periodOf, statusOf, verifyStripeSignature } from '../_shared/stripe.ts'
 
 // @ts-expect-error — Deno-Laufzeit.
 const env = (key: string): string => Deno.env.get(key) ?? ''
@@ -71,6 +71,7 @@ Deno.serve(async (req: Request) => {
       stripe_subscription_id: typeof obj.subscription === 'string' ? obj.subscription : null,
       // Der Einmalkauf ist unbefristet; beim Abo setzt das Abo-Ereignis das Ende.
       current_period_end: null,
+      billing_interval: meta.interval === 'monthly' || meta.interval === 'yearly' || meta.interval === 'once' ? meta.interval : null,
     }
     const { error } = await admin.from('entitlements').upsert(row, { onConflict: 'user_id,product' })
     if (error) {
@@ -84,7 +85,32 @@ Deno.serve(async (req: Request) => {
     const subscriptionId = typeof obj.id === 'string' ? obj.id : null
     if (!subscriptionId) return reply({ ok: true, ignored: 'no_id' }, 200)
     const status = event.type === 'customer.subscription.deleted' ? 'canceled' : statusOf(obj.status)
-    const patch: Record<string, unknown> = { status, current_period_end: iso(obj.current_period_end), stripe_price_id: priceOf(obj) }
+    const period = periodOf(obj)
+    const firstItem = (obj.items as { data?: { price?: { recurring?: { interval?: unknown } } }[] } | undefined)?.data?.[0]
+    const patch: Record<string, unknown> = {
+      status,
+      current_period_end: iso(period.end),
+      current_period_start: iso(period.start),
+      started_at: iso(obj.start_date),
+      stripe_price_id: priceOf(obj),
+    }
+    const interval = intervalOf(firstItem?.price?.recurring?.interval)
+    if (interval) patch.billing_interval = interval
+
+    // Stufenwechsel: Die Stufe steht in den Metadaten des Abos — gesetzt von
+    // change-plan (Hochstufung) oder von der zweiten Phase eines Abo-Plans
+    // (Herabstufung zur Verlängerung). Ist sie eine andere als die
+    // eingetragene, zieht die Zeile mit; eine vorgemerkte Herabstufung, die
+    // jetzt gilt, ist damit erledigt.
+    if (isProduct(meta.product) && typeof meta.user_id === 'string') {
+      const { data: existing } = await admin.from('entitlements').select('id, product').eq('stripe_subscription_id', subscriptionId).maybeSingle()
+      if (existing && existing.product !== meta.product) {
+        await admin.from('entitlements').delete().eq('user_id', meta.user_id).eq('product', meta.product).neq('id', existing.id)
+        patch.product = meta.product
+        patch.scheduled_product = null
+        patch.scheduled_at = null
+      }
+    }
     // Zuerst über die Abo-Kennung; ein Abo, das der Webhook vor der Kasse
     // sieht (Reihenfolge ist bei Stripe nicht garantiert), über die Metadaten.
     const { data: updated, error } = await admin.from('entitlements').update(patch).eq('stripe_subscription_id', subscriptionId).select('id')

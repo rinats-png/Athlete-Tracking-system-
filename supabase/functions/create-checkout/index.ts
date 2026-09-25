@@ -75,6 +75,7 @@ Deno.serve(async (req: Request) => {
     cancel_url: `${back}/preise?checkout=cancel`,
     'metadata[user_id]': userId,
     'metadata[product]': choice.product,
+    'metadata[interval]': choice.interval,
     // Rechnungen brauchen eine Adresse; Stripe fragt sie an der Kasse ab.
     billing_address_collection: 'required',
     'automatic_tax[enabled]': env('STRIPE_AUTOMATIC_TAX') === 'on' ? 'true' : 'false',
@@ -86,7 +87,16 @@ Deno.serve(async (req: Request) => {
     fields['subscription_data[metadata][product]'] = choice.product
   }
 
-  const res = await stripePost('checkout/sessions', secretKey, fields)
+  // Der Gründerpreis: ein Gutschein bei Stripe, nur für Trainerstufen. Wie oft
+  // er noch gilt, weiss Stripe (max_redemptions), nicht diese Funktion. Ist
+  // er aufgebraucht, lehnt Stripe die Kasse ab — dann ein zweiter Versuch
+  // ohne ihn, statt dem Trainer eine Fehlermeldung für ein abgelaufenes
+  // Angebot zu zeigen.
+  const founder = env('STRIPE_COUPON_FOUNDER')
+  const withFounder = founder && choice.product.startsWith('coach_') ? { ...fields, 'discounts[0][coupon]': founder } : null
+
+  let res = await stripePost('checkout/sessions', secretKey, withFounder ?? fields)
+  if (withFounder && !res.ok) res = await stripePost('checkout/sessions', secretKey, fields)
   if (!res.ok || typeof res.body.url !== 'string') {
     console.error('create-checkout: Stripe', res.status, (res.body as { error?: { message?: string } }).error?.message ?? '')
     return json(req, { error: 'checkout_failed' }, 502)

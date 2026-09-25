@@ -2,6 +2,8 @@ import { getSupabase } from './client'
 import { CURRENT_SCHEMA_VERSION, parseAthlete } from '@/lib/store/schema'
 import type { StoredAthlete, StoredData } from '@/lib/store/localStore'
 import { carriesSeries, mergeSeries, planSeriesPush, stripSeries, type SeriesRow } from './series'
+import { clearCarryChoice, readCarryChoice } from '@/lib/coachStatus'
+import { isBlankPlaceholder } from '@/lib/store/placeholder'
 
 /**
  * Synchronisierung: der Bestand als Zweitschrift auf dem Server.
@@ -30,6 +32,19 @@ import { carriesSeries, mergeSeries, planSeriesPush, stripSeries, type SeriesRow
  * Also personenbezogene Daten. Die Datenschutzerklärung beschreibt genau das;
  * ohne Anmeldung passiert es nicht.
  *
+ * DER BESTAND IST NICHT IMMER DER EIGENE. Wer als Trainer in einem Team
+ * arbeitet, gleicht gegen den Bestand des Teaminhabers ab (`my_pool_owner`,
+ * supabase/migrations/20260925110000_teams.sql). Wechselt der Bestand —
+ * Beitritt, Austritt, Entfernung, Ende der Teamstufe —, gilt:
+ *
+ *   - AUS EINEM TEAM HERAUS wird nie etwas mitgenommen. Die Athleten des
+ *     Teams verlassen dieses Gerät, bevor irgendetwas geschrieben wird; sonst
+ *     trüge ein ausscheidender Trainer den Teambestand in sein eigenes Konto.
+ *   - IN EIN TEAM HINEIN geht der bisherige Bestand nur, wenn der Trainer das
+ *     beim Beitritt ausdrücklich gewählt hat (`carry`). Dann zählt er im
+ *     Team. Sonst verlässt er dieses Gerät und bleibt im eigenen Konto auf
+ *     dem Server, bis der Trainer das Team wieder verlässt.
+ *
  * ÜBERGANG: Dokumente von vor der Trennung tragen die Zeitreihen noch im
  * Dokument. Beim ersten Holen werden sie als Einträge übernommen; beim
  * nächsten Schreiben geht das Dokument ohne sie hoch und die Zeilen einzeln.
@@ -47,9 +62,11 @@ export interface SyncState {
   seriesSyncedAt: string | null
   /** Athleten, deren Serverstand fremd ist. Solange gesetzt: Dokument nicht schreiben. */
   conflicts: string[]
+  /** Gegen welchen Bestand zuletzt abgeglichen wurde (owner_id). null = noch nie. */
+  pool: string | null
 }
 
-const EMPTY: SyncState = { seen: {}, lastSyncedAt: null, seriesSyncedAt: null, conflicts: [] }
+const EMPTY: SyncState = { seen: {}, lastSyncedAt: null, seriesSyncedAt: null, conflicts: [], pool: null }
 
 export function readSyncState(): SyncState {
   try {
@@ -61,6 +78,7 @@ export function readSyncState(): SyncState {
       lastSyncedAt: typeof parsed.lastSyncedAt === 'string' ? parsed.lastSyncedAt : null,
       seriesSyncedAt: typeof parsed.seriesSyncedAt === 'string' ? parsed.seriesSyncedAt : null,
       conflicts: Array.isArray(parsed.conflicts) ? parsed.conflicts.filter((c) => typeof c === 'string') : [],
+      pool: typeof parsed.pool === 'string' ? parsed.pool : null,
     }
   } catch {
     return EMPTY
@@ -111,6 +129,8 @@ export interface SyncReport {
   /** Athleten, bei denen der Serverstand des Dokuments fremd ist. */
   conflicts: string[]
   reason: null | 'offline' | 'not_signed_in' | 'unknown'
+  /** Der Bestand hat gewechselt (Team beigetreten oder verlassen). */
+  poolSwitched?: boolean
 }
 
 interface RemoteRow {
@@ -132,18 +152,36 @@ const fail = (reason: SyncReport['reason']): SyncReport => ({ ok: false, pushed:
  * niemand verursacht hat.
  */
 export async function syncOnce(
-  store: StoredData,
+  initialStore: StoredData,
   onPull: (athletes: StoredAthlete[]) => void,
   onSeries: (rows: SeriesRow[]) => number = () => 0,
+  onPoolSwitch: () => StoredData = () => initialStore,
 ): Promise<SyncReport> {
   const supabase = await getSupabase()
   if (!supabase) return fail('offline')
 
   const { data: auth } = await supabase.auth.getUser()
-  const uid = auth.user?.id
-  if (!uid) return fail('not_signed_in')
+  const me = auth.user?.id
+  if (!me) return fail('not_signed_in')
 
-  const state = readSyncState()
+  // In welchem Bestand arbeite ich? Ohne Antwort (alte Datenbank, Fehler):
+  // im eigenen — das ist der Stand vor den Teams und nie ein fremder.
+  const { data: poolData, error: poolError } = await supabase.rpc('my_pool_owner')
+  const uid: string = !poolError && typeof poolData === 'string' ? poolData : me
+
+  let state = readSyncState()
+  let store = initialStore
+  let poolSwitched = false
+  const previous = state.pool ?? me
+  if (previous !== uid) {
+    // Aus einem fremden Bestand heraus (previous ≠ ich): nie mitnehmen.
+    // In einen fremden hinein: nur, wenn beim Beitritt so gewählt.
+    const carry = previous === me && readCarryChoice() === 'carry'
+    if (!carry) store = onPoolSwitch()
+    clearCarryChoice()
+    state = { ...EMPTY }
+    poolSwitched = true
+  }
   const seen = { ...state.seen }
   const conflicts: string[] = []
   const device = deviceId()
@@ -181,7 +219,7 @@ export async function syncOnce(
   }
   if (incoming.length > 0) onPull(incoming)
   // Der Bestand, den die Zeitreihen gleich treffen: lokal plus eben Geholtes.
-  const athletesNow: StoredAthlete[] = [...store.athletes, ...incoming]
+  const athletesNow: StoredAthlete[] = [...store.athletes, ...incoming].filter((a) => !isBlankPlaceholder(a))
 
   // --- 2. Zeitreihen holen ----------------------------------------------------
   //
@@ -314,8 +352,8 @@ export async function syncOnce(
     .maybeSingle()
   const seriesSyncedAt = newest?.updated_at ?? newestServerTime ?? state.seriesSyncedAt
 
-  writeSyncState({ seen, lastSyncedAt: new Date().toISOString(), seriesSyncedAt, conflicts })
-  return { ok: conflicts.length === 0, pushed, pulled, seriesPushed, seriesPulled, conflicts, reason: null }
+  writeSyncState({ seen, lastSyncedAt: new Date().toISOString(), seriesSyncedAt, conflicts, pool: uid })
+  return { ok: conflicts.length === 0, pushed, pulled, seriesPushed, seriesPulled, conflicts, reason: null, poolSwitched }
 }
 
 /**
@@ -330,8 +368,8 @@ export async function resolveWithLocal(athleteId: string): Promise<boolean> {
   const supabase = await getSupabase()
   if (!supabase) return false
   const { data: auth } = await supabase.auth.getUser()
-  const uid = auth.user?.id
-  if (!uid) return false
+  if (!auth.user?.id) return false
+  const uid = readSyncState().pool ?? auth.user.id
 
   const { data } = await supabase
     .from('athlete_documents')

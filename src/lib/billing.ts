@@ -54,7 +54,7 @@ export function billingEnabled(): boolean {
   return import.meta.env?.VITE_BILLING === 'on'
 }
 
-const PRODUCTS: EntitlementProduct[] = ['athlete_plus', 'athlete_pro', 'athlete_elite', 'athlete_termin', 'coach_start', 'coach_team', 'coach_pro']
+const PRODUCTS: EntitlementProduct[] = ['athlete_plus', 'athlete_pro', 'athlete_elite', 'athlete_termin', 'coach_start', 'coach_team', 'coach_pro', 'coach_club']
 const STATUSES = ['active', 'trialing', 'past_due', 'canceled', 'expired'] as const
 
 function parseEntitlement(raw: unknown): Entitlement | null {
