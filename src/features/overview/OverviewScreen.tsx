@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { lazy, Suspense, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Play } from 'lucide-react'
@@ -33,8 +33,11 @@ import { LeverPanel } from './LeverPanel'
 import { CompetitionPanel } from './CompetitionPanel'
 import { BetweenTestsPanel } from './BetweenTestsPanel'
 import { DiaryTodayCard } from './DiaryTodayCard'
-import { InsightsSummary } from '@/features/insights/InsightsSummary'
-import { ReadinessContextPanel } from '@/features/readiness/ReadinessContextPanel'
+// Hinweise und Tageskontext werden nachgeladen: Regelwerk und Rechnungen
+// gehören nicht ins Startpaket (tests/loading.spec.ts), und beide Karten
+// erscheinen ohnehin erst, wenn es etwas zu zeigen gibt.
+const InsightsSummary = lazy(() => import('@/features/insights/InsightsSummary').then((m) => ({ default: m.InsightsSummary })))
+const ReadinessContextPanel = lazy(() => import('@/features/readiness/ReadinessContextPanel').then((m) => ({ default: m.ReadinessContextPanel })))
 import { pick } from '@/i18n/pick'
 
 /**
@@ -204,8 +207,10 @@ export function OverviewScreen() {
         />
       )}
 
-      <InsightsSummary className="rise mb-4" style={{ ['--rise-delay' as string]: '480ms' }} />
-      <ReadinessContextPanel compact className="rise mb-4" />
+      <Suspense fallback={null}>
+        <InsightsSummary className="rise mb-4" style={{ ['--rise-delay' as string]: '480ms' }} />
+        <ReadinessContextPanel compact className="rise mb-4" />
+      </Suspense>
 
       {/*
        * Der unfaire Vorteil, in zwei Flächen: WO die Zeit hingehört (die

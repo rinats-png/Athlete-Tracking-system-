@@ -64,7 +64,7 @@ export function ReadinessContextPanel({ className, compact = false }: { classNam
       <div className="border-t border-line px-4 py-2">
         <MetricMeta metric={context.metric} />
         {compact ? (
-          <Link to="/tagebuch" className="mt-1 inline-block text-[12px] underline underline-offset-2">
+          <Link to="/tagebuch" className="mt-1 inline-flex min-h-11 items-center text-[12px] underline underline-offset-2">
             {t('readinessCtx.openDiary')}
           </Link>
         ) : (

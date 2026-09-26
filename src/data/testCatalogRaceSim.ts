@@ -79,8 +79,8 @@ export const RACE_SIM_TESTS: TestBlueprint[] = [
     },
     equipmentIds: [['measured_course', 'treadmill'], ['ski_erg'], ['sled'], ['rowing_erg'], ['kettlebell', 'dumbbells'], ['added_load'], ['wall_ball'], ['stopwatch']],
     equipment: {
-      de: 'Laufstrecke oder Laufband, SkiErg, Schlitten, Rudergerät, Gewichte für den Carry, Sandsack, Wall Ball, Stoppuhr',
-      en: 'Running route or treadmill, SkiErg, sled, rowing erg, carry weights, sandbag, wall ball, stopwatch',
+      de: 'Laufstrecke oder Laufband, Ski-Ergometer (SkiErg), Schlitten, Ruderergometer, Kettlebells oder Kurzhanteln für den Carry, Sandsack oder Gewichte für die Lunges, Wall Ball, Stoppuhr',
+      en: 'Running route or treadmill, ski ergometer (SkiErg), sled, rowing ergometer, kettlebells or dumbbells for the carry, sandbag or weights for the lunges, wall ball, stopwatch',
     },
   },
   {
@@ -120,7 +120,7 @@ export const RACE_SIM_TESTS: TestBlueprint[] = [
       de: 'Rundenlänge und Pause wie im eigenen Wettkampf (z. B. 3 × 3 min, 1 min Pause). In jeder Runde so viele saubere Aktionen wie möglich — Schlagkombinationen am Sack, Eindreher am Partner oder Takedowns — und je Runde einzeln zählen. Aktion, Partner und Rundenformat über die Termine gleich halten.',
       en: 'Round length and rest as in your own competition (e.g. 3 × 3 min, 1 min rest). In each round as many clean actions as possible — combinations on the bag, entries on a partner or takedowns — counted per round. Keep action, partner and round format constant across sessions.',
     },
-    equipmentIds: [['stopwatch'], ['heavy_bag', 'partner'], ['counter', 'partner']],
-    equipment: { de: 'Stoppuhr, Sandsack oder Partner, Zähler oder zählender Partner', en: 'Stopwatch, bag or partner, counter or a partner who counts' },
+    equipmentIds: [['stopwatch'], ['heavy_bag', 'partner'], ['counter']],
+    equipment: { de: 'Stoppuhr, Sandsack oder Partner, Zähler', en: 'Stopwatch, bag or partner, counter' },
   },
 ]
