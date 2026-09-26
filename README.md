@@ -2,6 +2,8 @@
 
 **Measure. Benchmark. Develop.**
 
+Produktanforderungen: [docs/prd.md](docs/prd.md) · Architektur: [docs/architecture.md](docs/architecture.md)
+
 Progressive Web App für **periodische Sporttests und Leistungsdiagnostik**. Kein
 Workout-Tracker: die App wird alle paar Wochen oder Monate benutzt, um Leistung
 messbar zu machen — für ambitionierte Athleten (Functional Fitness, Kampfsport,
@@ -91,11 +93,15 @@ npm run db:types   # Supabase-Typen erzeugen (braucht supabase CLI + Link)
 
 ## Architektur
 
-* **Frontend:** React 19 + TypeScript, Vite, Tailwind v4, ECharts, i18next,
-  React Query, `vite-plugin-pwa` (offlinefähig — die Testdurchführung muss auch
-  im Funkloch der Halle laufen).
-* **Backend:** Supabase — Postgres für die Daten, Auth für den Login, Storage
-  für PDF-Reports und Trainer-Logos.
+Ausführlich in [docs/architecture.md](docs/architecture.md), Produktanforderungen
+in [docs/prd.md](docs/prd.md). Kurz:
+
+* **Frontend:** React 19 + TypeScript, Vite, Tailwind v4, eigene SVG-Diagramme,
+  i18next (8 Sprachen), `vite-plugin-pwa` (offlinefähig — die Testdurchführung
+  muss auch im Funkloch der Halle laufen). Daten lokal zuerst (localStorage,
+  versioniertes Schema).
+* **Backend:** Supabase — Postgres mit RLS, Auth, Edge Functions (Stripe,
+  Push, Kontolöschung), Cron und Vault.
 * **Projekt:** `baseline-diagnostics`, Region `eu-central-1` (Frankfurt).
 
 Der Zugriffsschutz liegt vollständig in der Datenbank (RLS). Der Client hält
