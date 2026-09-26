@@ -3,6 +3,9 @@
 Stand: 26.09.2026. Beschreibt, **wie** KYDON gebaut ist. Was es können soll,
 steht in [prd.md](prd.md).
 
+Für wer hier Code ändert — Mensch oder Claude: Die Abschnitte 16 bis 21 sind
+die Regeln. Wer eine davon brechen müsste, hält an und fragt (Abschnitt 21).
+
 ---
 
 ## 1. Überblick
@@ -256,6 +259,12 @@ Gemeinsamer Code: `_shared/stripe.ts` (ohne SDK, rein und prüfbar),
 | Eigene SVG-Diagramme | volle Kontrolle über Darstellung und Barrierefreiheit | mehr eigener Code |
 | Fachlogik ohne React | prüfbar ohne Browser, wiederverwendbar im Server | Disziplin beim Import |
 | Freischaltung nur per Webhook | kein Client kann sich selbst freischalten | kurze Verzögerung nach dem Kauf |
+| Sync nur auf Knopfdruck | der Nutzer sieht, wann Daten das Gerät verlassen; kein stiller Upload in der Halle | Abgleich kann vergessen werden |
+| Löschen im Team nur durch den Inhaber | ein Trainer kann nicht versehentlich den Bestand des Vereins leeren | lokales Löschen eines Mitglieds wirkt nicht auf dem Server |
+| Nie mitten am Testtag sperren (14 Tage Frist) | eine Sperre in der Halle kostet Vertrauen mehr als ein nachgezahltes Abo | Grenze wird zeitweise überschritten |
+| Zählen im Server, nicht im Client | eine Zahl, die Geld auslöst, darf nicht manipulierbar sein | Zählstand braucht Netz; offline gilt der letzte bekannte |
+| Referenz nur mit Quelle | eine erfundene Norm wirkt genau, ist aber falsch | Achsen bleiben in Nischendisziplinen leer |
+| Rechtstexte nur DE/EN | ungeprüfte Übersetzungen wären ein rechtliches Risiko | sechs Sprachen verweisen auf DE/EN |
 
 ## 15. Bekannte Grenzen
 
@@ -265,3 +274,183 @@ Gemeinsamer Code: `_shared/stripe.ts` (ohne SDK, rein und prüfbar),
   (nur der Inhaber löscht).
 - Community-Vergleich ohne Datenbasis.
 - Speichergrenze von localStorage.
+
+## 16. Zuständigkeiten
+
+Jede Aufgabe hat genau einen Ort. Gibt es ihn schon, wird er erweitert, nicht
+ein zweiter gebaut.
+
+| Aufgabe | Einziger Ort |
+|---|---|
+| Identität, Anmeldung, Sitzung | `src/lib/supabase/auth.ts` (Supabase Auth) |
+| Kontolöschung | Edge Function `delete-account` |
+| Lokaler Datenbestand, jede Schreiboperation | `src/lib/store/AppDataProvider.tsx` → `localStore.saveData()` |
+| Form und Version der gespeicherten Daten | `src/lib/store/schema.ts` (zod, `MIGRATIONS`) |
+| Abgleich mit dem Server | `src/lib/supabase/sync.ts` (`syncOnce`) |
+| Welcher Pool (eigener Bestand oder Team) | SQL `my_pool_owner()` / `can_use_pool()` |
+| Zugriff auf Serverdaten | RLS-Richtlinien in `supabase/migrations` |
+| Freischaltungen schreiben | Edge Function `stripe-webhook` (Stufenwechsel zusätzlich `change-plan`) |
+| Freischaltungen auslegen (was darf wer) | `src/domain/entitlement.ts` → `accessFor()`, `canUse()` |
+| Preise, Pakete, Stufen, Grenzen | `src/data/pricing.ts`; Grenzen und Plätze gespiegelt in SQL `coach_limit()`, `coach_seats()` |
+| Athleten zählen, Frist | SQL `my_coach_status()`; Anzeige `src/domain/upgrade.ts` |
+| Sperren in der Oberfläche | `<Gate feature=…>` (`src/features/billing/Gate.tsx`) |
+| Tests, Protokolle, Wertung | `src/data/testCatalog*.ts`, `testProcedure.ts` |
+| Referenzwerte und Quellen | `src/data/referenceModel.ts`, `references*.ts` |
+| Einordnung, Profil, Score | `src/lib/scoring.ts`, `src/domain/performanceScore.ts` |
+| Veränderung gegen Messfehler | `src/domain/change.ts` |
+| Abgeleitete Kennzahlen | `src/lib/metrics/*` |
+| Texte der Oberfläche | `src/i18n/<lang>.json` / `.extra.json` |
+| Texte der Inhalte (Testnamen …) | `{ de, en }` im Datenmodul + `src/i18n/content/<lang>.json` |
+| Gesundheitsdaten verschlüsseln | `src/lib/health/crypto.ts` |
+| Erinnerungen versenden | Edge Function `push` + Cron |
+| Farben, Flächen, Tiefe | `src/styles/theme.css` (Tokens) |
+
+## 17. Grenzen: was darf was berühren
+
+Richtung, von außen nach innen:
+
+```
+features (UI)  →  lib/store · lib/supabase · domain · data · components
+lib/*          →  domain · data
+domain         →  data
+data           →  (nichts)
+Edge Functions →  _shared · Datenbank
+```
+
+**Verboten:**
+- `domain/` importiert weder React noch `lib/supabase`, `lib/store` oder
+  `features/`. Keine Netzaufrufe, kein `localStorage`, keine Zeit ohne
+  Parameter (Datum wird übergeben).
+- Bildschirme (`features/`) rufen die Datenbank nicht direkt auf
+  (`getSupabase().from(…)`, `.rpc(…)`). Sie gehen über eine Funktion in
+  `src/lib/…`. Bekannte Ausnahme: `features/admin/useIsAdmin.ts` — beim
+  nächsten Anfassen nach `lib/supabase/analyticsAdmin.ts` ziehen.
+- Bildschirme schreiben nie selbst in `localStorage` für Fachdaten; nur über
+  den Store. Einstellungen (`kydon.theme`, `kydon.locale` …) sind erlaubt.
+- Der Client schreibt nie in `entitlements`, `coach_usage`, `teams`,
+  `team_members`, `team_invites`. Diese ändern nur Edge Functions oder
+  `SECURITY DEFINER`-Funktionen.
+- Kein Geheimnis im Client-Code oder im Build. Der Publishable Key ist das
+  einzige, was im Browser steht.
+- `data/` enthält keine Logik außer reinen Nachschlagefunktionen.
+- Edge Functions vertrauen nie dem Anfragekörper für *wer* (immer aus dem
+  JWT) oder *wie viel* (Preis-IDs aus der Umgebung).
+
+## 18. Datenflüsse
+
+### Messwert speichern (offline)
+```
+TestRunScreen  →  useAppData().recordResult(input)
+  →  deriveMetrics() (lib/metrics) + primaryValue()
+  →  commitAthlete(upsertResult)  +  Protokolleintrag
+  →  saveData()  →  localStorage `kydon.data.v1`
+  →  React-Context neu  →  Übersicht, Verlauf, Analyse rechnen neu
+       (scoring.ts, change.ts, performanceScore.ts)
+```
+Kein Netz beteiligt. Fehlt Speicherplatz, meldet `saveData()` `false` und
+die Oberfläche sagt es.
+
+### Abgleich (nur mit Konto, auf Knopfdruck)
+```
+SyncPanel „Jetzt abgleichen“  →  syncOnce()
+  →  rpc('my_pool_owner')  (Pool wechseln? dann lokalen Bestand ersetzen)
+  →  Dokumente: lesen, vergleichen, schreiben mit .eq('updated_at', erwartet)
+       ↳ abgelehnt → Konflikt, beide Stände bleiben
+  →  Serien: Upsert in 200er-Paketen, dann Abruf seit seriesSyncedAt
+  →  mergeAthletes() / mergeSeriesRows()  →  saveData()
+  →  kydon.sync.v1 aktualisiert
+```
+
+### Kauf
+```
+PricingScreen  →  create-checkout (JWT)  →  Stripe Checkout
+  →  Stripe  →  stripe-webhook (Signatur)  →  entitlements
+  →  App: BillingProvider.refresh()  →  accessFor()  →  Gate öffnet
+```
+
+### Stufenwechsel (Trainer)
+```
+CoachPlanPanel  →  change-plan {preview}  →  Betrag anzeigen
+  →  change-plan {apply}
+       hoch:   Stripe anteilig, nur bei erfolgreicher Zahlung → entitlements
+       runter: Abo-Plan ab Periodenende → scheduled_product
+  →  Webhook bestätigt später denselben Stand
+```
+
+### Team beitreten
+```
+Link /team/beitreten#token  →  accept_team_invite(token)  (SHA-256-Vergleich)
+  →  Wahl: eigenen Bestand mitnehmen oder nicht
+  →  syncOnce(replacePool)  →  Gerät arbeitet im Pool des Inhabers
+```
+
+## 19. Was nie brechen darf
+
+1. **Geheimnisse bleiben auf dem Server.** Stripe-Schlüssel, Service-Role,
+   VAPID, Cron-Geheimnis nur in Umgebung/Vault. Nie im Client, nie im Repo.
+2. **Kein Datenverlust.** Jede Schemaänderung bekommt eine Migration in
+   `MIGRATIONS` und erhöht `CURRENT_SCHEMA_VERSION`; ein neuerer Stand wird
+   nie überschrieben; Importe werden validiert.
+3. **Offline zuerst.** Messen, Verlauf und Auswertung funktionieren ohne Netz.
+   Keine neue Funktion darf das Speichern eines Messwerts vom Netz abhängig
+   machen.
+4. **Zugriff nur über RLS.** Jede neue Tabelle bekommt RLS und Richtlinien in
+   derselben Migration; `npm run security` muss grün bleiben.
+5. **Freischaltung nur vom Server.** Der Client zeigt Berechtigungen an, er
+   gewährt keine.
+6. **Keine Referenz ohne Quelle.** Keine Normwerte erfinden, keine
+   Platzhalter zurückbringen. Fehlt eine Quelle, bleibt die Achse leer.
+7. **Veränderung nur gegen den Messfehler.** Kein „besser“, das im Rauschen
+   liegt.
+8. **Nie mitten am Testtag sperren.** Grenzen mit Frist, bereits gezählte
+   Athleten bleiben messbar.
+9. **Jede Fachlogik hat einen Ort** (Abschnitt 16). Keine zweite Berechnung
+   derselben Sache an anderer Stelle.
+10. **Grenzen aus Abschnitt 17** werden nicht still überschritten.
+11. **Kein neues Muster ohne Grund.** Keine neue Bibliothek, kein neuer
+    State-Manager, keine zweite Styling-Methode, ohne dass die Entscheidung
+    in Abschnitt 14 eingetragen wird.
+12. **Acht Sprachen.** Jeder neue Oberflächentext in allen acht
+    Wörterbüchern; `scripts/checkLocale.mjs` bleibt grün.
+13. **Gesundheitsdaten** verlassen das Gerät nur verschlüsselt.
+
+## 20. Wohin neuer Code gehört
+
+| Vorhaben | Ort | Mit dabei |
+|---|---|---|
+| Neuer Test | `src/data/testCatalog*.ts` (passende Datei nach Herkunft) | Protokoll in `testProcedure.ts`, Kennzahlen in `lib/metrics`, Texte in `i18n/content/*`, Prüffall |
+| Neue Referenzwerte | `src/data/references*.ts` | Quelle {Studie, n}, Qualitätsstufe; Lücke aus `REFERENCE_GAPS` entfernen |
+| Neue Sportart / Disziplin | `src/data/sportProfiles*.ts` | Achsen (`profileAxes.ts`), Bild (`sportArt.ts`), ggf. Batterie |
+| Neue Rechenregel | `src/domain/<thema>.ts`, reine Funktion | Prüffall in `tests/`, ohne Browser |
+| Neues gespeichertes Feld | `src/lib/store/schema.ts` | Migration, Version +1, Store-Methode in `AppDataProvider`, Prüffall für die Migration |
+| Neue Serienart (wächst pro Eintrag) | `athlete_series` mit neuem `kind` | Merge in `mergeSeriesRows`, Upsert in `sync.ts` |
+| Neuer Bildschirm | `src/features/<bereich>/<Name>Screen.tsx` | Route lazy in `App.tsx`, ggf. `<Gate>`, Texte in 8 Sprachen |
+| Neue bezahlte Funktion | Feature-Name in `src/data/pricing.ts` | `<Gate feature>` an der Route, Hinweis in `PricingScreen`, Prüffall |
+| Neue Servertabelle | neue Migration `supabase/migrations/<datum>_<name>.sql` | RLS + Richtlinien, `npm run security`, Szenario in `supabase/scenarios` |
+| Neue Serverlogik mit Geheimnis | Edge Function `supabase/functions/<name>` | gemeinsamer Code in `_shared`, reine Teile dort prüfbar |
+| Neuer Oberflächentext | `src/i18n/de.json` bzw. `de.extra.json` | alle 7 weiteren Sprachen, `checkLocale` |
+| Neue Farbe, Fläche, Schatten | Token in `src/styles/theme.css` | Hell und Dunkel, Kontrast prüfen |
+| Neues UI-Grundelement | `src/components/ui` | vorhandene Primitives zuerst prüfen |
+| Neues Diagramm | `src/components/charts` | eigenes SVG, keine Bibliothek |
+
+Vor dem Anlegen: suchen, ob es das schon gibt (Store-Methode, Domain-Funktion,
+UI-Primitive). Erweitern geht vor Neubauen.
+
+## 21. Wann anhalten und fragen
+
+Wenn eine Aufgabe nur lösbar scheint, indem eine Regel aus Abschnitt 17 oder 19
+gebrochen wird:
+
+1. **Anhalten.** Nicht still umgehen, nicht „vorläufig“ einbauen.
+2. **Konflikt benennen:** welche Regel, an welcher Stelle.
+3. **Folgen zeigen:** was davon betroffen ist (Daten, Sicherheit, Geld,
+   Nutzer, Tests).
+4. **Kleinste verträgliche Lösung vorschlagen**, die die Regel einhält —
+   und die Alternative mit Regelbruch nur zur Entscheidung vorlegen.
+
+Außerdem immer fragen vor:
+- Löschen oder Umschreiben von Nutzerdaten, auch per Migration;
+- Änderungen an Preisen, Grenzen, Plätzen oder Fristen;
+- Änderungen an RLS-Richtlinien oder an Edge Functions, die Geld bewegen;
+- neuen Abhängigkeiten (npm-Pakete) oder neuen externen Diensten;
+- Texten mit rechtlicher Wirkung (Rechtsseiten, Einwilligung, Preise).
