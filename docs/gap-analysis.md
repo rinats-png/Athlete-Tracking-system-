@@ -68,6 +68,25 @@ Abschnitte A–R) gegen den Code auf `claude/sports-diagnostics-pwa-jnqy42`.
 9. **K9 Lizenzen** — Lizenzfeld, Liste offener Fälle.
 10. **K10** — Pakete, acht Sprachen, Gesamtlauf, Doku.
 
+## 3a. Umgesetzt (Stand 26.09.2026)
+
+| Paket | Ergebnis | Wo |
+|---|---|---|
+| K1 | Metric Contract; Fassung der Ableitung am Ergebnis (Schema 27) | `domain/metricContract.ts`, `MetricMeta` |
+| K2 | 24 feste Regeln mit ID, Version, Sperrfrist, Belegen; Eingang `/hinweise`, Top 3 auf der Übersicht | `domain/insightEngine.ts`, `features/insights` |
+| K3 | Tageskontext: 8 Komponenten gegen den eigenen 28-Tage-Median (MAD); Ruhepuls als Beobachtungswert; Selbsteinschätzung zuerst als Einzelangaben, 0–100 nur als Zusammenfassung | `domain/readinessContext.ts`, `features/readiness` |
+| K4 | `/belastung`: Last 7/28/90, zwölf Wochen, Wochenänderung, Monotonie, Strain; Ermüdungsresistenz aus vier Tests (+ zwei Simulationen) | `domain/load.ts`, `domain/durability.ts`, `features/load` |
+| K5 | Tests `hyrox_simulation` und `combat_rounds`; `/sportanalyse` mit Laufabfall, Stationsanteilen, Station gegen eigenen Median, Rundenabfall | `data/testCatalogRaceSim.ts`, `domain/raceSim.ts`, `features/sport` |
+| K6 | Tagesspanne KH/Protein nach Thomas et al. 2016; Verpflegung je Einheit (g/h, Schweissrate, Magen-Darm); Gewichtsband; beobachteter Umsatz nach Vertrag | `domain/fueling.ts`, `features/nutrition/FuelingPanels.tsx` |
+| K7 | Peak Week geprüft: nur Dokumentation; Prüffall gegen Vorgaben | `tests/peakWeekDoc.spec.ts` |
+| K8 | Ereignisliste als Positivliste in Client und Server, Prüffall; gefilterte Fehlererfassung | `_shared/eventRegistry.ts`, `lib/errorCapture.ts` |
+| K9 | Lizenzfeld an allen Referenzquellen; 14 offene Fälle | `docs/referenzlizenzen.md` |
+| K10 | Merkmale `durability`, `sportAnalysis` (Plus; Sportanalyse auch in den bezahlten Trainerstufen); acht Sprachen | `data/pricing.ts` |
+
+Vorläufige Festlegungen (Formelregister): Schwelle der Belastungsspitze 30 %,
+Untergrenze erkennbarer Durability-Veränderung 3 Prozentpunkte, Minutengrenzen
+der Belastungsstufe für den Tagesbedarf.
+
 ## 4. Was bewusst nicht kommt
 
 Monorepo, tRPC-API, Worker-Queue, PostHog, Sentry, LLM-Analyst,

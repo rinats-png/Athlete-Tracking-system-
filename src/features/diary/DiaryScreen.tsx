@@ -32,6 +32,7 @@ import { formatDate, formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { DiaryStrip } from './DiaryStrip'
 import { ReadinessContextPanel } from '@/features/readiness/ReadinessContextPanel'
+import { sessionFueling } from '@/domain/fueling'
 
 const SESSION_KINDS: StoredDiarySession['kind'][] = ['strength', 'endurance', 'sport', 'mobility', 'other']
 
@@ -76,15 +77,21 @@ export function DiaryScreen() {
   const [kind, setKind] = useState<StoredDiarySession['kind']>('strength')
   const [durationMin, setDurationMin] = useState(60)
   const [rpe, setRpe] = useState<number | null>(null)
+  // Verpflegung der Einheit — freiwillig, nur mit dem Merkmal Ernährung.
+  const [fuelOpen, setFuelOpen] = useState(false)
+  const [fuel, setFuel] = useState<Pick<StoredDiarySession, 'carbsG' | 'fluidMl' | 'giScore' | 'massBeforeKg' | 'massAfterKg'>>({})
+  const canFuel = billing.can('nutrition')
 
   const patch = (p: Parameters<typeof saveDiaryEntry>[1]) => saveDiaryEntry(day, p)
 
   const addSession = () => {
     if (rpe == null) return
-    const session: StoredDiarySession = { id: newId(), kind, durationMin, rpe, note: '' }
+    const session: StoredDiarySession = { id: newId(), kind, durationMin, rpe, note: '', ...(canFuel ? fuel : {}) }
     patch({ sessions: [...(entry?.sessions ?? []), session] })
     setAdding(false)
     setRpe(null)
+    setFuel({})
+    setFuelOpen(false)
   }
   const removeSession = (id: string) =>
     patch({ sessions: (entry?.sessions ?? []).filter((s) => s.id !== id) })
@@ -244,6 +251,11 @@ export function DiaryScreen() {
                   <span>
                     {t(`diary.sessions.kinds.${s.kind}`)} · {s.durationMin} min · RPE {s.rpe}
                     <span className="readout ml-2 text-ink-muted">{sessionLoad(s)} AU</span>
+                    {s.carbsG != null && (
+                      <span className="readout ml-2 text-ink-muted" data-testid="session-carbs">
+                        {t('fueling.chip.carbs', { perHour: formatNumber(sessionFueling(s, day).carbsPerHour, locale, 0) })}
+                      </span>
+                    )}
                   </span>
                   <Button
                     variant="ghost"
@@ -290,6 +302,37 @@ export function DiaryScreen() {
                   ? t('diary.sessions.rpeHint')
                   : t('diary.sessions.loadPreview', { load: durationMin * rpe })}
               </p>
+              {canFuel && (
+                <div className="sm:col-span-2" data-testid="session-fueling">
+                  <button
+                    type="button"
+                    aria-expanded={fuelOpen}
+                    onClick={() => setFuelOpen((o) => !o)}
+                    className="text-[12px] text-accent-text underline-offset-2 hover:underline"
+                  >
+                    {fuelOpen ? t('fueling.form.hide') : t('fueling.form.show')}
+                  </button>
+                  {fuelOpen && (
+                    <div className="mt-2 grid gap-3 sm:grid-cols-2">
+                      <NumberField label={t('fueling.form.carbs')} unit="g" value={fuel.carbsG ?? null} onChange={(v) => setFuel((f) => ({ ...f, carbsG: v }))} min={0} max={1000} step={5} />
+                      <NumberField label={t('fueling.form.fluid')} unit="ml" value={fuel.fluidMl ?? null} onChange={(v) => setFuel((f) => ({ ...f, fluidMl: v }))} min={0} max={15000} step={50} />
+                      <NumberField label={t('fueling.form.massBefore')} unit="kg" value={fuel.massBeforeKg ?? null} onChange={(v) => setFuel((f) => ({ ...f, massBeforeKg: v }))} min={20} max={400} step={0.1} />
+                      <NumberField label={t('fueling.form.massAfter')} unit="kg" value={fuel.massAfterKg ?? null} onChange={(v) => setFuel((f) => ({ ...f, massAfterKg: v }))} min={20} max={400} step={0.1} />
+                      <TapScale
+                        label={t('fueling.form.gi')}
+                        value={fuel.giScore ?? null}
+                        onChange={(v) => setFuel((f) => ({ ...f, giScore: v }))}
+                        min={0}
+                        max={3}
+                        lowLabel={t('fueling.form.giNone')}
+                        highLabel={t('fueling.form.giStrong')}
+                        className="sm:col-span-2"
+                      />
+                      <p className="text-[11px] text-ink-muted sm:col-span-2">{t('fueling.form.why')}</p>
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="flex gap-2 sm:col-span-2">
                 <Button variant="primary" size="sm" disabled={rpe == null} onClick={addSession}>
                   <Plus size={14} aria-hidden />

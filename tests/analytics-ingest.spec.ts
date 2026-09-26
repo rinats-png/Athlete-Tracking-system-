@@ -87,7 +87,9 @@ test.describe('Keine Inhalte, keine fremde Kennung', () => {
     )
     expect(out.ok).toBe(true)
     if (!out.ok) return
-    expect(out.event.properties).toEqual({ slug: 'cooper_12min', nested: { ok: 1 } })
+    // Seit der Ereignisliste bleibt nur, was für test_completed erlaubt ist;
+    // die Sperrwörter sind die zweite Schicht dahinter.
+    expect(out.event.properties).toEqual({ slug: 'cooper_12min' })
   })
 
   test('harmlose Schlüssel, die einen gesperrten Wortteil nur ähnlich enthalten, bleiben', () => {
@@ -100,13 +102,15 @@ test.describe('Keine Inhalte, keine fremde Kennung', () => {
     }
   })
 
-  test('lange Zeichenketten werden gekürzt, zu grosse Ereignisse abgelehnt', () => {
-    const out = sanitizeEvent(JSON.stringify({ event_name: 'x_y', properties: { a: 'x'.repeat(500) } }))
-    expect(out.ok && (out.event.properties.a as string).length).toBe(200)
+  test('lange Zeichenketten werden gekürzt, unbekannte Ereignisse abgelehnt', () => {
+    const out = sanitizeEvent(JSON.stringify({ event_name: 'page_view', properties: { path: 'x'.repeat(500) } }))
+    expect(out.ok && (out.event.properties.path as string).length).toBe(200)
 
+    // Ein Ereignis ausserhalb der Liste kommt gar nicht bis zur Grössenprüfung.
     const big: Record<string, string> = {}
     for (let i = 0; i < 29; i++) big[`k${i}`] = 'x'.repeat(199)
     expect(JSON.stringify(big).length).toBeGreaterThan(MAX_PROPERTIES_BYTES)
-    expect(sanitizeEvent(JSON.stringify({ event_name: 'x_y', properties: big }))).toEqual({ ok: false, reason: 'too_large' })
+    expect(sanitizeEvent(JSON.stringify({ event_name: 'x_y', properties: big }))).toEqual({ ok: false, reason: 'unknown_event' })
   })
+
 })

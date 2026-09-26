@@ -1,3 +1,4 @@
+import { buildMetric, type DerivedMetric } from '@/domain/metricContract'
 import { coreFoodByKey, type Per100 } from '@/data/foods'
 import { rollingMean, toDay, window as diaryWindow } from '@/domain/diary'
 import type { StoredDiaryEntry, StoredMeal, StoredMealItem } from '@/lib/store/localStore'
@@ -126,4 +127,32 @@ export function itemFromCore(foodKey: string, grams: number, id: string): Stored
 
 function strip(p: Per100): StoredMealItem['per100'] {
   return { kcal: p.kcal, protein: p.protein, fat: p.fat, carbs: p.carbs, fiber: p.fiber }
+}
+
+/**
+ * Der beobachtete Umsatz nach dem Metric Contract: als Schätzung markiert,
+ * mit Stichprobe (Tage mit Zufuhr) und Vollständigkeit über 28 Tage.
+ */
+
+export function observedTdeeMetric(meals: StoredMeal[], diary: StoredDiaryEntry[], today: string): DerivedMetric<number> & { weightDelta: number | null } {
+  const o = observedTdee(meals, diary, today)
+  const metric = buildMetric(
+    {
+      key: 'observed_tdee',
+      algorithm: 'observed_tdee_energy_balance',
+      algorithmVersion: '1.0.0',
+      unit: 'kcal',
+      minSample: OBSERVED_MIN_DAYS,
+      targetSample: 24,
+      estimate: true,
+    },
+    {
+      value: o?.tdee ?? null,
+      sampleSize: o?.days ?? 0,
+      period: { from: toDay(new Date(Date.parse(`${today}T00:00:00Z`) - (OBSERVED_WINDOW_DAYS - 1) * 86_400_000)), to: today },
+      completeness: o ? o.days / OBSERVED_WINDOW_DAYS : undefined,
+      warnings: ['self_report'],
+    },
+  )
+  return { ...metric, weightDelta: o?.weightDelta ?? null }
 }

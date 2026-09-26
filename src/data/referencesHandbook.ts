@@ -53,7 +53,7 @@ export const HANDBOOK_REFERENCES: ReferenceEntry[] = [
       { upTo: 17.0, label: { de: 'Very poor', en: 'Very poor' } },
       { upTo: null, label: { de: 'Bad', en: 'Bad' } },
     ],
-    source: { study: `SWFT/SWPT-Normtabelle · ${HANDBOOK}`, n: null },
+    source: { study: `SWFT/SWPT-Normtabelle · ${HANDBOOK}`, n: null, license: 'unclear' },
     quality: 'B',
     protocolNote: {
       de: 'Gilt nur für dasselbe SWFT-Protokoll und denselben Index (Summe beider Herzfrequenzen geteilt durch die Wurfzahl).',
@@ -74,7 +74,7 @@ export const HANDBOOK_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 63.23,
     sd: 5.5,
-    source: { study: `MMA physiologische Profile · ${HANDBOOK}`, n: null },
+    source: { study: `MMA physiologische Profile · ${HANDBOOK}`, n: null, license: 'unclear' },
     quality: 'B',
     protocolNote: {
       de: 'Spiroergometrie. Ein aus einem Feldtest geschätzter Wert liegt systematisch daneben.',
@@ -95,7 +95,7 @@ export const HANDBOOK_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 57.09,
     sd: 3.89,
-    source: { study: `Taekwondo physiological profile · ${HANDBOOK}`, n: null },
+    source: { study: `Taekwondo physiological profile · ${HANDBOOK}`, n: null, license: 'unclear' },
     quality: 'B',
     protocolNote: {
       de: 'Spiroergometrie. Ein aus einem Feldtest geschätzter Wert liegt systematisch daneben.',
@@ -116,7 +116,7 @@ export const HANDBOOK_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 49.63,
     sd: 4.95,
-    source: { study: `Regionale Kaderstudien · ${HANDBOOK}`, n: null },
+    source: { study: `Regionale Kaderstudien · ${HANDBOOK}`, n: null, license: 'unclear' },
     quality: 'C',
     protocolNote: {
       de: 'Feld- und Laborschätzungen gemischt. Das Handbuch nennt keine universelle Norm für diese Disziplin.',
@@ -143,7 +143,7 @@ export const HANDBOOK_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 35,
     sd: 18,
-    source: { study: `Franchini et al., Arch Budo 2011 · ${HANDBOOK}`, n: null },
+    source: { study: `Franchini et al., Arch Budo 2011 · ${HANDBOOK}`, n: null, license: 'unclear' },
     quality: 'B',
     protocolNote: {
       de: 'Isometrisch. Der dynamische Test derselben Arbeit ist eine andere Kennzahl und nicht damit zu vermischen.',
@@ -165,7 +165,7 @@ export const HANDBOOK_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 39,
     sd: 14,
-    source: { study: `Franchini et al., Arch Budo 2011 · ${HANDBOOK}`, n: null },
+    source: { study: `Franchini et al., Arch Budo 2011 · ${HANDBOOK}`, n: null, license: 'unclear' },
     quality: 'B',
     protocolNote: {
       de: 'Isometrisch. In dieser Arbeit lag die Regionalliga isometrisch NICHT unter dem Nationalteam — erst der dynamische Test trennte die Klassen.',

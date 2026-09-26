@@ -163,7 +163,13 @@ Status: ✅ gebaut · 🟡 teilweise / hinter Schalter · ⬜ offen.
 | Z-3 | Ernährung mit Open Food Facts und kuratiertem Kern | ✅ (Pro) |
 | Z-4 | Cockpit und Entscheidungslog | ✅ (Pro) |
 | Z-5 | Gesundheit (Labor, Symptome, Zyklus …), Ende-zu-Ende verschlüsselt | 🟡 (Elite; Art.-9-Entscheidung offen) |
-| Z-6 | Peak Week, Sportmodul | ✅ (Elite) |
+| Z-6 | Peak Week (nur Dokumentation), Sportmodul | ✅ (Elite) |
+| Z-7 | Hinweise aus festen Regeln mit Belegen, Sperrfrist, Erledigt/Ausblenden (`/hinweise`) | ✅ (Regeln je nach Merkmal) |
+| Z-8 | Tageskontext: Schlaf, Befinden, Belastung, HRV, Ruhepuls gegen die eigene 28-Tage-Bandbreite | ✅ |
+| Z-9 | Belastung 7/28/90 Tage, zwölf Wochen, Monotonie, Strain (`/belastung`) | ✅ (Plus) |
+| Z-10 | Ermüdungsresistenz aus Tests (frisch gegen ermüdet) im Verlauf | ✅ (Plus) |
+| Z-11 | HYROX-Simulation und Kampfsport-Runden mit Auswertung (`/sportanalyse`) | ✅ (Plus, Trainerstufen ab Start) |
+| Z-12 | Tagesspanne Kohlenhydrate/Protein nach Quelle, Verpflegung je Einheit, Gewichtsband, beobachteter Umsatz | ✅ (Pro) |
 
 ### 7.6 Konto, Sync, Abrechnung
 | ID | Anforderung | Status |
@@ -186,12 +192,12 @@ Quelle der Wahrheit: `src/data/pricing.ts`. Begründung: [preise.md](preise.md).
 | Paket | Preis | Athleten | Kern |
 |---|---|---|---|
 | Kydon (frei) | 0 € | 1 | Messen, Verlauf, Fehlerband, eigenes Profil, Export, Erinnerungen, Tagebuch leicht |
-| Plus | 49 €/Jahr · 4,90 €/Monat | 3 | Prognose, Saisonplan, Anforderungslücke, Perzentil, Sync, Card, Jahresrückblick, Trainingslog |
+| Plus | 49 €/Jahr · 4,90 €/Monat | 3 | Prognose, Saisonplan, Anforderungslücke, Perzentil, Sync, Card, Jahresrückblick, Trainingslog, Belastung, Ermüdungsresistenz, Sportanalyse |
 | Pro | 99 €/Jahr · 9,90 €/Monat | 3 | + Ernährung, Entscheidungslog, Cockpit |
 | Elite | 199 €/Jahr · 19,90 €/Monat | 3 | + Gesundheit, Peak Week, Sportmodul |
 | Kydon Date | 69 € einmalig | 3 | Plus-Funktionen, Zielstandards, PDF-Bericht |
 
-**Trainer** — alle mit Gruppentest, CSV-Import, Wirksamkeitsnachweis, unbegrenzten Berichten, PDF.
+**Trainer** — alle mit Gruppentest, CSV-Import, Wirksamkeitsnachweis, unbegrenzten Berichten, PDF; ab Coach Start zusätzlich die Sportanalyse (HYROX, Kampfsport).
 
 | Stufe | Preis | Gemessene Athleten/Jahr | Trainer |
 |---|---|---|---|
@@ -256,6 +262,8 @@ Vorschlag; Zielwerte werden nach den ersten 90 Tagen Livebetrieb festgelegt.
    `VITE_BILLING=on` und `VITE_FOUNDER_OFFER=on`.
 4. Domain-Aufteilung Landingpage / App festlegen (`VITE_APP_URL`).
 5. Merch-Shop-Adresse (`VITE_MERCH_URL`).
+6. Rechtelage der Referenzquellen klären: 14 offene Fälle in
+   [referenzlizenzen.md](referenzlizenzen.md).
 
 ## 14. Ausblick
 

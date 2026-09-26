@@ -122,6 +122,34 @@ export const FORMULA_REGISTRY: FormulaEntry[] = [
     reference: null,
     note: 'Der Quotient ist üblich; welche Veränderung erkennbar ist, kommt aus der eigenen Streuung (× 1,96·√2), mit einer gesetzten Untergrenze von 3 Prozentpunkten. Ersetzt werden muss die Untergrenze durch einen publizierten Messfehler je Test.',
   },
+  {
+    metricKey: 'fuel_carbs_g_per_kg',
+    source: 'published',
+    formula: 'Kohlenhydrate je Tag nach Belastungsstufe: 3–5 / 5–7 / 6–10 / 8–12 g je kg; Protein 1,2–2,0 g je kg',
+    reference: 'Thomas, Erdman & Burke (2016), ACSM/AND/DC Joint Position Statement; Burke et al. (2011)',
+    note: 'Spannen, keine Ziele. Wie die Stufe aus den Trainingsminuten entsteht, ist unter fuel_load_level als vorläufig geführt.',
+  },
+  {
+    metricKey: 'fuel_load_level',
+    source: 'provisional',
+    formula: 'Mittlere Trainingsminuten je erfasstem Tag der letzten 7 Tage: unter 45 leicht, unter 90 moderat, unter 240 hoch, darüber sehr hoch',
+    reference: null,
+    note: 'Die Quelle beschreibt die Stufen über Dauer und Intensität (etwa 1 h/Tag moderat, 1–3 h/Tag moderat bis hoch, über 4–5 h/Tag). Die Minutengrenzen ohne Intensität sind eine Übersetzung dieser App; eine Fassung mit Session-RPE müsste sie ersetzen.',
+  },
+  {
+    metricKey: 'intra_carbs_g_per_h',
+    source: 'published',
+    formula: 'Kohlenhydrate in der Einheit / Stunden; Spanne 30–60 g/h für 75–150 min, 60–90 g/h darüber',
+    reference: 'Thomas et al. (2016); Jeukendrup (2014)',
+    note: 'Unter 45 min ist keine Zufuhr nötig, 45–75 min kleine Mengen oder Mundspülung. 90 g/h setzen Glukose-Fruktose-Gemische und Gewöhnung voraus.',
+  },
+  {
+    metricKey: 'sweat_rate_l_per_h',
+    source: 'published',
+    formula: '(Körpermasse vorher − nachher + Trinkmenge) / Stunden',
+    reference: 'Sawka et al. (2007), ACSM Position Stand: Exercise and Fluid Replacement',
+    note: 'Urin und Atemwasser sind nicht abgezogen. Ein Masseverlust über 2 % gilt in der Quelle als Marke für eingeschränkte Ausdauerleistung.',
+  },
 ]
 
 export const FORMULA_BY_METRIC = new Map(FORMULA_REGISTRY.map((f) => [f.metricKey, f]))

@@ -15,11 +15,30 @@ export type ReferenceMethod = 'mean_sd' | 'percentiles' | 'bands' | 'anchor' | '
 /** A = Normtabelle/Metaanalyse · B = gute Vergleichsstudie · C/D = Einzelstudie oder indirekt. */
 export type ReferenceQuality = 'A' | 'B' | 'C' | 'D'
 
+/**
+ * Unter welchen Bedingungen die Werte einer Quelle hier stehen dürfen
+ * (Master-Spezifikation, Entscheidung 13). Keine Rechtsauskunft, sondern die
+ * Buchführung darüber, was noch geprüft werden muss — die offenen Fälle
+ * stehen in docs/referenzlizenzen.md.
+ *
+ *   open_access       Artikel unter offener Lizenz (PMC-OA, PLoS: CC BY).
+ *   public_domain     amtlicher Standard einer Behörde, gemeinfrei.
+ *   published_values  einzelne Kennwerte (Mittel, SD) aus einer Arbeit, mit
+ *                     Quelle zitiert — Tatsachen, keine übernommene Tabelle.
+ *   published_table   eine ganze Normtabelle aus einer nicht offenen
+ *                     Veröffentlichung — Übernahme im Umfang zu prüfen.
+ *   unclear           Sekundärquelle, Handbuch, Webseite oder Praxisübliches
+ *                     ohne nachvollziehbare Rechtelage — offen.
+ */
+export type ReferenceLicense = 'open_access' | 'public_domain' | 'published_values' | 'published_table' | 'unclear'
+
 export interface ReferenceSource {
   /** Kurzbezeichnung der Arbeit, wie sie im Bericht erscheint. */
   study: string
   /** Stichprobengrösse, soweit angegeben. */
   n: number | null
+  /** Rechtelage der übernommenen Werte. */
+  license: ReferenceLicense
 }
 
 export interface ReferenceBand {

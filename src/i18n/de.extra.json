@@ -246,7 +246,13 @@
     "sjft_index": "Der Index des Special Judo Fitness Test: beide Herzfrequenzen geteilt durch die Zahl der Würfe. Kleiner ist besser.",
     "swft_index": "Der Index des Special Wrestling Fitness Test, nach derselben Bauart wie der SJFT. Kleiner ist besser.",
     "vo2max_ml_kg_min": "Die geschätzte Sauerstoffaufnahme je Kilogramm Körpergewicht und Minute. Aus einem Feldtest wird sie über eine Formel geschätzt, nicht gemessen — ein Laborwert wäre ein anderer.",
-    "watts_per_kg": "Leistung je Kilogramm Körpergewicht. Für alles, wobei das eigene Gewicht mitbewegt wird, sagt sie mehr als die reine Wattzahl."
+    "watts_per_kg": "Leistung je Kilogramm Körpergewicht. Für alles, wobei das eigene Gewicht mitbewegt wird, sagt sie mehr als die reine Wattzahl.",
+    "total_time_s": "Die Summe aus acht Läufen, acht Stationen und — wenn erfasst — der Roxzone. Nur mit deinen eigenen Simulationen unter denselben Bedingungen vergleichbar.",
+    "run_total_s": "Die acht Läufe zusammen, ohne Stationen und Wechsel.",
+    "station_total_s": "Die acht Stationen zusammen, ohne Läufe und Wechsel.",
+    "run_decay_percent": "Wie viel langsamer die Läufe 7–8 waren als die Läufe 1–2, in Prozent. Kleiner heisst: das Tempo hält über das Rennen.",
+    "total_actions": "Alle Aktionen über die Runden zusammen.",
+    "round_decay_percent": "Wie viel weniger Aktionen die letzte Runde hatte als die erste, in Prozent. Kleiner heisst: bis zum Ende gleichmässig."
   },
   "pricing": {
     "eyebrow": "Profil",
@@ -1465,7 +1471,7 @@
       "HIGH": "gute Belastbarkeit"
     },
     "warning": {
-      "insufficient_data": "zu wenige Daten für einen Wert",
+      "insufficient_data": "noch kein Wert — die Datenlage reicht nicht",
       "missing_input": "eine nötige Angabe fehlt",
       "estimate": "Schätzung",
       "provisional_formula": "vorläufige Rechnung",
@@ -1541,7 +1547,10 @@
       "load7": "Belastung 7 Tage",
       "hrv": "HRV",
       "restingHr": "Ruhepuls",
-      "e1rm": "e1RM"
+      "e1rm": "e1RM",
+      "carbs_per_hour": "Kohlenhydrate je Stunde",
+      "gi_score": "Magen-Darm",
+      "weight_rate_pct_week": "Gewichtsänderung je Woche"
     },
     "why": {
       "profile_incomplete": "Ohne Geschlecht und Geburtsdatum gibt es keine Einordnung gegen Referenzwerte.",
@@ -1561,7 +1570,12 @@
       "e1rm_flat_two_blocks": "Der e1RM ist über zwei Vierwochenblöcke gleich geblieben.",
       "review_date_passed": "Das Überprüfungsdatum ist erreicht.",
       "two_lower_beyond_noise": "Die beiden jüngsten Werte liegen weiter unter deinem früheren Median, als deine Streuung erklärt.",
-      "two_higher_beyond_noise": "Die beiden jüngsten Werte liegen weiter über deinem früheren Median, als deine Streuung erklärt."
+      "two_higher_beyond_noise": "Die beiden jüngsten Werte liegen weiter über deinem früheren Median, als deine Streuung erklärt.",
+      "station_beyond_own_noise": "Die Abweichung ist grösser als deine eigene Streuung an dieser Station.",
+      "sessions_below_band": "Mindestens zwei Einheiten mit Angabe lagen unter der unteren Grenze.",
+      "gi_repeated": "Mindestens zwei Einheiten mit Beschwerden 2 oder 3 von 3.",
+      "two_weeks_below_band": "Zwei Wochen in Folge unter dem Band.",
+      "two_weeks_above_band": "Zwei Wochen in Folge über dem Band."
     },
     "rule": {
       "version": "Regel {{rule}}, Fassung {{version}}",
@@ -1636,6 +1650,30 @@
       "durability_improved": {
         "title": "Ermüdungsresistenz steigt: {{subject}}",
         "body": "Zuletzt {{latest}} % Erhalt, früher üblich {{baseline}} %; das ist mehr als die {{detectable}} Prozentpunkte, die deine Streuung erklärt."
+      },
+      "hyrox_run_decay": {
+        "title": "Laufabfall in der HYROX-Simulation nimmt zu",
+        "body": "In den beiden jüngsten Simulationen blieben von deinem Anfangstempo {{latest}} % übrig, früher üblich {{baseline}} %; erkennbar ist eine Veränderung ab {{detectable}} Prozentpunkten."
+      },
+      "combat_round_decay": {
+        "title": "Rundenabfall nimmt zu",
+        "body": "In den beiden jüngsten Rundentests blieben in der letzten Runde {{latest}} % der ersten, früher üblich {{baseline}} %; erkennbar ist eine Veränderung ab {{detectable}} Prozentpunkten."
+      },
+      "hyrox_station_slower": {
+        "title": "{{station}} langsamer als sonst",
+        "body": "In der jüngsten Simulation {{delta}} % über deinem eigenen Median — mehr als die {{detectable}} %, die deine Streuung an dieser Station erklärt."
+      },
+      "fueling_below_plan": {
+        "title": "Zufuhr in langen Einheiten unter der Spanne",
+        "body": "{{count}} Einheiten der letzten zwei Wochen lagen unter der publizierten Spanne für ihre Dauer (zuletzt {{perHour}} g/h). Ein Anlass, die Verpflegung anzusehen — kein Befund."
+      },
+      "gi_issue_pattern": {
+        "title": "Wiederholt Magen-Darm-Beschwerden",
+        "body": "{{count}} Einheiten der letzten zwei Wochen mit deutlichen Beschwerden. Ein Anlass, Verpflegung und Zeitpunkt anzusehen — bei anhaltenden Beschwerden ärztlich abklären."
+      },
+      "weight_rate_outside_target": {
+        "title": "Gewicht zwei Wochen ausserhalb deines Bands",
+        "body": "Diese Woche {{rate}} %, davor {{previous}} %; dein Band liegt bei {{min}} bis {{max}} % je Woche."
       }
     }
   },
@@ -1722,7 +1760,9 @@
       "reps": "frisch {{fresh}} Wdh., ermüdet {{fatigued}} Wdh.",
       "W": "höchster Sprint {{fresh}} W, letzter {{fatigued}} W",
       "throws_per_s": "Serie A {{fresh}} Würfe/s, Serie C {{fatigued}} Würfe/s",
-      "s_per_km": "frisch {{fresh}} s/km, nach dem Rad {{fatigued}} s/km"
+      "s_per_km": "frisch {{fresh}} s/km, nach dem Rad {{fatigued}} s/km",
+      "s_per_run": "Läufe 1–2 im Mittel {{fresh}} s, Läufe 7–8 {{fatigued}} s",
+      "actions": "erste Runde {{fresh}} Aktionen, letzte {{fatigued}}"
     },
     "verdict": {
       "unknown_one": "{{count}} Messung — für ein Urteil braucht es mindestens sechs.",
@@ -1730,6 +1770,118 @@
       "within_noise": "Innerhalb deiner Streuung: früher üblich {{baseline}} %, erkennbar wäre eine Veränderung ab {{detectable}} Prozentpunkten.",
       "improved": "Beide jüngsten Werte liegen mehr als {{detectable}} Prozentpunkte über deinem früheren Median ({{baseline}} %).",
       "worsened": "Beide jüngsten Werte liegen mehr als {{detectable}} Prozentpunkte unter deinem früheren Median ({{baseline}} %)."
+    }
+  },
+  "sportAnalysis": {
+    "eyebrow": "Sportanalyse",
+    "title": "HYROX und Kampfsport",
+    "intro": "Die jüngste Simulation zerlegt: wo die Zeit bleibt, wie stark das Tempo nachlässt, wie viel in der letzten Runde übrig ist. Verglichen wird nur mit deinen eigenen früheren Simulationen.",
+    "start": "Simulation erfassen",
+    "noNorms": "Keine Normen und keine Zielzeiten: Für Simulationen gibt es keine belastbaren Testwerte, und Rennzeiten hängen an Strecke, Feld und Wechseln. «Langsamer» steht nur da, wo die Abweichung grösser ist als deine eigene Streuung.",
+    "station": {
+      "skiErg": "SkiErg",
+      "sledPush": "Schlitten schieben",
+      "sledPull": "Schlitten ziehen",
+      "burpeeBroadJump": "Burpee Broad Jumps",
+      "row": "Rudern",
+      "farmersCarry": "Farmers Carry",
+      "sandbagLunges": "Sandbag Lunges",
+      "wallBalls": "Wall Balls"
+    },
+    "verdict": {
+      "no_history": "erste Simulation",
+      "within_noise": "ohne Urteil",
+      "slower": "langsamer als deine Streuung erklärt (ab {{detectable}} %)",
+      "faster": "schneller als deine Streuung erklärt (ab {{detectable}} %)"
+    },
+    "hyrox": {
+      "title": "HYROX-Simulation",
+      "empty": "Noch keine Simulation. Erfasst werden acht Läufe und acht Stationen einzeln — daraus entstehen Laufabfall und Stationsanteile.",
+      "of_one": "Vom {{date}} · gegen {{count}} frühere Simulation",
+      "of_other": "Vom {{date}} · gegen {{count}} frühere Simulationen",
+      "total": "Gesamt",
+      "runs": "Läufe",
+      "stations": "Stationen",
+      "roxzone": "Roxzone",
+      "runDecayTitle": "Laufabfall",
+      "runDecay": "Läufe 7–8 gegen 1–2: {{pct}} %",
+      "runsAria": "Zeiten der acht Läufe als Balken",
+      "stationsTitle": "Stationen",
+      "ownLimiter": "Am weitesten über deinem eigenen Median: {{station}}",
+      "largestShare": "Grösster Zeitanteil: {{station}} — eine Beschreibung, noch kein Befund.",
+      "share": "{{pct}} % der Gesamtzeit",
+      "vsMedian": "dein Median {{median}}, {{delta}} %",
+      "method": "Der Median stammt aus deinen früheren Simulationen. Ein Urteil gibt es ab vier früheren Simulationen: dann ist bekannt, wie stark eine Station bei dir von Mal zu Mal schwankt (× 1,96·√2, mindestens 3 %)."
+    },
+    "combat": {
+      "title": "Kampfsport-Runden",
+      "empty": "Noch keine Runden erfasst. Drei bis fünf Runden in Wettkampflänge, jede einzeln gezählt — daraus entsteht der Rundenabfall.",
+      "decay": "Letzte gegen erste Runde: −{{pct}} % · {{date}}",
+      "aria": "Aktionen je Runde als Balken"
+    }
+  },
+  "fueling": {
+    "chip": {
+      "carbs": "{{perHour}} g KH/h"
+    },
+    "form": {
+      "show": "Verpflegung erfassen (freiwillig)",
+      "hide": "Verpflegung ausblenden",
+      "carbs": "Kohlenhydrate in der Einheit",
+      "fluid": "Getrunken",
+      "massBefore": "Körpermasse vorher",
+      "massAfter": "Körpermasse nachher",
+      "gi": "Magen-Darm-Beschwerden",
+      "giNone": "keine",
+      "giStrong": "stark",
+      "why": "Aus Kohlenhydraten und Dauer entsteht die Zufuhr je Stunde, aus der Masse vorher und nachher die Schweissrate. Alles freiwillig."
+    },
+    "level": {
+      "light": "leicht",
+      "moderate": "moderat",
+      "high": "hoch",
+      "very_high": "sehr hoch"
+    },
+    "need": {
+      "title": "Bedarf nach Belastung",
+      "level": "Belastungsstufe {{level}}: im Mittel {{minutes}} min Training je erfasstem Tag ({{days}} von 7 Tagen erfasst).",
+      "noWeight": "Ohne Körpermasse keine Spanne — trag im Tagebuch dein Gewicht ein.",
+      "noDiary": "Ohne Tagebucheintrag in den letzten sieben Tagen ist die Belastung unbekannt.",
+      "eaten": "Heute gegessen: {{value}} g",
+      "source": "Spannen je kg Körpermasse nach Thomas, Erdman & Burke (2016, ACSM-Positionspapier) und Burke et al. (2011): Kohlenhydrate 3–5 / 5–7 / 6–10 / 8–12 g/kg nach Stufe, Protein 1,2–2,0 g/kg. Die Stufe aus den Trainingsminuten ist eine Festlegung von KYDON. Ein Massstab, kein Ziel — was du isst, entscheidest du."
+    },
+    "band": {
+      "none": "unter 45 min: keine Zufuhr nötig",
+      "small": "45–75 min: kleine Mengen oder Mundspülung",
+      "range": "Spanne für diese Dauer: {{lo}}–{{hi}} g/h"
+    },
+    "sessions": {
+      "title": "Verpflegung in Einheiten",
+      "why": "Die letzten 28 Tage, jüngste zuerst.",
+      "empty": "Noch keine Einheit mit Verpflegung. Beim Anlegen einer Einheit im Tagebuch lässt sie sich aufklappen.",
+      "perHour": "{{value}} g/h",
+      "below": "unter der Spanne",
+      "sweat": "Schweissrate {{rate}} l/h, Masseverlust {{loss}} %",
+      "lossAbove2": "über 2 % der Körpermasse",
+      "gi": "Magen-Darm {{score}} von 3",
+      "source": "Spannen nach Thomas et al. (2016) und Jeukendrup (2014); 90 g/h setzen Glukose-Fruktose-Gemische und Gewöhnung voraus. Schweissrate und die 2-%-Marke nach Sawka et al. (2007, ACSM). Urin und Atemwasser sind nicht abgezogen."
+    },
+    "weight": {
+      "title": "Gewichtsband",
+      "why": "Deine gewünschte Veränderung je Woche, in Prozent der Körpermasse. KYDON zeigt, ob die Woche darin liegt — mehr nicht.",
+      "thisWeek": "Diese Woche",
+      "lastWeek": "Woche davor",
+      "needs": "Dafür braucht es je zwei Wägungen in beiden Wochen.",
+      "position": {
+        "below": "Unter deinem Band ({{min}} bis {{max}}).",
+        "within": "Innerhalb deines Bands ({{min}} bis {{max}}).",
+        "above": "Über deinem Band ({{min}} bis {{max}})."
+      },
+      "min": "Band von (% je Woche)",
+      "max": "Band bis (% je Woche)",
+      "unit": "%",
+      "clear": "Band entfernen",
+      "note": "Das Band setzt du selbst, zum Beispiel mit deiner Trainerin oder Ernährungsberatung. KYDON schlägt keines vor. Ein Hinweis erscheint erst, wenn zwei Wochen in Folge auf derselben Seite liegen."
     }
   }
 }

@@ -38,6 +38,7 @@ export function InsightCard({
   const values = Object.fromEntries(
     Object.entries(insight.values).map(([k, v]) => [k, typeof v === 'number' ? formatNumber(v, locale, Number.isInteger(v) ? 0 : 1) : v]),
   )
+  if (typeof insight.values.station === 'string') values.station = t(`sportAnalysis.station.${insight.values.station}`)
   if (insight.ruleId === 'decision_review_due' && typeof insight.values.reviewOn === 'string' && insight.values.reviewOn) {
     values.reviewOn = formatDate(`${insight.values.reviewOn}T12:00:00Z`, locale)
   }

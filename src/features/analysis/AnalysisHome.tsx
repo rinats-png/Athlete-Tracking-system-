@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowRight, CalendarRange, Gauge, Play, Users, Activity, Lightbulb } from 'lucide-react'
+import { ArrowRight, CalendarRange, Gauge, Play, Users, Activity, Lightbulb, Timer } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { RadarProfile } from '@/components/charts/RadarProfile'
@@ -237,6 +237,17 @@ export function AnalysisHome() {
           <span>
             <span className="block text-[14px] font-medium">{t('load.title')}</span>
             <span className="block text-[12px] text-ink-secondary">{t('load.eyebrow')}</span>
+          </span>
+        </span>
+        <ArrowRight size={16} className="text-ink-muted" aria-hidden />
+      </Link>
+
+      <Link to="/sportanalyse" className="mt-4 flex min-h-14 items-center justify-between gap-3 border border-line bg-surface px-4 py-3 hover:bg-accent-quiet">
+        <span className="flex items-center gap-3">
+          <Timer size={18} className="text-ink-muted" aria-hidden />
+          <span>
+            <span className="block text-[14px] font-medium">{t('sportAnalysis.title')}</span>
+            <span className="block text-[12px] text-ink-secondary">{t('sportAnalysis.eyebrow')}</span>
           </span>
         </span>
         <ArrowRight size={16} className="text-ink-muted" aria-hidden />

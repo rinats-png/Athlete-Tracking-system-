@@ -10,12 +10,14 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { entryOn, rollingMean, toDay } from '@/domain/diary'
-import { bmrMifflin, dayMacros, itemMacros, mealMacros, microCoverage, observedTdee, PAL_LEVELS, tdeeFromBmr, MIFFLIN_ERROR_PCT, type Pal } from '@/domain/nutrition'
+import { bmrMifflin, dayMacros, itemMacros, mealMacros, microCoverage, observedTdee, observedTdeeMetric, PAL_LEVELS, tdeeFromBmr, MIFFLIN_ERROR_PCT, type Pal } from '@/domain/nutrition'
 import { newId } from '@/lib/store/localStore'
 import type { StoredMeal, StoredMealItem } from '@/lib/store/localStore'
 import { ageFromBirthDate, formatDate, formatNumber } from '@/lib/format'
 import { FoodSearch } from './FoodSearch'
 import { MacroBar } from './MacroBar'
+import { FuelingPanels } from './FuelingPanels'
+import { MetricMeta } from '@/features/shared/MetricMeta'
 
 const SLOTS: StoredMeal['slot'][] = ['breakfast', 'lunch', 'dinner', 'snack', 'pre', 'intra', 'post']
 
@@ -52,6 +54,7 @@ export function NutritionScreen() {
   const bmr = bmrMifflin({ weightKg: weight, heightCm: data.profile.heightCm, ageYears: ageFromBirthDate(data.profile.birthDate), sex: data.profile.sex })
   const tdee = tdeeFromBmr(bmr, nutrition.pal)
   const observed = useMemo(() => observedTdee(meals, diary, today), [meals, diary, today])
+  const observedMetric = useMemo(() => observedTdeeMetric(meals, diary, today), [meals, diary, today])
   const intake28 = useMemo(() => {
     const days: number[] = []
     for (let i = 0; i < 28; i++) {
@@ -171,6 +174,9 @@ export function NutritionScreen() {
         </div>
       </div>
 
+      {/* --- Bedarf, Verpflegung, Gewichtsband ---------------------------- */}
+      <FuelingPanels day={day} weightKg={weight ?? null} totals={totals} />
+
       {/* --- Referenz, kein Ziel ------------------------------------------ */}
       <Panel className="mb-4" data-testid="nutrition-reference">
         <PanelHeader title={t('nutrition.reference.title')} subtitle={t('nutrition.reference.why')} />
@@ -193,6 +199,7 @@ export function NutritionScreen() {
             options={PAL_LEVELS.map((p) => ({ value: String(p), label: t(`nutrition.reference.palLevels.${String(p).replace('.', '_')}`), hint: String(p) }))}
             className="flex-wrap"
           />
+          <MetricMeta metric={observedMetric} className="mb-2" />
           <p className="mt-2 text-[12px] leading-relaxed text-ink-secondary">{t('nutrition.reference.formula', { error: MIFFLIN_ERROR_PCT })}</p>
           <p className="mt-1 text-[11px] text-ink-muted">{t('nutrition.reference.noTarget')}</p>
         </div>

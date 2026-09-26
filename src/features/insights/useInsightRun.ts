@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react'
+import { trackEvent } from '@/lib/analytics'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useBilling } from '@/features/billing/BillingProvider'
 import { applyInsightAction, ruleById, runInsights, type Insight, type InsightAction } from '@/domain/insightEngine'
@@ -50,6 +51,8 @@ export function useInsightRun() {
     (insight: Insight, action: InsightAction) => {
       const cooldown = ruleById(insight.ruleId)?.cooldownDays ?? 7
       updateInsightState((state) => applyInsightAction(state, insight, action, cooldown))
+      // Welche Regeln Menschen für nützlich halten — nur Regel und Handlung, kein Inhalt.
+      if (action !== 'seen') trackEvent('insight_action', { rule: insight.ruleId, action })
     },
     [updateInsightState],
   )

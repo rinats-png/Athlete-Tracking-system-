@@ -6,6 +6,8 @@ import { completeness, toDay } from '@/domain/diary'
 import { recommendations, type Recommendation } from '@/domain/insights'
 import { loadSpike, loadSummary } from '@/domain/load'
 import { DURABILITY_RULES } from '@/domain/durability'
+import { RACE_SIM_RULES } from '@/domain/raceSim'
+import { FUELING_RULES } from '@/domain/fueling'
 import { confidenceLabel, type ConfidenceLabel } from '@/domain/metricContract'
 import { daysOutside, readinessContext } from '@/domain/readinessContext'
 import { blockCompare, exerciseSummary } from '@/domain/training'
@@ -516,6 +518,8 @@ export const INSIGHT_RULES: InsightRule[] = [
   strengthPlateau,
   decisionReviewDue,
   ...DURABILITY_RULES,
+  ...RACE_SIM_RULES,
+  ...FUELING_RULES,
 ]
 
 /** Weitere Regeln aus Fachmodulen (Durability, HYROX, Ernährung) melden sich hier an. */

@@ -18,6 +18,8 @@ import type { StoredResult } from '@/lib/store/localStore'
  *   - SJFT: Wurfrate der Serie C (30 s) gegen Serie A (15 s)
  *   - Brick Rad → Lauf: Laufpace nach dem Rad gegen die frische 5-km-Pace
  *     aus höchstens 56 Tagen davor
+ *   - HYROX-Simulation: Mittel der Läufe 1–2 gegen Mittel der Läufe 7–8 (Zeit)
+ *   - Kampfsport-Runden: letzte gegen erste Runde (Aktionen)
  *
  * RICHTUNG: Erhalt ist immer «höher ist besser» — beim Brick ist die Pace
  * deshalb umgedreht (frisch / ermüdet).
@@ -39,8 +41,27 @@ export const DURABILITY_MIN_BASELINE = 4
 /** Höchster Abstand zwischen frischem 5-km-Lauf und Brick-Test. */
 export const BRICK_FRESH_MAX_DAYS = 56
 
-export type DurabilitySource = 'fatigue_circuit_4x30s' | 'repeated_sprint_bike' | 'special_judo_fitness_test' | 'brick_bike_run'
-export const DURABILITY_SOURCES: DurabilitySource[] = ['fatigue_circuit_4x30s', 'repeated_sprint_bike', 'special_judo_fitness_test', 'brick_bike_run']
+export type DurabilitySource =
+  | 'fatigue_circuit_4x30s'
+  | 'repeated_sprint_bike'
+  | 'special_judo_fitness_test'
+  | 'brick_bike_run'
+  | 'hyrox_simulation'
+  | 'combat_rounds'
+export const DURABILITY_SOURCES: DurabilitySource[] = [
+  'fatigue_circuit_4x30s',
+  'repeated_sprint_bike',
+  'special_judo_fitness_test',
+  'brick_bike_run',
+  'hyrox_simulation',
+  'combat_rounds',
+]
+/**
+ * Die beiden Wettkampfsimulationen haben eigene Regeln (raceSim.ts,
+ * Merkmal `sportAnalysis`); die allgemeinen Durability-Regeln lassen sie aus,
+ * damit derselbe Befund nicht zweimal erscheint.
+ */
+export const SPORT_SIM_SOURCES: DurabilitySource[] = ['hyrox_simulation', 'combat_rounds']
 
 export interface DurabilityPoint {
   source: DurabilitySource
@@ -114,6 +135,22 @@ export function durabilityPoints(results: StoredResult[]): DurabilityPoint[] {
         const a = num(v.throwsA)
         const c = num(v.throwsC)
         p = point(r, a == null ? null : a / 15, c == null ? null : c / 30, 'throws_per_s', r.testSlug)
+        break
+      }
+      case 'hyrox_simulation': {
+        const early = [v.run1Seconds, v.run2Seconds].map(num)
+        const late = [v.run7Seconds, v.run8Seconds].map(num)
+        if (early.every((x) => x != null) && late.every((x) => x != null)) {
+          const e = (early[0]! + early[1]!) / 2
+          const l = (late[0]! + late[1]!) / 2
+          // Zeit: kleiner ist schneller — Erhalt ist frisch / ermüdet.
+          if (e > 0 && l > 0) p = { source: r.testSlug, resultId: r.id, day: r.performedAt.slice(0, 10), retentionPct: round1((e / l) * 100), fresh: e, fatigued: l, unit: 's_per_run' }
+        }
+        break
+      }
+      case 'combat_rounds': {
+        const rounds = [v.round1Actions, v.round2Actions, v.round3Actions, v.round4Actions, v.round5Actions].map(num).filter((x): x is number => x != null)
+        if (rounds.length >= 3) p = point(r, rounds[0], rounds[rounds.length - 1], 'actions', r.testSlug)
         break
       }
       case 'brick_bike_run': {
@@ -204,7 +241,7 @@ function durabilityRule(id: 'durability_improved' | 'durability_worsened', want:
     evaluate: (ctx) => {
       const hits: RuleHit[] = []
       for (const series of durabilityOverview(ctx.results)) {
-        if (series.verdict !== want) continue
+        if (series.verdict !== want || SPORT_SIM_SOURCES.includes(series.source)) continue
         const recent = series.points.slice(-2)
         hits.push({
           subject: series.source,

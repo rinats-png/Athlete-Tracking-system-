@@ -19,11 +19,14 @@ import '@fontsource/ibm-plex-mono/latin-500.css'
 import './styles/theme.css'
 import { i18nReady } from './i18n'
 import { setupPwaUpdates } from './lib/pwaUpdate'
+import { installErrorCapture } from './lib/errorCapture'
 import { ThemeProvider } from './lib/theme'
 import App from './App'
 
 // Muss vor dem Rendern laufen: die Registrierung soll nicht auf React warten.
 setupPwaUpdates()
+// Eigene Fehlererfassung — schickt nur mit Einwilligung (lib/errorCapture.ts).
+installErrorCapture()
 
 // Die Startsprache muss stehen, bevor gerendert wird — sonst sähe ein
 // englischer Start für einen Moment deutschen Text. Deutsch ist bereits da,

@@ -1,4 +1,5 @@
 import { supabaseConfig, getSupabase, isSupabaseConfigured } from '@/lib/supabase/client'
+import { allowProperties } from '@/lib/analyticsEvents'
 
 /**
  * Nutzungsstatistik — die Seite im Browser.
@@ -142,6 +143,13 @@ function dispatch(url: string, body: string): void {
  */
 export function trackEvent(eventName: string, properties: Record<string, unknown> = {}): void {
   if (consentState() !== 'granted') return
+  // Nur Ereignisse aus der Liste, nur deren Eigenschaften (analyticsEvents.ts).
+  const allowed = allowProperties(eventName, properties)
+  if (allowed == null) {
+    if (import.meta.env.DEV) console.warn(`[analytics] Ereignis nicht in der Liste: ${eventName}`)
+    return
+  }
+  properties = allowed
   const url = endpoint()
   if (!url) return
   const here = typeof location !== 'undefined' ? location.pathname : ''

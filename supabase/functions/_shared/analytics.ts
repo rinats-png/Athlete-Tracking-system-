@@ -6,7 +6,9 @@
  * deshalb liegt sie hier und nicht in `track/index.ts`: So lässt sie sich im
  * Browser-Testlauf prüfen, ohne eine Edge Function zu starten.
  *
- * DREI DINGE WERDEN HIER GARANTIERT, UNABHÄNGIG VOM CLIENT:
+ * VIER DINGE WERDEN HIER GARANTIERT, UNABHÄNGIG VOM CLIENT:
+ *
+ *   0. NUR BEKANNTE EREIGNISSE, NUR ERLAUBTE EIGENSCHAFTEN (eventRegistry.ts).
  *
  *   1. NICHTS AUS DER GESUNDHEITSSCHICHT. Ein Ereignis, dessen Pfad unter
  *      /gesundheit, /peakweek oder /freigaben liegt, wird verworfen — ganz,
@@ -20,6 +22,8 @@
  *      klingen, fliegen raus; lange Zeichenketten werden gekürzt. Ein
  *      Ereignis sagt, DASS etwas passierte, nicht WAS darin stand.
  */
+
+import { allowProperties } from './eventRegistry.ts'
 
 export const EVENT_NAME = /^[a-z][a-z0-9_]{1,63}$/
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
@@ -63,7 +67,7 @@ export interface CleanEvent {
   access_token: string | null
 }
 
-export type Outcome = { ok: true; event: CleanEvent } | { ok: false; reason: 'bad_json' | 'bad_name' | 'blocked_path' | 'too_large' }
+export type Outcome = { ok: true; event: CleanEvent } | { ok: false; reason: 'bad_json' | 'bad_name' | 'unknown_event' | 'blocked_path' | 'too_large' }
 
 const normKey = (k: string) => k.toLowerCase().replace(/[_\-\s]/g, '')
 
@@ -135,7 +139,10 @@ export function sanitizeEvent(raw: unknown): Outcome {
   const rawProps = b.properties && typeof b.properties === 'object' && !Array.isArray(b.properties) ? b.properties : {}
   if (carriesBlockedPath(rawProps)) return { ok: false, reason: 'blocked_path' }
 
-  const properties = (clean(rawProps, 0) ?? {}) as Record<string, unknown>
+  // Erste Schicht: die Positivliste. Zweite Schicht: die Sperrwörter.
+  const allowed = allowProperties(name, rawProps as Record<string, unknown>)
+  if (allowed == null) return { ok: false, reason: 'unknown_event' }
+  const properties = (clean(allowed, 0) ?? {}) as Record<string, unknown>
   if (JSON.stringify(properties).length > MAX_PROPERTIES_BYTES) return { ok: false, reason: 'too_large' }
 
   const session = typeof b.session_id === 'string' && UUID.test(b.session_id) ? b.session_id.toLowerCase() : null

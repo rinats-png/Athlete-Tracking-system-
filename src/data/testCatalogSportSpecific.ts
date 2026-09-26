@@ -1,3 +1,4 @@
+import { RACE_SIM_TESTS } from './testCatalogRaceSim'
 import type { TestBlueprint, TestField } from './testCatalog'
 import type { EquipmentId } from './equipment'
 import {
@@ -714,4 +715,5 @@ export const SPORT_SPECIFIC_TESTS: TestBlueprint[] = [
   ...ENDURANCE_SPORT_TESTS,
   ...SWIM_TESTS,
   ...TRIATHLON_TESTS,
+  ...RACE_SIM_TESTS,
 ]

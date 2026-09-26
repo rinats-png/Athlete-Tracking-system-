@@ -392,6 +392,18 @@ export const TEST_CLASSIFICATION: Record<string, TestClassification> = {
     dimensionMetrics: { endurance: 'thresholdPaceS100', strength_endurance: 'strokeLengthM' },
     direction: 'lower_is_better',
   },
+  hyrox_simulation: {
+    category: 'endurance',
+    dimension: 'strength_endurance',
+    dimensionMetrics: { strength_endurance: 'total_time_s', endurance: 'run_total_s' },
+    direction: 'lower_is_better',
+  },
+  combat_rounds: {
+    category: 'conditioning',
+    dimension: 'strength_endurance',
+    dimensionMetrics: { strength_endurance: 'total_actions' },
+    direction: 'higher_is_better',
+  },
   brick_bike_run: {
     category: 'endurance',
     dimension: 'endurance',

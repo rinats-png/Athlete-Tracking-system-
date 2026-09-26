@@ -255,17 +255,45 @@
     "en": "United States, under standard contractual clauses",
     "de": "Vereinigte Staaten, mit Standardvertragsklauseln"
   },
-  "Coach S": {
-    "en": "Coach S",
-    "de": "Coach S"
+  "Kydon": {
+    "en": "Kydon",
+    "de": "Kydon"
   },
-  "Coach M": {
-    "en": "Coach M",
-    "de": "Coach M"
+  "Kydon Plus": {
+    "en": "Kydon Plus",
+    "de": "Kydon Plus"
   },
-  "Coach L": {
-    "en": "Coach L",
-    "de": "Coach L"
+  "Kydon Pro": {
+    "en": "Kydon Pro",
+    "de": "Kydon Pro"
+  },
+  "Kydon Elite": {
+    "en": "Kydon Elite",
+    "de": "Kydon Elite"
+  },
+  "Kydon Date": {
+    "en": "Kydon Date",
+    "de": "Kydon Termin"
+  },
+  "Coach Free": {
+    "en": "Coach Free",
+    "de": "Coach Free"
+  },
+  "Coach Start": {
+    "en": "Coach Start",
+    "de": "Coach Start"
+  },
+  "Coach Team": {
+    "en": "Coach Team",
+    "de": "Coach Team"
+  },
+  "Coach Pro": {
+    "en": "Coach Pro",
+    "de": "Coach Pro"
+  },
+  "Coach Club": {
+    "en": "Coach Club",
+    "de": "Coach Club"
   },
   "Club and federation": {
     "en": "Club and federation",
@@ -298,18 +326,6 @@
   "The report goes to paying clients under your own branding.": {
     "en": "The report goes to paying clients under your own branding.",
     "de": "Der Report geht mit eigenem Logo an zahlende Kunden."
-  },
-  "Single report": {
-    "en": "Single report",
-    "de": "Einzelreport"
-  },
-  "Four reports": {
-    "en": "Four reports",
-    "de": "Vier Reports"
-  },
-  "Ten reports": {
-    "en": "Ten reports",
-    "de": "Zehn Reports"
   },
   "endurance": {
     "en": "endurance",
@@ -2434,6 +2450,46 @@
   "Bike or ergometer, running route": {
     "en": "Bike or ergometer, running route",
     "de": "Rad oder Ergometer, Laufstrecke"
+  },
+  "HYROX simulation": {
+    "en": "HYROX simulation",
+    "de": "HYROX-Simulation"
+  },
+  "HYROX sim": {
+    "en": "HYROX sim",
+    "de": "HYROX-Sim."
+  },
+  "Eight runs and eight stations, each time recorded separately. The finding lies in the course: how much the runs slow down and which station takes a growing share of the time — against your own earlier simulations.": {
+    "en": "Eight runs and eight stations, each time recorded separately. The finding lies in the course: how much the runs slow down and which station takes a growing share of the time — against your own earlier simulations.",
+    "de": "Acht Läufe und acht Stationen, jede Zeit einzeln. Die Aussage steckt im Verlauf: wie stark die Läufe nachlassen und welche Station einen wachsenden Anteil der Zeit frisst — gegen deine eigenen früheren Simulationen."
+  },
+  "Race format: 1 km run, then one station, eight times — SkiErg 1000 m, sled push 50 m, sled pull 50 m, burpee broad jumps 80 m, row 1000 m, farmers carry 200 m, sandbag lunges 100 m, wall balls 100. Time every run and every station separately; optionally the transitions in total as roxzone. Keep loads, course and surface constant across sessions — otherwise the trend compares conditions instead of you.": {
+    "en": "Race format: 1 km run, then one station, eight times — SkiErg 1000 m, sled push 50 m, sled pull 50 m, burpee broad jumps 80 m, row 1000 m, farmers carry 200 m, sandbag lunges 100 m, wall balls 100. Time every run and every station separately; optionally the transitions in total as roxzone. Keep loads, course and surface constant across sessions — otherwise the trend compares conditions instead of you.",
+    "de": "Format wie im Wettkampf: 1 km Lauf, dann eine Station, achtmal — SkiErg 1000 m, Schlitten schieben 50 m, Schlitten ziehen 50 m, Burpee Broad Jumps 80 m, Rudern 1000 m, Farmers Carry 200 m, Sandbag Lunges 100 m, Wall Balls 100. Jeden Lauf und jede Station einzeln stoppen; die Wechselzeiten auf Wunsch gesamt als Roxzone. Lasten, Strecke und Untergrund über die Termine gleich halten — sonst vergleicht der Verlauf die Bedingungen statt dich."
+  },
+  "Running route or treadmill, SkiErg, sled, rowing erg, carry weights, sandbag, wall ball, stopwatch": {
+    "en": "Running route or treadmill, SkiErg, sled, rowing erg, carry weights, sandbag, wall ball, stopwatch",
+    "de": "Laufstrecke oder Laufband, SkiErg, Schlitten, Rudergerät, Gewichte für den Carry, Sandsack, Wall Ball, Stoppuhr"
+  },
+  "Combat rounds": {
+    "en": "Combat rounds",
+    "de": "Kampfsport-Runden"
+  },
+  "Rounds": {
+    "en": "Rounds",
+    "de": "Runden"
+  },
+  "Three to five rounds at competition length with the same technical action, each round counted separately. The finding is not the total but how much is left in the last round.": {
+    "en": "Three to five rounds at competition length with the same technical action, each round counted separately. The finding is not the total but how much is left in the last round.",
+    "de": "Drei bis fünf Runden in Wettkampflänge mit derselben technischen Aktion, jede Runde einzeln gezählt. Nicht die Gesamtzahl ist die Aussage, sondern wie viel in der letzten Runde noch übrig ist."
+  },
+  "Round length and rest as in your own competition (e.g. 3 × 3 min, 1 min rest). In each round as many clean actions as possible — combinations on the bag, entries on a partner or takedowns — counted per round. Keep action, partner and round format constant across sessions.": {
+    "en": "Round length and rest as in your own competition (e.g. 3 × 3 min, 1 min rest). In each round as many clean actions as possible — combinations on the bag, entries on a partner or takedowns — counted per round. Keep action, partner and round format constant across sessions.",
+    "de": "Rundenlänge und Pause wie im eigenen Wettkampf (z. B. 3 × 3 min, 1 min Pause). In jeder Runde so viele saubere Aktionen wie möglich — Schlagkombinationen am Sack, Eindreher am Partner oder Takedowns — und je Runde einzeln zählen. Aktion, Partner und Rundenformat über die Termine gleich halten."
+  },
+  "Stopwatch, bag or partner, counter or a partner who counts": {
+    "en": "Stopwatch, bag or partner, counter or a partner who counts",
+    "de": "Stoppuhr, Sandsack oder Partner, Zähler oder zählender Partner"
   },
   "Special wrestling fitness test": {
     "en": "Special wrestling fitness test",

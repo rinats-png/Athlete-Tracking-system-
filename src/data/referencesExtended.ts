@@ -1,4 +1,4 @@
-import type { ReferenceBand, ReferenceEntry } from './referenceModel'
+import type { ReferenceBand, ReferenceEntry, ReferenceSource } from './referenceModel'
 
 /**
  * Referenzwerte aus der erweiterten Quelltabelle.
@@ -29,9 +29,11 @@ import type { ReferenceBand, ReferenceEntry } from './referenceModel'
 
 // --- Wiederkehrende Bausteine ------------------------------------------------
 
-const SJFT_SOURCE = {
+const SJFT_SOURCE: ReferenceSource = {
   study: 'Sterkowicz-Przybycień & Franchini 2018, J Exerc Rehabil (Kadetten/Junioren)',
   n: 252,
+  // J Exerc Rehabil erscheint offen (CC BY-NC) und liegt in PMC.
+  license: 'open_access',
 }
 
 const LAB_NOTE = {
@@ -252,7 +254,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       { upTo: 34, label: L.excellent },
       { upTo: null, label: { de: 'Superior', en: 'Superior' } },
     ],
-    source: { study: 'Sensitivity of Field Tests for Wrestlers Specific Fitness (PMC9465761)', n: null },
+    source: { study: 'Sensitivity of Field Tests for Wrestlers Specific Fitness (PMC9465761)', n: null, license: 'open_access' },
     quality: 'B',
   },
 
@@ -287,7 +289,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
         { upTo: row.above, label: { de: 'Überdurchschnittlich', en: 'Above average' } },
         { upTo: null, label: L.excellent },
       ],
-      source: { study: 'Cooper 1968, JAMA — Originalnormen des 12-Minuten-Laufs', n: null },
+      source: { study: 'Cooper 1968, JAMA — Originalnormen des 12-Minuten-Laufs', n: null, license: 'published_table' },
       quality: 'A',
     }),
   ) as ReferenceEntry[]),
@@ -316,7 +318,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'percentiles',
     values: [48.0, 55.2, 61.8, 66.3],
     percentileAnchors: [50, 75, 90, 95],
-    source: { study: 'Cooper Institute / ACSM, Laufband-Referenztabellen', n: 80000 },
+    source: { study: 'Cooper Institute / ACSM, Laufband-Referenztabellen', n: 80000, license: 'published_table' },
     quality: 'A',
     protocolNote: {
       de: 'Belegt sind P50 bis P95. Unterhalb und oberhalb dieser Spanne gibt dieser Eintrag kein Perzentil — dort antworten die anderen Referenzen. Zusätzlich gilt: die Quelle misst auf dem Laufband im Labor, ein Feldtestwert wie Cooper oder Beep-Test ist eine Schätzung.',
@@ -337,7 +339,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'percentiles',
     values: [37.6, 56.0],
     percentileAnchors: [50, 95],
-    source: { study: 'Cooper Institute / ACSM, Laufband-Referenztabellen', n: 80000 },
+    source: { study: 'Cooper Institute / ACSM, Laufband-Referenztabellen', n: 80000, license: 'published_table' },
     quality: 'A',
     protocolNote: {
       de: 'Belegt sind bei den Frauen nur P50 und P95. Zwischen beiden wird linear interpoliert; ausserhalb gibt dieser Eintrag kein Perzentil, dort antworten die anderen Referenzen. Die Einordnung ist damit gröber als bei den Männern.',
@@ -363,7 +365,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       { upTo: 4.6, label: L.middle },
       { upTo: null, label: { de: 'Poor', en: 'Poor' } },
     ],
-    source: { study: 'Allgemeine 30-m-Sprintnormen (brianmac)', n: null },
+    source: { study: 'Allgemeine 30-m-Sprintnormen (brianmac)', n: null, license: 'unclear' },
     quality: 'C',
   },
   {
@@ -383,7 +385,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       { upTo: 5.0, label: L.middle },
       { upTo: null, label: { de: 'Poor', en: 'Poor' } },
     ],
-    source: { study: 'Allgemeine 30-m-Sprintnormen (brianmac)', n: null },
+    source: { study: 'Allgemeine 30-m-Sprintnormen (brianmac)', n: null, license: 'unclear' },
     quality: 'C',
   },
   // ======================= AEROBE KAPAZITÄT JE KAMPFSPORT ==================
@@ -411,7 +413,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       method: 'mean_sd',
       mean: row.mean,
       sd: row.sd,
-      source: { study: 'Kirk, Querschnittsvergleich VO2max im Kampfsport (UCLan)', n: null },
+      source: { study: 'Kirk, Querschnittsvergleich VO2max im Kampfsport (UCLan)', n: null, license: 'published_values' },
       quality: 'C',
       protocolNote: LAB_NOTE,
     }),
@@ -431,7 +433,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 57.09,
     sd: 3.89,
-    source: { study: 'Wheeler et al. 2012, Elite-Taekwondo', n: null },
+    source: { study: 'Wheeler et al. 2012, Elite-Taekwondo', n: null, license: 'published_values' },
     quality: 'B',
     protocolNote: {
       de: 'Laborwert. Shuttle-Run-Tests unterschätzen die VO2max bei Elite-Taekwondo-Athleten laut der Quelle um rund 16 % — ein Beep-Test-Wert liegt hier systematisch zu niedrig.',
@@ -450,7 +452,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 55.5,
     sd: 7.3,
-    source: { study: 'Schick et al. 2010, MMA-Athleten', n: null },
+    source: { study: 'Schick et al. 2010, MMA-Athleten', n: null, license: 'published_values' },
     quality: 'B',
     protocolNote: {
       de: 'Die Studienlage zu MMA streut weit: dieselbe Quelltabelle nennt 60 (Alm & Yu), 55,5 (diese Arbeit), 51,3 und 48,1–53,4 für Weltmeisterkohorten. Der Bestand führt daneben eine ältere Elitekohorte mit 63,2 — sie steht als zweiter Vergleich daneben. Wer sich einordnet, sollte beide sehen. Zusätzlich gilt: Laborwert, ein Feldtestwert ist eine Schätzung.',
@@ -469,7 +471,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 53.0,
     sd: 6.6,
-    source: { study: 'Chaabene et al., KSAT-Validierung (PMC4594135)', n: null },
+    source: { study: 'Chaabene et al., KSAT-Validierung (PMC4594135)', n: null, license: 'open_access' },
     quality: 'B',
     protocolNote: LAB_NOTE,
   },
@@ -497,7 +499,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       method: 'mean_sd',
       mean: row.mean,
       sd: row.sd,
-      source: { study: 'SMI-Kaderstudie Pencak Silat (UNJA Repository 2025)', n: null },
+      source: { study: 'SMI-Kaderstudie Pencak Silat (UNJA Repository 2025)', n: null, license: 'unclear' },
       quality: 'C',
       protocolNote: {
         de: 'Regionalkader, mit dem Beep-Test geschätzt. Nationalkaderwerte derselben Quelltabelle liegen rund 16 ml/kg/min höher — die Einordnung sagt also, wo jemand innerhalb des Regionalkaders steht, nicht innerhalb des Sports.',
@@ -519,7 +521,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 32.6,
     sd: 2.7,
-    source: { study: 'Kirk, MMA-Elitekohorte (UCLan)', n: null },
+    source: { study: 'Kirk, MMA-Elitekohorte (UCLan)', n: null, license: 'published_values' },
     quality: 'C',
   },
   {
@@ -534,7 +536,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 29.8,
     sd: 4.5,
-    source: { study: 'Kirk, MMA-Elitekohorte (UCLan)', n: null },
+    source: { study: 'Kirk, MMA-Elitekohorte (UCLan)', n: null, license: 'published_values' },
     quality: 'C',
   },
 
@@ -554,7 +556,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 53,
     sd: 7,
-    source: { study: 'Griffkraft erfahrener BJJ-Athleten (Systematic Review, PMC5306420)', n: 15 },
+    source: { study: 'Griffkraft erfahrener BJJ-Athleten (Systematic Review, PMC5306420)', n: 15, license: 'open_access' },
     quality: 'B',
   },
 
@@ -584,7 +586,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       { upTo: 4.2, label: { de: 'Kategorie B', en: 'Category B' } },
       { upTo: null, label: { de: 'Kategorie A', en: 'Category A' } },
     ],
-    source: { study: 'Coggan/Allen-Leistungsprofil, Kategoriegrenzen der Praxis', n: null },
+    source: { study: 'Coggan/Allen-Leistungsprofil, Kategoriegrenzen der Praxis', n: null, license: 'unclear' },
     quality: 'D',
     protocolNote: {
       de: 'Praxisstandard ohne peer-review-geprüfte Normbasis, und geschlechtsunabhängig notiert — die zugrunde liegende Profiltabelle führt für Frauen eigene Bänder rund 0,4 bis 0,5 W/kg darunter. Für Frauen ist die Einordnung deshalb zu streng. Oberhalb der Kategorie A nennt das Referenzhandbuch weitere Stufen (Pro Continental 5,8–6,4 W/kg, World Tour ab 6,4); der Bereich zwischen 4,6 und 5,8 W/kg ist dort nicht belegt und bleibt ohne eigene Stufe. Die FTP hängt zudem am Messgerät und am Herleitungsmodell.',
@@ -629,7 +631,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       { upTo: 150, label: { de: 'Aufbaustufe', en: 'Novice' } },
       { upTo: null, label: { de: 'Einsteiger', en: 'Beginner' } },
     ],
-    source: { study: 'CSS-Stufentabelle, verbreitete Einteilung im Schwimmsport', n: null },
+    source: { study: 'CSS-Stufentabelle, verbreitete Einteilung im Schwimmsport', n: null, license: 'unclear' },
     quality: 'C',
     protocolNote: {
       de: 'Praxiseinteilung ohne Begutachtung, geschlechts- und altersunabhängig. Für Triathleten nennt dieselbe Quelle als Orientierung 1:40 bis 2:00 pro 100 m im Sprint- und Kurzdistanzfeld und 1:05 bis 1:15 im Profibereich.',
@@ -656,7 +658,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 54.4,
     sd: 13.4,
-    source: { study: 'Diaz-Lara, Gi-Griffausdauer (Systematic Review PMC5306420)', n: 14 },
+    source: { study: 'Diaz-Lara, Gi-Griffausdauer (Systematic Review PMC5306420)', n: 14, license: 'open_access' },
     quality: 'B',
   },
   {
@@ -671,7 +673,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 41,
     sd: 16,
-    source: { study: 'Gi-Griffausdauer, Blau- bis Schwarzgurt (Systematic Review PMC5306420)', n: 15 },
+    source: { study: 'Gi-Griffausdauer, Blau- bis Schwarzgurt (Systematic Review PMC5306420)', n: 15, license: 'open_access' },
     quality: 'B',
     protocolNote: {
       de: 'Der Überblick nennt für dieselbe Messung je nach Kohorte 28 bis 62 Sekunden. Zwei Werte aus verschiedenen Arbeiten zu vergleichen sagt deshalb wenig; der eigene Verlauf sagt mehr.',
@@ -690,7 +692,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
     method: 'mean_sd',
     mean: 35,
     sd: 18,
-    source: { study: 'Franchini et al. 2011, Arch Budo — Judogi-Griffausdauer', n: null },
+    source: { study: 'Franchini et al. 2011, Arch Budo — Judogi-Griffausdauer', n: null, license: 'published_values' },
     quality: 'B',
     protocolNote: {
       de: 'Dieselbe Arbeit misst bei einer Regionalligagruppe 39 ± 14 s — also mehr als beim Nationalteam. Der isometrische Griff trennt die Leistungsniveaus laut der Quelle NICHT; das leistet nur die dynamische Form. Diese Einordnung sagt deshalb, wo jemand im Feld liegt, nicht wie gut er ist.',
@@ -729,7 +731,7 @@ export const EXTENDED_REFERENCES: ReferenceEntry[] = [
       ageMax: 60,
       method: 'anchor',
       anchor: row.anchor,
-      source: { study: 'US Army Fitness Test, offizieller Standard ab Juni 2025', n: null },
+      source: { study: 'US Army Fitness Test, offizieller Standard ab Juni 2025', n: null, license: 'public_domain' },
       quality: 'A',
       protocolNote: row.lower
         ? {

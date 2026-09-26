@@ -304,6 +304,16 @@ ein zweiter gebaut.
 | Gesundheitsdaten verschlüsseln | `src/lib/health/crypto.ts` |
 | Erinnerungen versenden | Edge Function `push` + Cron |
 | Farben, Flächen, Tiefe | `src/styles/theme.css` (Tokens) |
+| Vertrag einer abgeleiteten Kennzahl (Stichprobe, Konfidenz, Warnungen, Fassung) | `src/domain/metricContract.ts` → `buildMetric()` |
+| Hinweise (Regeln, Belege, Sperrfristen, Zustand) | `src/domain/insightEngine.ts` (`INSIGHT_RULES`); Zustand in `athlete.insightState` |
+| Tageskontext (Readiness als Komponenten) | `src/domain/readinessContext.ts`; Selbsteinschätzung am Testtag `src/domain/readiness.ts` |
+| Trainingslast 7/28/90, Monotonie, Strain | `src/domain/load.ts` (Session-Last selbst: `domain/diary.ts`) |
+| Ermüdungsresistenz aus Tests | `src/domain/durability.ts` |
+| HYROX- und Kampfsport-Auswertung | `src/domain/raceSim.ts`; Tests in `src/data/testCatalogRaceSim.ts` |
+| Tagesbedarf, Verpflegung je Einheit, Gewichtsband | `src/domain/fueling.ts`; beobachteter Umsatz `src/domain/nutrition.ts` |
+| Was gezählt werden darf (Ereignisliste) | `supabase/functions/_shared/eventRegistry.ts`, Kopie `src/lib/analyticsEvents.ts` |
+| Fehlererfassung im Client | `src/lib/errorCapture.ts` (über `trackEvent('client_error')`) |
+| Rechtelage der Referenzquellen | Feld `license` in `referenceModel.ts`; offene Fälle `docs/referenzlizenzen.md` |
 
 ## 17. Grenzen: was darf was berühren
 
@@ -432,6 +442,10 @@ Link /team/beitreten#token  →  accept_team_invite(token)  (SHA-256-Vergleich)
 | Neue Farbe, Fläche, Schatten | Token in `src/styles/theme.css` | Hell und Dunkel, Kontrast prüfen |
 | Neues UI-Grundelement | `src/components/ui` | vorhandene Primitives zuerst prüfen |
 | Neues Diagramm | `src/components/charts` | eigenes SVG, keine Bibliothek |
+| Neue abgeleitete Kennzahl | `src/domain/<thema>.ts` mit `buildMetric()` | Mindeststichprobe, `provisional`/`estimate` setzen, `<MetricMeta>` in der Oberfläche, Eintrag im Formelregister |
+| Neue Hinweisregel | `InsightRule` im Fachmodul, eingetragen in `INSIGHT_RULES` | ID, Version, Sperrfrist, `requires`-Merkmal, Belege, `whyNow`; Texte `hints.rule.<id>`; Prüffall mit «kein Einzelwert-Alarm» |
+| Neues Nutzungsereignis | `EVENTS` in beiden Ereignislisten | nur Kennungen als Eigenschaften, nie Werte; Prüffall vergleicht beide Listen |
+| Neue Referenzquelle | `source: { study, n, license }` | offene Rechtelage in `docs/referenzlizenzen.md` |
 
 Vor dem Anlegen: suchen, ob es das schon gibt (Store-Methode, Domain-Funktion,
 UI-Primitive). Erweitern geht vor Neubauen.

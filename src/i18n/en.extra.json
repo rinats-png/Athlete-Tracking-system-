@@ -39,7 +39,8 @@
       "y_balance_composite": "Y-Balance (composite)",
       "fms_total": "Functional Movement Screen (total)",
       "sleep_h": "Sleep duration",
-      "srpe_load_au": "Weekly load (sRPE)"
+      "srpe_load_au": "Weekly load (sRPE)",
+      "resting_hr_bpm": "Resting heart rate"
     },
     "meaning": {
       "ck_u_l": "An enzyme whose blood level rises after unaccustomed load. Variation between people is very large — it is comparable only with yourself.",
@@ -53,7 +54,8 @@
       "y_balance_composite": "A single-leg reach test as a share of leg length. A movement-control screening, not a performance measure.",
       "fms_total": "Seven movement tasks scored 0 to 3 each. A movement-quality screening, not an injury prediction.",
       "sleep_h": "Hours of sleep the night before, self-estimated. Not a recovery score — a number that sits next to the next measurement.",
-      "srpe_load_au": "A week's load as the sum of effort (RPE 1–10) times minutes per session. Comparable only with yourself — and the most common explanation for a bad test day."
+      "srpe_load_au": "A week's load as the sum of effort (RPE 1–10) times minutes per session. Comparable only with yourself — and the most common explanation for a bad test day.",
+      "resting_hr_bpm": "Heartbeats per minute in the morning, lying down, before getting up. Comparable only with yourself; device and time of measurement should stay the same."
     }
   },
   "procedure": {
@@ -244,7 +246,13 @@
     "sjft_index": "The Special Judo Fitness Test index: both heart rates divided by the number of throws. Lower is better.",
     "swft_index": "The Special Wrestling Fitness Test index, built the same way as the SJFT. Lower is better.",
     "vo2max_ml_kg_min": "Estimated oxygen uptake per kilogram of body weight per minute. From a field test it is estimated by formula, not measured — a laboratory value would differ.",
-    "watts_per_kg": "Power per kilogram of body weight. Wherever your own weight is moved, it says more than raw watts."
+    "watts_per_kg": "Power per kilogram of body weight. Wherever your own weight is moved, it says more than raw watts.",
+    "total_time_s": "The sum of eight runs, eight stations and — if recorded — the Roxzone. Comparable only with your own simulations under the same conditions.",
+    "run_total_s": "The eight runs together, without stations and transitions.",
+    "station_total_s": "The eight stations together, without runs and transitions.",
+    "run_decay_percent": "How much slower runs 7–8 were than runs 1–2, in per cent. Smaller means: the pace holds over the race.",
+    "total_actions": "All actions across the rounds together.",
+    "round_decay_percent": "How many fewer actions the last round had than the first, in per cent. Smaller means: even through to the end."
   },
   "pricing": {
     "eyebrow": "Profile",
@@ -331,7 +339,9 @@
       "cockpit": "Cockpit with signals and adjustable thresholds",
       "health": "Health layer: laboratory record, symptoms, cycle, medication (Art. 9)",
       "peakWeek": "Peak week as a log",
-      "sportModule": "The figures of your own sport in one place"
+      "sportModule": "The figures of your own sport in one place",
+      "durability": "Fatigue resistance: fresh versus fatigued, from your tests, over time",
+      "sportAnalysis": "HYROX and combat sports analysis: run decay, stations, rounds"
     },
     "coachUpgrade": "If you go over your tier, you keep measuring: there is a fourteen-day grace period, and switching costs only the prorated difference for the rest of the year.",
     "founder": "Founder price: {{percent}}% off the first year of every coach tier — for the first {{count}} coaches.",
@@ -1449,6 +1459,429 @@
       "invite_other_email": "This invitation is for a different email address.",
       "not_team_owner": "Only the team owner can do this.",
       "failed": "That did not work. Please try again."
+    }
+  },
+  "metric": {
+    "algorithm": "Calculation: {{algorithm}} · version {{version}}",
+    "sample_one": "from {{count}} value",
+    "sample_other": "from {{count}} values",
+    "confidence": {
+      "LOW": "low confidence",
+      "MEDIUM": "medium confidence",
+      "HIGH": "good confidence"
+    },
+    "warning": {
+      "insufficient_data": "no value yet — not enough data",
+      "missing_input": "a required input is missing",
+      "estimate": "estimate",
+      "provisional_formula": "provisional calculation",
+      "incompatible_protocol": "protocols not comparable",
+      "low_completeness": "incomplete period",
+      "stale": "out of date",
+      "self_report": "self-reported",
+      "within_noise": "within measurement noise"
+    }
+  },
+  "hints": {
+    "eyebrow": "Hints",
+    "title": "Worth a look",
+    "intro": "Hints from fixed rules, not advice. Each names the rule it comes from and the data it rests on.",
+    "emptyTitle": "Nothing open right now",
+    "emptyBody": "No rule is triggered. As soon as new measurements, diary entries or sessions show something notable, it appears here.",
+    "new": "new",
+    "whyNow": "Why now:",
+    "evidence_one": "{{count}} piece of evidence",
+    "evidence_other": "{{count}} pieces of evidence",
+    "acknowledge": "Done",
+    "dismiss": "Hide",
+    "done": "Done",
+    "doneWhy": "Acknowledged hints whose finding still stands. After the rest period they are re-evaluated.",
+    "suppressed_one": "{{count}} hidden hint is currently paused.",
+    "suppressed_other": "{{count}} hidden hints are currently paused.",
+    "noAdvice": "A hint is a reason to take a look, not an instruction and not a diagnosis. Whether and what should change is decided by a person.",
+    "summaryTitle_one": "{{count}} hint",
+    "summaryTitle_other": "{{count}} hints",
+    "summaryNew_one": "{{count}} of them new",
+    "summaryNew_other": "{{count}} of them new",
+    "summarySub": "From fixed rules, with evidence",
+    "openAll": "All hints",
+    "severity": {
+      "info": "Info",
+      "notice": "Notable",
+      "warning": "Caution",
+      "review": "Discuss"
+    },
+    "category": {
+      "decision": "Decisions",
+      "load": "Load",
+      "recovery": "Recovery",
+      "performance": "Performance",
+      "durability": "Durability",
+      "adaptation": "Training",
+      "nutrition": "Nutrition",
+      "data_quality": "Data coverage"
+    },
+    "go": {
+      "test": "Go to test",
+      "decision": "Go to cockpit",
+      "route": "View"
+    },
+    "evidenceKind": {
+      "result": "Measurement",
+      "diary": "Diary",
+      "workout": "Session",
+      "observation": "Observation",
+      "decision": "Decision",
+      "meal": "Meal",
+      "metric": "Metric",
+      "axis": "Profile axis"
+    },
+    "metricKey": {
+      "load_7d": "Load 7 days",
+      "diary_completeness": "Diary completeness",
+      "sleepHours": "Sleep duration",
+      "sleepQuality": "Sleep quality",
+      "energy": "Energy",
+      "stress": "Stress",
+      "soreness": "Soreness",
+      "load7": "Load 7 days",
+      "hrv": "HRV",
+      "restingHr": "Resting HR",
+      "e1rm": "e1RM",
+      "carbs_per_hour": "Carbohydrate per hour",
+      "gi_score": "Gastrointestinal",
+      "weight_rate_pct_week": "Weight change per week"
+    },
+    "why": {
+      "profile_incomplete": "Without sex and date of birth there is no placement against reference values.",
+      "axis_unmeasured": "There is no measurement for this axis yet.",
+      "test_old": "The last measurement is {{days}} days old.",
+      "single_measurement": "The axis rests on a single measurement.",
+      "axis_below_rest": "The axis is {{gap}} points below the mean of your other axes.",
+      "quality_flags_recent": "{{count}} of {{total}} measurements from the last 60 days carry a caveat.",
+      "pr_beyond_noise": "The new personal best lies outside your measurement variation.",
+      "pr_within_noise": "The new personal best still lies within your measurement variation.",
+      "two_declines_beyond_noise": "The two most recent measurements are further below your earlier level than your measurement variation explains.",
+      "week_above_own_level": "This week is {{pct}} % above your typical week.",
+      "load_and_markers": "High week and at the same time {{markers}} recovery markers outside your usual range.",
+      "several_days_below": "{{days}} of the last {{of}} days with a value below your own usual range.",
+      "several_days_above": "{{days}} of the last {{of}} days with a value above your own usual range.",
+      "diary_sparse": "Only {{pct}} % of the last 14 days are recorded.",
+      "e1rm_flat_two_blocks": "The e1RM has stayed the same over two four-week blocks.",
+      "review_date_passed": "The review date has been reached.",
+      "two_lower_beyond_noise": "The two most recent values are further below your earlier median than your variation explains.",
+      "two_higher_beyond_noise": "The two most recent values are further above your earlier median than your variation explains.",
+      "station_beyond_own_noise": "The deviation is larger than your own variation at this station.",
+      "sessions_below_band": "At least two sessions with an entry were below the lower limit.",
+      "gi_repeated": "At least two sessions with symptoms of 2 or 3 out of 3.",
+      "two_weeks_below_band": "Two weeks in a row below the band.",
+      "two_weeks_above_band": "Two weeks in a row above the band."
+    },
+    "rule": {
+      "version": "Rule {{rule}}, version {{version}}",
+      "add_profile_data": {
+        "title": "Complete profile details",
+        "body": "With sex and date of birth, your values can be placed against matching reference groups."
+      },
+      "measure_missing_axis": {
+        "title": "{{subject}} not measured yet",
+        "body": "Without a measurement this axis stays empty in the profile. Missing does not mean weak."
+      },
+      "stale_test": {
+        "title": "Repeat {{subject}}",
+        "body": "The last measurement is {{days}} days old. A current value shows where you stand today."
+      },
+      "deepen_axis": {
+        "title": "Broaden the basis for {{subject}}",
+        "body": "A single measurement is a snapshot. A second test gives the axis confidence."
+      },
+      "measurement_quality_low": {
+        "title": "Measurements with a caveat",
+        "body": "{{count}} of {{total}} recent measurements are not fully valid, for instance because a maximal test was not taken to exhaustion. The values remain; they just carry less weight."
+      },
+      "benchmark_gap": {
+        "title": "{{subject}} is below your other axes",
+        "body": "Gap of {{gap}} points, based on {{measurements}} measurements. A finding about the profile, not a training plan."
+      },
+      "performance_pr": {
+        "title": "New personal best: {{subject}}",
+        "body": "{{value}} compared with {{previousBest}} before."
+      },
+      "performance_regression": {
+        "title": "{{subject}} is declining",
+        "body": "The two most recent measurements are up to {{change}} % below your earlier level; a change is detectable from {{detectable}} %. A reason to look at conditions and load."
+      },
+      "load_spike_review": {
+        "title": "Load well above your level",
+        "body": "This week {{load}} AU; typical is about {{typical}} AU. Descriptive, no statement about risk."
+      },
+      "load_plus_recovery": {
+        "title": "High week, recovery notable",
+        "body": "Load {{pct}} % above typical and {{markers}} recovery markers outside your usual range. A reason for a conversation, not a diagnosis."
+      },
+      "sleep_deviation": {
+        "title": "Less sleep than usual",
+        "body": "On {{days}} of the last {{of}} days, sleep duration was below your own usual range."
+      },
+      "hrv_deviation": {
+        "title": "HRV below your usual range",
+        "body": "On {{days}} of the last {{of}} measurement days, HRV was below your own usual range. Time of measurement and device shift it considerably."
+      },
+      "rhr_deviation": {
+        "title": "Resting HR above your usual range",
+        "body": "On {{days}} of the last {{of}} measurement days, resting HR was above your own usual range."
+      },
+      "data_incomplete": {
+        "title": "Diary incomplete",
+        "body": "{{pct}} % of the last 14 days are recorded. Below half, trends are hard to read."
+      },
+      "strength_plateau": {
+        "title": "{{subject}}: e1RM unchanged",
+        "body": "Most recently {{current}} kg, in the block before {{previous}} kg. A finding, not a target."
+      },
+      "decision_review_due": {
+        "title": "Review decision",
+        "body": "“{{decision}}” was due for review on {{reviewOn}}."
+      },
+      "durability_worsened": {
+        "title": "Fatigue resistance declining: {{subject}}",
+        "body": "Most recently {{latest}} % retention, previously typical {{baseline}} %; a change is detectable from {{detectable}} percentage points. A reason to look at load, recovery and test conditions."
+      },
+      "durability_improved": {
+        "title": "Fatigue resistance rising: {{subject}}",
+        "body": "Most recently {{latest}} % retention, previously typical {{baseline}} %; that is more than the {{detectable}} percentage points your variation explains."
+      },
+      "hyrox_run_decay": {
+        "title": "Run decay in the HYROX simulation increasing",
+        "body": "In the two most recent simulations, {{latest}} % of your starting pace remained, previously typical {{baseline}} %; a change is detectable from {{detectable}} percentage points."
+      },
+      "combat_round_decay": {
+        "title": "Round decay increasing",
+        "body": "In the two most recent round tests, the last round retained {{latest}} % of the first, previously typical {{baseline}} %; a change is detectable from {{detectable}} percentage points."
+      },
+      "hyrox_station_slower": {
+        "title": "{{station}} slower than usual",
+        "body": "In the most recent simulation {{delta}} % above your own median — more than the {{detectable}} % your variation at this station explains."
+      },
+      "fueling_below_plan": {
+        "title": "Intake in long sessions below the range",
+        "body": "{{count}} sessions in the last two weeks were below the published range for their duration (most recently {{perHour}} g/h). A reason to look at fuelling — not a finding."
+      },
+      "gi_issue_pattern": {
+        "title": "Repeated gastrointestinal symptoms",
+        "body": "{{count}} sessions in the last two weeks with marked symptoms. A reason to look at fuelling and timing — if symptoms persist, have them checked by a doctor."
+      },
+      "weight_rate_outside_target": {
+        "title": "Weight outside your band for two weeks",
+        "body": "This week {{rate}} %, the week before {{previous}} %; your band is {{min}} to {{max}} % per week."
+      }
+    }
+  },
+  "readinessCtx": {
+    "title": "Daily context",
+    "none": "No usual range yet — that takes at least 7 entries in 28 days.",
+    "allWithin_one": "{{count}} entry is within your usual range.",
+    "allWithin_other": "All {{count}} entries are within your usual range.",
+    "markers_one": "{{count}} of {{of}} entries outside your usual range.",
+    "markers_other": "{{count}} of {{of}} entries outside your usual range.",
+    "pending": "No usual range or no current value yet: {{list}}.",
+    "method": "The most recent value (at most 2 days old) is compared with your median over the 28 days before; outside means more than one robust spread away. Only the unfavourable direction is counted. This is a reason to take a look, not a clearance to train and not a health assessment.",
+    "addDevice": "Record HRV and resting HR as observations",
+    "openDiary": "View in diary",
+    "usual": "usually {{median}} {{unit}}",
+    "component": {
+      "sleepHours": "Sleep duration",
+      "sleepQuality": "Sleep quality",
+      "energy": "Energy",
+      "stress": "Stress",
+      "soreness": "Soreness",
+      "load7": "Load 7 days",
+      "hrv": "HRV (RMSSD)",
+      "restingHr": "Resting HR"
+    },
+    "status": {
+      "within": "within range",
+      "below": "below",
+      "above": "above",
+      "no_current": "no current value",
+      "insufficient": "no usual range yet"
+    },
+    "noMarkers": "No entry is outside your usual range in the unfavourable direction."
+  },
+  "readiness": {
+    "summary": "Summary",
+    "summaryBasis_one": "from {{count}} entry, equally weighted",
+    "summaryBasis_other": "from {{count}} entries, equally weighted",
+    "equalWeights": "equally weighted",
+    "lean": {
+      "favourable": "favourable",
+      "middle": "middle",
+      "unfavourable": "unfavourable"
+    }
+  },
+  "load": {
+    "eyebrow": "Load",
+    "title": "Training load and fatigue resistance",
+    "intro": "The load from your diary (duration × effort) over days and weeks, and below it, how much performance you retain under fatigue. Everything against yourself, not against others.",
+    "emptyTitle": "No sessions in the diary yet",
+    "emptyBody": "Load comes from the duration and effort (RPE) of your sessions. Log a few days and sums and weeks will appear here.",
+    "toDiary": "Go to diary",
+    "noAdvice": "Descriptive. No traffic light, no injury risk, no training recommendation — an RPE of 7 does not mean the same for two people, so only the comparison with yourself counts.",
+    "sums": {
+      "title": "Sums",
+      "why": "Session load after Foster in AU. Days without an entry count as not recorded, not as rest days.",
+      "days": "{{days}} days"
+    },
+    "weeks": {
+      "title": "Twelve weeks",
+      "typical": "Typical week (mean of the four weeks before): {{value}} AU",
+      "noTypical": "A typical week needs at least two of the four previous weeks with three entries each.",
+      "aria": "Weekly load of the last twelve weeks as bars",
+      "thisWeek": "this week",
+      "legend": "Faded: week with fewer than three entries. Dash: week without an entry."
+    },
+    "detail": {
+      "title": "This week",
+      "why": "Change from the previous week, monotony and strain after Foster.",
+      "change": "Vs previous week",
+      "monotony": "Monotony",
+      "strain": "Strain",
+      "spike": "This week is {{pct}} % above your typical week — more than the {{threshold}} % from which KYDON flags it. A reason to take a look, no statement about risk.",
+      "vsTypical": "Against your typical week: {{pct}} %.",
+      "method": "Monotony = mean of daily loads / their spread (from 5 recorded days); strain = weekly load × monotony. The 30 % flag threshold is a KYDON setting, not a limit from the literature."
+    }
+  },
+  "durability": {
+    "title": "Fatigue resistance",
+    "why": "How much of your fresh performance remains under fatigue — fatigued as a percentage of fresh.",
+    "empty": "The figure comes from tests that contain both fresh and fatigued in themselves. One of them is enough to start:",
+    "method": "Fatigue circuit: set 4 against set 1. Repeated sprint: last against highest sprint. SJFT: throw rate of series C against series A. Brick: fresh 5 km pace (at most 56 days before) against run pace after the bike. A change only counts once the two most recent values deviate further from your own earlier median than your variation explains (at least 3 percentage points — a KYDON setting).",
+    "detail": {
+      "reps": "fresh {{fresh}} reps, fatigued {{fatigued}} reps",
+      "W": "highest sprint {{fresh}} W, last {{fatigued}} W",
+      "throws_per_s": "series A {{fresh}} throws/s, series C {{fatigued}} throws/s",
+      "s_per_km": "fresh {{fresh}} s/km, after the bike {{fatigued}} s/km",
+      "s_per_run": "runs 1–2 averaging {{fresh}} s, runs 7–8 {{fatigued}} s",
+      "actions": "first round {{fresh}} actions, last {{fatigued}}"
+    },
+    "verdict": {
+      "unknown_one": "{{count}} measurement — a verdict needs at least six.",
+      "unknown_other": "{{count}} measurements — a verdict needs at least six.",
+      "within_noise": "Within your variation: previously typical {{baseline}} %, a change would be detectable from {{detectable}} percentage points.",
+      "improved": "Both most recent values are more than {{detectable}} percentage points above your earlier median ({{baseline}} %).",
+      "worsened": "Both most recent values are more than {{detectable}} percentage points below your earlier median ({{baseline}} %)."
+    }
+  },
+  "sportAnalysis": {
+    "eyebrow": "Sport analysis",
+    "title": "HYROX and combat sports",
+    "intro": "The most recent simulation broken down: where the time goes, how much the pace drops, how much is left in the last round. Compared only with your own earlier simulations.",
+    "start": "Record simulation",
+    "noNorms": "No norms and no target times: there are no reliable test values for simulations, and race times depend on course, field and transitions. “Slower” appears only where the deviation is larger than your own variation.",
+    "station": {
+      "skiErg": "SkiErg",
+      "sledPush": "Sled push",
+      "sledPull": "Sled pull",
+      "burpeeBroadJump": "Burpee broad jumps",
+      "row": "Rowing",
+      "farmersCarry": "Farmers carry",
+      "sandbagLunges": "Sandbag lunges",
+      "wallBalls": "Wall balls"
+    },
+    "verdict": {
+      "no_history": "first simulation",
+      "within_noise": "no verdict",
+      "slower": "slower than your variation explains (from {{detectable}} %)",
+      "faster": "faster than your variation explains (from {{detectable}} %)"
+    },
+    "hyrox": {
+      "title": "HYROX simulation",
+      "empty": "No simulation yet. Eight runs and eight stations are recorded individually — run decay and station shares are derived from them.",
+      "of_one": "From {{date}} · against {{count}} earlier simulation",
+      "of_other": "From {{date}} · against {{count}} earlier simulations",
+      "total": "Total",
+      "runs": "Runs",
+      "stations": "Stations",
+      "roxzone": "Roxzone",
+      "runDecayTitle": "Run decay",
+      "runDecay": "Runs 7–8 against 1–2: {{pct}} %",
+      "runsAria": "Times of the eight runs as bars",
+      "stationsTitle": "Stations",
+      "ownLimiter": "Furthest above your own median: {{station}}",
+      "largestShare": "Largest share of time: {{station}} — a description, not yet a finding.",
+      "share": "{{pct}} % of total time",
+      "vsMedian": "your median {{median}}, {{delta}} %",
+      "method": "The median comes from your earlier simulations. A verdict is given from four earlier simulations: by then it is known how much a station varies for you from one time to the next (× 1.96·√2, at least 3 %)."
+    },
+    "combat": {
+      "title": "Combat sports rounds",
+      "empty": "No rounds recorded yet. Three to five rounds at competition length, each counted individually — round decay is derived from them.",
+      "decay": "Last against first round: −{{pct}} % · {{date}}",
+      "aria": "Actions per round as bars"
+    }
+  },
+  "fueling": {
+    "chip": {
+      "carbs": "{{perHour}} g CHO/h"
+    },
+    "form": {
+      "show": "Record fuelling (optional)",
+      "hide": "Hide fuelling",
+      "carbs": "Carbohydrate during the session",
+      "fluid": "Drunk",
+      "massBefore": "Body mass before",
+      "massAfter": "Body mass after",
+      "gi": "Gastrointestinal symptoms",
+      "giNone": "none",
+      "giStrong": "severe",
+      "why": "Carbohydrate and duration give intake per hour; body mass before and after gives sweat rate. All optional."
+    },
+    "level": {
+      "light": "light",
+      "moderate": "moderate",
+      "high": "high",
+      "very_high": "very high"
+    },
+    "need": {
+      "title": "Needs by load",
+      "level": "Load level {{level}}: on average {{minutes}} min of training per recorded day ({{days}} of 7 days recorded).",
+      "noWeight": "No range without body mass — enter your weight in the diary.",
+      "noDiary": "Without a diary entry in the last seven days, the load is unknown.",
+      "eaten": "Eaten today: {{value}} g",
+      "source": "Ranges per kg body mass after Thomas, Erdman & Burke (2016, ACSM position stand) and Burke et al. (2011): carbohydrate 3–5 / 5–7 / 6–10 / 8–12 g/kg by level, protein 1.2–2.0 g/kg. The level from training minutes is a KYDON setting. A yardstick, not a target — what you eat is your decision."
+    },
+    "band": {
+      "none": "under 45 min: no intake needed",
+      "small": "45–75 min: small amounts or mouth rinse",
+      "range": "Range for this duration: {{lo}}–{{hi}} g/h"
+    },
+    "sessions": {
+      "title": "Fuelling in sessions",
+      "why": "The last 28 days, most recent first.",
+      "empty": "No session with fuelling yet. It can be expanded when adding a session in the diary.",
+      "perHour": "{{value}} g/h",
+      "below": "below the range",
+      "sweat": "Sweat rate {{rate}} l/h, mass loss {{loss}} %",
+      "lossAbove2": "over 2 % of body mass",
+      "gi": "Gastrointestinal {{score}} of 3",
+      "source": "Ranges after Thomas et al. (2016) and Jeukendrup (2014); 90 g/h presupposes glucose–fructose mixtures and gut training. Sweat rate and the 2 % mark after Sawka et al. (2007, ACSM). Urine and respiratory water are not subtracted."
+    },
+    "weight": {
+      "title": "Weight band",
+      "why": "Your intended change per week, as a percentage of body mass. KYDON shows whether the week falls within it — nothing more.",
+      "thisWeek": "This week",
+      "lastWeek": "Week before",
+      "needs": "This needs two weigh-ins in each of the two weeks.",
+      "position": {
+        "below": "Below your band ({{min}} to {{max}}).",
+        "within": "Within your band ({{min}} to {{max}}).",
+        "above": "Above your band ({{min}} to {{max}})."
+      },
+      "min": "Band from (% per week)",
+      "max": "Band to (% per week)",
+      "unit": "%",
+      "clear": "Remove band",
+      "note": "You set the band yourself, for example with your coach or nutritionist. KYDON does not suggest one. A hint only appears once two weeks in a row fall on the same side."
     }
   }
 }
