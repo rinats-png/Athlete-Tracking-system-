@@ -39,7 +39,8 @@
       "y_balance_composite": "Y-Balance (samlet)",
       "fms_total": "Functional Movement Screen (totalt)",
       "sleep_h": "Søvnlengde",
-      "srpe_load_au": "Ukebelastning (sRPE)"
+      "srpe_load_au": "Ukebelastning (sRPE)",
+      "resting_hr_bpm": "Hvilepuls"
     },
     "meaning": {
       "ck_u_l": "Et enzym som stiger i blodet etter uvant belastning. Variasjonen mellom personer er svært stor — det er bare sammenlignbart med deg selv.",
@@ -53,7 +54,8 @@
       "y_balance_composite": "En ettbeins rekkeviddetest som andel av beinlengden. En screening av bevegelseskontroll, ikke et prestasjonsmål.",
       "fms_total": "Sju bevegelsesoppgaver skåret 0 til 3 hver. En screening av bevegelseskvalitet, ikke en skadeprediksjon.",
       "sleep_h": "Timer søvn natten før, selvanslått. Ikke en restitusjonsskår — et tall som står ved siden av neste måling.",
-      "srpe_load_au": "En ukes belastning som summen av anstrengelse (RPE 1–10) ganger minutter per økt. Bare sammenlignbart med deg selv — og den vanligste forklaringen på en dårlig testdag."
+      "srpe_load_au": "En ukes belastning som summen av anstrengelse (RPE 1–10) ganger minutter per økt. Bare sammenlignbart med deg selv — og den vanligste forklaringen på en dårlig testdag.",
+      "resting_hr_bpm": "Hjerteslag per minutt om morgenen, liggende, før du står opp. Bare sammenlignbart med deg selv; apparat og måletidspunkt bør være de samme."
     }
   },
   "procedure": {
@@ -244,7 +246,13 @@
     "sjft_index": "Indeksen i Special Judo Fitness Test: begge pulsverdier delt på antall kast. Lavere er bedre.",
     "swft_index": "Indeksen i Special Wrestling Fitness Test, bygd opp på samme måte som SJFT. Lavere er bedre.",
     "vo2max_ml_kg_min": "Estimert oksygenopptak per kilo kroppsvekt per minutt. Fra en felttest estimeres det med formel, ikke målt — en laboratorieverdi ville avveket.",
-    "watts_per_kg": "Effekt per kilo kroppsvekt. Overalt der egen vekt flyttes, sier den mer enn rå watt."
+    "watts_per_kg": "Effekt per kilo kroppsvekt. Overalt der egen vekt flyttes, sier den mer enn rå watt.",
+    "total_time_s": "Summen av åtte løp, åtte stasjoner og — når den er registrert — roxzone. Bare sammenlignbar med dine egne simuleringer under de samme betingelsene.",
+    "run_total_s": "De åtte løpene samlet, uten stasjoner og overganger.",
+    "station_total_s": "De åtte stasjonene samlet, uten løp og overganger.",
+    "run_decay_percent": "Hvor mye langsommere løp 7–8 var enn løp 1–2, i prosent. Lavere betyr: tempoet holder gjennom løpet.",
+    "total_actions": "Alle aksjoner over rundene samlet.",
+    "round_decay_percent": "Hvor mange færre aksjoner siste runde hadde enn den første, i prosent. Lavere betyr: jevnt helt til slutt."
   },
   "pricing": {
     "eyebrow": "Profil",
@@ -331,7 +339,9 @@
       "cockpit": "Cockpit med signaler og justerbare terskler",
       "health": "Helsedel: laboratorieforløp, symptomer, syklus, legemidler (art. 9)",
       "peakWeek": "Peak Week som logg",
-      "sportModule": "Nøkkeltallene i din egen idrett på ett sted"
+      "sportModule": "Nøkkeltallene i din egen idrett på ett sted",
+      "durability": "Tretthetsresistens: uthvilt mot sliten, fra testene dine, over tid",
+      "sportAnalysis": "HYROX- og kampsportanalyse: tempofall, stasjoner, runder"
     },
     "coachUpgrade": "Går du over nivået ditt, kan du fortsette å måle: Du får fjorten dagers frist, og byttet koster bare den forholdsmessige differansen for resten av året.",
     "founder": "Grunnleggerpris: {{percent}} % rabatt på det første året av hvert trenernivå — for de første {{count}} trenerne.",
@@ -1449,6 +1459,429 @@
       "invite_other_email": "Denne invitasjonen gjelder en annen e-postadresse.",
       "not_team_owner": "Bare eieren av teamet kan gjøre dette.",
       "failed": "Det gikk ikke. Prøv igjen."
+    }
+  },
+  "metric": {
+    "algorithm": "Beregning: {{algorithm}} · versjon {{version}}",
+    "sample_one": "fra {{count}} verdi",
+    "sample_other": "fra {{count}} verdier",
+    "confidence": {
+      "LOW": "lav pålitelighet",
+      "MEDIUM": "middels pålitelighet",
+      "HIGH": "god pålitelighet"
+    },
+    "warning": {
+      "insufficient_data": "ingen verdi ennå — datagrunnlaget strekker ikke til",
+      "missing_input": "en nødvendig opplysning mangler",
+      "estimate": "estimat",
+      "provisional_formula": "foreløpig beregning",
+      "incompatible_protocol": "protokollene er ikke sammenlignbare",
+      "low_completeness": "periode med hull",
+      "stale": "utdatert",
+      "self_report": "egenrapportert",
+      "within_noise": "innenfor målestøyen"
+    }
+  },
+  "hints": {
+    "eyebrow": "Merknader",
+    "title": "Verdt en titt",
+    "intro": "Merknader fra faste regler, ikke råd. Hver av dem oppgir regelen den kommer fra og dataene den bygger på.",
+    "emptyTitle": "Ingenting åpent akkurat nå",
+    "emptyBody": "Ingen regel slår ut. Så snart nye målinger, dagbokoppføringer eller økter viser noe påfallende, står det her.",
+    "new": "ny",
+    "whyNow": "Hvorfor nå:",
+    "evidence_one": "{{count}} belegg",
+    "evidence_other": "{{count}} belegg",
+    "acknowledge": "Ferdig",
+    "dismiss": "Skjul",
+    "done": "Ferdig",
+    "doneWhy": "Bekreftede merknader der funnet fortsatt gjelder. Etter hvileperioden vurderes de på nytt.",
+    "suppressed_one": "{{count}} skjult merknad hviler akkurat nå.",
+    "suppressed_other": "{{count}} skjulte merknader hviler akkurat nå.",
+    "noAdvice": "En merknad er en anledning til å se nærmere, ikke en instruks og ingen diagnose. Om og hva som skal endres, avgjør et menneske.",
+    "summaryTitle_one": "{{count}} merknad",
+    "summaryTitle_other": "{{count}} merknader",
+    "summaryNew_one": "{{count}} av dem ny",
+    "summaryNew_other": "{{count}} av dem nye",
+    "summarySub": "Fra faste regler, med belegg",
+    "openAll": "Alle merknader",
+    "severity": {
+      "info": "Info",
+      "notice": "Påfallende",
+      "warning": "Obs",
+      "review": "Drøft"
+    },
+    "category": {
+      "decision": "Beslutninger",
+      "load": "Belastning",
+      "recovery": "Restitusjon",
+      "performance": "Prestasjon",
+      "durability": "Durability",
+      "adaptation": "Trening",
+      "nutrition": "Kosthold",
+      "data_quality": "Datagrunnlag"
+    },
+    "go": {
+      "test": "Til testen",
+      "decision": "Til cockpiten",
+      "route": "Se"
+    },
+    "evidenceKind": {
+      "result": "Måling",
+      "diary": "Dagbok",
+      "workout": "Økt",
+      "observation": "Observasjon",
+      "decision": "Beslutning",
+      "meal": "Måltid",
+      "metric": "Nøkkeltall",
+      "axis": "Profilakse"
+    },
+    "metricKey": {
+      "load_7d": "Belastning 7 dager",
+      "diary_completeness": "Dagbokens fullstendighet",
+      "sleepHours": "Søvnlengde",
+      "sleepQuality": "Søvnkvalitet",
+      "energy": "Energi",
+      "stress": "Stress",
+      "soreness": "Stølhet",
+      "load7": "Belastning 7 dager",
+      "hrv": "HRV",
+      "restingHr": "Hvilepuls",
+      "e1rm": "e1RM",
+      "carbs_per_hour": "Karbohydrater per time",
+      "gi_score": "Mage-tarm",
+      "weight_rate_pct_week": "Vektendring per uke"
+    },
+    "why": {
+      "profile_incomplete": "Uten kjønn og fødselsdato finnes ingen plassering mot referanseverdier.",
+      "axis_unmeasured": "Det finnes ennå ingen måling for denne aksen.",
+      "test_old": "Den siste målingen er {{days}} dager gammel.",
+      "single_measurement": "Aksen bygger på én enkelt måling.",
+      "axis_below_rest": "Aksen ligger {{gap}} poeng under snittet av de andre aksene dine.",
+      "quality_flags_recent": "{{count}} av {{total}} målinger de siste 60 dagene har et forbehold.",
+      "pr_beyond_noise": "Den nye bestenoteringen ligger utenfor målevariasjonen din.",
+      "pr_within_noise": "Den nye bestenoteringen ligger fortsatt innenfor målevariasjonen din.",
+      "two_declines_beyond_noise": "De to siste målingene ligger lenger under ditt tidligere nivå enn målevariasjonen din forklarer.",
+      "week_above_own_level": "Denne uken ligger {{pct}} % over din vanlige uke.",
+      "load_and_markers": "Høy uke og samtidig {{markers}} restitusjonsmarkører utenfor variasjonsbredden din.",
+      "several_days_below": "{{days}} av de siste {{of}} dagene med verdi under din egen variasjonsbredde.",
+      "several_days_above": "{{days}} av de siste {{of}} dagene med verdi over din egen variasjonsbredde.",
+      "diary_sparse": "Bare {{pct}} % av de siste 14 dagene er registrert.",
+      "e1rm_flat_two_blocks": "e1RM har stått stille gjennom to fireukersblokker.",
+      "review_date_passed": "Datoen for gjennomgang er nådd.",
+      "two_lower_beyond_noise": "De to siste verdiene ligger lenger under din tidligere median enn spredningen din forklarer.",
+      "two_higher_beyond_noise": "De to siste verdiene ligger lenger over din tidligere median enn spredningen din forklarer.",
+      "station_beyond_own_noise": "Avviket er større enn din egen spredning på denne stasjonen.",
+      "sessions_below_band": "Minst to økter med opplysning lå under den nedre grensen.",
+      "gi_repeated": "Minst to økter med plager 2 eller 3 av 3.",
+      "two_weeks_below_band": "To uker på rad under båndet.",
+      "two_weeks_above_band": "To uker på rad over båndet."
+    },
+    "rule": {
+      "version": "Regel {{rule}}, versjon {{version}}",
+      "add_profile_data": {
+        "title": "Fyll ut profilopplysninger",
+        "body": "Med kjønn og fødselsdato kan verdiene dine plasseres mot passende referansegrupper."
+      },
+      "measure_missing_axis": {
+        "title": "{{subject}} er ikke målt ennå",
+        "body": "Uten måling forblir denne aksen tom i profilen. Manglende betyr ikke svak."
+      },
+      "stale_test": {
+        "title": "{{subject}} på nytt",
+        "body": "Den siste målingen er {{days}} dager gammel. En aktuell verdi viser hvor du står i dag."
+      },
+      "deepen_axis": {
+        "title": "{{subject}} med bredere grunnlag",
+        "body": "Én enkelt måling er et øyeblikksbilde. En test til gjør aksen holdbar."
+      },
+      "measurement_quality_low": {
+        "title": "Målinger med forbehold",
+        "body": "{{count}} av {{total}} nyere målinger er ikke fullt gyldige, for eksempel fordi en maksimaltest ikke ble gjennomført til utmattelse. Verdiene blir stående, de veier bare mindre."
+      },
+      "benchmark_gap": {
+        "title": "{{subject}} ligger under de andre aksene dine",
+        "body": "Avstand {{gap}} poeng, basert på {{measurements}} målinger. Et funn om profilen, ingen treningsplan."
+      },
+      "performance_pr": {
+        "title": "Ny bestenotering: {{subject}}",
+        "body": "{{value}} mot tidligere {{previousBest}}."
+      },
+      "performance_regression": {
+        "title": "{{subject}} går tilbake",
+        "body": "De to siste målingene ligger opptil {{change}} % under ditt tidligere nivå; en endring kan påvises fra {{detectable}} %. En anledning til å se på betingelser og belastning."
+      },
+      "load_spike_review": {
+        "title": "Belastning tydelig over ditt nivå",
+        "body": "Denne uken {{load}} AU, vanlig er rundt {{typical}} AU. Beskrivende, ingen uttalelse om risiko."
+      },
+      "load_plus_recovery": {
+        "title": "Høy uke, påfallende restitusjon",
+        "body": "Belastning {{pct}} % over det vanlige og {{markers}} restitusjonsmarkører utenfor variasjonsbredden din. En anledning til en samtale, ingen diagnose."
+      },
+      "sleep_deviation": {
+        "title": "Mindre søvn enn vanlig",
+        "body": "På {{days}} av de siste {{of}} dagene lå søvnlengden under din egen variasjonsbredde."
+      },
+      "hrv_deviation": {
+        "title": "HRV under variasjonsbredden din",
+        "body": "På {{days}} av de siste {{of}} måledagene lå HRV under din egen variasjonsbredde. Måletidspunkt og apparat forskyver den betydelig."
+      },
+      "rhr_deviation": {
+        "title": "Hvilepuls over variasjonsbredden din",
+        "body": "På {{days}} av de siste {{of}} måledagene lå hvilepulsen over din egen variasjonsbredde."
+      },
+      "data_incomplete": {
+        "title": "Dagbok med hull",
+        "body": "{{pct}} % av de siste 14 dagene er registrert. Under halvparten kan forløp knapt leses."
+      },
+      "strength_plateau": {
+        "title": "{{subject}}: e1RM uendret",
+        "body": "Sist {{current}} kg, i blokken før {{previous}} kg. Et funn, ingen instruks."
+      },
+      "decision_review_due": {
+        "title": "Gjennomgå beslutning",
+        "body": "«{{decision}}» skulle gjennomgås {{reviewOn}}."
+      },
+      "durability_worsened": {
+        "title": "Tretthetsresistens går tilbake: {{subject}}",
+        "body": "Sist {{latest}} % bevart, tidligere vanlig {{baseline}} %; en endring kan påvises fra {{detectable}} prosentpoeng. En anledning til å se på belastning, restitusjon og testbetingelser."
+      },
+      "durability_improved": {
+        "title": "Tretthetsresistens øker: {{subject}}",
+        "body": "Sist {{latest}} % bevart, tidligere vanlig {{baseline}} %; det er mer enn de {{detectable}} prosentpoengene som spredningen din forklarer."
+      },
+      "hyrox_run_decay": {
+        "title": "Tempofallet i HYROX-simuleringen øker",
+        "body": "I de to siste simuleringene var {{latest}} % av starttempoet ditt igjen, tidligere vanlig {{baseline}} %; en endring kan påvises fra {{detectable}} prosentpoeng."
+      },
+      "combat_round_decay": {
+        "title": "Rundefallet øker",
+        "body": "I de to siste rundetestene var {{latest}} % av den første runden igjen i den siste, tidligere vanlig {{baseline}} %; en endring kan påvises fra {{detectable}} prosentpoeng."
+      },
+      "hyrox_station_slower": {
+        "title": "{{station}} langsommere enn vanlig",
+        "body": "I den siste simuleringen {{delta}} % over din egen median — mer enn de {{detectable}} % som spredningen din på denne stasjonen forklarer."
+      },
+      "fueling_below_plan": {
+        "title": "Inntak i lange økter under spennet",
+        "body": "{{count}} økter de siste to ukene lå under det publiserte spennet for varigheten sin (sist {{perHour}} g/h). En anledning til å se på inntaket — ikke et funn."
+      },
+      "gi_issue_pattern": {
+        "title": "Gjentatte mage-tarm-plager",
+        "body": "{{count}} økter de siste to ukene med tydelige plager. En anledning til å se på inntak og tidspunkt — ved vedvarende plager bør det avklares med lege."
+      },
+      "weight_rate_outside_target": {
+        "title": "Vekt to uker utenfor båndet ditt",
+        "body": "Denne uken {{rate}} %, uken før {{previous}} %; båndet ditt ligger på {{min}} til {{max}} % per uke."
+      }
+    }
+  },
+  "readinessCtx": {
+    "title": "Dagskontekst",
+    "none": "Ingen variasjonsbredde ennå — det krever minst 7 oppføringer på 28 dager.",
+    "allWithin_one": "{{count}} opplysning ligger innenfor din vanlige variasjonsbredde.",
+    "allWithin_other": "Alle {{count}} opplysninger ligger innenfor din vanlige variasjonsbredde.",
+    "markers_one": "{{count}} av {{of}} opplysninger utenfor din vanlige variasjonsbredde.",
+    "markers_other": "{{count}} av {{of}} opplysninger utenfor din vanlige variasjonsbredde.",
+    "pending": "Ennå uten variasjonsbredde eller uten aktuell verdi: {{list}}.",
+    "method": "Den siste verdien (høyst 2 dager gammel) sammenlignes med medianen din for de 28 dagene før; utenfor betyr mer enn én robust spredning unna. Bare den ugunstige retningen telles. Det er en anledning til å se nærmere, ingen treningsklarering og ingen helsevurdering.",
+    "addDevice": "Registrer HRV og hvilepuls som observasjon",
+    "openDiary": "Se i dagboken",
+    "usual": "vanlig {{median}} {{unit}}",
+    "component": {
+      "sleepHours": "Søvnlengde",
+      "sleepQuality": "Søvnkvalitet",
+      "energy": "Energi",
+      "stress": "Stress",
+      "soreness": "Stølhet",
+      "load7": "Belastning 7 dager",
+      "hrv": "HRV (RMSSD)",
+      "restingHr": "Hvilepuls"
+    },
+    "status": {
+      "within": "innenfor",
+      "below": "under",
+      "above": "over",
+      "no_current": "ingen aktuell verdi",
+      "insufficient": "ennå uten variasjonsbredde"
+    },
+    "noMarkers": "Ingen opplysning ligger utenfor din vanlige variasjonsbredde i ugunstig retning."
+  },
+  "readiness": {
+    "summary": "Sammendrag",
+    "summaryBasis_one": "fra {{count}} opplysning, likt vektet",
+    "summaryBasis_other": "fra {{count}} opplysninger, likt vektet",
+    "equalWeights": "likt vektet",
+    "lean": {
+      "favourable": "gunstig",
+      "middle": "middels",
+      "unfavourable": "ugunstig"
+    }
+  },
+  "load": {
+    "eyebrow": "Belastning",
+    "title": "Treningsbelastning og tretthetsresistens",
+    "intro": "Belastningen fra dagboken din (varighet × anstrengelse) over dager og uker, og under det hvor mye prestasjon du beholder under tretthet. Alt mot deg selv, ikke mot andre.",
+    "emptyTitle": "Ingen økter i dagboken ennå",
+    "emptyBody": "Belastningen beregnes fra varighet og anstrengelse (RPE) i øktene dine. Registrer noen dager, så vises summer og uker her.",
+    "toDiary": "Til dagboken",
+    "noAdvice": "Beskrivende. Ingen trafikklys, ingen skaderisiko, ingen treningsanbefaling — en RPE på 7 betyr ikke det samme for to mennesker, derfor teller bare sammenligningen med deg selv.",
+    "sums": {
+      "title": "Summer",
+      "why": "Øktbelastning etter Foster i AU. Dager uten oppføring teller som ikke registrert, ikke som hviledag.",
+      "days": "{{days}} dager"
+    },
+    "weeks": {
+      "title": "Tolv uker",
+      "typical": "Vanlig uke (snitt av de fire ukene før): {{value}} AU",
+      "noTypical": "En vanlig uke krever minst to av de fire foregående ukene med tre oppføringer hver.",
+      "aria": "Ukebelastning de siste tolv ukene som søyler",
+      "thisWeek": "denne uken",
+      "legend": "Blek: uke med færre enn tre oppføringer. Strek: uke uten oppføring."
+    },
+    "detail": {
+      "title": "Denne uken",
+      "why": "Endring fra forrige uke, monotoni og strain etter Foster.",
+      "change": "Mot forrige uke",
+      "monotony": "Monotoni",
+      "strain": "Strain",
+      "spike": "Denne uken ligger {{pct}} % over din vanlige uke — mer enn de {{threshold}} % der KYDON gir en merknad. En anledning til å se nærmere, ingen uttalelse om risiko.",
+      "vsTypical": "Mot din vanlige uke: {{pct}} %.",
+      "method": "Monotoni = snittet av dagsbelastningene / deres spredning (fra 5 registrerte dager); strain = ukebelastning × monotoni. Merknadsterskelen på 30 % er en fastsettelse fra KYDON, ingen grenseverdi fra litteraturen."
+    }
+  },
+  "durability": {
+    "title": "Tretthetsresistens",
+    "why": "Hvor mye av den uthvilte prestasjonen din som blir igjen under tretthet — sliten i prosent av uthvilt.",
+    "empty": "Tallet kommer fra tester som har både uthvilt og sliten i seg. Én av dem er nok til å begynne med:",
+    "method": "Tretthetssirkel: sett 4 mot sett 1. Gjentatt sprint: siste mot høyeste sprint. SJFT: kastrate i serie C mot serie A. Brick: uthvilt 5 km-tempo (høyst 56 dager før) mot løpstempo etter sykkel. En endring gjelder først når de to siste verdiene avviker mer fra din egen tidligere median enn spredningen din forklarer (minst 3 prosentpoeng — en fastsettelse fra KYDON).",
+    "detail": {
+      "reps": "uthvilt {{fresh}} rep., sliten {{fatigued}} rep.",
+      "W": "høyeste sprint {{fresh}} W, siste {{fatigued}} W",
+      "throws_per_s": "serie A {{fresh}} kast/s, serie C {{fatigued}} kast/s",
+      "s_per_km": "uthvilt {{fresh}} s/km, etter sykkel {{fatigued}} s/km",
+      "s_per_run": "løp 1–2 i snitt {{fresh}} s, løp 7–8 {{fatigued}} s",
+      "actions": "første runde {{fresh}} aksjoner, siste {{fatigued}}"
+    },
+    "verdict": {
+      "unknown_one": "{{count}} måling — en vurdering krever minst seks.",
+      "unknown_other": "{{count}} målinger — en vurdering krever minst seks.",
+      "within_noise": "Innenfor spredningen din: tidligere vanlig {{baseline}} %, en endring kunne påvises fra {{detectable}} prosentpoeng.",
+      "improved": "Begge de siste verdiene ligger mer enn {{detectable}} prosentpoeng over din tidligere median ({{baseline}} %).",
+      "worsened": "Begge de siste verdiene ligger mer enn {{detectable}} prosentpoeng under din tidligere median ({{baseline}} %)."
+    }
+  },
+  "sportAnalysis": {
+    "eyebrow": "Idrettsanalyse",
+    "title": "HYROX og kampsport",
+    "intro": "Den siste simuleringen brutt ned: hvor tiden går, hvor mye tempoet faller, hvor mye som er igjen i siste runde. Sammenligningen skjer bare mot dine egne tidligere simuleringer.",
+    "start": "Registrer simulering",
+    "noNorms": "Ingen normer og ingen måltider: for simuleringer finnes ingen holdbare testverdier, og løpstider avhenger av løype, felt og overganger. «Langsommere» står bare der avviket er større enn din egen spredning.",
+    "station": {
+      "skiErg": "SkiErg",
+      "sledPush": "Sledeskyv",
+      "sledPull": "Sledetrekk",
+      "burpeeBroadJump": "Burpee broad jumps",
+      "row": "Roing",
+      "farmersCarry": "Farmers carry",
+      "sandbagLunges": "Sandbag lunges",
+      "wallBalls": "Wall balls"
+    },
+    "verdict": {
+      "no_history": "første simulering",
+      "within_noise": "ingen vurdering",
+      "slower": "langsommere enn spredningen din forklarer (fra {{detectable}} %)",
+      "faster": "raskere enn spredningen din forklarer (fra {{detectable}} %)"
+    },
+    "hyrox": {
+      "title": "HYROX-simulering",
+      "empty": "Ingen simulering ennå. Åtte løp og åtte stasjoner registreres hver for seg — av dem beregnes tempofall og stasjonsandeler.",
+      "of_one": "Fra {{date}} · mot {{count}} tidligere simulering",
+      "of_other": "Fra {{date}} · mot {{count}} tidligere simuleringer",
+      "total": "Totalt",
+      "runs": "Løp",
+      "stations": "Stasjoner",
+      "roxzone": "Roxzone",
+      "runDecayTitle": "Tempofall i løpene",
+      "runDecay": "Løp 7–8 mot 1–2: {{pct}} %",
+      "runsAria": "Tidene for de åtte løpene som søyler",
+      "stationsTitle": "Stasjoner",
+      "ownLimiter": "Lengst over din egen median: {{station}}",
+      "largestShare": "Største tidsandel: {{station}} — en beskrivelse, ennå ikke et funn.",
+      "share": "{{pct}} % av totaltiden",
+      "vsMedian": "din median {{median}}, {{delta}} %",
+      "method": "Medianen kommer fra dine tidligere simuleringer. En vurdering gis fra fire tidligere simuleringer: da er det kjent hvor mye en stasjon varierer fra gang til gang hos deg (× 1,96·√2, minst 3 %)."
+    },
+    "combat": {
+      "title": "Kampsportrunder",
+      "empty": "Ingen runder registrert ennå. Tre til fem runder i konkurranselengde, hver telt for seg — av dem beregnes rundefallet.",
+      "decay": "Siste mot første runde: −{{pct}} % · {{date}}",
+      "aria": "Aksjoner per runde som søyler"
+    }
+  },
+  "fueling": {
+    "chip": {
+      "carbs": "{{perHour}} g KH/h"
+    },
+    "form": {
+      "show": "Registrer inntak (valgfritt)",
+      "hide": "Skjul inntak",
+      "carbs": "Karbohydrater i økten",
+      "fluid": "Drukket",
+      "massBefore": "Kroppsmasse før",
+      "massAfter": "Kroppsmasse etter",
+      "gi": "Mage-tarm-plager",
+      "giNone": "ingen",
+      "giStrong": "sterke",
+      "why": "Av karbohydrater og varighet beregnes inntaket per time, av massen før og etter svetteraten. Alt er valgfritt."
+    },
+    "level": {
+      "light": "lett",
+      "moderate": "moderat",
+      "high": "høy",
+      "very_high": "svært høy"
+    },
+    "need": {
+      "title": "Behov etter belastning",
+      "level": "Belastningsnivå {{level}}: i snitt {{minutes}} min trening per registrert dag ({{days}} av 7 dager registrert).",
+      "noWeight": "Uten kroppsmasse ingen spenn — registrer vekten din i dagboken.",
+      "noDiary": "Uten dagbokoppføring de siste sju dagene er belastningen ukjent.",
+      "eaten": "Spist i dag: {{value}} g",
+      "source": "Spenn per kg kroppsmasse etter Thomas, Erdman & Burke (2016, ACSM-posisjonspapir) og Burke et al. (2011): karbohydrater 3–5 / 5–7 / 6–10 / 8–12 g/kg etter nivå, protein 1,2–2,0 g/kg. Nivået ut fra treningsminuttene er en fastsettelse fra KYDON. En målestokk, ikke et mål — hva du spiser, bestemmer du."
+    },
+    "band": {
+      "none": "under 45 min: inntak ikke nødvendig",
+      "small": "45–75 min: små mengder eller munnskylling",
+      "range": "Spenn for denne varigheten: {{lo}}–{{hi}} g/h"
+    },
+    "sessions": {
+      "title": "Inntak i økter",
+      "why": "De siste 28 dagene, nyeste først.",
+      "empty": "Ingen økt med inntak ennå. Når du legger inn en økt i dagboken, kan det foldes ut.",
+      "perHour": "{{value}} g/h",
+      "below": "under spennet",
+      "sweat": "Svetterate {{rate}} l/h, massetap {{loss}} %",
+      "lossAbove2": "over 2 % av kroppsmassen",
+      "gi": "Mage-tarm {{score}} av 3",
+      "source": "Spenn etter Thomas et al. (2016) og Jeukendrup (2014); 90 g/h forutsetter glukose-fruktose-blandinger og tilvenning. Svetterate og 2 %-grensen etter Sawka et al. (2007, ACSM). Urin og vann i utåndingsluften er ikke trukket fra."
+    },
+    "weight": {
+      "title": "Vektbånd",
+      "why": "Den ønskede endringen din per uke, i prosent av kroppsmassen. KYDON viser om uken ligger innenfor — mer ikke.",
+      "thisWeek": "Denne uken",
+      "lastWeek": "Uken før",
+      "needs": "Det krever to veiinger i hver av de to ukene.",
+      "position": {
+        "below": "Under båndet ditt ({{min}} til {{max}}).",
+        "within": "Innenfor båndet ditt ({{min}} til {{max}}).",
+        "above": "Over båndet ditt ({{min}} til {{max}})."
+      },
+      "min": "Bånd fra (% per uke)",
+      "max": "Bånd til (% per uke)",
+      "unit": "%",
+      "clear": "Fjern bånd",
+      "note": "Båndet setter du selv, for eksempel sammen med treneren din eller en ernæringsrådgiver. KYDON foreslår ikke noe. En merknad vises først når to uker på rad ligger på samme side."
     }
   }
 }

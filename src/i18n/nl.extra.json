@@ -39,7 +39,8 @@
       "y_balance_composite": "Y-Balance (samengesteld)",
       "fms_total": "Functional Movement Screen (totaal)",
       "sleep_h": "Slaapduur",
-      "srpe_load_au": "Weekbelasting (sRPE)"
+      "srpe_load_au": "Weekbelasting (sRPE)",
+      "resting_hr_bpm": "Rusthartslag"
     },
     "meaning": {
       "ck_u_l": "Een enzym waarvan de bloedspiegel stijgt na ongewone belasting. De variatie tussen personen is zeer groot — alleen met jezelf vergelijkbaar.",
@@ -53,7 +54,8 @@
       "y_balance_composite": "Een reiktest op één been als aandeel van de beenlengte. Een screening van bewegingscontrole, geen prestatiemaat.",
       "fms_total": "Zeven bewegingstaken, elk gescoord van 0 tot 3. Een screening van bewegingskwaliteit, geen blessurevoorspelling.",
       "sleep_h": "Uren slaap de nacht ervoor, zelf geschat. Geen herstelscore — een getal dat naast de volgende meting staat.",
-      "srpe_load_au": "De belasting van een week als som van inspanning (RPE 1–10) maal minuten per sessie. Alleen met jezelf vergelijkbaar — en de meest voorkomende verklaring voor een slechte testdag."
+      "srpe_load_au": "De belasting van een week als som van inspanning (RPE 1–10) maal minuten per sessie. Alleen met jezelf vergelijkbaar — en de meest voorkomende verklaring voor een slechte testdag.",
+      "resting_hr_bpm": "Hartslagen per minuut 's ochtends, liggend, voor het opstaan. Alleen vergelijkbaar met jezelf; apparaat en meetmoment horen gelijk te blijven."
     }
   },
   "procedure": {
@@ -244,7 +246,13 @@
     "sjft_index": "De index van de Special Judo Fitness Test: beide hartslagen gedeeld door het aantal worpen. Lager is beter.",
     "swft_index": "De index van de Special Wrestling Fitness Test, op dezelfde manier opgebouwd als de SJFT. Lager is beter.",
     "vo2max_ml_kg_min": "Geschatte zuurstofopname per kilogram lichaamsgewicht per minuut. Uit een veldtest wordt ze met een formule geschat, niet gemeten — een laboratoriumwaarde zou afwijken.",
-    "watts_per_kg": "Vermogen per kilogram lichaamsgewicht. Overal waar het eigen gewicht verplaatst wordt, zegt het meer dan ruwe watts."
+    "watts_per_kg": "Vermogen per kilogram lichaamsgewicht. Overal waar het eigen gewicht verplaatst wordt, zegt het meer dan ruwe watts.",
+    "total_time_s": "De som van acht loopstukken, acht stations en — indien vastgelegd — de roxzone. Alleen vergelijkbaar met je eigen simulaties onder dezelfde omstandigheden.",
+    "run_total_s": "De acht loopstukken samen, zonder stations en wissels.",
+    "station_total_s": "De acht stations samen, zonder loopstukken en wissels.",
+    "run_decay_percent": "Hoeveel langzamer loopstukken 7–8 waren dan loopstukken 1–2, in procenten. Kleiner betekent: het tempo houdt stand over de race.",
+    "total_actions": "Alle acties over de rondes samen.",
+    "round_decay_percent": "Hoeveel minder acties de laatste ronde had dan de eerste, in procenten. Kleiner betekent: gelijkmatig tot het einde."
   },
   "pricing": {
     "eyebrow": "Profiel",
@@ -331,7 +339,9 @@
       "cockpit": "Cockpit met signalen en instelbare drempels",
       "health": "Gezondheidslaag: laboratoriumverloop, klachten, cyclus, medicatie (art. 9)",
       "peakWeek": "Peak Week als logboek",
-      "sportModule": "De kerncijfers van je eigen sport op één plek"
+      "sportModule": "De kerncijfers van je eigen sport op één plek",
+      "durability": "Vermoeidheidsresistentie: fris tegenover vermoeid, uit je tests, in het verloop",
+      "sportAnalysis": "HYROX- en vechtsportanalyse: loopverval, stations, rondes"
     },
     "coachUpgrade": "Ga je over je niveau heen, dan blijf je gewoon meten: je krijgt veertien dagen respijt, en overstappen kost alleen het naar rato berekende verschil voor de rest van het jaar.",
     "founder": "Oprichtersprijs: {{percent}}% korting op het eerste jaar van elk trainersniveau — voor de eerste {{count}} trainers.",
@@ -1449,6 +1459,429 @@
       "invite_other_email": "Deze uitnodiging is voor een ander e-mailadres.",
       "not_team_owner": "Alleen de eigenaar van het team mag dit.",
       "failed": "Dat is niet gelukt. Probeer het opnieuw."
+    }
+  },
+  "metric": {
+    "algorithm": "Berekening: {{algorithm}} · versie {{version}}",
+    "sample_one": "uit {{count}} waarde",
+    "sample_other": "uit {{count}} waarden",
+    "confidence": {
+      "LOW": "lage betrouwbaarheid",
+      "MEDIUM": "gemiddelde betrouwbaarheid",
+      "HIGH": "goede betrouwbaarheid"
+    },
+    "warning": {
+      "insufficient_data": "nog geen waarde — er is te weinig data",
+      "missing_input": "een benodigd gegeven ontbreekt",
+      "estimate": "Schatting",
+      "provisional_formula": "voorlopige berekening",
+      "incompatible_protocol": "protocollen niet vergelijkbaar",
+      "low_completeness": "onvolledige periode",
+      "stale": "verouderd",
+      "self_report": "zelf opgegeven",
+      "within_noise": "binnen de meetruis"
+    }
+  },
+  "hints": {
+    "eyebrow": "Aandachtspunten",
+    "title": "Wat een blik waard is",
+    "intro": "Aandachtspunten uit vaste regels, geen adviezen. Elk aandachtspunt noemt de regel waaruit het komt en de data waarop het rust.",
+    "emptyTitle": "Op dit moment niets open",
+    "emptyBody": "Geen enkele regel slaat aan. Zodra nieuwe metingen, dagboekitems of sessies iets opvallends tonen, staat het hier.",
+    "new": "nieuw",
+    "whyNow": "Waarom nu:",
+    "evidence_one": "{{count}} onderbouwing",
+    "evidence_other": "{{count}} onderbouwingen",
+    "acknowledge": "Afgehandeld",
+    "dismiss": "Verbergen",
+    "done": "Afgehandeld",
+    "doneWhy": "Bevestigde aandachtspunten waarvan de bevinding nog bestaat. Na de rustperiode worden ze opnieuw beoordeeld.",
+    "suppressed_one": "{{count}} verborgen aandachtspunt rust op dit moment.",
+    "suppressed_other": "{{count}} verborgen aandachtspunten rusten op dit moment.",
+    "noAdvice": "Een aandachtspunt is een aanleiding om te kijken, geen instructie en geen diagnose. Of en wat er moet veranderen, beslist een mens.",
+    "summaryTitle_one": "{{count}} aandachtspunt",
+    "summaryTitle_other": "{{count}} aandachtspunten",
+    "summaryNew_one": "{{count}} daarvan nieuw",
+    "summaryNew_other": "{{count}} daarvan nieuw",
+    "summarySub": "Uit vaste regels, met onderbouwing",
+    "openAll": "Alle aandachtspunten",
+    "severity": {
+      "info": "Info",
+      "notice": "Opvallend",
+      "warning": "Let op",
+      "review": "Bespreken"
+    },
+    "category": {
+      "decision": "Besluiten",
+      "load": "Belasting",
+      "recovery": "Herstel",
+      "performance": "Prestatie",
+      "durability": "Durability",
+      "adaptation": "Training",
+      "nutrition": "Voeding",
+      "data_quality": "Datakwaliteit"
+    },
+    "go": {
+      "test": "Naar de test",
+      "decision": "Naar de cockpit",
+      "route": "Bekijken"
+    },
+    "evidenceKind": {
+      "result": "Meting",
+      "diary": "Dagboek",
+      "workout": "Sessie",
+      "observation": "Observatie",
+      "decision": "Besluit",
+      "meal": "Maaltijd",
+      "metric": "Kengetal",
+      "axis": "Profielas"
+    },
+    "metricKey": {
+      "load_7d": "Belasting 7 dagen",
+      "diary_completeness": "Volledigheid dagboek",
+      "sleepHours": "Slaapduur",
+      "sleepQuality": "Slaapkwaliteit",
+      "energy": "Energie",
+      "stress": "Stress",
+      "soreness": "Spierpijn",
+      "load7": "Belasting 7 dagen",
+      "hrv": "HRV",
+      "restingHr": "Rusthartslag",
+      "e1rm": "e1RM",
+      "carbs_per_hour": "Koolhydraten per uur",
+      "gi_score": "Maag-darm",
+      "weight_rate_pct_week": "Gewichtsverandering per week"
+    },
+    "why": {
+      "profile_incomplete": "Zonder geslacht en geboortedatum is er geen plaatsing ten opzichte van referentiewaarden.",
+      "axis_unmeasured": "Voor deze as is er nog geen meting.",
+      "test_old": "De laatste meting is {{days}} dagen oud.",
+      "single_measurement": "De as rust op één enkele meting.",
+      "axis_below_rest": "De as ligt {{gap}} punten onder het gemiddelde van je andere assen.",
+      "quality_flags_recent": "{{count}} van {{total}} metingen uit de laatste 60 dagen hebben een voorbehoud.",
+      "pr_beyond_noise": "Het nieuwe persoonlijk record ligt buiten je meetvariatie.",
+      "pr_within_noise": "Het nieuwe persoonlijk record ligt nog binnen je meetvariatie.",
+      "two_declines_beyond_noise": "De twee meest recente metingen liggen verder onder je eerdere niveau dan je meetvariatie verklaart.",
+      "week_above_own_level": "Deze week ligt {{pct}} % boven je gebruikelijke week.",
+      "load_and_markers": "Zware week en tegelijk {{markers}} herstelmarkers buiten je bandbreedte.",
+      "several_days_below": "{{days}} van de laatste {{of}} dagen met een waarde onder je eigen bandbreedte.",
+      "several_days_above": "{{days}} van de laatste {{of}} dagen met een waarde boven je eigen bandbreedte.",
+      "diary_sparse": "Slechts {{pct}} % van de laatste 14 dagen is vastgelegd.",
+      "e1rm_flat_two_blocks": "De e1RM is over twee blokken van vier weken gelijk gebleven.",
+      "review_date_passed": "De evaluatiedatum is bereikt.",
+      "two_lower_beyond_noise": "De twee meest recente waarden liggen verder onder je eerdere mediaan dan je spreiding verklaart.",
+      "two_higher_beyond_noise": "De twee meest recente waarden liggen verder boven je eerdere mediaan dan je spreiding verklaart.",
+      "station_beyond_own_noise": "De afwijking is groter dan je eigen spreiding op dit station.",
+      "sessions_below_band": "Minstens twee sessies met opgave lagen onder de ondergrens.",
+      "gi_repeated": "Minstens twee sessies met klachten 2 of 3 van 3.",
+      "two_weeks_below_band": "Twee weken op rij onder de band.",
+      "two_weeks_above_band": "Twee weken op rij boven de band."
+    },
+    "rule": {
+      "version": "Regel {{rule}}, versie {{version}}",
+      "add_profile_data": {
+        "title": "Profielgegevens aanvullen",
+        "body": "Met geslacht en geboortedatum kunnen je waarden tegen passende referentiegroepen worden geplaatst."
+      },
+      "measure_missing_axis": {
+        "title": "{{subject}} is nog niet gemeten",
+        "body": "Zonder meting blijft deze as in het profiel leeg. Ontbrekend betekent niet zwak."
+      },
+      "stale_test": {
+        "title": "{{subject}} herhalen",
+        "body": "De laatste meting is {{days}} dagen oud. Een actuele waarde laat zien waar je vandaag staat."
+      },
+      "deepen_axis": {
+        "title": "{{subject}} breder onderbouwen",
+        "body": "Eén meting is een momentopname. Een tweede test maakt de as betrouwbaar."
+      },
+      "measurement_quality_low": {
+        "title": "Metingen met voorbehoud",
+        "body": "{{count}} van {{total}} recente metingen zijn niet volledig geldig, bijvoorbeeld omdat een maximaaltest niet tot uitputting ging. De waarden blijven staan, ze wegen alleen minder zwaar."
+      },
+      "benchmark_gap": {
+        "title": "{{subject}} ligt onder je andere assen",
+        "body": "Afstand {{gap}} punten, op basis van {{measurements}} metingen. Een bevinding over het profiel, geen trainingsschema."
+      },
+      "performance_pr": {
+        "title": "Nieuw persoonlijk record: {{subject}}",
+        "body": "{{value}} tegenover eerder {{previousBest}}."
+      },
+      "performance_regression": {
+        "title": "{{subject}} gaat achteruit",
+        "body": "De twee meest recente metingen liggen tot {{change}} % onder je eerdere niveau; een verandering is aantoonbaar vanaf {{detectable}} %. Een aanleiding om omstandigheden en belasting te bekijken."
+      },
+      "load_spike_review": {
+        "title": "Belasting duidelijk boven je niveau",
+        "body": "Deze week {{load}} AU, gebruikelijk is ongeveer {{typical}} AU. Beschrijvend, geen uitspraak over risico."
+      },
+      "load_plus_recovery": {
+        "title": "Zware week, herstel opvallend",
+        "body": "Belasting {{pct}} % boven gebruikelijk en {{markers}} herstelmarkers buiten je bandbreedte. Een aanleiding voor een gesprek, geen diagnose."
+      },
+      "sleep_deviation": {
+        "title": "Minder slaap dan gebruikelijk",
+        "body": "Op {{days}} van de laatste {{of}} dagen lag de slaapduur onder je eigen bandbreedte."
+      },
+      "hrv_deviation": {
+        "title": "HRV onder je bandbreedte",
+        "body": "Op {{days}} van de laatste {{of}} meetdagen lag de HRV onder je eigen bandbreedte. Meetmoment en apparaat verschuiven haar sterk."
+      },
+      "rhr_deviation": {
+        "title": "Rusthartslag boven je bandbreedte",
+        "body": "Op {{days}} van de laatste {{of}} meetdagen lag de rusthartslag boven je eigen bandbreedte."
+      },
+      "data_incomplete": {
+        "title": "Dagboek onvolledig",
+        "body": "{{pct}} % van de laatste 14 dagen is vastgelegd. Onder de helft zijn verlopen nauwelijks te lezen."
+      },
+      "strength_plateau": {
+        "title": "{{subject}}: e1RM onveranderd",
+        "body": "Laatst {{current}} kg, in het blok daarvoor {{previous}} kg. Een bevinding, geen voorschrift."
+      },
+      "decision_review_due": {
+        "title": "Besluit evalueren",
+        "body": "“{{decision}}” zou op {{reviewOn}} geëvalueerd worden."
+      },
+      "durability_worsened": {
+        "title": "Vermoeidheidsresistentie gaat achteruit: {{subject}}",
+        "body": "Laatst {{latest}} % behoud, eerder gebruikelijk {{baseline}} %; een verandering is herkenbaar vanaf {{detectable}} procentpunten. Een aanleiding om belasting, herstel en testomstandigheden te bekijken."
+      },
+      "durability_improved": {
+        "title": "Vermoeidheidsresistentie neemt toe: {{subject}}",
+        "body": "Laatst {{latest}} % behoud, eerder gebruikelijk {{baseline}} %; dat is meer dan de {{detectable}} procentpunten die je spreiding verklaart."
+      },
+      "hyrox_run_decay": {
+        "title": "Loopverval in de HYROX-simulatie neemt toe",
+        "body": "In de twee meest recente simulaties bleef van je begintempo {{latest}} % over, eerder gebruikelijk {{baseline}} %; een verandering is herkenbaar vanaf {{detectable}} procentpunten."
+      },
+      "combat_round_decay": {
+        "title": "Rondeverval neemt toe",
+        "body": "In de twee meest recente rondetests bleef in de laatste ronde {{latest}} % van de eerste over, eerder gebruikelijk {{baseline}} %; een verandering is herkenbaar vanaf {{detectable}} procentpunten."
+      },
+      "hyrox_station_slower": {
+        "title": "{{station}} langzamer dan anders",
+        "body": "In de meest recente simulatie {{delta}} % boven je eigen mediaan — meer dan de {{detectable}} % die je spreiding op dit station verklaart."
+      },
+      "fueling_below_plan": {
+        "title": "Inname in lange sessies onder het bereik",
+        "body": "{{count}} sessies uit de laatste twee weken lagen onder het gepubliceerde bereik voor hun duur (laatst {{perHour}} g/h). Een aanleiding om de voeding te bekijken — geen bevinding."
+      },
+      "gi_issue_pattern": {
+        "title": "Herhaaldelijk maag-darmklachten",
+        "body": "{{count}} sessies uit de laatste twee weken met duidelijke klachten. Een aanleiding om voeding en tijdstip te bekijken — bij aanhoudende klachten medisch laten beoordelen."
+      },
+      "weight_rate_outside_target": {
+        "title": "Gewicht twee weken buiten je band",
+        "body": "Deze week {{rate}} %, daarvoor {{previous}} %; je band ligt tussen {{min}} en {{max}} % per week."
+      }
+    }
+  },
+  "readinessCtx": {
+    "title": "Dagcontext",
+    "none": "Nog geen bandbreedte — daarvoor zijn minstens 7 invoeren in 28 dagen nodig.",
+    "allWithin_one": "{{count}} gegeven ligt binnen je gebruikelijke bandbreedte.",
+    "allWithin_other": "Alle {{count}} gegevens liggen binnen je gebruikelijke bandbreedte.",
+    "markers_one": "{{count}} van {{of}} gegevens buiten je gebruikelijke bandbreedte.",
+    "markers_other": "{{count}} van {{of}} gegevens buiten je gebruikelijke bandbreedte.",
+    "pending": "Nog zonder bandbreedte of zonder actuele waarde: {{list}}.",
+    "method": "Vergeleken wordt de meest recente waarde (hoogstens 2 dagen oud) met je mediaan van de 28 dagen daarvoor; buiten betekent meer dan één robuuste spreiding verwijderd. Alleen de ongunstige richting telt. Dit is een aanleiding om te kijken, geen trainingsvrijgave en geen gezondheidsoordeel.",
+    "addDevice": "HRV en rusthartslag als observatie vastleggen",
+    "openDiary": "In het dagboek bekijken",
+    "usual": "gebruikelijk {{median}} {{unit}}",
+    "component": {
+      "sleepHours": "Slaapduur",
+      "sleepQuality": "Slaapkwaliteit",
+      "energy": "Energie",
+      "stress": "Stress",
+      "soreness": "Spierpijn",
+      "load7": "Belasting 7 dagen",
+      "hrv": "HRV (RMSSD)",
+      "restingHr": "Rusthartslag"
+    },
+    "status": {
+      "within": "binnen de marge",
+      "below": "eronder",
+      "above": "erboven",
+      "no_current": "geen actuele waarde",
+      "insufficient": "nog zonder bandbreedte"
+    },
+    "noMarkers": "Geen enkel gegeven ligt in de ongunstige richting buiten je gebruikelijke bandbreedte."
+  },
+  "readiness": {
+    "summary": "Samenvatting",
+    "summaryBasis_one": "uit {{count}} gegeven, gelijk gewogen",
+    "summaryBasis_other": "uit {{count}} gegevens, gelijk gewogen",
+    "equalWeights": "gelijk gewogen",
+    "lean": {
+      "favourable": "gunstig",
+      "middle": "gemiddeld",
+      "unfavourable": "ongunstig"
+    }
+  },
+  "load": {
+    "eyebrow": "Belasting",
+    "title": "Trainingsbelasting en vermoeidheidsresistentie",
+    "intro": "De belasting uit je dagboek (duur × inspanning) over dagen en weken, daaronder hoeveel prestatie je onder vermoeidheid overhoudt. Alles ten opzichte van jezelf, niet van anderen.",
+    "emptyTitle": "Nog geen sessies in het dagboek",
+    "emptyBody": "De belasting ontstaat uit duur en inspanning (RPE) van je sessies. Na een paar dagen invoer verschijnen hier sommen en weken.",
+    "toDiary": "Naar het dagboek",
+    "noAdvice": "Beschrijvend. Geen stoplicht, geen blessurerisico, geen trainingsadvies — een RPE van 7 betekent bij twee mensen niet hetzelfde, daarom telt alleen de vergelijking met jezelf.",
+    "sums": {
+      "title": "Sommen",
+      "why": "Sessiebelasting volgens Foster in AU. Dagen zonder invoer tellen als niet vastgelegd, niet als rustdag.",
+      "days": "{{days}} dagen"
+    },
+    "weeks": {
+      "title": "Twaalf weken",
+      "typical": "Gebruikelijke week (gemiddelde van de vier weken daarvoor): {{value}} AU",
+      "noTypical": "Voor een gebruikelijke week zijn minstens twee van de vier voorgaande weken met elk drie invoeren nodig.",
+      "aria": "Weekbelasting van de laatste twaalf weken als balken",
+      "thisWeek": "deze week",
+      "legend": "Vaag: week met minder dan drie invoeren. Streepje: week zonder invoer."
+    },
+    "detail": {
+      "title": "Deze week",
+      "why": "Verandering ten opzichte van de vorige week, monotonie en strain volgens Foster.",
+      "change": "T.o.v. vorige week",
+      "monotony": "Monotonie",
+      "strain": "Strain",
+      "spike": "Deze week ligt {{pct}} % boven je gebruikelijke week — meer dan de {{threshold}} % vanaf waar KYDON erop wijst. Een aanleiding om te kijken, geen uitspraak over risico.",
+      "vsTypical": "T.o.v. je gebruikelijke week: {{pct}} %.",
+      "method": "Monotonie = gemiddelde van de dagbelastingen / hun spreiding (vanaf 5 vastgelegde dagen); strain = weekbelasting × monotonie. De signaaldrempel van 30 % is een keuze van KYDON, geen grenswaarde uit de literatuur."
+    }
+  },
+  "durability": {
+    "title": "Vermoeidheidsresistentie",
+    "why": "Hoeveel van je frisse prestatie onder vermoeidheid overblijft — vermoeid in procenten van fris.",
+    "empty": "Het getal komt uit tests die fris en vermoeid in zich dragen. Eén daarvan volstaat om te beginnen:",
+    "method": "Vermoeidheidscircuit: set 4 ten opzichte van set 1. Herhaalde sprint: laatste ten opzichte van hoogste sprint. SJFT: worpfrequentie van serie C ten opzichte van serie A. Brick: frisse 5-km-pace (hoogstens 56 dagen daarvoor) ten opzichte van de looppace na de fiets. Een verandering telt pas als de twee meest recente waarden verder van je eigen eerdere mediaan afwijken dan je spreiding verklaart (minstens 3 procentpunten — een keuze van KYDON).",
+    "detail": {
+      "reps": "fris {{fresh}} herh., vermoeid {{fatigued}} herh.",
+      "W": "hoogste sprint {{fresh}} W, laatste {{fatigued}} W",
+      "throws_per_s": "serie A {{fresh}} worpen/s, serie C {{fatigued}} worpen/s",
+      "s_per_km": "fris {{fresh}} s/km, na de fiets {{fatigued}} s/km",
+      "s_per_run": "loopstukken 1–2 gemiddeld {{fresh}} s, loopstukken 7–8 {{fatigued}} s",
+      "actions": "eerste ronde {{fresh}} acties, laatste {{fatigued}}"
+    },
+    "verdict": {
+      "unknown_one": "{{count}} meting — voor een oordeel zijn er minstens zes nodig.",
+      "unknown_other": "{{count}} metingen — voor een oordeel zijn er minstens zes nodig.",
+      "within_noise": "Binnen je spreiding: eerder gebruikelijk {{baseline}} %, een verandering zou herkenbaar zijn vanaf {{detectable}} procentpunten.",
+      "improved": "Beide meest recente waarden liggen meer dan {{detectable}} procentpunten boven je eerdere mediaan ({{baseline}} %).",
+      "worsened": "Beide meest recente waarden liggen meer dan {{detectable}} procentpunten onder je eerdere mediaan ({{baseline}} %)."
+    }
+  },
+  "sportAnalysis": {
+    "eyebrow": "Sportanalyse",
+    "title": "HYROX en vechtsport",
+    "intro": "De meest recente simulatie ontleed: waar de tijd blijft, hoe sterk het tempo terugvalt, hoeveel er in de laatste ronde over is. Vergeleken wordt alleen met je eigen eerdere simulaties.",
+    "start": "Simulatie vastleggen",
+    "noNorms": "Geen normen en geen streeftijden: voor simulaties bestaan geen onderbouwde testwaarden, en racetijden hangen af van parcours, deelnemersveld en wissels. “Langzamer” staat er alleen waar de afwijking groter is dan je eigen spreiding.",
+    "station": {
+      "skiErg": "SkiErg",
+      "sledPush": "Sled push",
+      "sledPull": "Sled pull",
+      "burpeeBroadJump": "Burpee broad jumps",
+      "row": "Roeien",
+      "farmersCarry": "Farmers carry",
+      "sandbagLunges": "Sandbag lunges",
+      "wallBalls": "Wall balls"
+    },
+    "verdict": {
+      "no_history": "eerste simulatie",
+      "within_noise": "zonder oordeel",
+      "slower": "langzamer dan je spreiding verklaart (vanaf {{detectable}} %)",
+      "faster": "sneller dan je spreiding verklaart (vanaf {{detectable}} %)"
+    },
+    "hyrox": {
+      "title": "HYROX-simulatie",
+      "empty": "Nog geen simulatie. Vastgelegd worden acht loopstukken en acht stations afzonderlijk — daaruit ontstaan loopverval en stationsaandelen.",
+      "of_one": "Van {{date}} · t.o.v. {{count}} eerdere simulatie",
+      "of_other": "Van {{date}} · t.o.v. {{count}} eerdere simulaties",
+      "total": "Totaal",
+      "runs": "Loopstukken",
+      "stations": "Stations",
+      "roxzone": "Roxzone",
+      "runDecayTitle": "Loopverval",
+      "runDecay": "Loopstukken 7–8 t.o.v. 1–2: {{pct}} %",
+      "runsAria": "Tijden van de acht loopstukken als balken",
+      "stationsTitle": "Stations",
+      "ownLimiter": "Het verst boven je eigen mediaan: {{station}}",
+      "largestShare": "Grootste tijdsaandeel: {{station}} — een beschrijving, nog geen bevinding.",
+      "share": "{{pct}} % van de totale tijd",
+      "vsMedian": "je mediaan {{median}}, {{delta}} %",
+      "method": "De mediaan komt uit je eerdere simulaties. Een oordeel is er vanaf vier eerdere simulaties: dan is bekend hoe sterk een station bij jou van keer tot keer schommelt (× 1,96·√2, minstens 3 %)."
+    },
+    "combat": {
+      "title": "Vechtsportrondes",
+      "empty": "Nog geen rondes vastgelegd. Drie tot vijf rondes van wedstrijdlengte, elk apart geteld — daaruit ontstaat het rondeverval.",
+      "decay": "Laatste t.o.v. eerste ronde: −{{pct}} % · {{date}}",
+      "aria": "Acties per ronde als balken"
+    }
+  },
+  "fueling": {
+    "chip": {
+      "carbs": "{{perHour}} g KH/h"
+    },
+    "form": {
+      "show": "Voeding vastleggen (optioneel)",
+      "hide": "Voeding verbergen",
+      "carbs": "Koolhydraten tijdens de sessie",
+      "fluid": "Gedronken",
+      "massBefore": "Lichaamsmassa vooraf",
+      "massAfter": "Lichaamsmassa achteraf",
+      "gi": "Maag-darmklachten",
+      "giNone": "geen",
+      "giStrong": "sterk",
+      "why": "Uit koolhydraten en duur volgt de inname per uur, uit de massa vooraf en achteraf de zweetsnelheid. Alles optioneel."
+    },
+    "level": {
+      "light": "licht",
+      "moderate": "matig",
+      "high": "hoog",
+      "very_high": "zeer hoog"
+    },
+    "need": {
+      "title": "Behoefte naar belasting",
+      "level": "Belastingsniveau {{level}}: gemiddeld {{minutes}} min training per vastgelegde dag ({{days}} van 7 dagen vastgelegd).",
+      "noWeight": "Zonder lichaamsmassa geen bereik — voer je gewicht in het dagboek in.",
+      "noDiary": "Zonder dagboekinvoer in de laatste zeven dagen is de belasting onbekend.",
+      "eaten": "Vandaag gegeten: {{value}} g",
+      "source": "Bereiken per kg lichaamsmassa volgens Thomas, Erdman & Burke (2016, ACSM-standpunt) en Burke et al. (2011): koolhydraten 3–5 / 5–7 / 6–10 / 8–12 g/kg per niveau, eiwit 1,2–2,0 g/kg. Het niveau uit de trainingsminuten is een keuze van KYDON. Een maatstaf, geen doel — wat je eet, bepaal je zelf."
+    },
+    "band": {
+      "none": "onder 45 min: geen inname nodig",
+      "small": "45–75 min: kleine hoeveelheden of mondspoeling",
+      "range": "Bereik voor deze duur: {{lo}}–{{hi}} g/h"
+    },
+    "sessions": {
+      "title": "Voeding in sessies",
+      "why": "De laatste 28 dagen, meest recente eerst.",
+      "empty": "Nog geen sessie met voeding. Bij het aanmaken van een sessie in het dagboek kun je dit openklappen.",
+      "perHour": "{{value}} g/h",
+      "below": "onder het bereik",
+      "sweat": "Zweetsnelheid {{rate}} l/h, massaverlies {{loss}} %",
+      "lossAbove2": "meer dan 2 % van de lichaamsmassa",
+      "gi": "Maag-darm {{score}} van 3",
+      "source": "Bereiken volgens Thomas et al. (2016) en Jeukendrup (2014); 90 g/h veronderstelt glucose-fructosemengsels en gewenning. Zweetsnelheid en de 2-%-grens volgens Sawka et al. (2007, ACSM). Urine en ademvocht zijn niet afgetrokken."
+    },
+    "weight": {
+      "title": "Gewichtsband",
+      "why": "Je gewenste verandering per week, in procenten van de lichaamsmassa. KYDON toont of de week daarbinnen ligt — meer niet.",
+      "thisWeek": "Deze week",
+      "lastWeek": "Week daarvoor",
+      "needs": "Daarvoor zijn in beide weken elk twee wegingen nodig.",
+      "position": {
+        "below": "Onder je band ({{min}} tot {{max}}).",
+        "within": "Binnen je band ({{min}} tot {{max}}).",
+        "above": "Boven je band ({{min}} tot {{max}})."
+      },
+      "min": "Band van (% per week)",
+      "max": "Band tot (% per week)",
+      "unit": "%",
+      "clear": "Band verwijderen",
+      "note": "De band stel je zelf in, bijvoorbeeld met je trainer of voedingsdeskundige. KYDON stelt er geen voor. Een aandachtspunt verschijnt pas als twee weken op rij aan dezelfde kant liggen."
     }
   }
 }

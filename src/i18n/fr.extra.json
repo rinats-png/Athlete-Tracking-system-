@@ -39,7 +39,8 @@
       "y_balance_composite": "Y-Balance (composite)",
       "fms_total": "Functional Movement Screen (total)",
       "sleep_h": "Durée de sommeil",
-      "srpe_load_au": "Charge hebdomadaire (sRPE)"
+      "srpe_load_au": "Charge hebdomadaire (sRPE)",
+      "resting_hr_bpm": "FC de repos"
     },
     "meaning": {
       "ck_u_l": "Une enzyme dont le taux sanguin monte après une charge inhabituelle. La variation entre personnes est très grande — comparable seulement avec toi-même.",
@@ -53,7 +54,8 @@
       "y_balance_composite": "Un test d'atteinte sur une jambe rapporté à la longueur de jambe. Un dépistage du contrôle moteur, pas une mesure de performance.",
       "fms_total": "Sept tâches motrices notées de 0 à 3 chacune. Un dépistage de la qualité du mouvement, pas une prédiction de blessure.",
       "sleep_h": "Heures de sommeil de la nuit précédente, auto-estimées. Pas un score de récupération — un chiffre placé à côté de la mesure suivante.",
-      "srpe_load_au": "La charge d'une semaine comme somme de l'effort (RPE 1–10) multiplié par les minutes par séance. Comparable seulement avec toi-même — et l'explication la plus fréquente d'un mauvais jour de test."
+      "srpe_load_au": "La charge d'une semaine comme somme de l'effort (RPE 1–10) multiplié par les minutes par séance. Comparable seulement avec toi-même — et l'explication la plus fréquente d'un mauvais jour de test.",
+      "resting_hr_bpm": "Battements par minute le matin, allongé, avant de se lever. Comparable seulement avec toi-même ; l'appareil et le moment de mesure devraient rester les mêmes."
     }
   },
   "procedure": {
@@ -244,7 +246,13 @@
     "sjft_index": "L'indice du Special Judo Fitness Test : les deux fréquences cardiaques divisées par le nombre de projections. Plus bas est mieux.",
     "swft_index": "L'indice du Special Wrestling Fitness Test, construit comme le SJFT. Plus bas est mieux.",
     "vo2max_ml_kg_min": "Consommation d'oxygène estimée par kilogramme de poids de corps et par minute. À partir d'un test de terrain, elle est estimée par formule, pas mesurée — une valeur de laboratoire différerait.",
-    "watts_per_kg": "Puissance par kilogramme de poids de corps. Partout où l'on déplace son propre poids, elle en dit plus que les watts bruts."
+    "watts_per_kg": "Puissance par kilogramme de poids de corps. Partout où l'on déplace son propre poids, elle en dit plus que les watts bruts.",
+    "total_time_s": "La somme des huit courses, des huit stations et — si elle est saisie — de la Roxzone. Comparable seulement avec tes propres simulations dans les mêmes conditions.",
+    "run_total_s": "Les huit courses ensemble, sans stations ni transitions.",
+    "station_total_s": "Les huit stations ensemble, sans courses ni transitions.",
+    "run_decay_percent": "De combien les courses 7–8 ont été plus lentes que les courses 1–2, en pourcent. Plus petit signifie : l'allure tient sur toute la course.",
+    "total_actions": "Toutes les actions sur l'ensemble des reprises.",
+    "round_decay_percent": "Combien d'actions en moins la dernière reprise a comptées par rapport à la première, en pourcent. Plus petit signifie : régulier jusqu'à la fin."
   },
   "pricing": {
     "eyebrow": "Profil",
@@ -331,7 +339,9 @@
       "cockpit": "Cockpit avec signaux et seuils réglables",
       "health": "Couche santé : historique de laboratoire, symptômes, cycle, médication (art. 9)",
       "peakWeek": "Peak Week sous forme de journal",
-      "sportModule": "Les indicateurs de ton sport au même endroit"
+      "sportModule": "Les indicateurs de ton sport au même endroit",
+      "durability": "Résistance à la fatigue : frais contre fatigué, à partir de vos tests, dans le temps",
+      "sportAnalysis": "Analyse HYROX et sports de combat : ralentissement en course, stations, reprises"
     },
     "coachUpgrade": "Si tu dépasses ton palier, tu continues à mesurer : tu as un délai de quatorze jours, et le changement ne coûte que la différence au prorata pour le reste de l’année.",
     "founder": "Prix fondateur : {{percent}} % de réduction sur la première année de chaque palier entraîneur — pour les {{count}} premiers entraîneurs.",
@@ -1449,6 +1459,429 @@
       "invite_other_email": "Cette invitation est destinée à une autre adresse e-mail.",
       "not_team_owner": "Seul le propriétaire de l’équipe peut faire cela.",
       "failed": "Ça n’a pas fonctionné. Réessaie."
+    }
+  },
+  "metric": {
+    "algorithm": "Calcul : {{algorithm}} · version {{version}}",
+    "sample_one": "sur {{count}} valeur",
+    "sample_other": "sur {{count}} valeurs",
+    "confidence": {
+      "LOW": "fiabilité faible",
+      "MEDIUM": "fiabilité moyenne",
+      "HIGH": "bonne fiabilité"
+    },
+    "warning": {
+      "insufficient_data": "pas encore de valeur — les données ne suffisent pas",
+      "missing_input": "une donnée nécessaire manque",
+      "estimate": "estimation",
+      "provisional_formula": "calcul provisoire",
+      "incompatible_protocol": "protocoles non comparables",
+      "low_completeness": "période incomplète",
+      "stale": "obsolète",
+      "self_report": "auto-déclaré",
+      "within_noise": "dans le bruit de mesure"
+    }
+  },
+  "hints": {
+    "eyebrow": "Remarques",
+    "title": "Ce qui mérite un regard",
+    "intro": "Des remarques issues de règles fixes, pas des conseils. Chacune nomme la règle dont elle provient et les données sur lesquelles elle repose.",
+    "emptyTitle": "Rien en suspens pour l'instant",
+    "emptyBody": "Aucune règle ne se déclenche. Dès que de nouvelles mesures, entrées de journal ou séances montrent quelque chose de notable, cela apparaît ici.",
+    "new": "nouveau",
+    "whyNow": "Pourquoi maintenant :",
+    "evidence_one": "{{count}} élément",
+    "evidence_other": "{{count}} éléments",
+    "acknowledge": "Traité",
+    "dismiss": "Masquer",
+    "done": "Traitées",
+    "doneWhy": "Remarques confirmées dont le constat persiste. Après le délai de repos, elles sont réévaluées.",
+    "suppressed_one": "{{count}} remarque masquée est en veille.",
+    "suppressed_other": "{{count}} remarques masquées sont en veille.",
+    "noAdvice": "Une remarque est une occasion de regarder, pas une consigne ni un diagnostic. Si quelque chose doit changer, et quoi, c'est une personne qui le décide.",
+    "summaryTitle_one": "{{count}} remarque",
+    "summaryTitle_other": "{{count}} remarques",
+    "summaryNew_one": "dont {{count}} nouvelle",
+    "summaryNew_other": "dont {{count}} nouvelles",
+    "summarySub": "Issues de règles fixes, avec éléments",
+    "openAll": "Toutes les remarques",
+    "severity": {
+      "info": "Info",
+      "notice": "Notable",
+      "warning": "Attention",
+      "review": "À discuter"
+    },
+    "category": {
+      "decision": "Décisions",
+      "load": "Charge",
+      "recovery": "Récupération",
+      "performance": "Performance",
+      "durability": "Durabilité",
+      "adaptation": "Entraînement",
+      "nutrition": "Nutrition",
+      "data_quality": "Données"
+    },
+    "go": {
+      "test": "Vers le test",
+      "decision": "Vers le cockpit",
+      "route": "Voir"
+    },
+    "evidenceKind": {
+      "result": "Mesure",
+      "diary": "Journal",
+      "workout": "Séance",
+      "observation": "Observation",
+      "decision": "Décision",
+      "meal": "Repas",
+      "metric": "Indicateur",
+      "axis": "Axe du profil"
+    },
+    "metricKey": {
+      "load_7d": "Charge 7 jours",
+      "diary_completeness": "Complétude du journal",
+      "sleepHours": "Durée de sommeil",
+      "sleepQuality": "Qualité du sommeil",
+      "energy": "Énergie",
+      "stress": "Stress",
+      "soreness": "Courbatures",
+      "load7": "Charge 7 jours",
+      "hrv": "VFC",
+      "restingHr": "FC de repos",
+      "e1rm": "e1RM",
+      "carbs_per_hour": "Glucides par heure",
+      "gi_score": "Troubles digestifs",
+      "weight_rate_pct_week": "Variation de poids par semaine"
+    },
+    "why": {
+      "profile_incomplete": "Sans sexe ni date de naissance, aucun classement par rapport aux valeurs de référence n'est possible.",
+      "axis_unmeasured": "Il n'existe encore aucune mesure pour cet axe.",
+      "test_old": "La dernière mesure date de {{days}} jours.",
+      "single_measurement": "L'axe repose sur une seule mesure.",
+      "axis_below_rest": "L'axe se situe {{gap}} points sous la moyenne de tes autres axes.",
+      "quality_flags_recent": "{{count}} des {{total}} mesures des 60 derniers jours portent une réserve.",
+      "pr_beyond_noise": "Le nouveau record personnel se situe au-delà de ta variation de mesure.",
+      "pr_within_noise": "Le nouveau record personnel se situe encore dans ta variation de mesure.",
+      "two_declines_beyond_noise": "Les deux mesures les plus récentes sont plus en dessous de ton niveau antérieur que ta variation de mesure ne l'explique.",
+      "week_above_own_level": "Cette semaine est {{pct}} % au-dessus de ta semaine habituelle.",
+      "load_and_markers": "Semaine chargée et, en même temps, {{markers}} marqueurs de récupération hors de ta plage habituelle.",
+      "several_days_below": "{{days}} des {{of}} derniers jours avec une valeur sous ta propre plage habituelle.",
+      "several_days_above": "{{days}} des {{of}} derniers jours avec une valeur au-dessus de ta propre plage habituelle.",
+      "diary_sparse": "Seuls {{pct}} % des 14 derniers jours sont renseignés.",
+      "e1rm_flat_two_blocks": "Le e1RM est resté inchangé sur deux blocs de quatre semaines.",
+      "review_date_passed": "La date de révision est atteinte.",
+      "two_lower_beyond_noise": "Les deux valeurs les plus récentes sont plus en dessous de ta médiane antérieure que ta dispersion ne l'explique.",
+      "two_higher_beyond_noise": "Les deux valeurs les plus récentes sont plus au-dessus de ta médiane antérieure que ta dispersion ne l'explique.",
+      "station_beyond_own_noise": "L'écart est plus grand que ta propre dispersion à cette station.",
+      "sessions_below_band": "Au moins deux séances renseignées se situaient sous la limite inférieure.",
+      "gi_repeated": "Au moins deux séances avec des troubles de 2 ou 3 sur 3.",
+      "two_weeks_below_band": "Deux semaines de suite sous la plage.",
+      "two_weeks_above_band": "Deux semaines de suite au-dessus de la plage."
+    },
+    "rule": {
+      "version": "Règle {{rule}}, version {{version}}",
+      "add_profile_data": {
+        "title": "Compléter le profil",
+        "body": "Avec le sexe et la date de naissance, tes valeurs peuvent être situées par rapport à des groupes de référence adaptés."
+      },
+      "measure_missing_axis": {
+        "title": "{{subject}} n'est pas encore mesuré",
+        "body": "Sans mesure, cet axe reste vide dans le profil. Manquant ne veut pas dire faible."
+      },
+      "stale_test": {
+        "title": "Répéter {{subject}}",
+        "body": "La dernière mesure date de {{days}} jours. Une valeur actuelle montre où tu en es aujourd'hui."
+      },
+      "deepen_axis": {
+        "title": "Étayer {{subject}} plus largement",
+        "body": "Une mesure isolée est un instantané. Un deuxième test rend l'axe fiable."
+      },
+      "measurement_quality_low": {
+        "title": "Mesures avec réserve",
+        "body": "{{count}} des {{total}} mesures récentes ne sont pas pleinement valides, par exemple parce qu'un test maximal n'a pas été mené à épuisement. Les valeurs restent, elles pèsent simplement moins."
+      },
+      "benchmark_gap": {
+        "title": "{{subject}} se situe sous tes autres axes",
+        "body": "Écart de {{gap}} points, fondé sur {{measurements}} mesures. Un constat sur le profil, pas un plan d'entraînement."
+      },
+      "performance_pr": {
+        "title": "Nouveau record personnel : {{subject}}",
+        "body": "{{value}} contre {{previousBest}} jusqu'ici."
+      },
+      "performance_regression": {
+        "title": "{{subject}} recule",
+        "body": "Les deux mesures les plus récentes se situent jusqu'à {{change}} % sous ton niveau antérieur ; un changement est démontrable à partir de {{detectable}} %. Une occasion de regarder les conditions et la charge."
+      },
+      "load_spike_review": {
+        "title": "Charge nettement au-dessus de ton niveau",
+        "body": "Cette semaine {{load}} AU, habituellement environ {{typical}} AU. Descriptif, aucune affirmation sur un risque."
+      },
+      "load_plus_recovery": {
+        "title": "Semaine chargée, récupération notable",
+        "body": "Charge {{pct}} % au-dessus de l'habitude et {{markers}} marqueurs de récupération hors de ta plage habituelle. Une occasion d'en parler, pas un diagnostic."
+      },
+      "sleep_deviation": {
+        "title": "Moins de sommeil que d'habitude",
+        "body": "Sur {{days}} des {{of}} derniers jours, la durée de sommeil était sous ta propre plage habituelle."
+      },
+      "hrv_deviation": {
+        "title": "VFC sous ta plage habituelle",
+        "body": "Sur {{days}} des {{of}} derniers jours de mesure, la VFC était sous ta propre plage habituelle. Le moment de mesure et l'appareil la déplacent fortement."
+      },
+      "rhr_deviation": {
+        "title": "FC de repos au-dessus de ta plage habituelle",
+        "body": "Sur {{days}} des {{of}} derniers jours de mesure, la FC de repos était au-dessus de ta propre plage habituelle."
+      },
+      "data_incomplete": {
+        "title": "Journal lacunaire",
+        "body": "{{pct}} % des 14 derniers jours sont renseignés. En dessous de la moitié, les évolutions sont difficiles à lire."
+      },
+      "strength_plateau": {
+        "title": "{{subject}} : e1RM inchangé",
+        "body": "Dernièrement {{current}} kg, dans le bloc précédent {{previous}} kg. Un constat, pas une consigne."
+      },
+      "decision_review_due": {
+        "title": "Réviser la décision",
+        "body": "« {{decision}} » devait être révisée le {{reviewOn}}."
+      },
+      "durability_worsened": {
+        "title": "La résistance à la fatigue recule : {{subject}}",
+        "body": "Dernièrement {{latest}} % de maintien, auparavant habituellement {{baseline}} % ; un changement est perceptible à partir de {{detectable}} points de pourcentage. Une occasion de regarder la charge, la récupération et les conditions de test."
+      },
+      "durability_improved": {
+        "title": "La résistance à la fatigue progresse : {{subject}}",
+        "body": "Dernièrement {{latest}} % de maintien, auparavant habituellement {{baseline}} % ; c'est plus que les {{detectable}} points de pourcentage qu'explique ta dispersion."
+      },
+      "hyrox_run_decay": {
+        "title": "Le ralentissement en course augmente dans la simulation HYROX",
+        "body": "Dans les deux simulations les plus récentes, il restait {{latest}} % de ton allure de départ, auparavant habituellement {{baseline}} % ; un changement est perceptible à partir de {{detectable}} points de pourcentage."
+      },
+      "combat_round_decay": {
+        "title": "La baisse sur les reprises augmente",
+        "body": "Dans les deux tests de reprises les plus récents, la dernière reprise atteignait {{latest}} % de la première, auparavant habituellement {{baseline}} % ; un changement est perceptible à partir de {{detectable}} points de pourcentage."
+      },
+      "hyrox_station_slower": {
+        "title": "{{station}} plus lent que d'habitude",
+        "body": "Dans la simulation la plus récente, {{delta}} % au-dessus de ta propre médiane — plus que les {{detectable}} % qu'explique ta dispersion à cette station."
+      },
+      "fueling_below_plan": {
+        "title": "Apport sous la fourchette lors des longues séances",
+        "body": "{{count}} séances des deux dernières semaines se situaient sous la fourchette publiée pour leur durée (dernièrement {{perHour}} g/h). Une occasion de regarder l'alimentation à l'effort — pas un constat."
+      },
+      "gi_issue_pattern": {
+        "title": "Troubles digestifs répétés",
+        "body": "{{count}} séances des deux dernières semaines avec des troubles marqués. Une occasion de regarder l'alimentation à l'effort et son moment — en cas de troubles persistants, un avis médical."
+      },
+      "weight_rate_outside_target": {
+        "title": "Poids hors de ta plage depuis deux semaines",
+        "body": "Cette semaine {{rate}} %, la précédente {{previous}} % ; ta plage va de {{min}} à {{max}} % par semaine."
+      }
+    }
+  },
+  "readinessCtx": {
+    "title": "Contexte du jour",
+    "none": "Pas encore de plage habituelle — il faut pour cela au moins 7 entrées en 28 jours.",
+    "allWithin_one": "{{count}} donnée se situe dans ta plage habituelle.",
+    "allWithin_other": "Les {{count}} données se situent toutes dans ta plage habituelle.",
+    "markers_one": "{{count}} donnée sur {{of}} hors de ta plage habituelle.",
+    "markers_other": "{{count}} données sur {{of}} hors de ta plage habituelle.",
+    "pending": "Encore sans plage habituelle ou sans valeur actuelle : {{list}}.",
+    "method": "La valeur la plus récente (au plus 2 jours) est comparée à ta médiane des 28 jours précédents ; hors plage signifie éloignée de plus d'une dispersion robuste. Seule la direction défavorable est comptée. C'est une occasion de regarder, pas une autorisation d'entraînement ni une évaluation de santé.",
+    "addDevice": "Saisir la VFC et la FC de repos comme observations",
+    "openDiary": "Voir dans le journal",
+    "usual": "habituellement {{median}} {{unit}}",
+    "component": {
+      "sleepHours": "Durée de sommeil",
+      "sleepQuality": "Qualité du sommeil",
+      "energy": "Énergie",
+      "stress": "Stress",
+      "soreness": "Courbatures",
+      "load7": "Charge 7 jours",
+      "hrv": "VFC (RMSSD)",
+      "restingHr": "FC de repos"
+    },
+    "status": {
+      "within": "dans la plage",
+      "below": "en dessous",
+      "above": "au-dessus",
+      "no_current": "pas de valeur actuelle",
+      "insufficient": "encore sans plage"
+    },
+    "noMarkers": "Aucune donnée ne se situe hors de ta plage habituelle dans la direction défavorable."
+  },
+  "readiness": {
+    "summary": "Synthèse",
+    "summaryBasis_one": "sur {{count}} donnée, pondération égale",
+    "summaryBasis_other": "sur {{count}} données, pondération égale",
+    "equalWeights": "pondération égale",
+    "lean": {
+      "favourable": "favorable",
+      "middle": "moyen",
+      "unfavourable": "défavorable"
+    }
+  },
+  "load": {
+    "eyebrow": "Charge",
+    "title": "Charge d'entraînement et résistance à la fatigue",
+    "intro": "La charge issue de ton journal (durée × effort) sur les jours et les semaines, et en dessous, la part de ta performance qui reste sous fatigue. Tout par rapport à toi-même, pas aux autres.",
+    "emptyTitle": "Pas encore de séances dans le journal",
+    "emptyBody": "La charge résulte de la durée et de l'effort (RPE) de tes séances. Une fois quelques jours saisis, les sommes et les semaines apparaissent ici.",
+    "toDiary": "Vers le journal",
+    "noAdvice": "Descriptif. Pas de feu tricolore, pas de risque de blessure, pas de recommandation d'entraînement — un RPE de 7 ne signifie pas la même chose chez deux personnes, c'est pourquoi seule compte la comparaison avec toi-même.",
+    "sums": {
+      "title": "Sommes",
+      "why": "Charge de séance selon Foster, en AU. Les jours sans entrée comptent comme non renseignés, pas comme jours de repos.",
+      "days": "{{days}} jours"
+    },
+    "weeks": {
+      "title": "Douze semaines",
+      "typical": "Semaine habituelle (moyenne des quatre semaines précédentes) : {{value}} AU",
+      "noTypical": "Une semaine habituelle demande au moins deux des quatre semaines précédentes avec trois entrées chacune.",
+      "aria": "Charge hebdomadaire des douze dernières semaines en barres",
+      "thisWeek": "cette semaine",
+      "legend": "Pâle : semaine avec moins de trois entrées. Trait : semaine sans entrée."
+    },
+    "detail": {
+      "title": "Cette semaine",
+      "why": "Variation par rapport à la semaine précédente, monotonie et strain selon Foster.",
+      "change": "Vs semaine précédente",
+      "monotony": "Monotonie",
+      "strain": "Strain",
+      "spike": "Cette semaine est {{pct}} % au-dessus de ta semaine habituelle — plus que les {{threshold}} % à partir desquels KYDON le signale. Une occasion de regarder, aucune affirmation sur un risque.",
+      "vsTypical": "Par rapport à ta semaine habituelle : {{pct}} %.",
+      "method": "Monotonie = moyenne des charges journalières / leur dispersion (à partir de 5 jours renseignés) ; strain = charge hebdomadaire × monotonie. Le seuil de signalement de 30 % est une convention de KYDON, pas une valeur limite issue de la littérature."
+    }
+  },
+  "durability": {
+    "title": "Résistance à la fatigue",
+    "why": "La part de ta performance à frais qui reste sous fatigue — fatigué en pourcent de frais.",
+    "empty": "Le chiffre provient de tests qui contiennent en eux un état frais et un état fatigué. Un seul suffit pour commencer :",
+    "method": "Circuit de fatigue : série 4 par rapport à la série 1. Sprints répétés : dernier sprint par rapport au meilleur. SJFT : cadence de projections de la série C par rapport à la série A. Enchaînement : allure fraîche sur 5 km (au plus 56 jours avant) par rapport à l'allure de course après le vélo. Un changement n'est retenu que lorsque les deux valeurs les plus récentes s'écartent davantage de ta propre médiane antérieure que ta dispersion ne l'explique (au moins 3 points de pourcentage — une convention de KYDON).",
+    "detail": {
+      "reps": "frais {{fresh}} rép., fatigué {{fatigued}} rép.",
+      "W": "meilleur sprint {{fresh}} W, dernier {{fatigued}} W",
+      "throws_per_s": "série A {{fresh}} projections/s, série C {{fatigued}} projections/s",
+      "s_per_km": "frais {{fresh}} s/km, après le vélo {{fatigued}} s/km",
+      "s_per_run": "courses 1–2 en moyenne {{fresh}} s, courses 7–8 {{fatigued}} s",
+      "actions": "première reprise {{fresh}} actions, dernière {{fatigued}}"
+    },
+    "verdict": {
+      "unknown_one": "{{count}} mesure — un verdict en demande au moins six.",
+      "unknown_other": "{{count}} mesures — un verdict en demande au moins six.",
+      "within_noise": "Dans ta dispersion : auparavant habituellement {{baseline}} %, un changement serait perceptible à partir de {{detectable}} points de pourcentage.",
+      "improved": "Les deux valeurs les plus récentes se situent plus de {{detectable}} points de pourcentage au-dessus de ta médiane antérieure ({{baseline}} %).",
+      "worsened": "Les deux valeurs les plus récentes se situent plus de {{detectable}} points de pourcentage sous ta médiane antérieure ({{baseline}} %)."
+    }
+  },
+  "sportAnalysis": {
+    "eyebrow": "Analyse sportive",
+    "title": "HYROX et sports de combat",
+    "intro": "La simulation la plus récente décomposée : où passe le temps, à quel point l'allure baisse, ce qui reste dans la dernière reprise. La comparaison se fait uniquement avec tes propres simulations antérieures.",
+    "start": "Saisir une simulation",
+    "noNorms": "Pas de normes ni de temps cibles : il n'existe pas de valeurs de test solides pour les simulations, et les temps de course dépendent du parcours, du plateau et des transitions. « Plus lent » n'apparaît que là où l'écart est plus grand que ta propre dispersion.",
+    "station": {
+      "skiErg": "SkiErg",
+      "sledPush": "Poussée de traîneau",
+      "sledPull": "Traction de traîneau",
+      "burpeeBroadJump": "Burpee Broad Jumps",
+      "row": "Rameur",
+      "farmersCarry": "Farmers Carry",
+      "sandbagLunges": "Sandbag Lunges",
+      "wallBalls": "Wall Balls"
+    },
+    "verdict": {
+      "no_history": "première simulation",
+      "within_noise": "sans verdict",
+      "slower": "plus lent que ta dispersion ne l'explique (à partir de {{detectable}} %)",
+      "faster": "plus rapide que ta dispersion ne l'explique (à partir de {{detectable}} %)"
+    },
+    "hyrox": {
+      "title": "Simulation HYROX",
+      "empty": "Pas encore de simulation. Huit courses et huit stations sont saisies séparément — il en résulte le ralentissement en course et les parts des stations.",
+      "of_one": "Du {{date}} · par rapport à {{count}} simulation antérieure",
+      "of_other": "Du {{date}} · par rapport à {{count}} simulations antérieures",
+      "total": "Total",
+      "runs": "Courses",
+      "stations": "Stations",
+      "roxzone": "Roxzone",
+      "runDecayTitle": "Ralentissement en course",
+      "runDecay": "Courses 7–8 par rapport à 1–2 : {{pct}} %",
+      "runsAria": "Temps des huit courses en barres",
+      "stationsTitle": "Stations",
+      "ownLimiter": "Le plus au-dessus de ta propre médiane : {{station}}",
+      "largestShare": "Plus grande part du temps : {{station}} — une description, pas encore un constat.",
+      "share": "{{pct}} % du temps total",
+      "vsMedian": "ta médiane {{median}}, {{delta}} %",
+      "method": "La médiane provient de tes simulations antérieures. Un verdict n'est donné qu'à partir de quatre simulations antérieures : on sait alors à quel point une station varie chez toi d'une fois à l'autre (× 1,96·√2, au moins 3 %)."
+    },
+    "combat": {
+      "title": "Reprises de sports de combat",
+      "empty": "Pas encore de reprises saisies. Trois à cinq reprises à la durée de compétition, chacune comptée séparément — il en résulte la baisse sur les reprises.",
+      "decay": "Dernière reprise par rapport à la première : −{{pct}} % · {{date}}",
+      "aria": "Actions par reprise en barres"
+    }
+  },
+  "fueling": {
+    "chip": {
+      "carbs": "{{perHour}} g glucides/h"
+    },
+    "form": {
+      "show": "Saisir l'alimentation à l'effort (facultatif)",
+      "hide": "Masquer l'alimentation à l'effort",
+      "carbs": "Glucides pendant la séance",
+      "fluid": "Bu",
+      "massBefore": "Masse corporelle avant",
+      "massAfter": "Masse corporelle après",
+      "gi": "Troubles digestifs",
+      "giNone": "aucun",
+      "giStrong": "forts",
+      "why": "Les glucides et la durée donnent l'apport par heure, la masse avant et après donne le taux de sudation. Tout est facultatif."
+    },
+    "level": {
+      "light": "léger",
+      "moderate": "modéré",
+      "high": "élevé",
+      "very_high": "très élevé"
+    },
+    "need": {
+      "title": "Besoin selon la charge",
+      "level": "Niveau de charge {{level}} : en moyenne {{minutes}} min d'entraînement par jour renseigné ({{days}} jours sur 7 renseignés).",
+      "noWeight": "Sans masse corporelle, pas de fourchette — le poids se saisit dans le journal.",
+      "noDiary": "Sans entrée de journal au cours des sept derniers jours, la charge est inconnue.",
+      "eaten": "Mangé aujourd'hui : {{value}} g",
+      "source": "Fourchettes par kg de masse corporelle selon Thomas, Erdman & Burke (2016, prise de position de l'ACSM) et Burke et al. (2011) : glucides 3–5 / 5–7 / 6–10 / 8–12 g/kg selon le niveau, protéines 1,2–2,0 g/kg. Le niveau déduit des minutes d'entraînement est une convention de KYDON. Un repère, pas un objectif — ce que tu manges, c'est toi qui le décides."
+    },
+    "band": {
+      "none": "moins de 45 min : aucun apport nécessaire",
+      "small": "45–75 min : petites quantités ou rinçage de bouche",
+      "range": "Fourchette pour cette durée : {{lo}}–{{hi}} g/h"
+    },
+    "sessions": {
+      "title": "Alimentation pendant les séances",
+      "why": "Les 28 derniers jours, les plus récents en premier.",
+      "empty": "Pas encore de séance avec alimentation à l'effort. Lors de la création d'une séance dans le journal, cette partie peut être dépliée.",
+      "perHour": "{{value}} g/h",
+      "below": "sous la fourchette",
+      "sweat": "Taux de sudation {{rate}} l/h, perte de masse {{loss}} %",
+      "lossAbove2": "plus de 2 % de la masse corporelle",
+      "gi": "Troubles digestifs {{score}} sur 3",
+      "source": "Fourchettes selon Thomas et al. (2016) et Jeukendrup (2014) ; 90 g/h supposent des mélanges glucose-fructose et une accoutumance. Taux de sudation et seuil de 2 % selon Sawka et al. (2007, ACSM). L'urine et l'eau respiratoire ne sont pas déduites."
+    },
+    "weight": {
+      "title": "Plage de poids",
+      "why": "La variation que tu souhaites par semaine, en pourcent de la masse corporelle. KYDON montre si la semaine s'y situe — rien de plus.",
+      "thisWeek": "Cette semaine",
+      "lastWeek": "Semaine précédente",
+      "needs": "Il faut pour cela deux pesées dans chacune des deux semaines.",
+      "position": {
+        "below": "Sous ta plage ({{min}} à {{max}}).",
+        "within": "Dans ta plage ({{min}} à {{max}}).",
+        "above": "Au-dessus de ta plage ({{min}} à {{max}})."
+      },
+      "min": "Plage de (% par semaine)",
+      "max": "Plage jusqu'à (% par semaine)",
+      "unit": "%",
+      "clear": "Supprimer la plage",
+      "note": "Tu fixes la plage toi-même, par exemple avec ton entraîneuse ou ton conseil en nutrition. KYDON n'en propose aucune. Une remarque n'apparaît que lorsque deux semaines de suite se situent du même côté."
     }
   }
 }
