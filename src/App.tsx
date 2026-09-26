@@ -160,6 +160,8 @@ const router = createBrowserRouter([
       { path: 'admin/analytics', element: screen(() => import('@/features/admin/AnalyticsDashboard'), 'AnalyticsDashboard') },
       { path: 'einseiter', element: screen(() => import('@/features/report/OnePagerScreen'), 'OnePagerScreen') },
       { path: 'bericht/:id', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
+      { path: 'belastung', element: <Gate feature="loadMonitoring">{screen(() => import('@/features/load/LoadScreen'), 'LoadScreen')}</Gate> },
+      { path: 'hinweise', element: screen(() => import('@/features/insights/InsightsScreen'), 'InsightsScreen') },
       { path: 'profil', element: screen(() => import('@/features/profile/ProfileScreen'), 'ProfileScreen') },
       { path: 'team/beitreten', element: screen(() => import('@/features/coach/JoinTeamScreen'), 'JoinTeamScreen') },
       { path: 'preise', element: screen(() => import('@/features/profile/PricingScreen'), 'PricingScreen') },

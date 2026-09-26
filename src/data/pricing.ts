@@ -144,6 +144,8 @@ export type PlanFeature =
   | 'diaryFull' // Volles Tagebuch: alle zuschaltbaren Felder
   | 'trainingLog' // Einheiten mit Sätzen, e1RM, Muskelvolumen
   | 'loadMonitoring' // Wochenlast, Verhältnis 7:28, Blockvergleich
+  | 'durability' // Ermüdungsresistenz aus Tests: frisch gegen ermüdet, im Verlauf
+  | 'sportAnalysis' // HYROX- und Kampfsport-Auswertung (auch in den bezahlten Trainerstufen)
   // --- Pro -------------------------------------------------------------------
   | 'nutrition' // Mahlzeiten, Makros, Referenzumsatz, Open Food Facts
   | 'decisionLog' // Entscheidungen mit Wirkungsprüfung
@@ -246,6 +248,8 @@ const PLUS_FEATURES: readonly PlanFeature[] = [
   'diaryFull',
   'trainingLog',
   'loadMonitoring',
+  'durability',
+  'sportAnalysis',
 ]
 
 const PRO_FEATURES: readonly PlanFeature[] = [...PLUS_FEATURES, 'nutrition', 'decisionLog', 'cockpit']
@@ -423,7 +427,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     athletesPerYear: 10,
     coachSeats: 1,
     name: { de: 'Coach Start', en: 'Coach Start' },
-    features: [...COACH_BASE, 'heatmap', 'plusForAthletes'],
+    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'sportAnalysis'],
     product: 'coach_start',
   },
   {
@@ -433,7 +437,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     athletesPerYear: 30,
     coachSeats: 2,
     name: { de: 'Coach Team', en: 'Coach Team' },
-    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
+    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach', 'sportAnalysis'],
     product: 'coach_team',
   },
   {
@@ -443,7 +447,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     athletesPerYear: 75,
     coachSeats: 3,
     name: { de: 'Coach Pro', en: 'Coach Pro' },
-    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
+    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach', 'sportAnalysis'],
     product: 'coach_pro',
   },
   {
@@ -453,7 +457,7 @@ export const COACH_TIERS: readonly CoachTier[] = [
     athletesPerYear: 150,
     coachSeats: 5,
     name: { de: 'Coach Club', en: 'Coach Club' },
-    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach'],
+    features: [...COACH_BASE, 'heatmap', 'plusForAthletes', 'whiteLabel', 'multiCoach', 'sportAnalysis'],
     product: 'coach_club',
   },
 ]

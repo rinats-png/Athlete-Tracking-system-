@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 26
+export const CURRENT_SCHEMA_VERSION = 27
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -317,6 +317,12 @@ const resultSchema = z.object({
     .object({ dataUrl: z.string().min(1).max(MAX_PHOTO_CHARS), addedAt: isoDate })
     .nullable()
     .default(null),
+  /**
+   * Fassung der Ableitungen, mit der `metrics` errechnet wurde
+   * (`DERIVE_VERSION` in domain/metricContract.ts). Null bei Ergebnissen von
+   * vor Schema 27 — deren Fassung ist nicht bekannt, nicht «die aktuelle».
+   */
+  deriveVersion: z.string().max(20).nullish(),
   createdAt: isoDate,
 })
 
@@ -528,6 +534,19 @@ const diarySessionSchema = z.object({
   /** Session-RPE 1–10 (Borg CR-10). Ganze Zahlen — Zehntel wären Scheingenauigkeit. */
   rpe: z.number().int().min(1).max(10),
   note: z.string().max(200).default(''),
+  /**
+   * Fueling während der Einheit (Schicht S4, Ausbau 26.09.2026). Alles
+   * freiwillig; leer heisst «nicht erfasst», nicht «nichts gegessen».
+   */
+  /** Kohlenhydrate während der Einheit, in Gramm. */
+  carbsG: finite.min(0).max(1000).nullish(),
+  /** Getrunken während der Einheit, in Millilitern. */
+  fluidMl: finite.min(0).max(15000).nullish(),
+  /** Magen-Darm-Beschwerden: 0 keine, 1 leicht, 2 deutlich, 3 stark. Selbstauskunft. */
+  giScore: z.number().int().min(0).max(3).nullish(),
+  /** Körpergewicht vor und nach der Einheit, für die Schweissrate. */
+  massBeforeKg: finite.min(20).max(400).nullish(),
+  massAfterKg: finite.min(20).max(400).nullish(),
 })
 
 /**
@@ -716,6 +735,15 @@ const mealSchema = z.object({
 /** Selbstauskunft zum Aktivitätsniveau (PAL) — Parameter der Referenz, kein Ziel. */
 const nutritionSettingsSchema = z.object({
   pal: finite.min(1.2).max(1.9).default(1.55),
+  /**
+   * Zielband der Gewichtsrate in % des Körpergewichts je Woche, vom Menschen
+   * gesetzt (z. B. −0,7 bis −0,3 in einer Diät). Null: kein Ziel. Die App
+   * schlägt kein Band vor — sie zeigt nur, ob der Trend darin liegt.
+   */
+  weightRateBand: z
+    .object({ minPctWeek: finite.min(-2).max(2), maxPctWeek: finite.min(-2).max(2) })
+    .refine((b) => b.minPctWeek <= b.maxPctWeek, 'min ≤ max')
+    .nullish(),
 })
 
 export const DIARY_OPTIONAL_FIELDS = ['sleepQuality', 'stress', 'soreness', 'steps', 'adherence', 'note'] as const
@@ -974,6 +1002,27 @@ const peakWeekSchema = z.object({
   updatedAt: isoDate,
 })
 
+/**
+ * Zustand eines Hinweises aus der Insight Engine (domain/insightEngine.ts).
+ *
+ * Gespeichert wird NICHT der Hinweis selbst — der entsteht bei jedem Öffnen
+ * neu aus den Daten —, sondern nur, was der Mensch damit getan hat: gesehen,
+ * bestätigt, verworfen, und bis wann er Ruhe haben will. `key` ist Regel plus
+ * Gegenstand (z. B. `stale_test:run_5k`), damit derselbe Befund nicht doppelt
+ * erscheint.
+ */
+const insightStateSchema = z.object({
+  key: z.string().min(1).max(160),
+  ruleId: z.string().min(1).max(60),
+  ruleVersion: z.string().max(20).default(''),
+  firstSeenAt: isoDate,
+  lastSeenAt: isoDate,
+  acknowledgedAt: isoDate.nullable().default(null),
+  dismissedAt: isoDate.nullable().default(null),
+  /** Bis zu diesem Tag erscheint der Hinweis nicht erneut. */
+  cooldownUntil: dayString.nullable().default(null),
+})
+
 const athleteSchema = z.object({
   id: z.string().min(1),
   name: z.string().max(120).default(''),
@@ -1042,6 +1091,8 @@ const athleteSchema = z.object({
   focuses: z.array(trainingFocusSchema).max(FOCUS_HARD_LIMIT).default([]),
   /** Änderungsnachweis, neueste zuerst. */
   audit: z.array(auditSchema).default([]),
+  /** Was mit den Hinweisen der Insight Engine geschehen ist (bestätigt, verworfen, Sperrfrist). */
+  insightState: z.array(insightStateSchema).max(500).default([]),
   createdAt: isoDate,
 })
 
@@ -1083,6 +1134,7 @@ export type ValidatedPeakDay = z.infer<typeof peakDaySchema>
 export type ValidatedWorkoutExercise = z.infer<typeof workoutExerciseSchema>
 export type ValidatedWorkoutSet = z.infer<typeof workoutSetSchema>
 export type ValidatedDecision = z.infer<typeof decisionSchema>
+export type ValidatedInsightState = z.infer<typeof insightStateSchema>
 export type ValidatedCockpit = z.infer<typeof cockpitThresholdsSchema>
 export type ValidatedMeal = z.infer<typeof mealSchema>
 export type ValidatedMealItem = z.infer<typeof mealItemSchema>
@@ -1264,6 +1316,7 @@ export const MIGRATIONS: Migration[] = [
         // Leer: rückwirkend lässt sich nicht rekonstruieren, wann was
         // geändert wurde, und ein erfundener Nachweis wäre wertlos.
         audit: [],
+        insightState: [],
       })),
     }),
   },
@@ -1531,6 +1584,23 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 26,
+    to: 27,
+    describe:
+      'Metric Contract und Insight Engine: Fassung der Ableitungen am Ergebnis, Hinweiszustand, Fueling je Einheit, Zielband der Gewichtsrate',
+    run: (data: any) => ({
+      ...data,
+      version: 27,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        // Bestehende Ergebnisse: Fassung unbekannt — ausdrücklich null.
+        results: (athlete.results ?? []).map((r: any) => ({ ...r, deriveVersion: r.deriveVersion ?? null })),
+        insightState: athlete.insightState ?? [],
+        nutrition: { ...(athlete.nutrition ?? {}), weightRateBand: athlete.nutrition?.weightRateBand ?? null },
+      })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1583,6 +1653,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
     focuses: [],
     audit: [],
+    insightState: [],
     createdAt: new Date().toISOString(),
   }
 }

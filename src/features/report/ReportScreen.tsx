@@ -22,7 +22,7 @@ import { RadarProfile } from '@/components/charts/RadarProfile'
 import { SportArt } from '@/components/signature/SportArt'
 import { compareAssessments } from '@/domain/analytics'
 import { coverageByDimension } from '@/domain/benchmark'
-import { readinessScore } from '@/domain/readiness'
+import { ReadinessBreakdown } from '@/features/assessments/ReadinessBreakdown'
 import { getTest as lookupTest } from '@/data/testCatalog'
 import type { StoredResult } from '@/lib/store/localStore'
 import { pick } from '@/i18n/pick'
@@ -483,16 +483,7 @@ export function ReportScreen() {
 
       {assessment?.readiness && (
         <Section no={++sectionNo} title={t('readiness.title')}>
-          <p className="text-[12px]">
-            {t('readiness.score')}:{' '}
-            <span className="readout">{readinessScore(assessment.readiness).score} %</span>{' '}
-            <span className="text-ink-muted">
-              ({t('readiness.basis', {
-                answered: readinessScore(assessment.readiness).answered,
-                total: readinessScore(assessment.readiness).total,
-              })})
-            </span>
-          </p>
+          <ReadinessBreakdown readiness={assessment.readiness} dense />
           <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
             {t('readiness.disclaimer')}
           </p>

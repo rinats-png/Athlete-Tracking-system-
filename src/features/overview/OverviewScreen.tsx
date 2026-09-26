@@ -33,6 +33,8 @@ import { LeverPanel } from './LeverPanel'
 import { CompetitionPanel } from './CompetitionPanel'
 import { BetweenTestsPanel } from './BetweenTestsPanel'
 import { DiaryTodayCard } from './DiaryTodayCard'
+import { InsightsSummary } from '@/features/insights/InsightsSummary'
+import { ReadinessContextPanel } from '@/features/readiness/ReadinessContextPanel'
 import { pick } from '@/i18n/pick'
 
 /**
@@ -201,6 +203,9 @@ export function OverviewScreen() {
           to={`/tests/${nextTest.slug}`}
         />
       )}
+
+      <InsightsSummary className="rise mb-4" style={{ ['--rise-delay' as string]: '480ms' }} />
+      <ReadinessContextPanel compact className="rise mb-4" />
 
       {/*
        * Der unfaire Vorteil, in zwei Flächen: WO die Zeit hingehört (die

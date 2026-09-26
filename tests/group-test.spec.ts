@@ -41,6 +41,7 @@ function athlete(id: string, name: string, values: number[]): StoredAthlete {
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
     focuses: [],
     audit: [],
+    insightState: [],
     createdAt: '2026-01-01T00:00:00.000Z',
   }
 }
@@ -100,6 +101,7 @@ test.describe('Gruppentest im Bildschirm', () => {
         name,
         results: [],
         audit: [],
+        insightState: [],
       }))
       store.activeAthleteId = 'athlete-1'
       localStorage.setItem('kydon.data.v1', JSON.stringify(store))

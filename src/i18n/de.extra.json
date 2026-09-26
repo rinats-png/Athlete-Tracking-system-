@@ -39,7 +39,8 @@
       "y_balance_composite": "Y-Balance (Gesamtwert)",
       "fms_total": "Functional Movement Screen (Gesamtpunkte)",
       "sleep_h": "Schlafdauer",
-      "srpe_load_au": "Belastung der Woche (sRPE)"
+      "srpe_load_au": "Belastung der Woche (sRPE)",
+      "resting_hr_bpm": "Ruhepuls"
     },
     "meaning": {
       "ck_u_l": "Ein Enzym, dessen Blutspiegel nach ungewohnter Belastung steigt. Die Streuung zwischen Menschen ist sehr gross — vergleichbar ist er nur mit dir selbst.",
@@ -53,7 +54,8 @@
       "y_balance_composite": "Ein Reichweitentest im Einbeinstand, als Anteil der Beinlänge. Ein Screening zur Bewegungskontrolle, keine Leistungsmessung.",
       "fms_total": "Sieben Bewegungsaufgaben mit je 0 bis 3 Punkten. Ein Screening zur Bewegungsqualität, keine Verletzungsvorhersage.",
       "sleep_h": "Stunden Schlaf in der Nacht davor, selbst geschätzt. Kein Erholungswert — eine Zahl, die neben der nächsten Messung steht.",
-      "srpe_load_au": "Belastung einer Woche als Summe aus Anstrengung (RPE 1–10) mal Minuten je Einheit. Nur mit dir selbst vergleichbar — und die häufigste Erklärung für einen schlechten Testtag."
+      "srpe_load_au": "Belastung einer Woche als Summe aus Anstrengung (RPE 1–10) mal Minuten je Einheit. Nur mit dir selbst vergleichbar — und die häufigste Erklärung für einen schlechten Testtag.",
+      "resting_hr_bpm": "Herzschläge pro Minute am Morgen, liegend, vor dem Aufstehen. Nur mit dir selbst vergleichbar; Gerät und Messzeitpunkt sollten gleich bleiben."
     }
   },
   "procedure": {
@@ -331,7 +333,9 @@
       "cockpit": "Cockpit mit Signalen und einstellbaren Schwellen",
       "health": "Gesundheitsschicht: Laborverlauf, Symptome, Zyklus, Medikation (Art. 9)",
       "peakWeek": "Peak Week als Protokoll",
-      "sportModule": "Die Kennzahlen der eigenen Sportart an einer Stelle"
+      "sportModule": "Die Kennzahlen der eigenen Sportart an einer Stelle",
+      "durability": "Ermüdungsresistenz: frisch gegen ermüdet, aus deinen Tests, im Verlauf",
+      "sportAnalysis": "HYROX- und Kampfsport-Auswertung: Laufabfall, Stationen, Runden"
     },
     "coachUpgrade": "Wer seine Stufe überschreitet, misst weiter: Es gibt vierzehn Tage Frist, und der Wechsel kostet nur die anteilige Differenz für den Rest des Jahres.",
     "founder": "Gründerpreis: {{percent}} % auf das erste Jahr jeder Trainerstufe — für die ersten {{count}} Trainer.",
@@ -1449,6 +1453,283 @@
       "invite_other_email": "Diese Einladung gilt für eine andere E-Mail-Adresse.",
       "not_team_owner": "Das darf nur der Inhaber des Teams.",
       "failed": "Das hat nicht geklappt. Versuch es noch einmal."
+    }
+  },
+  "metric": {
+    "algorithm": "Rechnung: {{algorithm}} · Fassung {{version}}",
+    "sample_one": "aus {{count}} Wert",
+    "sample_other": "aus {{count}} Werten",
+    "confidence": {
+      "LOW": "geringe Belastbarkeit",
+      "MEDIUM": "mittlere Belastbarkeit",
+      "HIGH": "gute Belastbarkeit"
+    },
+    "warning": {
+      "insufficient_data": "zu wenige Daten für einen Wert",
+      "missing_input": "eine nötige Angabe fehlt",
+      "estimate": "Schätzung",
+      "provisional_formula": "vorläufige Rechnung",
+      "incompatible_protocol": "Protokolle nicht vergleichbar",
+      "low_completeness": "lückenhafter Zeitraum",
+      "stale": "veraltet",
+      "self_report": "Selbstauskunft",
+      "within_noise": "im Messrauschen"
+    }
+  },
+  "hints": {
+    "eyebrow": "Hinweise",
+    "title": "Was einen Blick lohnt",
+    "intro": "Hinweise aus festen Regeln, keine Ratschläge. Jeder nennt die Regel, aus der er stammt, und die Daten, auf denen er steht.",
+    "emptyTitle": "Gerade nichts offen",
+    "emptyBody": "Keine Regel schlägt an. Sobald neue Messungen, Tagebucheinträge oder Einheiten etwas Auffälliges zeigen, steht es hier.",
+    "new": "neu",
+    "whyNow": "Warum jetzt:",
+    "evidence_one": "{{count}} Beleg",
+    "evidence_other": "{{count}} Belege",
+    "acknowledge": "Erledigt",
+    "dismiss": "Ausblenden",
+    "done": "Erledigt",
+    "doneWhy": "Bestätigte Hinweise, deren Befund noch besteht. Nach der Ruhefrist werden sie neu bewertet.",
+    "suppressed_one": "{{count}} ausgeblendeter Hinweis ruht gerade.",
+    "suppressed_other": "{{count}} ausgeblendete Hinweise ruhen gerade.",
+    "noAdvice": "Ein Hinweis ist ein Anlass zum Hinschauen, keine Anweisung und keine Diagnose. Ob und was sich ändern soll, entscheidet ein Mensch.",
+    "summaryTitle_one": "{{count}} Hinweis",
+    "summaryTitle_other": "{{count}} Hinweise",
+    "summaryNew_one": "{{count}} davon neu",
+    "summaryNew_other": "{{count}} davon neu",
+    "summarySub": "Aus festen Regeln, mit Belegen",
+    "openAll": "Alle Hinweise",
+    "severity": {
+      "info": "Info",
+      "notice": "Auffällig",
+      "warning": "Achtung",
+      "review": "Besprechen"
+    },
+    "category": {
+      "decision": "Entscheidungen",
+      "load": "Belastung",
+      "recovery": "Erholung",
+      "performance": "Leistung",
+      "durability": "Durability",
+      "adaptation": "Training",
+      "nutrition": "Ernährung",
+      "data_quality": "Datenlage"
+    },
+    "go": {
+      "test": "Zum Test",
+      "decision": "Zum Cockpit",
+      "route": "Ansehen"
+    },
+    "evidenceKind": {
+      "result": "Messung",
+      "diary": "Tagebuch",
+      "workout": "Einheit",
+      "observation": "Beobachtungswert",
+      "decision": "Entscheidung",
+      "meal": "Mahlzeit",
+      "metric": "Kennzahl",
+      "axis": "Profilachse"
+    },
+    "metricKey": {
+      "load_7d": "Belastung 7 Tage",
+      "diary_completeness": "Vollständigkeit Tagebuch",
+      "sleepHours": "Schlafdauer",
+      "sleepQuality": "Schlafqualität",
+      "energy": "Energie",
+      "stress": "Stress",
+      "soreness": "Muskelkater",
+      "load7": "Belastung 7 Tage",
+      "hrv": "HRV",
+      "restingHr": "Ruhepuls",
+      "e1rm": "e1RM"
+    },
+    "why": {
+      "profile_incomplete": "Ohne Geschlecht und Geburtsdatum gibt es keine Einordnung gegen Referenzwerte.",
+      "axis_unmeasured": "Zu dieser Achse gibt es noch keine Messung.",
+      "test_old": "Die letzte Messung ist {{days}} Tage alt.",
+      "single_measurement": "Die Achse steht auf einer einzigen Messung.",
+      "axis_below_rest": "Die Achse liegt {{gap}} Punkte unter dem Mittel deiner übrigen Achsen.",
+      "quality_flags_recent": "{{count}} von {{total}} Messungen der letzten 60 Tage tragen einen Vorbehalt.",
+      "pr_beyond_noise": "Die neue Bestleistung liegt ausserhalb deiner Messschwankung.",
+      "pr_within_noise": "Die neue Bestleistung liegt noch innerhalb deiner Messschwankung.",
+      "two_declines_beyond_noise": "Die beiden jüngsten Messungen liegen weiter unter deinem früheren Niveau, als deine Messschwankung erklärt.",
+      "week_above_own_level": "Diese Woche liegt {{pct}} % über deiner üblichen Woche.",
+      "load_and_markers": "Hohe Woche und zugleich {{markers}} Erholungsmarker ausserhalb deiner Bandbreite.",
+      "several_days_below": "{{days}} der letzten {{of}} Tage mit Wert unter deiner eigenen Bandbreite.",
+      "several_days_above": "{{days}} der letzten {{of}} Tage mit Wert über deiner eigenen Bandbreite.",
+      "diary_sparse": "Nur {{pct}} % der letzten 14 Tage sind erfasst.",
+      "e1rm_flat_two_blocks": "Der e1RM ist über zwei Vierwochenblöcke gleich geblieben.",
+      "review_date_passed": "Das Überprüfungsdatum ist erreicht.",
+      "two_lower_beyond_noise": "Die beiden jüngsten Werte liegen weiter unter deinem früheren Median, als deine Streuung erklärt.",
+      "two_higher_beyond_noise": "Die beiden jüngsten Werte liegen weiter über deinem früheren Median, als deine Streuung erklärt."
+    },
+    "rule": {
+      "version": "Regel {{rule}}, Fassung {{version}}",
+      "add_profile_data": {
+        "title": "Profilangaben ergänzen",
+        "body": "Mit Geschlecht und Geburtsdatum lassen sich deine Werte gegen passende Referenzgruppen einordnen."
+      },
+      "measure_missing_axis": {
+        "title": "{{subject}} ist noch nicht gemessen",
+        "body": "Ohne Messung bleibt diese Achse im Profil leer. Fehlend heisst nicht schwach."
+      },
+      "stale_test": {
+        "title": "{{subject}} wiederholen",
+        "body": "Die letzte Messung ist {{days}} Tage alt. Ein aktueller Wert zeigt, wo du heute stehst."
+      },
+      "deepen_axis": {
+        "title": "{{subject}} breiter belegen",
+        "body": "Eine einzelne Messung ist ein Schnappschuss. Ein zweiter Test macht die Achse belastbar."
+      },
+      "measurement_quality_low": {
+        "title": "Messungen mit Vorbehalt",
+        "body": "{{count}} von {{total}} jüngeren Messungen sind nicht voll gültig, etwa weil ein Maximaltest nicht ausbelastet war. Die Werte bleiben, sie wiegen nur weniger."
+      },
+      "benchmark_gap": {
+        "title": "{{subject}} liegt unter deinen übrigen Achsen",
+        "body": "Abstand {{gap}} Punkte, gestützt auf {{measurements}} Messungen. Ein Befund über das Profil, kein Trainingsplan."
+      },
+      "performance_pr": {
+        "title": "Neue Bestleistung: {{subject}}",
+        "body": "{{value}} gegenüber bisher {{previousBest}}."
+      },
+      "performance_regression": {
+        "title": "{{subject}} geht zurück",
+        "body": "Die beiden jüngsten Messungen liegen bis zu {{change}} % unter deinem früheren Niveau; nachweisbar ist eine Veränderung ab {{detectable}} %. Ein Anlass, Bedingungen und Belastung anzusehen."
+      },
+      "load_spike_review": {
+        "title": "Belastung deutlich über deinem Niveau",
+        "body": "Diese Woche {{load}} AU, üblich sind etwa {{typical}} AU. Beschreibend, keine Aussage über Risiko."
+      },
+      "load_plus_recovery": {
+        "title": "Hohe Woche, Erholung auffällig",
+        "body": "Belastung {{pct}} % über üblich und {{markers}} Erholungsmarker ausserhalb deiner Bandbreite. Ein Anlass für ein Gespräch, keine Diagnose."
+      },
+      "sleep_deviation": {
+        "title": "Weniger Schlaf als üblich",
+        "body": "An {{days}} der letzten {{of}} Tage lag die Schlafdauer unter deiner eigenen Bandbreite."
+      },
+      "hrv_deviation": {
+        "title": "HRV unter deiner Bandbreite",
+        "body": "An {{days}} der letzten {{of}} Messtage lag die HRV unter deiner eigenen Bandbreite. Messzeitpunkt und Gerät verschieben sie stark."
+      },
+      "rhr_deviation": {
+        "title": "Ruhepuls über deiner Bandbreite",
+        "body": "An {{days}} der letzten {{of}} Messtage lag der Ruhepuls über deiner eigenen Bandbreite."
+      },
+      "data_incomplete": {
+        "title": "Tagebuch lückenhaft",
+        "body": "{{pct}} % der letzten 14 Tage sind erfasst. Unter der Hälfte lassen sich Verläufe kaum lesen."
+      },
+      "strength_plateau": {
+        "title": "{{subject}}: e1RM unverändert",
+        "body": "Zuletzt {{current}} kg, im Block davor {{previous}} kg. Ein Befund, keine Vorgabe."
+      },
+      "decision_review_due": {
+        "title": "Entscheidung überprüfen",
+        "body": "«{{decision}}» sollte am {{reviewOn}} überprüft werden."
+      },
+      "durability_worsened": {
+        "title": "Ermüdungsresistenz geht zurück: {{subject}}",
+        "body": "Zuletzt {{latest}} % Erhalt, früher üblich {{baseline}} %; erkennbar ist eine Veränderung ab {{detectable}} Prozentpunkten. Ein Anlass, Belastung, Erholung und Testbedingungen anzusehen."
+      },
+      "durability_improved": {
+        "title": "Ermüdungsresistenz steigt: {{subject}}",
+        "body": "Zuletzt {{latest}} % Erhalt, früher üblich {{baseline}} %; das ist mehr als die {{detectable}} Prozentpunkte, die deine Streuung erklärt."
+      }
+    }
+  },
+  "readinessCtx": {
+    "title": "Tageskontext",
+    "none": "Noch keine Bandbreite — dafür braucht es mindestens 7 Einträge in 28 Tagen.",
+    "allWithin_one": "{{count}} Angabe liegt in deiner üblichen Bandbreite.",
+    "allWithin_other": "Alle {{count}} Angaben liegen in deiner üblichen Bandbreite.",
+    "markers_one": "{{count}} von {{of}} Angaben ausserhalb deiner üblichen Bandbreite.",
+    "markers_other": "{{count}} von {{of}} Angaben ausserhalb deiner üblichen Bandbreite.",
+    "pending": "Noch ohne Bandbreite oder ohne aktuellen Wert: {{list}}.",
+    "method": "Verglichen wird der jüngste Wert (höchstens 2 Tage alt) mit deinem Median der 28 Tage davor; ausserhalb heisst mehr als eine robuste Streuung entfernt. Gezählt wird nur die ungünstige Richtung. Das ist ein Anlass hinzuschauen, keine Trainingsfreigabe und keine gesundheitliche Bewertung.",
+    "addDevice": "HRV und Ruhepuls als Beobachtungswert erfassen",
+    "openDiary": "Im Tagebuch ansehen",
+    "usual": "üblich {{median}} {{unit}}",
+    "component": {
+      "sleepHours": "Schlafdauer",
+      "sleepQuality": "Schlafqualität",
+      "energy": "Energie",
+      "stress": "Stress",
+      "soreness": "Muskelkater",
+      "load7": "Belastung 7 Tage",
+      "hrv": "HRV (RMSSD)",
+      "restingHr": "Ruhepuls"
+    },
+    "status": {
+      "within": "im Rahmen",
+      "below": "darunter",
+      "above": "darüber",
+      "no_current": "kein aktueller Wert",
+      "insufficient": "noch ohne Bandbreite"
+    },
+    "noMarkers": "Keine Angabe liegt in der ungünstigen Richtung ausserhalb deiner üblichen Bandbreite."
+  },
+  "readiness": {
+    "summary": "Zusammenfassung",
+    "summaryBasis_one": "aus {{count}} Angabe, gleich gewichtet",
+    "summaryBasis_other": "aus {{count}} Angaben, gleich gewichtet",
+    "equalWeights": "gleich gewichtet",
+    "lean": {
+      "favourable": "günstig",
+      "middle": "mittel",
+      "unfavourable": "ungünstig"
+    }
+  },
+  "load": {
+    "eyebrow": "Belastung",
+    "title": "Trainingslast und Ermüdungsresistenz",
+    "intro": "Die Last aus deinem Tagebuch (Dauer × Anstrengung) über Tage und Wochen, darunter, wie viel Leistung dir unter Ermüdung bleibt. Alles gegen dich selbst, nicht gegen andere.",
+    "emptyTitle": "Noch keine Einheiten im Tagebuch",
+    "emptyBody": "Die Last entsteht aus Dauer und Anstrengung (RPE) deiner Einheiten. Trag ein paar Tage ein, dann erscheinen hier Summen und Wochen.",
+    "toDiary": "Zum Tagebuch",
+    "noAdvice": "Beschreibend. Keine Ampel, kein Verletzungsrisiko, keine Trainingsempfehlung — ein RPE von 7 heisst bei zwei Menschen nicht dasselbe, deshalb zählt nur der Vergleich mit dir selbst.",
+    "sums": {
+      "title": "Summen",
+      "why": "Session-Last nach Foster in AU. Tage ohne Eintrag zählen als nicht erfasst, nicht als Ruhetag.",
+      "days": "{{days}} Tage"
+    },
+    "weeks": {
+      "title": "Zwölf Wochen",
+      "typical": "Übliche Woche (Mittel der vier Wochen davor): {{value}} AU",
+      "noTypical": "Für eine übliche Woche braucht es mindestens zwei der vier Vorwochen mit je drei Einträgen.",
+      "aria": "Wochenlast der letzten zwölf Wochen als Balken",
+      "thisWeek": "diese Woche",
+      "legend": "Blass: Woche mit weniger als drei Einträgen. Strich: Woche ohne Eintrag."
+    },
+    "detail": {
+      "title": "Diese Woche",
+      "why": "Veränderung zur Vorwoche, Monotonie und Strain nach Foster.",
+      "change": "Zur Vorwoche",
+      "monotony": "Monotonie",
+      "strain": "Strain",
+      "spike": "Diese Woche liegt {{pct}} % über deiner üblichen Woche — mehr als die {{threshold}} %, ab denen KYDON darauf hinweist. Ein Anlass hinzuschauen, keine Aussage über Risiko.",
+      "vsTypical": "Gegen deine übliche Woche: {{pct}} %.",
+      "method": "Monotonie = Mittel der Tageslasten / deren Streuung (ab 5 erfassten Tagen); Strain = Wochenlast × Monotonie. Die Hinweisschwelle von 30 % ist eine Festlegung von KYDON, kein Grenzwert aus der Literatur."
+    }
+  },
+  "durability": {
+    "title": "Ermüdungsresistenz",
+    "why": "Wie viel deiner frischen Leistung unter Ermüdung bleibt — ermüdet in Prozent von frisch.",
+    "empty": "Die Zahl kommt aus Tests, die frisch und ermüdet in sich tragen. Einer davon genügt für den Anfang:",
+    "method": "Ermüdungszirkel: Satz 4 zu Satz 1. Wiederholter Sprint: letzter zu höchstem Sprint. SJFT: Wurfrate der Serie C zu Serie A. Brick: frische 5-km-Pace (höchstens 56 Tage davor) zur Laufpace nach dem Rad. Eine Veränderung gilt erst, wenn die beiden jüngsten Werte weiter vom eigenen früheren Median abweichen als deine Streuung erklärt (mindestens 3 Prozentpunkte — eine Festlegung von KYDON).",
+    "detail": {
+      "reps": "frisch {{fresh}} Wdh., ermüdet {{fatigued}} Wdh.",
+      "W": "höchster Sprint {{fresh}} W, letzter {{fatigued}} W",
+      "throws_per_s": "Serie A {{fresh}} Würfe/s, Serie C {{fatigued}} Würfe/s",
+      "s_per_km": "frisch {{fresh}} s/km, nach dem Rad {{fatigued}} s/km"
+    },
+    "verdict": {
+      "unknown_one": "{{count}} Messung — für ein Urteil braucht es mindestens sechs.",
+      "unknown_other": "{{count}} Messungen — für ein Urteil braucht es mindestens sechs.",
+      "within_noise": "Innerhalb deiner Streuung: früher üblich {{baseline}} %, erkennbar wäre eine Veränderung ab {{detectable}} Prozentpunkten.",
+      "improved": "Beide jüngsten Werte liegen mehr als {{detectable}} Prozentpunkte über deinem früheren Median ({{baseline}} %).",
+      "worsened": "Beide jüngsten Werte liegen mehr als {{detectable}} Prozentpunkte unter deinem früheren Median ({{baseline}} %)."
     }
   }
 }

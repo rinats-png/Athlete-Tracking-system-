@@ -31,6 +31,7 @@ import {
 import { formatDate, formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { DiaryStrip } from './DiaryStrip'
+import { ReadinessContextPanel } from '@/features/readiness/ReadinessContextPanel'
 
 const SESSION_KINDS: StoredDiarySession['kind'][] = ['strength', 'endurance', 'sport', 'mobility', 'other']
 
@@ -341,6 +342,9 @@ export function DiaryScreen() {
         </div>
       </Panel>
 
+      {/* --- Tageskontext: heute gegen die eigene Bandbreite ---------- */}
+      <ReadinessContextPanel className="mb-4" />
+
       {/* --- Vierzehn Tage ------------------------------------------- */}
       <Panel className="mb-4">
         <PanelHeader title={t('diary.strip.title')} subtitle={t('diary.strip.why')} />
@@ -394,6 +398,12 @@ export function DiaryScreen() {
         </p>
         <div className="border-t border-line px-4 py-3">
           <Button asChild variant="ghost" size="sm" className="-ml-3">
+            <Link to="/belastung">
+              {t('load.eyebrow')}
+              <ArrowRight size={14} aria-hidden />
+            </Link>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
             <Link to="/cockpit">
               {t('cockpit.title')}
               <ArrowRight size={14} aria-hidden />

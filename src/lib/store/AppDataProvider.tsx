@@ -1,3 +1,4 @@
+import { DERIVE_VERSION } from '@/domain/metricContract'
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { clearBackup, recoverFromBackup, writeBackup } from './backup'
 import { backupReminder, type BackupReminder } from '@/domain/backupReminder'
@@ -30,6 +31,7 @@ import {
   type StoredWorkout,
   type StoredDecision,
   type StoredCockpit,
+  type StoredInsightState,
   type StoredMeal,
   type StoredNutrition,
   type StoredHealth,
@@ -159,6 +161,9 @@ export interface AppDataValue {
   saveDecision: (decision: StoredDecision) => void
   cockpit: StoredCockpit
   saveCockpit: (patch: Partial<StoredCockpit>) => void
+  /** Zustand der Hinweise (Insight Engine): bestätigt, verworfen, Sperrfrist. */
+  insightState: StoredInsightState[]
+  updateInsightState: (fn: (state: StoredInsightState[]) => StoredInsightState[]) => void
   /** Mahlzeiten und Aktivitätsniveau des aktiven Athleten (Schicht S4). */
   meals: StoredMeal[]
   saveMeal: (meal: StoredMeal) => void
@@ -496,6 +501,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         // Ein Beleg kommt nach dem Eintragen dazu, nicht währenddessen: die
         // Zahl ist der Zweck, das Bild ist die Absicherung.
         photo: null,
+        deriveVersion: DERIVE_VERSION,
         createdAt: new Date().toISOString(),
       }
       commitAthlete((current) => upsertResult(current, result), {
@@ -703,6 +709,14 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, cockpit: { ...a.cockpit, ...patch } } : a)),
         })
       },
+      insightState: store.athletes.find((a) => a.id === store.activeAthleteId)?.insightState ?? [],
+      updateInsightState: (fn) => {
+        const current = storeRef.current
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, insightState: fn(a.insightState ?? []) } : a)),
+        })
+      },
       meals: store.athletes.find((a) => a.id === store.activeAthleteId)?.meals ?? [],
       saveMeal: (meal) => {
         const current = storeRef.current
@@ -718,7 +732,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, meals: a.meals.filter((m) => m.id !== id) } : a)),
         })
       },
-      nutrition: store.athletes.find((a) => a.id === store.activeAthleteId)?.nutrition ?? { pal: 1.55 },
+      nutrition: store.athletes.find((a) => a.id === store.activeAthleteId)?.nutrition ?? { pal: 1.55, weightRateBand: null },
       health: store.athletes.find((a) => a.id === store.activeAthleteId)?.health ?? { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null },
       updateHealth: (fn) => {
         const current = storeRef.current

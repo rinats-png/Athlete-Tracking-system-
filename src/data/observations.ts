@@ -110,6 +110,19 @@ export const OBSERVATIONS: ObservationDefinition[] = [
     source: 'device',
     direction: 'neutral',
   },
+  // Ruhepuls am Morgen, liegend, vor dem Aufstehen — Gerät oder Handgelenk.
+  // Wie die HRV nur gegen die eigene Bandbreite gelesen (domain/readinessContext.ts),
+  // nie gegen eine Norm.
+  {
+    key: 'resting_hr_bpm',
+    group: 'recovery',
+    unit: 'bpm',
+    min: 25,
+    max: 120,
+    step: 1,
+    source: 'device',
+    direction: 'neutral',
+  },
   // --- Belastung -----------------------------------------------------------
   // Die beiden Werte, die ohne Gerät wöchentlich erfasst werden können und
   // die nächste Messung lesbar machen: wie viel geschlafen, wie viel

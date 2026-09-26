@@ -108,6 +108,20 @@ export const FORMULA_REGISTRY: FormulaEntry[] = [
     reference: null,
     note: 'Die Rechnung selbst ist in der Sprintliteratur üblich; was als auffälliger Abfall gilt, ist hier gesetzt und braucht Referenzwerte je Sportart.',
   },
+  {
+    metricKey: 'load_spike',
+    source: 'provisional',
+    formula: 'Wochenlast (sRPE, 7 Tage) mehr als 30 % über der mittleren Wochenlast der vier Wochen davor',
+    reference: null,
+    note: 'Die Session-Last selbst ist publiziert (Foster 1998/2001). Die Schwelle von 30 % ist eine Festlegung dieser App für den Hinweis «Belastung ansehen», kein Grenzwert für Verletzungsrisiko — ein solcher ist nicht belegt.',
+  },
+  {
+    metricKey: 'durability_retention_pct',
+    source: 'provisional',
+    formula: 'ermüdete / frische Leistung × 100 (Satz 4 / Satz 1, letzter / bester Sprint, Wurfrate C / A, frische 5-km-Pace / Brick-Pace)',
+    reference: null,
+    note: 'Der Quotient ist üblich; welche Veränderung erkennbar ist, kommt aus der eigenen Streuung (× 1,96·√2), mit einer gesetzten Untergrenze von 3 Prozentpunkten. Ersetzt werden muss die Untergrenze durch einen publizierten Messfehler je Test.',
+  },
 ]
 
 export const FORMULA_BY_METRIC = new Map(FORMULA_REGISTRY.map((f) => [f.metricKey, f]))

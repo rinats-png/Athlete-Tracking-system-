@@ -35,13 +35,7 @@ export const SLEEP_TARGET_MINUTES = 8 * 60
  * am Ende überall «mehr ist besser» gilt.
  */
 const INVERTED: (keyof ValidatedReadiness)[] = ['fatigue', 'stress', 'soreness']
-const SCALES: (keyof ValidatedReadiness)[] = [
-  'sleepQuality',
-  'fatigue',
-  'stress',
-  'soreness',
-  'motivation',
-]
+const SCALES = ['sleepQuality', 'fatigue', 'stress', 'soreness', 'motivation'] as const satisfies readonly (keyof ValidatedReadiness)[]
 
 export function readinessScore(readiness: ValidatedReadiness | null): ReadinessScore {
   const total = SCALES.length + 1 // die fünf Skalen plus die Schlafdauer
@@ -102,4 +96,50 @@ export function formatSleepDuration(minutes: number | null): string {
   const h = Math.floor(minutes / 60)
   const m = minutes % 60
   return `${h}:${String(m).padStart(2, '0')}`
+}
+
+/**
+ * Die Selbsteinschätzung als einzelne Angaben (Master-Spezifikation D5).
+ *
+ * Vorne stehen die Komponenten, jede mit ihrem Rohwert und ob sie für sich
+ * günstig, mittel oder ungünstig liegt. Die Zusammenfassung aus
+ * `readinessScore` steht darunter — sie verdeckt, WELCHE Angabe den Wert
+ * drückt, und eine schlechte Nacht bei sonst gutem Befinden ist etwas
+ * anderes als durchweg mittlere Werte.
+ *
+ * Die Einteilung in Drittel ist eine Lesehilfe auf der Skala der Frage, kein
+ * Grenzwert: unter einem Drittel des Wegs zum günstigen Ende «ungünstig»,
+ * über zwei Dritteln «günstig».
+ */
+export type ReadinessPartKey = 'sleepMinutes' | (typeof SCALES)[number]
+export type ReadinessLean = 'favourable' | 'middle' | 'unfavourable'
+
+export interface ReadinessPart {
+  key: ReadinessPartKey
+  /** Rohwert: Minuten bei der Schlafdauer, sonst 1–10. */
+  value: number
+  /** 0–1, 1 = günstiges Ende. */
+  normalised: number
+  lean: ReadinessLean
+}
+
+export function readinessParts(readiness: ValidatedReadiness | null): ReadinessPart[] {
+  if (!readiness) return []
+  const parts: ReadinessPart[] = []
+  const lean = (n: number): ReadinessLean => (n >= 2 / 3 ? 'favourable' : n < 1 / 3 ? 'unfavourable' : 'middle')
+  if (readiness.sleepMinutes != null && Number.isFinite(readiness.sleepMinutes)) {
+    const n = Math.min(1, readiness.sleepMinutes / SLEEP_TARGET_MINUTES)
+    // Schlaf: die Drittel wären 2:40 und 5:20 — zu grob. Unter sechs Stunden
+    // gilt als kurz (75 % des Ziels), ab sieben Stunden als ausreichend.
+    const sleepLean: ReadinessLean = n >= 7 / 8 ? 'favourable' : n < 6 / 8 ? 'unfavourable' : 'middle'
+    parts.push({ key: 'sleepMinutes', value: readiness.sleepMinutes, normalised: n, lean: sleepLean })
+  }
+  for (const key of SCALES) {
+    const value = readiness[key]
+    if (typeof value !== 'number' || !Number.isFinite(value)) continue
+    const raw = (value - 1) / 9
+    const n = INVERTED.includes(key) ? 1 - raw : raw
+    parts.push({ key, value, normalised: n, lean: lean(n) })
+  }
+  return parts
 }

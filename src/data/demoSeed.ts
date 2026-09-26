@@ -537,6 +537,7 @@ export function buildDemoData(): StoredData {
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },
         focuses: DEMO_FOCUSES,
         audit: [],
+        insightState: [],
         createdAt: new Date().toISOString(),
       },
     ],

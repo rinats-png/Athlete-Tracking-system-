@@ -1,9 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { openGuest } from "./helpers";
+import { openDemo, openGuest } from "./helpers";
 import {
   SLEEP_TARGET_MINUTES,
   formatSleepDuration,
   parseSleepDuration,
+  readinessParts,
   readinessScore,
 } from "../src/domain/readiness";
 import type { ValidatedReadiness } from "../src/lib/store/schema";
@@ -82,6 +83,20 @@ test.describe("Bereitschaft", () => {
   });
 });
 
+test.describe("Bereitschaft als Komponenten", () => {
+  test("jede Angabe steht einzeln, mit Lage auf ihrer eigenen Skala", () => {
+    const parts = readinessParts(readiness({ sleepMinutes: 330, fatigue: 9, motivation: 8 }));
+    expect(parts.map((p) => p.key)).toEqual(["sleepMinutes", "fatigue", "motivation"]);
+    // 5:30 h Schlaf ist kurz, Ermüdung 9 (gedreht) ungünstig, Motivation 8 günstig.
+    expect(parts.map((p) => p.lean)).toEqual(["unfavourable", "unfavourable", "favourable"]);
+  });
+
+  test("fehlende Angaben erscheinen nicht als Komponente", () => {
+    expect(readinessParts(null)).toEqual([]);
+    expect(readinessParts(readiness())).toEqual([]);
+  });
+});
+
 test.describe("Bereitschaft im Ablauf", () => {
   test("sie lässt sich erfassen, überspringen und trägt ihre Grundlage mit", async ({
     page,
@@ -101,12 +116,27 @@ test.describe("Bereitschaft im Ablauf", () => {
     await page.getByLabel("Motivation").fill("9");
     await page.getByRole("button", { name: "Übernehmen" }).click();
 
-    // Der Wert steht mit der Zahl der beantworteten Fragen daneben.
-    await expect(page.getByText(/von 6 Fragen beantwortet/)).toBeVisible();
+    // Zuerst die einzelnen Angaben, die Zusammenfassung darunter — mit der
+    // Zahl der Angaben, aus denen sie besteht.
+    const summary = page.getByTestId("readiness-summary");
+    await expect(summary.locator('[data-part="sleepMinutes"]')).toContainText("7:30 h");
+    await expect(summary.locator('[data-part="motivation"]')).toContainText("9/10");
+    await expect(summary.getByText(/aus 2 Angaben, gleich gewichtet/)).toBeVisible();
 
     // Und überlebt einen Reload.
     await page.reload({ waitUntil: "domcontentloaded" });
-    await expect(page.getByText(/von 6 Fragen beantwortet/)).toBeVisible();
+    await expect(page.getByTestId("readiness-summary").getByText(/aus 2 Angaben/)).toBeVisible();
+  });
+
+  test("im Tagebuch steht der Tageskontext gegen die eigene Bandbreite", async ({ page }) => {
+    await openDemo(page);
+    await page.goto("/tagebuch", { waitUntil: "domcontentloaded" });
+    const panel = page.getByTestId("readiness-context");
+    await expect(panel).toBeVisible();
+    await expect(panel.getByText(/Bandbreite/).first()).toBeVisible();
+    // Keine Einzelzahl im Vordergrund: jede Komponente steht für sich.
+    await expect(panel.locator('[data-component="sleepHours"]')).toBeVisible();
+    await expect(panel.locator('[data-component="energy"]')).toBeVisible();
   });
 
   test("eine unsinnige Schlafdauer wird benannt", async ({ page }) => {

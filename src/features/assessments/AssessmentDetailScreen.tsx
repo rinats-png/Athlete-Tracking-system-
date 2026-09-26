@@ -5,6 +5,7 @@ import { ArrowLeft, Check, CircleCheck, Circle, Play, Trash2 } from 'lucide-reac
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { ReadinessForm } from './ReadinessForm'
 import { readinessScore } from '@/domain/readiness'
+import { ReadinessBreakdown } from './ReadinessBreakdown'
 import { Button } from '@/components/ui/Button'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import {
@@ -265,10 +266,12 @@ export function AssessmentDetailScreen() {
 }
 
 /**
- * Zusammenfassung der Selbsteinschätzung, solange das Formular zu ist.
+ * Die Selbsteinschätzung, solange das Formular zu ist.
  *
- * Zeigt den Wert immer zusammen mit der Zahl der beantworteten Fragen: 82 %
- * aus einer Antwort und 82 % aus sechs sind nicht dieselbe Aussage.
+ * Zuerst die einzelnen Angaben, die Zusammenfassung darunter und immer mit
+ * der Zahl der Angaben: 82 % aus einer Antwort und 82 % aus sechs sind nicht
+ * dieselbe Aussage — und welche Angabe den Wert drückt, sieht man nur an den
+ * Komponenten.
  */
 function ReadinessSummary({
   readiness,
@@ -281,21 +284,15 @@ function ReadinessSummary({
   const score = readinessScore(readiness)
 
   return (
-    <div className="mb-4 flex flex-wrap items-center gap-3 border border-line px-3 py-2.5">
-      <span className="label-tag">{t('readiness.title')}</span>
-      {score.score == null ? (
-        <span className="text-[13px] text-ink-secondary">{t('readiness.notRecorded')}</span>
-      ) : (
-        <span className="text-[13px]">
-          <span className="readout font-display text-[18px] font-bold">{score.score} %</span>{' '}
-          <span className="text-ink-muted">
-            {t('readiness.basis', { answered: score.answered, total: score.total })}
-          </span>
-        </span>
-      )}
-      <Button variant="ghost" size="sm" className="ml-auto" onClick={onOpen}>
-        {score.score == null ? t('readiness.record') : t('actions.edit')}
-      </Button>
+    <div className="mb-4 border border-line px-3 py-2.5" data-testid="readiness-summary">
+      <div className="flex flex-wrap items-center gap-3">
+        <span className="label-tag">{t('readiness.title')}</span>
+        {score.score == null && <span className="text-[13px] text-ink-secondary">{t('readiness.notRecorded')}</span>}
+        <Button variant="ghost" size="sm" className="ml-auto" onClick={onOpen}>
+          {score.score == null ? t('readiness.record') : t('actions.edit')}
+        </Button>
+      </div>
+      <ReadinessBreakdown readiness={readiness} className="mt-2" />
     </div>
   )
 }

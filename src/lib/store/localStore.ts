@@ -18,6 +18,7 @@ import {
   type ValidatedWorkoutExercise,
   type ValidatedWorkoutSet,
   type ValidatedDecision,
+  type ValidatedInsightState,
   type ValidatedCockpit,
   type ValidatedMeal,
   type ValidatedMealItem,
@@ -74,6 +75,7 @@ export type StoredWorkout = ValidatedWorkout
 export type StoredWorkoutExercise = ValidatedWorkoutExercise
 export type StoredWorkoutSet = ValidatedWorkoutSet
 export type StoredDecision = ValidatedDecision
+export type StoredInsightState = ValidatedInsightState
 export type StoredCockpit = ValidatedCockpit
 export type StoredMeal = ValidatedMeal
 export type StoredMealItem = ValidatedMealItem

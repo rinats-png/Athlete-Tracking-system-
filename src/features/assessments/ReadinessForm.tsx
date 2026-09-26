@@ -106,15 +106,15 @@ export function ReadinessForm({
 
         <div className="border-t border-line pt-3">
           <div className="flex items-baseline justify-between gap-2">
-            <span className="label-tag">{t('readiness.score')}</span>
-            <span className="readout font-display text-[24px] font-bold tabular-nums">
+            <span className="label-tag">{t('readiness.summary')}</span>
+            <span className="readout text-[15px] tabular-nums text-ink-secondary">
               {score.score == null ? '—' : `${score.score} %`}
             </span>
           </div>
           <p className="mt-1 text-[12px] leading-relaxed text-ink-muted">
             {score.score == null
               ? t('readiness.noAnswers')
-              : t('readiness.basis', { answered: score.answered, total: score.total })}
+              : `${t('readiness.basis', { answered: score.answered, total: score.total })} · ${t('readiness.equalWeights')}`}
           </p>
         </div>
 
