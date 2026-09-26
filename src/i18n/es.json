@@ -455,7 +455,9 @@
     "fuel_carbs_g_per_kg": "Rango diario de hidratos de carbono y proteína",
     "fuel_load_level": "Nivel de carga para la necesidad diaria",
     "intra_carbs_g_per_h": "Hidratos de carbono por hora en la sesión",
-    "sweat_rate_l_per_h": "Tasa de sudoración"
+    "sweat_rate_l_per_h": "Tasa de sudoración",
+    "hrv_artifact_rule": "Regla de artefactos de la medición de VFC",
+    "hrv_rmssd_ms": "Variabilidad de la frecuencia cardíaca (RMSSD)"
   },
   "categoriesShort": {
     "endurance": "Resistencia",

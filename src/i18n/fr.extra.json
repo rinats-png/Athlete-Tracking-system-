@@ -1706,7 +1706,8 @@
       "no_current": "pas de valeur actuelle",
       "insufficient": "encore sans plage"
     },
-    "noMarkers": "Aucune donnée ne se situe hors de ta plage habituelle dans la direction défavorable."
+    "noMarkers": "Aucune donnée ne se situe hors de ta plage habituelle dans la direction défavorable.",
+    "measureStrap": "Mesurer la VFC avec une ceinture thoracique"
   },
   "readiness": {
     "summary": "Synthèse",
@@ -1883,5 +1884,83 @@
       "clear": "Supprimer la plage",
       "note": "Tu fixes la plage toi-même, par exemple avec ton entraîneuse ou ton conseil en nutrition. KYDON n'en propose aucune. Une remarque n'apparaît que lorsque deux semaines de suite se situent du même côté."
     }
+  },
+  "hrv": {
+    "consent": {
+      "title": "Consentement pour les données cardiaques",
+      "agree": "J'accepte",
+      "storage": "La suite des battements reste sur l'appareil et est supprimée après la mesure. Seuls les deux résultats sont enregistrés. Avec un compte et la synchronisation, ils se trouvent aussi dans ton compte. Tu peux les supprimer à tout moment.",
+      "body": "La fréquence cardiaque et sa variabilité sont des données de santé (art. 9 RGPD). KYDON ne les mesure que si tu donnes ici ton accord, et ne les utilise que pour te les montrer dans l'historique et dans le contexte du jour."
+    },
+    "beats_other": "{{count}} battements",
+    "failure": {
+      "failed": "La connexion n'a pas pu être établie. La ceinture est-elle bien portée et n'est-elle pas déjà connectée à un autre appareil ?",
+      "lost": "La connexion a été interrompue. La mesure n'a pas été enregistrée.",
+      "no_rr": "La ceinture n'a envoyé aucun intervalle entre battements. Elle ne fournit que la fréquence cardiaque — pour la VFC, il faut une ceinture thoracique à électrodes ECG.",
+      "cancelled": "Aucune ceinture sélectionnée."
+    },
+    "noAdapter": "Le Bluetooth est désactivé ou absent sur cet appareil.",
+    "title": "Mesure de la VFC",
+    "rejected": {
+      "too_many_artifacts": "Trop de battements perturbés (plus de 5 %). En général, la ceinture est mal placée ou les électrodes sont sèches — merci de mesurer à nouveau.",
+      "too_short": "Trop peu de battements exploitables pour conclure — merci de mesurer à nouveau."
+    },
+    "noContact": "Pas de contact avec la peau — réajuste la ceinture, humidifie les électrodes.",
+    "method": "RMSSD selon la Task Force (1996), courante dans le pilotage de l'entraînement (Plews et al. 2013), fiable dès une minute (Esco & Flatt 2014). Artefacts : intervalles en dehors de 300–2000 ms ou écart de plus de 20 % par rapport au battement précédent — une convention usuelle, pas une norme.",
+    "straps": {
+      "title": "Quelles ceintures fonctionnent",
+      "why": "Toute ceinture Bluetooth fournit la fréquence cardiaque. Pour la VFC, il faut les intervalles entre les battements — seules les ceintures thoraciques à électrodes ECG les envoient.",
+      "hrOnly": "FC seule",
+      "browsers": "Connexion via Web Bluetooth : Chrome ou Edge sur Android, Windows, macOS, Linux. Pas dans Safari sur iPhone et iPad.",
+      "hrv": "VFC + FC",
+      "watch": "Montres de sport en mode « diffusion FC »",
+      "recommended": "Recommandé"
+    },
+    "cancel": "Annuler",
+    "unsupported": {
+      "title": "Ce navigateur ne peut pas connecter de ceinture",
+      "manual": "Saisir la valeur à la main",
+      "body": "La connexion passe par Web Bluetooth. Chrome et Edge le proposent sur Android, Windows, macOS et Linux — Safari sur iPhone et iPad, non. Avec l'app à venir, ce sera possible là aussi."
+    },
+    "noAdvice": "La VFC n'est lue que par rapport à ta propre plage habituelle. Ce n'est ni un diagnostic ni une autorisation d'entraînement.",
+    "result": {
+      "hr": "FC de repos",
+      "rmssd": "VFC (RMSSD)",
+      "analysed": "Analysé",
+      "artifacts": "Artefacts"
+    },
+    "protocol": {
+      "step3": "Allongé, respirer calmement et normalement, ne pas parler.",
+      "title": "Mesurer",
+      "step2": "Mettre la ceinture, humidifier légèrement les électrodes.",
+      "subtitle": "Toujours mesurer de la même façon — sinon tu mesures les circonstances.",
+      "step1": "Le matin au réveil, avant le café et l'entraînement.",
+      "step4": "Les {{settle}} premières secondes servent à la stabilisation et ne comptent pas."
+    },
+    "save": "Enregistrer le résultat",
+    "linkTitle": "Mesurer la VFC avec une ceinture thoracique",
+    "connecting": "Choisis ta ceinture dans la fenêtre du navigateur …",
+    "strapNote": {
+      "budget": "Bon marché, fournit en général les intervalles entre battements ; qualité plus variable.",
+      "dualBluetooth": "Deux connexions Bluetooth simultanées — montre et KYDON ensemble.",
+      "singleBluetooth": "Une seule connexion Bluetooth : la déconnecter d'abord de la montre.",
+      "antPlus": "Transmet à la montre via ANT+, le Bluetooth reste libre pour KYDON.",
+      "opticalNoRr": "Mesure optique au bras : fréquence cardiaque oui, intervalles fiables entre battements non.",
+      "broadcastNoRr": "La montre n'envoie que la fréquence cardiaque, pas les intervalles entre battements."
+    },
+    "minutes_one": "{{count}} minute",
+    "intro": "Deux minutes le matin avec une ceinture thoracique : on en tire ta variabilité de la fréquence cardiaque (RMSSD) et ta FC de repos. Les deux entrent dans le contexte du jour — comparées uniquement à toi-même.",
+    "connect": "Connecter la ceinture et démarrer",
+    "beats_one": "{{count}} battement",
+    "linkBody": "Connecte directement la Polar H10 ou d'autres ceintures ; la RMSSD et la FC de repos sont enregistrées.",
+    "saved": "Enregistré comme VFC et FC de repos.",
+    "toContext": "Vers le contexte du jour",
+    "settling": "Stabilisation",
+    "duration": "Durée",
+    "again": "Nouvelle mesure",
+    "minutes_other": "{{count}} minutes",
+    "savedNote": "Ceinture thoracique, {{seconds}} s analysées, {{artifacts}} % d'artefacts",
+    "eyebrow": "Ceinture thoracique",
+    "measuring": "Mesure"
   }
 }

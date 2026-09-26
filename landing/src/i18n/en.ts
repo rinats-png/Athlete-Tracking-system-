@@ -124,6 +124,30 @@ export const en = {
   'coaches.cta': 'Start as a coach',
   'coaches.alt': 'KYDON coach area',
 
+  'straps.eyebrow': 'Heart rate & HRV',
+  'straps.title': 'Connect your chest strap.<br /><span class="muted">HRV in two minutes.</span>',
+  'straps.lead':
+    'Two minutes in the morning with a chest strap give you your heart rate variability (RMSSD) and resting heart rate — straight into your daily context, compared only with yourself. Every Bluetooth strap delivers heart rate; for HRV you need a chest strap with ECG electrodes.',
+  'straps.recommended': 'Recommended',
+  'straps.hrv': 'HRV + heart rate',
+  'straps.hrOnly': 'Heart rate only',
+  'straps.note.dual': 'Two Bluetooth connections at once — watch and KYDON together.',
+  'straps.note.single': 'One Bluetooth connection: disconnect it from your watch first.',
+  'straps.note.ant': 'Sends to your watch via ANT+, Bluetooth stays free for KYDON.',
+  'straps.note.budget': 'Affordable, usually delivers beat intervals; quality varies more.',
+  'straps.note.optical': 'Optical sensors on the arm: heart rate yes, reliable beat intervals no.',
+  'straps.browsers':
+    'Connected via Web Bluetooth in Chrome or Edge on Android, Windows, macOS and Linux. Safari on iPhone and iPad does not support it — the upcoming app will.',
+
+  'soon.eyebrow': 'Coming soon',
+  'soon.title': 'KYDON as an app.<br /><span class="muted">For iPhone and Android.</span>',
+  'soon.lead':
+    'We are bringing KYDON to the App Store and Google Play — with chest strap measurement on the iPhone too, and your data carried over from the browser.',
+  'soon.storesLabel': 'App stores',
+  'soon.kickerApple': 'Soon on the',
+  'soon.kickerGoogle': 'Soon on',
+  'soon.note': 'Until then, KYDON runs in any browser and can be added to your home screen — no download needed.',
+
   'closing.eyebrow': 'Measure. Benchmark. Develop.',
   'closing.title': 'The future of sport<br />is measured.',
 

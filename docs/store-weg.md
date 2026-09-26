@@ -1,5 +1,8 @@
 # Der Weg in den App Store und zu Google Play
 
+> Der vollständige Arbeitsplan mit Schritten, Kosten und Zeit steht in
+> [native-app.md](native-app.md).
+
 Ziel ist KYDON als richtige App in beiden Stores. Dieses Dokument hält
 fest, wie das geht, was es kostet und was dabei gegen die Zusagen der App
 verstiesse — damit die Entscheidung später nicht unter Zeitdruck fällt.

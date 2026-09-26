@@ -121,6 +121,30 @@ export const de: Dict = {
   'coaches.cta': 'Als Trainer starten',
   'coaches.alt': 'KYDON-Trainerbereich',
 
+  'straps.eyebrow': 'Puls & HRV',
+  'straps.title': 'Brustgurt verbinden.<br /><span class="muted">HRV in zwei Minuten.</span>',
+  'straps.lead':
+    'Zwei Minuten am Morgen mit einem Brustgurt ergeben deine Herzratenvariabilität (RMSSD) und deinen Ruhepuls — direkt in deinen Tageskontext, verglichen nur mit dir selbst. Puls liefert jeder Bluetooth-Gurt; für die HRV braucht es einen Brustgurt mit EKG-Elektroden.',
+  'straps.recommended': 'Empfohlen',
+  'straps.hrv': 'HRV + Puls',
+  'straps.hrOnly': 'Nur Puls',
+  'straps.note.dual': 'Zwei Bluetooth-Verbindungen gleichzeitig — Uhr und KYDON zusammen.',
+  'straps.note.single': 'Eine Bluetooth-Verbindung: vorher von der Uhr trennen.',
+  'straps.note.ant': 'Sendet per ANT+ an die Uhr, Bluetooth bleibt frei für KYDON.',
+  'straps.note.budget': 'Günstig, liefert in der Regel Schlagabstände; die Qualität schwankt stärker.',
+  'straps.note.optical': 'Optische Messung am Arm: Puls ja, verlässliche Schlagabstände nein.',
+  'straps.browsers':
+    'Verbindung über Web Bluetooth in Chrome oder Edge auf Android, Windows, macOS und Linux. Safari auf iPhone und iPad unterstützt das nicht — die kommende App schon.',
+
+  'soon.eyebrow': 'Bald verfügbar',
+  'soon.title': 'KYDON als App.<br /><span class="muted">Für iPhone und Android.</span>',
+  'soon.lead':
+    'KYDON kommt in den App Store und zu Google Play — mit Brustgurt-Messung auch auf dem iPhone, und deine Daten aus dem Browser kommen mit.',
+  'soon.storesLabel': 'App-Stores',
+  'soon.kickerApple': 'Bald im',
+  'soon.kickerGoogle': 'Bald bei',
+  'soon.note': 'Bis dahin läuft KYDON in jedem Browser und lässt sich auf den Startbildschirm legen — ohne Download.',
+
   'closing.eyebrow': 'Messen. Vergleichen. Entwickeln.',
   'closing.title': 'Die Zukunft des Sports<br />wird gemessen.',
 

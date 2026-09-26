@@ -1706,7 +1706,8 @@
       "no_current": "geen actuele waarde",
       "insufficient": "nog zonder bandbreedte"
     },
-    "noMarkers": "Geen enkel gegeven ligt in de ongunstige richting buiten je gebruikelijke bandbreedte."
+    "noMarkers": "Geen enkel gegeven ligt in de ongunstige richting buiten je gebruikelijke bandbreedte.",
+    "measureStrap": "HRV meten met borstband"
   },
   "readiness": {
     "summary": "Samenvatting",
@@ -1883,5 +1884,83 @@
       "clear": "Band verwijderen",
       "note": "De band stel je zelf in, bijvoorbeeld met je trainer of voedingsdeskundige. KYDON stelt er geen voor. Een aandachtspunt verschijnt pas als twee weken op rij aan dezelfde kant liggen."
     }
+  },
+  "hrv": {
+    "consent": {
+      "title": "Toestemming voor hartgegevens",
+      "agree": "Akkoord",
+      "storage": "De slagenreeks blijft op het apparaat en wordt na de meting verwijderd. Alleen de twee resultaten worden opgeslagen. Met een account en synchronisatie staan ze ook in je account. Je kunt ze op elk moment verwijderen.",
+      "body": "Hartslag en hartslagvariabiliteit zijn gezondheidsgegevens (art. 9 AVG). KYDON meet ze alleen als je hier toestemming geeft, en gebruikt ze alleen om ze je in het verloop en in de dagcontext te tonen."
+    },
+    "beats_other": "{{count}} slagen",
+    "failure": {
+      "failed": "De verbinding kwam niet tot stand. Draag je de band en is hij niet net met een ander apparaat verbonden?",
+      "lost": "De verbinding is verbroken. De meting is niet opgeslagen.",
+      "no_rr": "De band heeft geen slagintervallen gestuurd. Hij levert alleen de hartslag — voor HRV is een borstband met ecg-elektroden nodig.",
+      "cancelled": "Geen band gekozen."
+    },
+    "noAdapter": "Bluetooth is op dit apparaat uitgeschakeld of niet aanwezig.",
+    "title": "HRV-meting",
+    "rejected": {
+      "too_many_artifacts": "Te veel verstoorde slagen (meer dan 5 %). Meestal zit de band niet goed of zijn de elektroden droog — meet nog een keer.",
+      "too_short": "Te weinig bruikbare slagen voor een uitspraak — meet nog een keer."
+    },
+    "noContact": "Geen huidcontact — band goed leggen, elektroden bevochtigen.",
+    "method": "RMSSD volgens Task Force (1996), gangbaar in de trainingssturing (Plews et al. 2013), vanaf één minuut betrouwbaar (Esco & Flatt 2014). Artefacten: intervallen buiten 300–2000 ms of meer dan 20 % sprong ten opzichte van de vorige slag — een gangbare afspraak, geen norm.",
+    "straps": {
+      "title": "Welke banden werken",
+      "why": "Elke Bluetooth-band levert de hartslag. Voor HRV zijn de intervallen tussen de hartslagen nodig — die sturen alleen borstbanden met ecg-elektroden.",
+      "hrOnly": "alleen hartslag",
+      "browsers": "Verbinding via Web Bluetooth: Chrome of Edge op Android, Windows, macOS, Linux. Niet in Safari op iPhone en iPad.",
+      "hrv": "HRV + hartslag",
+      "watch": "Sporthorloges in de modus „hartslag uitzenden”",
+      "recommended": "Aanbevolen"
+    },
+    "cancel": "Annuleren",
+    "unsupported": {
+      "title": "Deze browser kan geen banden verbinden",
+      "manual": "Waarde handmatig invoeren",
+      "body": "De verbinding loopt via Web Bluetooth. Dat bieden Chrome en Edge op Android, Windows, macOS en Linux — Safari op iPhone en iPad niet. Met de komende app lukt het daar ook."
+    },
+    "noAdvice": "De HRV wordt alleen afgezet tegen je eigen bandbreedte. Ze is geen diagnose en geen trainingsvrijgave.",
+    "result": {
+      "hr": "Rusthartslag",
+      "rmssd": "HRV (RMSSD)",
+      "analysed": "Geanalyseerd",
+      "artifacts": "Artefacten"
+    },
+    "protocol": {
+      "step3": "Liggen, rustig en normaal ademen, niet praten.",
+      "title": "Meten",
+      "step2": "Band omdoen, elektroden licht bevochtigen.",
+      "subtitle": "Meet altijd op dezelfde manier — anders meet je de omstandigheden.",
+      "step1": "'s Ochtends na het wakker worden, vóór koffie en training.",
+      "step4": "De eerste {{settle}} seconden zijn inslingertijd en tellen niet mee."
+    },
+    "save": "Resultaat opslaan",
+    "linkTitle": "HRV meten met borstband",
+    "connecting": "Kies je band in het browservenster …",
+    "strapNote": {
+      "budget": "Goedkoop, levert meestal slagintervallen; de kwaliteit wisselt sterker.",
+      "dualBluetooth": "Twee Bluetooth-verbindingen tegelijk — horloge en KYDON samen.",
+      "singleBluetooth": "Slechts één Bluetooth-verbinding: eerst loskoppelen van het horloge.",
+      "antPlus": "Stuurt via ANT+ naar het horloge, Bluetooth blijft vrij voor KYDON.",
+      "opticalNoRr": "Optische meting aan de arm: hartslag ja, betrouwbare slagintervallen nee.",
+      "broadcastNoRr": "Het horloge stuurt alleen de hartslag, geen slagintervallen."
+    },
+    "minutes_one": "{{count}} minuut",
+    "intro": "Twee minuten 's ochtends met een borstband: daaruit volgen je hartslagvariabiliteit (RMSSD) en je rusthartslag. Beide gaan naar de dagcontext — alleen vergeleken met jezelf.",
+    "connect": "Band verbinden en starten",
+    "beats_one": "{{count}} slag",
+    "linkBody": "Polar H10 en andere banden direct verbinden; RMSSD en rusthartslag worden ingevuld.",
+    "saved": "Opgeslagen als HRV en rusthartslag.",
+    "toContext": "Naar de dagcontext",
+    "settling": "Inslingeren",
+    "duration": "Duur",
+    "again": "Nieuwe meting",
+    "minutes_other": "{{count}} minuten",
+    "savedNote": "Borstband, {{seconds}} s geanalyseerd, {{artifacts}} % artefacten",
+    "eyebrow": "Borstband",
+    "measuring": "Meten"
   }
 }

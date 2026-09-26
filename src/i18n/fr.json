@@ -455,7 +455,9 @@
     "fuel_carbs_g_per_kg": "Fourchette de glucides et de protéines par jour",
     "intra_carbs_g_per_h": "Glucides par heure pendant la séance",
     "fuel_load_level": "Niveau de charge pour le besoin journalier",
-    "sweat_rate_l_per_h": "Taux de sudation"
+    "sweat_rate_l_per_h": "Taux de sudation",
+    "hrv_artifact_rule": "Règle d'artefacts de la mesure de VFC",
+    "hrv_rmssd_ms": "Variabilité de la fréquence cardiaque (RMSSD)"
   },
   "categoriesShort": {
     "endurance": "Endurance",

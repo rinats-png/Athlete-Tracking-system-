@@ -150,6 +150,20 @@ export const FORMULA_REGISTRY: FormulaEntry[] = [
     reference: 'Sawka et al. (2007), ACSM Position Stand: Exercise and Fluid Replacement',
     note: 'Urin und Atemwasser sind nicht abgezogen. Ein Masseverlust über 2 % gilt in der Quelle als Marke für eingeschränkte Ausdauerleistung.',
   },
+  {
+    metricKey: 'hrv_rmssd_ms',
+    source: 'published',
+    formula: 'Wurzel aus dem Mittel der quadrierten Differenzen benachbarter RR-Intervalle, nach 30 s Einschwingen, mindestens 60 s ausgewertet',
+    reference: 'Task Force of the ESC and NASPE (1996); Plews et al. (2013); Esco & Flatt (2014)',
+    note: 'Nur gegen die eigene Bandbreite gelesen. Messzeitpunkt, Körperlage und Gerät verschieben den Wert stark — deshalb immer gleich messen.',
+  },
+  {
+    metricKey: 'hrv_artifact_rule',
+    source: 'provisional',
+    formula: 'RR ausserhalb 300–2000 ms oder mehr als 20 % Abweichung vom vorigen gültigen Intervall gilt als Artefakt; über 5 % Artefakte ist die Messung nicht auswertbar',
+    reference: null,
+    note: 'In der HRV-Praxis übliche Festlegungen, aber keine Norm. Zu ersetzen durch ein veröffentlichtes Korrekturverfahren (z. B. Lipponen & Tarvainen 2019), wenn die Messung über Kurzmessungen am Morgen hinausgeht.',
+  },
 ]
 
 export const FORMULA_BY_METRIC = new Map(FORMULA_REGISTRY.map((f) => [f.metricKey, f]))

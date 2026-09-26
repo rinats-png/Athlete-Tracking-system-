@@ -455,7 +455,9 @@
     "fuel_carbs_g_per_kg": "Koolhydraat- en eiwitbereik per dag",
     "fuel_load_level": "Belastingsniveau voor de dagbehoefte",
     "intra_carbs_g_per_h": "Koolhydraten per uur tijdens de sessie",
-    "sweat_rate_l_per_h": "Zweetsnelheid"
+    "sweat_rate_l_per_h": "Zweetsnelheid",
+    "hrv_artifact_rule": "Artefactregel van de HRV-meting",
+    "hrv_rmssd_ms": "Hartslagvariabiliteit (RMSSD)"
   },
   "categoriesShort": {
     "endurance": "Uithouding",

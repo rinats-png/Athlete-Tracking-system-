@@ -11,8 +11,9 @@
   # Beim Verlassen der Seite nur die Herkunft senden, nie den vollen Pfad —
   # der könnte Athletenkennungen enthalten.
   Referrer-Policy: strict-origin-when-cross-origin
-  # Die App braucht weder Kamera noch Mikrofon noch Standort.
-  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()
+  # Die App braucht weder Kamera noch Mikrofon noch Standort. Bluetooth nur
+  # für die eigene Seite — die HRV-Messung mit dem Brustgurt (/hrv-messung).
+  Permissions-Policy: accelerometer=(), bluetooth=(self), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()
   # HTTPS erzwingen, inklusive Subdomains.
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   # Ein von hier geoeffnetes Fenster bekommt keinen Griff auf dieses zurueck.

@@ -170,6 +170,7 @@ Status: ✅ gebaut · 🟡 teilweise / hinter Schalter · ⬜ offen.
 | Z-10 | Ermüdungsresistenz aus Tests (frisch gegen ermüdet) im Verlauf | ✅ (Plus) |
 | Z-11 | HYROX-Simulation und Kampfsport-Runden mit Auswertung (`/sportanalyse`) | ✅ (Plus, Trainerstufen ab Start) |
 | Z-12 | Tagesspanne Kohlenhydrate/Protein nach Quelle, Verpflegung je Einheit, Gewichtsband, beobachteter Umsatz | ✅ (Pro) |
+| Z-13 | HRV-Messung mit Brustgurt (Web Bluetooth, RMSSD und Ruhepuls → Tageskontext), eigene Einwilligung | ✅ (Chrome/Edge; iPhone erst mit nativer App) |
 
 ### 7.6 Konto, Sync, Abrechnung
 | ID | Anforderung | Status |
@@ -262,12 +263,15 @@ Vorschlag; Zielwerte werden nach den ersten 90 Tagen Livebetrieb festgelegt.
    `VITE_BILLING=on` und `VITE_FOUNDER_OFFER=on`.
 4. Domain-Aufteilung Landingpage / App festlegen (`VITE_APP_URL`).
 5. Merch-Shop-Adresse (`VITE_MERCH_URL`).
-6. Rechtelage der Referenzquellen klären: 14 offene Fälle in
+6. Datenschutzerklärung um die Brustgurt-Messung ergänzen (Bluetooth, Puls
+   und HRV als Gesundheitsdaten, lokale Verarbeitung der Schlagfolge).
+7. Rechtelage der Referenzquellen klären: 14 offene Fälle in
    [referenzlizenzen.md](referenzlizenzen.md).
 
 ## 14. Ausblick
 
 - Community-Kohortenvergleich, sobald genug zugestimmte Daten vorliegen.
-- App-Store-Version über Capacitor.
+- App-Store-Version über Capacitor — vollständiger Plan in
+  [native-app.md](native-app.md).
 - Weitere Referenzwerte für Disziplinen mit Lücken.
 - Wearable- und Gesundheitsanbindungen (Tabelle `health_connections` vorbereitet).

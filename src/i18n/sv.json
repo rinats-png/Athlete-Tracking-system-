@@ -455,7 +455,9 @@
     "fuel_carbs_g_per_kg": "Kolhydrat- och proteinintervall per dag",
     "fuel_load_level": "Belastningsnivå för dagsbehovet",
     "intra_carbs_g_per_h": "Kolhydrater per timme under passet",
-    "sweat_rate_l_per_h": "Svetthastighet"
+    "sweat_rate_l_per_h": "Svetthastighet",
+    "hrv_artifact_rule": "Artefaktregel för HRV-mätningen",
+    "hrv_rmssd_ms": "Hjärtfrekvensvariabilitet (RMSSD)"
   },
   "categoriesShort": {
     "endurance": "Uthållighet",

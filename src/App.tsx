@@ -138,6 +138,7 @@ const router = createBrowserRouter([
       { path: 'trainer/heatmap', element: <Gate feature="heatmap">{screen(() => import('@/features/coach/GroupHeatmapScreen'), 'GroupHeatmapScreen')}</Gate> },
       { path: 'trainer/nachweis', element: screen(() => import('@/features/coach/CoachProofScreen'), 'CoachProofScreen') },
       { path: 'bericht', element: screen(() => import('@/features/report/ReportScreen'), 'ReportScreen') },
+      { path: 'hrv-messung', element: screen(() => import('@/features/hrv/HrvMeasureScreen'), 'HrvMeasureScreen') },
       { path: 'beobachtung', element: screen(() => import('@/features/observations/ObservationScreen'), 'ObservationScreen') },
       { path: 'tagebuch', element: screen(() => import('@/features/diary/DiaryScreen'), 'DiaryScreen') },
       // Die Schranken sitzen an der Route, nicht im Bildschirm: so kann kein

@@ -1706,7 +1706,8 @@
       "no_current": "ingen aktuel værdi",
       "insufficient": "endnu uden variationsbredde"
     },
-    "noMarkers": "Ingen angivelse ligger i den ugunstige retning uden for din sædvanlige variationsbredde."
+    "noMarkers": "Ingen angivelse ligger i den ugunstige retning uden for din sædvanlige variationsbredde.",
+    "measureStrap": "Mål HRV med brystbælte"
   },
   "readiness": {
     "summary": "Sammenfatning",
@@ -1883,5 +1884,83 @@
       "clear": "Fjern bånd",
       "note": "Båndet sætter du selv, fx sammen med din træner eller ernæringsrådgiver. KYDON foreslår ikke noget. En bemærkning vises først, når to uger i træk ligger på samme side."
     }
+  },
+  "hrv": {
+    "consent": {
+      "title": "Samtykke til hjertedata",
+      "agree": "Accepter",
+      "storage": "Slagrækken bliver på enheden og kasseres efter målingen. Kun de to resultater gemmes. Med konto og synkronisering ligger de også på din konto. Du kan altid slette dem.",
+      "body": "Puls og pulsvariabilitet er helbredsoplysninger (art. 9 GDPR). KYDON måler dem kun, hvis du giver samtykke her, og bruger dem kun til at vise dem for dig i historikken og i dagens kontekst."
+    },
+    "beats_other": "{{count}} slag",
+    "failure": {
+      "failed": "Forbindelsen kunne ikke oprettes. Er bæltet taget på og ikke forbundet til en anden enhed lige nu?",
+      "lost": "Forbindelsen blev afbrudt. Målingen blev ikke gemt.",
+      "no_rr": "Bæltet har ikke sendt nogen slagintervaller. Det leverer kun pulsen — til HRV kræves et brystbælte med EKG-elektroder.",
+      "cancelled": "Intet bælte valgt."
+    },
+    "noAdapter": "Bluetooth er slået fra eller findes ikke på denne enhed.",
+    "title": "HRV-måling",
+    "rejected": {
+      "too_many_artifacts": "For mange forstyrrede slag (over 5 %). Som regel sidder bæltet ikke rigtigt, eller elektroderne er tørre — mål venligst igen.",
+      "too_short": "For få brugbare slag til en vurdering — mål venligst igen."
+    },
+    "noContact": "Ingen hudkontakt — ret bæltet til, fugt elektroderne.",
+    "method": "RMSSD efter Task Force (1996), udbredt i træningsstyring (Plews et al. 2013), pålidelig fra ét minut (Esco & Flatt 2014). Artefakter: intervaller uden for 300–2000 ms eller et spring på mere end 20 % i forhold til det forrige slag — en almindelig fastsættelse, ikke en norm.",
+    "straps": {
+      "title": "Hvilke bælter virker",
+      "why": "Alle Bluetooth-bælter leverer puls. Til HRV kræves intervallerne mellem hjerteslagene — dem sender kun brystbælter med EKG-elektroder.",
+      "hrOnly": "kun puls",
+      "browsers": "Forbindelse via Web Bluetooth: Chrome eller Edge på Android, Windows, macOS, Linux. Ikke i Safari på iPhone og iPad.",
+      "hrv": "HRV + puls",
+      "watch": "Sportsure i tilstanden «send puls»",
+      "recommended": "Anbefalet"
+    },
+    "cancel": "Annuller",
+    "unsupported": {
+      "title": "Denne browser kan ikke forbinde bælter",
+      "manual": "Indtast værdien manuelt",
+      "body": "Forbindelsen går via Web Bluetooth. Det understøttes af Chrome og Edge på Android, Windows, macOS og Linux — ikke af Safari på iPhone og iPad. Med den kommende app virker det også der."
+    },
+    "noAdvice": "HRV læses kun mod din egen variationsbredde. Den er ikke et fund og ingen træningsfrigivelse.",
+    "result": {
+      "hr": "Hvilepuls",
+      "rmssd": "HRV (RMSSD)",
+      "analysed": "Analyseret",
+      "artifacts": "Artefakter"
+    },
+    "protocol": {
+      "step3": "Lig ned, træk vejret roligt og normalt, tal ikke.",
+      "title": "Måling",
+      "step2": "Tag bæltet på, fugt elektroderne let.",
+      "subtitle": "Mål altid på samme måde — ellers måler du omstændighederne.",
+      "step1": "Om morgenen efter opvågning, før kaffe og træning.",
+      "step4": "De første {{settle}} sekunder er indsvingning og tæller ikke."
+    },
+    "save": "Gem resultat",
+    "linkTitle": "Mål HRV med brystbælte",
+    "connecting": "Vælg dit bælte i browserdialogen …",
+    "strapNote": {
+      "budget": "Billigt, leverer som regel slagintervaller; kvaliteten svinger mere.",
+      "dualBluetooth": "To Bluetooth-forbindelser samtidig — ur og KYDON sammen.",
+      "singleBluetooth": "Kun én Bluetooth-forbindelse: afbryd først forbindelsen til uret.",
+      "antPlus": "Sender via ANT+ til uret, Bluetooth forbliver fri til KYDON.",
+      "opticalNoRr": "Optisk måling på armen: puls ja, pålidelige slagintervaller nej.",
+      "broadcastNoRr": "Uret sender kun pulsen, ingen slagintervaller."
+    },
+    "minutes_one": "{{count}} minut",
+    "intro": "To minutter om morgenen med et brystbælte: det giver din pulsvariabilitet (RMSSD) og din hvilepuls. Begge indgår i dagens kontekst — kun sammenlignet med dig selv.",
+    "connect": "Forbind bælte og start",
+    "beats_one": "{{count}} slag",
+    "linkBody": "Forbind Polar H10 og andre bælter direkte; RMSSD og hvilepuls registreres.",
+    "saved": "Gemt som HRV og hvilepuls.",
+    "toContext": "Til dagens kontekst",
+    "settling": "Indsvingning",
+    "duration": "Varighed",
+    "again": "Ny måling",
+    "minutes_other": "{{count}} minutter",
+    "savedNote": "Brystbælte, {{seconds}} s analyseret, {{artifacts}} % artefakter",
+    "eyebrow": "Brystbælte",
+    "measuring": "Måler"
   }
 }

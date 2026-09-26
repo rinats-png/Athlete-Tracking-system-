@@ -314,6 +314,8 @@ ein zweiter gebaut.
 | Was gezählt werden darf (Ereignisliste) | `supabase/functions/_shared/eventRegistry.ts`, Kopie `src/lib/analyticsEvents.ts` |
 | Fehlererfassung im Client | `src/lib/errorCapture.ts` (über `trackEvent('client_error')`) |
 | Rechtelage der Referenzquellen | Feld `license` in `referenceModel.ts`; offene Fälle `docs/referenzlizenzen.md` |
+| Verbindung zum Brustgurt (Bluetooth) | `src/lib/bluetooth/heartRate.ts` (Web Bluetooth; nativ später Capacitor-Plugin, docs/native-app.md) |
+| HRV-Rechnung (Paket lesen, Artefakte, RMSSD) | `src/domain/hrv.ts`; Gurtliste `src/data/heartRateStraps.ts` |
 
 ## 17. Grenzen: was darf was berühren
 

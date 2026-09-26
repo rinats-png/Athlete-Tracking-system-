@@ -1706,7 +1706,8 @@
       "no_current": "kein aktueller Wert",
       "insufficient": "noch ohne Bandbreite"
     },
-    "noMarkers": "Keine Angabe liegt in der ungünstigen Richtung ausserhalb deiner üblichen Bandbreite."
+    "noMarkers": "Keine Angabe liegt in der ungünstigen Richtung ausserhalb deiner üblichen Bandbreite.",
+    "measureStrap": "HRV mit Brustgurt messen"
   },
   "readiness": {
     "summary": "Zusammenfassung",
@@ -1883,5 +1884,83 @@
       "clear": "Band entfernen",
       "note": "Das Band setzt du selbst, zum Beispiel mit deiner Trainerin oder Ernährungsberatung. KYDON schlägt keines vor. Ein Hinweis erscheint erst, wenn zwei Wochen in Folge auf derselben Seite liegen."
     }
+  },
+  "hrv": {
+    "eyebrow": "Brustgurt",
+    "title": "HRV-Messung",
+    "intro": "Zwei Minuten am Morgen mit einem Brustgurt: daraus entstehen deine Herzratenvariabilität (RMSSD) und dein Ruhepuls. Beide fliessen in den Tageskontext — verglichen nur mit dir selbst.",
+    "linkTitle": "HRV mit Brustgurt messen",
+    "linkBody": "Polar H10 und andere Gurte direkt verbinden, RMSSD und Ruhepuls werden eingetragen.",
+    "unsupported": {
+      "title": "Dieser Browser kann keine Gurte verbinden",
+      "body": "Die Verbindung läuft über Web Bluetooth. Das bieten Chrome und Edge auf Android, Windows, macOS und Linux an — Safari auf iPhone und iPad nicht. Mit der kommenden App geht es auch dort.",
+      "manual": "Wert von Hand eintragen"
+    },
+    "noAdapter": "Bluetooth ist an diesem Gerät ausgeschaltet oder nicht vorhanden.",
+    "consent": {
+      "title": "Einwilligung für Herzdaten",
+      "body": "Puls und Herzratenvariabilität sind Gesundheitsdaten (Art. 9 DSGVO). KYDON misst sie nur, wenn du hier zustimmst, und nutzt sie nur, um sie dir im Verlauf und im Tageskontext zu zeigen.",
+      "storage": "Die Schlagfolge bleibt auf dem Gerät und wird nach der Messung verworfen. Gespeichert werden nur die beiden Ergebnisse. Mit Konto und Abgleich liegen sie auch in deinem Konto. Du kannst sie jederzeit löschen.",
+      "agree": "Einverstanden"
+    },
+    "protocol": {
+      "title": "Messen",
+      "subtitle": "Immer gleich messen — sonst misst du die Umstände.",
+      "step1": "Morgens nach dem Aufwachen, vor Kaffee und Training.",
+      "step2": "Gurt anlegen, Elektroden leicht anfeuchten.",
+      "step3": "Liegen, ruhig und normal atmen, nicht sprechen.",
+      "step4": "Die ersten {{settle}} Sekunden sind Einschwingen und zählen nicht."
+    },
+    "duration": "Dauer",
+    "minutes_one": "{{count}} Minute",
+    "minutes_other": "{{count}} Minuten",
+    "connect": "Gurt verbinden und starten",
+    "connecting": "Wähle deinen Gurt im Browserdialog aus …",
+    "settling": "Einschwingen",
+    "measuring": "Messen",
+    "beats_one": "{{count}} Schlag",
+    "beats_other": "{{count}} Schläge",
+    "noContact": "Kein Hautkontakt — Gurt zurechtrücken, Elektroden anfeuchten.",
+    "cancel": "Abbrechen",
+    "failure": {
+      "cancelled": "Kein Gurt ausgewählt.",
+      "failed": "Die Verbindung kam nicht zustande. Ist der Gurt angelegt und nicht gerade mit einem anderen Gerät verbunden?",
+      "lost": "Die Verbindung ist abgebrochen. Die Messung wurde nicht gespeichert.",
+      "no_rr": "Der Gurt hat keine Schlagabstände geschickt. Er liefert nur den Puls — für die HRV braucht es einen Brustgurt mit EKG-Elektroden."
+    },
+    "result": {
+      "rmssd": "HRV (RMSSD)",
+      "hr": "Ruhepuls",
+      "analysed": "Ausgewertet",
+      "artifacts": "Artefakte"
+    },
+    "rejected": {
+      "too_short": "Zu wenig verwertbare Schläge für eine Aussage — bitte noch einmal messen.",
+      "too_many_artifacts": "Zu viele gestörte Schläge (über 5 %). Meist sitzt der Gurt nicht richtig oder die Elektroden sind trocken — bitte noch einmal messen."
+    },
+    "save": "Ergebnis speichern",
+    "saved": "Gespeichert als HRV und Ruhepuls.",
+    "savedNote": "Brustgurt, {{seconds}} s ausgewertet, {{artifacts}} % Artefakte",
+    "toContext": "Zum Tageskontext",
+    "again": "Neue Messung",
+    "method": "RMSSD nach Task Force (1996), in der Trainingssteuerung üblich (Plews et al. 2013), ab einer Minute verlässlich (Esco & Flatt 2014). Artefakte: Abstände ausserhalb 300–2000 ms oder mehr als 20 % Sprung zum vorigen Schlag — eine übliche Festlegung, keine Norm.",
+    "straps": {
+      "title": "Welche Gurte funktionieren",
+      "why": "Puls liefert jeder Bluetooth-Gurt. Für die HRV braucht es die Abstände zwischen den Herzschlägen — die senden nur Brustgurte mit EKG-Elektroden.",
+      "recommended": "Empfohlen",
+      "hrv": "HRV + Puls",
+      "hrOnly": "nur Puls",
+      "watch": "Sportuhren im Modus «Puls senden»",
+      "browsers": "Verbindung über Web Bluetooth: Chrome oder Edge auf Android, Windows, macOS, Linux. Nicht in Safari auf iPhone und iPad."
+    },
+    "strapNote": {
+      "dualBluetooth": "Zwei Bluetooth-Verbindungen gleichzeitig — Uhr und KYDON zusammen.",
+      "singleBluetooth": "Nur eine Bluetooth-Verbindung: vorher von der Uhr trennen.",
+      "antPlus": "Sendet per ANT+ an die Uhr, Bluetooth bleibt frei für KYDON.",
+      "budget": "Günstig, liefert in der Regel Schlagabstände; Qualität schwankt stärker.",
+      "opticalNoRr": "Optische Messung am Arm: Puls ja, verlässliche Schlagabstände nein.",
+      "broadcastNoRr": "Die Uhr sendet nur den Puls, keine Schlagabstände."
+    },
+    "noAdvice": "Die HRV wird nur gegen deine eigene Bandbreite gelesen. Sie ist kein Befund und keine Trainingsfreigabe."
   }
 }

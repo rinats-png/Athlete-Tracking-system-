@@ -455,7 +455,9 @@
     "fuel_carbs_g_per_kg": "Kulhydrat- og proteinspænd pr. dag",
     "fuel_load_level": "Belastningstrin for dagsbehovet",
     "intra_carbs_g_per_h": "Kulhydrater pr. time i passet",
-    "sweat_rate_l_per_h": "Svedrate"
+    "sweat_rate_l_per_h": "Svedrate",
+    "hrv_artifact_rule": "Artefaktregel for HRV-målingen",
+    "hrv_rmssd_ms": "Pulsvariabilitet (RMSSD)"
   },
   "categoriesShort": {
     "endurance": "Udholdenhed",

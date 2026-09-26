@@ -455,7 +455,9 @@
     "fuel_carbs_g_per_kg": "Daily carbohydrate and protein range",
     "fuel_load_level": "Load level for daily needs",
     "intra_carbs_g_per_h": "Carbohydrate per hour during the session",
-    "sweat_rate_l_per_h": "Sweat rate"
+    "sweat_rate_l_per_h": "Sweat rate",
+    "hrv_artifact_rule": "HRV measurement artefact rule",
+    "hrv_rmssd_ms": "Heart rate variability (RMSSD)"
   },
   "categoriesShort": {
     "endurance": "Endurance",

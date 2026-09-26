@@ -1706,7 +1706,8 @@
       "no_current": "no current value",
       "insufficient": "no usual range yet"
     },
-    "noMarkers": "No entry is outside your usual range in the unfavourable direction."
+    "noMarkers": "No entry is outside your usual range in the unfavourable direction.",
+    "measureStrap": "Measure HRV with a chest strap"
   },
   "readiness": {
     "summary": "Summary",
@@ -1883,5 +1884,83 @@
       "clear": "Remove band",
       "note": "You set the band yourself, for example with your coach or nutritionist. KYDON does not suggest one. A hint only appears once two weeks in a row fall on the same side."
     }
+  },
+  "hrv": {
+    "consent": {
+      "title": "Consent for heart data",
+      "agree": "I agree",
+      "storage": "The beat sequence stays on the device and is discarded after the measurement. Only the two results are stored. With an account and sync, they are also kept in your account. You can delete them at any time.",
+      "body": "Heart rate and heart rate variability are health data (Art. 9 GDPR). KYDON only measures them if you agree here, and uses them only to show them to you over time and in the daily context."
+    },
+    "beats_other": "{{count}} beats",
+    "failure": {
+      "failed": "The connection could not be established. Is the strap on and not currently connected to another device?",
+      "lost": "The connection was lost. The measurement was not saved.",
+      "no_rr": "The strap sent no beat intervals. It only provides heart rate — HRV requires a chest strap with ECG electrodes.",
+      "cancelled": "No strap selected."
+    },
+    "noAdapter": "Bluetooth is switched off or not available on this device.",
+    "title": "HRV measurement",
+    "rejected": {
+      "too_many_artifacts": "Too many disturbed beats (over 5 %). Usually the strap is not seated properly or the electrodes are dry — please measure again.",
+      "too_short": "Too few usable beats for a result — please measure again."
+    },
+    "noContact": "No skin contact — adjust the strap, moisten the electrodes.",
+    "method": "RMSSD according to Task Force (1996), common in training monitoring (Plews et al. 2013), reliable from one minute (Esco & Flatt 2014). Artefacts: intervals outside 300–2000 ms or a jump of more than 20 % from the previous beat — a common convention, not a norm.",
+    "straps": {
+      "title": "Which straps work",
+      "why": "Every Bluetooth strap provides heart rate. HRV needs the intervals between heartbeats — only chest straps with ECG electrodes send those.",
+      "hrOnly": "heart rate only",
+      "browsers": "Connection via Web Bluetooth: Chrome or Edge on Android, Windows, macOS, Linux. Not in Safari on iPhone and iPad.",
+      "hrv": "HRV + heart rate",
+      "watch": "Sports watches in “broadcast heart rate” mode",
+      "recommended": "Recommended"
+    },
+    "cancel": "Cancel",
+    "unsupported": {
+      "title": "This browser cannot connect to straps",
+      "manual": "Enter value manually",
+      "body": "The connection uses Web Bluetooth. Chrome and Edge offer it on Android, Windows, macOS and Linux — Safari on iPhone and iPad does not. The upcoming app will make it work there too."
+    },
+    "noAdvice": "HRV is read only against your own usual range. It is not a finding and not a clearance to train.",
+    "result": {
+      "hr": "Resting HR",
+      "rmssd": "HRV (RMSSD)",
+      "analysed": "Analysed",
+      "artifacts": "Artefacts"
+    },
+    "protocol": {
+      "step3": "Lie down, breathe calmly and normally, do not talk.",
+      "title": "Measuring",
+      "step2": "Put on the strap and moisten the electrodes slightly.",
+      "subtitle": "Always measure the same way — otherwise you are measuring the circumstances.",
+      "step1": "In the morning after waking up, before coffee and training.",
+      "step4": "The first {{settle}} seconds are settling time and do not count."
+    },
+    "save": "Save result",
+    "linkTitle": "Measure HRV with a chest strap",
+    "connecting": "Select your strap in the browser dialogue …",
+    "strapNote": {
+      "budget": "Inexpensive, usually provides beat intervals; quality varies more.",
+      "dualBluetooth": "Two Bluetooth connections at once — watch and KYDON together.",
+      "singleBluetooth": "Only one Bluetooth connection: disconnect from the watch first.",
+      "antPlus": "Sends to the watch via ANT+, leaving Bluetooth free for KYDON.",
+      "opticalNoRr": "Optical measurement on the arm: heart rate yes, reliable beat intervals no.",
+      "broadcastNoRr": "The watch sends only heart rate, no beat intervals."
+    },
+    "minutes_one": "{{count}} minute",
+    "intro": "Two minutes in the morning with a chest strap: this gives your heart rate variability (RMSSD) and your resting heart rate. Both feed into the daily context — compared only with yourself.",
+    "connect": "Connect strap and start",
+    "beats_one": "{{count}} beat",
+    "linkBody": "Connect a Polar H10 or other straps directly; RMSSD and resting HR are entered for you.",
+    "saved": "Saved as HRV and resting HR.",
+    "toContext": "To daily context",
+    "settling": "Settling",
+    "duration": "Duration",
+    "again": "New measurement",
+    "minutes_other": "{{count}} minutes",
+    "savedNote": "Chest strap, {{seconds}} s analysed, {{artifacts}} % artefacts",
+    "eyebrow": "Chest strap",
+    "measuring": "Measuring"
   }
 }

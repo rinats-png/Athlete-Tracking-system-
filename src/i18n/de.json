@@ -455,7 +455,9 @@
     "fuel_carbs_g_per_kg": "Kohlenhydrat- und Proteinspanne je Tag",
     "fuel_load_level": "Belastungsstufe für den Tagesbedarf",
     "intra_carbs_g_per_h": "Kohlenhydrate je Stunde in der Einheit",
-    "sweat_rate_l_per_h": "Schweissrate"
+    "sweat_rate_l_per_h": "Schweissrate",
+    "hrv_rmssd_ms": "Herzratenvariabilität (RMSSD)",
+    "hrv_artifact_rule": "Artefaktregel der HRV-Messung"
   },
   "categoriesShort": {
     "endurance": "Ausdauer",

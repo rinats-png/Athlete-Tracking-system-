@@ -1706,7 +1706,8 @@
       "no_current": "inget aktuellt värde",
       "insufficient": "ännu utan spann"
     },
-    "noMarkers": "Ingen uppgift ligger i den ogynnsamma riktningen utanför ditt vanliga spann."
+    "noMarkers": "Ingen uppgift ligger i den ogynnsamma riktningen utanför ditt vanliga spann.",
+    "measureStrap": "Mät HRV med pulsband"
   },
   "readiness": {
     "summary": "Sammanfattning",
@@ -1883,5 +1884,83 @@
       "clear": "Ta bort band",
       "note": "Bandet sätter du själv, till exempel med din tränare eller kostrådgivare. KYDON föreslår inget. En flagga visas först när två veckor i rad ligger på samma sida."
     }
+  },
+  "hrv": {
+    "consent": {
+      "title": "Samtycke för hjärtdata",
+      "agree": "Jag samtycker",
+      "storage": "Slagföljden stannar på enheten och kasseras efter mätningen. Bara de två resultaten sparas. Med konto och synkronisering finns de även i ditt konto. Du kan radera dem när som helst.",
+      "body": "Puls och hjärtfrekvensvariabilitet är hälsodata (art. 9 GDPR). KYDON mäter dem bara om du samtycker här, och använder dem bara för att visa dem för dig i historiken och i dagens sammanhang."
+    },
+    "beats_other": "{{count}} slag",
+    "failure": {
+      "failed": "Anslutningen kunde inte upprättas. Sitter bandet på och är det inte anslutet till en annan enhet just nu?",
+      "lost": "Anslutningen bröts. Mätningen sparades inte.",
+      "no_rr": "Bandet skickade inga slagintervall. Det levererar bara pulsen — för HRV krävs ett pulsband med EKG-elektroder.",
+      "cancelled": "Inget pulsband valt."
+    },
+    "noAdapter": "Bluetooth är avstängt eller saknas på den här enheten.",
+    "title": "HRV-mätning",
+    "rejected": {
+      "too_many_artifacts": "För många störda slag (över 5 %). Oftast sitter bandet inte rätt eller elektroderna är torra — mät gärna igen.",
+      "too_short": "För få användbara slag för ett resultat — mät gärna igen."
+    },
+    "noContact": "Ingen hudkontakt — justera bandet, fukta elektroderna.",
+    "method": "RMSSD enligt Task Force (1996), vanligt inom träningsstyrning (Plews et al. 2013), tillförlitligt från en minut (Esco & Flatt 2014). Artefakter: intervall utanför 300–2000 ms eller mer än 20 % språng mot föregående slag — en vanlig fastställning, ingen norm.",
+    "straps": {
+      "title": "Vilka pulsband fungerar",
+      "why": "Puls levererar varje Bluetooth-band. För HRV krävs intervallen mellan hjärtslagen — dem skickar bara pulsband med EKG-elektroder.",
+      "hrOnly": "bara puls",
+      "browsers": "Anslutning via Web Bluetooth: Chrome eller Edge på Android, Windows, macOS, Linux. Inte i Safari på iPhone och iPad.",
+      "hrv": "HRV + puls",
+      "watch": "Sportklockor i läget ”Sänd puls”",
+      "recommended": "Rekommenderas"
+    },
+    "cancel": "Avbryt",
+    "unsupported": {
+      "title": "Den här webbläsaren kan inte ansluta pulsband",
+      "manual": "Ange värdet manuellt",
+      "body": "Anslutningen sker via Web Bluetooth. Det erbjuder Chrome och Edge på Android, Windows, macOS och Linux — inte Safari på iPhone och iPad. Med den kommande appen går det även där."
+    },
+    "noAdvice": "HRV läses bara mot ditt eget spann. Det är inget fynd och inget klartecken för träning.",
+    "result": {
+      "hr": "Vilopuls",
+      "rmssd": "HRV (RMSSD)",
+      "analysed": "Analyserat",
+      "artifacts": "Artefakter"
+    },
+    "protocol": {
+      "step3": "Ligg ner, andas lugnt och normalt, prata inte.",
+      "title": "Mät",
+      "step2": "Ta på bandet, fukta elektroderna lätt.",
+      "subtitle": "Mät alltid på samma sätt — annars mäter du omständigheterna.",
+      "step1": "På morgonen efter uppvaknandet, före kaffe och träning.",
+      "step4": "De första {{settle}} sekunderna är insvängning och räknas inte."
+    },
+    "save": "Spara resultat",
+    "linkTitle": "Mät HRV med pulsband",
+    "connecting": "Välj ditt pulsband i webbläsarens dialog …",
+    "strapNote": {
+      "budget": "Billigt, levererar i regel slagintervall; kvaliteten varierar mer.",
+      "dualBluetooth": "Två Bluetooth-anslutningar samtidigt — klocka och KYDON tillsammans.",
+      "singleBluetooth": "Bara en Bluetooth-anslutning: koppla först från klockan.",
+      "antPlus": "Sänder via ANT+ till klockan, Bluetooth förblir ledigt för KYDON.",
+      "opticalNoRr": "Optisk mätning på armen: puls ja, tillförlitliga slagintervall nej.",
+      "broadcastNoRr": "Klockan sänder bara pulsen, inga slagintervall."
+    },
+    "minutes_one": "{{count}} minut",
+    "intro": "Två minuter på morgonen med ett pulsband: det ger din hjärtfrekvensvariabilitet (RMSSD) och din vilopuls. Båda går in i dagens sammanhang — jämförda bara med dig själv.",
+    "connect": "Anslut bandet och starta",
+    "beats_one": "{{count}} slag",
+    "linkBody": "Anslut Polar H10 och andra band direkt, RMSSD och vilopuls förs in.",
+    "saved": "Sparat som HRV och vilopuls.",
+    "toContext": "Till dagens sammanhang",
+    "settling": "Insvängning",
+    "duration": "Längd",
+    "again": "Ny mätning",
+    "minutes_other": "{{count}} minuter",
+    "savedNote": "Pulsband, {{seconds}} s analyserat, {{artifacts}} % artefakter",
+    "eyebrow": "Pulsband",
+    "measuring": "Mäter"
   }
 }

@@ -70,6 +70,10 @@ export function ReadinessContextPanel({ className, compact = false }: { classNam
         ) : (
           <p className="mt-1 text-[11px] leading-relaxed text-ink-muted">
             {t('readinessCtx.method')}{' '}
+            <Link to="/hrv-messung" className="underline underline-offset-2">
+              {t('readinessCtx.measureStrap')}
+            </Link>{' '}
+            ·{' '}
             <Link to="/beobachtung" className="underline underline-offset-2">
               {t('readinessCtx.addDevice')}
             </Link>

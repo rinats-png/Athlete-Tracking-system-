@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Plus, Trash2 } from 'lucide-react'
+import { ArrowRight, HeartPulse, Plus, Trash2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
@@ -73,6 +74,21 @@ export function ObservationScreen() {
         title={t('observation.title')}
         intro={t('observation.intro')}
       />
+
+      <Link
+        to="/hrv-messung"
+        className="mb-4 flex min-h-14 items-center justify-between gap-3 border border-line bg-surface px-4 py-3 hover:bg-accent-quiet"
+        data-testid="hrv-link"
+      >
+        <span className="flex items-center gap-3">
+          <HeartPulse size={18} className="text-ink-muted" aria-hidden />
+          <span>
+            <span className="block text-[14px] font-medium">{t('hrv.linkTitle')}</span>
+            <span className="block text-[12px] text-ink-secondary">{t('hrv.linkBody')}</span>
+          </span>
+        </span>
+        <ArrowRight size={16} className="text-ink-muted" aria-hidden />
+      </Link>
 
       <Panel ticked className="mb-4">
         <PanelHeader title={t('observation.add')} subtitle={t('observation.why')} />

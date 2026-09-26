@@ -1706,7 +1706,8 @@
       "no_current": "sin valor actual",
       "insufficient": "aún sin rango"
     },
-    "noMarkers": "Ningún dato está fuera de tu rango habitual en la dirección desfavorable."
+    "noMarkers": "Ningún dato está fuera de tu rango habitual en la dirección desfavorable.",
+    "measureStrap": "Medir la VFC con banda pectoral"
   },
   "readiness": {
     "summary": "Resumen",
@@ -1883,5 +1884,83 @@
       "clear": "Quitar banda",
       "note": "La banda la fijas tú, por ejemplo con tu entrenadora o tu asesoría nutricional. KYDON no propone ninguna. Solo aparece un aviso cuando dos semanas seguidas quedan del mismo lado."
     }
+  },
+  "hrv": {
+    "consent": {
+      "title": "Consentimiento para datos cardíacos",
+      "agree": "Acepto",
+      "storage": "La secuencia de latidos se queda en el dispositivo y se descarta tras la medición. Solo se guardan los dos resultados. Con cuenta y sincronización, también quedan en tu cuenta. Puedes borrarlos en cualquier momento.",
+      "body": "El pulso y la variabilidad de la frecuencia cardíaca son datos de salud (art. 9 RGPD). KYDON solo los mide si das tu consentimiento aquí, y solo los usa para mostrártelos en el historial y en el contexto del día."
+    },
+    "beats_other": "{{count}} latidos",
+    "failure": {
+      "failed": "No se pudo establecer la conexión. ¿Llevas puesta la banda y no está conectada ahora mismo a otro dispositivo?",
+      "lost": "Se ha perdido la conexión. La medición no se ha guardado.",
+      "no_rr": "La banda no ha enviado intervalos entre latidos. Solo proporciona el pulso — para la VFC hace falta una banda pectoral con electrodos de ECG.",
+      "cancelled": "No se ha seleccionado ninguna banda."
+    },
+    "noAdapter": "El Bluetooth está desactivado o no existe en este dispositivo.",
+    "title": "Medición de VFC",
+    "rejected": {
+      "too_many_artifacts": "Demasiados latidos alterados (más del 5 %). Normalmente la banda no está bien colocada o los electrodos están secos — vuelve a medir.",
+      "too_short": "Muy pocos latidos aprovechables para sacar conclusiones — vuelve a medir."
+    },
+    "noContact": "Sin contacto con la piel — recoloca la banda y humedece los electrodos.",
+    "method": "RMSSD según la Task Force (1996), habitual en el control del entrenamiento (Plews et al. 2013), fiable a partir de un minuto (Esco & Flatt 2014). Artefactos: intervalos fuera de 300–2000 ms o un salto de más del 20 % respecto al latido anterior — un criterio habitual, no una norma.",
+    "straps": {
+      "title": "Qué bandas funcionan",
+      "why": "Cualquier banda Bluetooth proporciona el pulso. Para la VFC hacen falta los intervalos entre latidos — y solo los envían las bandas pectorales con electrodos de ECG.",
+      "hrOnly": "solo pulso",
+      "browsers": "Conexión a través de Web Bluetooth: Chrome o Edge en Android, Windows, macOS, Linux. No en Safari en iPhone y iPad.",
+      "hrv": "VFC + pulso",
+      "watch": "Relojes deportivos en modo «transmitir pulso»",
+      "recommended": "Recomendada"
+    },
+    "cancel": "Cancelar",
+    "unsupported": {
+      "title": "Este navegador no puede conectar bandas",
+      "manual": "Introducir el valor a mano",
+      "body": "La conexión funciona a través de Web Bluetooth. Lo ofrecen Chrome y Edge en Android, Windows, macOS y Linux — Safari en iPhone y iPad no. Con la próxima app también funcionará allí."
+    },
+    "noAdvice": "La VFC solo se interpreta frente a tu propio rango. No es un diagnóstico ni una autorización para entrenar.",
+    "result": {
+      "hr": "FC en reposo",
+      "rmssd": "VFC (RMSSD)",
+      "analysed": "Analizado",
+      "artifacts": "Artefactos"
+    },
+    "protocol": {
+      "step3": "Tumbado, respira tranquilo y con normalidad, sin hablar.",
+      "title": "Medir",
+      "step2": "Colócate la banda y humedece ligeramente los electrodos.",
+      "subtitle": "Mide siempre igual — si no, mides las circunstancias.",
+      "step1": "Por la mañana al despertar, antes del café y del entrenamiento.",
+      "step4": "Los primeros {{settle}} segundos son de estabilización y no cuentan."
+    },
+    "save": "Guardar resultado",
+    "linkTitle": "Medir la VFC con banda pectoral",
+    "connecting": "Elige tu banda en el diálogo del navegador …",
+    "strapNote": {
+      "budget": "Económica, por lo general proporciona intervalos entre latidos; la calidad varía más.",
+      "dualBluetooth": "Dos conexiones Bluetooth a la vez — reloj y KYDON juntos.",
+      "singleBluetooth": "Solo una conexión Bluetooth: desconéctala antes del reloj.",
+      "antPlus": "Envía al reloj por ANT+, el Bluetooth queda libre para KYDON.",
+      "opticalNoRr": "Medición óptica en el brazo: pulso sí, intervalos entre latidos fiables no.",
+      "broadcastNoRr": "El reloj solo transmite el pulso, no los intervalos entre latidos."
+    },
+    "minutes_one": "{{count}} minuto",
+    "intro": "Dos minutos por la mañana con una banda pectoral: de ahí salen tu variabilidad de la frecuencia cardíaca (RMSSD) y tu FC en reposo. Ambas pasan al contexto del día — comparadas solo contigo mismo.",
+    "connect": "Conectar banda e iniciar",
+    "beats_one": "{{count}} latido",
+    "linkBody": "Conecta directamente la Polar H10 y otras bandas; la RMSSD y la FC en reposo se registran.",
+    "saved": "Guardado como VFC y FC en reposo.",
+    "toContext": "Al contexto del día",
+    "settling": "Estabilización",
+    "duration": "Duración",
+    "again": "Nueva medición",
+    "minutes_other": "{{count}} minutos",
+    "savedNote": "Banda pectoral, {{seconds}} s analizados, {{artifacts}} % de artefactos",
+    "eyebrow": "Banda pectoral",
+    "measuring": "Midiendo"
   }
 }
