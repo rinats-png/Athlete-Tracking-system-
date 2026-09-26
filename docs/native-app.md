@@ -345,3 +345,107 @@ Windows).
 - GitHub Actions, macOS-Runner: https://docs.github.com/actions/using-github-hosted-runners/about-github-hosted-runners
 - MacinCloud: https://www.macincloud.com
 - Node.js: https://nodejs.org · Git: https://git-scm.com · VS Code: https://code.visualstudio.com
+
+---
+
+## 9. Für Solo-Betrieb ohne Programmierkenntnisse
+
+Gilt, wenn eine Person ohne eigenes Codeverständnis das Projekt allein über
+KI-Werkzeuge steuert (Stand dieses Betriebs: Claude Code als Hauptwerkzeug).
+Die Zeitangaben in Abschnitt 4 gehen von einer Person aus, die Code selbst
+lesen und Fehler einordnen kann. Ohne das verschiebt sich die Rechnung.
+
+### Was sich ändert, und warum
+
+| Grund | Auswirkung |
+|---|---|
+| **Testen auf echten Geräten kann nur ein Mensch.** Ob der Brustgurt wirklich verbindet, ob HealthKit die richtigen Werte liefert, ob ein Update nach `cap sync` noch läuft — das bestätigt niemand außer dir, am Gerät. | Jede Testrunde kostet deine Zeit, nicht nur Rechenzeit. |
+| **Store-Rückfragen brauchen eine Antwort, die du einreichst.** Wenn ein Prüfer schreibt «wofür der Standortzugriff?», entwerfe ich die Antwort, du reichst sie ein und trägst die Verantwortung dafür. | Wartezeit + Rückfragen wiederholen sich oft. |
+| **Mehrere KI-Werkzeuge parallel (Claude Code, Gemini, Kimi K3 o. ä.) sind ohne Codeprüfung ein Risiko, kein Vorteil.** Verschiedene Modelle treffen verschiedene Architekturentscheidungen; bearbeiten zwei Systeme dieselbe Datei, entstehen Widersprüche, die nur jemand mit Codeverständnis sauber zusammenführt. | **Empfehlung: ein Werkzeug führt** (hier: Claude Code, weil der gesamte Kontext — Architekturregeln, `CLAUDE.md`, 1165 Prüffälle — schon hier sitzt). Die anderen höchstens für Recherche oder eine zweite Meinung, nie für dieselbe Datei. |
+| **Betrieb danach ist keine einmalige Sache.** Sicherheitsupdates, ein abgelaufenes Zertifikat, eine neue Store-Angabe, ein iOS-Update mit anderem Verhalten. | Laufend ca. 1–2 Stunden im Monat einplanen, nicht null. |
+
+### Realistische Zeit, mit gleichzeitigem Server-Umzug
+
+| Block | Aufwand als Entwicklertage (Abschnitt 4) | Realistische Kalenderzeit im Solo-Betrieb |
+|---|---|---|
+| Server-Umzug weg von Netlify/Supabase | ca. 4–9 Tage | **3–5 Wochen** — jeder Schritt (Anmeldung, Zahlung, Sync) will nach der Umstellung von Hand bestätigt werden, und ein Fehler hier betrifft sofort alle Nutzer |
+| Capacitor-Hülle + native Funktionen (Phasen 1–3) | ca. 12–18 Tage | **8–14 Wochen** — jeder Baustein braucht eine Bestätigung auf echten Geräten, dazu Wartezeiten (D-U-N-S, Apple-Konto, Google-Testphase) |
+| Abrechnung, Store-Auftritt, Testen (Phasen 4–6) | ca. 8–14 Tage | **4–6 Wochen** |
+| Einreichen, Ablehnungsrunden (Phase 7) | ca. 3–5 Tage | **2–4 Wochen**, realistisch mit mindestens einer Ablehnungsrunde |
+| **Gesamt bis beide Apps live sind** | ≈ 27–46 Tage | **≈ 4–6 Monate** neben anderer Arbeit, **≈ 2–3 Monate** mit KYDON als Hauptfokus |
+
+Das liegt deutlich über den 6–10 Wochen aus Abschnitt 4. Der Unterschied ist
+nicht die Technik, sondern die Zeit für Testen, Rückmeldungen verstehen und
+Entscheiden.
+
+**Empfohlene Reihenfolge:** Server-Umzug zuerst abschließen und mindestens
+1–2 Wochen störungsfrei laufen lassen, bevor der native Umbau beginnt. Zwei
+große Baustellen gleichzeitig sind im Solo-Betrieb ohne Codeverständnis das
+größte Risiko: geht dabei etwas schief, ist die Fehlersuche am schwersten
+genau dann, wenn zwei Systeme gleichzeitig in Bewegung sind.
+
+### Test-Protokoll für jede grössere Änderung
+
+Eine feste Liste statt Code lesen zu müssen. Nach jedem `cap sync` und vor
+jeder Store-Einreichung einmal durchgehen, auf einem echten iPhone UND
+einem echten Android-Gerät:
+
+**Grundfunktion**
+1. App kalt starten (vorher vollständig beenden) — lädt sie ohne Fehler?
+2. Ohne Internet einen Test messen und speichern — funktioniert es offline?
+3. App beenden, neu starten — ist der Messwert noch da?
+4. Auf «Speicher freigeben» / App-Neuinstallation-Tricks des Systems
+   verzichten, aber Gerät einmal neu starten — App und Daten noch da?
+
+**Anmeldung**
+5. Neues Konto anlegen — kommt die Bestätigungs-Mail, öffnet der Link die App?
+6. Passwort vergessen — kommt die Mail, öffnet der Link die App?
+7. Abmelden, wieder anmelden — sind die Daten wieder da?
+
+**Brustgurt / HRV**
+8. Gurt anlegen, in der App verbinden — verbindet er sich?
+9. Zwei Minuten messen — kommt ein plausibler Wert (RMSSD, Ruhepuls)?
+10. Gurt während der Messung abnehmen — bricht die App sauber ab, statt
+    einzufrieren oder abzustürzen?
+
+**Apple Health / Health Connect** (nur wenn in dieser Version enthalten)
+11. Erlaubnis erteilen — fragt die App die richtigen Kategorien ab?
+12. Ein Wert aus Health (z. B. Ruhepuls) erscheint in KYDON?
+
+**Erinnerungen / Widget**
+13. Eine Erinnerung auslösen (Testtermin anlegen) — kommt die
+    Benachrichtigung?
+14. Widget auf den Homescreen legen — zeigt es einen sinnvollen Stand?
+
+**Käufe** (falls in dieser Version enthalten)
+15. Ein Abo kaufen (Sandbox/Testkonto von Apple bzw. Google) — schaltet die
+    richtige Stufe frei?
+16. Abo im System kündigen — verhält sich die App danach richtig (kein
+    Absturz, korrekte Anzeige)?
+
+**Konto**
+17. Konto in der App löschen — verschwinden Zugriff und Daten wirklich?
+
+**Sprachen**
+18. Gerätesprache auf zwei andere Sprachen stellen (z. B. Englisch,
+    Französisch) — sind Kernbildschirme vollständig übersetzt?
+
+Jeder Punkt, der scheitert, wird so beschrieben, wie es aussieht («bleibt
+bei ‹Wird verbunden› stehen», «Absturz nach dem Antippen von X») — das
+genügt, um es einzugrenzen; Codekenntnisse sind dafür nicht nötig.
+
+### Laufender Betrieb, minimaler aber nötiger Aufwand
+
+- **Uptime-Monitor** (z. B. UptimeRobot, kostenlos) auf die eigene
+  Serveradresse einrichten — meldet per Mail, wenn der Server nicht
+  erreichbar ist, ohne dass du selbst nachsehen musst.
+- **Backups** automatisch UND regelmäßig geprüft: einmal im Monat wirklich
+  eine Wiederherstellung testen, nicht nur annehmen, dass die Sicherung lief.
+- **Store-Postfächer** (Apple, Google) auf Benachrichtigungen prüfen —
+  beide melden sich bei neuen Anforderungen, abgelaufenen Zertifikaten oder
+  Richtlinienänderungen häufig nur per Mail.
+- **Ein Werkzeug, eine Historie:** Änderungen an der App über dieselbe
+  Codebasis und denselben Chat-Verlauf laufen lassen, statt zwischen
+  Werkzeugen zu wechseln — sonst geht der Zusammenhang («warum wurde das so
+  gebaut») verloren, den auch die KI braucht, um sicher weiterzuarbeiten.
+
