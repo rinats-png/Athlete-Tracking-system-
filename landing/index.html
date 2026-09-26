@@ -14,7 +14,7 @@
     <script src="theme-init.js"></script>
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
     <header class="site-header">
       <div class="site-header__shell">
@@ -25,17 +25,31 @@
           <span class="brand__name">KYDON</span>
         </a>
         <nav class="site-nav" aria-label="Main">
-          <a href="#why">Why KYDON</a>
-          <a href="#features">Features</a>
-          <a href="#sports">Sports</a>
-          <a href="#coaches">Coaches</a>
+          <a href="#why" data-i18n="nav.why">Why KYDON</a>
+          <a href="#features" data-i18n="nav.features">Features</a>
+          <a href="#sports" data-i18n="nav.sports">Sports</a>
+          <a href="#coaches" data-i18n="nav.coaches">Coaches</a>
         </nav>
         <div class="site-header__actions">
-          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+          <label class="lang-select">
+            <span class="visually-hidden" data-i18n="nav.language">Language</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></svg>
+            <select data-lang-select>
+              <option value="de">DE</option>
+              <option value="en">EN</option>
+              <option value="fr">FR</option>
+              <option value="es">ES</option>
+              <option value="sv">SV</option>
+              <option value="da">DA</option>
+              <option value="nb">NB</option>
+              <option value="nl">NL</option>
+            </select>
+          </label>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme" data-i18n-aria="nav.theme">
             <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
             <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
           </button>
-          <a class="btn btn--primary btn--small" data-app-link href="https://kydon.app">Get the App</a>
+          <a class="btn btn--primary btn--small" data-app-link href="https://kydon.app" data-i18n="cta.app">Get the App</a>
         </div>
       </div>
     </header>
@@ -46,41 +60,41 @@
         <canvas class="hero__scene" aria-hidden="true"></canvas>
         <h1 class="visually-hidden">KYDON — Performance Diagnostics</h1>
         <div class="hero__copy reveal">
-          <p class="eyebrow">Performance Diagnostics</p>
-          <p class="hero__claim">Measure. Benchmark. Develop.</p>
-          <p class="hero__lead">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Performance Diagnostics</p>
+          <p class="hero__claim" data-i18n="hero.claim">Measure. Benchmark. Develop.</p>
+          <p class="hero__lead" data-i18n="hero.lead">
             Performance diagnostics that fit in your pocket. Field tests with sourced protocols, real reference data and progress you can
             prove — for every athlete, in every sport.
           </p>
         </div>
         <ul class="hero__chips reveal" aria-label="At a glance">
-          <li>50+ disciplines</li>
-          <li>80+ tests</li>
-          <li>Works offline</li>
-          <li>8 languages</li>
+          <li data-i18n="hero.chip1">50+ disciplines</li>
+          <li data-i18n="hero.chip2">80+ tests</li>
+          <li data-i18n="hero.chip3">Works offline</li>
+          <li data-i18n="hero.chip4">8 languages</li>
         </ul>
-        <a class="hero__scroll" href="#enter" aria-label="Scroll down"><span></span></a>
+        <a class="hero__scroll" href="#enter" aria-label="Scroll down" data-i18n-aria="hero.scroll"><span></span></a>
       </section>
 
       <!-- THE TWO DOORS --------------------------------------------------- -->
       <section class="doors" id="enter" aria-labelledby="doors-title">
         <div class="doors__intro reveal">
-          <p class="eyebrow">The new era of sport</p>
-          <h2 id="doors-title" class="section-title">Two ways in.</h2>
+          <p class="eyebrow" data-i18n="doors.eyebrow">The new era of sport</p>
+          <h2 id="doors-title" class="section-title" data-i18n="doors.title">Two ways in.</h2>
         </div>
         <div class="doors__grid">
           <a class="door door--app reveal" data-app-link href="https://kydon.app">
-            <span class="door__label">For athletes &amp; coaches</span>
-            <span class="door__title">Get the App</span>
-            <span class="door__text">Start measuring today — free, in the browser, on any phone. No download needed.</span>
+            <span class="door__label" data-i18n="doors.app.label">For athletes &amp; coaches</span>
+            <span class="door__title" data-i18n="cta.app">Get the App</span>
+            <span class="door__text" data-i18n="doors.app.text">Start measuring today — free, in the browser, on any phone. No download needed.</span>
             <span class="door__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" /></svg>
             </span>
           </a>
           <a class="door door--merch reveal" data-merch-link href="#merch">
-            <span class="door__label">KYDON Merch</span>
-            <span class="door__title">Wear the New Era</span>
-            <span class="door__text">For those who already measure. Show where you stand.</span>
+            <span class="door__label" data-i18n="doors.merch.label">KYDON Merch</span>
+            <span class="door__title" data-i18n="doors.merch.title">Wear the New Era</span>
+            <span class="door__text" data-i18n="doors.merch.text">For those who already measure. Show where you stand.</span>
             <span class="door__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" /></svg>
             </span>
@@ -91,11 +105,11 @@
       <!-- WHY -------------------------------------------------------------- -->
       <section class="why panel" id="why" aria-labelledby="why-title">
         <div class="why__head reveal">
-          <p class="eyebrow">Why KYDON</p>
-          <h2 id="why-title" class="section-title">
+          <p class="eyebrow" data-i18n="why.eyebrow">Why KYDON</p>
+          <h2 id="why-title" class="section-title" data-i18n-html="why.title">
             Sport has always been judged by feel.<br /><span class="muted">The future is measured.</span>
           </h2>
-          <p class="section-lead">
+          <p class="section-lead" data-i18n="why.lead">
             Performance diagnostics used to mean a lab, a sports scientist and a waiting list. Most athletes never get
             there — and most training decisions are still made on gut feeling. KYDON brings the rigour of the lab to
             the field tests you can run in any gym, on any mat, on any track.
@@ -104,23 +118,23 @@
         <ol class="why__grid">
           <li class="why-card reveal">
             <span class="why-card__num">01</span>
-            <h3>Measured, not guessed</h3>
-            <p>Every test comes with its protocol: setup, execution, what counts. So a result means the same thing today, next month and in another gym.</p>
+            <h3 data-i18n="why.1.title">Measured, not guessed</h3>
+            <p data-i18n="why.1.text">Every test comes with its protocol: setup, execution, what counts. So a result means the same thing today, next month and in another gym.</p>
           </li>
           <li class="why-card reveal">
             <span class="why-card__num">02</span>
-            <h3>Benchmarked against real data</h3>
-            <p>Results are placed against published reference values — with the source named. Where there is no sound reference, KYDON says so instead of inventing one.</p>
+            <h3 data-i18n="why.2.title">Benchmarked against real data</h3>
+            <p data-i18n="why.2.text">Results are placed against published reference values — with the source named. Where there is no sound reference, KYDON says so instead of inventing one.</p>
           </li>
           <li class="why-card reveal">
             <span class="why-card__num">03</span>
-            <h3>Progress you can prove</h3>
-            <p>Every change is checked against the test's measurement error. You see when you really improved — and when it was just noise.</p>
+            <h3 data-i18n="why.3.title">Progress you can prove</h3>
+            <p data-i18n="why.3.text">Every change is checked against the test's measurement error. You see when you really improved — and when it was just noise.</p>
           </li>
           <li class="why-card reveal">
             <span class="why-card__num">04</span>
-            <h3>Yours, and private</h3>
-            <p>Works offline in the hall, stores on your device first and syncs only if you want. Designed for GDPR from day one.</p>
+            <h3 data-i18n="why.4.title">Yours, and private</h3>
+            <p data-i18n="why.4.text">Works offline in the hall, stores on your device first and syncs only if you want. Designed for GDPR from day one.</p>
           </li>
         </ol>
       </section>
@@ -128,74 +142,74 @@
       <!-- FEATURES ---------------------------------------------------------- -->
       <section class="features" id="features" aria-labelledby="features-title">
         <div class="features__head reveal">
-          <p class="eyebrow">Inside the app</p>
-          <h2 id="features-title" class="section-title">Field tests, done right.<br /><span class="muted">Right from your pocket.</span></h2>
+          <p class="eyebrow" data-i18n="features.eyebrow">Inside the app</p>
+          <h2 id="features-title" class="section-title" data-i18n-html="features.title">Field tests, done right.<br /><span class="muted">Right from your pocket.</span></h2>
         </div>
 
         <div class="feature reveal">
           <div class="feature__copy">
-            <p class="eyebrow">Performance profile</p>
-            <h3>See your whole athlete at a glance.</h3>
-            <p>Strength, power, endurance and sport-specific capacities on one profile — normalised, comparable and built only on axes that have a real reference behind them.</p>
+            <p class="eyebrow" data-i18n="f1.eyebrow">Performance profile</p>
+            <h3 data-i18n="f1.title">See your whole athlete at a glance.</h3>
+            <p data-i18n="f1.text">Strength, power, endurance and sport-specific capacities on one profile — normalised, comparable and built only on axes that have a real reference behind them.</p>
           </div>
           <figure class="phone">
-            <img class="shot shot--light" src="app/uebersicht-light.webp" alt="KYDON overview with performance profile" loading="lazy" width="309" height="686" />
+            <img class="shot shot--light" src="app/uebersicht-light.webp" alt="KYDON overview with performance profile" data-i18n-alt="f1.alt" loading="lazy" width="309" height="686" />
             <img class="shot shot--dark" src="app/uebersicht-dark.webp" alt="" loading="lazy" width="309" height="686" />
           </figure>
         </div>
 
         <div class="feature feature--flip reveal">
           <div class="feature__copy">
-            <p class="eyebrow">Diagnostics</p>
-            <h3>The right tests for your sport.</h3>
-            <p>Test batteries per discipline, guided step by step. Timer, counter and protocol on screen — a full test day runs from the phone.</p>
+            <p class="eyebrow" data-i18n="f2.eyebrow">Diagnostics</p>
+            <h3 data-i18n="f2.title">The right tests for your sport.</h3>
+            <p data-i18n="f2.text">Test batteries per discipline, guided step by step. Timer, counter and protocol on screen — a full test day runs from the phone.</p>
           </div>
           <figure class="phone">
-            <img class="shot shot--light" src="app/diagnostik-light.webp" alt="KYDON diagnostics area" loading="lazy" width="309" height="686" />
+            <img class="shot shot--light" src="app/diagnostik-light.webp" alt="KYDON diagnostics area" data-i18n-alt="f2.alt" loading="lazy" width="309" height="686" />
             <img class="shot shot--dark" src="app/diagnostik-dark.webp" alt="" loading="lazy" width="309" height="686" />
           </figure>
         </div>
 
         <div class="feature reveal">
           <div class="feature__copy">
-            <p class="eyebrow">Analysis</p>
-            <h3>Where you are strong. Where the potential is.</h3>
-            <p>Strengths, the biggest gap and the next test that makes sense — in plain words, with the reasoning shown.</p>
+            <p class="eyebrow" data-i18n="f3.eyebrow">Analysis</p>
+            <h3 data-i18n="f3.title">Where you are strong. Where the potential is.</h3>
+            <p data-i18n="f3.text">Strengths, the biggest gap and the next test that makes sense — in plain words, with the reasoning shown.</p>
           </div>
           <figure class="phone">
-            <img class="shot shot--light" src="app/analyse-light.webp" alt="KYDON analysis screen" loading="lazy" width="309" height="686" />
+            <img class="shot shot--light" src="app/analyse-light.webp" alt="KYDON analysis screen" data-i18n-alt="f3.alt" loading="lazy" width="309" height="686" />
             <img class="shot shot--dark" src="app/analyse-dark.webp" alt="" loading="lazy" width="309" height="686" />
           </figure>
         </div>
 
         <div class="feature feature--flip reveal">
           <div class="feature__copy">
-            <p class="eyebrow">History &amp; reports</p>
-            <h3>Every session, one story.</h3>
-            <p>History per test, a one-page report per athlete and a year in review. Export it, share it, print it for the next talk with your coach.</p>
+            <p class="eyebrow" data-i18n="f4.eyebrow">History &amp; reports</p>
+            <h3 data-i18n="f4.title">Every session, one story.</h3>
+            <p data-i18n="f4.text">History per test, a one-page report per athlete and a year in review. Export it, share it, print it for the next talk with your coach.</p>
           </div>
           <figure class="phone">
-            <img class="shot shot--light" src="app/verlauf-light.webp" alt="KYDON history screen" loading="lazy" width="309" height="686" />
+            <img class="shot shot--light" src="app/verlauf-light.webp" alt="KYDON history screen" data-i18n-alt="f4.alt" loading="lazy" width="309" height="686" />
             <img class="shot shot--dark" src="app/verlauf-dark.webp" alt="" loading="lazy" width="309" height="686" />
           </figure>
         </div>
 
-        <ul class="feature-list" aria-label="More features">
-          <li class="reveal"><strong>Diary &amp; wellbeing</strong><span>Sleep, load and readiness next to your numbers.</span></li>
-          <li class="reveal"><strong>Training log</strong><span>Workouts and exercises, linked to what you measure.</span></li>
-          <li class="reveal"><strong>Nutrition</strong><span>Food tracking with an open food database.</span></li>
-          <li class="reveal"><strong>Competition planning</strong><span>Competition dates, form outlook and a season plan.</span></li>
-          <li class="reveal"><strong>Performance card</strong><span>Your profile as a shareable card.</span></li>
-          <li class="reveal"><strong>CSV import</strong><span>Bring your old spreadsheets with you.</span></li>
+        <ul class="feature-list" aria-label="More features" data-i18n-aria="more.label">
+          <li class="reveal"><strong data-i18n="more.1.title">Diary &amp; wellbeing</strong><span data-i18n="more.1.text">Sleep, load and readiness next to your numbers.</span></li>
+          <li class="reveal"><strong data-i18n="more.2.title">Training log</strong><span data-i18n="more.2.text">Workouts and exercises, linked to what you measure.</span></li>
+          <li class="reveal"><strong data-i18n="more.3.title">Nutrition</strong><span data-i18n="more.3.text">Food tracking with an open food database.</span></li>
+          <li class="reveal"><strong data-i18n="more.4.title">Competition planning</strong><span data-i18n="more.4.text">Competition dates, form outlook and a season plan.</span></li>
+          <li class="reveal"><strong data-i18n="more.5.title">Performance card</strong><span data-i18n="more.5.text">Your profile as a shareable card.</span></li>
+          <li class="reveal"><strong data-i18n="more.6.title">CSV import</strong><span data-i18n="more.6.text">Bring your old spreadsheets with you.</span></li>
         </ul>
       </section>
 
       <!-- SPORTS ------------------------------------------------------------ -->
       <section class="sports panel" id="sports" aria-labelledby="sports-title">
         <div class="sports__head reveal">
-          <p class="eyebrow">Sports</p>
-          <h2 id="sports-title" class="section-title">One method. <span class="muted">50+ disciplines.</span></h2>
-          <p class="section-lead">From the mat to the pool, from the track to the service: each discipline gets its own profile of what matters — and the tests to measure it.</p>
+          <p class="eyebrow" data-i18n="sports.eyebrow">Sports</p>
+          <h2 id="sports-title" class="section-title" data-i18n-html="sports.title">One method. <span class="muted">50+ disciplines.</span></h2>
+          <p class="section-lead" data-i18n="sports.lead">From the mat to the pool, from the track to the service: each discipline gets its own profile of what matters — and the tests to measure it.</p>
         </div>
         <ul class="sports__grid" data-sports></ul>
       </section>
@@ -203,41 +217,41 @@
       <!-- COACHES ----------------------------------------------------------- -->
       <section class="coaches" id="coaches" aria-labelledby="coaches-title">
         <div class="coaches__copy reveal">
-          <p class="eyebrow">For coaches &amp; clubs</p>
-          <h2 id="coaches-title" class="section-title">Test a whole squad<br /><span class="muted">in one session.</span></h2>
-          <p class="section-lead">Group test mode, heatmaps across your athletes, side-by-side comparison and group reports. Invite fellow coaches into a team and work on the same athletes — from Coach Team upward.</p>
+          <p class="eyebrow" data-i18n="coaches.eyebrow">For coaches &amp; clubs</p>
+          <h2 id="coaches-title" class="section-title" data-i18n-html="coaches.title">Test a whole squad<br /><span class="muted">in one session.</span></h2>
+          <p class="section-lead" data-i18n="coaches.lead">Group test mode, heatmaps across your athletes, side-by-side comparison and group reports. Invite fellow coaches into a team and work on the same athletes — from Coach Team upward.</p>
           <ul class="checks">
-            <li>Group test mode for a whole squad</li>
-            <li>Heatmap and comparison across the squad</li>
-            <li>Proof of training effect, per athlete</li>
-            <li>Shared teams for up to five coaches</li>
+            <li data-i18n="coaches.1">Group test mode for a whole squad</li>
+            <li data-i18n="coaches.2">Heatmap and comparison across the squad</li>
+            <li data-i18n="coaches.3">Proof of training effect, per athlete</li>
+            <li data-i18n="coaches.4">Shared teams for up to five coaches</li>
           </ul>
-          <a class="btn btn--primary" data-app-link href="https://kydon.app">Start as a coach</a>
+          <a class="btn btn--primary" data-app-link href="https://kydon.app" data-i18n="coaches.cta">Start as a coach</a>
         </div>
         <figure class="phone reveal">
-          <img class="shot shot--light" src="app/trainer-light.webp" alt="KYDON coach area" loading="lazy" width="309" height="686" />
+          <img class="shot shot--light" src="app/trainer-light.webp" alt="KYDON coach area" data-i18n-alt="coaches.alt" loading="lazy" width="309" height="686" />
           <img class="shot shot--dark" src="app/trainer-dark.webp" alt="" loading="lazy" width="309" height="686" />
         </figure>
       </section>
 
       <!-- CLOSING ------------------------------------------------------------ -->
       <section class="closing panel" aria-labelledby="closing-title">
-        <p class="eyebrow reveal">Measure. Benchmark. Develop.</p>
-        <h2 id="closing-title" class="closing__title reveal">The future of sport<br />is measured.</h2>
+        <p class="eyebrow reveal" data-i18n="closing.eyebrow">Measure. Benchmark. Develop.</p>
+        <h2 id="closing-title" class="closing__title reveal" data-i18n-html="closing.title">The future of sport<br />is measured.</h2>
         <div class="closing__actions reveal">
-          <a class="btn btn--primary" data-app-link href="https://kydon.app">Get the App</a>
-          <a class="btn btn--secondary" data-merch-link href="#merch">Wear the New Era</a>
+          <a class="btn btn--primary" data-app-link href="https://kydon.app" data-i18n="cta.app">Get the App</a>
+          <a class="btn btn--secondary" data-merch-link href="#merch" data-i18n="doors.merch.title">Wear the New Era</a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <span class="brand__name">KYDON</span>
-      <span class="site-footer__claim">Performance Diagnostics</span>
+      <span class="site-footer__claim" data-i18n="footer.claim">Performance Diagnostics</span>
       <nav aria-label="Legal">
-        <a data-app-path="/impressum" href="https://kydon.app/impressum">Imprint</a>
-        <a data-app-path="/datenschutz" href="https://kydon.app/datenschutz">Privacy</a>
-        <a data-app-path="/nutzungsbedingungen" href="https://kydon.app/nutzungsbedingungen">Terms</a>
+        <a data-app-path="/impressum" href="https://kydon.app/impressum" data-i18n="footer.imprint">Imprint</a>
+        <a data-app-path="/datenschutz" href="https://kydon.app/datenschutz" data-i18n="footer.privacy">Privacy</a>
+        <a data-app-path="/nutzungsbedingungen" href="https://kydon.app/nutzungsbedingungen" data-i18n="footer.terms">Terms</a>
       </nav>
     </footer>
 

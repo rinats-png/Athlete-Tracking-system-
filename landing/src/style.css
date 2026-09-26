@@ -365,3 +365,30 @@ h1, h2, h3, p { margin: 0; }
   .site-header { inset: 10px 10px auto; }
   .brand__name { font-size: 18px; }
 }
+
+/* --- Sprachwahl ------------------------------------------------------------ */
+.lang-select {
+  position: relative; display: inline-flex; align-items: center; gap: 6px;
+  height: 40px; padding: 0 10px 0 12px; border-radius: var(--radius-pill);
+  border: 1px solid var(--line); color: var(--ink); cursor: pointer;
+}
+.lang-select svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; flex: none; }
+.lang-select select {
+  appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: inherit;
+  font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: 0.14em;
+  padding: 0 14px 0 0; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 5px center, right 1px center; background-size: 4px 4px; background-repeat: no-repeat;
+}
+.lang-select select:focus-visible { outline: none; }
+.lang-select:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lang-select option { color: #101a18; background: #ffffff; }
+@media (max-width: 560px) {
+  .lang-select { padding: 0 8px; }
+  .lang-select svg { display: none; }
+  .site-header__actions .btn--small { padding: 0 12px; font-size: 12px; }
+}
+.btn { white-space: nowrap; }
+@media (max-width: 420px) {
+  .site-header__actions .btn--small { display: none; }
+}

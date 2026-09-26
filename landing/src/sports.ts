@@ -1,19 +1,21 @@
-/** Die Motive aus der App (src/assets/sport) mit den Disziplinen, die sie tragen. */
-export const SPORTS: { motif: string; name: string; covers: string }[] = [
-  { motif: 'judo', name: 'Judo', covers: 'Combat' },
-  { motif: 'boxen', name: 'Boxing', covers: 'Combat' },
-  { motif: 'ringen', name: 'Wrestling', covers: 'Combat' },
-  { motif: 'bjj', name: 'BJJ & Ju-Jutsu', covers: 'Combat' },
-  { motif: 'mma', name: 'MMA', covers: 'Combat' },
-  { motif: 'karate', name: 'Karate', covers: 'Combat' },
-  { motif: 'kickboxen', name: 'Kickboxing', covers: 'Combat' },
-  { motif: 'taekwondo', name: 'Taekwondo', covers: 'Combat' },
-  { motif: 'fechten', name: 'Fencing', covers: 'Combat' },
-  { motif: 'laeufer', name: 'Running', covers: 'Track to trail' },
-  { motif: 'rad', name: 'Cycling', covers: 'Endurance' },
-  { motif: 'schwimmen', name: 'Swimming', covers: 'Endurance' },
-  { motif: 'triathlon', name: 'Triathlon', covers: 'Sprint to Ironman' },
-  { motif: 'rudern', name: 'Rowing', covers: 'Hybrid' },
-  { motif: 'schlitten', name: 'HYROX & Functional', covers: 'Hybrid' },
-  { motif: 'taktisch', name: 'Tactical', covers: 'Police · Fire · Military' },
+import type { Dict } from './i18n/en'
+
+/** Die Motive aus der App (src/assets/sport) mit Namen- und Kategorieschlüssel. */
+export const SPORTS: { motif: string; name: keyof Dict; covers: keyof Dict }[] = [
+  { motif: 'judo', name: 'sport.judo', covers: 'cat.combat' },
+  { motif: 'boxen', name: 'sport.boxen', covers: 'cat.combat' },
+  { motif: 'ringen', name: 'sport.ringen', covers: 'cat.combat' },
+  { motif: 'bjj', name: 'sport.bjj', covers: 'cat.combat' },
+  { motif: 'mma', name: 'sport.mma', covers: 'cat.combat' },
+  { motif: 'karate', name: 'sport.karate', covers: 'cat.combat' },
+  { motif: 'kickboxen', name: 'sport.kickboxen', covers: 'cat.combat' },
+  { motif: 'taekwondo', name: 'sport.taekwondo', covers: 'cat.combat' },
+  { motif: 'fechten', name: 'sport.fechten', covers: 'cat.combat' },
+  { motif: 'laeufer', name: 'sport.laeufer', covers: 'cat.running' },
+  { motif: 'rad', name: 'sport.rad', covers: 'cat.endurance' },
+  { motif: 'schwimmen', name: 'sport.schwimmen', covers: 'cat.endurance' },
+  { motif: 'triathlon', name: 'sport.triathlon', covers: 'cat.triathlon' },
+  { motif: 'rudern', name: 'sport.rudern', covers: 'cat.hybrid' },
+  { motif: 'schlitten', name: 'sport.schlitten', covers: 'cat.hybrid' },
+  { motif: 'taktisch', name: 'sport.taktisch', covers: 'cat.tactical' },
 ]

@@ -6,6 +6,8 @@ import '@fontsource/ibm-plex-sans/latin-400.css'
 import '@fontsource/ibm-plex-sans/latin-500.css'
 import './style.css'
 import { SPORTS } from './sports'
+import { applyLocale, initialLocale, storeLocale, type Locale } from './i18n'
+import type { Dict } from './i18n/en'
 import type { Theme, WordInk } from './scene/wordInk'
 
 /** Wohin die beiden Türen führen. Über Umgebungsvariablen beim Bauen änderbar. */
@@ -30,21 +32,39 @@ for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-merch-link]'
   else a.addEventListener('click', (e) => {
     e.preventDefault()
     a.classList.add('is-soon')
-    a.setAttribute('data-soon', 'Coming soon')
+    a.setAttribute('data-soon', dict['doors.merch.soon'])
   })
 }
 
 // --- Sportarten ---------------------------------------------------------------
 const grid = document.querySelector<HTMLUListElement>('[data-sports]')
-if (grid) {
+function renderSports(t: Dict) {
+  if (!grid) return
+  const shown = grid.children.length > 0
   grid.innerHTML = SPORTS.map(
-    (s) => `<li class="sport reveal">
+    (s) => `<li class="sport reveal${shown ? ' is-in' : ''}">
       <img class="shot--light" src="sport/${s.motif}-hell.webp" alt="" loading="lazy" width="400" height="400" />
       <img class="shot--dark" src="sport/${s.motif}-dunkel.webp" alt="" loading="lazy" width="400" height="400" />
-      <span class="sport__name">${s.name}</span>
-      <span class="sport__more">${s.covers}</span>
+      <span class="sport__name">${t[s.name]}</span>
+      <span class="sport__more">${t[s.covers]}</span>
     </li>`,
   ).join('')
+}
+
+// --- Sprache ---------------------------------------------------------------------
+let locale: Locale = initialLocale()
+let dict: Dict = applyLocale(locale)
+renderSports(dict)
+const langSelect = document.querySelector<HTMLSelectElement>('[data-lang-select]')
+if (langSelect) {
+  langSelect.value = locale
+  langSelect.addEventListener('change', () => {
+    locale = langSelect.value as Locale
+    storeLocale(locale)
+    dict = applyLocale(locale)
+    renderSports(dict)
+    for (const a of document.querySelectorAll('.is-soon')) a.setAttribute('data-soon', dict['doors.merch.soon'])
+  })
 }
 
 // --- Einblenden beim Scrollen -------------------------------------------------
