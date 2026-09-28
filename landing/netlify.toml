@@ -1,0 +1,9 @@
+# Landingpage als eigene Netlify-Site. In Netlify «Base directory» = landing setzen,
+# sonst greift die netlify.toml im Wurzelverzeichnis und baut die App.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  VITE_APP_URL = "https://baseline-diagnostics.netlify.app"
