@@ -39,6 +39,7 @@ export async function loadContentRoots(): Promise<unknown[]> {
     import('@/data/testBatteries'),
     import('@/data/testCatalog'),
     import('@/data/testProcedure'),
+    import('@/data/testProcedureLibrary'),
     import('@/data/testProtocols'),
   ])
 }

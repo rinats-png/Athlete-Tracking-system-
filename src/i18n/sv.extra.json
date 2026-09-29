@@ -40,7 +40,16 @@
       "fms_total": "Functional Movement Screen (totalt)",
       "sleep_h": "Sömnlängd",
       "srpe_load_au": "Veckobelastning (sRPE)",
-      "resting_hr_bpm": "Vilopuls"
+      "resting_hr_bpm": "Vilopuls",
+      "mep_cm_h2o": "Maximalt utandningstryck (MEP)",
+      "stork_balance_s": "Enbensstående (storktest)",
+      "flamingo_falls": "Flamingo-balanstest (förluster)",
+      "sit_and_reach_cm": "Sit-and-reach",
+      "jps_knee_deg": "Knäledens ledpositionssinne",
+      "stability_index": "Stabilitetsindex (kraftplatta)",
+      "reaction_time_ms": "Visuell reaktionstid",
+      "fitrosword_response_ms": "Fäktningsreaktionstid (FitroSword)",
+      "punch_peak_g": "Slagbelastning (toppacceleration)"
     },
     "meaning": {
       "ck_u_l": "Ett enzym vars blodnivå stiger efter ovan belastning. Variationen mellan personer är mycket stor — det är bara jämförbart med dig själv.",
@@ -55,7 +64,16 @@
       "fms_total": "Sju rörelseuppgifter poängsatta 0 till 3 vardera. En screening av rörelsekvalitet, ingen skadeprognos.",
       "sleep_h": "Timmar sömn natten innan, självskattat. Ingen återhämtningspoäng — en siffra som står bredvid nästa mätning.",
       "srpe_load_au": "En veckas belastning som summan av ansträngning (RPE 1–10) gånger minuter per pass. Bara jämförbart med dig själv — och den vanligaste förklaringen till en dålig testdag.",
-      "resting_hr_bpm": "Hjärtslag per minut på morgonen, liggande, innan du stiger upp. Bara jämförbart med dig själv; apparat och mättidpunkt bör vara desamma."
+      "resting_hr_bpm": "Hjärtslag per minut på morgonen, liggande, innan du stiger upp. Bara jämförbart med dig själv; apparat och mättidpunkt bör vara desamma.",
+      "mep_cm_h2o": "Det maximala trycket när man andas ut mot ett motstånd. Kräver en mätutrustning och en övad teknik.",
+      "stork_balance_s": "Hur länge du står på ett ben utan att förlora positionen. En balansscreening, inte ett prestationsmått. Notera andra sidan och förhållandena i anteckningen.",
+      "flamingo_falls": "Hur ofta du tappar balansen på 60 sekunder. Färre betyder stadigare, inte bättre i normens mening.",
+      "sit_and_reach_cm": "Räckvidden i den bakre kedjan i sittande. En rörlighetsscreening; normer gäller endast per ålder och kön.",
+      "jps_knee_deg": "Felet i grader när en knävinkel återskapas utan syn. Kräver en vinkelmätare och övning.",
+      "stability_index": "Svajet hos tryckcentrum på en kraftplatta. Värdet beror starkt på systemet och kan bara jämföras på samma utrustning.",
+      "reaction_time_ms": "Tiden från en visuell stimulus till det definierade svaret. Utrustningen påverkar värdet, därför registreras den tillsammans med det.",
+      "fitrosword_response_ms": "Reaktions- och total svarstid vid fäktning med ett specifikt system. Kan endast jämföras på samma system.",
+      "punch_peak_g": "Den högsta accelerationen som en kroppsburen sensor registrerar under boxning. Kan endast jämföras med samma sensor och placering."
     }
   },
   "procedure": {
@@ -68,7 +86,15 @@
     "standardise": "Vad som måste förbli lika",
     "origin": "Enligt: {{origin}}",
     "genericTag": "allmän",
-    "genericHint": "Inget särskilt genomförande är lagrat för det här testet ännu. Det som följer kommer från testläget och är mer allmänt än ett validerat protokoll."
+    "genericHint": "Inget särskilt genomförande är lagrat för det här testet ännu. Det som följer kommer från testläget och är mer allmänt än ett validerat protokoll.",
+    "goal": "Syfte",
+    "setup": "Utrustning och uppställning",
+    "steps": "Genomförande steg för steg",
+    "time": "Tidsangivelser",
+    "distance": "Avstånd",
+    "scoring": "Bedömning och utvärdering",
+    "scoringNote": "Siffrorna i den här beskrivningen är kohortvärden från protokollets källa, inga normer. Appen placerar bara ett resultat i sammanhang där en belagd referens finns lagrad.",
+    "figure": "Skiss"
   },
   "compare": {
     "title": "Atletjämförelse",

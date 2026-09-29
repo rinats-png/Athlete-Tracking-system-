@@ -40,7 +40,16 @@
       "fms_total": "Functional Movement Screen (total)",
       "sleep_h": "Duración del sueño",
       "srpe_load_au": "Carga semanal (sRPE)",
-      "resting_hr_bpm": "Frecuencia cardíaca en reposo"
+      "resting_hr_bpm": "Frecuencia cardíaca en reposo",
+      "mep_cm_h2o": "Presión espiratoria máxima (MEP)",
+      "stork_balance_s": "Apoyo monopodal (test de la cigüeña)",
+      "flamingo_falls": "Test del flamenco (pérdidas)",
+      "sit_and_reach_cm": "Sit-and-reach",
+      "jps_knee_deg": "Sentido de posición de la articulación de la rodilla",
+      "stability_index": "Índice de estabilidad (plataforma de fuerza)",
+      "reaction_time_ms": "Tiempo de reacción visual",
+      "fitrosword_response_ms": "Tiempo de reacción en esgrima (FitroSword)",
+      "punch_peak_g": "Carga de golpeo (aceleración pico)"
     },
     "meaning": {
       "ck_u_l": "Una enzima cuyo nivel en sangre sube tras una carga no habitual. La variación entre personas es muy grande — solo es comparable contigo mismo.",
@@ -55,7 +64,16 @@
       "fms_total": "Siete tareas de movimiento puntuadas de 0 a 3 cada una. Un cribado de calidad del movimiento, no una predicción de lesiones.",
       "sleep_h": "Horas de sueño la noche anterior, autoestimadas. No es una puntuación de recuperación — una cifra que se sitúa junto a la siguiente medición.",
       "srpe_load_au": "La carga de una semana como suma de esfuerzo (RPE 1–10) por minutos por sesión. Solo comparable contigo mismo — y la explicación más frecuente de un mal día de test.",
-      "resting_hr_bpm": "Latidos por minuto por la mañana, tumbado, antes de levantarte. Solo comparable contigo mismo; el dispositivo y el momento de la medición deberían mantenerse iguales."
+      "resting_hr_bpm": "Latidos por minuto por la mañana, tumbado, antes de levantarte. Solo comparable contigo mismo; el dispositivo y el momento de la medición deberían mantenerse iguales.",
+      "mep_cm_h2o": "La presión máxima al espirar contra una resistencia. Requiere un dispositivo de medición y una técnica practicada.",
+      "stork_balance_s": "Cuánto tiempo te mantienes sobre una pierna sin perder la posición. Un cribado de equilibrio, no una medida de rendimiento. Anota el otro lado y las condiciones en la nota.",
+      "flamingo_falls": "Cuántas veces pierdes el equilibrio en 60 segundos. Menos significa más estable, no mejor en el sentido de una norma.",
+      "sit_and_reach_cm": "El alcance de la cadena posterior en sedestación. Un cribado de movilidad; las normas solo se aplican por edad y sexo.",
+      "jps_knee_deg": "El error en grados al reproducir un ángulo de rodilla sin visión. Requiere un medidor de ángulo y práctica.",
+      "stability_index": "La oscilación del centro de presión en una plataforma de fuerza. El valor depende mucho del sistema y solo puede compararse en el mismo dispositivo.",
+      "reaction_time_ms": "El tiempo desde un estímulo visual hasta la respuesta definida. El dispositivo desplaza el valor, por eso se registra junto con él.",
+      "fitrosword_response_ms": "Reacción y tiempo de respuesta total en esgrima con un sistema específico. Solo comparable en el mismo sistema.",
+      "punch_peak_g": "La aceleración más alta que registra un sensor corporal durante el boxeo. Solo comparable con el mismo sensor y la misma colocación."
     }
   },
   "procedure": {
@@ -68,7 +86,15 @@
     "standardise": "Qué debe mantenerse igual",
     "origin": "Según: {{origin}}",
     "genericTag": "general",
-    "genericHint": "Aún no hay un procedimiento propio guardado para este test. Lo que sigue procede del modo de test y es más general que un protocolo validado."
+    "genericHint": "Aún no hay un procedimiento propio guardado para este test. Lo que sigue procede del modo de test y es más general que un protocolo validado.",
+    "goal": "Objetivo",
+    "setup": "Material y montaje",
+    "steps": "Ejecución paso a paso",
+    "time": "Tiempos",
+    "distance": "Distancias",
+    "scoring": "Valoración y evaluación",
+    "scoringNote": "Las cifras de esta descripción son valores de cohortes de la fuente del protocolo, no normas. La app solo clasifica un resultado donde hay una referencia documentada.",
+    "figure": "Esquema"
   },
   "compare": {
     "title": "Comparación de atletas",

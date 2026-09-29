@@ -62,6 +62,13 @@ export type EquipmentId =
   | 'open_space'
   | 'gi'
   | 'kettlebell'
+  | 'bench'
+  | 'timing_gates'
+  | 'force_plate'
+  | 'isokinetic'
+  | 'spiroergometry'
+  | 'punch_sensor'
+  | 'kick_target'
 
 export interface EquipmentItem {
   id: EquipmentId
@@ -262,6 +269,41 @@ export const EQUIPMENT: EquipmentItem[] = [
     id: 'kettlebell',
     name: { de: 'Kettlebells', en: 'Kettlebells' },
     keywords: ['kettlebell', 'kugelhantel'],
+  },
+  {
+    id: 'bench',
+    name: { de: "Bank oder Liege", en: "Bench or treatment table" },
+    keywords: ["bank", "liege", "bench", "table"],
+  },
+  {
+    id: 'timing_gates',
+    name: { de: "Zeitmessung (Lichtschranken)", en: "Timing system (light gates)" },
+    keywords: ["lichtschranke", "zeitmess", "timing", "light gate"],
+  },
+  {
+    id: 'force_plate',
+    name: { de: "Kraftmessplatte", en: "Force plate" },
+    keywords: ["kraftmessplatte", "kraftplatte", "force plate"],
+  },
+  {
+    id: 'isokinetic',
+    name: { de: "Isokinetisches Dynamometer", en: "Isokinetic dynamometer" },
+    keywords: ["isokinetisch", "isokinetic"],
+  },
+  {
+    id: 'spiroergometry',
+    name: { de: "Spiroergometrie", en: "Spiroergometry" },
+    keywords: ["spiroergometrie", "spiroergometry"],
+  },
+  {
+    id: 'punch_sensor',
+    name: { de: "Schlagkraft- oder Schlagleistungssystem", en: "Punch force or punch power system" },
+    keywords: ["schlagkraft", "schlagleistung", "punch force", "punch power"],
+  },
+  {
+    id: 'kick_target',
+    name: { de: "Kickziel oder Schlagpolster", en: "Kick target or strike pad" },
+    keywords: ["kickziel", "schlagpolster", "kick target", "strike pad"],
   },
 ]
 

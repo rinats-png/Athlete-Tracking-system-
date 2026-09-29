@@ -40,7 +40,16 @@
       "fms_total": "Functional Movement Screen (total)",
       "sleep_h": "Durée de sommeil",
       "srpe_load_au": "Charge hebdomadaire (sRPE)",
-      "resting_hr_bpm": "FC de repos"
+      "resting_hr_bpm": "FC de repos",
+      "mep_cm_h2o": "Pression expiratoire maximale (PEM)",
+      "stork_balance_s": "Station unipodale (test de la cigogne)",
+      "flamingo_falls": "Test d'équilibre flamingo (pertes)",
+      "sit_and_reach_cm": "Sit-and-reach",
+      "jps_knee_deg": "Sens de la position du genou",
+      "stability_index": "Indice de stabilité (plateforme de force)",
+      "reaction_time_ms": "Temps de réaction visuel",
+      "fitrosword_response_ms": "Temps de réaction en escrime (FitroSword)",
+      "punch_peak_g": "Charge de frappe (accélération maximale)"
     },
     "meaning": {
       "ck_u_l": "Une enzyme dont le taux sanguin monte après une charge inhabituelle. La variation entre personnes est très grande — comparable seulement avec toi-même.",
@@ -55,7 +64,16 @@
       "fms_total": "Sept tâches motrices notées de 0 à 3 chacune. Un dépistage de la qualité du mouvement, pas une prédiction de blessure.",
       "sleep_h": "Heures de sommeil de la nuit précédente, auto-estimées. Pas un score de récupération — un chiffre placé à côté de la mesure suivante.",
       "srpe_load_au": "La charge d'une semaine comme somme de l'effort (RPE 1–10) multiplié par les minutes par séance. Comparable seulement avec toi-même — et l'explication la plus fréquente d'un mauvais jour de test.",
-      "resting_hr_bpm": "Battements par minute le matin, allongé, avant de se lever. Comparable seulement avec toi-même ; l'appareil et le moment de mesure devraient rester les mêmes."
+      "resting_hr_bpm": "Battements par minute le matin, allongé, avant de se lever. Comparable seulement avec toi-même ; l'appareil et le moment de mesure devraient rester les mêmes.",
+      "mep_cm_h2o": "La pression maximale lors de l'expiration contre une résistance. Demande un appareil de mesure et une technique exercée.",
+      "stork_balance_s": "Combien de temps tu tiens sur une jambe sans perdre la position. Un dépistage de l'équilibre, pas une mesure de performance. Note l'autre côté et les conditions dans la remarque.",
+      "flamingo_falls": "Combien de fois tu perds l'équilibre en 60 secondes. Moins signifie plus stable, pas meilleur au sens d'une norme.",
+      "sit_and_reach_cm": "L'amplitude de la chaîne postérieure en position assise. Un dépistage de la mobilité ; les normes ne valent que par âge et sexe.",
+      "jps_knee_deg": "L'erreur en degrés lorsqu'un angle du genou est reproduit sans la vue. Demande un appareil de mesure d'angle et de l'entraînement.",
+      "stability_index": "L'oscillation du centre de pression sur une plateforme de force. La valeur dépend fortement du système et ne peut être comparée que sur le même appareil.",
+      "reaction_time_ms": "Le temps entre un stimulus visuel et la réponse définie. L'appareil décale la valeur, c'est pourquoi il est enregistré avec elle.",
+      "fitrosword_response_ms": "Temps de réaction et de réponse total en escrime avec un système précis. Comparable uniquement sur le même système.",
+      "punch_peak_g": "L'accélération la plus élevée qu'un capteur porté sur le corps enregistre pendant la boxe. Comparable uniquement avec le même capteur et le même emplacement."
     }
   },
   "procedure": {
@@ -68,7 +86,15 @@
     "standardise": "Ce qui doit rester identique",
     "origin": "D'après : {{origin}}",
     "genericTag": "général",
-    "genericHint": "Aucune procédure dédiée n'est encore enregistrée pour ce test. Ce qui suit découle du mode de test et est plus général qu'un protocole validé."
+    "genericHint": "Aucune procédure dédiée n'est encore enregistrée pour ce test. Ce qui suit découle du mode de test et est plus général qu'un protocole validé.",
+    "goal": "Objectif",
+    "setup": "Matériel et installation",
+    "steps": "Déroulement pas à pas",
+    "time": "Durées",
+    "distance": "Distances",
+    "scoring": "Évaluation et interprétation",
+    "scoringNote": "Les chiffres de cette description sont des valeurs de cohortes issues de la source du protocole, pas des normes. L’application ne situe un résultat que là où une référence documentée est enregistrée.",
+    "figure": "Schéma"
   },
   "compare": {
     "title": "Comparaison d'athlètes",

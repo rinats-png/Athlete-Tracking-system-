@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, HeartPulse, Plus, Trash2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -10,6 +10,9 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { ACTIVE_OBSERVATIONS, observationByKey } from '@/data/observations'
 import type { ObservationGroup } from '@/data/observations'
 import { formatDate, formatNumber } from '@/lib/format'
+import { ProcedureContent } from '@/features/tests/ProcedurePanel'
+import type { LibraryProcedure } from '@/data/testProcedureLibrary'
+import type { TestProcedure } from '@/data/testProcedure'
 
 const GROUPS: ObservationGroup[] = ['recovery', 'load', 'environment', 'sensor', 'body', 'screening']
 
@@ -37,6 +40,20 @@ export function ObservationScreen() {
   const [note, setNote] = useState('')
 
   const definition = observationByKey(key)
+
+  // Die Durchführungsbeschreibungen liegen im nachgeladenen Teil; sie gehören
+  // nicht ins Startpaket und werden erst gebraucht, wenn ein Wert gewählt ist.
+  const [procedures, setProcedures] = useState<Record<string, LibraryProcedure> | null>(null)
+  useEffect(() => {
+    let alive = true
+    void import('@/data/testProcedureLibrary').then((m) => {
+      if (alive) setProcedures(m.OBSERVATION_PROCEDURES)
+    })
+    return () => {
+      alive = false
+    }
+  }, [])
+  const procedure = procedures?.[key]
   const byKey = useMemo(() => {
     const map = new Map<string, typeof observations>()
     for (const entry of observations) {
@@ -174,6 +191,15 @@ export function ObservationScreen() {
             </p>
             <p className="mt-1 text-[11px] text-ink-muted">{t('observation.deviceHint')}</p>
           </div>
+        )}
+
+        {procedure && (
+          <details className="border-t border-line" data-testid="observation-procedure">
+            <summary className="cursor-pointer px-4 py-2.5 text-[13px] font-semibold">
+              {t('procedure.title')}
+            </summary>
+            <ProcedureContent procedure={procedure as TestProcedure} />
+          </details>
         )}
 
         <div className="border-t border-line px-4 py-3">

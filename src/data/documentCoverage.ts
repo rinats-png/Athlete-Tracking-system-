@@ -47,13 +47,6 @@ export const DOCUMENT_GAPS: DocumentGap[] = [
       'Das Dokument nennt keinen bestimmten Test, sondern die Kategorie. Der SWFT deckt sie ab; ein zweiter, unbestimmter Eintrag wäre eine leere Zeile.',
   },
   {
-    disciplineId: 'boxing',
-    label: 'punch-force plate test',
-    kind: 'equipment',
-    reason:
-      'Braucht eine Kraftmessplatte oder einen instrumentierten Sack. Ohne Gerät nicht messbar, geschätzte Schlagkraft wäre eine erfundene Zahl.',
-  },
-  {
     disciplineId: 'pencak_silat',
     label: 'specific combat circuits',
     kind: 'no_protocol',
@@ -62,17 +55,10 @@ export const DOCUMENT_GAPS: DocumentGap[] = [
   },
   {
     disciplineId: 'fencing',
-    label: 'lunge speed',
-    kind: 'equipment',
-    reason:
-      'Braucht Lichtschranken oder Videoanalyse mit hoher Bildrate. Von Hand gestoppt läge der Messfehler über dem Unterschied zwischen Athleten.',
-  },
-  {
-    disciplineId: 'fencing',
     label: 'reaction time',
-    kind: 'equipment',
+    kind: 'elsewhere',
     reason:
-      'Braucht eine Reizanlage mit Millisekundenauflösung. Ein Wert vom Telefon würde die Reaktionszeit des Geräts mitmessen.',
+      'Steht bei den Beobachtungswerten («Fecht-Reaktionszeit (FitroSword)» und «Visuelle Reaktionszeit»): Millisekundenwerte hängen vom Gerät ab, deshalb mit Geräteangabe und ohne Bewertung.',
   },
   {
     disciplineId: 'run_5k_discipline',
@@ -171,6 +157,27 @@ export const DOCUMENT_GAPS: DocumentGap[] = [
     kind: 'no_protocol',
     reason:
       'Verpflegungsverträglichkeit ist eine Ernährungsfrage und keine Leistungsmessung; KYDON gibt dazu keine Empfehlungen ab.',
+  },
+  {
+    disciplineId: 'boxing',
+    label: "SCAT3/Concussion Screening",
+    kind: 'equipment',
+    reason:
+      "Ein ärztliches Screening mit dem offiziellen Formular. Die App speichert keine Gesundheitsbefunde ohne Einwilligungsschicht und deutet keine Kopfverletzung (§82).",
+  },
+  {
+    disciplineId: 'boxing',
+    label: "Attention Network Test (ANT)",
+    kind: 'equipment',
+    reason:
+      "Braucht lizenzierte Testsoftware mit validierter Reizfolge. Ohne sie wäre jede Zahl eine erfundene ANT-Zahl.",
+  },
+  {
+    disciplineId: 'taekwondo',
+    label: "Roundhouse Kick Kinematics",
+    kind: 'equipment',
+    reason:
+      "Braucht 3D-Bewegungsanalyse und Kraftmessplatte. Ohne Gerät nicht messbar; geschätzte Gelenkwinkel wären erfundene Zahlen.",
   },
 ]
 

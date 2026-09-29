@@ -283,8 +283,12 @@ function StationSheet({
       <p className="mt-1 text-[12px]">{pick(test.equipment, locale)}</p>
 
       <dl className="mt-3 border-t border-line pt-2 text-[11px] leading-relaxed">
-        <dt className="font-semibold">{t('procedure.attempts')}</dt>
-        <dd className="mb-1">{pick(procedure.attempts, locale)}</dd>
+        {procedure.attempts && (
+          <>
+            <dt className="font-semibold">{t('procedure.attempts')}</dt>
+            <dd className="mb-1">{pick(procedure.attempts, locale)}</dd>
+          </>
+        )}
         <dt className="font-semibold">{t('procedure.valid')}</dt>
         <dd>{procedure.valid.map((v) => pick(v, locale)).join(' ')}</dd>
       </dl>

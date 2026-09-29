@@ -20,6 +20,7 @@
 
 import type { ProtocolMode, TestDefinition } from './testCatalog'
 import { protocolSpecFor } from './protocolV1'
+import { LIBRARY_PROCEDURES, isCompleteProcedure } from './testProcedureLibrary'
 
 import type { Localized } from '@/i18n/pick'
 
@@ -29,8 +30,11 @@ export type Bilingual = Localized
 export type TestProcedure = {
   /** Was vor dem ersten Versuch passiert. */
   prepare: Bilingual[]
-  /** Wie viele Versuche, mit welchen Pausen, und welcher zählt. */
-  attempts: Bilingual
+  /**
+   * Wie viele Versuche, mit welchen Pausen, und welcher zählt. Bei Einträgen
+   * der Testbibliothek darf er fehlen: dort stehen Schritte und Zeitvorgaben.
+   */
+  attempts?: Bilingual
   /** Woran erkennbar ist, dass ein Versuch zählt. */
   valid: Bilingual[]
   /** Wann abgebrochen wird — ohne Wertung, es ist dann einfach kein Ergebnis. */
@@ -43,6 +47,23 @@ export type TestProcedure = {
   standardise: Bilingual[]
   /** Veröffentlichtes Protokoll, dem diese Vorschrift folgt. Sonst leer. */
   origin?: string
+  /**
+   * Erweiterte Beschreibung aus der Testbibliothek (Protokoll v1.0). Alles
+   * optional: ein Test ohne diese Felder zeigt nur die fünf Blöcke oben.
+   */
+  goal?: Bilingual
+  /** Material und Aufbau. */
+  setup?: Bilingual
+  /** Durchführung als nummerierte Schritte. */
+  steps?: Bilingual[]
+  /** Nur wenn das Protokoll wirklich eine Zeit vorgibt; sonst leer lassen. */
+  timeSpec?: Bilingual
+  /** Nur wenn das Protokoll wirklich eine Strecke vorgibt; sonst leer lassen. */
+  distanceSpec?: Bilingual
+  /** Was gemessen und wie ausgewertet wird. Zahlen darin sind Kohortenwerte, keine Normen. */
+  scoring?: Bilingual
+  /** Skizze: Kennung in `features/tests/figures` und ihre Bildbeschreibung. */
+  figure?: { id: string; alt: Bilingual }
 }
 
 /** Woher eine Vorschrift stammt: eigens geschrieben oder aus dem Modus abgeleitet. */
@@ -977,7 +998,14 @@ export function procedureFor(test: TestDefinition): {
   source: ProcedureSource
 } {
   const specific = TEST_PROCEDURES[test.slug]
-  if (specific) return { procedure: withProtocolV1(test.slug, specific), source: 'specific' }
+  const library = LIBRARY_PROCEDURES[test.slug]
+  // Die Bibliothek ergänzt eine vorhandene Vorschrift um die neuen Felder und
+  // ersetzt nichts. Ein Test ohne eigene Vorschrift zählt als «specific»,
+  // wenn die Bibliothek alle fünf Grundblöcke liefert.
+  if (specific) return { procedure: withProtocolV1(test.slug, { ...specific, ...library }), source: 'specific' }
+  if (library && isCompleteProcedure(library)) {
+    return { procedure: withProtocolV1(test.slug, library), source: 'specific' }
+  }
   return { procedure: withProtocolV1(test.slug, GENERIC[test.protocol.mode]), source: 'generic' }
 }
 
@@ -991,7 +1019,9 @@ function withProtocolV1(slug: string, base: TestProcedure): TestProcedure {
   return {
     ...base,
     attempts: spec.attempts
-      ? { de: `${base.attempts.de} ${spec.attempts.de}`, en: `${base.attempts.en} ${spec.attempts.en}` }
+      ? base.attempts
+        ? { de: `${base.attempts.de} ${spec.attempts.de}`, en: `${base.attempts.en} ${spec.attempts.en}` }
+        : spec.attempts
       : base.attempts,
     valid: [...base.valid, ...(spec.valid ?? [])],
     standardise: [...base.standardise, ...(spec.standardise ?? [])],

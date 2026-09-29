@@ -164,7 +164,15 @@ test.describe("Grösse des Startpakets", () => {
   // Peak Week liegen in schema.ts, und schema.ts läuft beim Start — der
   // Bestand wird vor dem ersten Bild geprüft. Die Bildschirme dazu werden
   // nachgeladen, die Regeln können es nicht.
-  const BUDGET_KB = 950;
+  //
+  // 950 → 1100 (29.09.2026, Testbibliothek Welle 1): Der Katalog liegt im
+  // Startpaket, weil Bewertung und Profil ihn beim Start brauchen. Die
+  // Testbibliothek (Protokoll 1.0) bringt über hundert weitere Tests; im
+  // Startpaket steht davon nur, was der Katalog braucht (Bezeichnung, Felder,
+  // Ausrüstung, Einordnung). Durchführungsvorschriften, Skizzen und die
+  // Übersetzungen werden nachgeladen. Bewusst mit dem Auftraggeber
+  // abgestimmt statt still angehoben.
+  const BUDGET_KB = 1100;
 
   test(`das Hauptpaket bleibt unter ${BUDGET_KB} KB`, () => {
     const dir = new URL("../dist/assets/", import.meta.url);

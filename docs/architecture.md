@@ -431,6 +431,7 @@ Link /team/beitreten#token  →  accept_team_invite(token)  (SHA-256-Vergleich)
 | Vorhaben | Ort | Mit dabei |
 |---|---|---|
 | Neuer Test | `src/data/testCatalog*.ts` (passende Datei nach Herkunft) | Protokoll in `testProcedure.ts`, Kennzahlen in `lib/metrics`, Texte in `i18n/content/*`, Prüffall |
+| Test aus der Testbibliothek | `src/data/testCatalogLibrary.ts`, Beschreibung in `testProcedureLibrary.ts` | siehe [testbibliothek.md](testbibliothek.md) |
 | Neue Referenzwerte | `src/data/references*.ts` | Quelle {Studie, n}, Qualitätsstufe; Lücke aus `REFERENCE_GAPS` entfernen |
 | Neue Sportart / Disziplin | `src/data/sportProfiles*.ts` | Achsen (`profileAxes.ts`), Bild (`sportArt.ts`), ggf. Batterie |
 | Neue Rechenregel | `src/domain/<thema>.ts`, reine Funktion | Prüffall in `tests/`, ohne Browser |

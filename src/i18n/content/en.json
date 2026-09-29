@@ -131,6 +131,34 @@
     "en": "Kettlebells",
     "de": "Kettlebells"
   },
+  "Bench or treatment table": {
+    "en": "Bench or treatment table",
+    "de": "Bank oder Liege"
+  },
+  "Timing system (light gates)": {
+    "en": "Timing system (light gates)",
+    "de": "Zeitmessung (Lichtschranken)"
+  },
+  "Force plate": {
+    "en": "Force plate",
+    "de": "Kraftmessplatte"
+  },
+  "Isokinetic dynamometer": {
+    "en": "Isokinetic dynamometer",
+    "de": "Isokinetisches Dynamometer"
+  },
+  "Spiroergometry": {
+    "en": "Spiroergometry",
+    "de": "Spiroergometrie"
+  },
+  "Punch force or punch power system": {
+    "en": "Punch force or punch power system",
+    "de": "Schlagkraft- oder Schlagleistungssystem"
+  },
+  "Kick target or strike pad": {
+    "en": "Kick target or strike pad",
+    "de": "Kickziel oder Schlagpolster"
+  },
   "Outdoors: track, field, road": {
     "en": "Outdoors: track, field, road",
     "de": "Draussen: Bahn, Platz, Strasse"
@@ -2919,6 +2947,374 @@
     "en": "Track or measured course, stopwatch",
     "de": "Bahn oder vermessene Strecke, Stoppuhr"
   },
+  "Judogi chin-up (dynamic)": {
+    "en": "Judogi chin-up (dynamic)",
+    "de": "Judogi-Klimmzug (dynamisch)"
+  },
+  "Judogi chin-up": {
+    "en": "Judogi chin-up",
+    "de": "Judogi-Klimmzug"
+  },
+  "Specific grip strength endurance on a judogi jacket.": {
+    "en": "Specific grip strength endurance on a judogi jacket.",
+    "de": "Spezifische Griffkraftausdauer an einer Judojacke."
+  },
+  "Secure the judogi safely over the bar. Grip both lapels and start in a full hang. Pull the body up from the hang until the chin passes the defined grip height.": {
+    "en": "Secure the judogi safely over the bar. Grip both lapels and start in a full hang. Pull the body up from the hang until the chin passes the defined grip height.",
+    "de": "Judogi sicher über der Stange befestigen. Beide Revers greifen und in vollständigem Hang starten. Körper aus dem Hang hochziehen, bis das Kinn die definierte Griffhöhe überschreitet."
+  },
+  "Pull-up bar, judogi, counter": {
+    "en": "Pull-up bar, judogi, counter",
+    "de": "Klimmzugstange, Judogi, Zähler"
+  },
+  "Judogi chin-up (isometric)": {
+    "en": "Judogi chin-up (isometric)",
+    "de": "Judogi-Klimmzug (isometrisch)"
+  },
+  "Judogi hold": {
+    "en": "Judogi hold",
+    "de": "Judogi-Haltezeit"
+  },
+  "Isometric judo-specific grip strength endurance.": {
+    "en": "Isometric judo-specific grip strength endurance.",
+    "de": "Isometrische judospezifische Griffkraftausdauer."
+  },
+  "Secure the judogi. Grip the lapels with both hands. Pull into the upper pull-up position; elbows bent and chin above the defined grip height.": {
+    "en": "Secure the judogi. Grip the lapels with both hands. Pull into the upper pull-up position; elbows bent and chin above the defined grip height.",
+    "de": "Judogi befestigen. Mit beiden Händen Revers greifen. In obere Klimmzugposition ziehen; Ellenbogen gebeugt und Kinn oberhalb der definierten Griffhöhe."
+  },
+  "Pull-up bar, judogi, stopwatch": {
+    "en": "Pull-up bar, judogi, stopwatch",
+    "de": "Klimmzugstange, Judogi, Stoppuhr"
+  },
+  "Chin-up, underhand (max reps)": {
+    "en": "Chin-up, underhand (max reps)",
+    "de": "Klimmzug im Untergriff (maximal)"
+  },
+  "Chin-up": {
+    "en": "Chin-up",
+    "de": "Chin-up"
+  },
+  "Relative upper-body pulling strength endurance.": {
+    "en": "Relative upper-body pulling strength endurance.",
+    "de": "Relative Oberkörper-Zugkraftausdauer."
+  },
+  "Take an underhand grip. Start in a full hang. Pull the chin over the bar.": {
+    "en": "Take an underhand grip. Start in a full hang. Pull the chin over the bar.",
+    "de": "Untergriff einnehmen. Im vollständigen Hang starten. Kinn über Stange ziehen."
+  },
+  "Pull-up bar, counter": {
+    "en": "Pull-up bar, counter",
+    "de": "Klimmzugstange, Zähler"
+  },
+  "Trunk flexor endurance (McGill)": {
+    "en": "Trunk flexor endurance (McGill)",
+    "de": "Rumpfbeuger-Ausdauer (McGill)"
+  },
+  "Trunk flexor": {
+    "en": "Trunk flexor",
+    "de": "Rumpfbeuger"
+  },
+  "Isometric endurance of the trunk flexors.": {
+    "en": "Isometric endurance of the trunk flexors.",
+    "de": "Isometrische Ausdauer der Rumpfflexoren."
+  },
+  "Position the upper body at approx. 60° trunk inclination. Knees/hips bent, feet fixed. Cross arms over chest.": {
+    "en": "Position the upper body at approx. 60° trunk inclination. Knees/hips bent, feet fixed. Cross arms over chest.",
+    "de": "Oberkörper bei ca. 60° Rumpfneigung positionieren. Knie/Hüfte gebeugt, Füße fixiert. Arme vor Brust kreuzen."
+  },
+  "Mat, back support or wedge, stopwatch": {
+    "en": "Mat, back support or wedge, stopwatch",
+    "de": "Matte, Rückenstütze oder Keil, Stoppuhr"
+  },
+  "Side plank endurance": {
+    "en": "Side plank endurance",
+    "de": "Seitstütz-Ausdauer"
+  },
+  "Side plank": {
+    "en": "Side plank",
+    "de": "Seitstütz"
+  },
+  "Isometric lateral trunk strength endurance.": {
+    "en": "Isometric lateral trunk strength endurance.",
+    "de": "Isometrische laterale Rumpfkraftausdauer."
+  },
+  "Assume a side-lying position. Position the forearm under the shoulder. Legs extended, feet stacked.": {
+    "en": "Assume a side-lying position. Position the forearm under the shoulder. Legs extended, feet stacked.",
+    "de": "Seitlage einnehmen. Unterarm unter Schulter positionieren. Beine gestreckt, Füße übereinander."
+  },
+  "Trunk extensor endurance": {
+    "en": "Trunk extensor endurance",
+    "de": "Rumpfstrecker-Ausdauer"
+  },
+  "Trunk extensor": {
+    "en": "Trunk extensor",
+    "de": "Rumpfstrecker"
+  },
+  "Isometric endurance of the back extensors.": {
+    "en": "Isometric endurance of the back extensors.",
+    "de": "Isometrische Ausdauer der Rückenextensoren."
+  },
+  "Fix pelvis and legs on the bench. Hold the upper body horizontally, unsupported over the edge. Cross arms over chest.": {
+    "en": "Fix pelvis and legs on the bench. Hold the upper body horizontally, unsupported over the edge. Cross arms over chest.",
+    "de": "Becken und Beine auf Bank fixieren. Oberkörper horizontal frei über Kante halten. Arme vor Brust kreuzen."
+  },
+  "Bench or treatment table with straps, stopwatch": {
+    "en": "Bench or treatment table with straps, stopwatch",
+    "de": "Bank oder Liege mit Fixiergurten, Stoppuhr"
+  },
+  "Reactive agility test": {
+    "en": "Reactive agility test",
+    "de": "Reactive Agility Test"
+  },
+  "Reactive agility": {
+    "en": "Reactive agility",
+    "de": "Reaktive Agilität"
+  },
+  "Reactive change-of-direction speed in response to an unpredictable visual stimulus.": {
+    "en": "Reactive change-of-direction speed in response to an unpredictable visual stimulus.",
+    "de": "Reaktive Richtungswechselgeschwindigkeit auf einen unvorhersehbaren visuellen Reiz."
+  },
+  "Take the start position in the center. On a random light signal, move explosively to the indicated target marker. Touch/cross the target.": {
+    "en": "Take the start position in the center. On a random light signal, move explosively to the indicated target marker. Touch/cross the target.",
+    "de": "Startposition mittig einnehmen. Nach zufälligem Lichtsignal explosiv zur angezeigten Zielmarke bewegen. Ziel berühren/überqueren."
+  },
+  "Timing system with three target lights or markers, level ground": {
+    "en": "Timing system with three target lights or markers, level ground",
+    "de": "Zeitmessung mit drei Ziellichtern oder Zielmarkierungen, ebene Fläche"
+  },
+  "Trunk peak torque": {
+    "en": "Trunk peak torque",
+    "de": "Rumpf-Spitzendrehmoment"
+  },
+  "Trunk torque": {
+    "en": "Trunk torque",
+    "de": "Rumpfdrehmoment"
+  },
+  "Maximal trunk flexion/extension torque.": {
+    "en": "Maximal trunk flexion/extension torque.",
+    "de": "Maximales Rumpfbeuge-/Streckdrehmoment."
+  },
+  "Calibrate the device. Secure the test subject according to the manufacturer's standard. Align the axis of movement.": {
+    "en": "Calibrate the device. Secure the test subject according to the manufacturer's standard. Align the axis of movement.",
+    "de": "Gerät kalibrieren. Testperson nach Herstellerstandard fixieren. Bewegungsachse ausrichten."
+  },
+  "Peak punch force": {
+    "en": "Peak punch force",
+    "de": "Maximale Schlagkraft"
+  },
+  "Punch force": {
+    "en": "Punch force",
+    "de": "Schlagkraft"
+  },
+  "Maximal punch force of a defined boxing punch.": {
+    "en": "Maximal punch force of a defined boxing punch.",
+    "de": "Maximale Schlagkraft eines definierten Boxschlags."
+  },
+  "Calibrate the device. Set the target to individual shoulder/head height. Assume the defined starting position.": {
+    "en": "Calibrate the device. Set the target to individual shoulder/head height. Assume the defined starting position.",
+    "de": "Gerät kalibrieren. Ziel auf individuelle Schulter-/Kopfhöhe einstellen. Definierte Ausgangsstellung einnehmen."
+  },
+  "Calibrated punch force system or force plate, gloves": {
+    "en": "Calibrated punch force system or force plate, gloves",
+    "de": "Kalibriertes Schlagkraft-System oder Kraftmessplatte, Handschuhe"
+  },
+  "Punch power (PowerKube)": {
+    "en": "Punch power (PowerKube)",
+    "de": "Schlagleistung (PowerKube)"
+  },
+  "Punch power": {
+    "en": "Punch power",
+    "de": "Schlagleistung"
+  },
+  "Relative punch power with the PowerKube system.": {
+    "en": "Relative punch power with the PowerKube system.",
+    "de": "Relative Schlagleistung mit PowerKube-System."
+  },
+  "Record body weight. Calibrate the PowerKube. Test jab, cross and hook separately.": {
+    "en": "Record body weight. Calibrate the PowerKube. Test jab, cross and hook separately.",
+    "de": "Körpergewicht erfassen. PowerKube kalibrieren. Jab, Cross und Hook getrennt testen."
+  },
+  "PowerKube punch power system, gloves, scale": {
+    "en": "PowerKube punch power system, gloves, scale",
+    "de": "PowerKube-Schlagleistungssystem, Handschuhe, Waage"
+  },
+  "VO₂max (cardiopulmonary testing)": {
+    "en": "VO₂max (cardiopulmonary testing)",
+    "de": "VO₂max (Spiroergometrie)"
+  },
+  "VO₂max": {
+    "en": "VO₂max",
+    "de": "VO₂max"
+  },
+  "Maximal aerobic oxygen uptake.": {
+    "en": "Maximal aerobic oxygen uptake.",
+    "de": "Maximale aerobe Sauerstoffaufnahme."
+  },
+  "Calibrate the device. Start a standardized ramp/step protocol. Increase the load until exhaustion (maximal effort).": {
+    "en": "Calibrate the device. Start a standardized ramp/step protocol. Increase the load until exhaustion (maximal effort).",
+    "de": "Gerät kalibrieren. Standardisiertes Rampen-/Stufenprotokoll starten. Belastung bis Ausbelastung steigern."
+  },
+  "Spiroergometry system, treadmill or bike ergometer": {
+    "en": "Spiroergometry system, treadmill or bike ergometer",
+    "de": "Spiroergometrie, Laufband oder Fahrradergometer"
+  },
+  "Karate Specific Aerobic Test (KSAT)": {
+    "en": "Karate Specific Aerobic Test (KSAT)",
+    "de": "Karate Specific Aerobic Test (KSAT)"
+  },
+  "KSAT": {
+    "en": "KSAT",
+    "de": "KSAT"
+  },
+  "Karate-specific endurance performance to exhaustion.": {
+    "en": "Karate-specific endurance performance to exhaustion.",
+    "de": "Karatespezifische Ausdauerleistung bis zur Erschöpfung."
+  },
+  "Assume the standardized KSAT movement sequence. Complete the load levels according to the fixed KSAT audio. Perform techniques and movement paths fully.": {
+    "en": "Assume the standardized KSAT movement sequence. Complete the load levels according to the fixed KSAT audio. Perform techniques and movement paths fully.",
+    "de": "Standardisierte KSAT-Bewegungssequenz einnehmen. Belastungsstufen gemäß festem KSAT-Audio absolvieren. Techniken und Bewegungswege vollständig ausführen."
+  },
+  "KSAT setup with punch/kick target, audio protocol, stopwatch": {
+    "en": "KSAT setup with punch/kick target, audio protocol, stopwatch",
+    "de": "KSAT-Aufbau mit Schlag-/Kickziel, Audio-Protokoll, Stoppuhr"
+  },
+  "Force-velocity jump profile": {
+    "en": "Force-velocity jump profile",
+    "de": "Kraft-Geschwindigkeits-Sprungprofil"
+  },
+  "F-v profile": {
+    "en": "F-v profile",
+    "de": "F-v-Profil"
+  },
+  "Neuromuscular force-velocity profile from jumps with different loads.": {
+    "en": "Neuromuscular force-velocity profile from jumps with different loads.",
+    "de": "Neuromuskuläres Kraft-Geschwindigkeits-Profil über Sprünge mit unterschiedlichen Lasten."
+  },
+  "Measure CMJ without additional load. Perform further CMJs with several defined additional loads. 2–3 valid attempts per load.": {
+    "en": "Measure CMJ without additional load. Perform further CMJs with several defined additional loads. 2–3 valid attempts per load.",
+    "de": "CMJ ohne Zusatzlast messen. Weitere CMJ mit mehreren definierten Zusatzlasten durchführen. Je Last 2–3 gültige Versuche."
+  },
+  "Force plate or measurement system, added loads": {
+    "en": "Force plate or measurement system, added loads",
+    "de": "Kraftmessplatte oder Messsystem, Zusatzlasten"
+  },
+  "TAIKT (taekwondo kick test)": {
+    "en": "TAIKT (taekwondo kick test)",
+    "de": "TAIKT (Taekwondo-Kicktest)"
+  },
+  "TAIKT": {
+    "en": "TAIKT",
+    "de": "TAIKT"
+  },
+  "Taekwondo-specific repeated anaerobic kicking performance and fatigue.": {
+    "en": "Taekwondo-specific repeated anaerobic kicking performance and fatigue.",
+    "de": "Taekwondospezifische wiederholte anaerobe Kickleistung und Ermüdung."
+  },
+  "Standardized fighting stance. Perform maximal roundhouse kicks according to the TAIKT interval sequence. Count the kicks of each interval.": {
+    "en": "Standardized fighting stance. Perform maximal roundhouse kicks according to the TAIKT interval sequence. Count the kicks of each interval.",
+    "de": "Standardisierte Kampfstellung. Maximale Roundhouse-Kicks gemäß TAIKT-Intervallfolge ausführen. Kicks jedes Intervalls zählen."
+  },
+  "Kick target or electronic vest, audio protocol, counter": {
+    "en": "Kick target or electronic vest, audio protocol, counter",
+    "de": "Kickziel oder elektronische Weste, Audio-Protokoll, Zähler"
+  },
+  "TAAA test (taekwondo)": {
+    "en": "TAAA test (taekwondo)",
+    "de": "TAAA-Test (Taekwondo)"
+  },
+  "TAAA": {
+    "en": "TAAA",
+    "de": "TAAA"
+  },
+  "Combined aerobic, anaerobic and agility test with shuttles and roundhouse kicks.": {
+    "en": "Combined aerobic, anaerobic and agility test with shuttles and roundhouse kicks.",
+    "de": "Kombinierter aerober, anaerober und Agility-Test mit Shuttles und Roundhouse-Kicks."
+  },
+  "Shuttle between two lines 4 m apart. Within each 20-s work interval, perform the defined shuttle/kick sequence. Roundhouse kicks with both legs as specified.": {
+    "en": "Shuttle between two lines 4 m apart. Within each 20-s work interval, perform the defined shuttle/kick sequence. Roundhouse kicks with both legs as specified.",
+    "de": "Zwischen zwei 4 m entfernten Linien shutteln. Innerhalb jedes 20-s-Arbeitsintervalls die definierte Shuttle-/Kick-Sequenz durchführen. Roundhouse-Kicks beidbeinig gemäß Vorgabe."
+  },
+  "Measured course with two lines 4 m apart, kick target, audio protocol, heart rate monitor": {
+    "en": "Measured course with two lines 4 m apart, kick target, audio protocol, heart rate monitor",
+    "de": "Vermessene Strecke mit zwei Linien im Abstand von 4 m, Kickziel, Audio-Protokoll, Pulsmesser"
+  },
+  "Fencing Endurance Test (FET)": {
+    "en": "Fencing Endurance Test (FET)",
+    "de": "Fencing Endurance Test (FET)"
+  },
+  "FET": {
+    "en": "FET",
+    "de": "FET"
+  },
+  "Fencing-specific intermittent endurance performance.": {
+    "en": "Fencing-specific intermittent endurance performance.",
+    "de": "Fechtspezifische intermittierende Ausdauerleistung."
+  },
+  "Start position En garde. Perform the prescribed forward/backward movements and lunges to the audio beat. Speed/level increases according to the FET protocol.": {
+    "en": "Start position En garde. Perform the prescribed forward/backward movements and lunges to the audio beat. Speed/level increases according to the FET protocol.",
+    "de": "Startposition En garde. Vorgegebene Vor-/Rückbewegungen und Ausfälle im Audio-Takt ausführen. Geschwindigkeit/Stufe steigt gemäß FET-Protokoll."
+  },
+  "Fencing strip or marked course, audio protocol": {
+    "en": "Fencing strip or marked course, audio protocol",
+    "de": "Fechtbahn oder markierte Strecke, Audio-Protokoll"
+  },
+  "5×5 m shuttle": {
+    "en": "5×5 m shuttle",
+    "de": "5×5-m-Shuttle"
+  },
+  "Short multidirectional acceleration and turning ability.": {
+    "en": "Short multidirectional acceleration and turning ability.",
+    "de": "Kurze multidirektionale Beschleunigungs- und Wendefähigkeit."
+  },
+  "Start behind line A. Sprint 5 m to line B and touch/cross the line. Back to A.": {
+    "en": "Start behind line A. Sprint 5 m to line B and touch/cross the line. Back to A.",
+    "de": "Start hinter Linie A. 5 m zu Linie B sprinten und Linie berühren/überqueren. Zurück zu A."
+  },
+  "Marked course with two lines 5 m apart, stopwatch or timing system": {
+    "en": "Marked course with two lines 5 m apart, stopwatch or timing system",
+    "de": "Markierte Strecke mit zwei Linien im Abstand von 5 m, Stoppuhr oder Zeitmessung"
+  },
+  "Lunge time (fencing)": {
+    "en": "Lunge time (fencing)",
+    "de": "Ausfallzeit (Fechten)"
+  },
+  "Lunge time": {
+    "en": "Lunge time",
+    "de": "Ausfallzeit"
+  },
+  "Explosive lunge speed.": {
+    "en": "Explosive lunge speed.",
+    "de": "Explosive Ausfallgeschwindigkeit."
+  },
+  "Standardized En garde position. Perform a maximal lunge on a random signal. Measure time from signal/movement onset to defined target contact.": {
+    "en": "Standardized En garde position. Perform a maximal lunge on a random signal. Measure time from signal/movement onset to defined target contact.",
+    "de": "Standardisierte En-garde-Position. Auf zufälliges Signal maximalen Ausfall ausführen. Zeit vom Signal/Bewegungsbeginn bis definiertem Zielkontakt messen."
+  },
+  "Timing system (light gate or motion capture), fencing strip": {
+    "en": "Timing system (light gate or motion capture), fencing strip",
+    "de": "Zeitmessung (Lichtschranke oder Bewegungsanalyse), Fechtbahn"
+  },
+  "Agility test (Pencak Silat)": {
+    "en": "Agility test (Pencak Silat)",
+    "de": "Agility-Test (Pencak Silat)"
+  },
+  "Agility": {
+    "en": "Agility",
+    "de": "Agility"
+  },
+  "Sport-specific change-of-direction speed.": {
+    "en": "Sport-specific change-of-direction speed.",
+    "de": "Sportartspezifische Richtungswechselgeschwindigkeit."
+  },
+  "Standardized start position. Complete the prescribed course as fast as possible. Pass all turning points correctly.": {
+    "en": "Standardized start position. Complete the prescribed course as fast as possible. Pass all turning points correctly.",
+    "de": "Standardisierte Startposition. Vorgegebenen Parcours maximal schnell absolvieren. Alle Wendepunkte korrekt passieren."
+  },
+  "Marked course, stopwatch or timing system": {
+    "en": "Marked course, stopwatch or timing system",
+    "de": "Markierter Parcours, Stoppuhr oder Zeitmessung"
+  },
   "Warm up generally, then ramping sets: roughly 8 reps light, 5 moderate, 3 heavy, 1 near the expected maximum.": {
     "en": "Warm up generally, then ramping sets: roughly 8 reps light, 5 moderate, 3 heavy, 1 near the expected maximum.",
     "de": "Allgemein aufwärmen, dann Aufwärmsätze mit steigender Last: etwa 8 Wiederholungen leicht, 5 mittel, 3 schwer, 1 nahe am erwarteten Maximum."
@@ -3454,5 +3850,1649 @@
   "Record body weight on the same day — it is part of the load.": {
     "en": "Record body weight on the same day — it is part of the load.",
     "de": "Das Körpergewicht am selben Tag erfassen — es bestimmt die Last mit."
+  },
+  "Maximal isometric handgrip strength.": {
+    "en": "Maximal isometric handgrip strength.",
+    "de": "Maximale isometrische Handgriffkraft."
+  },
+  "Calibrated hand dynamometer; seated or defined standing position.": {
+    "en": "Calibrated hand dynamometer; seated or defined standing position.",
+    "de": "Kalibriertes Handdynamometer; Sitz oder definierte Standposition."
+  },
+  "Adjust the dynamometer to hand size.": {
+    "en": "Adjust the dynamometer to hand size.",
+    "de": "Dynamometer auf Handgröße einstellen."
+  },
+  "Take the arm position according to app standard: shoulder neutral, elbow 90°, forearm neutral.": {
+    "en": "Take the arm position according to app standard: shoulder neutral, elbow 90°, forearm neutral.",
+    "de": "Armposition gemäß App-Standard einnehmen: Schulter neutral, Ellenbogen 90°, Unterarm neutral."
+  },
+  "Squeeze maximally for 3–5 s.": {
+    "en": "Squeeze maximally for 3–5 s.",
+    "de": "Maximal 3–5 s zudrücken."
+  },
+  "30–60 s rest.": {
+    "en": "30–60 s rest.",
+    "de": "30–60 s Pause."
+  },
+  "Perform three attempts per hand.": {
+    "en": "Perform three attempts per hand.",
+    "de": "Drei Versuche pro Hand durchführen."
+  },
+  "3–5 s per attempt; 30–60 s rest.": {
+    "en": "3–5 s per attempt; 30–60 s rest.",
+    "de": "3–5 s je Versuch; 30–60 s Pause."
+  },
+  "Best value per hand in kg. General source anchors: men peak median ~51 kg; women ~31 kg; use age- and sex-specific norm.": {
+    "en": "Best value per hand in kg. General source anchors: men peak median ~51 kg; women ~31 kg; use age- and sex-specific norm.",
+    "de": "Bestwert je Hand in kg. Allgemeine Quellenanker: Männer Peak-Median ~51 kg; Frauen ~31 kg; alters-/geschlechtsspezifische Norm verwenden."
+  },
+  "A person stands upright, the elbow is bent at a right angle (90°), a hand dynamometer is held in the hand, the wrist is neutral.": {
+    "en": "A person stands upright, the elbow is bent at a right angle (90°), a hand dynamometer is held in the hand, the wrist is neutral.",
+    "de": "Eine Person steht aufrecht, der Ellenbogen ist im rechten Winkel (90°) gebeugt, in der Hand liegt ein Handdynamometer, das Handgelenk ist neutral."
+  },
+  "Vertical explosive strength of the lower extremities.": {
+    "en": "Vertical explosive strength of the lower extremities.",
+    "de": "Vertikale Explosivkraft der unteren Extremitäten."
+  },
+  "Force plate or validated jump mat; alternatively an optical system.": {
+    "en": "Force plate or validated jump mat; alternatively an optical system.",
+    "de": "Kraftplatte oder validierte Sprungmatte; alternativ optisches System."
+  },
+  "Stand upright.": {
+    "en": "Stand upright.",
+    "de": "Aufrecht stehen."
+  },
+  "Hold hands on hips according to the chosen variant.": {
+    "en": "Hold hands on hips according to the chosen variant.",
+    "de": "Hände gemäß gewählter Variante an Hüften halten."
+  },
+  "Perform a rapid countermovement.": {
+    "en": "Perform a rapid countermovement.",
+    "de": "Schnelle Gegenbewegung ausführen."
+  },
+  "Without pause, jump vertically with maximal effort.": {
+    "en": "Without pause, jump vertically with maximal effort.",
+    "de": "Ohne Pause maximal vertikal abspringen."
+  },
+  "Land with legs extended during the flight phase.": {
+    "en": "Land with legs extended during the flight phase.",
+    "de": "Mit gestreckten Beinen in der Flugphase landen."
+  },
+  "Three valid attempts with rest.": {
+    "en": "Three valid attempts with rest.",
+    "de": "Drei gültige Versuche mit Pause."
+  },
+  "Jump height in cm; optionally peak power, GRF, RFD. Three attempts, best value; higher = better.": {
+    "en": "Jump height in cm; optionally peak power, GRF, RFD. Three attempts, best value; higher = better.",
+    "de": "Sprunghöhe cm; optional Peak Power, GRF, RFD. Drei Versuche, Bestwert; höher = besser."
+  },
+  "Side sequence of a countermovement jump: upright, countermovement downward, takeoff with flight phase, landing. An arrow marks the jump height.": {
+    "en": "Side sequence of a countermovement jump: upright, countermovement downward, takeoff with flight phase, landing. An arrow marks the jump height.",
+    "de": "Seitliche Sequenz eines Counter-Movement-Jumps: aufrecht, Gegenbewegung nach unten, Absprung mit Flugphase, Landung. Ein Pfeil markiert die Sprunghöhe."
+  },
+  "Explosive strength without countermovement.": {
+    "en": "Explosive strength without countermovement.",
+    "de": "Explosivkraft ohne Gegenbewegung."
+  },
+  "Force plate/jump mat.": {
+    "en": "Force plate/jump mat.",
+    "de": "Kraftplatte/Sprungmatte."
+  },
+  "Hands on hips.": {
+    "en": "Hands on hips.",
+    "de": "Hände an Hüften."
+  },
+  "Take a squat position of approx. 90°.": {
+    "en": "Take a squat position of approx. 90°.",
+    "de": "Kniebeugeposition ca. 90° einnehmen."
+  },
+  "Hold statically for 2 s.": {
+    "en": "Hold statically for 2 s.",
+    "de": "2 s statisch halten."
+  },
+  "Jump maximally without countermovement.": {
+    "en": "Jump maximally without countermovement.",
+    "de": "Ohne Gegenbewegung maximal springen."
+  },
+  "Three attempts.": {
+    "en": "Three attempts.",
+    "de": "Drei Versuche."
+  },
+  "2 s hold phase.": {
+    "en": "2 s hold phase.",
+    "de": "2 s Haltephase."
+  },
+  "Jump height in cm; source anchor elite MMA 29.8±4.5 cm.": {
+    "en": "Jump height in cm; source anchor elite MMA 29.8±4.5 cm.",
+    "de": "Sprunghöhe cm; Quellenanker Elite MMA 29,8±4,5 cm."
+  },
+  "Side sequence of a squat jump: start position in a squat at about 90° at the knee with a 2 s hold phase, followed by a vertical takeoff and landing.": {
+    "en": "Side sequence of a squat jump: start position in a squat at about 90° at the knee with a 2 s hold phase, followed by a vertical takeoff and landing.",
+    "de": "Seitliche Sequenz eines Squat Jumps: Startposition in der Hocke bei etwa 90° im Knie mit 2 s Haltephase, danach senkrechter Absprung und Landung."
+  },
+  "Linear acceleration performance.": {
+    "en": "Linear acceleration performance.",
+    "de": "Lineare Beschleunigungsleistung."
+  },
+  "10 m track, timing gates.": {
+    "en": "10 m track, timing gates.",
+    "de": "10-m-Strecke, Timing Gates."
+  },
+  "Start 0.5 m behind the first light gate.": {
+    "en": "Start 0.5 m behind the first light gate.",
+    "de": "Start 0,5 m hinter erster Lichtschranke."
+  },
+  "Self-selected static start.": {
+    "en": "Self-selected static start.",
+    "de": "Selbstgewählter statischer Start."
+  },
+  "Sprint maximally through the 10 m finish.": {
+    "en": "Sprint maximally through the 10 m finish.",
+    "de": "Maximal durch 10-m-Ziel sprinten."
+  },
+  "3 attempts with full recovery.": {
+    "en": "3 attempts with full recovery.",
+    "de": "3 Versuche mit vollständiger Erholung."
+  },
+  "10.00 m timing distance.": {
+    "en": "10.00 m timing distance.",
+    "de": "10,00 m Timing-Distanz."
+  },
+  "Best time in s. Elite kumite source anchor 1.97±0.06 s.": {
+    "en": "Best time in s. Elite kumite source anchor 1.97±0.06 s.",
+    "de": "Bestzeit s. Elite-Kumite-Quellenanker 1,97±0,06 s."
+  },
+  "Top view of the sprint track: the start is 50 cm before the timing gate at 0 m, the finish gate is at 10 m. A dimension line shows the 10 m.": {
+    "en": "Top view of the sprint track: the start is 50 cm before the timing gate at 0 m, the finish gate is at 10 m. A dimension line shows the 10 m.",
+    "de": "Draufsicht der Sprintbahn: Der Start liegt 50 cm vor dem Timing Gate bei 0 m, das Zielgate steht bei 10 m. Eine Maßlinie zeigt die 10 m."
+  },
+  "Linear sprint speed.": {
+    "en": "Linear sprint speed.",
+    "de": "Lineare Sprintgeschwindigkeit."
+  },
+  "30 m track, timing gates.": {
+    "en": "30 m track, timing gates.",
+    "de": "30-m-Strecke, Timing Gates."
+  },
+  "Start 0.5 m behind the gate.": {
+    "en": "Start 0.5 m behind the gate.",
+    "de": "Start 0,5 m hinter Gate."
+  },
+  "Sprint maximally until past the finish.": {
+    "en": "Sprint maximally until past the finish.",
+    "de": "Maximal bis hinter Ziel sprinten."
+  },
+  "3 attempts, full recovery.": {
+    "en": "3 attempts, full recovery.",
+    "de": "3 Versuche, vollständige Erholung."
+  },
+  "30 m.": {
+    "en": "30 m.",
+    "de": "30 m."
+  },
+  "Best time in s.": {
+    "en": "Best time in s.",
+    "de": "Bestzeit s."
+  },
+  "Top view of the sprint track with timing gates at 0 m and 30 m. A dimension line shows the 30 m.": {
+    "en": "Top view of the sprint track with timing gates at 0 m and 30 m. A dimension line shows the 30 m.",
+    "de": "Draufsicht der Sprintbahn mit Timing Gates bei 0 m und 30 m. Eine Maßlinie zeigt die 30 m."
+  },
+  "Horizontal explosive strength.": {
+    "en": "Horizontal explosive strength.",
+    "de": "Horizontale Explosivkraft."
+  },
+  "Takeoff line, measuring tape, non-slip surface.": {
+    "en": "Takeoff line, measuring tape, non-slip surface.",
+    "de": "Absprunglinie, Maßband, rutschfeste Fläche."
+  },
+  "Stand behind the line with both feet.": {
+    "en": "Stand behind the line with both feet.",
+    "de": "Beidbeinig hinter Linie stehen."
+  },
+  "Arm swing allowed.": {
+    "en": "Arm swing allowed.",
+    "de": "Armschwung erlaubt."
+  },
+  "Jump maximally horizontally.": {
+    "en": "Jump maximally horizontally.",
+    "de": "Maximal horizontal springen."
+  },
+  "Land stably on both feet.": {
+    "en": "Land stably on both feet.",
+    "de": "Stabil beidbeinig landen."
+  },
+  "Measure from the line to the rearmost ground contact.": {
+    "en": "Measure from the line to the rearmost ground contact.",
+    "de": "Von Linie bis hinterstem Bodenkontakt messen."
+  },
+  "3 attempts.": {
+    "en": "3 attempts.",
+    "de": "3 Versuche."
+  },
+  "Best distance in cm.": {
+    "en": "Best distance in cm.",
+    "de": "Bestweite cm."
+  },
+  "Side jump sequence: takeoff line, jump forward and a measuring distance to the rearmost heel.": {
+    "en": "Side jump sequence: takeoff line, jump forward and a measuring distance to the rearmost heel.",
+    "de": "Seitliche Sprungsequenz: Absprunglinie, Sprung nach vorn und eine Messstrecke bis zur hintersten Ferse."
+  },
+  "Judo-specific anaerobic/aerobic performance capacity; records throws and heart rate response.": {
+    "en": "Judo-specific anaerobic/aerobic performance capacity; records throws and heart rate response.",
+    "de": "Judokaspezifische anaerobe/aerobe Leistungsfähigkeit; erfasst Würfe und Herzfrequenzreaktion."
+  },
+  "2 judoka as throwing partners, mat area, three marked positions A–B–C with 6 m each between A and B and between B and C, heart rate measurement, timer.": {
+    "en": "2 judoka as throwing partners, mat area, three marked positions A–B–C with 6 m each between A and B and between B and C, heart rate measurement, timer.",
+    "de": "2 Judoka als Wurfpartner, Mattenfläche, drei markierte Positionen A–B–C mit je 6 m zwischen A und B sowie B und C, Pulsmessung, Timer."
+  },
+  "Test subject stands at B; partners stand at A and C.": {
+    "en": "Test subject stands at B; partners stand at A and C.",
+    "de": "Testperson steht bei B; Partner stehen bei A und C."
+  },
+  "Perform ippon-seoi-nage alternately between A and C for 15 s.": {
+    "en": "Perform ippon-seoi-nage alternately between A and C for 15 s.",
+    "de": "15 s lang abwechselnd Ippon-seoi-nage zwischen A und C ausführen."
+  },
+  "10 s rest.": {
+    "en": "10 s rest.",
+    "de": "10 s Pause."
+  },
+  "30 s second set.": {
+    "en": "30 s second set.",
+    "de": "30 s zweite Serie."
+  },
+  "30 s third set.": {
+    "en": "30 s third set.",
+    "de": "30 s dritte Serie."
+  },
+  "Count all valid throws.": {
+    "en": "Count all valid throws.",
+    "de": "Alle gültigen Würfe zählen."
+  },
+  "Record heart rate immediately after the end and after 1 min.": {
+    "en": "Record heart rate immediately after the end and after 1 min.",
+    "de": "Herzfrequenz unmittelbar nach Ende und nach 1 min erfassen."
+  },
+  "15 s/10 s/30 s/10 s/30 s; HR additionally after 1 min.": {
+    "en": "15 s/10 s/30 s/10 s/30 s; HR additionally after 1 min.",
+    "de": "15 s/10 s/30 s/10 s/30 s; HF zusätzlich nach 1 min."
+  },
+  "6 m B–A and 6 m B–C.": {
+    "en": "6 m B–A and 6 m B–C.",
+    "de": "6 m B–A und 6 m B–C."
+  },
+  "Abdominal/chest pain, dizziness, injury, unsafe throwing technique; do not count invalid throws.": {
+    "en": "Abdominal/chest pain, dizziness, injury, unsafe throwing technique; do not count invalid throws.",
+    "de": "Bauch-/Brustschmerz, Schwindel, Verletzung, unsichere Wurftechnik; ungültige Würfe nicht zählen."
+  },
+  "Standard SJFT: 15 s + 30 s + 30 s, each with 10 s rest; same partners, mat, technique and distance.": {
+    "en": "Standard SJFT: 15 s + 30 s + 30 s, each with 10 s rest; same partners, mat, technique and distance.",
+    "de": "Standard-SJFT: 15 s + 30 s + 30 s, jeweils 10 s Pause; gleiche Partner, Matte, Technik und Distanz."
+  },
+  "Total throws; SJFT index = (HR immediately + HR after 1 min) / total throws. Lower index = better. Source values: junior male Excellent ≤10.40; Good 10.41–11.29; Regular 11.30–13.52; Poor 13.53–14.18; Very poor ≥14.19. Cadet male Excellent ≤11.15; Very poor ≥15.93.": {
+    "en": "Total throws; SJFT index = (HR immediately + HR after 1 min) / total throws. Lower index = better. Source values: junior male Excellent ≤10.40; Good 10.41–11.29; Regular 11.30–13.52; Poor 13.53–14.18; Very poor ≥14.19. Cadet male Excellent ≤11.15; Very poor ≥15.93.",
+    "de": "Gesamtwürfe; SJFT-Index = (HF direkt + HF nach 1 min) / Gesamtwürfe. Niedrigerer Index = besser. Quellenwerte: Junior m Excellent ≤10,40; Good 10,41–11,29; Regular 11,30–13,52; Poor 13,53–14,18; Very poor ≥14,19. Kadett m Excellent ≤11,15; Very poor ≥15,93."
+  },
+  "Top view of a judo mat: three positions A, B and C in a straight line, B in the middle, A and C each 6 m away. The test subject stands at B, the throwing partners at A and C. Arrows show the path from B to A, back to B and on to C.": {
+    "en": "Top view of a judo mat: three positions A, B and C in a straight line, B in the middle, A and C each 6 m away. The test subject stands at B, the throwing partners at A and C. Arrows show the path from B to A, back to B and on to C.",
+    "de": "Draufsicht einer Judomatte: drei Positionen A, B und C in gerader Linie, B in der Mitte, A und C je 6 m entfernt. Die Testperson steht bei B, die Wurfpartner bei A und C. Pfeile zeigen den Weg B nach A, zurück nach B und weiter nach C."
+  },
+  "Wrestling-specific repeated throwing performance and fatigue response.": {
+    "en": "Wrestling-specific repeated throwing performance and fatigue response.",
+    "de": "Ringerspezifische wiederholte Wurfleistung und Ermüdungsreaktion."
+  },
+  "Mat, two throwing partners of equal weight, timer, heart rate measurement.": {
+    "en": "Mat, two throwing partners of equal weight, timer, heart rate measurement.",
+    "de": "Matte, zwei gleich schwere Wurfpartner, Timer, Herzfrequenzmessung."
+  },
+  "Position the test subject centrally.": {
+    "en": "Position the test subject centrally.",
+    "de": "Testperson zentral positionieren."
+  },
+  "Perform the standardised throwing technique with alternating partners.": {
+    "en": "Perform the standardised throwing technique with alternating partners.",
+    "de": "Standardisierte Wurftechnik mit abwechselnden Partnern ausführen."
+  },
+  "Complete the SWFT series stored in the app in full.": {
+    "en": "Complete the SWFT series stored in the app in full.",
+    "de": "Die in der App hinterlegte SWFT-Serie vollständig absolvieren."
+  },
+  "Record heart rate according to the protocol.": {
+    "en": "Record heart rate according to the protocol.",
+    "de": "Herzfrequenz gemäß Protokoll erfassen."
+  },
+  "Calculate the index.": {
+    "en": "Calculate the index.",
+    "de": "Index berechnen."
+  },
+  "Unsafe throwing technique, injury, partner problem; do not count invalid throws.": {
+    "en": "Unsafe throwing technique, injury, partner problem; do not count invalid throws.",
+    "de": "Unsichere Wurftechnik, Verletzung, Partnerproblem; ungültige Würfe nicht zählen."
+  },
+  "Compare only identical SWFT/SWPT variants; same partner weights, throwing technique, area and time structure.": {
+    "en": "Compare only identical SWFT/SWPT variants; same partner weights, throwing technique, area and time structure.",
+    "de": "Nur identische SWFT/SWPT-Variante vergleichen; gleiche Partnergewichte, Wurftechnik, Fläche und Zeitstruktur."
+  },
+  "Throws and index. Source classification: Superior ≥35 throws / index ≤9.6; Excellent 33–34 / 9.7–10.8; Very good 30–32 / 10.9–12.0; Good 25–29 / 12.1–14.5; Poor 23–24 / 14.6–15.8; Very poor 20–22 / 15.9–17.0; Bad ≤19 / ≥17.1.": {
+    "en": "Throws and index. Source classification: Superior ≥35 throws / index ≤9.6; Excellent 33–34 / 9.7–10.8; Very good 30–32 / 10.9–12.0; Good 25–29 / 12.1–14.5; Poor 23–24 / 14.6–15.8; Very poor 20–22 / 15.9–17.0; Bad ≤19 / ≥17.1.",
+    "de": "Würfe und Index. Quellenklassifikation: Superior ≥35 Würfe / Index ≤9,6; Excellent 33–34 / 9,7–10,8; Very good 30–32 /10,9–12,0; Good 25–29 /12,1–14,5; Poor 23–24 /14,6–15,8; Very poor 20–22 /15,9–17,0; Bad ≤19 /≥17,1."
+  },
+  "Top view of a wrestling mat: test subject in the center at B, two throwing partners on the left (A) and right (C). Arrows show the alternating throws, plus symbols for time and heart rate.": {
+    "en": "Top view of a wrestling mat: test subject in the center at B, two throwing partners on the left (A) and right (C). Arrows show the alternating throws, plus symbols for time and heart rate.",
+    "de": "Draufsicht einer Ringermatte: Testperson mittig bei B, zwei Wurfpartner links (A) und rechts (C). Pfeile zeigen die abwechselnden Würfe, dazu Symbole für Zeit und Herzfrequenz."
+  },
+  "Punch volume and fatigue development over a boxing-specific round.": {
+    "en": "Punch volume and fatigue development over a boxing-specific round.",
+    "de": "Schlagvolumen und Ermüdungsentwicklung über eine boxspezifische Runde."
+  },
+  "Punching bag/instrumented target, timer, optional acceleration sensor/HR.": {
+    "en": "Punching bag/instrumented target, timer, optional acceleration sensor/HR.",
+    "de": "Boxsack/Instrumentiertes Target, Timer, optional Beschleunigungssensor/HR."
+  },
+  "Take the standardised distance.": {
+    "en": "Take the standardised distance.",
+    "de": "Standardisierte Distanz einnehmen."
+  },
+  "On the start signal, work for 3 min according to the specified punching mode.": {
+    "en": "On the start signal, work for 3 min according to the specified punching mode.",
+    "de": "Auf Startsignal 3 min nach vorgegebenem Schlagmodus arbeiten."
+  },
+  "Count all valid punches.": {
+    "en": "Count all valid punches.",
+    "de": "Alle gültigen Schläge zählen."
+  },
+  "Record output per minute or sub-interval.": {
+    "en": "Record output per minute or sub-interval.",
+    "de": "Output pro Minute bzw. Teilintervall erfassen."
+  },
+  "Record HR immediately and after 1 min, if used.": {
+    "en": "Record HR immediately and after 1 min, if used.",
+    "de": "HF direkt und nach 1 min erfassen, sofern genutzt."
+  },
+  "3:00 min; optional 1-min recovery.": {
+    "en": "3:00 min; optional 1-min recovery.",
+    "de": "3:00 min; optional 1-min Recovery."
+  },
+  "Technical defect, injury, punch counting unreliable.": {
+    "en": "Technical defect, injury, punch counting unreliable.",
+    "de": "Technischer Defekt, Verletzung, Schlagzählung unzuverlässig."
+  },
+  "Same bag/target, gloves, punch definition, round duration and instruction.": {
+    "en": "Same bag/target, gloves, punch definition, round duration and instruction.",
+    "de": "Gleicher Sack/Target, Handschuhe, Schlagdefinition, Rundendauer und Instruktion."
+  },
+  "Total punches, punches/min, round decrement, 1-min HR recovery. The source contains no universal norm.": {
+    "en": "Total punches, punches/min, round decrement, 1-min HR recovery. The source contains no universal norm.",
+    "de": "Gesamtpunches, Punches/min, Round-decrement, 1-min HR Recovery. Quelle enthält keine Universalnorm."
+  },
+  "Stable pull-up bar, firmly attached judogi jacket or two judogi lapels, counter.": {
+    "en": "Stable pull-up bar, firmly attached judogi jacket or two judogi lapels, counter.",
+    "de": "Stabile Klimmzugstange, fest befestigte Judogi-Jacke bzw. zwei Judogi-Revers, Zähler."
+  },
+  "Secure the judogi safely over the bar.": {
+    "en": "Secure the judogi safely over the bar.",
+    "de": "Judogi sicher über der Stange befestigen."
+  },
+  "Grip both lapels and start in a full hang.": {
+    "en": "Grip both lapels and start in a full hang.",
+    "de": "Beide Revers greifen und in vollständigem Hang starten."
+  },
+  "Pull the body up from the hang until the chin passes the defined grip height.": {
+    "en": "Pull the body up from the hang until the chin passes the defined grip height.",
+    "de": "Körper aus dem Hang hochziehen, bis das Kinn die definierte Griffhöhe überschreitet."
+  },
+  "Return in a controlled manner to full arm extension.": {
+    "en": "Return in a controlled manner to full arm extension.",
+    "de": "Kontrolliert in vollständige Armstreckung zurückkehren."
+  },
+  "Perform as many valid repetitions as possible without letting go.": {
+    "en": "Perform as many valid repetitions as possible without letting go.",
+    "de": "Maximal viele gültige Wiederholungen ohne Loslassen absolvieren."
+  },
+  "Letting go, technical inability to continue, pain; partial repetitions do not count.": {
+    "en": "Letting go, technical inability to continue, pain; partial repetitions do not count.",
+    "de": "Loslassen, technische Unfähigkeit fortzufahren, Schmerzen; Teilwiederholungen zählen nicht."
+  },
+  "Same judogi, same grip height/width, full extension at the bottom, identical repetition definition.": {
+    "en": "Same judogi, same grip height/width, full extension at the bottom, identical repetition definition.",
+    "de": "Gleicher Judogi, gleiche Griffhöhe/-breite, vollständige Streckung unten, identische Wiederholungsdefinition."
+  },
+  "Maximum valid repetitions. Source anchor: cadet male Excellent ≥32; junior male Excellent ≥31. BJJ (Gi Grip Dynamic Repetitions): reps; higher = better.": {
+    "en": "Maximum valid repetitions. Source anchor: cadet male Excellent ≥32; junior male Excellent ≥31. BJJ (Gi Grip Dynamic Repetitions): reps; higher = better.",
+    "de": "Maximale gültige Wiederholungen. Quellenanker: Kadett m Excellent ≥32; Junior m Excellent ≥31. BJJ (Gi Grip Dynamic Repetitions): Reps; höher = besser."
+  },
+  "Front view of a pull-up bar with judogi lapels in both hands: on the left in a full hang, on the right with the chin above the bar. An arrow shows the upward pulling direction.": {
+    "en": "Front view of a pull-up bar with judogi lapels in both hands: on the left in a full hang, on the right with the chin above the bar. An arrow shows the upward pulling direction.",
+    "de": "Frontansicht einer Klimmzugstange mit Judogi-Revers in beiden Händen: links im vollständigen Hang, rechts mit dem Kinn über der Stange. Ein Pfeil zeigt die Zugrichtung nach oben."
+  },
+  "Stable pull-up bar, judogi lapels, timer.": {
+    "en": "Stable pull-up bar, judogi lapels, timer.",
+    "de": "Stabile Klimmzugstange, Judogi-Revers, Timer."
+  },
+  "Attach the judogi.": {
+    "en": "Attach the judogi.",
+    "de": "Judogi befestigen."
+  },
+  "Grip the lapels with both hands.": {
+    "en": "Grip the lapels with both hands.",
+    "de": "Mit beiden Händen Revers greifen."
+  },
+  "Pull into the top pull-up position; elbows bent and chin above the defined grip height.": {
+    "en": "Pull into the top pull-up position; elbows bent and chin above the defined grip height.",
+    "de": "In obere Klimmzugposition ziehen; Ellenbogen gebeugt und Kinn oberhalb der definierten Griffhöhe."
+  },
+  "Start the timer as soon as the position is stable.": {
+    "en": "Start the timer as soon as the position is stable.",
+    "de": "Timer starten, sobald Position stabil ist."
+  },
+  "Hold the position as long as possible.": {
+    "en": "Hold the position as long as possible.",
+    "de": "Position so lange wie möglich halten."
+  },
+  "Stop the timer as soon as the minimum position is no longer held.": {
+    "en": "Stop the timer as soon as the minimum position is no longer held.",
+    "de": "Timer stoppen, sobald die Mindestposition nicht mehr gehalten wird."
+  },
+  "Maximum hold time.": {
+    "en": "Maximum hold time.",
+    "de": "Maximale Haltezeit."
+  },
+  "Chin drops below grip height, hand releases, external help, pain.": {
+    "en": "Chin drops below grip height, hand releases, external help, pain.",
+    "de": "Kinn fällt unter Griffhöhe, Hand löst sich, externe Hilfe, Schmerz."
+  },
+  "Same judogi, grip, elbow/chin standard; no additional support.": {
+    "en": "Same judogi, grip, elbow/chin standard; no additional support.",
+    "de": "Gleicher Judogi, Griff, Ellenbogen-/Kinnstandard; keine zusätzliche Unterstützung."
+  },
+  "Hold time in seconds. Source anchor: cadet male Excellent ≥90 s; junior male Excellent ≥76 s. BJJ (Gi Grip Endurance): hold time in s. Source range high-level about 40–62 s; experienced 41–45 s; beginners about 28–36 s.": {
+    "en": "Hold time in seconds. Source anchor: cadet male Excellent ≥90 s; junior male Excellent ≥76 s. BJJ (Gi Grip Endurance): hold time in s. Source range high-level about 40–62 s; experienced 41–45 s; beginners about 28–36 s.",
+    "de": "Haltezeit in Sekunden. Quellenanker: Kadett m Excellent ≥90 s; Junior m Excellent ≥76 s. BJJ (Gi Grip Endurance): Haltezeit s. Quellenband High-Level etwa 40–62 s; erfahren 41–45 s; Anfänger etwa 28–36 s."
+  },
+  "Side view: a person holds themselves with the chin above the bar, a dashed line marks the minimum height, with a stopwatch symbol beside it.": {
+    "en": "Side view: a person holds themselves with the chin above the bar, a dashed line marks the minimum height, with a stopwatch symbol beside it.",
+    "de": "Seitenansicht: Eine Person hält sich mit dem Kinn über der Stange, eine gestrichelte Linie markiert die Mindesthöhe, daneben ein Stoppuhr-Symbol."
+  },
+  "Pull-up bar.": {
+    "en": "Pull-up bar.",
+    "de": "Klimmzugstange."
+  },
+  "Take an underhand grip.": {
+    "en": "Take an underhand grip.",
+    "de": "Untergriff einnehmen."
+  },
+  "Start in a full hang.": {
+    "en": "Start in a full hang.",
+    "de": "Im vollständigen Hang starten."
+  },
+  "Pull the chin over the bar.": {
+    "en": "Pull the chin over the bar.",
+    "de": "Kinn über Stange ziehen."
+  },
+  "Return to full extension.": {
+    "en": "Return to full extension.",
+    "de": "In vollständige Streckung zurückkehren."
+  },
+  "As many clean repetitions as possible.": {
+    "en": "As many clean repetitions as possible.",
+    "de": "Maximal viele saubere Wiederholungen."
+  },
+  "Partial ROM, kipping, letting go.": {
+    "en": "Partial ROM, kipping, letting go.",
+    "de": "Teil-ROM, Kipping, Loslassen."
+  },
+  "Keep grip width and kipping rule constant; app standard: no kipping.": {
+    "en": "Keep grip width and kipping rule constant; app standard: no kipping.",
+    "de": "Griffbreite und Kipping-Regel konstant; App-Standard: kein Kipping."
+  },
+  "Reps. Elite cohort anchor 11.2; lower end of the cohort approx. 8–9.": {
+    "en": "Reps. Elite cohort anchor 11.2; lower end of the cohort approx. 8–9.",
+    "de": "Reps. Elite-Kohortenanker 11,2; unteres Kohortenende ca. 8–9."
+  },
+  "Mat, back support/wedge for the start position, timer.": {
+    "en": "Mat, back support/wedge for the start position, timer.",
+    "de": "Matte, Rückenstütze/Keil für Startposition, Timer."
+  },
+  "Position the upper body at approx. 60° trunk inclination.": {
+    "en": "Position the upper body at approx. 60° trunk inclination.",
+    "de": "Oberkörper bei ca. 60° Rumpfneigung positionieren."
+  },
+  "Knees/hips bent, feet fixed.": {
+    "en": "Knees/hips bent, feet fixed.",
+    "de": "Knie/Hüfte gebeugt, Füße fixiert."
+  },
+  "Cross arms in front of the chest.": {
+    "en": "Cross arms in front of the chest.",
+    "de": "Arme vor Brust kreuzen."
+  },
+  "Remove the support.": {
+    "en": "Remove the support.",
+    "de": "Stütze entfernen."
+  },
+  "Stop the time when the defined position is lost.": {
+    "en": "Stop the time when the defined position is lost.",
+    "de": "Zeit beim Verlust der definierten Position stoppen."
+  },
+  "Trunk visibly drops out of the target angle, pain, hands change position.": {
+    "en": "Trunk visibly drops out of the target angle, pain, hands change position.",
+    "de": "Rumpf fällt sichtbar aus Zielwinkel, Schmerz, Hände verändern Position."
+  },
+  "Same angles, foot fixation and arm position.": {
+    "en": "Same angles, foot fixation and arm position.",
+    "de": "Gleiche Winkel, Fußfixierung und Armposition."
+  },
+  "Hold time in s; higher = better.": {
+    "en": "Hold time in s; higher = better.",
+    "de": "Haltezeit s; höher = besser."
+  },
+  "Side view: the upper body is inclined about 60° to the floor and supported against a wedge, the knees are bent. Angle marking 60° and stopwatch symbol.": {
+    "en": "Side view: the upper body is inclined about 60° to the floor and supported against a wedge, the knees are bent. Angle marking 60° and stopwatch symbol.",
+    "de": "Seitenansicht: Der Oberkörper ist etwa 60° zum Boden geneigt und stützt sich an einem Keil ab, die Knie sind gebeugt. Winkelmarkierung 60° und Stoppuhr-Symbol."
+  },
+  "Mat, timer.": {
+    "en": "Mat, timer.",
+    "de": "Matte, Timer."
+  },
+  "Take a side-lying position.": {
+    "en": "Take a side-lying position.",
+    "de": "Seitlage einnehmen."
+  },
+  "Position the forearm under the shoulder.": {
+    "en": "Position the forearm under the shoulder.",
+    "de": "Unterarm unter Schulter positionieren."
+  },
+  "Legs extended, feet on top of each other.": {
+    "en": "Legs extended, feet on top of each other.",
+    "de": "Beine gestreckt, Füße übereinander."
+  },
+  "Raise the pelvis until shoulder, hip and ankle form a line.": {
+    "en": "Raise the pelvis until shoulder, hip and ankle form a line.",
+    "de": "Becken anheben, bis Schulter-Hüfte-Knöchel eine Linie bilden."
+  },
+  "Hold the position maximally.": {
+    "en": "Hold the position maximally.",
+    "de": "Position maximal halten."
+  },
+  "Test both sides.": {
+    "en": "Test both sides.",
+    "de": "Beide Seiten testen."
+  },
+  "Pelvis sinks, body rotates, additional contact, pain.": {
+    "en": "Pelvis sinks, body rotates, additional contact, pain.",
+    "de": "Becken sinkt, Körper rotiert, zusätzlicher Kontakt, Schmerz."
+  },
+  "Same arm/foot position; no rotating or bracing with the free hand.": {
+    "en": "Same arm/foot position; no rotating or bracing with the free hand.",
+    "de": "Gleiche Arm-/Fußposition; kein Rotieren oder Abstützen mit freier Hand."
+  },
+  "Hold time in s per side and asymmetry.": {
+    "en": "Hold time in s per side and asymmetry.",
+    "de": "Haltezeit s je Seite und Asymmetrie."
+  },
+  "Side view of the side plank: the forearm rests on the floor, the body forms a diagonal line from shoulder to foot. A stopwatch symbol beside it.": {
+    "en": "Side view of the side plank: the forearm rests on the floor, the body forms a diagonal line from shoulder to foot. A stopwatch symbol beside it.",
+    "de": "Seitenansicht des Seitstützes: Der Unterarm liegt am Boden, der Körper bildet von der Schulter bis zum Fuß eine schräge Linie. Daneben ein Stoppuhr-Symbol."
+  },
+  "Treatment table/bench, fixation straps, timer.": {
+    "en": "Treatment table/bench, fixation straps, timer.",
+    "de": "Behandlungsliege/Bank, Fixiergurte, Timer."
+  },
+  "Fix pelvis and legs on the bench.": {
+    "en": "Fix pelvis and legs on the bench.",
+    "de": "Becken und Beine auf Bank fixieren."
+  },
+  "Hold the upper body horizontal, free over the edge.": {
+    "en": "Hold the upper body horizontal, free over the edge.",
+    "de": "Oberkörper horizontal frei über Kante halten."
+  },
+  "Hold the horizontal position maximally.": {
+    "en": "Hold the horizontal position maximally.",
+    "de": "Horizontale Position maximal halten."
+  },
+  "Stop the time upon clear sagging.": {
+    "en": "Stop the time upon clear sagging.",
+    "de": "Zeit bei deutlichem Absinken stoppen."
+  },
+  "Upper body drops below tolerance range, pain, external help.": {
+    "en": "Upper body drops below tolerance range, pain, external help.",
+    "de": "Oberkörper sinkt unter Toleranzbereich, Schmerz, externe Hilfe."
+  },
+  "Same fixation, bench height, arm position.": {
+    "en": "Same fixation, bench height, arm position.",
+    "de": "Gleiche Fixierung, Bankhöhe, Armposition."
+  },
+  "Hold time in s.": {
+    "en": "Hold time in s.",
+    "de": "Haltezeit s."
+  },
+  "Side view: the legs are fixed on a bench, the upper body hangs horizontally free toward the front. A stopwatch symbol beside it.": {
+    "en": "Side view: the legs are fixed on a bench, the upper body hangs horizontally free toward the front. A stopwatch symbol beside it.",
+    "de": "Seitenansicht: Die Beine sind auf einer Bank fixiert, der Oberkörper hängt waagerecht frei nach vorn. Daneben ein Stoppuhr-Symbol."
+  },
+  "3 light/target markers, timing system, level surface.": {
+    "en": "3 light/target markers, timing system, level surface.",
+    "de": "3 Licht-/Zielmarkierungen, Timing-System, ebene Fläche."
+  },
+  "Take the start position in the center.": {
+    "en": "Take the start position in the center.",
+    "de": "Startposition mittig einnehmen."
+  },
+  "After a random light signal, move explosively to the indicated target marker.": {
+    "en": "After a random light signal, move explosively to the indicated target marker.",
+    "de": "Nach zufälligem Lichtsignal explosiv zur angezeigten Zielmarke bewegen."
+  },
+  "Touch/cross the target.": {
+    "en": "Touch/cross the target.",
+    "de": "Ziel berühren/überqueren."
+  },
+  "Return to the center.": {
+    "en": "Return to the center.",
+    "de": "Zur Mitte zurückkehren."
+  },
+  "Complete 6 valid random attempts.": {
+    "en": "Complete 6 valid random attempts.",
+    "de": "6 gültige zufällige Versuche absolvieren."
+  },
+  "App standard: target markers 3 m each from the center.": {
+    "en": "App standard: target markers 3 m each from the center.",
+    "de": "App-Standard: Zielmarken je 3 m von der Mitte."
+  },
+  "Wrong target, false start, slipping; attempt invalid.": {
+    "en": "Wrong target, false start, slipping; attempt invalid.",
+    "de": "Falsches Ziel, Frühstart, Ausrutschen; Versuch ungültig."
+  },
+  "App standard v1.0: identical distances, random stimulus sequence, same start position and timing technique.": {
+    "en": "App standard v1.0: identical distances, random stimulus sequence, same start position and timing technique.",
+    "de": "App-Standard v1.0: identische Distanzen, zufällige Reizfolge, gleiche Startposition und Timing-Technik."
+  },
+  "Reaction plus movement time in s; median and best value. No general norm in the source.": {
+    "en": "Reaction plus movement time in s; median and best value. No general norm in the source.",
+    "de": "Reaktions- plus Bewegungszeit in s; Median und Bestwert. Keine allgemeine Norm in der Quelle."
+  },
+  "Top view: a central start marker (S) and three target lights on the left, front and right, each 3 m away. Arrows lead from the center to all targets.": {
+    "en": "Top view: a central start marker (S) and three target lights on the left, front and right, each 3 m away. Arrows lead from the center to all targets.",
+    "de": "Draufsicht: eine zentrale Startmarke (S) und drei Ziellichter links, vorn und rechts, jeweils 3 m entfernt. Pfeile führen von der Mitte zu allen Zielen."
+  },
+  "Isokinetic dynamometer.": {
+    "en": "Isokinetic dynamometer.",
+    "de": "Isokinetisches Dynamometer."
+  },
+  "Calibrate the device.": {
+    "en": "Calibrate the device.",
+    "de": "Gerät kalibrieren."
+  },
+  "Fix the test subject according to the manufacturer standard.": {
+    "en": "Fix the test subject according to the manufacturer standard.",
+    "de": "Testperson nach Herstellerstandard fixieren."
+  },
+  "Align the axis of movement.": {
+    "en": "Align the axis of movement.",
+    "de": "Bewegungsachse ausrichten."
+  },
+  "Submaximal familiarisation.": {
+    "en": "Submaximal familiarisation.",
+    "de": "Submaximale Familiarisierung."
+  },
+  "Set the defined angular velocity.": {
+    "en": "Set the defined angular velocity.",
+    "de": "Definierte Winkelgeschwindigkeit einstellen."
+  },
+  "Perform maximal flexion/extension attempts.": {
+    "en": "Perform maximal flexion/extension attempts.",
+    "de": "Maximale Flexions-/Extensionsversuche durchführen."
+  },
+  "Misalignment, compensatory movement, pain.": {
+    "en": "Misalignment, compensatory movement, pain.",
+    "de": "Fehlausrichtung, Kompensationsbewegung, Schmerz."
+  },
+  "Device, ROM, angular velocity, seat/fixation position must be saved.": {
+    "en": "Device, ROM, angular velocity, seat/fixation position must be saved.",
+    "de": "Gerät, ROM, Winkelgeschwindigkeit, Sitz-/Fixierposition zwingend speichern."
+  },
+  "Peak torque in Nm and, if applicable, flexor/extensor ratio. No universal norm in the source.": {
+    "en": "Peak torque in Nm and, if applicable, flexor/extensor ratio. No universal norm in the source.",
+    "de": "Peak Torque Nm und ggf. Flexor/Extensor-Verhältnis. Keine universelle Norm in Quelle."
+  },
+  "Calibrated punch force system/force plate, gloves, defined target height.": {
+    "en": "Calibrated punch force system/force plate, gloves, defined target height.",
+    "de": "Kalibriertes Punch-Force-System/Kraftplatte, Handschuhe, definierte Zielhöhe."
+  },
+  "Set the target to individual shoulder/head height.": {
+    "en": "Set the target to individual shoulder/head height.",
+    "de": "Ziel auf individuelle Schulter-/Kopfhöhe einstellen."
+  },
+  "Take the defined starting stance.": {
+    "en": "Take the defined starting stance.",
+    "de": "Definierte Ausgangsstellung einnehmen."
+  },
+  "3 submaximal familiarisation punches.": {
+    "en": "3 submaximal familiarisation punches.",
+    "de": "3 submaximale Familiarisierungsschläge."
+  },
+  "3 maximal valid punches per punch type.": {
+    "en": "3 maximal valid punches per punch type.",
+    "de": "Je Schlagart 3 maximale gültige Schläge."
+  },
+  "60–90 s rest between maximal attempts.": {
+    "en": "60–90 s rest between maximal attempts.",
+    "de": "60–90 s Pause zwischen Maximalversuchen."
+  },
+  "Missed contact, step outside the specification, device error, pain.": {
+    "en": "Missed contact, step outside the specification, device error, pain.",
+    "de": "Fehlkontakt, Schritt außerhalb Vorgabe, Gerätfehler, Schmerz."
+  },
+  "Save device, glove, punch type, distance, stance and target height; do not compare values from different systems directly.": {
+    "en": "Save device, glove, punch type, distance, stance and target height; do not compare values from different systems directly.",
+    "de": "Gerät, Handschuh, Schlagart, Distanz, Stand und Zielhöhe speichern; Werte verschiedener Systeme nicht direkt vergleichen."
+  },
+  "Peak force in N per jab/cross/hook. Source anchor device-dependent: Olympic cross 3427±811 N; other elite cross ~3000–4300 N.": {
+    "en": "Peak force in N per jab/cross/hook. Source anchor device-dependent: Olympic cross 3427±811 N; other elite cross ~3000–4300 N.",
+    "de": "Peak Force N je Jab/Cross/Hook. Quellenanker geräteabhängig: Olympia-Cross 3427±811 N; weitere Elite-Cross ~3000–4300 N."
+  },
+  "Side view: a boxer punches a punch target with a force sensor. The distance to the target and the target height are drawn as dimension lines.": {
+    "en": "Side view: a boxer punches a punch target with a force sensor. The distance to the target and the target height are drawn as dimension lines.",
+    "de": "Seitenansicht: Ein Boxer schlägt gegen ein Schlagziel mit Kraftsensor. Der Abstand zum Ziel und die Zielhöhe sind als Maßlinien eingezeichnet."
+  },
+  "PowerKube, standardised gloves, scale.": {
+    "en": "PowerKube, standardised gloves, scale.",
+    "de": "PowerKube, standardisierte Handschuhe, Waage."
+  },
+  "Record body weight.": {
+    "en": "Record body weight.",
+    "de": "Körpergewicht erfassen."
+  },
+  "Calibrate the PowerKube.": {
+    "en": "Calibrate the PowerKube.",
+    "de": "PowerKube kalibrieren."
+  },
+  "Test jab, cross and hook separately.": {
+    "en": "Test jab, cross and hook separately.",
+    "de": "Jab, Cross und Hook getrennt testen."
+  },
+  "3 maximal valid attempts per punch type.": {
+    "en": "3 maximal valid attempts per punch type.",
+    "de": "Je Schlagart 3 maximale gültige Versuche."
+  },
+  "Save the best value.": {
+    "en": "Save the best value.",
+    "de": "Bestwert speichern."
+  },
+  "Missed contact, undefined punch type, technical malfunction.": {
+    "en": "Missed contact, undefined punch type, technical malfunction.",
+    "de": "Fehlkontakt, nicht definierte Schlagart, technische Störung."
+  },
+  "Compare only PowerKube values with each other; same setup and gloves.": {
+    "en": "Compare only PowerKube values with each other; same setup and gloves.",
+    "de": "Nur PowerKube-Werte untereinander vergleichen; gleiches Setup und Handschuhe."
+  },
+  "W/kg. Source anchor top 10 vs bottom 10: male jab 274/90, cross 484/199, hook 638/291; female 140/62, 287/145, 330/184.": {
+    "en": "W/kg. Source anchor top 10 vs bottom 10: male jab 274/90, cross 484/199, hook 638/291; female 140/62, 287/145, 330/184.",
+    "de": "W/kg. Quellenanker Top-10 vs Bottom-10: M Jab 274/90, Cross 484/199, Hook 638/291; F 140/62, 287/145, 330/184."
+  },
+  "Cardiopulmonary exercise testing, treadmill or cycle ergometer.": {
+    "en": "Cardiopulmonary exercise testing, treadmill or cycle ergometer.",
+    "de": "Spiroergometrie, Laufband oder Fahrradergometer."
+  },
+  "Start a standardised ramp/step protocol.": {
+    "en": "Start a standardised ramp/step protocol.",
+    "de": "Standardisiertes Rampen-/Stufenprotokoll starten."
+  },
+  "Increase the load until exhaustion.": {
+    "en": "Increase the load until exhaustion.",
+    "de": "Belastung bis Ausbelastung steigern."
+  },
+  "Record respiratory gases continuously.": {
+    "en": "Record respiratory gases continuously.",
+    "de": "Atemgase kontinuierlich erfassen."
+  },
+  "Determine the highest valid VO2 value.": {
+    "en": "Determine the highest valid VO2 value.",
+    "de": "Höchsten validen VO2-Wert bestimmen."
+  },
+  "Until exhaustion.": {
+    "en": "Until exhaustion.",
+    "de": "Bis Ausbelastung."
+  },
+  "Medical stopping criteria, voluntary exhaustion.": {
+    "en": "Medical stopping criteria, voluntary exhaustion.",
+    "de": "Medizinische Abbruchkriterien, freiwillige Erschöpfung."
+  },
+  "Do not change mode and ramp protocol; same calibration.": {
+    "en": "Do not change mode and ramp protocol; same calibration.",
+    "de": "Modus und Rampenprotokoll nicht wechseln; gleiche Kalibrierung."
+  },
+  "BJJ: ml/kg/min. Source range BJJ approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69.": {
+    "en": "BJJ: ml/kg/min. Source range BJJ approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69.",
+    "de": "BJJ: ml/kg/min. Quellenband BJJ ca. 42–52. MMA: ml/kg/min; Quellen: 63,23±5,50 in einer Elitekohorte, weitere Kohorten ca. 48,1–60; obere Werte ~68–69."
+  },
+  "Standardised KSAT setup, punch/kick target, audio/timer, HR and optionally lactate.": {
+    "en": "Standardised KSAT setup, punch/kick target, audio/timer, HR and optionally lactate.",
+    "de": "Standardisierter KSAT-Aufbau, Schlag-/Kickziel, Audio/Timer, HF und optional Laktat."
+  },
+  "Take the standardised KSAT movement sequence.": {
+    "en": "Take the standardised KSAT movement sequence.",
+    "de": "Standardisierte KSAT-Bewegungssequenz einnehmen."
+  },
+  "Complete the load stages according to the fixed KSAT audio.": {
+    "en": "Complete the load stages according to the fixed KSAT audio.",
+    "de": "Belastungsstufen gemäß festem KSAT-Audio absolvieren."
+  },
+  "Perform techniques and movement paths in full.": {
+    "en": "Perform techniques and movement paths in full.",
+    "de": "Techniken und Bewegungswege vollständig ausführen."
+  },
+  "Continue until protocol-defined exhaustion.": {
+    "en": "Continue until protocol-defined exhaustion.",
+    "de": "Bis zur protokollgemäßen Erschöpfung fortsetzen."
+  },
+  "Record time, HR and optionally lactate.": {
+    "en": "Record time, HR and optionally lactate.",
+    "de": "Zeit, HF und optional Laktat erfassen."
+  },
+  "Until exhaustion; source: mean TTE ~896 s.": {
+    "en": "Until exhaustion; source: mean TTE ~896 s.",
+    "de": "Bis Erschöpfung; Quelle: mittlere TTE ~896 s."
+  },
+  "Pace missed repeatedly, technique no longer compliant with the rules, medical stop.": {
+    "en": "Pace missed repeatedly, technique no longer compliant with the rules, medical stop.",
+    "de": "Tempo mehrfach verfehlt, Technik nicht mehr regelkonform, medizinischer Abbruch."
+  },
+  "Identical KSAT protocol only; same technique sequence, area and audio file.": {
+    "en": "Identical KSAT protocol only; same technique sequence, area and audio file.",
+    "de": "Nur identisches KSAT-Protokoll; gleiche Technikfolge, Fläche und Audiodatei."
+  },
+  "Time to exhaustion. Source anchor 896±133 s; HRpeak ≥99% HRmax; lactate 6.23±1.03 mmol/L; VO2max 53.0±6.6.": {
+    "en": "Time to exhaustion. Source anchor 896±133 s; HRpeak ≥99% HRmax; lactate 6.23±1.03 mmol/L; VO2max 53.0±6.6.",
+    "de": "Time to exhaustion. Quellenanker 896±133 s; HRpeak ≥99% HRmax; Laktat 6,23±1,03 mmol/L; VO2max 53,0±6,6."
+  },
+  "Force plate/encoder, additional loads.": {
+    "en": "Force plate/encoder, additional loads.",
+    "de": "Kraftplatte/Encoder, Zusatzlasten."
+  },
+  "Measure CMJ without additional load.": {
+    "en": "Measure CMJ without additional load.",
+    "de": "CMJ ohne Zusatzlast messen."
+  },
+  "Perform further CMJs with several defined additional loads.": {
+    "en": "Perform further CMJs with several defined additional loads.",
+    "de": "Weitere CMJ mit mehreren definierten Zusatzlasten durchführen."
+  },
+  "2–3 valid attempts per load.": {
+    "en": "2–3 valid attempts per load.",
+    "de": "Je Last 2–3 gültige Versuche."
+  },
+  "Use best values for linear F-v modeling.": {
+    "en": "Use best values for linear F-v modeling.",
+    "de": "Bestwerte zur linearen F-v-Modellierung verwenden."
+  },
+  "Change of technique, incorrect load, invalid jump.": {
+    "en": "Change of technique, incorrect load, invalid jump.",
+    "de": "Technikänderung, fehlerhafte Last, ungültiger Sprung."
+  },
+  "Same load levels, device, jump technique and arm rule.": {
+    "en": "Same load levels, device, jump technique and arm rule.",
+    "de": "Gleiche Laststufen, Gerät, Sprungtechnik und Armregel."
+  },
+  "F0, V0, Pmax or jump height/power; no universal karate norm in the source.": {
+    "en": "F0, V0, Pmax or jump height/power; no universal karate norm in the source.",
+    "de": "F0, V0, Pmax bzw. Sprunghöhe/Power; keine universelle Karate-Norm in Quelle."
+  },
+  "Kick target/electronic vest, timer/audio, counter.": {
+    "en": "Kick target/electronic vest, timer/audio, counter.",
+    "de": "Kickziel/elektronische Weste, Timer/Audio, Zähler."
+  },
+  "Standardized fighting stance.": {
+    "en": "Standardized fighting stance.",
+    "de": "Standardisierte Kampfstellung."
+  },
+  "Perform maximal roundhouse kicks according to the TAIKT interval sequence.": {
+    "en": "Perform maximal roundhouse kicks according to the TAIKT interval sequence.",
+    "de": "Maximale Roundhouse-Kicks gemäß TAIKT-Intervallfolge ausführen."
+  },
+  "Count the kicks of each interval.": {
+    "en": "Count the kicks of each interval.",
+    "de": "Kicks jedes Intervalls zählen."
+  },
+  "Observe the prescribed rests.": {
+    "en": "Observe the prescribed rests.",
+    "de": "Vorgegebene Pausen einhalten."
+  },
+  "Complete all sets.": {
+    "en": "Complete all sets.",
+    "de": "Alle Serien absolvieren."
+  },
+  "Calculate the fatigue index from the performance decline.": {
+    "en": "Calculate the fatigue index from the performance decline.",
+    "de": "Fatigue Index aus Leistungsabfall berechnen."
+  },
+  "Missed contact, incorrect technique, interval not adhered to.": {
+    "en": "Missed contact, incorrect technique, interval not adhered to.",
+    "de": "Fehlkontakt, falsche Technik, Intervall nicht eingehalten."
+  },
+  "Identical TAIKT protocol only; same target height, preferred leg/switching rule and counting method.": {
+    "en": "Identical TAIKT protocol only; same target height, preferred leg/switching rule and counting method.",
+    "de": "Nur identisches TAIKT-Protokoll; Zielhöhe, bevorzugtes Bein/Wechselregel und Zähltechnik gleich."
+  },
+  "Kicks per interval, total kicks, fatigue index %. The source describes technical level differences, not a universal cutoff table.": {
+    "en": "Kicks per interval, total kicks, fatigue index %. The source describes technical level differences, not a universal cutoff table.",
+    "de": "Kicks je Intervall, Gesamt-Kicks, Fatigue Index %. Quelle beschreibt technische Niveauunterschiede, keine universelle Cutoff-Tabelle."
+  },
+  "Side view: an athlete performs a roundhouse kick against a kick target, the target height is marked. Below, a schematic timeline with intervals.": {
+    "en": "Side view: an athlete performs a roundhouse kick against a kick target, the target height is marked. Below, a schematic timeline with intervals.",
+    "de": "Seitenansicht: Ein Athlet tritt einen Roundhouse-Kick gegen ein Kickziel, die Zielhöhe ist markiert. Darunter eine schematische Zeitachse mit Intervallen."
+  },
+  "4-m shuttle course, two lines, kick target, audio/timer, HR measurement.": {
+    "en": "4-m shuttle course, two lines, kick target, audio/timer, HR measurement.",
+    "de": "4-m-Shuttle-Strecke, zwei Linien, Kickziel, Audio/Timer, HF-Messung."
+  },
+  "Shuttle between two lines 4 m apart.": {
+    "en": "Shuttle between two lines 4 m apart.",
+    "de": "Zwischen zwei 4 m entfernten Linien shutteln."
+  },
+  "Within each 20-s work interval, perform the defined shuttle/kick sequence.": {
+    "en": "Within each 20-s work interval, perform the defined shuttle/kick sequence.",
+    "de": "Innerhalb jedes 20-s-Arbeitsintervalls die definierte Shuttle-/Kick-Sequenz durchführen."
+  },
+  "Roundhouse kicks with both legs as specified.": {
+    "en": "Roundhouse kicks with both legs as specified.",
+    "de": "Roundhouse-Kicks beidbeinig gemäß Vorgabe."
+  },
+  "After 20 s, exactly 10 s rest.": {
+    "en": "After 20 s, exactly 10 s rest.",
+    "de": "Nach 20 s exakt 10 s Pause."
+  },
+  "Complete a total of 6 work intervals.": {
+    "en": "Complete a total of 6 work intervals.",
+    "de": "Insgesamt 6 Arbeitsintervalle absolvieren."
+  },
+  "Record HR difference and BMI for the protocol-specific VO2 estimate.": {
+    "en": "Record HR difference and BMI for the protocol-specific VO2 estimate.",
+    "de": "HF-Differenz und BMI für die protokollspezifische VO2-Schätzung erfassen."
+  },
+  "6 × 20 s work; 10 s rest.": {
+    "en": "6 × 20 s work; 10 s rest.",
+    "de": "6 × 20 s Arbeit; 10 s Pause."
+  },
+  "4 m shuttle.": {
+    "en": "4 m shuttle.",
+    "de": "4 m Shuttle."
+  },
+  "Wrong shuttle path, skipped kicks, time structure violated.": {
+    "en": "Wrong shuttle path, skipped kicks, time structure violated.",
+    "de": "Falscher Shuttleweg, ausgelassene Kicks, Zeitstruktur verletzt."
+  },
+  "App adopts the 6×20-s structure with 10-s rests described in the source; identical kick/shuttle sequence.": {
+    "en": "App adopts the 6×20-s structure with 10-s rests described in the source; identical kick/shuttle sequence.",
+    "de": "App übernimmt die in der Quelle beschriebene 6×20-s-Struktur mit 10-s-Pausen; identische Kick-/Shuttlefolge."
+  },
+  "TAAA score and protocol-specific VO2 estimate; do not equate with direct cardiopulmonary exercise testing (spiroergometry).": {
+    "en": "TAAA score and protocol-specific VO2 estimate; do not equate with direct cardiopulmonary exercise testing (spiroergometry).",
+    "de": "TAAA Score und protokollspezifische VO2-Schätzung; nicht mit direkter Spiroergometrie gleichsetzen."
+  },
+  "Top view: two lines 4 m apart with a shuttle zigzag and a kick target at the side. Above, the time sequence 6 × (20 s work, 10 s rest).": {
+    "en": "Top view: two lines 4 m apart with a shuttle zigzag and a kick target at the side. Above, the time sequence 6 × (20 s work, 10 s rest).",
+    "de": "Draufsicht: zwei Linien in 4 m Abstand mit einem Shuttle-Zickzack und einem Kickziel an der Seite. Darüber der Zeitablauf 6 × (20 s Arbeit, 10 s Pause)."
+  },
+  "Fencing strip/marked course, audio/step protocol, complete standardized equipment.": {
+    "en": "Fencing strip/marked course, audio/step protocol, complete standardized equipment.",
+    "de": "Fechtbahn/markierte Strecke, Audio-/Stufenprotokoll, vollständige standardisierte Ausrüstung."
+  },
+  "Start position En garde.": {
+    "en": "Start position En garde.",
+    "de": "Startposition En garde."
+  },
+  "Perform the prescribed forward/backward movements and lunges to the audio beat.": {
+    "en": "Perform the prescribed forward/backward movements and lunges to the audio beat.",
+    "de": "Vorgegebene Vor-/Rückbewegungen und Ausfälle im Audio-Takt ausführen."
+  },
+  "Speed/level increases according to the FET protocol.": {
+    "en": "Speed/level increases according to the FET protocol.",
+    "de": "Geschwindigkeit/Stufe steigt gemäß FET-Protokoll."
+  },
+  "Continue until stopping as defined by the protocol.": {
+    "en": "Continue until stopping as defined by the protocol.",
+    "de": "Bis zum protokollgemäßen Abbruch fortsetzen."
+  },
+  "Record total duration.": {
+    "en": "Record total duration.",
+    "de": "Gesamtdauer erfassen."
+  },
+  "Until exhaustion; elite ROC anchor 14.3 min.": {
+    "en": "Until exhaustion; elite ROC anchor 14.3 min.",
+    "de": "Bis Erschöpfung; Elite-ROC-Anker 14,3 min."
+  },
+  "Pace/movement target missed repeatedly, technical instability, medical stop.": {
+    "en": "Pace/movement target missed repeatedly, technical instability, medical stop.",
+    "de": "Tempo/Bewegungsziel wiederholt verfehlt, technische Unsicherheit, medizinischer Abbruch."
+  },
+  "Identical FET audio and movement pattern only; same equipment and area.": {
+    "en": "Identical FET audio and movement pattern only; same equipment and area.",
+    "de": "Nur identisches FET-Audio und Bewegungsmuster; gleiche Ausrüstung und Fläche."
+  },
+  "Time in min. Source anchor for elite classification: ≥14.3 min.": {
+    "en": "Time in min. Source anchor for elite classification: ≥14.3 min.",
+    "de": "Zeit min. Quellenanker für Eliteklassifikation: ≥14,3 min."
+  },
+  "Top view of a fencing strip: start in En garde, arrows for forward and backward movement, lunge zone at the end and a stopwatch symbol.": {
+    "en": "Top view of a fencing strip: start in En garde, arrows for forward and backward movement, lunge zone at the end and a stopwatch symbol.",
+    "de": "Draufsicht einer Fechtbahn: Start in En garde, Pfeile für Vor- und Rückwärtsbewegung, Ausfallzone am Ende und ein Stoppuhr-Symbol."
+  },
+  "5-m course, lines, timing.": {
+    "en": "5-m course, lines, timing.",
+    "de": "5-m-Strecke, Linien, Timing."
+  },
+  "Start behind line A.": {
+    "en": "Start behind line A.",
+    "de": "Start hinter Linie A."
+  },
+  "Sprint 5 m to line B and touch/cross the line.": {
+    "en": "Sprint 5 m to line B and touch/cross the line.",
+    "de": "5 m zu Linie B sprinten und Linie berühren/überqueren."
+  },
+  "Back to A.": {
+    "en": "Back to A.",
+    "de": "Zurück zu A."
+  },
+  "Complete a total of five 5-m segments according to the specified variant.": {
+    "en": "Complete a total of five 5-m segments according to the specified variant.",
+    "de": "Insgesamt fünf 5-m-Abschnitte gemäß festgelegter Variante absolvieren."
+  },
+  "Record time.": {
+    "en": "Record time.",
+    "de": "Zeit erfassen."
+  },
+  "5 m between turning lines; 5 segments.": {
+    "en": "5 m between turning lines; 5 segments.",
+    "de": "5 m zwischen Wendelinien; 5 Abschnitte."
+  },
+  "Line not reached, wrong number of segments, timing error.": {
+    "en": "Line not reached, wrong number of segments, timing error.",
+    "de": "Linie nicht erreicht, falsche Abschnittszahl, Timingfehler."
+  },
+  "Same shuttle definition, start technique and timing.": {
+    "en": "Same shuttle definition, start technique and timing.",
+    "de": "Gleiche Shuttledefinition, Starttechnik und Timing."
+  },
+  "Time in s. Elite 12.43±0.95 s; Sub-Elite 13.28±0.93 s in the source.": {
+    "en": "Time in s. Elite 12.43±0.95 s; Sub-Elite 13.28±0.93 s in the source.",
+    "de": "Zeit s. Elite 12,43±0,95 s; Sub-Elite 13,28±0,93 s in Quelle."
+  },
+  "Top view: two lines 5 m apart, a zigzag arrow leads across five segments of 5 m each.": {
+    "en": "Top view: two lines 5 m apart, a zigzag arrow leads across five segments of 5 m each.",
+    "de": "Draufsicht: zwei Linien in 5 m Abstand, ein Zickzackpfeil führt über fünf Abschnitte von je 5 m."
+  },
+  "Timing/motion capture system, fencing strip.": {
+    "en": "Timing/motion capture system, fencing strip.",
+    "de": "Timing-/Motion-Capture-System, Fechtbahn."
+  },
+  "Standardized En garde position.": {
+    "en": "Standardized En garde position.",
+    "de": "Standardisierte En-garde-Position."
+  },
+  "Perform a maximal lunge on a random signal.": {
+    "en": "Perform a maximal lunge on a random signal.",
+    "de": "Auf zufälliges Signal maximalen Ausfall ausführen."
+  },
+  "Measure time from signal/movement onset to defined target contact.": {
+    "en": "Measure time from signal/movement onset to defined target contact.",
+    "de": "Zeit vom Signal/Bewegungsbeginn bis definiertem Zielkontakt messen."
+  },
+  "5 valid attempts.": {
+    "en": "5 valid attempts.",
+    "de": "5 gültige Versuche."
+  },
+  "False start, target missed, technique deviation.": {
+    "en": "False start, target missed, technique deviation.",
+    "de": "Frühstart, Ziel verfehlt, Technikabweichung."
+  },
+  "Same starting position, target distance and time definition.": {
+    "en": "Same starting position, target distance and time definition.",
+    "de": "Gleiche Startstellung, Zielentfernung und Zeitdefinition."
+  },
+  "Time in s. Elite 0.18±0.03; Sub-Elite 0.21±0.04 in the source.": {
+    "en": "Time in s. Elite 0.18±0.03; Sub-Elite 0.21±0.04 in the source.",
+    "de": "Zeit s. Elite 0,18±0,03; Sub-Elite 0,21±0,04 in Quelle."
+  },
+  "Side view: a fencer in En garde and in the lunge against a target. An arrow shows the measurement distance, plus a stopwatch symbol.": {
+    "en": "Side view: a fencer in En garde and in the lunge against a target. An arrow shows the measurement distance, plus a stopwatch symbol.",
+    "de": "Seitliche Darstellung: Ein Fechter in En garde und im Ausfall gegen eine Zielscheibe. Ein Pfeil zeigt die Messstrecke, dazu ein Stoppuhr-Symbol."
+  },
+  "Marked agility course, timing.": {
+    "en": "Marked agility course, timing.",
+    "de": "Markierter Agility-Parcours, Timing."
+  },
+  "Standardized start position.": {
+    "en": "Standardized start position.",
+    "de": "Standardisierte Startposition."
+  },
+  "Complete the prescribed course as fast as possible.": {
+    "en": "Complete the prescribed course as fast as possible.",
+    "de": "Vorgegebenen Parcours maximal schnell absolvieren."
+  },
+  "Pass all turning points correctly.": {
+    "en": "Pass all turning points correctly.",
+    "de": "Alle Wendepunkte korrekt passieren."
+  },
+  "2–3 valid attempts.": {
+    "en": "2–3 valid attempts.",
+    "de": "2–3 gültige Versuche."
+  },
+  "Cutting corners, skipping a marker, slipping.": {
+    "en": "Cutting corners, skipping a marker, slipping.",
+    "de": "Abkürzen, Markierung auslassen, Ausrutschen."
+  },
+  "Identical course, surface and timing.": {
+    "en": "Identical course, surface and timing.",
+    "de": "Identischer Parcours, Untergrund und Timing."
+  },
+  "Time in s; source anchor squad 5.63±0.28 s.": {
+    "en": "Time in s; source anchor squad 5.63±0.28 s.",
+    "de": "Zeit s; Quellenanker Kader 5,63±0,28 s."
+  },
+  "Schematic top view of a course with start (S), two turning points (1, 2) and finish (Z). Dimensions are not specified.": {
+    "en": "Schematic top view of a course with start (S), two turning points (1, 2) and finish (Z). Dimensions are not specified.",
+    "de": "Schematische Draufsicht eines Parcours mit Start (S), zwei Wendepunkten (1, 2) und Ziel (Z). Maße sind nicht angegeben."
+  },
+  "Dynamic single-leg balance and asymmetric reach.": {
+    "en": "Dynamic single-leg balance and asymmetric reach.",
+    "de": "Dynamische einbeinige Balance und asymmetrische Reichweite."
+  },
+  "Y-Balance kit or three measuring tapes in anterior, posteromedial and posterolateral directions; leg length measurement.": {
+    "en": "Y-Balance kit or three measuring tapes in anterior, posteromedial and posterolateral directions; leg length measurement.",
+    "de": "Y-Balance-Kit oder drei Maßbänder in anteriorer, posteromedialer und posterolateraler Richtung; Beinlängenmessung."
+  },
+  "Measure leg length from ASIS to medial malleolus.": {
+    "en": "Measure leg length from ASIS to medial malleolus.",
+    "de": "Beinlänge ASIS bis medialer Malleolus messen."
+  },
+  "Stand on one leg in the center.": {
+    "en": "Stand on one leg in the center.",
+    "de": "Auf einem Bein im Zentrum stehen."
+  },
+  "Reach as far as possible in the anterior direction with the free foot and return in a controlled manner.": {
+    "en": "Reach as far as possible in the anterior direction with the free foot and return in a controlled manner.",
+    "de": "Mit freiem Fuß in anteriorer Richtung maximal reichen und kontrolliert zurückkehren."
+  },
+  "Repeat posteromedially.": {
+    "en": "Repeat posteromedially.",
+    "de": "Posteromedial wiederholen."
+  },
+  "Repeat posterolaterally.": {
+    "en": "Repeat posterolaterally.",
+    "de": "Posterolateral wiederholen."
+  },
+  "Three valid measurement attempts per direction per leg.": {
+    "en": "Three valid measurement attempts per direction per leg.",
+    "de": "Je Richtung drei gültige Messversuche pro Bein."
+  },
+  "Three axes in a Y; angles according to the standardized Y-Balance system.": {
+    "en": "Three axes in a Y; angles according to the standardized Y-Balance system.",
+    "de": "Drei Achsen im Y; Winkel gemäß standardisiertem Y-Balance-System."
+  },
+  "Stance foot lifts, supporting step, loss of balance, reach block is kicked instead of pushed.": {
+    "en": "Stance foot lifts, supporting step, loss of balance, reach block is kicked instead of pushed.",
+    "de": "Standfuß löst sich, Stützschritt, Verlust des Gleichgewichts, Reach-Block wird getreten statt geschoben."
+  },
+  "Barefoot or same footwear; stance foot stays fully on the platform; hands according to a uniform rule; leg length for normalization.": {
+    "en": "Barefoot or same footwear; stance foot stays fully on the platform; hands according to a uniform rule; leg length for normalization.",
+    "de": "Barfuß oder gleiches Schuhwerk; Standfuß bleibt vollständig auf Plattform; Hände nach einheitlicher Regel; Beinlänge zur Normalisierung."
+  },
+  "Reach per direction and composite score = sum of the three maximum values /(3 × leg length) ×100. Side asymmetry separately.": {
+    "en": "Reach per direction and composite score = sum of the three maximum values /(3 × leg length) ×100. Side asymmetry separately.",
+    "de": "Reach je Richtung und Composite Score = Summe der drei Maximalwerte /(3 × Beinlänge) ×100. Seitenasymmetrie separat."
+  },
+  "Top view of the Y-Balance setup: stance platform in the center and three directions, anterior (1), posteromedial (2) and posterolateral (3). The two posterior directions are symmetrical to the anterior one.": {
+    "en": "Top view of the Y-Balance setup: stance platform in the center and three directions, anterior (1), posteromedial (2) and posterolateral (3). The two posterior directions are symmetrical to the anterior one.",
+    "de": "Draufsicht des Y-Balance-Aufbaus: Standplattform in der Mitte und drei Richtungen, anterior (1), posteromedial (2) und posterolateral (3). Die beiden hinteren Richtungen liegen symmetrisch zur vorderen."
+  },
+  "Maximal inspiratory respiratory muscle strength.": {
+    "en": "Maximal inspiratory respiratory muscle strength.",
+    "de": "Maximale inspiratorische Atemmuskelkraft."
+  },
+  "Respiratory pressure meter with mouthpiece and nose clip.": {
+    "en": "Respiratory pressure meter with mouthpiece and nose clip.",
+    "de": "Respiratory Pressure Meter mit Mundstück und Nasenklemme."
+  },
+  "Position sitting upright.": {
+    "en": "Position sitting upright.",
+    "de": "Sitzend aufrecht positionieren."
+  },
+  "Apply nose clip.": {
+    "en": "Apply nose clip.",
+    "de": "Nasenclip anlegen."
+  },
+  "Exhale maximally to residual volume.": {
+    "en": "Exhale maximally to residual volume.",
+    "de": "Bis Residualvolumen maximal ausatmen."
+  },
+  "Seal lips tightly around the mouthpiece.": {
+    "en": "Seal lips tightly around the mouthpiece.",
+    "de": "Mundstück dicht umschließen."
+  },
+  "Inhale as forcefully as possible against the occluded system.": {
+    "en": "Inhale as forcefully as possible against the occluded system.",
+    "de": "So kräftig wie möglich gegen das verschlossene System einatmen."
+  },
+  "Perform at least three technically valid attempts.": {
+    "en": "Perform at least three technically valid attempts.",
+    "de": "Mindestens drei technisch gültige Versuche durchführen."
+  },
+  "Maximal maneuver approx. 1–2 s; ≥30 s rest.": {
+    "en": "Maximal maneuver approx. 1–2 s; ≥30 s rest.",
+    "de": "Maximalmanöver ca. 1–2 s; ≥30 s Pause."
+  },
+  "Leak, incomplete exhalation, coughing, Valsalva/cheek compensation.": {
+    "en": "Leak, incomplete exhalation, coughing, Valsalva/cheek compensation.",
+    "de": "Leckage, unvollständiges Ausatmen, Husten, Valsalva/Backenkompensation."
+  },
+  "Same device, sitting position, starting lung volume; highest value only from reproducible attempts.": {
+    "en": "Same device, sitting position, starting lung volume; highest value only from reproducible attempts.",
+    "de": "Gleiches Gerät, Sitzposition, Lungenvolumen-Ausgangslage; höchster Wert nur bei reproduzierbaren Versuchen."
+  },
+  "MIP in cmH2O; higher = stronger. The source contains no universal athlete norm.": {
+    "en": "MIP in cmH2O; higher = stronger. The source contains no universal athlete norm.",
+    "de": "MIP in cmH2O; höher = stärker. Quelle enthält keine universelle Athletennorm."
+  },
+  "Maximal expiratory respiratory muscle strength.": {
+    "en": "Maximal expiratory respiratory muscle strength.",
+    "de": "Maximale exspiratorische Atemmuskelkraft."
+  },
+  "Respiratory pressure meter, mouthpiece, nose clip.": {
+    "en": "Respiratory pressure meter, mouthpiece, nose clip.",
+    "de": "Respiratory Pressure Meter, Mundstück, Nasenklemme."
+  },
+  "Sit upright.": {
+    "en": "Sit upright.",
+    "de": "Aufrecht sitzen."
+  },
+  "Inhale maximally to total lung capacity.": {
+    "en": "Inhale maximally to total lung capacity.",
+    "de": "Maximal bis zur totalen Lungenkapazität einatmen."
+  },
+  "Seal the mouthpiece tightly.": {
+    "en": "Seal the mouthpiece tightly.",
+    "de": "Mundstück dicht schließen."
+  },
+  "Exhale maximally against the occluded system.": {
+    "en": "Exhale maximally against the occluded system.",
+    "de": "Maximal gegen das verschlossene System ausatmen."
+  },
+  "At least three valid attempts.": {
+    "en": "At least three valid attempts.",
+    "de": "Mindestens drei gültige Versuche."
+  },
+  "Leak, coughing, incomplete inspiration.": {
+    "en": "Leak, coughing, incomplete inspiration.",
+    "de": "Leckage, Husten, unvollständige Inspiration."
+  },
+  "Same device and lung volume; avoid leaks.": {
+    "en": "Same device and lung volume; avoid leaks.",
+    "de": "Gleiches Gerät und Lungenvolumen; Leckagen vermeiden."
+  },
+  "MEP in cmH2O; best value. No general norm in the source file.": {
+    "en": "MEP in cmH2O; best value. No general norm in the source file.",
+    "de": "MEP cmH2O; Bestwert. Keine allgemeine Norm in der Quelldatei."
+  },
+  "Static single-leg balance.": {
+    "en": "Static single-leg balance.",
+    "de": "Statische einbeinige Balance."
+  },
+  "Level surface, timer.": {
+    "en": "Level surface, timer.",
+    "de": "Ebener Untergrund, Timer."
+  },
+  "Take off shoes.": {
+    "en": "Take off shoes.",
+    "de": "Schuhe ausziehen."
+  },
+  "Stand on the test leg.": {
+    "en": "Stand on the test leg.",
+    "de": "Auf dem Testbein stehen."
+  },
+  "Place the free foot against the inside of the standing knee.": {
+    "en": "Place the free foot against the inside of the standing knee.",
+    "de": "Freien Fuß an die Innenseite des Standknies legen."
+  },
+  "Raise the heel of the standing leg.": {
+    "en": "Raise the heel of the standing leg.",
+    "de": "Ferse des Standbeins anheben."
+  },
+  "Start timer.": {
+    "en": "Start timer.",
+    "de": "Timer starten."
+  },
+  "Measure time until the first rule violation.": {
+    "en": "Measure time until the first rule violation.",
+    "de": "Zeit bis zum ersten Regelverstoß messen."
+  },
+  "Three attempts per side.": {
+    "en": "Three attempts per side.",
+    "de": "Drei Versuche je Seite."
+  },
+  "Maximal hold time per attempt.": {
+    "en": "Maximal hold time per attempt.",
+    "de": "Maximale Haltezeit je Versuch."
+  },
+  "Hands leave hips, free foot detaches, standing foot shifts, heel touches floor.": {
+    "en": "Hands leave hips, free foot detaches, standing foot shifts, heel touches floor.",
+    "de": "Hände verlassen Hüfte, freier Fuß löst sich, Standfuß verschiebt sich, Ferse berührt Boden."
+  },
+  "Same surface, gaze point, foot position and stopping definition.": {
+    "en": "Same surface, gaze point, foot position and stopping definition.",
+    "de": "Gleicher Untergrund, Blickpunkt, Fußposition und Abbruchdefinition."
+  },
+  "Best hold time per side in s; higher = better.": {
+    "en": "Best hold time per side in s; higher = better.",
+    "de": "Beste Haltezeit je Seite in s; höher = besser."
+  },
+  "A person stands on one leg, the other foot rests at the knee of the standing leg, hands are on the hips. Next to it, a stopwatch symbol.": {
+    "en": "A person stands on one leg, the other foot rests at the knee of the standing leg, hands are on the hips. Next to it, a stopwatch symbol.",
+    "de": "Eine Person steht auf einem Bein, der andere Fuß liegt am Knie des Standbeins, die Hände sind an den Hüften. Daneben ein Stoppuhr-Symbol."
+  },
+  "Static balance ability on a narrow support surface.": {
+    "en": "Static balance ability on a narrow support surface.",
+    "de": "Statische Gleichgewichtsfähigkeit unter schmaler Unterstützungsfläche."
+  },
+  "Flamingo balance beam, timer.": {
+    "en": "Flamingo balance beam, timer.",
+    "de": "Flamingo-Balancebalken, Timer."
+  },
+  "Stand on one leg on the beam.": {
+    "en": "Stand on one leg on the beam.",
+    "de": "Auf dem Balken auf einem Bein stehen."
+  },
+  "Bend the free leg backward and grasp the foot.": {
+    "en": "Bend the free leg backward and grasp the foot.",
+    "de": "Freies Bein nach hinten beugen und Fuß greifen."
+  },
+  "Assume the balance position.": {
+    "en": "Assume the balance position.",
+    "de": "Balanceposition einnehmen."
+  },
+  "Count every loss of balance during 60 s.": {
+    "en": "Count every loss of balance during 60 s.",
+    "de": "Während 60 s jeden Balanceverlust zählen."
+  },
+  "After a loss, resume the position and continue the time.": {
+    "en": "After a loss, resume the position and continue the time.",
+    "de": "Nach Verlust Position erneut einnehmen und Zeit fortsetzen."
+  },
+  "60 s.": {
+    "en": "60 s.",
+    "de": "60 s."
+  },
+  "Stop in case of very frequent losses or safety risk.": {
+    "en": "Stop in case of very frequent losses or safety risk.",
+    "de": "Bei sehr häufigen Verlusten oder Sicherheitsrisiko abbrechen."
+  },
+  "Same beam, same side/shoe rule, same time.": {
+    "en": "Same beam, same side/shoe rule, same time.",
+    "de": "Gleicher Balken, gleiche Seite/Schuhregel, gleiche Zeit."
+  },
+  "Number of balance losses in 60 s; lower = better.": {
+    "en": "Number of balance losses in 60 s; lower = better.",
+    "de": "Anzahl Balanceverluste in 60 s; niedriger = besser."
+  },
+  "A person stands on one leg on the flamingo balance beam. Next to it, a stopwatch symbol showing 60 s.": {
+    "en": "A person stands on one leg on the flamingo balance beam. Next to it, a stopwatch symbol showing 60 s.",
+    "de": "Eine Person steht auf einem Bein auf dem Flamingo-Balancebalken. Daneben ein Stoppuhr-Symbol mit der Angabe 60 s."
+  },
+  "Flexibility of the posterior muscle chain.": {
+    "en": "Flexibility of the posterior muscle chain.",
+    "de": "Flexibilität der hinteren Muskelkette."
+  },
+  "Sit-and-reach box.": {
+    "en": "Sit-and-reach box.",
+    "de": "Sit-and-Reach-Box."
+  },
+  "Legs extended, feet against the box.": {
+    "en": "Legs extended, feet against the box.",
+    "de": "Beine gestreckt, Füße an Box."
+  },
+  "Hands on top of each other.": {
+    "en": "Hands on top of each other.",
+    "de": "Hände übereinander."
+  },
+  "Slowly push forward as far as possible.": {
+    "en": "Slowly push forward as far as possible.",
+    "de": "Langsam maximal nach vorne schieben."
+  },
+  "Hold the end position for approx. 2 s.": {
+    "en": "Hold the end position for approx. 2 s.",
+    "de": "Endposition ca. 2 s halten."
+  },
+  "2 s end hold time.": {
+    "en": "2 s end hold time.",
+    "de": "2 s Endhaltezeit."
+  },
+  "Knee flexion, jerky bouncing.": {
+    "en": "Knee flexion, jerky bouncing.",
+    "de": "Kniebeugung, ruckartiges Federn."
+  },
+  "Knees stay extended; no bouncing.": {
+    "en": "Knees stay extended; no bouncing.",
+    "de": "Knie bleiben gestreckt; kein Federn."
+  },
+  "Best distance in cm; norms are age- and sex-specific.": {
+    "en": "Best distance in cm; norms are age- and sex-specific.",
+    "de": "Bestweite cm; Normen alters-/geschlechtsspezifisch."
+  },
+  "Side view: a person sits with extended knees in front of the sit-and-reach box and pushes the slider forward, there is a scale on the box.": {
+    "en": "Side view: a person sits with extended knees in front of the sit-and-reach box and pushes the slider forward, there is a scale on the box.",
+    "de": "Seitenansicht: Eine Person sitzt mit gestreckten Knien vor der Sit-and-Reach-Box und schiebt den Messschieber nach vorn, auf der Box ist eine Skala."
+  },
+  "Proprioceptive accuracy of the knee joint.": {
+    "en": "Proprioceptive accuracy of the knee joint.",
+    "de": "Propriozeptive Genauigkeit des Kniegelenks."
+  },
+  "Goniometer/electronic angle meter or isokinetic system.": {
+    "en": "Goniometer/electronic angle meter or isokinetic system.",
+    "de": "Goniometer/elektronischer Winkelmesser oder isokinetisches System."
+  },
+  "Set reference angle passively/actively.": {
+    "en": "Set reference angle passively/actively.",
+    "de": "Referenzwinkel passiv/aktiv einstellen."
+  },
+  "Let the position be perceived for 5 s.": {
+    "en": "Let the position be perceived for 5 s.",
+    "de": "Position 5 s wahrnehmen lassen."
+  },
+  "Return the leg to the starting position.": {
+    "en": "Return the leg to the starting position.",
+    "de": "Bein in Ausgangsposition zurückführen."
+  },
+  "Reproduce the reference angle without vision.": {
+    "en": "Reproduce the reference angle without vision.",
+    "de": "Referenzwinkel ohne Sicht reproduzieren."
+  },
+  "3 attempts per angle/leg.": {
+    "en": "3 attempts per angle/leg.",
+    "de": "3 Versuche pro Winkel/Bein."
+  },
+  "5 s learning phase per reference angle.": {
+    "en": "5 s learning phase per reference angle.",
+    "de": "5 s Lernphase je Referenzwinkel."
+  },
+  "Visual control, compensation, measurement error.": {
+    "en": "Visual control, compensation, measurement error.",
+    "de": "Visuelle Kontrolle, Kompensation, Messfehler."
+  },
+  "Same angles, eyes closed/visual shielding, same device.": {
+    "en": "Same angles, eyes closed/visual shielding, same device.",
+    "de": "Gleiche Winkel, Augen geschlossen/visuelle Abschirmung, gleiches Gerät."
+  },
+  "Absolute repositioning error in degrees; lower = better.": {
+    "en": "Absolute repositioning error in degrees; lower = better.",
+    "de": "Absolute Repositionierungsabweichung in Grad; niedriger = besser."
+  },
+  "Postural stability, static or after a dynamic task.": {
+    "en": "Postural stability, static or after a dynamic task.",
+    "de": "Posturale Stabilität statisch bzw. nach dynamischer Aufgabe."
+  },
+  "Force plate/stabilometry system.": {
+    "en": "Force plate/stabilometry system.",
+    "de": "Kraftplatte/Stabilometrie-System."
+  },
+  "Standardized foot position.": {
+    "en": "Standardized foot position.",
+    "de": "Standardisierte Fußposition."
+  },
+  "Perform a defined standing or landing task.": {
+    "en": "Perform a defined standing or landing task.",
+    "de": "Definierte Stand- oder Landungsaufgabe durchführen."
+  },
+  "Start measurement window.": {
+    "en": "Start measurement window.",
+    "de": "Messfenster starten."
+  },
+  "Record COP/GRF data.": {
+    "en": "Record COP/GRF data.",
+    "de": "COP/GRF-Daten erfassen."
+  },
+  "Several valid attempts.": {
+    "en": "Several valid attempts.",
+    "de": "Mehrere gültige Versuche."
+  },
+  "Step, foot detaches, measurement window disturbed.": {
+    "en": "Step, foot detaches, measurement window disturbed.",
+    "de": "Schritt, Fuß löst sich, Messfenster gestört."
+  },
+  "Device, sampling, foot position, measurement duration and task identical.": {
+    "en": "Device, sampling, foot position, measurement duration and task identical.",
+    "de": "Gerät, Sampling, Fußposition, Messdauer und Aufgabe identisch."
+  },
+  "Stability index/COP metrics; lower sway is usually better; no universal norm from the source.": {
+    "en": "Stability index/COP metrics; lower sway is usually better; no universal norm from the source.",
+    "de": "Stability Index/COP-Metriken; niedrigere Schwankung meist besser; keine Universalnorm aus Quelle."
+  },
+  "Time between visual stimulus and defined motor response.": {
+    "en": "Time between visual stimulus and defined motor response.",
+    "de": "Zeit zwischen visuellem Reiz und definierter motorischer Antwort."
+  },
+  "Validated reaction time device or app-compatible sensor/button.": {
+    "en": "Validated reaction time device or app-compatible sensor/button.",
+    "de": "Validiertes Reaktionszeitgerät oder App-kompatibler Sensor/Button."
+  },
+  "Position the test subject comfortably.": {
+    "en": "Position the test subject comfortably.",
+    "de": "Testperson bequem positionieren."
+  },
+  "Perform 3 practice attempts.": {
+    "en": "Perform 3 practice attempts.",
+    "de": "3 Übungsversuche durchführen."
+  },
+  "Display a visual stimulus with a random delay.": {
+    "en": "Display a visual stimulus with a random delay.",
+    "de": "Zufällig verzögerten visuellen Reiz anzeigen."
+  },
+  "Press the defined button as fast as possible.": {
+    "en": "Press the defined button as fast as possible.",
+    "de": "So schnell wie möglich den definierten Button drücken."
+  },
+  "Perform 10 measurement attempts.": {
+    "en": "Perform 10 measurement attempts.",
+    "de": "10 Messversuche durchführen."
+  },
+  "Calculate median and mean.": {
+    "en": "Calculate median and mean.",
+    "de": "Median und Mittelwert berechnen."
+  },
+  "10 valid measurement attempts.": {
+    "en": "10 valid measurement attempts.",
+    "de": "10 gültige Messversuche."
+  },
+  "Anticipation before stimulus, distraction, wrong button; repeat the failed attempt.": {
+    "en": "Anticipation before stimulus, distraction, wrong button; repeat the failed attempt.",
+    "de": "Antizipation vor Reiz, Ablenkung, falsche Taste; Fehlversuch wiederholen."
+  },
+  "Same device, same hand, same stimulus type, same distance to the display, quiet environment.": {
+    "en": "Same device, same hand, same stimulus type, same distance to the display, quiet environment.",
+    "de": "Gleiches Gerät, gleiche Hand, gleiche Reizart, gleiche Distanz zum Display, ruhige Umgebung."
+  },
+  "Reaction time in ms; lower = better. The source file contains no general numerical norm for this.": {
+    "en": "Reaction time in ms; lower = better. The source file contains no general numerical norm for this.",
+    "de": "Reaktionszeit in ms; niedriger = besser. Die Quelldatei enthält hierfür keine allgemeine numerische Norm."
+  },
+  "Fencing-specific reaction and total response time.": {
+    "en": "Fencing-specific reaction and total response time.",
+    "de": "Fechtspezifische Reaktions- und Gesamtantwortzeit."
+  },
+  "FitroSword or identical reaction system.": {
+    "en": "FitroSword or identical reaction system.",
+    "de": "FitroSword oder identisches Reaktionssystem."
+  },
+  "Wait for a random stimulus.": {
+    "en": "Wait for a random stimulus.",
+    "de": "Zufälligen Reiz abwarten."
+  },
+  "Perform the defined lunge/arm movement as fast as possible.": {
+    "en": "Perform the defined lunge/arm movement as fast as possible.",
+    "de": "So schnell wie möglich definierten Ausfall/Armbewegung ausführen."
+  },
+  "Several attempts.": {
+    "en": "Several attempts.",
+    "de": "Mehrere Versuche."
+  },
+  "Calculate median/best value.": {
+    "en": "Calculate median/best value.",
+    "de": "Median/Bestwert berechnen."
+  },
+  "Anticipation, incorrect reaction, device error.": {
+    "en": "Anticipation, incorrect reaction, device error.",
+    "de": "Antizipation, Fehlreaktion, Gerätefehler."
+  },
+  "Identical device/protocol only.": {
+    "en": "Identical device/protocol only.",
+    "de": "Nur identisches Gerät/Protokoll."
+  },
+  "ms. Source finding: elite on average ~66 ms faster; total lunge response time ~753 ms.": {
+    "en": "ms. Source finding: elite on average ~66 ms faster; total lunge response time ~753 ms.",
+    "de": "ms. Quellenbefund: Elite im Mittel ~66 ms schneller; Gesamtantwortzeit Ausfall ~753 ms."
+  },
+  "Mechanical load from acceleration peaks during boxing.": {
+    "en": "Mechanical load from acceleration peaks during boxing.",
+    "de": "Mechanische Belastung aus Beschleunigungsspitzen während des Boxens."
+  },
+  "Validated accelerometer, defined sensor position, boxing protocol.": {
+    "en": "Validated accelerometer, defined sensor position, boxing protocol.",
+    "de": "Validierter Beschleunigungssensor, definierte Sensorposition, Boxing-Protokoll."
+  },
+  "Attach the sensor at the exactly defined position.": {
+    "en": "Attach the sensor at the exactly defined position.",
+    "de": "Sensor an exakt definierter Position befestigen."
+  },
+  "Zero the sensor.": {
+    "en": "Zero the sensor.",
+    "de": "Sensor nullen."
+  },
+  "Perform a standardized round.": {
+    "en": "Perform a standardized round.",
+    "de": "Standardisierte Runde durchführen."
+  },
+  "Record all acceleration peaks.": {
+    "en": "Record all acceleration peaks.",
+    "de": "Alle Beschleunigungsspitzen aufzeichnen."
+  },
+  "Calculate sum and peak values per round.": {
+    "en": "Calculate sum and peak values per round.",
+    "de": "Summe und Peakwerte pro Runde berechnen."
+  },
+  "According to the selected round protocol.": {
+    "en": "According to the selected round protocol.",
+    "de": "Entsprechend gewähltem Rundenprotokoll."
+  },
+  "Sensor slips, data loss, wrong position.": {
+    "en": "Sensor slips, data loss, wrong position.",
+    "de": "Sensor verrutscht, Datenverlust, falsche Position."
+  },
+  "Sensor, sampling rate, filter algorithm and position identical.": {
+    "en": "Sensor, sampling rate, filter algorithm and position identical.",
+    "de": "Sensor, Samplingrate, Filteralgorithmus und Position identisch."
+  },
+  "g, peak g, cumulative load/count; longitudinal/device-specific use only.": {
+    "en": "g, peak g, cumulative load/count; longitudinal/device-specific use only.",
+    "de": "g, Peak-g, kumulative Load/Count; nur longitudinal/gerätespezifisch."
   }
 }

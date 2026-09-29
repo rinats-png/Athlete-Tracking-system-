@@ -40,7 +40,16 @@
       "fms_total": "Functional Movement Screen (Gesamtpunkte)",
       "sleep_h": "Schlafdauer",
       "srpe_load_au": "Belastung der Woche (sRPE)",
-      "resting_hr_bpm": "Ruhepuls"
+      "resting_hr_bpm": "Ruhepuls",
+      "mep_cm_h2o": "Maximaler Ausatemdruck (MEP)",
+      "stork_balance_s": "Einbeinstand (Stork-Test)",
+      "flamingo_falls": "Flamingo-Balancetest (Verluste)",
+      "sit_and_reach_cm": "Sit-and-Reach",
+      "jps_knee_deg": "Positionssinn des Knies",
+      "stability_index": "Stabilitätsindex (Kraftplatte)",
+      "reaction_time_ms": "Visuelle Reaktionszeit",
+      "fitrosword_response_ms": "Fecht-Reaktionszeit (FitroSword)",
+      "punch_peak_g": "Schlagbelastung (Spitzenbeschleunigung)"
     },
     "meaning": {
       "ck_u_l": "Ein Enzym, dessen Blutspiegel nach ungewohnter Belastung steigt. Die Streuung zwischen Menschen ist sehr gross — vergleichbar ist er nur mit dir selbst.",
@@ -55,7 +64,16 @@
       "fms_total": "Sieben Bewegungsaufgaben mit je 0 bis 3 Punkten. Ein Screening zur Bewegungsqualität, keine Verletzungsvorhersage.",
       "sleep_h": "Stunden Schlaf in der Nacht davor, selbst geschätzt. Kein Erholungswert — eine Zahl, die neben der nächsten Messung steht.",
       "srpe_load_au": "Belastung einer Woche als Summe aus Anstrengung (RPE 1–10) mal Minuten je Einheit. Nur mit dir selbst vergleichbar — und die häufigste Erklärung für einen schlechten Testtag.",
-      "resting_hr_bpm": "Herzschläge pro Minute am Morgen, liegend, vor dem Aufstehen. Nur mit dir selbst vergleichbar; Gerät und Messzeitpunkt sollten gleich bleiben."
+      "resting_hr_bpm": "Herzschläge pro Minute am Morgen, liegend, vor dem Aufstehen. Nur mit dir selbst vergleichbar; Gerät und Messzeitpunkt sollten gleich bleiben.",
+      "mep_cm_h2o": "Der maximale Überdruck beim Ausatmen gegen einen Widerstand. Braucht ein Messgerät und eine eingeübte Ausführung.",
+      "stork_balance_s": "Wie lange du auf einem Bein stehst, ohne die Position zu verlieren. Ein Screening des Gleichgewichts, keine Leistungsmessung. Trag die andere Seite und die Bedingungen in die Notiz ein.",
+      "flamingo_falls": "Wie oft du in 60 Sekunden das Gleichgewicht verlierst. Weniger heißt ruhiger, nicht besser im Sinne einer Norm.",
+      "sit_and_reach_cm": "Die Reichweite der hinteren Muskelkette im Sitzen. Ein Screening der Beweglichkeit; Normen gelten nur nach Alter und Geschlecht.",
+      "jps_knee_deg": "Die Abweichung in Grad, wenn ein Kniewinkel ohne Sicht wieder eingestellt wird. Braucht einen Winkelmesser und Übung.",
+      "stability_index": "Die Schwankung des Körperschwerpunkts auf einer Kraftplatte. Der Wert hängt stark vom System ab und lässt sich nur mit demselben Gerät vergleichen.",
+      "reaction_time_ms": "Die Zeit von einem visuellen Reiz bis zur festgelegten Antwort. Das Gerät verschiebt den Wert, deshalb steht es dabei.",
+      "fitrosword_response_ms": "Reaktions- und Gesamtantwortzeit im Fechten mit einem bestimmten System. Nur mit demselben System vergleichbar.",
+      "punch_peak_g": "Die höchste Beschleunigung, die ein Sensor am Körper beim Boxen misst. Nur mit demselben Sensor und Sensorplatz vergleichbar."
     }
   },
   "procedure": {
@@ -68,7 +86,15 @@
     "standardise": "Was gleich bleiben muss",
     "origin": "Nach: {{origin}}",
     "genericTag": "allgemein",
-    "genericHint": "Für diesen Test ist noch keine eigene Vorschrift hinterlegt. Was hier steht, folgt aus dem Testmodus und ist allgemeiner als ein geprüftes Protokoll."
+    "genericHint": "Für diesen Test ist noch keine eigene Vorschrift hinterlegt. Was hier steht, folgt aus dem Testmodus und ist allgemeiner als ein geprüftes Protokoll.",
+    "goal": "Ziel",
+    "setup": "Material und Aufbau",
+    "steps": "Durchführung Schritt für Schritt",
+    "time": "Zeitvorgaben",
+    "distance": "Strecken- und Distanzangaben",
+    "scoring": "Bewertung und Auswertung",
+    "scoringNote": "Zahlen in dieser Beschreibung sind Kohortenwerte aus der Quelle des Protokolls, keine Normen. Eine Einordnung gibt die App nur, wo eine belegte Referenz hinterlegt ist.",
+    "figure": "Skizze"
   },
   "compare": {
     "title": "Athletenvergleich",

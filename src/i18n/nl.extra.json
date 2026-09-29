@@ -40,7 +40,16 @@
       "fms_total": "Functional Movement Screen (totaal)",
       "sleep_h": "Slaapduur",
       "srpe_load_au": "Weekbelasting (sRPE)",
-      "resting_hr_bpm": "Rusthartslag"
+      "resting_hr_bpm": "Rusthartslag",
+      "mep_cm_h2o": "Maximale expiratoire druk (MEP)",
+      "stork_balance_s": "Stand op één been (ooievaarstest)",
+      "flamingo_falls": "Flamingo-balanstest (verliezen)",
+      "sit_and_reach_cm": "Sit-and-reach",
+      "jps_knee_deg": "Kniegewrichtspositiezin",
+      "stability_index": "Stabiliteitsindex (krachtplaat)",
+      "reaction_time_ms": "Visuele reactietijd",
+      "fitrosword_response_ms": "Schermreactietijd (FitroSword)",
+      "punch_peak_g": "Stootbelasting (piekversnelling)"
     },
     "meaning": {
       "ck_u_l": "Een enzym waarvan de bloedspiegel stijgt na ongewone belasting. De variatie tussen personen is zeer groot — alleen met jezelf vergelijkbaar.",
@@ -55,7 +64,16 @@
       "fms_total": "Zeven bewegingstaken, elk gescoord van 0 tot 3. Een screening van bewegingskwaliteit, geen blessurevoorspelling.",
       "sleep_h": "Uren slaap de nacht ervoor, zelf geschat. Geen herstelscore — een getal dat naast de volgende meting staat.",
       "srpe_load_au": "De belasting van een week als som van inspanning (RPE 1–10) maal minuten per sessie. Alleen met jezelf vergelijkbaar — en de meest voorkomende verklaring voor een slechte testdag.",
-      "resting_hr_bpm": "Hartslagen per minuut 's ochtends, liggend, voor het opstaan. Alleen vergelijkbaar met jezelf; apparaat en meetmoment horen gelijk te blijven."
+      "resting_hr_bpm": "Hartslagen per minuut 's ochtends, liggend, voor het opstaan. Alleen vergelijkbaar met jezelf; apparaat en meetmoment horen gelijk te blijven.",
+      "mep_cm_h2o": "De maximale druk bij uitademen tegen een weerstand. Vereist een meetapparaat en een geoefende techniek.",
+      "stork_balance_s": "Hoe lang je op één been staat zonder de positie te verliezen. Een balansscreening, geen prestatiemaat. Noteer de andere zijde en de omstandigheden in de notitie.",
+      "flamingo_falls": "Hoe vaak je in 60 seconden je evenwicht verliest. Minder betekent stabieler, niet beter in de zin van een norm.",
+      "sit_and_reach_cm": "De reikafstand van de dorsale keten in zithouding. Een mobiliteitsscreening; normen gelden alleen per leeftijd en geslacht.",
+      "jps_knee_deg": "De fout in graden bij het reproduceren van een kniehoek zonder zicht. Vereist een hoekmeter en oefening.",
+      "stability_index": "De zwaai van het drukmiddelpunt op een krachtplaat. De waarde hangt sterk af van het systeem en is alleen vergelijkbaar op hetzelfde apparaat.",
+      "reaction_time_ms": "De tijd van een visuele prikkel tot de vastgelegde reactie. Het apparaat verschuift de waarde, daarom wordt het mee vastgelegd.",
+      "fitrosword_response_ms": "Reactie- en totale responstijd bij het schermen met een specifiek systeem. Alleen vergelijkbaar op hetzelfde systeem.",
+      "punch_peak_g": "De hoogste versnelling die een op het lichaam gedragen sensor tijdens het boksen registreert. Alleen vergelijkbaar met dezelfde sensor en plaatsing."
     }
   },
   "procedure": {
@@ -68,7 +86,15 @@
     "standardise": "Wat gelijk moet blijven",
     "origin": "Volgens: {{origin}}",
     "genericTag": "algemeen",
-    "genericHint": "Voor deze test is nog geen eigen uitvoering opgeslagen. Wat volgt komt uit de testmodus en is algemener dan een gevalideerd protocol."
+    "genericHint": "Voor deze test is nog geen eigen uitvoering opgeslagen. Wat volgt komt uit de testmodus en is algemener dan een gevalideerd protocol.",
+    "goal": "Doel",
+    "setup": "Materiaal en opstelling",
+    "steps": "Uitvoering stap voor stap",
+    "time": "Tijdsaanduidingen",
+    "distance": "Afstanden",
+    "scoring": "Beoordeling en evaluatie",
+    "scoringNote": "Getallen in deze beschrijving zijn cohortwaarden uit de bron van het protocol, geen normen. De app plaatst een resultaat alleen in context waar een onderbouwde referentie is opgeslagen.",
+    "figure": "Schets"
   },
   "compare": {
     "title": "Atletenvergelijking",

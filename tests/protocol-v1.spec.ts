@@ -44,7 +44,7 @@ test.describe('Protokoll v1.0 — Daten', () => {
   test('die Entscheidungen landen in der Durchführungsvorschrift', () => {
     const squat = procedureFor(getTest('back_squat_1rm')!).procedure
     expect(squat.valid.map((v) => v.de).join(' ')).toContain('Hüftfalte kommt unter die Oberkante')
-    expect(squat.attempts.de).toContain('Epley')
+    expect(squat.attempts?.de).toContain('Epley')
     const beep = procedureFor(getTest('beep_test_20m')!).procedure
     expect(beep.valid.map((v) => v.de).join(' ')).toContain('Léger (1988)')
     // Auch eine allgemeine Vorschrift bekommt die v1.0-Regeln.

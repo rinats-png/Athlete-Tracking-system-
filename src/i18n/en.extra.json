@@ -40,7 +40,16 @@
       "fms_total": "Functional Movement Screen (total)",
       "sleep_h": "Sleep duration",
       "srpe_load_au": "Weekly load (sRPE)",
-      "resting_hr_bpm": "Resting heart rate"
+      "resting_hr_bpm": "Resting heart rate",
+      "mep_cm_h2o": "Maximal expiratory pressure (MEP)",
+      "stork_balance_s": "Single-leg stand (stork test)",
+      "flamingo_falls": "Flamingo balance test (losses)",
+      "sit_and_reach_cm": "Sit-and-reach",
+      "jps_knee_deg": "Knee joint position sense",
+      "stability_index": "Stability index (force plate)",
+      "reaction_time_ms": "Visual reaction time",
+      "fitrosword_response_ms": "Fencing reaction time (FitroSword)",
+      "punch_peak_g": "Punch load (peak acceleration)"
     },
     "meaning": {
       "ck_u_l": "An enzyme whose blood level rises after unaccustomed load. Variation between people is very large — it is comparable only with yourself.",
@@ -55,7 +64,16 @@
       "fms_total": "Seven movement tasks scored 0 to 3 each. A movement-quality screening, not an injury prediction.",
       "sleep_h": "Hours of sleep the night before, self-estimated. Not a recovery score — a number that sits next to the next measurement.",
       "srpe_load_au": "A week's load as the sum of effort (RPE 1–10) times minutes per session. Comparable only with yourself — and the most common explanation for a bad test day.",
-      "resting_hr_bpm": "Heartbeats per minute in the morning, lying down, before getting up. Comparable only with yourself; device and time of measurement should stay the same."
+      "resting_hr_bpm": "Heartbeats per minute in the morning, lying down, before getting up. Comparable only with yourself; device and time of measurement should stay the same.",
+      "mep_cm_h2o": "The maximum pressure when breathing out against a resistance. Needs a measuring device and a practised technique.",
+      "stork_balance_s": "How long you stand on one leg without losing the position. A balance screening, not a performance measure. Note the other side and the conditions in the note.",
+      "flamingo_falls": "How often you lose your balance in 60 seconds. Fewer means steadier, not better in the sense of a norm.",
+      "sit_and_reach_cm": "The reach of the posterior chain while seated. A mobility screening; norms only apply by age and sex.",
+      "jps_knee_deg": "The error in degrees when a knee angle is reproduced without vision. Needs an angle measuring device and practice.",
+      "stability_index": "The sway of the centre of pressure on a force plate. The value depends strongly on the system and can only be compared on the same device.",
+      "reaction_time_ms": "The time from a visual stimulus to the defined response. The device shifts the value, so it is recorded with it.",
+      "fitrosword_response_ms": "Reaction and total response time in fencing with a specific system. Only comparable on the same system.",
+      "punch_peak_g": "The highest acceleration a body-worn sensor records during boxing. Only comparable with the same sensor and placement."
     }
   },
   "procedure": {
@@ -68,7 +86,15 @@
     "standardise": "What has to stay the same",
     "origin": "Following: {{origin}}",
     "genericTag": "general",
-    "genericHint": "No dedicated procedure is stored for this test yet. What follows comes from the test mode and is more general than a validated protocol."
+    "genericHint": "No dedicated procedure is stored for this test yet. What follows comes from the test mode and is more general than a validated protocol.",
+    "goal": "Purpose",
+    "setup": "Equipment and setup",
+    "steps": "Procedure step by step",
+    "time": "Timing",
+    "distance": "Distances",
+    "scoring": "Scoring and evaluation",
+    "scoringNote": "Numbers in this description are cohort values from the protocol source, not norms. The app classifies a result only where a sourced reference is stored.",
+    "figure": "Sketch"
   },
   "compare": {
     "title": "Athlete comparison",

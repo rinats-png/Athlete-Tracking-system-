@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test'
 import { REFERENCES, REFERENCE_GAPS, compareToReferences } from '../src/data/references'
 import { EXTENDED_REFERENCES } from '../src/data/referencesExtended'
 import { getTest, TEST_CATALOG } from '../src/data/testCatalog'
+import { LIBRARY_PROCEDURES } from '../src/data/testProcedureLibrary'
 import { rateResult } from '../src/domain/rating'
 import type { StoredResult } from '../src/lib/store/localStore'
 
@@ -252,8 +253,20 @@ test.describe('Was bewusst draussen blieb', () => {
   })
 
   test('der Katalog führt keinen Test ohne beschreibbares Protokoll', () => {
-    for (const slug of ['karate_specific_aerobic_test', 'taaa_test', 'punch_force']) {
+    // Die früheren Kennungen bleiben aus dem Katalog.
+    for (const slug of ['karate_specific_aerobic_test', 'punch_force']) {
       expect(TEST_CATALOG.some((t) => t.slug === slug), slug).toBe(false)
+    }
+    // KSAT, TAAA, TAIKT, FET und die Schlagkraft standen hier, solange keine
+    // Quelle ihr Protokoll beschrieb. Die Testbibliothek (Protokoll 1.0)
+    // beschreibt sie jetzt Schritt für Schritt; sie stehen deshalb im Katalog
+    // — und der Fall verlangt, dass jeder von ihnen diese Beschreibung auch
+    // wirklich trägt, statt nur im Katalog zu stehen.
+    for (const slug of ['ksat_karate', 'taaa_test', 'taikt_kick_test', 'fencing_endurance_test', 'peak_punch_force']) {
+      expect(TEST_CATALOG.some((t) => t.slug === slug), slug).toBe(true)
+      const p = LIBRARY_PROCEDURES[slug]
+      expect(p?.steps?.length ?? 0, `${slug}: Schritte`).toBeGreaterThanOrEqual(4)
+      expect(p?.standardise?.length ?? 0, `${slug}: was gleich bleiben muss`).toBeGreaterThan(0)
     }
   })
 })

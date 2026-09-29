@@ -28,6 +28,7 @@ import {
 import { SPORT_SPECIFIC_TESTS } from './testCatalogSportSpecific'
 import { DOCUMENT_TESTS } from './testCatalogDocument'
 import { EXTENDED_TESTS } from './testCatalogExtended'
+import { LIBRARY_TESTS } from './testCatalogLibrary'
 import { vo2maxFromBeepTest, vo2maxFromCooper } from '@/lib/metrics'
 import { deriveRowing } from './testDeriveShared'
 
@@ -444,6 +445,8 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
   ...DOCUMENT_TESTS,
   // Aus der erweiterten Quelltabelle; Aufnahmekriterium steht dort.
   ...EXTENDED_TESTS,
+  // Testbibliothek, Protokoll 1.0: Tests, die die App vorher nicht hatte.
+  ...LIBRARY_TESTS,
 ]
 
 /**
