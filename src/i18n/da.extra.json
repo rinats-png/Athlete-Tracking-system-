@@ -19,7 +19,8 @@
       "sensor": "Sensorer",
       "body": "Krop",
       "screening": "Screening",
-      "load": "Belastning"
+      "load": "Belastning",
+      "skill": "Færdighed"
     },
     "sources": {
       "self": "Kan registreres selv, uden apparat.",
@@ -57,7 +58,14 @@
       "shoulder_rom_deg": "Skulderbevægelighed",
       "body_mass_change_pct": "Ændring i kropsmasse før/efter løbet",
       "sebt_composite_pct": "Star Excursion Balance (samlet)",
-      "ankle_dorsiflexion_deg": "Ankeldorsalfleksion"
+      "ankle_dorsiflexion_deg": "Ankeldorsalfleksion",
+      "uq_y_balance_pct": "Upper quarter Y-balance (samlet)",
+      "shoulder_jps_deg": "Skulderleddets positionssans",
+      "lateral_scapular_slide_cm": "Lateral scapular slide (LSST)",
+      "gps_match_distance_km": "Samlet distance i kamp (GPS)",
+      "hsr_distance_m": "Højhastighedsløb i kamp, distance (GPS)",
+      "shot_accuracy_football_pct": "Fodbold-skudtest: træfprocent",
+      "throw_accuracy_handball_pct": "Håndbold-kasttest: træfprocent"
     },
     "meaning": {
       "ck_u_l": "Et enzym, hvis niveau i blodet stiger efter uvant belastning. Variationen mellem personer er meget stor — det kan kun sammenlignes med dig selv.",
@@ -89,7 +97,14 @@
       "shoulder_rom_deg": "Skulderens bevægelighed i grader. En screening; notér side, retning og målemetode i noten.",
       "body_mass_change_pct": "Den procentvise ændring i kropsmasse mellem før og efter en indsats. En observation, ikke en præstation og ingen vurdering af væsketab.",
       "sebt_composite_pct": "Den gennemsnitlige rækkevidde i alle retninger som procent af benlængden. En balancescreening, ikke et præstationsmål.",
-      "ankle_dorsiflexion_deg": "Hvor langt anklen kan bøjes opad, i grader. En mobilitetsscreening; notér side og målemetode i noten."
+      "ankle_dorsiflexion_deg": "Hvor langt anklen kan bøjes opad, i grader. En mobilitetsscreening; notér side og målemetode i noten.",
+      "uq_y_balance_pct": "Gennemsnittet af den frie hånds rækkevidde i tre retninger som procent af armlængden. En stabilitetsscreening, ikke et præstationsmål; notér side og udstyr i noten.",
+      "shoulder_jps_deg": "Fejlen i grader ved gengivelse af en tidligere indlært ledposition. En screening; mindre betyder mere præcis, ikke bedre trænet.",
+      "lateral_scapular_slide_cm": "Sideforskellen i afstanden mellem skulderblad og rygsøjle i centimeter. En screening, ikke en præstation; notér armposition og undersøger i noten.",
+      "gps_match_distance_km": "Den distance, en GPS-sensor registrerer over en kamp. Kun sammenlignelig med samme sensor og kampvarighed; ikke en præstationsvurdering.",
+      "hsr_distance_m": "Den distance over den tærskel, dit GPS-system tæller som høj hastighed. Tærsklen varierer mellem systemer; notér den i noten.",
+      "shot_accuracy_football_pct": "Andelen af træffere i procent ud fra skud og træffere i skudtesten. En færdighedsregistrering, ikke en præstationsakse; notér afstand, bold og fod i noten.",
+      "throw_accuracy_handball_pct": "Andelen af træffere i procent ud fra kast og træffere i kasttesten. En færdighedsregistrering, ikke en præstationsakse; notér afstand, bold og kastteknik i noten."
     }
   },
   "procedure": {

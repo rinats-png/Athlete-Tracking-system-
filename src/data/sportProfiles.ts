@@ -20,9 +20,10 @@ import type { PerformanceDimension } from '@/types/domain'
  * dieser App gekennzeichnet und gehören durch belegte Werte ersetzt, sobald
  * welche vorliegen.
  *
- * FUSSBALL ist ausdrücklich nicht enthalten. Der Ausschluss ist als Datenregel
- * hinterlegt (BLOCKED_DISCIPLINES) und wird beim Bau geprüft, damit er bei
- * einer späteren Erweiterung nicht versehentlich zurückkommt.
+ * FUSSBALL war ausgeschlossen. Der Auftraggeber hat die Sperre aufgehoben
+ * (Testbibliothek, Welle 3); die Disziplin steht unten in `TEAM_FOOTBALL`.
+ * `BLOCKED_DISCIPLINES` bleibt als Mechanismus bestehen, ist aber leer — eine
+ * künftige Sperre wird dort eingetragen und beim Bau geprüft.
  */
 
 export type SportCategoryId =
@@ -152,12 +153,10 @@ export interface SportCategory {
 /**
  * Ausdrücklich ausgeschlossen. Der Grund steht dabei, damit die Entscheidung
  * nachvollziehbar bleibt und nicht versehentlich rückgängig gemacht wird.
+ * Fußball stand hier bis zur Freigabe durch den Auftraggeber (Welle 3 der
+ * Testbibliothek); die Liste ist seither leer.
  */
-export const BLOCKED_DISCIPLINES: { id: string; reason: string }[] = [
-  { id: 'football', reason: 'Auf Wunsch ausgeschlossen.' },
-  { id: 'soccer', reason: 'Auf Wunsch ausgeschlossen.' },
-  { id: 'fussball', reason: 'Auf Wunsch ausgeschlossen.' },
-]
+export const BLOCKED_DISCIPLINES: { id: string; reason: string }[] = []
 
 export const SPORT_CATEGORIES: SportCategory[] = [
   {
@@ -1088,6 +1087,37 @@ const TACTICAL: Discipline[] = [
   },
 ]
 
+/**
+ * Fußball — freigegeben mit Welle 3 der Testbibliothek.
+ *
+ * Die Kerntests sind die universellen des Produktkonzepts (Sprint, CMJ). Die
+ * Testbibliothek nennt für Fußball weitere Tests; sie stehen als Ergänzungen
+ * daneben und tragen nie ein Profil. Die Gewichte sind eine Voreinstellung
+ * der App, aus der Belastungsstruktur abgeleitet, nicht aus einer Quelle.
+ */
+const TEAM_FOOTBALL: Discipline[] = [
+  {
+    id: 'football',
+    categoryId: 'team',
+    name: { de: 'Fußball', en: 'Football (soccer)' },
+    aliases: ['Fussball', 'Soccer'],
+    dimensionWeights: { endurance: 1, power: 0.9, agility: 0.8, max_strength: 0.4 },
+    tests: [
+      conceptCore('sprint_20m', 'Sprint'),
+      conceptCore('countermovement_jump', 'Sprungkraft'),
+      addedOptional('beep_test_20m', 'Feldtest für die intermittierende Ausdauer ohne Labor.'),
+      addedOptional('shuttle_5_10_5', 'Richtungswechsel mit Antritt, wie er im Spiel hundertfach vorkommt.'),
+      addedOptional('yo_yo_ir1', "Die Testbibliothek (Protokoll 1.0) nennt «Yo-Yo Intermittent Recovery Test Level 1» für diese Disziplin."),
+      addedOptional('repeated_sprint_ability', "Die Testbibliothek (Protokoll 1.0) nennt «Repeated Sprint Ability» für diese Disziplin."),
+      addedOptional('eccentric_adductor_strength', "Die Testbibliothek (Protokoll 1.0) nennt «Eccentric Adductor Strength» für diese Disziplin."),
+      addedOptional('isometric_adduction_single_leg', "Die Testbibliothek (Protokoll 1.0) nennt «Single-leg Isometric Adduction» für diese Disziplin."),
+    ],
+    eventDurationSeconds: [5400, 5400],
+    typicalLimiter: 'endurance',
+    axisIds: ['power', 'agility', 'endurance'],
+  },
+]
+
 export const DISCIPLINES: Discipline[] = [
   ...COMBAT,
   ...HYBRID,
@@ -1099,6 +1129,7 @@ export const DISCIPLINES: Discipline[] = [
   // Aus der Mastertabelle. Eigene Datei, weil sie aus einer anderen Quelle
   // stammen als die ursprünglichen vierzig.
   ...TABLE_DISCIPLINES,
+  ...TEAM_FOOTBALL,
 ]
 
 export const DISCIPLINE_BY_ID = new Map(DISCIPLINES.map((d) => [d.id, d]))

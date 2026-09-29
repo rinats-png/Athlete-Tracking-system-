@@ -197,6 +197,10 @@ export const RATIONALE_BY_ID: Record<string, { de: string; en: string }> = {
     de: 'Tragen und Heben unter Zeitdruck, oft in engen Räumen und über Treppen. Die Belastung ist kurz und hoch, die Erholung dazwischen unplanbar.',
     en: 'Carrying and lifting under time pressure, often in confined spaces and up stairs. The effort is short and high, the recovery between unplannable.',
   },
+  football: {
+    de: 'Wiederholte Sprints, Richtungswechsel und Ausdauer über neunzig Minuten. Gemessen wird, was den Antritt und die Wiederholbarkeit trägt — nicht das Spielverständnis.',
+    en: 'Repeated sprints, changes of direction and endurance over ninety minutes. What is measured is what carries acceleration and repeatability — not game understanding.',
+  },
   basketball: {
     de: 'Sprungkraft und wiederholte Richtungswechsel über vier Viertel. Gemessen wird, was die Reichhöhe am Korb und den ersten Schritt entscheidet — nicht die Wurfquote.',
     en: 'Jump height and repeated changes of direction across four quarters. What is measured is what decides reach at the rim and the first step — not shooting percentage.',

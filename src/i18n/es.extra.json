@@ -19,7 +19,8 @@
       "sensor": "Sensores",
       "body": "Cuerpo",
       "screening": "Cribado",
-      "load": "Carga"
+      "load": "Carga",
+      "skill": "Habilidad"
     },
     "sources": {
       "self": "Se puede registrar uno mismo, sin dispositivo.",
@@ -57,7 +58,14 @@
       "shoulder_rom_deg": "Hombro: rango de movimiento",
       "body_mass_change_pct": "Cambio de masa corporal antes/después de la carrera",
       "sebt_composite_pct": "Star Excursion Balance (compuesto)",
-      "ankle_dorsiflexion_deg": "Dorsiflexión del tobillo"
+      "ankle_dorsiflexion_deg": "Dorsiflexión del tobillo",
+      "uq_y_balance_pct": "Y-balance del cuadrante superior (compuesto)",
+      "shoulder_jps_deg": "Sentido de posición articular del hombro",
+      "lateral_scapular_slide_cm": "Deslizamiento escapular lateral (LSST)",
+      "gps_match_distance_km": "Distancia total del partido (GPS)",
+      "hsr_distance_m": "Distancia de carrera a alta velocidad del partido (GPS)",
+      "shot_accuracy_football_pct": "Test de tiro de fútbol: porcentaje de aciertos",
+      "throw_accuracy_handball_pct": "Test de lanzamiento de balonmano: porcentaje de aciertos"
     },
     "meaning": {
       "ck_u_l": "Una enzima cuyo nivel en sangre sube tras una carga no habitual. La variación entre personas es muy grande — solo es comparable contigo mismo.",
@@ -89,7 +97,14 @@
       "shoulder_rom_deg": "El rango de movimiento del hombro en grados. Un cribado; anota el lado, la dirección y el método de medición en la nota.",
       "body_mass_change_pct": "El cambio porcentual de la masa corporal entre antes y después de un esfuerzo. Una observación, no un rendimiento ni una valoración de la pérdida de líquidos.",
       "sebt_composite_pct": "El alcance promedio en todas las direcciones, como porcentaje de la longitud de la pierna. Un cribado de equilibrio, no una medida de rendimiento.",
-      "ankle_dorsiflexion_deg": "Hasta dónde puede flexionarse el tobillo hacia arriba, en grados. Un cribado de movilidad; anota el lado y el método de medición en la nota."
+      "ankle_dorsiflexion_deg": "Hasta dónde puede flexionarse el tobillo hacia arriba, en grados. Un cribado de movilidad; anota el lado y el método de medición en la nota.",
+      "uq_y_balance_pct": "El alcance medio de la mano libre en tres direcciones, como porcentaje de la longitud del brazo. Es un cribado de estabilidad, no una medida de rendimiento; anotar el lado y el kit en la nota.",
+      "shoulder_jps_deg": "El error en grados al reproducir una posición articular aprendida previamente. Es un cribado; menor significa más preciso, no mejor entrenado.",
+      "lateral_scapular_slide_cm": "La diferencia entre lados en la distancia entre la escápula y la columna, en centímetros. Es un cribado, no un rendimiento; anotar la posición del brazo y el evaluador en la nota.",
+      "gps_match_distance_km": "La distancia que registra un sensor GPS durante un partido. Solo comparable con el mismo sensor y la misma duración del partido; no es una valoración del rendimiento.",
+      "hsr_distance_m": "La distancia por encima del umbral que tu sistema GPS cuenta como alta velocidad. El umbral difiere entre sistemas; anotarlo en la nota.",
+      "shot_accuracy_football_pct": "El porcentaje de aciertos, a partir de los disparos y aciertos del test de tiro. Un registro de habilidad, no un eje de rendimiento; anotar la distancia, el balón y la pierna en la nota.",
+      "throw_accuracy_handball_pct": "El porcentaje de aciertos, a partir de los lanzamientos y aciertos del test de lanzamiento. Un registro de habilidad, no un eje de rendimiento; anotar la distancia, el balón y la técnica de lanzamiento en la nota."
     }
   },
   "procedure": {

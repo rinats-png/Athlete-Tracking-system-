@@ -12,10 +12,8 @@ import { rationaleFor } from '../src/data/sportRationale'
  * Kampf-, Ausdauer- und Einsatzsport. Mannschaftssport, Leichtathletik,
  * Rudern und Kraftdreikampf fehlten ganz.
  *
- * Der teuerste Fehler wäre, dabei die Fussballsperre stillschweigend
- * aufzuheben: sie ist eine Grundsatzentscheidung des Auftraggebers und wird
- * nicht durch eine Datenlieferung ausser Kraft gesetzt. Dafür steht der
- * letzte Fall.
+ * Die frühere Fußballsperre hat der Auftraggeber ausdrücklich aufgehoben
+ * (Testbibliothek, Welle 3); der letzte Fall hält das fest.
  */
 
 test.describe('Neue Disziplinen', () => {
@@ -35,12 +33,19 @@ test.describe('Neue Disziplinen', () => {
     }
   })
 
-  test('ihre Herkunft ist als Mastertabelle gekennzeichnet', () => {
+  test('ihre Herkunft ist gekennzeichnet: Mastertabelle oder ergänzt mit Grund', () => {
     // Zielgruppendokument und Mastertabelle sind zwei Quellen mit
     // verschiedener Belegkraft — das muss am Eintrag ablesbar bleiben.
+    // Spätere Ergänzungen (Testbibliothek) tragen ihren Grund und nie ein Profil.
     for (const discipline of TABLE_DISCIPLINES) {
       for (const entry of discipline.tests) {
-        expect(entry.provenance, `${discipline.id} -> ${entry.slug}`).toBe('master_table')
+        const id = `${discipline.id} -> ${entry.slug}`
+        if (entry.provenance === 'addition') {
+          expect(entry.role, id).toBe('optional')
+          expect(entry.reason?.length ?? 0, id).toBeGreaterThan(10)
+        } else {
+          expect(entry.provenance, id).toBe('master_table')
+        }
       }
     }
   })
@@ -53,11 +58,13 @@ test.describe('Neue Disziplinen', () => {
     }
   })
 
-  test('Fussball bleibt gesperrt', () => {
-    // Die Mastertabelle nennt ihn. Das hebt die Sperre nicht auf.
-    expect(BLOCKED_DISCIPLINES.map((b) => b.id)).toContain('football')
-    expect(DISCIPLINES.map((d) => d.id)).not.toContain('football')
-    expect(DISCIPLINES.map((d) => d.id)).not.toContain('soccer')
+  test('Fußball ist freigegeben und steht nicht unter den Mastertabellen-Disziplinen', () => {
+    // Der Auftraggeber hat die Sperre mit Welle 3 der Testbibliothek aufgehoben.
+    // Die Disziplin stammt aus der Testbibliothek, nicht aus der Mastertabelle.
+    expect(BLOCKED_DISCIPLINES).toEqual([])
+    expect(DISCIPLINES.map((d) => d.id)).toContain('football')
+    expect(TABLE_DISCIPLINES.map((d) => d.id)).not.toContain('football')
+    expect(coreSlugs(disciplineById('football')!).length).toBeGreaterThan(0)
   })
 })
 

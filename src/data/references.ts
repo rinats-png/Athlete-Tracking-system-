@@ -797,10 +797,10 @@ export const REFERENCE_GAPS: ReferenceGap[] = [
     },
   },
   {
-    subject: 'Sprint 20/30 m — Normen nur für Kohorten, die diese App nicht führt',
+    subject: 'Sprint 20/30 m — Normen nur für männliche Nachwuchsspieler',
     testSlugs: ['sprint_10m', 'sprint_20m', 'sprint_30m', 'sprint_40yd'],
     reason:
-      'Zentile für 5 m und 30 m liegen vor, erhoben an 1.745 Datenpunkten männlicher Nachwuchsspieler (U11–U19) — und zwar im Fussball, einer Disziplin, die diese App ausdrücklich nicht führt. Die Arbeit zeigt zudem, dass die biologische Reife das Ergebnis stärker verschiebt als das Lebensalter: eine Norm nach Lebensalter ordnet spät entwickelte Jugendliche systematisch falsch ein. Eine Zentiltabelle einer Sportart, die es hier nicht gibt, auf alle Sprinter zu übertragen, wäre eine Aussage über Menschen, die die Quelle nicht deckt.',
+      'Zentile für 5 m und 30 m liegen vor, erhoben an 1.745 Datenpunkten männlicher Nachwuchsspieler (U11–U19) im Fussball. Die Arbeit zeigt zudem, dass die biologische Reife das Ergebnis stärker verschiebt als das Lebensalter: eine Norm nach Lebensalter ordnet spät entwickelte Jugendliche systematisch falsch ein. Eine Zentiltabelle einer Nachwuchs-Kohorte auf alle Sprinter zu übertragen, wäre eine Aussage über Menschen, die die Quelle nicht deckt.',
     source: {
       study:
         'Ruf et al. 2024, Pediatr Exerc Sci 36(4):192–200 — Sprintzentile nach chronologischem und skelettalem Alter',

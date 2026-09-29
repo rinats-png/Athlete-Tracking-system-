@@ -9,7 +9,7 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
 |---|---|---|
 | 1 | Kampfsport (Judo, Ringen, Boxen, BJJ, MMA, Karate, Taekwondo, Fechten, Pencak Silat) | übertragen |
 | 2 | Laufen, Radfahren, Schwimmen, Triathlon, Rudern | übertragen |
-| 3 | Teamsport (Fußball, Basketball, Handball, Volleyball, Rugby, Cricket) | offen |
+| 3 | Teamsport (Fußball, Basketball, Handball, Volleyball, Rugby, Cricket) | übertragen |
 | 4 | Kraftsport, Allgemein, HYROX, Tactical | offen |
 | 5 | Recovery, Thermal, NIRS, Ü40+ | offen |
 
@@ -35,6 +35,14 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
   Reaktionszeit, Atemdruck) sind Beobachtungswerte: erfasst, nicht bewertet.
 - **Nicht übernommen:** SCAT3 (ärztlich, §82), ANT (lizenzierte Software), Roundhouse-Kinematik
   (3D-Analyse); PVT und Stroop (validierte Reizsoftware), VISA-A (lizenzierter Fragebogen).
+- **Fußball** war gesperrt (`BLOCKED_DISCIPLINES`); der Auftraggeber hat die Sperre mit Welle 3
+  aufgehoben. Die Liste bleibt als Mechanismus, ist aber leer. Fußball steht als Disziplin in
+  `sportProfiles.ts` (`TEAM_FOOTBALL`); Kerntests sind nur die universellen (Sprint, CMJ), die
+  Tests der Bibliothek sind Ergänzungen. Die Gewichte sind eine Voreinstellung der App.
+- **Technikwerte** (Schuss- und Wurfgenauigkeit) sind Beobachtungswerte der Gruppe «Technik»:
+  keine Leistungsachse, keine Bewertung. GPS-Strecke und Hochgeschwindigkeitsstrecke sind
+  Sensor-Beobachtungswerte.
+- **Doppelt im Dokument:** Schulter-ER/IR (Handball) ist derselbe Wert wie in Schwimmen.
 - **Rudern** hat im Katalog keine Disziplin. Die Ruder-Tests (500 m, 30 s Leistung) und der
   1000-m-Lauf stehen im Katalog, sind aber keiner Disziplin zugeordnet.
 - **Quellenfehler:** Der 10-km-Lauf nennt in der Quelle «10,000 km»; übernommen sind 10 km.

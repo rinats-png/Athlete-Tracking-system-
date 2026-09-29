@@ -748,4 +748,48 @@ export const TEST_CLASSIFICATION: Record<string, TestClassification> = {
     dimensionMetrics: { endurance: 'durationSeconds' },
     direction: 'lower_is_better',
   },
+
+  // --- Testbibliothek, Protokoll 1.0 (Welle 2 (Laufen, Rad, Schwimmen, Triathlon, Rudern)) -------------------------------
+  yo_yo_ir1: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'totalDistanceM' },
+    direction: 'higher_is_better',
+  },
+  repeated_sprint_ability: {
+    category: 'speed',
+    dimension: 'power',
+    dimensionMetrics: { power: 'meanSprintTimeS' },
+    direction: 'lower_is_better',
+  },
+  approach_vertical_jump: {
+    category: 'power',
+    dimension: 'power',
+    dimensionMetrics: { power: 'jumpHeightCm' },
+    direction: 'higher_is_better',
+  },
+  ckcuest: {
+    category: 'strength_endurance',
+    dimension: 'strength_endurance',
+    dimensionMetrics: { strength_endurance: 'touches' },
+    direction: 'higher_is_better',
+  },
+  modified_push_up_test: {
+    category: 'strength_endurance',
+    dimension: 'strength_endurance',
+    dimensionMetrics: { strength_endurance: 'reps' },
+    direction: 'higher_is_better',
+  },
+  eccentric_adductor_strength: {
+    category: 'max_strength',
+    dimension: 'max_strength',
+    dimensionMetrics: { max_strength: 'peakForceN' },
+    direction: 'higher_is_better',
+  },
+  isometric_adduction_single_leg: {
+    category: 'max_strength',
+    dimension: 'max_strength',
+    dimensionMetrics: { max_strength: 'peakForceN' },
+    direction: 'higher_is_better',
+  },
 }

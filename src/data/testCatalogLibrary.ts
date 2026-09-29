@@ -646,4 +646,174 @@ export const LIBRARY_TESTS: TestBlueprint[] = [
     equipmentIds: [['track', 'measured_course'], ['stopwatch']],
     equipment: { de: "Laufbahn oder vermessene Strecke, Stoppuhr", en: "Running track or measured course, stopwatch" },
   },
+  {
+    slug: 'yo_yo_ir1',
+    primaryMetric: 'totalDistanceM',
+    primaryUnit: "m",
+    fields: [
+      { key: 'totalDistanceM', type: 'integer', unit: "m", required: true, min: 40, max: 4000 },
+      RPE,
+    ],
+    protocol: { mode: 'attempts', attempts: 1 },
+    requiresBodyWeight: false,
+    derivedMetrics: [],
+    sortOrder: 750,
+    name: { de: "Yo-Yo Intermittent Recovery Test, Stufe 1", en: "Yo-Yo intermittent recovery test, level 1" },
+    shortName: { de: "Yo-Yo IR1", en: "Yo-Yo IR1" },
+    summary: { de: "Intermittierende aerobe Leistungsfähigkeit mit kurzen Erholungspausen.", en: "Intermittent aerobic performance with short recovery breaks." },
+    instructions: { de: "Zwischen zwei 20-m-Linien im Audio-Takt hin und zurück laufen. Nach jedem 40-m-Shuttle 10 s aktive Erholung in der 5-m-Zone. Geschwindigkeit steigt stufenweise.", en: "Run back and forth between two 20 m lines to the audio beep. After each 40 m shuttle, take 10 s of active recovery in the 5 m zone. Speed increases stepwise." },
+    equipmentIds: [['measured_course', 'cones'], ['audio_protocol']],
+    equipment: { de: "Vermessene Strecke mit Markierungen (20 m plus 5 m Erholungszone), Yo-Yo-IR1-Audio", en: "Measured course with markers (20 m plus 5 m recovery zone), Yo-Yo IR1 audio" },
+  },
+  {
+    slug: 'repeated_sprint_ability',
+    primaryMetric: 'meanSprintTimeS',
+    primaryUnit: "s",
+    fields: [
+      { key: 'sprint1S', type: 'number', unit: "s", required: true, min: 2, max: 15, step: 0.01 },
+      { key: 'sprint2S', type: 'number', unit: "s", required: true, min: 2, max: 15, step: 0.01 },
+      { key: 'sprint3S', type: 'number', unit: "s", required: true, min: 2, max: 15, step: 0.01 },
+      { key: 'sprint4S', type: 'number', unit: "s", required: true, min: 2, max: 15, step: 0.01 },
+      { key: 'sprint5S', type: 'number', unit: "s", required: true, min: 2, max: 15, step: 0.01 },
+      { key: 'sprint6S', type: 'number', unit: "s", required: true, min: 2, max: 15, step: 0.01 },
+    ],
+    protocol: { mode: 'attempts', attempts: 6, targetDistanceM: 30 },
+    requiresBodyWeight: false,
+    deviceBound: 'high',
+    derivedMetrics: ['meanSprintTimeS', 'rsaDecrementPercent'],
+    derive: (values, _ctx, put) => {
+      const times = [values.sprint1S, values.sprint2S, values.sprint3S, values.sprint4S, values.sprint5S, values.sprint6S]
+      if (times.some((t) => t == null || !Number.isFinite(t) || t <= 0)) return
+      const list = times as number[]
+      const best = Math.min(...list)
+      const mean = list.reduce((a, c) => a + c, 0) / list.length
+      put('meanSprintTimeS', Math.round(mean * 100) / 100)
+      // Leistungsabfall: mittlere Zeit gegen die beste, in Prozent.
+      put('rsaDecrementPercent', Math.round((mean / best - 1) * 1000) / 10)
+    },
+    sortOrder: 751,
+    name: { de: "Repeated Sprint Ability (6 × 30 m)", en: "Repeated sprint ability (6 × 30 m)" },
+    shortName: { de: "RSA", en: "RSA" },
+    summary: { de: "Fähigkeit, wiederholte maximale Sprints mit kurzen Pausen aufrechtzuerhalten.", en: "Ability to sustain repeated maximal sprints with short breaks." },
+    instructions: { de: "Standardisiert aufwärmen. App-Standard: 6×30 m maximal sprinten. Zwischen Sprints 20 s aktive/passive Erholung.", en: "Warm up in a standardised way. App standard: sprint 6×30 m at maximum effort. 20 s active/passive recovery between sprints." },
+    equipmentIds: [['timing_gates'], ['cones']],
+    equipment: { de: "Zeitmessung mit Lichtschranken, Markierungen für die 30-m-Strecke", en: "Timing system with light gates, markers for the 30 m course" },
+  },
+  {
+    slug: 'approach_vertical_jump',
+    primaryMetric: 'jumpHeightCm',
+    primaryUnit: "cm",
+    fields: [
+      { key: 'jumpHeightCm', type: 'number', unit: "cm", required: true, min: 5, max: 120, step: 0.5 },
+    ],
+    protocol: { mode: 'attempts', attempts: 3 },
+    requiresBodyWeight: false,
+    deviceBound: 'high',
+    derivedMetrics: [],
+    sortOrder: 752,
+    name: { de: "Sprunghöhe mit Anlauf", en: "Approach vertical jump" },
+    shortName: { de: "Anlaufsprung", en: "Approach jump" },
+    summary: { de: "Vertikale Sprunghöhe mit Anlauf.", en: "Vertical jump height with approach." },
+    instructions: { de: "Standardisierten 2- oder 3-Schritt-Anlauf nutzen. Maximal abspringen und höchste Marke erreichen. 3 Versuche.", en: "Use a standardised 2- or 3-step approach. Jump maximally and reach the highest mark. 3 attempts." },
+    equipmentIds: [['jump_mat']],
+    equipment: { de: "Sprungmatte oder Messsystem (z. B. Vertec)", en: "Jump mat or measurement system (e.g. Vertec)" },
+  },
+  {
+    slug: 'ckcuest',
+    primaryMetric: 'touches',
+    primaryUnit: "Berührungen",
+    fields: [
+      { key: 'touches', type: 'integer', unit: "Berührungen", required: true, min: 0, max: 60 },
+      RPE,
+    ],
+    protocol: { mode: 'attempts', attempts: 3 },
+    requiresBodyWeight: false,
+    derivedMetrics: [],
+    sortOrder: 753,
+    name: { de: "Liegestütz-Berührungstest (CKCUEST)", en: "Closed kinetic chain upper extremity stability test (CKCUEST)" },
+    shortName: { de: "CKCUEST", en: "CKCUEST" },
+    summary: { de: "Geschlossene kinetische Kette: Schulterstabilität, Schnelligkeit und Oberkörperkontrolle.", en: "Closed kinetic chain: shoulder stability, speed and upper-body control." },
+    instructions: { de: "Liegestützposition mit Händen auf den Markierungen. Auf Start abwechselnd mit einer Hand die gegenüberliegende Markierung berühren. 15 s lang maximal viele gültige Berührungen.", en: "Assume the push-up position with hands on the markers. On start, alternately touch the opposite marker with one hand. Maximum number of valid touches in 15 s." },
+    equipmentIds: [['mat'], ['cones'], ['stopwatch']],
+    equipment: { de: "Matte, Markierungen im Abstand von 91,4 cm, Stoppuhr", en: "Mat, markers 91.4 cm apart, stopwatch" },
+  },
+  {
+    slug: 'modified_push_up_test',
+    primaryMetric: 'reps',
+    primaryUnit: "Wdh.",
+    fields: [
+      { key: 'reps', type: 'integer', unit: "Wdh.", required: true, min: 0, max: 150 },
+      RPE,
+    ],
+    protocol: { mode: 'attempts', attempts: 1 },
+    requiresBodyWeight: false,
+    derivedMetrics: [],
+    sortOrder: 754,
+    name: { de: "Modifizierter Liegestütztest", en: "Modified push-up test" },
+    shortName: { de: "Mod. Liegestütz", en: "Modified push-up" },
+    summary: { de: "Oberkörper-Kraftausdauer.", en: "Upper-body muscular endurance." },
+    instructions: { de: "Standardisierte modifizierte Ausgangsposition einnehmen. Brust bis definierte Tiefe absenken. Vollständig hochdrücken.", en: "Assume the standardised modified starting position. Lower the chest to a defined depth. Push up fully." },
+    equipmentIds: [['mat'], ['counter']],
+    equipment: { de: "Matte, Zähler", en: "Mat, counter" },
+  },
+  {
+    slug: 'eccentric_adductor_strength',
+    primaryMetric: 'peakForceN',
+    primaryUnit: "N",
+    fields: [
+      { key: 'forceLeftN', type: 'number', unit: "N", required: true, min: 20, max: 1500, step: 1 },
+      { key: 'forceRightN', type: 'number', unit: "N", required: true, min: 20, max: 1500, step: 1 },
+    ],
+    protocol: { mode: 'attempts', attempts: 3 },
+    requiresBodyWeight: false,
+    setting: 'lab',
+    deviceBound: 'critical',
+    derivedMetrics: ['peakForceN', 'asymmetryPercent'],
+    derive: (values, _ctx, put) => {
+      const left = values.forceLeftN
+      const right = values.forceRightN
+      if (left == null || right == null) return
+      // Die schwächere Seite begrenzt; die Asymmetrie steht daneben.
+      put('peakForceN', Math.min(left, right))
+      const high = Math.max(left, right)
+      put('asymmetryPercent', high > 0 ? Math.round((Math.abs(left - right) / high) * 1000) / 10 : 0)
+    },
+    sortOrder: 755,
+    name: { de: "Exzentrische Adduktorenkraft", en: "Eccentric adductor strength" },
+    shortName: { de: "Adduktoren exz.", en: "Adductors ecc." },
+    summary: { de: "Exzentrische Adduktorenkraft, relevant für Leistungsverfolgung und Leistenfunktion.", en: "Eccentric adductor strength, relevant for performance tracking and groin function." },
+    instructions: { de: "Standardisierte Seitenlage/Rückenlage gemäß gewähltem Protokoll. Dynamometer an definierter Stelle ansetzen. Maximale Adduktion gegen zunehmenden externen Druck halten.", en: "Standardised side-lying/supine position according to the chosen protocol. Apply the dynamometer at a defined point. Hold maximal adduction against increasing external pressure." },
+    equipmentIds: [['force_sensor']],
+    equipment: { de: "Handheld-Dynamometer oder fixiertes Kraftsystem", en: "Handheld dynamometer or fixed force system" },
+  },
+  {
+    slug: 'isometric_adduction_single_leg',
+    primaryMetric: 'peakForceN',
+    primaryUnit: "N",
+    fields: [
+      { key: 'forceLeftN', type: 'number', unit: "N", required: true, min: 20, max: 1500, step: 1 },
+      { key: 'forceRightN', type: 'number', unit: "N", required: true, min: 20, max: 1500, step: 1 },
+    ],
+    protocol: { mode: 'attempts', attempts: 3 },
+    requiresBodyWeight: false,
+    setting: 'lab',
+    deviceBound: 'critical',
+    derivedMetrics: ['peakForceN', 'asymmetryPercent'],
+    derive: (values, _ctx, put) => {
+      const left = values.forceLeftN
+      const right = values.forceRightN
+      if (left == null || right == null) return
+      // Die schwächere Seite begrenzt; die Asymmetrie steht daneben.
+      put('peakForceN', Math.min(left, right))
+      const high = Math.max(left, right)
+      put('asymmetryPercent', high > 0 ? Math.round((Math.abs(left - right) / high) * 1000) / 10 : 0)
+    },
+    sortOrder: 756,
+    name: { de: "Isometrische Adduktion (ein Bein)", en: "Single-leg isometric adduction" },
+    shortName: { de: "Adduktion iso.", en: "Adduction iso." },
+    summary: { de: "Isometrische Adduktorenkraft eines Beins.", en: "Isometric adductor strength of one leg." },
+    instructions: { de: "Definierte Hüftposition einnehmen. Messpolster an standardisiertem Hebelarm platzieren. 3 maximale Adduktionskontraktionen 3–5 s je Seite.", en: "Assume a defined hip position. Place the measuring pad at a standardised lever arm. 3 maximal adduction contractions of 3–5 s per side." },
+    equipmentIds: [['force_sensor']],
+    equipment: { de: "Fixiertes Dynamometer oder Kraftsensor", en: "Fixed dynamometer or force sensor" },
+  },
 ]

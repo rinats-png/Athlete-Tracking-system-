@@ -79,9 +79,9 @@ test.describe("Disziplinen", () => {
     }
   });
 
-  test("Fussball bleibt ausgeschlossen", () => {
-    // Als Datenregel und nicht als Auslassung: eine spätere Erweiterung soll
-    // den Ausschluss nicht versehentlich rückgängig machen.
+  test("keine gesperrte Disziplin ist im Katalog", () => {
+    // Fußball war gesperrt und ist seit Welle 3 der Testbibliothek freigegeben;
+    // die Liste ist leer. Wird künftig etwas gesperrt, gilt diese Prüfung.
     const blocked = new Set(BLOCKED_DISCIPLINES.map((b) => b.id));
     for (const d of DISCIPLINES) {
       expect(blocked.has(d.id), d.id).toBe(false);

@@ -14,7 +14,7 @@ import { ProcedureContent } from '@/features/tests/ProcedurePanel'
 import type { LibraryProcedure } from '@/data/testProcedureLibrary'
 import type { TestProcedure } from '@/data/testProcedure'
 
-const GROUPS: ObservationGroup[] = ['recovery', 'load', 'environment', 'sensor', 'body', 'screening']
+const GROUPS: ObservationGroup[] = ['recovery', 'load', 'environment', 'sensor', 'body', 'screening', 'skill']
 
 /**
  * Beobachtungswerte erfassen und im Verlauf sehen.

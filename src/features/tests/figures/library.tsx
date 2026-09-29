@@ -358,7 +358,7 @@ function PunchForce() {
     </>
   )
 }
-function Sprint({ meters, lead }: { meters: number; lead?: boolean }) {
+function Sprint({ meters, lead, label }: { meters: number; lead?: boolean; label?: string }) {
   return (
     <>
       <line x1="20" y1="70" x2="300" y2="70" style={S.floor} />
@@ -366,7 +366,7 @@ function Sprint({ meters, lead }: { meters: number; lead?: boolean }) {
       {lead && <line x1="40" y1="64" x2="40" y2="116" style={S.thin} />}
       <line x1="70" y1="60" x2="70" y2="120" style={{ ...S.acc, strokeWidth: 3 }} />
       <line x1="270" y1="60" x2="270" y2="120" style={{ ...S.acc, strokeWidth: 3 }} />
-      <Dim a={[70, 138]} b={[270, 138]} label={`${meters} m`} off={20} />
+      <Dim a={[70, 138]} b={[270, 138]} label={label ?? `${meters} m`} off={20} />
       {lead && <Dim a={[40, 126]} b={[70, 126]} label="50 cm" off={20} />}
       <Arrow from={[80, 90]} to={[258, 90]} />
       <T x={70} y={54}>0</T>
@@ -600,6 +600,105 @@ function SingleLegHop() {
   )
 }
 
+const Cone = ({ x, y }: { x: number; y: number }) => <circle cx={x} cy={y} r={4} style={S.dotInk} />
+
+function YoYo() {
+  // 20 m zwischen den Linien, 5 m Erholungszone hinter der Startlinie (8 px je m).
+  return (
+    <>
+      <rect x="50" y="56" width="40" height="80" style={S.mat} />
+      <line x1="90" y1="46" x2="90" y2="146" style={{ ...S.acc, strokeWidth: 3 }} />
+      <line x1="250" y1="46" x2="250" y2="146" style={{ ...S.acc, strokeWidth: 3 }} />
+      <Arrow from={[98, 84]} to={[242, 84]} />
+      <Arrow from={[242, 108]} to={[98, 108]} />
+      <Arrow from={[84, 108]} to={[58, 108]} st={S.thin} />
+      <T x={70} y={42}>10 s</T>
+      <Dim a={[90, 156]} b={[250, 156]} label="20 m" off={20} />
+      <Dim a={[50, 172]} b={[90, 172]} label="5 m" off={20} />
+    </>
+  )
+}
+function GoalShot({ dist, numbered }: { dist: string; numbered?: boolean }) {
+  const cx = [126.7, 160, 193.3]
+  return (
+    <>
+      <rect x="110" y="14" width="100" height="50" style={S.mat} />
+      <line x1="143.3" y1="14" x2="143.3" y2="64" style={S.thin} />
+      <line x1="176.7" y1="14" x2="176.7" y2="64" style={S.thin} />
+      <line x1="110" y1="39" x2="210" y2="39" style={S.thin} />
+      {numbered && cx.map((x, i) => <T key={`a${i}`} x={x} y={30} k="txtInk">{i + 1}</T>)}
+      {numbered && cx.map((x, i) => <T key={`b${i}`} x={x} y={55} k="txtInk">{i + 4}</T>)}
+      <line x1="90" y1="100" x2="230" y2="100" style={{ ...S.body, strokeWidth: 3 }} />
+      <line x1="160" y1="100" x2="160" y2="166" style={S.dash} />
+      <circle cx="160" cy="170" r="4" style={S.dotAcc} />
+      <Dim a={[240, 100]} b={[240, 170]} label={dist} />
+    </>
+  )
+}
+function UpperQuarterY() {
+  return (
+    <>
+      <rect x="148" y="98" width="24" height="24" rx="6" style={S.mat} />
+      <Arrow from={[144, 110]} to={[70, 110]} />
+      <Arrow from={[174, 122]} to={[240, 168]} />
+      <Arrow from={[174, 98]} to={[240, 44]} />
+      <T x={62} y={114} a="end">1</T>
+      <T x={248} y={172} a="start">2</T>
+      <T x={248} y={44} a="start">3</T>
+    </>
+  )
+}
+function Ckcuest() {
+  return (
+    <>
+      <rect x="78" y="76" width="24" height="16" rx="4" style={S.mat} />
+      <rect x="218" y="76" width="24" height="16" rx="4" style={S.mat} />
+      <Head x={160} y={40} r={8} />
+      <Poly p={[[90, 84], [160, 84], [230, 84]]} />
+      <Poly p={[[160, 92], [160, 142]]} />
+      <Arrow from={[104, 70]} to={[214, 100]} />
+      <Arrow from={[216, 70]} to={[106, 100]} />
+      <Dim a={[90, 162]} b={[230, 162]} label="91.4 cm" off={20} />
+    </>
+  )
+}
+function Illinois() {
+  // 10 × 5 m bei 20 px je m; vier zentrale Kegel in gleichem Abstand.
+  return (
+    <>
+      <rect x="60" y="50" width="200" height="100" style={{ ...S.mat, fill: 'none' }} />
+      <Cone x={60} y={50} />
+      <Cone x={60} y={150} />
+      <Cone x={260} y={50} />
+      <Cone x={260} y={150} />
+      {[61, 127, 193, 259].map((x) => <Cone key={x} x={x} y={100} />)}
+      <T x={48} y={154} a="end" k="txtInk">S</T>
+      <Dim a={[61, 38]} b={[127, 38]} label="3.3 m" />
+      <Dim a={[60, 164]} b={[260, 164]} label="10 m" off={20} />
+      <Dim a={[276, 50]} b={[276, 150]} label="5 m" />
+    </>
+  )
+}
+function TTest() {
+  // A–B 9,14 m (140 px), B–C und B–D je 4,57 m (70 px).
+  return (
+    <>
+      <Dot x={160} y={172} k="A" />
+      <Dot x={160} y={34} k="B" on />
+      <Dot x={90} y={34} k="C" />
+      <Dot x={230} y={34} k="D" />
+      <Arrow from={[156, 160]} to={[156, 46]} />
+      <Arrow from={[150, 34]} to={[102, 34]} st={S.thin} />
+      <Arrow from={[96, 20]} to={[224, 20]} st={S.thin} />
+      <Arrow from={[218, 34]} to={[170, 34]} st={S.thin} />
+      <Arrow from={[164, 46]} to={[164, 160]} st={S.thin} />
+      <Dim a={[90, 84]} b={[160, 84]} label="4.57 m" />
+      <Dim a={[160, 84]} b={[230, 84]} label="4.57 m" />
+      <Dim a={[272, 172]} b={[272, 34]} label="9.14 m" />
+    </>
+  )
+}
+
 const FIGS: Record<string, () => ReactNode> = {
   sjft: SjftMat,
   swft: SwftMat,
@@ -638,6 +737,20 @@ const FIGS: Record<string, () => ReactNode> = {
   star_excursion: StarExcursion,
   single_leg_hop: SingleLegHop,
   sprint_20m: () => <Sprint meters={20} />,
+  yoyo_ir: YoYo,
+  rsa_30m: () => (
+    <>
+      <Sprint meters={30} />
+      <T x={160} y={24}>6 × 30 m · 20 s</T>
+    </>
+  ),
+  sprint_40yd: () => <Sprint meters={40} label="40 yd" />,
+  shot_football: () => <GoalShot dist="16.5 m" />,
+  shot_handball: () => <GoalShot dist="7 m" numbered />,
+  uq_y_balance: UpperQuarterY,
+  ckcuest: Ckcuest,
+  illinois: Illinois,
+  t_test: TTest,
 }
 
 export const FIGURE_IDS = Object.keys(FIGS)

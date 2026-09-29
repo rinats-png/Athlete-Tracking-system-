@@ -19,7 +19,8 @@
       "sensor": "Sensoren",
       "body": "Lichaam",
       "screening": "Screening",
-      "load": "Belasting"
+      "load": "Belasting",
+      "skill": "Vaardigheid"
     },
     "sources": {
       "self": "Zelf vast te leggen, zonder apparaat.",
@@ -57,7 +58,14 @@
       "shoulder_rom_deg": "Schouderbeweeglijkheid",
       "body_mass_change_pct": "Verandering lichaamsmassa voor/na de wedstrijd",
       "sebt_composite_pct": "Star Excursion Balance (composiet)",
-      "ankle_dorsiflexion_deg": "Enkeldorsaalflexie"
+      "ankle_dorsiflexion_deg": "Enkeldorsaalflexie",
+      "uq_y_balance_pct": "Upper quarter Y-balance (composiet)",
+      "shoulder_jps_deg": "Schouder-gewrichtspositiezin",
+      "lateral_scapular_slide_cm": "Laterale scapulaire slide (LSST)",
+      "gps_match_distance_km": "Totale wedstrijdafstand (GPS)",
+      "hsr_distance_m": "Hoge-snelheidsafstand in de wedstrijd (GPS)",
+      "shot_accuracy_football_pct": "Schiettest voetbal: trefferpercentage",
+      "throw_accuracy_handball_pct": "Werptest handbal: trefferpercentage"
     },
     "meaning": {
       "ck_u_l": "Een enzym waarvan de bloedspiegel stijgt na ongewone belasting. De variatie tussen personen is zeer groot — alleen met jezelf vergelijkbaar.",
@@ -89,7 +97,14 @@
       "shoulder_rom_deg": "Het bewegingsbereik van de schouder in graden. Een screening; noteer zijde, richting en meetmethode in de notitie.",
       "body_mass_change_pct": "De procentuele verandering van de lichaamsmassa tussen voor en na een inspanning. Een observatie, geen prestatie en geen oordeel over vochtverlies.",
       "sebt_composite_pct": "De gemiddelde reikafstand over alle richtingen, als percentage van de beenlengte. Een evenwichtsscreening, geen prestatiemaat.",
-      "ankle_dorsiflexion_deg": "Hoe ver de enkel omhoog kan buigen, in graden. Een mobiliteitsscreening; noteer zijde en meetmethode in de notitie."
+      "ankle_dorsiflexion_deg": "Hoe ver de enkel omhoog kan buigen, in graden. Een mobiliteitsscreening; noteer zijde en meetmethode in de notitie.",
+      "uq_y_balance_pct": "Het gemiddelde bereik van de vrije hand in drie richtingen, als percentage van de armlengte. Een stabiliteitsscreening, geen prestatiemeting; noteer zijde en kit in de notitie.",
+      "shoulder_jps_deg": "De fout in graden bij het reproduceren van een eerder aangeleerde gewrichtspositie. Een screening; kleiner betekent nauwkeuriger, niet beter getraind.",
+      "lateral_scapular_slide_cm": "Het zijverschil in de afstand tussen schouderblad en wervelkolom, in centimeters. Een screening, geen prestatie; noteer armpositie en onderzoeker in de notitie.",
+      "gps_match_distance_km": "De afstand die een GPS-sensor over een wedstrijd registreert. Alleen vergelijkbaar bij dezelfde sensor en wedstrijdduur; geen prestatiebeoordeling.",
+      "hsr_distance_m": "De afstand boven de drempel die je GPS-systeem als hoge snelheid telt. De drempel verschilt per systeem; noteer hem in de notitie.",
+      "shot_accuracy_football_pct": "Het aandeel treffers in procent, uit de schoten en treffers van de schiettest. Een vaardigheidsregistratie, geen prestatie-as; noteer afstand, bal en voet in de notitie.",
+      "throw_accuracy_handball_pct": "Het aandeel treffers in procent, uit de worpen en treffers van de werptest. Een vaardigheidsregistratie, geen prestatie-as; noteer afstand, bal en worptechniek in de notitie."
     }
   },
   "procedure": {

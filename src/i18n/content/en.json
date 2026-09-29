@@ -4479,10 +4479,6 @@
     "en": "Touch/cross the target.",
     "de": "Ziel berühren/überqueren."
   },
-  "Return to the center.": {
-    "en": "Return to the center.",
-    "de": "Zur Mitte zurückkehren."
-  },
   "Complete 6 valid random attempts.": {
     "en": "Complete 6 valid random attempts.",
     "de": "6 gültige zufällige Versuche absolvieren."
@@ -4887,10 +4883,6 @@
     "en": "Complete a total of five 5-m segments according to the specified variant.",
     "de": "Insgesamt fünf 5-m-Abschnitte gemäß festgelegter Variante absolvieren."
   },
-  "Record time.": {
-    "en": "Record time.",
-    "de": "Zeit erfassen."
-  },
   "5 m between turning lines; 5 segments.": {
     "en": "5 m between turning lines; 5 segments.",
     "de": "5 m zwischen Wendelinien; 5 Abschnitte."
@@ -4994,10 +4986,6 @@
   "Measure leg length from ASIS to medial malleolus.": {
     "en": "Measure leg length from ASIS to medial malleolus.",
     "de": "Beinlänge ASIS bis medialer Malleolus messen."
-  },
-  "Stand on one leg in the center.": {
-    "en": "Stand on one leg in the center.",
-    "de": "Auf einem Bein im Zentrum stehen."
   },
   "Reach as far as possible in the anterior direction with the free foot and return in a controlled manner.": {
     "en": "Reach as far as possible in the anterior direction with the free foot and return in a controlled manner.",
@@ -5711,10 +5699,6 @@
     "en": "Run 1,000 m at maximal effort. Record the time.",
     "de": "1.000 m maximal laufen. Zeit erfassen."
   },
-  "Best time s. Running: best time s. Source norm: M Excellent <4.0; Good 4.0–4.2; Average 4.3–4.4; Fair 4.5–4.6; Poor >4.6. F: <4.5; 4.5–4.6; 4.7–4.8; 4.9–5.0; >5.0.": {
-    "en": "Best time s. Running: best time s. Source norm: M Excellent <4.0; Good 4.0–4.2; Average 4.3–4.4; Fair 4.5–4.6; Poor >4.6. F: <4.5; 4.5–4.6; 4.7–4.8; 4.9–5.0; >5.0.",
-    "de": "Bestzeit s. Laufen: Bestzeit s. Quellen-Norm: M Excellent <4,0; Good 4,0–4,2; Average 4,3–4,4; Fair 4,5–4,6; Poor >4,6. F: <4,5; 4,5–4,6; 4,7–4,8; 4,9–5,0; >5,0."
-  },
   "BJJ: ml/kg/min. BJJ source range approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69. Treadmill: ml/kg/min. FRIEND e.g. M 20–29 44.5; 40–49 39.0; 60–69 34.1; F 33.9 /28.9 /22.6. Cycling: ml/kg/min; trained approx. 50–60, elite up to ~80–90+ per source range.": {
     "en": "BJJ: ml/kg/min. BJJ source range approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69. Treadmill: ml/kg/min. FRIEND e.g. M 20–29 44.5; 40–49 39.0; 60–69 34.1; F 33.9 /28.9 /22.6. Cycling: ml/kg/min; trained approx. 50–60, elite up to ~80–90+ per source range.",
     "de": "BJJ: ml/kg/min. Quellenband BJJ ca. 42–52. MMA: ml/kg/min; Quellen: 63,23±5,50 in einer Elitekohorte, weitere Kohorten ca. 48,1–60; obere Werte ~68–69. Laufband: ml/kg/min. FRIEND z.B. M 20–29 44,5; 40–49 39,0; 60–69 34,1; F 33,9 /28,9 /22,6. Radfahren: ml/kg/min; trainiert ca. 50–60, Elite bis ~80–90+ laut Quellenband."
@@ -6086,10 +6070,6 @@
   "42.195 km.": {
     "en": "42.195 km.",
     "de": "42,195 km."
-  },
-  "Race/medical stop.": {
-    "en": "Race/medical stop.",
-    "de": "Wettkampf-/medizinischer Abbruch."
   },
   "Document course profile, weather and race status.": {
     "en": "Document course profile, weather and race status.",
@@ -6718,5 +6698,793 @@
   "Degrees or cm; side comparison.": {
     "en": "Degrees or cm; side comparison.",
     "de": "Grad oder cm; Seitenvergleich."
+  },
+  "Dynamometer or force sensor": {
+    "en": "Dynamometer or force sensor",
+    "de": "Dynamometer oder Kraftsensor"
+  },
+  "Football (soccer)": {
+    "en": "Football (soccer)",
+    "de": "Fußball"
+  },
+  "Repeated sprints, changes of direction and endurance over ninety minutes. What is measured is what carries acceleration and repeatability — not game understanding.": {
+    "en": "Repeated sprints, changes of direction and endurance over ninety minutes. What is measured is what carries acceleration and repeatability — not game understanding.",
+    "de": "Wiederholte Sprints, Richtungswechsel und Ausdauer über neunzig Minuten. Gemessen wird, was den Antritt und die Wiederholbarkeit trägt — nicht das Spielverständnis."
+  },
+  "Yo-Yo intermittent recovery test, level 1": {
+    "en": "Yo-Yo intermittent recovery test, level 1",
+    "de": "Yo-Yo Intermittent Recovery Test, Stufe 1"
+  },
+  "Yo-Yo IR1": {
+    "en": "Yo-Yo IR1",
+    "de": "Yo-Yo IR1"
+  },
+  "Intermittent aerobic performance with short recovery breaks.": {
+    "en": "Intermittent aerobic performance with short recovery breaks.",
+    "de": "Intermittierende aerobe Leistungsfähigkeit mit kurzen Erholungspausen."
+  },
+  "Run back and forth between two 20 m lines to the audio beep. After each 40 m shuttle, take 10 s of active recovery in the 5 m zone. Speed increases stepwise.": {
+    "en": "Run back and forth between two 20 m lines to the audio beep. After each 40 m shuttle, take 10 s of active recovery in the 5 m zone. Speed increases stepwise.",
+    "de": "Zwischen zwei 20-m-Linien im Audio-Takt hin und zurück laufen. Nach jedem 40-m-Shuttle 10 s aktive Erholung in der 5-m-Zone. Geschwindigkeit steigt stufenweise."
+  },
+  "Measured course with markers (20 m plus 5 m recovery zone), Yo-Yo IR1 audio": {
+    "en": "Measured course with markers (20 m plus 5 m recovery zone), Yo-Yo IR1 audio",
+    "de": "Vermessene Strecke mit Markierungen (20 m plus 5 m Erholungszone), Yo-Yo-IR1-Audio"
+  },
+  "Repeated sprint ability (6 × 30 m)": {
+    "en": "Repeated sprint ability (6 × 30 m)",
+    "de": "Repeated Sprint Ability (6 × 30 m)"
+  },
+  "RSA": {
+    "en": "RSA",
+    "de": "RSA"
+  },
+  "Ability to sustain repeated maximal sprints with short breaks.": {
+    "en": "Ability to sustain repeated maximal sprints with short breaks.",
+    "de": "Fähigkeit, wiederholte maximale Sprints mit kurzen Pausen aufrechtzuerhalten."
+  },
+  "Warm up in a standardised way. App standard: sprint 6×30 m at maximum effort. 20 s active/passive recovery between sprints.": {
+    "en": "Warm up in a standardised way. App standard: sprint 6×30 m at maximum effort. 20 s active/passive recovery between sprints.",
+    "de": "Standardisiert aufwärmen. App-Standard: 6×30 m maximal sprinten. Zwischen Sprints 20 s aktive/passive Erholung."
+  },
+  "Timing system with light gates, markers for the 30 m course": {
+    "en": "Timing system with light gates, markers for the 30 m course",
+    "de": "Zeitmessung mit Lichtschranken, Markierungen für die 30-m-Strecke"
+  },
+  "Approach vertical jump": {
+    "en": "Approach vertical jump",
+    "de": "Sprunghöhe mit Anlauf"
+  },
+  "Approach jump": {
+    "en": "Approach jump",
+    "de": "Anlaufsprung"
+  },
+  "Vertical jump height with approach.": {
+    "en": "Vertical jump height with approach.",
+    "de": "Vertikale Sprunghöhe mit Anlauf."
+  },
+  "Use a standardised 2- or 3-step approach. Jump maximally and reach the highest mark. 3 attempts.": {
+    "en": "Use a standardised 2- or 3-step approach. Jump maximally and reach the highest mark. 3 attempts.",
+    "de": "Standardisierten 2- oder 3-Schritt-Anlauf nutzen. Maximal abspringen und höchste Marke erreichen. 3 Versuche."
+  },
+  "Jump mat or measurement system (e.g. Vertec)": {
+    "en": "Jump mat or measurement system (e.g. Vertec)",
+    "de": "Sprungmatte oder Messsystem (z. B. Vertec)"
+  },
+  "Closed kinetic chain upper extremity stability test (CKCUEST)": {
+    "en": "Closed kinetic chain upper extremity stability test (CKCUEST)",
+    "de": "Liegestütz-Berührungstest (CKCUEST)"
+  },
+  "CKCUEST": {
+    "en": "CKCUEST",
+    "de": "CKCUEST"
+  },
+  "Closed kinetic chain: shoulder stability, speed and upper-body control.": {
+    "en": "Closed kinetic chain: shoulder stability, speed and upper-body control.",
+    "de": "Geschlossene kinetische Kette: Schulterstabilität, Schnelligkeit und Oberkörperkontrolle."
+  },
+  "Assume the push-up position with hands on the markers. On start, alternately touch the opposite marker with one hand. Maximum number of valid touches in 15 s.": {
+    "en": "Assume the push-up position with hands on the markers. On start, alternately touch the opposite marker with one hand. Maximum number of valid touches in 15 s.",
+    "de": "Liegestützposition mit Händen auf den Markierungen. Auf Start abwechselnd mit einer Hand die gegenüberliegende Markierung berühren. 15 s lang maximal viele gültige Berührungen."
+  },
+  "Mat, markers 91.4 cm apart, stopwatch": {
+    "en": "Mat, markers 91.4 cm apart, stopwatch",
+    "de": "Matte, Markierungen im Abstand von 91,4 cm, Stoppuhr"
+  },
+  "Modified push-up test": {
+    "en": "Modified push-up test",
+    "de": "Modifizierter Liegestütztest"
+  },
+  "Modified push-up": {
+    "en": "Modified push-up",
+    "de": "Mod. Liegestütz"
+  },
+  "Upper-body muscular endurance.": {
+    "en": "Upper-body muscular endurance.",
+    "de": "Oberkörper-Kraftausdauer."
+  },
+  "Assume the standardised modified starting position. Lower the chest to a defined depth. Push up fully.": {
+    "en": "Assume the standardised modified starting position. Lower the chest to a defined depth. Push up fully.",
+    "de": "Standardisierte modifizierte Ausgangsposition einnehmen. Brust bis definierte Tiefe absenken. Vollständig hochdrücken."
+  },
+  "Mat, counter": {
+    "en": "Mat, counter",
+    "de": "Matte, Zähler"
+  },
+  "Eccentric adductor strength": {
+    "en": "Eccentric adductor strength",
+    "de": "Exzentrische Adduktorenkraft"
+  },
+  "Adductors ecc.": {
+    "en": "Adductors ecc.",
+    "de": "Adduktoren exz."
+  },
+  "Eccentric adductor strength, relevant for performance tracking and groin function.": {
+    "en": "Eccentric adductor strength, relevant for performance tracking and groin function.",
+    "de": "Exzentrische Adduktorenkraft, relevant für Leistungsverfolgung und Leistenfunktion."
+  },
+  "Standardised side-lying/supine position according to the chosen protocol. Apply the dynamometer at a defined point. Hold maximal adduction against increasing external pressure.": {
+    "en": "Standardised side-lying/supine position according to the chosen protocol. Apply the dynamometer at a defined point. Hold maximal adduction against increasing external pressure.",
+    "de": "Standardisierte Seitenlage/Rückenlage gemäß gewähltem Protokoll. Dynamometer an definierter Stelle ansetzen. Maximale Adduktion gegen zunehmenden externen Druck halten."
+  },
+  "Handheld dynamometer or fixed force system": {
+    "en": "Handheld dynamometer or fixed force system",
+    "de": "Handheld-Dynamometer oder fixiertes Kraftsystem"
+  },
+  "Single-leg isometric adduction": {
+    "en": "Single-leg isometric adduction",
+    "de": "Isometrische Adduktion (ein Bein)"
+  },
+  "Adduction iso.": {
+    "en": "Adduction iso.",
+    "de": "Adduktion iso."
+  },
+  "Isometric adductor strength of one leg.": {
+    "en": "Isometric adductor strength of one leg.",
+    "de": "Isometrische Adduktorenkraft eines Beins."
+  },
+  "Assume a defined hip position. Place the measuring pad at a standardised lever arm. 3 maximal adduction contractions of 3–5 s per side.": {
+    "en": "Assume a defined hip position. Place the measuring pad at a standardised lever arm. 3 maximal adduction contractions of 3–5 s per side.",
+    "de": "Definierte Hüftposition einnehmen. Messpolster an standardisiertem Hebelarm platzieren. 3 maximale Adduktionskontraktionen 3–5 s je Seite."
+  },
+  "Fixed dynamometer or force sensor": {
+    "en": "Fixed dynamometer or force sensor",
+    "de": "Fixiertes Dynamometer oder Kraftsensor"
+  },
+  "Best time s. Running: best time s. Source norm: M Excellent <4.0; Good 4.0–4.2; Average 4.3–4.4; Fair 4.5–4.6; Poor >4.6. F: <4.5; 4.5–4.6; 4.7–4.8; 4.9–5.0; >5.0. Rugby: 10-, 20-, 30-m splits.": {
+    "en": "Best time s. Running: best time s. Source norm: M Excellent <4.0; Good 4.0–4.2; Average 4.3–4.4; Fair 4.5–4.6; Poor >4.6. F: <4.5; 4.5–4.6; 4.7–4.8; 4.9–5.0; >5.0. Rugby: 10-, 20-, 30-m splits.",
+    "de": "Bestzeit s. Laufen: Bestzeit s. Quellen-Norm: M Excellent <4,0; Good 4,0–4,2; Average 4,3–4,4; Fair 4,5–4,6; Poor >4,6. F: <4,5; 4,5–4,6; 4,7–4,8; 4,9–5,0; >5,0. Rugby: 10-,20-,30-m-Splits."
+  },
+  "Best time s. Basketball: best time; source band youth/professional approx. 2.5–3.5 s per level/sex.": {
+    "en": "Best time s. Basketball: best time; source band youth/professional approx. 2.5–3.5 s per level/sex.",
+    "de": "Bestzeit s. Basketball: Bestzeit; Quellenband Jugend/Profi ca. 2,5–3,5 s je Niveau/Geschlecht."
+  },
+  "Vertical explosive strength.": {
+    "en": "Vertical explosive strength.",
+    "de": "Vertikale Explosivkraft."
+  },
+  "Jump system/force plate.": {
+    "en": "Jump system/force plate.",
+    "de": "Jump-System/Kraftplatte."
+  },
+  "Perform the CMJ according to the standard.": {
+    "en": "Perform the CMJ according to the standard.",
+    "de": "CMJ nach Standard durchführen."
+  },
+  "cm/power; source: athletic cohorts, no universal CT norm.": {
+    "en": "cm/power; source: athletic cohorts, no universal CT norm.",
+    "de": "cm/Power; Quelle: sportliche Kohorten, keine universelle CT-Norm."
+  },
+  "Pre-planned change-of-direction speed.": {
+    "en": "Pre-planned change-of-direction speed.",
+    "de": "Vorgeplante Richtungswechselgeschwindigkeit."
+  },
+  "8 cones, 10×5-m rectangle, timing.": {
+    "en": "8 cones, 10×5-m rectangle, timing.",
+    "de": "8 Kegel, 10×5-m-Rechteck, Timing."
+  },
+  "Lie prone at the start.": {
+    "en": "Lie prone at the start.",
+    "de": "Bauchlage am Start."
+  },
+  "Sprint 10 m.": {
+    "en": "Sprint 10 m.",
+    "de": "10 m sprinten."
+  },
+  "Complete the course with the central slalom along the standard route.": {
+    "en": "Complete the course with the central slalom along the standard route.",
+    "de": "Parcours mit zentralem Slalom gemäß Standardroute absolvieren."
+  },
+  "Sprint through the finish.": {
+    "en": "Sprint through the finish.",
+    "de": "Durch Ziel sprinten."
+  },
+  "2 attempts, 3 min rest.": {
+    "en": "2 attempts, 3 min rest.",
+    "de": "2 Versuche, 3 min Pause."
+  },
+  "Rectangle 10×5 m; central cones approx. 3.3 m apart.": {
+    "en": "Rectangle 10×5 m; central cones approx. 3.3 m apart.",
+    "de": "Rechteck 10×5 m; zentrale Kegel ca. 3,3 m auseinander."
+  },
+  "Best time s; lower = better.": {
+    "en": "Best time s; lower = better.",
+    "de": "Bestzeit s; niedriger = besser."
+  },
+  "Top view of the Illinois agility test: a 10 × 5 m rectangle with four cones in the corners and four cones in a straight line in the middle, start (S) at one corner. A dimension line shows approx. 3.3 m spacing between the central cones.": {
+    "en": "Top view of the Illinois agility test: a 10 × 5 m rectangle with four cones in the corners and four cones in a straight line in the middle, start (S) at one corner. A dimension line shows approx. 3.3 m spacing between the central cones.",
+    "de": "Draufsicht des Illinois-Agility-Tests: ein Rechteck von 10 × 5 m mit vier Kegeln in den Ecken und vier Kegeln in gerader Linie in der Mitte, Start (S) an einer Ecke. Eine Maßlinie zeigt ca. 3,3 m Abstand zwischen zentralen Kegeln."
+  },
+  "Acceleration/sprint performance in fast bowlers.": {
+    "en": "Acceleration/sprint performance in fast bowlers.",
+    "de": "Beschleunigung/Sprintleistung bei Fast Bowlern."
+  },
+  "Timing gates, 40-yard course.": {
+    "en": "Timing gates, 40-yard course.",
+    "de": "Timing Gates, 40-yard-Strecke."
+  },
+  "Static start.": {
+    "en": "Static start.",
+    "de": "Statischer Start."
+  },
+  "Sprint 40 yd at maximum effort.": {
+    "en": "Sprint 40 yd at maximum effort.",
+    "de": "40 yd maximal sprinten."
+  },
+  "3 attempts with recovery.": {
+    "en": "3 attempts with recovery.",
+    "de": "3 Versuche mit Erholung."
+  },
+  "40 yd = 36.576 m.": {
+    "en": "40 yd = 36.576 m.",
+    "de": "40 yd = 36,576 m."
+  },
+  "Top view of the sprint lane with start and finish 40 yards apart. A dimension line shows the distance.": {
+    "en": "Top view of the sprint lane with start and finish 40 yards apart. A dimension line shows the distance.",
+    "de": "Draufsicht der Sprintbahn mit Start und Ziel im Abstand von 40 Yards. Eine Maßlinie zeigt die Strecke."
+  },
+  "Lateral movement, forward and backward acceleration.": {
+    "en": "Lateral movement, forward and backward acceleration.",
+    "de": "Seitliche Bewegung, Vorwärts- und Rückwärtsbeschleunigung."
+  },
+  "4 cones, timing.": {
+    "en": "4 cones, timing.",
+    "de": "4 Kegel, Timing."
+  },
+  "Cone A start; B 9.14 m straight ahead.": {
+    "en": "Cone A start; B 9.14 m straight ahead.",
+    "de": "Kegel A Start; B 9,14 m gerade voraus."
+  },
+  "C and D each 4.57 m left/right of B.": {
+    "en": "C and D each 4.57 m left/right of B.",
+    "de": "C und D jeweils 4,57 m links/rechts von B."
+  },
+  "A→B forward; sideways B→C; sideways C→D; sideways D→B; backward B→A.": {
+    "en": "A→B forward; sideways B→C; sideways C→D; sideways D→B; backward B→A.",
+    "de": "A→B vorwärts; seitlich B→C; seitlich C→D; seitlich D→B; rückwärts B→A."
+  },
+  "A–B 9.14 m; B–C and B–D 4.57 m each.": {
+    "en": "A–B 9.14 m; B–C and B–D 4.57 m each.",
+    "de": "A–B 9,14 m; B–C und B–D je 4,57 m."
+  },
+  "Top view of the T-test: A at the bottom, B 9.14 m ahead, C and D each 4.57 m left and right of B. Arrows show the route A, B, C, D, B, A.": {
+    "en": "Top view of the T-test: A at the bottom, B 9.14 m ahead, C and D each 4.57 m left and right of B. Arrows show the route A, B, C, D, B, A.",
+    "de": "Draufsicht des T-Tests: A unten, B 9,14 m voraus, C und D je 4,57 m links und rechts von B. Pfeile zeigen die Route A, B, C, D, B, A."
+  },
+  "20-m running course plus 5-m recovery zone, Yo-Yo IR1 audio, cones.": {
+    "en": "20-m running course plus 5-m recovery zone, Yo-Yo IR1 audio, cones.",
+    "de": "20-m-Laufstrecke plus 5-m-Erholungszone, Yo-Yo-IR1-Audio, Hütchen."
+  },
+  "Run back and forth between two 20-m lines to the audio beat.": {
+    "en": "Run back and forth between two 20-m lines to the audio beat.",
+    "de": "Zwischen zwei 20-m-Linien im Audio-Takt hin und zurück laufen."
+  },
+  "After each 40-m shuttle, take 10 s of active recovery in the 5-m zone.": {
+    "en": "After each 40-m shuttle, take 10 s of active recovery in the 5-m zone.",
+    "de": "Nach jedem 40-m-Shuttle 10 s aktive Erholung in der 5-m-Zone."
+  },
+  "Speed increases in stages.": {
+    "en": "Speed increases in stages.",
+    "de": "Geschwindigkeit steigt stufenweise."
+  },
+  "Warning at the first miss; test ends at the second miss.": {
+    "en": "Warning at the first miss; test ends at the second miss.",
+    "de": "Bei erstem Verfehlen Warnung; bei zweitem Fehler Testende."
+  },
+  "10 s recovery after each 2×20-m shuttle.": {
+    "en": "10 s recovery after each 2×20-m shuttle.",
+    "de": "10 s Recovery nach jedem 2×20-m-Shuttle."
+  },
+  "20 m test course +5 m recovery zone.": {
+    "en": "20 m test course +5 m recovery zone.",
+    "de": "20 m Teststrecke +5 m Recoveryzone."
+  },
+  "Second missed pace, medical stop.": {
+    "en": "Second missed pace, medical stop.",
+    "de": "Zweites Tempoversäumnis, medizinischer Abbruch."
+  },
+  "Original Yo-Yo IR1 audio, exactly 20 m + 5 m, same termination rule.": {
+    "en": "Original Yo-Yo IR1 audio, exactly 20 m + 5 m, same termination rule.",
+    "de": "Original Yo-Yo IR1 Audio, exakt 20 m + 5 m, gleiche Abbruchregel."
+  },
+  "Total distance m; higher = better.": {
+    "en": "Total distance m; higher = better.",
+    "de": "Gesamtdistanz m; höher = besser."
+  },
+  "Top view: two lines 20 m apart, a 5-m recovery zone behind the start line. Arrows show the path back and forth over 20 m and then into the recovery zone (10 s).": {
+    "en": "Top view: two lines 20 m apart, a 5-m recovery zone behind the start line. Arrows show the path back and forth over 20 m and then into the recovery zone (10 s).",
+    "de": "Draufsicht: zwei Linien im Abstand von 20 m, hinter der Startlinie eine Erholungszone von 5 m. Pfeile zeigen den Weg hin und zurück über 20 m und danach in die Erholungszone (10 s)."
+  },
+  "Timing gates, marked sprint course, timer.": {
+    "en": "Timing gates, marked sprint course, timer.",
+    "de": "Timing Gates, markierte Sprintstrecke, Timer."
+  },
+  "App standard: sprint 6×30 m at maximum effort.": {
+    "en": "App standard: sprint 6×30 m at maximum effort.",
+    "de": "App-Standard: 6×30 m maximal sprinten."
+  },
+  "20 s active/passive recovery between sprints.": {
+    "en": "20 s active/passive recovery between sprints.",
+    "de": "Zwischen Sprints 20 s aktive/passive Erholung."
+  },
+  "Record all times.": {
+    "en": "Record all times.",
+    "de": "Alle Zeiten erfassen."
+  },
+  "6 sprints; 20 s rest.": {
+    "en": "6 sprints; 20 s rest.",
+    "de": "6 Sprints; 20 s Pause."
+  },
+  "30 m per sprint.": {
+    "en": "30 m per sprint.",
+    "de": "30 m je Sprint."
+  },
+  "False start, incomplete distance, wrong rest.": {
+    "en": "False start, incomplete distance, wrong rest.",
+    "de": "Fehlstart, unvollständige Distanz, Pause falsch."
+  },
+  "Same distance, rest, start technique and timing.": {
+    "en": "Same distance, rest, start technique and timing.",
+    "de": "Gleiche Distanz, Pause, Starttechnik und Timing."
+  },
+  "Best time, mean time, fatigue decrement.": {
+    "en": "Best time, mean time, fatigue decrement.",
+    "de": "Bestzeit, Mean Time, Fatigue Decrement."
+  },
+  "Top view of the sprint lane with start and finish 30 m apart. Above it the sequence: 6 sprints over 30 m with 20 s rest.": {
+    "en": "Top view of the sprint lane with start and finish 30 m apart. Above it the sequence: 6 sprints over 30 m with 20 s rest.",
+    "de": "Draufsicht der Sprintbahn mit Start und Ziel im Abstand von 30 m. Darüber der Ablauf: 6 Sprints über 30 m mit 20 s Pause."
+  },
+  "Vertec/jump system.": {
+    "en": "Vertec/jump system.",
+    "de": "Vertec/Jump-System."
+  },
+  "Use a standardised 2- or 3-step approach.": {
+    "en": "Use a standardised 2- or 3-step approach.",
+    "de": "Standardisierten 2- oder 3-Schritt-Anlauf nutzen."
+  },
+  "Jump off at maximum effort and reach the highest mark.": {
+    "en": "Jump off at maximum effort and reach the highest mark.",
+    "de": "Maximal abspringen und höchste Marke erreichen."
+  },
+  "Approach variant changed, faulty measurement.": {
+    "en": "Approach variant changed, faulty measurement.",
+    "de": "Anlaufvariante geändert, Fehlmessung."
+  },
+  "Store approach type, take-off leg/one- or two-legged.": {
+    "en": "Store approach type, take-off leg/one- or two-legged.",
+    "de": "Anlaufart, Absprungbein/ein- oder beidbeinig speichern."
+  },
+  "Jump height cm; professional benchmarks in the source approx. M 68–74 cm, F 51–56 cm; device-dependent.": {
+    "en": "Jump height cm; professional benchmarks in the source approx. M 68–74 cm, F 51–56 cm; device-dependent.",
+    "de": "Sprunghöhe cm; Profi-Benchmarks in Quelle etwa M 68–74 cm, F 51–56 cm; geräteabhängig."
+  },
+  "Two parallel marks 91.4 cm apart, timer.": {
+    "en": "Two parallel marks 91.4 cm apart, timer.",
+    "de": "Zwei parallele Markierungen 91,4 cm auseinander, Timer."
+  },
+  "Push-up position with hands on the marks.": {
+    "en": "Push-up position with hands on the marks.",
+    "de": "Liegestützposition mit Händen auf den Markierungen."
+  },
+  "On start, alternately touch the opposite mark with one hand.": {
+    "en": "On start, alternately touch the opposite mark with one hand.",
+    "de": "Auf Start abwechselnd mit einer Hand die gegenüberliegende Markierung berühren."
+  },
+  "As many valid touches as possible in 15 s.": {
+    "en": "As many valid touches as possible in 15 s.",
+    "de": "15 s lang maximal viele gültige Berührungen."
+  },
+  "3 attempts with rest.": {
+    "en": "3 attempts with rest.",
+    "de": "3 Versuche mit Pause."
+  },
+  "15 s per attempt.": {
+    "en": "15 s per attempt.",
+    "de": "15 s je Versuch."
+  },
+  "91.4 cm between hand marks.": {
+    "en": "91.4 cm between hand marks.",
+    "de": "91,4 cm zwischen Handmarkierungen."
+  },
+  "Hands outside, hips collapse, touch missed.": {
+    "en": "Hands outside, hips collapse, touch missed.",
+    "de": "Hände außerhalb, Hüfte kollabiert, Berührung verfehlt."
+  },
+  "Marks 91.4 cm; same body position; 15 s.": {
+    "en": "Marks 91.4 cm; same body position; 15 s.",
+    "de": "Markierungen 91,4 cm; gleiche Körperposition; 15 s."
+  },
+  "Touches/15 s; optional normalised scores.": {
+    "en": "Touches/15 s; optional normalised scores.",
+    "de": "Touches/15 s; optional normalisierte Scores."
+  },
+  "Top view of the push-up position: two hand marks are 91.4 cm apart, crossed arrows show the alternating touch of the opposite mark.": {
+    "en": "Top view of the push-up position: two hand marks are 91.4 cm apart, crossed arrows show the alternating touch of the opposite mark.",
+    "de": "Draufsicht der Liegestützposition: Zwei Handmarkierungen liegen 91,4 cm auseinander, gekreuzte Pfeile zeigen das abwechselnde Berühren der gegenüberliegenden Markierung."
+  },
+  "Mat, timer/counter.": {
+    "en": "Mat, timer/counter.",
+    "de": "Matte, Timer/Zähler."
+  },
+  "Assume the standardised modified starting position.": {
+    "en": "Assume the standardised modified starting position.",
+    "de": "Standardisierte modifizierte Ausgangsposition einnehmen."
+  },
+  "Lower the chest to the defined depth.": {
+    "en": "Lower the chest to the defined depth.",
+    "de": "Brust bis definierte Tiefe absenken."
+  },
+  "Push up fully.": {
+    "en": "Push up fully.",
+    "de": "Vollständig hochdrücken."
+  },
+  "Maximum valid repetitions according to the fixed app standard.": {
+    "en": "Maximum valid repetitions according to the fixed app standard.",
+    "de": "Maximal gültige Wiederholungen nach festem App-Standard."
+  },
+  "Partial ROM/loss of position.": {
+    "en": "Partial ROM/loss of position.",
+    "de": "Teil-ROM/Positionsverlust."
+  },
+  "Same hand/knee position and ROM.": {
+    "en": "Same hand/knee position and ROM.",
+    "de": "Gleiche Hand-/Knieposition und ROM."
+  },
+  "Reps; source names an outcome without a universal norm.": {
+    "en": "Reps; source names an outcome without a universal norm.",
+    "de": "Reps; Quelle nennt Outcome ohne Universalnorm."
+  },
+  "Handheld dynamometer or fixed force system.": {
+    "en": "Handheld dynamometer or fixed force system.",
+    "de": "Handheld Dynamometer oder fixiertes Kraftsystem."
+  },
+  "Standardised side-lying/supine position according to the chosen protocol.": {
+    "en": "Standardised side-lying/supine position according to the chosen protocol.",
+    "de": "Standardisierte Seitenlage/Rückenlage gemäß gewähltem Protokoll."
+  },
+  "Place the dynamometer at the defined site.": {
+    "en": "Place the dynamometer at the defined site.",
+    "de": "Dynamometer an definierter Stelle ansetzen."
+  },
+  "Hold maximal adduction against increasing external pressure.": {
+    "en": "Hold maximal adduction against increasing external pressure.",
+    "de": "Maximale Adduktion gegen zunehmenden externen Druck halten."
+  },
+  "Perform the break test.": {
+    "en": "Perform the break test.",
+    "de": "Break-Test durchführen."
+  },
+  "Loss of position, pain, tester error.": {
+    "en": "Loss of position, pain, tester error.",
+    "de": "Positionsverlust, Schmerz, Testerfehler."
+  },
+  "Keep position, lever arm, device and tester identical; record N and N/kg.": {
+    "en": "Keep position, lever arm, device and tester identical; record N and N/kg.",
+    "de": "Position, Hebelarm, Gerät und Tester identisch; N und N/kg speichern."
+  },
+  "Peak force N/Nkg; side asymmetry. Source names the outcome, no universal norm.": {
+    "en": "Peak force N/Nkg; side asymmetry. Source names the outcome, no universal norm.",
+    "de": "Peak Force N/Nkg; Seitenasymmetrie. Quelle nennt Outcome, keine Universalnorm."
+  },
+  "Fixed dynamometer or force sensor.": {
+    "en": "Fixed dynamometer or force sensor.",
+    "de": "Fixiertes Dynamometer oder Kraftsensor."
+  },
+  "Assume a defined hip position.": {
+    "en": "Assume a defined hip position.",
+    "de": "Definierte Hüftposition einnehmen."
+  },
+  "Place the measuring pad at a standardised lever arm.": {
+    "en": "Place the measuring pad at a standardised lever arm.",
+    "de": "Messpolster an standardisiertem Hebelarm platzieren."
+  },
+  "3 maximal adduction contractions of 3–5 s per side.": {
+    "en": "3 maximal adduction contractions of 3–5 s per side.",
+    "de": "3 maximale Adduktionskontraktionen 3–5 s je Seite."
+  },
+  "Same position/lever arm/device.": {
+    "en": "Same position/lever arm/device.",
+    "de": "Gleiche Position/Hebelarm/Gerät."
+  },
+  "Peak N/Nkg and asymmetry; source names the outcome without a universal norm.": {
+    "en": "Peak N/Nkg and asymmetry; source names the outcome without a universal norm.",
+    "de": "Peak N/Nkg und Asymmetrie; Quelle nennt Outcome ohne Universalnorm."
+  },
+  "Dynamic stability and reach of the upper extremity.": {
+    "en": "Dynamic stability and reach of the upper extremity.",
+    "de": "Dynamische Stabilität und Reichweite der oberen Extremität."
+  },
+  "Upper Quarter Y-Balance Kit.": {
+    "en": "Upper Quarter Y-Balance Kit.",
+    "de": "Upper Quarter Y-Balance Kit."
+  },
+  "Measure arm length.": {
+    "en": "Measure arm length.",
+    "de": "Armlänge messen."
+  },
+  "Place the support hand centrally.": {
+    "en": "Place the support hand centrally.",
+    "de": "Stützhand zentral platzieren."
+  },
+  "Reach with the free hand in turn medially, inferolaterally and superolaterally.": {
+    "en": "Reach with the free hand in turn medially, inferolaterally and superolaterally.",
+    "de": "Mit freier Hand nacheinander medial, inferolateral und superolateral reichen."
+  },
+  "3 attempts per direction per side.": {
+    "en": "3 attempts per direction per side.",
+    "de": "Je Richtung 3 Versuche pro Seite."
+  },
+  "Support hand lifts off, loss of plank position.": {
+    "en": "Support hand lifts off, loss of plank position.",
+    "de": "Stützhand löst sich, Verlust der Plankposition."
+  },
+  "Same hand position, body line and arm length normalisation.": {
+    "en": "Same hand position, body line and arm length normalisation.",
+    "de": "Handposition, Körperlinie und Armlängennormalisierung gleich."
+  },
+  "Composite score % and asymmetry.": {
+    "en": "Composite score % and asymmetry.",
+    "de": "Composite Score % und Asymmetrie."
+  },
+  "Top view of the Upper Quarter Y-Balance: the support hand is in the centre, three arrows show the reach directions medial (1), inferolateral (2) and superolateral (3).": {
+    "en": "Top view of the Upper Quarter Y-Balance: the support hand is in the centre, three arrows show the reach directions medial (1), inferolateral (2) and superolateral (3).",
+    "de": "Draufsicht des Upper Quarter Y-Balance: Die Stützhand steht in der Mitte, drei Pfeile zeigen die Reichrichtungen medial (1), inferolateral (2) und superolateral (3)."
+  },
+  "Proprioceptive reproduction accuracy of the shoulder.": {
+    "en": "Proprioceptive reproduction accuracy of the shoulder.",
+    "de": "Propriozeptive Reproduktionsgenauigkeit der Schulter."
+  },
+  "Digital goniometer/isokinetic device.": {
+    "en": "Digital goniometer/isokinetic device.",
+    "de": "Digitales Goniometer/Isokinetik."
+  },
+  "Set the reference angle.": {
+    "en": "Set the reference angle.",
+    "de": "Referenzwinkel einstellen."
+  },
+  "Perceive for 5 s.": {
+    "en": "Perceive for 5 s.",
+    "de": "5 s wahrnehmen."
+  },
+  "Return to the starting position.": {
+    "en": "Return to the starting position.",
+    "de": "Zur Ausgangsposition."
+  },
+  "Reproduce the target angle without vision.": {
+    "en": "Reproduce the target angle without vision.",
+    "de": "Ohne Sicht Zielwinkel reproduzieren."
+  },
+  "3 attempts per direction.": {
+    "en": "3 attempts per direction.",
+    "de": "3 Versuche je Richtung."
+  },
+  "5 s learning phase.": {
+    "en": "5 s learning phase.",
+    "de": "5 s Lernphase."
+  },
+  "Visual aid/compensation.": {
+    "en": "Visual aid/compensation.",
+    "de": "Visuelle Hilfe/Kompensation."
+  },
+  "Same angles, position, visual shielding.": {
+    "en": "Same angles, position, visual shielding.",
+    "de": "Gleiche Winkel, Position, visuelle Abschirmung."
+  },
+  "Absolute error °; lower = better.": {
+    "en": "Absolute error °; lower = better.",
+    "de": "Absolute Fehlerabweichung °; niedriger = besser."
+  },
+  "Scapular position asymmetry.": {
+    "en": "Scapular position asymmetry.",
+    "de": "Scapuläre Positionsasymmetrie."
+  },
+  "Tape measure/caliper.": {
+    "en": "Tape measure/caliper.",
+    "de": "Maßband/Kaliper."
+  },
+  "Assume defined arm position 1.": {
+    "en": "Assume defined arm position 1.",
+    "de": "Definierte Armposition 1 einnehmen."
+  },
+  "Measure the distance from the scapular reference point to the spine on both sides.": {
+    "en": "Measure the distance from the scapular reference point to the spine on both sides.",
+    "de": "Abstand Scapula-Referenzpunkt zur Wirbelsäule beidseits messen."
+  },
+  "Repeat for further standardised arm positions.": {
+    "en": "Repeat for further standardised arm positions.",
+    "de": "Für weitere standardisierte Armpositionen wiederholen."
+  },
+  "Landmarks cannot be palpated reliably.": {
+    "en": "Landmarks cannot be palpated reliably.",
+    "de": "Landmarken nicht sicher palpierbar."
+  },
+  "Same anatomical landmarks and tester.": {
+    "en": "Same anatomical landmarks and tester.",
+    "de": "Gleiche anatomische Landmarken und Tester."
+  },
+  "Side difference cm; clinical/functional, no performance norm.": {
+    "en": "Side difference cm; clinical/functional, no performance norm.",
+    "de": "Seitendifferenz cm; klinisch/funktionell, keine Leistungsnorm."
+  },
+  "Total distance covered in the match.": {
+    "en": "Total distance covered in the match.",
+    "de": "Gesamte im Spiel zurückgelegte Distanz."
+  },
+  "GPS/LPS system.": {
+    "en": "GPS/LPS system.",
+    "de": "GPS/LPS-System."
+  },
+  "Wear the sensor according to the manufacturer standard.": {
+    "en": "Wear the sensor according to the manufacturer standard.",
+    "de": "Sensor nach Herstellerstandard tragen."
+  },
+  "Record playing time.": {
+    "en": "Record playing time.",
+    "de": "Spielzeit erfassen."
+  },
+  "Analyse active match time only.": {
+    "en": "Analyse active match time only.",
+    "de": "Nur aktive Matchzeit analysieren."
+  },
+  "Export the total distance.": {
+    "en": "Export the total distance.",
+    "de": "Gesamtdistanz exportieren."
+  },
+  "Record match duration.": {
+    "en": "Record match duration.",
+    "de": "Matchdauer speichern."
+  },
+  "Data loss, shortened playing time without normalisation.": {
+    "en": "Data loss, shortened playing time without normalisation.",
+    "de": "Datenverlust, verkürzte Spielzeit ohne Normalisierung."
+  },
+  "Same device/sampling; record playing time and position.": {
+    "en": "Same device/sampling; record playing time and position.",
+    "de": "Gleiches Gerät/Sampling; Spielzeit und Position speichern."
+  },
+  "km; professional source anchor M ~10–12 km, F ~8–10 km per match.": {
+    "en": "km; professional source anchor M ~10–12 km, F ~8–10 km per match.",
+    "de": "km; Profiquellenanker M ~10–12 km, F ~8–10 km pro Match."
+  },
+  "Distance above a defined speed threshold.": {
+    "en": "Distance above a defined speed threshold.",
+    "de": "Distanz oberhalb definierter Geschwindigkeitsgrenze."
+  },
+  "GPS/LPS.": {
+    "en": "GPS/LPS.",
+    "de": "GPS/LPS."
+  },
+  "Record match/training.": {
+    "en": "Record match/training.",
+    "de": "Match/Training aufzeichnen."
+  },
+  "Define the speed zone before analysis.": {
+    "en": "Define the speed zone before analysis.",
+    "de": "Geschwindigkeitszone vor Analyse festlegen."
+  },
+  "Sum the distance above the threshold.": {
+    "en": "Sum the distance above the threshold.",
+    "de": "Distanz oberhalb Schwelle summieren."
+  },
+  "A change of threshold makes values not directly comparable.": {
+    "en": "A change of threshold makes values not directly comparable.",
+    "de": "Schwellenwechsel macht Werte nicht direkt vergleichbar."
+  },
+  "Threshold, device and sampling must be recorded.": {
+    "en": "Threshold, device and sampling must be recorded.",
+    "de": "Schwelle, Gerät und Sampling zwingend speichern."
+  },
+  "m/km; source often cites >19 km/h HSR and >23 km/h sprint zone as practical definitions.": {
+    "en": "m/km; source often cites >19 km/h HSR and >23 km/h sprint zone as practical definitions.",
+    "de": "m/km; Quelle nennt häufig >19 km/h HSR und >23 km/h Sprintzone als Praxisdefinitionen."
+  },
+  "Accuracy of shots on goal.": {
+    "en": "Accuracy of shots on goal.",
+    "de": "Treffgenauigkeit beim Torschuss."
+  },
+  "Goal with standardised target zones, balls, marked shooting point.": {
+    "en": "Goal with standardised target zones, balls, marked shooting point.",
+    "de": "Tor mit standardisierten Zielzonen, Bälle, markierter Schusspunkt."
+  },
+  "Place the ball at the defined point.": {
+    "en": "Place the ball at the defined point.",
+    "de": "Ball am definierten Punkt platzieren."
+  },
+  "Shoot at the given target.": {
+    "en": "Shoot at the given target.",
+    "de": "Auf vorgegebenes Ziel schießen."
+  },
+  "App standard: 10 shots, target zone sequence randomised.": {
+    "en": "App standard: 10 shots, target zone sequence randomised.",
+    "de": "App-Standard: 10 Schüsse, Zielzonenfolge randomisiert."
+  },
+  "Document hits per zone.": {
+    "en": "Document hits per zone.",
+    "de": "Treffer je Zone dokumentieren."
+  },
+  "App standard: 16.5 m shooting distance.": {
+    "en": "App standard: 16.5 m shooting distance.",
+    "de": "App-Standard: 16,5 m Schussdistanz."
+  },
+  "Line crossed, wrong target zone, ball position changed.": {
+    "en": "Line crossed, wrong target zone, ball position changed.",
+    "de": "Linie übertreten, falsche Zielzone, Ballposition verändert."
+  },
+  "Same distance, ball, target size; dominant/non-dominant foot separately.": {
+    "en": "Same distance, ball, target size; dominant/non-dominant foot separately.",
+    "de": "Gleiche Distanz, Ball, Zielgröße, dominanter/nichtdominanter Fuß getrennt."
+  },
+  "Hit rate %, point score.": {
+    "en": "Hit rate %, point score.",
+    "de": "Trefferquote %, Punktescore."
+  },
+  "Front view of a football goal divided into target zones. Below it, the top view: the shooting point is centred in front of the goal, 16.5 m from the goal line.": {
+    "en": "Front view of a football goal divided into target zones. Below it, the top view: the shooting point is centred in front of the goal, 16.5 m from the goal line.",
+    "de": "Frontansicht eines Fußballtors, in Zielzonen unterteilt. Darunter die Draufsicht: der Schusspunkt liegt mittig vor dem Tor, 16,5 m von der Torlinie entfernt."
+  },
+  "Throwing accuracy at defined goal targets.": {
+    "en": "Throwing accuracy at defined goal targets.",
+    "de": "Wurfgenauigkeit auf definierte Torziele."
+  },
+  "Handball goal with target zones, balls, throwing line.": {
+    "en": "Handball goal with target zones, balls, throwing line.",
+    "de": "Handballtor mit Zielzonen, Bälle, Wurflinie."
+  },
+  "Mark the target zones.": {
+    "en": "Mark the target zones.",
+    "de": "Zielzonen markieren."
+  },
+  "Perform 10 throws from a fixed distance.": {
+    "en": "Perform 10 throws from a fixed distance.",
+    "de": "Von festgelegter Distanz 10 Würfe durchführen."
+  },
+  "Specify/randomise the target zone before each throw.": {
+    "en": "Specify/randomise the target zone before each throw.",
+    "de": "Zielzone vor jedem Wurf vorgeben/randomisieren."
+  },
+  "Document hits.": {
+    "en": "Document hits.",
+    "de": "Treffer dokumentieren."
+  },
+  "App standard: 7 m for the static standard test.": {
+    "en": "App standard: 7 m for the static standard test.",
+    "de": "App-Standard: 7 m bei statischem Standardtest."
+  },
+  "Overstepping, wrong technique, target system changed.": {
+    "en": "Overstepping, wrong technique, target system changed.",
+    "de": "Übertreten, falsche Technik, Zielsystem verändert."
+  },
+  "Same distance, ball size, throwing technique and target zones.": {
+    "en": "Same distance, ball size, throwing technique and target zones.",
+    "de": "Gleiche Distanz, Ballgröße, Wurftechnik und Zielzonen."
+  },
+  "Hit rate/point score; source contains no universal norm.": {
+    "en": "Hit rate/point score; source contains no universal norm.",
+    "de": "Trefferquote/Punktescore; Quelle enthält keine Universalnorm."
+  },
+  "Front view of a handball goal with numbered target zones. Below it, the top view: the throwing position is centred in front of the goal, 7 m from the goal line.": {
+    "en": "Front view of a handball goal with numbered target zones. Below it, the top view: the throwing position is centred in front of the goal, 7 m from the goal line.",
+    "de": "Frontansicht eines Handballtors mit nummerierten Zielzonen. Darunter die Draufsicht: die Wurfposition liegt mittig vor dem Tor, 7 m von der Torlinie entfernt."
   }
 }

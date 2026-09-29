@@ -217,7 +217,8 @@ Anforderungslücke, die bei jedem Test wirken.
 
 1. `src/data/operator.ts` — Name, Anschrift, E-Mail fehlen (§5 DDG).
 2. Rechtstexte anwaltlich prüfen lassen.
-3. Fussball: entschieden, bleibt ausgeschlossen (`BLOCKED_DISCIPLINES`).
+3. Fussball: war ausgeschlossen; der Auftraggeber hat die Sperre mit Welle 3 der Testbibliothek
+   aufgehoben (`BLOCKED_DISCIPLINES` ist leer).
 
 ---
 

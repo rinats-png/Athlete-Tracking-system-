@@ -5,10 +5,11 @@ import { LIBRARY_PROCEDURES, OBSERVATION_PROCEDURES } from '../src/data/testProc
 import { OBSERVATIONS } from '../src/data/observations'
 import { FIGURE_IDS } from '../src/features/tests/figures/library'
 import { EQUIPMENT_BY_ID } from '../src/data/equipment'
+import { disciplineById } from '../src/data/sportProfiles'
 
 /**
  * Testbibliothek, Protokoll 1.0 — Welle 1 (Kampfsport) und Welle 2 (Laufen,
- * Rad, Schwimmen, Triathlon, Rudern).
+ * Rad, Schwimmen, Triathlon, Rudern) und Welle 3 (Teamsport).
  *
  * Was hier gesichert wird, ist genau das, was beim Übertragen aus einem
  * Dokument still verloren geht: ein Verweis, der ins Leere zeigt, eine
@@ -120,6 +121,46 @@ test.describe('Testbibliothek — Daten', () => {
     expect(none).toEqual({})
   })
 
+  test('Repeated Sprint Ability: Mittel und Abfall nur bei allen sechs Sprints', () => {
+    const t = TEST_CATALOG.find((x) => x.slug === 'repeated_sprint_ability')!
+    const ctx = { bodyWeightKg: null, ageYears: 24, sex: 'male' as const }
+    const run = (values: Record<string, number>) => {
+      const out: Record<string, number> = {}
+      t.derive?.(values, ctx, (k, v) => {
+        if (v != null) out[k] = v
+      }, t)
+      return out
+    }
+    const all = run({ sprint1S: 4, sprint2S: 4, sprint3S: 4.2, sprint4S: 4.2, sprint5S: 4.4, sprint6S: 4.4 })
+    expect(all.meanSprintTimeS).toBe(4.2)
+    expect(all.rsaDecrementPercent).toBe(5)
+    expect(run({ sprint1S: 4, sprint2S: 4.1 }), 'ohne alle sechs keine Kennzahl').toEqual({})
+  })
+
+  test('die Adduktorenkraft wertet die schwächere Seite und nennt die Asymmetrie', () => {
+    for (const slug of ['eccentric_adductor_strength', 'isometric_adduction_single_leg']) {
+      const t = TEST_CATALOG.find((x) => x.slug === slug)!
+      const out: Record<string, number> = {}
+      t.derive?.({ forceLeftN: 200, forceRightN: 250 }, { bodyWeightKg: null, ageYears: 24, sex: 'male' }, (k, v) => {
+        if (v != null) out[k] = v
+      }, t)
+      expect(out.peakForceN, slug).toBe(200)
+      expect(out.asymmetryPercent, slug).toBe(20)
+      expect(t.setting, slug).toBe('lab')
+      expect(t.deviceBound, slug).toBe('critical')
+    }
+  })
+
+  test('Fußball ist eine Disziplin; seine Testbibliothek-Tests sind nur Ergänzungen', () => {
+    const d = disciplineById('football')!
+    expect(d).toBeTruthy()
+    const added = d.tests.filter((t) => t.provenance === 'addition')
+    expect(added.map((t) => t.slug)).toEqual(
+      expect.arrayContaining(['yo_yo_ir1', 'repeated_sprint_ability', 'eccentric_adductor_strength', 'isometric_adduction_single_leg']),
+    )
+    for (const t of added) expect(t.role).toBe('optional')
+  })
+
   test('Zugleinen-Schwimmen, Isometrik und F-v-Profil sind Laborwerte und nie Pflicht', () => {
     for (const slug of ['tethered_swim_30s', 'whole_body_isometric_force', 'fv_profile_ergometer']) {
       const t = TEST_CATALOG.find((x) => x.slug === slug)!
@@ -163,6 +204,13 @@ test.describe('Testbibliothek — Anzeige', () => {
     await page.goto('/tests/triathlon_sprint_time/details', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
     await expect(page.getByRole('img', { name: /Ablaufgrafik des Sprint-Triathlons/ })).toBeVisible()
+  })
+
+  test('Welle 3: der Yo-Yo-Test zeigt seine Skizze mit den 20 m', async ({ page }) => {
+    await openGuest(page)
+    await page.goto('/tests/yo_yo_ir1/details', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
+    await expect(page.getByRole('img', { name: /zwei Linien im Abstand von 20 m/ })).toBeVisible()
   })
 
   test('ein Beobachtungswert zeigt seine Durchführung, ohne bewertet zu werden', async ({ page }) => {

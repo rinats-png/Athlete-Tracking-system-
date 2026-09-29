@@ -19,7 +19,8 @@
       "sensor": "Capteurs",
       "body": "Corps",
       "screening": "Dépistage",
-      "load": "Charge"
+      "load": "Charge",
+      "skill": "Habileté"
     },
     "sources": {
       "self": "Peut être relevé soi-même, sans appareil.",
@@ -57,7 +58,14 @@
       "shoulder_rom_deg": "Amplitude de mouvement de l'épaule",
       "body_mass_change_pct": "Variation de la masse corporelle avant/après la course",
       "sebt_composite_pct": "Star Excursion Balance (composite)",
-      "ankle_dorsiflexion_deg": "Dorsiflexion de la cheville"
+      "ankle_dorsiflexion_deg": "Dorsiflexion de la cheville",
+      "uq_y_balance_pct": "Upper quarter Y-balance (composite)",
+      "shoulder_jps_deg": "Sens de la position articulaire de l'épaule",
+      "lateral_scapular_slide_cm": "Lateral scapular slide (LSST)",
+      "gps_match_distance_km": "Distance totale du match (GPS)",
+      "hsr_distance_m": "Distance parcourue à haute vitesse en match (GPS)",
+      "shot_accuracy_football_pct": "Test de tir au football : taux de réussite",
+      "throw_accuracy_handball_pct": "Test de lancer au handball : taux de réussite"
     },
     "meaning": {
       "ck_u_l": "Une enzyme dont le taux sanguin monte après une charge inhabituelle. La variation entre personnes est très grande — comparable seulement avec toi-même.",
@@ -89,7 +97,14 @@
       "shoulder_rom_deg": "L'amplitude de mouvement de l'épaule en degrés. Un dépistage ; note le côté, la direction et la méthode de mesure dans la note.",
       "body_mass_change_pct": "La variation en pourcentage de la masse corporelle entre avant et après un effort. Une observation, pas une performance et aucun jugement sur la perte de liquide.",
       "sebt_composite_pct": "L'atteinte moyenne dans toutes les directions, en pourcentage de la longueur de jambe. Un dépistage de l'équilibre, pas une mesure de performance.",
-      "ankle_dorsiflexion_deg": "Jusqu'où la cheville peut fléchir vers le haut, en degrés. Un dépistage de la mobilité ; note le côté et la méthode de mesure dans la note."
+      "ankle_dorsiflexion_deg": "Jusqu'où la cheville peut fléchir vers le haut, en degrés. Un dépistage de la mobilité ; note le côté et la méthode de mesure dans la note.",
+      "uq_y_balance_pct": "La portée moyenne de la main libre dans trois directions, en pourcentage de la longueur du bras. Un dépistage de la stabilité, pas une mesure de performance ; note le côté et le kit dans la note.",
+      "shoulder_jps_deg": "L'erreur en degrés lors de la reproduction d'une position articulaire apprise auparavant. Un dépistage ; plus petit signifie plus précis, pas mieux entraîné.",
+      "lateral_scapular_slide_cm": "La différence entre les côtés de la distance entre l'omoplate et la colonne vertébrale, en centimètres. Un dépistage, pas une performance ; note la position du bras et l'examinateur dans la note.",
+      "gps_match_distance_km": "La distance qu'un capteur GPS enregistre pendant un match. Comparable uniquement avec le même capteur et la même durée de match ; pas une évaluation de la performance.",
+      "hsr_distance_m": "La distance au-dessus du seuil que ton système GPS compte comme haute vitesse. Le seuil diffère selon les systèmes ; note-le dans la note.",
+      "shot_accuracy_football_pct": "La part de tirs réussis en pourcentage, à partir des tirs et des réussites du test de tir. Un relevé d'habileté, pas un axe de performance ; note la distance, le ballon et le pied dans la note.",
+      "throw_accuracy_handball_pct": "La part de tirs réussis en pourcentage, à partir des lancers et des réussites du test de lancer. Un relevé d'habileté, pas un axe de performance ; note la distance, le ballon et la technique de lancer dans la note."
     }
   },
   "procedure": {

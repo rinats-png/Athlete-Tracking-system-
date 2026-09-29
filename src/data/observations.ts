@@ -33,6 +33,8 @@ export type ObservationGroup =
   | 'sensor'
   | 'body'
   | 'screening'
+  /** Technikleistung als Selbstauskunft, z. B. Trefferquote. Bewertet nichts. */
+  | 'skill'
 
 /** Wer oder was nötig ist, um den Wert überhaupt zu erheben. */
 export type ObservationSource =
@@ -393,6 +395,77 @@ export const OBSERVATIONS: ObservationDefinition[] = [
     max: 60,
     step: 0.5,
     source: 'device',
+    direction: 'higher',
+  },
+  // --- Testbibliothek, Protokoll 1.0 (Welle 3) -------------------------------
+  {
+    key: 'uq_y_balance_pct',
+    group: 'screening',
+    unit: "%",
+    min: 40,
+    max: 160,
+    step: 0.1,
+    source: 'device',
+    direction: 'higher',
+  },
+  {
+    key: 'shoulder_jps_deg',
+    group: 'screening',
+    unit: "°",
+    min: 0,
+    max: 30,
+    step: 0.1,
+    source: 'device',
+    direction: 'lower',
+  },
+  {
+    key: 'lateral_scapular_slide_cm',
+    group: 'screening',
+    unit: "cm",
+    min: 0,
+    max: 8,
+    step: 0.1,
+    source: 'device',
+    direction: 'neutral',
+  },
+  {
+    key: 'gps_match_distance_km',
+    group: 'sensor',
+    unit: "km",
+    min: 0,
+    max: 30,
+    step: 0.01,
+    source: 'device',
+    direction: 'neutral',
+  },
+  {
+    key: 'hsr_distance_m',
+    group: 'sensor',
+    unit: "m",
+    min: 0,
+    max: 3000,
+    step: 1,
+    source: 'device',
+    direction: 'neutral',
+  },
+  {
+    key: 'shot_accuracy_football_pct',
+    group: 'skill',
+    unit: "%",
+    min: 0,
+    max: 100,
+    step: 1,
+    source: 'self',
+    direction: 'higher',
+  },
+  {
+    key: 'throw_accuracy_handball_pct',
+    group: 'skill',
+    unit: "%",
+    min: 0,
+    max: 100,
+    step: 1,
+    source: 'self',
     direction: 'higher',
   },
 ]

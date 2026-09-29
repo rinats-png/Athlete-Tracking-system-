@@ -71,6 +71,7 @@ export type EquipmentId =
   | 'kick_target'
   | 'tether_system'
   | 'isometric_rig'
+  | 'force_sensor'
 
 export interface EquipmentItem {
   id: EquipmentId
@@ -316,6 +317,11 @@ export const EQUIPMENT: EquipmentItem[] = [
     id: 'isometric_rig',
     name: { de: "Isometrisches Zuggestell", en: "Isometric pull rig" },
     keywords: ["zuggestell", "isometrisch", "isometric"],
+  },
+  {
+    id: 'force_sensor',
+    name: { de: "Dynamometer oder Kraftsensor", en: "Dynamometer or force sensor" },
+    keywords: ["dynamometer", "kraftsensor", "kraftsystem", "force sensor", "force system"],
   },
 ]
 

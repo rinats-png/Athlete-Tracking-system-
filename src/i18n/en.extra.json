@@ -19,7 +19,8 @@
       "sensor": "Sensors",
       "body": "Body",
       "screening": "Screening",
-      "load": "Load"
+      "load": "Load",
+      "skill": "Skill"
     },
     "sources": {
       "self": "Can be recorded yourself, without a device.",
@@ -57,7 +58,14 @@
       "shoulder_rom_deg": "Shoulder range of motion",
       "body_mass_change_pct": "Body mass change before/after the race",
       "sebt_composite_pct": "Star Excursion Balance (composite)",
-      "ankle_dorsiflexion_deg": "Ankle dorsiflexion"
+      "ankle_dorsiflexion_deg": "Ankle dorsiflexion",
+      "uq_y_balance_pct": "Upper quarter Y-balance (composite)",
+      "shoulder_jps_deg": "Shoulder joint position sense",
+      "lateral_scapular_slide_cm": "Lateral scapular slide (LSST)",
+      "gps_match_distance_km": "Match total distance (GPS)",
+      "hsr_distance_m": "Match high-speed running distance (GPS)",
+      "shot_accuracy_football_pct": "Football shooting test: hit rate",
+      "throw_accuracy_handball_pct": "Handball throwing test: hit rate"
     },
     "meaning": {
       "ck_u_l": "An enzyme whose blood level rises after unaccustomed load. Variation between people is very large — it is comparable only with yourself.",
@@ -89,7 +97,14 @@
       "shoulder_rom_deg": "The range of motion of the shoulder in degrees. A screening; note side, direction and measuring method in the note.",
       "body_mass_change_pct": "The percentage change in body mass between before and after an effort. An observation, not a performance and no judgement of fluid loss.",
       "sebt_composite_pct": "The averaged reach across all directions, as a percentage of leg length. A balance screening, not a performance measure.",
-      "ankle_dorsiflexion_deg": "How far the ankle can bend upward, in degrees. A mobility screening; note side and measuring method in the note."
+      "ankle_dorsiflexion_deg": "How far the ankle can bend upward, in degrees. A mobility screening; note side and measuring method in the note.",
+      "uq_y_balance_pct": "The averaged reach of the free hand in three directions, as a percentage of arm length. A stability screening, not a performance measure; note side and kit in the note.",
+      "shoulder_jps_deg": "The error in degrees when reproducing a joint position you learned before. A screening; smaller means more accurate, not better trained.",
+      "lateral_scapular_slide_cm": "The side difference in the distance between shoulder blade and spine, in centimetres. A screening, not a performance; note arm position and examiner in the note.",
+      "gps_match_distance_km": "The distance a GPS sensor records over a match. Only comparable with the same sensor and match duration; not a performance rating.",
+      "hsr_distance_m": "The distance above the threshold your GPS system counts as high speed. The threshold differs between systems; note it in the note.",
+      "shot_accuracy_football_pct": "The share of hits in percent, from the shots and hits of the shooting test. A skill record, not a performance axis; note distance, ball and foot in the note.",
+      "throw_accuracy_handball_pct": "The share of hits in percent, from the throws and hits of the throwing test. A skill record, not a performance axis; note distance, ball and throwing technique in the note."
     }
   },
   "procedure": {

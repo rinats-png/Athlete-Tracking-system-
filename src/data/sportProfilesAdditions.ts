@@ -21,6 +21,14 @@ const tableOptional = (slug: string, documentLabel: string): DisciplineTest => (
   documentLabel,
 })
 
+/** Später ergänzt, mit Grund. Trägt nie ein Profil. */
+const addedOptional = (slug: string, reason: string): DisciplineTest => ({
+  slug,
+  role: 'optional',
+  provenance: 'addition',
+  reason,
+})
+
 /**
  * Disziplinen aus der Mastertabelle des Auftraggebers.
  *
@@ -36,10 +44,9 @@ const tableOptional = (slug: string, documentLabel: string): DisciplineTest => (
  * und ein Flügelspieler sind nicht dasselbe, und ein Profil, das sie
  * gleichsetzt, ordnet beide falsch ein. Das Feld dafür steht am Athleten.
  *
- * FUSSBALL FEHLT ABSICHTLICH. Er steht in `BLOCKED_DISCIPLINES` und bleibt
- * dort, bis der Auftraggeber ausdrücklich etwas anderes sagt. Die
- * Mastertabelle nennt ihn, das genügt nicht: die Sperre ist eine
- * Grundsatzentscheidung und wird nicht durch eine Datenlieferung aufgehoben.
+ * FUSSBALL steht hier nicht, sondern in `sportProfiles.ts` (`TEAM_FOOTBALL`):
+ * die frühere Sperre hat der Auftraggeber ausdrücklich aufgehoben, und die
+ * Disziplin stammt aus der Testbibliothek, nicht aus der Mastertabelle.
  *
  * Die AXEN je Disziplin enthalten nur, was ihre Kerntests auch erreichen
  * können — sonst stünde im Profil dauerhaft eine Lücke, die keine ist.
@@ -66,6 +73,7 @@ export const TEAM_SPORTS: Discipline[] = [
       tableCore('beep_test_20m', 'Intermittierende Ausdauer'),
       tableOptional('back_squat_1rm', 'Lower-body strength'),
       tableOptional('standing_broad_jump', 'Horizontale Sprungkraft'),
+      addedOptional('approach_vertical_jump', "Die Testbibliothek (Protokoll 1.0) nennt «Approach Vertical Jump» für diese Disziplin."),
     ],
     eventDurationSeconds: [2400, 2880],
     typicalLimiter: 'power',
@@ -83,6 +91,8 @@ export const TEAM_SPORTS: Discipline[] = [
       tableCore('beep_test_20m', 'Intermittierende Ausdauer'),
       tableOptional('bench_press_1rm', 'Oberkörperkraft'),
       tableOptional('grip_strength', 'Griffkraft für Wurf und Zweikampf'),
+      addedOptional('ckcuest', "Die Testbibliothek (Protokoll 1.0) nennt «CKCUEST» für diese Disziplin."),
+      addedOptional('modified_push_up_test', "Die Testbibliothek (Protokoll 1.0) nennt «Modified Push-up Test» für diese Disziplin."),
     ],
     eventDurationSeconds: [3600, 3600],
     typicalLimiter: 'power',
