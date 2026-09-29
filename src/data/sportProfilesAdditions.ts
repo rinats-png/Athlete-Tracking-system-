@@ -229,6 +229,7 @@ export const STRENGTH_SPORTS: Discipline[] = [
       tableCore('deadlift_1rm', '1RM Deadlift'),
       tableOptional('grip_strength', 'Griffkraft als Begrenzer beim Kreuzheben'),
       tableOptional('overhead_press_1rm', 'Oberkörperkraft über Kopf'),
+      addedOptional('isometric_mid_thigh_pull', "Die Testbibliothek (Protokoll 1.0) nennt «Isometric Mid-Thigh Pull (IMTP)» für diese Disziplin."),
     ],
     eventDurationSeconds: null,
     typicalLimiter: 'max_strength',

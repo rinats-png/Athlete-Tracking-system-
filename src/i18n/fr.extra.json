@@ -65,7 +65,9 @@
       "gps_match_distance_km": "Distance totale du match (GPS)",
       "hsr_distance_m": "Distance parcourue à haute vitesse en match (GPS)",
       "shot_accuracy_football_pct": "Test de tir au football : taux de réussite",
-      "throw_accuracy_handball_pct": "Test de lancer au handball : taux de réussite"
+      "throw_accuracy_handball_pct": "Test de lancer au handball : taux de réussite",
+      "dxa_fat_mass_percent": "Masse grasse (DXA)",
+      "bia_fat_mass_percent": "Masse grasse (BIA)"
     },
     "meaning": {
       "ck_u_l": "Une enzyme dont le taux sanguin monte après une charge inhabituelle. La variation entre personnes est très grande — comparable seulement avec toi-même.",
@@ -104,7 +106,9 @@
       "gps_match_distance_km": "La distance qu'un capteur GPS enregistre pendant un match. Comparable uniquement avec le même capteur et la même durée de match ; pas une évaluation de la performance.",
       "hsr_distance_m": "La distance au-dessus du seuil que ton système GPS compte comme haute vitesse. Le seuil diffère selon les systèmes ; note-le dans la note.",
       "shot_accuracy_football_pct": "La part de tirs réussis en pourcentage, à partir des tirs et des réussites du test de tir. Un relevé d'habileté, pas un axe de performance ; note la distance, le ballon et le pied dans la note.",
-      "throw_accuracy_handball_pct": "La part de tirs réussis en pourcentage, à partir des lancers et des réussites du test de lancer. Un relevé d'habileté, pas un axe de performance ; note la distance, le ballon et la technique de lancer dans la note."
+      "throw_accuracy_handball_pct": "La part de tirs réussis en pourcentage, à partir des lancers et des réussites du test de lancer. Un relevé d'habileté, pas un axe de performance ; note la distance, le ballon et la technique de lancer dans la note.",
+      "dxa_fat_mass_percent": "Part de masse grasse issue d'un scan DXA. Ne mélange pas DXA et BIA : compare uniquement des valeurs obtenues avec la même méthode et le même appareil ; note l'hydratation et l'heure dans la remarque.",
+      "bia_fat_mass_percent": "Part de masse grasse issue d'une mesure par bioimpédance. Comparable uniquement avec le même appareil, le même moment de la journée et une hydratation similaire ; ne mélange pas avec la DXA."
     }
   },
   "procedure": {

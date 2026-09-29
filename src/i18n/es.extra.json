@@ -65,7 +65,9 @@
       "gps_match_distance_km": "Distancia total del partido (GPS)",
       "hsr_distance_m": "Distancia de carrera a alta velocidad del partido (GPS)",
       "shot_accuracy_football_pct": "Test de tiro de fútbol: porcentaje de aciertos",
-      "throw_accuracy_handball_pct": "Test de lanzamiento de balonmano: porcentaje de aciertos"
+      "throw_accuracy_handball_pct": "Test de lanzamiento de balonmano: porcentaje de aciertos",
+      "dxa_fat_mass_percent": "Grasa corporal (DXA)",
+      "bia_fat_mass_percent": "Grasa corporal (BIA)"
     },
     "meaning": {
       "ck_u_l": "Una enzima cuyo nivel en sangre sube tras una carga no habitual. La variación entre personas es muy grande — solo es comparable contigo mismo.",
@@ -104,7 +106,9 @@
       "gps_match_distance_km": "La distancia que registra un sensor GPS durante un partido. Solo comparable con el mismo sensor y la misma duración del partido; no es una valoración del rendimiento.",
       "hsr_distance_m": "La distancia por encima del umbral que tu sistema GPS cuenta como alta velocidad. El umbral difiere entre sistemas; anotarlo en la nota.",
       "shot_accuracy_football_pct": "El porcentaje de aciertos, a partir de los disparos y aciertos del test de tiro. Un registro de habilidad, no un eje de rendimiento; anotar la distancia, el balón y la pierna en la nota.",
-      "throw_accuracy_handball_pct": "El porcentaje de aciertos, a partir de los lanzamientos y aciertos del test de lanzamiento. Un registro de habilidad, no un eje de rendimiento; anotar la distancia, el balón y la técnica de lanzamiento en la nota."
+      "throw_accuracy_handball_pct": "El porcentaje de aciertos, a partir de los lanzamientos y aciertos del test de lanzamiento. Un registro de habilidad, no un eje de rendimiento; anotar la distancia, el balón y la técnica de lanzamiento en la nota.",
+      "dxa_fat_mass_percent": "Porcentaje de grasa corporal de un escáner DXA. No mezclar DXA y BIA: comparar solo valores del mismo método y equipo; anotar la hidratación y la hora en la nota.",
+      "bia_fat_mass_percent": "Porcentaje de grasa corporal de una medición por bioimpedancia. Solo comparable con el mismo equipo, la misma hora del día y una hidratación similar; no mezclar con DXA."
     }
   },
   "procedure": {

@@ -699,6 +699,120 @@ function TTest() {
   )
 }
 
+function Squat1Rm() {
+  // Links aufrecht, rechts tiefster Punkt: Hüftfalte unter der Knieoberkante.
+  return (
+    <>
+      <Floor y={170} />
+      <line x1="288" y1="44" x2="288" y2="170" style={S.floor} />
+      <line x1="262" y1="138" x2="288" y2="138" style={S.acc} />
+      <line x1="262" y1="70" x2="288" y2="70" style={S.floor} />
+      <Head x={78} y={46} />
+      <Poly p={[[78, 54], [78, 108], [78, 168]]} />
+      <line x1="62" y1="62" x2="94" y2="62" style={{ ...S.body, strokeWidth: 5 }} />
+      <Arrow from={[130, 70]} to={[130, 116]} st={S.thin} />
+      <Head x={196} y={84} />
+      <Poly p={[[194, 92], [176, 132]]} />
+      <Poly p={[[176, 132], [208, 128], [198, 168]]} />
+      <line x1="182" y1="90" x2="206" y2="90" style={{ ...S.body, strokeWidth: 5 }} />
+      <line x1="158" y1="126" x2="230" y2="126" style={S.dash} />
+      <circle cx="176" cy="134" r="3.5" style={S.dotAcc} />
+    </>
+  )
+}
+function Imtp() {
+  // Stange fixiert auf mittlerer Oberschenkelhöhe, Person steht auf der Kraftplatte.
+  return (
+    <>
+      <rect x="110" y="168" width="100" height="8" style={S.mat} />
+      <line x1="214" y1="110" x2="214" y2="168" style={S.floor} />
+      <line x1="150" y1="114" x2="214" y2="114" style={{ ...S.acc, strokeWidth: 3 }} />
+      <Head x={166} y={46} />
+      <Poly p={[[164, 54], [148, 98]]} />
+      <Poly p={[[148, 98], [170, 130], [158, 166]]} />
+      <Poly p={[[164, 60], [168, 114]]} />
+      <Arrow from={[250, 150]} to={[250, 84]} />
+    </>
+  )
+}
+function Speaker({ x, y }: { x: number; y: number }) {
+  return (
+    <>
+      <polyline points={pts([[x, y - 4], [x + 5, y - 4], [x + 11, y - 9], [x + 11, y + 9], [x + 5, y + 4], [x, y + 4], [x, y - 4]])} style={S.thin} />
+      <path d={`M ${x + 15} ${y - 5} q 5 5 0 10`} style={S.thin} />
+    </>
+  )
+}
+function HyroxRace() {
+  // Acht Abschnitte: je 1 km Lauf, danach eine Station; Stationen nummeriert in Rennreihenfolge.
+  const cells = Array.from({ length: 8 }, (_, i) => i)
+  return (
+    <>
+      {cells.map((i) => {
+        const col = i % 4
+        const row = Math.floor(i / 4)
+        const x = 24 + col * 72
+        const y = 40 + row * 70
+        return (
+          <g key={i}>
+            <line x1={x} y1={y} x2={x + 34} y2={y} style={{ ...S.acc, strokeWidth: 4 }} />
+            <T x={x + 17} y={y - 8}>1 km</T>
+            <circle cx={x + 50} cy={y} r={11} style={S.mat} />
+            <T x={x + 50} y={y + 4} k="txtInk">{i + 1}</T>
+          </g>
+        )
+      })}
+      <Arrow from={[300, 40]} to={[300, 100]} st={S.thin} />
+    </>
+  )
+}
+function SledLane() {
+  return (
+    <>
+      <line x1="40" y1="60" x2="280" y2="60" style={S.floor} />
+      <line x1="40" y1="130" x2="280" y2="130" style={S.floor} />
+      <line x1="60" y1="52" x2="60" y2="138" style={{ ...S.acc, strokeWidth: 3 }} />
+      <line x1="260" y1="52" x2="260" y2="138" style={S.dash} />
+      <rect x="68" y="80" width="30" height="20" rx="3" style={S.mat} />
+      <Arrow from={[106, 90]} to={[248, 90]} />
+      <T x={60} y={44}>S</T>
+    </>
+  )
+}
+function WallBall() {
+  return (
+    <>
+      <Floor y={170} />
+      <line x1="272" y1="20" x2="272" y2="170" style={S.floor} />
+      <line x1="250" y1="46" x2="272" y2="46" style={S.acc} />
+      <Head x={98} y={92} />
+      <Poly p={[[96, 100], [80, 132]]} />
+      <Poly p={[[80, 132], [108, 130], [98, 168]]} />
+      <Poly p={[[94, 104], [116, 110]]} />
+      <circle cx="122" cy="106" r="8" style={S.mat} />
+      <path d="M 132 100 Q 200 10 246 44" style={S.dash} />
+      <Arrow from={[236, 40]} to={[248, 46]} st={S.thin} />
+      <line x1="62" y1="126" x2="120" y2="126" style={S.dash} />
+    </>
+  )
+}
+function SdcLane() {
+  // 25 m; fünf Abschnitte in der Reihenfolge des Protokolls, Zahlen 1–5.
+  return (
+    <>
+      <line x1="70" y1="12" x2="70" y2="150" style={{ ...S.acc, strokeWidth: 3 }} />
+      <line x1="250" y1="12" x2="250" y2="150" style={{ ...S.acc, strokeWidth: 3 }} />
+      {[28, 56, 84, 112, 140].map((y, i) => (
+        <g key={y}>
+          <Arrow from={i % 2 === 0 ? [78, y] : [242, y]} to={i % 2 === 0 ? [242, y] : [78, y]} st={S.thin} />
+          <T x={54} y={y + 4} k="txtInk">{i + 1}</T>
+        </g>
+      ))}
+      <Dim a={[70, 166]} b={[250, 166]} label="25 m" off={20} />
+    </>
+  )
+}
+
 const FIGS: Record<string, () => ReactNode> = {
   sjft: SjftMat,
   swft: SwftMat,
@@ -751,6 +865,18 @@ const FIGS: Record<string, () => ReactNode> = {
   ckcuest: Ckcuest,
   illinois: Illinois,
   t_test: TTest,
+  squat_1rm: Squat1Rm,
+  imtp: Imtp,
+  shuttle_20m: () => (
+    <>
+      <Shuttle meters={20} legs={5} />
+      <Speaker x={20} y={20} />
+    </>
+  ),
+  hyrox_race: HyroxRace,
+  sled_lane: SledLane,
+  wall_ball: WallBall,
+  sdc_lane: SdcLane,
 }
 
 export const FIGURE_IDS = Object.keys(FIGS)

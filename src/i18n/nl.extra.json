@@ -65,7 +65,9 @@
       "gps_match_distance_km": "Totale wedstrijdafstand (GPS)",
       "hsr_distance_m": "Hoge-snelheidsafstand in de wedstrijd (GPS)",
       "shot_accuracy_football_pct": "Schiettest voetbal: trefferpercentage",
-      "throw_accuracy_handball_pct": "Werptest handbal: trefferpercentage"
+      "throw_accuracy_handball_pct": "Werptest handbal: trefferpercentage",
+      "dxa_fat_mass_percent": "Lichaamsvet (DXA)",
+      "bia_fat_mass_percent": "Lichaamsvet (BIA)"
     },
     "meaning": {
       "ck_u_l": "Een enzym waarvan de bloedspiegel stijgt na ongewone belasting. De variatie tussen personen is zeer groot — alleen met jezelf vergelijkbaar.",
@@ -104,7 +106,9 @@
       "gps_match_distance_km": "De afstand die een GPS-sensor over een wedstrijd registreert. Alleen vergelijkbaar bij dezelfde sensor en wedstrijdduur; geen prestatiebeoordeling.",
       "hsr_distance_m": "De afstand boven de drempel die je GPS-systeem als hoge snelheid telt. De drempel verschilt per systeem; noteer hem in de notitie.",
       "shot_accuracy_football_pct": "Het aandeel treffers in procent, uit de schoten en treffers van de schiettest. Een vaardigheidsregistratie, geen prestatie-as; noteer afstand, bal en voet in de notitie.",
-      "throw_accuracy_handball_pct": "Het aandeel treffers in procent, uit de worpen en treffers van de werptest. Een vaardigheidsregistratie, geen prestatie-as; noteer afstand, bal en worptechniek in de notitie."
+      "throw_accuracy_handball_pct": "Het aandeel treffers in procent, uit de worpen en treffers van de werptest. Een vaardigheidsregistratie, geen prestatie-as; noteer afstand, bal en worptechniek in de notitie.",
+      "dxa_fat_mass_percent": "Aandeel lichaamsvet uit een DXA-scan. Meng DXA en BIA niet: vergelijk alleen waarden van dezelfde methode en hetzelfde apparaat; noteer hydratatie en tijdstip in de opmerking.",
+      "bia_fat_mass_percent": "Aandeel lichaamsvet uit een bio-impedantiemeting. Alleen vergelijkbaar met hetzelfde apparaat, hetzelfde tijdstip van de dag en vergelijkbare hydratatie; meng niet met DXA."
     }
   },
   "procedure": {

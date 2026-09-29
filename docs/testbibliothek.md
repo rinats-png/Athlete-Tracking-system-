@@ -10,7 +10,7 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
 | 1 | Kampfsport (Judo, Ringen, Boxen, BJJ, MMA, Karate, Taekwondo, Fechten, Pencak Silat) | übertragen |
 | 2 | Laufen, Radfahren, Schwimmen, Triathlon, Rudern | übertragen |
 | 3 | Teamsport (Fußball, Basketball, Handball, Volleyball, Rugby, Cricket) | übertragen |
-| 4 | Kraftsport, Allgemein, HYROX, Tactical | offen |
+| 4 | Kraftsport, Allgemein, HYROX, Tactical | übertragen |
 | 5 | Recovery, Thermal, NIRS, Ü40+ | offen |
 
 ## Wohin was gehört
@@ -43,6 +43,13 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
   keine Leistungsachse, keine Bewertung. GPS-Strecke und Hochgeschwindigkeitsstrecke sind
   Sensor-Beobachtungswerte.
 - **Doppelt im Dokument:** Schulter-ER/IR (Handball) ist derselbe Wert wie in Schwimmen.
+- **Körperzusammensetzung:** DXA und BIA sind zwei getrennte Beobachtungswerte, weil die Quelle
+  ausdrücklich verbietet, sie zu mischen. Der FMS ist der Beobachtungswert `fms_total` (ohne
+  Skizze: sieben Bewegungsmuster, keine Bewertung erfunden). Sit-and-Reach steht doppelt im
+  Dokument und ist ein Beobachtungswert.
+- **AFT (Tactical):** Die Quellenanker («Maximalwert 350 lb», «61 Reps», «13:25») stehen als
+  Kohortenwerte im Abschnitt «Bewertung»; das 3RM-Kreuzheben ist ein eigener Test ohne
+  1RM-Umrechnung.
 - **Rudern** hat im Katalog keine Disziplin. Die Ruder-Tests (500 m, 30 s Leistung) und der
   1000-m-Lauf stehen im Katalog, sind aber keiner Disziplin zugeordnet.
 - **Quellenfehler:** Der 10-km-Lauf nennt in der Quelle «10,000 km»; übernommen sind 10 km.

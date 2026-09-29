@@ -65,7 +65,9 @@
       "gps_match_distance_km": "Samlet distance i kamp (GPS)",
       "hsr_distance_m": "Højhastighedsløb i kamp, distance (GPS)",
       "shot_accuracy_football_pct": "Fodbold-skudtest: træfprocent",
-      "throw_accuracy_handball_pct": "Håndbold-kasttest: træfprocent"
+      "throw_accuracy_handball_pct": "Håndbold-kasttest: træfprocent",
+      "dxa_fat_mass_percent": "Kropsfedt (DXA)",
+      "bia_fat_mass_percent": "Kropsfedt (BIA)"
     },
     "meaning": {
       "ck_u_l": "Et enzym, hvis niveau i blodet stiger efter uvant belastning. Variationen mellem personer er meget stor — det kan kun sammenlignes med dig selv.",
@@ -104,7 +106,9 @@
       "gps_match_distance_km": "Den distance, en GPS-sensor registrerer over en kamp. Kun sammenlignelig med samme sensor og kampvarighed; ikke en præstationsvurdering.",
       "hsr_distance_m": "Den distance over den tærskel, dit GPS-system tæller som høj hastighed. Tærsklen varierer mellem systemer; notér den i noten.",
       "shot_accuracy_football_pct": "Andelen af træffere i procent ud fra skud og træffere i skudtesten. En færdighedsregistrering, ikke en præstationsakse; notér afstand, bold og fod i noten.",
-      "throw_accuracy_handball_pct": "Andelen af træffere i procent ud fra kast og træffere i kasttesten. En færdighedsregistrering, ikke en præstationsakse; notér afstand, bold og kastteknik i noten."
+      "throw_accuracy_handball_pct": "Andelen af træffere i procent ud fra kast og træffere i kasttesten. En færdighedsregistrering, ikke en præstationsakse; notér afstand, bold og kastteknik i noten.",
+      "dxa_fat_mass_percent": "Kropsfedtandel fra en DXA-scanning. Bland ikke DXA og BIA: sammenlign kun værdier fra samme metode og apparat; notér hydrering og tidspunkt i noten.",
+      "bia_fat_mass_percent": "Kropsfedtandel fra en bioimpedansmåling. Kun sammenlignelig med samme apparat, tidspunkt på dagen og tilsvarende hydrering; bland ikke med DXA."
     }
   },
   "procedure": {

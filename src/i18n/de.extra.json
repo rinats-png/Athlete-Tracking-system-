@@ -65,7 +65,9 @@
       "gps_match_distance_km": "Spiel: Gesamtstrecke (GPS)",
       "hsr_distance_m": "Spiel: Hochgeschwindigkeitsstrecke (GPS)",
       "shot_accuracy_football_pct": "Schusstest Fußball: Trefferquote",
-      "throw_accuracy_handball_pct": "Wurftest Handball: Trefferquote"
+      "throw_accuracy_handball_pct": "Wurftest Handball: Trefferquote",
+      "dxa_fat_mass_percent": "Körperfett (DXA)",
+      "bia_fat_mass_percent": "Körperfett (BIA)"
     },
     "meaning": {
       "ck_u_l": "Ein Enzym, dessen Blutspiegel nach ungewohnter Belastung steigt. Die Streuung zwischen Menschen ist sehr gross — vergleichbar ist er nur mit dir selbst.",
@@ -104,7 +106,9 @@
       "gps_match_distance_km": "Die vom GPS-Sensor gemessene Strecke eines Spiels. Nur mit demselben Sensor und derselben Spieldauer vergleichbar; keine Leistungsbewertung.",
       "hsr_distance_m": "Die Strecke oberhalb der Schwelle, die dein GPS-System als hohe Geschwindigkeit führt. Die Schwelle unterscheidet sich je System; trag sie in die Notiz ein.",
       "shot_accuracy_football_pct": "Der Anteil der Treffer in Prozent, aus der Zahl der Schüsse und Treffer des Schusstests. Eine Technikangabe, keine Leistungsachse; Distanz, Ball und Fuß gehören in die Notiz.",
-      "throw_accuracy_handball_pct": "Der Anteil der Treffer in Prozent, aus der Zahl der Würfe und Treffer des Wurftests. Eine Technikangabe, keine Leistungsachse; Distanz, Ball und Wurftechnik gehören in die Notiz."
+      "throw_accuracy_handball_pct": "Der Anteil der Treffer in Prozent, aus der Zahl der Würfe und Treffer des Wurftests. Eine Technikangabe, keine Leistungsachse; Distanz, Ball und Wurftechnik gehören in die Notiz.",
+      "dxa_fat_mass_percent": "Der Körperfettanteil aus einer DXA-Messung. DXA und BIA nicht mischen: vergleiche nur Werte desselben Verfahrens und Geräts; Hydration und Zeitpunkt gehören in die Notiz.",
+      "bia_fat_mass_percent": "Der Körperfettanteil aus einer Bioimpedanz-Messung. Nur mit demselben Gerät, derselben Tageszeit und ähnlicher Hydration vergleichbar; nicht mit DXA mischen."
     }
   },
   "procedure": {

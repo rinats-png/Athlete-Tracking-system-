@@ -5,11 +5,13 @@ import { LIBRARY_PROCEDURES, OBSERVATION_PROCEDURES } from '../src/data/testProc
 import { OBSERVATIONS } from '../src/data/observations'
 import { FIGURE_IDS } from '../src/features/tests/figures/library'
 import { EQUIPMENT_BY_ID } from '../src/data/equipment'
+import { procedureFor } from '../src/data/testProcedure'
 import { disciplineById } from '../src/data/sportProfiles'
 
 /**
  * Testbibliothek, Protokoll 1.0 — Welle 1 (Kampfsport) und Welle 2 (Laufen,
- * Rad, Schwimmen, Triathlon, Rudern) und Welle 3 (Teamsport).
+ * Rad, Schwimmen, Triathlon, Rudern) Welle 3 (Teamsport) und
+ * Welle 4 (Kraftsport, Allgemein, HYROX, Tactical).
  *
  * Was hier gesichert wird, ist genau das, was beim Übertragen aus einem
  * Dokument still verloren geht: ein Verweis, der ins Leere zeigt, eine
@@ -35,6 +37,15 @@ test.describe('Testbibliothek — Daten', () => {
       expect(p.goal?.en, `${key}: goal`).toBeTruthy()
       expect(p.steps?.length ?? 0, `${key}: Schritte`).toBeGreaterThan(0)
       expect(p.scoring?.de, `${key}: Bewertung`).toBeTruthy()
+    }
+  })
+
+  test('jeder Test mit Bibliotheksvorschrift zeigt eine vollständige, keine allgemeine', () => {
+    // Fehlt einem Test die eigene Vorschrift und liefert die Bibliothek nur Zusatzfelder,
+    // fällt die Seite still auf den allgemeinen Text zurück.
+    for (const slug of Object.keys(LIBRARY_PROCEDURES)) {
+      const t = TEST_CATALOG.find((x) => x.slug === slug)!
+      expect(procedureFor(t).source, slug).toBe('specific')
     }
   })
 
@@ -161,8 +172,8 @@ test.describe('Testbibliothek — Daten', () => {
     for (const t of added) expect(t.role).toBe('optional')
   })
 
-  test('Zugleinen-Schwimmen, Isometrik und F-v-Profil sind Laborwerte und nie Pflicht', () => {
-    for (const slug of ['tethered_swim_30s', 'whole_body_isometric_force', 'fv_profile_ergometer']) {
+  test('Zugleinen-Schwimmen, Isometrik, IMTP und F-v-Profil sind Laborwerte und nie Pflicht', () => {
+    for (const slug of ['tethered_swim_30s', 'whole_body_isometric_force', 'fv_profile_ergometer', 'isometric_mid_thigh_pull']) {
       const t = TEST_CATALOG.find((x) => x.slug === slug)!
       expect(t.setting, slug).toBe('lab')
       expect(t.deviceBound, slug).toBe('critical')
@@ -211,6 +222,14 @@ test.describe('Testbibliothek — Anzeige', () => {
     await page.goto('/tests/yo_yo_ir1/details', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
     await expect(page.getByRole('img', { name: /zwei Linien im Abstand von 20 m/ })).toBeVisible()
+  })
+
+  test('Welle 4: HYROX zeigt die acht Abschnitte, der 3RM-Test hat keine Referenz erfunden', async ({ page }) => {
+    await openGuest(page)
+    await page.goto('/tests/hyrox_simulation/details', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByRole('img', { name: /Ablaufgrafik des HYROX-Rennens/ })).toBeVisible()
+    await page.goto('/tests/deadlift_3rm_aft/details', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
   })
 
   test('ein Beobachtungswert zeigt seine Durchführung, ohne bewertet zu werden', async ({ page }) => {

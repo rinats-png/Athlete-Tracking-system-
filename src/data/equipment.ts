@@ -72,6 +72,7 @@ export type EquipmentId =
   | 'tether_system'
   | 'isometric_rig'
   | 'force_sensor'
+  | 'trap_bar'
 
 export interface EquipmentItem {
   id: EquipmentId
@@ -322,6 +323,11 @@ export const EQUIPMENT: EquipmentItem[] = [
     id: 'force_sensor',
     name: { de: "Dynamometer oder Kraftsensor", en: "Dynamometer or force sensor" },
     keywords: ["dynamometer", "kraftsensor", "kraftsystem", "force sensor", "force system"],
+  },
+  {
+    id: 'trap_bar',
+    name: { de: "Hex-/Trap-Bar", en: "Hex/trap bar" },
+    keywords: ["trap-bar", "hex-", "trap bar", "hex/"],
   },
 ]
 

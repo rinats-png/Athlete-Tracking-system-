@@ -792,4 +792,24 @@ export const TEST_CLASSIFICATION: Record<string, TestClassification> = {
     dimensionMetrics: { max_strength: 'peakForceN' },
     direction: 'higher_is_better',
   },
+
+  // --- Testbibliothek, Protokoll 1.0 (Welle 2 (Laufen, Rad, Schwimmen, Triathlon, Rudern)) -------------------------------
+  isometric_mid_thigh_pull: {
+    category: 'max_strength',
+    dimension: 'max_strength',
+    dimensionMetrics: { max_strength: 'peakForceN' },
+    direction: 'higher_is_better',
+  },
+  multiple_jump_test: {
+    category: 'power',
+    dimension: 'power',
+    dimensionMetrics: { power: 'meanJumpHeightCm' },
+    direction: 'higher_is_better',
+  },
+  deadlift_3rm_aft: {
+    category: 'max_strength',
+    dimension: 'max_strength',
+    dimensionMetrics: { max_strength: 'load3RmKg' },
+    direction: 'higher_is_better',
+  },
 }

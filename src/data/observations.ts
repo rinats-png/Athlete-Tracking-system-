@@ -468,6 +468,27 @@ export const OBSERVATIONS: ObservationDefinition[] = [
     source: 'self',
     direction: 'higher',
   },
+  // --- Testbibliothek, Protokoll 1.0 (Welle 4) -------------------------------
+  {
+    key: 'dxa_fat_mass_percent',
+    group: 'body',
+    unit: "%",
+    min: 2,
+    max: 60,
+    step: 0.1,
+    source: 'lab',
+    direction: 'neutral',
+  },
+  {
+    key: 'bia_fat_mass_percent',
+    group: 'body',
+    unit: "%",
+    min: 2,
+    max: 60,
+    step: 0.1,
+    source: 'device',
+    direction: 'neutral',
+  },
 ]
 
 export const OBSERVATION_BY_KEY = new Map(OBSERVATIONS.map((o) => [o.key, o]))
