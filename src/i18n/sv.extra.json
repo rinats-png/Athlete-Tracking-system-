@@ -131,7 +131,8 @@
     "distance": "Avstånd",
     "scoring": "Bedömning och utvärdering",
     "scoringNote": "Siffrorna i den här beskrivningen är kohortvärden från protokollets källa, inga normer. Appen placerar bara ett resultat i sammanhang där en belagd referens finns lagrad.",
-    "figure": "Skiss"
+    "figure": "Skiss",
+    "imageAlt": "Illustration till testet: {{name}}"
   },
   "compare": {
     "title": "Atletjämförelse",

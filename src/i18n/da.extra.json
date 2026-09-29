@@ -131,7 +131,8 @@
     "distance": "Afstande",
     "scoring": "Bedømmelse og evaluering",
     "scoringNote": "Tal i denne beskrivelse er kohorteværdier fra protokollens kilde, ikke normer. Appen indplacerer kun et resultat, hvor en dokumenteret reference er lagret.",
-    "figure": "Skitse"
+    "figure": "Skitse",
+    "imageAlt": "Illustration til testen: {{name}}"
   },
   "compare": {
     "title": "Atletsammenligning",

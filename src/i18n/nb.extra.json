@@ -131,7 +131,8 @@
     "distance": "Avstander",
     "scoring": "Vurdering og evaluering",
     "scoringNote": "Tallene i denne beskrivelsen er kohortverdier fra protokollens kilde, ikke normer. Appen plasserer bare et resultat der en dokumentert referanse er lagret.",
-    "figure": "Skisse"
+    "figure": "Skisse",
+    "imageAlt": "Illustrasjon til testen: {{name}}"
   },
   "compare": {
     "title": "Utøversammenligning",

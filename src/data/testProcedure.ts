@@ -62,8 +62,6 @@ export type TestProcedure = {
   distanceSpec?: Bilingual
   /** Was gemessen und wie ausgewertet wird. Zahlen darin sind Kohortenwerte, keine Normen. */
   scoring?: Bilingual
-  /** Skizze: Kennung in `features/tests/figures` und ihre Bildbeschreibung. */
-  figure?: { id: string; alt: Bilingual }
 }
 
 /** Woher eine Vorschrift stammt: eigens geschrieben oder aus dem Modus abgeleitet. */

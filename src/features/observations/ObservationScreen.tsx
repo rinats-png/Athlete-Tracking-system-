@@ -198,7 +198,10 @@ export function ObservationScreen() {
             <summary className="cursor-pointer px-4 py-2.5 text-[13px] font-semibold">
               {t('procedure.title')}
             </summary>
-            <ProcedureContent procedure={procedure as TestProcedure} />
+            <ProcedureContent
+              procedure={procedure as TestProcedure}
+              image={{ id: key, name: t(`observation.keys.${key}`) }}
+            />
           </details>
         )}
 

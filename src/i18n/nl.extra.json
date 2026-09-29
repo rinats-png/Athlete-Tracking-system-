@@ -131,7 +131,8 @@
     "distance": "Afstanden",
     "scoring": "Beoordeling en evaluatie",
     "scoringNote": "Getallen in deze beschrijving zijn cohortwaarden uit de bron van het protocol, geen normen. De app plaatst een resultaat alleen in context waar een onderbouwde referentie is opgeslagen.",
-    "figure": "Schets"
+    "figure": "Schets",
+    "imageAlt": "Illustratie bij de test: {{name}}"
   },
   "compare": {
     "title": "Atletenvergelijking",

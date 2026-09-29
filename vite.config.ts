@@ -58,6 +58,20 @@ export default defineConfig({
         // Testdurchführung muss auch im Funkloch der Halle funktionieren.
         // webp gehörte anfangs nicht dazu — die Körperansicht fehlte offline.
         globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2,webmanifest}'],
+        // Die Testbilder (rund 9 MB) gehören nicht in den Vorab-Zwischenspeicher:
+        // sie sind Beiwerk, die Vorschrift steht auch ohne sie. Sie werden beim
+        // ersten Ansehen gespeichert und danach offline gezeigt.
+        globIgnores: ['testbilder/**'],
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }: { url: URL }) => url.pathname.startsWith('/testbilder/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'testbilder',
+              expiration: { maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 * 365 },
+            },
+          },
+        ],
         navigateFallback: '/index.html',
         cleanupOutdatedCaches: true,
         // Empfang und Anzeige von Push-Nachrichten (public/push-sw.js).

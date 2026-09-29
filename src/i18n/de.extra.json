@@ -131,7 +131,8 @@
     "distance": "Strecken- und Distanzangaben",
     "scoring": "Bewertung und Auswertung",
     "scoringNote": "Zahlen in dieser Beschreibung sind Kohortenwerte aus der Quelle des Protokolls, keine Normen. Eine Einordnung gibt die App nur, wo eine belegte Referenz hinterlegt ist.",
-    "figure": "Skizze"
+    "figure": "Skizze",
+    "imageAlt": "Illustration zum Test: {{name}}"
   },
   "compare": {
     "title": "Athletenvergleich",

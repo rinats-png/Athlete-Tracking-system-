@@ -6,7 +6,7 @@ import type { Bilingual, TestProcedure } from '@/data/testProcedure'
 import type { TestDefinition } from '@/data/testCatalog'
 import { pick } from '@/i18n/pick'
 import type { AppLocale } from '@/i18n/locales'
-import { TestFigure } from './figures/TestFigure'
+import { TestImage } from './TestImage'
 
 /**
  * Die Durchführungsvorschrift zu einem Test.
@@ -61,11 +61,12 @@ export function ProcedureDetails({ test }: { test: TestDefinition }) {
 
 function ProcedureBody({ test }: { test: TestDefinition }) {
   const { procedure } = procedureFor(test)
-  return <ProcedureContent procedure={procedure} />
+  const locale = useLocale()
+  return <ProcedureContent procedure={procedure} image={{ id: test.slug, name: pick(test.name, locale) }} />
 }
 
 /** Der Inhalt einer Vorschrift — für Tests und für Beobachtungswerte gleich. */
-export function ProcedureContent({ procedure }: { procedure: TestProcedure }) {
+export function ProcedureContent({ procedure, image }: { procedure: TestProcedure; image?: { id: string; name: string } }) {
   const { t } = useTranslation()
   const locale = useLocale()
 
@@ -77,7 +78,7 @@ export function ProcedureContent({ procedure }: { procedure: TestProcedure }) {
           {pick(procedure.goal, locale)}
         </p>
       )}
-      {procedure.figure && <TestFigure id={procedure.figure.id} alt={pick(procedure.figure.alt, locale)} />}
+      {image && <TestImage id={image.id} name={image.name} />}
       <dl className="divide-y divide-line border-t border-line">
         {procedure.setup && <Block label={t('procedure.setup')} items={[procedure.setup]} locale={locale} />}
         {procedure.steps && procedure.steps.length > 0 && (

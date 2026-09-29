@@ -3879,10 +3879,6 @@
     "en": "3–5 s per attempt; 30–60 s rest.",
     "de": "3–5 s je Versuch; 30–60 s Pause."
   },
-  "A person stands upright, the elbow is bent at a right angle (90°), a hand dynamometer is held in the hand, the wrist is neutral.": {
-    "en": "A person stands upright, the elbow is bent at a right angle (90°), a hand dynamometer is held in the hand, the wrist is neutral.",
-    "de": "Eine Person steht aufrecht, der Ellenbogen ist im rechten Winkel (90°) gebeugt, in der Hand liegt ein Handdynamometer, das Handgelenk ist neutral."
-  },
   "Vertical explosive strength of the lower extremities.": {
     "en": "Vertical explosive strength of the lower extremities.",
     "de": "Vertikale Explosivkraft der unteren Extremitäten."
@@ -3918,10 +3914,6 @@
   "Jump height in cm; optionally peak power, GRF, RFD. Three attempts, best value; higher = better.": {
     "en": "Jump height in cm; optionally peak power, GRF, RFD. Three attempts, best value; higher = better.",
     "de": "Sprunghöhe cm; optional Peak Power, GRF, RFD. Drei Versuche, Bestwert; höher = besser."
-  },
-  "Side sequence of a countermovement jump: upright, countermovement downward, takeoff with flight phase, landing. An arrow marks the jump height.": {
-    "en": "Side sequence of a countermovement jump: upright, countermovement downward, takeoff with flight phase, landing. An arrow marks the jump height.",
-    "de": "Seitliche Sequenz eines Counter-Movement-Jumps: aufrecht, Gegenbewegung nach unten, Absprung mit Flugphase, Landung. Ein Pfeil markiert die Sprunghöhe."
   },
   "Explosive strength without countermovement.": {
     "en": "Explosive strength without countermovement.",
@@ -3959,10 +3951,6 @@
     "en": "Jump height in cm; source anchor elite MMA 29.8±4.5 cm.",
     "de": "Sprunghöhe cm; Quellenanker Elite MMA 29,8±4,5 cm."
   },
-  "Side sequence of a squat jump: start position in a squat at about 90° at the knee with a 2 s hold phase, followed by a vertical takeoff and landing.": {
-    "en": "Side sequence of a squat jump: start position in a squat at about 90° at the knee with a 2 s hold phase, followed by a vertical takeoff and landing.",
-    "de": "Seitliche Sequenz eines Squat Jumps: Startposition in der Hocke bei etwa 90° im Knie mit 2 s Haltephase, danach senkrechter Absprung und Landung."
-  },
   "Linear acceleration performance.": {
     "en": "Linear acceleration performance.",
     "de": "Lineare Beschleunigungsleistung."
@@ -3995,10 +3983,6 @@
     "en": "Best time in s. Elite kumite source anchor 1.97±0.06 s.",
     "de": "Bestzeit s. Elite-Kumite-Quellenanker 1,97±0,06 s."
   },
-  "Top view of the sprint track: the start is 50 cm before the timing gate at 0 m, the finish gate is at 10 m. A dimension line shows the 10 m.": {
-    "en": "Top view of the sprint track: the start is 50 cm before the timing gate at 0 m, the finish gate is at 10 m. A dimension line shows the 10 m.",
-    "de": "Draufsicht der Sprintbahn: Der Start liegt 50 cm vor dem Timing Gate bei 0 m, das Zielgate steht bei 10 m. Eine Maßlinie zeigt die 10 m."
-  },
   "Linear sprint speed.": {
     "en": "Linear sprint speed.",
     "de": "Lineare Sprintgeschwindigkeit."
@@ -4022,10 +4006,6 @@
   "30 m.": {
     "en": "30 m.",
     "de": "30 m."
-  },
-  "Top view of the sprint track with timing gates at 0 m and 30 m. A dimension line shows the 30 m.": {
-    "en": "Top view of the sprint track with timing gates at 0 m and 30 m. A dimension line shows the 30 m.",
-    "de": "Draufsicht der Sprintbahn mit Timing Gates bei 0 m und 30 m. Eine Maßlinie zeigt die 30 m."
   },
   "Horizontal explosive strength.": {
     "en": "Horizontal explosive strength.",
@@ -4062,10 +4042,6 @@
   "Best distance in cm.": {
     "en": "Best distance in cm.",
     "de": "Bestweite cm."
-  },
-  "Side jump sequence: takeoff line, jump forward and a measuring distance to the rearmost heel.": {
-    "en": "Side jump sequence: takeoff line, jump forward and a measuring distance to the rearmost heel.",
-    "de": "Seitliche Sprungsequenz: Absprunglinie, Sprung nach vorn und eine Messstrecke bis zur hintersten Ferse."
   },
   "Judo-specific anaerobic/aerobic performance capacity; records throws and heart rate response.": {
     "en": "Judo-specific anaerobic/aerobic performance capacity; records throws and heart rate response.",
@@ -4123,10 +4099,6 @@
     "en": "Total throws; SJFT index = (HR immediately + HR after 1 min) / total throws. Lower index = better. Source values: junior male Excellent ≤10.40; Good 10.41–11.29; Regular 11.30–13.52; Poor 13.53–14.18; Very poor ≥14.19. Cadet male Excellent ≤11.15; Very poor ≥15.93.",
     "de": "Gesamtwürfe; SJFT-Index = (HF direkt + HF nach 1 min) / Gesamtwürfe. Niedrigerer Index = besser. Quellenwerte: Junior m Excellent ≤10,40; Good 10,41–11,29; Regular 11,30–13,52; Poor 13,53–14,18; Very poor ≥14,19. Kadett m Excellent ≤11,15; Very poor ≥15,93."
   },
-  "Top view of a judo mat: three positions A, B and C in a straight line, B in the middle, A and C each 6 m away. The test subject stands at B, the throwing partners at A and C. Arrows show the path from B to A, back to B and on to C.": {
-    "en": "Top view of a judo mat: three positions A, B and C in a straight line, B in the middle, A and C each 6 m away. The test subject stands at B, the throwing partners at A and C. Arrows show the path from B to A, back to B and on to C.",
-    "de": "Draufsicht einer Judomatte: drei Positionen A, B und C in gerader Linie, B in der Mitte, A und C je 6 m entfernt. Die Testperson steht bei B, die Wurfpartner bei A und C. Pfeile zeigen den Weg B nach A, zurück nach B und weiter nach C."
-  },
   "Wrestling-specific repeated throwing performance and fatigue response.": {
     "en": "Wrestling-specific repeated throwing performance and fatigue response.",
     "de": "Ringerspezifische wiederholte Wurfleistung und Ermüdungsreaktion."
@@ -4166,10 +4138,6 @@
   "Throws and index. Source classification: Superior ≥35 throws / index ≤9.6; Excellent 33–34 / 9.7–10.8; Very good 30–32 / 10.9–12.0; Good 25–29 / 12.1–14.5; Poor 23–24 / 14.6–15.8; Very poor 20–22 / 15.9–17.0; Bad ≤19 / ≥17.1.": {
     "en": "Throws and index. Source classification: Superior ≥35 throws / index ≤9.6; Excellent 33–34 / 9.7–10.8; Very good 30–32 / 10.9–12.0; Good 25–29 / 12.1–14.5; Poor 23–24 / 14.6–15.8; Very poor 20–22 / 15.9–17.0; Bad ≤19 / ≥17.1.",
     "de": "Würfe und Index. Quellenklassifikation: Superior ≥35 Würfe / Index ≤9,6; Excellent 33–34 / 9,7–10,8; Very good 30–32 /10,9–12,0; Good 25–29 /12,1–14,5; Poor 23–24 /14,6–15,8; Very poor 20–22 /15,9–17,0; Bad ≤19 /≥17,1."
-  },
-  "Top view of a wrestling mat: test subject in the center at B, two throwing partners on the left (A) and right (C). Arrows show the alternating throws, plus symbols for time and heart rate.": {
-    "en": "Top view of a wrestling mat: test subject in the center at B, two throwing partners on the left (A) and right (C). Arrows show the alternating throws, plus symbols for time and heart rate.",
-    "de": "Draufsicht einer Ringermatte: Testperson mittig bei B, zwei Wurfpartner links (A) und rechts (C). Pfeile zeigen die abwechselnden Würfe, dazu Symbole für Zeit und Herzfrequenz."
   },
   "Punch volume and fatigue development over a boxing-specific round.": {
     "en": "Punch volume and fatigue development over a boxing-specific round.",
@@ -4251,10 +4219,6 @@
     "en": "Maximum valid repetitions. Source anchor: cadet male Excellent ≥32; junior male Excellent ≥31. BJJ (Gi Grip Dynamic Repetitions): reps; higher = better.",
     "de": "Maximale gültige Wiederholungen. Quellenanker: Kadett m Excellent ≥32; Junior m Excellent ≥31. BJJ (Gi Grip Dynamic Repetitions): Reps; höher = besser."
   },
-  "Front view of a pull-up bar with judogi lapels in both hands: on the left in a full hang, on the right with the chin above the bar. An arrow shows the upward pulling direction.": {
-    "en": "Front view of a pull-up bar with judogi lapels in both hands: on the left in a full hang, on the right with the chin above the bar. An arrow shows the upward pulling direction.",
-    "de": "Frontansicht einer Klimmzugstange mit Judogi-Revers in beiden Händen: links im vollständigen Hang, rechts mit dem Kinn über der Stange. Ein Pfeil zeigt die Zugrichtung nach oben."
-  },
   "Stable pull-up bar, judogi lapels, timer.": {
     "en": "Stable pull-up bar, judogi lapels, timer.",
     "de": "Stabile Klimmzugstange, Judogi-Revers, Timer."
@@ -4298,10 +4262,6 @@
   "Hold time in seconds. Source anchor: cadet male Excellent ≥90 s; junior male Excellent ≥76 s. BJJ (Gi Grip Endurance): hold time in s. Source range high-level about 40–62 s; experienced 41–45 s; beginners about 28–36 s.": {
     "en": "Hold time in seconds. Source anchor: cadet male Excellent ≥90 s; junior male Excellent ≥76 s. BJJ (Gi Grip Endurance): hold time in s. Source range high-level about 40–62 s; experienced 41–45 s; beginners about 28–36 s.",
     "de": "Haltezeit in Sekunden. Quellenanker: Kadett m Excellent ≥90 s; Junior m Excellent ≥76 s. BJJ (Gi Grip Endurance): Haltezeit s. Quellenband High-Level etwa 40–62 s; erfahren 41–45 s; Anfänger etwa 28–36 s."
-  },
-  "Side view: a person holds themselves with the chin above the bar, a dashed line marks the minimum height, with a stopwatch symbol beside it.": {
-    "en": "Side view: a person holds themselves with the chin above the bar, a dashed line marks the minimum height, with a stopwatch symbol beside it.",
-    "de": "Seitenansicht: Eine Person hält sich mit dem Kinn über der Stange, eine gestrichelte Linie markiert die Mindesthöhe, daneben ein Stoppuhr-Symbol."
   },
   "Pull-up bar.": {
     "en": "Pull-up bar.",
@@ -4375,10 +4335,6 @@
     "en": "Hold time in s; higher = better.",
     "de": "Haltezeit s; höher = besser."
   },
-  "Side view: the upper body is inclined about 60° to the floor and supported against a wedge, the knees are bent. Angle marking 60° and stopwatch symbol.": {
-    "en": "Side view: the upper body is inclined about 60° to the floor and supported against a wedge, the knees are bent. Angle marking 60° and stopwatch symbol.",
-    "de": "Seitenansicht: Der Oberkörper ist etwa 60° zum Boden geneigt und stützt sich an einem Keil ab, die Knie sind gebeugt. Winkelmarkierung 60° und Stoppuhr-Symbol."
-  },
   "Mat, timer.": {
     "en": "Mat, timer.",
     "de": "Matte, Timer."
@@ -4419,10 +4375,6 @@
     "en": "Hold time in s per side and asymmetry.",
     "de": "Haltezeit s je Seite und Asymmetrie."
   },
-  "Side view of the side plank: the forearm rests on the floor, the body forms a diagonal line from shoulder to foot. A stopwatch symbol beside it.": {
-    "en": "Side view of the side plank: the forearm rests on the floor, the body forms a diagonal line from shoulder to foot. A stopwatch symbol beside it.",
-    "de": "Seitenansicht des Seitstützes: Der Unterarm liegt am Boden, der Körper bildet von der Schulter bis zum Fuß eine schräge Linie. Daneben ein Stoppuhr-Symbol."
-  },
   "Treatment table/bench, fixation straps, timer.": {
     "en": "Treatment table/bench, fixation straps, timer.",
     "de": "Behandlungsliege/Bank, Fixiergurte, Timer."
@@ -4454,10 +4406,6 @@
   "Hold time in s.": {
     "en": "Hold time in s.",
     "de": "Haltezeit s."
-  },
-  "Side view: the legs are fixed on a bench, the upper body hangs horizontally free toward the front. A stopwatch symbol beside it.": {
-    "en": "Side view: the legs are fixed on a bench, the upper body hangs horizontally free toward the front. A stopwatch symbol beside it.",
-    "de": "Seitenansicht: Die Beine sind auf einer Bank fixiert, der Oberkörper hängt waagerecht frei nach vorn. Daneben ein Stoppuhr-Symbol."
   },
   "3 light/target markers, timing system, level surface.": {
     "en": "3 light/target markers, timing system, level surface.",
@@ -4494,10 +4442,6 @@
   "Reaction plus movement time in s; median and best value. No general norm in the source.": {
     "en": "Reaction plus movement time in s; median and best value. No general norm in the source.",
     "de": "Reaktions- plus Bewegungszeit in s; Median und Bestwert. Keine allgemeine Norm in der Quelle."
-  },
-  "Top view: a central start marker (S) and three target lights on the left, front and right, each 3 m away. Arrows lead from the center to all targets.": {
-    "en": "Top view: a central start marker (S) and three target lights on the left, front and right, each 3 m away. Arrows lead from the center to all targets.",
-    "de": "Draufsicht: eine zentrale Startmarke (S) und drei Ziellichter links, vorn und rechts, jeweils 3 m entfernt. Pfeile führen von der Mitte zu allen Zielen."
   },
   "Isokinetic dynamometer.": {
     "en": "Isokinetic dynamometer.",
@@ -4574,10 +4518,6 @@
   "Peak force in N per jab/cross/hook. Source anchor device-dependent: Olympic cross 3427±811 N; other elite cross ~3000–4300 N.": {
     "en": "Peak force in N per jab/cross/hook. Source anchor device-dependent: Olympic cross 3427±811 N; other elite cross ~3000–4300 N.",
     "de": "Peak Force N je Jab/Cross/Hook. Quellenanker geräteabhängig: Olympia-Cross 3427±811 N; weitere Elite-Cross ~3000–4300 N."
-  },
-  "Side view: a boxer punches a punch target with a force sensor. The distance to the target and the target height are drawn as dimension lines.": {
-    "en": "Side view: a boxer punches a punch target with a force sensor. The distance to the target and the target height are drawn as dimension lines.",
-    "de": "Seitenansicht: Ein Boxer schlägt gegen ein Schlagziel mit Kraftsensor. Der Abstand zum Ziel und die Zielhöhe sind als Maßlinien eingezeichnet."
   },
   "PowerKube, standardised gloves, scale.": {
     "en": "PowerKube, standardised gloves, scale.",
@@ -4759,10 +4699,6 @@
     "en": "Kicks per interval, total kicks, fatigue index %. The source describes technical level differences, not a universal cutoff table.",
     "de": "Kicks je Intervall, Gesamt-Kicks, Fatigue Index %. Quelle beschreibt technische Niveauunterschiede, keine universelle Cutoff-Tabelle."
   },
-  "Side view: an athlete performs a roundhouse kick against a kick target, the target height is marked. Below, a schematic timeline with intervals.": {
-    "en": "Side view: an athlete performs a roundhouse kick against a kick target, the target height is marked. Below, a schematic timeline with intervals.",
-    "de": "Seitenansicht: Ein Athlet tritt einen Roundhouse-Kick gegen ein Kickziel, die Zielhöhe ist markiert. Darunter eine schematische Zeitachse mit Intervallen."
-  },
   "4-m shuttle course, two lines, kick target, audio/timer, HR measurement.": {
     "en": "4-m shuttle course, two lines, kick target, audio/timer, HR measurement.",
     "de": "4-m-Shuttle-Strecke, zwei Linien, Kickziel, Audio/Timer, HF-Messung."
@@ -4811,10 +4747,6 @@
     "en": "TAAA score and protocol-specific VO2 estimate; do not equate with direct cardiopulmonary exercise testing (spiroergometry).",
     "de": "TAAA Score und protokollspezifische VO2-Schätzung; nicht mit direkter Spiroergometrie gleichsetzen."
   },
-  "Top view: two lines 4 m apart with a shuttle zigzag and a kick target at the side. Above, the time sequence 6 × (20 s work, 10 s rest).": {
-    "en": "Top view: two lines 4 m apart with a shuttle zigzag and a kick target at the side. Above, the time sequence 6 × (20 s work, 10 s rest).",
-    "de": "Draufsicht: zwei Linien in 4 m Abstand mit einem Shuttle-Zickzack und einem Kickziel an der Seite. Darüber der Zeitablauf 6 × (20 s Arbeit, 10 s Pause)."
-  },
   "Fencing strip/marked course, audio/step protocol, complete standardized equipment.": {
     "en": "Fencing strip/marked course, audio/step protocol, complete standardized equipment.",
     "de": "Fechtbahn/markierte Strecke, Audio-/Stufenprotokoll, vollständige standardisierte Ausrüstung."
@@ -4855,10 +4787,6 @@
     "en": "Time in min. Source anchor for elite classification: ≥14.3 min.",
     "de": "Zeit min. Quellenanker für Eliteklassifikation: ≥14,3 min."
   },
-  "Top view of a fencing strip: start in En garde, arrows for forward and backward movement, lunge zone at the end and a stopwatch symbol.": {
-    "en": "Top view of a fencing strip: start in En garde, arrows for forward and backward movement, lunge zone at the end and a stopwatch symbol.",
-    "de": "Draufsicht einer Fechtbahn: Start in En garde, Pfeile für Vor- und Rückwärtsbewegung, Ausfallzone am Ende und ein Stoppuhr-Symbol."
-  },
   "5-m course, lines, timing.": {
     "en": "5-m course, lines, timing.",
     "de": "5-m-Strecke, Linien, Timing."
@@ -4895,10 +4823,6 @@
     "en": "Time in s. Elite 12.43±0.95 s; Sub-Elite 13.28±0.93 s in the source.",
     "de": "Zeit s. Elite 12,43±0,95 s; Sub-Elite 13,28±0,93 s in Quelle."
   },
-  "Top view: two lines 5 m apart, a zigzag arrow leads across five segments of 5 m each.": {
-    "en": "Top view: two lines 5 m apart, a zigzag arrow leads across five segments of 5 m each.",
-    "de": "Draufsicht: zwei Linien in 5 m Abstand, ein Zickzackpfeil führt über fünf Abschnitte von je 5 m."
-  },
   "Timing/motion capture system, fencing strip.": {
     "en": "Timing/motion capture system, fencing strip.",
     "de": "Timing-/Motion-Capture-System, Fechtbahn."
@@ -4931,10 +4855,6 @@
     "en": "Time in s. Elite 0.18±0.03; Sub-Elite 0.21±0.04 in the source.",
     "de": "Zeit s. Elite 0,18±0,03; Sub-Elite 0,21±0,04 in Quelle."
   },
-  "Side view: a fencer in En garde and in the lunge against a target. An arrow shows the measurement distance, plus a stopwatch symbol.": {
-    "en": "Side view: a fencer in En garde and in the lunge against a target. An arrow shows the measurement distance, plus a stopwatch symbol.",
-    "de": "Seitliche Darstellung: Ein Fechter in En garde und im Ausfall gegen eine Zielscheibe. Ein Pfeil zeigt die Messstrecke, dazu ein Stoppuhr-Symbol."
-  },
   "Marked agility course, timing.": {
     "en": "Marked agility course, timing.",
     "de": "Markierter Agility-Parcours, Timing."
@@ -4966,10 +4886,6 @@
   "Time in s; source anchor squad 5.63±0.28 s.": {
     "en": "Time in s; source anchor squad 5.63±0.28 s.",
     "de": "Zeit s; Quellenanker Kader 5,63±0,28 s."
-  },
-  "Schematic top view of a course with start (S), two turning points (1, 2) and finish (Z). Dimensions are not specified.": {
-    "en": "Schematic top view of a course with start (S), two turning points (1, 2) and finish (Z). Dimensions are not specified.",
-    "de": "Schematische Draufsicht eines Parcours mit Start (S), zwei Wendepunkten (1, 2) und Ziel (Z). Maße sind nicht angegeben."
   },
   "Dynamic single-leg balance and asymmetric reach.": {
     "en": "Dynamic single-leg balance and asymmetric reach.",
@@ -5014,10 +4930,6 @@
   "Reach per direction and composite score = sum of the three maximum values /(3 × leg length) ×100. Side asymmetry separately.": {
     "en": "Reach per direction and composite score = sum of the three maximum values /(3 × leg length) ×100. Side asymmetry separately.",
     "de": "Reach je Richtung und Composite Score = Summe der drei Maximalwerte /(3 × Beinlänge) ×100. Seitenasymmetrie separat."
-  },
-  "Top view of the Y-Balance setup: stance platform in the center and three directions, anterior (1), posteromedial (2) and posterolateral (3). The two posterior directions are symmetrical to the anterior one.": {
-    "en": "Top view of the Y-Balance setup: stance platform in the center and three directions, anterior (1), posteromedial (2) and posterolateral (3). The two posterior directions are symmetrical to the anterior one.",
-    "de": "Draufsicht des Y-Balance-Aufbaus: Standplattform in der Mitte und drei Richtungen, anterior (1), posteromedial (2) und posterolateral (3). Die beiden hinteren Richtungen liegen symmetrisch zur vorderen."
   },
   "Maximal inspiratory respiratory muscle strength.": {
     "en": "Maximal inspiratory respiratory muscle strength.",
@@ -5159,10 +5071,6 @@
     "en": "Best hold time per side in s; higher = better.",
     "de": "Beste Haltezeit je Seite in s; höher = besser."
   },
-  "A person stands on one leg, the other foot rests at the knee of the standing leg, hands are on the hips. Next to it, a stopwatch symbol.": {
-    "en": "A person stands on one leg, the other foot rests at the knee of the standing leg, hands are on the hips. Next to it, a stopwatch symbol.",
-    "de": "Eine Person steht auf einem Bein, der andere Fuß liegt am Knie des Standbeins, die Hände sind an den Hüften. Daneben ein Stoppuhr-Symbol."
-  },
   "Static balance ability on a narrow support surface.": {
     "en": "Static balance ability on a narrow support surface.",
     "de": "Statische Gleichgewichtsfähigkeit unter schmaler Unterstützungsfläche."
@@ -5207,10 +5115,6 @@
     "en": "Number of balance losses in 60 s; lower = better.",
     "de": "Anzahl Balanceverluste in 60 s; niedriger = besser."
   },
-  "A person stands on one leg on the flamingo balance beam. Next to it, a stopwatch symbol showing 60 s.": {
-    "en": "A person stands on one leg on the flamingo balance beam. Next to it, a stopwatch symbol showing 60 s.",
-    "de": "Eine Person steht auf einem Bein auf dem Flamingo-Balancebalken. Daneben ein Stoppuhr-Symbol mit der Angabe 60 s."
-  },
   "Flexibility of the posterior muscle chain.": {
     "en": "Flexibility of the posterior muscle chain.",
     "de": "Flexibilität der hinteren Muskelkette."
@@ -5250,10 +5154,6 @@
   "Best distance in cm; norms are age- and sex-specific.": {
     "en": "Best distance in cm; norms are age- and sex-specific.",
     "de": "Bestweite cm; Normen alters-/geschlechtsspezifisch."
-  },
-  "Side view: a person sits with extended knees in front of the sit-and-reach box and pushes the slider forward, there is a scale on the box.": {
-    "en": "Side view: a person sits with extended knees in front of the sit-and-reach box and pushes the slider forward, there is a scale on the box.",
-    "de": "Seitenansicht: Eine Person sitzt mit gestreckten Knien vor der Sit-and-Reach-Box und schiebt den Messschieber nach vorn, auf der Box ist eine Skala."
   },
   "Proprioceptive accuracy of the knee joint.": {
     "en": "Proprioceptive accuracy of the knee joint.",
@@ -5739,10 +5639,6 @@
     "en": "Distance m. M 20–29: Excellent >2800, Good 2400–2800, Average 2200–2399, Fair 1600–2199, Poor <1600. F 20–29: >2700, 2200–2700, 1800–2199, 1500–1799, <1500.",
     "de": "Distanz m. M 20–29: Excellent >2800, Good 2400–2800, Average 2200–2399, Fair 1600–2199, Poor <1600. F 20–29: >2700, 2200–2700, 1800–2199, 1500–1799, <1500."
   },
-  "Top view of a 400-m track with lane 1 highlighted, start line and markers at 100, 200 and 300 m.": {
-    "en": "Top view of a 400-m track with lane 1 highlighted, start line and markers at 100, 200 and 300 m.",
-    "de": "Draufsicht einer 400-m-Bahn mit hervorgehobener Bahn 1, Startlinie und Marken bei 100, 200 und 300 m."
-  },
   "Acceleration performance over 20 m.": {
     "en": "Acceleration performance over 20 m.",
     "de": "Beschleunigungsleistung über 20 m."
@@ -5762,10 +5658,6 @@
   "Best time s.": {
     "en": "Best time s.",
     "de": "Bestzeit s."
-  },
-  "Top view of the sprint lane with timing gates at 0 m and 20 m. A dimension line shows the 20 m.": {
-    "en": "Top view of the sprint lane with timing gates at 0 m and 20 m. A dimension line shows the 20 m.",
-    "de": "Draufsicht der Sprintbahn mit Timing Gates bei 0 m und 20 m. Eine Maßlinie zeigt die 20 m."
   },
   "Endurance performance over a standardised 10 km.": {
     "en": "Endurance performance over a standardised 10 km.",
@@ -5974,10 +5866,6 @@
   "CSS = (T400 − T200) / 2 in s/100 m. Source ranges: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30.": {
     "en": "CSS = (T400 − T200) / 2 in s/100 m. Source ranges: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30.",
     "de": "CSS = (T400 − T200) / 2 in s/100 m. Quellenbänder: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30."
-  },
-  "Top view of a swimming pool with two separate timed swims over 400 m and 200 m; below it the formula CSS = (T400 − T200) / 2.": {
-    "en": "Top view of a swimming pool with two separate timed swims over 400 m and 200 m; below it the formula CSS = (T400 − T200) / 2.",
-    "de": "Draufsicht eines Schwimmbeckens mit zwei getrennten Zeitläufen über 400 m und 200 m; darunter die Formel CSS = (T400 − T200) / 2."
   },
   "Progressive swim-specific endurance up to the highest sustainable stage.": {
     "en": "Progressive swim-specific endurance up to the highest sustainable stage.",
@@ -6231,10 +6119,6 @@
     "en": "Total time. Source benchmark: M mean ~1:36, F mean ~1:46; top 20% M ~1:26, F ~1:30.",
     "de": "Gesamtzeit. Quellenbenchmark: M Ø ~1:36, F Ø ~1:46; Top 20% M ~1:26, F ~1:30."
   },
-  "Flow chart of the sprint triathlon: swim 750 m, transition T1, bike 20 km, transition T2, run 5 km.": {
-    "en": "Flow chart of the sprint triathlon: swim 750 m, transition T1, bike 20 km, transition T2, run 5 km.",
-    "de": "Ablaufgrafik des Sprint-Triathlons: Schwimmen 750 m, Wechsel T1, Radfahren 20 km, Wechsel T2, Laufen 5 km."
-  },
   "Measured course, timing.": {
     "en": "Measured course, timing.",
     "de": "Vermessener Kurs, Timing."
@@ -6262,10 +6146,6 @@
   "Source benchmark mean M ~2:53, F ~3:07; top 20% M ~2:35, F ~2:49.": {
     "en": "Source benchmark mean M ~2:53, F ~3:07; top 20% M ~2:35, F ~2:49.",
     "de": "Quellenbenchmark Ø M ~2:53, F ~3:07; Top 20% M ~2:35, F ~2:49."
-  },
-  "Flow chart of the Olympic triathlon: swim 1500 m, transition T1, bike 40 km, transition T2, run 10 km.": {
-    "en": "Flow chart of the Olympic triathlon: swim 1500 m, transition T1, bike 40 km, transition T2, run 10 km.",
-    "de": "Ablaufgrafik des olympischen Triathlons: Schwimmen 1500 m, Wechsel T1, Radfahren 40 km, Wechsel T2, Laufen 10 km."
   },
   "Standardised isometric dynamometer/force rig.": {
     "en": "Standardised isometric dynamometer/force rig.",
@@ -6334,10 +6214,6 @@
   "Best distance in cm and Limb Symmetry Index.": {
     "en": "Best distance in cm and Limb Symmetry Index.",
     "de": "Bestweite cm und Limb Symmetry Index."
-  },
-  "Side view of the single-leg hop: take-off from the start line, landing on the same leg, measured distance to the heel.": {
-    "en": "Side view of the single-leg hop: take-off from the start line, landing on the same leg, measured distance to the heel.",
-    "de": "Seitliche Darstellung des Einbeinsprungs: Absprung von der Startlinie, Landung auf demselben Bein, Messstrecke bis zur Ferse."
   },
   "Rowing ergometer, performance monitor.": {
     "en": "Rowing ergometer, performance monitor.",
@@ -6659,10 +6535,6 @@
     "en": "Reach cm/% leg length.",
     "de": "Reach cm/% Beinlänge."
   },
-  "Top view of the Star Excursion Balance Test: stance foot in the centre and eight evenly spaced directions.": {
-    "en": "Top view of the Star Excursion Balance Test: stance foot in the centre and eight evenly spaced directions.",
-    "de": "Draufsicht des Star-Excursion-Balance-Tests: Standfuß in der Mitte und acht gleichmäßig verteilte Richtungen."
-  },
   "Ankle mobility.": {
     "en": "Ankle mobility.",
     "de": "Sprunggelenksbeweglichkeit."
@@ -6903,10 +6775,6 @@
     "en": "Best time s; lower = better.",
     "de": "Bestzeit s; niedriger = besser."
   },
-  "Top view of the Illinois agility test: a 10 × 5 m rectangle with four cones in the corners and four cones in a straight line in the middle, start (S) at one corner. A dimension line shows approx. 3.3 m spacing between the central cones.": {
-    "en": "Top view of the Illinois agility test: a 10 × 5 m rectangle with four cones in the corners and four cones in a straight line in the middle, start (S) at one corner. A dimension line shows approx. 3.3 m spacing between the central cones.",
-    "de": "Draufsicht des Illinois-Agility-Tests: ein Rechteck von 10 × 5 m mit vier Kegeln in den Ecken und vier Kegeln in gerader Linie in der Mitte, Start (S) an einer Ecke. Eine Maßlinie zeigt ca. 3,3 m Abstand zwischen zentralen Kegeln."
-  },
   "Acceleration/sprint performance in fast bowlers.": {
     "en": "Acceleration/sprint performance in fast bowlers.",
     "de": "Beschleunigung/Sprintleistung bei Fast Bowlern."
@@ -6931,10 +6799,6 @@
     "en": "40 yd = 36.576 m.",
     "de": "40 yd = 36,576 m."
   },
-  "Top view of the sprint lane with start and finish 40 yards apart. A dimension line shows the distance.": {
-    "en": "Top view of the sprint lane with start and finish 40 yards apart. A dimension line shows the distance.",
-    "de": "Draufsicht der Sprintbahn mit Start und Ziel im Abstand von 40 Yards. Eine Maßlinie zeigt die Strecke."
-  },
   "Lateral movement, forward and backward acceleration.": {
     "en": "Lateral movement, forward and backward acceleration.",
     "de": "Seitliche Bewegung, Vorwärts- und Rückwärtsbeschleunigung."
@@ -6958,10 +6822,6 @@
   "A–B 9.14 m; B–C and B–D 4.57 m each.": {
     "en": "A–B 9.14 m; B–C and B–D 4.57 m each.",
     "de": "A–B 9,14 m; B–C und B–D je 4,57 m."
-  },
-  "Top view of the T-test: A at the bottom, B 9.14 m ahead, C and D each 4.57 m left and right of B. Arrows show the route A, B, C, D, B, A.": {
-    "en": "Top view of the T-test: A at the bottom, B 9.14 m ahead, C and D each 4.57 m left and right of B. Arrows show the route A, B, C, D, B, A.",
-    "de": "Draufsicht des T-Tests: A unten, B 9,14 m voraus, C und D je 4,57 m links und rechts von B. Pfeile zeigen die Route A, B, C, D, B, A."
   },
   "20-m running course plus 5-m recovery zone, Yo-Yo IR1 audio, cones.": {
     "en": "20-m running course plus 5-m recovery zone, Yo-Yo IR1 audio, cones.",
@@ -7003,10 +6863,6 @@
     "en": "Total distance m; higher = better.",
     "de": "Gesamtdistanz m; höher = besser."
   },
-  "Top view: two lines 20 m apart, a 5-m recovery zone behind the start line. Arrows show the path back and forth over 20 m and then into the recovery zone (10 s).": {
-    "en": "Top view: two lines 20 m apart, a 5-m recovery zone behind the start line. Arrows show the path back and forth over 20 m and then into the recovery zone (10 s).",
-    "de": "Draufsicht: zwei Linien im Abstand von 20 m, hinter der Startlinie eine Erholungszone von 5 m. Pfeile zeigen den Weg hin und zurück über 20 m und danach in die Erholungszone (10 s)."
-  },
   "Timing gates, marked sprint course, timer.": {
     "en": "Timing gates, marked sprint course, timer.",
     "de": "Timing Gates, markierte Sprintstrecke, Timer."
@@ -7042,10 +6898,6 @@
   "Best time, mean time, fatigue decrement.": {
     "en": "Best time, mean time, fatigue decrement.",
     "de": "Bestzeit, Mean Time, Fatigue Decrement."
-  },
-  "Top view of the sprint lane with start and finish 30 m apart. Above it the sequence: 6 sprints over 30 m with 20 s rest.": {
-    "en": "Top view of the sprint lane with start and finish 30 m apart. Above it the sequence: 6 sprints over 30 m with 20 s rest.",
-    "de": "Draufsicht der Sprintbahn mit Start und Ziel im Abstand von 30 m. Darüber der Ablauf: 6 Sprints über 30 m mit 20 s Pause."
   },
   "Vertec/jump system.": {
     "en": "Vertec/jump system.",
@@ -7110,10 +6962,6 @@
   "Touches/15 s; optional normalised scores.": {
     "en": "Touches/15 s; optional normalised scores.",
     "de": "Touches/15 s; optional normalisierte Scores."
-  },
-  "Top view of the push-up position: two hand marks are 91.4 cm apart, crossed arrows show the alternating touch of the opposite mark.": {
-    "en": "Top view of the push-up position: two hand marks are 91.4 cm apart, crossed arrows show the alternating touch of the opposite mark.",
-    "de": "Draufsicht der Liegestützposition: Zwei Handmarkierungen liegen 91,4 cm auseinander, gekreuzte Pfeile zeigen das abwechselnde Berühren der gegenüberliegenden Markierung."
   },
   "Mat, timer/counter.": {
     "en": "Mat, timer/counter.",
@@ -7238,10 +7086,6 @@
   "Composite score % and asymmetry.": {
     "en": "Composite score % and asymmetry.",
     "de": "Composite Score % und Asymmetrie."
-  },
-  "Top view of the Upper Quarter Y-Balance: the support hand is in the centre, three arrows show the reach directions medial (1), inferolateral (2) and superolateral (3).": {
-    "en": "Top view of the Upper Quarter Y-Balance: the support hand is in the centre, three arrows show the reach directions medial (1), inferolateral (2) and superolateral (3).",
-    "de": "Draufsicht des Upper Quarter Y-Balance: Die Stützhand steht in der Mitte, drei Pfeile zeigen die Reichrichtungen medial (1), inferolateral (2) und superolateral (3)."
   },
   "Proprioceptive reproduction accuracy of the shoulder.": {
     "en": "Proprioceptive reproduction accuracy of the shoulder.",
@@ -7431,10 +7275,6 @@
     "en": "Hit rate %, point score.",
     "de": "Trefferquote %, Punktescore."
   },
-  "Front view of a football goal divided into target zones. Below it, the top view: the shooting point is centred in front of the goal, 16.5 m from the goal line.": {
-    "en": "Front view of a football goal divided into target zones. Below it, the top view: the shooting point is centred in front of the goal, 16.5 m from the goal line.",
-    "de": "Frontansicht eines Fußballtors, in Zielzonen unterteilt. Darunter die Draufsicht: der Schusspunkt liegt mittig vor dem Tor, 16,5 m von der Torlinie entfernt."
-  },
   "Throwing accuracy at defined goal targets.": {
     "en": "Throwing accuracy at defined goal targets.",
     "de": "Wurfgenauigkeit auf definierte Torziele."
@@ -7474,10 +7314,6 @@
   "Hit rate/point score; source contains no universal norm.": {
     "en": "Hit rate/point score; source contains no universal norm.",
     "de": "Trefferquote/Punktescore; Quelle enthält keine Universalnorm."
-  },
-  "Front view of a handball goal with numbered target zones. Below it, the top view: the throwing position is centred in front of the goal, 7 m from the goal line.": {
-    "en": "Front view of a handball goal with numbered target zones. Below it, the top view: the throwing position is centred in front of the goal, 7 m from the goal line.",
-    "de": "Frontansicht eines Handballtors mit nummerierten Zielzonen. Darunter die Draufsicht: die Wurfposition liegt mittig vor dem Tor, 7 m von der Torlinie entfernt."
   },
   "Hex/trap bar": {
     "en": "Hex/trap bar",
@@ -7583,10 +7419,6 @@
     "en": "1RM in kg and kg/kg body weight.",
     "de": "1RM kg und kg/kg Körpergewicht."
   },
-  "Side sequence of a squat: on the left upright with the bar on the back of the neck, on the right at the lowest point, with the hip crease below the top of the knee (dashed line). The rack post and the safety arms are on the right.": {
-    "en": "Side sequence of a squat: on the left upright with the bar on the back of the neck, on the right at the lowest point, with the hip crease below the top of the knee (dashed line). The rack post and the safety arms are on the right.",
-    "de": "Seitliche Sequenz einer Kniebeuge: links aufrecht mit der Stange im Nacken, rechts am tiefsten Punkt, die Hüftfalte liegt unter der Knieoberkante (gestrichelte Linie). Rechts stehen der Rackpfosten und die Safety Arms."
-  },
   "Maximal horizontal pressing strength.": {
     "en": "Maximal horizontal pressing strength.",
     "de": "Maximale horizontale Druckkraft."
@@ -7675,10 +7507,6 @@
     "en": "Level/shuttle/distance, optional VO2 estimate.",
     "de": "Stufe/Shuttle/Distanz, optional VO2-Schätzung."
   },
-  "Top view: two lines 20 m apart, arrows there and back, next to them a loudspeaker symbol for the audio signal.": {
-    "en": "Top view: two lines 20 m apart, arrows there and back, next to them a loudspeaker symbol for the audio signal.",
-    "de": "Draufsicht: zwei Linien im Abstand von 20 m, Pfeile hin und zurück, daneben ein Lautsprechersymbol für das Audiosignal."
-  },
   "Overall performance in the standardized HYROX race format.": {
     "en": "Overall performance in the standardized HYROX race format.",
     "de": "Gesamtleistung im standardisierten HYROX-Rennformat."
@@ -7731,10 +7559,6 @@
     "en": "Total time. Source benchmark M Beginner 1:40–1:54, Average 1:24–1:39, Advanced 1:15–1:23, Elite <1:15; F 1:51–2:06, 1:36–1:50, 1:26–1:35, Elite <1:26.",
     "de": "Gesamtzeit. Quellenbenchmark M Beginner 1:40–1:54, Average 1:24–1:39, Advanced 1:15–1:23, Elite <1:15; F 1:51–2:06, 1:36–1:50, 1:26–1:35, Elite <1:26."
   },
-  "Flow chart of the HYROX race: eight sections, each with 1 km of running followed by a numbered station in the order SkiErg, Sled Push, Sled Pull, Burpee Broad Jumps, rowing, Farmers Carry, Sandbag Lunges, Wall Balls.": {
-    "en": "Flow chart of the HYROX race: eight sections, each with 1 km of running followed by a numbered station in the order SkiErg, Sled Push, Sled Pull, Burpee Broad Jumps, rowing, Farmers Carry, Sandbag Lunges, Wall Balls.",
-    "de": "Ablaufgrafik des HYROX-Rennens: acht Abschnitte mit je 1 km Lauf und danach einer nummerierten Station in der Reihenfolge SkiErg, Sled Push, Sled Pull, Burpee Broad Jumps, Rudern, Farmers Carry, Sandbag Lunges, Wall Balls."
-  },
   "Sled push performance within the HYROX standard.": {
     "en": "Sled push performance within the HYROX standard.",
     "de": "Schlitten-Schubleistung innerhalb des HYROX-Standards."
@@ -7762,10 +7586,6 @@
   "Station time; source load Open: M 152 kg, F 102 kg according to the table at the time.": {
     "en": "Station time; source load Open: M 152 kg, F 102 kg according to the table at the time.",
     "de": "Stationszeit; Quellenlast Open: M 152 kg, F 102 kg laut damaliger Tabelle."
-  },
-  "Top view of the sled push lane: start line (S), a sled at the start and an arrow along the lane to the turn or finish line. The lane length depends on the division and is not specified.": {
-    "en": "Top view of the sled push lane: start line (S), a sled at the start and an arrow along the lane to the turn or finish line. The lane length depends on the division and is not specified.",
-    "de": "Draufsicht der Sled-Push-Bahn: Startlinie (S), ein Schlitten am Start und ein Pfeil über die Bahn bis zur Wende- oder Ziellinie. Die Bahnlänge richtet sich nach der Division und ist nicht angegeben."
   },
   "Local muscular endurance and coordinated whole-body performance.": {
     "en": "Local muscular endurance and coordinated whole-body performance.",
@@ -7798,10 +7618,6 @@
   "Time/no-reps; source ball M 6 kg, F 4 kg.": {
     "en": "Time/no-reps; source ball M 6 kg, F 4 kg.",
     "de": "Zeit/No-Reps; Quellenball M 6 kg, F 4 kg."
-  },
-  "Side view of the wall ball throw: the person is in a deep squat with the ball, a dashed line marks knee height, and the ball flies in an arc to the target mark on the wall. Height and distance depend on the division.": {
-    "en": "Side view of the wall ball throw: the person is in a deep squat with the ball, a dashed line marks knee height, and the ball flies in an arc to the target mark on the wall. Height and distance depend on the division.",
-    "de": "Seitenansicht des Wall-Ball-Wurfs: Die Person steht in der tiefen Kniebeuge mit dem Ball, eine gestrichelte Linie markiert die Kniehöhe, der Ball fliegt im Bogen zur Zielmarke an der Wand. Höhe und Abstand richten sich nach der Division."
   },
   "Prone position.": {
     "en": "Prone position.",
@@ -7866,10 +7682,6 @@
   "Time; source anchor 1:30 for maximum value.": {
     "en": "Time; source anchor 1:30 for maximum value.",
     "de": "Zeit; Quellenanker 1:30 für Maximalwert."
-  },
-  "Top view of the 25-m lane of the sprint-drag-carry with five numbered sections in protocol order: sprint, drag sled, sideways, carry kettlebells, sprint. The arrows change direction.": {
-    "en": "Top view of the 25-m lane of the sprint-drag-carry with five numbered sections in protocol order: sprint, drag sled, sideways, carry kettlebells, sprint. The arrows change direction.",
-    "de": "Draufsicht der 25-m-Bahn des Sprint-Drag-Carry mit fünf nummerierten Abschnitten in der Reihenfolge des Protokolls: Sprint, Schlitten ziehen, seitwärts, Kettlebells tragen, Sprint. Die Pfeile wechseln die Richtung."
   },
   "Isometric core strength endurance.": {
     "en": "Isometric core strength endurance.",
@@ -7958,10 +7770,6 @@
   "Peak force N/Nkg, RFD. Box source anchor: M heavyweight ~3418 N to flyweight ~2199 N; F flyweight ~1929 N, strawweight ~1740 N.": {
     "en": "Peak force N/Nkg, RFD. Box source anchor: M heavyweight ~3418 N to flyweight ~2199 N; F flyweight ~1929 N, strawweight ~1740 N.",
     "de": "Peak Force N/Nkg, RFD. Box-Quellenanker: M Heavyweight ~3418 N bis Flyweight ~2199 N; F Flyweight ~1929 N, Strawweight ~1740 N."
-  },
-  "Side view of the isometric mid-thigh pull: the person stands on a force plate, the bar is fixed at mid-thigh height, an arrow shows the maximal upward pull.": {
-    "en": "Side view of the isometric mid-thigh pull: the person stands on a force plate, the bar is fixed at mid-thigh height, an arrow shows the maximal upward pull.",
-    "de": "Seitenansicht des Isometric Mid-Thigh Pull: Die Person steht auf einer Kraftplatte, die Stange ist auf mittlerer Oberschenkelhöhe fixiert, ein Pfeil zeigt den maximalen Zug nach oben."
   },
   "App standard: 10 continuous maximal two-legged jumps.": {
     "en": "App standard: 10 continuous maximal two-legged jumps.",

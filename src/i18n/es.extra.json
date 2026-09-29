@@ -131,7 +131,8 @@
     "distance": "Distancias",
     "scoring": "Valoración y evaluación",
     "scoringNote": "Las cifras de esta descripción son valores de cohortes de la fuente del protocolo, no normas. La app solo clasifica un resultado donde hay una referencia documentada.",
-    "figure": "Esquema"
+    "figure": "Esquema",
+    "imageAlt": "Ilustración de la prueba: {{name}}"
   },
   "compare": {
     "title": "Comparación de atletas",

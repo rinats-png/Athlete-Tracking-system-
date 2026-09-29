@@ -34,7 +34,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     timeSpec: bi("3–5 s je Versuch; 30–60 s Pause.", "3–5 s per attempt; 30–60 s rest."),
     scoring: bi("Bestwert je Hand in kg. Allgemeine Quellenanker: Männer Peak-Median ~51 kg; Frauen ~31 kg; alters-/geschlechtsspezifische Norm verwenden. Allgemein: kg. Quellen: UK Peak M ~51 kg, F ~31 kg; NIH z.B. M 25–29 dominant 49,7 kg.", "Best value per hand in kg. General source anchors: men peak median ~51 kg; women ~31 kg; use the age-/sex-specific norm. General: kg. Sources: UK Peak M ~51 kg, F ~31 kg; NIH e.g. M 25–29 dominant 49.7 kg."),
-    figure: { id: "handgrip", alt: bi("Eine Person steht aufrecht, der Ellenbogen ist im rechten Winkel (90°) gebeugt, in der Hand liegt ein Handdynamometer, das Handgelenk ist neutral.", "A person stands upright, the elbow is bent at a right angle (90°), a hand dynamometer is held in the hand, the wrist is neutral.") },
   },
   countermovement_jump: {
     goal: bi("Vertikale Explosivkraft der unteren Extremitäten.", "Vertical explosive strength of the lower extremities."),
@@ -48,7 +47,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
       bi("Drei gültige Versuche mit Pause.", "Three valid attempts with rest."),
     ],
     scoring: bi("Sprunghöhe cm; optional Peak Power, GRF, RFD. Drei Versuche, Bestwert; höher = besser.", "Jump height in cm; optionally peak power, GRF, RFD. Three attempts, best value; higher = better."),
-    figure: { id: "cmj", alt: bi("Seitliche Sequenz eines Counter-Movement-Jumps: aufrecht, Gegenbewegung nach unten, Absprung mit Flugphase, Landung. Ein Pfeil markiert die Sprunghöhe.", "Side sequence of a countermovement jump: upright, countermovement downward, takeoff with flight phase, landing. An arrow marks the jump height.") },
   },
   squat_jump: {
     goal: bi("Explosivkraft ohne Gegenbewegung.", "Explosive strength without countermovement."),
@@ -62,7 +60,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     timeSpec: bi("2 s Haltephase.", "2 s hold phase."),
     scoring: bi("Sprunghöhe cm; Quellenanker Elite MMA 29,8±4,5 cm.", "Jump height in cm; source anchor elite MMA 29.8±4.5 cm."),
-    figure: { id: "squat_jump", alt: bi("Seitliche Sequenz eines Squat Jumps: Startposition in der Hocke bei etwa 90° im Knie mit 2 s Haltephase, danach senkrechter Absprung und Landung.", "Side sequence of a squat jump: start position in a squat at about 90° at the knee with a 2 s hold phase, followed by a vertical takeoff and landing.") },
   },
   sprint_10m: {
     goal: bi("Lineare Beschleunigungsleistung.", "Linear acceleration performance."),
@@ -75,7 +72,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     distanceSpec: bi("10,00 m Timing-Distanz.", "10.00 m timing distance."),
     scoring: bi("Bestzeit s. Elite-Kumite-Quellenanker 1,97±0,06 s.", "Best time in s. Elite kumite source anchor 1.97±0.06 s."),
-    figure: { id: "sprint_10m", alt: bi("Draufsicht der Sprintbahn: Der Start liegt 50 cm vor dem Timing Gate bei 0 m, das Zielgate steht bei 10 m. Eine Maßlinie zeigt die 10 m.", "Top view of the sprint track: the start is 50 cm before the timing gate at 0 m, the finish gate is at 10 m. A dimension line shows the 10 m.") },
   },
   sprint_30m: {
     goal: bi("Lineare Sprintgeschwindigkeit.", "Linear sprint speed."),
@@ -87,7 +83,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     distanceSpec: bi("30 m.", "30 m."),
     scoring: bi("Bestzeit s. Laufen: Bestzeit s. Quellen-Norm: M Excellent <4,0; Good 4,0–4,2; Average 4,3–4,4; Fair 4,5–4,6; Poor >4,6. F: <4,5; 4,5–4,6; 4,7–4,8; 4,9–5,0; >5,0. Rugby: 10-,20-,30-m-Splits.", "Best time s. Running: best time s. Source norm: M Excellent <4.0; Good 4.0–4.2; Average 4.3–4.4; Fair 4.5–4.6; Poor >4.6. F: <4.5; 4.5–4.6; 4.7–4.8; 4.9–5.0; >5.0. Rugby: 10-, 20-, 30-m splits."),
-    figure: { id: "sprint_30m", alt: bi("Draufsicht der Sprintbahn mit Timing Gates bei 0 m und 30 m. Eine Maßlinie zeigt die 30 m.", "Top view of the sprint track with timing gates at 0 m and 30 m. A dimension line shows the 30 m.") },
   },
   standing_broad_jump: {
     goal: bi("Horizontale Explosivkraft.", "Horizontal explosive strength."),
@@ -101,7 +96,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
       bi("3 Versuche.", "3 attempts."),
     ],
     scoring: bi("Bestweite cm.", "Best distance in cm."),
-    figure: { id: "broad_jump", alt: bi("Seitliche Sprungsequenz: Absprunglinie, Sprung nach vorn und eine Messstrecke bis zur hintersten Ferse.", "Side jump sequence: takeoff line, jump forward and a measuring distance to the rearmost heel.") },
   },
   special_judo_fitness_test: {
     prepare: [],
@@ -123,7 +117,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Bauch-/Brustschmerz, Schwindel, Verletzung, unsichere Wurftechnik; ungültige Würfe nicht zählen.", "Abdominal/chest pain, dizziness, injury, unsafe throwing technique; do not count invalid throws.")],
     standardise: [bi("Standard-SJFT: 15 s + 30 s + 30 s, jeweils 10 s Pause; gleiche Partner, Matte, Technik und Distanz.", "Standard SJFT: 15 s + 30 s + 30 s, each with 10 s rest; same partners, mat, technique and distance.")],
     scoring: bi("Gesamtwürfe; SJFT-Index = (HF direkt + HF nach 1 min) / Gesamtwürfe. Niedrigerer Index = besser. Quellenwerte: Junior m Excellent ≤10,40; Good 10,41–11,29; Regular 11,30–13,52; Poor 13,53–14,18; Very poor ≥14,19. Kadett m Excellent ≤11,15; Very poor ≥15,93.", "Total throws; SJFT index = (HR immediately + HR after 1 min) / total throws. Lower index = better. Source values: junior male Excellent ≤10.40; Good 10.41–11.29; Regular 11.30–13.52; Poor 13.53–14.18; Very poor ≥14.19. Cadet male Excellent ≤11.15; Very poor ≥15.93."),
-    figure: { id: "sjft", alt: bi("Draufsicht einer Judomatte: drei Positionen A, B und C in gerader Linie, B in der Mitte, A und C je 6 m entfernt. Die Testperson steht bei B, die Wurfpartner bei A und C. Pfeile zeigen den Weg B nach A, zurück nach B und weiter nach C.", "Top view of a judo mat: three positions A, B and C in a straight line, B in the middle, A and C each 6 m away. The test subject stands at B, the throwing partners at A and C. Arrows show the path from B to A, back to B and on to C.") },
   },
   special_wrestling_fitness_test: {
     prepare: [],
@@ -141,7 +134,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Unsichere Wurftechnik, Verletzung, Partnerproblem; ungültige Würfe nicht zählen.", "Unsafe throwing technique, injury, partner problem; do not count invalid throws.")],
     standardise: [bi("Nur identische SWFT/SWPT-Variante vergleichen; gleiche Partnergewichte, Wurftechnik, Fläche und Zeitstruktur.", "Compare only identical SWFT/SWPT variants; same partner weights, throwing technique, area and time structure.")],
     scoring: bi("Würfe und Index. Quellenklassifikation: Superior ≥35 Würfe / Index ≤9,6; Excellent 33–34 / 9,7–10,8; Very good 30–32 /10,9–12,0; Good 25–29 /12,1–14,5; Poor 23–24 /14,6–15,8; Very poor 20–22 /15,9–17,0; Bad ≤19 /≥17,1.", "Throws and index. Source classification: Superior ≥35 throws / index ≤9.6; Excellent 33–34 / 9.7–10.8; Very good 30–32 / 10.9–12.0; Good 25–29 / 12.1–14.5; Poor 23–24 / 14.6–15.8; Very poor 20–22 / 15.9–17.0; Bad ≤19 / ≥17.1."),
-    figure: { id: "swft", alt: bi("Draufsicht einer Ringermatte: Testperson mittig bei B, zwei Wurfpartner links (A) und rechts (C). Pfeile zeigen die abwechselnden Würfe, dazu Symbole für Zeit und Herzfrequenz.", "Top view of a wrestling mat: test subject in the center at B, two throwing partners on the left (A) and right (C). Arrows show the alternating throws, plus symbols for time and heart rate.") },
   },
   punch_test_180s: {
     prepare: [],
@@ -175,7 +167,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Loslassen, technische Unfähigkeit fortzufahren, Schmerzen; Teilwiederholungen zählen nicht.", "Letting go, technical inability to continue, pain; partial repetitions do not count.")],
     standardise: [bi("Gleicher Judogi, gleiche Griffhöhe/-breite, vollständige Streckung unten, identische Wiederholungsdefinition.", "Same judogi, same grip height/width, full extension at the bottom, identical repetition definition.")],
     scoring: bi("Maximale gültige Wiederholungen. Quellenanker: Kadett m Excellent ≥32; Junior m Excellent ≥31. BJJ (Gi Grip Dynamic Repetitions): Reps; höher = besser.", "Maximum valid repetitions. Source anchor: cadet male Excellent ≥32; junior male Excellent ≥31. BJJ (Gi Grip Dynamic Repetitions): reps; higher = better."),
-    figure: { id: "chinup_dynamic", alt: bi("Frontansicht einer Klimmzugstange mit Judogi-Revers in beiden Händen: links im vollständigen Hang, rechts mit dem Kinn über der Stange. Ein Pfeil zeigt die Zugrichtung nach oben.", "Front view of a pull-up bar with judogi lapels in both hands: on the left in a full hang, on the right with the chin above the bar. An arrow shows the upward pulling direction.") },
   },
   judogi_chin_up_hold: {
     prepare: [],
@@ -194,7 +185,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Kinn fällt unter Griffhöhe, Hand löst sich, externe Hilfe, Schmerz.", "Chin drops below grip height, hand releases, external help, pain.")],
     standardise: [bi("Gleicher Judogi, Griff, Ellenbogen-/Kinnstandard; keine zusätzliche Unterstützung.", "Same judogi, grip, elbow/chin standard; no additional support.")],
     scoring: bi("Haltezeit in Sekunden. Quellenanker: Kadett m Excellent ≥90 s; Junior m Excellent ≥76 s. BJJ (Gi Grip Endurance): Haltezeit s. Quellenband High-Level etwa 40–62 s; erfahren 41–45 s; Anfänger etwa 28–36 s.", "Hold time in seconds. Source anchor: cadet male Excellent ≥90 s; junior male Excellent ≥76 s. BJJ (Gi Grip Endurance): hold time in s. Source range high-level about 40–62 s; experienced 41–45 s; beginners about 28–36 s."),
-    figure: { id: "chinup_isometric", alt: bi("Seitenansicht: Eine Person hält sich mit dem Kinn über der Stange, eine gestrichelte Linie markiert die Mindesthöhe, daneben ein Stoppuhr-Symbol.", "Side view: a person holds themselves with the chin above the bar, a dashed line marks the minimum height, with a stopwatch symbol beside it.") },
   },
   chin_up_max_reps: {
     prepare: [],
@@ -229,7 +219,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Rumpf fällt sichtbar aus Zielwinkel, Schmerz, Hände verändern Position.", "Trunk visibly drops out of the target angle, pain, hands change position.")],
     standardise: [bi("Gleiche Winkel, Fußfixierung und Armposition.", "Same angles, foot fixation and arm position.")],
     scoring: bi("Haltezeit s; höher = besser.", "Hold time in s; higher = better."),
-    figure: { id: "mcgill_flexor", alt: bi("Seitenansicht: Der Oberkörper ist etwa 60° zum Boden geneigt und stützt sich an einem Keil ab, die Knie sind gebeugt. Winkelmarkierung 60° und Stoppuhr-Symbol.", "Side view: the upper body is inclined about 60° to the floor and supported against a wedge, the knees are bent. Angle marking 60° and stopwatch symbol.") },
   },
   side_plank_endurance: {
     prepare: [],
@@ -248,7 +237,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Becken sinkt, Körper rotiert, zusätzlicher Kontakt, Schmerz.", "Pelvis sinks, body rotates, additional contact, pain.")],
     standardise: [bi("Gleiche Arm-/Fußposition; kein Rotieren oder Abstützen mit freier Hand.", "Same arm/foot position; no rotating or bracing with the free hand.")],
     scoring: bi("Haltezeit s je Seite und Asymmetrie.", "Hold time in s per side and asymmetry."),
-    figure: { id: "side_plank", alt: bi("Seitenansicht des Seitstützes: Der Unterarm liegt am Boden, der Körper bildet von der Schulter bis zum Fuß eine schräge Linie. Daneben ein Stoppuhr-Symbol.", "Side view of the side plank: the forearm rests on the floor, the body forms a diagonal line from shoulder to foot. A stopwatch symbol beside it.") },
   },
   trunk_extension_endurance: {
     prepare: [],
@@ -266,7 +254,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Oberkörper sinkt unter Toleranzbereich, Schmerz, externe Hilfe.", "Upper body drops below tolerance range, pain, external help.")],
     standardise: [bi("Gleiche Fixierung, Bankhöhe, Armposition.", "Same fixation, bench height, arm position.")],
     scoring: bi("Haltezeit s.", "Hold time in s."),
-    figure: { id: "trunk_extension", alt: bi("Seitenansicht: Die Beine sind auf einer Bank fixiert, der Oberkörper hängt waagerecht frei nach vorn. Daneben ein Stoppuhr-Symbol.", "Side view: the legs are fixed on a bench, the upper body hangs horizontally free toward the front. A stopwatch symbol beside it.") },
   },
   reactive_agility_test: {
     prepare: [],
@@ -284,7 +271,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Falsches Ziel, Frühstart, Ausrutschen; Versuch ungültig.", "Wrong target, false start, slipping; attempt invalid.")],
     standardise: [bi("App-Standard v1.0: identische Distanzen, zufällige Reizfolge, gleiche Startposition und Timing-Technik.", "App standard v1.0: identical distances, random stimulus sequence, same start position and timing technique.")],
     scoring: bi("Reaktions- plus Bewegungszeit in s; Median und Bestwert. Keine allgemeine Norm in der Quelle.", "Reaction plus movement time in s; median and best value. No general norm in the source."),
-    figure: { id: "reactive_agility", alt: bi("Draufsicht: eine zentrale Startmarke (S) und drei Ziellichter links, vorn und rechts, jeweils 3 m entfernt. Pfeile führen von der Mitte zu allen Zielen.", "Top view: a central start marker (S) and three target lights on the left, front and right, each 3 m away. Arrows lead from the center to all targets.") },
   },
   trunk_peak_torque: {
     prepare: [],
@@ -319,7 +305,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Fehlkontakt, Schritt außerhalb Vorgabe, Gerätfehler, Schmerz.", "Missed contact, step outside the specification, device error, pain.")],
     standardise: [bi("Gerät, Handschuh, Schlagart, Distanz, Stand und Zielhöhe speichern; Werte verschiedener Systeme nicht direkt vergleichen.", "Save device, glove, punch type, distance, stance and target height; do not compare values from different systems directly.")],
     scoring: bi("Peak Force N je Jab/Cross/Hook. Quellenanker geräteabhängig: Olympia-Cross 3427±811 N; weitere Elite-Cross ~3000–4300 N.", "Peak force in N per jab/cross/hook. Source anchor device-dependent: Olympic cross 3427±811 N; other elite cross ~3000–4300 N."),
-    figure: { id: "punch_force", alt: bi("Seitenansicht: Ein Boxer schlägt gegen ein Schlagziel mit Kraftsensor. Der Abstand zum Ziel und die Zielhöhe sind als Maßlinien eingezeichnet.", "Side view: a boxer punches a punch target with a force sensor. The distance to the target and the target height are drawn as dimension lines.") },
   },
   powerkube_punch_power: {
     prepare: [],
@@ -402,7 +387,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Fehlkontakt, falsche Technik, Intervall nicht eingehalten.", "Missed contact, incorrect technique, interval not adhered to.")],
     standardise: [bi("Nur identisches TAIKT-Protokoll; Zielhöhe, bevorzugtes Bein/Wechselregel und Zähltechnik gleich.", "Identical TAIKT protocol only; same target height, preferred leg/switching rule and counting method.")],
     scoring: bi("Kicks je Intervall, Gesamt-Kicks, Fatigue Index %. Quelle beschreibt technische Niveauunterschiede, keine universelle Cutoff-Tabelle.", "Kicks per interval, total kicks, fatigue index %. The source describes technical level differences, not a universal cutoff table."),
-    figure: { id: "taikt", alt: bi("Seitenansicht: Ein Athlet tritt einen Roundhouse-Kick gegen ein Kickziel, die Zielhöhe ist markiert. Darunter eine schematische Zeitachse mit Intervallen.", "Side view: an athlete performs a roundhouse kick against a kick target, the target height is marked. Below, a schematic timeline with intervals.") },
   },
   taaa_test: {
     prepare: [],
@@ -422,7 +406,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Falscher Shuttleweg, ausgelassene Kicks, Zeitstruktur verletzt.", "Wrong shuttle path, skipped kicks, time structure violated.")],
     standardise: [bi("App übernimmt die in der Quelle beschriebene 6×20-s-Struktur mit 10-s-Pausen; identische Kick-/Shuttlefolge.", "App adopts the 6×20-s structure with 10-s rests described in the source; identical kick/shuttle sequence.")],
     scoring: bi("TAAA Score und protokollspezifische VO2-Schätzung; nicht mit direkter Spiroergometrie gleichsetzen.", "TAAA score and protocol-specific VO2 estimate; do not equate with direct cardiopulmonary exercise testing (spiroergometry)."),
-    figure: { id: "taaa", alt: bi("Draufsicht: zwei Linien in 4 m Abstand mit einem Shuttle-Zickzack und einem Kickziel an der Seite. Darüber der Zeitablauf 6 × (20 s Arbeit, 10 s Pause).", "Top view: two lines 4 m apart with a shuttle zigzag and a kick target at the side. Above, the time sequence 6 × (20 s work, 10 s rest).") },
   },
   fencing_endurance_test: {
     prepare: [],
@@ -440,7 +423,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Tempo/Bewegungsziel wiederholt verfehlt, technische Unsicherheit, medizinischer Abbruch.", "Pace/movement target missed repeatedly, technical instability, medical stop.")],
     standardise: [bi("Nur identisches FET-Audio und Bewegungsmuster; gleiche Ausrüstung und Fläche.", "Identical FET audio and movement pattern only; same equipment and area.")],
     scoring: bi("Zeit min. Quellenanker für Eliteklassifikation: ≥14,3 min.", "Time in min. Source anchor for elite classification: ≥14.3 min."),
-    figure: { id: "fencing_endurance", alt: bi("Draufsicht einer Fechtbahn: Start in En garde, Pfeile für Vor- und Rückwärtsbewegung, Ausfallzone am Ende und ein Stoppuhr-Symbol.", "Top view of a fencing strip: start in En garde, arrows for forward and backward movement, lunge zone at the end and a stopwatch symbol.") },
   },
   shuttle_5x5m: {
     prepare: [],
@@ -458,7 +440,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Linie nicht erreicht, falsche Abschnittszahl, Timingfehler.", "Line not reached, wrong number of segments, timing error.")],
     standardise: [bi("Gleiche Shuttledefinition, Starttechnik und Timing.", "Same shuttle definition, start technique and timing.")],
     scoring: bi("Zeit s. Elite 12,43±0,95 s; Sub-Elite 13,28±0,93 s in Quelle.", "Time in s. Elite 12.43±0.95 s; Sub-Elite 13.28±0.93 s in the source."),
-    figure: { id: "shuttle_5x5", alt: bi("Draufsicht: zwei Linien in 5 m Abstand, ein Zickzackpfeil führt über fünf Abschnitte von je 5 m.", "Top view: two lines 5 m apart, a zigzag arrow leads across five segments of 5 m each.") },
   },
   lunge_time: {
     prepare: [],
@@ -474,7 +455,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Frühstart, Ziel verfehlt, Technikabweichung.", "False start, target missed, technique deviation.")],
     standardise: [bi("Gleiche Startstellung, Zielentfernung und Zeitdefinition.", "Same starting position, target distance and time definition.")],
     scoring: bi("Zeit s. Elite 0,18±0,03; Sub-Elite 0,21±0,04 in Quelle.", "Time in s. Elite 0.18±0.03; Sub-Elite 0.21±0.04 in the source."),
-    figure: { id: "lunge", alt: bi("Seitliche Darstellung: Ein Fechter in En garde und im Ausfall gegen eine Zielscheibe. Ein Pfeil zeigt die Messstrecke, dazu ein Stoppuhr-Symbol.", "Side view: a fencer in En garde and in the lunge against a target. An arrow shows the measurement distance, plus a stopwatch symbol.") },
   },
   pencak_silat_agility: {
     prepare: [],
@@ -490,7 +470,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Abkürzen, Markierung auslassen, Ausrutschen.", "Cutting corners, skipping a marker, slipping.")],
     standardise: [bi("Identischer Parcours, Untergrund und Timing.", "Identical course, surface and timing.")],
     scoring: bi("Zeit s; Quellenanker Kader 5,63±0,28 s.", "Time in s; source anchor squad 5.63±0.28 s."),
-    figure: { id: "agility_course", alt: bi("Schematische Draufsicht eines Parcours mit Start (S), zwei Wendepunkten (1, 2) und Ziel (Z). Maße sind nicht angegeben.", "Schematic top view of a course with start (S), two turning points (1, 2) and finish (Z). Dimensions are not specified.") },
   },
   cooper_12min: {
     goal: bi("Aerobe Feldleistungsfähigkeit über maximale Distanz in 12 Minuten.", "Aerobic field performance over the maximum distance in 12 minutes."),
@@ -505,7 +484,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     timeSpec: bi("12:00 min.", "12:00 min."),
     distanceSpec: bi("Maximale Distanz.", "Maximum distance."),
     scoring: bi("Distanz m. M 20–29: Excellent >2800, Good 2400–2800, Average 2200–2399, Fair 1600–2199, Poor <1600. F 20–29: >2700, 2200–2700, 1800–2199, 1500–1799, <1500.", "Distance m. M 20–29: Excellent >2800, Good 2400–2800, Average 2200–2399, Fair 1600–2199, Poor <1600. F 20–29: >2700, 2200–2700, 1800–2199, 1500–1799, <1500."),
-    figure: { id: "track_400", alt: bi("Draufsicht einer 400-m-Bahn mit hervorgehobener Bahn 1, Startlinie und Marken bei 100, 200 und 300 m.", "Top view of a 400-m track with lane 1 highlighted, start line and markers at 100, 200 and 300 m.") },
   },
   sprint_20m: {
     goal: bi("Beschleunigungsleistung über 20 m.", "Acceleration performance over 20 m."),
@@ -516,7 +494,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     distanceSpec: bi("20 m.", "20 m."),
     scoring: bi("Bestzeit s. Basketball: Bestzeit; Quellenband Jugend/Profi ca. 2,5–3,5 s je Niveau/Geschlecht.", "Best time s. Basketball: best time; source band youth/professional approx. 2.5–3.5 s per level/sex."),
-    figure: { id: "sprint_20m", alt: bi("Draufsicht der Sprintbahn mit Timing Gates bei 0 m und 20 m. Eine Maßlinie zeigt die 20 m.", "Top view of the sprint lane with timing gates at 0 m and 20 m. A dimension line shows the 20 m.") },
   },
   run_10k: {
     goal: bi("Ausdauerleistung über standardisierte 10 km.", "Endurance performance over a standardised 10 km."),
@@ -598,7 +575,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Falsche Distanz, Timingfehler, Stilwechsel.", "Wrong distance, timing error, stroke change.")],
     standardise: [bi("Gleiches Becken, Startart, Schwimmstil und Timing.", "Same pool, start type, swimming stroke and timing.")],
     scoring: bi("CSS = (T400 − T200) / 2 in s/100 m. Quellenbänder: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30.", "CSS = (T400 − T200) / 2 in s/100 m. Source ranges: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30."),
-    figure: { id: "css_swim", alt: bi("Draufsicht eines Schwimmbeckens mit zwei getrennten Zeitläufen über 400 m und 200 m; darunter die Formel CSS = (T400 − T200) / 2.", "Top view of a swimming pool with two separate timed swims over 400 m and 200 m; below it the formula CSS = (T400 − T200) / 2.") },
   },
   swim_incremental: {
     prepare: [],
@@ -720,7 +696,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Wettkampfregeln/medizinischer Abbruch.", "Competition rules/medical stop.")],
     standardise: [bi("Distanz, Kurs, Wetter, Wind, Drafting-Regel und Eventtyp speichern.", "Record distance, course, weather, wind, drafting rule and event type.")],
     scoring: bi("Gesamtzeit. Quellenbenchmark: M Ø ~1:36, F Ø ~1:46; Top 20% M ~1:26, F ~1:30.", "Total time. Source benchmark: M mean ~1:36, F mean ~1:46; top 20% M ~1:26, F ~1:30."),
-    figure: { id: "triathlon_sprint", alt: bi("Ablaufgrafik des Sprint-Triathlons: Schwimmen 750 m, Wechsel T1, Radfahren 20 km, Wechsel T2, Laufen 5 km.", "Flow chart of the sprint triathlon: swim 750 m, transition T1, bike 20 km, transition T2, run 5 km.") },
   },
   triathlon_olympic_time: {
     prepare: [],
@@ -735,7 +710,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Wettkampf-/medizinischer Abbruch.", "Competition/medical stop.")],
     standardise: [bi("Event-/Streckenbedingungen speichern.", "Record event/course conditions.")],
     scoring: bi("Quellenbenchmark Ø M ~2:53, F ~3:07; Top 20% M ~2:35, F ~2:49.", "Source benchmark mean M ~2:53, F ~3:07; top 20% M ~2:35, F ~2:49."),
-    figure: { id: "triathlon_olympic", alt: bi("Ablaufgrafik des olympischen Triathlons: Schwimmen 1500 m, Wechsel T1, Radfahren 40 km, Wechsel T2, Laufen 10 km.", "Flow chart of the Olympic triathlon: swim 1500 m, transition T1, bike 40 km, transition T2, run 10 km.") },
   },
   whole_body_isometric_force: {
     prepare: [],
@@ -767,7 +741,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Zweites Bein berührt Boden, Nachhüpfen, Sturz.", "Other leg touches the ground, additional hop, fall.")],
     standardise: [bi("Gleiche Schuhe/Untergrund; stabile Landung erforderlich.", "Same shoes/surface; stable landing required.")],
     scoring: bi("Bestweite cm und Limb Symmetry Index.", "Best distance in cm and Limb Symmetry Index."),
-    figure: { id: "single_leg_hop", alt: bi("Seitliche Darstellung des Einbeinsprungs: Absprung von der Startlinie, Landung auf demselben Bein, Messstrecke bis zur Ferse.", "Side view of the single-leg hop: take-off from the start line, landing on the same leg, measured distance to the heel.") },
   },
   row_500m: {
     prepare: [],
@@ -836,7 +809,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     distanceSpec: bi("Rechteck 10×5 m; zentrale Kegel ca. 3,3 m auseinander.", "Rectangle 10×5 m; central cones approx. 3.3 m apart."),
     scoring: bi("Bestzeit s; niedriger = besser.", "Best time s; lower = better."),
-    figure: { id: "illinois", alt: bi("Draufsicht des Illinois-Agility-Tests: ein Rechteck von 10 × 5 m mit vier Kegeln in den Ecken und vier Kegeln in gerader Linie in der Mitte, Start (S) an einer Ecke. Eine Maßlinie zeigt ca. 3,3 m Abstand zwischen zentralen Kegeln.", "Top view of the Illinois agility test: a 10 × 5 m rectangle with four cones in the corners and four cones in a straight line in the middle, start (S) at one corner. A dimension line shows approx. 3.3 m spacing between the central cones.") },
   },
   sprint_40yd: {
     goal: bi("Beschleunigung/Sprintleistung bei Fast Bowlern.", "Acceleration/sprint performance in fast bowlers."),
@@ -848,7 +820,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     distanceSpec: bi("40 yd = 36,576 m.", "40 yd = 36.576 m."),
     scoring: bi("Bestzeit s.", "Best time s."),
-    figure: { id: "sprint_40yd", alt: bi("Draufsicht der Sprintbahn mit Start und Ziel im Abstand von 40 Yards. Eine Maßlinie zeigt die Strecke.", "Top view of the sprint lane with start and finish 40 yards apart. A dimension line shows the distance.") },
   },
   t_test_agility: {
     goal: bi("Seitliche Bewegung, Vorwärts- und Rückwärtsbeschleunigung.", "Lateral movement, forward and backward acceleration."),
@@ -861,7 +832,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     ],
     distanceSpec: bi("A–B 9,14 m; B–C und B–D je 4,57 m.", "A–B 9.14 m; B–C and B–D 4.57 m each."),
     scoring: bi("Zeit s.", "Time s."),
-    figure: { id: "t_test", alt: bi("Draufsicht des T-Tests: A unten, B 9,14 m voraus, C und D je 4,57 m links und rechts von B. Pfeile zeigen die Route A, B, C, D, B, A.", "Top view of the T-test: A at the bottom, B 9.14 m ahead, C and D each 4.57 m left and right of B. Arrows show the route A, B, C, D, B, A.") },
   },
   yo_yo_ir1: {
     prepare: [],
@@ -879,7 +849,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Zweites Tempoversäumnis, medizinischer Abbruch.", "Second missed pace, medical stop.")],
     standardise: [bi("Original Yo-Yo IR1 Audio, exakt 20 m + 5 m, gleiche Abbruchregel.", "Original Yo-Yo IR1 audio, exactly 20 m + 5 m, same termination rule.")],
     scoring: bi("Gesamtdistanz m; höher = besser.", "Total distance m; higher = better."),
-    figure: { id: "yoyo_ir", alt: bi("Draufsicht: zwei Linien im Abstand von 20 m, hinter der Startlinie eine Erholungszone von 5 m. Pfeile zeigen den Weg hin und zurück über 20 m und danach in die Erholungszone (10 s).", "Top view: two lines 20 m apart, a 5-m recovery zone behind the start line. Arrows show the path back and forth over 20 m and then into the recovery zone (10 s).") },
   },
   repeated_sprint_ability: {
     prepare: [],
@@ -897,7 +866,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Fehlstart, unvollständige Distanz, Pause falsch.", "False start, incomplete distance, wrong rest.")],
     standardise: [bi("Gleiche Distanz, Pause, Starttechnik und Timing.", "Same distance, rest, start technique and timing.")],
     scoring: bi("Bestzeit, Mean Time, Fatigue Decrement.", "Best time, mean time, fatigue decrement."),
-    figure: { id: "rsa_30m", alt: bi("Draufsicht der Sprintbahn mit Start und Ziel im Abstand von 30 m. Darüber der Ablauf: 6 Sprints über 30 m mit 20 s Pause.", "Top view of the sprint lane with start and finish 30 m apart. Above it the sequence: 6 sprints over 30 m with 20 s rest.") },
   },
   approach_vertical_jump: {
     prepare: [],
@@ -929,7 +897,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Hände außerhalb, Hüfte kollabiert, Berührung verfehlt.", "Hands outside, hips collapse, touch missed.")],
     standardise: [bi("Markierungen 91,4 cm; gleiche Körperposition; 15 s.", "Marks 91.4 cm; same body position; 15 s.")],
     scoring: bi("Touches/15 s; optional normalisierte Scores.", "Touches/15 s; optional normalised scores."),
-    figure: { id: "ckcuest", alt: bi("Draufsicht der Liegestützposition: Zwei Handmarkierungen liegen 91,4 cm auseinander, gekreuzte Pfeile zeigen das abwechselnde Berühren der gegenüberliegenden Markierung.", "Top view of the push-up position: two hand marks are 91.4 cm apart, crossed arrows show the alternating touch of the opposite mark.") },
   },
   modified_push_up_test: {
     prepare: [],
@@ -988,7 +955,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
       bi("Last progressiv steigern.", "Increase the load progressively."),
     ],
     scoring: bi("1RM kg und kg/kg Körpergewicht.", "1RM in kg and kg/kg body weight."),
-    figure: { id: "squat_1rm", alt: bi("Seitliche Sequenz einer Kniebeuge: links aufrecht mit der Stange im Nacken, rechts am tiefsten Punkt, die Hüftfalte liegt unter der Knieoberkante (gestrichelte Linie). Rechts stehen der Rackpfosten und die Safety Arms.", "Side sequence of a squat: on the left upright with the bar on the back of the neck, on the right at the lowest point, with the hip crease below the top of the knee (dashed line). The rack post and the safety arms are on the right.") },
   },
   bench_press_1rm: {
     goal: bi("Maximale horizontale Druckkraft.", "Maximal horizontal pressing strength."),
@@ -1027,7 +993,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     timeSpec: bi("Stufen etwa 1 min.", "Levels approx. 1 min."),
     distanceSpec: bi("20 m.", "20 m."),
     scoring: bi("Stufe/Shuttle/Distanz, optional VO2-Schätzung.", "Level/shuttle/distance, optional VO2 estimate."),
-    figure: { id: "shuttle_20m", alt: bi("Draufsicht: zwei Linien im Abstand von 20 m, Pfeile hin und zurück, daneben ein Lautsprechersymbol für das Audiosignal.", "Top view: two lines 20 m apart, arrows there and back, next to them a loudspeaker symbol for the audio signal.") },
   },
   hyrox_simulation: {
     prepare: [],
@@ -1049,7 +1014,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Regel-/medizinischer Abbruch.", "Rule or medical stop.")],
     standardise: [bi("Division, Lasten und Eventstandard speichern; nur gleiche Division vergleichen.", "Record division, loads and event standard; only compare the same division.")],
     scoring: bi("Gesamtzeit. Quellenbenchmark M Beginner 1:40–1:54, Average 1:24–1:39, Advanced 1:15–1:23, Elite <1:15; F 1:51–2:06, 1:36–1:50, 1:26–1:35, Elite <1:26.", "Total time. Source benchmark M Beginner 1:40–1:54, Average 1:24–1:39, Advanced 1:15–1:23, Elite <1:15; F 1:51–2:06, 1:36–1:50, 1:26–1:35, Elite <1:26."),
-    figure: { id: "hyrox_race", alt: bi("Ablaufgrafik des HYROX-Rennens: acht Abschnitte mit je 1 km Lauf und danach einer nummerierten Station in der Reihenfolge SkiErg, Sled Push, Sled Pull, Burpee Broad Jumps, Rudern, Farmers Carry, Sandbag Lunges, Wall Balls.", "Flow chart of the HYROX race: eight sections, each with 1 km of running followed by a numbered station in the order SkiErg, Sled Push, Sled Pull, Burpee Broad Jumps, rowing, Farmers Carry, Sandbag Lunges, Wall Balls.") },
   },
   sled_push: {
     prepare: [],
@@ -1066,7 +1030,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Bahn nicht vollständig, falsche Last.", "Lane not completed, wrong load.")],
     standardise: [bi("Sled/Floor beeinflussen stark; gleiche Bahn und Last.", "Sled and floor have a strong effect; same lane and load.")],
     scoring: bi("Stationszeit; Quellenlast Open: M 152 kg, F 102 kg laut damaliger Tabelle.", "Station time; source load Open: M 152 kg, F 102 kg according to the table at the time."),
-    figure: { id: "sled_lane", alt: bi("Draufsicht der Sled-Push-Bahn: Startlinie (S), ein Schlitten am Start und ein Pfeil über die Bahn bis zur Wende- oder Ziellinie. Die Bahnlänge richtet sich nach der Division und ist nicht angegeben.", "Top view of the sled push lane: start line (S), a sled at the start and an arrow along the lane to the turn or finish line. The lane length depends on the division and is not specified.") },
   },
   wall_balls_75: {
     prepare: [],
@@ -1083,7 +1046,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Ziel verfehlt, Squattiefe fehlt, falsche Last.", "Target missed, squat depth missing, wrong load.")],
     standardise: [bi("Ballgewicht, Zielhöhe und Reps nach Division.", "Ball weight, target height and reps by division.")],
     scoring: bi("Zeit/No-Reps; Quellenball M 6 kg, F 4 kg.", "Time/no-reps; source ball M 6 kg, F 4 kg."),
-    figure: { id: "wall_ball", alt: bi("Seitenansicht des Wall-Ball-Wurfs: Die Person steht in der tiefen Kniebeuge mit dem Ball, eine gestrichelte Linie markiert die Kniehöhe, der Ball fliegt im Bogen zur Zielmarke an der Wand. Höhe und Abstand richten sich nach der Division.", "Side view of the wall ball throw: the person is in a deep squat with the ball, a dashed line marks knee height, and the ball flies in an arc to the target mark on the wall. Height and distance depend on the division.") },
   },
   hand_release_push_up: {
     prepare: [],
@@ -1118,7 +1080,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Falsche Reihenfolge/Last/Distanz.", "Wrong order/load/distance.")],
     standardise: [bi("Offizielle Lasten, 25-m-Bahn und Reihenfolge.", "Official loads, 25 m lane and order.")],
     scoring: bi("Zeit; Quellenanker 1:30 für Maximalwert.", "Time; source anchor 1:30 for maximum value."),
-    figure: { id: "sdc_lane", alt: bi("Draufsicht der 25-m-Bahn des Sprint-Drag-Carry mit fünf nummerierten Abschnitten in der Reihenfolge des Protokolls: Sprint, Schlitten ziehen, seitwärts, Kettlebells tragen, Sprint. Die Pfeile wechseln die Richtung.", "Top view of the 25-m lane of the sprint-drag-carry with five numbered sections in protocol order: sprint, drag sled, sideways, carry kettlebells, sprint. The arrows change direction.") },
   },
   plank_hold: {
     goal: bi("Isometrische Rumpfkraftausdauer.", "Isometric core strength endurance."),
@@ -1158,7 +1119,6 @@ export const LIBRARY_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Pre-tension außerhalb Regel, Positionsänderung, Schmerz.", "Pre-tension outside the rule, change of position, pain.")],
     standardise: [bi("Stangenhöhe, Winkel, Kraftplatte/Sampling identisch.", "Keep bar height, angles, force plate/sampling identical.")],
     scoring: bi("Peak Force N/Nkg, RFD. Box-Quellenanker: M Heavyweight ~3418 N bis Flyweight ~2199 N; F Flyweight ~1929 N, Strawweight ~1740 N.", "Peak force N/Nkg, RFD. Box source anchor: M heavyweight ~3418 N to flyweight ~2199 N; F flyweight ~1929 N, strawweight ~1740 N."),
-    figure: { id: "imtp", alt: bi("Seitenansicht des Isometric Mid-Thigh Pull: Die Person steht auf einer Kraftplatte, die Stange ist auf mittlerer Oberschenkelhöhe fixiert, ein Pfeil zeigt den maximalen Zug nach oben.", "Side view of the isometric mid-thigh pull: the person stands on a force plate, the bar is fixed at mid-thigh height, an arrow shows the maximal upward pull.") },
   },
   multiple_jump_test: {
     prepare: [],
@@ -1213,7 +1173,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Standfuß löst sich, Stützschritt, Verlust des Gleichgewichts, Reach-Block wird getreten statt geschoben.", "Stance foot lifts, supporting step, loss of balance, reach block is kicked instead of pushed.")],
     standardise: [bi("Barfuß oder gleiches Schuhwerk; Standfuß bleibt vollständig auf Plattform; Hände nach einheitlicher Regel; Beinlänge zur Normalisierung.", "Barefoot or same footwear; stance foot stays fully on the platform; hands according to a uniform rule; leg length for normalization.")],
     scoring: bi("Reach je Richtung und Composite Score = Summe der drei Maximalwerte /(3 × Beinlänge) ×100. Seitenasymmetrie separat.", "Reach per direction and composite score = sum of the three maximum values /(3 × leg length) ×100. Side asymmetry separately."),
-    figure: { id: "y_balance", alt: bi("Draufsicht des Y-Balance-Aufbaus: Standplattform in der Mitte und drei Richtungen, anterior (1), posteromedial (2) und posterolateral (3). Die beiden hinteren Richtungen liegen symmetrisch zur vorderen.", "Top view of the Y-Balance setup: stance platform in the center and three directions, anterior (1), posteromedial (2) and posterolateral (3). The two posterior directions are symmetrical to the anterior one.") },
   },
   mip_cm_h2o: {
     prepare: [],
@@ -1268,7 +1227,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Hände verlassen Hüfte, freier Fuß löst sich, Standfuß verschiebt sich, Ferse berührt Boden.", "Hands leave hips, free foot detaches, standing foot shifts, heel touches floor.")],
     standardise: [bi("Gleicher Untergrund, Blickpunkt, Fußposition und Abbruchdefinition.", "Same surface, gaze point, foot position and stopping definition.")],
     scoring: bi("Beste Haltezeit je Seite in s; höher = besser.", "Best hold time per side in s; higher = better."),
-    figure: { id: "stork", alt: bi("Eine Person steht auf einem Bein, der andere Fuß liegt am Knie des Standbeins, die Hände sind an den Hüften. Daneben ein Stoppuhr-Symbol.", "A person stands on one leg, the other foot rests at the knee of the standing leg, hands are on the hips. Next to it, a stopwatch symbol.") },
   },
   flamingo_falls: {
     prepare: [],
@@ -1286,7 +1244,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Bei sehr häufigen Verlusten oder Sicherheitsrisiko abbrechen.", "Stop in case of very frequent losses or safety risk.")],
     standardise: [bi("Gleicher Balken, gleiche Seite/Schuhregel, gleiche Zeit.", "Same beam, same side/shoe rule, same time.")],
     scoring: bi("Anzahl Balanceverluste in 60 s; niedriger = besser.", "Number of balance losses in 60 s; lower = better."),
-    figure: { id: "flamingo", alt: bi("Eine Person steht auf einem Bein auf dem Flamingo-Balancebalken. Daneben ein Stoppuhr-Symbol mit der Angabe 60 s.", "A person stands on one leg on the flamingo balance beam. Next to it, a stopwatch symbol showing 60 s.") },
   },
   sit_and_reach_cm: {
     prepare: [],
@@ -1305,7 +1262,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Kniebeugung, ruckartiges Federn.", "Knee flexion, jerky bouncing.")],
     standardise: [bi("Knie bleiben gestreckt; kein Federn.", "Knees stay extended; no bouncing.")],
     scoring: bi("Bestweite cm; Normen alters-/geschlechtsspezifisch.", "Best distance in cm; norms are age- and sex-specific."),
-    figure: { id: "sit_reach", alt: bi("Seitenansicht: Eine Person sitzt mit gestreckten Knien vor der Sit-and-Reach-Box und schiebt den Messschieber nach vorn, auf der Box ist eine Skala.", "Side view: a person sits with extended knees in front of the sit-and-reach box and pushes the slider forward, there is a scale on the box.") },
   },
   jps_knee_deg: {
     prepare: [],
@@ -1491,7 +1447,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Standfuß bewegt sich, Stützschritt, Gleichgewichtsverlust.", "Stance foot moves, support step, loss of balance.")],
     standardise: [bi("App-Standard muss Richtungsset fixieren; für Vergleich nur identische Version.", "App standard must fix the direction set; for comparison, use only an identical version.")],
     scoring: bi("Reach cm/% Beinlänge.", "Reach cm/% leg length."),
-    figure: { id: "star_excursion", alt: bi("Draufsicht des Star-Excursion-Balance-Tests: Standfuß in der Mitte und acht gleichmäßig verteilte Richtungen.", "Top view of the Star Excursion Balance Test: stance foot in the centre and eight evenly spaced directions.") },
   },
   ankle_dorsiflexion_deg: {
     prepare: [],
@@ -1522,7 +1477,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Stützhand löst sich, Verlust der Plankposition.", "Support hand lifts off, loss of plank position.")],
     standardise: [bi("Handposition, Körperlinie und Armlängennormalisierung gleich.", "Same hand position, body line and arm length normalisation.")],
     scoring: bi("Composite Score % und Asymmetrie.", "Composite score % and asymmetry."),
-    figure: { id: "uq_y_balance", alt: bi("Draufsicht des Upper Quarter Y-Balance: Die Stützhand steht in der Mitte, drei Pfeile zeigen die Reichrichtungen medial (1), inferolateral (2) und superolateral (3).", "Top view of the Upper Quarter Y-Balance: the support hand is in the centre, three arrows show the reach directions medial (1), inferolateral (2) and superolateral (3).") },
   },
   shoulder_jps_deg: {
     prepare: [],
@@ -1600,7 +1554,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Linie übertreten, falsche Zielzone, Ballposition verändert.", "Line crossed, wrong target zone, ball position changed.")],
     standardise: [bi("Gleiche Distanz, Ball, Zielgröße, dominanter/nichtdominanter Fuß getrennt.", "Same distance, ball, target size; dominant/non-dominant foot separately.")],
     scoring: bi("Trefferquote %, Punktescore.", "Hit rate %, point score."),
-    figure: { id: "shot_football", alt: bi("Frontansicht eines Fußballtors, in Zielzonen unterteilt. Darunter die Draufsicht: der Schusspunkt liegt mittig vor dem Tor, 16,5 m von der Torlinie entfernt.", "Front view of a football goal divided into target zones. Below it, the top view: the shooting point is centred in front of the goal, 16.5 m from the goal line.") },
   },
   throw_accuracy_handball_pct: {
     prepare: [],
@@ -1617,7 +1570,6 @@ export const OBSERVATION_PROCEDURES: Record<string, LibraryProcedure> = {
     abort: [bi("Übertreten, falsche Technik, Zielsystem verändert.", "Overstepping, wrong technique, target system changed.")],
     standardise: [bi("Gleiche Distanz, Ballgröße, Wurftechnik und Zielzonen.", "Same distance, ball size, throwing technique and target zones.")],
     scoring: bi("Trefferquote/Punktescore; Quelle enthält keine Universalnorm.", "Hit rate/point score; source contains no universal norm."),
-    figure: { id: "shot_handball", alt: bi("Frontansicht eines Handballtors mit nummerierten Zielzonen. Darunter die Draufsicht: die Wurfposition liegt mittig vor dem Tor, 7 m von der Torlinie entfernt.", "Front view of a handball goal with numbered target zones. Below it, the top view: the throwing position is centred in front of the goal, 7 m from the goal line.") },
   },
   fms_total: {
     prepare: [],

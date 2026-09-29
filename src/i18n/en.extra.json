@@ -131,7 +131,8 @@
     "distance": "Distances",
     "scoring": "Scoring and evaluation",
     "scoringNote": "Numbers in this description are cohort values from the protocol source, not norms. The app classifies a result only where a sourced reference is stored.",
-    "figure": "Sketch"
+    "figure": "Sketch",
+    "imageAlt": "Illustration for the test: {{name}}"
   },
   "compare": {
     "title": "Athlete comparison",

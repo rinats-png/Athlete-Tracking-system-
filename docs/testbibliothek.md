@@ -19,16 +19,16 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
 |---|---|
 | Test, den die App noch nicht hatte (Bezeichnung, Felder, Ausrüstung) | `src/data/testCatalogLibrary.ts` (Startpaket) |
 | Einordnung (Achse, Richtung) | `src/data/testClassification.ts` |
-| Ausführliche Beschreibung: Ziel, Aufbau, Schritte, Zeit, Strecke, Abbruch, Bewertung, Skizze | `src/data/testProcedureLibrary.ts` (nachgeladen) |
+| Ausführliche Beschreibung: Ziel, Aufbau, Schritte, Zeit, Strecke, Abbruch, Bewertung | `src/data/testProcedureLibrary.ts` (nachgeladen) |
 | Beobachtungswert (Screening, Sensor, keine Leistung) | `src/data/observations.ts` + Beschreibung in `OBSERVATION_PROCEDURES` |
-| Skizzen | `src/features/tests/figures/library.tsx` (nachgeladen, ohne Wörter) |
+| Bilder | `public/testbilder/T<Nr>.webp`, Zuordnung `src/data/testImages.ts`, Anzeige `src/features/tests/TestImage.tsx` |
 | Zuordnung zu einer Sportart | `src/data/sportProfiles.ts` (`addedOptional`) |
 | Bewusst nicht übernommen, mit Grund | `src/data/documentCoverage.ts` |
 
 ## Entscheidungen
 
 - **Vorhandene Tests** behalten ihre Vorschrift; die Bibliothek ergänzt Ziel, Aufbau, Schritte,
-  Bewertung und Skizze. Tests ohne eigene Vorschrift bekommen sie vollständig.
+  Bewertung und Bild. Tests ohne eigene Vorschrift bekommen sie vollständig.
 - **Doppelte Einträge** sind ein Test für mehrere Disziplinen (z. B. VO₂max, Judogi-Klimmzug).
 - **Geräte- und Labortests** bleiben Tests (`setting: 'lab'`, `deviceBound`), sind aber nie
   Voraussetzung für ein Profil. Screening-, Monitoring- und Sensorwerte (Balance, Beweglichkeit,
@@ -45,7 +45,7 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
 - **Doppelt im Dokument:** Schulter-ER/IR (Handball) ist derselbe Wert wie in Schwimmen.
 - **Körperzusammensetzung:** DXA und BIA sind zwei getrennte Beobachtungswerte, weil die Quelle
   ausdrücklich verbietet, sie zu mischen. Der FMS ist der Beobachtungswert `fms_total` (ohne
-  Skizze: sieben Bewegungsmuster, keine Bewertung erfunden). Sit-and-Reach steht doppelt im
+  Bild: sieben Bewegungsmuster, keine Bewertung erfunden). Sit-and-Reach steht doppelt im
   Dokument und ist ein Beobachtungswert.
 - **AFT (Tactical):** Die Quellenanker («Maximalwert 350 lb», «61 Reps», «13:25») stehen als
   Kohortenwerte im Abschnitt «Bewertung»; das 3RM-Kreuzheben ist ein eigener Test ohne
@@ -69,6 +69,17 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
 1. Einträge dem Schema zuordnen: vorhanden ergänzen, neuer Test, Beobachtungswert oder Lücke.
 2. Deutsch aus dem Dokument, Englisch übersetzen, dann `content/<lang>.json` für die sechs
    weiteren Sprachen (Export: `scripts/exportContent.ts`; Prüfung: `checkLocale`).
-3. Skizze nur, wo eine Grafik den Aufbau klärt; Maße nur, wo das Protokoll sie nennt.
+3. Bild aus der Bildlieferung (KYDON-Testaufbau): nach WebP, 1024 px breit, unteres Label-Band
+   abgeschneiden; bei Doppelten gilt die niedrigere Nummer.
 4. Prüfen: `npm run lint`, `tests/testLibrary.spec.ts`, Katalog- und Sprachfälle, Größe des
    Startpakets (`tests/loading.spec.ts`).
+
+## Bilder
+
+Die Bilder der Testbibliothek (KYDON-Testaufbau, Teil 1 und 2, Nr. 1–133) ersetzen die früheren
+Skizzen. Sie sind Stimmungsbilder, keine Maßzeichnungen: Strecken und Maße stehen deshalb nur im
+Text der Vorschrift. 109 Bilder sind eingebaut (ein Bild je Test oder Beobachtungswert); für
+Doppelte, ärztliche Lücken (SCAT3, ANT, CK, Troponin, PVT, Stroop, VISA-A) und Einträge ohne
+Seite in der App gibt es keines. Die Bildbeschreibung ist überall «Illustration zum Test: <Name>».
+Die Bilder liegen nicht im Vorab-Zwischenspeicher (rund 9 MB), sondern werden beim ersten Ansehen
+gespeichert.

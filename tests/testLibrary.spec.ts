@@ -3,7 +3,8 @@ import { openGuest } from './helpers'
 import { TEST_CATALOG } from '../src/data/testCatalog'
 import { LIBRARY_PROCEDURES, OBSERVATION_PROCEDURES } from '../src/data/testProcedureLibrary'
 import { OBSERVATIONS } from '../src/data/observations'
-import { FIGURE_IDS } from '../src/features/tests/figures/library'
+import { existsSync } from 'node:fs'
+import { TEST_IMAGE_NUMBER, testImageUrl } from '../src/data/testImages'
 import { EQUIPMENT_BY_ID } from '../src/data/equipment'
 import { procedureFor } from '../src/data/testProcedure'
 import { disciplineById } from '../src/data/sportProfiles'
@@ -50,19 +51,21 @@ test.describe('Testbibliothek — Daten', () => {
     }
   })
 
-  test('jede Skizze gibt es, und jede hat eine Bildbeschreibung', () => {
-    for (const [key, p] of Object.entries(procedures)) {
-      if (!p.figure) continue
-      expect(FIGURE_IDS, `${key}: Skizze «${p.figure.id}» fehlt`).toContain(p.figure.id)
-      expect(p.figure.alt.de.length, `${key}: Bildbeschreibung`).toBeGreaterThan(30)
-      expect(p.figure.alt.en.length, `${key}: alt text`).toBeGreaterThan(30)
+  test('jedes Bild gibt es als Datei und gehört zu einem Test oder Beobachtungswert', () => {
+    const known = new Set([...TEST_CATALOG.map((t) => t.slug), ...OBSERVATIONS.map((o) => o.key)])
+    for (const key of Object.keys(TEST_IMAGE_NUMBER)) {
+      expect(known.has(key), `Bild für unbekannten Schlüssel ${key}`).toBe(true)
+      const url = testImageUrl(key)!
+      expect(existsSync(`public${url}`), `${key}: ${url} fehlt`).toBe(true)
     }
   })
 
-  test('jede Skizze wird von mindestens einer Vorschrift gebraucht', () => {
-    const used = new Set(Object.values(procedures).map((p) => p.figure?.id))
-    const unused = FIGURE_IDS.filter((id) => !used.has(id))
-    expect(unused, `Skizzen ohne Test: ${unused.join(', ')}`).toEqual([])
+  test('jede Vorschrift mit Bild-Schlüssel hat ein Bild, und keine Datei liegt ungenutzt', async () => {
+    const { readdirSync } = await import('node:fs')
+    const used = new Set(Object.values(TEST_IMAGE_NUMBER).map((n) => `T${String(n).padStart(3, '0')}.webp`))
+    const unused = readdirSync('public/testbilder').filter((f) => !used.has(f))
+    expect(unused, `Bilder ohne Test: ${unused.join(', ')}`).toEqual([])
+    for (const key of Object.keys(procedures)) expect(TEST_IMAGE_NUMBER[key], `${key}: Bild`).toBeTruthy()
   })
 
   test('eine Vorschrift ohne Zeit- oder Streckenangabe zeigt keinen Platzhalter', () => {
@@ -201,8 +204,8 @@ test.describe('Testbibliothek — Anzeige', () => {
     await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
     await expect(page.getByText('Bewertung und Auswertung', { exact: true })).toBeVisible()
     await expect(page.locator('ol > li').first()).toBeVisible()
-    // Die Skizze wird nachgeladen und trägt ihre Bildbeschreibung.
-    await expect(page.getByRole('img', { name: /Seitenansicht: Eine Person hält sich mit dem Kinn/ })).toBeVisible()
+    // Das Bild trägt eine Beschreibung mit dem Namen des Tests.
+    await expect(page.getByRole('img', { name: /Illustration zum Test: Judogi-Klimmzug/ })).toBeVisible()
     // Die Vorschrift erklärt sich selbst: keine «allgemein»-Kennzeichnung.
     await expect(page.getByText('allgemein', { exact: true })).toHaveCount(0)
   })
@@ -213,31 +216,31 @@ test.describe('Testbibliothek — Anzeige', () => {
 
     // Aus dem Dokument neu:
     await expect(page.getByText('Ziel', { exact: true })).toBeVisible()
-    await expect(page.getByRole('img', { name: /Draufsicht der Sprintbahn/ })).toBeVisible()
+    await expect(page.getByRole('img', { name: /Illustration zum Test: / })).toBeVisible()
     // Vorhanden geblieben:
     for (const label of ['Versuche und Pausen', 'Wann ein Versuch zählt', 'Was gleich bleiben muss']) {
       await expect(page.getByText(label, { exact: true })).toBeVisible()
     }
   })
 
-  test('Welle 2: ein neuer Triathlon-Test zeigt seine Ablaufskizze', async ({ page }) => {
+  test('Welle 2: ein neuer Triathlon-Test zeigt sein Bild', async ({ page }) => {
     await openGuest(page)
     await page.goto('/tests/triathlon_sprint_time/details', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
-    await expect(page.getByRole('img', { name: /Ablaufgrafik des Sprint-Triathlons/ })).toBeVisible()
+    await expect(page.getByRole('img', { name: /Illustration zum Test: Sprint-Triathlon/ })).toBeVisible()
   })
 
-  test('Welle 3: der Yo-Yo-Test zeigt seine Skizze mit den 20 m', async ({ page }) => {
+  test('Welle 3: der Yo-Yo-Test zeigt sein Bild', async ({ page }) => {
     await openGuest(page)
     await page.goto('/tests/yo_yo_ir1/details', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
-    await expect(page.getByRole('img', { name: /zwei Linien im Abstand von 20 m/ })).toBeVisible()
+    await expect(page.getByRole('img', { name: /Illustration zum Test: Yo-Yo/ })).toBeVisible()
   })
 
   test('Welle 4: HYROX zeigt die acht Abschnitte, der 3RM-Test hat keine Referenz erfunden', async ({ page }) => {
     await openGuest(page)
     await page.goto('/tests/hyrox_simulation/details', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByRole('img', { name: /Ablaufgrafik des HYROX-Rennens/ })).toBeVisible()
+    await expect(page.getByRole('img', { name: /Illustration zum Test: HYROX/ })).toBeVisible()
     await page.goto('/tests/deadlift_3rm_aft/details', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
   })

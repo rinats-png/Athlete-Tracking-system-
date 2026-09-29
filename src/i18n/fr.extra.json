@@ -131,7 +131,8 @@
     "distance": "Distances",
     "scoring": "Évaluation et interprétation",
     "scoringNote": "Les chiffres de cette description sont des valeurs de cohortes issues de la source du protocole, pas des normes. L’application ne situe un résultat que là où une référence documentée est enregistrée.",
-    "figure": "Schéma"
+    "figure": "Schéma",
+    "imageAlt": "Illustration du test : {{name}}"
   },
   "compare": {
     "title": "Comparaison d'athlètes",
