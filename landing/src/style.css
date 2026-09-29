@@ -21,6 +21,11 @@
   --glass: rgba(255, 255, 255, 0.58);
   --glass-strong: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(255, 255, 255, 0.85);
+  /* Karten als Milchglas, wie in der App (src/styles/theme.css). */
+  --card: rgba(255, 255, 255, 0.66);
+  --card-border: rgba(255, 255, 255, 0.92);
+  --card-shadow: 0 8px 24px rgb(16 26 24 / 0.08), 0 0 44px -18px var(--glow);
+  --phone-bg: rgba(255, 255, 255, 0.35);
   --glow: rgba(63, 191, 147, 0.32);
   --shadow: 0 18px 44px rgb(16 26 24 / 0.14), 0 2px 6px rgb(16 26 24 / 0.08), 0 0 80px -20px var(--glow);
   --door-app-bg: #1e7d63;
@@ -30,6 +35,7 @@
 
   --font-display: 'Saira Condensed', 'Arial Narrow', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
   --radius-section: 48px;
   --radius-card: 24px;
   --radius-pill: 999px;
@@ -55,6 +61,10 @@
     --glass: rgba(237, 241, 242, 0.07);
     --glass-strong: rgba(20, 28, 33, 0.82);
     --glass-border: rgba(237, 241, 242, 0.14);
+    --card: rgba(237, 241, 242, 0.07);
+    --card-border: rgba(237, 241, 242, 0.14);
+    --card-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.3), 0 0 44px -18px var(--glow);
+    --phone-bg: rgba(237, 241, 242, 0.05);
     --glow: rgba(127, 229, 181, 0.36);
     --shadow: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 32px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);
     --door-app-bg: #7fe5b5;
@@ -82,6 +92,10 @@
   --glass: rgba(237, 241, 242, 0.07);
   --glass-strong: rgba(20, 28, 33, 0.82);
   --glass-border: rgba(237, 241, 242, 0.14);
+  --card: rgba(237, 241, 242, 0.07);
+  --card-border: rgba(237, 241, 242, 0.14);
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.3), 0 0 44px -18px var(--glow);
+  --phone-bg: rgba(237, 241, 242, 0.05);
   --glow: rgba(127, 229, 181, 0.36);
   --shadow: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 32px rgb(0 0 0 / 0.42), 0 0 80px -20px var(--glow);
   --door-app-bg: #7fe5b5;
@@ -217,7 +231,9 @@ h1, h2, h3, p { margin: 0; }
 .hero__chips li {
   padding: 12px 22px; border-radius: var(--radius-pill); font-size: 15px;
   background: var(--glass); border: 1px solid var(--glass-border); backdrop-filter: blur(10px);
+  display: inline-flex; align-items: center; gap: 8px;
 }
+.hero__chips li::before { content: ''; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--glow); }
 .hero__scroll { position: absolute; z-index: 2; left: 50%; bottom: 28px; transform: translateX(-50%); width: 26px; height: 42px; border: 1.5px solid var(--ink-muted); border-radius: 14px; }
 .hero__scroll span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; margin-left: -1.5px; border-radius: 2px; background: var(--accent); animation: scroll-dot 1.8s var(--ease) infinite; }
 @keyframes scroll-dot { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(14px); opacity: 0; } 100% { opacity: 0; } }
@@ -261,8 +277,11 @@ h1, h2, h3, p { margin: 0; }
 .why { padding: 110px 40px; }
 .why__head { max-width: 1000px; }
 .why__grid { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.why-card { padding: 28px; border-radius: var(--radius-card); background: var(--glass-strong); border: 1px solid var(--glass-border); display: flex; flex-direction: column; gap: 14px; }
-.why-card__num { font-family: var(--font-display); font-weight: 600; color: var(--accent-text); letter-spacing: 0.18em; }
+.why-card { padding: 28px; border-radius: var(--radius-card); background: var(--card); border: 1px solid var(--card-border); box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 14px; }
+.why-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.why-card__num { font-family: var(--font-mono); font-weight: 300; font-size: 34px; line-height: 1; color: var(--accent-text); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.why-card__icon { height: 28px; width: auto; flex: none; color: var(--accent); }
+.why-card__icon .mk { fill: var(--ink); }
 .why-card h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 26px; line-height: 1.05; }
 .why-card p { color: var(--ink-secondary); font-size: 16px; font-weight: 300; }
 
@@ -279,16 +298,15 @@ h1, h2, h3, p { margin: 0; }
 .feature__copy h3 { margin-top: 14px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(32px, 3.6vw, 52px); line-height: 1; }
 .feature__copy p:not(.eyebrow) { margin-top: 18px; color: var(--ink-secondary); font-weight: 300; font-size: 18px; }
 .phone {
-  margin: 0; width: 300px; aspect-ratio: 412 / 915; border-radius: 40px; overflow: hidden;
-  border: 8px solid var(--ink); background: var(--ink); box-shadow: var(--shadow);
+  margin: 0; width: 300px; aspect-ratio: 412 / 915; border-radius: 44px; overflow: hidden; padding: 9px;
+  border: 1px solid var(--card-border); background: var(--phone-bg); box-shadow: var(--shadow);
   transform: perspective(1400px) rotateY(-6deg) rotateX(2deg); transition: transform 0.8s var(--ease);
 }
 .feature--flip .phone { transform: perspective(1400px) rotateY(6deg) rotateX(2deg); }
 .phone:hover { transform: perspective(1400px) rotateY(0) rotateX(0); }
-.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-:root[data-theme='dark'] .phone { border-color: #2f3a3f; }
-.feature-list { list-style: none; margin: 72px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; }
-.feature-list li { background: var(--plane); padding: 28px; display: flex; flex-direction: column; gap: 6px; }
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 34px; }
+.feature-list { list-style: none; margin: 72px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.feature-list li { background: var(--card); border: 1px solid var(--card-border); box-shadow: var(--card-shadow); border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 6px; }
 .feature-list strong { font-family: var(--font-display); font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: 0.02em; }
 .feature-list span { color: var(--ink-secondary); font-weight: 300; font-size: 16px; }
 
@@ -311,20 +329,20 @@ h1, h2, h3, p { margin: 0; }
 
 /* --- Brustgurt / HRV -------------------------------------------------------------- */
 .straps { padding: 110px 40px; }
-.straps__list { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-card); overflow: hidden; }
-.strap { background: var(--plane); padding: 22px 26px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; }
+.straps__list { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.strap { background: var(--card); border: 1px solid var(--card-border); box-shadow: var(--card-shadow); border-radius: 20px; padding: 22px 26px; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; }
 .strap:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .strap__name { font-family: var(--font-display); font-weight: 700; font-size: 21px; text-transform: uppercase; letter-spacing: 0.02em; }
 .strap__rec { margin-left: 8px; font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--accent-text); vertical-align: middle; }
 .strap__note { grid-column: 1; color: var(--ink-secondary); font-weight: 300; font-size: 15px; }
-.strap__badge { grid-column: 2; grid-row: 1 / span 2; white-space: nowrap; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 12px; font-size: 13px; color: var(--ink-muted); }
-.strap__badge--hrv { border-color: var(--accent); color: var(--accent-text); box-shadow: 0 0 18px -8px var(--glow); }
+.strap__badge { grid-column: 2; grid-row: 1 / span 2; white-space: nowrap; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 12px; font-size: 13px; font-weight: 500; color: var(--ink-muted); }
+.strap__badge--hrv { border-color: var(--accent); background: var(--accent-quiet); color: var(--accent-text); box-shadow: 0 0 18px -8px var(--glow); }
 .straps__foot { margin-top: 20px; max-width: 760px; color: var(--ink-muted); font-size: 14px; }
 
 /* --- Bald im App Store -------------------------------------------------------------- */
 .soon { padding: 110px 40px; }
 .soon__stores { list-style: none; padding: 0; margin: 36px 0 0; display: flex; gap: 12px; flex-wrap: wrap; }
-.store-pill { display: flex; flex-direction: column; justify-content: center; min-width: 200px; height: 64px; padding: 0 22px; border-radius: 16px; border: 1px dashed var(--line); background: var(--glass); backdrop-filter: blur(10px); }
+.store-pill { display: flex; flex-direction: column; justify-content: center; min-width: 200px; height: 64px; padding: 0 22px; border-radius: 16px; border: 1px dashed var(--line); background: var(--card); box-shadow: var(--card-shadow); backdrop-filter: blur(10px); }
 .store-pill__kicker { font-size: 12px; color: var(--ink-muted); }
 .store-pill__name { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: 0.02em; }
 .soon__note { margin-top: 20px; max-width: 620px; color: var(--ink-muted); font-size: 14px; }

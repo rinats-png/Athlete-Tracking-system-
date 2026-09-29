@@ -1,6 +1,7 @@
 import '@fontsource/saira-condensed/latin-500.css'
 import '@fontsource/saira-condensed/latin-600.css'
 import '@fontsource/saira-condensed/latin-700.css'
+import '@fontsource/ibm-plex-mono/latin-300.css'
 import '@fontsource/ibm-plex-sans/latin-300.css'
 import '@fontsource/ibm-plex-sans/latin-400.css'
 import '@fontsource/ibm-plex-sans/latin-500.css'
