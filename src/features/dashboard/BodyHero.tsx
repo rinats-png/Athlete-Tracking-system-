@@ -168,7 +168,7 @@ export function BodyHero({
       </div>
 
       <div className="mt-1 flex flex-col items-center border-t border-line px-4 py-4">
-        <span className="readout text-[46px] leading-none font-medium text-accent-text">
+        <span className="readout text-[46px] leading-none font-light text-accent-text">
           {index == null ? '—' : formatNumber(index, locale, 0)}
         </span>
         <span className="label-tag mt-2">{t('body.index')}</span>

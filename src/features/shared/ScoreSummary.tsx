@@ -36,7 +36,7 @@ export function ScoreSummary({ score, axes }: { score: PerformanceScore; axes: R
     <div className="px-4 py-4">
       <span className="label-tag">{t('score.title')}</span>
       <div className="mt-1 flex items-baseline gap-3">
-        <span className="readout text-[44px] leading-none font-medium tabular-nums">
+        <span className="readout text-[44px] leading-none font-light tabular-nums">
           {formatNumber(score.value, locale, 0)}
         </span>
         <span className="text-[13px] leading-snug text-ink-secondary">

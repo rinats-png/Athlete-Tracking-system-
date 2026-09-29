@@ -27,7 +27,7 @@ export function StatTile({
         <span
           className={cn(
             'readout leading-none',
-            emphasis ? 'text-[34px] font-medium' : 'text-[24px]',
+            emphasis ? 'text-[34px] font-light' : 'text-[24px]',
           )}
         >
           {value}

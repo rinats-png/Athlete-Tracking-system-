@@ -10,8 +10,10 @@ const button = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-accent text-accent-ink hover:bg-accent/85',
-        outline: 'border border-line-strong text-ink hover:bg-accent-quiet hover:border-accent',
+        primary:
+          'bg-accent text-accent-ink shadow-[0_0_24px_-6px_var(--glow)] hover:bg-accent/85',
+        outline:
+          'border border-line-strong bg-glass text-ink hover:bg-accent-quiet hover:border-accent',
         ghost: 'text-ink-secondary hover:text-ink hover:bg-accent-quiet',
       },
       // Alle Grössen halten die 44-px-Untergrenze für Trefferflächen ein.

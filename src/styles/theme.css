@@ -119,6 +119,13 @@
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-edge:   rgba(255, 255, 255, 0.9);
 
+  /* Karten als Milchglas: der Nebel des Grundes scheint durch, die weisse
+     Kante hebt sie ab. Die Deckkraft ist so gewählt, dass die Schriftrollen
+     weiter gegen die vier Flächen gelten (contrast.spec.ts). */
+  --card:         rgba(255, 255, 255, 0.66);
+  --card-raised:  rgba(255, 255, 255, 0.82);
+  --card-border:  rgba(255, 255, 255, 0.92);
+
   /* Das Glühen der Karten: auf dem Nebel stärker als auf der Tinte —
      dort ersetzt es, was auf dunklem Grund der Schlagschatten tut. */
   --glow:         rgba(63, 191, 147, 0.32);
@@ -133,6 +140,7 @@
      unten — der Grund ist nie eine flache Farbe. */
   --atmo:
     radial-gradient(65% 50% at 50% 12%, rgba(255, 255, 255, 0.92), transparent 62%),
+    radial-gradient(42% 30% at 78% 6%, rgba(63, 191, 147, 0.34), transparent 68%),
     radial-gradient(50% 40% at 20% 85%, rgba(63, 191, 147, 0.22), transparent 60%),
     radial-gradient(45% 35% at 85% 75%, rgba(30, 125, 99, 0.18), transparent 58%),
     linear-gradient(180deg, #E1EBEA, #D6E3E2 55%, #BFD5D2);
@@ -251,6 +259,11 @@
     --glass-border: rgba(237, 241, 242, 0.14);
     --glass-edge:   rgba(237, 241, 242, 0.28);
 
+    /* Karten als Milchglas, dunkel: eine Spur Nebelweiss über dem Grund. */
+    --card:         rgba(237, 241, 242, 0.07);
+    --card-raised:  rgba(237, 241, 242, 0.11);
+    --card-border:  rgba(237, 241, 242, 0.14);
+
     --glow:         rgba(127, 229, 181, 0.42);
 
     --headline-glow: rgba(237, 241, 242, 0.20);
@@ -260,7 +273,7 @@
 
     /* Mondlichtbecken von oben, kühle Tiefe von unten. */
     --atmo:
-      radial-gradient(60% 45% at 50% 8%, rgba(127, 229, 181, 0.20), transparent 60%),
+      radial-gradient(60% 45% at 50% 8%, rgba(127, 229, 181, 0.26), transparent 60%),
       radial-gradient(70% 50% at 50% 115%, rgba(30, 125, 99, 0.26), transparent 60%),
       linear-gradient(180deg, #0E1418, #0B1014 55%, #070A0D);
 
@@ -337,6 +350,11 @@
   --glass-border: rgba(237, 241, 242, 0.14);
   --glass-edge:   rgba(237, 241, 242, 0.28);
 
+  /* Karten als Milchglas, dunkel: eine Spur Nebelweiss über dem Grund. */
+  --card:         rgba(237, 241, 242, 0.07);
+  --card-raised:  rgba(237, 241, 242, 0.11);
+  --card-border:  rgba(237, 241, 242, 0.14);
+
   --glow:         rgba(127, 229, 181, 0.42);
 
   --headline-glow: rgba(237, 241, 242, 0.20);
@@ -346,7 +364,7 @@
 
   /* Mondlichtbecken von oben, kühle Tiefe von unten. */
   --atmo:
-    radial-gradient(60% 45% at 50% 8%, rgba(127, 229, 181, 0.20), transparent 60%),
+    radial-gradient(60% 45% at 50% 8%, rgba(127, 229, 181, 0.26), transparent 60%),
     radial-gradient(70% 50% at 50% 115%, rgba(30, 125, 99, 0.26), transparent 60%),
     linear-gradient(180deg, #0E1418, #0B1014 55%, #070A0D);
 
@@ -375,6 +393,9 @@
   --color-glass:          var(--glass);
   --color-glass-strong:   var(--glass-strong);
   --color-glass-border:   var(--glass-border);
+  --color-card:           var(--card);
+  --color-card-raised:    var(--card-raised);
+  --color-card-border:    var(--card-border);
   --color-accent-ink:     var(--accent-ink);
   --color-accent-text:    var(--accent-text);
   --color-accent-quiet:   var(--accent-quiet);
@@ -469,14 +490,14 @@ body {
   /* `relative`, damit die Lichtkante von `.float` und der Akzentbalken von
      `.panel-ticked` einen Bezugsrahmen haben. */
   position: relative;
-  background-color: var(--surface);
-  border: 1px solid var(--line);
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   box-shadow: var(--elev-1);
 }
 
 .float {
-  background-color: var(--surface-raised);
+  background-color: var(--card-raised);
   box-shadow: var(--elev-2);
 }
 
