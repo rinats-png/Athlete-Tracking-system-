@@ -49,7 +49,15 @@
       "stability_index": "Indice de stabilité (plateforme de force)",
       "reaction_time_ms": "Temps de réaction visuel",
       "fitrosword_response_ms": "Temps de réaction en escrime (FitroSword)",
-      "punch_peak_g": "Charge de frappe (accélération maximale)"
+      "punch_peak_g": "Charge de frappe (accélération maximale)",
+      "stroke_rate_spm": "Fréquence de bras (natation)",
+      "stroke_length_m": "Longueur de coup de bras (natation)",
+      "index_of_coordination_pct": "Indice de coordination (natation)",
+      "shoulder_er_ir_ratio": "Épaule : rapport rotation externe/interne",
+      "shoulder_rom_deg": "Amplitude de mouvement de l'épaule",
+      "body_mass_change_pct": "Variation de la masse corporelle avant/après la course",
+      "sebt_composite_pct": "Star Excursion Balance (composite)",
+      "ankle_dorsiflexion_deg": "Dorsiflexion de la cheville"
     },
     "meaning": {
       "ck_u_l": "Une enzyme dont le taux sanguin monte après une charge inhabituelle. La variation entre personnes est très grande — comparable seulement avec toi-même.",
@@ -73,7 +81,15 @@
       "stability_index": "L'oscillation du centre de pression sur une plateforme de force. La valeur dépend fortement du système et ne peut être comparée que sur le même appareil.",
       "reaction_time_ms": "Le temps entre un stimulus visuel et la réponse définie. L'appareil décale la valeur, c'est pourquoi il est enregistré avec elle.",
       "fitrosword_response_ms": "Temps de réaction et de réponse total en escrime avec un système précis. Comparable uniquement sur le même système.",
-      "punch_peak_g": "L'accélération la plus élevée qu'un capteur porté sur le corps enregistre pendant la boxe. Comparable uniquement avec le même capteur et le même emplacement."
+      "punch_peak_g": "L'accélération la plus élevée qu'un capteur porté sur le corps enregistre pendant la boxe. Comparable uniquement avec le même capteur et le même emplacement.",
+      "stroke_rate_spm": "Nombre de cycles de bras par minute. Ne prend son sens qu'avec la longueur de coup de bras ; une valeur plus élevée n'est pas automatiquement meilleure.",
+      "stroke_length_m": "La distance dont un cycle de bras te fait avancer. Elle dépend de la technique, de l'allure et de la morphologie, et n'est comparable qu'avec la même méthode de mesure.",
+      "index_of_coordination_pct": "Mesure dans quelle proportion les phases de traction des deux bras se chevauchent ou laissent des écarts. Nécessite une analyse vidéo ou des capteurs et n'est comparable qu'avec la même analyse.",
+      "shoulder_er_ir_ratio": "Le rapport entre la force de rotation externe et interne. Un dépistage avec un dynamomètre manuel, pas une valeur de performance ; note le côté et l'appareil dans la note.",
+      "shoulder_rom_deg": "L'amplitude de mouvement de l'épaule en degrés. Un dépistage ; note le côté, la direction et la méthode de mesure dans la note.",
+      "body_mass_change_pct": "La variation en pourcentage de la masse corporelle entre avant et après un effort. Une observation, pas une performance et aucun jugement sur la perte de liquide.",
+      "sebt_composite_pct": "L'atteinte moyenne dans toutes les directions, en pourcentage de la longueur de jambe. Un dépistage de l'équilibre, pas une mesure de performance.",
+      "ankle_dorsiflexion_deg": "Jusqu'où la cheville peut fléchir vers le haut, en degrés. Un dépistage de la mobilité ; note le côté et la méthode de mesure dans la note."
     }
   },
   "procedure": {

@@ -49,7 +49,15 @@
       "stability_index": "Stabilitätsindex (Kraftplatte)",
       "reaction_time_ms": "Visuelle Reaktionszeit",
       "fitrosword_response_ms": "Fecht-Reaktionszeit (FitroSword)",
-      "punch_peak_g": "Schlagbelastung (Spitzenbeschleunigung)"
+      "punch_peak_g": "Schlagbelastung (Spitzenbeschleunigung)",
+      "stroke_rate_spm": "Zugfrequenz (Schwimmen)",
+      "stroke_length_m": "Zuglänge (Schwimmen)",
+      "index_of_coordination_pct": "Koordinationsindex (Schwimmen)",
+      "shoulder_er_ir_ratio": "Schulter: Verhältnis Außen-/Innenrotation",
+      "shoulder_rom_deg": "Schulterbeweglichkeit",
+      "body_mass_change_pct": "Körpermasse vor/nach dem Wettkampf (Änderung)",
+      "sebt_composite_pct": "Star Excursion Balance (Gesamtwert)",
+      "ankle_dorsiflexion_deg": "Sprunggelenk: Dorsalflexion"
     },
     "meaning": {
       "ck_u_l": "Ein Enzym, dessen Blutspiegel nach ungewohnter Belastung steigt. Die Streuung zwischen Menschen ist sehr gross — vergleichbar ist er nur mit dir selbst.",
@@ -73,7 +81,15 @@
       "stability_index": "Die Schwankung des Körperschwerpunkts auf einer Kraftplatte. Der Wert hängt stark vom System ab und lässt sich nur mit demselben Gerät vergleichen.",
       "reaction_time_ms": "Die Zeit von einem visuellen Reiz bis zur festgelegten Antwort. Das Gerät verschiebt den Wert, deshalb steht es dabei.",
       "fitrosword_response_ms": "Reaktions- und Gesamtantwortzeit im Fechten mit einem bestimmten System. Nur mit demselben System vergleichbar.",
-      "punch_peak_g": "Die höchste Beschleunigung, die ein Sensor am Körper beim Boxen misst. Nur mit demselben Sensor und Sensorplatz vergleichbar."
+      "punch_peak_g": "Die höchste Beschleunigung, die ein Sensor am Körper beim Boxen misst. Nur mit demselben Sensor und Sensorplatz vergleichbar.",
+      "stroke_rate_spm": "Die Zahl der Armzyklen pro Minute. Nur zusammen mit der Zuglänge sinnvoll zu lesen; ein höherer Wert ist nicht automatisch besser.",
+      "stroke_length_m": "Die Strecke, die ein Armzyklus vorwärts bringt. Hängt von Technik, Tempo und Körpergröße ab und ist nur mit derselben Messweise vergleichbar.",
+      "index_of_coordination_pct": "Wie stark sich die Zugphasen der beiden Arme überlappen oder Lücken lassen. Braucht eine Videoanalyse oder Sensoren und ist nur mit derselben Auswertung vergleichbar.",
+      "shoulder_er_ir_ratio": "Das Verhältnis der Kraft bei Außen- zu Innenrotation. Ein Screening mit Handdynamometer, kein Leistungswert; trag Seite und Gerät in die Notiz ein.",
+      "shoulder_rom_deg": "Der Bewegungsumfang der Schulter in Grad. Ein Screening; Seite, Bewegungsrichtung und Messweise gehören in die Notiz.",
+      "body_mass_change_pct": "Die prozentuale Änderung der Körpermasse zwischen vor und nach einer Belastung. Eine Beobachtung, keine Leistung und keine Bewertung von Flüssigkeitsverlust.",
+      "sebt_composite_pct": "Die gemittelte Reichweite in allen Richtungen, in Prozent der Beinlänge. Ein Screening des Gleichgewichts, keine Leistungsmessung.",
+      "ankle_dorsiflexion_deg": "Wie weit sich das Sprunggelenk nach oben beugen lässt, in Grad. Ein Beweglichkeits-Screening; Seite und Messweise gehören in die Notiz."
     }
   },
   "procedure": {

@@ -49,7 +49,15 @@
       "stability_index": "Stability index (force plate)",
       "reaction_time_ms": "Visual reaction time",
       "fitrosword_response_ms": "Fencing reaction time (FitroSword)",
-      "punch_peak_g": "Punch load (peak acceleration)"
+      "punch_peak_g": "Punch load (peak acceleration)",
+      "stroke_rate_spm": "Stroke rate (swimming)",
+      "stroke_length_m": "Stroke length (swimming)",
+      "index_of_coordination_pct": "Index of coordination (swimming)",
+      "shoulder_er_ir_ratio": "Shoulder: external/internal rotation ratio",
+      "shoulder_rom_deg": "Shoulder range of motion",
+      "body_mass_change_pct": "Body mass change before/after the race",
+      "sebt_composite_pct": "Star Excursion Balance (composite)",
+      "ankle_dorsiflexion_deg": "Ankle dorsiflexion"
     },
     "meaning": {
       "ck_u_l": "An enzyme whose blood level rises after unaccustomed load. Variation between people is very large — it is comparable only with yourself.",
@@ -73,7 +81,15 @@
       "stability_index": "The sway of the centre of pressure on a force plate. The value depends strongly on the system and can only be compared on the same device.",
       "reaction_time_ms": "The time from a visual stimulus to the defined response. The device shifts the value, so it is recorded with it.",
       "fitrosword_response_ms": "Reaction and total response time in fencing with a specific system. Only comparable on the same system.",
-      "punch_peak_g": "The highest acceleration a body-worn sensor records during boxing. Only comparable with the same sensor and placement."
+      "punch_peak_g": "The highest acceleration a body-worn sensor records during boxing. Only comparable with the same sensor and placement.",
+      "stroke_rate_spm": "Arm cycles per minute. Only meaningful together with stroke length; a higher value is not automatically better.",
+      "stroke_length_m": "The distance one arm cycle carries you forward. It depends on technique, pace and body size and is only comparable with the same measuring method.",
+      "index_of_coordination_pct": "How much the pull phases of the two arms overlap or leave gaps. Needs video analysis or sensors and is only comparable with the same analysis.",
+      "shoulder_er_ir_ratio": "The ratio of external to internal rotation strength. A screening with a hand-held dynamometer, not a performance value; note side and device in the note.",
+      "shoulder_rom_deg": "The range of motion of the shoulder in degrees. A screening; note side, direction and measuring method in the note.",
+      "body_mass_change_pct": "The percentage change in body mass between before and after an effort. An observation, not a performance and no judgement of fluid loss.",
+      "sebt_composite_pct": "The averaged reach across all directions, as a percentage of leg length. A balance screening, not a performance measure.",
+      "ankle_dorsiflexion_deg": "How far the ankle can bend upward, in degrees. A mobility screening; note side and measuring method in the note."
     }
   },
   "procedure": {

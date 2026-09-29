@@ -49,7 +49,15 @@
       "stability_index": "Stabilitetsindeks (kraftplattform)",
       "reaction_time_ms": "Visuell reaksjonstid",
       "fitrosword_response_ms": "Fektereaksjonstid (FitroSword)",
-      "punch_peak_g": "Slagbelastning (toppakselerasjon)"
+      "punch_peak_g": "Slagbelastning (toppakselerasjon)",
+      "stroke_rate_spm": "Slagfrekvens (svømming)",
+      "stroke_length_m": "Slaglengde (svømming)",
+      "index_of_coordination_pct": "Koordinasjonsindeks (svømming)",
+      "shoulder_er_ir_ratio": "Skulder: forhold mellom utadrotasjon og innadrotasjon",
+      "shoulder_rom_deg": "Skulderbevegelighet",
+      "body_mass_change_pct": "Endring i kroppsmasse før/etter løpet",
+      "sebt_composite_pct": "Star Excursion Balance (samlet)",
+      "ankle_dorsiflexion_deg": "Ankeldorsalfleksjon"
     },
     "meaning": {
       "ck_u_l": "Et enzym som stiger i blodet etter uvant belastning. Variasjonen mellom personer er svært stor — det er bare sammenlignbart med deg selv.",
@@ -73,7 +81,15 @@
       "stability_index": "Svaiingen til trykksenteret på en kraftplattform. Verdien avhenger sterkt av systemet og kan bare sammenlignes på samme enhet.",
       "reaction_time_ms": "Tiden fra en visuell stimulus til den definerte responsen. Enheten forskyver verdien, så den registreres sammen med den.",
       "fitrosword_response_ms": "Reaksjons- og total responstid i fekting med et spesifikt system. Bare sammenlignbar på samme system.",
-      "punch_peak_g": "Den høyeste akselerasjonen en kroppsbåret sensor registrerer under boksing. Bare sammenlignbar med samme sensor og plassering."
+      "punch_peak_g": "Den høyeste akselerasjonen en kroppsbåret sensor registrerer under boksing. Bare sammenlignbar med samme sensor og plassering.",
+      "stroke_rate_spm": "Armsyklus per minutt. Gir bare mening sammen med slaglengde; en høyere verdi er ikke automatisk bedre.",
+      "stroke_length_m": "Distansen én armsyklus fører deg fremover. Den avhenger av teknikk, tempo og kroppsstørrelse og kan bare sammenlignes med samme målemetode.",
+      "index_of_coordination_pct": "Hvor mye trekkfasene til de to armene overlapper eller har mellomrom. Krever videoanalyse eller sensorer og kan bare sammenlignes med samme analyse.",
+      "shoulder_er_ir_ratio": "Forholdet mellom styrke i utadrotasjon og innadrotasjon. En screening med håndholdt dynamometer, ikke en prestasjonsverdi; noter side og utstyr i notatet.",
+      "shoulder_rom_deg": "Skulderens bevegelighet i grader. En screening; noter side, retning og målemetode i notatet.",
+      "body_mass_change_pct": "Prosentvis endring i kroppsmasse mellom før og etter en belastning. En observasjon, ikke en prestasjon og ingen vurdering av væsketap.",
+      "sebt_composite_pct": "Gjennomsnittlig rekkevidde i alle retninger, som prosent av benlengde. En balanse-screening, ikke et prestasjonsmål.",
+      "ankle_dorsiflexion_deg": "Hvor langt ankelen kan bøyes oppover, i grader. En bevegelighets-screening; noter side og målemetode i notatet."
     }
   },
   "procedure": {

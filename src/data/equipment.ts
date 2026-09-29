@@ -69,6 +69,8 @@ export type EquipmentId =
   | 'spiroergometry'
   | 'punch_sensor'
   | 'kick_target'
+  | 'tether_system'
+  | 'isometric_rig'
 
 export interface EquipmentItem {
   id: EquipmentId
@@ -304,6 +306,16 @@ export const EQUIPMENT: EquipmentItem[] = [
     id: 'kick_target',
     name: { de: "Kickziel oder Schlagpolster", en: "Kick target or strike pad" },
     keywords: ["kickziel", "schlagpolster", "kick target", "strike pad"],
+  },
+  {
+    id: 'tether_system',
+    name: { de: "Zugleinen-System mit Kraftsensor", en: "Tether system with force sensor" },
+    keywords: ["zugleine", "tether"],
+  },
+  {
+    id: 'isometric_rig',
+    name: { de: "Isometrisches Zuggestell", en: "Isometric pull rig" },
+    keywords: ["zuggestell", "isometrisch", "isometric"],
   },
 ]
 

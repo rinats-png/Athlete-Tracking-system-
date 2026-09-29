@@ -3195,10 +3195,6 @@
     "en": "Measure CMJ without additional load. Perform further CMJs with several defined additional loads. 2–3 valid attempts per load.",
     "de": "CMJ ohne Zusatzlast messen. Weitere CMJ mit mehreren definierten Zusatzlasten durchführen. Je Last 2–3 gültige Versuche."
   },
-  "Force plate or measurement system, added loads": {
-    "en": "Force plate or measurement system, added loads",
-    "de": "Kraftmessplatte oder Messsystem, Zusatzlasten"
-  },
   "TAIKT (taekwondo kick test)": {
     "en": "TAIKT (taekwondo kick test)",
     "de": "TAIKT (Taekwondo-Kicktest)"
@@ -4031,10 +4027,6 @@
     "en": "30 m.",
     "de": "30 m."
   },
-  "Best time in s.": {
-    "en": "Best time in s.",
-    "de": "Bestzeit s."
-  },
   "Top view of the sprint track with timing gates at 0 m and 30 m. A dimension line shows the 30 m.": {
     "en": "Top view of the sprint track with timing gates at 0 m and 30 m. A dimension line shows the 30 m.",
     "de": "Draufsicht der Sprintbahn mit Timing Gates bei 0 m und 30 m. Eine Maßlinie zeigt die 30 m."
@@ -4662,10 +4654,6 @@
   "Do not change mode and ramp protocol; same calibration.": {
     "en": "Do not change mode and ramp protocol; same calibration.",
     "de": "Modus und Rampenprotokoll nicht wechseln; gleiche Kalibrierung."
-  },
-  "BJJ: ml/kg/min. Source range BJJ approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69.": {
-    "en": "BJJ: ml/kg/min. Source range BJJ approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69.",
-    "de": "BJJ: ml/kg/min. Quellenband BJJ ca. 42–52. MMA: ml/kg/min; Quellen: 63,23±5,50 in einer Elitekohorte, weitere Kohorten ca. 48,1–60; obere Werte ~68–69."
   },
   "Standardised KSAT setup, punch/kick target, audio/timer, HR and optionally lactate.": {
     "en": "Standardised KSAT setup, punch/kick target, audio/timer, HR and optionally lactate.",
@@ -5494,5 +5482,1241 @@
   "g, peak g, cumulative load/count; longitudinal/device-specific use only.": {
     "en": "g, peak g, cumulative load/count; longitudinal/device-specific use only.",
     "de": "g, Peak-g, kumulative Load/Count; nur longitudinal/gerätespezifisch."
+  },
+  "Tether system with force sensor": {
+    "en": "Tether system with force sensor",
+    "de": "Zugleinen-System mit Kraftsensor"
+  },
+  "Isometric pull rig": {
+    "en": "Isometric pull rig",
+    "de": "Isometrisches Zuggestell"
+  },
+  "Force plate or measurement system, added weights": {
+    "en": "Force plate or measurement system, added weights",
+    "de": "Kraftmessplatte oder Messsystem, Zusatzgewichte"
+  },
+  "Marathon finish time": {
+    "en": "Marathon finish time",
+    "de": "Marathon-Zielzeit"
+  },
+  "Endurance performance over 42.195 km.": {
+    "en": "Endurance performance over 42.195 km.",
+    "de": "Ausdauerleistung über 42,195 km."
+  },
+  "Complete the race under regular conditions. Record net/gross time and splits.": {
+    "en": "Complete the race under regular conditions. Record net/gross time and splits.",
+    "de": "Wettkampf unter regulären Bedingungen absolvieren. Netto-/Bruttozeit und Splits speichern."
+  },
+  "Stopwatch or official timing, measured course": {
+    "en": "Stopwatch or official timing, measured course",
+    "de": "Stoppuhr oder offizielle Zeitmessung, vermessene Strecke"
+  },
+  "Critical power test": {
+    "en": "Critical power test",
+    "de": "Critical-Power-Test"
+  },
+  "Critical power": {
+    "en": "Critical power",
+    "de": "Critical Power"
+  },
+  "Modelling of sustainable critical power and W′ from several maximal efforts.": {
+    "en": "Modelling of sustainable critical power and W′ from several maximal efforts.",
+    "de": "Modellierung der nachhaltigen kritischen Leistung und W′ aus mehreren maximalen Belastungen."
+  },
+  "Perform at least 3 maximal time trials of different durations at separate/sufficiently recovered time points. Record power and duration exactly. Calculate CP/W′ with a defined model.": {
+    "en": "Perform at least 3 maximal time trials of different durations at separate/sufficiently recovered time points. Record power and duration exactly. Calculate CP/W′ with a defined model.",
+    "de": "Mindestens 3 maximale Time Trials unterschiedlicher Dauer an getrennten/ausreichend erholten Zeitpunkten durchführen. Leistung und Dauer exakt erfassen. CP/W′ mit festgelegtem Modell berechnen."
+  },
+  "Bike ergometer, smart trainer or power meter": {
+    "en": "Bike ergometer, smart trainer or power meter",
+    "de": "Radergometer, Smart-Trainer oder Leistungsmesser"
+  },
+  "Force-velocity profile (ergometer)": {
+    "en": "Force-velocity profile (ergometer)",
+    "de": "Kraft-Geschwindigkeits-Profil (Ergometer)"
+  },
+  "F-v ergometer": {
+    "en": "F-v ergometer",
+    "de": "F-v-Ergometer"
+  },
+  "Mechanical force-velocity-power profile.": {
+    "en": "Mechanical force-velocity-power profile.",
+    "de": "Mechanisches Kraft-Geschwindigkeits-Leistungsprofil."
+  },
+  "Perform several maximal attempts at graded resistances. Record peak force and velocity for each load. Calculate the F-v regression.": {
+    "en": "Perform several maximal attempts at graded resistances. Record peak force and velocity for each load. Calculate the F-v regression.",
+    "de": "Mehrere maximale Versuche bei abgestuften Widerständen durchführen. Peak Force und Geschwindigkeit je Last erfassen. F-v-Regression berechnen."
+  },
+  "Bike ergometer or smart trainer with force and cadence measurement": {
+    "en": "Bike ergometer or smart trainer with force and cadence measurement",
+    "de": "Radergometer oder Smart-Trainer mit Kraft- und Drehzahlmessung"
+  },
+  "50 m freestyle time trial": {
+    "en": "50 m freestyle time trial",
+    "de": "50 m Freistil auf Zeit"
+  },
+  "50 m freestyle": {
+    "en": "50 m freestyle",
+    "de": "50 m Freistil"
+  },
+  "Maximal swimming speed over 50 m freestyle.": {
+    "en": "Maximal swimming speed over 50 m freestyle.",
+    "de": "Maximale Schwimmgeschwindigkeit über 50 m Freistil."
+  },
+  "Start in a standardised way. Swim 50 m freestyle at maximal effort. Stop the time at the touch.": {
+    "en": "Start in a standardised way. Swim 50 m freestyle at maximal effort. Stop the time at the touch.",
+    "de": "Standardisiert starten. 50 m Freistil maximal schwimmen. Zeit bei Anschlag stoppen."
+  },
+  "Pool lane, stopwatch or timing system": {
+    "en": "Pool lane, stopwatch or timing system",
+    "de": "Schwimmbahn, Stoppuhr oder Zeitmessung"
+  },
+  "Tethered swimming (30 s max)": {
+    "en": "Tethered swimming (30 s max)",
+    "de": "Zugleinen-Schwimmen (30 s maximal)"
+  },
+  "Tethered 30 s": {
+    "en": "Tethered 30 s",
+    "de": "Zugleine 30 s"
+  },
+  "Maximal swim-specific force/power load under tethering.": {
+    "en": "Maximal swim-specific force/power load under tethering.",
+    "de": "Maximale schwimmspezifische Kraft-/Leistungsbelastung unter Fixierung."
+  },
+  "Attach the belt and tether. Warm up by swimming in a standardised way. Swim maximally for 30 s on signal.": {
+    "en": "Attach the belt and tether. Warm up by swimming in a standardised way. Swim maximally for 30 s on signal.",
+    "de": "Gurt und Tether befestigen. Standardisiert einschwimmen. Auf Signal 30 s maximal schwimmen."
+  },
+  "Tether system with force sensor, stopwatch": {
+    "en": "Tether system with force sensor, stopwatch",
+    "de": "Zugleinen-System mit Kraftsensor, Stoppuhr"
+  },
+  "Sprint triathlon (total time)": {
+    "en": "Sprint triathlon (total time)",
+    "de": "Sprint-Triathlon (Gesamtzeit)"
+  },
+  "Overall performance over a standardised sprint distance.": {
+    "en": "Overall performance over a standardised sprint distance.",
+    "de": "Gesamtleistung über standardisierte Sprintdistanz."
+  },
+  "Complete swim, T1, bike, T2 and run in compliance with the rules. Record total time and splits.": {
+    "en": "Complete swim, T1, bike, T2 and run in compliance with the rules. Record total time and splits.",
+    "de": "Schwimmen, T1, Radfahren, T2 und Laufen regelkonform absolvieren. Gesamtzeit und Splits speichern."
+  },
+  "Stopwatch or official timing": {
+    "en": "Stopwatch or official timing",
+    "de": "Stoppuhr oder offizielle Zeitmessung"
+  },
+  "Olympic distance (total time)": {
+    "en": "Olympic distance (total time)",
+    "de": "Olympische Distanz (Gesamtzeit)"
+  },
+  "Olympic distance": {
+    "en": "Olympic distance",
+    "de": "Olympische Distanz"
+  },
+  "Overall performance over the Olympic triathlon distance.": {
+    "en": "Overall performance over the Olympic triathlon distance.",
+    "de": "Gesamtleistung über olympische Triathlondistanz."
+  },
+  "Complete 1.5 km swim, T1, 40 km bike, T2, 10 km run. Record splits.": {
+    "en": "Complete 1.5 km swim, T1, 40 km bike, T2, 10 km run. Record splits.",
+    "de": "1,5 km Schwimmen, T1, 40 km Rad, T2, 10 km Lauf absolvieren. Splits speichern."
+  },
+  "Whole-body isometric force": {
+    "en": "Whole-body isometric force",
+    "de": "Ganzkörper-Isometrik-Kraft"
+  },
+  "Isometric force": {
+    "en": "Isometric force",
+    "de": "Isometrik-Kraft"
+  },
+  "Maximal whole-body isometric force before/after endurance load.": {
+    "en": "Maximal whole-body isometric force before/after endurance load.",
+    "de": "Maximale Ganzkörper-Isometriekraft vor/nach Ausdauerbelastung."
+  },
+  "Set up the device and body position. 2–3 submaximal familiarisation trials. 3 maximal isometric attempts of 3–5 s.": {
+    "en": "Set up the device and body position. 2–3 submaximal familiarisation trials. 3 maximal isometric attempts of 3–5 s.",
+    "de": "Gerät und Körperposition einstellen. 2–3 submaximale Familiarisierungen. 3 maximale isometrische Versuche 3–5 s."
+  },
+  "Isometric pull rig or force plate": {
+    "en": "Isometric pull rig or force plate",
+    "de": "Isometrisches Zuggestell oder Kraftmessplatte"
+  },
+  "Single-leg hop for distance": {
+    "en": "Single-leg hop for distance",
+    "de": "Einbeinsprung auf Weite"
+  },
+  "Single-leg hop": {
+    "en": "Single-leg hop",
+    "de": "Einbeinsprung"
+  },
+  "Unilateral horizontal explosive strength and functional symmetry.": {
+    "en": "Unilateral horizontal explosive strength and functional symmetry.",
+    "de": "Unilaterale horizontale Explosivkraft und funktionelle Symmetrie."
+  },
+  "Stand on one leg behind the line. Jump forward maximally. Land stably on the same leg and hold the position.": {
+    "en": "Stand on one leg behind the line. Jump forward maximally. Land stably on the same leg and hold the position.",
+    "de": "Auf einem Bein hinter Linie stehen. Maximal vorwärts springen. Auf demselben Bein stabil landen und Position halten."
+  },
+  "Tape measure, level ground": {
+    "en": "Tape measure, level ground",
+    "de": "Massband, ebene Fläche"
+  },
+  "500 m ergometer time trial": {
+    "en": "500 m ergometer time trial",
+    "de": "500 m Ergometer auf Zeit"
+  },
+  "500 m ergo": {
+    "en": "500 m ergo",
+    "de": "500 m Ergo"
+  },
+  "Anaerobic-aerobic short-distance performance on the rowing ergometer.": {
+    "en": "Anaerobic-aerobic short-distance performance on the rowing ergometer.",
+    "de": "Anaerob-aerobe Kurzdistanzleistung auf dem Ruderergometer."
+  },
+  "Set up the ergometer. Program 500 m. Warm up in a standardised way.": {
+    "en": "Set up the ergometer. Program 500 m. Warm up in a standardised way.",
+    "de": "Ergometer einstellen. 500 m programmieren. Standardisiert aufwärmen."
+  },
+  "30 s anaerobic power (rowing ergometer)": {
+    "en": "30 s anaerobic power (rowing ergometer)",
+    "de": "30-s-Anaerobe Leistung (Ruderergometer)"
+  },
+  "30 s ergo": {
+    "en": "30 s ergo",
+    "de": "30 s Ergo"
+  },
+  "Short-duration maximal rowing power.": {
+    "en": "Short-duration maximal rowing power.",
+    "de": "Kurzzeitige maximale Ruderleistung."
+  },
+  "Warm up in a standardised way. Row maximally for 30 s. Record peak and mean power.": {
+    "en": "Warm up in a standardised way. Row maximally for 30 s. Record peak and mean power.",
+    "de": "Standardisiert aufwärmen. 30 s maximal rudern. Peak und Mean Power erfassen."
+  },
+  "1000 m run": {
+    "en": "1000 m run",
+    "de": "1000-m-Lauf"
+  },
+  "1000 m": {
+    "en": "1000 m",
+    "de": "1000 m"
+  },
+  "General aerobic running performance in youth rowing test batteries.": {
+    "en": "General aerobic running performance in youth rowing test batteries.",
+    "de": "Allgemeine aerobe Laufleistung in Ruderjugend-Testbatterien."
+  },
+  "Run 1,000 m at maximal effort. Record the time.": {
+    "en": "Run 1,000 m at maximal effort. Record the time.",
+    "de": "1.000 m maximal laufen. Zeit erfassen."
+  },
+  "Best time s. Running: best time s. Source norm: M Excellent <4.0; Good 4.0–4.2; Average 4.3–4.4; Fair 4.5–4.6; Poor >4.6. F: <4.5; 4.5–4.6; 4.7–4.8; 4.9–5.0; >5.0.": {
+    "en": "Best time s. Running: best time s. Source norm: M Excellent <4.0; Good 4.0–4.2; Average 4.3–4.4; Fair 4.5–4.6; Poor >4.6. F: <4.5; 4.5–4.6; 4.7–4.8; 4.9–5.0; >5.0.",
+    "de": "Bestzeit s. Laufen: Bestzeit s. Quellen-Norm: M Excellent <4,0; Good 4,0–4,2; Average 4,3–4,4; Fair 4,5–4,6; Poor >4,6. F: <4,5; 4,5–4,6; 4,7–4,8; 4,9–5,0; >5,0."
+  },
+  "BJJ: ml/kg/min. BJJ source range approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69. Treadmill: ml/kg/min. FRIEND e.g. M 20–29 44.5; 40–49 39.0; 60–69 34.1; F 33.9 /28.9 /22.6. Cycling: ml/kg/min; trained approx. 50–60, elite up to ~80–90+ per source range.": {
+    "en": "BJJ: ml/kg/min. BJJ source range approx. 42–52. MMA: ml/kg/min; sources: 63.23±5.50 in an elite cohort, other cohorts approx. 48.1–60; upper values ~68–69. Treadmill: ml/kg/min. FRIEND e.g. M 20–29 44.5; 40–49 39.0; 60–69 34.1; F 33.9 /28.9 /22.6. Cycling: ml/kg/min; trained approx. 50–60, elite up to ~80–90+ per source range.",
+    "de": "BJJ: ml/kg/min. Quellenband BJJ ca. 42–52. MMA: ml/kg/min; Quellen: 63,23±5,50 in einer Elitekohorte, weitere Kohorten ca. 48,1–60; obere Werte ~68–69. Laufband: ml/kg/min. FRIEND z.B. M 20–29 44,5; 40–49 39,0; 60–69 34,1; F 33,9 /28,9 /22,6. Radfahren: ml/kg/min; trainiert ca. 50–60, Elite bis ~80–90+ laut Quellenband."
+  },
+  "Aerobic field performance over the maximum distance in 12 minutes.": {
+    "en": "Aerobic field performance over the maximum distance in 12 minutes.",
+    "de": "Aerobe Feldleistungsfähigkeit über maximale Distanz in 12 Minuten."
+  },
+  "400-m track or exactly measured flat course, timer, lap counter.": {
+    "en": "400-m track or exactly measured flat course, timer, lap counter.",
+    "de": "400-m-Bahn oder exakt vermessene flache Strecke, Timer, Rundenzähler."
+  },
+  "Warm up.": {
+    "en": "Warm up.",
+    "de": "Aufwärmen."
+  },
+  "Position at the start line.": {
+    "en": "Position at the start line.",
+    "de": "An Startlinie positionieren."
+  },
+  "Run for 12:00 min; pace freely.": {
+    "en": "Run for 12:00 min; pace freely.",
+    "de": "12:00 min laufen; Tempo frei einteilen."
+  },
+  "Mark position after the stop signal.": {
+    "en": "Mark position after the stop signal.",
+    "de": "Nach Stoppsignal Position markieren."
+  },
+  "Add laps + remaining metres.": {
+    "en": "Add laps + remaining metres.",
+    "de": "Runden + Restmeter addieren."
+  },
+  "12:00 min.": {
+    "en": "12:00 min.",
+    "de": "12:00 min."
+  },
+  "Maximum distance.": {
+    "en": "Maximum distance.",
+    "de": "Maximale Distanz."
+  },
+  "Distance m. M 20–29: Excellent >2800, Good 2400–2800, Average 2200–2399, Fair 1600–2199, Poor <1600. F 20–29: >2700, 2200–2700, 1800–2199, 1500–1799, <1500.": {
+    "en": "Distance m. M 20–29: Excellent >2800, Good 2400–2800, Average 2200–2399, Fair 1600–2199, Poor <1600. F 20–29: >2700, 2200–2700, 1800–2199, 1500–1799, <1500.",
+    "de": "Distanz m. M 20–29: Excellent >2800, Good 2400–2800, Average 2200–2399, Fair 1600–2199, Poor <1600. F 20–29: >2700, 2200–2700, 1800–2199, 1500–1799, <1500."
+  },
+  "Top view of a 400-m track with lane 1 highlighted, start line and markers at 100, 200 and 300 m.": {
+    "en": "Top view of a 400-m track with lane 1 highlighted, start line and markers at 100, 200 and 300 m.",
+    "de": "Draufsicht einer 400-m-Bahn mit hervorgehobener Bahn 1, Startlinie und Marken bei 100, 200 und 300 m."
+  },
+  "Acceleration performance over 20 m.": {
+    "en": "Acceleration performance over 20 m.",
+    "de": "Beschleunigungsleistung über 20 m."
+  },
+  "Timing gates, 20 m.": {
+    "en": "Timing gates, 20 m.",
+    "de": "Timing Gates, 20 m."
+  },
+  "As for the 10-m sprint; finish gate at 20 m.": {
+    "en": "As for the 10-m sprint; finish gate at 20 m.",
+    "de": "Wie 10-m-Sprint; Zielgate bei 20 m."
+  },
+  "20 m.": {
+    "en": "20 m.",
+    "de": "20 m."
+  },
+  "Best time s.": {
+    "en": "Best time s.",
+    "de": "Bestzeit s."
+  },
+  "Top view of the sprint lane with timing gates at 0 m and 20 m. A dimension line shows the 20 m.": {
+    "en": "Top view of the sprint lane with timing gates at 0 m and 20 m. A dimension line shows the 20 m.",
+    "de": "Draufsicht der Sprintbahn mit Timing Gates bei 0 m und 20 m. Eine Maßlinie zeigt die 20 m."
+  },
+  "Endurance performance over a standardised 10 km.": {
+    "en": "Endurance performance over a standardised 10 km.",
+    "de": "Ausdauerleistung über standardisierte 10 km."
+  },
+  "Measured 10-km course or 400-m track, electronic timing.": {
+    "en": "Measured 10-km course or 400-m track, electronic timing.",
+    "de": "Vermessene 10-km-Strecke oder 400-m-Bahn, elektronische Zeitmessung."
+  },
+  "Warm up in a standardised way.": {
+    "en": "Warm up in a standardised way.",
+    "de": "Standardisiert aufwärmen."
+  },
+  "Complete 10 km at maximal or race-like effort.": {
+    "en": "Complete 10 km at maximal or race-like effort.",
+    "de": "10 km maximal bzw. wettkampfnah absolvieren."
+  },
+  "Record total time and splits.": {
+    "en": "Record total time and splits.",
+    "de": "Gesamtzeit und Splits erfassen."
+  },
+  "10 km.": {
+    "en": "10 km.",
+    "de": "10 km."
+  },
+  "Total time min:s; elite anchor source M <28:00, F <32:00.": {
+    "en": "Total time min:s; elite anchor source M <28:00, F <32:00.",
+    "de": "Gesamtzeit min:s; Eliteanker Quelle M <28:00, F <32:00."
+  },
+  "Estimate of Functional Threshold Power from a maximal 20-min effort.": {
+    "en": "Estimate of Functional Threshold Power from a maximal 20-min effort.",
+    "de": "Schätzung der Functional Threshold Power aus einer maximalen 20-min-Leistung."
+  },
+  "Calibrated power meter/smart trainer, bicycle, ventilation.": {
+    "en": "Calibrated power meter/smart trainer, bicycle, ventilation.",
+    "de": "Kalibrierter Powermeter/Smart Trainer, Fahrrad, Ventilation."
+  },
+  "Standardised warm-up.": {
+    "en": "Standardised warm-up.",
+    "de": "Standardisiertes Warm-up."
+  },
+  "After recovery, ride 20 min at maximal even effort.": {
+    "en": "After recovery, ride 20 min at maximal even effort.",
+    "de": "Nach Erholung 20 min maximal gleichmäßig fahren."
+  },
+  "Record the average power of the 20 min.": {
+    "en": "Record the average power of the 20 min.",
+    "de": "Durchschnittsleistung der 20 min erfassen."
+  },
+  "FTP estimate = 95% of the 20-min average power.": {
+    "en": "FTP estimate = 95% of the 20-min average power.",
+    "de": "FTP-Schätzung = 95% der 20-min-Durchschnittsleistung."
+  },
+  "20:00 min test interval.": {
+    "en": "20:00 min test interval.",
+    "de": "20:00 min Testintervall."
+  },
+  "FTP W and W/kg. Practice anchor source: Cat C <2.625; B <3.36; A 4.20–4.59; Pro Conti 5.8–6.4; World Tour ≥6.4 W/kg.": {
+    "en": "FTP W and W/kg. Practice anchor source: Cat C <2.625; B <3.36; A 4.20–4.59; Pro Conti 5.8–6.4; World Tour ≥6.4 W/kg.",
+    "de": "FTP W und W/kg. Praxisanker Quelle: Cat C <2,625; B <3,36; A 4,20–4,59; Pro Conti 5,8–6,4; World Tour ≥6,4 W/kg."
+  },
+  "Anaerobic peak and mean power as well as fatigue.": {
+    "en": "Anaerobic peak and mean power as well as fatigue.",
+    "de": "Anaerobe Peak- und Mean-Power sowie Fatigue."
+  },
+  "Calibrated cycle ergometer with Wingate mode.": {
+    "en": "Calibrated cycle ergometer with Wingate mode.",
+    "de": "Kalibriertes Fahrradergometer mit Wingate-Modus."
+  },
+  "Standardised warm-up with short sprints.": {
+    "en": "Standardised warm-up with short sprints.",
+    "de": "Standardisiertes Warm-up mit kurzen Sprints."
+  },
+  "Accelerate.": {
+    "en": "Accelerate.",
+    "de": "Beschleunigen."
+  },
+  "Apply the prescribed resistance load fully.": {
+    "en": "Apply the prescribed resistance load fully.",
+    "de": "Vorgegebene Widerstandslast vollständig aufschalten."
+  },
+  "Sprint maximally for 30 s.": {
+    "en": "Sprint maximally for 30 s.",
+    "de": "30 s maximal sprinten."
+  },
+  "Record power continuously.": {
+    "en": "Record power continuously.",
+    "de": "Power kontinuierlich erfassen."
+  },
+  "30 s maximal.": {
+    "en": "30 s maximal.",
+    "de": "30 s maximal."
+  },
+  "Peak power W/Wkg, mean power, fatigue index %. Source names Wingate as an endpoint, not a universal norm.": {
+    "en": "Peak power W/Wkg, mean power, fatigue index %. Source names Wingate as an endpoint, not a universal norm.",
+    "de": "Peak Power W/Wkg, Mean Power, Fatigue Index %. Quelle nennt Wingate als Endpunkt, keine universelle Norm."
+  },
+  "Standardised rowing endurance performance.": {
+    "en": "Standardised rowing endurance performance.",
+    "de": "Standardisierte Ruder-Ausdauerleistung."
+  },
+  "Rowing ergometer.": {
+    "en": "Rowing ergometer.",
+    "de": "Ruderergometer."
+  },
+  "Program 2,000 m.": {
+    "en": "Program 2,000 m.",
+    "de": "2.000 m programmieren."
+  },
+  "Complete at maximal effort with free race pacing.": {
+    "en": "Complete at maximal effort with free race pacing.",
+    "de": "Maximal mit freier Renneinteilung absolvieren."
+  },
+  "Save display values.": {
+    "en": "Save display values.",
+    "de": "Displaywerte speichern."
+  },
+  "2,000 m.": {
+    "en": "2,000 m.",
+    "de": "2.000 m."
+  },
+  "Total time, pace, watts, W/kg.": {
+    "en": "Total time, pace, watts, W/kg.",
+    "de": "Gesamtzeit, Pace, Watt, W/kg."
+  },
+  "Maximal aerobic mechanical power in a progressive ergometer test.": {
+    "en": "Maximal aerobic mechanical power in a progressive ergometer test.",
+    "de": "Maximale aerobe mechanische Leistung in einem progressiven Ergometertest."
+  },
+  "Calibrated cycle ergometer/power meter.": {
+    "en": "Calibrated cycle ergometer/power meter.",
+    "de": "Kalibriertes Fahrradergometer/Powermeter."
+  },
+  "Increase power in steps.": {
+    "en": "Increase power in steps.",
+    "de": "Stufenweise Leistung erhöhen."
+  },
+  "Keep cadence within the specified range.": {
+    "en": "Keep cadence within the specified range.",
+    "de": "Kadenz innerhalb Vorgabe halten."
+  },
+  "Until cadence/power can no longer be maintained.": {
+    "en": "Until cadence/power can no longer be maintained.",
+    "de": "Bis Kadenz/Leistung nicht mehr gehalten werden kann."
+  },
+  "Calculate the last fully or partially completed stage.": {
+    "en": "Calculate the last fully or partially completed stage.",
+    "de": "Letzte vollständig bzw. anteilig absolvierte Stufe berechnen."
+  },
+  "Protocol-dependent.": {
+    "en": "Protocol-dependent.",
+    "de": "Protokollabhängig."
+  },
+  "Cadence repeatedly below threshold, medical stop.": {
+    "en": "Cadence repeatedly below threshold, medical stop.",
+    "de": "Kadenz mehrfach unter Schwelle, medizinischer Abbruch."
+  },
+  "Stage length, power increment, cadence rule identical.": {
+    "en": "Stage length, power increment, cadence rule identical.",
+    "de": "Stufenlänge, Leistungsinkrement, Kadenzregel identisch."
+  },
+  "MAP W and W/kg; source cohort 352±49 W.": {
+    "en": "MAP W and W/kg; source cohort 352±49 W.",
+    "de": "MAP W und W/kg; Quellenkohorte 352±49 W."
+  },
+  "Field-based threshold/endurance metric from 400-m and 200-m maximal times.": {
+    "en": "Field-based threshold/endurance metric from 400-m and 200-m maximal times.",
+    "de": "Feldbasierte Schwellen-/Ausdauerkennzahl aus 400-m- und 200-m-Maximalzeit."
+  },
+  "25- or 50-m pool, timing.": {
+    "en": "25- or 50-m pool, timing.",
+    "de": "25- oder 50-m-Becken, Zeitmessung."
+  },
+  "Warm up by swimming in a standardised way.": {
+    "en": "Warm up by swimming in a standardised way.",
+    "de": "Standardisiert einschwimmen."
+  },
+  "Swim a 400 m time trial at maximal effort; save time in seconds.": {
+    "en": "Swim a 400 m time trial at maximal effort; save time in seconds.",
+    "de": "400 m Time Trial maximal absolvieren; Zeit in Sekunden speichern."
+  },
+  "Recover fully.": {
+    "en": "Recover fully.",
+    "de": "Vollständig erholen."
+  },
+  "Swim a 200 m time trial at maximal effort.": {
+    "en": "Swim a 200 m time trial at maximal effort.",
+    "de": "200 m Time Trial maximal absolvieren."
+  },
+  "Calculate CSS.": {
+    "en": "Calculate CSS.",
+    "de": "CSS berechnen."
+  },
+  "400 m and 200 m.": {
+    "en": "400 m and 200 m.",
+    "de": "400 m und 200 m."
+  },
+  "Wrong distance, timing error, stroke change.": {
+    "en": "Wrong distance, timing error, stroke change.",
+    "de": "Falsche Distanz, Timingfehler, Stilwechsel."
+  },
+  "Same pool, start type, swimming stroke and timing.": {
+    "en": "Same pool, start type, swimming stroke and timing.",
+    "de": "Gleiches Becken, Startart, Schwimmstil und Timing."
+  },
+  "CSS = (T400 − T200) / 2 in s/100 m. Source ranges: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30.": {
+    "en": "CSS = (T400 − T200) / 2 in s/100 m. Source ranges: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30.",
+    "de": "CSS = (T400 − T200) / 2 in s/100 m. Quellenbänder: Elite 1:10–1:25; Advanced 1:25–1:40; Intermediate 1:40–2:00; Improver 2:00–2:30; Beginner ≥2:30."
+  },
+  "Top view of a swimming pool with two separate timed swims over 400 m and 200 m; below it the formula CSS = (T400 − T200) / 2.": {
+    "en": "Top view of a swimming pool with two separate timed swims over 400 m and 200 m; below it the formula CSS = (T400 − T200) / 2.",
+    "de": "Draufsicht eines Schwimmbeckens mit zwei getrennten Zeitläufen über 400 m und 200 m; darunter die Formel CSS = (T400 − T200) / 2."
+  },
+  "Progressive swim-specific endurance up to the highest sustainable stage.": {
+    "en": "Progressive swim-specific endurance up to the highest sustainable stage.",
+    "de": "Progressive schwimmspezifische Ausdauer bis zur höchsten haltbaren Stufe."
+  },
+  "Swimming pool, audio/pace system, timing.": {
+    "en": "Swimming pool, audio/pace system, timing.",
+    "de": "Schwimmbecken, Audio/Pace-System, Zeitmessung."
+  },
+  "Start at the prescribed initial speed.": {
+    "en": "Start at the prescribed initial speed.",
+    "de": "Mit vorgegebener Anfangsgeschwindigkeit starten."
+  },
+  "Increase speed in steps according to the app audio.": {
+    "en": "Increase speed in steps according to the app audio.",
+    "de": "Geschwindigkeit stufenweise gemäß App-Audio erhöhen."
+  },
+  "Turn according to a uniform rule.": {
+    "en": "Turn according to a uniform rule.",
+    "de": "Wenden nach einheitlicher Regel."
+  },
+  "Until the pace can no longer be maintained.": {
+    "en": "Until the pace can no longer be maintained.",
+    "de": "Bis Tempo nicht mehr gehalten wird."
+  },
+  "Stage protocol according to app version.": {
+    "en": "Stage protocol according to app version.",
+    "de": "Stufenprotokoll gemäß App-Version."
+  },
+  "Target time repeatedly missed, medical stop.": {
+    "en": "Target time repeatedly missed, medical stop.",
+    "de": "Zielzeit wiederholt verfehlt, medizinischer Abbruch."
+  },
+  "App standard v1.0: identical audio/stage file, pool length and start type.": {
+    "en": "App standard v1.0: identical audio/stage file, pool length and start type.",
+    "de": "App-Standard v1.0: identische Audio-/Stufendatei, Beckenlänge und Startart."
+  },
+  "Last completed stage/speed; source describes reproducibility, not a universal norm.": {
+    "en": "Last completed stage/speed; source describes reproducibility, not a universal norm.",
+    "de": "Letzte vollständige Stufe/Geschwindigkeit; Quelle beschreibt Reproduzierbarkeit, keine universelle Norm."
+  },
+  "Swimming performance over 100 m.": {
+    "en": "Swimming performance over 100 m.",
+    "de": "Schwimmleistung über 100 m."
+  },
+  "Pool, timing.": {
+    "en": "Pool, timing.",
+    "de": "Becken, Timing."
+  },
+  "Swim 100 m freestyle at maximal effort.": {
+    "en": "Swim 100 m freestyle at maximal effort.",
+    "de": "100 m Freistil maximal absolvieren."
+  },
+  "Save time and optionally the 50-m split.": {
+    "en": "Save time and optionally the 50-m split.",
+    "de": "Zeit und optional 50-m-Split speichern."
+  },
+  "100 m.": {
+    "en": "100 m.",
+    "de": "100 m."
+  },
+  "False start/rule violation.": {
+    "en": "False start/rule violation.",
+    "de": "Fehlstart/Regelverstoß."
+  },
+  "Pool length, start type, timing identical.": {
+    "en": "Pool length, start type, timing identical.",
+    "de": "Beckenlänge, Startart, Timing gleich."
+  },
+  "Time s.": {
+    "en": "Time s.",
+    "de": "Zeit s."
+  },
+  "Officially measured course/chip timing.": {
+    "en": "Officially measured course/chip timing.",
+    "de": "Offiziell vermessene Strecke/Chip-Timing."
+  },
+  "Complete the race under regular conditions.": {
+    "en": "Complete the race under regular conditions.",
+    "de": "Wettkampf unter regulären Bedingungen absolvieren."
+  },
+  "Save net/gross time and splits.": {
+    "en": "Save net/gross time and splits.",
+    "de": "Netto-/Bruttozeit und Splits speichern."
+  },
+  "42.195 km.": {
+    "en": "42.195 km.",
+    "de": "42,195 km."
+  },
+  "Race/medical stop.": {
+    "en": "Race/medical stop.",
+    "de": "Wettkampf-/medizinischer Abbruch."
+  },
+  "Document course profile, weather and race status.": {
+    "en": "Document course profile, weather and race status.",
+    "de": "Streckenprofil, Wetter und Wettkampfstatus dokumentieren."
+  },
+  "Finish time; source ranges 2:30–3:00, 3:00–3:30, 3:30–4:00, 4:00–4:30, >4:30.": {
+    "en": "Finish time; source ranges 2:30–3:00, 3:00–3:30, 3:30–4:00, 4:00–4:30, >4:30.",
+    "de": "Finish Time; Quellenbänder 2:30–3:00, 3:00–3:30, 3:30–4:00, 4:00–4:30, >4:30."
+  },
+  "Power meter/ergometer.": {
+    "en": "Power meter/ergometer.",
+    "de": "Powermeter/Ergometer."
+  },
+  "Perform at least 3 maximal time trials of different durations at separate/sufficiently recovered time points.": {
+    "en": "Perform at least 3 maximal time trials of different durations at separate/sufficiently recovered time points.",
+    "de": "Mindestens 3 maximale Time Trials unterschiedlicher Dauer an getrennten/ausreichend erholten Zeitpunkten durchführen."
+  },
+  "Record power and duration exactly.": {
+    "en": "Record power and duration exactly.",
+    "de": "Leistung und Dauer exakt erfassen."
+  },
+  "Calculate CP/W′ with a defined model.": {
+    "en": "Calculate CP/W′ with a defined model.",
+    "de": "CP/W′ mit festgelegtem Modell berechnen."
+  },
+  "App standard: e.g. 3, 7 and 12 min maximal; sufficient recovery.": {
+    "en": "App standard: e.g. 3, 7 and 12 min maximal; sufficient recovery.",
+    "de": "App-Standard: z.B. 3, 7 und 12 min maximal; ausreichende Erholung."
+  },
+  "Pacing error, incomplete maximal effort, technical data gap.": {
+    "en": "Pacing error, incomplete maximal effort, technical data gap.",
+    "de": "Pacingfehler, unvollständige Maximalleistung, technische Datenlücke."
+  },
+  "Same device, same test durations and model equation.": {
+    "en": "Same device, same test durations and model equation.",
+    "de": "Gleiches Gerät, gleiche Testdauern und Modellgleichung."
+  },
+  "CP W and W′ kJ; do not equate with FTP.": {
+    "en": "CP W and W′ kJ; do not equate with FTP.",
+    "de": "CP W und W′ kJ; nicht mit FTP gleichsetzen."
+  },
+  "Instrumented ergometer/power meter/force sensor.": {
+    "en": "Instrumented ergometer/power meter/force sensor.",
+    "de": "Instrumentiertes Ergometer/Powermeter/Kraftsensor."
+  },
+  "Perform several maximal attempts at graded resistances.": {
+    "en": "Perform several maximal attempts at graded resistances.",
+    "de": "Mehrere maximale Versuche bei abgestuften Widerständen durchführen."
+  },
+  "Record peak force and velocity for each load.": {
+    "en": "Record peak force and velocity for each load.",
+    "de": "Peak Force und Geschwindigkeit je Last erfassen."
+  },
+  "Calculate the F-v regression.": {
+    "en": "Calculate the F-v regression.",
+    "de": "F-v-Regression berechnen."
+  },
+  "Determine F0, V0 and Pmax.": {
+    "en": "Determine F0, V0 and Pmax.",
+    "de": "F0, V0 und Pmax bestimmen."
+  },
+  "Failed attempt, submaximal effort, sensor error.": {
+    "en": "Failed attempt, submaximal effort, sensor error.",
+    "de": "Fehlversuch, submaximaler Einsatz, Sensorfehler."
+  },
+  "Identical load levels, device, start conditions and model.": {
+    "en": "Identical load levels, device, start conditions and model.",
+    "de": "Identische Laststufen, Gerät, Startbedingungen und Modell."
+  },
+  "F0, V0, Pmax, RFD; device/model-specific.": {
+    "en": "F0, V0, Pmax, RFD; device/model-specific.",
+    "de": "F0, V0, Pmax, RFD; geräte-/modellspezifisch."
+  },
+  "25/50-m pool, electronic or hand timing.": {
+    "en": "25/50-m pool, electronic or hand timing.",
+    "de": "25/50-m-Becken, elektronische oder Handzeit."
+  },
+  "Start in a standardised way.": {
+    "en": "Start in a standardised way.",
+    "de": "Standardisiert starten."
+  },
+  "Swim 50 m freestyle at maximal effort.": {
+    "en": "Swim 50 m freestyle at maximal effort.",
+    "de": "50 m Freistil maximal schwimmen."
+  },
+  "Stop time at the touch.": {
+    "en": "Stop time at the touch.",
+    "de": "Zeit bei Anschlag stoppen."
+  },
+  "2 attempts only in a test setting; in competition, official result.": {
+    "en": "2 attempts only in a test setting; in competition, official result.",
+    "de": "2 Versuche nur bei Testsetting; im Wettkampf offizielles Ergebnis."
+  },
+  "50 m.": {
+    "en": "50 m.",
+    "de": "50 m."
+  },
+  "False start, wrong distance, rule violation.": {
+    "en": "False start, wrong distance, rule violation.",
+    "de": "Fehlstart, falsche Distanz, Regelverstoß."
+  },
+  "Save pool length, start type and timing.": {
+    "en": "Save pool length, start type and timing.",
+    "de": "Beckenlänge, Startart und Timing speichern."
+  },
+  "Time s; lower = better. Source contains no general norm.": {
+    "en": "Time s; lower = better. Source contains no general norm.",
+    "de": "Zeit s; niedriger = besser. Quelle enthält keine allgemeine Norm."
+  },
+  "Tether system with force sensor, belt, pool.": {
+    "en": "Tether system with force sensor, belt, pool.",
+    "de": "Tether-System mit Kraftsensor, Gurt, Becken."
+  },
+  "Attach belt and tether.": {
+    "en": "Attach belt and tether.",
+    "de": "Gurt und Tether befestigen."
+  },
+  "Swim maximally for 30 s on signal.": {
+    "en": "Swim maximally for 30 s on signal.",
+    "de": "Auf Signal 30 s maximal schwimmen."
+  },
+  "Record force/tremor/power data.": {
+    "en": "Record force/tremor/power data.",
+    "de": "Kraft-/Tremor-/Leistungsdaten erfassen."
+  },
+  "Tether problem, technique/safety problem.": {
+    "en": "Tether problem, technique/safety problem.",
+    "de": "Tetherproblem, Technik-/Sicherheitsproblem."
+  },
+  "Tether length, sensor, belt, swimming stroke and position identical.": {
+    "en": "Tether length, sensor, belt, swimming stroke and position identical.",
+    "de": "Tetherlänge, Sensor, Gurt, Schwimmstil und Position identisch."
+  },
+  "Peak/mean force or sensor-dependent metrics; source uses, among others, tremor after 30-s maximal effort.": {
+    "en": "Peak/mean force or sensor-dependent metrics; source uses, among others, tremor after 30-s maximal effort.",
+    "de": "Peak/Mean Force bzw. sensorabhängige Metriken; Quelle nutzt u.a. Tremor nach 30-s-Maximalbelastung."
+  },
+  "Officially measured course, chip timing.": {
+    "en": "Officially measured course, chip timing.",
+    "de": "Offiziell vermessener Kurs, Chip-Timing."
+  },
+  "Complete swim, T1, bike, T2 and run in compliance with the rules.": {
+    "en": "Complete swim, T1, bike, T2 and run in compliance with the rules.",
+    "de": "Schwimmen, T1, Radfahren, T2 und Laufen regelkonform absolvieren."
+  },
+  "Save total time and splits.": {
+    "en": "Save total time and splits.",
+    "de": "Gesamtzeit und Splits speichern."
+  },
+  "Typically 750 m swim + 20 km bike + 5 km run; record the exact event distance.": {
+    "en": "Typically 750 m swim + 20 km bike + 5 km run; record the exact event distance.",
+    "de": "Typisch 750 m Swim +20 km Bike +5 km Run; Eventdistanz exakt speichern."
+  },
+  "Competition rules/medical stop.": {
+    "en": "Competition rules/medical stop.",
+    "de": "Wettkampfregeln/medizinischer Abbruch."
+  },
+  "Record distance, course, weather, wind, drafting rule and event type.": {
+    "en": "Record distance, course, weather, wind, drafting rule and event type.",
+    "de": "Distanz, Kurs, Wetter, Wind, Drafting-Regel und Eventtyp speichern."
+  },
+  "Total time. Source benchmark: M mean ~1:36, F mean ~1:46; top 20% M ~1:26, F ~1:30.": {
+    "en": "Total time. Source benchmark: M mean ~1:36, F mean ~1:46; top 20% M ~1:26, F ~1:30.",
+    "de": "Gesamtzeit. Quellenbenchmark: M Ø ~1:36, F Ø ~1:46; Top 20% M ~1:26, F ~1:30."
+  },
+  "Flow chart of the sprint triathlon: swim 750 m, transition T1, bike 20 km, transition T2, run 5 km.": {
+    "en": "Flow chart of the sprint triathlon: swim 750 m, transition T1, bike 20 km, transition T2, run 5 km.",
+    "de": "Ablaufgrafik des Sprint-Triathlons: Schwimmen 750 m, Wechsel T1, Radfahren 20 km, Wechsel T2, Laufen 5 km."
+  },
+  "Measured course, timing.": {
+    "en": "Measured course, timing.",
+    "de": "Vermessener Kurs, Timing."
+  },
+  "Complete 1.5 km swim, T1, 40 km bike, T2, 10 km run.": {
+    "en": "Complete 1.5 km swim, T1, 40 km bike, T2, 10 km run.",
+    "de": "1,5 km Schwimmen, T1, 40 km Rad, T2, 10 km Lauf absolvieren."
+  },
+  "Record splits.": {
+    "en": "Record splits.",
+    "de": "Splits speichern."
+  },
+  "1.5 km + 40 km + 10 km.": {
+    "en": "1.5 km + 40 km + 10 km.",
+    "de": "1,5 km +40 km +10 km."
+  },
+  "Competition/medical stop.": {
+    "en": "Competition/medical stop.",
+    "de": "Wettkampf-/medizinischer Abbruch."
+  },
+  "Record event/course conditions.": {
+    "en": "Record event/course conditions.",
+    "de": "Event-/Streckenbedingungen speichern."
+  },
+  "Source benchmark mean M ~2:53, F ~3:07; top 20% M ~2:35, F ~2:49.": {
+    "en": "Source benchmark mean M ~2:53, F ~3:07; top 20% M ~2:35, F ~2:49.",
+    "de": "Quellenbenchmark Ø M ~2:53, F ~3:07; Top 20% M ~2:35, F ~2:49."
+  },
+  "Flow chart of the Olympic triathlon: swim 1500 m, transition T1, bike 40 km, transition T2, run 10 km.": {
+    "en": "Flow chart of the Olympic triathlon: swim 1500 m, transition T1, bike 40 km, transition T2, run 10 km.",
+    "de": "Ablaufgrafik des olympischen Triathlons: Schwimmen 1500 m, Wechsel T1, Radfahren 40 km, Wechsel T2, Laufen 10 km."
+  },
+  "Standardised isometric dynamometer/force rig.": {
+    "en": "Standardised isometric dynamometer/force rig.",
+    "de": "Standardisiertes isometrisches Dynamometer/Force Rig."
+  },
+  "Set up the device and body position.": {
+    "en": "Set up the device and body position.",
+    "de": "Gerät und Körperposition einstellen."
+  },
+  "2–3 submaximal familiarisation trials.": {
+    "en": "2–3 submaximal familiarisation trials.",
+    "de": "2–3 submaximale Familiarisierungen."
+  },
+  "3 maximal isometric attempts of 3–5 s.": {
+    "en": "3 maximal isometric attempts of 3–5 s.",
+    "de": "3 maximale isometrische Versuche 3–5 s."
+  },
+  "Record the best value; for fatigue monitoring, identical pre/post.": {
+    "en": "Record the best value; for fatigue monitoring, identical pre/post.",
+    "de": "Bestwert speichern; bei Fatigue-Monitoring identisch pre/post."
+  },
+  "3–5 s per maximal attempt.": {
+    "en": "3–5 s per maximal attempt.",
+    "de": "3–5 s je Maximalversuch."
+  },
+  "Loss of position, pain.": {
+    "en": "Loss of position, pain.",
+    "de": "Positionsverlust, Schmerz."
+  },
+  "Same joint angles, device and instruction.": {
+    "en": "Same joint angles, device and instruction.",
+    "de": "Gleiche Gelenkwinkel, Gerät und Instruktion."
+  },
+  "N and % change pre/post.": {
+    "en": "N and % change pre/post.",
+    "de": "N und % Veränderung pre/post."
+  },
+  "Tape measure, start line.": {
+    "en": "Tape measure, start line.",
+    "de": "Maßband, Startlinie."
+  },
+  "Stand on one leg behind the line.": {
+    "en": "Stand on one leg behind the line.",
+    "de": "Auf einem Bein hinter Linie stehen."
+  },
+  "Jump forward maximally.": {
+    "en": "Jump forward maximally.",
+    "de": "Maximal vorwärts springen."
+  },
+  "Land stably on the same leg and hold the position.": {
+    "en": "Land stably on the same leg and hold the position.",
+    "de": "Auf demselben Bein stabil landen und Position halten."
+  },
+  "3 attempts per side.": {
+    "en": "3 attempts per side.",
+    "de": "3 Versuche je Seite."
+  },
+  "Other leg touches the ground, additional hop, fall.": {
+    "en": "Other leg touches the ground, additional hop, fall.",
+    "de": "Zweites Bein berührt Boden, Nachhüpfen, Sturz."
+  },
+  "Same shoes/surface; stable landing required.": {
+    "en": "Same shoes/surface; stable landing required.",
+    "de": "Gleiche Schuhe/Untergrund; stabile Landung erforderlich."
+  },
+  "Best distance in cm and Limb Symmetry Index.": {
+    "en": "Best distance in cm and Limb Symmetry Index.",
+    "de": "Bestweite cm und Limb Symmetry Index."
+  },
+  "Side view of the single-leg hop: take-off from the start line, landing on the same leg, measured distance to the heel.": {
+    "en": "Side view of the single-leg hop: take-off from the start line, landing on the same leg, measured distance to the heel.",
+    "de": "Seitliche Darstellung des Einbeinsprungs: Absprung von der Startlinie, Landung auf demselben Bein, Messstrecke bis zur Ferse."
+  },
+  "Rowing ergometer, performance monitor.": {
+    "en": "Rowing ergometer, performance monitor.",
+    "de": "Ruderergometer, Performance Monitor."
+  },
+  "Set up the ergometer.": {
+    "en": "Set up the ergometer.",
+    "de": "Ergometer einstellen."
+  },
+  "Program 500 m.": {
+    "en": "Program 500 m.",
+    "de": "500 m programmieren."
+  },
+  "Complete 500 m at maximal effort.": {
+    "en": "Complete 500 m at maximal effort.",
+    "de": "500 m maximal absolvieren."
+  },
+  "Record time, pace, watts.": {
+    "en": "Record time, pace, watts.",
+    "de": "Zeit, Pace, Watt speichern."
+  },
+  "500 m.": {
+    "en": "500 m.",
+    "de": "500 m."
+  },
+  "Technical/medical stop.": {
+    "en": "Technical/medical stop.",
+    "de": "Technischer/medizinischer Abbruch."
+  },
+  "Same model/drag factor/foot position.": {
+    "en": "Same model/drag factor/foot position.",
+    "de": "Gleiches Modell/Drag Factor/Fußposition."
+  },
+  "Time, pace/500 m, mean watts.": {
+    "en": "Time, pace/500 m, mean watts.",
+    "de": "Zeit, Pace/500 m, Ø Watt."
+  },
+  "Row maximally for 30 s.": {
+    "en": "Row maximally for 30 s.",
+    "de": "30 s maximal rudern."
+  },
+  "Record peak and mean power.": {
+    "en": "Record peak and mean power.",
+    "de": "Peak und Mean Power erfassen."
+  },
+  "30 s.": {
+    "en": "30 s.",
+    "de": "30 s."
+  },
+  "Same device/drag factor/start technique.": {
+    "en": "Same device/drag factor/start technique.",
+    "de": "Gleiches Gerät/Drag Factor/Starttechnik."
+  },
+  "Peak W, mean W, decrement.": {
+    "en": "Peak W, mean W, decrement.",
+    "de": "Peak W, Mean W, Decrement."
+  },
+  "400 m track/measured course, timer.": {
+    "en": "400 m track/measured course, timer.",
+    "de": "400-m-Bahn/vermessene Strecke, Timer."
+  },
+  "Run 1,000 m at maximal effort.": {
+    "en": "Run 1,000 m at maximal effort.",
+    "de": "1.000 m maximal laufen."
+  },
+  "Record the time.": {
+    "en": "Record the time.",
+    "de": "Zeit erfassen."
+  },
+  "1,000 m.": {
+    "en": "1,000 m.",
+    "de": "1.000 m."
+  },
+  "Medical stop.": {
+    "en": "Medical stop.",
+    "de": "Medizinischer Abbruch."
+  },
+  "Same course/timing.": {
+    "en": "Same course/timing.",
+    "de": "Gleiche Strecke/Timing."
+  },
+  "Time in min:s.": {
+    "en": "Time in min:s.",
+    "de": "Zeit min:s."
+  },
+  "Stroke rate as a technical performance metric.": {
+    "en": "Stroke rate as a technical performance metric.",
+    "de": "Zugfrequenz als technische Leistungsmetrik."
+  },
+  "Video/sensor/stopwatch.": {
+    "en": "Video/sensor/stopwatch.",
+    "de": "Video/Sensor/Chronometer."
+  },
+  "Swim a defined section at stable speed.": {
+    "en": "Swim a defined section at stable speed.",
+    "de": "Definierten Schwimmabschnitt mit stabiler Geschwindigkeit absolvieren."
+  },
+  "Count complete arm cycles over a fixed time window.": {
+    "en": "Count complete arm cycles over a fixed time window.",
+    "de": "Vollständige Armzyklen über festes Zeitfenster zählen."
+  },
+  "Convert to strokes/min.": {
+    "en": "Convert to strokes/min.",
+    "de": "Auf Züge/min umrechnen."
+  },
+  "App standard: 15–30 s measurement window.": {
+    "en": "App standard: 15–30 s measurement window.",
+    "de": "App-Standard: 15–30 s Messfenster."
+  },
+  "Miscount, acceleration/turn phase within the window.": {
+    "en": "Miscount, acceleration/turn phase within the window.",
+    "de": "Fehlzählung, Beschleunigungs-/Wendephase im Fenster."
+  },
+  "Same stroke, speed, section and measurement method.": {
+    "en": "Same stroke, speed, section and measurement method.",
+    "de": "Gleicher Stil, Geschwindigkeit, Abschnitt und Messmethode."
+  },
+  "spm; interpret together with stroke length/velocity.": {
+    "en": "spm; interpret together with stroke length/velocity.",
+    "de": "spm; zusammen mit Stroke Length/Velocity interpretieren."
+  },
+  "Distance covered per swimming cycle.": {
+    "en": "Distance covered per swimming cycle.",
+    "de": "Zurückgelegte Distanz pro Schwimmzyklus."
+  },
+  "Video/sensor, known distance.": {
+    "en": "Video/sensor, known distance.",
+    "de": "Video/Sensor, bekannte Strecke."
+  },
+  "Swim a stable section.": {
+    "en": "Swim a stable section.",
+    "de": "Stabilen Abschnitt schwimmen."
+  },
+  "Record cycles and distance covered.": {
+    "en": "Record cycles and distance covered.",
+    "de": "Zyklen und zurückgelegte Distanz erfassen."
+  },
+  "Divide distance by cycles.": {
+    "en": "Divide distance by cycles.",
+    "de": "Distanz durch Zyklen teilen."
+  },
+  "Turns/starts within the measurement window.": {
+    "en": "Turns/starts within the measurement window.",
+    "de": "Wenden/Starts im Messfenster."
+  },
+  "Same stroke, section, exclude turns.": {
+    "en": "Same stroke, section, exclude turns.",
+    "de": "Gleicher Stil, Abschnitt, Wenden ausschließen."
+  },
+  "m/cycle.": {
+    "en": "m/cycle.",
+    "de": "m/Zyklus."
+  },
+  "Temporal coordination of the propulsive phases of both arms.": {
+    "en": "Temporal coordination of the propulsive phases of both arms.",
+    "de": "Zeitliche Koordination der Propulsionsphasen beider Arme."
+  },
+  "Underwater/above-water video with sufficient frame rate.": {
+    "en": "Underwater/above-water video with sufficient frame rate.",
+    "de": "Unter-/Überwasservideo mit ausreichender Bildrate."
+  },
+  "Record video synchronously.": {
+    "en": "Record video synchronously.",
+    "de": "Video synchron aufnehmen."
+  },
+  "Mark start/end of the propulsive arm phases frame-accurately.": {
+    "en": "Mark start/end of the propulsive arm phases frame-accurately.",
+    "de": "Beginn/Ende der propulsiven Armphasen framegenau markieren."
+  },
+  "Calculate the time gap/overlap between the arms.": {
+    "en": "Calculate the time gap/overlap between the arms.",
+    "de": "Zeitliche Lücke/Überlappung zwischen Armen berechnen."
+  },
+  "Insufficient visibility/frame rate.": {
+    "en": "Insufficient visibility/frame rate.",
+    "de": "Unzureichende Sicht/Framerate."
+  },
+  "Identical camera position, frame rate, phase definition.": {
+    "en": "Identical camera position, frame rate, phase definition.",
+    "de": "Kameraposition, Framerate, Definition der Phasen identisch."
+  },
+  "IoC %; device-/analysis-specific.": {
+    "en": "IoC %; device-/analysis-specific.",
+    "de": "IoC %; geräte-/analysespezifisch."
+  },
+  "Shoulder rotation strength in swimmers.": {
+    "en": "Shoulder rotation strength in swimmers.",
+    "de": "Schulterrotationskraft bei Schwimmern."
+  },
+  "Dynamometer.": {
+    "en": "Dynamometer.",
+    "de": "Dynamometer."
+  },
+  "Standardised shoulder/elbow position.": {
+    "en": "Standardised shoulder/elbow position.",
+    "de": "Standardisierte Schulter-/Ellenbogenposition."
+  },
+  "3 maximal ER and IR attempts per side.": {
+    "en": "3 maximal ER and IR attempts per side.",
+    "de": "3 maximale ER- und IR-Versuche pro Seite."
+  },
+  "3–5 s per attempt.": {
+    "en": "3–5 s per attempt.",
+    "de": "3–5 s je Versuch."
+  },
+  "Compensation/pain.": {
+    "en": "Compensation/pain.",
+    "de": "Kompensation/Schmerz."
+  },
+  "Same angles/device.": {
+    "en": "Same angles/device.",
+    "de": "Gleiche Winkel/Gerät."
+  },
+  "N/Nkg, ER:IR ratio.": {
+    "en": "N/Nkg, ER:IR ratio.",
+    "de": "N/Nkg, ER:IR-Ratio."
+  },
+  "Active/passive shoulder mobility.": {
+    "en": "Active/passive shoulder mobility.",
+    "de": "Aktive/passive Schulterbeweglichkeit."
+  },
+  "Goniometer/inclinometer.": {
+    "en": "Goniometer/inclinometer.",
+    "de": "Goniometer/Inklinometer."
+  },
+  "Define anatomical landmarks.": {
+    "en": "Define anatomical landmarks.",
+    "de": "Anatomische Landmarken definieren."
+  },
+  "Measure IR and ER in a standardised position.": {
+    "en": "Measure IR and ER in a standardised position.",
+    "de": "IR und ER in standardisierter Position messen."
+  },
+  "2–3 measurements per side.": {
+    "en": "2–3 measurements per side.",
+    "de": "2–3 Messungen je Seite."
+  },
+  "Scapular compensation.": {
+    "en": "Scapular compensation.",
+    "de": "Scapuläre Kompensation."
+  },
+  "Same tester/position.": {
+    "en": "Same tester/position.",
+    "de": "Gleicher Tester/Position."
+  },
+  "Degrees and side asymmetry.": {
+    "en": "Degrees and side asymmetry.",
+    "de": "Grad und Seitenasymmetrie."
+  },
+  "Acute body mass change as hydration/load monitoring.": {
+    "en": "Acute body mass change as hydration/load monitoring.",
+    "de": "Akute Körpermassenänderung als Hydrations-/Belastungsmonitoring."
+  },
+  "Calibrated scale.": {
+    "en": "Calibrated scale.",
+    "de": "Kalibrierte Waage."
+  },
+  "Weigh before the load, preferably in standardised clothing.": {
+    "en": "Weigh before the load, preferably in standardised clothing.",
+    "de": "Vor Belastung möglichst in standardisierter Kleidung wiegen."
+  },
+  "After the load, towel dry and weigh again in comparable clothing.": {
+    "en": "After the load, towel dry and weigh again in comparable clothing.",
+    "de": "Nach Belastung abtrocknen und in vergleichbarer Kleidung erneut wiegen."
+  },
+  "Calculate the difference and percentage change.": {
+    "en": "Calculate the difference and percentage change.",
+    "de": "Differenz und Prozentänderung berechnen."
+  },
+  "Non-comparable clothing/fluid intake not documented.": {
+    "en": "Non-comparable clothing/fluid intake not documented.",
+    "de": "Unvergleichbare Kleidung/Flüssigkeitsaufnahme nicht dokumentiert."
+  },
+  "Same scale, clothing; document timing relative to eating/drinking.": {
+    "en": "Same scale, clothing; document timing relative to eating/drinking.",
+    "de": "Gleiche Waage, Kleidung, Zeitpunkt relativ zu Essen/Trinken dokumentieren."
+  },
+  "% Δ body mass = (Post−Pre)/Pre×100; not a performance norm.": {
+    "en": "% Δ body mass = (Post−Pre)/Pre×100; not a performance norm.",
+    "de": "%Δ Körpermasse = (Post−Pre)/Pre×100; keine Leistungsnorm."
+  },
+  "Dynamic balance and reach.": {
+    "en": "Dynamic balance and reach.",
+    "de": "Dynamische Balance und Reichweite."
+  },
+  "Floor markings in eight directions or a defined reduced version.": {
+    "en": "Floor markings in eight directions or a defined reduced version.",
+    "de": "Bodenmarkierungen in acht Richtungen oder definierte reduzierte Version."
+  },
+  "Measure leg length.": {
+    "en": "Measure leg length.",
+    "de": "Beinlänge messen."
+  },
+  "Stand on one leg in the centre.": {
+    "en": "Stand on one leg in the centre.",
+    "de": "Auf einem Bein im Zentrum stehen."
+  },
+  "Reach maximally with the free foot in each defined direction.": {
+    "en": "Reach maximally with the free foot in each defined direction.",
+    "de": "Mit freiem Fuß in jede definierte Richtung maximal reichen."
+  },
+  "Return to the centre.": {
+    "en": "Return to the centre.",
+    "de": "Zur Mitte zurückkehren."
+  },
+  "Several attempts per direction.": {
+    "en": "Several attempts per direction.",
+    "de": "Je Richtung mehrere Versuche."
+  },
+  "Stance foot moves, support step, loss of balance.": {
+    "en": "Stance foot moves, support step, loss of balance.",
+    "de": "Standfuß bewegt sich, Stützschritt, Gleichgewichtsverlust."
+  },
+  "App standard must fix the direction set; for comparison, use only an identical version.": {
+    "en": "App standard must fix the direction set; for comparison, use only an identical version.",
+    "de": "App-Standard muss Richtungsset fixieren; für Vergleich nur identische Version."
+  },
+  "Reach cm/% leg length.": {
+    "en": "Reach cm/% leg length.",
+    "de": "Reach cm/% Beinlänge."
+  },
+  "Top view of the Star Excursion Balance Test: stance foot in the centre and eight evenly spaced directions.": {
+    "en": "Top view of the Star Excursion Balance Test: stance foot in the centre and eight evenly spaced directions.",
+    "de": "Draufsicht des Star-Excursion-Balance-Tests: Standfuß in der Mitte und acht gleichmäßig verteilte Richtungen."
+  },
+  "Ankle mobility.": {
+    "en": "Ankle mobility.",
+    "de": "Sprunggelenksbeweglichkeit."
+  },
+  "Goniometer or weight-bearing lunge measurement.": {
+    "en": "Goniometer or weight-bearing lunge measurement.",
+    "de": "Goniometer oder Weight-Bearing-Lunge-Messung."
+  },
+  "Standardised position.": {
+    "en": "Standardised position.",
+    "de": "Standardisierte Position."
+  },
+  "Maximal dorsiflexion without heel lift.": {
+    "en": "Maximal dorsiflexion without heel lift.",
+    "de": "Maximale Dorsalflexion ohne Fersenabheben."
+  },
+  "Measure angle/distance.": {
+    "en": "Measure angle/distance.",
+    "de": "Winkel/Distanz messen."
+  },
+  "Heel lifts/pronation distorts the result.": {
+    "en": "Heel lifts/pronation distorts the result.",
+    "de": "Ferse hebt/Pronation verfälscht."
+  },
+  "Do not mix methods.": {
+    "en": "Do not mix methods.",
+    "de": "Gleiche Methode nicht mischen."
+  },
+  "Degrees or cm; side comparison.": {
+    "en": "Degrees or cm; side comparison.",
+    "de": "Grad oder cm; Seitenvergleich."
   }
 }

@@ -7,7 +7,8 @@ import { FIGURE_IDS } from '../src/features/tests/figures/library'
 import { EQUIPMENT_BY_ID } from '../src/data/equipment'
 
 /**
- * Testbibliothek, Protokoll 1.0 — Welle 1 (Kampfsport).
+ * Testbibliothek, Protokoll 1.0 — Welle 1 (Kampfsport) und Welle 2 (Laufen,
+ * Rad, Schwimmen, Triathlon, Rudern).
  *
  * Was hier gesichert wird, ist genau das, was beim Übertragen aus einem
  * Dokument still verloren geht: ein Verweis, der ins Leere zeigt, eine
@@ -87,6 +88,45 @@ test.describe('Testbibliothek — Daten', () => {
     }, t)
     expect(none, 'ohne zweite Seite keine erfundene Kennzahl').toEqual({})
   })
+
+  test('der Einbeinsprung wertet die schwächere Seite und den Seitenindex', () => {
+    const t = TEST_CATALOG.find((x) => x.slug === 'single_leg_hop')!
+    const ctx = { bodyWeightKg: null, ageYears: 28, sex: 'male' as const }
+    const out: Record<string, number> = {}
+    t.derive?.({ hopLeftCm: 180, hopRightCm: 200 }, ctx, (k, v) => {
+      if (v != null) out[k] = v
+    }, t)
+    expect(out.hopDistanceCm).toBe(180)
+    expect(out.limbSymmetryIndex).toBe(90)
+    const none: Record<string, number> = {}
+    t.derive?.({ hopLeftCm: 180 }, ctx, (k, v) => {
+      if (v != null) none[k] = v
+    }, t)
+    expect(none, 'ohne zweite Seite keine erfundene Kennzahl').toEqual({})
+  })
+
+  test('die 30-s-Ergometerleistung nennt den Leistungsabfall nur mit Minimalwert', () => {
+    const t = TEST_CATALOG.find((x) => x.slug === 'row_30s_power')!
+    const ctx = { bodyWeightKg: null, ageYears: 28, sex: 'male' as const }
+    const out: Record<string, number> = {}
+    t.derive?.({ peakPowerW: 800, meanPowerW: 650, minPowerW: 400 }, ctx, (k, v) => {
+      if (v != null) out[k] = v
+    }, t)
+    expect(out.fatigue_index_percent).toBe(50)
+    const none: Record<string, number> = {}
+    t.derive?.({ peakPowerW: 800, meanPowerW: 650 }, ctx, (k, v) => {
+      if (v != null) none[k] = v
+    }, t)
+    expect(none).toEqual({})
+  })
+
+  test('Zugleinen-Schwimmen, Isometrik und F-v-Profil sind Laborwerte und nie Pflicht', () => {
+    for (const slug of ['tethered_swim_30s', 'whole_body_isometric_force', 'fv_profile_ergometer']) {
+      const t = TEST_CATALOG.find((x) => x.slug === slug)!
+      expect(t.setting, slug).toBe('lab')
+      expect(t.deviceBound, slug).toBe('critical')
+    }
+  })
 })
 
 test.describe('Testbibliothek — Anzeige', () => {
@@ -116,6 +156,13 @@ test.describe('Testbibliothek — Anzeige', () => {
     for (const label of ['Versuche und Pausen', 'Wann ein Versuch zählt', 'Was gleich bleiben muss']) {
       await expect(page.getByText(label, { exact: true })).toBeVisible()
     }
+  })
+
+  test('Welle 2: ein neuer Triathlon-Test zeigt seine Ablaufskizze', async ({ page }) => {
+    await openGuest(page)
+    await page.goto('/tests/triathlon_sprint_time/details', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByText('Durchführung Schritt für Schritt', { exact: true })).toBeVisible()
+    await expect(page.getByRole('img', { name: /Ablaufgrafik des Sprint-Triathlons/ })).toBeVisible()
   })
 
   test('ein Beobachtungswert zeigt seine Durchführung, ohne bewertet zu werden', async ({ page }) => {

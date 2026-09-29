@@ -489,6 +489,117 @@ function BroadJump() {
   )
 }
 
+
+function Track400() {
+  return (
+    <>
+      <rect x="40" y="36" width="240" height="118" rx="59" style={S.thin} />
+      <rect x="52" y="48" width="216" height="94" rx="47" style={S.acc} />
+      <rect x="64" y="60" width="192" height="70" rx="35" style={S.thin} />
+      <line x1="160" y1="30" x2="160" y2="66" style={{ ...S.body, strokeWidth: 3.5 }} />
+      <T x={160} y={24}>0</T>
+      {[
+        [290, 96, '100'],
+        [160, 172, '200'],
+        [30, 96, '300'],
+      ].map(([x, y, k]) => (
+        <T key={String(k)} x={x as number} y={y as number} a={x === 290 ? 'start' : x === 30 ? 'end' : 'middle'}>
+          {k as string}
+        </T>
+      ))}
+      <Arrow from={[176, 95]} to={[214, 95]} />
+      <Timer x={160} y={98} />
+    </>
+  )
+}
+function CssPool() {
+  return (
+    <>
+      <rect x="24" y="26" width="272" height="96" rx="8" style={S.mat} />
+      <line x1="24" y1="74" x2="296" y2="74" style={S.dash} />
+      <Arrow from={[40, 50]} to={[276, 50]} />
+      <Arrow from={[40, 98]} to={[158, 98]} />
+      <T x={158} y={44}>400 m</T>
+      <T x={100} y={116}>200 m</T>
+      <Timer x={284} y={98} />
+      <T x={160} y={158} k="txtInk">CSS = (T400 − T200) / 2</T>
+    </>
+  )
+}
+function TriProcess({ swim, bike, run }: { swim: string; bike: string; run: string }) {
+  const stage = (x: number, dist: string, icon: ReactNode) => (
+    <>
+      <rect x={x} y="60" width="54" height="44" rx="10" style={{ ...S.mat, stroke: ACCENT }} />
+      {icon}
+      <T x={x + 27} y={124}>{dist}</T>
+    </>
+  )
+  const trans = (x: number, k: string) => (
+    <>
+      <rect x={x} y="60" width="36" height="44" rx="10" style={S.mat} />
+      <T x={x + 18} y={86} k="txtInk">{k}</T>
+    </>
+  )
+  return (
+    <>
+      {stage(12, swim, <path d="M22 84 q6 -8 12 0 t12 0 t12 0 M22 94 q6 -8 12 0 t12 0" style={S.body} />)}
+      {trans(76, 'T1')}
+      {stage(120, bike, (
+        <>
+          <circle cx="138" cy="90" r="7" style={S.body} />
+          <circle cx="156" cy="90" r="7" style={S.body} />
+          <Poly p={[[138, 90], [146, 78], [156, 90]]} />
+        </>
+      ))}
+      {trans(184, 'T2')}
+      {stage(228, run, (
+        <>
+          <Head x={252} y={72} r={4} />
+          <Poly p={[[252, 77], [252, 90]]} />
+          <Poly p={[[252, 90], [246, 100]]} />
+          <Poly p={[[252, 90], [258, 100]]} />
+          <Poly p={[[252, 82], [259, 86]]} />
+        </>
+      ))}
+      <Arrow from={[68, 82]} to={[76, 82]} st={S.thin} />
+      <Arrow from={[112, 82]} to={[120, 82]} st={S.thin} />
+      <Arrow from={[176, 82]} to={[184, 82]} st={S.thin} />
+      <Arrow from={[220, 82]} to={[228, 82]} st={S.thin} />
+    </>
+  )
+}
+function StarExcursion() {
+  const dirs = Array.from({ length: 8 }, (_, i) => (i * Math.PI) / 4)
+  return (
+    <>
+      <circle cx="160" cy="95" r="70" style={S.dash} />
+      <rect x="150" y="80" width="20" height="30" rx="6" style={S.mat} />
+      {dirs.map((a, i) => (
+        <Arrow key={i} from={[160 + 16 * Math.cos(a), 95 + 16 * Math.sin(a)]} to={[160 + 66 * Math.cos(a), 95 + 66 * Math.sin(a)]} />
+      ))}
+    </>
+  )
+}
+function SingleLegHop() {
+  return (
+    <>
+      <Floor y={158} />
+      <line x1="74" y1="150" x2="74" y2="166" style={S.acc} />
+      <Head x={62} y={76} />
+      <Poly p={[[62, 83], [66, 116], [66, 152]]} />
+      <Poly p={[[66, 116], [80, 134], [66, 140]]} />
+      <Poly p={[[62, 94], [42, 80]]} />
+      <Head x={214} y={76} />
+      <Poly p={[[214, 83], [210, 116], [206, 152]]} />
+      <Poly p={[[210, 116], [222, 134], [212, 142]]} />
+      <Poly p={[[214, 94], [232, 82]]} />
+      <circle cx="206" cy="158" r="3.5" style={S.dotAcc} />
+      <Dim a={[74, 176]} b={[206, 176]} label="" />
+      <Arrow from={[90, 58]} to={[196, 58]} st={S.thin} />
+    </>
+  )
+}
+
 const FIGS: Record<string, () => ReactNode> = {
   sjft: SjftMat,
   swft: SwftMat,
@@ -520,6 +631,13 @@ const FIGS: Record<string, () => ReactNode> = {
   agility_course: Course,
   sit_reach: SitReach,
   broad_jump: BroadJump,
+  track_400: Track400,
+  css_swim: CssPool,
+  triathlon_sprint: () => <TriProcess swim="750 m" bike="20 km" run="5 km" />,
+  triathlon_olympic: () => <TriProcess swim="1500 m" bike="40 km" run="10 km" />,
+  star_excursion: StarExcursion,
+  single_leg_hop: SingleLegHop,
+  sprint_20m: () => <Sprint meters={20} />,
 }
 
 export const FIGURE_IDS = Object.keys(FIGS)

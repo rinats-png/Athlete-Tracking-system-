@@ -179,6 +179,27 @@ export const DOCUMENT_GAPS: DocumentGap[] = [
     reason:
       "Braucht 3D-Bewegungsanalyse und Kraftmessplatte. Ohne Gerät nicht messbar; geschätzte Gelenkwinkel wären erfundene Zahlen.",
   },
+  {
+    disciplineId: 'general_fitness',
+    label: "Psychomotor Vigilance Test (PVT)",
+    kind: 'equipment',
+    reason:
+      "Braucht validierte Software mit Millisekunden-Zeitmessung der Reaktion und einer geprüften Reizfolge. Eine Handy-Näherung würde Zahlen liefern, die wie PVT-Werte aussehen, es aber nicht sind.",
+  },
+  {
+    disciplineId: 'general_fitness',
+    label: "Stroop-Test",
+    kind: 'equipment',
+    reason:
+      "Braucht validierte Reizsoftware mit geprüfter Farb-Wort-Folge und genauer Reaktionszeit. Ohne sie wäre jeder Wert eine erfundene Stroop-Zahl.",
+  },
+  {
+    disciplineId: 'triathlon_sprint',
+    label: "VISA-A (Fragebogen)",
+    kind: 'no_protocol',
+    reason:
+      "Ein lizenzierter, validierter Fragebogen zur Achillessehne. Die App speichert keine Gesundheitsbefunde ohne Einwilligungsschicht und deutet keine Beschwerden (§82).",
+  },
 ]
 
 /** Die offenen Lücken, wie sie im Bericht erscheinen. */

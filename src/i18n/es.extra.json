@@ -49,7 +49,15 @@
       "stability_index": "Índice de estabilidad (plataforma de fuerza)",
       "reaction_time_ms": "Tiempo de reacción visual",
       "fitrosword_response_ms": "Tiempo de reacción en esgrima (FitroSword)",
-      "punch_peak_g": "Carga de golpeo (aceleración pico)"
+      "punch_peak_g": "Carga de golpeo (aceleración pico)",
+      "stroke_rate_spm": "Frecuencia de brazada (natación)",
+      "stroke_length_m": "Longitud de brazada (natación)",
+      "index_of_coordination_pct": "Índice de coordinación (natación)",
+      "shoulder_er_ir_ratio": "Hombro: ratio de rotación externa/interna",
+      "shoulder_rom_deg": "Hombro: rango de movimiento",
+      "body_mass_change_pct": "Cambio de masa corporal antes/después de la carrera",
+      "sebt_composite_pct": "Star Excursion Balance (compuesto)",
+      "ankle_dorsiflexion_deg": "Dorsiflexión del tobillo"
     },
     "meaning": {
       "ck_u_l": "Una enzima cuyo nivel en sangre sube tras una carga no habitual. La variación entre personas es muy grande — solo es comparable contigo mismo.",
@@ -73,7 +81,15 @@
       "stability_index": "La oscilación del centro de presión en una plataforma de fuerza. El valor depende mucho del sistema y solo puede compararse en el mismo dispositivo.",
       "reaction_time_ms": "El tiempo desde un estímulo visual hasta la respuesta definida. El dispositivo desplaza el valor, por eso se registra junto con él.",
       "fitrosword_response_ms": "Reacción y tiempo de respuesta total en esgrima con un sistema específico. Solo comparable en el mismo sistema.",
-      "punch_peak_g": "La aceleración más alta que registra un sensor corporal durante el boxeo. Solo comparable con el mismo sensor y la misma colocación."
+      "punch_peak_g": "La aceleración más alta que registra un sensor corporal durante el boxeo. Solo comparable con el mismo sensor y la misma colocación.",
+      "stroke_rate_spm": "Ciclos de brazo por minuto. Solo tiene sentido junto con la longitud de brazada; un valor más alto no es automáticamente mejor.",
+      "stroke_length_m": "La distancia que te hace avanzar un ciclo de brazo. Depende de la técnica, el ritmo y el tamaño corporal, y solo es comparable con el mismo método de medición.",
+      "index_of_coordination_pct": "Cuánto se solapan o dejan huecos las fases de tracción de los dos brazos. Requiere análisis de vídeo o sensores y solo es comparable con el mismo análisis.",
+      "shoulder_er_ir_ratio": "La relación entre la fuerza de rotación externa y la interna. Un cribado con dinamómetro manual, no un valor de rendimiento; anota el lado y el dispositivo en la nota.",
+      "shoulder_rom_deg": "El rango de movimiento del hombro en grados. Un cribado; anota el lado, la dirección y el método de medición en la nota.",
+      "body_mass_change_pct": "El cambio porcentual de la masa corporal entre antes y después de un esfuerzo. Una observación, no un rendimiento ni una valoración de la pérdida de líquidos.",
+      "sebt_composite_pct": "El alcance promedio en todas las direcciones, como porcentaje de la longitud de la pierna. Un cribado de equilibrio, no una medida de rendimiento.",
+      "ankle_dorsiflexion_deg": "Hasta dónde puede flexionarse el tobillo hacia arriba, en grados. Un cribado de movilidad; anota el lado y el método de medición en la nota."
     }
   },
   "procedure": {

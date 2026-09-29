@@ -674,4 +674,78 @@ export const TEST_CLASSIFICATION: Record<string, TestClassification> = {
     dimensionMetrics: { agility: 'durationSeconds' },
     direction: 'lower_is_better',
   },
+
+  // --- Testbibliothek, Protokoll 1.0 (Welle 2 (Laufen, Rad, Schwimmen, Triathlon, Rudern)) -------------------------------
+  marathon_finish_time: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
+  critical_power_test: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'criticalPowerW' },
+    direction: 'higher_is_better',
+  },
+  fv_profile_ergometer: {
+    category: 'power',
+    dimension: 'power',
+    dimensionMetrics: { power: 'pmaxW' },
+    direction: 'higher_is_better',
+  },
+  swim_50m: {
+    category: 'endurance',
+    dimension: 'power',
+    dimensionMetrics: { power: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
+  tethered_swim_30s: {
+    category: 'power',
+    dimension: 'power',
+    dimensionMetrics: { power: 'peakForceN' },
+    direction: 'higher_is_better',
+  },
+  triathlon_sprint_time: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
+  triathlon_olympic_time: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
+  whole_body_isometric_force: {
+    category: 'max_strength',
+    dimension: 'max_strength',
+    dimensionMetrics: { max_strength: 'peakForceN' },
+    direction: 'higher_is_better',
+  },
+  single_leg_hop: {
+    category: 'power',
+    dimension: 'power',
+    dimensionMetrics: { power: 'hopDistanceCm' },
+    direction: 'higher_is_better',
+  },
+  row_500m: {
+    category: 'endurance',
+    dimension: 'power',
+    dimensionMetrics: { power: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
+  row_30s_power: {
+    category: 'power',
+    dimension: 'power',
+    dimensionMetrics: { power: 'peakPowerW', strength_endurance: 'fatigue_index_percent' },
+    direction: 'higher_is_better',
+  },
+  run_1000m: {
+    category: 'endurance',
+    dimension: 'endurance',
+    dimensionMetrics: { endurance: 'durationSeconds' },
+    direction: 'lower_is_better',
+  },
 }

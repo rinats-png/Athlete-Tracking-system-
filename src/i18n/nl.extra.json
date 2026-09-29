@@ -49,7 +49,15 @@
       "stability_index": "Stabiliteitsindex (krachtplaat)",
       "reaction_time_ms": "Visuele reactietijd",
       "fitrosword_response_ms": "Schermreactietijd (FitroSword)",
-      "punch_peak_g": "Stootbelasting (piekversnelling)"
+      "punch_peak_g": "Stootbelasting (piekversnelling)",
+      "stroke_rate_spm": "Slagfrequentie (zwemmen)",
+      "stroke_length_m": "Slaglengte (zwemmen)",
+      "index_of_coordination_pct": "Coördinatie-index (zwemmen)",
+      "shoulder_er_ir_ratio": "Schouder: verhouding exorotatie/endorotatie",
+      "shoulder_rom_deg": "Schouderbeweeglijkheid",
+      "body_mass_change_pct": "Verandering lichaamsmassa voor/na de wedstrijd",
+      "sebt_composite_pct": "Star Excursion Balance (composiet)",
+      "ankle_dorsiflexion_deg": "Enkeldorsaalflexie"
     },
     "meaning": {
       "ck_u_l": "Een enzym waarvan de bloedspiegel stijgt na ongewone belasting. De variatie tussen personen is zeer groot — alleen met jezelf vergelijkbaar.",
@@ -73,7 +81,15 @@
       "stability_index": "De zwaai van het drukmiddelpunt op een krachtplaat. De waarde hangt sterk af van het systeem en is alleen vergelijkbaar op hetzelfde apparaat.",
       "reaction_time_ms": "De tijd van een visuele prikkel tot de vastgelegde reactie. Het apparaat verschuift de waarde, daarom wordt het mee vastgelegd.",
       "fitrosword_response_ms": "Reactie- en totale responstijd bij het schermen met een specifiek systeem. Alleen vergelijkbaar op hetzelfde systeem.",
-      "punch_peak_g": "De hoogste versnelling die een op het lichaam gedragen sensor tijdens het boksen registreert. Alleen vergelijkbaar met dezelfde sensor en plaatsing."
+      "punch_peak_g": "De hoogste versnelling die een op het lichaam gedragen sensor tijdens het boksen registreert. Alleen vergelijkbaar met dezelfde sensor en plaatsing.",
+      "stroke_rate_spm": "Armcycli per minuut. Alleen zinvol in combinatie met slaglengte; een hogere waarde is niet automatisch beter.",
+      "stroke_length_m": "De afstand die je met één armcyclus vooruit komt. Hij hangt af van techniek, tempo en lichaamsgrootte en is alleen vergelijkbaar bij dezelfde meetmethode.",
+      "index_of_coordination_pct": "Hoeveel de trekfasen van beide armen overlappen of openlaten. Vereist videoanalyse of sensoren en is alleen vergelijkbaar bij dezelfde analyse.",
+      "shoulder_er_ir_ratio": "De verhouding tussen de kracht van exorotatie en endorotatie. Een screening met een handdynamometer, geen prestatiewaarde; noteer zijde en apparaat in de notitie.",
+      "shoulder_rom_deg": "Het bewegingsbereik van de schouder in graden. Een screening; noteer zijde, richting en meetmethode in de notitie.",
+      "body_mass_change_pct": "De procentuele verandering van de lichaamsmassa tussen voor en na een inspanning. Een observatie, geen prestatie en geen oordeel over vochtverlies.",
+      "sebt_composite_pct": "De gemiddelde reikafstand over alle richtingen, als percentage van de beenlengte. Een evenwichtsscreening, geen prestatiemaat.",
+      "ankle_dorsiflexion_deg": "Hoe ver de enkel omhoog kan buigen, in graden. Een mobiliteitsscreening; noteer zijde en meetmethode in de notitie."
     }
   },
   "procedure": {

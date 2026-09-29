@@ -109,7 +109,7 @@ test.describe('Gruppentest im Bildschirm', () => {
     await page.goto('/trainer/gruppentest', { waitUntil: 'domcontentloaded' })
 
     await page.getByLabel('Test', { exact: false }).first().selectOption('grip_strength')
-    await page.getByLabel('Mara').fill('40')
+    await page.getByLabel('Mara', { exact: true }).fill('40')
     await page.getByLabel('Jonas').fill('44')
     // Ines bleibt leer — sie war nicht da.
     await page.getByRole('button', { name: /Werte speichern/ }).click()
