@@ -11,7 +11,8 @@ import { disciplineById } from '../src/data/sportProfiles'
 /**
  * Testbibliothek, Protokoll 1.0 — Welle 1 (Kampfsport) und Welle 2 (Laufen,
  * Rad, Schwimmen, Triathlon, Rudern) Welle 3 (Teamsport) und
- * Welle 4 (Kraftsport, Allgemein, HYROX, Tactical).
+ * Welle 4 (Kraftsport, Allgemein, HYROX, Tactical) und
+ * Welle 5 (Recovery, Thermal, NIRS, Ü40+).
  *
  * Was hier gesichert wird, ist genau das, was beim Übertragen aus einem
  * Dokument still verloren geht: ein Verweis, der ins Leere zeigt, eine
@@ -170,6 +171,15 @@ test.describe('Testbibliothek — Daten', () => {
       expect.arrayContaining(['yo_yo_ir1', 'repeated_sprint_ability', 'eccentric_adductor_strength', 'isometric_adduction_single_leg']),
     )
     for (const t of added) expect(t.role).toBe('optional')
+  })
+
+  test('Welle 5: Gesundheitsmarker mit Einwilligungspflicht bekommen keine Eingabe', () => {
+    // CK bleibt ausgesetzt; Troponin gibt es gar nicht. Eine Vorschrift dafür würde
+    // eine Erhebung anleiten, die die App nicht entgegennehmen darf.
+    expect(Object.keys(OBSERVATION_PROCEDURES)).not.toContain('ck_u_l')
+    const ck = OBSERVATIONS.find((o) => o.key === 'ck_u_l')
+    expect(ck?.retired).toBe('art9')
+    expect(OBSERVATIONS.some((o) => /tropon|ctn/i.test(o.key))).toBe(false)
   })
 
   test('Zugleinen-Schwimmen, Isometrik, IMTP und F-v-Profil sind Laborwerte und nie Pflicht', () => {

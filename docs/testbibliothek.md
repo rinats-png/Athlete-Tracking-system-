@@ -1,7 +1,7 @@
 # Testbibliothek (Protokoll 1.0)
 
 Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 133 Testeinträge
-(126 verschiedene) in 29 Bereichen. Sie wird in Wellen nach Disziplin übertragen.
+(126 verschiedene) in 29 Bereichen. Sie wird in Wellen nach Disziplin übertragen; alle fünf Wellen sind übertragen.
 
 ## Stand
 
@@ -11,7 +11,7 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
 | 2 | Laufen, Radfahren, Schwimmen, Triathlon, Rudern | übertragen |
 | 3 | Teamsport (Fußball, Basketball, Handball, Volleyball, Rugby, Cricket) | übertragen |
 | 4 | Kraftsport, Allgemein, HYROX, Tactical | übertragen |
-| 5 | Recovery, Thermal, NIRS, Ü40+ | offen |
+| 5 | Recovery, Thermal, NIRS, Ü40+ | übertragen |
 
 ## Wohin was gehört
 
@@ -50,6 +50,10 @@ Quelle: «Standardisierte Testbibliothek für die App», Protokollversion 1.0, 1
 - **AFT (Tactical):** Die Quellenanker («Maximalwert 350 lb», «61 Reps», «13:25») stehen als
   Kohortenwerte im Abschnitt «Bewertung»; das 3RM-Kreuzheben ist ein eigener Test ohne
   1RM-Umrechnung.
+- **Welle 5:** DOMS, WBGT und SmO₂ sind vorhandene Beobachtungswerte und bekommen ihre Vorschrift;
+  der Ruheenergieverbrauch (indirekte Kalorimetrie) ist ein neuer. Nicht übernommen: Kreatinkinase
+  (Laborwert nach Art. 9 DSGVO, Eingabe ausgesetzt) und hs-Troponin (klinischer Marker, ärztlich).
+  Die WBGT-Schwelle im Bewertungstext ist ein Hinweis der Quelle; lokale Regeln haben Vorrang.
 - **Rudern** hat im Katalog keine Disziplin. Die Ruder-Tests (500 m, 30 s Leistung) und der
   1000-m-Lauf stehen im Katalog, sind aber keiner Disziplin zugeordnet.
 - **Quellenfehler:** Der 10-km-Lauf nennt in der Quelle «10,000 km»; übernommen sind 10 km.

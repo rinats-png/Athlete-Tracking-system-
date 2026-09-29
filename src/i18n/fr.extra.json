@@ -67,7 +67,8 @@
       "shot_accuracy_football_pct": "Test de tir au football : taux de réussite",
       "throw_accuracy_handball_pct": "Test de lancer au handball : taux de réussite",
       "dxa_fat_mass_percent": "Masse grasse (DXA)",
-      "bia_fat_mass_percent": "Masse grasse (BIA)"
+      "bia_fat_mass_percent": "Masse grasse (BIA)",
+      "rmr_kcal_day": "Dépense énergétique de repos (RMR)"
     },
     "meaning": {
       "ck_u_l": "Une enzyme dont le taux sanguin monte après une charge inhabituelle. La variation entre personnes est très grande — comparable seulement avec toi-même.",
@@ -108,7 +109,8 @@
       "shot_accuracy_football_pct": "La part de tirs réussis en pourcentage, à partir des tirs et des réussites du test de tir. Un relevé d'habileté, pas un axe de performance ; note la distance, le ballon et le pied dans la note.",
       "throw_accuracy_handball_pct": "La part de tirs réussis en pourcentage, à partir des lancers et des réussites du test de lancer. Un relevé d'habileté, pas un axe de performance ; note la distance, le ballon et la technique de lancer dans la note.",
       "dxa_fat_mass_percent": "Part de masse grasse issue d'un scan DXA. Ne mélange pas DXA et BIA : compare uniquement des valeurs obtenues avec la même méthode et le même appareil ; note l'hydratation et l'heure dans la remarque.",
-      "bia_fat_mass_percent": "Part de masse grasse issue d'une mesure par bioimpédance. Comparable uniquement avec le même appareil, le même moment de la journée et une hydratation similaire ; ne mélange pas avec la DXA."
+      "bia_fat_mass_percent": "Part de masse grasse issue d'une mesure par bioimpédance. Comparable uniquement avec le même appareil, le même moment de la journée et une hydratation similaire ; ne mélange pas avec la DXA.",
+      "rmr_kcal_day": "L'énergie que le corps utilise au repos, mesurée par calorimétrie indirecte, en kcal par jour. Comparable uniquement avec le même appareil, la même durée de jeûne et la même heure ; ce n'est pas une mesure de performance."
     }
   },
   "procedure": {

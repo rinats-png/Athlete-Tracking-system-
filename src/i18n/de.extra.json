@@ -67,7 +67,8 @@
       "shot_accuracy_football_pct": "Schusstest Fußball: Trefferquote",
       "throw_accuracy_handball_pct": "Wurftest Handball: Trefferquote",
       "dxa_fat_mass_percent": "Körperfett (DXA)",
-      "bia_fat_mass_percent": "Körperfett (BIA)"
+      "bia_fat_mass_percent": "Körperfett (BIA)",
+      "rmr_kcal_day": "Ruheenergieverbrauch (RMR)"
     },
     "meaning": {
       "ck_u_l": "Ein Enzym, dessen Blutspiegel nach ungewohnter Belastung steigt. Die Streuung zwischen Menschen ist sehr gross — vergleichbar ist er nur mit dir selbst.",
@@ -108,7 +109,8 @@
       "shot_accuracy_football_pct": "Der Anteil der Treffer in Prozent, aus der Zahl der Schüsse und Treffer des Schusstests. Eine Technikangabe, keine Leistungsachse; Distanz, Ball und Fuß gehören in die Notiz.",
       "throw_accuracy_handball_pct": "Der Anteil der Treffer in Prozent, aus der Zahl der Würfe und Treffer des Wurftests. Eine Technikangabe, keine Leistungsachse; Distanz, Ball und Wurftechnik gehören in die Notiz.",
       "dxa_fat_mass_percent": "Der Körperfettanteil aus einer DXA-Messung. DXA und BIA nicht mischen: vergleiche nur Werte desselben Verfahrens und Geräts; Hydration und Zeitpunkt gehören in die Notiz.",
-      "bia_fat_mass_percent": "Der Körperfettanteil aus einer Bioimpedanz-Messung. Nur mit demselben Gerät, derselben Tageszeit und ähnlicher Hydration vergleichbar; nicht mit DXA mischen."
+      "bia_fat_mass_percent": "Der Körperfettanteil aus einer Bioimpedanz-Messung. Nur mit demselben Gerät, derselben Tageszeit und ähnlicher Hydration vergleichbar; nicht mit DXA mischen.",
+      "rmr_kcal_day": "Der Energiebedarf des Körpers in Ruhe, per indirekter Kalorimetrie gemessen, in kcal pro Tag. Nur mit demselben Gerät, derselben Nüchternzeit und Tageszeit vergleichbar; keine Leistungsmessung."
     }
   },
   "procedure": {

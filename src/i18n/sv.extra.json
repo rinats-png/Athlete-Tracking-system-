@@ -67,7 +67,8 @@
       "shot_accuracy_football_pct": "Fotbollsskjuttest: träffprocent",
       "throw_accuracy_handball_pct": "Handbollskasttest: träffprocent",
       "dxa_fat_mass_percent": "Kroppsfett (DXA)",
-      "bia_fat_mass_percent": "Kroppsfett (BIA)"
+      "bia_fat_mass_percent": "Kroppsfett (BIA)",
+      "rmr_kcal_day": "Vilometabolism (RMR)"
     },
     "meaning": {
       "ck_u_l": "Ett enzym vars blodnivå stiger efter ovan belastning. Variationen mellan personer är mycket stor — det är bara jämförbart med dig själv.",
@@ -108,7 +109,8 @@
       "shot_accuracy_football_pct": "Andelen träffar i procent, utifrån skotten och träffarna i skjuttestet. En färdighetsregistrering, inte en prestationsaxel; notera avstånd, boll och fot i anteckningen.",
       "throw_accuracy_handball_pct": "Andelen träffar i procent, utifrån kasten och träffarna i kasttestet. En färdighetsregistrering, inte en prestationsaxel; notera avstånd, boll och kastteknik i anteckningen.",
       "dxa_fat_mass_percent": "Kroppsfettandel från en DXA-skanning. Blanda inte DXA och BIA: jämför bara värden från samma metod och samma apparat; notera vätskestatus och tidpunkt i anteckningen.",
-      "bia_fat_mass_percent": "Kroppsfettandel från en bioimpedansmätning. Jämförbar endast med samma apparat, tid på dagen och liknande vätskestatus; blanda inte med DXA."
+      "bia_fat_mass_percent": "Kroppsfettandel från en bioimpedansmätning. Jämförbar endast med samma apparat, tid på dagen och liknande vätskestatus; blanda inte med DXA.",
+      "rmr_kcal_day": "Den energi kroppen förbrukar i vila, mätt med indirekt kalorimetri, i kcal per dag. Jämförbar endast med samma enhet, fastetid och tid på dygnet; inte ett prestationsmått."
     }
   },
   "procedure": {

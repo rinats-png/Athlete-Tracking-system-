@@ -67,7 +67,8 @@
       "shot_accuracy_football_pct": "Fodbold-skudtest: træfprocent",
       "throw_accuracy_handball_pct": "Håndbold-kasttest: træfprocent",
       "dxa_fat_mass_percent": "Kropsfedt (DXA)",
-      "bia_fat_mass_percent": "Kropsfedt (BIA)"
+      "bia_fat_mass_percent": "Kropsfedt (BIA)",
+      "rmr_kcal_day": "Hvileenergiforbrug (RMR)"
     },
     "meaning": {
       "ck_u_l": "Et enzym, hvis niveau i blodet stiger efter uvant belastning. Variationen mellem personer er meget stor — det kan kun sammenlignes med dig selv.",
@@ -108,7 +109,8 @@
       "shot_accuracy_football_pct": "Andelen af træffere i procent ud fra skud og træffere i skudtesten. En færdighedsregistrering, ikke en præstationsakse; notér afstand, bold og fod i noten.",
       "throw_accuracy_handball_pct": "Andelen af træffere i procent ud fra kast og træffere i kasttesten. En færdighedsregistrering, ikke en præstationsakse; notér afstand, bold og kastteknik i noten.",
       "dxa_fat_mass_percent": "Kropsfedtandel fra en DXA-scanning. Bland ikke DXA og BIA: sammenlign kun værdier fra samme metode og apparat; notér hydrering og tidspunkt i noten.",
-      "bia_fat_mass_percent": "Kropsfedtandel fra en bioimpedansmåling. Kun sammenlignelig med samme apparat, tidspunkt på dagen og tilsvarende hydrering; bland ikke med DXA."
+      "bia_fat_mass_percent": "Kropsfedtandel fra en bioimpedansmåling. Kun sammenlignelig med samme apparat, tidspunkt på dagen og tilsvarende hydrering; bland ikke med DXA.",
+      "rmr_kcal_day": "Den energi, kroppen bruger i hvile, målt ved indirekte kalorimetri, i kcal pr. dag. Kun sammenlignelig med samme udstyr, fastetid og tidspunkt på dagen; ikke et præstationsmål."
     }
   },
   "procedure": {

@@ -489,6 +489,17 @@ export const OBSERVATIONS: ObservationDefinition[] = [
     source: 'device',
     direction: 'neutral',
   },
+  // --- Testbibliothek, Protokoll 1.0 (Welle 5) -------------------------------
+  {
+    key: 'rmr_kcal_day',
+    group: 'body',
+    unit: "kcal",
+    min: 600,
+    max: 5000,
+    step: 1,
+    source: 'lab',
+    direction: 'neutral',
+  },
 ]
 
 export const OBSERVATION_BY_KEY = new Map(OBSERVATIONS.map((o) => [o.key, o]))

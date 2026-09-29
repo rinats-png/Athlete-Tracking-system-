@@ -67,7 +67,8 @@
       "shot_accuracy_football_pct": "Football shooting test: hit rate",
       "throw_accuracy_handball_pct": "Handball throwing test: hit rate",
       "dxa_fat_mass_percent": "Body fat (DXA)",
-      "bia_fat_mass_percent": "Body fat (BIA)"
+      "bia_fat_mass_percent": "Body fat (BIA)",
+      "rmr_kcal_day": "Resting energy expenditure (RMR)"
     },
     "meaning": {
       "ck_u_l": "An enzyme whose blood level rises after unaccustomed load. Variation between people is very large — it is comparable only with yourself.",
@@ -108,7 +109,8 @@
       "shot_accuracy_football_pct": "The share of hits in percent, from the shots and hits of the shooting test. A skill record, not a performance axis; note distance, ball and foot in the note.",
       "throw_accuracy_handball_pct": "The share of hits in percent, from the throws and hits of the throwing test. A skill record, not a performance axis; note distance, ball and throwing technique in the note.",
       "dxa_fat_mass_percent": "Body fat share from a DXA scan. Do not mix DXA and BIA: only compare values from the same method and device; note hydration and time in the note.",
-      "bia_fat_mass_percent": "Body fat share from a bioimpedance measurement. Only comparable with the same device, time of day and similar hydration; do not mix with DXA."
+      "bia_fat_mass_percent": "Body fat share from a bioimpedance measurement. Only comparable with the same device, time of day and similar hydration; do not mix with DXA.",
+      "rmr_kcal_day": "The energy the body uses at rest, measured by indirect calorimetry, in kcal per day. Only comparable with the same device, fasting time and time of day; not a performance measure."
     }
   },
   "procedure": {

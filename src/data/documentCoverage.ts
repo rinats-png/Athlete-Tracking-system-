@@ -200,6 +200,20 @@ export const DOCUMENT_GAPS: DocumentGap[] = [
     reason:
       "Ein lizenzierter, validierter Fragebogen zur Achillessehne. Die App speichert keine Gesundheitsbefunde ohne Einwilligungsschicht und deutet keine Beschwerden (§82).",
   },
+  {
+    disciplineId: 'general_fitness',
+    label: "Kreatinkinase im Blut (Recovery)",
+    kind: 'no_protocol',
+    reason:
+      "Ein Laborwert und damit ein Gesundheitsdatum nach Art. 9 DSGVO; die Eingabe ist ausgesetzt (siehe Beobachtungswert ck_u_l), bis die Gesundheitsschicht die Einwilligung trägt. Die App deutet ihn nicht (§82).",
+  },
+  {
+    disciplineId: 'general_fitness',
+    label: "Herzmuskel-Troponin nach Belastung (hs-cTnI/T)",
+    kind: 'no_protocol',
+    reason:
+      "Ein klinischer Belastungsmarker, ausdrücklich kein Fitnessscore. Er gehört in ärztliche Hand; die App nimmt ihn nicht entgegen und deutet ihn nicht (§82, Art. 9 DSGVO).",
+  },
 ]
 
 /** Die offenen Lücken, wie sie im Bericht erscheinen. */

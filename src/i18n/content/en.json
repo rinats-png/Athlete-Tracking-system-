@@ -8214,5 +8214,153 @@
   "Wrong order/load/distance.": {
     "en": "Wrong order/load/distance.",
     "de": "Falsche Reihenfolge/Last/Distanz."
+  },
+  "Subjective intensity of muscle soreness/pain.": {
+    "en": "Subjective intensity of muscle soreness/pain.",
+    "de": "Subjektive Muskelkater-/Schmerzintensität."
+  },
+  "A fixed, defined NRS/VAS scale.": {
+    "en": "A fixed, defined NRS/VAS scale.",
+    "de": "Fest definierte NRS/VAS-Skala."
+  },
+  "Test the same muscle group/movement.": {
+    "en": "Test the same muscle group/movement.",
+    "de": "Gleiche Muskelgruppe/Bewegung prüfen."
+  },
+  "Rate the pain on a 0–10 NRS.": {
+    "en": "Rate the pain on a 0–10 NRS.",
+    "de": "Schmerz auf 0–10 NRS bewerten."
+  },
+  "Record the time since the exercise.": {
+    "en": "Record the time since the exercise.",
+    "de": "Zeitpunkt nach Belastung speichern."
+  },
+  "Do not compare directly across a different scale or time point.": {
+    "en": "Do not compare directly across a different scale or time point.",
+    "de": "Andere Skala/anderer Zeitpunkt nicht direkt vergleichen."
+  },
+  "Same scale, same provoking movement and same time point.": {
+    "en": "Same scale, same provoking movement and same time point.",
+    "de": "Gleiche Skala, gleiche Provokationsbewegung und Zeitpunkt."
+  },
+  "0–10 score and change; lower = less soreness.": {
+    "en": "0–10 score and change; lower = less soreness.",
+    "de": "0–10 Score und Veränderung; niedriger = weniger Soreness."
+  },
+  "Heat load from the environment; a safety parameter, not a fitness score.": {
+    "en": "Heat load from the environment; a safety parameter, not a fitness score.",
+    "de": "Umweltbedingte Hitzebelastung; Sicherheitsparameter, kein Fitnessscore."
+  },
+  "Calibrated WBGT meter.": {
+    "en": "Calibrated WBGT meter.",
+    "de": "Kalibriertes WBGT-Messgerät."
+  },
+  "Place the device at the location of the exercise.": {
+    "en": "Place the device at the location of the exercise.",
+    "de": "Gerät am Belastungsort positionieren."
+  },
+  "Allow enough time for it to acclimatize.": {
+    "en": "Allow enough time for it to acclimatize.",
+    "de": "Ausreichend akklimatisieren lassen."
+  },
+  "Record WBGT before and during the exercise.": {
+    "en": "Record WBGT before and during the exercise.",
+    "de": "WBGT vor und während Belastung erfassen."
+  },
+  "Device not stabilized/wrongly positioned.": {
+    "en": "Device not stabilized/wrongly positioned.",
+    "de": "Gerät nicht stabilisiert/falsch positioniert."
+  },
+  "Record measuring height/location, sun/shade and device.": {
+    "en": "Record measuring height/location, sun/shade and device.",
+    "de": "Messhöhe/Ort, Sonne/Schatten und Gerät dokumentieren."
+  },
+  "°C WBGT. The source file names >28 °C as an ACSM-related threshold for postponing competition, mentioned in the register description; local rules take precedence.": {
+    "en": "°C WBGT. The source file names >28 °C as an ACSM-related threshold for postponing competition, mentioned in the register description; local rules take precedence.",
+    "de": "°C WBGT. Quelldatei nennt >28 °C als in Registerbeschreibung erwähnte ACSM-bezogene Wettkampfverschiebungsgrenze; lokale Regeln haben Vorrang."
+  },
+  "Local muscle oxygenation at rest and during exercise.": {
+    "en": "Local muscle oxygenation at rest and during exercise.",
+    "de": "Lokale Muskeloxygenierung während Ruhe/Belastung."
+  },
+  "NIRS sensor (e.g. MOXY), fixation.": {
+    "en": "NIRS sensor (e.g. MOXY), fixation.",
+    "de": "NIRS-Sensor (z.B. MOXY), Fixierung."
+  },
+  "Mark the measuring site anatomically.": {
+    "en": "Mark the measuring site anatomically.",
+    "de": "Messstelle anatomisch markieren."
+  },
+  "Attach the sensor so that it is light-tight.": {
+    "en": "Attach the sensor so that it is light-tight.",
+    "de": "Sensor lichtdicht befestigen."
+  },
+  "Record a baseline.": {
+    "en": "Record a baseline.",
+    "de": "Baseline erfassen."
+  },
+  "Perform a standardized exercise.": {
+    "en": "Perform a standardized exercise.",
+    "de": "Standardisierte Belastung durchführen."
+  },
+  "Record SmO2/THb continuously.": {
+    "en": "Record SmO2/THb continuously.",
+    "de": "SmO2/THb kontinuierlich speichern."
+  },
+  "Baseline + exercise period.": {
+    "en": "Baseline + exercise period.",
+    "de": "Baseline + Belastungszeitraum."
+  },
+  "Sensor movement/light leakage/data loss.": {
+    "en": "Sensor movement/light leakage/data loss.",
+    "de": "Sensorbewegung/Lichteinfall/Datenverlust."
+  },
+  "Sensor position, device, skin/fat tissue, sampling and exercise identical.": {
+    "en": "Sensor position, device, skin/fat tissue, sampling and exercise identical.",
+    "de": "Sensorposition, Gerät, Haut-/Fettgewebe, Sampling und Belastung identisch."
+  },
+  "SmO2 %, THb; primarily longitudinal; no universal norm from the source.": {
+    "en": "SmO2 %, THb; primarily longitudinal; no universal norm from the source.",
+    "de": "SmO2 %, THb; primär longitudinal; keine Universalnorm aus Quelle."
+  },
+  "Resting energy expenditure by indirect calorimetry.": {
+    "en": "Resting energy expenditure by indirect calorimetry.",
+    "de": "Ruheenergieverbrauch mittels indirekter Kalorimetrie."
+  },
+  "Metabolic cart, canopy hood/mask, quiet temperature-controlled room.": {
+    "en": "Metabolic cart, canopy hood/mask, quiet temperature-controlled room.",
+    "de": "Metabolic Cart, Atemhaube/Maske, ruhiger temperierter Raum."
+  },
+  "Measure after a standardized fasting/rest period.": {
+    "en": "Measure after a standardized fasting/rest period.",
+    "de": "Nach standardisierter Nüchtern-/Ruhephase messen."
+  },
+  "Lie still.": {
+    "en": "Lie still.",
+    "de": "Ruhig liegen."
+  },
+  "Record O2/CO2 until steady state.": {
+    "en": "Record O2/CO2 until steady state.",
+    "de": "O2/CO2 bis steady state erfassen."
+  },
+  "Calculate the energy expenditure.": {
+    "en": "Calculate the energy expenditure.",
+    "de": "Energieverbrauch berechnen."
+  },
+  "Typically 20–30 min of measurement after the rest period.": {
+    "en": "Typically 20–30 min of measurement after the rest period.",
+    "de": "Typisch 20–30 min Messung nach Ruhephase."
+  },
+  "No steady state, movement, recent exercise/food.": {
+    "en": "No steady state, movement, recent exercise/food.",
+    "de": "Kein steady state, Bewegung, kürzliche Belastung/Nahrung."
+  },
+  "Same fasting time, time of day, room temperature, device and steady-state rule.": {
+    "en": "Same fasting time, time of day, room temperature, device and steady-state rule.",
+    "de": "Nüchternzeit, Tageszeit, Raumtemperatur, Gerät und steady-state-Regel gleich."
+  },
+  "kcal/day; no general athlete norm in the source.": {
+    "en": "kcal/day; no general athlete norm in the source.",
+    "de": "kcal/day; keine allgemeine Athletennorm in Quelle."
   }
 }
