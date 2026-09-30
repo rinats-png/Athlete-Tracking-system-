@@ -491,3 +491,47 @@ h1, h2, h3, p { margin: 0; }
 .door__title { text-shadow: none; }
 .sport { box-shadow: var(--elev-1); }
 .phone { box-shadow: var(--elev-2); }
+
+/* --- Layout wie in der App --------------------------------------------------- */
+/* Messraster: das feine Gitter des App-Grundes, oben kräftig, nach unten ausgeblendet. */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 56px 56px; opacity: 0.35;
+  -webkit-mask-image: radial-gradient(90% 70% at 50% 0, #000, transparent 75%); mask-image: radial-gradient(90% 70% at 50% 0, #000, transparent 75%);
+}
+
+/* Beschriftungen als Status-Pillen (gesperrte Versalschrift + Leuchtpunkt). */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: var(--radius-pill);
+  font-size: 12px; letter-spacing: 0.16em; background: var(--accent-quiet); border: 1px solid var(--glass-border);
+}
+.eyebrow::before { content: ''; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--glow); }
+
+/* Funktionsblöcke: Karte (Ebene 2) mit dem App-Bildschirm als Bildschirmrahmen. */
+.feature {
+  position: relative; padding: 48px; margin-top: 24px; border: 1px solid var(--card-border); border-radius: var(--radius-card);
+  background: var(--card-raised); box-shadow: var(--elev-2); backdrop-filter: blur(10px);
+  grid-template-columns: minmax(0, 1fr) 340px; gap: 56px;
+}
+.feature--flip { grid-template-columns: 340px minmax(0, 1fr); }
+.feature::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 1px; background: linear-gradient(to right, transparent, color-mix(in oklab, var(--glass-edge) 60%, transparent), transparent); }
+.feature:first-of-type { margin-top: 40px; }
+.phone, .feature--flip .phone {
+  width: 340px; padding: 0; border-radius: var(--radius-card); transform: none; border: 1px solid var(--card-border);
+  background: var(--display); box-shadow: var(--elev-2);
+}
+.phone:hover { transform: none; }
+.phone img { border-radius: var(--radius-card); }
+.coaches .phone { width: 340px; }
+.coaches { grid-template-columns: minmax(0, 1fr) 340px; }
+
+/* Zahlen und Kennwerte: Mono, Tabellenziffern. */
+.why-card__num, .hero__chips li { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.hero__chips li { font-size: 13px; letter-spacing: 0.04em; }
+
+@media (max-width: 860px) {
+  .feature, .feature--flip { padding: 24px; grid-template-columns: 1fr; }
+  .phone, .feature--flip .phone, .coaches .phone { width: min(340px, 100%); }
+  .coaches { grid-template-columns: 1fr; }
+}
