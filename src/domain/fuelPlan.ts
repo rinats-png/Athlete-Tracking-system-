@@ -1,3 +1,4 @@
+import { FUEL_NOTES, type ContextKey, type FuelNote } from '@/data/fuelContext'
 import type { FuelRule } from '@/data/fuelRules'
 import { intraSessionBand, type IntraBand, type SessionFueling } from '@/domain/fueling'
 import { PROTEIN_BAND } from '@/domain/fueling'
@@ -166,3 +167,22 @@ export function feelByBand(rows: SessionFueling[]): FeelByBand | null {
 }
 
 export { PROTEIN_BAND }
+
+// --- Hitze, Kälte, Reise ------------------------------------------------------
+
+export type Conditions = 'normal' | 'hot' | 'cold'
+export type Travel = 'none' | 'trip' | 'zones'
+
+/**
+ * Hinweise für die gewählten Bedingungen. Ändert keine Spanne — die Vorlage
+ * nennt dafür keine Zahlen. Eine Reise mit Zeitzonenwechsel schliesst die
+ * Reise ein.
+ */
+export function contextNotes(conditions: Conditions, travel: Travel): FuelNote[] {
+  const on = new Set<ContextKey>()
+  if (conditions === 'hot') on.add('hot')
+  if (conditions === 'cold') on.add('cold')
+  if (travel !== 'none') on.add('trip')
+  if (travel === 'zones') on.add('zones')
+  return FUEL_NOTES.filter((n) => on.has(n.applies))
+}

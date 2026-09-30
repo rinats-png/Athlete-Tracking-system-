@@ -2044,6 +2044,63 @@
       "feelBelow": "below: {{mean}} of 5 ({{n}} sessions)",
       "feelNote": "Descriptive: two groups with a mean, not proof of a cause.",
       "source": "Self-report and measurements from your diary. Sweat rate after Sawka et al. (2007), gut course after Costa et al. (2017)."
+    },
+    "context": {
+      "conditions": "Conditions",
+      "travel": "Travel",
+      "cond": {
+        "normal": "normal",
+        "hot": "hot",
+        "cold": "cold"
+      },
+      "trav": {
+        "none": "none",
+        "trip": "trip",
+        "zones": "with time-zone change"
+      },
+      "noNumbers": "These notes do not change any range above — the evidence gives no numbers for that.",
+      "notes": {
+        "hot_sweat": "In the heat sweat rate usually rises. A value from cool sessions underestimates it; measure under similar conditions.",
+        "hot_fluid": "Drink well beforehand, during the session by thirst — and no more than needed. Gaining body mass during a session is a warning sign in the heat too.",
+        "hot_caffeine": "Caffeine: effect and tolerance depend on heat and habituation. Only what you have tried on competition day.",
+        "cold_thirst": "You sweat in the cold too, and thirst often signals more weakly. Plan drinking points instead of waiting for thirst.",
+        "trip_access": "Take what you have tried in sessions. Find out on site what food and drinks are available.",
+        "trip_arrival": "If you arrive shortly before the start, decide food and drink beforehand so the plan does not depend on availability.",
+        "zones_timing": "Align meals and drinking with the local time of the competition early."
+      }
+    },
+    "supplements": {
+      "title": "Supplements",
+      "why": "Information only: what the position statements show and where they end. No recommendation, no dose, no brand.",
+      "dopingTitle": "Anti-doping: please read first",
+      "doping": "Supplements can be contaminated with prohibited substances. If you are subject to testing, use only products independently tested for contaminants, and check every ingredient against the prohibited list. You are responsible for what you take.",
+      "links": {
+        "wada": "WADA Prohibited List",
+        "nada": "NADA Germany"
+      },
+      "note": "The strength is our reading of the position statements and not yet checked against the primary text. Not a substitute for medical or nutrition advice.",
+      "items": {
+        "caffeine": {
+          "name": "Caffeine",
+          "what": "Can improve endurance and short intense performance.",
+          "limits": "Effect and tolerance are individual. Taken late it can disturb sleep, gut symptoms are possible, and habitual intake changes the effect."
+        },
+        "creatine": {
+          "name": "Creatine",
+          "what": "Can improve repeated short, intense performance and the adaptation to strength training.",
+          "limits": "Can increase body mass — relevant for weight classes. The benefit for pure endurance performance is limited."
+        },
+        "bicarbonate": {
+          "name": "Sodium bicarbonate",
+          "what": "Can improve short, very intense efforts with high lactate production, with evidence from combat sports too.",
+          "limits": "Gut symptoms are common. Tolerance must be tested in training beforehand, never first in competition."
+        },
+        "beta_alanine": {
+          "name": "Beta-alanine",
+          "what": "Can improve performance in high-intensity efforts of roughly half a minute to ten minutes.",
+          "limits": "Skin tingling is common. The effect builds over weeks, not a day."
+        }
+      }
     }
   },
   "hrv": {

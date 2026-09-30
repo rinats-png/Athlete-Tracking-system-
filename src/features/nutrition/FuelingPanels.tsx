@@ -6,9 +6,10 @@ import { NumberField } from '@/components/ui/NumberField'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { FUEL_SOURCES } from '@/data/fuelRules'
+import { ANTI_DOPING_LINKS, SUPPLEMENTS } from '@/data/supplements'
 import { disciplineById } from '@/data/sportProfiles'
 import { fuelRuleFor, sportDailyNeed } from '@/domain/fuel'
-import { feelByBand, gutProfile, planFuel, sweatProfile, type SessionKind } from '@/domain/fuelPlan'
+import { contextNotes, feelByBand, gutProfile, planFuel, sweatProfile, type Conditions, type SessionKind, type Travel } from '@/domain/fuelPlan'
 import { pick } from '@/i18n/pick'
 import { bandPosition, dailyFuelNeed, recentFueling, weeklyWeightRate, type IntraBand } from '@/domain/fueling'
 import type { Macros } from '@/domain/nutrition'
@@ -31,6 +32,7 @@ export function FuelingPanels({ day, weightKg, totals }: { day: string; weightKg
       <FuelRulePanel weightKg={weightKg} />
       <FuelPlanPanel day={day} weightKg={weightKg} />
       <FuelProfilePanel day={day} />
+      <SupplementPanel />
       <FuelNeedPanel day={day} weightKg={weightKg} totals={totals} />
       <SessionFuelingPanel day={day} />
       <WeightBandPanel day={day} />
@@ -300,10 +302,13 @@ function FuelPlanPanel({ day, weightKg }: { day: string; weightKg: number | null
   const [durationMin, setDurationMin] = useState<number | null>(90)
   const [hoursToNext, setHoursToNext] = useState<number | null>(null)
   const [lossKg, setLossKg] = useState<number | null>(null)
+  const [conditions, setConditions] = useState<Conditions>('normal')
+  const [travel, setTravel] = useState<Travel>('none')
   const gut = useMemo(() => gutProfile(recentFueling(diary, day, 90)), [diary, day])
   if (!match) return null
   const plan = planFuel({ rule: match.rule, weightKg, durationMin: durationMin ?? 0, kind, hoursToNext, gutTroubleGPerH: gut?.troubleGPerH ?? null, lossKg })
   const { before, during, after } = plan
+  const notes = contextNotes(conditions, travel)
 
   return (
     <Panel className="mb-4" data-testid="fuel-plan">
@@ -319,6 +324,22 @@ function FuelPlanPanel({ day, weightKg }: { day: string; weightKg: number | null
         <NumberField label={t('fueling.plan.duration')} unit="min" value={durationMin} onChange={setDurationMin} min={5} max={1440} step={5} />
         <NumberField label={t('fueling.plan.hoursToNext')} unit="h" value={hoursToNext} onChange={setHoursToNext} min={0} max={168} step={1} />
         <NumberField label={t('fueling.plan.loss')} unit="kg" value={lossKg} onChange={setLossKg} min={0} max={10} step={0.1} />
+        <div role="group" aria-label={t('fueling.context.conditions')} className="flex flex-wrap items-center gap-2 sm:col-span-2">
+          <span className="label-tag">{t('fueling.context.conditions')}</span>
+          {(['normal', 'hot', 'cold'] as const).map((c) => (
+            <Button key={c} variant={conditions === c ? 'primary' : 'outline'} size="sm" aria-pressed={conditions === c} onClick={() => setConditions(c)}>
+              {t(`fueling.context.cond.${c}`)}
+            </Button>
+          ))}
+        </div>
+        <div role="group" aria-label={t('fueling.context.travel')} className="flex flex-wrap items-center gap-2 sm:col-span-2">
+          <span className="label-tag">{t('fueling.context.travel')}</span>
+          {(['none', 'trip', 'zones'] as const).map((c) => (
+            <Button key={c} variant={travel === c ? 'primary' : 'outline'} size="sm" aria-pressed={travel === c} onClick={() => setTravel(c)}>
+              {t(`fueling.context.trav.${c}`)}
+            </Button>
+          ))}
+        </div>
       </div>
       {durationMin != null && durationMin > 0 && (
         <div className="grid grid-cols-1 divide-y divide-line border-t border-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
@@ -379,6 +400,23 @@ function FuelPlanPanel({ day, weightKg }: { day: string; weightKg: number | null
           </section>
         </div>
       )}
+      {notes.length > 0 && (
+        <ul className="space-y-2 border-t border-line px-4 py-3 text-[13px] text-ink-secondary" data-testid="fuel-context">
+          {notes.map((n) => (
+            <li key={n.id} data-note={n.id}>
+              {t(`fueling.context.notes.${n.id}`)}
+              <span className="ml-2 inline-flex flex-wrap gap-1 align-middle">
+                {[t(`fueling.rule.evidence.strength.${n.evidence.strength}`), t(`fueling.rule.evidence.type.${n.evidence.type}`)].map((b) => (
+                  <span key={b} className="rounded-pill border border-line px-2 py-0.5 text-[10px] text-ink-muted">
+                    {b}
+                  </span>
+                ))}
+              </span>
+            </li>
+          ))}
+          <li className="text-[11px] text-ink-muted">{t('fueling.context.noNumbers')}</li>
+        </ul>
+      )}
       <ul className="space-y-1 border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">
         {plan.sourceIds.map((id) => (
           <li key={id}>{FUEL_SOURCES[id].citation}</li>
@@ -434,6 +472,66 @@ function FuelProfilePanel({ day }: { day: string }) {
         </ul>
       )}
       <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('fueling.profile.source')}</p>
+    </Panel>
+  )
+}
+
+/**
+ * Nahrungsergänzung: nur Information (docs/fuel.md, §5). Keine Empfehlung,
+ * keine Dosis, keine Marke, keine Rangliste. Die Anti-Doping-Warnung steht
+ * VOR den Karten und lässt sich nicht einklappen.
+ */
+function SupplementPanel() {
+  const { t } = useTranslation()
+  return (
+    <Panel className="mb-4" data-testid="fuel-supplements">
+      <PanelHeader title={t('fueling.supplements.title')} subtitle={t('fueling.supplements.why')} />
+      <div className="border-b border-line bg-accent-quiet px-4 py-3 text-[13px]" data-testid="fuel-doping">
+        <p className="font-medium">{t('fueling.supplements.dopingTitle')}</p>
+        <p className="mt-1 text-ink-secondary">{t('fueling.supplements.doping')}</p>
+        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px]">
+          {ANTI_DOPING_LINKS.map((l) => (
+            <a key={l.id} href={l.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
+              {t(`fueling.supplements.links.${l.id}`)}
+            </a>
+          ))}
+        </p>
+      </div>
+      <ul className="divide-y divide-line">
+        {SUPPLEMENTS.map((sup) => (
+          <li key={sup.id} className="space-y-1.5 px-4 py-3 text-[13px]" data-testid={`fuel-supp-${sup.id}`}>
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <span className="font-display text-[16px] font-bold uppercase tracking-[0.05em]">{t(`fueling.supplements.items.${sup.id}.name`)}</span>
+              <span className="flex flex-wrap gap-1.5">
+                {[t(`fueling.rule.evidence.strength.${sup.strength}`), t(`fueling.rule.evidence.type.${sup.type}`), t('fueling.rule.evidence.verification.not_reverified')].map((b) => (
+                  <span key={b} className="rounded-pill border border-line px-2.5 py-0.5 text-[11px] text-ink-secondary">
+                    {b}
+                  </span>
+                ))}
+              </span>
+            </div>
+            <p>{t(`fueling.supplements.items.${sup.id}.what`)}</p>
+            <p className="text-ink-secondary">{t(`fueling.supplements.items.${sup.id}.limits`)}</p>
+            <ul className="space-y-0.5 text-[11px] leading-relaxed text-ink-muted">
+              {sup.sourceIds.map((id) => {
+                const src = FUEL_SOURCES[id]
+                return (
+                  <li key={id}>
+                    {src.url ? (
+                      <a href={src.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
+                        {src.citation}
+                      </a>
+                    ) : (
+                      src.citation
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          </li>
+        ))}
+      </ul>
+      <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('fueling.supplements.note')}</p>
     </Panel>
   )
 }

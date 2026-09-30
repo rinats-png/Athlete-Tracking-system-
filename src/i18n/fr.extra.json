@@ -2044,6 +2044,63 @@
       "feelBelow": "en dessous : {{mean}} sur 5 ({{n}} séances)",
       "feelNote": "Descriptif : deux groupes avec une moyenne, pas une preuve de cause.",
       "source": "Déclarations et mesures de ton journal. Taux de sudation selon Sawka et al. (2007), évolution digestive selon Costa et al. (2017)."
+    },
+    "context": {
+      "conditions": "Conditions",
+      "travel": "Voyage",
+      "cond": {
+        "normal": "normales",
+        "hot": "chaudes",
+        "cold": "froides"
+      },
+      "trav": {
+        "none": "aucun",
+        "trip": "déplacement",
+        "zones": "avec changement de fuseau"
+      },
+      "noNumbers": "Ces remarques ne modifient aucune fourchette ci-dessus — les sources ne donnent pas de chiffres pour cela.",
+      "notes": {
+        "hot_sweat": "Par forte chaleur, le taux de sudation augmente en général. Une valeur issue de séances fraîches le sous-estime ; mesure dans des conditions similaires.",
+        "hot_fluid": "Bois bien avant, pendant la séance selon la soif — et pas plus que nécessaire. Une prise de masse corporelle pendant la séance est un signal d'alerte, aussi par forte chaleur.",
+        "hot_caffeine": "Caféine : l'effet et la tolérance dépendent de la chaleur et de l'habitude. Seulement ce que tu as testé le jour de la compétition.",
+        "cold_thirst": "Tu transpires aussi par temps froid, et la soif se manifeste souvent moins. Prévois des points de boisson au lieu d'attendre la soif.",
+        "trip_access": "Emporte ce que tu as testé en séance. Renseigne-toi sur place sur la nourriture et les boissons disponibles.",
+        "trip_arrival": "Si tu arrives peu avant le départ, décide à l'avance de l'alimentation et des boissons pour que le plan ne dépende pas de la disponibilité.",
+        "zones_timing": "Aligne tôt les repas et les boissons sur l'heure locale de la compétition."
+      }
+    },
+    "supplements": {
+      "title": "Compléments alimentaires",
+      "why": "Information seulement : ce que montrent les prises de position et où elles s'arrêtent. Ni recommandation, ni dose, ni marque.",
+      "dopingTitle": "Antidopage : à lire en premier",
+      "doping": "Les compléments peuvent être contaminés par des substances interdites. Si tu es soumis à des contrôles, ne prends que des produits testés de façon indépendante pour les contaminants et vérifie chaque substance dans la liste des interdictions. Tu es responsable de ce que tu prends.",
+      "links": {
+        "wada": "Liste des interdictions de l'AMA",
+        "nada": "NADA Allemagne"
+      },
+      "note": "Le niveau est notre lecture des prises de position, pas encore vérifiée sur le texte source. Ne remplace pas un avis médical ou nutritionnel.",
+      "items": {
+        "caffeine": {
+          "name": "Caféine",
+          "what": "Peut améliorer l'endurance et la performance intense de courte durée.",
+          "limits": "L'effet et la tolérance sont individuels. Prise tard, elle peut perturber le sommeil, des troubles digestifs sont possibles et une consommation habituelle modifie l'effet."
+        },
+        "creatine": {
+          "name": "Créatine",
+          "what": "Peut améliorer la performance répétée, courte et intense, et l'adaptation à la musculation.",
+          "limits": "Peut augmenter la masse corporelle — pertinent pour les catégories de poids. L'intérêt pour une pure performance d'endurance est limité."
+        },
+        "bicarbonate": {
+          "name": "Bicarbonate de sodium",
+          "what": "Peut améliorer les efforts courts et très intenses avec forte production de lactate, avec des données aussi issues des sports de combat.",
+          "limits": "Les troubles digestifs sont fréquents. La tolérance doit être testée à l'entraînement, jamais pour la première fois en compétition."
+        },
+        "beta_alanine": {
+          "name": "Bêta-alanine",
+          "what": "Peut améliorer la performance lors d'efforts intenses d'environ une demi-minute à dix minutes.",
+          "limits": "Des fourmillements de la peau sont fréquents. L'effet se construit sur des semaines, pas sur un jour."
+        }
+      }
     }
   },
   "hrv": {

@@ -96,7 +96,7 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
 |---|---|
 | 1 ✅ | Regelbasis: Evidenzobjekt, Sportgruppen, Ausdauer-Sportarten (Laufen 5–10 km, Marathon/Ultra, Radfahren, Schwimmen, Triathlon kurz und lang, Rudern). Protein auf 1,6–2,2 samt Quelle in Formelregister und Texten aller Sprachen. Vorhandenes Fueling darauf umgestellt. |
 | 2 ✅ | Plan je Einheit und Wettkampftag (Vorher / Währenddessen / Nachher), Aufladen, Schweissrate und Magen-Darm-Grenze sichtbar, Rückmeldung nach der Einheit. |
-| 3 | Hitze, Höhe, Reise als Modifikatoren; Supplement-Informationsseite. |
+| 3 ✅ | Hitze, Höhe, Reise als Modifikatoren; Supplement-Informationsseite. |
 | 4 | Kampfsport (G6) und Teamsport: Turniertag-Planer für Zwischenkämpfe, mit Hinweistext aus §4. |
 
 ## 8. Offen
@@ -113,6 +113,14 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
   Bewusst nicht: Trinkmenge in ml/h als Zahl (die Vorlage nennt nur «individuell, nie
   vollständiger Ersatz»), Natriumziele (keine belastbaren Schweissdaten), Ausgleich
   nur aus gemessenem Verlust.
+- **Stufe 3 gebaut (30.09.2026):** Bedingungen (normal, heiss, kalt) und Reise (Anreise,
+  Zeitzonenwechsel) in der Plan-Karte liefern **Hinweise, keine Rechenfaktoren**: die Vorlage
+  nennt dafür keine Zahlen, also ändert sich keine Spanne (`src/data/fuelContext.ts`; Hinweise
+  ohne Konsensuspapier tragen «expert / low»). **Höhe:** die Vorlage nennt nur die Variable
+  `altitude_m` und keine Regel — deshalb nichts. Supplement-Informationsseite
+  (`src/data/supplements.ts`): Koffein, Kreatin, Bikarbonat, Beta-Alanin, Anti-Doping-Warnung
+  vor der Liste, Links zu WADA und NADA Deutschland, keine Dosis, keine Marke. Die Stärken
+  (hoch/mittel) sind unsere Einordnung der ISSN-Positionspapiere, nicht am Primärtext geprüft.
 - Morton et al. (2018) ist eine Meta-Analyse zu **Krafttraining**. Für Ausdauer
   ist 1,6–2,2 g/kg damit übertragen; das Abzeichen zeigt «Übertragen» nur, wenn die
   Regel so gekennzeichnet ist — für die Proteinspanne fehlt noch ein eigenes

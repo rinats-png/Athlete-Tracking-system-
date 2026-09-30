@@ -2044,6 +2044,63 @@
       "feelBelow": "eronder: {{mean}} van 5 ({{n}} trainingen)",
       "feelNote": "Beschrijvend: twee groepen met een gemiddelde, geen bewijs voor een oorzaak.",
       "source": "Zelfrapportage en metingen uit je dagboek. Zweetverlies volgens Sawka et al. (2007), darmverloop volgens Costa et al. (2017)."
+    },
+    "context": {
+      "conditions": "Omstandigheden",
+      "travel": "Reis",
+      "cond": {
+        "normal": "normaal",
+        "hot": "heet",
+        "cold": "koud"
+      },
+      "trav": {
+        "none": "geen",
+        "trip": "reis",
+        "zones": "met tijdzoneverschil"
+      },
+      "noNumbers": "Deze opmerkingen wijzigen geen bereik hierboven — de bronnen geven daarvoor geen getallen.",
+      "notes": {
+        "hot_sweat": "Bij hitte stijgt het zweetverlies meestal. Een waarde uit koele trainingen onderschat het; meet onder vergelijkbare omstandigheden.",
+        "hot_fluid": "Drink vooraf goed, tijdens de training naar dorst — en niet meer dan nodig. Lichaamsmassa erbij tijdens de training is ook bij hitte een waarschuwing.",
+        "hot_caffeine": "Cafeïne: effect en verdraagzaamheid hangen af van hitte en gewenning. Alleen wat je hebt uitgeprobeerd op wedstrijddag.",
+        "cold_thirst": "Ook in de kou zweet je, en dorst meldt zich vaak zwakker. Plan drinkmomenten in in plaats van op dorst te wachten.",
+        "trip_access": "Neem mee wat je in trainingen hebt uitgeprobeerd. Zoek ter plaatse uit welk eten en drinken er is.",
+        "trip_arrival": "Kom je vlak voor de start aan, leg eten en drinken dan vooraf vast zodat het plan niet van beschikbaarheid afhangt.",
+        "zones_timing": "Stem maaltijden en drinken vroeg af op de lokale tijd van de wedstrijd."
+      }
+    },
+    "supplements": {
+      "title": "Supplementen",
+      "why": "Alleen informatie: wat de standpuntbepalingen laten zien en waar ze ophouden. Geen aanbeveling, geen dosis, geen merk.",
+      "dopingTitle": "Antidoping: eerst lezen",
+      "doping": "Supplementen kunnen verontreinigd zijn met verboden stoffen. Word je gecontroleerd, gebruik dan alleen producten die onafhankelijk op verontreiniging zijn getest en controleer elke stof aan de hand van de verbodslijst. Je bent zelf verantwoordelijk voor wat je inneemt.",
+      "links": {
+        "wada": "Verbodslijst van WADA",
+        "nada": "NADA Duitsland"
+      },
+      "note": "De sterkte is onze lezing van de standpuntbepalingen en nog niet aan de brontekst gecontroleerd. Geen vervanging van medisch of voedingsadvies.",
+      "items": {
+        "caffeine": {
+          "name": "Cafeïne",
+          "what": "Kan uithoudingsvermogen en korte intensieve prestaties verbeteren.",
+          "limits": "Effect en verdraagzaamheid zijn individueel. Laat ingenomen kan het de slaap verstoren, maag-darmklachten zijn mogelijk en gewoonte verandert het effect."
+        },
+        "creatine": {
+          "name": "Creatine",
+          "what": "Kan herhaalde korte, intensieve prestaties en de aanpassing aan krachttraining verbeteren.",
+          "limits": "Kan de lichaamsmassa verhogen — relevant bij gewichtsklassen. Voor pure duurprestaties is het voordeel beperkt."
+        },
+        "bicarbonate": {
+          "name": "Natriumbicarbonaat",
+          "what": "Kan korte, zeer intensieve inspanningen met hoge lactaatproductie verbeteren, ook met bewijs uit vechtsporten.",
+          "limits": "Maag-darmklachten komen vaak voor. De verdraagzaamheid moet vooraf in training worden getest, nooit voor het eerst in een wedstrijd."
+        },
+        "beta_alanine": {
+          "name": "Bèta-alanine",
+          "what": "Kan prestaties bij zeer intensieve inspanningen van ongeveer een halve tot tien minuten verbeteren.",
+          "limits": "Tintelingen van de huid komen vaak voor. Het effect bouwt zich over weken op, niet in één dag."
+        }
+      }
     }
   },
   "hrv": {

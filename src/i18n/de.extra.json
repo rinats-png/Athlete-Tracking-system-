@@ -2044,6 +2044,63 @@
       "feelBelow": "darunter: {{mean}} von 5 ({{n}} Einheiten)",
       "feelNote": "Beschreibend: zwei Gruppen mit Mittelwert, kein Beleg für eine Ursache.",
       "source": "Selbstauskunft und Messwerte aus deinem Tagebuch. Schweissrate nach Sawka et al. (2007), Magen-Darm-Verlauf nach Costa et al. (2017)."
+    },
+    "context": {
+      "conditions": "Bedingungen",
+      "travel": "Reise",
+      "cond": {
+        "normal": "normal",
+        "hot": "heiss",
+        "cold": "kalt"
+      },
+      "trav": {
+        "none": "keine",
+        "trip": "Anreise",
+        "zones": "mit Zeitzonenwechsel"
+      },
+      "noNumbers": "Diese Hinweise ändern keine Spanne oben — dafür nennt die Quellenlage keine Zahlen.",
+      "notes": {
+        "hot_sweat": "Bei Hitze steigt die Schweissrate meist. Ein Wert aus kühlen Einheiten unterschätzt sie; miss unter ähnlichen Bedingungen.",
+        "hot_fluid": "Vorher gut trinken, während der Einheit nach Durst — und nicht mehr als nötig. Ein Körpermassegewinn in der Einheit ist auch bei Hitze ein Warnzeichen.",
+        "hot_caffeine": "Koffein: Wirkung und Verträglichkeit hängen von Hitze und Gewöhnung ab. Nur Erprobtes am Wettkampftag.",
+        "cold_thirst": "Auch in der Kälte schwitzt du, und der Durst meldet sich oft schwächer. Trinkpunkte einplanen, statt auf Durst zu warten.",
+        "trip_access": "Was du in Einheiten erprobt hast, mitnehmen. Vor Ort klären, was es an Essen und Getränken gibt.",
+        "trip_arrival": "Bei Anreise kurz vor dem Start Essen und Trinken vorher festlegen, damit der Plan nicht an der Verfügbarkeit hängt.",
+        "zones_timing": "Mahlzeiten und Trinken früh an die Ortszeit des Wettkampfs anlehnen."
+      }
+    },
+    "supplements": {
+      "title": "Nahrungsergänzung",
+      "why": "Nur Information: was die Positionspapiere belegen und wo sie enden. Keine Empfehlung, keine Dosis, keine Marke.",
+      "dopingTitle": "Anti-Doping: bitte zuerst lesen",
+      "doping": "Nahrungsergänzung kann mit verbotenen Stoffen verunreinigt sein. Wenn du Kontrollen unterliegst, nimm nur Produkte, die unabhängig auf Verunreinigungen geprüft sind, und prüfe jeden Wirkstoff gegen die Verbotsliste. Du bist selbst verantwortlich für das, was du einnimmst.",
+      "links": {
+        "wada": "Verbotsliste der WADA",
+        "nada": "NADA Deutschland"
+      },
+      "note": "Die Stärke ist unsere Einordnung der Positionspapiere und noch nicht am Primärtext geprüft. Kein Ersatz für ärztliche oder ernährungsfachliche Beratung.",
+      "items": {
+        "caffeine": {
+          "name": "Koffein",
+          "what": "Kann Ausdauer und kurze intensive Leistung verbessern.",
+          "limits": "Wirkung und Verträglichkeit sind individuell. Spät genommen kann es den Schlaf stören, Magen-Darm-Beschwerden sind möglich, und gewohnter Konsum verändert die Wirkung."
+        },
+        "creatine": {
+          "name": "Kreatin",
+          "what": "Kann wiederholte kurze, intensive Leistung und die Anpassung an Krafttraining verbessern.",
+          "limits": "Kann die Körpermasse erhöhen — bei Gewichtsklassen relevant. Für reine Ausdauerleistung ist der Nutzen begrenzt."
+        },
+        "bicarbonate": {
+          "name": "Natriumbikarbonat",
+          "what": "Kann kurze, sehr intensive Leistungen mit hoher Laktatbildung verbessern, auch mit Belegen aus dem Kampfsport.",
+          "limits": "Magen-Darm-Beschwerden sind häufig. Die Verträglichkeit muss vorher im Training geprüft werden, nie erst im Wettkampf."
+        },
+        "beta_alanine": {
+          "name": "Beta-Alanin",
+          "what": "Kann Leistung bei hochintensiven Belastungen von etwa einer halben bis zehn Minuten verbessern.",
+          "limits": "Kribbeln der Haut ist häufig. Die Wirkung baut sich über Wochen auf, nicht über einen Tag."
+        }
+      }
     }
   },
   "hrv": {

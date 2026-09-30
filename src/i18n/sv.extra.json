@@ -2044,6 +2044,63 @@
       "feelBelow": "under: {{mean}} av 5 ({{n}} pass)",
       "feelNote": "Beskrivande: två grupper med medelvärde, inget bevis för orsak.",
       "source": "Självrapportering och mätvärden från din dagbok. Svettmängd enligt Sawka et al. (2007), magförlopp enligt Costa et al. (2017)."
+    },
+    "context": {
+      "conditions": "Förhållanden",
+      "travel": "Resa",
+      "cond": {
+        "normal": "normala",
+        "hot": "varma",
+        "cold": "kalla"
+      },
+      "trav": {
+        "none": "ingen",
+        "trip": "resa",
+        "zones": "med tidszonsbyte"
+      },
+      "noNumbers": "Dessa anteckningar ändrar inget intervall ovan — underlaget ger inga siffror för det.",
+      "notes": {
+        "hot_sweat": "I värme stiger svettmängden oftast. Ett värde från svala pass underskattar den; mät under liknande förhållanden.",
+        "hot_fluid": "Drick bra före, under passet efter törst — och inte mer än nödvändigt. Viktökning under passet är en varningssignal även i värme.",
+        "hot_caffeine": "Koffein: effekt och tolerans beror på värme och vana. Bara sådant du har provat på tävlingsdagen.",
+        "cold_thirst": "Du svettas även i kyla, och törsten märks ofta svagare. Planera dryckespunkter i stället för att vänta på törst.",
+        "trip_access": "Ta med det du har provat på passen. Ta reda på vad som finns att äta och dricka på plats.",
+        "trip_arrival": "Kommer du strax före start, bestäm mat och dryck i förväg så att planen inte hänger på tillgången.",
+        "zones_timing": "Lägg måltider och dryck tidigt efter tävlingsplatsens lokala tid."
+      }
+    },
+    "supplements": {
+      "title": "Kosttillskott",
+      "why": "Endast information: vad ståndpunktsdokumenten visar och var de tar slut. Ingen rekommendation, ingen dos, inget märke.",
+      "dopingTitle": "Antidoping: läs detta först",
+      "doping": "Kosttillskott kan vara förorenade med förbjudna ämnen. Om du kan bli kontrollerad, ta bara produkter som är oberoende testade för föroreningar och kontrollera varje ämne mot förbudslistan. Du ansvarar själv för vad du tar.",
+      "links": {
+        "wada": "WADA:s förbudslista",
+        "nada": "NADA Tyskland"
+      },
+      "note": "Styrkan är vår tolkning av ståndpunktsdokumenten och ännu inte kontrollerad mot originaltexten. Ersätter inte medicinsk rådgivning eller kostrådgivning.",
+      "items": {
+        "caffeine": {
+          "name": "Koffein",
+          "what": "Kan förbättra uthållighet och kort intensiv prestation.",
+          "limits": "Effekt och tolerans är individuella. Taget sent kan det störa sömnen, magbesvär är möjliga och van konsumtion ändrar effekten."
+        },
+        "creatine": {
+          "name": "Kreatin",
+          "what": "Kan förbättra upprepad kort, intensiv prestation och anpassningen till styrketräning.",
+          "limits": "Kan öka kroppsvikten — relevant för viktklasser. Nyttan för ren uthållighet är begränsad."
+        },
+        "bicarbonate": {
+          "name": "Natriumbikarbonat",
+          "what": "Kan förbättra korta, mycket intensiva ansträngningar med hög laktatbildning, även med belägg från kampsport.",
+          "limits": "Magbesvär är vanliga. Toleransen måste provas i träning i förväg, aldrig första gången på tävling."
+        },
+        "beta_alanine": {
+          "name": "Beta-alanin",
+          "what": "Kan förbättra prestationen vid högintensiva ansträngningar på ungefär en halv till tio minuter.",
+          "limits": "Stickningar i huden är vanliga. Effekten byggs upp över veckor, inte över en dag."
+        }
+      }
     }
   },
   "hrv": {

@@ -2044,6 +2044,63 @@
       "feelBelow": "por debajo: {{mean}} de 5 ({{n}} sesiones)",
       "feelNote": "Descriptivo: dos grupos con una media, no prueba de una causa.",
       "source": "Autoinforme y mediciones de tu diario. Tasa de sudoración según Sawka et al. (2007), evolución digestiva según Costa et al. (2017)."
+    },
+    "context": {
+      "conditions": "Condiciones",
+      "travel": "Viaje",
+      "cond": {
+        "normal": "normales",
+        "hot": "calor",
+        "cold": "frío"
+      },
+      "trav": {
+        "none": "ninguno",
+        "trip": "desplazamiento",
+        "zones": "con cambio de huso horario"
+      },
+      "noNumbers": "Estas notas no cambian ningún rango de arriba — las fuentes no dan cifras para ello.",
+      "notes": {
+        "hot_sweat": "Con calor la tasa de sudoración suele subir. Un valor de sesiones frescas la subestima; mídela en condiciones parecidas.",
+        "hot_fluid": "Bebe bien antes, durante la sesión según la sed — y no más de lo necesario. Ganar masa corporal durante la sesión es una señal de alerta también con calor.",
+        "hot_caffeine": "Cafeína: el efecto y la tolerancia dependen del calor y de la costumbre. Solo lo que has probado el día de la competición.",
+        "cold_thirst": "También sudas con frío y la sed suele notarse menos. Planifica puntos de bebida en lugar de esperar a la sed.",
+        "trip_access": "Lleva lo que has probado en las sesiones. Averigua allí qué comida y bebida hay.",
+        "trip_arrival": "Si llegas poco antes de la salida, decide antes la comida y la bebida para que el plan no dependa de la disponibilidad.",
+        "zones_timing": "Ajusta pronto las comidas y las bebidas a la hora local de la competición."
+      }
+    },
+    "supplements": {
+      "title": "Suplementos",
+      "why": "Solo información: qué muestran los documentos de posición y dónde terminan. Sin recomendación, sin dosis, sin marca.",
+      "dopingTitle": "Antidopaje: léelo primero",
+      "doping": "Los suplementos pueden estar contaminados con sustancias prohibidas. Si estás sujeto a controles, usa solo productos analizados de forma independiente en busca de contaminantes y comprueba cada sustancia con la lista de prohibidas. Eres responsable de lo que tomas.",
+      "links": {
+        "wada": "Lista de prohibidas de la AMA",
+        "nada": "NADA Alemania"
+      },
+      "note": "El nivel es nuestra lectura de los documentos de posición y aún no está comprobado en el texto original. No sustituye el consejo médico o nutricional.",
+      "items": {
+        "caffeine": {
+          "name": "Cafeína",
+          "what": "Puede mejorar la resistencia y el rendimiento intenso de corta duración.",
+          "limits": "El efecto y la tolerancia son individuales. Tomada tarde puede alterar el sueño, son posibles molestias digestivas y el consumo habitual cambia el efecto."
+        },
+        "creatine": {
+          "name": "Creatina",
+          "what": "Puede mejorar el rendimiento repetido, corto e intenso y la adaptación al entrenamiento de fuerza.",
+          "limits": "Puede aumentar la masa corporal — relevante en categorías de peso. El beneficio para el rendimiento de resistencia pura es limitado."
+        },
+        "bicarbonate": {
+          "name": "Bicarbonato de sodio",
+          "what": "Puede mejorar esfuerzos cortos y muy intensos con alta producción de lactato, con datos también de deportes de combate.",
+          "limits": "Las molestias digestivas son frecuentes. La tolerancia debe probarse antes en el entrenamiento, nunca por primera vez en competición."
+        },
+        "beta_alanine": {
+          "name": "Beta-alanina",
+          "what": "Puede mejorar el rendimiento en esfuerzos de alta intensidad de aproximadamente medio minuto a diez minutos.",
+          "limits": "El hormigueo de la piel es frecuente. El efecto se construye durante semanas, no en un día."
+        }
+      }
     }
   },
   "hrv": {

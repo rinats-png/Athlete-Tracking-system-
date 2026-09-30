@@ -74,6 +74,31 @@ export const FUEL_SOURCES: Record<string, FuelSource> = {
     citation: 'Hew-Butler et al. (2015). Statement of the Third International Exercise-Associated Hyponatremia Consensus Development Conference. Clin J Sport Med 25(4):303–320',
     url: 'https://doi.org/10.1097/JSM.0000000000000221',
   },
+  guest2021: {
+    id: 'guest2021',
+    citation: 'Guest et al. (2021). International society of sports nutrition position stand: caffeine and exercise performance. J Int Soc Sports Nutr 18:1',
+    url: 'https://doi.org/10.1186/s12970-020-00383-4',
+  },
+  kreider2017: {
+    id: 'kreider2017',
+    citation: 'Kreider et al. (2017). International Society of Sports Nutrition position stand: safety and efficacy of creatine supplementation in exercise, sport, and medicine. J Int Soc Sports Nutr 14:18',
+    url: 'https://pubmed.ncbi.nlm.nih.gov/28615996/',
+  },
+  grgic2021: {
+    id: 'grgic2021',
+    citation: 'Grgic et al. (2021). International Society of Sports Nutrition position stand: sodium bicarbonate and exercise performance. J Int Soc Sports Nutr 18:61',
+    url: 'https://doi.org/10.1186/s12970-021-00458-w',
+  },
+  trexler2015: {
+    id: 'trexler2015',
+    citation: 'Trexler et al. (2015). International Society of Sports Nutrition position stand: beta-alanine. J Int Soc Sports Nutr 12:30',
+    url: 'https://pubmed.ncbi.nlm.nih.gov/26175657/',
+  },
+  maughan2018: {
+    id: 'maughan2018',
+    citation: 'Maughan et al. (2018). IOC consensus statement: dietary supplements and the high-performance athlete. Br J Sports Med 52:439–455',
+    url: 'https://pubmed.ncbi.nlm.nih.gov/29540367/',
+  },
   costa2017: {
     id: 'costa2017',
     citation: 'Costa et al. (2017). Systematic review: exercise-induced gastrointestinal syndrome — implications for health and intestinal disease. Aliment Pharmacol Ther 46(3):246–265',
