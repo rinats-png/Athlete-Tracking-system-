@@ -2,6 +2,7 @@
 // keine Importe und läuft damit fertig, bevor `./i18n` seinen Sprachschlüssel
 // liest. Die Position ist Teil der Korrektheit — siehe die Datei selbst.
 import './lib/store/migrateStorage'
+import { initWhatsNew } from './features/whatsNew/whatsNewState'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 // Schriften lokal gebündelt statt von Google Fonts geladen.
@@ -24,6 +25,8 @@ import { installErrorCapture } from './lib/errorCapture'
 import { ThemeProvider } from './lib/theme'
 import App from './App'
 
+// Erststart erkennen, bevor irgendetwas Bestand anlegt: wer neu ist, sieht keine «Neuerungen».
+initWhatsNew()
 // Muss vor dem Rendern laufen: die Registrierung soll nicht auf React warten.
 setupPwaUpdates()
 // Eigene Fehlererfassung — schickt nur mit Einwilligung (lib/errorCapture.ts).

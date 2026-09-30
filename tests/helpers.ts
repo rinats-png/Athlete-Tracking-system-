@@ -44,6 +44,10 @@ async function resetState(page: Page) {
     // sie durch jeden der ~2400 Faelle zu klicken wuerde nur Zeit kosten,
     // ohne etwas zu belegen. Der eigene Fall dafuer geht durch das Tor.
     localStorage.setItem('kydon.account.v1', JSON.stringify(account))
+    // «Neu bei KYDON» ist ein Hinweis für Menschen nach einem Update; ein
+    // Prüflauf mit vorbelegtem Bestand sähe es sonst in jedem Fall. Der eigene
+    // Fall (whatsNew.spec.ts) setzt die Marke zurück und prüft das Fenster.
+    localStorage.setItem('kydon.whatsnew.seen', '9999-12-31')
     localStorage.setItem('kydon.data.v1', JSON.stringify(store))
   }, { store: seeded, account: SEEDED_ACCOUNT })
   await page.reload({ waitUntil: 'domcontentloaded' })

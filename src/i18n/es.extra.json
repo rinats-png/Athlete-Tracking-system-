@@ -2202,5 +2202,21 @@
     "savedNote": "Banda pectoral, {{seconds}} s analizados, {{artifacts}} % de artefactos",
     "eyebrow": "Banda pectoral",
     "measuring": "Midiendo"
+  },
+  "whatsNew": {
+    "eyebrow": "Novedades",
+    "title": "Novedades en KYDON:",
+    "close": "Entendido",
+    "items": {
+      "design": "Nuevo diseño: tarjetas de cristal esmerilado con niveles, cifras mono para los valores medidos y transiciones más calmadas — claro y oscuro.",
+      "tests": "Biblioteca de pruebas según el protocolo 1.0: 126 pruebas en 29 áreas, cada una con objetivo, montaje, pasos y valoración.",
+      "images": "Fotos de los montajes de las pruebas en las descripciones en lugar de bocetos.",
+      "fuel": "Nuevo en la alimentación — Fuel: la regla de tu disciplina (resistencia, deportes de combate, deportes de equipo) con fuentes e insignias de evidencia, un plan para una sesión y para la competición, tu tasa de sudoración y tu límite digestivo.",
+      "tournament": "Planificador de jornada de torneo para deportes de combate: comida y líquido entre combates.",
+      "supplements": "Página informativa sobre suplementos con evidencia, enlaces a las fuentes y aviso antidopaje — sin dosis ni marcas.",
+      "energy": "Diario: nuevo campo «Energía durante la sesión» (1–5) junto a la alimentación y las molestias digestivas.",
+      "protein": "Rango de proteína ahora 1,6–2,2 g/kg al día (antes 1,2–2,0).",
+      "pro": "La alimentación y Fuel forman parte de Pro."
+    }
   }
 }

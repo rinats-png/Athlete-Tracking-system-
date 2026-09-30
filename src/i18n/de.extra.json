@@ -2202,5 +2202,21 @@
       "broadcastNoRr": "Die Uhr sendet nur den Puls, keine Schlagabstände."
     },
     "noAdvice": "Die HRV wird nur gegen deine eigene Bandbreite gelesen. Sie ist kein Befund und keine Trainingsfreigabe."
+  },
+  "whatsNew": {
+    "eyebrow": "Was ist neu",
+    "title": "Neu bei KYDON:",
+    "close": "Verstanden",
+    "items": {
+      "design": "Neues Design: Milchglas-Karten mit Ebenen, Mono-Ziffern für Messwerte und ruhigere Übergänge — hell und dunkel.",
+      "tests": "Testbibliothek nach Protokoll 1.0: 126 Tests in 29 Bereichen, jeder mit Ziel, Aufbau, Schritten und Bewertung.",
+      "images": "Fotos der Testaufbauten in den Beschreibungen statt Skizzen.",
+      "fuel": "Neu in der Ernährung — Fuel: die Regel deiner Disziplin (Ausdauer, Kampfsport, Teamsport) mit Quellen und Evidenzabzeichen, Plan für Einheit und Wettkampf, deine Schweißrate und Magen-Darm-Grenze.",
+      "tournament": "Turniertag-Planer für Kampfsport: Verpflegung und Flüssigkeit zwischen den Kämpfen.",
+      "supplements": "Informationsseite zu Nahrungsergänzung mit Evidenz, Quellenlinks und Anti-Doping-Hinweis — ohne Dosierung und ohne Marken.",
+      "energy": "Tagebuch: neues Feld „Energie in der Einheit“ (1–5) neben Verpflegung und Magen-Darm.",
+      "protein": "Proteinspanne jetzt 1,6–2,2 g/kg und Tag (bisher 1,2–2,0).",
+      "pro": "Ernährung und Fuel gehören zu Pro."
+    }
   }
 }

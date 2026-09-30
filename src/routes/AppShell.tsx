@@ -10,6 +10,7 @@ import { usePageTracking } from '@/features/shared/usePageTracking'
 import { AnalyticsConsentStrip } from '@/features/shared/AnalyticsConsent'
 import { AdminBar } from '@/features/admin/AdminLink'
 import { usePushDueSync } from '@/features/push/usePushDueSync'
+import { WhatsNewDialog } from '@/features/whatsNew/WhatsNewDialog'
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -71,6 +72,7 @@ export function AppShell() {
         <Outlet />
       </main>
 
+      <WhatsNewDialog />
       <ActionOrb />
       <BottomNav active={active} onNavigate={(key) => navigate(pathForNavKey(key))} />
     </div>

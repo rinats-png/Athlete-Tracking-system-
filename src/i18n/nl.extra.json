@@ -2202,5 +2202,21 @@
     "savedNote": "Borstband, {{seconds}} s geanalyseerd, {{artifacts}} % artefacten",
     "eyebrow": "Borstband",
     "measuring": "Meten"
+  },
+  "whatsNew": {
+    "eyebrow": "Wat is er nieuw",
+    "title": "Nieuw bij KYDON:",
+    "close": "Begrepen",
+    "items": {
+      "design": "Nieuw ontwerp: matglazen kaarten met lagen, monocijfers voor meetwaarden en rustigere overgangen — licht en donker.",
+      "tests": "Testbibliotheek volgens protocol 1.0: 126 tests in 29 gebieden, elk met doel, opstelling, stappen en beoordeling.",
+      "images": "Foto’s van de testopstellingen in de beschrijvingen in plaats van schetsen.",
+      "fuel": "Nieuw in voeding — Fuel: de regel voor jouw discipline (uithouding, vechtsport, teamsport) met bronnen en bewijsbadges, een plan voor een training en voor wedstrijd, jouw zweetverlies en darmgrens.",
+      "tournament": "Toernooidagplanner voor vechtsport: eten en vocht tussen de gevechten.",
+      "supplements": "Informatiepagina over supplementen met bewijs, bronlinks en antidopingwaarschuwing — zonder dosering en zonder merken.",
+      "energy": "Dagboek: nieuw veld “Energie tijdens de training” (1–5) naast voeding en maag-darmklachten.",
+      "protein": "Eiwitbereik nu 1,6–2,2 g/kg per dag (eerder 1,2–2,0).",
+      "pro": "Voeding en Fuel horen bij Pro."
+    }
   }
 }
