@@ -1899,7 +1899,10 @@
       "gi": "Maag-darmklachten",
       "giNone": "geen",
       "giStrong": "sterk",
-      "why": "Uit koolhydraten en duur volgt de inname per uur, uit de massa vooraf en achteraf de zweetsnelheid. Alles optioneel."
+      "why": "Uit koolhydraten en duur volgt de inname per uur, uit de massa vooraf en achteraf de zweetsnelheid. Alles optioneel.",
+      "feel": "Energie tijdens de training",
+      "feelLow": "leeg",
+      "feelHigh": "vol"
     },
     "level": {
       "light": "licht",
@@ -1929,7 +1932,8 @@
       "sweat": "Zweetsnelheid {{rate}} l/h, massaverlies {{loss}} %",
       "lossAbove2": "meer dan 2 % van de lichaamsmassa",
       "gi": "Maag-darm {{score}} van 3",
-      "source": "Bereiken volgens Thomas et al. (2016) en Jeukendrup (2014); 90 g/h veronderstelt glucose-fructosemengsels en gewenning. Zweetsnelheid en de 2-%-grens volgens Sawka et al. (2007, ACSM). Urine en ademvocht zijn niet afgetrokken."
+      "source": "Bereiken volgens Thomas et al. (2016) en Jeukendrup (2014); 90 g/h veronderstelt glucose-fructosemengsels en gewenning. Zweetsnelheid en de 2-%-grens volgens Sawka et al. (2007, ACSM). Urine en ademvocht zijn niet afgetrokken.",
+      "feel": "Energie tijdens de training: {{score}} van 5"
     },
     "weight": {
       "title": "Gewichtsband",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Nog niet aan de brontekst gecontroleerd"
         }
       }
+    },
+    "plan": {
+      "title": "Plan voor een training",
+      "why": "Uit je discipline, de duur en je eigen waarden. Er wordt niets opgeslagen.",
+      "kind": "Soort",
+      "kinds": {
+        "training": "Training",
+        "race": "Wedstrijd"
+      },
+      "duration": "Duur",
+      "hoursToNext": "Uren tot de volgende training (optioneel)",
+      "loss": "Gemeten verlies van lichaamsmassa (optioneel)",
+      "before": "Ervoor",
+      "during": "Tijdens",
+      "after": "Erna",
+      "preCarbs": "Koolhydraten, 1–4 uur ervoor",
+      "preFluid": "Vocht, 2–4 uur ervoor",
+      "load": "Laden: {{perKg}} g/kg per dag ({{g}} g) gedurende {{hours}} uur ervoor, zonder uitputtingsfase.",
+      "loadNotNeeded": "Laden is bij een race tot 90 minuten niet nodig.",
+      "gutCap": "Je had klachten vanaf {{value}} g/u — de bovengrens ligt daarom daar.",
+      "mix": "Vanaf 60 g/u heeft de darm meerdere soorten koolhydraten en gewenning nodig. 90–120 g/u alleen na darmtraining, nooit als standaard.",
+      "fluidDuring": "Vocht naar dorst en je zweetverlies, zonder alles te willen aanvullen. Lichaamsmassa erbij tijdens de training is een waarschuwing.",
+      "rapid": "Snelle aanvulling, omdat de volgende training binnen 8 uur is",
+      "noRapid": "8 uur of meer tot de volgende training: normale maaltijden binnen je dagbereik volstaan.",
+      "proteinMeal": "Eiwit per maaltijd (0,3 g/kg)",
+      "rehydrate": "Aanvulling van het gemeten verlies (125–150 %), over meerdere uren",
+      "note": "Een bereik uit consensusdocumenten, geen doel. Geen richtlijn voor gewichtsklassen of gewichtsverlies."
+    },
+    "profile": {
+      "title": "Jouw waarden",
+      "empty": "Nog geen waarden. Leg in trainingen de voeding, de massa ervoor en erna en klachten vast — dan verschijnen ze hier.",
+      "why": "Uit je trainingen van de laatste 90 dagen.",
+      "sweat": "Zweetverlies",
+      "median": "midden {{value}} l/u",
+      "sweatN": "{{n}} metingen. Urine en ademwater zijn niet afgetrokken.",
+      "gut": "Darmgrens",
+      "tolerated": "Verdragen tot {{value}} g/u",
+      "trouble": "Klachten vanaf {{value}} g/u",
+      "gutN": "Uit {{n}} trainingen van 45 minuten of langer met inname en klachtenscore.",
+      "feel": "Energie naar inname",
+      "feelWithin": "binnen het bereik: {{mean}} van 5 ({{n}} trainingen)",
+      "feelBelow": "eronder: {{mean}} van 5 ({{n}} trainingen)",
+      "feelNote": "Beschrijvend: twee groepen met een gemiddelde, geen bewijs voor een oorzaak.",
+      "source": "Zelfrapportage en metingen uit je dagboek. Zweetverlies volgens Sawka et al. (2007), darmverloop volgens Costa et al. (2017)."
     }
   },
   "hrv": {

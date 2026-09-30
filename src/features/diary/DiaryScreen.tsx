@@ -79,7 +79,7 @@ export function DiaryScreen() {
   const [rpe, setRpe] = useState<number | null>(null)
   // Verpflegung der Einheit — freiwillig, nur mit dem Merkmal Ernährung.
   const [fuelOpen, setFuelOpen] = useState(false)
-  const [fuel, setFuel] = useState<Pick<StoredDiarySession, 'carbsG' | 'fluidMl' | 'giScore' | 'massBeforeKg' | 'massAfterKg'>>({})
+  const [fuel, setFuel] = useState<Pick<StoredDiarySession, 'carbsG' | 'fluidMl' | 'giScore' | 'massBeforeKg' | 'massAfterKg' | 'energyFeel'>>({})
   const canFuel = billing.can('nutrition')
 
   const patch = (p: Parameters<typeof saveDiaryEntry>[1]) => saveDiaryEntry(day, p)
@@ -326,6 +326,16 @@ export function DiaryScreen() {
                         max={3}
                         lowLabel={t('fueling.form.giNone')}
                         highLabel={t('fueling.form.giStrong')}
+                        className="sm:col-span-2"
+                      />
+                      <TapScale
+                        label={t('fueling.form.feel')}
+                        value={fuel.energyFeel ?? null}
+                        onChange={(v) => setFuel((f) => ({ ...f, energyFeel: v }))}
+                        min={1}
+                        max={5}
+                        lowLabel={t('fueling.form.feelLow')}
+                        highLabel={t('fueling.form.feelHigh')}
                         className="sm:col-span-2"
                       />
                       <p className="text-[11px] text-ink-muted sm:col-span-2">{t('fueling.form.why')}</p>

@@ -1899,7 +1899,10 @@
       "gi": "Molestias gastrointestinales",
       "giNone": "ninguna",
       "giStrong": "fuertes",
-      "why": "De los hidratos de carbono y la duración resulta la ingesta por hora; de la masa antes y después, la tasa de sudoración. Todo opcional."
+      "why": "De los hidratos de carbono y la duración resulta la ingesta por hora; de la masa antes y después, la tasa de sudoración. Todo opcional.",
+      "feel": "Energía durante la sesión",
+      "feelLow": "vacía",
+      "feelHigh": "llena"
     },
     "level": {
       "light": "ligera",
@@ -1929,7 +1932,8 @@
       "sweat": "Tasa de sudoración {{rate}} l/h, pérdida de masa {{loss}} %",
       "lossAbove2": "más del 2 % de la masa corporal",
       "gi": "Gastrointestinal {{score}} de 3",
-      "source": "Rangos según Thomas et al. (2016) y Jeukendrup (2014); 90 g/h presuponen mezclas de glucosa y fructosa y adaptación. Tasa de sudoración y la marca del 2 % según Sawka et al. (2007, ACSM). No se descuentan la orina ni el agua respiratoria."
+      "source": "Rangos según Thomas et al. (2016) y Jeukendrup (2014); 90 g/h presuponen mezclas de glucosa y fructosa y adaptación. Tasa de sudoración y la marca del 2 % según Sawka et al. (2007, ACSM). No se descuentan la orina ni el agua respiratoria.",
+      "feel": "Energía durante la sesión: {{score}} de 5"
     },
     "weight": {
       "title": "Banda de peso",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Aún no comprobado en el texto original"
         }
       }
+    },
+    "plan": {
+      "title": "Plan para una sesión",
+      "why": "A partir de tu disciplina, la duración y tus propios valores. No se guarda nada.",
+      "kind": "Tipo",
+      "kinds": {
+        "training": "Entrenamiento",
+        "race": "Competición"
+      },
+      "duration": "Duración",
+      "hoursToNext": "Horas hasta la próxima sesión (opcional)",
+      "loss": "Pérdida de masa corporal medida (opcional)",
+      "before": "Antes",
+      "during": "Durante",
+      "after": "Después",
+      "preCarbs": "Hidratos de carbono, 1–4 horas antes",
+      "preFluid": "Líquido, 2–4 horas antes",
+      "load": "Carga: {{perKg}} g/kg al día ({{g}} g) durante las {{hours}} horas previas, sin fase de vaciado.",
+      "loadNotNeeded": "La carga no hace falta en una carrera de hasta 90 minutos.",
+      "gutCap": "Tuviste molestias a partir de {{value}} g/h — por eso el límite superior está ahí.",
+      "mix": "A partir de 60 g/h el intestino necesita varios tipos de hidratos y práctica. 90–120 g/h solo tras entrenar el intestino, nunca por defecto.",
+      "fluidDuring": "Líquido según la sed y tu tasa de sudoración, sin querer reponerlo todo. Ganar masa corporal durante la sesión es una señal de alerta.",
+      "rapid": "Reposición rápida, porque la próxima sesión es en menos de 8 horas",
+      "noRapid": "8 horas o más hasta la próxima sesión: bastan comidas normales dentro de tu rango diario.",
+      "proteinMeal": "Proteína por comida (0,3 g/kg)",
+      "rehydrate": "Compensación de la pérdida medida (125–150 %), durante varias horas",
+      "note": "Un rango basado en documentos de consenso, no un objetivo. No es una guía para categorías de peso ni pérdida de peso."
+    },
+    "profile": {
+      "title": "Tus valores",
+      "empty": "Aún no hay valores. Anota en las sesiones la alimentación, la masa antes y después y las molestias — aparecerán aquí.",
+      "why": "De tus sesiones de los últimos 90 días.",
+      "sweat": "Tasa de sudoración",
+      "median": "centro {{value}} l/h",
+      "sweatN": "{{n}} mediciones. No se descuentan la orina ni el agua respiratoria.",
+      "gut": "Límite digestivo",
+      "tolerated": "Tolerado hasta {{value}} g/h",
+      "trouble": "Molestias a partir de {{value}} g/h",
+      "gutN": "De {{n}} sesiones de 45 minutos o más con ingesta y valoración de molestias.",
+      "feel": "Energía según la ingesta",
+      "feelWithin": "dentro del rango: {{mean}} de 5 ({{n}} sesiones)",
+      "feelBelow": "por debajo: {{mean}} de 5 ({{n}} sesiones)",
+      "feelNote": "Descriptivo: dos grupos con una media, no prueba de una causa.",
+      "source": "Autoinforme y mediciones de tu diario. Tasa de sudoración según Sawka et al. (2007), evolución digestiva según Costa et al. (2017)."
     }
   },
   "hrv": {

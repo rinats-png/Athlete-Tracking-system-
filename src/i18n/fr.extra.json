@@ -1899,7 +1899,10 @@
       "gi": "Troubles digestifs",
       "giNone": "aucun",
       "giStrong": "forts",
-      "why": "Les glucides et la durée donnent l'apport par heure, la masse avant et après donne le taux de sudation. Tout est facultatif."
+      "why": "Les glucides et la durée donnent l'apport par heure, la masse avant et après donne le taux de sudation. Tout est facultatif.",
+      "feel": "Énergie pendant la séance",
+      "feelLow": "vide",
+      "feelHigh": "pleine"
     },
     "level": {
       "light": "léger",
@@ -1929,7 +1932,8 @@
       "sweat": "Taux de sudation {{rate}} l/h, perte de masse {{loss}} %",
       "lossAbove2": "plus de 2 % de la masse corporelle",
       "gi": "Troubles digestifs {{score}} sur 3",
-      "source": "Fourchettes selon Thomas et al. (2016) et Jeukendrup (2014) ; 90 g/h supposent des mélanges glucose-fructose et une accoutumance. Taux de sudation et seuil de 2 % selon Sawka et al. (2007, ACSM). L'urine et l'eau respiratoire ne sont pas déduites."
+      "source": "Fourchettes selon Thomas et al. (2016) et Jeukendrup (2014) ; 90 g/h supposent des mélanges glucose-fructose et une accoutumance. Taux de sudation et seuil de 2 % selon Sawka et al. (2007, ACSM). L'urine et l'eau respiratoire ne sont pas déduites.",
+      "feel": "Énergie pendant la séance : {{score}} sur 5"
     },
     "weight": {
       "title": "Plage de poids",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Pas encore vérifié sur le texte source"
         }
       }
+    },
+    "plan": {
+      "title": "Plan pour une séance",
+      "why": "À partir de ta discipline, de la durée et de tes propres valeurs. Rien n'est enregistré.",
+      "kind": "Type",
+      "kinds": {
+        "training": "Entraînement",
+        "race": "Compétition"
+      },
+      "duration": "Durée",
+      "hoursToNext": "Heures avant la prochaine séance (facultatif)",
+      "loss": "Perte de masse corporelle mesurée (facultatif)",
+      "before": "Avant",
+      "during": "Pendant",
+      "after": "Après",
+      "preCarbs": "Glucides, 1–4 heures avant",
+      "preFluid": "Liquide, 2–4 heures avant",
+      "load": "Charge : {{perKg}} g/kg par jour ({{g}} g) pendant les {{hours}} heures précédentes, sans phase de déplétion.",
+      "loadNotNeeded": "La charge n'est pas nécessaire pour une course jusqu'à 90 minutes.",
+      "gutCap": "Tu as eu des troubles à partir de {{value}} g/h — la limite haute est donc placée là.",
+      "mix": "À partir de 60 g/h, l'intestin a besoin de plusieurs types de glucides et d'habitude. 90–120 g/h seulement après un entraînement digestif, jamais par défaut.",
+      "fluidDuring": "Liquide selon la soif et ton taux de sudation, sans vouloir tout remplacer. Une prise de masse corporelle pendant la séance est un signal d'alerte.",
+      "rapid": "Réapprovisionnement rapide, car la prochaine séance a lieu dans moins de 8 heures",
+      "noRapid": "8 heures ou plus avant la prochaine séance : des repas normaux dans ta fourchette quotidienne suffisent.",
+      "proteinMeal": "Protéines par repas (0,3 g/kg)",
+      "rehydrate": "Compensation de la perte mesurée (125–150 %), sur plusieurs heures",
+      "note": "Une fourchette issue de documents de consensus, pas un objectif. Pas de conseil pour les catégories de poids ou la perte de poids."
+    },
+    "profile": {
+      "title": "Tes valeurs",
+      "empty": "Pas encore de valeurs. Note dans les séances l'alimentation, la masse avant et après et les troubles — ils apparaîtront ici.",
+      "why": "À partir de tes séances des 90 derniers jours.",
+      "sweat": "Taux de sudation",
+      "median": "milieu {{value}} l/h",
+      "sweatN": "{{n}} mesures. L'urine et l'eau respiratoire ne sont pas déduites.",
+      "gut": "Limite digestive",
+      "tolerated": "Toléré jusqu'à {{value}} g/h",
+      "trouble": "Troubles à partir de {{value}} g/h",
+      "gutN": "À partir de {{n}} séances de 45 minutes ou plus avec apport et évaluation des troubles.",
+      "feel": "Énergie selon l'apport",
+      "feelWithin": "dans la fourchette : {{mean}} sur 5 ({{n}} séances)",
+      "feelBelow": "en dessous : {{mean}} sur 5 ({{n}} séances)",
+      "feelNote": "Descriptif : deux groupes avec une moyenne, pas une preuve de cause.",
+      "source": "Déclarations et mesures de ton journal. Taux de sudation selon Sawka et al. (2007), évolution digestive selon Costa et al. (2017)."
     }
   },
   "hrv": {

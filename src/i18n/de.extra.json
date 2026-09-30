@@ -1899,7 +1899,10 @@
       "gi": "Magen-Darm-Beschwerden",
       "giNone": "keine",
       "giStrong": "stark",
-      "why": "Aus Kohlenhydraten und Dauer entsteht die Zufuhr je Stunde, aus der Masse vorher und nachher die Schweissrate. Alles freiwillig."
+      "why": "Aus Kohlenhydraten und Dauer entsteht die Zufuhr je Stunde, aus der Masse vorher und nachher die Schweissrate. Alles freiwillig.",
+      "feel": "Energie in der Einheit",
+      "feelLow": "leer",
+      "feelHigh": "voll"
     },
     "level": {
       "light": "leicht",
@@ -1929,7 +1932,8 @@
       "sweat": "Schweissrate {{rate}} l/h, Masseverlust {{loss}} %",
       "lossAbove2": "über 2 % der Körpermasse",
       "gi": "Magen-Darm {{score}} von 3",
-      "source": "Spannen nach Thomas et al. (2016) und Jeukendrup (2014); 90 g/h setzen Glukose-Fruktose-Gemische und Gewöhnung voraus. Schweissrate und die 2-%-Marke nach Sawka et al. (2007, ACSM). Urin und Atemwasser sind nicht abgezogen."
+      "source": "Spannen nach Thomas et al. (2016) und Jeukendrup (2014); 90 g/h setzen Glukose-Fruktose-Gemische und Gewöhnung voraus. Schweissrate und die 2-%-Marke nach Sawka et al. (2007, ACSM). Urin und Atemwasser sind nicht abgezogen.",
+      "feel": "Energie in der Einheit: {{score}} von 5"
     },
     "weight": {
       "title": "Gewichtsband",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Noch nicht am Primärtext geprüft"
         }
       }
+    },
+    "plan": {
+      "title": "Plan für eine Einheit",
+      "why": "Aus deiner Disziplin, der Dauer und deinen eigenen Werten. Nichts wird gespeichert.",
+      "kind": "Art",
+      "kinds": {
+        "training": "Training",
+        "race": "Wettkampf"
+      },
+      "duration": "Dauer",
+      "hoursToNext": "Stunden bis zur nächsten Einheit (optional)",
+      "loss": "Gemessener Körpermasseverlust (optional)",
+      "before": "Davor",
+      "during": "Währenddessen",
+      "after": "Danach",
+      "preCarbs": "Kohlenhydrate, 1–4 Stunden vorher",
+      "preFluid": "Flüssigkeit, 2–4 Stunden vorher",
+      "load": "Aufladen: {{perKg}} g/kg und Tag ({{g}} g) über {{hours}} Stunden vorher, ohne Entleerungsphase.",
+      "loadNotNeeded": "Aufladen ist bei einem Rennen bis 90 Minuten nicht nötig.",
+      "gutCap": "Bei dir traten ab {{value}} g/h Beschwerden auf — die Obergrenze liegt deshalb dort.",
+      "mix": "Ab 60 g/h braucht der Darm mehrere Kohlenhydratarten und Gewöhnung. 90–120 g/h nur nach Magen-Darm-Training, nie als Standard.",
+      "fluidDuring": "Flüssigkeit nach Durst und deiner Schweissrate, ohne alles Verlorene ersetzen zu wollen. Ein Körpermassegewinn in der Einheit ist ein Warnzeichen.",
+      "rapid": "Schnelle Auffüllung, weil die nächste Einheit in weniger als 8 Stunden ansteht",
+      "noRapid": "Bis zur nächsten Einheit 8 Stunden oder mehr: normale Mahlzeiten nach deiner Tagesspanne genügen.",
+      "proteinMeal": "Protein je Mahlzeit (0,3 g/kg)",
+      "rehydrate": "Ausgleich des gemessenen Verlusts (125–150 %), über mehrere Stunden",
+      "note": "Eine Spanne nach Konsensuspapieren, kein Sollwert. Keine Anleitung für Gewichtsklassen oder Gewichtsabnahme."
+    },
+    "profile": {
+      "title": "Deine Werte",
+      "empty": "Noch keine Werte. Erfasse in Einheiten die Verpflegung, das Gewicht vorher und nachher und die Beschwerden — dann erscheinen sie hier.",
+      "why": "Aus deinen Einheiten der letzten 90 Tage.",
+      "sweat": "Schweissrate",
+      "median": "Mitte {{value}} l/h",
+      "sweatN": "{{n}} Messungen. Urin und Atemwasser sind nicht abgezogen.",
+      "gut": "Magen-Darm-Grenze",
+      "tolerated": "Vertragen bis {{value}} g/h",
+      "trouble": "Beschwerden ab {{value}} g/h",
+      "gutN": "Aus {{n}} Einheiten ab 45 Minuten mit Zufuhr und Beschwerdeangabe.",
+      "feel": "Energie nach Zufuhr",
+      "feelWithin": "in der Spanne: {{mean}} von 5 ({{n}} Einheiten)",
+      "feelBelow": "darunter: {{mean}} von 5 ({{n}} Einheiten)",
+      "feelNote": "Beschreibend: zwei Gruppen mit Mittelwert, kein Beleg für eine Ursache.",
+      "source": "Selbstauskunft und Messwerte aus deinem Tagebuch. Schweissrate nach Sawka et al. (2007), Magen-Darm-Verlauf nach Costa et al. (2017)."
     }
   },
   "hrv": {

@@ -133,6 +133,8 @@ export interface SessionFueling {
   /** Körpermasseverlust in Prozent der Masse vorher. */
   massLossPct: number | null
   giScore: number | null
+  /** Energie in der Einheit, 1–5, Selbstauskunft. */
+  energyFeel: number | null
 }
 
 export function sessionFueling(s: StoredDiarySession, day: string): SessionFueling {
@@ -148,7 +150,7 @@ export function sessionFueling(s: StoredDiarySession, day: string): SessionFueli
     // 1 kg Körpermasse ≈ 1 l Schweiss; Urin und Atemwasser sind nicht abgezogen.
     sweatRateLph = Math.round(((lossKg + (s.fluidMl ?? 0) / 1000) / hours) * 100) / 100
   }
-  return { sessionId: s.id, day, durationMin: s.durationMin, carbsPerHour, band, belowBand, sweatRateLph, massLossPct, giScore: s.giScore ?? null }
+  return { sessionId: s.id, day, durationMin: s.durationMin, carbsPerHour, band, belowBand, sweatRateLph, massLossPct, giScore: s.giScore ?? null, energyFeel: s.energyFeel ?? null }
 }
 
 /** Alle Einheiten mit irgendeiner Verpflegungsangabe in den letzten `days` Tagen, jüngste zuerst. */
@@ -159,7 +161,7 @@ export function recentFueling(diary: StoredDiaryEntry[], today: string, days = 2
     .sort((a, b) => b.day.localeCompare(a.day))
     .flatMap((e) =>
       e.sessions
-        .filter((s) => s.carbsG != null || s.fluidMl != null || s.giScore != null || (s.massBeforeKg != null && s.massAfterKg != null))
+        .filter((s) => s.carbsG != null || s.fluidMl != null || s.giScore != null || s.energyFeel != null || (s.massBeforeKg != null && s.massAfterKg != null))
         .map((s) => sessionFueling(s, e.day)),
     )
 }

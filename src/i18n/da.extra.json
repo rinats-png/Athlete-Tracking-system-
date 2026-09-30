@@ -1899,7 +1899,10 @@
       "gi": "Mave-tarm-gener",
       "giNone": "ingen",
       "giStrong": "stærke",
-      "why": "Ud fra kulhydrater og varighed beregnes indtaget pr. time, ud fra massen før og efter svedraten. Alt er valgfrit."
+      "why": "Ud fra kulhydrater og varighed beregnes indtaget pr. time, ud fra massen før og efter svedraten. Alt er valgfrit.",
+      "feel": "Energi under træningen",
+      "feelLow": "tom",
+      "feelHigh": "fuld"
     },
     "level": {
       "light": "let",
@@ -1929,7 +1932,8 @@
       "sweat": "Svedrate {{rate}} l/t, massetab {{loss}} %",
       "lossAbove2": "over 2 % af kropsmassen",
       "gi": "Mave-tarm {{score}} af 3",
-      "source": "Spænd efter Thomas et al. (2016) og Jeukendrup (2014); 90 g/t forudsætter glukose-fruktose-blandinger og tilvænning. Svedrate og 2-%-grænsen efter Sawka et al. (2007, ACSM). Urin og vand fra åndedrættet er ikke fratrukket."
+      "source": "Spænd efter Thomas et al. (2016) og Jeukendrup (2014); 90 g/t forudsætter glukose-fruktose-blandinger og tilvænning. Svedrate og 2-%-grænsen efter Sawka et al. (2007, ACSM). Urin og vand fra åndedrættet er ikke fratrukket.",
+      "feel": "Energi under træningen: {{score}} af 5"
     },
     "weight": {
       "title": "Vægtbånd",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Endnu ikke kontrolleret mod originalteksten"
         }
       }
+    },
+    "plan": {
+      "title": "Plan for en træning",
+      "why": "Ud fra din disciplin, varigheden og dine egne værdier. Intet gemmes.",
+      "kind": "Type",
+      "kinds": {
+        "training": "Træning",
+        "race": "Konkurrence"
+      },
+      "duration": "Varighed",
+      "hoursToNext": "Timer til næste træning (valgfrit)",
+      "loss": "Målt tab af kropsmasse (valgfrit)",
+      "before": "Før",
+      "during": "Under",
+      "after": "Efter",
+      "preCarbs": "Kulhydrat, 1–4 timer før",
+      "preFluid": "Væske, 2–4 timer før",
+      "load": "Opladning: {{perKg}} g/kg om dagen ({{g}} g) i {{hours}} timer før, uden tømningsfase.",
+      "loadNotNeeded": "Opladning er ikke nødvendig til et løb op til 90 minutter.",
+      "gutCap": "Du fik gener fra {{value}} g/t — derfor ligger øvre grænse dér.",
+      "mix": "Fra 60 g/t har tarmen brug for flere kulhydrattyper og øvelse. 90–120 g/t først efter maveträning, aldrig som standard.",
+      "fluidDuring": "Væske efter tørst og din svedrate, uden at forsøge at erstatte alt. Vægtøgning under træningen er et advarselstegn.",
+      "rapid": "Hurtig påfyldning, fordi næste træning er om under 8 timer",
+      "noRapid": "8 timer eller mere til næste træning: almindelige måltider inden for dit dagsspænd er nok.",
+      "proteinMeal": "Protein pr. måltid (0,3 g/kg)",
+      "rehydrate": "Erstatning af det målte tab (125–150 %), over flere timer",
+      "note": "Et spænd fra konsensusdokumenter, ikke et mål. Ingen vejledning til vægtklasser eller vægttab."
+    },
+    "profile": {
+      "title": "Dine værdier",
+      "empty": "Ingen værdier endnu. Notér kost, vægt før og efter og gener i træningerne — så vises de her.",
+      "why": "Fra dine træninger de seneste 90 dage.",
+      "sweat": "Svedrate",
+      "median": "midt {{value}} l/t",
+      "sweatN": "{{n}} målinger. Urin og åndedrætsvand er ikke fratrukket.",
+      "gut": "Mavegrænse",
+      "tolerated": "Tålt op til {{value}} g/t",
+      "trouble": "Gener fra {{value}} g/t",
+      "gutN": "Fra {{n}} træninger på 45 minutter eller mere med indtag og generangivelse.",
+      "feel": "Energi efter indtag",
+      "feelWithin": "inden for spændet: {{mean}} af 5 ({{n}} træninger)",
+      "feelBelow": "under: {{mean}} af 5 ({{n}} træninger)",
+      "feelNote": "Beskrivende: to grupper med gennemsnit, ikke bevis for en årsag.",
+      "source": "Selvrapportering og målinger fra din dagbog. Svedrate efter Sawka et al. (2007), mageforløb efter Costa et al. (2017)."
     }
   },
   "hrv": {

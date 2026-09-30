@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 27
+export const CURRENT_SCHEMA_VERSION = 28
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -547,6 +547,8 @@ const diarySessionSchema = z.object({
   /** Körpergewicht vor und nach der Einheit, für die Schweissrate. */
   massBeforeKg: finite.min(20).max(400).nullish(),
   massAfterKg: finite.min(20).max(400).nullish(),
+  /** Energie in der Einheit: 1 leer … 5 voll. Selbstauskunft (Fuel Stufe 2). */
+  energyFeel: z.number().int().min(1).max(5).nullish(),
 })
 
 /**
@@ -1600,6 +1602,12 @@ export const MIGRATIONS: Migration[] = [
         nutrition: { ...(athlete.nutrition ?? {}), weightRateBand: athlete.nutrition?.weightRateBand ?? null },
       })),
     }),
+  },
+  {
+    from: 27,
+    to: 28,
+    describe: 'Fuel Stufe 2: Energie in der Einheit am Tagebuchtermin (optional, nichts zu füllen)',
+    run: (data: any) => ({ ...data, version: 28 }),
   },
 ]
 

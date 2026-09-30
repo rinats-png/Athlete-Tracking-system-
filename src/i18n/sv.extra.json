@@ -1899,7 +1899,10 @@
       "gi": "Mag-tarmbesvär",
       "giNone": "inga",
       "giStrong": "kraftiga",
-      "why": "Av kolhydrater och längd räknas intaget per timme fram, av vikten före och efter svetthastigheten. Allt är valfritt."
+      "why": "Av kolhydrater och längd räknas intaget per timme fram, av vikten före och efter svetthastigheten. Allt är valfritt.",
+      "feel": "Energi under passet",
+      "feelLow": "tom",
+      "feelHigh": "full"
     },
     "level": {
       "light": "lätt",
@@ -1929,7 +1932,8 @@
       "sweat": "Svetthastighet {{rate}} l/h, viktförlust {{loss}} %",
       "lossAbove2": "över 2 % av kroppsvikten",
       "gi": "Mag-tarm {{score}} av 3",
-      "source": "Intervall enligt Thomas et al. (2016) och Jeukendrup (2014); 90 g/h förutsätter glukos-fruktosblandningar och tillvänjning. Svetthastighet och 2 %-gränsen enligt Sawka et al. (2007, ACSM). Urin och vatten i utandningsluften är inte fråndragna."
+      "source": "Intervall enligt Thomas et al. (2016) och Jeukendrup (2014); 90 g/h förutsätter glukos-fruktosblandningar och tillvänjning. Svetthastighet och 2 %-gränsen enligt Sawka et al. (2007, ACSM). Urin och vatten i utandningsluften är inte fråndragna.",
+      "feel": "Energi under passet: {{score}} av 5"
     },
     "weight": {
       "title": "Viktband",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Ännu inte kontrollerad mot originaltexten"
         }
       }
+    },
+    "plan": {
+      "title": "Plan för ett pass",
+      "why": "Utifrån din gren, längden och dina egna värden. Inget sparas.",
+      "kind": "Typ",
+      "kinds": {
+        "training": "Träning",
+        "race": "Tävling"
+      },
+      "duration": "Längd",
+      "hoursToNext": "Timmar till nästa pass (valfritt)",
+      "loss": "Uppmätt viktförlust (valfritt)",
+      "before": "Före",
+      "during": "Under",
+      "after": "Efter",
+      "preCarbs": "Kolhydrater, 1–4 timmar före",
+      "preFluid": "Vätska, 2–4 timmar före",
+      "load": "Laddning: {{perKg}} g/kg och dag ({{g}} g) under {{hours}} timmar före, utan tömningsfas.",
+      "loadNotNeeded": "Laddning behövs inte för ett lopp upp till 90 minuter.",
+      "gutCap": "Du fick besvär från {{value}} g/h — därför ligger övre gränsen där.",
+      "mix": "Från 60 g/h behöver tarmen flera kolhydrattyper och träning. 90–120 g/h först efter magträning, aldrig som standard.",
+      "fluidDuring": "Vätska efter törst och din svettmängd, utan att försöka ersätta allt. Viktökning under passet är en varningssignal.",
+      "rapid": "Snabb påfyllning, eftersom nästa pass är om mindre än 8 timmar",
+      "noRapid": "8 timmar eller mer till nästa pass: vanliga måltider inom ditt dagsintervall räcker.",
+      "proteinMeal": "Protein per måltid (0,3 g/kg)",
+      "rehydrate": "Ersättning av den uppmätta förlusten (125–150 %), över flera timmar",
+      "note": "Ett intervall från konsensusdokument, inget mål. Ingen vägledning för viktklasser eller viktnedgång."
+    },
+    "profile": {
+      "title": "Dina värden",
+      "empty": "Inga värden ännu. Notera kost, vikt före och efter samt besvär i passen — då visas de här.",
+      "why": "Från dina pass de senaste 90 dagarna.",
+      "sweat": "Svettmängd",
+      "median": "mitt {{value}} l/h",
+      "sweatN": "{{n}} mätningar. Urin och andningsvatten är inte avdragna.",
+      "gut": "Magens gräns",
+      "tolerated": "Tolererat upp till {{value}} g/h",
+      "trouble": "Besvär från {{value}} g/h",
+      "gutN": "Från {{n}} pass på 45 minuter eller mer med intag och besvärsangivelse.",
+      "feel": "Energi efter intag",
+      "feelWithin": "inom intervallet: {{mean}} av 5 ({{n}} pass)",
+      "feelBelow": "under: {{mean}} av 5 ({{n}} pass)",
+      "feelNote": "Beskrivande: två grupper med medelvärde, inget bevis för orsak.",
+      "source": "Självrapportering och mätvärden från din dagbok. Svettmängd enligt Sawka et al. (2007), magförlopp enligt Costa et al. (2017)."
     }
   },
   "hrv": {

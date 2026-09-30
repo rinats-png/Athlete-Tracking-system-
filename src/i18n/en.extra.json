@@ -1899,7 +1899,10 @@
       "gi": "Gastrointestinal symptoms",
       "giNone": "none",
       "giStrong": "severe",
-      "why": "Carbohydrate and duration give intake per hour; body mass before and after gives sweat rate. All optional."
+      "why": "Carbohydrate and duration give intake per hour; body mass before and after gives sweat rate. All optional.",
+      "feel": "Energy during the session",
+      "feelLow": "empty",
+      "feelHigh": "full"
     },
     "level": {
       "light": "light",
@@ -1929,7 +1932,8 @@
       "sweat": "Sweat rate {{rate}} l/h, mass loss {{loss}} %",
       "lossAbove2": "over 2 % of body mass",
       "gi": "Gastrointestinal {{score}} of 3",
-      "source": "Ranges after Thomas et al. (2016) and Jeukendrup (2014); 90 g/h presupposes glucose–fructose mixtures and gut training. Sweat rate and the 2 % mark after Sawka et al. (2007, ACSM). Urine and respiratory water are not subtracted."
+      "source": "Ranges after Thomas et al. (2016) and Jeukendrup (2014); 90 g/h presupposes glucose–fructose mixtures and gut training. Sweat rate and the 2 % mark after Sawka et al. (2007, ACSM). Urine and respiratory water are not subtracted.",
+      "feel": "Energy during the session: {{score}} of 5"
     },
     "weight": {
       "title": "Weight band",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Not yet checked against primary text"
         }
       }
+    },
+    "plan": {
+      "title": "Plan for a session",
+      "why": "From your discipline, the duration and your own values. Nothing is saved.",
+      "kind": "Type",
+      "kinds": {
+        "training": "Training",
+        "race": "Competition"
+      },
+      "duration": "Duration",
+      "hoursToNext": "Hours until the next session (optional)",
+      "loss": "Measured body mass loss (optional)",
+      "before": "Before",
+      "during": "During",
+      "after": "After",
+      "preCarbs": "Carbohydrate, 1–4 hours before",
+      "preFluid": "Fluid, 2–4 hours before",
+      "load": "Loading: {{perKg}} g/kg per day ({{g}} g) for {{hours}} hours before, without a depletion phase.",
+      "loadNotNeeded": "Loading is not needed for a race up to 90 minutes.",
+      "gutCap": "You had symptoms from {{value}} g/h — so the upper limit sits there.",
+      "mix": "From 60 g/h the gut needs several carbohydrate types and practice. 90–120 g/h only after gut training, never as a default.",
+      "fluidDuring": "Fluid by thirst and your sweat rate, without trying to replace everything lost. Gaining body mass during a session is a warning sign.",
+      "rapid": "Rapid replenishment, because the next session is less than 8 hours away",
+      "noRapid": "8 hours or more until the next session: normal meals within your daily range are enough.",
+      "proteinMeal": "Protein per meal (0.3 g/kg)",
+      "rehydrate": "Replacing the measured loss (125–150 %), over several hours",
+      "note": "A range from consensus papers, not a target. Not guidance for weight classes or weight loss."
+    },
+    "profile": {
+      "title": "Your values",
+      "empty": "No values yet. In sessions, record the fuelling, body mass before and after, and any symptoms — they will appear here.",
+      "why": "From your sessions of the last 90 days.",
+      "sweat": "Sweat rate",
+      "median": "middle {{value}} l/h",
+      "sweatN": "{{n}} measurements. Urine and respiratory water are not subtracted.",
+      "gut": "Gut limit",
+      "tolerated": "Tolerated up to {{value}} g/h",
+      "trouble": "Symptoms from {{value}} g/h",
+      "gutN": "From {{n}} sessions of 45 minutes or more with intake and symptom rating.",
+      "feel": "Energy by intake",
+      "feelWithin": "within range: {{mean}} of 5 ({{n}} sessions)",
+      "feelBelow": "below: {{mean}} of 5 ({{n}} sessions)",
+      "feelNote": "Descriptive: two groups with a mean, not proof of a cause.",
+      "source": "Self-report and measurements from your diary. Sweat rate after Sawka et al. (2007), gut course after Costa et al. (2017)."
     }
   },
   "hrv": {

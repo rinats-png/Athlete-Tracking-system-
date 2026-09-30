@@ -95,7 +95,7 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
 | Stufe | Inhalt |
 |---|---|
 | 1 ✅ | Regelbasis: Evidenzobjekt, Sportgruppen, Ausdauer-Sportarten (Laufen 5–10 km, Marathon/Ultra, Radfahren, Schwimmen, Triathlon kurz und lang, Rudern). Protein auf 1,6–2,2 samt Quelle in Formelregister und Texten aller Sprachen. Vorhandenes Fueling darauf umgestellt. |
-| 2 | Plan je Einheit und Wettkampftag (Vorher / Währenddessen / Nachher), Aufladen, Schweissrate und Magen-Darm-Grenze sichtbar, Rückmeldung nach der Einheit. |
+| 2 ✅ | Plan je Einheit und Wettkampftag (Vorher / Währenddessen / Nachher), Aufladen, Schweissrate und Magen-Darm-Grenze sichtbar, Rückmeldung nach der Einheit. |
 | 3 | Hitze, Höhe, Reise als Modifikatoren; Supplement-Informationsseite. |
 | 4 | Kampfsport (G6) und Teamsport: Turniertag-Planer für Zwischenkämpfe, mit Hinweistext aus §4. |
 
@@ -106,6 +106,13 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
   Protein 1,6–2,2. Ohne Regel (Halbmarathon, Freiwasser, Kampfsport) sagt die Karte das.
   Keine Schemaänderung, daher keine Migration. Die Disziplinspannen stehen im
   Formelregister als vorläufig (`fuel_sport_carbs_g_per_kg`).
+- **Stufe 2 gebaut (30.09.2026):** `src/domain/fuelPlan.ts` (Plan davor/währenddessen/danach,
+  Schweissrate, Magen-Darm-Grenze, Energie nach Zufuhr), Karten «Plan für eine Einheit» und
+  «Deine Werte» in der Ernährung, Feld «Energie in der Einheit» (1–5) am Tagebuchtermin.
+  Schema 28 (optionales Feld, Migration ohne Umbau). Der Plan wird nicht gespeichert.
+  Bewusst nicht: Trinkmenge in ml/h als Zahl (die Vorlage nennt nur «individuell, nie
+  vollständiger Ersatz»), Natriumziele (keine belastbaren Schweissdaten), Ausgleich
+  nur aus gemessenem Verlust.
 - Morton et al. (2018) ist eine Meta-Analyse zu **Krafttraining**. Für Ausdauer
   ist 1,6–2,2 g/kg damit übertragen; das Abzeichen zeigt «Übertragen» nur, wenn die
   Regel so gekennzeichnet ist — für die Proteinspanne fehlt noch ein eigenes

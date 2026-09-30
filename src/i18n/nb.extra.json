@@ -1899,7 +1899,10 @@
       "gi": "Mage-tarm-plager",
       "giNone": "ingen",
       "giStrong": "sterke",
-      "why": "Av karbohydrater og varighet beregnes inntaket per time, av massen før og etter svetteraten. Alt er valgfritt."
+      "why": "Av karbohydrater og varighet beregnes inntaket per time, av massen før og etter svetteraten. Alt er valgfritt.",
+      "feel": "Energi under økten",
+      "feelLow": "tom",
+      "feelHigh": "full"
     },
     "level": {
       "light": "lett",
@@ -1929,7 +1932,8 @@
       "sweat": "Svetterate {{rate}} l/h, massetap {{loss}} %",
       "lossAbove2": "over 2 % av kroppsmassen",
       "gi": "Mage-tarm {{score}} av 3",
-      "source": "Spenn etter Thomas et al. (2016) og Jeukendrup (2014); 90 g/h forutsetter glukose-fruktose-blandinger og tilvenning. Svetterate og 2 %-grensen etter Sawka et al. (2007, ACSM). Urin og vann i utåndingsluften er ikke trukket fra."
+      "source": "Spenn etter Thomas et al. (2016) og Jeukendrup (2014); 90 g/h forutsetter glukose-fruktose-blandinger og tilvenning. Svetterate og 2 %-grensen etter Sawka et al. (2007, ACSM). Urin og vann i utåndingsluften er ikke trukket fra.",
+      "feel": "Energi under økten: {{score}} av 5"
     },
     "weight": {
       "title": "Vektbånd",
@@ -1996,6 +2000,50 @@
           "not_reverified": "Ennå ikke kontrollert mot originalteksten"
         }
       }
+    },
+    "plan": {
+      "title": "Plan for en økt",
+      "why": "Ut fra grenen din, varigheten og dine egne verdier. Ingenting lagres.",
+      "kind": "Type",
+      "kinds": {
+        "training": "Trening",
+        "race": "Konkurranse"
+      },
+      "duration": "Varighet",
+      "hoursToNext": "Timer til neste økt (valgfritt)",
+      "loss": "Målt tap av kroppsmasse (valgfritt)",
+      "before": "Før",
+      "during": "Under",
+      "after": "Etter",
+      "preCarbs": "Karbohydrater, 1–4 timer før",
+      "preFluid": "Væske, 2–4 timer før",
+      "load": "Lading: {{perKg}} g/kg per dag ({{g}} g) i {{hours}} timer før, uten tømmingsfase.",
+      "loadNotNeeded": "Lading trengs ikke for et løp opptil 90 minutter.",
+      "gutCap": "Du fikk plager fra {{value}} g/t — derfor ligger øvre grense der.",
+      "mix": "Fra 60 g/t trenger tarmen flere karbohydrattyper og øving. 90–120 g/t først etter magetrening, aldri som standard.",
+      "fluidDuring": "Væske etter tørst og svetteraten din, uten å prøve å erstatte alt. Vektøkning under økten er et varselsignal.",
+      "rapid": "Rask påfylling, fordi neste økt er om mindre enn 8 timer",
+      "noRapid": "8 timer eller mer til neste økt: vanlige måltider innenfor dagsspennet ditt er nok.",
+      "proteinMeal": "Protein per måltid (0,3 g/kg)",
+      "rehydrate": "Erstatning av det målte tapet (125–150 %), over flere timer",
+      "note": "Et spenn fra konsensusdokumenter, ikke et mål. Ingen veiledning for vektklasser eller vektnedgang."
+    },
+    "profile": {
+      "title": "Dine verdier",
+      "empty": "Ingen verdier ennå. Før inn kosthold, vekt før og etter og plager i øktene — da vises de her.",
+      "why": "Fra øktene dine de siste 90 dagene.",
+      "sweat": "Svetterate",
+      "median": "midt {{value}} l/t",
+      "sweatN": "{{n}} målinger. Urin og pustevann er ikke trukket fra.",
+      "gut": "Magegrense",
+      "tolerated": "Tålt opptil {{value}} g/t",
+      "trouble": "Plager fra {{value}} g/t",
+      "gutN": "Fra {{n}} økter på 45 minutter eller mer med inntak og plageangivelse.",
+      "feel": "Energi etter inntak",
+      "feelWithin": "innenfor spennet: {{mean}} av 5 ({{n}} økter)",
+      "feelBelow": "under: {{mean}} av 5 ({{n}} økter)",
+      "feelNote": "Beskrivende: to grupper med gjennomsnitt, ikke bevis for årsak.",
+      "source": "Egenrapportering og målinger fra dagboken din. Svetterate etter Sawka et al. (2007), mageforløp etter Costa et al. (2017)."
     }
   },
   "hrv": {
