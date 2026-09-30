@@ -1966,7 +1966,9 @@
         "g30_60": "Under konkurranse 30–60 g karbohydrater per time, avhengig av varighet og toleranse.",
         "g30_90": "Under konkurranse 30–60 g per time, fra cirka 2,5 timer opptil cirka 90 g per time med flere karbohydrattyper.",
         "g60_90": "Under konkurranse vanligvis 60–90 g karbohydrater per time, med flere karbohydrattyper og øvd på forhånd.",
-        "advanced": "90–120 g per time først etter magetrening og aldri som standard; grunnlaget for det er tydelig svakere."
+        "advanced": "90–120 g per time først etter magetrening og aldri som standard; grunnlaget for det er tydelig svakere.",
+        "between_bouts": "Som regel ingenting under kampen; mellom kampene små mengder lettfordøyelige karbohydrater og væske, så langt det tåles.",
+        "breaks": "I pauser, time-outer og til pause små mengder karbohydrater og væske, så langt det tåles."
       },
       "carbLoad": {
         "not_essential": "Karbohydratlading trengs ikke for et løp under 90 minutter; før 1–4 g/kg, 1–4 timer før.",
@@ -2026,7 +2028,8 @@
       "noRapid": "8 timer eller mer til neste økt: vanlige måltider innenfor dagsspennet ditt er nok.",
       "proteinMeal": "Protein per måltid (0,3 g/kg)",
       "rehydrate": "Erstatning av det målte tapet (125–150 %), over flere timer",
-      "note": "Et spenn fra konsensusdokumenter, ikke et mål. Ingen veiledning for vektklasser eller vektnedgang."
+      "note": "Et spenn fra konsensusdokumenter, ikke et mål. Ingen veiledning for vektklasser eller vektnedgang.",
+      "duringBouts": "Under selve kampen som regel ikke noe inntak — se konkurransedagen nedenfor."
     },
     "profile": {
       "title": "Dine verdier",
@@ -2101,6 +2104,25 @@
           "limits": "Prikking i huden er vanlig. Effekten bygges opp over uker, ikke over en dag."
         }
       }
+    },
+    "tournament": {
+      "title": "Konkurransedag: mellom kampene",
+      "bouts": "Kamper",
+      "boutMin": "Varighet per kamp",
+      "gapMin": "Pause imellom",
+      "perGap": "per pause",
+      "total": "Omtrent {{g}} g totalt over {{gaps}} pauser",
+      "kind": {
+        "sips": "Pause under 10 minutter: bare væske i små slurker, så langt det tåles.",
+        "small": "Kort pause (10–29 minutter): små mengder lettfordøyelige karbohydrater og væske.",
+        "snack": "Lengre pause (30 minutter eller mer): en liten matbit med karbohydrater, lite fett og fiber, pluss væske."
+      },
+      "evidence": "Mengdene er overført fra utholdenhetsstudier (30–60 g per time, regnet om til pausen) — evidens lav. Kildene om kampsport sier bare «lite og lettfordøyelig».",
+      "scope": "Bare mat og væske mellom kampene. Ingenting om veiing, vekt eller tiden etterpå."
+    },
+    "weightClass": {
+      "title": "Vektklasser: ikke KYDONs sak",
+      "body": "Veiing, vektnedgang og vektkutt hører hjemme hos idrettsmedisin og ernæringsfaglig personell, og for under 18 år ikke som akutt tiltak. KYDON regner ikke noe på dette og gir ingen veiledning — heller ikke noen tidsplan etter veiingen. For å lese videre:"
     }
   },
   "hrv": {

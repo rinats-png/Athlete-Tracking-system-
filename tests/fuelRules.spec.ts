@@ -39,8 +39,8 @@ test.describe('Fuel-Regeln', () => {
     }
   })
 
-  test('ohne Regel keine Spanne: Halbmarathon, Freiwasser, Kampfsport, keine Disziplin', () => {
-    for (const id of ['half_marathon', 'open_water', 'judo', 'mma', null]) expect(fuelRuleFor(id), String(id)).toBeNull()
+  test('ohne Regel keine Spanne: Halbmarathon, Freiwasser, Ju-Jutsu, HYROX, keine Disziplin', () => {
+    for (const id of ['half_marathon', 'open_water', 'ju_jutsu', 'hyrox', null]) expect(fuelRuleFor(id), String(id)).toBeNull()
   })
 
   test('verwandte Disziplinen werden als übertragen ausgewiesen', () => {
@@ -82,7 +82,7 @@ test.describe('Fuel-Regeln', () => {
     await openDemo(page)
     await page.evaluate(() => {
       const data = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
-      data.athletes[0].profile.disciplineId = 'judo'
+      data.athletes[0].profile.disciplineId = 'ju_jutsu'
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
     await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })

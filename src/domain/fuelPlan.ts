@@ -54,6 +54,8 @@ export interface FuelPlan {
     gutCapGPerH: number | null
     /** Mehrere Kohlenhydratarten und Gewöhnung nötig (ab 60 g/h). */
     needsMixAndPractice: boolean
+    /** Wettkampf im Kampfformat: während des Kampfes nichts, zwischen den Kämpfen der Turniertag-Planer. */
+    betweenBouts: boolean
   }
   after: {
     /** 1,0–1,2 g/kg und Stunde über etwa 4 Stunden, nur bei unter 8 Stunden bis zur nächsten Einheit. */
@@ -85,6 +87,8 @@ export function planFuel(i: FuelPlanInput): FuelPlan {
     if (i.rule.intra === 'g30_60') band = { kind: 'range', lo: band.lo, hi: Math.min(band.hi, 60) }
     if (i.rule.intra === 'g60_90' && i.durationMin >= 120) band = { kind: 'range', lo: 60, hi: 90 }
   }
+  const betweenBouts = race && i.rule.intra === 'between_bouts'
+  if (betweenBouts) band = { kind: 'none' }
   let gutCapGPerH: number | null = null
   if (band.kind === 'range' && i.gutTroubleGPerH != null && i.gutTroubleGPerH < band.hi) {
     gutCapGPerH = i.gutTroubleGPerH
@@ -103,7 +107,7 @@ export function planFuel(i: FuelPlanInput): FuelPlan {
       load: loadOk ? { carbsPerKg: loadPerKg, carbsG: g(loadPerKg, kg), hours: [36, 48] } : null,
       loadNotNeeded: race && i.rule.carbLoad === 'not_essential' && i.durationMin <= 90,
     },
-    during: { band, gutCapGPerH, needsMixAndPractice: band.kind === 'range' && band.hi >= 60 },
+    during: { band, gutCapGPerH, needsMixAndPractice: band.kind === 'range' && band.hi >= 60, betweenBouts },
     after: {
       rapid: rapidOn ? { carbsPerKgH: rapidPerKgH, hours: 4, carbsG: g(rapidPerKgH, kg) } : null,
       proteinPerMealG: kg ? Math.round(0.3 * kg) : null,
@@ -167,6 +171,51 @@ export function feelByBand(rows: SessionFueling[]): FeelByBand | null {
 }
 
 export { PROTEIN_BAND }
+
+// --- Turniertag (Kampfsport, Fechten) -----------------------------------------
+
+export interface TournamentInput {
+  bouts: number
+  /** Dauer eines Kampfes in Minuten. */
+  boutMin: number
+  /** Pause zwischen zwei Kämpfen in Minuten, im Mittel. */
+  gapMin: number
+}
+
+export type GapKind = 'sips' | 'small' | 'snack'
+
+export interface TournamentPlan {
+  gaps: number
+  gapKind: GapKind
+  /** g Kohlenhydrate je Pause. Null bei «nur Flüssigkeit». */
+  carbsPerGapG: [number, number] | null
+  /** Ganzer Turnierblock vom ersten bis zum letzten Kampf, in Minuten. */
+  spanMin: number
+  totalG: [number, number] | null
+}
+
+/**
+ * Verpflegung zwischen den Kämpfen. Die Vorlage sagt nur «kleine, schnell
+ * verdauliche Kohlenhydrate und Flüssigkeit, soweit verträglich» und nennt
+ * keine Menge. Die Mengen hier sind deshalb ÜBERTRAGEN: 30–60 g je Stunde
+ * (Jeukendrup 2014, Ausdauer) auf die Länge der Pause gerechnet, und in der
+ * Oberfläche als «Übertragen, Evidenz niedrig» gekennzeichnet. Unter zehn
+ * Minuten Pause nur Flüssigkeit. Nichts davon betrifft Wiegen oder Gewicht.
+ */
+export function tournamentPlan(t: TournamentInput): TournamentPlan | null {
+  if (!(t.bouts >= 1) || !(t.boutMin > 0) || !(t.gapMin >= 0)) return null
+  const gaps = Math.max(0, Math.round(t.bouts) - 1)
+  const spanMin = t.bouts * t.boutMin + gaps * t.gapMin
+  const gapKind: GapKind = t.gapMin < 10 ? 'sips' : t.gapMin < 30 ? 'small' : 'snack'
+  const per: [number, number] | null = gapKind === 'sips' ? null : [Math.round((30 * t.gapMin) / 60), Math.round((60 * t.gapMin) / 60)]
+  return {
+    gaps,
+    gapKind,
+    carbsPerGapG: per,
+    spanMin,
+    totalG: per ? [per[0] * gaps, per[1] * gaps] : null,
+  }
+}
 
 // --- Hitze, Kälte, Reise ------------------------------------------------------
 

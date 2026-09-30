@@ -97,7 +97,7 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
 | 1 ✅ | Regelbasis: Evidenzobjekt, Sportgruppen, Ausdauer-Sportarten (Laufen 5–10 km, Marathon/Ultra, Radfahren, Schwimmen, Triathlon kurz und lang, Rudern). Protein auf 1,6–2,2 samt Quelle in Formelregister und Texten aller Sprachen. Vorhandenes Fueling darauf umgestellt. |
 | 2 ✅ | Plan je Einheit und Wettkampftag (Vorher / Währenddessen / Nachher), Aufladen, Schweissrate und Magen-Darm-Grenze sichtbar, Rückmeldung nach der Einheit. |
 | 3 ✅ | Hitze, Höhe, Reise als Modifikatoren; Supplement-Informationsseite. |
-| 4 | Kampfsport (G6) und Teamsport: Turniertag-Planer für Zwischenkämpfe, mit Hinweistext aus §4. |
+| 4 ✅ | Kampfsport (G6) und Teamsport: Turniertag-Planer für Zwischenkämpfe, mit Hinweistext aus §4. |
 
 ## 8. Offen
 
@@ -121,6 +121,15 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
   (`src/data/supplements.ts`): Koffein, Kreatin, Bikarbonat, Beta-Alanin, Anti-Doping-Warnung
   vor der Liste, Links zu WADA und NADA Deutschland, keine Dosis, keine Marke. Die Stärken
   (hoch/mittel) sind unsere Einordnung der ISSN-Positionspapiere, nicht am Primärtext geprüft.
+- **Stufe 4 gebaut (30.09.2026):** Regeln für Judo, Ringen, Boxen, Taekwondo, MMA (Konsensus,
+  «mittel»), BJJ, Kickboxen, Pencak Silat, Karate (Übertragung, «niedrig»), Fechten sowie
+  Fussball, Handball, Basketball, Rugby, Volleyball, Cricket. Ju-Jutsu und HYROX haben keine
+  Regel. Kampfformat im Wettkampf: während des Kampfes keine Zufuhr; **Turniertag-Planer**
+  nur für Verpflegung und Flüssigkeit zwischen den Kämpfen. Die Mengen sind aus Ausdauer
+  übertragen (30–60 g/h auf die Pause gerechnet) und so gekennzeichnet; unter 10 min Pause
+  nur Flüssigkeit. Bei Sportarten mit Gewichtsklasse steht der Hinweis «nicht Sache von KYDON»
+  mit Verweis auf ISSN 2025, Reale 2017 und IOC REDs 2023 über der Regel. Nichts zu Wiegen,
+  Gewicht oder Zeit danach.
 - Morton et al. (2018) ist eine Meta-Analyse zu **Krafttraining**. Für Ausdauer
   ist 1,6–2,2 g/kg damit übertragen; das Abzeichen zeigt «Übertragen» nur, wenn die
   Regel so gekennzeichnet ist — für die Proteinspanne fehlt noch ein eigenes

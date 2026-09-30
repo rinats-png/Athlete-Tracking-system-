@@ -1966,7 +1966,9 @@
         "g30_60": "En competición 30–60 g de hidratos de carbono por hora, según la duración y la tolerancia.",
         "g30_90": "En competición 30–60 g por hora, desde unas 2,5 horas hasta unos 90 g por hora con varios tipos de hidratos de carbono.",
         "g60_90": "En competición normalmente 60–90 g de hidratos de carbono por hora, con varios tipos y ensayados antes.",
-        "advanced": "90–120 g por hora solo tras entrenar el intestino y nunca por defecto; la evidencia es claramente más débil."
+        "advanced": "90–120 g por hora solo tras entrenar el intestino y nunca por defecto; la evidencia es claramente más débil.",
+        "between_bouts": "Normalmente nada durante el combate; entre combates pequeñas cantidades de hidratos de carbono fáciles de digerir y líquido, según la tolerancia.",
+        "breaks": "En descansos, tiempos muertos y al descanso, pequeñas cantidades de hidratos de carbono y líquido, según la tolerancia."
       },
       "carbLoad": {
         "not_essential": "La carga de hidratos no hace falta en una carrera de menos de 90 minutos; antes, 1–4 g/kg, 1–4 horas antes.",
@@ -2026,7 +2028,8 @@
       "noRapid": "8 horas o más hasta la próxima sesión: bastan comidas normales dentro de tu rango diario.",
       "proteinMeal": "Proteína por comida (0,3 g/kg)",
       "rehydrate": "Compensación de la pérdida medida (125–150 %), durante varias horas",
-      "note": "Un rango basado en documentos de consenso, no un objetivo. No es una guía para categorías de peso ni pérdida de peso."
+      "note": "Un rango basado en documentos de consenso, no un objetivo. No es una guía para categorías de peso ni pérdida de peso.",
+      "duringBouts": "En el combate mismo normalmente no se toma nada — ver la jornada de torneo más abajo."
     },
     "profile": {
       "title": "Tus valores",
@@ -2101,6 +2104,25 @@
           "limits": "El hormigueo de la piel es frecuente. El efecto se construye durante semanas, no en un día."
         }
       }
+    },
+    "tournament": {
+      "title": "Jornada de torneo: entre combates",
+      "bouts": "Combates",
+      "boutMin": "Duración de un combate",
+      "gapMin": "Pausa entre ellos",
+      "perGap": "por pausa",
+      "total": "Unos {{g}} g en total en {{gaps}} pausas",
+      "kind": {
+        "sips": "Pausa de menos de 10 minutos: solo líquido, en sorbos pequeños, según la tolerancia.",
+        "small": "Pausa corta (10–29 minutos): pequeñas cantidades de hidratos de carbono fáciles de digerir y líquido.",
+        "snack": "Pausa más larga (30 minutos o más): un tentempié pequeño con hidratos de carbono, poca grasa y fibra, y líquido."
+      },
+      "evidence": "Las cantidades se han trasladado de estudios de resistencia (30–60 g por hora, ajustadas a la pausa) — evidencia baja. Las fuentes sobre deportes de combate solo dicen «pequeño y fácil de digerir».",
+      "scope": "Solo comida y líquido entre combates. Nada sobre el pesaje, el peso ni el tiempo posterior."
+    },
+    "weightClass": {
+      "title": "Categorías de peso: no es asunto de KYDON",
+      "body": "El pesaje, la pérdida de peso y el corte de peso corresponden a la medicina deportiva y a profesionales de la nutrición, y en menores de 18 años no como medida aguda. KYDON no calcula nada al respecto y no da instrucciones — tampoco un calendario tras el pesaje. Para leer más:"
     }
   },
   "hrv": {

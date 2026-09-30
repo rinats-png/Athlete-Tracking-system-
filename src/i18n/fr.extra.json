@@ -1966,7 +1966,9 @@
         "g30_60": "En compétition, 30–60 g de glucides par heure, selon la durée et la tolérance.",
         "g30_90": "En compétition, 30–60 g par heure, à partir d'environ 2,5 heures jusqu'à environ 90 g par heure avec plusieurs types de glucides.",
         "g60_90": "En compétition, en général 60–90 g de glucides par heure, avec plusieurs types de glucides et testés à l'avance.",
-        "advanced": "90–120 g par heure seulement après un entraînement digestif et jamais par défaut ; les preuves sont nettement plus faibles."
+        "advanced": "90–120 g par heure seulement après un entraînement digestif et jamais par défaut ; les preuves sont nettement plus faibles.",
+        "between_bouts": "En général rien pendant le combat ; entre les combats de petites quantités de glucides faciles à digérer et du liquide, selon la tolérance.",
+        "breaks": "Pendant les pauses, temps morts et à la mi-temps, de petites quantités de glucides et de liquide, selon la tolérance."
       },
       "carbLoad": {
         "not_essential": "La charge en glucides n'est pas nécessaire pour une course de moins de 90 minutes ; avant, 1–4 g/kg, 1–4 heures avant.",
@@ -2026,7 +2028,8 @@
       "noRapid": "8 heures ou plus avant la prochaine séance : des repas normaux dans ta fourchette quotidienne suffisent.",
       "proteinMeal": "Protéines par repas (0,3 g/kg)",
       "rehydrate": "Compensation de la perte mesurée (125–150 %), sur plusieurs heures",
-      "note": "Une fourchette issue de documents de consensus, pas un objectif. Pas de conseil pour les catégories de poids ou la perte de poids."
+      "note": "Une fourchette issue de documents de consensus, pas un objectif. Pas de conseil pour les catégories de poids ou la perte de poids.",
+      "duringBouts": "Pendant le combat lui-même, en général aucun apport — voir la journée de tournoi ci-dessous."
     },
     "profile": {
       "title": "Tes valeurs",
@@ -2101,6 +2104,25 @@
           "limits": "Des fourmillements de la peau sont fréquents. L'effet se construit sur des semaines, pas sur un jour."
         }
       }
+    },
+    "tournament": {
+      "title": "Journée de tournoi : entre les combats",
+      "bouts": "Combats",
+      "boutMin": "Durée d'un combat",
+      "gapMin": "Pause entre deux",
+      "perGap": "par pause",
+      "total": "Environ {{g}} g au total sur {{gaps}} pauses",
+      "kind": {
+        "sips": "Pause de moins de 10 minutes : seulement du liquide, en petites gorgées, selon la tolérance.",
+        "small": "Pause courte (10–29 minutes) : petits apports de glucides faciles à digérer et du liquide.",
+        "snack": "Pause plus longue (30 minutes ou plus) : petite collation avec glucides, peu de graisses et de fibres, et du liquide."
+      },
+      "evidence": "Les quantités sont transposées d'études d'endurance (30–60 g par heure, ramenées à la pause) — preuves faibles. Les sources sur les sports de combat disent seulement « petit et facile à digérer ».",
+      "scope": "Uniquement l'alimentation et le liquide entre les combats. Rien sur la pesée, le poids ou la période qui suit."
+    },
+    "weightClass": {
+      "title": "Catégories de poids : pas l'affaire de KYDON",
+      "body": "La pesée, la perte de poids et la coupe de poids relèvent de la médecine du sport et de professionnels de la nutrition, et chez les moins de 18 ans pas comme mesure aiguë. KYDON ne calcule rien à ce sujet et ne donne aucune instruction — pas non plus de calendrier après la pesée. Pour en savoir plus :"
     }
   },
   "hrv": {

@@ -1966,7 +1966,9 @@
         "g30_60": "Tijdens de wedstrijd 30–60 g koolhydraten per uur, afhankelijk van duur en verdraagzaamheid.",
         "g30_90": "Tijdens de wedstrijd 30–60 g per uur, vanaf ongeveer 2,5 uur tot ongeveer 90 g per uur met meerdere soorten koolhydraten.",
         "g60_90": "Tijdens de wedstrijd meestal 60–90 g koolhydraten per uur, met meerdere soorten koolhydraten en vooraf geoefend.",
-        "advanced": "90–120 g per uur alleen na darmtraining en nooit als standaard; het bewijs daarvoor is duidelijk zwakker."
+        "advanced": "90–120 g per uur alleen na darmtraining en nooit als standaard; het bewijs daarvoor is duidelijk zwakker.",
+        "between_bouts": "Meestal niets tijdens het gevecht; tussen de gevechten kleine hoeveelheden makkelijk verteerbare koolhydraten en vocht, voor zover verdragen.",
+        "breaks": "In pauzes, time-outs en bij de rust kleine hoeveelheden koolhydraten en vocht, voor zover verdragen."
       },
       "carbLoad": {
         "not_essential": "Koolhydraten laden is voor een race van minder dan 90 minuten niet nodig; vooraf 1–4 g/kg, 1–4 uur ervoor.",
@@ -2026,7 +2028,8 @@
       "noRapid": "8 uur of meer tot de volgende training: normale maaltijden binnen je dagbereik volstaan.",
       "proteinMeal": "Eiwit per maaltijd (0,3 g/kg)",
       "rehydrate": "Aanvulling van het gemeten verlies (125–150 %), over meerdere uren",
-      "note": "Een bereik uit consensusdocumenten, geen doel. Geen richtlijn voor gewichtsklassen of gewichtsverlies."
+      "note": "Een bereik uit consensusdocumenten, geen doel. Geen richtlijn voor gewichtsklassen of gewichtsverlies.",
+      "duringBouts": "Tijdens het gevecht zelf meestal geen inname — zie wedstrijddag hieronder."
     },
     "profile": {
       "title": "Jouw waarden",
@@ -2101,6 +2104,25 @@
           "limits": "Tintelingen van de huid komen vaak voor. Het effect bouwt zich over weken op, niet in één dag."
         }
       }
+    },
+    "tournament": {
+      "title": "Toernooidag: tussen de gevechten",
+      "bouts": "Gevechten",
+      "boutMin": "Duur van een gevecht",
+      "gapMin": "Pauze ertussen",
+      "perGap": "per pauze",
+      "total": "Ongeveer {{g}} g in totaal over {{gaps}} pauzes",
+      "kind": {
+        "sips": "Pauze korter dan 10 minuten: alleen vocht, in kleine slokjes, voor zover verdragen.",
+        "small": "Korte pauze (10–29 minuten): kleine hoeveelheden makkelijk verteerbare koolhydraten en vocht.",
+        "snack": "Langere pauze (30 minuten of meer): een kleine snack met koolhydraten, weinig vet en vezels, plus vocht."
+      },
+      "evidence": "De hoeveelheden zijn overgenomen uit duurstudies (30–60 g per uur, omgerekend naar de pauze) — bewijs laag. De bronnen over vechtsporten zeggen alleen «klein en makkelijk verteerbaar».",
+      "scope": "Alleen eten en vocht tussen de gevechten. Niets over wegen, gewicht of de tijd erna."
+    },
+    "weightClass": {
+      "title": "Gewichtsklassen: niet aan KYDON",
+      "body": "Wegen, gewichtsverlies en afvallen voor de weging horen thuis bij sportgeneeskunde en voedingsdeskundigen, en bij onder-18-jarigen niet als acute maatregel. KYDON rekent hier niets voor uit en geeft geen instructies — ook geen tijdschema na het wegen. Om na te lezen:"
     }
   },
   "hrv": {

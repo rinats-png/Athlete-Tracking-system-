@@ -1966,7 +1966,9 @@
         "g30_60": "Im Wettkampf 30–60 g Kohlenhydrate pro Stunde, je nach Dauer und Verträglichkeit.",
         "g30_90": "Im Wettkampf 30–60 g pro Stunde, ab etwa 2,5 Stunden bis etwa 90 g pro Stunde mit mehreren Kohlenhydratarten.",
         "g60_90": "Im Wettkampf üblicherweise 60–90 g Kohlenhydrate pro Stunde, mit mehreren Kohlenhydratarten und vorher geübt.",
-        "advanced": "90–120 g pro Stunde nur nach Magen-Darm-Training und nie als Standard; die Evidenz dafür ist deutlich schwächer."
+        "advanced": "90–120 g pro Stunde nur nach Magen-Darm-Training und nie als Standard; die Evidenz dafür ist deutlich schwächer.",
+        "between_bouts": "Während des Kampfes meist nichts; zwischen den Kämpfen kleine, leicht verdauliche Kohlenhydrate und Flüssigkeit, soweit verträglich.",
+        "breaks": "In Pausen, Auszeiten und Halbzeit kleine Mengen Kohlenhydrate und Flüssigkeit, soweit verträglich."
       },
       "carbLoad": {
         "not_essential": "Aufladen ist für ein Rennen unter 90 Minuten nicht nötig; vorher 1–4 g/kg, 1–4 Stunden davor.",
@@ -2026,7 +2028,8 @@
       "noRapid": "Bis zur nächsten Einheit 8 Stunden oder mehr: normale Mahlzeiten nach deiner Tagesspanne genügen.",
       "proteinMeal": "Protein je Mahlzeit (0,3 g/kg)",
       "rehydrate": "Ausgleich des gemessenen Verlusts (125–150 %), über mehrere Stunden",
-      "note": "Eine Spanne nach Konsensuspapieren, kein Sollwert. Keine Anleitung für Gewichtsklassen oder Gewichtsabnahme."
+      "note": "Eine Spanne nach Konsensuspapieren, kein Sollwert. Keine Anleitung für Gewichtsklassen oder Gewichtsabnahme.",
+      "duringBouts": "Im Kampf selbst meist keine Zufuhr — siehe Turniertag unten."
     },
     "profile": {
       "title": "Deine Werte",
@@ -2101,6 +2104,25 @@
           "limits": "Kribbeln der Haut ist häufig. Die Wirkung baut sich über Wochen auf, nicht über einen Tag."
         }
       }
+    },
+    "tournament": {
+      "title": "Turniertag: zwischen den Kämpfen",
+      "bouts": "Kämpfe",
+      "boutMin": "Dauer je Kampf",
+      "gapMin": "Pause dazwischen",
+      "perGap": "je Pause",
+      "total": "Insgesamt etwa {{g}} g über {{gaps}} Pausen",
+      "kind": {
+        "sips": "Unter 10 Minuten Pause: nur Flüssigkeit in kleinen Schlucken, soweit verträglich.",
+        "small": "Kurze Pause (10–29 Minuten): kleine, leicht verdauliche Kohlenhydrate und Flüssigkeit.",
+        "snack": "Längere Pause (ab 30 Minuten): kleiner Snack mit Kohlenhydraten, wenig Fett und Ballaststoffen, dazu Flüssigkeit."
+      },
+      "evidence": "Die Mengen sind aus Ausdauerstudien übertragen (30–60 g je Stunde, auf die Pause gerechnet) — Evidenz niedrig. Die Quellen zum Kampfsport nennen nur «klein und leicht verdaulich».",
+      "scope": "Nur Verpflegung und Flüssigkeit zwischen den Kämpfen. Nichts zu Wiegen, Gewicht oder der Zeit danach."
+    },
+    "weightClass": {
+      "title": "Gewichtsklassen: nicht Sache von KYDON",
+      "body": "Wiegen, Gewichtsabnahme und Abkochen gehören in die Hand von Sportmedizin und Ernährungsfachpersonal, bei unter 18-Jährigen nicht als akute Maßnahme. KYDON rechnet dazu nichts und gibt keine Anleitung — auch keinen Zeitplan nach dem Wiegen. Zum Nachlesen:"
     }
   },
   "hrv": {

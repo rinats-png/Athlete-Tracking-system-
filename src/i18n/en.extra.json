@@ -1966,7 +1966,9 @@
         "g30_60": "During competition 30–60 g carbohydrate per hour, depending on duration and tolerance.",
         "g30_90": "During competition 30–60 g per hour, from about 2.5 hours up to about 90 g per hour with several carbohydrate types.",
         "g60_90": "During competition typically 60–90 g carbohydrate per hour, with several carbohydrate types and rehearsed beforehand.",
-        "advanced": "90–120 g per hour only after gut training and never as a default; the evidence for it is clearly weaker."
+        "advanced": "90–120 g per hour only after gut training and never as a default; the evidence for it is clearly weaker.",
+        "between_bouts": "Usually nothing during the bout; between bouts small, easily digestible carbohydrate and fluid, as tolerated.",
+        "breaks": "In breaks, timeouts and at half-time small amounts of carbohydrate and fluid, as tolerated."
       },
       "carbLoad": {
         "not_essential": "Carbohydrate loading is not needed for a race under 90 minutes; beforehand 1–4 g/kg, 1–4 hours before.",
@@ -2026,7 +2028,8 @@
       "noRapid": "8 hours or more until the next session: normal meals within your daily range are enough.",
       "proteinMeal": "Protein per meal (0.3 g/kg)",
       "rehydrate": "Replacing the measured loss (125–150 %), over several hours",
-      "note": "A range from consensus papers, not a target. Not guidance for weight classes or weight loss."
+      "note": "A range from consensus papers, not a target. Not guidance for weight classes or weight loss.",
+      "duringBouts": "No intake during the bout itself, usually — see tournament day below."
     },
     "profile": {
       "title": "Your values",
@@ -2101,6 +2104,25 @@
           "limits": "Skin tingling is common. The effect builds over weeks, not a day."
         }
       }
+    },
+    "tournament": {
+      "title": "Tournament day: between bouts",
+      "bouts": "Bouts",
+      "boutMin": "Length of a bout",
+      "gapMin": "Break in between",
+      "perGap": "per break",
+      "total": "About {{g}} g in total over {{gaps}} breaks",
+      "kind": {
+        "sips": "Break under 10 minutes: fluid only, in small sips, as tolerated.",
+        "small": "Short break (10–29 minutes): small, easily digestible carbohydrate and fluid.",
+        "snack": "Longer break (30 minutes or more): a small snack with carbohydrate, little fat and fibre, plus fluid."
+      },
+      "evidence": "The amounts are transferred from endurance studies (30–60 g per hour, scaled to the break) — evidence low. The combat-sport sources only say “small and easily digestible”.",
+      "scope": "Only food and fluid between bouts. Nothing on weigh-in, weight or the time after."
+    },
+    "weightClass": {
+      "title": "Weight classes: not KYDON’s business",
+      "body": "Weigh-in, weight loss and cutting belong in the hands of sports medicine and qualified nutrition professionals, and for under-18s not as an acute measure. KYDON calculates nothing on this and gives no instructions — no timeline after weigh-in either. Further reading:"
     }
   },
   "hrv": {

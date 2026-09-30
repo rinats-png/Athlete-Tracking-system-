@@ -99,6 +99,21 @@ export const FUEL_SOURCES: Record<string, FuelSource> = {
     citation: 'Maughan et al. (2018). IOC consensus statement: dietary supplements and the high-performance athlete. Br J Sports Med 52:439–455',
     url: 'https://pubmed.ncbi.nlm.nih.gov/29540367/',
   },
+  ricci2025: {
+    id: 'ricci2025',
+    citation: 'Ricci et al. (2025). International Society of Sports Nutrition position stand: nutrition and weight cut strategies for mixed martial arts and other combat sports. J Int Soc Sports Nutr 22',
+    url: 'https://pubmed.ncbi.nlm.nih.gov/40059405/',
+  },
+  reale2017: {
+    id: 'reale2017',
+    citation: 'Reale, Slater & Burke (2017). Acute-weight-loss strategies for combat sports and applications to Olympic success. Int J Sports Physiol Perform 12(2):142–151',
+    url: 'https://pubmed.ncbi.nlm.nih.gov/28316263/',
+  },
+  mountjoy2023: {
+    id: 'mountjoy2023',
+    citation: 'Mountjoy et al. (2023). 2023 International Olympic Committee consensus statement on Relative Energy Deficiency in Sport (REDs). Br J Sports Med 57:1073–1097',
+    url: 'https://pubmed.ncbi.nlm.nih.gov/37752011/',
+  },
   costa2017: {
     id: 'costa2017',
     citation: 'Costa et al. (2017). Systematic review: exercise-induced gastrointestinal syndrome — implications for health and intestinal disease. Aliment Pharmacol Ther 46(3):246–265',
@@ -106,9 +121,9 @@ export const FUEL_SOURCES: Record<string, FuelSource> = {
   },
 }
 
-export type FuelGroup = 'g3_endurance' | 'g4_multisport' | 'g_rowing'
+export type FuelGroup = 'g3_endurance' | 'g4_multisport' | 'g_rowing' | 'g6_combat' | 'intermittent' | 'team'
 /** Verpflegung während des Wettkampfs: grobe Einordnung, die Zahlen stehen in den Texten. */
-export type IntraKind = 'none_in_race' | 'g30_60' | 'g30_90' | 'g60_90'
+export type IntraKind = 'none_in_race' | 'g30_60' | 'g30_90' | 'g60_90' | 'between_bouts' | 'breaks'
 /** Aufladen vor dem Ereignis. `null` = die Vorlage macht dazu keine Aussage. */
 export type CarbLoad = 'not_essential' | 'appropriate' | null
 
@@ -123,14 +138,18 @@ export interface FuelRule {
   carbsPerKg: [number, number]
   intra: IntraKind
   carbLoad: CarbLoad
+  /** Turnierformat mit mehreren Kämpfen an einem Tag: der Turniertag-Planer gilt. */
+  tournament?: boolean
+  /** Sportart mit Gewichtsklassen: der Hinweis zu Wiegen und Abkochen steht dabei. */
+  weightClass?: boolean
   evidence: FuelEvidence
 }
 
 const REVIEWED = '2026-09-30'
-const ev = (strength: EvidenceStrength, sourceIds: string[], type: EvidenceType = 'consensus'): FuelEvidence => ({
+const ev = (strength: EvidenceStrength, sourceIds: string[], type: EvidenceType = 'consensus', specificity: SportSpecificity = 'general_athlete'): FuelEvidence => ({
   type,
   strength,
-  specificity: 'general_athlete',
+  specificity,
   verification: 'not_reverified',
   sourceIds,
   ruleVersion: '1.0.0',
@@ -207,5 +226,104 @@ export const FUEL_RULES: FuelRule[] = [
     intra: 'none_in_race',
     carbLoad: null,
     evidence: ev('moderate', ['thomas2016', 'burke2011']),
+  },
+  // --- Kampfsport (Stufe 4). Direkte Studienlage dünn: Konsensus und Übertragung.
+  {
+    id: 'combat_weight',
+    group: 'g6_combat',
+    disciplineIds: ['judo', 'wrestling', 'boxing', 'taekwondo', 'mma'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [4, 7],
+    intra: 'between_bouts',
+    carbLoad: null,
+    tournament: true,
+    weightClass: true,
+    evidence: ev('moderate', ['ricci2025', 'reale2017', 'thomas2016'], 'consensus', 'related_sport'),
+  },
+  {
+    id: 'combat_extrapolated',
+    group: 'g6_combat',
+    disciplineIds: ['bjj', 'kickboxing', 'pencak_silat'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [4, 7],
+    intra: 'between_bouts',
+    carbLoad: null,
+    tournament: true,
+    weightClass: true,
+    evidence: ev('low', ['ricci2025', 'thomas2016'], 'extrapolation', 'related_sport'),
+  },
+  {
+    id: 'karate',
+    group: 'g6_combat',
+    disciplineIds: ['karate'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [3, 6],
+    intra: 'between_bouts',
+    carbLoad: null,
+    tournament: true,
+    weightClass: true,
+    evidence: ev('low', ['ricci2025', 'thomas2016'], 'extrapolation', 'related_sport'),
+  },
+  {
+    id: 'fencing',
+    group: 'intermittent',
+    disciplineIds: ['fencing'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [3, 6],
+    intra: 'between_bouts',
+    carbLoad: null,
+    tournament: true,
+    evidence: ev('low', ['thomas2016'], 'extrapolation', 'related_sport'),
+  },
+  // --- Teamsport (Stufe 4)
+  {
+    id: 'football',
+    group: 'team',
+    disciplineIds: ['football'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [5, 10],
+    intra: 'g30_60',
+    carbLoad: null,
+    evidence: ev('moderate', ['thomas2016', 'jeukendrup2014']),
+  },
+  {
+    id: 'team_court',
+    group: 'team',
+    disciplineIds: ['handball', 'basketball'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [4, 7],
+    intra: 'breaks',
+    carbLoad: null,
+    evidence: ev('moderate', ['thomas2016']),
+  },
+  {
+    id: 'rugby',
+    group: 'team',
+    disciplineIds: ['rugby'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [5, 8],
+    intra: 'breaks',
+    carbLoad: null,
+    evidence: ev('moderate', ['thomas2016']),
+  },
+  {
+    id: 'volleyball',
+    group: 'team',
+    disciplineIds: ['volleyball'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [3, 6],
+    intra: 'breaks',
+    carbLoad: null,
+    evidence: ev('moderate', ['thomas2016']),
+  },
+  {
+    id: 'cricket',
+    group: 'team',
+    disciplineIds: ['cricket'],
+    relatedDisciplineIds: [],
+    carbsPerKg: [3, 7],
+    intra: 'breaks',
+    carbLoad: null,
+    evidence: ev('low', ['thomas2016'], 'extrapolation', 'related_sport'),
   },
 ]

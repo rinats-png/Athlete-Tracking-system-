@@ -1966,7 +1966,9 @@
         "g30_60": "Under tävling 30–60 g kolhydrater per timme, beroende på längd och tolerans.",
         "g30_90": "Under tävling 30–60 g per timme, från cirka 2,5 timmar upp till cirka 90 g per timme med flera kolhydrattyper.",
         "g60_90": "Under tävling vanligen 60–90 g kolhydrater per timme, med flera kolhydrattyper och övat i förväg.",
-        "advanced": "90–120 g per timme först efter magträning och aldrig som standard; underlaget för det är tydligt svagare."
+        "advanced": "90–120 g per timme först efter magträning och aldrig som standard; underlaget för det är tydligt svagare.",
+        "between_bouts": "Oftast inget under matchen; mellan matcherna små mängder lättsmält kolhydrat och vätska, om det tolereras.",
+        "breaks": "I pauser, timeouts och halvtid små mängder kolhydrat och vätska, om det tolereras."
       },
       "carbLoad": {
         "not_essential": "Kolhydratladdning behövs inte för ett lopp under 90 minuter; innan 1–4 g/kg, 1–4 timmar före.",
@@ -2026,7 +2028,8 @@
       "noRapid": "8 timmar eller mer till nästa pass: vanliga måltider inom ditt dagsintervall räcker.",
       "proteinMeal": "Protein per måltid (0,3 g/kg)",
       "rehydrate": "Ersättning av den uppmätta förlusten (125–150 %), över flera timmar",
-      "note": "Ett intervall från konsensusdokument, inget mål. Ingen vägledning för viktklasser eller viktnedgång."
+      "note": "Ett intervall från konsensusdokument, inget mål. Ingen vägledning för viktklasser eller viktnedgång.",
+      "duringBouts": "Under själva matchen oftast inget intag — se tävlingsdagen nedan."
     },
     "profile": {
       "title": "Dina värden",
@@ -2101,6 +2104,25 @@
           "limits": "Stickningar i huden är vanliga. Effekten byggs upp över veckor, inte över en dag."
         }
       }
+    },
+    "tournament": {
+      "title": "Tävlingsdag: mellan matcherna",
+      "bouts": "Matcher",
+      "boutMin": "Längd per match",
+      "gapMin": "Paus emellan",
+      "perGap": "per paus",
+      "total": "Ungefär {{g}} g totalt över {{gaps}} pauser",
+      "kind": {
+        "sips": "Paus under 10 minuter: bara vätska i små klunkar, om det tolereras.",
+        "small": "Kort paus (10–29 minuter): små mängder lättsmält kolhydrat och vätska.",
+        "snack": "Längre paus (30 minuter eller mer): en liten mellanmål med kolhydrat, lite fett och fiber, plus vätska."
+      },
+      "evidence": "Mängderna är överförda från uthållighetsstudier (30–60 g per timme, omräknat till pausen) — evidens låg. Källorna om kampsport säger bara ”litet och lättsmält”.",
+      "scope": "Endast mat och vätska mellan matcherna. Inget om invägning, vikt eller tiden efter."
+    },
+    "weightClass": {
+      "title": "Viktklasser: inte KYDONs sak",
+      "body": "Invägning, viktnedgång och viktminskning inför invägning hör hemma hos idrottsmedicin och kostkunnig personal, och för under 18 år inte som akut åtgärd. KYDON räknar inget på detta och ger ingen anvisning — inte heller något tidsschema efter invägningen. Att läsa vidare:"
     }
   },
   "hrv": {

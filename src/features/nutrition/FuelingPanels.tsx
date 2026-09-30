@@ -9,7 +9,7 @@ import { FUEL_SOURCES } from '@/data/fuelRules'
 import { ANTI_DOPING_LINKS, SUPPLEMENTS } from '@/data/supplements'
 import { disciplineById } from '@/data/sportProfiles'
 import { fuelRuleFor, sportDailyNeed } from '@/domain/fuel'
-import { contextNotes, feelByBand, gutProfile, planFuel, sweatProfile, type Conditions, type SessionKind, type Travel } from '@/domain/fuelPlan'
+import { contextNotes, feelByBand, gutProfile, planFuel, sweatProfile, tournamentPlan, type Conditions, type SessionKind, type Travel } from '@/domain/fuelPlan'
 import { pick } from '@/i18n/pick'
 import { bandPosition, dailyFuelNeed, recentFueling, weeklyWeightRate, type IntraBand } from '@/domain/fueling'
 import type { Macros } from '@/domain/nutrition'
@@ -280,6 +280,21 @@ function FuelRulePanel({ weightKg }: { weightKg: number | null }) {
         </ul>
         <p className="mt-2 text-[11px] text-ink-muted">{t('fueling.rule.version', { version: ev.ruleVersion, date: ev.reviewed })}</p>
       </div>
+      {rule.weightClass && (
+        <div className="border-t border-line bg-accent-quiet px-4 py-3 text-[12px]" data-testid="fuel-weightclass">
+          <p className="font-medium">{t('fueling.weightClass.title')}</p>
+          <p className="mt-1 text-ink-secondary">{t('fueling.weightClass.body')}</p>
+          <ul className="mt-2 space-y-0.5 text-[11px] text-ink-muted">
+            {['ricci2025', 'reale2017', 'mountjoy2023'].map((id) => (
+              <li key={id}>
+                <a href={FUEL_SOURCES[id].url ?? undefined} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
+                  {FUEL_SOURCES[id].citation}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('fueling.rule.scope')}</p>
     </Panel>
   )
@@ -302,6 +317,9 @@ function FuelPlanPanel({ day, weightKg }: { day: string; weightKg: number | null
   const [durationMin, setDurationMin] = useState<number | null>(90)
   const [hoursToNext, setHoursToNext] = useState<number | null>(null)
   const [lossKg, setLossKg] = useState<number | null>(null)
+  const [bouts, setBouts] = useState<number | null>(4)
+  const [boutMin, setBoutMin] = useState<number | null>(5)
+  const [gapMin, setGapMin] = useState<number | null>(30)
   const [conditions, setConditions] = useState<Conditions>('normal')
   const [travel, setTravel] = useState<Travel>('none')
   const gut = useMemo(() => gutProfile(recentFueling(diary, day, 90)), [diary, day])
@@ -309,6 +327,7 @@ function FuelPlanPanel({ day, weightKg }: { day: string; weightKg: number | null
   const plan = planFuel({ rule: match.rule, weightKg, durationMin: durationMin ?? 0, kind, hoursToNext, gutTroubleGPerH: gut?.troubleGPerH ?? null, lossKg })
   const { before, during, after } = plan
   const notes = contextNotes(conditions, travel)
+  const tournament = match.rule.tournament && kind === 'race' ? tournamentPlan({ bouts: bouts ?? 0, boutMin: boutMin ?? 0, gapMin: gapMin ?? 0 }) : null
 
   return (
     <Panel className="mb-4" data-testid="fuel-plan">
@@ -366,7 +385,7 @@ function FuelPlanPanel({ day, weightKg }: { day: string; weightKg: number | null
           </section>
           <section className="space-y-1.5 px-4 py-3 text-[13px]" data-testid="fuel-plan-during">
             <span className="label-tag">{t('fueling.plan.during')}</span>
-            <p className="readout">{bandText(t, during.band)}</p>
+            {during.betweenBouts ? <p data-testid="fuel-plan-bouts-note">{t('fueling.plan.duringBouts')}</p> : <p className="readout">{bandText(t, during.band)}</p>}
             {during.gutCapGPerH != null && (
               <p className="text-[12px] text-warning" data-testid="fuel-plan-gutcap">
                 {t('fueling.plan.gutCap', { value: during.gutCapGPerH })}
@@ -398,6 +417,31 @@ function FuelPlanPanel({ day, weightKg }: { day: string; weightKg: number | null
               </p>
             )}
           </section>
+        </div>
+      )}
+      {match.rule.tournament && kind === 'race' && (
+        <div className="border-t border-line px-4 py-3 text-[13px]" data-testid="fuel-tournament">
+          <span className="label-tag">{t('fueling.tournament.title')}</span>
+          <div className="mt-2 grid gap-3 sm:grid-cols-3">
+            <NumberField label={t('fueling.tournament.bouts')} value={bouts} onChange={setBouts} min={1} max={12} step={1} />
+            <NumberField label={t('fueling.tournament.boutMin')} unit="min" value={boutMin} onChange={setBoutMin} min={1} max={30} step={1} />
+            <NumberField label={t('fueling.tournament.gapMin')} unit="min" value={gapMin} onChange={setGapMin} min={0} max={300} step={5} />
+          </div>
+          {tournament && (
+            <div className="mt-3 space-y-1">
+              <p data-testid="fuel-tournament-gap">
+                {t(`fueling.tournament.kind.${tournament.gapKind}`)}
+                {tournament.carbsPerGapG && <span className="readout"> · {rangeText(tournament.carbsPerGapG, locale)} g {t('fueling.tournament.perGap')}</span>}
+              </p>
+              {tournament.totalG && tournament.gaps > 0 && (
+                <p className="readout text-[12px] text-ink-secondary">
+                  {t('fueling.tournament.total', { g: rangeText(tournament.totalG, locale), gaps: tournament.gaps })}
+                </p>
+              )}
+              <p className="text-[11px] text-ink-muted">{t('fueling.tournament.evidence')}</p>
+              <p className="text-[11px] text-ink-muted">{t('fueling.tournament.scope')}</p>
+            </div>
+          )}
         </div>
       )}
       {notes.length > 0 && (
