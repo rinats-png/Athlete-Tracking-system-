@@ -2211,12 +2211,20 @@
       "design": "Nytt design: kort av frostet glass med nivåer, monotall for måleverdier og roligere overganger — lyst og mørkt.",
       "tests": "Testbibliotek etter protokoll 1.0: 126 tester i 29 områder, hver med mål, oppsett, trinn og vurdering.",
       "images": "Bilder av testoppsettene i beskrivelsene i stedet for skisser.",
-      "fuel": "Nytt i kostholdet — Fuel: regelen for grenen din (utholdenhet, kampsport, lagidrett) med kilder og evidensmerker, en plan for en økt og for konkurranse, svetteraten din og magegrensen din.",
+      "fuel": "Nytt område Fuel i nedre felt: regelen for grenen din (utholdenhet, kampsport, lagidrett) med kilder og evidensmerker, en plan for en økt og for konkurranse, svetteraten din og magegrensen din.",
       "tournament": "Konkurransedagsplanlegger for kampsport: mat og væske mellom kampene.",
       "supplements": "Informasjonsside om kosttilskudd med evidens, kildelenker og antidopingvarsel — uten dosering og uten merker.",
       "energy": "Dagbok: nytt felt «Energi under økten» (1–5) ved siden av kosthold og magebesvær.",
       "protein": "Proteinspenn nå 1,6–2,2 g/kg per dag (tidligere 1,2–2,0).",
       "pro": "Kosthold og Fuel er en del av Pro."
     }
+  },
+  "fuel": {
+    "eyebrow": "Fuel",
+    "title": "Fuel",
+    "intro": "Kosthold, væske og restitusjon etter grenen din — med kilder og evidensmerker.",
+    "mealsLabel": "Kosthold",
+    "mealsLink": "Måltider, dagsbehov og inntak i økter",
+    "nutritionLink": "Regelen for grenen din, plan for økt og konkurranse, kosttilskudd"
   }
 }

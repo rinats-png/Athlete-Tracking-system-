@@ -29,10 +29,6 @@ function shift(day: string, delta: number): string {
 export function FuelingPanels({ day, weightKg, totals }: { day: string; weightKg: number | null; totals: Macros }) {
   return (
     <>
-      <FuelRulePanel weightKg={weightKg} />
-      <FuelPlanPanel day={day} weightKg={weightKg} />
-      <FuelProfilePanel day={day} />
-      <SupplementPanel />
       <FuelNeedPanel day={day} weightKg={weightKg} totals={totals} />
       <SessionFuelingPanel day={day} />
       <WeightBandPanel day={day} />
@@ -297,6 +293,22 @@ function FuelRulePanel({ weightKg }: { weightKg: number | null }) {
       )}
       <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('fueling.rule.scope')}</p>
     </Panel>
+  )
+}
+
+/**
+ * Der Fuel-Bereich (eigener Reiter in der unteren Leiste, /fuel): Regel der
+ * Disziplin, Plan, eigene Werte, Nahrungsergänzung. Die Ernährung behält den
+ * Tagesbedarf, die Verpflegung je Einheit und das Gewichtsband.
+ */
+export function FuelHub({ day, weightKg }: { day: string; weightKg: number | null }) {
+  return (
+    <>
+      <FuelRulePanel weightKg={weightKg} />
+      <FuelPlanPanel day={day} weightKg={weightKg} />
+      <FuelProfilePanel day={day} />
+      <SupplementPanel />
+    </>
   )
 }
 

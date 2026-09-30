@@ -15,12 +15,14 @@
       "diagnostics": "Diagnostik",
       "analysis": "Analyse",
       "history": "Verlauf",
-      "profile": "Profil"
+      "profile": "Profil",
+      "fuel": "Fuel"
     },
     "overview": "Übersicht",
     "diagnostics": "Diagnostik",
     "analysis": "Analyse",
-    "skipToContent": "Zum Inhalt springen"
+    "skipToContent": "Zum Inhalt springen",
+    "fuel": "Fuel"
   },
   "actions": {
     "startTest": "Test starten",

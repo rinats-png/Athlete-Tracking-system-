@@ -24,7 +24,7 @@ test.describe('Fuel und die Pro-Schranke', () => {
   })
 })
 
-async function withPlan(page: import('@playwright/test').Page, product: string | null) {
+async function withPlan(page: import('@playwright/test').Page, product: string | null, path = '/fuel') {
   await openDemo(page)
   await page.evaluate((p) => {
     localStorage.setItem('kydon.billing.mode', 'on')
@@ -33,14 +33,17 @@ async function withPlan(page: import('@playwright/test').Page, product: string |
     data.athletes[0].profile.disciplineId = 'marathon'
     localStorage.setItem('kydon.data.v1', JSON.stringify(data))
   }, product)
-  await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+  await page.goto(path, { waitUntil: 'domcontentloaded' })
 }
 
 for (const plan of [null, 'athlete_plus']) {
   test(`${plan ?? 'ohne Stufe'}: Schranke statt Fuel-Karten`, async ({ page }) => {
     await withPlan(page, plan)
     await expect(page.getByTestId('gate-nutrition')).toBeVisible()
-    for (const id of ['fuel-rule', 'fuel-plan', 'fuel-profile', 'fuel-supplements', 'fuel-need']) await expect(page.getByTestId(id), id).toHaveCount(0)
+    for (const id of ['fuel-rule', 'fuel-plan', 'fuel-profile', 'fuel-supplements']) await expect(page.getByTestId(id), id).toHaveCount(0)
+    await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('gate-nutrition')).toBeVisible()
+    await expect(page.getByTestId('fuel-need')).toHaveCount(0)
   })
 }
 

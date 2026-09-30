@@ -81,7 +81,7 @@ test('Judo: Hinweis zu Gewichtsklassen und Turniertag in der Ernährung', async 
     data.athletes[0].profile.disciplineId = 'judo'
     localStorage.setItem('kydon.data.v1', JSON.stringify(data))
   })
-  await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+  await page.goto('/fuel', { waitUntil: 'domcontentloaded' })
   await expect(page.getByTestId('fuel-weightclass')).toBeVisible()
   await expect(page.getByTestId('fuel-tournament')).toHaveCount(0)
   await page.getByTestId('fuel-plan').getByRole('button', { name: /Wettkampf/ }).click()

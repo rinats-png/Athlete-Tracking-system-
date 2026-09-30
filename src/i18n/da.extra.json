@@ -2211,12 +2211,20 @@
       "design": "Nyt design: kort af matteret glas med niveauer, monotal til måleværdier og roligere overgange — lyst og mørkt.",
       "tests": "Testbibliotek efter protokol 1.0: 126 tests i 29 områder, hver med mål, opstilling, trin og vurdering.",
       "images": "Fotos af testopstillingerne i beskrivelserne i stedet for skitser.",
-      "fuel": "Nyt i kosten — Fuel: reglen for din disciplin (udholdenhed, kampsport, holdsport) med kilder og evidensmærker, en plan for en træning og for konkurrence, din svedrate og din mavegrænse.",
+      "fuel": "Nyt område Fuel i den nederste bjælke: reglen for din disciplin (udholdenhed, kampsport, holdsport) med kilder og evidensmærker, en plan for en træning og for konkurrence, din svedrate og din mavegrænse.",
       "tournament": "Konkurrencedagsplanlægger til kampsport: mad og væske mellem kampene.",
       "supplements": "Informationsside om kosttilskud med evidens, kildelinks og antidopingadvarsel — uden dosering og uden mærker.",
       "energy": "Dagbog: nyt felt »Energi under træningen« (1–5) ved siden af kost og mavegener.",
       "protein": "Proteinspænd nu 1,6–2,2 g/kg om dagen (tidligere 1,2–2,0).",
       "pro": "Kost og Fuel er en del af Pro."
     }
+  },
+  "fuel": {
+    "eyebrow": "Fuel",
+    "title": "Fuel",
+    "intro": "Kost, væske og restitution efter din disciplin — med kilder og evidensmærker.",
+    "mealsLabel": "Kost",
+    "mealsLink": "Måltider, dagsbehov og indtag i træninger",
+    "nutritionLink": "Reglen for din disciplin, plan for træning og konkurrence, kosttilskud"
   }
 }

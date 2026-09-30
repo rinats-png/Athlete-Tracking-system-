@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Activity, BarChart3, ClipboardList, House, User } from 'lucide-react'
+import { Activity, BarChart3, ClipboardList, Flame, House, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
 
@@ -36,15 +36,16 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
  */
 
 /**
- * Die fünf Hauptbereiche (Konzept §5): Übersicht, Diagnostik, Analyse,
- * Verlauf, Profil. Der Testkatalog und die Einzeltests gehören zur
+ * Die sechs Hauptbereiche (Konzept §5, dazu Fuel): Übersicht, Diagnostik,
+ * Analyse, Verlauf, Fuel, Profil. Fuel umfasst auch die Ernährung. Der Testkatalog und die Einzeltests gehören zur
  * Diagnostik; Bericht und Trainer-Ansicht liegen unter Analyse bzw. Profil.
  */
 export const NAV_ITEMS = [
-  { key: 'overview', icon: House, path: '/', alsoMatches: ['/tagebuch', '/training', '/cockpit', '/ernaehrung'] },
+  { key: 'overview', icon: House, path: '/', alsoMatches: ['/tagebuch', '/training', '/cockpit'] },
   { key: 'diagnostics', icon: ClipboardList, path: '/diagnostik', alsoMatches: ['/tests', '/sport', '/batterie'] },
   { key: 'analysis', icon: Activity, path: '/analyse', alsoMatches: ['/bericht', '/community'] },
   { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: ['/werte', '/kalender'] },
+  { key: 'fuel', icon: Flame, path: '/fuel', alsoMatches: ['/ernaehrung'] },
   { key: 'profile', icon: User, path: '/profil', alsoMatches: ['/trainer'] },
 ] as const
 
@@ -97,7 +98,7 @@ export function BottomNav({
     >
       <div
         className={cn(
-          'pointer-events-auto relative mx-auto grid max-w-md grid-cols-5 items-center',
+          'pointer-events-auto relative mx-auto grid max-w-md grid-cols-6 items-center',
           'h-[var(--bottom-nav-h)] rounded-pill border border-line px-1',
           // Milchglas: was darunter durchläuft, bleibt erkennbar. Ohne den
           // Weichzeichner wäre die Leiste entweder undurchsichtig (und
@@ -115,7 +116,7 @@ export function BottomNav({
          */}
         <span
           aria-hidden
-          className="absolute top-1.5 bottom-1.5 left-1 w-[calc((100%-0.5rem)/5)] rounded-pill bg-accent-quiet"
+          className="absolute top-1.5 bottom-1.5 left-1 w-[calc((100%-0.5rem)/6)] rounded-pill bg-accent-quiet"
           style={{
             transform: `translateX(${index * 100}%)`,
             transition: 'transform var(--motion-base) var(--ease-out)',

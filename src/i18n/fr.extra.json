@@ -2211,12 +2211,20 @@
       "design": "Nouveau design : cartes en verre dépoli avec des niveaux, chiffres en mono pour les valeurs mesurées et transitions plus calmes — clair et sombre.",
       "tests": "Bibliothèque de tests selon le protocole 1.0 : 126 tests dans 29 domaines, chacun avec objectif, montage, étapes et évaluation.",
       "images": "Photos des montages de test dans les descriptions à la place des croquis.",
-      "fuel": "Nouveau dans l'alimentation — Fuel : la règle de ta discipline (endurance, sports de combat, sports collectifs) avec sources et badges de preuve, un plan pour une séance et pour la compétition, ton taux de sudation et ta limite digestive.",
+      "fuel": "Nouvelle rubrique Fuel dans la barre du bas : la règle de ta discipline (endurance, sports de combat, sports collectifs) avec sources et badges de preuve, un plan pour une séance et pour la compétition, ton taux de sudation et ta limite digestive.",
       "tournament": "Planificateur de journée de tournoi pour les sports de combat : alimentation et liquide entre les combats.",
       "supplements": "Page d'information sur les compléments avec preuves, liens vers les sources et avertissement antidopage — sans dosage ni marques.",
       "energy": "Journal : nouveau champ « Énergie pendant la séance » (1–5) à côté de l'alimentation et des troubles digestifs.",
       "protein": "Fourchette de protéines désormais 1,6–2,2 g/kg par jour (avant : 1,2–2,0).",
       "pro": "L'alimentation et Fuel font partie de Pro."
     }
+  },
+  "fuel": {
+    "eyebrow": "Fuel",
+    "title": "Fuel",
+    "intro": "Alimentation, liquides et récupération selon ta discipline — avec sources et badges de preuve.",
+    "mealsLabel": "Alimentation",
+    "mealsLink": "Repas, besoin quotidien et apport pendant les séances",
+    "nutritionLink": "Règle de ta discipline, plan pour une séance et la compétition, compléments"
   }
 }

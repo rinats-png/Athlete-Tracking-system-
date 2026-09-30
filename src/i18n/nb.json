@@ -15,12 +15,14 @@
       "diagnostics": "Diagnostikk",
       "analysis": "Analyse",
       "history": "Historikk",
-      "profile": "Profil"
+      "profile": "Profil",
+      "fuel": "Fuel"
     },
     "overview": "Oversikt",
     "diagnostics": "Diagnostikk",
     "analysis": "Analyse",
-    "skipToContent": "Hopp til innhold"
+    "skipToContent": "Hopp til innhold",
+    "fuel": "Fuel"
   },
   "actions": {
     "startTest": "Start test",

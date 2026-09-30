@@ -2211,12 +2211,20 @@
       "design": "New design: frosted-glass cards with layers, mono digits for measured values and calmer transitions — light and dark.",
       "tests": "Test library to protocol 1.0: 126 tests in 29 areas, each with goal, setup, steps and scoring.",
       "images": "Photos of the test setups in the descriptions instead of sketches.",
-      "fuel": "New in nutrition — Fuel: the rule for your discipline (endurance, combat sports, team sports) with sources and evidence badges, a plan for a session and for competition, your sweat rate and gut limit.",
+      "fuel": "New Fuel area in the bottom bar: the rule for your discipline (endurance, combat sports, team sports) with sources and evidence badges, a plan for a session and for competition, your sweat rate and gut limit.",
       "tournament": "Tournament-day planner for combat sports: food and fluid between bouts.",
       "supplements": "Information page on supplements with evidence, source links and an anti-doping notice — no dosing, no brands.",
       "energy": "Diary: new field “Energy during the session” (1–5) next to fuelling and gut symptoms.",
       "protein": "Protein range now 1.6–2.2 g/kg per day (previously 1.2–2.0).",
       "pro": "Nutrition and Fuel are part of Pro."
     }
+  },
+  "fuel": {
+    "eyebrow": "Fuel",
+    "title": "Fuel",
+    "intro": "Fuelling, fluids and recovery for your discipline — with sources and evidence badges.",
+    "mealsLabel": "Nutrition",
+    "mealsLink": "Meals, daily need and fuelling in sessions",
+    "nutritionLink": "Your discipline's rule, plan for a session and competition, supplements"
   }
 }

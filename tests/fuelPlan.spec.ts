@@ -110,7 +110,7 @@ test('Plan in der Ernährung: Wettkampf über 90 min zeigt Aufladen', async ({ p
     data.athletes[0].profile.disciplineId = 'marathon'
     localStorage.setItem('kydon.data.v1', JSON.stringify(data))
   })
-  await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+  await page.goto('/fuel', { waitUntil: 'domcontentloaded' })
   const plan = page.getByTestId('fuel-plan')
   await expect(plan).toBeVisible()
   await expect(page.getByTestId('fuel-plan-load')).toHaveCount(0)

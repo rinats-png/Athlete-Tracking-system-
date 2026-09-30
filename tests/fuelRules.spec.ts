@@ -70,7 +70,7 @@ test.describe('Fuel-Regeln', () => {
       data.athletes[0].profile.disciplineId = 'marathon'
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
-    await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+    await page.goto('/fuel', { waitUntil: 'domcontentloaded' })
     const card = page.getByTestId('fuel-rule')
     await expect(card).toBeVisible()
     await expect(page.getByTestId('fuel-rule-evidence')).toBeVisible()
@@ -85,7 +85,7 @@ test.describe('Fuel-Regeln', () => {
       data.athletes[0].profile.disciplineId = 'ju_jutsu'
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
-    await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+    await page.goto('/fuel', { waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('fuel-rule-none')).toBeVisible()
     await expect(page.getByTestId('fuel-rule-evidence')).toHaveCount(0)
   })

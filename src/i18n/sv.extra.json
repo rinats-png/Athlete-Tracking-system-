@@ -2211,12 +2211,20 @@
       "design": "Ny design: kort av frostat glas med nivåer, monosiffror för mätvärden och lugnare övergångar — ljust och mörkt.",
       "tests": "Testbibliotek enligt protokoll 1.0: 126 tester i 29 områden, vart och ett med mål, uppställning, steg och bedömning.",
       "images": "Foton av testuppställningarna i beskrivningarna i stället för skisser.",
-      "fuel": "Nytt i kosten — Fuel: regeln för din gren (uthållighet, kampsport, lagsport) med källor och evidensmärken, en plan för ett pass och för tävling, din svettmängd och magens gräns.",
+      "fuel": "Nytt område Fuel i nedre fältet: regeln för din gren (uthållighet, kampsport, lagsport) med källor och evidensmärken, en plan för ett pass och för tävling, din svettmängd och magens gräns.",
       "tournament": "Tävlingsdagsplanerare för kampsport: mat och vätska mellan matcherna.",
       "supplements": "Informationssida om kosttillskott med evidens, källänkar och antidopingvarning — utan dosering och utan märken.",
       "energy": "Dagbok: nytt fält ”Energi under passet” (1–5) bredvid kost och magbesvär.",
       "protein": "Proteinintervall nu 1,6–2,2 g/kg och dag (tidigare 1,2–2,0).",
       "pro": "Kost och Fuel ingår i Pro."
     }
+  },
+  "fuel": {
+    "eyebrow": "Fuel",
+    "title": "Fuel",
+    "intro": "Kost, vätska och återhämtning efter din gren — med källor och evidensmärken.",
+    "mealsLabel": "Kost",
+    "mealsLink": "Måltider, dagsbehov och intag under pass",
+    "nutritionLink": "Regeln för din gren, plan för pass och tävling, kosttillskott"
   }
 }

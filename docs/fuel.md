@@ -19,8 +19,12 @@ legt fest, **was davon gebaut wird, was nicht und in welcher Reihenfolge**.
 
 ## 2. Wo es hingehört
 
-Ein Reiter «Fuel» innerhalb von Ernährung (`features/nutrition`), kein eigener
-Bereich. Fachlogik nur in `src/domain` (rein, ohne React, Netz, Storage), Regeln
+**Geändert am 30.09.2026 auf Wunsch:** Fuel ist ein eigener Bereich in der unteren Leiste
+(sechster Reiter vor dem Profil, Route `/fuel`, `features/fuel`). Die Ernährung (`/ernaehrung`)
+markiert denselben Reiter und behält Tagesbedarf, Verpflegung je Einheit und Gewichtsband;
+von beiden Seiten führt eine Karte zur anderen. Die Schranke bleibt `nutrition` (Pro).
+
+Ursprünglich vorgesehen war ein Reiter innerhalb von Ernährung (`features/nutrition`). Fachlogik nur in `src/domain` (rein, ohne React, Netz, Storage), Regeln
 als Daten in `src/data`. Was es schon gibt und erweitert wird:
 
 - `domain/fueling.ts`: Tagesspanne Kohlenhydrate und Protein, Verpflegung je

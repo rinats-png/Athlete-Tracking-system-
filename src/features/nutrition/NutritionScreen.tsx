@@ -175,6 +175,15 @@ export function NutritionScreen() {
       </div>
 
       {/* --- Bedarf, Verpflegung, Gewichtsband ---------------------------- */}
+      <Panel lift className="mb-4">
+        <Link to="/fuel" data-testid="nutrition-to-fuel" className="flex items-center justify-between gap-3 px-4 py-3 text-[14px]">
+          <span>
+            <span className="label-tag block">{t('fuel.eyebrow')}</span>
+            {t('fuel.nutritionLink')}
+          </span>
+          <ArrowRight size={18} aria-hidden />
+        </Link>
+      </Panel>
       <FuelingPanels day={day} weightKg={weight ?? null} totals={totals} />
 
       {/* --- Referenz, kein Ziel ------------------------------------------ */}

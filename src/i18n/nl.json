@@ -15,12 +15,14 @@
       "diagnostics": "Diagnostiek",
       "analysis": "Analyse",
       "history": "Historie",
-      "profile": "Profiel"
+      "profile": "Profiel",
+      "fuel": "Fuel"
     },
     "overview": "Overzicht",
     "diagnostics": "Diagnostiek",
     "analysis": "Analyse",
-    "skipToContent": "Naar de inhoud"
+    "skipToContent": "Naar de inhoud",
+    "fuel": "Fuel"
   },
   "actions": {
     "startTest": "Test starten",

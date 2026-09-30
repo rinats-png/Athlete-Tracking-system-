@@ -47,7 +47,7 @@ test.describe('Nahrungsergänzung', () => {
 
   test('Seite: Warnung vor der Liste, Links, vier Karten', async ({ page }) => {
     await openDemo(page)
-    await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+    await page.goto('/fuel', { waitUntil: 'domcontentloaded' })
     const panel = page.getByTestId('fuel-supplements')
     await expect(panel).toBeVisible()
     await expect(page.getByTestId('fuel-doping')).toBeVisible()
@@ -69,7 +69,7 @@ test.describe('Nahrungsergänzung', () => {
       data.athletes[0].profile.disciplineId = 'marathon'
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
-    await page.goto('/ernaehrung', { waitUntil: 'domcontentloaded' })
+    await page.goto('/fuel', { waitUntil: 'domcontentloaded' })
     const plan = page.getByTestId('fuel-plan')
     await expect(page.getByTestId('fuel-context')).toHaveCount(0)
     const before = await page.getByTestId('fuel-plan-during').innerText()
