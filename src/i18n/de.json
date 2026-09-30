@@ -1917,6 +1917,19 @@
       "sent_one": "An {{count}} Athlet verschickt.",
       "sent_other": "An {{count}} Athleten verschickt.",
       "limit": "Tageslimit für diese Athleten erreicht."
-    }
+    },
+    "topics": {
+      "title": "Was du per Push bekommst",
+      "due": "Fällige Nachmessungen",
+      "dueHint": "Der Server erfährt nur das Datum der nächsten Fälligkeit.",
+      "agenda": "Termine",
+      "agendaHint": "Wettkampf am Vortag, Testtermin am Tag selbst. Der Server erfährt nur das Datum.",
+      "release": "Aktualisierungen der App",
+      "releaseHint": "Ein Hinweis, wenn KYDON neue Funktionen bekommen hat.",
+      "activity": "Aktivität deiner Athleten",
+      "activityHint": "Ein Hinweis, dass verbundene Athleten etwas eingetragen haben – ohne Namen, ohne Werte, höchstens einmal pro Stunde."
+    },
+    "notifyCoach": "Meinen Trainer bei Aktivität benachrichtigen",
+    "notifyCoachHint": "Wenn du mit einem Trainer verbunden bist, erfährt er per Push, DASS du etwas eingetragen hast – nicht was. Du kannst das hier ausschalten."
   }
 }

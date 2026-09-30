@@ -1,12 +1,38 @@
 import { expect, test } from '@playwright/test'
 import { openColdStart, openDemo } from './helpers'
 import { WHATS_NEW } from '../src/data/whatsNew'
-import { latestReleaseId, unseenReleases } from '../src/features/whatsNew/whatsNewState'
+import { initWhatsNew, isFirstStart, latestReleaseId, pendingReleases, unseenReleases } from '../src/features/whatsNew/whatsNewState'
 import { readFileSync } from 'node:fs'
 
 /** «Neu bei KYDON»: einmal je neuem Stand, nie beim Erststart, nie zweimal. */
 
 const rel = (id: string) => ({ id, items: ['a'] })
+
+test.describe('Erststart (Logik mit Speicher-Attrappe)', () => {
+  const fake = (entries: Record<string, string>) => {
+    const m = new Map(Object.entries(entries))
+    ;(globalThis as any).localStorage = { getItem: (k: string) => m.get(k) ?? null, setItem: (k: string, v: string) => void m.set(k, v), removeItem: (k: string) => void m.delete(k) }
+    return m
+  }
+  test('weder Marke noch Bestand: Erststart, kein Hinweis, nichts geschrieben', async () => {
+    const m = fake({})
+    initWhatsNew()
+    expect(isFirstStart()).toBe(true)
+    expect(pendingReleases()).toEqual([])
+    expect(m.size).toBe(0)
+  })
+  test('Bestand ohne Marke (Update): Hinweis steht an', async () => {
+    fake({ 'kydon.data.v1': '{}' })
+    initWhatsNew()
+    expect(isFirstStart()).toBe(false)
+    expect(pendingReleases().length).toBe(WHATS_NEW.length)
+  })
+  test('Marke gleich dem neuesten Stand: nichts', async () => {
+    fake({ 'kydon.data.v1': '{}', 'kydon.whatsnew.seen': WHATS_NEW[0].id })
+    initWhatsNew()
+    expect(pendingReleases()).toEqual([])
+  })
+})
 
 test.describe('Logik', () => {
   test('ohne Marke sind alle Stände neu, neueste zuerst', () => {
@@ -36,10 +62,10 @@ test.describe('Logik', () => {
 })
 
 test.describe('Im Bildschirm', () => {
-  test('Erststart: kein Hinweis, Marke gesetzt', async ({ page }) => {
+  test('Erststart: kein Hinweis, und beim Start wird nichts geschrieben (Gerät leeren bleibt sauber)', async ({ page }) => {
     await openColdStart(page)
     await expect(page.getByTestId('whats-new')).toHaveCount(0)
-    expect(await page.evaluate(() => localStorage.getItem('kydon.whatsnew.seen'))).toBe(WHATS_NEW[0].id)
+    expect(await page.evaluate(() => localStorage.getItem('kydon.whatsnew.seen'))).toBeNull()
   })
 
   test('Update mit vorhandenem Bestand: einmal sichtbar, Schliessen setzt die Marke, kein zweites Mal', async ({ page }) => {

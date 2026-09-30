@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { dueTests } from '@/domain/reminders'
 import { reminderSettingsOf } from '@/features/shared/profileContext'
-import { PUSH_CHANGED, pushFlag, syncPushDue } from '@/lib/push'
+import { agendaDates } from '@/domain/pushAgenda'
+import { PUSH_CHANGED, pushFlag, syncPushAgenda, syncPushDue } from '@/lib/push'
 import { useAppData } from '@/lib/store/AppDataProvider'
 
 /**
- * Meldet dem Server das nächste Fälligkeitsdatum — und nur das.
+ * Meldet dem Server das nächste Fälligkeitsdatum und die Erinnerungstage für
+ * Wettkampf und Testtermin — und nur diese Daten.
  *
  * Läuft nur, wenn Push auf diesem Gerät eingeschaltet ist. Sind Erinnerungen
  * aus oder ist nichts gemessen, wird das Datum gelöscht.
@@ -19,6 +21,9 @@ export function usePushDueSync(): void {
     return dates[0] ?? null
   }, [data.results, data.profile])
 
+  // Erinnerungstage für Wettkampf (Vortag) und den nächsten geplanten Testtermin.
+  const agenda = useMemo(() => agendaDates({ profile: data.profile, assessments: data.assessments }, new Date().toISOString().slice(0, 10)), [data.profile, data.assessments])
+
   const [epoch, setEpoch] = useState(0)
   useEffect(() => {
     const bump = () => setEpoch((n) => n + 1)
@@ -30,4 +35,10 @@ export function usePushDueSync(): void {
     if (!pushFlag()) return
     void syncPushDue(next).catch(() => undefined)
   }, [next, epoch])
+
+  useEffect(() => {
+    if (!pushFlag()) return
+    void syncPushAgenda('competition', agenda.competition).catch(() => undefined)
+    void syncPushAgenda('assessment', agenda.assessment).catch(() => undefined)
+  }, [agenda.competition, agenda.assessment, epoch])
 }

@@ -1917,6 +1917,19 @@
       "sent_one": "Enviado a {{count}} atleta.",
       "sent_other": "Enviado a {{count}} atletas.",
       "limit": "Límite diario alcanzado para estos atletas."
-    }
+    },
+    "topics": {
+      "title": "Lo que recibes por push",
+      "due": "Nuevas mediciones pendientes",
+      "dueHint": "El servidor solo conoce la fecha del próximo vencimiento.",
+      "agenda": "Citas",
+      "agendaHint": "Competición el día antes, sesión de pruebas el mismo día. El servidor solo conoce la fecha.",
+      "release": "Actualizaciones de la app",
+      "releaseHint": "Un aviso cuando KYDON tiene funciones nuevas.",
+      "activity": "Actividad de tus atletas",
+      "activityHint": "Un aviso de que atletas conectados han registrado algo — sin nombres, sin valores, como máximo una vez por hora."
+    },
+    "notifyCoach": "Avisar a mi entrenador de mi actividad",
+    "notifyCoachHint": "Si estás conectado a un entrenador, se entera por push DE QUE has registrado algo — no de qué. Puedes desactivarlo aquí."
   }
 }

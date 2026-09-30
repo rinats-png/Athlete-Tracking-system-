@@ -1917,6 +1917,19 @@
       "sent_one": "Sendt til {{count}} atlet.",
       "sent_other": "Sendt til {{count}} atleter.",
       "limit": "Dagsgrænsen er nået for disse atleter."
-    }
+    },
+    "topics": {
+      "title": "Hvad du får som push",
+      "due": "Nye målinger der er tid til",
+      "dueHint": "Serveren kender kun datoen for den næste måling.",
+      "agenda": "Aftaler",
+      "agendaHint": "Konkurrence dagen før, testtidspunkt på selve dagen. Serveren kender kun datoen.",
+      "release": "Appopdateringer",
+      "releaseHint": "En besked, når KYDON har fået nye funktioner.",
+      "activity": "Dine atleters aktivitet",
+      "activityHint": "En besked om, at tilknyttede atleter har registreret noget — uden navne, uden værdier, højst én gang i timen."
+    },
+    "notifyCoach": "Giv min træner besked om min aktivitet",
+    "notifyCoachHint": "Er du knyttet til en træner, får han via push at vide, AT du har registreret noget — ikke hvad. Du kan slå det fra her."
   }
 }

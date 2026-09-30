@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/Button'
 import { useExtraReady } from '@/features/shared/useExtraReady'
-import { markWhatsNewSeen, pendingReleases } from './whatsNewState'
+import { isFirstStart, markWhatsNewSeen, pendingReleases } from './whatsNewState'
 
 /**
  * «Neu bei KYDON:» — ein Hinweisfenster, genau einmal je neuem Stand.
@@ -24,6 +24,11 @@ export function WhatsNewDialog() {
   const [releases] = useState(() => pendingReleases())
   const [open, setOpen] = useState(releases.length > 0)
   const ref = useRef<HTMLDialogElement>(null)
+
+  // Erststart: die App-Hülle steht, jetzt ist der aktuelle Stand «gesehen».
+  useEffect(() => {
+    if (isFirstStart()) markWhatsNewSeen()
+  }, [])
 
   useEffect(() => {
     const el = ref.current

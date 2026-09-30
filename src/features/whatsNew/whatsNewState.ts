@@ -10,9 +10,12 @@ import { WHATS_NEW, type WhatsNewRelease } from '@/data/whatsNew'
  *
  * ERSTSTART: wer die App zum ersten Mal öffnet (weder Marke noch Bestand),
  * bekommt keinen Hinweis auf «Neuerungen» — es gibt für ihn nichts, was neu
- * WÄRE. `initWhatsNew` setzt dann still den aktuellen Stand als gesehen. Wer
- * schon einen Bestand hat, aber noch keine Marke (Update von einer Fassung
- * ohne diesen Hinweis), sieht ihn einmal.
+ * WÄRE. `initWhatsNew` merkt sich das nur im Arbeitsspeicher; geschrieben
+ * wird die Marke erst, wenn die App-Hülle steht (`WhatsNewDialog`). Der Grund:
+ * «Gerät leeren» löscht alle Schlüssel und lädt neu — ein beim Start
+ * geschriebener Schlüssel stünde sofort wieder da. Wer schon einen Bestand
+ * hat, aber noch keine Marke (Update von einer Fassung ohne diesen Hinweis),
+ * sieht den Hinweis einmal.
  *
  * OHNE SPEICHER (privater Modus, blockiert) wird nichts gezeigt: lieber kein
  * Hinweis als einer bei jedem Start.
@@ -53,20 +56,25 @@ export function unseenReleases(seen: string | null, releases: readonly WhatsNewR
   return releases.filter((r) => seen == null || r.id > seen).sort((a, b) => (a.id < b.id ? 1 : -1))
 }
 
-/** Beim Start, einmal: Erststart erkennen und still als gesehen markieren. */
-export function initWhatsNew(releases: readonly WhatsNewRelease[] = WHATS_NEW): void {
+let firstStart = false
+
+/** Beim Start, einmal: Erststart erkennen (nur im Arbeitsspeicher, nichts wird geschrieben). */
+export function initWhatsNew(): void {
   try {
-    const latest = latestReleaseId(releases)
-    if (latest == null || readSeen() != null) return
-    const hasData = localStorage.getItem(DATA_KEY) != null
-    if (!hasData) writeSeen(latest)
+    firstStart = readSeen() == null && localStorage.getItem(DATA_KEY) == null
   } catch {
-    /* Ohne Speicher gibt es nichts zu merken. */
+    firstStart = false
   }
+}
+
+/** War das der allererste Start dieses Geräts? */
+export function isFirstStart(): boolean {
+  return firstStart
 }
 
 /** Was jetzt angezeigt werden soll; leer, wenn nichts. */
 export function pendingReleases(releases: readonly WhatsNewRelease[] = WHATS_NEW): WhatsNewRelease[] {
+  if (firstStart) return []
   const list = unseenReleases(readSeen(), releases)
   if (list.length === 0) return []
   // Lässt sich die Marke nicht schreiben, würde der Hinweis bei jedem Start wiederkehren.

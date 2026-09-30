@@ -2,13 +2,21 @@
  * Versand von Push-Benachrichtigungen (Web Push mit VAPID, Bibliothek
  * web-push).
  *
- * VIER AKTIONEN
+ * SIEBEN AKTIONEN
  *   due        — stündlich aus pg_cron, nur mit dem Cron-Geheimnis. Meldet
  *                allen, deren nächstes Fälligkeitsdatum erreicht ist.
  *   test       — eine Probenachricht an die eigenen Geräte.
  *   broadcast  — Nachricht an alle Abonnenten. Nur der Admin
  *                (is_analytics_admin in der Datenbank).
  *   coach      — Nachricht eines Trainers an aktiv verbundene Athleten.
+ *   release    — Hinweis auf eine neue App-Fassung, jede Kennung genau einmal.
+ *                Admin (Token) oder Cron-Geheimnis (Deploy-Aufruf).
+ *   activity   — alle zehn Minuten aus pg_cron: meldet Trainern, dass
+ *                verbundene Athleten etwas eingetragen haben (nur Anzahl).
+ *   (due meldet ausserdem Termine: Wettkampf am Vortag, Testtermin am Tag.)
+ *
+ * Jedes Gerät hat Themen (due, agenda, release, activity); Meldungen gehen nur
+ * an Geräte, die das Thema eingeschaltet haben.
  *
  * Wer anfragt, bestimmt ein geprüftes Token — nie ein Feld im Körper.
  * Abgelaufene Abonnements (404/410 vom Push-Dienst) werden gelöscht.
@@ -20,6 +28,12 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import webpush from 'npm:web-push@3.6.7'
 import {
   LIMITS,
+  activityPayload,
+  agendaPayload,
+  isReleaseId,
+  releasePayload,
+  wantsTopic,
+  type PushTopic,
   MAX_BODY,
   MAX_COACH_BODY,
   MAX_TITLE,
@@ -60,10 +74,15 @@ interface Subscription {
   p256dh: string
   auth: string
   locale: string
+  topics?: string[] | null
 }
 
 // deno-lint-ignore no-explicit-any
 type Db = any
+
+function forTopic(subs: Subscription[] | null, topic: PushTopic): Subscription[] {
+  return (subs ?? []).filter((s) => wantsTopic(s.topics, topic))
+}
 
 async function sendAll(db: Db, subs: Subscription[], payloadFor: (s: Subscription) => PushPayload) {
   let sent = 0
@@ -138,15 +157,97 @@ Deno.serve(async (req: Request) => {
     const now = new Date().toISOString()
     const { data: due } = await db.from('push_due').select('user_id, due_at, sent_for').lte('due_at', now).limit(500)
     const pending = (due ?? []).filter((d: { due_at: string; sent_for: string | null }) => d.sent_for !== d.due_at)
-    if (pending.length === 0) return reply(req, 200, { ok: true, users: 0 })
-    const ids = pending.map((d: { user_id: string }) => d.user_id)
-    const { data: subs } = await db.from('push_subscriptions').select('*').in('user_id', ids)
-    const result = await sendAll(db, subs ?? [], (s) => duePayload(s.locale))
-    for (const d of pending) {
-      await db.from('push_due').update({ sent_for: d.due_at }).eq('user_id', d.user_id)
+    let users = 0
+    let result = { sent: 0, gone: 0, failed: 0 }
+    if (pending.length > 0) {
+      const ids = pending.map((d: { user_id: string }) => d.user_id)
+      const { data: subs } = await db.from('push_subscriptions').select('*').in('user_id', ids)
+      result = await sendAll(db, forTopic(subs, 'due'), (s) => duePayload(s.locale))
+      for (const d of pending) {
+        await db.from('push_due').update({ sent_for: d.due_at }).eq('user_id', d.user_id)
+      }
+      await log(db, 'due', null, ids)
+      users = ids.length
     }
-    await log(db, 'due', null, ids)
-    return reply(req, 200, { ok: true, users: ids.length, ...result })
+    // Termine: Wettkampf am Vortag, Testtermin am Tag. Ein Datum je Konto und Art.
+    let agendaUsers = 0
+    const { data: agenda } = await db.from('push_agenda').select('user_id, kind, due_at, sent_for').lte('due_at', now).limit(500)
+    const agendaPending = (agenda ?? []).filter((d: { due_at: string; sent_for: string | null }) => d.sent_for !== d.due_at)
+    for (const kind of ['competition', 'assessment'] as const) {
+      const rows = agendaPending.filter((d: { kind: string }) => d.kind === kind)
+      if (rows.length === 0) continue
+      const ids = rows.map((d: { user_id: string }) => d.user_id)
+      const { data: subs } = await db.from('push_subscriptions').select('*').in('user_id', ids)
+      await sendAll(db, forTopic(subs, 'agenda'), (s) => agendaPayload(kind, s.locale))
+      for (const d of rows) await db.from('push_agenda').update({ sent_for: d.due_at }).eq('user_id', d.user_id).eq('kind', kind)
+      await log(db, 'agenda', null, ids)
+      agendaUsers += ids.length
+    }
+    return reply(req, 200, { ok: true, users, agendaUsers, ...result })
+  }
+
+  // --- Neue App-Fassung ankündigen: Cron-Geheimnis (Deploy) oder Admin ----------------
+  if (body.action === 'release') {
+    if (!isReleaseId(body.releaseId)) return reply(req, 400, { ok: false, reason: 'release' })
+    let sender: string | null = null
+    const secret = req.headers.get('x-cron-secret') ?? ''
+    if (!(config.cron_secret && secret === config.cron_secret)) {
+      const token = (req.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '')
+      if (!token) return reply(req, 401)
+      const { data: auth } = await db.auth.getUser(token)
+      if (!auth?.user) return reply(req, 401)
+      const asUser = createClient(env('SUPABASE_URL'), env('SUPABASE_ANON_KEY'), {
+        auth: { persistSession: false },
+        global: { headers: { Authorization: `Bearer ${token}` } },
+      })
+      const { data: isAdmin } = await asUser.rpc('is_analytics_admin')
+      if (isAdmin !== true) return reply(req, 403)
+      sender = auth.user.id
+      if ((await countSince(db, sender, 'release', 24)) >= LIMITS.releasePerDay) return reply(req, 429)
+    }
+    // Jede Kennung genau einmal: der Primärschlüssel entscheidet, nicht eine Vorabfrage.
+    const { error: dup } = await db.from('push_releases').insert({ release_id: body.releaseId, sender })
+    if (dup) return reply(req, 200, { ok: true, skipped: 'already_sent' })
+    const { data: subs } = await db.from('push_subscriptions').select('*').limit(10000)
+    const result = await sendAll(db, forTopic(subs, 'release'), (s) => releasePayload(s.locale))
+    await log(db, 'release', sender, [null])
+    return reply(req, 200, { ok: true, ...result })
+  }
+
+  // --- Aktivität: Trainer erfahren, dass Athleten etwas eingetragen haben ---------------
+  if (body.action === 'activity') {
+    const secret = req.headers.get('x-cron-secret') ?? ''
+    if (!config.cron_secret || secret !== config.cron_secret) return reply(req, 401)
+    const { data: events } = await db
+      .from('push_events')
+      .select('id, coach_id, athlete_user, created_at')
+      .is('sent_at', null)
+      .order('created_at', { ascending: true })
+      .limit(2000)
+    const list: { id: number; coach_id: string; athlete_user: string; created_at: string }[] = events ?? []
+    if (list.length === 0) return reply(req, 200, { ok: true, coaches: 0 })
+    const byCoach = new Map<string, typeof list>()
+    for (const e of list) byCoach.set(e.coach_id, [...(byCoach.get(e.coach_id) ?? []), e])
+    let coaches = 0
+    const doneIds: number[] = []
+    for (const [coachId, rows] of byCoach) {
+      // Höchstens eine Meldung je Stunde; was dazwischen liegt, wandert in die nächste.
+      const recent = await db
+        .from('push_log')
+        .select('id', { count: 'exact', head: true })
+        .eq('kind', 'activity')
+        .eq('recipient', coachId)
+        .gte('created_at', new Date(Date.now() - 3600_000).toISOString())
+      if ((recent.count ?? 0) >= LIMITS.activityPerCoachPerHour) continue
+      const athletes = new Set(rows.map((r) => r.athlete_user)).size
+      const { data: subs } = await db.from('push_subscriptions').select('*').eq('user_id', coachId)
+      await sendAll(db, forTopic(subs, 'activity'), (s) => activityPayload(s.locale, athletes))
+      await log(db, 'activity', null, [coachId])
+      doneIds.push(...rows.map((r) => r.id))
+      coaches++
+    }
+    if (doneIds.length > 0) await db.from('push_events').update({ sent_at: new Date().toISOString() }).in('id', doneIds)
+    return reply(req, 200, { ok: true, coaches })
   }
 
   // --- Alles Übrige braucht eine Anmeldung ----------------------------------

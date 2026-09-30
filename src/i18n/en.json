@@ -1917,6 +1917,19 @@
       "sent_one": "Sent to {{count}} athlete.",
       "sent_other": "Sent to {{count}} athletes.",
       "limit": "Daily limit reached for these athletes."
-    }
+    },
+    "topics": {
+      "title": "What you get by push",
+      "due": "Retests due",
+      "dueHint": "The server only learns the date of the next due retest.",
+      "agenda": "Appointments",
+      "agendaHint": "Competition the day before, test session on the day itself. The server only learns the date.",
+      "release": "App updates",
+      "releaseHint": "A notice when KYDON has new features.",
+      "activity": "Your athletes' activity",
+      "activityHint": "A notice that connected athletes have logged something — no names, no values, at most once an hour."
+    },
+    "notifyCoach": "Notify my coach about my activity",
+    "notifyCoachHint": "If you are connected to a coach, they learn by push THAT you logged something — not what. You can turn this off here."
   }
 }

@@ -1917,6 +1917,19 @@
       "sent_one": "Skickat till {{count}} idrottare.",
       "sent_other": "Skickat till {{count}} idrottare.",
       "limit": "Dagsgränsen är nådd för de här idrottarna."
-    }
+    },
+    "topics": {
+      "title": "Vad du får via push",
+      "due": "Nya mätningar som är dags",
+      "dueHint": "Servern får bara veta datumet för nästa mätning.",
+      "agenda": "Tider",
+      "agendaHint": "Tävling dagen före, testtillfälle samma dag. Servern får bara veta datumet.",
+      "release": "Appuppdateringar",
+      "releaseHint": "Ett meddelande när KYDON har fått nya funktioner.",
+      "activity": "Dina atleters aktivitet",
+      "activityHint": "Ett meddelande om att anslutna atleter har registrerat något — utan namn, utan värden, högst en gång i timmen."
+    },
+    "notifyCoach": "Meddela min tränare om min aktivitet",
+    "notifyCoachHint": "Är du ansluten till en tränare får den via push veta ATT du har registrerat något — inte vad. Du kan stänga av det här."
   }
 }

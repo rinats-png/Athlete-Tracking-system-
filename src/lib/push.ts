@@ -19,6 +19,10 @@ import { getSupabase, isSupabaseConfigured } from '@/lib/supabase/client'
 export const VAPID_PUBLIC_KEY =
   'BBDbagV03QOENKN_AuBJCLjsKoHsCHsRHStHjjCO_tZ3TzmVJfO4Y6hiXVh69eE_nPh_6hV_sOYMA1RuA4pHoFc'
 
+/** Themen, die jedes Gerät einzeln ein- und ausschalten kann (wie in supabase/functions/_shared/push.ts). */
+export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity'] as const
+export type PushTopic = (typeof PUSH_TOPICS)[number]
+
 const FLAG_KEY = 'kydon.push.v1'
 /** Ereignis, sobald Push eingeschaltet wurde — dann wird das Datum gemeldet. */
 export const PUSH_CHANGED = 'kydon-push-changed'
@@ -141,7 +145,10 @@ export async function disablePush(): Promise<PushState> {
   }
   const supabase = await getSupabase()
   const userId = await currentUserId()
-  if (supabase && userId) await supabase.from('push_due').delete().eq('user_id', userId)
+  if (supabase && userId) {
+    await supabase.from('push_due').delete().eq('user_id', userId)
+    await supabase.from('push_agenda').delete().eq('user_id', userId)
+  }
   return 'off'
 }
 
@@ -164,7 +171,63 @@ export async function syncPushDue(dueOn: string | null): Promise<void> {
   await supabase.from('push_due').upsert({ user_id: userId, due_at: dueAt, sent_for: null })
 }
 
-type SendResult = { ok: boolean; status: number; sent?: number; recipients?: number }
+/**
+ * Einen Termin an den Server melden (oder löschen): Wettkampf am Vortag,
+ * Testtermin am Tag, jeweils 9 Uhr Ortszeit. Nur das Datum geht raus.
+ */
+export async function syncPushAgenda(kind: 'competition' | 'assessment', notifyOn: string | null): Promise<void> {
+  if (!readFlag()) return
+  const userId = await currentUserId()
+  const supabase = await getSupabase()
+  if (!userId || !supabase) return
+  if (!notifyOn) {
+    await supabase.from('push_agenda').delete().eq('user_id', userId).eq('kind', kind)
+    return
+  }
+  const dueAt = new Date(`${notifyOn}T09:00:00`).toISOString()
+  const { data } = await supabase.from('push_agenda').select('due_at').eq('user_id', userId).eq('kind', kind).maybeSingle()
+  if (data && new Date(data.due_at).toISOString() === dueAt) return
+  await supabase.from('push_agenda').upsert({ user_id: userId, kind, due_at: dueAt, sent_for: null })
+}
+
+/** Die Themen dieses Geräts. Ohne Abonnement: alle (Vorgabe). */
+export async function readTopics(): Promise<PushTopic[]> {
+  const supabase = await getSupabase()
+  const registration = await navigator.serviceWorker?.getRegistration()
+  const subscription = await registration?.pushManager.getSubscription()
+  if (!supabase || !subscription) return [...PUSH_TOPICS]
+  const { data } = await supabase.from('push_subscriptions').select('topics').eq('endpoint', subscription.endpoint).maybeSingle()
+  const topics = (data?.topics as string[] | undefined) ?? [...PUSH_TOPICS]
+  return PUSH_TOPICS.filter((t) => topics.includes(t))
+}
+
+export async function saveTopics(topics: PushTopic[]): Promise<boolean> {
+  const supabase = await getSupabase()
+  const registration = await navigator.serviceWorker?.getRegistration()
+  const subscription = await registration?.pushManager.getSubscription()
+  if (!supabase || !subscription) return false
+  const { error } = await supabase.from('push_subscriptions').update({ topics }).eq('endpoint', subscription.endpoint)
+  return !error
+}
+
+/** Darf mein Trainer bei Aktivität benachrichtigt werden? Vorgabe ja. */
+export async function readNotifyCoach(): Promise<boolean> {
+  const supabase = await getSupabase()
+  const userId = await currentUserId()
+  if (!supabase || !userId) return true
+  const { data } = await supabase.from('push_prefs').select('notify_coach').eq('user_id', userId).maybeSingle()
+  return data?.notify_coach ?? true
+}
+
+export async function saveNotifyCoach(on: boolean): Promise<boolean> {
+  const supabase = await getSupabase()
+  const userId = await currentUserId()
+  if (!supabase || !userId) return false
+  const { error } = await supabase.from('push_prefs').upsert({ user_id: userId, notify_coach: on })
+  return !error
+}
+
+type SendResult = { ok: boolean; status: number; sent?: number; recipients?: number; skipped?: string }
 
 async function invoke(body: Record<string, unknown>): Promise<SendResult> {
   const supabase = await getSupabase()
@@ -179,6 +242,8 @@ async function invoke(body: Record<string, unknown>): Promise<SendResult> {
 
 export const sendTestPush = () => invoke({ action: 'test' })
 export const sendBroadcast = (title: string, body: string) => invoke({ action: 'broadcast', title, body })
+/** Eine neue App-Fassung ankündigen (nur Admin; jede Kennung wird höchstens einmal verschickt). */
+export const sendRelease = (releaseId: string) => invoke({ action: 'release', releaseId })
 export const sendCoachPush = (athleteIds: string[], body: string) => invoke({ action: 'coach', athleteIds, body })
 
 export interface LinkedAthlete {

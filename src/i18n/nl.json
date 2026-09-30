@@ -1917,6 +1917,19 @@
       "sent_one": "Verstuurd naar {{count}} atleet.",
       "sent_other": "Verstuurd naar {{count}} atleten.",
       "limit": "Daglimiet bereikt voor deze atleten."
-    }
+    },
+    "topics": {
+      "title": "Wat je per push krijgt",
+      "due": "Hermetingen die gepland staan",
+      "dueHint": "De server kent alleen de datum van de eerstvolgende hermeting.",
+      "agenda": "Afspraken",
+      "agendaHint": "Wedstrijd de dag ervoor, testmoment op de dag zelf. De server kent alleen de datum.",
+      "release": "App-updates",
+      "releaseHint": "Een melding als KYDON nieuwe functies heeft.",
+      "activity": "Activiteit van je atleten",
+      "activityHint": "Een melding dat gekoppelde atleten iets hebben vastgelegd — zonder namen, zonder waarden, hooguit één keer per uur."
+    },
+    "notifyCoach": "Mijn trainer op de hoogte brengen van mijn activiteit",
+    "notifyCoachHint": "Ben je gekoppeld aan een trainer, dan hoort hij per push DAT je iets hebt vastgelegd — niet wat. Hier kun je dat uitzetten."
   }
 }

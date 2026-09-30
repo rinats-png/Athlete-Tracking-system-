@@ -1917,6 +1917,19 @@
       "sent_one": "Envoyé à {{count}} athlète.",
       "sent_other": "Envoyé à {{count}} athlètes.",
       "limit": "Limite quotidienne atteinte pour ces athlètes."
-    }
+    },
+    "topics": {
+      "title": "Ce que tu reçois par push",
+      "due": "Nouvelles mesures à faire",
+      "dueHint": "Le serveur ne connaît que la date de la prochaine échéance.",
+      "agenda": "Rendez-vous",
+      "agendaHint": "Compétition la veille, séance de tests le jour même. Le serveur ne connaît que la date.",
+      "release": "Mises à jour de l'application",
+      "releaseHint": "Une notification quand KYDON a de nouvelles fonctions.",
+      "activity": "Activité de tes athlètes",
+      "activityHint": "Une notification quand des athlètes connectés ont saisi quelque chose — sans noms, sans valeurs, au plus une fois par heure."
+    },
+    "notifyCoach": "Prévenir mon entraîneur de mon activité",
+    "notifyCoachHint": "Si tu es connecté à un entraîneur, il apprend par push QUE tu as saisi quelque chose — pas quoi. Tu peux le désactiver ici."
   }
 }

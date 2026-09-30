@@ -21,7 +21,7 @@ import {
   type Summary,
   type TopEvent,
 } from '@/lib/supabase/analyticsAdmin'
-import { AdminBroadcast } from './AdminBroadcast'
+import { AdminBroadcast, AdminRelease } from './AdminBroadcast'
 import { cn } from '@/lib/utils'
 
 /**
@@ -157,6 +157,7 @@ function Dashboard() {
       <FunnelPanel range={range} names={names} />
       <LogPanel range={range} />
       <AdminBroadcast />
+      <AdminRelease />
     </div>
   )
 }
