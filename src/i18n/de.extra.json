@@ -1913,7 +1913,7 @@
       "noWeight": "Ohne Körpermasse keine Spanne — trag im Tagebuch dein Gewicht ein.",
       "noDiary": "Ohne Tagebucheintrag in den letzten sieben Tagen ist die Belastung unbekannt.",
       "eaten": "Heute gegessen: {{value}} g",
-      "source": "Spannen je kg Körpermasse nach Thomas, Erdman & Burke (2016, ACSM-Positionspapier) und Burke et al. (2011): Kohlenhydrate 3–5 / 5–7 / 6–10 / 8–12 g/kg nach Stufe, Protein 1,2–2,0 g/kg. Die Stufe aus den Trainingsminuten ist eine Festlegung von KYDON. Ein Massstab, kein Ziel — was du isst, entscheidest du."
+      "source": "Spannen je kg Körpermasse nach Thomas, Erdman & Burke (2016, ACSM-Positionspapier) und Burke et al. (2011); Protein: Morton et al. (2018): Kohlenhydrate 3–5 / 5–7 / 6–10 / 8–12 g/kg nach Stufe, Protein 1,6–2,2 g/kg. Die Stufe aus den Trainingsminuten ist eine Festlegung von KYDON. Ein Massstab, kein Ziel — was du isst, entscheidest du."
     },
     "band": {
       "none": "unter 45 min: keine Zufuhr nötig",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Band entfernen",
       "note": "Das Band setzt du selbst, zum Beispiel mit deiner Trainerin oder Ernährungsberatung. KYDON schlägt keines vor. Ein Hinweis erscheint erst, wenn zwei Wochen in Folge auf derselben Seite liegen."
+    },
+    "rule": {
+      "title": "Regel deiner Disziplin",
+      "noDiscipline": "Keine Disziplin gewählt",
+      "noDisciplineBody": "Wähle im Profil deine Disziplin, dann zeigt KYDON die passende Regel.",
+      "none": "Für diese Disziplin liegt noch keine belegte Regel vor. KYDON leitet keine her — bis dahin gilt die Spanne nach Belastung.",
+      "scope": "Ein Massstab nach Konsensuspapieren, kein individueller Sollwert und keine Ernährungsberatung. Bei Gewichtsklassen, Gewichtsabnahme oder Anzeichen von Energiemangel gehört die Entscheidung zu Sportmedizin und Ernährungsfachpersonal; KYDON rechnet dazu nichts (IOC-Konsens REDs 2023).",
+      "carbsHow": "Innerhalb der Spanne richtet sich der Tag nach der Belastung: leichte Tage unten, harte Tage und die Tage vor dem Wettkampf oben.",
+      "hyponatremia": "Nicht mehr trinken als nötig: Ein Körpermassegewinn während einer langen Einheit ist ein Warnzeichen, kein Ziel.",
+      "version": "Regelversion {{version}}, durchgesehen am {{date}}",
+      "intra": {
+        "none_in_race": "Im Rennen selbst meist nicht nötig; vorher zählt mehr.",
+        "g30_60": "Im Wettkampf 30–60 g Kohlenhydrate pro Stunde, je nach Dauer und Verträglichkeit.",
+        "g30_90": "Im Wettkampf 30–60 g pro Stunde, ab etwa 2,5 Stunden bis etwa 90 g pro Stunde mit mehreren Kohlenhydratarten.",
+        "g60_90": "Im Wettkampf üblicherweise 60–90 g Kohlenhydrate pro Stunde, mit mehreren Kohlenhydratarten und vorher geübt.",
+        "advanced": "90–120 g pro Stunde nur nach Magen-Darm-Training und nie als Standard; die Evidenz dafür ist deutlich schwächer."
+      },
+      "carbLoad": {
+        "not_essential": "Aufladen ist für ein Rennen unter 90 Minuten nicht nötig; vorher 1–4 g/kg, 1–4 Stunden davor.",
+        "appropriate": "Aufladen ist hier sinnvoll: 36–48 Stunden vorher 10–12 g/kg und Tag, ohne vorherige Entleerungsphase."
+      },
+      "evidence": {
+        "title": "Evidenz",
+        "strength": {
+          "high": "Evidenz hoch",
+          "moderate": "Evidenz mittel",
+          "low": "Evidenz niedrig",
+          "emerging": "Evidenz im Aufbau"
+        },
+        "type": {
+          "meta_analysis": "Meta-Analyse",
+          "consensus": "Konsensuspapier",
+          "rct": "Randomisierte Studie",
+          "observational": "Beobachtungsstudie",
+          "mechanistic": "Mechanistisch",
+          "expert": "Expertenmeinung",
+          "extrapolation": "Übertragen"
+        },
+        "specificity": {
+          "same_sport": "Gleiche Sportart",
+          "related_sport": "Verwandte Sportart",
+          "general_athlete": "Allgemein für Sportler"
+        },
+        "verification": {
+          "primary_verified": "Am Primärtext geprüft",
+          "secondary_verified": "Über Sekundärquelle geprüft",
+          "not_reverified": "Noch nicht am Primärtext geprüft"
+        }
+      }
     }
   },
   "hrv": {

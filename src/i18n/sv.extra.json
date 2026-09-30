@@ -1913,7 +1913,7 @@
       "noWeight": "Utan kroppsvikt inget intervall — registrera din vikt i dagboken.",
       "noDiary": "Utan dagboksanteckning de senaste sju dagarna är belastningen okänd.",
       "eaten": "Ätit i dag: {{value}} g",
-      "source": "Intervall per kg kroppsvikt enligt Thomas, Erdman & Burke (2016, ACSM-ståndpunkt) och Burke et al. (2011): kolhydrater 3–5 / 5–7 / 6–10 / 8–12 g/kg efter nivå, protein 1,2–2,0 g/kg. Nivån utifrån träningsminuterna är ett val av KYDON. En måttstock, inget mål — vad du äter bestämmer du."
+      "source": "Intervall per kg kroppsvikt enligt Thomas, Erdman & Burke (2016, ACSM-ståndpunkt) och Burke et al. (2011); protein: Morton et al. (2018): kolhydrater 3–5 / 5–7 / 6–10 / 8–12 g/kg efter nivå, protein 1,6–2,2 g/kg. Nivån utifrån träningsminuterna är ett val av KYDON. En måttstock, inget mål — vad du äter bestämmer du."
     },
     "band": {
       "none": "under 45 min: inget intag behövs",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Ta bort band",
       "note": "Bandet sätter du själv, till exempel med din tränare eller kostrådgivare. KYDON föreslår inget. En flagga visas först när två veckor i rad ligger på samma sida."
+    },
+    "rule": {
+      "title": "Regel för din gren",
+      "noDiscipline": "Ingen gren vald",
+      "noDisciplineBody": "Välj din gren i profilen så visar KYDON den passande regeln.",
+      "none": "Det finns ännu ingen belagd regel för den här grenen. KYDON härleder ingen — tills vidare gäller intervallet efter belastning.",
+      "scope": "En måttstock baserad på konsensusdokument, inget individuellt mål och ingen kostrådgivning. Vid viktklasser, viktnedgång eller tecken på energibrist hör beslutet hemma hos idrottsmedicin och kostkunnig personal; KYDON räknar inget på detta (IOC-konsensus REDs 2023).",
+      "carbsHow": "Inom intervallet följer dagen belastningen: lätta dagar nedtill, hårda dagar och dagarna före tävling upptill.",
+      "hyponatremia": "Drick inte mer än nödvändigt: viktökning under ett långt pass är en varningssignal, inget mål.",
+      "version": "Regelversion {{version}}, granskad {{date}}",
+      "intra": {
+        "none_in_race": "Behövs oftast inte under själva loppet; det som kommer före väger tyngre.",
+        "g30_60": "Under tävling 30–60 g kolhydrater per timme, beroende på längd och tolerans.",
+        "g30_90": "Under tävling 30–60 g per timme, från cirka 2,5 timmar upp till cirka 90 g per timme med flera kolhydrattyper.",
+        "g60_90": "Under tävling vanligen 60–90 g kolhydrater per timme, med flera kolhydrattyper och övat i förväg.",
+        "advanced": "90–120 g per timme först efter magträning och aldrig som standard; underlaget för det är tydligt svagare."
+      },
+      "carbLoad": {
+        "not_essential": "Kolhydratladdning behövs inte för ett lopp under 90 minuter; innan 1–4 g/kg, 1–4 timmar före.",
+        "appropriate": "Kolhydratladdning är rimlig här: 10–12 g/kg och dag under 36–48 timmar före, utan föregående tömningsfas."
+      },
+      "evidence": {
+        "title": "Evidens",
+        "strength": {
+          "high": "Evidens hög",
+          "moderate": "Evidens måttlig",
+          "low": "Evidens låg",
+          "emerging": "Evidens under uppbyggnad"
+        },
+        "type": {
+          "meta_analysis": "Metaanalys",
+          "consensus": "Konsensusdokument",
+          "rct": "Randomiserad studie",
+          "observational": "Observationsstudie",
+          "mechanistic": "Mekanistisk",
+          "expert": "Expertutlåtande",
+          "extrapolation": "Överfört"
+        },
+        "specificity": {
+          "same_sport": "Samma idrott",
+          "related_sport": "Besläktad idrott",
+          "general_athlete": "Idrottare i allmänhet"
+        },
+        "verification": {
+          "primary_verified": "Kontrollerad mot originaltexten",
+          "secondary_verified": "Kontrollerad via sekundär källa",
+          "not_reverified": "Ännu inte kontrollerad mot originaltexten"
+        }
+      }
     }
   },
   "hrv": {

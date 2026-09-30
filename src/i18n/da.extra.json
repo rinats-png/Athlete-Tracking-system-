@@ -1913,7 +1913,7 @@
       "noWeight": "Uden kropsmasse intet spænd — registrer din vægt i dagbogen.",
       "noDiary": "Uden dagbogsindtastning i de sidste syv dage er belastningen ukendt.",
       "eaten": "Spist i dag: {{value}} g",
-      "source": "Spænd pr. kg kropsmasse efter Thomas, Erdman & Burke (2016, ACSM-positionspapir) og Burke et al. (2011): kulhydrater 3–5 / 5–7 / 6–10 / 8–12 g/kg efter trin, protein 1,2–2,0 g/kg. Trinnet ud fra træningsminutterne er fastsat af KYDON. En målestok, ikke et mål — hvad du spiser, afgør du."
+      "source": "Spænd pr. kg kropsmasse efter Thomas, Erdman & Burke (2016, ACSM-positionspapir) og Burke et al. (2011); protein: Morton et al. (2018): kulhydrater 3–5 / 5–7 / 6–10 / 8–12 g/kg efter trin, protein 1,6–2,2 g/kg. Trinnet ud fra træningsminutterne er fastsat af KYDON. En målestok, ikke et mål — hvad du spiser, afgør du."
     },
     "band": {
       "none": "under 45 min: intet indtag nødvendigt",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Fjern bånd",
       "note": "Båndet sætter du selv, fx sammen med din træner eller ernæringsrådgiver. KYDON foreslår ikke noget. En bemærkning vises først, når to uger i træk ligger på samme side."
+    },
+    "rule": {
+      "title": "Regel for din disciplin",
+      "noDiscipline": "Ingen disciplin valgt",
+      "noDisciplineBody": "Vælg din disciplin i profilen, så viser KYDON den passende regel.",
+      "none": "Der findes endnu ingen dokumenteret regel for denne disciplin. KYDON udleder ingen — indtil videre gælder spændet efter belastning.",
+      "scope": "En målestok baseret på konsensusdokumenter, ikke et individuelt mål og ikke kostrådgivning. Ved vægtklasser, vægttab eller tegn på energimangel hører beslutningen hjemme hos idrætsmedicin og ernæringsfagligt personale; KYDON regner ikke noget på dette (IOC-konsensus REDs 2023).",
+      "carbsHow": "Inden for spændet følger dagen belastningen: lette dage nederst, hårde dage og dagene før konkurrence øverst.",
+      "hyponatremia": "Drik ikke mere end nødvendigt: vægtøgning under en lang træning er et advarselstegn, ikke et mål.",
+      "version": "Regelversion {{version}}, gennemgået {{date}}",
+      "intra": {
+        "none_in_race": "Behøves som regel ikke under selve løbet; det, der kommer før, vejer tungere.",
+        "g30_60": "Under konkurrence 30–60 g kulhydrat i timen, afhængigt af varighed og tolerance.",
+        "g30_90": "Under konkurrence 30–60 g i timen, fra omkring 2,5 timer op til omkring 90 g i timen med flere kulhydrattyper.",
+        "g60_90": "Under konkurrence typisk 60–90 g kulhydrat i timen, med flere kulhydrattyper og øvet på forhånd.",
+        "advanced": "90–120 g i timen først efter mavetræning og aldrig som standard; grundlaget for det er tydeligt svagere."
+      },
+      "carbLoad": {
+        "not_essential": "Kulhydratopladning er ikke nødvendig til et løb under 90 minutter; før 1–4 g/kg, 1–4 timer før.",
+        "appropriate": "Kulhydratopladning giver mening her: 10–12 g/kg om dagen i 36–48 timer før, uden forudgående tømningsfase."
+      },
+      "evidence": {
+        "title": "Evidens",
+        "strength": {
+          "high": "Evidens høj",
+          "moderate": "Evidens moderat",
+          "low": "Evidens lav",
+          "emerging": "Evidens under opbygning"
+        },
+        "type": {
+          "meta_analysis": "Metaanalyse",
+          "consensus": "Konsensusdokument",
+          "rct": "Randomiseret studie",
+          "observational": "Observationsstudie",
+          "mechanistic": "Mekanistisk",
+          "expert": "Ekspertudtalelse",
+          "extrapolation": "Overført"
+        },
+        "specificity": {
+          "same_sport": "Samme sport",
+          "related_sport": "Beslægtet sport",
+          "general_athlete": "Idrætsudøvere generelt"
+        },
+        "verification": {
+          "primary_verified": "Kontrolleret mod originalteksten",
+          "secondary_verified": "Kontrolleret via sekundær kilde",
+          "not_reverified": "Endnu ikke kontrolleret mod originalteksten"
+        }
+      }
     }
   },
   "hrv": {

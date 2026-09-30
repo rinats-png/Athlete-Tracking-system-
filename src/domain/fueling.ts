@@ -17,6 +17,7 @@ import type { StoredDiaryEntry, StoredDiarySession } from '@/lib/store/localStor
  *   Kohlenhydrate je Tag nach Belastung und Protein je Tag:
  *     Thomas, Erdman, Burke (2016). ACSM/AND/DC Joint Position Statement:
  *     Nutrition and Athletic Performance. Med Sci Sports Exerc 48(3):543–568.
+ *   Protein 1,6–2,2 g/kg: Morton et al. (2018). Br J Sports Med 52:376–384.
  *     Burke et al. (2011). Carbohydrates for training and competition.
  *     J Sports Sci 29 Suppl 1:S17–S27.
  *   Kohlenhydrate während der Einheit (30–60 g/h ab etwa 1 h, bis 90 g/h
@@ -46,8 +47,13 @@ export const CARB_BANDS: Record<LoadLevel, [number, number]> = {
   high: [6, 10],
   very_high: [8, 12],
 }
-/** g Protein je kg und Tag (Thomas et al. 2016). */
-export const PROTEIN_BAND: [number, number] = [1.2, 2.0]
+/**
+ * g Protein je kg und Tag. Bis 30.09.2026 1,2–2,0 (Thomas et al. 2016); auf
+ * Entscheidung des Auftraggebers 1,6–2,2 (Morton et al. 2018, Meta-Analyse:
+ * Plateau ab etwa 1,6 g/kg, oberer Rand des Konfidenzintervalls bei 2,2).
+ * Die Obergrenze ist am Volltext noch gegenzulesen (docs/fuel.md §8).
+ */
+export const PROTEIN_BAND: [number, number] = [1.6, 2.2]
 
 /** Mittlere Trainingsminuten je Tag → Stufe. Festlegung dieser App. */
 export function loadLevel(minutesPerDay: number): LoadLevel {

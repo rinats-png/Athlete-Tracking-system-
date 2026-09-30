@@ -1913,7 +1913,7 @@
       "noWeight": "Zonder lichaamsmassa geen bereik — voer je gewicht in het dagboek in.",
       "noDiary": "Zonder dagboekinvoer in de laatste zeven dagen is de belasting onbekend.",
       "eaten": "Vandaag gegeten: {{value}} g",
-      "source": "Bereiken per kg lichaamsmassa volgens Thomas, Erdman & Burke (2016, ACSM-standpunt) en Burke et al. (2011): koolhydraten 3–5 / 5–7 / 6–10 / 8–12 g/kg per niveau, eiwit 1,2–2,0 g/kg. Het niveau uit de trainingsminuten is een keuze van KYDON. Een maatstaf, geen doel — wat je eet, bepaal je zelf."
+      "source": "Bereiken per kg lichaamsmassa volgens Thomas, Erdman & Burke (2016, ACSM-standpunt) en Burke et al. (2011); eiwit: Morton et al. (2018): koolhydraten 3–5 / 5–7 / 6–10 / 8–12 g/kg per niveau, eiwit 1,6–2,2 g/kg. Het niveau uit de trainingsminuten is een keuze van KYDON. Een maatstaf, geen doel — wat je eet, bepaal je zelf."
     },
     "band": {
       "none": "onder 45 min: geen inname nodig",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Band verwijderen",
       "note": "De band stel je zelf in, bijvoorbeeld met je trainer of voedingsdeskundige. KYDON stelt er geen voor. Een aandachtspunt verschijnt pas als twee weken op rij aan dezelfde kant liggen."
+    },
+    "rule": {
+      "title": "Regel voor jouw discipline",
+      "noDiscipline": "Geen discipline gekozen",
+      "noDisciplineBody": "Kies je discipline in het profiel, dan toont KYDON de passende regel.",
+      "none": "Voor deze discipline is er nog geen onderbouwde regel. KYDON leidt er geen af — tot dan geldt het bereik naar belasting.",
+      "scope": "Een maatstaf op basis van consensusdocumenten, geen individueel doel en geen voedingsadvies. Bij gewichtsklassen, gewichtsverlies of tekenen van een energietekort ligt de beslissing bij sportgeneeskunde en voedingsdeskundigen; KYDON rekent hier niets voor uit (IOC-consensus REDs 2023).",
+      "carbsHow": "Binnen het bereik volgt de dag de belasting: rustige dagen onderaan, zware dagen en de dagen voor de wedstrijd bovenaan.",
+      "hyponatremia": "Drink niet meer dan nodig: lichaamsmassa erbij tijdens een lange training is een waarschuwing, geen doel.",
+      "version": "Regelversie {{version}}, herzien op {{date}}",
+      "intra": {
+        "none_in_race": "Tijdens de race zelf meestal niet nodig; wat ervoor komt telt zwaarder.",
+        "g30_60": "Tijdens de wedstrijd 30–60 g koolhydraten per uur, afhankelijk van duur en verdraagzaamheid.",
+        "g30_90": "Tijdens de wedstrijd 30–60 g per uur, vanaf ongeveer 2,5 uur tot ongeveer 90 g per uur met meerdere soorten koolhydraten.",
+        "g60_90": "Tijdens de wedstrijd meestal 60–90 g koolhydraten per uur, met meerdere soorten koolhydraten en vooraf geoefend.",
+        "advanced": "90–120 g per uur alleen na darmtraining en nooit als standaard; het bewijs daarvoor is duidelijk zwakker."
+      },
+      "carbLoad": {
+        "not_essential": "Koolhydraten laden is voor een race van minder dan 90 minuten niet nodig; vooraf 1–4 g/kg, 1–4 uur ervoor.",
+        "appropriate": "Koolhydraten laden is hier zinvol: 10–12 g/kg per dag gedurende 36–48 uur ervoor, zonder voorafgaande uitputtingsfase."
+      },
+      "evidence": {
+        "title": "Bewijs",
+        "strength": {
+          "high": "Bewijs hoog",
+          "moderate": "Bewijs matig",
+          "low": "Bewijs laag",
+          "emerging": "Bewijs in opbouw"
+        },
+        "type": {
+          "meta_analysis": "Meta-analyse",
+          "consensus": "Consensusdocument",
+          "rct": "Gerandomiseerde studie",
+          "observational": "Observationele studie",
+          "mechanistic": "Mechanistisch",
+          "expert": "Expertmening",
+          "extrapolation": "Overgenomen"
+        },
+        "specificity": {
+          "same_sport": "Dezelfde sport",
+          "related_sport": "Verwante sport",
+          "general_athlete": "Sporters in het algemeen"
+        },
+        "verification": {
+          "primary_verified": "Gecontroleerd aan de brontekst",
+          "secondary_verified": "Gecontroleerd via een secundaire bron",
+          "not_reverified": "Nog niet aan de brontekst gecontroleerd"
+        }
+      }
     }
   },
   "hrv": {

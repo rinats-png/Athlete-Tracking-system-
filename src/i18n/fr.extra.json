@@ -1913,7 +1913,7 @@
       "noWeight": "Sans masse corporelle, pas de fourchette — le poids se saisit dans le journal.",
       "noDiary": "Sans entrée de journal au cours des sept derniers jours, la charge est inconnue.",
       "eaten": "Mangé aujourd'hui : {{value}} g",
-      "source": "Fourchettes par kg de masse corporelle selon Thomas, Erdman & Burke (2016, prise de position de l'ACSM) et Burke et al. (2011) : glucides 3–5 / 5–7 / 6–10 / 8–12 g/kg selon le niveau, protéines 1,2–2,0 g/kg. Le niveau déduit des minutes d'entraînement est une convention de KYDON. Un repère, pas un objectif — ce que tu manges, c'est toi qui le décides."
+      "source": "Fourchettes par kg de masse corporelle selon Thomas, Erdman & Burke (2016, prise de position de l'ACSM) et Burke et al. (2011) ; protéines : Morton et al. (2018) : glucides 3–5 / 5–7 / 6–10 / 8–12 g/kg selon le niveau, protéines 1,6–2,2 g/kg. Le niveau déduit des minutes d'entraînement est une convention de KYDON. Un repère, pas un objectif — ce que tu manges, c'est toi qui le décides."
     },
     "band": {
       "none": "moins de 45 min : aucun apport nécessaire",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Supprimer la plage",
       "note": "Tu fixes la plage toi-même, par exemple avec ton entraîneuse ou ton conseil en nutrition. KYDON n'en propose aucune. Une remarque n'apparaît que lorsque deux semaines de suite se situent du même côté."
+    },
+    "rule": {
+      "title": "Règle de ta discipline",
+      "noDiscipline": "Aucune discipline choisie",
+      "noDisciplineBody": "Choisis ta discipline dans le profil et KYDON affiche la règle correspondante.",
+      "none": "Il n'existe pas encore de règle sourcée pour cette discipline. KYDON n'en déduit aucune — d'ici là, la fourchette selon la charge s'applique.",
+      "scope": "Un repère fondé sur des documents de consensus, pas un objectif individuel ni un conseil nutritionnel. Pour les catégories de poids, la perte de poids ou les signes de déficit énergétique, la décision revient à la médecine du sport et à des professionnels de la nutrition ; KYDON ne calcule rien à ce sujet (consensus IOC REDs 2023).",
+      "carbsHow": "Dans la fourchette, la journée suit la charge : jours faciles en bas, jours durs et veille de compétition en haut.",
+      "hyponatremia": "Ne bois pas plus que nécessaire : une prise de masse corporelle pendant une longue séance est un signal d'alerte, pas un objectif.",
+      "version": "Règle version {{version}}, révisée le {{date}}",
+      "intra": {
+        "none_in_race": "En général inutile pendant la course elle-même ; ce qui précède compte davantage.",
+        "g30_60": "En compétition, 30–60 g de glucides par heure, selon la durée et la tolérance.",
+        "g30_90": "En compétition, 30–60 g par heure, à partir d'environ 2,5 heures jusqu'à environ 90 g par heure avec plusieurs types de glucides.",
+        "g60_90": "En compétition, en général 60–90 g de glucides par heure, avec plusieurs types de glucides et testés à l'avance.",
+        "advanced": "90–120 g par heure seulement après un entraînement digestif et jamais par défaut ; les preuves sont nettement plus faibles."
+      },
+      "carbLoad": {
+        "not_essential": "La charge en glucides n'est pas nécessaire pour une course de moins de 90 minutes ; avant, 1–4 g/kg, 1–4 heures avant.",
+        "appropriate": "La charge en glucides est pertinente ici : 10–12 g/kg par jour pendant 36–48 heures avant, sans phase de déplétion préalable."
+      },
+      "evidence": {
+        "title": "Preuves",
+        "strength": {
+          "high": "Preuves élevées",
+          "moderate": "Preuves modérées",
+          "low": "Preuves faibles",
+          "emerging": "Preuves émergentes"
+        },
+        "type": {
+          "meta_analysis": "Méta-analyse",
+          "consensus": "Document de consensus",
+          "rct": "Essai randomisé",
+          "observational": "Étude observationnelle",
+          "mechanistic": "Mécanistique",
+          "expert": "Avis d'experts",
+          "extrapolation": "Extrapolé"
+        },
+        "specificity": {
+          "same_sport": "Même sport",
+          "related_sport": "Sport apparenté",
+          "general_athlete": "Sportifs en général"
+        },
+        "verification": {
+          "primary_verified": "Vérifié sur le texte source",
+          "secondary_verified": "Vérifié via une source secondaire",
+          "not_reverified": "Pas encore vérifié sur le texte source"
+        }
+      }
     }
   },
   "hrv": {

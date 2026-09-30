@@ -125,9 +125,16 @@ export const FORMULA_REGISTRY: FormulaEntry[] = [
   {
     metricKey: 'fuel_carbs_g_per_kg',
     source: 'published',
-    formula: 'Kohlenhydrate je Tag nach Belastungsstufe: 3–5 / 5–7 / 6–10 / 8–12 g je kg; Protein 1,2–2,0 g je kg',
-    reference: 'Thomas, Erdman & Burke (2016), ACSM/AND/DC Joint Position Statement; Burke et al. (2011)',
+    formula: 'Kohlenhydrate je Tag nach Belastungsstufe: 3–5 / 5–7 / 6–10 / 8–12 g je kg; Protein 1,6–2,2 g je kg',
+    reference: 'Thomas, Erdman & Burke (2016), ACSM/AND/DC Joint Position Statement; Burke et al. (2011); Morton et al. (2018) für Protein',
     note: 'Spannen, keine Ziele. Wie die Stufe aus den Trainingsminuten entsteht, ist unter fuel_load_level als vorläufig geführt.',
+  },
+  {
+    metricKey: 'fuel_sport_carbs_g_per_kg',
+    source: 'provisional',
+    formula: 'Kohlenhydrate je Tag nach Disziplin (Ausdauer): Lauf 5–10 km 5–8, Marathon/Ultra 6–10, Rad 5–12, Schwimmen 5–8, Triathlon kurz 5–10, lang 6–12, Rudern 5–8 g je kg',
+    reference: null,
+    note: 'Arbeitsbereiche der Master-Spezifikation Fuel Management v2.0, aus den Konsensuspapieren auf die Disziplin übertragen, nicht am Primärtext geprüft. Jede Regel trägt ihr Evidenzobjekt (src/data/fuelRules.ts); ohne Regel zeigt die App nichts.',
   },
   {
     metricKey: 'fuel_load_level',

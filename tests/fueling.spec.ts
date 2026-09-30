@@ -75,7 +75,7 @@ test.describe('Tagesbedarf nach Quelle', () => {
     const need = dailyFuelNeed(diary, TODAY, 70)!
     expect(need.level).toBe('moderate')
     expect(need.carbsG).toEqual([350, 490])
-    expect(need.proteinG).toEqual([84, 140])
+    expect(need.proteinG).toEqual([112, 154])
     expect(need.daysWithEntry).toBe(3)
   })
 

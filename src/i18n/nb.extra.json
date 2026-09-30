@@ -1913,7 +1913,7 @@
       "noWeight": "Uten kroppsmasse ingen spenn — registrer vekten din i dagboken.",
       "noDiary": "Uten dagbokoppføring de siste sju dagene er belastningen ukjent.",
       "eaten": "Spist i dag: {{value}} g",
-      "source": "Spenn per kg kroppsmasse etter Thomas, Erdman & Burke (2016, ACSM-posisjonspapir) og Burke et al. (2011): karbohydrater 3–5 / 5–7 / 6–10 / 8–12 g/kg etter nivå, protein 1,2–2,0 g/kg. Nivået ut fra treningsminuttene er en fastsettelse fra KYDON. En målestokk, ikke et mål — hva du spiser, bestemmer du."
+      "source": "Spenn per kg kroppsmasse etter Thomas, Erdman & Burke (2016, ACSM-posisjonspapir) og Burke et al. (2011); protein: Morton et al. (2018): karbohydrater 3–5 / 5–7 / 6–10 / 8–12 g/kg etter nivå, protein 1,6–2,2 g/kg. Nivået ut fra treningsminuttene er en fastsettelse fra KYDON. En målestokk, ikke et mål — hva du spiser, bestemmer du."
     },
     "band": {
       "none": "under 45 min: inntak ikke nødvendig",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Fjern bånd",
       "note": "Båndet setter du selv, for eksempel sammen med treneren din eller en ernæringsrådgiver. KYDON foreslår ikke noe. En merknad vises først når to uker på rad ligger på samme side."
+    },
+    "rule": {
+      "title": "Regel for din gren",
+      "noDiscipline": "Ingen gren valgt",
+      "noDisciplineBody": "Velg grenen din i profilen, så viser KYDON den passende regelen.",
+      "none": "Det finnes ennå ingen belagt regel for denne grenen. KYDON utleder ingen — inntil videre gjelder spennet etter belastning.",
+      "scope": "En målestokk basert på konsensusdokumenter, ikke et individuelt mål og ikke kostholdsrådgivning. Ved vektklasser, vektnedgang eller tegn på energimangel hører avgjørelsen hjemme hos idrettsmedisin og ernæringsfaglig personell; KYDON regner ikke noe på dette (IOC-konsensus REDs 2023).",
+      "carbsHow": "Innenfor spennet følger dagen belastningen: lette dager nederst, harde dager og dagene før konkurranse øverst.",
+      "hyponatremia": "Drikk ikke mer enn nødvendig: vektøkning under en lang økt er et varselsignal, ikke et mål.",
+      "version": "Regelversjon {{version}}, gjennomgått {{date}}",
+      "intra": {
+        "none_in_race": "Trengs som regel ikke under selve løpet; det som kommer før veier tyngre.",
+        "g30_60": "Under konkurranse 30–60 g karbohydrater per time, avhengig av varighet og toleranse.",
+        "g30_90": "Under konkurranse 30–60 g per time, fra cirka 2,5 timer opptil cirka 90 g per time med flere karbohydrattyper.",
+        "g60_90": "Under konkurranse vanligvis 60–90 g karbohydrater per time, med flere karbohydrattyper og øvd på forhånd.",
+        "advanced": "90–120 g per time først etter magetrening og aldri som standard; grunnlaget for det er tydelig svakere."
+      },
+      "carbLoad": {
+        "not_essential": "Karbohydratlading trengs ikke for et løp under 90 minutter; før 1–4 g/kg, 1–4 timer før.",
+        "appropriate": "Karbohydratlading er fornuftig her: 10–12 g/kg per dag i 36–48 timer før, uten forutgående tømmingsfase."
+      },
+      "evidence": {
+        "title": "Evidens",
+        "strength": {
+          "high": "Evidens høy",
+          "moderate": "Evidens moderat",
+          "low": "Evidens lav",
+          "emerging": "Evidens under oppbygging"
+        },
+        "type": {
+          "meta_analysis": "Metaanalyse",
+          "consensus": "Konsensusdokument",
+          "rct": "Randomisert studie",
+          "observational": "Observasjonsstudie",
+          "mechanistic": "Mekanistisk",
+          "expert": "Ekspertvurdering",
+          "extrapolation": "Overført"
+        },
+        "specificity": {
+          "same_sport": "Samme idrett",
+          "related_sport": "Beslektet idrett",
+          "general_athlete": "Idrettsutøvere generelt"
+        },
+        "verification": {
+          "primary_verified": "Kontrollert mot originalteksten",
+          "secondary_verified": "Kontrollert via sekundærkilde",
+          "not_reverified": "Ennå ikke kontrollert mot originalteksten"
+        }
+      }
     }
   },
   "hrv": {

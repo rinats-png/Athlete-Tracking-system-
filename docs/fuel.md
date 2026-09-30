@@ -94,12 +94,23 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
 
 | Stufe | Inhalt |
 |---|---|
-| 1 | Regelbasis: Evidenzobjekt, Sportgruppen, Ausdauer-Sportarten (Laufen 5–10 km, Marathon/Ultra, Radfahren, Schwimmen, Triathlon kurz und lang, Rudern). Protein auf 1,6–2,2 samt Quelle in Formelregister und Texten aller Sprachen. Vorhandenes Fueling darauf umgestellt. |
+| 1 ✅ | Regelbasis: Evidenzobjekt, Sportgruppen, Ausdauer-Sportarten (Laufen 5–10 km, Marathon/Ultra, Radfahren, Schwimmen, Triathlon kurz und lang, Rudern). Protein auf 1,6–2,2 samt Quelle in Formelregister und Texten aller Sprachen. Vorhandenes Fueling darauf umgestellt. |
 | 2 | Plan je Einheit und Wettkampftag (Vorher / Währenddessen / Nachher), Aufladen, Schweissrate und Magen-Darm-Grenze sichtbar, Rückmeldung nach der Einheit. |
 | 3 | Hitze, Höhe, Reise als Modifikatoren; Supplement-Informationsseite. |
 | 4 | Kampfsport (G6) und Teamsport: Turniertag-Planer für Zwischenkämpfe, mit Hinweistext aus §4. |
 
 ## 8. Offen
+
+- **Stufe 1 gebaut (30.09.2026):** `src/data/fuelRules.ts` (7 Regeln, Quellenregister,
+  Evidenzobjekt), `src/domain/fuel.ts`, Karte «Regel deiner Disziplin» in der Ernährung,
+  Protein 1,6–2,2. Ohne Regel (Halbmarathon, Freiwasser, Kampfsport) sagt die Karte das.
+  Keine Schemaänderung, daher keine Migration. Die Disziplinspannen stehen im
+  Formelregister als vorläufig (`fuel_sport_carbs_g_per_kg`).
+- Morton et al. (2018) ist eine Meta-Analyse zu **Krafttraining**. Für Ausdauer
+  ist 1,6–2,2 g/kg damit übertragen; das Abzeichen zeigt «Übertragen» nur, wenn die
+  Regel so gekennzeichnet ist — für die Proteinspanne fehlt noch ein eigenes
+  Evidenzobjekt (ACSM 2016 nennt 1,2–2,0 für Ausdauer). Entscheidung 5 gilt, die
+  Kennzeichnung ist offen.
 
 - Quelle der Protein-Spanne 1,6–2,2: Morton et al. (2018, Meta-Analyse,
   PMID 28698222) belegt 1,6 als Plateau; die Obergrenze 2,2 ist der obere Rand

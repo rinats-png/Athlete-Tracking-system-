@@ -5,6 +5,10 @@ import { Button } from '@/components/ui/Button'
 import { NumberField } from '@/components/ui/NumberField'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { FUEL_SOURCES } from '@/data/fuelRules'
+import { disciplineById } from '@/data/sportProfiles'
+import { fuelRuleFor, sportDailyNeed } from '@/domain/fuel'
+import { pick } from '@/i18n/pick'
 import { bandPosition, dailyFuelNeed, recentFueling, weeklyWeightRate, type IntraBand } from '@/domain/fueling'
 import type { Macros } from '@/domain/nutrition'
 import { formatDate, formatNumber } from '@/lib/format'
@@ -23,6 +27,7 @@ function shift(day: string, delta: number): string {
 export function FuelingPanels({ day, weightKg, totals }: { day: string; weightKg: number | null; totals: Macros }) {
   return (
     <>
+      <FuelRulePanel weightKg={weightKg} />
       <FuelNeedPanel day={day} weightKg={weightKg} totals={totals} />
       <SessionFuelingPanel day={day} />
       <WeightBandPanel day={day} />
@@ -185,6 +190,91 @@ function WeightBandPanel({ day }: { day: string }) {
         )}
         <p className="text-[11px] leading-relaxed text-ink-muted sm:col-span-2">{t('fueling.weight.note')}</p>
       </div>
+    </Panel>
+  )
+}
+
+/**
+ * Regel der eigenen Disziplin (docs/fuel.md, Stufe 1): Tagesspanne, Aufladen,
+ * Verpflegung im Wettkampf — jeweils mit Evidenzabzeichen und Quellen. Ohne
+ * Regel sagt die Karte das, statt eine Spanne herzuleiten.
+ */
+function FuelRulePanel({ weightKg }: { weightKg: number | null }) {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  const { data } = useAppData()
+  const discipline = disciplineById(data.profile.disciplineId)
+  const match = fuelRuleFor(data.profile.disciplineId)
+  const need = match ? sportDailyNeed(match.rule, weightKg) : null
+
+  if (!discipline || !match) {
+    return (
+      <Panel className="mb-4" data-testid="fuel-rule">
+        <PanelHeader title={t('fueling.rule.title')} subtitle={discipline ? pick(discipline.name, locale) : t('fueling.rule.noDiscipline')} />
+        <p className="px-4 py-3 text-[13px] text-ink-secondary" data-testid="fuel-rule-none">
+          {discipline ? t('fueling.rule.none') : t('fueling.rule.noDisciplineBody')}
+        </p>
+        <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('fueling.rule.scope')}</p>
+      </Panel>
+    )
+  }
+  const { rule, specificity } = match
+  const ev = rule.evidence
+  const badges = [t(`fueling.rule.evidence.strength.${ev.strength}`), t(`fueling.rule.evidence.type.${ev.type}`), t(`fueling.rule.evidence.specificity.${specificity}`), t(`fueling.rule.evidence.verification.${ev.verification}`)]
+
+  return (
+    <Panel className="mb-4" data-testid="fuel-rule">
+      <PanelHeader title={t('fueling.rule.title')} subtitle={pick(discipline.name, locale)} />
+      <div className="grid grid-cols-1 gap-4 px-4 py-4 sm:grid-cols-2">
+        <div>
+          <span className="label-tag">{t('nutrition.macros.carbs')}</span>
+          <p className="readout text-[13px]">
+            {formatNumber(rule.carbsPerKg[0], locale, 0)}–{formatNumber(rule.carbsPerKg[1], locale, 0)} g/kg
+            {need && ` · ${formatNumber(need.carbsG[0], locale, 0)}–${formatNumber(need.carbsG[1], locale, 0)} g`}
+          </p>
+          <p className="mt-1 text-[11px] text-ink-muted">{t('fueling.rule.carbsHow')}</p>
+        </div>
+        <div>
+          <span className="label-tag">{t('nutrition.macros.protein')}</span>
+          <p className="readout text-[13px]">
+            1,6–2,2 g/kg{need && ` · ${formatNumber(need.proteinG[0], locale, 0)}–${formatNumber(need.proteinG[1], locale, 0)} g`}
+          </p>
+        </div>
+      </div>
+      <ul className="space-y-1.5 border-t border-line px-4 py-3 text-[13px] text-ink-secondary">
+        <li data-testid="fuel-rule-intra">{t(`fueling.rule.intra.${rule.intra}`)}</li>
+        {(rule.intra === 'g30_90' || rule.intra === 'g60_90') && <li className="text-[12px] text-ink-muted">{t('fueling.rule.intra.advanced')}</li>}
+        {rule.carbLoad && <li data-testid="fuel-rule-load">{t(`fueling.rule.carbLoad.${rule.carbLoad}`)}</li>}
+        <li className="text-[12px] text-ink-muted">{t('fueling.rule.hyponatremia')}</li>
+      </ul>
+      <div className="border-t border-line px-4 py-3" data-testid="fuel-rule-evidence">
+        <span className="label-tag">{t('fueling.rule.evidence.title')}</span>
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
+          {badges.map((b) => (
+            <span key={b} className="rounded-pill border border-line px-2.5 py-0.5 text-[11px] text-ink-secondary">
+              {b}
+            </span>
+          ))}
+        </div>
+        <ul className="mt-2 space-y-1 text-[11px] leading-relaxed text-ink-muted">
+          {ev.sourceIds.map((id) => {
+            const src = FUEL_SOURCES[id]
+            return (
+              <li key={id}>
+                {src.url ? (
+                  <a href={src.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink">
+                    {src.citation}
+                  </a>
+                ) : (
+                  src.citation
+                )}
+              </li>
+            )
+          })}
+        </ul>
+        <p className="mt-2 text-[11px] text-ink-muted">{t('fueling.rule.version', { version: ev.ruleVersion, date: ev.reviewed })}</p>
+      </div>
+      <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('fueling.rule.scope')}</p>
     </Panel>
   )
 }

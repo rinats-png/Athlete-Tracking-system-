@@ -1913,7 +1913,7 @@
       "noWeight": "No range without body mass — enter your weight in the diary.",
       "noDiary": "Without a diary entry in the last seven days, the load is unknown.",
       "eaten": "Eaten today: {{value}} g",
-      "source": "Ranges per kg body mass after Thomas, Erdman & Burke (2016, ACSM position stand) and Burke et al. (2011): carbohydrate 3–5 / 5–7 / 6–10 / 8–12 g/kg by level, protein 1.2–2.0 g/kg. The level from training minutes is a KYDON setting. A yardstick, not a target — what you eat is your decision."
+      "source": "Ranges per kg body mass after Thomas, Erdman & Burke (2016, ACSM position stand) and Burke et al. (2011); protein: Morton et al. (2018): carbohydrate 3–5 / 5–7 / 6–10 / 8–12 g/kg by level, protein 1.6–2.2 g/kg. The level from training minutes is a KYDON setting. A yardstick, not a target — what you eat is your decision."
     },
     "band": {
       "none": "under 45 min: no intake needed",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Remove band",
       "note": "You set the band yourself, for example with your coach or nutritionist. KYDON does not suggest one. A hint only appears once two weeks in a row fall on the same side."
+    },
+    "rule": {
+      "title": "Rule for your discipline",
+      "noDiscipline": "No discipline selected",
+      "noDisciplineBody": "Pick your discipline in the profile and KYDON shows the matching rule.",
+      "none": "There is no sourced rule for this discipline yet. KYDON does not derive one — until then the range by training load applies.",
+      "scope": "A yardstick based on consensus papers, not an individual target and not nutrition advice. For weight classes, weight loss or signs of low energy availability the decision belongs with sports medicine and qualified nutrition professionals; KYDON calculates nothing on this (IOC REDs consensus 2023).",
+      "carbsHow": "Within the range the day follows the load: easy days low, hard days and the days before competition high.",
+      "hyponatremia": "Do not drink more than needed: gaining body mass during a long session is a warning sign, not a goal.",
+      "version": "Rule version {{version}}, reviewed {{date}}",
+      "intra": {
+        "none_in_race": "Usually not needed during the race itself; what comes before matters more.",
+        "g30_60": "During competition 30–60 g carbohydrate per hour, depending on duration and tolerance.",
+        "g30_90": "During competition 30–60 g per hour, from about 2.5 hours up to about 90 g per hour with several carbohydrate types.",
+        "g60_90": "During competition typically 60–90 g carbohydrate per hour, with several carbohydrate types and rehearsed beforehand.",
+        "advanced": "90–120 g per hour only after gut training and never as a default; the evidence for it is clearly weaker."
+      },
+      "carbLoad": {
+        "not_essential": "Carbohydrate loading is not needed for a race under 90 minutes; beforehand 1–4 g/kg, 1–4 hours before.",
+        "appropriate": "Carbohydrate loading makes sense here: 10–12 g/kg per day for 36–48 hours before, without a prior depletion phase."
+      },
+      "evidence": {
+        "title": "Evidence",
+        "strength": {
+          "high": "Evidence high",
+          "moderate": "Evidence moderate",
+          "low": "Evidence low",
+          "emerging": "Evidence emerging"
+        },
+        "type": {
+          "meta_analysis": "Meta-analysis",
+          "consensus": "Consensus paper",
+          "rct": "Randomised trial",
+          "observational": "Observational study",
+          "mechanistic": "Mechanistic",
+          "expert": "Expert opinion",
+          "extrapolation": "Extrapolated"
+        },
+        "specificity": {
+          "same_sport": "Same sport",
+          "related_sport": "Related sport",
+          "general_athlete": "General athletes"
+        },
+        "verification": {
+          "primary_verified": "Checked against primary text",
+          "secondary_verified": "Checked via secondary source",
+          "not_reverified": "Not yet checked against primary text"
+        }
+      }
     }
   },
   "hrv": {

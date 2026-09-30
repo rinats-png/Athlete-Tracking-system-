@@ -1913,7 +1913,7 @@
       "noWeight": "Sin masa corporal no hay rango — el peso se registra en el diario.",
       "noDiary": "Sin entradas en el diario en los últimos siete días, la carga es desconocida.",
       "eaten": "Comido hoy: {{value}} g",
-      "source": "Rangos por kg de masa corporal según Thomas, Erdman & Burke (2016, documento de posición del ACSM) y Burke et al. (2011): hidratos de carbono 3–5 / 5–7 / 6–10 / 8–12 g/kg según el nivel, proteína 1,2–2,0 g/kg. El nivel a partir de los minutos de entrenamiento es una convención de KYDON. Una referencia, no un objetivo — lo que comes lo decides tú."
+      "source": "Rangos por kg de masa corporal según Thomas, Erdman & Burke (2016, documento de posición del ACSM) y Burke et al. (2011); proteína: Morton et al. (2018): hidratos de carbono 3–5 / 5–7 / 6–10 / 8–12 g/kg según el nivel, proteína 1,6–2,2 g/kg. El nivel a partir de los minutos de entrenamiento es una convención de KYDON. Una referencia, no un objetivo — lo que comes lo decides tú."
     },
     "band": {
       "none": "menos de 45 min: no hace falta ingesta",
@@ -1947,6 +1947,55 @@
       "unit": "%",
       "clear": "Quitar banda",
       "note": "La banda la fijas tú, por ejemplo con tu entrenadora o tu asesoría nutricional. KYDON no propone ninguna. Solo aparece un aviso cuando dos semanas seguidas quedan del mismo lado."
+    },
+    "rule": {
+      "title": "Regla de tu disciplina",
+      "noDiscipline": "Ninguna disciplina elegida",
+      "noDisciplineBody": "Elige tu disciplina en el perfil y KYDON muestra la regla correspondiente.",
+      "none": "Todavía no hay una regla con fuente para esta disciplina. KYDON no deduce ninguna — mientras tanto se aplica el rango según la carga.",
+      "scope": "Una referencia basada en documentos de consenso, no un objetivo individual ni asesoramiento nutricional. En categorías de peso, pérdida de peso o signos de baja disponibilidad de energía, la decisión corresponde a la medicina deportiva y a profesionales de la nutrición; KYDON no calcula nada al respecto (consenso IOC REDs 2023).",
+      "carbsHow": "Dentro del rango el día sigue la carga: días fáciles abajo, días duros y los previos a la competición arriba.",
+      "hyponatremia": "No bebas más de lo necesario: ganar masa corporal durante una sesión larga es una señal de alerta, no un objetivo.",
+      "version": "Regla versión {{version}}, revisada el {{date}}",
+      "intra": {
+        "none_in_race": "Normalmente no hace falta durante la carrera; lo que va antes cuenta más.",
+        "g30_60": "En competición 30–60 g de hidratos de carbono por hora, según la duración y la tolerancia.",
+        "g30_90": "En competición 30–60 g por hora, desde unas 2,5 horas hasta unos 90 g por hora con varios tipos de hidratos de carbono.",
+        "g60_90": "En competición normalmente 60–90 g de hidratos de carbono por hora, con varios tipos y ensayados antes.",
+        "advanced": "90–120 g por hora solo tras entrenar el intestino y nunca por defecto; la evidencia es claramente más débil."
+      },
+      "carbLoad": {
+        "not_essential": "La carga de hidratos no hace falta en una carrera de menos de 90 minutos; antes, 1–4 g/kg, 1–4 horas antes.",
+        "appropriate": "Aquí tiene sentido cargar hidratos: 10–12 g/kg al día durante 36–48 horas antes, sin fase de vaciado previa."
+      },
+      "evidence": {
+        "title": "Evidencia",
+        "strength": {
+          "high": "Evidencia alta",
+          "moderate": "Evidencia media",
+          "low": "Evidencia baja",
+          "emerging": "Evidencia emergente"
+        },
+        "type": {
+          "meta_analysis": "Metaanálisis",
+          "consensus": "Documento de consenso",
+          "rct": "Ensayo aleatorizado",
+          "observational": "Estudio observacional",
+          "mechanistic": "Mecanístico",
+          "expert": "Opinión de expertos",
+          "extrapolation": "Extrapolado"
+        },
+        "specificity": {
+          "same_sport": "Mismo deporte",
+          "related_sport": "Deporte afín",
+          "general_athlete": "Deportistas en general"
+        },
+        "verification": {
+          "primary_verified": "Comprobado en el texto original",
+          "secondary_verified": "Comprobado en una fuente secundaria",
+          "not_reverified": "Aún no comprobado en el texto original"
+        }
+      }
     }
   },
   "hrv": {
