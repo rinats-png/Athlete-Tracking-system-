@@ -130,6 +130,15 @@ Markennamen, keine Dosierungsanweisung, keine Rangliste nach Ziel.
   nur Flüssigkeit. Bei Sportarten mit Gewichtsklasse steht der Hinweis «nicht Sache von KYDON»
   mit Verweis auf ISSN 2025, Reale 2017 und IOC REDs 2023 über der Regel. Nichts zu Wiegen,
   Gewicht oder Zeit danach.
+- **Pro-Schranke geprüft (30.09.2026):** Fuel hängt an demselben Merkmal `nutrition` wie die
+  Ernährung (nur Pro, `smallestPlanWith('nutrition') = pro`). Alle Karten liegen in
+  `/ernaehrung` hinter `<Gate feature="nutrition">`; das Verpflegungsformular im Tagebuch
+  (inkl. «Energie in der Einheit») und die drei Hinweisregeln (`requires: 'nutrition'`)
+  verlangen dieselbe Stufe. Es gibt keinen zweiten Zugang. Bestand und Export bleiben
+  wie überall frei (Schranke hält Merkmale zurück, nie Daten). Keine Codeänderung nötig,
+  Absicherung durch `tests/fuelGate.spec.ts`. Nicht geändert: die Pro-Beschreibung auf
+  der Preisseite (nennt weiter «Ernährung»); ein Hinweis auf Fuel dort wäre eine
+  Preisseiten-Änderung und braucht Ihre Freigabe.
 - Morton et al. (2018) ist eine Meta-Analyse zu **Krafttraining**. Für Ausdauer
   ist 1,6–2,2 g/kg damit übertragen; das Abzeichen zeigt «Übertragen» nur, wenn die
   Regel so gekennzeichnet ist — für die Proteinspanne fehlt noch ein eigenes
