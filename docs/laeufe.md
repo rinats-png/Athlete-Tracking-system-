@@ -4,7 +4,7 @@ Auswertung von Läufen und Einheiten aus Strava, Garmin oder einer anderen Aktiv
 Ausgangspunkt war ein Dashboard-Prompt (Strava-Export → Einzeldatei). Übernommen sind die Fachideen, nicht
 Marke, Netzaufruf oder fremdes Design.
 
-**Stand:** 2. Oktober 2026 · Stufen 1 bis 3 gebaut.
+**Stand:** 2. Oktober 2026 · Stufen 1 bis 4 gebaut; Rennwetter bis zur Freigabe des Datenschutztextes verborgen.
 
 ## Entscheidungen
 
@@ -24,7 +24,7 @@ Marke, Netzaufruf oder fremdes Design.
 | 1 | Import und Datenmodell | ✅ |
 | 2 | Rechnung in `src/domain/runMetrics.ts`: Belastung, Fitness/Ermüdung/Form, Wochenumfang, Konstanz, VDOT und Prognosespannen, Tempo bei gleichem Puls. Jede Zahl mit Quelle oder «vorläufig» im Formelregister | ✅ |
 | 3 | Anzeige: Form-Kurve, Wochenumfang, Ringe, Skyline, Rennprognose, ein Befund | ✅ |
-| 4 | Freiwilliges Rennwetter mit Einwilligung, Datenschutz anpassen (Rechtstext nur nach Freigabe) | offen |
+| 4 | Freiwilliges Rennwetter mit Einwilligung, Datenschutz anpassen (Rechtstext nur nach Freigabe) | ✅ gebaut, verborgen bis zur Freigabe |
 
 ## Stufe 1: was gebaut ist
 
@@ -59,7 +59,7 @@ Marke, Netzaufruf oder fremdes Design.
 - **Parameter:** Maximalpuls (zweite Bestätigung innerhalb 3 Schläge, nie über 215), Schwellenpuls aus dem stärksten Lauf zwischen 9,5 und 21,5 km (unter 15 km mal 0,98), Zonen bei 85/90/95/100 %. Ruhepuls fehlt: 50, als «angenommen» gekennzeichnet.
 - **Kennzahlen:** Form mit Wort (−25/−10/+5/+15), Rampe, akut zu chronisch (nur beschreibend), Monotonie, Sprung (jüngste Woche ab 30 km und über 30 %), abgeleitetes Wochenziel, Konstanz (Serien, Treffer der letzten sechs Wochen, aktive Tage), Rennen, Prognosespannen für 5 km, 10 km, Halbmarathon, Marathon, Lockerbereich (70 % und 62 % des VDOT), Taper-Projektion, Intensitätsverteilung, lockere und harte Läufe der letzten zwölf Wochen, Gewohnheit, Bestzeiten und Rekorde, Summen, Schuhe der letzten 90 Tage.
 - **Abweichung von der Vorlage:** keine «Chance in Prozent». Stattdessen `raceOutlook`: Zielzeit unter, in oder über der Spanne («ehrgeizig / realistisch / sicher»).
-- **Noch nicht gebaut:** Wochenplan gegen Ist, Race-Day-Wetter (Stufe 4).
+- **Noch nicht gebaut:** Wochenplan gegen Ist.
 
 ## Stufe 3: was gebaut ist
 
@@ -69,3 +69,14 @@ Reiter «Läufe» in der Analyse zeigt über dem Import (nur Pro, Funktion `runA
 - **`src/features/runs/RunsDashboard.tsx`:** Befund, Formkurve (3/6/12 Monate), Skyline des Jahres, Wochenumfang mit Ringen und Balken (12/26/52 Wochen), Rennprognose mit Zielzeit als Spanne und Wort (kein Prozentwert), Tempo bei gleichem Puls, Einblicke, Intensität, Gewohnheit, Rekorde, Schuhe, «Daten und Annahmen».
 - **Texte:** `runs.dash.*`, `runs.finding.*`, `runs.insight.*` in allen acht Sprachen; Beschreibung statt Urteil, keine Reparaturanleitung, keine Prognose-Chance in Prozent.
 - **Prüfung:** `tests/runsDashboard.spec.ts` (Befund, Einblicke, Anzeige nach Import, hell und dunkel ohne Überlauf, Leeren).
+
+## Stufe 4: was gebaut ist
+
+Rennwetter in der Rennprognose, **nur wenn der Bau `VITE_RACE_WEATHER=on` trägt** (Prüfbau ja, Auslieferung nein, bis `docs/rennwetter-datenschutz.md` freigegeben ist).
+
+- **Anbieter:** Open-Meteo (kein Schlüssel). `src/lib/openMeteo.ts` ruft nur auf Tipp auf; `src/domain/raceWeather.ts` (rein) liest die Antworten und prüft das Vorhersagefenster (heute bis 15 Tage voraus).
+- **Einwilligung:** der Tipp auf «Wetter abrufen», nachdem darüber steht, was gesendet wird: Ortsname, dann Koordinaten und Renntag. Nichts wird gespeichert, kein Schema, keine Migration.
+- **Keine Umrechnung:** gezeigt werden Temperatur, Wind, Regen. Die Prognose wird nicht angepasst, weil es dafür keine Quelle gibt, die wir einsetzen dürften (Regel 6).
+- **Sicherheitsrichtlinie:** `connect-src` nennt zusätzlich `geocoding-api.open-meteo.com` und `api.open-meteo.com`.
+- **Offen vor der Freigabe:** Tarif für kommerzielle Nutzung, Empfänger-Liste, Impressum, dann Schalter in der Auslieferung.
+- **Prüfung:** `tests/raceWeather.spec.ts` (Fenster, Antworten lesen, nichts vor dem Tipp, nur Ort/Koordinaten/Tag gesendet, Fehlerfälle).

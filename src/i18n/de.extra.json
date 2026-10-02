@@ -2406,6 +2406,28 @@
         "assumed": "angenommen",
         "none": "nicht ableitbar",
         "formula": "Formeln: VDOT nach Daniels und Gilbert, Rennzeiten nach Riegel, Form nach Banister. Schwellenpuls, Belastung ohne Puls und Lauf-Einstufung sind eigene, vorläufige Annahmen."
+      },
+      "weather": {
+        "title": "Wetter am Renntag (freiwillig)",
+        "consent": "Auf Tipp geht der Ortsname an Open-Meteo (open-meteo.com), danach die Koordinaten des gewählten Orts und der Renntag. Keine Läufe, keine Pulswerte, kein Name, kein Gerätestandort. Es wird nichts gespeichert.",
+        "place": "Ort des Rennens",
+        "day": "Renntag",
+        "go": "Wetter abrufen",
+        "busy": "Wetter wird abgerufen …",
+        "fail": {
+          "offline": "Ohne Verbindung kein Wetter. Alles andere bleibt nutzbar.",
+          "error": "Das Wetter ließ sich nicht abrufen. Versuch es später noch einmal.",
+          "nothing": "Zu diesem Ort gibt es keine Treffer.",
+          "past": "Der Tag liegt in der Vergangenheit.",
+          "too_far": "Eine Vorhersage gibt es nur für die nächsten 16 Tage.",
+          "invalid": "Bitte einen gültigen Tag wählen."
+        },
+        "temp": "Temperatur",
+        "wind": "Wind (Spitze)",
+        "rain": "Regen",
+        "chance": "Regenwahrscheinlichkeit",
+        "noAdjust": "KYDON rechnet die Prognose nicht um: wie stark Hitze oder Wind dein Tempo verschieben, hängt von dir ab.",
+        "source": "Wetterdaten:"
       }
     },
     "finding": {

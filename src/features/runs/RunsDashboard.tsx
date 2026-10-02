@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
@@ -6,6 +6,8 @@ import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { computeRunMetrics, raceOutlook, shiftDay, weekStart, zoneBounds, type RaceKey, type RunMetrics } from '@/domain/runMetrics'
 import { findFinding, findInsights, type Insight } from '@/domain/runFinding'
+import { forecastWindow, msToKmh, type Place, type RaceWeather } from '@/domain/raceWeather'
+import { findPlaces, METEO_ATTRIBUTION, raceDayWeather, raceWeatherEnabled } from '@/lib/openMeteo'
 import { formatDate, formatNumber } from '@/lib/format'
 import type { StoredActivity } from '@/lib/store/localStore'
 import type { AppLocale } from '@/i18n/locales'
@@ -365,8 +367,122 @@ function PredictionPanel({ m }: { m: RunMetrics }) {
           </p>
         )}
       </div>
+      {raceWeatherEnabled() && <RaceWeatherBlock />}
       <p className="border-t border-line px-4 py-2 text-[11px] text-ink-muted">{t('runs.dash.pred.note')}</p>
     </Panel>
+  )
+}
+
+// --- Rennwetter ---------------------------------------------------------------------------------
+
+type WeatherState =
+  | { s: 'idle' }
+  | { s: 'busy' }
+  | { s: 'pick'; places: Place[] }
+  | { s: 'done'; place: Place; w: RaceWeather }
+  | { s: 'fail'; why: 'offline' | 'error' | 'nothing' | 'past' | 'too_far' | 'invalid' }
+
+/**
+ * Nur auf Tipp: vor dem Knopf steht, was gesendet wird. Der Tipp ist die
+ * Einwilligung für genau diese Abfrage; nichts wird gemerkt.
+ */
+function RaceWeatherBlock() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  const [place, setPlace] = useState('')
+  const [day, setDay] = useState('')
+  const [st, setSt] = useState<WeatherState>({ s: 'idle' })
+  const abort = useRef<AbortController | null>(null)
+  const today = new Date().toLocaleDateString('sv-SE')
+
+  const load = async (p: Place) => {
+    setSt({ s: 'busy' })
+    abort.current?.abort()
+    abort.current = new AbortController()
+    const r = await raceDayWeather(p, day, abort.current.signal)
+    setSt(r.ok ? { s: 'done', place: p, w: r.value } : { s: 'fail', why: r.reason })
+  }
+  const search = async () => {
+    const win = forecastWindow(day, today)
+    if (win !== 'ok') return setSt({ s: 'fail', why: win })
+    setSt({ s: 'busy' })
+    abort.current?.abort()
+    abort.current = new AbortController()
+    const r = await findPlaces(place, locale, abort.current.signal)
+    if (!r.ok) return setSt({ s: 'fail', why: r.reason })
+    if (r.value.length === 1) return load(r.value[0])
+    setSt({ s: 'pick', places: r.value })
+  }
+  const label = (p: Place) => [p.name, p.region, p.country].filter(Boolean).join(', ')
+  const dash = '–'
+  const deg = (v: number | null) => (v == null ? dash : `${formatNumber(v, locale, 0)} °C`)
+
+  return (
+    <div className="border-t border-line px-4 py-3" data-testid="race-weather">
+      <Label>{t('runs.dash.weather.title')}</Label>
+      <p className="mt-1 text-[12px] text-ink-secondary">{t('runs.dash.weather.consent')}</p>
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        <input
+          value={place}
+          onChange={(e) => setPlace(e.target.value)}
+          placeholder={t('runs.dash.weather.place')}
+          aria-label={t('runs.dash.weather.place')}
+          maxLength={80}
+          data-testid="weather-place"
+          className="h-11 min-w-0 flex-1 rounded-md border border-line bg-surface-sunken px-3 text-[15px]"
+        />
+        <input
+          type="date"
+          value={day}
+          onChange={(e) => setDay(e.target.value)}
+          aria-label={t('runs.dash.weather.day')}
+          data-testid="weather-day"
+          className="h-11 rounded-md border border-line bg-surface-sunken px-3 text-[15px]"
+        />
+        <button
+          type="button"
+          onClick={search}
+          disabled={place.trim().length < 2 || !day || st.s === 'busy'}
+          data-testid="weather-go"
+          className="h-11 rounded-md bg-accent px-4 font-display text-[13px] font-semibold uppercase tracking-[0.1em] text-accent-ink disabled:opacity-40"
+        >
+          {t('runs.dash.weather.go')}
+        </button>
+      </div>
+      <div aria-live="polite" className="mt-2 text-[13px]">
+        {st.s === 'busy' && <p className="text-ink-muted">{t('runs.dash.weather.busy')}</p>}
+        {st.s === 'fail' && <p data-testid="weather-fail" className="text-ink-secondary">{t(`runs.dash.weather.fail.${st.why}`)}</p>}
+        {st.s === 'pick' && (
+          <ul data-testid="weather-pick">
+            {st.places.map((p) => (
+              <li key={`${p.lat},${p.lon}`}>
+                <button type="button" onClick={() => load(p)} className="min-h-11 w-full rounded-md px-2 text-left hover:bg-surface-sunken">{label(p)}</button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {st.s === 'done' && (
+          <div data-testid="weather-result">
+            <p className="text-ink-muted">{label(st.place)} · {formatDate(`${st.w.day}T12:00:00Z`, locale)}</p>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              {[
+                [t('runs.dash.weather.temp'), `${deg(st.w.tempMin)} – ${deg(st.w.tempMax)}`],
+                [t('runs.dash.weather.wind'), st.w.windMax == null ? dash : `${formatNumber(msToKmh(st.w.windMax), locale, 0)} km/h`],
+                [t('runs.dash.weather.rain'), st.w.precipMm == null ? dash : `${formatNumber(st.w.precipMm, locale, 1)} mm`],
+                [t('runs.dash.weather.chance'), st.w.precipChance == null ? dash : `${formatNumber(st.w.precipChance, locale, 0)} %`],
+              ].map(([k, v]) => (
+                <div key={k} className="rounded-md bg-surface-sunken px-3 py-2.5">
+                  <p className="readout text-[16px] font-light">{v}</p>
+                  <p className="text-[11px] text-ink-muted">{k}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-2 text-[12px] text-ink-secondary">{t('runs.dash.weather.noAdjust')}</p>
+          </div>
+        )}
+      </div>
+      <p className="mt-1 text-[11px] text-ink-muted">{t('runs.dash.weather.source')} {METEO_ATTRIBUTION}</p>
+    </div>
   )
 }
 

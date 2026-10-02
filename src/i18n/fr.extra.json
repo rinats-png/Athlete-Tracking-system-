@@ -2406,6 +2406,28 @@
         "assumed": "supposée",
         "none": "non déductible",
         "formula": "Formules : VDOT selon Daniels et Gilbert, temps de course selon Riegel, forme selon Banister. Fréquence cardiaque au seuil, charge sans fréquence cardiaque et classement des sorties sont des hypothèses propres et provisoires."
+      },
+      "weather": {
+        "title": "Météo le jour de la course (facultatif)",
+        "consent": "Au tap, le nom du lieu part chez Open-Meteo (open-meteo.com), puis les coordonnées du lieu choisi et le jour de la course. Aucune sortie, aucune fréquence cardiaque, aucun nom, aucune position de l'appareil. Rien n'est enregistré.",
+        "place": "Lieu de la course",
+        "day": "Jour de la course",
+        "go": "Afficher la météo",
+        "busy": "Météo en cours de chargement …",
+        "fail": {
+          "offline": "Sans connexion, pas de météo. Tout le reste reste utilisable.",
+          "error": "La météo n'a pas pu être chargée. Réessaie plus tard.",
+          "nothing": "Aucun résultat pour ce lieu.",
+          "past": "Ce jour est passé.",
+          "too_far": "Une prévision n'existe que pour les 16 prochains jours.",
+          "invalid": "Choisis un jour valide."
+        },
+        "temp": "Température",
+        "wind": "Vent (pointe)",
+        "rain": "Pluie",
+        "chance": "Probabilité de pluie",
+        "noAdjust": "KYDON ne corrige pas la prévision : l'effet de la chaleur ou du vent sur ton allure dépend de toi.",
+        "source": "Données météo :"
       }
     },
     "finding": {

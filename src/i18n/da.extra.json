@@ -2406,6 +2406,28 @@
         "assumed": "antaget",
         "none": "kan ikke udledes",
         "formula": "Formler: VDOT efter Daniels og Gilbert, løbstider efter Riegel, form efter Banister. Tærskelpuls, belastning uden puls og inddeling af ture er egne, foreløbige antagelser."
+      },
+      "weather": {
+        "title": "Vejr på løbsdagen (frivilligt)",
+        "consent": "Når du trykker, sendes stednavnet til Open-Meteo (open-meteo.com), derefter koordinaterne for det valgte sted og løbsdagen. Ingen ture, ingen puls, intet navn, ingen enhedsplacering. Der gemmes intet.",
+        "place": "Løbets sted",
+        "day": "Løbsdag",
+        "go": "Hent vejr",
+        "busy": "Henter vejr …",
+        "fail": {
+          "offline": "Uden forbindelse intet vejr. Alt andet kan stadig bruges.",
+          "error": "Vejret kunne ikke hentes. Prøv igen senere.",
+          "nothing": "Ingen resultater for dette sted.",
+          "past": "Dagen ligger i fortiden.",
+          "too_far": "Der findes kun prognose for de næste 16 dage.",
+          "invalid": "Vælg en gyldig dag."
+        },
+        "temp": "Temperatur",
+        "wind": "Vind (stød)",
+        "rain": "Regn",
+        "chance": "Risiko for regn",
+        "noAdjust": "KYDON regner ikke prognosen om: hvor meget varme eller vind bremser dig, afhænger af dig.",
+        "source": "Vejrdata:"
       }
     },
     "finding": {

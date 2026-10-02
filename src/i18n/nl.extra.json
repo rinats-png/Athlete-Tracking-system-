@@ -2406,6 +2406,28 @@
         "assumed": "aangenomen",
         "none": "niet af te leiden",
         "formula": "Formules: VDOT volgens Daniels en Gilbert, wedstrijdtijden volgens Riegel, vorm volgens Banister. Drempelhartslag, belasting zonder hartslag en indeling van loopjes zijn eigen, voorlopige aannames."
+      },
+      "weather": {
+        "title": "Weer op wedstrijddag (vrijwillig)",
+        "consent": "Na je tik gaat de plaatsnaam naar Open-Meteo (open-meteo.com), daarna de coördinaten van de gekozen plaats en de wedstrijddag. Geen loopjes, geen hartslag, geen naam, geen apparaatlocatie. Er wordt niets opgeslagen.",
+        "place": "Plaats van de wedstrijd",
+        "day": "Wedstrijddag",
+        "go": "Weer ophalen",
+        "busy": "Weer wordt opgehaald …",
+        "fail": {
+          "offline": "Zonder verbinding geen weer. De rest blijft bruikbaar.",
+          "error": "Het weer kon niet worden opgehaald. Probeer het later opnieuw.",
+          "nothing": "Geen resultaten voor deze plaats.",
+          "past": "Die dag ligt in het verleden.",
+          "too_far": "Een voorspelling bestaat alleen voor de komende 16 dagen.",
+          "invalid": "Kies een geldige dag."
+        },
+        "temp": "Temperatuur",
+        "wind": "Wind (piek)",
+        "rain": "Regen",
+        "chance": "Kans op regen",
+        "noAdjust": "KYDON rekent de prognose niet om: hoeveel hitte of wind je vertraagt, hangt van jou af.",
+        "source": "Weergegevens:"
       }
     },
     "finding": {

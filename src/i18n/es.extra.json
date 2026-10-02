@@ -2406,6 +2406,28 @@
         "assumed": "supuesta",
         "none": "no deducible",
         "formula": "Fórmulas: VDOT según Daniels y Gilbert, tiempos de carrera según Riegel, forma según Banister. Frecuencia cardiaca de umbral, carga sin frecuencia cardiaca y clasificación de salidas son supuestos propios y provisionales."
+      },
+      "weather": {
+        "title": "Tiempo el día de la carrera (opcional)",
+        "consent": "Al pulsar, el nombre del lugar va a Open-Meteo (open-meteo.com), después las coordenadas del lugar elegido y el día de la carrera. Sin salidas, sin frecuencia cardiaca, sin nombre, sin ubicación del dispositivo. No se guarda nada.",
+        "place": "Lugar de la carrera",
+        "day": "Día de la carrera",
+        "go": "Ver el tiempo",
+        "busy": "Cargando el tiempo …",
+        "fail": {
+          "offline": "Sin conexión no hay tiempo. Todo lo demás sigue disponible.",
+          "error": "No se pudo cargar el tiempo. Inténtalo más tarde.",
+          "nothing": "No hay resultados para este lugar.",
+          "past": "Ese día ya pasó.",
+          "too_far": "Solo hay previsión para los próximos 16 días.",
+          "invalid": "Elige un día válido."
+        },
+        "temp": "Temperatura",
+        "wind": "Viento (racha)",
+        "rain": "Lluvia",
+        "chance": "Probabilidad de lluvia",
+        "noAdjust": "KYDON no corrige la previsión: cuánto te frenan el calor o el viento depende de ti.",
+        "source": "Datos meteorológicos:"
       }
     },
     "finding": {

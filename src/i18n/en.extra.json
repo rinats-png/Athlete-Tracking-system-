@@ -2406,6 +2406,28 @@
         "assumed": "assumed",
         "none": "not derivable",
         "formula": "Formulas: VDOT after Daniels and Gilbert, race times after Riegel, form after Banister. Threshold heart rate, load without heart rate and run classification are own, provisional assumptions."
+      },
+      "weather": {
+        "title": "Weather on race day (optional)",
+        "consent": "When you tap, the place name goes to Open-Meteo (open-meteo.com), then the coordinates of the place you pick and the race day. No runs, no heart rate, no name, no device location. Nothing is stored.",
+        "place": "Race location",
+        "day": "Race day",
+        "go": "Get weather",
+        "busy": "Getting weather …",
+        "fail": {
+          "offline": "No connection, no weather. Everything else stays usable.",
+          "error": "The weather could not be loaded. Try again later.",
+          "nothing": "No matches for this place.",
+          "past": "That day is in the past.",
+          "too_far": "A forecast exists only for the next 16 days.",
+          "invalid": "Please choose a valid day."
+        },
+        "temp": "Temperature",
+        "wind": "Wind (peak)",
+        "rain": "Rain",
+        "chance": "Chance of rain",
+        "noAdjust": "KYDON does not adjust the forecast: how much heat or wind slows you depends on you.",
+        "source": "Weather data:"
       }
     },
     "finding": {

@@ -2406,6 +2406,28 @@
         "assumed": "antagen",
         "none": "kan inte härledas",
         "formula": "Formler: VDOT enligt Daniels och Gilbert, loppstider enligt Riegel, form enligt Banister. Tröskelpuls, belastning utan puls och indelning av löpturer är egna, preliminära antaganden."
+      },
+      "weather": {
+        "title": "Väder på loppdagen (frivilligt)",
+        "consent": "När du trycker går ortnamnet till Open-Meteo (open-meteo.com), därefter koordinaterna för den valda orten och loppdagen. Inga löpturer, ingen puls, inget namn, ingen enhetsplats. Inget sparas.",
+        "place": "Loppets ort",
+        "day": "Loppdag",
+        "go": "Hämta väder",
+        "busy": "Hämtar väder …",
+        "fail": {
+          "offline": "Utan uppkoppling inget väder. Allt annat går att använda.",
+          "error": "Vädret kunde inte hämtas. Försök igen senare.",
+          "nothing": "Inga träffar för den här orten.",
+          "past": "Dagen ligger i det förflutna.",
+          "too_far": "Prognos finns bara för de närmaste 16 dagarna.",
+          "invalid": "Välj en giltig dag."
+        },
+        "temp": "Temperatur",
+        "wind": "Vind (topp)",
+        "rain": "Regn",
+        "chance": "Risk för regn",
+        "noAdjust": "KYDON räknar inte om prognosen: hur mycket värme eller vind bromsar dig beror på dig.",
+        "source": "Väderdata:"
       }
     },
     "finding": {
