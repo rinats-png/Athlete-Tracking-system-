@@ -2290,6 +2290,201 @@
       "unreadable": "This file could not be read: no activities with a readable date found."
     },
     "added_one": "1 new session imported.",
-    "added_other": "{{count}} new sessions imported."
+    "added_other": "{{count}} new sessions imported.",
+    "dash": {
+      "finding": "Finding",
+      "basis": {
+        "evidenced": "Backed by your data",
+        "hint": "A hint, not a diagnosis"
+      },
+      "findingNote": "A finding describes what stands out most in your data. It replaces neither training nor medical advice.",
+      "period": "Period",
+      "sourceNote": "All values are calculated from your imported sessions on this device.",
+      "form": {
+        "title": "Form curve",
+        "sub": "Fitness and fatigue from your load",
+        "words": {
+          "very_loaded": "Heavily loaded",
+          "building": "Building",
+          "balanced": "Balanced",
+          "fresh": "Fresh",
+          "very_fresh": "Very fresh"
+        },
+        "loaded": "Loaded",
+        "fresh": "Fresh",
+        "chartAlt": "Form curve: fitness {{fitness}}, fatigue {{fatigue}}",
+        "fitness": "Fitness",
+        "fatigue": "Fatigue",
+        "ramp": "7-day change",
+        "note": "Form = fitness minus fatigue (Banister, 42 and 7 days). Load is duration times heart-rate fraction squared.",
+        "estimated": "For {{n}} sessions without heart rate the load is estimated."
+      },
+      "year": {
+        "title": "Your year",
+        "sub": "Each pillar is a week, its height the kilometres",
+        "runs": "Runs",
+        "hours": "Hours",
+        "elev": "Elevation",
+        "alt": "Skyline of the last 12 months, {{km}} km run in total",
+        "biggest": "Biggest week: {{km}} km, starting {{date}}"
+      },
+      "week": {
+        "title": "Weekly volume",
+        "sub": "Kilometres per week and how often you hit your weekly goal",
+        "noGoal": "No weekly goal can be derived yet",
+        "ringsAlt": "This week {{week}} percent of the goal, {{hits}} of 6 weeks reached",
+        "ringWeek": "This week",
+        "ringConsistency": "Last 6 weeks",
+        "derived": "The goal is derived from your recent weeks, not preset.",
+        "w12": "12 weeks",
+        "w26": "26 weeks",
+        "w52": "52 weeks",
+        "barsAlt": "Weekly kilometres, this week {{km}} km",
+        "goalLine": "Weekly goal {{km}} km",
+        "streak": "Streak (weeks)",
+        "longest": "Longest streak",
+        "active": "Active days"
+      },
+      "pred": {
+        "title": "Race forecast",
+        "sub": "From your strongest run: VDOT {{vdot}} ({{km}} km on {{date}})",
+        "half": "Half marathon",
+        "marathon": "Marathon",
+        "easy": "Easy pace: {{fast}} to {{slow}} per km",
+        "target": "Target distance",
+        "outlook": {
+          "ambitious": "Ambitious",
+          "realistic": "Realistic",
+          "safe": "Safe"
+        },
+        "outlookText": "Your goal {{target}} compared with the range {{low}} to {{high}}.",
+        "note": "The times are a range, not a promise. They assume flat courses, good days and fitting training; heat, terrain and daily form shift them."
+      },
+      "pace": {
+        "title": "Pace at the same heart rate",
+        "sub": "Runs at {{lo}} to {{hi}} beats per minute ({{n}} runs)",
+        "text": "At the start {{first}}, lately {{last}} per km — at the same heart rate.",
+        "axis": "min/km",
+        "alt": "Pace at the same heart rate over {{n}} runs",
+        "note": "{{n}} runs with stops, climbs or outliers are left out. Wind, heat and sleep change heart rate; the trend is a hint."
+      },
+      "int": {
+        "title": "Intensity",
+        "sub": "Last 12 weeks across five heart-rate zones",
+        "easy": "easy",
+        "alt": "{{easy}} percent of the time in the easy range",
+        "of": "of",
+        "easyAbove": "easy runs above zone 2",
+        "hardAbove": "hard sessions at threshold",
+        "backToBack": "hard days back to back",
+        "note": "Easy runs are those that look easy by pace, length and name. Zones are shares of your threshold heart rate."
+      },
+      "habit": {
+        "title": "Habit",
+        "sub": "Most often: {{day}} at {{hour}}:00",
+        "before9": "before 9 am",
+        "alt": "Runs by weekday"
+      },
+      "rec": {
+        "title": "Records",
+        "longest": "Longest run",
+        "week": "Biggest week",
+        "elev": "Most elevation",
+        "early": "Earliest start",
+        "month": "Biggest month"
+      },
+      "shoes": {
+        "title": "Shoes",
+        "sub": "Kilometres per pair — the line marks 700 km"
+      },
+      "data": {
+        "title": "Data and assumptions",
+        "maxHr": "Maximum heart rate (from your data)",
+        "restHr": "Resting heart rate",
+        "thr": "Threshold heart rate",
+        "noHr": "Sessions without heart rate",
+        "assumed": "assumed",
+        "none": "not derivable",
+        "formula": "Formulas: VDOT after Daniels and Gilbert, race times after Riegel, form after Banister. Threshold heart rate, load without heart rate and run classification are own, provisional assumptions."
+      }
+    },
+    "finding": {
+      "easy_too_hard": {
+        "lead": "Your easy runs are",
+        "accent": "not easy",
+        "text": "{{above}} of {{total}} easy runs were above zone 2, that is from {{zone3}} beats per minute. What feels easy is often already the middle range."
+      },
+      "volume_jump": {
+        "lead": "Your volume",
+        "accent": "jumped",
+        "text": "Last week was {{pct}} percent above the average before it: {{km}} km. Many runners notice bigger jumps before the body catches up."
+      },
+      "hard_too_hard": {
+        "lead": "Hard sessions sit",
+        "accent": "at threshold",
+        "text": "{{above}} of {{total}} hard sessions reached the threshold heart rate of {{thr}} beats — a lot of stimulus with little recovery between."
+      },
+      "overload": {
+        "lead": "You are",
+        "accent": "heavily loaded",
+        "text": "Form is at {{form}}: fatigue from the last days clearly exceeds your fitness. A descriptive value, not a verdict."
+      },
+      "progress": {
+        "lead": "Your pace at the same heart rate",
+        "accent": "has moved",
+        "text": "At {{lo}} to {{hi}} beats per minute the difference between the start and lately is {{delta}} seconds per km."
+      },
+      "steady": {
+        "lead": "You are",
+        "accent": "staying on it",
+        "text": "You hit your weekly goal in {{hits}} of the last 6 weeks. Nothing stands out — which is a good sign here."
+      },
+      "num": {
+        "easyAboveZ3": "above zone 2",
+        "easyTotal": "easy runs",
+        "medianHr": "median heart rate",
+        "jumpPct": "jump",
+        "weekKm": "last week",
+        "ramp": "change",
+        "hardAbove": "at threshold",
+        "hardTotal": "hard sessions",
+        "threshold": "threshold HR",
+        "form": "Form",
+        "fitness": "Fitness",
+        "fatigue": "Fatigue",
+        "deltaPace": "difference",
+        "runsInBand": "runs in band",
+        "vdot": "VDOT",
+        "weeksHit": "weeks reached",
+        "activeDays": "active days",
+        "runs": "runs"
+      }
+    },
+    "insight": {
+      "progress": {
+        "title": "Progress",
+        "text": "Your strongest run gives VDOT {{vdot}}; it is {{days}} days old."
+      },
+      "risk": {
+        "title": "Load ratio",
+        "text": "Last 7 days against the 4 weeks before: {{ac}}. Monotony {{mono}}. Descriptive, not a traffic light."
+      },
+      "race": {
+        "title": "Half marathon",
+        "text": "A range of {{low}} to {{high}}, calculated from your strongest run."
+      },
+      "consistency": {
+        "title": "Consistency",
+        "text": "{{hits}} of 6 weeks reached. Current streak {{streak}}, longest {{longest}} weeks."
+      },
+      "habit": {
+        "title": "Early-run share",
+        "text": "{{share}} percent of your runs start before 9 am. Most often: {{weekday}} at {{hour}}:00."
+      },
+      "gear": {
+        "title": "Shoe in use",
+        "text": "{{name}} has {{km}} km. From about 600 to 800 km it is worth checking its condition."
+      }
+    }
   }
 }

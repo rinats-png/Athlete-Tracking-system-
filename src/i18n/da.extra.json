@@ -2290,6 +2290,201 @@
       "unreadable": "Filen kunne ikke læses: fandt ingen aktiviteter med læsbar dato."
     },
     "added_one": "1 ny træning importeret.",
-    "added_other": "{{count}} nye træninger importeret."
+    "added_other": "{{count}} nye træninger importeret.",
+    "dash": {
+      "finding": "Fund",
+      "basis": {
+        "evidenced": "Understøttet af dine data",
+        "hint": "Et fingerpeg, ingen diagnose"
+      },
+      "findingNote": "Et fund beskriver det, der træder tydeligst frem i dine data. Det erstatter hverken træning eller lægelig rådgivning.",
+      "period": "Periode",
+      "sourceNote": "Alle værdier beregnes ud fra dine importerede pas på denne enhed.",
+      "form": {
+        "title": "Formkurve",
+        "sub": "Kondition og træthed ud fra din belastning",
+        "words": {
+          "very_loaded": "Hårdt belastet",
+          "building": "Under opbygning",
+          "balanced": "I balance",
+          "fresh": "Udhvilet",
+          "very_fresh": "Meget udhvilet"
+        },
+        "loaded": "Belastet",
+        "fresh": "Udhvilet",
+        "chartAlt": "Formkurve: kondition {{fitness}}, træthed {{fatigue}}",
+        "fitness": "Kondition",
+        "fatigue": "Træthed",
+        "ramp": "Ændring 7 dage",
+        "note": "Form = kondition minus træthed (Banister, 42 og 7 dage). Belastning er varighed gange pulsandel i anden.",
+        "estimated": "For {{n}} pas uden puls er belastningen anslået."
+      },
+      "year": {
+        "title": "Dit år",
+        "sub": "Hver søjle er en uge, højden er kilometer",
+        "runs": "Løbeture",
+        "hours": "Timer",
+        "elev": "Højdemeter",
+        "alt": "Skyline over de seneste 12 måneder, i alt {{km}} km løbet",
+        "biggest": "Største uge: {{km}} km, fra {{date}}"
+      },
+      "week": {
+        "title": "Ugevolumen",
+        "sub": "Kilometer pr. uge og hvor ofte du når dit ugemål",
+        "noGoal": "Intet ugemål kan udledes endnu",
+        "ringsAlt": "Denne uge {{week}} procent af målet, {{hits}} af 6 uger nået",
+        "ringWeek": "Denne uge",
+        "ringConsistency": "Seneste 6 uger",
+        "derived": "Målet er udledt af dine seneste uger, ikke forudindstillet.",
+        "w12": "12 uger",
+        "w26": "26 uger",
+        "w52": "52 uger",
+        "barsAlt": "Ugekilometer, denne uge {{km}} km",
+        "goalLine": "Ugemål {{km}} km",
+        "streak": "Stime (uger)",
+        "longest": "Længste stime",
+        "active": "Aktive dage"
+      },
+      "pred": {
+        "title": "Løbsprognose",
+        "sub": "Ud fra din stærkeste tur: VDOT {{vdot}} ({{km}} km den {{date}})",
+        "half": "Halvmaraton",
+        "marathon": "Maraton",
+        "easy": "Roligt tempo: {{fast}} til {{slow}} pr. km",
+        "target": "Måldistance",
+        "outlook": {
+          "ambitious": "Ambitiøst",
+          "realistic": "Realistisk",
+          "safe": "Sikkert"
+        },
+        "outlookText": "Dit mål {{target}} sammenlignet med spændet {{low}} til {{high}}.",
+        "note": "Tiderne er et spænd, ikke et løfte. De forudsætter flad rute, en god dag og passende træning; varme, terræn og dagsform forskyder dem."
+      },
+      "pace": {
+        "title": "Tempo ved samme puls",
+        "sub": "Ture ved {{lo}} til {{hi}} slag i minuttet ({{n}} ture)",
+        "text": "I begyndelsen {{first}}, på det seneste {{last}} pr. km — ved samme puls.",
+        "axis": "min/km",
+        "alt": "Tempo ved samme puls over {{n}} ture",
+        "note": "{{n}} ture med stop, bakker eller afvigere er udeladt. Vind, varme og søvn ændrer pulsen; forløbet er et fingerpeg."
+      },
+      "int": {
+        "title": "Intensitet",
+        "sub": "Seneste 12 uger fordelt på fem pulszoner",
+        "easy": "roligt",
+        "alt": "{{easy}} procent af tiden i det rolige område",
+        "of": "af",
+        "easyAbove": "rolige ture over zone 2",
+        "hardAbove": "hårde pas ved tærsklen",
+        "backToBack": "hårde dage i træk",
+        "note": "Rolige ture er dem, der ser rolige ud efter tempo, længde og navn. Zonerne er andele af din tærskelpuls."
+      },
+      "habit": {
+        "title": "Vane",
+        "sub": "Oftest: {{day}} klokken {{hour}}",
+        "before9": "før 9",
+        "alt": "Ture efter ugedag"
+      },
+      "rec": {
+        "title": "Rekorder",
+        "longest": "Længste tur",
+        "week": "Største uge",
+        "elev": "Flest højdemeter",
+        "early": "Tidligste start",
+        "month": "Største måned"
+      },
+      "shoes": {
+        "title": "Sko",
+        "sub": "Kilometer pr. par — stregen markerer 700 km"
+      },
+      "data": {
+        "title": "Data og antagelser",
+        "maxHr": "Maksimalpuls (fra dine data)",
+        "restHr": "Hvilepuls",
+        "thr": "Tærskelpuls",
+        "noHr": "Pas uden puls",
+        "assumed": "antaget",
+        "none": "kan ikke udledes",
+        "formula": "Formler: VDOT efter Daniels og Gilbert, løbstider efter Riegel, form efter Banister. Tærskelpuls, belastning uden puls og inddeling af ture er egne, foreløbige antagelser."
+      }
+    },
+    "finding": {
+      "easy_too_hard": {
+        "lead": "Dine rolige ture er",
+        "accent": "ikke rolige",
+        "text": "{{above}} af {{total}} rolige ture lå over zone 2, altså fra {{zone3}} slag i minuttet. Det, der føles roligt, er ofte allerede mellemområdet."
+      },
+      "volume_jump": {
+        "lead": "Din volumen er",
+        "accent": "sprunget",
+        "text": "Sidste uge lå {{pct}} procent over gennemsnittet før: {{km}} km. Mange løbere mærker store spring, før kroppen når at følge med."
+      },
+      "hard_too_hard": {
+        "lead": "Hårde pas ligger",
+        "accent": "ved tærsklen",
+        "text": "{{above}} af {{total}} hårde pas nåede tærskelpulsen på {{thr}} slag — meget stimulus med lidt hvile imellem."
+      },
+      "overload": {
+        "lead": "Du er",
+        "accent": "hårdt belastet",
+        "text": "Formen ligger på {{form}}: trætheden fra de seneste dage overstiger tydeligt din kondition. En beskrivende værdi, ingen dom."
+      },
+      "progress": {
+        "lead": "Dit tempo ved samme puls",
+        "accent": "har flyttet sig",
+        "text": "Ved {{lo}} til {{hi}} slag i minuttet er forskellen mellem begyndelsen og det seneste {{delta}} sekunder pr. km."
+      },
+      "steady": {
+        "lead": "Du bliver",
+        "accent": "ved",
+        "text": "Du nåede dit ugemål i {{hits}} af de seneste 6 uger. Intet stikker ud — her er det et godt tegn."
+      },
+      "num": {
+        "easyAboveZ3": "over zone 2",
+        "easyTotal": "rolige ture",
+        "medianHr": "median-puls",
+        "jumpPct": "spring",
+        "weekKm": "sidste uge",
+        "ramp": "ændring",
+        "hardAbove": "ved tærsklen",
+        "hardTotal": "hårde pas",
+        "threshold": "tærskelpuls",
+        "form": "Form",
+        "fitness": "Kondition",
+        "fatigue": "Træthed",
+        "deltaPace": "forskel",
+        "runsInBand": "ture i båndet",
+        "vdot": "VDOT",
+        "weeksHit": "uger nået",
+        "activeDays": "aktive dage",
+        "runs": "ture"
+      }
+    },
+    "insight": {
+      "progress": {
+        "title": "Fremgang",
+        "text": "Din stærkeste tur giver VDOT {{vdot}}; den er {{days}} dage gammel."
+      },
+      "risk": {
+        "title": "Belastningsforhold",
+        "text": "Seneste 7 dage mod de 4 uger før: {{ac}}. Ensformighed {{mono}}. Beskrivende, ikke et trafiklys."
+      },
+      "race": {
+        "title": "Halvmaraton",
+        "text": "Et spænd på {{low}} til {{high}}, beregnet ud fra din stærkeste tur."
+      },
+      "consistency": {
+        "title": "Jævnhed",
+        "text": "{{hits}} af 6 uger nået. Nuværende stime {{streak}}, længste {{longest}} uger."
+      },
+      "habit": {
+        "title": "Andel tidlige ture",
+        "text": "{{share}} procent af dine ture starter før 9. Oftest: {{weekday}} klokken {{hour}}."
+      },
+      "gear": {
+        "title": "Sko i brug",
+        "text": "{{name}} har {{km}} km. Fra omkring 600 til 800 km kan det betale sig at tjekke stand."
+      }
+    }
   }
 }

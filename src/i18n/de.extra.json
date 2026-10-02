@@ -2290,6 +2290,201 @@
       "unreadable": "Diese Datei ließ sich nicht lesen: keine Aktivitäten mit lesbarem Datum gefunden."
     },
     "added_one": "1 neue Einheit übernommen.",
-    "added_other": "{{count}} neue Einheiten übernommen."
+    "added_other": "{{count}} neue Einheiten übernommen.",
+    "dash": {
+      "finding": "Befund",
+      "basis": {
+        "evidenced": "Belegt durch deine Daten",
+        "hint": "Hinweis, keine Diagnose"
+      },
+      "findingNote": "Ein Befund beschreibt, was in deinen Daten am deutlichsten steht. Er ersetzt weder Training noch ärztlichen Rat.",
+      "period": "Zeitraum",
+      "sourceNote": "Alle Werte werden aus deinen importierten Einheiten auf diesem Gerät berechnet.",
+      "form": {
+        "title": "Formkurve",
+        "sub": "Fitness und Ermüdung aus deiner Belastung",
+        "words": {
+          "very_loaded": "Stark belastet",
+          "building": "Im Aufbau",
+          "balanced": "Ausgewogen",
+          "fresh": "Frisch",
+          "very_fresh": "Sehr frisch"
+        },
+        "loaded": "Belastet",
+        "fresh": "Frisch",
+        "chartAlt": "Formkurve: Fitness {{fitness}}, Ermüdung {{fatigue}}",
+        "fitness": "Fitness",
+        "fatigue": "Ermüdung",
+        "ramp": "Anstieg 7 Tage",
+        "note": "Form = Fitness minus Ermüdung (Banister, 42 und 7 Tage). Die Belastung ist Dauer mal Pulsanteil zum Quadrat.",
+        "estimated": "Bei {{n}} Einheiten ohne Puls ist die Belastung geschätzt."
+      },
+      "year": {
+        "title": "Dein Jahr",
+        "sub": "Jede Säule ist eine Woche, die Höhe sind die Kilometer",
+        "runs": "Läufe",
+        "hours": "Stunden",
+        "elev": "Höhenmeter",
+        "alt": "Skyline der letzten 12 Monate, zusammen {{km}} km gelaufen",
+        "biggest": "Größte Woche: {{km}} km, ab {{date}}"
+      },
+      "week": {
+        "title": "Wochenumfang",
+        "sub": "Kilometer je Woche und wie oft du dein Wochenziel erreichst",
+        "noGoal": "Noch kein Wochenziel ableitbar",
+        "ringsAlt": "Diese Woche {{week}} Prozent des Ziels, {{hits}} von 6 Wochen erreicht",
+        "ringWeek": "Diese Woche",
+        "ringConsistency": "Letzte 6 Wochen",
+        "derived": "Das Ziel ist aus deinen letzten Wochen abgeleitet, nicht vorgegeben.",
+        "w12": "12 Wochen",
+        "w26": "26 Wochen",
+        "w52": "52 Wochen",
+        "barsAlt": "Wochenkilometer, diese Woche {{km}} km",
+        "goalLine": "Wochenziel {{km}} km",
+        "streak": "Serie (Wochen)",
+        "longest": "Längste Serie",
+        "active": "Aktive Tage"
+      },
+      "pred": {
+        "title": "Rennprognose",
+        "sub": "Aus deinem stärksten Lauf: VDOT {{vdot}} ({{km}} km am {{date}})",
+        "half": "Halbmarathon",
+        "marathon": "Marathon",
+        "easy": "Lockeres Tempo: {{fast}} bis {{slow}} pro km",
+        "target": "Zielstrecke",
+        "outlook": {
+          "ambitious": "Ehrgeizig",
+          "realistic": "Realistisch",
+          "safe": "Sicher"
+        },
+        "outlookText": "Dein Ziel {{target}} liegt gegenüber der Spanne {{low}} bis {{high}}.",
+        "note": "Die Zeiten sind eine Spanne, keine Zusage. Sie gelten für flache Strecken, gute Tage und passendes Training; Hitze, Gelände und Tagesform verschieben sie."
+      },
+      "pace": {
+        "title": "Tempo bei gleichem Puls",
+        "sub": "Läufe bei {{lo}} bis {{hi}} Schlägen pro Minute ({{n}} Läufe)",
+        "text": "Zu Beginn {{first}}, zuletzt {{last}} pro km — bei gleichem Puls.",
+        "axis": "min/km",
+        "alt": "Tempo bei gleichem Puls über {{n}} Läufe",
+        "note": "{{n}} Läufe mit Pausen, Steigung oder Ausreißern sind ausgenommen. Wind, Hitze und Schlaf verändern den Puls; der Verlauf ist ein Hinweis."
+      },
+      "int": {
+        "title": "Intensität",
+        "sub": "Verteilung der letzten 12 Wochen auf fünf Pulszonen",
+        "easy": "locker",
+        "alt": "{{easy}} Prozent der Zeit im lockeren Bereich",
+        "of": "von",
+        "easyAbove": "lockere Läufe über Zone 2",
+        "hardAbove": "harte Einheiten an der Schwelle",
+        "backToBack": "harte Tage direkt hintereinander",
+        "note": "Lockere Läufe sind solche, die nach Tempo, Länge und Namen locker wirken. Die Zonen sind Anteile deiner Schwellenherzfrequenz."
+      },
+      "habit": {
+        "title": "Gewohnheit",
+        "sub": "Am häufigsten: {{day}} um {{hour}} Uhr",
+        "before9": "vor 9 Uhr",
+        "alt": "Läufe nach Wochentag"
+      },
+      "rec": {
+        "title": "Rekorde",
+        "longest": "Längster Lauf",
+        "week": "Stärkste Woche",
+        "elev": "Meiste Höhenmeter",
+        "early": "Frühester Start",
+        "month": "Stärkster Monat"
+      },
+      "shoes": {
+        "title": "Schuhe",
+        "sub": "Kilometer je Paar — der Strich markiert 700 km"
+      },
+      "data": {
+        "title": "Daten und Annahmen",
+        "maxHr": "Maximalpuls (aus deinen Daten)",
+        "restHr": "Ruhepuls",
+        "thr": "Schwellenpuls",
+        "noHr": "Einheiten ohne Puls",
+        "assumed": "angenommen",
+        "none": "nicht ableitbar",
+        "formula": "Formeln: VDOT nach Daniels und Gilbert, Rennzeiten nach Riegel, Form nach Banister. Schwellenpuls, Belastung ohne Puls und Lauf-Einstufung sind eigene, vorläufige Annahmen."
+      }
+    },
+    "finding": {
+      "easy_too_hard": {
+        "lead": "Deine lockeren Läufe sind",
+        "accent": "nicht locker",
+        "text": "{{above}} von {{total}} lockeren Läufen lagen über der Zone 2, also ab {{zone3}} Schlägen pro Minute. Wer locker meint, läuft hier oft schon im mittleren Bereich."
+      },
+      "volume_jump": {
+        "lead": "Dein Umfang ist",
+        "accent": "gesprungen",
+        "text": "Die letzte Woche war {{pct}} Prozent über dem Schnitt davor: {{km}} km. Größere Sprünge fallen vielen Läufern auf, bevor der Körper nachkommt."
+      },
+      "hard_too_hard": {
+        "lead": "Harte Einheiten liegen",
+        "accent": "an der Schwelle",
+        "text": "{{above}} von {{total}} harten Einheiten erreichten den Schwellenpuls von {{thr}} Schlägen — viel Reiz bei wenig Erholung dazwischen."
+      },
+      "overload": {
+        "lead": "Du bist",
+        "accent": "stark belastet",
+        "text": "Die Form liegt bei {{form}}: die Ermüdung der letzten Tage übersteigt deine Fitness deutlich. Ein beschreibender Wert, kein Urteil."
+      },
+      "progress": {
+        "lead": "Dein Tempo bei gleichem Puls",
+        "accent": "hat sich bewegt",
+        "text": "Bei {{lo}} bis {{hi}} Schlägen pro Minute liegt der Unterschied zwischen Anfang und zuletzt bei {{delta}} Sekunden pro km."
+      },
+      "steady": {
+        "lead": "Du bleibst",
+        "accent": "dran",
+        "text": "In {{hits}} der letzten 6 Wochen hast du dein Wochenziel erreicht. Nichts sticht heraus — das ist hier ein gutes Zeichen."
+      },
+      "num": {
+        "easyAboveZ3": "über Zone 2",
+        "easyTotal": "lockere Läufe",
+        "medianHr": "Median Puls",
+        "jumpPct": "Sprung",
+        "weekKm": "letzte Woche",
+        "ramp": "Anstieg",
+        "hardAbove": "an der Schwelle",
+        "hardTotal": "harte Einheiten",
+        "threshold": "Schwellenpuls",
+        "form": "Form",
+        "fitness": "Fitness",
+        "fatigue": "Ermüdung",
+        "deltaPace": "Unterschied",
+        "runsInBand": "Läufe im Band",
+        "vdot": "VDOT",
+        "weeksHit": "Wochen erreicht",
+        "activeDays": "aktive Tage",
+        "runs": "Läufe"
+      }
+    },
+    "insight": {
+      "progress": {
+        "title": "Fortschritt",
+        "text": "Dein stärkster Lauf ergibt VDOT {{vdot}}; er ist {{days}} Tage alt."
+      },
+      "risk": {
+        "title": "Belastungsverhältnis",
+        "text": "Letzte 7 Tage gegen die 4 Wochen davor: {{ac}}. Monotonie {{mono}}. Beschreibend, keine Ampel."
+      },
+      "race": {
+        "title": "Halbmarathon",
+        "text": "Eine Spanne von {{low}} bis {{high}}, aus deinem stärksten Lauf gerechnet."
+      },
+      "consistency": {
+        "title": "Beständigkeit",
+        "text": "{{hits}} von 6 Wochen erreicht. Aktuelle Serie {{streak}}, längste {{longest}} Wochen."
+      },
+      "habit": {
+        "title": "Frühlauf-Anteil",
+        "text": "{{share}} Prozent deiner Läufe beginnen vor 9 Uhr. Am häufigsten: {{weekday}} um {{hour}} Uhr."
+      },
+      "gear": {
+        "title": "Schuh im Einsatz",
+        "text": "{{name}} hat {{km}} km. Ab etwa 600 bis 800 km lohnt ein Blick auf den Zustand."
+      }
+    }
   }
 }

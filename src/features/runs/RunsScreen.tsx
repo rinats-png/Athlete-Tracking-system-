@@ -9,6 +9,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { deviceTimeZone, parseActivityExport, type ActivitySport, type ImportReport } from '@/domain/activityImport'
 import { formatDate, formatNumber } from '@/lib/format'
 import { AnalysisTabs } from './AnalysisTabs'
+import { RunsDashboard } from './RunsDashboard'
 
 const SPORTS: ActivitySport[] = ['run', 'trail', 'bike', 'strength', 'hike', 'swim', 'other']
 
@@ -58,6 +59,8 @@ export function RunsScreen() {
     <>
       <ScreenHeader eyebrow={t('runs.eyebrow')} title={t('runs.title')} intro={t('runs.intro')} />
       <AnalysisTabs active="runs" />
+
+      <RunsDashboard activities={activities} />
 
       <Panel className="mb-4" data-testid="runs-import">
         <PanelHeader title={t('runs.import.title')} subtitle={t('runs.import.why')} />

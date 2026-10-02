@@ -2290,6 +2290,201 @@
       "unreadable": "Filen kunne ikke leses: fant ingen aktiviteter med lesbar dato."
     },
     "added_one": "1 ny økt importert.",
-    "added_other": "{{count}} nye økter importert."
+    "added_other": "{{count}} nye økter importert.",
+    "dash": {
+      "finding": "Funn",
+      "basis": {
+        "evidenced": "Støttet av dataene dine",
+        "hint": "Et hint, ingen diagnose"
+      },
+      "findingNote": "Et funn beskriver det som skiller seg tydeligst ut i dataene dine. Det erstatter verken trening eller medisinsk råd.",
+      "period": "Periode",
+      "sourceNote": "Alle verdier beregnes fra øktene du har importert, på denne enheten.",
+      "form": {
+        "title": "Formkurve",
+        "sub": "Form og tretthet ut fra belastningen din",
+        "words": {
+          "very_loaded": "Sterkt belastet",
+          "building": "Under oppbygging",
+          "balanced": "I balanse",
+          "fresh": "Uthvilt",
+          "very_fresh": "Veldig uthvilt"
+        },
+        "loaded": "Belastet",
+        "fresh": "Uthvilt",
+        "chartAlt": "Formkurve: kondisjon {{fitness}}, tretthet {{fatigue}}",
+        "fitness": "Kondisjon",
+        "fatigue": "Tretthet",
+        "ramp": "Endring 7 dager",
+        "note": "Form = kondisjon minus tretthet (Banister, 42 og 7 dager). Belastning er varighet ganger pulsandel i andre.",
+        "estimated": "For {{n}} økter uten puls er belastningen anslått."
+      },
+      "year": {
+        "title": "Året ditt",
+        "sub": "Hver søyle er en uke, høyden er kilometer",
+        "runs": "Løpeturer",
+        "hours": "Timer",
+        "elev": "Høydemeter",
+        "alt": "Skyline over de siste 12 månedene, til sammen {{km}} km løpt",
+        "biggest": "Største uke: {{km}} km, fra {{date}}"
+      },
+      "week": {
+        "title": "Ukevolum",
+        "sub": "Kilometer per uke og hvor ofte du når ukemålet",
+        "noGoal": "Ukemål kan ikke utledes ennå",
+        "ringsAlt": "Denne uken {{week}} prosent av målet, {{hits}} av 6 uker nådd",
+        "ringWeek": "Denne uken",
+        "ringConsistency": "Siste 6 uker",
+        "derived": "Målet er utledet fra de siste ukene dine, ikke forhåndsinnstilt.",
+        "w12": "12 uker",
+        "w26": "26 uker",
+        "w52": "52 uker",
+        "barsAlt": "Ukekilometer, denne uken {{km}} km",
+        "goalLine": "Ukemål {{km}} km",
+        "streak": "Rekke (uker)",
+        "longest": "Lengste rekke",
+        "active": "Aktive dager"
+      },
+      "pred": {
+        "title": "Løpsprognose",
+        "sub": "Fra den sterkeste turen din: VDOT {{vdot}} ({{km}} km den {{date}})",
+        "half": "Halvmaraton",
+        "marathon": "Maraton",
+        "easy": "Rolig tempo: {{fast}} til {{slow}} per km",
+        "target": "Måldistanse",
+        "outlook": {
+          "ambitious": "Ambisiøst",
+          "realistic": "Realistisk",
+          "safe": "Trygt"
+        },
+        "outlookText": "Målet ditt {{target}} sammenlignet med spennet {{low}} til {{high}}.",
+        "note": "Tidene er et spenn, ikke et løfte. De forutsetter flat løype, en god dag og passende trening; varme, terreng og dagsform forskyver dem."
+      },
+      "pace": {
+        "title": "Tempo ved samme puls",
+        "sub": "Turer ved {{lo}} til {{hi}} slag per minutt ({{n}} turer)",
+        "text": "I starten {{first}}, i det siste {{last}} per km — ved samme puls.",
+        "axis": "min/km",
+        "alt": "Tempo ved samme puls over {{n}} turer",
+        "note": "{{n}} turer med stopp, bakker eller avvik er utelatt. Vind, varme og søvn endrer pulsen; utviklingen er et hint."
+      },
+      "int": {
+        "title": "Intensitet",
+        "sub": "Siste 12 uker fordelt på fem pulssoner",
+        "easy": "rolig",
+        "alt": "{{easy}} prosent av tiden i det rolige området",
+        "of": "av",
+        "easyAbove": "rolige turer over sone 2",
+        "hardAbove": "harde økter ved terskel",
+        "backToBack": "harde dager på rad",
+        "note": "Rolige turer er de som ser rolige ut etter tempo, lengde og navn. Sonene er andeler av terskelpulsen din."
+      },
+      "habit": {
+        "title": "Vane",
+        "sub": "Oftest: {{day}} klokken {{hour}}",
+        "before9": "før 9",
+        "alt": "Turer etter ukedag"
+      },
+      "rec": {
+        "title": "Rekorder",
+        "longest": "Lengste tur",
+        "week": "Største uke",
+        "elev": "Flest høydemeter",
+        "early": "Tidligste start",
+        "month": "Største måned"
+      },
+      "shoes": {
+        "title": "Sko",
+        "sub": "Kilometer per par — streken markerer 700 km"
+      },
+      "data": {
+        "title": "Data og antakelser",
+        "maxHr": "Makspuls (fra dataene dine)",
+        "restHr": "Hvilepuls",
+        "thr": "Terskelpuls",
+        "noHr": "Økter uten puls",
+        "assumed": "antatt",
+        "none": "kan ikke utledes",
+        "formula": "Formler: VDOT etter Daniels og Gilbert, løpstider etter Riegel, form etter Banister. Terskelpuls, belastning uten puls og inndeling av turer er egne, foreløpige antakelser."
+      }
+    },
+    "finding": {
+      "easy_too_hard": {
+        "lead": "De rolige turene dine er",
+        "accent": "ikke rolige",
+        "text": "{{above}} av {{total}} rolige turer lå over sone 2, altså fra {{zone3}} slag per minutt. Det som føles rolig, er ofte allerede mellomområdet."
+      },
+      "volume_jump": {
+        "lead": "Volumet ditt har",
+        "accent": "hoppet",
+        "text": "Forrige uke lå {{pct}} prosent over snittet før: {{km}} km. Mange løpere merker store hopp før kroppen rekker å henge med."
+      },
+      "hard_too_hard": {
+        "lead": "Harde økter ligger",
+        "accent": "ved terskel",
+        "text": "{{above}} av {{total}} harde økter nådde terskelpulsen på {{thr}} slag — mye stimulans med lite hvile imellom."
+      },
+      "overload": {
+        "lead": "Du er",
+        "accent": "sterkt belastet",
+        "text": "Formen ligger på {{form}}: trettheten fra de siste dagene overstiger tydelig kondisjonen din. En beskrivende verdi, ingen dom."
+      },
+      "progress": {
+        "lead": "Tempoet ditt ved samme puls",
+        "accent": "har beveget seg",
+        "text": "Ved {{lo}} til {{hi}} slag per minutt er forskjellen mellom starten og i det siste {{delta}} sekunder per km."
+      },
+      "steady": {
+        "lead": "Du holder",
+        "accent": "koken",
+        "text": "Du nådde ukemålet i {{hits}} av de siste 6 ukene. Ingenting skiller seg ut — her er det et godt tegn."
+      },
+      "num": {
+        "easyAboveZ3": "over sone 2",
+        "easyTotal": "rolige turer",
+        "medianHr": "median puls",
+        "jumpPct": "hopp",
+        "weekKm": "forrige uke",
+        "ramp": "endring",
+        "hardAbove": "ved terskel",
+        "hardTotal": "harde økter",
+        "threshold": "terskelpuls",
+        "form": "Form",
+        "fitness": "Kondisjon",
+        "fatigue": "Tretthet",
+        "deltaPace": "forskjell",
+        "runsInBand": "turer i båndet",
+        "vdot": "VDOT",
+        "weeksHit": "uker nådd",
+        "activeDays": "aktive dager",
+        "runs": "turer"
+      }
+    },
+    "insight": {
+      "progress": {
+        "title": "Framgang",
+        "text": "Den sterkeste turen din gir VDOT {{vdot}}; den er {{days}} dager gammel."
+      },
+      "risk": {
+        "title": "Belastningsforhold",
+        "text": "Siste 7 dager mot de 4 ukene før: {{ac}}. Ensformighet {{mono}}. Beskrivende, ikke et trafikklys."
+      },
+      "race": {
+        "title": "Halvmaraton",
+        "text": "Et spenn på {{low}} til {{high}}, regnet ut fra den sterkeste turen din."
+      },
+      "consistency": {
+        "title": "Jevnhet",
+        "text": "{{hits}} av 6 uker nådd. Gjeldende rekke {{streak}}, lengste {{longest}} uker."
+      },
+      "habit": {
+        "title": "Andel tidlige turer",
+        "text": "{{share}} prosent av turene dine starter før 9. Oftest: {{weekday}} klokken {{hour}}."
+      },
+      "gear": {
+        "title": "Sko i bruk",
+        "text": "{{name}} har {{km}} km. Fra omtrent 600 til 800 km lønner det seg å sjekke tilstanden."
+      }
+    }
   }
 }

@@ -2290,6 +2290,201 @@
       "unreadable": "Dit bestand kon niet worden gelezen: geen activiteiten met leesbare datum gevonden."
     },
     "added_one": "1 nieuwe training geïmporteerd.",
-    "added_other": "{{count}} nieuwe trainingen geïmporteerd."
+    "added_other": "{{count}} nieuwe trainingen geïmporteerd.",
+    "dash": {
+      "finding": "Bevinding",
+      "basis": {
+        "evidenced": "Onderbouwd door je gegevens",
+        "hint": "Een aanwijzing, geen diagnose"
+      },
+      "findingNote": "Een bevinding beschrijft wat het sterkst opvalt in je gegevens. Ze vervangt noch training noch medisch advies.",
+      "period": "Periode",
+      "sourceNote": "Alle waarden worden berekend uit je geïmporteerde sessies op dit apparaat.",
+      "form": {
+        "title": "Vormcurve",
+        "sub": "Fitheid en vermoeidheid uit je belasting",
+        "words": {
+          "very_loaded": "Zwaar belast",
+          "building": "In opbouw",
+          "balanced": "In balans",
+          "fresh": "Fris",
+          "very_fresh": "Zeer fris"
+        },
+        "loaded": "Belast",
+        "fresh": "Fris",
+        "chartAlt": "Vormcurve: fitheid {{fitness}}, vermoeidheid {{fatigue}}",
+        "fitness": "Fitheid",
+        "fatigue": "Vermoeidheid",
+        "ramp": "Verschil 7 dagen",
+        "note": "Vorm = fitheid min vermoeidheid (Banister, 42 en 7 dagen). Belasting is duur maal hartslagfractie in het kwadraat.",
+        "estimated": "Bij {{n}} sessies zonder hartslag is de belasting geschat."
+      },
+      "year": {
+        "title": "Jouw jaar",
+        "sub": "Elke zuil is een week, de hoogte zijn de kilometers",
+        "runs": "Loopjes",
+        "hours": "Uren",
+        "elev": "Hoogtemeters",
+        "alt": "Skyline van de afgelopen 12 maanden, in totaal {{km}} km gelopen",
+        "biggest": "Grootste week: {{km}} km, vanaf {{date}}"
+      },
+      "week": {
+        "title": "Weekomvang",
+        "sub": "Kilometers per week en hoe vaak je je weekdoel haalt",
+        "noGoal": "Nog geen weekdoel af te leiden",
+        "ringsAlt": "Deze week {{week}} procent van het doel, {{hits}} van 6 weken gehaald",
+        "ringWeek": "Deze week",
+        "ringConsistency": "Laatste 6 weken",
+        "derived": "Het doel is afgeleid van je laatste weken, niet vooraf ingesteld.",
+        "w12": "12 weken",
+        "w26": "26 weken",
+        "w52": "52 weken",
+        "barsAlt": "Weekkilometers, deze week {{km}} km",
+        "goalLine": "Weekdoel {{km}} km",
+        "streak": "Reeks (weken)",
+        "longest": "Langste reeks",
+        "active": "Actieve dagen"
+      },
+      "pred": {
+        "title": "Wedstrijdprognose",
+        "sub": "Uit je sterkste loop: VDOT {{vdot}} ({{km}} km op {{date}})",
+        "half": "Halve marathon",
+        "marathon": "Marathon",
+        "easy": "Rustig tempo: {{fast}} tot {{slow}} per km",
+        "target": "Doelafstand",
+        "outlook": {
+          "ambitious": "Ambitieus",
+          "realistic": "Realistisch",
+          "safe": "Veilig"
+        },
+        "outlookText": "Je doel {{target}} ten opzichte van de marge {{low}} tot {{high}}.",
+        "note": "De tijden zijn een marge, geen belofte. Ze gaan uit van een vlak parcours, een goede dag en passende training; hitte, terrein en dagvorm verschuiven ze."
+      },
+      "pace": {
+        "title": "Tempo bij gelijke hartslag",
+        "sub": "Loopjes bij {{lo}} tot {{hi}} slagen per minuut ({{n}} loopjes)",
+        "text": "Aan het begin {{first}}, recent {{last}} per km — bij gelijke hartslag.",
+        "axis": "min/km",
+        "alt": "Tempo bij gelijke hartslag over {{n}} loopjes",
+        "note": "{{n}} loopjes met stops, hellingen of uitschieters blijven buiten beschouwing. Wind, hitte en slaap veranderen de hartslag; het verloop is een aanwijzing."
+      },
+      "int": {
+        "title": "Intensiteit",
+        "sub": "Laatste 12 weken verdeeld over vijf hartslagzones",
+        "easy": "rustig",
+        "alt": "{{easy}} procent van de tijd in het rustige bereik",
+        "of": "van",
+        "easyAbove": "rustige loopjes boven zone 2",
+        "hardAbove": "zware sessies op de drempel",
+        "backToBack": "zware dagen achter elkaar",
+        "note": "Rustige loopjes zijn die welke qua tempo, lengte en naam rustig lijken. De zones zijn delen van je drempelhartslag."
+      },
+      "habit": {
+        "title": "Gewoonte",
+        "sub": "Meestal: {{day}} om {{hour}} uur",
+        "before9": "vóór 9 uur",
+        "alt": "Loopjes per weekdag"
+      },
+      "rec": {
+        "title": "Records",
+        "longest": "Langste loop",
+        "week": "Grootste week",
+        "elev": "Meeste hoogtemeters",
+        "early": "Vroegste start",
+        "month": "Grootste maand"
+      },
+      "shoes": {
+        "title": "Schoenen",
+        "sub": "Kilometers per paar — de streep markeert 700 km"
+      },
+      "data": {
+        "title": "Gegevens en aannames",
+        "maxHr": "Maximale hartslag (uit je gegevens)",
+        "restHr": "Rusthartslag",
+        "thr": "Drempelhartslag",
+        "noHr": "Sessies zonder hartslag",
+        "assumed": "aangenomen",
+        "none": "niet af te leiden",
+        "formula": "Formules: VDOT volgens Daniels en Gilbert, wedstrijdtijden volgens Riegel, vorm volgens Banister. Drempelhartslag, belasting zonder hartslag en indeling van loopjes zijn eigen, voorlopige aannames."
+      }
+    },
+    "finding": {
+      "easy_too_hard": {
+        "lead": "Je rustige loopjes zijn",
+        "accent": "niet rustig",
+        "text": "{{above}} van {{total}} rustige loopjes lagen boven zone 2, dus vanaf {{zone3}} slagen per minuut. Wat rustig voelt, is vaak al het middenbereik."
+      },
+      "volume_jump": {
+        "lead": "Je omvang is",
+        "accent": "gesprongen",
+        "text": "De laatste week lag {{pct}} procent boven het gemiddelde ervoor: {{km}} km. Veel lopers merken grote sprongen voordat het lichaam kan volgen."
+      },
+      "hard_too_hard": {
+        "lead": "Zware sessies liggen",
+        "accent": "op de drempel",
+        "text": "{{above}} van {{total}} zware sessies bereikten de drempelhartslag van {{thr}} slagen — veel prikkel met weinig herstel ertussen."
+      },
+      "overload": {
+        "lead": "Je bent",
+        "accent": "zwaar belast",
+        "text": "De vorm staat op {{form}}: de vermoeidheid van de laatste dagen is duidelijk groter dan je fitheid. Een beschrijvende waarde, geen oordeel."
+      },
+      "progress": {
+        "lead": "Je tempo bij gelijke hartslag",
+        "accent": "is verschoven",
+        "text": "Bij {{lo}} tot {{hi}} slagen per minuut is het verschil tussen begin en recent {{delta}} seconden per km."
+      },
+      "steady": {
+        "lead": "Je blijft",
+        "accent": "erbij",
+        "text": "In {{hits}} van de laatste 6 weken haalde je je weekdoel. Niets valt op — hier is dat een goed teken."
+      },
+      "num": {
+        "easyAboveZ3": "boven zone 2",
+        "easyTotal": "rustige loopjes",
+        "medianHr": "mediane hartslag",
+        "jumpPct": "sprong",
+        "weekKm": "laatste week",
+        "ramp": "verschil",
+        "hardAbove": "op de drempel",
+        "hardTotal": "zware sessies",
+        "threshold": "drempelhartslag",
+        "form": "Vorm",
+        "fitness": "Fitheid",
+        "fatigue": "Vermoeidheid",
+        "deltaPace": "verschil",
+        "runsInBand": "loopjes in de band",
+        "vdot": "VDOT",
+        "weeksHit": "weken gehaald",
+        "activeDays": "actieve dagen",
+        "runs": "loopjes"
+      }
+    },
+    "insight": {
+      "progress": {
+        "title": "Voortgang",
+        "text": "Je sterkste loop geeft VDOT {{vdot}}; die is {{days}} dagen oud."
+      },
+      "risk": {
+        "title": "Belastingsverhouding",
+        "text": "Laatste 7 dagen tegenover de 4 weken ervoor: {{ac}}. Eentonigheid {{mono}}. Beschrijvend, geen stoplicht."
+      },
+      "race": {
+        "title": "Halve marathon",
+        "text": "Een marge van {{low}} tot {{high}}, berekend uit je sterkste loop."
+      },
+      "consistency": {
+        "title": "Regelmaat",
+        "text": "{{hits}} van 6 weken gehaald. Huidige reeks {{streak}}, langste {{longest}} weken."
+      },
+      "habit": {
+        "title": "Aandeel vroege loopjes",
+        "text": "{{share}} procent van je loopjes begint vóór 9 uur. Meestal: {{weekday}} om {{hour}} uur."
+      },
+      "gear": {
+        "title": "Schoen in gebruik",
+        "text": "{{name}} heeft {{km}} km. Vanaf ongeveer 600 tot 800 km is het verstandig de staat te bekijken."
+      }
+    }
   }
 }

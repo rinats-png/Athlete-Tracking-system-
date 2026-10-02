@@ -2290,6 +2290,201 @@
       "unreadable": "Filen gick inte att läsa: inga aktiviteter med läsbart datum hittades."
     },
     "added_one": "1 nytt pass importerat.",
-    "added_other": "{{count}} nya pass importerade."
+    "added_other": "{{count}} nya pass importerade.",
+    "dash": {
+      "finding": "Iakttagelse",
+      "basis": {
+        "evidenced": "Styrkt av dina data",
+        "hint": "En fingervisning, ingen diagnos"
+      },
+      "findingNote": "En iakttagelse beskriver vad som syns tydligast i dina data. Den ersätter varken träning eller medicinsk rådgivning.",
+      "period": "Period",
+      "sourceNote": "Alla värden räknas ut från dina importerade pass på den här enheten.",
+      "form": {
+        "title": "Formkurva",
+        "sub": "Kondition och trötthet utifrån din belastning",
+        "words": {
+          "very_loaded": "Hårt belastad",
+          "building": "Under uppbyggnad",
+          "balanced": "I balans",
+          "fresh": "Utvilad",
+          "very_fresh": "Mycket utvilad"
+        },
+        "loaded": "Belastad",
+        "fresh": "Utvilad",
+        "chartAlt": "Formkurva: kondition {{fitness}}, trötthet {{fatigue}}",
+        "fitness": "Kondition",
+        "fatigue": "Trötthet",
+        "ramp": "Ändring 7 dagar",
+        "note": "Form = kondition minus trötthet (Banister, 42 och 7 dagar). Belastning är tid gånger pulsandel i kvadrat.",
+        "estimated": "För {{n}} pass utan puls är belastningen uppskattad."
+      },
+      "year": {
+        "title": "Ditt år",
+        "sub": "Varje pelare är en vecka, höjden är kilometer",
+        "runs": "Löpturer",
+        "hours": "Timmar",
+        "elev": "Höjdmeter",
+        "alt": "Skyline över de senaste 12 månaderna, totalt {{km}} km löpt",
+        "biggest": "Största veckan: {{km}} km, från {{date}}"
+      },
+      "week": {
+        "title": "Veckovolym",
+        "sub": "Kilometer per vecka och hur ofta du når ditt veckomål",
+        "noGoal": "Inget veckomål kan härledas ännu",
+        "ringsAlt": "Den här veckan {{week}} procent av målet, {{hits}} av 6 veckor nådda",
+        "ringWeek": "Den här veckan",
+        "ringConsistency": "Senaste 6 veckorna",
+        "derived": "Målet är härlett från dina senaste veckor, inte förinställt.",
+        "w12": "12 veckor",
+        "w26": "26 veckor",
+        "w52": "52 veckor",
+        "barsAlt": "Veckokilometer, den här veckan {{km}} km",
+        "goalLine": "Veckomål {{km}} km",
+        "streak": "Svit (veckor)",
+        "longest": "Längsta svit",
+        "active": "Aktiva dagar"
+      },
+      "pred": {
+        "title": "Loppprognos",
+        "sub": "Från din starkaste löptur: VDOT {{vdot}} ({{km}} km den {{date}})",
+        "half": "Halvmaraton",
+        "marathon": "Maraton",
+        "easy": "Lugnt tempo: {{fast}} till {{slow}} per km",
+        "target": "Måldistans",
+        "outlook": {
+          "ambitious": "Ambitiöst",
+          "realistic": "Realistiskt",
+          "safe": "Säkert"
+        },
+        "outlookText": "Ditt mål {{target}} jämfört med spannet {{low}} till {{high}}.",
+        "note": "Tiderna är ett spann, inget löfte. De förutsätter platt bana, en bra dag och lämplig träning; värme, terräng och dagsform förskjuter dem."
+      },
+      "pace": {
+        "title": "Tempo vid samma puls",
+        "sub": "Löpturer vid {{lo}} till {{hi}} slag per minut ({{n}} löpturer)",
+        "text": "I början {{first}}, på sistone {{last}} per km — vid samma puls.",
+        "axis": "min/km",
+        "alt": "Tempo vid samma puls över {{n}} löpturer",
+        "note": "{{n}} löpturer med stopp, backar eller avvikare är undantagna. Vind, värme och sömn påverkar pulsen; utvecklingen är en fingervisning."
+      },
+      "int": {
+        "title": "Intensitet",
+        "sub": "Senaste 12 veckorna fördelade på fem pulszoner",
+        "easy": "lugnt",
+        "alt": "{{easy}} procent av tiden i det lugna området",
+        "of": "av",
+        "easyAbove": "lugna turer över zon 2",
+        "hardAbove": "hårda pass vid tröskeln",
+        "backToBack": "hårda dagar i rad",
+        "note": "Lugna turer är de som ser lugna ut efter tempo, längd och namn. Zonerna är andelar av din tröskelpuls."
+      },
+      "habit": {
+        "title": "Vana",
+        "sub": "Oftast: {{day}} klockan {{hour}}",
+        "before9": "före 9",
+        "alt": "Löpturer per veckodag"
+      },
+      "rec": {
+        "title": "Rekord",
+        "longest": "Längsta löptur",
+        "week": "Största veckan",
+        "elev": "Flest höjdmeter",
+        "early": "Tidigaste start",
+        "month": "Största månaden"
+      },
+      "shoes": {
+        "title": "Skor",
+        "sub": "Kilometer per par — strecket markerar 700 km"
+      },
+      "data": {
+        "title": "Data och antaganden",
+        "maxHr": "Maxpuls (från dina data)",
+        "restHr": "Vilopuls",
+        "thr": "Tröskelpuls",
+        "noHr": "Pass utan puls",
+        "assumed": "antagen",
+        "none": "kan inte härledas",
+        "formula": "Formler: VDOT enligt Daniels och Gilbert, loppstider enligt Riegel, form enligt Banister. Tröskelpuls, belastning utan puls och indelning av löpturer är egna, preliminära antaganden."
+      }
+    },
+    "finding": {
+      "easy_too_hard": {
+        "lead": "Dina lugna turer är",
+        "accent": "inte lugna",
+        "text": "{{above}} av {{total}} lugna turer låg över zon 2, alltså från {{zone3}} slag per minut. Det som känns lugnt är ofta redan mellanområdet."
+      },
+      "volume_jump": {
+        "lead": "Din volym har",
+        "accent": "hoppat",
+        "text": "Förra veckan låg {{pct}} procent över snittet före: {{km}} km. Många löpare märker stora hopp innan kroppen hunnit med."
+      },
+      "hard_too_hard": {
+        "lead": "Hårda pass ligger",
+        "accent": "vid tröskeln",
+        "text": "{{above}} av {{total}} hårda pass nådde tröskelpulsen på {{thr}} slag — mycket stimulans med lite vila emellan."
+      },
+      "overload": {
+        "lead": "Du är",
+        "accent": "hårt belastad",
+        "text": "Formen ligger på {{form}}: tröttheten från de senaste dagarna överstiger tydligt din kondition. Ett beskrivande värde, ingen dom."
+      },
+      "progress": {
+        "lead": "Ditt tempo vid samma puls",
+        "accent": "har rört sig",
+        "text": "Vid {{lo}} till {{hi}} slag per minut är skillnaden mellan början och på sistone {{delta}} sekunder per km."
+      },
+      "steady": {
+        "lead": "Du håller",
+        "accent": "i gång",
+        "text": "Du nådde ditt veckomål {{hits}} av de senaste 6 veckorna. Inget sticker ut — här är det ett gott tecken."
+      },
+      "num": {
+        "easyAboveZ3": "över zon 2",
+        "easyTotal": "lugna turer",
+        "medianHr": "median-puls",
+        "jumpPct": "hopp",
+        "weekKm": "förra veckan",
+        "ramp": "ändring",
+        "hardAbove": "vid tröskeln",
+        "hardTotal": "hårda pass",
+        "threshold": "tröskelpuls",
+        "form": "Form",
+        "fitness": "Kondition",
+        "fatigue": "Trötthet",
+        "deltaPace": "skillnad",
+        "runsInBand": "turer i bandet",
+        "vdot": "VDOT",
+        "weeksHit": "veckor nådda",
+        "activeDays": "aktiva dagar",
+        "runs": "löpturer"
+      }
+    },
+    "insight": {
+      "progress": {
+        "title": "Framsteg",
+        "text": "Din starkaste löptur ger VDOT {{vdot}}; den är {{days}} dagar gammal."
+      },
+      "risk": {
+        "title": "Belastningskvot",
+        "text": "Senaste 7 dagarna mot de 4 veckorna före: {{ac}}. Enformighet {{mono}}. Beskrivande, inget trafikljus."
+      },
+      "race": {
+        "title": "Halvmaraton",
+        "text": "Ett spann på {{low}} till {{high}}, beräknat från din starkaste löptur."
+      },
+      "consistency": {
+        "title": "Jämnhet",
+        "text": "{{hits}} av 6 veckor nådda. Aktuell svit {{streak}}, längsta {{longest}} veckor."
+      },
+      "habit": {
+        "title": "Andel tidiga turer",
+        "text": "{{share}} procent av dina turer börjar före 9. Oftast: {{weekday}} klockan {{hour}}."
+      },
+      "gear": {
+        "title": "Sko i bruk",
+        "text": "{{name}} har {{km}} km. Från ungefär 600 till 800 km lönar det sig att kontrollera skicket."
+      }
+    }
   }
 }

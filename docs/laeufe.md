@@ -4,7 +4,7 @@ Auswertung von Läufen und Einheiten aus Strava, Garmin oder einer anderen Aktiv
 Ausgangspunkt war ein Dashboard-Prompt (Strava-Export → Einzeldatei). Übernommen sind die Fachideen, nicht
 Marke, Netzaufruf oder fremdes Design.
 
-**Stand:** 2. Oktober 2026 · Stufen 1 und 2 gebaut.
+**Stand:** 2. Oktober 2026 · Stufen 1 bis 3 gebaut.
 
 ## Entscheidungen
 
@@ -23,7 +23,7 @@ Marke, Netzaufruf oder fremdes Design.
 |---|---|---|
 | 1 | Import und Datenmodell | ✅ |
 | 2 | Rechnung in `src/domain/runMetrics.ts`: Belastung, Fitness/Ermüdung/Form, Wochenumfang, Konstanz, VDOT und Prognosespannen, Tempo bei gleichem Puls. Jede Zahl mit Quelle oder «vorläufig» im Formelregister | ✅ |
-| 3 | Anzeige: Form-Kurve, Wochenumfang, Ringe, Skyline, Rennprognose, ein Befund | offen |
+| 3 | Anzeige: Form-Kurve, Wochenumfang, Ringe, Skyline, Rennprognose, ein Befund | ✅ |
 | 4 | Freiwilliges Rennwetter mit Einwilligung, Datenschutz anpassen (Rechtstext nur nach Freigabe) | offen |
 
 ## Stufe 1: was gebaut ist
@@ -59,4 +59,13 @@ Marke, Netzaufruf oder fremdes Design.
 - **Parameter:** Maximalpuls (zweite Bestätigung innerhalb 3 Schläge, nie über 215), Schwellenpuls aus dem stärksten Lauf zwischen 9,5 und 21,5 km (unter 15 km mal 0,98), Zonen bei 85/90/95/100 %. Ruhepuls fehlt: 50, als «angenommen» gekennzeichnet.
 - **Kennzahlen:** Form mit Wort (−25/−10/+5/+15), Rampe, akut zu chronisch (nur beschreibend), Monotonie, Sprung (jüngste Woche ab 30 km und über 30 %), abgeleitetes Wochenziel, Konstanz (Serien, Treffer der letzten sechs Wochen, aktive Tage), Rennen, Prognosespannen für 5 km, 10 km, Halbmarathon, Marathon, Lockerbereich (70 % und 62 % des VDOT), Taper-Projektion, Intensitätsverteilung, lockere und harte Läufe der letzten zwölf Wochen, Gewohnheit, Bestzeiten und Rekorde, Summen, Schuhe der letzten 90 Tage.
 - **Abweichung von der Vorlage:** keine «Chance in Prozent». Stattdessen `raceOutlook`: Zielzeit unter, in oder über der Spanne («ehrgeizig / realistisch / sicher»).
-- **Noch nicht gebaut:** der eine Befund in Worten und die Insights (Stufe 3 mit der Anzeige), Wochenplan gegen Ist, Race-Day-Wetter (Stufe 4).
+- **Noch nicht gebaut:** Wochenplan gegen Ist, Race-Day-Wetter (Stufe 4).
+
+## Stufe 3: was gebaut ist
+
+Reiter «Läufe» in der Analyse zeigt über dem Import (nur Pro, Funktion `runAnalysis`) die Auswertung. Alles rechnet lokal aus `computeRunMetrics`; die Bildschirme rechnen nichts selbst.
+
+- **`src/domain/runFinding.ts`** (rein): `findFinding` wählt den einen Befund (lockere Läufe zu hart, Umfangssprung, harte Einheiten an der Schwelle, starke Belastung, Tempo bei gleichem Puls bewegt, sonst «dran»), `findInsights` bis zu sechs Einblicke. Jeder trägt die Grundlage «belegt durch deine Daten» oder «Hinweis, keine Diagnose».
+- **`src/features/runs/RunsDashboard.tsx`:** Befund, Formkurve (3/6/12 Monate), Skyline des Jahres, Wochenumfang mit Ringen und Balken (12/26/52 Wochen), Rennprognose mit Zielzeit als Spanne und Wort (kein Prozentwert), Tempo bei gleichem Puls, Einblicke, Intensität, Gewohnheit, Rekorde, Schuhe, «Daten und Annahmen».
+- **Texte:** `runs.dash.*`, `runs.finding.*`, `runs.insight.*` in allen acht Sprachen; Beschreibung statt Urteil, keine Reparaturanleitung, keine Prognose-Chance in Prozent.
+- **Prüfung:** `tests/runsDashboard.spec.ts` (Befund, Einblicke, Anzeige nach Import, hell und dunkel ohne Überlauf, Leeren).

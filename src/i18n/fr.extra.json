@@ -2290,6 +2290,201 @@
       "unreadable": "Ce fichier n'a pas pu être lu : aucune activité avec une date lisible."
     },
     "added_one": "1 nouvelle séance importée.",
-    "added_other": "{{count}} nouvelles séances importées."
+    "added_other": "{{count}} nouvelles séances importées.",
+    "dash": {
+      "finding": "Constat",
+      "basis": {
+        "evidenced": "Appuyé par tes données",
+        "hint": "Un indice, pas un diagnostic"
+      },
+      "findingNote": "Un constat décrit ce qui ressort le plus de tes données. Il ne remplace ni l'entraînement ni un avis médical.",
+      "period": "Période",
+      "sourceNote": "Toutes les valeurs sont calculées à partir de tes séances importées, sur cet appareil.",
+      "form": {
+        "title": "Courbe de forme",
+        "sub": "Fitness et fatigue à partir de ta charge",
+        "words": {
+          "very_loaded": "Très chargé",
+          "building": "En construction",
+          "balanced": "Équilibré",
+          "fresh": "Frais",
+          "very_fresh": "Très frais"
+        },
+        "loaded": "Chargé",
+        "fresh": "Frais",
+        "chartAlt": "Courbe de forme : fitness {{fitness}}, fatigue {{fatigue}}",
+        "fitness": "Fitness",
+        "fatigue": "Fatigue",
+        "ramp": "Variation 7 jours",
+        "note": "Forme = fitness moins fatigue (Banister, 42 et 7 jours). La charge est la durée multipliée par la fraction de fréquence cardiaque au carré.",
+        "estimated": "Pour {{n}} séances sans fréquence cardiaque, la charge est estimée."
+      },
+      "year": {
+        "title": "Ton année",
+        "sub": "Chaque pilier est une semaine, sa hauteur les kilomètres",
+        "runs": "Sorties",
+        "hours": "Heures",
+        "elev": "Dénivelé",
+        "alt": "Skyline des 12 derniers mois, {{km}} km courus au total",
+        "biggest": "Plus grosse semaine : {{km}} km, à partir du {{date}}"
+      },
+      "week": {
+        "title": "Volume hebdomadaire",
+        "sub": "Kilomètres par semaine et fréquence à laquelle tu atteins ton objectif",
+        "noGoal": "Aucun objectif hebdomadaire déductible pour l'instant",
+        "ringsAlt": "Cette semaine {{week}} pour cent de l'objectif, {{hits}} semaines sur 6 atteintes",
+        "ringWeek": "Cette semaine",
+        "ringConsistency": "6 dernières semaines",
+        "derived": "L'objectif est déduit de tes dernières semaines, pas imposé.",
+        "w12": "12 semaines",
+        "w26": "26 semaines",
+        "w52": "52 semaines",
+        "barsAlt": "Kilomètres par semaine, cette semaine {{km}} km",
+        "goalLine": "Objectif hebdomadaire {{km}} km",
+        "streak": "Série (semaines)",
+        "longest": "Plus longue série",
+        "active": "Jours actifs"
+      },
+      "pred": {
+        "title": "Prévision de course",
+        "sub": "À partir de ta meilleure sortie : VDOT {{vdot}} ({{km}} km le {{date}})",
+        "half": "Semi-marathon",
+        "marathon": "Marathon",
+        "easy": "Allure facile : {{fast}} à {{slow}} par km",
+        "target": "Distance visée",
+        "outlook": {
+          "ambitious": "Ambitieux",
+          "realistic": "Réaliste",
+          "safe": "Sûr"
+        },
+        "outlookText": "Ton objectif {{target}} comparé à la fourchette {{low}} à {{high}}.",
+        "note": "Les temps sont une fourchette, pas une promesse. Ils supposent un parcours plat, un bon jour et un entraînement adapté ; chaleur, terrain et forme du jour les déplacent."
+      },
+      "pace": {
+        "title": "Allure à fréquence cardiaque égale",
+        "sub": "Sorties à {{lo}} à {{hi}} battements par minute ({{n}} sorties)",
+        "text": "Au début {{first}}, récemment {{last}} par km — à fréquence cardiaque égale.",
+        "axis": "min/km",
+        "alt": "Allure à fréquence cardiaque égale sur {{n}} sorties",
+        "note": "{{n}} sorties avec arrêts, côtes ou valeurs aberrantes sont écartées. Vent, chaleur et sommeil modifient la fréquence cardiaque ; la tendance est un indice."
+      },
+      "int": {
+        "title": "Intensité",
+        "sub": "12 dernières semaines réparties sur cinq zones de fréquence cardiaque",
+        "easy": "facile",
+        "alt": "{{easy}} pour cent du temps en zone facile",
+        "of": "sur",
+        "easyAbove": "sorties faciles au-dessus de la zone 2",
+        "hardAbove": "séances dures au seuil",
+        "backToBack": "jours durs consécutifs",
+        "note": "Les sorties faciles sont celles qui paraissent faciles par allure, durée et nom. Les zones sont des parts de ta fréquence cardiaque au seuil."
+      },
+      "habit": {
+        "title": "Habitude",
+        "sub": "Le plus souvent : {{day}} à {{hour}} h",
+        "before9": "avant 9 h",
+        "alt": "Sorties par jour de la semaine"
+      },
+      "rec": {
+        "title": "Records",
+        "longest": "Plus longue sortie",
+        "week": "Plus grosse semaine",
+        "elev": "Plus de dénivelé",
+        "early": "Départ le plus tôt",
+        "month": "Plus gros mois"
+      },
+      "shoes": {
+        "title": "Chaussures",
+        "sub": "Kilomètres par paire — le trait marque 700 km"
+      },
+      "data": {
+        "title": "Données et hypothèses",
+        "maxHr": "Fréquence cardiaque maximale (d'après tes données)",
+        "restHr": "Fréquence cardiaque au repos",
+        "thr": "Fréquence cardiaque au seuil",
+        "noHr": "Séances sans fréquence cardiaque",
+        "assumed": "supposée",
+        "none": "non déductible",
+        "formula": "Formules : VDOT selon Daniels et Gilbert, temps de course selon Riegel, forme selon Banister. Fréquence cardiaque au seuil, charge sans fréquence cardiaque et classement des sorties sont des hypothèses propres et provisoires."
+      }
+    },
+    "finding": {
+      "easy_too_hard": {
+        "lead": "Tes sorties faciles ne sont",
+        "accent": "pas faciles",
+        "text": "{{above}} sorties faciles sur {{total}} dépassaient la zone 2, soit à partir de {{zone3}} battements par minute. Ce qui semble facile est souvent déjà la zone moyenne."
+      },
+      "volume_jump": {
+        "lead": "Ton volume a",
+        "accent": "bondi",
+        "text": "La dernière semaine dépassait de {{pct}} pour cent la moyenne précédente : {{km}} km. Beaucoup de coureurs remarquent les grands écarts avant que le corps ne suive."
+      },
+      "hard_too_hard": {
+        "lead": "Les séances dures sont",
+        "accent": "au seuil",
+        "text": "{{above}} séances dures sur {{total}} ont atteint la fréquence cardiaque au seuil de {{thr}} battements — beaucoup de stimulus pour peu de récupération entre elles."
+      },
+      "overload": {
+        "lead": "Tu es",
+        "accent": "très chargé",
+        "text": "La forme est à {{form}} : la fatigue des derniers jours dépasse nettement ta fitness. Une valeur descriptive, pas un verdict."
+      },
+      "progress": {
+        "lead": "Ton allure à fréquence cardiaque égale",
+        "accent": "a bougé",
+        "text": "À {{lo}} à {{hi}} battements par minute, l'écart entre le début et récemment est de {{delta}} secondes par km."
+      },
+      "steady": {
+        "lead": "Tu restes",
+        "accent": "régulier",
+        "text": "Tu as atteint ton objectif hebdomadaire sur {{hits}} des 6 dernières semaines. Rien ne ressort — ici, c'est bon signe."
+      },
+      "num": {
+        "easyAboveZ3": "au-dessus zone 2",
+        "easyTotal": "sorties faciles",
+        "medianHr": "FC médiane",
+        "jumpPct": "bond",
+        "weekKm": "dernière semaine",
+        "ramp": "variation",
+        "hardAbove": "au seuil",
+        "hardTotal": "séances dures",
+        "threshold": "FC au seuil",
+        "form": "Forme",
+        "fitness": "Fitness",
+        "fatigue": "Fatigue",
+        "deltaPace": "écart",
+        "runsInBand": "sorties dans la plage",
+        "vdot": "VDOT",
+        "weeksHit": "semaines atteintes",
+        "activeDays": "jours actifs",
+        "runs": "sorties"
+      }
+    },
+    "insight": {
+      "progress": {
+        "title": "Progression",
+        "text": "Ta meilleure sortie donne un VDOT de {{vdot}} ; elle date de {{days}} jours."
+      },
+      "risk": {
+        "title": "Rapport de charge",
+        "text": "7 derniers jours contre les 4 semaines précédentes : {{ac}}. Monotonie {{mono}}. Descriptif, pas un feu tricolore."
+      },
+      "race": {
+        "title": "Semi-marathon",
+        "text": "Une fourchette de {{low}} à {{high}}, calculée à partir de ta meilleure sortie."
+      },
+      "consistency": {
+        "title": "Régularité",
+        "text": "{{hits}} semaines sur 6 atteintes. Série actuelle {{streak}}, la plus longue {{longest}} semaines."
+      },
+      "habit": {
+        "title": "Part des sorties matinales",
+        "text": "{{share}} pour cent de tes sorties commencent avant 9 h. Le plus souvent : {{weekday}} à {{hour}} h."
+      },
+      "gear": {
+        "title": "Chaussure en service",
+        "text": "{{name}} compte {{km}} km. À partir de 600 à 800 km environ, un coup d'œil à son état s'impose."
+      }
+    }
   }
 }
