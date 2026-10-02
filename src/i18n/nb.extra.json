@@ -405,7 +405,8 @@
       "peakWeek": "Peak Week som logg",
       "sportModule": "Nøkkeltallene i din egen idrett på ett sted",
       "durability": "Tretthetsresistens: uthvilt mot sliten, fra testene dine, over tid",
-      "sportAnalysis": "HYROX- og kampsportanalyse: tempofall, stasjoner, runder"
+      "sportAnalysis": "HYROX- og kampsportanalyse: tempofall, stasjoner, runder",
+      "runAnalysis": "Løping: import fra Strava eller Garmin, form, prognoser"
     },
     "coachUpgrade": "Går du over nivået ditt, kan du fortsette å måle: Du får fjorten dagers frist, og byttet koster bare den forholdsmessige differansen for resten av året.",
     "founder": "Grunnleggerpris: {{percent}} % rabatt på det første året av hvert trenernivå — for de første {{count}} trenerne.",
@@ -2226,5 +2227,69 @@
     "mealsLabel": "Kosthold",
     "mealsLink": "Måltider, dagsbehov og inntak i økter",
     "nutritionLink": "Regelen for grenen din, plan for økt og konkurranse, kosttilskudd"
+  },
+  "runs": {
+    "eyebrow": "Analyse",
+    "title": "Løping",
+    "intro": "Løpene og øktene dine fra Strava, Garmin eller en annen aktivitetsliste. Alt blir på denne enheten.",
+    "tabs": {
+      "label": "Del av analysen",
+      "profile": "Profil",
+      "runs": "Løping"
+    },
+    "preview": {
+      "title": "Dette kjente jeg igjen",
+      "source": "Kilde: {{source}} · tidssone {{tz}}",
+      "period": "{{n}} økter fra {{from}} til {{to}}",
+      "noHr": "{{n}} økter uten puls — det som mangler forblir manglende, ingenting fylles inn.",
+      "skipped": "{{n}} rader uten lesbar dato hoppet over.",
+      "apply": "Importer"
+    },
+    "addedNone": "Ingenting nytt: alle øktene fantes fra før.",
+    "stored": {
+      "title": "I dataene dine",
+      "empty": "Ingenting importert ennå.",
+      "period": "{{n}} økter fra {{from}} til {{to}}",
+      "local": "Blir på denne enheten og synkroniseres ikke. Er med i eksporten.",
+      "clear": "Slett importerte økter",
+      "clearConfirm": "Ja, slett alle"
+    },
+    "source": {
+      "strava": "Strava",
+      "garmin": "Garmin Connect",
+      "other": "annen liste"
+    },
+    "sport": {
+      "run": "Løp",
+      "trail": "Trail",
+      "bike": "Sykkel",
+      "strength": "Styrke",
+      "hike": "Tur",
+      "swim": "Svømming",
+      "other": "Annet"
+    },
+    "role": {
+      "date": "Dato",
+      "type": "Type",
+      "name": "Navn",
+      "distance": "Distanse",
+      "moving": "Bevegelsestid",
+      "elapsed": "Total tid",
+      "avgHr": "Puls",
+      "maxHr": "Makspuls",
+      "elev": "Høydemeter",
+      "gear": "Sko/utstyr",
+      "calories": "Kalorier",
+      "cadence": "Kadens"
+    },
+    "import": {
+      "title": "Importer aktiviteter",
+      "why": "Filen leses bare på enheten din. Ingenting lagres før du bekrefter.",
+      "choose": "Velg CSV-fil",
+      "formats": "Strava: activities.csv fra dataeksporten. Garmin Connect: aktiviteter som CSV. Andre lister med dato, type, distanse og tid fungerer også.",
+      "unreadable": "Filen kunne ikke leses: fant ingen aktiviteter med lesbar dato."
+    },
+    "added_one": "1 ny økt importert.",
+    "added_other": "{{count}} nye økter importert."
   }
 }

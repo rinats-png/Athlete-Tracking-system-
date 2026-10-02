@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 28
+export const CURRENT_SCHEMA_VERSION = 29
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -186,6 +186,30 @@ const profileSchema = z.object({
     .object({ name: z.string().max(80).default(''), on: dayString })
     .nullable()
     .default(null),
+})
+
+/**
+ * Eine Aktivität aus einem Import (Strava, Garmin, …) — docs/laeufe.md.
+ * Fehlend heisst fehlend: `null`, nie 0. Liegt nur auf dem Gerät: Puls und
+ * Strecken gehen nicht in den Abgleich (stripSeries in src/lib/supabase/series.ts).
+ */
+const activitySchema = z.object({
+  id: z.string().min(1).max(160),
+  source: z.enum(['strava', 'garmin', 'other']),
+  startedAt: isoDate,
+  day: dayString,
+  hour: z.number().int().min(0).max(23),
+  sport: z.enum(['run', 'trail', 'bike', 'strength', 'hike', 'swim', 'other']),
+  name: z.string().max(120).default(''),
+  distanceM: finite.min(0).max(1_000_000).nullable().default(null),
+  movingS: finite.min(0).max(1_000_000).nullable().default(null),
+  elapsedS: finite.min(0).max(1_000_000).nullable().default(null),
+  avgHr: finite.min(30).max(230).nullable().default(null),
+  maxHr: finite.min(60).max(230).nullable().default(null),
+  elevM: finite.min(-500).max(20000).nullable().default(null),
+  gear: z.string().max(80).nullable().default(null),
+  calories: finite.min(0).max(50000).nullable().default(null),
+  cadence: finite.min(0).max(300).nullable().default(null),
 })
 
 const biometricSchema = z.object({
@@ -1041,6 +1065,8 @@ const athleteSchema = z.object({
   diary: z.array(diaryEntrySchema).default([]),
   /** Freiwillige Tagebuchfelder, die dieser Athlet eingeschaltet hat. */
   diaryFields: z.array(diaryFieldSchema).default([]),
+  /** Importierte Aktivitäten (Strava, Garmin …) für den Bereich «Läufe». Nur auf dem Gerät. */
+  activities: z.array(activitySchema).max(20000).default([]),
   /** Trainingslog: Einheiten mit Sätzen (Schicht S2). */
   workouts: z.array(workoutSchema).default([]),
   /** Decision-Log (Schicht S3): was entschieden wurde, und was danach geschah. */
@@ -1123,6 +1149,7 @@ export type ValidatedObservation = z.infer<typeof observationSchema>
 export type ValidatedDiaryEntry = z.infer<typeof diaryEntrySchema>
 export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
 export type ValidatedWorkout = z.infer<typeof workoutSchema>
+export type ValidatedActivity = z.infer<typeof activitySchema>
 export type ValidatedHealth = z.infer<typeof healthSchema>
 export type ValidatedHealthConsent = z.infer<typeof healthConsentSchema>
 export type ValidatedLabEntry = z.infer<typeof labEntrySchema>
@@ -1609,6 +1636,16 @@ export const MIGRATIONS: Migration[] = [
     describe: 'Fuel Stufe 2: Energie in der Einheit am Tagebuchtermin (optional, nichts zu füllen)',
     run: (data: any) => ({ ...data, version: 28 }),
   },
+  {
+    from: 28,
+    to: 29,
+    describe: 'Läufe: importierte Aktivitäten je Athlet (leer, nur auf dem Gerät)',
+    run: (data: any) => ({
+      ...data,
+      version: 29,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, activities: athlete.activities ?? [] })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1650,6 +1687,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     diary: [],
     diaryFields: [],
     workouts: [],
+    activities: [],
     decisions: [],
     cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
     meals: [],

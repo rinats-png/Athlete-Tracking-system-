@@ -36,6 +36,7 @@ function athlete(id: string, name: string, values: number[]): StoredAthlete {
     meals: [],
     nutrition: { pal: 1.55 },
     health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null },
+    activities: [],
     peakWeeks: [],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

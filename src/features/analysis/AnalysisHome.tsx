@@ -13,6 +13,7 @@ import { BenchmarkRow } from '@/features/shared/BenchmarkRow'
 import { useLocale } from '@/features/shared/useLocale'
 import { ratingContextOf, disciplineIdsOf } from '@/features/shared/profileContext'
 import { AnalysisDeepDive } from './AnalysisScreen'
+import { AnalysisTabs } from '@/features/runs/AnalysisTabs'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { disciplineById } from '@/data/sportProfiles'
 import { getTest } from '@/data/testCatalog'
@@ -93,6 +94,7 @@ export function AnalysisHome() {
   return (
     <>
       <ScreenHeader eyebrow={t('analysisHome.eyebrow')} title={t('analysisHome.title')} intro={t('analysisHome.intro')} />
+      <AnalysisTabs active="profile" />
 
       {/*
        * Das Analyse-Trio: Stärken, Potenzial, Empfehlung als drei versetzte

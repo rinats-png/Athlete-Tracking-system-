@@ -405,7 +405,8 @@
       "peakWeek": "Peak week as a log",
       "sportModule": "The figures of your own sport in one place",
       "durability": "Fatigue resistance: fresh versus fatigued, from your tests, over time",
-      "sportAnalysis": "HYROX and combat sports analysis: run decay, stations, rounds"
+      "sportAnalysis": "HYROX and combat sports analysis: run decay, stations, rounds",
+      "runAnalysis": "Runs: import from Strava or Garmin, form, predictions"
     },
     "coachUpgrade": "If you go over your tier, you keep measuring: there is a fourteen-day grace period, and switching costs only the prorated difference for the rest of the year.",
     "founder": "Founder price: {{percent}}% off the first year of every coach tier — for the first {{count}} coaches.",
@@ -2226,5 +2227,69 @@
     "mealsLabel": "Nutrition",
     "mealsLink": "Meals, daily need and fuelling in sessions",
     "nutritionLink": "Your discipline's rule, plan for a session and competition, supplements"
+  },
+  "runs": {
+    "eyebrow": "Analysis",
+    "title": "Runs",
+    "intro": "Your runs and sessions from Strava, Garmin or another activity list. Everything stays on this device.",
+    "tabs": {
+      "label": "Analysis section",
+      "profile": "Profile",
+      "runs": "Runs"
+    },
+    "preview": {
+      "title": "What I found",
+      "source": "Source: {{source}} · time zone {{tz}}",
+      "period": "{{n}} sessions from {{from}} to {{to}}",
+      "noHr": "{{n}} sessions without heart rate — missing stays missing, nothing is filled in.",
+      "skipped": "{{n}} rows without a readable date skipped.",
+      "apply": "Import"
+    },
+    "addedNone": "Nothing new: all sessions were already there.",
+    "stored": {
+      "title": "In your data",
+      "empty": "Nothing imported yet.",
+      "period": "{{n}} sessions from {{from}} to {{to}}",
+      "local": "Stays on this device and is not synced. It is included in the export.",
+      "clear": "Delete imported sessions",
+      "clearConfirm": "Yes, delete all"
+    },
+    "source": {
+      "strava": "Strava",
+      "garmin": "Garmin Connect",
+      "other": "other list"
+    },
+    "sport": {
+      "run": "Run",
+      "trail": "Trail",
+      "bike": "Ride",
+      "strength": "Strength",
+      "hike": "Hike",
+      "swim": "Swim",
+      "other": "Other"
+    },
+    "role": {
+      "date": "Date",
+      "type": "Type",
+      "name": "Name",
+      "distance": "Distance",
+      "moving": "Moving time",
+      "elapsed": "Elapsed time",
+      "avgHr": "Heart rate",
+      "maxHr": "Max heart rate",
+      "elev": "Elevation",
+      "gear": "Shoe/gear",
+      "calories": "Calories",
+      "cadence": "Cadence"
+    },
+    "import": {
+      "title": "Import activities",
+      "why": "The file is read on your device only. Nothing is kept until you confirm.",
+      "choose": "Choose CSV file",
+      "formats": "Strava: activities.csv from the data export. Garmin Connect: activities as CSV. Other lists with date, type, distance and time work too.",
+      "unreadable": "This file could not be read: no activities with a readable date found."
+    },
+    "added_one": "1 new session imported.",
+    "added_other": "{{count}} new sessions imported."
   }
 }

@@ -405,7 +405,8 @@
       "peakWeek": "Peak Week como registro",
       "sportModule": "Las cifras de tu deporte en un solo sitio",
       "durability": "Resistencia a la fatiga: fresco frente a fatigado, a partir de tus tests, en el historial",
-      "sportAnalysis": "Análisis de HYROX y deportes de combate: caída en carrera, estaciones, asaltos"
+      "sportAnalysis": "Análisis de HYROX y deportes de combate: caída en carrera, estaciones, asaltos",
+      "runAnalysis": "Carreras: importación de Strava o Garmin, forma, previsiones"
     },
     "coachUpgrade": "Si superas tu nivel, sigues midiendo: tienes un plazo de catorce días, y el cambio solo cuesta la diferencia prorrateada para el resto del año.",
     "founder": "Precio de fundador: {{percent}} % de descuento en el primer año de cada nivel de entrenador, para los primeros {{count}} entrenadores.",
@@ -2226,5 +2227,69 @@
     "mealsLabel": "Alimentación",
     "mealsLink": "Comidas, necesidad diaria y aporte durante las sesiones",
     "nutritionLink": "Regla de tu disciplina, plan para una sesión y la competición, suplementos"
+  },
+  "runs": {
+    "eyebrow": "Análisis",
+    "title": "Carreras",
+    "intro": "Tus carreras y sesiones de Strava, Garmin u otra lista de actividades. Todo se queda en este dispositivo.",
+    "tabs": {
+      "label": "Sección del análisis",
+      "profile": "Perfil",
+      "runs": "Carreras"
+    },
+    "preview": {
+      "title": "Lo que he reconocido",
+      "source": "Fuente: {{source}} · zona horaria {{tz}}",
+      "period": "{{n}} sesiones del {{from}} al {{to}}",
+      "noHr": "{{n}} sesiones sin frecuencia cardíaca — lo que falta sigue faltando, no se completa nada.",
+      "skipped": "{{n}} filas sin fecha legible omitidas.",
+      "apply": "Importar"
+    },
+    "addedNone": "Nada nuevo: todas las sesiones ya estaban.",
+    "stored": {
+      "title": "En tus datos",
+      "empty": "Aún no se ha importado nada.",
+      "period": "{{n}} sesiones del {{from}} al {{to}}",
+      "local": "Se queda en este dispositivo y no se sincroniza. Está incluido en la exportación.",
+      "clear": "Borrar las sesiones importadas",
+      "clearConfirm": "Sí, borrar todo"
+    },
+    "source": {
+      "strava": "Strava",
+      "garmin": "Garmin Connect",
+      "other": "otra lista"
+    },
+    "sport": {
+      "run": "Carrera",
+      "trail": "Trail",
+      "bike": "Bici",
+      "strength": "Fuerza",
+      "hike": "Senderismo",
+      "swim": "Natación",
+      "other": "Otro"
+    },
+    "role": {
+      "date": "Fecha",
+      "type": "Tipo",
+      "name": "Nombre",
+      "distance": "Distancia",
+      "moving": "Tiempo en movimiento",
+      "elapsed": "Tiempo total",
+      "avgHr": "Frecuencia cardíaca",
+      "maxHr": "FC máx.",
+      "elev": "Desnivel",
+      "gear": "Zapatilla/equipo",
+      "calories": "Calorías",
+      "cadence": "Cadencia"
+    },
+    "import": {
+      "title": "Importar actividades",
+      "why": "El archivo se lee solo en tu dispositivo. No se guarda nada hasta que lo confirmes.",
+      "choose": "Elegir archivo CSV",
+      "formats": "Strava: activities.csv de la exportación de datos. Garmin Connect: actividades como CSV. Otras listas con fecha, tipo, distancia y tiempo también sirven.",
+      "unreadable": "No se pudo leer este archivo: no se encontraron actividades con fecha legible."
+    },
+    "added_one": "1 sesión nueva importada.",
+    "added_other": "{{count}} sesiones nuevas importadas."
   }
 }

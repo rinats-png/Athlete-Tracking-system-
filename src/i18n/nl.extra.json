@@ -405,7 +405,8 @@
       "peakWeek": "Peak Week als logboek",
       "sportModule": "De kerncijfers van je eigen sport op één plek",
       "durability": "Vermoeidheidsresistentie: fris tegenover vermoeid, uit je tests, in het verloop",
-      "sportAnalysis": "HYROX- en vechtsportanalyse: loopverval, stations, rondes"
+      "sportAnalysis": "HYROX- en vechtsportanalyse: loopverval, stations, rondes",
+      "runAnalysis": "Hardlopen: import uit Strava of Garmin, vorm, voorspellingen"
     },
     "coachUpgrade": "Ga je over je niveau heen, dan blijf je gewoon meten: je krijgt veertien dagen respijt, en overstappen kost alleen het naar rato berekende verschil voor de rest van het jaar.",
     "founder": "Oprichtersprijs: {{percent}}% korting op het eerste jaar van elk trainersniveau — voor de eerste {{count}} trainers.",
@@ -2226,5 +2227,69 @@
     "mealsLabel": "Voeding",
     "mealsLink": "Maaltijden, dagbehoefte en inname tijdens trainingen",
     "nutritionLink": "Regel voor jouw discipline, plan voor een training en wedstrijd, supplementen"
+  },
+  "runs": {
+    "eyebrow": "Analyse",
+    "title": "Hardlopen",
+    "intro": "Je loopjes en trainingen uit Strava, Garmin of een andere activiteitenlijst. Alles blijft op dit apparaat.",
+    "tabs": {
+      "label": "Onderdeel van de analyse",
+      "profile": "Profiel",
+      "runs": "Lopen"
+    },
+    "preview": {
+      "title": "Dit heb ik herkend",
+      "source": "Bron: {{source}} · tijdzone {{tz}}",
+      "period": "{{n}} trainingen van {{from}} tot {{to}}",
+      "noHr": "{{n}} trainingen zonder hartslag — wat ontbreekt blijft ontbreken, er wordt niets aangevuld.",
+      "skipped": "{{n}} regels zonder leesbare datum overgeslagen.",
+      "apply": "Importeren"
+    },
+    "addedNone": "Niets nieuws: alle trainingen waren er al.",
+    "stored": {
+      "title": "In je gegevens",
+      "empty": "Nog niets geïmporteerd.",
+      "period": "{{n}} trainingen van {{from}} tot {{to}}",
+      "local": "Blijft op dit apparaat en wordt niet gesynchroniseerd. Zit wel in de export.",
+      "clear": "Geïmporteerde trainingen verwijderen",
+      "clearConfirm": "Ja, alles verwijderen"
+    },
+    "source": {
+      "strava": "Strava",
+      "garmin": "Garmin Connect",
+      "other": "andere lijst"
+    },
+    "sport": {
+      "run": "Hardlopen",
+      "trail": "Trail",
+      "bike": "Fietsen",
+      "strength": "Kracht",
+      "hike": "Wandelen",
+      "swim": "Zwemmen",
+      "other": "Overig"
+    },
+    "role": {
+      "date": "Datum",
+      "type": "Type",
+      "name": "Naam",
+      "distance": "Afstand",
+      "moving": "Beweegtijd",
+      "elapsed": "Totale tijd",
+      "avgHr": "Hartslag",
+      "maxHr": "Max. hartslag",
+      "elev": "Hoogtemeters",
+      "gear": "Schoen/uitrusting",
+      "calories": "Calorieën",
+      "cadence": "Cadans"
+    },
+    "import": {
+      "title": "Activiteiten importeren",
+      "why": "Het bestand wordt alleen op je apparaat gelezen. Er wordt niets bewaard tot je bevestigt.",
+      "choose": "CSV-bestand kiezen",
+      "formats": "Strava: activities.csv uit de data-export. Garmin Connect: activiteiten als CSV. Andere lijsten met datum, type, afstand en tijd werken ook.",
+      "unreadable": "Dit bestand kon niet worden gelezen: geen activiteiten met leesbare datum gevonden."
+    },
+    "added_one": "1 nieuwe training geïmporteerd.",
+    "added_other": "{{count}} nieuwe trainingen geïmporteerd."
   }
 }

@@ -147,6 +147,7 @@ export type PlanFeature =
   | 'durability' // Ermüdungsresistenz aus Tests: frisch gegen ermüdet, im Verlauf
   | 'sportAnalysis' // HYROX- und Kampfsport-Auswertung (auch in den bezahlten Trainerstufen)
   // --- Pro -------------------------------------------------------------------
+  | 'runAnalysis' // Läufe: Import von Strava/Garmin, Form, Prognosen (docs/laeufe.md)
   | 'nutrition' // Mahlzeiten, Makros, Referenzumsatz, Open Food Facts
   | 'decisionLog' // Entscheidungen mit Wirkungsprüfung
   | 'cockpit' // Signale mit einstellbaren Schwellen
@@ -252,7 +253,7 @@ const PLUS_FEATURES: readonly PlanFeature[] = [
   'sportAnalysis',
 ]
 
-const PRO_FEATURES: readonly PlanFeature[] = [...PLUS_FEATURES, 'nutrition', 'decisionLog', 'cockpit']
+const PRO_FEATURES: readonly PlanFeature[] = [...PLUS_FEATURES, 'nutrition', 'runAnalysis', 'decisionLog', 'cockpit']
 
 export const ATHLETE_PLANS: readonly AthletePlan[] = [
   {

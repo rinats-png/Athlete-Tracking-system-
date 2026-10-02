@@ -405,7 +405,8 @@
       "peakWeek": "Peak Week als Protokoll",
       "sportModule": "Die Kennzahlen der eigenen Sportart an einer Stelle",
       "durability": "Ermüdungsresistenz: frisch gegen ermüdet, aus deinen Tests, im Verlauf",
-      "sportAnalysis": "HYROX- und Kampfsport-Auswertung: Laufabfall, Stationen, Runden"
+      "sportAnalysis": "HYROX- und Kampfsport-Auswertung: Laufabfall, Stationen, Runden",
+      "runAnalysis": "Läufe: Import von Strava oder Garmin, Form, Prognosen"
     },
     "coachUpgrade": "Wer seine Stufe überschreitet, misst weiter: Es gibt vierzehn Tage Frist, und der Wechsel kostet nur die anteilige Differenz für den Rest des Jahres.",
     "founder": "Gründerpreis: {{percent}} % auf das erste Jahr jeder Trainerstufe — für die ersten {{count}} Trainer.",
@@ -2226,5 +2227,69 @@
     "mealsLabel": "Ernährung",
     "mealsLink": "Mahlzeiten, Tagesbedarf und Verpflegung in Einheiten",
     "nutritionLink": "Regel deiner Disziplin, Plan für Einheit und Wettkampf, Supplemente"
+  },
+  "runs": {
+    "eyebrow": "Analyse",
+    "title": "Läufe",
+    "intro": "Deine Läufe und Einheiten aus Strava, Garmin oder einer anderen Aktivitätenliste. Alles bleibt auf diesem Gerät.",
+    "tabs": {
+      "label": "Bereich der Analyse",
+      "profile": "Profil",
+      "runs": "Läufe"
+    },
+    "preview": {
+      "title": "Das habe ich erkannt",
+      "source": "Quelle: {{source}} · Zeitzone {{tz}}",
+      "period": "{{n}} Einheiten vom {{from}} bis {{to}}",
+      "noHr": "{{n}} Einheiten ohne Puls — fehlend heißt fehlend, es wird nichts ergänzt.",
+      "skipped": "{{n}} Zeilen ohne lesbares Datum übersprungen.",
+      "apply": "Übernehmen"
+    },
+    "addedNone": "Nichts Neues: alle Einheiten waren schon da.",
+    "stored": {
+      "title": "Im Bestand",
+      "empty": "Noch nichts importiert.",
+      "period": "{{n}} Einheiten vom {{from}} bis {{to}}",
+      "local": "Bleibt auf diesem Gerät und geht nicht in den Abgleich. Im Export ist es enthalten.",
+      "clear": "Importierte Einheiten löschen",
+      "clearConfirm": "Ja, alle löschen"
+    },
+    "source": {
+      "strava": "Strava",
+      "garmin": "Garmin Connect",
+      "other": "andere Liste"
+    },
+    "sport": {
+      "run": "Lauf",
+      "trail": "Trail",
+      "bike": "Rad",
+      "strength": "Kraft",
+      "hike": "Wandern",
+      "swim": "Schwimmen",
+      "other": "Sonstiges"
+    },
+    "role": {
+      "date": "Datum",
+      "type": "Typ",
+      "name": "Name",
+      "distance": "Strecke",
+      "moving": "Bewegungszeit",
+      "elapsed": "Gesamtzeit",
+      "avgHr": "Puls",
+      "maxHr": "Maximalpuls",
+      "elev": "Höhenmeter",
+      "gear": "Schuh/Gerät",
+      "calories": "Kalorien",
+      "cadence": "Kadenz"
+    },
+    "import": {
+      "title": "Aktivitäten importieren",
+      "why": "Die Datei wird nur auf deinem Gerät gelesen. Übernommen wird erst, wenn du es bestätigst.",
+      "choose": "CSV-Datei wählen",
+      "formats": "Strava: activities.csv aus dem Datenexport. Garmin Connect: Aktivitäten als CSV. Andere Listen mit Datum, Typ, Strecke und Zeit gehen ebenfalls.",
+      "unreadable": "Diese Datei ließ sich nicht lesen: keine Aktivitäten mit lesbarem Datum gefunden."
+    },
+    "added_one": "1 neue Einheit übernommen.",
+    "added_other": "{{count}} neue Einheiten übernommen."
   }
 }

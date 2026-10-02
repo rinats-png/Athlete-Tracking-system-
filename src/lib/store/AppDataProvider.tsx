@@ -29,6 +29,7 @@ import {
   type StoredObservation,
   type StoredDiaryEntry,
   type StoredWorkout,
+  type StoredActivity,
   type StoredDecision,
   type StoredCockpit,
   type StoredInsightState,
@@ -151,6 +152,11 @@ export interface AppDataValue {
    */
   workouts: StoredWorkout[]
   saveWorkout: (workout: StoredWorkout) => void
+  /** Aktivitäten aus einem Import übernehmen; schon vorhandene (gleiche Kennung) bleiben, wie sie sind. Gibt die Zahl neuer zurück. */
+  importActivities: (list: StoredActivity[]) => number
+  /** Alle importierten Aktivitäten des aktiven Athleten löschen. */
+  clearActivities: () => void
+  activities: StoredActivity[]
   deleteWorkout: (id: string) => void
   /**
    * Decision-Log und Cockpit-Schwellen des aktiven Athleten (Schicht S3).
@@ -663,6 +669,25 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         })
       },
       workouts: store.athletes.find((a) => a.id === store.activeAthleteId)?.workouts ?? [],
+      activities: store.athletes.find((a) => a.id === store.activeAthleteId)?.activities ?? [],
+      importActivities: (list) => {
+        const current = storeRef.current
+        const active = current.athletes.find((a) => a.id === current.activeAthleteId)
+        const have = new Set((active?.activities ?? []).map((a) => a.id))
+        const fresh = list.filter((a) => !have.has(a.id))
+        if (fresh.length === 0) return 0
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) =>
+            a.id === current.activeAthleteId ? { ...a, activities: [...a.activities, ...fresh].sort((x, y) => x.startedAt.localeCompare(y.startedAt)) } : a,
+          ),
+        })
+        return fresh.length
+      },
+      clearActivities: () => {
+        const current = storeRef.current
+        commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, activities: [] } : a)) })
+      },
       saveWorkout: (workout) => {
         const current = storeRef.current
         const now = new Date().toISOString()

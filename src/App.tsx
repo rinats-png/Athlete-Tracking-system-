@@ -127,6 +127,7 @@ const router = createBrowserRouter([
       { path: 'verlauf/kalender', element: screen(() => import('@/features/history/CalendarScreen'), 'CalendarScreen') },
       { path: 'verlauf/erinnerungen', element: screen(() => import('@/features/history/RemindersScreen'), 'RemindersScreen') },
       { path: 'analyse', element: screen(() => import('@/features/analysis/AnalysisHome'), 'AnalysisHome') },
+      { path: 'analyse/laeufe', element: <Gate feature="runAnalysis">{screen(() => import('@/features/runs/RunsScreen'), 'RunsScreen')}</Gate> },
       { path: 'analyse/jahr', element: <Gate feature="yearReview">{screen(() => import('@/features/analysis/YearReviewScreen'), 'YearReviewScreen')}</Gate> },
       { path: 'community', element: screen(() => import('@/features/analysis/CommunityScreen'), 'CommunityScreen') },
       { path: 'trainer', element: screen(() => import('@/features/coach/CoachScreen'), 'CoachScreen') },

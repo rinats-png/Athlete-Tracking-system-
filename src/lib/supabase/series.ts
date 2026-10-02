@@ -97,7 +97,7 @@ export function stripHealth(athlete: StoredAthlete): StoredAthlete {
 
 /** Das Dokument OHNE Zeitreihen und OHNE Gesundheitsschicht — das, was in athlete_documents liegt. */
 export function stripSeries(athlete: StoredAthlete): StoredAthlete {
-  return stripHealth({ ...athlete, diary: [], workouts: [], decisions: [], meals: [] })
+  return stripHealth({ ...athlete, diary: [], workouts: [], decisions: [], meals: [], activities: [] })
 }
 
 /** Alle Zeilen eines Athleten, so wie sie lokal liegen. */

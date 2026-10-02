@@ -405,7 +405,8 @@
       "peakWeek": "Peak Week som log",
       "sportModule": "Nøgletallene i din egen sport ét sted",
       "durability": "Træthedsresistens: frisk mod træt, fra dine tests, over tid",
-      "sportAnalysis": "HYROX- og kampsportsanalyse: løbefald, stationer, runder"
+      "sportAnalysis": "HYROX- og kampsportsanalyse: løbefald, stationer, runder",
+      "runAnalysis": "Løb: import fra Strava eller Garmin, form, prognoser"
     },
     "coachUpgrade": "Hvis du går over dit niveau, kan du fortsætte med at måle: Der er fjorten dages frist, og skiftet koster kun den forholdsmæssige difference for resten af året.",
     "founder": "Stifterpris: {{percent}} % rabat på det første år af hvert trænerniveau — for de første {{count}} trænere.",
@@ -2226,5 +2227,69 @@
     "mealsLabel": "Kost",
     "mealsLink": "Måltider, dagsbehov og indtag i træninger",
     "nutritionLink": "Reglen for din disciplin, plan for træning og konkurrence, kosttilskud"
+  },
+  "runs": {
+    "eyebrow": "Analyse",
+    "title": "Løb",
+    "intro": "Dine løb og træninger fra Strava, Garmin eller en anden aktivitetsliste. Alt bliver på denne enhed.",
+    "tabs": {
+      "label": "Del af analysen",
+      "profile": "Profil",
+      "runs": "Løb"
+    },
+    "preview": {
+      "title": "Det her genkendte jeg",
+      "source": "Kilde: {{source}} · tidszone {{tz}}",
+      "period": "{{n}} træninger fra {{from}} til {{to}}",
+      "noHr": "{{n}} træninger uden puls — det, der mangler, forbliver manglende, intet udfyldes.",
+      "skipped": "{{n}} rækker uden læsbar dato sprunget over.",
+      "apply": "Importer"
+    },
+    "addedNone": "Intet nyt: alle træninger var der allerede.",
+    "stored": {
+      "title": "I dine data",
+      "empty": "Intet importeret endnu.",
+      "period": "{{n}} træninger fra {{from}} til {{to}}",
+      "local": "Bliver på denne enhed og synkroniseres ikke. Er med i eksporten.",
+      "clear": "Slet importerede træninger",
+      "clearConfirm": "Ja, slet alle"
+    },
+    "source": {
+      "strava": "Strava",
+      "garmin": "Garmin Connect",
+      "other": "anden liste"
+    },
+    "sport": {
+      "run": "Løb",
+      "trail": "Trail",
+      "bike": "Cykel",
+      "strength": "Styrke",
+      "hike": "Vandring",
+      "swim": "Svømning",
+      "other": "Andet"
+    },
+    "role": {
+      "date": "Dato",
+      "type": "Type",
+      "name": "Navn",
+      "distance": "Distance",
+      "moving": "Bevægelsestid",
+      "elapsed": "Samlet tid",
+      "avgHr": "Puls",
+      "maxHr": "Maks. puls",
+      "elev": "Højdemeter",
+      "gear": "Sko/udstyr",
+      "calories": "Kalorier",
+      "cadence": "Kadence"
+    },
+    "import": {
+      "title": "Importer aktiviteter",
+      "why": "Filen læses kun på din enhed. Intet gemmes, før du bekræfter.",
+      "choose": "Vælg CSV-fil",
+      "formats": "Strava: activities.csv fra dataeksporten. Garmin Connect: aktiviteter som CSV. Andre lister med dato, type, distance og tid virker også.",
+      "unreadable": "Filen kunne ikke læses: fandt ingen aktiviteter med læsbar dato."
+    },
+    "added_one": "1 ny træning importeret.",
+    "added_other": "{{count}} nye træninger importeret."
   }
 }

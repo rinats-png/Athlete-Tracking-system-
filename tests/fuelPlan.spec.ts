@@ -99,7 +99,7 @@ test.describe('Schema 28', () => {
     const { data, report } = parseStoredData(old)
     expect(report.migratedFrom).toBe(27)
     expect(data?.version).toBe(CURRENT_SCHEMA_VERSION)
-    expect(CURRENT_SCHEMA_VERSION).toBe(28)
+    expect(CURRENT_SCHEMA_VERSION).toBeGreaterThanOrEqual(28)
   })
 })
 

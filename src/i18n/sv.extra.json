@@ -405,7 +405,8 @@
       "peakWeek": "Peak Week som logg",
       "sportModule": "Nyckeltalen i din egen sport på ett ställe",
       "durability": "Trötthetsresistens: utvilad mot trött, från dina tester, över tid",
-      "sportAnalysis": "HYROX- och kampsportsanalys: tempotapp, stationer, ronder"
+      "sportAnalysis": "HYROX- och kampsportsanalys: tempotapp, stationer, ronder",
+      "runAnalysis": "Löpning: import från Strava eller Garmin, form, prognoser"
     },
     "coachUpgrade": "Går du över din nivå kan du fortsätta mäta: du får fjorton dagars frist, och bytet kostar bara den proportionella mellanskillnaden för resten av året.",
     "founder": "Grundarpris: {{percent}} % rabatt på första året av varje tränarnivå — för de första {{count}} tränarna.",
@@ -2226,5 +2227,69 @@
     "mealsLabel": "Kost",
     "mealsLink": "Måltider, dagsbehov och intag under pass",
     "nutritionLink": "Regeln för din gren, plan för pass och tävling, kosttillskott"
+  },
+  "runs": {
+    "eyebrow": "Analys",
+    "title": "Löpning",
+    "intro": "Dina löppass och träningar från Strava, Garmin eller en annan aktivitetslista. Allt stannar på den här enheten.",
+    "tabs": {
+      "label": "Del av analysen",
+      "profile": "Profil",
+      "runs": "Löpning"
+    },
+    "preview": {
+      "title": "Det här kände jag igen",
+      "source": "Källa: {{source}} · tidszon {{tz}}",
+      "period": "{{n}} pass från {{from}} till {{to}}",
+      "noHr": "{{n}} pass utan puls — det som saknas förblir saknat, inget fylls i.",
+      "skipped": "{{n}} rader utan läsbart datum hoppades över.",
+      "apply": "Importera"
+    },
+    "addedNone": "Inget nytt: alla pass fanns redan.",
+    "stored": {
+      "title": "I din data",
+      "empty": "Inget importerat ännu.",
+      "period": "{{n}} pass från {{from}} till {{to}}",
+      "local": "Stannar på den här enheten och synkas inte. Ingår i exporten.",
+      "clear": "Ta bort importerade pass",
+      "clearConfirm": "Ja, ta bort alla"
+    },
+    "source": {
+      "strava": "Strava",
+      "garmin": "Garmin Connect",
+      "other": "annan lista"
+    },
+    "sport": {
+      "run": "Löpning",
+      "trail": "Trail",
+      "bike": "Cykel",
+      "strength": "Styrka",
+      "hike": "Vandring",
+      "swim": "Simning",
+      "other": "Övrigt"
+    },
+    "role": {
+      "date": "Datum",
+      "type": "Typ",
+      "name": "Namn",
+      "distance": "Sträcka",
+      "moving": "Rörelsetid",
+      "elapsed": "Total tid",
+      "avgHr": "Puls",
+      "maxHr": "Maxpuls",
+      "elev": "Höjdmeter",
+      "gear": "Sko/utrustning",
+      "calories": "Kalorier",
+      "cadence": "Kadens"
+    },
+    "import": {
+      "title": "Importera aktiviteter",
+      "why": "Filen läses bara på din enhet. Inget sparas förrän du bekräftar.",
+      "choose": "Välj CSV-fil",
+      "formats": "Strava: activities.csv från dataexporten. Garmin Connect: aktiviteter som CSV. Andra listor med datum, typ, sträcka och tid fungerar också.",
+      "unreadable": "Filen gick inte att läsa: inga aktiviteter med läsbart datum hittades."
+    },
+    "added_one": "1 nytt pass importerat.",
+    "added_other": "{{count}} nya pass importerade."
   }
 }
