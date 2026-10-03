@@ -123,7 +123,71 @@ export const TEST_IMAGE_NUMBER: Record<string, number> = {
   rmr_kcal_day: 125,
 }
 
+/**
+ * Einträge ohne Dokumentnummer (Ergänzung «KYDON-Testbilder», 55 Bilder):
+ * die Datei heißt `public/testbilder/S_<Schlüssel>.webp`. Gleiche
+ * Aufbereitung wie oben (Beschnitt auf 1536×930, 1024 px, WebP 0,8).
+ */
+export const SLUG_IMAGE_KEYS: ReadonlySet<string> = new Set([
+  'assault_bike_10min_cal',
+  'bear_complex',
+  'brick_bike_run',
+  'burpee_broad_jump_80m',
+  'cindy_20min_amrap',
+  'clean_1rm',
+  'clean_and_jerk_1rm',
+  'combat_rounds',
+  'crawl_30m',
+  'downhill_run_test',
+  'farmers_carry',
+  'fat_mass_percent',
+  'fatigue_circuit_4x30s',
+  'fran',
+  'gi_grip_hang',
+  'grace',
+  'grappling_circuit_5min',
+  'grip_hang_time',
+  'hr_drift_test',
+  'jjapt',
+  'kick_test_60s',
+  'lactate_step_test',
+  'lean_mass_kg',
+  'loaded_march',
+  'murph',
+  'obstacle_course_sim',
+  'overhead_press_1rm',
+  'peak_power_5s',
+  'pull_up_max_reps',
+  'punch_test_60s',
+  'repeated_jump_15s',
+  'repeated_sprint_bike',
+  'repeated_throws_30s',
+  'resting_hr_bpm',
+  'rope_climb',
+  'rope_skipping_3min',
+  'row_1000m',
+  'run_1_5_mile',
+  'run_5k',
+  'shuttle_5_10_5',
+  'ski_erg_1000m',
+  'sled_drag',
+  'sleep_h',
+  'snatch_1rm',
+  'srpe_load_au',
+  'stair_climb',
+  'submax_efficiency_bike',
+  'swim_100m_backstroke',
+  'swim_100m_breaststroke',
+  'swim_100m_butterfly',
+  'swim_400m',
+  'threshold_run_30min',
+  'uchi_komi_fitness_test',
+  'uphill_run_test',
+  'weighted_pull_up_1rm',
+])
+
 export function testImageUrl(key: string): string | null {
   const n = TEST_IMAGE_NUMBER[key]
-  return n ? `/testbilder/T${String(n).padStart(3, '0')}.webp` : null
+  if (n) return `/testbilder/T${String(n).padStart(3, '0')}.webp`
+  return SLUG_IMAGE_KEYS.has(key) ? `/testbilder/S_${key}.webp` : null
 }

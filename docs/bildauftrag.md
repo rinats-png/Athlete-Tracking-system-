@@ -320,7 +320,7 @@ Werte, die erfasst, aber nicht bewertet werden (Screening, Sensor, Körper, Erho
 
 ## 7. Zählung
 
-- Tests: 125, davon 75 mit Bild, **50 ohne**.
-- Beobachtungswerte: 40, davon 34 mit Bild, **6 ohne**.
-- Übungen: 72, **alle ohne** Bild.
-- Insgesamt zu erstellen: **128** Bilder.
+- Tests: 125, **alle mit Bild** (75 mit Dokumentnummer `T<Nr>.webp`, 50 aus der Ergänzung `S_<slug>.webp`).
+- Beobachtungswerte: 39 aktive, **alle mit Bild** (5 aus der Ergänzung).
+- Übungen: 72, **alle ohne** Bild (die Anzeige kennt für Übungen noch keine Bilder; Namensform `U_<key>.jpg`).
+- Ergänzung «KYDON-Testbilder» vom 3. Oktober 2026: 55 Bilder, eingebaut über `SLUG_IMAGE_KEYS` in `src/data/testImages.ts`.

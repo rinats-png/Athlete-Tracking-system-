@@ -4,7 +4,7 @@ import { TEST_CATALOG } from '../src/data/testCatalog'
 import { LIBRARY_PROCEDURES, OBSERVATION_PROCEDURES } from '../src/data/testProcedureLibrary'
 import { OBSERVATIONS } from '../src/data/observations'
 import { existsSync } from 'node:fs'
-import { TEST_IMAGE_NUMBER, testImageUrl } from '../src/data/testImages'
+import { SLUG_IMAGE_KEYS, TEST_IMAGE_NUMBER, testImageUrl } from '../src/data/testImages'
 import { EQUIPMENT_BY_ID } from '../src/data/equipment'
 import { procedureFor } from '../src/data/testProcedure'
 import { disciplineById } from '../src/data/sportProfiles'
@@ -53,7 +53,7 @@ test.describe('Testbibliothek — Daten', () => {
 
   test('jedes Bild gibt es als Datei und gehört zu einem Test oder Beobachtungswert', () => {
     const known = new Set([...TEST_CATALOG.map((t) => t.slug), ...OBSERVATIONS.map((o) => o.key)])
-    for (const key of Object.keys(TEST_IMAGE_NUMBER)) {
+    for (const key of [...Object.keys(TEST_IMAGE_NUMBER), ...SLUG_IMAGE_KEYS]) {
       expect(known.has(key), `Bild für unbekannten Schlüssel ${key}`).toBe(true)
       const url = testImageUrl(key)!
       expect(existsSync(`public${url}`), `${key}: ${url} fehlt`).toBe(true)
@@ -62,10 +62,15 @@ test.describe('Testbibliothek — Daten', () => {
 
   test('jede Vorschrift mit Bild-Schlüssel hat ein Bild, und keine Datei liegt ungenutzt', async () => {
     const { readdirSync } = await import('node:fs')
-    const used = new Set(Object.values(TEST_IMAGE_NUMBER).map((n) => `T${String(n).padStart(3, '0')}.webp`))
+    const used = new Set([...Object.values(TEST_IMAGE_NUMBER).map((n) => `T${String(n).padStart(3, '0')}.webp`), ...[...SLUG_IMAGE_KEYS].map((k) => `S_${k}.webp`)])
     const unused = readdirSync('public/testbilder').filter((f) => !used.has(f))
     expect(unused, `Bilder ohne Test: ${unused.join(', ')}`).toEqual([])
-    for (const key of Object.keys(procedures)) expect(TEST_IMAGE_NUMBER[key], `${key}: Bild`).toBeTruthy()
+    for (const key of Object.keys(procedures)) expect(testImageUrl(key), `${key}: Bild`).toBeTruthy()
+  })
+
+  test('jeder aktive Test und Beobachtungswert hat jetzt ein Bild', () => {
+    const missing = [...TEST_CATALOG.map((t) => t.slug), ...OBSERVATIONS.filter((o) => !o.retired).map((o) => o.key)].filter((k) => !testImageUrl(k))
+    expect(missing).toEqual([])
   })
 
   test('eine Vorschrift ohne Zeit- oder Streckenangabe zeigt keinen Platzhalter', () => {
