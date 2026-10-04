@@ -214,7 +214,11 @@
     "equipmentField": "Materiaal, tijdmeting",
     "conditionsSaved": "Opgeslagen.",
     "conditionsApplied": "Weggeschreven naar elke meting van deze dag.",
-    "conditionsMissing": "Nog niets ingevoerd. Zonder dit kan de app later niet zeggen of twee metingen vergelijkbaar zijn."
+    "conditionsMissing": "Nog niets ingevoerd. Zonder dit kan de app later niet zeggen of twee metingen vergelijkbaar zijn.",
+    "startTime": "Begin (tijdstip, optioneel)",
+    "breakMinutes": "Pauze tussen de rondes (minuten)",
+    "window": "{{start}}–{{end}}",
+    "kiosk": "Kiosk"
   },
   "consent": {
     "title": "Toestemming",
@@ -491,7 +495,8 @@
     "caveat": "De mediaan in plaats van het gemiddelde, omdat een afgebroken poging of een verkeerd ingetypte waarde een gemiddelde merkbaar verschuift en een mediaan niet. De middelste helft is het bereik waarin de helft van de groep zit.",
     "nextStation": "Volgend station",
     "soloTitle": "De groepstest hoort bij de trainersmodus",
-    "soloBody": "In de trainersmodus beheer je meerdere atleten en kun je ze om de beurt op één station testen."
+    "soloBody": "In de trainersmodus beheer je meerdere atleten en kun je ze om de beurt op één station testen.",
+    "toKiosk": "In kioskmodus vastleggen"
   },
   "coachDash": {
     "title": "Trainersgedeelte",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} dag achterstallig",
       "days_other": "{{count}} dagen achterstallig"
     }
+  },
+  "kiosk": {
+    "title": "Kioskmodus",
+    "chooseTest": "Test kiezen",
+    "exit": "Afsluiten",
+    "supportedNote": "De kiosk biedt tests waarvan de prestatiewaarde één getalveld is. Voor tests met meerdere velden per poging is er de groepstest.",
+    "unsupportedTitle": "Geen kiosk voor deze test",
+    "unsupportedBody": "De prestatiewaarde vraagt meerdere velden per poging. Daarvoor is de groepstest.",
+    "progress": "{{done}} van {{total}} gemeten",
+    "saved": "{{name}}: {{value}} {{unit}} opgeslagen",
+    "allDone": "Allen gemeten",
+    "allDoneBody": "Alle atleten op dit station hebben een waarde voor deze dag.",
+    "report": "Groepsrapport openen",
+    "nextOpen": "Volgende openstaande atleet",
+    "blocked": "geblokkeerd",
+    "attempt": "Poging {{n}}",
+    "best": "beste geldige poging",
+    "invalid": "ongeldig, telt niet mee",
+    "markInvalid": "Ongeldig",
+    "saveNext": "Opslaan, volgende atleet",
+    "backToList": "Terug naar lijst",
+    "rule": "De beste geldige poging telt. Ongeldige pogingen blijven bewaard maar worden niet gescoord.",
+    "offline": "Werkt zonder netwerk. Alles blijft op dit apparaat."
   }
 }

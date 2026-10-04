@@ -214,7 +214,11 @@
     "equipmentField": "Equipamiento, cronometraje",
     "conditionsSaved": "Guardado.",
     "conditionsApplied": "Escrito en cada medición de esta jornada.",
-    "conditionsMissing": "Aún no se ha introducido nada. Sin esto la app no podrá decir después si dos mediciones son comparables."
+    "conditionsMissing": "Aún no se ha introducido nada. Sin esto la app no podrá decir después si dos mediciones son comparables.",
+    "startTime": "Inicio (hora, opcional)",
+    "breakMinutes": "Pausa entre rondas (minutos)",
+    "window": "{{start}}–{{end}}",
+    "kiosk": "Quiosco"
   },
   "consent": {
     "title": "Consentimiento",
@@ -491,7 +495,8 @@
     "caveat": "La mediana en lugar de la media, porque un intento abortado o un valor mal tecleado arrastra la media de forma notable y la mediana no. La mitad central es el rango que contiene a la mitad del grupo.",
     "nextStation": "Siguiente estación",
     "soloTitle": "El test de grupo pertenece al modo entrenador",
-    "soloBody": "En modo entrenador gestionas varios atletas y puedes testarlos por turnos en una estación."
+    "soloBody": "En modo entrenador gestionas varios atletas y puedes testarlos por turnos en una estación.",
+    "toKiosk": "Registrar en modo quiosco"
   },
   "coachDash": {
     "title": "Área de entrenador",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} día de retraso",
       "days_other": "{{count}} días de retraso"
     }
+  },
+  "kiosk": {
+    "title": "Modo quiosco",
+    "chooseTest": "Elegir test",
+    "exit": "Salir",
+    "supportedNote": "El quiosco ofrece tests cuyo valor de rendimiento es un único campo numérico. Para tests con varios campos por intento está el test de grupo.",
+    "unsupportedTitle": "No hay quiosco para este test",
+    "unsupportedBody": "Su valor de rendimiento necesita varios campos por intento. Para eso está el test de grupo.",
+    "progress": "{{done}} de {{total}} medidos",
+    "saved": "{{name}}: {{value}} {{unit}} guardado",
+    "allDone": "Todos medidos",
+    "allDoneBody": "Todos los atletas de esta estación tienen un valor para este día.",
+    "report": "Abrir informe de grupo",
+    "nextOpen": "Siguiente atleta pendiente",
+    "blocked": "bloqueado",
+    "attempt": "Intento {{n}}",
+    "best": "mejor intento válido",
+    "invalid": "no válido, no cuenta",
+    "markInvalid": "No válido",
+    "saveNext": "Guardar, siguiente atleta",
+    "backToList": "Volver a la lista",
+    "rule": "Cuenta el mejor intento válido. Los intentos no válidos quedan guardados pero no se puntúan.",
+    "offline": "Funciona sin red. Todo queda en este dispositivo."
   }
 }

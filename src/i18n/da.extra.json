@@ -214,7 +214,11 @@
     "equipmentField": "Udstyr, tidtagning",
     "conditionsSaved": "Gemt.",
     "conditionsApplied": "Skrevet til hver måling på denne dag.",
-    "conditionsMissing": "Intet indtastet endnu. Uden det kan appen ikke senere sige, om to målinger er sammenlignelige."
+    "conditionsMissing": "Intet indtastet endnu. Uden det kan appen ikke senere sige, om to målinger er sammenlignelige.",
+    "startTime": "Start (klokkeslæt, valgfrit)",
+    "breakMinutes": "Pause mellem runderne (minutter)",
+    "window": "{{start}}–{{end}}",
+    "kiosk": "Kiosk"
   },
   "consent": {
     "title": "Samtykke",
@@ -491,7 +495,8 @@
     "caveat": "Medianen frem for gennemsnittet, fordi et afbrudt forsøg eller en tastefejl trækker et gennemsnit mærkbart og en median ikke. Den midterste halvdel er det interval, der rummer halvdelen af gruppen.",
     "nextStation": "Næste station",
     "soloTitle": "Gruppetesten hører til trænertilstand",
-    "soloBody": "I trænertilstand administrerer du flere atleter og kan teste dem ved én station efter tur."
+    "soloBody": "I trænertilstand administrerer du flere atleter og kan teste dem ved én station efter tur.",
+    "toKiosk": "Registrér i kioskfunktion"
   },
   "coachDash": {
     "title": "Trænerområde",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} dag overskredet",
       "days_other": "{{count}} dage overskredet"
     }
+  },
+  "kiosk": {
+    "title": "Kioskfunktion",
+    "chooseTest": "Vælg test",
+    "exit": "Afslut",
+    "supportedNote": "Kiosken tilbyder tests, hvor præstationsværdien er ét enkelt talfelt. Til tests med flere felter pr. forsøg findes gruppetesten.",
+    "unsupportedTitle": "Ingen kiosk til denne test",
+    "unsupportedBody": "Præstationsværdien kræver flere felter pr. forsøg. Det er det, gruppetesten er til.",
+    "progress": "{{done}} af {{total}} målt",
+    "saved": "{{name}}: {{value}} {{unit}} gemt",
+    "allDone": "Alle målt",
+    "allDoneBody": "Alle atleter på denne station har en værdi for dagen.",
+    "report": "Åbn grupperapport",
+    "nextOpen": "Næste åbne atlet",
+    "blocked": "spærret",
+    "attempt": "Forsøg {{n}}",
+    "best": "bedste gyldige forsøg",
+    "invalid": "ugyldigt, tæller ikke",
+    "markInvalid": "Ugyldigt",
+    "saveNext": "Gem, næste atlet",
+    "backToList": "Tilbage til listen",
+    "rule": "Det bedste gyldige forsøg tæller. Ugyldige forsøg bliver gemt, men ikke vurderet.",
+    "offline": "Fungerer uden net. Alt bliver på denne enhed."
   }
 }

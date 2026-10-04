@@ -23,6 +23,8 @@ const day: StoredTestDay = {
   testSlugs: ['countermovement_jump', 'shuttle_5_10_5', 'pull_up_max_reps', 'cooper_12min'],
   athleteIds: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
   stationMinutes: 20,
+  startTime: null,
+  breakMinutes: 0,
   conditions: { surface: '', temperatureC: null, equipment: '' },
   createdAt: '2026-09-01T09:00:00.000Z',
   completedAt: null,

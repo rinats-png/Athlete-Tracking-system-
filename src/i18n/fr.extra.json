@@ -214,7 +214,11 @@
     "equipmentField": "Matériel, chronométrage",
     "conditionsSaved": "Enregistré.",
     "conditionsApplied": "Reporté sur chaque mesure de cette journée.",
-    "conditionsMissing": "Rien de saisi pour l'instant. Sans cela, l'app ne pourra pas dire plus tard si deux mesures sont comparables."
+    "conditionsMissing": "Rien de saisi pour l'instant. Sans cela, l'app ne pourra pas dire plus tard si deux mesures sont comparables.",
+    "startTime": "Début (heure, facultatif)",
+    "breakMinutes": "Pause entre les tours (minutes)",
+    "window": "{{start}}–{{end}}",
+    "kiosk": "Kiosque"
   },
   "consent": {
     "title": "Consentement",
@@ -491,7 +495,8 @@
     "caveat": "La médiane plutôt que la moyenne, parce qu'une tentative interrompue ou une valeur mal saisie tire nettement une moyenne et pas une médiane. La moitié centrale est l'intervalle qui contient la moitié du groupe.",
     "nextStation": "Station suivante",
     "soloTitle": "Le test de groupe appartient au mode entraîneur",
-    "soloBody": "En mode entraîneur, tu gères plusieurs athlètes et peux les tester à une station, à tour de rôle."
+    "soloBody": "En mode entraîneur, tu gères plusieurs athlètes et peux les tester à une station, à tour de rôle.",
+    "toKiosk": "Saisir en mode kiosque"
   },
   "coachDash": {
     "title": "Espace entraîneur",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} jour de retard",
       "days_other": "{{count}} jours de retard"
     }
+  },
+  "kiosk": {
+    "title": "Mode kiosque",
+    "chooseTest": "Choisir un test",
+    "exit": "Quitter",
+    "supportedNote": "Le kiosque propose les tests dont la valeur de performance est un seul champ numérique. Pour les tests à plusieurs champs par essai, il y a le test de groupe.",
+    "unsupportedTitle": "Pas de kiosque pour ce test",
+    "unsupportedBody": "Sa valeur de performance demande plusieurs champs par essai. C'est le rôle du test de groupe.",
+    "progress": "{{done}} sur {{total}} mesurés",
+    "saved": "{{name}} : {{value}} {{unit}} enregistré",
+    "allDone": "Tous mesurés",
+    "allDoneBody": "Tous les athlètes de cette station ont une valeur pour ce jour.",
+    "report": "Ouvrir le rapport de groupe",
+    "nextOpen": "Prochain athlète ouvert",
+    "blocked": "bloqué",
+    "attempt": "Essai {{n}}",
+    "best": "meilleur essai valide",
+    "invalid": "invalide, ne compte pas",
+    "markInvalid": "Invalide",
+    "saveNext": "Enregistrer, athlète suivant",
+    "backToList": "Retour à la liste",
+    "rule": "Le meilleur essai valide compte. Les essais invalides restent enregistrés mais ne sont pas notés.",
+    "offline": "Fonctionne sans réseau. Tout reste sur cet appareil."
   }
 }

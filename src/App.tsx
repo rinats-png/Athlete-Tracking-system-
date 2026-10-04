@@ -147,6 +147,7 @@ const router = createBrowserRouter([
       { path: 'uebersicht', element: <OverviewScreen /> },
       { path: 'mehr', element: screen(() => import('@/features/more/MoreScreen'), 'MoreScreen') },
       { path: 'trainer/gruppentest', element: screen(() => import('@/features/coach/GroupTestScreen'), 'GroupTestScreen') },
+      { path: 'trainer/kiosk', element: screen(() => import('@/features/coach/KioskScreen'), 'KioskScreen') },
       { path: 'trainer/testtag', element: screen(() => import('@/features/coach/TestDayScreen'), 'TestDayScreen') },
       { path: 'trainer/testtag/:id', element: screen(() => import('@/features/coach/TestDayDetailScreen'), 'TestDayDetailScreen') },
       { path: 'trainer/vergleich', element: screen(() => import('@/features/coach/AthleteCompare'), 'AthleteCompare') },

@@ -31,6 +31,15 @@ export function AppShell() {
   const { mode, storageBlocked, role } = useAppData()
   const items = navItemsFor(role)
   const active = navKeyForPath(pathname, role)
+  // Der Kiosk-Modus ist ein eigener Raum: keine Kopfzeile, keine Leiste, kein Fächer.
+  const kiosk = pathname.startsWith('/trainer/kiosk')
+  if (kiosk) {
+    return (
+      <main id="main" className="min-h-dvh">
+        <Outlet />
+      </main>
+    )
+  }
 
   return (
     <div className="flex min-h-dvh flex-col">

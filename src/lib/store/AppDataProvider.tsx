@@ -46,6 +46,7 @@ import {
 import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
 import { isBlankPlaceholder } from './placeholder'
 import { isEmptyEntry } from '@/domain/diary'
+import type { KioskResult } from '@/domain/kiosk'
 import { mergeSeries, type SeriesRow } from '@/lib/supabase/series'
 import { mergeHealth, type IncomingHealth } from '@/lib/health/sync'
 import { FOCUS_HARD_LIMIT } from '@/domain/trainingFocus'
@@ -283,6 +284,19 @@ export interface AppDataValue {
     values: Record<string, number>[],
     conditions?: { surface: string; temperatureC: number | null; equipment: string },
   ) => number
+  /**
+   * Kiosk-Modus: das Ergebnis EINES Athleten (nicht des aktiven) mit allen
+   * Versuchen. Ungültige bleiben in `attempts` und stehen in
+   * `protocol.invalidAttempts`; `values` ist der beste gültige Versuch.
+   * Gibt zurück, ob geschrieben wurde.
+   */
+  recordKioskResult: (
+    athleteId: string,
+    testSlug: string,
+    performedAt: string,
+    result: KioskResult,
+    conditions?: { surface: string; temperatureC: number | null; equipment: string },
+  ) => boolean
   saveAssessment: (assessment: StoredAssessment) => void
   /** Testtage des Geräts. Gehören keinem einzelnen Athleten. */
   testDays: StoredTestDay[]
@@ -949,6 +963,61 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         })
         if (written > 0) commitStore({ ...source, athletes })
         return written
+      },
+      recordKioskResult: (athleteId, testSlug, performedAt, res, conditions) => {
+        const test = getTest(testSlug)
+        const source = storeRef.current
+        const athlete = source.athletes.find((a) => a.id === athleteId)
+        if (!test || !athlete || res.attempts.length === 0) return false
+        const view = {
+          branding: source.branding,
+          profile: athlete.profile,
+          biometrics: athlete.biometrics,
+          assessments: athlete.assessments,
+          results: athlete.results,
+        }
+        const context = {
+          bodyWeightKg: bodyWeightAt(view, performedAt),
+          ageYears: ageFromBirthDate(athlete.profile.birthDate),
+          sex: athlete.profile.sex,
+        }
+        const metrics = deriveMetrics(test, res.values, context)
+        const result: StoredResult = {
+          id: newId(),
+          testSlug,
+          performedAt,
+          values: res.values,
+          metrics,
+          score: primaryValue(test, res.values, metrics),
+          bodyWeightKg: context.bodyWeightKg,
+          ageYears: context.ageYears,
+          sex: context.sex,
+          assessmentId: null,
+          attempts: res.attempts,
+          attemptSelection: 'best',
+          context: { ...EMPTY_CONTEXT, ...(conditions ?? {}) },
+          protocol: { ...EMPTY_PROTOCOL, invalidAttempts: res.invalidIndexes.map((index) => ({ index, reason: '' })) },
+          notes: undefined,
+          photo: null,
+          createdAt: new Date().toISOString(),
+        }
+        const entry: ValidatedAudit = {
+          id: newId(),
+          at: new Date().toISOString(),
+          action: 'created',
+          entity: 'result',
+          entityId: result.id,
+          label: test.name.de,
+        }
+        commitStore({
+          ...source,
+          athletes: source.athletes.map((a) =>
+            a.id === athleteId
+              ? { ...a, results: [result, ...a.results].sort((x, y) => y.performedAt.localeCompare(x.performedAt)), audit: [entry, ...a.audit].slice(0, AUDIT_LIMIT) }
+              : a,
+          ),
+        })
+        return true
       },
       setResultPhoto: (id, dataUrl) => {
         const target = data.results.find((r) => r.id === id)

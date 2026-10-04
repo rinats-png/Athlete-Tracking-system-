@@ -214,7 +214,11 @@
     "equipmentField": "Utrustning, tidtagning",
     "conditionsSaved": "Sparat.",
     "conditionsApplied": "Skrivet till varje mätning den här dagen.",
-    "conditionsMissing": "Inget angivet ännu. Utan det kan appen inte senare säga om två mätningar är jämförbara."
+    "conditionsMissing": "Inget angivet ännu. Utan det kan appen inte senare säga om två mätningar är jämförbara.",
+    "startTime": "Start (klockslag, valfritt)",
+    "breakMinutes": "Paus mellan varven (minuter)",
+    "window": "{{start}}–{{end}}",
+    "kiosk": "Kiosk"
   },
   "consent": {
     "title": "Samtycke",
@@ -491,7 +495,8 @@
     "caveat": "Median i stället för medelvärde, eftersom ett avbrutet försök eller ett felskrivet värde drar ett medelvärde märkbart men inte en median. Mittersta hälften är det intervall som rymmer halva gruppen.",
     "nextStation": "Nästa station",
     "soloTitle": "Grupptestet hör till tränarläget",
-    "soloBody": "I tränarläget hanterar du flera atleter och kan testa dem vid en station i tur och ordning."
+    "soloBody": "I tränarläget hanterar du flera atleter och kan testa dem vid en station i tur och ordning.",
+    "toKiosk": "Registrera i kioskläge"
   },
   "coachDash": {
     "title": "Tränarområde",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} dag försenad",
       "days_other": "{{count}} dagar försenad"
     }
+  },
+  "kiosk": {
+    "title": "Kioskläge",
+    "chooseTest": "Välj test",
+    "exit": "Avsluta",
+    "supportedNote": "Kiosken erbjuder test vars prestationsvärde är ett enda sifferfält. För test med flera fält per försök finns grupptestet.",
+    "unsupportedTitle": "Ingen kiosk för det här testet",
+    "unsupportedBody": "Prestationsvärdet kräver flera fält per försök. Det är vad grupptestet är till för.",
+    "progress": "{{done}} av {{total}} mätta",
+    "saved": "{{name}}: {{value}} {{unit}} sparat",
+    "allDone": "Alla mätta",
+    "allDoneBody": "Alla atleter vid den här stationen har ett värde för dagen.",
+    "report": "Öppna grupprapport",
+    "nextOpen": "Nästa öppna atlet",
+    "blocked": "spärrad",
+    "attempt": "Försök {{n}}",
+    "best": "bästa giltiga försök",
+    "invalid": "ogiltigt, räknas inte",
+    "markInvalid": "Ogiltigt",
+    "saveNext": "Spara, nästa atlet",
+    "backToList": "Tillbaka till listan",
+    "rule": "Det bästa giltiga försöket räknas. Ogiltiga försök sparas men poängsätts inte.",
+    "offline": "Fungerar utan nät. Allt stannar på den här enheten."
   }
 }

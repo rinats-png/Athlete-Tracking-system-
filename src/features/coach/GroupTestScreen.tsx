@@ -14,6 +14,7 @@ import { useBilling } from '@/features/billing/BillingProvider'
 import { LimitNotice } from '@/features/billing/CoachPlanPanel'
 import { TEST_CATALOG, getTest } from '@/data/testCatalog'
 import { groupStats, MIN_FOR_SPREAD } from '@/domain/groupStats'
+import { kioskSupported } from '@/domain/kiosk'
 import { formatNumber } from '@/lib/format'
 import type { AppLocale } from '@/i18n/locales'
 import { pick } from '@/i18n/pick'
@@ -153,6 +154,12 @@ export function GroupTestScreen() {
         <Panel className="mt-4">
           <p className="px-4 py-6 text-[14px] text-ink-secondary">{t('group.noAthletes')}</p>
         </Panel>
+      )}
+
+      {test && kioskSupported(slug) && active.length > 0 && written == null && (
+        <Button asChild variant="outline" size="md" className="mt-4">
+          <Link to={`/trainer/kiosk?test=${slug}&tag=${day}`} data-testid="group-to-kiosk">{t('group.toKiosk')}</Link>
+        </Button>
       )}
 
       {test && active.length > 0 && written == null && (

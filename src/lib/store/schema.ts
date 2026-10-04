@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 30
+export const CURRENT_SCHEMA_VERSION = 31
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -498,6 +498,10 @@ const testDaySchema = z.object({
   athleteIds: z.array(z.string().min(1)).max(60).default([]),
   /** Veranschlagte Minuten je Station und Gruppe. */
   stationMinutes: z.number().int().min(5).max(120).default(20),
+  /** Beginn des Testtags, `HH:MM`. Ohne Angabe gibt es Minuten nach Start statt Uhrzeiten. */
+  startTime: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/).nullable().default(null),
+  /** Pause zwischen zwei Runden, Minuten. */
+  breakMinutes: z.number().int().min(0).max(60).default(0),
   /**
    * Die Bedingungen, die für ALLE an diesem Tag gelten.
    *
@@ -1660,6 +1664,16 @@ export const MIGRATIONS: Migration[] = [
       ...data,
       version: 30,
       athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, shareCheckins: false })),
+    }),
+  },
+  {
+    from: 30,
+    to: 31,
+    describe: 'Testtag: Startzeit und Pause zwischen den Runden (leer)',
+    run: (data: any) => ({
+      ...data,
+      version: 31,
+      testDays: (data.testDays ?? []).map((d: any) => ({ ...d, startTime: d.startTime ?? null, breakMinutes: d.breakMinutes ?? 0 })),
     }),
   },
 ]

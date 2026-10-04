@@ -214,7 +214,11 @@
     "equipmentField": "Ausrüstung, Zeitnahme",
     "conditionsSaved": "Gespeichert.",
     "conditionsApplied": "Wird auf jede Messung dieses Tages geschrieben.",
-    "conditionsMissing": "Noch nichts eingetragen. Ohne diese Angaben kann die App später nicht sagen, ob zwei Messungen vergleichbar sind."
+    "conditionsMissing": "Noch nichts eingetragen. Ohne diese Angaben kann die App später nicht sagen, ob zwei Messungen vergleichbar sind.",
+    "startTime": "Beginn (Uhrzeit, optional)",
+    "breakMinutes": "Pause zwischen den Runden (Minuten)",
+    "window": "{{start}}–{{end}} Uhr",
+    "kiosk": "Kiosk"
   },
   "consent": {
     "title": "Einwilligung",
@@ -491,7 +495,8 @@
     "caveat": "Der Median statt des Mittelwerts, weil ein abgebrochener Versuch oder ein vertippter Wert ein Mittel spürbar zieht und den Median nicht. Die mittlere Hälfte ist die Spanne, in der die Hälfte der Gruppe liegt.",
     "nextStation": "Nächste Station",
     "soloTitle": "Der Gruppentest gehört zum Trainermodus",
-    "soloBody": "Im Trainermodus verwaltest du mehrere Athleten und kannst sie an einer Station nacheinander testen."
+    "soloBody": "Im Trainermodus verwaltest du mehrere Athleten und kannst sie an einer Station nacheinander testen.",
+    "toKiosk": "Im Kiosk-Modus erfassen"
   },
   "coachDash": {
     "title": "Trainerbereich",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} Tag überfällig",
       "days_other": "{{count}} Tage überfällig"
     }
+  },
+  "kiosk": {
+    "title": "Kiosk-Modus",
+    "chooseTest": "Test wählen",
+    "exit": "Beenden",
+    "supportedNote": "Im Kiosk stehen Tests, deren Leistungswert ein einzelnes Zahlenfeld ist. Für Tests mit mehreren Feldern je Versuch gibt es den Gruppentest.",
+    "unsupportedTitle": "Für diesen Test gibt es den Kiosk nicht",
+    "unsupportedBody": "Sein Leistungswert braucht mehrere Felder je Versuch. Dafür ist der Gruppentest da.",
+    "progress": "{{done}} von {{total}} gemessen",
+    "saved": "{{name}}: {{value}} {{unit}} gespeichert",
+    "allDone": "Alle gemessen",
+    "allDoneBody": "Alle Athleten dieser Station haben einen Wert für diesen Tag.",
+    "report": "Gruppenbericht öffnen",
+    "nextOpen": "Nächster offener Athlet",
+    "blocked": "gesperrt",
+    "attempt": "Versuch {{n}}",
+    "best": "bester gültiger Versuch",
+    "invalid": "ungültig, zählt nicht",
+    "markInvalid": "Ungültig",
+    "saveNext": "Speichern, nächster Athlet",
+    "backToList": "Zur Liste",
+    "rule": "Der beste gültige Versuch zählt. Ungültige Versuche bleiben gespeichert, werden aber nicht gewertet.",
+    "offline": "Läuft ohne Netz. Alles bleibt auf diesem Gerät."
   }
 }

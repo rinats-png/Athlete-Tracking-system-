@@ -81,7 +81,7 @@ export function runPlan(day: StoredTestDay): RunPlan {
       const station = stations[(group + round) % stations.length]
       slots.push({
         round: round + 1,
-        startMinute: round * day.stationMinutes,
+        startMinute: round * (day.stationMinutes + (day.breakMinutes ?? 0)),
         stationSlug: station.slug,
         athleteIds: groups[group],
       })
@@ -92,8 +92,23 @@ export function runPlan(day: StoredTestDay): RunPlan {
     stations,
     groups,
     slots,
-    totalMinutes: stations.length * day.stationMinutes,
+    totalMinutes: stations.length * day.stationMinutes + Math.max(0, stations.length - 1) * (day.breakMinutes ?? 0),
   }
+}
+
+const pad = (n: number) => String(n).padStart(2, '0')
+
+/**
+ * Das Zeitfenster einer Runde als Uhrzeit, oder null ohne Startzeit.
+ * Runde ab 1; die Pause liegt zwischen den Runden, nicht danach.
+ */
+export function roundWindow(day: Pick<StoredTestDay, 'startTime' | 'stationMinutes' | 'breakMinutes'>, round: number): { start: string; end: string } | null {
+  if (!day.startTime || round < 1) return null
+  const [h, m] = day.startTime.split(':').map(Number)
+  const startMin = h * 60 + m + (round - 1) * (day.stationMinutes + (day.breakMinutes ?? 0))
+  const endMin = startMin + day.stationMinutes
+  const fmt = (x: number) => `${pad(Math.floor(x / 60) % 24)}:${pad(x % 60)}`
+  return { start: fmt(startMin), end: fmt(endMin) }
 }
 
 /** Wo eine Gruppe in einer bestimmten Runde steht. */

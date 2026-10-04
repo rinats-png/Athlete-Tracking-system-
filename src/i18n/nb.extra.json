@@ -214,7 +214,11 @@
     "equipmentField": "Utstyr, tidtaking",
     "conditionsSaved": "Lagret.",
     "conditionsApplied": "Skrevet til hver måling denne dagen.",
-    "conditionsMissing": "Ingenting lagt inn ennå. Uten dette kan appen ikke senere si om to målinger er sammenlignbare."
+    "conditionsMissing": "Ingenting lagt inn ennå. Uten dette kan appen ikke senere si om to målinger er sammenlignbare.",
+    "startTime": "Start (klokkeslett, valgfritt)",
+    "breakMinutes": "Pause mellom rundene (minutter)",
+    "window": "{{start}}–{{end}}",
+    "kiosk": "Kiosk"
   },
   "consent": {
     "title": "Samtykke",
@@ -491,7 +495,8 @@
     "caveat": "Median framfor gjennomsnitt, fordi et avbrutt forsøk eller en feiltastet verdi trekker et snitt merkbart, men ikke en median. Den midterste halvdelen er spennet som rommer halve gruppen.",
     "nextStation": "Neste stasjon",
     "soloTitle": "Gruppetesten hører til trenermodus",
-    "soloBody": "I trenermodus administrerer du flere utøvere og kan teste dem på én stasjon etter tur."
+    "soloBody": "I trenermodus administrerer du flere utøvere og kan teste dem på én stasjon etter tur.",
+    "toKiosk": "Registrer i kioskmodus"
   },
   "coachDash": {
     "title": "Trenerområde",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} dag forfalt",
       "days_other": "{{count}} dager forfalt"
     }
+  },
+  "kiosk": {
+    "title": "Kioskmodus",
+    "chooseTest": "Velg test",
+    "exit": "Avslutt",
+    "supportedNote": "Kiosken tilbyr tester der prestasjonsverdien er ett enkelt tallfelt. For tester med flere felt per forsøk finnes gruppetesten.",
+    "unsupportedTitle": "Ingen kiosk for denne testen",
+    "unsupportedBody": "Prestasjonsverdien trenger flere felt per forsøk. Det er det gruppetesten er til for.",
+    "progress": "{{done}} av {{total}} målt",
+    "saved": "{{name}}: {{value}} {{unit}} lagret",
+    "allDone": "Alle målt",
+    "allDoneBody": "Alle utøvere på denne stasjonen har en verdi for dagen.",
+    "report": "Åpne grupperapport",
+    "nextOpen": "Neste åpne utøver",
+    "blocked": "sperret",
+    "attempt": "Forsøk {{n}}",
+    "best": "beste gyldige forsøk",
+    "invalid": "ugyldig, teller ikke",
+    "markInvalid": "Ugyldig",
+    "saveNext": "Lagre, neste utøver",
+    "backToList": "Tilbake til listen",
+    "rule": "Det beste gyldige forsøket teller. Ugyldige forsøk blir lagret, men ikke vurdert.",
+    "offline": "Fungerer uten nett. Alt blir på denne enheten."
   }
 }

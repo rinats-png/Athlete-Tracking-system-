@@ -35,6 +35,8 @@ export function TestDayScreen() {
   const [batterySlug, setBatterySlug] = useState('')
   const [picked, setPicked] = useState<string[]>(() => roster.map((a) => a.id))
   const [stationMinutes, setStationMinutes] = useState(20)
+  const [startTime, setStartTime] = useState('')
+  const [breakMinutes, setBreakMinutes] = useState(0)
 
   const battery = TEST_BATTERIES.find((b) => b.slug === batterySlug) ?? null
   const stations = battery?.testSlugs ?? []
@@ -51,6 +53,8 @@ export function TestDayScreen() {
       testSlugs: stations,
       athleteIds: picked,
       stationMinutes,
+      startTime: /^([01]\d|2[0-3]):[0-5]\d$/.test(startTime) ? startTime : null,
+      breakMinutes,
       conditions: { surface: '', temperatureC: null, equipment: '' },
       createdAt: new Date().toISOString(),
       completedAt: null,
@@ -128,6 +132,28 @@ export function TestDayScreen() {
                 max={120}
                 value={stationMinutes}
                 onChange={(e) => setStationMinutes(Number(e.target.value) || 20)}
+                className="mt-1 min-h-11 w-full border border-line bg-transparent px-3 text-[14px]"
+              />
+            </label>
+            <label className="text-[13px]">
+              <span className="label-tag">{t('testDay.startTime')}</span>
+              <input
+                type="time"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                data-testid="testday-start-time"
+                className="mt-1 min-h-11 w-full border border-line bg-transparent px-3 text-[14px]"
+              />
+            </label>
+            <label className="text-[13px]">
+              <span className="label-tag">{t('testDay.breakMinutes')}</span>
+              <input
+                type="number"
+                min={0}
+                max={60}
+                value={breakMinutes}
+                onChange={(e) => setBreakMinutes(Math.max(0, Math.min(60, Number(e.target.value) || 0)))}
+                data-testid="testday-break"
                 className="mt-1 min-h-11 w-full border border-line bg-transparent px-3 text-[14px]"
               />
             </label>

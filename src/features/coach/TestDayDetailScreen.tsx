@@ -9,7 +9,8 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { getTest } from '@/data/testCatalog'
-import { progressOf, runPlan, stationForGroup } from '@/domain/testDay'
+import { progressOf, roundWindow, runPlan, stationForGroup } from '@/domain/testDay'
+import { kioskSupported } from '@/domain/kiosk'
 import { procedureFor } from '@/data/testProcedure'
 import { formatDate } from '@/lib/format'
 import type { AppLocale } from '@/types/domain'
@@ -94,8 +95,11 @@ export function TestDayDetailScreen() {
                   <tr key={round} className="border-b border-line/60">
                     <td className="px-3 py-2">
                       <span className="readout">{round}</span>
-                      <span className="ml-2 text-[11px] text-ink-muted">
-                        {t('testDay.fromMinute', { minutes: roundIndex * day.stationMinutes })}
+                      <span className="ml-2 text-[11px] text-ink-muted" data-testid={`round-window-${round}`}>
+                        {(() => {
+                          const w = roundWindow(day, round)
+                          return w ? t('testDay.window', { start: w.start, end: w.end }) : t('testDay.fromMinute', { minutes: roundIndex * (day.stationMinutes + (day.breakMinutes ?? 0)) })
+                        })()}
                       </span>
                     </td>
                     {plan.groups.map((_, groupIndex) => {
@@ -189,12 +193,21 @@ export function TestDayDetailScreen() {
                     })}
                   </p>
                 </div>
-                <Button asChild variant={done ? 'ghost' : 'outline'} size="sm">
-                  <Link to={`/trainer/gruppentest?test=${station.slug}&tag=${day.plannedOn}`}>
-                    {done && <Check size={14} aria-hidden />}
-                    {t('testDay.capture')}
-                  </Link>
-                </Button>
+                <div className="flex flex-wrap justify-end gap-2">
+                  {kioskSupported(station.slug) && (
+                    <Button asChild variant="primary" size="sm">
+                      <Link to={`/trainer/kiosk?test=${station.slug}&tag=${day.plannedOn}`} data-testid={`kiosk-link-${station.slug}`}>
+                        {t('testDay.kiosk')}
+                      </Link>
+                    </Button>
+                  )}
+                  <Button asChild variant={done ? 'ghost' : 'outline'} size="sm">
+                    <Link to={`/trainer/gruppentest?test=${station.slug}&tag=${day.plannedOn}`}>
+                      {done && <Check size={14} aria-hidden />}
+                      {t('testDay.capture')}
+                    </Link>
+                  </Button>
+                </div>
               </li>
             )
           })}

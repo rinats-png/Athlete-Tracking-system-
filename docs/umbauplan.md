@@ -23,7 +23,7 @@
 | 1 | **Trainer:** Navigation (Today, Athleten, Test, Team, Mehr), Trainer-Today, Team-Hub, Mehr-Seite, Wächter-Test | ✅ gebaut |
 | 2 | **Athlet:** Navigation (Heute, Leistung, Test, Fuel, Mehr), Heute, Leistungsprofil mit Assessment Coverage und Data Confidence | ✅ gebaut |
 | 3 | Check-in (Migration), Trainer-Check-ins mit Baseline, Wochenrückblick | ✅ gebaut; Teilen mit dem Trainer hinter Schalter bis zur Freigabe |
-| 4 | Kiosk-Modus und Testtag-Planer | offen |
+| 4 | Kiosk-Modus und Testtag-Planer (Startzeit, Pause, Zeitfenster) | ✅ gebaut |
 | 5 | Ask KYDON, Coach Copilot (erst Werkzeugschicht, dann Sprachmodell) | offen |
 | 6 | Fuel-Vervollständigung mit Evidence Drawer | offen |
 
@@ -53,3 +53,11 @@ Jede neue Funktion besteht die Prüfung aus Doktrin §50.
 - **Teilen mit dem Trainer:** Schalter «Meinem Trainer zeigen» (aus), nur mit Bau-Schalter `VITE_CHECKIN_SHARE=on`. Serverseitig `supabase/migrations/20261004100000_shared_checkins.sql`: Tabelle mit RLS (nur Eigentümer), Lesen für Trainer nur über `coach_shared_checkins()` bei aktiver Verknüpfung, Aufbewahrung 90 Tage, Kontolöschung räumt ab. **Nicht ausgerollt, Datenschutztext nur als Entwurf** (`docs/checkin-datenschutz.md`).
 - **Wochenrückblick** (`/woche`, `domain/weekReview.ts`): Belastung neben dem Mittel der vier Wochen davor, Check-in-Tage, neue Messungen, größter belegter Fortschritt (über der Messschwankung), überfällige Tests. Keine Streaks, keine Abzeichen.
 - **Noch nicht:** der Montagsbrief als Push. Er braucht ein neues Push-Thema und eine Änderung der Edge Function `push`, das liegt bei dir zum Ausrollen. Bis dahin ist der Rückblick in der App erreichbar (Heute → «Deine Woche ansehen», Mehr).
+
+## Etappe 4: was gebaut ist
+
+- **Kiosk-Modus** (`features/coach/KioskScreen.tsx`, Logik `domain/kiosk.ts`, Adresse `/trainer/kiosk?test=…&tag=…`): ohne Kopfzeile, Leiste und Fächer. Athlet antippen oder «Nächster offener Athlet», bis zu drei Versuche, ungültige markieren, der beste GÜLTIGE zählt, «Speichern, nächster Athlet» führt ohne Umweg weiter. Große Eingabeflächen, läuft ohne Netz, alles bleibt auf dem Gerät. Gesperrte Athleten (fehlende Einwilligung, abgelaufene Frist) bleiben gesperrt, wie im Gruppentest.
+- **Gespeichert** wird mit den Rohversuchen (`attempts`), ungültige in `protocol.invalidAttempts` markiert (nichts wird gelöscht), `values` ist der beste gültige Versuch, `attemptSelection` ist `best`; die Bedingungen des Testtags gelten für jeden Wert (neue Provider-Aktion `recordKioskResult`).
+- **Nur für Tests mit einem Zahlenfeld.** Bei mehreren Feldern je Versuch (zum Beispiel 1RM aus Last und Wiederholungen) bleibt der Gruppentest zuständig; der Kiosk sagt das.
+- **Testtag-Planer:** Beginn (Uhrzeit) und Pause zwischen den Runden (Schema 31). Der Plan zeigt Uhrzeiten je Runde («09:25–09:45 Uhr») und rechnet die Pause in die Gesamtdauer; an jeder Station steht «Kiosk» neben «Erfassen». Auch im Gruppentest gibt es den Weg in den Kiosk.
+- **Noch nicht:** QR-Code zum Wählen des Athleten (braucht die Kamera und eine eigene Prüfung der Einwilligung), spätere Synchronisierung zwischen mehreren Kiosk-Geräten, Rotation nach Trainerzahl und Ausrüstung.

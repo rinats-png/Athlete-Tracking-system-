@@ -214,7 +214,11 @@
     "equipmentField": "Equipment, timing",
     "conditionsSaved": "Saved.",
     "conditionsApplied": "Written to every measurement of this day.",
-    "conditionsMissing": "Nothing entered yet. Without it the app cannot later say whether two measurements are comparable."
+    "conditionsMissing": "Nothing entered yet. Without it the app cannot later say whether two measurements are comparable.",
+    "startTime": "Start (time of day, optional)",
+    "breakMinutes": "Break between rounds (minutes)",
+    "window": "{{start}}–{{end}}",
+    "kiosk": "Kiosk"
   },
   "consent": {
     "title": "Consent",
@@ -491,7 +495,8 @@
     "caveat": "The median rather than the mean, because an aborted attempt or a mistyped value pulls a mean noticeably and a median not. The middle half is the range holding half the group.",
     "nextStation": "Next station",
     "soloTitle": "The group test belongs to coach mode",
-    "soloBody": "In coach mode you manage several athletes and can test them at one station in turn."
+    "soloBody": "In coach mode you manage several athletes and can test them at one station in turn.",
+    "toKiosk": "Record in kiosk mode"
   },
   "coachDash": {
     "title": "Coach area",
@@ -2708,5 +2713,28 @@
       "days_one": "{{count}} day overdue",
       "days_other": "{{count}} days overdue"
     }
+  },
+  "kiosk": {
+    "title": "Kiosk mode",
+    "chooseTest": "Choose test",
+    "exit": "Exit",
+    "supportedNote": "The kiosk offers tests whose performance value is a single number field. For tests with several fields per attempt there is the group test.",
+    "unsupportedTitle": "No kiosk for this test",
+    "unsupportedBody": "Its performance value needs several fields per attempt. That is what the group test is for.",
+    "progress": "{{done}} of {{total}} measured",
+    "saved": "{{name}}: {{value}} {{unit}} saved",
+    "allDone": "All measured",
+    "allDoneBody": "All athletes at this station have a value for this day.",
+    "report": "Open group report",
+    "nextOpen": "Next open athlete",
+    "blocked": "locked",
+    "attempt": "Attempt {{n}}",
+    "best": "best valid attempt",
+    "invalid": "invalid, does not count",
+    "markInvalid": "Invalid",
+    "saveNext": "Save, next athlete",
+    "backToList": "Back to list",
+    "rule": "The best valid attempt counts. Invalid attempts stay saved but are not scored.",
+    "offline": "Works offline. Everything stays on this device."
   }
 }
