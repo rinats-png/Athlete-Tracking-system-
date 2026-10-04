@@ -2916,7 +2916,8 @@
       "athlete": "Inneholder alt fra mandagsbrevet, også belastning og innsjekker.",
       "parents": "Uten innsjekker: egenvurderinger om støl og stress går bare til utøveren.",
       "association": "Bare datagrunnlag, funn og neste måling. Ingen dagbok-, belastnings- eller innsjekkdata."
-    }
+    },
+    "block": "Treningsblokk: uke {{week}} av {{weeks}}, {{done}} av {{planned}} økter denne uken fullført."
   },
   "plan": {
     "eyebrow": "Plan",
@@ -3101,7 +3102,16 @@
       "unknown": "Målefeilen er ikke kjent ennå, endringen kan ikke vurderes.",
       "note": "Rapporten setter plan og måling side om side. Den sier ikke om planen forårsaket en endring."
     },
-    "close": "Avslutt blokk"
+    "close": "Avslutt blokk",
+    "next": {
+      "title": "Neste blokk",
+      "phase": "«{{phase}}» foreslås som fase for neste blokk. Du kan endre den.",
+      "unproven": "For disse testene er ingen forbedring over målefeilen påvist: {{tests}}.",
+      "missing": "Disse målingene ved blokkens slutt mangler ennå: {{tests}}.",
+      "note": "Hvilke hull som er åpne, går fram av de nye målingene når du planlegger. Rapporten foreslår ikke treningsinnhold.",
+      "button": "Planlegg neste blokk"
+    },
+    "closedNote": "Denne blokken er avsluttet. Du kan bare se på den."
   },
   "player": {
     "eyebrow": "Økt",

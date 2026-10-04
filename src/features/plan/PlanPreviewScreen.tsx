@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -68,7 +68,9 @@ export function PlanPreviewScreen() {
   const mode = trainingPlanMode()
   const profile = data.profile
   const family = familyOfDiscipline(profile.disciplineId)
-  const [phase, setPhase] = useState<Phase>('BUILD')
+  const [params] = useSearchParams()
+  const wanted = params.get('phase')
+  const [phase, setPhase] = useState<Phase>(PHASES.includes(wanted as Phase) ? (wanted as Phase) : 'BUILD')
   const [available, setAvailable] = useState<number[]>([1, 2, 3, 4, 6])
   const [hard, setHard] = useState<number[]>([])
 

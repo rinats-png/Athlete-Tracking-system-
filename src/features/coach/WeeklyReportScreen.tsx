@@ -31,7 +31,7 @@ export function WeeklyReportScreen() {
   const athlete = active.find((a) => a.id === id) ?? active[0] ?? null
 
   const report = useMemo(
-    () => (athlete ? weeklyReport({ athlete: { profile: athlete.profile, results: athlete.results, workouts: athlete.workouts, diary: athlete.diary }, reminders: reminderSettingsOf(athlete.profile) }, recipient) : null),
+    () => (athlete ? weeklyReport({ athlete: { profile: athlete.profile, results: athlete.results, workouts: athlete.workouts, diary: athlete.diary }, trainingBlocks: athlete.trainingBlocks, reminders: reminderSettingsOf(athlete.profile) }, recipient) : null),
     [athlete, recipient],
   )
   if (!athlete || !report) return <EmptyState title={t('coachDash.emptyTitle')} body={t('coachDash.emptyBody')} />
@@ -64,6 +64,8 @@ export function WeeklyReportScreen() {
       }
       case 'countdown':
         return t(p.name ? 'brief.plan.countdownNamed' : 'brief.plan.countdown', { days: Number(p.days), name: String(p.name) })
+      case 'block':
+        return t('weeklyReport.block', { week: Number(p.week), weeks: Number(p.weeks), done: Number(p.done), planned: Number(p.planned) })
       case 'nextOverdue':
         return t('brief.next.overdue', { name: name(p.slug), days: Number(p.days) })
       case 'nextMissing':

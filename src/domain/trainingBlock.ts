@@ -156,3 +156,31 @@ export function blockReport(block: StoredTrainingBlock, results: StoredResult[],
   })
   return { planned, done, metrics, finished }
 }
+
+/** Der Block, der gezeigt wird: der aktive, sonst der zuletzt geänderte abgeschlossene. */
+export function shownBlock(blocks: StoredTrainingBlock[]): StoredTrainingBlock | null {
+  return blocks.find((b) => b.status === 'active') ?? [...blocks].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))[0] ?? null
+}
+
+/** Reihenfolge der Phasen für den nächsten Block. Der Taper hängt an einem Wettkampftermin und wird nicht vorgeschlagen. */
+const NEXT_PHASE: Record<Phase, Phase> = { GPP: 'BUILD', BUILD: 'SPECIFIC', SPECIFIC: 'SPECIFIC', TAPER: 'TRANSITION', TRANSITION: 'GPP' }
+
+export interface NextBlockSuggestion {
+  phase: Phase
+  /** Messungen, die den Block nicht belegt verändert haben oder noch fehlen: bleiben als offene Lücke. */
+  unproven: string[]
+  missing: string[]
+}
+
+/**
+ * ADAPT: was für den nächsten Block bleibt. Die Lücken selbst kommen beim
+ * Planen aus den neuen Messungen (`requirementGap`); hier steht nur, welche
+ * Retests nichts belegt haben oder fehlen, und die nächste Phase als Vorschlag.
+ */
+export function nextBlockSuggestion(block: StoredTrainingBlock, report: BlockReport): NextBlockSuggestion {
+  return {
+    phase: NEXT_PHASE[block.phase],
+    unproven: report.metrics.filter((m) => m.status === 'measured' && m.report && m.report.verdict !== 'better').map((m) => m.metric),
+    missing: report.metrics.filter((m) => m.status === 'open').map((m) => m.metric),
+  }
+}

@@ -2916,7 +2916,8 @@
       "athlete": "Innehåller allt från måndagsbrevet, även belastning och incheckningar.",
       "parents": "Utan incheckningar: självskattningar om träningsvärk och stress går bara till idrottaren.",
       "association": "Bara datakvalitet, fynd och nästa mätning. Inga dagboks-, belastnings- eller incheckningsdata."
-    }
+    },
+    "block": "Träningsblock: vecka {{week}} av {{weeks}}, {{done}} av {{planned}} pass den här veckan avslutade."
   },
   "plan": {
     "eyebrow": "Plan",
@@ -3101,7 +3102,16 @@
       "unknown": "Mätfelet är ännu inte känt, förändringen kan inte bedömas.",
       "note": "Rapporten ställer plan och mätning bredvid varandra. Den säger inte om planen orsakade en förändring."
     },
-    "close": "Avsluta block"
+    "close": "Avsluta block",
+    "next": {
+      "title": "Nästa block",
+      "phase": "”{{phase}}” föreslås som fas för nästa block. Du kan ändra den.",
+      "unproven": "För dessa test är ingen förbättring över mätfelet belagd: {{tests}}.",
+      "missing": "Dessa mätningar vid blockets slut saknas ännu: {{tests}}.",
+      "note": "Vilka luckor som är öppna framgår av de nya mätningarna när du planerar. Rapporten föreslår inget träningsinnehåll.",
+      "button": "Planera nästa block"
+    },
+    "closedNote": "Det här blocket är avslutat. Du kan bara titta på det."
   },
   "player": {
     "eyebrow": "Pass",

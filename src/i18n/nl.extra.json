@@ -2916,7 +2916,8 @@
       "athlete": "Bevat alles uit de maandagbrief, ook belasting en check-ins.",
       "parents": "Zonder check-ins: zelfinschattingen over spierpijn en stress gaan alleen naar de atleet.",
       "association": "Alleen betrouwbaarheid van gegevens, bevinding en volgende meting. Geen dagboek-, belastings- of check-ingegevens."
-    }
+    },
+    "block": "Trainingsblok: week {{week}} van {{weeks}}, {{done}} van {{planned}} trainingen van deze week afgerond."
   },
   "plan": {
     "eyebrow": "Plan",
@@ -3101,7 +3102,16 @@
       "unknown": "De meetfout is nog niet bekend, de verandering is niet te duiden.",
       "note": "Het rapport zet plan en meting naast elkaar. Het zegt niet of het plan een verandering veroorzaakte."
     },
-    "close": "Blok afsluiten"
+    "close": "Blok afsluiten",
+    "next": {
+      "title": "Volgend blok",
+      "phase": "«{{phase}}» wordt voorgesteld als fase van het volgende blok. Je kunt dit wijzigen.",
+      "unproven": "Bij deze tests is geen verbetering boven de meetfout aangetoond: {{tests}}.",
+      "missing": "Deze metingen aan het einde van het blok ontbreken nog: {{tests}}.",
+      "note": "Welke hiaten open zijn, volgt bij het plannen uit de nieuwe metingen. Het rapport stelt geen trainingsinhoud voor.",
+      "button": "Volgend blok plannen"
+    },
+    "closedNote": "Dit blok is afgesloten. Je kunt het alleen bekijken."
   },
   "player": {
     "eyebrow": "Training",

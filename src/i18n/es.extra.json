@@ -2916,7 +2916,8 @@
       "athlete": "Contiene todo el resumen del lunes, también carga y check-ins.",
       "parents": "Sin check-ins: las autoevaluaciones de agujetas y estrés solo van al atleta.",
       "association": "Solo fiabilidad de los datos, hallazgo y próxima medición. Sin datos de diario, carga ni check-in."
-    }
+    },
+    "block": "Bloque de entrenamiento: semana {{week}} de {{weeks}}, {{done}} de {{planned}} sesiones de esta semana completadas."
   },
   "plan": {
     "eyebrow": "Plan",
@@ -3101,7 +3102,16 @@
       "unknown": "El error de medición aún no se conoce, el cambio no se puede interpretar.",
       "note": "El informe pone plan y medición lado a lado. No dice si el plan causó un cambio."
     },
-    "close": "Cerrar bloque"
+    "close": "Cerrar bloque",
+    "next": {
+      "title": "Siguiente bloque",
+      "phase": "Se propone «{{phase}}» como fase del siguiente bloque. Puedes cambiarla.",
+      "unproven": "En estas pruebas no está demostrada una mejora por encima del error de medición: {{tests}}.",
+      "missing": "Faltan estas mediciones del final del bloque: {{tests}}.",
+      "note": "Qué lagunas siguen abiertas resulta de las nuevas mediciones al planificar. El informe no propone contenidos de entrenamiento.",
+      "button": "Planificar el siguiente bloque"
+    },
+    "closedNote": "Este bloque está cerrado. Solo puedes verlo."
   },
   "player": {
     "eyebrow": "Sesión",

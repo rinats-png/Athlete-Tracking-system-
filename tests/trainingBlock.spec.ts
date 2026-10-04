@@ -153,6 +153,32 @@ test.describe('Block: Bildschirme', () => {
     await expect(page.getByTestId('block-reason-s2')).toContainText('Verletzungspause')
   })
 
+  test('Block zu Ende: nächste Phase vorgeschlagen, Plan öffnet damit; abgeschlossen bleibt zur Ansicht', async ({ page }) => {
+    await prepare(page)
+    await page.evaluate((list) => {
+      const data = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
+      const now = new Date().toISOString()
+      // Beginn vor zehn Wochen, an einem Montag: der Block (6 Wochen) ist vorbei.
+      const d = new Date(Date.now() - 70 * 86_400_000)
+      const wd = ((d.getUTCDay() + 6) % 7) + 1
+      const monday = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - (wd - 1))).toISOString().slice(0, 10)
+      data.athletes[0].trainingBlocks = [{ id: 'b1', family: 'combat_grappling', disciplineId: 'judo', phase: 'BUILD', startDay: monday, weeks: 6, retestMetrics: ['countermovement_jump'], sessions: list, completions: [], status: 'active', createdAt: now, updatedAt: now }]
+      localStorage.setItem('kydon.data.v1', JSON.stringify(data))
+    }, [sess('s1', 1)])
+    await page.goto('/plan/block', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('block-next')).toBeVisible()
+    await expect(page.getByTestId('block-next-missing')).toBeVisible()
+    await page.getByTestId('block-next-plan').click()
+    await expect(page).toHaveURL(/\/plan\?phase=SPECIFIC/)
+    await expect(page.getByTestId('plan-phase')).toHaveValue('SPECIFIC')
+    await page.goto('/plan/block', { waitUntil: 'domcontentloaded' })
+    await page.getByTestId('block-close').click()
+    await expect(page.getByTestId('block-closed')).toBeVisible()
+    await expect(page.getByTestId('block-edit-open-s1')).toHaveCount(0)
+    await expect(page.getByTestId('block-close')).toHaveCount(0)
+    expect(await page.getByTestId('plan-block').innerText()).not.toMatch(/block\.[a-z]+\.|\{\{/)
+  })
+
   test('Player: Einheit abschließen legt Last ins Tagebuch und zählt in der Woche', async ({ page }) => {
     await prepare(page)
     await page.evaluate(() => {
@@ -188,5 +214,44 @@ test.describe('Block: Bildschirme', () => {
     // Zweites Abschließen am selben Tag ist ausgeschlossen: nichts mehr offen.
     await page.goto('/plan/heute', { waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('session-player')).toHaveCount(0)
+  })
+})
+
+import { nextBlockSuggestion, shownBlock } from '../src/domain/trainingBlock'
+import { weeklyReport } from '../src/domain/weeklyReport'
+
+test.describe('ADAPT und Bericht (Etappe 11)', () => {
+  test('nächste Phase als Vorschlag; unbelegte und fehlende Retests benannt', () => {
+    const b = mk()
+    const none = blockReport(b, [], '2026-11-20')
+    expect(nextBlockSuggestion(b, none)).toEqual({ phase: 'SPECIFIC', unproven: [], missing: ['vo2max_ergospirometry', 'countermovement_jump'] })
+    const noise = blockReport(b, [result('2026-09-20', 40), result('2026-11-12', 40.2)], '2026-11-20')
+    const sug = nextBlockSuggestion(b, noise)
+    expect(sug.unproven).toEqual(['countermovement_jump'])
+    expect(sug.missing).toEqual(['vo2max_ergospirometry'])
+    expect(nextBlockSuggestion({ ...b, phase: 'GPP' }, none).phase).toBe('BUILD')
+    expect(nextBlockSuggestion({ ...b, phase: 'SPECIFIC' }, none).phase).toBe('SPECIFIC')
+  })
+
+  test('gezeigt wird der aktive Block, sonst der zuletzt geänderte abgeschlossene', () => {
+    const a = { ...mk(), id: 'a', status: 'closed' as const, updatedAt: '2026-10-01T00:00:00.000Z' }
+    const c = { ...mk(), id: 'c', status: 'closed' as const, updatedAt: '2026-11-01T00:00:00.000Z' }
+    const act = { ...mk(), id: 'act' }
+    expect(shownBlock([])).toBeNull()
+    expect(shownBlock([a, c])!.id).toBe('c')
+    expect(shownBlock([a, c, act])!.id).toBe('act')
+  })
+
+  test('Wochenbericht: Block für Athlet und Eltern, nie für den Verband', () => {
+    const a = emptyData().athletes[0]
+    const inp = { athlete: { profile: a.profile, results: [], workouts: [], diary: [] }, reminders: { remindersEnabled: false, reminderIntervalDays: {} }, trainingBlocks: [{ ...mk(), completions: [{ sessionId: 'vo2_4x4-d1', day: '2026-10-12', durationMin: 25, rpe: 8, diarySessionId: 'x' }] }] }
+    const at = new Date('2026-10-14T08:00:00.000Z')
+    const find = (r: 'athlete' | 'parents' | 'association') => weeklyReport(inp, r, at).facts.find((f) => f.key === 'block')
+    expect(find('athlete')?.params).toEqual({ week: 2, weeks: 6, done: 1, planned: 2 })
+    expect(find('parents')?.params).toEqual({ week: 2, weeks: 6, done: 1, planned: 2 })
+    expect(find('association')).toBeUndefined()
+    // Ohne Block oder außerhalb des Zeitraums: keine Zeile.
+    expect(weeklyReport({ ...inp, trainingBlocks: [] }, 'athlete', at).facts.some((f) => f.key === 'block')).toBe(false)
+    expect(weeklyReport(inp, 'athlete', new Date('2026-12-01T08:00:00.000Z')).facts.some((f) => f.key === 'block')).toBe(false)
   })
 })

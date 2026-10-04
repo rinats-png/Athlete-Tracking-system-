@@ -6,7 +6,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { blockEndDay, blockReport, blockWeek, openSessionsOn, overrideSession, weekChecks } from '@/domain/trainingBlock'
+import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, shownBlock, weekChecks } from '@/domain/trainingBlock'
 import { blockText } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { getTest } from '@/data/testCatalog'
@@ -25,7 +25,8 @@ export function BlockScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
   const { data, trainingBlocks, saveTrainingBlock } = useAppData()
-  const block = trainingBlocks.find((b) => b.status === 'active') ?? null
+  const block = shownBlock(trainingBlocks)
+  const readOnly = block?.status === 'closed'
   const today = new Date().toISOString().slice(0, 10)
   const [editing, setEditing] = useState<string | null>(null)
   const [day, setDay] = useState(1)
@@ -43,6 +44,7 @@ export function BlockScreen() {
   const d = (x: string) => formatDate(`${x}T12:00:00Z`, locale)
   const discipline = disciplineById(block.disciplineId ?? '')
   const open = openSessionsOn(block, today)
+  const next = report.finished ? nextBlockSuggestion(block, report) : null
 
   const apply = (s: StoredPlannedSession, change: { day?: number; removed?: boolean }) => {
     const res = overrideSession(block, s.id, change, reason, new Date().toISOString())
@@ -75,6 +77,7 @@ export function BlockScreen() {
       />
 
       <Panel className="mb-4" data-testid="block-week">
+        {readOnly && <p className="px-4 pt-3 text-[12px] text-ink-secondary" data-testid="block-closed">{t('block.closedNote')}</p>}
         <PanelHeader title={typeof week === 'number' ? t('block.week', { week, weeks: block.weeks }) : week === 'before' ? t('block.before', { day: d(block.startDay) }) : t('block.after')} />
         <ul className="px-4 pb-3 text-[14px]">
           {checks.length === 0 && <li className="text-ink-secondary">{t('block.noWeeks')}</li>}
@@ -85,7 +88,7 @@ export function BlockScreen() {
             </li>
           ))}
         </ul>
-        {open.length > 0 && (
+        {!readOnly && open.length > 0 && (
           <p className="border-t border-line px-4 py-3">
             <Link to="/plan/heute" data-testid="block-to-player" className="inline-flex min-h-11 items-center rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">
               {t('block.startPlayer', { count: open.length })}
@@ -134,7 +137,7 @@ export function BlockScreen() {
                     <button type="button" onClick={() => { setEditing(null); setError(null) }} className="min-h-11 px-3 text-[13px] text-ink-secondary">{t('block.cancel')}</button>
                   </div>
                 </div>
-              ) : (
+              ) : readOnly ? null : (
                 <button type="button" data-testid={`block-edit-open-${s.id}`} onClick={() => { setEditing(s.id); setDay(s.day); setReason(''); setError(null) }} className="mt-1 min-h-11 text-[13px] text-accent-text underline underline-offset-2">
                   {t('block.edit')}
                 </button>
@@ -144,6 +147,21 @@ export function BlockScreen() {
         </ul>
         <p className="border-t border-line px-4 py-2 text-[11px] text-ink-muted">{t('block.overrideNote')}</p>
       </Panel>
+
+      {next && (
+        <Panel className="mb-4" data-testid="block-next">
+          <PanelHeader title={t('block.next.title')} />
+          <div className="space-y-2 px-4 pb-4 text-[14px]">
+            <p>{t('block.next.phase', { phase: t(`plan.phase.${next.phase}`) })}</p>
+            {next.unproven.length > 0 && <p data-testid="block-next-unproven">{t('block.next.unproven', { tests: next.unproven.map(testName).join(', ') })}</p>}
+            {next.missing.length > 0 && <p data-testid="block-next-missing">{t('block.next.missing', { tests: next.missing.map(testName).join(', ') })}</p>}
+            <p className="text-[12px] text-ink-secondary">{t('block.next.note')}</p>
+            <Link to={`/plan?phase=${next.phase}`} data-testid="block-next-plan" className="inline-flex min-h-11 items-center rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">
+              {t('block.next.button')}
+            </Link>
+          </div>
+        </Panel>
+      )}
 
       <Panel data-testid="block-report">
         <PanelHeader title={t('block.report.title')} subtitle={t('block.report.count', { done: report.done, planned: report.planned })} />
@@ -156,6 +174,7 @@ export function BlockScreen() {
             </li>
           ))}
         </ul>
+        {!readOnly && (
         <div className="border-t border-line px-4 py-3">
           <button
             type="button"
@@ -166,6 +185,7 @@ export function BlockScreen() {
             {t('block.close')}
           </button>
         </div>
+        )}
         <p className="border-t border-line px-4 py-2 text-[11px] text-ink-muted">{t('block.report.note')}</p>
       </Panel>
     </div>

@@ -2916,7 +2916,8 @@
       "athlete": "Enthält alles aus dem Montagsbrief, auch Belastung und Check-ins.",
       "parents": "Ohne Check-ins: Selbsteinschätzungen zu Muskelkater und Stress gehen nur an den Athleten selbst.",
       "association": "Nur Datenlage, Befund und nächste Messung. Keine Tagebuch-, Belastungs- oder Check-in-Daten."
-    }
+    },
+    "block": "Trainingsblock: Woche {{week}} von {{weeks}}, {{done}} von {{planned}} Einheiten dieser Woche abgeschlossen."
   },
   "plan": {
     "eyebrow": "Plan",
@@ -3101,7 +3102,16 @@
       "unknown": "Die Messschwankung ist noch nicht bekannt, die Änderung lässt sich nicht einordnen.",
       "note": "Der Bericht stellt Plan und Messung gegenüber. Er sagt nicht, ob der Plan die Ursache einer Veränderung war."
     },
-    "close": "Block abschließen"
+    "close": "Block abschließen",
+    "next": {
+      "title": "Nächster Block",
+      "phase": "Als Phase für den nächsten Block ist «{{phase}}» vorgeschlagen. Du kannst sie ändern.",
+      "unproven": "Bei diesen Tests ist keine Verbesserung über der Messschwankung belegt: {{tests}}.",
+      "missing": "Diese Messungen am Blockende fehlen noch: {{tests}}.",
+      "note": "Welche Lücken offen sind, ergibt sich beim Planen aus den neuen Messungen. Der Bericht schlägt keine Trainingsinhalte vor.",
+      "button": "Nächsten Block planen"
+    },
+    "closedNote": "Dieser Block ist abgeschlossen. Du siehst ihn nur zur Ansicht."
   },
   "player": {
     "eyebrow": "Einheit",

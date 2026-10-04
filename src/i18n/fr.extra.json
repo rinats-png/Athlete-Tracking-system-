@@ -2916,7 +2916,8 @@
       "athlete": "Contient tout le bref du lundi, y compris la charge et les check-ins.",
       "parents": "Sans check-ins : les auto-évaluations sur les courbatures et le stress ne vont qu'à l'athlète.",
       "association": "Seulement fiabilité des données, constat et prochaine mesure. Aucune donnée de journal, de charge ou de check-in."
-    }
+    },
+    "block": "Bloc d'entraînement : semaine {{week}} sur {{weeks}}, {{done}} séances sur {{planned}} de cette semaine terminées."
   },
   "plan": {
     "eyebrow": "Plan",
@@ -3101,7 +3102,16 @@
       "unknown": "L'erreur de mesure n'est pas encore connue, la variation ne peut pas être interprétée.",
       "note": "Le rapport met plan et mesure côte à côte. Il ne dit pas si le plan a causé un changement."
     },
-    "close": "Clore le bloc"
+    "close": "Clore le bloc",
+    "next": {
+      "title": "Bloc suivant",
+      "phase": "« {{phase}} » est proposée comme phase du prochain bloc. Tu peux la changer.",
+      "unproven": "Pour ces tests, aucune amélioration au-delà de l'erreur de mesure n'est prouvée : {{tests}}.",
+      "missing": "Ces mesures de fin de bloc manquent encore : {{tests}}.",
+      "note": "Les lacunes ouvertes ressortent des nouvelles mesures lors de la planification. Le rapport ne propose pas de contenu d'entraînement.",
+      "button": "Planifier le bloc suivant"
+    },
+    "closedNote": "Ce bloc est clos. Tu ne peux que le consulter."
   },
   "player": {
     "eyebrow": "Séance",

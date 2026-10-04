@@ -2916,7 +2916,8 @@
       "athlete": "Contains everything from the Monday brief, including load and check-ins.",
       "parents": "Without check-ins: self-assessments on soreness and stress go only to the athlete.",
       "association": "Only data confidence, finding and next measurement. No diary, load or check-in data."
-    }
+    },
+    "block": "Training block: week {{week}} of {{weeks}}, {{done}} of {{planned}} sessions of this week completed."
   },
   "plan": {
     "eyebrow": "Plan",
@@ -3101,7 +3102,16 @@
       "unknown": "The measurement error is not known yet, the change cannot be classified.",
       "note": "The report sets plan and measurement side by side. It does not say whether the plan caused a change."
     },
-    "close": "Close block"
+    "close": "Close block",
+    "next": {
+      "title": "Next block",
+      "phase": "\"{{phase}}\" is suggested as the phase for the next block. You can change it.",
+      "unproven": "For these tests no improvement beyond the measurement error is proven: {{tests}}.",
+      "missing": "These measurements at the end of the block are still missing: {{tests}}.",
+      "note": "Which gaps are open follows from the new measurements when you plan. The report does not suggest training content.",
+      "button": "Plan next block"
+    },
+    "closedNote": "This block is closed. You can only view it."
   },
   "player": {
     "eyebrow": "Session",
