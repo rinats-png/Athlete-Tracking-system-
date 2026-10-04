@@ -2647,7 +2647,8 @@
       "terms": "Conditions d'utilisation",
       "dpa": "Accord de sous-traitance",
       "week": "Bilan de la semaine",
-      "ask": "Demander à KYDON"
+      "ask": "Demander à KYDON",
+      "brief": "Bref du lundi"
     }
   },
   "teamHub": {
@@ -2833,5 +2834,35 @@
       "quality": "Qualité de mesure",
       "depth": "Profondeur"
     }
+  },
+  "brief": {
+    "eyebrow": "Lundi",
+    "title": "Ton bref du lundi",
+    "range": "{{from}} au {{to}}",
+    "form": {
+      "title": "Fiabilité des données",
+      "text": "Fiabilité des données de tes mesures : {{level}}."
+    },
+    "finding": {
+      "title": "L'unique constat",
+      "text": "{{name}} : {{percent}} % mieux, au-delà de l'erreur de mesure (prouvé à partir de {{detectable}} %).",
+      "none": "Cette semaine, aucune variation au-delà de l'erreur de mesure."
+    },
+    "load": {
+      "title": "Charge",
+      "compare": "Cette semaine {{week}} UA, en moyenne {{mean}} UA sur les quatre semaines précédentes.",
+      "noBaseline": "Cette semaine {{week}} UA. Il manque quatre semaines de journal pour comparer.",
+      "note": "Charge de séance selon Foster, une description sans corridor."
+    },
+    "checkins_one": "Check-in sur {{count}} jour.",
+    "checkins_other": "Check-in sur {{count}} jours.",
+    "next": {
+      "title": "Prochaine mesure",
+      "overdue": "{{name}} est en retard de {{days}} jours.",
+      "missing": "{{name}} manque encore dans ton profil.",
+      "none": "Aucune mesure n'est due ou ouverte pour le moment.",
+      "open": "Ouvrir le test"
+    },
+    "note": "Le bref décrit ce que les données permettent. Il ne donne aucun conseil d'entraînement et ne déduit aucune cause."
   }
 }

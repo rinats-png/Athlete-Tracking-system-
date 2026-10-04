@@ -2647,7 +2647,8 @@
       "terms": "Användarvillkor",
       "dpa": "Personuppgiftsbiträdesavtal",
       "week": "Veckoöversikt",
-      "ask": "Fråga KYDON"
+      "ask": "Fråga KYDON",
+      "brief": "Måndagsbrev"
     }
   },
   "teamHub": {
@@ -2833,5 +2834,35 @@
       "quality": "Mätkvalitet",
       "depth": "Djup"
     }
+  },
+  "brief": {
+    "eyebrow": "Måndag",
+    "title": "Ditt måndagsbrev",
+    "range": "{{from}} till {{to}}",
+    "form": {
+      "title": "Datakvalitet",
+      "text": "Datakvalitet för dina mätningar: {{level}}."
+    },
+    "finding": {
+      "title": "Det enda fyndet",
+      "text": "{{name}}: {{percent}} % bättre, över mätfelet (belagt från {{detectable}} %).",
+      "none": "Den här veckan finns ingen förändring över mätfelet."
+    },
+    "load": {
+      "title": "Belastning",
+      "compare": "Den här veckan {{week}} AU, i snitt {{mean}} AU de fyra veckorna före.",
+      "noBaseline": "Den här veckan {{week}} AU. För jämförelse saknas fyra veckors dagbok.",
+      "note": "Passbelastning enligt Foster, en beskrivning utan korridor."
+    },
+    "checkins_one": "Incheckning på {{count}} dag.",
+    "checkins_other": "Incheckning på {{count}} dagar.",
+    "next": {
+      "title": "Nästa mätning",
+      "overdue": "{{name}} har varit aktuellt i {{days}} dagar.",
+      "missing": "{{name}} saknas ännu i din profil.",
+      "none": "Just nu är ingen mätning aktuell eller öppen.",
+      "open": "Öppna test"
+    },
+    "note": "Brevet beskriver vad data ger. Det ger inga träningsråd och härleder inga orsaker."
   }
 }

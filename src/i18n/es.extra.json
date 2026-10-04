@@ -2647,7 +2647,8 @@
       "terms": "Condiciones de uso",
       "dpa": "Encargo de tratamiento",
       "week": "Resumen semanal",
-      "ask": "Preguntar a KYDON"
+      "ask": "Preguntar a KYDON",
+      "brief": "Resumen del lunes"
     }
   },
   "teamHub": {
@@ -2833,5 +2834,35 @@
       "quality": "Calidad de medición",
       "depth": "Profundidad"
     }
+  },
+  "brief": {
+    "eyebrow": "Lunes",
+    "title": "Tu resumen del lunes",
+    "range": "Del {{from}} al {{to}}",
+    "form": {
+      "title": "Fiabilidad de los datos",
+      "text": "Fiabilidad de los datos de tus mediciones: {{level}}."
+    },
+    "finding": {
+      "title": "El hallazgo",
+      "text": "{{name}}: {{percent}} % mejor, por encima del error de medición (demostrado a partir del {{detectable}} %).",
+      "none": "Esta semana no hay ningún cambio por encima del error de medición."
+    },
+    "load": {
+      "title": "Carga",
+      "compare": "Esta semana {{week}} UA, de media {{mean}} UA en las cuatro semanas anteriores.",
+      "noBaseline": "Esta semana {{week}} UA. Faltan cuatro semanas de diario para comparar.",
+      "note": "Carga de sesión según Foster, una descripción sin corredor."
+    },
+    "checkins_one": "Check-in en {{count}} día.",
+    "checkins_other": "Check-in en {{count}} días.",
+    "next": {
+      "title": "Próxima medición",
+      "overdue": "{{name}} está atrasada {{days}} días.",
+      "missing": "{{name}} todavía falta en tu perfil.",
+      "none": "Ahora mismo no hay ninguna medición pendiente o abierta.",
+      "open": "Abrir prueba"
+    },
+    "note": "El resumen describe lo que permiten los datos. No da consejos de entrenamiento ni deduce causas."
   }
 }

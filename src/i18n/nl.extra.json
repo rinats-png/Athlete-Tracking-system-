@@ -2647,7 +2647,8 @@
       "terms": "Gebruiksvoorwaarden",
       "dpa": "Verwerkersovereenkomst",
       "week": "Weekoverzicht",
-      "ask": "Vraag het KYDON"
+      "ask": "Vraag het KYDON",
+      "brief": "Maandagbrief"
     }
   },
   "teamHub": {
@@ -2833,5 +2834,35 @@
       "quality": "Meetkwaliteit",
       "depth": "Diepte"
     }
+  },
+  "brief": {
+    "eyebrow": "Maandag",
+    "title": "Je maandagbrief",
+    "range": "{{from}} tot {{to}}",
+    "form": {
+      "title": "Betrouwbaarheid van gegevens",
+      "text": "Betrouwbaarheid van je metingen: {{level}}."
+    },
+    "finding": {
+      "title": "De ene bevinding",
+      "text": "{{name}}: {{percent}} % beter, boven de meetfout (aangetoond vanaf {{detectable}} %).",
+      "none": "Deze week is er geen verandering boven de meetfout."
+    },
+    "load": {
+      "title": "Belasting",
+      "compare": "Deze week {{week}} AU, gemiddeld {{mean}} AU in de vier weken ervoor.",
+      "noBaseline": "Deze week {{week}} AU. Voor een vergelijking ontbreken vier weken dagboek.",
+      "note": "Sessiebelasting volgens Foster, een beschrijving zonder corridor."
+    },
+    "checkins_one": "Check-in op {{count}} dag.",
+    "checkins_other": "Check-in op {{count}} dagen.",
+    "next": {
+      "title": "Volgende meting",
+      "overdue": "{{name}} is al {{days}} dagen aan de beurt.",
+      "missing": "{{name}} ontbreekt nog in je profiel.",
+      "none": "Op dit moment is er geen meting aan de beurt of open.",
+      "open": "Test openen"
+    },
+    "note": "De brief beschrijft wat de gegevens toelaten. Hij geeft geen trainingsadvies en leidt geen oorzaken af."
   }
 }

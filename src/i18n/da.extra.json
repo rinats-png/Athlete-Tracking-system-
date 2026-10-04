@@ -2647,7 +2647,8 @@
       "terms": "Brugsvilkår",
       "dpa": "Databehandleraftale",
       "week": "Ugeoversigt",
-      "ask": "Spørg KYDON"
+      "ask": "Spørg KYDON",
+      "brief": "Mandagsbrev"
     }
   },
   "teamHub": {
@@ -2833,5 +2834,35 @@
       "quality": "Målekvalitet",
       "depth": "Dybde"
     }
+  },
+  "brief": {
+    "eyebrow": "Mandag",
+    "title": "Dit mandagsbrev",
+    "range": "{{from}} til {{to}}",
+    "form": {
+      "title": "Datagrundlag",
+      "text": "Datagrundlaget for dine målinger: {{level}}."
+    },
+    "finding": {
+      "title": "Det ene fund",
+      "text": "{{name}}: {{percent}} % bedre, over målefejlen (påvist fra {{detectable}} %).",
+      "none": "Denne uge er der ingen ændring over målefejlen."
+    },
+    "load": {
+      "title": "Belastning",
+      "compare": "Denne uge {{week}} AU, i gennemsnit {{mean}} AU de fire uger før.",
+      "noBaseline": "Denne uge {{week}} AU. Til en sammenligning mangler fire ugers dagbog.",
+      "note": "Sessionsbelastning efter Foster, en beskrivelse uden korridor."
+    },
+    "checkins_one": "Check-in på {{count}} dag.",
+    "checkins_other": "Check-in på {{count}} dage.",
+    "next": {
+      "title": "Næste måling",
+      "overdue": "{{name}} har været aktuel i {{days}} dage.",
+      "missing": "{{name}} mangler endnu i din profil.",
+      "none": "Lige nu er ingen måling aktuel eller åben.",
+      "open": "Åbn test"
+    },
+    "note": "Brevet beskriver, hvad data giver. Det giver ingen træningsråd og udleder ingen årsager."
   }
 }

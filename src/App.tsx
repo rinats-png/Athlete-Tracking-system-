@@ -142,6 +142,7 @@ const router = createBrowserRouter([
       { path: 'trainer', element: screen(() => import('@/features/coach/CoachScreen'), 'CoachScreen') },
       { path: 'trainer/team', element: screen(() => import('@/features/coach/TeamHub'), 'TeamHub') },
       { path: 'fragen', element: screen(() => import('@/features/ask/AskScreen'), 'AskScreen') },
+      { path: 'brief', element: screen(() => import('@/features/brief/BriefScreen'), 'BriefScreen') },
       { path: 'woche', element: screen(() => import('@/features/week/WeekReviewScreen'), 'WeekReviewScreen') },
       { path: 'checkin', element: screen(() => import('@/features/today/CheckInScreen'), 'CheckInScreen') },
       { path: 'performance', element: screen(() => import('@/features/performance/PerformanceScreen'), 'PerformanceScreen') },

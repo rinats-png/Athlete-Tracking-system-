@@ -2647,7 +2647,8 @@
       "terms": "Nutzungsbedingungen",
       "dpa": "Auftragsverarbeitung",
       "week": "Wochenrückblick",
-      "ask": "Fragen an KYDON"
+      "ask": "Fragen an KYDON",
+      "brief": "Montagsbrief"
     }
   },
   "teamHub": {
@@ -2833,5 +2834,35 @@
       "quality": "Messqualität",
       "depth": "Tiefe"
     }
+  },
+  "brief": {
+    "eyebrow": "Montag",
+    "title": "Dein Montagsbrief",
+    "range": "{{from}} bis {{to}}",
+    "form": {
+      "title": "Datenlage",
+      "text": "Datenlage deiner Messungen: {{level}}."
+    },
+    "finding": {
+      "title": "Der eine Befund",
+      "text": "{{name}}: {{percent}} % besser, über der Messschwankung (belegt ab {{detectable}} %).",
+      "none": "In dieser Woche gibt es keine Veränderung über der Messschwankung."
+    },
+    "load": {
+      "title": "Belastung",
+      "compare": "Diese Woche {{week}} AU, im Mittel der vier Wochen davor {{mean}} AU.",
+      "noBaseline": "Diese Woche {{week}} AU. Für einen Vergleich fehlen vier Wochen Tagebuch.",
+      "note": "Sitzungslast nach Foster, eine Beschreibung ohne Korridor."
+    },
+    "checkins_one": "Check-in an {{count}} Tag.",
+    "checkins_other": "Check-in an {{count}} Tagen.",
+    "next": {
+      "title": "Nächste Messung",
+      "overdue": "{{name}} ist seit {{days}} Tagen fällig.",
+      "missing": "{{name}} fehlt in deinem Profil noch.",
+      "none": "Im Moment ist keine Messung fällig oder offen.",
+      "open": "Test öffnen"
+    },
+    "note": "Der Brief beschreibt, was die Daten hergeben. Er gibt keinen Trainingsrat und leitet keine Ursachen ab."
   }
 }

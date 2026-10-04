@@ -2647,7 +2647,8 @@
       "terms": "Terms of use",
       "dpa": "Data processing agreement",
       "week": "Week review",
-      "ask": "Ask KYDON"
+      "ask": "Ask KYDON",
+      "brief": "Monday brief"
     }
   },
   "teamHub": {
@@ -2833,5 +2834,35 @@
       "quality": "Measurement quality",
       "depth": "Depth"
     }
+  },
+  "brief": {
+    "eyebrow": "Monday",
+    "title": "Your Monday brief",
+    "range": "{{from}} to {{to}}",
+    "form": {
+      "title": "Data confidence",
+      "text": "Data confidence of your measurements: {{level}}."
+    },
+    "finding": {
+      "title": "The one finding",
+      "text": "{{name}}: {{percent}} % better, beyond measurement error (proven from {{detectable}} %).",
+      "none": "This week there is no change beyond the measurement error."
+    },
+    "load": {
+      "title": "Load",
+      "compare": "This week {{week}} AU, on average {{mean}} AU in the four weeks before.",
+      "noBaseline": "This week {{week}} AU. Four weeks of diary are missing for a comparison.",
+      "note": "Session load after Foster, a description without a corridor."
+    },
+    "checkins_one": "Check-in on {{count}} day.",
+    "checkins_other": "Check-in on {{count}} days.",
+    "next": {
+      "title": "Next measurement",
+      "overdue": "{{name}} has been due for {{days}} days.",
+      "missing": "{{name}} is still missing in your profile.",
+      "none": "No measurement is due or open right now.",
+      "open": "Open test"
+    },
+    "note": "The brief describes what the data allows. It gives no training advice and derives no causes."
   }
 }
