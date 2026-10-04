@@ -2656,7 +2656,8 @@
       "ask": "Spør KYDON",
       "brief": "Mandagsbrev",
       "weeklyReport": "Ukerapport",
-      "plan": "Treningsplan (forhåndsvisning)"
+      "plan": "Treningsplan (forhåndsvisning)",
+      "planBlock": "Treningsblokk"
     }
   },
   "teamHub": {
@@ -3050,6 +3051,75 @@
       "concurrent": "Styrke og hard utholdenhet ligger på ulike dager så langt uken tillater. En fast rekkefølge er ikke dokumentert. Ved samtidig trening viste det seg en liten ulempe for benstyrken hos menn, ikke hos kvinner; ingen regel etter kjønn følger av det her.",
       "noStationDose": "For stasjonsspesifikk trening (for eksempel slede eller wall balls) gir beleggene ingen dokumentert dose. HYROX-data er mest observasjoner. Denne delen blir hos treneren.",
       "combatScope": "Teknikk, taktikk, sparring og vektklasser blir hos treneren; KYDON planlegger ikke vektkutt. Symptomer etter slag mot hodet hører til medisinsk oppfølging, ikke til denne appen."
+    },
+    "adopt": {
+      "button": "Ta i bruk som blokk",
+      "hint": "Blokken starter neste mandag. Etterpå kan du endre økter; hver endring krever en begrunnelse.",
+      "toBlock": "Til aktiv blokk"
     }
+  },
+  "block": {
+    "eyebrow": "Blokk",
+    "title": "Treningsblokk",
+    "none": "Det finnes ingen aktiv blokk ennå. Ta først i bruk en plan.",
+    "toPlan": "Til planen",
+    "range": "{{discipline}} · {{from}} til {{to}}",
+    "week": "Uke {{week}} av {{weeks}}",
+    "before": "Blokken starter {{day}}.",
+    "after": "Blokken er over. Rapporten står under.",
+    "noWeeks": "Ingen fullført uke ennå.",
+    "checkWeek": "Uke {{week}}",
+    "checkCount": "{{done}} av {{planned}} økter",
+    "startPlayer": "Start økt ({{count}} åpen)",
+    "checkNote": "Bare økter du har fullført i spilleren telles. Det er en telling, ikke en vurdering.",
+    "sessions": "Økter",
+    "removed": "strøket",
+    "coachChanged": "Endret av treneren: {{reason}}",
+    "newDay": "Ny dag",
+    "reason": "Begrunnelse for endringen",
+    "error": {
+      "reason_required": "En endring krever en begrunnelse.",
+      "unknown_session": "Denne økten finnes ikke lenger.",
+      "day_taken": "Det ligger allerede en nøkkeløkt den dagen.",
+      "nothing_changed": "Ingenting er endret."
+    },
+    "move": "Flytt",
+    "remove": "Stryk",
+    "restore": "Gjenopprett",
+    "cancel": "Avbryt",
+    "edit": "Endre",
+    "overrideNote": "Planen er et forslag fra lagrede regler. Treneren endrer og bestemmer; hver endring forblir synlig med begrunnelse.",
+    "report": {
+      "title": "Blokkrapport",
+      "count": "{{done}} av {{planned}} planlagte økter fullført",
+      "noMetrics": "Denne blokken har ingen måling til slutt.",
+      "missing": "Ingen måling registrert ved blokkens slutt.",
+      "open": "Målingen ved blokkens slutt står igjen.",
+      "better": "Forbedring på {{percent}} %, over målefeilen (påvist fra {{detectable}} %).",
+      "worse": "Forverring på {{percent}} %, over målefeilen (påvist fra {{detectable}} %).",
+      "noise": "Endring på {{percent}} %, innenfor målefeilen (påvist fra {{detectable}} %). En endring er ikke påvist.",
+      "unknown": "Målefeilen er ikke kjent ennå, endringen kan ikke vurderes.",
+      "note": "Rapporten setter plan og måling side om side. Den sier ikke om planen forårsaket en endring."
+    },
+    "close": "Avslutt blokk"
+  },
+  "player": {
+    "eyebrow": "Økt",
+    "title": "Dagens økt",
+    "intro": "Leder deg gjennom dagens økt. Fungerer uten nett.",
+    "noBlock": "Det finnes ingen aktiv blokk.",
+    "none": "Ingen økt er åpen i dag.",
+    "toBlock": "Til blokken",
+    "pick": "Velg økt",
+    "work": "Arbeid {{index}} av {{of}}",
+    "rest": "Pause etter {{index}} av {{of}}",
+    "pause": "Pause",
+    "start": "Start",
+    "stepOf": "Steg {{step}} av {{of}}",
+    "finish": "Fullfør",
+    "allDone": "Alle stegene er gjort.",
+    "minutes": "Varighet i minutter",
+    "rpe": "Anstrengelse (RPE 1–10)",
+    "save": "Registrer økt"
   }
 }

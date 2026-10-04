@@ -528,6 +528,7 @@ export function buildDemoData(): StoredData {
         diary: DEMO_DIARY,
         diaryFields: ['stress', 'soreness'],
         workouts: DEMO_WORKOUTS,
+        trainingBlocks: [],
         decisions: DEMO_DECISIONS,
         cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
         meals: DEMO_MEALS,

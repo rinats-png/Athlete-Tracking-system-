@@ -42,8 +42,8 @@
 | 9b | Fundament: Typen, Regelregister mit Prüfstatus, Gate, erste Regel (Norwegian 4×4), Tests | ✅ |
 | 9c | Pilot Combat Grappling: Regeln, Planbauer, Vorschau-Bildschirm `/plan`, Messung am Blockende | ✅ (Regeln ungeprüft) |
 | 9d | Pilot Hybrid (HYROX, Hybrid Training) | ✅ (Regeln ungeprüft) |
-| 9e | Pilot Combat Striking | offen |
-| 9f | Session Player, Coach Override, Wochenprüfung, Block-Bericht | offen |
+| 9e | Pilot Combat Striking (Boxen, Kickboxen) | ✅ (Regeln ungeprüft) |
+| 10 | Block, Coach Override, Session Player, Wochenprüfung, Block-Bericht (vormals 9f) | ✅ |
 
 Jede Etappe: Prüfung der Doktrin (§50), Texte in 8 Sprachen, Prüffälle, Regeln mit Prüfstatus. Preise ändern wir nicht ohne Rückfrage; die in der Recherche vorgeschlagene Stufe «Training Pro» ist ein Vorschlag, keine Entscheidung.
 
@@ -82,3 +82,21 @@ Pro Regel: stimmt die Quelle mit der Aussage überein, passt die Population, sin
 **Was für Hybrid bewusst nicht geplant wird, weil keine Dosis belegt ist:** Schwellenintervalle, aerobe Grundlage, stationsspezifische Einheiten (HYROX_STATIONS), Compromised Running. Die Recherche beschreibt Blockstrukturen (Kap. 8 und 9) als Entwurf, nennt aber keine Studie mit Dosierung. Der Bauer sagt das («keine passende Regel»), statt sie zu erfinden. Wer diese Einheiten aufnehmen will, braucht eine Quelle und eine Fachperson; dann kommt je eine Regel ins Register.
 
 **HYROX-Daten** (Rennzeiten, Pace-Drop, Anteil Laufen) sind Beobachtungen und Benchmarks, keine Interventionsevidenz. Sie dienen später der Anforderungsanzeige, nicht der Dosierung.
+
+## Pilot Striking (Etappe 9e)
+
+Boxen und Kickboxen gehören zur Familie `combat_striking`. Es gibt **keine neuen Regeln**: die Recherche (Kap. 11 bis 13) nennt für Striking keine eigene Dosierung und verweist auf die übertragbaren Kampfsport-Reviews. Neu ist die **Spezifität je Disziplin** (`specificityByDiscipline`): Kraft und Power gelten für Boxen und Judo als direkt (beide stehen in der Kampfsport-Übersicht), für Kickboxen, Ringen und BJJ nur als verwandt; Plyometrie ist für Judo und Ringen direkt, für Boxen und Kickboxen verwandt. Dadurch wurde auch die Einstufung für Grappling genauer (Ringen und BJJ vorher pauschal «direkt», jetzt «verwandt»). Muay Thai ist als Pilot genannt, hat in der App aber noch keine Disziplin; sie braucht zuerst einen Katalogeintrag.
+
+Für alle Kampfsport-Pläne gilt ein fester Hinweis: Technik, Taktik, Sparring und Gewichtsklassen bleiben beim Trainer, KYDON plant kein Gewichtmachen, bei Symptomen nach Kopftreffern entscheidet die ärztliche Betreuung.
+
+## Block, Override, Player, Wochenprüfung, Bericht (Etappe 10)
+
+**Schema 33:** `trainingBlocks` je Athlet (Momentaufnahme der Einheiten mit Regel und Version, Abschlüsse, Status). Lokal, mit dem Athletendokument; keine Gesundheitsdaten.
+
+- **Block übernehmen** (`/plan`, Knopf): beginnt am nächsten Montag, Dauer wie im Plan.
+- **Coach Override** (`/plan/block`): Tag verschieben oder Einheit streichen. Jede Änderung braucht einen Grund, zwei Schlüsseleinheiten an einem Tag nimmt die App nicht an; die Änderung bleibt mit Grund sichtbar.
+- **Session Player** (`/plan/heute`): Einheit des Tages, Intervalle mit Uhr für Arbeit und Pause, läuft ohne Netz. Abschluss mit Dauer und Anstrengung legt die Last ins Tagebuch (Einheit mit Kennung `plan:<Einheit>`) und zählt in der Wochenprüfung.
+- **Wochenprüfung:** geplante gegen abgeschlossene Einheiten je Woche. Eine Zählung, keine Bewertung.
+- **Block-Bericht:** Einheiten gegen Plan; die Messung am Blockende wird gegen den typischen Messfehler eingeordnet (`changeReport`). Eine fehlende Messung ist erst nach Blockende ein Fehlen; der Bericht sagt nie, ob der Plan die Ursache einer Veränderung war.
+
+**Noch offen:** Plan für den nächsten Block aus dem Bericht ableiten (ADAPT), Block-Bericht als Seite für Eltern oder Verband, Anzeige des Plans für den Athleten, wenn der Trainer ihn führt (heute liegt der Block auf dem Gerät des aktiven Athleten).

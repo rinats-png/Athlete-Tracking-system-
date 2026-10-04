@@ -27,6 +27,7 @@ const GROUPS: { key: string; items: { key: string; to: string }[] }[] = [
     items: [
       { key: 'brief', to: '/brief' },
       { key: 'plan', to: '/plan' },
+      { key: 'planBlock', to: '/plan/block' },
       { key: 'weeklyReport', to: '/trainer/wochenbericht' },
       { key: 'week', to: '/woche' },
       { key: 'ask', to: '/fragen' },
@@ -73,7 +74,7 @@ export function MoreScreen() {
           const items = group.items
             .filter(() => group.key !== 'measure' || role === 'coach')
             .filter((i) => i.key !== 'weeklyReport' || role === 'coach')
-            .filter((i) => i.key !== 'plan' || planMode(import.meta.env?.VITE_TRAINING_PLAN) !== 'off')
+            .filter((i) => (i.key !== 'plan' && i.key !== 'planBlock') || planMode(import.meta.env?.VITE_TRAINING_PLAN) !== 'off')
           if (items.length === 0) return null
           return (
             <Panel key={group.key} data-testid={`more-${group.key}`}>

@@ -186,7 +186,7 @@ export function BottomNav({
         }
       >
         <svg aria-hidden className="absolute inset-0 size-full overflow-visible drop-shadow-[0_-6px_18px_rgba(0,0,0,0.16)]" viewBox="0 0 390 122" preserveAspectRatio="none">
-          <path d="M0,122 A195,108 0 0 1 390,122 Z" style={{ fill: 'color-mix(in srgb, var(--surface-raised) 94%, transparent)', stroke: 'var(--line)', strokeWidth: 1.5, vectorEffect: 'non-scaling-stroke' }} />
+          <path d="M0,122 A195,108 0 0 1 390,122 Z" style={{ fill: 'var(--surface-raised)', stroke: 'var(--line)', strokeWidth: 1.5, vectorEffect: 'non-scaling-stroke' }} />
         </svg>
         {items.map(({ key, icon: Icon }, i) => {
           const big = i === centerIndex

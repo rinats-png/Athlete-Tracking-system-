@@ -29,6 +29,7 @@ import {
   type StoredObservation,
   type StoredDiaryEntry,
   type StoredWorkout,
+  type StoredTrainingBlock,
   type StoredActivity,
   type StoredDecision,
   type StoredCockpit,
@@ -153,6 +154,12 @@ export interface AppDataValue {
    */
   workouts: StoredWorkout[]
   saveWorkout: (workout: StoredWorkout) => void
+  /** Trainingsblöcke des aktiven Athleten (Training Engine). */
+  trainingBlocks: StoredTrainingBlock[]
+  saveTrainingBlock: (block: StoredTrainingBlock) => void
+  deleteTrainingBlock: (id: string) => void
+  /** Eine geplante Einheit als erledigt eintragen: Block und Tagebuch (Last) in einem Schritt. */
+  completePlannedSession: (input: { blockId: string; sessionId: string; day: string; durationMin: number; rpe: number; kind: 'strength' | 'endurance' }) => void
   /** Aktivitäten aus einem Import übernehmen; schon vorhandene (gleiche Kennung) bleiben, wie sie sind. Gibt die Zahl neuer zurück. */
   importActivities: (list: StoredActivity[]) => number
   /** Alle importierten Aktivitäten des aktiven Athleten löschen. */
@@ -732,6 +739,39 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             diary = diary.filter((e) => !isEmptyEntry(e))
             const saved: StoredWorkout = { ...workout, diarySessionId: wantsSession ? sessionId : null, updatedAt: now }
             return { ...a, diary, workouts: [...a.workouts.filter((w) => w.id !== workout.id), saved] }
+          }),
+        })
+      },
+      trainingBlocks: store.athletes.find((a) => a.id === store.activeAthleteId)?.trainingBlocks ?? [],
+      saveTrainingBlock: (block) => {
+        const current = storeRef.current
+        const now = new Date().toISOString()
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, trainingBlocks: [...a.trainingBlocks.filter((b) => b.id !== block.id), { ...block, updatedAt: now }] } : a)),
+        })
+      },
+      deleteTrainingBlock: (id) => {
+        const current = storeRef.current
+        commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, trainingBlocks: a.trainingBlocks.filter((b) => b.id !== id) } : a)) })
+      },
+      completePlannedSession: ({ blockId, sessionId, day, durationMin, rpe, kind }) => {
+        const current = storeRef.current
+        const now = new Date().toISOString()
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => {
+            if (a.id !== current.activeAthleteId) return a
+            const block = a.trainingBlocks.find((b) => b.id === blockId)
+            if (!block || block.completions.some((c) => c.sessionId === sessionId && c.day === day)) return a
+            const diarySessionId = newId()
+            const session = { id: diarySessionId, kind, durationMin, rpe, note: `plan:${sessionId}`.slice(0, 200) }
+            const existing = a.diary.find((e) => e.day === day)
+            const diary = existing
+              ? a.diary.map((e) => (e.day === day ? { ...e, sessions: [...e.sessions, session], updatedAt: now } : e))
+              : [...a.diary, { id: newId(), day, weightKg: null, sleepHours: null, sleepQuality: null, energy: null, stress: null, soreness: null, steps: null, adherence: null, sessions: [session], note: '', createdAt: now, updatedAt: now }]
+            const completion = { sessionId, day, durationMin, rpe, diarySessionId }
+            return { ...a, diary, trainingBlocks: a.trainingBlocks.map((b) => (b.id === blockId ? { ...b, completions: [...b.completions, completion], updatedAt: now } : b)) }
           }),
         })
       },

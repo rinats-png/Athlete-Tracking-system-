@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -7,8 +8,12 @@ import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { radarProfile } from '@/lib/scoring'
 import { requirementGap } from '@/domain/requirementGap'
-import { familyOfDiscipline, HIGH_INTENSITY_BUDGET, planBlock, type PlannedSession } from '@/domain/trainingPlan'
+import { blockText } from '@/features/plan/planText'
+import type { StoredPlannedSession } from '@/lib/store/localStore'
+import { familyOfDiscipline, HIGH_INTENSITY_BUDGET, planBlock } from '@/domain/trainingPlan'
 import { planMode } from '@/domain/trainingRules'
+import { adoptBlock } from '@/domain/trainingBlock'
+import { newId } from '@/lib/store/localStore'
 import { TRAINING_RULES, TRAINING_SOURCES } from '@/data/trainingRules'
 import { getTest } from '@/data/testCatalog'
 import { disciplineById } from '@/data/sportProfiles'
@@ -58,7 +63,8 @@ function DayChips({ label, value, onChange, testId }: { label: string; value: nu
 export function PlanPreviewScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { data } = useAppData()
+  const { data, saveTrainingBlock, trainingBlocks } = useAppData()
+  const navigate = useNavigate()
   const mode = trainingPlanMode()
   const profile = data.profile
   const family = familyOfDiscipline(profile.disciplineId)
@@ -92,24 +98,6 @@ export function PlanPreviewScreen() {
   if (!family || !plan) return <EmptyState title={t('plan.title')} body={discipline ? t('plan.unsupported') : t('plan.noDiscipline')} />
 
   const testName = (slug: string) => pick(getTest(slug)?.name, locale) ?? slug
-  const blockText = (b: PlannedSession['blocks'][number]): string => {
-    switch (b.type) {
-      case 'interval':
-        return t('plan.block.interval', { reps: b.repetitions, work: b.workSeconds / 60, rec: b.recoverySeconds / 60, min: b.intensity.type === 'hr_percent_max' ? b.intensity.min : 0, max: b.intensity.type === 'hr_percent_max' ? b.intensity.max : 0 })
-      case 'sprint_repeats':
-        return t('plan.block.sprint', { sets: b.sets, reps: b.repetitions, dist: b.distanceM, rec: b.maxRecoverySeconds })
-      case 'strength': {
-        const l = b.loadTarget
-        const range = l.type === 'percent_1rm' ? { min: l.min, max: l.max } : { min: 0, max: 0 }
-        return b.maxRepsPerSet != null ? t('plan.block.strengthMax', { ...range, reps: b.maxRepsPerSet }) : t('plan.block.strength', { ...range, sets: b.sets ?? 0 })
-      }
-      case 'jumps':
-        return t('plan.block.jumps')
-      default:
-        return ''
-    }
-  }
-
   return (
     <div data-testid="plan-preview">
       <ScreenHeader eyebrow={t('plan.eyebrow')} title={t('plan.title')} intro={t('plan.intro')} />
@@ -156,7 +144,7 @@ export function PlanPreviewScreen() {
                   <p className="text-[12px] text-ink-secondary">{t(`plan.rules.${rule.id}.title`)}</p>
                   {s.blocks.map((b, i) => (
                     <p key={i} className="mt-1 text-[14px]">
-                      {blockText(b)}
+                      {blockText(b as StoredPlannedSession['blocks'][number], t)}
                     </p>
                   ))}
                   {s.plannedDurationMin != null && <p className="text-[12px] text-ink-muted">{t('plan.session.minutes', { count: s.plannedDurationMin })}</p>}
@@ -223,6 +211,30 @@ export function PlanPreviewScreen() {
           </ul>
         </Panel>
       )}
+
+      <Panel className="mb-4" data-testid="plan-adopt">
+        <div className="space-y-2 px-4 py-4">
+          <button
+            type="button"
+            data-testid="plan-adopt-button"
+            disabled={plan.sessions.length === 0}
+            onClick={() => {
+              const now = new Date().toISOString()
+              saveTrainingBlock(adoptBlock(plan, { id: newId(), family, disciplineId: profile.disciplineId, phase, startDay: now.slice(0, 10), now }))
+              navigate('/plan/block')
+            }}
+            className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink disabled:opacity-45"
+          >
+            {t('plan.adopt.button')}
+          </button>
+          <p className="text-[12px] text-ink-secondary">{t('plan.adopt.hint')}</p>
+          {trainingBlocks.some((b) => b.status === 'active') && (
+            <button type="button" onClick={() => navigate('/plan/block')} className="min-h-11 text-[13px] text-accent-text underline underline-offset-2" data-testid="plan-to-block">
+              {t('plan.adopt.toBlock')}
+            </button>
+          )}
+        </div>
+      </Panel>
 
       <Panel data-testid="plan-retest">
         <PanelHeader title={t('plan.retest.title')} />

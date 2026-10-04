@@ -2656,7 +2656,8 @@
       "ask": "Fråga KYDON",
       "brief": "Måndagsbrev",
       "weeklyReport": "Veckorapport",
-      "plan": "Träningsplan (förhandsvisning)"
+      "plan": "Träningsplan (förhandsvisning)",
+      "planBlock": "Träningsblock"
     }
   },
   "teamHub": {
@@ -3050,6 +3051,75 @@
       "concurrent": "Styrka och hård uthållighet ligger på skilda dagar så långt veckan tillåter. En fast ordning är inte belagd. Vid samtidig träning syntes en liten nackdel för benstyrkan hos män, inte hos kvinnor; någon regel efter kön följer inte av det här.",
       "noStationDose": "För stationsspecifik träning (till exempel släde eller wall balls) ger beläggen ingen belagd dos. HYROX-data är mest observationer. Den delen ligger kvar hos tränaren.",
       "combatScope": "Teknik, taktik, sparring och viktklasser ligger kvar hos tränaren; KYDON planerar ingen viktnedgång. Symtom efter slag mot huvudet hör till sjukvården, inte till den här appen."
+    },
+    "adopt": {
+      "button": "Ta över som block",
+      "hint": "Blocket börjar nästa måndag. Därefter kan du ändra pass; varje ändring kräver en anledning.",
+      "toBlock": "Till aktivt block"
     }
+  },
+  "block": {
+    "eyebrow": "Block",
+    "title": "Träningsblock",
+    "none": "Det finns inget aktivt block ännu. Ta först över en plan.",
+    "toPlan": "Till planen",
+    "range": "{{discipline}} · {{from}} till {{to}}",
+    "week": "Vecka {{week}} av {{weeks}}",
+    "before": "Blocket börjar den {{day}}.",
+    "after": "Blocket är slut. Rapporten står nedan.",
+    "noWeeks": "Ingen avslutad vecka ännu.",
+    "checkWeek": "Vecka {{week}}",
+    "checkCount": "{{done}} av {{planned}} pass",
+    "startPlayer": "Starta pass ({{count}} öppet)",
+    "checkNote": "Bara pass du avslutat i spelaren räknas. Det är en räkning, ingen bedömning.",
+    "sessions": "Pass",
+    "removed": "struket",
+    "coachChanged": "Ändrat av tränaren: {{reason}}",
+    "newDay": "Ny dag",
+    "reason": "Anledning till ändringen",
+    "error": {
+      "reason_required": "En ändring kräver en anledning.",
+      "unknown_session": "Det här passet finns inte längre.",
+      "day_taken": "Det ligger redan ett nyckelpass den dagen.",
+      "nothing_changed": "Inget har ändrats."
+    },
+    "move": "Flytta",
+    "remove": "Stryk",
+    "restore": "Återställ",
+    "cancel": "Avbryt",
+    "edit": "Ändra",
+    "overrideNote": "Planen är ett förslag från lagrade regler. Tränaren ändrar och bestämmer; varje ändring förblir synlig med sin anledning.",
+    "report": {
+      "title": "Blockrapport",
+      "count": "{{done}} av {{planned}} planerade pass avslutade",
+      "noMetrics": "Det här blocket har ingen mätning i slutet.",
+      "missing": "Ingen mätning registrerad vid blockets slut.",
+      "open": "Mätningen vid blockets slut återstår.",
+      "better": "Förbättring med {{percent}} %, över mätfelet (belagd från {{detectable}} %).",
+      "worse": "Försämring med {{percent}} %, över mätfelet (belagd från {{detectable}} %).",
+      "noise": "Förändring på {{percent}} %, inom mätfelet (belagd från {{detectable}} %). En förändring är inte belagd.",
+      "unknown": "Mätfelet är ännu inte känt, förändringen kan inte bedömas.",
+      "note": "Rapporten ställer plan och mätning bredvid varandra. Den säger inte om planen orsakade en förändring."
+    },
+    "close": "Avsluta block"
+  },
+  "player": {
+    "eyebrow": "Pass",
+    "title": "Dagens pass",
+    "intro": "Leder dig genom dagens pass. Fungerar utan nätverk.",
+    "noBlock": "Det finns inget aktivt block.",
+    "none": "Inget pass är öppet i dag.",
+    "toBlock": "Till blocket",
+    "pick": "Välj pass",
+    "work": "Arbete {{index}} av {{of}}",
+    "rest": "Vila efter {{index}} av {{of}}",
+    "pause": "Paus",
+    "start": "Start",
+    "stepOf": "Steg {{step}} av {{of}}",
+    "finish": "Avsluta",
+    "allDone": "Alla steg är klara.",
+    "minutes": "Längd i minuter",
+    "rpe": "Ansträngning (RPE 1–10)",
+    "save": "Registrera pass"
   }
 }

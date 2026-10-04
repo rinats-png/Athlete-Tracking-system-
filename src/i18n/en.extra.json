@@ -2656,7 +2656,8 @@
       "ask": "Ask KYDON",
       "brief": "Monday brief",
       "weeklyReport": "Weekly report",
-      "plan": "Training plan (preview)"
+      "plan": "Training plan (preview)",
+      "planBlock": "Training block"
     }
   },
   "teamHub": {
@@ -3050,6 +3051,75 @@
       "concurrent": "Strength and hard endurance sit on separate days as far as the weekly plan allows. A fixed order is not proven. With concurrent training, a small disadvantage in leg strength appeared in men, not in women; no sex rule follows from that here.",
       "noStationDose": "For station-specific training (for example sled or wall balls) the evidence gives no proven dose. HYROX data are mostly observational. This part stays with the coach.",
       "combatScope": "Technique, tactics, sparring and weight classes stay with the coach; KYDON does not plan weight cutting. Symptoms after head impacts are a matter for medical care, not for this app."
+    },
+    "adopt": {
+      "button": "Adopt as block",
+      "hint": "The block starts next Monday. After that you can change sessions; every change needs a reason.",
+      "toBlock": "To the active block"
     }
+  },
+  "block": {
+    "eyebrow": "Block",
+    "title": "Training block",
+    "none": "There is no active block yet. Adopt a plan first.",
+    "toPlan": "To the plan",
+    "range": "{{discipline}} · {{from}} to {{to}}",
+    "week": "Week {{week}} of {{weeks}}",
+    "before": "The block starts on {{day}}.",
+    "after": "The block is over. The report is below.",
+    "noWeeks": "No completed week yet.",
+    "checkWeek": "Week {{week}}",
+    "checkCount": "{{done}} of {{planned}} sessions",
+    "startPlayer": "Start session ({{count}} open)",
+    "checkNote": "Only sessions you completed in the player are counted. This is a count, not an assessment.",
+    "sessions": "Sessions",
+    "removed": "removed",
+    "coachChanged": "Changed by the coach: {{reason}}",
+    "newDay": "New day",
+    "reason": "Reason for the change",
+    "error": {
+      "reason_required": "A change needs a reason.",
+      "unknown_session": "This session no longer exists.",
+      "day_taken": "A key session is already on that day.",
+      "nothing_changed": "Nothing changed."
+    },
+    "move": "Move",
+    "remove": "Remove",
+    "restore": "Restore",
+    "cancel": "Cancel",
+    "edit": "Change",
+    "overrideNote": "The plan is a suggestion from stored rules. The coach changes and decides; every change stays visible with its reason.",
+    "report": {
+      "title": "Block report",
+      "count": "{{done}} of {{planned}} planned sessions completed",
+      "noMetrics": "This block has no measurement at its end.",
+      "missing": "No measurement recorded at the end of the block.",
+      "open": "The measurement at the end of the block is still pending.",
+      "better": "Improvement of {{percent}} %, beyond measurement error (proven from {{detectable}} %).",
+      "worse": "Decline of {{percent}} %, beyond measurement error (proven from {{detectable}} %).",
+      "noise": "Change of {{percent}} %, within measurement error (proven from {{detectable}} %). A change is not proven.",
+      "unknown": "The measurement error is not known yet, the change cannot be classified.",
+      "note": "The report sets plan and measurement side by side. It does not say whether the plan caused a change."
+    },
+    "close": "Close block"
+  },
+  "player": {
+    "eyebrow": "Session",
+    "title": "Session of the day",
+    "intro": "Guides you through the session of the day. Works offline.",
+    "noBlock": "There is no active block.",
+    "none": "No session is open today.",
+    "toBlock": "To the block",
+    "pick": "Choose session",
+    "work": "Work {{index}} of {{of}}",
+    "rest": "Rest after {{index}} of {{of}}",
+    "pause": "Pause",
+    "start": "Start",
+    "stepOf": "Step {{step}} of {{of}}",
+    "finish": "Finish",
+    "allDone": "All steps are done.",
+    "minutes": "Duration in minutes",
+    "rpe": "Effort (RPE 1–10)",
+    "save": "Log session"
   }
 }

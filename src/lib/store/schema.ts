@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 32
+export const CURRENT_SCHEMA_VERSION = 33
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -677,6 +677,64 @@ const workoutSchema = z.object({
 })
 
 /**
+ * Trainingsblock (Training Engine, docs/training-engine.md): ein übernommener
+ * Plan mit Startdatum, den der Trainer ändern darf. Jede Änderung trägt einen
+ * Grund. Die Dosierungen stammen aus Regeln des Registers (ruleId, Version);
+ * der Block speichert sie als Momentaufnahme, damit eine spätere Regeländerung
+ * einen laufenden Block nicht stillschweigend umschreibt.
+ */
+const planIntensitySchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('hr_percent_max'), min: finite, max: finite }),
+  z.object({ type: z.literal('rpe'), min: finite, max: finite }),
+  z.object({ type: z.literal('percent_1rm'), min: finite, max: finite }),
+  z.object({ type: z.literal('max_effort') }),
+])
+const planPartSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('interval'), modality: z.enum(['run', 'bike', 'row', 'ski', 'mixed']), repetitions: z.number().int().min(1).max(100), workSeconds: z.number().int().min(1).max(7200), recoverySeconds: z.number().int().min(0).max(7200), intensity: planIntensitySchema }),
+  z.object({ type: z.literal('sprint_repeats'), sets: z.number().int().min(1).max(20), repetitions: z.number().int().min(1).max(50), distanceM: z.number().int().min(1).max(1000), maxRecoverySeconds: z.number().int().min(0).max(600) }),
+  z.object({ type: z.literal('strength'), exerciseKey: z.string().nullable(), sets: z.number().int().min(1).max(20).nullable(), reps: z.number().int().min(1).max(100).nullable(), maxRepsPerSet: z.number().int().min(1).max(100).nullable(), loadTarget: planIntensitySchema }),
+  z.object({ type: z.literal('jumps'), note: z.literal('plyometric') }),
+])
+const plannedSessionSchema = z.object({
+  id: z.string().min(1).max(80),
+  /** 1 = Montag … 7 = Sonntag. */
+  day: z.number().int().min(1).max(7),
+  ruleId: z.string().min(1).max(60),
+  ruleVersion: z.string().min(1).max(20),
+  primaryIntent: z.string().min(1).max(40),
+  evidenceStrength: z.enum(['HIGH', 'MODERATE', 'LOW', 'EMERGING', 'INSUFFICIENT']),
+  evidenceSpecificity: z.enum(['DIRECT', 'RELATED', 'GENERAL', 'EXTRAPOLATED']),
+  plannedDurationMin: z.number().int().min(1).max(600).nullable().default(null),
+  highIntensity: z.boolean().default(false),
+  blocks: z.array(planPartSchema).max(10).default([]),
+  retestMetric: z.string().max(80),
+  coachModified: z.boolean().default(false),
+  coachModificationReason: z.string().max(200).nullable().default(null),
+  removed: z.boolean().default(false),
+})
+const planCompletionSchema = z.object({
+  sessionId: z.string().min(1).max(80),
+  day: dayString,
+  durationMin: z.number().int().min(1).max(600),
+  rpe: z.number().int().min(1).max(10),
+  diarySessionId: z.string().nullable().default(null),
+})
+const trainingBlockSchema = z.object({
+  id: z.string().min(1),
+  family: z.enum(['combat_grappling', 'combat_striking', 'hybrid']),
+  disciplineId: z.string().max(60).nullable().default(null),
+  phase: z.enum(['GPP', 'BUILD', 'SPECIFIC', 'TAPER', 'TRANSITION']),
+  startDay: dayString,
+  weeks: z.number().int().min(1).max(26),
+  retestMetrics: z.array(z.string().max(80)).max(8).default([]),
+  sessions: z.array(plannedSessionSchema).max(60).default([]),
+  completions: z.array(planCompletionSchema).max(600).default([]),
+  status: z.enum(['active', 'closed']).default('active'),
+  createdAt: isoDate,
+  updatedAt: isoDate,
+})
+
+/**
  * Eine Entscheidung im Decision-Log (Schicht S3).
  *
  * Aus dem Coach-System v4: Anlass, Bereich, Beobachtung, Entscheidung,
@@ -1090,6 +1148,7 @@ const athleteSchema = z.object({
   shareCheckins: z.boolean().default(false),
   /** Trainingslog: Einheiten mit Sätzen (Schicht S2). */
   workouts: z.array(workoutSchema).default([]),
+  trainingBlocks: z.array(trainingBlockSchema).default([]),
   /** Decision-Log (Schicht S3): was entschieden wurde, und was danach geschah. */
   decisions: z.array(decisionSchema).default([]),
   /** Schwellen des Cockpits für diesen Athleten. */
@@ -1170,6 +1229,9 @@ export type ValidatedObservation = z.infer<typeof observationSchema>
 export type ValidatedDiaryEntry = z.infer<typeof diaryEntrySchema>
 export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
 export type ValidatedWorkout = z.infer<typeof workoutSchema>
+export type ValidatedTrainingBlock = z.infer<typeof trainingBlockSchema>
+export type ValidatedPlannedSession = z.infer<typeof plannedSessionSchema>
+export type ValidatedPlanCompletion = z.infer<typeof planCompletionSchema>
 export type ValidatedActivity = z.infer<typeof activitySchema>
 export type ValidatedHealth = z.infer<typeof healthSchema>
 export type ValidatedHealthConsent = z.infer<typeof healthConsentSchema>
@@ -1699,6 +1761,15 @@ export const MIGRATIONS: Migration[] = [
         profile: { ...athlete.profile, weeklyTarget: athlete.profile?.weeklyTarget ?? { sessions: null, loadAU: null } },
       })),
     }),
+  },  {
+    from: 32,
+    to: 33,
+    describe: 'Trainingsblöcke je Athlet (Training Engine), leer',
+    run: (data: any) => ({
+      ...data,
+      version: 33,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, trainingBlocks: athlete.trainingBlocks ?? [] })),
+    }),
   },
 ]
 
@@ -1741,6 +1812,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     diary: [],
     diaryFields: [],
     workouts: [],
+    trainingBlocks: [],
     activities: [],
     shareCheckins: false,
     decisions: [],

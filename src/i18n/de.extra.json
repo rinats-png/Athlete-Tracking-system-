@@ -2656,7 +2656,8 @@
       "ask": "Fragen an KYDON",
       "brief": "Montagsbrief",
       "weeklyReport": "Wochenbericht",
-      "plan": "Trainingsplan (Vorschau)"
+      "plan": "Trainingsplan (Vorschau)",
+      "planBlock": "Trainingsblock"
     }
   },
   "teamHub": {
@@ -3050,6 +3051,75 @@
       "concurrent": "Kraft und harte Ausdauer liegen an getrennten Tagen, soweit der Wochenplan es zulässt. Eine feste Reihenfolge ist nicht belegt. Bei gleichzeitigem Training zeigte sich ein kleiner Nachteil bei der Beinkraft von Männern, nicht von Frauen; daraus folgt hier keine Geschlechtsregel.",
       "noStationDose": "Für stationsspezifisches Training (zum Beispiel Sled oder Wall Balls) nennt die Studienlage keine belegte Dosis. HYROX-Daten sind überwiegend Beobachtungen. Dieser Teil bleibt beim Trainer.",
       "combatScope": "Technik, Taktik, Sparring und Gewichtsklassen bleiben beim Trainer; KYDON plant kein Gewichtmachen. Bei Symptomen nach Kopftreffern gehört die Entscheidung zur ärztlichen Betreuung, nicht in diese App."
+    },
+    "adopt": {
+      "button": "Als Block übernehmen",
+      "hint": "Der Block beginnt am nächsten Montag. Danach kannst du Einheiten ändern; jede Änderung braucht einen Grund.",
+      "toBlock": "Zum aktiven Block"
     }
+  },
+  "block": {
+    "eyebrow": "Block",
+    "title": "Trainingsblock",
+    "none": "Es gibt noch keinen aktiven Block. Übernimm zuerst einen Plan.",
+    "toPlan": "Zum Plan",
+    "range": "{{discipline}} · {{from}} bis {{to}}",
+    "week": "Woche {{week}} von {{weeks}}",
+    "before": "Der Block beginnt am {{day}}.",
+    "after": "Der Block ist zu Ende. Unten steht der Bericht.",
+    "noWeeks": "Noch keine abgeschlossene Woche.",
+    "checkWeek": "Woche {{week}}",
+    "checkCount": "{{done}} von {{planned}} Einheiten",
+    "startPlayer": "Einheit starten ({{count}} offen)",
+    "checkNote": "Gezählt werden nur die Einheiten, die du im Player abgeschlossen hast. Das ist eine Zählung, keine Bewertung.",
+    "sessions": "Einheiten",
+    "removed": "gestrichen",
+    "coachChanged": "Vom Trainer geändert: {{reason}}",
+    "newDay": "Neuer Tag",
+    "reason": "Grund der Änderung",
+    "error": {
+      "reason_required": "Eine Änderung braucht einen Grund.",
+      "unknown_session": "Diese Einheit gibt es nicht mehr.",
+      "day_taken": "An diesem Tag liegt schon eine Schlüsseleinheit.",
+      "nothing_changed": "Es hat sich nichts geändert."
+    },
+    "move": "Verschieben",
+    "remove": "Streichen",
+    "restore": "Wiederherstellen",
+    "cancel": "Abbrechen",
+    "edit": "Ändern",
+    "overrideNote": "Der Plan ist ein Vorschlag aus hinterlegten Regeln. Der Trainer ändert und entscheidet; jede Änderung bleibt mit Grund sichtbar.",
+    "report": {
+      "title": "Bericht zum Block",
+      "count": "{{done}} von {{planned}} geplanten Einheiten abgeschlossen",
+      "noMetrics": "Dieser Block hat keine Messung am Ende.",
+      "missing": "Keine Messung am Blockende erfasst.",
+      "open": "Die Messung am Blockende steht noch aus.",
+      "better": "Verbesserung um {{percent}} %, über der Messschwankung (belegt ab {{detectable}} %).",
+      "worse": "Verschlechterung um {{percent}} %, über der Messschwankung (belegt ab {{detectable}} %).",
+      "noise": "Änderung um {{percent}} %, innerhalb der Messschwankung (belegt ab {{detectable}} %). Eine Veränderung ist nicht belegt.",
+      "unknown": "Die Messschwankung ist noch nicht bekannt, die Änderung lässt sich nicht einordnen.",
+      "note": "Der Bericht stellt Plan und Messung gegenüber. Er sagt nicht, ob der Plan die Ursache einer Veränderung war."
+    },
+    "close": "Block abschließen"
+  },
+  "player": {
+    "eyebrow": "Einheit",
+    "title": "Einheit des Tages",
+    "intro": "Führt durch die Einheit des Tages. Läuft ohne Netz.",
+    "noBlock": "Es gibt keinen aktiven Block.",
+    "none": "Heute ist keine Einheit offen.",
+    "toBlock": "Zum Block",
+    "pick": "Einheit wählen",
+    "work": "Arbeit {{index}} von {{of}}",
+    "rest": "Pause nach {{index}} von {{of}}",
+    "pause": "Pause",
+    "start": "Start",
+    "stepOf": "Schritt {{step}} von {{of}}",
+    "finish": "Abschließen",
+    "allDone": "Alle Schritte sind durch.",
+    "minutes": "Dauer in Minuten",
+    "rpe": "Anstrengung (RPE 1–10)",
+    "save": "Einheit eintragen"
   }
 }

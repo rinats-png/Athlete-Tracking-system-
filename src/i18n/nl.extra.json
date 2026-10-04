@@ -2656,7 +2656,8 @@
       "ask": "Vraag het KYDON",
       "brief": "Maandagbrief",
       "weeklyReport": "Weekrapport",
-      "plan": "Trainingsplan (voorbeeld)"
+      "plan": "Trainingsplan (voorbeeld)",
+      "planBlock": "Trainingsblok"
     }
   },
   "teamHub": {
@@ -3050,6 +3051,75 @@
       "concurrent": "Kracht en harde duur liggen op aparte dagen voor zover de week het toelaat. Een vaste volgorde is niet aangetoond. Bij gelijktijdig trainen zagen we een klein nadeel voor beenkracht bij mannen, niet bij vrouwen; daar volgt hier geen regel naar geslacht uit.",
       "noStationDose": "Voor stationspecifieke training (bijvoorbeeld sled of wall balls) geeft het bewijs geen aangetoonde dosis. HYROX-gegevens zijn vooral observaties. Dit deel blijft bij de trainer.",
       "combatScope": "Techniek, tactiek, sparring en gewichtsklassen blijven bij de trainer; KYDON plant geen gewichtmaken. Bij klachten na klappen tegen het hoofd hoort de beslissing bij medische zorg, niet bij deze app."
+    },
+    "adopt": {
+      "button": "Als blok overnemen",
+      "hint": "Het blok begint volgende maandag. Daarna kun je trainingen wijzigen; elke wijziging heeft een reden nodig.",
+      "toBlock": "Naar het actieve blok"
     }
+  },
+  "block": {
+    "eyebrow": "Blok",
+    "title": "Trainingsblok",
+    "none": "Er is nog geen actief blok. Neem eerst een plan over.",
+    "toPlan": "Naar het plan",
+    "range": "{{discipline}} · {{from}} tot {{to}}",
+    "week": "Week {{week}} van {{weeks}}",
+    "before": "Het blok begint op {{day}}.",
+    "after": "Het blok is afgelopen. Het rapport staat hieronder.",
+    "noWeeks": "Nog geen afgeronde week.",
+    "checkWeek": "Week {{week}}",
+    "checkCount": "{{done}} van {{planned}} trainingen",
+    "startPlayer": "Training starten ({{count}} open)",
+    "checkNote": "Alleen trainingen die je in de speler hebt afgerond tellen mee. Dit is een telling, geen beoordeling.",
+    "sessions": "Trainingen",
+    "removed": "geschrapt",
+    "coachChanged": "Gewijzigd door de trainer: {{reason}}",
+    "newDay": "Nieuwe dag",
+    "reason": "Reden van de wijziging",
+    "error": {
+      "reason_required": "Een wijziging heeft een reden nodig.",
+      "unknown_session": "Deze training bestaat niet meer.",
+      "day_taken": "Op die dag staat al een sleuteltraining.",
+      "nothing_changed": "Er is niets veranderd."
+    },
+    "move": "Verplaatsen",
+    "remove": "Schrappen",
+    "restore": "Herstellen",
+    "cancel": "Annuleren",
+    "edit": "Wijzigen",
+    "overrideNote": "Het plan is een voorstel uit opgeslagen regels. De trainer past aan en beslist; elke wijziging blijft met reden zichtbaar.",
+    "report": {
+      "title": "Blokrapport",
+      "count": "{{done}} van {{planned}} geplande trainingen afgerond",
+      "noMetrics": "Dit blok heeft geen meting aan het einde.",
+      "missing": "Geen meting aan het einde van het blok vastgelegd.",
+      "open": "De meting aan het einde van het blok moet nog.",
+      "better": "Verbetering van {{percent}} %, boven de meetfout (aangetoond vanaf {{detectable}} %).",
+      "worse": "Verslechtering van {{percent}} %, boven de meetfout (aangetoond vanaf {{detectable}} %).",
+      "noise": "Verandering van {{percent}} %, binnen de meetfout (aangetoond vanaf {{detectable}} %). Een verandering is niet aangetoond.",
+      "unknown": "De meetfout is nog niet bekend, de verandering is niet te duiden.",
+      "note": "Het rapport zet plan en meting naast elkaar. Het zegt niet of het plan een verandering veroorzaakte."
+    },
+    "close": "Blok afsluiten"
+  },
+  "player": {
+    "eyebrow": "Training",
+    "title": "Training van de dag",
+    "intro": "Leidt je door de training van de dag. Werkt zonder netwerk.",
+    "noBlock": "Er is geen actief blok.",
+    "none": "Vandaag staat geen training open.",
+    "toBlock": "Naar het blok",
+    "pick": "Training kiezen",
+    "work": "Werk {{index}} van {{of}}",
+    "rest": "Rust na {{index}} van {{of}}",
+    "pause": "Pauze",
+    "start": "Start",
+    "stepOf": "Stap {{step}} van {{of}}",
+    "finish": "Afronden",
+    "allDone": "Alle stappen zijn gedaan.",
+    "minutes": "Duur in minuten",
+    "rpe": "Inspanning (RPE 1–10)",
+    "save": "Training vastleggen"
   }
 }

@@ -2656,7 +2656,8 @@
       "ask": "Spørg KYDON",
       "brief": "Mandagsbrev",
       "weeklyReport": "Ugerapport",
-      "plan": "Træningsplan (forhåndsvisning)"
+      "plan": "Træningsplan (forhåndsvisning)",
+      "planBlock": "Træningsblok"
     }
   },
   "teamHub": {
@@ -3050,6 +3051,75 @@
       "concurrent": "Styrke og hård udholdenhed ligger på forskellige dage, så langt ugen tillader. En fast rækkefølge er ikke dokumenteret. Ved samtidig træning viste der sig en lille ulempe for benstyrken hos mænd, ikke hos kvinder; ingen regel efter køn følger heraf her.",
       "noStationDose": "Til stationsspecifik træning (for eksempel slæde eller wall balls) giver belæggene ingen dokumenteret dosis. HYROX-data er mest observationer. Denne del bliver hos træneren.",
       "combatScope": "Teknik, taktik, sparring og vægtklasser bliver hos træneren; KYDON planlægger ikke vægtnedskæring. Symptomer efter slag mod hovedet hører til lægelig opfølgning, ikke til denne app."
+    },
+    "adopt": {
+      "button": "Tag i brug som blok",
+      "hint": "Blokken starter næste mandag. Derefter kan du ændre sessioner; hver ændring kræver en begrundelse.",
+      "toBlock": "Til aktiv blok"
     }
+  },
+  "block": {
+    "eyebrow": "Blok",
+    "title": "Træningsblok",
+    "none": "Der er endnu ingen aktiv blok. Tag først en plan i brug.",
+    "toPlan": "Til planen",
+    "range": "{{discipline}} · {{from}} til {{to}}",
+    "week": "Uge {{week}} af {{weeks}}",
+    "before": "Blokken starter den {{day}}.",
+    "after": "Blokken er slut. Rapporten står nedenfor.",
+    "noWeeks": "Ingen afsluttet uge endnu.",
+    "checkWeek": "Uge {{week}}",
+    "checkCount": "{{done}} af {{planned}} sessioner",
+    "startPlayer": "Start session ({{count}} åben)",
+    "checkNote": "Kun sessioner, du har afsluttet i afspilleren, tælles. Det er en optælling, ikke en vurdering.",
+    "sessions": "Sessioner",
+    "removed": "slettet",
+    "coachChanged": "Ændret af træneren: {{reason}}",
+    "newDay": "Ny dag",
+    "reason": "Begrundelse for ændringen",
+    "error": {
+      "reason_required": "En ændring kræver en begrundelse.",
+      "unknown_session": "Denne session findes ikke længere.",
+      "day_taken": "Der ligger allerede en nøglesession den dag.",
+      "nothing_changed": "Intet er ændret."
+    },
+    "move": "Flyt",
+    "remove": "Slet",
+    "restore": "Gendan",
+    "cancel": "Annuller",
+    "edit": "Ændr",
+    "overrideNote": "Planen er et forslag fra gemte regler. Træneren ændrer og beslutter; hver ændring forbliver synlig med begrundelse.",
+    "report": {
+      "title": "Blokrapport",
+      "count": "{{done}} af {{planned}} planlagte sessioner afsluttet",
+      "noMetrics": "Denne blok har ingen måling til sidst.",
+      "missing": "Ingen måling registreret ved blokkens slutning.",
+      "open": "Målingen ved blokkens slutning mangler stadig.",
+      "better": "Forbedring på {{percent}} %, over målefejlen (påvist fra {{detectable}} %).",
+      "worse": "Forværring på {{percent}} %, over målefejlen (påvist fra {{detectable}} %).",
+      "noise": "Ændring på {{percent}} %, inden for målefejlen (påvist fra {{detectable}} %). En ændring er ikke påvist.",
+      "unknown": "Målefejlen er endnu ikke kendt, ændringen kan ikke vurderes.",
+      "note": "Rapporten stiller plan og måling side om side. Den siger ikke, om planen forårsagede en ændring."
+    },
+    "close": "Afslut blok"
+  },
+  "player": {
+    "eyebrow": "Session",
+    "title": "Dagens session",
+    "intro": "Fører dig gennem dagens session. Virker uden net.",
+    "noBlock": "Der er ingen aktiv blok.",
+    "none": "Ingen session er åben i dag.",
+    "toBlock": "Til blokken",
+    "pick": "Vælg session",
+    "work": "Arbejde {{index}} af {{of}}",
+    "rest": "Pause efter {{index}} af {{of}}",
+    "pause": "Pause",
+    "start": "Start",
+    "stepOf": "Trin {{step}} af {{of}}",
+    "finish": "Afslut",
+    "allDone": "Alle trin er gjort.",
+    "minutes": "Varighed i minutter",
+    "rpe": "Anstrengelse (RPE 1–10)",
+    "save": "Registrer session"
   }
 }

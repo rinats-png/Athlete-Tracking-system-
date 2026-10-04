@@ -15,6 +15,9 @@ import {
   type ValidatedDiaryEntry,
   type ValidatedDiarySession,
   type ValidatedWorkout,
+  type ValidatedTrainingBlock,
+  type ValidatedPlannedSession,
+  type ValidatedPlanCompletion,
   type ValidatedActivity,
   type ValidatedWorkoutExercise,
   type ValidatedWorkoutSet,
@@ -74,6 +77,9 @@ export type StoredDiaryEntry = ValidatedDiaryEntry
 export type StoredDiarySession = ValidatedDiarySession
 export type StoredActivity = ValidatedActivity
 export type StoredWorkout = ValidatedWorkout
+export type StoredTrainingBlock = ValidatedTrainingBlock
+export type StoredPlannedSession = ValidatedPlannedSession
+export type StoredPlanCompletion = ValidatedPlanCompletion
 export type StoredWorkoutExercise = ValidatedWorkoutExercise
 export type StoredWorkoutSet = ValidatedWorkoutSet
 export type StoredDecision = ValidatedDecision

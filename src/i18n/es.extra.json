@@ -2656,7 +2656,8 @@
       "ask": "Preguntar a KYDON",
       "brief": "Resumen del lunes",
       "weeklyReport": "Informe semanal",
-      "plan": "Plan de entrenamiento (vista previa)"
+      "plan": "Plan de entrenamiento (vista previa)",
+      "planBlock": "Bloque de entrenamiento"
     }
   },
   "teamHub": {
@@ -3050,6 +3051,75 @@
       "concurrent": "Fuerza y resistencia dura están en días separados en la medida en que lo permite la semana. Un orden fijo no está demostrado. Con el entrenamiento concurrente apareció una pequeña desventaja en la fuerza de piernas en hombres, no en mujeres; de ello no se deriva aquí ninguna regla por sexo.",
       "noStationDose": "Para el entrenamiento específico de estaciones (por ejemplo trineo o wall balls) la evidencia no da una dosis demostrada. Los datos de HYROX son sobre todo observacionales. Esta parte queda en manos del entrenador.",
       "combatScope": "Técnica, táctica, sparring y categorías de peso quedan en manos del entrenador; KYDON no planifica recortes de peso. Los síntomas tras golpes en la cabeza son asunto de la atención médica, no de esta app."
+    },
+    "adopt": {
+      "button": "Adoptar como bloque",
+      "hint": "El bloque empieza el próximo lunes. Después puedes cambiar sesiones; cada cambio necesita un motivo.",
+      "toBlock": "Al bloque activo"
     }
+  },
+  "block": {
+    "eyebrow": "Bloque",
+    "title": "Bloque de entrenamiento",
+    "none": "Todavía no hay un bloque activo. Adopta primero un plan.",
+    "toPlan": "Al plan",
+    "range": "{{discipline}} · del {{from}} al {{to}}",
+    "week": "Semana {{week}} de {{weeks}}",
+    "before": "El bloque empieza el {{day}}.",
+    "after": "El bloque ha terminado. El informe está debajo.",
+    "noWeeks": "Aún no hay semanas completadas.",
+    "checkWeek": "Semana {{week}}",
+    "checkCount": "{{done}} de {{planned}} sesiones",
+    "startPlayer": "Empezar sesión ({{count}} abierta)",
+    "checkNote": "Solo se cuentan las sesiones que completaste en el reproductor. Es un recuento, no una valoración.",
+    "sessions": "Sesiones",
+    "removed": "eliminada",
+    "coachChanged": "Cambiado por el entrenador: {{reason}}",
+    "newDay": "Nuevo día",
+    "reason": "Motivo del cambio",
+    "error": {
+      "reason_required": "Un cambio necesita un motivo.",
+      "unknown_session": "Esta sesión ya no existe.",
+      "day_taken": "Ese día ya hay una sesión clave.",
+      "nothing_changed": "No ha cambiado nada."
+    },
+    "move": "Mover",
+    "remove": "Eliminar",
+    "restore": "Restaurar",
+    "cancel": "Cancelar",
+    "edit": "Cambiar",
+    "overrideNote": "El plan es una propuesta a partir de reglas guardadas. El entrenador cambia y decide; cada cambio queda visible con su motivo.",
+    "report": {
+      "title": "Informe del bloque",
+      "count": "{{done}} de {{planned}} sesiones planificadas completadas",
+      "noMetrics": "Este bloque no tiene medición al final.",
+      "missing": "No se registró ninguna medición al final del bloque.",
+      "open": "La medición del final del bloque está pendiente.",
+      "better": "Mejora del {{percent}} %, por encima del error de medición (demostrada a partir del {{detectable}} %).",
+      "worse": "Empeoramiento del {{percent}} %, por encima del error de medición (demostrado a partir del {{detectable}} %).",
+      "noise": "Cambio del {{percent}} %, dentro del error de medición (demostrado a partir del {{detectable}} %). Un cambio no está demostrado.",
+      "unknown": "El error de medición aún no se conoce, el cambio no se puede interpretar.",
+      "note": "El informe pone plan y medición lado a lado. No dice si el plan causó un cambio."
+    },
+    "close": "Cerrar bloque"
+  },
+  "player": {
+    "eyebrow": "Sesión",
+    "title": "Sesión del día",
+    "intro": "Te guía por la sesión del día. Funciona sin red.",
+    "noBlock": "No hay ningún bloque activo.",
+    "none": "Hoy no hay ninguna sesión abierta.",
+    "toBlock": "Al bloque",
+    "pick": "Elegir sesión",
+    "work": "Trabajo {{index}} de {{of}}",
+    "rest": "Pausa tras {{index}} de {{of}}",
+    "pause": "Pausa",
+    "start": "Empezar",
+    "stepOf": "Paso {{step}} de {{of}}",
+    "finish": "Terminar",
+    "allDone": "Todos los pasos están hechos.",
+    "minutes": "Duración en minutos",
+    "rpe": "Esfuerzo (RPE 1–10)",
+    "save": "Registrar sesión"
   }
 }
