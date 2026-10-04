@@ -56,6 +56,8 @@ export function auditPolicies(dir = DIR) {
   const policies = new Map()
   const rlsTables = new Set()
   const policyTables = new Set()
+  /** Tabellen, denen anon und authenticated alle Rechte entzogen wurden: nur der Service-Schlüssel kommt heran. */
+  const serverOnly = new Set()
   const functions = []
 
   for (const file of files) {
@@ -65,6 +67,9 @@ export function auditPolicies(dir = DIR) {
 
       const rls = lower.match(/alter table (?:public\.)?(\w+)\s+enable row level security/)
       if (rls) rlsTables.add(rls[1])
+
+      const revoked = lower.match(/^revoke all on (?:table )?(?:public\.)?(\w+) from [^;]*\bauthenticated\b/)
+      if (revoked) serverOnly.add(revoked[1])
 
       // Namen dürfen mit oder ohne Anführungszeichen stehen. Beides kommt im
       // Bestand vor, und ein Parser, der eine Schreibweise übersieht, prüft
@@ -131,7 +136,8 @@ export function auditPolicies(dir = DIR) {
     }
   }
   for (const table of rlsTables) {
-    if (!policyTables.has(table)) {
+    // Absicht, kein Versehen: ohne Rechte für Endnutzer ist «keine Policy» richtig.
+    if (!policyTables.has(table) && !serverOnly.has(table)) {
       add('MEDIUM', 'rls-without-policy', table,
         'RLS eingeschaltet, aber keine Policy — die Tabelle ist für Endnutzer unlesbar')
     }
