@@ -1,5 +1,20 @@
 # KYDON – Produktdoktrin und Zielarchitektur
 
+> ## Nachtrag 1 (4. Oktober 2026): Trainingsplanung aus belegten Regeln
+>
+> **Entscheidung des Inhabers.** Die Doktrin wird an einer Stelle geändert: KYDON darf Trainingspläne erzeugen, aber nur unter diesen Bedingungen. Wo dieser Nachtrag einer Aussage weiter unten widerspricht (§1 «empfiehlt nicht, wie…», §5, §26, §45, §46, §49 «kein Trainingsplaner»), gilt der Nachtrag. Alles andere bleibt.
+>
+> 1. **Jeder Plan hat einen Grund, jeder Grund hat Evidenz, jeder Block endet mit einer erneuten Messung.** Ohne gemessene Lücke und ohne Messung am Blockende wird nichts geplant.
+> 2. **Deterministisch.** Die Planlogik stammt aus hinterlegten Regeln im Code (`src/domain`, `src/data`). Ein Sprachmodell erfindet keine Regel, keine Dosis und keine Zahl; es darf höchstens formulieren (§28 gilt unverändert).
+> 3. **Jede Regel trägt Quelle, Evidenzstärke, Spezifität und Prüfstatus.** Evidence Strength, Specificity und Data Confidence bleiben getrennt und werden nie zu einem Score verrechnet (§11).
+> 4. **Prüfstatus.** Eine Regel ist `unreviewed` oder `reviewed`. Nur geprüfte Regeln gehen in einen Plan, den ein Mensch ohne Vorschauschalter sieht. Geprüft heißt: eine fachkundige Person (Sportwissenschaft oder Trainer) hat Quelle und Regel gegengelesen, mit Namen und Datum im Register. Ungeprüfte Regeln erscheinen nur hinter dem Bau-Schalter `VITE_TRAINING_PLAN=preview` und sind dort sichtbar als ungeprüft gekennzeichnet.
+> 5. **Der Trainer hat das letzte Wort.** Jeder Planvorschlag ist änderbar; Änderungen tragen einen Grund (Coach Override). Der Athlet sieht, ob ein Plan vom Trainer geändert wurde.
+> 6. **Keine Medizin.** Weiterhin keine Diagnose, keine Behandlung, keine Rückkehr-Freigabe, keine Gewichtmachen-Automatik, keine Verletzungsvorhersage, keine zyklusbasierten Empfehlungen (§25, §45 bleiben).
+> 7. **Wo die Evidenz nicht reicht, gibt es keine Regel.** `INSUFFICIENT` heißt: keine automatische Verordnung, nur Beschreibung und ein Hinweis, dass die Lage offen ist.
+> 8. **Der Wächter-Test bleibt.** Texte beschreiben und begründen; sie urteilen nicht über Personen und behaupten keine Ursachen aus Gleichzeitigem (§29).
+>
+> Umsetzung und Reihenfolge: [training-engine.md](training-engine.md).
+
 **Stand:** 4. Oktober 2026  
 **Zweck:** Verbindliche Leitlinie für die weitere Produktentwicklung von KYDON.
 

@@ -18,6 +18,7 @@ Deutsch, im Stil der umgebenden Dateien.
 - **[docs/produktdoktrin.md](docs/produktdoktrin.md)** — verbindliche Produktleitlinie (was KYDON sagen darf und was nicht, §50 Entscheidungsregel für neue Funktionen)
 - [docs/umbauplan.md](docs/umbauplan.md) — Umbau nach der Doktrin, Etappen und Entscheidungen
 - [docs/prd.md](docs/prd.md) — was das Produkt können soll, Pakete, offene Punkte
+- [docs/training-engine.md](docs/training-engine.md) — Pläne aus belegten, geprüften Regeln (Nachtrag 1 der Doktrin)
 - [docs/ask-kydon.md](docs/ask-kydon.md) — Fragen an KYDON, Zahlenwächter, Coach Copilot
 - Themenseiten in `docs/` (Preise, Sicherheit, Sprachen, Push, Auslieferung …)
 
@@ -33,6 +34,7 @@ Deutsch, im Stil der umgebenden Dateien.
 8. Nie mitten am Testtag sperren.
 9. Fachlogik nur in `src/domain` (rein, ohne React/Netz/Storage).
 10. Jeder Oberflächentext in allen 8 Sprachen.
+11. Keine Trainingsregel ohne Quelle, Evidenzangabe und Prüfstatus; ungeprüfte Regeln nur hinter dem Vorschauschalter.
 
 Müsste eine Aufgabe eine dieser Regeln brechen: **anhalten**, Konflikt
 benennen, Folgen zeigen, kleinste regelkonforme Lösung vorschlagen (§21).

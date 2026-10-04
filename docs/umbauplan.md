@@ -81,3 +81,7 @@ Auftragsverarbeitung, Monatsdeckel.
 - **8b** Anzeige für Übungsbilder (`src/data/exerciseImages.ts`, Vorschau im Trainingseditor). Die Liste ist leer, bis die Bilder `U_<key>.jpg` geliefert sind; ein Prüffall hält Liste und Dateien im Gleichlauf.
 - **8c** Wochenbericht des Trainers (`/trainer/wochenbericht`): Athlet, Eltern oder Verband, je Empfänger datensparsam, Bestätigung vor Kopieren und Drucken.
 - **8d** Push-Thema `weekly`, siehe [push.md](push.md).
+
+## Etappe 9 — Training Engine (Entscheidung vom 4. Oktober 2026)
+
+Doktrin geändert (Nachtrag 1): Pläne aus belegten, geprüften Regeln. Pilot in drei Sportwelten, schrittweise, ohne Neubau. Siehe [training-engine.md](training-engine.md).
