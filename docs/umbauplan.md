@@ -21,7 +21,7 @@
 | Etappe | Inhalt | Stand |
 |---|---|---|
 | 1 | **Trainer:** Navigation (Today, Athleten, Test, Team, Mehr), Trainer-Today, Team-Hub, Mehr-Seite, Wächter-Test | ✅ gebaut |
-| 2 | **Athlet:** Navigation (Today, Performance, Test, Fuel, Mehr), Today, Performance-Profil mit Assessment Coverage und Data Confidence | offen |
+| 2 | **Athlet:** Navigation (Heute, Leistung, Test, Fuel, Mehr), Heute, Leistungsprofil mit Assessment Coverage und Data Confidence | ✅ gebaut |
 | 3 | Check-in (Migration), Trainer-Cockpit mit Check-in-Quote, Montagsbrief | offen |
 | 4 | Kiosk-Modus und Testtag-Planer | offen |
 | 5 | Ask KYDON, Coach Copilot (erst Werkzeugschicht, dann Sprachmodell) | offen |
@@ -36,3 +36,11 @@ Jede neue Funktion besteht die Prüfung aus Doktrin §50.
 - **Team** (`TeamHub.tsx`) und **Mehr** (`MoreScreen.tsx`) ordnen vorhandene Werkzeuge, ohne etwas zu verschieben.
 - **Läufe:** die Serien-Kacheln sind entfernt (keine Streak-Mechanik, Doktrin §19).
 - **Wächter** (`tests/doctrine.spec.ts`): schlägt an, wenn Ratgeber- oder Kausalsprache in den deutschen oder englischen Texten steht. Der heutige Bestand war sauber.
+
+## Etappe 2: was gebaut ist
+
+- **Navigation des Athleten:** Heute, Leistung, Test, Fuel, Mehr. Alle Adressen blieben; Verlauf, Analyse und Bericht liegen unter Leistung, Profil, Tagebuch, Training und Rechtliches unter Mehr. Die frühere Übersicht ist unter `/uebersicht` erreichbar.
+- **Heute** (`features/today/AthleteToday.tsx`, Logik in `domain/performanceView.ts`): Veränderungen je Test mit Urteil gegen den Messfehler, größte messbare Lücke im vorhandenen Profil, heutige Einheit, Tages-Check-in (die bestehende Karte), nächster Test, Wettkampf. Ohne Messung zeigt Heute weiter den geführten Einstieg.
+- **Leistung** (`features/performance/PerformanceScreen.tsx`): Datenbasis mit Data Confidence (HIGH, MODERATE, LOW, INSUFFICIENT), Kerntests als Anzahl, Radar, Dimensionen mit Perzentil, «keine Referenz» oder «keine Daten», vier Karten. Kein Gesamtwert.
+- **Gefunden und behoben:** Der Radar zeigte über dem Diagramm einen Rohschlüssel (`radar.unitPercentile`); die Schlüssel hießen anders im Wörterbuch.
+- **Noch nicht:** der Check-in aus dem Mockup (Energie, Muskelkater, Stress mit Freigabe an den Trainer) braucht eine Migration und folgt in Etappe 3.

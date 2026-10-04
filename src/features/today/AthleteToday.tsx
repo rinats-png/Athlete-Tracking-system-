@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowDown, ArrowUp, ChevronRight, Minus, ShieldCheck } from 'lucide-react'
+import { ArrowDown, ArrowUp, ChevronRight, ShieldCheck } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { ImageCard } from '@/components/ui/ImageCard'
 import { useLocale } from '@/features/shared/useLocale'
@@ -79,14 +79,14 @@ function TodayWithData() {
             <ul className="grid gap-px bg-line sm:grid-cols-3">
               {today.changes.map((c) => {
                 const v = c.report.verdict
-                const Icon = v === 'better' ? ArrowUp : v === 'worse' ? ArrowDown : Minus
-                const tone = v === 'better' ? 'text-accent-text' : v === 'worse' ? 'text-critical' : 'text-ink-muted'
+                const Icon = v === 'better' ? ArrowUp : v === 'worse' ? ArrowDown : null
+                const tone = v === 'better' ? 'text-accent-text' : v === 'worse' ? 'text-critical' : 'text-ink-secondary'
                 return (
                   <li key={c.slug} className="bg-surface px-4 py-3" data-testid={`change-${c.slug}`}>
                     <p className="truncate text-[12px] text-ink-secondary">{testName(c.slug)}</p>
                     <p className={cn('mt-1 flex items-center gap-1.5 readout text-[22px] font-light', tone)}>
-                      <Icon size={18} aria-hidden />
-                      {c.report.changePercent != null && (v === 'better' || v === 'worse') ? `${c.report.changePercent > 0 ? '+' : ''}${formatNumber(c.report.changePercent, locale, 1)} %` : '–'}
+                      {Icon && <Icon size={18} aria-hidden />}
+                      {c.report.changePercent != null ? `${c.report.changePercent > 0 ? '+' : ''}${formatNumber(c.report.changePercent, locale, 1)} %` : '–'}
                     </p>
                     <p className="mt-0.5 text-[11px] text-ink-muted">{t(`athleteToday.changes.verdict.${v}`)}</p>
                   </li>

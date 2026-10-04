@@ -80,7 +80,7 @@ export function RadarProfile({
   const [view, setView] = useState<'chart' | 'table'>('chart')
   const hatch = useHatchId()
 
-  const axisUnit = mode === 'population' ? t('radar.unitPercentile') : t('radar.unitPersonalBest')
+  const axisUnit = mode === 'population' ? t('radar.axisUnitPopulation') : t('radar.axisUnitPersonalBest')
 
   const geometry = useMemo(() => {
     const n = Math.max(1, axes.length)

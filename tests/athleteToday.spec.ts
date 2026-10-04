@@ -118,7 +118,7 @@ test('Bildschirm: Leistung zeigt Datenbasis, Dimensionen und die vier Karten, oh
   await expect(page.getByTestId('perf-dimensions').locator('li').first()).toBeVisible()
   for (const id of ['perf-strongest', 'perf-gap', 'perf-change', 'perf-next']) await expect(page.getByTestId(id)).toBeVisible()
   const text = await page.getByTestId('performance-screen').innerText()
-  expect(text).not.toMatch(/performance\.|athleteToday\./)
+  expect(text).not.toMatch(/performance\.|athleteToday\.|radar\.[a-z]/i)
   expect(text).not.toMatch(/\d+\s?%\s*(Abdeckung|Coverage)/i)
 })
 
