@@ -55,7 +55,7 @@ test.describe('Gate (Nachtrag 1, Punkt 4)', () => {
     const q = { family: 'hybrid' as const, phase: 'BUILD' as const, intent: 'VO2MAX' as const, mode: 'preview' as const, trainingAgeYears: 3 }
     expect(eligibleRules(q).map((r) => r.id)).toEqual(['vo2_4x4'])
     expect(eligibleRules({ ...q, phase: 'TAPER' })).toEqual([])
-    expect(eligibleRules({ ...q, intent: 'MAX_STRENGTH' })).toEqual([])
+    expect(eligibleRules({ ...q, intent: 'MAX_SPEED' })).toEqual([])
     expect(eligibleRules({ ...q, trainingAgeYears: 0 })).toEqual([])
     expect(eligibleRules({ ...q, trainingAgeYears: null })).toEqual([])
     expect(eligibleRules({ ...q, mode: 'live' })).toEqual([])

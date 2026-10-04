@@ -2655,7 +2655,8 @@
       "week": "Ugeoversigt",
       "ask": "Spørg KYDON",
       "brief": "Mandagsbrev",
-      "weeklyReport": "Ugerapport"
+      "weeklyReport": "Ugerapport",
+      "plan": "Træningsplan (forhåndsvisning)"
     }
   },
   "teamHub": {
@@ -2914,6 +2915,134 @@
       "athlete": "Indeholder alt fra mandagsbrevet, også belastning og check-ins.",
       "parents": "Uden check-ins: selvvurderinger om ømhed og stress går kun til atleten.",
       "association": "Kun datagrundlag, fund og næste måling. Ingen dagbogs-, belastnings- eller check-in-data."
+    }
+  },
+  "plan": {
+    "eyebrow": "Plan",
+    "title": "Træningsplan (forhåndsvisning)",
+    "intro": "Et forslag fra gemte, dokumenterede regler for dine huller. Træneren har det sidste ord.",
+    "preview": "Forhåndsvisning: reglerne er endnu ikke kontrolleret af en fagperson og er markeret som ukontrollerede.",
+    "off": "Træningsplanen er ikke slået til i denne version.",
+    "noDiscipline": "Vælg din disciplin i profilen, så kan KYDON søge regler for dine huller.",
+    "unsupported": "Der findes endnu ingen regler for denne disciplin. Piloten starter med grappling (judo, brydning, BJJ).",
+    "phase": {
+      "label": "Fase",
+      "GPP": "Generel forberedelse",
+      "BUILD": "Opbygning",
+      "SPECIFIC": "Specifik forberedelse"
+    },
+    "days": {
+      "available": "Dage til ekstra sessioner",
+      "hard": "Dage med hårde runder (sparring, randori)"
+    },
+    "day": {
+      "1": "man",
+      "2": "tir",
+      "3": "ons",
+      "4": "tor",
+      "5": "fre",
+      "6": "lør",
+      "7": "søn"
+    },
+    "hr": {
+      "known": "Maksimalpuls findes i profilen: pulsmål er mulige.",
+      "unknown": "Ingen maksimalpuls i profilen: sessioner med pulsmål planlægges ikke."
+    },
+    "sessions": {
+      "title": "Sessioner",
+      "none": "Med de valgte dage og de tilgængelige data bliver der ingen session."
+    },
+    "session": {
+      "line": "{{day}} · {{intent}}",
+      "minutes": "ca. {{count}} min arbejde og pause, uden opvarmning"
+    },
+    "intent": {
+      "VO2MAX": "VO₂max",
+      "REPEATED_SPRINT": "Gentagne sprint",
+      "MAX_STRENGTH": "Maksimal styrke",
+      "POWER": "Power",
+      "PLYOMETRIC": "Pliometri"
+    },
+    "block": {
+      "interval": "{{reps}} × {{work}} min arbejde, {{rec}} min aktiv pause, {{min}}–{{max}} % af maksimalpuls",
+      "sprint": "{{sets}} sæt × {{reps}} × {{dist}} m, maksimalt, pause højst {{rec}} s",
+      "strength": "{{sets}} sæt ved {{min}}–{{max}} % 1RM. Træneren vælger øvelsen.",
+      "strengthMax": "{{min}}–{{max}} % 1RM, højst {{reps}} gentagelser pr. sæt, maksimal bevægelsesintention. Træneren vælger øvelse og sæt.",
+      "jumps": "Træneren vælger springformer og omfang."
+    },
+    "evidence": {
+      "strength": "Belæg: {{level}}",
+      "specificity": "Specificitet: {{level}}",
+      "open": "Belæg og grænser"
+    },
+    "strength": {
+      "HIGH": "høj",
+      "MODERATE": "moderat",
+      "LOW": "lav",
+      "EMERGING": "fremspirende",
+      "INSUFFICIENT": "utilstrækkelig"
+    },
+    "specificity": {
+      "DIRECT": "direkte",
+      "RELATED": "beslægtet",
+      "GENERAL": "generel",
+      "EXTRAPOLATED": "ekstrapoleret"
+    },
+    "review": {
+      "unreviewed": "Ukontrolleret",
+      "reviewed": "Kontrolleret af {{name}} den {{date}}"
+    },
+    "limits": "Belægets grænser",
+    "sources": "Kilder",
+    "skipped": {
+      "title": "Ikke planlagt"
+    },
+    "skip": {
+      "data_thin": "for få målinger: mål igen først",
+      "no_rule": "ingen passende regel",
+      "hr_max_unknown": "ingen pulsmål uden kendt maksimalpuls",
+      "no_slot": "ingen ledig dag, der passer til reglerne",
+      "too_long": "længere end den valgte maksimale varighed",
+      "budget": "budgettet for høj intensitet er brugt op",
+      "not_open": "intet åbent hul"
+    },
+    "retest": {
+      "title": "Måling ved blokkens slutning",
+      "text": "I slutningen af uge {{week}} måles der igen: {{tests}}.",
+      "none": "Uden sessioner er der ingen måling ved blokkens slutning."
+    },
+    "budget": "Høj intensitet: {{used}} af {{max}} sessioner pr. uge (hårde runder tæller med).",
+    "note": "Planen er et forslag fra gemte regler og ikke medicinsk eller terapeutisk rådgivning. Træneren ændrer og beslutter.",
+    "rules": {
+      "vo2_4x4": {
+        "title": "Intervaller 4 × 4 minutter",
+        "limit0": "Styrken gælder udviklingen af VO₂max, ikke præstationen i sporten.",
+        "limit1": "Direkte belæg for hybrid og kampsport for netop denne form er lavt.",
+        "limit2": "Andre intervalformer kan være ligeværdige; 4 × 4 er ikke generelt overlegent."
+      },
+      "rst_30m": {
+        "title": "Gentagne sprint, 3 sæt × 6 × 30 m",
+        "limit0": "Løb op til 10 sekunder, pause op til 60 sekunder; alder 14 til 35 år, 2 til 12 uger.",
+        "limit1": "Mere frekvens, varighed, volumen eller distance gav ingen dokumenteret ekstra gevinst.",
+        "limit2": "Kun overført for hybrid; beslægtet for grappling (hold- og kampsport), ikke undersøgt direkte."
+      },
+      "max_strength_80": {
+        "title": "Maksimal styrke fra 80 % 1RM",
+        "limit0": "Generelt er belæggene høje, i kampsport moderate (kvinder underrepræsenteret). Her gælder det mere forsigtige niveau.",
+        "limit1": "Kilden fastlægger ikke gentagelser, øvelse eller rækkefølge: valget af øvelse bliver hos træneren.",
+        "limit2": "Periodisering i sig selv er ikke dokumenteret for styrkeeffekten."
+      },
+      "power_30_70": {
+        "title": "Power ved 30 til 70 % 1RM",
+        "limit0": "Højst 24 gentagelser pr. sæt, maksimal koncentrisk bevægelsesintention; kilden angiver ingen frekvens.",
+        "limit1": "I kampsport forbedrede styrketræning også specifikke handlinger; kvinder underrepræsenteret."
+      },
+      "plyo_combat": {
+        "title": "Pliometri i kampsport",
+        "limit0": "Stikprøverne var for det meste mandlige og for det meste under 18 år; ingen automatisk overførsel til kvinder, masters eller elite.",
+        "limit1": "Ingen effekt på krops-, fedt- eller muskelmasse.",
+        "limit2": "Kilden fastlægger ikke springformer, kontakter eller opbygning: træneren vælger dem."
+      }
     }
   }
 }

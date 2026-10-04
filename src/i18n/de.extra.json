@@ -2655,7 +2655,8 @@
       "week": "Wochenrückblick",
       "ask": "Fragen an KYDON",
       "brief": "Montagsbrief",
-      "weeklyReport": "Wochenbericht"
+      "weeklyReport": "Wochenbericht",
+      "plan": "Trainingsplan (Vorschau)"
     }
   },
   "teamHub": {
@@ -2914,6 +2915,134 @@
       "athlete": "Enthält alles aus dem Montagsbrief, auch Belastung und Check-ins.",
       "parents": "Ohne Check-ins: Selbsteinschätzungen zu Muskelkater und Stress gehen nur an den Athleten selbst.",
       "association": "Nur Datenlage, Befund und nächste Messung. Keine Tagebuch-, Belastungs- oder Check-in-Daten."
+    }
+  },
+  "plan": {
+    "eyebrow": "Plan",
+    "title": "Trainingsplan (Vorschau)",
+    "intro": "Ein Vorschlag aus hinterlegten, belegten Regeln für deine Lücken. Der Trainer hat das letzte Wort.",
+    "preview": "Vorschau: Die Regeln sind noch nicht von einer Fachperson geprüft und deshalb als ungeprüft gekennzeichnet.",
+    "off": "Der Trainingsplan ist in dieser Fassung nicht eingeschaltet.",
+    "noDiscipline": "Wähle im Profil deine Disziplin, dann kann KYDON Regeln für deine Lücken suchen.",
+    "unsupported": "Für diese Disziplin gibt es noch keine Regeln. Pilotwelt ist zunächst Grappling (Judo, Ringen, BJJ).",
+    "phase": {
+      "label": "Phase",
+      "GPP": "Allgemeine Vorbereitung",
+      "BUILD": "Aufbau",
+      "SPECIFIC": "Spezifische Vorbereitung"
+    },
+    "days": {
+      "available": "Tage für zusätzliche Einheiten",
+      "hard": "Tage mit harten Runden (Sparring, Randori)"
+    },
+    "day": {
+      "1": "Mo",
+      "2": "Di",
+      "3": "Mi",
+      "4": "Do",
+      "5": "Fr",
+      "6": "Sa",
+      "7": "So"
+    },
+    "hr": {
+      "known": "Maximale Herzfrequenz im Profil vorhanden: Pulsziele sind möglich.",
+      "unknown": "Keine maximale Herzfrequenz im Profil: Einheiten mit Pulsziel werden nicht geplant."
+    },
+    "sessions": {
+      "title": "Einheiten",
+      "none": "Mit den gewählten Tagen und den vorhandenen Daten ergibt sich keine Einheit."
+    },
+    "session": {
+      "line": "{{day}} · {{intent}}",
+      "minutes": "ca. {{count}} Min. Arbeit und Pause, ohne Aufwärmen"
+    },
+    "intent": {
+      "VO2MAX": "VO₂max",
+      "REPEATED_SPRINT": "Wiederholte Sprints",
+      "MAX_STRENGTH": "Maximalkraft",
+      "POWER": "Power",
+      "PLYOMETRIC": "Plyometrie"
+    },
+    "block": {
+      "interval": "{{reps}} × {{work}} Min. Arbeit, {{rec}} Min. aktive Pause, {{min}}–{{max}} % der maximalen Herzfrequenz",
+      "sprint": "{{sets}} Sätze × {{reps}} × {{dist}} m, maximal, Pause höchstens {{rec}} s",
+      "strength": "{{sets}} Sätze bei {{min}}–{{max}} % 1RM. Die Übung wählt der Trainer.",
+      "strengthMax": "{{min}}–{{max}} % 1RM, höchstens {{reps}} Wiederholungen je Satz, maximale Bewegungsabsicht. Übung und Sätze wählt der Trainer.",
+      "jumps": "Sprungformen und Umfang wählt der Trainer."
+    },
+    "evidence": {
+      "strength": "Evidenz: {{level}}",
+      "specificity": "Spezifität: {{level}}",
+      "open": "Belege und Grenzen"
+    },
+    "strength": {
+      "HIGH": "hoch",
+      "MODERATE": "mittel",
+      "LOW": "niedrig",
+      "EMERGING": "vorläufig",
+      "INSUFFICIENT": "unzureichend"
+    },
+    "specificity": {
+      "DIRECT": "direkt",
+      "RELATED": "verwandt",
+      "GENERAL": "allgemein",
+      "EXTRAPOLATED": "übertragen"
+    },
+    "review": {
+      "unreviewed": "Ungeprüft",
+      "reviewed": "Geprüft von {{name}} am {{date}}"
+    },
+    "limits": "Grenzen der Evidenz",
+    "sources": "Quellen",
+    "skipped": {
+      "title": "Nicht geplant"
+    },
+    "skip": {
+      "data_thin": "zu wenige Messungen: erst erneut messen",
+      "no_rule": "keine passende Regel",
+      "hr_max_unknown": "keine Pulsziele ohne bekannte maximale Herzfrequenz",
+      "no_slot": "kein freier Tag, der zu den Regeln passt",
+      "too_long": "länger als die gewählte Höchstdauer",
+      "budget": "Budget für hohe Intensität ausgeschöpft",
+      "not_open": "keine offene Lücke"
+    },
+    "retest": {
+      "title": "Messung am Blockende",
+      "text": "Am Ende von Woche {{week}} wird erneut gemessen: {{tests}}.",
+      "none": "Ohne Einheiten gibt es keine Messung am Blockende."
+    },
+    "budget": "Hohe Intensität: {{used}} von {{max}} Einheiten pro Woche (harte Runden zählen mit).",
+    "note": "Dieser Plan ist ein Vorschlag aus hinterlegten Regeln und kein ärztlicher oder therapeutischer Rat. Der Trainer ändert und entscheidet.",
+    "rules": {
+      "vo2_4x4": {
+        "title": "Intervalle 4 × 4 Minuten",
+        "limit0": "Die Stärke gilt für die Entwicklung der VO₂max, nicht für die Leistung in der Sportart.",
+        "limit1": "Direkte Evidenz für Hybrid und Kampfsport zu genau dieser Form ist niedrig.",
+        "limit2": "Andere Intervallformen können gleichwertig sein; 4 × 4 ist nicht allgemein überlegen."
+      },
+      "rst_30m": {
+        "title": "Wiederholte Sprints, 3 Sätze × 6 × 30 m",
+        "limit0": "Läufe bis 10 Sekunden, Pause bis 60 Sekunden; Alter 14 bis 35 Jahre, 2 bis 12 Wochen.",
+        "limit1": "Mehr Frequenz, Dauer, Volumen oder Distanz brachte keinen belegten Zusatznutzen.",
+        "limit2": "Für Hybrid nur übertragen; für Grappling verwandt (Team- und Kampfsport), nicht direkt untersucht."
+      },
+      "max_strength_80": {
+        "title": "Maximalkraft ab 80 % 1RM",
+        "limit0": "Allgemein ist die Evidenz hoch, im Kampfsport mittel (Frauen unterrepräsentiert). Hier gilt die vorsichtigere Stufe.",
+        "limit1": "Wiederholungen, Übung und Reihenfolge legt die Quelle nicht fest: die Wahl der Übung bleibt beim Trainer.",
+        "limit2": "Periodisierung selbst ist für den Krafteffekt nicht belegt."
+      },
+      "power_30_70": {
+        "title": "Power bei 30 bis 70 % 1RM",
+        "limit0": "Höchstens 24 Wiederholungen pro Satz, maximale konzentrische Bewegungsabsicht; eine Frequenz nennt die Quelle nicht.",
+        "limit1": "Im Kampfsport verbesserte Krafttraining auch spezifische Aktionen; Frauen unterrepräsentiert."
+      },
+      "plyo_combat": {
+        "title": "Plyometrie im Kampfsport",
+        "limit0": "Die Stichproben waren überwiegend männlich und mehrheitlich unter 18 Jahre alt; keine automatische Übertragung auf Frauen, Masters oder Elite.",
+        "limit1": "Kein Effekt auf Körper-, Fett- oder Muskelmasse.",
+        "limit2": "Sprungformen, Kontakte und Aufbau legt die Quelle nicht fest: sie wählt der Trainer."
+      }
     }
   }
 }

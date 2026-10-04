@@ -2655,7 +2655,8 @@
       "week": "Veckoöversikt",
       "ask": "Fråga KYDON",
       "brief": "Måndagsbrev",
-      "weeklyReport": "Veckorapport"
+      "weeklyReport": "Veckorapport",
+      "plan": "Träningsplan (förhandsvisning)"
     }
   },
   "teamHub": {
@@ -2914,6 +2915,134 @@
       "athlete": "Innehåller allt från måndagsbrevet, även belastning och incheckningar.",
       "parents": "Utan incheckningar: självskattningar om träningsvärk och stress går bara till idrottaren.",
       "association": "Bara datakvalitet, fynd och nästa mätning. Inga dagboks-, belastnings- eller incheckningsdata."
+    }
+  },
+  "plan": {
+    "eyebrow": "Plan",
+    "title": "Träningsplan (förhandsvisning)",
+    "intro": "Ett förslag från lagrade, belagda regler för dina luckor. Tränaren har sista ordet.",
+    "preview": "Förhandsvisning: reglerna har ännu inte granskats av en sakkunnig och är markerade som ogranskade.",
+    "off": "Träningsplanen är inte påslagen i den här versionen.",
+    "noDiscipline": "Välj din gren i profilen så kan KYDON söka regler för dina luckor.",
+    "unsupported": "Det finns ännu inga regler för den här grenen. Piloten börjar med grappling (judo, brottning, BJJ).",
+    "phase": {
+      "label": "Fas",
+      "GPP": "Allmän förberedelse",
+      "BUILD": "Uppbyggnad",
+      "SPECIFIC": "Specifik förberedelse"
+    },
+    "days": {
+      "available": "Dagar för extra pass",
+      "hard": "Dagar med hårda ronder (sparring, randori)"
+    },
+    "day": {
+      "1": "mån",
+      "2": "tis",
+      "3": "ons",
+      "4": "tors",
+      "5": "fre",
+      "6": "lör",
+      "7": "sön"
+    },
+    "hr": {
+      "known": "Maxpuls finns i profilen: pulsmål är möjliga.",
+      "unknown": "Ingen maxpuls i profilen: pass med pulsmål planeras inte."
+    },
+    "sessions": {
+      "title": "Pass",
+      "none": "Med de valda dagarna och tillgängliga data blir det inget pass."
+    },
+    "session": {
+      "line": "{{day}} · {{intent}}",
+      "minutes": "ca {{count}} min arbete och vila, utan uppvärmning"
+    },
+    "intent": {
+      "VO2MAX": "VO₂max",
+      "REPEATED_SPRINT": "Upprepade sprinter",
+      "MAX_STRENGTH": "Maximal styrka",
+      "POWER": "Power",
+      "PLYOMETRIC": "Plyometri"
+    },
+    "block": {
+      "interval": "{{reps}} × {{work}} min arbete, {{rec}} min aktiv vila, {{min}}–{{max}} % av maxpulsen",
+      "sprint": "{{sets}} set × {{reps}} × {{dist}} m, maximalt, vila högst {{rec}} s",
+      "strength": "{{sets}} set vid {{min}}–{{max}} % 1RM. Tränaren väljer övningen.",
+      "strengthMax": "{{min}}–{{max}} % 1RM, högst {{reps}} repetitioner per set, maximal rörelseintention. Tränaren väljer övning och set.",
+      "jumps": "Tränaren väljer hoppformer och omfattning."
+    },
+    "evidence": {
+      "strength": "Belägg: {{level}}",
+      "specificity": "Specificitet: {{level}}",
+      "open": "Belägg och gränser"
+    },
+    "strength": {
+      "HIGH": "hög",
+      "MODERATE": "måttlig",
+      "LOW": "låg",
+      "EMERGING": "framväxande",
+      "INSUFFICIENT": "otillräcklig"
+    },
+    "specificity": {
+      "DIRECT": "direkt",
+      "RELATED": "besläktad",
+      "GENERAL": "allmän",
+      "EXTRAPOLATED": "extrapolerad"
+    },
+    "review": {
+      "unreviewed": "Ogranskad",
+      "reviewed": "Granskad av {{name}} den {{date}}"
+    },
+    "limits": "Beläggens gränser",
+    "sources": "Källor",
+    "skipped": {
+      "title": "Inte planerat"
+    },
+    "skip": {
+      "data_thin": "för få mätningar: mät om först",
+      "no_rule": "ingen passande regel",
+      "hr_max_unknown": "inga pulsmål utan känd maxpuls",
+      "no_slot": "ingen ledig dag som passar reglerna",
+      "too_long": "längre än vald maxlängd",
+      "budget": "budgeten för hög intensitet är slut",
+      "not_open": "ingen öppen lucka"
+    },
+    "retest": {
+      "title": "Mätning vid blockets slut",
+      "text": "I slutet av vecka {{week}} mäts det igen: {{tests}}.",
+      "none": "Utan pass finns ingen mätning vid blockets slut."
+    },
+    "budget": "Hög intensitet: {{used}} av {{max}} pass per vecka (hårda ronder räknas med).",
+    "note": "Planen är ett förslag från lagrade regler och inget medicinskt eller terapeutiskt råd. Tränaren ändrar och bestämmer.",
+    "rules": {
+      "vo2_4x4": {
+        "title": "Intervaller 4 × 4 minuter",
+        "limit0": "Styrkan gäller utvecklingen av VO₂max, inte prestationen i idrotten.",
+        "limit1": "Direkta belägg för hybrid och kampsport för just den här formen är låga.",
+        "limit2": "Andra intervallformer kan vara likvärdiga; 4 × 4 är inte generellt överlägset."
+      },
+      "rst_30m": {
+        "title": "Upprepade sprinter, 3 set × 6 × 30 m",
+        "limit0": "Löpningar upp till 10 sekunder, vila upp till 60 sekunder; ålder 14 till 35 år, 2 till 12 veckor.",
+        "limit1": "Mer frekvens, längd, volym eller distans gav ingen belagd extra nytta.",
+        "limit2": "Bara överfört för hybrid; besläktat för grappling (lag- och kampsport), inte direkt undersökt."
+      },
+      "max_strength_80": {
+        "title": "Maximal styrka från 80 % 1RM",
+        "limit0": "Allmänt är beläggen höga, i kampsport måttliga (kvinnor underrepresenterade). Här gäller den försiktigare nivån.",
+        "limit1": "Källan fastställer inte repetitioner, övning eller ordning: valet av övning ligger hos tränaren.",
+        "limit2": "Periodisering i sig är inte belagd för styrkeeffekten."
+      },
+      "power_30_70": {
+        "title": "Power vid 30 till 70 % 1RM",
+        "limit0": "Högst 24 repetitioner per set, maximal koncentrisk rörelseintention; källan anger ingen frekvens.",
+        "limit1": "I kampsport förbättrade styrketräning också specifika handlingar; kvinnor underrepresenterade."
+      },
+      "plyo_combat": {
+        "title": "Plyometri i kampsport",
+        "limit0": "Urvalen var mest manliga och mestadels under 18 år; ingen automatisk överföring till kvinnor, masters eller elit.",
+        "limit1": "Ingen effekt på kropps-, fett- eller muskelmassa.",
+        "limit2": "Källan fastställer inte hoppformer, kontakter eller uppbyggnad: tränaren väljer dem."
+      }
     }
   }
 }

@@ -50,6 +50,7 @@ export type IntensityTarget =
   | { type: 'hr_percent_max'; min: number; max: number }
   | { type: 'rpe'; min: number; max: number }
   | { type: 'percent_1rm'; min: number; max: number }
+  | { type: 'max_effort' }
 
 /** Prüfstatus: ohne Prüfung keine Anzeige außerhalb der Vorschau. */
 export type ReviewState =
@@ -81,6 +82,10 @@ export interface EvidenceRule {
     intensity?: IntensityTarget
     /** Anzahl Wiederholungen der Arbeitsphase. */
     repetitions?: Range
+    sets?: Range
+    distanceM?: Range
+    /** Wiederholungen je Satz bei Kraft und Power; fehlt, wenn die Quelle keine nennt. */
+    repsPerSet?: Range
     workSeconds?: Range
     recoverySeconds?: Range
     blockDurationWeeks?: Range
@@ -116,7 +121,11 @@ export type ContextCheck = 'high_intensity_sessions_per_week' | 'fixed_sparring_
 
 export type SessionBlock =
   | { type: 'interval'; modality: 'run' | 'bike' | 'row' | 'ski' | 'mixed'; repetitions: number; workSeconds: number; recoverySeconds: number; intensity: IntensityTarget }
-  | { type: 'strength'; exerciseKey: string; sets: number; reps: number; loadTarget: IntensityTarget; rirTarget: number | null; restSeconds: number }
+  /** Wiederholte Sprints über eine feste Strecke. Pause: Obergrenze der Studienlage. */
+  | { type: 'sprint_repeats'; sets: number; repetitions: number; distanceM: number; maxRecoverySeconds: number }
+  /** Die Übung wählt der Trainer (`exerciseKey: null`); die Regel legt nur Last und Sätze fest. */
+  | { type: 'strength'; exerciseKey: string | null; sets: number | null; reps: number | null; maxRepsPerSet: number | null; loadTarget: IntensityTarget }
+  | { type: 'jumps'; note: 'plyometric' }
   | { type: 'combat_rounds'; roundType: 'bag' | 'pads' | 'sparring' | 'grappling' | 'mixed'; rounds: number; roundSeconds: number; restSeconds: number; targetRpe: Range }
 
 export interface TrainingSession {
@@ -128,7 +137,8 @@ export interface TrainingSession {
   /** Aus der Regel übernommen, nicht neu eingeschätzt. */
   evidenceStrength: EvidenceStrength
   evidenceSpecificity: EvidenceSpecificity
-  plannedDurationMin: number
+  /** Reine Arbeits- und Pausenzeit; `null`, wenn die Regel sie nicht festlegt. Ohne Aufwärmen. */
+  plannedDurationMin: number | null
   blocks: SessionBlock[]
   /** Messung, auf die der Block hinarbeitet. */
   retestMetric: string

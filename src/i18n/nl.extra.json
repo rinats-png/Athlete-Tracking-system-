@@ -2655,7 +2655,8 @@
       "week": "Weekoverzicht",
       "ask": "Vraag het KYDON",
       "brief": "Maandagbrief",
-      "weeklyReport": "Weekrapport"
+      "weeklyReport": "Weekrapport",
+      "plan": "Trainingsplan (voorbeeld)"
     }
   },
   "teamHub": {
@@ -2914,6 +2915,134 @@
       "athlete": "Bevat alles uit de maandagbrief, ook belasting en check-ins.",
       "parents": "Zonder check-ins: zelfinschattingen over spierpijn en stress gaan alleen naar de atleet.",
       "association": "Alleen betrouwbaarheid van gegevens, bevinding en volgende meting. Geen dagboek-, belastings- of check-ingegevens."
+    }
+  },
+  "plan": {
+    "eyebrow": "Plan",
+    "title": "Trainingsplan (voorbeeld)",
+    "intro": "Een voorstel uit opgeslagen, onderbouwde regels voor jouw hiaten. De trainer heeft het laatste woord.",
+    "preview": "Voorbeeld: de regels zijn nog niet door een deskundige gecontroleerd en staan als ongecontroleerd gemarkeerd.",
+    "off": "Het trainingsplan staat in deze versie niet aan.",
+    "noDiscipline": "Kies in het profiel je discipline, dan zoekt KYDON regels voor je hiaten.",
+    "unsupported": "Voor deze discipline zijn er nog geen regels. De pilot begint met grappling (judo, worstelen, BJJ).",
+    "phase": {
+      "label": "Fase",
+      "GPP": "Algemene voorbereiding",
+      "BUILD": "Opbouw",
+      "SPECIFIC": "Specifieke voorbereiding"
+    },
+    "days": {
+      "available": "Dagen voor extra trainingen",
+      "hard": "Dagen met harde rondes (sparring, randori)"
+    },
+    "day": {
+      "1": "ma",
+      "2": "di",
+      "3": "wo",
+      "4": "do",
+      "5": "vr",
+      "6": "za",
+      "7": "zo"
+    },
+    "hr": {
+      "known": "Maximale hartslag staat in het profiel: hartslagdoelen zijn mogelijk.",
+      "unknown": "Geen maximale hartslag in het profiel: trainingen met hartslagdoel worden niet gepland."
+    },
+    "sessions": {
+      "title": "Trainingen",
+      "none": "Met de gekozen dagen en de beschikbare gegevens ontstaat geen training."
+    },
+    "session": {
+      "line": "{{day}} · {{intent}}",
+      "minutes": "ca. {{count}} min werk en rust, zonder warming-up"
+    },
+    "intent": {
+      "VO2MAX": "VO₂max",
+      "REPEATED_SPRINT": "Herhaalde sprints",
+      "MAX_STRENGTH": "Maximale kracht",
+      "POWER": "Power",
+      "PLYOMETRIC": "Plyometrie"
+    },
+    "block": {
+      "interval": "{{reps}} × {{work}} min werk, {{rec}} min actieve rust, {{min}}–{{max}} % van de maximale hartslag",
+      "sprint": "{{sets}} sets × {{reps}} × {{dist}} m, maximaal, rust hooguit {{rec}} s",
+      "strength": "{{sets}} sets op {{min}}–{{max}} % 1RM. De trainer kiest de oefening.",
+      "strengthMax": "{{min}}–{{max}} % 1RM, hooguit {{reps}} herhalingen per set, maximale bewegingsintentie. De trainer kiest oefening en sets.",
+      "jumps": "De trainer kiest sprongvormen en omvang."
+    },
+    "evidence": {
+      "strength": "Bewijs: {{level}}",
+      "specificity": "Specificiteit: {{level}}",
+      "open": "Bewijs en grenzen"
+    },
+    "strength": {
+      "HIGH": "hoog",
+      "MODERATE": "gemiddeld",
+      "LOW": "laag",
+      "EMERGING": "opkomend",
+      "INSUFFICIENT": "onvoldoende"
+    },
+    "specificity": {
+      "DIRECT": "direct",
+      "RELATED": "verwant",
+      "GENERAL": "algemeen",
+      "EXTRAPOLATED": "geëxtrapoleerd"
+    },
+    "review": {
+      "unreviewed": "Ongecontroleerd",
+      "reviewed": "Gecontroleerd door {{name}} op {{date}}"
+    },
+    "limits": "Grenzen van het bewijs",
+    "sources": "Bronnen",
+    "skipped": {
+      "title": "Niet gepland"
+    },
+    "skip": {
+      "data_thin": "te weinig metingen: eerst opnieuw meten",
+      "no_rule": "geen passende regel",
+      "hr_max_unknown": "geen hartslagdoelen zonder bekende maximale hartslag",
+      "no_slot": "geen vrije dag die bij de regels past",
+      "too_long": "langer dan de gekozen maximale duur",
+      "budget": "budget voor hoge intensiteit op",
+      "not_open": "geen open hiaat"
+    },
+    "retest": {
+      "title": "Meting aan het einde van het blok",
+      "text": "Aan het einde van week {{week}} wordt opnieuw gemeten: {{tests}}.",
+      "none": "Zonder trainingen is er geen meting aan het einde van het blok."
+    },
+    "budget": "Hoge intensiteit: {{used}} van {{max}} trainingen per week (harde rondes tellen mee).",
+    "note": "Dit plan is een voorstel uit opgeslagen regels en geen medisch of therapeutisch advies. De trainer past aan en beslist.",
+    "rules": {
+      "vo2_4x4": {
+        "title": "Intervallen 4 × 4 minuten",
+        "limit0": "De sterkte van het bewijs geldt voor de ontwikkeling van VO₂max, niet voor prestaties in de sport.",
+        "limit1": "Direct bewijs voor hybride en vechtsport voor precies deze vorm is laag.",
+        "limit2": "Andere intervalvormen kunnen gelijkwaardig zijn; 4 × 4 is niet algemeen beter."
+      },
+      "rst_30m": {
+        "title": "Herhaalde sprints, 3 sets × 6 × 30 m",
+        "limit0": "Sprints tot 10 seconden, rust tot 60 seconden; leeftijd 14 tot 35 jaar, 2 tot 12 weken.",
+        "limit1": "Meer frequentie, duur, volume of afstand gaf geen aangetoond extra voordeel.",
+        "limit2": "Alleen overgedragen voor hybride; verwant voor grappling (team- en vechtsport), niet direct onderzocht."
+      },
+      "max_strength_80": {
+        "title": "Maximale kracht vanaf 80 % 1RM",
+        "limit0": "Algemeen is het bewijs hoog, bij vechtsport gemiddeld (vrouwen ondervertegenwoordigd). Hier geldt het voorzichtigere niveau.",
+        "limit1": "De bron legt herhalingen, oefening en volgorde niet vast: de keuze van de oefening blijft bij de trainer.",
+        "limit2": "Periodisering zelf is voor het krachteffect niet aangetoond."
+      },
+      "power_30_70": {
+        "title": "Power op 30 tot 70 % 1RM",
+        "limit0": "Hooguit 24 herhalingen per set, maximale concentrische bewegingsintentie; de bron noemt geen frequentie.",
+        "limit1": "Bij vechtsport verbeterde krachttraining ook specifieke acties; vrouwen ondervertegenwoordigd."
+      },
+      "plyo_combat": {
+        "title": "Plyometrie in de vechtsport",
+        "limit0": "De steekproeven waren vooral mannelijk en grotendeels jonger dan 18; geen automatische overdracht naar vrouwen, masters of elite.",
+        "limit1": "Geen effect op lichaams-, vet- of spiermassa.",
+        "limit2": "De bron legt sprongvormen, contacten en opbouw niet vast: de trainer kiest ze."
+      }
     }
   }
 }

@@ -2655,7 +2655,8 @@
       "week": "Resumen semanal",
       "ask": "Preguntar a KYDON",
       "brief": "Resumen del lunes",
-      "weeklyReport": "Informe semanal"
+      "weeklyReport": "Informe semanal",
+      "plan": "Plan de entrenamiento (vista previa)"
     }
   },
   "teamHub": {
@@ -2914,6 +2915,134 @@
       "athlete": "Contiene todo el resumen del lunes, también carga y check-ins.",
       "parents": "Sin check-ins: las autoevaluaciones de agujetas y estrés solo van al atleta.",
       "association": "Solo fiabilidad de los datos, hallazgo y próxima medición. Sin datos de diario, carga ni check-in."
+    }
+  },
+  "plan": {
+    "eyebrow": "Plan",
+    "title": "Plan de entrenamiento (vista previa)",
+    "intro": "Una propuesta a partir de reglas guardadas y respaldadas por evidencia para tus lagunas. El entrenador tiene la última palabra.",
+    "preview": "Vista previa: las reglas aún no han sido revisadas por una persona cualificada y se marcan como no revisadas.",
+    "off": "El plan de entrenamiento no está activado en esta versión.",
+    "noDiscipline": "Elige tu disciplina en el perfil para que KYDON busque reglas para tus lagunas.",
+    "unsupported": "Todavía no hay reglas para esta disciplina. El piloto empieza por el grappling (judo, lucha, BJJ).",
+    "phase": {
+      "label": "Fase",
+      "GPP": "Preparación general",
+      "BUILD": "Construcción",
+      "SPECIFIC": "Preparación específica"
+    },
+    "days": {
+      "available": "Días para sesiones adicionales",
+      "hard": "Días con rounds duros (sparring, randori)"
+    },
+    "day": {
+      "1": "lun",
+      "2": "mar",
+      "3": "mié",
+      "4": "jue",
+      "5": "vie",
+      "6": "sáb",
+      "7": "dom"
+    },
+    "hr": {
+      "known": "Hay frecuencia cardíaca máxima en el perfil: son posibles objetivos de pulso.",
+      "unknown": "No hay frecuencia cardíaca máxima en el perfil: no se planifican sesiones con objetivo de pulso."
+    },
+    "sessions": {
+      "title": "Sesiones",
+      "none": "Con los días elegidos y los datos disponibles no resulta ninguna sesión."
+    },
+    "session": {
+      "line": "{{day}} · {{intent}}",
+      "minutes": "aprox. {{count}} min de trabajo y pausa, sin calentamiento"
+    },
+    "intent": {
+      "VO2MAX": "VO₂max",
+      "REPEATED_SPRINT": "Sprints repetidos",
+      "MAX_STRENGTH": "Fuerza máxima",
+      "POWER": "Potencia",
+      "PLYOMETRIC": "Pliometría"
+    },
+    "block": {
+      "interval": "{{reps}} × {{work}} min de trabajo, {{rec}} min de pausa activa, {{min}}–{{max}} % de la frecuencia cardíaca máxima",
+      "sprint": "{{sets}} series × {{reps}} × {{dist}} m, máximo, pausa de {{rec}} s como mucho",
+      "strength": "{{sets}} series al {{min}}–{{max}} % 1RM. El entrenador elige el ejercicio.",
+      "strengthMax": "{{min}}–{{max}} % 1RM, como mucho {{reps}} repeticiones por serie, intención de movimiento máxima. El entrenador elige ejercicio y series.",
+      "jumps": "El entrenador elige las formas de salto y el volumen."
+    },
+    "evidence": {
+      "strength": "Evidencia: {{level}}",
+      "specificity": "Especificidad: {{level}}",
+      "open": "Evidencia y límites"
+    },
+    "strength": {
+      "HIGH": "alta",
+      "MODERATE": "moderada",
+      "LOW": "baja",
+      "EMERGING": "emergente",
+      "INSUFFICIENT": "insuficiente"
+    },
+    "specificity": {
+      "DIRECT": "directa",
+      "RELATED": "afín",
+      "GENERAL": "general",
+      "EXTRAPOLATED": "extrapolada"
+    },
+    "review": {
+      "unreviewed": "Sin revisar",
+      "reviewed": "Revisado por {{name}} el {{date}}"
+    },
+    "limits": "Límites de la evidencia",
+    "sources": "Fuentes",
+    "skipped": {
+      "title": "No planificado"
+    },
+    "skip": {
+      "data_thin": "muy pocas mediciones: medir de nuevo primero",
+      "no_rule": "ninguna regla adecuada",
+      "hr_max_unknown": "sin objetivos de pulso si no se conoce la frecuencia máxima",
+      "no_slot": "ningún día libre que encaje con las reglas",
+      "too_long": "más largo que la duración máxima elegida",
+      "budget": "presupuesto de alta intensidad agotado",
+      "not_open": "ninguna laguna abierta"
+    },
+    "retest": {
+      "title": "Medición al final del bloque",
+      "text": "Al final de la semana {{week}} se mide de nuevo: {{tests}}.",
+      "none": "Sin sesiones no hay medición al final del bloque."
+    },
+    "budget": "Alta intensidad: {{used}} de {{max}} sesiones por semana (los rounds duros cuentan).",
+    "note": "Este plan es una propuesta a partir de reglas guardadas y no un consejo médico ni terapéutico. El entrenador cambia y decide.",
+    "rules": {
+      "vo2_4x4": {
+        "title": "Intervalos 4 × 4 minutos",
+        "limit0": "La solidez se refiere al desarrollo del VO₂max, no al rendimiento en el deporte.",
+        "limit1": "La evidencia directa para híbrido y deportes de combate en esta forma exacta es baja.",
+        "limit2": "Otras formas de intervalos pueden ser equivalentes; 4 × 4 no es superior en general."
+      },
+      "rst_30m": {
+        "title": "Sprints repetidos, 3 series × 6 × 30 m",
+        "limit0": "Carreras de hasta 10 segundos, pausa de hasta 60 segundos; edad de 14 a 35 años, 2 a 12 semanas.",
+        "limit1": "Más frecuencia, duración, volumen o distancia no aportó un beneficio adicional demostrado.",
+        "limit2": "Solo extrapolado para híbrido; afín para grappling (deportes de equipo y de combate), no estudiado directamente."
+      },
+      "max_strength_80": {
+        "title": "Fuerza máxima desde el 80 % 1RM",
+        "limit0": "En general la evidencia es alta, en deportes de combate moderada (mujeres infrarrepresentadas). Aquí se aplica el nivel más prudente.",
+        "limit1": "La fuente no fija repeticiones, ejercicio ni orden: la elección del ejercicio queda en manos del entrenador.",
+        "limit2": "La periodización en sí no está demostrada para el efecto sobre la fuerza."
+      },
+      "power_30_70": {
+        "title": "Potencia al 30 al 70 % 1RM",
+        "limit0": "Como mucho 24 repeticiones por serie, intención de movimiento concéntrica máxima; la fuente no indica frecuencia.",
+        "limit1": "En deportes de combate, el entrenamiento de fuerza también mejoró acciones específicas; mujeres infrarrepresentadas."
+      },
+      "plyo_combat": {
+        "title": "Pliometría en deportes de combate",
+        "limit0": "Las muestras eran sobre todo masculinas y mayoritariamente menores de 18 años; sin traslado automático a mujeres, másters o élite.",
+        "limit1": "Sin efecto sobre la masa corporal, grasa o muscular.",
+        "limit2": "La fuente no fija formas de salto, contactos ni progresión: los elige el entrenador."
+      }
     }
   }
 }

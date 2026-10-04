@@ -2655,7 +2655,8 @@
       "week": "Week review",
       "ask": "Ask KYDON",
       "brief": "Monday brief",
-      "weeklyReport": "Weekly report"
+      "weeklyReport": "Weekly report",
+      "plan": "Training plan (preview)"
     }
   },
   "teamHub": {
@@ -2914,6 +2915,134 @@
       "athlete": "Contains everything from the Monday brief, including load and check-ins.",
       "parents": "Without check-ins: self-assessments on soreness and stress go only to the athlete.",
       "association": "Only data confidence, finding and next measurement. No diary, load or check-in data."
+    }
+  },
+  "plan": {
+    "eyebrow": "Plan",
+    "title": "Training plan (preview)",
+    "intro": "A suggestion from stored, evidence-based rules for your gaps. The coach has the final say.",
+    "preview": "Preview: the rules have not yet been reviewed by a qualified person and are marked as unreviewed.",
+    "off": "The training plan is not switched on in this version.",
+    "noDiscipline": "Choose your discipline in the profile so KYDON can look for rules for your gaps.",
+    "unsupported": "There are no rules for this discipline yet. The pilot area is grappling first (judo, wrestling, BJJ).",
+    "phase": {
+      "label": "Phase",
+      "GPP": "General preparation",
+      "BUILD": "Build",
+      "SPECIFIC": "Specific preparation"
+    },
+    "days": {
+      "available": "Days for additional sessions",
+      "hard": "Days with hard rounds (sparring, randori)"
+    },
+    "day": {
+      "1": "Mon",
+      "2": "Tue",
+      "3": "Wed",
+      "4": "Thu",
+      "5": "Fri",
+      "6": "Sat",
+      "7": "Sun"
+    },
+    "hr": {
+      "known": "Maximum heart rate is in your profile: heart-rate targets are possible.",
+      "unknown": "No maximum heart rate in your profile: sessions with heart-rate targets are not planned."
+    },
+    "sessions": {
+      "title": "Sessions",
+      "none": "With the chosen days and the available data, no session results."
+    },
+    "session": {
+      "line": "{{day}} · {{intent}}",
+      "minutes": "about {{count}} min work and rest, without warm-up"
+    },
+    "intent": {
+      "VO2MAX": "VO₂max",
+      "REPEATED_SPRINT": "Repeated sprints",
+      "MAX_STRENGTH": "Maximal strength",
+      "POWER": "Power",
+      "PLYOMETRIC": "Plyometrics"
+    },
+    "block": {
+      "interval": "{{reps}} × {{work}} min work, {{rec}} min active rest, {{min}}–{{max}} % of maximum heart rate",
+      "sprint": "{{sets}} sets × {{reps}} × {{dist}} m, maximal, rest at most {{rec}} s",
+      "strength": "{{sets}} sets at {{min}}–{{max}} % 1RM. The coach chooses the exercise.",
+      "strengthMax": "{{min}}–{{max}} % 1RM, at most {{reps}} repetitions per set, maximal movement intent. The coach chooses exercise and sets.",
+      "jumps": "The coach chooses jump forms and volume."
+    },
+    "evidence": {
+      "strength": "Evidence: {{level}}",
+      "specificity": "Specificity: {{level}}",
+      "open": "Evidence and limits"
+    },
+    "strength": {
+      "HIGH": "high",
+      "MODERATE": "moderate",
+      "LOW": "low",
+      "EMERGING": "emerging",
+      "INSUFFICIENT": "insufficient"
+    },
+    "specificity": {
+      "DIRECT": "direct",
+      "RELATED": "related",
+      "GENERAL": "general",
+      "EXTRAPOLATED": "extrapolated"
+    },
+    "review": {
+      "unreviewed": "Unreviewed",
+      "reviewed": "Reviewed by {{name}} on {{date}}"
+    },
+    "limits": "Limits of the evidence",
+    "sources": "Sources",
+    "skipped": {
+      "title": "Not planned"
+    },
+    "skip": {
+      "data_thin": "too few measurements: measure again first",
+      "no_rule": "no suitable rule",
+      "hr_max_unknown": "no heart-rate targets without a known maximum heart rate",
+      "no_slot": "no free day that fits the rules",
+      "too_long": "longer than the chosen maximum duration",
+      "budget": "budget for high intensity used up",
+      "not_open": "no open gap"
+    },
+    "retest": {
+      "title": "Measurement at the end of the block",
+      "text": "At the end of week {{week}} you measure again: {{tests}}.",
+      "none": "Without sessions there is no measurement at the end of the block."
+    },
+    "budget": "High intensity: {{used}} of {{max}} sessions per week (hard rounds count).",
+    "note": "This plan is a suggestion from stored rules and not medical or therapeutic advice. The coach changes and decides.",
+    "rules": {
+      "vo2_4x4": {
+        "title": "Intervals 4 × 4 minutes",
+        "limit0": "The strength applies to the development of VO₂max, not to performance in the sport.",
+        "limit1": "Direct evidence for hybrid and combat sports for exactly this form is low.",
+        "limit2": "Other interval forms can be equivalent; 4 × 4 is not generally superior."
+      },
+      "rst_30m": {
+        "title": "Repeated sprints, 3 sets × 6 × 30 m",
+        "limit0": "Runs up to 10 seconds, rest up to 60 seconds; age 14 to 35, 2 to 12 weeks.",
+        "limit1": "More frequency, duration, volume or distance brought no proven extra benefit.",
+        "limit2": "Only transferred for hybrid; related for grappling (team and combat sports), not studied directly."
+      },
+      "max_strength_80": {
+        "title": "Maximal strength from 80 % 1RM",
+        "limit0": "In general the evidence is high, in combat sports moderate (women under-represented). The more cautious level applies here.",
+        "limit1": "The source does not fix repetitions, exercise or order: choosing the exercise stays with the coach.",
+        "limit2": "Periodization itself is not proven for the strength effect."
+      },
+      "power_30_70": {
+        "title": "Power at 30 to 70 % 1RM",
+        "limit0": "At most 24 repetitions per set, maximal concentric movement intent; the source gives no frequency.",
+        "limit1": "In combat sports, strength training also improved specific actions; women under-represented."
+      },
+      "plyo_combat": {
+        "title": "Plyometrics in combat sports",
+        "limit0": "The samples were mostly male and mostly under 18; no automatic transfer to women, masters or elite athletes.",
+        "limit1": "No effect on body, fat or muscle mass.",
+        "limit2": "The source does not fix jump forms, contacts or build-up: the coach chooses them."
+      }
     }
   }
 }
