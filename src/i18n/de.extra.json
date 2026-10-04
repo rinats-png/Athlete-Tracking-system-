@@ -3277,5 +3277,38 @@
         "sum": "Power, Plyometrie und wiederholte Sprints, am Ende eine Kampfsimulation."
       }
     }
+  },
+  "cal": {
+    "title": "Plankalender",
+    "intro": "Deine Einheiten nach Woche, Phase oder Monat. Zum Verschieben eine Einheit antippen oder ziehen und den Zieltag wählen.",
+    "view": "Ansicht",
+    "v": {
+      "week": "Woche",
+      "phase": "Phase",
+      "month": "Monat"
+    },
+    "prev": "Vorherige Woche",
+    "next": "Nächste Woche",
+    "weekOf": "Woche {{n}} von {{of}}",
+    "weekShort": "Woche {{n}}",
+    "count": "{{done}} von {{total}} erledigt",
+    "rest": "Ruhetag",
+    "done": "Erledigt",
+    "minutes": "{{n}} Min.",
+    "key": "Schlüsseleinheit",
+    "open": "Offen",
+    "noBlock": "Es gibt keinen aktiven Block.",
+    "moveHere": "Hierhin verschieben",
+    "pickTarget": "{{intent}}: Zieltag wählen.",
+    "moveTo": "{{intent}} auf {{day}} verschieben.",
+    "confirm": "Verschieben",
+    "seriesNote": "Das Verschieben gilt für die Einheit in allen ihren Wochen.",
+    "err": {
+      "reason_required": "Bitte einen Grund angeben.",
+      "unknown_session": "Einheit nicht gefunden.",
+      "day_taken": "An diesem Tag liegt schon eine Einheit.",
+      "nothing_changed": "Der Tag ist unverändert."
+    },
+    "link": "Kalender"
   }
 }

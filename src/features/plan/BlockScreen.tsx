@@ -76,6 +76,12 @@ export function BlockScreen() {
         intro={t('block.range', { discipline: pick(discipline?.name, locale) ?? '', from: d(block.startDay), to: d(blockEndDay(block)) })}
       />
 
+      <p className="mb-3">
+        <Link to="/plan/kalender" data-testid="block-to-calendar" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">
+          {t('cal.link')}
+        </Link>
+      </p>
+
       <Panel className="mb-4" data-testid="block-week">
         {readOnly && <p className="px-4 pt-3 text-[12px] text-ink-secondary" data-testid="block-closed">{t('block.closedNote')}</p>}
         <PanelHeader title={typeof week === 'number' ? t('block.week', { week, weeks: block.weeks }) : week === 'before' ? t('block.before', { day: d(block.startDay) }) : t('block.after')} />

@@ -3277,5 +3277,38 @@
         "sum": "Puissance, pliométrie et sprints répétés, avec une simulation de combat à la fin."
       }
     }
+  },
+  "cal": {
+    "title": "Calendrier du plan",
+    "intro": "Tes séances par semaine, phase ou mois. Pour déplacer, touche ou fais glisser une séance et choisis le jour cible.",
+    "view": "Vue",
+    "v": {
+      "week": "Semaine",
+      "phase": "Phase",
+      "month": "Mois"
+    },
+    "prev": "Semaine précédente",
+    "next": "Semaine suivante",
+    "weekOf": "Semaine {{n}} sur {{of}}",
+    "weekShort": "Semaine {{n}}",
+    "count": "{{done}} sur {{total}} faites",
+    "rest": "Jour de repos",
+    "done": "Faite",
+    "minutes": "{{n}} min",
+    "key": "Séance clé",
+    "open": "Ouverte",
+    "noBlock": "Il n’y a pas de bloc actif.",
+    "moveHere": "Déplacer ici",
+    "pickTarget": "{{intent}} : choisis le jour cible.",
+    "moveTo": "Déplacer {{intent}} vers {{day}}.",
+    "confirm": "Déplacer",
+    "seriesNote": "Le déplacement vaut pour la séance sur toutes ses semaines.",
+    "err": {
+      "reason_required": "Merci d’indiquer un motif.",
+      "unknown_session": "Séance introuvable.",
+      "day_taken": "Une séance existe déjà ce jour-là.",
+      "nothing_changed": "Le jour est inchangé."
+    },
+    "link": "Calendrier"
   }
 }

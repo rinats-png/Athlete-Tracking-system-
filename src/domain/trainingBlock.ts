@@ -197,3 +197,22 @@ export function nextBlockSuggestion(block: StoredTrainingBlock, report: BlockRep
     missing: report.metrics.filter((m) => m.status === 'open').map((m) => m.metric),
   }
 }
+
+export interface CalendarCell {
+  /** 1 = Montag … 7 = Sonntag. */
+  weekday: number
+  date: string
+  sessions: { session: StoredPlannedSession; done: boolean }[]
+}
+
+/** Eine Blockwoche als sieben Tage mit ihren Einheiten (gestrichene fehlen, Wochenspanne beachtet). */
+export function calendarWeek(block: StoredTrainingBlock, week: number): CalendarCell[] {
+  return Array.from({ length: 7 }, (_, i) => {
+    const weekday = i + 1
+    const date = sessionDate(block, week, weekday)
+    const sessions = block.sessions
+      .filter((s) => !s.removed && s.day === weekday && sessionInWeek(s, week, block.weeks))
+      .map((session) => ({ session, done: isDone(block, session.id, date) != null }))
+    return { weekday, date, sessions }
+  })
+}

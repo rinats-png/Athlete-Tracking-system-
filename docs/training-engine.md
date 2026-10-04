@@ -111,3 +111,12 @@ Zweiter Weg zum Block neben der Berechnung: eine **Vorlage** (`src/data/planTemp
 - Mit Wettkampftermin endet der Block davor; reicht die Zeit nicht, startet er früh und die App sagt es (`tooShort`).
 - **Schema 34:** Einheiten haben `weekFrom`, `weekTo` (Phasen innerhalb des Blocks), `kind` und nullbare Regel- und Evidenzfelder; der Block merkt `templateId` und `eventDay`. Heute, Wochenprüfung, Override und Bericht rechnen mit der Wochenspanne.
 - Offen bleiben bis zu den nächsten Etappen: weitere Vorlagen aus der Spezifikation, Kalender, eigener Plan, Plan-Import.
+
+## Plankalender (Trainingsbereich Etappe 3)
+
+`/plan/kalender`: Woche (sieben Tage als Karten), Phase (eine Zeile je Blockwoche mit Zählung) und Monat (vier Wochen als Punkte, erledigt gefüllt).
+
+- Karten zeigen Absicht, Dauer (nur wo eine Regel sie festlegt), Schlüsseleinheit und Evidenz oder «Offen».
+- **Verschieben** per Ziehen (Desktop) oder Antippen plus «Hierhin verschieben» (Touch, Tastatur). Es läuft über `overrideSession`: Grund Pflicht, nie zwei Einheiten an einem Tag, Änderung steht mit Grund im Block. Die Änderung gilt für die Einheit in allen ihren Wochen; das steht im Bildschirm.
+- Rein lesend aus dem Block: `calendarWeek` in `trainingBlock.ts`.
+- Noch offen: Einheit hinzufügen, kopieren, duplizieren, Woche oder Phase kopieren, als Vorlage speichern (kommen mit dem manuellen Builder).

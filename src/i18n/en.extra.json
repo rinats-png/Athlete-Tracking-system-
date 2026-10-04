@@ -3277,5 +3277,38 @@
         "sum": "Power, plyometrics and repeated sprints, with a fight simulation at the end."
       }
     }
+  },
+  "cal": {
+    "title": "Plan calendar",
+    "intro": "Your sessions by week, phase or month. To move one, tap or drag a session and choose the target day.",
+    "view": "View",
+    "v": {
+      "week": "Week",
+      "phase": "Phase",
+      "month": "Month"
+    },
+    "prev": "Previous week",
+    "next": "Next week",
+    "weekOf": "Week {{n}} of {{of}}",
+    "weekShort": "Week {{n}}",
+    "count": "{{done}} of {{total}} done",
+    "rest": "Rest day",
+    "done": "Done",
+    "minutes": "{{n}} min",
+    "key": "Key session",
+    "open": "Open",
+    "noBlock": "There is no active block.",
+    "moveHere": "Move here",
+    "pickTarget": "{{intent}}: choose the target day.",
+    "moveTo": "Move {{intent}} to {{day}}.",
+    "confirm": "Move",
+    "seriesNote": "Moving applies to the session in all of its weeks.",
+    "err": {
+      "reason_required": "Please give a reason.",
+      "unknown_session": "Session not found.",
+      "day_taken": "There is already a session on that day.",
+      "nothing_changed": "The day is unchanged."
+    },
+    "link": "Calendar"
   }
 }

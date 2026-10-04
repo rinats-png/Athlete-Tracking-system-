@@ -3277,5 +3277,38 @@
         "sum": "Power, pliometri og gentagne sprints, med en kampsimulering til sidst."
       }
     }
+  },
+  "cal": {
+    "title": "Plankalender",
+    "intro": "Dine sessioner pr. uge, fase eller måned. Tryk på eller træk en session for at flytte den, og vælg måldag.",
+    "view": "Visning",
+    "v": {
+      "week": "Uge",
+      "phase": "Fase",
+      "month": "Måned"
+    },
+    "prev": "Forrige uge",
+    "next": "Næste uge",
+    "weekOf": "Uge {{n}} af {{of}}",
+    "weekShort": "Uge {{n}}",
+    "count": "{{done}} af {{total}} udført",
+    "rest": "Hviledag",
+    "done": "Udført",
+    "minutes": "{{n}} min",
+    "key": "Nøglesession",
+    "open": "Åben",
+    "noBlock": "Der er ingen aktiv blok.",
+    "moveHere": "Flyt hertil",
+    "pickTarget": "{{intent}}: vælg måldag.",
+    "moveTo": "Flyt {{intent}} til {{day}}.",
+    "confirm": "Flyt",
+    "seriesNote": "Flytningen gælder sessionen i alle dens uger.",
+    "err": {
+      "reason_required": "Angiv en begrundelse.",
+      "unknown_session": "Sessionen blev ikke fundet.",
+      "day_taken": "Der ligger allerede en session den dag.",
+      "nothing_changed": "Dagen er uændret."
+    },
+    "link": "Kalender"
   }
 }

@@ -3277,5 +3277,38 @@
         "sum": "Potencia, pliometría y sprints repetidos, con una simulación de combate al final."
       }
     }
+  },
+  "cal": {
+    "title": "Calendario del plan",
+    "intro": "Tus sesiones por semana, fase o mes. Para moverla, toca o arrastra una sesión y elige el día de destino.",
+    "view": "Vista",
+    "v": {
+      "week": "Semana",
+      "phase": "Fase",
+      "month": "Mes"
+    },
+    "prev": "Semana anterior",
+    "next": "Semana siguiente",
+    "weekOf": "Semana {{n}} de {{of}}",
+    "weekShort": "Semana {{n}}",
+    "count": "{{done}} de {{total}} hechas",
+    "rest": "Día de descanso",
+    "done": "Hecha",
+    "minutes": "{{n}} min",
+    "key": "Sesión clave",
+    "open": "Abierta",
+    "noBlock": "No hay un bloque activo.",
+    "moveHere": "Mover aquí",
+    "pickTarget": "{{intent}}: elige el día de destino.",
+    "moveTo": "Mover {{intent}} a {{day}}.",
+    "confirm": "Mover",
+    "seriesNote": "El cambio vale para la sesión en todas sus semanas.",
+    "err": {
+      "reason_required": "Indica un motivo.",
+      "unknown_session": "Sesión no encontrada.",
+      "day_taken": "Ya hay una sesión ese día.",
+      "nothing_changed": "El día no ha cambiado."
+    },
+    "link": "Calendario"
   }
 }

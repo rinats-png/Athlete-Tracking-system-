@@ -3277,5 +3277,38 @@
         "sum": "Power, plyometri och upprepade sprinter, med en matchsimulering i slutet."
       }
     }
+  },
+  "cal": {
+    "title": "Plankalender",
+    "intro": "Dina pass per vecka, fas eller månad. Tryck på eller dra ett pass för att flytta det och välj måldag.",
+    "view": "Vy",
+    "v": {
+      "week": "Vecka",
+      "phase": "Fas",
+      "month": "Månad"
+    },
+    "prev": "Föregående vecka",
+    "next": "Nästa vecka",
+    "weekOf": "Vecka {{n}} av {{of}}",
+    "weekShort": "Vecka {{n}}",
+    "count": "{{done}} av {{total}} klara",
+    "rest": "Vilodag",
+    "done": "Klart",
+    "minutes": "{{n}} min",
+    "key": "Nyckelpass",
+    "open": "Öppet",
+    "noBlock": "Det finns inget aktivt block.",
+    "moveHere": "Flytta hit",
+    "pickTarget": "{{intent}}: välj måldag.",
+    "moveTo": "Flytta {{intent}} till {{day}}.",
+    "confirm": "Flytta",
+    "seriesNote": "Flytten gäller passet i alla dess veckor.",
+    "err": {
+      "reason_required": "Ange ett skäl.",
+      "unknown_session": "Passet hittades inte.",
+      "day_taken": "Det finns redan ett pass den dagen.",
+      "nothing_changed": "Dagen är oförändrad."
+    },
+    "link": "Kalender"
   }
 }

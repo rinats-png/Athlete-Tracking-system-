@@ -3277,5 +3277,38 @@
         "sum": "Power, plyometrie en herhaalde sprints, met aan het eind een gevechtssimulatie."
       }
     }
+  },
+  "cal": {
+    "title": "Plankalender",
+    "intro": "Je trainingen per week, fase of maand. Tik of sleep een training om te verplaatsen en kies de doeldag.",
+    "view": "Weergave",
+    "v": {
+      "week": "Week",
+      "phase": "Fase",
+      "month": "Maand"
+    },
+    "prev": "Vorige week",
+    "next": "Volgende week",
+    "weekOf": "Week {{n}} van {{of}}",
+    "weekShort": "Week {{n}}",
+    "count": "{{done}} van {{total}} gedaan",
+    "rest": "Rustdag",
+    "done": "Gedaan",
+    "minutes": "{{n}} min",
+    "key": "Sleuteltraining",
+    "open": "Open",
+    "noBlock": "Er is geen actief blok.",
+    "moveHere": "Hierheen verplaatsen",
+    "pickTarget": "{{intent}}: kies de doeldag.",
+    "moveTo": "{{intent}} naar {{day}} verplaatsen.",
+    "confirm": "Verplaatsen",
+    "seriesNote": "Verplaatsen geldt voor de training in al haar weken.",
+    "err": {
+      "reason_required": "Geef een reden op.",
+      "unknown_session": "Training niet gevonden.",
+      "day_taken": "Op die dag staat al een training.",
+      "nothing_changed": "De dag is ongewijzigd."
+    },
+    "link": "Kalender"
   }
 }

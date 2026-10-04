@@ -3277,5 +3277,38 @@
         "sum": "Power, pliometri og gjentatte sprinter, med en kampsimulering til slutt."
       }
     }
+  },
+  "cal": {
+    "title": "Plankalender",
+    "intro": "Øktene dine per uke, fase eller måned. Trykk på eller dra en økt for å flytte den, og velg måldag.",
+    "view": "Visning",
+    "v": {
+      "week": "Uke",
+      "phase": "Fase",
+      "month": "Måned"
+    },
+    "prev": "Forrige uke",
+    "next": "Neste uke",
+    "weekOf": "Uke {{n}} av {{of}}",
+    "weekShort": "Uke {{n}}",
+    "count": "{{done}} av {{total}} fullført",
+    "rest": "Hviledag",
+    "done": "Fullført",
+    "minutes": "{{n}} min",
+    "key": "Nøkkeløkt",
+    "open": "Åpen",
+    "noBlock": "Det finnes ingen aktiv blokk.",
+    "moveHere": "Flytt hit",
+    "pickTarget": "{{intent}}: velg måldag.",
+    "moveTo": "Flytt {{intent}} til {{day}}.",
+    "confirm": "Flytt",
+    "seriesNote": "Flyttingen gjelder økten i alle ukene.",
+    "err": {
+      "reason_required": "Oppgi en begrunnelse.",
+      "unknown_session": "Økten ble ikke funnet.",
+      "day_taken": "Det ligger allerede en økt den dagen.",
+      "nothing_changed": "Dagen er uendret."
+    },
+    "link": "Kalender"
   }
 }
