@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 34
+export const CURRENT_SCHEMA_VERSION = 35
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -703,7 +703,10 @@ const plannedSessionSchema = z.object({
   weekFrom: z.number().int().min(1).max(26).default(1),
   weekTo: z.number().int().min(1).max(26).nullable().default(null),
   /** `rule` = Dosierung aus einer Regel des Registers; `open` = Vorlage nennt Absicht und Dauer, aber keine belegte Dosis. */
-  kind: z.enum(['rule', 'open']).default('rule'),
+  kind: z.enum(['rule', 'open', 'own']).default('rule'),
+  /** Eigene Einheiten (`own`): Name und Notiz stammen vom Menschen, nicht aus einer Regel. */
+  title: z.string().max(60).default(''),
+  note: z.string().max(200).default(''),
   ruleId: z.string().min(1).max(60).nullable().default(null),
   ruleVersion: z.string().min(1).max(20).nullable().default(null),
   primaryIntent: z.string().min(1).max(40),
@@ -726,7 +729,9 @@ const planCompletionSchema = z.object({
 })
 const trainingBlockSchema = z.object({
   id: z.string().min(1),
-  family: z.enum(['combat_grappling', 'combat_striking', 'hybrid']),
+  /** `null` bei eigenen Plänen einer Sportart ohne Pilotfamilie. */
+  family: z.enum(['combat_grappling', 'combat_striking', 'hybrid']).nullable(),
+  name: z.string().max(60).default(''),
   disciplineId: z.string().max(60).nullable().default(null),
   phase: z.enum(['GPP', 'BUILD', 'SPECIFIC', 'TAPER', 'TRANSITION']),
   startDay: dayString,
@@ -1794,6 +1799,23 @@ export const MIGRATIONS: Migration[] = [
           templateId: b.templateId ?? null,
           eventDay: b.eventDay ?? null,
           sessions: (b.sessions ?? []).map((x: any) => ({ ...x, weekFrom: x.weekFrom ?? 1, weekTo: x.weekTo ?? null, kind: x.kind ?? 'rule' })),
+        })),
+      })),
+    }),
+  },
+  {
+    from: 34,
+    to: 35,
+    describe: 'Trainingsblöcke: Name; Einheiten mit Titel und Notiz (eigene Pläne)',
+    run: (data: any) => ({
+      ...data,
+      version: 35,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        trainingBlocks: (athlete.trainingBlocks ?? []).map((b: any) => ({
+          ...b,
+          name: b.name ?? '',
+          sessions: (b.sessions ?? []).map((x: any) => ({ ...x, title: x.title ?? '', note: x.note ?? '' })),
         })),
       })),
     }),

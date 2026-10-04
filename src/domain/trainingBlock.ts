@@ -29,6 +29,7 @@ export function adoptBlock(plan: BlockPlan, ctx: { id: string; family: SportFami
   return {
     id: ctx.id,
     family: ctx.family,
+    name: '',
     disciplineId: ctx.disciplineId,
     phase: ctx.phase,
     startDay: mondayOnOrAfter(ctx.startDay),
@@ -42,6 +43,8 @@ export function adoptBlock(plan: BlockPlan, ctx: { id: string; family: SportFami
       weekFrom: 1,
       weekTo: null,
       kind: 'rule',
+      title: '',
+      note: '',
       ruleId: s.ruleId,
       ruleVersion: s.ruleVersion,
       primaryIntent: s.primaryIntent,
@@ -215,4 +218,121 @@ export function calendarWeek(block: StoredTrainingBlock, week: number): Calendar
       .map((session) => ({ session, done: isDone(block, session.id, date) != null }))
     return { weekday, date, sessions }
   })
+}
+
+/* ---------- Eigener Plan (Trainingsbereich Etappe 4) ---------- */
+
+export interface OwnBlockInput {
+  id: string
+  name: string
+  family: SportFamily | null
+  disciplineId: string | null
+  phase: Phase
+  weeks: number
+  startDay: string
+  now: string
+}
+
+/** Leerer eigener Plan: Name, Länge, Phase und Start sind die Entscheidung des Menschen; keine Regel, keine Evidenzangabe. */
+export function createOwnBlock(i: OwnBlockInput): StoredTrainingBlock {
+  return {
+    id: i.id,
+    name: i.name.trim().slice(0, 60),
+    family: i.family,
+    disciplineId: i.disciplineId,
+    phase: i.phase,
+    startDay: mondayOnOrAfter(i.startDay),
+    weeks: Math.min(26, Math.max(1, Math.round(i.weeks))),
+    retestMetrics: [],
+    templateId: null,
+    eventDay: null,
+    sessions: [],
+    completions: [],
+    status: 'active',
+    createdAt: i.now,
+    updatedAt: i.now,
+  }
+}
+
+export interface OwnSessionInput {
+  id: string
+  day: number
+  intent: string
+  title: string
+  note: string
+  minutes: number | null
+  weekFrom: number
+  weekTo: number | null
+  highIntensity: boolean
+}
+export type EditResult = { ok: true; block: StoredTrainingBlock } | { ok: false; error: 'bad_weeks' | 'day_taken' | 'unknown_session' | 'no_intent' }
+
+const overlaps = (a: Pick<StoredPlannedSession, 'weekFrom' | 'weekTo'>, b: Pick<StoredPlannedSession, 'weekFrom' | 'weekTo'>, weeks: number) => a.weekFrom <= (b.weekTo ?? weeks) && b.weekFrom <= (a.weekTo ?? weeks)
+
+/** Eigene Einheit hinzufügen. Zwei Einheiten am selben Tag in denselben Wochen nimmt die App nicht an. */
+export function addOwnSession(block: StoredTrainingBlock, i: OwnSessionInput, now: string): EditResult {
+  if (!i.intent) return { ok: false, error: 'no_intent' }
+  const weekTo = i.weekTo ?? null
+  if (i.weekFrom < 1 || i.weekFrom > block.weeks || (weekTo != null && (weekTo < i.weekFrom || weekTo > block.weeks))) return { ok: false, error: 'bad_weeks' }
+  const s: StoredPlannedSession = {
+    id: i.id,
+    day: i.day,
+    weekFrom: i.weekFrom,
+    weekTo,
+    kind: 'own',
+    title: i.title.trim().slice(0, 60),
+    note: i.note.trim().slice(0, 200),
+    ruleId: null,
+    ruleVersion: null,
+    primaryIntent: i.intent,
+    evidenceStrength: null,
+    evidenceSpecificity: null,
+    plannedDurationMin: i.minutes != null && i.minutes >= 1 ? Math.min(600, Math.round(i.minutes)) : null,
+    highIntensity: i.highIntensity,
+    blocks: [],
+    retestMetric: '',
+    coachModified: false,
+    coachModificationReason: null,
+    removed: false,
+  }
+  if (block.sessions.some((x) => !x.removed && x.day === s.day && overlaps(x, s, block.weeks))) return { ok: false, error: 'day_taken' }
+  return { ok: true, block: { ...block, sessions: [...block.sessions, s], updatedAt: now } }
+}
+
+/** Einheit auf einen anderen Tag kopieren (gleiche Wochen); die Kopie ist eine eigene Einheit. */
+export function duplicateSession(block: StoredTrainingBlock, sessionId: string, day: number, newId: string, now: string): EditResult {
+  const src = block.sessions.find((s) => s.id === sessionId && !s.removed)
+  if (!src) return { ok: false, error: 'unknown_session' }
+  const copy: StoredPlannedSession = { ...src, id: newId, day, coachModified: false, coachModificationReason: null }
+  if (block.sessions.some((x) => !x.removed && x.day === day && overlaps(x, copy, block.weeks))) return { ok: false, error: 'day_taken' }
+  return { ok: true, block: { ...block, sessions: [...block.sessions, copy], updatedAt: now } }
+}
+
+/** Eigene Einheit löschen. Nur `own`: Einheiten aus Regeln oder Vorlagen werden gestrichen (Override mit Grund). */
+export function deleteOwnSession(block: StoredTrainingBlock, sessionId: string, now: string): EditResult {
+  const s = block.sessions.find((x) => x.id === sessionId)
+  if (!s || s.kind !== 'own') return { ok: false, error: 'unknown_session' }
+  return { ok: true, block: { ...block, sessions: block.sessions.filter((x) => x.id !== sessionId), updatedAt: now } }
+}
+
+/**
+ * Woche kopieren: alle Einheiten, die in `from` gelten, gelten auch in `to`.
+ * Eine Einheit mit Wochenspanne wird dafür auf eine eigene Kopie für `to`
+ * gesetzt; belegte Tage in `to` werden übersprungen und gemeldet.
+ */
+export function copyWeek(block: StoredTrainingBlock, from: number, to: number, newId: () => string, now: string): { block: StoredTrainingBlock; copied: number; skipped: number } {
+  let copied = 0
+  let skipped = 0
+  let sessions = block.sessions
+  for (const s of block.sessions.filter((x) => !x.removed && sessionInWeek(x, from, block.weeks))) {
+    if (sessionInWeek(s, to, block.weeks)) continue
+    const copy: StoredPlannedSession = { ...s, id: newId(), weekFrom: to, weekTo: to, coachModified: false, coachModificationReason: null }
+    if (sessions.some((x) => !x.removed && x.day === copy.day && overlaps(x, copy, block.weeks))) {
+      skipped++
+      continue
+    }
+    sessions = [...sessions, copy]
+    copied++
+  }
+  return { block: copied > 0 ? { ...block, sessions, updatedAt: now } : block, copied, skipped }
 }

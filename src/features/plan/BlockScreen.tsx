@@ -7,7 +7,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, shownBlock, weekChecks } from '@/domain/trainingBlock'
-import { blockText } from '@/features/plan/planText'
+import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { getTest } from '@/data/testCatalog'
 import { disciplineById } from '@/data/sportProfiles'
@@ -110,10 +110,10 @@ export function BlockScreen() {
           {[...block.sessions].sort((a, b) => a.day - b.day).map((s) => (
             <li key={s.id} className={cn('border-t border-line px-4 py-3 first:border-t-0', s.removed && 'opacity-60')} data-testid={`block-session-${s.id}`}>
               <p className="font-display text-[15px] font-bold">
-                {t(`plan.day.${s.day}`)} · {t(`plan.intent.${s.primaryIntent}`)}
+                {t(`plan.day.${s.day}`)} · {sessionName(s, t)}
                 {s.removed && <span className="ml-2 text-[12px] font-normal text-ink-muted">{t('block.removed')}</span>}
               </p>
-              <p className="text-[12px] text-ink-secondary">{s.ruleId ? t(`plan.rules.${s.ruleId}.title`) : t('plan.openSession')}</p>
+              <p className="text-[12px] text-ink-secondary">{sessionSource(s, t)}</p>
               {s.blocks.map((b, i) => (
                 <p key={i} className="mt-1 text-[14px]">{blockText(b, t)}</p>
               ))}

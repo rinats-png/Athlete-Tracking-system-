@@ -12,11 +12,11 @@ import { cn } from '@/lib/utils'
  * aus belegten Regeln; Vorlagen und eigener Plan folgen in den nächsten
  * Etappen und stehen bis dahin sichtbar als «folgt» da, ohne Verweis ins Leere.
  */
-const WAYS = [
+const WAYS: { key: string; image: string; to: string | null }[] = [
   { key: 'template', image: 'rowing_erg', to: '/plan/vorlagen' },
-  { key: 'own', image: 'back_squat', to: null },
+  { key: 'own', image: 'back_squat', to: '/plan/eigen' },
   { key: 'computed', image: 'treadmill', to: '/plan/neu' },
-] as const
+]
 
 export function PlanWayScreen() {
   const { t } = useTranslation()

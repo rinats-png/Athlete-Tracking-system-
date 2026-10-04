@@ -6,7 +6,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { openSessionsOn } from '@/domain/trainingBlock'
-import { blockText, diaryKindOf } from '@/features/plan/planText'
+import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { cn } from '@/lib/utils'
 import type { StoredPlannedSession } from '@/lib/store/localStore'
@@ -128,7 +128,7 @@ export function SessionPlayerScreen() {
         </div>
       )}
       <Panel className="mb-4">
-        <PanelHeader title={t(`plan.intent.${session.primaryIntent}`)} subtitle={session.ruleId ? t(`plan.rules.${session.ruleId}.title`) : t('plan.openSession')} />
+        <PanelHeader title={sessionName(session, t)} subtitle={sessionSource(session, t)} />
         <div className="px-4 pb-4">
           {session.blocks.map((b, i) => (
             <p key={i} className="text-[14px]">{blockText(b, t)}</p>

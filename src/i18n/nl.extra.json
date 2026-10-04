@@ -2969,7 +2969,20 @@
       "HYROX_STATIONS": "Hyrox-stations",
       "GRIP_ENDURANCE": "Grijpuithoudingsvermogen",
       "FIGHT_SIMULATION": "Gevechtssimulatie",
-      "RACE_REHEARSAL": "Generale repetitie"
+      "RACE_REHEARSAL": "Generale repetitie",
+      "THRESHOLD": "Drempel",
+      "REPEATED_HIGH_INTENSITY": "Herhaalde hoge intensiteit",
+      "LONG_ENDURANCE": "Lange duur",
+      "RECOVERY_AEROBIC": "Actief herstel",
+      "RELATIVE_STRENGTH": "Relatieve kracht",
+      "HYPERTROPHY_SUPPORT": "Spieropbouw",
+      "STRENGTH_ENDURANCE": "Krachtuithouding",
+      "ISOMETRIC_STRENGTH": "Isometrische kracht",
+      "ACCELERATION": "Acceleratie",
+      "MAX_SPEED": "Topsnelheid",
+      "AGILITY_COD": "Behendigheid en richtingsveranderingen",
+      "COMBAT_ROUNDS": "Gevechtsrondes",
+      "TAPER_MAINTENANCE": "Taper en behoud"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min werk, {{rec}} min actieve rust, {{min}}–{{max}} % van de maximale hartslag",
@@ -3310,5 +3323,38 @@
       "nothing_changed": "De dag is ongewijzigd."
     },
     "link": "Kalender"
+  },
+  "own": {
+    "tag": "Eigen training",
+    "title": "Eigen plan maken",
+    "intro": "Maak een leeg plan en voeg je trainingen met de hand toe.",
+    "note": "Eigen trainingen zijn jouw beslissing. KYDON onderbouwt ze niet en toetst ze niet aan studies.",
+    "name": "Naam van het plan",
+    "weeks": "Weken",
+    "create": "Plan maken",
+    "addTitle": "Training toevoegen",
+    "intent": "Intentie",
+    "sessionTitle": "Naam van de training (optioneel)",
+    "day": "Dag",
+    "fromWeek": "Vanaf week",
+    "toWeek": "Tot week",
+    "minutes": "Duur in minuten (optioneel)",
+    "noteLabel": "Notitie (optioneel)",
+    "add": "Toevoegen",
+    "listTitle": "Trainingen",
+    "none": "Nog geen training.",
+    "duplicateTo": "Kopiëren naar …",
+    "delete": "Verwijderen",
+    "copyWeek": "Week kopiëren",
+    "copyFrom": "Van week",
+    "copyTo": "Naar week",
+    "copy": "Kopiëren",
+    "copied": "{{copied}} gekopieerd, {{skipped}} overgeslagen (dag bezet).",
+    "err": {
+      "bad_weeks": "De weken passen niet bij de lengte van het plan.",
+      "day_taken": "Op die dag staat in die weken al een training.",
+      "no_intent": "Kies een intentie.",
+      "unknown_session": "Training niet gevonden."
+    }
   }
 }

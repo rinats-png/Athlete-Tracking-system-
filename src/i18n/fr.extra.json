@@ -2969,7 +2969,20 @@
       "HYROX_STATIONS": "Stations Hyrox",
       "GRIP_ENDURANCE": "Endurance de préhension",
       "FIGHT_SIMULATION": "Simulation de combat",
-      "RACE_REHEARSAL": "Répétition de compétition"
+      "RACE_REHEARSAL": "Répétition de compétition",
+      "THRESHOLD": "Seuil",
+      "REPEATED_HIGH_INTENSITY": "Haute intensité répétée",
+      "LONG_ENDURANCE": "Endurance longue",
+      "RECOVERY_AEROBIC": "Récupération active",
+      "RELATIVE_STRENGTH": "Force relative",
+      "HYPERTROPHY_SUPPORT": "Soutien à l’hypertrophie",
+      "STRENGTH_ENDURANCE": "Endurance de force",
+      "ISOMETRIC_STRENGTH": "Force isométrique",
+      "ACCELERATION": "Accélération",
+      "MAX_SPEED": "Vitesse maximale",
+      "AGILITY_COD": "Agilité et changements de direction",
+      "COMBAT_ROUNDS": "Rounds de combat",
+      "TAPER_MAINTENANCE": "Affûtage et maintien"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min de travail, {{rec}} min de pause active, {{min}}–{{max}} % de la fréquence cardiaque maximale",
@@ -3310,5 +3323,38 @@
       "nothing_changed": "Le jour est inchangé."
     },
     "link": "Calendrier"
+  },
+  "own": {
+    "tag": "Séance perso",
+    "title": "Créer ton propre plan",
+    "intro": "Crée un plan vide et ajoute tes séances à la main.",
+    "note": "Les séances perso sont ta décision. KYDON ne les documente pas et ne les compare pas aux études.",
+    "name": "Nom du plan",
+    "weeks": "Semaines",
+    "create": "Créer le plan",
+    "addTitle": "Ajouter une séance",
+    "intent": "Intention",
+    "sessionTitle": "Nom de la séance (facultatif)",
+    "day": "Jour",
+    "fromWeek": "À partir de la semaine",
+    "toWeek": "Jusqu’à la semaine",
+    "minutes": "Durée en minutes (facultatif)",
+    "noteLabel": "Note (facultatif)",
+    "add": "Ajouter",
+    "listTitle": "Séances",
+    "none": "Pas encore de séance.",
+    "duplicateTo": "Copier vers …",
+    "delete": "Supprimer",
+    "copyWeek": "Copier la semaine",
+    "copyFrom": "De la semaine",
+    "copyTo": "Vers la semaine",
+    "copy": "Copier",
+    "copied": "{{copied}} copiées, {{skipped}} ignorées (jour occupé).",
+    "err": {
+      "bad_weeks": "Les semaines ne correspondent pas à la durée du plan.",
+      "day_taken": "Une séance existe déjà ce jour-là dans ces semaines.",
+      "no_intent": "Choisis une intention.",
+      "unknown_session": "Séance introuvable."
+    }
   }
 }

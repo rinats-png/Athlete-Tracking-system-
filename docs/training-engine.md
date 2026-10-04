@@ -120,3 +120,13 @@ Zweiter Weg zum Block neben der Berechnung: eine **Vorlage** (`src/data/planTemp
 - **Verschieben** per Ziehen (Desktop) oder Antippen plus «Hierhin verschieben» (Touch, Tastatur). Es läuft über `overrideSession`: Grund Pflicht, nie zwei Einheiten an einem Tag, Änderung steht mit Grund im Block. Die Änderung gilt für die Einheit in allen ihren Wochen; das steht im Bildschirm.
 - Rein lesend aus dem Block: `calendarWeek` in `trainingBlock.ts`.
 - Noch offen: Einheit hinzufügen, kopieren, duplizieren, Woche oder Phase kopieren, als Vorlage speichern (kommen mit dem manuellen Builder).
+
+## Eigener Plan (Trainingsbereich Etappe 4)
+
+`/plan/eigen`: leeren Plan anlegen (Name, Wochen, Phase, Start), Einheiten von Hand hinzufügen.
+
+- Eine **eigene Einheit** (`kind: 'own'`) ist die Entscheidung des Menschen: Absicht aus der Liste, Name, Dauer und Notiz frei. Sie trägt keine Regel, keine Dosis aus dem Register und keine Evidenzangabe und steht überall als «Eigene Einheit» da. KYDON belegt sie nicht und prüft sie nicht gegen Studien; das steht im Bildschirm.
+- Kopieren auf einen anderen Tag, Woche kopieren (Quellwoche gilt auch in der Zielwoche, belegte Tage werden gezählt übersprungen) und Löschen eigener Einheiten. Einheiten aus Regeln oder Vorlagen werden nie gelöscht, sondern mit Grund gestrichen (Override).
+- Zwei Einheiten am selben Tag in denselben Wochen nimmt die App nicht an.
+- **Schema 35:** Block `name`, `family` nullbar (Sportart ohne Pilotfamilie); Einheit `title`, `note`, `kind: 'own'`.
+- Noch offen: «als Vorlage speichern», Phase kopieren, Übungsbibliothek und eigene Übungen im Builder, Plan-Import.

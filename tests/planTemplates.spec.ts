@@ -86,7 +86,7 @@ test.describe('Vorlagen: Fachlogik', () => {
     const fit = fitTemplate(base('hyrox_prep', { availableDays: [1, 2, 3, 4, 6, 7], fixedSessions: [] }))
     const rehearsal = fit.sessions.find((s) => s.primaryIntent === 'RACE_REHEARSAL')
     expect(rehearsal).toMatchObject({ weekFrom: 7, weekTo: 7, kind: 'open' })
-    const block: StoredTrainingBlock = { id: 'b', family: 'hybrid', disciplineId: 'hyrox', phase: 'BUILD', startDay: '2026-10-05', weeks: t.weeks, retestMetrics: [], templateId: t.id, eventDay: null, sessions: fit.sessions, completions: [], status: 'active', createdAt: '', updatedAt: '' }
+    const block: StoredTrainingBlock = { id: 'b', name: '', family: 'hybrid', disciplineId: 'hyrox', phase: 'BUILD', startDay: '2026-10-05', weeks: t.weeks, retestMetrics: [], templateId: t.id, eventDay: null, sessions: fit.sessions, completions: [], status: 'active', createdAt: '', updatedAt: '' }
     const rehearsalDate = (week: number) => new Date(Date.parse('2026-10-05T00:00:00Z') + ((week - 1) * 7 + rehearsal!.day - 1) * 86_400_000).toISOString().slice(0, 10)
     expect(openSessionsOn(block, rehearsalDate(7)).some((s) => s.id === rehearsal!.id)).toBe(true)
     expect(openSessionsOn(block, rehearsalDate(6)).some((s) => s.id === rehearsal!.id)).toBe(false)

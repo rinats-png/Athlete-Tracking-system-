@@ -22,3 +22,15 @@ export function blockText(b: StoredPlannedSession['blocks'][number], t: TFunctio
 
 /** Welche Art Tagebuch-Einheit zur Intention gehört. */
 export const diaryKindOf = (intent: string): 'strength' | 'endurance' => (intent === 'VO2MAX' || intent === 'REPEATED_SPRINT' || intent === 'REPEATED_HIGH_INTENSITY' ? 'endurance' : 'strength')
+
+type Tr = (key: string, opts?: Record<string, unknown>) => string
+interface NamedSession {
+  kind: 'rule' | 'open' | 'own'
+  title: string
+  primaryIntent: string
+  ruleId: string | null
+}
+/** Name einer Einheit: bei eigenen der selbst gewählte Titel, sonst die Absicht. */
+export const sessionName = (s: NamedSession, t: Tr): string => (s.kind === 'own' && s.title ? s.title : t(`plan.intent.${s.primaryIntent}`))
+/** Zeile darunter: Regel, «Eigene Einheit» oder «Offen». */
+export const sessionSource = (s: NamedSession, t: Tr): string => (s.ruleId ? t(`plan.rules.${s.ruleId}.title`) : s.kind === 'own' ? t('own.tag') : t('plan.openSession'))

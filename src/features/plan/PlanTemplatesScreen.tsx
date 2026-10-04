@@ -172,6 +172,7 @@ export function PlanTemplateFitScreen() {
     saveTrainingBlock({
       id: newId(),
       family: tpl.family,
+      name: '',
       disciplineId: profile.disciplineId,
       phase: tpl.phase,
       startDay: fit.startDay,

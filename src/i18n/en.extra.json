@@ -2969,7 +2969,20 @@
       "HYROX_STATIONS": "Hyrox stations",
       "GRIP_ENDURANCE": "Grip endurance",
       "FIGHT_SIMULATION": "Fight simulation",
-      "RACE_REHEARSAL": "Race rehearsal"
+      "RACE_REHEARSAL": "Race rehearsal",
+      "THRESHOLD": "Threshold",
+      "REPEATED_HIGH_INTENSITY": "Repeated high intensity",
+      "LONG_ENDURANCE": "Long endurance",
+      "RECOVERY_AEROBIC": "Active recovery",
+      "RELATIVE_STRENGTH": "Relative strength",
+      "HYPERTROPHY_SUPPORT": "Hypertrophy support",
+      "STRENGTH_ENDURANCE": "Strength endurance",
+      "ISOMETRIC_STRENGTH": "Isometric strength",
+      "ACCELERATION": "Acceleration",
+      "MAX_SPEED": "Maximum speed",
+      "AGILITY_COD": "Agility and change of direction",
+      "COMBAT_ROUNDS": "Combat rounds",
+      "TAPER_MAINTENANCE": "Taper and maintenance"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min work, {{rec}} min active rest, {{min}}–{{max}} % of maximum heart rate",
@@ -3310,5 +3323,38 @@
       "nothing_changed": "The day is unchanged."
     },
     "link": "Calendar"
+  },
+  "own": {
+    "tag": "Own session",
+    "title": "Create your own plan",
+    "intro": "Start an empty plan and add your sessions by hand.",
+    "note": "Own sessions are your decision. KYDON does not source them or check them against studies.",
+    "name": "Plan name",
+    "weeks": "Weeks",
+    "create": "Create plan",
+    "addTitle": "Add session",
+    "intent": "Intent",
+    "sessionTitle": "Session name (optional)",
+    "day": "Day",
+    "fromWeek": "From week",
+    "toWeek": "To week",
+    "minutes": "Duration in minutes (optional)",
+    "noteLabel": "Note (optional)",
+    "add": "Add",
+    "listTitle": "Sessions",
+    "none": "No session yet.",
+    "duplicateTo": "Copy to …",
+    "delete": "Delete",
+    "copyWeek": "Copy week",
+    "copyFrom": "From week",
+    "copyTo": "To week",
+    "copy": "Copy",
+    "copied": "{{copied}} copied, {{skipped}} skipped (day taken).",
+    "err": {
+      "bad_weeks": "The weeks do not fit the plan length.",
+      "day_taken": "There is already a session on that day in those weeks.",
+      "no_intent": "Please choose an intent.",
+      "unknown_session": "Session not found."
+    }
   }
 }

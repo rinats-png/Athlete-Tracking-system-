@@ -2969,7 +2969,20 @@
       "HYROX_STATIONS": "Hyrox-stationer",
       "GRIP_ENDURANCE": "Grebsudholdenhed",
       "FIGHT_SIMULATION": "Kampsimulering",
-      "RACE_REHEARSAL": "Konkurrenceprøve"
+      "RACE_REHEARSAL": "Konkurrenceprøve",
+      "THRESHOLD": "Tærskel",
+      "REPEATED_HIGH_INTENSITY": "Gentagen høj intensitet",
+      "LONG_ENDURANCE": "Lang udholdenhed",
+      "RECOVERY_AEROBIC": "Aktiv restitution",
+      "RELATIVE_STRENGTH": "Relativ styrke",
+      "HYPERTROPHY_SUPPORT": "Muskelopbygning",
+      "STRENGTH_ENDURANCE": "Styrkeudholdenhed",
+      "ISOMETRIC_STRENGTH": "Isometrisk styrke",
+      "ACCELERATION": "Acceleration",
+      "MAX_SPEED": "Tophastighed",
+      "AGILITY_COD": "Smidighed og retningsskift",
+      "COMBAT_ROUNDS": "Kampsrunder",
+      "TAPER_MAINTENANCE": "Nedtrapning og vedligehold"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min arbejde, {{rec}} min aktiv pause, {{min}}–{{max}} % af maksimalpuls",
@@ -3310,5 +3323,38 @@
       "nothing_changed": "Dagen er uændret."
     },
     "link": "Kalender"
+  },
+  "own": {
+    "tag": "Egen session",
+    "title": "Lav din egen plan",
+    "intro": "Lav en tom plan og tilføj dine sessioner i hånden.",
+    "note": "Egne sessioner er din beslutning. KYDON belægger dem ikke og prøver dem ikke mod studier.",
+    "name": "Planens navn",
+    "weeks": "Uger",
+    "create": "Opret plan",
+    "addTitle": "Tilføj session",
+    "intent": "Hensigt",
+    "sessionTitle": "Sessionens navn (valgfrit)",
+    "day": "Dag",
+    "fromWeek": "Fra uge",
+    "toWeek": "Til uge",
+    "minutes": "Varighed i minutter (valgfrit)",
+    "noteLabel": "Note (valgfrit)",
+    "add": "Tilføj",
+    "listTitle": "Sessioner",
+    "none": "Ingen session endnu.",
+    "duplicateTo": "Kopiér til …",
+    "delete": "Slet",
+    "copyWeek": "Kopiér uge",
+    "copyFrom": "Fra uge",
+    "copyTo": "Til uge",
+    "copy": "Kopiér",
+    "copied": "{{copied}} kopieret, {{skipped}} sprunget over (dagen er optaget).",
+    "err": {
+      "bad_weeks": "Ugerne passer ikke til planens længde.",
+      "day_taken": "Der ligger allerede en session den dag i de uger.",
+      "no_intent": "Vælg en hensigt.",
+      "unknown_session": "Sessionen blev ikke fundet."
+    }
   }
 }

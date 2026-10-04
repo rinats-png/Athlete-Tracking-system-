@@ -2969,7 +2969,20 @@
       "HYROX_STATIONS": "Hyrox-stasjoner",
       "GRIP_ENDURANCE": "Grepsutholdenhet",
       "FIGHT_SIMULATION": "Kampsimulering",
-      "RACE_REHEARSAL": "Konkurranseprøve"
+      "RACE_REHEARSAL": "Konkurranseprøve",
+      "THRESHOLD": "Terskel",
+      "REPEATED_HIGH_INTENSITY": "Gjentatt høy intensitet",
+      "LONG_ENDURANCE": "Lang utholdenhet",
+      "RECOVERY_AEROBIC": "Aktiv restitusjon",
+      "RELATIVE_STRENGTH": "Relativ styrke",
+      "HYPERTROPHY_SUPPORT": "Muskelbygging",
+      "STRENGTH_ENDURANCE": "Styrkeutholdenhet",
+      "ISOMETRIC_STRENGTH": "Isometrisk styrke",
+      "ACCELERATION": "Akselerasjon",
+      "MAX_SPEED": "Toppfart",
+      "AGILITY_COD": "Smidighet og retningsendringer",
+      "COMBAT_ROUNDS": "Kamprunder",
+      "TAPER_MAINTENANCE": "Nedtrapping og vedlikehold"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min arbeid, {{rec}} min aktiv pause, {{min}}–{{max}} % av makspuls",
@@ -3310,5 +3323,38 @@
       "nothing_changed": "Dagen er uendret."
     },
     "link": "Kalender"
+  },
+  "own": {
+    "tag": "Egen økt",
+    "title": "Lag din egen plan",
+    "intro": "Lag en tom plan og legg til øktene dine for hånd.",
+    "note": "Egne økter er din avgjørelse. KYDON belegger dem ikke og prøver dem ikke mot studier.",
+    "name": "Navn på planen",
+    "weeks": "Uker",
+    "create": "Lag plan",
+    "addTitle": "Legg til økt",
+    "intent": "Hensikt",
+    "sessionTitle": "Navn på økten (valgfritt)",
+    "day": "Dag",
+    "fromWeek": "Fra uke",
+    "toWeek": "Til uke",
+    "minutes": "Varighet i minutter (valgfritt)",
+    "noteLabel": "Notat (valgfritt)",
+    "add": "Legg til",
+    "listTitle": "Økter",
+    "none": "Ingen økt ennå.",
+    "duplicateTo": "Kopier til …",
+    "delete": "Slett",
+    "copyWeek": "Kopier uke",
+    "copyFrom": "Fra uke",
+    "copyTo": "Til uke",
+    "copy": "Kopier",
+    "copied": "{{copied}} kopiert, {{skipped}} hoppet over (dagen er opptatt).",
+    "err": {
+      "bad_weeks": "Ukene passer ikke til lengden på planen.",
+      "day_taken": "Det ligger allerede en økt den dagen i de ukene.",
+      "no_intent": "Velg en hensikt.",
+      "unknown_session": "Økten ble ikke funnet."
+    }
   }
 }

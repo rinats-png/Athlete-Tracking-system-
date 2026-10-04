@@ -2969,7 +2969,20 @@
       "HYROX_STATIONS": "Hyrox-stationer",
       "GRIP_ENDURANCE": "Grepputhållighet",
       "FIGHT_SIMULATION": "Matchsimulering",
-      "RACE_REHEARSAL": "Tävlingsrepetition"
+      "RACE_REHEARSAL": "Tävlingsrepetition",
+      "THRESHOLD": "Tröskel",
+      "REPEATED_HIGH_INTENSITY": "Upprepad hög intensitet",
+      "LONG_ENDURANCE": "Lång uthållighet",
+      "RECOVERY_AEROBIC": "Aktiv återhämtning",
+      "RELATIVE_STRENGTH": "Relativ styrka",
+      "HYPERTROPHY_SUPPORT": "Muskelbyggande",
+      "STRENGTH_ENDURANCE": "Styrkeuthållighet",
+      "ISOMETRIC_STRENGTH": "Isometrisk styrka",
+      "ACCELERATION": "Acceleration",
+      "MAX_SPEED": "Maxfart",
+      "AGILITY_COD": "Smidighet och riktningsändringar",
+      "COMBAT_ROUNDS": "Kampronder",
+      "TAPER_MAINTENANCE": "Taper och bibehållande"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min arbete, {{rec}} min aktiv vila, {{min}}–{{max}} % av maxpulsen",
@@ -3310,5 +3323,38 @@
       "nothing_changed": "Dagen är oförändrad."
     },
     "link": "Kalender"
+  },
+  "own": {
+    "tag": "Eget pass",
+    "title": "Skapa en egen plan",
+    "intro": "Skapa en tom plan och lägg till dina pass för hand.",
+    "note": "Egna pass är ditt beslut. KYDON belägger dem inte och prövar dem inte mot studier.",
+    "name": "Planens namn",
+    "weeks": "Veckor",
+    "create": "Skapa plan",
+    "addTitle": "Lägg till pass",
+    "intent": "Avsikt",
+    "sessionTitle": "Passets namn (valfritt)",
+    "day": "Dag",
+    "fromWeek": "Från vecka",
+    "toWeek": "Till vecka",
+    "minutes": "Längd i minuter (valfritt)",
+    "noteLabel": "Anteckning (valfritt)",
+    "add": "Lägg till",
+    "listTitle": "Pass",
+    "none": "Inget pass än.",
+    "duplicateTo": "Kopiera till …",
+    "delete": "Ta bort",
+    "copyWeek": "Kopiera vecka",
+    "copyFrom": "Från vecka",
+    "copyTo": "Till vecka",
+    "copy": "Kopiera",
+    "copied": "{{copied}} kopierade, {{skipped}} överhoppade (dagen upptagen).",
+    "err": {
+      "bad_weeks": "Veckorna passar inte planens längd.",
+      "day_taken": "Det finns redan ett pass den dagen i de veckorna.",
+      "no_intent": "Välj en avsikt.",
+      "unknown_session": "Passet hittades inte."
+    }
   }
 }

@@ -2969,7 +2969,20 @@
       "HYROX_STATIONS": "Hyrox-Stationen",
       "GRIP_ENDURANCE": "Griffausdauer",
       "FIGHT_SIMULATION": "Kampfsimulation",
-      "RACE_REHEARSAL": "Wettkampfprobe"
+      "RACE_REHEARSAL": "Wettkampfprobe",
+      "THRESHOLD": "Schwelle",
+      "REPEATED_HIGH_INTENSITY": "Wiederholte hohe Intensität",
+      "LONG_ENDURANCE": "Lange Ausdauer",
+      "RECOVERY_AEROBIC": "Aktive Erholung",
+      "RELATIVE_STRENGTH": "Relative Kraft",
+      "HYPERTROPHY_SUPPORT": "Muskelaufbau",
+      "STRENGTH_ENDURANCE": "Kraftausdauer",
+      "ISOMETRIC_STRENGTH": "Isometrische Kraft",
+      "ACCELERATION": "Beschleunigung",
+      "MAX_SPEED": "Maximale Geschwindigkeit",
+      "AGILITY_COD": "Agilität und Richtungswechsel",
+      "COMBAT_ROUNDS": "Kampfrunden",
+      "TAPER_MAINTENANCE": "Taper und Erhalt"
     },
     "block": {
       "interval": "{{reps}} × {{work}} Min. Arbeit, {{rec}} Min. aktive Pause, {{min}}–{{max}} % der maximalen Herzfrequenz",
@@ -3310,5 +3323,38 @@
       "nothing_changed": "Der Tag ist unverändert."
     },
     "link": "Kalender"
+  },
+  "own": {
+    "tag": "Eigene Einheit",
+    "title": "Plan selbst erstellen",
+    "intro": "Lege einen leeren Plan an und füge deine Einheiten von Hand hinzu.",
+    "note": "Eigene Einheiten sind deine Entscheidung. KYDON belegt sie nicht und prüft sie nicht gegen Studien.",
+    "name": "Name des Plans",
+    "weeks": "Wochen",
+    "create": "Plan anlegen",
+    "addTitle": "Einheit hinzufügen",
+    "intent": "Absicht",
+    "sessionTitle": "Name der Einheit (optional)",
+    "day": "Tag",
+    "fromWeek": "Ab Woche",
+    "toWeek": "Bis Woche",
+    "minutes": "Dauer in Minuten (optional)",
+    "noteLabel": "Notiz (optional)",
+    "add": "Hinzufügen",
+    "listTitle": "Einheiten",
+    "none": "Noch keine Einheit.",
+    "duplicateTo": "Kopieren auf …",
+    "delete": "Löschen",
+    "copyWeek": "Woche kopieren",
+    "copyFrom": "Von Woche",
+    "copyTo": "Nach Woche",
+    "copy": "Kopieren",
+    "copied": "{{copied}} kopiert, {{skipped}} übersprungen (Tag belegt).",
+    "err": {
+      "bad_weeks": "Die Wochen passen nicht zur Länge des Plans.",
+      "day_taken": "An diesem Tag liegt in diesen Wochen schon eine Einheit.",
+      "no_intent": "Bitte eine Absicht wählen.",
+      "unknown_session": "Einheit nicht gefunden."
+    }
   }
 }

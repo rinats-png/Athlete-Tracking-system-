@@ -140,6 +140,8 @@ export function fitTemplate(input: FitInput): FitResult {
         weekFrom: slot.weekFrom,
         weekTo: slot.weekTo == null ? null : weekTo,
         kind: rule ? 'rule' : 'open',
+        title: '',
+        note: '',
         ruleId: rule?.id ?? null,
         ruleVersion: rule?.version ?? null,
         primaryIntent: slot.intent,

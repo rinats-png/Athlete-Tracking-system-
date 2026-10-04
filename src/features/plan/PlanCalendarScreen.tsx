@@ -9,6 +9,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { planMode } from '@/domain/planMode'
 import { blockWeek, calendarWeek, overrideSession, type CalendarCell } from '@/domain/trainingBlock'
 import type { StoredPlannedSession, StoredTrainingBlock } from '@/lib/store/localStore'
+import { sessionName } from '@/features/plan/planText'
 import { cn } from '@/lib/utils'
 
 /**
@@ -39,12 +40,12 @@ function Card({ s, done, picked, onPick }: { s: StoredPlannedSession; done: bool
     >
       <span className="flex items-center gap-2 font-display text-[14px] font-bold">
         {done && <Check size={14} aria-label={t('cal.done')} />}
-        {t(`plan.intent.${s.primaryIntent}`)}
+        {sessionName(s, t)}
       </span>
       <span className="mt-1 flex flex-wrap gap-1.5 text-[11px] text-ink-secondary">
         {s.plannedDurationMin != null && <span>{t('cal.minutes', { n: s.plannedDurationMin })}</span>}
         {s.highIntensity && <span>{t('cal.key')}</span>}
-        <span>{s.evidenceStrength ? t('plan.evidence.strength', { level: t(`plan.strength.${s.evidenceStrength}`) }) : t('cal.open')}</span>
+        <span>{s.kind === 'own' ? t('own.tag') : s.evidenceStrength ? t('plan.evidence.strength', { level: t(`plan.strength.${s.evidenceStrength}`) }) : t('cal.open')}</span>
       </span>
     </button>
   )
