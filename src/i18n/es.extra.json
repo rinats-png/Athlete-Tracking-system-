@@ -1087,7 +1087,27 @@
     "hint": "No es un valor de referencia. Una entrada de registro documenta que un método se mide así en investigación registrada — no que exista una norma para él, y nada sobre la calidad o eficacia del estudio.",
     "outcomes": "Medidas registradas",
     "caveat": "A tener en cuenta",
-    "open": "Abrir estudio"
+    "open": "Abrir estudio",
+    "drawer": {
+      "open": "Ver evidencia",
+      "title": "Evidencia de esta recomendación",
+      "close": "Cerrar",
+      "recommendation": "Recomendación",
+      "strength": "Solidez de la evidencia",
+      "type": "Tipo de evidencia",
+      "specificity": "Especificidad",
+      "appliedTo": "Aplicada a",
+      "transfer": "Transferencia",
+      "verification": "Estado de verificación",
+      "version": "Versión de la regla",
+      "sources": "Fuentes",
+      "note": "Esto describe la base de la afirmación, no tus datos. La fiabilidad de tus datos se muestra aparte y no se combina con la evidencia.",
+      "transferValue": {
+        "direct": "directa, del mismo deporte",
+        "related": "transferida de un deporte afín",
+        "extrapolated": "extrapolada de deportistas en general"
+      }
+    }
   },
   "health": {
     "eyebrow": "Mayores de dieciocho · Élite",

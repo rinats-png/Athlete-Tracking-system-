@@ -1087,7 +1087,27 @@
     "hint": "Ingen referanseverdi. En registeroppføring dokumenterer at en metode måles slik i registrert forskning — ikke at det finnes en norm for den, og ingenting om studiens kvalitet eller effekt.",
     "outcomes": "Registrerte mål",
     "caveat": "Merk",
-    "open": "Åpne studie"
+    "open": "Åpne studie",
+    "drawer": {
+      "open": "Se belegg",
+      "title": "Belegg for anbefalingen",
+      "close": "Lukk",
+      "recommendation": "Anbefaling",
+      "strength": "Styrken på evidensen",
+      "type": "Type evidens",
+      "specificity": "Spesifisitet",
+      "appliedTo": "Brukt på",
+      "transfer": "Overføring",
+      "verification": "Verifiseringsstatus",
+      "version": "Regelversjon",
+      "sources": "Kilder",
+      "note": "Dette beskriver grunnlaget for utsagnet, ikke dataene dine. Datagrunnlaget ditt vises separat og regnes ikke sammen med belegget.",
+      "transferValue": {
+        "direct": "direkte, fra samme idrett",
+        "related": "overført fra en beslektet idrett",
+        "extrapolated": "ekstrapolert fra utøvere generelt"
+      }
+    }
   },
   "health": {
     "eyebrow": "Fra atten år · Elite",

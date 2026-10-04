@@ -1087,7 +1087,27 @@
     "hint": "Pas une valeur de référence. Une entrée de registre documente qu'une méthode est mesurée ainsi dans une recherche enregistrée — pas qu'une norme existe pour elle, et rien sur la qualité ou l'efficacité de l'étude.",
     "outcomes": "Mesures enregistrées",
     "caveat": "À noter",
-    "open": "Ouvrir l'étude"
+    "open": "Ouvrir l'étude",
+    "drawer": {
+      "open": "Voir la preuve",
+      "title": "Preuves de cette recommandation",
+      "close": "Fermer",
+      "recommendation": "Recommandation",
+      "strength": "Niveau de preuve",
+      "type": "Type de preuve",
+      "specificity": "Spécificité",
+      "appliedTo": "Appliquée à",
+      "transfer": "Transfert",
+      "verification": "État de vérification",
+      "version": "Version de la règle",
+      "sources": "Sources",
+      "note": "Cela décrit la base de l'énoncé, pas vos données. La fiabilité de vos données est indiquée séparément et n'est pas combinée à la preuve.",
+      "transferValue": {
+        "direct": "direct, du même sport",
+        "related": "transféré d'un sport proche",
+        "extrapolated": "extrapolé à partir des sportifs en général"
+      }
+    }
   },
   "health": {
     "eyebrow": "18 ans et plus · Élite",

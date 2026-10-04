@@ -1087,7 +1087,27 @@
     "hint": "Geen referentiewaarde. Een registervermelding documenteert dat een methode zo gemeten wordt in geregistreerd onderzoek — niet dat er een norm voor bestaat, en niets over de kwaliteit of werkzaamheid van de studie.",
     "outcomes": "Geregistreerde maten",
     "caveat": "Ter opmerking",
-    "open": "Studie openen"
+    "open": "Studie openen",
+    "drawer": {
+      "open": "Onderbouwing bekijken",
+      "title": "Onderbouwing van deze aanbeveling",
+      "close": "Sluiten",
+      "recommendation": "Aanbeveling",
+      "strength": "Sterkte van het bewijs",
+      "type": "Soort bewijs",
+      "specificity": "Specificiteit",
+      "appliedTo": "Toegepast op",
+      "transfer": "Overdracht",
+      "verification": "Verificatiestatus",
+      "version": "Regelversie",
+      "sources": "Bronnen",
+      "note": "Dit beschrijft de basis van de uitspraak, niet jouw gegevens. De betrouwbaarheid van jouw gegevens wordt apart getoond en niet met het bewijs verrekend.",
+      "transferValue": {
+        "direct": "direct, uit dezelfde sport",
+        "related": "overgedragen uit een verwante sport",
+        "extrapolated": "geëxtrapoleerd uit sporters in het algemeen"
+      }
+    }
   },
   "health": {
     "eyebrow": "Vanaf achttien · Elite",

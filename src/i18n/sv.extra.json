@@ -1087,7 +1087,27 @@
     "hint": "Inget referensvärde. En registerpost dokumenterar att en metod mäts så här i registrerad forskning — inte att en norm finns för den, och inget om studiens kvalitet eller effekt.",
     "outcomes": "Registrerade mått",
     "caveat": "Att notera",
-    "open": "Öppna studie"
+    "open": "Öppna studie",
+    "drawer": {
+      "open": "Visa belägg",
+      "title": "Belägg för rekommendationen",
+      "close": "Stäng",
+      "recommendation": "Rekommendation",
+      "strength": "Evidensens styrka",
+      "type": "Typ av evidens",
+      "specificity": "Specificitet",
+      "appliedTo": "Tillämpad på",
+      "transfer": "Överföring",
+      "verification": "Verifieringsstatus",
+      "version": "Regelversion",
+      "sources": "Källor",
+      "note": "Detta beskriver grunden för påståendet, inte dina data. Datakvaliteten för dig visas separat och räknas inte ihop med beläggen.",
+      "transferValue": {
+        "direct": "direkt, från samma idrott",
+        "related": "överfört från en besläktad idrott",
+        "extrapolated": "extrapolerat från idrottare i allmänhet"
+      }
+    }
   },
   "health": {
     "eyebrow": "Från arton år · Elit",

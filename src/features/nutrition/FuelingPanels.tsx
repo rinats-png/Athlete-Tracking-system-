@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { EvidenceDrawer } from '@/components/ui/EvidenceDrawer'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { NumberField } from '@/components/ui/NumberField'
@@ -275,6 +276,12 @@ function FuelRulePanel({ weightKg }: { weightKg: number | null }) {
           })}
         </ul>
         <p className="mt-2 text-[11px] text-ink-muted">{t('fueling.rule.version', { version: ev.ruleVersion, date: ev.reviewed })}</p>
+        <EvidenceDrawer
+          recommendation={`${t('nutrition.macros.carbs')}: ${formatNumber(rule.carbsPerKg[0], locale, 0)}–${formatNumber(rule.carbsPerKg[1], locale, 0)} g/kg`}
+          evidence={ev}
+          specificity={specificity}
+          appliedTo={pick(discipline.name, locale) ?? ''}
+        />
       </div>
       {rule.weightClass && (
         <div className="border-t border-line bg-accent-quiet px-4 py-3 text-[12px]" data-testid="fuel-weightclass">

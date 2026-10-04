@@ -1087,7 +1087,27 @@
     "hint": "Ikke en referenceværdi. En registerpost dokumenterer, at en metode måles på denne måde i registreret forskning — ikke at der findes en norm for den, og intet om studiets kvalitet eller effekt.",
     "outcomes": "Registrerede mål",
     "caveat": "Bemærk",
-    "open": "Åbn studie"
+    "open": "Åbn studie",
+    "drawer": {
+      "open": "Se belæg",
+      "title": "Belæg for anbefalingen",
+      "close": "Luk",
+      "recommendation": "Anbefaling",
+      "strength": "Evidensens styrke",
+      "type": "Type evidens",
+      "specificity": "Specificitet",
+      "appliedTo": "Anvendt på",
+      "transfer": "Overførsel",
+      "verification": "Verifikationsstatus",
+      "version": "Regelversion",
+      "sources": "Kilder",
+      "note": "Dette beskriver grundlaget for udsagnet, ikke dine data. Dit datagrundlag vises separat og regnes ikke sammen med belægget.",
+      "transferValue": {
+        "direct": "direkte, fra samme sport",
+        "related": "overført fra en beslægtet sport",
+        "extrapolated": "ekstrapoleret fra atleter generelt"
+      }
+    }
   },
   "health": {
     "eyebrow": "Fra atten år · Elite",
