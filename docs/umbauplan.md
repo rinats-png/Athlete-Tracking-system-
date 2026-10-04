@@ -24,8 +24,8 @@
 | 2 | **Athlet:** Navigation (Heute, Leistung, Test, Fuel, Mehr), Heute, Leistungsprofil mit Assessment Coverage und Data Confidence | ✅ gebaut |
 | 3 | Check-in (Migration), Trainer-Check-ins mit Baseline, Wochenrückblick | ✅ gebaut; Teilen mit dem Trainer hinter Schalter bis zur Freigabe |
 | 4 | Kiosk-Modus und Testtag-Planer (Startzeit, Pause, Zeitfenster) | ✅ gebaut |
-| 5 | Ask KYDON, Coach Copilot (erst Werkzeugschicht, dann Sprachmodell) | offen |
-| 6 | Fuel-Vervollständigung mit Evidence Drawer | offen |
+| 5 | Ask KYDON, Coach Copilot (erst Werkzeugschicht, dann Sprachmodell) | ✅ Werkzeugschicht gebaut; Sprachmodell wartet auf Entscheidungen |
+| 6 | Fuel-Vervollständigung mit Evidence Drawer | ✅ Drawer an der Regelkarte gebaut |
 
 Jede neue Funktion besteht die Prüfung aus Doktrin §50.
 
