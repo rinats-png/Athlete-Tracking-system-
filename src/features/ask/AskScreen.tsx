@@ -10,6 +10,7 @@ import { answer, askableTests, QUESTIONS, type Fact, type QuestionKey } from '@/
 import { getTest } from '@/data/testCatalog'
 import { pick } from '@/i18n/pick'
 import { cn } from '@/lib/utils'
+import { PhraseButton } from '@/components/PhraseButton'
 
 /**
  * Fragen an KYDON (Produktdoktrin §30): feste Fragen, deterministische
@@ -86,6 +87,7 @@ export function AskScreen() {
             <li key={`${f.key}-${i}`}>{text(f)}</li>
           ))}
         </ul>
+        {!result.empty && <PhraseButton kind="answer" facts={result.facts} />}
         {result.link && (
           <p className="px-4 pb-3">
             <Link to={result.link} className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">

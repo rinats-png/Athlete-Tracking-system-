@@ -2878,5 +2878,18 @@
       "load": "Carga: {{actual}} UA con un objetivo de {{target}} UA.",
       "note": "El objetivo lo fijas tú. KYDON solo compara y no juzga."
     }
+  },
+  "phrase": {
+    "button": "Formular como texto",
+    "note": "Formulado por un modelo de lenguaje. Todas las cifras proceden de los hechos y se han comprobado.",
+    "usage": "{{used}} de {{limit}} usos este mes.",
+    "reason": {
+      "disabled": "La reformulación no está activada.",
+      "unavailable": "Hace falta una cuenta y conexión. La respuesta fija se mantiene.",
+      "not_entitled": "La reformulación forma parte de Pro. La respuesta fija se mantiene.",
+      "limit_reached": "Se han agotado las 30 reformulaciones de este mes. La respuesta fija se mantiene.",
+      "rejected": "El texto no superó la comprobación de cifras y no se muestra. La respuesta fija se mantiene.",
+      "failed": "No ha funcionado. La respuesta fija se mantiene."
+    }
   }
 }

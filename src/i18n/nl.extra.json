@@ -2878,5 +2878,18 @@
       "load": "Belasting: {{actual}} AU bij een doel van {{target}} AU.",
       "note": "Het doel stel je zelf in. KYDON vergelijkt alleen en oordeelt niet."
     }
+  },
+  "phrase": {
+    "button": "Als tekst formuleren",
+    "note": "Geformuleerd door een taalmodel. Alle cijfers komen uit de feiten en zijn gecontroleerd.",
+    "usage": "{{used}} van {{limit}} keer deze maand.",
+    "reason": {
+      "disabled": "Herformuleren staat niet aan.",
+      "unavailable": "Hiervoor zijn een account en verbinding nodig. Het vaste antwoord blijft.",
+      "not_entitled": "Herformuleren hoort bij Pro. Het vaste antwoord blijft.",
+      "limit_reached": "De 30 herformuleringen van deze maand zijn op. Het vaste antwoord blijft.",
+      "rejected": "De tekst haalde de cijfercontrole niet en wordt niet getoond. Het vaste antwoord blijft.",
+      "failed": "Dat is niet gelukt. Het vaste antwoord blijft."
+    }
   }
 }

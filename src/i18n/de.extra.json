@@ -2878,5 +2878,18 @@
       "load": "Last: {{actual}} AU bei einem Ziel von {{target}} AU.",
       "note": "Das Ziel hast du selbst festgelegt. KYDON stellt nur gegenüber und bewertet nicht."
     }
+  },
+  "phrase": {
+    "button": "Als Text formulieren",
+    "note": "Von einem Sprachmodell formuliert. Alle Zahlen stammen aus den Fakten und wurden geprüft.",
+    "usage": "{{used}} von {{limit}} Aufrufen in diesem Monat.",
+    "reason": {
+      "disabled": "Die Umformulierung ist nicht eingeschaltet.",
+      "unavailable": "Dafür braucht es ein Konto und eine Verbindung. Die feste Antwort bleibt.",
+      "not_entitled": "Die Umformulierung gehört zu Pro. Die feste Antwort bleibt.",
+      "limit_reached": "Die 30 Umformulierungen dieses Monats sind aufgebraucht. Die feste Antwort bleibt.",
+      "rejected": "Der Text hat die Zahlenprüfung nicht bestanden und wird nicht gezeigt. Die feste Antwort bleibt.",
+      "failed": "Das hat nicht geklappt. Die feste Antwort bleibt."
+    }
   }
 }

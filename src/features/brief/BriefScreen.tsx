@@ -10,6 +10,8 @@ import { mondayBrief } from '@/domain/mondayBrief'
 import { getTest } from '@/data/testCatalog'
 import { formatDate, formatNumber } from '@/lib/format'
 import { pick } from '@/i18n/pick'
+import { PhraseButton } from '@/components/PhraseButton'
+import { phraseEnabled } from '@/lib/supabase/phrase'
 
 /**
  * Montagsbrief: eine Seite, die Fakten der Woche in der Sprache des Nutzers
@@ -91,6 +93,11 @@ export function BriefScreen() {
           </div>
         </Panel>
       </div>
+      {phraseEnabled() && (
+        <Panel className="mt-4" data-testid="brief-phrase">
+          <PhraseButton kind="brief" facts={brief.facts} />
+        </Panel>
+      )}
       <p className="mt-3 text-[11px] text-ink-muted">{t('brief.note')}</p>
     </div>
   )

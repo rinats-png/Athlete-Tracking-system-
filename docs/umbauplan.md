@@ -68,3 +68,9 @@ Deterministische Werkzeugschicht: sieben feste Fragen (`/fragen`), Zahlenwächte
 Trainer-Zusammenfassung mit bearbeitbaren Nachrichtenentwürfen. Kein Sprachmodell.
 Details: [ask-kydon.md](ask-kydon.md). Offen für ein Modell: Anbieter, Region,
 Auftragsverarbeitung, Monatsdeckel.
+
+## Etappe 7 — Montagsbrief, Wochenziel, Sprachmodell (umgesetzt)
+
+- **7a** Montagsbrief (`/brief`): Datenlage, der eine Befund, Belastung, nächste Messung, aus Fakten im Format der Fragen. Push-Thema `weekly` fehlt noch (braucht Server-Job und Vault-Geheimnis).
+- **7b** Wochenziel gegen Ist: Schema 32, Ziel im Profil vom Menschen gesetzt, Gegenüberstellung ohne Wertung, Countdown zum Wettkampf. Taper-Projektion bewusst nicht gebaut (wäre Trainingsrat, Doktrin).
+- **7c** Sprachmodell-Schicht, aus bis zur Freigabe: siehe [ask-kydon.md](ask-kydon.md).

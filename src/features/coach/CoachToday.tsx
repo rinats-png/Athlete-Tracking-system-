@@ -13,6 +13,7 @@ import { testImageUrl } from '@/data/testImages'
 import { formatDate, formatNumber } from '@/lib/format'
 import { checkinsOf, teamCheckins } from '@/domain/checkin'
 import { coachCopilot, type DraftSpec } from '@/domain/coachCopilot'
+import { PhraseButton } from '@/components/PhraseButton'
 import { checkinShareEnabled } from '@/lib/checkinShare'
 import { fetchLinkedCheckins, type LinkedCheckins } from '@/lib/supabase/checkinShare'
 
@@ -336,6 +337,12 @@ function CopilotCard({ today }: { today: CoachTodayView }) {
                   onChange={(e) => setEdited((m) => ({ ...m, [d.athleteId]: e.target.value }))}
                   rows={3}
                   className="mt-1 w-full rounded-md border border-line bg-surface px-3 py-2 text-[14px]"
+                />
+                <PhraseButton
+                  kind="draft"
+                  name={d.name}
+                  facts={[{ key: 'draft', params: { template: d.template, days: Number(d.params.days) } }]}
+                  onText={(text) => setEdited((m) => ({ ...m, [d.athleteId]: text }))}
                 />
                 <button type="button" onClick={() => void copy(d.athleteId, value)} className="mt-1 min-h-11 rounded-pill border border-line px-4 text-[13px] hover:bg-surface-sunken">
                   {copied === d.athleteId ? t('coachToday.copilot.copied') : t('coachToday.copilot.copy')}

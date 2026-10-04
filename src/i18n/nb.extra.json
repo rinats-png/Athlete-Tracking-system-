@@ -2878,5 +2878,18 @@
       "load": "Belastning: {{actual}} AU mot et mål på {{target}} AU.",
       "note": "Målet setter du selv. KYDON sammenligner bare og vurderer ikke."
     }
+  },
+  "phrase": {
+    "button": "Formuler som tekst",
+    "note": "Formulert av en språkmodell. Alle tall kommer fra fakta og er kontrollert.",
+    "usage": "{{used}} av {{limit}} kall denne måneden.",
+    "reason": {
+      "disabled": "Omformulering er ikke slått på.",
+      "unavailable": "Det krever en konto og tilkobling. Det faste svaret blir stående.",
+      "not_entitled": "Omformulering hører til Pro. Det faste svaret blir stående.",
+      "limit_reached": "De 30 omformuleringene denne måneden er brukt opp. Det faste svaret blir stående.",
+      "rejected": "Teksten besto ikke tallkontrollen og vises ikke. Det faste svaret blir stående.",
+      "failed": "Det gikk ikke. Det faste svaret blir stående."
+    }
   }
 }

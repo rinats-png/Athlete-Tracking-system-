@@ -2878,5 +2878,18 @@
       "load": "Load: {{actual}} AU against a target of {{target}} AU.",
       "note": "You set the target yourself. KYDON only compares and does not judge."
     }
+  },
+  "phrase": {
+    "button": "Phrase as text",
+    "note": "Phrased by a language model. All numbers come from the facts and were checked.",
+    "usage": "{{used}} of {{limit}} calls this month.",
+    "reason": {
+      "disabled": "Rephrasing is not switched on.",
+      "unavailable": "This needs an account and a connection. The fixed answer stays.",
+      "not_entitled": "Rephrasing is part of Pro. The fixed answer stays.",
+      "limit_reached": "The 30 rephrasings of this month are used up. The fixed answer stays.",
+      "rejected": "The text failed the number check and is not shown. The fixed answer stays.",
+      "failed": "That did not work. The fixed answer stays."
+    }
   }
 }

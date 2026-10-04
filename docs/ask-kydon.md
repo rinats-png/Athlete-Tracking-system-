@@ -54,3 +54,33 @@ Trainer bearbeitet, kopiert und verschickt selbst.
 
 `tests/ask.spec.ts` (Fachlogik mit handgerechneten Werten, Wächter, Copilot,
 Bildschirm), `tests/doctrine.spec.ts` (keine Ratgeber- oder Kausalsprache).
+
+## Sprachmodell-Schicht (Etappe 7c, gebaut, aus bis zur Freigabe)
+
+Entscheidungen des Inhabers: Anthropic-API in der EU-Region, nur Fakten ohne
+Namen, nur Pro, 30 Aufrufe je Konto und Monat. Umformuliert werden
+Montagsbrief, Antworten auf die sieben Fragen und Trainer-Nachrichtenentwürfe.
+
+| Teil | Ort |
+|---|---|
+| Regeln (was hinausgeht, Auftrag an das Modell, Grenze, Stufen) | `supabase/functions/_shared/phrase.ts` |
+| Edge Function | `supabase/functions/phrase/index.ts` |
+| Zähler mit RLS, Schreiben nur über `ai_usage_bump` | `supabase/migrations/20261004110000_ai_usage.sql` |
+| Client mit Zahlenwächter und Rückfall | `src/lib/supabase/phrase.ts`, `src/components/PhraseButton.tsx` |
+
+Ablauf: Fakten bereinigen (Namen und Freitext fliegen raus, auch die Funktion
+weist sie ab) → Funktion prüft Token, Stufe, Monatsgrenze → Anbieter →
+Zahlenwächter im Client → Anzeige. Jede Störung ergibt die feste Vorlage und
+einen Satz, warum. Entwürfe tragen nur den Platzhalter `{name}`; der Name wird
+erst in der App eingesetzt.
+
+**Schalter:** `VITE_AI_PHRASE=on` (Bau). Produktiv aus, bis AVV, Region und
+Datenschutztext stehen.
+
+**Einzurichten vom Inhaber, nicht im Repo:** Funktions-Umgebung
+`ANTHROPIC_API_KEY`, `ANTHROPIC_BASE_URL` (die EU-Adresse des Anbieters),
+`ANTHROPIC_MODEL`, `APP_ORIGIN`; Migration einspielen; Funktion
+`phrase` ausrollen. Die Region ist nicht im Code festgelegt, weil sie vom
+Vertrag abhängt.
+
+**Noch nicht gebaut:** Wochenbericht für Eltern oder Verband (Baustein B2).
