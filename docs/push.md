@@ -66,3 +66,10 @@ Das Cron-Geheimnis kommt aus dem Vault bzw. aus den Secrets der Auslieferung, ni
 
 - Auf dem iPhone funktioniert Push nur aus der installierten App (Home-Bildschirm), ab iOS 16.4.
 - Ohne Konto gibt es kein Push. Der Server braucht ein Konto, um zu wissen, wem er schreibt.
+
+## Montagsbrief (Thema `weekly`, Etappe 8d)
+
+- Fünftes Thema, **nicht in der Vorgabe**: kommt nur zu Geräten, die es einschalten (Athleten; für Trainer ausgeblendet).
+- Der Server meldet nur, dass die Woche begonnen hat. Der Text ist arm (kein Name, kein Wert); Ziel der Nachricht ist `/brief`.
+- Zeitplan: montags 07:00 UTC über `pg_cron` (Aktion `weekly` der Funktion `push`, Cron-Geheimnis aus dem Vault). Je Konto und Woche höchstens eine Meldung (Prüfung über `push_log`).
+- Einzuspielen: Migration `20261004120000_push_weekly.sql`, danach die Funktion `push` neu ausrollen.

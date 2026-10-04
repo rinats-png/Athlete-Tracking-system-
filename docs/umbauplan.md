@@ -74,3 +74,10 @@ Auftragsverarbeitung, Monatsdeckel.
 - **7a** Montagsbrief (`/brief`): Datenlage, der eine Befund, Belastung, nächste Messung, aus Fakten im Format der Fragen. Push-Thema `weekly` fehlt noch (braucht Server-Job und Vault-Geheimnis).
 - **7b** Wochenziel gegen Ist: Schema 32, Ziel im Profil vom Menschen gesetzt, Gegenüberstellung ohne Wertung, Countdown zum Wettkampf. Taper-Projektion bewusst nicht gebaut (wäre Trainingsrat, Doktrin).
 - **7c** Sprachmodell-Schicht, aus bis zur Freigabe: siehe [ask-kydon.md](ask-kydon.md).
+
+## Etappe 8 — Aufräumen, Übungsbilder, Wochenbericht, Push weekly (umgesetzt)
+
+- **8a** `npm audit fix` (0 Schwachstellen); der RLS-Audit erkennt Tabellen, denen Endnutzern alle Rechte entzogen sind, als Absicht (0 Befunde). Keine Policy wurde geändert.
+- **8b** Anzeige für Übungsbilder (`src/data/exerciseImages.ts`, Vorschau im Trainingseditor). Die Liste ist leer, bis die Bilder `U_<key>.jpg` geliefert sind; ein Prüffall hält Liste und Dateien im Gleichlauf.
+- **8c** Wochenbericht des Trainers (`/trainer/wochenbericht`): Athlet, Eltern oder Verband, je Empfänger datensparsam, Bestätigung vor Kopieren und Drucken.
+- **8d** Push-Thema `weekly`, siehe [push.md](push.md).

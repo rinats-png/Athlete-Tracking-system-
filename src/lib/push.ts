@@ -20,8 +20,10 @@ export const VAPID_PUBLIC_KEY =
   'BBDbagV03QOENKN_AuBJCLjsKoHsCHsRHStHjjCO_tZ3TzmVJfO4Y6hiXVh69eE_nPh_6hV_sOYMA1RuA4pHoFc'
 
 /** Themen, die jedes Gerät einzeln ein- und ausschalten kann (wie in supabase/functions/_shared/push.ts). */
-export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity'] as const
+export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity', 'weekly'] as const
 export type PushTopic = (typeof PUSH_TOPICS)[number]
+/** Vorgabe ohne Angabe: der Montagsbrief ist ein Angebot und bleibt aus, bis jemand ihn einschaltet. */
+export const DEFAULT_PUSH_TOPICS: readonly PushTopic[] = ['due', 'agenda', 'release', 'activity']
 
 const FLAG_KEY = 'kydon.push.v1'
 /** Ereignis, sobald Push eingeschaltet wurde — dann wird das Datum gemeldet. */
@@ -195,9 +197,9 @@ export async function readTopics(): Promise<PushTopic[]> {
   const supabase = await getSupabase()
   const registration = await navigator.serviceWorker?.getRegistration()
   const subscription = await registration?.pushManager.getSubscription()
-  if (!supabase || !subscription) return [...PUSH_TOPICS]
+  if (!supabase || !subscription) return [...DEFAULT_PUSH_TOPICS]
   const { data } = await supabase.from('push_subscriptions').select('topics').eq('endpoint', subscription.endpoint).maybeSingle()
-  const topics = (data?.topics as string[] | undefined) ?? [...PUSH_TOPICS]
+  const topics = (data?.topics as string[] | undefined) ?? [...DEFAULT_PUSH_TOPICS]
   return PUSH_TOPICS.filter((t) => topics.includes(t))
 }
 

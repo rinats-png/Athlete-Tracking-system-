@@ -8,12 +8,13 @@
  * Telefon in der Hand hat.
  */
 
-export type PushKind = 'due' | 'broadcast' | 'coach' | 'test' | 'agenda' | 'release' | 'activity'
+export type PushKind = 'due' | 'broadcast' | 'coach' | 'test' | 'agenda' | 'release' | 'activity' | 'weekly'
 
 /** Themen, die jedes Gerät einzeln ein- und ausschalten kann. */
-export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity'] as const
+export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity', 'weekly'] as const
 export type PushTopic = (typeof PUSH_TOPICS)[number]
-export const DEFAULT_TOPICS: readonly PushTopic[] = PUSH_TOPICS
+/** Vorgabe ohne Angabe. Der Montagsbrief ist ein Angebot und kommt nur, wenn jemand ihn einschaltet. */
+export const DEFAULT_TOPICS: readonly PushTopic[] = ['due', 'agenda', 'release', 'activity']
 
 /** Hat dieses Gerät das Thema eingeschaltet? Ohne Angabe gelten alle Themen. */
 export const wantsTopic = (topics: readonly string[] | null | undefined, topic: PushTopic): boolean => (topics ?? DEFAULT_TOPICS).includes(topic)
@@ -163,3 +164,28 @@ export const LIMITS = {
   /** Rundmeldung zu einer App-Fassung: einmal je Fassung. */
   releasePerDay: 3,
 } as const
+
+// --- Montagsbrief ------------------------------------------------------------------
+// Auch hier bleibt der Text arm: er sagt nur, dass der Brief da ist.
+
+const WEEKLY: Record<string, { title: string; body: string }> = {
+  de: { title: 'Dein Montagsbrief', body: 'Die neue Woche liegt bereit. Öffne KYDON für deinen Brief.' },
+  en: { title: 'Your Monday brief', body: 'The new week is ready. Open KYDON for your brief.' },
+  fr: { title: 'Ton bref du lundi', body: 'La nouvelle semaine est prête. Ouvre KYDON pour ton bref.' },
+  es: { title: 'Tu resumen del lunes', body: 'La nueva semana está lista. Abre KYDON para ver tu resumen.' },
+  nl: { title: 'Je maandagbrief', body: 'De nieuwe week staat klaar. Open KYDON voor je brief.' },
+  sv: { title: 'Ditt måndagsbrev', body: 'Den nya veckan är redo. Öppna KYDON för ditt brev.' },
+  da: { title: 'Dit mandagsbrev', body: 'Den nye uge er klar. Åbn KYDON for dit brev.' },
+  nb: { title: 'Ditt mandagsbrev', body: 'Den nye uken er klar. Åpne KYDON for brevet ditt.' },
+}
+
+export function weeklyPayload(locale: string): PushPayload {
+  const t = WEEKLY[lang(locale)]
+  return { title: t.title, body: t.body, url: '/brief', tag: 'kydon-weekly' }
+}
+
+/** Montag 00:00 UTC der Woche, in der `d` liegt — Grenze dafür, dass der Brief je Woche nur einmal kommt. */
+export function weekStartUtc(d: Date): Date {
+  const day = (d.getUTCDay() + 6) % 7
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - day))
+}

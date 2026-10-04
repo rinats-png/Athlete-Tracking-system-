@@ -1947,7 +1947,9 @@
       "release": "Mises à jour de l'application",
       "releaseHint": "Une notification quand KYDON a de nouvelles fonctions.",
       "activity": "Activité de tes athlètes",
-      "activityHint": "Une notification quand des athlètes connectés ont saisi quelque chose — sans noms, sans valeurs, au plus une fois par heure."
+      "activityHint": "Une notification quand des athlètes connectés ont saisi quelque chose — sans noms, sans valeurs, au plus une fois par heure.",
+      "weekly": "Bref du lundi",
+      "weeklyHint": "Le lundi, une alerte indiquant que ton bref est prêt. Sans contenu, seulement qu'il est là."
     },
     "notifyCoach": "Prévenir mon entraîneur de mon activité",
     "notifyCoachHint": "Si tu es connecté à un entraîneur, il apprend par push QUE tu as saisi quelque chose — pas quoi. Tu peux le désactiver ici."

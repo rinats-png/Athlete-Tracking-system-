@@ -1947,7 +1947,9 @@
       "release": "App-updates",
       "releaseHint": "Een melding als KYDON nieuwe functies heeft.",
       "activity": "Activiteit van je atleten",
-      "activityHint": "Een melding dat gekoppelde atleten iets hebben vastgelegd — zonder namen, zonder waarden, hooguit één keer per uur."
+      "activityHint": "Een melding dat gekoppelde atleten iets hebben vastgelegd — zonder namen, zonder waarden, hooguit één keer per uur.",
+      "weekly": "Maandagbrief",
+      "weeklyHint": "Op maandag een melding dat je brief klaarstaat. Zonder inhoud, alleen dat hij er is."
     },
     "notifyCoach": "Mijn trainer op de hoogte brengen van mijn activiteit",
     "notifyCoachHint": "Ben je gekoppeld aan een trainer, dan hoort hij per push DAT je iets hebt vastgelegd — niet wat. Hier kun je dat uitzetten."

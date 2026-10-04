@@ -1947,7 +1947,9 @@
       "release": "Appuppdateringar",
       "releaseHint": "Ett meddelande när KYDON har fått nya funktioner.",
       "activity": "Dina atleters aktivitet",
-      "activityHint": "Ett meddelande om att anslutna atleter har registrerat något — utan namn, utan värden, högst en gång i timmen."
+      "activityHint": "Ett meddelande om att anslutna atleter har registrerat något — utan namn, utan värden, högst en gång i timmen.",
+      "weekly": "Måndagsbrev",
+      "weeklyHint": "På måndagen en notis om att ditt brev finns. Utan innehåll, bara att det finns."
     },
     "notifyCoach": "Meddela min tränare om min aktivitet",
     "notifyCoachHint": "Är du ansluten till en tränare får den via push veta ATT du har registrerat något — inte vad. Du kan stänga av det här."

@@ -15,7 +15,7 @@
  *                verbundene Athleten etwas eingetragen haben (nur Anzahl).
  *   (due meldet ausserdem Termine: Wettkampf am Vortag, Testtermin am Tag.)
  *
- * Jedes Gerät hat Themen (due, agenda, release, activity); Meldungen gehen nur
+ * Jedes Gerät hat Themen (due, agenda, release, activity, weekly); Meldungen gehen nur
  * an Geräte, die das Thema eingeschaltet haben.
  *
  * Wer anfragt, bestimmt ein geprüftes Token — nie ein Feld im Körper.
@@ -41,6 +41,8 @@ import {
   cleanText,
   coachPayload,
   duePayload,
+  weeklyPayload,
+  weekStartUtc,
   testPayload,
   type PushKind,
   type PushPayload,
@@ -184,6 +186,22 @@ Deno.serve(async (req: Request) => {
       agendaUsers += ids.length
     }
     return reply(req, 200, { ok: true, users, agendaUsers, ...result })
+  }
+
+  // --- Montagsbrief: zeitgesteuert, einmal je Woche und Konto -------------------------
+  if (body.action === 'weekly') {
+    const secret = req.headers.get('x-cron-secret') ?? ''
+    if (!config.cron_secret || secret !== config.cron_secret) return reply(req, 401)
+    const since = weekStartUtc(new Date()).toISOString()
+    const { data: subs } = await db.from('push_subscriptions').select('*').contains('topics', ['weekly'])
+    const wanted: Subscription[] = forTopic(subs, 'weekly')
+    if (wanted.length === 0) return reply(req, 200, { ok: true, users: 0 })
+    const { data: already } = await db.from('push_log').select('recipient').eq('kind', 'weekly').gte('created_at', since).in('recipient', wanted.map((s) => s.user_id))
+    const done = new Set((already ?? []).map((r: { recipient: string }) => r.recipient))
+    const fresh = wanted.filter((s) => !done.has(s.user_id))
+    const result = await sendAll(db, fresh, (s) => weeklyPayload(s.locale))
+    await log(db, 'weekly', null, [...new Set(fresh.map((s) => s.user_id))])
+    return reply(req, 200, { ok: true, users: new Set(fresh.map((s) => s.user_id)).size, ...result })
   }
 
   // --- Neue App-Fassung ankündigen: Cron-Geheimnis (Deploy) oder Admin ----------------

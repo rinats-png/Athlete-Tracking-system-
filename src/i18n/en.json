@@ -1947,7 +1947,9 @@
       "release": "App updates",
       "releaseHint": "A notice when KYDON has new features.",
       "activity": "Your athletes' activity",
-      "activityHint": "A notice that connected athletes have logged something — no names, no values, at most once an hour."
+      "activityHint": "A notice that connected athletes have logged something — no names, no values, at most once an hour.",
+      "weekly": "Monday brief",
+      "weeklyHint": "A note on Monday that your brief is ready. No content, only that it is there."
     },
     "notifyCoach": "Notify my coach about my activity",
     "notifyCoachHint": "If you are connected to a coach, they learn by push THAT you logged something — not what. You can turn this off here."

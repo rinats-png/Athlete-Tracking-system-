@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bell, BellOff, Send } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { PUSH_TOPICS, disablePush, enablePush, pushState, readNotifyCoach, readTopics, saveNotifyCoach, saveTopics, sendTestPush } from '@/lib/push'
+import { DEFAULT_PUSH_TOPICS, PUSH_TOPICS, disablePush, enablePush, pushState, readNotifyCoach, readTopics, saveNotifyCoach, saveTopics, sendTestPush } from '@/lib/push'
 import type { PushState, PushTopic } from '@/lib/push'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useLocale } from '@/features/shared/useLocale'
@@ -20,7 +20,7 @@ export function PushPanel() {
   const [busy, setBusy] = useState(false)
   const [note, setNote] = useState<string | null>(null)
   const { role } = useAppData()
-  const [topics, setTopics] = useState<PushTopic[]>([...PUSH_TOPICS])
+  const [topics, setTopics] = useState<PushTopic[]>([...DEFAULT_PUSH_TOPICS])
   const [notifyCoach, setNotifyCoach] = useState(true)
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export function PushPanel() {
           <p className="mt-2 text-[12px] text-ink-muted">{t('push.on')}</p>
           <fieldset className="mt-3 space-y-1.5" data-testid="push-topics">
             <legend className="label-tag">{t('push.topics.title')}</legend>
-            {PUSH_TOPICS.filter((tp) => tp !== 'activity' || role === 'coach').map((tp) => (
+            {PUSH_TOPICS.filter((tp) => (tp !== 'activity' || role === 'coach') && (tp !== 'weekly' || role !== 'coach')).map((tp) => (
               <label key={tp} className="flex items-start gap-2 text-[13px]">
                 <input type="checkbox" className="mt-1" checked={topics.includes(tp)} onChange={() => void toggleTopic(tp)} data-topic={tp} />
                 <span>

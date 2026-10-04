@@ -1947,7 +1947,9 @@
       "release": "Appopdateringer",
       "releaseHint": "En besked, når KYDON har fået nye funktioner.",
       "activity": "Dine atleters aktivitet",
-      "activityHint": "En besked om, at tilknyttede atleter har registreret noget — uden navne, uden værdier, højst én gang i timen."
+      "activityHint": "En besked om, at tilknyttede atleter har registreret noget — uden navne, uden værdier, højst én gang i timen.",
+      "weekly": "Mandagsbrev",
+      "weeklyHint": "Om mandagen en besked om, at dit brev er klar. Uden indhold, kun at det findes."
     },
     "notifyCoach": "Giv min træner besked om min aktivitet",
     "notifyCoachHint": "Er du knyttet til en træner, får han via push at vide, AT du har registreret noget — ikke hvad. Du kan slå det fra her."

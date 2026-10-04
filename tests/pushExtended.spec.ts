@@ -4,6 +4,8 @@ import {
   DEFAULT_TOPICS,
   PUSH_TOPICS,
   activityPayload,
+  weeklyPayload,
+  weekStartUtc,
   agendaPayload,
   isReleaseId,
   releasePayload,
@@ -53,8 +55,10 @@ test.describe('Inhalt', () => {
 })
 
 test.describe('Themen und Kennungen', () => {
-  test('ohne Angabe gelten alle Themen; ein abgeschaltetes Thema bekommt nichts', () => {
-    expect([...DEFAULT_TOPICS]).toEqual([...PUSH_TOPICS])
+  test('ohne Angabe gelten die Vorgabethemen (der Montagsbrief nicht); ein abgeschaltetes Thema bekommt nichts', () => {
+    expect([...DEFAULT_TOPICS]).toEqual(PUSH_TOPICS.filter((t) => t !== 'weekly'))
+    expect(wantsTopic(null, 'weekly')).toBe(false)
+    expect(wantsTopic(['weekly'], 'weekly')).toBe(true)
     expect(wantsTopic(null, 'release')).toBe(true)
     expect(wantsTopic(['due'], 'release')).toBe(false)
     expect(wantsTopic([], 'due')).toBe(false)
@@ -121,5 +125,30 @@ test.describe('Datenbank (statische Prüfung der Migration)', () => {
   test('das Cron-Geheimnis steht nicht in der Datei, nur der Vault-Zugriff', () => {
     expect(sql).toMatch(/decrypted_secret from vault\.decrypted_secrets where name='push_cron_secret'/)
     expect(sql).not.toMatch(/x-cron-secret['"]\s*,\s*'[A-Za-z0-9]{16,}'/)
+  })
+})
+
+test.describe('Montagsbrief per Push (Etappe 8d)', () => {
+  test('arm in jeder Sprache: kein Name, keine Zahl, Ziel ist der Brief', () => {
+    for (const l of ['de', 'en', 'fr', 'es', 'nl', 'sv', 'nb', 'da']) {
+      const p = weeklyPayload(l)
+      expect(p.url).toBe('/brief')
+      expect(p.title.length).toBeLessThanOrEqual(60)
+      expect(p.body.length).toBeLessThanOrEqual(200)
+      expect(`${p.title} ${p.body}`).not.toMatch(/\d/)
+    }
+    expect(weeklyPayload('xx').title).toBe('Your Monday brief')
+  })
+  test('die Woche beginnt am Montag 00:00 UTC', () => {
+    expect(weekStartUtc(new Date('2026-10-04T12:00:00Z')).toISOString()).toBe('2026-09-28T00:00:00.000Z') // Sonntag
+    expect(weekStartUtc(new Date('2026-10-05T07:00:00Z')).toISOString()).toBe('2026-10-05T00:00:00.000Z') // Montag
+    expect(weekStartUtc(new Date('2026-10-07T23:59:00Z')).toISOString()).toBe('2026-10-05T00:00:00.000Z')
+  })
+  test('Migration: Constraints, Zeitplan montags, kein Geheimnis im Text', () => {
+    const sql = readFileSync('supabase/migrations/20261004120000_push_weekly.sql', 'utf-8')
+    expect(sql).toMatch(/'weekly'\]::text\[\]/)
+    expect(sql).toMatch(/cron\.schedule\('push-weekly', '0 7 \* \* 1'/)
+    expect(sql).toMatch(/vault\.decrypted_secrets/)
+    expect(sql).not.toMatch(/x-cron-secret['"]\s*,\s*'[A-Za-z0-9]{16,}/)
   })
 })

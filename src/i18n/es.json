@@ -1947,7 +1947,9 @@
       "release": "Actualizaciones de la app",
       "releaseHint": "Un aviso cuando KYDON tiene funciones nuevas.",
       "activity": "Actividad de tus atletas",
-      "activityHint": "Un aviso de que atletas conectados han registrado algo — sin nombres, sin valores, como máximo una vez por hora."
+      "activityHint": "Un aviso de que atletas conectados han registrado algo — sin nombres, sin valores, como máximo una vez por hora.",
+      "weekly": "Resumen del lunes",
+      "weeklyHint": "El lunes, un aviso de que tu resumen está listo. Sin contenido, solo que está ahí."
     },
     "notifyCoach": "Avisar a mi entrenador de mi actividad",
     "notifyCoachHint": "Si estás conectado a un entrenador, se entera por push DE QUE has registrado algo — no de qué. Puedes desactivarlo aquí."
