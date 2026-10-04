@@ -15,6 +15,8 @@ Deutsch, im Stil der umgebenden Dateien.
   - §19 Was nie brechen darf
   - §20 Wohin neuer Code gehört
   - §21 Wann anhalten und fragen
+- **[docs/produktdoktrin.md](docs/produktdoktrin.md)** — verbindliche Produktleitlinie (was KYDON sagen darf und was nicht, §50 Entscheidungsregel für neue Funktionen)
+- [docs/umbauplan.md](docs/umbauplan.md) — Umbau nach der Doktrin, Etappen und Entscheidungen
 - [docs/prd.md](docs/prd.md) — was das Produkt können soll, Pakete, offene Punkte
 - Themenseiten in `docs/` (Preise, Sicherheit, Sprachen, Push, Auslieferung …)
 
