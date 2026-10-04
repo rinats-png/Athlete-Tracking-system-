@@ -127,7 +127,9 @@ export const TRAINING_RULES: EvidenceRule[] = [
     },
     evidence: {
       strength: 'MODERATE',
-      specificity: { combat_grappling: 'DIRECT', combat_striking: 'DIRECT', hybrid: 'GENERAL' },
+      // Die Kampfsport-Übersicht nennt Judo und Boxen unter den Sportarten mit Effekt in spezifischen Aktionen; für die übrigen gilt «verwandt».
+      specificity: { combat_grappling: 'RELATED', combat_striking: 'RELATED', hybrid: 'GENERAL' },
+      specificityByDiscipline: { judo: 'DIRECT', boxing: 'DIRECT' },
       evidenceTypes: ['consensus', 'systematic_review'],
       sourceIds: ['acsm_2026', 'combat_strength_2023', 'heavy_strength_cyclists_2025'],
       limitations: [
@@ -150,14 +152,15 @@ export const TRAINING_RULES: EvidenceRule[] = [
     intent: 'POWER',
     targetAdaptation: ['power'],
     eligibleFamilies: ['combat_grappling', 'combat_striking', 'hybrid'],
-    eligiblePhases: ['BUILD', 'SPECIFIC'],
+    eligiblePhases: ['GPP', 'BUILD', 'SPECIFIC'],
     prescription: {
       intensity: { type: 'percent_1rm', min: 30, max: 70 },
       repsPerSet: [1, 24],
     },
     evidence: {
       strength: 'MODERATE',
-      specificity: { combat_grappling: 'DIRECT', combat_striking: 'DIRECT', hybrid: 'GENERAL' },
+      specificity: { combat_grappling: 'RELATED', combat_striking: 'RELATED', hybrid: 'GENERAL' },
+      specificityByDiscipline: { judo: 'DIRECT', boxing: 'DIRECT' },
       evidenceTypes: ['consensus', 'systematic_review'],
       sourceIds: ['acsm_2026', 'combat_strength_2023'],
       limitations: [
@@ -186,7 +189,9 @@ export const TRAINING_RULES: EvidenceRule[] = [
     evidence: {
       // GRADE «niedrig bis moderat»: hier die niedrigere Stufe.
       strength: 'LOW',
-      specificity: { combat_grappling: 'DIRECT', combat_striking: 'DIRECT' },
+      // Die Meta-Analyse umfasst Taekwondo, Silat, Ringen, Judo, Fechten und Karate; Boxen, Kickboxen und BJJ kommen nicht vor.
+      specificity: { combat_grappling: 'RELATED', combat_striking: 'RELATED' },
+      specificityByDiscipline: { judo: 'DIRECT', wrestling: 'DIRECT' },
       evidenceTypes: ['meta_analysis'],
       sourceIds: ['combat_plyo_2023'],
       limitations: [

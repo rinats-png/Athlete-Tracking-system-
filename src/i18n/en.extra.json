@@ -2924,7 +2924,7 @@
     "preview": "Preview: the rules have not yet been reviewed by a qualified person and are marked as unreviewed.",
     "off": "The training plan is not switched on in this version.",
     "noDiscipline": "Choose your discipline in the profile so KYDON can look for rules for your gaps.",
-    "unsupported": "There are no rules for this discipline yet. Pilot areas are grappling (judo, wrestling, BJJ) and hybrid (HYROX, hybrid training).",
+    "unsupported": "There are no rules for this discipline yet. Pilot areas are grappling (judo, wrestling, BJJ), striking (boxing, kickboxing) and hybrid (HYROX, hybrid training).",
     "phase": {
       "label": "Phase",
       "GPP": "General preparation",
@@ -3048,7 +3048,8 @@
     "hint": {
       "title": "About the evidence",
       "concurrent": "Strength and hard endurance sit on separate days as far as the weekly plan allows. A fixed order is not proven. With concurrent training, a small disadvantage in leg strength appeared in men, not in women; no sex rule follows from that here.",
-      "noStationDose": "For station-specific training (for example sled or wall balls) the evidence gives no proven dose. HYROX data are mostly observational. This part stays with the coach."
+      "noStationDose": "For station-specific training (for example sled or wall balls) the evidence gives no proven dose. HYROX data are mostly observational. This part stays with the coach.",
+      "combatScope": "Technique, tactics, sparring and weight classes stay with the coach; KYDON does not plan weight cutting. Symptoms after head impacts are a matter for medical care, not for this app."
     }
   }
 }

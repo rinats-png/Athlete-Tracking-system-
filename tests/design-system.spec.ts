@@ -168,25 +168,35 @@ async function floatingNav(page: import('@playwright/test').Page) {
 }
 
 test.describe('Schwebende Navigation', () => {
-  test('der aktive Anzeiger wandert, statt umzuspringen', async ({ page }) => {
+  test('Bogen: fünf Tabs, der mittlere ist größer; Antippen blinkt zweimal, dann folgt die Seite', async ({ page }) => {
     await openDemo(page)
     const nav = await floatingNav(page)
     test.skip(nav == null, 'ab lg trägt die Kopfzeile die Navigation')
 
-    const indicator = nav!.locator('span[aria-hidden]').first()
-    const before = await indicator.evaluate((el) => getComputedStyle(el).transform)
-    expect(
-      await indicator.evaluate((el) => getComputedStyle(el).transitionProperty),
-      'ohne Übergang springt er, und die Bewegung sagt nichts mehr',
-    ).toContain('transform')
+    const buttons = nav!.getByRole('button')
+    await expect(buttons).toHaveCount(5)
+    const sizes = await buttons.evaluateAll((els) => els.map((el) => el.querySelector('.nav-dot')!.getBoundingClientRect().width))
+    expect(sizes[2], 'der mittlere Tab ist der größte').toBeGreaterThan(Math.max(sizes[0], sizes[1], sizes[3], sizes[4]))
+    // Alle Treffflächen mindestens 44 px.
+    const boxes = await buttons.evaluateAll((els) => els.map((el) => el.getBoundingClientRect()))
+    for (const b of boxes) expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(43.5)
 
+    // Antippen: erst blinkt der Tab (data-blinking), die Seite wechselt erst danach.
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
     await nav!.getByRole('button', { name: /Leistung/ }).click()
+    await expect(nav!.locator('[data-blinking]')).toHaveCount(1)
+    expect(page.url()).not.toMatch(/performance/)
     await expect(page).toHaveURL(/performance/)
-    // Nach dem Klick läuft der Übergang noch — direkt zu messen erwischt
-    // ihn auf halbem Weg und manchmal noch am Ausgangspunkt.
-    await expect
-      .poll(() => indicator.evaluate((el) => getComputedStyle(el).transform))
-      .not.toBe(before)
+    await expect(nav!.locator('[data-blinking]')).toHaveCount(0)
+  })
+
+  test('bei «Bewegung reduzieren» entfallen Blinken und Verzögerung', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await openDemo(page)
+    const nav = await floatingNav(page)
+    test.skip(nav == null, 'ab lg trägt die Kopfzeile die Navigation')
+    await nav!.getByRole('button', { name: /Leistung/ }).click()
+    await expect(page).toHaveURL(/performance/, { timeout: 300 })
   })
 })
 

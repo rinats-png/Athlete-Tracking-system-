@@ -149,7 +149,7 @@
   /* Höhe der Navigationsleiste. Eine fixierte Leiste nimmt keinen Platz im
      Fluss ein — die App-Hülle reserviert ihn über genau diesen Wert, sonst
      liegt der letzte Inhalt unerreichbar darunter. */
-  --bottom-nav-h: 60px;
+  --bottom-nav-h: 122px;
 
   /* Kanten. Eine Karte, die schwebt, braucht eine weiche Kante — eine
      scharfe Ecke liegt optisch auf dem Grund auf. Die Skala ist klein
@@ -1176,4 +1176,14 @@ body {
   opacity: var(--card-image-opacity, 0.6);
   -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 100%);
   mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+}
+
+/* Bogen-Navigation: der angetippte Tab blinkt zweimal (Dauer = BLINK_MS in BottomNav.tsx). */
+@keyframes nav-blink {
+  0%, 30%, 55%, 80%, 100% { filter: none; box-shadow: none; }
+  15%, 65% { filter: brightness(1.35) saturate(1.2); box-shadow: 0 0 0 6px var(--accent-quiet), 0 0 24px 2px var(--accent-glow); }
+}
+[data-blinking] .nav-dot { animation: nav-blink 480ms linear 1; }
+@media (prefers-reduced-motion: reduce) {
+  [data-blinking] .nav-dot { animation: none; }
 }

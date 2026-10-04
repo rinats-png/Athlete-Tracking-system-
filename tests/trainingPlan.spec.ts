@@ -210,8 +210,8 @@ test.describe('Pilot Hybrid (Etappe 9d)', () => {
     // Kein Hinweis auf Gleichzeitigkeit ohne beides.
     const onlyStrength = planBlock(hybrid({ gaps: [row('max_strength', true, 3)] }))
     expect(onlyStrength.notes).toEqual([])
-    // Grappling bekommt die Hybrid-Hinweise nie.
-    expect(planBlock(base()).notes).toEqual([])
+    // Grappling bekommt die Hybrid-Hinweise nie, nur den Hinweis zum Geltungsbereich im Kampfsport.
+    expect(planBlock(base()).notes).toEqual([{ key: 'combat_scope', sourceIds: [] }])
   })
 
   test('Streuung gilt nur für Hybrid: Grappling darf dieselben Tage dicht legen', () => {
@@ -247,4 +247,65 @@ test('Bildschirm Plan: HYROX zeigt Hinweise zur Studienlage mit Quellen', async 
   // Ob Hinweise erscheinen, hängt von den Demodaten ab; erscheinen sie, tragen sie Quellen.
   const notes = page.getByTestId('plan-notes')
   if (await notes.count()) await expect(notes.locator('a').first()).toHaveAttribute('href', /doi\.org/)
+})
+
+import { familyOfDiscipline } from '../src/domain/trainingPlan'
+import { specificityFor } from '../src/domain/trainingRules'
+
+test.describe('Pilot Striking (Etappe 9e)', () => {
+  const boxing = (over: Partial<PlanInput> = {}): PlanInput =>
+    base({
+      family: 'combat_striking',
+      disciplineId: 'boxing',
+      trainingAgeYears: 4,
+      availableDays: [1, 2, 3, 4, 6],
+      gaps: [row('endurance', true, 3), row('power', true, 3), row('max_strength', true, 3)],
+      ...over,
+    })
+
+  test('Zuordnung: Boxen und Kickboxen sind Striking; MMA und Karate (noch) nicht', () => {
+    expect(familyOfDiscipline('boxing')).toBe('combat_striking')
+    expect(familyOfDiscipline('kickboxing')).toBe('combat_striking')
+    expect(familyOfDiscipline('mma')).toBeNull()
+    expect(familyOfDiscipline('karate')).toBeNull()
+  })
+
+  test('Boxen, früher Camp-Abschnitt: 4×4 Montag (nicht neben dem harten Freitag), Power Dienstag, Kraft Mittwoch und Donnerstag', () => {
+    const plan = planBlock(boxing())
+    expect(plan.sessions.map((s) => [s.day, s.ruleId])).toEqual([
+      [1, 'vo2_4x4'],
+      [2, 'power_30_70'],
+      [3, 'max_strength_80'],
+      [4, 'max_strength_80'],
+    ])
+    expect(plan.notes).toEqual([{ key: 'combat_scope', sourceIds: [] }])
+  })
+
+  test('Spezifität je Disziplin: Boxen und Judo direkt bei Kraft, Kickboxen und Ringen nur verwandt; Plyometrie direkt für Ringen und Judo', () => {
+    const strength = TRAINING_RULES.find((r) => r.id === 'max_strength_80')!
+    const plyo = TRAINING_RULES.find((r) => r.id === 'plyo_combat')!
+    expect(specificityFor(strength, 'combat_striking', 'boxing')).toBe('DIRECT')
+    expect(specificityFor(strength, 'combat_striking', 'kickboxing')).toBe('RELATED')
+    expect(specificityFor(strength, 'combat_grappling', 'judo')).toBe('DIRECT')
+    expect(specificityFor(strength, 'combat_grappling', 'wrestling')).toBe('RELATED')
+    expect(specificityFor(strength, 'combat_grappling', 'bjj')).toBe('RELATED')
+    expect(specificityFor(plyo, 'combat_grappling', 'wrestling')).toBe('DIRECT')
+    expect(specificityFor(plyo, 'combat_striking', 'boxing')).toBe('RELATED')
+    // Ohne Disziplin zählt die Familie; ohne Eintrag nie DIRECT.
+    expect(specificityFor(strength, 'hybrid')).toBe('GENERAL')
+    expect(specificityFor(strength, 'combat_striking', null)).toBe('RELATED')
+  })
+
+  test('die geplanten Einheiten tragen die Spezifität der Disziplin', () => {
+    const boxer = planBlock(boxing())
+    expect(boxer.sessions.map((s) => s.evidenceSpecificity)).toEqual(['EXTRAPOLATED', 'DIRECT', 'DIRECT', 'DIRECT'])
+    const kick = planBlock(boxing({ disciplineId: 'kickboxing' }))
+    expect(kick.sessions.map((s) => s.evidenceSpecificity)).toEqual(['EXTRAPOLATED', 'RELATED', 'RELATED', 'RELATED'])
+  })
+
+  test('Plyometrie gehört nur zum Kampfsport und braucht die Trainerfreigabe als Merkmal', () => {
+    const plyo = TRAINING_RULES.find((r) => r.id === 'plyo_combat')!
+    expect(plyo.eligibleFamilies).not.toContain('hybrid')
+    expect(plyo.safety.requiresCoachApproval).toBe(true)
+  })
 })

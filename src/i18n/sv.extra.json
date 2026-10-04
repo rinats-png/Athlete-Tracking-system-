@@ -2924,7 +2924,7 @@
     "preview": "Förhandsvisning: reglerna har ännu inte granskats av en sakkunnig och är markerade som ogranskade.",
     "off": "Träningsplanen är inte påslagen i den här versionen.",
     "noDiscipline": "Välj din gren i profilen så kan KYDON söka regler för dina luckor.",
-    "unsupported": "Det finns ännu inga regler för den här grenen. Piloter är grappling (judo, brottning, BJJ) och hybrid (HYROX, hybridträning).",
+    "unsupported": "Det finns ännu inga regler för den här grenen. Piloter är grappling (judo, brottning, BJJ), striking (boxning, kickboxning) och hybrid (HYROX, hybridträning).",
     "phase": {
       "label": "Fas",
       "GPP": "Allmän förberedelse",
@@ -3048,7 +3048,8 @@
     "hint": {
       "title": "Om beläggen",
       "concurrent": "Styrka och hård uthållighet ligger på skilda dagar så långt veckan tillåter. En fast ordning är inte belagd. Vid samtidig träning syntes en liten nackdel för benstyrkan hos män, inte hos kvinnor; någon regel efter kön följer inte av det här.",
-      "noStationDose": "För stationsspecifik träning (till exempel släde eller wall balls) ger beläggen ingen belagd dos. HYROX-data är mest observationer. Den delen ligger kvar hos tränaren."
+      "noStationDose": "För stationsspecifik träning (till exempel släde eller wall balls) ger beläggen ingen belagd dos. HYROX-data är mest observationer. Den delen ligger kvar hos tränaren.",
+      "combatScope": "Teknik, taktik, sparring och viktklasser ligger kvar hos tränaren; KYDON planerar ingen viktnedgång. Symtom efter slag mot huvudet hör till sjukvården, inte till den här appen."
     }
   }
 }

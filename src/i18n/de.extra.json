@@ -2924,7 +2924,7 @@
     "preview": "Vorschau: Die Regeln sind noch nicht von einer Fachperson geprüft und deshalb als ungeprüft gekennzeichnet.",
     "off": "Der Trainingsplan ist in dieser Fassung nicht eingeschaltet.",
     "noDiscipline": "Wähle im Profil deine Disziplin, dann kann KYDON Regeln für deine Lücken suchen.",
-    "unsupported": "Für diese Disziplin gibt es noch keine Regeln. Pilotwelten sind Grappling (Judo, Ringen, BJJ) und Hybrid (HYROX, Hybrid Training).",
+    "unsupported": "Für diese Disziplin gibt es noch keine Regeln. Pilotwelten sind Grappling (Judo, Ringen, BJJ), Striking (Boxen, Kickboxen) und Hybrid (HYROX, Hybrid Training).",
     "phase": {
       "label": "Phase",
       "GPP": "Allgemeine Vorbereitung",
@@ -3048,7 +3048,8 @@
     "hint": {
       "title": "Zur Studienlage",
       "concurrent": "Kraft und harte Ausdauer liegen an getrennten Tagen, soweit der Wochenplan es zulässt. Eine feste Reihenfolge ist nicht belegt. Bei gleichzeitigem Training zeigte sich ein kleiner Nachteil bei der Beinkraft von Männern, nicht von Frauen; daraus folgt hier keine Geschlechtsregel.",
-      "noStationDose": "Für stationsspezifisches Training (zum Beispiel Sled oder Wall Balls) nennt die Studienlage keine belegte Dosis. HYROX-Daten sind überwiegend Beobachtungen. Dieser Teil bleibt beim Trainer."
+      "noStationDose": "Für stationsspezifisches Training (zum Beispiel Sled oder Wall Balls) nennt die Studienlage keine belegte Dosis. HYROX-Daten sind überwiegend Beobachtungen. Dieser Teil bleibt beim Trainer.",
+      "combatScope": "Technik, Taktik, Sparring und Gewichtsklassen bleiben beim Trainer; KYDON plant kein Gewichtmachen. Bei Symptomen nach Kopftreffern gehört die Entscheidung zur ärztlichen Betreuung, nicht in diese App."
     }
   }
 }

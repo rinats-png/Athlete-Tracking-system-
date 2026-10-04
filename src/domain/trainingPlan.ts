@@ -38,6 +38,8 @@ export interface FixedSession {
 
 export interface PlanInput {
   family: SportFamily
+  /** Disziplin, wenn bekannt: macht die Spezifität genauer als die Familie. */
+  disciplineId?: string | null
   phase: Phase
   trainingAgeYears: number | null
   /** Tage, an denen eine zusätzliche Einheit möglich ist (1 bis 7). */
@@ -75,7 +77,7 @@ export interface PlannedSession extends TrainingSession {
   dimension: PerformanceDimension
 }
 
-export type PlanNoteKey = 'concurrent' | 'no_station_dose'
+export type PlanNoteKey = 'concurrent' | 'no_station_dose' | 'combat_scope'
 export interface PlanNote {
   key: PlanNoteKey
   sourceIds: string[]
@@ -218,7 +220,7 @@ export function planBlock(input: PlanInput): BlockPlan {
           ruleId: rule.id,
           ruleVersion: rule.version,
           evidenceStrength: rule.evidence.strength,
-          evidenceSpecificity: specificityFor(rule, input.family),
+          evidenceSpecificity: specificityFor(rule, input.family, input.disciplineId),
           plannedDurationMin: minutes,
           blocks,
           retestMetric: rule.retestMetric,
@@ -236,6 +238,7 @@ export function planBlock(input: PlanInput): BlockPlan {
 
   sessions.sort((a, b) => a.day - b.day)
   const notes: PlanNote[] = []
+  if (input.family === 'combat_grappling' || input.family === 'combat_striking') notes.push({ key: 'combat_scope', sourceIds: [] })
   if (input.family === 'hybrid') {
     const strengthDays = sessions.some((x) => x.primaryIntent === 'MAX_STRENGTH' || x.primaryIntent === 'POWER')
     const enduranceHigh = sessions.some((x) => x.highIntensity)
@@ -253,9 +256,10 @@ export function planBlock(input: PlanInput): BlockPlan {
   }
 }
 
-/** Sportfamilie einer Disziplin. Piloten: Grappling und Hybrid; Striking folgt. */
+/** Sportfamilie einer Disziplin. Piloten: Grappling, Hybrid und Striking. */
 export function familyOfDiscipline(disciplineId: string | null | undefined): SportFamily | null {
   if (disciplineId === 'judo' || disciplineId === 'wrestling' || disciplineId === 'bjj') return 'combat_grappling'
   if (disciplineId === 'hyrox' || disciplineId === 'hybrid') return 'hybrid'
+  if (disciplineId === 'boxing' || disciplineId === 'kickboxing') return 'combat_striking'
   return null
 }

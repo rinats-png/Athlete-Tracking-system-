@@ -2924,7 +2924,7 @@
     "preview": "Vista previa: las reglas aún no han sido revisadas por una persona cualificada y se marcan como no revisadas.",
     "off": "El plan de entrenamiento no está activado en esta versión.",
     "noDiscipline": "Elige tu disciplina en el perfil para que KYDON busque reglas para tus lagunas.",
-    "unsupported": "Todavía no hay reglas para esta disciplina. Los pilotos son el grappling (judo, lucha, BJJ) y el híbrido (HYROX, entrenamiento híbrido).",
+    "unsupported": "Todavía no hay reglas para esta disciplina. Los pilotos son el grappling (judo, lucha, BJJ), el striking (boxeo, kickboxing) y el híbrido (HYROX, entrenamiento híbrido).",
     "phase": {
       "label": "Fase",
       "GPP": "Preparación general",
@@ -3048,7 +3048,8 @@
     "hint": {
       "title": "Sobre la evidencia",
       "concurrent": "Fuerza y resistencia dura están en días separados en la medida en que lo permite la semana. Un orden fijo no está demostrado. Con el entrenamiento concurrente apareció una pequeña desventaja en la fuerza de piernas en hombres, no en mujeres; de ello no se deriva aquí ninguna regla por sexo.",
-      "noStationDose": "Para el entrenamiento específico de estaciones (por ejemplo trineo o wall balls) la evidencia no da una dosis demostrada. Los datos de HYROX son sobre todo observacionales. Esta parte queda en manos del entrenador."
+      "noStationDose": "Para el entrenamiento específico de estaciones (por ejemplo trineo o wall balls) la evidencia no da una dosis demostrada. Los datos de HYROX son sobre todo observacionales. Esta parte queda en manos del entrenador.",
+      "combatScope": "Técnica, táctica, sparring y categorías de peso quedan en manos del entrenador; KYDON no planifica recortes de peso. Los síntomas tras golpes en la cabeza son asunto de la atención médica, no de esta app."
     }
   }
 }

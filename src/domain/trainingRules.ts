@@ -46,8 +46,12 @@ export function eligibleRules(q: RuleQuery, rules: EvidenceRule[] = TRAINING_RUL
   })
 }
 
-/** Spezifität der Regel für eine Sportfamilie; fehlt der Eintrag, gilt EXTRAPOLATED. */
-export const specificityFor = (rule: EvidenceRule, family: SportFamily): EvidenceSpecificity => rule.evidence.specificity[family] ?? 'EXTRAPOLATED'
+/**
+ * Spezifität der Regel: erst die Disziplin, wenn die Studienlage sie nennt,
+ * dann die Familie; fehlt beides, gilt EXTRAPOLATED, nie DIRECT.
+ */
+export const specificityFor = (rule: EvidenceRule, family: SportFamily, disciplineId?: string | null): EvidenceSpecificity =>
+  (disciplineId ? rule.evidence.specificityByDiscipline?.[disciplineId] : undefined) ?? rule.evidence.specificity[family] ?? 'EXTRAPOLATED'
 
 /** Strukturprüfung des Registers: wird in den Prüffällen aufgerufen. */
 export function validateRegistry(rules: EvidenceRule[] = TRAINING_RULES): string[] {

@@ -95,6 +95,8 @@ export interface EvidenceRule {
     strength: EvidenceStrength
     /** Spezifität je Sportfamilie. Fehlt ein Eintrag, gilt `EXTRAPOLATED`. */
     specificity: Partial<Record<SportFamily, EvidenceSpecificity>>
+    /** Genauer als die Familie: nur wo die Studienlage die Disziplin wirklich nennt. Hat Vorrang vor `specificity`. */
+    specificityByDiscipline?: Record<string, EvidenceSpecificity>
     evidenceTypes: EvidenceType[]
     sourceIds: string[]
     /** Was die Quelle nicht hergibt. Wird dem Nutzer gezeigt, nicht versteckt. */

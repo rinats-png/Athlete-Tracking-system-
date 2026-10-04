@@ -2924,7 +2924,7 @@
     "preview": "Forhåndsvisning: reglene er ennå ikke kontrollert av en fagperson og er merket som ukontrollerte.",
     "off": "Treningsplanen er ikke slått på i denne versjonen.",
     "noDiscipline": "Velg disiplinen din i profilen, så kan KYDON lete etter regler for hullene dine.",
-    "unsupported": "Det finnes ennå ingen regler for denne disiplinen. Pilotene er grappling (judo, bryting, BJJ) og hybrid (HYROX, hybridtrening).",
+    "unsupported": "Det finnes ennå ingen regler for denne disiplinen. Pilotene er grappling (judo, bryting, BJJ), striking (boksing, kickboksing) og hybrid (HYROX, hybridtrening).",
     "phase": {
       "label": "Fase",
       "GPP": "Generell forberedelse",
@@ -3048,7 +3048,8 @@
     "hint": {
       "title": "Om beleggene",
       "concurrent": "Styrke og hard utholdenhet ligger på ulike dager så langt uken tillater. En fast rekkefølge er ikke dokumentert. Ved samtidig trening viste det seg en liten ulempe for benstyrken hos menn, ikke hos kvinner; ingen regel etter kjønn følger av det her.",
-      "noStationDose": "For stasjonsspesifikk trening (for eksempel slede eller wall balls) gir beleggene ingen dokumentert dose. HYROX-data er mest observasjoner. Denne delen blir hos treneren."
+      "noStationDose": "For stasjonsspesifikk trening (for eksempel slede eller wall balls) gir beleggene ingen dokumentert dose. HYROX-data er mest observasjoner. Denne delen blir hos treneren.",
+      "combatScope": "Teknikk, taktikk, sparring og vektklasser blir hos treneren; KYDON planlegger ikke vektkutt. Symptomer etter slag mot hodet hører til medisinsk oppfølging, ikke til denne appen."
     }
   }
 }
