@@ -87,6 +87,7 @@
   --accent-ink:       #F4FBF8;
   --accent-text:      #17614D;
   --accent-quiet:     rgba(30, 125, 99, 0.14);
+  --card-image-opacity: 0.42;
   --focus:            #1E7D63;
   --brand-bridge:     #5E9B57;  /* Moos — in beiden Themes gleich */
 
@@ -230,6 +231,7 @@
     --accent-ink:     #06100B;
     --accent-text:    #7FE5B5;
     --accent-quiet:   rgba(127, 229, 181, 0.18);
+  --card-image-opacity: 0.7;
     --focus:          #7FE5B5;
     --brand-bridge:   #5E9B57;
 
@@ -321,6 +323,7 @@
   --accent-ink:     #06100B;
   --accent-text:    #7FE5B5;
   --accent-quiet:   rgba(127, 229, 181, 0.18);
+  --card-image-opacity: 0.7;
   --focus:          #7FE5B5;
   --brand-bridge:   #5E9B57;
 
@@ -1160,4 +1163,17 @@ body {
     var(--accent) 0 1px,
     transparent 1px 3px
   );
+}
+
+/* Bildkarte (Produktdoktrin-Umbau): ein vorhandenes KYDON-Testbild liegt
+   rechts, läuft zum Text hin in die Kartenfläche aus. Der Text steht immer auf
+   der Fläche, nie auf dem Bild — dadurch bleibt der Kontrast in beiden
+   Erscheinungsbildern gleich. */
+.image-card { position: relative; overflow: hidden; isolation: isolate; }
+.image-card__img {
+  position: absolute; inset-block: 0; right: 0; width: 62%; height: 100%;
+  object-fit: cover; z-index: -1; pointer-events: none;
+  opacity: var(--card-image-opacity, 0.6);
+  -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 0%, transparent 100%);
 }

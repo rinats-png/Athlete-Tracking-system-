@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AppHeader } from '@/features/dashboard/AppHeader'
-import { BottomNav, navKeyForPath, pathForNavKey } from '@/features/dashboard/BottomNav'
+import { BottomNav, navItemsFor, navKeyForPath, pathForNavKey } from '@/features/dashboard/BottomNav'
 import { DataLoadNotice } from '@/features/dashboard/DataLoadNotice'
 import { ActionOrb } from '@/components/signature/ActionOrb'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -28,8 +28,9 @@ export function AppShell() {
   useOverdueNotice()
   usePushDueSync()
   usePageTracking(pathname)
-  const { mode, storageBlocked } = useAppData()
-  const active = navKeyForPath(pathname)
+  const { mode, storageBlocked, role } = useAppData()
+  const items = navItemsFor(role)
+  const active = navKeyForPath(pathname, role)
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -45,6 +46,7 @@ export function AppShell() {
       <AppHeader
         mode={mode}
         active={active}
+        items={items}
         onNavigate={(key) => navigate(pathForNavKey(key))}
       />
 
@@ -74,7 +76,7 @@ export function AppShell() {
 
       <WhatsNewDialog />
       <ActionOrb />
-      <BottomNav active={active} onNavigate={(key) => navigate(pathForNavKey(key))} />
+      <BottomNav active={active} items={items} onNavigate={(key) => navigate(pathForNavKey(key))} />
     </div>
   )
 }

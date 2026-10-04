@@ -2341,8 +2341,6 @@
         "w52": "52 semanas",
         "barsAlt": "Kilómetros semanales, esta semana {{km}} km",
         "goalLine": "Objetivo semanal {{km}} km",
-        "streak": "Racha (semanas)",
-        "longest": "Racha más larga",
         "active": "Días activos"
       },
       "pred": {
@@ -2497,7 +2495,7 @@
       },
       "consistency": {
         "title": "Constancia",
-        "text": "{{hits}} de 6 semanas alcanzadas. Racha actual {{streak}}, la más larga {{longest}} semanas."
+        "text": "{{hits}} de 6 semanas alcanzadas."
       },
       "habit": {
         "title": "Proporción de salidas tempranas",
@@ -2506,6 +2504,114 @@
       "gear": {
         "title": "Zapatilla en uso",
         "text": "{{name}} lleva {{km}} km. A partir de unos 600 a 800 km conviene revisar su estado."
+      }
+    }
+  },
+  "coachToday": {
+    "eyebrow": "Resumen del equipo",
+    "title": "Hoy",
+    "week": "Semana del {{from}} al {{to}}",
+    "status": {
+      "title": "Estado del equipo",
+      "athletes_one": "{{count}} atleta",
+      "athletes_other": "{{count}} atletas",
+      "current": "Al día",
+      "review": "A revisar",
+      "overdue": "Atrasado",
+      "note": "Los tres grupos solo describen los datos: cuándo fue la última medición y si hay que revisar una evolución o la base de datos. No son un juicio sobre una persona."
+    },
+    "priority": {
+      "title": "Mirar primero",
+      "flagged_one": "{{count}} marcado",
+      "flagged_other": "{{count}} marcados",
+      "all": "Todos los atletas",
+      "none": "Esta semana nadie necesita una revisión de datos."
+    },
+    "reason": {
+      "declining": "Evolución a la baja en varios tests",
+      "overdue": "Medición atrasada",
+      "overdueDays": "Medición atrasada {{days}} días",
+      "thin_data": "Datos aún escasos",
+      "no_assessment": "Aún sin medición"
+    },
+    "matrix": {
+      "title": "Mapa de calor del equipo",
+      "sub": "Percentil por eje, más oscuro significa más alto",
+      "open": "Abrir mapa de calor",
+      "noData": "sin datos"
+    },
+    "testDay": {
+      "title": "Próxima jornada de tests",
+      "body": "{{athletes}} atletas · {{stations}} estaciones",
+      "open": "Abrir jornada de tests",
+      "none": "No hay jornada de tests planificada."
+    },
+    "pattern": {
+      "title": "Patrón en el equipo",
+      "body": "En {{open}} de {{covered}} atletas, «{{axis}}» está por debajo del requisito de la disciplina. Es una observación sobre el grupo, no una causa.",
+      "none": "Sin patrón: ningún eje en el que al menos 4 atletas y la mitad de los clasificados estén por debajo del requisito."
+    },
+    "actions": {
+      "title": "Acceso rápido",
+      "testDay": "Planificar jornada de tests",
+      "review": "Revisar atletas",
+      "report": "Informe de grupo"
+    }
+  },
+  "more": {
+    "eyebrow": "Más",
+    "title": "Más",
+    "intro": "Todo lo que no es una de las cinco áreas principales. Cada entrada lleva a donde estaba antes.",
+    "group": {
+      "measure": "Medir",
+      "evaluate": "Evaluar",
+      "between": "Entre tests",
+      "account": "Cuenta y aviso legal"
+    },
+    "item": {
+      "catalog": "Catálogo de tests",
+      "diagnostics": "Diagnóstico",
+      "observation": "Valores de observación",
+      "history": "Historial",
+      "analysis": "Análisis",
+      "runs": "Carreras",
+      "report": "Informe",
+      "hints": "Indicaciones",
+      "diary": "Diario",
+      "training": "Entrenamiento",
+      "load": "Carga",
+      "cockpit": "Cockpit",
+      "fuel": "Fuel",
+      "hrv": "Medición de VFC",
+      "profile": "Perfil",
+      "pricing": "Precios",
+      "imprint": "Aviso legal",
+      "privacy": "Privacidad",
+      "terms": "Condiciones de uso",
+      "dpa": "Encargo de tratamiento"
+    }
+  },
+  "teamHub": {
+    "eyebrow": "Equipo",
+    "title": "Equipo",
+    "intro": "La vista de grupo en un solo sitio: comparar, ver patrones, informar, demostrar el efecto.",
+    "manage": "Gestionar e invitar al equipo",
+    "tool": {
+      "heatmap": {
+        "title": "Mapa de calor",
+        "body": "Atletas y ejes de un vistazo, con los patrones del grupo."
+      },
+      "compare": {
+        "title": "Comparación",
+        "body": "Atletas lado a lado, con método de medición y error."
+      },
+      "report": {
+        "title": "Informe de grupo",
+        "body": "El grupo como informe, listo para exportar."
+      },
+      "proof": {
+        "title": "Prueba",
+        "body": "Qué ha cambiado, medido, con el tiempo."
       }
     }
   }

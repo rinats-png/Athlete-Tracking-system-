@@ -2341,8 +2341,6 @@
         "w52": "52 Wochen",
         "barsAlt": "Wochenkilometer, diese Woche {{km}} km",
         "goalLine": "Wochenziel {{km}} km",
-        "streak": "Serie (Wochen)",
-        "longest": "Längste Serie",
         "active": "Aktive Tage"
       },
       "pred": {
@@ -2497,7 +2495,7 @@
       },
       "consistency": {
         "title": "Beständigkeit",
-        "text": "{{hits}} von 6 Wochen erreicht. Aktuelle Serie {{streak}}, längste {{longest}} Wochen."
+        "text": "{{hits}} von 6 Wochen erreicht."
       },
       "habit": {
         "title": "Frühlauf-Anteil",
@@ -2506,6 +2504,114 @@
       "gear": {
         "title": "Schuh im Einsatz",
         "text": "{{name}} hat {{km}} km. Ab etwa 600 bis 800 km lohnt ein Blick auf den Zustand."
+      }
+    }
+  },
+  "coachToday": {
+    "eyebrow": "Team-Übersicht",
+    "title": "Heute",
+    "week": "Woche {{from}} bis {{to}}",
+    "status": {
+      "title": "Teamstatus",
+      "athletes_one": "{{count}} Athlet",
+      "athletes_other": "{{count}} Athleten",
+      "current": "Aktuell",
+      "review": "Zu prüfen",
+      "overdue": "Überfällig",
+      "note": "Die drei Gruppen beschreiben nur die Daten: wann zuletzt gemessen wurde und ob ein Verlauf oder die Datenlage zu prüfen ist. Sie sind kein Urteil über eine Person."
+    },
+    "priority": {
+      "title": "Zuerst ansehen",
+      "flagged_one": "{{count}} markiert",
+      "flagged_other": "{{count}} markiert",
+      "all": "Alle Athleten",
+      "none": "Diese Woche braucht niemand eine Prüfung der Daten."
+    },
+    "reason": {
+      "declining": "Verlauf fällt über mehrere Tests",
+      "overdue": "Messung überfällig",
+      "overdueDays": "Messung seit {{days}} Tagen überfällig",
+      "thin_data": "Datenlage noch dünn",
+      "no_assessment": "Noch keine Messung"
+    },
+    "matrix": {
+      "title": "Team-Heatmap",
+      "sub": "Perzentil je Achse, dunkler heißt höher",
+      "open": "Zur Heatmap",
+      "noData": "keine Daten"
+    },
+    "testDay": {
+      "title": "Nächster Testtag",
+      "body": "{{athletes}} Athleten · {{stations}} Stationen",
+      "open": "Testtag öffnen",
+      "none": "Kein Testtag geplant."
+    },
+    "pattern": {
+      "title": "Muster im Team",
+      "body": "Bei {{open}} von {{covered}} Athleten liegt «{{axis}}» unter der Anforderung der Disziplin. Das ist eine Beobachtung über die Gruppe, keine Ursache.",
+      "none": "Kein Muster: keine Achse, auf der mindestens 4 Athleten und die Hälfte der Eingeordneten unter der Anforderung liegen."
+    },
+    "actions": {
+      "title": "Schnellzugriff",
+      "testDay": "Testtag planen",
+      "review": "Athleten prüfen",
+      "report": "Gruppenbericht"
+    }
+  },
+  "more": {
+    "eyebrow": "Mehr",
+    "title": "Mehr",
+    "intro": "Alles, was nicht zu den fünf Hauptbereichen gehört. Jeder Eintrag führt dorthin, wo er vorher auch lag.",
+    "group": {
+      "measure": "Messen",
+      "evaluate": "Auswerten",
+      "between": "Zwischen den Tests",
+      "account": "Konto und Rechtliches"
+    },
+    "item": {
+      "catalog": "Testkatalog",
+      "diagnostics": "Diagnostik",
+      "observation": "Beobachtungswerte",
+      "history": "Verlauf",
+      "analysis": "Analyse",
+      "runs": "Läufe",
+      "report": "Bericht",
+      "hints": "Hinweise",
+      "diary": "Tagebuch",
+      "training": "Training",
+      "load": "Belastung",
+      "cockpit": "Cockpit",
+      "fuel": "Fuel",
+      "hrv": "HRV-Messung",
+      "profile": "Profil",
+      "pricing": "Preise",
+      "imprint": "Impressum",
+      "privacy": "Datenschutz",
+      "terms": "Nutzungsbedingungen",
+      "dpa": "Auftragsverarbeitung"
+    }
+  },
+  "teamHub": {
+    "eyebrow": "Team",
+    "title": "Team",
+    "intro": "Die Gruppensicht an einer Stelle: vergleichen, Muster sehen, berichten, Wirkung belegen.",
+    "manage": "Team verwalten und einladen",
+    "tool": {
+      "heatmap": {
+        "title": "Heatmap",
+        "body": "Athleten und Achsen im Überblick, mit Mustern der Gruppe."
+      },
+      "compare": {
+        "title": "Vergleich",
+        "body": "Athleten nebeneinander, mit Messmethode und Fehler."
+      },
+      "report": {
+        "title": "Gruppenbericht",
+        "body": "Die Gruppe als Bericht, auch zum Exportieren."
+      },
+      "proof": {
+        "title": "Nachweis",
+        "body": "Was sich über die Zeit gemessen verändert hat."
       }
     }
   }

@@ -2341,8 +2341,6 @@
         "w52": "52 uger",
         "barsAlt": "Ugekilometer, denne uge {{km}} km",
         "goalLine": "Ugemål {{km}} km",
-        "streak": "Stime (uger)",
-        "longest": "Længste stime",
         "active": "Aktive dage"
       },
       "pred": {
@@ -2497,7 +2495,7 @@
       },
       "consistency": {
         "title": "Jævnhed",
-        "text": "{{hits}} af 6 uger nået. Nuværende stime {{streak}}, længste {{longest}} uger."
+        "text": "{{hits}} af 6 uger nået."
       },
       "habit": {
         "title": "Andel tidlige ture",
@@ -2506,6 +2504,114 @@
       "gear": {
         "title": "Sko i brug",
         "text": "{{name}} har {{km}} km. Fra omkring 600 til 800 km kan det betale sig at tjekke stand."
+      }
+    }
+  },
+  "coachToday": {
+    "eyebrow": "Holdoversigt",
+    "title": "I dag",
+    "week": "Uge {{from}} til {{to}}",
+    "status": {
+      "title": "Holdstatus",
+      "athletes_one": "{{count}} atlet",
+      "athletes_other": "{{count}} atleter",
+      "current": "Opdateret",
+      "review": "Bør gennemgås",
+      "overdue": "Overskredet",
+      "note": "De tre grupper beskriver kun dataene: hvornår der sidst blev målt, og om et forløb eller datagrundlaget bør gennemgås. De er ingen vurdering af en person."
+    },
+    "priority": {
+      "title": "Se først",
+      "flagged_one": "{{count}} markeret",
+      "flagged_other": "{{count}} markeret",
+      "all": "Alle atleter",
+      "none": "Ingen behøver en gennemgang af data i denne uge."
+    },
+    "reason": {
+      "declining": "Forløb falder over flere tests",
+      "overdue": "Måling overskredet",
+      "overdueDays": "Måling overskredet med {{days}} dage",
+      "thin_data": "Datagrundlaget er stadig tyndt",
+      "no_assessment": "Ingen måling endnu"
+    },
+    "matrix": {
+      "title": "Holdets varmekort",
+      "sub": "Percentil pr. akse, mørkere betyder højere",
+      "open": "Åbn varmekortet",
+      "noData": "ingen data"
+    },
+    "testDay": {
+      "title": "Næste testdag",
+      "body": "{{athletes}} atleter · {{stations}} stationer",
+      "open": "Åbn testdagen",
+      "none": "Ingen testdag planlagt."
+    },
+    "pattern": {
+      "title": "Mønster på holdet",
+      "body": "For {{open}} af {{covered}} atleter ligger «{{axis}}» under disciplinens krav. Det er en iagttagelse om gruppen, ikke en årsag.",
+      "none": "Intet mønster: ingen akse, hvor mindst 4 atleter og halvdelen af de vurderede ligger under kravet."
+    },
+    "actions": {
+      "title": "Hurtig adgang",
+      "testDay": "Planlæg testdag",
+      "review": "Gennemgå atleter",
+      "report": "Grupperapport"
+    }
+  },
+  "more": {
+    "eyebrow": "Mere",
+    "title": "Mere",
+    "intro": "Alt, der ikke hører til de fem hovedområder. Hver post fører derhen, hvor den lå før.",
+    "group": {
+      "measure": "Måle",
+      "evaluate": "Vurdere",
+      "between": "Mellem testene",
+      "account": "Konto og juridisk"
+    },
+    "item": {
+      "catalog": "Testkatalog",
+      "diagnostics": "Diagnostik",
+      "observation": "Observationsværdier",
+      "history": "Historik",
+      "analysis": "Analyse",
+      "runs": "Løb",
+      "report": "Rapport",
+      "hints": "Fingerpeg",
+      "diary": "Dagbog",
+      "training": "Træning",
+      "load": "Belastning",
+      "cockpit": "Cockpit",
+      "fuel": "Fuel",
+      "hrv": "HRV-måling",
+      "profile": "Profil",
+      "pricing": "Priser",
+      "imprint": "Impressum",
+      "privacy": "Privatliv",
+      "terms": "Brugsvilkår",
+      "dpa": "Databehandleraftale"
+    }
+  },
+  "teamHub": {
+    "eyebrow": "Hold",
+    "title": "Hold",
+    "intro": "Gruppevisningen ét sted: sammenligne, se mønstre, rapportere, vise effekt.",
+    "manage": "Administrer og invitér holdet",
+    "tool": {
+      "heatmap": {
+        "title": "Varmekort",
+        "body": "Atleter og akser med ét blik, med gruppens mønstre."
+      },
+      "compare": {
+        "title": "Sammenligning",
+        "body": "Atleter side om side, med målemetode og fejl."
+      },
+      "report": {
+        "title": "Grupperapport",
+        "body": "Gruppen som rapport, klar til eksport."
+      },
+      "proof": {
+        "title": "Dokumentation",
+        "body": "Hvad der målbart har ændret sig over tid."
       }
     }
   }

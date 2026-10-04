@@ -20,7 +20,7 @@
 
 | Etappe | Inhalt | Stand |
 |---|---|---|
-| 1 | **Trainer:** Navigation (Today, Athleten, Test, Team, Mehr), Trainer-Today, Team-Hub, Mehr-Seite, Wächter-Test | in Arbeit |
+| 1 | **Trainer:** Navigation (Today, Athleten, Test, Team, Mehr), Trainer-Today, Team-Hub, Mehr-Seite, Wächter-Test | ✅ gebaut |
 | 2 | **Athlet:** Navigation (Today, Performance, Test, Fuel, Mehr), Today, Performance-Profil mit Assessment Coverage und Data Confidence | offen |
 | 3 | Check-in (Migration), Trainer-Cockpit mit Check-in-Quote, Montagsbrief | offen |
 | 4 | Kiosk-Modus und Testtag-Planer | offen |
@@ -28,3 +28,11 @@
 | 6 | Fuel-Vervollständigung mit Evidence Drawer | offen |
 
 Jede neue Funktion besteht die Prüfung aus Doktrin §50.
+
+## Etappe 1: was gebaut ist
+
+- **Navigation nach Rolle** (`BottomNav.tsx`): Trainer sehen Heute, Athleten, Test, Team, Mehr. Athleten behalten bis Etappe 2 ihre sechs Bereiche. Die Adressen bleiben alle, wie sie waren.
+- **Heute** (`CoachToday.tsx`, Logik in `domain/coachToday.ts`): Teamstatus (Aktuell, Zu prüfen, Überfällig; beschreibt nur Daten), «Zuerst ansehen» mit Grund, Team-Heatmap in Jade-Stufen, nächster Testtag, Muster im Team, Schnellzugriff. Karten mit Bild nutzen die vorhandenen Testbilder (`ImageCard`), in beiden Erscheinungsbildern.
+- **Team** (`TeamHub.tsx`) und **Mehr** (`MoreScreen.tsx`) ordnen vorhandene Werkzeuge, ohne etwas zu verschieben.
+- **Läufe:** die Serien-Kacheln sind entfernt (keine Streak-Mechanik, Doktrin §19).
+- **Wächter** (`tests/doctrine.spec.ts`): schlägt an, wenn Ratgeber- oder Kausalsprache in den deutschen oder englischen Texten steht. Der heutige Bestand war sauber.

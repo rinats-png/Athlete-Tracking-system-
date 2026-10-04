@@ -2341,8 +2341,6 @@
         "w52": "52 veckor",
         "barsAlt": "Veckokilometer, den här veckan {{km}} km",
         "goalLine": "Veckomål {{km}} km",
-        "streak": "Svit (veckor)",
-        "longest": "Längsta svit",
         "active": "Aktiva dagar"
       },
       "pred": {
@@ -2497,7 +2495,7 @@
       },
       "consistency": {
         "title": "Jämnhet",
-        "text": "{{hits}} av 6 veckor nådda. Aktuell svit {{streak}}, längsta {{longest}} veckor."
+        "text": "{{hits}} av 6 veckor nådda."
       },
       "habit": {
         "title": "Andel tidiga turer",
@@ -2506,6 +2504,114 @@
       "gear": {
         "title": "Sko i bruk",
         "text": "{{name}} har {{km}} km. Från ungefär 600 till 800 km lönar det sig att kontrollera skicket."
+      }
+    }
+  },
+  "coachToday": {
+    "eyebrow": "Lagöversikt",
+    "title": "Idag",
+    "week": "Vecka {{from}} till {{to}}",
+    "status": {
+      "title": "Lagstatus",
+      "athletes_one": "{{count}} atlet",
+      "athletes_other": "{{count}} atleter",
+      "current": "Aktuell",
+      "review": "Att granska",
+      "overdue": "Försenad",
+      "note": "De tre grupperna beskriver bara data: när senaste mätningen gjordes och om en utveckling eller dataunderlaget bör granskas. De är ingen bedömning av en person."
+    },
+    "priority": {
+      "title": "Titta först",
+      "flagged_one": "{{count}} markerad",
+      "flagged_other": "{{count}} markerade",
+      "all": "Alla atleter",
+      "none": "Ingen behöver få data granskad den här veckan."
+    },
+    "reason": {
+      "declining": "Utveckling sjunker över flera tester",
+      "overdue": "Mätning försenad",
+      "overdueDays": "Mätning försenad i {{days}} dagar",
+      "thin_data": "Data fortfarande tunna",
+      "no_assessment": "Ingen mätning ännu"
+    },
+    "matrix": {
+      "title": "Lagets värmekarta",
+      "sub": "Percentil per axel, mörkare betyder högre",
+      "open": "Öppna värmekartan",
+      "noData": "inga data"
+    },
+    "testDay": {
+      "title": "Nästa testdag",
+      "body": "{{athletes}} atleter · {{stations}} stationer",
+      "open": "Öppna testdagen",
+      "none": "Ingen testdag planerad."
+    },
+    "pattern": {
+      "title": "Mönster i laget",
+      "body": "För {{open}} av {{covered}} atleter ligger «{{axis}}» under disciplinens krav. Det är en iakttagelse om gruppen, inte en orsak.",
+      "none": "Inget mönster: ingen axel där minst 4 atleter och hälften av de bedömda ligger under kravet."
+    },
+    "actions": {
+      "title": "Snabbåtkomst",
+      "testDay": "Planera testdag",
+      "review": "Granska atleter",
+      "report": "Grupprapport"
+    }
+  },
+  "more": {
+    "eyebrow": "Mer",
+    "title": "Mer",
+    "intro": "Allt som inte hör till de fem huvudområdena. Varje post leder dit den låg förut.",
+    "group": {
+      "measure": "Mäta",
+      "evaluate": "Utvärdera",
+      "between": "Mellan testerna",
+      "account": "Konto och juridik"
+    },
+    "item": {
+      "catalog": "Testkatalog",
+      "diagnostics": "Diagnostik",
+      "observation": "Observationsvärden",
+      "history": "Historik",
+      "analysis": "Analys",
+      "runs": "Löpning",
+      "report": "Rapport",
+      "hints": "Tips",
+      "diary": "Dagbok",
+      "training": "Träning",
+      "load": "Belastning",
+      "cockpit": "Cockpit",
+      "fuel": "Fuel",
+      "hrv": "HRV-mätning",
+      "profile": "Profil",
+      "pricing": "Priser",
+      "imprint": "Impressum",
+      "privacy": "Integritet",
+      "terms": "Användarvillkor",
+      "dpa": "Personuppgiftsbiträdesavtal"
+    }
+  },
+  "teamHub": {
+    "eyebrow": "Lag",
+    "title": "Lag",
+    "intro": "Gruppvyn på ett ställe: jämföra, se mönster, rapportera, visa effekt.",
+    "manage": "Hantera och bjuda in laget",
+    "tool": {
+      "heatmap": {
+        "title": "Värmekarta",
+        "body": "Atleter och axlar på en blick, med gruppens mönster."
+      },
+      "compare": {
+        "title": "Jämförelse",
+        "body": "Atleter sida vid sida, med mätmetod och fel."
+      },
+      "report": {
+        "title": "Grupprapport",
+        "body": "Gruppen som rapport, redo att exportera."
+      },
+      "proof": {
+        "title": "Belägg",
+        "body": "Vad som mätbart har förändrats över tid."
       }
     }
   }

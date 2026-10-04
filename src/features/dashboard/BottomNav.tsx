@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Activity, BarChart3, ClipboardList, Flame, House, User } from 'lucide-react'
+import { Activity, BarChart3, ClipboardList, Ellipsis, Flame, House, User, Users, UsersRound } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
 
@@ -49,38 +49,75 @@ export const NAV_ITEMS = [
   { key: 'profile', icon: User, path: '/profil', alsoMatches: ['/trainer'] },
 ] as const
 
-export type NavKey = (typeof NAV_ITEMS)[number]['key']
+/**
+ * Die fünf Bereiche des Trainers (Produktdoktrin §6): Heute, Athleten, Test,
+ * Team, Mehr. Der Trainer arbeitet in Fragen, nicht in Themen: wer braucht
+ * Aufmerksamkeit (Heute, Athleten), was wird gemessen (Test), wie steht die
+ * Gruppe da (Team). Alles andere liegt unter Mehr.
+ */
+export const COACH_NAV_ITEMS = [
+  { key: 'coachToday', icon: House, path: '/', alsoMatches: [] },
+  { key: 'coachAthletes', icon: Users, path: '/trainer', alsoMatches: ['/cockpit'] },
+  {
+    key: 'coachTest',
+    icon: ClipboardList,
+    path: '/trainer/testtag',
+    alsoMatches: ['/trainer/gruppentest', '/tests', '/diagnostik', '/batterie', '/sport', '/ergebnis'],
+  },
+  {
+    key: 'coachTeam',
+    icon: UsersRound,
+    path: '/trainer/team',
+    alsoMatches: ['/trainer/vergleich', '/trainer/gruppenbericht', '/trainer/heatmap', '/trainer/nachweis', '/team'],
+  },
+  { key: 'coachMore', icon: Ellipsis, path: '/mehr', alsoMatches: ['/profil', '/verlauf', '/analyse', '/bericht', '/tagebuch', '/training', '/fuel', '/ernaehrung', '/belastung', '/hinweise', '/preise', '/impressum', '/datenschutz', '/nutzungsbedingungen', '/auftragsverarbeitung'] },
+] as const
+
+export type AthleteNavKey = (typeof NAV_ITEMS)[number]['key']
+export type CoachNavKey = (typeof COACH_NAV_ITEMS)[number]['key']
+export type NavKey = AthleteNavKey | CoachNavKey
+export type NavItem = { key: NavKey; icon: typeof House; path: string; alsoMatches: readonly string[] }
+export type NavRole = 'solo' | 'coach'
+
+export function navItemsFor(role: NavRole): readonly NavItem[] {
+  return role === 'coach' ? COACH_NAV_ITEMS : NAV_ITEMS
+}
 
 export function pathForNavKey(key: NavKey): string {
-  return NAV_ITEMS.find((item) => item.key === key)?.path ?? '/'
+  return [...NAV_ITEMS, ...COACH_NAV_ITEMS].find((item) => item.key === key)?.path ?? '/'
 }
 
 /**
  * Aktiver Eintrag aus dem Pfad. Längster Treffer gewinnt, damit
  * /tests/cooper_12min ebenfalls den Tab "Tests" markiert.
  */
-export function navKeyForPath(pathname: string): NavKey {
-  const match = NAV_ITEMS.flatMap((item) =>
-    [item.path, ...item.alsoMatches]
-      .filter((path) => path !== '/' && pathname.startsWith(path))
-      .map((path) => ({ key: item.key, path })),
-  ).sort((a, b) => b.path.length - a.path.length)[0]
-  return match?.key ?? 'overview'
+export function navKeyForPath(pathname: string, role: NavRole = 'solo'): NavKey {
+  const items = navItemsFor(role)
+  const match = items
+    .flatMap((item) =>
+      [item.path, ...item.alsoMatches]
+        .filter((path) => path !== '/' && pathname.startsWith(path))
+        .map((path) => ({ key: item.key, path })),
+    )
+    .sort((a, b) => b.path.length - a.path.length)[0]
+  return match?.key ?? items[0].key
 }
 
 export function BottomNav({
   active = 'overview',
   onNavigate,
+  items = NAV_ITEMS,
 }: {
   active?: NavKey
   onNavigate?: (key: NavKey) => void
+  items?: readonly NavItem[]
 }) {
   const { t } = useTranslation()
   const visualInset = useVisualViewportInset()
 
   const index = Math.max(
     0,
-    NAV_ITEMS.findIndex((item) => item.key === active),
+    items.findIndex((item) => item.key === active),
   )
 
   return (
@@ -98,13 +135,14 @@ export function BottomNav({
     >
       <div
         className={cn(
-          'pointer-events-auto relative mx-auto grid max-w-md grid-cols-6 items-center',
+          'pointer-events-auto relative mx-auto grid max-w-md items-center',
           'h-[var(--bottom-nav-h)] rounded-pill border border-line px-1',
           // Milchglas: was darunter durchläuft, bleibt erkennbar. Ohne den
           // Weichzeichner wäre die Leiste entweder undurchsichtig (und
           // verdeckte Inhalt) oder unlesbar.
           'bg-glass-strong shadow-elev-2 backdrop-blur-xl',
         )}
+        style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
       >
         {/*
          * Der aktive Anzeiger WANDERT — er wird nicht neu gezeichnet.
@@ -116,13 +154,14 @@ export function BottomNav({
          */}
         <span
           aria-hidden
-          className="absolute top-1.5 bottom-1.5 left-1 w-[calc((100%-0.5rem)/6)] rounded-pill bg-accent-quiet"
+          className="absolute top-1.5 bottom-1.5 left-1 rounded-pill bg-accent-quiet"
           style={{
+            width: `calc((100% - 0.5rem) / ${items.length})`,
             transform: `translateX(${index * 100}%)`,
             transition: 'transform var(--motion-base) var(--ease-out)',
           }}
         />
-        {NAV_ITEMS.map(({ key, icon }) => (
+        {items.map(({ key, icon }) => (
           <NavItem
             key={key}
             icon={icon}

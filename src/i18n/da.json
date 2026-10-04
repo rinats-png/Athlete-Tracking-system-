@@ -16,13 +16,23 @@
       "analysis": "Analyse",
       "history": "Historik",
       "profile": "Profil",
-      "fuel": "Fuel"
+      "fuel": "Fuel",
+      "coachToday": "I dag",
+      "coachAthletes": "Atleter",
+      "coachTest": "Test",
+      "coachTeam": "Hold",
+      "coachMore": "Mere"
     },
     "overview": "Oversigt",
     "diagnostics": "Diagnostik",
     "analysis": "Analyse",
     "skipToContent": "Spring til indhold",
-    "fuel": "Fuel"
+    "fuel": "Fuel",
+    "coachToday": "I dag",
+    "coachAthletes": "Atleter",
+    "coachTest": "Test",
+    "coachTeam": "Hold",
+    "coachMore": "Mere"
   },
   "actions": {
     "startTest": "Start test",

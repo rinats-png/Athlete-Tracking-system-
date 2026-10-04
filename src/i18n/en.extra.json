@@ -2341,8 +2341,6 @@
         "w52": "52 weeks",
         "barsAlt": "Weekly kilometres, this week {{km}} km",
         "goalLine": "Weekly goal {{km}} km",
-        "streak": "Streak (weeks)",
-        "longest": "Longest streak",
         "active": "Active days"
       },
       "pred": {
@@ -2497,7 +2495,7 @@
       },
       "consistency": {
         "title": "Consistency",
-        "text": "{{hits}} of 6 weeks reached. Current streak {{streak}}, longest {{longest}} weeks."
+        "text": "{{hits}} of 6 weeks reached."
       },
       "habit": {
         "title": "Early-run share",
@@ -2506,6 +2504,114 @@
       "gear": {
         "title": "Shoe in use",
         "text": "{{name}} has {{km}} km. From about 600 to 800 km it is worth checking its condition."
+      }
+    }
+  },
+  "coachToday": {
+    "eyebrow": "Team overview",
+    "title": "Today",
+    "week": "Week {{from}} to {{to}}",
+    "status": {
+      "title": "Team status",
+      "athletes_one": "{{count}} athlete",
+      "athletes_other": "{{count}} athletes",
+      "current": "Up to date",
+      "review": "To review",
+      "overdue": "Overdue",
+      "note": "The three groups only describe the data: when someone was last measured and whether a trend or the data basis should be reviewed. They are not a judgement of a person."
+    },
+    "priority": {
+      "title": "Look at first",
+      "flagged_one": "{{count}} flagged",
+      "flagged_other": "{{count}} flagged",
+      "all": "All athletes",
+      "none": "Nobody needs a data review this week."
+    },
+    "reason": {
+      "declining": "Trend falling across several tests",
+      "overdue": "Measurement overdue",
+      "overdueDays": "Measurement overdue for {{days}} days",
+      "thin_data": "Data still thin",
+      "no_assessment": "No measurement yet"
+    },
+    "matrix": {
+      "title": "Team heatmap",
+      "sub": "Percentile per axis, darker means higher",
+      "open": "Open heatmap",
+      "noData": "no data"
+    },
+    "testDay": {
+      "title": "Next test day",
+      "body": "{{athletes}} athletes · {{stations}} stations",
+      "open": "Open test day",
+      "none": "No test day planned."
+    },
+    "pattern": {
+      "title": "Pattern in the team",
+      "body": "For {{open}} of {{covered}} athletes, “{{axis}}” is below the discipline's requirement. That is an observation about the group, not a cause.",
+      "none": "No pattern: no axis where at least 4 athletes and half of those rated are below the requirement."
+    },
+    "actions": {
+      "title": "Quick access",
+      "testDay": "Plan test day",
+      "review": "Review athletes",
+      "report": "Group report"
+    }
+  },
+  "more": {
+    "eyebrow": "More",
+    "title": "More",
+    "intro": "Everything that is not one of the five main areas. Each entry leads where it was before.",
+    "group": {
+      "measure": "Measure",
+      "evaluate": "Evaluate",
+      "between": "Between tests",
+      "account": "Account and legal"
+    },
+    "item": {
+      "catalog": "Test catalogue",
+      "diagnostics": "Diagnostics",
+      "observation": "Observation values",
+      "history": "History",
+      "analysis": "Analysis",
+      "runs": "Runs",
+      "report": "Report",
+      "hints": "Hints",
+      "diary": "Diary",
+      "training": "Training",
+      "load": "Load",
+      "cockpit": "Cockpit",
+      "fuel": "Fuel",
+      "hrv": "HRV measurement",
+      "profile": "Profile",
+      "pricing": "Pricing",
+      "imprint": "Imprint",
+      "privacy": "Privacy",
+      "terms": "Terms of use",
+      "dpa": "Data processing agreement"
+    }
+  },
+  "teamHub": {
+    "eyebrow": "Team",
+    "title": "Team",
+    "intro": "The group view in one place: compare, see patterns, report, prove effect.",
+    "manage": "Manage and invite the team",
+    "tool": {
+      "heatmap": {
+        "title": "Heatmap",
+        "body": "Athletes and axes at a glance, with patterns of the group."
+      },
+      "compare": {
+        "title": "Comparison",
+        "body": "Athletes side by side, with measurement method and error."
+      },
+      "report": {
+        "title": "Group report",
+        "body": "The group as a report, ready to export."
+      },
+      "proof": {
+        "title": "Proof",
+        "body": "What has changed in measured terms over time."
       }
     }
   }

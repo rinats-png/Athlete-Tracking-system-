@@ -305,10 +305,9 @@ function WeekPanel({ m }: { m: RunMetrics }) {
           {goal && <line x1="6" x2="354" y1={92 - (goal / max) * 80} y2={92 - (goal / max) * 80} stroke="var(--accent)" strokeWidth="1.2" />}
         </svg>
         {goal && <p className="text-[11px] text-ink-muted">{t('runs.dash.week.goalLine', { km: formatNumber(goal, locale, 0) })}</p>}
-        <div className="mt-3 grid grid-cols-3 gap-2">
+        <div className="mt-3 grid grid-cols-2 gap-2">
           {[
-            ['runs.dash.week.streak', m.consistency.currentStreak],
-            ['runs.dash.week.longest', m.consistency.longestStreak],
+            ['runs.finding.num.weeksHit', `${m.consistency.hitsLastSix}/6`],
             ['runs.dash.week.active', m.consistency.activeDays],
           ].map(([k, v]) => (
             <div key={k as string} className="rounded-md bg-surface-sunken px-3 py-2.5">

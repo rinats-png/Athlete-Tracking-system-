@@ -2341,8 +2341,6 @@
         "w52": "52 semaines",
         "barsAlt": "Kilomètres par semaine, cette semaine {{km}} km",
         "goalLine": "Objectif hebdomadaire {{km}} km",
-        "streak": "Série (semaines)",
-        "longest": "Plus longue série",
         "active": "Jours actifs"
       },
       "pred": {
@@ -2497,7 +2495,7 @@
       },
       "consistency": {
         "title": "Régularité",
-        "text": "{{hits}} semaines sur 6 atteintes. Série actuelle {{streak}}, la plus longue {{longest}} semaines."
+        "text": "{{hits}} semaines sur 6 atteintes."
       },
       "habit": {
         "title": "Part des sorties matinales",
@@ -2506,6 +2504,114 @@
       "gear": {
         "title": "Chaussure en service",
         "text": "{{name}} compte {{km}} km. À partir de 600 à 800 km environ, un coup d'œil à son état s'impose."
+      }
+    }
+  },
+  "coachToday": {
+    "eyebrow": "Vue de l'équipe",
+    "title": "Aujourd'hui",
+    "week": "Semaine du {{from}} au {{to}}",
+    "status": {
+      "title": "État de l'équipe",
+      "athletes_one": "{{count}} athlète",
+      "athletes_other": "{{count}} athlètes",
+      "current": "À jour",
+      "review": "À examiner",
+      "overdue": "En retard",
+      "note": "Les trois groupes décrivent seulement les données : quand la dernière mesure date et si un historique ou la base de données est à examiner. Ce n'est pas un jugement sur une personne."
+    },
+    "priority": {
+      "title": "À voir en premier",
+      "flagged_one": "{{count}} signalé",
+      "flagged_other": "{{count}} signalés",
+      "all": "Tous les athlètes",
+      "none": "Personne n'a besoin d'un examen des données cette semaine."
+    },
+    "reason": {
+      "declining": "Évolution en baisse sur plusieurs tests",
+      "overdue": "Mesure en retard",
+      "overdueDays": "Mesure en retard depuis {{days}} jours",
+      "thin_data": "Données encore minces",
+      "no_assessment": "Pas encore de mesure"
+    },
+    "matrix": {
+      "title": "Heatmap de l'équipe",
+      "sub": "Centile par axe, plus foncé signifie plus élevé",
+      "open": "Ouvrir la heatmap",
+      "noData": "pas de données"
+    },
+    "testDay": {
+      "title": "Prochaine journée de tests",
+      "body": "{{athletes}} athlètes · {{stations}} stations",
+      "open": "Ouvrir la journée de tests",
+      "none": "Aucune journée de tests prévue."
+    },
+    "pattern": {
+      "title": "Schéma dans l'équipe",
+      "body": "Pour {{open}} athlètes sur {{covered}}, « {{axis}} » est sous l'exigence de la discipline. C'est une observation sur le groupe, pas une cause.",
+      "none": "Aucun schéma : aucun axe où au moins 4 athlètes et la moitié des athlètes classés sont sous l'exigence."
+    },
+    "actions": {
+      "title": "Accès rapide",
+      "testDay": "Planifier la journée de tests",
+      "review": "Examiner les athlètes",
+      "report": "Rapport de groupe"
+    }
+  },
+  "more": {
+    "eyebrow": "Plus",
+    "title": "Plus",
+    "intro": "Tout ce qui ne fait pas partie des cinq zones principales. Chaque entrée mène là où elle se trouvait avant.",
+    "group": {
+      "measure": "Mesurer",
+      "evaluate": "Évaluer",
+      "between": "Entre les tests",
+      "account": "Compte et mentions légales"
+    },
+    "item": {
+      "catalog": "Catalogue de tests",
+      "diagnostics": "Diagnostic",
+      "observation": "Valeurs d'observation",
+      "history": "Historique",
+      "analysis": "Analyse",
+      "runs": "Courses",
+      "report": "Rapport",
+      "hints": "Indications",
+      "diary": "Journal",
+      "training": "Entraînement",
+      "load": "Charge",
+      "cockpit": "Cockpit",
+      "fuel": "Fuel",
+      "hrv": "Mesure de la VFC",
+      "profile": "Profil",
+      "pricing": "Tarifs",
+      "imprint": "Mentions légales",
+      "privacy": "Confidentialité",
+      "terms": "Conditions d'utilisation",
+      "dpa": "Accord de sous-traitance"
+    }
+  },
+  "teamHub": {
+    "eyebrow": "Équipe",
+    "title": "Équipe",
+    "intro": "La vue de groupe en un seul endroit : comparer, voir des schémas, faire un rapport, documenter l'effet.",
+    "manage": "Gérer et inviter l'équipe",
+    "tool": {
+      "heatmap": {
+        "title": "Heatmap",
+        "body": "Athlètes et axes en un coup d'œil, avec les schémas du groupe."
+      },
+      "compare": {
+        "title": "Comparaison",
+        "body": "Athlètes côte à côte, avec méthode de mesure et erreur."
+      },
+      "report": {
+        "title": "Rapport de groupe",
+        "body": "Le groupe sous forme de rapport, exportable."
+      },
+      "proof": {
+        "title": "Preuve",
+        "body": "Ce qui a changé, mesuré, au fil du temps."
       }
     }
   }

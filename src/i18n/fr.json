@@ -16,13 +16,23 @@
       "analysis": "Analyse",
       "history": "Historique",
       "profile": "Profil",
-      "fuel": "Fuel"
+      "fuel": "Fuel",
+      "coachToday": "Aujourd'hui",
+      "coachAthletes": "Athlètes",
+      "coachTest": "Test",
+      "coachTeam": "Équipe",
+      "coachMore": "Plus"
     },
     "overview": "Aperçu",
     "diagnostics": "Diagnostic",
     "analysis": "Analyse",
     "skipToContent": "Aller au contenu",
-    "fuel": "Fuel"
+    "fuel": "Fuel",
+    "coachToday": "Aujourd'hui",
+    "coachAthletes": "Athlètes",
+    "coachTest": "Test",
+    "coachTeam": "Équipe",
+    "coachMore": "Plus"
   },
   "actions": {
     "startTest": "Lancer le test",

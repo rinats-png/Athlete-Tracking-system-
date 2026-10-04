@@ -122,7 +122,7 @@ export function findInsights(m: RunMetrics): Insight[] {
     const p = m.predictions.list.find((x) => x.key === 'half')!
     out.push({ key: 'race', value: { type: 'seconds', s: p.low }, params: { low: p.low, high: p.high }, basis: m.predictions.baseRaceId ? 'evidenced' : 'hint' })
   }
-  out.push({ key: 'consistency', value: { type: 'text', text: `${m.consistency.hitsLastSix}/6` }, params: { hits: m.consistency.hitsLastSix, streak: m.consistency.currentStreak, longest: m.consistency.longestStreak }, basis: 'evidenced' })
+  out.push({ key: 'consistency', value: { type: 'text', text: `${m.consistency.hitsLastSix}/6` }, params: { hits: m.consistency.hitsLastSix }, basis: 'evidenced' })
   if (m.habit.before9Share != null) {
     out.push({ key: 'habit', value: { type: 'number', n: Math.round(m.habit.before9Share * 100), digits: 0 }, unit: 'percent', params: { share: Math.round(m.habit.before9Share * 100), weekday: m.habit.mostCommon?.weekday ?? 0, hour: m.habit.mostCommon?.hour ?? 0 }, basis: m.totals.runs >= 20 ? 'evidenced' : 'hint' })
   }

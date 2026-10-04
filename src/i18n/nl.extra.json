@@ -2341,8 +2341,6 @@
         "w52": "52 weken",
         "barsAlt": "Weekkilometers, deze week {{km}} km",
         "goalLine": "Weekdoel {{km}} km",
-        "streak": "Reeks (weken)",
-        "longest": "Langste reeks",
         "active": "Actieve dagen"
       },
       "pred": {
@@ -2497,7 +2495,7 @@
       },
       "consistency": {
         "title": "Regelmaat",
-        "text": "{{hits}} van 6 weken gehaald. Huidige reeks {{streak}}, langste {{longest}} weken."
+        "text": "{{hits}} van 6 weken gehaald."
       },
       "habit": {
         "title": "Aandeel vroege loopjes",
@@ -2506,6 +2504,114 @@
       "gear": {
         "title": "Schoen in gebruik",
         "text": "{{name}} heeft {{km}} km. Vanaf ongeveer 600 tot 800 km is het verstandig de staat te bekijken."
+      }
+    }
+  },
+  "coachToday": {
+    "eyebrow": "Teamoverzicht",
+    "title": "Vandaag",
+    "week": "Week {{from}} tot {{to}}",
+    "status": {
+      "title": "Teamstatus",
+      "athletes_one": "{{count}} atleet",
+      "athletes_other": "{{count}} atleten",
+      "current": "Actueel",
+      "review": "Te bekijken",
+      "overdue": "Achterstallig",
+      "note": "De drie groepen beschrijven alleen de gegevens: wanneer voor het laatst gemeten is en of een verloop of de gegevensbasis bekeken moet worden. Ze zijn geen oordeel over een persoon."
+    },
+    "priority": {
+      "title": "Eerst bekijken",
+      "flagged_one": "{{count}} gemarkeerd",
+      "flagged_other": "{{count}} gemarkeerd",
+      "all": "Alle atleten",
+      "none": "Deze week heeft niemand een controle van de gegevens nodig."
+    },
+    "reason": {
+      "declining": "Verloop daalt over meerdere tests",
+      "overdue": "Meting achterstallig",
+      "overdueDays": "Meting {{days}} dagen achterstallig",
+      "thin_data": "Gegevens nog dun",
+      "no_assessment": "Nog geen meting"
+    },
+    "matrix": {
+      "title": "Team-heatmap",
+      "sub": "Percentiel per as, donkerder betekent hoger",
+      "open": "Heatmap openen",
+      "noData": "geen gegevens"
+    },
+    "testDay": {
+      "title": "Volgende testdag",
+      "body": "{{athletes}} atleten · {{stations}} stations",
+      "open": "Testdag openen",
+      "none": "Geen testdag gepland."
+    },
+    "pattern": {
+      "title": "Patroon in het team",
+      "body": "Bij {{open}} van {{covered}} atleten ligt «{{axis}}» onder de eis van de discipline. Dat is een waarneming over de groep, geen oorzaak.",
+      "none": "Geen patroon: geen as waarop minstens 4 atleten en de helft van de ingedeelden onder de eis liggen."
+    },
+    "actions": {
+      "title": "Snel naar",
+      "testDay": "Testdag plannen",
+      "review": "Atleten bekijken",
+      "report": "Groepsrapport"
+    }
+  },
+  "more": {
+    "eyebrow": "Meer",
+    "title": "Meer",
+    "intro": "Alles wat niet bij de vijf hoofdonderdelen hoort. Elk item leidt naar waar het eerder stond.",
+    "group": {
+      "measure": "Meten",
+      "evaluate": "Beoordelen",
+      "between": "Tussen de tests",
+      "account": "Account en juridisch"
+    },
+    "item": {
+      "catalog": "Testcatalogus",
+      "diagnostics": "Diagnostiek",
+      "observation": "Waarnemingswaarden",
+      "history": "Verloop",
+      "analysis": "Analyse",
+      "runs": "Loopjes",
+      "report": "Rapport",
+      "hints": "Aanwijzingen",
+      "diary": "Dagboek",
+      "training": "Training",
+      "load": "Belasting",
+      "cockpit": "Cockpit",
+      "fuel": "Fuel",
+      "hrv": "HRV-meting",
+      "profile": "Profiel",
+      "pricing": "Prijzen",
+      "imprint": "Colofon",
+      "privacy": "Privacy",
+      "terms": "Gebruiksvoorwaarden",
+      "dpa": "Verwerkersovereenkomst"
+    }
+  },
+  "teamHub": {
+    "eyebrow": "Team",
+    "title": "Team",
+    "intro": "De groepsweergave op één plek: vergelijken, patronen zien, rapporteren, effect aantonen.",
+    "manage": "Team beheren en uitnodigen",
+    "tool": {
+      "heatmap": {
+        "title": "Heatmap",
+        "body": "Atleten en assen in één oogopslag, met patronen van de groep."
+      },
+      "compare": {
+        "title": "Vergelijking",
+        "body": "Atleten naast elkaar, met meetmethode en fout."
+      },
+      "report": {
+        "title": "Groepsrapport",
+        "body": "De groep als rapport, klaar om te exporteren."
+      },
+      "proof": {
+        "title": "Bewijs",
+        "body": "Wat er in de loop van de tijd gemeten is veranderd."
       }
     }
   }

@@ -16,13 +16,23 @@
       "analysis": "Analyse",
       "history": "Historie",
       "profile": "Profiel",
-      "fuel": "Fuel"
+      "fuel": "Fuel",
+      "coachToday": "Vandaag",
+      "coachAthletes": "Atleten",
+      "coachTest": "Test",
+      "coachTeam": "Team",
+      "coachMore": "Meer"
     },
     "overview": "Overzicht",
     "diagnostics": "Diagnostiek",
     "analysis": "Analyse",
     "skipToContent": "Naar de inhoud",
-    "fuel": "Fuel"
+    "fuel": "Fuel",
+    "coachToday": "Vandaag",
+    "coachAthletes": "Atleten",
+    "coachTest": "Test",
+    "coachTeam": "Team",
+    "coachMore": "Meer"
   },
   "actions": {
     "startTest": "Test starten",

@@ -103,12 +103,20 @@ function screen<T extends Record<string, ComponentType>>(
   )
 }
 
+const COACH_TODAY = screen(() => import('@/features/coach/CoachToday'), 'CoachToday')
+
+/** Startseite: Trainer sehen «Heute» mit der Teamlage, alle anderen die Übersicht. */
+function HomeRoute() {
+  const { role } = useAppData()
+  return role === 'coach' ? COACH_TODAY : <OverviewScreen />
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <AppShell />,
     children: [
-      { index: true, element: <OverviewScreen /> },
+      { index: true, element: <HomeRoute /> },
       { path: 'diagnostik', element: <DiagnosticsHub /> },
       { path: 'diagnostik/bereich/:area', element: screen(() => import('@/features/diagnostics/AreaScreen'), 'AreaScreen') },
       { path: 'diagnostik/termine', element: screen(() => import('@/features/assessments/AssessmentListScreen'), 'AssessmentListScreen') },
@@ -131,6 +139,8 @@ const router = createBrowserRouter([
       { path: 'analyse/jahr', element: <Gate feature="yearReview">{screen(() => import('@/features/analysis/YearReviewScreen'), 'YearReviewScreen')}</Gate> },
       { path: 'community', element: screen(() => import('@/features/analysis/CommunityScreen'), 'CommunityScreen') },
       { path: 'trainer', element: screen(() => import('@/features/coach/CoachScreen'), 'CoachScreen') },
+      { path: 'trainer/team', element: screen(() => import('@/features/coach/TeamHub'), 'TeamHub') },
+      { path: 'mehr', element: screen(() => import('@/features/more/MoreScreen'), 'MoreScreen') },
       { path: 'trainer/gruppentest', element: screen(() => import('@/features/coach/GroupTestScreen'), 'GroupTestScreen') },
       { path: 'trainer/testtag', element: screen(() => import('@/features/coach/TestDayScreen'), 'TestDayScreen') },
       { path: 'trainer/testtag/:id', element: screen(() => import('@/features/coach/TestDayDetailScreen'), 'TestDayDetailScreen') },

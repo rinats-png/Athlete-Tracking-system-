@@ -16,13 +16,23 @@
       "analysis": "Analysis",
       "history": "History",
       "profile": "Profile",
-      "fuel": "Fuel"
+      "fuel": "Fuel",
+      "coachToday": "Today",
+      "coachAthletes": "Athletes",
+      "coachTest": "Test",
+      "coachTeam": "Team",
+      "coachMore": "More"
     },
     "overview": "Overview",
     "diagnostics": "Diagnostics",
     "analysis": "Analysis",
     "skipToContent": "Skip to content",
-    "fuel": "Fuel"
+    "fuel": "Fuel",
+    "coachToday": "Today",
+    "coachAthletes": "Athletes",
+    "coachTest": "Test",
+    "coachTeam": "Team",
+    "coachMore": "More"
   },
   "actions": {
     "startTest": "Start test",

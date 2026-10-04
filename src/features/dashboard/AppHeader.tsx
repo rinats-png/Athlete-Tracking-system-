@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { AthleteSwitcher } from '@/features/coach/AthleteSwitcher'
-import { NAV_ITEMS, type NavKey } from './BottomNav'
+import { NAV_ITEMS, type NavItem, type NavKey } from './BottomNav'
 import { cn } from '@/lib/utils'
 
 /**
@@ -18,11 +18,13 @@ export function AppHeader({
   mode,
   active = 'overview',
   onNavigate,
+  items = NAV_ITEMS,
 }: {
   /** 'guest' = lokale Daten ohne Konto, 'demo' = mitgelieferter Beispielsatz. */
   mode: 'guest' | 'demo'
   active?: NavKey
   onNavigate?: (key: NavKey) => void
+  items?: readonly NavItem[]
 }) {
   const { t } = useTranslation()
 
@@ -43,7 +45,7 @@ export function AppHeader({
               Breite genau eine sichtbare Navigation. */}
           <nav aria-label={t('nav.primary')} className="hidden lg:block">
             <ul className="flex items-center gap-1">
-              {NAV_ITEMS.map(({ key }) => (
+              {items.map(({ key }) => (
                 <li key={key}>
                   <button
                     type="button"
