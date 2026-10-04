@@ -63,7 +63,8 @@ test.describe('Testbibliothek — Daten', () => {
   test('jede Vorschrift mit Bild-Schlüssel hat ein Bild, und keine Datei liegt ungenutzt', async () => {
     const { readdirSync } = await import('node:fs')
     const used = new Set([...Object.values(TEST_IMAGE_NUMBER).map((n) => `T${String(n).padStart(3, '0')}.webp`), ...[...SLUG_IMAGE_KEYS].map((k) => `S_${k}.webp`)])
-    const unused = readdirSync('public/testbilder').filter((f) => !used.has(f))
+    // Übungsbilder (U_<key>.jpg) gehören zu den Übungen, nicht zu den Tests; ihr Gleichlauf steht in exerciseImages.spec.ts.
+    const unused = readdirSync('public/testbilder').filter((f) => !used.has(f) && !f.startsWith('U_'))
     expect(unused, `Bilder ohne Test: ${unused.join(', ')}`).toEqual([])
     for (const key of Object.keys(procedures)) expect(testImageUrl(key), `${key}: Bild`).toBeTruthy()
   })
