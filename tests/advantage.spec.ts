@@ -60,6 +60,7 @@ async function openSeeded(page: Page, results: StoredResult[]) {
 test.describe('Anforderungslücke und Wettkampf auf der Übersicht', () => {
   test('der Demobestand zeigt die Rangfolge, den Wettkampf und die Fläche zwischen den Tests', async ({ page }) => {
     await openDemo(page)
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     const lever = page.getByTestId('lever-panel')
     await expect(lever).toBeVisible()
     await expect(lever.getByText('Anforderungslücke')).toBeVisible()
@@ -99,7 +100,7 @@ test.describe('Anforderungslücke und Wettkampf auf der Übersicht', () => {
     await page.getByLabel(/Sprungweite|Weite|Distanz/).first().fill('2.40')
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
     await page.waitForURL('**/ergebnis/**')
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     const competition = page.getByTestId('competition-panel')
     await expect(competition.getByText('Vereinsmeisterschaft')).toBeVisible()
     await expect(competition.getByText(/in \d+ Tagen/)).toBeVisible()

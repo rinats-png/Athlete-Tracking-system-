@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Activity, BarChart3, ClipboardList, Ellipsis, Flame, House, User, Users, UsersRound } from 'lucide-react'
+import { BarChart3, ClipboardList, Ellipsis, Flame, House, Users, UsersRound } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
 
@@ -36,17 +36,31 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
  */
 
 /**
- * Die sechs Hauptbereiche (Konzept §5, dazu Fuel): Übersicht, Diagnostik,
- * Analyse, Verlauf, Fuel, Profil. Fuel umfasst auch die Ernährung. Der Testkatalog und die Einzeltests gehören zur
- * Diagnostik; Bericht und Trainer-Ansicht liegen unter Analyse bzw. Profil.
+ * Die fünf Hauptbereiche des Athleten (Produktdoktrin §6): Heute, Performance,
+ * Test, Fuel, Mehr. Verlauf, Analyse und Bericht gehören zu Performance; Profil,
+ * Tagebuch, Training und Rechtliches liegen unter Mehr. Die Adressen blieben.
  */
 export const NAV_ITEMS = [
-  { key: 'overview', icon: House, path: '/', alsoMatches: ['/tagebuch', '/training', '/cockpit'] },
-  { key: 'diagnostics', icon: ClipboardList, path: '/diagnostik', alsoMatches: ['/tests', '/sport', '/batterie'] },
-  { key: 'analysis', icon: Activity, path: '/analyse', alsoMatches: ['/bericht', '/community'] },
-  { key: 'history', icon: BarChart3, path: '/verlauf', alsoMatches: ['/werte', '/kalender'] },
+  { key: 'athleteToday', icon: House, path: '/', alsoMatches: ['/uebersicht'] },
+  {
+    key: 'athletePerformance',
+    icon: BarChart3,
+    path: '/performance',
+    alsoMatches: ['/verlauf', '/analyse', '/bericht', '/community', '/hinweise', '/einseiter'],
+  },
+  {
+    key: 'athleteTest',
+    icon: ClipboardList,
+    path: '/diagnostik',
+    alsoMatches: ['/tests', '/sport', '/batterie', '/ergebnis', '/beobachtung', '/hrv-messung'],
+  },
   { key: 'fuel', icon: Flame, path: '/fuel', alsoMatches: ['/ernaehrung'] },
-  { key: 'profile', icon: User, path: '/profil', alsoMatches: ['/trainer'] },
+  {
+    key: 'athleteMore',
+    icon: Ellipsis,
+    path: '/mehr',
+    alsoMatches: ['/profil', '/tagebuch', '/training', '/cockpit', '/belastung', '/gesundheit', '/peakweek', '/sportmodul', '/sportanalyse', '/freigaben', '/team', '/preise', '/impressum', '/datenschutz', '/nutzungsbedingungen', '/auftragsverarbeitung'],
+  },
 ] as const
 
 /**
@@ -104,7 +118,7 @@ export function navKeyForPath(pathname: string, role: NavRole = 'solo'): NavKey 
 }
 
 export function BottomNav({
-  active = 'overview',
+  active = 'athleteToday',
   onNavigate,
   items = NAV_ITEMS,
 }: {

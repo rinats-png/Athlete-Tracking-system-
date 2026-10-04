@@ -21,7 +21,11 @@
       "coachAthletes": "Athletes",
       "coachTest": "Test",
       "coachTeam": "Team",
-      "coachMore": "More"
+      "coachMore": "More",
+      "athleteToday": "Today",
+      "athletePerformance": "Performance",
+      "athleteTest": "Test",
+      "athleteMore": "More"
     },
     "overview": "Overview",
     "diagnostics": "Diagnostics",
@@ -32,7 +36,11 @@
     "coachAthletes": "Athletes",
     "coachTest": "Test",
     "coachTeam": "Team",
-    "coachMore": "More"
+    "coachMore": "More",
+    "athleteToday": "Today",
+    "athletePerformance": "Performance",
+    "athleteTest": "Test",
+    "athleteMore": "More"
   },
   "actions": {
     "startTest": "Start test",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Notify my coach about my activity",
     "notifyCoachHint": "If you are connected to a coach, they learn by push THAT you logged something — not what. You can turn this off here."
+  },
+  "athleteToday": {
+    "eyebrow": "Today",
+    "greeting": {
+      "morning": "Good morning{{name}}",
+      "day": "Good afternoon{{name}}",
+      "evening": "Good evening{{name}}"
+    },
+    "confidence": "Data confidence: {{level}}",
+    "coverage": "{{measured}} of {{total}} core tests",
+    "changes": {
+      "title": "Changes",
+      "sub": "Compared with the previous measurement, checked against measurement error.",
+      "all": "History",
+      "none": "From the second measurement of a test, the change appears here.",
+      "verdict": {
+        "better": "above measurement noise, better",
+        "worse": "above measurement noise, worse",
+        "within_noise": "within noise, no proven difference",
+        "unknown_error": "measurement error not yet known",
+        "first": "first measurement"
+      }
+    },
+    "gap": {
+      "title": "Largest measurable gap",
+      "body": "In your current profile this axis is at percentile {{score}}, with a high requirement for the discipline. A measurable gap is not a cause of competition performance.",
+      "none": "In your current profile no axis with a high requirement is below the reference midpoint.",
+      "open": "To the performance profile"
+    },
+    "session": {
+      "title": "Today's session",
+      "none": "No session entered.",
+      "add": "Add session",
+      "open": "Open session",
+      "untitled": "Session",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Next test",
+      "open": "Open test",
+      "none": "No test suggested."
+    },
+    "event": {
+      "title": "Competition",
+      "unnamed": "Competition",
+      "days_one": "in {{count}} day",
+      "days_other": "in {{count}} days",
+      "none": "No competition entered.",
+      "set": "Add competition",
+      "open": "Change competition"
+    }
+  },
+  "performance": {
+    "confidence": "Data confidence: {{level}}",
+    "level": {
+      "HIGH": "high",
+      "MODERATE": "moderate",
+      "LOW": "low",
+      "INSUFFICIENT": "insufficient"
+    }
   }
 }

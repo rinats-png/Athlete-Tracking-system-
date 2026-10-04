@@ -103,7 +103,7 @@ test.describe('In der Oberfläche', () => {
       await openIn(page, lang)
       const dict = readDict(lang)
       // Die Navigation trägt das Wörterbuch …
-      await expect(page.getByRole('button', { name: dict.nav.diagnostics }).first()).toBeVisible()
+      await expect(page.getByRole('button', { name: dict.nav.athleteTest }).first()).toBeVisible()
       await expect(page.locator('html')).toHaveAttribute('lang', lang)
 
       // … der Katalog die ergänzten Inhalte: der Cooper-Test heisst in jeder

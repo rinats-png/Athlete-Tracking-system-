@@ -42,7 +42,7 @@ test.describe('Gastmodus', () => {
     await expect(page.getByText('Dein Wert')).toBeVisible()
 
     // 5. Und in der Übersicht entsteht ein Profil
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Testperson')).toBeVisible()
     // Das Leistungsprofil steht als Orb da — seit dem Umbau auf «Performance
     // OS» ist die Form die Aussage, nicht mehr eine Balkenliste.

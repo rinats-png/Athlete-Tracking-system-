@@ -5,7 +5,7 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { auditPolicies } from '../scripts/auditPolicies.mjs'
 // @ts-expect-error — siehe oben.
 import { scanSecrets } from '../scripts/scanSecrets.mjs'
-import { openGuest, readDict } from './helpers'
+import { openGuest, readDict, openProfileViaNav } from './helpers'
 import {
   FREE_ATTEMPTS,
   MAX_DELAY_MS,
@@ -176,7 +176,7 @@ test.describe('Gerät leeren beim Abmelden', () => {
     })
     // Über die Navigation statt per `goto`: der Profilbildschirm wird
     // nachgeladen, und ein direkter Aufruf misst dann den Ladezustand.
-    await page.getByRole('button', { name: 'PROFIL' }).click()
+    await openProfileViaNav(page)
 
     await page.getByTestId('sign-out-wipe').click()
     // Ohne Bestätigung passiert nichts: der Weg ist unumkehrbar.
@@ -203,7 +203,7 @@ test.describe('Gerät leeren beim Abmelden', () => {
     // Die Gegenprobe gehört dazu: wäre das Löschen die Vorgabe, verlöre jeder
     // Athlet beim Abmelden seine Messreihe (§32).
     await openGuest(page)
-    await page.getByRole('button', { name: 'PROFIL' }).click()
+    await openProfileViaNav(page)
     await page.getByRole('button', { name: readDict('de').auth.signOut, exact: true }).click()
     await page.waitForURL('**/')
     expect(await page.evaluate(() => localStorage.getItem('kydon.data.v1'))).not.toBeNull()

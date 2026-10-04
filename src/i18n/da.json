@@ -21,7 +21,11 @@
       "coachAthletes": "Atleter",
       "coachTest": "Test",
       "coachTeam": "Hold",
-      "coachMore": "Mere"
+      "coachMore": "Mere",
+      "athleteToday": "I dag",
+      "athletePerformance": "Præstation",
+      "athleteTest": "Test",
+      "athleteMore": "Mere"
     },
     "overview": "Oversigt",
     "diagnostics": "Diagnostik",
@@ -32,7 +36,11 @@
     "coachAthletes": "Atleter",
     "coachTest": "Test",
     "coachTeam": "Hold",
-    "coachMore": "Mere"
+    "coachMore": "Mere",
+    "athleteToday": "I dag",
+    "athletePerformance": "Præstation",
+    "athleteTest": "Test",
+    "athleteMore": "Mere"
   },
   "actions": {
     "startTest": "Start test",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Giv min træner besked om min aktivitet",
     "notifyCoachHint": "Er du knyttet til en træner, får han via push at vide, AT du har registreret noget — ikke hvad. Du kan slå det fra her."
+  },
+  "athleteToday": {
+    "eyebrow": "I dag",
+    "greeting": {
+      "morning": "Godmorgen{{name}}",
+      "day": "God dag{{name}}",
+      "evening": "God aften{{name}}"
+    },
+    "confidence": "Datapålidelighed: {{level}}",
+    "coverage": "{{measured}} af {{total}} kernetests",
+    "changes": {
+      "title": "Ændringer",
+      "sub": "Sammenlignet med forrige måling, vurderet mod målefejlen.",
+      "all": "Historik",
+      "none": "Fra den anden måling af en test vises ændringen her.",
+      "verdict": {
+        "better": "over målestøjen, bedre",
+        "worse": "over målestøjen, dårligere",
+        "within_noise": "inden for støjen, ingen påvist forskel",
+        "unknown_error": "målefejl endnu ukendt",
+        "first": "første måling"
+      }
+    },
+    "gap": {
+      "title": "Største målbare hul",
+      "body": "I den nuværende profil ligger denne akse på percentil {{score}}, ved højt krav i disciplinen. Et målbart hul er ingen årsag til konkurrenceresultatet.",
+      "none": "I den nuværende profil ligger ingen akse med højt krav under referencens midte.",
+      "open": "Til præstationsprofilen"
+    },
+    "session": {
+      "title": "Dagens pas",
+      "none": "Intet pas registreret.",
+      "add": "Registrér pas",
+      "open": "Åbn passet",
+      "untitled": "Pas",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Næste test",
+      "open": "Åbn testen",
+      "none": "Ingen test foreslået."
+    },
+    "event": {
+      "title": "Konkurrence",
+      "unnamed": "Konkurrence",
+      "days_one": "om {{count}} dag",
+      "days_other": "om {{count}} dage",
+      "none": "Ingen konkurrence registreret.",
+      "set": "Registrér konkurrence",
+      "open": "Ændr konkurrence"
+    }
+  },
+  "performance": {
+    "confidence": "Datapålidelighed: {{level}}",
+    "level": {
+      "HIGH": "høj",
+      "MODERATE": "middel",
+      "LOW": "lav",
+      "INSUFFICIENT": "utilstrækkelig"
+    }
   }
 }

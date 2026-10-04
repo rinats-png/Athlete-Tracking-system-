@@ -8,7 +8,7 @@ import { openDemo } from './helpers'
 
 const MIN_TARGET = 44
 
-const ROUTES = ['/', '/tests', '/verlauf', '/profil']
+const ROUTES = ['/', '/tests', '/verlauf', '/profil', '/performance', '/mehr']
 
 for (const route of ROUTES) {
   test(`Trefferflächen auf ${route}`, async ({ page }) => {

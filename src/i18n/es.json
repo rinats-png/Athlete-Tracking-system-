@@ -21,7 +21,11 @@
       "coachAthletes": "Atletas",
       "coachTest": "Test",
       "coachTeam": "Equipo",
-      "coachMore": "Más"
+      "coachMore": "Más",
+      "athleteToday": "Hoy",
+      "athletePerformance": "Rendimiento",
+      "athleteTest": "Test",
+      "athleteMore": "Más"
     },
     "overview": "Resumen",
     "diagnostics": "Diagnóstico",
@@ -32,7 +36,11 @@
     "coachAthletes": "Atletas",
     "coachTest": "Test",
     "coachTeam": "Equipo",
-    "coachMore": "Más"
+    "coachMore": "Más",
+    "athleteToday": "Hoy",
+    "athletePerformance": "Rendimiento",
+    "athleteTest": "Test",
+    "athleteMore": "Más"
   },
   "actions": {
     "startTest": "Iniciar test",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Avisar a mi entrenador de mi actividad",
     "notifyCoachHint": "Si estás conectado a un entrenador, se entera por push DE QUE has registrado algo — no de qué. Puedes desactivarlo aquí."
+  },
+  "athleteToday": {
+    "eyebrow": "Hoy",
+    "greeting": {
+      "morning": "Buenos días{{name}}",
+      "day": "Buenas tardes{{name}}",
+      "evening": "Buenas noches{{name}}"
+    },
+    "confidence": "Fiabilidad de los datos: {{level}}",
+    "coverage": "{{measured}} de {{total}} tests clave",
+    "changes": {
+      "title": "Cambios",
+      "sub": "Respecto a la medición anterior, comprobados frente al error de medición.",
+      "all": "Historial",
+      "none": "Desde la segunda medición de un test, aquí aparece el cambio.",
+      "verdict": {
+        "better": "por encima del ruido de medición, mejor",
+        "worse": "por encima del ruido de medición, peor",
+        "within_noise": "dentro del ruido, sin diferencia demostrada",
+        "unknown_error": "error de medición aún desconocido",
+        "first": "primera medición"
+      }
+    },
+    "gap": {
+      "title": "Mayor brecha medible",
+      "body": "En el perfil actual este eje está en el percentil {{score}}, con una exigencia alta de la disciplina. Una brecha medible no es la causa del rendimiento en competición.",
+      "none": "En el perfil actual ningún eje de exigencia alta está por debajo de la mitad de la referencia.",
+      "open": "Al perfil de rendimiento"
+    },
+    "session": {
+      "title": "Sesión de hoy",
+      "none": "Ninguna sesión registrada.",
+      "add": "Registrar sesión",
+      "open": "Abrir sesión",
+      "untitled": "Sesión",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Próximo test",
+      "open": "Abrir test",
+      "none": "Ningún test propuesto."
+    },
+    "event": {
+      "title": "Competición",
+      "unnamed": "Competición",
+      "days_one": "en {{count}} día",
+      "days_other": "en {{count}} días",
+      "none": "Ninguna competición registrada.",
+      "set": "Registrar competición",
+      "open": "Cambiar competición"
+    }
+  },
+  "performance": {
+    "confidence": "Fiabilidad de los datos: {{level}}",
+    "level": {
+      "HIGH": "alta",
+      "MODERATE": "media",
+      "LOW": "baja",
+      "INSUFFICIENT": "insuficiente"
+    }
   }
 }

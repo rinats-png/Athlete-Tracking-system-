@@ -21,7 +21,11 @@
       "coachAthletes": "Utøvere",
       "coachTest": "Test",
       "coachTeam": "Lag",
-      "coachMore": "Mer"
+      "coachMore": "Mer",
+      "athleteToday": "I dag",
+      "athletePerformance": "Prestasjon",
+      "athleteTest": "Test",
+      "athleteMore": "Mer"
     },
     "overview": "Oversikt",
     "diagnostics": "Diagnostikk",
@@ -32,7 +36,11 @@
     "coachAthletes": "Utøvere",
     "coachTest": "Test",
     "coachTeam": "Lag",
-    "coachMore": "Mer"
+    "coachMore": "Mer",
+    "athleteToday": "I dag",
+    "athletePerformance": "Prestasjon",
+    "athleteTest": "Test",
+    "athleteMore": "Mer"
   },
   "actions": {
     "startTest": "Start test",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Varsle treneren min om aktiviteten min",
     "notifyCoachHint": "Er du knyttet til en trener, får han vite via push AT du har registrert noe — ikke hva. Du kan slå det av her."
+  },
+  "athleteToday": {
+    "eyebrow": "I dag",
+    "greeting": {
+      "morning": "God morgen{{name}}",
+      "day": "God dag{{name}}",
+      "evening": "God kveld{{name}}"
+    },
+    "confidence": "Datapålitelighet: {{level}}",
+    "coverage": "{{measured}} av {{total}} kjernetester",
+    "changes": {
+      "title": "Endringer",
+      "sub": "Sammenlignet med forrige måling, vurdert mot målefeilen.",
+      "all": "Historikk",
+      "none": "Fra den andre målingen av en test vises endringen her.",
+      "verdict": {
+        "better": "over målestøyen, bedre",
+        "worse": "over målestøyen, dårligere",
+        "within_noise": "innenfor støyen, ingen påvist forskjell",
+        "unknown_error": "målefeil ennå ukjent",
+        "first": "første måling"
+      }
+    },
+    "gap": {
+      "title": "Største målbare gap",
+      "body": "I den nåværende profilen ligger denne aksen på persentil {{score}}, ved høyt krav i disiplinen. Et målbart gap er ingen årsak til konkurranseprestasjonen.",
+      "none": "I den nåværende profilen ligger ingen akse med høyt krav under referansens midtpunkt.",
+      "open": "Til prestasjonsprofilen"
+    },
+    "session": {
+      "title": "Dagens økt",
+      "none": "Ingen økt registrert.",
+      "add": "Registrer økt",
+      "open": "Åpne økten",
+      "untitled": "Økt",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Neste test",
+      "open": "Åpne testen",
+      "none": "Ingen test foreslått."
+    },
+    "event": {
+      "title": "Konkurranse",
+      "unnamed": "Konkurranse",
+      "days_one": "om {{count}} dag",
+      "days_other": "om {{count}} dager",
+      "none": "Ingen konkurranse registrert.",
+      "set": "Registrer konkurranse",
+      "open": "Endre konkurranse"
+    }
+  },
+  "performance": {
+    "confidence": "Datapålitelighet: {{level}}",
+    "level": {
+      "HIGH": "høy",
+      "MODERATE": "middels",
+      "LOW": "lav",
+      "INSUFFICIENT": "utilstrekkelig"
+    }
   }
 }

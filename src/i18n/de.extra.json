@@ -2614,5 +2614,56 @@
         "body": "Was sich über die Zeit gemessen verändert hat."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Performance",
+    "title": "Leistungsprofil",
+    "intro": "Was deine Messungen zeigen: Perzentil je Dimension, mit Referenz, Alter der Messung und Datenlage. Kein Gesamtwert.",
+    "basis": {
+      "title": "Datenbasis",
+      "coverage": "Abdeckung der Kerntests",
+      "oldest": "Ältester Test",
+      "days_one": "vor {{count}} Tag",
+      "days_other": "vor {{count}} Tagen",
+      "references": "Referenzabdeckung",
+      "referencesValue": "{{covered}} von {{total}} Dimensionen",
+      "missing": "Es fehlen: {{names}}.",
+      "stale": "{{count}} Kerntests sind älter als 90 Tage.",
+      "noTotal": "Kein Gesamtwert: Er würde fehlende Dimensionen verdecken."
+    },
+    "radar": {
+      "title": "Profil im Perzentil der Referenzgruppe",
+      "note": "Achsen ohne Daten oder Referenz bleiben leer."
+    },
+    "dimensions": {
+      "title": "Dimensionen",
+      "sub": "Perzentil gegenüber der Referenz, mit Alter der letzten Messung.",
+      "unmeasured": "Noch nicht gemessen",
+      "noReference": "Wert vorhanden, Perzentil nicht berechenbar",
+      "reference": "Perzentil gegenüber der Referenz",
+      "age_one": "Test vor {{count}} Tag",
+      "age_other": "Test vor {{count}} Tagen",
+      "open": "unter der Referenzmitte bei hoher Anforderung"
+    },
+    "status": {
+      "noReference": "keine Referenz",
+      "unmeasured": "keine Daten"
+    },
+    "cards": {
+      "strongest": "Größte Stärke",
+      "gap": "Größte messbare Lücke",
+      "change": "Größte Veränderung",
+      "next": "Empfohlener nächster Test",
+      "none": "Noch nicht ermittelbar.",
+      "gapNote": "Perzentil {{score}} im vorhandenen Profil",
+      "gapNone": "Keine Achse mit hoher Anforderung unter der Referenzmitte.",
+      "changeNone": "Noch keine belegte Veränderung."
+    },
+    "links": {
+      "history": "Verlauf",
+      "analysis": "Analyse",
+      "report": "Bericht",
+      "overview": "Ausführliche Übersicht"
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Suspense, lazy, useCallback, useEffect, useRef, useState, type Componen
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { AppShell } from '@/routes/AppShell'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
+import { AthleteToday } from '@/features/today/AthleteToday'
 import { DiagnosticsHub } from '@/features/diagnostics/DiagnosticsHub'
 
 /*
@@ -108,7 +109,7 @@ const COACH_TODAY = screen(() => import('@/features/coach/CoachToday'), 'CoachTo
 /** Startseite: Trainer sehen «Heute» mit der Teamlage, alle anderen die Übersicht. */
 function HomeRoute() {
   const { role } = useAppData()
-  return role === 'coach' ? COACH_TODAY : <OverviewScreen />
+  return role === 'coach' ? COACH_TODAY : <AthleteToday />
 }
 
 const router = createBrowserRouter([
@@ -140,6 +141,8 @@ const router = createBrowserRouter([
       { path: 'community', element: screen(() => import('@/features/analysis/CommunityScreen'), 'CommunityScreen') },
       { path: 'trainer', element: screen(() => import('@/features/coach/CoachScreen'), 'CoachScreen') },
       { path: 'trainer/team', element: screen(() => import('@/features/coach/TeamHub'), 'TeamHub') },
+      { path: 'performance', element: screen(() => import('@/features/performance/PerformanceScreen'), 'PerformanceScreen') },
+      { path: 'uebersicht', element: <OverviewScreen /> },
       { path: 'mehr', element: screen(() => import('@/features/more/MoreScreen'), 'MoreScreen') },
       { path: 'trainer/gruppentest', element: screen(() => import('@/features/coach/GroupTestScreen'), 'GroupTestScreen') },
       { path: 'trainer/testtag', element: screen(() => import('@/features/coach/TestDayScreen'), 'TestDayScreen') },

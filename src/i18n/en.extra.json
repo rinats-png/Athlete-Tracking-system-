@@ -2614,5 +2614,56 @@
         "body": "What has changed in measured terms over time."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Performance",
+    "title": "Performance profile",
+    "intro": "What your measurements show: percentile per dimension, with reference, age of the measurement and data confidence. No overall score.",
+    "basis": {
+      "title": "Data basis",
+      "coverage": "Core test coverage",
+      "oldest": "Oldest test",
+      "days_one": "{{count}} day ago",
+      "days_other": "{{count}} days ago",
+      "references": "Reference coverage",
+      "referencesValue": "{{covered}} of {{total}} dimensions",
+      "missing": "Missing: {{names}}.",
+      "stale": "{{count}} core tests are older than 90 days.",
+      "noTotal": "No overall score: it would hide missing dimensions."
+    },
+    "radar": {
+      "title": "Profile as percentile of the reference group",
+      "note": "Axes without data or reference stay empty."
+    },
+    "dimensions": {
+      "title": "Dimensions",
+      "sub": "Percentile against the reference, with age of the latest measurement.",
+      "unmeasured": "Not measured yet",
+      "noReference": "Value present, percentile cannot be calculated",
+      "reference": "Percentile against the reference",
+      "age_one": "Test {{count}} day ago",
+      "age_other": "Test {{count}} days ago",
+      "open": "below the reference midpoint with a high requirement"
+    },
+    "status": {
+      "noReference": "no reference",
+      "unmeasured": "no data"
+    },
+    "cards": {
+      "strongest": "Biggest strength",
+      "gap": "Largest measurable gap",
+      "change": "Biggest change",
+      "next": "Recommended next test",
+      "none": "Cannot be determined yet.",
+      "gapNote": "Percentile {{score}} in the current profile",
+      "gapNone": "No axis with a high requirement below the reference midpoint.",
+      "changeNone": "No proven change yet."
+    },
+    "links": {
+      "history": "History",
+      "analysis": "Analysis",
+      "report": "Report",
+      "overview": "Detailed overview"
+    }
   }
 }

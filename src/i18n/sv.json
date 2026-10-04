@@ -21,7 +21,11 @@
       "coachAthletes": "Atleter",
       "coachTest": "Test",
       "coachTeam": "Lag",
-      "coachMore": "Mer"
+      "coachMore": "Mer",
+      "athleteToday": "Idag",
+      "athletePerformance": "Prestation",
+      "athleteTest": "Test",
+      "athleteMore": "Mer"
     },
     "overview": "Översikt",
     "diagnostics": "Diagnostik",
@@ -32,7 +36,11 @@
     "coachAthletes": "Atleter",
     "coachTest": "Test",
     "coachTeam": "Lag",
-    "coachMore": "Mer"
+    "coachMore": "Mer",
+    "athleteToday": "Idag",
+    "athletePerformance": "Prestation",
+    "athleteTest": "Test",
+    "athleteMore": "Mer"
   },
   "actions": {
     "startTest": "Starta test",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Meddela min tränare om min aktivitet",
     "notifyCoachHint": "Är du ansluten till en tränare får den via push veta ATT du har registrerat något — inte vad. Du kan stänga av det här."
+  },
+  "athleteToday": {
+    "eyebrow": "Idag",
+    "greeting": {
+      "morning": "God morgon{{name}}",
+      "day": "God dag{{name}}",
+      "evening": "God kväll{{name}}"
+    },
+    "confidence": "Datatillförlitlighet: {{level}}",
+    "coverage": "{{measured}} av {{total}} kärntester",
+    "changes": {
+      "title": "Förändringar",
+      "sub": "Jämfört med föregående mätning, prövade mot mätfelet.",
+      "all": "Historik",
+      "none": "Från andra mätningen av ett test visas förändringen här.",
+      "verdict": {
+        "better": "över mätbruset, bättre",
+        "worse": "över mätbruset, sämre",
+        "within_noise": "inom bruset, ingen belagd skillnad",
+        "unknown_error": "mätfel ännu okänt",
+        "first": "första mätningen"
+      }
+    },
+    "gap": {
+      "title": "Största mätbara lucka",
+      "body": "I den nuvarande profilen ligger den här axeln på percentil {{score}}, vid högt krav i disciplinen. En mätbar lucka är ingen orsak till tävlingsprestationen.",
+      "none": "I den nuvarande profilen ligger ingen axel med högt krav under referensens mitt.",
+      "open": "Till prestationsprofilen"
+    },
+    "session": {
+      "title": "Dagens pass",
+      "none": "Inget pass inlagt.",
+      "add": "Lägg in pass",
+      "open": "Öppna passet",
+      "untitled": "Pass",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Nästa test",
+      "open": "Öppna testet",
+      "none": "Inget test föreslaget."
+    },
+    "event": {
+      "title": "Tävling",
+      "unnamed": "Tävling",
+      "days_one": "om {{count}} dag",
+      "days_other": "om {{count}} dagar",
+      "none": "Ingen tävling inlagd.",
+      "set": "Lägg in tävling",
+      "open": "Ändra tävling"
+    }
+  },
+  "performance": {
+    "confidence": "Datatillförlitlighet: {{level}}",
+    "level": {
+      "HIGH": "hög",
+      "MODERATE": "medel",
+      "LOW": "låg",
+      "INSUFFICIENT": "otillräcklig"
+    }
   }
 }

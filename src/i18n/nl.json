@@ -21,7 +21,11 @@
       "coachAthletes": "Atleten",
       "coachTest": "Test",
       "coachTeam": "Team",
-      "coachMore": "Meer"
+      "coachMore": "Meer",
+      "athleteToday": "Vandaag",
+      "athletePerformance": "Prestatie",
+      "athleteTest": "Test",
+      "athleteMore": "Meer"
     },
     "overview": "Overzicht",
     "diagnostics": "Diagnostiek",
@@ -32,7 +36,11 @@
     "coachAthletes": "Atleten",
     "coachTest": "Test",
     "coachTeam": "Team",
-    "coachMore": "Meer"
+    "coachMore": "Meer",
+    "athleteToday": "Vandaag",
+    "athletePerformance": "Prestatie",
+    "athleteTest": "Test",
+    "athleteMore": "Meer"
   },
   "actions": {
     "startTest": "Test starten",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Mijn trainer op de hoogte brengen van mijn activiteit",
     "notifyCoachHint": "Ben je gekoppeld aan een trainer, dan hoort hij per push DAT je iets hebt vastgelegd — niet wat. Hier kun je dat uitzetten."
+  },
+  "athleteToday": {
+    "eyebrow": "Vandaag",
+    "greeting": {
+      "morning": "Goedemorgen{{name}}",
+      "day": "Goedemiddag{{name}}",
+      "evening": "Goedenavond{{name}}"
+    },
+    "confidence": "Betrouwbaarheid van de gegevens: {{level}}",
+    "coverage": "{{measured}} van {{total}} kerntests",
+    "changes": {
+      "title": "Veranderingen",
+      "sub": "Ten opzichte van de vorige meting, getoetst aan de meetfout.",
+      "all": "Verloop",
+      "none": "Vanaf de tweede meting van een test verschijnt hier de verandering.",
+      "verdict": {
+        "better": "boven de meetruis, beter",
+        "worse": "boven de meetruis, slechter",
+        "within_noise": "binnen de ruis, geen bewezen verschil",
+        "unknown_error": "meetfout nog onbekend",
+        "first": "eerste meting"
+      }
+    },
+    "gap": {
+      "title": "Grootste meetbare kloof",
+      "body": "In het huidige profiel ligt deze as op percentiel {{score}}, bij een hoge eis van de discipline. Een meetbare kloof is geen oorzaak van de wedstrijdprestatie.",
+      "none": "In het huidige profiel ligt geen as met een hoge eis onder het midden van de referentie.",
+      "open": "Naar het prestatieprofiel"
+    },
+    "session": {
+      "title": "Sessie van vandaag",
+      "none": "Geen sessie ingevoerd.",
+      "add": "Sessie invoeren",
+      "open": "Sessie openen",
+      "untitled": "Sessie",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Volgende test",
+      "open": "Test openen",
+      "none": "Geen test voorgesteld."
+    },
+    "event": {
+      "title": "Wedstrijd",
+      "unnamed": "Wedstrijd",
+      "days_one": "over {{count}} dag",
+      "days_other": "over {{count}} dagen",
+      "none": "Geen wedstrijd ingevoerd.",
+      "set": "Wedstrijd invoeren",
+      "open": "Wedstrijd wijzigen"
+    }
+  },
+  "performance": {
+    "confidence": "Betrouwbaarheid van de gegevens: {{level}}",
+    "level": {
+      "HIGH": "hoog",
+      "MODERATE": "gemiddeld",
+      "LOW": "laag",
+      "INSUFFICIENT": "onvoldoende"
+    }
   }
 }

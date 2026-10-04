@@ -2614,5 +2614,56 @@
         "body": "Ce qui a changé, mesuré, au fil du temps."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Performance",
+    "title": "Profil de performance",
+    "intro": "Ce que montrent tes mesures : centile par dimension, avec référence, âge de la mesure et fiabilité des données. Pas de valeur globale.",
+    "basis": {
+      "title": "Base de données",
+      "coverage": "Couverture des tests clés",
+      "oldest": "Test le plus ancien",
+      "days_one": "il y a {{count}} jour",
+      "days_other": "il y a {{count}} jours",
+      "references": "Couverture des références",
+      "referencesValue": "{{covered}} dimensions sur {{total}}",
+      "missing": "Manquent : {{names}}.",
+      "stale": "{{count}} tests clés ont plus de 90 jours.",
+      "noTotal": "Pas de valeur globale : elle masquerait les dimensions manquantes."
+    },
+    "radar": {
+      "title": "Profil en centile du groupe de référence",
+      "note": "Les axes sans données ou sans référence restent vides."
+    },
+    "dimensions": {
+      "title": "Dimensions",
+      "sub": "Centile par rapport à la référence, avec l'âge de la dernière mesure.",
+      "unmeasured": "Pas encore mesuré",
+      "noReference": "Valeur présente, centile non calculable",
+      "reference": "Centile par rapport à la référence",
+      "age_one": "Test il y a {{count}} jour",
+      "age_other": "Test il y a {{count}} jours",
+      "open": "sous le milieu de la référence avec une exigence élevée"
+    },
+    "status": {
+      "noReference": "pas de référence",
+      "unmeasured": "pas de données"
+    },
+    "cards": {
+      "strongest": "Plus grande force",
+      "gap": "Plus grand écart mesurable",
+      "change": "Plus grande évolution",
+      "next": "Prochain test recommandé",
+      "none": "Pas encore déterminable.",
+      "gapNote": "Centile {{score}} dans le profil actuel",
+      "gapNone": "Aucun axe à exigence élevée sous le milieu de la référence.",
+      "changeNone": "Pas encore d'évolution prouvée."
+    },
+    "links": {
+      "history": "Historique",
+      "analysis": "Analyse",
+      "report": "Rapport",
+      "overview": "Vue d'ensemble détaillée"
+    }
   }
 }

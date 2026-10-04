@@ -2614,5 +2614,56 @@
         "body": "Hvad der målbart har ændret sig over tid."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Præstation",
+    "title": "Præstationsprofil",
+    "intro": "Hvad dine målinger viser: percentil pr. dimension, med reference, målingens alder og datapålidelighed. Ingen samlet værdi.",
+    "basis": {
+      "title": "Datagrundlag",
+      "coverage": "Dækning af kernetests",
+      "oldest": "Ældste test",
+      "days_one": "for {{count}} dag siden",
+      "days_other": "for {{count}} dage siden",
+      "references": "Referencedækning",
+      "referencesValue": "{{covered}} af {{total}} dimensioner",
+      "missing": "Mangler: {{names}}.",
+      "stale": "{{count}} kernetests er ældre end 90 dage.",
+      "noTotal": "Ingen samlet værdi: den ville skjule manglende dimensioner."
+    },
+    "radar": {
+      "title": "Profil i percentil for referencegruppen",
+      "note": "Akser uden data eller reference forbliver tomme."
+    },
+    "dimensions": {
+      "title": "Dimensioner",
+      "sub": "Percentil mod referencen, med alderen på seneste måling.",
+      "unmeasured": "Endnu ikke målt",
+      "noReference": "Værdi findes, percentil kan ikke beregnes",
+      "reference": "Percentil mod referencen",
+      "age_one": "Test for {{count}} dag siden",
+      "age_other": "Test for {{count}} dage siden",
+      "open": "under referencens midte ved højt krav"
+    },
+    "status": {
+      "noReference": "ingen reference",
+      "unmeasured": "ingen data"
+    },
+    "cards": {
+      "strongest": "Største styrke",
+      "gap": "Største målbare hul",
+      "change": "Største ændring",
+      "next": "Anbefalet næste test",
+      "none": "Kan ikke fastslås endnu.",
+      "gapNote": "Percentil {{score}} i den nuværende profil",
+      "gapNone": "Ingen akse med højt krav under referencens midte.",
+      "changeNone": "Ingen påvist ændring endnu."
+    },
+    "links": {
+      "history": "Historik",
+      "analysis": "Analyse",
+      "report": "Rapport",
+      "overview": "Detaljeret oversigt"
+    }
   }
 }

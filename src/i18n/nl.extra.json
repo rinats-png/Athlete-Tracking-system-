@@ -2614,5 +2614,56 @@
         "body": "Wat er in de loop van de tijd gemeten is veranderd."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Prestatie",
+    "title": "Prestatieprofiel",
+    "intro": "Wat je metingen laten zien: percentiel per dimensie, met referentie, leeftijd van de meting en betrouwbaarheid. Geen totaalwaarde.",
+    "basis": {
+      "title": "Gegevensbasis",
+      "coverage": "Dekking van de kerntests",
+      "oldest": "Oudste test",
+      "days_one": "{{count}} dag geleden",
+      "days_other": "{{count}} dagen geleden",
+      "references": "Dekking van referenties",
+      "referencesValue": "{{covered}} van {{total}} dimensies",
+      "missing": "Ontbreekt: {{names}}.",
+      "stale": "{{count}} kerntests zijn ouder dan 90 dagen.",
+      "noTotal": "Geen totaalwaarde: die zou ontbrekende dimensies verbergen."
+    },
+    "radar": {
+      "title": "Profiel in percentiel van de referentiegroep",
+      "note": "Assen zonder gegevens of referentie blijven leeg."
+    },
+    "dimensions": {
+      "title": "Dimensies",
+      "sub": "Percentiel ten opzichte van de referentie, met de leeftijd van de laatste meting.",
+      "unmeasured": "Nog niet gemeten",
+      "noReference": "Waarde aanwezig, percentiel niet te berekenen",
+      "reference": "Percentiel ten opzichte van de referentie",
+      "age_one": "Test {{count}} dag geleden",
+      "age_other": "Test {{count}} dagen geleden",
+      "open": "onder het midden van de referentie bij een hoge eis"
+    },
+    "status": {
+      "noReference": "geen referentie",
+      "unmeasured": "geen gegevens"
+    },
+    "cards": {
+      "strongest": "Grootste sterkte",
+      "gap": "Grootste meetbare kloof",
+      "change": "Grootste verandering",
+      "next": "Aanbevolen volgende test",
+      "none": "Nog niet te bepalen.",
+      "gapNote": "Percentiel {{score}} in het huidige profiel",
+      "gapNone": "Geen as met een hoge eis onder het midden van de referentie.",
+      "changeNone": "Nog geen bewezen verandering."
+    },
+    "links": {
+      "history": "Verloop",
+      "analysis": "Analyse",
+      "report": "Rapport",
+      "overview": "Uitgebreid overzicht"
+    }
   }
 }

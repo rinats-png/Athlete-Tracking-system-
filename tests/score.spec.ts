@@ -54,7 +54,7 @@ test.describe('Zusammenfassung', () => {
 
   test('im Bildschirm steht die Abdeckung neben der Zahl', async ({ page }) => {
     await openDemo(page)
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     // Entweder eine Zahl mit Abdeckung, oder die Ansage, dass Achsen fehlen —
     // aber nie eine Zahl allein.
     const mitAbdeckung = page.getByText(/von \d+ Achsen mit belegter Referenz/)

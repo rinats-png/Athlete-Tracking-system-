@@ -2614,5 +2614,56 @@
         "body": "Qué ha cambiado, medido, con el tiempo."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Rendimiento",
+    "title": "Perfil de rendimiento",
+    "intro": "Lo que muestran tus mediciones: percentil por dimensión, con referencia, antigüedad de la medición y fiabilidad de los datos. Sin valor global.",
+    "basis": {
+      "title": "Base de datos",
+      "coverage": "Cobertura de tests clave",
+      "oldest": "Test más antiguo",
+      "days_one": "hace {{count}} día",
+      "days_other": "hace {{count}} días",
+      "references": "Cobertura de referencias",
+      "referencesValue": "{{covered}} de {{total}} dimensiones",
+      "missing": "Faltan: {{names}}.",
+      "stale": "{{count}} tests clave tienen más de 90 días.",
+      "noTotal": "Sin valor global: ocultaría las dimensiones que faltan."
+    },
+    "radar": {
+      "title": "Perfil en percentil del grupo de referencia",
+      "note": "Los ejes sin datos o sin referencia quedan vacíos."
+    },
+    "dimensions": {
+      "title": "Dimensiones",
+      "sub": "Percentil respecto a la referencia, con la antigüedad de la última medición.",
+      "unmeasured": "Aún sin medir",
+      "noReference": "Valor presente, percentil no calculable",
+      "reference": "Percentil respecto a la referencia",
+      "age_one": "Test hace {{count}} día",
+      "age_other": "Test hace {{count}} días",
+      "open": "por debajo de la mitad de la referencia con exigencia alta"
+    },
+    "status": {
+      "noReference": "sin referencia",
+      "unmeasured": "sin datos"
+    },
+    "cards": {
+      "strongest": "Mayor fortaleza",
+      "gap": "Mayor brecha medible",
+      "change": "Mayor cambio",
+      "next": "Próximo test recomendado",
+      "none": "Aún no determinable.",
+      "gapNote": "Percentil {{score}} en el perfil actual",
+      "gapNone": "Ningún eje de exigencia alta por debajo de la mitad de la referencia.",
+      "changeNone": "Aún sin cambio demostrado."
+    },
+    "links": {
+      "history": "Historial",
+      "analysis": "Análisis",
+      "report": "Informe",
+      "overview": "Resumen detallado"
+    }
   }
 }

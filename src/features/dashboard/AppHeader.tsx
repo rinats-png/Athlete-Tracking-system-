@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils'
  */
 export function AppHeader({
   mode,
-  active = 'overview',
+  active = 'athleteToday',
   onNavigate,
   items = NAV_ITEMS,
 }: {

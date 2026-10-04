@@ -21,7 +21,11 @@
       "coachAthletes": "Athleten",
       "coachTest": "Test",
       "coachTeam": "Team",
-      "coachMore": "Mehr"
+      "coachMore": "Mehr",
+      "athleteToday": "Heute",
+      "athletePerformance": "Leistung",
+      "athleteTest": "Test",
+      "athleteMore": "Mehr"
     },
     "overview": "Übersicht",
     "diagnostics": "Diagnostik",
@@ -32,7 +36,11 @@
     "coachAthletes": "Athleten",
     "coachTest": "Test",
     "coachTeam": "Team",
-    "coachMore": "Mehr"
+    "coachMore": "Mehr",
+    "athleteToday": "Heute",
+    "athletePerformance": "Leistung",
+    "athleteTest": "Test",
+    "athleteMore": "Mehr"
   },
   "actions": {
     "startTest": "Test starten",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Meinen Trainer bei Aktivität benachrichtigen",
     "notifyCoachHint": "Wenn du mit einem Trainer verbunden bist, erfährt er per Push, DASS du etwas eingetragen hast – nicht was. Du kannst das hier ausschalten."
+  },
+  "athleteToday": {
+    "eyebrow": "Heute",
+    "greeting": {
+      "morning": "Guten Morgen{{name}}",
+      "day": "Guten Tag{{name}}",
+      "evening": "Guten Abend{{name}}"
+    },
+    "confidence": "Datenlage: {{level}}",
+    "coverage": "{{measured}} von {{total}} Kerntests",
+    "changes": {
+      "title": "Veränderungen",
+      "sub": "Gegenüber der Vormessung, geprüft gegen den Messfehler.",
+      "all": "Verlauf",
+      "none": "Ab der zweiten Messung eines Tests steht hier die Veränderung.",
+      "verdict": {
+        "better": "über der Messschwankung, besser",
+        "worse": "über der Messschwankung, schlechter",
+        "within_noise": "im Rauschen, kein belegter Unterschied",
+        "unknown_error": "Messfehler noch unbekannt",
+        "first": "erste Messung"
+      }
+    },
+    "gap": {
+      "title": "Größte messbare Lücke",
+      "body": "Im vorhandenen Profil liegt diese Achse beim Perzentil {{score}}, bei hoher Anforderung der Disziplin. Eine messbare Lücke ist keine Ursache für die Wettkampfleistung.",
+      "none": "Im vorhandenen Profil liegt keine Achse mit hoher Anforderung unter der Referenzmitte.",
+      "open": "Zum Leistungsprofil"
+    },
+    "session": {
+      "title": "Heutige Einheit",
+      "none": "Keine Einheit eingetragen.",
+      "add": "Einheit eintragen",
+      "open": "Einheit öffnen",
+      "untitled": "Einheit",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Nächster Test",
+      "open": "Test öffnen",
+      "none": "Kein Test vorgeschlagen."
+    },
+    "event": {
+      "title": "Wettkampf",
+      "unnamed": "Wettkampf",
+      "days_one": "in {{count}} Tag",
+      "days_other": "in {{count}} Tagen",
+      "none": "Kein Wettkampf eingetragen.",
+      "set": "Wettkampf eintragen",
+      "open": "Wettkampf ändern"
+    }
+  },
+  "performance": {
+    "confidence": "Datenlage: {{level}}",
+    "level": {
+      "HIGH": "hoch",
+      "MODERATE": "mittel",
+      "LOW": "gering",
+      "INSUFFICIENT": "unzureichend"
+    }
   }
 }

@@ -276,3 +276,9 @@ export function cipherBytes(blob: string): string {
 
 /** Kürzer als das ist kein Beleg, sondern Zufall. */
 export const MIN_EVIDENCE_LENGTH = 4
+
+/** Öffnet das Profil über die Leiste: Mehr, dann «Profil». */
+export async function openProfileViaNav(page: Page) {
+  await page.getByRole('navigation', { name: 'Hauptnavigation' }).getByRole('button', { name: 'Mehr' }).click()
+  await page.getByTestId('more-screen').getByRole('link', { name: 'Profil' }).click()
+}

@@ -56,7 +56,7 @@ test.describe('Navigation dauerhaft erreichbar', () => {
       nav?.setAttribute('data-probe', 'original')
     })
 
-    for (const label of [/^Diagnostik$/, /^Verlauf$/, /^Profil$/, /^Übersicht$/]) {
+    for (const label of [/^Test$/, /^Leistung$/, /^Mehr$/, /^Heute$/]) {
       await page.getByRole('button', { name: label }).first().click()
       await page.waitForTimeout(150)
       const still = await page.evaluate(() => {
@@ -95,8 +95,8 @@ test.describe('Navigation dauerhaft erreichbar', () => {
 
   test('aktiver Eintrag folgt der Route und übersteht einen Reload', async ({ page }) => {
     await openDemo(page)
-    await page.getByRole('button', { name: /^Verlauf$/ }).first().click()
-    await expect(page).toHaveURL(/\/verlauf$/)
+    await page.getByRole('button', { name: /^Leistung$/ }).first().click()
+    await expect(page).toHaveURL(/\/performance$/)
 
     await page.reload({ waitUntil: 'domcontentloaded' })
     const current = await page.evaluate(() =>
@@ -104,7 +104,7 @@ test.describe('Navigation dauerhaft erreichbar', () => {
         el.textContent?.trim(),
       ),
     )
-    expect(current.join(' ')).toMatch(/Verlauf/i)
+    expect(current.join(' ')).toMatch(/Leistung/i)
   })
 })
 

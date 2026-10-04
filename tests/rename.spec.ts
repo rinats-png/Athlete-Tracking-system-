@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { readFileSync, existsSync } from 'node:fs'
 import { emptyData } from '../src/lib/store/schema'
-import { blockFonts, openGuest } from './helpers'
+import { blockFonts, openGuest, openProfileViaNav } from './helpers'
 
 /**
  * Die Umbenennung von Baseline zu Kydon — und was dabei NICHT passieren darf.
@@ -122,7 +122,7 @@ test.describe('Alte Exportdateien bleiben einlesbar', () => {
     // Ein eingerichteter Bestand, damit die Navigation steht — der Import
     // ersetzt ihn dann durch die Datei.
     await openGuest(page)
-    await page.getByRole('button', { name: 'PROFIL' }).click()
+    await openProfileViaNav(page)
     await page.getByLabel('Importieren').setInputFiles({
       name: 'alt.json',
       mimeType: 'application/json',

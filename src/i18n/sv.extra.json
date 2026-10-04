@@ -2614,5 +2614,56 @@
         "body": "Vad som mätbart har förändrats över tid."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Prestation",
+    "title": "Prestationsprofil",
+    "intro": "Vad dina mätningar visar: percentil per dimension, med referens, mätningens ålder och datatillförlitlighet. Inget totalvärde.",
+    "basis": {
+      "title": "Dataunderlag",
+      "coverage": "Täckning av kärntester",
+      "oldest": "Äldsta testet",
+      "days_one": "för {{count}} dag sedan",
+      "days_other": "för {{count}} dagar sedan",
+      "references": "Referenstäckning",
+      "referencesValue": "{{covered}} av {{total}} dimensioner",
+      "missing": "Saknas: {{names}}.",
+      "stale": "{{count}} kärntester är äldre än 90 dagar.",
+      "noTotal": "Inget totalvärde: det skulle dölja saknade dimensioner."
+    },
+    "radar": {
+      "title": "Profil i percentil för referensgruppen",
+      "note": "Axlar utan data eller referens förblir tomma."
+    },
+    "dimensions": {
+      "title": "Dimensioner",
+      "sub": "Percentil mot referensen, med åldern på senaste mätningen.",
+      "unmeasured": "Ännu inte mätt",
+      "noReference": "Värde finns, percentil kan inte beräknas",
+      "reference": "Percentil mot referensen",
+      "age_one": "Test för {{count}} dag sedan",
+      "age_other": "Test för {{count}} dagar sedan",
+      "open": "under referensens mitt vid högt krav"
+    },
+    "status": {
+      "noReference": "ingen referens",
+      "unmeasured": "inga data"
+    },
+    "cards": {
+      "strongest": "Största styrka",
+      "gap": "Största mätbara lucka",
+      "change": "Största förändring",
+      "next": "Rekommenderat nästa test",
+      "none": "Kan inte fastställas ännu.",
+      "gapNote": "Percentil {{score}} i den nuvarande profilen",
+      "gapNone": "Ingen axel med högt krav under referensens mitt.",
+      "changeNone": "Ingen belagd förändring ännu."
+    },
+    "links": {
+      "history": "Historik",
+      "analysis": "Analys",
+      "report": "Rapport",
+      "overview": "Detaljerad översikt"
+    }
   }
 }

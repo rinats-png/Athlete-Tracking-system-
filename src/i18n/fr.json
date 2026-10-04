@@ -21,7 +21,11 @@
       "coachAthletes": "Athlètes",
       "coachTest": "Test",
       "coachTeam": "Équipe",
-      "coachMore": "Plus"
+      "coachMore": "Plus",
+      "athleteToday": "Aujourd'hui",
+      "athletePerformance": "Performance",
+      "athleteTest": "Test",
+      "athleteMore": "Plus"
     },
     "overview": "Aperçu",
     "diagnostics": "Diagnostic",
@@ -32,7 +36,11 @@
     "coachAthletes": "Athlètes",
     "coachTest": "Test",
     "coachTeam": "Équipe",
-    "coachMore": "Plus"
+    "coachMore": "Plus",
+    "athleteToday": "Aujourd'hui",
+    "athletePerformance": "Performance",
+    "athleteTest": "Test",
+    "athleteMore": "Plus"
   },
   "actions": {
     "startTest": "Lancer le test",
@@ -1943,5 +1951,65 @@
     },
     "notifyCoach": "Prévenir mon entraîneur de mon activité",
     "notifyCoachHint": "Si tu es connecté à un entraîneur, il apprend par push QUE tu as saisi quelque chose — pas quoi. Tu peux le désactiver ici."
+  },
+  "athleteToday": {
+    "eyebrow": "Aujourd'hui",
+    "greeting": {
+      "morning": "Bonjour{{name}}",
+      "day": "Bonne journée{{name}}",
+      "evening": "Bonsoir{{name}}"
+    },
+    "confidence": "Fiabilité des données : {{level}}",
+    "coverage": "{{measured}} tests clés sur {{total}}",
+    "changes": {
+      "title": "Évolutions",
+      "sub": "Par rapport à la mesure précédente, vérifiées par rapport à l'erreur de mesure.",
+      "all": "Historique",
+      "none": "Dès la deuxième mesure d'un test, l'évolution apparaît ici.",
+      "verdict": {
+        "better": "au-dessus du bruit de mesure, meilleur",
+        "worse": "au-dessus du bruit de mesure, moins bon",
+        "within_noise": "dans le bruit, pas de différence prouvée",
+        "unknown_error": "erreur de mesure encore inconnue",
+        "first": "première mesure"
+      }
+    },
+    "gap": {
+      "title": "Plus grand écart mesurable",
+      "body": "Dans le profil actuel, cet axe est au centile {{score}}, avec une exigence élevée de la discipline. Un écart mesurable n'est pas la cause de la performance en compétition.",
+      "none": "Dans le profil actuel, aucun axe à exigence élevée n'est sous le milieu de la référence.",
+      "open": "Vers le profil de performance"
+    },
+    "session": {
+      "title": "Séance du jour",
+      "none": "Aucune séance saisie.",
+      "add": "Saisir une séance",
+      "open": "Ouvrir la séance",
+      "untitled": "Séance",
+      "minutes": "{{minutes}} min"
+    },
+    "next": {
+      "title": "Prochain test",
+      "open": "Ouvrir le test",
+      "none": "Aucun test proposé."
+    },
+    "event": {
+      "title": "Compétition",
+      "unnamed": "Compétition",
+      "days_one": "dans {{count}} jour",
+      "days_other": "dans {{count}} jours",
+      "none": "Aucune compétition saisie.",
+      "set": "Saisir une compétition",
+      "open": "Modifier la compétition"
+    }
+  },
+  "performance": {
+    "confidence": "Fiabilité des données : {{level}}",
+    "level": {
+      "HIGH": "élevée",
+      "MODERATE": "moyenne",
+      "LOW": "faible",
+      "INSUFFICIENT": "insuffisante"
+    }
   }
 }

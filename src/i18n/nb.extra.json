@@ -2614,5 +2614,56 @@
         "body": "Hva som målbart har endret seg over tid."
       }
     }
+  },
+  "performance": {
+    "eyebrow": "Prestasjon",
+    "title": "Prestasjonsprofil",
+    "intro": "Hva målingene dine viser: persentil per dimensjon, med referanse, målingens alder og datapålitelighet. Ingen totalverdi.",
+    "basis": {
+      "title": "Datagrunnlag",
+      "coverage": "Dekning av kjernetester",
+      "oldest": "Eldste test",
+      "days_one": "for {{count}} dag siden",
+      "days_other": "for {{count}} dager siden",
+      "references": "Referansedekning",
+      "referencesValue": "{{covered}} av {{total}} dimensjoner",
+      "missing": "Mangler: {{names}}.",
+      "stale": "{{count}} kjernetester er eldre enn 90 dager.",
+      "noTotal": "Ingen totalverdi: den ville skjult manglende dimensjoner."
+    },
+    "radar": {
+      "title": "Profil i persentil for referansegruppen",
+      "note": "Akser uten data eller referanse forblir tomme."
+    },
+    "dimensions": {
+      "title": "Dimensjoner",
+      "sub": "Persentil mot referansen, med alderen på siste måling.",
+      "unmeasured": "Ikke målt ennå",
+      "noReference": "Verdi finnes, persentil kan ikke beregnes",
+      "reference": "Persentil mot referansen",
+      "age_one": "Test for {{count}} dag siden",
+      "age_other": "Test for {{count}} dager siden",
+      "open": "under referansens midtpunkt ved høyt krav"
+    },
+    "status": {
+      "noReference": "ingen referanse",
+      "unmeasured": "ingen data"
+    },
+    "cards": {
+      "strongest": "Største styrke",
+      "gap": "Største målbare gap",
+      "change": "Største endring",
+      "next": "Anbefalt neste test",
+      "none": "Kan ikke fastslås ennå.",
+      "gapNote": "Persentil {{score}} i den nåværende profilen",
+      "gapNone": "Ingen akse med høyt krav under referansens midtpunkt.",
+      "changeNone": "Ingen påvist endring ennå."
+    },
+    "links": {
+      "history": "Historikk",
+      "analysis": "Analyse",
+      "report": "Rapport",
+      "overview": "Detaljert oversikt"
+    }
   }
 }

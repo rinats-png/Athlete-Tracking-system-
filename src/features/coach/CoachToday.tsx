@@ -77,7 +77,7 @@ export function CoachToday() {
             title={t('coachToday.priority.title')}
             subtitle={today.priority.length > 0 ? t('coachToday.priority.flagged', { count: today.priority.length }) : undefined}
             action={
-              <Link to="/trainer" className="inline-flex min-h-11 items-center text-[12px] text-accent-text underline underline-offset-2">
+              <Link to="/trainer" className="inline-flex min-h-11 min-w-11 items-center justify-end text-[12px] text-accent-text underline underline-offset-2">
                 {t('coachToday.priority.all')}
               </Link>
             }
@@ -110,7 +110,7 @@ export function CoachToday() {
               title={t('coachToday.matrix.title')}
               subtitle={t('coachToday.matrix.sub')}
               action={
-                <Link to="/trainer/heatmap" className="inline-flex min-h-11 items-center text-[12px] text-accent-text underline underline-offset-2">
+                <Link to="/trainer/heatmap" className="inline-flex min-h-11 min-w-11 items-center justify-end text-[12px] text-accent-text underline underline-offset-2">
                   {t('coachToday.matrix.open')}
                 </Link>
               }

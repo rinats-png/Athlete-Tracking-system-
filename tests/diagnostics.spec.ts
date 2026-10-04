@@ -16,6 +16,7 @@ test.describe('Übersicht', () => {
 
   test('mit Messungen: Orb, Stärken, Potenzial, nächster Test, letzte Ergebnisse', async ({ page }) => {
     await openDemo(page)
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     // Das Leistungsprofil steht seit dem Umbau als Orb da, nicht als
     // Balkenliste — die Aussage ist dieselbe, die Form eine andere.
     await expect(page.getByRole('img', { name: /Leistungsprofil als Form/ })).toBeVisible()
@@ -27,6 +28,7 @@ test.describe('Übersicht', () => {
 
   test('die Empfehlung trägt ihre Begründung mit', async ({ page }) => {
     await openDemo(page)
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     const karte = page.getByRole('link', { name: /Nächster sinnvoller Test/ })
     await expect(karte).toBeVisible()
     // Eine Empfehlung ohne «warum» ist von einer zufälligen Auswahl nicht

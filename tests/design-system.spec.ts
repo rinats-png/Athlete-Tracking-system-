@@ -51,7 +51,7 @@ test.describe('Tiefe und Bewegung', () => {
     const context = await browser.newContext({ reducedMotion: 'reduce' })
     const page = await context.newPage()
     await openDemo(page)
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
 
     const orb = page.getByRole('img', { name: /Leistungsprofil als Form/ })
     await expect(orb).toBeVisible()
@@ -67,6 +67,7 @@ test.describe('Tiefe und Bewegung', () => {
 test.describe('Performance Orb', () => {
   test('er trägt seine Abdeckung als Beschriftung, nicht nur die Zahl', async ({ page }) => {
     await openDemo(page)
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     const orb = page.getByRole('img', { name: /Leistungsprofil als Form/ })
     const label = await orb.getAttribute('aria-label')
     expect(label, 'sonst wäre die Zahl für Screenreader eine Behauptung').toMatch(
@@ -76,7 +77,7 @@ test.describe('Performance Orb', () => {
 
   test('ohne Messungen erscheint er gar nicht — statt als leere Form', async ({ page }) => {
     await openGuest(page)
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     await expect(page.getByRole('img', { name: /Leistungsprofil als Form/ })).toHaveCount(0)
   })
 
@@ -91,7 +92,7 @@ test.describe('Performance Orb', () => {
     const context = await browser.newContext({ reducedMotion: 'reduce' })
     const page = await context.newPage()
     await openDemo(page)
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     await page.getByRole('img', { name: /Leistungsprofil als Form/ }).waitFor()
 
     const offPath = await page.evaluate(() => {
@@ -121,7 +122,7 @@ test.describe('Performance Orb', () => {
     const context = await browser.newContext({ reducedMotion: 'reduce' })
     const page = await context.newPage()
     await openDemo(page)
-    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.goto('/uebersicht', { waitUntil: 'domcontentloaded' })
     await page.getByRole('img', { name: /Leistungsprofil als Form/ }).waitFor()
 
     const collisions = await page.evaluate(() => {
@@ -179,8 +180,8 @@ test.describe('Schwebende Navigation', () => {
       'ohne Übergang springt er, und die Bewegung sagt nichts mehr',
     ).toContain('transform')
 
-    await nav!.getByRole('button', { name: /Verlauf/ }).click()
-    await expect(page).toHaveURL(/verlauf/)
+    await nav!.getByRole('button', { name: /Leistung/ }).click()
+    await expect(page).toHaveURL(/performance/)
     // Nach dem Klick läuft der Übergang noch — direkt zu messen erwischt
     // ihn auf halbem Weg und manchmal noch am Ausgangspunkt.
     await expect
@@ -289,6 +290,6 @@ test.describe('Performance Journey', () => {
     await openDemo(page)
     await page.goto('/verlauf', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Deine Journey')).toBeVisible()
-    await expect(page.getByText('Heute').first()).toBeVisible()
+    await expect(page.locator('main').getByText('Heute').first()).toBeVisible()
   })
 })
