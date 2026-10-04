@@ -61,3 +61,10 @@ Jede neue Funktion besteht die Prüfung aus Doktrin §50.
 - **Nur für Tests mit einem Zahlenfeld.** Bei mehreren Feldern je Versuch (zum Beispiel 1RM aus Last und Wiederholungen) bleibt der Gruppentest zuständig; der Kiosk sagt das.
 - **Testtag-Planer:** Beginn (Uhrzeit) und Pause zwischen den Runden (Schema 31). Der Plan zeigt Uhrzeiten je Runde («09:25–09:45 Uhr») und rechnet die Pause in die Gesamtdauer; an jeder Station steht «Kiosk» neben «Erfassen». Auch im Gruppentest gibt es den Weg in den Kiosk.
 - **Noch nicht:** QR-Code zum Wählen des Athleten (braucht die Kamera und eine eigene Prüfung der Einwilligung), spätere Synchronisierung zwischen mehreren Kiosk-Geräten, Rotation nach Trainerzahl und Ausrüstung.
+
+## Etappe 5 — Fragen an KYDON, Coach Copilot (umgesetzt)
+
+Deterministische Werkzeugschicht: sieben feste Fragen (`/fragen`), Zahlenwächter,
+Trainer-Zusammenfassung mit bearbeitbaren Nachrichtenentwürfen. Kein Sprachmodell.
+Details: [ask-kydon.md](ask-kydon.md). Offen für ein Modell: Anbieter, Region,
+Auftragsverarbeitung, Monatsdeckel.

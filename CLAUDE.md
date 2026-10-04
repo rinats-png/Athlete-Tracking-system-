@@ -18,6 +18,7 @@ Deutsch, im Stil der umgebenden Dateien.
 - **[docs/produktdoktrin.md](docs/produktdoktrin.md)** — verbindliche Produktleitlinie (was KYDON sagen darf und was nicht, §50 Entscheidungsregel für neue Funktionen)
 - [docs/umbauplan.md](docs/umbauplan.md) — Umbau nach der Doktrin, Etappen und Entscheidungen
 - [docs/prd.md](docs/prd.md) — was das Produkt können soll, Pakete, offene Punkte
+- [docs/ask-kydon.md](docs/ask-kydon.md) — Fragen an KYDON, Zahlenwächter, Coach Copilot
 - Themenseiten in `docs/` (Preise, Sicherheit, Sprachen, Push, Auslieferung …)
 
 ## Die harten Regeln (Kurzfassung von §19)

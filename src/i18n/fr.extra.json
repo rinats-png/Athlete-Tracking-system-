@@ -2574,6 +2574,25 @@
       },
       "values": "Moy. {{recent}} au lieu de {{baseline}}",
       "note": "Décrit seulement l'écart par rapport à la propre base de l'athlète (3 derniers jours contre les 28 jours précédents). Auto-évaluation, pas une mesure, pas une cause."
+    },
+    "copilot": {
+      "title": "Résumé et brouillons",
+      "sub": "KYDON écrit des brouillons, vous les envoyez vous-même.",
+      "status": "{{current}} à jour, {{review}} à examiner, {{overdue}} en retard, sur {{total}} athlètes.",
+      "priority_one": "Regarder d'abord {{count}} athlète.",
+      "priority_other": "Regarder d'abord {{count}} athlètes.",
+      "testDay": "Prochaine journée de tests : {{title}} le {{on}} avec {{athletes}} athlètes.",
+      "draftsTitle": "Brouillons de messages",
+      "copy": "Copier",
+      "copied": "Copié",
+      "none": "Aucun brouillon nécessaire.",
+      "noName": "Athlète",
+      "draft": {
+        "overdue": "Bonjour {{name}}, ta prochaine mesure est en retard de {{days}} jours. Un rendez-vous cette semaine te convient-il ?",
+        "declining": "Bonjour {{name}}, je vois une évolution à la baisse dans tes dernières mesures. Regardons les données ensemble.",
+        "thin_data": "Bonjour {{name}}, il manque encore des mesures pour une évaluation fiable. On planifie une séance ?",
+        "no_assessment": "Bonjour {{name}}, il n'y a pas encore de mesure de toi. Quand pourrions-nous faire une première séance ?"
+      }
     }
   },
   "more": {
@@ -2607,7 +2626,8 @@
       "privacy": "Confidentialité",
       "terms": "Conditions d'utilisation",
       "dpa": "Accord de sous-traitance",
-      "week": "Bilan de la semaine"
+      "week": "Bilan de la semaine",
+      "ask": "Demander à KYDON"
     }
   },
   "teamHub": {
@@ -2736,5 +2756,62 @@
     "backToList": "Retour à la liste",
     "rule": "Le meilleur essai valide compte. Les essais invalides restent enregistrés mais ne sont pas notés.",
     "offline": "Fonctionne sans réseau. Tout reste sur cet appareil."
+  },
+  "ask": {
+    "eyebrow": "Questions",
+    "title": "Demander à KYDON",
+    "intro": "Questions fixes, avec réponses tirées de vos propres mesures. Ni conseil, ni cause, ni verdict.",
+    "chooseTest": "Test",
+    "noTests": "Aucune mesure évaluée pour le moment.",
+    "details": "Voir les détails",
+    "note": "Les réponses viennent des calculs de l'application, sans modèle de langage et sans réseau.",
+    "q": {
+      "development": "Comment ce test a-t-il évolué ?",
+      "changed": "Qu'est-ce qui a changé de façon prouvée ?",
+      "overdue": "Qu'est-ce qui est en retard ?",
+      "whyUnchanged": "Pourquoi ce test est-il considéré comme inchangé ?",
+      "missing": "Que manque-t-il encore ?",
+      "methods": "Mes mesures sont-elles comparables ?",
+      "confidence": "Quelle est la fiabilité des données ?"
+    },
+    "fact": {
+      "noMeasurements": "Il n'y a pas encore de mesure évaluée pour ce test.",
+      "count": "{{n}} mesures enregistrées.",
+      "single": "Seule mesure : {{value}} {{unit}} le {{day}}. Une évolution demande une deuxième mesure.",
+      "firstLast": "Première mesure {{first}} {{unit}} ({{firstDay}}), dernière {{last}} {{unit}} ({{lastDay}}).",
+      "verdict_better": "Amélioration de {{percent}} %, prouvée à partir de {{detectable}} %.",
+      "verdict_worse": "Baisse de {{percent}} %, prouvée à partir de {{detectable}} %.",
+      "verdictNoise": "Variation de {{percent}} %, dans la marge d'erreur de mesure (prouvée à partir de {{detectable}} %).",
+      "verdictUnknown": "Variation de {{percent}} % ; l'erreur de mesure n'est pas encore connue.",
+      "noneProven": "Aucune variation au-delà de l'erreur de mesure n'est prouvée actuellement.",
+      "changed_better": "{{name}} : {{percent}} % mieux, prouvé à partir de {{detectable}} %.",
+      "changed_worse": "{{name}} : {{percent}} % moins bien, prouvé à partir de {{detectable}} %.",
+      "remindersOff": "Les rappels sont désactivés, il n'y a donc pas d'échéances.",
+      "noneOverdue": "Rien n'est en retard.",
+      "overdue": "{{name}} : en retard de {{days}} jours, dernière mesure le {{last}}.",
+      "first": "Il n'y a qu'une mesure, une comparaison n'est pas encore possible.",
+      "errorUnknown": "L'erreur de mesure est inconnue ({{points}} points de mesure), une variation ne peut pas encore être interprétée.",
+      "change": "Variation calculée : {{percent}} %.",
+      "withinNoise": "La variation de {{percent}} % est inférieure au seuil de {{detectable}} %. L'erreur de mesure typique est de {{error}} % ({{points}} points de mesure).",
+      "notUnchanged": "Ce test n'est pas considéré comme inchangé : variation de {{percent}} %.",
+      "noDiscipline": "Aucune discipline n'est choisie, il n'y a donc pas de liste de tests manquants.",
+      "coverage": "{{measured}} tests sur {{total}} de la discipline sont mesurés.",
+      "missingTest": "Manque : {{name}}",
+      "stale": "{{count}} mesures sont dépassées.",
+      "dimsUnmeasured": "{{count}} dimensions ne sont pas encore mesurées.",
+      "dimsNoReference": "{{count}} dimensions n'ont pas de valeurs de référence.",
+      "nothingMissing": "Il ne manque rien.",
+      "noRepeats": "Aucun test n'a encore de répétition.",
+      "methodsDiffer": "{{name}} : {{n}} conditions de mesure différentes, la comparaison est limitée.",
+      "allComparable": "Pour {{count}} tests répétés, les conditions enregistrées concordent.",
+      "level": "Fiabilité des données : {{level}}.",
+      "component": "{{name}} : {{value}} %"
+    },
+    "comp": {
+      "coverage": "Couverture",
+      "recency": "Actualité",
+      "quality": "Qualité de mesure",
+      "depth": "Profondeur"
+    }
   }
 }

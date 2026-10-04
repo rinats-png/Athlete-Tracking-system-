@@ -7,11 +7,12 @@ import { ImageCard } from '@/components/ui/ImageCard'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { coachToday, type PriorityAthlete } from '@/domain/coachToday'
+import { coachToday, type CoachToday as CoachTodayView, type PriorityAthlete } from '@/domain/coachToday'
 import { axisLabel } from '@/data/profileAxes'
 import { testImageUrl } from '@/data/testImages'
 import { formatDate, formatNumber } from '@/lib/format'
 import { checkinsOf, teamCheckins } from '@/domain/checkin'
+import { coachCopilot, type DraftSpec } from '@/domain/coachCopilot'
 import { checkinShareEnabled } from '@/lib/checkinShare'
 import { fetchLinkedCheckins, type LinkedCheckins } from '@/lib/supabase/checkinShare'
 
@@ -206,6 +207,8 @@ export function CoachToday() {
 
         <CheckinsCard />
 
+        <CopilotCard today={today} />
+
         <Panel className="lg:col-span-2" data-testid="today-actions">
           <PanelHeader title={t('coachToday.actions.title')} />
           <div className="grid gap-2 px-4 pb-4 sm:grid-cols-3">
@@ -284,6 +287,64 @@ function CheckinsCard() {
         )}
       </div>
       <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('coachToday.checkins.note')}</p>
+    </Panel>
+  )
+}
+
+/**
+ * Zusammenfassung und Nachrichtenentwürfe (Produktdoktrin §31). Die Entwürfe
+ * sind bearbeitbar und gehen nirgends hin: KYDON sendet nichts, der Trainer
+ * kopiert und verschickt selbst.
+ */
+function CopilotCard({ today }: { today: CoachTodayView }) {
+  const { t } = useTranslation()
+  const copilot = useMemo(() => coachCopilot(today), [today])
+  const draftOf = (d: DraftSpec) => t(`coachToday.copilot.draft.${d.template}`, { ...d.params, name: d.name || t('coachToday.copilot.noName') })
+  const [edited, setEdited] = useState<Record<string, string>>({})
+  const [copied, setCopied] = useState<string | null>(null)
+  const copy = async (id: string, value: string) => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(id)
+    } catch {
+      // Ohne Zwischenablage bleibt der Text im Feld markierbar.
+    }
+  }
+  return (
+    <Panel className="lg:col-span-2" data-testid="today-copilot">
+      <PanelHeader title={t('coachToday.copilot.title')} subtitle={t('coachToday.copilot.sub')} />
+      <ul className="space-y-1 px-4 pb-2 text-[14px]" data-testid="copilot-summary">
+        {copilot.summary.map((f) => (
+          <li key={f.key}>{t(`coachToday.copilot.${f.key}`, f.params)}</li>
+        ))}
+      </ul>
+      <div className="px-4 pb-4">
+        <h3 className="mt-2 text-[12px] font-semibold uppercase tracking-wide text-ink-muted">{t('coachToday.copilot.draftsTitle')}</h3>
+        {copilot.drafts.length === 0 ? (
+          <p className="mt-1 text-[14px] text-ink-secondary">{t('coachToday.copilot.none')}</p>
+        ) : (
+          copilot.drafts.map((d) => {
+            const value = edited[d.athleteId] ?? draftOf(d)
+            return (
+              <div key={d.athleteId} className="mt-2" data-testid={`draft-${d.athleteId}`}>
+                <label className="block text-[12px] text-ink-secondary" htmlFor={`draft-${d.athleteId}-text`}>
+                  {d.name || t('coach.unnamed')}
+                </label>
+                <textarea
+                  id={`draft-${d.athleteId}-text`}
+                  value={value}
+                  onChange={(e) => setEdited((m) => ({ ...m, [d.athleteId]: e.target.value }))}
+                  rows={3}
+                  className="mt-1 w-full rounded-md border border-line bg-surface px-3 py-2 text-[14px]"
+                />
+                <button type="button" onClick={() => void copy(d.athleteId, value)} className="mt-1 min-h-11 rounded-pill border border-line px-4 text-[13px] hover:bg-surface-sunken">
+                  {copied === d.athleteId ? t('coachToday.copilot.copied') : t('coachToday.copilot.copy')}
+                </button>
+              </div>
+            )
+          })
+        )}
+      </div>
     </Panel>
   )
 }

@@ -2574,6 +2574,25 @@
       },
       "values": "Gem. {{recent}} in plaats van {{baseline}}",
       "note": "Beschrijft alleen de afwijking van de eigen basislijn van de atleet (laatste 3 dagen tegen de 28 dagen ervoor). Zelfinschatting, geen meting, geen oorzaak."
+    },
+    "copilot": {
+      "title": "Samenvatting en concepten",
+      "sub": "KYDON schrijft concepten, jij verstuurt ze zelf.",
+      "status": "{{current}} actueel, {{review}} te controleren, {{overdue}} te laat, van {{total}} atleten.",
+      "priority_one": "Eerst naar {{count}} atleet kijken.",
+      "priority_other": "Eerst naar {{count}} atleten kijken.",
+      "testDay": "Volgende testdag: {{title}} op {{on}} met {{athletes}} atleten.",
+      "draftsTitle": "Berichtconcepten",
+      "copy": "Kopiëren",
+      "copied": "Gekopieerd",
+      "none": "Geen concepten nodig.",
+      "noName": "Atleet",
+      "draft": {
+        "overdue": "Hoi {{name}}, je volgende meting is al {{days}} dagen aan de beurt. Past een afspraak deze week?",
+        "declining": "Hoi {{name}}, ik zie een dalend verloop in je laatste metingen. Laten we de gegevens samen bekijken.",
+        "thin_data": "Hoi {{name}}, voor een betrouwbare beoordeling ontbreken nog metingen. Zullen we een sessie plannen?",
+        "no_assessment": "Hoi {{name}}, er is nog geen meting van je. Wanneer past een eerste sessie?"
+      }
     }
   },
   "more": {
@@ -2607,7 +2626,8 @@
       "privacy": "Privacy",
       "terms": "Gebruiksvoorwaarden",
       "dpa": "Verwerkersovereenkomst",
-      "week": "Weekoverzicht"
+      "week": "Weekoverzicht",
+      "ask": "Vraag het KYDON"
     }
   },
   "teamHub": {
@@ -2736,5 +2756,62 @@
     "backToList": "Terug naar lijst",
     "rule": "De beste geldige poging telt. Ongeldige pogingen blijven bewaard maar worden niet gescoord.",
     "offline": "Werkt zonder netwerk. Alles blijft op dit apparaat."
+  },
+  "ask": {
+    "eyebrow": "Vragen",
+    "title": "Vraag het KYDON",
+    "intro": "Vaste vragen, beantwoord uit je eigen metingen. Geen advies, geen oorzaak, geen oordeel.",
+    "chooseTest": "Test",
+    "noTests": "Nog geen beoordeelde meting.",
+    "details": "Details bekijken",
+    "note": "De antwoorden komen uit de berekeningen van de app, zonder taalmodel en zonder netwerk.",
+    "q": {
+      "development": "Hoe heeft deze test zich ontwikkeld?",
+      "changed": "Wat is aantoonbaar veranderd?",
+      "overdue": "Wat is te laat?",
+      "whyUnchanged": "Waarom geldt deze test als ongewijzigd?",
+      "missing": "Wat ontbreekt nog?",
+      "methods": "Zijn mijn metingen vergelijkbaar?",
+      "confidence": "Hoe betrouwbaar zijn de gegevens?"
+    },
+    "fact": {
+      "noMeasurements": "Er is nog geen beoordeelde meting voor deze test.",
+      "count": "{{n}} metingen aanwezig.",
+      "single": "Enige meting: {{value}} {{unit}} op {{day}}. Voor een verloop is een tweede nodig.",
+      "firstLast": "Eerste meting {{first}} {{unit}} ({{firstDay}}), laatste {{last}} {{unit}} ({{lastDay}}).",
+      "verdict_better": "Verbetering van {{percent}} %, aangetoond vanaf {{detectable}} %.",
+      "verdict_worse": "Verslechtering van {{percent}} %, aangetoond vanaf {{detectable}} %.",
+      "verdictNoise": "Verandering van {{percent}} %, binnen de meetfout (aangetoond vanaf {{detectable}} %).",
+      "verdictUnknown": "Verandering van {{percent}} %; de meetfout is nog niet bekend.",
+      "noneProven": "Op dit moment is geen verandering boven de meetfout aangetoond.",
+      "changed_better": "{{name}}: {{percent}} % beter, aangetoond vanaf {{detectable}} %.",
+      "changed_worse": "{{name}}: {{percent}} % slechter, aangetoond vanaf {{detectable}} %.",
+      "remindersOff": "Herinneringen staan uit, daarom zijn er geen vervaldata.",
+      "noneOverdue": "Niets is te laat.",
+      "overdue": "{{name}}: {{days}} dagen te laat, laatst op {{last}}.",
+      "first": "Er is maar één meting, vergelijken kan nog niet.",
+      "errorUnknown": "De meetfout is onbekend ({{points}} meetpunten), een verandering is nog niet te duiden.",
+      "change": "Berekende verandering: {{percent}} %.",
+      "withinNoise": "De verandering van {{percent}} % ligt onder de drempel van {{detectable}} %. De typische meetfout is {{error}} % ({{points}} meetpunten).",
+      "notUnchanged": "Deze test geldt niet als ongewijzigd: {{percent}} % verandering.",
+      "noDiscipline": "Er is geen discipline gekozen, dus er is geen lijst met ontbrekende tests.",
+      "coverage": "{{measured}} van {{total}} tests van de discipline zijn gemeten.",
+      "missingTest": "Ontbreekt: {{name}}",
+      "stale": "{{count}} metingen zijn verouderd.",
+      "dimsUnmeasured": "{{count}} dimensies zijn nog niet gemeten.",
+      "dimsNoReference": "{{count}} dimensies hebben geen referentiewaarden.",
+      "nothingMissing": "Er ontbreekt niets.",
+      "noRepeats": "Nog geen test heeft een herhaling.",
+      "methodsDiffer": "{{name}}: {{n}} verschillende meetomstandigheden, de vergelijking is beperkt.",
+      "allComparable": "Bij {{count}} tests met herhaling komen de vastgelegde omstandigheden overeen.",
+      "level": "Betrouwbaarheid van de gegevens: {{level}}.",
+      "component": "{{name}}: {{value}} %"
+    },
+    "comp": {
+      "coverage": "Dekking",
+      "recency": "Actualiteit",
+      "quality": "Meetkwaliteit",
+      "depth": "Diepte"
+    }
   }
 }

@@ -2574,6 +2574,25 @@
       },
       "values": "Media {{recent}} en lugar de {{baseline}}",
       "note": "Describe solo la desviación de la propia base del atleta (últimos 3 días frente a los 28 anteriores). Autoevaluación, no una medición, sin causa."
+    },
+    "copilot": {
+      "title": "Resumen y borradores",
+      "sub": "KYDON escribe borradores, tú los envías.",
+      "status": "{{current}} al día, {{review}} por revisar, {{overdue}} atrasados, de {{total}} atletas.",
+      "priority_one": "Mirar primero {{count}} atleta.",
+      "priority_other": "Mirar primero {{count}} atletas.",
+      "testDay": "Próxima jornada de pruebas: {{title}} el {{on}} con {{athletes}} atletas.",
+      "draftsTitle": "Borradores de mensajes",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "none": "No hacen falta borradores.",
+      "noName": "Atleta",
+      "draft": {
+        "overdue": "Hola {{name}}, tu próxima medición está atrasada {{days}} días. ¿Te viene bien una cita esta semana?",
+        "declining": "Hola {{name}}, veo una evolución a la baja en tus últimas mediciones. Miremos los datos juntos.",
+        "thin_data": "Hola {{name}}, para una valoración fiable aún faltan mediciones. ¿Planificamos una sesión?",
+        "no_assessment": "Hola {{name}}, todavía no hay ninguna medición tuya. ¿Cuándo te vendría bien una primera sesión?"
+      }
     }
   },
   "more": {
@@ -2607,7 +2626,8 @@
       "privacy": "Privacidad",
       "terms": "Condiciones de uso",
       "dpa": "Encargo de tratamiento",
-      "week": "Resumen semanal"
+      "week": "Resumen semanal",
+      "ask": "Preguntar a KYDON"
     }
   },
   "teamHub": {
@@ -2736,5 +2756,62 @@
     "backToList": "Volver a la lista",
     "rule": "Cuenta el mejor intento válido. Los intentos no válidos quedan guardados pero no se puntúan.",
     "offline": "Funciona sin red. Todo queda en este dispositivo."
+  },
+  "ask": {
+    "eyebrow": "Preguntas",
+    "title": "Preguntar a KYDON",
+    "intro": "Preguntas fijas, respondidas con tus propias mediciones. Sin consejos, sin causas, sin veredictos.",
+    "chooseTest": "Prueba",
+    "noTests": "Todavía no hay mediciones evaluadas.",
+    "details": "Ver detalles",
+    "note": "Las respuestas salen de los cálculos de la app, sin modelo de lenguaje y sin red.",
+    "q": {
+      "development": "¿Cómo ha evolucionado esta prueba?",
+      "changed": "¿Qué ha cambiado de forma demostrada?",
+      "overdue": "¿Qué está atrasado?",
+      "whyUnchanged": "¿Por qué esta prueba cuenta como sin cambios?",
+      "missing": "¿Qué falta todavía?",
+      "methods": "¿Son comparables mis mediciones?",
+      "confidence": "¿Qué fiabilidad tienen los datos?"
+    },
+    "fact": {
+      "noMeasurements": "Todavía no hay mediciones evaluadas de esta prueba.",
+      "count": "{{n}} mediciones registradas.",
+      "single": "Única medición: {{value}} {{unit}} el {{day}}. Una evolución necesita una segunda.",
+      "firstLast": "Primera medición {{first}} {{unit}} ({{firstDay}}), última {{last}} {{unit}} ({{lastDay}}).",
+      "verdict_better": "Mejora del {{percent}} %, demostrada a partir del {{detectable}} %.",
+      "verdict_worse": "Empeoramiento del {{percent}} %, demostrado a partir del {{detectable}} %.",
+      "verdictNoise": "Cambio del {{percent}} %, dentro del error de medición (demostrado a partir del {{detectable}} %).",
+      "verdictUnknown": "Cambio del {{percent}} %; el error de medición aún no se conoce.",
+      "noneProven": "Ahora mismo no hay ningún cambio demostrado por encima del error de medición.",
+      "changed_better": "{{name}}: {{percent}} % mejor, demostrado a partir del {{detectable}} %.",
+      "changed_worse": "{{name}}: {{percent}} % peor, demostrado a partir del {{detectable}} %.",
+      "remindersOff": "Los recordatorios están desactivados, por eso no hay vencimientos.",
+      "noneOverdue": "Nada está atrasado.",
+      "overdue": "{{name}}: atrasada {{days}} días, última vez el {{last}}.",
+      "first": "Solo hay una medición, aún no es posible comparar.",
+      "errorUnknown": "El error de medición es desconocido ({{points}} puntos de medición), un cambio aún no se puede interpretar.",
+      "change": "Cambio calculado: {{percent}} %.",
+      "withinNoise": "El cambio del {{percent}} % está por debajo del umbral del {{detectable}} %. El error de medición típico es del {{error}} % ({{points}} puntos de medición).",
+      "notUnchanged": "Esta prueba no cuenta como sin cambios: cambio del {{percent}} %.",
+      "noDiscipline": "No hay disciplina elegida, por eso no hay lista de pruebas pendientes.",
+      "coverage": "{{measured}} de {{total}} pruebas de la disciplina están medidas.",
+      "missingTest": "Falta: {{name}}",
+      "stale": "{{count}} mediciones están desactualizadas.",
+      "dimsUnmeasured": "{{count}} dimensiones todavía no están medidas.",
+      "dimsNoReference": "{{count}} dimensiones no tienen valores de referencia.",
+      "nothingMissing": "No falta nada.",
+      "noRepeats": "Ninguna prueba tiene aún repeticiones.",
+      "methodsDiffer": "{{name}}: {{n}} condiciones de medición distintas, la comparación es limitada.",
+      "allComparable": "En {{count}} pruebas con repeticiones, las condiciones registradas coinciden.",
+      "level": "Fiabilidad de los datos: {{level}}.",
+      "component": "{{name}}: {{value}} %"
+    },
+    "comp": {
+      "coverage": "Cobertura",
+      "recency": "Actualidad",
+      "quality": "Calidad de medición",
+      "depth": "Profundidad"
+    }
   }
 }

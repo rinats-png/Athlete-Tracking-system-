@@ -2574,6 +2574,25 @@
       },
       "values": "Ø {{recent}} statt {{baseline}}",
       "note": "Beschreibt nur die Abweichung von der eigenen Baseline des Athleten (letzte 3 Tage gegen die 28 Tage davor). Selbsteinschätzung, keine Messung, keine Ursache."
+    },
+    "copilot": {
+      "title": "Zusammenfassung und Entwürfe",
+      "sub": "KYDON schreibt Entwürfe, du schickst sie selbst ab.",
+      "status": "{{current}} aktuell, {{review}} zu prüfen, {{overdue}} überfällig, von {{total}} Athleten.",
+      "priority_one": "{{count}} Athlet zuerst ansehen.",
+      "priority_other": "{{count}} Athleten zuerst ansehen.",
+      "testDay": "Nächster Testtag: {{title}} am {{on}} mit {{athletes}} Athleten.",
+      "draftsTitle": "Nachrichtenentwürfe",
+      "copy": "Kopieren",
+      "copied": "Kopiert",
+      "none": "Keine Entwürfe nötig.",
+      "noName": "Athlet",
+      "draft": {
+        "overdue": "Hallo {{name}}, deine nächste Messung ist seit {{days}} Tagen fällig. Passt dir ein Termin diese Woche?",
+        "declining": "Hallo {{name}}, in deinen letzten Messungen sehe ich einen fallenden Verlauf. Lass uns die Daten gemeinsam ansehen.",
+        "thin_data": "Hallo {{name}}, für eine verlässliche Einordnung fehlen noch Messungen. Wollen wir einen Termin planen?",
+        "no_assessment": "Hallo {{name}}, es gibt noch keine Messung von dir. Wann passt ein erster Termin?"
+      }
     }
   },
   "more": {
@@ -2607,7 +2626,8 @@
       "privacy": "Datenschutz",
       "terms": "Nutzungsbedingungen",
       "dpa": "Auftragsverarbeitung",
-      "week": "Wochenrückblick"
+      "week": "Wochenrückblick",
+      "ask": "Fragen an KYDON"
     }
   },
   "teamHub": {
@@ -2736,5 +2756,62 @@
     "backToList": "Zur Liste",
     "rule": "Der beste gültige Versuch zählt. Ungültige Versuche bleiben gespeichert, werden aber nicht gewertet.",
     "offline": "Läuft ohne Netz. Alles bleibt auf diesem Gerät."
+  },
+  "ask": {
+    "eyebrow": "Fragen",
+    "title": "Fragen an KYDON",
+    "intro": "Feste Fragen, beantwortet aus deinen eigenen Messungen. Kein Rat, keine Ursache, kein Urteil.",
+    "chooseTest": "Test",
+    "noTests": "Noch keine bewertete Messung.",
+    "details": "Details ansehen",
+    "note": "Die Antworten kommen aus den Rechenstellen der App, ohne Sprachmodell und ohne Netz.",
+    "q": {
+      "development": "Wie hat sich dieser Test entwickelt?",
+      "changed": "Was hat sich belegt verändert?",
+      "overdue": "Was ist überfällig?",
+      "whyUnchanged": "Warum gilt dieser Test als unverändert?",
+      "missing": "Was fehlt noch?",
+      "methods": "Sind meine Messungen vergleichbar?",
+      "confidence": "Wie sicher ist die Datenlage?"
+    },
+    "fact": {
+      "noMeasurements": "Zu diesem Test gibt es noch keine bewertete Messung.",
+      "count": "{{n}} Messungen vorhanden.",
+      "single": "Einzige Messung: {{value}} {{unit}} am {{day}}. Für einen Verlauf braucht es eine zweite.",
+      "firstLast": "Erste Messung {{first}} {{unit}} ({{firstDay}}), letzte {{last}} {{unit}} ({{lastDay}}).",
+      "verdict_better": "Verbesserung um {{percent}} %, ab {{detectable}} % belegt.",
+      "verdict_worse": "Verschlechterung um {{percent}} %, ab {{detectable}} % belegt.",
+      "verdictNoise": "Änderung von {{percent}} %, das liegt innerhalb der Messschwankung (ab {{detectable}} % belegt).",
+      "verdictUnknown": "Änderung von {{percent}} %; die Messschwankung ist noch nicht bekannt.",
+      "noneProven": "Zurzeit ist keine Veränderung über der Messschwankung belegt.",
+      "changed_better": "{{name}}: {{percent}} % besser, belegt ab {{detectable}} %.",
+      "changed_worse": "{{name}}: {{percent}} % schlechter, belegt ab {{detectable}} %.",
+      "remindersOff": "Erinnerungen sind ausgeschaltet, deshalb gibt es keine Fälligkeiten.",
+      "noneOverdue": "Nichts ist überfällig.",
+      "overdue": "{{name}}: seit {{days}} Tagen fällig, zuletzt am {{last}}.",
+      "first": "Es gibt erst eine Messung, ein Vergleich ist noch nicht möglich.",
+      "errorUnknown": "Die Messschwankung ist unbekannt ({{points}} Messpunkte), eine Änderung lässt sich noch nicht einordnen.",
+      "change": "Rechnerische Änderung: {{percent}} %.",
+      "withinNoise": "Die Änderung von {{percent}} % liegt unter der Schwelle von {{detectable}} %. Die typische Messschwankung beträgt {{error}} % ({{points}} Messpunkte).",
+      "notUnchanged": "Dieser Test gilt nicht als unverändert: {{percent}} % Änderung.",
+      "noDiscipline": "Es ist keine Disziplin gewählt, daher gibt es keine Liste fehlender Tests.",
+      "coverage": "{{measured}} von {{total}} Tests der Disziplin sind gemessen.",
+      "missingTest": "Fehlt: {{name}}",
+      "stale": "{{count}} Messungen sind veraltet.",
+      "dimsUnmeasured": "{{count}} Dimensionen sind noch nicht gemessen.",
+      "dimsNoReference": "{{count}} Dimensionen haben keine Vergleichswerte.",
+      "nothingMissing": "Es fehlt nichts.",
+      "noRepeats": "Es gibt noch keinen Test mit Wiederholung.",
+      "methodsDiffer": "{{name}}: {{n}} verschiedene Messbedingungen, der Vergleich ist eingeschränkt.",
+      "allComparable": "Bei {{count}} Tests mit Wiederholung stimmen die erfassten Bedingungen überein.",
+      "level": "Datenlage: {{level}}.",
+      "component": "{{name}}: {{value}} %"
+    },
+    "comp": {
+      "coverage": "Abdeckung",
+      "recency": "Aktualität",
+      "quality": "Messqualität",
+      "depth": "Tiefe"
+    }
   }
 }

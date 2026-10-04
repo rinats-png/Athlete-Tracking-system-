@@ -2574,6 +2574,25 @@
       },
       "values": "Gns. {{recent}} i stedet for {{baseline}}",
       "note": "Beskriver kun afvigelsen fra atletens egen baseline (seneste 3 dage mod de 28 før). Selvvurdering, ikke en måling, ingen årsag."
+    },
+    "copilot": {
+      "title": "Oversigt og udkast",
+      "sub": "KYDON skriver udkast, du sender dem selv.",
+      "status": "{{current}} opdateret, {{review}} at gennemgå, {{overdue}} forfaldne, af {{total}} atleter.",
+      "priority_one": "Se først på {{count}} atlet.",
+      "priority_other": "Se først på {{count}} atleter.",
+      "testDay": "Næste testdag: {{title}} den {{on}} med {{athletes}} atleter.",
+      "draftsTitle": "Beskedudkast",
+      "copy": "Kopier",
+      "copied": "Kopieret",
+      "none": "Ingen udkast nødvendige.",
+      "noName": "Atlet",
+      "draft": {
+        "overdue": "Hej {{name}}, din næste måling har været aktuel i {{days}} dage. Passer en tid i denne uge?",
+        "declining": "Hej {{name}}, jeg ser en faldende udvikling i dine seneste målinger. Lad os se på data sammen.",
+        "thin_data": "Hej {{name}}, for en pålidelig vurdering mangler der flere målinger. Skal vi planlægge en session?",
+        "no_assessment": "Hej {{name}}, der findes endnu ingen måling af dig. Hvornår passer en første session?"
+      }
     }
   },
   "more": {
@@ -2607,7 +2626,8 @@
       "privacy": "Privatliv",
       "terms": "Brugsvilkår",
       "dpa": "Databehandleraftale",
-      "week": "Ugeoversigt"
+      "week": "Ugeoversigt",
+      "ask": "Spørg KYDON"
     }
   },
   "teamHub": {
@@ -2736,5 +2756,62 @@
     "backToList": "Tilbage til listen",
     "rule": "Det bedste gyldige forsøg tæller. Ugyldige forsøg bliver gemt, men ikke vurderet.",
     "offline": "Fungerer uden net. Alt bliver på denne enhed."
+  },
+  "ask": {
+    "eyebrow": "Spørgsmål",
+    "title": "Spørg KYDON",
+    "intro": "Faste spørgsmål, besvaret ud fra dine egne målinger. Ingen råd, ingen årsager, ingen domme.",
+    "chooseTest": "Test",
+    "noTests": "Endnu ingen vurderet måling.",
+    "details": "Se detaljer",
+    "note": "Svarene kommer fra appens egne beregninger, uden sprogmodel og uden net.",
+    "q": {
+      "development": "Hvordan har denne test udviklet sig?",
+      "changed": "Hvad har påviseligt ændret sig?",
+      "overdue": "Hvad er forfaldent?",
+      "whyUnchanged": "Hvorfor regnes denne test som uændret?",
+      "missing": "Hvad mangler endnu?",
+      "methods": "Er mine målinger sammenlignelige?",
+      "confidence": "Hvor pålidelige er data?"
+    },
+    "fact": {
+      "noMeasurements": "Der er endnu ingen vurderet måling for denne test.",
+      "count": "{{n}} målinger findes.",
+      "single": "Eneste måling: {{value}} {{unit}} den {{day}}. En udvikling kræver en anden.",
+      "firstLast": "Første måling {{first}} {{unit}} ({{firstDay}}), seneste {{last}} {{unit}} ({{lastDay}}).",
+      "verdict_better": "Forbedring på {{percent}} %, påvist fra {{detectable}} %.",
+      "verdict_worse": "Forværring på {{percent}} %, påvist fra {{detectable}} %.",
+      "verdictNoise": "Ændring på {{percent}} %, inden for målefejlen (påvist fra {{detectable}} %).",
+      "verdictUnknown": "Ændring på {{percent}} %; målefejlen er endnu ikke kendt.",
+      "noneProven": "Lige nu er ingen ændring ud over målefejlen påvist.",
+      "changed_better": "{{name}}: {{percent}} % bedre, påvist fra {{detectable}} %.",
+      "changed_worse": "{{name}}: {{percent}} % dårligere, påvist fra {{detectable}} %.",
+      "remindersOff": "Påmindelser er slået fra, derfor er der ingen frister.",
+      "noneOverdue": "Intet er forfaldent.",
+      "overdue": "{{name}}: forfaldent i {{days}} dage, sidst den {{last}}.",
+      "first": "Der er kun én måling, en sammenligning er endnu ikke mulig.",
+      "errorUnknown": "Målefejlen er ukendt ({{points}} målepunkter), en ændring kan endnu ikke vurderes.",
+      "change": "Beregnet ændring: {{percent}} %.",
+      "withinNoise": "Ændringen på {{percent}} % ligger under tærsklen på {{detectable}} %. Den typiske målefejl er {{error}} % ({{points}} målepunkter).",
+      "notUnchanged": "Denne test regnes ikke som uændret: {{percent}} % ændring.",
+      "noDiscipline": "Der er ikke valgt nogen disciplin, derfor findes der ingen liste over manglende tests.",
+      "coverage": "{{measured}} af {{total}} tests i disciplinen er målt.",
+      "missingTest": "Mangler: {{name}}",
+      "stale": "{{count}} målinger er forældede.",
+      "dimsUnmeasured": "{{count}} dimensioner er endnu ikke målt.",
+      "dimsNoReference": "{{count}} dimensioner mangler referenceværdier.",
+      "nothingMissing": "Intet mangler.",
+      "noRepeats": "Ingen test har endnu en gentagelse.",
+      "methodsDiffer": "{{name}}: {{n}} forskellige målebetingelser, sammenligningen er begrænset.",
+      "allComparable": "For {{count}} tests med gentagelse stemmer de registrerede betingelser overens.",
+      "level": "Datagrundlag: {{level}}.",
+      "component": "{{name}}: {{value}} %"
+    },
+    "comp": {
+      "coverage": "Dækning",
+      "recency": "Aktualitet",
+      "quality": "Målekvalitet",
+      "depth": "Dybde"
+    }
   }
 }

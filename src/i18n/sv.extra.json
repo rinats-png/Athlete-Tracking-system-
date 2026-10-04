@@ -2574,6 +2574,25 @@
       },
       "values": "Snitt {{recent}} i stället för {{baseline}}",
       "note": "Beskriver bara avvikelsen från atletens egen baslinje (senaste 3 dagarna mot de 28 före). Självskattning, ingen mätning, ingen orsak."
+    },
+    "copilot": {
+      "title": "Sammanfattning och utkast",
+      "sub": "KYDON skriver utkast, du skickar dem själv.",
+      "status": "{{current}} aktuella, {{review}} att granska, {{overdue}} försenade, av {{total}} idrottare.",
+      "priority_one": "Titta först på {{count}} idrottare.",
+      "priority_other": "Titta först på {{count}} idrottare.",
+      "testDay": "Nästa testdag: {{title}} den {{on}} med {{athletes}} idrottare.",
+      "draftsTitle": "Meddelandeutkast",
+      "copy": "Kopiera",
+      "copied": "Kopierat",
+      "none": "Inga utkast behövs.",
+      "noName": "Idrottare",
+      "draft": {
+        "overdue": "Hej {{name}}, din nästa mätning har varit aktuell i {{days}} dagar. Passar en tid den här veckan?",
+        "declining": "Hej {{name}}, jag ser en nedåtgående utveckling i dina senaste mätningar. Låt oss titta på uppgifterna tillsammans.",
+        "thin_data": "Hej {{name}}, för en tillförlitlig bedömning saknas ännu mätningar. Ska vi planera ett pass?",
+        "no_assessment": "Hej {{name}}, det finns ännu ingen mätning av dig. När passar ett första pass?"
+      }
     }
   },
   "more": {
@@ -2607,7 +2626,8 @@
       "privacy": "Integritet",
       "terms": "Användarvillkor",
       "dpa": "Personuppgiftsbiträdesavtal",
-      "week": "Veckoöversikt"
+      "week": "Veckoöversikt",
+      "ask": "Fråga KYDON"
     }
   },
   "teamHub": {
@@ -2736,5 +2756,62 @@
     "backToList": "Tillbaka till listan",
     "rule": "Det bästa giltiga försöket räknas. Ogiltiga försök sparas men poängsätts inte.",
     "offline": "Fungerar utan nät. Allt stannar på den här enheten."
+  },
+  "ask": {
+    "eyebrow": "Frågor",
+    "title": "Fråga KYDON",
+    "intro": "Fasta frågor, besvarade utifrån dina egna mätningar. Inga råd, inga orsaker, inga domar.",
+    "chooseTest": "Test",
+    "noTests": "Ännu ingen bedömd mätning.",
+    "details": "Visa detaljer",
+    "note": "Svaren kommer från appens egna beräkningar, utan språkmodell och utan nätverk.",
+    "q": {
+      "development": "Hur har det här testet utvecklats?",
+      "changed": "Vad har påvisbart förändrats?",
+      "overdue": "Vad är försenat?",
+      "whyUnchanged": "Varför räknas det här testet som oförändrat?",
+      "missing": "Vad saknas ännu?",
+      "methods": "Är mina mätningar jämförbara?",
+      "confidence": "Hur tillförlitliga är uppgifterna?"
+    },
+    "fact": {
+      "noMeasurements": "Det finns ännu ingen bedömd mätning för det här testet.",
+      "count": "{{n}} mätningar finns.",
+      "single": "Enda mätningen: {{value}} {{unit}} den {{day}}. För en utveckling behövs en andra.",
+      "firstLast": "Första mätningen {{first}} {{unit}} ({{firstDay}}), senaste {{last}} {{unit}} ({{lastDay}}).",
+      "verdict_better": "Förbättring med {{percent}} %, belagd från {{detectable}} %.",
+      "verdict_worse": "Försämring med {{percent}} %, belagd från {{detectable}} %.",
+      "verdictNoise": "Förändring på {{percent}} %, inom mätfelet (belagd från {{detectable}} %).",
+      "verdictUnknown": "Förändring på {{percent}} %; mätfelet är ännu inte känt.",
+      "noneProven": "Just nu är ingen förändring utöver mätfelet belagd.",
+      "changed_better": "{{name}}: {{percent}} % bättre, belagt från {{detectable}} %.",
+      "changed_worse": "{{name}}: {{percent}} % sämre, belagt från {{detectable}} %.",
+      "remindersOff": "Påminnelser är avstängda, därför finns inga förfallodatum.",
+      "noneOverdue": "Inget är försenat.",
+      "overdue": "{{name}}: försenat {{days}} dagar, senast den {{last}}.",
+      "first": "Det finns bara en mätning, en jämförelse är ännu inte möjlig.",
+      "errorUnknown": "Mätfelet är okänt ({{points}} mätpunkter), en förändring kan ännu inte bedömas.",
+      "change": "Beräknad förändring: {{percent}} %.",
+      "withinNoise": "Förändringen på {{percent}} % ligger under tröskeln på {{detectable}} %. Det typiska mätfelet är {{error}} % ({{points}} mätpunkter).",
+      "notUnchanged": "Det här testet räknas inte som oförändrat: {{percent}} % förändring.",
+      "noDiscipline": "Ingen gren är vald, därför finns ingen lista över saknade test.",
+      "coverage": "{{measured}} av {{total}} test i grenen är mätta.",
+      "missingTest": "Saknas: {{name}}",
+      "stale": "{{count}} mätningar är föråldrade.",
+      "dimsUnmeasured": "{{count}} dimensioner är ännu inte mätta.",
+      "dimsNoReference": "{{count}} dimensioner saknar referensvärden.",
+      "nothingMissing": "Inget saknas.",
+      "noRepeats": "Inget test har ännu någon upprepning.",
+      "methodsDiffer": "{{name}}: {{n}} olika mätförhållanden, jämförelsen är begränsad.",
+      "allComparable": "För {{count}} test med upprepning stämmer de registrerade förhållandena överens.",
+      "level": "Datakvalitet: {{level}}.",
+      "component": "{{name}}: {{value}} %"
+    },
+    "comp": {
+      "coverage": "Täckning",
+      "recency": "Aktualitet",
+      "quality": "Mätkvalitet",
+      "depth": "Djup"
+    }
   }
 }
