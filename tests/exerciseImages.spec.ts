@@ -22,3 +22,7 @@ test('ohne Bild: null, keine Anfrage', () => {
   expect(exerciseImageUrl('nicht_vorhanden')).toBeNull()
   expect(exerciseImageUrl('custom')).toBeNull()
 })
+
+test('alle 72 Übungen haben ein Bild', () => {
+  expect(EXERCISE_IMAGE_KEYS.size).toBe(EXERCISES.filter((e) => e.key !== 'custom').length)
+})

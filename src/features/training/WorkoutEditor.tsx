@@ -105,9 +105,6 @@ export function WorkoutEditor({
         return (
           <section key={ex.id} className="border border-line bg-surface-sunken" aria-label={name}>
             <div className="flex items-center justify-between gap-2 border-b border-line px-3 py-2">
-              {exerciseImageUrl(ex.exerciseKey) && (
-                <img src={exerciseImageUrl(ex.exerciseKey) ?? undefined} alt="" loading="lazy" decoding="async" data-testid="exercise-image" className="h-12 w-[72px] shrink-0 rounded-sm object-cover" />
-              )}
               <div className="min-w-0 flex-1">
                 <p className="truncate font-display text-[15px] font-bold uppercase tracking-[0.04em]">
                   {index + 1}. {name}
@@ -123,6 +120,16 @@ export function WorkoutEditor({
                 <Trash2 size={14} aria-hidden />
               </Button>
             </div>
+            {exerciseImageUrl(ex.exerciseKey) && (
+              <img
+                src={exerciseImageUrl(ex.exerciseKey) ?? undefined}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                data-testid="exercise-image"
+                className="aspect-[3/2] max-h-48 w-full border-b border-line object-cover"
+              />
+            )}
 
             <ol className="divide-y divide-line">
               {ex.sets.map((set, i) => {

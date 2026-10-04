@@ -186,3 +186,14 @@ test.describe('Im Bildschirm', () => {
     }
   })
 })
+
+test('Übungsbild erscheint im Editor, sobald es vorliegt', async ({ page }) => {
+  await openGuest(page)
+  await page.goto('/training', { waitUntil: 'domcontentloaded' })
+  await page.getByRole('button', { name: 'Neue Einheit' }).click()
+  await page.getByLabel('Übung hinzufügen').fill('knie')
+  await page.getByRole('option', { name: /Kniebeuge \(Langhantel\)/ }).click()
+  const img = page.getByTestId('exercise-image').first()
+  await expect(img).toBeVisible()
+  await expect.poll(async () => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth)).toBe(1024)
+})
