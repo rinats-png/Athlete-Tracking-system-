@@ -37,7 +37,7 @@ export function BlockScreen() {
   const report = useMemo(() => (block ? blockReport(block, data.results, today) : null), [block, data.results, today])
 
   if (trainingPlanMode() === 'off') return <EmptyState title={t('plan.title')} body={t('plan.off')} />
-  if (!block || !report) return <EmptyState title={t('block.title')} body={t('block.none')} action={<Link to="/plan" className="inline-flex min-h-11 items-center text-accent-text underline">{t('block.toPlan')}</Link>} />
+  if (!block || !report) return <EmptyState title={t('block.title')} body={t('block.none')} action={<Link to="/plan/waehlen" className="inline-flex min-h-11 items-center text-accent-text underline">{t('block.toPlan')}</Link>} />
 
   const week = blockWeek(block, today)
   const testName = (slug: string) => pick(getTest(slug)?.name, locale) ?? slug
@@ -156,7 +156,7 @@ export function BlockScreen() {
             {next.unproven.length > 0 && <p data-testid="block-next-unproven">{t('block.next.unproven', { tests: next.unproven.map(testName).join(', ') })}</p>}
             {next.missing.length > 0 && <p data-testid="block-next-missing">{t('block.next.missing', { tests: next.missing.map(testName).join(', ') })}</p>}
             <p className="text-[12px] text-ink-secondary">{t('block.next.note')}</p>
-            <Link to={`/plan?phase=${next.phase}`} data-testid="block-next-plan" className="inline-flex min-h-11 items-center rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">
+            <Link to={`/plan/neu?phase=${next.phase}`} data-testid="block-next-plan" className="inline-flex min-h-11 items-center rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">
               {t('block.next.button')}
             </Link>
           </div>

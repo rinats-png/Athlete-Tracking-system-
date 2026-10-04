@@ -84,7 +84,7 @@ test.describe('Fachlogik', () => {
 })
 
 test('Navigation des Athleten: fünf Bereiche, alte Adressen führen auf den richtigen', () => {
-  expect(NAV_ITEMS.map((i) => i.key)).toEqual(['athleteToday', 'athletePerformance', 'athleteTest', 'fuel', 'athleteMore'])
+  expect(NAV_ITEMS.map((i) => i.key)).toEqual(['athleteToday', 'athleteTest', 'athletePlan', 'athletePerformance', 'fuel', 'athleteMore'])
   expect(navKeyForPath('/')).toBe('athleteToday')
   expect(navKeyForPath('/verlauf')).toBe('athletePerformance')
   expect(navKeyForPath('/analyse/laeufe')).toBe('athletePerformance')

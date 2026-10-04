@@ -3131,5 +3131,64 @@
     "minutes": "Duración en minutos",
     "rpe": "Esfuerzo (RPE 1–10)",
     "save": "Registrar sesión"
+  },
+  "planHub": {
+    "eyebrow": "Entrenamiento",
+    "title": "Plan",
+    "competition": "Objetivo: {{name}}",
+    "competitionUnnamed": "tu competición",
+    "empty": {
+      "title": "Todavía no hay un bloque activo",
+      "body": "Elige un camino hacia un plan. El plan es una propuesta a partir de reglas respaldadas; el entrenador cambia y decide.",
+      "cta": "Elegir plan"
+    },
+    "block": "BLOQUE ACTUAL",
+    "weekOf": "Semana {{week}} de {{weeks}} · fase {{phase}}",
+    "notStarted": "El bloque empieza el próximo lunes.",
+    "over": "El bloque ha terminado.",
+    "retestIn_one": "Retest en {{count}} día",
+    "retestIn_other": "Retest en {{count}} días",
+    "competitionIn_one": "Competición en {{count}} día",
+    "competitionIn_other": "Competición en {{count}} días",
+    "today": "Hoy",
+    "start": "Empezar sesión",
+    "todayNone": "Hoy no hay nada abierto.",
+    "thisWeek": "Esta semana",
+    "ofCount": "de {{count}}",
+    "doneSessions": "sesiones completadas",
+    "goal": "Objetivo del bloque",
+    "retest": "Retest",
+    "retestEnd_one": "en {{count}} día",
+    "retestEnd_other": "en {{count}} días",
+    "why": {
+      "title": "¿Por qué entreno esto?",
+      "text": "Este bloque persigue: {{intents}}. Las sesiones proceden de reglas guardadas; cada una muestra su evidencia y su estado de revisión.",
+      "link": "¿Por qué? Sesiones y evidencia"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Pruebas",
+      "library": "Biblioteca",
+      "ask": "Preguntas"
+    }
+  },
+  "planWay": {
+    "title": "Elegir plan",
+    "intro": "Tres caminos hacia un plan. Cada sesión muestra de dónde viene.",
+    "template": {
+      "title": "Usar un plan preparado",
+      "sub": "Programas a partir de reglas respaldadas"
+    },
+    "own": {
+      "title": "Crear tu propio plan",
+      "sub": "Control total y flexibilidad"
+    },
+    "computed": {
+      "title": "Calcular un plan",
+      "sub": "A partir de tus pruebas y tu perfil, calculado con reglas respaldadas"
+    },
+    "available": "Disponible",
+    "soon": "Próximamente",
+    "note": "Un modelo de lenguaje no crea planes. A lo sumo formula explicaciones."
   }
 }

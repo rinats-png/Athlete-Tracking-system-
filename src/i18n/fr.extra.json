@@ -3131,5 +3131,64 @@
     "minutes": "Durée en minutes",
     "rpe": "Effort (RPE 1–10)",
     "save": "Enregistrer la séance"
+  },
+  "planHub": {
+    "eyebrow": "Entraînement",
+    "title": "Plan",
+    "competition": "Objectif : {{name}}",
+    "competitionUnnamed": "ta compétition",
+    "empty": {
+      "title": "Pas encore de bloc actif",
+      "body": "Choisis un chemin vers un plan. Le plan est une proposition issue de règles documentées ; l'entraîneur modifie et décide.",
+      "cta": "Choisir un plan"
+    },
+    "block": "BLOC ACTUEL",
+    "weekOf": "Semaine {{week}} sur {{weeks}} · phase {{phase}}",
+    "notStarted": "Le bloc commence lundi prochain.",
+    "over": "Le bloc est terminé.",
+    "retestIn_one": "Retest dans {{count}} jour",
+    "retestIn_other": "Retest dans {{count}} jours",
+    "competitionIn_one": "Compétition dans {{count}} jour",
+    "competitionIn_other": "Compétition dans {{count}} jours",
+    "today": "Aujourd'hui",
+    "start": "Démarrer la séance",
+    "todayNone": "Rien n'est ouvert aujourd'hui.",
+    "thisWeek": "Cette semaine",
+    "ofCount": "sur {{count}}",
+    "doneSessions": "séances terminées",
+    "goal": "Objectif du bloc",
+    "retest": "Retest",
+    "retestEnd_one": "dans {{count}} jour",
+    "retestEnd_other": "dans {{count}} jours",
+    "why": {
+      "title": "Pourquoi je m'entraîne ainsi ?",
+      "text": "Ce bloc vise : {{intents}}. Les séances viennent de règles enregistrées ; chacune montre ses preuves et son état de vérification.",
+      "link": "Pourquoi ? Séances et preuves"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Tests",
+      "library": "Bibliothèque",
+      "ask": "Questions"
+    }
+  },
+  "planWay": {
+    "title": "Choisir un plan",
+    "intro": "Trois chemins vers un plan. Chaque séance montre d'où elle vient.",
+    "template": {
+      "title": "Utiliser un plan prêt",
+      "sub": "Programmes issus de règles documentées"
+    },
+    "own": {
+      "title": "Créer son propre plan",
+      "sub": "Contrôle total et flexibilité"
+    },
+    "computed": {
+      "title": "Calculer un plan",
+      "sub": "À partir de tes tests et de ton profil, calculé à partir de règles documentées"
+    },
+    "available": "Disponible",
+    "soon": "Bientôt",
+    "note": "Un modèle de langage ne crée pas de plans. Il formule tout au plus des explications."
   }
 }

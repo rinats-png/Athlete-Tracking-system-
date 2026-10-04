@@ -3131,5 +3131,64 @@
     "minutes": "Dauer in Minuten",
     "rpe": "Anstrengung (RPE 1–10)",
     "save": "Einheit eintragen"
+  },
+  "planHub": {
+    "eyebrow": "Training",
+    "title": "Plan",
+    "competition": "Ziel: {{name}}",
+    "competitionUnnamed": "dein Wettkampf",
+    "empty": {
+      "title": "Noch kein aktiver Block",
+      "body": "Wähle einen Weg zum Plan. Der Plan ist ein Vorschlag aus belegten Regeln; der Trainer ändert und entscheidet.",
+      "cta": "Plan wählen"
+    },
+    "block": "AKTUELLER BLOCK",
+    "weekOf": "Woche {{week}} von {{weeks}} · Phase {{phase}}",
+    "notStarted": "Der Block beginnt am nächsten Montag.",
+    "over": "Der Block ist zu Ende.",
+    "retestIn_one": "Retest in {{count}} Tag",
+    "retestIn_other": "Retest in {{count}} Tagen",
+    "competitionIn_one": "Wettkampf in {{count}} Tag",
+    "competitionIn_other": "Wettkampf in {{count}} Tagen",
+    "today": "Heute",
+    "start": "Einheit starten",
+    "todayNone": "Heute ist nichts offen.",
+    "thisWeek": "Diese Woche",
+    "ofCount": "von {{count}}",
+    "doneSessions": "Einheiten abgeschlossen",
+    "goal": "Blockziel",
+    "retest": "Retest",
+    "retestEnd_one": "in {{count}} Tag",
+    "retestEnd_other": "in {{count}} Tagen",
+    "why": {
+      "title": "Warum trainiere ich das?",
+      "text": "Dieser Block verfolgt: {{intents}}. Die Einheiten stammen aus hinterlegten Regeln; jede zeigt Evidenz und Prüfstatus.",
+      "link": "Warum? Einheiten und Belege"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Tests",
+      "library": "Bibliothek",
+      "ask": "Fragen"
+    }
+  },
+  "planWay": {
+    "title": "Plan wählen",
+    "intro": "Drei Wege zum Plan. Jede Einheit zeigt, woher sie kommt.",
+    "template": {
+      "title": "Vorgefertigten Plan nutzen",
+      "sub": "Programme aus belegten Regeln"
+    },
+    "own": {
+      "title": "Plan selbst erstellen",
+      "sub": "Volle Kontrolle und Flexibilität"
+    },
+    "computed": {
+      "title": "Plan berechnen",
+      "sub": "Aus deinen Tests und deinem Profil, berechnet aus belegten Regeln"
+    },
+    "available": "Verfügbar",
+    "soon": "Folgt",
+    "note": "Ein Sprachmodell erzeugt keine Pläne. Es formuliert höchstens Erklärungen."
   }
 }

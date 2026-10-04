@@ -3131,5 +3131,64 @@
     "minutes": "Varighet i minutter",
     "rpe": "Anstrengelse (RPE 1–10)",
     "save": "Registrer økt"
+  },
+  "planHub": {
+    "eyebrow": "Trening",
+    "title": "Plan",
+    "competition": "Mål: {{name}}",
+    "competitionUnnamed": "konkurransen din",
+    "empty": {
+      "title": "Ingen aktiv blokk ennå",
+      "body": "Velg en vei til en plan. Planen er et forslag fra dokumenterte regler; treneren endrer og bestemmer.",
+      "cta": "Velg plan"
+    },
+    "block": "GJELDENDE BLOKK",
+    "weekOf": "Uke {{week}} av {{weeks}} · fase {{phase}}",
+    "notStarted": "Blokken starter neste mandag.",
+    "over": "Blokken er over.",
+    "retestIn_one": "Retest om {{count}} dag",
+    "retestIn_other": "Retest om {{count}} dager",
+    "competitionIn_one": "Konkurranse om {{count}} dag",
+    "competitionIn_other": "Konkurranse om {{count}} dager",
+    "today": "I dag",
+    "start": "Start økt",
+    "todayNone": "Ingenting er åpent i dag.",
+    "thisWeek": "Denne uken",
+    "ofCount": "av {{count}}",
+    "doneSessions": "økter fullført",
+    "goal": "Blokkmål",
+    "retest": "Retest",
+    "retestEnd_one": "om {{count}} dag",
+    "retestEnd_other": "om {{count}} dager",
+    "why": {
+      "title": "Hvorfor trener jeg dette?",
+      "text": "Denne blokken sikter mot: {{intents}}. Øktene kommer fra lagrede regler; hver økt viser belegg og kontrollstatus.",
+      "link": "Hvorfor? Økter og belegg"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Tester",
+      "library": "Bibliotek",
+      "ask": "Spørsmål"
+    }
+  },
+  "planWay": {
+    "title": "Velg plan",
+    "intro": "Tre veier til en plan. Hver økt viser hvor den kommer fra.",
+    "template": {
+      "title": "Bruk en ferdig plan",
+      "sub": "Programmer fra dokumenterte regler"
+    },
+    "own": {
+      "title": "Lag din egen plan",
+      "sub": "Full kontroll og fleksibilitet"
+    },
+    "computed": {
+      "title": "Beregn en plan",
+      "sub": "Fra testene og profilen din, beregnet fra dokumenterte regler"
+    },
+    "available": "Tilgjengelig",
+    "soon": "Kommer",
+    "note": "En språkmodell lager ikke planer. Den formulerer høyst forklaringer."
   }
 }

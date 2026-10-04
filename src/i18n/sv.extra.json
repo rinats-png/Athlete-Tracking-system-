@@ -3131,5 +3131,64 @@
     "minutes": "Längd i minuter",
     "rpe": "Ansträngning (RPE 1–10)",
     "save": "Registrera pass"
+  },
+  "planHub": {
+    "eyebrow": "Träning",
+    "title": "Plan",
+    "competition": "Mål: {{name}}",
+    "competitionUnnamed": "din tävling",
+    "empty": {
+      "title": "Inget aktivt block ännu",
+      "body": "Välj en väg till en plan. Planen är ett förslag från belagda regler; tränaren ändrar och bestämmer.",
+      "cta": "Välj plan"
+    },
+    "block": "AKTUELLT BLOCK",
+    "weekOf": "Vecka {{week}} av {{weeks}} · fas {{phase}}",
+    "notStarted": "Blocket börjar nästa måndag.",
+    "over": "Blocket är slut.",
+    "retestIn_one": "Omtest om {{count}} dag",
+    "retestIn_other": "Omtest om {{count}} dagar",
+    "competitionIn_one": "Tävling om {{count}} dag",
+    "competitionIn_other": "Tävling om {{count}} dagar",
+    "today": "I dag",
+    "start": "Starta pass",
+    "todayNone": "Inget är öppet i dag.",
+    "thisWeek": "Den här veckan",
+    "ofCount": "av {{count}}",
+    "doneSessions": "pass avslutade",
+    "goal": "Blockmål",
+    "retest": "Omtest",
+    "retestEnd_one": "om {{count}} dag",
+    "retestEnd_other": "om {{count}} dagar",
+    "why": {
+      "title": "Varför tränar jag det här?",
+      "text": "Det här blocket syftar till: {{intents}}. Passen kommer från lagrade regler; varje pass visar belägg och granskningsstatus.",
+      "link": "Varför? Pass och belägg"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Test",
+      "library": "Bibliotek",
+      "ask": "Frågor"
+    }
+  },
+  "planWay": {
+    "title": "Välj plan",
+    "intro": "Tre vägar till en plan. Varje pass visar varifrån det kommer.",
+    "template": {
+      "title": "Använd en färdig plan",
+      "sub": "Program från belagda regler"
+    },
+    "own": {
+      "title": "Skapa en egen plan",
+      "sub": "Full kontroll och flexibilitet"
+    },
+    "computed": {
+      "title": "Beräkna en plan",
+      "sub": "Från dina test och din profil, beräknad ur belagda regler"
+    },
+    "available": "Tillgänglig",
+    "soon": "Kommer",
+    "note": "En språkmodell skapar inga planer. Den formulerar högst förklaringar."
   }
 }

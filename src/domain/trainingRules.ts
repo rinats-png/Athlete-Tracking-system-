@@ -8,14 +8,8 @@ import type { EvidenceRule, EvidenceSpecificity, Intent, Phase, SportFamily } fr
  * Ohne ihn sieht ein Mensch nur geprüfte Regeln — heute also keine.
  */
 
-export type PlanMode = 'off' | 'preview' | 'live'
-
-/** Aus dem Bau-Schalter. Alles außer `preview` ist aus; `live` wird nur durch geprüfte Regeln wirksam. */
-export function planMode(flag: string | undefined): PlanMode {
-  if (flag === 'preview') return 'preview'
-  if (flag === 'on') return 'live'
-  return 'off'
-}
+import { planMode, type PlanMode } from '@/domain/planMode'
+export { planMode, type PlanMode }
 
 export const isReviewed = (rule: EvidenceRule): boolean => rule.review.state === 'reviewed'
 

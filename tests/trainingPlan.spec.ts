@@ -149,7 +149,7 @@ test.describe('Bildschirm Plan (Vorschau)', () => {
       data.athletes[0].profile.maxHr = 195
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
-    await page.goto('/plan', { waitUntil: 'domcontentloaded' })
+    await page.goto('/plan/neu', { waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('plan-preview')).toBeVisible()
     await expect(page.getByTestId('plan-preview-banner')).toBeVisible()
     await expect(page.getByTestId('plan-retest')).toBeVisible()
@@ -173,7 +173,7 @@ test.describe('Bildschirm Plan (Vorschau)', () => {
       data.athletes[0].profile.disciplineId = 'marathon'
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
-    await page.goto('/plan', { waitUntil: 'domcontentloaded' })
+    await page.goto('/plan/neu', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText(/Pilotwelt/)).toBeVisible()
   })
 })
@@ -240,7 +240,7 @@ test('Bildschirm Plan: HYROX zeigt Hinweise zur Studienlage mit Quellen', async 
     data.athletes[0].profile.maxHr = 190
     localStorage.setItem('kydon.data.v1', JSON.stringify(data))
   })
-  await page.goto('/plan', { waitUntil: 'domcontentloaded' })
+  await page.goto('/plan/neu', { waitUntil: 'domcontentloaded' })
   await expect(page.getByTestId('plan-preview')).toBeVisible()
   const text = await page.getByTestId('plan-preview').innerText()
   expect(text).not.toMatch(/plan\.[a-z]+\.|\{\{/)

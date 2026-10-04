@@ -169,7 +169,7 @@ test.describe('Block: Bildschirme', () => {
     await expect(page.getByTestId('block-next')).toBeVisible()
     await expect(page.getByTestId('block-next-missing')).toBeVisible()
     await page.getByTestId('block-next-plan').click()
-    await expect(page).toHaveURL(/\/plan\?phase=SPECIFIC/)
+    await expect(page).toHaveURL(/\/plan\/neu\?phase=SPECIFIC/)
     await expect(page.getByTestId('plan-phase')).toHaveValue('SPECIFIC')
     await page.goto('/plan/block', { waitUntil: 'domcontentloaded' })
     await page.getByTestId('block-close').click()

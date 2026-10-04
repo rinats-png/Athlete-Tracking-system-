@@ -25,7 +25,8 @@
       "athleteToday": "Vandaag",
       "athletePerformance": "Prestatie",
       "athleteTest": "Test",
-      "athleteMore": "Meer"
+      "athleteMore": "Meer",
+      "athletePlan": "Plan"
     },
     "overview": "Overzicht",
     "diagnostics": "Diagnostiek",
@@ -40,7 +41,8 @@
     "athleteToday": "Vandaag",
     "athletePerformance": "Prestatie",
     "athleteTest": "Test",
-    "athleteMore": "Meer"
+    "athleteMore": "Meer",
+    "athletePlan": "Plan"
   },
   "actions": {
     "startTest": "Test starten",

@@ -3131,5 +3131,64 @@
     "minutes": "Duur in minuten",
     "rpe": "Inspanning (RPE 1–10)",
     "save": "Training vastleggen"
+  },
+  "planHub": {
+    "eyebrow": "Training",
+    "title": "Plan",
+    "competition": "Doel: {{name}}",
+    "competitionUnnamed": "je wedstrijd",
+    "empty": {
+      "title": "Nog geen actief blok",
+      "body": "Kies een weg naar een plan. Het plan is een voorstel uit onderbouwde regels; de trainer past aan en beslist.",
+      "cta": "Plan kiezen"
+    },
+    "block": "HUIDIG BLOK",
+    "weekOf": "Week {{week}} van {{weeks}} · fase {{phase}}",
+    "notStarted": "Het blok begint volgende maandag.",
+    "over": "Het blok is afgelopen.",
+    "retestIn_one": "Hermeting over {{count}} dag",
+    "retestIn_other": "Hermeting over {{count}} dagen",
+    "competitionIn_one": "Wedstrijd over {{count}} dag",
+    "competitionIn_other": "Wedstrijd over {{count}} dagen",
+    "today": "Vandaag",
+    "start": "Training starten",
+    "todayNone": "Vandaag staat niets open.",
+    "thisWeek": "Deze week",
+    "ofCount": "van {{count}}",
+    "doneSessions": "trainingen afgerond",
+    "goal": "Blokdoel",
+    "retest": "Hermeting",
+    "retestEnd_one": "over {{count}} dag",
+    "retestEnd_other": "over {{count}} dagen",
+    "why": {
+      "title": "Waarom train ik dit?",
+      "text": "Dit blok richt zich op: {{intents}}. De trainingen komen uit opgeslagen regels; elke toont bewijs en controlestatus.",
+      "link": "Waarom? Trainingen en bewijs"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Tests",
+      "library": "Bibliotheek",
+      "ask": "Vragen"
+    }
+  },
+  "planWay": {
+    "title": "Plan kiezen",
+    "intro": "Drie wegen naar een plan. Elke training toont waar ze vandaan komt.",
+    "template": {
+      "title": "Kant-en-klaar plan gebruiken",
+      "sub": "Programma's uit onderbouwde regels"
+    },
+    "own": {
+      "title": "Zelf een plan maken",
+      "sub": "Volledige controle en flexibiliteit"
+    },
+    "computed": {
+      "title": "Plan berekenen",
+      "sub": "Uit je tests en profiel, berekend uit onderbouwde regels"
+    },
+    "available": "Beschikbaar",
+    "soon": "Volgt",
+    "note": "Een taalmodel maakt geen plannen. Het formuleert hooguit uitleg."
   }
 }

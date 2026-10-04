@@ -54,7 +54,7 @@ test.describe('Fachlogik', () => {
 test.describe('Navigation nach Rolle', () => {
   test('Trainer und Athleten haben je fünf Bereiche', () => {
     expect(COACH_NAV_ITEMS.map((i) => i.key)).toEqual(['coachToday', 'coachAthletes', 'coachTest', 'coachTeam', 'coachMore'])
-    expect(NAV_ITEMS).toHaveLength(5)
+    expect(NAV_ITEMS).toHaveLength(6) // mit Trainingsbereich (Bau-Schalter); ohne ihn fünf
   })
   test('die Pfade führen auf den richtigen Bereich', () => {
     expect(navKeyForPath('/', 'coach')).toBe('coachToday')
@@ -133,5 +133,5 @@ test('Bildschirm: kein seitliches Überlaufen, hell und dunkel', async ({ page }
 
 test('Athleten sehen ihre fünf Bereiche', async ({ page }) => {
   await openDemo(page)
-  await expect(page.getByRole('navigation', { name: 'Hauptnavigation' }).getByRole('button')).toHaveCount(5)
+  await expect(page.getByRole('navigation', { name: 'Hauptnavigation' }).getByRole('button')).toHaveCount(6)
 })

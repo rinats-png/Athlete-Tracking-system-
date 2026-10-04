@@ -3131,5 +3131,64 @@
     "minutes": "Duration in minutes",
     "rpe": "Effort (RPE 1–10)",
     "save": "Log session"
+  },
+  "planHub": {
+    "eyebrow": "Training",
+    "title": "Plan",
+    "competition": "Goal: {{name}}",
+    "competitionUnnamed": "your competition",
+    "empty": {
+      "title": "No active block yet",
+      "body": "Choose a way to a plan. The plan is a suggestion from evidence-based rules; the coach changes and decides.",
+      "cta": "Choose plan"
+    },
+    "block": "CURRENT BLOCK",
+    "weekOf": "Week {{week}} of {{weeks}} · {{phase}} phase",
+    "notStarted": "The block starts next Monday.",
+    "over": "The block is over.",
+    "retestIn_one": "Retest in {{count}} day",
+    "retestIn_other": "Retest in {{count}} days",
+    "competitionIn_one": "Competition in {{count}} day",
+    "competitionIn_other": "Competition in {{count}} days",
+    "today": "Today",
+    "start": "Start session",
+    "todayNone": "Nothing is open today.",
+    "thisWeek": "This week",
+    "ofCount": "of {{count}}",
+    "doneSessions": "sessions completed",
+    "goal": "Block goal",
+    "retest": "Retest",
+    "retestEnd_one": "in {{count}} day",
+    "retestEnd_other": "in {{count}} days",
+    "why": {
+      "title": "Why am I training this?",
+      "text": "This block pursues: {{intents}}. The sessions come from stored rules; each shows its evidence and review status.",
+      "link": "Why? Sessions and evidence"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Tests",
+      "library": "Library",
+      "ask": "Questions"
+    }
+  },
+  "planWay": {
+    "title": "Choose plan",
+    "intro": "Three ways to a plan. Every session shows where it comes from.",
+    "template": {
+      "title": "Use a ready-made plan",
+      "sub": "Programs from evidence-based rules"
+    },
+    "own": {
+      "title": "Create your own plan",
+      "sub": "Full control and flexibility"
+    },
+    "computed": {
+      "title": "Compute a plan",
+      "sub": "From your tests and profile, computed from evidence-based rules"
+    },
+    "available": "Available",
+    "soon": "Coming",
+    "note": "A language model does not create plans. At most it phrases explanations."
   }
 }

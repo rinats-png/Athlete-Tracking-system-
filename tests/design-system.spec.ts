@@ -168,13 +168,13 @@ async function floatingNav(page: import('@playwright/test').Page) {
 }
 
 test.describe('Schwebende Navigation', () => {
-  test('Bogen: fünf Tabs, der mittlere ist größer; Antippen blinkt zweimal, dann folgt die Seite', async ({ page }) => {
+  test('Bogen: sechs Tabs, Plan (dritter) ist größer; Antippen blinkt zweimal, dann folgt die Seite', async ({ page }) => {
     await openDemo(page)
     const nav = await floatingNav(page)
     test.skip(nav == null, 'ab lg trägt die Kopfzeile die Navigation')
 
     const buttons = nav!.getByRole('button')
-    await expect(buttons).toHaveCount(5)
+    await expect(buttons).toHaveCount(6)
     const sizes = await buttons.evaluateAll((els) => els.map((el) => el.querySelector('.nav-dot')!.getBoundingClientRect().width))
     expect(sizes[2], 'der mittlere Tab ist der größte').toBeGreaterThan(Math.max(sizes[0], sizes[1], sizes[3], sizes[4]))
     // Alle Treffflächen mindestens 44 px.

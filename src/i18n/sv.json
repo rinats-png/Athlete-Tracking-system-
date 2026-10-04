@@ -25,7 +25,8 @@
       "athleteToday": "Idag",
       "athletePerformance": "Prestation",
       "athleteTest": "Test",
-      "athleteMore": "Mer"
+      "athleteMore": "Mer",
+      "athletePlan": "Plan"
     },
     "overview": "Översikt",
     "diagnostics": "Diagnostik",
@@ -40,7 +41,8 @@
     "athleteToday": "Idag",
     "athletePerformance": "Prestation",
     "athleteTest": "Test",
-    "athleteMore": "Mer"
+    "athleteMore": "Mer",
+    "athletePlan": "Plan"
   },
   "actions": {
     "startTest": "Starta test",

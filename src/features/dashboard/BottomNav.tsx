@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { BarChart3, ClipboardList, Ellipsis, Flame, House, Users, UsersRound } from 'lucide-react'
+import { BarChart3, CalendarRange, ClipboardList, Ellipsis, Flame, House, Users, UsersRound } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
+import { planEnabled } from '@/domain/planMode'
 
 /**
  * Primäre Navigation auf Touch-Geräten.
@@ -44,23 +45,25 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
 export const NAV_ITEMS = [
   { key: 'athleteToday', icon: House, path: '/', alsoMatches: ['/uebersicht', '/checkin', '/woche'] },
   {
-    key: 'athletePerformance',
-    icon: BarChart3,
-    path: '/performance',
-    alsoMatches: ['/verlauf', '/analyse', '/bericht', '/community', '/hinweise', '/einseiter'],
-  },
-  {
     key: 'athleteTest',
     icon: ClipboardList,
     path: '/diagnostik',
     alsoMatches: ['/tests', '/sport', '/batterie', '/ergebnis', '/beobachtung', '/hrv-messung'],
+  },
+  // Training (Etappe 1 des neuen Trainingsbereichs): Hub, Block, Player, Berechnung.
+  { key: 'athletePlan', icon: CalendarRange, path: '/plan', alsoMatches: ['/training'] },
+  {
+    key: 'athletePerformance',
+    icon: BarChart3,
+    path: '/performance',
+    alsoMatches: ['/verlauf', '/analyse', '/bericht', '/community', '/hinweise', '/einseiter'],
   },
   { key: 'fuel', icon: Flame, path: '/fuel', alsoMatches: ['/ernaehrung'] },
   {
     key: 'athleteMore',
     icon: Ellipsis,
     path: '/mehr',
-    alsoMatches: ['/profil', '/tagebuch', '/training', '/cockpit', '/belastung', '/gesundheit', '/peakweek', '/sportmodul', '/sportanalyse', '/freigaben', '/team', '/preise', '/impressum', '/datenschutz', '/nutzungsbedingungen', '/auftragsverarbeitung'],
+    alsoMatches: ['/profil', '/tagebuch', '/cockpit', '/belastung', '/gesundheit', '/peakweek', '/sportmodul', '/sportanalyse', '/freigaben', '/team', '/preise', '/impressum', '/datenschutz', '/nutzungsbedingungen', '/auftragsverarbeitung'],
   },
 ] as const
 
@@ -94,8 +97,13 @@ export type NavKey = AthleteNavKey | CoachNavKey
 export type NavItem = { key: NavKey; icon: typeof House; path: string; alsoMatches: readonly string[] }
 export type NavRole = 'solo' | 'coach'
 
+/** Reihenfolge ohne Trainingsbereich: Test sitzt in der Mitte der fünf. */
+const WITHOUT_PLAN = ['athleteToday', 'athletePerformance', 'athleteTest', 'fuel', 'athleteMore']
+
 export function navItemsFor(role: NavRole): readonly NavItem[] {
-  return role === 'coach' ? COACH_NAV_ITEMS : NAV_ITEMS
+  if (role === 'coach') return COACH_NAV_ITEMS
+  if (planEnabled()) return NAV_ITEMS
+  return WITHOUT_PLAN.map((key) => NAV_ITEMS.find((i) => i.key === key)!)
 }
 
 export function pathForNavKey(key: NavKey): string {
@@ -106,8 +114,7 @@ export function pathForNavKey(key: NavKey): string {
  * Aktiver Eintrag aus dem Pfad. Längster Treffer gewinnt, damit
  * /tests/cooper_12min ebenfalls den Tab "Tests" markiert.
  */
-export function navKeyForPath(pathname: string, role: NavRole = 'solo'): NavKey {
-  const items = navItemsFor(role)
+export function navKeyForPath(pathname: string, role: NavRole = 'solo', items: readonly NavItem[] = navItemsFor(role)): NavKey {
   const match = items
     .flatMap((item) =>
       [item.path, ...item.alsoMatches]
@@ -122,18 +129,21 @@ export function navKeyForPath(pathname: string, role: NavRole = 'solo'): NavKey 
 export const BLINK_MS = 480
 
 /**
- * Lage der Tabs auf dem Bogen: Winkel auf einer Ellipse. Der mittlere Tab
- * liegt oben (90°), die übrigen verteilen sich symmetrisch. Bei vier Tabs
- * gibt es keine Mitte; dann sind alle gleich groß.
+ * Lage der Tabs auf dem Bogen: x in % der Breite, y folgt der Ellipse. Der
+ * größte Tab sitzt am höchsten Punkt. Fünf Tabs: der mittlere ist groß.
+ * Sechs Tabs: der dritte (Plan) ist groß und liegt links der Mitte.
+ * Bei einer anderen Anzahl gleichmäßig, ohne großen Tab.
  */
-const ANGLES: Record<number, number[]> = {
-  3: [135, 90, 45],
-  4: [140, 105, 75, 40],
-  5: [150, 120, 90, 60, 30],
+const X_PCT: Record<number, number[]> = {
+  5: [16.7, 30.8, 50, 69.2, 83.3],
+  6: [8.7, 23.6, 41, 60.5, 74.9, 88.7],
 }
-const RX_PCT = 38.46 // Halbachse der Tab-Ellipse in % der Breite
+const BIG_INDEX: Record<number, number> = { 5: 2, 6: 2 }
 const BASE_Y = 104 // Unterkante der Tab-Ellipse in px von oben
-const RY = 46
+const ELL_A = 178 // Halbachse in px bei 390 px Breite
+const ELL_B = 48
+
+const yFor = (xPct: number) => BASE_Y - ELL_B * Math.sqrt(Math.max(0, 1 - ((((xPct - 50) / 100) * 390) / ELL_A) ** 2))
 
 export function BottomNav({
   active = 'athleteToday',
@@ -150,8 +160,8 @@ export function BottomNav({
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   useEffect(() => () => void (timer.current && clearTimeout(timer.current)), [])
 
-  const angles = ANGLES[items.length] ?? ANGLES[5]
-  const centerIndex = items.length % 2 === 1 ? Math.floor(items.length / 2) : -1
+  const xs = X_PCT[items.length] ?? Array.from({ length: items.length }, (_, i) => ((i + 0.5) / items.length) * 90 + 5)
+  const bigIndex = BIG_INDEX[items.length] ?? -1
 
   const choose = (key: NavKey) => {
     if (blinking) return
@@ -178,7 +188,7 @@ export function BottomNav({
         className="pointer-events-none relative mx-auto h-[var(--bottom-nav-h)] max-w-md"
         style={
           {
-            '--t-w': 'clamp(44px, 14vw, 60px)',
+            '--t-w': 'clamp(44px, 13vw, 56px)',
             '--t-s': 'clamp(40px, 12vw, 48px)',
             '--c-w': 'clamp(60px, 18vw, 72px)',
             '--c-s': 'clamp(56px, 17vw, 68px)',
@@ -189,10 +199,9 @@ export function BottomNav({
           <path d="M0,122 A195,108 0 0 1 390,122 Z" style={{ fill: 'var(--surface-raised)', stroke: 'var(--line)', strokeWidth: 1.5, vectorEffect: 'non-scaling-stroke' }} />
         </svg>
         {items.map(({ key, icon: Icon }, i) => {
-          const big = i === centerIndex
-          const theta = (angles[i] * Math.PI) / 180
-          const x = 50 + RX_PCT * Math.cos(theta)
-          const cy = BASE_Y - RY * Math.sin(theta)
+          const big = i === bigIndex
+          const x = xs[i]
+          const cy = yFor(x)
           const isActive = active === key
           const w = big ? 'var(--c-w)' : 'var(--t-w)'
           const size = big ? 'var(--c-s)' : 'var(--t-s)'

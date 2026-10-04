@@ -25,7 +25,8 @@
       "athleteToday": "I dag",
       "athletePerformance": "Præstation",
       "athleteTest": "Test",
-      "athleteMore": "Mere"
+      "athleteMore": "Mere",
+      "athletePlan": "Plan"
     },
     "overview": "Oversigt",
     "diagnostics": "Diagnostik",
@@ -40,7 +41,8 @@
     "athleteToday": "I dag",
     "athletePerformance": "Præstation",
     "athleteTest": "Test",
-    "athleteMore": "Mere"
+    "athleteMore": "Mere",
+    "athletePlan": "Plan"
   },
   "actions": {
     "startTest": "Start test",

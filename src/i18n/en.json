@@ -25,7 +25,8 @@
       "athleteToday": "Today",
       "athletePerformance": "Performance",
       "athleteTest": "Test",
-      "athleteMore": "More"
+      "athleteMore": "More",
+      "athletePlan": "Plan"
     },
     "overview": "Overview",
     "diagnostics": "Diagnostics",
@@ -40,7 +41,8 @@
     "athleteToday": "Today",
     "athletePerformance": "Performance",
     "athleteTest": "Test",
-    "athleteMore": "More"
+    "athleteMore": "More",
+    "athletePlan": "Plan"
   },
   "actions": {
     "startTest": "Start test",

@@ -3131,5 +3131,64 @@
     "minutes": "Varighed i minutter",
     "rpe": "Anstrengelse (RPE 1–10)",
     "save": "Registrer session"
+  },
+  "planHub": {
+    "eyebrow": "Træning",
+    "title": "Plan",
+    "competition": "Mål: {{name}}",
+    "competitionUnnamed": "din konkurrence",
+    "empty": {
+      "title": "Endnu ingen aktiv blok",
+      "body": "Vælg en vej til en plan. Planen er et forslag fra dokumenterede regler; træneren ændrer og beslutter.",
+      "cta": "Vælg plan"
+    },
+    "block": "AKTUEL BLOK",
+    "weekOf": "Uge {{week}} af {{weeks}} · fase {{phase}}",
+    "notStarted": "Blokken starter næste mandag.",
+    "over": "Blokken er slut.",
+    "retestIn_one": "Gentest om {{count}} dag",
+    "retestIn_other": "Gentest om {{count}} dage",
+    "competitionIn_one": "Konkurrence om {{count}} dag",
+    "competitionIn_other": "Konkurrence om {{count}} dage",
+    "today": "I dag",
+    "start": "Start session",
+    "todayNone": "Intet er åbent i dag.",
+    "thisWeek": "Denne uge",
+    "ofCount": "af {{count}}",
+    "doneSessions": "sessioner afsluttet",
+    "goal": "Blokmål",
+    "retest": "Gentest",
+    "retestEnd_one": "om {{count}} dag",
+    "retestEnd_other": "om {{count}} dage",
+    "why": {
+      "title": "Hvorfor træner jeg dette?",
+      "text": "Denne blok sigter mod: {{intents}}. Sessionerne kommer fra gemte regler; hver session viser belæg og kontrolstatus.",
+      "link": "Hvorfor? Sessioner og belæg"
+    },
+    "shortcut": {
+      "plan": "Plan",
+      "tests": "Tests",
+      "library": "Bibliotek",
+      "ask": "Spørgsmål"
+    }
+  },
+  "planWay": {
+    "title": "Vælg plan",
+    "intro": "Tre veje til en plan. Hver session viser, hvor den kommer fra.",
+    "template": {
+      "title": "Brug en færdig plan",
+      "sub": "Programmer fra dokumenterede regler"
+    },
+    "own": {
+      "title": "Lav din egen plan",
+      "sub": "Fuld kontrol og fleksibilitet"
+    },
+    "computed": {
+      "title": "Beregn en plan",
+      "sub": "Ud fra dine tests og din profil, beregnet af dokumenterede regler"
+    },
+    "available": "Tilgængelig",
+    "soon": "Kommer",
+    "note": "En sprogmodel laver ikke planer. Den formulerer højst forklaringer."
   }
 }
