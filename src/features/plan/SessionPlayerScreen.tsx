@@ -128,7 +128,7 @@ export function SessionPlayerScreen() {
         </div>
       )}
       <Panel className="mb-4">
-        <PanelHeader title={t(`plan.intent.${session.primaryIntent}`)} subtitle={t(`plan.rules.${session.ruleId}.title`)} />
+        <PanelHeader title={t(`plan.intent.${session.primaryIntent}`)} subtitle={session.ruleId ? t(`plan.rules.${session.ruleId}.title`) : t('plan.openSession')} />
         <div className="px-4 pb-4">
           {session.blocks.map((b, i) => (
             <p key={i} className="text-[14px]">{blockText(b, t)}</p>

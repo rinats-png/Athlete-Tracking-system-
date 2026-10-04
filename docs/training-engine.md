@@ -100,3 +100,14 @@ Für alle Kampfsport-Pläne gilt ein fester Hinweis: Technik, Taktik, Sparring u
 - **Block-Bericht:** Einheiten gegen Plan; die Messung am Blockende wird gegen den typischen Messfehler eingeordnet (`changeReport`). Eine fehlende Messung ist erst nach Blockende ein Fehlen; der Bericht sagt nie, ob der Plan die Ursache einer Veränderung war.
 
 **Noch offen:** Plan für den nächsten Block aus dem Bericht ableiten (ADAPT), Block-Bericht als Seite für Eltern oder Verband, Anzeige des Plans für den Athleten, wenn der Trainer ihn führt (heute liegt der Block auf dem Gerät des aktiven Athleten).
+
+## Planbibliothek, Plan-Detail, Plan anpassen (Trainingsbereich Etappe 2)
+
+Zweiter Weg zum Block neben der Berechnung: eine **Vorlage** (`src/data/planTemplates.ts`).
+
+- Eine Vorlage ist eine **Struktur**: Plätze (Absicht, Wochenspanne, Häufigkeit), keine Dosis. Ein Platz zeigt auf eine Regel des Registers; die Dosis, Evidenz und der Prüfstatus kommen von dort. Ein Platz **ohne** Regel ist eine **offene Einheit** (`kind: 'open'`): Absicht ja, Zahlen nein, keine Dauer. So entsteht keine erfundene Dosis (Regel 6 und 11).
+- **Alle sieben Vorlagen sind ungeprüft** und nur hinter dem Vorschauschalter sichtbar: Hybrid-Basis, Hybrid-Kraft, Hyrox-Vorbereitung, Grappling Basis und Aufbau, Striking Basis und Aufbau. Ein Prüffall stellt sicher, dass jeder Regelplatz zu Familie und Phase seiner Vorlage passt.
+- **Individualisieren** (`src/domain/planFit.ts`, deterministisch): verfügbare Tage, harte Runden, Ausstattung (Gewichte, Ausdauergerät, Sprintstrecke), Startdatum, Wettkampftermin. Es gelten die Planungsregeln des Bauers (eine Einheit je Tag, kein hoher Reiz neben harten Runden, Wochenbudget 3, Hybrid mit Abstand). Was nicht passt, entfällt **sichtbar mit Grund** (`equipment`, `rule_unavailable`, `hr_max_unknown`, `no_slot`, `budget`); nichts wird still verschoben.
+- Mit Wettkampftermin endet der Block davor; reicht die Zeit nicht, startet er früh und die App sagt es (`tooShort`).
+- **Schema 34:** Einheiten haben `weekFrom`, `weekTo` (Phasen innerhalb des Blocks), `kind` und nullbare Regel- und Evidenzfelder; der Block merkt `templateId` und `eventDay`. Heute, Wochenprüfung, Override und Bericht rechnen mit der Wochenspanne.
+- Offen bleiben bis zu den nächsten Etappen: weitere Vorlagen aus der Spezifikation, Kalender, eigener Plan, Plan-Import.

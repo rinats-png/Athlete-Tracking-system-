@@ -2963,7 +2963,13 @@
       "REPEATED_SPRINT": "Sprints repetidos",
       "MAX_STRENGTH": "Fuerza máxima",
       "POWER": "Potencia",
-      "PLYOMETRIC": "Pliometría"
+      "PLYOMETRIC": "Pliometría",
+      "AEROBIC_BASE": "Resistencia de base",
+      "COMPROMISED_RUNNING": "Correr con fatiga",
+      "HYROX_STATIONS": "Estaciones Hyrox",
+      "GRIP_ENDURANCE": "Resistencia de agarre",
+      "FIGHT_SIMULATION": "Simulación de combate",
+      "RACE_REHEARSAL": "Ensayo de competición"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min de trabajo, {{rec}} min de pausa activa, {{min}}–{{max}} % de la frecuencia cardíaca máxima",
@@ -3057,7 +3063,8 @@
       "button": "Adoptar como bloque",
       "hint": "El bloque empieza el próximo lunes. Después puedes cambiar sesiones; cada cambio necesita un motivo.",
       "toBlock": "Al bloque activo"
-    }
+    },
+    "openSession": "Sesión abierta: intención sin dosis documentada"
   },
   "block": {
     "eyebrow": "Bloque",
@@ -3190,5 +3197,85 @@
     "available": "Disponible",
     "soon": "Próximamente",
     "note": "Un modelo de lenguaje no crea planes. A lo sumo formula explicaciones."
+  },
+  "tpl": {
+    "libraryTitle": "Biblioteca de planes",
+    "libraryIntro": "Plantillas para tu deporte. La dosis viene de reglas documentadas; si no hay, la sesión queda abierta.",
+    "libraryIntroAll": "Plantillas para todos los deportes. Elige un deporte en tu perfil para ver solo las suyas.",
+    "goalLabel": "Objetivo",
+    "goal": {
+      "all": "Todos",
+      "base": "Base",
+      "strength": "Fuerza",
+      "power": "Potencia",
+      "event": "Competición"
+    },
+    "none": "No hay plantilla para esta selección.",
+    "unreviewed": "Sin revisar",
+    "weeksTotal": "{{n}} semanas",
+    "family": {
+      "combat_grappling": "Deporte de combate, agarre",
+      "combat_striking": "Deporte de combate, golpeo",
+      "hybrid": "Híbrido"
+    },
+    "note": "Todas las plantillas están sin revisar y aún no las ha aprobado una persona cualificada. Son una sugerencia, no una prescripción.",
+    "week": "Semana {{n}}",
+    "weeks": "Semanas {{from}}–{{to}}",
+    "openDose": "Abierta: sin dosis documentada, la sesión solo indica la intención",
+    "unknown": "Esta plantilla no existe.",
+    "structure": "Estructura",
+    "structureNote": "Las cifras solo aparecen donde una regla del registro las da. Lo demás lo decides tú o tu entrenador.",
+    "fit": {
+      "cta": "Ajustar y adoptar",
+      "title": "Ajustar el plan",
+      "intro": "Coloca la plantilla en tu semana. Lo que no encaja desaparece de forma visible, con el motivo.",
+      "equipment": "Equipamiento disponible",
+      "start": "Inicio (como pronto)",
+      "event": "Fecha de competición (opcional)",
+      "tooShort": "Quedan menos de {{weeks}} semanas hasta la fecha. El bloque empieza pronto pero termina después de la fecha.",
+      "startsOn": "El bloque empieza el lunes {{day}}."
+    },
+    "equipment": {
+      "weights": "Pesas",
+      "cardio": "Máquina de cardio o ruta",
+      "sprint": "Pista de sprint"
+    },
+    "skip": {
+      "equipment": "Falta equipamiento",
+      "rule_unavailable": "La regla no encaja con la fase, la familia o la antigüedad",
+      "hr_max_unknown": "sin objetivos de pulso sin frecuencia cardíaca máxima conocida",
+      "no_slot": "ningún día libre que encaje con las reglas",
+      "budget": "presupuesto de alta intensidad agotado"
+    },
+    "t": {
+      "hybrid_base": {
+        "name": "Base híbrida",
+        "sum": "Construir resistencia y fuerza a la vez, con una sesión de intervalos y correr con fatiga."
+      },
+      "hybrid_strength": {
+        "name": "Fuerza híbrida",
+        "sum": "Fuerza antes que resistencia: fuerza máxima, luego potencia, más una sesión de resistencia suave."
+      },
+      "hyrox_prep": {
+        "name": "Preparación Hyrox",
+        "sum": "Ocho semanas hacia una competición: intervalos, fuerza, estaciones y un ensayo en la semana 7."
+      },
+      "grappling_gpp": {
+        "name": "Agarre: base",
+        "sum": "Fuerza máxima y sprints repetidos para judo, lucha y BJJ, más resistencia de agarre."
+      },
+      "grappling_build": {
+        "name": "Agarre: desarrollo",
+        "sum": "Potencia, pliometría y sprints repetidos, con una simulación de combate al final."
+      },
+      "striking_gpp": {
+        "name": "Golpeo: base",
+        "sum": "Fuerza máxima y una sesión de intervalos para boxeo y kickboxing, más resistencia suave."
+      },
+      "striking_build": {
+        "name": "Golpeo: desarrollo",
+        "sum": "Potencia, pliometría y sprints repetidos, con una simulación de combate al final."
+      }
+    }
   }
 }

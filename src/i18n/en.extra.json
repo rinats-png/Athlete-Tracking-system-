@@ -2963,7 +2963,13 @@
       "REPEATED_SPRINT": "Repeated sprints",
       "MAX_STRENGTH": "Maximal strength",
       "POWER": "Power",
-      "PLYOMETRIC": "Plyometrics"
+      "PLYOMETRIC": "Plyometrics",
+      "AEROBIC_BASE": "Aerobic base",
+      "COMPROMISED_RUNNING": "Running under fatigue",
+      "HYROX_STATIONS": "Hyrox stations",
+      "GRIP_ENDURANCE": "Grip endurance",
+      "FIGHT_SIMULATION": "Fight simulation",
+      "RACE_REHEARSAL": "Race rehearsal"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min work, {{rec}} min active rest, {{min}}–{{max}} % of maximum heart rate",
@@ -3057,7 +3063,8 @@
       "button": "Adopt as block",
       "hint": "The block starts next Monday. After that you can change sessions; every change needs a reason.",
       "toBlock": "To the active block"
-    }
+    },
+    "openSession": "Open session: intent without a sourced dose"
   },
   "block": {
     "eyebrow": "Block",
@@ -3190,5 +3197,85 @@
     "available": "Available",
     "soon": "Coming",
     "note": "A language model does not create plans. At most it phrases explanations."
+  },
+  "tpl": {
+    "libraryTitle": "Plan library",
+    "libraryIntro": "Templates for your sport. The dose comes from sourced rules; where there is none, the session stays open.",
+    "libraryIntroAll": "Templates for all sports. Pick a sport in your profile to see only its templates.",
+    "goalLabel": "Goal",
+    "goal": {
+      "all": "All",
+      "base": "Base",
+      "strength": "Strength",
+      "power": "Power",
+      "event": "Competition"
+    },
+    "none": "No template matches this selection.",
+    "unreviewed": "Unreviewed",
+    "weeksTotal": "{{n}} weeks",
+    "family": {
+      "combat_grappling": "Combat sport grappling",
+      "combat_striking": "Combat sport striking",
+      "hybrid": "Hybrid"
+    },
+    "note": "All templates are unreviewed and not yet approved by a qualified person. They are a suggestion, not a prescription.",
+    "week": "Week {{n}}",
+    "weeks": "Weeks {{from}}–{{to}}",
+    "openDose": "Open: no sourced dose, the session only names the intent",
+    "unknown": "This template does not exist.",
+    "structure": "Structure",
+    "structureNote": "Numbers appear only where a rule in the registry gives them. Everything else is up to you or your coach.",
+    "fit": {
+      "cta": "Adjust and adopt",
+      "title": "Adjust plan",
+      "intro": "Fit the template to your week. What does not fit drops out visibly, with a reason.",
+      "equipment": "Available equipment",
+      "start": "Start (earliest)",
+      "event": "Competition date (optional)",
+      "tooShort": "Less than {{weeks}} weeks remain until the date. The block starts early but ends after the date.",
+      "startsOn": "The block starts on Monday, {{day}}."
+    },
+    "equipment": {
+      "weights": "Weights",
+      "cardio": "Cardio machine or route",
+      "sprint": "Sprint lane"
+    },
+    "skip": {
+      "equipment": "Equipment missing",
+      "rule_unavailable": "Rule does not fit phase, family or training age",
+      "hr_max_unknown": "no heart-rate targets without a known maximum heart rate",
+      "no_slot": "no free day that fits the rules",
+      "budget": "high-intensity budget used up"
+    },
+    "t": {
+      "hybrid_base": {
+        "name": "Hybrid base",
+        "sum": "Build endurance and strength side by side, with one interval session and running under fatigue."
+      },
+      "hybrid_strength": {
+        "name": "Hybrid strength",
+        "sum": "Strength before endurance: maximal strength, later power, plus one easy endurance session."
+      },
+      "hyrox_prep": {
+        "name": "Hyrox preparation",
+        "sum": "Eight weeks to an event: intervals, strength, stations and a race rehearsal in week 7."
+      },
+      "grappling_gpp": {
+        "name": "Grappling: base",
+        "sum": "Maximal strength and repeated sprints for judo, wrestling and BJJ, plus grip endurance."
+      },
+      "grappling_build": {
+        "name": "Grappling: build",
+        "sum": "Power, plyometrics and repeated sprints, with a fight simulation at the end."
+      },
+      "striking_gpp": {
+        "name": "Striking: base",
+        "sum": "Maximal strength and one interval session for boxing and kickboxing, plus easy endurance."
+      },
+      "striking_build": {
+        "name": "Striking: build",
+        "sum": "Power, plyometrics and repeated sprints, with a fight simulation at the end."
+      }
+    }
   }
 }

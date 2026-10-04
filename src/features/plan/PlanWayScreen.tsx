@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
  * Etappen und stehen bis dahin sichtbar als «folgt» da, ohne Verweis ins Leere.
  */
 const WAYS = [
-  { key: 'template', image: 'rowing_erg', to: null },
+  { key: 'template', image: 'rowing_erg', to: '/plan/vorlagen' },
   { key: 'own', image: 'back_squat', to: null },
   { key: 'computed', image: 'treadmill', to: '/plan/neu' },
 ] as const

@@ -2963,7 +2963,13 @@
       "REPEATED_SPRINT": "Gjentatte sprinter",
       "MAX_STRENGTH": "Maksimal styrke",
       "POWER": "Power",
-      "PLYOMETRIC": "Pliometri"
+      "PLYOMETRIC": "Pliometri",
+      "AEROBIC_BASE": "Grunnkondisjon",
+      "COMPROMISED_RUNNING": "Løping under tretthet",
+      "HYROX_STATIONS": "Hyrox-stasjoner",
+      "GRIP_ENDURANCE": "Grepsutholdenhet",
+      "FIGHT_SIMULATION": "Kampsimulering",
+      "RACE_REHEARSAL": "Konkurranseprøve"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min arbeid, {{rec}} min aktiv pause, {{min}}–{{max}} % av makspuls",
@@ -3057,7 +3063,8 @@
       "button": "Ta i bruk som blokk",
       "hint": "Blokken starter neste mandag. Etterpå kan du endre økter; hver endring krever en begrunnelse.",
       "toBlock": "Til aktiv blokk"
-    }
+    },
+    "openSession": "Åpen økt: hensikt uten belagt dose"
   },
   "block": {
     "eyebrow": "Blokk",
@@ -3190,5 +3197,85 @@
     "available": "Tilgjengelig",
     "soon": "Kommer",
     "note": "En språkmodell lager ikke planer. Den formulerer høyst forklaringer."
+  },
+  "tpl": {
+    "libraryTitle": "Planbibliotek",
+    "libraryIntro": "Maler for din idrett. Dosen kommer fra belagte regler; mangler de, forblir økten åpen.",
+    "libraryIntroAll": "Maler for alle idretter. Velg en idrett i profilen din for å se bare dens maler.",
+    "goalLabel": "Mål",
+    "goal": {
+      "all": "Alle",
+      "base": "Basis",
+      "strength": "Styrke",
+      "power": "Power",
+      "event": "Konkurranse"
+    },
+    "none": "Det finnes ingen mal for dette utvalget.",
+    "unreviewed": "Ugjennomgått",
+    "weeksTotal": "{{n}} uker",
+    "family": {
+      "combat_grappling": "Kampsport grappling",
+      "combat_striking": "Kampsport striking",
+      "hybrid": "Hybrid"
+    },
+    "note": "Alle maler er ugjennomgått og ennå ikke godkjent av en fagkyndig person. De er et forslag, ikke en forskrivning.",
+    "week": "Uke {{n}}",
+    "weeks": "Uke {{from}}–{{to}}",
+    "openDose": "Åpen: ingen belagt dose, økten oppgir bare hensikten",
+    "unknown": "Denne malen finnes ikke.",
+    "structure": "Oppbygging",
+    "structureNote": "Tall står bare der en regel i registeret oppgir dem. Alt annet bestemmer du eller treneren din.",
+    "fit": {
+      "cta": "Tilpass og ta i bruk",
+      "title": "Tilpass planen",
+      "intro": "Legg malen på uken din. Det som ikke passer, utgår synlig, med begrunnelse.",
+      "equipment": "Tilgjengelig utstyr",
+      "start": "Start (tidligst)",
+      "event": "Konkurransedato (valgfritt)",
+      "tooShort": "Det er mindre enn {{weeks}} uker til datoen. Blokken starter tidlig, men slutter etter datoen.",
+      "startsOn": "Blokken starter mandag {{day}}."
+    },
+    "equipment": {
+      "weights": "Vekter",
+      "cardio": "Kondisjonsmaskin eller rute",
+      "sprint": "Sprintbane"
+    },
+    "skip": {
+      "equipment": "Utstyr mangler",
+      "rule_unavailable": "Regelen passer ikke til fase, familie eller treningsalder",
+      "hr_max_unknown": "ingen pulsmål uten kjent makspuls",
+      "no_slot": "ingen ledig dag som passer reglene",
+      "budget": "budsjettet for høy intensitet er brukt opp"
+    },
+    "t": {
+      "hybrid_base": {
+        "name": "Hybridbasis",
+        "sum": "Bygg utholdenhet og styrke side om side, med én intervalløkt og løping under tretthet."
+      },
+      "hybrid_strength": {
+        "name": "Hybridstyrke",
+        "sum": "Styrke før utholdenhet: maksimal styrke, senere power, pluss en rolig utholdenhetsøkt."
+      },
+      "hyrox_prep": {
+        "name": "Hyrox-forberedelse",
+        "sum": "Åtte uker mot en konkurranse: intervaller, styrke, stasjoner og en prøve i uke 7."
+      },
+      "grappling_gpp": {
+        "name": "Grappling: basis",
+        "sum": "Maksimal styrke og gjentatte sprinter for judo, bryting og BJJ, pluss grepsutholdenhet."
+      },
+      "grappling_build": {
+        "name": "Grappling: oppbygging",
+        "sum": "Power, pliometri og gjentatte sprinter, med en kampsimulering til slutt."
+      },
+      "striking_gpp": {
+        "name": "Striking: basis",
+        "sum": "Maksimal styrke og én intervalløkt for boksing og kickboksing, pluss rolig utholdenhet."
+      },
+      "striking_build": {
+        "name": "Striking: oppbygging",
+        "sum": "Power, pliometri og gjentatte sprinter, med en kampsimulering til slutt."
+      }
+    }
   }
 }

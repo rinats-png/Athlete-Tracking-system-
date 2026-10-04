@@ -8,7 +8,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { planMode } from '@/domain/planMode'
-import { blockEndDay, blockWeek, openSessionsOn, weekChecks } from '@/domain/trainingBlock'
+import { blockEndDay, blockWeek, openSessionsOn, sessionInWeek, weekChecks } from '@/domain/trainingBlock'
 import { daysTo } from '@/domain/weeklyPlan'
 import { TRAINING_RULES } from '@/data/trainingRules'
 import { getTest } from '@/data/testCatalog'
@@ -34,11 +34,11 @@ export function PlanHubScreen() {
     if (!block) return null
     const week = blockWeek(block, today)
     const checks = weekChecks(block, today)
-    const current = typeof week === 'number' ? checks.find((c) => c.week === week) ?? { week, planned: block.sessions.filter((s) => !s.removed).length, done: 0 } : null
+    const current = typeof week === 'number' ? checks.find((c) => c.week === week) ?? { week, planned: block.sessions.filter((s) => !s.removed && sessionInWeek(s, week, block.weeks)).length, done: 0 } : null
     const open = openSessionsOn(block, today)
     const intents = [...new Set(block.sessions.filter((s) => !s.removed).map((s) => s.primaryIntent))]
-    const strengths = [...new Set(block.sessions.filter((s) => !s.removed).map((s) => s.evidenceStrength))]
-    const unreviewed = block.sessions.some((s) => TRAINING_RULES.find((r) => r.id === s.ruleId)?.review.state !== 'reviewed')
+    const strengths = [...new Set(block.sessions.filter((s) => !s.removed).map((s) => s.evidenceStrength).filter((x): x is NonNullable<typeof x> => x != null))]
+    const unreviewed = block.sessions.some((s) => s.kind === 'open' || TRAINING_RULES.find((r) => r.id === s.ruleId)?.review.state !== 'reviewed')
     return { week, current, open, intents, strengths, unreviewed, endsIn: daysTo(blockEndDay(block), new Date()) }
   }, [block, today])
 

@@ -2963,7 +2963,13 @@
       "REPEATED_SPRINT": "Herhaalde sprints",
       "MAX_STRENGTH": "Maximale kracht",
       "POWER": "Power",
-      "PLYOMETRIC": "Plyometrie"
+      "PLYOMETRIC": "Plyometrie",
+      "AEROBIC_BASE": "Basisconditie",
+      "COMPROMISED_RUNNING": "Lopen onder vermoeidheid",
+      "HYROX_STATIONS": "Hyrox-stations",
+      "GRIP_ENDURANCE": "Grijpuithoudingsvermogen",
+      "FIGHT_SIMULATION": "Gevechtssimulatie",
+      "RACE_REHEARSAL": "Generale repetitie"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min werk, {{rec}} min actieve rust, {{min}}–{{max}} % van de maximale hartslag",
@@ -3057,7 +3063,8 @@
       "button": "Als blok overnemen",
       "hint": "Het blok begint volgende maandag. Daarna kun je trainingen wijzigen; elke wijziging heeft een reden nodig.",
       "toBlock": "Naar het actieve blok"
-    }
+    },
+    "openSession": "Open training: intentie zonder onderbouwde dosis"
   },
   "block": {
     "eyebrow": "Blok",
@@ -3190,5 +3197,85 @@
     "available": "Beschikbaar",
     "soon": "Volgt",
     "note": "Een taalmodel maakt geen plannen. Het formuleert hooguit uitleg."
+  },
+  "tpl": {
+    "libraryTitle": "Planbibliotheek",
+    "libraryIntro": "Sjablonen voor jouw sport. De dosis komt uit onderbouwde regels; waar die ontbreken, blijft de training open.",
+    "libraryIntroAll": "Sjablonen voor alle sporten. Kies een sport in je profiel om alleen die te zien.",
+    "goalLabel": "Doel",
+    "goal": {
+      "all": "Alle",
+      "base": "Basis",
+      "strength": "Kracht",
+      "power": "Power",
+      "event": "Wedstrijd"
+    },
+    "none": "Voor deze selectie is er geen sjabloon.",
+    "unreviewed": "Niet beoordeeld",
+    "weeksTotal": "{{n}} weken",
+    "family": {
+      "combat_grappling": "Vechtsport grappling",
+      "combat_striking": "Vechtsport striking",
+      "hybrid": "Hybride"
+    },
+    "note": "Alle sjablonen zijn niet beoordeeld en nog niet vrijgegeven door een deskundige. Ze zijn een suggestie, geen voorschrift.",
+    "week": "Week {{n}}",
+    "weeks": "Week {{from}}–{{to}}",
+    "openDose": "Open: geen onderbouwde dosis, de training noemt alleen de intentie",
+    "unknown": "Dit sjabloon bestaat niet.",
+    "structure": "Opbouw",
+    "structureNote": "Cijfers staan alleen waar een regel uit het register ze noemt. De rest bepaal jij of je trainer.",
+    "fit": {
+      "cta": "Aanpassen en overnemen",
+      "title": "Plan aanpassen",
+      "intro": "Leg het sjabloon op jouw week. Wat niet past, valt zichtbaar af, met reden.",
+      "equipment": "Beschikbare uitrusting",
+      "start": "Start (op zijn vroegst)",
+      "event": "Wedstrijddatum (optioneel)",
+      "tooShort": "Tot de datum zijn er minder dan {{weeks}} weken. Het blok begint vroeg maar eindigt na de datum.",
+      "startsOn": "Het blok begint op maandag {{day}}."
+    },
+    "equipment": {
+      "weights": "Gewichten",
+      "cardio": "Cardioapparaat of route",
+      "sprint": "Sprintbaan"
+    },
+    "skip": {
+      "equipment": "Uitrusting ontbreekt",
+      "rule_unavailable": "Regel past niet bij fase, familie of trainingsleeftijd",
+      "hr_max_unknown": "geen hartslagdoelen zonder bekende maximale hartslag",
+      "no_slot": "geen vrije dag die bij de regels past",
+      "budget": "budget voor hoge intensiteit is op"
+    },
+    "t": {
+      "hybrid_base": {
+        "name": "Hybride basis",
+        "sum": "Uithoudingsvermogen en kracht naast elkaar opbouwen, met één intervaltraining en lopen onder vermoeidheid."
+      },
+      "hybrid_strength": {
+        "name": "Hybride kracht",
+        "sum": "Kracht voor uithoudingsvermogen: maximale kracht, later power, plus een rustige duurtraining."
+      },
+      "hyrox_prep": {
+        "name": "Hyrox-voorbereiding",
+        "sum": "Acht weken naar een wedstrijd: intervallen, kracht, stations en een generale repetitie in week 7."
+      },
+      "grappling_gpp": {
+        "name": "Grappling: basis",
+        "sum": "Maximale kracht en herhaalde sprints voor judo, worstelen en BJJ, plus grijpuithoudingsvermogen."
+      },
+      "grappling_build": {
+        "name": "Grappling: opbouw",
+        "sum": "Power, plyometrie en herhaalde sprints, met aan het eind een gevechtssimulatie."
+      },
+      "striking_gpp": {
+        "name": "Striking: basis",
+        "sum": "Maximale kracht en één intervaltraining voor boksen en kickboksen, plus rustig duurwerk."
+      },
+      "striking_build": {
+        "name": "Striking: opbouw",
+        "sum": "Power, plyometrie en herhaalde sprints, met aan het eind een gevechtssimulatie."
+      }
+    }
   }
 }

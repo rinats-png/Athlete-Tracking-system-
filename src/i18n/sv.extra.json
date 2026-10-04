@@ -2963,7 +2963,13 @@
       "REPEATED_SPRINT": "Upprepade sprinter",
       "MAX_STRENGTH": "Maximal styrka",
       "POWER": "Power",
-      "PLYOMETRIC": "Plyometri"
+      "PLYOMETRIC": "Plyometri",
+      "AEROBIC_BASE": "Grundkondition",
+      "COMPROMISED_RUNNING": "Löpning under trötthet",
+      "HYROX_STATIONS": "Hyrox-stationer",
+      "GRIP_ENDURANCE": "Grepputhållighet",
+      "FIGHT_SIMULATION": "Matchsimulering",
+      "RACE_REHEARSAL": "Tävlingsrepetition"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min arbete, {{rec}} min aktiv vila, {{min}}–{{max}} % av maxpulsen",
@@ -3057,7 +3063,8 @@
       "button": "Ta över som block",
       "hint": "Blocket börjar nästa måndag. Därefter kan du ändra pass; varje ändring kräver en anledning.",
       "toBlock": "Till aktivt block"
-    }
+    },
+    "openSession": "Öppet pass: avsikt utan belagd dos"
   },
   "block": {
     "eyebrow": "Block",
@@ -3190,5 +3197,85 @@
     "available": "Tillgänglig",
     "soon": "Kommer",
     "note": "En språkmodell skapar inga planer. Den formulerar högst förklaringar."
+  },
+  "tpl": {
+    "libraryTitle": "Planbibliotek",
+    "libraryIntro": "Mallar för din idrott. Dosen kommer från belagda regler; saknas de förblir passet öppet.",
+    "libraryIntroAll": "Mallar för alla idrotter. Välj en idrott i din profil för att bara se dess mallar.",
+    "goalLabel": "Mål",
+    "goal": {
+      "all": "Alla",
+      "base": "Bas",
+      "strength": "Styrka",
+      "power": "Power",
+      "event": "Tävling"
+    },
+    "none": "Det finns ingen mall för det här urvalet.",
+    "unreviewed": "Ogranskad",
+    "weeksTotal": "{{n}} veckor",
+    "family": {
+      "combat_grappling": "Kampsport grappling",
+      "combat_striking": "Kampsport striking",
+      "hybrid": "Hybrid"
+    },
+    "note": "Alla mallar är ogranskade och ännu inte godkända av en sakkunnig person. De är ett förslag, inte en ordination.",
+    "week": "Vecka {{n}}",
+    "weeks": "Vecka {{from}}–{{to}}",
+    "openDose": "Öppet: ingen belagd dos, passet anger bara avsikten",
+    "unknown": "Den här mallen finns inte.",
+    "structure": "Struktur",
+    "structureNote": "Siffror står bara där en regel i registret anger dem. Allt annat bestämmer du eller din tränare.",
+    "fit": {
+      "cta": "Anpassa och ta över",
+      "title": "Anpassa planen",
+      "intro": "Lägg mallen på din vecka. Det som inte passar utgår synligt, med skäl.",
+      "equipment": "Tillgänglig utrustning",
+      "start": "Start (tidigast)",
+      "event": "Tävlingsdatum (valfritt)",
+      "tooShort": "Det är mindre än {{weeks}} veckor till datumet. Blocket startar tidigt men slutar efter datumet.",
+      "startsOn": "Blocket börjar måndag {{day}}."
+    },
+    "equipment": {
+      "weights": "Vikter",
+      "cardio": "Konditionsmaskin eller bana",
+      "sprint": "Sprintbana"
+    },
+    "skip": {
+      "equipment": "Utrustning saknas",
+      "rule_unavailable": "Regeln passar inte fas, familj eller träningsålder",
+      "hr_max_unknown": "inga pulsmål utan känd maxpuls",
+      "no_slot": "ingen ledig dag som passar reglerna",
+      "budget": "budgeten för hög intensitet är slut"
+    },
+    "t": {
+      "hybrid_base": {
+        "name": "Hybridbas",
+        "sum": "Bygg uthållighet och styrka vid sidan av varandra, med ett intervallpass och löpning under trötthet."
+      },
+      "hybrid_strength": {
+        "name": "Hybridstyrka",
+        "sum": "Styrka före uthållighet: maxstyrka, senare power, plus ett lugnt uthållighetspass."
+      },
+      "hyrox_prep": {
+        "name": "Hyrox-förberedelse",
+        "sum": "Åtta veckor mot en tävling: intervaller, styrka, stationer och en repetition i vecka 7."
+      },
+      "grappling_gpp": {
+        "name": "Grappling: bas",
+        "sum": "Maxstyrka och upprepade sprinter för judo, brottning och BJJ, plus grepputhållighet."
+      },
+      "grappling_build": {
+        "name": "Grappling: uppbyggnad",
+        "sum": "Power, plyometri och upprepade sprinter, med en matchsimulering i slutet."
+      },
+      "striking_gpp": {
+        "name": "Striking: bas",
+        "sum": "Maxstyrka och ett intervallpass för boxning och kickboxning, plus lugn uthållighet."
+      },
+      "striking_build": {
+        "name": "Striking: uppbyggnad",
+        "sum": "Power, plyometri och upprepade sprinter, med en matchsimulering i slutet."
+      }
+    }
   }
 }

@@ -34,9 +34,14 @@ export function adoptBlock(plan: BlockPlan, ctx: { id: string; family: SportFami
     startDay: mondayOnOrAfter(ctx.startDay),
     weeks: plan.weeks,
     retestMetrics: plan.retest.metrics,
+    templateId: null,
+    eventDay: null,
     sessions: plan.sessions.map((s) => ({
       id: s.id,
       day: s.day,
+      weekFrom: 1,
+      weekTo: null,
+      kind: 'rule',
       ruleId: s.ruleId,
       ruleVersion: s.ruleVersion,
       primaryIntent: s.primaryIntent,
@@ -57,6 +62,13 @@ export function adoptBlock(plan: BlockPlan, ctx: { id: string; family: SportFami
   }
 }
 
+/** Gilt die Einheit in dieser Blockwoche? Vorlagen mit Phasen schalten Einheiten wochenweise zu. */
+export const sessionInWeek = (s: Pick<StoredPlannedSession, 'weekFrom' | 'weekTo'>, week: number, blockWeeks: number): boolean => week >= s.weekFrom && week <= (s.weekTo ?? blockWeeks)
+
+/** Wie viele Einheiten (ohne gestrichene) der Block insgesamt vorsieht. */
+export const plannedTotal = (block: Pick<StoredTrainingBlock, 'sessions' | 'weeks'>): number =>
+  Array.from({ length: block.weeks }, (_, i) => block.sessions.filter((s) => !s.removed && sessionInWeek(s, i + 1, block.weeks)).length).reduce((a, b) => a + b, 0)
+
 export type OverrideResult = { ok: true; block: StoredTrainingBlock } | { ok: false; error: 'reason_required' | 'unknown_session' | 'day_taken' | 'nothing_changed' }
 
 /**
@@ -72,7 +84,8 @@ export function overrideSession(block: StoredTrainingBlock, sessionId: string, c
   const day = change.day ?? session.day
   const removed = change.removed ?? session.removed
   if (day === session.day && removed === session.removed) return { ok: false, error: 'nothing_changed' }
-  if (!removed && block.sessions.some((s) => s.id !== sessionId && !s.removed && s.day === day)) return { ok: false, error: 'day_taken' }
+  const overlap = (a: StoredPlannedSession, b: StoredPlannedSession) => a.weekFrom <= (b.weekTo ?? block.weeks) && b.weekFrom <= (a.weekTo ?? block.weeks)
+  if (!removed && block.sessions.some((s) => s.id !== sessionId && !s.removed && s.day === day && overlap(s, session))) return { ok: false, error: 'day_taken' }
   return {
     ok: true,
     block: {
@@ -101,7 +114,7 @@ export function openSessionsOn(block: StoredTrainingBlock, today: string): Store
   const w = blockWeek(block, today)
   if (typeof w !== 'number') return []
   const wd = weekdayOf(today)
-  return block.sessions.filter((s) => !s.removed && s.day === wd && !isDone(block, s.id, today))
+  return block.sessions.filter((s) => !s.removed && s.day === wd && sessionInWeek(s, w, block.weeks) && !isDone(block, s.id, today))
 }
 
 export interface WeekCheck {
@@ -117,8 +130,9 @@ export function weekChecks(block: StoredTrainingBlock, today: string): WeekCheck
   const active = block.sessions.filter((s) => !s.removed)
   return Array.from({ length: upTo }, (_, i) => {
     const week = i + 1
-    const done = active.filter((s) => isDone(block, s.id, sessionDate(block, week, s.day))).length
-    return { week, planned: active.length, done }
+    const inWeek = active.filter((s) => sessionInWeek(s, week, block.weeks))
+    const done = inWeek.filter((s) => isDone(block, s.id, sessionDate(block, week, s.day))).length
+    return { week, planned: inWeek.length, done }
   })
 }
 
@@ -142,9 +156,8 @@ export interface BlockReport {
  * gegen den typischen Messfehler (`changeReport`).
  */
 export function blockReport(block: StoredTrainingBlock, results: StoredResult[], today: string): BlockReport {
-  const active = block.sessions.filter((s) => !s.removed)
   const done = block.completions.length
-  const planned = active.length * block.weeks
+  const planned = plannedTotal(block)
   const from = dayNum(block.startDay) + (block.weeks - 1) * 7
   const to = dayNum(block.startDay) + block.weeks * 7 + 14
   const finished = block.status === 'closed' || blockWeek(block, today) === 'after'

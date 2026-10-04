@@ -2963,7 +2963,13 @@
       "REPEATED_SPRINT": "Wiederholte Sprints",
       "MAX_STRENGTH": "Maximalkraft",
       "POWER": "Power",
-      "PLYOMETRIC": "Plyometrie"
+      "PLYOMETRIC": "Plyometrie",
+      "AEROBIC_BASE": "Grundlagenausdauer",
+      "COMPROMISED_RUNNING": "Laufen unter Ermüdung",
+      "HYROX_STATIONS": "Hyrox-Stationen",
+      "GRIP_ENDURANCE": "Griffausdauer",
+      "FIGHT_SIMULATION": "Kampfsimulation",
+      "RACE_REHEARSAL": "Wettkampfprobe"
     },
     "block": {
       "interval": "{{reps}} × {{work}} Min. Arbeit, {{rec}} Min. aktive Pause, {{min}}–{{max}} % der maximalen Herzfrequenz",
@@ -3057,7 +3063,8 @@
       "button": "Als Block übernehmen",
       "hint": "Der Block beginnt am nächsten Montag. Danach kannst du Einheiten ändern; jede Änderung braucht einen Grund.",
       "toBlock": "Zum aktiven Block"
-    }
+    },
+    "openSession": "Offene Einheit: Absicht ohne belegte Dosis"
   },
   "block": {
     "eyebrow": "Block",
@@ -3190,5 +3197,85 @@
     "available": "Verfügbar",
     "soon": "Folgt",
     "note": "Ein Sprachmodell erzeugt keine Pläne. Es formuliert höchstens Erklärungen."
+  },
+  "tpl": {
+    "libraryTitle": "Planbibliothek",
+    "libraryIntro": "Vorlagen für deine Sportart. Die Dosis kommt aus belegten Regeln; wo es keine gibt, bleibt die Einheit offen.",
+    "libraryIntroAll": "Vorlagen für alle Sportarten. Wähle in deinem Profil eine Sportart, dann siehst du nur ihre Vorlagen.",
+    "goalLabel": "Ziel",
+    "goal": {
+      "all": "Alle",
+      "base": "Grundlage",
+      "strength": "Kraft",
+      "power": "Power",
+      "event": "Wettkampf"
+    },
+    "none": "Für diese Auswahl gibt es keine Vorlage.",
+    "unreviewed": "Ungeprüft",
+    "weeksTotal": "{{n}} Wochen",
+    "family": {
+      "combat_grappling": "Kampfsport Grappling",
+      "combat_striking": "Kampfsport Striking",
+      "hybrid": "Hybrid"
+    },
+    "note": "Alle Vorlagen sind ungeprüft und noch nicht von einer fachkundigen Person freigegeben. Sie sind ein Vorschlag, keine Verordnung.",
+    "week": "Woche {{n}}",
+    "weeks": "Woche {{from}}–{{to}}",
+    "openDose": "Offen: keine belegte Dosis, die Einheit nennt nur die Absicht",
+    "unknown": "Diese Vorlage gibt es nicht.",
+    "structure": "Aufbau",
+    "structureNote": "Zahlen stehen nur dort, wo eine Regel des Registers sie nennt. Alles andere legst du oder dein Trainer fest.",
+    "fit": {
+      "cta": "Anpassen und übernehmen",
+      "title": "Plan anpassen",
+      "intro": "Lege die Vorlage auf deine Woche. Was nicht passt, entfällt sichtbar mit Grund.",
+      "equipment": "Verfügbare Ausstattung",
+      "start": "Start (frühestens)",
+      "event": "Wettkampftermin (optional)",
+      "tooShort": "Bis zum Termin bleiben weniger als {{weeks}} Wochen. Der Block startet früh, endet aber nach dem Termin.",
+      "startsOn": "Der Block beginnt am Montag, {{day}}."
+    },
+    "equipment": {
+      "weights": "Gewichte",
+      "cardio": "Ausdauergerät oder Strecke",
+      "sprint": "Sprintstrecke"
+    },
+    "skip": {
+      "equipment": "Ausstattung fehlt",
+      "rule_unavailable": "Regel passt nicht zu Phase, Familie oder Trainingsalter",
+      "hr_max_unknown": "keine Pulsziele ohne bekannte maximale Herzfrequenz",
+      "no_slot": "kein freier Tag, der zu den Regeln passt",
+      "budget": "Budget für hohe Intensität ausgeschöpft"
+    },
+    "t": {
+      "hybrid_base": {
+        "name": "Hybrid-Basis",
+        "sum": "Ausdauer und Kraft nebeneinander aufbauen, mit einem Intervallreiz und Laufen unter Ermüdung."
+      },
+      "hybrid_strength": {
+        "name": "Hybrid-Kraft",
+        "sum": "Kraft vor Ausdauer: Maximalkraft, später Power, dazu eine ruhige Ausdauereinheit."
+      },
+      "hyrox_prep": {
+        "name": "Hyrox-Vorbereitung",
+        "sum": "Acht Wochen auf einen Wettkampf: Intervalle, Kraft, Stationen und eine Wettkampfprobe in Woche 7."
+      },
+      "grappling_gpp": {
+        "name": "Grappling: Basis",
+        "sum": "Maximalkraft und wiederholte Sprints für Judo, Ringen und BJJ, ergänzt um Griffausdauer."
+      },
+      "grappling_build": {
+        "name": "Grappling: Aufbau",
+        "sum": "Power, Plyometrie und wiederholte Sprints, am Ende eine Kampfsimulation."
+      },
+      "striking_gpp": {
+        "name": "Striking: Basis",
+        "sum": "Maximalkraft und ein Intervallreiz für Boxen und Kickboxen, dazu ruhige Ausdauer."
+      },
+      "striking_build": {
+        "name": "Striking: Aufbau",
+        "sum": "Power, Plyometrie und wiederholte Sprints, am Ende eine Kampfsimulation."
+      }
+    }
   }
 }

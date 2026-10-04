@@ -111,7 +111,7 @@ const isHigh = (i: Intent) => HIGH_INTENSITY.includes(i)
 /** Messungen, ab denen eine Lücke als Grundlage taugt: eine Einzelmessung ist ein Punkt, kein Befund. */
 export const MIN_MEASUREMENTS = 2
 
-function blocksFor(rule: EvidenceRule): SessionBlock[] {
+export function blocksFor(rule: EvidenceRule): SessionBlock[] {
   const p = rule.prescription
   if (rule.intent === 'VO2MAX' && p.repetitions && p.workSeconds && p.recoverySeconds && p.intensity?.type === 'hr_percent_max') {
     return [{ type: 'interval', modality: 'mixed', repetitions: p.repetitions[0], workSeconds: p.workSeconds[0], recoverySeconds: p.recoverySeconds[0], intensity: p.intensity }]
@@ -127,7 +127,7 @@ function blocksFor(rule: EvidenceRule): SessionBlock[] {
 }
 
 /** Reine Arbeits- und Pausenzeit, wo die Regel sie festlegt. */
-function durationOf(blocks: SessionBlock[]): number | null {
+export function durationOf(blocks: SessionBlock[]): number | null {
   let total = 0
   for (const b of blocks) {
     if (b.type === 'interval') total += (b.repetitions * (b.workSeconds + b.recoverySeconds) - b.recoverySeconds) / 60

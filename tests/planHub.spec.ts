@@ -57,7 +57,7 @@ test.describe('Bildschirm', () => {
     await expect(page.getByTestId('hub-empty')).toBeVisible()
     await page.getByTestId('hub-choose').click()
     await expect(page.getByTestId('plan-way')).toBeVisible()
-    await expect(page.getByTestId('way-template')).toHaveAttribute('aria-disabled', 'true')
+    await expect(page.getByTestId('way-template')).toHaveAttribute('href', '/plan/vorlagen')
     await expect(page.getByTestId('way-own')).toHaveAttribute('aria-disabled', 'true')
     await page.getByTestId('way-computed').click()
     await expect(page).toHaveURL(/\/plan\/neu/)

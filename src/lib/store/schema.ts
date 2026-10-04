@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 33
+export const CURRENT_SCHEMA_VERSION = 34
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -699,15 +699,20 @@ const plannedSessionSchema = z.object({
   id: z.string().min(1).max(80),
   /** 1 = Montag … 7 = Sonntag. */
   day: z.number().int().min(1).max(7),
-  ruleId: z.string().min(1).max(60),
-  ruleVersion: z.string().min(1).max(20),
+  /** Ab welcher Blockwoche die Einheit gilt (Vorlagen mit Phasen); bis `weekTo`, leer = bis zum Blockende. */
+  weekFrom: z.number().int().min(1).max(26).default(1),
+  weekTo: z.number().int().min(1).max(26).nullable().default(null),
+  /** `rule` = Dosierung aus einer Regel des Registers; `open` = Vorlage nennt Absicht und Dauer, aber keine belegte Dosis. */
+  kind: z.enum(['rule', 'open']).default('rule'),
+  ruleId: z.string().min(1).max(60).nullable().default(null),
+  ruleVersion: z.string().min(1).max(20).nullable().default(null),
   primaryIntent: z.string().min(1).max(40),
-  evidenceStrength: z.enum(['HIGH', 'MODERATE', 'LOW', 'EMERGING', 'INSUFFICIENT']),
-  evidenceSpecificity: z.enum(['DIRECT', 'RELATED', 'GENERAL', 'EXTRAPOLATED']),
+  evidenceStrength: z.enum(['HIGH', 'MODERATE', 'LOW', 'EMERGING', 'INSUFFICIENT']).nullable().default(null),
+  evidenceSpecificity: z.enum(['DIRECT', 'RELATED', 'GENERAL', 'EXTRAPOLATED']).nullable().default(null),
   plannedDurationMin: z.number().int().min(1).max(600).nullable().default(null),
   highIntensity: z.boolean().default(false),
   blocks: z.array(planPartSchema).max(10).default([]),
-  retestMetric: z.string().max(80),
+  retestMetric: z.string().max(80).default(''),
   coachModified: z.boolean().default(false),
   coachModificationReason: z.string().max(200).nullable().default(null),
   removed: z.boolean().default(false),
@@ -727,6 +732,10 @@ const trainingBlockSchema = z.object({
   startDay: dayString,
   weeks: z.number().int().min(1).max(26),
   retestMetrics: z.array(z.string().max(80)).max(8).default([]),
+  /** Aus welcher Vorlage der Block stammt (`planTemplates`), sonst berechnet oder eigen. */
+  templateId: z.string().max(60).nullable().default(null),
+  /** Wettkampftermin, auf den der Block zuläuft; nur Orientierung für den Start. */
+  eventDay: dayString.nullable().default(null),
   sessions: z.array(plannedSessionSchema).max(60).default([]),
   completions: z.array(planCompletionSchema).max(600).default([]),
   status: z.enum(['active', 'closed']).default('active'),
@@ -1769,6 +1778,24 @@ export const MIGRATIONS: Migration[] = [
       ...data,
       version: 33,
       athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, trainingBlocks: athlete.trainingBlocks ?? [] })),
+    }),
+  },
+  {
+    from: 33,
+    to: 34,
+    describe: 'Trainingsblöcke: Vorlage, Termin; Einheiten mit Wochenspanne und Art',
+    run: (data: any) => ({
+      ...data,
+      version: 34,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        trainingBlocks: (athlete.trainingBlocks ?? []).map((b: any) => ({
+          ...b,
+          templateId: b.templateId ?? null,
+          eventDay: b.eventDay ?? null,
+          sessions: (b.sessions ?? []).map((x: any) => ({ ...x, weekFrom: x.weekFrom ?? 1, weekTo: x.weekTo ?? null, kind: x.kind ?? 'rule' })),
+        })),
+      })),
     }),
   },
 ]

@@ -9,6 +9,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { radarProfile } from '@/lib/scoring'
 import { requirementGap } from '@/domain/requirementGap'
 import { blockText } from '@/features/plan/planText'
+import { DayChips } from '@/features/plan/DayChips'
 import type { StoredPlannedSession } from '@/lib/store/localStore'
 import { familyOfDiscipline, HIGH_INTENSITY_BUDGET, planBlock } from '@/domain/trainingPlan'
 import { planMode } from '@/domain/trainingRules'
@@ -18,7 +19,6 @@ import { TRAINING_RULES, TRAINING_SOURCES } from '@/data/trainingRules'
 import { getTest } from '@/data/testCatalog'
 import { disciplineById } from '@/data/sportProfiles'
 import { pick } from '@/i18n/pick'
-import { cn } from '@/lib/utils'
 import type { Phase } from '@/domain/trainingTypes'
 import type { PerformanceDimension } from '@/types/domain'
 
@@ -30,35 +30,8 @@ import type { PerformanceDimension } from '@/types/domain'
  * sind sichtbar als ungeprüft gekennzeichnet. Der Trainer hat das letzte Wort.
  */
 const PHASES: Phase[] = ['GPP', 'BUILD', 'SPECIFIC']
-const DAYS = [1, 2, 3, 4, 5, 6, 7]
 
 export const trainingPlanMode = () => planMode(import.meta.env?.VITE_TRAINING_PLAN)
-
-function DayChips({ label, value, onChange, testId }: { label: string; value: number[]; onChange: (v: number[]) => void; testId: string }) {
-  const { t } = useTranslation()
-  return (
-    <div role="group" aria-label={label} data-testid={testId}>
-      <span className="label-tag">{label}</span>
-      <div className="mt-1.5 flex flex-wrap gap-2">
-        {DAYS.map((d) => {
-          const on = value.includes(d)
-          return (
-            <button
-              key={d}
-              type="button"
-              aria-pressed={on}
-              data-testid={`${testId}-${d}`}
-              onClick={() => onChange(on ? value.filter((x) => x !== d) : [...value, d])}
-              className={cn('min-h-11 min-w-11 rounded-pill border px-3 text-[13px]', on ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line hover:bg-surface-sunken')}
-            >
-              {t(`plan.day.${d}`)}
-            </button>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
 
 export function PlanPreviewScreen() {
   const { t } = useTranslation()

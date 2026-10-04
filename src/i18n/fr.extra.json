@@ -2963,7 +2963,13 @@
       "REPEATED_SPRINT": "Sprints répétés",
       "MAX_STRENGTH": "Force maximale",
       "POWER": "Puissance",
-      "PLYOMETRIC": "Pliométrie"
+      "PLYOMETRIC": "Pliométrie",
+      "AEROBIC_BASE": "Endurance de base",
+      "COMPROMISED_RUNNING": "Course sous fatigue",
+      "HYROX_STATIONS": "Stations Hyrox",
+      "GRIP_ENDURANCE": "Endurance de préhension",
+      "FIGHT_SIMULATION": "Simulation de combat",
+      "RACE_REHEARSAL": "Répétition de compétition"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min de travail, {{rec}} min de pause active, {{min}}–{{max}} % de la fréquence cardiaque maximale",
@@ -3057,7 +3063,8 @@
       "button": "Adopter comme bloc",
       "hint": "Le bloc commence lundi prochain. Ensuite tu peux modifier les séances ; chaque modification demande une raison.",
       "toBlock": "Vers le bloc actif"
-    }
+    },
+    "openSession": "Séance ouverte : une intention sans dose documentée"
   },
   "block": {
     "eyebrow": "Bloc",
@@ -3190,5 +3197,85 @@
     "available": "Disponible",
     "soon": "Bientôt",
     "note": "Un modèle de langage ne crée pas de plans. Il formule tout au plus des explications."
+  },
+  "tpl": {
+    "libraryTitle": "Bibliothèque de plans",
+    "libraryIntro": "Modèles pour ton sport. La dose vient de règles documentées ; sans règle, la séance reste ouverte.",
+    "libraryIntroAll": "Modèles pour tous les sports. Choisis un sport dans ton profil pour ne voir que les siens.",
+    "goalLabel": "Objectif",
+    "goal": {
+      "all": "Tous",
+      "base": "Base",
+      "strength": "Force",
+      "power": "Puissance",
+      "event": "Compétition"
+    },
+    "none": "Aucun modèle ne correspond à cette sélection.",
+    "unreviewed": "Non vérifié",
+    "weeksTotal": "{{n}} semaines",
+    "family": {
+      "combat_grappling": "Sport de combat, lutte au sol",
+      "combat_striking": "Sport de combat, percussion",
+      "hybrid": "Hybride"
+    },
+    "note": "Tous les modèles sont non vérifiés et pas encore validés par une personne qualifiée. Ils sont une suggestion, pas une prescription.",
+    "week": "Semaine {{n}}",
+    "weeks": "Semaines {{from}}–{{to}}",
+    "openDose": "Ouvert : pas de dose documentée, la séance indique seulement l’intention",
+    "unknown": "Ce modèle n’existe pas.",
+    "structure": "Structure",
+    "structureNote": "Les chiffres n’apparaissent que là où une règle du registre les donne. Le reste dépend de toi ou de ton entraîneur.",
+    "fit": {
+      "cta": "Adapter et adopter",
+      "title": "Adapter le plan",
+      "intro": "Place le modèle sur ta semaine. Ce qui ne convient pas disparaît visiblement, avec la raison.",
+      "equipment": "Équipement disponible",
+      "start": "Début (au plus tôt)",
+      "event": "Date de compétition (facultatif)",
+      "tooShort": "Il reste moins de {{weeks}} semaines avant la date. Le bloc commence tôt mais finit après la date.",
+      "startsOn": "Le bloc commence le lundi {{day}}."
+    },
+    "equipment": {
+      "weights": "Poids",
+      "cardio": "Ergomètre ou parcours",
+      "sprint": "Piste de sprint"
+    },
+    "skip": {
+      "equipment": "Équipement manquant",
+      "rule_unavailable": "La règle ne convient pas à la phase, à la famille ou à l’ancienneté",
+      "hr_max_unknown": "pas d’objectifs de fréquence cardiaque sans fréquence cardiaque maximale connue",
+      "no_slot": "pas de jour libre compatible avec les règles",
+      "budget": "budget d’intensité élevée épuisé"
+    },
+    "t": {
+      "hybrid_base": {
+        "name": "Base hybride",
+        "sum": "Développer endurance et force ensemble, avec une séance par intervalles et de la course sous fatigue."
+      },
+      "hybrid_strength": {
+        "name": "Force hybride",
+        "sum": "La force avant l’endurance : force maximale, puis puissance, plus une séance d’endurance facile."
+      },
+      "hyrox_prep": {
+        "name": "Préparation Hyrox",
+        "sum": "Huit semaines vers une compétition : intervalles, force, stations et une répétition en semaine 7."
+      },
+      "grappling_gpp": {
+        "name": "Lutte au sol : base",
+        "sum": "Force maximale et sprints répétés pour judo, lutte et JJB, plus endurance de préhension."
+      },
+      "grappling_build": {
+        "name": "Lutte au sol : développement",
+        "sum": "Puissance, pliométrie et sprints répétés, avec une simulation de combat à la fin."
+      },
+      "striking_gpp": {
+        "name": "Percussion : base",
+        "sum": "Force maximale et une séance par intervalles pour boxe et kickboxing, plus endurance facile."
+      },
+      "striking_build": {
+        "name": "Percussion : développement",
+        "sum": "Puissance, pliométrie et sprints répétés, avec une simulation de combat à la fin."
+      }
+    }
   }
 }

@@ -107,7 +107,7 @@ export function BlockScreen() {
                 {t(`plan.day.${s.day}`)} · {t(`plan.intent.${s.primaryIntent}`)}
                 {s.removed && <span className="ml-2 text-[12px] font-normal text-ink-muted">{t('block.removed')}</span>}
               </p>
-              <p className="text-[12px] text-ink-secondary">{t(`plan.rules.${s.ruleId}.title`)}</p>
+              <p className="text-[12px] text-ink-secondary">{s.ruleId ? t(`plan.rules.${s.ruleId}.title`) : t('plan.openSession')}</p>
               {s.blocks.map((b, i) => (
                 <p key={i} className="mt-1 text-[14px]">{blockText(b, t)}</p>
               ))}
