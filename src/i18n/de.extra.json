@@ -2924,7 +2924,7 @@
     "preview": "Vorschau: Die Regeln sind noch nicht von einer Fachperson geprüft und deshalb als ungeprüft gekennzeichnet.",
     "off": "Der Trainingsplan ist in dieser Fassung nicht eingeschaltet.",
     "noDiscipline": "Wähle im Profil deine Disziplin, dann kann KYDON Regeln für deine Lücken suchen.",
-    "unsupported": "Für diese Disziplin gibt es noch keine Regeln. Pilotwelt ist zunächst Grappling (Judo, Ringen, BJJ).",
+    "unsupported": "Für diese Disziplin gibt es noch keine Regeln. Pilotwelten sind Grappling (Judo, Ringen, BJJ) und Hybrid (HYROX, Hybrid Training).",
     "phase": {
       "label": "Phase",
       "GPP": "Allgemeine Vorbereitung",
@@ -3030,7 +3030,8 @@
         "title": "Maximalkraft ab 80 % 1RM",
         "limit0": "Allgemein ist die Evidenz hoch, im Kampfsport mittel (Frauen unterrepräsentiert). Hier gilt die vorsichtigere Stufe.",
         "limit1": "Wiederholungen, Übung und Reihenfolge legt die Quelle nicht fest: die Wahl der Übung bleibt beim Trainer.",
-        "limit2": "Periodisierung selbst ist für den Krafteffekt nicht belegt."
+        "limit2": "Periodisierung selbst ist für den Krafteffekt nicht belegt.",
+        "limit3": "Bei Ausdauersportlern (Radsport, Evidenz niedrig) verbesserte schweres Krafttraining Effizienz und Leistung ohne Änderung der VO₂max; in Hybridplänen bleibt Kraft deshalb erhalten."
       },
       "power_30_70": {
         "title": "Power bei 30 bis 70 % 1RM",
@@ -3043,6 +3044,11 @@
         "limit1": "Kein Effekt auf Körper-, Fett- oder Muskelmasse.",
         "limit2": "Sprungformen, Kontakte und Aufbau legt die Quelle nicht fest: sie wählt der Trainer."
       }
+    },
+    "hint": {
+      "title": "Zur Studienlage",
+      "concurrent": "Kraft und harte Ausdauer liegen an getrennten Tagen, soweit der Wochenplan es zulässt. Eine feste Reihenfolge ist nicht belegt. Bei gleichzeitigem Training zeigte sich ein kleiner Nachteil bei der Beinkraft von Männern, nicht von Frauen; daraus folgt hier keine Geschlechtsregel.",
+      "noStationDose": "Für stationsspezifisches Training (zum Beispiel Sled oder Wall Balls) nennt die Studienlage keine belegte Dosis. HYROX-Daten sind überwiegend Beobachtungen. Dieser Teil bleibt beim Trainer."
     }
   }
 }

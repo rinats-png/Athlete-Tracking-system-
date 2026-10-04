@@ -2924,7 +2924,7 @@
     "preview": "Förhandsvisning: reglerna har ännu inte granskats av en sakkunnig och är markerade som ogranskade.",
     "off": "Träningsplanen är inte påslagen i den här versionen.",
     "noDiscipline": "Välj din gren i profilen så kan KYDON söka regler för dina luckor.",
-    "unsupported": "Det finns ännu inga regler för den här grenen. Piloten börjar med grappling (judo, brottning, BJJ).",
+    "unsupported": "Det finns ännu inga regler för den här grenen. Piloter är grappling (judo, brottning, BJJ) och hybrid (HYROX, hybridträning).",
     "phase": {
       "label": "Fas",
       "GPP": "Allmän förberedelse",
@@ -3030,7 +3030,8 @@
         "title": "Maximal styrka från 80 % 1RM",
         "limit0": "Allmänt är beläggen höga, i kampsport måttliga (kvinnor underrepresenterade). Här gäller den försiktigare nivån.",
         "limit1": "Källan fastställer inte repetitioner, övning eller ordning: valet av övning ligger hos tränaren.",
-        "limit2": "Periodisering i sig är inte belagd för styrkeeffekten."
+        "limit2": "Periodisering i sig är inte belagd för styrkeeffekten.",
+        "limit3": "Hos uthållighetsidrottare (cykling, låga belägg) förbättrade tung styrketräning effektivitet och prestation utan att ändra VO₂max; styrka finns därför kvar i hybridplaner."
       },
       "power_30_70": {
         "title": "Power vid 30 till 70 % 1RM",
@@ -3043,6 +3044,11 @@
         "limit1": "Ingen effekt på kropps-, fett- eller muskelmassa.",
         "limit2": "Källan fastställer inte hoppformer, kontakter eller uppbyggnad: tränaren väljer dem."
       }
+    },
+    "hint": {
+      "title": "Om beläggen",
+      "concurrent": "Styrka och hård uthållighet ligger på skilda dagar så långt veckan tillåter. En fast ordning är inte belagd. Vid samtidig träning syntes en liten nackdel för benstyrkan hos män, inte hos kvinnor; någon regel efter kön följer inte av det här.",
+      "noStationDose": "För stationsspecifik träning (till exempel släde eller wall balls) ger beläggen ingen belagd dos. HYROX-data är mest observationer. Den delen ligger kvar hos tränaren."
     }
   }
 }

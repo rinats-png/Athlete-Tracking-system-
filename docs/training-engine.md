@@ -41,7 +41,7 @@
 | 9a | Doktrin-Nachtrag, diese Seite, Plan | ✅ |
 | 9b | Fundament: Typen, Regelregister mit Prüfstatus, Gate, erste Regel (Norwegian 4×4), Tests | ✅ |
 | 9c | Pilot Combat Grappling: Regeln, Planbauer, Vorschau-Bildschirm `/plan`, Messung am Blockende | ✅ (Regeln ungeprüft) |
-| 9d | Pilot Hybrid (HYROX, Hybrid Training) | offen |
+| 9d | Pilot Hybrid (HYROX, Hybrid Training) | ✅ (Regeln ungeprüft) |
 | 9e | Pilot Combat Striking | offen |
 | 9f | Session Player, Coach Override, Wochenprüfung, Block-Bericht | offen |
 
@@ -69,3 +69,16 @@ Pro Regel: stimmt die Quelle mit der Aussage überein, passt die Population, sin
 **Offen für die Fachperson:** Übung, Sprungformen und Wiederholungszahl bei Kraft legt keine Quelle fest; sie bleiben beim Trainer. Das Alter der Stichproben (häufig unter 18 bei Plyometrie) und der Frauenanteil begrenzen die Übertragung.
 
 **Schalter:** `VITE_TRAINING_PLAN=preview` zeigt `/plan` mit ungeprüften Regeln, jede Einheit als «Ungeprüft» gekennzeichnet. Ohne den Schalter ist der Bildschirm aus und nicht in «Mehr» verlinkt. Produktiv bleibt er aus, bis eine fachkundige Person Regeln geprüft hat.
+
+## Pilot Hybrid (Etappe 9d)
+
+**Zuordnung:** die Disziplinen `hyrox` und `hybrid` gehören zur Sportfamilie `hybrid`. Die fünf Regeln aus 9c gelten auch hier, mit der Spezifität, die die Recherche nennt: 4 × 4 und wiederholte Sprints nur übertragen (`EXTRAPOLATED`), Kraft und Power allgemein (`GENERAL`). Plyometrie gilt nur für Kampfsport.
+
+**Neu im Planbauer:**
+- Schlüsseleinheiten werden in Hybridplänen auf getrennte Tage gelegt (Concurrent-Training-Literatur: Abstand bevorzugt); sind nur benachbarte Tage frei, werden sie genutzt.
+- Hinweise zur Studienlage mit Quellen: bei Kraft plus harter Ausdauer der Hinweis zum gleichzeitigen Training (keine feste Reihenfolge belegt, kleiner Nachteil bei der Beinkraft von Männern, keine Geschlechtsregel); bei offener Kraftausdauer der Hinweis, dass für stationsspezifisches Training keine Dosis belegt ist.
+- Neue Quellen im Register (Verfasser aus dem Quellenregister der Recherche, Kap. 68): Huiberts 2024, Held 2026, Llanos-Lagos 2025, Brandt 2025, Villarroel López 2025. Die Quellen aus 9c tragen jetzt ihre Verfasser.
+
+**Was für Hybrid bewusst nicht geplant wird, weil keine Dosis belegt ist:** Schwellenintervalle, aerobe Grundlage, stationsspezifische Einheiten (HYROX_STATIONS), Compromised Running. Die Recherche beschreibt Blockstrukturen (Kap. 8 und 9) als Entwurf, nennt aber keine Studie mit Dosierung. Der Bauer sagt das («keine passende Regel»), statt sie zu erfinden. Wer diese Einheiten aufnehmen will, braucht eine Quelle und eine Fachperson; dann kommt je eine Regel ins Register.
+
+**HYROX-Daten** (Rennzeiten, Pace-Drop, Anteil Laufen) sind Beobachtungen und Benchmarks, keine Interventionsevidenz. Sie dienen später der Anforderungsanzeige, nicht der Dosierung.

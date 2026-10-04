@@ -2924,7 +2924,7 @@
     "preview": "Preview: the rules have not yet been reviewed by a qualified person and are marked as unreviewed.",
     "off": "The training plan is not switched on in this version.",
     "noDiscipline": "Choose your discipline in the profile so KYDON can look for rules for your gaps.",
-    "unsupported": "There are no rules for this discipline yet. The pilot area is grappling first (judo, wrestling, BJJ).",
+    "unsupported": "There are no rules for this discipline yet. Pilot areas are grappling (judo, wrestling, BJJ) and hybrid (HYROX, hybrid training).",
     "phase": {
       "label": "Phase",
       "GPP": "General preparation",
@@ -3030,7 +3030,8 @@
         "title": "Maximal strength from 80 % 1RM",
         "limit0": "In general the evidence is high, in combat sports moderate (women under-represented). The more cautious level applies here.",
         "limit1": "The source does not fix repetitions, exercise or order: choosing the exercise stays with the coach.",
-        "limit2": "Periodization itself is not proven for the strength effect."
+        "limit2": "Periodization itself is not proven for the strength effect.",
+        "limit3": "In endurance athletes (cycling, low evidence), heavy strength training improved efficiency and performance without changing VO₂max; strength therefore stays in hybrid plans."
       },
       "power_30_70": {
         "title": "Power at 30 to 70 % 1RM",
@@ -3043,6 +3044,11 @@
         "limit1": "No effect on body, fat or muscle mass.",
         "limit2": "The source does not fix jump forms, contacts or build-up: the coach chooses them."
       }
+    },
+    "hint": {
+      "title": "About the evidence",
+      "concurrent": "Strength and hard endurance sit on separate days as far as the weekly plan allows. A fixed order is not proven. With concurrent training, a small disadvantage in leg strength appeared in men, not in women; no sex rule follows from that here.",
+      "noStationDose": "For station-specific training (for example sled or wall balls) the evidence gives no proven dose. HYROX data are mostly observational. This part stays with the coach."
     }
   }
 }

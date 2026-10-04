@@ -19,6 +19,9 @@ import type { PerformanceDimension } from '@/types/domain'
  *   3. Gesamtbudget hoher Intensität je Woche: harte Runden zählen mit.
  *   4. Wo die Regel keine Frequenz nennt, gilt eine Einheit je Woche.
  *   5. Blocklänge: Eingabe, Vorgabe sechs Wochen; sie endet mit einer Messung.
+ *   6. Hybrid: Schlüsseleinheiten möglichst nicht an aufeinanderfolgenden Tagen
+ *      (Concurrent-Training-Literatur, Abstand zwischen den Reizen bevorzugt);
+ *      geht es nicht anders, werden auch benachbarte Tage genutzt.
  */
 
 /** Wie viele harte Einheiten je Woche insgesamt (harte Runden plus Intervall- und Sprinteinheiten). */
@@ -72,10 +75,18 @@ export interface PlannedSession extends TrainingSession {
   dimension: PerformanceDimension
 }
 
+export type PlanNoteKey = 'concurrent' | 'no_station_dose'
+export interface PlanNote {
+  key: PlanNoteKey
+  sourceIds: string[]
+}
+
 export interface BlockPlan {
   weeks: number
   sessions: PlannedSession[]
   skipped: SkippedGap[]
+  /** Hinweise zur Studienlage, die für diesen Plan gelten. */
+  notes: PlanNote[]
   /** Am Blockende gemessen wird, was die verwendeten Regeln als Messung nennen. */
   retest: { week: number; metrics: string[] }
   /** Schlüsselreize insgesamt je Woche, gemessen am Budget. */
@@ -165,10 +176,6 @@ export function planBlock(input: PlanInput): BlockPlan {
         continue
       }
       const high = isHigh(rule.intent)
-      if (high && budget <= 0) {
-        lastReason = 'budget'
-        continue
-      }
       const blocks = blocksFor(rule)
       const minutes = durationOf(blocks)
       if (input.maxSessionMinutes != null && minutes != null && minutes > input.maxSessionMinutes) {
@@ -176,22 +183,29 @@ export function planBlock(input: PlanInput): BlockPlan {
         continue
       }
       const frequency = rule.prescription.frequencyPerWeek?.[0] ?? DEFAULT_FREQUENCY
-      const days: number[] = []
-      for (const day of [...input.availableDays].sort((a, b) => a - b)) {
-        if (days.length >= frequency) break
-        if (taken.has(day)) continue
-        if (high && hardDays.some((h) => adjacent(day, h))) continue
-        // Eine Hoch-Intensitäts-Einheit kostet Budget je Tag.
-        if (high && budget - days.length <= 0) break
-        // Schlüsseleinheiten nicht an aufeinanderfolgenden Tagen stapeln, wenn es anders geht.
-        days.push(day)
-        taken.add(day)
+      if (high && budget < frequency) {
+        lastReason = 'budget'
+        continue
       }
-      if (days.length < frequency) {
-        for (const d of days) taken.delete(d)
+      const free = [...input.availableDays].sort((a, b) => a - b).filter((d) => !taken.has(d) && !(high && hardDays.some((h) => adjacent(d, h))))
+      const chosen: number[] = []
+      const keyDays = sessions.map((x) => x.day)
+      const pick = (avoidAdjacent: boolean) => {
+        for (const d of free) {
+          if (chosen.length >= frequency) break
+          if (chosen.includes(d)) continue
+          if (avoidAdjacent && [...keyDays, ...chosen].some((k) => adjacent(d, k))) continue
+          chosen.push(d)
+        }
+      }
+      if (input.family === 'hybrid') pick(true)
+      pick(false)
+      if (chosen.length < frequency) {
         lastReason = 'no_slot'
         continue
       }
+      const days = chosen.sort((a, b) => a - b)
+      for (const d of days) taken.add(d)
       for (const day of days) {
         sessions.push({
           id: `${rule.id}-d${day}`,
@@ -221,18 +235,27 @@ export function planBlock(input: PlanInput): BlockPlan {
   }
 
   sessions.sort((a, b) => a.day - b.day)
+  const notes: PlanNote[] = []
+  if (input.family === 'hybrid') {
+    const strengthDays = sessions.some((x) => x.primaryIntent === 'MAX_STRENGTH' || x.primaryIntent === 'POWER')
+    const enduranceHigh = sessions.some((x) => x.highIntensity)
+    if (strengthDays && enduranceHigh) notes.push({ key: 'concurrent', sourceIds: ['concurrent_2024', 'concurrent_umbrella_2026'] })
+    if (skipped.some((x) => x.dimension === 'strength_endurance' && x.reason === 'no_rule')) notes.push({ key: 'no_station_dose', sourceIds: ['hyrox_demand_2025', 'hift_scoping_2025'] })
+  }
   const metrics = [...new Set(sessions.map((s) => s.retestMetric))]
   return {
     weeks,
     sessions,
     skipped,
+    notes,
     retest: { week: weeks, metrics },
     highIntensityUsed: HIGH_INTENSITY_BUDGET - budget,
   }
 }
 
-/** Sportfamilie einer Disziplin. Pilotwelt: Grappling; andere Disziplinen folgen mit ihren Etappen. */
+/** Sportfamilie einer Disziplin. Piloten: Grappling und Hybrid; Striking folgt. */
 export function familyOfDiscipline(disciplineId: string | null | undefined): SportFamily | null {
   if (disciplineId === 'judo' || disciplineId === 'wrestling' || disciplineId === 'bjj') return 'combat_grappling'
+  if (disciplineId === 'hyrox' || disciplineId === 'hybrid') return 'hybrid'
   return null
 }

@@ -2924,7 +2924,7 @@
     "preview": "Voorbeeld: de regels zijn nog niet door een deskundige gecontroleerd en staan als ongecontroleerd gemarkeerd.",
     "off": "Het trainingsplan staat in deze versie niet aan.",
     "noDiscipline": "Kies in het profiel je discipline, dan zoekt KYDON regels voor je hiaten.",
-    "unsupported": "Voor deze discipline zijn er nog geen regels. De pilot begint met grappling (judo, worstelen, BJJ).",
+    "unsupported": "Voor deze discipline zijn er nog geen regels. Pilots zijn grappling (judo, worstelen, BJJ) en hybride (HYROX, hybride training).",
     "phase": {
       "label": "Fase",
       "GPP": "Algemene voorbereiding",
@@ -3030,7 +3030,8 @@
         "title": "Maximale kracht vanaf 80 % 1RM",
         "limit0": "Algemeen is het bewijs hoog, bij vechtsport gemiddeld (vrouwen ondervertegenwoordigd). Hier geldt het voorzichtigere niveau.",
         "limit1": "De bron legt herhalingen, oefening en volgorde niet vast: de keuze van de oefening blijft bij de trainer.",
-        "limit2": "Periodisering zelf is voor het krachteffect niet aangetoond."
+        "limit2": "Periodisering zelf is voor het krachteffect niet aangetoond.",
+        "limit3": "Bij duursporters (wielrennen, laag bewijs) verbeterde zware krachttraining efficiëntie en prestatie zonder verandering van de VO₂max; kracht blijft daarom in hybride plannen."
       },
       "power_30_70": {
         "title": "Power op 30 tot 70 % 1RM",
@@ -3043,6 +3044,11 @@
         "limit1": "Geen effect op lichaams-, vet- of spiermassa.",
         "limit2": "De bron legt sprongvormen, contacten en opbouw niet vast: de trainer kiest ze."
       }
+    },
+    "hint": {
+      "title": "Over het bewijs",
+      "concurrent": "Kracht en harde duur liggen op aparte dagen voor zover de week het toelaat. Een vaste volgorde is niet aangetoond. Bij gelijktijdig trainen zagen we een klein nadeel voor beenkracht bij mannen, niet bij vrouwen; daar volgt hier geen regel naar geslacht uit.",
+      "noStationDose": "Voor stationspecifieke training (bijvoorbeeld sled of wall balls) geeft het bewijs geen aangetoonde dosis. HYROX-gegevens zijn vooral observaties. Dit deel blijft bij de trainer."
     }
   }
 }

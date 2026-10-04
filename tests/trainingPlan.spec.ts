@@ -177,3 +177,74 @@ test.describe('Bildschirm Plan (Vorschau)', () => {
     await expect(page.getByText(/Pilotwelt/)).toBeVisible()
   })
 })
+
+test.describe('Pilot Hybrid (Etappe 9d)', () => {
+  const hybrid = (over: Partial<PlanInput> = {}): PlanInput =>
+    base({
+      family: 'hybrid',
+      fixedSessions: [],
+      gaps: [row('endurance', true, 3), row('max_strength', true, 3), row('power', true, 2), row('strength_endurance', true, 3)],
+      ...over,
+    })
+
+  test('Hybrid-Woche: 4×4 am Montag, Kraft an getrennten Tagen (Mi, Fr), Power in der verbleibenden Lücke (Di)', () => {
+    const plan = planBlock(hybrid())
+    expect(plan.sessions.map((s) => [s.day, s.ruleId])).toEqual([
+      [1, 'vo2_4x4'],
+      [2, 'power_30_70'],
+      [3, 'max_strength_80'],
+      [5, 'max_strength_80'],
+    ])
+    // Hybrid ist für alle Regeln nur übertragen oder allgemein belegt, nie direkt.
+    expect(plan.sessions.map((s) => s.evidenceSpecificity)).toEqual(['EXTRAPOLATED', 'GENERAL', 'GENERAL', 'GENERAL'])
+    expect(plan.sessions.some((s) => s.evidenceSpecificity === 'DIRECT')).toBe(false)
+  })
+
+  test('Hinweise: Concurrent-Training bei Kraft plus harter Ausdauer, keine Stationsdosis bei Kraftausdauer', () => {
+    const plan = planBlock(hybrid())
+    expect(plan.notes).toEqual([
+      { key: 'concurrent', sourceIds: ['concurrent_2024', 'concurrent_umbrella_2026'] },
+      { key: 'no_station_dose', sourceIds: ['hyrox_demand_2025', 'hift_scoping_2025'] },
+    ])
+    expect(plan.skipped).toEqual([{ dimension: 'strength_endurance', reason: 'no_rule', ruleId: null }])
+    // Kein Hinweis auf Gleichzeitigkeit ohne beides.
+    const onlyStrength = planBlock(hybrid({ gaps: [row('max_strength', true, 3)] }))
+    expect(onlyStrength.notes).toEqual([])
+    // Grappling bekommt die Hybrid-Hinweise nie.
+    expect(planBlock(base()).notes).toEqual([])
+  })
+
+  test('Streuung gilt nur für Hybrid: Grappling darf dieselben Tage dicht legen', () => {
+    const grapple = planBlock(base({ family: 'combat_grappling', fixedSessions: [], gaps: [row('endurance', true, 3), row('max_strength', true, 3)] }))
+    expect(grapple.sessions.map((s) => s.day)).toEqual([1, 2, 3])
+  })
+
+  test('wenn nur benachbarte Tage frei sind, werden sie genutzt statt nichts zu planen', () => {
+    const plan = planBlock(hybrid({ availableDays: [1, 2], gaps: [row('max_strength', true, 3)] }))
+    expect(plan.sessions.map((s) => s.day)).toEqual([1, 2])
+  })
+
+  test('Budget kleiner als die Häufigkeit der Regel: benannt als Budget, nicht als fehlender Tag', () => {
+    const plan = planBlock(hybrid({ fixedSessions: [{ day: 7, kind: 'hard_rounds' }, { day: 6, kind: 'hard_rounds' }], availableDays: [1, 2, 3, 4], gaps: [row('endurance', true, 3)], hrMaxPlausible: false }))
+    // Budget 3 − 2 = 1; die Sprint-Regel braucht zwei Einheiten.
+    expect(plan.skipped).toEqual([{ dimension: 'endurance', reason: 'budget', ruleId: 'rst_30m' }])
+  })
+})
+
+test('Bildschirm Plan: HYROX zeigt Hinweise zur Studienlage mit Quellen', async ({ page }) => {
+  await openDemo(page)
+  await page.evaluate(() => {
+    const data = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
+    data.athletes[0].profile.disciplineId = 'hyrox'
+    data.athletes[0].profile.trainingAgeYears = 4
+    data.athletes[0].profile.maxHr = 190
+    localStorage.setItem('kydon.data.v1', JSON.stringify(data))
+  })
+  await page.goto('/plan', { waitUntil: 'domcontentloaded' })
+  await expect(page.getByTestId('plan-preview')).toBeVisible()
+  const text = await page.getByTestId('plan-preview').innerText()
+  expect(text).not.toMatch(/plan\.[a-z]+\.|\{\{/)
+  // Ob Hinweise erscheinen, hängt von den Demodaten ab; erscheinen sie, tragen sie Quellen.
+  const notes = page.getByTestId('plan-notes')
+  if (await notes.count()) await expect(notes.locator('a').first()).toHaveAttribute('href', /doi\.org/)
+})

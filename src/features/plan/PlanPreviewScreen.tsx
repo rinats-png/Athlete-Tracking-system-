@@ -191,6 +191,25 @@ export function PlanPreviewScreen() {
         )}
       </Panel>
 
+      {plan.notes.length > 0 && (
+        <Panel className="mb-4" data-testid="plan-notes">
+          <PanelHeader title={t('plan.hint.title')} />
+          <ul className="px-4 pb-4 text-[14px]">
+            {plan.notes.map((n) => (
+              <li key={n.key} className="border-t border-line py-2 first:border-t-0">
+                <p>{t(n.key === 'concurrent' ? 'plan.hint.concurrent' : 'plan.hint.noStationDose')}</p>
+                <ul className="mt-1 list-disc pl-5 text-[11px] text-ink-muted">
+                  {n.sourceIds.map((id) => {
+                    const src = TRAINING_SOURCES[id]
+                    return <li key={id}>{src.url ? <a href={src.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{src.citation}</a> : src.citation}</li>
+                  })}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      )}
+
       {plan.skipped.length > 0 && (
         <Panel className="mb-4" data-testid="plan-skipped">
           <PanelHeader title={t('plan.skipped.title')} />

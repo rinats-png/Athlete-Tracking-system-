@@ -26,14 +26,19 @@ export const TRAINING_SOURCES: Record<string, TrainingSource> = {
   },
 }
 
-/** Quellen der Pilotwelt Grappling. Verfasser nennt die Recherche für diese Einträge nicht; die DOI trägt den Beleg. */
-const doi = (id: string, citation: string, doiId: string): TrainingSource => ({ id, citation, url: `https://doi.org/${doiId}`, fullTextChecked: false })
+/** Quellen aus dem Quellenregister der Recherche (Kap. 68). Alle nur auf Abstract-Ebene gelesen. */
+const src = (id: string, citation: string, doiId: string | null): TrainingSource => ({ id, citation, url: doiId ? `https://doi.org/${doiId}` : null, fullTextChecked: false })
 
 Object.assign(TRAINING_SOURCES, {
-  rst_meta_2023: doi('rst_meta_2023', 'Meta-Analyse zum Repeated-Sprint-Training (40 Publikationen, 541 Athleten), 2023.', '10.1007/s40279-023-01959-1'),
-  acsm_2026: doi('acsm_2026', 'ACSM-Übersicht 2026 zum Krafttraining (137 Reviews, über 30.000 Teilnehmende).', '10.1249/MSS.0000000000003897'),
-  combat_strength_2023: doi('combat_strength_2023', 'Review zum Krafttraining im Kampfsport (20 Studien, 504 Teilnehmende), 2023.', '10.3390/ijerph20043516'),
-  combat_plyo_2023: doi('combat_plyo_2023', 'Meta-Analyse zur Plyometrie im Kampfsport (12 Studien, 292 Teilnehmende), 2023.', '10.3390/sports11020033'),
+  rst_meta_2023: src('rst_meta_2023', 'Thurlow F, et al. (2024). Effects of Repeated-Sprint Training on Physical Fitness and Physiological Adaptation in Athletes. Sports Med.', '10.1007/s40279-023-01959-1'),
+  acsm_2026: src('acsm_2026', 'Currier BS, et al. (2026). ACSM Position Stand: Resistance Training Prescription for Muscle Function, Hypertrophy, and Physical Performance in Healthy Adults. Med Sci Sports Exerc.', '10.1249/MSS.0000000000003897'),
+  combat_strength_2023: src('combat_strength_2023', 'Cid-Calfucura I, et al. (2023). Effects of Strength Training on Physical Fitness of Olympic Combat Sports Athletes. Int J Environ Res Public Health.', '10.3390/ijerph20043516'),
+  combat_plyo_2023: src('combat_plyo_2023', 'Ojeda-Aravena A, et al. (2023). Plyometric-Jump Training on Physical Fitness of Combat Sport Athletes. Sports (Basel).', '10.3390/sports11020033'),
+  concurrent_2024: src('concurrent_2024', 'Huiberts RO, et al. (2024). Concurrent Strength and Endurance Training: impact of sex and training status. Sports Med.', '10.1007/s40279-023-01943-9'),
+  concurrent_umbrella_2026: src('concurrent_umbrella_2026', 'Held S, et al. (2026). Maximizing Adaptations in Concurrent Training: An Umbrella Review of Meta-analyses. Sports Med.', '10.1007/s40279-026-02401-y'),
+  heavy_strength_cyclists_2025: src('heavy_strength_cyclists_2025', 'Llanos-Lagos C, et al. (2025). Heavy strength training effects on physiological determinants of endurance cyclist performance. Eur J Appl Physiol.', '10.1007/s00421-025-05883-2'),
+  hyrox_demand_2025: src('hyrox_demand_2025', 'Brandt T, et al. (2025). Acute physiological responses and performance determinants in Hyrox. Front Physiol.', '10.3389/fphys.2025.1519240'),
+  hift_scoping_2025: src('hift_scoping_2025', 'Villarroel López P, Juárez Santos-García D. (2025). HIFT in Hybrid Competitions: A Scoping Review of Performance Models and Physiological Adaptations. J Funct Morphol Kinesiol.', '10.3390/jfmk10040365'),
 })
 
 export const TRAINING_RULES: EvidenceRule[] = [
@@ -124,11 +129,12 @@ export const TRAINING_RULES: EvidenceRule[] = [
       strength: 'MODERATE',
       specificity: { combat_grappling: 'DIRECT', combat_striking: 'DIRECT', hybrid: 'GENERAL' },
       evidenceTypes: ['consensus', 'systematic_review'],
-      sourceIds: ['acsm_2026', 'combat_strength_2023'],
+      sourceIds: ['acsm_2026', 'combat_strength_2023', 'heavy_strength_cyclists_2025'],
       limitations: [
         'Allgemeine Trainingsphysiologie: HIGH (ACSM 2026). Im Kampfsport: MODERATE, Frauen unterrepräsentiert. Hier gilt die vorsichtigere Stufe.',
         'Wiederholungszahl, Übung und Reihenfolge legt die Quelle nicht fest: die Wahl der Übung bleibt beim Trainer.',
         'Periodisierung selbst ist für den Krafteffekt nicht belegt.',
+        'Bei Ausdauersportlern (Radsport, Evidenz niedrig) verbesserte schweres Krafttraining Effizienz und Leistung ohne Änderung der VO₂max; in Hybridplänen bleibt Kraft deshalb erhalten.',
       ],
     },
     safety: { contraindicationTags: [], requiresCoachApproval: false, forbiddenForAutoPrescription: false },

@@ -2924,7 +2924,7 @@
     "preview": "Aperçu : les règles n'ont pas encore été relues par une personne qualifiée et sont marquées comme non vérifiées.",
     "off": "Le plan d'entraînement n'est pas activé dans cette version.",
     "noDiscipline": "Choisissez votre discipline dans le profil pour que KYDON cherche des règles pour vos lacunes.",
-    "unsupported": "Il n'y a pas encore de règles pour cette discipline. Le pilote commence par le grappling (judo, lutte, BJJ).",
+    "unsupported": "Il n'y a pas encore de règles pour cette discipline. Les pilotes sont le grappling (judo, lutte, BJJ) et l'hybride (HYROX, entraînement hybride).",
     "phase": {
       "label": "Phase",
       "GPP": "Préparation générale",
@@ -3030,7 +3030,8 @@
         "title": "Force maximale à partir de 80 % 1RM",
         "limit0": "En général les preuves sont élevées, dans les sports de combat moyennes (femmes sous-représentées). Le niveau le plus prudent s'applique ici.",
         "limit1": "La source ne fixe ni répétitions, ni exercice, ni ordre : le choix de l'exercice reste à l'entraîneur.",
-        "limit2": "La périodisation elle-même n'est pas prouvée pour l'effet sur la force."
+        "limit2": "La périodisation elle-même n'est pas prouvée pour l'effet sur la force.",
+        "limit3": "Chez les sportifs d'endurance (cyclisme, preuves faibles), la musculation lourde a amélioré l'efficacité et la performance sans modifier la VO₂max ; la force reste donc dans les plans hybrides."
       },
       "power_30_70": {
         "title": "Puissance à 30 à 70 % 1RM",
@@ -3043,6 +3044,11 @@
         "limit1": "Aucun effet sur la masse corporelle, grasse ou musculaire.",
         "limit2": "La source ne fixe ni formes de sauts, ni contacts, ni progression : l'entraîneur les choisit."
       }
+    },
+    "hint": {
+      "title": "À propos des preuves",
+      "concurrent": "Force et endurance dure sont sur des jours séparés autant que la semaine le permet. Un ordre fixe n'est pas prouvé. Avec l'entraînement combiné, un petit désavantage de force des jambes est apparu chez les hommes, pas chez les femmes ; il n'en découle ici aucune règle selon le sexe.",
+      "noStationDose": "Pour l'entraînement spécifique aux stations (par exemple traîneau ou wall balls), les études ne donnent pas de dose prouvée. Les données HYROX sont surtout observationnelles. Cette partie reste à l'entraîneur."
     }
   }
 }

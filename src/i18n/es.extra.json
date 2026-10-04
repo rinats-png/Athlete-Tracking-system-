@@ -2924,7 +2924,7 @@
     "preview": "Vista previa: las reglas aún no han sido revisadas por una persona cualificada y se marcan como no revisadas.",
     "off": "El plan de entrenamiento no está activado en esta versión.",
     "noDiscipline": "Elige tu disciplina en el perfil para que KYDON busque reglas para tus lagunas.",
-    "unsupported": "Todavía no hay reglas para esta disciplina. El piloto empieza por el grappling (judo, lucha, BJJ).",
+    "unsupported": "Todavía no hay reglas para esta disciplina. Los pilotos son el grappling (judo, lucha, BJJ) y el híbrido (HYROX, entrenamiento híbrido).",
     "phase": {
       "label": "Fase",
       "GPP": "Preparación general",
@@ -3030,7 +3030,8 @@
         "title": "Fuerza máxima desde el 80 % 1RM",
         "limit0": "En general la evidencia es alta, en deportes de combate moderada (mujeres infrarrepresentadas). Aquí se aplica el nivel más prudente.",
         "limit1": "La fuente no fija repeticiones, ejercicio ni orden: la elección del ejercicio queda en manos del entrenador.",
-        "limit2": "La periodización en sí no está demostrada para el efecto sobre la fuerza."
+        "limit2": "La periodización en sí no está demostrada para el efecto sobre la fuerza.",
+        "limit3": "En deportistas de resistencia (ciclismo, evidencia baja), el entrenamiento de fuerza pesado mejoró la eficiencia y el rendimiento sin cambiar el VO₂max; por eso la fuerza se mantiene en los planes híbridos."
       },
       "power_30_70": {
         "title": "Potencia al 30 al 70 % 1RM",
@@ -3043,6 +3044,11 @@
         "limit1": "Sin efecto sobre la masa corporal, grasa o muscular.",
         "limit2": "La fuente no fija formas de salto, contactos ni progresión: los elige el entrenador."
       }
+    },
+    "hint": {
+      "title": "Sobre la evidencia",
+      "concurrent": "Fuerza y resistencia dura están en días separados en la medida en que lo permite la semana. Un orden fijo no está demostrado. Con el entrenamiento concurrente apareció una pequeña desventaja en la fuerza de piernas en hombres, no en mujeres; de ello no se deriva aquí ninguna regla por sexo.",
+      "noStationDose": "Para el entrenamiento específico de estaciones (por ejemplo trineo o wall balls) la evidencia no da una dosis demostrada. Los datos de HYROX son sobre todo observacionales. Esta parte queda en manos del entrenador."
     }
   }
 }
