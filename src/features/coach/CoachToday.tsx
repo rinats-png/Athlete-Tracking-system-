@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { CalendarClock, CheckCircle2, ChevronRight, ClipboardList, Eye, FileText, Flag } from 'lucide-react'
@@ -10,7 +10,10 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { coachToday, type PriorityAthlete } from '@/domain/coachToday'
 import { axisLabel } from '@/data/profileAxes'
 import { testImageUrl } from '@/data/testImages'
-import { formatDate } from '@/lib/format'
+import { formatDate, formatNumber } from '@/lib/format'
+import { checkinsOf, teamCheckins } from '@/domain/checkin'
+import { checkinShareEnabled } from '@/lib/checkinShare'
+import { fetchLinkedCheckins, type LinkedCheckins } from '@/lib/supabase/checkinShare'
 
 /**
  * Heute — die Startseite des Trainers (Produktdoktrin §36).
@@ -201,6 +204,8 @@ export function CoachToday() {
           </div>
         </ImageCard>
 
+        <CheckinsCard />
+
         <Panel className="lg:col-span-2" data-testid="today-actions">
           <PanelHeader title={t('coachToday.actions.title')} />
           <div className="grid gap-2 px-4 pb-4 sm:grid-cols-3">
@@ -227,4 +232,58 @@ export function CoachToday() {
 function reasonText(p: PriorityAthlete, t: (k: string, o?: Record<string, unknown>) => string): string {
   if (p.reason === 'overdue' && p.daysOverdue != null && p.daysOverdue > 0) return t('coachToday.reason.overdueDays', { days: p.daysOverdue })
   return t(`coachToday.reason.${p.reason}`)
+}
+
+/**
+ * Check-ins dieser Woche (Produktdoktrin §32): wer hat sich gemeldet, wer
+ * weicht von der EIGENEN Baseline ab. Beschreibt, erklärt nichts, empfiehlt
+ * nichts. Lokal geführte Athleten zählen immer; verbundene Athleten nur, wenn
+ * sie ihre Check-ins zeigen und der Bau-Schalter an ist.
+ */
+function CheckinsCard() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  const { athletes } = useAppData()
+  const [linked, setLinked] = useState<LinkedCheckins[]>([])
+  useEffect(() => {
+    if (!checkinShareEnabled()) return
+    let alive = true
+    void fetchLinkedCheckins(new Date(Date.now() - 35 * 86_400_000).toISOString().slice(0, 10)).then((r) => alive && r && setLinked(r))
+    return () => {
+      alive = false
+    }
+  }, [])
+  const team = useMemo(() => {
+    const own = athletes.filter((a) => !a.archived).map((a) => ({ id: a.id, name: a.name || a.profile.firstName || '', checkins: checkinsOf(a.diary) }))
+    const ids = new Set(own.map((p) => p.id))
+    return teamCheckins([...own, ...linked.filter((p) => !ids.has(p.id))])
+  }, [athletes, linked])
+  if (team.total === 0) return null
+  const dev = (field: string) => t(`coachToday.checkins.dev.${field}`)
+  return (
+    <Panel data-testid="today-checkins">
+      <PanelHeader title={t('coachToday.checkins.title')} subtitle={t('coachToday.checkins.count', { done: team.withCheckin, total: team.total })} />
+      <div className="px-4 pb-3">
+        {team.flagged.length === 0 ? (
+          <p className="text-[14px] text-ink-secondary" data-testid="checkins-none-flagged">
+            {team.withCheckin === 0 ? t('coachToday.checkins.none') : t('coachToday.checkins.noneFlagged')}
+          </p>
+        ) : (
+          <ul>
+            {team.flagged.map((r) => (
+              <li key={r.id} className="border-t border-line py-2 first:border-t-0" data-testid={`checkin-flag-${r.id}`}>
+                <p className="text-[14px] font-medium">{r.name || t('coach.unnamed')}</p>
+                {r.deviations.map((d) => (
+                  <p key={d.field} className="text-[12px] text-ink-secondary">
+                    {dev(d.field)} · {t('coachToday.checkins.values', { recent: formatNumber(d.recent, locale, 1), baseline: formatNumber(d.baseline, locale, 1) })}
+                  </p>
+                ))}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <p className="border-t border-line px-4 py-2 text-[11px] leading-relaxed text-ink-muted">{t('coachToday.checkins.note')}</p>
+    </Panel>
+  )
 }

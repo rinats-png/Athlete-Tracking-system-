@@ -2556,6 +2556,19 @@
       "testDay": "Planlegg testdag",
       "review": "Gå gjennom utøvere",
       "report": "Grupperapport"
+    },
+    "checkins": {
+      "title": "Innsjekker denne uken",
+      "count": "{{done}} av {{total}} utøvere",
+      "none": "Ingen innsjekker denne uken ennå.",
+      "noneFlagged": "Ingen avviker fra sin egen baseline.",
+      "dev": {
+        "soreness": "Muskelsårhet høyere enn de 28 dagene før",
+        "stress": "Stress høyere enn de 28 dagene før",
+        "energy": "Energi lavere enn de 28 dagene før"
+      },
+      "values": "Snitt {{recent}} i stedet for {{baseline}}",
+      "note": "Beskriver bare avviket fra utøverens egen baseline (siste 3 dager mot de 28 før). Selvvurdering, ikke en måling, ingen årsak."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Impressum",
       "privacy": "Personvern",
       "terms": "Bruksvilkår",
-      "dpa": "Databehandleravtale"
+      "dpa": "Databehandleravtale",
+      "week": "Ukeoversikt"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Analyse",
       "report": "Rapport",
       "overview": "Detaljert oversikt"
+    }
+  },
+  "week": {
+    "eyebrow": "Tilbakeblikk",
+    "title": "Uken din",
+    "range": "{{from}} til {{to}}",
+    "load": {
+      "title": "Belastning",
+      "compare": "Gjennomsnitt for de fire ukene før: {{mean}} AU per uke.",
+      "noBaseline": "For en sammenligning mangler fire uker dagbok.",
+      "note": "Øktbelastning etter Foster (varighet ganger anstrengelse). En beskrivelse, ikke en korridor."
+    },
+    "activity": {
+      "title": "Aktivitet",
+      "checkins": "Innsjekker",
+      "of7": "på {{count}} av 7 dager",
+      "results": "Nye målinger"
+    },
+    "win": {
+      "title": "Største påviste fremgang",
+      "beyond": "over målestøyen (påvist fra {{detectable}} %)",
+      "note": "Sammenlignet med forrige måling av samme test.",
+      "none": "Ingen endring over målestøyen denne uken."
+    },
+    "due": {
+      "title": "Bør sjekkes",
+      "none": "Ingen test forfalt.",
+      "days_one": "{{count}} dag forfalt",
+      "days_other": "{{count}} dager forfalt"
     }
   }
 }

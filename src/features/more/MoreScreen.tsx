@@ -24,6 +24,7 @@ const GROUPS: { key: string; items: { key: string; to: string }[] }[] = [
   {
     key: 'evaluate',
     items: [
+      { key: 'week', to: '/woche' },
       { key: 'history', to: '/verlauf' },
       { key: 'analysis', to: '/analyse' },
       { key: 'runs', to: '/analyse/laeufe' },

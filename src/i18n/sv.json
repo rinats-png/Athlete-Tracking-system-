@@ -2001,6 +2001,9 @@
       "none": "Ingen tävling inlagd.",
       "set": "Lägg in tävling",
       "open": "Ändra tävling"
+    },
+    "week": {
+      "link": "Se din vecka"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "medel",
       "LOW": "låg",
       "INSUFFICIENT": "otillräcklig"
+    }
+  },
+  "checkin": {
+    "eyebrow": "Idag",
+    "screenTitle": "Incheckning",
+    "intro": "Tre frågor, 15 sekunder. En självskattning, ingen mätning.",
+    "title": "Snabb incheckning",
+    "sub": "15 sekunder",
+    "field": {
+      "energy": "Energi",
+      "soreness": "Träningsvärk",
+      "stress": "Stress"
+    },
+    "scale": {
+      "low": "låg",
+      "high": "hög"
+    },
+    "note": "Självskattning, ingen mätning. Den ersätter varken ett samtal eller ett medicinskt utlåtande.",
+    "save": "Spara incheckning",
+    "saved": "Sparad för idag.",
+    "diary": "Dagbok",
+    "share": {
+      "label": "Visa för min tränare",
+      "hint": "Bara dessa tre värden, bara så länge reglaget är på. Stänger du av det raderas de hos tränaren. Du behöver ett konto och en koppling till en tränare.",
+      "note": {
+        "not_signed_in": "För att dela måste du vara inloggad. Din incheckning är sparad.",
+        "unavailable": "Ingen uppkoppling just nu. Din incheckning är sparad, men inte delad.",
+        "failed": "Delningen lyckades inte. Din incheckning är sparad."
+      }
     }
   }
 }

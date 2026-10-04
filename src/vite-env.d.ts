@@ -7,6 +7,7 @@ interface ImportMetaEnv {
   readonly VITE_DEMO_MODE?: string
   readonly VITE_BILLING?: string
   readonly VITE_RACE_WEATHER?: string
+  readonly VITE_CHECKIN_SHARE?: string
   readonly VITE_FOUNDER_OFFER?: string
 }
 

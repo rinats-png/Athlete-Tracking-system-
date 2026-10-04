@@ -157,6 +157,9 @@ export interface AppDataValue {
   /** Alle importierten Aktivitäten des aktiven Athleten löschen. */
   clearActivities: () => void
   activities: StoredActivity[]
+  /** Ob der aktive Athlet seine Check-in-Werte dem Trainer zeigt. */
+  shareCheckins: boolean
+  setShareCheckins: (on: boolean) => void
   deleteWorkout: (id: string) => void
   /**
    * Decision-Log und Cockpit-Schwellen des aktiven Athleten (Schicht S3).
@@ -670,6 +673,11 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       },
       workouts: store.athletes.find((a) => a.id === store.activeAthleteId)?.workouts ?? [],
       activities: store.athletes.find((a) => a.id === store.activeAthleteId)?.activities ?? [],
+      shareCheckins: store.athletes.find((a) => a.id === store.activeAthleteId)?.shareCheckins ?? false,
+      setShareCheckins: (on) => {
+        const current = storeRef.current
+        commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, shareCheckins: on } : a)) })
+      },
       importActivities: (list) => {
         const current = storeRef.current
         const active = current.athletes.find((a) => a.id === current.activeAthleteId)

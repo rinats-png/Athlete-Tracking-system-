@@ -2556,6 +2556,19 @@
       "testDay": "Planera testdag",
       "review": "Granska atleter",
       "report": "Grupprapport"
+    },
+    "checkins": {
+      "title": "Incheckningar den här veckan",
+      "count": "{{done}} av {{total}} atleter",
+      "none": "Inga incheckningar den här veckan ännu.",
+      "noneFlagged": "Ingen avviker från sin egen baslinje.",
+      "dev": {
+        "soreness": "Träningsvärk högre än de 28 dagarna före",
+        "stress": "Stress högre än de 28 dagarna före",
+        "energy": "Energi lägre än de 28 dagarna före"
+      },
+      "values": "Snitt {{recent}} i stället för {{baseline}}",
+      "note": "Beskriver bara avvikelsen från atletens egen baslinje (senaste 3 dagarna mot de 28 före). Självskattning, ingen mätning, ingen orsak."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Impressum",
       "privacy": "Integritet",
       "terms": "Användarvillkor",
-      "dpa": "Personuppgiftsbiträdesavtal"
+      "dpa": "Personuppgiftsbiträdesavtal",
+      "week": "Veckoöversikt"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Analys",
       "report": "Rapport",
       "overview": "Detaljerad översikt"
+    }
+  },
+  "week": {
+    "eyebrow": "Tillbakablick",
+    "title": "Din vecka",
+    "range": "{{from}} till {{to}}",
+    "load": {
+      "title": "Belastning",
+      "compare": "Genomsnitt för de fyra veckorna före: {{mean}} AU per vecka.",
+      "noBaseline": "För en jämförelse saknas fyra veckors dagbok.",
+      "note": "Passbelastning enligt Foster (tid gånger ansträngning). En beskrivning, ingen korridor."
+    },
+    "activity": {
+      "title": "Aktivitet",
+      "checkins": "Incheckningar",
+      "of7": "på {{count}} av 7 dagar",
+      "results": "Nya mätningar"
+    },
+    "win": {
+      "title": "Största belagda framsteg",
+      "beyond": "över mätbruset (belagt från {{detectable}} %)",
+      "note": "Jämfört med föregående mätning av samma test.",
+      "none": "Ingen förändring över mätbruset den här veckan."
+    },
+    "due": {
+      "title": "Att granska",
+      "none": "Inget test försenat.",
+      "days_one": "{{count}} dag försenad",
+      "days_other": "{{count}} dagar försenad"
     }
   }
 }

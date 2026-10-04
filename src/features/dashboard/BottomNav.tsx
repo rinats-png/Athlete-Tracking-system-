@@ -41,7 +41,7 @@ import { useVisualViewportInset } from '@/lib/useVisualViewportInset'
  * Tagebuch, Training und Rechtliches liegen unter Mehr. Die Adressen blieben.
  */
 export const NAV_ITEMS = [
-  { key: 'athleteToday', icon: House, path: '/', alsoMatches: ['/uebersicht'] },
+  { key: 'athleteToday', icon: House, path: '/', alsoMatches: ['/uebersicht', '/checkin', '/woche'] },
   {
     key: 'athletePerformance',
     icon: BarChart3,

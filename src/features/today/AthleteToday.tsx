@@ -7,7 +7,7 @@ import { ImageCard } from '@/components/ui/ImageCard'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
-import { DiaryTodayCard } from '@/features/overview/DiaryTodayCard'
+import { CheckInPanel } from './CheckInPanel'
 import { athleteToday, type ConfidenceLevel } from '@/domain/performanceView'
 import { axisLabel } from '@/data/profileAxes'
 import { disciplineById } from '@/data/sportProfiles'
@@ -132,7 +132,12 @@ function TodayWithData() {
           </div>
         </Panel>
 
-        <DiaryTodayCard />
+        <CheckInPanel />
+
+        <Link to="/woche" data-testid="today-week-link" className="flex min-h-14 items-center justify-between gap-3 rounded-lg border border-line px-4 text-[14px] hover:bg-surface-sunken lg:col-span-2">
+          <span>{t('athleteToday.week.link')}</span>
+          <ChevronRight size={16} aria-hidden className="text-ink-muted" />
+        </Link>
 
         <ImageCard image={today.nextTest ? testImageUrl(today.nextTest.slug) : null} data-testid="today-next">
           <div className="px-4 py-4">

@@ -2556,6 +2556,19 @@
       "testDay": "Planlæg testdag",
       "review": "Gennemgå atleter",
       "report": "Grupperapport"
+    },
+    "checkins": {
+      "title": "Check-ins denne uge",
+      "count": "{{done}} af {{total}} atleter",
+      "none": "Endnu ingen check-ins denne uge.",
+      "noneFlagged": "Ingen afviger fra sin egen baseline.",
+      "dev": {
+        "soreness": "Muskelømhed højere end de 28 dage før",
+        "stress": "Stress højere end de 28 dage før",
+        "energy": "Energi lavere end de 28 dage før"
+      },
+      "values": "Gns. {{recent}} i stedet for {{baseline}}",
+      "note": "Beskriver kun afvigelsen fra atletens egen baseline (seneste 3 dage mod de 28 før). Selvvurdering, ikke en måling, ingen årsag."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Impressum",
       "privacy": "Privatliv",
       "terms": "Brugsvilkår",
-      "dpa": "Databehandleraftale"
+      "dpa": "Databehandleraftale",
+      "week": "Ugeoversigt"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Analyse",
       "report": "Rapport",
       "overview": "Detaljeret oversigt"
+    }
+  },
+  "week": {
+    "eyebrow": "Tilbageblik",
+    "title": "Din uge",
+    "range": "{{from}} til {{to}}",
+    "load": {
+      "title": "Belastning",
+      "compare": "Gennemsnit af de fire uger før: {{mean}} AU pr. uge.",
+      "noBaseline": "Til en sammenligning mangler fire ugers dagbog.",
+      "note": "Pasbelastning efter Foster (varighed gange anstrengelse). En beskrivelse, ikke en korridor."
+    },
+    "activity": {
+      "title": "Aktivitet",
+      "checkins": "Check-ins",
+      "of7": "på {{count}} af 7 dage",
+      "results": "Nye målinger"
+    },
+    "win": {
+      "title": "Største påviste fremgang",
+      "beyond": "over målestøjen (påvist fra {{detectable}} %)",
+      "note": "Sammenlignet med forrige måling af samme test.",
+      "none": "Ingen ændring over målestøjen denne uge."
+    },
+    "due": {
+      "title": "Bør gennemgås",
+      "none": "Ingen test overskredet.",
+      "days_one": "{{count}} dag overskredet",
+      "days_other": "{{count}} dage overskredet"
     }
   }
 }

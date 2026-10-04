@@ -2001,6 +2001,9 @@
       "none": "Ninguna competición registrada.",
       "set": "Registrar competición",
       "open": "Cambiar competición"
+    },
+    "week": {
+      "link": "Ver tu semana"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "media",
       "LOW": "baja",
       "INSUFFICIENT": "insuficiente"
+    }
+  },
+  "checkin": {
+    "eyebrow": "Hoy",
+    "screenTitle": "Check-in",
+    "intro": "Tres preguntas, 15 segundos. Una autoevaluación, no una medición.",
+    "title": "Check-in rápido",
+    "sub": "15 segundos",
+    "field": {
+      "energy": "Energía",
+      "soreness": "Agujetas",
+      "stress": "Estrés"
+    },
+    "scale": {
+      "low": "bajo",
+      "high": "alto"
+    },
+    "note": "Autoevaluación, no una medición. No sustituye ni una conversación ni una opinión médica.",
+    "save": "Guardar check-in",
+    "saved": "Guardado para hoy.",
+    "diary": "Diario",
+    "share": {
+      "label": "Mostrar a mi entrenador",
+      "hint": "Solo estos tres valores, solo mientras el interruptor esté activado. Desactivarlo los borra en el entrenador. Necesitas una cuenta y una conexión con un entrenador.",
+      "note": {
+        "not_signed_in": "Para compartir debes haber iniciado sesión. Tu check-in está guardado.",
+        "unavailable": "Sin conexión ahora. Tu check-in está guardado, pero no compartido.",
+        "failed": "No se pudo compartir. Tu check-in está guardado."
+      }
     }
   }
 }

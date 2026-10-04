@@ -2556,6 +2556,19 @@
       "testDay": "Planifier la journée de tests",
       "review": "Examiner les athlètes",
       "report": "Rapport de groupe"
+    },
+    "checkins": {
+      "title": "Check-ins cette semaine",
+      "count": "{{done}} athlètes sur {{total}}",
+      "none": "Pas encore de check-in cette semaine.",
+      "noneFlagged": "Personne ne s'écarte de sa propre base.",
+      "dev": {
+        "soreness": "Courbatures plus élevées que les 28 jours précédents",
+        "stress": "Stress plus élevé que les 28 jours précédents",
+        "energy": "Énergie plus basse que les 28 jours précédents"
+      },
+      "values": "Moy. {{recent}} au lieu de {{baseline}}",
+      "note": "Décrit seulement l'écart par rapport à la propre base de l'athlète (3 derniers jours contre les 28 jours précédents). Auto-évaluation, pas une mesure, pas une cause."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Mentions légales",
       "privacy": "Confidentialité",
       "terms": "Conditions d'utilisation",
-      "dpa": "Accord de sous-traitance"
+      "dpa": "Accord de sous-traitance",
+      "week": "Bilan de la semaine"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Analyse",
       "report": "Rapport",
       "overview": "Vue d'ensemble détaillée"
+    }
+  },
+  "week": {
+    "eyebrow": "Bilan",
+    "title": "Ta semaine",
+    "range": "du {{from}} au {{to}}",
+    "load": {
+      "title": "Charge",
+      "compare": "Moyenne des quatre semaines précédentes : {{mean}} UA par semaine.",
+      "noBaseline": "Il manque quatre semaines de journal pour comparer.",
+      "note": "Charge de séance selon Foster (durée fois effort). Une description, pas un couloir."
+    },
+    "activity": {
+      "title": "Activité",
+      "checkins": "Check-ins",
+      "of7": "sur {{count}} jours sur 7",
+      "results": "Nouvelles mesures"
+    },
+    "win": {
+      "title": "Plus grand progrès prouvé",
+      "beyond": "au-dessus du bruit de mesure (prouvé à partir de {{detectable}} %)",
+      "note": "Par rapport à la mesure précédente du même test.",
+      "none": "Cette semaine, aucun changement au-dessus du bruit de mesure."
+    },
+    "due": {
+      "title": "À examiner",
+      "none": "Aucun test en retard.",
+      "days_one": "{{count}} jour de retard",
+      "days_other": "{{count}} jours de retard"
     }
   }
 }

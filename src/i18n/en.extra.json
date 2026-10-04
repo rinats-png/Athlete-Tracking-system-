@@ -2556,6 +2556,19 @@
       "testDay": "Plan test day",
       "review": "Review athletes",
       "report": "Group report"
+    },
+    "checkins": {
+      "title": "Check-ins this week",
+      "count": "{{done}} of {{total}} athletes",
+      "none": "No check-ins this week yet.",
+      "noneFlagged": "Nobody deviates from their own baseline.",
+      "dev": {
+        "soreness": "Soreness higher than in the 28 days before",
+        "stress": "Stress higher than in the 28 days before",
+        "energy": "Energy lower than in the 28 days before"
+      },
+      "values": "Avg {{recent}} instead of {{baseline}}",
+      "note": "Describes only the deviation from the athlete's own baseline (last 3 days against the 28 days before). Self-assessment, not a measurement, no cause."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Imprint",
       "privacy": "Privacy",
       "terms": "Terms of use",
-      "dpa": "Data processing agreement"
+      "dpa": "Data processing agreement",
+      "week": "Week review"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Analysis",
       "report": "Report",
       "overview": "Detailed overview"
+    }
+  },
+  "week": {
+    "eyebrow": "Review",
+    "title": "Your week",
+    "range": "{{from}} to {{to}}",
+    "load": {
+      "title": "Load",
+      "compare": "Average of the four weeks before: {{mean}} AU per week.",
+      "noBaseline": "Four weeks of diary are missing for a comparison.",
+      "note": "Session load after Foster (duration times effort). A description, not a corridor."
+    },
+    "activity": {
+      "title": "Activity",
+      "checkins": "Check-ins",
+      "of7": "on {{count}} of 7 days",
+      "results": "New measurements"
+    },
+    "win": {
+      "title": "Biggest proven progress",
+      "beyond": "above measurement noise (proven from {{detectable}} %)",
+      "note": "Compared with the previous measurement of the same test.",
+      "none": "No change above measurement noise this week."
+    },
+    "due": {
+      "title": "To review",
+      "none": "No test overdue.",
+      "days_one": "{{count}} day overdue",
+      "days_other": "{{count}} days overdue"
     }
   }
 }

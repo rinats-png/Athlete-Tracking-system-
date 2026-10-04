@@ -22,7 +22,7 @@
 |---|---|---|
 | 1 | **Trainer:** Navigation (Today, Athleten, Test, Team, Mehr), Trainer-Today, Team-Hub, Mehr-Seite, Wächter-Test | ✅ gebaut |
 | 2 | **Athlet:** Navigation (Heute, Leistung, Test, Fuel, Mehr), Heute, Leistungsprofil mit Assessment Coverage und Data Confidence | ✅ gebaut |
-| 3 | Check-in (Migration), Trainer-Cockpit mit Check-in-Quote, Montagsbrief | offen |
+| 3 | Check-in (Migration), Trainer-Check-ins mit Baseline, Wochenrückblick | ✅ gebaut; Teilen mit dem Trainer hinter Schalter bis zur Freigabe |
 | 4 | Kiosk-Modus und Testtag-Planer | offen |
 | 5 | Ask KYDON, Coach Copilot (erst Werkzeugschicht, dann Sprachmodell) | offen |
 | 6 | Fuel-Vervollständigung mit Evidence Drawer | offen |
@@ -44,3 +44,12 @@ Jede neue Funktion besteht die Prüfung aus Doktrin §50.
 - **Leistung** (`features/performance/PerformanceScreen.tsx`): Datenbasis mit Data Confidence (HIGH, MODERATE, LOW, INSUFFICIENT), Kerntests als Anzahl, Radar, Dimensionen mit Perzentil, «keine Referenz» oder «keine Daten», vier Karten. Kein Gesamtwert.
 - **Gefunden und behoben:** Der Radar zeigte über dem Diagramm einen Rohschlüssel (`radar.unitPercentile`); die Schlüssel hießen anders im Wörterbuch.
 - **Noch nicht:** der Check-in aus dem Mockup (Energie, Muskelkater, Stress mit Freigabe an den Trainer) braucht eine Migration und folgt in Etappe 3.
+
+## Etappe 3: was gebaut ist
+
+- **Check-in** (`features/today/CheckInPanel.tsx`, Logik `domain/checkin.ts`): Energie, Muskelkater, Stress von 1 bis 5, in 15 Sekunden, auf «Heute» und unter `/checkin`. Die Werte stehen im Tagebuch (dieselben Felder, kein neues Datenformat) und sind eine Selbsteinschätzung, keine Messung.
+- **Schema 30:** `shareCheckins` je Athlet, Vorgabe aus (Migration 29 → 30).
+- **Trainer** (`CoachToday`, Karte «Check-ins diese Woche»): wer hat sich gemeldet, wer weicht von der EIGENEN Baseline ab (letzte 3 Tage gegen die 28 davor, ab einem Skalenpunkt, mindestens 7 Werte in der Baseline). Eine Beschreibung, keine Ursache und kein Urteil. Die Schwelle ist eine offene Produktentscheidung (`DEVIATION_POINTS`).
+- **Teilen mit dem Trainer:** Schalter «Meinem Trainer zeigen» (aus), nur mit Bau-Schalter `VITE_CHECKIN_SHARE=on`. Serverseitig `supabase/migrations/20261004100000_shared_checkins.sql`: Tabelle mit RLS (nur Eigentümer), Lesen für Trainer nur über `coach_shared_checkins()` bei aktiver Verknüpfung, Aufbewahrung 90 Tage, Kontolöschung räumt ab. **Nicht ausgerollt, Datenschutztext nur als Entwurf** (`docs/checkin-datenschutz.md`).
+- **Wochenrückblick** (`/woche`, `domain/weekReview.ts`): Belastung neben dem Mittel der vier Wochen davor, Check-in-Tage, neue Messungen, größter belegter Fortschritt (über der Messschwankung), überfällige Tests. Keine Streaks, keine Abzeichen.
+- **Noch nicht:** der Montagsbrief als Push. Er braucht ein neues Push-Thema und eine Änderung der Edge Function `push`, das liegt bei dir zum Ausrollen. Bis dahin ist der Rückblick in der App erreichbar (Heute → «Deine Woche ansehen», Mehr).

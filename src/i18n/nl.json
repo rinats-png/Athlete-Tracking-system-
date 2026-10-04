@@ -2001,6 +2001,9 @@
       "none": "Geen wedstrijd ingevoerd.",
       "set": "Wedstrijd invoeren",
       "open": "Wedstrijd wijzigen"
+    },
+    "week": {
+      "link": "Bekijk je week"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "gemiddeld",
       "LOW": "laag",
       "INSUFFICIENT": "onvoldoende"
+    }
+  },
+  "checkin": {
+    "eyebrow": "Vandaag",
+    "screenTitle": "Check-in",
+    "intro": "Drie vragen, 15 seconden. Een zelfinschatting, geen meting.",
+    "title": "Snelle check-in",
+    "sub": "15 seconden",
+    "field": {
+      "energy": "Energie",
+      "soreness": "Spierpijn",
+      "stress": "Stress"
+    },
+    "scale": {
+      "low": "laag",
+      "high": "hoog"
+    },
+    "note": "Zelfinschatting, geen meting. Ze vervangt geen gesprek en geen medisch oordeel.",
+    "save": "Check-in opslaan",
+    "saved": "Voor vandaag opgeslagen.",
+    "diary": "Dagboek",
+    "share": {
+      "label": "Aan mijn trainer tonen",
+      "hint": "Alleen deze drie waarden, alleen zolang de schakelaar aan staat. Uitzetten verwijdert ze bij de trainer. Je hebt een account en een koppeling met een trainer nodig.",
+      "note": {
+        "not_signed_in": "Om te delen moet je ingelogd zijn. Je check-in is opgeslagen.",
+        "unavailable": "Nu geen verbinding. Je check-in is opgeslagen, maar niet gedeeld.",
+        "failed": "Delen is niet gelukt. Je check-in is opgeslagen."
+      }
     }
   }
 }

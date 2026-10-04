@@ -2001,6 +2001,9 @@
       "none": "Kein Wettkampf eingetragen.",
       "set": "Wettkampf eintragen",
       "open": "Wettkampf ändern"
+    },
+    "week": {
+      "link": "Deine Woche ansehen"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "mittel",
       "LOW": "gering",
       "INSUFFICIENT": "unzureichend"
+    }
+  },
+  "checkin": {
+    "eyebrow": "Heute",
+    "screenTitle": "Check-in",
+    "intro": "Drei Fragen, 15 Sekunden. Eine Selbsteinschätzung, keine Messung.",
+    "title": "Schneller Check-in",
+    "sub": "15 Sekunden",
+    "field": {
+      "energy": "Energie",
+      "soreness": "Muskelkater",
+      "stress": "Stress"
+    },
+    "scale": {
+      "low": "wenig",
+      "high": "viel"
+    },
+    "note": "Selbsteinschätzung, keine Messung. Sie ersetzt weder ein Gespräch noch eine ärztliche Einschätzung.",
+    "save": "Check-in speichern",
+    "saved": "Heute gespeichert.",
+    "diary": "Tagebuch",
+    "share": {
+      "label": "Meinem Trainer zeigen",
+      "hint": "Nur diese drei Werte, nur solange der Schalter an ist. Ausschalten löscht sie beim Trainer. Dafür brauchst du ein Konto und eine Verbindung zu einem Trainer.",
+      "note": {
+        "not_signed_in": "Zum Teilen musst du angemeldet sein. Dein Check-in ist gespeichert.",
+        "unavailable": "Gerade keine Verbindung. Dein Check-in ist gespeichert, nur nicht geteilt.",
+        "failed": "Das Teilen hat nicht geklappt. Dein Check-in ist gespeichert."
+      }
     }
   }
 }

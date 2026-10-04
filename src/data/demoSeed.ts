@@ -533,6 +533,7 @@ export function buildDemoData(): StoredData {
         nutrition: { pal: 1.55 },
     health: { consents: [], labs: [], symptoms: [], cycle: [], selfImage: [], meds: [], photos: [], trainingKcalPerDay: null, updatedAt: null },
     activities: [],
+    shareCheckins: false,
     peakWeeks: [],
     notes: '',
     consent: { grantedAt: null, grantedBy: '', forMinor: false, withdrawnAt: null },

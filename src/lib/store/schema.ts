@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 29
+export const CURRENT_SCHEMA_VERSION = 30
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -1067,6 +1067,12 @@ const athleteSchema = z.object({
   diaryFields: z.array(diaryFieldSchema).default([]),
   /** Importierte Aktivitäten (Strava, Garmin …) für den Bereich «Läufe». Nur auf dem Gerät. */
   activities: z.array(activitySchema).max(20000).default([]),
+  /**
+   * Ob der Athlet seine Check-in-Werte (Energie, Muskelkater, Stress) dem
+   * verbundenen Trainer zeigt. Aus, bis er es einschaltet; ausschalten löscht
+   * die geteilten Zeilen auf dem Server. Eine Selbsteinschätzung, keine Messung.
+   */
+  shareCheckins: z.boolean().default(false),
   /** Trainingslog: Einheiten mit Sätzen (Schicht S2). */
   workouts: z.array(workoutSchema).default([]),
   /** Decision-Log (Schicht S3): was entschieden wurde, und was danach geschah. */
@@ -1646,6 +1652,16 @@ export const MIGRATIONS: Migration[] = [
       athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, activities: athlete.activities ?? [] })),
     }),
   },
+  {
+    from: 29,
+    to: 30,
+    describe: 'Check-in: Freigabe an den Trainer je Athlet (aus)',
+    run: (data: any) => ({
+      ...data,
+      version: 30,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, shareCheckins: false })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1688,6 +1704,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     diaryFields: [],
     workouts: [],
     activities: [],
+    shareCheckins: false,
     decisions: [],
     cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
     meals: [],

@@ -2556,6 +2556,19 @@
       "testDay": "Testtag planen",
       "review": "Athleten prüfen",
       "report": "Gruppenbericht"
+    },
+    "checkins": {
+      "title": "Check-ins diese Woche",
+      "count": "{{done}} von {{total}} Athleten",
+      "none": "Noch keine Check-ins diese Woche.",
+      "noneFlagged": "Niemand weicht von der eigenen Baseline ab.",
+      "dev": {
+        "soreness": "Muskelkater höher als in den 28 Tagen davor",
+        "stress": "Stress höher als in den 28 Tagen davor",
+        "energy": "Energie niedriger als in den 28 Tagen davor"
+      },
+      "values": "Ø {{recent}} statt {{baseline}}",
+      "note": "Beschreibt nur die Abweichung von der eigenen Baseline des Athleten (letzte 3 Tage gegen die 28 Tage davor). Selbsteinschätzung, keine Messung, keine Ursache."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Impressum",
       "privacy": "Datenschutz",
       "terms": "Nutzungsbedingungen",
-      "dpa": "Auftragsverarbeitung"
+      "dpa": "Auftragsverarbeitung",
+      "week": "Wochenrückblick"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Analyse",
       "report": "Bericht",
       "overview": "Ausführliche Übersicht"
+    }
+  },
+  "week": {
+    "eyebrow": "Rückblick",
+    "title": "Deine Woche",
+    "range": "{{from}} bis {{to}}",
+    "load": {
+      "title": "Belastung",
+      "compare": "Im Mittel der vier Wochen davor: {{mean}} AU pro Woche.",
+      "noBaseline": "Für einen Vergleich fehlen vier Wochen Tagebuch.",
+      "note": "Sitzungslast nach Foster (Dauer mal Anstrengung). Eine Beschreibung, kein Korridor."
+    },
+    "activity": {
+      "title": "Aktivität",
+      "checkins": "Check-ins",
+      "of7": "an {{count}} von 7 Tagen",
+      "results": "Neue Messungen"
+    },
+    "win": {
+      "title": "Größter belegter Fortschritt",
+      "beyond": "über der Messschwankung (ab {{detectable}} % belegt)",
+      "note": "Verglichen mit der Vormessung desselben Tests.",
+      "none": "Diese Woche keine Veränderung über der Messschwankung."
+    },
+    "due": {
+      "title": "Zu prüfen",
+      "none": "Kein Test überfällig.",
+      "days_one": "{{count}} Tag überfällig",
+      "days_other": "{{count}} Tage überfällig"
     }
   }
 }

@@ -2556,6 +2556,19 @@
       "testDay": "Planificar jornada de tests",
       "review": "Revisar atletas",
       "report": "Informe de grupo"
+    },
+    "checkins": {
+      "title": "Check-ins esta semana",
+      "count": "{{done}} de {{total}} atletas",
+      "none": "Aún no hay check-ins esta semana.",
+      "noneFlagged": "Nadie se desvía de su propia base.",
+      "dev": {
+        "soreness": "Agujetas más altas que en los 28 días anteriores",
+        "stress": "Estrés más alto que en los 28 días anteriores",
+        "energy": "Energía más baja que en los 28 días anteriores"
+      },
+      "values": "Media {{recent}} en lugar de {{baseline}}",
+      "note": "Describe solo la desviación de la propia base del atleta (últimos 3 días frente a los 28 anteriores). Autoevaluación, no una medición, sin causa."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Aviso legal",
       "privacy": "Privacidad",
       "terms": "Condiciones de uso",
-      "dpa": "Encargo de tratamiento"
+      "dpa": "Encargo de tratamiento",
+      "week": "Resumen semanal"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Análisis",
       "report": "Informe",
       "overview": "Resumen detallado"
+    }
+  },
+  "week": {
+    "eyebrow": "Resumen",
+    "title": "Tu semana",
+    "range": "del {{from}} al {{to}}",
+    "load": {
+      "title": "Carga",
+      "compare": "Media de las cuatro semanas anteriores: {{mean}} UA por semana.",
+      "noBaseline": "Faltan cuatro semanas de diario para comparar.",
+      "note": "Carga de sesión según Foster (duración por esfuerzo). Una descripción, no un corredor."
+    },
+    "activity": {
+      "title": "Actividad",
+      "checkins": "Check-ins",
+      "of7": "en {{count}} de 7 días",
+      "results": "Mediciones nuevas"
+    },
+    "win": {
+      "title": "Mayor progreso demostrado",
+      "beyond": "por encima del ruido de medición (demostrado desde {{detectable}} %)",
+      "note": "Comparado con la medición anterior del mismo test.",
+      "none": "Esta semana ningún cambio por encima del ruido de medición."
+    },
+    "due": {
+      "title": "A revisar",
+      "none": "Ningún test atrasado.",
+      "days_one": "{{count}} día de retraso",
+      "days_other": "{{count}} días de retraso"
     }
   }
 }

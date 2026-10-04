@@ -2001,6 +2001,9 @@
       "none": "No competition entered.",
       "set": "Add competition",
       "open": "Change competition"
+    },
+    "week": {
+      "link": "View your week"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "moderate",
       "LOW": "low",
       "INSUFFICIENT": "insufficient"
+    }
+  },
+  "checkin": {
+    "eyebrow": "Today",
+    "screenTitle": "Check-in",
+    "intro": "Three questions, 15 seconds. A self-assessment, not a measurement.",
+    "title": "Quick check-in",
+    "sub": "15 seconds",
+    "field": {
+      "energy": "Energy",
+      "soreness": "Soreness",
+      "stress": "Stress"
+    },
+    "scale": {
+      "low": "low",
+      "high": "high"
+    },
+    "note": "Self-assessment, not a measurement. It replaces neither a conversation nor a medical opinion.",
+    "save": "Save check-in",
+    "saved": "Saved for today.",
+    "diary": "Diary",
+    "share": {
+      "label": "Show to my coach",
+      "hint": "Only these three values, only while the switch is on. Turning it off deletes them at your coach. You need an account and a connection to a coach.",
+      "note": {
+        "not_signed_in": "You need to be signed in to share. Your check-in is saved.",
+        "unavailable": "No connection right now. Your check-in is saved, just not shared.",
+        "failed": "Sharing did not work. Your check-in is saved."
+      }
     }
   }
 }

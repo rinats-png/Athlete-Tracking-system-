@@ -2001,6 +2001,9 @@
       "none": "Aucune compétition saisie.",
       "set": "Saisir une compétition",
       "open": "Modifier la compétition"
+    },
+    "week": {
+      "link": "Voir ta semaine"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "moyenne",
       "LOW": "faible",
       "INSUFFICIENT": "insuffisante"
+    }
+  },
+  "checkin": {
+    "eyebrow": "Aujourd'hui",
+    "screenTitle": "Check-in",
+    "intro": "Trois questions, 15 secondes. Une auto-évaluation, pas une mesure.",
+    "title": "Check-in rapide",
+    "sub": "15 secondes",
+    "field": {
+      "energy": "Énergie",
+      "soreness": "Courbatures",
+      "stress": "Stress"
+    },
+    "scale": {
+      "low": "faible",
+      "high": "élevé"
+    },
+    "note": "Auto-évaluation, pas une mesure. Elle ne remplace ni une conversation ni un avis médical.",
+    "save": "Enregistrer le check-in",
+    "saved": "Enregistré pour aujourd'hui.",
+    "diary": "Journal",
+    "share": {
+      "label": "Montrer à mon entraîneur",
+      "hint": "Seulement ces trois valeurs, seulement tant que l'interrupteur est activé. Le désactiver les supprime chez l'entraîneur. Il faut un compte et une liaison avec un entraîneur.",
+      "note": {
+        "not_signed_in": "Pour partager, tu dois être connecté. Ton check-in est enregistré.",
+        "unavailable": "Pas de connexion pour le moment. Ton check-in est enregistré, mais pas partagé.",
+        "failed": "Le partage n'a pas fonctionné. Ton check-in est enregistré."
+      }
     }
   }
 }

@@ -2001,6 +2001,9 @@
       "none": "Ingen konkurranse registrert.",
       "set": "Registrer konkurranse",
       "open": "Endre konkurranse"
+    },
+    "week": {
+      "link": "Se uken din"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "middels",
       "LOW": "lav",
       "INSUFFICIENT": "utilstrekkelig"
+    }
+  },
+  "checkin": {
+    "eyebrow": "I dag",
+    "screenTitle": "Innsjekk",
+    "intro": "Tre spørsmål, 15 sekunder. En selvvurdering, ikke en måling.",
+    "title": "Rask innsjekk",
+    "sub": "15 sekunder",
+    "field": {
+      "energy": "Energi",
+      "soreness": "Muskelsårhet",
+      "stress": "Stress"
+    },
+    "scale": {
+      "low": "lav",
+      "high": "høy"
+    },
+    "note": "Selvvurdering, ikke en måling. Den erstatter verken en samtale eller en medisinsk vurdering.",
+    "save": "Lagre innsjekk",
+    "saved": "Lagret for i dag.",
+    "diary": "Dagbok",
+    "share": {
+      "label": "Vis til treneren min",
+      "hint": "Bare disse tre verdiene, bare så lenge bryteren er på. Slår du den av, slettes de hos treneren. Du trenger en konto og en kobling til en trener.",
+      "note": {
+        "not_signed_in": "For å dele må du være innlogget. Innsjekken din er lagret.",
+        "unavailable": "Ingen tilkobling akkurat nå. Innsjekken din er lagret, men ikke delt.",
+        "failed": "Delingen lyktes ikke. Innsjekken din er lagret."
+      }
     }
   }
 }

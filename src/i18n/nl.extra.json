@@ -2556,6 +2556,19 @@
       "testDay": "Testdag plannen",
       "review": "Atleten bekijken",
       "report": "Groepsrapport"
+    },
+    "checkins": {
+      "title": "Check-ins deze week",
+      "count": "{{done}} van {{total}} atleten",
+      "none": "Nog geen check-ins deze week.",
+      "noneFlagged": "Niemand wijkt af van de eigen basislijn.",
+      "dev": {
+        "soreness": "Spierpijn hoger dan in de 28 dagen ervoor",
+        "stress": "Stress hoger dan in de 28 dagen ervoor",
+        "energy": "Energie lager dan in de 28 dagen ervoor"
+      },
+      "values": "Gem. {{recent}} in plaats van {{baseline}}",
+      "note": "Beschrijft alleen de afwijking van de eigen basislijn van de atleet (laatste 3 dagen tegen de 28 dagen ervoor). Zelfinschatting, geen meting, geen oorzaak."
     }
   },
   "more": {
@@ -2588,7 +2601,8 @@
       "imprint": "Colofon",
       "privacy": "Privacy",
       "terms": "Gebruiksvoorwaarden",
-      "dpa": "Verwerkersovereenkomst"
+      "dpa": "Verwerkersovereenkomst",
+      "week": "Weekoverzicht"
     }
   },
   "teamHub": {
@@ -2664,6 +2678,35 @@
       "analysis": "Analyse",
       "report": "Rapport",
       "overview": "Uitgebreid overzicht"
+    }
+  },
+  "week": {
+    "eyebrow": "Terugblik",
+    "title": "Je week",
+    "range": "{{from}} tot {{to}}",
+    "load": {
+      "title": "Belasting",
+      "compare": "Gemiddelde van de vier weken ervoor: {{mean}} AU per week.",
+      "noBaseline": "Voor een vergelijking ontbreken vier weken dagboek.",
+      "note": "Sessiebelasting volgens Foster (duur maal inspanning). Een beschrijving, geen corridor."
+    },
+    "activity": {
+      "title": "Activiteit",
+      "checkins": "Check-ins",
+      "of7": "op {{count}} van 7 dagen",
+      "results": "Nieuwe metingen"
+    },
+    "win": {
+      "title": "Grootste bewezen vooruitgang",
+      "beyond": "boven de meetruis (bewezen vanaf {{detectable}} %)",
+      "note": "Vergeleken met de vorige meting van dezelfde test.",
+      "none": "Deze week geen verandering boven de meetruis."
+    },
+    "due": {
+      "title": "Te bekijken",
+      "none": "Geen test achterstallig.",
+      "days_one": "{{count}} dag achterstallig",
+      "days_other": "{{count}} dagen achterstallig"
     }
   }
 }

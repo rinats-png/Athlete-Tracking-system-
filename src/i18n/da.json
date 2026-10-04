@@ -2001,6 +2001,9 @@
       "none": "Ingen konkurrence registreret.",
       "set": "Registrér konkurrence",
       "open": "Ændr konkurrence"
+    },
+    "week": {
+      "link": "Se din uge"
     }
   },
   "performance": {
@@ -2010,6 +2013,35 @@
       "MODERATE": "middel",
       "LOW": "lav",
       "INSUFFICIENT": "utilstrækkelig"
+    }
+  },
+  "checkin": {
+    "eyebrow": "I dag",
+    "screenTitle": "Check-in",
+    "intro": "Tre spørgsmål, 15 sekunder. En selvvurdering, ikke en måling.",
+    "title": "Hurtigt check-in",
+    "sub": "15 sekunder",
+    "field": {
+      "energy": "Energi",
+      "soreness": "Muskelømhed",
+      "stress": "Stress"
+    },
+    "scale": {
+      "low": "lav",
+      "high": "høj"
+    },
+    "note": "Selvvurdering, ikke en måling. Den erstatter hverken en samtale eller en lægelig vurdering.",
+    "save": "Gem check-in",
+    "saved": "Gemt for i dag.",
+    "diary": "Dagbog",
+    "share": {
+      "label": "Vis til min træner",
+      "hint": "Kun disse tre værdier, kun så længe kontakten er tændt. Slår du den fra, slettes de hos træneren. Du skal bruge en konto og en forbindelse til en træner.",
+      "note": {
+        "not_signed_in": "For at dele skal du være logget ind. Dit check-in er gemt.",
+        "unavailable": "Ingen forbindelse lige nu. Dit check-in er gemt, men ikke delt.",
+        "failed": "Delingen lykkedes ikke. Dit check-in er gemt."
+      }
     }
   }
 }
