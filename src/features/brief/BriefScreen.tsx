@@ -33,6 +33,8 @@ export function BriefScreen() {
   const load = f('load') ?? f('loadNoBaseline')!
   const next = f('nextOverdue') ?? f('nextMissing') ?? f('nextNone')!
   const checkins = f('checkins')!
+  const plan = f('plan')
+  const countdown = f('countdown')
 
   return (
     <div data-testid="monday-brief">
@@ -58,6 +60,21 @@ export function BriefScreen() {
             <p className="mt-2 text-[11px] text-ink-muted">{t('brief.load.note')}</p>
           </div>
         </Panel>
+        {(plan || countdown) && (
+          <Panel data-testid="brief-plan">
+            <PanelHeader title={t('brief.plan.title')} />
+            <div className="space-y-1 px-4 pb-4 text-[14px]">
+              {countdown && <p>{t(countdown.params.name ? 'brief.plan.countdownNamed' : 'brief.plan.countdown', { days: Number(countdown.params.days), name: String(countdown.params.name) })}</p>}
+              {plan && Number(plan.params.sessionsTarget) >= 0 && (
+                <p>{t('brief.plan.sessions', { actual: Number(plan.params.sessions), target: Number(plan.params.sessionsTarget) })}</p>
+              )}
+              {plan && Number(plan.params.loadTarget) >= 0 && (
+                <p>{t('brief.plan.load', { actual: num(plan.params.load, 0), target: num(plan.params.loadTarget, 0) })}</p>
+              )}
+              {plan && <p className="pt-1 text-[11px] text-ink-muted">{t('brief.plan.note')}</p>}
+            </div>
+          </Panel>
+        )}
         <Panel data-testid="brief-next">
           <PanelHeader title={t('brief.next.title')} />
           <div className="px-4 pb-4 text-[14px]">

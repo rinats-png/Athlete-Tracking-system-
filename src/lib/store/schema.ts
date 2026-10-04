@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 31
+export const CURRENT_SCHEMA_VERSION = 32
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -186,6 +186,17 @@ const profileSchema = z.object({
     .object({ name: z.string().max(80).default(''), on: dayString })
     .nullable()
     .default(null),
+  /**
+   * Wochenziel, das der Mensch SELBST festlegt (Einheiten und Last je Woche).
+   * KYDON schlägt keines vor und bewertet es nicht: der Vergleich mit dem Ist
+   * ist eine Gegenüberstellung (domain/weeklyPlan.ts). Leer = kein Ziel.
+   */
+  weeklyTarget: z
+    .object({
+      sessions: z.number().int().min(0).max(21).nullable().default(null),
+      loadAU: z.number().min(0).max(5000).nullable().default(null),
+    })
+    .default({ sessions: null, loadAU: null }),
 })
 
 /**
@@ -1674,6 +1685,19 @@ export const MIGRATIONS: Migration[] = [
       ...data,
       version: 31,
       testDays: (data.testDays ?? []).map((d: any) => ({ ...d, startTime: d.startTime ?? null, breakMinutes: d.breakMinutes ?? 0 })),
+    }),
+  },
+  {
+    from: 31,
+    to: 32,
+    describe: 'Profil: Wochenziel (Einheiten und Last, leer)',
+    run: (data: any) => ({
+      ...data,
+      version: 32,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        profile: { ...athlete.profile, weeklyTarget: athlete.profile?.weeklyTarget ?? { sessions: null, loadAU: null } },
+      })),
     }),
   },
 ]

@@ -746,6 +746,12 @@
       "namePlaceholder": "t.ex. distriktsmästerskap",
       "date": "Datum",
       "clear": "Ta bort tävling"
+    },
+    "weeklyTarget": {
+      "title": "Veckomål",
+      "hint": "Valfritt: hur många pass och hur mycket belastning du planerar per vecka. Du bestämmer, KYDON föreslår inget.",
+      "sessions": "Mål pass",
+      "load": "Mål belastning"
     }
   },
   "assessments": {
@@ -2863,6 +2869,14 @@
       "none": "Just nu är ingen mätning aktuell eller öppen.",
       "open": "Öppna test"
     },
-    "note": "Brevet beskriver vad data ger. Det ger inga träningsråd och härleder inga orsaker."
+    "note": "Brevet beskriver vad data ger. Det ger inga träningsråd och härleder inga orsaker.",
+    "plan": {
+      "title": "Mål och vecka",
+      "countdown": "Det är {{days}} dagar kvar till tävlingen.",
+      "countdownNamed": "Det är {{days}} dagar kvar till ”{{name}}”.",
+      "sessions": "Pass: {{actual}} av {{target}} planerade.",
+      "load": "Belastning: {{actual}} AU mot ett mål på {{target}} AU.",
+      "note": "Målet sätter du själv. KYDON jämför bara och bedömer inte."
+    }
   }
 }

@@ -244,6 +244,29 @@ export function ProfileScreen() {
             )}
           </Panel>
 
+          <Panel data-testid="weekly-target-settings">
+            <PanelHeader title={t('profile.weeklyTarget.title')} subtitle={t('profile.weeklyTarget.hint')} />
+            <div className="grid gap-3 px-4 py-4 sm:grid-cols-2">
+              <NumberField
+                label={t('profile.weeklyTarget.sessions')}
+                value={data.profile.weeklyTarget.sessions}
+                min={0}
+                max={21}
+                step={1}
+                onChange={(v) => saveProfile({ weeklyTarget: { ...data.profile.weeklyTarget, sessions: v == null ? null : Math.round(v) } })}
+              />
+              <NumberField
+                label={t('profile.weeklyTarget.load')}
+                unit="AU"
+                value={data.profile.weeklyTarget.loadAU}
+                min={0}
+                max={5000}
+                step={10}
+                onChange={(v) => saveProfile({ weeklyTarget: { ...data.profile.weeklyTarget, loadAU: v } })}
+              />
+            </div>
+          </Panel>
+
           {/* Offenlegung, welche Zahlen dieser App noch auf einer eigenen
               Festlegung beruhen. Sie steht sichtbar in der App und nicht nur
               im Code: eine gesetzte Zahl sieht sonst aus wie eine belegte

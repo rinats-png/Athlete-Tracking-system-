@@ -1,6 +1,7 @@
 import type { Fact } from '@/domain/askKydon'
 import { dataConfidence, athleteToday } from '@/domain/performanceView'
 import { weekReview } from '@/domain/weekReview'
+import { daysTo, hasTarget, weeksAgainstTarget } from '@/domain/weeklyPlan'
 import type { ReminderSettings } from '@/domain/reminders'
 import type { StoredAthlete } from '@/lib/store/localStore'
 
@@ -45,6 +46,14 @@ export function mondayBrief(input: BriefInput, asOf: Date = new Date()): MondayB
       : fact('loadNoBaseline', { week: Math.round(review.load.week) }),
   )
   facts.push(fact('checkins', { days: review.checkinDays }))
+
+  const target = athlete.profile.weeklyTarget
+  if (hasTarget(target)) {
+    const w = weeksAgainstTarget(athlete.diary, target, asOf, 1)[0]
+    facts.push(fact('plan', { sessions: w.sessions, sessionsTarget: target.sessions ?? -1, load: w.loadAU, loadTarget: target.loadAU ?? -1 }))
+  }
+  const comp = athlete.profile.competition
+  if (comp && daysTo(comp.on, asOf) >= 0) facts.push(fact('countdown', { days: daysTo(comp.on, asOf), name: comp.name }))
 
   const today = athleteToday({ profile: athlete.profile, results: athlete.results, workouts: athlete.workouts }, asOf)
   if (review.overdue.length > 0) {

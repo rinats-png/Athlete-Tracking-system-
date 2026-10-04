@@ -746,6 +746,12 @@
       "namePlaceholder": "p. ej. campeonato regional",
       "date": "Fecha",
       "clear": "Quitar competición"
+    },
+    "weeklyTarget": {
+      "title": "Objetivo semanal",
+      "hint": "Opcional: cuántas sesiones y cuánta carga te propones por semana. Lo fijas tú, KYDON no propone ninguno.",
+      "sessions": "Objetivo sesiones",
+      "load": "Objetivo carga"
     }
   },
   "assessments": {
@@ -2863,6 +2869,14 @@
       "none": "Ahora mismo no hay ninguna medición pendiente o abierta.",
       "open": "Abrir prueba"
     },
-    "note": "El resumen describe lo que permiten los datos. No da consejos de entrenamiento ni deduce causas."
+    "note": "El resumen describe lo que permiten los datos. No da consejos de entrenamiento ni deduce causas.",
+    "plan": {
+      "title": "Objetivo y semana",
+      "countdown": "Faltan {{days}} días para la competición.",
+      "countdownNamed": "Faltan {{days}} días para «{{name}}».",
+      "sessions": "Sesiones: {{actual}} de {{target}} previstas.",
+      "load": "Carga: {{actual}} UA con un objetivo de {{target}} UA.",
+      "note": "El objetivo lo fijas tú. KYDON solo compara y no juzga."
+    }
   }
 }

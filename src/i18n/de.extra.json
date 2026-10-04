@@ -746,6 +746,12 @@
       "namePlaceholder": "z. B. Landesmeisterschaft",
       "date": "Datum",
       "clear": "Wettkampf entfernen"
+    },
+    "weeklyTarget": {
+      "title": "Wochenziel",
+      "hint": "Optional: wie viele Einheiten und wie viel Last du dir pro Woche vornimmst. Du legst es fest, KYDON schlägt keines vor.",
+      "sessions": "Ziel Einheiten",
+      "load": "Ziel Last"
     }
   },
   "assessments": {
@@ -2863,6 +2869,14 @@
       "none": "Im Moment ist keine Messung fällig oder offen.",
       "open": "Test öffnen"
     },
-    "note": "Der Brief beschreibt, was die Daten hergeben. Er gibt keinen Trainingsrat und leitet keine Ursachen ab."
+    "note": "Der Brief beschreibt, was die Daten hergeben. Er gibt keinen Trainingsrat und leitet keine Ursachen ab.",
+    "plan": {
+      "title": "Ziel und Woche",
+      "countdown": "Noch {{days}} Tage bis zum Wettkampf.",
+      "countdownNamed": "Noch {{days}} Tage bis «{{name}}».",
+      "sessions": "Einheiten: {{actual}} von {{target}} geplanten.",
+      "load": "Last: {{actual}} AU bei einem Ziel von {{target}} AU.",
+      "note": "Das Ziel hast du selbst festgelegt. KYDON stellt nur gegenüber und bewertet nicht."
+    }
   }
 }

@@ -746,6 +746,12 @@
       "namePlaceholder": "bijv. regionaal kampioenschap",
       "date": "Datum",
       "clear": "Wedstrijd verwijderen"
+    },
+    "weeklyTarget": {
+      "title": "Weekdoel",
+      "hint": "Optioneel: hoeveel sessies en hoeveel belasting je per week voorneemt. Jij stelt het in, KYDON stelt er geen voor.",
+      "sessions": "Doel sessies",
+      "load": "Doel belasting"
     }
   },
   "assessments": {
@@ -2863,6 +2869,14 @@
       "none": "Op dit moment is er geen meting aan de beurt of open.",
       "open": "Test openen"
     },
-    "note": "De brief beschrijft wat de gegevens toelaten. Hij geeft geen trainingsadvies en leidt geen oorzaken af."
+    "note": "De brief beschrijft wat de gegevens toelaten. Hij geeft geen trainingsadvies en leidt geen oorzaken af.",
+    "plan": {
+      "title": "Doel en week",
+      "countdown": "Nog {{days}} dagen tot de wedstrijd.",
+      "countdownNamed": "Nog {{days}} dagen tot «{{name}}».",
+      "sessions": "Sessies: {{actual}} van {{target}} gepland.",
+      "load": "Belasting: {{actual}} AU bij een doel van {{target}} AU.",
+      "note": "Het doel stel je zelf in. KYDON vergelijkt alleen en oordeelt niet."
+    }
   }
 }

@@ -746,6 +746,12 @@
       "namePlaceholder": "e.g. regional championship",
       "date": "Date",
       "clear": "Remove competition"
+    },
+    "weeklyTarget": {
+      "title": "Weekly target",
+      "hint": "Optional: how many sessions and how much load you plan per week. You set it, KYDON suggests none.",
+      "sessions": "Target sessions",
+      "load": "Target load"
     }
   },
   "assessments": {
@@ -2863,6 +2869,14 @@
       "none": "No measurement is due or open right now.",
       "open": "Open test"
     },
-    "note": "The brief describes what the data allows. It gives no training advice and derives no causes."
+    "note": "The brief describes what the data allows. It gives no training advice and derives no causes.",
+    "plan": {
+      "title": "Goal and week",
+      "countdown": "{{days}} days to the competition.",
+      "countdownNamed": "{{days}} days to “{{name}}”.",
+      "sessions": "Sessions: {{actual}} of {{target}} planned.",
+      "load": "Load: {{actual}} AU against a target of {{target}} AU.",
+      "note": "You set the target yourself. KYDON only compares and does not judge."
+    }
   }
 }

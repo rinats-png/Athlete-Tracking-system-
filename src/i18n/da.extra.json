@@ -746,6 +746,12 @@
       "namePlaceholder": "fx regionsmesterskab",
       "date": "Dato",
       "clear": "Fjern konkurrence"
+    },
+    "weeklyTarget": {
+      "title": "Ugemål",
+      "hint": "Valgfrit: hvor mange sessioner og hvor meget belastning du planlægger pr. uge. Du bestemmer, KYDON foreslår intet.",
+      "sessions": "Mål sessioner",
+      "load": "Mål belastning"
     }
   },
   "assessments": {
@@ -2863,6 +2869,14 @@
       "none": "Lige nu er ingen måling aktuel eller åben.",
       "open": "Åbn test"
     },
-    "note": "Brevet beskriver, hvad data giver. Det giver ingen træningsråd og udleder ingen årsager."
+    "note": "Brevet beskriver, hvad data giver. Det giver ingen træningsråd og udleder ingen årsager.",
+    "plan": {
+      "title": "Mål og uge",
+      "countdown": "Der er {{days}} dage til konkurrencen.",
+      "countdownNamed": "Der er {{days}} dage til »{{name}}«.",
+      "sessions": "Sessioner: {{actual}} af {{target}} planlagte.",
+      "load": "Belastning: {{actual}} AU mod et mål på {{target}} AU.",
+      "note": "Målet sætter du selv. KYDON sammenligner kun og vurderer ikke."
+    }
   }
 }

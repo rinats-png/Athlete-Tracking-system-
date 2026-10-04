@@ -423,6 +423,7 @@ export function buildDemoData(): StoredData {
     // Zehn Wochen voraus, vom Tag des Ladens an gerechnet: der Demobestand
     // soll den Rahmen zeigen, nicht einen Wettkampf, der längst vorbei ist.
     competition: { name: 'Landesmeisterschaft', on: new Date(Date.now() + 70 * 86_400_000).toISOString().slice(0, 10) },
+    weeklyTarget: { sessions: null, loadAU: null },
     // Der Demobestand zeigt, wie zwei Sportarten nebeneinander aussehen.
     additionalDisciplineIds: ['bjj'],
     goalKey: 'general_performance',

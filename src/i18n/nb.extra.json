@@ -746,6 +746,12 @@
       "namePlaceholder": "f.eks. regionsmesterskap",
       "date": "Dato",
       "clear": "Fjern konkurranse"
+    },
+    "weeklyTarget": {
+      "title": "Ukemål",
+      "hint": "Valgfritt: hvor mange økter og hvor mye belastning du planlegger per uke. Du bestemmer, KYDON foreslår ingenting.",
+      "sessions": "Mål økter",
+      "load": "Mål belastning"
     }
   },
   "assessments": {
@@ -2863,6 +2869,14 @@
       "none": "Akkurat nå er ingen måling aktuell eller åpen.",
       "open": "Åpne test"
     },
-    "note": "Brevet beskriver hva dataene gir. Det gir ingen treningsråd og utleder ingen årsaker."
+    "note": "Brevet beskriver hva dataene gir. Det gir ingen treningsråd og utleder ingen årsaker.",
+    "plan": {
+      "title": "Mål og uke",
+      "countdown": "Det er {{days}} dager til konkurransen.",
+      "countdownNamed": "Det er {{days}} dager til «{{name}}».",
+      "sessions": "Økter: {{actual}} av {{target}} planlagte.",
+      "load": "Belastning: {{actual}} AU mot et mål på {{target}} AU.",
+      "note": "Målet setter du selv. KYDON sammenligner bare og vurderer ikke."
+    }
   }
 }
