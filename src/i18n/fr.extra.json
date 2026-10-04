@@ -2654,7 +2654,8 @@
       "dpa": "Accord de sous-traitance",
       "week": "Bilan de la semaine",
       "ask": "Demander à KYDON",
-      "brief": "Bref du lundi"
+      "brief": "Bref du lundi",
+      "weeklyReport": "Rapport hebdomadaire"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "Les 30 reformulations de ce mois sont épuisées. La réponse fixe reste.",
       "rejected": "Le texte n'a pas passé la vérification des chiffres et n'est pas affiché. La réponse fixe reste.",
       "failed": "Cela n'a pas fonctionné. La réponse fixe reste."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Rapport hebdomadaire",
+    "title": "Rapport hebdomadaire",
+    "intro": "À partir des données de la semaine. Tu le relis, ajoutes une phrase et le transmets toi-même ; KYDON n'envoie rien.",
+    "athlete": "Athlète",
+    "recipient": "Destinataire",
+    "to": {
+      "athlete": "Athlète",
+      "parents": "Parents",
+      "association": "Fédération"
+    },
+    "heading": "Rapport hebdomadaire pour {{name}}",
+    "note": "Le rapport décrit les données. Il ne donne aucun conseil d'entraînement et ne déduit aucune cause.",
+    "noteLabel": "Ajout de l'entraîneur (facultatif)",
+    "checked": "J'ai relu le rapport",
+    "print": "Imprimer",
+    "needsCheck": "Copier et imprimer sont possibles une fois le rapport relu.",
+    "scope": {
+      "athlete": "Contient tout le bref du lundi, y compris la charge et les check-ins.",
+      "parents": "Sans check-ins : les auto-évaluations sur les courbatures et le stress ne vont qu'à l'athlète.",
+      "association": "Seulement fiabilité des données, constat et prochaine mesure. Aucune donnée de journal, de charge ou de check-in."
     }
   }
 }

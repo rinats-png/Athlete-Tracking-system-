@@ -153,6 +153,7 @@ const router = createBrowserRouter([
       { path: 'trainer/testtag', element: screen(() => import('@/features/coach/TestDayScreen'), 'TestDayScreen') },
       { path: 'trainer/testtag/:id', element: screen(() => import('@/features/coach/TestDayDetailScreen'), 'TestDayDetailScreen') },
       { path: 'trainer/vergleich', element: screen(() => import('@/features/coach/AthleteCompare'), 'AthleteCompare') },
+      { path: 'trainer/wochenbericht', element: screen(() => import('@/features/coach/WeeklyReportScreen'), 'WeeklyReportScreen') },
       { path: 'trainer/gruppenbericht', element: screen(() => import('@/features/coach/GroupReportScreen'), 'GroupReportScreen') },
       { path: 'trainer/heatmap', element: <Gate feature="heatmap">{screen(() => import('@/features/coach/GroupHeatmapScreen'), 'GroupHeatmapScreen')}</Gate> },
       { path: 'trainer/nachweis', element: screen(() => import('@/features/coach/CoachProofScreen'), 'CoachProofScreen') },

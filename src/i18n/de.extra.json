@@ -2654,7 +2654,8 @@
       "dpa": "Auftragsverarbeitung",
       "week": "Wochenrückblick",
       "ask": "Fragen an KYDON",
-      "brief": "Montagsbrief"
+      "brief": "Montagsbrief",
+      "weeklyReport": "Wochenbericht"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "Die 30 Umformulierungen dieses Monats sind aufgebraucht. Die feste Antwort bleibt.",
       "rejected": "Der Text hat die Zahlenprüfung nicht bestanden und wird nicht gezeigt. Die feste Antwort bleibt.",
       "failed": "Das hat nicht geklappt. Die feste Antwort bleibt."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Wochenbericht",
+    "title": "Wochenbericht",
+    "intro": "Aus den Daten der Woche. Du prüfst, ergänzt einen Satz und gibst den Bericht selbst weiter; KYDON verschickt nichts.",
+    "athlete": "Athlet",
+    "recipient": "Empfänger",
+    "to": {
+      "athlete": "Athlet",
+      "parents": "Eltern",
+      "association": "Verband"
+    },
+    "heading": "Wochenbericht für {{name}}",
+    "note": "Der Bericht beschreibt die Daten. Er gibt keinen Trainingsrat und leitet keine Ursachen ab.",
+    "noteLabel": "Ergänzung des Trainers (optional)",
+    "checked": "Ich habe den Bericht geprüft",
+    "print": "Drucken",
+    "needsCheck": "Kopieren und Drucken gehen erst, wenn du den Bericht geprüft hast.",
+    "scope": {
+      "athlete": "Enthält alles aus dem Montagsbrief, auch Belastung und Check-ins.",
+      "parents": "Ohne Check-ins: Selbsteinschätzungen zu Muskelkater und Stress gehen nur an den Athleten selbst.",
+      "association": "Nur Datenlage, Befund und nächste Messung. Keine Tagebuch-, Belastungs- oder Check-in-Daten."
     }
   }
 }

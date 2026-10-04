@@ -2654,7 +2654,8 @@
       "dpa": "Personuppgiftsbiträdesavtal",
       "week": "Veckoöversikt",
       "ask": "Fråga KYDON",
-      "brief": "Måndagsbrev"
+      "brief": "Måndagsbrev",
+      "weeklyReport": "Veckorapport"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "Månadens 30 omformuleringar är förbrukade. Det fasta svaret finns kvar.",
       "rejected": "Texten klarade inte sifferkontrollen och visas inte. Det fasta svaret finns kvar.",
       "failed": "Det gick inte. Det fasta svaret finns kvar."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Veckorapport",
+    "title": "Veckorapport",
+    "intro": "Från veckans data. Du granskar, lägger till en mening och för det vidare själv; KYDON skickar inget.",
+    "athlete": "Idrottare",
+    "recipient": "Mottagare",
+    "to": {
+      "athlete": "Idrottare",
+      "parents": "Föräldrar",
+      "association": "Förbund"
+    },
+    "heading": "Veckorapport för {{name}}",
+    "note": "Rapporten beskriver data. Den ger inga träningsråd och härleder inga orsaker.",
+    "noteLabel": "Tränarens tillägg (valfritt)",
+    "checked": "Jag har granskat rapporten",
+    "print": "Skriv ut",
+    "needsCheck": "Kopiera och skriv ut fungerar när du har granskat rapporten.",
+    "scope": {
+      "athlete": "Innehåller allt från måndagsbrevet, även belastning och incheckningar.",
+      "parents": "Utan incheckningar: självskattningar om träningsvärk och stress går bara till idrottaren.",
+      "association": "Bara datakvalitet, fynd och nästa mätning. Inga dagboks-, belastnings- eller incheckningsdata."
     }
   }
 }

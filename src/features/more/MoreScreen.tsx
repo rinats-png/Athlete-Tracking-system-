@@ -25,6 +25,7 @@ const GROUPS: { key: string; items: { key: string; to: string }[] }[] = [
     key: 'evaluate',
     items: [
       { key: 'brief', to: '/brief' },
+      { key: 'weeklyReport', to: '/trainer/wochenbericht' },
       { key: 'week', to: '/woche' },
       { key: 'ask', to: '/fragen' },
       { key: 'history', to: '/verlauf' },
@@ -67,7 +68,9 @@ export function MoreScreen() {
       <div className="grid gap-4 lg:grid-cols-2">
         {GROUPS.map((group) => {
           // Der Messbereich ist für Trainer hier, für Athleten liegt er in der Leiste.
-          const items = group.items.filter(() => group.key !== 'measure' || role === 'coach')
+          const items = group.items
+            .filter(() => group.key !== 'measure' || role === 'coach')
+            .filter((i) => i.key !== 'weeklyReport' || role === 'coach')
           if (items.length === 0) return null
           return (
             <Panel key={group.key} data-testid={`more-${group.key}`}>

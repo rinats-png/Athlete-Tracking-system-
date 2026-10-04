@@ -2654,7 +2654,8 @@
       "dpa": "Encargo de tratamiento",
       "week": "Resumen semanal",
       "ask": "Preguntar a KYDON",
-      "brief": "Resumen del lunes"
+      "brief": "Resumen del lunes",
+      "weeklyReport": "Informe semanal"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "Se han agotado las 30 reformulaciones de este mes. La respuesta fija se mantiene.",
       "rejected": "El texto no superó la comprobación de cifras y no se muestra. La respuesta fija se mantiene.",
       "failed": "No ha funcionado. La respuesta fija se mantiene."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Informe semanal",
+    "title": "Informe semanal",
+    "intro": "A partir de los datos de la semana. Lo revisas, añades una frase y lo entregas tú; KYDON no envía nada.",
+    "athlete": "Atleta",
+    "recipient": "Destinatario",
+    "to": {
+      "athlete": "Atleta",
+      "parents": "Padres",
+      "association": "Federación"
+    },
+    "heading": "Informe semanal de {{name}}",
+    "note": "El informe describe los datos. No da consejos de entrenamiento ni deduce causas.",
+    "noteLabel": "Añadido del entrenador (opcional)",
+    "checked": "He revisado el informe",
+    "print": "Imprimir",
+    "needsCheck": "Copiar e imprimir funcionan cuando hayas revisado el informe.",
+    "scope": {
+      "athlete": "Contiene todo el resumen del lunes, también carga y check-ins.",
+      "parents": "Sin check-ins: las autoevaluaciones de agujetas y estrés solo van al atleta.",
+      "association": "Solo fiabilidad de los datos, hallazgo y próxima medición. Sin datos de diario, carga ni check-in."
     }
   }
 }

@@ -2654,7 +2654,8 @@
       "dpa": "Verwerkersovereenkomst",
       "week": "Weekoverzicht",
       "ask": "Vraag het KYDON",
-      "brief": "Maandagbrief"
+      "brief": "Maandagbrief",
+      "weeklyReport": "Weekrapport"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "De 30 herformuleringen van deze maand zijn op. Het vaste antwoord blijft.",
       "rejected": "De tekst haalde de cijfercontrole niet en wordt niet getoond. Het vaste antwoord blijft.",
       "failed": "Dat is niet gelukt. Het vaste antwoord blijft."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Weekrapport",
+    "title": "Weekrapport",
+    "intro": "Op basis van de gegevens van de week. Jij controleert, voegt een zin toe en geeft het zelf door; KYDON verstuurt niets.",
+    "athlete": "Atleet",
+    "recipient": "Ontvanger",
+    "to": {
+      "athlete": "Atleet",
+      "parents": "Ouders",
+      "association": "Bond"
+    },
+    "heading": "Weekrapport voor {{name}}",
+    "note": "Het rapport beschrijft de gegevens. Het geeft geen trainingsadvies en leidt geen oorzaken af.",
+    "noteLabel": "Aanvulling van de trainer (optioneel)",
+    "checked": "Ik heb het rapport gecontroleerd",
+    "print": "Afdrukken",
+    "needsCheck": "Kopiëren en afdrukken kan zodra je het rapport hebt gecontroleerd.",
+    "scope": {
+      "athlete": "Bevat alles uit de maandagbrief, ook belasting en check-ins.",
+      "parents": "Zonder check-ins: zelfinschattingen over spierpijn en stress gaan alleen naar de atleet.",
+      "association": "Alleen betrouwbaarheid van gegevens, bevinding en volgende meting. Geen dagboek-, belastings- of check-ingegevens."
     }
   }
 }

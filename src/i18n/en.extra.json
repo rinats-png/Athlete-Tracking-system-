@@ -2654,7 +2654,8 @@
       "dpa": "Data processing agreement",
       "week": "Week review",
       "ask": "Ask KYDON",
-      "brief": "Monday brief"
+      "brief": "Monday brief",
+      "weeklyReport": "Weekly report"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "The 30 rephrasings of this month are used up. The fixed answer stays.",
       "rejected": "The text failed the number check and is not shown. The fixed answer stays.",
       "failed": "That did not work. The fixed answer stays."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Weekly report",
+    "title": "Weekly report",
+    "intro": "From the week's data. You review it, add a sentence and pass it on yourself; KYDON sends nothing.",
+    "athlete": "Athlete",
+    "recipient": "Recipient",
+    "to": {
+      "athlete": "Athlete",
+      "parents": "Parents",
+      "association": "Association"
+    },
+    "heading": "Weekly report for {{name}}",
+    "note": "The report describes the data. It gives no training advice and derives no causes.",
+    "noteLabel": "Coach's addition (optional)",
+    "checked": "I have reviewed the report",
+    "print": "Print",
+    "needsCheck": "Copy and print work once you have reviewed the report.",
+    "scope": {
+      "athlete": "Contains everything from the Monday brief, including load and check-ins.",
+      "parents": "Without check-ins: self-assessments on soreness and stress go only to the athlete.",
+      "association": "Only data confidence, finding and next measurement. No diary, load or check-in data."
     }
   }
 }

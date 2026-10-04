@@ -2654,7 +2654,8 @@
       "dpa": "Databehandleravtale",
       "week": "Ukeoversikt",
       "ask": "Spør KYDON",
-      "brief": "Mandagsbrev"
+      "brief": "Mandagsbrev",
+      "weeklyReport": "Ukerapport"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "De 30 omformuleringene denne måneden er brukt opp. Det faste svaret blir stående.",
       "rejected": "Teksten besto ikke tallkontrollen og vises ikke. Det faste svaret blir stående.",
       "failed": "Det gikk ikke. Det faste svaret blir stående."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Ukerapport",
+    "title": "Ukerapport",
+    "intro": "Fra ukens data. Du kontrollerer, legger til en setning og gir den videre selv; KYDON sender ingenting.",
+    "athlete": "Utøver",
+    "recipient": "Mottaker",
+    "to": {
+      "athlete": "Utøver",
+      "parents": "Foreldre",
+      "association": "Forbund"
+    },
+    "heading": "Ukerapport for {{name}}",
+    "note": "Rapporten beskriver dataene. Den gir ingen treningsråd og utleder ingen årsaker.",
+    "noteLabel": "Trenerens tillegg (valgfritt)",
+    "checked": "Jeg har kontrollert rapporten",
+    "print": "Skriv ut",
+    "needsCheck": "Kopiering og utskrift fungerer når du har kontrollert rapporten.",
+    "scope": {
+      "athlete": "Inneholder alt fra mandagsbrevet, også belastning og innsjekker.",
+      "parents": "Uten innsjekker: egenvurderinger om støl og stress går bare til utøveren.",
+      "association": "Bare datagrunnlag, funn og neste måling. Ingen dagbok-, belastnings- eller innsjekkdata."
     }
   }
 }

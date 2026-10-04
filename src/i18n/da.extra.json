@@ -2654,7 +2654,8 @@
       "dpa": "Databehandleraftale",
       "week": "Ugeoversigt",
       "ask": "Spørg KYDON",
-      "brief": "Mandagsbrev"
+      "brief": "Mandagsbrev",
+      "weeklyReport": "Ugerapport"
     }
   },
   "teamHub": {
@@ -2890,6 +2891,29 @@
       "limit_reached": "De 30 omformuleringer denne måned er brugt. Det faste svar bliver stående.",
       "rejected": "Teksten bestod ikke talkontrollen og vises ikke. Det faste svar bliver stående.",
       "failed": "Det lykkedes ikke. Det faste svar bliver stående."
+    }
+  },
+  "weeklyReport": {
+    "eyebrow": "Ugerapport",
+    "title": "Ugerapport",
+    "intro": "Fra ugens data. Du gennemgår, tilføjer en sætning og giver den selv videre; KYDON sender intet.",
+    "athlete": "Atlet",
+    "recipient": "Modtager",
+    "to": {
+      "athlete": "Atlet",
+      "parents": "Forældre",
+      "association": "Forbund"
+    },
+    "heading": "Ugerapport for {{name}}",
+    "note": "Rapporten beskriver data. Den giver ingen træningsråd og udleder ingen årsager.",
+    "noteLabel": "Trænerens tilføjelse (valgfri)",
+    "checked": "Jeg har gennemgået rapporten",
+    "print": "Udskriv",
+    "needsCheck": "Kopiering og udskrift virker, når du har gennemgået rapporten.",
+    "scope": {
+      "athlete": "Indeholder alt fra mandagsbrevet, også belastning og check-ins.",
+      "parents": "Uden check-ins: selvvurderinger om ømhed og stress går kun til atleten.",
+      "association": "Kun datagrundlag, fund og næste måling. Ingen dagbogs-, belastnings- eller check-in-data."
     }
   }
 }
