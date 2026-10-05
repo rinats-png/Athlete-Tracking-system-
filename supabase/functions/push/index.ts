@@ -11,11 +11,13 @@
  *   coach      — Nachricht eines Trainers an aktiv verbundene Athleten.
  *   release    — Hinweis auf eine neue App-Fassung, jede Kennung genau einmal.
  *                Admin (Token) oder Cron-Geheimnis (Deploy-Aufruf).
+ *   plan_offer — alle zehn Minuten aus pg_cron: meldet Athleten, dass ein Trainer
+ *                ihnen einen Plan angeboten hat (ohne Namen und Inhalt).
  *   activity   — alle zehn Minuten aus pg_cron: meldet Trainern, dass
  *                verbundene Athleten etwas eingetragen haben (nur Anzahl).
  *   (due meldet ausserdem Termine: Wettkampf am Vortag, Testtermin am Tag.)
  *
- * Jedes Gerät hat Themen (due, agenda, release, activity, weekly); Meldungen gehen nur
+ * Jedes Gerät hat Themen (due, agenda, release, activity, weekly, plan); Meldungen gehen nur
  * an Geräte, die das Thema eingeschaltet haben.
  *
  * Wer anfragt, bestimmt ein geprüftes Token — nie ein Feld im Körper.
@@ -42,6 +44,7 @@ import {
   coachPayload,
   duePayload,
   weeklyPayload,
+  planOfferPayload,
   weekStartUtc,
   testPayload,
   type PushKind,
@@ -240,6 +243,7 @@ Deno.serve(async (req: Request) => {
       .from('push_events')
       .select('id, coach_id, athlete_user, created_at')
       .is('sent_at', null)
+      .in('kind', ['result', 'entry'])
       .order('created_at', { ascending: true })
       .limit(2000)
     const list: { id: number; coach_id: string; athlete_user: string; created_at: string }[] = events ?? []
@@ -266,6 +270,36 @@ Deno.serve(async (req: Request) => {
     }
     if (doneIds.length > 0) await db.from('push_events').update({ sent_at: new Date().toISOString() }).in('id', doneIds)
     return reply(req, 200, { ok: true, coaches })
+  }
+
+  // --- Angebot vom Trainer: der Athlet erfährt, dass ein Plan wartet ---------------------
+  if (body.action === 'plan_offer') {
+    const secret = req.headers.get('x-cron-secret') ?? ''
+    if (!config.cron_secret || secret !== config.cron_secret) return reply(req, 401)
+    const { data: events } = await db.from('push_events').select('id, athlete_user').is('sent_at', null).eq('kind', 'plan_offer').order('created_at', { ascending: true }).limit(2000)
+    const list: { id: number; athlete_user: string }[] = events ?? []
+    if (list.length === 0) return reply(req, 200, { ok: true, athletes: 0 })
+    const byAthlete = new Map<string, number[]>()
+    for (const e of list) byAthlete.set(e.athlete_user, [...(byAthlete.get(e.athlete_user) ?? []), e.id])
+    let athletes = 0
+    const doneIds: number[] = []
+    for (const [userId, ids] of byAthlete) {
+      // Höchstens eine Meldung je Stunde; was dazwischen liegt, wandert in die nächste.
+      const recent = await db
+        .from('push_log')
+        .select('id', { count: 'exact', head: true })
+        .eq('kind', 'plan')
+        .eq('recipient', userId)
+        .gte('created_at', new Date(Date.now() - 3600_000).toISOString())
+      if ((recent.count ?? 0) >= LIMITS.planPerAthletePerHour) continue
+      const { data: subs } = await db.from('push_subscriptions').select('*').eq('user_id', userId)
+      await sendAll(db, forTopic(subs, 'plan'), (s) => planOfferPayload(s.locale))
+      await log(db, 'plan', null, [userId])
+      doneIds.push(...ids)
+      athletes++
+    }
+    if (doneIds.length > 0) await db.from('push_events').update({ sent_at: new Date().toISOString() }).in('id', doneIds)
+    return reply(req, 200, { ok: true, athletes })
   }
 
   // --- Alles Übrige braucht eine Anmeldung ----------------------------------

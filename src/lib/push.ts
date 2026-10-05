@@ -20,9 +20,9 @@ export const VAPID_PUBLIC_KEY =
   'BBDbagV03QOENKN_AuBJCLjsKoHsCHsRHStHjjCO_tZ3TzmVJfO4Y6hiXVh69eE_nPh_6hV_sOYMA1RuA4pHoFc'
 
 /** Themen, die jedes Gerät einzeln ein- und ausschalten kann (wie in supabase/functions/_shared/push.ts). */
-export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity', 'weekly'] as const
+export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity', 'weekly', 'plan'] as const
 export type PushTopic = (typeof PUSH_TOPICS)[number]
-/** Vorgabe ohne Angabe: der Montagsbrief ist ein Angebot und bleibt aus, bis jemand ihn einschaltet. */
+/** Vorgabe ohne Angabe: Montagsbrief und Hinweis auf Pläne vom Trainer sind Angebote und bleiben aus, bis jemand sie einschaltet. */
 export const DEFAULT_PUSH_TOPICS: readonly PushTopic[] = ['due', 'agenda', 'release', 'activity']
 
 const FLAG_KEY = 'kydon.push.v1'

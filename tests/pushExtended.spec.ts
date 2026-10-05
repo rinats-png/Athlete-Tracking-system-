@@ -5,6 +5,7 @@ import {
   PUSH_TOPICS,
   activityPayload,
   weeklyPayload,
+  planOfferPayload,
   weekStartUtc,
   agendaPayload,
   isReleaseId,
@@ -56,7 +57,8 @@ test.describe('Inhalt', () => {
 
 test.describe('Themen und Kennungen', () => {
   test('ohne Angabe gelten die Vorgabethemen (der Montagsbrief nicht); ein abgeschaltetes Thema bekommt nichts', () => {
-    expect([...DEFAULT_TOPICS]).toEqual(PUSH_TOPICS.filter((t) => t !== 'weekly'))
+    expect([...DEFAULT_TOPICS]).toEqual(PUSH_TOPICS.filter((t) => t !== 'weekly' && t !== 'plan'))
+    expect(wantsTopic(null, 'plan')).toBe(false)
     expect(wantsTopic(null, 'weekly')).toBe(false)
     expect(wantsTopic(['weekly'], 'weekly')).toBe(true)
     expect(wantsTopic(null, 'release')).toBe(true)
@@ -150,5 +152,40 @@ test.describe('Montagsbrief per Push (Etappe 8d)', () => {
     expect(sql).toMatch(/cron\.schedule\('push-weekly', '0 7 \* \* 1'/)
     expect(sql).toMatch(/vault\.decrypted_secrets/)
     expect(sql).not.toMatch(/x-cron-secret['"]\s*,\s*'[A-Za-z0-9]{16,}/)
+  })
+})
+
+test.describe('Hinweis auf ein Angebot vom Trainer (Thema plan)', () => {
+  test('arm in jeder Sprache: kein Name, keine Zahl, Ziel ist der Plan', () => {
+    for (const l of ['de', 'en', 'fr', 'es', 'nl', 'sv', 'nb', 'da']) {
+      const p = planOfferPayload(l)
+      expect(p.url).toBe('/plan')
+      expect(p.title.length).toBeLessThanOrEqual(60)
+      expect(p.body.length).toBeLessThanOrEqual(200)
+      expect(`${p.title} ${p.body}`).not.toMatch(/\d|Trainer [A-Z]/)
+    }
+    expect(planOfferPayload('xx').title).toBe('A new plan is waiting')
+  })
+  test('Migration: Thema nur als Angebot, Auslöser nach dem Anlegen, Empfänger ist der Athlet, kein Geheimnis im Text', () => {
+    const sql = readFileSync('supabase/migrations/20261005110000_push_plan_offer.sql', 'utf-8')
+    expect(sql).toMatch(/'weekly', 'plan'\]::text\[\]/)
+    expect(sql).toMatch(/'plan_offer'/)
+    expect(sql).toMatch(/after insert on public\.plan_assignments/)
+    expect(sql).toMatch(/security definer/)
+    expect(sql).toMatch(/revoke all on function public\.push_plan_offer\(\)/)
+    expect(sql).toMatch(/cron\.schedule\('push-plan-offer'/)
+    expect(sql).toMatch(/vault\.decrypted_secrets/)
+    expect(sql).not.toMatch(/x-cron-secret['"]\s*,\s*'[A-Za-z0-9]{16,}/)
+    // Der Auslöser meldet nur bei einem Angebot an einen Athleten mit Konto.
+    expect(sql).toMatch(/new\.status = 'offered'/)
+    expect(sql).toMatch(/a\.user_id is not null/)
+  })
+  test('die Funktion schickt nur mit Cron-Geheimnis, ohne Absender in der Nachricht, und die Aktivitätsmeldung ignoriert Plan-Ereignisse', () => {
+    const code = readFileSync('supabase/functions/push/index.ts', 'utf-8')
+    const block = code.slice(code.indexOf("body.action === 'plan_offer'"), code.indexOf('// --- Alles Übrige braucht eine Anmeldung'))
+    expect(block).toMatch(/secret !== config\.cron_secret/)
+    expect(block).toMatch(/planOfferPayload\(s\.locale\)/)
+    expect(block).toMatch(/LIMITS\.planPerAthletePerHour/)
+    expect(code).toMatch(/\.in\('kind', \['result', 'entry'\]\)/)
   })
 })

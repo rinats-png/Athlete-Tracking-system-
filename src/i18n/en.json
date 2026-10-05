@@ -1953,7 +1953,9 @@
       "activity": "Your athletes' activity",
       "activityHint": "A notice that connected athletes have logged something — no names, no values, at most once an hour.",
       "weekly": "Monday brief",
-      "weeklyHint": "A note on Monday that your brief is ready. No content, only that it is there."
+      "weeklyHint": "A note on Monday that your brief is ready. No content, only that it is there.",
+      "plan": "Plans from your coach",
+      "planHint": "A notice that a coach has offered you a plan. No name, no content, at most once an hour."
     },
     "notifyCoach": "Notify my coach about my activity",
     "notifyCoachHint": "If you are connected to a coach, they learn by push THAT you logged something — not what. You can turn this off here."

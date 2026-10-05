@@ -1,3 +1,4 @@
+import { planAssignEnabled } from '@/lib/planAssign'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bell, BellOff, Send } from 'lucide-react'
@@ -80,7 +81,7 @@ export function PushPanel() {
           <p className="mt-2 text-[12px] text-ink-muted">{t('push.on')}</p>
           <fieldset className="mt-3 space-y-1.5" data-testid="push-topics">
             <legend className="label-tag">{t('push.topics.title')}</legend>
-            {PUSH_TOPICS.filter((tp) => (tp !== 'activity' || role === 'coach') && (tp !== 'weekly' || role !== 'coach')).map((tp) => (
+            {PUSH_TOPICS.filter((tp) => (tp !== 'activity' || role === 'coach') && (tp !== 'weekly' || role !== 'coach') && (tp !== 'plan' || (role !== 'coach' && planAssignEnabled()))).map((tp) => (
               <label key={tp} className="flex items-start gap-2 text-[13px]">
                 <input type="checkbox" className="mt-1" checked={topics.includes(tp)} onChange={() => void toggleTopic(tp)} data-topic={tp} />
                 <span>

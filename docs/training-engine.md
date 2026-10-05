@@ -174,7 +174,8 @@ Entscheidungen des Inhabers: der Athlet nimmt an oder lehnt ab; der Trainer sieh
 - **Freigaben.** Drei getrennte, anfangs ausgeschaltete Schalter: «erledigt», «Dauer und RPE», «Puls»; die beiden letzten gibt es nur mit «erledigt». Jederzeit änderbar (im Block); Ausschalten wirkt sofort: Spalten werden genullt, «erledigt» aus löscht die Zeilen. Der Trainer liest über `coach_plan_progress()`, die zusätzlich zur Lesezeit nach dem aktuellen Stand der Freigaben maskiert.
 - **Server.** Keine Schreibrichtlinie auf `plan_assignments` und `plan_assignment_results`: alles läuft über Funktionen (`offer_`, `withdraw_`, `respond_`, `set_…_share`, `report_plan_completion`), die Verknüpfung, Rolle und Zustand prüfen. Höchstens fünf offene Angebote je Trainer und Athlet, Nutzlast höchstens 200 KB. Aufbewahrung: Ergebnisse 180 Tage, abgelehnte und zurückgezogene Zuweisungen 30 Tage; die Kontolöschung nimmt beides mit.
 - **Offline.** Erledigen läuft ohne Netz. Gemeldet wird beim Abschluss und beim Öffnen des Blocks nach (idempotent, eine Zeile je Zuweisung, Einheit und Tag). Zugewiesene Einheiten tragen feste Kennungen `<Kurzform>-<Index>`.
-- **Noch offen:** Plan-Tab in der Trainer-Navigation, Trainer-Vorlagen mit Versionen, Hinweis an den Athleten per Push, Rechtstext.
+- **Push-Hinweis** bei einem neuen Angebot: vorbereitet (Migration `20261005110000_push_plan_offer.sql`, Funktion `push`, Thema `plan`), nicht ausgerollt; siehe `docs/push.md`.
+- **Noch offen:** Rechtstext für den Push-Hinweis beim Einspielen.
 
 ## Plan-Tab für Trainer (Trainingsbereich Etappe 11)
 

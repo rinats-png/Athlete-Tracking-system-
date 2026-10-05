@@ -73,3 +73,11 @@ Das Cron-Geheimnis kommt aus dem Vault bzw. aus den Secrets der Auslieferung, ni
 - Der Server meldet nur, dass die Woche begonnen hat. Der Text ist arm (kein Name, kein Wert); Ziel der Nachricht ist `/brief`.
 - Zeitplan: montags 07:00 UTC über `pg_cron` (Aktion `weekly` der Funktion `push`, Cron-Geheimnis aus dem Vault). Je Konto und Woche höchstens eine Meldung (Prüfung über `push_log`).
 - Einzuspielen: Migration `20261004120000_push_weekly.sql`, danach die Funktion `push` neu ausrollen.
+
+## Hinweis auf ein Angebot vom Trainer (Thema `plan`, vorbereitet, nicht ausgerollt)
+
+- Sechstes Thema, **nicht in der Vorgabe**: ein Angebot des Athleten, kommt nur zu Geräten, die «Pläne von deinem Trainer» einschalten (nur Athleten, nur mit `VITE_PLAN_ASSIGN=on`).
+- Auslöser: ein neues Angebot in `plan_assignments` (Migration `20261005100000_plan_assignments.sql`) legt über einen Datenbank-Auslöser ein Ereignis `plan_offer` in `push_events` ab; `athlete_user` ist hier der Empfänger. Die Aktion `plan_offer` der Funktion `push` (alle zehn Minuten aus pg_cron, Cron-Geheimnis aus dem Vault) sendet an dessen Geräte mit dem Thema.
+- Der Server erfährt nur, DASS ein Angebot da ist. Die Nachricht nennt weder Trainer noch Plan noch Inhalt («Neuer Plan wartet») und führt auf `/plan`. Höchstens eine Meldung je Athlet und Stunde; was dazwischen liegt, wandert in den nächsten Lauf. Die Aktivitätsmeldung an Trainer ignoriert diese Ereignisse (`kind in ('result','entry')`).
+- **Einzuspielen, in dieser Reihenfolge:** `20261005100000_plan_assignments.sql`, dann `20261005110000_push_plan_offer.sql`, danach die Funktion `push` neu ausliefern (`supabase functions deploy push`). Ohne die Funktion bleibt das Ereignis liegen (Aufräumen nach 7 Tagen); ohne die Migration gibt es das Thema nicht.
+- **Rechtstext:** beim Einspielen einen Satz in den Abschnitt «Push-Benachrichtigungen» und «Pläne vom Trainer» der Datenschutzerklärung aufnehmen (Hinweis auf ein Angebot, ohne Namen und Inhalt, nur mit eingeschaltetem Thema). Nicht geschehen: Rechtstexte ändere ich nur auf deine Anweisung.

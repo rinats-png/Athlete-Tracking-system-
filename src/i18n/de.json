@@ -1953,7 +1953,9 @@
       "activity": "Aktivität deiner Athleten",
       "activityHint": "Ein Hinweis, dass verbundene Athleten etwas eingetragen haben – ohne Namen, ohne Werte, höchstens einmal pro Stunde.",
       "weekly": "Montagsbrief",
-      "weeklyHint": "Am Montag ein Hinweis, dass dein Brief bereitliegt. Ohne Inhalt, nur dass er da ist."
+      "weeklyHint": "Am Montag ein Hinweis, dass dein Brief bereitliegt. Ohne Inhalt, nur dass er da ist.",
+      "plan": "Pläne von deinem Trainer",
+      "planHint": "Ein Hinweis, dass ein Trainer dir einen Plan angeboten hat. Ohne Namen und Inhalt, höchstens einmal pro Stunde."
     },
     "notifyCoach": "Meinen Trainer bei Aktivität benachrichtigen",
     "notifyCoachHint": "Wenn du mit einem Trainer verbunden bist, erfährt er per Push, DASS du etwas eingetragen hast – nicht was. Du kannst das hier ausschalten."

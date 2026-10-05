@@ -1953,7 +1953,9 @@
       "activity": "Activiteit van je atleten",
       "activityHint": "Een melding dat gekoppelde atleten iets hebben vastgelegd — zonder namen, zonder waarden, hooguit één keer per uur.",
       "weekly": "Maandagbrief",
-      "weeklyHint": "Op maandag een melding dat je brief klaarstaat. Zonder inhoud, alleen dat hij er is."
+      "weeklyHint": "Op maandag een melding dat je brief klaarstaat. Zonder inhoud, alleen dat hij er is.",
+      "plan": "Plannen van je trainer",
+      "planHint": "Een melding dat een trainer je een plan heeft aangeboden. Zonder naam en inhoud, hoogstens één keer per uur."
     },
     "notifyCoach": "Mijn trainer op de hoogte brengen van mijn activiteit",
     "notifyCoachHint": "Ben je gekoppeld aan een trainer, dan hoort hij per push DAT je iets hebt vastgelegd — niet wat. Hier kun je dat uitzetten."

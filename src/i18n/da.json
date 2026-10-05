@@ -1953,7 +1953,9 @@
       "activity": "Dine atleters aktivitet",
       "activityHint": "En besked om, at tilknyttede atleter har registreret noget — uden navne, uden værdier, højst én gang i timen.",
       "weekly": "Mandagsbrev",
-      "weeklyHint": "Om mandagen en besked om, at dit brev er klar. Uden indhold, kun at det findes."
+      "weeklyHint": "Om mandagen en besked om, at dit brev er klar. Uden indhold, kun at det findes.",
+      "plan": "Planer fra din træner",
+      "planHint": "En besked om, at en træner har tilbudt dig en plan. Uden navn og indhold, højst én gang i timen."
     },
     "notifyCoach": "Giv min træner besked om min aktivitet",
     "notifyCoachHint": "Er du knyttet til en træner, får han via push at vide, AT du har registreret noget — ikke hvad. Du kan slå det fra her."

@@ -1953,7 +1953,9 @@
       "activity": "Activité de tes athlètes",
       "activityHint": "Une notification quand des athlètes connectés ont saisi quelque chose — sans noms, sans valeurs, au plus une fois par heure.",
       "weekly": "Bref du lundi",
-      "weeklyHint": "Le lundi, une alerte indiquant que ton bref est prêt. Sans contenu, seulement qu'il est là."
+      "weeklyHint": "Le lundi, une alerte indiquant que ton bref est prêt. Sans contenu, seulement qu'il est là.",
+      "plan": "Plans de ton entraîneur",
+      "planHint": "Un avis qu’un entraîneur t’a proposé un plan. Sans nom ni contenu, au plus une fois par heure."
     },
     "notifyCoach": "Prévenir mon entraîneur de mon activité",
     "notifyCoachHint": "Si tu es connecté à un entraîneur, il apprend par push QUE tu as saisi quelque chose — pas quoi. Tu peux le désactiver ici."

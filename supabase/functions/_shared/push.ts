@@ -8,10 +8,10 @@
  * Telefon in der Hand hat.
  */
 
-export type PushKind = 'due' | 'broadcast' | 'coach' | 'test' | 'agenda' | 'release' | 'activity' | 'weekly'
+export type PushKind = 'due' | 'broadcast' | 'coach' | 'test' | 'agenda' | 'release' | 'activity' | 'weekly' | 'plan'
 
 /** Themen, die jedes Gerät einzeln ein- und ausschalten kann. */
-export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity', 'weekly'] as const
+export const PUSH_TOPICS = ['due', 'agenda', 'release', 'activity', 'weekly', 'plan'] as const
 export type PushTopic = (typeof PUSH_TOPICS)[number]
 /** Vorgabe ohne Angabe. Der Montagsbrief ist ein Angebot und kommt nur, wenn jemand ihn einschaltet. */
 export const DEFAULT_TOPICS: readonly PushTopic[] = ['due', 'agenda', 'release', 'activity']
@@ -161,6 +161,8 @@ export const LIMITS = {
   testPerHour: 5,
   /** Aktivitätsmeldungen an einen Trainer: höchstens eine je Stunde. */
   activityPerCoachPerHour: 1,
+  /** Hinweis auf ein Angebot vom Trainer: höchstens eine Meldung je Athlet und Stunde. */
+  planPerAthletePerHour: 1,
   /** Rundmeldung zu einer App-Fassung: einmal je Fassung. */
   releasePerDay: 3,
 } as const
@@ -188,4 +190,23 @@ export function weeklyPayload(locale: string): PushPayload {
 export function weekStartUtc(d: Date): Date {
   const day = (d.getUTCDay() + 6) % 7
   return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - day))
+}
+
+// --- Angebot vom Trainer -----------------------------------------------------------
+// Der Text sagt nur, dass etwas wartet: kein Trainer, kein Plan, kein Inhalt.
+
+const PLAN_OFFER: Record<string, { title: string; body: string }> = {
+  de: { title: 'Neuer Plan wartet', body: 'Ein Plan ist für dich bereit. Öffne KYDON und entscheide.' },
+  en: { title: 'A new plan is waiting', body: 'A plan is ready for you. Open KYDON and decide.' },
+  fr: { title: 'Un nouveau plan t’attend', body: 'Un plan est prêt pour toi. Ouvre KYDON et décide.' },
+  es: { title: 'Te espera un plan nuevo', body: 'Hay un plan listo para ti. Abre KYDON y decide.' },
+  nl: { title: 'Er wacht een nieuw plan', body: 'Er staat een plan voor je klaar. Open KYDON en beslis.' },
+  sv: { title: 'En ny plan väntar', body: 'En plan är klar för dig. Öppna KYDON och bestäm.' },
+  da: { title: 'En ny plan venter', body: 'En plan er klar til dig. Åbn KYDON og beslut.' },
+  nb: { title: 'En ny plan venter', body: 'En plan er klar for deg. Åpne KYDON og bestem.' },
+}
+
+export function planOfferPayload(locale: string): PushPayload {
+  const t = PLAN_OFFER[lang(locale)]
+  return { title: t.title, body: t.body, url: '/plan', tag: 'kydon-plan-offer' }
 }
