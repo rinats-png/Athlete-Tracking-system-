@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import { openDemo } from './helpers'
 import { assignedSessionId, exportPlan, importPlan } from '../src/domain/planFile'
 import { createOwnBlock, addOwnSession } from '../src/domain/trainingBlock'
+import { isMinor } from '../src/domain/minor'
 import { CURRENT_SCHEMA_VERSION, emptyData, parseStoredData } from '../src/lib/store/schema'
 
 /** Trainingsbereich Etappe 10: Pläne vom Trainer zuweisen. */
@@ -31,6 +32,15 @@ test.describe('Zuweisung: Migration (statische Prüfung)', () => {
     }
     expect(SQL).toMatch(/grant execute on function public\.coach_plan_progress\(uuid\) to authenticated/)
     expect(SQL).not.toMatch(/grant execute[^;]*to (anon|public)/i)
+  })
+  test('Minderjährige: ohne Bestätigung der Einwilligung kein Angebot, Zeitpunkt gespeichert, Puls für unter 18 ausgeschlossen', () => {
+    const offer = SQL.slice(SQL.indexOf('function public.offer_plan_assignment'), SQL.indexOf('-- --- Trainer: zurückziehen'))
+    expect(offer).toMatch(/p_consent_attested is not true/)
+    expect(offer).toMatch(/consent_attested_at/)
+    expect(SQL).toMatch(/consent_attested_at timestamptz not null/)
+    expect(SQL).toMatch(/function public\.athlete_is_minor/)
+    expect(SQL).toMatch(/and not public\.athlete_is_minor\(p\.athlete_id\)/)
+    expect(SQL).toMatch(/q\.id = p_id and public\.athlete_is_minor\(q\.athlete_id\)/)
   })
   test('Trainer liest den Fortschritt nur bei aktiver Verknüpfung und maskiert nach aktuellem Stand der Freigaben; Kontolöschung nimmt die Zuweisungen mit', () => {
     const fn = SQL.slice(SQL.indexOf('function public.coach_plan_progress'), SQL.indexOf('-- --- Aufbewahrung'))
@@ -187,11 +197,14 @@ test.describe('Zuweisung: Trainer', () => {
     await expect(page.getByTestId('assign-athlete-ath-2')).toHaveCount(0)
     await expect(page.getByTestId('assign-send')).toBeDisabled()
     await page.getByTestId('assign-athlete-ath-1').click()
+    // Ohne die Bestätigung (volljährig oder Einwilligung der Eltern) bleibt Senden gesperrt.
+    await expect(page.getByTestId('assign-send')).toBeDisabled()
+    await page.getByTestId('assign-consent').check()
     await page.getByTestId('assign-send').click()
     await expect(page.getByTestId('assign-sent')).toBeVisible()
     const rpc = calls.find((c) => c.url.includes('/rpc/offer_plan_assignment'))!
     const body = JSON.parse(rpc.body!)
-    expect(body).toMatchObject({ p_athlete_id: 'ath-1', p_name: 'Mein Plan' })
+    expect(body).toMatchObject({ p_athlete_id: 'ath-1', p_name: 'Mein Plan', p_consent_attested: true })
     expect(body.p_payload).toMatchObject({ format: 'kydon-plan', version: 1 })
     expect(JSON.stringify(body.p_payload)).not.toContain('evidenceStrength')
   })
@@ -252,5 +265,48 @@ test.describe('Zuweisung: Datenschutzerklärung und Auslieferung', () => {
     expect(toml).toMatch(/VITE_PLAN_ASSIGN\s*=\s*"on"/)
     expect(toml).toMatch(/VITE_TRAINING_PLAN\s*=\s*"preview"/)
     expect(SQL.length).toBeGreaterThan(1000)
+  })
+})
+
+test.describe('Zuweisung: Minderjährige und Vertrag', () => {
+  test('isMinor: Geburtstag zählt, ohne Datum nicht gesperrt', () => {
+    expect(isMinor('2010-10-06', '2026-10-05')).toBe(true) // 15
+    expect(isMinor('2008-10-05', '2026-10-05')).toBe(false) // genau 18
+    expect(isMinor('2008-10-06', '2026-10-05')).toBe(true) // einen Tag vor dem 18.
+    expect(isMinor(null, '2026-10-05')).toBe(false)
+    expect(isMinor('kaputt', '2026-10-05')).toBe(false)
+  })
+  test('Athlet unter 18: Puls nicht freigebbar, Hinweis auf die Zustimmung der Eltern', async ({ page }) => {
+    await signedIn(page, { offers: [offerRow()] })
+    await openDemo(page)
+    await page.evaluate(() => {
+      const d = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
+      d.athletes[0].profile.birthDate = `${new Date().getUTCFullYear() - 15}-01-15`
+      d.athletes[0].trainingBlocks = []
+      localStorage.setItem('kydon.data.v1', JSON.stringify(d))
+    })
+    await page.goto('/plan', { waitUntil: 'domcontentloaded' })
+    await page.getByTestId(`offer-open-${AID}`).click()
+    await expect(page.getByTestId('offer-minor')).toContainText('unter 18')
+    await page.getByTestId('offer-share-done').check()
+    await expect(page.getByTestId('offer-share-hr')).toBeDisabled()
+    await expect(page.getByTestId('offer-share-results')).toBeEnabled()
+  })
+  test('der AVV enthält den Zusatz zur freigabebasierten Verarbeitung (de, en), die Fassung ist angehoben, die Annahme steht danach', async () => {
+    const { dpaDocument, DPA_VERSION } = await import('../src/features/legal/texts')
+    expect(DPA_VERSION).toBe('2026-10-05')
+    for (const [locale, key, last] of [['de', 'Freigabebasierte Datenverarbeitung', '13. Annahme'], ['en', 'Release-based processing', '13. Acceptance']] as const) {
+      const doc = dpaDocument(locale)
+      const idx = doc.sections.findIndex((s) => s.heading.includes(key))
+      expect(idx, locale).toBeGreaterThan(-1)
+      const text = doc.sections.map((s) => [s.heading, ...s.body, ...(s.list ?? [])].join(' ')).join(' ')
+      for (const m of locale === 'de' ? ['Art. 4 Nr. 7', 'Art. 9 Abs. 2 lit. a', 'Widerruf der Freigabe', 'Minderjährige Athleten'] : ['Art. 4(7)', 'Art. 9(2)(a)', 'Withdrawal of the release', 'Minor athletes']) expect(text, `${locale}: ${m}`).toContain(m)
+      expect(doc.sections[doc.sections.length - 1].heading.startsWith(last), locale).toBe(true)
+    }
+  })
+  test('Push-Satz in der Datenschutzerklärung (de, en)', async () => {
+    const { privacyDocument } = await import('../src/features/legal/texts')
+    expect(privacyDocument('de').sections.find((s) => s.heading.startsWith('Push-Benachrichtigungen'))!.body.join(' ')).toContain('Pläne von deinem Trainer')
+    expect(privacyDocument('en').sections.find((s) => s.heading.startsWith('Push notifications'))!.body.join(' ')).toContain('Plans from your coach')
   })
 })

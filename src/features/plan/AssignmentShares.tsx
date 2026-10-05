@@ -5,6 +5,8 @@ import { planAssignEnabled } from '@/lib/planAssign'
 import { fetchMyAssignments, setShares, type Shares } from '@/lib/supabase/planAssign'
 import { syncAssignedCompletions } from '@/lib/assignSync'
 import type { StoredTrainingBlock } from '@/lib/store/localStore'
+import { useAppData } from '@/lib/store/AppDataProvider'
+import { isMinor } from '@/domain/minor'
 import { cn } from '@/lib/utils'
 
 /** Freigaben des Athleten für einen zugewiesenen Block: jederzeit änderbar, Widerruf wirkt sofort. */
@@ -13,6 +15,8 @@ export function AssignmentShares({ block }: { block: StoredTrainingBlock }) {
   const [shares, setLocal] = useState<Shares | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const id = block.assignmentId
+  const { data } = useAppData()
+  const minor = isMinor(data.profile.birthDate, new Date().toISOString().slice(0, 10))
 
   useEffect(() => {
     if (!planAssignEnabled() || !id) return
@@ -47,11 +51,12 @@ export function AssignmentShares({ block }: { block: StoredTrainingBlock }) {
       <PanelHeader title={t('offers.sharesTitle')} subtitle={t('offers.sharesSub')} />
       <div className="space-y-1 px-4 pb-4">
         {([['done', 'offers.shareDone'], ['results', 'offers.shareResults'], ['hr', 'offers.shareHr']] as const).map(([key, label]) => (
-          <label key={key} className={cn('flex min-h-11 items-start gap-3 text-[14px]', key !== 'done' && !shares.done && 'opacity-50')}>
-            <input type="checkbox" checked={shares[key]} disabled={key !== 'done' && !shares.done} onChange={() => void change(key)} data-testid={`share-${key}`} className="mt-1 h-5 w-5" />
+          <label key={key} className={cn('flex min-h-11 items-start gap-3 text-[14px]', ((key !== 'done' && !shares.done) || (key === 'hr' && minor)) && 'opacity-50')}>
+            <input type="checkbox" checked={shares[key]} disabled={(key !== 'done' && !shares.done) || (key === 'hr' && minor)} onChange={() => void change(key)} data-testid={`share-${key}`} className="mt-1 h-5 w-5" />
             <span>{t(label)}</span>
           </label>
         ))}
+        {minor && <p className="text-[12px] text-accent-text" data-testid="shares-minor">{t('offers.minor')}</p>}
         <p className="text-[12px] text-ink-muted">{t('offers.revocable')}</p>
         {message && <p role="alert" className="text-[13px] text-accent-text" data-testid="shares-message">{message}</p>}
       </div>

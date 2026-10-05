@@ -2931,7 +2931,9 @@
       "label": "Fase",
       "GPP": "Algemene voorbereiding",
       "BUILD": "Opbouw",
-      "SPECIFIC": "Specifieke voorbereiding"
+      "SPECIFIC": "Specifieke voorbereiding",
+      "TAPER": "Taper voor de wedstrijd",
+      "TRANSITION": "Overgang en terugkeer"
     },
     "days": {
       "available": "Dagen voor extra trainingen",
@@ -3289,6 +3291,26 @@
       "striking_build": {
         "name": "Striking: opbouw",
         "sum": "Power, plyometrie en herhaalde sprints, met aan het eind een gevechtssimulatie."
+      },
+      "grappling_taper": {
+        "name": "Wedstrijd-taper grappling",
+        "sum": "Twee weken voor de wedstrijd: minder volume, gevechtsrondes, één simulatie in week 1. Alleen structuur, geen onderbouwde dosis."
+      },
+      "striking_taper": {
+        "name": "Wedstrijd-taper striking",
+        "sum": "Twee weken voor de wedstrijd: minder volume, gevechtsrondes, één simulatie in week 1. Alleen structuur, geen onderbouwde dosis."
+      },
+      "grappling_return": {
+        "name": "Terugkeer na een pauze grappling",
+        "sum": "Vier weken terug in de training: eerst herstel, dan basis, kracht en gevechtsrondes. Alleen structuur, geen onderbouwde dosis."
+      },
+      "striking_return": {
+        "name": "Terugkeer na een pauze striking",
+        "sum": "Vier weken terug in de training: eerst herstel, dan basis, kracht en gevechtsrondes. Alleen structuur, geen onderbouwde dosis."
+      },
+      "hybrid_return": {
+        "name": "Terugkeer na een pauze hybride",
+        "sum": "Vier weken terug in de training: eerst herstel, dan basis, kracht en gevechtsrondes. Alleen structuur, geen onderbouwde dosis."
       }
     }
   },
@@ -3465,7 +3487,8 @@
     "failed": "Dat is niet gelukt. Controleer de verbinding en probeer het opnieuw.",
     "unreadable": "Dit plan is niet te lezen. Het is niet geaccepteerd.",
     "sharesTitle": "Delen met je trainer",
-    "sharesSub": "Wat de trainer van dit plan mag zien."
+    "sharesSub": "Wat de trainer van dit plan mag zien.",
+    "minor": "Je bent jonger dan 18. Accepteer het plan alleen als je ouders hebben ingestemd; je trainer regelt dat met hen. Je hartslag kun je niet delen."
   },
   "assign": {
     "off": "Plan toewijzen",
@@ -3495,7 +3518,8 @@
       "accepted": "Geaccepteerd",
       "declined": "Afgewezen",
       "withdrawn": "Ingetrokken"
-    }
+    },
+    "consent": "Ik bevestig: de atleet is meerderjarig, of ik heb de toestemming van de wettelijke vertegenwoordigers (bevestigd in de app of schriftelijk verkregen)."
   },
   "lib": {
     "save": "Opslaan als sjabloon",

@@ -95,6 +95,7 @@ const privacyDe: LegalDocument = {
         'Du entscheidest. Ein Plan wird erst zu deinem Block, wenn du ihn annimmst; ablehnen ist jederzeit möglich. Solange du nichts einschaltest, sieht der Trainer nichts von deinem Fortschritt. Du kannst drei Dinge getrennt freigeben: (1) dass du eine Einheit erledigt hast, (2) Dauer und Anstrengung (RPE) der Einheit, (3) Mittel und Höchstwert deines Pulses. (2) und (3) gibt es nur zusammen mit (1). Der Puls wird nur als Mittel- und Höchstwert der Einheit übertragen, nie als Verlauf.',
         'Rechtsgrundlage für (1) und (2) ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Der Puls ist ein Gesundheitsdatum; dafür ist deine ausdrückliche Einwilligung die Rechtsgrundlage (Art. 9 Abs. 2 lit. a DSGVO). Du kannst jede Freigabe jederzeit im Block ändern. Ausschalten wirkt sofort: freigegebene Werte werden gelöscht beziehungsweise für den Trainer unsichtbar, und beim Ausschalten von (1) werden alle Zeilen gelöscht.',
         'Der Trainer sieht den Fortschritt nur bei aktiver Verknüpfung mit dir und nur so weit, wie du ihn freigegeben hast; das setzen Zugriffsregeln in der Datenbank durch, nicht nur die App. Aufbewahrung: gemeldete Einheiten höchstens 180 Tage, abgelehnte oder zurückgezogene Pläne 30 Tage, danach löschen wir sie automatisch. Beim Löschen deines Kontos oder des Trainerkontos werden die zugehörigen Pläne und Meldungen entfernt.',
+        'Minderjährige: Ein Trainer darf einem Athleten unter 18 Jahren erst dann einen Plan senden, wenn er bestätigt, dass die Einwilligung der Erziehungsberechtigten vorliegt (in der App bestätigt oder schriftlich eingeholt). KYDON kann diese Einwilligung nicht prüfen. Der Puls lässt sich für Athleten unter 18 Jahren nicht freigeben, soweit das Geburtsdatum bekannt ist.',
         'Diese Funktion ist in der Testphase. Der Plan ist ein Vorschlag aus hinterlegten Regeln und Vorlagen, die noch nicht von einer fachkundigen Person geprüft sind; KYDON ersetzt keine ärztliche oder trainerische Beratung.',
       ],
     },
@@ -141,6 +142,7 @@ const privacyDe: LegalDocument = {
         'Nachrichten gibt es aus drei Anlässen: eine fällige Nachmessung, eine Mitteilung des Betreibers an alle mit eingeschaltetem Push, und eine Nachricht eines Trainers, mit dem du aktiv verbunden bist (höchstens drei pro Tag).',
         'Zugestellt wird über den Push-Dienst deines Browsers (bei Chrome Google, bei Safari Apple, bei Firefox Mozilla). Der Inhalt ist auf dem Weg dorthin Ende-zu-Ende verschlüsselt; der Dienst sieht Zeitpunkt und Grösse, nicht den Text.',
         'Ausschalten: unter «Erinnerungen» oder in den Browser-Einstellungen. Beim Ausschalten in der App löschen wir Adresse und Fälligkeitsdatum sofort.',
+        'Hat ein Trainer dir einen Plan angeboten und hast du das Thema «Pläne von deinem Trainer» eingeschaltet, sendet die App eine allgemeine Push-Benachrichtigung, die lediglich auf das Vorliegen eines neuen Angebots hinweist, ohne sensible Inhalts- oder Absenderdaten (wie Namen oder Trainingsdetails) auf den Sperrbildschirm zu übertragen. Der Server erfährt dafür nur, dass ein Angebot vorliegt.',
       ],
     },
     {
@@ -230,6 +232,7 @@ const privacyEn: LegalDocument = {
         'You decide. A plan only becomes your block when you accept it; you can decline at any time. As long as you switch nothing on, the coach sees nothing of your progress. You can release three things separately: (1) that you completed a session, (2) duration and effort (RPE) of the session, (3) average and maximum of your heart rate. (2) and (3) only exist together with (1). Heart rate is transmitted only as the average and maximum of the session, never as a time series.',
         'The legal basis for (1) and (2) is your consent (Art. 6(1)(a) GDPR). Heart rate is health data; the legal basis for it is your explicit consent (Art. 9(2)(a) GDPR). You can change each release at any time in the block. Switching off takes effect immediately: released values are deleted or hidden from the coach, and switching off (1) deletes all rows.',
         'The coach sees progress only while the connection with you is active and only as far as you have released it; this is enforced by database access rules, not only by the app. Retention: reported sessions at most 180 days, declined or withdrawn plans 30 days, after which we delete them automatically. Deleting your account or the coach’s account removes the related plans and reports.',
+        'Minors: a coach may only send a plan to an athlete under 18 once they confirm that the consent of the legal guardians is held (confirmed in the app or obtained in writing). KYDON cannot verify this consent. Heart rate cannot be shared for athletes under 18 where the date of birth is known.',
         'This feature is in its test phase. The plan is a suggestion from stored rules and templates that have not yet been reviewed by a qualified person; KYDON does not replace medical or coaching advice.',
       ],
     },
@@ -260,6 +263,7 @@ const privacyEn: LegalDocument = {
         'Messages come from three sources: a due retest, an announcement by the operator to everyone with push on, and a message from a coach you are actively linked with (at most three per day).',
         'Delivery runs through your browser’s push service (Google for Chrome, Apple for Safari, Mozilla for Firefox). The content is end-to-end encrypted on the way; the service sees time and size, not the text.',
         'Turning it off: under «Reminders» or in your browser settings. When you turn it off in the app, we delete the address and due date immediately.',
+        'If a coach has offered you a plan and you have switched on the topic “Plans from your coach”, the app sends a general push notification that merely indicates that a new offer exists, without transmitting sensitive content or sender data (such as names or training details) to the lock screen. For this the server only learns that an offer exists.',
       ],
     },
     {
@@ -564,7 +568,42 @@ const dpaDe: LegalDocument = {
       ],
     },
     {
-      heading: '12. Annahme, Fassung, Schluss',
+      heading: '12. Freigabebasierte Datenverarbeitung, Verantwortlichkeit und Athletenfreigaben',
+      body: [
+        'Umfang der Verantwortlichkeit des Auftraggebers (Trainers): Der Auftraggeber ist Verantwortlicher im Sinne des Art. 4 Nr. 7 DSGVO ausschließlich für diejenigen personenbezogenen Daten von Athleten, die',
+      ],
+      list: [
+        'a) durch den Auftraggeber selbst in die Plattform KYDON eingegeben oder importiert werden, oder',
+        'b) vom jeweiligen Athleten über die Plattformfunktionen ausdrücklich und aktiv für das Profil bzw. das Dashboard des Auftraggebers freigegeben werden («Data Sharing»).',
+      ],
+    },
+    {
+      heading: 'Autonomie des Athletenkontos',
+      body: [
+        'Die Parteien stellen klar, dass Athleten über ein eigenständiges Nutzerverhältnis mit dem Auftragnehmer (KYDON) verfügen können. Daten, Analysen oder Historien, die der Athlet außerhalb einer aktiven Zuweisung bzw. Freigabe an den Auftraggeber führt, unterliegen nicht der Weisungsbefugnis des Auftraggebers und sind nicht Gegenstand dieses Vertrags.',
+      ],
+    },
+    {
+      heading: 'Rechtsgrundlage und besondere Datenkategorien (Art. 9 DSGVO)',
+      body: [
+        'Soweit über KYDON sportphysiologische Parameter, Leistungsdiagnostiken, Regenerationswerte, Biometrie oder sonstige Gesundheitsdaten im Sinne des Art. 9 Abs. 1 DSGVO verarbeitet werden, sichert der Auftraggeber zu, dass er vor der Einsichtnahme und Verarbeitung über eine wirksame Rechtsgrundlage verfügt (insbesondere eine ausdrückliche, informierte und freiwillige Einwilligung des Athleten gemäß Art. 9 Abs. 2 lit. a DSGVO in Verbindung mit Art. 7 DSGVO bzw. § 26 Abs. 3 BDSG, sofern anwendbar).',
+        'Der Auftraggeber stellt den Auftragnehmer im Innenverhältnis von allen Ansprüchen Dritter frei, die daraus resultieren, dass der Auftraggeber freigegebene Daten ohne ausreichende datenschutzrechtliche Legitimation verarbeitet hat.',
+      ],
+    },
+    {
+      heading: 'Minderjährige Athleten',
+      body: [
+        'Bevor der Auftraggeber einem minderjährigen Athleten einen Plan zuweist oder Freigaben eines minderjährigen Athleten einsieht, holt er die Einwilligung der Erziehungsberechtigten ein, entweder in der Anwendung oder schriftlich, und bewahrt sie auf. Die Anwendung verlangt vor dem Senden eines Plans seine ausdrückliche Bestätigung, dass der Athlet volljährig ist oder diese Einwilligung vorliegt; prüfen kann sie die Einwilligung nicht. Die Freigabe des Pulses ist für Athleten unter 18 Jahren technisch ausgeschlossen, soweit das Geburtsdatum bekannt ist.',
+      ],
+    },
+    {
+      heading: 'Widerruf der Freigabe durch den Athleten',
+      body: [
+        'Entzieht ein Athlet über die Plattform seine Freigabe gegenüber dem Auftraggeber, endet bezüglich der künftigen Erfassung und Synchronisation dieser Daten die Auftragsverarbeitung im Auftrag dieses Auftraggebers. Bis zum Widerruf rechtmäßig übermittelte und dem Auftraggeber zugewiesene Daten verbleiben in dessen Verantwortung, soweit keine gesetzlichen Löschpflichten entgegenstehen oder der Athlet ein Löschersuchen gegenüber dem Auftraggeber geltend macht.',
+      ],
+    },
+    {
+      heading: '13. Annahme, Fassung, Schluss',
       body: [
         'Der Vertrag wird angenommen, indem der Inhaber des Trainerkontos ihn in der Anwendung bestätigt. Datum und Fassung der Annahme werden im Konto gespeichert und sind dort einsehbar. Bei einer neuen Fassung ist eine erneute Annahme nötig; bis dahin gilt die zuletzt angenommene Fassung.',
         'Im Übrigen gelten die Nutzungsbedingungen. Dieser Vertrag geht ihnen vor, soweit er die Verarbeitung im Auftrag betrifft. Es gilt deutsches Recht.',
@@ -672,7 +711,42 @@ const dpaEn: LegalDocument = {
       ],
     },
     {
-      heading: '12. Acceptance, version, final provisions',
+      heading: '12. Release-based processing, responsibility and athlete releases',
+      body: [
+        'Scope of the client’s (coach’s) responsibility: the client is the controller within the meaning of Art. 4(7) GDPR exclusively for those personal data of athletes that',
+      ],
+      list: [
+        'a) are entered or imported into the KYDON platform by the client themselves, or',
+        'b) are expressly and actively released by the respective athlete through the platform functions for the client’s profile or dashboard (“data sharing”).',
+      ],
+    },
+    {
+      heading: 'Autonomy of the athlete account',
+      body: [
+        'The parties clarify that athletes may have an independent user relationship with the processor (KYDON). Data, analyses or histories that the athlete keeps outside an active assignment or release to the client are not subject to the client’s right to issue instructions and are not covered by this agreement.',
+      ],
+    },
+    {
+      heading: 'Legal basis and special categories of data (Art. 9 GDPR)',
+      body: [
+        'Where sport-physiological parameters, performance diagnostics, recovery values, biometrics or other health data within the meaning of Art. 9(1) GDPR are processed through KYDON, the client warrants that, before viewing and processing them, they have a valid legal basis (in particular the express, informed and voluntary consent of the athlete under Art. 9(2)(a) GDPR in conjunction with Art. 7 GDPR or, where applicable, section 26(3) BDSG).',
+        'As between the parties, the client indemnifies the processor against all third-party claims arising from the client having processed released data without sufficient data protection legitimacy.',
+      ],
+    },
+    {
+      heading: 'Minor athletes',
+      body: [
+        'Before the client assigns a plan to a minor athlete or views the releases of a minor athlete, they obtain the consent of the legal guardians, either in the application or in writing, and keep it on file. Before sending a plan, the application requires the client’s express confirmation that the athlete is of legal age or that this consent is held; it cannot verify the consent. Sharing heart rate is technically excluded for athletes under 18 where the date of birth is known.',
+      ],
+    },
+    {
+      heading: 'Withdrawal of the release by the athlete',
+      body: [
+        'If an athlete withdraws their release towards the client through the platform, the processing on behalf of that client ends with regard to the future collection and synchronisation of this data. Data lawfully transmitted and assigned to the client until the withdrawal remains in the client’s responsibility, unless statutory deletion obligations stand in the way or the athlete asserts a request for erasure towards the client.',
+      ],
+    },
+    {
+      heading: '13. Acceptance, version, final provisions',
       body: [
         'The agreement is accepted when the holder of the coach account confirms it in the application. Date and version of acceptance are stored in the account and visible there. A new version requires renewed acceptance; until then the last accepted version applies.',
         'Otherwise the terms of use apply. This agreement prevails insofar as it concerns processing on behalf. German law applies.',

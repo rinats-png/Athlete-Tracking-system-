@@ -2931,7 +2931,9 @@
       "label": "Phase",
       "GPP": "General preparation",
       "BUILD": "Build",
-      "SPECIFIC": "Specific preparation"
+      "SPECIFIC": "Specific preparation",
+      "TAPER": "Taper before competition",
+      "TRANSITION": "Transition and return"
     },
     "days": {
       "available": "Days for additional sessions",
@@ -3289,6 +3291,26 @@
       "striking_build": {
         "name": "Striking: build",
         "sum": "Power, plyometrics and repeated sprints, with a fight simulation at the end."
+      },
+      "grappling_taper": {
+        "name": "Competition taper grappling",
+        "sum": "Two weeks before the competition: less volume, combat rounds, one simulation in week 1. Structure only, no sourced dose."
+      },
+      "striking_taper": {
+        "name": "Competition taper striking",
+        "sum": "Two weeks before the competition: less volume, combat rounds, one simulation in week 1. Structure only, no sourced dose."
+      },
+      "grappling_return": {
+        "name": "Return after a break grappling",
+        "sum": "Four weeks back into training: recovery first, then base, strength and combat rounds. Structure only, no sourced dose."
+      },
+      "striking_return": {
+        "name": "Return after a break striking",
+        "sum": "Four weeks back into training: recovery first, then base, strength and combat rounds. Structure only, no sourced dose."
+      },
+      "hybrid_return": {
+        "name": "Return after a break hybrid",
+        "sum": "Four weeks back into training: recovery first, then base, strength and combat rounds. Structure only, no sourced dose."
       }
     }
   },
@@ -3465,7 +3487,8 @@
     "failed": "That did not work. Check your connection and try again.",
     "unreadable": "This plan cannot be read. It was not accepted.",
     "sharesTitle": "Sharing with your coach",
-    "sharesSub": "What the coach may see of this plan."
+    "sharesSub": "What the coach may see of this plan.",
+    "minor": "You are under 18. Only accept the plan if your parents have agreed; your coach clears that with them. You cannot share your heart rate."
   },
   "assign": {
     "off": "Assign plan",
@@ -3495,7 +3518,8 @@
       "accepted": "Accepted",
       "declined": "Declined",
       "withdrawn": "Withdrawn"
-    }
+    },
+    "consent": "I confirm: the athlete is of legal age, or I hold the consent of their legal guardians (confirmed in the app or obtained in writing)."
   },
   "lib": {
     "save": "Save as template",

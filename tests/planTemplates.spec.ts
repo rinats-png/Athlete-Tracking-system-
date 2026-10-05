@@ -115,6 +115,21 @@ test.describe('Vorlagen: Fachlogik', () => {
   })
 })
 
+test.describe('Vorlagen: Taper und Rückkehr', () => {
+  test('fünf Vorlagen ohne Regelplätze: alles offen, keine Dosis, Wochenspannen stimmig', () => {
+    for (const id of ['grappling_taper', 'striking_taper', 'grappling_return', 'striking_return', 'hybrid_return']) {
+      const t = PLAN_TEMPLATES.find((x) => x.id === id)!
+      expect(t, id).toBeTruthy()
+      expect(['TAPER', 'TRANSITION']).toContain(t.phase)
+      expect(t.slots.every((s) => s.ruleId === null), id).toBe(true)
+      const fit = fitTemplate(base(id, { disciplineId: t.family === 'hybrid' ? 'hybrid' : t.family === 'combat_striking' ? 'boxing' : 'judo', availableDays: [1, 2, 3, 4, 5, 6, 7], fixedSessions: [] }))
+      expect(fit.sessions.length, id).toBeGreaterThan(0)
+      expect(fit.sessions.every((s) => s.kind === 'open' && s.blocks.length === 0 && s.evidenceStrength === null), id).toBe(true)
+    }
+    expect(PLAN_TEMPLATES).toHaveLength(12)
+  })
+})
+
 test.describe('Vorlagen: Bildschirme', () => {
   const prepare = async (page: import('@playwright/test').Page) => {
     await openDemo(page)
@@ -139,6 +154,8 @@ test.describe('Vorlagen: Bildschirme', () => {
     await expect(page.getByTestId('tpl-card-grappling_build')).toBeVisible()
     await expect(page.getByTestId('tpl-card-grappling_gpp')).toHaveCount(0)
     await page.getByTestId('tpl-goal-event').click()
+    await expect(page.getByTestId('tpl-card-grappling_taper')).toBeVisible()
+    await page.getByTestId('tpl-goal-strength').click()
     await expect(page.getByTestId('tpl-none')).toBeVisible()
   })
 

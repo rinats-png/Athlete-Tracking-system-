@@ -8,6 +8,7 @@ import { fetchMyAssignments, respondAssignment, type Assignment, type Shares } f
 import { importPlan } from '@/domain/planFile'
 import { familyOfDiscipline } from '@/domain/trainingPlan'
 import { planMode } from '@/domain/planMode'
+import { isMinor } from '@/domain/minor'
 import { cn } from '@/lib/utils'
 
 /**
@@ -24,6 +25,7 @@ export function PlanOffersPanel() {
   const [shares, setShares] = useState<Shares>({ done: false, results: false, hr: false })
   const [message, setMessage] = useState<string | null>(null)
   const hasActive = trainingBlocks.some((b) => b.status === 'active')
+  const minor = isMinor(data.profile.birthDate, new Date().toISOString().slice(0, 10))
 
   useEffect(() => {
     if (!planAssignEnabled()) return
@@ -76,11 +78,12 @@ export function PlanOffersPanel() {
               <div className="mt-2 space-y-3">
                 <p className="text-[13px] text-ink-secondary">{t('offers.consent')}</p>
                 {([['done', 'offers.shareDone'], ['results', 'offers.shareResults'], ['hr', 'offers.shareHr']] as const).map(([key, label]) => (
-                  <label key={key} className={cn('flex min-h-11 items-start gap-3 text-[14px]', key !== 'done' && !shares.done && 'opacity-50')}>
-                    <input type="checkbox" checked={shares[key]} disabled={key !== 'done' && !shares.done} onChange={() => toggle(key)} data-testid={`offer-share-${key}`} className="mt-1 h-5 w-5" />
+                  <label key={key} className={cn('flex min-h-11 items-start gap-3 text-[14px]', ((key !== 'done' && !shares.done) || (key === 'hr' && minor)) && 'opacity-50')}>
+                    <input type="checkbox" checked={shares[key]} disabled={(key !== 'done' && !shares.done) || (key === 'hr' && minor)} onChange={() => toggle(key)} data-testid={`offer-share-${key}`} className="mt-1 h-5 w-5" />
                     <span>{t(label)}</span>
                   </label>
                 ))}
+                {minor && <p className="text-[12px] text-accent-text" data-testid="offer-minor">{t('offers.minor')}</p>}
                 <p className="text-[12px] text-ink-muted">{t('offers.revocable')}</p>
                 {hasActive && <p className="text-[12px] text-accent-text" data-testid="offer-blocked">{t('offers.activeBlock')}</p>}
                 <div className="flex flex-wrap gap-2">

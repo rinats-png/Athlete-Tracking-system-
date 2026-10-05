@@ -25,6 +25,7 @@ export function AssignScreen() {
   const [assignments, setAssignments] = useState<Assignment[]>([])
   const [target, setTarget] = useState<string | null>(null)
   const [name, setName] = useState(block?.name ?? '')
+  const [consent, setConsent] = useState(false)
   const [state, setState] = useState<'idle' | 'sent' | 'failed' | 'unavailable'>('idle')
   const [progress, setProgress] = useState<{ id: string; rows: ProgressRow[] } | null>(null)
 
@@ -40,7 +41,7 @@ export function AssignScreen() {
 
   const send = async () => {
     if (!block || !target) return
-    const r = await offerAssignment(target, name, JSON.parse(exportPlan(block)))
+    const r = await offerAssignment(target, name, JSON.parse(exportPlan(block)), consent)
     setState(r.ok ? 'sent' : 'failed')
     if (r.ok) reload()
   }
@@ -69,8 +70,12 @@ export function AssignScreen() {
                       ))}
                     </div>
                   </div>
+                  <label className="flex min-h-11 items-start gap-3 text-[13px]">
+                    <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} data-testid="assign-consent" className="mt-1 h-5 w-5" />
+                    <span>{t('assign.consent')}</span>
+                  </label>
                   <p className="text-[12px] text-ink-secondary">{t('assign.note')}</p>
-                  <button type="button" data-testid="assign-send" disabled={!target} onClick={() => void send()} className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink disabled:opacity-45">{t('assign.sendButton')}</button>
+                  <button type="button" data-testid="assign-send" disabled={!target || !consent} onClick={() => void send()} className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink disabled:opacity-45">{t('assign.sendButton')}</button>
                   {state === 'sent' && <p className="text-[13px]" data-testid="assign-sent">{t('assign.sent')}</p>}
                   {state === 'failed' && <p role="alert" className="text-[13px] text-accent-text" data-testid="assign-failed">{t('assign.failed')}</p>}
                 </>

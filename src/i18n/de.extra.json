@@ -2931,7 +2931,9 @@
       "label": "Phase",
       "GPP": "Allgemeine Vorbereitung",
       "BUILD": "Aufbau",
-      "SPECIFIC": "Spezifische Vorbereitung"
+      "SPECIFIC": "Spezifische Vorbereitung",
+      "TAPER": "Wettkampfspitze (Taper)",
+      "TRANSITION": "Übergang und Rückkehr"
     },
     "days": {
       "available": "Tage für zusätzliche Einheiten",
@@ -3289,6 +3291,26 @@
       "striking_build": {
         "name": "Striking: Aufbau",
         "sum": "Power, Plyometrie und wiederholte Sprints, am Ende eine Kampfsimulation."
+      },
+      "grappling_taper": {
+        "name": "Wettkampf-Spitze Grappling",
+        "sum": "Zwei Wochen vor dem Wettkampf: weniger Umfang, Kampfrunden, eine Simulation in Woche 1. Nur Struktur, keine belegte Dosis."
+      },
+      "striking_taper": {
+        "name": "Wettkampf-Spitze Striking",
+        "sum": "Zwei Wochen vor dem Wettkampf: weniger Umfang, Kampfrunden, eine Simulation in Woche 1. Nur Struktur, keine belegte Dosis."
+      },
+      "grappling_return": {
+        "name": "Rückkehr nach Pause Grappling",
+        "sum": "Vier Wochen zurück ins Training: erst Erholung, dann Grundlage, Kraft und Kampfrunden. Nur Struktur, keine belegte Dosis."
+      },
+      "striking_return": {
+        "name": "Rückkehr nach Pause Striking",
+        "sum": "Vier Wochen zurück ins Training: erst Erholung, dann Grundlage, Kraft und Kampfrunden. Nur Struktur, keine belegte Dosis."
+      },
+      "hybrid_return": {
+        "name": "Rückkehr nach Pause Hybrid",
+        "sum": "Vier Wochen zurück ins Training: erst Erholung, dann Grundlage, Kraft und Kampfrunden. Nur Struktur, keine belegte Dosis."
       }
     }
   },
@@ -3465,7 +3487,8 @@
     "failed": "Das hat nicht geklappt. Prüfe die Verbindung und versuche es noch einmal.",
     "unreadable": "Dieser Plan lässt sich nicht lesen. Er wurde nicht angenommen.",
     "sharesTitle": "Freigaben an deinen Trainer",
-    "sharesSub": "Was der Trainer von diesem Plan sehen darf."
+    "sharesSub": "Was der Trainer von diesem Plan sehen darf.",
+    "minor": "Du bist unter 18. Nimm den Plan nur an, wenn deine Eltern zugestimmt haben; das klärt dein Trainer mit ihnen. Den Puls kannst du nicht freigeben."
   },
   "assign": {
     "off": "Plan zuweisen",
@@ -3495,7 +3518,8 @@
       "accepted": "Angenommen",
       "declined": "Abgelehnt",
       "withdrawn": "Zurückgezogen"
-    }
+    },
+    "consent": "Ich bestätige: Der Athlet ist volljährig, oder die Einwilligung der Erziehungsberechtigten liegt mir vor (in der App bestätigt oder schriftlich eingeholt)."
   },
   "lib": {
     "save": "Als Vorlage speichern",

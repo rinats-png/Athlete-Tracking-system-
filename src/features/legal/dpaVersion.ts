@@ -4,4 +4,4 @@
  * (ein nachgeladener Baustein) mitzuladen. Der Text selbst steht in
  * texts.ts; wer ihn ändert, ändert diese Fassung.
  */
-export const DPA_VERSION = '2026-09-21'
+export const DPA_VERSION = '2026-10-05'

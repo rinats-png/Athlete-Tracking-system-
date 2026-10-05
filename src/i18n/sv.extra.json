@@ -2931,7 +2931,9 @@
       "label": "Fas",
       "GPP": "Allmän förberedelse",
       "BUILD": "Uppbyggnad",
-      "SPECIFIC": "Specifik förberedelse"
+      "SPECIFIC": "Specifik förberedelse",
+      "TAPER": "Nedtrappning före tävling",
+      "TRANSITION": "Övergång och återgång"
     },
     "days": {
       "available": "Dagar för extra pass",
@@ -3289,6 +3291,26 @@
       "striking_build": {
         "name": "Striking: uppbyggnad",
         "sum": "Power, plyometri och upprepade sprinter, med en matchsimulering i slutet."
+      },
+      "grappling_taper": {
+        "name": "Tävlingsnedtrappning grappling",
+        "sum": "Två veckor före tävlingen: mindre volym, kampronder, en simulering i vecka 1. Bara struktur, ingen belagd dos."
+      },
+      "striking_taper": {
+        "name": "Tävlingsnedtrappning striking",
+        "sum": "Två veckor före tävlingen: mindre volym, kampronder, en simulering i vecka 1. Bara struktur, ingen belagd dos."
+      },
+      "grappling_return": {
+        "name": "Återgång efter uppehåll grappling",
+        "sum": "Fyra veckor tillbaka i träningen: först återhämtning, sedan bas, styrka och kampronder. Bara struktur, ingen belagd dos."
+      },
+      "striking_return": {
+        "name": "Återgång efter uppehåll striking",
+        "sum": "Fyra veckor tillbaka i träningen: först återhämtning, sedan bas, styrka och kampronder. Bara struktur, ingen belagd dos."
+      },
+      "hybrid_return": {
+        "name": "Återgång efter uppehåll hybrid",
+        "sum": "Fyra veckor tillbaka i träningen: först återhämtning, sedan bas, styrka och kampronder. Bara struktur, ingen belagd dos."
       }
     }
   },
@@ -3465,7 +3487,8 @@
     "failed": "Det gick inte. Kontrollera anslutningen och försök igen.",
     "unreadable": "Den här planen går inte att läsa. Den togs inte emot.",
     "sharesTitle": "Delning med din tränare",
-    "sharesSub": "Vad tränaren får se av den här planen."
+    "sharesSub": "Vad tränaren får se av den här planen.",
+    "minor": "Du är under 18. Ta bara emot planen om dina föräldrar har samtyckt; din tränare klarar det med dem. Du kan inte dela din puls."
   },
   "assign": {
     "off": "Tilldela plan",
@@ -3495,7 +3518,8 @@
       "accepted": "Mottagen",
       "declined": "Avvisad",
       "withdrawn": "Återkallad"
-    }
+    },
+    "consent": "Jag bekräftigar: idrottaren är myndig, eller så har jag vårdnadshavarnas samtycke (bekräftat i appen eller inhämtat skriftligt)."
   },
   "lib": {
     "save": "Spara som mall",

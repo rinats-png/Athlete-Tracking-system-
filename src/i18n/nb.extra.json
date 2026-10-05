@@ -2931,7 +2931,9 @@
       "label": "Fase",
       "GPP": "Generell forberedelse",
       "BUILD": "Oppbygging",
-      "SPECIFIC": "Spesifikk forberedelse"
+      "SPECIFIC": "Spesifikk forberedelse",
+      "TAPER": "Nedtrapping før konkurranse",
+      "TRANSITION": "Overgang og retur"
     },
     "days": {
       "available": "Dager for ekstra økter",
@@ -3289,6 +3291,26 @@
       "striking_build": {
         "name": "Striking: oppbygging",
         "sum": "Power, pliometri og gjentatte sprinter, med en kampsimulering til slutt."
+      },
+      "grappling_taper": {
+        "name": "Konkurranse-nedtrapping grappling",
+        "sum": "To uker før konkurransen: mindre volum, kamprunder, én simulering i uke 1. Bare struktur, ingen belagt dose."
+      },
+      "striking_taper": {
+        "name": "Konkurranse-nedtrapping striking",
+        "sum": "To uker før konkurransen: mindre volum, kamprunder, én simulering i uke 1. Bare struktur, ingen belagt dose."
+      },
+      "grappling_return": {
+        "name": "Retur etter pause grappling",
+        "sum": "Fire uker tilbake i treningen: først restitusjon, så basis, styrke og kamprunder. Bare struktur, ingen belagt dose."
+      },
+      "striking_return": {
+        "name": "Retur etter pause striking",
+        "sum": "Fire uker tilbake i treningen: først restitusjon, så basis, styrke og kamprunder. Bare struktur, ingen belagt dose."
+      },
+      "hybrid_return": {
+        "name": "Retur etter pause hybrid",
+        "sum": "Fire uker tilbake i treningen: først restitusjon, så basis, styrke og kamprunder. Bare struktur, ingen belagt dose."
       }
     }
   },
@@ -3465,7 +3487,8 @@
     "failed": "Det fungerte ikke. Sjekk tilkoblingen og prøv igjen.",
     "unreadable": "Denne planen kan ikke leses. Den ble ikke tatt imot.",
     "sharesTitle": "Deling med treneren din",
-    "sharesSub": "Hva treneren får se av denne planen."
+    "sharesSub": "Hva treneren får se av denne planen.",
+    "minor": "Du er under 18. Ta bare imot planen hvis foreldrene dine har samtykket; treneren din avklarer det med dem. Du kan ikke dele pulsen din."
   },
   "assign": {
     "off": "Tildel plan",
@@ -3495,7 +3518,8 @@
       "accepted": "Tatt imot",
       "declined": "Avslått",
       "withdrawn": "Trukket tilbake"
-    }
+    },
+    "consent": "Jeg bekrefter: utøveren er myndig, eller jeg har samtykke fra de foresatte (bekreftet i appen eller innhentet skriftlig)."
   },
   "lib": {
     "save": "Lagre som mal",

@@ -108,10 +108,11 @@ export async function fetchCoachAssignments(): Promise<AssignResult<Assignment[]
   return error || !Array.isArray(data) ? fail('failed') : { ok: true, value: (data as Row[]).map((x) => toAssignment(x, false)) }
 }
 
-export async function offerAssignment(athleteId: string, name: string, payload: unknown): Promise<AssignResult<string>> {
+/** `consentAttested`: der Trainer bestätigt, dass der Athlet volljährig ist oder die Einwilligung der Eltern vorliegt. */
+export async function offerAssignment(athleteId: string, name: string, payload: unknown, consentAttested: boolean): Promise<AssignResult<string>> {
   const r = await ready()
   if (!r.supabase) return fail(r.error)
-  const { data, error } = await r.supabase.rpc('offer_plan_assignment', { p_athlete_id: athleteId, p_name: name, p_payload: payload })
+  const { data, error } = await r.supabase.rpc('offer_plan_assignment', { p_athlete_id: athleteId, p_name: name, p_payload: payload, p_consent_attested: consentAttested })
   return error || typeof data !== 'string' ? fail('failed') : { ok: true, value: data }
 }
 

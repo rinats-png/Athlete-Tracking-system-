@@ -20,8 +20,8 @@ import type { EvidenceRule, TrainingSource } from '@/domain/trainingTypes'
 export const TRAINING_SOURCES: Record<string, TrainingSource> = {
   helgerud_2007: {
     id: 'helgerud_2007',
-    citation: 'Helgerud J, Høydal K, Wang E, et al. (2007). Aerobic high-intensity intervals improve VO₂max more than moderate training. Med Sci Sports Exerc.',
-    url: null,
+    citation: 'Helgerud J, Høydal K, Wang E, et al. (2007). Aerobic high-intensity intervals improve VO₂max more than moderate training. Med Sci Sports Exerc 39(4):665-71.',
+    url: 'https://doi.org/10.1249/mss.0b013e3180304570',
     fullTextChecked: false,
   },
 }

@@ -2931,7 +2931,9 @@
       "label": "Fase",
       "GPP": "Preparación general",
       "BUILD": "Construcción",
-      "SPECIFIC": "Preparación específica"
+      "SPECIFIC": "Preparación específica",
+      "TAPER": "Tapering antes de la competición",
+      "TRANSITION": "Transición y vuelta"
     },
     "days": {
       "available": "Días para sesiones adicionales",
@@ -3289,6 +3291,26 @@
       "striking_build": {
         "name": "Golpeo: desarrollo",
         "sum": "Potencia, pliometría y sprints repetidos, con una simulación de combate al final."
+      },
+      "grappling_taper": {
+        "name": "Tapering de competición agarre",
+        "sum": "Dos semanas antes de la competición: menos volumen, asaltos de combate, una simulación en la semana 1. Solo estructura, sin dosis documentada."
+      },
+      "striking_taper": {
+        "name": "Tapering de competición golpeo",
+        "sum": "Dos semanas antes de la competición: menos volumen, asaltos de combate, una simulación en la semana 1. Solo estructura, sin dosis documentada."
+      },
+      "grappling_return": {
+        "name": "Vuelta tras una pausa agarre",
+        "sum": "Cuatro semanas para volver a entrenar: primero recuperación, luego base, fuerza y asaltos de combate. Solo estructura, sin dosis documentada."
+      },
+      "striking_return": {
+        "name": "Vuelta tras una pausa golpeo",
+        "sum": "Cuatro semanas para volver a entrenar: primero recuperación, luego base, fuerza y asaltos de combate. Solo estructura, sin dosis documentada."
+      },
+      "hybrid_return": {
+        "name": "Vuelta tras una pausa híbrido",
+        "sum": "Cuatro semanas para volver a entrenar: primero recuperación, luego base, fuerza y asaltos de combate. Solo estructura, sin dosis documentada."
       }
     }
   },
@@ -3465,7 +3487,8 @@
     "failed": "No ha funcionado. Revisa la conexión e inténtalo de nuevo.",
     "unreadable": "Este plan no se puede leer. No se ha aceptado.",
     "sharesTitle": "Compartir con tu entrenador",
-    "sharesSub": "Lo que el entrenador puede ver de este plan."
+    "sharesSub": "Lo que el entrenador puede ver de este plan.",
+    "minor": "Eres menor de 18 años. Acepta el plan solo si tus padres están de acuerdo; tu entrenador lo aclara con ellos. No puedes compartir tu pulso."
   },
   "assign": {
     "off": "Asignar plan",
@@ -3495,7 +3518,8 @@
       "accepted": "Aceptado",
       "declined": "Rechazado",
       "withdrawn": "Retirado"
-    }
+    },
+    "consent": "Confirmo: el atleta es mayor de edad, o dispongo del consentimiento de sus tutores legales (confirmado en la app o obtenido por escrito)."
   },
   "lib": {
     "save": "Guardar como plantilla",

@@ -2931,7 +2931,9 @@
       "label": "Phase",
       "GPP": "Préparation générale",
       "BUILD": "Construction",
-      "SPECIFIC": "Préparation spécifique"
+      "SPECIFIC": "Préparation spécifique",
+      "TAPER": "Affûtage avant la compétition",
+      "TRANSITION": "Transition et reprise"
     },
     "days": {
       "available": "Jours pour des séances supplémentaires",
@@ -3289,6 +3291,26 @@
       "striking_build": {
         "name": "Percussion : développement",
         "sum": "Puissance, pliométrie et sprints répétés, avec une simulation de combat à la fin."
+      },
+      "grappling_taper": {
+        "name": "Affûtage compétition lutte au sol",
+        "sum": "Deux semaines avant la compétition : moins de volume, rounds de combat, une simulation en semaine 1. Structure seulement, pas de dose documentée."
+      },
+      "striking_taper": {
+        "name": "Affûtage compétition percussion",
+        "sum": "Deux semaines avant la compétition : moins de volume, rounds de combat, une simulation en semaine 1. Structure seulement, pas de dose documentée."
+      },
+      "grappling_return": {
+        "name": "Reprise après une pause lutte au sol",
+        "sum": "Quatre semaines pour revenir à l’entraînement : d’abord la récupération, puis base, force et rounds de combat. Structure seulement, pas de dose documentée."
+      },
+      "striking_return": {
+        "name": "Reprise après une pause percussion",
+        "sum": "Quatre semaines pour revenir à l’entraînement : d’abord la récupération, puis base, force et rounds de combat. Structure seulement, pas de dose documentée."
+      },
+      "hybrid_return": {
+        "name": "Reprise après une pause hybride",
+        "sum": "Quatre semaines pour revenir à l’entraînement : d’abord la récupération, puis base, force et rounds de combat. Structure seulement, pas de dose documentée."
       }
     }
   },
@@ -3465,7 +3487,8 @@
     "failed": "Cela n’a pas fonctionné. Vérifie la connexion et réessaie.",
     "unreadable": "Ce plan est illisible. Il n’a pas été accepté.",
     "sharesTitle": "Partage avec ton entraîneur",
-    "sharesSub": "Ce que l’entraîneur peut voir de ce plan."
+    "sharesSub": "Ce que l’entraîneur peut voir de ce plan.",
+    "minor": "Tu as moins de 18 ans. N’accepte le plan que si tes parents ont donné leur accord ; ton entraîneur le clarifie avec eux. Tu ne peux pas partager ton pouls."
   },
   "assign": {
     "off": "Attribuer un plan",
@@ -3495,7 +3518,8 @@
       "accepted": "Accepté",
       "declined": "Refusé",
       "withdrawn": "Retiré"
-    }
+    },
+    "consent": "Je confirme : l’athlète est majeur, ou je dispose du consentement de ses représentants légaux (confirmé dans l’app ou obtenu par écrit)."
   },
   "lib": {
     "save": "Enregistrer comme modèle",

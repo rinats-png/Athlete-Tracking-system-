@@ -45,6 +45,34 @@ export interface PlanTemplate {
 const open = (key: string, intent: Intent, o: Partial<Omit<TemplateSlot, 'key' | 'intent' | 'ruleId'>> = {}): TemplateSlot => ({ key, intent, ruleId: null, perWeek: 1, weekFrom: 1, weekTo: null, high: false, needs: null, ...o })
 const rule = (key: string, intent: Intent, ruleId: string, o: Partial<Omit<TemplateSlot, 'key' | 'intent' | 'ruleId'>> = {}): TemplateSlot => ({ key, intent, ruleId, perWeek: 1, weekFrom: 1, weekTo: null, high: ['VO2MAX', 'REPEATED_SPRINT'].includes(intent), needs: null, ...o })
 
+const taper = (id: string, family: SportFamily): PlanTemplate => ({
+  id,
+  family,
+  phase: 'TAPER',
+  weeks: 2,
+  goal: 'event',
+  slots: [
+    open('sim', 'FIGHT_SIMULATION', { weekFrom: 1, weekTo: 1, high: true }),
+    open('rounds', 'COMBAT_ROUNDS'),
+    open('maintain', 'TAPER_MAINTENANCE'),
+    open('recovery', 'RECOVERY_AEROBIC'),
+  ],
+})
+
+const comeback = (id: string, family: SportFamily): PlanTemplate => ({
+  id,
+  family,
+  phase: 'TRANSITION',
+  weeks: 4,
+  goal: 'base',
+  slots: [
+    open('recovery', 'RECOVERY_AEROBIC', { perWeek: 2 }),
+    open('base', 'AEROBIC_BASE', { weekFrom: 2 }),
+    open('strength', 'MAX_STRENGTH', { weekFrom: 3, needs: 'weights' }),
+    ...(family === 'hybrid' ? [] : [open('rounds', 'COMBAT_ROUNDS', { weekFrom: 4 })]),
+  ],
+})
+
 export const PLAN_TEMPLATES: PlanTemplate[] = [
   {
     id: 'hybrid_base',
@@ -136,6 +164,14 @@ export const PLAN_TEMPLATES: PlanTemplate[] = [
       open('sim', 'FIGHT_SIMULATION', { weekFrom: 5, high: true }),
     ],
   },
+  // Wettkampf-Spitze und Rückkehr nach Pause (Entscheidung des Inhabers): nur Struktur,
+  // keine belegte Dosis. Alle Plätze sind offen; die Regeln des Registers gelten für
+  // Aufbau- und Wettkampfphasen, nicht für Taper und Übergang.
+  taper('grappling_taper', 'combat_grappling'),
+  taper('striking_taper', 'combat_striking'),
+  comeback('grappling_return', 'combat_grappling'),
+  comeback('striking_return', 'combat_striking'),
+  comeback('hybrid_return', 'hybrid'),
 ]
 
 export const templateById = (id: string | null | undefined): PlanTemplate | undefined => PLAN_TEMPLATES.find((t) => t.id === id)

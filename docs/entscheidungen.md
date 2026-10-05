@@ -1,5 +1,56 @@
 # Offene Entscheidungen zum Trainingsbereich
 
+## Stand der Antworten (5. Oktober 2026, nach deiner Rückmeldung)
+
+| Punkt | Entscheidung | Umgesetzt |
+|---|---|---|
+| A1 | Sammel-SQL-Datei | ja: `supabase/einspielen/offene_migrationen.sql` (`npm run sql:bundle`), Prüffall hält sie aktuell |
+| A2 | niemand prüft zentral; der Trainer sendet, der Athlet antwortet | Hinweis: siehe «Kurztest» unten, 10 Minuten mit zwei Konten |
+| B1 | Anwaltstermin kommt noch | offen, bei dir |
+| B2 | Aufbewahrung so lassen (180 / 30 Tage) | nichts zu tun |
+| B3 | Eltern müssen vor dem Start beim Trainer zustimmen (App oder Schriftstück); Puls unter 18 aus | ja: Bestätigung des Trainers vor dem Senden (Server verlangt sie), Puls unter 18 gesperrt, Hinweis beim Athleten, im AVV und in der Datenschutzerklärung |
+| B4 | AVV-Zusatz «Freigabebasierte Datenverarbeitung» | ja: neuer Abschnitt 12 im AVV (de, en), Fassung `2026-10-05`; **Trainer müssen den AVV neu annehmen** |
+| B5 | Push-Satz | ja: Satz in die Datenschutzerklärung (de, en) |
+| B6 | Englisch als Rückfall | nichts zu tun |
+| C3, C4, C5 | Festlegungen bestätigt, Vorschau bleibt in der Testphase an | nichts zu tun |
+| C6 | Quellenliste mit DOI | ja: `docs/quellenpruefung.md`; Helgerud-DOI nach PubMed nachgetragen |
+| D1, D2 | Taper (Kampfsport) und Rückkehr nach Pause, nur Struktur | ja: 5 neue Vorlagen (Grappling/Striking-Taper, Rückkehr für Grappling, Striking, Hybrid), alle Plätze offen |
+| E1 | Muay Thai: ich schlage Anforderungshöhen vor, du bestätigst | **offen: Vorschlag unten, bitte bestätigen** |
+| E2 | Judo und Kickboxen | beide gibt es im Katalog, nichts zu tun |
+| F1–F4 | Wetter, Check-in teilen, Sprachmodell, Strava bleiben aus | nichts zu tun, die Auslieferung setzt keinen dieser Schalter |
+
+### Hinweise zu deinen Antworten
+
+- **Zu A2.** Gemeint war nur: wer probiert den Ablauf einmal mit zwei echten Konten aus (ein Trainer, ein Athlet), bevor Testpersonen ihn sehen, weil ich ihn nur mit nachgebildeten Antworten prüfen konnte. «Niemand» ist eine mögliche Antwort; der Kurztest unten kostet etwa zehn Minuten und fängt Fehler in der Migration ab, die kein automatischer Test findet. Auf deinem Telefon kann ich nichts ausprobieren; das müsstest du oder jemand anderes tun.
+- **Ein Teil deiner Antworten (A2, B3, B5 ... F4)** las sich wie eine zweite Stimme, die mich in der Ich-Form anspricht («du bestätigst», «mein Formulierungsvorschlag»). Ich habe sie als deine Entscheidungen übernommen. Bei **B3** habe ich beides verbunden: deine Regel (Eltern stimmen beim Trainer zu) und die Pulssperre unter 18 aus der anderen Antwort. Wenn du die Pulssperre nicht willst, sag es, sie ist eine Zeile.
+- **Beim AVV-Zusatz** habe ich deinen Text übernommen, die Überschriften der Unterabsätze getrennt und einen Absatz **«Minderjährige Athleten»** ergänzt (Zusicherung des Trainers, Bestätigung in der App, Pulssperre). Der englische Text ist meine Übersetzung. Beides gehört zum Anwaltstermin (B1).
+
+### Kurztest mit zwei Konten (nach dem Einspielen der SQL-Datei)
+
+1. Konto T (Trainer) und Konto A (Athlet) anlegen, verbinden (Einladung wie bisher).
+2. T: Plan anlegen (eigener Plan, eine Einheit) → Block → «Plan an Athleten zuweisen», Athleten wählen, Bestätigung ankreuzen, senden. Erwartet: «Der Plan wurde gesendet».
+3. A: `/plan` öffnen. Erwartet: Angebot sichtbar, alle drei Freigaben aus; Puls erst nach «erledigt» wählbar. Annehmen (ohne aktiven Block).
+4. A: Einheit im Player erledigen. T: Zuweisungen → «Fortschritt». Erwartet: nur, was A freigegeben hat.
+5. A: Freigabe im Block ausschalten. T: Fortschritt neu laden. Erwartet: ausgeschaltete Werte weg.
+6. Wenn Push aktiv ist: A schaltet «Pläne von deinem Trainer» ein; T sendet ein zweites Angebot. Erwartet: eine allgemeine Meldung «Neuer Plan wartet» innerhalb von etwa zehn Minuten.
+7. Athlet mit Geburtsdatum unter 18: Erwartet: Hinweis auf die Zustimmung der Eltern, Puls nicht wählbar.
+
+### Muay Thai: Vorschlag zur Bestätigung (E1)
+
+Muay Thai fehlt im Katalog. Vorschlag: gleiche Pilotfamilie und gleiche Testliste wie Kickboxen (Kick-Test 60 s, Schlag-Test 60 s, Sprint 30 m, CMJ, Shuttle 5-10-5, Ermüdungsparcours), mit **diesen Anforderungshöhen** (0 bis 1, nur Voreinstellung der App, keine Literatur):
+
+| Fähigkeit | Kickboxen (vorhanden) | Muay Thai (Vorschlag) | Begründung des Vorschlags |
+|---|---|---|---|
+| Kraftausdauer | 1,0 | 1,0 | Runden mit hohem Schlag- und Tritt-Volumen |
+| Schnellkraft | 0,8 | 0,9 | zusätzlich Knie, Ellbogen, Clinch |
+| Ausdauer | 0,8 | 0,8 | fünf Runden wie Kickboxen |
+| Agilität | 0,7 | 0,6 | weniger Ringbewegung, mehr Clinch |
+| Relativkraft | 0,5 | 0,6 | Clinch und Kontrolle |
+
+Das sind meine Annahmen ohne Quelle; die Fachperson aus C1 sollte sie ansehen. Bitte antworte: **E1: so übernehmen** oder die Zahlen ändern.
+
+---
+
 Stand: 5. Oktober 2026. Alles, was ich nicht allein festlegen darf oder kann. Jede Frage hat den Hintergrund, die Möglichkeiten, was daraus folgt und meine Empfehlung. Zum Beantworten genügt ein Kreuz oder ein Satz; Fragen mit «Fachperson» oder «Anwalt» brauchen vermutlich erst deren Rat.
 
 Reihenfolge: **A** muss zuerst (sonst läuft die Zuweisung ins Leere), **B** und **C** gehören vor das Ende der Testphase, **D** bis **F** sind Erweiterungen.
