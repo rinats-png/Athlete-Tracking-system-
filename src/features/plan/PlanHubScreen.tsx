@@ -8,6 +8,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { planMode } from '@/domain/planMode'
+import { planAssignEnabled } from '@/lib/planAssign'
 import { PlanOffersPanel } from '@/features/plan/PlanOffersPanel'
 import { blockEndDay, blockWeek, openSessionsOn, sessionInWeek, weekChecks } from '@/domain/trainingBlock'
 import { daysTo } from '@/domain/weeklyPlan'
@@ -26,7 +27,7 @@ const chip = 'inline-flex min-h-6 items-center gap-1 rounded-pill border border-
 export function PlanHubScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { data, trainingBlocks } = useAppData()
+  const { data, trainingBlocks, role } = useAppData()
   const mode = planMode(import.meta.env?.VITE_TRAINING_PLAN)
   const today = new Date().toISOString().slice(0, 10)
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
@@ -55,6 +56,11 @@ export function PlanHubScreen() {
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('planHub.title')} intro={competition ? t('planHub.competition', { name: competition.name || t('planHub.competitionUnnamed') }) : undefined} />
 
       <PlanOffersPanel />
+      {role === 'coach' && planAssignEnabled() && (
+        <p className="mb-4">
+          <Link to="/plan/zuweisen" data-testid="hub-to-assign" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('assign.link')}</Link>
+        </p>
+      )}
 
       {!block || !view ? (
         <Panel className="mb-4" data-testid="hub-empty">

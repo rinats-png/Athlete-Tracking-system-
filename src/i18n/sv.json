@@ -26,7 +26,8 @@
       "athletePerformance": "Prestation",
       "athleteTest": "Test",
       "athleteMore": "Mer",
-      "athletePlan": "Plan"
+      "athletePlan": "Plan",
+      "coachPlan": "Plan"
     },
     "overview": "Översikt",
     "diagnostics": "Diagnostik",
@@ -42,7 +43,8 @@
     "athletePerformance": "Prestation",
     "athleteTest": "Test",
     "athleteMore": "Mer",
-    "athletePlan": "Plan"
+    "athletePlan": "Plan",
+    "coachPlan": "Plan"
   },
   "actions": {
     "startTest": "Starta test",

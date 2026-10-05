@@ -68,7 +68,7 @@ export const NAV_ITEMS = [
 ] as const
 
 /**
- * Die fünf Bereiche des Trainers (Produktdoktrin §6): Heute, Athleten, Test,
+ * Die Bereiche des Trainers (Produktdoktrin §6): Heute, Athleten, (Plan), Test,
  * Team, Mehr. Der Trainer arbeitet in Fragen, nicht in Themen: wer braucht
  * Aufmerksamkeit (Heute, Athleten), was wird gemessen (Test), wie steht die
  * Gruppe da (Team). Alles andere liegt unter Mehr.
@@ -76,6 +76,8 @@ export const NAV_ITEMS = [
 export const COACH_NAV_ITEMS = [
   { key: 'coachToday', icon: House, path: '/', alsoMatches: [] },
   { key: 'coachAthletes', icon: Users, path: '/trainer', alsoMatches: ['/cockpit'] },
+  // Plan (Trainingsbereich Etappe 11): Block, Kalender, Vorlagen, Zuweisen. Nur mit Trainingsbereich.
+  { key: 'coachPlan', icon: CalendarRange, path: '/plan', alsoMatches: ['/training'] },
   {
     key: 'coachTest',
     icon: ClipboardList,
@@ -100,8 +102,11 @@ export type NavRole = 'solo' | 'coach'
 /** Reihenfolge ohne Trainingsbereich: Test sitzt in der Mitte der fünf. */
 const WITHOUT_PLAN = ['athleteToday', 'athletePerformance', 'athleteTest', 'fuel', 'athleteMore']
 
+/** Trainer ohne Trainingsbereich: die fünf Bereiche der Doktrin, Test in der Mitte. */
+const COACH_WITHOUT_PLAN = ['coachToday', 'coachAthletes', 'coachTest', 'coachTeam', 'coachMore']
+
 export function navItemsFor(role: NavRole): readonly NavItem[] {
-  if (role === 'coach') return COACH_NAV_ITEMS
+  if (role === 'coach') return planEnabled() ? COACH_NAV_ITEMS : COACH_WITHOUT_PLAN.map((key) => COACH_NAV_ITEMS.find((i) => i.key === key)!)
   if (planEnabled()) return NAV_ITEMS
   return WITHOUT_PLAN.map((key) => NAV_ITEMS.find((i) => i.key === key)!)
 }

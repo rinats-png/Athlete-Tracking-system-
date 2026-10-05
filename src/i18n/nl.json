@@ -26,7 +26,8 @@
       "athletePerformance": "Prestatie",
       "athleteTest": "Test",
       "athleteMore": "Meer",
-      "athletePlan": "Plan"
+      "athletePlan": "Plan",
+      "coachPlan": "Plan"
     },
     "overview": "Overzicht",
     "diagnostics": "Diagnostiek",
@@ -42,7 +43,8 @@
     "athletePerformance": "Prestatie",
     "athleteTest": "Test",
     "athleteMore": "Meer",
-    "athletePlan": "Plan"
+    "athletePlan": "Plan",
+    "coachPlan": "Plan"
   },
   "actions": {
     "startTest": "Test starten",

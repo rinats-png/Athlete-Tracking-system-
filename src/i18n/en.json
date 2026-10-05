@@ -26,7 +26,8 @@
       "athletePerformance": "Performance",
       "athleteTest": "Test",
       "athleteMore": "More",
-      "athletePlan": "Plan"
+      "athletePlan": "Plan",
+      "coachPlan": "Plan"
     },
     "overview": "Overview",
     "diagnostics": "Diagnostics",
@@ -42,7 +43,8 @@
     "athletePerformance": "Performance",
     "athleteTest": "Test",
     "athleteMore": "More",
-    "athletePlan": "Plan"
+    "athletePlan": "Plan",
+    "coachPlan": "Plan"
   },
   "actions": {
     "startTest": "Start test",

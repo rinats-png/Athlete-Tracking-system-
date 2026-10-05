@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import { openDemo } from './helpers'
 import { bucketOf, coachToday, weekOf } from '../src/domain/coachToday'
 import { emptyData } from '../src/lib/store/schema'
-import { COACH_NAV_ITEMS, NAV_ITEMS, navKeyForPath } from '../src/features/dashboard/BottomNav'
+import { COACH_NAV_ITEMS, NAV_ITEMS, navItemsFor, navKeyForPath } from '../src/features/dashboard/BottomNav'
 import type { StoredAthlete, StoredTestDay } from '../src/lib/store/localStore'
 
 /** Etappe 1 des Umbaus nach der Produktdoktrin: Trainer-Navigation und Heute-Seite. */
@@ -52,9 +52,12 @@ test.describe('Fachlogik', () => {
 })
 
 test.describe('Navigation nach Rolle', () => {
-  test('Trainer und Athleten haben je fünf Bereiche', () => {
-    expect(COACH_NAV_ITEMS.map((i) => i.key)).toEqual(['coachToday', 'coachAthletes', 'coachTest', 'coachTeam', 'coachMore'])
-    expect(NAV_ITEMS).toHaveLength(6) // mit Trainingsbereich (Bau-Schalter); ohne ihn fünf
+  test('Trainer und Athleten haben je fünf Bereiche, mit Trainingsbereich (Bau-Schalter) je sechs', () => {
+    expect(COACH_NAV_ITEMS.map((i) => i.key)).toEqual(['coachToday', 'coachAthletes', 'coachPlan', 'coachTest', 'coachTeam', 'coachMore'])
+    expect(NAV_ITEMS).toHaveLength(6)
+    // Ohne Bau-Schalter (hier: kein Vite-Umfeld) bleibt es bei den fünf der Doktrin.
+    expect(navItemsFor('coach').map((i) => i.key)).toEqual(['coachToday', 'coachAthletes', 'coachTest', 'coachTeam', 'coachMore'])
+    expect(navKeyForPath('/plan/zuweisen', 'coach', COACH_NAV_ITEMS)).toBe('coachPlan')
   })
   test('die Pfade führen auf den richtigen Bereich', () => {
     expect(navKeyForPath('/', 'coach')).toBe('coachToday')
@@ -88,11 +91,11 @@ async function asCoach(page: import('@playwright/test').Page) {
   await expect(page.getByTestId('coach-today')).toBeVisible()
 }
 
-test('Bildschirm: Trainer sieht Heute mit Teamstatus, Priorität und fünf Bereichen', async ({ page }) => {
+test('Bildschirm: Trainer sieht Heute mit Teamstatus, Priorität und sechs Bereichen (mit Trainingsbereich)', async ({ page }) => {
   await asCoach(page)
   const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
-  await expect(nav.getByRole('button')).toHaveCount(5)
-  for (const label of ['Heute', 'Athleten', 'Test', 'Team', 'Mehr']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
+  await expect(nav.getByRole('button')).toHaveCount(6)
+  for (const label of ['Heute', 'Athleten', 'Plan', 'Test', 'Team', 'Mehr']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
   const nums = await Promise.all(['current', 'review', 'overdue'].map(async (k) => Number(await page.getByTestId(`status-${k}`).locator('.readout').innerText())))
   expect(nums.reduce((a, b) => a + b, 0)).toBe(5)
   await expect(page.getByTestId('today-priority')).toBeVisible()

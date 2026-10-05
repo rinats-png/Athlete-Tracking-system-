@@ -175,3 +175,7 @@ Entscheidungen des Inhabers: der Athlet nimmt an oder lehnt ab; der Trainer sieh
 - **Server.** Keine Schreibrichtlinie auf `plan_assignments` und `plan_assignment_results`: alles läuft über Funktionen (`offer_`, `withdraw_`, `respond_`, `set_…_share`, `report_plan_completion`), die Verknüpfung, Rolle und Zustand prüfen. Höchstens fünf offene Angebote je Trainer und Athlet, Nutzlast höchstens 200 KB. Aufbewahrung: Ergebnisse 180 Tage, abgelehnte und zurückgezogene Zuweisungen 30 Tage; die Kontolöschung nimmt beides mit.
 - **Offline.** Erledigen läuft ohne Netz. Gemeldet wird beim Abschluss und beim Öffnen des Blocks nach (idempotent, eine Zeile je Zuweisung, Einheit und Tag). Zugewiesene Einheiten tragen feste Kennungen `<Kurzform>-<Index>`.
 - **Noch offen:** Plan-Tab in der Trainer-Navigation, Trainer-Vorlagen mit Versionen, Hinweis an den Athleten per Push, Rechtstext.
+
+## Plan-Tab für Trainer (Trainingsbereich Etappe 11)
+
+Mit Trainingsbereich hat auch der Trainer sechs Tabs: Heute, Athleten, **Plan** (groß, links der Mitte), Test, Team, Mehr; ohne Bau-Schalter bleiben es die fünf der Doktrin. Der Plan-Tab öffnet den Hub (`/plan`) mit Block, Kalender, Vorlagen, eigenem Plan und, bei eingeschaltetem `VITE_PLAN_ASSIGN`, dem Weg zum Zuweisen. Die beiden Plan-Einträge unter «Mehr» entfallen, weil der Tab sie ersetzt.
