@@ -389,9 +389,14 @@ export function ReportScreen() {
                       {formatResultValue(row.current, locale, data.profile.unitSystem)}
                     </td>
                     <td className="num">
-                      {row.changePercent == null
-                        ? '—'
-                        : `${row.changePercent > 0 ? '+' : ''}${row.changePercent.toFixed(1)} % (${t('analysis.overDays', { count: row.daysBetween })})`}
+                      {row.changePercent == null ? (
+                        '—'
+                      ) : (
+                        <>
+                          {`${row.changePercent > 0 ? '+' : ''}${row.changePercent.toFixed(1)} %`}
+                          <span className="block text-[11px] text-ink-muted">({t('analysis.overDays', { count: row.daysBetween })})</span>
+                        </>
+                      )}
                     </td>
                     <td>
                       {trend.label === 'insufficient'
