@@ -35,6 +35,9 @@ export interface LegalDocument {
 
 const STAND_DE = 'Stand: 24. September 2026'
 const STAND_EN = 'Last updated: 24 September 2026'
+// Die Datenschutzerklärung ist neuer (Pläne vom Trainer, Testphase).
+const PRIVACY_STAND_DE = 'Stand: 5. Oktober 2026'
+const PRIVACY_STAND_EN = 'Last updated: 5 October 2026'
 
 // --- Datenschutz -------------------------------------------------------------
 
@@ -42,7 +45,7 @@ const privacyDe: LegalDocument = {
   title: 'Datenschutzerklärung',
   intro:
     'KYDON ist so gebaut, dass möglichst wenig über dich anfällt. Diese Erklärung beschreibt, was tatsächlich passiert — nicht, was rechtlich gerade noch zulässig wäre.',
-  updated: STAND_DE,
+  updated: PRIVACY_STAND_DE,
   sections: [
     {
       heading: 'Das Wichtigste zuerst',
@@ -83,6 +86,16 @@ const privacyDe: LegalDocument = {
         'Trägst du als Trainer Daten anderer Personen ein, bist du für diese Daten verantwortlich. Du brauchst dafür eine eigene Rechtsgrundlage — in der Regel die Einwilligung der betreffenden Person, bei Minderjährigen die der Erziehungsberechtigten.',
         'KYDON verarbeitet diese Daten in deinem Auftrag. Dafür gilt der Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO, den du in deinem Trainerkonto annimmst; er ist unter /auftragsverarbeitung einsehbar.',
         'KYDON speichert zu betreuten Athleten nur, was du einträgst. Es gibt für sie kein eigenes Konto, keine Einladung und keine E-Mail-Adresse.',
+      ],
+    },
+    {
+      heading: 'Pläne vom Trainer (freiwillig, Testphase)',
+      body: [
+        'Ein mit dir verbundener Trainer kann dir einen Trainingsplan schicken. Dafür speichern wir den Plan auf unseren Servern (Supabase): Name, Wochen und Tage, die Absicht der Einheiten, Notizen sowie Namen, Sätze, Wiederholungen und Lasttexte eigener Übungen. Dosierungen und Belege kommen nicht aus dem Plan, sondern baut deine App aus dem Regelregister.',
+        'Du entscheidest. Ein Plan wird erst zu deinem Block, wenn du ihn annimmst; ablehnen ist jederzeit möglich. Solange du nichts einschaltest, sieht der Trainer nichts von deinem Fortschritt. Du kannst drei Dinge getrennt freigeben: (1) dass du eine Einheit erledigt hast, (2) Dauer und Anstrengung (RPE) der Einheit, (3) Mittel und Höchstwert deines Pulses. (2) und (3) gibt es nur zusammen mit (1). Der Puls wird nur als Mittel- und Höchstwert der Einheit übertragen, nie als Verlauf.',
+        'Rechtsgrundlage für (1) und (2) ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Der Puls ist ein Gesundheitsdatum; dafür ist deine ausdrückliche Einwilligung die Rechtsgrundlage (Art. 9 Abs. 2 lit. a DSGVO). Du kannst jede Freigabe jederzeit im Block ändern. Ausschalten wirkt sofort: freigegebene Werte werden gelöscht beziehungsweise für den Trainer unsichtbar, und beim Ausschalten von (1) werden alle Zeilen gelöscht.',
+        'Der Trainer sieht den Fortschritt nur bei aktiver Verknüpfung mit dir und nur so weit, wie du ihn freigegeben hast; das setzen Zugriffsregeln in der Datenbank durch, nicht nur die App. Aufbewahrung: gemeldete Einheiten höchstens 180 Tage, abgelehnte oder zurückgezogene Pläne 30 Tage, danach löschen wir sie automatisch. Beim Löschen deines Kontos oder des Trainerkontos werden die zugehörigen Pläne und Meldungen entfernt.',
+        'Diese Funktion ist in der Testphase. Der Plan ist ein Vorschlag aus hinterlegten Regeln und Vorlagen, die noch nicht von einer fachkundigen Person geprüft sind; KYDON ersetzt keine ärztliche oder trainerische Beratung.',
       ],
     },
     {
@@ -167,7 +180,7 @@ const privacyEn: LegalDocument = {
   title: 'Privacy policy',
   intro:
     'KYDON is built so that as little as possible about you is processed. This policy describes what actually happens — not what would still be legally permissible.',
-  updated: STAND_EN,
+  updated: PRIVACY_STAND_EN,
   sections: [
     {
       heading: 'The essentials first',
@@ -208,6 +221,16 @@ const privacyEn: LegalDocument = {
         'If you enter other people’s data as a coach, you are the controller for that data. You need your own legal basis — usually the consent of the person concerned, or of a guardian for minors.',
         'KYDON processes this data on your behalf. The data processing agreement under Art. 28 GDPR, which you accept in your coach account, applies; it is available at /auftragsverarbeitung.',
         'KYDON stores only what you enter about coached athletes. They have no account of their own, no invitation and no email address.',
+      ],
+    },
+    {
+      heading: 'Plans from your coach (optional, test phase)',
+      body: [
+        'A coach connected to you can send you a training plan. For this we store the plan on our servers (Supabase): name, weeks and days, the intent of the sessions, notes, and names, sets, reps and load texts of own exercises. Dosage and evidence do not come from the plan; your app builds them from the rule registry.',
+        'You decide. A plan only becomes your block when you accept it; you can decline at any time. As long as you switch nothing on, the coach sees nothing of your progress. You can release three things separately: (1) that you completed a session, (2) duration and effort (RPE) of the session, (3) average and maximum of your heart rate. (2) and (3) only exist together with (1). Heart rate is transmitted only as the average and maximum of the session, never as a time series.',
+        'The legal basis for (1) and (2) is your consent (Art. 6(1)(a) GDPR). Heart rate is health data; the legal basis for it is your explicit consent (Art. 9(2)(a) GDPR). You can change each release at any time in the block. Switching off takes effect immediately: released values are deleted or hidden from the coach, and switching off (1) deletes all rows.',
+        'The coach sees progress only while the connection with you is active and only as far as you have released it; this is enforced by database access rules, not only by the app. Retention: reported sessions at most 180 days, declined or withdrawn plans 30 days, after which we delete them automatically. Deleting your account or the coach’s account removes the related plans and reports.',
+        'This feature is in its test phase. The plan is a suggestion from stored rules and templates that have not yet been reviewed by a qualified person; KYDON does not replace medical or coaching advice.',
       ],
     },
     { heading: 'Recipients', body: ['We use two processors. Data processing agreements under Art. 28 GDPR are in place with both.'] },

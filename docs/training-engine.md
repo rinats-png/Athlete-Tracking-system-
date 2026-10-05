@@ -166,7 +166,7 @@ Export (`Plan exportieren`, im Block und im eigenen Plan) und Import (`/plan/eig
 
 ## Pläne vom Trainer zuweisen (Trainingsbereich Etappe 10)
 
-**Nicht ausgerollt:** Migration `20261005100000_plan_assignments.sql` und Bau-Schalter `VITE_PLAN_ASSIGN=on` (nur Entwicklung und Prüfläufe). Live erst nach Freigabe durch den Inhaber, mit angepasstem Datenschutztext (Puls ist ein Gesundheitsdatum, Art. 9) und ausgerollter Migration.
+**Testphase, Auslieferung eingeschaltet (5. Oktober 2026, Entscheidung des Inhabers).** `netlify.toml` setzt `VITE_TRAINING_PLAN=preview` und `VITE_PLAN_ASSIGN=on`; die Datenschutzerklärung (de, en) hat den Abschnitt «Pläne vom Trainer (freiwillig, Testphase)». **Voraussetzung auf dem Server:** die Migration `supabase/migrations/20261005100000_plan_assignments.sql` muss in Supabase ausgeführt sein (SQL-Editor oder `supabase db push`). Ohne sie meldet das Senden «hat nicht geklappt» und der Athlet sieht keine Angebote; sonst bricht nichts. Die Migration prüft `npm run security` statisch, gegen eine echte Datenbank lief sie noch nicht. Zurücknehmen: die zwei Zeilen in `netlify.toml` entfernen. Der Rechtstext gehört vor dem Ende der Testphase anwaltlich geprüft.
 
 Entscheidungen des Inhabers: der Athlet nimmt an oder lehnt ab; der Trainer sieht Erledigt, Dauer und RPE und Puls nur nach ausdrücklicher, getrennter Freigabe des Athleten.
 

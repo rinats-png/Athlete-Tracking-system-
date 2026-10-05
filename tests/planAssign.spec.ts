@@ -231,3 +231,26 @@ test.describe('Trainer: Plan-Tab', () => {
     await expect(page.getByTestId('hub-to-assign')).toBeVisible()
   })
 })
+
+test.describe('Zuweisung: Datenschutzerklärung und Auslieferung', () => {
+  test('beide Sprachen haben den Abschnitt mit Einwilligung, Puls als Gesundheitsdatum, Widerruf, Aufbewahrung und Testphase', async () => {
+    const { privacyDocument } = await import('../src/features/legal/texts')
+    for (const [locale, heading, markers] of [
+      ['de', 'Pläne vom Trainer', ['Art. 9 Abs. 2 lit. a', 'Ausschalten wirkt sofort', '180 Tage', '30 Tage', 'Testphase']],
+      ['en', 'Plans from your coach', ['Art. 9(2)(a)', 'Switching off takes effect immediately', '180 days', '30 days', 'test phase']],
+    ] as const) {
+      const doc = privacyDocument(locale)
+      const section = doc.sections.find((s) => s.heading.startsWith(heading))
+      expect(section, locale).toBeTruthy()
+      const text = section!.body.join(' ')
+      for (const m of markers) expect(text, `${locale}: ${m}`).toContain(m)
+      expect(doc.updated).toMatch(/2026/)
+    }
+  })
+  test('die Auslieferung schaltet Zuweisung und Vorschau ein, und die Migration liegt im Repo', () => {
+    const toml = readFileSync('netlify.toml', 'utf8')
+    expect(toml).toMatch(/VITE_PLAN_ASSIGN\s*=\s*"on"/)
+    expect(toml).toMatch(/VITE_TRAINING_PLAN\s*=\s*"preview"/)
+    expect(SQL.length).toBeGreaterThan(1000)
+  })
+})

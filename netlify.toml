@@ -15,6 +15,12 @@
   # der Datenbank, nicht über Geheimhaltung des Clients.
   VITE_SUPABASE_URL = "https://bsbionvnsvqghaqijmpl.supabase.co"
   VITE_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_5HjIDmeWLD0lr1Gy9r4E8A_q-YHpSvE"
+  # Testphase (Entscheidung des Inhabers, 5. Oktober 2026): Trainingsbereich in der
+  # Vorschau (Regeln und Vorlagen sind ungeprüft und als solche gekennzeichnet) und
+  # Pläne vom Trainer. Zurücknehmen: beide Zeilen entfernen oder auf "off" setzen.
+  # Die Zuweisung braucht die Migration 20261005100000_plan_assignments.sql in Supabase.
+  VITE_TRAINING_PLAN = "preview"
+  VITE_PLAN_ASSIGN = "on"
 
 # Single-Page-App: jede Route muss auf index.html zeigen, sonst liefert ein
 # Direktaufruf oder ein Reload eine 404.
