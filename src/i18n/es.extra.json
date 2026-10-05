@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Indica un nombre.",
       "no_sessions": "El plan no tiene ninguna sesión.",
-      "too_many": "No se pueden tener más de 20 plantillas."
+      "too_many": "No se pueden tener más de 20 plantillas.",
+      "too_big": "Las plantillas ocuparían demasiado almacenamiento local. Elimina una plantilla o versión."
     }
   },
   "fuelPlan": {

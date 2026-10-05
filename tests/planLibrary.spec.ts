@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { openDemo } from './helpers'
-import { deleteTemplate, deleteVersion, latestVersion, MAX_TEMPLATES, MAX_VERSIONS, saveAsTemplate } from '../src/domain/planLibrary'
+import { deleteTemplate, deleteVersion, latestVersion, MAX_TEMPLATES, MAX_TOTAL_CHARS, MAX_VERSIONS, saveAsTemplate } from '../src/domain/planLibrary'
 import { importPlan } from '../src/domain/planFile'
 import { addOwnSession, createOwnBlock } from '../src/domain/trainingBlock'
 import { CURRENT_SCHEMA_VERSION, emptyData, parseStoredData } from '../src/lib/store/schema'
@@ -63,6 +63,12 @@ test.describe('Planvorlagen: Fachlogik', () => {
     expect(afterOne[0].versions.map((v) => v.version)).toEqual([2])
     expect(deleteVersion(afterOne, tpl.id, 2)).toEqual([])
     expect(deleteTemplate(b.list, tpl.id)).toEqual([])
+  })
+  test('Speicherschutz: eine zu große Version und eine zu große Gesamtmenge werden abgewiesen', () => {
+    // Die Gesamtmenge: viele Vorlagen mit je großem Inhalt.
+    const filler = Array.from({ length: 12 }, (_, i) => ({ id: `f${i}`, name: `F${i}`, weeks: 4, versions: [{ version: 1, savedAt: NOW, content: 'x'.repeat(MAX_TOTAL_CHARS / 10) }] }))
+    expect(saveAsTemplate(filler, block(1), 'Neu', id, NOW)).toEqual({ ok: false, error: 'too_big' })
+    expect(saveAsTemplate(filler.slice(0, 3), block(1), 'Neu', id, NOW).ok).toBe(true)
   })
   test('Schema 39: ältere Bestände bekommen leere Vorlagen', () => {
     const old = emptyData() as any

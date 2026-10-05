@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Geef een naam op.",
       "no_sessions": "Het plan heeft geen training.",
-      "too_many": "Meer dan 20 sjablonen is niet mogelijk."
+      "too_many": "Meer dan 20 sjablonen is niet mogelijk.",
+      "too_big": "De sjablonen zouden te veel lokale opslag gebruiken. Verwijder een sjabloon of versie."
     }
   },
   "fuelPlan": {

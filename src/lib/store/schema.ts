@@ -746,7 +746,8 @@ const customExerciseSchema = z.object({
 const planTemplateVersionSchema = z.object({
   version: z.number().int().min(1).max(9999),
   savedAt: isoDate,
-  content: z.string().min(2).max(200_000),
+  /** Ein Plan als Datei ist klein (60 Einheiten etwa 15 KB); die Grenze schützt den lokalen Speicher. */
+  content: z.string().min(2).max(60_000),
 })
 const planTemplateSchema = z.object({
   id: z.string().min(1).max(80),

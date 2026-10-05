@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Ange ett namn.",
       "no_sessions": "Planen har inget pass.",
-      "too_many": "Fler än 20 mallar går inte."
+      "too_many": "Fler än 20 mallar går inte.",
+      "too_big": "Mallarna skulle ta för mycket lokalt lagringsutrymme. Ta bort en mall eller version."
     }
   },
   "fuelPlan": {

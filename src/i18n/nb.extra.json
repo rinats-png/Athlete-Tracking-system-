@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Oppgi et navn.",
       "no_sessions": "Planen har ingen økt.",
-      "too_many": "Mer enn 20 maler er ikke mulig."
+      "too_many": "Mer enn 20 maler er ikke mulig.",
+      "too_big": "Malene ville tatt for mye lokal lagring. Slett en mal eller versjon."
     }
   },
   "fuelPlan": {

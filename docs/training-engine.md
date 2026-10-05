@@ -196,3 +196,7 @@ Auf Fuel steht über der Verpflegung eine Karte «Heute geplant» mit den heute 
 ## Übungsbibliothek (Trainingsbereich Etappe 15)
 
 `/plan/uebungen`: der Katalog (`src/data/exercises.ts`, mit Bild wo vorhanden) mit Suche und Filter nach Muskelgruppe, dazu **eigene Übungen** (Name, Muskelgruppe; höchstens 50, doppelte gegen Katalog und eigene in beiden Sprachen abgewiesen). Eigene Übungen tragen keine Anleitung und keine Wirkungsbehauptung. In der Übungssuche des eigenen Plans stehen eigene vor dem Katalog. Schema 40 (`customExercises` je Athlet), lokal. Domäne: `src/domain/exerciseLibrary.ts`.
+
+## Speicherschutz der eigenen Vorlagen (Trainingsbereich Etappe 16)
+
+Eigene Planvorlagen liegen im lokalen Speicher des Browsers, der begrenzt ist. Eine Version darf höchstens 60 000 Zeichen haben (ein Plan mit 60 Einheiten braucht etwa 15 000), alle Vorlagen zusammen höchstens 600 000; darüber meldet das Speichern «zu groß» und fordert zum Löschen einer Vorlage oder Version auf, statt den Speicher zu füllen. Zuvor erlaubte das Schema bis zu 200 000 Zeichen je Version bei 20 Vorlagen mit je fünf Versionen. Der Import einer Datei bleibt bei 200 KB (er legt nur einen Block an).

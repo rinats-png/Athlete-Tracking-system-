@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Indique un nom.",
       "no_sessions": "Le plan n’a aucune séance.",
-      "too_many": "Plus de 20 modèles n’est pas possible."
+      "too_many": "Plus de 20 modèles n’est pas possible.",
+      "too_big": "Les modèles occuperaient trop de stockage local. Supprime un modèle ou une version."
     }
   },
   "fuelPlan": {

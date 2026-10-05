@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Angiv et navn.",
       "no_sessions": "Planen har ingen session.",
-      "too_many": "Mere end 20 skabeloner er ikke muligt."
+      "too_many": "Mere end 20 skabeloner er ikke muligt.",
+      "too_big": "Skabelonerne ville fylde for meget lokal lagring. Slet en skabelon eller version."
     }
   },
   "fuelPlan": {

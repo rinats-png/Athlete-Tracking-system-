@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Bitte einen Namen angeben.",
       "no_sessions": "Der Plan hat keine Einheit.",
-      "too_many": "Mehr als 20 Vorlagen gehen nicht."
+      "too_many": "Mehr als 20 Vorlagen gehen nicht.",
+      "too_big": "Die Vorlagen würden den lokalen Speicher zu stark belasten. Lösche eine Vorlage oder Version."
     }
   },
   "fuelPlan": {

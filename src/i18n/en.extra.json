@@ -3514,7 +3514,8 @@
     "err": {
       "no_name": "Please give a name.",
       "no_sessions": "The plan has no session.",
-      "too_many": "More than 20 templates are not possible."
+      "too_many": "More than 20 templates are not possible.",
+      "too_big": "The templates would use too much local storage. Delete a template or version."
     }
   },
   "fuelPlan": {
