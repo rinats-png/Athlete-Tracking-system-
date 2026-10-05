@@ -3367,5 +3367,43 @@
       "load": "Belastning (tekst)",
       "add": "Legg til øvelse"
     }
+  },
+  "gate": {
+    "title": "Klar for et planforslag?",
+    "intro": "Den beregnede planen for {{discipline}} frigis først når de obligatoriske egenskapene er målt godt nok. Det er ikke antall tester som teller, men hva idretten din krever.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Forklare",
+        "body": "Hva en test betyr og hvorfor en økt ble valgt. Alltid tilgjengelig."
+      },
+      "ANALYZE": {
+        "name": "Analysere",
+        "body": "Styrker, solide områder og utviklingspotensial. Ved god datapålitelighet og halvparten av de obligatoriske områdene."
+      },
+      "PRESCRIBE": {
+        "name": "Forskrive",
+        "body": "En beregnet plan. Først når alle obligatoriske områder er målt tilstrekkelig og nylig."
+      }
+    },
+    "reached": "nådd",
+    "locked": "fortsatt låst",
+    "profile": "Prestasjonsprofil",
+    "coverage": "{{ok}} av {{total}} obligatoriske områder målt tilstrekkelig",
+    "reliability": "Samlet datapålitelighet: {{level}}",
+    "required": "Obligatorisk",
+    "recommended": "Anbefalt",
+    "status": {
+      "ok": "{{n}} målinger, aktuelle",
+      "thin": "{{n}} måling, minst to trengs",
+      "stale": "{{n}} målinger, siste for {{days}} dager siden (grense {{max}})",
+      "missing": "ikke målt"
+    },
+    "note": "Tilstrekkelig betyr: minst to målinger, den siste ikke eldre enn {{max}} dager. Obligatorisk er det idretten din krever sterkt. Dette er appens valg, ikke litteraturverdier.",
+    "open": "Alle obligatoriske områder er målt tilstrekkelig. Planen kan beregnes.",
+    "compute": "Beregn plan",
+    "closed": "For en beregnet plan mangler fortsatt:",
+    "reliabilityMissing": "Den samlede datapåliteligheten er fortsatt for lav.",
+    "planTests": "Planlegg tester",
+    "preview": "Utviklerforhåndsvisning: beregn likevel"
   }
 }

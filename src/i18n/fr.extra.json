@@ -3367,5 +3367,43 @@
       "load": "Charge (texte)",
       "add": "Ajouter l’exercice"
     }
+  },
+  "gate": {
+    "title": "Prêt pour une proposition de plan ?",
+    "intro": "Le plan calculé pour {{discipline}} n’est débloqué que lorsque les capacités obligatoires sont assez mesurées. Ce n’est pas le nombre de tests qui compte, mais ce que ton sport exige.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Expliquer",
+        "body": "Ce que signifie un test et pourquoi une séance a été choisie. Toujours disponible."
+      },
+      "ANALYZE": {
+        "name": "Analyser",
+        "body": "Forces, zones solides et potentiel de progression. Avec une bonne fiabilité des données et la moitié des zones obligatoires."
+      },
+      "PRESCRIBE": {
+        "name": "Prescrire",
+        "body": "Un plan calculé. Seulement quand toutes les zones obligatoires sont assez et récemment mesurées."
+      }
+    },
+    "reached": "atteint",
+    "locked": "encore verrouillé",
+    "profile": "Profil de performance",
+    "coverage": "{{ok}} zones obligatoires sur {{total}} suffisamment mesurées",
+    "reliability": "Fiabilité globale des données : {{level}}",
+    "required": "Obligatoire",
+    "recommended": "Recommandé",
+    "status": {
+      "ok": "{{n}} mesures, récentes",
+      "thin": "{{n}} mesure, au moins deux nécessaires",
+      "stale": "{{n}} mesures, dernière il y a {{days}} jours (limite {{max}})",
+      "missing": "non mesuré"
+    },
+    "note": "Suffisant signifie : au moins deux mesures, la dernière pas plus ancienne que {{max}} jours. Obligatoire = ce que ton sport exige fortement. Ce sont des choix de l’app, pas des valeurs de la littérature.",
+    "open": "Toutes les zones obligatoires sont suffisamment mesurées. Le plan peut être calculé.",
+    "compute": "Calculer le plan",
+    "closed": "Pour un plan calculé, il manque encore :",
+    "reliabilityMissing": "La fiabilité globale des données est encore trop basse.",
+    "planTests": "Planifier des tests",
+    "preview": "Aperçu développeur : calculer quand même"
   }
 }

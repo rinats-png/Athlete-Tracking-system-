@@ -3367,5 +3367,43 @@
       "load": "Load (text)",
       "add": "Add exercise"
     }
+  },
+  "gate": {
+    "title": "Ready for a plan proposal?",
+    "intro": "The calculated plan for {{discipline}} is only released once the required abilities are measured well enough. It is not the number of tests that counts, but what your sport demands.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Explain",
+        "body": "What a test means and why a session was chosen. Always available."
+      },
+      "ANALYZE": {
+        "name": "Analyze",
+        "body": "Strengths, solid areas and room to develop. With good data reliability and half of the required areas."
+      },
+      "PRESCRIBE": {
+        "name": "Prescribe",
+        "body": "A calculated plan. Only when all required areas are measured sufficiently and recently."
+      }
+    },
+    "reached": "reached",
+    "locked": "still locked",
+    "profile": "Performance profile",
+    "coverage": "{{ok}} of {{total}} required areas measured sufficiently",
+    "reliability": "Overall data reliability: {{level}}",
+    "required": "Required",
+    "recommended": "Recommended",
+    "status": {
+      "ok": "{{n}} measurements, current",
+      "thin": "{{n}} measurement, at least two needed",
+      "stale": "{{n}} measurements, last {{days}} days ago (limit {{max}})",
+      "missing": "not measured"
+    },
+    "note": "Sufficient means: at least two measurements, the latest no older than {{max}} days. Required is what your sport demands strongly. These are the app’s rules, not literature values.",
+    "open": "All required areas are measured sufficiently. The plan can be calculated.",
+    "compute": "Calculate plan",
+    "closed": "A calculated plan still lacks:",
+    "reliabilityMissing": "Overall data reliability is still too low.",
+    "planTests": "Plan tests",
+    "preview": "Developer preview: calculate anyway"
   }
 }

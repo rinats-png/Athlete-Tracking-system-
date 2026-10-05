@@ -3367,5 +3367,43 @@
       "load": "Gewicht (tekst)",
       "add": "Oefening toevoegen"
     }
+  },
+  "gate": {
+    "title": "Klaar voor een planvoorstel?",
+    "intro": "Het berekende plan voor {{discipline}} wordt pas vrijgegeven als de verplichte eigenschappen voldoende gemeten zijn. Niet het aantal tests telt, maar wat jouw sport vraagt.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Uitleggen",
+        "body": "Wat een test betekent en waarom een training gekozen is. Altijd beschikbaar."
+      },
+      "ANALYZE": {
+        "name": "Analyseren",
+        "body": "Sterke punten, solide gebieden en ontwikkelruimte. Bij goede betrouwbaarheid van de gegevens en de helft van de verplichte gebieden."
+      },
+      "PRESCRIBE": {
+        "name": "Voorschrijven",
+        "body": "Een berekend plan. Pas als alle verplichte gebieden voldoende en recent gemeten zijn."
+      }
+    },
+    "reached": "bereikt",
+    "locked": "nog vergrendeld",
+    "profile": "Prestatieprofiel",
+    "coverage": "{{ok}} van {{total}} verplichte gebieden voldoende gemeten",
+    "reliability": "Algemene betrouwbaarheid van de gegevens: {{level}}",
+    "required": "Verplicht",
+    "recommended": "Aanbevolen",
+    "status": {
+      "ok": "{{n}} metingen, actueel",
+      "thin": "{{n}} meting, minstens twee nodig",
+      "stale": "{{n}} metingen, laatste {{days}} dagen geleden (grens {{max}})",
+      "missing": "niet gemeten"
+    },
+    "note": "Voldoende betekent: minstens twee metingen, de laatste niet ouder dan {{max}} dagen. Verplicht is wat jouw sport sterk vraagt. Dit zijn keuzes van de app, geen literatuurwaarden.",
+    "open": "Alle verplichte gebieden zijn voldoende gemeten. Het plan kan worden berekend.",
+    "compute": "Plan berekenen",
+    "closed": "Voor een berekend plan ontbreekt nog:",
+    "reliabilityMissing": "De algemene betrouwbaarheid van de gegevens is nog te laag.",
+    "planTests": "Tests plannen",
+    "preview": "Ontwikkelaarsvoorbeeld: toch berekenen"
   }
 }

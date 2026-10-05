@@ -3367,5 +3367,43 @@
       "load": "Belastning (tekst)",
       "add": "Tilføj øvelse"
     }
+  },
+  "gate": {
+    "title": "Klar til et planforslag?",
+    "intro": "Den beregnede plan for {{discipline}} frigives først, når de obligatoriske evner er målt tilstrækkeligt. Det er ikke antallet af tests, der tæller, men hvad din sport kræver.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Forklare",
+        "body": "Hvad en test betyder, og hvorfor en session blev valgt. Altid tilgængelig."
+      },
+      "ANALYZE": {
+        "name": "Analysere",
+        "body": "Styrker, solide områder og udviklingspotentiale. Ved god datapålidelighed og halvdelen af de obligatoriske områder."
+      },
+      "PRESCRIBE": {
+        "name": "Ordinere",
+        "body": "En beregnet plan. Først når alle obligatoriske områder er målt tilstrækkeligt og for nylig."
+      }
+    },
+    "reached": "nået",
+    "locked": "stadig låst",
+    "profile": "Præstationsprofil",
+    "coverage": "{{ok}} af {{total}} obligatoriske områder målt tilstrækkeligt",
+    "reliability": "Samlet datapålidelighed: {{level}}",
+    "required": "Obligatorisk",
+    "recommended": "Anbefalet",
+    "status": {
+      "ok": "{{n}} målinger, aktuelle",
+      "thin": "{{n}} måling, mindst to kræves",
+      "stale": "{{n}} målinger, seneste for {{days}} dage siden (grænse {{max}})",
+      "missing": "ikke målt"
+    },
+    "note": "Tilstrækkeligt betyder: mindst to målinger, den seneste ikke ældre end {{max}} dage. Obligatorisk er det, din sport kræver stærkt. Det er appens valg, ikke litteraturværdier.",
+    "open": "Alle obligatoriske områder er målt tilstrækkeligt. Planen kan beregnes.",
+    "compute": "Beregn plan",
+    "closed": "For en beregnet plan mangler stadig:",
+    "reliabilityMissing": "Den samlede datapålidelighed er stadig for lav.",
+    "planTests": "Planlæg tests",
+    "preview": "Udviklerforhåndsvisning: beregn alligevel"
   }
 }

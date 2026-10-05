@@ -3367,5 +3367,43 @@
       "load": "Belastning (text)",
       "add": "Lägg till övning"
     }
+  },
+  "gate": {
+    "title": "Redo för ett planförslag?",
+    "intro": "Den beräknade planen för {{discipline}} släpps först när de obligatoriska förmågorna är tillräckligt mätta. Det är inte antalet tester som avgör, utan vad din idrott kräver.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Förklara",
+        "body": "Vad ett test betyder och varför ett pass valdes. Alltid tillgängligt."
+      },
+      "ANALYZE": {
+        "name": "Analysera",
+        "body": "Styrkor, stabila områden och utvecklingspotential. Vid god datatillförlitlighet och hälften av de obligatoriska områdena."
+      },
+      "PRESCRIBE": {
+        "name": "Ordinera",
+        "body": "En beräknad plan. Först när alla obligatoriska områden är tillräckligt och nyligen mätta."
+      }
+    },
+    "reached": "uppnått",
+    "locked": "ännu låst",
+    "profile": "Prestationsprofil",
+    "coverage": "{{ok}} av {{total}} obligatoriska områden tillräckligt mätta",
+    "reliability": "Total datatillförlitlighet: {{level}}",
+    "required": "Obligatoriskt",
+    "recommended": "Rekommenderat",
+    "status": {
+      "ok": "{{n}} mätningar, aktuella",
+      "thin": "{{n}} mätning, minst två behövs",
+      "stale": "{{n}} mätningar, senaste för {{days}} dagar sedan (gräns {{max}})",
+      "missing": "inte mätt"
+    },
+    "note": "Tillräckligt betyder: minst två mätningar, den senaste inte äldre än {{max}} dagar. Obligatoriskt är det din idrott kräver starkt. Det är appens val, inte litteraturvärden.",
+    "open": "Alla obligatoriska områden är tillräckligt mätta. Planen kan beräknas.",
+    "compute": "Beräkna plan",
+    "closed": "För en beräknad plan saknas fortfarande:",
+    "reliabilityMissing": "Den totala datatillförlitligheten är fortfarande för låg.",
+    "planTests": "Planera tester",
+    "preview": "Utvecklarförhandsvisning: beräkna ändå"
   }
 }

@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils'
 const WAYS: { key: string; image: string; to: string | null }[] = [
   { key: 'template', image: 'rowing_erg', to: '/plan/vorlagen' },
   { key: 'own', image: 'back_squat', to: '/plan/eigen' },
-  { key: 'computed', image: 'treadmill', to: '/plan/neu' },
+  { key: 'computed', image: 'treadmill', to: '/plan/pruefung' },
 ]
 
 export function PlanWayScreen() {

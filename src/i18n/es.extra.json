@@ -3367,5 +3367,43 @@
       "load": "Carga (texto)",
       "add": "Añadir ejercicio"
     }
+  },
+  "gate": {
+    "title": "¿Listo para una propuesta de plan?",
+    "intro": "El plan calculado para {{discipline}} solo se libera cuando las capacidades obligatorias están suficientemente medidas. No cuenta el número de tests, sino lo que exige tu deporte.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Explicar",
+        "body": "Qué significa un test y por qué se eligió una sesión. Siempre disponible."
+      },
+      "ANALYZE": {
+        "name": "Analizar",
+        "body": "Fortalezas, áreas sólidas y margen de mejora. Con buena fiabilidad de datos y la mitad de las áreas obligatorias."
+      },
+      "PRESCRIBE": {
+        "name": "Prescribir",
+        "body": "Un plan calculado. Solo cuando todas las áreas obligatorias están medidas lo suficiente y recientemente."
+      }
+    },
+    "reached": "alcanzado",
+    "locked": "aún bloqueado",
+    "profile": "Perfil de rendimiento",
+    "coverage": "{{ok}} de {{total}} áreas obligatorias medidas lo suficiente",
+    "reliability": "Fiabilidad global de los datos: {{level}}",
+    "required": "Obligatorio",
+    "recommended": "Recomendado",
+    "status": {
+      "ok": "{{n}} mediciones, actuales",
+      "thin": "{{n}} medición, hacen falta al menos dos",
+      "stale": "{{n}} mediciones, la última hace {{days}} días (límite {{max}})",
+      "missing": "sin medir"
+    },
+    "note": "Suficiente significa: al menos dos mediciones, la última no más antigua que {{max}} días. Obligatorio es lo que tu deporte exige con fuerza. Son decisiones de la app, no valores de la literatura.",
+    "open": "Todas las áreas obligatorias están medidas lo suficiente. Se puede calcular el plan.",
+    "compute": "Calcular plan",
+    "closed": "Para un plan calculado aún falta:",
+    "reliabilityMissing": "La fiabilidad global de los datos sigue siendo baja.",
+    "planTests": "Planificar tests",
+    "preview": "Vista previa de desarrollo: calcular igualmente"
   }
 }

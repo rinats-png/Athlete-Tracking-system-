@@ -150,6 +150,7 @@ const router = createBrowserRouter([
       { path: 'plan/vorlagen/:id/anpassen', element: screen(() => import('@/features/plan/PlanTemplatesScreen'), 'PlanTemplateFitScreen') },
       { path: 'plan/kalender', element: screen(() => import('@/features/plan/PlanCalendarScreen'), 'PlanCalendarScreen') },
       { path: 'plan/eigen', element: screen(() => import('@/features/plan/OwnPlanScreen'), 'OwnPlanScreen') },
+      { path: 'plan/pruefung', element: screen(() => import('@/features/plan/PlanGateScreen'), 'PlanGateScreen') },
       { path: 'plan/neu', element: screen(() => import('@/features/plan/PlanPreviewScreen'), 'PlanPreviewScreen') },
       { path: 'plan/block', element: screen(() => import('@/features/plan/BlockScreen'), 'BlockScreen') },
       { path: 'plan/heute', element: screen(() => import('@/features/plan/SessionPlayerScreen'), 'SessionPlayerScreen') },

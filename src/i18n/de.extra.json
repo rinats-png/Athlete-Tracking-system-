@@ -3367,5 +3367,43 @@
       "load": "Last (Text)",
       "add": "Übung hinzufügen"
     }
+  },
+  "gate": {
+    "title": "Bereit für den Planvorschlag?",
+    "intro": "Der berechnete Plan für {{discipline}} wird nur freigegeben, wenn die Pflicht-Fähigkeiten ausreichend gemessen sind. Nicht die Zahl der Tests entscheidet, sondern was deine Sportart verlangt.",
+    "level": {
+      "EXPLAIN": {
+        "name": "Erklären",
+        "body": "Was ein Test bedeutet und warum eine Einheit gewählt wurde. Immer verfügbar."
+      },
+      "ANALYZE": {
+        "name": "Analysieren",
+        "body": "Stärken, solide Bereiche und Entwicklungspotenzial. Ab guter Datenzuverlässigkeit und der Hälfte der Pflichtbereiche."
+      },
+      "PRESCRIBE": {
+        "name": "Verordnen",
+        "body": "Ein berechneter Plan. Erst wenn alle Pflichtbereiche ausreichend und aktuell gemessen sind."
+      }
+    },
+    "reached": "erreicht",
+    "locked": "noch gesperrt",
+    "profile": "Leistungsprofil",
+    "coverage": "{{ok}} von {{total}} Pflichtbereichen ausreichend gemessen",
+    "reliability": "Datenzuverlässigkeit insgesamt: {{level}}",
+    "required": "Pflicht",
+    "recommended": "Empfohlen",
+    "status": {
+      "ok": "{{n}} Messungen, aktuell",
+      "thin": "{{n}} Messung, mindestens zwei nötig",
+      "stale": "{{n}} Messungen, letzte vor {{days}} Tagen (Grenze {{max}})",
+      "missing": "nicht gemessen"
+    },
+    "note": "Ausreichend heißt: mindestens zwei Messungen, die letzte nicht älter als {{max}} Tage. Pflicht ist, was deine Sportart stark verlangt. Das sind Festlegungen der App, keine Literaturwerte.",
+    "open": "Alle Pflichtbereiche sind ausreichend gemessen. Der Plan kann berechnet werden.",
+    "compute": "Plan berechnen",
+    "closed": "Für einen berechneten Plan fehlt noch:",
+    "reliabilityMissing": "Die Datenzuverlässigkeit insgesamt ist noch zu niedrig.",
+    "planTests": "Tests planen",
+    "preview": "Entwicklervorschau: trotzdem rechnen"
   }
 }

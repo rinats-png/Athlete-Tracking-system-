@@ -60,6 +60,8 @@ test.describe('Bildschirm', () => {
     await expect(page.getByTestId('way-template')).toHaveAttribute('href', '/plan/vorlagen')
     await expect(page.getByTestId('way-own')).toHaveAttribute('href', '/plan/eigen')
     await page.getByTestId('way-computed').click()
+    await expect(page).toHaveURL(/\/plan\/pruefung/)
+    await page.getByTestId('gate-preview').click()
     await expect(page).toHaveURL(/\/plan\/neu/)
     await expect(page.getByTestId('plan-preview')).toBeVisible()
   })

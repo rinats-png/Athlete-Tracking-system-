@@ -134,3 +134,13 @@ Zweiter Weg zum Block neben der Berechnung: eine **Vorlage** (`src/data/planTemp
 ## Übungen im eigenen Plan (Trainingsbereich Etappe 5)
 
 Eigene Einheiten nehmen **Übungen** auf: Suche im Katalog (`src/data/exercises.ts`, mit Bild) oder freier Name, Sätze, Wiederholungen, Last als Freitext. Teilart `exercise` im Block; der Name ist eine Momentaufnahme der gewählten Sprache. Einheiten aus Regeln oder Vorlagen bekommen über diesen Weg keine Übung: ihre Dosis bleibt die der Regel. Höchstens zehn Teile je Einheit. Schema 36 (neue Teilart, Bestand unverändert). Offen: Übungsbibliothek als eigener Bildschirm, eigene Übungen speichern und wiederverwenden, Vorlage speichern.
+
+## Bewertungstor und Leistungsprofil (Trainingsbereich Etappe 6)
+
+`/plan/pruefung` (`src/domain/planGate.ts`, `PlanGateScreen`): der Weg «Plan berechnen» führt zuerst hierher.
+
+- **Pflicht** ist jede Fähigkeit, die die Disziplin stark verlangt (Anforderungshöhe ≥ 0,7 wie bei der Anforderungslücke). **Ausreichend** heißt mindestens zwei Messungen, die jüngste höchstens `GATE_MAX_AGE_DAYS` (120) Tage alt. Beides sind Festlegungen der App, keine Literaturwerte, und Teil der fachlichen Prüfung.
+- **Drei Stufen:** Erklären (immer), Analysieren (Datenzuverlässigkeit ≥ MODERATE und mindestens die Hälfte der Pflichtbereiche), Verordnen (alle Pflichtbereiche ausreichend und Zuverlässigkeit ≥ MODERATE). Erst dann führt der Bildschirm zu «Plan berechnen».
+- **Abdeckung als Anzahl**, nie als Prozent («3 von 4 Pflichtbereichen», Doktrin §14, §22). Je Bereich Status (ausreichend, zu wenig, zu alt, nicht gemessen) und Zuverlässigkeit (HIGH ab drei aktuellen Messungen, MODERATE bei zwei, LOW, INSUFFICIENT).
+- Gesperrt: die Liste nennt, was noch fehlt, mit Weg zu den Tests. Hinter dem Vorschauschalter (nur Entwicklung) gibt es einen kleinen Link «trotzdem rechnen»; im Betrieb ohne Schalter fehlt er.
+- Die Planvorschau (`/plan/neu`) bleibt ohne Freigabe erreichbar, wenn man ihre Adresse kennt; ihr eigener Bauer prüft weiter je Lücke Messzahl und Regel (`data_thin`, `no_rule`).
