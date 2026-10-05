@@ -148,3 +148,9 @@ Eigene Einheiten nehmen **Übungen** auf: Suche im Katalog (`src/data/exercises.
 ## «Warum diese Einheit?» (Trainingsbereich Etappe 7)
 
 `SessionWhy` im Block und im Player: ein Aufklapper je Einheit, ohne Chat und ohne Sprachmodell. Er zeigt Absicht, Vorlage, Regel mit Version, Evidenzstärke, Spezifität, Prüfstatus, Grenzen, Quellen (mit DOI-Link), die Messgröße am Blockende und die Änderung des Trainers mit Grund. Der Hinweis zur Tageswahl nennt die Planungsregeln als Festlegungen der App. Offene und eigene Einheiten sagen ausdrücklich, dass es keine belegte Dosis gibt. Alles stammt aus Block und Regelregister; KYDON erfindet keine Begründung.
+
+## Plan als Datei (Trainingsbereich Etappe 8)
+
+Export (`Plan exportieren`, im Block und im eigenen Plan) und Import (`/plan/eigen`, nur ohne aktiven Block, nichts wird überschrieben) als JSON, Format `kydon-plan` Version 1, höchstens 200 KB, 60 Einheiten.
+
+**Eine Datei ist fremder Inhalt.** Der Import (`src/domain/planFile.ts`) übernimmt nur, was ein Mensch selbst setzen kann: Tag, Wochen, Absicht, Name, Notiz, Dauer, eigene Übungen. Evidenz, Dosis und Prüfstatus aus der Datei zählen nie. Nennt eine Einheit eine Regel des Registers, die im aktuellen Modus für Sportfamilie und Trainingsalter zulässig ist, wird sie aus dem Register neu gebaut; jede andere wird zur eigenen Einheit ohne Evidenzangabe. Unbekannte oder nicht zulässige Regeln, belegte Tage und falsche Wochen werden gezählt und gemeldet, nicht still verworfen. Die Datei enthält keine Gesundheits- und keine Erledigungsdaten.

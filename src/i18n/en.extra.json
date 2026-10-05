@@ -3416,5 +3416,16 @@
     "open": "This session only names the intent. No sourced dose exists for it, so there are no numbers here.",
     "retest": "Measured at the end of the block: {{test}}",
     "coach": "Changed by the coach: {{reason}}"
+  },
+  "file": {
+    "export": "Export plan",
+    "import": "Import plan from file",
+    "importNote": "A KYDON plan file (JSON). The app never takes dose or evidence from the file: sessions with a known rule are rebuilt from the rule registry, everything else becomes own sessions. Import only works when no block is active.",
+    "report": "{{fromRules}} sessions from rules, {{own}} own sessions, of which {{unknownRules}} with an unknown or not permitted rule, {{skipped}} skipped.",
+    "err": {
+      "too_big": "The file is too large.",
+      "not_json": "The file is not valid JSON.",
+      "not_a_plan": "The file is not a KYDON plan."
+    }
   }
 }

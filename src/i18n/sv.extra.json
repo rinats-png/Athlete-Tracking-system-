@@ -3416,5 +3416,16 @@
     "open": "Passet anger bara avsikten. Det finns ingen belagd dos, därför står det inga siffror här.",
     "retest": "Mäts vid blockets slut: {{test}}",
     "coach": "Ändrat av tränaren: {{reason}}"
+  },
+  "file": {
+    "export": "Exportera plan",
+    "import": "Importera plan från fil",
+    "importNote": "En KYDON-planfil (JSON). Appen tar aldrig dos eller evidens från filen: pass med känd regel byggs om från regelregistret, allt annat blir egna pass. Import går bara när inget block är aktivt.",
+    "report": "{{fromRules}} pass från regler, {{own}} egna pass, varav {{unknownRules}} med okänd eller otillåten regel, {{skipped}} överhoppade.",
+    "err": {
+      "too_big": "Filen är för stor.",
+      "not_json": "Filen är inte giltig JSON.",
+      "not_a_plan": "Filen är inte en KYDON-plan."
+    }
   }
 }

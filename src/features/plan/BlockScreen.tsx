@@ -7,6 +7,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, shownBlock, weekChecks } from '@/domain/trainingBlock'
+import { PlanExportButton } from '@/features/plan/PlanFileTools'
 import { SessionWhy } from '@/features/plan/SessionWhy'
 import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
@@ -82,6 +83,8 @@ export function BlockScreen() {
           {t('cal.link')}
         </Link>
       </p>
+
+      {!readOnly && <div className="mb-3"><PlanExportButton block={block} /></div>}
 
       <Panel className="mb-4" data-testid="block-week">
         {readOnly && <p className="px-4 pt-3 text-[12px] text-ink-secondary" data-testid="block-closed">{t('block.closedNote')}</p>}

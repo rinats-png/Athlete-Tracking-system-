@@ -3416,5 +3416,16 @@
     "open": "Denne session angiver kun hensigten. Der findes ingen belagt dosis, derfor står der ingen tal her.",
     "retest": "Måles ved blokkens slutning: {{test}}",
     "coach": "Ændret af træneren: {{reason}}"
+  },
+  "file": {
+    "export": "Eksportér plan",
+    "import": "Importér plan fra fil",
+    "importNote": "En KYDON-planfil (JSON). Appen overtager aldrig dosis eller evidens fra filen: sessioner med kendt regel bygges om fra regelregistret, alt andet bliver egne sessioner. Import virker kun, når ingen blok er aktiv.",
+    "report": "{{fromRules}} sessioner fra regler, {{own}} egne sessioner, heraf {{unknownRules}} med ukendt eller ikke tilladt regel, {{skipped}} sprunget over.",
+    "err": {
+      "too_big": "Filen er for stor.",
+      "not_json": "Filen er ikke gyldig JSON.",
+      "not_a_plan": "Filen er ikke en KYDON-plan."
+    }
   }
 }

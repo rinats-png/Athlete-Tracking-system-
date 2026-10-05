@@ -13,6 +13,7 @@ import { addExercise, addOwnSession, copyWeek, createOwnBlock, deleteOwnSession,
 import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
 import { searchExercises } from '@/data/exercises'
 import { exerciseImageUrl } from '@/data/exerciseImages'
+import { PlanExportButton, PlanImportButton } from '@/features/plan/PlanFileTools'
 import { cn } from '@/lib/utils'
 
 /**
@@ -123,6 +124,9 @@ export function OwnPlanScreen() {
             </button>
           </div>
         </Panel>
+        <Panel className="mt-4">
+          <div className="px-4 py-4"><PlanImportButton /></div>
+        </Panel>
       </div>
     )
   }
@@ -198,7 +202,10 @@ export function OwnPlanScreen() {
           </button>
         </div>
       </Panel>
-      <Link to="/plan/kalender" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('cal.link')}</Link>
+      <div className="flex flex-wrap items-center gap-4">
+        <Link to="/plan/kalender" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('cal.link')}</Link>
+        <PlanExportButton block={block} />
+      </div>
     </div>
   )
 }

@@ -3416,5 +3416,16 @@
     "open": "Diese Einheit nennt nur die Absicht. Für sie liegt keine belegte Dosis vor, deshalb stehen hier keine Zahlen.",
     "retest": "Am Blockende gemessen: {{test}}",
     "coach": "Vom Trainer geändert: {{reason}}"
+  },
+  "file": {
+    "export": "Plan exportieren",
+    "import": "Plan aus Datei importieren",
+    "importNote": "Eine KYDON-Plandatei (JSON). Dosis und Evidenz übernimmt die App nie aus der Datei: Einheiten mit bekannter Regel werden aus dem Regelregister neu gebaut, alles andere wird zu eigenen Einheiten. Importiert wird nur, wenn kein aktiver Block läuft.",
+    "report": "{{fromRules}} Einheiten aus Regeln, {{own}} eigene Einheiten, davon {{unknownRules}} mit unbekannter oder nicht zulässiger Regel, {{skipped}} übersprungen.",
+    "err": {
+      "too_big": "Die Datei ist zu groß.",
+      "not_json": "Die Datei ist kein gültiges JSON.",
+      "not_a_plan": "Die Datei ist kein KYDON-Plan."
+    }
   }
 }

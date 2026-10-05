@@ -3416,5 +3416,16 @@
     "open": "Esta sesión solo indica la intención. No hay dosis documentada, por eso aquí no hay cifras.",
     "retest": "Medido al final del bloque: {{test}}",
     "coach": "Cambiado por el entrenador: {{reason}}"
+  },
+  "file": {
+    "export": "Exportar plan",
+    "import": "Importar plan desde archivo",
+    "importNote": "Un archivo de plan KYDON (JSON). La app nunca toma dosis ni evidencia del archivo: las sesiones con una regla conocida se reconstruyen desde el registro, el resto pasa a sesiones propias. Solo se puede importar sin un bloque activo.",
+    "report": "{{fromRules}} sesiones de reglas, {{own}} sesiones propias, de ellas {{unknownRules}} con una regla desconocida o no permitida, {{skipped}} omitidas.",
+    "err": {
+      "too_big": "El archivo es demasiado grande.",
+      "not_json": "El archivo no es un JSON válido.",
+      "not_a_plan": "El archivo no es un plan KYDON."
+    }
   }
 }

@@ -3416,5 +3416,16 @@
     "open": "Deze training noemt alleen de intentie. Er is geen onderbouwde dosis, daarom staan hier geen cijfers.",
     "retest": "Aan het einde van het blok gemeten: {{test}}",
     "coach": "Door de trainer gewijzigd: {{reason}}"
+  },
+  "file": {
+    "export": "Plan exporteren",
+    "import": "Plan uit bestand importeren",
+    "importNote": "Een KYDON-planbestand (JSON). De app neemt dosis en bewijs nooit uit het bestand over: trainingen met een bekende regel worden opnieuw opgebouwd uit het register, de rest wordt eigen training. Importeren kan alleen zonder actief blok.",
+    "report": "{{fromRules}} trainingen uit regels, {{own}} eigen trainingen, waarvan {{unknownRules}} met een onbekende of niet toegestane regel, {{skipped}} overgeslagen.",
+    "err": {
+      "too_big": "Het bestand is te groot.",
+      "not_json": "Het bestand is geen geldige JSON.",
+      "not_a_plan": "Het bestand is geen KYDON-plan."
+    }
   }
 }

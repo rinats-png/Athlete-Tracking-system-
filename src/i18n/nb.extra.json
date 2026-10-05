@@ -3416,5 +3416,16 @@
     "open": "Denne økten oppgir bare hensikten. Det finnes ingen belagt dose, derfor står det ingen tall her.",
     "retest": "Måles ved slutten av blokken: {{test}}",
     "coach": "Endret av treneren: {{reason}}"
+  },
+  "file": {
+    "export": "Eksporter plan",
+    "import": "Importer plan fra fil",
+    "importNote": "En KYDON-planfil (JSON). Appen tar aldri dose eller evidens fra filen: økter med kjent regel bygges på nytt fra regelregisteret, alt annet blir egne økter. Import går bare når ingen blokk er aktiv.",
+    "report": "{{fromRules}} økter fra regler, {{own}} egne økter, hvorav {{unknownRules}} med ukjent eller ikke tillatt regel, {{skipped}} hoppet over.",
+    "err": {
+      "too_big": "Filen er for stor.",
+      "not_json": "Filen er ikke gyldig JSON.",
+      "not_a_plan": "Filen er ikke en KYDON-plan."
+    }
   }
 }

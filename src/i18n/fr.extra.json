@@ -3416,5 +3416,16 @@
     "open": "Cette séance indique seulement l’intention. Il n’existe pas de dose documentée, donc pas de chiffres ici.",
     "retest": "Mesuré à la fin du bloc : {{test}}",
     "coach": "Modifié par l’entraîneur : {{reason}}"
+  },
+  "file": {
+    "export": "Exporter le plan",
+    "import": "Importer un plan depuis un fichier",
+    "importNote": "Un fichier de plan KYDON (JSON). L’app ne reprend jamais dose ni preuves du fichier : les séances à règle connue sont reconstruites depuis le registre, le reste devient séances perso. L’import n’est possible que sans bloc actif.",
+    "report": "{{fromRules}} séances issues de règles, {{own}} séances perso, dont {{unknownRules}} avec une règle inconnue ou non autorisée, {{skipped}} ignorées.",
+    "err": {
+      "too_big": "Le fichier est trop volumineux.",
+      "not_json": "Le fichier n’est pas un JSON valide.",
+      "not_a_plan": "Le fichier n’est pas un plan KYDON."
+    }
   }
 }
