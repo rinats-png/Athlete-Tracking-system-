@@ -161,5 +161,5 @@ Export (`Plan exportieren`, im Block und im eigenen Plan) und Import (`/plan/eig
 
 - **Einordnung nur gegen das Pulsziel der Regel** («darunter», «im Zielbereich», «darüber» in Prozent der HFmax) und nur mit glaubwürdiger HFmax im Profil. Keine eigenen Zonen, keine medizinische Deutung; ein Pulsgurt ist kein Medizinprodukt.
 - **Datenschutz:** Werte bleiben im Arbeitsspeicher der Seite. Gespeichert werden beim Abschluss nur Mittel und Höchstwert der Einheit (mindestens drei plausible Werte, 30 bis 230), lokal in der Erledigung (`avgHr`, `maxHr`, Schema 37). Es geht nichts an einen Server.
-- Werte zählen für die Zusammenfassung nur, solange die Uhr läuft. Die Reine Logik (Paket lesen, Plausibilität, Zielbereich, Zusammenfassung) steht in `src/domain/liveHr.ts`.
+- Werte zählen für die Zusammenfassung nur, solange die Uhr läuft. Die reine Logik (Paket lesen, Plausibilität, Zielbereich, Zusammenfassung) steht in `src/domain/liveHr.ts`.
 - Nicht geprüft: echte Pulsgurte. Die Tests bilden Web Bluetooth nach; ein Gurt auf einem Android-Gerät muss von Hand ausprobiert werden.
