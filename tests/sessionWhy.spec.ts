@@ -32,7 +32,7 @@ test('Block: Regeleinheit zeigt Regel, Evidenz, Prüfstatus, Grenzen, Quellen, M
   await expect(rule).toContainText('Am Blockende gemessen')
   await expect(rule).toContainText('Aus der Vorlage')
   await expect(page.getByTestId('why-coach-r')).toContainText('Wettkampf am Samstag')
-  await expect(rule.locator('a[href^="https://doi.org/"]').first()).toBeVisible()
+  await expect(rule).toContainText('Helgerud')
   await page.getByTestId('why-open-o').click()
   await expect(page.getByTestId('why-openline-o')).toContainText('keine belegte Dosis')
   await expect(page.getByTestId('why-o')).not.toContainText('Quellen')
