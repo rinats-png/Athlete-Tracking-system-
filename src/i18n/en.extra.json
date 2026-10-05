@@ -3405,5 +3405,16 @@
     "reliabilityMissing": "Overall data reliability is still too low.",
     "planTests": "Plan tests",
     "preview": "Developer preview: calculate anyway"
+  },
+  "why": {
+    "title": "Why this session?",
+    "intent": "Intent: {{intent}}",
+    "template": "From the template “{{name}}”.",
+    "rule": "The dose comes from the rule “{{rule}}” (version {{version}}). KYDON did not change it.",
+    "day": "The day follows the planning rules: at most one session per day, no high-intensity session next to hard rounds, at most three high-intensity sessions per week. These are the app’s rules, not study values.",
+    "own": "You created this session yourself. It is your decision and not backed by studies.",
+    "open": "This session only names the intent. No sourced dose exists for it, so there are no numbers here.",
+    "retest": "Measured at the end of the block: {{test}}",
+    "coach": "Changed by the coach: {{reason}}"
   }
 }

@@ -3405,5 +3405,16 @@
     "reliabilityMissing": "De algemene betrouwbaarheid van de gegevens is nog te laag.",
     "planTests": "Tests plannen",
     "preview": "Ontwikkelaarsvoorbeeld: toch berekenen"
+  },
+  "why": {
+    "title": "Waarom deze training?",
+    "intent": "Intentie: {{intent}}",
+    "template": "Uit het sjabloon “{{name}}”.",
+    "rule": "De dosis komt uit de regel “{{rule}}” (versie {{version}}). KYDON heeft haar niet aangepast.",
+    "day": "De dag volgt de planningsregels: hoogstens één training per dag, geen training met hoge intensiteit naast harde rondes, hoogstens drie van hoge intensiteit per week. Dit zijn keuzes van de app, geen studiewaarden.",
+    "own": "Je hebt deze training zelf gemaakt. Het is jouw beslissing en niet door studies onderbouwd.",
+    "open": "Deze training noemt alleen de intentie. Er is geen onderbouwde dosis, daarom staan hier geen cijfers.",
+    "retest": "Aan het einde van het blok gemeten: {{test}}",
+    "coach": "Door de trainer gewijzigd: {{reason}}"
   }
 }

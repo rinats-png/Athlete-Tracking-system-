@@ -7,6 +7,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, shownBlock, weekChecks } from '@/domain/trainingBlock'
+import { SessionWhy } from '@/features/plan/SessionWhy'
 import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { getTest } from '@/data/testCatalog'
@@ -117,6 +118,7 @@ export function BlockScreen() {
               {s.blocks.map((b, i) => (
                 <p key={i} className="mt-1 text-[14px]">{blockText(b, t)}</p>
               ))}
+              <SessionWhy session={s} block={block} />
               {s.coachModified && (
                 <p className="mt-1 text-[12px] text-accent-text" data-testid={`block-reason-${s.id}`}>
                   {t('block.coachChanged', { reason: s.coachModificationReason ?? '' })}

@@ -3405,5 +3405,16 @@
     "reliabilityMissing": "Die Datenzuverlässigkeit insgesamt ist noch zu niedrig.",
     "planTests": "Tests planen",
     "preview": "Entwicklervorschau: trotzdem rechnen"
+  },
+  "why": {
+    "title": "Warum diese Einheit?",
+    "intent": "Absicht: {{intent}}",
+    "template": "Aus der Vorlage „{{name}}“.",
+    "rule": "Die Dosierung stammt aus der Regel „{{rule}}“ (Version {{version}}). KYDON hat sie nicht verändert.",
+    "day": "Der Tag folgt den Planungsregeln: höchstens eine Einheit je Tag, kein hoher Reiz neben harten Runden, höchstens drei hohe Reize je Woche. Das sind Festlegungen der App, keine Studienwerte.",
+    "own": "Diese Einheit hast du selbst angelegt. Sie ist deine Entscheidung und nicht durch Studien belegt.",
+    "open": "Diese Einheit nennt nur die Absicht. Für sie liegt keine belegte Dosis vor, deshalb stehen hier keine Zahlen.",
+    "retest": "Am Blockende gemessen: {{test}}",
+    "coach": "Vom Trainer geändert: {{reason}}"
   }
 }

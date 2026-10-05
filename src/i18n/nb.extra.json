@@ -3405,5 +3405,16 @@
     "reliabilityMissing": "Den samlede datapåliteligheten er fortsatt for lav.",
     "planTests": "Planlegg tester",
     "preview": "Utviklerforhåndsvisning: beregn likevel"
+  },
+  "why": {
+    "title": "Hvorfor denne økten?",
+    "intent": "Hensikt: {{intent}}",
+    "template": "Fra malen «{{name}}».",
+    "rule": "Dosen kommer fra regelen «{{rule}}» (versjon {{version}}). KYDON har ikke endret den.",
+    "day": "Dagen følger planreglene: høyst én økt per dag, ingen høyintensiv økt ved siden av harde runder, høyst tre høyintensive økter per uke. Dette er appens valg, ikke studieverdier.",
+    "own": "Du laget denne økten selv. Den er din avgjørelse og ikke belagt av studier.",
+    "open": "Denne økten oppgir bare hensikten. Det finnes ingen belagt dose, derfor står det ingen tall her.",
+    "retest": "Måles ved slutten av blokken: {{test}}",
+    "coach": "Endret av treneren: {{reason}}"
   }
 }

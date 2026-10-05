@@ -144,3 +144,7 @@ Eigene Einheiten nehmen **Übungen** auf: Suche im Katalog (`src/data/exercises.
 - **Abdeckung als Anzahl**, nie als Prozent («3 von 4 Pflichtbereichen», Doktrin §14, §22). Je Bereich Status (ausreichend, zu wenig, zu alt, nicht gemessen) und Zuverlässigkeit (HIGH ab drei aktuellen Messungen, MODERATE bei zwei, LOW, INSUFFICIENT).
 - Gesperrt: die Liste nennt, was noch fehlt, mit Weg zu den Tests. Hinter dem Vorschauschalter (nur Entwicklung) gibt es einen kleinen Link «trotzdem rechnen»; im Betrieb ohne Schalter fehlt er.
 - Die Planvorschau (`/plan/neu`) bleibt ohne Freigabe erreichbar, wenn man ihre Adresse kennt; ihr eigener Bauer prüft weiter je Lücke Messzahl und Regel (`data_thin`, `no_rule`).
+
+## «Warum diese Einheit?» (Trainingsbereich Etappe 7)
+
+`SessionWhy` im Block und im Player: ein Aufklapper je Einheit, ohne Chat und ohne Sprachmodell. Er zeigt Absicht, Vorlage, Regel mit Version, Evidenzstärke, Spezifität, Prüfstatus, Grenzen, Quellen (mit DOI-Link), die Messgröße am Blockende und die Änderung des Trainers mit Grund. Der Hinweis zur Tageswahl nennt die Planungsregeln als Festlegungen der App. Offene und eigene Einheiten sagen ausdrücklich, dass es keine belegte Dosis gibt. Alles stammt aus Block und Regelregister; KYDON erfindet keine Begründung.

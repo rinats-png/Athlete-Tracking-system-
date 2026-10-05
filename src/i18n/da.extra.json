@@ -3405,5 +3405,16 @@
     "reliabilityMissing": "Den samlede datapålidelighed er stadig for lav.",
     "planTests": "Planlæg tests",
     "preview": "Udviklerforhåndsvisning: beregn alligevel"
+  },
+  "why": {
+    "title": "Hvorfor denne session?",
+    "intent": "Hensigt: {{intent}}",
+    "template": "Fra skabelonen “{{name}}”.",
+    "rule": "Dosis kommer fra reglen “{{rule}}” (version {{version}}). KYDON har ikke ændret den.",
+    "day": "Dagen følger planreglerne: højst én session pr. dag, ingen højintens session ved siden af hårde runder, højst tre højintense sessioner pr. uge. Det er appens valg, ikke studieværdier.",
+    "own": "Du har selv oprettet denne session. Den er din beslutning og ikke belagt af studier.",
+    "open": "Denne session angiver kun hensigten. Der findes ingen belagt dosis, derfor står der ingen tal her.",
+    "retest": "Måles ved blokkens slutning: {{test}}",
+    "coach": "Ændret af træneren: {{reason}}"
   }
 }

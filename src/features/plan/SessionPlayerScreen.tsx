@@ -6,6 +6,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { openSessionsOn } from '@/domain/trainingBlock'
+import { SessionWhy } from '@/features/plan/SessionWhy'
 import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { cn } from '@/lib/utils'
@@ -133,6 +134,7 @@ export function SessionPlayerScreen() {
           {session.blocks.map((b, i) => (
             <p key={i} className="text-[14px]">{blockText(b, t)}</p>
           ))}
+          <SessionWhy session={session} block={block} />
           {steps.length > 0 && (
             <div className="mt-4 text-center" data-testid="player-timer">
               <p className="label-tag">{current ? t(current.kind === 'work' ? 'player.work' : 'player.rest', { index: current.index, of: current.of }) : ''}</p>

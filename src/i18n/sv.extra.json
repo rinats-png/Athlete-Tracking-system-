@@ -3405,5 +3405,16 @@
     "reliabilityMissing": "Den totala datatillförlitligheten är fortfarande för låg.",
     "planTests": "Planera tester",
     "preview": "Utvecklarförhandsvisning: beräkna ändå"
+  },
+  "why": {
+    "title": "Varför det här passet?",
+    "intent": "Avsikt: {{intent}}",
+    "template": "Från mallen ”{{name}}”.",
+    "rule": "Dosen kommer från regeln ”{{rule}}” (version {{version}}). KYDON har inte ändrat den.",
+    "day": "Dagen följer planeringsreglerna: högst ett pass per dag, inget högintensivt pass bredvid hårda ronder, högst tre högintensiva pass per vecka. Det är appens val, inte studievärden.",
+    "own": "Du skapade passet själv. Det är ditt beslut och inte belagt av studier.",
+    "open": "Passet anger bara avsikten. Det finns ingen belagd dos, därför står det inga siffror här.",
+    "retest": "Mäts vid blockets slut: {{test}}",
+    "coach": "Ändrat av tränaren: {{reason}}"
   }
 }

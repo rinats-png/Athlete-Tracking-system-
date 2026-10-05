@@ -3405,5 +3405,16 @@
     "reliabilityMissing": "La fiabilidad global de los datos sigue siendo baja.",
     "planTests": "Planificar tests",
     "preview": "Vista previa de desarrollo: calcular igualmente"
+  },
+  "why": {
+    "title": "¿Por qué esta sesión?",
+    "intent": "Intención: {{intent}}",
+    "template": "De la plantilla «{{name}}».",
+    "rule": "La dosis viene de la regla «{{rule}}» (versión {{version}}). KYDON no la ha cambiado.",
+    "day": "El día sigue las reglas de planificación: como máximo una sesión al día, ninguna de alta intensidad junto a asaltos duros, como máximo tres de alta intensidad por semana. Son decisiones de la app, no valores de estudios.",
+    "own": "Creaste esta sesión tú mismo. Es tu decisión y no está respaldada por estudios.",
+    "open": "Esta sesión solo indica la intención. No hay dosis documentada, por eso aquí no hay cifras.",
+    "retest": "Medido al final del bloque: {{test}}",
+    "coach": "Cambiado por el entrenador: {{reason}}"
   }
 }
