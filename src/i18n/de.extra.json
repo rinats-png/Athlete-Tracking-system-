@@ -3354,7 +3354,18 @@
       "bad_weeks": "Die Wochen passen nicht zur Länge des Plans.",
       "day_taken": "An diesem Tag liegt in diesen Wochen schon eine Einheit.",
       "no_intent": "Bitte eine Absicht wählen.",
-      "unknown_session": "Einheit nicht gefunden."
+      "unknown_session": "Einheit nicht gefunden.",
+      "no_name": "Bitte einen Namen angeben.",
+      "too_many": "Mehr als zehn Teile gehen in einer Einheit nicht.",
+      "bad_sets": "Sätze oder Wiederholungen liegen außerhalb des Bereichs."
+    },
+    "ex": {
+      "search": "Übung suchen oder eintragen",
+      "custom": "„{{name}}“ als eigene Übung eintragen",
+      "sets": "Sätze",
+      "reps": "Wdh.",
+      "load": "Last (Text)",
+      "add": "Übung hinzufügen"
     }
   }
 }

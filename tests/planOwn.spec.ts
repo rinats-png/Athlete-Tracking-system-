@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { openDemo } from './helpers'
-import { addOwnSession, copyWeek, createOwnBlock, deleteOwnSession, duplicateSession, openSessionsOn } from '../src/domain/trainingBlock'
+import { addExercise, addOwnSession, copyWeek, createOwnBlock, deleteOwnSession, duplicateSession, openSessionsOn, removeExercise } from '../src/domain/trainingBlock'
 import { CURRENT_SCHEMA_VERSION, emptyData, parseStoredData } from '../src/lib/store/schema'
 
 /** Trainingsbereich Etappe 4: eigener Plan. */
@@ -93,5 +93,50 @@ test.describe('Eigener Plan: Bildschirm', () => {
     await page.goto(`/plan/eigen`, { waitUntil: 'domcontentloaded' })
     await page.getByTestId(`own-del-${id}`).click()
     await expect(page.locator('[data-testid^="own-session-"]')).toHaveCount(1)
+  })
+})
+
+test.describe('Eigener Plan: Übungen', () => {
+  test('Fachlogik: nur eigene Einheiten bekommen Übungen; Name, Sätze und Grenze werden geprüft', () => {
+    let b = ok(addOwnSession(mk(), input('a', 1), NOW))
+    const e = { exerciseKey: null, name: 'Kreuzheben', sets: 3, reps: 5, load: '100 kg' }
+    const withEx = (addExercise(b, 'a', e, NOW) as { ok: true; block: typeof b }).block
+    expect(withEx.sessions[0].blocks).toEqual([{ type: 'exercise', exerciseKey: null, name: 'Kreuzheben', sets: 3, reps: 5, load: '100 kg' }])
+    expect(addExercise(b, 'a', { ...e, name: '  ' }, NOW)).toEqual({ ok: false, error: 'no_name' })
+    expect(addExercise(b, 'a', { ...e, sets: 0 }, NOW)).toEqual({ ok: false, error: 'bad_sets' })
+    expect(addExercise(b, 'zz', e, NOW)).toEqual({ ok: false, error: 'unknown_session' })
+    const rule = { ...b, sessions: [{ ...b.sessions[0], kind: 'rule' as const }] }
+    expect(addExercise(rule, 'a', e, NOW)).toEqual({ ok: false, error: 'unknown_session' })
+    for (let i = 0; i < 10; i++) b = (addExercise(b, 'a', e, NOW) as { ok: true; block: typeof b }).block
+    expect(addExercise(b, 'a', e, NOW)).toEqual({ ok: false, error: 'too_many' })
+    const removed = removeExercise(withEx, 'a', 0, NOW) as { ok: true; block: typeof b }
+    expect(removed.block.sessions[0].blocks).toEqual([])
+  })
+
+  test('Bildschirm: Katalogübung und freie Übung werden angelegt und im Block gezeigt', async ({ page }) => {
+    await openDemo(page)
+    await page.evaluate(() => {
+      const data = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
+      const now = new Date().toISOString()
+      data.athletes[0].trainingBlocks = [{ id: 'b', name: 'X', family: null, disciplineId: null, phase: 'BUILD', startDay: '2026-10-05', weeks: 4, retestMetrics: [], templateId: null, eventDay: null, sessions: [{ id: 's1', day: 1, weekFrom: 1, weekTo: null, kind: 'own', title: 'Beintag', note: '', ruleId: null, ruleVersion: null, primaryIntent: 'MAX_STRENGTH', evidenceStrength: null, evidenceSpecificity: null, plannedDurationMin: null, highIntensity: false, blocks: [], retestMetric: '', coachModified: false, coachModificationReason: null, removed: false }], completions: [], status: 'active', createdAt: now, updatedAt: now }]
+      localStorage.setItem('kydon.data.v1', JSON.stringify(data))
+    })
+    await page.goto('/plan/eigen', { waitUntil: 'domcontentloaded' })
+    await page.getByTestId('own-ex-search-s1').fill('kniebeuge')
+    await page.locator('[data-testid^="own-ex-hit-"]').first().click()
+    await page.getByTestId('own-ex-reps-s1').fill('5')
+    await page.getByTestId('own-ex-load-s1').fill('80 kg')
+    await page.getByTestId('own-ex-add-s1').click()
+    await expect(page.getByTestId('own-ex-s1')).toContainText('3 × 5 · 80 kg')
+    await page.getByTestId('own-ex-search-s1').fill('Zughaltung')
+    await page.getByTestId('own-ex-custom-s1').click()
+    await page.getByTestId('own-ex-add-s1').click()
+    await expect(page.getByTestId('own-ex-s1')).toContainText('Zughaltung: 3')
+    await page.getByTestId('own-ex-del-s1-1').click()
+    await expect(page.getByTestId('own-ex-s1')).not.toContainText('Zughaltung')
+    const parts = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks[0].sessions[0].blocks)
+    expect(parts).toHaveLength(1)
+    expect(parts[0]).toMatchObject({ type: 'exercise', sets: 3, reps: 5, load: '80 kg' })
+    expect(parts[0].exerciseKey).not.toBeNull()
   })
 })

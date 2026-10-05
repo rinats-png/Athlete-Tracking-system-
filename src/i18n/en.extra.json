@@ -3354,7 +3354,18 @@
       "bad_weeks": "The weeks do not fit the plan length.",
       "day_taken": "There is already a session on that day in those weeks.",
       "no_intent": "Please choose an intent.",
-      "unknown_session": "Session not found."
+      "unknown_session": "Session not found.",
+      "no_name": "Please give a name.",
+      "too_many": "A session holds at most ten parts.",
+      "bad_sets": "Sets or reps are out of range."
+    },
+    "ex": {
+      "search": "Search or enter an exercise",
+      "custom": "Enter “{{name}}” as your own exercise",
+      "sets": "Sets",
+      "reps": "Reps",
+      "load": "Load (text)",
+      "add": "Add exercise"
     }
   }
 }

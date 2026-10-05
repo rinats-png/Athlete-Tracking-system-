@@ -3354,7 +3354,18 @@
       "bad_weeks": "Les semaines ne correspondent pas à la durée du plan.",
       "day_taken": "Une séance existe déjà ce jour-là dans ces semaines.",
       "no_intent": "Choisis une intention.",
-      "unknown_session": "Séance introuvable."
+      "unknown_session": "Séance introuvable.",
+      "no_name": "Indique un nom.",
+      "too_many": "Une séance contient dix parties au maximum.",
+      "bad_sets": "Séries ou répétitions hors limites."
+    },
+    "ex": {
+      "search": "Chercher ou saisir un exercice",
+      "custom": "Saisir « {{name}} » comme exercice perso",
+      "sets": "Séries",
+      "reps": "Rép.",
+      "load": "Charge (texte)",
+      "add": "Ajouter l’exercice"
     }
   }
 }

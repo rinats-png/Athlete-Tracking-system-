@@ -3354,7 +3354,18 @@
       "bad_weeks": "Veckorna passar inte planens längd.",
       "day_taken": "Det finns redan ett pass den dagen i de veckorna.",
       "no_intent": "Välj en avsikt.",
-      "unknown_session": "Passet hittades inte."
+      "unknown_session": "Passet hittades inte.",
+      "no_name": "Ange ett namn.",
+      "too_many": "Ett pass rymmer högst tio delar.",
+      "bad_sets": "Set eller repetitioner ligger utanför intervallet."
+    },
+    "ex": {
+      "search": "Sök eller skriv en övning",
+      "custom": "Lägg till ”{{name}}” som egen övning",
+      "sets": "Set",
+      "reps": "Rep.",
+      "load": "Belastning (text)",
+      "add": "Lägg till övning"
     }
   }
 }

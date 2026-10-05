@@ -3354,7 +3354,18 @@
       "bad_weeks": "Las semanas no encajan con la duración del plan.",
       "day_taken": "Ya hay una sesión ese día en esas semanas.",
       "no_intent": "Elige una intención.",
-      "unknown_session": "Sesión no encontrada."
+      "unknown_session": "Sesión no encontrada.",
+      "no_name": "Indica un nombre.",
+      "too_many": "Una sesión admite como máximo diez partes.",
+      "bad_sets": "Series o repeticiones fuera de rango."
+    },
+    "ex": {
+      "search": "Buscar o escribir un ejercicio",
+      "custom": "Añadir «{{name}}» como ejercicio propio",
+      "sets": "Series",
+      "reps": "Rep.",
+      "load": "Carga (texto)",
+      "add": "Añadir ejercicio"
     }
   }
 }

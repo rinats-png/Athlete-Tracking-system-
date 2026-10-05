@@ -130,3 +130,7 @@ Zweiter Weg zum Block neben der Berechnung: eine **Vorlage** (`src/data/planTemp
 - Zwei Einheiten am selben Tag in denselben Wochen nimmt die App nicht an.
 - **Schema 35:** Block `name`, `family` nullbar (Sportart ohne Pilotfamilie); Einheit `title`, `note`, `kind: 'own'`.
 - Noch offen: «als Vorlage speichern», Phase kopieren, Übungsbibliothek und eigene Übungen im Builder, Plan-Import.
+
+## Übungen im eigenen Plan (Trainingsbereich Etappe 5)
+
+Eigene Einheiten nehmen **Übungen** auf: Suche im Katalog (`src/data/exercises.ts`, mit Bild) oder freier Name, Sätze, Wiederholungen, Last als Freitext. Teilart `exercise` im Block; der Name ist eine Momentaufnahme der gewählten Sprache. Einheiten aus Regeln oder Vorlagen bekommen über diesen Weg keine Übung: ihre Dosis bleibt die der Regel. Höchstens zehn Teile je Einheit. Schema 36 (neue Teilart, Bestand unverändert). Offen: Übungsbibliothek als eigener Bildschirm, eigene Übungen speichern und wiederverwenden, Vorlage speichern.

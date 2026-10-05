@@ -13,6 +13,8 @@ export function blockText(b: StoredPlannedSession['blocks'][number], t: TFunctio
       const range = l.type === 'percent_1rm' ? { min: l.min, max: l.max } : { min: 0, max: 0 }
       return b.maxRepsPerSet != null ? t('plan.block.strengthMax', { ...range, reps: b.maxRepsPerSet }) : t('plan.block.strength', { ...range, sets: b.sets ?? 0 })
     }
+    case 'exercise':
+      return `${b.name}: ${[`${b.sets}${b.reps != null ? ` × ${b.reps}` : ''}`, b.load].filter(Boolean).join(' · ')}`
     case 'jumps':
       return t('plan.block.jumps')
     default:

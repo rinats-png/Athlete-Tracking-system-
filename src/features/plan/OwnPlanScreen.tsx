@@ -9,8 +9,10 @@ import { newId } from '@/lib/store/localStore'
 import { planMode } from '@/domain/planMode'
 import { familyOfDiscipline } from '@/domain/trainingPlan'
 import { INTENTS, type Phase } from '@/domain/trainingTypes'
-import { addOwnSession, copyWeek, createOwnBlock, deleteOwnSession, duplicateSession, type EditResult } from '@/domain/trainingBlock'
-import { sessionName, sessionSource } from '@/features/plan/planText'
+import { addExercise, addOwnSession, copyWeek, createOwnBlock, deleteOwnSession, duplicateSession, removeExercise, type EditResult, type ExerciseResult } from '@/domain/trainingBlock'
+import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
+import { searchExercises } from '@/data/exercises'
+import { exerciseImageUrl } from '@/data/exerciseImages'
 import { cn } from '@/lib/utils'
 
 /**
@@ -21,6 +23,60 @@ import { cn } from '@/lib/utils'
  */
 const PHASES: Phase[] = ['GPP', 'BUILD', 'SPECIFIC', 'TAPER', 'TRANSITION']
 const field = 'mt-1.5 block min-h-11 w-full rounded-md border border-line bg-surface px-3 text-[16px]'
+
+/** Übungen einer eigenen Einheit: Suche im Katalog oder freier Name, Sätze, Wiederholungen, Last als Text. */
+function Exercises({ block, session, onResult }: { block: import('@/lib/store/localStore').StoredTrainingBlock; session: import('@/lib/store/localStore').StoredPlannedSession; onResult: (r: ExerciseResult) => void }) {
+  const { t, i18n } = useTranslation()
+  const [query, setQuery] = useState('')
+  const [picked, setPicked] = useState<{ key: string | null; name: string } | null>(null)
+  const [sets, setSets] = useState('3')
+  const [reps, setReps] = useState('')
+  const [load, setLoad] = useState('')
+  const de = i18n.language.startsWith('de')
+  const hits = query.trim() ? searchExercises(query, 5) : []
+  const now = () => new Date().toISOString()
+  return (
+    <div className="mt-2 border-t border-line pt-2" data-testid={`own-ex-${session.id}`}>
+      {session.blocks.map((b, i) => (
+        <p key={i} className="flex items-center justify-between gap-2 text-[14px]">
+          <span>{blockText(b, t as never)}</span>
+          {b.type === 'exercise' && <button type="button" data-testid={`own-ex-del-${session.id}-${i}`} onClick={() => onResult(removeExercise(block, session.id, i, now()))} className="min-h-11 px-2 text-[12px] text-accent-text underline underline-offset-2">{t('own.delete')}</button>}
+        </p>
+      ))}
+      <label className="block text-[13px]">
+        <span className="label-tag">{t('own.ex.search')}</span>
+        <input value={picked ? picked.name : query} onChange={(e) => { setPicked(null); setQuery(e.target.value) }} data-testid={`own-ex-search-${session.id}`} className={field} />
+      </label>
+      {!picked && hits.length > 0 && (
+        <ul className="mt-1.5 flex flex-wrap gap-2">
+          {hits.map((h) => {
+            const img = exerciseImageUrl(h.key)
+            return (
+              <li key={h.key}>
+                <button type="button" data-testid={`own-ex-hit-${h.key}`} onClick={() => setPicked({ key: h.key, name: de ? h.name.de : h.name.en })} className="flex min-h-11 items-center gap-2 rounded-pill border border-line px-3 text-[13px]">
+                  {img && <img src={img} alt="" width={24} height={24} className="h-6 w-6 rounded object-cover" />}
+                  {de ? h.name.de : h.name.en}
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+      {!picked && query.trim() && (
+        <button type="button" data-testid={`own-ex-custom-${session.id}`} onClick={() => setPicked({ key: null, name: query.trim() })} className="mt-1.5 min-h-11 text-[13px] text-accent-text underline underline-offset-2">{t('own.ex.custom', { name: query.trim() })}</button>
+      )}
+      {picked && (
+        <div className="mt-2 grid grid-cols-3 gap-3">
+          <label className="block text-[13px]"><span className="label-tag">{t('own.ex.sets')}</span><input type="number" min={1} max={20} value={sets} onChange={(e) => setSets(e.target.value)} data-testid={`own-ex-sets-${session.id}`} className={field} /></label>
+          <label className="block text-[13px]"><span className="label-tag">{t('own.ex.reps')}</span><input type="number" min={1} max={100} value={reps} onChange={(e) => setReps(e.target.value)} data-testid={`own-ex-reps-${session.id}`} className={field} /></label>
+          <label className="block text-[13px]"><span className="label-tag">{t('own.ex.load')}</span><input value={load} maxLength={30} onChange={(e) => setLoad(e.target.value)} data-testid={`own-ex-load-${session.id}`} className={field} /></label>
+          <button type="button" data-testid={`own-ex-add-${session.id}`} onClick={() => { onResult(addExercise(block, session.id, { exerciseKey: picked.key, name: picked.name, sets: Number(sets), reps: reps ? Number(reps) : null, load }, now())); setPicked(null); setQuery(''); setReps(''); setLoad('') }} className="col-span-3 min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">{t('own.ex.add')}</button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 const today = () => new Date().toISOString().slice(0, 10)
 
 export function OwnPlanScreen() {
@@ -44,7 +100,7 @@ export function OwnPlanScreen() {
 
   if (planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off') return <EmptyState title={t('plan.title')} body={t('plan.off')} />
 
-  const apply = (r: EditResult) => {
+  const apply = (r: EditResult | ExerciseResult) => {
     if (!r.ok) return setMessage(t(`own.err.${r.error}`))
     saveTrainingBlock(r.block)
     setMessage(null)
@@ -115,6 +171,7 @@ export function OwnPlanScreen() {
                   {(s.weekFrom !== 1 || s.weekTo != null) && ` · ${s.weekFrom}–${s.weekTo ?? block.weeks}`}
                 </p>
                 {s.note && <p className="mt-1 text-[13px]">{s.note}</p>}
+                {s.kind === 'own' && <Exercises block={block} session={s} onResult={apply} />}
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <label className="text-[12px]">
                     <span className="sr-only">{t('own.duplicateTo')}</span>

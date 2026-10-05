@@ -3354,7 +3354,18 @@
       "bad_weeks": "De weken passen niet bij de lengte van het plan.",
       "day_taken": "Op die dag staat in die weken al een training.",
       "no_intent": "Kies een intentie.",
-      "unknown_session": "Training niet gevonden."
+      "unknown_session": "Training niet gevonden.",
+      "no_name": "Geef een naam op.",
+      "too_many": "Een training bevat maximaal tien onderdelen.",
+      "bad_sets": "Sets of herhalingen liggen buiten het bereik."
+    },
+    "ex": {
+      "search": "Oefening zoeken of invoeren",
+      "custom": "“{{name}}” als eigen oefening invoeren",
+      "sets": "Sets",
+      "reps": "Herh.",
+      "load": "Gewicht (tekst)",
+      "add": "Oefening toevoegen"
     }
   }
 }

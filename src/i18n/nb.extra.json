@@ -3354,7 +3354,18 @@
       "bad_weeks": "Ukene passer ikke til lengden på planen.",
       "day_taken": "Det ligger allerede en økt den dagen i de ukene.",
       "no_intent": "Velg en hensikt.",
-      "unknown_session": "Økten ble ikke funnet."
+      "unknown_session": "Økten ble ikke funnet.",
+      "no_name": "Oppgi et navn.",
+      "too_many": "En økt rommer høyst ti deler.",
+      "bad_sets": "Sett eller repetisjoner er utenfor området."
+    },
+    "ex": {
+      "search": "Søk eller skriv inn en øvelse",
+      "custom": "Legg inn «{{name}}» som egen øvelse",
+      "sets": "Sett",
+      "reps": "Rep.",
+      "load": "Belastning (tekst)",
+      "add": "Legg til øvelse"
     }
   }
 }

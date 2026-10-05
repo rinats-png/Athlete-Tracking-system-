@@ -3354,7 +3354,18 @@
       "bad_weeks": "Ugerne passer ikke til planens længde.",
       "day_taken": "Der ligger allerede en session den dag i de uger.",
       "no_intent": "Vælg en hensigt.",
-      "unknown_session": "Sessionen blev ikke fundet."
+      "unknown_session": "Sessionen blev ikke fundet.",
+      "no_name": "Angiv et navn.",
+      "too_many": "En session rummer højst ti dele.",
+      "bad_sets": "Sæt eller gentagelser er uden for området."
+    },
+    "ex": {
+      "search": "Søg eller skriv en øvelse",
+      "custom": "Tilføj “{{name}}” som egen øvelse",
+      "sets": "Sæt",
+      "reps": "Gentagelser",
+      "load": "Belastning (tekst)",
+      "add": "Tilføj øvelse"
     }
   }
 }

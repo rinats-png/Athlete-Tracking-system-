@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 35
+export const CURRENT_SCHEMA_VERSION = 36
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -694,6 +694,8 @@ const planPartSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('sprint_repeats'), sets: z.number().int().min(1).max(20), repetitions: z.number().int().min(1).max(50), distanceM: z.number().int().min(1).max(1000), maxRecoverySeconds: z.number().int().min(0).max(600) }),
   z.object({ type: z.literal('strength'), exerciseKey: z.string().nullable(), sets: z.number().int().min(1).max(20).nullable(), reps: z.number().int().min(1).max(100).nullable(), maxRepsPerSet: z.number().int().min(1).max(100).nullable(), loadTarget: planIntensitySchema }),
   z.object({ type: z.literal('jumps'), note: z.literal('plyometric') }),
+  /** Eigene Übung einer eigenen Einheit: Name als Momentaufnahme, Last als Freitext des Menschen. */
+  z.object({ type: z.literal('exercise'), exerciseKey: z.string().max(60).nullable().default(null), name: z.string().min(1).max(60), sets: z.number().int().min(1).max(20), reps: z.number().int().min(1).max(100).nullable().default(null), load: z.string().max(30).default('') }),
 ])
 const plannedSessionSchema = z.object({
   id: z.string().min(1).max(80),
@@ -1819,6 +1821,12 @@ export const MIGRATIONS: Migration[] = [
         })),
       })),
     }),
+  },
+  {
+    from: 35,
+    to: 36,
+    describe: 'Trainingsblöcke: eigene Übungen als Teil einer Einheit (nur neue Teilart, Bestand unverändert)',
+    run: (data: any) => ({ ...data, version: 36 }),
   },
 ]
 

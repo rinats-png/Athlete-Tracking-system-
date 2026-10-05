@@ -336,3 +336,30 @@ export function copyWeek(block: StoredTrainingBlock, from: number, to: number, n
   }
   return { block: copied > 0 ? { ...block, sessions, updatedAt: now } : block, copied, skipped }
 }
+
+export interface ExerciseInput {
+  exerciseKey: string | null
+  name: string
+  sets: number
+  reps: number | null
+  load: string
+}
+export type ExerciseResult = { ok: true; block: StoredTrainingBlock } | { ok: false; error: 'unknown_session' | 'no_name' | 'too_many' | 'bad_sets' }
+
+/** Übung zu einer EIGENEN Einheit. Einheiten aus Regeln behalten ihre Dosis; dort wählt der Trainer die Übung nicht über diesen Weg. */
+export function addExercise(block: StoredTrainingBlock, sessionId: string, e: ExerciseInput, now: string): ExerciseResult {
+  const s = block.sessions.find((x) => x.id === sessionId)
+  if (!s || s.kind !== 'own') return { ok: false, error: 'unknown_session' }
+  const name = e.name.trim().slice(0, 60)
+  if (!name) return { ok: false, error: 'no_name' }
+  if (!Number.isInteger(e.sets) || e.sets < 1 || e.sets > 20 || (e.reps != null && (!Number.isInteger(e.reps) || e.reps < 1 || e.reps > 100))) return { ok: false, error: 'bad_sets' }
+  if (s.blocks.length >= 10) return { ok: false, error: 'too_many' }
+  const part = { type: 'exercise' as const, exerciseKey: e.exerciseKey, name, sets: e.sets, reps: e.reps, load: e.load.trim().slice(0, 30) }
+  return { ok: true, block: { ...block, updatedAt: now, sessions: block.sessions.map((x) => (x.id === sessionId ? { ...x, blocks: [...x.blocks, part] } : x)) } }
+}
+
+export function removeExercise(block: StoredTrainingBlock, sessionId: string, index: number, now: string): ExerciseResult {
+  const s = block.sessions.find((x) => x.id === sessionId)
+  if (!s || s.kind !== 'own' || !s.blocks[index] || s.blocks[index].type !== 'exercise') return { ok: false, error: 'unknown_session' }
+  return { ok: true, block: { ...block, updatedAt: now, sessions: block.sessions.map((x) => (x.id === sessionId ? { ...x, blocks: x.blocks.filter((_, i) => i !== index) } : x)) } }
+}
