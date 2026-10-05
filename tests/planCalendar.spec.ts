@@ -65,11 +65,11 @@ test.describe('Plankalender: Bildschirm', () => {
     expect(s).toMatchObject({ day: 4, coachModified: true, coachModificationReason: 'Arbeitstermin' })
   })
 
-  test('Ziehen auf einen Tag wählt ihn als Ziel; belegter Tag wird abgewiesen', async ({ page }) => {
+  test('Ziehen auf einen Tag wählt ihn als Ziel; Bestätigen verschiebt', async ({ page }) => {
     await prepare(page)
     await page.goto('/plan/kalender', { waitUntil: 'domcontentloaded' })
     await page.getByTestId('cal-session-s1').dragTo(page.getByTestId('cal-day-2'))
-    await expect(page.getByTestId('cal-move')).toContainText('Dienstag')
+    await expect(page.getByTestId('cal-move')).toContainText('Di verschieben')
     await page.getByTestId('cal-reason').fill('x')
     await page.getByTestId('cal-confirm').click()
     await expect(page.getByTestId('cal-day-2')).toContainText('Grundlagenausdauer')
