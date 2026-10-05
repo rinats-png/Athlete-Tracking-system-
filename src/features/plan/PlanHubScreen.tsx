@@ -58,6 +58,7 @@ export function PlanHubScreen() {
       <PlanOffersPanel />
       <nav className="mb-4 flex flex-wrap gap-x-5" aria-label={t('planHub.more')} data-testid="hub-links">
         <Link to="/plan/kalender" data-testid="hub-to-calendar" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('cal.link')}</Link>
+        <Link to="/plan/uebungen" data-testid="hub-to-exercises" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('exlib.link')}</Link>
         <Link to="/plan/entwicklung" data-testid="hub-to-development" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('dev.link')}</Link>
       </nav>
       {role === 'coach' && planAssignEnabled() && (

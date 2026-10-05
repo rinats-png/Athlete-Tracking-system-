@@ -31,6 +31,7 @@ import {
   type StoredWorkout,
   type StoredTrainingBlock,
   type StoredPlanTemplate,
+  type StoredCustomExercise,
   type StoredActivity,
   type StoredDecision,
   type StoredCockpit,
@@ -160,6 +161,9 @@ export interface AppDataValue {
   /** Eigene Planvorlagen mit Versionen (Trainingsbereich Etappe 12). */
   planTemplates: StoredPlanTemplate[]
   savePlanTemplates: (list: StoredPlanTemplate[]) => void
+  /** Eigene Übungen der Übungsbibliothek (Trainingsbereich Etappe 15). */
+  customExercises: StoredCustomExercise[]
+  saveCustomExercises: (list: StoredCustomExercise[]) => void
   saveTrainingBlock: (block: StoredTrainingBlock) => void
   deleteTrainingBlock: (id: string) => void
   /** Eine geplante Einheit als erledigt eintragen: Block und Tagebuch (Last) in einem Schritt. */
@@ -748,6 +752,11 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
       },
       trainingBlocks: store.athletes.find((a) => a.id === store.activeAthleteId)?.trainingBlocks ?? [],
       planTemplates: store.athletes.find((a) => a.id === store.activeAthleteId)?.planTemplates ?? [],
+      customExercises: store.athletes.find((a) => a.id === store.activeAthleteId)?.customExercises ?? [],
+      saveCustomExercises: (list) => {
+        const current = storeRef.current
+        commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, customExercises: list.slice(0, 50) } : a)) })
+      },
       savePlanTemplates: (list) => {
         const current = storeRef.current
         commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, planTemplates: list.slice(0, 20) } : a)) })

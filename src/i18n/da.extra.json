@@ -3536,5 +3536,25 @@
     "partial": "{{measured}} målinger ved blokkens slutning, {{open}} stadig åbne.",
     "note": "En måling tæller først, når den findes efter blokkens slutning; “åben” betyder ikke målt, aldrig dårlig. “Bedre” eller “dårligere” står kun, hvor ændringen er større end din typiske målefejl.",
     "link": "Langsigtet udvikling"
+  },
+  "exlib": {
+    "title": "Øvelsesbibliotek",
+    "intro": "Kataloget med billeder og dine egne øvelser. I din egen plan finder du begge i øvelsessøgningen.",
+    "addTitle": "Tilføj egen øvelse",
+    "name": "Navn",
+    "muscle": "Muskelgruppe",
+    "noMuscle": "Uden muskelgruppe",
+    "add": "Tilføj",
+    "note": "Egne øvelser har kun navn og muskelgruppe. KYDON giver ingen vejledning eller effekt til dem.",
+    "search": "Søg øvelse",
+    "count": "{{n}} øvelser",
+    "none": "Ingen øvelse fundet.",
+    "own": "egen",
+    "link": "Øvelsesbibliotek",
+    "err": {
+      "no_name": "Angiv et navn.",
+      "duplicate": "Denne øvelse findes allerede.",
+      "too_many": "Mere end 50 egne øvelser er ikke muligt."
+    }
   }
 }

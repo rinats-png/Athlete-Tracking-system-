@@ -33,6 +33,7 @@ function athlete(id: string, name: string, values: number[]): StoredAthlete {
     workouts: [],
     trainingBlocks: [],
     planTemplates: [],
+    customExercises: [],
     decisions: [],
     cockpit: { sleepDropPct: 15, energyDropPct: 15, stressRisePct: 25, weightChangePctWeek: 1, adherenceBelow: 4, minCompletenessPct: 70 },
     meals: [],

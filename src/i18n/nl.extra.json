@@ -3536,5 +3536,25 @@
     "partial": "{{measured}} metingen aan het einde van het blok, {{open}} nog open.",
     "note": "Een meting telt pas als ze na het einde van het blok bestaat; “open” betekent niet gemeten, nooit slecht. “Beter” of “slechter” staat er alleen als de verandering groter is dan je typische meetfout.",
     "link": "Ontwikkeling op lange termijn"
+  },
+  "exlib": {
+    "title": "Oefeningenbibliotheek",
+    "intro": "De catalogus met afbeeldingen en je eigen oefeningen. In je eigen plan vind je beide in de oefeningenzoeker.",
+    "addTitle": "Eigen oefening toevoegen",
+    "name": "Naam",
+    "muscle": "Spiergroep",
+    "noMuscle": "Zonder spiergroep",
+    "add": "Toevoegen",
+    "note": "Eigen oefeningen hebben alleen een naam en een spiergroep. KYDON geeft er geen instructies of effecten bij.",
+    "search": "Oefening zoeken",
+    "count": "{{n}} oefeningen",
+    "none": "Geen oefening gevonden.",
+    "own": "eigen",
+    "link": "Oefeningenbibliotheek",
+    "err": {
+      "no_name": "Geef een naam op.",
+      "duplicate": "Deze oefening bestaat al.",
+      "too_many": "Meer dan 50 eigen oefeningen is niet mogelijk."
+    }
   }
 }

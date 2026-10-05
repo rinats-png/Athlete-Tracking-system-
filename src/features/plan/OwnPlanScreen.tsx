@@ -11,7 +11,7 @@ import { familyOfDiscipline } from '@/domain/trainingPlan'
 import { INTENTS, type Phase } from '@/domain/trainingTypes'
 import { addExercise, addOwnSession, copyWeek, createOwnBlock, deleteOwnSession, duplicateSession, removeExercise, type EditResult, type ExerciseResult } from '@/domain/trainingBlock'
 import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
-import { searchExercises } from '@/data/exercises'
+import { searchLibrary } from '@/domain/exerciseLibrary'
 import { exerciseImageUrl } from '@/data/exerciseImages'
 import type { ImportReport } from '@/domain/planFile'
 import { PlanExportButton, PlanImportButton, SaveTemplateButton } from '@/features/plan/PlanFileTools'
@@ -35,7 +35,8 @@ function Exercises({ block, session, onResult }: { block: import('@/lib/store/lo
   const [reps, setReps] = useState('')
   const [load, setLoad] = useState('')
   const de = i18n.language.startsWith('de')
-  const hits = query.trim() ? searchExercises(query, 5) : []
+  const { customExercises } = useAppData()
+  const hits = query.trim() ? searchLibrary(query, customExercises, null, de ? 'de' : 'en', 5) : []
   const now = () => new Date().toISOString()
   return (
     <div className="mt-2 border-t border-line pt-2" data-testid={`own-ex-${session.id}`}>
@@ -52,12 +53,12 @@ function Exercises({ block, session, onResult }: { block: import('@/lib/store/lo
       {!picked && hits.length > 0 && (
         <ul className="mt-1.5 flex flex-wrap gap-2">
           {hits.map((h) => {
-            const img = exerciseImageUrl(h.key)
+            const img = h.key ? exerciseImageUrl(h.key) : null
             return (
-              <li key={h.key}>
-                <button type="button" data-testid={`own-ex-hit-${h.key}`} onClick={() => setPicked({ key: h.key, name: de ? h.name.de : h.name.en })} className="flex min-h-11 items-center gap-2 rounded-pill border border-line px-3 text-[13px]">
+              <li key={h.key ?? h.customId}>
+                <button type="button" data-testid={`own-ex-hit-${h.key ?? h.customId}`} onClick={() => setPicked({ key: h.key, name: h.name })} className="flex min-h-11 items-center gap-2 rounded-pill border border-line px-3 text-[13px]">
                   {img && <img src={img} alt="" width={24} height={24} className="h-6 w-6 rounded object-cover" />}
-                  {de ? h.name.de : h.name.en}
+                  {h.name}
                 </button>
               </li>
             )

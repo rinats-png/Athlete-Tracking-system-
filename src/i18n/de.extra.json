@@ -3536,5 +3536,25 @@
     "partial": "{{measured}} Messungen am Blockende, {{open}} noch offen.",
     "note": "Eine Messung zählt erst, wenn sie nach dem Blockende vorliegt; „offen“ heißt nicht gemessen, nie schlecht. „Besser“ oder „schlechter“ steht nur, wo die Veränderung größer ist als dein typischer Messfehler.",
     "link": "Langzeitentwicklung"
+  },
+  "exlib": {
+    "title": "Übungsbibliothek",
+    "intro": "Der Katalog mit Bildern und deine eigenen Übungen. Im eigenen Plan findest du beides in der Übungssuche.",
+    "addTitle": "Eigene Übung anlegen",
+    "name": "Name",
+    "muscle": "Muskelgruppe",
+    "noMuscle": "Ohne Muskelgruppe",
+    "add": "Anlegen",
+    "note": "Eigene Übungen tragen nur Name und Muskelgruppe. KYDON gibt dazu keine Anleitung und keine Wirkung an.",
+    "search": "Übung suchen",
+    "count": "{{n}} Übungen",
+    "none": "Keine Übung gefunden.",
+    "own": "eigene",
+    "link": "Übungsbibliothek",
+    "err": {
+      "no_name": "Bitte einen Namen angeben.",
+      "duplicate": "Diese Übung gibt es schon.",
+      "too_many": "Mehr als 50 eigene Übungen gehen nicht."
+    }
   }
 }

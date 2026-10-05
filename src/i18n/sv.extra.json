@@ -3536,5 +3536,25 @@
     "partial": "{{measured}} mätningar vid blockets slut, {{open}} fortfarande öppna.",
     "note": "En mätning räknas först när den finns efter blockets slut; ”öppen” betyder inte mätt, aldrig dålig. ”Bättre” eller ”sämre” står bara där förändringen är större än ditt typiska mätfel.",
     "link": "Långsiktig utveckling"
+  },
+  "exlib": {
+    "title": "Övningsbibliotek",
+    "intro": "Katalogen med bilder och dina egna övningar. I din egen plan hittar du båda i övningssökningen.",
+    "addTitle": "Lägg till egen övning",
+    "name": "Namn",
+    "muscle": "Muskelgrupp",
+    "noMuscle": "Utan muskelgrupp",
+    "add": "Lägg till",
+    "note": "Egna övningar har bara namn och muskelgrupp. KYDON ger ingen instruktion eller effekt för dem.",
+    "search": "Sök övning",
+    "count": "{{n}} övningar",
+    "none": "Ingen övning hittades.",
+    "own": "egen",
+    "link": "Övningsbibliotek",
+    "err": {
+      "no_name": "Ange ett namn.",
+      "duplicate": "Den här övningen finns redan.",
+      "too_many": "Fler än 50 egna övningar går inte."
+    }
   }
 }

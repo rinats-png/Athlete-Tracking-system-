@@ -192,3 +192,7 @@ Auf Fuel steht über der Verpflegung eine Karte «Heute geplant» mit den heute 
 ## Langzeitentwicklung (Trainingsbereich Etappe 14)
 
 `/plan/entwicklung` (`src/domain/development.ts`, `DevelopmentScreen`), erreichbar vom Hub: die Blöcke nebeneinander (neueste zuerst) mit Zählung erledigter gegen geplante Einheiten und den Blockmessungen gegen den Messfehler (dieselbe Rechnung wie der Block-Bericht, `verdictLine`), dazu die erledigten Einheiten der letzten zwölf Wochen als Balken. **Keine Prognose und kein Erfolgsurteil:** die Balken zeigen Beständigkeit, «offen» heißt nicht gemessen und nie schlecht, «besser» oder «schlechter» steht nur über dem typischen Messfehler (Regel 7). Die Summe zählt alle erledigten Einheiten, auch die vor dem Zwölf-Wochen-Fenster.
+
+## Übungsbibliothek (Trainingsbereich Etappe 15)
+
+`/plan/uebungen`: der Katalog (`src/data/exercises.ts`, mit Bild wo vorhanden) mit Suche und Filter nach Muskelgruppe, dazu **eigene Übungen** (Name, Muskelgruppe; höchstens 50, doppelte gegen Katalog und eigene in beiden Sprachen abgewiesen). Eigene Übungen tragen keine Anleitung und keine Wirkungsbehauptung. In der Übungssuche des eigenen Plans stehen eigene vor dem Katalog. Schema 40 (`customExercises` je Athlet), lokal. Domäne: `src/domain/exerciseLibrary.ts`.

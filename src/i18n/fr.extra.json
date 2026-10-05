@@ -3536,5 +3536,25 @@
     "partial": "{{measured}} mesures en fin de bloc, {{open}} encore ouvertes.",
     "note": "Une mesure ne compte que si elle existe après la fin du bloc ; « ouvert » veut dire non mesuré, jamais mauvais. « Mieux » ou « moins bien » n’apparaît que si le changement dépasse ton erreur de mesure typique.",
     "link": "Évolution à long terme"
+  },
+  "exlib": {
+    "title": "Bibliothèque d’exercices",
+    "intro": "Le catalogue avec images et tes propres exercices. Dans ton plan perso, tu trouves les deux dans la recherche d’exercices.",
+    "addTitle": "Ajouter ton exercice",
+    "name": "Nom",
+    "muscle": "Groupe musculaire",
+    "noMuscle": "Sans groupe musculaire",
+    "add": "Ajouter",
+    "note": "Les exercices perso ne portent qu’un nom et un groupe musculaire. KYDON n’indique ni consigne ni effet.",
+    "search": "Chercher un exercice",
+    "count": "{{n}} exercices",
+    "none": "Aucun exercice trouvé.",
+    "own": "perso",
+    "link": "Bibliothèque d’exercices",
+    "err": {
+      "no_name": "Indique un nom.",
+      "duplicate": "Cet exercice existe déjà.",
+      "too_many": "Plus de 50 exercices perso n’est pas possible."
+    }
   }
 }

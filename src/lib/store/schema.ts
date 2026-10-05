@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 39
+export const CURRENT_SCHEMA_VERSION = 40
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -737,6 +737,12 @@ const planCompletionSchema = z.object({
  * siehe domain/planFile.ts), mit Versionen. Wer unter demselben Namen erneut
  * speichert, legt eine neue Version an; die letzten fünf bleiben.
  */
+/** Eigene Übung der Übungsbibliothek (Trainingsbereich Etappe 15): Name und Muskelgruppe vom Menschen. */
+const customExerciseSchema = z.object({
+  id: z.string().min(1).max(80),
+  name: z.string().min(1).max(60),
+  muscle: z.enum(['legs', 'glutes', 'calves', 'back', 'lower_back', 'chest', 'shoulders', 'neck', 'biceps', 'triceps', 'core', 'full_body', 'cardio']).nullable().default(null),
+})
 const planTemplateVersionSchema = z.object({
   version: z.number().int().min(1).max(9999),
   savedAt: isoDate,
@@ -1187,6 +1193,7 @@ const athleteSchema = z.object({
   workouts: z.array(workoutSchema).default([]),
   trainingBlocks: z.array(trainingBlockSchema).default([]),
   planTemplates: z.array(planTemplateSchema).max(20).default([]),
+  customExercises: z.array(customExerciseSchema).max(50).default([]),
   /** Decision-Log (Schicht S3): was entschieden wurde, und was danach geschah. */
   decisions: z.array(decisionSchema).default([]),
   /** Schwellen des Cockpits für diesen Athleten. */
@@ -1269,6 +1276,7 @@ export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
 export type ValidatedWorkout = z.infer<typeof workoutSchema>
 export type ValidatedTrainingBlock = z.infer<typeof trainingBlockSchema>
 export type ValidatedPlanTemplate = z.infer<typeof planTemplateSchema>
+export type ValidatedCustomExercise = z.infer<typeof customExerciseSchema>
 export type ValidatedPlannedSession = z.infer<typeof plannedSessionSchema>
 export type ValidatedPlanCompletion = z.infer<typeof planCompletionSchema>
 export type ValidatedActivity = z.infer<typeof activitySchema>
@@ -1887,6 +1895,16 @@ export const MIGRATIONS: Migration[] = [
       athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, planTemplates: athlete.planTemplates ?? [] })),
     }),
   },
+  {
+    from: 39,
+    to: 40,
+    describe: 'Eigene Übungen der Übungsbibliothek, leer',
+    run: (data: any) => ({
+      ...data,
+      version: 40,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, customExercises: athlete.customExercises ?? [] })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1930,6 +1948,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     workouts: [],
     trainingBlocks: [],
     planTemplates: [],
+    customExercises: [],
     activities: [],
     shareCheckins: false,
     decisions: [],

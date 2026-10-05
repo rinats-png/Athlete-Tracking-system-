@@ -3536,5 +3536,25 @@
     "partial": "{{measured}} measured at the end of the block, {{open}} still open.",
     "note": "A measurement only counts once it exists after the block ends; “open” means not measured, never bad. “Better” or “worse” only appears where the change is larger than your typical measurement error.",
     "link": "Long-term development"
+  },
+  "exlib": {
+    "title": "Exercise library",
+    "intro": "The catalogue with pictures and your own exercises. In your own plan you find both in the exercise search.",
+    "addTitle": "Add your own exercise",
+    "name": "Name",
+    "muscle": "Muscle group",
+    "noMuscle": "No muscle group",
+    "add": "Add",
+    "note": "Own exercises carry only a name and a muscle group. KYDON gives no instructions or effects for them.",
+    "search": "Search exercises",
+    "count": "{{n}} exercises",
+    "none": "No exercise found.",
+    "own": "own",
+    "link": "Exercise library",
+    "err": {
+      "no_name": "Please give a name.",
+      "duplicate": "This exercise already exists.",
+      "too_many": "More than 50 own exercises are not possible."
+    }
   }
 }

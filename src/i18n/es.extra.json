@@ -3536,5 +3536,25 @@
     "partial": "{{measured}} mediciones al final del bloque, {{open}} aún abiertas.",
     "note": "Una medición solo cuenta cuando existe después del final del bloque; «abierta» significa sin medir, nunca mala. «Mejor» o «peor» solo aparece cuando el cambio supera tu error de medición típico.",
     "link": "Evolución a largo plazo"
+  },
+  "exlib": {
+    "title": "Biblioteca de ejercicios",
+    "intro": "El catálogo con imágenes y tus propios ejercicios. En tu plan propio encuentras ambos en la búsqueda de ejercicios.",
+    "addTitle": "Añadir tu ejercicio",
+    "name": "Nombre",
+    "muscle": "Grupo muscular",
+    "noMuscle": "Sin grupo muscular",
+    "add": "Añadir",
+    "note": "Los ejercicios propios solo llevan nombre y grupo muscular. KYDON no da instrucciones ni efectos para ellos.",
+    "search": "Buscar ejercicio",
+    "count": "{{n}} ejercicios",
+    "none": "No se ha encontrado ningún ejercicio.",
+    "own": "propio",
+    "link": "Biblioteca de ejercicios",
+    "err": {
+      "no_name": "Indica un nombre.",
+      "duplicate": "Este ejercicio ya existe.",
+      "too_many": "No se pueden tener más de 50 ejercicios propios."
+    }
   }
 }

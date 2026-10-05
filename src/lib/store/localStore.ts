@@ -17,6 +17,7 @@ import {
   type ValidatedWorkout,
   type ValidatedTrainingBlock,
   type ValidatedPlanTemplate,
+  type ValidatedCustomExercise,
   type ValidatedPlannedSession,
   type ValidatedPlanCompletion,
   type ValidatedActivity,
@@ -80,6 +81,7 @@ export type StoredActivity = ValidatedActivity
 export type StoredWorkout = ValidatedWorkout
 export type StoredTrainingBlock = ValidatedTrainingBlock
 export type StoredPlanTemplate = ValidatedPlanTemplate
+export type StoredCustomExercise = ValidatedCustomExercise
 export type StoredPlannedSession = ValidatedPlannedSession
 export type StoredPlanCompletion = ValidatedPlanCompletion
 export type StoredWorkoutExercise = ValidatedWorkoutExercise
