@@ -3495,5 +3495,25 @@
       "declined": "Declined",
       "withdrawn": "Withdrawn"
     }
+  },
+  "lib": {
+    "save": "Save as template",
+    "saveConfirm": "Save",
+    "saved": "“{{name}}” saved (version {{version}}).",
+    "mine": "My templates",
+    "mineSub": "Your own plans with versions. Saving under the same name creates a new version.",
+    "versionOf": "Version {{v}}",
+    "version": "Version",
+    "versionLabel": "Version {{v}} · {{date}}",
+    "use": "Use",
+    "deleteVersion": "Delete version",
+    "delete": "Delete",
+    "activeBlock": "You have an active block. Close it first, then you can use a template.",
+    "unreadable": "This template cannot be read.",
+    "err": {
+      "no_name": "Please give a name.",
+      "no_sessions": "The plan has no session.",
+      "too_many": "More than 20 templates are not possible."
+    }
   }
 }

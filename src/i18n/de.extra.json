@@ -3495,5 +3495,25 @@
       "declined": "Abgelehnt",
       "withdrawn": "Zurückgezogen"
     }
+  },
+  "lib": {
+    "save": "Als Vorlage speichern",
+    "saveConfirm": "Speichern",
+    "saved": "„{{name}}“ gespeichert (Version {{version}}).",
+    "mine": "Meine Vorlagen",
+    "mineSub": "Eigene Pläne mit Versionen. Unter demselben Namen speichern ergibt eine neue Version.",
+    "versionOf": "Version {{v}}",
+    "version": "Version",
+    "versionLabel": "Version {{v}} · {{date}}",
+    "use": "Verwenden",
+    "deleteVersion": "Version löschen",
+    "delete": "Löschen",
+    "activeBlock": "Du hast einen aktiven Block. Schließe ihn zuerst ab, dann kannst du eine Vorlage verwenden.",
+    "unreadable": "Diese Vorlage lässt sich nicht lesen.",
+    "err": {
+      "no_name": "Bitte einen Namen angeben.",
+      "no_sessions": "Der Plan hat keine Einheit.",
+      "too_many": "Mehr als 20 Vorlagen gehen nicht."
+    }
   }
 }

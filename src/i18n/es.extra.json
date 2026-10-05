@@ -3495,5 +3495,25 @@
       "declined": "Rechazado",
       "withdrawn": "Retirado"
     }
+  },
+  "lib": {
+    "save": "Guardar como plantilla",
+    "saveConfirm": "Guardar",
+    "saved": "«{{name}}» guardada (versión {{version}}).",
+    "mine": "Mis plantillas",
+    "mineSub": "Tus propios planes con versiones. Guardar con el mismo nombre crea una nueva versión.",
+    "versionOf": "Versión {{v}}",
+    "version": "Versión",
+    "versionLabel": "Versión {{v}} · {{date}}",
+    "use": "Usar",
+    "deleteVersion": "Eliminar versión",
+    "delete": "Eliminar",
+    "activeBlock": "Tienes un bloque activo. Ciérralo primero y luego podrás usar una plantilla.",
+    "unreadable": "Esta plantilla no se puede leer.",
+    "err": {
+      "no_name": "Indica un nombre.",
+      "no_sessions": "El plan no tiene ninguna sesión.",
+      "too_many": "No se pueden tener más de 20 plantillas."
+    }
   }
 }

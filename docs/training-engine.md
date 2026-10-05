@@ -179,3 +179,7 @@ Entscheidungen des Inhabers: der Athlet nimmt an oder lehnt ab; der Trainer sieh
 ## Plan-Tab für Trainer (Trainingsbereich Etappe 11)
 
 Mit Trainingsbereich hat auch der Trainer sechs Tabs: Heute, Athleten, **Plan** (groß, links der Mitte), Test, Team, Mehr; ohne Bau-Schalter bleiben es die fünf der Doktrin. Der Plan-Tab öffnet den Hub (`/plan`) mit Block, Kalender, Vorlagen, eigenem Plan und, bei eingeschaltetem `VITE_PLAN_ASSIGN`, dem Weg zum Zuweisen. Die beiden Plan-Einträge unter «Mehr» entfallen, weil der Tab sie ersetzt.
+
+## Eigene Planvorlagen mit Versionen (Trainingsbereich Etappe 12)
+
+«Als Vorlage speichern» im Block und im eigenen Plan; «Meine Vorlagen» in der Bibliothek (`/plan/vorlagen`). Eine Vorlage ist ein Plan als Datei (siehe «Plan als Datei»): Struktur und Eigenes, nie Evidenz oder Dosis, und beim Verwenden gilt der Import (Regeln werden aus dem Register neu gebaut). Unter demselben Namen erneut gespeichert (ohne Rücksicht auf Groß- und Kleinschreibung) entsteht eine neue Version; die letzten fünf bleiben, höchstens zwanzig Vorlagen. Verwenden mit gewählter Version legt einen Block an, nur ohne aktiven Block. Schema 39 (`planTemplates` je Athlet), lokal, nichts geht an einen Server. Domäne: `src/domain/planLibrary.ts`.

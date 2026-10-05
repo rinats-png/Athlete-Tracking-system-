@@ -3495,5 +3495,25 @@
       "declined": "Refusé",
       "withdrawn": "Retiré"
     }
+  },
+  "lib": {
+    "save": "Enregistrer comme modèle",
+    "saveConfirm": "Enregistrer",
+    "saved": "« {{name}} » enregistré (version {{version}}).",
+    "mine": "Mes modèles",
+    "mineSub": "Tes propres plans avec versions. Enregistrer sous le même nom crée une nouvelle version.",
+    "versionOf": "Version {{v}}",
+    "version": "Version",
+    "versionLabel": "Version {{v}} · {{date}}",
+    "use": "Utiliser",
+    "deleteVersion": "Supprimer la version",
+    "delete": "Supprimer",
+    "activeBlock": "Tu as un bloc actif. Termine-le d’abord, puis tu peux utiliser un modèle.",
+    "unreadable": "Ce modèle est illisible.",
+    "err": {
+      "no_name": "Indique un nom.",
+      "no_sessions": "Le plan n’a aucune séance.",
+      "too_many": "Plus de 20 modèles n’est pas possible."
+    }
   }
 }

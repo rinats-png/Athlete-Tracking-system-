@@ -30,6 +30,7 @@ import {
   type StoredDiaryEntry,
   type StoredWorkout,
   type StoredTrainingBlock,
+  type StoredPlanTemplate,
   type StoredActivity,
   type StoredDecision,
   type StoredCockpit,
@@ -156,6 +157,9 @@ export interface AppDataValue {
   saveWorkout: (workout: StoredWorkout) => void
   /** Trainingsblöcke des aktiven Athleten (Training Engine). */
   trainingBlocks: StoredTrainingBlock[]
+  /** Eigene Planvorlagen mit Versionen (Trainingsbereich Etappe 12). */
+  planTemplates: StoredPlanTemplate[]
+  savePlanTemplates: (list: StoredPlanTemplate[]) => void
   saveTrainingBlock: (block: StoredTrainingBlock) => void
   deleteTrainingBlock: (id: string) => void
   /** Eine geplante Einheit als erledigt eintragen: Block und Tagebuch (Last) in einem Schritt. */
@@ -743,6 +747,11 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         })
       },
       trainingBlocks: store.athletes.find((a) => a.id === store.activeAthleteId)?.trainingBlocks ?? [],
+      planTemplates: store.athletes.find((a) => a.id === store.activeAthleteId)?.planTemplates ?? [],
+      savePlanTemplates: (list) => {
+        const current = storeRef.current
+        commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, planTemplates: list.slice(0, 20) } : a)) })
+      },
       saveTrainingBlock: (block) => {
         const current = storeRef.current
         const now = new Date().toISOString()

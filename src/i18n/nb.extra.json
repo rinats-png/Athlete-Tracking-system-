@@ -3495,5 +3495,25 @@
       "declined": "Avslått",
       "withdrawn": "Trukket tilbake"
     }
+  },
+  "lib": {
+    "save": "Lagre som mal",
+    "saveConfirm": "Lagre",
+    "saved": "«{{name}}» lagret (versjon {{version}}).",
+    "mine": "Mine maler",
+    "mineSub": "Dine egne planer med versjoner. Å lagre under samme navn gir en ny versjon.",
+    "versionOf": "Versjon {{v}}",
+    "version": "Versjon",
+    "versionLabel": "Versjon {{v}} · {{date}}",
+    "use": "Bruk",
+    "deleteVersion": "Slett versjon",
+    "delete": "Slett",
+    "activeBlock": "Du har en aktiv blokk. Avslutt den først, så kan du bruke en mal.",
+    "unreadable": "Denne malen kan ikke leses.",
+    "err": {
+      "no_name": "Oppgi et navn.",
+      "no_sessions": "Planen har ingen økt.",
+      "too_many": "Mer enn 20 maler er ikke mulig."
+    }
   }
 }

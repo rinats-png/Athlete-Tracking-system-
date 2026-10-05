@@ -6,6 +6,7 @@ import { newId, type StoredTrainingBlock } from '@/lib/store/localStore'
 import { planMode } from '@/domain/planMode'
 import { familyOfDiscipline } from '@/domain/trainingPlan'
 import { exportPlan, importPlan, PLAN_FILE_MAX_BYTES, type ImportReport } from '@/domain/planFile'
+import { saveAsTemplate } from '@/domain/planLibrary'
 
 /** Export eines Blocks als Datei. Die Datei trägt Struktur und Eigenes, keine Gesundheitsdaten. */
 export function PlanExportButton({ block }: { block: StoredTrainingBlock }) {
@@ -66,6 +67,35 @@ export function PlanImportButton({ onImported }: { onImported: (report: ImportRe
       </button>
       <p className="text-[12px] text-ink-secondary">{t('file.importNote')}</p>
       {message && <p role="alert" className="text-[13px] text-accent-text" data-testid="plan-import-error">{message}</p>}
+    </div>
+  )
+}
+
+/** Plan als eigene Vorlage speichern; unter demselben Namen wird es eine neue Version. */
+export function SaveTemplateButton({ block }: { block: StoredTrainingBlock }) {
+  const { t } = useTranslation()
+  const { planTemplates, savePlanTemplates } = useAppData()
+  const [open, setOpen] = useState(false)
+  const [name, setName] = useState(block.name)
+  const [message, setMessage] = useState<string | null>(null)
+  const save = () => {
+    const r = saveAsTemplate(planTemplates, block, name, newId, new Date().toISOString())
+    if (!r.ok) return setMessage(t(`lib.err.${r.error}`))
+    savePlanTemplates(r.list)
+    setMessage(t('lib.saved', { name: name.trim(), version: r.version }))
+    setOpen(false)
+  }
+  return (
+    <div data-testid="save-template">
+      {!open ? (
+        <button type="button" data-testid="save-template-open" onClick={() => setOpen(true)} className="inline-flex min-h-11 items-center rounded-pill border border-line px-4 text-[13px]">{t('lib.save')}</button>
+      ) : (
+        <div className="flex flex-wrap items-end gap-2">
+          <label className="text-[13px]"><span className="label-tag">{t('own.name')}</span><input value={name} maxLength={60} onChange={(e) => setName(e.target.value)} data-testid="save-template-name" className="mt-1.5 block min-h-11 rounded-md border border-line bg-surface px-3 text-[16px]" /></label>
+          <button type="button" data-testid="save-template-confirm" onClick={save} className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">{t('lib.saveConfirm')}</button>
+        </div>
+      )}
+      {message && <p className="mt-1 text-[12px] text-ink-secondary" role="status" data-testid="save-template-message">{message}</p>}
     </div>
   )
 }

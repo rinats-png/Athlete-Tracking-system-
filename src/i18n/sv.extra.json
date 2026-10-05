@@ -3495,5 +3495,25 @@
       "declined": "Avvisad",
       "withdrawn": "Återkallad"
     }
+  },
+  "lib": {
+    "save": "Spara som mall",
+    "saveConfirm": "Spara",
+    "saved": "”{{name}}” sparad (version {{version}}).",
+    "mine": "Mina mallar",
+    "mineSub": "Dina egna planer med versioner. Att spara under samma namn skapar en ny version.",
+    "versionOf": "Version {{v}}",
+    "version": "Version",
+    "versionLabel": "Version {{v}} · {{date}}",
+    "use": "Använd",
+    "deleteVersion": "Ta bort version",
+    "delete": "Ta bort",
+    "activeBlock": "Du har ett aktivt block. Avsluta det först, sedan kan du använda en mall.",
+    "unreadable": "Den här mallen går inte att läsa.",
+    "err": {
+      "no_name": "Ange ett namn.",
+      "no_sessions": "Planen har inget pass.",
+      "too_many": "Fler än 20 mallar går inte."
+    }
   }
 }

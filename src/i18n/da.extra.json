@@ -3495,5 +3495,25 @@
       "declined": "Afvist",
       "withdrawn": "Trukket tilbage"
     }
+  },
+  "lib": {
+    "save": "Gem som skabelon",
+    "saveConfirm": "Gem",
+    "saved": "“{{name}}” gemt (version {{version}}).",
+    "mine": "Mine skabeloner",
+    "mineSub": "Dine egne planer med versioner. At gemme under samme navn giver en ny version.",
+    "versionOf": "Version {{v}}",
+    "version": "Version",
+    "versionLabel": "Version {{v}} · {{date}}",
+    "use": "Brug",
+    "deleteVersion": "Slet version",
+    "delete": "Slet",
+    "activeBlock": "Du har en aktiv blok. Afslut den først, så kan du bruge en skabelon.",
+    "unreadable": "Denne skabelon kan ikke læses.",
+    "err": {
+      "no_name": "Angiv et navn.",
+      "no_sessions": "Planen har ingen session.",
+      "too_many": "Mere end 20 skabeloner er ikke muligt."
+    }
   }
 }

@@ -9,7 +9,7 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, shownBlock, weekChecks } from '@/domain/trainingBlock'
 import { planAssignEnabled } from '@/lib/planAssign'
 import { AssignmentShares } from '@/features/plan/AssignmentShares'
-import { PlanExportButton } from '@/features/plan/PlanFileTools'
+import { PlanExportButton, SaveTemplateButton } from '@/features/plan/PlanFileTools'
 import { SessionWhy } from '@/features/plan/SessionWhy'
 import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
@@ -89,6 +89,7 @@ export function BlockScreen() {
       {!readOnly && (
         <div className="mb-3 flex flex-wrap items-center gap-4">
           <PlanExportButton block={block} />
+          <SaveTemplateButton block={block} />
           {planAssignEnabled() && <Link to="/plan/zuweisen" data-testid="block-to-assign" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('assign.link')}</Link>}
         </div>
       )}

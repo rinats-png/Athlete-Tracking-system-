@@ -14,7 +14,7 @@ import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
 import { searchExercises } from '@/data/exercises'
 import { exerciseImageUrl } from '@/data/exerciseImages'
 import type { ImportReport } from '@/domain/planFile'
-import { PlanExportButton, PlanImportButton } from '@/features/plan/PlanFileTools'
+import { PlanExportButton, PlanImportButton, SaveTemplateButton } from '@/features/plan/PlanFileTools'
 import { cn } from '@/lib/utils'
 
 /**
@@ -208,6 +208,7 @@ export function OwnPlanScreen() {
       <div className="flex flex-wrap items-center gap-4">
         <Link to="/plan/kalender" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('cal.link')}</Link>
         <PlanExportButton block={block} />
+        <SaveTemplateButton block={block} />
       </div>
     </div>
   )

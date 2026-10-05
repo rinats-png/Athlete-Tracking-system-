@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 38
+export const CURRENT_SCHEMA_VERSION = 39
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -732,6 +732,22 @@ const planCompletionSchema = z.object({
   avgHr: z.number().int().min(30).max(230).nullable().default(null),
   maxHr: z.number().int().min(30).max(230).nullable().default(null),
 })
+/**
+ * Eigene Planvorlage (Trainingsbereich Etappe 12): ein Plan als Datei (`kydon-plan`,
+ * siehe domain/planFile.ts), mit Versionen. Wer unter demselben Namen erneut
+ * speichert, legt eine neue Version an; die letzten fünf bleiben.
+ */
+const planTemplateVersionSchema = z.object({
+  version: z.number().int().min(1).max(9999),
+  savedAt: isoDate,
+  content: z.string().min(2).max(200_000),
+})
+const planTemplateSchema = z.object({
+  id: z.string().min(1).max(80),
+  name: z.string().min(1).max(60),
+  weeks: z.number().int().min(1).max(26),
+  versions: z.array(planTemplateVersionSchema).min(1).max(5),
+})
 const trainingBlockSchema = z.object({
   id: z.string().min(1),
   /** `null` bei eigenen Plänen einer Sportart ohne Pilotfamilie. */
@@ -1170,6 +1186,7 @@ const athleteSchema = z.object({
   /** Trainingslog: Einheiten mit Sätzen (Schicht S2). */
   workouts: z.array(workoutSchema).default([]),
   trainingBlocks: z.array(trainingBlockSchema).default([]),
+  planTemplates: z.array(planTemplateSchema).max(20).default([]),
   /** Decision-Log (Schicht S3): was entschieden wurde, und was danach geschah. */
   decisions: z.array(decisionSchema).default([]),
   /** Schwellen des Cockpits für diesen Athleten. */
@@ -1251,6 +1268,7 @@ export type ValidatedDiaryEntry = z.infer<typeof diaryEntrySchema>
 export type ValidatedDiarySession = z.infer<typeof diarySessionSchema>
 export type ValidatedWorkout = z.infer<typeof workoutSchema>
 export type ValidatedTrainingBlock = z.infer<typeof trainingBlockSchema>
+export type ValidatedPlanTemplate = z.infer<typeof planTemplateSchema>
 export type ValidatedPlannedSession = z.infer<typeof plannedSessionSchema>
 export type ValidatedPlanCompletion = z.infer<typeof planCompletionSchema>
 export type ValidatedActivity = z.infer<typeof activitySchema>
@@ -1859,6 +1877,16 @@ export const MIGRATIONS: Migration[] = [
       })),
     }),
   },
+  {
+    from: 38,
+    to: 39,
+    describe: 'Eigene Planvorlagen mit Versionen, leer',
+    run: (data: any) => ({
+      ...data,
+      version: 39,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, planTemplates: athlete.planTemplates ?? [] })),
+    }),
+  },
 ]
 
 export interface LoadReport {
@@ -1901,6 +1929,7 @@ export function emptyAthlete(id = 'athlete-1'): ValidatedAthlete {
     diaryFields: [],
     workouts: [],
     trainingBlocks: [],
+    planTemplates: [],
     activities: [],
     shareCheckins: false,
     decisions: [],

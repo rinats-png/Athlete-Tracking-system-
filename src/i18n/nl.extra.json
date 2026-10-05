@@ -3495,5 +3495,25 @@
       "declined": "Afgewezen",
       "withdrawn": "Ingetrokken"
     }
+  },
+  "lib": {
+    "save": "Opslaan als sjabloon",
+    "saveConfirm": "Opslaan",
+    "saved": "“{{name}}” opgeslagen (versie {{version}}).",
+    "mine": "Mijn sjablonen",
+    "mineSub": "Je eigen plannen met versies. Opslaan onder dezelfde naam maakt een nieuwe versie.",
+    "versionOf": "Versie {{v}}",
+    "version": "Versie",
+    "versionLabel": "Versie {{v}} · {{date}}",
+    "use": "Gebruiken",
+    "deleteVersion": "Versie verwijderen",
+    "delete": "Verwijderen",
+    "activeBlock": "Je hebt een actief blok. Sluit dat eerst af, dan kun je een sjabloon gebruiken.",
+    "unreadable": "Dit sjabloon is niet te lezen.",
+    "err": {
+      "no_name": "Geef een naam op.",
+      "no_sessions": "Het plan heeft geen training.",
+      "too_many": "Meer dan 20 sjablonen is niet mogelijk."
+    }
   }
 }

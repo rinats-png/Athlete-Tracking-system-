@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { MyTemplates } from '@/features/plan/MyTemplates'
 import { DayChips } from '@/features/plan/DayChips'
 import { blockText } from '@/features/plan/planText'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -51,6 +52,7 @@ export function PlanLibraryScreen() {
   return (
     <div data-testid="plan-library">
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('tpl.libraryTitle')} intro={t(family ? 'tpl.libraryIntro' : 'tpl.libraryIntroAll')} />
+      <MyTemplates />
       <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t('tpl.goalLabel')}>
         {GOALS.map((g) => (
           <button key={g} type="button" aria-pressed={goal === g} data-testid={`tpl-goal-${g}`} onClick={() => setGoal(g)} className={cn('min-h-11 rounded-pill border px-4 text-[13px]', goal === g ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line')}>
