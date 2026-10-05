@@ -183,3 +183,7 @@ Mit Trainingsbereich hat auch der Trainer sechs Tabs: Heute, Athleten, **Plan** 
 ## Eigene Planvorlagen mit Versionen (Trainingsbereich Etappe 12)
 
 «Als Vorlage speichern» im Block und im eigenen Plan; «Meine Vorlagen» in der Bibliothek (`/plan/vorlagen`). Eine Vorlage ist ein Plan als Datei (siehe «Plan als Datei»): Struktur und Eigenes, nie Evidenz oder Dosis, und beim Verwenden gilt der Import (Regeln werden aus dem Register neu gebaut). Unter demselben Namen erneut gespeichert (ohne Rücksicht auf Groß- und Kleinschreibung) entsteht eine neue Version; die letzten fünf bleiben, höchstens zwanzig Vorlagen. Verwenden mit gewählter Version legt einen Block an, nur ohne aktiven Block. Schema 39 (`planTemplates` je Athlet), lokal, nichts geht an einen Server. Domäne: `src/domain/planLibrary.ts`.
+
+## Fuel und Plan (Trainingsbereich Etappe 13)
+
+Auf Fuel steht über der Verpflegung eine Karte «Heute geplant» mit den heute offenen Einheiten des aktiven Blocks (Name, Dauer wo eine Regel oder der Mensch sie festlegt, Schlüsseleinheit) und einem Weg zum Player; der Player führt zurück zu Fuel. **Die Karte rechnet keine Mengen und gibt keine Empfehlung**: sie nennt, was im Plan steht (Doktrin: keine Zahl ohne Quelle). Ohne Einheit heute erscheint sie nicht. Verpflegungsempfehlungen je Einheit würden eine geprüfte Regel mit Quelle brauchen und sind nicht gebaut.

@@ -3515,5 +3515,11 @@
       "no_sessions": "Planen har ingen økt.",
       "too_many": "Mer enn 20 maler er ikke mulig."
     }
+  },
+  "fuelPlan": {
+    "title": "Planlagt i dag",
+    "sub": "Hva du spiser og drikker for i dag. KYDON nevner her bare det som står i planen.",
+    "toPlayer": "Til økten",
+    "toFuel": "Kost rundt økten"
   }
 }

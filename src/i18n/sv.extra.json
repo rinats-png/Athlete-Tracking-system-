@@ -3515,5 +3515,11 @@
       "no_sessions": "Planen har inget pass.",
       "too_many": "Fler än 20 mallar går inte."
     }
+  },
+  "fuelPlan": {
+    "title": "Planerat idag",
+    "sub": "Vad du äter och dricker för idag. KYDON nämner här bara det som står i planen.",
+    "toPlayer": "Till passet",
+    "toFuel": "Kost kring passet"
   }
 }

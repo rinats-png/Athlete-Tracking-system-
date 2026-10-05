@@ -3515,5 +3515,11 @@
       "no_sessions": "El plan no tiene ninguna sesión.",
       "too_many": "No se pueden tener más de 20 plantillas."
     }
+  },
+  "fuelPlan": {
+    "title": "Previsto para hoy",
+    "sub": "Para qué comes y bebes hoy. KYDON solo nombra aquí lo que está en el plan.",
+    "toPlayer": "A la sesión",
+    "toFuel": "Alimentación en torno a la sesión"
   }
 }

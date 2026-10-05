@@ -3515,5 +3515,11 @@
       "no_sessions": "Le plan n’a aucune séance.",
       "too_many": "Plus de 20 modèles n’est pas possible."
     }
+  },
+  "fuelPlan": {
+    "title": "Prévu aujourd’hui",
+    "sub": "Pour quoi tu manges et bois aujourd’hui. KYDON ne nomme ici que ce qui figure dans le plan.",
+    "toPlayer": "Vers la séance",
+    "toFuel": "Alimentation autour de la séance"
   }
 }

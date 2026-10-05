@@ -3515,5 +3515,11 @@
       "no_sessions": "Planen har ingen session.",
       "too_many": "Mere end 20 skabeloner er ikke muligt."
     }
+  },
+  "fuelPlan": {
+    "title": "Planlagt i dag",
+    "sub": "Hvad du spiser og drikker for i dag. KYDON nævner her kun det, der står i planen.",
+    "toPlayer": "Til sessionen",
+    "toFuel": "Kost omkring sessionen"
   }
 }

@@ -3515,5 +3515,11 @@
       "no_sessions": "Der Plan hat keine Einheit.",
       "too_many": "Mehr als 20 Vorlagen gehen nicht."
     }
+  },
+  "fuelPlan": {
+    "title": "Heute geplant",
+    "sub": "Wofür du heute isst und trinkst. KYDON nennt hier nur, was im Plan steht.",
+    "toPlayer": "Zur Einheit",
+    "toFuel": "Verpflegung rund um die Einheit"
   }
 }

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { ArrowRight } from 'lucide-react'
 import { Panel } from '@/components/ui/Panel'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { FuelPlanned } from '@/features/fuel/FuelPlanned'
 import { FuelHub } from '@/features/nutrition/FuelingPanels'
 import { entryOn, rollingMean, toDay } from '@/domain/diary'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -23,6 +24,7 @@ export function FuelScreen() {
   return (
     <>
       <ScreenHeader eyebrow={t('fuel.eyebrow')} title={t('fuel.title')} intro={t('fuel.intro')} />
+      <FuelPlanned day={today} />
       <FuelHub day={today} weightKg={weight ?? null} />
       <Panel lift className="mb-4">
         <Link to="/ernaehrung" data-testid="fuel-to-nutrition" className="flex items-center justify-between gap-3 px-4 py-3 text-[14px]">

@@ -3515,5 +3515,11 @@
       "no_sessions": "Het plan heeft geen training.",
       "too_many": "Meer dan 20 sjablonen is niet mogelijk."
     }
+  },
+  "fuelPlan": {
+    "title": "Vandaag gepland",
+    "sub": "Waarvoor je vandaag eet en drinkt. KYDON noemt hier alleen wat in het plan staat.",
+    "toPlayer": "Naar de training",
+    "toFuel": "Voeding rond de training"
   }
 }

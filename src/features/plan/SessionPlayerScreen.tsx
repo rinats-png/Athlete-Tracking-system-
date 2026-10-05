@@ -163,6 +163,9 @@ export function SessionPlayerScreen() {
         </div>
       </Panel>
 
+      <p className="mb-4">
+        <Link to="/fuel" data-testid="player-to-fuel" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('fuelPlan.toFuel')}</Link>
+      </p>
       <LiveHr hrMax={data.profile.maxHr} target={targetOf(session)} running={running} onSummary={setHr} />
 
       <Panel data-testid="player-finish">

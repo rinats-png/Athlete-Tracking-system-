@@ -3515,5 +3515,11 @@
       "no_sessions": "The plan has no session.",
       "too_many": "More than 20 templates are not possible."
     }
+  },
+  "fuelPlan": {
+    "title": "Planned today",
+    "sub": "What you are eating and drinking for today. KYDON only names what is in the plan.",
+    "toPlayer": "To the session",
+    "toFuel": "Fuel around the session"
   }
 }
