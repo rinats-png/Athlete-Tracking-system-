@@ -26,7 +26,8 @@ test.describe('Zuweisung: Migration (statische Prüfung)', () => {
       const head = body.slice(0, 600)
       expect(head, f).toMatch(/security definer/)
       expect(head, f).toMatch(/set search_path/)
-      expect(SQL, f).toMatch(new RegExp(`revoke all on function public\\.${f}\\(`))
+      // delete_account_data behält als bestehende Funktion seine früher gesetzten Rechte (create or replace ändert sie nicht).
+      if (f !== 'delete_account_data') expect(SQL, f).toMatch(new RegExp(`revoke all on function public\\.${f}\\(`))
     }
     expect(SQL).toMatch(/grant execute on function public\.coach_plan_progress\(uuid\) to authenticated/)
     expect(SQL).not.toMatch(/grant execute[^;]*to (anon|public)/i)
@@ -70,7 +71,7 @@ const PAYLOAD = { format: 'kydon-plan', version: 1, name: 'Vom Trainer', weeks: 
 async function signedIn(page: Page, handlers: { offers?: unknown[]; links?: unknown[]; coachRows?: unknown[]; progress?: unknown[] }) {
   const calls: { url: string; body: string | null }[] = []
   await page.addInitScript((u) => {
-    localStorage.setItem('sb-bsbionvnsvqghaqijmpl-auth-token', JSON.stringify({ access_token: 'stub', token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + 3600, refresh_token: 'stub', user: u }))
+    localStorage.setItem('kydon.auth', JSON.stringify({ access_token: 'stub', token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + 3600, refresh_token: 'stub', user: u }))
   }, USER)
   await page.route('**/*.supabase.co/**', async (route) => {
     const url = route.request().url()
@@ -130,6 +131,7 @@ test.describe('Zuweisung: Athlet', () => {
     expect(calls.some((c) => c.url.includes('/rpc/respond_plan_assignment'))).toBe(false)
     await page.getByTestId(`offer-open-${AID}`).click()
     await page.getByTestId(`offer-decline-${AID}`).click()
+    await expect(page.getByTestId(`offer-${AID}`)).toHaveCount(0)
     const rpc = calls.find((c) => c.url.includes('/rpc/respond_plan_assignment'))!
     expect(JSON.parse(rpc.body!)).toMatchObject({ p_accept: false, p_share_done: false, p_share_results: false, p_share_hr: false })
   })
@@ -160,7 +162,8 @@ test.describe('Zuweisung: Athlet', () => {
     }, AID)
     await page.goto('/plan/block', { waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('share-hr')).toBeChecked()
-    await page.getByTestId('share-done').uncheck()
+    await page.getByTestId('share-done').click()
+    await expect(page.getByTestId('share-done')).not.toBeChecked()
     await expect(page.getByTestId('share-results')).not.toBeChecked()
     await expect(page.getByTestId('share-hr')).not.toBeChecked()
     const rpc = calls.filter((c) => c.url.includes('/rpc/set_plan_assignment_share')).pop()!
