@@ -6,6 +6,8 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { openSessionsOn } from '@/domain/trainingBlock'
+import { LiveHr } from '@/features/plan/LiveHr'
+import type { HrSummary } from '@/domain/liveHr'
 import { SessionWhy } from '@/features/plan/SessionWhy'
 import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
@@ -37,12 +39,18 @@ function stepsOf(session: StoredPlannedSession): Step[] {
   return out
 }
 
+/** Pulsziel der Einheit in Prozent der HFmax, wo die Regel eines nennt. */
+function targetOf(session: StoredPlannedSession): { min: number; max: number } | null {
+  for (const b of session.blocks) if (b.type === 'interval' && b.intensity.type === 'hr_percent_max') return { min: b.intensity.min, max: b.intensity.max }
+  return null
+}
+
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.max(0, Math.ceil(s % 60)) % 60).padStart(2, '0')}`
 
 export function SessionPlayerScreen() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { trainingBlocks, completePlannedSession } = useAppData()
+  const { data, trainingBlocks, completePlannedSession } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
   const today = new Date().toISOString().slice(0, 10)
   const open = block ? openSessionsOn(block, today) : []
@@ -57,6 +65,7 @@ export function SessionPlayerScreen() {
   const startedAt = useRef<number | null>(null)
   const [rpe, setRpe] = useState<number | null>(null)
   const [minutes, setMinutes] = useState<number | null>(null)
+  const [hr, setHr] = useState<HrSummary | null>(null)
 
   useEffect(() => {
     setStep(0)
@@ -64,6 +73,7 @@ export function SessionPlayerScreen() {
     setRemaining(steps[0]?.seconds ?? 0)
     startedAt.current = null
     setMinutes(session?.plannedDurationMin ?? null)
+    setHr(null)
   }, [session?.id, steps])
 
   useEffect(() => {
@@ -112,7 +122,7 @@ export function SessionPlayerScreen() {
 
   const done = () => {
     if (rpe == null) return
-    completePlannedSession({ blockId: block.id, sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, kind: diaryKindOf(session.primaryIntent) })
+    completePlannedSession({ blockId: block.id, sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, kind: diaryKindOf(session.primaryIntent), hr: hr ? { avg: hr.avg, max: hr.max } : null })
     navigate('/plan/block')
   }
 
@@ -149,6 +159,8 @@ export function SessionPlayerScreen() {
           )}
         </div>
       </Panel>
+
+      <LiveHr hrMax={data.profile.maxHr} target={targetOf(session)} running={running} onSummary={setHr} />
 
       <Panel data-testid="player-finish">
         <PanelHeader title={t('player.finish')} subtitle={finished ? t('player.allDone') : undefined} />

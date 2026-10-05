@@ -3427,5 +3427,25 @@
       "not_json": "Filen är inte giltig JSON.",
       "not_a_plan": "Filen är inte en KYDON-plan."
     }
+  },
+  "hr": {
+    "title": "Puls",
+    "connected": "Ansluten: {{name}}",
+    "device": "Pulsband",
+    "unit": "slag/min",
+    "zone": {
+      "below": "Under målet ({{min}}–{{max}} % maxpuls)",
+      "in": "Inom målet ({{min}}–{{max}} % maxpuls)",
+      "above": "Över målet ({{min}}–{{max}} % maxpuls)"
+    },
+    "connect": "Anslut pulsband",
+    "unsupported": "Din webbläsare kan inte ansluta pulsband (Chrome på Android eller dator kan). Skriv in pulsen för hand.",
+    "manual": "Puls för hand (slag/min)",
+    "add": "Lägg till",
+    "noMax": "Utan en trovärdig maxpuls i profilen visar appen inga målområden.",
+    "lost": "Anslutningen till pulsbandet bröts.",
+    "failed": "Anslutningen fungerade inte.",
+    "implausible": "Värdet ligger utanför 30 till 230.",
+    "note": "Värdena stannar på din enhet. Vid avslut sparas bara passets medel- och maxvärde. Ett pulsband är ingen medicinteknisk produkt; appen tolkar inte pulsen medicinskt."
   }
 }

@@ -3427,5 +3427,25 @@
       "not_json": "The file is not valid JSON.",
       "not_a_plan": "The file is not a KYDON plan."
     }
+  },
+  "hr": {
+    "title": "Heart rate",
+    "connected": "Connected: {{name}}",
+    "device": "Heart-rate strap",
+    "unit": "bpm",
+    "zone": {
+      "below": "Below target ({{min}}–{{max}} % HRmax)",
+      "in": "In target range ({{min}}–{{max}} % HRmax)",
+      "above": "Above target ({{min}}–{{max}} % HRmax)"
+    },
+    "connect": "Connect heart-rate strap",
+    "unsupported": "Your browser cannot connect a heart-rate strap (Chrome on Android or desktop can). Enter your heart rate by hand.",
+    "manual": "Heart rate by hand (bpm)",
+    "add": "Add",
+    "noMax": "Without a credible maximum heart rate in your profile the app shows no target ranges.",
+    "lost": "The connection to the strap was lost.",
+    "failed": "The connection did not work.",
+    "implausible": "The value is outside 30 to 230.",
+    "note": "Values stay on your device. Only the average and maximum of the session are saved when you finish. A heart-rate strap is not a medical device; the app does not interpret heart rate medically."
   }
 }

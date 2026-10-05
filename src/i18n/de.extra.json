@@ -3427,5 +3427,25 @@
       "not_json": "Die Datei ist kein gültiges JSON.",
       "not_a_plan": "Die Datei ist kein KYDON-Plan."
     }
+  },
+  "hr": {
+    "title": "Puls",
+    "connected": "Verbunden: {{name}}",
+    "device": "Pulsgurt",
+    "unit": "Schläge/min",
+    "zone": {
+      "below": "Unter dem Ziel ({{min}}–{{max}} % HFmax)",
+      "in": "Im Zielbereich ({{min}}–{{max}} % HFmax)",
+      "above": "Über dem Ziel ({{min}}–{{max}} % HFmax)"
+    },
+    "connect": "Pulsgurt verbinden",
+    "unsupported": "Dein Browser kann keinen Pulsgurt verbinden (Chrome auf Android oder Desktop kann es). Trage den Puls von Hand ein.",
+    "manual": "Puls von Hand (Schläge/min)",
+    "add": "Eintragen",
+    "noMax": "Ohne glaubwürdige maximale Herzfrequenz im Profil zeigt die App keine Zielbereiche.",
+    "lost": "Die Verbindung zum Pulsgurt ist abgebrochen.",
+    "failed": "Die Verbindung hat nicht geklappt.",
+    "implausible": "Der Wert liegt außerhalb von 30 bis 230.",
+    "note": "Die Werte bleiben auf deinem Gerät. Gespeichert werden beim Abschluss nur Mittel und Höchstwert der Einheit. Ein Pulsgurt ist kein Medizinprodukt, die App wertet den Puls nicht medizinisch."
   }
 }

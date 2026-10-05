@@ -3427,5 +3427,25 @@
       "not_json": "Filen er ikke gyldig JSON.",
       "not_a_plan": "Filen er ikke en KYDON-plan."
     }
+  },
+  "hr": {
+    "title": "Puls",
+    "connected": "Tilkoblet: {{name}}",
+    "device": "Pulsbelte",
+    "unit": "slag/min",
+    "zone": {
+      "below": "Under målet ({{min}}–{{max}} % makspuls)",
+      "in": "Innenfor målet ({{min}}–{{max}} % makspuls)",
+      "above": "Over målet ({{min}}–{{max}} % makspuls)"
+    },
+    "connect": "Koble til pulsbelte",
+    "unsupported": "Nettleseren din kan ikke koble til pulsbelte (Chrome på Android eller datamaskin kan). Skriv inn pulsen for hånd.",
+    "manual": "Puls for hånd (slag/min)",
+    "add": "Legg til",
+    "noMax": "Uten en troverdig makspuls i profilen viser appen ingen målområder.",
+    "lost": "Forbindelsen til pulsbeltet ble brutt.",
+    "failed": "Tilkoblingen fungerte ikke.",
+    "implausible": "Verdien ligger utenfor 30 til 230.",
+    "note": "Verdiene blir på enheten din. Ved avslutning lagres bare gjennomsnitt og maksimum for økten. Et pulsbelte er ikke medisinsk utstyr; appen tolker ikke pulsen medisinsk."
   }
 }

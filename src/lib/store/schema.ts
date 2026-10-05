@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 36
+export const CURRENT_SCHEMA_VERSION = 37
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -728,6 +728,9 @@ const planCompletionSchema = z.object({
   durationMin: z.number().int().min(1).max(600),
   rpe: z.number().int().min(1).max(10),
   diarySessionId: z.string().nullable().default(null),
+  /** Mittel und Höchstwert des Pulses der Einheit (Pulsgurt oder Handeingabe), nur lokal. */
+  avgHr: z.number().int().min(30).max(230).nullable().default(null),
+  maxHr: z.number().int().min(30).max(230).nullable().default(null),
 })
 const trainingBlockSchema = z.object({
   id: z.string().min(1),
@@ -1827,6 +1830,19 @@ export const MIGRATIONS: Migration[] = [
     to: 36,
     describe: 'Trainingsblöcke: eigene Übungen als Teil einer Einheit (nur neue Teilart, Bestand unverändert)',
     run: (data: any) => ({ ...data, version: 36 }),
+  },
+  {
+    from: 36,
+    to: 37,
+    describe: 'Erledigte Einheiten: Puls (Mittel, Höchstwert), leer',
+    run: (data: any) => ({
+      ...data,
+      version: 37,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        trainingBlocks: (athlete.trainingBlocks ?? []).map((b: any) => ({ ...b, completions: (b.completions ?? []).map((c: any) => ({ ...c, avgHr: c.avgHr ?? null, maxHr: c.maxHr ?? null })) })),
+      })),
+    }),
   },
 ]
 

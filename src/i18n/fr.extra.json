@@ -3427,5 +3427,25 @@
       "not_json": "Le fichier n’est pas un JSON valide.",
       "not_a_plan": "Le fichier n’est pas un plan KYDON."
     }
+  },
+  "hr": {
+    "title": "Fréquence cardiaque",
+    "connected": "Connecté : {{name}}",
+    "device": "Ceinture cardio",
+    "unit": "bpm",
+    "zone": {
+      "below": "Sous la cible ({{min}}–{{max}} % FCmax)",
+      "in": "Dans la cible ({{min}}–{{max}} % FCmax)",
+      "above": "Au-dessus de la cible ({{min}}–{{max}} % FCmax)"
+    },
+    "connect": "Connecter la ceinture cardio",
+    "unsupported": "Ton navigateur ne peut pas connecter de ceinture cardio (Chrome sur Android ou ordinateur le peut). Saisis ta fréquence à la main.",
+    "manual": "Fréquence à la main (bpm)",
+    "add": "Ajouter",
+    "noMax": "Sans fréquence cardiaque maximale crédible dans ton profil, l’app n’affiche pas de zones cibles.",
+    "lost": "La connexion à la ceinture a été perdue.",
+    "failed": "La connexion n’a pas fonctionné.",
+    "implausible": "La valeur est hors de 30 à 230.",
+    "note": "Les valeurs restent sur ton appareil. À la fin, seuls la moyenne et le maximum de la séance sont enregistrés. Une ceinture cardio n’est pas un dispositif médical ; l’app n’interprète pas le pouls médicalement."
   }
 }

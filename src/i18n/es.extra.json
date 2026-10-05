@@ -3427,5 +3427,25 @@
       "not_json": "El archivo no es un JSON válido.",
       "not_a_plan": "El archivo no es un plan KYDON."
     }
+  },
+  "hr": {
+    "title": "Pulso",
+    "connected": "Conectado: {{name}}",
+    "device": "Banda de pulso",
+    "unit": "ppm",
+    "zone": {
+      "below": "Por debajo del objetivo ({{min}}–{{max}} % FCmáx)",
+      "in": "En el objetivo ({{min}}–{{max}} % FCmáx)",
+      "above": "Por encima del objetivo ({{min}}–{{max}} % FCmáx)"
+    },
+    "connect": "Conectar banda de pulso",
+    "unsupported": "Tu navegador no puede conectar una banda de pulso (Chrome en Android o escritorio sí). Introduce el pulso a mano.",
+    "manual": "Pulso a mano (ppm)",
+    "add": "Añadir",
+    "noMax": "Sin una frecuencia cardíaca máxima creíble en tu perfil, la app no muestra zonas objetivo.",
+    "lost": "Se perdió la conexión con la banda.",
+    "failed": "La conexión no funcionó.",
+    "implausible": "El valor está fuera de 30 a 230.",
+    "note": "Los valores se quedan en tu dispositivo. Al terminar solo se guardan la media y el máximo de la sesión. Una banda de pulso no es un producto sanitario; la app no interpreta el pulso médicamente."
   }
 }

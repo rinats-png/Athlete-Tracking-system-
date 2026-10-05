@@ -3427,5 +3427,25 @@
       "not_json": "Het bestand is geen geldige JSON.",
       "not_a_plan": "Het bestand is geen KYDON-plan."
     }
+  },
+  "hr": {
+    "title": "Hartslag",
+    "connected": "Verbonden: {{name}}",
+    "device": "Hartslagband",
+    "unit": "slagen/min",
+    "zone": {
+      "below": "Onder het doel ({{min}}–{{max}} % HFmax)",
+      "in": "In het doelbereik ({{min}}–{{max}} % HFmax)",
+      "above": "Boven het doel ({{min}}–{{max}} % HFmax)"
+    },
+    "connect": "Hartslagband verbinden",
+    "unsupported": "Je browser kan geen hartslagband verbinden (Chrome op Android of desktop kan het). Voer je hartslag met de hand in.",
+    "manual": "Hartslag met de hand (slagen/min)",
+    "add": "Toevoegen",
+    "noMax": "Zonder geloofwaardige maximale hartslag in je profiel toont de app geen doelbereiken.",
+    "lost": "De verbinding met de band is verbroken.",
+    "failed": "De verbinding is niet gelukt.",
+    "implausible": "De waarde ligt buiten 30 tot 230.",
+    "note": "De waarden blijven op je apparaat. Bij afronden worden alleen gemiddelde en maximum van de training opgeslagen. Een hartslagband is geen medisch hulpmiddel; de app duidt de hartslag niet medisch."
   }
 }

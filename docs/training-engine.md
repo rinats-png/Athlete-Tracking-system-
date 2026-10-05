@@ -154,3 +154,12 @@ Eigene Einheiten nehmen **Übungen** auf: Suche im Katalog (`src/data/exercises.
 Export (`Plan exportieren`, im Block und im eigenen Plan) und Import (`/plan/eigen`, nur ohne aktiven Block, nichts wird überschrieben) als JSON, Format `kydon-plan` Version 1, höchstens 200 KB, 60 Einheiten.
 
 **Eine Datei ist fremder Inhalt.** Der Import (`src/domain/planFile.ts`) übernimmt nur, was ein Mensch selbst setzen kann: Tag, Wochen, Absicht, Name, Notiz, Dauer, eigene Übungen. Evidenz, Dosis und Prüfstatus aus der Datei zählen nie. Nennt eine Einheit eine Regel des Registers, die im aktuellen Modus für Sportfamilie und Trainingsalter zulässig ist, wird sie aus dem Register neu gebaut; jede andere wird zur eigenen Einheit ohne Evidenzangabe. Unbekannte oder nicht zulässige Regeln, belegte Tage und falsche Wochen werden gezählt und gemeldet, nicht still verworfen. Die Datei enthält keine Gesundheits- und keine Erledigungsdaten.
+
+## Live-Puls im Player (Trainingsbereich Etappe 9)
+
+`LiveHr` im Session Player: Pulsgurt über Web Bluetooth (Merkmal Heart Rate, `src/lib/bluetoothHr.ts`; nur Chrome auf Android und Desktop) oder Handeingabe als Rückfall, wo der Browser es nicht kann.
+
+- **Einordnung nur gegen das Pulsziel der Regel** («darunter», «im Zielbereich», «darüber» in Prozent der HFmax) und nur mit glaubwürdiger HFmax im Profil. Keine eigenen Zonen, keine medizinische Deutung; ein Pulsgurt ist kein Medizinprodukt.
+- **Datenschutz:** Werte bleiben im Arbeitsspeicher der Seite. Gespeichert werden beim Abschluss nur Mittel und Höchstwert der Einheit (mindestens drei plausible Werte, 30 bis 230), lokal in der Erledigung (`avgHr`, `maxHr`, Schema 37). Es geht nichts an einen Server.
+- Werte zählen für die Zusammenfassung nur, solange die Uhr läuft. Die Reine Logik (Paket lesen, Plausibilität, Zielbereich, Zusammenfassung) steht in `src/domain/liveHr.ts`.
+- Nicht geprüft: echte Pulsgurte. Die Tests bilden Web Bluetooth nach; ein Gurt auf einem Android-Gerät muss von Hand ausprobiert werden.
