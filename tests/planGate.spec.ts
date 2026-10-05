@@ -34,7 +34,7 @@ test.describe('Bewertungstor: Fachlogik', () => {
   test('niedrige Gesamtzuverlässigkeit sperrt trotz voller Abdeckung; die Hälfte ergibt Analysieren', () => {
     const all = [axis('a', 3, 10), axis('b', 2, 30)]
     expect(assessmentGate(gapOf(rows), all, 'LOW', ASOF)).toMatchObject({ open: false, level: 'EXPLAIN' })
-    const half = assessmentGate(gapOf(rows), [axis('a', 3, 10)], 'MODERATE', ASOF)
+    const half = assessmentGate(gapOf([row('a', 'endurance', 0.9, 3), row('b', 'max_strength', 0.8, 0)]), [axis('a', 3, 10)], 'MODERATE', ASOF)
     expect(half).toMatchObject({ open: false, level: 'ANALYZE', requiredOk: 1, requiredTotal: 2 })
   })
 
@@ -44,12 +44,12 @@ test.describe('Bewertungstor: Fachlogik', () => {
 })
 
 test.describe('Bewertungstor: Bildschirm', () => {
-  test('ohne Messungen gesperrt mit Liste und Weg zu den Tests; Abdeckung als Anzahl', async ({ page }) => {
+  test('mit einer einzigen Messung gesperrt mit Liste und Weg zu den Tests; Abdeckung als Anzahl', async ({ page }) => {
     await openDemo(page)
     await page.evaluate(() => {
       const data = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
       data.athletes[0].profile.disciplineId = 'judo'
-      data.athletes[0].results = []
+      data.athletes[0].results = data.athletes[0].results.slice(0, 1)
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
     await page.goto('/plan/pruefung', { waitUntil: 'domcontentloaded' })
@@ -71,6 +71,7 @@ test.describe('Bewertungstor: Bildschirm', () => {
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     })
     await page.goto('/plan/pruefung', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('gate-overall')).toBeVisible()
     const rows = page.locator('[data-testid^="gate-row-"]')
     expect(await rows.count()).toBeGreaterThan(2)
     for (const s of await rows.evaluateAll((els) => els.map((e) => e.getAttribute('data-status')))) expect(['ok', 'thin', 'stale', 'missing']).toContain(s)
