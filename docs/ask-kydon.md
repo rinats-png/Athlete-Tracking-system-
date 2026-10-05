@@ -74,7 +74,7 @@ Zahlenwächter im Client → Anzeige. Jede Störung ergibt die feste Vorlage und
 einen Satz, warum. Entwürfe tragen nur den Platzhalter `{name}`; der Name wird
 erst in der App eingesetzt.
 
-**Schalter:** `VITE_AI_PHRASE=on` (Bau). Produktiv aus, bis AVV, Region und
+**Stand 5. Oktober 2026: in der Auslieferung EINGESCHALTET** (`netlify.toml`, Entscheidung des Inhabers, der AVV, Region, Datenschutztext und das Einrichten der Edge Function `phrase` selbst übernimmt). Ohne eingerichtete Funktion fällt jede Antwort auf die feste Vorlage zurück, ohne Fehler (`src/lib/supabase/phrase.ts`). Zurücknehmen: Zeile in `netlify.toml` entfernen. Ursprüngliche Vorgabe: `VITE_AI_PHRASE=on` (Bau). Produktiv aus, bis AVV, Region und
 Datenschutztext stehen.
 
 **Einzurichten vom Inhaber, nicht im Repo:** Funktions-Umgebung

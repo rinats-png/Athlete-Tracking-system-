@@ -17,7 +17,8 @@
 | D1, D2 | Taper (Kampfsport) und Rückkehr nach Pause, nur Struktur | ja: 5 neue Vorlagen (Grappling/Striking-Taper, Rückkehr für Grappling, Striking, Hybrid), alle Plätze offen |
 | E1 | Muay Thai: ich schlage Anforderungshöhen vor, du bestätigst | **offen: Vorschlag unten, bitte bestätigen** |
 | E2 | Judo und Kickboxen | beide gibt es im Katalog, nichts zu tun |
-| F1–F4 | Wetter, Check-in teilen, Sprachmodell, Strava bleiben aus | nichts zu tun, die Auslieferung setzt keinen dieser Schalter |
+| F1, F2, F4 | Wetter, Check-in teilen, Strava bleiben aus | nichts zu tun, die Auslieferung setzt keinen dieser Schalter |
+| F3 | **geändert:** Sprachmodell eingeschaltet, Inhaber kümmert sich um AVV, Region, Datenschutztext und Einrichten der Funktion | ja: `VITE_AI_PHRASE="on"` in `netlify.toml` |
 
 ### Hinweise zu deinen Antworten
 

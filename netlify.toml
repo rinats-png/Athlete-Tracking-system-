@@ -21,6 +21,12 @@
   # Die Zuweisung braucht die Migration 20261005100000_plan_assignments.sql in Supabase.
   VITE_TRAINING_PLAN = "preview"
   VITE_PLAN_ASSIGN = "on"
+  # Sprachmodell-Umformulierung (Entscheidung des Inhabers, 5. Oktober 2026): in der
+  # Auslieferung eingeschaltet. Die Edge Function `phrase` und ihr Schlüssel müssen im
+  # Supabase-Projekt eingerichtet sein; ohne sie fällt jede Antwort auf die Vorlage
+  # zurück (kein Fehler). AVV, Region und Datenschutztext liegen beim Inhaber.
+  # Zurücknehmen: Zeile entfernen oder auf "off" setzen.
+  VITE_AI_PHRASE = "on"
 
 # Single-Page-App: jede Route muss auf index.html zeigen, sonst liefert ein
 # Direktaufruf oder ein Reload eine 404.
