@@ -3447,5 +3447,53 @@
     "failed": "De verbinding is niet gelukt.",
     "implausible": "De waarde ligt buiten 30 tot 230.",
     "note": "De waarden blijven op je apparaat. Bij afronden worden alleen gemiddelde en maximum van de training opgeslagen. Een hartslagband is geen medisch hulpmiddel; de app duidt de hartslag niet medisch."
+  },
+  "offers": {
+    "title": "Plan van je trainer",
+    "sub": "Jij beslist of je hem accepteert.",
+    "unnamed": "Plan zonder naam",
+    "decide": "Bekijken en beslissen",
+    "consent": "Er wordt niets gedeeld zolang je niets aanzet. Kies wat je trainer van je voortgang mag zien:",
+    "shareDone": "Gedaan: de trainer ziet welke training je hebt gedaan",
+    "shareResults": "Duur en inspanning (RPE) van de gedane training",
+    "shareHr": "Hartslag: gemiddelde en maximum (gezondheidsgegeven)",
+    "revocable": "Je kunt dit altijd wijzigen. Uitzetten werkt direct en wist wat de trainer al kon zien.",
+    "activeBlock": "Je hebt al een actief blok. Sluit dat eerst af, dan kun je het plan accepteren.",
+    "accept": "Accepteren",
+    "decline": "Afwijzen",
+    "failed": "Dat is niet gelukt. Controleer de verbinding en probeer het opnieuw.",
+    "unreadable": "Dit plan is niet te lezen. Het is niet geaccepteerd.",
+    "sharesTitle": "Delen met je trainer",
+    "sharesSub": "Wat de trainer van dit plan mag zien."
+  },
+  "assign": {
+    "off": "Plan toewijzen",
+    "title": "Plan toewijzen",
+    "intro": "Stuur je actieve plan naar een verbonden atleet. De atleet beslist of hij het accepteert en kiest zelf wat jij van de voortgang ziet.",
+    "unavailable": "Toewijzen vraagt een account en een verbinding. Nu is het niet bereikbaar.",
+    "send": "Plan versturen",
+    "noBlock": "Je hebt geen actief plan. Maak er eerst een:",
+    "athlete": "Atleet",
+    "noAthletes": "Geen verbonden atleten met een account.",
+    "note": "Het plan wordt als structuur verstuurd. De app van de atleet bouwt dosis en bewijs uit het regelregister.",
+    "sendButton": "Plan versturen",
+    "sent": "Het plan is verstuurd. De atleet beslist.",
+    "failed": "Versturen is niet gelukt.",
+    "list": "Toewijzingen",
+    "none": "Nog geen toewijzing.",
+    "shares": "Delen van de atleet: gedaan {{done}}, duur en RPE {{results}}, hartslag {{hr}}.",
+    "yes": "ja",
+    "no": "nee",
+    "progress": "Voortgang",
+    "withdraw": "Intrekken",
+    "noProgress": "Nog niets gemeld.",
+    "sessionN": "Training {{n}}",
+    "link": "Plan toewijzen aan atleet",
+    "status": {
+      "offered": "Aangeboden",
+      "accepted": "Geaccepteerd",
+      "declined": "Afgewezen",
+      "withdrawn": "Ingetrokken"
+    }
   }
 }

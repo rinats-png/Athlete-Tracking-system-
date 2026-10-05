@@ -7,6 +7,8 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, shownBlock, weekChecks } from '@/domain/trainingBlock'
+import { planAssignEnabled } from '@/lib/planAssign'
+import { AssignmentShares } from '@/features/plan/AssignmentShares'
 import { PlanExportButton } from '@/features/plan/PlanFileTools'
 import { SessionWhy } from '@/features/plan/SessionWhy'
 import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
@@ -84,7 +86,14 @@ export function BlockScreen() {
         </Link>
       </p>
 
-      {!readOnly && <div className="mb-3"><PlanExportButton block={block} /></div>}
+      {!readOnly && (
+        <div className="mb-3 flex flex-wrap items-center gap-4">
+          <PlanExportButton block={block} />
+          {planAssignEnabled() && <Link to="/plan/zuweisen" data-testid="block-to-assign" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('assign.link')}</Link>}
+        </div>
+      )}
+
+      {!readOnly && <AssignmentShares block={block} />}
 
       <Panel className="mb-4" data-testid="block-week">
         {readOnly && <p className="px-4 pt-3 text-[12px] text-ink-secondary" data-testid="block-closed">{t('block.closedNote')}</p>}

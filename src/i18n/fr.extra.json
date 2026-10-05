@@ -3447,5 +3447,53 @@
     "failed": "La connexion n’a pas fonctionné.",
     "implausible": "La valeur est hors de 30 à 230.",
     "note": "Les valeurs restent sur ton appareil. À la fin, seuls la moyenne et le maximum de la séance sont enregistrés. Une ceinture cardio n’est pas un dispositif médical ; l’app n’interprète pas le pouls médicalement."
+  },
+  "offers": {
+    "title": "Plan de ton entraîneur",
+    "sub": "Tu décides si tu l’acceptes.",
+    "unnamed": "Plan sans nom",
+    "decide": "Voir et décider",
+    "consent": "Rien n’est partagé tant que tu n’actives rien. Choisis ce que ton entraîneur peut voir de ta progression :",
+    "shareDone": "Fait : l’entraîneur voit quelle séance tu as faite",
+    "shareResults": "Durée et effort (RPE) de la séance faite",
+    "shareHr": "Pouls : moyenne et maximum (donnée de santé)",
+    "revocable": "Tu peux changer cela à tout moment. Désactiver agit immédiatement et supprime ce que l’entraîneur pouvait déjà voir.",
+    "activeBlock": "Tu as déjà un bloc actif. Termine-le d’abord, puis tu peux accepter le plan.",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "failed": "Cela n’a pas fonctionné. Vérifie la connexion et réessaie.",
+    "unreadable": "Ce plan est illisible. Il n’a pas été accepté.",
+    "sharesTitle": "Partage avec ton entraîneur",
+    "sharesSub": "Ce que l’entraîneur peut voir de ce plan."
+  },
+  "assign": {
+    "off": "Attribuer un plan",
+    "title": "Attribuer un plan",
+    "intro": "Envoie ton plan actif à un athlète connecté. L’athlète décide de l’accepter et choisit ce que tu vois de la progression.",
+    "unavailable": "L’attribution nécessite un compte et une connexion. Elle est injoignable pour l’instant.",
+    "send": "Envoyer le plan",
+    "noBlock": "Tu n’as pas de plan actif. Crée-en un d’abord :",
+    "athlete": "Athlète",
+    "noAthletes": "Aucun athlète connecté avec un compte.",
+    "note": "Le plan est envoyé comme structure. L’app de l’athlète construit dose et preuves depuis le registre de règles.",
+    "sendButton": "Envoyer le plan",
+    "sent": "Le plan a été envoyé. L’athlète décide.",
+    "failed": "L’envoi n’a pas fonctionné.",
+    "list": "Attributions",
+    "none": "Pas encore d’attribution.",
+    "shares": "Partage de l’athlète : fait {{done}}, durée et RPE {{results}}, pouls {{hr}}.",
+    "yes": "oui",
+    "no": "non",
+    "progress": "Progression",
+    "withdraw": "Retirer",
+    "noProgress": "Rien de signalé pour l’instant.",
+    "sessionN": "Séance {{n}}",
+    "link": "Attribuer le plan à un athlète",
+    "status": {
+      "offered": "Proposé",
+      "accepted": "Accepté",
+      "declined": "Refusé",
+      "withdrawn": "Retiré"
+    }
   }
 }

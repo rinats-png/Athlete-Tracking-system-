@@ -3447,5 +3447,53 @@
     "failed": "La conexión no funcionó.",
     "implausible": "El valor está fuera de 30 a 230.",
     "note": "Los valores se quedan en tu dispositivo. Al terminar solo se guardan la media y el máximo de la sesión. Una banda de pulso no es un producto sanitario; la app no interpreta el pulso médicamente."
+  },
+  "offers": {
+    "title": "Plan de tu entrenador",
+    "sub": "Tú decides si lo aceptas.",
+    "unnamed": "Plan sin nombre",
+    "decide": "Ver y decidir",
+    "consent": "No se comparte nada mientras no lo actives. Elige qué puede ver tu entrenador de tu progreso:",
+    "shareDone": "Hecho: el entrenador ve qué sesión has completado",
+    "shareResults": "Duración y esfuerzo (RPE) de la sesión completada",
+    "shareHr": "Pulso: media y máximo (dato de salud)",
+    "revocable": "Puedes cambiarlo en cualquier momento. Desactivarlo surte efecto al instante y borra lo que el entrenador ya podía ver.",
+    "activeBlock": "Ya tienes un bloque activo. Ciérralo primero y luego podrás aceptar el plan.",
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "failed": "No ha funcionado. Revisa la conexión e inténtalo de nuevo.",
+    "unreadable": "Este plan no se puede leer. No se ha aceptado.",
+    "sharesTitle": "Compartir con tu entrenador",
+    "sharesSub": "Lo que el entrenador puede ver de este plan."
+  },
+  "assign": {
+    "off": "Asignar plan",
+    "title": "Asignar plan",
+    "intro": "Envía tu plan activo a un atleta conectado. El atleta decide si lo acepta y elige qué ves del progreso.",
+    "unavailable": "Asignar necesita una cuenta y una conexión. Ahora no está disponible.",
+    "send": "Enviar plan",
+    "noBlock": "No tienes un plan activo. Crea uno primero:",
+    "athlete": "Atleta",
+    "noAthletes": "No hay atletas conectados con cuenta.",
+    "note": "El plan se envía como estructura. La app del atleta construye dosis y evidencia desde el registro de reglas.",
+    "sendButton": "Enviar plan",
+    "sent": "El plan se ha enviado. El atleta decide.",
+    "failed": "El envío no ha funcionado.",
+    "list": "Asignaciones",
+    "none": "Aún no hay asignaciones.",
+    "shares": "Lo que comparte el atleta: hecho {{done}}, duración y RPE {{results}}, pulso {{hr}}.",
+    "yes": "sí",
+    "no": "no",
+    "progress": "Progreso",
+    "withdraw": "Retirar",
+    "noProgress": "Aún no hay nada comunicado.",
+    "sessionN": "Sesión {{n}}",
+    "link": "Asignar plan al atleta",
+    "status": {
+      "offered": "Ofrecido",
+      "accepted": "Aceptado",
+      "declined": "Rechazado",
+      "withdrawn": "Retirado"
+    }
   }
 }

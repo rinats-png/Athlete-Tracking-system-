@@ -179,6 +179,7 @@ export function PlanTemplateFitScreen() {
       weeks: tpl.weeks,
       retestMetrics: fit.retestMetrics,
       templateId: tpl.id,
+      assignmentId: null,
       eventDay: eventDay || null,
       sessions: fit.sessions,
       completions: [],

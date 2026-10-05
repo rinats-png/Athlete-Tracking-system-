@@ -3447,5 +3447,53 @@
     "failed": "Tilkoblingen fungerte ikke.",
     "implausible": "Verdien ligger utenfor 30 til 230.",
     "note": "Verdiene blir på enheten din. Ved avslutning lagres bare gjennomsnitt og maksimum for økten. Et pulsbelte er ikke medisinsk utstyr; appen tolker ikke pulsen medisinsk."
+  },
+  "offers": {
+    "title": "Plan fra treneren din",
+    "sub": "Du bestemmer om du tar imot den.",
+    "unnamed": "Plan uten navn",
+    "decide": "Se og bestem",
+    "consent": "Ingenting deles før du slår det på. Velg hva treneren din får se av fremgangen din:",
+    "shareDone": "Fullført: treneren ser hvilken økt du har gjort",
+    "shareResults": "Varighet og anstrengelse (RPE) for den fullførte økten",
+    "shareHr": "Puls: gjennomsnitt og maksimum (helseopplysning)",
+    "revocable": "Du kan endre dette når som helst. Å slå av gjelder umiddelbart og sletter det treneren allerede kunne se.",
+    "activeBlock": "Du har allerede en aktiv blokk. Avslutt den først, så kan du ta imot planen.",
+    "accept": "Ta imot",
+    "decline": "Avslå",
+    "failed": "Det fungerte ikke. Sjekk tilkoblingen og prøv igjen.",
+    "unreadable": "Denne planen kan ikke leses. Den ble ikke tatt imot.",
+    "sharesTitle": "Deling med treneren din",
+    "sharesSub": "Hva treneren får se av denne planen."
+  },
+  "assign": {
+    "off": "Tildel plan",
+    "title": "Tildel plan",
+    "intro": "Send den aktive planen din til en tilkoblet utøver. Utøveren bestemmer om planen tas imot og velger selv hva du ser av fremgangen.",
+    "unavailable": "Tildeling krever en konto og en tilkobling. Den er ikke tilgjengelig akkurat nå.",
+    "send": "Send plan",
+    "noBlock": "Du har ingen aktiv plan. Lag en først:",
+    "athlete": "Utøver",
+    "noAthletes": "Ingen tilkoblede utøvere med konto.",
+    "note": "Planen sendes som struktur. Utøverens app bygger dose og evidens fra regelregisteret.",
+    "sendButton": "Send plan",
+    "sent": "Planen ble sendt. Utøveren bestemmer.",
+    "failed": "Sendingen fungerte ikke.",
+    "list": "Tildelinger",
+    "none": "Ingen tildeling ennå.",
+    "shares": "Utøverens deling: fullført {{done}}, varighet og RPE {{results}}, puls {{hr}}.",
+    "yes": "ja",
+    "no": "nei",
+    "progress": "Fremgang",
+    "withdraw": "Trekk tilbake",
+    "noProgress": "Ingenting rapportert ennå.",
+    "sessionN": "Økt {{n}}",
+    "link": "Tildel plan til utøver",
+    "status": {
+      "offered": "Tilbudt",
+      "accepted": "Tatt imot",
+      "declined": "Avslått",
+      "withdrawn": "Trukket tilbake"
+    }
   }
 }

@@ -8,6 +8,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { planMode } from '@/domain/planMode'
+import { PlanOffersPanel } from '@/features/plan/PlanOffersPanel'
 import { blockEndDay, blockWeek, openSessionsOn, sessionInWeek, weekChecks } from '@/domain/trainingBlock'
 import { daysTo } from '@/domain/weeklyPlan'
 import { TRAINING_RULES } from '@/data/trainingRules'
@@ -52,6 +53,8 @@ export function PlanHubScreen() {
   return (
     <div data-testid="plan-hub">
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('planHub.title')} intro={competition ? t('planHub.competition', { name: competition.name || t('planHub.competitionUnnamed') }) : undefined} />
+
+      <PlanOffersPanel />
 
       {!block || !view ? (
         <Panel className="mb-4" data-testid="hub-empty">

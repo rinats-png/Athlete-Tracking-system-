@@ -3447,5 +3447,53 @@
     "failed": "The connection did not work.",
     "implausible": "The value is outside 30 to 230.",
     "note": "Values stay on your device. Only the average and maximum of the session are saved when you finish. A heart-rate strap is not a medical device; the app does not interpret heart rate medically."
+  },
+  "offers": {
+    "title": "Plan from your coach",
+    "sub": "You decide whether to accept it.",
+    "unnamed": "Unnamed plan",
+    "decide": "View and decide",
+    "consent": "Nothing is shared unless you switch it on. Choose what your coach may see of your progress:",
+    "shareDone": "Done: the coach sees which session you completed",
+    "shareResults": "Duration and effort (RPE) of the completed session",
+    "shareHr": "Heart rate: average and maximum (health data)",
+    "revocable": "You can change this at any time. Switching off takes effect immediately and deletes what the coach could already see.",
+    "activeBlock": "You already have an active block. Close it first, then you can accept the plan.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "failed": "That did not work. Check your connection and try again.",
+    "unreadable": "This plan cannot be read. It was not accepted.",
+    "sharesTitle": "Sharing with your coach",
+    "sharesSub": "What the coach may see of this plan."
+  },
+  "assign": {
+    "off": "Assign plan",
+    "title": "Assign plan",
+    "intro": "Send your active plan to a connected athlete. The athlete decides whether to accept it and chooses what you see of the progress.",
+    "unavailable": "Assigning needs an account and a connection. It is not reachable right now.",
+    "send": "Send plan",
+    "noBlock": "You have no active plan. Create one first:",
+    "athlete": "Athlete",
+    "noAthletes": "No connected athletes with an account.",
+    "note": "The plan is sent as a structure. The athlete’s app builds dose and evidence from the rule registry.",
+    "sendButton": "Send plan",
+    "sent": "The plan was sent. The athlete decides.",
+    "failed": "Sending did not work.",
+    "list": "Assignments",
+    "none": "No assignment yet.",
+    "shares": "Athlete’s sharing: done {{done}}, duration and RPE {{results}}, heart rate {{hr}}.",
+    "yes": "yes",
+    "no": "no",
+    "progress": "Progress",
+    "withdraw": "Withdraw",
+    "noProgress": "Nothing reported yet.",
+    "sessionN": "Session {{n}}",
+    "link": "Assign plan to athlete",
+    "status": {
+      "offered": "Offered",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "withdrawn": "Withdrawn"
+    }
   }
 }

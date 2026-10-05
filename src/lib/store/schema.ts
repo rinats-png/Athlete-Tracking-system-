@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 37
+export const CURRENT_SCHEMA_VERSION = 38
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -746,6 +746,8 @@ const trainingBlockSchema = z.object({
   templateId: z.string().max(60).nullable().default(null),
   /** Wettkampftermin, auf den der Block zuläuft; nur Orientierung für den Start. */
   eventDay: dayString.nullable().default(null),
+  /** Zuweisung des Trainers, aus der der Block stammt (Server `plan_assignments`); sonst `null`. */
+  assignmentId: z.string().uuid().nullable().default(null),
   sessions: z.array(plannedSessionSchema).max(60).default([]),
   completions: z.array(planCompletionSchema).max(600).default([]),
   status: z.enum(['active', 'closed']).default('active'),
@@ -1841,6 +1843,19 @@ export const MIGRATIONS: Migration[] = [
       athletes: (data.athletes ?? []).map((athlete: any) => ({
         ...athlete,
         trainingBlocks: (athlete.trainingBlocks ?? []).map((b: any) => ({ ...b, completions: (b.completions ?? []).map((c: any) => ({ ...c, avgHr: c.avgHr ?? null, maxHr: c.maxHr ?? null })) })),
+      })),
+    }),
+  },
+  {
+    from: 37,
+    to: 38,
+    describe: 'Trainingsblöcke: Zuweisung des Trainers (leer)',
+    run: (data: any) => ({
+      ...data,
+      version: 38,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        trainingBlocks: (athlete.trainingBlocks ?? []).map((b: any) => ({ ...b, assignmentId: b.assignmentId ?? null })),
       })),
     }),
   },

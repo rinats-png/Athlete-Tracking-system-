@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_CHECKIN_SHARE?: string
   readonly VITE_AI_PHRASE?: string
   readonly VITE_TRAINING_PLAN?: string
+  readonly VITE_PLAN_ASSIGN?: string
   readonly VITE_FOUNDER_OFFER?: string
 }
 

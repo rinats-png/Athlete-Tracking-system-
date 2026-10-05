@@ -91,7 +91,12 @@ export interface ImportContext {
   family: StoredTrainingBlock['family']
   trainingAgeYears: number | null
   mode: PlanMode
+  /** Zuweisung des Trainers: Kennung des Blocks und feste Einheitenkennungen (`<kurz>-<Index>`), damit der Fortschritt zuordenbar bleibt. */
+  assignmentId?: string
 }
+
+/** Feste Einheitenkennung einer zugewiesenen Einheit: Kurzform der Zuweisung und Index in der Nutzlast. */
+export const assignedSessionId = (assignmentId: string, index: number): string => `${assignmentId.slice(0, 8)}-${index}`
 
 export function importPlan(text: string, ctx: ImportContext): ImportResult {
   if (text.length > PLAN_FILE_MAX_BYTES) return { ok: false, error: 'too_big' }
@@ -106,11 +111,12 @@ export function importPlan(text: string, ctx: ImportContext): ImportResult {
   const f = parsed.data
   const block = createOwnBlock({ id: ctx.newId(), name: f.name || 'Import', family: ctx.family, disciplineId: ctx.disciplineId, phase: f.phase as Phase, weeks: f.weeks, startDay: ctx.startDay, now: ctx.now })
   block.startDay = mondayOnOrAfter(ctx.startDay)
+  block.assignmentId = ctx.assignmentId ?? null
   const report: ImportReport = { fromRules: 0, own: 0, unknownRules: 0, skipped: 0 }
   const sessions: StoredPlannedSession[] = []
   const overlaps = (a: StoredPlannedSession, b: StoredPlannedSession) => a.weekFrom <= (b.weekTo ?? f.weeks) && b.weekFrom <= (a.weekTo ?? f.weeks)
 
-  for (const s of f.sessions) {
+  for (const [index, s] of f.sessions.entries()) {
     const weekTo = s.weekTo
     if (s.weekFrom > f.weeks || (weekTo != null && (weekTo < s.weekFrom || weekTo > f.weeks))) {
       report.skipped++
@@ -124,7 +130,7 @@ export function importPlan(text: string, ctx: ImportContext): ImportResult {
       report.skipped++
       continue
     }
-    const base = { id: ctx.newId(), day: s.day, weekFrom: s.weekFrom, weekTo, coachModified: false, coachModificationReason: null, removed: false }
+    const base = { id: ctx.assignmentId ? assignedSessionId(ctx.assignmentId, index) : ctx.newId(), day: s.day, weekFrom: s.weekFrom, weekTo, coachModified: false, coachModificationReason: null, removed: false }
     let session: StoredPlannedSession
     if (usable && known) {
       const blocks = blocksFor(known)

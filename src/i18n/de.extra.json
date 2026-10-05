@@ -3447,5 +3447,53 @@
     "failed": "Die Verbindung hat nicht geklappt.",
     "implausible": "Der Wert liegt außerhalb von 30 bis 230.",
     "note": "Die Werte bleiben auf deinem Gerät. Gespeichert werden beim Abschluss nur Mittel und Höchstwert der Einheit. Ein Pulsgurt ist kein Medizinprodukt, die App wertet den Puls nicht medizinisch."
+  },
+  "offers": {
+    "title": "Plan von deinem Trainer",
+    "sub": "Du entscheidest, ob du ihn annimmst.",
+    "unnamed": "Plan ohne Namen",
+    "decide": "Ansehen und entscheiden",
+    "consent": "Nichts wird geteilt, solange du nichts einschaltest. Wähle, was dein Trainer vom Fortschritt sehen darf:",
+    "shareDone": "Erledigt: der Trainer sieht, welche Einheit du gemacht hast",
+    "shareResults": "Dauer und Anstrengung (RPE) der erledigten Einheit",
+    "shareHr": "Puls: Mittel und Höchstwert (Gesundheitsdatum)",
+    "revocable": "Du kannst das jederzeit ändern. Ausschalten wirkt sofort und löscht, was der Trainer schon sehen konnte.",
+    "activeBlock": "Du hast schon einen aktiven Block. Schließe ihn zuerst ab, dann kannst du den Plan annehmen.",
+    "accept": "Annehmen",
+    "decline": "Ablehnen",
+    "failed": "Das hat nicht geklappt. Prüfe die Verbindung und versuche es noch einmal.",
+    "unreadable": "Dieser Plan lässt sich nicht lesen. Er wurde nicht angenommen.",
+    "sharesTitle": "Freigaben an deinen Trainer",
+    "sharesSub": "Was der Trainer von diesem Plan sehen darf."
+  },
+  "assign": {
+    "off": "Plan zuweisen",
+    "title": "Plan zuweisen",
+    "intro": "Schicke deinen aktiven Plan an einen verbundenen Athleten. Der Athlet entscheidet, ob er ihn annimmt, und gibt selbst frei, was du vom Fortschritt siehst.",
+    "unavailable": "Die Zuweisung braucht ein Konto und eine Verbindung. Gerade ist sie nicht erreichbar.",
+    "send": "Plan senden",
+    "noBlock": "Du hast keinen aktiven Plan. Lege zuerst einen an:",
+    "athlete": "Athlet",
+    "noAthletes": "Keine verbundenen Athleten mit Konto.",
+    "note": "Der Plan wird als Struktur gesendet. Dosis und Evidenz baut die App des Athleten aus dem Regelregister.",
+    "sendButton": "Plan senden",
+    "sent": "Der Plan wurde gesendet. Der Athlet entscheidet.",
+    "failed": "Das Senden hat nicht geklappt.",
+    "list": "Zuweisungen",
+    "none": "Noch keine Zuweisung.",
+    "shares": "Freigaben des Athleten: erledigt {{done}}, Dauer und RPE {{results}}, Puls {{hr}}.",
+    "yes": "ja",
+    "no": "nein",
+    "progress": "Fortschritt",
+    "withdraw": "Zurückziehen",
+    "noProgress": "Noch nichts gemeldet.",
+    "sessionN": "Einheit {{n}}",
+    "link": "Plan an Athleten zuweisen",
+    "status": {
+      "offered": "Angeboten",
+      "accepted": "Angenommen",
+      "declined": "Abgelehnt",
+      "withdrawn": "Zurückgezogen"
+    }
   }
 }

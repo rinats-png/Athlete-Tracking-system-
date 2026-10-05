@@ -37,6 +37,7 @@ export function adoptBlock(plan: BlockPlan, ctx: { id: string; family: SportFami
     retestMetrics: plan.retest.metrics,
     templateId: null,
     eventDay: null,
+    assignmentId: null,
     sessions: plan.sessions.map((s) => ({
       id: s.id,
       day: s.day,
@@ -246,6 +247,7 @@ export function createOwnBlock(i: OwnBlockInput): StoredTrainingBlock {
     retestMetrics: [],
     templateId: null,
     eventDay: null,
+    assignmentId: null,
     sessions: [],
     completions: [],
     status: 'active',

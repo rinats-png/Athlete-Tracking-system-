@@ -3447,5 +3447,53 @@
     "failed": "Anslutningen fungerade inte.",
     "implausible": "Värdet ligger utanför 30 till 230.",
     "note": "Värdena stannar på din enhet. Vid avslut sparas bara passets medel- och maxvärde. Ett pulsband är ingen medicinteknisk produkt; appen tolkar inte pulsen medicinskt."
+  },
+  "offers": {
+    "title": "Plan från din tränare",
+    "sub": "Du bestämmer om du tar emot den.",
+    "unnamed": "Plan utan namn",
+    "decide": "Titta och bestäm",
+    "consent": "Inget delas förrän du slår på det. Välj vad din tränare får se av din utveckling:",
+    "shareDone": "Klart: tränaren ser vilket pass du gjort",
+    "shareResults": "Längd och ansträngning (RPE) för det genomförda passet",
+    "shareHr": "Puls: medel och max (hälsouppgift)",
+    "revocable": "Du kan ändra det när som helst. Att stänga av gäller direkt och raderar det tränaren redan kunde se.",
+    "activeBlock": "Du har redan ett aktivt block. Avsluta det först, sedan kan du ta emot planen.",
+    "accept": "Ta emot",
+    "decline": "Avvisa",
+    "failed": "Det gick inte. Kontrollera anslutningen och försök igen.",
+    "unreadable": "Den här planen går inte att läsa. Den togs inte emot.",
+    "sharesTitle": "Delning med din tränare",
+    "sharesSub": "Vad tränaren får se av den här planen."
+  },
+  "assign": {
+    "off": "Tilldela plan",
+    "title": "Tilldela plan",
+    "intro": "Skicka din aktiva plan till en ansluten idrottare. Idrottaren bestämmer om planen tas emot och väljer själv vad du ser av utvecklingen.",
+    "unavailable": "Tilldelning kräver ett konto och en anslutning. Den går inte att nå just nu.",
+    "send": "Skicka plan",
+    "noBlock": "Du har ingen aktiv plan. Skapa en först:",
+    "athlete": "Idrottare",
+    "noAthletes": "Inga anslutna idrottare med konto.",
+    "note": "Planen skickas som struktur. Idrottarens app bygger dos och evidens från regelregistret.",
+    "sendButton": "Skicka plan",
+    "sent": "Planen skickades. Idrottaren bestämmer.",
+    "failed": "Det gick inte att skicka.",
+    "list": "Tilldelningar",
+    "none": "Ingen tilldelning än.",
+    "shares": "Idrottarens delning: klart {{done}}, längd och RPE {{results}}, puls {{hr}}.",
+    "yes": "ja",
+    "no": "nej",
+    "progress": "Utveckling",
+    "withdraw": "Återkalla",
+    "noProgress": "Inget rapporterat än.",
+    "sessionN": "Pass {{n}}",
+    "link": "Tilldela plan till idrottare",
+    "status": {
+      "offered": "Erbjuden",
+      "accepted": "Mottagen",
+      "declined": "Avvisad",
+      "withdrawn": "Återkallad"
+    }
   }
 }
