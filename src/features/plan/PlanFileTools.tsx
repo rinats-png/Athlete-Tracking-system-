@@ -31,16 +31,14 @@ export function PlanExportButton({ block }: { block: StoredTrainingBlock }) {
 }
 
 /** Import aus einer Datei, nur wenn kein aktiver Block läuft (nichts wird überschrieben). */
-export function PlanImportButton() {
+export function PlanImportButton({ onImported }: { onImported: (report: ImportReport) => void }) {
   const { t } = useTranslation()
   const { data, saveTrainingBlock } = useAppData()
   const input = useRef<HTMLInputElement>(null)
   const [message, setMessage] = useState<string | null>(null)
-  const [report, setReport] = useState<ImportReport | null>(null)
   const profile = data.profile
 
   const onFile = async (file: File | undefined) => {
-    setReport(null)
     if (!file) return
     if (file.size > PLAN_FILE_MAX_BYTES) return setMessage(t('file.err.too_big'))
     const now = new Date().toISOString()
@@ -56,7 +54,7 @@ export function PlanImportButton() {
     if (!r.ok) return setMessage(t(`file.err.${r.error}`))
     saveTrainingBlock(r.block)
     setMessage(null)
-    setReport(r.report)
+    onImported(r.report)
   }
 
   return (
@@ -68,7 +66,6 @@ export function PlanImportButton() {
       </button>
       <p className="text-[12px] text-ink-secondary">{t('file.importNote')}</p>
       {message && <p role="alert" className="text-[13px] text-accent-text" data-testid="plan-import-error">{message}</p>}
-      {report && <p className="text-[13px]" data-testid="plan-import-report">{t('file.report', { ...report })}</p>}
     </div>
   )
 }

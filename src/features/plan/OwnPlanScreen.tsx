@@ -13,6 +13,7 @@ import { addExercise, addOwnSession, copyWeek, createOwnBlock, deleteOwnSession,
 import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
 import { searchExercises } from '@/data/exercises'
 import { exerciseImageUrl } from '@/data/exerciseImages'
+import type { ImportReport } from '@/domain/planFile'
 import { PlanExportButton, PlanImportButton } from '@/features/plan/PlanFileTools'
 import { cn } from '@/lib/utils'
 
@@ -98,6 +99,7 @@ export function OwnPlanScreen() {
   const [copyFrom, setCopyFrom] = useState(1)
   const [copyTo, setCopyTo] = useState(2)
   const [message, setMessage] = useState<string | null>(null)
+  const [imported, setImported] = useState<ImportReport | null>(null)
 
   if (planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off') return <EmptyState title={t('plan.title')} body={t('plan.off')} />
 
@@ -125,7 +127,7 @@ export function OwnPlanScreen() {
           </div>
         </Panel>
         <Panel className="mt-4">
-          <div className="px-4 py-4"><PlanImportButton /></div>
+          <div className="px-4 py-4"><PlanImportButton onImported={setImported} /></div>
         </Panel>
       </div>
     )
@@ -136,6 +138,7 @@ export function OwnPlanScreen() {
   return (
     <div data-testid="own-plan">
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={block.name || t('own.title')} intro={t('own.note')} />
+      {imported && <p className="mb-3 rounded-md border border-line bg-accent-quiet px-3 py-2 text-[13px]" data-testid="plan-import-report">{t('file.report', { ...imported })}</p>}
       {message && <p role="alert" className="mb-3 rounded-md border border-line bg-accent-quiet px-3 py-2 text-[13px]" data-testid="own-message">{message}</p>}
 
       <Panel className="mb-4" data-testid="own-add">

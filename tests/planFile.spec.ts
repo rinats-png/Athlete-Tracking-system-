@@ -25,12 +25,12 @@ test.describe('Planaustausch: Fachlogik', () => {
     expect(r.report).toMatchObject({ fromRules: 1, own: 1, unknownRules: 0, skipped: 0 })
   })
 
-  test('unbekannte Regel wird zur eigenen Einheit und gezählt; ohne Preview-Modus keine ungeprüfte Regel', () => {
+  test('unbekannte Regel wird zur eigenen Einheit und gezählt; im Betrieb (live) keine ungeprüfte Regel', () => {
     const r = importPlan(file([s({ ruleId: 'erfundene_regel' })]), ctx())
     if (!r.ok) throw new Error('erwartet ok')
     expect(r.block.sessions[0]).toMatchObject({ kind: 'own', ruleId: null })
     expect(r.report.unknownRules).toBe(1)
-    const prod = importPlan(file([s({ ruleId: 'max_strength_80' })]), ctx({ mode: 'reviewed' }))
+    const prod = importPlan(file([s({ ruleId: 'max_strength_80' })]), ctx({ mode: 'live' }))
     if (!prod.ok) throw new Error('erwartet ok')
     expect(prod.block.sessions[0].kind).toBe('own')
     expect(prod.report.unknownRules).toBe(1)
