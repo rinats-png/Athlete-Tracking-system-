@@ -3190,7 +3190,8 @@
       "tests": "Tests",
       "library": "Bibliotheek",
       "ask": "Vragen"
-    }
+    },
+    "more": "Meer in het plan"
   },
   "planWay": {
     "title": "Plan kiezen",
@@ -3521,5 +3522,19 @@
     "sub": "Waarvoor je vandaag eet en drinkt. KYDON noemt hier alleen wat in het plan staat.",
     "toPlayer": "Naar de training",
     "toFuel": "Voeding rond de training"
+  },
+  "dev": {
+    "title": "Ontwikkeling op lange termijn",
+    "intro": "Je blokken naast elkaar en hoe consequent je getraind hebt. Alleen vergeleken met je meetfout, er wordt niets voorspeld.",
+    "none": "Nog geen blok. Zodra je een plan overneemt, verschijnt het hier.",
+    "weeksTitle": "Gedane trainingen van de laatste {{n}} weken",
+    "total": "{{n}} gedaan in totaal",
+    "weeksNote": "De lengte van de balken toont consistentie, geen succes.",
+    "blocksTitle": "Blokken",
+    "active": "loopt",
+    "closed": "afgesloten",
+    "partial": "{{measured}} metingen aan het einde van het blok, {{open}} nog open.",
+    "note": "Een meting telt pas als ze na het einde van het blok bestaat; “open” betekent niet gemeten, nooit slecht. “Beter” of “slechter” staat er alleen als de verandering groter is dan je typische meetfout.",
+    "link": "Ontwikkeling op lange termijn"
   }
 }

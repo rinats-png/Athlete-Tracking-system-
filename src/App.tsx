@@ -152,6 +152,7 @@ const router = createBrowserRouter([
       { path: 'plan/eigen', element: screen(() => import('@/features/plan/OwnPlanScreen'), 'OwnPlanScreen') },
       { path: 'plan/pruefung', element: screen(() => import('@/features/plan/PlanGateScreen'), 'PlanGateScreen') },
       { path: 'plan/zuweisen', element: screen(() => import('@/features/plan/AssignScreen'), 'AssignScreen') },
+      { path: 'plan/entwicklung', element: screen(() => import('@/features/plan/DevelopmentScreen'), 'DevelopmentScreen') },
       { path: 'plan/neu', element: screen(() => import('@/features/plan/PlanPreviewScreen'), 'PlanPreviewScreen') },
       { path: 'plan/block', element: screen(() => import('@/features/plan/BlockScreen'), 'BlockScreen') },
       { path: 'plan/heute', element: screen(() => import('@/features/plan/SessionPlayerScreen'), 'SessionPlayerScreen') },

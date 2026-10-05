@@ -56,6 +56,10 @@ export function PlanHubScreen() {
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('planHub.title')} intro={competition ? t('planHub.competition', { name: competition.name || t('planHub.competitionUnnamed') }) : undefined} />
 
       <PlanOffersPanel />
+      <nav className="mb-4 flex flex-wrap gap-x-5" aria-label={t('planHub.more')} data-testid="hub-links">
+        <Link to="/plan/kalender" data-testid="hub-to-calendar" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('cal.link')}</Link>
+        <Link to="/plan/entwicklung" data-testid="hub-to-development" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('dev.link')}</Link>
+      </nav>
       {role === 'coach' && planAssignEnabled() && (
         <p className="mb-4">
           <Link to="/plan/zuweisen" data-testid="hub-to-assign" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">{t('assign.link')}</Link>

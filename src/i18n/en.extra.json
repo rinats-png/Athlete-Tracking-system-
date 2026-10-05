@@ -3190,7 +3190,8 @@
       "tests": "Tests",
       "library": "Library",
       "ask": "Questions"
-    }
+    },
+    "more": "More in the plan"
   },
   "planWay": {
     "title": "Choose plan",
@@ -3521,5 +3522,19 @@
     "sub": "What you are eating and drinking for today. KYDON only names what is in the plan.",
     "toPlayer": "To the session",
     "toFuel": "Fuel around the session"
+  },
+  "dev": {
+    "title": "Long-term development",
+    "intro": "Your blocks side by side and how consistently you trained. Only compared against your measurement error; nothing is predicted.",
+    "none": "No block yet. Once you adopt a plan it appears here.",
+    "weeksTitle": "Completed sessions of the last {{n}} weeks",
+    "total": "{{n}} completed in total",
+    "weeksNote": "Bar length shows consistency, not success.",
+    "blocksTitle": "Blocks",
+    "active": "running",
+    "closed": "closed",
+    "partial": "{{measured}} measured at the end of the block, {{open}} still open.",
+    "note": "A measurement only counts once it exists after the block ends; “open” means not measured, never bad. “Better” or “worse” only appears where the change is larger than your typical measurement error.",
+    "link": "Long-term development"
   }
 }

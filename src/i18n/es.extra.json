@@ -3190,7 +3190,8 @@
       "tests": "Pruebas",
       "library": "Biblioteca",
       "ask": "Preguntas"
-    }
+    },
+    "more": "Más del plan"
   },
   "planWay": {
     "title": "Elegir plan",
@@ -3521,5 +3522,19 @@
     "sub": "Para qué comes y bebes hoy. KYDON solo nombra aquí lo que está en el plan.",
     "toPlayer": "A la sesión",
     "toFuel": "Alimentación en torno a la sesión"
+  },
+  "dev": {
+    "title": "Evolución a largo plazo",
+    "intro": "Tus bloques uno junto a otro y lo constante que has sido. Solo se compara con tu error de medición; no se predice nada.",
+    "none": "Aún no hay ningún bloque. Cuando adoptes un plan, aparecerá aquí.",
+    "weeksTitle": "Sesiones hechas en las últimas {{n}} semanas",
+    "total": "{{n}} hechas en total",
+    "weeksNote": "La longitud de las barras muestra constancia, no éxito.",
+    "blocksTitle": "Bloques",
+    "active": "en curso",
+    "closed": "cerrado",
+    "partial": "{{measured}} mediciones al final del bloque, {{open}} aún abiertas.",
+    "note": "Una medición solo cuenta cuando existe después del final del bloque; «abierta» significa sin medir, nunca mala. «Mejor» o «peor» solo aparece cuando el cambio supera tu error de medición típico.",
+    "link": "Evolución a largo plazo"
   }
 }

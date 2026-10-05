@@ -11,11 +11,11 @@ import { planAssignEnabled } from '@/lib/planAssign'
 import { AssignmentShares } from '@/features/plan/AssignmentShares'
 import { PlanExportButton, SaveTemplateButton } from '@/features/plan/PlanFileTools'
 import { SessionWhy } from '@/features/plan/SessionWhy'
-import { blockText, sessionName, sessionSource } from '@/features/plan/planText'
+import { blockText, sessionName, sessionSource, verdictLine } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { getTest } from '@/data/testCatalog'
 import { disciplineById } from '@/data/sportProfiles'
-import { formatDate, formatNumber } from '@/lib/format'
+import { formatDate } from '@/lib/format'
 import { pick } from '@/i18n/pick'
 import { cn } from '@/lib/utils'
 import type { StoredPlannedSession } from '@/lib/store/localStore'
@@ -62,15 +62,7 @@ export function BlockScreen() {
     setError(null)
   }
 
-  const verdictText = (m: (typeof report.metrics)[number]): string => {
-    if (m.status === 'open' || !m.report) return report.finished ? t('block.report.missing') : t('block.report.open')
-    const r = m.report
-    const pct = formatNumber(Math.abs(r.changePercent ?? 0), locale, 1)
-    if (r.verdict === 'better') return t('block.report.better', { percent: pct, detectable: formatNumber(r.detectablePercent ?? 0, locale, 1) })
-    if (r.verdict === 'worse') return t('block.report.worse', { percent: pct, detectable: formatNumber(r.detectablePercent ?? 0, locale, 1) })
-    if (r.verdict === 'within_noise') return t('block.report.noise', { percent: pct, detectable: formatNumber(r.detectablePercent ?? 0, locale, 1) })
-    return t('block.report.unknown')
-  }
+  const verdictText = (m: (typeof report.metrics)[number]): string => verdictLine(m, report.finished, t, locale)
 
   return (
     <div data-testid="plan-block">

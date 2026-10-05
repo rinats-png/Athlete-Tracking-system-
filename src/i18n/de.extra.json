@@ -3190,7 +3190,8 @@
       "tests": "Tests",
       "library": "Bibliothek",
       "ask": "Fragen"
-    }
+    },
+    "more": "Weiter im Plan"
   },
   "planWay": {
     "title": "Plan wählen",
@@ -3521,5 +3522,19 @@
     "sub": "Wofür du heute isst und trinkst. KYDON nennt hier nur, was im Plan steht.",
     "toPlayer": "Zur Einheit",
     "toFuel": "Verpflegung rund um die Einheit"
+  },
+  "dev": {
+    "title": "Langzeitentwicklung",
+    "intro": "Deine Blöcke nebeneinander und wie beständig du trainiert hast. Verglichen wird nur mit deinem Messfehler, nichts wird vorhergesagt.",
+    "none": "Noch kein Block. Sobald du einen Plan übernommen hast, erscheint er hier.",
+    "weeksTitle": "Erledigte Einheiten der letzten {{n}} Wochen",
+    "total": "{{n}} erledigt insgesamt",
+    "weeksNote": "Die Länge der Balken zeigt Beständigkeit, nicht Erfolg.",
+    "blocksTitle": "Blöcke",
+    "active": "läuft",
+    "closed": "abgeschlossen",
+    "partial": "{{measured}} Messungen am Blockende, {{open}} noch offen.",
+    "note": "Eine Messung zählt erst, wenn sie nach dem Blockende vorliegt; „offen“ heißt nicht gemessen, nie schlecht. „Besser“ oder „schlechter“ steht nur, wo die Veränderung größer ist als dein typischer Messfehler.",
+    "link": "Langzeitentwicklung"
   }
 }

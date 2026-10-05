@@ -1,4 +1,6 @@
 import type { TFunction } from 'i18next'
+import { formatNumber } from '@/lib/format'
+import type { MetricReport } from '@/domain/trainingBlock'
 import type { StoredPlannedSession } from '@/lib/store/localStore'
 
 /** Text eines Blocks einer Einheit; gleiche Wörter in Vorschau, Block und Player. */
@@ -36,3 +38,15 @@ interface NamedSession {
 export const sessionName = (s: NamedSession, t: Tr): string => (s.kind === 'own' && s.title ? s.title : t(`plan.intent.${s.primaryIntent}`))
 /** Zeile darunter: Regel, «Eigene Einheit» oder «Offen». */
 export const sessionSource = (s: NamedSession, t: Tr): string => (s.ruleId ? t(`plan.rules.${s.ruleId}.title`) : s.kind === 'own' ? t('own.tag') : t('plan.openSession'))
+
+/** Urteil einer Blockmessung gegen den Messfehler; ein nicht gemessener Retest ist offen, nie ein Misserfolg. */
+export function verdictLine(m: MetricReport, finished: boolean, t: TFunction, locale: string): string {
+  if (m.status === 'open' || !m.report) return finished ? t('block.report.missing') : t('block.report.open')
+  const r = m.report
+  const pct = formatNumber(Math.abs(r.changePercent ?? 0), locale as never, 1)
+  const detectable = formatNumber(r.detectablePercent ?? 0, locale as never, 1)
+  if (r.verdict === 'better') return t('block.report.better', { percent: pct, detectable })
+  if (r.verdict === 'worse') return t('block.report.worse', { percent: pct, detectable })
+  if (r.verdict === 'within_noise') return t('block.report.noise', { percent: pct, detectable })
+  return t('block.report.unknown')
+}

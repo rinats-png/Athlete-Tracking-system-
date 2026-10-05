@@ -3190,7 +3190,8 @@
       "tests": "Tester",
       "library": "Bibliotek",
       "ask": "Spørsmål"
-    }
+    },
+    "more": "Mer i planen"
   },
   "planWay": {
     "title": "Velg plan",
@@ -3521,5 +3522,19 @@
     "sub": "Hva du spiser og drikker for i dag. KYDON nevner her bare det som står i planen.",
     "toPlayer": "Til økten",
     "toFuel": "Kost rundt økten"
+  },
+  "dev": {
+    "title": "Langsiktig utvikling",
+    "intro": "Blokkene dine side om side og hvor jevnt du har trent. Sammenlignes bare med målefeilen din, ingenting forutsies.",
+    "none": "Ingen blokk ennå. Når du har tatt i bruk en plan, vises den her.",
+    "weeksTitle": "Fullførte økter de siste {{n}} ukene",
+    "total": "{{n}} fullført totalt",
+    "weeksNote": "Søylelengden viser jevnhet, ikke suksess.",
+    "blocksTitle": "Blokker",
+    "active": "pågår",
+    "closed": "avsluttet",
+    "partial": "{{measured}} målinger ved slutten av blokken, {{open}} fortsatt åpne.",
+    "note": "En måling teller først når den finnes etter blokkens slutt; «åpen» betyr ikke målt, aldri dårlig. «Bedre» eller «dårligere» står bare der endringen er større enn din typiske målefeil.",
+    "link": "Langsiktig utvikling"
   }
 }

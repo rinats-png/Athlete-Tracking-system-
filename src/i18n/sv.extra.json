@@ -3190,7 +3190,8 @@
       "tests": "Test",
       "library": "Bibliotek",
       "ask": "Frågor"
-    }
+    },
+    "more": "Mer i planen"
   },
   "planWay": {
     "title": "Välj plan",
@@ -3521,5 +3522,19 @@
     "sub": "Vad du äter och dricker för idag. KYDON nämner här bara det som står i planen.",
     "toPlayer": "Till passet",
     "toFuel": "Kost kring passet"
+  },
+  "dev": {
+    "title": "Långsiktig utveckling",
+    "intro": "Dina block bredvid varandra och hur jämnt du tränat. Jämförs bara mot ditt mätfel, inget förutsägs.",
+    "none": "Inget block än. När du tagit över en plan syns den här.",
+    "weeksTitle": "Genomförda pass de senaste {{n}} veckorna",
+    "total": "{{n}} genomförda totalt",
+    "weeksNote": "Stapelns längd visar jämnhet, inte framgång.",
+    "blocksTitle": "Block",
+    "active": "pågår",
+    "closed": "avslutat",
+    "partial": "{{measured}} mätningar vid blockets slut, {{open}} fortfarande öppna.",
+    "note": "En mätning räknas först när den finns efter blockets slut; ”öppen” betyder inte mätt, aldrig dålig. ”Bättre” eller ”sämre” står bara där förändringen är större än ditt typiska mätfel.",
+    "link": "Långsiktig utveckling"
   }
 }

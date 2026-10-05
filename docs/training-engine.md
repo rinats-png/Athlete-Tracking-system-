@@ -187,3 +187,7 @@ Mit Trainingsbereich hat auch der Trainer sechs Tabs: Heute, Athleten, **Plan** 
 ## Fuel und Plan (Trainingsbereich Etappe 13)
 
 Auf Fuel steht über der Verpflegung eine Karte «Heute geplant» mit den heute offenen Einheiten des aktiven Blocks (Name, Dauer wo eine Regel oder der Mensch sie festlegt, Schlüsseleinheit) und einem Weg zum Player; der Player führt zurück zu Fuel. **Die Karte rechnet keine Mengen und gibt keine Empfehlung**: sie nennt, was im Plan steht (Doktrin: keine Zahl ohne Quelle). Ohne Einheit heute erscheint sie nicht. Verpflegungsempfehlungen je Einheit würden eine geprüfte Regel mit Quelle brauchen und sind nicht gebaut.
+
+## Langzeitentwicklung (Trainingsbereich Etappe 14)
+
+`/plan/entwicklung` (`src/domain/development.ts`, `DevelopmentScreen`), erreichbar vom Hub: die Blöcke nebeneinander (neueste zuerst) mit Zählung erledigter gegen geplante Einheiten und den Blockmessungen gegen den Messfehler (dieselbe Rechnung wie der Block-Bericht, `verdictLine`), dazu die erledigten Einheiten der letzten zwölf Wochen als Balken. **Keine Prognose und kein Erfolgsurteil:** die Balken zeigen Beständigkeit, «offen» heißt nicht gemessen und nie schlecht, «besser» oder «schlechter» steht nur über dem typischen Messfehler (Regel 7). Die Summe zählt alle erledigten Einheiten, auch die vor dem Zwölf-Wochen-Fenster.

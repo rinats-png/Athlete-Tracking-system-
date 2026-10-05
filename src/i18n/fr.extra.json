@@ -3190,7 +3190,8 @@
       "tests": "Tests",
       "library": "Bibliothèque",
       "ask": "Questions"
-    }
+    },
+    "more": "Suite du plan"
   },
   "planWay": {
     "title": "Choisir un plan",
@@ -3521,5 +3522,19 @@
     "sub": "Pour quoi tu manges et bois aujourd’hui. KYDON ne nomme ici que ce qui figure dans le plan.",
     "toPlayer": "Vers la séance",
     "toFuel": "Alimentation autour de la séance"
+  },
+  "dev": {
+    "title": "Évolution à long terme",
+    "intro": "Tes blocs côte à côte et ta régularité. Comparaison uniquement avec ton erreur de mesure, rien n’est prédit.",
+    "none": "Pas encore de bloc. Dès que tu adoptes un plan, il apparaît ici.",
+    "weeksTitle": "Séances faites sur les {{n}} dernières semaines",
+    "total": "{{n}} faites au total",
+    "weeksNote": "La longueur des barres montre la régularité, pas la réussite.",
+    "blocksTitle": "Blocs",
+    "active": "en cours",
+    "closed": "terminé",
+    "partial": "{{measured}} mesures en fin de bloc, {{open}} encore ouvertes.",
+    "note": "Une mesure ne compte que si elle existe après la fin du bloc ; « ouvert » veut dire non mesuré, jamais mauvais. « Mieux » ou « moins bien » n’apparaît que si le changement dépasse ton erreur de mesure typique.",
+    "link": "Évolution à long terme"
   }
 }
