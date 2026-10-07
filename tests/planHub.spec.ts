@@ -39,7 +39,7 @@ test.describe('Bildschirm', () => {
     const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
     const buttons = nav.getByRole('button')
     await expect(buttons).toHaveCount(12)
-    await expect(buttons.nth(2)).toHaveAttribute('aria-label', 'Plan')
+    await expect(buttons.nth(2)).toHaveAccessibleName('Plan')
     await buttons.nth(2).click()
     await expect(page).toHaveURL(/\/plan$/)
     await expect(page.getByTestId('plan-hub')).toBeVisible()

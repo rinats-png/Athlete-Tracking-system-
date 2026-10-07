@@ -316,7 +316,6 @@ export function BottomNav({
                 <button
                   key={key}
                   type="button"
-                  aria-label={t(`nav.short.${key}`)}
                   aria-current={isActive ? 'page' : undefined}
                   data-hot={i === hot ? '' : undefined}
                   onClick={() => {
@@ -335,6 +334,8 @@ export function BottomNav({
                   >
                     <Icon size={21} strokeWidth={isActive ? 2.2 : 1.8} aria-hidden />
                   </span>
+                  {/* Name als Text statt aria-label: so bleibt getByLabel für Formularfelder eindeutig. */}
+                  <span className="sr-only">{t(`nav.short.${key}`)}</span>
                   <span
                     aria-hidden
                     className={cn(

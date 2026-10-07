@@ -186,7 +186,7 @@ test.describe('Schwebende Navigation', () => {
         const dock = el.querySelector('[data-testid="nav-dock"]')!.getBoundingClientRect()
         const mid = dock.left + dock.width / 2
         const btn = [...el.querySelectorAll('button')].find((b) => { const r = b.getBoundingClientRect(); return Math.abs(r.left + r.width / 2 - mid) < 4 })
-        return btn ? { label: btn.getAttribute('aria-label'), size: btn.querySelector('.nav-dot')!.getBoundingClientRect().width } : null
+        return btn ? { label: btn.querySelector('.sr-only')!.textContent, size: btn.querySelector('.nav-dot')!.getBoundingClientRect().width } : null
       })
     await expect.poll(async () => (await centred())?.label).toBe('Heute')
     const big = (await centred())!.size
