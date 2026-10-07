@@ -1,0 +1,104 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KYDON Dock</title><style>
+:root{--bg:#EEF4F3;--s:#fff;--sr:#fff;--sun:#D6E3E2;--ink:#0d1f1b;--i2:#40544f;--line:#C3D2CF;--acc:#1E7D63;--accink:#F4FBF8;--glow:#3FBF93;--q:rgba(30,125,99,.14);--shade:rgba(16,40,34,.18)}
+.dark{--bg:#0B1014;--s:#141C21;--sr:#1B252B;--sun:#0F161A;--ink:#F2F7F8;--i2:#BFCCD0;--line:#2F3A3F;--acc:#7FE5B5;--accink:#06100B;--glow:#A6F0CE;--q:rgba(127,229,181,.18);--shade:rgba(0,0,0,.5)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;padding:22px;background:#8f9e9c;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#111}
+.top{display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
+.top h1{font-size:18px;margin:0 10px 0 0}.top button{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid #577;background:#fff;font-size:14px;cursor:pointer}
+.row{display:flex;flex-wrap:wrap;gap:26px;justify-content:center}
+figure{margin:0;width:390px}figcaption{margin-top:10px;font-size:13px;line-height:1.45;text-align:center}
+.phone{width:390px;height:760px;border-radius:40px;background:#000;padding:8px}
+.screen{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:var(--bg);color:var(--ink);user-select:none}
+.page{position:absolute;inset:0;padding:40px 20px 0;transition:transform .42s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.page h2{font-size:28px;margin:0 0 14px}.card{height:92px;border-radius:16px;background:var(--s);border:1px solid var(--line);margin-bottom:12px}.card.s{height:60px}
+.card.hero{border-color:var(--acc);background:linear-gradient(135deg,var(--q),transparent 70%)}
+.hint{position:absolute;left:0;right:0;bottom:185px;text-align:center;font-size:12px;color:var(--i2)}
+/* Dock läuft über die volle Breite und verschwindet weich am Displayrand */
+.dock{position:absolute;left:0;right:0;bottom:18px;height:160px;touch-action:none;cursor:grab;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34px,#000 calc(100% - 34px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 34px,#000 calc(100% - 34px),transparent)}
+.dock:active{cursor:grabbing}
+.rail{position:absolute;left:0;right:0;bottom:8px;height:66px;margin:0 -40px;background:var(--sr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:0 12px 30px var(--shade)}
+.track{position:absolute;left:0;bottom:18px;height:46px;will-change:transform}
+.dt{position:absolute;bottom:0;width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:var(--sun);color:var(--i2);border:1px solid var(--line);transform-origin:bottom center;will-change:transform}
+.dt.on{background:var(--acc);color:var(--accink);border-color:var(--acc);box-shadow:0 0 20px -4px var(--glow)}
+.tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);padding:4px 10px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:12px;white-space:nowrap;opacity:0;pointer-events:none}
+.dt.hot .tip{opacity:1}
+.lens{position:absolute;left:50%;bottom:4px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--glow)}
+.sound{position:absolute;right:14px;top:44px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--s);color:var(--i2);display:grid;place-items:center;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.page{transition:none}}
+</style></head>
+<body><div class="top"><h1>KYDON · Lupen-Dock mit allen Bereichen</h1><button id="theme">Hell / Dunkel</button></div><div class="row">
+<figure><div class="phone"><div class="screen" id="F"><button class="sound" aria-label="Ton"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume2"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg></button><div class="page"><h2>Heute</h2><div class="card hero"></div><div class="card s"></div><div class="card"></div><div class="card s"></div></div><div class="hint">Wischen schiebt die Leiste · Finger halten vergrößert</div><div class="dock"><div class="rail"></div><div class="track"></div></div></div></div><figcaption><b>C1 · Lupe folgt dem Finger</b><br>Alle zwölf Bereiche liegen in einer Leiste, die über den Displayrand hinausläuft. Wischen schiebt sie mit Schwung, am Ende federt sie zurück. Wo der Finger liegt, wachsen die Symbole wie unter einer Lupe. Loslassen ohne Schwung wählt. Leises Rasten bei jedem Symbol, zwei Töne bei der Auswahl, dumpfer Ton am Anschlag.</figcaption></figure>
+<figure><div class="phone"><div class="screen" id="M"><button class="sound" aria-label="Ton"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume2"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg></button><div class="page"><h2>Heute</h2><div class="card hero"></div><div class="card s"></div><div class="card"></div><div class="card s"></div></div><div class="hint">Wischen dreht die Leiste · Mitte ist gewählt</div><div class="dock"><div class="rail"></div><div class="track"></div><div class="lens"></div></div></div></div><figcaption><b>C2 · Lupe fest in der Mitte</b><br>Die Lupe steht fest in der Mitte. Die Leiste gleitet darunter durch und rastet mit einem Klick ein. Der Bereich in der Mitte ist gewählt. Antippen holt ein Symbol direkt in die Mitte. Fühlt sich an wie ein Drehregler, nur waagerecht.</figcaption></figure>
+</div><p style="text-align:center;font-size:13px">Ton oben rechts im Telefon an- oder ausschalten. Der Ton startet erst nach der ersten Berührung (Vorgabe der Browser).</p><script>
+const TABS = [{"t":"Heute","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-house\"><path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"></path><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path></svg>"},{"t":"Test","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-clipboard-list\"><rect width=\"8\" height=\"4\" x=\"8\" y=\"2\" rx=\"1\" ry=\"1\"></rect><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"></path><path d=\"M12 11h4\"></path><path d=\"M12 16h4\"></path><path d=\"M8 11h.01\"></path><path d=\"M8 16h.01\"></path></svg>"},{"t":"Plan","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-calendar-range\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"4\" rx=\"2\"></rect><path d=\"M16 2v4\"></path><path d=\"M3 10h18\"></path><path d=\"M8 2v4\"></path><path d=\"M17 14h-6\"></path><path d=\"M13 18H7\"></path><path d=\"M7 14h.01\"></path><path d=\"M17 18h.01\"></path></svg>"},{"t":"Leistung","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-chart-column\"><path d=\"M3 3v16a2 2 0 0 0 2 2h16\"></path><path d=\"M18 17V9\"></path><path d=\"M13 17V5\"></path><path d=\"M8 17v-3\"></path></svg>"},{"t":"Fuel","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-flame\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z\"></path></svg>"},{"t":"Tagebuch","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-notebook-pen\"><path d=\"M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4\"></path><path d=\"M2 6h4\"></path><path d=\"M2 10h4\"></path><path d=\"M2 14h4\"></path><path d=\"M2 18h4\"></path><path d=\"M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z\"></path></svg>"},{"t":"Belastung","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-gauge\"><path d=\"m12 14 4-4\"></path><path d=\"M3.34 19a10 10 0 1 1 17.32 0\"></path></svg>"},{"t":"Gesundheit","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-heart-pulse\"><path d=\"M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z\"></path><path d=\"M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27\"></path></svg>"},{"t":"Peak Week","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-mountain\"><path d=\"m8 3 4 8 5-5 5 15H2L8 3z\"></path></svg>"},{"t":"Profil","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-user\"><path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"></path><circle cx=\"12\" cy=\"7\" r=\"4\"></circle></svg>"},{"t":"Freigaben","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-share2\"><circle cx=\"18\" cy=\"5\" r=\"3\"></circle><circle cx=\"6\" cy=\"12\" r=\"3\"></circle><circle cx=\"18\" cy=\"19\" r=\"3\"></circle><line x1=\"8.59\" x2=\"15.42\" y1=\"13.51\" y2=\"17.49\"></line><line x1=\"15.41\" x2=\"8.59\" y1=\"6.51\" y2=\"10.49\"></line></svg>"},{"t":"Einstellungen","s":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-settings\"><path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\"></path><circle cx=\"12\" cy=\"12\" r=\"3\"></circle></svg>"}];
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const STEP = 56; // Abstand der Symbole
+document.getElementById('theme').onclick = () => document.body.classList.toggle('dark');
+
+/* ---------- Ton: kleine Synthese mit Web Audio, keine Dateien ---------- */
+let ac = null, soundOn = true;
+function audio() { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume(); return ac; }
+function blip(freq, dur, vol, type) { if (!soundOn) return; const a = audio(), t = a.currentTime;
+  const o = a.createOscillator(), g = a.createGain(); o.type = type || 'sine'; o.frequency.setValueAtTime(freq, t);
+  o.frequency.exponentialRampToValueAtTime(freq * 0.6, t + dur);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + 0.02); }
+const tick = (speed) => blip(1400 + Math.min(speed, 30) * 25, 0.035, 0.05, 'triangle'); // Rasten beim Vorbeiziehen
+const pick = () => { blip(660, 0.09, 0.12, 'sine'); setTimeout(() => blip(990, 0.12, 0.09, 'sine'), 60); }; // Auswahl: zwei Töne aufwärts
+const edge = () => blip(180, 0.12, 0.1, 'sine'); // Anschlag am Ende
+document.querySelectorAll('.sound').forEach(b => b.onclick = (e) => { e.stopPropagation(); soundOn = !soundOn;
+  document.querySelectorAll('.sound').forEach(x => x.innerHTML = soundOn ? "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-volume2\"><path d=\"M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z\"></path><path d=\"M16 9a5 5 0 0 1 0 6\"></path><path d=\"M19.364 18.364a9 9 0 0 0 0-12.728\"></path></svg>" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-volume-x\"><path d=\"M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z\"></path><line x1=\"22\" x2=\"16\" y1=\"9\" y2=\"15\"></line><line x1=\"16\" x2=\"22\" y1=\"9\" y2=\"15\"></line></svg>"); if (soundOn) pick(); });
+
+function pageCtl(screen) { let cur = 0; const pg = screen.querySelector('.page');
+  return (k) => { if (k === cur) return; const dir = k > cur ? 1 : -1; cur = k; const h2 = pg.querySelector('h2');
+    if (calm) { h2.textContent = TABS[k].t; return; }
+    pg.style.transition = 'transform .16s ease-in, opacity .16s'; pg.style.transform = 'translateX(' + (-30 * dir) + 'px)'; pg.style.opacity = '0';
+    setTimeout(() => { h2.textContent = TABS[k].t; pg.style.transition = 'none'; pg.style.transform = 'translateX(' + (30 * dir) + 'px)';
+      requestAnimationFrame(() => { pg.style.transition = ''; pg.style.transform = ''; pg.style.opacity = '1'; }); }, 160); };
+}
+
+/* mode 'finger': Lupe folgt dem Finger, Leiste rollt mit Schwung; 'mitte': Lupe fest in der Mitte, Leiste rastet ein */
+function dock(screen, mode) {
+  const d = screen.querySelector('.dock'), tr = screen.querySelector('.track'), go = pageCtl(screen);
+  const W = d.clientWidth, n = TABS.length, total = (n - 1) * STEP;
+  const els = TABS.map((t, i) => { const e = document.createElement('div'); e.className = 'dt' + (i ? '' : ' on');
+    e.innerHTML = t.s + '<span class="tip">' + t.t + '</span>'; tr.appendChild(e); return e; });
+  let active = 0, x = mode === 'mitte' ? W / 2 : 30, v = 0, lens = null, down = null, moved = 0, lastHot = -1, raf = 0;
+  const minX = mode === 'mitte' ? W / 2 - total : W - 30 - total - 46, maxX = mode === 'mitte' ? W / 2 : 30;
+  function layout() {
+    const lx = mode === 'mitte' ? W / 2 : lens; let hot = -1, best = 1e9;
+    els.forEach((e, i) => { const cx = x + i * STEP + (mode === 'mitte' ? 0 : 23); let s = 1, lift = 0, dx = 0;
+      if (lx != null) { const dist = Math.abs(cx - lx); const f = Math.max(0, 1 - dist / 120); s = 1 + 0.75 * f * f; lift = 16 * f * f;
+        dx = Math.sign(cx - lx) * 22 * (1 - Math.max(0, 1 - dist / 140)) * f * 2; if (dist < best) { best = dist; hot = i; } }
+      e.style.transform = 'translate(' + (cx - 23 + dx) + 'px,' + (-lift) + 'px) scale(' + s.toFixed(3) + ')'; e.classList.toggle('hot', i === hot && (lx != null)); });
+    if (hot !== lastHot && hot >= 0) { if (lastHot >= 0) tick(Math.abs(v)); lastHot = hot; }
+    return hot;
+  }
+  function snapTo(i) { const target = W / 2 - i * STEP; cancelAnimationFrame(raf);
+    const step = () => { const a = (target - x) * 0.16 - v * 0.42; v += a; x += v; layout(); if (Math.abs(target - x) > 0.3 || Math.abs(v) > 0.3) raf = requestAnimationFrame(step); else { x = target; v = 0; layout(); } };
+    if (calm) { x = target; layout(); } else step(); }
+  function coast() { cancelAnimationFrame(raf); const step = () => { v *= 0.94; x += v;
+      if (x > maxX || x < minX) { const lim = x > maxX ? maxX : minX; x = lim + (x - lim) * 0.5; if (Math.abs(v) > 2) edge(); v = 0; }
+      layout(); if (Math.abs(v) > 0.2) raf = requestAnimationFrame(step); };
+    if (!calm) step(); }
+  function choose(i) { if (i < 0) return; els[active].classList.remove('on'); active = i; els[i].classList.add('on'); pick(); go(i);
+    if (navigator.vibrate) navigator.vibrate(8); }
+  d.addEventListener('pointerdown', (e) => { audio(); cancelAnimationFrame(raf); d.setPointerCapture(e.pointerId);
+    const r = d.getBoundingClientRect(); down = { px: e.clientX, x, t: performance.now(), lx: e.clientX }; moved = 0; v = 0;
+    if (mode === 'finger') lens = e.clientX - r.left; layout(); });
+  d.addEventListener('pointermove', (e) => { if (!down) return; const r = d.getBoundingClientRect(); const dx = e.clientX - down.px; moved = Math.max(moved, Math.abs(dx));
+    const now = performance.now(); v = (e.clientX - down.lx) / Math.max(1, now - down.t) * 16; down.lx = e.clientX; down.t = now;
+    let nx = down.x + dx; if (nx > maxX) nx = maxX + (nx - maxX) * 0.35; if (nx < minX) nx = minX + (nx - minX) * 0.35; x = nx;
+    if (mode === 'finger') lens = e.clientX - r.left; layout(); });
+  const up = (e) => { if (!down) return; const r = d.getBoundingClientRect(); down = null;
+    if (mode === 'mitte') { // Antippen wählt das getippte Symbol, Wischen rastet in der Mitte ein
+      let i; if (moved < 6) i = Math.round((e.clientX - r.left - x) / STEP); else i = Math.round((W / 2 - (x + v * 8)) / STEP);
+      i = Math.max(0, Math.min(n - 1, i)); snapTo(i); choose(i); lastHot = i; return; }
+    const hot = layout(); lens = null; if (moved < 6 || Math.abs(v) < 1) choose(hot); else { if (x > maxX || x < minX) { x = Math.max(minX, Math.min(maxX, x)); } coast(); } layout(); };
+  d.addEventListener('pointerup', up); d.addEventListener('pointercancel', () => { down = null; lens = null; layout(); });
+  layout();
+}
+dock(document.getElementById('F'), 'finger');
+dock(document.getElementById('M'), 'mitte');
+</script></body></html>
