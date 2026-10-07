@@ -27,14 +27,14 @@ test('Tippen auf «Fuel» öffnet den Bereich; von dort geht es zur Ernährung u
   await expect(page).toHaveURL(/\/fuel$/)
 })
 
-test('die Leiste passt in die Breite, alle sechs Beschriftungen sichtbar', async ({ page }) => {
+test('die Leiste passt in die Breite, alle zwölf Bereiche erreichbar', async ({ page }) => {
   await openDemo(page)
   const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
   const box = await nav.boundingBox()
   const viewport = page.viewportSize()!
   expect(box!.x).toBeGreaterThanOrEqual(0)
   expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width + 1)
-  await expect(nav.getByRole('button')).toHaveCount(6)
+  await expect(nav.getByRole('button')).toHaveCount(12)
   for (const b of await nav.getByRole('button').all()) {
     const bb = await b.boundingBox()
     expect(bb!.width, 'jeder Reiter mindestens 44 px breit').toBeGreaterThanOrEqual(44)

@@ -27,7 +27,17 @@
       "athleteTest": "Test",
       "athleteMore": "Mer",
       "athletePlan": "Plan",
-      "coachPlan": "Plan"
+      "coachPlan": "Plan",
+      "dockDiary": "Dagbok",
+      "dockLoad": "Belastning",
+      "dockHealth": "Helse",
+      "dockPeakWeek": "Peak Week",
+      "dockProfile": "Profil",
+      "dockShares": "Delinger",
+      "dockWeeklyReport": "Ukerapport",
+      "dockAsk": "Spørsmål",
+      "dockAnalysis": "Analyse",
+      "dockSettings": "Innstillinger"
     },
     "overview": "Oversikt",
     "diagnostics": "Diagnostikk",

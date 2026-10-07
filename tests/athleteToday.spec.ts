@@ -105,7 +105,7 @@ test('Bildschirm: Heute zeigt Veränderung, Lücke und nächsten Test; ohne Rohs
   expect(text).not.toMatch(/\b(bereit|Risiko|Streak)\b/i)
   expect(text).not.toMatch(/\d\s?% bereit/)
   const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
-  for (const label of ['Heute', 'Leistung', 'Test', 'Fuel', 'Mehr']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
+  for (const label of ['Heute', 'Leistung', 'Test', 'Fuel', 'Einstellungen']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
 })
 
 test('Bildschirm: Leistung zeigt Datenbasis, Dimensionen und die vier Karten, ohne Gesamtwert', async ({ page }) => {

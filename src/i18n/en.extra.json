@@ -2658,6 +2658,11 @@
       "weeklyReport": "Weekly report",
       "plan": "Training plan (preview)",
       "planBlock": "Training block"
+    },
+    "settings": {
+      "title": "Settings",
+      "navSound": "Navigation bar sound",
+      "navSoundHint": "A soft click while swiping, two tones when you choose."
     }
   },
   "teamHub": {

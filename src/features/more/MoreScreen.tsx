@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ChevronRight } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { navPick, navSoundEnabled, primeNavSound, setNavSoundEnabled } from '@/lib/navSound'
 
 /**
  * Mehr — alles, was nicht zu den fünf Hauptbereichen gehört (Produktdoktrin §6).
@@ -66,6 +68,7 @@ export function MoreScreen() {
     <div data-testid="more-screen">
       <ScreenHeader eyebrow={t('more.eyebrow')} title={t('more.title')} intro={t('more.intro')} />
       <div className="grid gap-4 lg:grid-cols-2">
+        <SettingsPanel />
         {GROUPS.map((group) => {
           // Der Messbereich ist für Trainer hier, für Athleten liegt er in der Leiste.
           const items = group.items
@@ -90,5 +93,37 @@ export function MoreScreen() {
         })}
       </div>
     </div>
+  )
+}
+
+/** Geräte-Einstellungen. In der Leiste heißt diese Seite deshalb «Einstellungen». */
+function SettingsPanel() {
+  const { t } = useTranslation()
+  const [sound, setSound] = useState(navSoundEnabled)
+  return (
+    <Panel data-testid="more-settings">
+      <PanelHeader title={t('more.settings.title')} />
+      <label className="flex min-h-12 items-center gap-3 px-4 pb-3 text-[14px]">
+        <span className="flex-1">
+          {t('more.settings.navSound')}
+          <span className="block text-[12px] text-ink-muted">{t('more.settings.navSoundHint')}</span>
+        </span>
+        <input
+          type="checkbox"
+          role="switch"
+          data-testid="nav-sound"
+          checked={sound}
+          onChange={(e) => {
+            setSound(e.target.checked)
+            setNavSoundEnabled(e.target.checked)
+            if (e.target.checked) {
+              primeNavSound()
+              navPick()
+            }
+          }}
+          className="size-5 accent-[var(--accent)]"
+        />
+      </label>
+    </Panel>
   )
 }

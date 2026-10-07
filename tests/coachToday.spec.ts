@@ -94,8 +94,8 @@ async function asCoach(page: import('@playwright/test').Page) {
 test('Bildschirm: Trainer sieht Heute mit Teamstatus, Priorität und sechs Bereichen (mit Trainingsbereich)', async ({ page }) => {
   await asCoach(page)
   const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
-  await expect(nav.getByRole('button')).toHaveCount(6)
-  for (const label of ['Heute', 'Athleten', 'Plan', 'Test', 'Team', 'Mehr']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
+  await expect(nav.getByRole('button')).toHaveCount(10)
+  for (const label of ['Heute', 'Athleten', 'Plan', 'Test', 'Team', 'Wochenbericht', 'Fragen', 'Analyse', 'Profil', 'Einstellungen']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
   const nums = await Promise.all(['current', 'review', 'overdue'].map(async (k) => Number(await page.getByTestId(`status-${k}`).locator('.readout').innerText())))
   expect(nums.reduce((a, b) => a + b, 0)).toBe(5)
   await expect(page.getByTestId('today-priority')).toBeVisible()
@@ -106,12 +106,12 @@ test('Bildschirm: Trainer sieht Heute mit Teamstatus, Priorität und sechs Berei
   expect(text).not.toMatch(/\b(bereit|ready|Risiko|risk)\b/i)
 })
 
-test('Bildschirm: Team, Mehr und Athleten sind über die Leiste erreichbar', async ({ page }) => {
+test('Bildschirm: Team, Einstellungen (Mehr) und Athleten sind über die Leiste erreichbar', async ({ page }) => {
   await asCoach(page)
   const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
   await nav.getByRole('button', { name: 'Team' }).click()
   await expect(page.getByTestId('team-hub')).toBeVisible()
-  await nav.getByRole('button', { name: 'Mehr' }).click()
+  await nav.getByRole('button', { name: 'Einstellungen' }).click()
   await expect(page.getByTestId('more-screen')).toBeVisible()
   await expect(page.getByTestId('more-measure')).toBeVisible()
   await nav.getByRole('button', { name: 'Athleten' }).click()
@@ -134,7 +134,7 @@ test('Bildschirm: kein seitliches Überlaufen, hell und dunkel', async ({ page }
   }
 })
 
-test('Athleten sehen ihre fünf Bereiche', async ({ page }) => {
+test('Athleten sehen alle ihre Bereiche in der Leiste', async ({ page }) => {
   await openDemo(page)
-  await expect(page.getByRole('navigation', { name: 'Hauptnavigation' }).getByRole('button')).toHaveCount(6)
+  await expect(page.getByRole('navigation', { name: 'Hauptnavigation' }).getByRole('button')).toHaveCount(12)
 })

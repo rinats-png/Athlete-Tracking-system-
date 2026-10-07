@@ -2658,6 +2658,11 @@
       "weeklyReport": "Weekrapport",
       "plan": "Trainingsplan (voorbeeld)",
       "planBlock": "Trainingsblok"
+    },
+    "settings": {
+      "title": "Instellingen",
+      "navSound": "Geluid van de navigatiebalk",
+      "navSoundHint": "Een zachte klik bij het vegen, twee tonen bij het kiezen."
     }
   },
   "teamHub": {

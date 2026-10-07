@@ -168,35 +168,74 @@ async function floatingNav(page: import('@playwright/test').Page) {
 }
 
 test.describe('Schwebende Navigation', () => {
-  test('Bogen: sechs Tabs, Plan (dritter) ist größer; Antippen blinkt zweimal, dann folgt die Seite', async ({ page }) => {
+  test('Lupen-Dock: alle zwölf Bereiche, der aktive steht vergrößert in der Mitte, Antippen holt ihn dorthin', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' })
     await openDemo(page)
     const nav = await floatingNav(page)
     test.skip(nav == null, 'ab lg trägt die Kopfzeile die Navigation')
 
     const buttons = nav!.getByRole('button')
-    await expect(buttons).toHaveCount(6)
-    const sizes = await buttons.evaluateAll((els) => els.map((el) => el.querySelector('.nav-dot')!.getBoundingClientRect().width))
-    expect(sizes[2], 'der mittlere Tab ist der größte').toBeGreaterThan(Math.max(sizes[0], sizes[1], sizes[3], sizes[4]))
-    // Alle Treffflächen mindestens 44 px.
-    const boxes = await buttons.evaluateAll((els) => els.map((el) => el.getBoundingClientRect()))
-    for (const b of boxes) expect(Math.min(b.width, b.height)).toBeGreaterThanOrEqual(43.5)
+    await expect(buttons).toHaveCount(12)
+    // Treffflächen mindestens 44 px und überlappungsfrei (die Lupe vergrößert nur das Bild).
+    const boxes = await buttons.evaluateAll((els) => els.map((el) => { const r = el.getBoundingClientRect(); return [r.left, r.right, r.width, r.height] }))
+    for (const [, , w, h] of boxes) expect(Math.min(w, h)).toBeGreaterThanOrEqual(43.5)
+    for (let i = 1; i < boxes.length; i++) expect(boxes[i][0] + 0.5).toBeGreaterThanOrEqual(boxes[i - 1][1])
 
-    // Antippen: erst blinkt der Tab (data-blinking), die Seite wechselt erst danach.
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
-    await nav!.getByRole('button', { name: /Leistung/ }).click()
-    await expect(nav!.locator('[data-blinking]')).toHaveCount(1)
-    expect(page.url()).not.toMatch(/performance/)
-    await expect(page).toHaveURL(/performance/)
-    await expect(nav!.locator('[data-blinking]')).toHaveCount(0)
+    const centred = async () =>
+      nav!.evaluate((el) => {
+        const dock = el.querySelector('[data-testid="nav-dock"]')!.getBoundingClientRect()
+        const mid = dock.left + dock.width / 2
+        const btn = [...el.querySelectorAll('button')].find((b) => { const r = b.getBoundingClientRect(); return Math.abs(r.left + r.width / 2 - mid) < 4 })
+        return btn ? { label: btn.getAttribute('aria-label'), size: btn.querySelector('.nav-dot')!.getBoundingClientRect().width } : null
+      })
+    await expect.poll(async () => (await centred())?.label).toBe('Heute')
+    const big = (await centred())!.size
+    const small = await buttons.nth(5).evaluate((el) => el.querySelector('.nav-dot')!.getBoundingClientRect().width)
+    expect(big, 'die Mitte ist vergrößert').toBeGreaterThan(small + 8)
+
+    // Ein Bereich jenseits des Rands: antippen wählt ihn und holt ihn in die Mitte.
+    await nav!.getByRole('button', { name: 'Tagebuch' }).click()
+    await expect(page).toHaveURL(/tagebuch/)
+    await expect.poll(async () => (await centred())?.label).toBe('Tagebuch')
+    await expect(nav!.getByRole('button', { name: 'Tagebuch' })).toHaveAttribute('aria-current', 'page')
   })
 
-  test('bei «Bewegung reduzieren» entfallen Blinken und Verzögerung', async ({ page }) => {
+  test('Wischen: was in der Mitte einrastet, ist gewählt; programmatisches Scrollen wählt nicht', async ({ page }) => {
+    await openDemo(page)
+    const nav = await floatingNav(page)
+    test.skip(nav == null, 'ab lg trägt die Kopfzeile die Navigation')
+    const dock = page.getByTestId('nav-dock')
+    // Ohne Berührung: Scrollen allein wechselt die Seite nicht.
+    await dock.evaluate((el) => el.scrollTo({ left: 56 * 2 }))
+    await page.waitForTimeout(400)
+    expect(page.url()).not.toMatch(/plan/)
+    // Mit Berührung (Wischen): Fuel rastet ein und wird gewählt.
+    await dock.dispatchEvent('pointerdown')
+    await dock.evaluate((el) => el.scrollTo({ left: 56 * 4 + 10 }))
+    await expect(page).toHaveURL(/\/fuel$/)
+  })
+
+  test('bei «Bewegung reduzieren» wählt Antippen sofort, ohne Vergrößerung', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await openDemo(page)
     const nav = await floatingNav(page)
     test.skip(nav == null, 'ab lg trägt die Kopfzeile die Navigation')
-    await nav!.getByRole('button', { name: /Leistung/ }).click()
+    await nav!.getByRole('button', { name: 'Leistung' }).click()
     await expect(page).toHaveURL(/performance/, { timeout: 300 })
+    const sizes = await nav!.getByRole('button').evaluateAll((els) => els.map((el) => el.querySelector('.nav-dot')!.getBoundingClientRect().width))
+    expect(Math.max(...sizes) - Math.min(...sizes)).toBeLessThan(1)
+  })
+
+  test('Ton: standardmäßig an, unter Mehr abschaltbar, bleibt nach dem Neuladen aus', async ({ page }) => {
+    await openDemo(page)
+    await page.goto('/mehr', { waitUntil: 'domcontentloaded' })
+    const sw = page.getByTestId('nav-sound')
+    await expect(sw).toBeChecked()
+    await sw.click()
+    await expect(sw).not.toBeChecked()
+    await page.reload({ waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('nav-sound')).not.toBeChecked()
+    expect(await page.evaluate(() => localStorage.getItem('kydon.navSound'))).toBe('off')
   })
 })
 
@@ -302,4 +341,14 @@ test.describe('Performance Journey', () => {
     await expect(page.getByText('Deine Journey')).toBeVisible()
     await expect(page.locator('main').getByText('Heute').first()).toBeVisible()
   })
+})
+
+test('Leiste: jeder Eintrag führt auf seine eigene Adresse, für Athlet und Trainer', async () => {
+  const { dockItemsFor, pathForNavKey } = await import('../src/features/dashboard/BottomNav')
+  for (const role of ['solo', 'coach'] as const) {
+    const items = dockItemsFor(role)
+    for (const item of items) expect(pathForNavKey(item.key), `${role} ${item.key}`).toBe(item.path)
+    expect(new Set(items.map((i) => i.path)).size, `${role}: keine Adresse doppelt`).toBe(items.length)
+    expect(items.at(-1)!.path).toBe('/mehr')
+  }
 })

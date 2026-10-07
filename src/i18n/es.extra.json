@@ -2658,6 +2658,11 @@
       "weeklyReport": "Informe semanal",
       "plan": "Plan de entrenamiento (vista previa)",
       "planBlock": "Bloque de entrenamiento"
+    },
+    "settings": {
+      "title": "Ajustes",
+      "navSound": "Sonido de la barra de navegación",
+      "navSoundHint": "Un clic suave al deslizar, dos tonos al elegir."
     }
   },
   "teamHub": {

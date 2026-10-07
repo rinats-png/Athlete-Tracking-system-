@@ -27,7 +27,17 @@
       "athleteTest": "Test",
       "athleteMore": "More",
       "athletePlan": "Plan",
-      "coachPlan": "Plan"
+      "coachPlan": "Plan",
+      "dockDiary": "Diary",
+      "dockLoad": "Load",
+      "dockHealth": "Health",
+      "dockPeakWeek": "Peak Week",
+      "dockProfile": "Profile",
+      "dockShares": "Shares",
+      "dockWeeklyReport": "Weekly report",
+      "dockAsk": "Ask",
+      "dockAnalysis": "Analysis",
+      "dockSettings": "Settings"
     },
     "overview": "Overview",
     "diagnostics": "Diagnostics",

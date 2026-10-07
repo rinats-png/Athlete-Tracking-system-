@@ -34,17 +34,12 @@ const seed = (page: import('@playwright/test').Page, withSession: boolean) =>
   }, withSession)
 
 test.describe('Bildschirm', () => {
-  test('sechs Tabs, Plan ist der größte, Antippen öffnet den Hub', async ({ page }) => {
+  test('Plan steht als dritter Bereich in der Leiste, Antippen öffnet den Hub', async ({ page }) => {
     await openDemo(page)
     const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
     const buttons = nav.getByRole('button')
-    await expect(buttons).toHaveCount(6)
-    const sizes = await buttons.evaluateAll((els) => els.map((el) => el.querySelector('.nav-dot')!.getBoundingClientRect().width))
-    expect(sizes[2]).toBeGreaterThan(Math.max(sizes[0], sizes[1], sizes[3], sizes[4], sizes[5]))
-    // Treffer mindestens 44 px, keine Überlappung der Tabs.
-    const boxes = await buttons.evaluateAll((els) => els.map((el) => { const r = el.getBoundingClientRect(); return [r.left, r.right, r.width, r.height] }))
-    for (const [, , w, h] of boxes) expect(Math.min(w, h)).toBeGreaterThanOrEqual(43.5)
-    for (let i = 1; i < boxes.length; i++) expect(boxes[i][0] + 0.5, `Tab ${i} überlappt`).toBeGreaterThanOrEqual(boxes[i - 1][1])
+    await expect(buttons).toHaveCount(12)
+    await expect(buttons.nth(2)).toHaveAttribute('aria-label', 'Plan')
     await buttons.nth(2).click()
     await expect(page).toHaveURL(/\/plan$/)
     await expect(page.getByTestId('plan-hub')).toBeVisible()

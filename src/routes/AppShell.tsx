@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AppHeader } from '@/features/dashboard/AppHeader'
-import { BottomNav, navItemsFor, navKeyForPath, pathForNavKey } from '@/features/dashboard/BottomNav'
+import { BottomNav, dockItemsFor, navItemsFor, navKeyForPath, pathForNavKey } from '@/features/dashboard/BottomNav'
 import { DataLoadNotice } from '@/features/dashboard/DataLoadNotice'
 import { ActionOrb } from '@/components/signature/ActionOrb'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -31,6 +31,8 @@ export function AppShell() {
   const { mode, storageBlocked, role } = useAppData()
   const items = navItemsFor(role)
   const active = navKeyForPath(pathname, role)
+  const dock = dockItemsFor(role)
+  const dockActive = navKeyForPath(pathname, role, dock)
   // Der Kiosk-Modus ist ein eigener Raum: keine Kopfzeile, keine Leiste, kein Fächer.
   const kiosk = pathname.startsWith('/trainer/kiosk')
   if (kiosk) {
@@ -85,7 +87,7 @@ export function AppShell() {
 
       <WhatsNewDialog />
       <ActionOrb />
-      <BottomNav active={active} items={items} onNavigate={(key) => navigate(pathForNavKey(key))} />
+      <BottomNav active={dockActive} items={dock} onNavigate={(key) => navigate(pathForNavKey(key))} />
     </div>
   )
 }

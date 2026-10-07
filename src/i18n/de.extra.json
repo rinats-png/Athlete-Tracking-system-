@@ -2658,6 +2658,11 @@
       "weeklyReport": "Wochenbericht",
       "plan": "Trainingsplan (Vorschau)",
       "planBlock": "Trainingsblock"
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "navSound": "Ton der Navigationsleiste",
+      "navSoundHint": "Leises Rasten beim Wischen, zwei Töne bei der Auswahl."
     }
   },
   "teamHub": {

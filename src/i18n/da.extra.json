@@ -2658,6 +2658,11 @@
       "weeklyReport": "Ugerapport",
       "plan": "Træningsplan (forhåndsvisning)",
       "planBlock": "Træningsblok"
+    },
+    "settings": {
+      "title": "Indstillinger",
+      "navSound": "Lyd i navigationslinjen",
+      "navSoundHint": "Et blødt klik, når du swiper, to toner, når du vælger."
     }
   },
   "teamHub": {
