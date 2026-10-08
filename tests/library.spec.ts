@@ -27,7 +27,8 @@ test.describe('Übungsdatenbank', () => {
       for (const p of e.patterns) expect(PATTERNS, `${e.id} ${p}`).toContain(p)
       for (const c of e.caution) expect(CAUTION, `${e.id} ${c}`).toContain(c)
       expect(['LOW', 'MODERATE', 'HIGH']).toContain(e.complexity)
-      expect(e.steps.length, `${e.id} ohne Ausführungsschritte`).toBeGreaterThan(0)
+      const text = JSON.parse(readFileSync(new URL(`exerciseTexts/${e.category}.json`, dir), 'utf8'))[e.id]
+      expect(text?.steps.length, `${e.id} ohne Ausführungsschritte`).toBeGreaterThan(0)
       // HIGH-Komplexität ist nie «selbst geführt».
       if (e.complexity === 'HIGH') expect(e.coachGate, e.id).not.toBe('SELF_GUIDED_WITH_CUES')
       if (e.category === 'OLY') expect(e.complexity, `${e.id}: Oly nicht LOW`).not.toBe('LOW')

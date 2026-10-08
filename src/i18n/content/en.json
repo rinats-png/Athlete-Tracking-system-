@@ -8243,10 +8243,6 @@
     "en": "Record the station setup and sled resistance: only comparable with an identical setup.",
     "de": "Stationsaufbau und Schlittenwiderstand festhalten: nur bei identischem Aufbau vergleichbar."
   },
-  "Running route, wall ball, sled, kettlebells/dumbbells, stopwatch": {
-    "en": "Running route, wall ball, sled, kettlebells/dumbbells, stopwatch",
-    "de": "Laufstrecke, Wall Ball, Schlitten, Kettlebells/Kurzhanteln, Stoppuhr"
-  },
   "Standardised GPP circuit": {
     "en": "Standardised GPP circuit",
     "de": "Standardisierter GPP-Zirkel"
@@ -8282,10 +8278,6 @@
   "Same load, same recovery position (seated or standing). Caffeine, sleep and room temperature affect heart rate – note them.": {
     "en": "Same load, same recovery position (seated or standing). Caffeine, sleep and room temperature affect heart rate – note them.",
     "de": "Gleiche Belastung, gleiche Position in der Erholung (sitzend oder stehend). Koffein, Schlaf und Raumtemperatur beeinflussen die Herzfrequenz – notieren."
-  },
-  "Heart rate strap, ergometer": {
-    "en": "Heart rate strap, ergometer",
-    "de": "Pulsgurt, Ergometer"
   },
   "Competition simulation with openers": {
     "en": "Competition simulation with openers",
@@ -8326,5 +8318,13 @@
   "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.": {
     "en": "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.",
     "de": "Ein aerobes Rennen mit anaerobem Finale. Das Training ähnelt eher dem 5-km-Modell, ergänzt um Renntempo und Endspurt-Reserve."
+  },
+  "Running route, track or treadmill, wall ball, sled, kettlebells/dumbbells, stopwatch": {
+    "en": "Running route, track or treadmill, wall ball, sled, kettlebells/dumbbells, stopwatch",
+    "de": "Laufstrecke, Bahn oder Laufband, Wall Ball, Schlitten, Kettlebells/Kurzhanteln, Stoppuhr"
+  },
+  "Heart rate strap; bike ergometer, rowing ergometer or treadmill": {
+    "en": "Heart rate strap; bike ergometer, rowing ergometer or treadmill",
+    "de": "Pulsgurt; Fahrradergometer, Ruderergometer oder Laufband"
   }
 }

@@ -107,7 +107,7 @@ export const PROGRAM_TESTS: TestBlueprint[] = [
       en: 'Record the station setup and sled resistance: only comparable with an identical setup.',
     },
     equipmentIds: [['measured_course', 'track', 'treadmill'], ['wall_ball'], ['sled'], ['kettlebell', 'dumbbells'], ['stopwatch']],
-    equipment: { de: 'Laufstrecke, Wall Ball, Schlitten, Kettlebells/Kurzhanteln, Stoppuhr', en: 'Running route, wall ball, sled, kettlebells/dumbbells, stopwatch' },
+    equipment: { de: 'Laufstrecke, Bahn oder Laufband, Wall Ball, Schlitten, Kettlebells/Kurzhanteln, Stoppuhr', en: 'Running route, track or treadmill, wall ball, sled, kettlebells/dumbbells, stopwatch' },
   },
   {
     slug: 'gpp_circuit',
@@ -152,7 +152,7 @@ export const PROGRAM_TESTS: TestBlueprint[] = [
       en: 'Same load, same recovery position (seated or standing). Caffeine, sleep and room temperature affect heart rate – note them.',
     },
     equipmentIds: [['heart_rate_monitor'], ['bike_erg', 'rowing_erg', 'treadmill']],
-    equipment: { de: 'Pulsgurt, Ergometer', en: 'Heart rate strap, ergometer' },
+    equipment: { de: 'Pulsgurt; Fahrradergometer, Ruderergometer oder Laufband', en: 'Heart rate strap; bike ergometer, rowing ergometer or treadmill' },
   },
   {
     slug: 'opener_simulation',

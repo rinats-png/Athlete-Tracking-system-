@@ -6,7 +6,8 @@
  *   node scripts/buildLibrary.mjs
  *
  * Ausgabe in `src/data/library/`:
- *   exerciseRegistry.json  — 128 Übungen, Ausführung in Schritte zerlegt,
+ *   exerciseRegistry.json  — 128 Übungen (Liste: Muster, Gerät, Komplexität …)
+ *   exerciseTexts/<KAT>.json — Ausführung in Schritten, Muskeln, Transfer,
  *                            Quellen aus dem Fließtext als Liste
  *   programIndex.json      — Regeln, Vorlagen, Intents, Tests, Planköpfe
  *   plans/<PLAN_ID>.json   — Wochen eines Plans (nachgeladen beim Öffnen)
@@ -56,14 +57,34 @@ function splitExecution(text) {
   }
 }
 
-const exercises = registry.map((e) => {
+/**
+ * Übungen in zwei Teilen: die Liste (Name, Muster, Gerät, Komplexität … —
+ * alles, was Filter und Ersatz brauchen) und die Texte je Kategorie
+ * (Ausführung, Muskeln, Transfer, Quellen), nachgeladen erst im Detail.
+ * Zusammen wären es ≈ 250 KB in einem Baustein (Grenze: tests/loading.spec.ts).
+ */
+const exercises = registry.map((e) => ({
+  id: e.exercise_id,
+  name: e.name,
+  category: e.category_id,
+  section: e.section_title,
+  patterns: e.movement_patterns,
+  equipment: e.equipment_ids,
+  complexity: e.technical_complexity,
+  coachGate: e.coach_gate,
+  loadTypes: e.load_types,
+  parameters: e.allowed_parameters,
+  caution: e.caution_tags,
+  regressions: e.regression_options,
+  progressions: e.progression_options,
+  transferDefault: e.transfer_default,
+}))
+
+const textsByCategory = {}
+for (const e of registry) {
   const transfer = splitLinks(e.transfer)
   const exec = splitExecution(e.execution)
-  return {
-    id: e.exercise_id,
-    name: e.name,
-    category: e.category_id,
-    section: e.section_title,
+  ;(textsByCategory[e.category_id] ??= {})[e.exercise_id] = {
     steps: exec.steps,
     cues: exec.cues,
     errors: exec.errors,
@@ -72,18 +93,8 @@ const exercises = registry.map((e) => {
     sportsNote: e.sports,
     transfer: transfer.text,
     sources: transfer.sources,
-    patterns: e.movement_patterns,
-    equipment: e.equipment_ids,
-    complexity: e.technical_complexity,
-    coachGate: e.coach_gate,
-    loadTypes: e.load_types,
-    parameters: e.allowed_parameters,
-    caution: e.caution_tags,
-    regressions: e.regression_options,
-    progressions: e.progression_options,
-    transferDefault: e.transfer_default,
   }
-})
+}
 
 const planHead = (p) => {
   const { weekly, ...head } = p
@@ -112,6 +123,9 @@ const index = {
 
 rmSync(join(out, 'plans'), { recursive: true, force: true })
 mkdirSync(join(out, 'plans'), { recursive: true })
+rmSync(join(out, 'exerciseTexts'), { recursive: true, force: true })
+mkdirSync(join(out, 'exerciseTexts'), { recursive: true })
+for (const [cat, texts] of Object.entries(textsByCategory)) writeFileSync(join(out, 'exerciseTexts', `${cat}.json`), JSON.stringify(texts))
 writeFileSync(join(out, 'exerciseRegistry.json'), JSON.stringify(exercises))
 writeFileSync(join(out, 'programIndex.json'), JSON.stringify(index))
 for (const p of seed.plans) writeFileSync(join(out, 'plans', `${p.plan_id}.json`), JSON.stringify(p.weekly))

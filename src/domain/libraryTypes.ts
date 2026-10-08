@@ -14,20 +14,12 @@ export interface SourceLink {
   url: string
 }
 
+/** Listenteil einer Übung: alles, was Filter, Ersatz und Pläne brauchen. */
 export interface LibraryExercise {
   id: string
   name: string
   category: string
   section: string
-  steps: string[]
-  cues: string
-  errors: string
-  muscles: string
-  abilities: string
-  /** Sportarten-Zeile der Recherche: menschenlesbare Annotation, KEINE geprüfte Zuordnung. */
-  sportsNote: string
-  transfer: string
-  sources: SourceLink[]
   patterns: string[]
   equipment: string[]
   complexity: Complexity
@@ -38,6 +30,19 @@ export interface LibraryExercise {
   regressions: string[]
   progressions: string[]
   transferDefault: Specificity
+}
+
+/** Textteil einer Übung (nachgeladen je Kategorie, erst im Detail gebraucht). */
+export interface ExerciseText {
+  steps: string[]
+  cues: string
+  errors: string
+  muscles: string
+  abilities: string
+  /** Sportarten-Zeile der Recherche: menschenlesbare Annotation, KEINE geprüfte Zuordnung. */
+  sportsNote: string
+  transfer: string
+  sources: SourceLink[]
 }
 
 export interface EvidenceRef {

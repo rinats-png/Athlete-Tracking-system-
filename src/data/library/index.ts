@@ -1,4 +1,4 @@
-import type { LibraryExercise, PlanWeek, ProgramIndex } from '@/domain/libraryTypes'
+import type { ExerciseText, LibraryExercise, PlanWeek, ProgramIndex } from '@/domain/libraryTypes'
 
 /**
  * Nachladen der Trainingsbibliothek. Die Daten (≈ 350 KB Index + Übungen,
@@ -31,3 +31,12 @@ export async function loadPlanWeeks(planId: string): Promise<PlanWeek[] | null> 
 }
 
 export const PLAN_IDS = Object.keys(planFiles).map((p) => p.replace('./plans/', '').replace('.json', ''))
+
+const textFiles = import.meta.glob<{ default: Record<string, ExerciseText> }>('./exerciseTexts/*.json')
+
+/** Texte einer Übung (Ausführung, Muskeln, Transfer, Quellen); lädt die Datei ihrer Kategorie. */
+export async function loadExerciseText(category: string, id: string): Promise<ExerciseText | null> {
+  const load = textFiles[`./exerciseTexts/${category}.json`]
+  if (!load) return null
+  return (await load()).default[id] ?? null
+}

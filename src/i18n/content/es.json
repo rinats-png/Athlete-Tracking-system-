@@ -2060,7 +2060,6 @@
   "Half HYROX": "Medio HYROX",
   "4 × (1 km run + one station): 25 wall balls, 20 m sled push, 12 burpee broad jumps, 20 m farmers carry. Total time.": "4 × (1 km de carrera + una estación): 25 wall balls, 20 m de empuje de trineo, 12 burpee broad jumps, 20 m de farmers carry. Tiempo total.",
   "Record the station setup and sled resistance: only comparable with an identical setup.": "Anota el montaje de las estaciones y la resistencia del trineo: solo comparable con un montaje idéntico.",
-  "Running route, wall ball, sled, kettlebells/dumbbells, stopwatch": "Recorrido de carrera, wall ball, trineo, kettlebells/mancuernas, cronómetro",
   "Standardised GPP circuit": "Circuito GPP estandarizado",
   "GPP circuit": "Circuito GPP",
   "3 rounds: 10 goblet squats with a fixed weight, 10 push-ups, 250 m rowing. Total time.": "3 rondas: 10 goblet squats con peso fijo, 10 flexiones, 250 m de remo. Tiempo total.",
@@ -2070,7 +2069,6 @@
   "HR recovery": "Recuperación FC",
   "After 3 min of defined interval load (e.g. 6 × 10 s hard / 50 s easy on the bike): heart rate at the end and after 60 s of rest.": "Tras 3 min de intervalos definidos (p. ej., 6 × 10 s fuerte / 50 s suave en la bici): frecuencia cardiaca al final y tras 60 s de descanso.",
   "Same load, same recovery position (seated or standing). Caffeine, sleep and room temperature affect heart rate – note them.": "Misma carga, misma posición de recuperación (sentado o de pie). La cafeína, el sueño y la temperatura ambiente influyen en la frecuencia cardiaca: anótalos.",
-  "Heart rate strap, ergometer": "Banda de frecuencia cardiaca, ergómetro",
   "Competition simulation with openers": "Simulación de competición con openers",
   "Opener simulation": "Simulación de openers",
   "One attempt each in squat, bench press and deadlift with the planned opener (about 90 % of the target maximum) under competition commands. Not a max attempt.": "Un intento en sentadilla, press de banca y peso muerto con el opener previsto (alrededor del 90 % del máximo objetivo) con voces de competición. No es un intento máximo.",
@@ -2080,5 +2078,7 @@
   "1500 m": "1500 m",
   "Like kickboxing, plus the clinch: repeated isometric-dynamic whole-body work under fatigue. Pure striking conditioning underestimates exactly this fatigue.": "Como el kickboxing, más el clinch: trabajo repetido isométrico-dinámico de todo el cuerpo bajo fatiga. Un acondicionamiento solo de golpeo subestima justo esa fatiga.",
   "Both energy systems contribute substantially. The race is decided on the second lap: lactate tolerance while keeping sprint quality. The higher the top speed, the easier race pace feels.": "Ambos sistemas energéticos contribuyen de forma importante. La carrera se decide en la segunda vuelta: tolerancia al lactato manteniendo la calidad de sprint. Cuanto mayor la velocidad máxima, más fácil se siente el ritmo de carrera.",
-  "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.": "Una carrera aeróbica con final anaeróbico. El entrenamiento se parece más al modelo de 5 km, con ritmo de carrera y reserva para el sprint final."
+  "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.": "Una carrera aeróbica con final anaeróbico. El entrenamiento se parece más al modelo de 5 km, con ritmo de carrera y reserva para el sprint final.",
+  "Running route, track or treadmill, wall ball, sled, kettlebells/dumbbells, stopwatch": "Recorrido de carrera, pista o cinta, wall ball, trineo, kettlebells/mancuernas, cronómetro",
+  "Heart rate strap; bike ergometer, rowing ergometer or treadmill": "Banda de frecuencia cardiaca; bicicleta ergométrica, remoergómetro o cinta"
 }

@@ -2060,7 +2060,6 @@
   "Half HYROX": "Halv HYROX",
   "4 × (1 km run + one station): 25 wall balls, 20 m sled push, 12 burpee broad jumps, 20 m farmers carry. Total time.": "4 × (1 km löpning + en station): 25 wall balls, 20 m slädpress, 12 burpee broad jumps, 20 m farmers carry. Total tid.",
   "Record the station setup and sled resistance: only comparable with an identical setup.": "Notera stationsuppställning och slädens motstånd: bara jämförbart med identisk uppställning.",
-  "Running route, wall ball, sled, kettlebells/dumbbells, stopwatch": "Löpsträcka, wall ball, släde, kettlebells/hantlar, tidtagarur",
   "Standardised GPP circuit": "Standardiserad GPP-cirkel",
   "GPP circuit": "GPP-cirkel",
   "3 rounds: 10 goblet squats with a fixed weight, 10 push-ups, 250 m rowing. Total time.": "3 varv: 10 goblet squats med fast vikt, 10 armhävningar, 250 m rodd. Total tid.",
@@ -2070,7 +2069,6 @@
   "HR recovery": "Pulsåterhämtning",
   "After 3 min of defined interval load (e.g. 6 × 10 s hard / 50 s easy on the bike): heart rate at the end and after 60 s of rest.": "Efter 3 min definierad intervallbelastning (t.ex. 6 × 10 s hårt / 50 s lätt på cykeln): puls i slutet och efter 60 s vila.",
   "Same load, same recovery position (seated or standing). Caffeine, sleep and room temperature affect heart rate – note them.": "Samma belastning, samma återhämtningsposition (sittande eller stående). Koffein, sömn och rumstemperatur påverkar pulsen – notera dem.",
-  "Heart rate strap, ergometer": "Pulsband, ergometer",
   "Competition simulation with openers": "Tävlingssimulering med öppningsförsök",
   "Opener simulation": "Öppningssimulering",
   "One attempt each in squat, bench press and deadlift with the planned opener (about 90 % of the target maximum) under competition commands. Not a max attempt.": "Ett försök vardera i knäböj, bänkpress och marklyft med planerat öppningsförsök (cirka 90 % av målmaximum) under tävlingskommandon. Inget maxförsök.",
@@ -2080,5 +2078,7 @@
   "1500 m": "1500 m",
   "Like kickboxing, plus the clinch: repeated isometric-dynamic whole-body work under fatigue. Pure striking conditioning underestimates exactly this fatigue.": "Som kickboxning, plus clinchen: upprepat isometriskt-dynamiskt helkroppsarbete under trötthet. Ren slagkondition underskattar just den tröttheten.",
   "Both energy systems contribute substantially. The race is decided on the second lap: lactate tolerance while keeping sprint quality. The higher the top speed, the easier race pace feels.": "Båda energisystemen bidrar väsentligt. Loppet avgörs på andra varvet: laktattolerans med bibehållen sprintkvalitet. Ju högre topphastighet, desto lättare känns tävlingsfarten.",
-  "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.": "Ett aerobt lopp med anaerob avslutning. Träningen liknar mer 5-km-modellen, kompletterad med tävlingsfart och spurtreserv."
+  "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.": "Ett aerobt lopp med anaerob avslutning. Träningen liknar mer 5-km-modellen, kompletterad med tävlingsfart och spurtreserv.",
+  "Running route, track or treadmill, wall ball, sled, kettlebells/dumbbells, stopwatch": "Löpsträcka, bana eller löpband, wall ball, släde, kettlebells/hantlar, tidtagarur",
+  "Heart rate strap; bike ergometer, rowing ergometer or treadmill": "Pulsband; cykelergometer, roddmaskin eller löpband"
 }

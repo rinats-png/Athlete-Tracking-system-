@@ -205,3 +205,10 @@ Eigene Planvorlagen liegen im lokalen Speicher des Browsers, der begrenzt ist. E
 ## Taper und Rückkehr nach Pause
 
 Fünf Vorlagen, nur Struktur (Entscheidung des Inhabers): `grappling_taper`, `striking_taper` (2 Wochen, Phase Taper, eine Simulation in Woche 1, Kampfrunden, Erhalt, Erholung) und `grappling_return`, `striking_return`, `hybrid_return` (4 Wochen, Phase Übergang: Erholung, ab Woche 2 Grundlage, ab Woche 3 Kraft, bei Kampfsport ab Woche 4 Kampfrunden). **Alle Plätze offen:** die Regeln des Registers gelten für Aufbau- und Wettkampfphasen, nicht für Taper und Übergang; es gibt keine belegte Dosis. Die Wochenzahlen sind Produktentscheidungen und gehören zur fachlichen Prüfung.
+
+## Trainingsbibliothek (Übungsdatenbank v1.1, Programm-Seed v4)
+
+128 kuratierte Übungen, 16 Pläne in voller Wochentiefe, 37 Methodenregeln,
+adaptive Anpassung mit Planversionen, 7 neue Tests, Muay Thai, 800 m und
+1500 m. Regelkette, Entscheidungen und offene Bereiche:
+[trainingsbibliothek.md](trainingsbibliothek.md).

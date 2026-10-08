@@ -8,7 +8,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { resolveByName, substitutes } from '@/domain/library'
 import { REGISTRY_TO_LEGACY } from '@/data/library/legacyExerciseMap'
 import { exerciseImageUrl } from '@/data/exerciseImages'
-import { useLibrary } from './useLibrary'
+import { useExerciseText, useLibrary } from './useLibrary'
 import { CoachPill, ComplexityDot, GermanOnlyNote } from './bits'
 
 /**
@@ -24,9 +24,12 @@ export function ExerciseDetailScreen() {
   const { exercises } = useLibrary()
   const e = exercises?.find((x) => x.id === id) ?? null
   const subs = useMemo(() => (e && exercises ? substitutes(e, exercises) : []), [e, exercises])
+  const text = useExerciseText(e?.category, e?.id)
 
   if (!exercises) return <p className="text-[14px] text-ink-secondary" data-testid="lib-loading">{t('lib.loading')}</p>
   if (!e) return <EmptyState title={t('lib.notFound')} body={t('lib.notFoundBody')} />
+  if (text === undefined) return <p className="text-[14px] text-ink-secondary" data-testid="lib-loading">{t('lib.loading')}</p>
+  const x = text ?? { steps: [], cues: '', errors: '', muscles: '', abilities: '', sportsNote: '', transfer: '', sources: [] }
 
   const legacy = REGISTRY_TO_LEGACY[e.id]
   const img = legacy ? exerciseImageUrl(legacy) : null
@@ -59,19 +62,19 @@ export function ExerciseDetailScreen() {
           <div className="px-4 pb-4">
             {img && <img src={img} alt="" width={320} height={200} loading="lazy" className="mb-3 h-40 w-full rounded object-cover" />}
             <ol className="space-y-2 text-[14px]">
-              {e.steps.map((s, i) => (
+              {x.steps.map((s, i) => (
                 <li key={i} className="flex gap-3"><span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent-quiet text-[12px] text-accent-text">{i + 1}</span><span>{s}</span></li>
               ))}
             </ol>
-            {e.cues && <p className="mt-3 text-[13px]"><span className="label-tag">{t('lib.cues')}</span><br />{e.cues}</p>}
-            {e.errors && <p className="mt-3 text-[13px]"><span className="label-tag">{t('lib.errors')}</span><br />{e.errors}</p>}
+            {x.cues && <p className="mt-3 text-[13px]"><span className="label-tag">{t('lib.cues')}</span><br />{x.cues}</p>}
+            {x.errors && <p className="mt-3 text-[13px]"><span className="label-tag">{t('lib.errors')}</span><br />{x.errors}</p>}
           </div>
         </Panel>
 
         <div className="space-y-4">
           <Panel>
             <PanelHeader title={t('lib.muscles')} />
-            <div className="space-y-2 px-4 pb-4 text-[14px]"><p>{e.muscles}</p><p className="text-ink-secondary">{e.abilities}</p></div>
+            <div className="space-y-2 px-4 pb-4 text-[14px]"><p>{x.muscles}</p><p className="text-ink-secondary">{x.abilities}</p></div>
           </Panel>
 
           <Panel data-testid="ex-params">
@@ -108,12 +111,12 @@ export function ExerciseDetailScreen() {
         <PanelHeader title={t('lib.transfer')} />
         <div className="space-y-3 px-4 pb-4 text-[14px]">
           <p className="text-[12px] text-ink-secondary" data-testid="ex-transfer-note">{t('lib.transferNote')}</p>
-          <p>{e.transfer}</p>
-          <p className="text-[13px] text-ink-secondary"><span className="label-tag">{t('lib.sportsNote')}</span><br />{e.sportsNote}</p>
-          {e.sources.length > 0 && (
+          <p>{x.transfer}</p>
+          <p className="text-[13px] text-ink-secondary"><span className="label-tag">{t('lib.sportsNote')}</span><br />{x.sportsNote}</p>
+          {x.sources.length > 0 && (
             <div>
               <span className="label-tag">{t('lib.sources')}</span>
-              <ul className="mt-1 space-y-1">{e.sources.map((s) => <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-[13px] text-accent-text underline underline-offset-2">{s.label}<ExternalLink size={12} aria-hidden /></a></li>)}</ul>
+              <ul className="mt-1 space-y-1">{x.sources.map((s) => <li key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-[13px] text-accent-text underline underline-offset-2">{s.label}<ExternalLink size={12} aria-hidden /></a></li>)}</ul>
             </div>
           )}
         </div>
