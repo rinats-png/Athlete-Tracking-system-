@@ -8170,5 +8170,161 @@
   "kcal/day; no general athlete norm in the source.": {
     "en": "kcal/day; no general athlete norm in the source.",
     "de": "kcal/day; keine allgemeine Athletennorm in Quelle."
+  },
+  "5RM squat, bench press, deadlift": {
+    "en": "5RM squat, bench press, deadlift",
+    "de": "5RM Kniebeuge, Bankdrücken, Kreuzheben"
+  },
+  "5RM S/B/D": {
+    "en": "5RM S/B/D",
+    "de": "5RM KB/BD/KH"
+  },
+  "Direct test of the heaviest load for five clean repetitions per lift. No estimation formula.": {
+    "en": "Direct test of the heaviest load for five clean repetitions per lift. No estimation formula.",
+    "de": "Direkter Test der höchsten Last für fünf saubere Wiederholungen je Lift. Keine Schätzformel."
+  },
+  "Guided warm-up, then build up per lift to five clean repetitions; full rest. Same exercise execution as at the start of the plan.": {
+    "en": "Guided warm-up, then build up per lift to five clean repetitions; full rest. Same exercise execution as at the start of the plan.",
+    "de": "Angeleitetes Aufwärmen, dann je Lift steigern bis zu fünf sauberen Wiederholungen; volle Pausen. Gleiche Übungsausführung wie zu Planbeginn."
+  },
+  "Barbell, rack, bench": {
+    "en": "Barbell, rack, bench",
+    "de": "Langhantel, Rack, Bank"
+  },
+  "3RM squat, bench press, deadlift": {
+    "en": "3RM squat, bench press, deadlift",
+    "de": "3RM Kniebeuge, Bankdrücken, Kreuzheben"
+  },
+  "3RM S/B/D": {
+    "en": "3RM S/B/D",
+    "de": "3RM KB/BD/KH"
+  },
+  "Heaviest load for three clean repetitions per lift; experienced athletes only.": {
+    "en": "Heaviest load for three clean repetitions per lift; experienced athletes only.",
+    "de": "Höchste Last für drei saubere Wiederholungen je Lift; nur für Erfahrene."
+  },
+  "As in the 5RM test, but three repetitions. Only with safe technique and spotting.": {
+    "en": "As in the 5RM test, but three repetitions. Only with safe technique and spotting.",
+    "de": "Wie beim 5RM-Test, aber drei Wiederholungen. Nur mit sicherer Technik und Sicherung."
+  },
+  "10RM squat and press variation": {
+    "en": "10RM squat and press variation",
+    "de": "10RM Kniebeuge- und Drückvariante"
+  },
+  "10RM": {
+    "en": "10RM",
+    "de": "10RM"
+  },
+  "Heaviest load for ten repetitions in a squat and a press variation – the same exercises as at the start of the plan.": {
+    "en": "Heaviest load for ten repetitions in a squat and a press variation – the same exercises as at the start of the plan.",
+    "de": "Höchste Last für zehn Wiederholungen in einer Kniebeuge- und einer Drückvariante – dieselben Übungen wie zu Planbeginn."
+  },
+  "Record the exercise choice at the start of the plan and do not change it at the retest. Full rest between attempts.": {
+    "en": "Record the exercise choice at the start of the plan and do not change it at the retest. Full rest between attempts.",
+    "de": "Übungswahl zu Planbeginn festhalten und beim Retest nicht wechseln. Volle Pausen zwischen den Versuchen."
+  },
+  "Barbell, dumbbells or kettlebell": {
+    "en": "Barbell, dumbbells or kettlebell",
+    "de": "Langhantel, Kurzhanteln oder Kettlebell"
+  },
+  "Half HYROX simulation": {
+    "en": "Half HYROX simulation",
+    "de": "Halb-HYROX-Simulation"
+  },
+  "Half HYROX": {
+    "en": "Half HYROX",
+    "de": "Halb-HYROX"
+  },
+  "4 × (1 km run + one station): 25 wall balls, 20 m sled push, 12 burpee broad jumps, 20 m farmers carry. Total time.": {
+    "en": "4 × (1 km run + one station): 25 wall balls, 20 m sled push, 12 burpee broad jumps, 20 m farmers carry. Total time.",
+    "de": "4 × (1 km Lauf + eine Station): 25 Wall Balls, 20 m Sled Push, 12 Burpee Broad Jumps, 20 m Farmers Carry. Gesamtzeit."
+  },
+  "Record the station setup and sled resistance: only comparable with an identical setup.": {
+    "en": "Record the station setup and sled resistance: only comparable with an identical setup.",
+    "de": "Stationsaufbau und Schlittenwiderstand festhalten: nur bei identischem Aufbau vergleichbar."
+  },
+  "Running route, wall ball, sled, kettlebells/dumbbells, stopwatch": {
+    "en": "Running route, wall ball, sled, kettlebells/dumbbells, stopwatch",
+    "de": "Laufstrecke, Wall Ball, Schlitten, Kettlebells/Kurzhanteln, Stoppuhr"
+  },
+  "Standardised GPP circuit": {
+    "en": "Standardised GPP circuit",
+    "de": "Standardisierter GPP-Zirkel"
+  },
+  "GPP circuit": {
+    "en": "GPP circuit",
+    "de": "GPP-Zirkel"
+  },
+  "3 rounds: 10 goblet squats with a fixed weight, 10 push-ups, 250 m rowing. Total time.": {
+    "en": "3 rounds: 10 goblet squats with a fixed weight, 10 push-ups, 250 m rowing. Total time.",
+    "de": "3 Runden: 10 Goblet Squats mit festem Gewicht, 10 Liegestütze, 250 m Rudern. Gesamtzeit."
+  },
+  "Same weight as the first time; note the rowing ergometer damper setting.": {
+    "en": "Same weight as the first time; note the rowing ergometer damper setting.",
+    "de": "Gleiches Gewicht wie beim ersten Mal; Dämpferstellung des Ruderergometers notieren."
+  },
+  "Kettlebell or dumbbell, rowing ergometer, stopwatch": {
+    "en": "Kettlebell or dumbbell, rowing ergometer, stopwatch",
+    "de": "Kettlebell oder Kurzhantel, Ruderergometer, Stoppuhr"
+  },
+  "Heart rate recovery 60 s": {
+    "en": "Heart rate recovery 60 s",
+    "de": "Herzfrequenz-Rückgang 60 s"
+  },
+  "HR recovery": {
+    "en": "HR recovery",
+    "de": "HF-Rückgang"
+  },
+  "After 3 min of defined interval load (e.g. 6 × 10 s hard / 50 s easy on the bike): heart rate at the end and after 60 s of rest.": {
+    "en": "After 3 min of defined interval load (e.g. 6 × 10 s hard / 50 s easy on the bike): heart rate at the end and after 60 s of rest.",
+    "de": "Nach 3 min definierter Intervallbelastung (z. B. 6 × 10 s hart / 50 s locker am Bike): Herzfrequenz am Ende und nach 60 s Ruhe."
+  },
+  "Same load, same recovery position (seated or standing). Caffeine, sleep and room temperature affect heart rate – note them.": {
+    "en": "Same load, same recovery position (seated or standing). Caffeine, sleep and room temperature affect heart rate – note them.",
+    "de": "Gleiche Belastung, gleiche Position in der Erholung (sitzend oder stehend). Koffein, Schlaf und Raumtemperatur beeinflussen die Herzfrequenz – notieren."
+  },
+  "Heart rate strap, ergometer": {
+    "en": "Heart rate strap, ergometer",
+    "de": "Pulsgurt, Ergometer"
+  },
+  "Competition simulation with openers": {
+    "en": "Competition simulation with openers",
+    "de": "Wettkampf-Simulation mit Openern"
+  },
+  "Opener simulation": {
+    "en": "Opener simulation",
+    "de": "Opener-Simulation"
+  },
+  "One attempt each in squat, bench press and deadlift with the planned opener (about 90 % of the target maximum) under competition commands. Not a max attempt.": {
+    "en": "One attempt each in squat, bench press and deadlift with the planned opener (about 90 % of the target maximum) under competition commands. Not a max attempt.",
+    "de": "Je ein Versuch in Kniebeuge, Bankdrücken und Kreuzheben mit dem geplanten Opener (etwa 90 % des Ziel-Maximums) unter Wettkampfkommandos. Kein Maximalversuch."
+  },
+  "Commands and rest as in competition. Valid attempts are counted.": {
+    "en": "Commands and rest as in competition. Valid attempts are counted.",
+    "de": "Kommandos und Pausen wie im Wettkampf. Gezählt werden gültige Versuche."
+  },
+  "Muay Thai": {
+    "en": "Muay Thai",
+    "de": "Muay Thai"
+  },
+  "800 m": {
+    "en": "800 m",
+    "de": "800 m"
+  },
+  "1500 m": {
+    "en": "1500 m",
+    "de": "1500 m"
+  },
+  "Like kickboxing, plus the clinch: repeated isometric-dynamic whole-body work under fatigue. Pure striking conditioning underestimates exactly this fatigue.": {
+    "en": "Like kickboxing, plus the clinch: repeated isometric-dynamic whole-body work under fatigue. Pure striking conditioning underestimates exactly this fatigue.",
+    "de": "Wie Kickboxen, dazu der Clinch: wiederholte isometrisch-dynamische Ganzkörperarbeit unter Ermüdung. Reines Schlag-Conditioning unterschätzt genau diese Ermüdung."
+  },
+  "Both energy systems contribute substantially. The race is decided on the second lap: lactate tolerance while keeping sprint quality. The higher the top speed, the easier race pace feels.": {
+    "en": "Both energy systems contribute substantially. The race is decided on the second lap: lactate tolerance while keeping sprint quality. The higher the top speed, the easier race pace feels.",
+    "de": "Beide Energiesysteme tragen wesentlich bei. Entschieden wird in der zweiten Runde: Laktattoleranz bei erhaltener Sprintqualität. Je höher die Höchstgeschwindigkeit, desto leichter fühlt sich das Renntempo an."
+  },
+  "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.": {
+    "en": "An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.",
+    "de": "Ein aerobes Rennen mit anaerobem Finale. Das Training ähnelt eher dem 5-km-Modell, ergänzt um Renntempo und Endspurt-Reserve."
   }
 }

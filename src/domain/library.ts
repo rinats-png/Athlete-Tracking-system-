@@ -10,6 +10,7 @@ import type {
   SessionTemplate,
 } from '@/domain/libraryTypes'
 import type { StoredPlannedSession, StoredTrainingBlock } from '@/lib/store/localStore'
+import { SEED_TEST_TO_SLUG } from '@/data/library/testMap'
 
 /**
  * Fachlogik der Trainingsbibliothek (Übungsdatenbank v1.1, Programm-Seed v4).
@@ -360,7 +361,7 @@ export function materializePlan(
     phase: PHASE_OF_CATEGORY[plan.category] ?? 'BUILD',
     startDay: ctx.startDay,
     weeks: plan.weeks,
-    retestMetrics: [],
+    retestMetrics: plan.retest.test_ids.map((t) => SEED_TEST_TO_SLUG[t]).filter((x): x is string => !!x).slice(0, 8),
     templateId: null,
     eventDay: null,
     assignmentId: null,

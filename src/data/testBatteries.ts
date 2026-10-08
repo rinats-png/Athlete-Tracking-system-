@@ -52,7 +52,7 @@ export const TEST_BATTERIES: TestBattery[] = [
   },
   {
     slug: 'combat_athlete_check',
-    disciplineIds: ['judo', 'wrestling', 'bjj', 'boxing', 'kickboxing', 'taekwondo', 'mma', 'karate', 'ju_jutsu', 'pencak_silat', 'fencing'],
+    disciplineIds: ['judo', 'wrestling', 'bjj', 'boxing', 'kickboxing', 'muay_thai', 'taekwondo', 'mma', 'karate', 'ju_jutsu', 'pencak_silat', 'fencing'],
     testSlugs: [
       'grip_strength',
       'countermovement_jump',

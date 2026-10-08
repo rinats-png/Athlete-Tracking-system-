@@ -812,4 +812,12 @@ export const TEST_CLASSIFICATION: Record<string, TestClassification> = {
     dimensionMetrics: { max_strength: 'load3RmKg' },
     direction: 'higher_is_better',
   },
+  // Retests der Programmbibliothek (Programm-Seed v4).
+  strength_5rm: { category: 'max_strength', dimension: 'max_strength', dimensionMetrics: { max_strength: 'total5RmKg' }, direction: 'higher_is_better' },
+  strength_3rm: { category: 'max_strength', dimension: 'max_strength', dimensionMetrics: { max_strength: 'total3RmKg' }, direction: 'higher_is_better' },
+  strength_10rm: { category: 'max_strength', dimension: 'max_strength', dimensionMetrics: { max_strength: 'total10RmKg' }, direction: 'higher_is_better' },
+  hyrox_half_sim: { category: 'endurance', dimension: 'endurance', dimensionMetrics: { endurance: 'durationSeconds' }, direction: 'lower_is_better' },
+  gpp_circuit: { category: 'endurance', dimension: 'endurance', dimensionMetrics: { endurance: 'durationSeconds' }, direction: 'lower_is_better' },
+  hr_recovery_60s: { category: 'endurance', dimension: 'endurance', dimensionMetrics: { endurance: 'hrDropBpm' }, direction: 'higher_is_better' },
+  opener_simulation: { category: 'max_strength', dimension: 'max_strength', dimensionMetrics: { max_strength: 'successfulAttempts' }, direction: 'higher_is_better' },
 }

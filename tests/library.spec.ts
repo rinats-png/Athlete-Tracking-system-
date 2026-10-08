@@ -98,9 +98,12 @@ test.describe('Programmbibliothek', () => {
     for (const p of index.plans) expect(planReviewed(p, index.methodRules), p.plan_id).toBe(false)
   })
 
-  test('jeder Retest zeigt auf einen Test des Katalogs', () => {
+  test('jeder Retest zeigt auf einen Test des Seeds UND auf einen Test des KYDON-Katalogs', async () => {
+    const { SEED_TEST_TO_SLUG } = await import('../src/data/library/testMap')
+    const { getTest } = await import('../src/data/testCatalog')
     const tests = new Set(index.tests.map((t) => t.test_id))
     for (const p of index.plans) for (const t of p.retest.test_ids) expect(tests.has(t), `${p.plan_id} → ${t}`).toBe(true)
+    for (const t of index.tests) expect(getTest(SEED_TEST_TO_SLUG[t.test_id]), t.test_id).toBeTruthy()
   })
 
   test('Übernahme: Athlet nur AUTO-Pläne, «Coach empfohlen» mit Bestätigung, Coach-Pläne nur über Trainer', async () => {
@@ -303,4 +306,18 @@ test.describe('Adaptive Anpassung', () => {
     const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
     expect(over).toBeLessThanOrEqual(0)
   })
+})
+
+test('Sportarten-Entscheid v4: Muay Thai, 800 m, 1500 m mit Kerntests aus dem Gesamtmaster; neue Retest-Tests ohne Referenzwerte', async () => {
+  const { DISCIPLINES } = await import('../src/data/sportProfiles')
+  const { getTest } = await import('../src/data/testCatalog')
+  for (const id of ['muay_thai', 'run_800m', 'run_1500m']) {
+    const d = DISCIPLINES.find((x) => x.id === id)!
+    expect(d, id).toBeTruthy()
+    const core = d.tests.filter((t) => t.role === 'core')
+    expect(core.length, id).toBeGreaterThanOrEqual(4)
+    for (const t of core) expect(t.documentLabel, `${id} ${t.slug}`).toMatch(/^Gesamtmaster v3, 8\.\d/)
+  }
+  expect(DISCIPLINES.find((d) => d.id === 'muay_thai')!.dimensionWeights).toEqual({ strength_endurance: 1, power: 0.9, endurance: 0.8, agility: 0.6, relative_strength: 0.6 })
+  for (const slug of ['strength_5rm', 'strength_3rm', 'strength_10rm', 'hyrox_half_sim', 'gpp_circuit', 'hr_recovery_60s', 'opener_simulation']) expect(getTest(slug), slug).toBeTruthy()
 })

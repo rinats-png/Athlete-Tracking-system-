@@ -341,6 +341,27 @@ const COMBAT: Discipline[] = [
     axisIds: ['strength_endurance', 'power', 'agility', 'fatigue_resistance'],
   },
   {
+    // Programmbibliothek v4 (Sportarten-Entscheid): Kerntests aus dem Trainingsplan-Gesamtmaster v3,
+    // Kap. 8.3, auf vorhandene Tests abgebildet; Gewichte sind Produktannahme (Entscheidung E1), kein Literaturwert.
+    id: 'muay_thai',
+    categoryId: 'combat',
+    name: { de: 'Muay Thai', en: 'Muay Thai' },
+    aliases: ['Thaiboxen', 'Thai boxing'],
+    dimensionWeights: { strength_endurance: 1, power: 0.9, endurance: 0.8, agility: 0.6, relative_strength: 0.6 },
+    tests: [
+      conceptCore('combat_rounds', 'Gesamtmaster v3, 8.3: RSA über 3–5 Runden à 3 min'),
+      conceptCore('kick_test_60s', 'Gesamtmaster v3, 8.3: Tritt-/Knie-Schnellkraft'),
+      conceptCore('punch_test_60s', 'Gesamtmaster v3, 8.3: Schlag-/Ellbogen-Schnellkraft'),
+      conceptCore('countermovement_jump', 'Gesamtmaster v3, 8.3: Schnellkraft'),
+      conceptCore('pull_up_max_reps', 'Gesamtmaster v3, 8.3: Clinch-Kraftausdauer (Oberkörper-Zug)'),
+      addedOptional('grip_strength', 'Clinch-Griff: der Gesamtmaster nennt isometrische Griffarbeit als Clinch-spezifisch.'),
+      addedOptional('run_1_5_mile', 'Feldtest für die aerobe Grundlage (GA-Basis), ohne Labor.'),
+    ],
+    eventDurationSeconds: [540, 1140],
+    typicalLimiter: 'strength_endurance',
+    axisIds: ['strength_endurance', 'power', 'fatigue_resistance', 'grip'],
+  },
+  {
     id: 'taekwondo',
     categoryId: 'combat',
     name: { de: 'Taekwondo', en: 'Taekwondo' },
@@ -581,6 +602,41 @@ const HYBRID: Discipline[] = [
 ]
 
 const RUNNING: Discipline[] = [
+  {
+    // Programmbibliothek v4 (Sportarten-Entscheid): Kerntests aus dem Trainingsplan-Gesamtmaster v3, Kap. 8.1;
+    // Gewichte Produktannahme. Die Speed Reserve läuft über die Schnellkraft (es gibt keine eigene Sprint-Dimension).
+    id: 'run_800m',
+    categoryId: 'running',
+    name: { de: '800 m', en: '800 m' },
+    dimensionWeights: { endurance: 1, power: 0.7, strength_endurance: 0.6 },
+    tests: [
+      conceptCore('sprint_30m', 'Gesamtmaster v3, 8.1: Speed Reserve'),
+      conceptCore('run_1000m', 'Gesamtmaster v3, 8.1: Renntempo-Toleranz'),
+      conceptCore('cooper_12min', 'Gesamtmaster v3, 8.1: aerobe Power'),
+      conceptCore('repeated_sprint_ability', 'Gesamtmaster v3, 8.1: anaerobe Kapazität / Laktattoleranz'),
+      addedOptional('countermovement_jump', 'Neuromuskuläre Frische und Schnellkraft als Grundlage der Speed Reserve.'),
+    ],
+    eventDurationSeconds: [100, 180],
+    typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'power', 'fatigue_resistance'],
+  },
+  {
+    // Kap. 8.2: «1500-m-Läufer trainieren näher am 5-km-Modell» — Profil nah an 5 km, mit Speed Reserve.
+    id: 'run_1500m',
+    categoryId: 'running',
+    name: { de: '1500 m', en: '1500 m' },
+    dimensionWeights: { endurance: 1, strength_endurance: 0.5, power: 0.4 },
+    tests: [
+      conceptCore('cooper_12min', 'Gesamtmaster v3, 8.2: aerobe Power'),
+      conceptCore('threshold_run_30min', 'Gesamtmaster v3, 8.2: Schwelle / Critical Speed'),
+      conceptCore('run_1000m', 'Gesamtmaster v3, 8.2: Renntempo-Toleranz'),
+      conceptCore('sprint_30m', 'Gesamtmaster v3, 8.2: Speed Reserve für den Endspurt'),
+      addedOptional('run_5k', 'Der Gesamtmaster nennt 3–5-km-Tempoläufe als spezifische Ausdauerbrücke.'),
+    ],
+    eventDurationSeconds: [210, 360],
+    typicalLimiter: 'endurance',
+    axisIds: ['endurance', 'run_economy', 'power'],
+  },
   {
     id: 'run_5k_discipline',
     categoryId: 'running',

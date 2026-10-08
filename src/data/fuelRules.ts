@@ -160,7 +160,7 @@ export const FUEL_RULES: FuelRule[] = [
   {
     id: 'run_short',
     group: 'g3_endurance',
-    disciplineIds: ['run_5k_discipline', 'run_10k_discipline'],
+    disciplineIds: ['run_800m', 'run_1500m', 'run_5k_discipline', 'run_10k_discipline'],
     relatedDisciplineIds: [],
     carbsPerKg: [5, 8],
     intra: 'none_in_race',
@@ -243,7 +243,7 @@ export const FUEL_RULES: FuelRule[] = [
   {
     id: 'combat_extrapolated',
     group: 'g6_combat',
-    disciplineIds: ['bjj', 'kickboxing', 'pencak_silat'],
+    disciplineIds: ['bjj', 'kickboxing', 'muay_thai', 'pencak_silat'],
     relatedDisciplineIds: [],
     carbsPerKg: [4, 7],
     intra: 'between_bouts',

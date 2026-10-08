@@ -260,6 +260,6 @@ export function planBlock(input: PlanInput): BlockPlan {
 export function familyOfDiscipline(disciplineId: string | null | undefined): SportFamily | null {
   if (disciplineId === 'judo' || disciplineId === 'wrestling' || disciplineId === 'bjj') return 'combat_grappling'
   if (disciplineId === 'hyrox' || disciplineId === 'hybrid') return 'hybrid'
-  if (disciplineId === 'boxing' || disciplineId === 'kickboxing') return 'combat_striking'
+  if (disciplineId === 'boxing' || disciplineId === 'kickboxing' || disciplineId === 'muay_thai') return 'combat_striking'
   return null
 }

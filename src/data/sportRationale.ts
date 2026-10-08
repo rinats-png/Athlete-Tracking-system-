@@ -53,6 +53,18 @@ export const RATIONALE_BY_ID: Record<string, { de: string; en: string }> = {
     de: 'Mehrere Runden mit kurzen Pausen. Schlagfrequenz über die Rundendauer und die Erholung zwischen den Runden bestimmen das Ergebnis stärker als die einzelne Schlagkraft.',
     en: 'Several rounds with short breaks. Punch rate across the round and recovery between rounds decide the outcome more than single-punch force.',
   },
+  muay_thai: {
+    de: 'Wie Kickboxen, dazu der Clinch: wiederholte isometrisch-dynamische Ganzkörperarbeit unter Ermüdung. Reines Schlag-Conditioning unterschätzt genau diese Ermüdung.',
+    en: 'Like kickboxing, plus the clinch: repeated isometric-dynamic whole-body work under fatigue. Pure striking conditioning underestimates exactly this fatigue.',
+  },
+  run_800m: {
+    de: 'Beide Energiesysteme tragen wesentlich bei. Entschieden wird in der zweiten Runde: Laktattoleranz bei erhaltener Sprintqualität. Je höher die Höchstgeschwindigkeit, desto leichter fühlt sich das Renntempo an.',
+    en: 'Both energy systems contribute substantially. The race is decided on the second lap: lactate tolerance while keeping sprint quality. The higher the top speed, the easier race pace feels.',
+  },
+  run_1500m: {
+    de: 'Ein aerobes Rennen mit anaerobem Finale. Das Training ähnelt eher dem 5-km-Modell, ergänzt um Renntempo und Endspurt-Reserve.',
+    en: 'An aerobic race with an anaerobic finish. Training resembles the 5 km model more, plus race pace and finishing-speed reserve.',
+  },
   kickboxing: {
     de: 'Wie Boxen, zusätzlich mit hoher Beinarbeit. Die Wiederholbarkeit von Tritten unter Ermüdung ist die Grösse, die eine Bestleistung nicht zeigt.',
     en: 'As boxing, with a large lower-body share added. Repeatability of kicks under fatigue is the quantity a personal best does not show.',

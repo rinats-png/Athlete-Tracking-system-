@@ -121,6 +121,14 @@ export const TEST_IMAGE_NUMBER: Record<string, number> = {
   wbgt_c: 122,
   smo2_percent: 123,
   rmr_kcal_day: 125,
+  // Retests der Programmbibliothek: kein eigenes Motiv, sie zeigen das Bild des nächstverwandten Tests.
+  strength_5rm: 93,
+  strength_10rm: 93,
+  strength_3rm: 95,
+  opener_simulation: 94,
+  hyrox_half_sim: 112,
+  gpp_circuit: 114,
+  hr_recovery_60s: 103,
 }
 
 /**

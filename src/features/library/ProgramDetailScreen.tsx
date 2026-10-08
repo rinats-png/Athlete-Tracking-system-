@@ -10,6 +10,7 @@ import type { MethodRule } from '@/domain/libraryTypes'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { newId } from '@/lib/store/localStore'
 import { cn } from '@/lib/utils'
+import { SEED_TEST_TO_SLUG } from '@/data/library/testMap'
 import { useLibrary, usePlanWeeks } from './useLibrary'
 import { GermanOnlyNote, UnreviewedBanner } from './bits'
 
@@ -130,7 +131,7 @@ export function ProgramDetailScreen() {
           <p className="text-ink-secondary">{plan.retest.timing} · {plan.retest.decision_rule}</p>
           {tests.map((x) => (
             <div key={x.test_id} className="rounded-md bg-surface-sunken px-3 py-2">
-              <p className="font-semibold">{x.name}</p>
+              <p className="font-semibold">{SEED_TEST_TO_SLUG[x.test_id] ? <Link to={`/tests/${SEED_TEST_TO_SLUG[x.test_id]}/details`} className="text-accent-text underline underline-offset-2" data-testid={`prog-test-${x.test_id}`}>{x.name}</Link> : x.name}</p>
               <p className="text-[13px] text-ink-secondary">{x.protocol}</p>
               <p className="mt-1 text-[12px] text-ink-muted">{t('prog.errorNote')} {x.measurement_error_note}</p>
             </div>

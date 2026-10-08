@@ -28,6 +28,7 @@ const DISCIPLINE_MOTIF: Record<string, string> = {
   karate: 'karate',
   boxing: 'boxen',
   kickboxing: 'kickboxen',
+  muay_thai: 'kickboxen',
   bjj: 'bjj',
   ju_jutsu: 'bjj',
   mma: 'mma',
