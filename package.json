@@ -17,7 +17,8 @@
     "test:phone": "playwright test --project=phone",
     "test:ui": "playwright test --ui",
     "mockups": "playwright test -c playwright.mockups.config.ts",
-    "sql:bundle": "node scripts/buildSqlBundle.mjs"
+    "sql:bundle": "node scripts/buildSqlBundle.mjs",
+    "library:build": "node scripts/buildLibrary.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",
