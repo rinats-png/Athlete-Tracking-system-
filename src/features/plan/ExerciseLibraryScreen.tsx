@@ -10,8 +10,19 @@ import { MUSCLES, type Muscle } from '@/data/exercises'
 import { exerciseImageUrl } from '@/data/exerciseImages'
 import { addCustomExercise, removeCustomExercise, searchLibrary } from '@/domain/exerciseLibrary'
 import { cn } from '@/lib/utils'
+import { SegmentedControl } from '@/components/ui/SegmentedControl'
+import { LEGACY_TO_REGISTRY } from '@/data/library/legacyExerciseMap'
+import { ExerciseDatabase } from '@/features/library/ExerciseDatabase'
+import { GermanOnlyNote } from '@/features/library/bits'
+import { useLibrary } from '@/features/library/useLibrary'
 
-/** Übungsbibliothek (Trainingsbereich Etappe 15): Katalog mit Bildern, dazu eigene Übungen. */
+/**
+ * Übungsbibliothek: die kuratierte Übungsdatenbank (128, v1.1) als erster
+ * Reiter; der zweite zeigt, was nur der alte Katalog kennt, und die eigenen
+ * Übungen. Alte Einträge, die einer Datenbank-Übung entsprechen
+ * (`legacyExerciseMap`), stehen nur noch einmal — in der Datenbank. Logs mit
+ * alten Kennungen bleiben gültig.
+ */
 const field = 'mt-1.5 block min-h-11 w-full rounded-md border border-line bg-surface px-3 text-[16px]'
 
 export function ExerciseLibraryScreen() {
@@ -23,7 +34,9 @@ export function ExerciseLibraryScreen() {
   const [newMuscle, setNewMuscle] = useState<Muscle | ''>('')
   const [message, setMessage] = useState<string | null>(null)
   const lang = i18n.language.startsWith('de') ? 'de' : 'en'
-  const entries = useMemo(() => searchLibrary(query, customExercises, muscle, lang), [query, customExercises, muscle, lang])
+  const entries = useMemo(() => searchLibrary(query, customExercises, muscle, lang).filter((e) => !e.key || !LEGACY_TO_REGISTRY[e.key]), [query, customExercises, muscle, lang])
+  const [tab, setTab] = useState<'db' | 'mine'>('db')
+  const { exercises } = useLibrary()
 
   if (planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off') return <EmptyState title={t('plan.title')} body={t('plan.off')} />
 
@@ -38,6 +51,23 @@ export function ExerciseLibraryScreen() {
   return (
     <div data-testid="exercise-library">
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('exlib.title')} intro={t('exlib.intro')} />
+      <SegmentedControl
+        className="mb-4"
+        label={t('exlib.title')}
+        value={tab}
+        onChange={setTab}
+        options={[
+          { value: 'db', label: t('lib.tabDb', { n: exercises?.length ?? 128 }) },
+          { value: 'mine', label: t('lib.tabMine') },
+        ]}
+      />
+      {tab === 'db' ? (
+        <>
+          <GermanOnlyNote />
+          {exercises ? <ExerciseDatabase exercises={exercises} /> : <p className="text-[14px] text-ink-secondary" data-testid="lib-loading">{t('lib.loading')}</p>}
+        </>
+      ) : (
+      <>
 
       <Panel className="mb-4" data-testid="exlib-add">
         <PanelHeader title={t('exlib.addTitle')} />
@@ -85,6 +115,8 @@ export function ExerciseLibraryScreen() {
           </ul>
         )}
       </Panel>
+      </>
+      )}
     </div>
   )
 }
