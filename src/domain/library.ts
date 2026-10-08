@@ -9,6 +9,7 @@ import type {
   ProgramIndex,
   SessionTemplate,
 } from '@/domain/libraryTypes'
+import type { StoredPlannedSession, StoredTrainingBlock } from '@/lib/store/localStore'
 
 /**
  * Fachlogik der Trainingsbibliothek (Übungsdatenbank v1.1, Programm-Seed v4).
@@ -238,4 +239,146 @@ export function resolveByName(name: string, list: LibraryExercise[]): LibraryExe
   const n = fold(name)
   const head = (s: string) => fold(s.split('(')[0].trim())
   return list.find((e) => fold(e.name) === n) ?? list.find((e) => head(e.name) === head(name)) ?? null
+}
+
+// ---------------------------------------------------------------------------
+// Übernehmen: Bibliotheksplan → Trainingsblock
+// ---------------------------------------------------------------------------
+
+const DAY: Record<string, number> = { Mo: 1, Di: 2, Mi: 3, Do: 4, Fr: 5, Sa: 6, So: 7 }
+/** Einheitenvorlage → Intention (Schlüssel `plan.intent.*`, gleiche Wörter wie in Hub, Kalender und Player). */
+export const INTENT_OF_TEMPLATE: Record<string, string> = {
+  SES_AEROBIC_BASE: 'AEROBIC_BASE',
+  'SES_GPP*': 'GPP',
+  'SES_HYPERTROPHY*': 'HYPERTROPHY_SUPPORT',
+  SES_MAINTENANCE: 'TAPER_MAINTENANCE',
+  SES_MAX_STRENGTH: 'MAX_STRENGTH',
+  SES_METCON: 'METCON',
+  SES_MOBILITY: 'MOBILITY',
+  SES_POWER: 'POWER',
+  SES_PRIMING: 'PRIMING',
+  SES_STATION_SPECIFIC: 'HYROX_STATIONS',
+  'SES_STRENGTH_VOLUME*': 'STRENGTH_VOLUME',
+  SES_THRESHOLD: 'THRESHOLD',
+  SES_VO2: 'VO2MAX',
+  SES_RSA: 'REPEATED_HIGH_INTENSITY',
+}
+
+const HIGH_INTENSITY_TEMPLATES = new Set(['SES_VO2', 'SES_RSA', 'SES_POWER', 'SES_MAX_STRENGTH', 'SES_METCON'])
+
+/** Sitzungskennung im Block: Plan, Woche, Position — stabil über Planversionen. */
+export const librarySessionId = (planId: string, week: number, index: number) => `${planId}:w${week}:${index}`
+
+const PHASE_OF_CATEGORY: Record<string, StoredTrainingBlock['phase']> = {
+  FOUNDATION: 'GPP',
+  METHOD_DEVELOPMENT: 'BUILD',
+  SPORT_SPECIFIC: 'SPECIFIC',
+  COMPETITION_OR_READINESS: 'SPECIFIC',
+  MAINTENANCE: 'TRANSITION',
+}
+
+const FAMILY_OF_GOAL: Record<string, StoredTrainingBlock['family']> = {
+  COMBAT_SPORT_GRAPPLING: 'combat_grappling',
+  COMBAT_SPORT_STRIKING: 'combat_striking',
+  HYROX: 'hybrid',
+}
+
+/**
+ * Macht aus einem Bibliotheksplan einen Block: jede Einheit jeder Woche wird
+ * eine Einheit mit `weekFrom = weekTo = Woche`; die Dosis ist Momentaufnahme
+ * des Seeds (spätere Seed-Versionen schreiben laufende Blöcke nicht um).
+ */
+export function materializePlan(
+  plan: PlanHead,
+  weeks: PlanWeek[],
+  index: ProgramIndex,
+  exercises: LibraryExercise[],
+  ctx: { id: string; startDay: string; now: string; disciplineId: string | null },
+): StoredTrainingBlock {
+  const names = new Map(exercises.map((e) => [e.id, e.name]))
+  const templates = new Map(index.sessionTemplates.map((t) => [t.session_template_id, t]))
+  const rules = new Map(index.methodRules.map((r) => [r.rule_id, r]))
+  const sessions: StoredPlannedSession[] = []
+  for (const w of weeks) {
+    w.sessions.forEach((s, i) => {
+      const tpl = templates.get(s.session_template_id)
+      const rule = tpl ? rules.get(tpl.dose_bounds_rule_id) : undefined
+      const durations = s.items.flatMap((it) => (it.kind === 'conditioning' && it.duration_min != null ? [it.duration_min] : []))
+      sessions.push({
+        id: librarySessionId(plan.plan_id, w.week, i),
+        day: DAY[s.day] ?? 1,
+        weekFrom: w.week,
+        weekTo: w.week,
+        kind: 'library',
+        title: s.name.slice(0, 60),
+        note: w.reduced ? 'reduced' : '',
+        ruleId: tpl?.dose_bounds_rule_id ?? null,
+        ruleVersion: plan.version,
+        primaryIntent: INTENT_OF_TEMPLATE[s.session_template_id] ?? 'GPP',
+        evidenceStrength: null,
+        evidenceSpecificity: rule?.evidence_default ?? null,
+        plannedDurationMin: durations.length ? Math.min(600, Math.round(durations.reduce((a, b) => a + b, 0))) : null,
+        highIntensity: HIGH_INTENSITY_TEMPLATES.has(s.session_template_id) && !w.reduced,
+        blocks: s.items.slice(0, 12).map((it) =>
+          it.kind === 'exercise'
+            ? {
+                type: 'library_exercise' as const,
+                exerciseId: it.exercise_id,
+                name: (names.get(it.exercise_id) ?? it.exercise_id).slice(0, 120),
+                sets: it.sets,
+                reps: it.reps != null ? String(it.reps).slice(0, 40) : null,
+                rpe: it.rpe,
+                restS: it.rest_s,
+                intensity: it.intensity ? String(it.intensity).slice(0, 40) : null,
+                intent: it.exercise_intent,
+                role: it.role,
+                ruleId: ruleIdForItem(it, tpl),
+                note: (it.notes ?? '').slice(0, 200),
+              }
+            : {
+                type: 'library_conditioning' as const,
+                modality: it.modality.slice(0, 40),
+                description: it.description.slice(0, 200),
+                durationMin: it.duration_min,
+                distance: it.distance,
+                zone: it.zone ? it.zone.slice(0, 80) : null,
+                note: (it.notes ?? '').slice(0, 200),
+              },
+        ),
+        retestMetric: '',
+        coachModified: false,
+        coachModificationReason: null,
+        removed: false,
+      })
+    })
+  }
+  return {
+    id: ctx.id,
+    family: FAMILY_OF_GOAL[plan.goal] ?? null,
+    name: plan.title.slice(0, 60),
+    disciplineId: ctx.disciplineId,
+    phase: PHASE_OF_CATEGORY[plan.category] ?? 'BUILD',
+    startDay: ctx.startDay,
+    weeks: plan.weeks,
+    retestMetrics: [],
+    templateId: null,
+    eventDay: null,
+    assignmentId: null,
+    sessions,
+    completions: [],
+    status: 'active',
+    libraryPlanId: plan.plan_id,
+    libraryVersion: plan.version,
+    planVersion: 1,
+    adjustments: [],
+    createdAt: ctx.now,
+    updatedAt: ctx.now,
+  }
+}
+
+/** Nächster Montag ab `today` (heute, wenn heute Montag ist) — Bibliothekspläne beginnen mit Woche 1 am Montag. */
+export function nextMonday(today: string): string {
+  const d = new Date(`${today}T00:00:00Z`)
+  const add = (8 - (d.getUTCDay() || 7)) % 7
+  return new Date(d.getTime() + add * 86_400_000).toISOString().slice(0, 10)
 }

@@ -1,3 +1,4 @@
+import { BLOCK_V41_DEFAULTS } from '@/domain/trainingBlock'
 import { useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -172,6 +173,8 @@ export function PlanTemplateFitScreen() {
   const adopt = () => {
     const now = new Date().toISOString()
     saveTrainingBlock({
+      ...BLOCK_V41_DEFAULTS,
+      adjustments: [],
       id: newId(),
       family: tpl.family,
       name: '',

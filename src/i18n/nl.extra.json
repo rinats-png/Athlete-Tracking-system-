@@ -2989,7 +2989,12 @@
       "MAX_SPEED": "Topsnelheid",
       "AGILITY_COD": "Behendigheid en richtingsveranderingen",
       "COMBAT_ROUNDS": "Gevechtsrondes",
-      "TAPER_MAINTENANCE": "Taper en behoud"
+      "TAPER_MAINTENANCE": "Taper en behoud",
+      "GPP": "Algemene basis",
+      "METCON": "Metcon",
+      "MOBILITY": "Beweeglijkheid",
+      "PRIMING": "Priming",
+      "STRENGTH_VOLUME": "Krachtvolume"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min werk, {{rec}} min actieve rust, {{min}}–{{max}} % van de maximale hartslag",
@@ -3217,7 +3222,11 @@
     },
     "available": "Beschikbaar",
     "soon": "Volgt",
-    "note": "Een taalmodel maakt geen plannen. Het formuleert hooguit uitleg."
+    "note": "Een taalmodel maakt geen plannen. Het formuleert hooguit uitleg.",
+    "library": {
+      "title": "Uit de programmabibliotheek",
+      "sub": "16 kant-en-klare plannen, week voor week"
+    }
   },
   "tpl": {
     "libraryTitle": "Planbibliotheek",
@@ -3711,6 +3720,14 @@
       "tempo_optional": "Bewegingstempo (optioneel)",
       "time_s": "Tijd (s)",
       "work_s_or_reps": "Werktijd of herhalingen"
+    },
+    "restS": "Rust {{s}} s",
+    "minutes": "{{n}} min",
+    "sessionTag": "Bibliotheekplan",
+    "why": {
+      "plan": "Uit het bibliotheekplan \"{{plan}}\", planversie {{version}}.",
+      "rule": "Dosis binnen de grenzen van methoderegel {{rule}}.",
+      "details": "Regels en bronnen in de plandetails"
     }
   },
   "fuelPlan": {
@@ -3751,6 +3768,80 @@
       "no_name": "Geef een naam op.",
       "duplicate": "Deze oefening bestaat al.",
       "too_many": "Meer dan 50 eigen oefeningen is niet mogelijk."
+    }
+  },
+  "prog": {
+    "link": "Programmabibliotheek",
+    "title": "Programmabibliotheek",
+    "intro": "Kant-en-klare plannen, week voor week. Elke dosis valt onder een methoderegel met grenzen; wat je overneemt, kun je later aanpassen.",
+    "goal": "Doel",
+    "level": "Niveau",
+    "levels": {
+      "all": "Alle niveaus",
+      "beginner": "Beginner",
+      "advanced": "Gevorderd"
+    },
+    "selfOnly": "Alleen plannen die ik zelf kan overnemen",
+    "count": "{{n}} plannen",
+    "meta": "{{weeks}} weken · {{days}} dagen/week · {{sessions}} sessies",
+    "gate": {
+      "confirm": "Trainer aanbevolen",
+      "coach_only": "Alleen via trainer"
+    },
+    "about": "Over het plan",
+    "prerequisites": "Voorwaarden",
+    "autonomy": "Wie mag het overnemen?",
+    "autonomyLevel": {
+      "AUTO_WITH_RULES": "Zelf, binnen de regels",
+      "COACH_SENSITIVE": "Met trainer (gevoelig)",
+      "COACH_TEMPLATE": "Trainersjabloon",
+      "COACH_ONLY": "Alleen trainer"
+    },
+    "fuel": "Voedingsnotitie",
+    "blocks": "Opbouw van het plan",
+    "weeksRange": "Week {{from}}–{{to}}",
+    "progression": "Opbouw",
+    "weekView": "Week voor week",
+    "reducedWeek": "Lichtere week (deload/taper): lagere dosis, gepland.",
+    "day": {
+      "Mo": "Ma",
+      "Di": "Di",
+      "Mi": "Wo",
+      "Do": "Do",
+      "Fr": "Vr",
+      "Sa": "Za",
+      "So": "Zo"
+    },
+    "retest": "Hertest aan het eind",
+    "errorNote": "Meetfout (nog zonder bron; tot dan geen oordeel \"beter/slechter\"):",
+    "rules": "Regels achter het plan",
+    "rulesNote": "Elke dosis moet binnen deze methoderegels blijven – ook na elke aanpassing. Alle regels wachten nog op vakinhoudelijke controle.",
+    "cutoff": "Stoppen bij",
+    "noSource": "zonder bron",
+    "noFulltext": "volledige tekst niet gecontroleerd",
+    "adopt": "Plan overnemen",
+    "start": "Start",
+    "startNote": "Week 1 begint op maandag {{day}}.",
+    "confirmCoach": "Ik begrijp het: voor dit plan wordt een trainer aanbevolen, omdat het technisch veeleisende oefeningen bevat.",
+    "adoptButton": "Overnemen",
+    "coachOnly": "Dit plan bevat methoden die een trainer vragen (bijv. dropsets, priming). Een trainer kan het overnemen en aan jou toewijzen.",
+    "cat": {
+      "FOUNDATION": "Basis",
+      "METHOD_DEVELOPMENT": "Methodefocus",
+      "SPORT_SPECIFIC": "Sportspecifiek",
+      "COMPETITION_OR_READINESS": "Wedstrijd",
+      "MAINTENANCE": "Behoud"
+    },
+    "goals": {
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "COMBAT_SPORT_STRIKING": "Striking",
+      "GENERAL_FITNESS": "Algemene fitheid",
+      "GENERAL_STRENGTH": "Algemene kracht",
+      "HYPERTROPHY": "Spieropbouw",
+      "HYROX": "HYROX",
+      "POWERLIFTING": "Powerliften",
+      "RUN_10K": "10 km hardlopen",
+      "RUN_5K": "5 km hardlopen"
     }
   }
 }

@@ -2989,7 +2989,12 @@
       "MAX_SPEED": "Maxfart",
       "AGILITY_COD": "Smidighet och riktningsändringar",
       "COMBAT_ROUNDS": "Kampronder",
-      "TAPER_MAINTENANCE": "Taper och bibehållande"
+      "TAPER_MAINTENANCE": "Taper och bibehållande",
+      "GPP": "Allmän grund",
+      "METCON": "Metcon",
+      "MOBILITY": "Rörlighet",
+      "PRIMING": "Priming",
+      "STRENGTH_VOLUME": "Styrkevolym"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min arbete, {{rec}} min aktiv vila, {{min}}–{{max}} % av maxpulsen",
@@ -3217,7 +3222,11 @@
     },
     "available": "Tillgänglig",
     "soon": "Kommer",
-    "note": "En språkmodell skapar inga planer. Den formulerar högst förklaringar."
+    "note": "En språkmodell skapar inga planer. Den formulerar högst förklaringar.",
+    "library": {
+      "title": "Från programbiblioteket",
+      "sub": "16 färdiga planer, vecka för vecka"
+    }
   },
   "tpl": {
     "libraryTitle": "Planbibliotek",
@@ -3711,6 +3720,14 @@
       "tempo_optional": "Rörelsetempo (valfritt)",
       "time_s": "Tid (s)",
       "work_s_or_reps": "Arbetstid eller repetitioner"
+    },
+    "restS": "Vila {{s}} s",
+    "minutes": "{{n}} min",
+    "sessionTag": "Biblioteksplan",
+    "why": {
+      "plan": "Från biblioteksplanen \"{{plan}}\", planversion {{version}}.",
+      "rule": "Dos inom gränserna för metodregel {{rule}}.",
+      "details": "Regler och källor i plandetaljen"
     }
   },
   "fuelPlan": {
@@ -3751,6 +3768,80 @@
       "no_name": "Ange ett namn.",
       "duplicate": "Den här övningen finns redan.",
       "too_many": "Fler än 50 egna övningar går inte."
+    }
+  },
+  "prog": {
+    "link": "Programbibliotek",
+    "title": "Programbibliotek",
+    "intro": "Färdiga planer vecka för vecka. Varje dos ligger under en metodregel med gränser; det du tar över kan du justera senare.",
+    "goal": "Mål",
+    "level": "Nivå",
+    "levels": {
+      "all": "Alla nivåer",
+      "beginner": "Nybörjare",
+      "advanced": "Avancerad"
+    },
+    "selfOnly": "Bara planer jag kan ta över själv",
+    "count": "{{n}} planer",
+    "meta": "{{weeks}} veckor · {{days}} dagar/vecka · {{sessions}} pass",
+    "gate": {
+      "confirm": "Tränare rekommenderas",
+      "coach_only": "Bara via tränare"
+    },
+    "about": "Om planen",
+    "prerequisites": "Förutsättningar",
+    "autonomy": "Vem får ta över?",
+    "autonomyLevel": {
+      "AUTO_WITH_RULES": "Själv, inom reglerna",
+      "COACH_SENSITIVE": "Med tränare (känsligt)",
+      "COACH_TEMPLATE": "Tränarmall",
+      "COACH_ONLY": "Bara tränare"
+    },
+    "fuel": "Kostnotis",
+    "blocks": "Planens upplägg",
+    "weeksRange": "Vecka {{from}}–{{to}}",
+    "progression": "Progression",
+    "weekView": "Vecka för vecka",
+    "reducedWeek": "Lättare vecka (deload/taper): lägre dos, planerad.",
+    "day": {
+      "Mo": "Mån",
+      "Di": "Tis",
+      "Mi": "Ons",
+      "Do": "Tor",
+      "Fr": "Fre",
+      "Sa": "Lör",
+      "So": "Sön"
+    },
+    "retest": "Omtest i slutet",
+    "errorNote": "Mätfel (ännu utan källa; till dess ingen bedömning \"bättre/sämre\"):",
+    "rules": "Regler bakom planen",
+    "rulesNote": "Varje dos måste ligga inom dessa metodregler – även efter varje justering. Alla regler väntar ännu på fackgranskning.",
+    "cutoff": "Avbryt när",
+    "noSource": "utan källa",
+    "noFulltext": "fulltext ej kontrollerad",
+    "adopt": "Ta över planen",
+    "start": "Start",
+    "startNote": "Vecka 1 börjar måndag {{day}}.",
+    "confirmCoach": "Jag förstår: en tränare rekommenderas för planen eftersom den innehåller tekniskt krävande övningar.",
+    "adoptButton": "Ta över",
+    "coachOnly": "Planen innehåller metoder som kräver tränare (t.ex. dropset, priming). En tränare kan ta över den och tilldela dig den.",
+    "cat": {
+      "FOUNDATION": "Grund",
+      "METHOD_DEVELOPMENT": "Metodfokus",
+      "SPORT_SPECIFIC": "Idrottsspecifik",
+      "COMPETITION_OR_READINESS": "Tävling",
+      "MAINTENANCE": "Underhåll"
+    },
+    "goals": {
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "COMBAT_SPORT_STRIKING": "Striking",
+      "GENERAL_FITNESS": "Allmän kondition",
+      "GENERAL_STRENGTH": "Allmän styrka",
+      "HYPERTROPHY": "Muskeltillväxt",
+      "HYROX": "HYROX",
+      "POWERLIFTING": "Styrkelyft",
+      "RUN_10K": "Löpning 10 km",
+      "RUN_5K": "Löpning 5 km"
     }
   }
 }

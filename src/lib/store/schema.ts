@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 40
+export const CURRENT_SCHEMA_VERSION = 41
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -696,6 +696,35 @@ const planPartSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('jumps'), note: z.literal('plyometric') }),
   /** Eigene Übung einer eigenen Einheit: Name als Momentaufnahme, Last als Freitext des Menschen. */
   z.object({ type: z.literal('exercise'), exerciseKey: z.string().max(60).nullable().default(null), name: z.string().min(1).max(60), sets: z.number().int().min(1).max(20), reps: z.number().int().min(1).max(100).nullable().default(null), load: z.string().max(30).default('') }),
+  /**
+   * Position eines Bibliotheksplans (Programm-Seed v4): Übung der
+   * Übungsdatenbank mit Dosis als Momentaufnahme. `ruleId` ist die
+   * Methodenregel, in deren Grenzen die Dosis liegen muss (auch nach einer
+   * Anpassung); `reps` bleibt Text, weil der Seed Spannen und Einheiten trägt.
+   */
+  z.object({
+    type: z.literal('library_exercise'),
+    exerciseId: z.string().min(1).max(60),
+    name: z.string().min(1).max(120),
+    sets: z.number().int().min(1).max(20).nullable(),
+    reps: z.string().max(40).nullable(),
+    rpe: finite.min(1).max(10).nullable(),
+    restS: z.number().int().min(0).max(1200).nullable(),
+    intensity: z.string().max(40).nullable().default(null),
+    intent: z.string().max(40),
+    role: z.enum(['primary', 'accessory']),
+    ruleId: z.string().max(40).nullable(),
+    note: z.string().max(200).default(''),
+  }),
+  z.object({
+    type: z.literal('library_conditioning'),
+    modality: z.string().max(40),
+    description: z.string().max(200),
+    durationMin: finite.min(0).max(600).nullable(),
+    distance: z.string().max(40).nullable(),
+    zone: z.string().max(80).nullable(),
+    note: z.string().max(200).default(''),
+  }),
 ])
 const plannedSessionSchema = z.object({
   id: z.string().min(1).max(80),
@@ -705,7 +734,7 @@ const plannedSessionSchema = z.object({
   weekFrom: z.number().int().min(1).max(26).default(1),
   weekTo: z.number().int().min(1).max(26).nullable().default(null),
   /** `rule` = Dosierung aus einer Regel des Registers; `open` = Vorlage nennt Absicht und Dauer, aber keine belegte Dosis. */
-  kind: z.enum(['rule', 'open', 'own']).default('rule'),
+  kind: z.enum(['rule', 'open', 'own', 'library']).default('rule'),
   /** Eigene Einheiten (`own`): Name und Notiz stammen vom Menschen, nicht aus einer Regel. */
   title: z.string().max(60).default(''),
   note: z.string().max(200).default(''),
@@ -716,7 +745,7 @@ const plannedSessionSchema = z.object({
   evidenceSpecificity: z.enum(['DIRECT', 'RELATED', 'GENERAL', 'EXTRAPOLATED']).nullable().default(null),
   plannedDurationMin: z.number().int().min(1).max(600).nullable().default(null),
   highIntensity: z.boolean().default(false),
-  blocks: z.array(planPartSchema).max(10).default([]),
+  blocks: z.array(planPartSchema).max(12).default([]),
   retestMetric: z.string().max(80).default(''),
   coachModified: z.boolean().default(false),
   coachModificationReason: z.string().max(200).nullable().default(null),
@@ -731,6 +760,28 @@ const planCompletionSchema = z.object({
   /** Mittel und Höchstwert des Pulses der Einheit (Pulsgurt oder Handeingabe), nur lokal. */
   avgHr: z.number().int().min(30).max(230).nullable().default(null),
   maxHr: z.number().int().min(30).max(230).nullable().default(null),
+  /** Rückmeldung nach der Einheit: 1 deutlich zu leicht … 3 passend … 5 deutlich zu schwer (Gesamtmaster v3 §11.1). */
+  feedback: z.number().int().min(1).max(5).nullable().default(null),
+  /** Schmerz während der Einheit: sperrt jede Steigerung (keine Diagnose, nur ein Halt). */
+  pain: z.boolean().default(false),
+})
+/**
+ * Eine übernommene Anpassung eines Bibliotheksplans: was sich änderte, unter
+ * welcher Regel, auf wessen Wunsch. Die Änderungen stehen als Liste, damit die
+ * Vorversion rekonstruierbar bleibt — nichts wird stillschweigend überschrieben.
+ */
+const planAdjustmentSchema = z.object({
+  id: z.string().min(1).max(80),
+  at: isoDate,
+  /** Ausgangsversion → neue Version. */
+  fromVersion: z.number().int().min(1).max(999),
+  toVersion: z.number().int().min(1).max(999),
+  source: z.enum(['feedback', 'manual']),
+  /** Wunsch in Prozent (−30 … +30); bei Feedback die abgeleitete Richtung. */
+  intentPct: z.number().int().min(-30).max(30),
+  changes: z
+    .array(z.object({ sessionId: z.string().max(80), part: z.number().int().min(0).max(12), field: z.enum(['sets', 'rpe', 'reps', 'durationMin']), from: z.string().max(40), to: z.string().max(40), ruleId: z.string().max(40).nullable() }))
+    .max(400),
 })
 /**
  * Eigene Planvorlage (Trainingsbereich Etappe 12): ein Plan als Datei (`kydon-plan`,
@@ -771,8 +822,14 @@ const trainingBlockSchema = z.object({
   eventDay: dayString.nullable().default(null),
   /** Zuweisung des Trainers, aus der der Block stammt (Server `plan_assignments`); sonst `null`. */
   assignmentId: z.string().uuid().nullable().default(null),
-  sessions: z.array(plannedSessionSchema).max(60).default([]),
+  sessions: z.array(plannedSessionSchema).max(100).default([]),
   completions: z.array(planCompletionSchema).max(600).default([]),
+  /** Bibliotheksplan, aus dem der Block stammt (`PLN_…`, Programm-Seed v4), mit Seed-Version. */
+  libraryPlanId: z.string().max(60).nullable().default(null),
+  libraryVersion: z.string().max(20).nullable().default(null),
+  /** Planversion: 1 beim Übernehmen, +1 je übernommener Anpassung. */
+  planVersion: z.number().int().min(1).max(999).default(1),
+  adjustments: z.array(planAdjustmentSchema).max(40).default([]),
   status: z.enum(['active', 'closed']).default('active'),
   createdAt: isoDate,
   updatedAt: isoDate,
@@ -1279,6 +1336,7 @@ export type ValidatedTrainingBlock = z.infer<typeof trainingBlockSchema>
 export type ValidatedPlanTemplate = z.infer<typeof planTemplateSchema>
 export type ValidatedCustomExercise = z.infer<typeof customExerciseSchema>
 export type ValidatedPlannedSession = z.infer<typeof plannedSessionSchema>
+export type ValidatedPlanAdjustment = z.infer<typeof planAdjustmentSchema>
 export type ValidatedPlanCompletion = z.infer<typeof planCompletionSchema>
 export type ValidatedActivity = z.infer<typeof activitySchema>
 export type ValidatedHealth = z.infer<typeof healthSchema>
@@ -1904,6 +1962,26 @@ export const MIGRATIONS: Migration[] = [
       ...data,
       version: 40,
       athletes: (data.athletes ?? []).map((athlete: any) => ({ ...athlete, customExercises: athlete.customExercises ?? [] })),
+    }),
+  },
+  {
+    from: 40,
+    to: 41,
+    describe: 'Bibliothekspläne: Herkunft, Planversion, Anpassungen; Rückmeldung und Schmerz je erledigter Einheit',
+    run: (data: any) => ({
+      ...data,
+      version: 41,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        trainingBlocks: (athlete.trainingBlocks ?? []).map((b: any) => ({
+          ...b,
+          libraryPlanId: b.libraryPlanId ?? null,
+          libraryVersion: b.libraryVersion ?? null,
+          planVersion: b.planVersion ?? 1,
+          adjustments: b.adjustments ?? [],
+          completions: (b.completions ?? []).map((c: any) => ({ ...c, feedback: c.feedback ?? null, pain: c.pain ?? false })),
+        })),
+      })),
     }),
   },
 ]

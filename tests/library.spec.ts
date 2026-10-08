@@ -152,3 +152,71 @@ test.describe('Übungsdatenbank: Bildschirm', () => {
     expect(over).toBeLessThanOrEqual(0)
   })
 })
+
+test.describe('Programmbibliothek: Übernehmen', () => {
+  test('jeder Plan wird ein gültiger Block (Schema 41): Einheiten je Woche, Dosis als Momentaufnahme, Version 1', async () => {
+    const { materializePlan, INTENT_OF_TEMPLATE } = await import('../src/domain/library')
+    const { emptyData, parseStoredData } = await import('../src/lib/store/schema')
+    for (const t of index.sessionTemplates) expect(INTENT_OF_TEMPLATE[t.session_template_id], t.session_template_id).toBeTruthy()
+    for (const p of index.plans) {
+      const block = materializePlan(p, weeksOf(p.plan_id), index, exercises, { id: `b-${p.plan_id}`, startDay: '2026-10-12', now: '2026-10-08T12:00:00.000Z', disciplineId: null })
+      expect(block.sessions).toHaveLength(p.sessionCount)
+      expect(block.libraryPlanId).toBe(p.plan_id)
+      expect(block.planVersion).toBe(1)
+      const data = emptyData() as any
+      data.athletes[0].trainingBlocks = [block]
+      const { data: parsed, report } = parseStoredData(data)
+      expect(report.rejected, p.plan_id).toEqual([])
+      expect(parsed!.athletes[0].trainingBlocks[0].sessions, p.plan_id).toHaveLength(p.sessionCount)
+    }
+  })
+
+  test('Schema 41: ältere Blöcke bekommen Herkunft leer, Version 1, keine Anpassungen; Abschlüsse ohne Rückmeldung', async () => {
+    const { emptyData, parseStoredData } = await import('../src/lib/store/schema')
+    const old = emptyData() as any
+    old.version = 40
+    old.athletes[0].trainingBlocks = [{ id: 'b', name: '', family: null, disciplineId: null, phase: 'BUILD', startDay: '2026-10-05', weeks: 4, retestMetrics: [], templateId: null, assignmentId: null, eventDay: null, sessions: [], completions: [{ sessionId: 's', day: '2026-10-05', durationMin: 30, rpe: 6, diarySessionId: null, avgHr: null, maxHr: null }], status: 'active', createdAt: '2026-10-01T00:00:00.000Z', updatedAt: '2026-10-01T00:00:00.000Z' }]
+    const { data, report } = parseStoredData(old)
+    expect(report.migratedFrom).toBe(40)
+    const b = data!.athletes[0].trainingBlocks[0]
+    expect(b).toMatchObject({ libraryPlanId: null, libraryVersion: null, planVersion: 1, adjustments: [] })
+    expect(b.completions[0]).toMatchObject({ feedback: null, pain: false })
+  })
+
+  test('nächster Montag', async () => {
+    const { nextMonday } = await import('../src/domain/library')
+    expect(nextMonday('2026-10-08')).toBe('2026-10-12')
+    expect(nextMonday('2026-10-12')).toBe('2026-10-12')
+    expect(nextMonday('2026-10-11')).toBe('2026-10-12')
+  })
+
+  test('Bildschirm: Ziel filtern, Plan öffnen, Woche wechseln, Regeln mit DOI, übernehmen → Block mit Bibliothekseinheiten', async ({ page }) => {
+    const { openDemo } = await import('./helpers')
+    await openDemo(page)
+    await page.goto('/plan/waehlen', { waitUntil: 'domcontentloaded' })
+    await page.getByTestId('way-library').click()
+    await expect(page.getByTestId('program-library')).toBeVisible()
+    await expect(page.getByTestId('lib-unreviewed')).toBeVisible()
+    await expect(page.getByTestId('prog-count')).toContainText('16')
+    await page.getByTestId('prog-goal-RUN_5K').click()
+    await expect(page.getByTestId('prog-count')).toContainText('2')
+    // Coach-Pläne sind für Athleten als «Nur über Trainer» markiert.
+    await page.getByTestId('prog-goal-all').click()
+    await expect(page.getByTestId('prog-gate-PLN_HYP_PPL_12W')).toBeVisible()
+    await page.getByTestId('prog-PLN_HYP_PPL_12W').click()
+    await expect(page.getByTestId('prog-coach-only')).toBeVisible()
+    await expect(page.getByTestId('prog-adopt-button')).toHaveCount(0)
+    await page.goto('/plan/programme/PLN_RUN5K_BASE_8W', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('prog-rules').locator('a[href^="https://doi.org/10."]').first()).toBeVisible()
+    await page.getByTestId('prog-week-4').click()
+    await expect(page.getByTestId('prog-reduced')).toBeVisible()
+    await expect(page.getByTestId('prog-retest')).toContainText('5-km')
+    await page.getByTestId('prog-adopt-button').click()
+    await expect(page).toHaveURL(/\/plan\/block$/)
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks.find((b: any) => b.libraryPlanId === 'PLN_RUN5K_BASE_8W'))
+    expect(stored.sessions).toHaveLength(24)
+    expect(stored.sessions[0].kind).toBe('library')
+    const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+    expect(over).toBeLessThanOrEqual(0)
+  })
+})

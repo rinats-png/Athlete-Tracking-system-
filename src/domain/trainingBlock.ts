@@ -23,10 +23,15 @@ export const mondayOnOrAfter = (day: string): string => {
   return wd === 1 ? day : dayStr(dayNum(day) + (8 - wd))
 }
 
+/** Felder, die erst mit Schema 41 kamen (Bibliothekspläne, Versionen); für Blöcke anderer Herkunft leer. */
+export const BLOCK_V41_DEFAULTS = { libraryPlanId: null, libraryVersion: null, planVersion: 1, adjustments: [] } as const
+
 export const blockEndDay = (b: Pick<StoredTrainingBlock, 'startDay' | 'weeks'>): string => dayStr(dayNum(b.startDay) + b.weeks * 7 - 1)
 
 export function adoptBlock(plan: BlockPlan, ctx: { id: string; family: SportFamily; disciplineId: string | null; phase: Phase; startDay: string; now: string }): StoredTrainingBlock {
   return {
+    ...BLOCK_V41_DEFAULTS,
+    adjustments: [],
     id: ctx.id,
     family: ctx.family,
     name: '',
@@ -237,6 +242,8 @@ export interface OwnBlockInput {
 /** Leerer eigener Plan: Name, Länge, Phase und Start sind die Entscheidung des Menschen; keine Regel, keine Evidenzangabe. */
 export function createOwnBlock(i: OwnBlockInput): StoredTrainingBlock {
   return {
+    ...BLOCK_V41_DEFAULTS,
+    adjustments: [],
     id: i.id,
     name: i.name.trim().slice(0, 60),
     family: i.family,

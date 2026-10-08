@@ -2989,7 +2989,12 @@
       "MAX_SPEED": "Toppfart",
       "AGILITY_COD": "Smidighet og retningsendringer",
       "COMBAT_ROUNDS": "Kamprunder",
-      "TAPER_MAINTENANCE": "Nedtrapping og vedlikehold"
+      "TAPER_MAINTENANCE": "Nedtrapping og vedlikehold",
+      "GPP": "Generell grunntrening",
+      "METCON": "Metcon",
+      "MOBILITY": "Bevegelighet",
+      "PRIMING": "Priming",
+      "STRENGTH_VOLUME": "Styrkevolum"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min arbeid, {{rec}} min aktiv pause, {{min}}–{{max}} % av makspuls",
@@ -3217,7 +3222,11 @@
     },
     "available": "Tilgjengelig",
     "soon": "Kommer",
-    "note": "En språkmodell lager ikke planer. Den formulerer høyst forklaringer."
+    "note": "En språkmodell lager ikke planer. Den formulerer høyst forklaringer.",
+    "library": {
+      "title": "Fra programbiblioteket",
+      "sub": "16 ferdige planer, uke for uke"
+    }
   },
   "tpl": {
     "libraryTitle": "Planbibliotek",
@@ -3711,6 +3720,14 @@
       "tempo_optional": "Bevegelsestempo (valgfritt)",
       "time_s": "Tid (s)",
       "work_s_or_reps": "Arbeidstid eller repetisjoner"
+    },
+    "restS": "Pause {{s}} s",
+    "minutes": "{{n}} min",
+    "sessionTag": "Bibliotekplan",
+    "why": {
+      "plan": "Fra bibliotekplanen «{{plan}}», planversjon {{version}}.",
+      "rule": "Dose innenfor grensene til metoderegel {{rule}}.",
+      "details": "Regler og kilder i plandetaljene"
     }
   },
   "fuelPlan": {
@@ -3751,6 +3768,80 @@
       "no_name": "Oppgi et navn.",
       "duplicate": "Denne øvelsen finnes allerede.",
       "too_many": "Mer enn 50 egne øvelser er ikke mulig."
+    }
+  },
+  "prog": {
+    "link": "Programbibliotek",
+    "title": "Programbibliotek",
+    "intro": "Ferdige planer uke for uke. Hver dose ligger under en metoderegel med grenser; det du tar over, kan du justere senere.",
+    "goal": "Mål",
+    "level": "Nivå",
+    "levels": {
+      "all": "Alle nivåer",
+      "beginner": "Nybegynner",
+      "advanced": "Viderekommen"
+    },
+    "selfOnly": "Bare planer jeg kan ta over selv",
+    "count": "{{n}} planer",
+    "meta": "{{weeks}} uker · {{days}} dager/uke · {{sessions}} økter",
+    "gate": {
+      "confirm": "Trener anbefales",
+      "coach_only": "Bare via trener"
+    },
+    "about": "Om planen",
+    "prerequisites": "Forutsetninger",
+    "autonomy": "Hvem kan ta over?",
+    "autonomyLevel": {
+      "AUTO_WITH_RULES": "Selv, innenfor reglene",
+      "COACH_SENSITIVE": "Med trener (sensitivt)",
+      "COACH_TEMPLATE": "Trenermal",
+      "COACH_ONLY": "Bare trener"
+    },
+    "fuel": "Ernæringsmerknad",
+    "blocks": "Planens oppbygning",
+    "weeksRange": "Uke {{from}}–{{to}}",
+    "progression": "Progresjon",
+    "weekView": "Uke for uke",
+    "reducedWeek": "Lettere uke (deload/taper): lavere dose, planlagt.",
+    "day": {
+      "Mo": "Man",
+      "Di": "Tir",
+      "Mi": "Ons",
+      "Do": "Tor",
+      "Fr": "Fre",
+      "Sa": "Lør",
+      "So": "Søn"
+    },
+    "retest": "Retest til slutt",
+    "errorNote": "Målefeil (ennå uten kilde; inntil da ingen vurdering «bedre/dårligere»):",
+    "rules": "Regler bak planen",
+    "rulesNote": "Hver dose må ligge innenfor disse metodereglene – også etter hver justering. Alle reglene venter fortsatt på faglig gjennomgang.",
+    "cutoff": "Avbryt når",
+    "noSource": "uten kilde",
+    "noFulltext": "fulltekst ikke sjekket",
+    "adopt": "Ta over planen",
+    "start": "Start",
+    "startNote": "Uke 1 starter mandag {{day}}.",
+    "confirmCoach": "Jeg forstår: en trener anbefales for denne planen fordi den inneholder teknisk krevende øvelser.",
+    "adoptButton": "Ta over",
+    "coachOnly": "Planen inneholder metoder som krever trener (f.eks. dropsett, priming). En trener kan ta den over og tildele deg den.",
+    "cat": {
+      "FOUNDATION": "Grunnlag",
+      "METHOD_DEVELOPMENT": "Metodefokus",
+      "SPORT_SPECIFIC": "Idrettsspesifikk",
+      "COMPETITION_OR_READINESS": "Konkurranse",
+      "MAINTENANCE": "Vedlikehold"
+    },
+    "goals": {
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "COMBAT_SPORT_STRIKING": "Striking",
+      "GENERAL_FITNESS": "Generell form",
+      "GENERAL_STRENGTH": "Generell styrke",
+      "HYPERTROPHY": "Muskelvekst",
+      "HYROX": "HYROX",
+      "POWERLIFTING": "Styrkeløft",
+      "RUN_10K": "Løping 10 km",
+      "RUN_5K": "Løping 5 km"
     }
   }
 }

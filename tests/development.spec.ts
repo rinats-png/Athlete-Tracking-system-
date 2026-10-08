@@ -7,7 +7,7 @@ import type { StoredTrainingBlock } from '../src/lib/store/localStore'
 
 const mk = (id: string, startDay: string, over: Partial<StoredTrainingBlock> = {}): StoredTrainingBlock =>
   ({ id, name: id, family: null, disciplineId: null, phase: 'BUILD', startDay, weeks: 4, retestMetrics: [], templateId: null, assignmentId: null, eventDay: null, sessions: [], completions: [], status: 'closed', createdAt: '', updatedAt: '', ...over }) as StoredTrainingBlock
-const done = (day: string) => ({ sessionId: 's', day, durationMin: 30, rpe: 6, diarySessionId: null, avgHr: null, maxHr: null })
+const done = (day: string) => ({ sessionId: 's', day, durationMin: 30, rpe: 6, diarySessionId: null, avgHr: null, maxHr: null, feedback: null, pain: false })
 
 test.describe('Langzeitentwicklung: Fachlogik', () => {
   test('Blöcke neueste zuerst; zwölf Wochen mit Montag, Zählung je Woche über alle Blöcke, Summe über alles', () => {
@@ -48,7 +48,7 @@ test.describe('Langzeitentwicklung: Bildschirm', () => {
       const mk = (id: string, name: string, status: string, startDay: string, completions: unknown[], retest: string[]) => ({ id, name, family: null, disciplineId: null, phase: 'BUILD', startDay, weeks: 4, retestMetrics: retest, templateId: null, assignmentId: null, eventDay: null, sessions: [], completions, status, createdAt: now.toISOString(), updatedAt: now.toISOString() })
       d.athletes[0].trainingBlocks = [
         mk('b1', 'Alter Block', 'closed', '2026-03-02', [], ['countermovement_jump']),
-        mk('b2', 'Neuer Block', 'active', '2026-09-14', [{ sessionId: 's', day, durationMin: 30, rpe: 6, diarySessionId: null, avgHr: null, maxHr: null }], []),
+        mk('b2', 'Neuer Block', 'active', '2026-09-14', [{ sessionId: 's', day, durationMin: 30, rpe: 6, diarySessionId: null, avgHr: null, maxHr: null, feedback: null, pain: false }], []),
       ]
       localStorage.setItem('kydon.data.v1', JSON.stringify(d))
     })

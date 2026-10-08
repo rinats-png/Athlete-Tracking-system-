@@ -167,7 +167,7 @@ export interface AppDataValue {
   saveTrainingBlock: (block: StoredTrainingBlock) => void
   deleteTrainingBlock: (id: string) => void
   /** Eine geplante Einheit als erledigt eintragen: Block und Tagebuch (Last) in einem Schritt. */
-  completePlannedSession: (input: { blockId: string; sessionId: string; day: string; durationMin: number; rpe: number; kind: 'strength' | 'endurance'; hr?: { avg: number; max: number } | null }) => void
+  completePlannedSession: (input: { blockId: string; sessionId: string; day: string; durationMin: number; rpe: number; kind: 'strength' | 'endurance'; hr?: { avg: number; max: number } | null; feedback?: number | null; pain?: boolean }) => void
   /** Aktivitäten aus einem Import übernehmen; schon vorhandene (gleiche Kennung) bleiben, wie sie sind. Gibt die Zahl neuer zurück. */
   importActivities: (list: StoredActivity[]) => number
   /** Alle importierten Aktivitäten des aktiven Athleten löschen. */
@@ -773,7 +773,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         const current = storeRef.current
         commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, trainingBlocks: a.trainingBlocks.filter((b) => b.id !== id) } : a)) })
       },
-      completePlannedSession: ({ blockId, sessionId, day, durationMin, rpe, kind, hr }) => {
+      completePlannedSession: ({ blockId, sessionId, day, durationMin, rpe, kind, hr, feedback, pain }) => {
         const current = storeRef.current
         const now = new Date().toISOString()
         commitStore({
@@ -788,7 +788,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
             const diary = existing
               ? a.diary.map((e) => (e.day === day ? { ...e, sessions: [...e.sessions, session], updatedAt: now } : e))
               : [...a.diary, { id: newId(), day, weightKg: null, sleepHours: null, sleepQuality: null, energy: null, stress: null, soreness: null, steps: null, adherence: null, sessions: [session], note: '', createdAt: now, updatedAt: now }]
-            const completion = { sessionId, day, durationMin, rpe, diarySessionId, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null }
+            const completion = { sessionId, day, durationMin, rpe, diarySessionId, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback: feedback ?? null, pain: pain ?? false }
             return { ...a, diary, trainingBlocks: a.trainingBlocks.map((b) => (b.id === blockId ? { ...b, completions: [...b.completions, completion], updatedAt: now } : b)) }
           }),
         })

@@ -2989,7 +2989,12 @@
       "MAX_SPEED": "Maximum speed",
       "AGILITY_COD": "Agility and change of direction",
       "COMBAT_ROUNDS": "Combat rounds",
-      "TAPER_MAINTENANCE": "Taper and maintenance"
+      "TAPER_MAINTENANCE": "Taper and maintenance",
+      "GPP": "General preparation",
+      "METCON": "Metcon",
+      "MOBILITY": "Mobility",
+      "PRIMING": "Priming",
+      "STRENGTH_VOLUME": "Strength volume"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min work, {{rec}} min active rest, {{min}}–{{max}} % of maximum heart rate",
@@ -3217,7 +3222,11 @@
     },
     "available": "Available",
     "soon": "Coming",
-    "note": "A language model does not create plans. At most it phrases explanations."
+    "note": "A language model does not create plans. At most it phrases explanations.",
+    "library": {
+      "title": "From the programme library",
+      "sub": "16 ready-made plans, week by week"
+    }
   },
   "tpl": {
     "libraryTitle": "Plan library",
@@ -3711,6 +3720,14 @@
       "tempo_optional": "Tempo (optional)",
       "time_s": "Time (s)",
       "work_s_or_reps": "Work time or reps"
+    },
+    "restS": "Rest {{s}} s",
+    "minutes": "{{n}} min",
+    "sessionTag": "Library plan",
+    "why": {
+      "plan": "From the library plan \"{{plan}}\", plan version {{version}}.",
+      "rule": "Dose within the limits of method rule {{rule}}.",
+      "details": "Rules and sources in the plan details"
     }
   },
   "fuelPlan": {
@@ -3751,6 +3768,80 @@
       "no_name": "Please give a name.",
       "duplicate": "This exercise already exists.",
       "too_many": "More than 50 own exercises are not possible."
+    }
+  },
+  "prog": {
+    "link": "Programme library",
+    "title": "Programme library",
+    "intro": "Ready-made plans, week by week. Every dose sits under a method rule with limits; what you adopt you can adjust later.",
+    "goal": "Goal",
+    "level": "Level",
+    "levels": {
+      "all": "All levels",
+      "beginner": "Beginner",
+      "advanced": "Advanced"
+    },
+    "selfOnly": "Only plans I can adopt myself",
+    "count": "{{n}} plans",
+    "meta": "{{weeks}} weeks · {{days}} days/week · {{sessions}} sessions",
+    "gate": {
+      "confirm": "Coach recommended",
+      "coach_only": "Via coach only"
+    },
+    "about": "About the plan",
+    "prerequisites": "Prerequisites",
+    "autonomy": "Who may adopt it?",
+    "autonomyLevel": {
+      "AUTO_WITH_RULES": "Yourself, within the rules",
+      "COACH_SENSITIVE": "With a coach (sensitive)",
+      "COACH_TEMPLATE": "Coach template",
+      "COACH_ONLY": "Coach only"
+    },
+    "fuel": "Fuel note",
+    "blocks": "Plan structure",
+    "weeksRange": "Week {{from}}–{{to}}",
+    "progression": "Progression",
+    "weekView": "Week by week",
+    "reducedWeek": "Lighter week (deload/taper): reduced dose, planned.",
+    "day": {
+      "Mo": "Mon",
+      "Di": "Tue",
+      "Mi": "Wed",
+      "Do": "Thu",
+      "Fr": "Fri",
+      "Sa": "Sat",
+      "So": "Sun"
+    },
+    "retest": "Retest at the end",
+    "errorNote": "Measurement error (no cited source yet; until then no \"better/worse\" verdict):",
+    "rules": "Rules behind the plan",
+    "rulesNote": "Every dose must stay within these method rules – also after every adjustment. All rules are still awaiting expert review.",
+    "cutoff": "Stop when",
+    "noSource": "no study source",
+    "noFulltext": "full text not checked",
+    "adopt": "Adopt plan",
+    "start": "Start",
+    "startNote": "Week 1 starts on Monday, {{day}}.",
+    "confirmCoach": "I understand: a coach is recommended for this plan because it contains technically demanding exercises.",
+    "adoptButton": "Adopt",
+    "coachOnly": "This plan contains methods that need a coach (e.g. drop sets, priming). A coach can adopt it and assign it to you.",
+    "cat": {
+      "FOUNDATION": "Foundation",
+      "METHOD_DEVELOPMENT": "Method focus",
+      "SPORT_SPECIFIC": "Sport-specific",
+      "COMPETITION_OR_READINESS": "Competition",
+      "MAINTENANCE": "Maintenance"
+    },
+    "goals": {
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "COMBAT_SPORT_STRIKING": "Striking",
+      "GENERAL_FITNESS": "General fitness",
+      "GENERAL_STRENGTH": "General strength",
+      "HYPERTROPHY": "Hypertrophy",
+      "HYROX": "HYROX",
+      "POWERLIFTING": "Powerlifting",
+      "RUN_10K": "10 km running",
+      "RUN_5K": "5 km running"
     }
   }
 }

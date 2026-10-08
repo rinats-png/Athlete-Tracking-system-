@@ -2989,7 +2989,12 @@
       "MAX_SPEED": "Vitesse maximale",
       "AGILITY_COD": "Agilité et changements de direction",
       "COMBAT_ROUNDS": "Rounds de combat",
-      "TAPER_MAINTENANCE": "Affûtage et maintien"
+      "TAPER_MAINTENANCE": "Affûtage et maintien",
+      "GPP": "Préparation générale",
+      "METCON": "Metcon",
+      "MOBILITY": "Mobilité",
+      "PRIMING": "Priming",
+      "STRENGTH_VOLUME": "Volume de force"
     },
     "block": {
       "interval": "{{reps}} × {{work}} min de travail, {{rec}} min de pause active, {{min}}–{{max}} % de la fréquence cardiaque maximale",
@@ -3217,7 +3222,11 @@
     },
     "available": "Disponible",
     "soon": "Bientôt",
-    "note": "Un modèle de langage ne crée pas de plans. Il formule tout au plus des explications."
+    "note": "Un modèle de langage ne crée pas de plans. Il formule tout au plus des explications.",
+    "library": {
+      "title": "Depuis la bibliothèque",
+      "sub": "16 plans complets, semaine par semaine"
+    }
   },
   "tpl": {
     "libraryTitle": "Bibliothèque de plans",
@@ -3711,6 +3720,14 @@
       "tempo_optional": "Tempo (option)",
       "time_s": "Temps (s)",
       "work_s_or_reps": "Temps de travail ou répétitions"
+    },
+    "restS": "Repos {{s}} s",
+    "minutes": "{{n}} min",
+    "sessionTag": "Plan de la bibliothèque",
+    "why": {
+      "plan": "Issu du plan « {{plan}} », version {{version}}.",
+      "rule": "Dosage dans les limites de la règle {{rule}}.",
+      "details": "Règles et sources dans le détail du plan"
     }
   },
   "fuelPlan": {
@@ -3751,6 +3768,80 @@
       "no_name": "Indique un nom.",
       "duplicate": "Cet exercice existe déjà.",
       "too_many": "Plus de 50 exercices perso n’est pas possible."
+    }
+  },
+  "prog": {
+    "link": "Bibliothèque de programmes",
+    "title": "Bibliothèque de programmes",
+    "intro": "Des plans complets, semaine par semaine. Chaque dosage relève d'une règle de méthode avec des limites ; ce que tu adoptes reste ajustable.",
+    "goal": "Objectif",
+    "level": "Niveau",
+    "levels": {
+      "all": "Tous niveaux",
+      "beginner": "Débutant",
+      "advanced": "Avancé"
+    },
+    "selfOnly": "Seulement les plans que je peux adopter seul",
+    "count": "{{n}} plans",
+    "meta": "{{weeks}} semaines · {{days}} jours/semaine · {{sessions}} séances",
+    "gate": {
+      "confirm": "Entraîneur recommandé",
+      "coach_only": "Uniquement via entraîneur"
+    },
+    "about": "À propos du plan",
+    "prerequisites": "Prérequis",
+    "autonomy": "Qui peut l’adopter ?",
+    "autonomyLevel": {
+      "AUTO_WITH_RULES": "Toi-même, dans les règles",
+      "COACH_SENSITIVE": "Avec entraîneur (sensible)",
+      "COACH_TEMPLATE": "Modèle entraîneur",
+      "COACH_ONLY": "Entraîneur uniquement"
+    },
+    "fuel": "Note nutrition",
+    "blocks": "Structure du plan",
+    "weeksRange": "Semaine {{from}}–{{to}}",
+    "progression": "Progression",
+    "weekView": "Semaine par semaine",
+    "reducedWeek": "Semaine allégée (deload/affûtage) : dose réduite, prévue.",
+    "day": {
+      "Mo": "Lun",
+      "Di": "Mar",
+      "Mi": "Mer",
+      "Do": "Jeu",
+      "Fr": "Ven",
+      "Sa": "Sam",
+      "So": "Dim"
+    },
+    "retest": "Retest à la fin",
+    "errorNote": "Erreur de mesure (pas encore de source citée ; d'ici là, pas de verdict « mieux/moins bien ») :",
+    "rules": "Règles derrière le plan",
+    "rulesNote": "Chaque dosage doit rester dans ces règles – aussi après chaque ajustement. Toutes les règles attendent encore une relecture.",
+    "cutoff": "Arrêt",
+    "noSource": "sans source",
+    "noFulltext": "texte intégral non vérifié",
+    "adopt": "Adopter le plan",
+    "start": "Début",
+    "startNote": "La semaine 1 commence le lundi {{day}}.",
+    "confirmCoach": "J'ai compris : un entraîneur est recommandé pour ce plan, car il contient des exercices techniquement exigeants.",
+    "adoptButton": "Adopter",
+    "coachOnly": "Ce plan contient des méthodes qui demandent un entraîneur (p. ex. drop sets, priming). Un entraîneur peut l'adopter et te l'attribuer.",
+    "cat": {
+      "FOUNDATION": "Base",
+      "METHOD_DEVELOPMENT": "Accent méthode",
+      "SPORT_SPECIFIC": "Spécifique",
+      "COMPETITION_OR_READINESS": "Compétition",
+      "MAINTENANCE": "Entretien"
+    },
+    "goals": {
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "COMBAT_SPORT_STRIKING": "Pieds-poings",
+      "GENERAL_FITNESS": "Forme générale",
+      "GENERAL_STRENGTH": "Force générale",
+      "HYPERTROPHY": "Hypertrophie",
+      "HYROX": "HYROX",
+      "POWERLIFTING": "Force athlétique",
+      "RUN_10K": "Course 10 km",
+      "RUN_5K": "Course 5 km"
     }
   }
 }

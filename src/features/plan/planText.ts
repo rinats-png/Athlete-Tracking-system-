@@ -19,6 +19,10 @@ export function blockText(b: StoredPlannedSession['blocks'][number], t: TFunctio
       return `${b.name}: ${[`${b.sets}${b.reps != null ? ` × ${b.reps}` : ''}`, b.load].filter(Boolean).join(' · ')}`
     case 'jumps':
       return t('plan.block.jumps')
+    case 'library_exercise':
+      return `${b.name}: ${[b.sets != null && b.reps ? `${b.sets} × ${b.reps}` : b.reps ?? (b.sets != null ? `${b.sets}` : ''), b.intensity, b.rpe != null ? `RPE ${b.rpe}` : '', b.restS != null ? t('lib.restS', { s: b.restS }) : ''].filter(Boolean).join(' · ')}`
+    case 'library_conditioning':
+      return [b.description, b.durationMin != null ? t('lib.minutes', { n: b.durationMin }) : '', b.distance, b.zone].filter(Boolean).join(' · ')
     default:
       return ''
   }
@@ -29,15 +33,15 @@ export const diaryKindOf = (intent: string): 'strength' | 'endurance' => (intent
 
 type Tr = (key: string, opts?: Record<string, unknown>) => string
 interface NamedSession {
-  kind: 'rule' | 'open' | 'own'
+  kind: 'rule' | 'open' | 'own' | 'library'
   title: string
   primaryIntent: string
   ruleId: string | null
 }
 /** Name einer Einheit: bei eigenen der selbst gewählte Titel, sonst die Absicht. */
-export const sessionName = (s: NamedSession, t: Tr): string => (s.kind === 'own' && s.title ? s.title : t(`plan.intent.${s.primaryIntent}`))
+export const sessionName = (s: NamedSession, t: Tr): string => ((s.kind === 'own' || s.kind === 'library') && s.title ? s.title : t(`plan.intent.${s.primaryIntent}`))
 /** Zeile darunter: Regel, «Eigene Einheit» oder «Offen». */
-export const sessionSource = (s: NamedSession, t: Tr): string => (s.ruleId ? t(`plan.rules.${s.ruleId}.title`) : s.kind === 'own' ? t('own.tag') : t('plan.openSession'))
+export const sessionSource = (s: NamedSession, t: Tr): string => (s.kind === 'library' ? t('lib.sessionTag') : s.ruleId ? t(`plan.rules.${s.ruleId}.title`) : s.kind === 'own' ? t('own.tag') : t('plan.openSession'))
 
 /** Urteil einer Blockmessung gegen den Messfehler; ein nicht gemessener Retest ist offen, nie ein Misserfolg. */
 export function verdictLine(m: MetricReport, finished: boolean, t: TFunction, locale: string): string {

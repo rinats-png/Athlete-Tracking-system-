@@ -125,7 +125,7 @@ export function SessionPlayerScreen() {
     if (rpe == null) return
     completePlannedSession({ blockId: block.id, sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, kind: diaryKindOf(session.primaryIntent), hr: hr ? { avg: hr.avg, max: hr.max } : null })
     // Zugewiesener Block: Fortschritt nachmelden (best effort, ohne Netz geht es später).
-    if (block.assignmentId) void syncAssignedCompletions({ ...block, completions: [...block.completions, { sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, diarySessionId: null, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null }] })
+    if (block.assignmentId) void syncAssignedCompletions({ ...block, completions: [...block.completions, { sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, diarySessionId: null, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback: null, pain: false }] })
     navigate('/plan/block')
   }
 

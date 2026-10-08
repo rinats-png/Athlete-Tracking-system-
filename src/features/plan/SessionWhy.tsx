@@ -19,6 +19,21 @@ export function SessionWhy({ session, block }: { session: StoredPlannedSession; 
   const rule = session.ruleId ? TRAINING_RULES.find((r) => r.id === session.ruleId) : null
   const tpl = templateById(block.templateId)
   const retest = session.retestMetric ? pick(getTest(session.retestMetric)?.name, locale) ?? session.retestMetric : null
+  if (session.kind === 'library') {
+    // Bibliotheksplan: Regelkette aus dem Programm-Seed; Details stehen im Plandetail.
+    return (
+      <details className="mt-2 text-[13px]" data-testid={`why-${session.id}`}>
+        <summary className="min-h-11 cursor-pointer py-2 text-accent-text" data-testid={`why-open-${session.id}`}>{t('why.title')}</summary>
+        <div className="space-y-2 rounded-md border border-line bg-surface-sunken px-3 py-3">
+          <p>{t('lib.why.plan', { plan: block.name, version: block.planVersion })}</p>
+          {session.ruleId && <p>{t('lib.why.rule', { rule: session.ruleId })}</p>}
+          {session.evidenceSpecificity && <p>{t('plan.evidence.specificity', { level: t(`plan.specificity.${session.evidenceSpecificity}`) })}</p>}
+          <p className="text-ink-secondary">{t('plan.review.unreviewed')}</p>
+          {block.libraryPlanId && <a href={`/plan/programme/${block.libraryPlanId}`} className="inline-flex min-h-11 items-center text-accent-text underline underline-offset-2">{t('lib.why.details')}</a>}
+        </div>
+      </details>
+    )
+  }
   return (
     <details className="mt-2 text-[13px]" data-testid={`why-${session.id}`}>
       <summary className="min-h-11 cursor-pointer py-2 text-accent-text" data-testid={`why-open-${session.id}`}>{t('why.title')}</summary>

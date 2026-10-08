@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils'
  * Etappen und stehen bis dahin sichtbar als «folgt» da, ohne Verweis ins Leere.
  */
 const WAYS: { key: string; image: string; to: string | null }[] = [
+  { key: 'library', image: 'kettlebell_swing', to: '/plan/programme' },
   { key: 'template', image: 'rowing_erg', to: '/plan/vorlagen' },
   { key: 'own', image: 'back_squat', to: '/plan/eigen' },
   { key: 'computed', image: 'treadmill', to: '/plan/pruefung' },
