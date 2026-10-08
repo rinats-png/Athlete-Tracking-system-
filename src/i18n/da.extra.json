@@ -3843,5 +3843,47 @@
       "RUN_10K": "Løb 10 km",
       "RUN_5K": "Løb 5 km"
     }
+  },
+  "adapt": {
+    "title": "Justér træningen",
+    "version": "Planversion {{n}}",
+    "feedbackQ": "Hvor hårdt var det?",
+    "fb": {
+      "1": "alt for let",
+      "2": "lidt let",
+      "3": "passende",
+      "4": "lidt hårdt",
+      "5": "alt for hårdt"
+    },
+    "pain": "Smerter under passet (så øges intet)",
+    "review": {
+      "too_early": "Et forslag ud fra dine tilbagemeldinger kommer tidligst 3 dage efter start.",
+      "too_few": "For få tilbagemeldinger endnu ({{n}} af mindst 2 de seneste 14 dage).",
+      "fits": "Dine tilbagemeldinger ({{n}}) siger: passende. Intet forslag nødvendigt.",
+      "too_easy": "Dine tilbagemeldinger ({{n}}) siger: lidt let. Forslag: lidt hårdere.",
+      "too_hard": "Dine tilbagemeldinger ({{n}}) siger: lidt hårdt. Forslag: lidt lettere.",
+      "pain": "Du har meldt smerter. Øgninger er spærret; forslag: lidt lettere. Ved vedvarende gener, kontakt læge."
+    },
+    "useSuggestion": "Se forslag ({{pct}} %)",
+    "manual": "Eget ønske",
+    "manualNote": "Procenten er et ønske, ikke en multiplikator: ±10 ændrer anstrengelsen (RPE ±1), ±20 ét sæt, ±30 to sæt – altid inden for reglernes grænser og kun for kommende pas.",
+    "preview": "{{n}} ændringer; {{limit}} poster bliver, fordi de står ved regelgrænsen.",
+    "none": "Ingen ændring mulig: alle {{n}} poster står allerede ved deres regelgrænse.",
+    "blocked": "Øgning er spærret, fordi der er meldt smerter de seneste 14 dage.",
+    "more": "… og {{n}} mere",
+    "withinRules": "Alle ændringer ligger inden for metodereglens grænser. Lettere uger og gennemførte pas ændres ikke.",
+    "accept": "Godkend",
+    "reject": "Afvis",
+    "history": "Versioner",
+    "historyRow": "Version {{from}} → {{to}}: {{pct}} %, {{n}} ændringer ({{date}})",
+    "revert": "Fortryd seneste justering",
+    "field": {
+      "rpe": "Anstrengelse",
+      "sets": "Sæt",
+      "reps": "Gentagelser",
+      "durationMin": "Varighed (min)"
+    },
+    "weekShort": "U{{n}}",
+    "sessionsOfWeek": "Pas i uge {{n}}"
   }
 }

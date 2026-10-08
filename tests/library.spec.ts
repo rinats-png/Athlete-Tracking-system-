@@ -220,3 +220,87 @@ test.describe('Programmbibliothek: Übernehmen', () => {
     expect(over).toBeLessThanOrEqual(0)
   })
 })
+
+test.describe('Adaptive Anpassung', () => {
+  const mkBlock = async (planId: string, startDay = '2026-10-05') => {
+    const { materializePlan } = await import('../src/domain/library')
+    const p = index.plans.find((x) => x.plan_id === planId)!
+    return materializePlan(p, weeksOf(planId), index, exercises, { id: 'b', startDay, now: '2026-10-05T00:00:00.000Z', disciplineId: null })
+  }
+  const done = (sessionId: string, day: string, feedback: number | null, pain = false) => ({ sessionId, day, durationMin: 45, rpe: 7, diarySessionId: null, avgHr: null, maxHr: null, feedback, pain })
+
+  test('Review: frühestens nach 3 Tagen, mindestens 2 Rückmeldungen, Richtung aus dem Mittel, Schmerz → leichter', async () => {
+    const { reviewFeedback } = await import('../src/domain/adaptation')
+    const b = await mkBlock('PLN_STR_BASE_8W')
+    expect(reviewFeedback(b, '2026-10-06').reason).toBe('too_early')
+    expect(reviewFeedback({ ...b, completions: [done('x', '2026-10-06', 1)] }, '2026-10-09').reason).toBe('too_few')
+    expect(reviewFeedback({ ...b, completions: [done('x', '2026-10-06', 1), done('y', '2026-10-08', 2)] }, '2026-10-09')).toMatchObject({ reason: 'too_easy', suggestedPct: 10 })
+    expect(reviewFeedback({ ...b, completions: [done('x', '2026-10-06', 5), done('y', '2026-10-08', 4)] }, '2026-10-09')).toMatchObject({ reason: 'too_hard', suggestedPct: -10 })
+    expect(reviewFeedback({ ...b, completions: [done('x', '2026-10-06', 3), done('y', '2026-10-08', 3)] }, '2026-10-09')).toMatchObject({ reason: 'fits', suggestedPct: null })
+    expect(reviewFeedback({ ...b, completions: [done('x', '2026-10-06', 1, true)] }, '2026-10-09')).toMatchObject({ reason: 'pain', suggestedPct: -10 })
+  })
+
+  test('Vorschlag: nur künftige Einheiten außerhalb von Entlastungswochen, je Position eine Stellgröße, nie außerhalb der Regelgrenze', async () => {
+    const { proposeAdjustment, applyAdjustment, revertLast } = await import('../src/domain/adaptation')
+    const { checkDose } = await import('../src/domain/library')
+    const b = await mkBlock('PLN_STR_BASE_8W')
+    const today = '2026-10-14' // Woche 2
+    for (const pct of [10, 20, 30, -10, -20, -30] as const) {
+      const p = proposeAdjustment(b, pct, index.methodRules, today)
+      expect(p.blocked).toBe(false)
+      for (const c of p.changes) {
+        const s = b.sessions.find((x) => x.id === c.sessionId)!
+        expect(s.weekFrom, `${pct}`).toBeGreaterThanOrEqual(2)
+        expect(s.note).not.toBe('reduced')
+        expect(pct === 10 || pct === -10 ? c.field : 'x').toBe(pct === 10 || pct === -10 ? 'rpe' : 'x')
+      }
+      // Nach der Übernahme liegt jede geänderte Position weiter in den Grenzen ihrer Regel.
+      const next = applyAdjustment(b, p, { id: `a${pct}`, now: '2026-10-14T00:00:00.000Z', source: 'manual' })
+      if (p.changes.length) expect(next.planVersion).toBe(2)
+      for (const c of p.changes) {
+        const part = next.sessions.find((x) => x.id === c.sessionId)!.blocks[c.part]
+        if (part.type !== 'library_exercise' || !part.ruleId) continue
+        const rule = index.methodRules.find((r) => r.rule_id === part.ruleId)!
+        const v = checkDose({ kind: 'exercise', exercise_id: part.exerciseId, sets: part.sets, reps: part.reps, intensity: null, rpe: part.rpe, rest_s: part.restS, notes: '', exercise_intent: part.intent, role: part.role }, rule)
+        expect(v.filter((x) => x.field === c.field), `${pct} ${c.sessionId}`).toEqual([])
+      }
+    }
+    const p = proposeAdjustment(b, 10, index.methodRules, today)
+    expect(p.changes.length).toBeGreaterThan(0)
+    const v2 = applyAdjustment(b, p, { id: 'a', now: '2026-10-14T00:00:00.000Z', source: 'manual' })
+    expect(v2.adjustments).toHaveLength(1)
+    const v3 = revertLast(v2, { id: 'r', now: '2026-10-14T01:00:00.000Z' })
+    expect(v3.planVersion).toBe(3)
+    expect(v3.sessions).toEqual(b.sessions)
+  })
+
+  test('Schmerz in den letzten 14 Tagen sperrt jede Steigerung, leichter bleibt möglich', async () => {
+    const { proposeAdjustment } = await import('../src/domain/adaptation')
+    const b = { ...(await mkBlock('PLN_STR_BASE_8W')), completions: [done('x', '2026-10-12', 3, true)] }
+    expect(proposeAdjustment(b, 20, index.methodRules, '2026-10-14')).toMatchObject({ blocked: true, changes: [] })
+    expect(proposeAdjustment(b, -20, index.methodRules, '2026-10-14').blocked).toBe(false)
+  })
+
+  test('Bildschirm: Rückmeldung im Player, Anpassung im Block mit Vorschau, Übernehmen erzeugt Version 2, Zurücknehmen Version 3', async ({ page }) => {
+    const { openDemo } = await import('./helpers')
+    const block = await mkBlock('PLN_STR_BASE_8W', '2026-01-05')
+    await openDemo(page)
+    await page.evaluate((b) => {
+      const d = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
+      d.athletes[0].trainingBlocks = [{ ...b, startDay: new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10) }]
+      localStorage.setItem('kydon.data.v1', JSON.stringify(d))
+    }, block)
+    await page.goto('/plan/block', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('adjust-panel')).toBeVisible()
+    await expect(page.getByTestId('adjust-review')).toContainText(/Rückmeldungen/)
+    await page.getByTestId('adjust-10').click()
+    await expect(page.getByTestId('adjust-changes')).toBeVisible()
+    await page.getByTestId('adjust-accept').click()
+    await expect(page.getByTestId('adjust-panel')).toContainText('Planversion 2')
+    await expect(page.getByTestId('adjust-history')).toContainText('1 → 2')
+    await page.getByTestId('adjust-revert').click()
+    await expect(page.getByTestId('adjust-panel')).toContainText('Planversion 3')
+    const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
+    expect(over).toBeLessThanOrEqual(0)
+  })
+})

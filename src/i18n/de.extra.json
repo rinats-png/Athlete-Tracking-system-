@@ -3843,5 +3843,47 @@
       "RUN_10K": "10 km Laufen",
       "RUN_5K": "5 km Laufen"
     }
+  },
+  "adapt": {
+    "title": "Training anpassen",
+    "version": "Planversion {{n}}",
+    "feedbackQ": "Wie war die Belastung?",
+    "fb": {
+      "1": "viel zu leicht",
+      "2": "eher leicht",
+      "3": "passend",
+      "4": "eher schwer",
+      "5": "viel zu schwer"
+    },
+    "pain": "Schmerzen während der Einheit (dann wird nichts gesteigert)",
+    "review": {
+      "too_early": "Ein Vorschlag aus deinen Rückmeldungen kommt frühestens 3 Tage nach dem Start.",
+      "too_few": "Noch zu wenige Rückmeldungen ({{n}} von mindestens 2 in den letzten 14 Tagen).",
+      "fits": "Deine Rückmeldungen ({{n}}) sagen: passt. Kein Vorschlag nötig.",
+      "too_easy": "Deine Rückmeldungen ({{n}}) sagen: eher leicht. Vorschlag: etwas schwerer.",
+      "too_hard": "Deine Rückmeldungen ({{n}}) sagen: eher schwer. Vorschlag: etwas leichter.",
+      "pain": "Du hast Schmerzen gemeldet. Steigerungen sind gesperrt; Vorschlag: etwas leichter. Bei anhaltenden Beschwerden ärztlich abklären."
+    },
+    "useSuggestion": "Vorschlag ansehen ({{pct}} %)",
+    "manual": "Eigener Wunsch",
+    "manualNote": "Die Prozentzahl ist ein Wunsch, kein Multiplikator: ±10 ändert die Anstrengung (RPE ±1), ±20 einen Satz, ±30 zwei Sätze – immer nur innerhalb der Regelgrenzen und nur für kommende Einheiten.",
+    "preview": "{{n}} Änderungen; {{limit}} Positionen bleiben, weil sie an der Regelgrenze stehen.",
+    "none": "Keine Änderung möglich: alle {{n}} betroffenen Positionen stehen schon an der Grenze ihrer Regel.",
+    "blocked": "Steigern ist gesperrt, weil in den letzten 14 Tagen Schmerzen gemeldet wurden.",
+    "more": "… und {{n}} weitere",
+    "withinRules": "Alle Änderungen liegen in den Grenzen der jeweiligen Methodenregel. Entlastungswochen und erledigte Einheiten bleiben unverändert.",
+    "accept": "Übernehmen",
+    "reject": "Ablehnen",
+    "history": "Versionen",
+    "historyRow": "Version {{from}} → {{to}}: {{pct}} %, {{n}} Änderungen ({{date}})",
+    "revert": "Letzte Anpassung zurücknehmen",
+    "field": {
+      "rpe": "Anstrengung",
+      "sets": "Sätze",
+      "reps": "Wiederholungen",
+      "durationMin": "Dauer (min)"
+    },
+    "weekShort": "W{{n}}",
+    "sessionsOfWeek": "Einheiten in Woche {{n}}"
   }
 }

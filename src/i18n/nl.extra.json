@@ -3843,5 +3843,47 @@
       "RUN_10K": "10 km hardlopen",
       "RUN_5K": "5 km hardlopen"
     }
+  },
+  "adapt": {
+    "title": "Training aanpassen",
+    "version": "Planversie {{n}}",
+    "feedbackQ": "Hoe zwaar was het?",
+    "fb": {
+      "1": "veel te licht",
+      "2": "eerder licht",
+      "3": "passend",
+      "4": "eerder zwaar",
+      "5": "veel te zwaar"
+    },
+    "pain": "Pijn tijdens de sessie (er wordt dan niets verhoogd)",
+    "review": {
+      "too_early": "Een voorstel op basis van je feedback komt op zijn vroegst 3 dagen na de start.",
+      "too_few": "Nog te weinig feedback ({{n}} van minstens 2 in de laatste 14 dagen).",
+      "fits": "Je feedback ({{n}}) zegt: passend. Geen voorstel nodig.",
+      "too_easy": "Je feedback ({{n}}) zegt: eerder licht. Voorstel: iets zwaarder.",
+      "too_hard": "Je feedback ({{n}}) zegt: eerder zwaar. Voorstel: iets lichter.",
+      "pain": "Je hebt pijn gemeld. Verhogingen zijn geblokkeerd; voorstel: iets lichter. Bij aanhoudende klachten een arts raadplegen."
+    },
+    "useSuggestion": "Voorstel bekijken ({{pct}} %)",
+    "manual": "Eigen wens",
+    "manualNote": "Het percentage is een wens, geen vermenigvuldiger: ±10 verandert de inspanning (RPE ±1), ±20 één set, ±30 twee sets – altijd binnen de regelgrenzen en alleen voor komende sessies.",
+    "preview": "{{n}} wijzigingen; {{limit}} posities blijven, omdat ze op de regelgrens staan.",
+    "none": "Geen wijziging mogelijk: alle {{n}} posities staan al op de grens van hun regel.",
+    "blocked": "Verhogen is geblokkeerd, omdat er in de laatste 14 dagen pijn is gemeld.",
+    "more": "… en nog {{n}}",
+    "withinRules": "Alle wijzigingen blijven binnen de grenzen van de methoderegel. Lichtere weken en gedane sessies blijven ongewijzigd.",
+    "accept": "Overnemen",
+    "reject": "Afwijzen",
+    "history": "Versies",
+    "historyRow": "Versie {{from}} → {{to}}: {{pct}} %, {{n}} wijzigingen ({{date}})",
+    "revert": "Laatste aanpassing terugdraaien",
+    "field": {
+      "rpe": "Inspanning",
+      "sets": "Sets",
+      "reps": "Herhalingen",
+      "durationMin": "Duur (min)"
+    },
+    "weekShort": "W{{n}}",
+    "sessionsOfWeek": "Sessies in week {{n}}"
   }
 }

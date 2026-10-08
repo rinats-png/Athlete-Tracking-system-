@@ -6,7 +6,8 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, shownBlock, weekChecks } from '@/domain/trainingBlock'
+import { blockEndDay, blockReport, blockWeek, nextBlockSuggestion, openSessionsOn, overrideSession, sessionInWeek, shownBlock, weekChecks } from '@/domain/trainingBlock'
+import { AdjustPanel } from '@/features/library/AdjustPanel'
 import { planAssignEnabled } from '@/lib/planAssign'
 import { AssignmentShares } from '@/features/plan/AssignmentShares'
 import { PlanExportButton, SaveTemplateButton } from '@/features/plan/PlanFileTools'
@@ -44,6 +45,8 @@ export function BlockScreen() {
   if (!block || !report) return <EmptyState title={t('block.title')} body={t('block.none')} action={<Link to="/plan/waehlen" className="inline-flex min-h-11 items-center text-accent-text underline">{t('block.toPlan')}</Link>} />
 
   const week = blockWeek(block, today)
+  // Bibliothekspläne tragen jede Woche eigene Einheiten: gezeigt wird die laufende (vor dem Start Woche 1, danach die letzte).
+  const shownWeek = typeof week === 'number' ? week : week === 'before' ? 1 : block.weeks
   const testName = (slug: string) => pick(getTest(slug)?.name, locale) ?? slug
   const d = (x: string) => formatDate(`${x}T12:00:00Z`, locale)
   const discipline = disciplineById(block.disciplineId ?? '')
@@ -110,10 +113,12 @@ export function BlockScreen() {
         <p className="border-t border-line px-4 py-2 text-[11px] text-ink-muted">{t('block.checkNote')}</p>
       </Panel>
 
+      {block.libraryPlanId && !readOnly && <AdjustPanel block={block} />}
+
       <Panel className="mb-4" data-testid="block-sessions">
-        <PanelHeader title={t('block.sessions')} />
+        <PanelHeader title={block.libraryPlanId ? t('adapt.sessionsOfWeek', { n: shownWeek }) : t('block.sessions')} />
         <ul>
-          {[...block.sessions].sort((a, b) => a.day - b.day).map((s) => (
+          {[...block.sessions].filter((s) => !block.libraryPlanId || sessionInWeek(s, shownWeek, block.weeks)).sort((a, b) => a.day - b.day).map((s) => (
             <li key={s.id} className={cn('border-t border-line px-4 py-3 first:border-t-0', s.removed && 'opacity-60')} data-testid={`block-session-${s.id}`}>
               <p className="font-display text-[15px] font-bold">
                 {t(`plan.day.${s.day}`)} · {sessionName(s, t)}

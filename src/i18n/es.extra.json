@@ -3843,5 +3843,47 @@
       "RUN_10K": "Carrera 10 km",
       "RUN_5K": "Carrera 5 km"
     }
+  },
+  "adapt": {
+    "title": "Ajustar entrenamiento",
+    "version": "Versión del plan {{n}}",
+    "feedbackQ": "¿Cómo fue la carga?",
+    "fb": {
+      "1": "demasiado fácil",
+      "2": "algo fácil",
+      "3": "adecuado",
+      "4": "algo duro",
+      "5": "demasiado duro"
+    },
+    "pain": "Dolor durante la sesión (no se aumentará nada)",
+    "review": {
+      "too_early": "Una propuesta basada en tus valoraciones llega como pronto 3 días después del inicio.",
+      "too_few": "Aún pocas valoraciones ({{n}} de al menos 2 en los últimos 14 días).",
+      "fits": "Tus valoraciones ({{n}}) dicen: adecuado. No hace falta propuesta.",
+      "too_easy": "Tus valoraciones ({{n}}) dicen: algo fácil. Propuesta: un poco más duro.",
+      "too_hard": "Tus valoraciones ({{n}}) dicen: algo duro. Propuesta: un poco más fácil.",
+      "pain": "Has indicado dolor. Los aumentos están bloqueados; propuesta: un poco más fácil. Si las molestias persisten, consulta a un médico."
+    },
+    "useSuggestion": "Ver propuesta ({{pct}} %)",
+    "manual": "Tu deseo",
+    "manualNote": "El porcentaje es un deseo, no un multiplicador: ±10 cambia el esfuerzo (RPE ±1), ±20 una serie, ±30 dos series, siempre dentro de los límites de la regla y solo para sesiones futuras.",
+    "preview": "{{n}} cambios; {{limit}} elementos se mantienen porque están en el límite.",
+    "none": "Ningún cambio posible: los {{n}} elementos ya están en el límite de su regla.",
+    "blocked": "Aumentar está bloqueado porque se indicó dolor en los últimos 14 días.",
+    "more": "… y {{n}} más",
+    "withinRules": "Todos los cambios quedan dentro de los límites de la regla. Las semanas de descarga y las sesiones hechas no cambian.",
+    "accept": "Aceptar",
+    "reject": "Rechazar",
+    "history": "Versiones",
+    "historyRow": "Versión {{from}} → {{to}}: {{pct}} %, {{n}} cambios ({{date}})",
+    "revert": "Deshacer el último ajuste",
+    "field": {
+      "rpe": "Esfuerzo",
+      "sets": "Series",
+      "reps": "Repeticiones",
+      "durationMin": "Duración (min)"
+    },
+    "weekShort": "S{{n}}",
+    "sessionsOfWeek": "Sesiones de la semana {{n}}"
   }
 }

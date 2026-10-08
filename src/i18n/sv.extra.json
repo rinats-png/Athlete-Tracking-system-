@@ -3843,5 +3843,47 @@
       "RUN_10K": "Löpning 10 km",
       "RUN_5K": "Löpning 5 km"
     }
+  },
+  "adapt": {
+    "title": "Justera träningen",
+    "version": "Planversion {{n}}",
+    "feedbackQ": "Hur tungt var det?",
+    "fb": {
+      "1": "alldeles för lätt",
+      "2": "ganska lätt",
+      "3": "lagom",
+      "4": "ganska tungt",
+      "5": "alldeles för tungt"
+    },
+    "pain": "Smärta under passet (då ökas ingenting)",
+    "review": {
+      "too_early": "Ett förslag utifrån din återkoppling kommer tidigast 3 dagar efter start.",
+      "too_few": "För lite återkoppling ännu ({{n}} av minst 2 de senaste 14 dagarna).",
+      "fits": "Din återkoppling ({{n}}) säger: lagom. Inget förslag behövs.",
+      "too_easy": "Din återkoppling ({{n}}) säger: ganska lätt. Förslag: lite tyngre.",
+      "too_hard": "Din återkoppling ({{n}}) säger: ganska tungt. Förslag: lite lättare.",
+      "pain": "Du har rapporterat smärta. Ökningar är spärrade; förslag: lite lättare. Kontakta läkare vid ihållande besvär."
+    },
+    "useSuggestion": "Visa förslag ({{pct}} %)",
+    "manual": "Egen önskan",
+    "manualNote": "Procenten är en önskan, ingen multiplikator: ±10 ändrar ansträngningen (RPE ±1), ±20 ett set, ±30 två set – alltid inom regelgränserna och bara för kommande pass.",
+    "preview": "{{n}} ändringar; {{limit}} poster står kvar eftersom de är vid regelgränsen.",
+    "none": "Ingen ändring möjlig: alla {{n}} poster är redan vid sin regelgräns.",
+    "blocked": "Att öka är spärrat eftersom smärta rapporterats de senaste 14 dagarna.",
+    "more": "… och {{n}} till",
+    "withinRules": "Alla ändringar ligger inom metodregelns gränser. Lättare veckor och gjorda pass ändras inte.",
+    "accept": "Godkänn",
+    "reject": "Avböj",
+    "history": "Versioner",
+    "historyRow": "Version {{from}} → {{to}}: {{pct}} %, {{n}} ändringar ({{date}})",
+    "revert": "Ångra senaste justering",
+    "field": {
+      "rpe": "Ansträngning",
+      "sets": "Set",
+      "reps": "Repetitioner",
+      "durationMin": "Tid (min)"
+    },
+    "weekShort": "V{{n}}",
+    "sessionsOfWeek": "Pass vecka {{n}}"
   }
 }

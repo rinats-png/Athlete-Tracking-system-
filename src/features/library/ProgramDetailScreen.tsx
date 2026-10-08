@@ -30,7 +30,8 @@ export function ProgramDetailScreen() {
   const { id } = useParams()
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { role, data, saveTrainingBlock } = useAppData()
+  const { role, data, saveTrainingBlock, trainingBlocks } = useAppData()
+  const hasActive = trainingBlocks.some((b) => b.status === 'active')
   const { index, exercises } = useLibrary()
   const weeks = usePlanWeeks(id)
   const plan = index?.plans.find((p) => p.plan_id === id) ?? null
@@ -47,7 +48,7 @@ export function ProgramDetailScreen() {
   const gate = adoptGate(plan, role)
   const tests = plan.retest.test_ids.map((tid) => index.tests.find((x) => x.test_id === tid)).filter((x): x is NonNullable<typeof x> => !!x)
   const current = weeks.find((w) => w.week === week) ?? weeks[0]
-  const canAdopt = gate === 'open' || (gate === 'confirm' && confirmed)
+  const canAdopt = !hasActive && (gate === 'open' || (gate === 'confirm' && confirmed))
 
   const adopt = () => {
     const block = materializePlan(plan, weeks, index, exercises, { id: newId(), startDay: nextMonday(startDay), now: new Date().toISOString(), disciplineId: data.profile.disciplineId ?? null })
@@ -178,6 +179,7 @@ export function ProgramDetailScreen() {
                   {t('prog.confirmCoach')}
                 </label>
               )}
+              {hasActive && <p className="text-[12px] text-ink-secondary" data-testid="prog-active">{t('lib.activeBlock')} <Link to="/plan/block" className="text-accent-text underline underline-offset-2">{t('plan.adopt.toBlock')}</Link></p>}
               <button type="button" disabled={!canAdopt} onClick={adopt} data-testid="prog-adopt-button" className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink disabled:opacity-50">{t('prog.adoptButton')}</button>
             </>
           )}

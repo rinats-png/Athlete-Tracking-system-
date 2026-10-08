@@ -67,6 +67,8 @@ export function SessionPlayerScreen() {
   const [rpe, setRpe] = useState<number | null>(null)
   const [minutes, setMinutes] = useState<number | null>(null)
   const [hr, setHr] = useState<HrSummary | null>(null)
+  const [feedback, setFeedback] = useState<number | null>(null)
+  const [pain, setPain] = useState(false)
 
   useEffect(() => {
     setStep(0)
@@ -123,9 +125,9 @@ export function SessionPlayerScreen() {
 
   const done = () => {
     if (rpe == null) return
-    completePlannedSession({ blockId: block.id, sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, kind: diaryKindOf(session.primaryIntent), hr: hr ? { avg: hr.avg, max: hr.max } : null })
+    completePlannedSession({ blockId: block.id, sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, kind: diaryKindOf(session.primaryIntent), hr: hr ? { avg: hr.avg, max: hr.max } : null, feedback, pain })
     // Zugewiesener Block: Fortschritt nachmelden (best effort, ohne Netz geht es später).
-    if (block.assignmentId) void syncAssignedCompletions({ ...block, completions: [...block.completions, { sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, diarySessionId: null, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback: null, pain: false }] })
+    if (block.assignmentId) void syncAssignedCompletions({ ...block, completions: [...block.completions, { sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, diarySessionId: null, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback, pain }] })
     navigate('/plan/block')
   }
 
@@ -185,6 +187,21 @@ export function SessionPlayerScreen() {
               ))}
             </div>
           </div>
+          <div role="radiogroup" aria-label={t('adapt.feedbackQ')} data-testid="player-feedback">
+            <span className="label-tag">{t('adapt.feedbackQ')}</span>
+            <div className="mt-1.5 grid grid-cols-5 gap-2">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button key={n} type="button" role="radio" aria-checked={feedback === n} data-testid={`player-feedback-${n}`} onClick={() => setFeedback(feedback === n ? null : n)} className={cn('flex min-h-11 flex-col items-center justify-center rounded-md border px-1 text-[11px] leading-tight', feedback === n ? 'border-accent bg-accent text-accent-ink' : 'border-line')}>
+                  <span className="text-[15px]">{n}</span>
+                  <span>{t(`adapt.fb.${n}`)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <label className="flex min-h-11 items-center gap-3 text-[14px]">
+            <input type="checkbox" checked={pain} onChange={(e) => setPain(e.target.checked)} data-testid="player-pain" className="size-5" />
+            {t('adapt.pain')}
+          </label>
           <button type="button" data-testid="player-done" disabled={rpe == null} onClick={done} className="min-h-11 rounded-pill bg-accent px-6 text-[13px] font-semibold text-accent-ink disabled:opacity-45">
             {t('player.save')}
           </button>

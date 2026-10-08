@@ -3843,5 +3843,47 @@
       "RUN_10K": "10 km running",
       "RUN_5K": "5 km running"
     }
+  },
+  "adapt": {
+    "title": "Adjust training",
+    "version": "Plan version {{n}}",
+    "feedbackQ": "How hard was it?",
+    "fb": {
+      "1": "far too easy",
+      "2": "rather easy",
+      "3": "about right",
+      "4": "rather hard",
+      "5": "far too hard"
+    },
+    "pain": "Pain during the session (nothing will be increased)",
+    "review": {
+      "too_early": "A suggestion based on your feedback comes no earlier than 3 days after the start.",
+      "too_few": "Not enough feedback yet ({{n}} of at least 2 in the last 14 days).",
+      "fits": "Your feedback ({{n}}) says: about right. No suggestion needed.",
+      "too_easy": "Your feedback ({{n}}) says: rather easy. Suggestion: a little harder.",
+      "too_hard": "Your feedback ({{n}}) says: rather hard. Suggestion: a little easier.",
+      "pain": "You reported pain. Increases are locked; suggestion: a little easier. If complaints persist, see a doctor."
+    },
+    "useSuggestion": "View suggestion ({{pct}} %)",
+    "manual": "Your own wish",
+    "manualNote": "The percentage is a wish, not a multiplier: ±10 changes effort (RPE ±1), ±20 one set, ±30 two sets – always within the rule limits and only for upcoming sessions.",
+    "preview": "{{n}} changes; {{limit}} items stay because they are at the rule limit.",
+    "none": "No change possible: all {{n}} affected items are already at their rule limit.",
+    "blocked": "Increasing is locked because pain was reported in the last 14 days.",
+    "more": "… and {{n}} more",
+    "withinRules": "All changes stay within the limits of the respective method rule. Lighter weeks and completed sessions stay unchanged.",
+    "accept": "Accept",
+    "reject": "Decline",
+    "history": "Versions",
+    "historyRow": "Version {{from}} → {{to}}: {{pct}} %, {{n}} changes ({{date}})",
+    "revert": "Undo last adjustment",
+    "field": {
+      "rpe": "Effort",
+      "sets": "Sets",
+      "reps": "Reps",
+      "durationMin": "Duration (min)"
+    },
+    "weekShort": "W{{n}}",
+    "sessionsOfWeek": "Sessions in week {{n}}"
   }
 }

@@ -3843,5 +3843,47 @@
       "RUN_10K": "Course 10 km",
       "RUN_5K": "Course 5 km"
     }
+  },
+  "adapt": {
+    "title": "Ajuster l'entraînement",
+    "version": "Version du plan {{n}}",
+    "feedbackQ": "Comment était la charge ?",
+    "fb": {
+      "1": "bien trop facile",
+      "2": "plutôt facile",
+      "3": "adapté",
+      "4": "plutôt dur",
+      "5": "bien trop dur"
+    },
+    "pain": "Douleur pendant la séance (rien ne sera augmenté)",
+    "review": {
+      "too_early": "Une proposition basée sur tes retours arrive au plus tôt 3 jours après le début.",
+      "too_few": "Pas encore assez de retours ({{n}} sur au moins 2 ces 14 derniers jours).",
+      "fits": "Tes retours ({{n}}) disent : adapté. Pas de proposition nécessaire.",
+      "too_easy": "Tes retours ({{n}}) disent : plutôt facile. Proposition : un peu plus dur.",
+      "too_hard": "Tes retours ({{n}}) disent : plutôt dur. Proposition : un peu plus facile.",
+      "pain": "Tu as signalé une douleur. Les augmentations sont bloquées ; proposition : un peu plus facile. Si la gêne persiste, consulte un médecin."
+    },
+    "useSuggestion": "Voir la proposition ({{pct}} %)",
+    "manual": "Ton souhait",
+    "manualNote": "Le pourcentage est un souhait, pas un multiplicateur : ±10 change l'effort (RPE ±1), ±20 une série, ±30 deux séries – toujours dans les limites des règles et seulement pour les séances à venir.",
+    "preview": "{{n}} modifications ; {{limit}} éléments restent, car ils sont à la limite.",
+    "none": "Aucune modification possible : les {{n}} éléments sont déjà à la limite de leur règle.",
+    "blocked": "L'augmentation est bloquée, car une douleur a été signalée ces 14 derniers jours.",
+    "more": "… et {{n}} de plus",
+    "withinRules": "Toutes les modifications restent dans les limites de la règle. Les semaines allégées et séances faites ne changent pas.",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "history": "Versions",
+    "historyRow": "Version {{from}} → {{to}} : {{pct}} %, {{n}} modifications ({{date}})",
+    "revert": "Annuler le dernier ajustement",
+    "field": {
+      "rpe": "Effort",
+      "sets": "Séries",
+      "reps": "Répétitions",
+      "durationMin": "Durée (min)"
+    },
+    "weekShort": "S{{n}}",
+    "sessionsOfWeek": "Séances de la semaine {{n}}"
   }
 }

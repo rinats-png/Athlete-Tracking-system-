@@ -3843,5 +3843,47 @@
       "RUN_10K": "Løping 10 km",
       "RUN_5K": "Løping 5 km"
     }
+  },
+  "adapt": {
+    "title": "Juster treningen",
+    "version": "Planversjon {{n}}",
+    "feedbackQ": "Hvor tungt var det?",
+    "fb": {
+      "1": "altfor lett",
+      "2": "nokså lett",
+      "3": "passe",
+      "4": "nokså tungt",
+      "5": "altfor tungt"
+    },
+    "pain": "Smerter under økten (da økes ingenting)",
+    "review": {
+      "too_early": "Et forslag ut fra tilbakemeldingene dine kommer tidligst 3 dager etter start.",
+      "too_few": "For få tilbakemeldinger ennå ({{n}} av minst 2 de siste 14 dagene).",
+      "fits": "Tilbakemeldingene dine ({{n}}) sier: passe. Ikke behov for forslag.",
+      "too_easy": "Tilbakemeldingene dine ({{n}}) sier: nokså lett. Forslag: litt tyngre.",
+      "too_hard": "Tilbakemeldingene dine ({{n}}) sier: nokså tungt. Forslag: litt lettere.",
+      "pain": "Du har meldt smerter. Økninger er sperret; forslag: litt lettere. Ved vedvarende plager, kontakt lege."
+    },
+    "useSuggestion": "Se forslag ({{pct}} %)",
+    "manual": "Eget ønske",
+    "manualNote": "Prosenten er et ønske, ikke en multiplikator: ±10 endrer anstrengelsen (RPE ±1), ±20 ett sett, ±30 to sett – alltid innenfor regelgrensene og bare for kommende økter.",
+    "preview": "{{n}} endringer; {{limit}} poster står fordi de er ved regelgrensen.",
+    "none": "Ingen endring mulig: alle {{n}} poster er allerede ved regelgrensen.",
+    "blocked": "Økning er sperret fordi det er meldt smerter de siste 14 dagene.",
+    "more": "… og {{n}} til",
+    "withinRules": "Alle endringer ligger innenfor metoderegelens grenser. Lettere uker og gjennomførte økter endres ikke.",
+    "accept": "Godta",
+    "reject": "Avslå",
+    "history": "Versjoner",
+    "historyRow": "Versjon {{from}} → {{to}}: {{pct}} %, {{n}} endringer ({{date}})",
+    "revert": "Angre siste justering",
+    "field": {
+      "rpe": "Anstrengelse",
+      "sets": "Sett",
+      "reps": "Repetisjoner",
+      "durationMin": "Varighet (min)"
+    },
+    "weekShort": "U{{n}}",
+    "sessionsOfWeek": "Økter uke {{n}}"
   }
 }
