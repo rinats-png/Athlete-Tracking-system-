@@ -3171,8 +3171,10 @@
     "competitionUnnamed": "your competition",
     "empty": {
       "title": "No active block yet",
-      "body": "Choose a way to a plan. The plan is a suggestion from evidence-based rules; the coach changes and decides.",
-      "cta": "Choose plan"
+      "body": "Start with a ready-made plan — or build your own.",
+      "cta": "Choose plan",
+      "ready": "Choose a ready-made plan",
+      "otherWays": "Own plan or computed"
     },
     "block": "CURRENT BLOCK",
     "weekOf": "Week {{week}} of {{weeks}} · {{phase}} phase",
@@ -3207,7 +3209,7 @@
   },
   "planWay": {
     "title": "Choose plan",
-    "intro": "Three ways to a plan. Every session shows where it comes from.",
+    "intro": "Ready-made, your own, or computed.",
     "template": {
       "title": "Use a ready-made plan",
       "sub": "Programs from evidence-based rules"
@@ -3224,14 +3226,14 @@
     "soon": "Coming",
     "note": "A language model does not create plans. At most it phrases explanations.",
     "library": {
-      "title": "From the programme library",
-      "sub": "16 ready-made plans, week by week"
+      "title": "Choose a ready-made plan",
+      "sub": "All plans and templates — those for your sport first"
     }
   },
   "tpl": {
     "libraryTitle": "Plan library",
     "libraryIntro": "Templates for your sport. The dose comes from sourced rules; where there is none, the session stays open.",
-    "libraryIntroAll": "Templates for all sports. Pick a sport in your profile to see only its templates.",
+    "libraryIntroAll": "All templates; those for your sport come first.",
     "goalLabel": "Goal",
     "goal": {
       "all": "All",
@@ -3774,7 +3776,8 @@
       "RUN": "Running",
       "RUN_SHORT": "Short-distance running",
       "ALL": "All sports"
-    }
+    },
+    "unreviewedShort": "Draft · not yet expert-reviewed"
   },
   "fuelPlan": {
     "title": "Planned today",
@@ -3818,7 +3821,7 @@
   },
   "prog": {
     "link": "Programme library",
-    "title": "Programme library",
+    "title": "Ready-made plans",
     "intro": "Ready-made plans, week by week. Every dose sits under a method rule with limits; what you adopt you can adjust later.",
     "goal": "Goal",
     "level": "Level",
@@ -3869,7 +3872,7 @@
     "start": "Start",
     "startNote": "Week 1 starts on Monday, {{day}}.",
     "confirmCoach": "I understand: a coach is recommended for this plan because it contains technically demanding exercises.",
-    "adoptButton": "Adopt",
+    "adoptButton": "Start plan",
     "coachOnly": "This plan contains methods that need a coach (e.g. drop sets, priming). A coach can adopt it and assign it to you.",
     "cat": {
       "FOUNDATION": "Foundation",
@@ -3890,7 +3893,13 @@
       "RUN_5K": "5 km running"
     },
     "typicalError": "Typical error (literature): {{value}}.",
-    "typicalErrorNote": "Order of magnitude only; the app judges with your own measurement error."
+    "typicalErrorNote": "Order of magnitude only; the app judges with your own measurement error.",
+    "metaShort": "{{weeks}} weeks · {{days}}× a week",
+    "ownTemplates": "My saved templates",
+    "background": "Background: structure, rules, sources",
+    "replaceButton": "Start this plan instead",
+    "replaceConfirm": "Yes, switch",
+    "replaceNote": "Your current plan ends and stays available to view."
   },
   "adapt": {
     "title": "Adjust training",
@@ -3959,5 +3968,11 @@
     },
     "tick": "Set {{n}} done",
     "add": "Add set"
+  },
+  "fit": {
+    "match": "Fits {{sport}}",
+    "supports": "Supports {{sport}}",
+    "other": "Different focus",
+    "filter": "For {{sport}}"
   }
 }

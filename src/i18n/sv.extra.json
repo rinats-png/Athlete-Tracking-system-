@@ -3171,8 +3171,10 @@
     "competitionUnnamed": "din tävling",
     "empty": {
       "title": "Inget aktivt block ännu",
-      "body": "Välj en väg till en plan. Planen är ett förslag från belagda regler; tränaren ändrar och bestämmer.",
-      "cta": "Välj plan"
+      "body": "Börja med en färdig plan — eller bygg din egen.",
+      "cta": "Välj plan",
+      "ready": "Välj färdig plan",
+      "otherWays": "Egen plan eller beräknad"
     },
     "block": "AKTUELLT BLOCK",
     "weekOf": "Vecka {{week}} av {{weeks}} · fas {{phase}}",
@@ -3207,7 +3209,7 @@
   },
   "planWay": {
     "title": "Välj plan",
-    "intro": "Tre vägar till en plan. Varje pass visar varifrån det kommer.",
+    "intro": "Färdig, egen eller beräknad.",
     "template": {
       "title": "Använd en färdig plan",
       "sub": "Program från belagda regler"
@@ -3224,14 +3226,14 @@
     "soon": "Kommer",
     "note": "En språkmodell skapar inga planer. Den formulerar högst förklaringar.",
     "library": {
-      "title": "Från programbiblioteket",
-      "sub": "16 färdiga planer, vecka för vecka"
+      "title": "Välj färdig plan",
+      "sub": "Alla planer och mallar — de för din idrott först"
     }
   },
   "tpl": {
     "libraryTitle": "Planbibliotek",
     "libraryIntro": "Mallar för din idrott. Dosen kommer från belagda regler; saknas de förblir passet öppet.",
-    "libraryIntroAll": "Mallar för alla idrotter. Välj en idrott i din profil för att bara se dess mallar.",
+    "libraryIntroAll": "Alla mallar; de för din idrott står först.",
     "goalLabel": "Mål",
     "goal": {
       "all": "Alla",
@@ -3774,7 +3776,8 @@
       "RUN": "Löpning",
       "RUN_SHORT": "Kort löpning",
       "ALL": "Alla idrotter"
-    }
+    },
+    "unreviewedShort": "Utkast · ännu inte fackgranskat"
   },
   "fuelPlan": {
     "title": "Planerat idag",
@@ -3818,7 +3821,7 @@
   },
   "prog": {
     "link": "Programbibliotek",
-    "title": "Programbibliotek",
+    "title": "Färdiga planer",
     "intro": "Färdiga planer vecka för vecka. Varje dos ligger under en metodregel med gränser; det du tar över kan du justera senare.",
     "goal": "Mål",
     "level": "Nivå",
@@ -3869,7 +3872,7 @@
     "start": "Start",
     "startNote": "Vecka 1 börjar måndag {{day}}.",
     "confirmCoach": "Jag förstår: en tränare rekommenderas för planen eftersom den innehåller tekniskt krävande övningar.",
-    "adoptButton": "Ta över",
+    "adoptButton": "Starta planen",
     "coachOnly": "Planen innehåller metoder som kräver tränare (t.ex. dropset, priming). En tränare kan ta över den och tilldela dig den.",
     "cat": {
       "FOUNDATION": "Grund",
@@ -3890,7 +3893,13 @@
       "RUN_5K": "Löpning 5 km"
     },
     "typicalError": "Typiskt mätfel (litteratur): {{value}}.",
-    "typicalErrorNote": "Bara storleksordning; appen bedömer med ditt eget mätfel."
+    "typicalErrorNote": "Bara storleksordning; appen bedömer med ditt eget mätfel.",
+    "metaShort": "{{weeks}} veckor · {{days}}× i veckan",
+    "ownTemplates": "Mina sparade mallar",
+    "background": "Bakgrund: upplägg, regler, källor",
+    "replaceButton": "Starta den här planen i stället",
+    "replaceConfirm": "Ja, byt",
+    "replaceNote": "Din pågående plan avslutas och finns kvar att titta på."
   },
   "adapt": {
     "title": "Justera träningen",
@@ -3959,5 +3968,11 @@
     },
     "tick": "Set {{n}} klart",
     "add": "Lägg till set"
+  },
+  "fit": {
+    "match": "Passar {{sport}}",
+    "supports": "Stödjer {{sport}}",
+    "other": "Annat fokus",
+    "filter": "För {{sport}}"
   }
 }

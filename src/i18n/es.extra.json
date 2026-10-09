@@ -3171,8 +3171,10 @@
     "competitionUnnamed": "tu competición",
     "empty": {
       "title": "Todavía no hay un bloque activo",
-      "body": "Elige un camino hacia un plan. El plan es una propuesta a partir de reglas respaldadas; el entrenador cambia y decide.",
-      "cta": "Elegir plan"
+      "body": "Empieza con un plan listo, o crea el tuyo.",
+      "cta": "Elegir plan",
+      "ready": "Elegir un plan listo",
+      "otherWays": "Plan propio o calculado"
     },
     "block": "BLOQUE ACTUAL",
     "weekOf": "Semana {{week}} de {{weeks}} · fase {{phase}}",
@@ -3207,7 +3209,7 @@
   },
   "planWay": {
     "title": "Elegir plan",
-    "intro": "Tres caminos hacia un plan. Cada sesión muestra de dónde viene.",
+    "intro": "Plan listo, propio o calculado.",
     "template": {
       "title": "Usar un plan preparado",
       "sub": "Programas a partir de reglas respaldadas"
@@ -3224,14 +3226,14 @@
     "soon": "Próximamente",
     "note": "Un modelo de lenguaje no crea planes. A lo sumo formula explicaciones.",
     "library": {
-      "title": "Desde la biblioteca",
-      "sub": "16 planes completos, semana a semana"
+      "title": "Elegir un plan listo",
+      "sub": "Todos los planes y plantillas: primero los de tu deporte"
     }
   },
   "tpl": {
     "libraryTitle": "Biblioteca de planes",
     "libraryIntro": "Plantillas para tu deporte. La dosis viene de reglas documentadas; si no hay, la sesión queda abierta.",
-    "libraryIntroAll": "Plantillas para todos los deportes. Elige un deporte en tu perfil para ver solo las suyas.",
+    "libraryIntroAll": "Todas las plantillas; las de tu deporte primero.",
     "goalLabel": "Objetivo",
     "goal": {
       "all": "Todos",
@@ -3774,7 +3776,8 @@
       "RUN": "Carrera",
       "RUN_SHORT": "Carrera corta",
       "ALL": "Todos los deportes"
-    }
+    },
+    "unreviewedShort": "Borrador · aún sin revisión experta"
   },
   "fuelPlan": {
     "title": "Previsto para hoy",
@@ -3818,7 +3821,7 @@
   },
   "prog": {
     "link": "Biblioteca de programas",
-    "title": "Biblioteca de programas",
+    "title": "Planes listos",
     "intro": "Planes completos, semana a semana. Cada dosis está bajo una regla de método con límites; lo que adoptes podrás ajustarlo después.",
     "goal": "Objetivo",
     "level": "Nivel",
@@ -3869,7 +3872,7 @@
     "start": "Inicio",
     "startNote": "La semana 1 empieza el lunes {{day}}.",
     "confirmCoach": "Entiendo: se recomienda un entrenador para este plan porque contiene ejercicios técnicamente exigentes.",
-    "adoptButton": "Adoptar",
+    "adoptButton": "Empezar plan",
     "coachOnly": "Este plan contiene métodos que requieren entrenador (p. ej., drop sets, priming). Un entrenador puede adoptarlo y asignártelo.",
     "cat": {
       "FOUNDATION": "Base",
@@ -3890,7 +3893,13 @@
       "RUN_5K": "Carrera 5 km"
     },
     "typicalError": "Error típico (literatura): {{value}}.",
-    "typicalErrorNote": "Solo orden de magnitud; la app juzga con tu propio error de medida."
+    "typicalErrorNote": "Solo orden de magnitud; la app juzga con tu propio error de medida.",
+    "metaShort": "{{weeks}} semanas · {{days}}× por semana",
+    "ownTemplates": "Mis plantillas guardadas",
+    "background": "Contexto: estructura, reglas, fuentes",
+    "replaceButton": "Empezar este plan en su lugar",
+    "replaceConfirm": "Sí, cambiar",
+    "replaceNote": "Tu plan actual termina y sigue disponible para consultarlo."
   },
   "adapt": {
     "title": "Ajustar entrenamiento",
@@ -3959,5 +3968,11 @@
     },
     "tick": "Serie {{n}} hecha",
     "add": "Añadir serie"
+  },
+  "fit": {
+    "match": "Encaja con {{sport}}",
+    "supports": "Apoya {{sport}}",
+    "other": "Otro enfoque",
+    "filter": "Para {{sport}}"
   }
 }

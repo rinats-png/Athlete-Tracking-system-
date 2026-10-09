@@ -3171,8 +3171,10 @@
     "competitionUnnamed": "je wedstrijd",
     "empty": {
       "title": "Nog geen actief blok",
-      "body": "Kies een weg naar een plan. Het plan is een voorstel uit onderbouwde regels; de trainer past aan en beslist.",
-      "cta": "Plan kiezen"
+      "body": "Begin met een kant-en-klaar plan — of maak je eigen.",
+      "cta": "Plan kiezen",
+      "ready": "Kant-en-klaar plan kiezen",
+      "otherWays": "Eigen plan of berekend"
     },
     "block": "HUIDIG BLOK",
     "weekOf": "Week {{week}} van {{weeks}} · fase {{phase}}",
@@ -3207,7 +3209,7 @@
   },
   "planWay": {
     "title": "Plan kiezen",
-    "intro": "Drie wegen naar een plan. Elke training toont waar ze vandaan komt.",
+    "intro": "Kant-en-klaar, eigen of berekend.",
     "template": {
       "title": "Kant-en-klaar plan gebruiken",
       "sub": "Programma's uit onderbouwde regels"
@@ -3224,14 +3226,14 @@
     "soon": "Volgt",
     "note": "Een taalmodel maakt geen plannen. Het formuleert hooguit uitleg.",
     "library": {
-      "title": "Uit de programmabibliotheek",
-      "sub": "16 kant-en-klare plannen, week voor week"
+      "title": "Kant-en-klaar plan kiezen",
+      "sub": "Alle plannen en sjablonen — die voor jouw sport eerst"
     }
   },
   "tpl": {
     "libraryTitle": "Planbibliotheek",
     "libraryIntro": "Sjablonen voor jouw sport. De dosis komt uit onderbouwde regels; waar die ontbreken, blijft de training open.",
-    "libraryIntroAll": "Sjablonen voor alle sporten. Kies een sport in je profiel om alleen die te zien.",
+    "libraryIntroAll": "Alle sjablonen; die voor jouw sport staan bovenaan.",
     "goalLabel": "Doel",
     "goal": {
       "all": "Alle",
@@ -3774,7 +3776,8 @@
       "RUN": "Hardlopen",
       "RUN_SHORT": "Korte afstand",
       "ALL": "Alle sporten"
-    }
+    },
+    "unreviewedShort": "Concept · nog niet vakinhoudelijk gecontroleerd"
   },
   "fuelPlan": {
     "title": "Vandaag gepland",
@@ -3818,7 +3821,7 @@
   },
   "prog": {
     "link": "Programmabibliotheek",
-    "title": "Programmabibliotheek",
+    "title": "Kant-en-klare plannen",
     "intro": "Kant-en-klare plannen, week voor week. Elke dosis valt onder een methoderegel met grenzen; wat je overneemt, kun je later aanpassen.",
     "goal": "Doel",
     "level": "Niveau",
@@ -3869,7 +3872,7 @@
     "start": "Start",
     "startNote": "Week 1 begint op maandag {{day}}.",
     "confirmCoach": "Ik begrijp het: voor dit plan wordt een trainer aanbevolen, omdat het technisch veeleisende oefeningen bevat.",
-    "adoptButton": "Overnemen",
+    "adoptButton": "Plan starten",
     "coachOnly": "Dit plan bevat methoden die een trainer vragen (bijv. dropsets, priming). Een trainer kan het overnemen en aan jou toewijzen.",
     "cat": {
       "FOUNDATION": "Basis",
@@ -3890,7 +3893,13 @@
       "RUN_5K": "5 km hardlopen"
     },
     "typicalError": "Typische meetfout (literatuur): {{value}}.",
-    "typicalErrorNote": "Alleen een ordegrootte; de app oordeelt met je eigen meetfout."
+    "typicalErrorNote": "Alleen een ordegrootte; de app oordeelt met je eigen meetfout.",
+    "metaShort": "{{weeks}} weken · {{days}}× per week",
+    "ownTemplates": "Mijn opgeslagen sjablonen",
+    "background": "Achtergrond: opbouw, regels, bronnen",
+    "replaceButton": "Dit plan in plaats daarvan starten",
+    "replaceConfirm": "Ja, wisselen",
+    "replaceNote": "Je huidige plan stopt en blijft zichtbaar."
   },
   "adapt": {
     "title": "Training aanpassen",
@@ -3959,5 +3968,11 @@
     },
     "tick": "Set {{n}} gedaan",
     "add": "Set toevoegen"
+  },
+  "fit": {
+    "match": "Past bij {{sport}}",
+    "supports": "Ondersteunt {{sport}}",
+    "other": "Ander accent",
+    "filter": "Voor {{sport}}"
   }
 }

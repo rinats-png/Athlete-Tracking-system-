@@ -35,7 +35,7 @@ danach im Service-Worker-Cache: offline nutzbar.
 | Sprachen | Oberfläche in 8 Sprachen; Inhalte (Übungs-, Plan-, Regeltexte) vorerst Deutsch mit sichtbarem Hinweis — bewusste Ausnahme von Regel 10 bis zur fachlichen Freigabe |
 | Sichtbarkeit | Produktion bleibt im Vorschaumodus; jeder Plan trägt sichtbar «fachlich ungeprüft – Testphase» |
 | Übungskatalog | zusammengeführt: Datenbank ist Hauptkatalog, alte Kennungen bleiben gültig, Varianten ohne Gegenstück bleiben als «Weitere» |
-| Übernehmen | Athlet: AUTO-Pläne direkt, «Coach empfohlen» mit Bestätigung; COACH_SENSITIVE/TEMPLATE/ONLY nur über Trainer. Bei aktivem Block gesperrt (wie bisher) |
+| Übernehmen | Jeder Plan ist frei wählbar, für Athleten wie Trainer (Entscheidung 9. Oktober 2026; vorher Sperre «nur über Trainer» nach Autonomie des Seeds). Klein am Plan: «Passt zu …» (Seed-Zuordnung Sportart → Ziel), «Unterstützt …» (Plan trainiert eine Fähigkeit, die das Sportprofil ≥ 0,7 gewichtet), «Anderer Schwerpunkt». Läuft ein Block, beendet ein zweiter Tipp ihn und startet den neuen |
 | Neue Tests | 5RM/3RM/10RM, Halb-HYROX, GPP-Zirkel, HF-Rückgang 60 s, Opener-Simulation — ohne Referenzwerte, ohne Bewertung bis Messfehler belegt |
 | Neue Sportarten | Muay Thai, 800 m, 1500 m; Kerntests aus dem Gesamtmaster v3 Kap. 8.1–8.3 als Produktkonzept; Gewichte Produktannahme |
 

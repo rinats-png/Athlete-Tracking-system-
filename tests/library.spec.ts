@@ -107,14 +107,20 @@ test.describe('Programmbibliothek', () => {
     for (const t of index.tests) expect(getTest(SEED_TEST_TO_SLUG[t.test_id]), t.test_id).toBeTruthy()
   })
 
-  test('Übernahme: Athlet nur AUTO-Pläne, «Coach empfohlen» mit Bestätigung, Coach-Pläne nur über Trainer', async () => {
-    const { adoptGate } = await import('../src/domain/library')
-    const byId = (id: string) => index.plans.find((p) => p.plan_id === id)!
-    expect(adoptGate(byId('PLN_RUN5K_BASE_8W'), 'solo')).toBe('open')
-    expect(adoptGate(byId('PLN_HYP_PPL_12W'), 'solo')).toBe('coach_only')
-    expect(adoptGate(byId('PLN_HYP_PPL_12W'), 'coach')).toBe('open')
-    const recommended = index.plans.find((p) => p.autonomy === 'AUTO_WITH_RULES' && p.coach_gate === 'COACH_RECOMMENDED')
-    if (recommended) expect(adoptGate(recommended, 'solo')).toBe('confirm')
+  test('jeder Plan frei wählbar; «passt zu deiner Sportart» aus Seed-Zuordnung und Sportprofil', async () => {
+    const lib = await import('../src/domain/library')
+    expect('adoptGate' in lib).toBe(false)
+    const { planFit, GOALS_OF_DISCIPLINE, DIMS_OF_GOAL } = lib
+    const { disciplineById } = await import('../src/data/sportProfiles')
+    // Jedes Ziel des Seeds hat Fähigkeiten, jede zugeordnete Sportart gibt es im Katalog.
+    for (const p of index.plans) expect(DIMS_OF_GOAL[p.goal], p.goal).toBeTruthy()
+    for (const id of Object.keys(GOALS_OF_DISCIPLINE)) expect(disciplineById(id), id).toBeTruthy()
+    const judo = disciplineById('judo')!
+    expect(planFit('COMBAT_SPORT_GRAPPLING', judo)).toBe('match')
+    expect(planFit('GENERAL_STRENGTH', judo)).toBe('supports')
+    expect(planFit('RUN_10K', judo)).toBe('other')
+    expect(planFit('RUN_5K', disciplineById('run_800m'))).toBe('match')
+    expect(planFit('HYROX', null)).toBeNull()
   })
 })
 
@@ -194,28 +200,34 @@ test.describe('Programmbibliothek: Übernehmen', () => {
     expect(nextMonday('2026-10-11')).toBe('2026-10-12')
   })
 
-  test('Bildschirm: Ziel filtern, Plan öffnen, Woche wechseln, Regeln mit DOI, übernehmen → Block mit Bibliothekseinheiten', async ({ page }) => {
+  test('Bildschirm: alle Pläne und Vorlagen, Passendes oben, Ziel filtern, jeder Plan startbar, Hintergrund aufklappbar', async ({ page }) => {
     const { openDemo } = await import('./helpers')
+    const { PLAN_TEMPLATES } = await import('../src/data/planTemplates')
     await openDemo(page)
-    await page.goto('/plan/waehlen', { waitUntil: 'domcontentloaded' })
-    await page.getByTestId('way-library').click()
+    await page.goto('/plan/programme', { waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('program-library')).toBeVisible()
     await expect(page.getByTestId('lib-unreviewed')).toBeVisible()
-    await expect(page.getByTestId('prog-count')).toContainText('16')
+    await expect(page.getByTestId('prog-count')).toContainText(String(16 + PLAN_TEMPLATES.length))
+    // Demo-Athlet: Judo → der Grappling-Plan steht oben und «passt».
+    const first = page.locator('[data-testid^="prog-fit-"]').first()
+    await expect(first).toHaveAttribute('data-fit', 'match')
+    await expect(page.getByTestId('prog-fit-PLN_COMBAT_GRAPPLING_BASE_8W')).toContainText('Passt zu Judo')
+    await expect(page.getByTestId('prog-fit-PLN_RUN10K_BASE_10W')).toContainText('Anderer Schwerpunkt')
     await page.getByTestId('prog-goal-RUN_5K').click()
     await expect(page.getByTestId('prog-count')).toContainText('2')
-    // Coach-Pläne sind für Athleten als «Nur über Trainer» markiert.
-    await page.getByTestId('prog-goal-all').click()
-    await expect(page.getByTestId('prog-gate-PLN_HYP_PPL_12W')).toBeVisible()
-    await page.getByTestId('prog-PLN_HYP_PPL_12W').click()
-    await expect(page.getByTestId('prog-coach-only')).toBeVisible()
-    await expect(page.getByTestId('prog-adopt-button')).toHaveCount(0)
+    // Früher «nur über Trainer» — jetzt frei startbar.
+    await page.goto('/plan/programme/PLN_HYP_PPL_12W', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('prog-adopt-button')).toBeEnabled()
     await page.goto('/plan/programme/PLN_RUN5K_BASE_8W', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByTestId('prog-rules')).toBeHidden()
+    await page.getByTestId('prog-background').locator('summary').click()
     await expect(page.getByTestId('prog-rules').locator('a[href^="https://doi.org/10."]').first()).toBeVisible()
     await page.getByTestId('prog-week-4').click()
     await expect(page.getByTestId('prog-reduced')).toBeVisible()
     await expect(page.getByTestId('prog-retest')).toContainText('5-km')
+    // Der Demo-Athlet hat einen laufenden Block: erst nachfragen, dann wechseln.
     await page.getByTestId('prog-adopt-button').click()
+    if (await page.getByTestId('prog-replace-note').count()) await page.getByTestId('prog-adopt-button').click()
     await expect(page).toHaveURL(/\/plan\/block$/)
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks.find((b: any) => b.libraryPlanId === 'PLN_RUN5K_BASE_8W'))
     expect(stored.sessions).toHaveLength(24)

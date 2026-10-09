@@ -143,12 +143,14 @@ test.describe('Vorlagen: Bildschirme', () => {
     })
   }
 
-  test('Bibliothek zeigt die Vorlagen der Sportart, alle ungeprüft, Filter nach Ziel', async ({ page }) => {
+  test('Bibliothek zeigt alle Vorlagen, die der Sportart zuerst mit «passt», alle ungeprüft, Filter nach Ziel', async ({ page }) => {
     await prepare(page)
     await page.goto('/plan/vorlagen', { waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('plan-library')).toBeVisible()
     await expect(page.getByTestId('tpl-card-grappling_gpp')).toBeVisible()
-    await expect(page.getByTestId('tpl-card-hyrox_prep')).toHaveCount(0)
+    await expect(page.getByTestId('tpl-card-hyrox_prep')).toBeVisible()
+    await expect(page.locator('[data-testid^="tpl-card-"]').first()).toHaveAttribute('data-testid', /grappling/)
+    await expect(page.getByTestId('tpl-fit-grappling_gpp')).toHaveAttribute('data-fit', 'match')
     await expect(page.getByTestId('tpl-card-grappling_gpp')).toContainText('Ungeprüft')
     await page.getByTestId('tpl-goal-power').click()
     await expect(page.getByTestId('tpl-card-grappling_build')).toBeVisible()
@@ -156,7 +158,8 @@ test.describe('Vorlagen: Bildschirme', () => {
     await page.getByTestId('tpl-goal-event').click()
     await expect(page.getByTestId('tpl-card-grappling_taper')).toBeVisible()
     await page.getByTestId('tpl-goal-strength').click()
-    await expect(page.getByTestId('tpl-none')).toBeVisible()
+    await expect(page.getByTestId('tpl-card-hybrid_strength')).toBeVisible()
+    await expect(page.getByTestId('tpl-fit-hybrid_strength')).toHaveAttribute('data-fit', 'supports')
   })
 
   test('Detail: Regelplätze mit Evidenz, offene Plätze als offen gekennzeichnet', async ({ page }) => {

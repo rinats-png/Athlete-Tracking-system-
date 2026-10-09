@@ -161,19 +161,67 @@ export function planReviewed(plan: PlanHead, rules: MethodRule[]): boolean {
 // Wer darf übernehmen?
 // ---------------------------------------------------------------------------
 
-export type AdoptGate = 'open' | 'confirm' | 'coach_only'
-
 /**
- * Selbst übernehmen darf ein Athlet Pläne, deren Autonomie AUTO_WITH_RULES ist;
- * bei «Coach empfohlen» erst nach ausdrücklicher Bestätigung. Pläne mit
- * COACH_SENSITIVE/COACH_TEMPLATE/COACH_ONLY übernimmt nur ein Trainer
- * (Doktrin: keine Freischaltung technisch heikler Inhalte per Selbst-Schalter).
+ * Jeder Plan ist frei wählbar — für Athleten wie für Trainer (Entscheidung
+ * vom 9. Oktober 2026). Statt einer Sperre steht an jedem Plan klein, ob er
+ * zur eigenen Sportart passt:
+ *
+ *  - `match`: der Plan ist für diese Sportart gebaut (Sportarten-Zuordnung
+ *    des Programm-Seeds, `sport_id_map`);
+ *  - `supports`: der Plan trainiert eine Fähigkeit, die das Sportprofil der
+ *    Sportart stark gewichtet (Gewicht ≥ 0,7 in `dimensionWeights`);
+ *  - `other`: anderer Schwerpunkt — wählbar, nur ohne Bezug zur Sportart.
+ *
+ * Welche Fähigkeiten ein Planziel trainiert (`DIMS_OF_GOAL`), ist eine
+ * Produktzuordnung aus dem Ziel des Plans, keine Wirksamkeitsaussage; sie
+ * gehört zum fachlichen Review.
  */
-export function adoptGate(plan: PlanHead, role: 'solo' | 'coach'): AdoptGate {
-  if (role === 'coach') return 'open'
-  if (plan.autonomy !== 'AUTO_WITH_RULES') return 'coach_only'
-  return plan.coach_gate === 'SELF_GUIDED_WITH_CUES' ? 'open' : 'confirm'
+export type PlanFit = 'match' | 'supports' | 'other'
+
+/** Sportart → Planziele des Seeds (aus `sport_id_map`, KYDON-Kennungen). */
+export const GOALS_OF_DISCIPLINE: Record<string, string[]> = {
+  hyrox: ['HYROX'],
+  functional_fitness: ['GENERAL_FITNESS', 'HYROX'],
+  general_fitness: ['GENERAL_FITNESS'],
+  run_800m: ['RUN_5K'],
+  run_5k_discipline: ['RUN_5K'],
+  run_1500m: ['RUN_10K'],
+  run_10k_discipline: ['RUN_10K'],
+  powerlifting: ['POWERLIFTING'],
+  judo: ['COMBAT_SPORT_GRAPPLING'],
+  wrestling: ['COMBAT_SPORT_GRAPPLING'],
+  bjj: ['COMBAT_SPORT_GRAPPLING'],
+  boxing: ['COMBAT_SPORT_STRIKING'],
+  kickboxing: ['COMBAT_SPORT_STRIKING'],
+  muay_thai: ['COMBAT_SPORT_STRIKING'],
+  mma: ['COMBAT_SPORT_STRIKING', 'COMBAT_SPORT_GRAPPLING'],
 }
+
+/** Planziel → Fähigkeiten, die der Plan vor allem trainiert. */
+export const DIMS_OF_GOAL: Record<string, string[]> = {
+  HYROX: ['strength_endurance', 'endurance'],
+  RUN_5K: ['endurance'],
+  RUN_10K: ['endurance'],
+  GENERAL_FITNESS: ['strength_endurance', 'endurance'],
+  POWERLIFTING: ['max_strength'],
+  GENERAL_STRENGTH: ['max_strength', 'relative_strength'],
+  HYPERTROPHY: ['max_strength'],
+  COMBAT_SPORT_GRAPPLING: ['strength_endurance', 'relative_strength', 'max_strength'],
+  COMBAT_SPORT_STRIKING: ['strength_endurance', 'endurance', 'power'],
+}
+
+/** Vorlagen der Trainingsfamilien sprechen dieselben Ziele. */
+export const GOAL_OF_FAMILY: Record<string, string> = { hybrid: 'HYROX', combat_grappling: 'COMBAT_SPORT_GRAPPLING', combat_striking: 'COMBAT_SPORT_STRIKING' }
+
+/** Passt ein Planziel zur Sportart? `null`, wenn keine Sportart gewählt ist. */
+export function planFit(goal: string, discipline: { id: string; dimensionWeights: Partial<Record<string, number>> } | null | undefined): PlanFit | null {
+  if (!discipline) return null
+  if ((GOALS_OF_DISCIPLINE[discipline.id] ?? []).includes(goal)) return 'match'
+  const strong = (DIMS_OF_GOAL[goal] ?? []).some((d) => (discipline.dimensionWeights[d] ?? 0) >= 0.7)
+  return strong ? 'supports' : 'other'
+}
+
+export const FIT_ORDER: Record<PlanFit, number> = { match: 0, supports: 1, other: 2 }
 
 // ---------------------------------------------------------------------------
 // Übungen: Filter und Ersatz

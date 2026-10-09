@@ -73,9 +73,14 @@ export function PlanHubScreen() {
           <div className="space-y-3 px-4 py-4">
             <h2 className="font-display text-[20px] font-bold">{t('planHub.empty.title')}</h2>
             <p className="text-[14px] text-ink-secondary">{t('planHub.empty.body')}</p>
-            <Link to="/plan/waehlen" data-testid="hub-choose" className="inline-flex min-h-11 items-center rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">
-              {t('planHub.empty.cta')}
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <Link to="/plan/programme" data-testid="hub-ready" className="inline-flex min-h-11 items-center rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">
+                {t('planHub.empty.ready')}
+              </Link>
+              <Link to="/plan/waehlen" data-testid="hub-choose" className="inline-flex min-h-11 items-center text-[13px] text-accent-text underline underline-offset-2">
+                {t('planHub.empty.otherWays')}
+              </Link>
+            </div>
           </div>
         </Panel>
       ) : (

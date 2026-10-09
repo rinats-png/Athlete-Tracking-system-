@@ -16,6 +16,8 @@ import { fitTemplate } from '@/domain/planFit'
 import { TRAINING_RULES } from '@/data/trainingRules'
 import { EQUIPMENT, PLAN_TEMPLATES, templateById, type Equipment, type PlanTemplate } from '@/data/planTemplates'
 import { cn } from '@/lib/utils'
+import { GOAL_OF_FAMILY, planFit } from '@/domain/library'
+import { FitTag, useMySport } from '@/features/library/bits'
 
 /**
  * Planbibliothek, Plan-Detail und «Plan anpassen» (Trainingsbereich Etappe 2).
@@ -49,10 +51,12 @@ export function PlanLibraryScreen() {
   const [goal, setGoal] = useState<(typeof GOALS)[number]>('all')
   if (planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off') return <Off />
   const family = familyOfDiscipline(data.profile.disciplineId)
-  const list = PLAN_TEMPLATES.filter((x) => (!family || x.family === family) && (goal === 'all' || x.goal === goal))
+  const { discipline, name: sport } = useMySport()
+  // Alle Vorlagen, die der eigenen Sportfamilie zuerst; jede ist frei wählbar.
+  const list = PLAN_TEMPLATES.filter((x) => goal === 'all' || x.goal === goal).sort((a, b) => Number(b.family === family) - Number(a.family === family))
   return (
     <div data-testid="plan-library">
-      <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('tpl.libraryTitle')} intro={t(family ? 'tpl.libraryIntro' : 'tpl.libraryIntroAll')} />
+      <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('tpl.libraryTitle')} intro={t('tpl.libraryIntroAll')} />
       <MyTemplates />
       <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t('tpl.goalLabel')}>
         {GOALS.map((g) => (
@@ -70,6 +74,7 @@ export function PlanLibraryScreen() {
               <Link to={`/plan/vorlagen/${x.id}`} data-testid={`tpl-card-${x.id}`} className="block rounded-lg border border-line bg-surface-raised p-4">
                 <p className="font-display text-[17px] font-bold">{t(`tpl.t.${x.id}.name`)}</p>
                 <p className="mt-1 text-[13px] text-ink-secondary">{t(`tpl.t.${x.id}.sum`)}</p>
+                <FitTag fit={planFit(GOAL_OF_FAMILY[x.family], discipline)} sport={sport} testId={`tpl-fit-${x.id}`} />
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Chip tone="accent">{t('tpl.unreviewed')}</Chip>
                   <Chip>{t('tpl.weeksTotal', { n: x.weeks })}</Chip>

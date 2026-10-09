@@ -3171,8 +3171,10 @@
     "competitionUnnamed": "din konkurrence",
     "empty": {
       "title": "Endnu ingen aktiv blok",
-      "body": "Vælg en vej til en plan. Planen er et forslag fra dokumenterede regler; træneren ændrer og beslutter.",
-      "cta": "Vælg plan"
+      "body": "Start med en færdig plan — eller byg din egen.",
+      "cta": "Vælg plan",
+      "ready": "Vælg færdig plan",
+      "otherWays": "Egen plan eller beregnet"
     },
     "block": "AKTUEL BLOK",
     "weekOf": "Uge {{week}} af {{weeks}} · fase {{phase}}",
@@ -3207,7 +3209,7 @@
   },
   "planWay": {
     "title": "Vælg plan",
-    "intro": "Tre veje til en plan. Hver session viser, hvor den kommer fra.",
+    "intro": "Færdig, egen eller beregnet.",
     "template": {
       "title": "Brug en færdig plan",
       "sub": "Programmer fra dokumenterede regler"
@@ -3224,14 +3226,14 @@
     "soon": "Kommer",
     "note": "En sprogmodel laver ikke planer. Den formulerer højst forklaringer.",
     "library": {
-      "title": "Fra programbiblioteket",
-      "sub": "16 færdige planer, uge for uge"
+      "title": "Vælg færdig plan",
+      "sub": "Alle planer og skabeloner — dem til din sport først"
     }
   },
   "tpl": {
     "libraryTitle": "Planbibliotek",
     "libraryIntro": "Skabeloner til din sport. Dosis kommer fra belagte regler; mangler de, forbliver sessionen åben.",
-    "libraryIntroAll": "Skabeloner til alle sportsgrene. Vælg en sport i din profil for kun at se dens skabeloner.",
+    "libraryIntroAll": "Alle skabeloner; dem til din sport står først.",
     "goalLabel": "Mål",
     "goal": {
       "all": "Alle",
@@ -3774,7 +3776,8 @@
       "RUN": "Løb",
       "RUN_SHORT": "Kort løb",
       "ALL": "Alle sportsgrene"
-    }
+    },
+    "unreviewedShort": "Udkast · endnu ikke fagligt gennemgået"
   },
   "fuelPlan": {
     "title": "Planlagt i dag",
@@ -3818,7 +3821,7 @@
   },
   "prog": {
     "link": "Programbibliotek",
-    "title": "Programbibliotek",
+    "title": "Færdige planer",
     "intro": "Færdige planer uge for uge. Hver dosis ligger under en metoderegel med grænser; det, du overtager, kan du justere senere.",
     "goal": "Mål",
     "level": "Niveau",
@@ -3869,7 +3872,7 @@
     "start": "Start",
     "startNote": "Uge 1 starter mandag {{day}}.",
     "confirmCoach": "Jeg forstår: en træner anbefales til denne plan, fordi den indeholder teknisk krævende øvelser.",
-    "adoptButton": "Overtag",
+    "adoptButton": "Start planen",
     "coachOnly": "Planen indeholder metoder, der kræver træner (fx dropsæt, priming). En træner kan overtage den og tildele dig den.",
     "cat": {
       "FOUNDATION": "Grundlag",
@@ -3890,7 +3893,13 @@
       "RUN_5K": "Løb 5 km"
     },
     "typicalError": "Typisk målefejl (litteratur): {{value}}.",
-    "typicalErrorNote": "Kun størrelsesorden; appen vurderer med din egen målefejl."
+    "typicalErrorNote": "Kun størrelsesorden; appen vurderer med din egen målefejl.",
+    "metaShort": "{{weeks}} uger · {{days}}× om ugen",
+    "ownTemplates": "Mine gemte skabeloner",
+    "background": "Baggrund: opbygning, regler, kilder",
+    "replaceButton": "Start denne plan i stedet",
+    "replaceConfirm": "Ja, skift",
+    "replaceNote": "Din nuværende plan afsluttes og kan stadig ses."
   },
   "adapt": {
     "title": "Justér træningen",
@@ -3959,5 +3968,11 @@
     },
     "tick": "Sæt {{n}} færdigt",
     "add": "Tilføj sæt"
+  },
+  "fit": {
+    "match": "Passer til {{sport}}",
+    "supports": "Støtter {{sport}}",
+    "other": "Andet fokus",
+    "filter": "Til {{sport}}"
   }
 }

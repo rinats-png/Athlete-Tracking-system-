@@ -8,13 +8,11 @@ import { exerciseImageUrl } from '@/data/exerciseImages'
 import { cn } from '@/lib/utils'
 
 /**
- * Weg zum Plan: drei große Karten. Heute läuft der Weg über die Berechnung
- * aus belegten Regeln; Vorlagen und eigener Plan folgen in den nächsten
- * Etappen und stehen bis dahin sichtbar als «folgt» da, ohne Verweis ins Leere.
+ * Weg zum Plan: fertiger Plan (alle Pläne und Vorlagen an einem Ort), eigener
+ * Plan oder berechnet aus belegten Regeln.
  */
 const WAYS: { key: string; image: string; to: string | null }[] = [
   { key: 'library', image: 'kettlebell_swing', to: '/plan/programme' },
-  { key: 'template', image: 'rowing_erg', to: '/plan/vorlagen' },
   { key: 'own', image: 'back_squat', to: '/plan/eigen' },
   { key: 'computed', image: 'treadmill', to: '/plan/pruefung' },
 ]

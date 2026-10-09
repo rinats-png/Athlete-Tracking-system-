@@ -3171,8 +3171,10 @@
     "competitionUnnamed": "ta compétition",
     "empty": {
       "title": "Pas encore de bloc actif",
-      "body": "Choisis un chemin vers un plan. Le plan est une proposition issue de règles documentées ; l'entraîneur modifie et décide.",
-      "cta": "Choisir un plan"
+      "body": "Commence avec un plan prêt — ou crée le tien.",
+      "cta": "Choisir un plan",
+      "ready": "Choisir un plan prêt",
+      "otherWays": "Plan perso ou calculé"
     },
     "block": "BLOC ACTUEL",
     "weekOf": "Semaine {{week}} sur {{weeks}} · phase {{phase}}",
@@ -3207,7 +3209,7 @@
   },
   "planWay": {
     "title": "Choisir un plan",
-    "intro": "Trois chemins vers un plan. Chaque séance montre d'où elle vient.",
+    "intro": "Plan prêt, perso ou calculé.",
     "template": {
       "title": "Utiliser un plan prêt",
       "sub": "Programmes issus de règles documentées"
@@ -3224,14 +3226,14 @@
     "soon": "Bientôt",
     "note": "Un modèle de langage ne crée pas de plans. Il formule tout au plus des explications.",
     "library": {
-      "title": "Depuis la bibliothèque",
-      "sub": "16 plans complets, semaine par semaine"
+      "title": "Choisir un plan prêt",
+      "sub": "Tous les plans et modèles — ceux de ton sport d’abord"
     }
   },
   "tpl": {
     "libraryTitle": "Bibliothèque de plans",
     "libraryIntro": "Modèles pour ton sport. La dose vient de règles documentées ; sans règle, la séance reste ouverte.",
-    "libraryIntroAll": "Modèles pour tous les sports. Choisis un sport dans ton profil pour ne voir que les siens.",
+    "libraryIntroAll": "Tous les modèles ; ceux de ton sport en premier.",
     "goalLabel": "Objectif",
     "goal": {
       "all": "Tous",
@@ -3774,7 +3776,8 @@
       "RUN": "Course",
       "RUN_SHORT": "Course courte",
       "ALL": "Tous les sports"
-    }
+    },
+    "unreviewedShort": "Brouillon · pas encore validé"
   },
   "fuelPlan": {
     "title": "Prévu aujourd’hui",
@@ -3818,7 +3821,7 @@
   },
   "prog": {
     "link": "Bibliothèque de programmes",
-    "title": "Bibliothèque de programmes",
+    "title": "Plans prêts",
     "intro": "Des plans complets, semaine par semaine. Chaque dosage relève d'une règle de méthode avec des limites ; ce que tu adoptes reste ajustable.",
     "goal": "Objectif",
     "level": "Niveau",
@@ -3869,7 +3872,7 @@
     "start": "Début",
     "startNote": "La semaine 1 commence le lundi {{day}}.",
     "confirmCoach": "J'ai compris : un entraîneur est recommandé pour ce plan, car il contient des exercices techniquement exigeants.",
-    "adoptButton": "Adopter",
+    "adoptButton": "Démarrer le plan",
     "coachOnly": "Ce plan contient des méthodes qui demandent un entraîneur (p. ex. drop sets, priming). Un entraîneur peut l'adopter et te l'attribuer.",
     "cat": {
       "FOUNDATION": "Base",
@@ -3890,7 +3893,13 @@
       "RUN_5K": "Course 5 km"
     },
     "typicalError": "Erreur typique (littérature) : {{value}}.",
-    "typicalErrorNote": "Ordre de grandeur seulement ; l’app juge avec ta propre erreur de mesure."
+    "typicalErrorNote": "Ordre de grandeur seulement ; l’app juge avec ta propre erreur de mesure.",
+    "metaShort": "{{weeks}} semaines · {{days}}× par semaine",
+    "ownTemplates": "Mes modèles enregistrés",
+    "background": "Contexte : structure, règles, sources",
+    "replaceButton": "Démarrer ce plan à la place",
+    "replaceConfirm": "Oui, changer",
+    "replaceNote": "Ton plan en cours se termine et reste consultable."
   },
   "adapt": {
     "title": "Ajuster l'entraînement",
@@ -3959,5 +3968,11 @@
     },
     "tick": "Série {{n}} faite",
     "add": "Ajouter une série"
+  },
+  "fit": {
+    "match": "Adapté à : {{sport}}",
+    "supports": "Soutient : {{sport}}",
+    "other": "Autre objectif",
+    "filter": "Pour {{sport}}"
   }
 }

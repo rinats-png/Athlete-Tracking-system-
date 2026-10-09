@@ -3171,8 +3171,10 @@
     "competitionUnnamed": "dein Wettkampf",
     "empty": {
       "title": "Noch kein aktiver Block",
-      "body": "Wähle einen Weg zum Plan. Der Plan ist ein Vorschlag aus belegten Regeln; der Trainer ändert und entscheidet.",
-      "cta": "Plan wählen"
+      "body": "Starte mit einem fertigen Plan — oder bau dir deinen eigenen.",
+      "cta": "Plan wählen",
+      "ready": "Fertigen Plan wählen",
+      "otherWays": "Eigener Plan oder berechnet"
     },
     "block": "AKTUELLER BLOCK",
     "weekOf": "Woche {{week}} von {{weeks}} · Phase {{phase}}",
@@ -3207,7 +3209,7 @@
   },
   "planWay": {
     "title": "Plan wählen",
-    "intro": "Drei Wege zum Plan. Jede Einheit zeigt, woher sie kommt.",
+    "intro": "Fertiger Plan, eigener Plan oder berechnet.",
     "template": {
       "title": "Vorgefertigten Plan nutzen",
       "sub": "Programme aus belegten Regeln"
@@ -3224,14 +3226,14 @@
     "soon": "Folgt",
     "note": "Ein Sprachmodell erzeugt keine Pläne. Es formuliert höchstens Erklärungen.",
     "library": {
-      "title": "Aus der Programmbibliothek",
-      "sub": "16 fertige Pläne, Woche für Woche"
+      "title": "Fertigen Plan wählen",
+      "sub": "Alle Pläne und Vorlagen — passend zu deiner Sportart zuerst"
     }
   },
   "tpl": {
     "libraryTitle": "Planbibliothek",
     "libraryIntro": "Vorlagen für deine Sportart. Die Dosis kommt aus belegten Regeln; wo es keine gibt, bleibt die Einheit offen.",
-    "libraryIntroAll": "Vorlagen für alle Sportarten. Wähle in deinem Profil eine Sportart, dann siehst du nur ihre Vorlagen.",
+    "libraryIntroAll": "Alle Vorlagen; die zu deiner Sportart stehen oben.",
     "goalLabel": "Ziel",
     "goal": {
       "all": "Alle",
@@ -3774,7 +3776,8 @@
       "RUN": "Laufen",
       "RUN_SHORT": "Laufen kurz/schnell",
       "ALL": "Alle Sportarten"
-    }
+    },
+    "unreviewedShort": "Entwurf · fachlich noch nicht geprüft"
   },
   "fuelPlan": {
     "title": "Heute geplant",
@@ -3818,7 +3821,7 @@
   },
   "prog": {
     "link": "Programmbibliothek",
-    "title": "Programmbibliothek",
+    "title": "Fertige Pläne",
     "intro": "Fertige Pläne in voller Wochentiefe. Jede Dosis steht unter einer Methodenregel mit Grenzen; was du übernimmst, kannst du später anpassen.",
     "goal": "Ziel",
     "level": "Niveau",
@@ -3869,7 +3872,7 @@
     "start": "Start",
     "startNote": "Woche 1 beginnt am Montag, {{day}}.",
     "confirmCoach": "Mir ist klar: Für diesen Plan wird ein Trainer empfohlen, weil er technisch anspruchsvolle Übungen enthält.",
-    "adoptButton": "Übernehmen",
+    "adoptButton": "Plan starten",
     "coachOnly": "Dieser Plan enthält Methoden, die einen Trainer brauchen (z. B. Drop Sets, Priming). Ein Trainer kann ihn für dich übernehmen und dir zuweisen.",
     "cat": {
       "FOUNDATION": "Grundlage",
@@ -3890,7 +3893,13 @@
       "RUN_5K": "5 km Laufen"
     },
     "typicalError": "Typischer Messfehler (Literatur): {{value}}.",
-    "typicalErrorNote": "Nur Größenordnung; die App urteilt mit deinem eigenen Messfehler."
+    "typicalErrorNote": "Nur Größenordnung; die App urteilt mit deinem eigenen Messfehler.",
+    "metaShort": "{{weeks}} Wochen · {{days}}× pro Woche",
+    "ownTemplates": "Meine gespeicherten Vorlagen",
+    "background": "Hintergrund: Aufbau, Regeln, Quellen",
+    "replaceButton": "Diesen Plan stattdessen starten",
+    "replaceConfirm": "Ja, wechseln",
+    "replaceNote": "Dein laufender Plan wird beendet und bleibt zur Ansicht erhalten."
   },
   "adapt": {
     "title": "Training anpassen",
@@ -3959,5 +3968,11 @@
     },
     "tick": "Satz {{n}} erledigt",
     "add": "Satz hinzufügen"
+  },
+  "fit": {
+    "match": "Passt zu {{sport}}",
+    "supports": "Unterstützt {{sport}}",
+    "other": "Anderer Schwerpunkt",
+    "filter": "Für {{sport}}"
   }
 }
