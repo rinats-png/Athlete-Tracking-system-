@@ -60,7 +60,7 @@ export function ScreenHeader({
     return (
       <header className={cn('mb-4', className)} data-testid="screen-hero">
         <PhotoCard image={image} className="min-h-[150px] p-4">
-          <div className="flex flex-wrap items-end justify-between gap-3">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div className="min-w-0 flex-1">
               <span className="label-tag">{eyebrow}</span>
               <div className="mt-1 flex items-center gap-2">
