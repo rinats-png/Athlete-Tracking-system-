@@ -32,7 +32,7 @@ export function AssessmentListScreen() {
   return (
     <>
       <ScreenHeader
-        eyebrow={t('diag.eyebrow')}
+        eyebrow={t('assessments.count', { count: assessments.length })}
         title={t('assessments.title')}
         intro={t('assessments.intro')}
         image={AREA_IMAGES.testDay}

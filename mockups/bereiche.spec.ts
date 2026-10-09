@@ -36,5 +36,11 @@ for (const theme of ['light', 'dark'] as const) {
       await page.waitForTimeout(700)
       await page.screenshot({ path: `mockups-neu/bereiche/${file}-${name}.png` })
     }
+    // Eine Erklärung aufgeklappt: das ⓘ am Kartenkopf im Trainingslog.
+    await page.goto('/training', { waitUntil: 'domcontentloaded' })
+    await page.getByTestId('panel-info').first().click()
+    await page.evaluate((t) => document.documentElement.setAttribute('data-theme', t), theme)
+    await page.waitForTimeout(500)
+    await page.screenshot({ path: `mockups-neu/bereiche/24-info-offen-${name}.png` })
   })
 }
