@@ -172,7 +172,7 @@ export function AnalysisHome() {
       <Panel className="mt-4">
         <PanelHeader
           title={t('analysisHome.benchmark')}
-          subtitle={t('analysisHome.benchmarkHint')}
+          note={t('analysisHome.benchmarkHint')}
           action={
             measuredSlugs.length > 1 ? (
               <select

@@ -153,7 +153,7 @@ function WeightBandPanel({ day }: { day: string }) {
 
   return (
     <Panel className="mb-4" data-testid="weight-band">
-      <PanelHeader title={t('fueling.weight.title')} subtitle={t('fueling.weight.why')} />
+      <PanelHeader title={t('fueling.weight.title')} note={t('fueling.weight.why')} />
       <div className="px-4 py-3 text-[13px]">
         <p>
           {t('fueling.weight.thisWeek')}: <span className="readout">{pct(thisWeek)}</span> · {t('fueling.weight.lastWeek')}: <span className="readout">{pct(lastWeek)}</span>

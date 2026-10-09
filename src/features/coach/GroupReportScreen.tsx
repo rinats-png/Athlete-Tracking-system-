@@ -71,7 +71,7 @@ export function GroupReportScreen() {
       </p>
 
       <Panel>
-        <PanelHeader title={t('compare.axes')} subtitle={t('compare.group.medianHint')} />
+        <PanelHeader title={t('compare.axes')} note={t('compare.group.medianHint')} />
         <div className="overflow-x-auto">
           <table className="report-table w-full min-w-[520px] border-collapse text-[13px]">
             <thead>

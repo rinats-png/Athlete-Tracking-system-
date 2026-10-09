@@ -184,7 +184,7 @@ export function TestCatalogScreen() {
             <Panel className="mb-4">
               <PanelHeader
                 title={t('tests.optionalFor', { sport: pick(discipline.name, locale) })}
-                subtitle={t('tests.optionalHint')}
+                note={t('tests.optionalHint')}
               />
               <ul className="divide-y divide-line">{optional.map(row)}</ul>
             </Panel>

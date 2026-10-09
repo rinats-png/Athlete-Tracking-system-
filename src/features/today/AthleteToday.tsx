@@ -5,7 +5,7 @@ import { ArrowDown, ArrowUp, ChevronRight, Flag, ShieldCheck } from 'lucide-reac
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { ImageCard } from '@/components/ui/ImageCard'
 import { PhotoCard } from '@/components/ui/PhotoCard'
-import { InfoNote } from '@/features/shared/InfoNote'
+import { InfoNote } from '@/components/ui/InfoNote'
 import { sessionName } from '@/features/plan/planText'
 import { planMode } from '@/domain/planMode'
 import { missedOccurrences, occurrences, openOccurrencesOn } from '@/domain/trainingBlock'

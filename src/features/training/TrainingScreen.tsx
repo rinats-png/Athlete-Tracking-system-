@@ -110,7 +110,7 @@ export function TrainingScreen() {
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
         <div className="space-y-4">
           <Panel>
-            <PanelHeader title={t('training.list.title')} subtitle={t('training.list.why')} />
+            <PanelHeader title={t('training.list.title')} note={t('training.list.why')} />
             {sorted.length === 0 ? (
               <p className="px-4 py-4 text-[13px] text-ink-secondary">{t('training.list.empty')}</p>
             ) : (
@@ -178,7 +178,7 @@ export function TrainingScreen() {
 
         <div className="space-y-4">
           <Panel>
-            <PanelHeader title={t('training.week.title')} subtitle={t('training.week.why')} />
+            <PanelHeader title={t('training.week.title')} note={t('training.week.why')} />
             <div className="grid grid-cols-2 divide-x divide-line">
               <StatTile label={t('training.week.sets')} value={String(weekSets)} />
               <StatTile label={t('training.week.volume')} value={formatNumber(weekVolume, locale, 0)} unit="kg·Wdh" />

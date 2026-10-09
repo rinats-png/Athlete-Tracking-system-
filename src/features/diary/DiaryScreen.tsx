@@ -417,7 +417,7 @@ export function DiaryScreen() {
 
       {/* --- Kennzahlen ------------------------------------------------ */}
       <Panel>
-        <PanelHeader title={t('diary.stats.title')} subtitle={t('diary.stats.why')} />
+        <PanelHeader title={t('diary.stats.title')} note={t('diary.stats.why')} />
         <div className="grid grid-cols-2 divide-x divide-y divide-line sm:grid-cols-4 sm:divide-y-0">
           <StatTile
             label={t('diary.stats.weight7')}

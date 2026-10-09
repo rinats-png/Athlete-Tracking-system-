@@ -81,7 +81,7 @@ export function PerformanceScreen() {
         </Panel>
 
         <Panel className="lg:col-span-2" data-testid="perf-dimensions">
-          <PanelHeader title={t('performance.dimensions.title')} subtitle={t('performance.dimensions.sub')} />
+          <PanelHeader title={t('performance.dimensions.title')} note={t('performance.dimensions.sub')} />
           <ul className="px-4 pb-3">
             {today.dimensions.map((d) => (
               <li key={d.axisId} className="border-t border-line py-3 first:border-t-0" data-testid={`dim-${d.axisId}`}>

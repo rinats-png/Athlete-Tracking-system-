@@ -72,7 +72,7 @@ export function CockpitScreen() {
 
       {/* --- Sieben gegen achtundzwanzig --------------------------------- */}
       <Panel className="mb-4">
-        <PanelHeader title={t('cockpit.overview.title')} subtitle={t('cockpit.overview.why')} />
+        <PanelHeader title={t('cockpit.overview.title')} note={t('cockpit.overview.why')} />
         <div className="grid grid-cols-2 divide-x divide-y divide-line sm:grid-cols-4 sm:divide-y-0">
           <StatTile label={t('cockpit.overview.sleep')} value={formatNumber(overview.sleep.recent.mean, locale, 1)} unit="h" meta={pair(overview.sleep, 1)} />
           <StatTile label={t('cockpit.overview.energy')} value={formatNumber(overview.energy.recent.mean, locale, 1)} meta={pair(overview.energy, 1)} />
@@ -92,7 +92,7 @@ export function CockpitScreen() {
 
       {/* --- Zum Hinschauen ---------------------------------------------- */}
       <Panel ticked className="mb-4" data-testid="cockpit-signals">
-        <PanelHeader title={t('cockpit.signals.title')} subtitle={t('cockpit.signals.why')} />
+        <PanelHeader title={t('cockpit.signals.title')} note={t('cockpit.signals.why')} />
         {signals.length === 0 && overdue.length === 0 ? (
           <p className="px-4 py-4 text-[13px] text-ink-secondary">{t('cockpit.signals.none')}</p>
         ) : (
@@ -148,7 +148,7 @@ export function CockpitScreen() {
       <Panel className="mb-4">
         <PanelHeader
           title={t('cockpit.log.title')}
-          subtitle={t('cockpit.log.why')}
+          note={t('cockpit.log.why')}
           action={
             !editing && (
               <Button variant="primary" size="sm" onClick={() => setEditing({})}>
@@ -245,7 +245,7 @@ export function CockpitScreen() {
 
       {/* --- Schwellen ------------------------------------------------------ */}
       <Panel>
-        <PanelHeader title={t('cockpit.thresholds.title')} subtitle={t('cockpit.thresholds.why')} />
+        <PanelHeader title={t('cockpit.thresholds.title')} note={t('cockpit.thresholds.why')} />
         <div className="grid gap-5 px-4 py-4 sm:grid-cols-2">
           <RangeField label={t('cockpit.thresholds.sleepDropPct')} value={cockpit.sleepDropPct} onChange={(v) => saveCockpit({ sleepDropPct: v })} min={5} max={40} step={1} unit="%" />
           <RangeField label={t('cockpit.thresholds.energyDropPct')} value={cockpit.energyDropPct} onChange={(v) => saveCockpit({ energyDropPct: v })} min={5} max={40} step={1} unit="%" />

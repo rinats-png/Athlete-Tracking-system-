@@ -67,7 +67,7 @@ export function PlanOffersPanel() {
 
   return (
     <Panel className="mb-4" data-testid="plan-offers">
-      <PanelHeader title={t('offers.title')} subtitle={t('offers.sub')} />
+      <PanelHeader title={t('offers.title')} note={t('offers.sub')} />
       <ul>
         {offers.map((a) => (
           <li key={a.id} className="border-t border-line px-4 py-3 first:border-t-0" data-testid={`offer-${a.id}`}>

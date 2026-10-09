@@ -83,7 +83,7 @@ export function SportModuleScreen() {
 
       {cs && (
         <Panel className="mt-4" data-testid="critical-speed">
-          <PanelHeader title={t('sportModule.criticalSpeed')} subtitle={t('sportModule.criticalSpeedSub')} />
+          <PanelHeader title={t('sportModule.criticalSpeed')} note={t('sportModule.criticalSpeedSub')} />
           <div className="px-4 py-3 text-[13px] leading-relaxed">
             <p className="readout text-[24px] tabular-nums">
               {formatNumber(cs.speed, locale, 2)} <span className="text-[13px] text-ink-muted">m/s</span>

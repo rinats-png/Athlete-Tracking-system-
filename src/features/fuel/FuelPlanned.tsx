@@ -24,7 +24,7 @@ export function FuelPlanned({ day }: { day: string }) {
   if (sessions.length === 0) return null
   return (
     <ImageCard image={sessionImage(sessions[0])} lift className="mb-4" data-testid="fuel-planned">
-      <PanelHeader title={t('fuelPlan.title')} subtitle={t('fuelPlan.sub')} />
+      <PanelHeader title={t('fuelPlan.title')} note={t('fuelPlan.sub')} />
       <ul className="px-4 pb-1">
         {sessions.map((s) => (
           <li key={s.id} className="border-t border-line py-2 text-[14px] first:border-t-0" data-testid={`fuel-planned-${s.id}`}>

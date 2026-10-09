@@ -204,7 +204,7 @@ export function PlanCalendarScreen() {
 
       {missed.length > 0 && (
         <Panel className="mb-3 border-warning" data-testid="cal-missed">
-          <PanelHeader title={t('cal.missedTitle', { n: missed.length })} subtitle={t('cal.missedNote')} />
+          <PanelHeader title={t('cal.missedTitle', { n: missed.length })} note={t('cal.missedNote')} />
           <ul className="px-4 pb-3">
             {missed.slice(0, 6).map((o) => (
               <li key={keyOf(o)} className="flex flex-wrap items-center justify-between gap-2 border-t border-line py-2 first:border-t-0">

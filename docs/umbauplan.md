@@ -131,4 +131,22 @@ liegt hell auf dem Bild.
   Entwicklung sowie die Einleitungen von Messung und neuem Termin.
 - **Bewusst sichtbar** bleiben der Umfangshinweis der Gesundheitsschicht
   (Art. 9) und alle Warn- und Rechtstexte.
-- Die Unterzeilen der Kartenköpfe (`PanelHeader subtitle`) sind unverändert.
+
+**Dritter Schritt (Unterzeilen der Karten).** `PanelHeader` kennt neben
+`subtitle` jetzt `note`: eine Erklärung, die ein ⓘ neben dem Kartentitel
+aufklappt (`components/ui/InfoNote.tsx` für Erklärungen im Kartenkörper).
+
+Die Regel:
+
+- **`subtitle` (sichtbar):** kurze Fakten, die man zum Lesen braucht, also
+  Anzahl, Datum, Einheit, Fassung oder Stand.
+- **`note` (hinter ⓘ):** Sätze, die erklären, wie eine Fläche gemeint ist.
+- **Bewusst sichtbar** bleiben, auch wenn es Sätze sind:
+  - alles in der Gesundheitsschicht;
+  - Rechts-, Preis- und Datenschutzhinweise;
+  - Legenden, ohne die ein Diagramm nicht lesbar ist;
+  - jeder Satz, der eine Fehldeutung von Zahlen verhindert. Beispiele:
+    «kein gemessener 1RM», «kein Referenzwert», «keine medizinische
+    Aussage», «eine Festlegung dieser App», «keine Freigabe, keine Sperre».
+
+Neue Karten folgen derselben Regel.

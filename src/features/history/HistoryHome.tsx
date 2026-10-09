@@ -87,7 +87,7 @@ export function HistoryHome() {
           passiert», die Kurve darunter «wie genau». */}
       {nodes.length >= 2 && (
         <Panel float className="rise mb-4">
-          <PanelHeader title={t('journey.title')} subtitle={t('journey.hint')} />
+          <PanelHeader title={t('journey.title')} note={t('journey.hint')} />
           <PerformanceJourney nodes={nodes} className="px-4 pt-4 pb-5" />
         </Panel>
       )}

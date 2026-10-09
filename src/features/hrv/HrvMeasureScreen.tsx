@@ -201,7 +201,7 @@ export function HrvMeasureScreen() {
         </Panel>
       ) : (
         <Panel ticked float className="mb-4" data-testid="hrv-measure">
-          <PanelHeader title={t('hrv.protocol.title')} subtitle={t('hrv.protocol.subtitle')} />
+          <PanelHeader title={t('hrv.protocol.title')} note={t('hrv.protocol.subtitle')} />
           {phase === 'idle' && (
             <div className="space-y-4 px-4 py-4">
               <ol className="list-decimal space-y-1 pl-5 text-[13px] leading-relaxed text-ink-secondary">
@@ -292,7 +292,7 @@ export function HrvMeasureScreen() {
       )}
 
       <Panel className="mb-4" data-testid="hrv-straps">
-        <PanelHeader title={t('hrv.straps.title')} subtitle={t('hrv.straps.why')} />
+        <PanelHeader title={t('hrv.straps.title')} note={t('hrv.straps.why')} />
         <ul className="divide-y divide-line">
           {HEART_RATE_STRAPS.map((s) => (
             <li key={s.id} className="flex flex-wrap items-baseline justify-between gap-2 px-4 py-2.5 text-[13px]" data-strap={s.id}>

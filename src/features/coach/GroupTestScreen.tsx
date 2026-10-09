@@ -114,7 +114,7 @@ export function GroupTestScreen() {
       )}
 
       <Panel>
-        <PanelHeader title={t('group.station')} subtitle={t('group.stationHint')} />
+        <PanelHeader title={t('group.station')} note={t('group.stationHint')} />
         <div className="grid gap-3 px-4 py-4 sm:grid-cols-2">
           <label className="block">
             <span className="label-tag">{t('table.test')}</span>
@@ -202,7 +202,7 @@ export function GroupTestScreen() {
 
       {written != null && stats && (
         <Panel className="mt-4">
-          <PanelHeader title={t('group.result')} subtitle={t('group.resultHint')} />
+          <PanelHeader title={t('group.result')} note={t('group.resultHint')} />
           <div className="px-4 py-4">
             <p role="status" className="text-[14px] text-good">
               {t('group.written', { count: written })}

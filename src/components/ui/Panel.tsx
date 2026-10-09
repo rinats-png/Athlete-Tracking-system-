@@ -1,3 +1,6 @@
+import { useId, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Info } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 /**
@@ -43,14 +46,21 @@ export function Panel({
 export function PanelHeader({
   title,
   subtitle,
+  note,
   action,
   className,
 }: {
   title: string
+  /** Kurze Angabe, die man zum Lesen der Fläche braucht (Anzahl, Datum, Einheit). */
   subtitle?: string
+  /** Erklärung eine Ebene tiefer: ein ⓘ neben dem Titel klappt sie auf. */
+  note?: string
   action?: React.ReactNode
   className?: string
 }) {
+  const { t } = useTranslation()
+  const [open, setOpen] = useState(false)
+  const id = useId()
   return (
     <div
       className={cn(
@@ -59,12 +69,32 @@ export function PanelHeader({
       )}
     >
       <div className="min-w-0">
-        <h2 className="label-tag">{title}</h2>
+        <div className="flex items-center gap-1">
+          <h2 className="label-tag">{title}</h2>
+          {note && (
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls={id}
+              aria-label={`${t('look.info')}: ${title}`}
+              onClick={() => setOpen((o) => !o)}
+              data-testid="panel-info"
+              className={cn('-my-3 inline-flex size-11 shrink-0 items-center justify-center rounded-pill', open ? 'text-accent-text' : 'text-ink-muted')}
+            >
+              <Info size={15} aria-hidden />
+            </button>
+          )}
+        </div>
         {subtitle && (
           // Kein `truncate`: der Untertitel erklärt, was die Fläche zeigt.
           // Abgeschnitten wäre die Erklärung weg — und die Nichtumbruch-Regel
           // machte den Text zugleich zur breitesten Stelle der Seite.
           <p className="mt-1 text-[13px] leading-snug text-ink-secondary">{subtitle}</p>
+        )}
+        {note && (
+          <p id={id} hidden={!open} className="mt-1 max-w-[62ch] text-[13px] leading-snug text-ink-secondary">
+            {note}
+          </p>
         )}
       </div>
       {action && <div className="shrink-0">{action}</div>}

@@ -124,7 +124,7 @@ function LoadPanels({ summary }: { summary: LoadSummary }) {
       </Panel>
 
       <Panel className="mb-4" data-testid="load-week-detail">
-        <PanelHeader title={t('load.detail.title')} subtitle={t('load.detail.why')} />
+        <PanelHeader title={t('load.detail.title')} note={t('load.detail.why')} />
         <div className="grid grid-cols-1 divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <StatTile
             label={t('load.detail.change')}
