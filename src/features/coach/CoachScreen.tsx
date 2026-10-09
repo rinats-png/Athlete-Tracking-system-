@@ -10,6 +10,8 @@ import { useBilling } from '@/features/billing/BillingProvider'
 import { LimitNotice } from '@/features/billing/CoachPlanPanel'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useLocale } from '@/features/shared/useLocale'
+import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 
 /**
  * Trainerbereich.
@@ -24,14 +26,7 @@ export function CoachScreen() {
 
   return (
     <>
-      <header className="mb-4">
-        <h1 className="font-display text-[28px] leading-tight font-bold sm:text-[34px]">
-          {t('coachDash.title')}
-        </h1>
-        <p className="mt-1.5 max-w-[62ch] text-[14px] leading-relaxed text-ink-secondary">
-          {t('coachDash.intro')}
-        </p>
-      </header>
+      <ScreenHeader eyebrow={t('coachToday.eyebrow')} title={t('coachDash.title')} intro={t('coachDash.intro')} image={AREA_IMAGES.team} />
 
       {role === 'coach' ? (
         <>

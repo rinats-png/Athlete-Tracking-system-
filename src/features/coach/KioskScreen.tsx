@@ -13,6 +13,8 @@ import { bestInputIndex, doneOnDay, kioskResult, kioskSupported, MAX_ATTEMPTS, n
 import { formatNumber } from '@/lib/format'
 import { pick } from '@/i18n/pick'
 import { cn } from '@/lib/utils'
+import { testImageUrl } from '@/data/testImages'
+import { AREA_IMAGES } from '@/data/visuals'
 
 /**
  * Kiosk-Modus (Produktdoktrin §16): ein Gerät an der Station.
@@ -124,6 +126,11 @@ export function KioskScreen() {
 
       {test && kioskSupported(slug) && (
         <>
+          {/* Das Testbild als Band: erkennbar aus der Distanz, ohne Text. */}
+          <div className="relative mb-3 h-28 overflow-hidden rounded-xl" aria-hidden data-testid="kiosk-photo">
+            <img src={testImageUrl(slug) ?? AREA_IMAGES.testDay} alt="" decoding="async" className="size-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(7,10,13,.55)] to-transparent" />
+          </div>
           <div className="mb-3" aria-live="polite">
             <div className="flex items-center justify-between text-[13px] text-ink-secondary">
               <span data-testid="kiosk-progress">{t('kiosk.progress', { done: done.size, total: roster.length })}</span>

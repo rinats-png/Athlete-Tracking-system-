@@ -89,3 +89,19 @@ export const HUB_IMAGES = {
   own: img('S_farmers_carry.webp'),
   calendar: img('S_run_5k.webp'),
 } as const
+
+/** Titelfotos der Bereiche (Fotokopf im `ScreenHeader`). */
+export const AREA_IMAGES = {
+  runs: img('S_run_1_5_mile.webp'),
+  health: img('S_resting_hr_bpm.webp'),
+  hrv: img('S_hr_drift_test.webp'),
+  peak: img('S_lean_mass_kg.webp'),
+  fuel: img('S_brick_bike_run.webp'),
+  training: img('U_back_squat.jpg'),
+  diary: img('S_sleep_h.webp'),
+  load: img('S_srpe_load_au.webp'),
+  development: img('S_murph.webp'),
+  testDay: img('T010.webp'),
+  week: img('S_fatigue_circuit_4x30s.webp'),
+  team: img('S_repeated_throws_30s.webp'),
+} as const

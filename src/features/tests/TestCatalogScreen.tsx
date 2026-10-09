@@ -17,14 +17,8 @@ import type { TestCategory } from '@/types/domain'
 import { pick } from '@/i18n/pick'
 import { useLocale } from '@/features/shared/useLocale'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
-import { PhotoCard, Segments } from '@/components/ui/PhotoCard'
+import { PhotoCard, Segments, Thumb } from '@/components/ui/PhotoCard'
 import { testImageUrl } from '@/data/testImages'
-
-/** Vorschaubild eines Tests; ohne Bild eine ruhige Fläche gleicher Größe. */
-function TestThumb({ slug }: { slug: string }) {
-  const src = testImageUrl(slug)
-  return src ? <img src={src} alt="" loading="lazy" decoding="async" className="thumb" /> : <span className="thumb" aria-hidden />
-}
 
 type Filter = TestCategory | 'all'
 
@@ -118,7 +112,7 @@ export function TestCatalogScreen() {
           // nur einzeilig ist.
           className="flex min-h-16 items-center gap-3 px-4 py-3 transition-colors hover:bg-accent-quiet"
         >
-          <TestThumb slug={test.slug} />
+          <Thumb src={testImageUrl(test.slug)} />
           <div className="min-w-0 flex-1">
             <p className="font-medium">{pick(test.name, locale)}</p>
             <p className="mt-0.5 text-[12px] text-ink-muted">

@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight } from 'lucide-react'
-import { Panel, PanelHeader } from '@/components/ui/Panel'
+import { PanelHeader } from '@/components/ui/Panel'
+import { ImageCard } from '@/components/ui/ImageCard'
+import { sessionImage } from '@/data/visuals'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { planEnabled } from '@/domain/planMode'
 import { openSessionsOn } from '@/domain/trainingBlock'
@@ -21,7 +23,7 @@ export function FuelPlanned({ day }: { day: string }) {
   const sessions = block ? openSessionsOn(block, day) : []
   if (sessions.length === 0) return null
   return (
-    <Panel lift className="mb-4" data-testid="fuel-planned">
+    <ImageCard image={sessionImage(sessions[0])} lift className="mb-4" data-testid="fuel-planned">
       <PanelHeader title={t('fuelPlan.title')} subtitle={t('fuelPlan.sub')} />
       <ul className="px-4 pb-1">
         {sessions.map((s) => (
@@ -36,6 +38,6 @@ export function FuelPlanned({ day }: { day: string }) {
         {t('fuelPlan.toPlayer')}
         <ArrowRight size={18} aria-hidden />
       </Link>
-    </Panel>
+    </ImageCard>
   )
 }

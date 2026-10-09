@@ -26,6 +26,10 @@ import { AdminLink } from '@/features/admin/AdminLink'
 import { CoachPushPanel } from '@/features/push/CoachPushPanel'
 import { provisionalFormulas } from '@/domain/formulaRegistry'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { SportArt } from '@/components/signature/SportArt'
+import { disciplineById } from '@/data/sportProfiles'
+import { pick } from '@/i18n/pick'
 import { introEnabled, setIntroEnabled } from '@/features/intro/introPreference'
 import { ageFromBirthDate, formatDate } from '@/lib/format'
 import type { Sex } from '@/types/domain'
@@ -44,6 +48,7 @@ export function ProfileScreen() {
   const [intro, setIntro] = useState(() => introEnabled())
 
   const age = ageFromBirthDate(data.profile.birthDate)
+  const profileDiscipline = disciplineById(data.profile.disciplineId)
 
   const download = () => {
     downloadFile(
@@ -69,12 +74,11 @@ export function ProfileScreen() {
 
   return (
     <>
-      <header className="mb-4">
-        <span className="label-tag">{t('nav.profile')}</span>
-        <h1 className="mt-1 font-display text-[30px] leading-none font-bold sm:text-[38px]">
-          {t('profile.title')}
-        </h1>
-      </header>
+      <ScreenHeader
+        eyebrow={profileDiscipline ? `${t('nav.profile')} · ${pick(profileDiscipline.name, locale)}` : t('nav.profile')}
+        title={data.profile.firstName || t('profile.title')}
+        art={profileDiscipline && <SportArt disciplineId={profileDiscipline.id} categoryId={profileDiscipline.categoryId} className="float size-16 shrink-0 rounded-[var(--radius-md)]" />}
+      />
 
       <div className="grid gap-4 lg:grid-cols-2">
         <Panel>

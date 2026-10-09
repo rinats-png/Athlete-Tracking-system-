@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { StatTile } from '@/components/ui/StatTile'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 import { MetricMeta } from '@/features/shared/MetricMeta'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -167,7 +168,7 @@ export function HrvMeasureScreen() {
 
   return (
     <>
-      <ScreenHeader eyebrow={t('hrv.eyebrow')} title={t('hrv.title')} intro={t('hrv.intro')} />
+      <ScreenHeader eyebrow={t('hrv.eyebrow')} title={t('hrv.title')} intro={t('hrv.intro')} image={AREA_IMAGES.hrv} />
 
       {support === 'unsupported' && (
         <Panel className="mb-4" data-testid="hrv-unsupported">

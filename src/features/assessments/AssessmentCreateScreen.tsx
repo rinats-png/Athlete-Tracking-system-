@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils'
 import type { PerformanceDimension, TestCategory } from '@/types/domain'
 import { pick } from '@/i18n/pick'
 import { useLocale } from '@/features/shared/useLocale'
+import { ScreenHeader } from '@/features/shared/ScreenHeader'
 
 type Filter = TestCategory | 'all'
 
@@ -229,14 +230,7 @@ export function AssessmentCreateScreen() {
         </Link>
       </Button>
 
-      <header className="mb-4">
-        <h1 className="font-display text-[28px] leading-tight font-bold sm:text-[34px]">
-          {t('assessments.newTitle')}
-        </h1>
-        <p className="mt-1.5 max-w-[62ch] text-[14px] leading-relaxed text-ink-secondary">
-          {t('assessments.newIntro')}
-        </p>
-      </header>
+      <ScreenHeader eyebrow={t('diag.eyebrow')} title={t('assessments.newTitle')} intro={t('assessments.newIntro')} />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         <div className="min-w-0 space-y-4 md:col-span-2 lg:col-span-3">

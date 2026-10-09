@@ -32,3 +32,8 @@ export function Segments({ total, done, current, className }: { total: number; d
     </span>
   )
 }
+
+/** Vorschaubild in Listen (48 px); ohne Bild eine ruhige Fläche gleicher Größe. */
+export function Thumb({ src, className }: { src: string | null | undefined; className?: string }) {
+  return src ? <img src={src} alt="" loading="lazy" decoding="async" className={cn('thumb', className)} /> : <span className={cn('thumb', className)} aria-hidden />
+}

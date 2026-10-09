@@ -112,3 +112,23 @@ jede Funktion. Geändert ist die Gewichtung:
 - **Player:** immer dunkel (`.scope-dark` in `theme.css` übernimmt die Werte
   von Mondlicht für einen Bereich), Fotokopf der ersten Übung.
 - **Testen:** Fotokarte «Kerntests: x von y gemessen», Vorschaubild je Test.
+
+**Zweiter Schritt (übrige Bereiche).** `ScreenHeader` nimmt ein Titelfoto
+(`image`, Bilder in `AREA_IMAGES`); die Seite behält ihre Überschrift, das ⓘ
+liegt hell auf dem Bild.
+
+- **Fotokopf:** Läufe, Gesundheit, HRV-Messung, Peak Week, Fuel, Trainingslog,
+  Tagebuch, Belastung, Entwicklung, Wochenrückblick, Termine, Testdetail,
+  Messung, Übungsdetail, Testtage, Wochenbericht und Trainer-Übersicht.
+- **Bildkarten:** «Geplant für heute» in Fuel (erste Übung der Einheit), Weg
+  zur Peak Week in Gesundheit, Bestwert der Woche.
+- **Vorschaubilder:** Trainingslog (Einheiten und Bestleistungen), fällige
+  Tests der Woche, Termine, Blöcke in Entwicklung. Der Verlauf zeigt die
+  gemessenen Tests als Bildreihe zum Antippen.
+- **Weitere Bilder:** Der Kiosk zeigt das Testbild als Band. Das Profil zeigt
+  Name und Sportart mit dem Sportmotiv.
+- **Hinweise hinter ⓘ:** Neu dahinter liegen die Hinweise in Woche und
+  Entwicklung sowie die Einleitungen von Messung und neuem Termin.
+- **Bewusst sichtbar** bleiben der Umfangshinweis der Gesundheitsschicht
+  (Art. 9) und alle Warn- und Rechtstexte.
+- Die Unterzeilen der Kartenköpfe (`PanelHeader subtitle`) sind unverändert.

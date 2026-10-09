@@ -4,6 +4,8 @@ import { ArrowRight } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
+import { ImageCard } from '@/components/ui/ImageCard'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { ageAllows, hasConsent } from '@/domain/health'
 import { HEALTH_MIN_AGE } from '@/lib/store/schema'
@@ -40,7 +42,7 @@ export function HealthScreen() {
 
   return (
     <>
-      <ScreenHeader eyebrow={t('health.eyebrow')} title={t('health.title')} intro={t('health.intro')} />
+      <ScreenHeader eyebrow={t('health.eyebrow')} title={t('health.title')} intro={t('health.intro')} image={AREA_IMAGES.health} />
 
       <p role="note" className="mb-4 border-l-2 border-line-strong px-3 py-2 text-[13px] leading-relaxed text-ink-secondary" data-testid="health-scope">
         {t('health.scope')}
@@ -68,9 +70,9 @@ export function HealthScreen() {
           {hasConsent(health, 'photos') && <PhotoPanel />}
           <EnergyPanel />
           <SharePanel />
-          <Panel>
+          <ImageCard image={AREA_IMAGES.peak}>
             <div className="px-4 py-3">
-              <p className="text-[13px] leading-relaxed text-ink-secondary">{t('health.toPeak')}</p>
+              <p className="max-w-[40ch] text-[13px] leading-relaxed text-ink-secondary">{t('health.toPeak')}</p>
               <Button asChild variant="ghost" size="sm" className="mt-1 -ml-3">
                 <Link to="/peakweek">
                   {t('peak.title')}
@@ -78,7 +80,7 @@ export function HealthScreen() {
                 </Link>
               </Button>
             </div>
-          </Panel>
+          </ImageCard>
         </div>
       )}
     </>
