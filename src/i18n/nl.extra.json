@@ -3995,5 +3995,49 @@
     "tests": {
       "measured": "{{measured}} van {{total}} gemeten"
     }
+  },
+  "start": {
+    "button": "Training starten",
+    "title": "Training starten",
+    "today": "Vandaag",
+    "missed": "Gemist",
+    "upcoming": "Komende twee weken",
+    "allDone": "Geen open training in het plan — alles gedaan.",
+    "countsHint": "Je kunt elke training ook op een andere dag doen. Hij wordt dan afgevinkt voor de geplande datum.",
+    "none": "Je hebt geen lopend plan. Trainen kan toch — kies hieronder een manier.",
+    "free": "Zonder plan",
+    "log": "Iets invoeren",
+    "logSub": "Een training direct in het trainingslog zetten",
+    "catalog": "Uit de catalogus",
+    "catalogSub": "Een training uit een kant-en-klaar plan, zonder het plan over te nemen",
+    "build": "Zelf samenstellen",
+    "buildSub": "Oefeningen kiezen, sets vastleggen, beginnen",
+    "countsFor": "Gepland voor {{date}} – telt voor die datum.",
+    "doNow": "Nu doen"
+  },
+  "free": {
+    "eyebrow": "Vrije training",
+    "catalogTitle": "Training uit de catalogus",
+    "catalogIntro": "Kies een plan en daaruit een training. Het plan zelf wordt niet overgenomen.",
+    "pickSession": "Kies een training",
+    "week": "Week",
+    "items": "Onderdelen: {{n}}",
+    "otherPlan": "Ander plan kiezen",
+    "buildTitle": "Eigen training",
+    "buildIntro": "Voor vandaag, zonder plan. Hij wordt opgeslagen in het trainingslog.",
+    "name": "Naam van de training",
+    "search": "Oefening zoeken",
+    "exercises": "Oefeningen",
+    "empty": "Nog geen oefening. Zoek hierboven en tik er een aan.",
+    "sets": "Sets",
+    "setsN": "{{n}} ×",
+    "fewer": "Eén set minder",
+    "more": "Eén set meer",
+    "reps": "Herh./tijd",
+    "remove": "Oefening verwijderen",
+    "start": "Training starten",
+    "lost": "Hier is geen training gekozen. Kies er een onder ‘Training starten’.",
+    "noSlot": "Vrije training: telt als training, maar vinkt geen datum in het plan af.",
+    "save": "Opslaan in het trainingslog"
   }
 }

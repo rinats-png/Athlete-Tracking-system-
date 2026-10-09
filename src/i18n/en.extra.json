@@ -3995,5 +3995,49 @@
     "tests": {
       "measured": "{{measured}} of {{total}} measured"
     }
+  },
+  "start": {
+    "button": "Start training",
+    "title": "Start training",
+    "today": "Today",
+    "missed": "Missed",
+    "upcoming": "Next two weeks",
+    "allDone": "No open session in the plan — all done.",
+    "countsHint": "You can do any session on a different day too. It is then ticked off for its planned date.",
+    "none": "You have no active plan. You can still train — pick a way below.",
+    "free": "Without a plan",
+    "log": "Log something",
+    "logSub": "Write a workout straight into the training log",
+    "catalog": "From the catalogue",
+    "catalogSub": "A session from a ready-made plan, without adopting the plan",
+    "build": "Build your own",
+    "buildSub": "Pick exercises, set the sets, go",
+    "countsFor": "Planned for {{date}} – counts for that date.",
+    "doNow": "Do it now"
+  },
+  "free": {
+    "eyebrow": "Free training",
+    "catalogTitle": "Session from the catalogue",
+    "catalogIntro": "Pick a plan and a session from it. The plan itself is not adopted.",
+    "pickSession": "Pick a session",
+    "week": "Week",
+    "items": "Parts: {{n}}",
+    "otherPlan": "Choose another plan",
+    "buildTitle": "Your own session",
+    "buildIntro": "For today, without a plan. It is saved in the training log.",
+    "name": "Session name",
+    "search": "Search exercise",
+    "exercises": "Exercises",
+    "empty": "No exercise yet. Search above and tap one.",
+    "sets": "Sets",
+    "setsN": "{{n}} ×",
+    "fewer": "One set fewer",
+    "more": "One set more",
+    "reps": "Reps/time",
+    "remove": "Remove exercise",
+    "start": "Start session",
+    "lost": "No session is selected here. Pick one under “Start training”.",
+    "noSlot": "Free training: counts as training but does not tick off a plan date.",
+    "save": "Save to training log"
   }
 }

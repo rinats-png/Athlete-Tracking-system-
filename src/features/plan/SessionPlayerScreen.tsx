@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -7,7 +7,7 @@ import { InfoNote } from '@/components/ui/InfoNote'
 import { sessionImage } from '@/data/visuals'
 import { X } from 'lucide-react'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { openOccurrencesOn } from '@/domain/trainingBlock'
+import { findOpenOccurrence, openOccurrencesOn } from '@/domain/trainingBlock'
 import { syncAssignedCompletions } from '@/lib/assignSync'
 import { LiveHr } from '@/features/plan/LiveHr'
 import type { HrSummary } from '@/domain/liveHr'
@@ -62,9 +62,13 @@ export function SessionPlayerScreen() {
   const { data, trainingBlocks, completePlannedSession } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
   const today = new Date().toISOString().slice(0, 10)
-  const open = block ? openOccurrencesOn(block, today) : []
-  const [pickedKey, setPickedKey] = useState<string | null>(null)
+  // Gewählt über die Startauswahl oder den Kalender: auch eine Einheit eines anderen Tages.
+  const [params] = useSearchParams()
+  const wanted = block && params.get('s') && params.get('d') ? findOpenOccurrence(block, params.get('s') as string, params.get('d') as string) : null
   const keyOf = (o: { session: StoredPlannedSession; planned: string }) => `${o.session.id}|${o.planned}`
+  const todays = block ? openOccurrencesOn(block, today) : []
+  const open = wanted && !todays.some((o) => keyOf(o) === keyOf(wanted)) ? [wanted, ...todays] : todays
+  const [pickedKey, setPickedKey] = useState<string | null>(wanted ? keyOf(wanted) : null)
   const occurrence = open.find((o) => keyOf(o) === pickedKey) ?? open[0] ?? null
   const session = occurrence?.session ?? null
   const hasLibrary = session?.blocks.some((b) => b.type === 'library_exercise') ?? false
@@ -189,6 +193,7 @@ export function SessionPlayerScreen() {
       )}
       <Panel className="mb-4">
         <div className="px-4 py-4">
+          {occurrence.date !== today && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-other-day">{t('start.countsFor', { date: `${occurrence.date.slice(8, 10)}.${occurrence.date.slice(5, 7)}.` })}</p>}
           {occurrence.moved && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-moved">{t('cal.movedFrom', { date: `${occurrence.planned.slice(8, 10)}.${occurrence.planned.slice(5, 7)}.` })}</p>}
           {session.blocks.map((b, i) => (b.type === 'library_exercise' || b.type === 'strength' || b.type === 'exercise' ? null : <p key={i} className="text-[14px]">{blockText(b, t)}</p>))}
           <SetLogger session={session} exercises={exercises} planSubs={planSubs} blocks={trainingBlocks} onChange={setLog} />

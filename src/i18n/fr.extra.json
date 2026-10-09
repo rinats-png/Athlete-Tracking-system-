@@ -3995,5 +3995,49 @@
     "tests": {
       "measured": "{{measured}} sur {{total}} mesurés"
     }
+  },
+  "start": {
+    "button": "Commencer l’entraînement",
+    "title": "Commencer l’entraînement",
+    "today": "Aujourd’hui",
+    "missed": "Manquées",
+    "upcoming": "Deux prochaines semaines",
+    "allDone": "Aucune séance ouverte dans le plan — tout est fait.",
+    "countsHint": "Tu peux aussi faire chaque séance un autre jour. Elle est alors cochée pour sa date prévue.",
+    "none": "Tu n’as pas de plan en cours. Tu peux quand même t’entraîner — choisis une option ci-dessous.",
+    "free": "Sans plan",
+    "log": "Saisir un entraînement",
+    "logSub": "Écrire une séance directement dans le journal",
+    "catalog": "Depuis le catalogue",
+    "catalogSub": "Une séance d’un plan prêt à l’emploi, sans adopter le plan",
+    "build": "Composer soi-même",
+    "buildSub": "Choisir des exercices, fixer les séries, c’est parti",
+    "countsFor": "Prévue le {{date}} – compte pour cette date.",
+    "doNow": "Faire maintenant"
+  },
+  "free": {
+    "eyebrow": "Entraînement libre",
+    "catalogTitle": "Séance du catalogue",
+    "catalogIntro": "Choisis un plan puis une séance. Le plan lui-même n’est pas adopté.",
+    "pickSession": "Choisis une séance",
+    "week": "Semaine",
+    "items": "Éléments : {{n}}",
+    "otherPlan": "Choisir un autre plan",
+    "buildTitle": "Ta propre séance",
+    "buildIntro": "Pour aujourd’hui, sans plan. Elle est enregistrée dans le journal.",
+    "name": "Nom de la séance",
+    "search": "Chercher un exercice",
+    "exercises": "Exercices",
+    "empty": "Aucun exercice pour l’instant. Cherche ci-dessus et touches-en un.",
+    "sets": "Séries",
+    "setsN": "{{n}} ×",
+    "fewer": "Une série de moins",
+    "more": "Une série de plus",
+    "reps": "Rép./durée",
+    "remove": "Retirer l’exercice",
+    "start": "Lancer la séance",
+    "lost": "Aucune séance n’est choisie ici. Choisis-en une dans « Commencer l’entraînement ».",
+    "noSlot": "Entraînement libre : compte comme entraînement, mais ne coche aucune date du plan.",
+    "save": "Enregistrer dans le journal"
   }
 }

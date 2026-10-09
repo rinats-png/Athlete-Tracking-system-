@@ -115,8 +115,8 @@ function TodayWithData() {
                   <p className="label-tag">{t('athleteToday.session.title')}</p>
                   <p className="mt-0.5 text-[14px] text-ink-secondary">{t('athleteToday.session.none')}</p>
                 </div>
-                <Link to={block ? '/plan' : '/training'} className="inline-flex min-h-11 items-center gap-1 text-[13px] text-accent-text">
-                  {block ? t('look.today.toPlan') : t('athleteToday.session.add')} <ChevronRight size={15} aria-hidden />
+                <Link to={planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off' ? '/training' : '/plan/start'} data-testid="today-start-training" className="inline-flex min-h-11 items-center gap-1 text-[13px] text-accent-text">
+                  {planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off' ? t('athleteToday.session.add') : t('start.button')} <ChevronRight size={15} aria-hidden />
                 </Link>
               </div>
             </Panel>

@@ -92,6 +92,39 @@ nur heute (`completion.swaps`); auf Wunsch auch in den folgenden Einheiten —
 dann als neue Planversion mit Änderungsliste (`source: substitution`),
 rücknehmbar wie jede Anpassung.
 
+## Training starten (9. Oktober 2026)
+
+Ein Knopf «Training starten» steht oben im Plan-Hub, mit und ohne Plan. Auf
+«Heute» führt der Link ohne Einheit ebenfalls dorthin. Er öffnet
+`/plan/start` (`TrainingStartScreen`).
+
+**Aus dem Plan.** Angezeigt werden die offenen Termine von heute, die
+verpassten (neueste zuerst) und die der nächsten 14 Tage (`openToDo`). Jeder
+Termin lässt sich jetzt durchführen, auch der von morgen. Der Player
+(`/plan/heute?s=<Einheit>&d=<geplanter Tag>`, `findOpenOccurrence`) sagt
+dann: «Geplant für … – zählt für diesen Termin.» Beim Abschluss hält
+`completion.planDay` den geplanten Tag fest. Kalender, Hub, Wochenprüfung
+und Bericht zeigen den Termin dadurch als erledigt, ohne neues Feld und ohne
+Migration. Im Kalender heißt derselbe Weg «Jetzt durchführen».
+
+**Ohne Plan (freies Training).** Es zählt als Training, hakt aber keinen
+Termin ab (`domain/freeSession.ts`). Es gibt drei Wege:
+
+- **Etwas eintragen:** öffnet den Editor des Trainingslogs (`/training?neu=1`).
+- **Aus dem Katalog:** eine Einheit aus einem fertigen Plan, Woche wählbar,
+  ohne den Plan zu übernehmen (`librarySession`). Inhalt und Dosis sind die
+  des Plans, die Kennung ist eigen. Hinweise «fachlich ungeprüft» und «nur
+  Deutsch» wie in der Bibliothek.
+- **Selbst zusammenstellen:** Name, höchstens 12 Übungen aus der
+  Übungsdatenbank, je Übung Sätze und Wiederholungen oder Zeit
+  (`customSession`). Keine Regel, keine Dosisvorgabe.
+
+Der freie Player (`/plan/frei`) hat Satz-Log und Ersatz nur für heute; «auch
+künftig» entfällt, weil es keinen Plan gibt. Dazu kommen Minuten und RPE.
+Speichern (`logFreeSession`) legt eine Einheit im Tagebuch an (Last, Notiz
+`frei:<Name>`) und ein Workout im Trainingslog (Sätze mit Wiederholungen).
+Kein Block wird verändert.
+
 ## Offene Bereiche (nachzureichen)
 
 | # | Bereich | Was fehlt | Wer |

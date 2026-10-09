@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Pencil, Plus, Trash2 } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
@@ -55,7 +55,9 @@ export function TrainingScreen() {
   const locale = useLocale()
   const { workouts, saveWorkout, deleteWorkout, role } = useAppData()
   const today = toDay(new Date())
-  const [editing, setEditing] = useState<StoredWorkout | null>(null)
+  // `?neu=1` (aus «Training starten → Etwas eintragen») öffnet gleich den Editor.
+  const [params] = useSearchParams()
+  const [editing, setEditing] = useState<StoredWorkout | null>(() => (params.get('neu') === '1' ? blank(today) : null))
 
   const sorted = useMemo(() => [...workouts].sort((a, b) => b.day.localeCompare(a.day) || b.createdAt.localeCompare(a.createdAt)), [workouts])
   const summary = useMemo(() => exerciseSummary(workouts), [workouts])

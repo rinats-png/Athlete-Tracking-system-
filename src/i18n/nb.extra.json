@@ -3995,5 +3995,49 @@
     "tests": {
       "measured": "{{measured}} av {{total}} målt"
     }
+  },
+  "start": {
+    "button": "Start trening",
+    "title": "Start trening",
+    "today": "I dag",
+    "missed": "Gått glipp av",
+    "upcoming": "Neste to uker",
+    "allDone": "Ingen åpne økter i planen – alt er gjort.",
+    "countsHint": "Du kan også gjøre hver økt en annen dag. Den krysses da av for den planlagte datoen.",
+    "none": "Du har ingen aktiv plan. Du kan trene likevel – velg en måte nedenfor.",
+    "free": "Uten plan",
+    "log": "Før inn noe",
+    "logSub": "Skriv en økt rett inn i treningsloggen",
+    "catalog": "Fra katalogen",
+    "catalogSub": "En økt fra en ferdig plan, uten å ta i bruk planen",
+    "build": "Sett sammen selv",
+    "buildSub": "Velg øvelser, bestem sett, sett i gang",
+    "countsFor": "Planlagt til {{date}} – teller for den datoen.",
+    "doNow": "Gjør nå"
+  },
+  "free": {
+    "eyebrow": "Fri trening",
+    "catalogTitle": "Økt fra katalogen",
+    "catalogIntro": "Velg en plan og en økt fra den. Selve planen tas ikke i bruk.",
+    "pickSession": "Velg en økt",
+    "week": "Uke",
+    "items": "Deler: {{n}}",
+    "otherPlan": "Velg en annen plan",
+    "buildTitle": "Egen økt",
+    "buildIntro": "For i dag, uten plan. Den lagres i treningsloggen.",
+    "name": "Navn på økten",
+    "search": "Søk øvelse",
+    "exercises": "Øvelser",
+    "empty": "Ingen øvelse ennå. Søk ovenfor og trykk på en.",
+    "sets": "Sett",
+    "setsN": "{{n}} ×",
+    "fewer": "Ett sett mindre",
+    "more": "Ett sett til",
+    "reps": "Rep./tid",
+    "remove": "Fjern øvelse",
+    "start": "Start økt",
+    "lost": "Ingen økt er valgt her. Velg en under «Start trening».",
+    "noSlot": "Fri trening: teller som trening, men krysser ikke av noen dato i planen.",
+    "save": "Lagre i treningsloggen"
   }
 }

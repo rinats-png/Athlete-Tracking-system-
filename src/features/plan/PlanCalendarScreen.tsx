@@ -316,6 +316,7 @@ export function PlanCalendarScreen() {
             )}
             <div className="flex flex-wrap gap-2">
               {picked && target != null && <button type="button" data-testid="cal-confirm" onClick={confirm} className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">{t('cal.confirm')}</button>}
+              {picked && !picked.done && <Link to={`/plan/heute?s=${encodeURIComponent(picked.session.id)}&d=${picked.planned}`} data-testid="cal-do-now" className="inline-flex min-h-11 items-center rounded-pill border border-accent px-4 text-[13px] font-semibold text-accent-text">{t('start.doNow')}</Link>}
               {picked?.moved && !series && <button type="button" data-testid="cal-unmove" onClick={unmove} className="min-h-11 rounded-pill border border-line px-4 text-[13px]">{t('cal.unmove', { date: dm(picked.planned) })}</button>}
               <button type="button" onClick={reset} data-testid="cal-cancel" className="min-h-11 px-3 text-[13px] text-ink-secondary underline underline-offset-2">{t('cal.cancel')}</button>
             </div>

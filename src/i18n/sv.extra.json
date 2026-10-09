@@ -3995,5 +3995,49 @@
     "tests": {
       "measured": "{{measured}} av {{total}} mätta"
     }
+  },
+  "start": {
+    "button": "Starta träning",
+    "title": "Starta träning",
+    "today": "I dag",
+    "missed": "Missade",
+    "upcoming": "Kommande två veckor",
+    "allDone": "Inget öppet pass i planen – allt klart.",
+    "countsHint": "Du kan göra varje pass en annan dag också. Det bockas då av för sitt planerade datum.",
+    "none": "Du har ingen aktiv plan. Du kan ändå träna – välj ett sätt nedan.",
+    "free": "Utan plan",
+    "log": "Logga något",
+    "logSub": "Skriv ett pass direkt i träningsloggen",
+    "catalog": "Från katalogen",
+    "catalogSub": "Ett pass ur en färdig plan, utan att ta över planen",
+    "build": "Sätt ihop själv",
+    "buildSub": "Välj övningar, bestäm set, kör",
+    "countsFor": "Planerat till {{date}} – räknas för det datumet.",
+    "doNow": "Gör nu"
+  },
+  "free": {
+    "eyebrow": "Fri träning",
+    "catalogTitle": "Pass från katalogen",
+    "catalogIntro": "Välj en plan och ett pass ur den. Planen tas inte över.",
+    "pickSession": "Välj ett pass",
+    "week": "Vecka",
+    "items": "Delar: {{n}}",
+    "otherPlan": "Välj en annan plan",
+    "buildTitle": "Eget pass",
+    "buildIntro": "För i dag, utan plan. Det sparas i träningsloggen.",
+    "name": "Passets namn",
+    "search": "Sök övning",
+    "exercises": "Övningar",
+    "empty": "Ingen övning än. Sök ovan och tryck på en.",
+    "sets": "Set",
+    "setsN": "{{n}} ×",
+    "fewer": "Ett set färre",
+    "more": "Ett set till",
+    "reps": "Rep./tid",
+    "remove": "Ta bort övning",
+    "start": "Starta pass",
+    "lost": "Inget pass är valt här. Välj ett under ”Starta träning”.",
+    "noSlot": "Fri träning: räknas som träning men bockar inte av något datum i planen.",
+    "save": "Spara i träningsloggen"
   }
 }

@@ -3995,5 +3995,49 @@
     "tests": {
       "measured": "{{measured}} af {{total}} målt"
     }
+  },
+  "start": {
+    "button": "Start træning",
+    "title": "Start træning",
+    "today": "I dag",
+    "missed": "Misset",
+    "upcoming": "De næste to uger",
+    "allDone": "Ingen åbne træninger i planen – alt er klaret.",
+    "countsHint": "Du kan også lave hver træning på en anden dag. Den bliver så krydset af for sin planlagte dato.",
+    "none": "Du har ingen aktiv plan. Du kan stadig træne – vælg en måde nedenfor.",
+    "free": "Uden plan",
+    "log": "Registrér noget",
+    "logSub": "Skriv en træning direkte i træningsloggen",
+    "catalog": "Fra kataloget",
+    "catalogSub": "En træning fra en færdig plan, uden at tage planen i brug",
+    "build": "Sæt selv sammen",
+    "buildSub": "Vælg øvelser, fastlæg sæt, gå i gang",
+    "countsFor": "Planlagt til {{date}} – tæller for den dato.",
+    "doNow": "Gør det nu"
+  },
+  "free": {
+    "eyebrow": "Fri træning",
+    "catalogTitle": "Træning fra kataloget",
+    "catalogIntro": "Vælg en plan og en træning fra den. Selve planen tages ikke i brug.",
+    "pickSession": "Vælg en træning",
+    "week": "Uge",
+    "items": "Dele: {{n}}",
+    "otherPlan": "Vælg en anden plan",
+    "buildTitle": "Egen træning",
+    "buildIntro": "Til i dag, uden plan. Den gemmes i træningsloggen.",
+    "name": "Træningens navn",
+    "search": "Søg øvelse",
+    "exercises": "Øvelser",
+    "empty": "Ingen øvelse endnu. Søg ovenfor og tryk på en.",
+    "sets": "Sæt",
+    "setsN": "{{n}} ×",
+    "fewer": "Et sæt mindre",
+    "more": "Et sæt mere",
+    "reps": "Gent./tid",
+    "remove": "Fjern øvelse",
+    "start": "Start træning",
+    "lost": "Der er ikke valgt nogen træning her. Vælg en under »Start træning«.",
+    "noSlot": "Fri træning: tæller som træning, men krydser ikke en dato af i planen.",
+    "save": "Gem i træningsloggen"
   }
 }

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { CalendarRange, Check, ClipboardList, Flag, Library, MessageSquareText, Timer } from 'lucide-react'
+import { CalendarRange, Check, ClipboardList, Flag, Library, MessageSquareText, Play, Timer } from 'lucide-react'
 import { Panel } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
@@ -68,6 +68,11 @@ export function PlanHubScreen() {
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('planHub.title')} intro={competition ? t('planHub.competition', { name: competition.name || t('planHub.competitionUnnamed') }) : undefined} />
 
       <PlanOffersPanel />
+
+      {/* Immer da: Training starten — aus dem Plan (auch an einem anderen Tag) oder frei. */}
+      <Link to="/plan/start" data-testid="hub-start-training" className="mb-4 flex min-h-12 items-center justify-center gap-2 rounded-pill bg-accent px-5 text-[15px] font-semibold text-accent-ink">
+        <Play size={16} aria-hidden /> {t('start.button')}
+      </Link>
 
       {!block || !view ? (
         <Panel className="mb-4" data-testid="hub-empty">

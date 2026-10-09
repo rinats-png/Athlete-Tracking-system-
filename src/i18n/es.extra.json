@@ -3995,5 +3995,49 @@
     "tests": {
       "measured": "{{measured}} de {{total}} medidos"
     }
+  },
+  "start": {
+    "button": "Empezar entrenamiento",
+    "title": "Empezar entrenamiento",
+    "today": "Hoy",
+    "missed": "Perdidas",
+    "upcoming": "Próximas dos semanas",
+    "allDone": "No hay sesiones pendientes en el plan: todo hecho.",
+    "countsHint": "Puedes hacer cualquier sesión otro día. Se marcará como hecha en su fecha prevista.",
+    "none": "No tienes un plan activo. Aun así puedes entrenar: elige una opción abajo.",
+    "free": "Sin plan",
+    "log": "Registrar algo",
+    "logSub": "Anotar un entrenamiento directamente en el registro",
+    "catalog": "Del catálogo",
+    "catalogSub": "Una sesión de un plan listo, sin adoptar el plan",
+    "build": "Crear la tuya",
+    "buildSub": "Elige ejercicios, fija las series y empieza",
+    "countsFor": "Prevista para el {{date}}: cuenta para esa fecha.",
+    "doNow": "Hacer ahora"
+  },
+  "free": {
+    "eyebrow": "Entrenamiento libre",
+    "catalogTitle": "Sesión del catálogo",
+    "catalogIntro": "Elige un plan y una sesión de él. El plan no se adopta.",
+    "pickSession": "Elige una sesión",
+    "week": "Semana",
+    "items": "Partes: {{n}}",
+    "otherPlan": "Elegir otro plan",
+    "buildTitle": "Tu propia sesión",
+    "buildIntro": "Para hoy, sin plan. Se guarda en el registro de entrenamiento.",
+    "name": "Nombre de la sesión",
+    "search": "Buscar ejercicio",
+    "exercises": "Ejercicios",
+    "empty": "Aún no hay ejercicios. Busca arriba y toca uno.",
+    "sets": "Series",
+    "setsN": "{{n}} ×",
+    "fewer": "Una serie menos",
+    "more": "Una serie más",
+    "reps": "Rep./tiempo",
+    "remove": "Quitar ejercicio",
+    "start": "Empezar sesión",
+    "lost": "Aquí no hay ninguna sesión elegida. Elige una en «Empezar entrenamiento».",
+    "noSlot": "Entrenamiento libre: cuenta como entrenamiento, pero no marca ninguna fecha del plan.",
+    "save": "Guardar en el registro"
   }
 }
