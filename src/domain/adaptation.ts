@@ -111,7 +111,7 @@ export function proposeAdjustment(block: StoredTrainingBlock, pct: IntentPct, ru
 }
 
 /** Übernimmt einen Vorschlag: neue Planversion, Änderungsliste bleibt im Block (rekonstruierbar). */
-export function applyAdjustment(block: StoredTrainingBlock, p: Proposal, meta: { id: string; now: string; source: 'feedback' | 'manual' }): StoredTrainingBlock {
+export function applyAdjustment(block: StoredTrainingBlock, p: Proposal, meta: { id: string; now: string; source: 'feedback' | 'manual' | 'substitution' }): StoredTrainingBlock {
   if (p.changes.length === 0) return block
   const bySession = new Map<string, Change[]>()
   for (const c of p.changes) bySession.set(c.sessionId, [...(bySession.get(c.sessionId) ?? []), c])
@@ -125,6 +125,10 @@ export function applyAdjustment(block: StoredTrainingBlock, p: Proposal, meta: {
         if (!c) return part
         if (part.type === 'library_exercise' && (c.field === 'rpe' || c.field === 'sets')) return { ...part, [c.field]: Number(c.to) }
         if (part.type === 'library_conditioning' && c.field === 'durationMin') return { ...part, durationMin: Number(c.to) }
+        if (part.type === 'library_exercise' && c.field === 'exercise') {
+          const [exerciseId, ...name] = c.to.split('|')
+          return { ...part, exerciseId, name: name.join('|') || part.name }
+        }
         return part
       }),
     }
@@ -140,4 +144,27 @@ export function revertLast(block: StoredTrainingBlock, meta: { id: string; now: 
   if (!last) return block
   const inverse: Proposal = { pct: (-last.intentPct || 10) as IntentPct, changes: last.changes.map((c) => ({ ...c, from: c.to, to: c.from })), atLimit: 0, blocked: false }
   return applyAdjustment(block, inverse, { ...meta, source: 'manual' })
+}
+
+/**
+ * Ersatz übernehmen: eine im Training ersetzte Übung auch in den folgenden,
+ * nicht erledigten Einheiten des Blocks tauschen. Dosis und Methodenregel der
+ * Position bleiben (der Ersatz teilt das Bewegungsmuster, `library.ts`); es
+ * entsteht eine neue Planversion mit Änderungsliste, also rücknehmbar.
+ * `from`/`to` der Änderung tragen `id|Name`.
+ */
+export function applySubstitution(block: StoredTrainingBlock, sub: { from: string; fromName: string; to: string; toName: string }, meta: { id: string; now: string; today: string }): StoredTrainingBlock {
+  const w = blockWeek(block, meta.today)
+  const fromWeek = w === 'before' ? 1 : w === 'after' ? block.weeks + 1 : w
+  const done = new Set(block.completions.map((c) => c.sessionId))
+  const changes: Change[] = []
+  for (const s of block.sessions) {
+    if (s.kind !== 'library' || s.removed || done.has(s.id) || (s.weekTo ?? block.weeks) < fromWeek) continue
+    s.blocks.forEach((p, i) => {
+      if (p.type === 'library_exercise' && p.exerciseId === sub.from) changes.push({ sessionId: s.id, part: i, field: 'exercise', from: `${sub.from}|${sub.fromName}`.slice(0, 120), to: `${sub.to}|${sub.toName}`.slice(0, 120), ruleId: p.ruleId })
+    })
+  }
+  const next = applyAdjustment(block, { pct: 10, changes, atLimit: 0, blocked: false }, { id: meta.id, now: meta.now, source: 'substitution' })
+  // Ein Ersatz ist kein Schwierigkeitswunsch: im Protokoll steht 0 %.
+  return next === block ? block : { ...next, adjustments: next.adjustments.map((a) => (a.id === meta.id ? { ...a, intentPct: 0 } : a)) }
 }

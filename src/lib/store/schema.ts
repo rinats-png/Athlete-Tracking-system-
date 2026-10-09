@@ -18,7 +18,7 @@ import { FOCUS_HARD_LIMIT, FOCUS_NOTE_MAX } from '@/domain/trainingFocus'
  *    Testfall, nicht eine Reihe von Feldzuweisungen irgendwo im Ladepfad.
  */
 
-export const CURRENT_SCHEMA_VERSION = 41
+export const CURRENT_SCHEMA_VERSION = 42
 
 // --- Bausteine ---------------------------------------------------------------
 
@@ -751,6 +751,30 @@ const plannedSessionSchema = z.object({
   coachModificationReason: z.string().max(200).nullable().default(null),
   removed: z.boolean().default(false),
 })
+/**
+ * Ein erfasster Satz im Session Player. `part` ist die Position der Übung in
+ * der Einheit; `exerciseId` die Übung, die wirklich gemacht wurde (nach einem
+ * Ersatz die Ersatzübung). Welche Felder es gibt, sagt der Parametervertrag
+ * der Übung (`parameters` der Übungsdatenbank).
+ */
+const planSetLogSchema = z.object({
+  part: z.number().int().min(0).max(11),
+  exerciseId: z.string().max(60).nullable(),
+  name: z.string().min(1).max(120),
+  set: z.number().int().min(1).max(20),
+  reps: z.number().int().min(0).max(300).nullable().default(null),
+  weightKg: finite.min(0).max(1000).nullable().default(null),
+  rir: z.number().int().min(0).max(10).nullable().default(null),
+  rpe: finite.min(1).max(10).nullable().default(null),
+  durationS: z.number().int().min(0).max(36_000).nullable().default(null),
+  distanceM: z.number().int().min(0).max(100_000).nullable().default(null),
+})
+const planSwapSchema = z.object({
+  part: z.number().int().min(0).max(11),
+  from: z.string().max(60),
+  to: z.string().max(60),
+  toName: z.string().min(1).max(120),
+})
 const planCompletionSchema = z.object({
   sessionId: z.string().min(1).max(80),
   day: dayString,
@@ -764,6 +788,15 @@ const planCompletionSchema = z.object({
   feedback: z.number().int().min(1).max(5).nullable().default(null),
   /** Schmerz während der Einheit: sperrt jede Steigerung (keine Diagnose, nur ein Halt). */
   pain: z.boolean().default(false),
+  /**
+   * Geplanter Termin der Einheit, wenn sie verschoben erledigt wurde (`day` ist
+   * dann der Tag, an dem trainiert wurde). Leer: geplant und erledigt am selben Tag.
+   */
+  planDay: dayString.nullable().default(null),
+  /** Satz-Log: was je Satz wirklich war. Leere Felder heißen «nicht erfasst», nie 0. */
+  sets: z.array(planSetLogSchema).max(160).default([]),
+  /** Übungen, die in dieser Einheit ersetzt wurden (nur heute). */
+  swaps: z.array(planSwapSchema).max(12).default([]),
 })
 /**
  * Eine übernommene Anpassung eines Bibliotheksplans: was sich änderte, unter
@@ -776,11 +809,12 @@ const planAdjustmentSchema = z.object({
   /** Ausgangsversion → neue Version. */
   fromVersion: z.number().int().min(1).max(999),
   toVersion: z.number().int().min(1).max(999),
-  source: z.enum(['feedback', 'manual']),
+  /** `substitution`: Übung im Training ersetzt, für die folgenden Einheiten übernommen. */
+  source: z.enum(['feedback', 'manual', 'substitution']),
   /** Wunsch in Prozent (−30 … +30); bei Feedback die abgeleitete Richtung. */
   intentPct: z.number().int().min(-30).max(30),
   changes: z
-    .array(z.object({ sessionId: z.string().max(80), part: z.number().int().min(0).max(12), field: z.enum(['sets', 'rpe', 'reps', 'durationMin']), from: z.string().max(40), to: z.string().max(40), ruleId: z.string().max(40).nullable() }))
+    .array(z.object({ sessionId: z.string().max(80), part: z.number().int().min(0).max(12), field: z.enum(['sets', 'rpe', 'reps', 'durationMin', 'exercise']), from: z.string().max(120), to: z.string().max(120), ruleId: z.string().max(40).nullable() }))
     .max(400),
 })
 /**
@@ -830,6 +864,12 @@ const trainingBlockSchema = z.object({
   /** Planversion: 1 beim Übernehmen, +1 je übernommener Anpassung. */
   planVersion: z.number().int().min(1).max(999).default(1),
   adjustments: z.array(planAdjustmentSchema).max(40).default([]),
+  /**
+   * Verschobene Termine einzelner Einheiten (Kalender): die Einheit, die am
+   * geplanten Tag `from` stand, liegt jetzt auf `to`. Gilt nur für diesen einen
+   * Termin; die Serie bleibt. Ohne Grund — der Athlet plant seine Woche selbst.
+   */
+  moves: z.array(z.object({ sessionId: z.string().min(1).max(80), from: dayString, to: dayString, at: isoDate })).max(400).default([]),
   status: z.enum(['active', 'closed']).default('active'),
   createdAt: isoDate,
   updatedAt: isoDate,
@@ -1980,6 +2020,23 @@ export const MIGRATIONS: Migration[] = [
           planVersion: b.planVersion ?? 1,
           adjustments: b.adjustments ?? [],
           completions: (b.completions ?? []).map((c: any) => ({ ...c, feedback: c.feedback ?? null, pain: c.pain ?? false })),
+        })),
+      })),
+    }),
+  },
+  {
+    from: 41,
+    to: 42,
+    describe: 'Kalender: verschobene Termine; Satz-Log, Ersatz und geplanter Tag je erledigter Einheit',
+    run: (data: any) => ({
+      ...data,
+      version: 42,
+      athletes: (data.athletes ?? []).map((athlete: any) => ({
+        ...athlete,
+        trainingBlocks: (athlete.trainingBlocks ?? []).map((b: any) => ({
+          ...b,
+          moves: b.moves ?? [],
+          completions: (b.completions ?? []).map((c: any) => ({ ...c, planDay: c.planDay ?? null, sets: c.sets ?? [], swaps: c.swaps ?? [] })),
         })),
       })),
     }),

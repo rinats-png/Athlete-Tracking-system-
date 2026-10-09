@@ -23,15 +23,14 @@ export const mondayOnOrAfter = (day: string): string => {
   return wd === 1 ? day : dayStr(dayNum(day) + (8 - wd))
 }
 
-/** Felder, die erst mit Schema 41 kamen (Bibliothekspläne, Versionen); für Blöcke anderer Herkunft leer. */
-export const BLOCK_V41_DEFAULTS = { libraryPlanId: null, libraryVersion: null, planVersion: 1, adjustments: [] } as const
+/** Felder, die erst mit Schema 41/42 kamen (Bibliothekspläne, Versionen, verschobene Termine); für Blöcke anderer Herkunft leer. */
+export const BLOCK_V41_DEFAULTS: Pick<StoredTrainingBlock, 'libraryPlanId' | 'libraryVersion' | 'planVersion' | 'adjustments' | 'moves'> = { libraryPlanId: null, libraryVersion: null, planVersion: 1, adjustments: [], moves: [] }
 
 export const blockEndDay = (b: Pick<StoredTrainingBlock, 'startDay' | 'weeks'>): string => dayStr(dayNum(b.startDay) + b.weeks * 7 - 1)
 
 export function adoptBlock(plan: BlockPlan, ctx: { id: string; family: SportFamily; disciplineId: string | null; phase: Phase; startDay: string; now: string }): StoredTrainingBlock {
   return {
     ...BLOCK_V41_DEFAULTS,
-    adjustments: [],
     id: ctx.id,
     family: ctx.family,
     name: '',
@@ -101,6 +100,8 @@ export function overrideSession(block: StoredTrainingBlock, sessionId: string, c
       ...block,
       updatedAt: now,
       sessions: block.sessions.map((s) => (s.id === sessionId ? { ...s, day, removed, coachModified: true, coachModificationReason: why.slice(0, 200) } : s)),
+      // Die Serie bekommt einen neuen Wochentag: einzeln verschobene Termine dieser Einheit hängen am alten und fallen weg.
+      moves: (block.moves ?? []).filter((m) => m.sessionId !== sessionId),
     },
   }
 }
@@ -115,15 +116,103 @@ export function blockWeek(block: Pick<StoredTrainingBlock, 'startDay' | 'weeks'>
 
 const sessionDate = (block: Pick<StoredTrainingBlock, 'startDay'>, week: number, weekday: number): string => dayStr(dayNum(block.startDay) + (week - 1) * 7 + (weekday - 1))
 
-const isDone = (block: StoredTrainingBlock, sessionId: string, date: string): StoredPlanCompletion | undefined => block.completions.find((c) => c.sessionId === sessionId && c.day === date)
+/** Erledigt? Ein Termin heißt nach seinem geplanten Tag; wer verschoben trainiert hat, trägt ihn in `planDay`. */
+const isDone = (block: StoredTrainingBlock, sessionId: string, planned: string): StoredPlanCompletion | undefined =>
+  block.completions.find((c) => c.sessionId === sessionId && (c.planDay ?? c.day) === planned)
 
-/** Offene Einheiten an einem Kalendertag, im Zeitraum des Blocks. */
-export function openSessionsOn(block: StoredTrainingBlock, today: string): StoredPlannedSession[] {
+/* ---------- Termine: Einheiten mit echtem Datum (Kalender) ---------- */
+
+/**
+ * Ein Termin: eine Einheit in einer Blockwoche. `planned` ist der Tag aus dem
+ * Plan, `date` der Tag, an dem sie jetzt liegt (nach einem Verschieben).
+ */
+export interface Occurrence {
+  session: StoredPlannedSession
+  week: number
+  planned: string
+  date: string
+  moved: boolean
+  done: boolean
+}
+
+/** Alle Termine des Blocks, nach Datum sortiert (gestrichene fehlen). */
+export function occurrences(block: StoredTrainingBlock): Occurrence[] {
+  const moves = block.moves ?? []
+  const out: Occurrence[] = []
+  for (let week = 1; week <= block.weeks; week++) {
+    for (const session of block.sessions) {
+      if (session.removed || !sessionInWeek(session, week, block.weeks)) continue
+      const planned = sessionDate(block, week, session.day)
+      const move = moves.find((m) => m.sessionId === session.id && m.from === planned)
+      out.push({ session, week, planned, date: move?.to ?? planned, moved: move != null, done: isDone(block, session.id, planned) != null })
+    }
+  }
+  return out.sort((a, b) => a.date.localeCompare(b.date) || a.session.day - b.session.day)
+}
+
+/** Termine an einem Kalendertag. */
+export const occurrencesOn = (block: StoredTrainingBlock, date: string): Occurrence[] => occurrences(block).filter((o) => o.date === date)
+
+/** Offene Termine an einem Tag (aktiver Block). */
+export function openOccurrencesOn(block: StoredTrainingBlock, today: string): Occurrence[] {
   if (block.status !== 'active') return []
-  const w = blockWeek(block, today)
-  if (typeof w !== 'number') return []
-  const wd = weekdayOf(today)
-  return block.sessions.filter((s) => !s.removed && s.day === wd && sessionInWeek(s, w, block.weeks) && !isDone(block, s.id, today))
+  return occurrencesOn(block, today).filter((o) => !o.done)
+}
+
+/** Offene Einheiten an einem Kalendertag — nach ihrem jetzigen Termin, auch wenn er verschoben wurde. */
+export function openSessionsOn(block: StoredTrainingBlock, today: string): StoredPlannedSession[] {
+  return openOccurrencesOn(block, today).map((o) => o.session)
+}
+
+/** Verpasste Termine: vor heute, nicht erledigt. Sie lassen sich nachholen (verschieben), nie stillschweigend. */
+export function missedOccurrences(block: StoredTrainingBlock, today: string): Occurrence[] {
+  if (block.status !== 'active') return []
+  return occurrences(block).filter((o) => !o.done && o.date < today)
+}
+
+/** Wie weit ein Termin nach Blockende noch liegen darf: zwei Wochen zum Nachholen. */
+export const MOVE_GRACE_DAYS = 14
+
+export type MoveError = 'unknown_occurrence' | 'done' | 'past' | 'out_of_range' | 'two_key' | 'nothing_changed'
+export type MoveWarning = 'key_adjacent' | 'event_close' | 'crowded' | 'outside_block'
+
+/**
+ * Hinweise zu einem Zieltag, bevor jemand verschiebt — sie sperren nicht, sie
+ * sagen, worauf zu achten ist: zwei harte Tage hintereinander, zu nah am
+ * Wettkampf, ein voller Tag, ein Tag außerhalb des Blocks.
+ */
+export function moveWarnings(block: StoredTrainingBlock, sessionId: string, planned: string, to: string): MoveWarning[] {
+  const all = occurrences(block)
+  const self = all.find((o) => o.session.id === sessionId && o.planned === planned)
+  if (!self) return []
+  const others = all.filter((o) => o !== self)
+  const out: MoveWarning[] = []
+  const near = (d: string, n: number) => Math.abs(dayNum(d) - dayNum(to)) <= n
+  if (self.session.highIntensity && others.some((o) => o.session.highIntensity && o.date !== to && near(o.date, 1))) out.push('key_adjacent')
+  if (block.eventDay && dayNum(to) <= dayNum(block.eventDay) && near(block.eventDay, self.session.highIntensity ? 2 : 0)) out.push('event_close')
+  if (others.filter((o) => o.date === to).length >= 2) out.push('crowded')
+  if (to < block.startDay || to > blockEndDay(block)) out.push('outside_block')
+  return out
+}
+
+/**
+ * Einen einzelnen Termin verschieben (Kalender). Frei: jeder Tag von heute bis
+ * zwei Wochen nach Blockende. Gesperrt sind nur Erledigtes, die Vergangenheit
+ * und zwei Schlüsseleinheiten an einem Tag (Planungsregel 1). Zurück auf den
+ * geplanten Tag löscht die Verschiebung.
+ */
+export function moveOccurrence(block: StoredTrainingBlock, sessionId: string, planned: string, to: string, today: string, now: string): { ok: true; block: StoredTrainingBlock } | { ok: false; error: MoveError } {
+  const all = occurrences(block)
+  const self = all.find((o) => o.session.id === sessionId && o.planned === planned)
+  if (!self) return { ok: false, error: 'unknown_occurrence' }
+  if (self.done) return { ok: false, error: 'done' }
+  if (to === self.date) return { ok: false, error: 'nothing_changed' }
+  if (to < today) return { ok: false, error: 'past' }
+  if (dayNum(to) > dayNum(blockEndDay(block)) + MOVE_GRACE_DAYS) return { ok: false, error: 'out_of_range' }
+  if (self.session.highIntensity && all.some((o) => o !== self && o.date === to && o.session.highIntensity)) return { ok: false, error: 'two_key' }
+  const rest = (block.moves ?? []).filter((m) => !(m.sessionId === sessionId && m.from === planned))
+  const moves = to === planned ? rest : [...rest, { sessionId, from: planned, to, at: now }]
+  return { ok: true, block: { ...block, moves: moves.slice(-400), updatedAt: now } }
 }
 
 export interface WeekCheck {
@@ -214,17 +303,30 @@ export interface CalendarCell {
   sessions: { session: StoredPlannedSession; done: boolean }[]
 }
 
-/** Eine Blockwoche als sieben Tage mit ihren Einheiten (gestrichene fehlen, Wochenspanne beachtet). */
+/** Eine Blockwoche als sieben Tage mit ihren Einheiten (gestrichene fehlen, Wochenspanne beachtet, Verschiebungen eingerechnet). */
 export function calendarWeek(block: StoredTrainingBlock, week: number): CalendarCell[] {
-  return Array.from({ length: 7 }, (_, i) => {
-    const weekday = i + 1
-    const date = sessionDate(block, week, weekday)
-    const sessions = block.sessions
-      .filter((s) => !s.removed && s.day === weekday && sessionInWeek(s, week, block.weeks))
-      .map((session) => ({ session, done: isDone(block, session.id, date) != null }))
-    return { weekday, date, sessions }
+  return calendarDays(block, sessionDate(block, week, 1), 7).map((c) => ({ weekday: c.weekday, date: c.date, sessions: c.items.map((o) => ({ session: o.session, done: o.done })) }))
+}
+
+export interface CalendarDay {
+  weekday: number
+  date: string
+  items: Occurrence[]
+}
+
+/** `count` Kalendertage ab `from`, je mit ihren Terminen — unabhängig von Blockwochen. */
+export function calendarDays(block: StoredTrainingBlock, from: string, count: number): CalendarDay[] {
+  const all = occurrences(block)
+  return Array.from({ length: count }, (_, i) => {
+    const date = dayStr(dayNum(from) + i)
+    return { weekday: weekdayOf(date), date, items: all.filter((o) => o.date === date) }
   })
 }
+
+/** Montag der Woche, in der `day` liegt. */
+export const mondayOf = (day: string): string => dayStr(dayNum(day) - (weekdayOf(day) - 1))
+/** Tag plus/minus `n` Tage. */
+export const addDays = (day: string, n: number): string => dayStr(dayNum(day) + n)
 
 /* ---------- Eigener Plan (Trainingsbereich Etappe 4) ---------- */
 

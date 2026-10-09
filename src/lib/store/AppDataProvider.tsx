@@ -45,7 +45,11 @@ import {
   type StoredData,
   type StoredFocus,
   type StoredResult,
+  type StoredPlanCompletion,
 } from './localStore'
+import { workoutFromSets } from '@/domain/setLog'
+import { applySubstitution } from '@/domain/adaptation'
+import { REGISTRY_TO_LEGACY } from '@/data/library/legacyExerciseMap'
 import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
 import { isBlankPlaceholder } from './placeholder'
 import { isEmptyEntry } from '@/domain/diary'
@@ -167,7 +171,7 @@ export interface AppDataValue {
   saveTrainingBlock: (block: StoredTrainingBlock) => void
   deleteTrainingBlock: (id: string) => void
   /** Eine geplante Einheit als erledigt eintragen: Block und Tagebuch (Last) in einem Schritt. */
-  completePlannedSession: (input: { blockId: string; sessionId: string; day: string; durationMin: number; rpe: number; kind: 'strength' | 'endurance'; hr?: { avg: number; max: number } | null; feedback?: number | null; pain?: boolean }) => void
+  completePlannedSession: (input: { blockId: string; sessionId: string; day: string; durationMin: number; rpe: number; kind: 'strength' | 'endurance'; hr?: { avg: number; max: number } | null; feedback?: number | null; pain?: boolean; planDay?: string | null; sets?: StoredPlanCompletion['sets']; swaps?: StoredPlanCompletion['swaps']; title?: string; substitutions?: { from: string; fromName: string; to: string; toName: string }[] }) => void
   /** Aktivitäten aus einem Import übernehmen; schon vorhandene (gleiche Kennung) bleiben, wie sie sind. Gibt die Zahl neuer zurück. */
   importActivities: (list: StoredActivity[]) => number
   /** Alle importierten Aktivitäten des aktiven Athleten löschen. */
@@ -773,7 +777,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         const current = storeRef.current
         commitStore({ ...current, athletes: current.athletes.map((a) => (a.id === current.activeAthleteId ? { ...a, trainingBlocks: a.trainingBlocks.filter((b) => b.id !== id) } : a)) })
       },
-      completePlannedSession: ({ blockId, sessionId, day, durationMin, rpe, kind, hr, feedback, pain }) => {
+      completePlannedSession: ({ blockId, sessionId, day, durationMin, rpe, kind, hr, feedback, pain, planDay, sets, swaps, title, substitutions }) => {
         const current = storeRef.current
         const now = new Date().toISOString()
         commitStore({
@@ -781,15 +785,20 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           athletes: current.athletes.map((a) => {
             if (a.id !== current.activeAthleteId) return a
             const block = a.trainingBlocks.find((b) => b.id === blockId)
-            if (!block || block.completions.some((c) => c.sessionId === sessionId && c.day === day)) return a
+            const planned = planDay ?? day
+            if (!block || block.completions.some((c) => c.sessionId === sessionId && (c.planDay ?? c.day) === planned)) return a
             const diarySessionId = newId()
             const session = { id: diarySessionId, kind, durationMin, rpe, note: `plan:${sessionId}`.slice(0, 200) }
             const existing = a.diary.find((e) => e.day === day)
             const diary = existing
               ? a.diary.map((e) => (e.day === day ? { ...e, sessions: [...e.sessions, session], updatedAt: now } : e))
               : [...a.diary, { id: newId(), day, weightKg: null, sleepHours: null, sleepQuality: null, energy: null, stress: null, soreness: null, steps: null, adherence: null, sessions: [session], note: '', createdAt: now, updatedAt: now }]
-            const completion = { sessionId, day, durationMin, rpe, diarySessionId, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback: feedback ?? null, pain: pain ?? false }
-            return { ...a, diary, trainingBlocks: a.trainingBlocks.map((b) => (b.id === blockId ? { ...b, completions: [...b.completions, completion], updatedAt: now } : b)) }
+            const completion = { sessionId, day, durationMin, rpe, diarySessionId, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback: feedback ?? null, pain: pain ?? false, planDay: planned === day ? null : planned, sets: (sets ?? []).slice(0, 160), swaps: (swaps ?? []).slice(0, 12) }
+            // Sätze mit Wiederholungen auch ins Trainingslog (Verlauf, e1RM); die Last bleibt beim Tagebuch.
+            const workout = workoutFromSets(completion.sets, { id: newId(), day, title: title ?? '', diarySessionId, now, newId, legacyOf: (id) => REGISTRY_TO_LEGACY[id] })
+            // Ersatz «auch künftig»: in den folgenden Einheiten tauschen, als neue Planversion (rücknehmbar).
+            const withSubs = (b: StoredTrainingBlock) => (substitutions ?? []).reduce((acc, sub) => applySubstitution(acc, sub, { id: newId(), now, today: day }), b)
+            return { ...a, diary, workouts: workout ? [...a.workouts, workout] : a.workouts, trainingBlocks: a.trainingBlocks.map((b) => (b.id === blockId ? withSubs({ ...b, completions: [...b.completions, completion], updatedAt: now }) : b)) }
           }),
         })
       },

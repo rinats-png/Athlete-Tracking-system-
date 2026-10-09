@@ -134,6 +134,13 @@ export function ProgramDetailScreen() {
               <p className="font-semibold">{SEED_TEST_TO_SLUG[x.test_id] ? <Link to={`/tests/${SEED_TEST_TO_SLUG[x.test_id]}/details`} className="text-accent-text underline underline-offset-2" data-testid={`prog-test-${x.test_id}`}>{x.name}</Link> : x.name}</p>
               <p className="text-[13px] text-ink-secondary">{x.protocol}</p>
               <p className="mt-1 text-[12px] text-ink-muted">{t('prog.errorNote')} {x.measurement_error_note}</p>
+              {x.typical_error && (
+                <p className="mt-1 text-[12px] text-ink-muted" data-testid={`prog-typical-${x.test_id}`}>
+                  {t('prog.typicalError', { value: x.typical_error.value })}{' '}
+                  <a href={`https://doi.org/${x.typical_error.source_ref.doi}`} target="_blank" rel="noopener noreferrer" className="text-accent-text underline underline-offset-2">{x.typical_error.source_ref.cite}</a>
+                  {' · '}{t('plan.review.unreviewed')} · {t('prog.typicalErrorNote')}
+                </p>
+              )}
             </div>
           ))}
         </div>
@@ -149,6 +156,7 @@ export function ProgramDetailScreen() {
                 <p className="font-semibold">{r.name} <span className="font-normal text-ink-muted">({r.rule_id})</span></p>
                 <p className="text-ink-secondary">{bounds(r)}</p>
                 <p className="text-ink-secondary">{t('prog.cutoff')}: {r.quality_cutoff}</p>
+                {r.evidence_note && <p className="mt-1 text-[12px] text-ink-muted" data-testid={`prog-rule-note-${r.rule_id}`}>{r.evidence_note.trim()}</p>}
                 <p className="mt-1 flex flex-wrap gap-1.5 text-[11px]">
                   <span className="rounded-pill border border-line px-2 py-0.5">{t('plan.evidence.specificity', { level: t(`plan.specificity.${r.evidence_default}`) })}</span>
                   <span className="rounded-pill border border-warning px-2 py-0.5 text-warning">{t('plan.review.unreviewed')}</span>

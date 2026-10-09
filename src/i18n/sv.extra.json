@@ -3330,7 +3330,7 @@
   },
   "cal": {
     "title": "Plankalender",
-    "intro": "Dina pass per vecka, fas eller månad. Tryck på eller dra ett pass för att flytta det och välj måldag.",
+    "intro": "Dina pass med datum. Tryck eller dra och välj en dag — flytta enskilda pass fritt, även mellan veckor.",
     "view": "Vy",
     "v": {
       "week": "Vecka",
@@ -3352,14 +3352,46 @@
     "pickTarget": "{{intent}}: välj måldag.",
     "moveTo": "Flytta {{intent}} till {{day}}.",
     "confirm": "Flytta",
-    "seriesNote": "Flytten gäller passet i alla dess veckor.",
+    "seriesNote": "Serien flyttas alla veckor; det är en planändring och kräver ett skäl.",
     "err": {
       "reason_required": "Ange ett skäl.",
       "unknown_session": "Passet hittades inte.",
       "day_taken": "Det finns redan ett pass den dagen.",
-      "nothing_changed": "Dagen är oförändrad."
+      "nothing_changed": "Dagen är oförändrad.",
+      "done": "Klara pass ligger kvar.",
+      "past": "Inget kan flyttas bakåt i tiden.",
+      "out_of_range": "Högst två veckor efter blockets slut.",
+      "two_key": "Det finns redan ett nyckelpass den dagen — appen tar inte två samma dag.",
+      "unknown_occurrence": "Datumet hittades inte."
     },
-    "link": "Kalender"
+    "link": "Kalender",
+    "movedFrom": "flyttat från {{date}}",
+    "missed": "missat",
+    "today": "Idag",
+    "event": "Tävling",
+    "ics": "Till kalendern",
+    "missedTitle": "{{n}} missade pass",
+    "missedNote": "Ta igen eller låt bli — båda är okej. Inget flyttas av sig självt.",
+    "catchUpToday": "Gör det idag",
+    "pickDay": "Välj dag",
+    "beforeBlock": "Före blocket",
+    "afterBlock": "Efter blocket",
+    "prevMonth": "Föregående månad",
+    "nextMonth": "Nästa månad",
+    "monthHint": "Tryck på en dag för att öppna veckan. Med ett valt pass blir det måldagen.",
+    "moveSeriesTo": "Flytta {{intent}} till {{day}} alla veckor.",
+    "mode": "Vad ska flyttas?",
+    "modeSingle": "Bara detta datum",
+    "modeSeries": "Alla veckor (serie)",
+    "cancel": "Avbryt",
+    "unmove": "Tillbaka till {{date}}",
+    "singleNote": "Gäller bara detta datum; övriga veckor är oförändrade.",
+    "warn": {
+      "key_adjacent": "Dagen före eller efter finns redan ett hårt pass — planera två hårda dagar i rad medvetet.",
+      "event_close": "Nära tävlingen — hårda pass strax innan kostar fräschör.",
+      "crowded": "Den dagen finns redan två pass.",
+      "outside_block": "Dagen ligger utanför blocket; veckokontroll och rapport räknar ändå passet."
+    }
   },
   "own": {
     "tag": "Eget pass",
@@ -3728,6 +3760,20 @@
       "plan": "Från biblioteksplanen \"{{plan}}\", planversion {{version}}.",
       "rule": "Dos inom gränserna för metodregel {{rule}}.",
       "details": "Regler och källor i plandetaljen"
+    },
+    "sportTransfer": "Idrottsöverföring (utkast)",
+    "sportTransferNote": "härlett ur rörelsemönster, ingen granskad koppling.",
+    "sportCode": {
+      "HYROX": "HYROX",
+      "GENERAL_FITNESS": "Allmän fitness",
+      "COMBAT_SPORT": "Kampsport",
+      "COMBAT_SPORT_STRIKING": "Slag- och sparksporter",
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "POWERLIFTING": "Styrkelyft",
+      "HYPERTROPHY": "Muskeluppbyggnad",
+      "RUN": "Löpning",
+      "RUN_SHORT": "Kort löpning",
+      "ALL": "Alla idrotter"
     }
   },
   "fuelPlan": {
@@ -3842,7 +3888,9 @@
       "POWERLIFTING": "Styrkelyft",
       "RUN_10K": "Löpning 10 km",
       "RUN_5K": "Löpning 5 km"
-    }
+    },
+    "typicalError": "Typiskt mätfel (litteratur): {{value}}.",
+    "typicalErrorNote": "Bara storleksordning; appen bedömer med ditt eget mätfel."
   },
   "adapt": {
     "title": "Justera träningen",
@@ -3885,5 +3933,31 @@
     },
     "weekShort": "V{{n}}",
     "sessionsOfWeek": "Pass vecka {{n}}"
+  },
+  "setlog": {
+    "title": "Setlogg",
+    "count": "{{n}} set loggade",
+    "note": "Bocka av ett set när det är gjort. Förifyllda värden räknas först när de är bockade.",
+    "rest": "Vila",
+    "restSkip": "Hoppa över",
+    "last": "Förra gången ({{day}}): {{sets}}",
+    "swap": "Byt ut",
+    "swapNote": "Samma rörelsemönster; set, repetitioner och ansträngning är som planerat.",
+    "noOptions": "Inget alternativ med samma rörelsemönster.",
+    "fromPlan": "från planen",
+    "unswap": "Tillbaka till planerad övning",
+    "swappedFrom": "Ersätter: {{name}}",
+    "keep": "Använd även i följande pass i blocket (ny planversion)",
+    "set": "Set",
+    "f": {
+      "weightKg": "kg",
+      "reps": "Rep.",
+      "rir": "RIR",
+      "rpe": "RPE",
+      "durationS": "Sek",
+      "distanceM": "m"
+    },
+    "tick": "Set {{n}} klart",
+    "add": "Lägg till set"
   }
 }

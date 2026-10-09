@@ -106,3 +106,28 @@ export function buildIcs(due: DueTest[], locale: AppLocale, now: Date = new Date
   // RFC 5545 verlangt CRLF; mit \n allein lehnen einige Kalender die Datei ab.
   return `${lines.join('\r\n')}\r\n`
 }
+
+/**
+ * Trainingstermine als Kalenderdatei (Plankalender). Ganztägig wie oben: die
+ * App kennt keine Uhrzeit des Trainings und erfindet keine. Die UID hängt am
+ * geplanten Termin, damit ein erneuter Import einen verschobenen Termin
+ * ersetzt statt verdoppelt.
+ */
+export function buildPlanIcs(events: { uid: string; date: string; title: string; description: string }[], now: Date = new Date()): string {
+  const lines: string[] = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//KYDON//Training Plan//DE', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH']
+  for (const e of events) {
+    lines.push(
+      'BEGIN:VEVENT',
+      fold(`UID:${e.uid}@kydon-plan`),
+      `DTSTAMP:${stamp(now)}`,
+      `DTSTART;VALUE=DATE:${e.date.replace(/-/g, '')}`,
+      `DTEND;VALUE=DATE:${plusOneDay(e.date).replace(/-/g, '')}`,
+      fold(`SUMMARY:${escape(e.title)}`),
+      fold(`DESCRIPTION:${escape(e.description)}`),
+      'TRANSP:TRANSPARENT',
+      'END:VEVENT',
+    )
+  }
+  lines.push('END:VCALENDAR')
+  return `${lines.join('\r\n')}\r\n`
+}

@@ -43,6 +43,8 @@ export interface ExerciseText {
   sportsNote: string
   transfer: string
   sources: SourceLink[]
+  /** v4.1: Sporttransfer aus den Bewegungsmustern abgeleitet — EXTRAPOLATED, ungeprüft. */
+  sportTransfer: { sports: string[]; evidence: Specificity; status: string } | null
 }
 
 export interface EvidenceRef {
@@ -67,6 +69,8 @@ export interface MethodRule {
   review_status: 'DRAFT_UNREVIEWED' | 'REVIEWED'
   notes: string
   evidence_refs?: EvidenceRef[]
+  /** v4.1: Begründung der Evidenzstufe bzw. der Quelle. */
+  evidence_note?: string | null
 }
 
 export interface SessionTemplate {
@@ -90,6 +94,8 @@ export interface LibraryTest {
   metric: string
   measurement_error_note: string
   applies_to: string[]
+  /** v4.1: typischer Messfehler aus der Literatur — Größenordnung, ungeprüft; die App urteilt NICHT damit (Regel 7: eigene Messwiederholung). */
+  typical_error?: { value: string; unit: string; source_ref: EvidenceRef; status: string; note: string } | null
 }
 
 export interface PlanHead {

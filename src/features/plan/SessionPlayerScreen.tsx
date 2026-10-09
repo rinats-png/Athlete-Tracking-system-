@@ -5,7 +5,7 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { openSessionsOn } from '@/domain/trainingBlock'
+import { openOccurrencesOn } from '@/domain/trainingBlock'
 import { syncAssignedCompletions } from '@/lib/assignSync'
 import { LiveHr } from '@/features/plan/LiveHr'
 import type { HrSummary } from '@/domain/liveHr'
@@ -14,11 +14,17 @@ import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/p
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { cn } from '@/lib/utils'
 import type { StoredPlannedSession } from '@/lib/store/localStore'
+import { SetLogger, type Swap } from '@/features/plan/SetLogger'
+import { useLibrary } from '@/features/library/useLibrary'
+import type { SetLogEntry } from '@/domain/setLog'
 
 /**
  * Session Player: führt durch die Einheit des Tages. Läuft ohne Netz. Für
  * Intervalle zählt eine Uhr Arbeit und Pause; alles andere steht als Karte.
  * Beim Abschluss kommt die Einheit mit Dauer und Anstrengung ins Tagebuch.
+ *
+ * Übungen haben ein Satz-Log (was je Satz war) und lassen sich ersetzen
+ * (`SetLogger`). Der Player zeigt die Termine des Tages — auch verschobene.
  */
 
 interface Step {
@@ -54,9 +60,15 @@ export function SessionPlayerScreen() {
   const { data, trainingBlocks, completePlannedSession } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
   const today = new Date().toISOString().slice(0, 10)
-  const open = block ? openSessionsOn(block, today) : []
-  const [pickedId, setPickedId] = useState<string | null>(null)
-  const session = open.find((s) => s.id === pickedId) ?? open[0] ?? null
+  const open = block ? openOccurrencesOn(block, today) : []
+  const [pickedKey, setPickedKey] = useState<string | null>(null)
+  const keyOf = (o: { session: StoredPlannedSession; planned: string }) => `${o.session.id}|${o.planned}`
+  const occurrence = open.find((o) => keyOf(o) === pickedKey) ?? open[0] ?? null
+  const session = occurrence?.session ?? null
+  const hasLibrary = session?.blocks.some((b) => b.type === 'library_exercise') ?? false
+  const { exercises, index } = useLibrary(hasLibrary)
+  const planSubs = index?.plans.find((p) => p.plan_id === block?.libraryPlanId)?.substitutions ?? {}
+  const [log, setLog] = useState<{ sets: SetLogEntry[]; swaps: Swap[] }>({ sets: [], swaps: [] })
 
   const steps = useMemo(() => (session ? stepsOf(session) : []), [session])
   const [step, setStep] = useState(0)
@@ -109,7 +121,7 @@ export function SessionPlayerScreen() {
   }, [running, steps])
 
   if (trainingPlanMode() === 'off' || !block) return <EmptyState title={t('player.title')} body={t('player.noBlock')} action={<Link to="/plan/block" className="inline-flex min-h-11 items-center text-accent-text underline">{t('player.toBlock')}</Link>} />
-  if (!session) return <EmptyState title={t('player.title')} body={t('player.none')} action={<Link to="/plan/block" className="inline-flex min-h-11 items-center text-accent-text underline">{t('player.toBlock')}</Link>} />
+  if (!session || !occurrence) return <EmptyState title={t('player.title')} body={t('player.none')} action={<Link to="/plan/block" className="inline-flex min-h-11 items-center text-accent-text underline">{t('player.toBlock')}</Link>} />
 
   const toggle = () => {
     if (steps.length === 0) return
@@ -125,9 +137,27 @@ export function SessionPlayerScreen() {
 
   const done = () => {
     if (rpe == null) return
-    completePlannedSession({ blockId: block.id, sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, kind: diaryKindOf(session.primaryIntent), hr: hr ? { avg: hr.avg, max: hr.max } : null, feedback, pain })
+    const durationMin = Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30))
+    const planDay = occurrence.planned === today ? null : occurrence.planned
+    const swaps = log.swaps.map(({ part, from, to, toName }) => ({ part, from, to, toName }))
+    completePlannedSession({
+      blockId: block.id,
+      sessionId: session.id,
+      day: today,
+      durationMin,
+      rpe,
+      kind: diaryKindOf(session.primaryIntent),
+      hr: hr ? { avg: hr.avg, max: hr.max } : null,
+      feedback,
+      pain,
+      planDay,
+      sets: log.sets,
+      swaps,
+      title: sessionName(session, t),
+      substitutions: log.swaps.filter((x) => x.keep).map(({ from, fromName, to, toName }) => ({ from, fromName, to, toName })),
+    })
     // Zugewiesener Block: Fortschritt nachmelden (best effort, ohne Netz geht es später).
-    if (block.assignmentId) void syncAssignedCompletions({ ...block, completions: [...block.completions, { sessionId: session.id, day: today, durationMin: Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30)), rpe, diarySessionId: null, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback, pain }] })
+    if (block.assignmentId) void syncAssignedCompletions({ ...block, completions: [...block.completions, { sessionId: session.id, day: today, durationMin, rpe, diarySessionId: null, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback, pain, planDay, sets: log.sets, swaps }] })
     navigate('/plan/block')
   }
 
@@ -136,9 +166,9 @@ export function SessionPlayerScreen() {
       <ScreenHeader eyebrow={t('player.eyebrow')} title={t('player.title')} intro={t('player.intro')} />
       {open.length > 1 && (
         <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t('player.pick')}>
-          {open.map((s) => (
-            <button key={s.id} type="button" aria-pressed={s.id === session.id} onClick={() => setPickedId(s.id)} className={cn('min-h-11 rounded-pill border px-4 text-[13px]', s.id === session.id ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line')}>
-              {t(`plan.intent.${s.primaryIntent}`)}
+          {open.map((o) => (
+            <button key={keyOf(o)} type="button" aria-pressed={keyOf(o) === keyOf(occurrence)} onClick={() => setPickedKey(keyOf(o))} className={cn('min-h-11 rounded-pill border px-4 text-[13px]', keyOf(o) === keyOf(occurrence) ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line')}>
+              {t(`plan.intent.${o.session.primaryIntent}`)}
             </button>
           ))}
         </div>
@@ -146,9 +176,9 @@ export function SessionPlayerScreen() {
       <Panel className="mb-4">
         <PanelHeader title={sessionName(session, t)} subtitle={sessionSource(session, t)} />
         <div className="px-4 pb-4">
-          {session.blocks.map((b, i) => (
-            <p key={i} className="text-[14px]">{blockText(b, t)}</p>
-          ))}
+          {occurrence.moved && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-moved">{t('cal.movedFrom', { date: `${occurrence.planned.slice(8, 10)}.${occurrence.planned.slice(5, 7)}.` })}</p>}
+          {session.blocks.map((b, i) => (b.type === 'library_exercise' || b.type === 'strength' || b.type === 'exercise' ? null : <p key={i} className="text-[14px]">{blockText(b, t)}</p>))}
+          <SetLogger session={session} exercises={exercises} planSubs={planSubs} blocks={trainingBlocks} onChange={setLog} />
           <SessionWhy session={session} block={block} />
           {steps.length > 0 && (
             <div className="mt-4 text-center" data-testid="player-timer">

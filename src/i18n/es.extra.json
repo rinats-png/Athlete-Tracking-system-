@@ -3330,7 +3330,7 @@
   },
   "cal": {
     "title": "Calendario del plan",
-    "intro": "Tus sesiones por semana, fase o mes. Para moverla, toca o arrastra una sesión y elige el día de destino.",
+    "intro": "Tus sesiones con fecha. Toca o arrastra y elige un día: mueve sesiones sueltas libremente, incluso entre semanas.",
     "view": "Vista",
     "v": {
       "week": "Semana",
@@ -3352,14 +3352,46 @@
     "pickTarget": "{{intent}}: elige el día de destino.",
     "moveTo": "Mover {{intent}} a {{day}}.",
     "confirm": "Mover",
-    "seriesNote": "El cambio vale para la sesión en todas sus semanas.",
+    "seriesNote": "La serie se mueve en todas las semanas; es un cambio del plan y requiere un motivo.",
     "err": {
       "reason_required": "Indica un motivo.",
       "unknown_session": "Sesión no encontrada.",
       "day_taken": "Ya hay una sesión ese día.",
-      "nothing_changed": "El día no ha cambiado."
+      "nothing_changed": "El día no ha cambiado.",
+      "done": "Las sesiones hechas se quedan donde están.",
+      "past": "No se puede mover al pasado.",
+      "out_of_range": "Como máximo dos semanas después del bloque.",
+      "two_key": "Ese día ya hay una sesión clave; la app no acepta dos el mismo día.",
+      "unknown_occurrence": "Fecha no encontrada."
     },
-    "link": "Calendario"
+    "link": "Calendario",
+    "movedFrom": "movida del {{date}}",
+    "missed": "perdida",
+    "today": "Hoy",
+    "event": "Competición",
+    "ics": "Al calendario",
+    "missedTitle": "{{n}} sesión(es) perdida(s)",
+    "missedNote": "Recuperar o dejarla: ambas opciones valen. Nada se mueve solo.",
+    "catchUpToday": "Hacerla hoy",
+    "pickDay": "Elegir día",
+    "beforeBlock": "Antes del bloque",
+    "afterBlock": "Después del bloque",
+    "prevMonth": "Mes anterior",
+    "nextMonth": "Mes siguiente",
+    "monthHint": "Toca un día para abrir su semana. Con una sesión elegida, fija el día de destino.",
+    "moveSeriesTo": "Mover {{intent}} al {{day}} en todas las semanas.",
+    "mode": "¿Qué mover?",
+    "modeSingle": "Solo esta fecha",
+    "modeSeries": "Todas las semanas (serie)",
+    "cancel": "Cancelar",
+    "unmove": "Volver al {{date}}",
+    "singleNote": "Solo afecta a esta fecha; las demás semanas siguen igual.",
+    "warn": {
+      "key_adjacent": "Ya hay una sesión dura el día anterior o siguiente: planifica dos días duros seguidos a conciencia.",
+      "event_close": "Cerca de la competición: sesiones duras justo antes restan frescura.",
+      "crowded": "Ese día ya hay dos sesiones.",
+      "outside_block": "El día está fuera del bloque; la revisión semanal y el informe cuentan igualmente la sesión."
+    }
   },
   "own": {
     "tag": "Sesión propia",
@@ -3728,6 +3760,20 @@
       "plan": "Del plan de la biblioteca «{{plan}}», versión {{version}}.",
       "rule": "Dosis dentro de los límites de la regla {{rule}}.",
       "details": "Reglas y fuentes en el detalle del plan"
+    },
+    "sportTransfer": "Transferencia deportiva (borrador)",
+    "sportTransferNote": "derivado de los patrones de movimiento, sin revisar.",
+    "sportCode": {
+      "HYROX": "HYROX",
+      "GENERAL_FITNESS": "Fitness general",
+      "COMBAT_SPORT": "Deportes de combate",
+      "COMBAT_SPORT_STRIKING": "Deportes de golpeo",
+      "COMBAT_SPORT_GRAPPLING": "Deportes de agarre",
+      "POWERLIFTING": "Powerlifting",
+      "HYPERTROPHY": "Hipertrofia",
+      "RUN": "Carrera",
+      "RUN_SHORT": "Carrera corta",
+      "ALL": "Todos los deportes"
     }
   },
   "fuelPlan": {
@@ -3842,7 +3888,9 @@
       "POWERLIFTING": "Powerlifting",
       "RUN_10K": "Carrera 10 km",
       "RUN_5K": "Carrera 5 km"
-    }
+    },
+    "typicalError": "Error típico (literatura): {{value}}.",
+    "typicalErrorNote": "Solo orden de magnitud; la app juzga con tu propio error de medida."
   },
   "adapt": {
     "title": "Ajustar entrenamiento",
@@ -3885,5 +3933,31 @@
     },
     "weekShort": "S{{n}}",
     "sessionsOfWeek": "Sesiones de la semana {{n}}"
+  },
+  "setlog": {
+    "title": "Registro de series",
+    "count": "{{n}} series registradas",
+    "note": "Marca la serie cuando esté hecha. Los valores precargados solo cuentan al marcarlos.",
+    "rest": "Descanso",
+    "restSkip": "Saltar",
+    "last": "La última vez ({{day}}): {{sets}}",
+    "swap": "Sustituir",
+    "swapNote": "Mismo patrón de movimiento; series, repeticiones y esfuerzo se mantienen.",
+    "noOptions": "No hay sustituto con el mismo patrón de movimiento.",
+    "fromPlan": "del plan",
+    "unswap": "Volver al ejercicio planificado",
+    "swappedFrom": "Sustituye a: {{name}}",
+    "keep": "Aplicar también a las siguientes sesiones de este bloque (nueva versión del plan)",
+    "set": "Serie",
+    "f": {
+      "weightKg": "kg",
+      "reps": "Rep.",
+      "rir": "RIR",
+      "rpe": "RPE",
+      "durationS": "Seg",
+      "distanceM": "m"
+    },
+    "tick": "Serie {{n}} hecha",
+    "add": "Añadir serie"
   }
 }

@@ -3330,7 +3330,7 @@
   },
   "cal": {
     "title": "Plan calendar",
-    "intro": "Your sessions by week, phase or month. To move one, tap or drag a session and choose the target day.",
+    "intro": "Your sessions with dates. Tap or drag, then pick a day — move single sessions freely, even across weeks.",
     "view": "View",
     "v": {
       "week": "Week",
@@ -3349,17 +3349,49 @@
     "open": "Open",
     "noBlock": "There is no active block.",
     "moveHere": "Move here",
-    "pickTarget": "{{intent}}: choose the target day.",
+    "pickTarget": "{{intent}}: pick the target day.",
     "moveTo": "Move {{intent}} to {{day}}.",
     "confirm": "Move",
-    "seriesNote": "Moving applies to the session in all of its weeks.",
+    "seriesNote": "The series moves in every week; this changes the plan and needs a reason.",
     "err": {
       "reason_required": "Please give a reason.",
       "unknown_session": "Session not found.",
       "day_taken": "There is already a session on that day.",
-      "nothing_changed": "The day is unchanged."
+      "nothing_changed": "The day is unchanged.",
+      "done": "Completed sessions stay where they are.",
+      "past": "Nothing can be moved into the past.",
+      "out_of_range": "At most two weeks after the block ends.",
+      "two_key": "There is already a key session that day — the app does not accept two on one day.",
+      "unknown_occurrence": "Date not found."
     },
-    "link": "Calendar"
+    "link": "Calendar",
+    "movedFrom": "moved from {{date}}",
+    "missed": "missed",
+    "today": "Today",
+    "event": "Competition",
+    "ics": "To device calendar",
+    "missedTitle": "{{n}} missed session(s)",
+    "missedNote": "Catch up or let it go — both are fine. Nothing moves on its own.",
+    "catchUpToday": "Do it today",
+    "pickDay": "Pick a day",
+    "beforeBlock": "Before the block",
+    "afterBlock": "After the block",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "monthHint": "Tap a day to open its week. With a session picked, tapping sets the target day.",
+    "moveSeriesTo": "Move {{intent}} to {{day}} in every week.",
+    "mode": "What to move?",
+    "modeSingle": "Only this date",
+    "modeSeries": "Every week (series)",
+    "cancel": "Cancel",
+    "unmove": "Back to {{date}}",
+    "singleNote": "Applies to this one date only; other weeks stay as they are.",
+    "warn": {
+      "key_adjacent": "A hard session is already on the day before or after — plan back-to-back hard days on purpose.",
+      "event_close": "Close to the competition — hard sessions right before cost freshness.",
+      "crowded": "There are already two sessions on this day.",
+      "outside_block": "The day lies outside the block; weekly check and report still count the session."
+    }
   },
   "own": {
     "tag": "Own session",
@@ -3728,6 +3760,20 @@
       "plan": "From the library plan \"{{plan}}\", plan version {{version}}.",
       "rule": "Dose within the limits of method rule {{rule}}.",
       "details": "Rules and sources in the plan details"
+    },
+    "sportTransfer": "Sport transfer (draft)",
+    "sportTransferNote": "derived from movement patterns, not a reviewed mapping.",
+    "sportCode": {
+      "HYROX": "HYROX",
+      "GENERAL_FITNESS": "General fitness",
+      "COMBAT_SPORT": "Combat sports",
+      "COMBAT_SPORT_STRIKING": "Striking sports",
+      "COMBAT_SPORT_GRAPPLING": "Grappling sports",
+      "POWERLIFTING": "Powerlifting",
+      "HYPERTROPHY": "Hypertrophy",
+      "RUN": "Running",
+      "RUN_SHORT": "Short-distance running",
+      "ALL": "All sports"
     }
   },
   "fuelPlan": {
@@ -3842,7 +3888,9 @@
       "POWERLIFTING": "Powerlifting",
       "RUN_10K": "10 km running",
       "RUN_5K": "5 km running"
-    }
+    },
+    "typicalError": "Typical error (literature): {{value}}.",
+    "typicalErrorNote": "Order of magnitude only; the app judges with your own measurement error."
   },
   "adapt": {
     "title": "Adjust training",
@@ -3885,5 +3933,31 @@
     },
     "weekShort": "W{{n}}",
     "sessionsOfWeek": "Sessions in week {{n}}"
+  },
+  "setlog": {
+    "title": "Set log",
+    "count": "{{n}} sets logged",
+    "note": "Tick a set once it is done. Prefilled numbers only count once ticked.",
+    "rest": "Rest",
+    "restSkip": "Skip",
+    "last": "Last time ({{day}}): {{sets}}",
+    "swap": "Swap",
+    "swapNote": "Same movement pattern; sets, reps and effort stay as planned.",
+    "noOptions": "No substitute with the same movement pattern.",
+    "fromPlan": "from plan",
+    "unswap": "Back to the planned exercise",
+    "swappedFrom": "Replaces: {{name}}",
+    "keep": "Also apply to the following sessions of this block (new plan version)",
+    "set": "Set",
+    "f": {
+      "weightKg": "kg",
+      "reps": "Reps",
+      "rir": "RIR",
+      "rpe": "RPE",
+      "durationS": "Sec",
+      "distanceM": "m"
+    },
+    "tick": "Set {{n}} done",
+    "add": "Add set"
   }
 }

@@ -3,17 +3,18 @@ import { loadExercises, loadExerciseText, loadPlanWeeks, loadProgramIndex } from
 import type { ExerciseText, LibraryExercise, PlanWeek, ProgramIndex } from '@/domain/libraryTypes'
 
 /** Lädt Übungsdatenbank und Programmindex nach; `null`, solange sie unterwegs sind. */
-export function useLibrary(): { exercises: LibraryExercise[] | null; index: ProgramIndex | null } {
+export function useLibrary(enabled = true): { exercises: LibraryExercise[] | null; index: ProgramIndex | null } {
   const [exercises, setExercises] = useState<LibraryExercise[] | null>(null)
   const [index, setIndex] = useState<ProgramIndex | null>(null)
   useEffect(() => {
+    if (!enabled) return
     let live = true
     void loadExercises().then((e) => live && setExercises(e))
     void loadProgramIndex().then((i) => live && setIndex(i))
     return () => {
       live = false
     }
-  }, [])
+  }, [enabled])
   return { exercises, index }
 }
 

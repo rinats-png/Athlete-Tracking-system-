@@ -3330,7 +3330,7 @@
   },
   "cal": {
     "title": "Calendrier du plan",
-    "intro": "Tes séances par semaine, phase ou mois. Pour déplacer, touche ou fais glisser une séance et choisis le jour cible.",
+    "intro": "Tes séances avec leur date. Touche ou fais glisser, puis choisis un jour — déplace librement une séance, même d’une semaine à l’autre.",
     "view": "Vue",
     "v": {
       "week": "Semaine",
@@ -3352,14 +3352,46 @@
     "pickTarget": "{{intent}} : choisis le jour cible.",
     "moveTo": "Déplacer {{intent}} vers {{day}}.",
     "confirm": "Déplacer",
-    "seriesNote": "Le déplacement vaut pour la séance sur toutes ses semaines.",
+    "seriesNote": "La série se déplace chaque semaine ; c’est une modification du plan qui demande une raison.",
     "err": {
       "reason_required": "Merci d’indiquer un motif.",
       "unknown_session": "Séance introuvable.",
       "day_taken": "Une séance existe déjà ce jour-là.",
-      "nothing_changed": "Le jour est inchangé."
+      "nothing_changed": "Le jour est inchangé.",
+      "done": "Les séances faites restent à leur place.",
+      "past": "Impossible de déplacer dans le passé.",
+      "out_of_range": "Au plus deux semaines après la fin du bloc.",
+      "two_key": "Il y a déjà une séance clé ce jour-là — l’app n’en accepte pas deux le même jour.",
+      "unknown_occurrence": "Date introuvable."
     },
-    "link": "Calendrier"
+    "link": "Calendrier",
+    "movedFrom": "déplacée du {{date}}",
+    "missed": "manquée",
+    "today": "Aujourd’hui",
+    "event": "Compétition",
+    "ics": "Vers le calendrier",
+    "missedTitle": "{{n}} séance(s) manquée(s)",
+    "missedNote": "Rattraper ou laisser — les deux sont possibles. Rien ne bouge tout seul.",
+    "catchUpToday": "Rattraper aujourd’hui",
+    "pickDay": "Choisir un jour",
+    "beforeBlock": "Avant le bloc",
+    "afterBlock": "Après le bloc",
+    "prevMonth": "Mois précédent",
+    "nextMonth": "Mois suivant",
+    "monthHint": "Touche un jour pour ouvrir sa semaine. Avec une séance choisie, cela fixe le jour cible.",
+    "moveSeriesTo": "Déplacer {{intent}} au {{day}} chaque semaine.",
+    "mode": "Que déplacer ?",
+    "modeSingle": "Seulement cette date",
+    "modeSeries": "Toutes les semaines (série)",
+    "cancel": "Annuler",
+    "unmove": "Revenir au {{date}}",
+    "singleNote": "Ne concerne que cette date ; les autres semaines restent inchangées.",
+    "warn": {
+      "key_adjacent": "Une séance dure est déjà prévue la veille ou le lendemain — planifie deux jours durs d’affilée en connaissance de cause.",
+      "event_close": "Proche de la compétition — une séance dure juste avant coûte de la fraîcheur.",
+      "crowded": "Il y a déjà deux séances ce jour-là.",
+      "outside_block": "Le jour est hors du bloc ; le contrôle hebdo et le bilan comptent quand même la séance."
+    }
   },
   "own": {
     "tag": "Séance perso",
@@ -3728,6 +3760,20 @@
       "plan": "Issu du plan « {{plan}} », version {{version}}.",
       "rule": "Dosage dans les limites de la règle {{rule}}.",
       "details": "Règles et sources dans le détail du plan"
+    },
+    "sportTransfer": "Transfert sportif (brouillon)",
+    "sportTransferNote": "déduit des schémas de mouvement, sans validation.",
+    "sportCode": {
+      "HYROX": "HYROX",
+      "GENERAL_FITNESS": "Forme générale",
+      "COMBAT_SPORT": "Sports de combat",
+      "COMBAT_SPORT_STRIKING": "Sports de frappe",
+      "COMBAT_SPORT_GRAPPLING": "Sports de préhension",
+      "POWERLIFTING": "Force athlétique",
+      "HYPERTROPHY": "Hypertrophie",
+      "RUN": "Course",
+      "RUN_SHORT": "Course courte",
+      "ALL": "Tous les sports"
     }
   },
   "fuelPlan": {
@@ -3842,7 +3888,9 @@
       "POWERLIFTING": "Force athlétique",
       "RUN_10K": "Course 10 km",
       "RUN_5K": "Course 5 km"
-    }
+    },
+    "typicalError": "Erreur typique (littérature) : {{value}}.",
+    "typicalErrorNote": "Ordre de grandeur seulement ; l’app juge avec ta propre erreur de mesure."
   },
   "adapt": {
     "title": "Ajuster l'entraînement",
@@ -3885,5 +3933,31 @@
     },
     "weekShort": "S{{n}}",
     "sessionsOfWeek": "Séances de la semaine {{n}}"
+  },
+  "setlog": {
+    "title": "Journal des séries",
+    "count": "{{n}} séries saisies",
+    "note": "Cochez une série une fois réalisée. Les valeurs préremplies ne comptent qu’une fois cochées.",
+    "rest": "Récupération",
+    "restSkip": "Passer",
+    "last": "La dernière fois ({{day}}) : {{sets}}",
+    "swap": "Remplacer",
+    "swapNote": "Même schéma de mouvement ; séries, répétitions et effort restent comme prévu.",
+    "noOptions": "Aucun remplacement avec le même schéma de mouvement.",
+    "fromPlan": "du plan",
+    "unswap": "Revenir à l’exercice prévu",
+    "swappedFrom": "Remplace : {{name}}",
+    "keep": "Appliquer aussi aux séances suivantes de ce bloc (nouvelle version du plan)",
+    "set": "Série",
+    "f": {
+      "weightKg": "kg",
+      "reps": "Rép.",
+      "rir": "RIR",
+      "rpe": "RPE",
+      "durationS": "Sec",
+      "distanceM": "m"
+    },
+    "tick": "Série {{n}} faite",
+    "add": "Ajouter une série"
   }
 }

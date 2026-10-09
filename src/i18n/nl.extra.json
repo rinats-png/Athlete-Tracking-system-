@@ -3330,7 +3330,7 @@
   },
   "cal": {
     "title": "Plankalender",
-    "intro": "Je trainingen per week, fase of maand. Tik of sleep een training om te verplaatsen en kies de doeldag.",
+    "intro": "Je sessies met datum. Tik of sleep en kies een dag — verplaats losse sessies vrij, ook over weken heen.",
     "view": "Weergave",
     "v": {
       "week": "Week",
@@ -3352,14 +3352,46 @@
     "pickTarget": "{{intent}}: kies de doeldag.",
     "moveTo": "{{intent}} naar {{day}} verplaatsen.",
     "confirm": "Verplaatsen",
-    "seriesNote": "Verplaatsen geldt voor de training in al haar weken.",
+    "seriesNote": "De reeks verschuift in alle weken; dat is een planwijziging en vraagt een reden.",
     "err": {
       "reason_required": "Geef een reden op.",
       "unknown_session": "Training niet gevonden.",
       "day_taken": "Op die dag staat al een training.",
-      "nothing_changed": "De dag is ongewijzigd."
+      "nothing_changed": "De dag is ongewijzigd.",
+      "done": "Afgeronde sessies blijven waar ze zijn.",
+      "past": "Niets kan naar het verleden verplaatst worden.",
+      "out_of_range": "Hoogstens twee weken na het einde van het blok.",
+      "two_key": "Er staat al een sleutelsessie op die dag — twee op één dag neemt de app niet aan.",
+      "unknown_occurrence": "Datum niet gevonden."
     },
-    "link": "Kalender"
+    "link": "Kalender",
+    "movedFrom": "verplaatst van {{date}}",
+    "missed": "gemist",
+    "today": "Vandaag",
+    "event": "Wedstrijd",
+    "ics": "Naar agenda",
+    "missedTitle": "{{n}} gemiste sessie(s)",
+    "missedNote": "Inhalen of laten liggen — allebei prima. Niets verschuift vanzelf.",
+    "catchUpToday": "Vandaag inhalen",
+    "pickDay": "Dag kiezen",
+    "beforeBlock": "Voor het blok",
+    "afterBlock": "Na het blok",
+    "prevMonth": "Vorige maand",
+    "nextMonth": "Volgende maand",
+    "monthHint": "Tik op een dag om de week te openen. Met een gekozen sessie kies je zo de doeldag.",
+    "moveSeriesTo": "{{intent}} in alle weken naar {{day}} verplaatsen.",
+    "mode": "Wat verplaatsen?",
+    "modeSingle": "Alleen deze datum",
+    "modeSeries": "Alle weken (reeks)",
+    "cancel": "Annuleren",
+    "unmove": "Terug naar {{date}}",
+    "singleNote": "Geldt alleen voor deze datum; de andere weken blijven zoals ze zijn.",
+    "warn": {
+      "key_adjacent": "Op de dag ervoor of erna staat al een zware sessie — plan twee zware dagen achter elkaar bewust.",
+      "event_close": "Dicht bij de wedstrijd — zware sessies vlak ervoor kosten frisheid.",
+      "crowded": "Op deze dag staan al twee sessies.",
+      "outside_block": "De dag ligt buiten het blok; weekcontrole en verslag tellen de sessie toch mee."
+    }
   },
   "own": {
     "tag": "Eigen training",
@@ -3728,6 +3760,20 @@
       "plan": "Uit het bibliotheekplan \"{{plan}}\", planversie {{version}}.",
       "rule": "Dosis binnen de grenzen van methoderegel {{rule}}.",
       "details": "Regels en bronnen in de plandetails"
+    },
+    "sportTransfer": "Sporttransfer (concept)",
+    "sportTransferNote": "afgeleid uit bewegingspatronen, geen gecontroleerde koppeling.",
+    "sportCode": {
+      "HYROX": "HYROX",
+      "GENERAL_FITNESS": "Algemene fitheid",
+      "COMBAT_SPORT": "Vechtsport",
+      "COMBAT_SPORT_STRIKING": "Slag- en trapsport",
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "POWERLIFTING": "Powerlifting",
+      "HYPERTROPHY": "Spieropbouw",
+      "RUN": "Hardlopen",
+      "RUN_SHORT": "Korte afstand",
+      "ALL": "Alle sporten"
     }
   },
   "fuelPlan": {
@@ -3842,7 +3888,9 @@
       "POWERLIFTING": "Powerliften",
       "RUN_10K": "10 km hardlopen",
       "RUN_5K": "5 km hardlopen"
-    }
+    },
+    "typicalError": "Typische meetfout (literatuur): {{value}}.",
+    "typicalErrorNote": "Alleen een ordegrootte; de app oordeelt met je eigen meetfout."
   },
   "adapt": {
     "title": "Training aanpassen",
@@ -3885,5 +3933,31 @@
     },
     "weekShort": "W{{n}}",
     "sessionsOfWeek": "Sessies in week {{n}}"
+  },
+  "setlog": {
+    "title": "Setlog",
+    "count": "{{n}} sets vastgelegd",
+    "note": "Vink een set af als hij gedaan is. Vooraf ingevulde getallen tellen pas met een vinkje.",
+    "rest": "Rust",
+    "restSkip": "Overslaan",
+    "last": "Vorige keer ({{day}}): {{sets}}",
+    "swap": "Vervangen",
+    "swapNote": "Hetzelfde bewegingspatroon; sets, herhalingen en inspanning blijven zoals gepland.",
+    "noOptions": "Geen vervanging met hetzelfde bewegingspatroon.",
+    "fromPlan": "uit plan",
+    "unswap": "Terug naar de geplande oefening",
+    "swappedFrom": "Vervangt: {{name}}",
+    "keep": "Ook in de volgende sessies van dit blok overnemen (nieuwe planversie)",
+    "set": "Set",
+    "f": {
+      "weightKg": "kg",
+      "reps": "Herh.",
+      "rir": "RIR",
+      "rpe": "RPE",
+      "durationS": "Sec",
+      "distanceM": "m"
+    },
+    "tick": "Set {{n}} gedaan",
+    "add": "Set toevoegen"
   }
 }

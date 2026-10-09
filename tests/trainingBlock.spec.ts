@@ -66,7 +66,7 @@ test.describe('Block: Fachlogik', () => {
     const b = mk()
     expect(openSessionsOn(b, '2026-10-05').map((s) => s.id)).toEqual(['vo2_4x4-d1'])
     expect(openSessionsOn(b, '2026-10-07')).toEqual([])
-    const done = { ...b, completions: [{ sessionId: 'vo2_4x4-d1', day: '2026-10-05', durationMin: 25, rpe: 8, diarySessionId: 'x', avgHr: null, maxHr: null, feedback: null, pain: false }] }
+    const done = { ...b, completions: [{ sessionId: 'vo2_4x4-d1', day: '2026-10-05', durationMin: 25, rpe: 8, diarySessionId: 'x', avgHr: null, maxHr: null, feedback: null, pain: false, planDay: null, sets: [], swaps: [] }] }
     expect(openSessionsOn(done, '2026-10-05')).toEqual([])
     expect(weekChecks(done, '2026-10-14')).toEqual([
       { week: 1, planned: 2, done: 1 },
@@ -244,7 +244,7 @@ test.describe('ADAPT und Bericht (Etappe 11)', () => {
 
   test('Wochenbericht: Block für Athlet und Eltern, nie für den Verband', () => {
     const a = emptyData().athletes[0]
-    const inp = { athlete: { profile: a.profile, results: [], workouts: [], diary: [] }, reminders: { remindersEnabled: false, reminderIntervalDays: {} }, trainingBlocks: [{ ...mk(), completions: [{ sessionId: 'vo2_4x4-d1', day: '2026-10-12', durationMin: 25, rpe: 8, diarySessionId: 'x', avgHr: null, maxHr: null, feedback: null, pain: false }] }] }
+    const inp = { athlete: { profile: a.profile, results: [], workouts: [], diary: [] }, reminders: { remindersEnabled: false, reminderIntervalDays: {} }, trainingBlocks: [{ ...mk(), completions: [{ sessionId: 'vo2_4x4-d1', day: '2026-10-12', durationMin: 25, rpe: 8, diarySessionId: 'x', avgHr: null, maxHr: null, feedback: null, pain: false, planDay: null, sets: [], swaps: [] }] }] }
     const at = new Date('2026-10-14T08:00:00.000Z')
     const find = (r: 'athlete' | 'parents' | 'association') => weeklyReport(inp, r, at).facts.find((f) => f.key === 'block')
     expect(find('athlete')?.params).toEqual({ week: 2, weeks: 6, done: 1, planned: 2 })

@@ -29,7 +29,7 @@ export function ExerciseDetailScreen() {
   if (!exercises) return <p className="text-[14px] text-ink-secondary" data-testid="lib-loading">{t('lib.loading')}</p>
   if (!e) return <EmptyState title={t('lib.notFound')} body={t('lib.notFoundBody')} />
   if (text === undefined) return <p className="text-[14px] text-ink-secondary" data-testid="lib-loading">{t('lib.loading')}</p>
-  const x = text ?? { steps: [], cues: '', errors: '', muscles: '', abilities: '', sportsNote: '', transfer: '', sources: [] }
+  const x = text ?? { steps: [], cues: '', errors: '', muscles: '', abilities: '', sportsNote: '', transfer: '', sources: [], sportTransfer: null }
 
   const legacy = REGISTRY_TO_LEGACY[e.id]
   const img = legacy ? exerciseImageUrl(legacy) : null
@@ -112,6 +112,13 @@ export function ExerciseDetailScreen() {
         <div className="space-y-3 px-4 pb-4 text-[14px]">
           <p className="text-[12px] text-ink-secondary" data-testid="ex-transfer-note">{t('lib.transferNote')}</p>
           <p>{x.transfer}</p>
+          {x.sportTransfer && (
+            <div data-testid="ex-sport-transfer">
+              <span className="label-tag">{t('lib.sportTransfer')}</span>
+              <ul className="mt-1 flex flex-wrap gap-1.5">{x.sportTransfer.sports.map((s) => <li key={s} className="rounded-pill border border-line px-2.5 py-0.5 text-[12px]">{t(`lib.sportCode.${s}`)}</li>)}</ul>
+              <p className="mt-1 text-[11px] text-ink-muted">{t('plan.evidence.specificity', { level: t(`plan.specificity.${x.sportTransfer.evidence}`) })} · {t('plan.review.unreviewed')} · {t('lib.sportTransferNote')}</p>
+            </div>
+          )}
           <p className="text-[13px] text-ink-secondary"><span className="label-tag">{t('lib.sportsNote')}</span><br />{x.sportsNote}</p>
           {x.sources.length > 0 && (
             <div>

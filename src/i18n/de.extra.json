@@ -3330,7 +3330,7 @@
   },
   "cal": {
     "title": "Plankalender",
-    "intro": "Deine Einheiten nach Woche, Phase oder Monat. Zum Verschieben eine Einheit antippen oder ziehen und den Zieltag wählen.",
+    "intro": "Deine Einheiten mit Datum. Antippen oder ziehen, dann einen Tag wählen — einzelne Termine frei verschieben, auch über Wochen.",
     "view": "Ansicht",
     "v": {
       "week": "Woche",
@@ -3352,14 +3352,46 @@
     "pickTarget": "{{intent}}: Zieltag wählen.",
     "moveTo": "{{intent}} auf {{day}} verschieben.",
     "confirm": "Verschieben",
-    "seriesNote": "Das Verschieben gilt für die Einheit in allen ihren Wochen.",
+    "seriesNote": "Die Serie verschiebt sich in allen Wochen; das ist ein Planeingriff und braucht einen Grund.",
     "err": {
       "reason_required": "Bitte einen Grund angeben.",
       "unknown_session": "Einheit nicht gefunden.",
       "day_taken": "An diesem Tag liegt schon eine Einheit.",
-      "nothing_changed": "Der Tag ist unverändert."
+      "nothing_changed": "Der Tag ist unverändert.",
+      "done": "Erledigte Einheiten bleiben, wo sie sind.",
+      "past": "In die Vergangenheit lässt sich nichts verschieben.",
+      "out_of_range": "Höchstens zwei Wochen nach Blockende.",
+      "two_key": "An diesem Tag liegt schon eine Schlüsseleinheit — zwei an einem Tag nimmt die App nicht an.",
+      "unknown_occurrence": "Termin nicht gefunden."
     },
-    "link": "Kalender"
+    "link": "Kalender",
+    "movedFrom": "verschoben vom {{date}}",
+    "missed": "verpasst",
+    "today": "Heute",
+    "event": "Wettkampf",
+    "ics": "In den Gerätekalender",
+    "missedTitle": "{{n}} verpasste Einheit(en)",
+    "missedNote": "Nachholen oder liegen lassen — beides ist in Ordnung. Nichts wird stillschweigend verschoben.",
+    "catchUpToday": "Heute nachholen",
+    "pickDay": "Tag wählen",
+    "beforeBlock": "Vor dem Block",
+    "afterBlock": "Nach dem Block",
+    "prevMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat",
+    "monthHint": "Tag antippen öffnet die Woche. Mit gewählter Einheit legt das Antippen den Zieltag fest.",
+    "moveSeriesTo": "{{intent}} in allen Wochen auf {{day}} verschieben.",
+    "mode": "Was verschieben?",
+    "modeSingle": "Nur diesen Termin",
+    "modeSeries": "Alle Wochen (Serie)",
+    "cancel": "Abbrechen",
+    "unmove": "Zurück auf {{date}}",
+    "singleNote": "Gilt nur für diesen einen Termin; die anderen Wochen bleiben, wie sie sind.",
+    "warn": {
+      "key_adjacent": "Am Tag davor oder danach liegt schon eine harte Einheit — zwei harte Tage hintereinander bewusst planen.",
+      "event_close": "Nah am Wettkampf — harte Einheiten kurz davor kosten Frische.",
+      "crowded": "An diesem Tag liegen schon zwei Einheiten.",
+      "outside_block": "Der Tag liegt außerhalb des Blocks; Wochenprüfung und Bericht zählen die Einheit trotzdem."
+    }
   },
   "own": {
     "tag": "Eigene Einheit",
@@ -3728,6 +3760,20 @@
       "plan": "Aus dem Bibliotheksplan «{{plan}}», Planversion {{version}}.",
       "rule": "Dosis in den Grenzen der Methodenregel {{rule}}.",
       "details": "Regeln und Quellen im Plandetail"
+    },
+    "sportTransfer": "Sporttransfer (Entwurf)",
+    "sportTransferNote": "aus den Bewegungsmustern abgeleitet, keine geprüfte Zuordnung.",
+    "sportCode": {
+      "HYROX": "HYROX",
+      "GENERAL_FITNESS": "Allgemeine Fitness",
+      "COMBAT_SPORT": "Kampfsport",
+      "COMBAT_SPORT_STRIKING": "Kampfsport Schlagen/Treten",
+      "COMBAT_SPORT_GRAPPLING": "Kampfsport Griff/Boden",
+      "POWERLIFTING": "Kraftdreikampf",
+      "HYPERTROPHY": "Muskelaufbau",
+      "RUN": "Laufen",
+      "RUN_SHORT": "Laufen kurz/schnell",
+      "ALL": "Alle Sportarten"
     }
   },
   "fuelPlan": {
@@ -3842,7 +3888,9 @@
       "POWERLIFTING": "Kraftdreikampf",
       "RUN_10K": "10 km Laufen",
       "RUN_5K": "5 km Laufen"
-    }
+    },
+    "typicalError": "Typischer Messfehler (Literatur): {{value}}.",
+    "typicalErrorNote": "Nur Größenordnung; die App urteilt mit deinem eigenen Messfehler."
   },
   "adapt": {
     "title": "Training anpassen",
@@ -3885,5 +3933,31 @@
     },
     "weekShort": "W{{n}}",
     "sessionsOfWeek": "Einheiten in Woche {{n}}"
+  },
+  "setlog": {
+    "title": "Satz-Log",
+    "count": "{{n}} Sätze erfasst",
+    "note": "Haken setzen, wenn der Satz gemacht ist. Vorbefüllte Zahlen zählen erst mit Haken.",
+    "rest": "Pause",
+    "restSkip": "Überspringen",
+    "last": "Letztes Mal ({{day}}): {{sets}}",
+    "swap": "Ersetzen",
+    "swapNote": "Gleiches Bewegungsmuster; Sätze, Wiederholungen und Anstrengung bleiben wie geplant.",
+    "noOptions": "Kein Ersatz im gleichen Bewegungsmuster.",
+    "fromPlan": "vom Plan",
+    "unswap": "Zurück zur Planübung",
+    "swappedFrom": "Ersetzt: {{name}}",
+    "keep": "Auch in den folgenden Einheiten dieses Blocks übernehmen (neue Planversion)",
+    "set": "Satz",
+    "f": {
+      "weightKg": "kg",
+      "reps": "Wdh.",
+      "rir": "RIR",
+      "rpe": "RPE",
+      "durationS": "Sek.",
+      "distanceM": "m"
+    },
+    "tick": "Satz {{n}} erledigt",
+    "add": "Satz hinzufügen"
   }
 }

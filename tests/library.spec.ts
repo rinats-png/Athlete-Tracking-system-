@@ -231,7 +231,7 @@ test.describe('Adaptive Anpassung', () => {
     const p = index.plans.find((x) => x.plan_id === planId)!
     return materializePlan(p, weeksOf(planId), index, exercises, { id: 'b', startDay, now: '2026-10-05T00:00:00.000Z', disciplineId: null })
   }
-  const done = (sessionId: string, day: string, feedback: number | null, pain = false) => ({ sessionId, day, durationMin: 45, rpe: 7, diarySessionId: null, avgHr: null, maxHr: null, feedback, pain })
+  const done = (sessionId: string, day: string, feedback: number | null, pain = false) => ({ sessionId, day, durationMin: 45, rpe: 7, diarySessionId: null, avgHr: null, maxHr: null, feedback, pain, planDay: null, sets: [], swaps: [] })
 
   test('Review: frühestens nach 3 Tagen, mindestens 2 Rückmeldungen, Richtung aus dem Mittel, Schmerz → leichter', async () => {
     const { reviewFeedback } = await import('../src/domain/adaptation')

@@ -24,7 +24,7 @@ const src = join(root, 'content/library')
 const out = join(root, 'src/data/library')
 
 const registry = JSON.parse(readFileSync(join(src, 'kydon_exercise_registry_128_v1_1.json'), 'utf8'))
-const seed = JSON.parse(readFileSync(join(src, 'kydon_program_seed_v4.json'), 'utf8'))
+const seed = JSON.parse(readFileSync(join(src, 'kydon_program_seed_v4_1.json'), 'utf8'))
 
 const LINK = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g
 
@@ -80,6 +80,9 @@ const exercises = registry.map((e) => ({
   transferDefault: e.transfer_default,
 }))
 
+// v4.1: Sporttransfer je Übung — aus Bewegungsmustern abgeleitet, EXTRAPOLATED und ungeprüft.
+const transferOf = new Map((seed.exercise_sport_transfer ?? []).map((x) => [x.exercise_id, x]))
+
 const textsByCategory = {}
 for (const e of registry) {
   const transfer = splitLinks(e.transfer)
@@ -93,6 +96,7 @@ for (const e of registry) {
     sportsNote: e.sports,
     transfer: transfer.text,
     sources: transfer.sources,
+    sportTransfer: transferOf.has(e.exercise_id) ? { sports: transferOf.get(e.exercise_id).sports, evidence: transferOf.get(e.exercise_id).evidence, status: transferOf.get(e.exercise_id).status } : null,
   }
 }
 
@@ -106,7 +110,7 @@ const planHead = (p) => {
 }
 
 const index = {
-  version: '4.0',
+  version: seed.version,
   generated: seed.generated,
   methodRules: seed.method_rules,
   sessionTemplates: seed.session_templates,

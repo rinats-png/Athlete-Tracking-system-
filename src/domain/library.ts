@@ -235,6 +235,43 @@ export function substitutes(target: LibraryExercise, list: LibraryExercise[], av
     .map((x) => x.e)
 }
 
+/**
+ * Ersatz im Training: zuerst die Ersatzübungen, die der Plan selbst nennt
+ * (`substitutions` des Programm-Seeds), dann die Kette oben. Übungen, die nur
+ * mit Trainer gehen, kommen nur, wenn die ersetzte es auch tut — ein Tausch
+ * im Training darf nicht anspruchsvoller werden als der Plan.
+ */
+export function substituteOptions(target: LibraryExercise, list: LibraryExercise[], planSubs: Record<string, string[]> = {}, available: string[] = []): { exercise: LibraryExercise; fromPlan: boolean }[] {
+  const allowed = (e: LibraryExercise) => e.coachGate !== 'COACH_REQUIRED' || target.coachGate === 'COACH_REQUIRED'
+  const fromPlan = (planSubs[target.id] ?? []).map((id) => list.find((e) => e.id === id)).filter((e): e is LibraryExercise => e != null && allowed(e))
+  const chain = substitutes(target, list, available, 8).filter((e) => allowed(e) && !fromPlan.some((p) => p.id === e.id))
+  return [...fromPlan.map((exercise) => ({ exercise, fromPlan: true })), ...chain.slice(0, 5).map((exercise) => ({ exercise, fromPlan: false }))]
+}
+
+/**
+ * Parametervertrag → Eingabefelder eines Satzes im Player. Höchstens drei
+ * Felder, damit die Zeile auf ein Telefon passt; was die Übung nicht kennt,
+ * fragt der Player nicht ab.
+ */
+export type SetField = 'weightKg' | 'reps' | 'rir' | 'rpe' | 'durationS' | 'distanceM'
+export function setFieldsFor(parameters: string[]): SetField[] {
+  const has = (...k: string[]) => k.some((x) => parameters.includes(x))
+  const out: SetField[] = []
+  if (has('load_kg', 'load_optional', 'added_load_optional', 'pct_1rm_optional')) out.push('weightKg')
+  if (has('reps', 'reps_or_time', 'reps_or_contacts', 'work_s_or_reps', 'duration_s_or_reps', 'rounds')) out.push('reps')
+  if (has('duration_s', 'time_s', 'effort_duration_s') || (out.length === 0 && has('duration_s_or_reps', 'reps_or_time'))) out.push('durationS')
+  if (has('distance_m', 'distance_m_optional') && out.length < 2) out.push('distanceM')
+  if (out.length < 3) out.push(has('rir', 'rir_optional') ? 'rir' : 'rpe')
+  if (out.length === 1) out.unshift('reps')
+  return out.slice(0, 3)
+}
+
+/** Erste Zahl einer Wiederholungsangabe («6–8» → 6, «30 s» → 30); `null` ohne Zahl. */
+export function firstNumber(text: string | null | undefined): number | null {
+  const m = text?.match(/\d+/)
+  return m ? Number(m[0]) : null
+}
+
 /** Varianten-Graph: Regression/Progression stehen als Namen; aufgelöst, wo der Name eindeutig zu einer Übung passt. */
 export function resolveByName(name: string, list: LibraryExercise[]): LibraryExercise | null {
   const n = fold(name)
@@ -354,6 +391,7 @@ export function materializePlan(
     })
   }
   return {
+    moves: [],
     id: ctx.id,
     family: FAMILY_OF_GOAL[plan.goal] ?? null,
     name: plan.title.slice(0, 60),

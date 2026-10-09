@@ -25,9 +25,10 @@ test.describe('Plankalender: Bildschirm', () => {
     await page.evaluate((sess) => {
       const data = JSON.parse(localStorage.getItem('kydon.data.v1') as string)
       const now = new Date().toISOString()
+      // Der Block beginnt am nächsten Montag: alle Tage der ersten Woche liegen in der Zukunft (verschiebbar).
       const today = new Date()
       const wd = ((today.getUTCDay() + 6) % 7) + 1
-      const monday = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - (wd - 1))).toISOString().slice(0, 10)
+      const monday = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() + (8 - wd))).toISOString().slice(0, 10)
       data.athletes[0].trainingBlocks = [{ id: 'b1', family: 'hybrid', disciplineId: 'hyrox', phase: 'BUILD', startDay: monday, weeks: 6, retestMetrics: [], templateId: null, eventDay: null, sessions: sess, completions: [], status: 'active', createdAt: now, updatedAt: now }]
       localStorage.setItem('kydon.data.v1', JSON.stringify(data))
     }, [mkSession('s1', 1), mkSession('s2', 3, { primaryIntent: 'GRIP_ENDURANCE', weekFrom: 3 })])
@@ -51,11 +52,34 @@ test.describe('Plankalender: Bildschirm', () => {
     await expect(page.getByTestId('cal-month')).toBeVisible()
   })
 
-  test('Verschieben braucht einen Grund, gilt für die Serie und landet im Block', async ({ page }) => {
+  test('Einzelnen Termin verschieben braucht keinen Grund und gilt nur für diese Woche', async ({ page }) => {
     await prepare(page)
     await page.goto('/plan/kalender', { waitUntil: 'domcontentloaded' })
     await page.getByTestId('cal-session-s1').click()
     await page.getByTestId('cal-move-4').click()
+    await page.getByTestId('cal-confirm').click()
+    await expect(page.getByTestId('cal-day-4')).toContainText('Grundlagenausdauer')
+    await expect(page.getByTestId('cal-moved-s1')).toBeVisible()
+    const b = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks[0])
+    expect(b.sessions.find((x: { id: string }) => x.id === 's1')).toMatchObject({ day: 1, coachModified: false })
+    expect(b.moves).toHaveLength(1)
+    // Nächste Woche liegt die Einheit wieder am Montag.
+    await page.getByTestId('cal-next').click()
+    await expect(page.getByTestId('cal-day-1')).toContainText('Grundlagenausdauer')
+    // Zurück auf den geplanten Tag löscht die Verschiebung.
+    await page.getByTestId('cal-prev').click()
+    await page.getByTestId('cal-session-s1').click()
+    await page.getByTestId('cal-unmove').click()
+    await expect(page.getByTestId('cal-day-1')).toContainText('Grundlagenausdauer')
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks[0].moves)).toEqual([])
+  })
+
+  test('Serie verschieben braucht einen Grund und gilt für alle Wochen', async ({ page }) => {
+    await prepare(page)
+    await page.goto('/plan/kalender', { waitUntil: 'domcontentloaded' })
+    await page.getByTestId('cal-session-s1').click()
+    await page.getByTestId('cal-move-4').click()
+    await page.getByTestId('cal-mode-series').click()
     await page.getByTestId('cal-confirm').click()
     await expect(page.getByTestId('cal-error')).toContainText('Grund')
     await page.getByTestId('cal-reason').fill('Arbeitstermin')
@@ -69,10 +93,23 @@ test.describe('Plankalender: Bildschirm', () => {
     await prepare(page)
     await page.goto('/plan/kalender', { waitUntil: 'domcontentloaded' })
     await page.getByTestId('cal-session-s1').dragTo(page.getByTestId('cal-day-2'))
-    await expect(page.getByTestId('cal-move')).toContainText('Di verschieben')
-    await page.getByTestId('cal-reason').fill('x')
+    await expect(page.getByTestId('cal-move')).toContainText('Di')
     await page.getByTestId('cal-confirm').click()
     await expect(page.getByTestId('cal-day-2')).toContainText('Grundlagenausdauer')
+  })
+
+  test('Monat: echtes Kalenderdatum, Zieltag per Antippen, auch in die nächste Woche', async ({ page }) => {
+    await prepare(page)
+    await page.goto('/plan/kalender', { waitUntil: 'domcontentloaded' })
+    const monday = await page.getByTestId('cal-day-1').getAttribute('data-date')
+    await page.getByTestId('cal-session-s1').click()
+    await page.getByTestId('cal-view-month').click()
+    const target = new Date(Date.parse(`${monday}T00:00:00Z`) + 9 * 86400000).toISOString().slice(0, 10)
+    if ((await page.getByTestId(`cal-mday-${target}`).count()) === 0) await page.getByTestId('cal-next-month').click()
+    await page.getByTestId(`cal-mday-${target}`).click()
+    await page.getByTestId('cal-confirm').click()
+    const moves = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks[0].moves)
+    expect(moves).toEqual([expect.objectContaining({ sessionId: 's1', from: monday, to: target })])
   })
 
   test('ohne Block ein ruhiger Hinweis', async ({ page }) => {

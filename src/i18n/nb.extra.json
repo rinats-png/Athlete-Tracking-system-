@@ -3330,7 +3330,7 @@
   },
   "cal": {
     "title": "Plankalender",
-    "intro": "Øktene dine per uke, fase eller måned. Trykk på eller dra en økt for å flytte den, og velg måldag.",
+    "intro": "Øktene dine med dato. Trykk eller dra og velg en dag — flytt enkeltøkter fritt, også mellom uker.",
     "view": "Visning",
     "v": {
       "week": "Uke",
@@ -3352,14 +3352,46 @@
     "pickTarget": "{{intent}}: velg måldag.",
     "moveTo": "Flytt {{intent}} til {{day}}.",
     "confirm": "Flytt",
-    "seriesNote": "Flyttingen gjelder økten i alle ukene.",
+    "seriesNote": "Serien flyttes i alle uker; det er en planendring og krever en grunn.",
     "err": {
       "reason_required": "Oppgi en begrunnelse.",
       "unknown_session": "Økten ble ikke funnet.",
       "day_taken": "Det ligger allerede en økt den dagen.",
-      "nothing_changed": "Dagen er uendret."
+      "nothing_changed": "Dagen er uendret.",
+      "done": "Fullførte økter blir der de er.",
+      "past": "Ingenting kan flyttes til fortiden.",
+      "out_of_range": "Høyst to uker etter blokkslutt.",
+      "two_key": "Det er allerede en nøkkeløkt den dagen — appen godtar ikke to samme dag.",
+      "unknown_occurrence": "Fant ikke datoen."
     },
-    "link": "Kalender"
+    "link": "Kalender",
+    "movedFrom": "flyttet fra {{date}}",
+    "missed": "gått glipp av",
+    "today": "I dag",
+    "event": "Konkurranse",
+    "ics": "Til kalenderen",
+    "missedTitle": "{{n}} tapte økt(er)",
+    "missedNote": "Ta igjen eller la være — begge deler er greit. Ingenting flyttes av seg selv.",
+    "catchUpToday": "Ta igjen i dag",
+    "pickDay": "Velg dag",
+    "beforeBlock": "Før blokken",
+    "afterBlock": "Etter blokken",
+    "prevMonth": "Forrige måned",
+    "nextMonth": "Neste måned",
+    "monthHint": "Trykk på en dag for å åpne uken. Med en valgt økt blir det måldagen.",
+    "moveSeriesTo": "Flytt {{intent}} til {{day}} i alle uker.",
+    "mode": "Hva skal flyttes?",
+    "modeSingle": "Bare denne datoen",
+    "modeSeries": "Alle uker (serie)",
+    "cancel": "Avbryt",
+    "unmove": "Tilbake til {{date}}",
+    "singleNote": "Gjelder bare denne datoen; de andre ukene er uendret.",
+    "warn": {
+      "key_adjacent": "Dagen før eller etter er det allerede en hard økt — planlegg to harde dager på rad bevisst.",
+      "event_close": "Nær konkurransen — harde økter rett før koster friskhet.",
+      "crowded": "Det er allerede to økter denne dagen.",
+      "outside_block": "Dagen ligger utenfor blokken; ukesjekk og rapport teller likevel økten."
+    }
   },
   "own": {
     "tag": "Egen økt",
@@ -3728,6 +3760,20 @@
       "plan": "Fra bibliotekplanen «{{plan}}», planversjon {{version}}.",
       "rule": "Dose innenfor grensene til metoderegel {{rule}}.",
       "details": "Regler og kilder i plandetaljene"
+    },
+    "sportTransfer": "Idrettsoverføring (utkast)",
+    "sportTransferNote": "avledet av bevegelsesmønstre, ingen kontrollert kobling.",
+    "sportCode": {
+      "HYROX": "HYROX",
+      "GENERAL_FITNESS": "Generell form",
+      "COMBAT_SPORT": "Kampsport",
+      "COMBAT_SPORT_STRIKING": "Slag- og sparkesport",
+      "COMBAT_SPORT_GRAPPLING": "Grappling",
+      "POWERLIFTING": "Styrkeløft",
+      "HYPERTROPHY": "Muskelvekst",
+      "RUN": "Løping",
+      "RUN_SHORT": "Kort løping",
+      "ALL": "Alle idretter"
     }
   },
   "fuelPlan": {
@@ -3842,7 +3888,9 @@
       "POWERLIFTING": "Styrkeløft",
       "RUN_10K": "Løping 10 km",
       "RUN_5K": "Løping 5 km"
-    }
+    },
+    "typicalError": "Typisk målefeil (litteratur): {{value}}.",
+    "typicalErrorNote": "Bare størrelsesorden; appen vurderer med din egen målefeil."
   },
   "adapt": {
     "title": "Juster treningen",
@@ -3885,5 +3933,31 @@
     },
     "weekShort": "U{{n}}",
     "sessionsOfWeek": "Økter uke {{n}}"
+  },
+  "setlog": {
+    "title": "Settlogg",
+    "count": "{{n}} sett logget",
+    "note": "Kryss av et sett når det er gjort. Forhåndsutfylte tall teller først når de er krysset av.",
+    "rest": "Pause",
+    "restSkip": "Hopp over",
+    "last": "Forrige gang ({{day}}): {{sets}}",
+    "swap": "Bytt ut",
+    "swapNote": "Samme bevegelsesmønster; sett, repetisjoner og anstrengelse blir som planlagt.",
+    "noOptions": "Ingen erstatning med samme bevegelsesmønster.",
+    "fromPlan": "fra planen",
+    "unswap": "Tilbake til planlagt øvelse",
+    "swappedFrom": "Erstatter: {{name}}",
+    "keep": "Bruk også i de neste øktene i blokken (ny planversjon)",
+    "set": "Sett",
+    "f": {
+      "weightKg": "kg",
+      "reps": "Rep.",
+      "rir": "RIR",
+      "rpe": "RPE",
+      "durationS": "Sek",
+      "distanceM": "m"
+    },
+    "tick": "Sett {{n}} ferdig",
+    "add": "Legg til sett"
   }
 }
