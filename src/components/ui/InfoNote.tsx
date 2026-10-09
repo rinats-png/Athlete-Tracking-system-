@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils'
 
 /**
  * Erklärung eine Ebene tiefer: ein kleines ⓘ, das einen Satz aufklappt.
- * Der Text bleibt im Dokument (für Vorleser über `aria-controls`), steht
- * aber erst nach dem Antippen sichtbar da.
+ * Der Text kommt erst nach dem Antippen ins Dokument; das ⓘ sagt über
+ * `aria-expanded`, ob er offen ist.
  */
 export function InfoNote({ text, className, testId }: { text: string; className?: string; testId?: string }) {
   const { t } = useTranslation()
@@ -17,7 +17,7 @@ export function InfoNote({ text, className, testId }: { text: string; className?
       <button
         type="button"
         aria-expanded={open}
-        aria-controls={id}
+        aria-controls={open ? id : undefined}
         aria-label={t('look.info')}
         onClick={(e) => {
           e.preventDefault()
@@ -29,9 +29,11 @@ export function InfoNote({ text, className, testId }: { text: string; className?
       >
         <Info size={16} aria-hidden />
       </button>
-      <span id={id} hidden={!open} className="block max-w-[52ch] text-[12px] leading-relaxed text-ink-secondary">
-        {text}
-      </span>
+      {open && (
+        <span id={id} className="block max-w-[52ch] text-[12px] leading-relaxed text-ink-secondary">
+          {text}
+        </span>
+      )}
     </span>
   )
 }

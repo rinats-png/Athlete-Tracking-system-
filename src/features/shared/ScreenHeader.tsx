@@ -41,7 +41,7 @@ export function ScreenHeader({
     <button
       type="button"
       aria-expanded={open}
-      aria-controls={id}
+      aria-controls={open ? id : undefined}
       aria-label={t('look.info')}
       onClick={() => setOpen((o) => !o)}
       data-testid="header-info"
@@ -50,8 +50,8 @@ export function ScreenHeader({
       <Info size={17} aria-hidden />
     </button>
   )
-  const introText = intro && (
-    <p id={id} hidden={!open} className="mt-1.5 max-w-[60ch] text-[13px] leading-relaxed text-ink-secondary">
+  const introText = intro && open && (
+    <p id={id} className="mt-1.5 max-w-[60ch] text-[13px] leading-relaxed text-ink-secondary">
       {intro}
     </p>
   )

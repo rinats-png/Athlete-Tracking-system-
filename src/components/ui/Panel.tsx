@@ -75,8 +75,8 @@ export function PanelHeader({
             <button
               type="button"
               aria-expanded={open}
-              aria-controls={id}
-              aria-label={`${t('look.info')}: ${title}`}
+              aria-controls={open ? id : undefined}
+              aria-label={t('look.info')}
               onClick={() => setOpen((o) => !o)}
               data-testid="panel-info"
               className={cn('-my-3 inline-flex size-11 shrink-0 items-center justify-center rounded-pill', open ? 'text-accent-text' : 'text-ink-muted')}
@@ -91,8 +91,8 @@ export function PanelHeader({
           // machte den Text zugleich zur breitesten Stelle der Seite.
           <p className="mt-1 text-[13px] leading-snug text-ink-secondary">{subtitle}</p>
         )}
-        {note && (
-          <p id={id} hidden={!open} className="mt-1 max-w-[62ch] text-[13px] leading-snug text-ink-secondary">
+        {note && open && (
+          <p id={id} className="mt-1 max-w-[62ch] text-[13px] leading-snug text-ink-secondary">
             {note}
           </p>
         )}
