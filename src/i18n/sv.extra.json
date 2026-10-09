@@ -3974,5 +3974,26 @@
     "supports": "Stödjer {{sport}}",
     "other": "Annat fokus",
     "filter": "För {{sport}}"
+  },
+  "look": {
+    "info": "Mer info",
+    "today": {
+      "label": "Idag i planen",
+      "go": "Kör",
+      "toPlan": "Till planen",
+      "missed": "missad · ta igen?",
+      "percentile": "Percentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "ta igen",
+      "exercises": "Övningar",
+      "own": "Egen plan"
+    },
+    "player": {
+      "close": "Stäng passet"
+    },
+    "tests": {
+      "measured": "{{measured}} av {{total}} mätta"
+    }
   }
 }

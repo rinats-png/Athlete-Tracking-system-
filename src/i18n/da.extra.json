@@ -3974,5 +3974,26 @@
     "supports": "Støtter {{sport}}",
     "other": "Andet fokus",
     "filter": "Til {{sport}}"
+  },
+  "look": {
+    "info": "Mere info",
+    "today": {
+      "label": "I dag i planen",
+      "go": "Kom i gang",
+      "toPlan": "Til planen",
+      "missed": "misset · indhente?",
+      "percentile": "Percentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "indhent",
+      "exercises": "Øvelser",
+      "own": "Egen plan"
+    },
+    "player": {
+      "close": "Luk træningen"
+    },
+    "tests": {
+      "measured": "{{measured}} af {{total}} målt"
+    }
   }
 }

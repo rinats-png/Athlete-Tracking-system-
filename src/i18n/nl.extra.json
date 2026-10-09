@@ -3974,5 +3974,26 @@
     "supports": "Ondersteunt {{sport}}",
     "other": "Ander accent",
     "filter": "Voor {{sport}}"
+  },
+  "look": {
+    "info": "Meer info",
+    "today": {
+      "label": "Vandaag in je plan",
+      "go": "Aan de slag",
+      "toPlan": "Naar het plan",
+      "missed": "gemist · inhalen?",
+      "percentile": "Percentiel {{score}}"
+    },
+    "hub": {
+      "catchUp": "inhalen",
+      "exercises": "Oefeningen",
+      "own": "Eigen plan"
+    },
+    "player": {
+      "close": "Training sluiten"
+    },
+    "tests": {
+      "measured": "{{measured}} van {{total}} gemeten"
+    }
   }
 }

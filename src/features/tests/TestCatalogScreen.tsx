@@ -16,6 +16,15 @@ import { EQUIPMENT_BY_ID, canPerform, missingFor, type EquipmentId } from '@/dat
 import type { TestCategory } from '@/types/domain'
 import { pick } from '@/i18n/pick'
 import { useLocale } from '@/features/shared/useLocale'
+import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { PhotoCard, Segments } from '@/components/ui/PhotoCard'
+import { testImageUrl } from '@/data/testImages'
+
+/** Vorschaubild eines Tests; ohne Bild eine ruhige Fläche gleicher Größe. */
+function TestThumb({ slug }: { slug: string }) {
+  const src = testImageUrl(slug)
+  return src ? <img src={src} alt="" loading="lazy" decoding="async" className="thumb" /> : <span className="thumb" aria-hidden />
+}
 
 type Filter = TestCategory | 'all'
 
@@ -109,6 +118,7 @@ export function TestCatalogScreen() {
           // nur einzeilig ist.
           className="flex min-h-16 items-center gap-3 px-4 py-3 transition-colors hover:bg-accent-quiet"
         >
+          <TestThumb slug={test.slug} />
           <div className="min-w-0 flex-1">
             <p className="font-medium">{pick(test.name, locale)}</p>
             <p className="mt-0.5 text-[12px] text-ink-muted">
@@ -150,13 +160,15 @@ export function TestCatalogScreen() {
 
   return (
     <>
-      <header className="mb-4">
-        <span className="label-tag">{t('nav.tests')}</span>
-        <h1 className="mt-1 font-display text-[30px] leading-none font-bold sm:text-[38px]">
-          {t('tests.title')}
-        </h1>
-        <p className="mt-1.5 max-w-[60ch] text-[13px] text-ink-secondary">{t('tests.intro')}</p>
-      </header>
+      <ScreenHeader eyebrow={t('nav.tests')} title={t('tests.title')} intro={t('tests.intro')} />
+
+      {discipline && core.length > 0 && (
+        <PhotoCard image={testImageUrl(core[0].slug)} className="mb-4 min-h-[150px] gap-1 p-4" data-testid="tests-hero">
+          <span className="label-tag">{pick(discipline.name, locale)}</span>
+          <span className="font-display text-[26px] leading-none font-bold">{t('look.tests.measured', { measured: core.filter((c) => lastByTest.has(c.slug)).length, total: core.length })}</span>
+          <Segments total={core.length} done={core.filter((c) => lastByTest.has(c.slug)).length} className="mt-2" />
+        </PhotoCard>
+      )}
 
       <div className="mb-4">
         <SportSelector />

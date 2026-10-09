@@ -3,7 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { InfoNote } from '@/features/shared/InfoNote'
+import { sessionImage } from '@/data/visuals'
+import { X } from 'lucide-react'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { openOccurrencesOn } from '@/domain/trainingBlock'
 import { syncAssignedCompletions } from '@/lib/assignSync'
@@ -162,8 +164,20 @@ export function SessionPlayerScreen() {
   }
 
   return (
-    <div data-testid="session-player">
-      <ScreenHeader eyebrow={t('player.eyebrow')} title={t('player.title')} intro={t('player.intro')} />
+    <div data-testid="session-player" className="scope-dark -mx-4 -mt-5 min-h-dvh px-4 pb-8 sm:mx-0 sm:mt-0 sm:min-h-0 sm:rounded-2xl sm:px-6">
+      {/* Fotokopf: die erste bebilderte Übung der Einheit, läuft in den dunklen Grund aus. */}
+      <div className="relative -mx-4 h-[220px] overflow-hidden sm:-mx-6 sm:rounded-t-2xl">
+        <img src={sessionImage(session)} alt="" decoding="async" className="size-full object-cover" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(0deg, var(--plane) 4%, rgba(11,16,20,.25) 60%, rgba(11,16,20,.6))' }} />
+        <Link to="/plan" aria-label={t('look.player.close')} className="absolute top-3 left-2 inline-flex size-11 items-center justify-center rounded-pill text-ink">
+          <X size={20} aria-hidden />
+        </Link>
+      </div>
+      <header className="relative -mt-16 mb-4">
+        <span className="label-tag">{t('player.eyebrow')} · {sessionSource(session, t)}</span>
+        <h1 className="mt-1 font-display text-[36px] leading-none font-bold">{sessionName(session, t)}</h1>
+        <InfoNote text={t('player.intro')} />
+      </header>
       {open.length > 1 && (
         <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t('player.pick')}>
           {open.map((o) => (
@@ -174,8 +188,7 @@ export function SessionPlayerScreen() {
         </div>
       )}
       <Panel className="mb-4">
-        <PanelHeader title={sessionName(session, t)} subtitle={sessionSource(session, t)} />
-        <div className="px-4 pb-4">
+        <div className="px-4 py-4">
           {occurrence.moved && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-moved">{t('cal.movedFrom', { date: `${occurrence.planned.slice(8, 10)}.${occurrence.planned.slice(5, 7)}.` })}</p>}
           {session.blocks.map((b, i) => (b.type === 'library_exercise' || b.type === 'strength' || b.type === 'exercise' ? null : <p key={i} className="text-[14px]">{blockText(b, t)}</p>))}
           <SetLogger session={session} exercises={exercises} planSubs={planSubs} blocks={trainingBlocks} onChange={setLog} />

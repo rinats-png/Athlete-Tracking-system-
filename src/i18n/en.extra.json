@@ -3974,5 +3974,26 @@
     "supports": "Supports {{sport}}",
     "other": "Different focus",
     "filter": "For {{sport}}"
+  },
+  "look": {
+    "info": "More info",
+    "today": {
+      "label": "Today in your plan",
+      "go": "Let’s go",
+      "toPlan": "Open plan",
+      "missed": "missed · make it up?",
+      "percentile": "Percentile {{score}}"
+    },
+    "hub": {
+      "catchUp": "make up",
+      "exercises": "Exercises",
+      "own": "Own plan"
+    },
+    "player": {
+      "close": "Close session"
+    },
+    "tests": {
+      "measured": "{{measured}} of {{total}} measured"
+    }
   }
 }

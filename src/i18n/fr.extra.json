@@ -3974,5 +3974,26 @@
     "supports": "Soutient : {{sport}}",
     "other": "Autre objectif",
     "filter": "Pour {{sport}}"
+  },
+  "look": {
+    "info": "En savoir plus",
+    "today": {
+      "label": "Aujourd’hui au programme",
+      "go": "C’est parti",
+      "toPlan": "Voir le plan",
+      "missed": "manquée · la rattraper ?",
+      "percentile": "Percentile {{score}}"
+    },
+    "hub": {
+      "catchUp": "rattraper",
+      "exercises": "Exercices",
+      "own": "Mon plan"
+    },
+    "player": {
+      "close": "Fermer la séance"
+    },
+    "tests": {
+      "measured": "{{measured}} sur {{total}} mesurés"
+    }
   }
 }

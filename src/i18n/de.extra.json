@@ -3974,5 +3974,26 @@
     "supports": "Unterstützt {{sport}}",
     "other": "Anderer Schwerpunkt",
     "filter": "Für {{sport}}"
+  },
+  "look": {
+    "info": "Mehr dazu",
+    "today": {
+      "label": "Heute im Plan",
+      "go": "Los geht’s",
+      "toPlan": "Zum Plan",
+      "missed": "verpasst · nachholen?",
+      "percentile": "Perzentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "nachholen",
+      "exercises": "Übungen",
+      "own": "Eigener Plan"
+    },
+    "player": {
+      "close": "Einheit schließen"
+    },
+    "tests": {
+      "measured": "{{measured}} von {{total}} gemessen"
+    }
   }
 }

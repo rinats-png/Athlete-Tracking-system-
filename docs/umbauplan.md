@@ -85,3 +85,30 @@ Auftragsverarbeitung, Monatsdeckel.
 ## Etappe 9 — Training Engine (Entscheidung vom 4. Oktober 2026)
 
 Doktrin geändert (Nachtrag 1): Pläne aus belegten, geprüften Regeln. Pilot in drei Sportwelten, schrittweise, ohne Neubau. Siehe [training-engine.md](training-engine.md).
+
+## Neugestaltung «weniger Text, mehr Bild» (Entscheidung vom 9. Oktober 2026)
+
+Freigegeben nach den Entwürfen (Zeitleiste C mit Startkarte aus B, dunkler
+Player A). Alle bisherigen Inhalte bleiben: Bilder, Grafiken, Lupen-Dock,
+jede Funktion. Geändert ist die Gewichtung:
+
+- **Erklärungen eine Ebene tiefer.** `ScreenHeader` zeigt die Einleitung erst
+  nach dem ⓘ neben dem Titel; `InfoNote` macht dasselbe in Karten (z. B. die
+  Grundlage der Veränderungen, der Satz zur messbaren Lücke). Der Text bleibt
+  im Dokument, die Doktrin-Aussagen gehen nicht verloren.
+- **Fotokarte** (`components/ui/PhotoCard.tsx`): Bild füllt die Karte, Text
+  hell auf dunklem Verlauf, gleicher Kontrast hell wie dunkel. `Segments`
+  zeigt Wochen bzw. gemessene Tests als Balken.
+- **Bildzuordnung** (`data/visuals.ts`): Planziel → Bild, Absicht → Bild,
+  Einheit → erste bebilderte Übung. Nur vorhandene Dateien aus
+  `public/testbilder`; die Bilder sind Schmuck (`alt=""`).
+- **Heute:** Startkarte mit der Einheit des Tages aus dem aktiven Block
+  («Los geht’s» → Player), Zeitleiste (verpasst, als Nächstes, Wettkampf),
+  danach Veränderungen, Lücke, nächster Test, Check-in, Woche.
+- **Plan:** laufender Plan als Fotokarte mit Wochenbalken, «Diese Woche» als
+  Liste mit Bildern und Stand, Begründung aufklappbar, vier Wege als
+  Bildkacheln (Fertige Pläne, Übungen, Eigener Plan, Kalender).
+- **Fertige Pläne / Plan-Detail:** Vorschaubild je Plan, Fotokopf im Detail.
+- **Player:** immer dunkel (`.scope-dark` in `theme.css` übernimmt die Werte
+  von Mondlicht für einen Bereich), Fotokopf der ersten Übung.
+- **Testen:** Fotokarte «Kerntests: x von y gemessen», Vorschaubild je Test.
