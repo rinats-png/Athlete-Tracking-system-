@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Setlog",
-    "count": "{{n}} sets vastgelegd",
+    "count": "Sets vastgelegd: {{n}}",
     "note": "Vink een set af als hij gedaan is. Vooraf ingevulde getallen tellen pas met een vinkje.",
     "rest": "Rust",
     "restSkip": "Overslaan",

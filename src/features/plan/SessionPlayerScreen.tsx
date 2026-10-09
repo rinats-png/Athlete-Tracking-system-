@@ -168,7 +168,7 @@ export function SessionPlayerScreen() {
         <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t('player.pick')}>
           {open.map((o) => (
             <button key={keyOf(o)} type="button" aria-pressed={keyOf(o) === keyOf(occurrence)} onClick={() => setPickedKey(keyOf(o))} className={cn('min-h-11 rounded-pill border px-4 text-[13px]', keyOf(o) === keyOf(occurrence) ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line')}>
-              {t(`plan.intent.${o.session.primaryIntent}`)}
+              {sessionName(o.session, t)}
             </button>
           ))}
         </div>

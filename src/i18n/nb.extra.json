@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Settlogg",
-    "count": "{{n}} sett logget",
+    "count": "Loggede sett: {{n}}",
     "note": "Kryss av et sett når det er gjort. Forhåndsutfylte tall teller først når de er krysset av.",
     "rest": "Pause",
     "restSkip": "Hopp over",

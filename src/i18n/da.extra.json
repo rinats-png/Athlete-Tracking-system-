@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Sætlog",
-    "count": "{{n}} sæt logget",
+    "count": "Loggede sæt: {{n}}",
     "note": "Sæt flueben, når sættet er lavet. Forudfyldte tal tæller først med flueben.",
     "rest": "Pause",
     "restSkip": "Spring over",

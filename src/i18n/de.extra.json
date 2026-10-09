@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Satz-Log",
-    "count": "{{n}} Sätze erfasst",
+    "count": "Sätze erfasst: {{n}}",
     "note": "Haken setzen, wenn der Satz gemacht ist. Vorbefüllte Zahlen zählen erst mit Haken.",
     "rest": "Pause",
     "restSkip": "Überspringen",

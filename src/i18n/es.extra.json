@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Registro de series",
-    "count": "{{n}} series registradas",
+    "count": "Series registradas: {{n}}",
     "note": "Marca la serie cuando esté hecha. Los valores precargados solo cuentan al marcarlos.",
     "rest": "Descanso",
     "restSkip": "Saltar",

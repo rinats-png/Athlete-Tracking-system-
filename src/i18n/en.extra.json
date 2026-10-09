@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Set log",
-    "count": "{{n}} sets logged",
+    "count": "Sets logged: {{n}}",
     "note": "Tick a set once it is done. Prefilled numbers only count once ticked.",
     "rest": "Rest",
     "restSkip": "Skip",

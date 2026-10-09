@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Setlogg",
-    "count": "{{n}} set loggade",
+    "count": "Loggade set: {{n}}",
     "note": "Bocka av ett set när det är gjort. Förifyllda värden räknas först när de är bockade.",
     "rest": "Vila",
     "restSkip": "Hoppa över",

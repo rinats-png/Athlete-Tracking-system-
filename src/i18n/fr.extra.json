@@ -3936,7 +3936,7 @@
   },
   "setlog": {
     "title": "Journal des séries",
-    "count": "{{n}} séries saisies",
+    "count": "Séries saisies : {{n}}",
     "note": "Cochez une série une fois réalisée. Les valeurs préremplies ne comptent qu’une fois cochées.",
     "rest": "Récupération",
     "restSkip": "Passer",
