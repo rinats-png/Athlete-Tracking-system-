@@ -36,12 +36,16 @@ export function buildBundle(read = (f) => readFileSync(`supabase/migrations/${f}
 -- Enthalten:
 ${OPEN_MIGRATIONS.map((f) => `--   ${f}`).join('\n')}
 --
--- Mehrfaches Ausführen ist unschädlich. Voraussetzung: pg_cron, pg_net und der
--- Vault-Eintrag push_cron_secret sind eingerichtet (siehe docs/push.md).
+-- EINMAL ausführen. Alles läuft in EINER Transaktion: schlägt ein Schritt
+-- fehl, wird nichts übernommen — dann die Fehlermeldung weitergeben, nicht
+-- erneut starten. Voraussetzung: pg_cron, pg_net und der Vault-Eintrag
+-- push_cron_secret sind eingerichtet (siehe docs/push.md).
 -- =============================================================================
+
+begin;
 `
   const parts = OPEN_MIGRATIONS.map((f) => `\n-- ########## ${f} ##########\n\n${read(f).replace(/\s+$/, '')}\n`)
-  return head + parts.join('')
+  return head + parts.join('') + '\ncommit;\n'
 }
 
 if (process.argv[1] && process.argv[1].endsWith('buildSqlBundle.mjs')) {

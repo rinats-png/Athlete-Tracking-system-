@@ -16,9 +16,13 @@
 --   20261011110000_revoke_anon_rpc.sql
 --   20261011120000_ai_consents.sql
 --
--- Mehrfaches Ausführen ist unschädlich. Voraussetzung: pg_cron, pg_net und der
--- Vault-Eintrag push_cron_secret sind eingerichtet (siehe docs/push.md).
+-- EINMAL ausführen. Alles läuft in EINER Transaktion: schlägt ein Schritt
+-- fehl, wird nichts übernommen — dann die Fehlermeldung weitergeben, nicht
+-- erneut starten. Voraussetzung: pg_cron, pg_net und der Vault-Eintrag
+-- push_cron_secret sind eingerichtet (siehe docs/push.md).
 -- =============================================================================
+
+begin;
 
 -- ########## 20260930100000_push_topics_activity.sql ##########
 
@@ -1091,3 +1095,5 @@ grant select, insert, update on public.ai_consents to authenticated;
 drop trigger if exists ai_consents_touch on public.ai_consents;
 create trigger ai_consents_touch before update on public.ai_consents
   for each row execute function public.touch_updated_at();
+
+commit;
