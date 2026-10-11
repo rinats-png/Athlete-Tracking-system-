@@ -521,7 +521,7 @@
       "thin_data": "Datenlage dünn",
       "no_assessment": "Noch keine Messung"
     },
-    "method": "Der Trend ist ein Mehrheitsentscheid über die Tests, für die sich überhaupt einer rechnen lässt — bewusst kein Mittelwert der Steigungen, weil sich Prozent je 30 Tage über verschiedene Tests nicht sinnvoll mitteln lassen. «Braucht Aufmerksamkeit» ist keine Bewertung der Person, sondern ein Hinweis auf einen der genannten Gründe.",
+    "method": "Der Trend ist ein Mehrheitsentscheid über die Tests, für die sich überhaupt einer rechnen lässt — bewusst kein Mittelwert der Steigungen, weil sich Prozent je 30 Tage über verschiedene Tests nicht sinnvoll mitteln lassen. «Braucht Aufmerksamkeit» ist keine Bewertung der Person, sondern ein Hinweis auf einen der genannten Gründe. Ein Test zählt nur, wenn seine Veränderung über dem eigenen Messfehler liegt.",
     "emptyTitle": "Noch keine Athleten",
     "emptyBody": "Leg im Profil unter «Betreute Athleten» die erste Person an.",
     "soloTitle": "Trainermodus nicht aktiv",
@@ -933,12 +933,14 @@
     "overDays_other": "über {{count}} Tage",
     "trendLabel": {
       "improving": "Steigend",
-      "stable": "Stabil",
+      "stable": "Keine klare Veränderung",
       "declining": "Fallend",
+      "unclear": "Unklar",
       "insufficient_one": "{{count}} Messung",
       "insufficient_other": "{{count}} Messungen"
     },
     "trendInsufficientHint": "Ab drei Messungen wird eine Ausgleichsgerade gerechnet. Zwei Punkte ergeben immer eine perfekte Gerade — ein Trend ist das nicht.",
+    "trendUnclearHint": "Der Messfehler für diesen Test ist noch nicht bekannt — ab vier Messungen lässt er sich schätzen. Bis dahin sagt KYDON weder «steigend» noch «fallend».",
     "trendBasis": "{{points}} Messungen, {{days}} Tage, R² {{r2}}",
     "compareAssessments": "Zwei Termine vergleichen",
     "compareHint": "Nur abgeschlossene Termine. Tests, die nur in einem der beiden vorkommen, werden gekennzeichnet statt weggelassen.",
@@ -3022,7 +3024,7 @@
       "EXTRAPOLATED": "übertragen"
     },
     "review": {
-      "unreviewed": "Ungeprüft",
+      "unreviewed": "Fachlich noch nicht geprüft",
       "reviewed": "Geprüft von {{name}} am {{date}}"
     },
     "limits": "Grenzen der Evidenz",
@@ -3243,7 +3245,7 @@
       "event": "Wettkampf"
     },
     "none": "Für diese Auswahl gibt es keine Vorlage.",
-    "unreviewed": "Ungeprüft",
+    "unreviewed": "Fachlich noch nicht geprüft",
     "weeksTotal": "{{n}} Wochen",
     "family": {
       "combat_grappling": "Kampfsport Grappling",
@@ -3974,5 +3976,70 @@
     "supports": "Unterstützt {{sport}}",
     "other": "Anderer Schwerpunkt",
     "filter": "Für {{sport}}"
+  },
+  "look": {
+    "info": "Mehr dazu",
+    "today": {
+      "label": "Heute im Plan",
+      "go": "Los geht’s",
+      "toPlan": "Zum Plan",
+      "missed": "verpasst · nachholen?",
+      "percentile": "Perzentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "nachholen",
+      "exercises": "Übungen",
+      "own": "Eigener Plan"
+    },
+    "player": {
+      "close": "Einheit schließen"
+    },
+    "tests": {
+      "measured": "{{measured}} von {{total}} gemessen"
+    }
+  },
+  "start": {
+    "button": "Training starten",
+    "title": "Training starten",
+    "today": "Heute",
+    "missed": "Verpasst",
+    "upcoming": "Nächste zwei Wochen",
+    "allDone": "Keine offene Einheit im Plan — alles erledigt.",
+    "countsHint": "Du kannst jede Einheit auch an einem anderen Tag machen. Sie wird dann für ihren geplanten Termin abgehakt.",
+    "none": "Du hast keinen laufenden Plan. Trainieren kannst du trotzdem — wähle unten einen Weg.",
+    "free": "Ohne Plan",
+    "log": "Etwas eintragen",
+    "logSub": "Training direkt ins Trainingslog schreiben",
+    "catalog": "Aus dem Katalog",
+    "catalogSub": "Eine Einheit aus einem fertigen Plan, ohne den Plan zu übernehmen",
+    "build": "Selbst zusammenstellen",
+    "buildSub": "Übungen wählen, Sätze festlegen, loslegen",
+    "countsFor": "Geplant für {{date}} – zählt für diesen Termin.",
+    "doNow": "Jetzt durchführen"
+  },
+  "free": {
+    "eyebrow": "Freies Training",
+    "catalogTitle": "Einheit aus dem Katalog",
+    "catalogIntro": "Wähle einen Plan und daraus eine Einheit. Der Plan wird dabei nicht übernommen.",
+    "pickSession": "Wähle eine Einheit",
+    "week": "Woche",
+    "items": "Teile: {{n}}",
+    "otherPlan": "Anderen Plan wählen",
+    "buildTitle": "Eigene Einheit",
+    "buildIntro": "Für heute, ohne Plan. Gespeichert wird sie im Trainingslog.",
+    "name": "Name der Einheit",
+    "search": "Übung suchen",
+    "exercises": "Übungen",
+    "empty": "Noch keine Übung. Suche oben und tippe eine an.",
+    "sets": "Sätze",
+    "setsN": "{{n}} ×",
+    "fewer": "Ein Satz weniger",
+    "more": "Ein Satz mehr",
+    "reps": "Wdh./Zeit",
+    "remove": "Übung entfernen",
+    "start": "Einheit starten",
+    "lost": "Hier ist keine Einheit gewählt. Wähle sie unter «Training starten» aus.",
+    "noSlot": "Freies Training: zählt als Training, hakt aber keinen Termin im Plan ab.",
+    "save": "Speichern und ins Trainingslog"
   }
 }

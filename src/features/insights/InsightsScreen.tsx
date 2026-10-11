@@ -57,7 +57,7 @@ export function InsightsScreen() {
 
       {run.acknowledged.length > 0 && (
         <Panel className="mb-4">
-          <PanelHeader title={t('hints.done')} subtitle={t('hints.doneWhy')} />
+          <PanelHeader title={t('hints.done')} note={t('hints.doneWhy')} />
           <ul className="divide-y divide-line opacity-80">
             {run.acknowledged.map((insight) => (
               <InsightCard key={insight.key} insight={insight} compact />

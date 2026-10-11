@@ -521,7 +521,7 @@
       "thin_data": "Tunna data",
       "no_assessment": "Ingen mätning ännu"
     },
-    "method": "Trenden är ett majoritetsbeslut över de tester för vilka en över huvud taget kan beräknas — medvetet inget medelvärde av lutningar, eftersom procent per 30 dagar inte kan medelvärdesbildas meningsfullt över olika tester. ”Behöver uppmärksamhet” är ingen bedömning av personen utan en hänvisning till ett av de angivna skälen.",
+    "method": "Trenden är ett majoritetsbeslut över de tester för vilka en över huvud taget kan beräknas — medvetet inget medelvärde av lutningar, eftersom procent per 30 dagar inte kan medelvärdesbildas meningsfullt över olika tester. ”Behöver uppmärksamhet” är ingen bedömning av personen utan en hänvisning till ett av de angivna skälen. Ett test räknas bara om förändringen är större än det egna mätfelet.",
     "emptyTitle": "Inga atleter ännu",
     "emptyBody": "Lägg till den första personen under ”Atleter du tränar” i din profil.",
     "soloTitle": "Tränarläget är av",
@@ -933,12 +933,14 @@
     "overDays_other": "över {{count}} dagar",
     "trendLabel": {
       "improving": "Förbättras",
-      "stable": "Stabil",
+      "stable": "Ingen tydlig förändring",
       "declining": "Försämras",
+      "unclear": "Oklart",
       "insufficient_one": "{{count}} mätning",
       "insufficient_other": "{{count}} mätningar"
     },
     "trendInsufficientHint": "En regressionslinje beräknas från tre mätningar. Två punkter ger alltid en perfekt linje — det är ingen trend.",
+    "trendUnclearHint": "Mätfelet för det här testet är ännu inte känt — det kan uppskattas från fyra mätningar. Till dess säger KYDON varken ”förbättras” eller ”försämras”.",
     "trendBasis": "{{points}} mätningar, {{days}} dagar, R² {{r2}}",
     "compareAssessments": "Jämför två tillfällen",
     "compareHint": "Endast slutförda tillfällen. Tester som finns i bara ett av de två markeras i stället för att utelämnas.",
@@ -3022,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolerad"
     },
     "review": {
-      "unreviewed": "Ogranskad",
+      "unreviewed": "Ännu inte fackgranskat",
       "reviewed": "Granskad av {{name}} den {{date}}"
     },
     "limits": "Beläggens gränser",
@@ -3243,7 +3245,7 @@
       "event": "Tävling"
     },
     "none": "Det finns ingen mall för det här urvalet.",
-    "unreviewed": "Ogranskad",
+    "unreviewed": "Ännu inte fackgranskat",
     "weeksTotal": "{{n}} veckor",
     "family": {
       "combat_grappling": "Kampsport grappling",
@@ -3974,5 +3976,70 @@
     "supports": "Stödjer {{sport}}",
     "other": "Annat fokus",
     "filter": "För {{sport}}"
+  },
+  "look": {
+    "info": "Mer info",
+    "today": {
+      "label": "Idag i planen",
+      "go": "Kör",
+      "toPlan": "Till planen",
+      "missed": "missad · ta igen?",
+      "percentile": "Percentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "ta igen",
+      "exercises": "Övningar",
+      "own": "Egen plan"
+    },
+    "player": {
+      "close": "Stäng passet"
+    },
+    "tests": {
+      "measured": "{{measured}} av {{total}} mätta"
+    }
+  },
+  "start": {
+    "button": "Starta träning",
+    "title": "Starta träning",
+    "today": "I dag",
+    "missed": "Missade",
+    "upcoming": "Kommande två veckor",
+    "allDone": "Inget öppet pass i planen – allt klart.",
+    "countsHint": "Du kan göra varje pass en annan dag också. Det bockas då av för sitt planerade datum.",
+    "none": "Du har ingen aktiv plan. Du kan ändå träna – välj ett sätt nedan.",
+    "free": "Utan plan",
+    "log": "Logga något",
+    "logSub": "Skriv ett pass direkt i träningsloggen",
+    "catalog": "Från katalogen",
+    "catalogSub": "Ett pass ur en färdig plan, utan att ta över planen",
+    "build": "Sätt ihop själv",
+    "buildSub": "Välj övningar, bestäm set, kör",
+    "countsFor": "Planerat till {{date}} – räknas för det datumet.",
+    "doNow": "Gör nu"
+  },
+  "free": {
+    "eyebrow": "Fri träning",
+    "catalogTitle": "Pass från katalogen",
+    "catalogIntro": "Välj en plan och ett pass ur den. Planen tas inte över.",
+    "pickSession": "Välj ett pass",
+    "week": "Vecka",
+    "items": "Delar: {{n}}",
+    "otherPlan": "Välj en annan plan",
+    "buildTitle": "Eget pass",
+    "buildIntro": "För i dag, utan plan. Det sparas i träningsloggen.",
+    "name": "Passets namn",
+    "search": "Sök övning",
+    "exercises": "Övningar",
+    "empty": "Ingen övning än. Sök ovan och tryck på en.",
+    "sets": "Set",
+    "setsN": "{{n}} ×",
+    "fewer": "Ett set färre",
+    "more": "Ett set till",
+    "reps": "Rep./tid",
+    "remove": "Ta bort övning",
+    "start": "Starta pass",
+    "lost": "Inget pass är valt här. Välj ett under ”Starta träning”.",
+    "noSlot": "Fri träning: räknas som träning men bockar inte av något datum i planen.",
+    "save": "Spara i träningsloggen"
   }
 }

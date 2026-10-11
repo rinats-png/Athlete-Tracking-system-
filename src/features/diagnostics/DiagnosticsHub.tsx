@@ -149,7 +149,7 @@ export function DiagnosticsHub() {
 
       <section className="mt-6 grid gap-4 lg:grid-cols-2">
         <Panel>
-          <PanelHeader title={t('diag.batteries')} subtitle={t('diag.batteriesHint')} />
+          <PanelHeader title={t('diag.batteries')} note={t('diag.batteriesHint')} />
           <ul className="divide-y divide-line">
             {batteries.map((battery) => (
               <li key={battery.slug}>
@@ -167,7 +167,7 @@ export function DiagnosticsHub() {
           </ul>
         </Panel>
         <Panel>
-          <PanelHeader title={t('diag.sessions')} subtitle={t('diag.sessionsHint')} />
+          <PanelHeader title={t('diag.sessions')} note={t('diag.sessionsHint')} />
           <Link to="/diagnostik/termine" className="flex items-center justify-between gap-3 px-4 py-3 text-[14px] hover:bg-accent-quiet">
             {t('assessments.all')}
             <ChevronRight size={16} className="shrink-0 text-ink-muted" aria-hidden />

@@ -49,7 +49,7 @@ export function TeamPanel() {
 
   return (
     <Panel data-testid="team-panel">
-      <PanelHeader title={t('team.title')} subtitle={t('team.subtitle')} />
+      <PanelHeader title={t('team.title')} note={t('team.subtitle')} />
       <div className="space-y-4 px-4 py-4 text-[13px] leading-relaxed">
         {coach.team ? coach.team.role === 'owner' ? <OwnerView /> : <MemberView /> : <NoTeamView />}
       </div>

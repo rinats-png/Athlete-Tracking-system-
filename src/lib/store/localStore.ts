@@ -5,6 +5,7 @@ import {
   parseStoredData,
   storedDataSchema,
   type LoadReport,
+  type QuarantineEntry,
   type AthleteView,
   type ValidatedAssessment,
   type ValidatedAthlete,
@@ -59,6 +60,25 @@ import {
  */
 
 const STORAGE_KEY = 'kydon.data.v1'
+/** Abgewiesene Rohdaten (siehe `keepInQuarantine`). */
+const QUARANTINE_KEY = 'kydon.quarantine.v1'
+/** Mehr als das hält die Quarantäne nicht — sie darf den Bestand nicht verdrängen. */
+const QUARANTINE_MAX_CHARS = 1_500_000
+
+/**
+ * Schreibsperre für einen Bestand aus einer neueren App-Fassung.
+ *
+ * Diese Fassung kennt dessen Felder nicht. Speicherte sie, ginge alles
+ * verloren, was sie nicht kennt — also wird gar nicht gespeichert, bis die
+ * App aktualisiert ist. Gesetzt beim Laden, gelöst nur durch einen Neustart
+ * mit einer passenden Fassung oder durch ausdrückliches Löschen.
+ */
+let writeLocked = false
+
+/** Ob der Bestand dieser Sitzung schreibgeschützt ist (neuere Fassung). */
+export function isWriteLocked(): boolean {
+  return writeLocked
+}
 
 export type StoredData = ValidatedData
 /**
@@ -115,6 +135,8 @@ export interface LoadResult {
    * dann darf die Zweitschrift einspringen.
    */
   absent: boolean
+  /** Der Bestand stammt aus einer neueren Fassung und wird nicht überschrieben. */
+  locked: boolean
 }
 
 /**
@@ -123,38 +145,128 @@ export interface LoadResult {
  * Bericht, nicht zu einer weissen Seite.
  */
 export function loadData(): LoadResult {
+  writeLocked = false
   let raw: string | null
   try {
     raw = localStorage.getItem(STORAGE_KEY)
   } catch {
-    return { data: emptyData(), report: emptyReport(), unavailable: true, absent: true }
+    return { data: emptyData(), report: emptyReport(), unavailable: true, absent: true, locked: false }
   }
 
-  if (!raw) return { data: emptyData(), report: emptyReport(), unavailable: false, absent: true }
+  if (!raw) return { data: emptyData(), report: emptyReport(), unavailable: false, absent: true, locked: false }
 
   let parsedJson: unknown
   try {
     parsedJson = JSON.parse(raw)
   } catch {
+    const entry: QuarantineEntry = { kind: 'file', id: '-', reason: 'Kein gültiges JSON', raw }
+    keepInQuarantine([entry])
     return {
       data: emptyData(),
-      report: { ...emptyReport(), rejected: [{ kind: 'file', id: '-', reason: 'Kein gültiges JSON' }] },
+      report: { ...emptyReport(), rejected: [{ kind: entry.kind, id: entry.id, reason: entry.reason }], quarantine: [entry] },
       unavailable: false,
       // Ein beschädigter Eintrag ist so gut wie keiner: die Zweitschrift ist
-      // die bessere Quelle.
+      // die bessere Quelle. Der Rohtext liegt vorher in der Quarantäne.
       absent: true,
+      locked: false,
     }
   }
 
   const { data, report } = parseStoredData(parsedJson)
-  return { data: data ?? emptyData(), report, unavailable: false, absent: data == null }
+  if (report.quarantine.length > 0) keepInQuarantine(report.quarantine)
+  // Neuere Fassung: nicht «abwesend» — sonst spränge die (ältere)
+  // Zweitschrift ein und das nächste Speichern überschriebe den Bestand.
+  writeLocked = report.fromNewerVersion
+  return {
+    data: data ?? emptyData(),
+    report,
+    unavailable: false,
+    absent: data == null && !report.fromNewerVersion,
+    locked: writeLocked,
+  }
+}
+
+export interface StoredQuarantineEntry extends QuarantineEntry {
+  /** Wann der Eintrag abgewiesen wurde. */
+  savedAt: string
+  /** Die Schemafassung, an der er gescheitert ist. */
+  schemaVersion: number
+}
+
+/**
+ * Abgewiesene Rohdaten auf dem Gerät aufheben.
+ *
+ * Ohne das wäre ein abgewiesener Eintrag beim nächsten Speichern endgültig
+ * weg — und abgewiesen wird nicht nur Kaputtes, sondern auch, was an einem
+ * Fehler im Schema scheitert. Die Quarantäne hält es fest, bis es nach einer
+ * Korrektur wieder eingelesen oder vom Nutzer als Datei gesichert wird.
+ *
+ * Doppelte (gleiche Art, Kennung und Rohwert) werden nicht erneut abgelegt:
+ * solange nichts gespeichert wurde, scheitert derselbe Eintrag bei jedem
+ * Start. Passt die Quarantäne nicht mehr in den Speicher, bleibt sie, wie sie
+ * war — lieber die älteren Einträge behalten als alle verlieren.
+ */
+export function keepInQuarantine(entries: QuarantineEntry[], now = new Date()): number {
+  const existing = readQuarantine()
+  const seen = new Set(existing.map((e) => `${e.kind}|${e.id}|${JSON.stringify(e.raw)}`))
+  const added: StoredQuarantineEntry[] = []
+  for (const entry of entries) {
+    const key = `${entry.kind}|${entry.id}|${JSON.stringify(entry.raw)}`
+    if (seen.has(key)) continue
+    seen.add(key)
+    added.push({ ...entry, savedAt: now.toISOString(), schemaVersion: CURRENT_SCHEMA_VERSION })
+  }
+  if (added.length === 0) return 0
+  const text = JSON.stringify([...existing, ...added])
+  if (text.length > QUARANTINE_MAX_CHARS) return 0
+  try {
+    localStorage.setItem(QUARANTINE_KEY, text)
+    return added.length
+  } catch {
+    return 0
+  }
+}
+
+export function readQuarantine(): StoredQuarantineEntry[] {
+  try {
+    const raw = localStorage.getItem(QUARANTINE_KEY)
+    const parsed: unknown = raw ? JSON.parse(raw) : []
+    return Array.isArray(parsed) ? (parsed as StoredQuarantineEntry[]) : []
+  } catch {
+    return []
+  }
+}
+
+export function clearQuarantine(): void {
+  try {
+    localStorage.removeItem(QUARANTINE_KEY)
+  } catch {
+    /* Der Speicher war ohnehin nicht verfügbar. */
+  }
+}
+
+/** Die Quarantäne als Datei, lesbar ohne die App. */
+export function exportQuarantine(appVersion = __APP_VERSION__): string {
+  return JSON.stringify(
+    {
+      format: 'KYDON_QUARANTINE',
+      schemaVersion: CURRENT_SCHEMA_VERSION,
+      appVersion,
+      createdAt: new Date().toISOString(),
+      entries: readQuarantine(),
+    },
+    null,
+    2,
+  )
 }
 
 function emptyReport(): LoadReport {
-  return { migratedFrom: null, fromNewerVersion: false, rejected: [] }
+  return { migratedFrom: null, fromNewerVersion: false, rejected: [], quarantine: [] }
 }
 
 export function saveData(data: StoredData): boolean {
+  // Ein Bestand aus einer neueren Fassung wird nicht überschrieben (s. o.).
+  if (writeLocked) return false
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...data, version: CURRENT_SCHEMA_VERSION }))
     return true
@@ -166,6 +278,9 @@ export function saveData(data: StoredData): boolean {
 }
 
 export function clearData(): void {
+  // Ausdrückliches Löschen hebt die Sperre auf: danach gibt es nichts mehr,
+  // das eine neuere Fassung geschrieben hätte.
+  writeLocked = false
   try {
     localStorage.removeItem(STORAGE_KEY)
   } catch {
@@ -245,6 +360,10 @@ export function importData(json: string): ImportOutcome {
   if (!candidate || typeof candidate !== 'object' || !('version' in (candidate as object))) {
     return { ok: false, data: null, report: emptyReport(), error: 'unknown_format' }
   }
+
+  // Solange ein Bestand aus einer neueren Fassung auf dem Gerät liegt, würde
+  // ein Import ihn ersetzen — dieselbe Sperre wie beim Speichern.
+  if (writeLocked) return { ok: false, data: null, report: emptyReport(), error: 'newer_version' }
 
   const { data, report } = parseStoredData(candidate)
   if (!data) {

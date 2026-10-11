@@ -70,7 +70,7 @@ test.describe('Bildschirm', () => {
     await expect(page.getByTestId('hub-block')).toBeVisible()
     await expect(page.getByTestId('hub-week')).toContainText('Woche 3 von 6')
     for (const id of ['hub-today', 'hub-weekcount', 'hub-goal', 'hub-retest', 'hub-why']) await expect(page.getByTestId(id)).toBeVisible()
-    await expect(page.getByTestId('hub-why')).toContainText('Ungeprüft')
+    await expect(page.getByTestId('hub-why')).toContainText('Fachlich noch nicht geprüft')
     await expect(page.getByTestId('hub-block')).toContainText('Wettkampf in 47 Tagen')
     const text = await page.getByTestId('plan-hub').innerText()
     expect(text).not.toMatch(/planHub\.|plan\.[a-z]+\.|\{\{/)

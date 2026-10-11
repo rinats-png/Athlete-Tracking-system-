@@ -170,6 +170,28 @@ export function missedOccurrences(block: StoredTrainingBlock, today: string): Oc
   return occurrences(block).filter((o) => !o.done && o.date < today)
 }
 
+/**
+ * Offene Termine zum Durchführen: heute, verpasste (jüngste zuerst) und die
+ * kommenden bis `horizonDays` voraus. Jede lässt sich heute erledigen; der
+ * Abschluss zählt für ihren Plantermin (`planDay`), nicht für heute.
+ */
+export function openToDo(block: StoredTrainingBlock, today: string, horizonDays = 14): { today: Occurrence[]; missed: Occurrence[]; upcoming: Occurrence[] } {
+  if (block.status !== 'active') return { today: [], missed: [], upcoming: [] }
+  const limit = addDays(today, horizonDays)
+  const open = occurrences(block).filter((o) => !o.done)
+  return {
+    today: open.filter((o) => o.date === today),
+    missed: open.filter((o) => o.date < today).reverse(),
+    upcoming: open.filter((o) => o.date > today && o.date <= limit),
+  }
+}
+
+/** Einen offenen Termin finden (für den Player: «diese Einheit jetzt»). */
+export function findOpenOccurrence(block: StoredTrainingBlock, sessionId: string, planned: string): Occurrence | null {
+  if (block.status !== 'active') return null
+  return occurrences(block).find((o) => o.session.id === sessionId && o.planned === planned && !o.done) ?? null
+}
+
 /** Wie weit ein Termin nach Blockende noch liegen darf: zwei Wochen zum Nachholen. */
 export const MOVE_GRACE_DAYS = 14
 

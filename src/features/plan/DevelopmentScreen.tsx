@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES, sessionImage } from '@/data/visuals'
+import { Thumb } from '@/components/ui/PhotoCard'
+import { InfoNote } from '@/components/ui/InfoNote'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { planMode } from '@/domain/planMode'
@@ -28,7 +31,7 @@ export function DevelopmentScreen() {
 
   return (
     <div data-testid="plan-development">
-      <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('dev.title')} intro={t('dev.intro')} />
+      <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('dev.title')} intro={t('dev.intro')} image={AREA_IMAGES.development} />
 
       <Panel className="mb-4" data-testid="dev-weeks">
         <PanelHeader title={t('dev.weeksTitle', { n: dev.weeks.length })} subtitle={t('dev.total', { n: dev.totalDone })} />
@@ -43,14 +46,16 @@ export function DevelopmentScreen() {
             </li>
           ))}
         </ul>
-        <p className="border-t border-line px-4 py-2 text-[11px] text-ink-muted">{t('dev.weeksNote')}</p>
+        <InfoNote text={t('dev.weeksNote')} className="border-t border-line px-4" />
       </Panel>
 
       <Panel data-testid="dev-blocks">
         <PanelHeader title={t('dev.blocksTitle')} />
         <ul>
           {dev.blocks.map(({ block, report, measured, open }) => (
-            <li key={block.id} className="border-t border-line px-4 py-3 first:border-t-0" data-testid={`dev-block-${block.id}`}>
+            <li key={block.id} className="flex gap-3 border-t border-line px-4 py-3 first:border-t-0" data-testid={`dev-block-${block.id}`}>
+              <Thumb src={block.sessions.find((x) => !x.removed) ? sessionImage(block.sessions.find((x) => !x.removed)!) : AREA_IMAGES.development} />
+              <div className="min-w-0 flex-1">
               <p className="font-display text-[15px] font-bold">{block.name || t(`plan.phase.${block.phase}`)}<span className="ml-2 text-[12px] font-normal text-ink-secondary">{t(block.status === 'active' ? 'dev.active' : 'dev.closed')}</span></p>
               <p className="text-[12px] text-ink-secondary">{formatDate(block.startDay, locale)} · {t('tpl.weeksTotal', { n: block.weeks })} · {t('block.report.count', { done: report.done, planned: report.planned })}</p>
               {report.metrics.length === 0 ? (
@@ -63,10 +68,11 @@ export function DevelopmentScreen() {
                 </ul>
               )}
               {open > 0 && measured > 0 && <p className="mt-1 text-[11px] text-ink-muted">{t('dev.partial', { measured, open })}</p>}
+              </div>
             </li>
           ))}
         </ul>
-        <p className="border-t border-line px-4 py-2 text-[11px] text-ink-muted">{t('dev.note')}</p>
+        <InfoNote text={t('dev.note')} className="border-t border-line px-4" />
       </Panel>
     </div>
   )

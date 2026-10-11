@@ -521,7 +521,7 @@
       "thin_data": "Datos escasos",
       "no_assessment": "Aún sin medición"
     },
-    "method": "La tendencia es una decisión por mayoría entre los tests para los que puede calcularse — deliberadamente no una media de pendientes, porque el porcentaje por 30 días no se puede promediar con sentido entre tests distintos. «Necesita atención» no es un juicio sobre la persona sino una indicación de uno de los motivos citados.",
+    "method": "La tendencia es una decisión por mayoría entre los tests para los que puede calcularse — deliberadamente no una media de pendientes, porque el porcentaje por 30 días no se puede promediar con sentido entre tests distintos. «Necesita atención» no es un juicio sobre la persona sino una indicación de uno de los motivos citados. Un test solo cuenta si su cambio supera el propio error de medición.",
     "emptyTitle": "Aún sin atletas",
     "emptyBody": "Añade a la primera persona en «Atletas que entrenas» en tu perfil.",
     "soloTitle": "El modo entrenador está desactivado",
@@ -933,12 +933,14 @@
     "overDays_other": "en {{count}} días",
     "trendLabel": {
       "improving": "Mejorando",
-      "stable": "Estable",
+      "stable": "Sin cambio claro",
       "declining": "Empeorando",
+      "unclear": "Incierto",
       "insufficient_one": "{{count}} medición",
       "insufficient_other": "{{count}} mediciones"
     },
     "trendInsufficientHint": "Una recta de regresión se calcula a partir de tres mediciones. Dos puntos siempre forman una recta perfecta — eso no es una tendencia.",
+    "trendUnclearHint": "El error de medición de este test aún no se conoce: se puede estimar a partir de cuatro mediciones. Hasta entonces KYDON no dice ni «mejorando» ni «empeorando».",
     "trendBasis": "{{points}} mediciones, {{days}} días, R² {{r2}}",
     "compareAssessments": "Comparar dos sesiones",
     "compareHint": "Solo sesiones completadas. Los tests presentes en solo una de las dos se marcan en lugar de omitirse.",
@@ -3022,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolada"
     },
     "review": {
-      "unreviewed": "Sin revisar",
+      "unreviewed": "Aún sin revisión experta",
       "reviewed": "Revisado por {{name}} el {{date}}"
     },
     "limits": "Límites de la evidencia",
@@ -3243,7 +3245,7 @@
       "event": "Competición"
     },
     "none": "No hay plantilla para esta selección.",
-    "unreviewed": "Sin revisar",
+    "unreviewed": "Aún sin revisión experta",
     "weeksTotal": "{{n}} semanas",
     "family": {
       "combat_grappling": "Deporte de combate, agarre",
@@ -3974,5 +3976,70 @@
     "supports": "Apoya {{sport}}",
     "other": "Otro enfoque",
     "filter": "Para {{sport}}"
+  },
+  "look": {
+    "info": "Más información",
+    "today": {
+      "label": "Hoy en tu plan",
+      "go": "Empezar",
+      "toPlan": "Ver el plan",
+      "missed": "perdida · ¿recuperarla?",
+      "percentile": "Percentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "recuperar",
+      "exercises": "Ejercicios",
+      "own": "Plan propio"
+    },
+    "player": {
+      "close": "Cerrar la sesión"
+    },
+    "tests": {
+      "measured": "{{measured}} de {{total}} medidos"
+    }
+  },
+  "start": {
+    "button": "Empezar entrenamiento",
+    "title": "Empezar entrenamiento",
+    "today": "Hoy",
+    "missed": "Perdidas",
+    "upcoming": "Próximas dos semanas",
+    "allDone": "No hay sesiones pendientes en el plan: todo hecho.",
+    "countsHint": "Puedes hacer cualquier sesión otro día. Se marcará como hecha en su fecha prevista.",
+    "none": "No tienes un plan activo. Aun así puedes entrenar: elige una opción abajo.",
+    "free": "Sin plan",
+    "log": "Registrar algo",
+    "logSub": "Anotar un entrenamiento directamente en el registro",
+    "catalog": "Del catálogo",
+    "catalogSub": "Una sesión de un plan listo, sin adoptar el plan",
+    "build": "Crear la tuya",
+    "buildSub": "Elige ejercicios, fija las series y empieza",
+    "countsFor": "Prevista para el {{date}}: cuenta para esa fecha.",
+    "doNow": "Hacer ahora"
+  },
+  "free": {
+    "eyebrow": "Entrenamiento libre",
+    "catalogTitle": "Sesión del catálogo",
+    "catalogIntro": "Elige un plan y una sesión de él. El plan no se adopta.",
+    "pickSession": "Elige una sesión",
+    "week": "Semana",
+    "items": "Partes: {{n}}",
+    "otherPlan": "Elegir otro plan",
+    "buildTitle": "Tu propia sesión",
+    "buildIntro": "Para hoy, sin plan. Se guarda en el registro de entrenamiento.",
+    "name": "Nombre de la sesión",
+    "search": "Buscar ejercicio",
+    "exercises": "Ejercicios",
+    "empty": "Aún no hay ejercicios. Busca arriba y toca uno.",
+    "sets": "Series",
+    "setsN": "{{n}} ×",
+    "fewer": "Una serie menos",
+    "more": "Una serie más",
+    "reps": "Rep./tiempo",
+    "remove": "Quitar ejercicio",
+    "start": "Empezar sesión",
+    "lost": "Aquí no hay ninguna sesión elegida. Elige una en «Empezar entrenamiento».",
+    "noSlot": "Entrenamiento libre: cuenta como entrenamiento, pero no marca ninguna fecha del plan.",
+    "save": "Guardar en el registro"
   }
 }

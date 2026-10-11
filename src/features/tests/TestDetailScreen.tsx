@@ -14,6 +14,7 @@ import { describeTest } from '@/domain/testModel'
 import { rateResult } from '@/domain/rating'
 import { EQUIPMENT_BY_ID } from '@/data/equipment'
 import { ProcedurePanel } from './ProcedurePanel'
+import { testImageUrl } from '@/data/testImages'
 import { formatDate, formatDuration, formatNumber } from '@/lib/format'
 import { formatResultValue } from '@/lib/resultView'
 import { gapsForTest } from '@/data/references'
@@ -71,6 +72,7 @@ export function TestDetailScreen() {
         eyebrow={`${t(`categories.${test.category}`)} · ${t(`dimensions.${test.dimension}`)}`}
         title={pick(test.name, locale)}
         intro={pick(test.summary, locale)}
+        image={testImageUrl(test.slug)}
         action={
           <Button asChild variant="primary">
             <Link to={`/tests/${test.slug}`}>

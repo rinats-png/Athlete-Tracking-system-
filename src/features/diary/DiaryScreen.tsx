@@ -12,6 +12,7 @@ import { RangeField } from '@/components/ui/RangeField'
 import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { StatTile } from '@/components/ui/StatTile'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { DIARY_OPTIONAL_FIELDS, type DiaryOptionalField } from '@/lib/store/schema'
@@ -113,6 +114,7 @@ export function DiaryScreen() {
         eyebrow={t('diary.eyebrow')}
         title={t('diary.title')}
         intro={role === 'coach' ? t('diary.introCoach') : t('diary.intro')}
+        image={AREA_IMAGES.diary}
       />
 
       {/* --- Der Tag -------------------------------------------------- */}
@@ -415,7 +417,7 @@ export function DiaryScreen() {
 
       {/* --- Kennzahlen ------------------------------------------------ */}
       <Panel>
-        <PanelHeader title={t('diary.stats.title')} subtitle={t('diary.stats.why')} />
+        <PanelHeader title={t('diary.stats.title')} note={t('diary.stats.why')} />
         <div className="grid grid-cols-2 divide-x divide-y divide-line sm:grid-cols-4 sm:divide-y-0">
           <StatTile
             label={t('diary.stats.weight7')}

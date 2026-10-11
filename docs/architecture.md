@@ -202,7 +202,7 @@ Gemeinsamer Code: `_shared/stripe.ts` (ohne SDK, rein und prüfbar),
 | Referenzen | `data/referenceModel.ts`, `references*.ts` | Methode (mean_sd, Perzentile, Bänder …), Qualität A–D, Quelle {Studie, n}, Lückenliste |
 | Radar | `lib/scoring.ts` | Bestleistung oder Perzentil, Fenster 18 Monate |
 | Score | `domain/performanceScore.ts` | erst ab 3 Achsen mit Referenz |
-| Messfehler | `domain/change.ts` | typischer Fehler je Athlet und Test ab 4 Messungen; Schwelle 1,96·√2; Urteile besser / schlechter / Rauschen / unbekannt / erste |
+| Messfehler | `domain/change.ts` | typischer Fehler je Athlet und Test ab 4 Messungen; Schwelle 1,96·√2; Urteile besser / schlechter / Rauschen / unbekannt / erste. `judgeChange` ist das einzige Urteil: auch der Trend (`analytics.ts`, Veränderung entlang der Geraden über den Zeitraum) und der Trainernachweis (`coachProof.ts`) urteilen darüber; unbekannter Messfehler = «unklar», keine Ersatzschwelle |
 
 ## 9. Internationalisierung
 

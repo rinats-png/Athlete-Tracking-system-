@@ -83,7 +83,7 @@ export function EditResultPanel({ result }: { result: StoredResult }) {
 
   return (
     <Panel className="no-print">
-      <PanelHeader title={t('editResult.title')} subtitle={t('editResult.hint')} />
+      <PanelHeader title={t('editResult.title')} note={t('editResult.hint')} />
       <form className="space-y-3 px-4 py-4" onSubmit={submit}>
         {test.fields.map((field) => (
           <label key={field.key} className="block">

@@ -6,6 +6,7 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { newId } from '@/lib/store/localStore'
@@ -79,6 +80,7 @@ export function TestDayScreen() {
         eyebrow={t('coachDash.title')}
         title={t('testDay.plural')}
         intro={t('testDay.intro')}
+        image={AREA_IMAGES.testDay}
         action={
           <Button variant="primary" onClick={() => setOpen((v) => !v)}>
             <Plus size={14} aria-hidden />

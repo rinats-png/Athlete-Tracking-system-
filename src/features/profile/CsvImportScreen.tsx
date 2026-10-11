@@ -88,7 +88,7 @@ export function CsvImportScreen() {
       />
 
       <Panel>
-        <PanelHeader title={t('csvImport.step1')} subtitle={t('csvImport.step1Hint')} />
+        <PanelHeader title={t('csvImport.step1')} note={t('csvImport.step1Hint')} />
         <div className="px-4 py-4">
           <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-[14px]">
             <Upload size={16} aria-hidden />
@@ -114,7 +114,7 @@ export function CsvImportScreen() {
 
       {table && (
         <Panel className="mt-4">
-          <PanelHeader title={t('csvImport.step2')} subtitle={t('csvImport.step2Hint')} />
+          <PanelHeader title={t('csvImport.step2')} note={t('csvImport.step2Hint')} />
           <ul className="divide-y divide-line">
             {table.headers.map((header, index) => (
               <li key={`${header}-${index}`} className="flex flex-wrap items-center gap-3 px-4 py-2.5">

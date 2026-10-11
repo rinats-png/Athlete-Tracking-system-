@@ -39,7 +39,7 @@ export function CoachSettings({ locale }: { locale: AppLocale }) {
 
   return (
     <Panel>
-      <PanelHeader title={t('coach.title')} subtitle={t('coach.hint')} />
+      <PanelHeader title={t('coach.title')} note={t('coach.hint')} />
       <div className="space-y-4 px-4 py-4">
         <div>
           <SegmentedControl<'solo' | 'coach'>

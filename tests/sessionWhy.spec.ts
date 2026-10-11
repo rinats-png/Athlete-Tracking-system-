@@ -26,7 +26,7 @@ test('Block: Regeleinheit zeigt Regel, Evidenz, Prüfstatus, Grenzen, Quellen, M
   const rule = page.getByTestId('why-r')
   await expect(rule).toContainText('Version 1.0.0')
   await expect(rule).toContainText('Evidenz')
-  await expect(rule).toContainText('Ungeprüft')
+  await expect(rule).toContainText('Fachlich noch nicht geprüft')
   await expect(rule).toContainText('Grenzen')
   await expect(rule).toContainText('Quellen')
   await expect(rule).toContainText('Am Blockende gemessen')

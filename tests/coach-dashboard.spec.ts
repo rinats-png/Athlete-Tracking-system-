@@ -70,9 +70,13 @@ test.describe("Athletenzeilen", () => {
       [
         athlete({
           results: [
-            result("back_squat_1rm", "2026-02-01", 170, { id: "r1" }),
-            result("back_squat_1rm", "2026-03-01", 162, { id: "r2" }),
-            result("back_squat_1rm", "2026-04-20", 154, { id: "r3" }),
+            // Fünf Messungen: erst ab vier ist der eigene Messfehler bekannt,
+            // und nur gegen ihn darf «fallend» gesagt werden (change.ts).
+            result("back_squat_1rm", "2026-01-05", 172, { id: "r1" }),
+            result("back_squat_1rm", "2026-02-01", 166, { id: "r2" }),
+            result("back_squat_1rm", "2026-03-01", 161, { id: "r3" }),
+            result("back_squat_1rm", "2026-04-01", 154, { id: "r4" }),
+            result("back_squat_1rm", "2026-04-20", 149, { id: "r5" }),
           ],
         }),
       ],
@@ -88,16 +92,22 @@ test.describe("Athletenzeilen", () => {
       results: [
         // Kniebeuge steigend
         result("back_squat_1rm", "2026-01-01", 150, { id: "s1" }),
-        result("back_squat_1rm", "2026-02-01", 160, { id: "s2" }),
-        result("back_squat_1rm", "2026-03-01", 170, { id: "s3" }),
+        result("back_squat_1rm", "2026-02-01", 158, { id: "s2" }),
+        result("back_squat_1rm", "2026-03-01", 165, { id: "s3" }),
+        result("back_squat_1rm", "2026-04-01", 174, { id: "s4" }),
+        result("back_squat_1rm", "2026-05-01", 181, { id: "s5" }),
         // Bankdrücken steigend
         result("bench_press_1rm", "2026-01-01", 100, { id: "b1" }),
-        result("bench_press_1rm", "2026-02-01", 105, { id: "b2" }),
-        result("bench_press_1rm", "2026-03-01", 110, { id: "b3" }),
+        result("bench_press_1rm", "2026-02-01", 104, { id: "b2" }),
+        result("bench_press_1rm", "2026-03-01", 109, { id: "b3" }),
+        result("bench_press_1rm", "2026-04-01", 113, { id: "b4" }),
+        result("bench_press_1rm", "2026-05-01", 118, { id: "b5" }),
         // Cooper fallend
         result("cooper_12min", "2026-01-01", 3000, { id: "c1" }),
-        result("cooper_12min", "2026-02-01", 2900, { id: "c2" }),
-        result("cooper_12min", "2026-03-01", 2800, { id: "c3" }),
+        result("cooper_12min", "2026-02-01", 2920, { id: "c2" }),
+        result("cooper_12min", "2026-03-01", 2830, { id: "c3" }),
+        result("cooper_12min", "2026-04-01", 2760, { id: "c4" }),
+        result("cooper_12min", "2026-05-01", 2670, { id: "c5" }),
       ],
     };
     expect(
@@ -109,6 +119,23 @@ test.describe("Athletenzeilen", () => {
         results: data.results,
       }),
     ).toBe("improving");
+  });
+
+  test("ohne bekannten Messfehler gibt es keinen Gesamttrend, sondern «unklar»", () => {
+    const results = [
+      result("back_squat_1rm", "2026-01-01", 150, { id: "u1" }),
+      result("back_squat_1rm", "2026-02-01", 160, { id: "u2" }),
+      result("back_squat_1rm", "2026-03-01", 170, { id: "u3" }),
+    ];
+    expect(
+      overallTrend({
+        branding: emptyData().branding,
+        profile: emptyData().athletes[0].profile,
+        biometrics: [],
+        assessments: [],
+        results,
+      }),
+    ).toBe("unclear");
   });
 
   test("eine dünne Datenlage wird als solche markiert", () => {

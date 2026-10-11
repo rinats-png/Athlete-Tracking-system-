@@ -84,7 +84,7 @@ export function AnalysisDeepDive() {
         <CoveragePanel coverage={coverage} />
 
         <Panel>
-          <PanelHeader title={t('analysis.balance')} subtitle={t('analysis.balanceHint')} />
+          <PanelHeader title={t('analysis.balance')} note={t('analysis.balanceHint')} />
           <div className="px-4 py-4">
             {balance.balance == null ? (
               <p className="text-[13px] text-ink-secondary">{t('analysis.balanceTooFew')}</p>
@@ -235,7 +235,7 @@ export function AnalysisDeepDive() {
       <Panel className="mt-4">
         <PanelHeader
           title={t('analysis.compareAssessments')}
-          subtitle={t('analysis.compareHint')}
+          note={t('analysis.compareHint')}
         />
         {completed.length < 2 ? (
           <p className="px-4 py-6 text-[14px] text-ink-secondary">{t('analysis.needTwoAssessments')}</p>
@@ -371,7 +371,7 @@ function TrendBadge({
   }
 
   return (
-    <span className="text-[12px]">
+    <span className="text-[12px]" title={trend.label === 'unclear' ? t('analysis.trendUnclearHint') : undefined}>
       {t(`analysis.trendLabel.${trend.label}`)}
       <span className="block text-ink-muted">
         {t('analysis.trendBasis', {

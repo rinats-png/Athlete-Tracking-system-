@@ -7,6 +7,7 @@ import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { planMode } from '@/domain/planMode'
 import { FIT_ORDER, GOAL_OF_FAMILY, planFit, type PlanFit } from '@/domain/library'
 import { PLAN_TEMPLATES } from '@/data/planTemplates'
+import { goalImage } from '@/data/visuals'
 import { cn } from '@/lib/utils'
 import { useLibrary } from './useLibrary'
 import { FitTag, GermanOnlyNote, UnreviewedBanner, useMySport } from './bits'
@@ -77,6 +78,7 @@ export function ProgramLibraryScreen() {
         {shown.map((i) => (
           <li key={i.key}>
             <Link to={i.to} data-testid={`prog-${i.key}`} className="flex min-h-16 items-center gap-3 py-3">
+              <img src={goalImage(i.goal)} alt="" loading="lazy" decoding="async" className="thumb" />
               <div className="min-w-0 flex-1">
                 <p className="font-display text-[16px] leading-tight font-bold">{i.title}</p>
                 <p className="mt-0.5 text-[12px] text-ink-secondary">{i.meta}</p>

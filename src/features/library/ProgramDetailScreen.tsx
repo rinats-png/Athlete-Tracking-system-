@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { ExternalLink } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { PhotoCard } from '@/components/ui/PhotoCard'
+import { goalImage } from '@/data/visuals'
 import { materializePlan, nextMonday, planFit } from '@/domain/library'
 import type { MethodRule } from '@/domain/libraryTypes'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -63,7 +64,11 @@ export function ProgramDetailScreen() {
 
   return (
     <div data-testid="program-detail">
-      <ScreenHeader eyebrow={t(`prog.goals.${plan.goal}`)} title={plan.title} intro={t('prog.meta', { weeks: plan.weeks, days: plan.sessions_per_week, sessions: plan.sessionCount })} />
+      <PhotoCard image={goalImage(plan.goal)} className="mb-4 min-h-[170px] gap-1 p-4" data-testid="prog-hero">
+        <span className="label-tag">{t(`prog.goals.${plan.goal}`)}</span>
+        <h1 className="font-display text-[30px] leading-none font-bold">{plan.title}</h1>
+        <span className="text-[13px] text-[#B9CCC7]">{t('prog.meta', { weeks: plan.weeks, days: plan.sessions_per_week, sessions: plan.sessionCount })}</span>
+      </PhotoCard>
       <div className="-mt-2 mb-3"><FitTag fit={planFit(plan.goal, discipline)} sport={sport} testId="prog-fit" /></div>
       <UnreviewedBanner />
       <GermanOnlyNote />

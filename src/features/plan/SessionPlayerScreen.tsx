@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
-import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { InfoNote } from '@/components/ui/InfoNote'
+import { sessionImage } from '@/data/visuals'
+import { X } from 'lucide-react'
 import { useAppData } from '@/lib/store/AppDataProvider'
-import { openOccurrencesOn } from '@/domain/trainingBlock'
+import { findOpenOccurrence, openOccurrencesOn } from '@/domain/trainingBlock'
 import { syncAssignedCompletions } from '@/lib/assignSync'
 import { LiveHr } from '@/features/plan/LiveHr'
 import type { HrSummary } from '@/domain/liveHr'
 import { SessionWhy } from '@/features/plan/SessionWhy'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { cn } from '@/lib/utils'
@@ -60,11 +63,16 @@ export function SessionPlayerScreen() {
   const { data, trainingBlocks, completePlannedSession } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
   const today = new Date().toISOString().slice(0, 10)
-  const open = block ? openOccurrencesOn(block, today) : []
-  const [pickedKey, setPickedKey] = useState<string | null>(null)
+  // Gewählt über die Startauswahl oder den Kalender: auch eine Einheit eines anderen Tages.
+  const [params] = useSearchParams()
+  const wanted = block && params.get('s') && params.get('d') ? findOpenOccurrence(block, params.get('s') as string, params.get('d') as string) : null
   const keyOf = (o: { session: StoredPlannedSession; planned: string }) => `${o.session.id}|${o.planned}`
+  const todays = block ? openOccurrencesOn(block, today) : []
+  const open = wanted && !todays.some((o) => keyOf(o) === keyOf(wanted)) ? [wanted, ...todays] : todays
+  const [pickedKey, setPickedKey] = useState<string | null>(wanted ? keyOf(wanted) : null)
   const occurrence = open.find((o) => keyOf(o) === pickedKey) ?? open[0] ?? null
   const session = occurrence?.session ?? null
+  const review = useReviewState(block, session)
   const hasLibrary = session?.blocks.some((b) => b.type === 'library_exercise') ?? false
   const { exercises, index } = useLibrary(hasLibrary)
   const planSubs = index?.plans.find((p) => p.plan_id === block?.libraryPlanId)?.substitutions ?? {}
@@ -162,8 +170,21 @@ export function SessionPlayerScreen() {
   }
 
   return (
-    <div data-testid="session-player">
-      <ScreenHeader eyebrow={t('player.eyebrow')} title={t('player.title')} intro={t('player.intro')} />
+    <div data-testid="session-player" className="scope-dark -mx-4 -mt-5 min-h-dvh px-4 pb-8 sm:mx-0 sm:mt-0 sm:min-h-0 sm:rounded-2xl sm:px-6">
+      {/* Fotokopf: die erste bebilderte Übung der Einheit, läuft in den dunklen Grund aus. */}
+      <div className="relative -mx-4 h-[220px] overflow-hidden sm:-mx-6 sm:rounded-t-2xl">
+        <img src={sessionImage(session)} alt="" decoding="async" className="size-full object-cover" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(0deg, var(--plane) 4%, rgba(11,16,20,.25) 60%, rgba(11,16,20,.6))' }} />
+        <Link to="/plan" aria-label={t('look.player.close')} className="absolute top-3 left-2 inline-flex size-11 items-center justify-center rounded-pill text-ink">
+          <X size={20} aria-hidden />
+        </Link>
+      </div>
+      <header className="relative -mt-16 mb-4">
+        <span className="label-tag">{t('player.eyebrow')} · {sessionSource(session, t)}</span>
+        <h1 className="mt-1 font-display text-[36px] leading-none font-bold">{sessionName(session, t)}</h1>
+        <span className="mt-2 block"><ReviewMark state={review} testId="player-unreviewed" /></span>
+        <InfoNote text={t('player.intro')} />
+      </header>
       {open.length > 1 && (
         <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t('player.pick')}>
           {open.map((o) => (
@@ -174,8 +195,8 @@ export function SessionPlayerScreen() {
         </div>
       )}
       <Panel className="mb-4">
-        <PanelHeader title={sessionName(session, t)} subtitle={sessionSource(session, t)} />
-        <div className="px-4 pb-4">
+        <div className="px-4 py-4">
+          {occurrence.date !== today && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-other-day">{t('start.countsFor', { date: `${occurrence.date.slice(8, 10)}.${occurrence.date.slice(5, 7)}.` })}</p>}
           {occurrence.moved && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-moved">{t('cal.movedFrom', { date: `${occurrence.planned.slice(8, 10)}.${occurrence.planned.slice(5, 7)}.` })}</p>}
           {session.blocks.map((b, i) => (b.type === 'library_exercise' || b.type === 'strength' || b.type === 'exercise' ? null : <p key={i} className="text-[14px]">{blockText(b, t)}</p>))}
           <SetLogger session={session} exercises={exercises} planSubs={planSubs} blocks={trainingBlocks} onChange={setLog} />

@@ -6,6 +6,7 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { TapScale } from '@/components/ui/TapScale'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 import { useLocale } from '@/features/shared/useLocale'
 import { formatDate, formatNumber } from '@/lib/format'
 import { newId } from '@/lib/store/localStore'
@@ -56,7 +57,7 @@ export function PeakWeekScreen() {
           {t('health.title')}
         </Link>
       </Button>
-      <ScreenHeader eyebrow={t('peak.eyebrow')} title={t('peak.title')} intro={t('peak.intro')} />
+      <ScreenHeader eyebrow={t('peak.eyebrow')} title={t('peak.title')} intro={t('peak.intro')} image={AREA_IMAGES.peak} />
 
       <Panel className="mb-4">
         <PanelHeader

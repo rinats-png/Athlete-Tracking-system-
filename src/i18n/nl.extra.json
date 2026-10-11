@@ -521,7 +521,7 @@
       "thin_data": "Weinig data",
       "no_assessment": "Nog geen meting"
     },
-    "method": "De trend is een meerderheidsbeslissing over de tests waarvoor er überhaupt een te berekenen is — bewust geen gemiddelde van hellingen, omdat procent per 30 dagen over verschillende tests niet zinvol te middelen is. “Aandacht nodig” is geen oordeel over de persoon, maar een verwijzing naar een van de genoemde redenen.",
+    "method": "De trend is een meerderheidsbeslissing over de tests waarvoor er überhaupt een te berekenen is — bewust geen gemiddelde van hellingen, omdat procent per 30 dagen over verschillende tests niet zinvol te middelen is. “Aandacht nodig” is geen oordeel over de persoon, maar een verwijzing naar een van de genoemde redenen. Een test telt alleen mee als de verandering groter is dan de eigen meetfout.",
     "emptyTitle": "Nog geen atleten",
     "emptyBody": "Voeg de eerste persoon toe onder “Atleten die je traint” in je profiel.",
     "soloTitle": "Trainersmodus staat uit",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} dagen",
     "trendLabel": {
       "improving": "Verbetert",
-      "stable": "Stabiel",
+      "stable": "Geen duidelijke verandering",
       "declining": "Daalt",
+      "unclear": "Onduidelijk",
       "insufficient_one": "{{count}} meting",
       "insufficient_other": "{{count}} metingen"
     },
     "trendInsufficientHint": "Een regressielijn wordt vanaf drie metingen berekend. Twee punten vormen altijd een perfecte lijn — dat is geen trend.",
+    "trendUnclearHint": "De meetfout voor deze test is nog niet bekend — vanaf vier metingen is die te schatten. Tot dan zegt KYDON niet „verbetert” of „daalt”.",
     "trendBasis": "{{points}} metingen, {{days}} dagen, R² {{r2}}",
     "compareAssessments": "Twee sessies vergelijken",
     "compareHint": "Alleen afgeronde sessies. Tests die in slechts één van de twee voorkomen, worden gemarkeerd in plaats van weggelaten.",
@@ -3022,7 +3024,7 @@
       "EXTRAPOLATED": "geëxtrapoleerd"
     },
     "review": {
-      "unreviewed": "Ongecontroleerd",
+      "unreviewed": "Nog niet vakinhoudelijk gecontroleerd",
       "reviewed": "Gecontroleerd door {{name}} op {{date}}"
     },
     "limits": "Grenzen van het bewijs",
@@ -3243,7 +3245,7 @@
       "event": "Wedstrijd"
     },
     "none": "Voor deze selectie is er geen sjabloon.",
-    "unreviewed": "Niet beoordeeld",
+    "unreviewed": "Nog niet vakinhoudelijk gecontroleerd",
     "weeksTotal": "{{n}} weken",
     "family": {
       "combat_grappling": "Vechtsport grappling",
@@ -3974,5 +3976,70 @@
     "supports": "Ondersteunt {{sport}}",
     "other": "Ander accent",
     "filter": "Voor {{sport}}"
+  },
+  "look": {
+    "info": "Meer info",
+    "today": {
+      "label": "Vandaag in je plan",
+      "go": "Aan de slag",
+      "toPlan": "Naar het plan",
+      "missed": "gemist · inhalen?",
+      "percentile": "Percentiel {{score}}"
+    },
+    "hub": {
+      "catchUp": "inhalen",
+      "exercises": "Oefeningen",
+      "own": "Eigen plan"
+    },
+    "player": {
+      "close": "Training sluiten"
+    },
+    "tests": {
+      "measured": "{{measured}} van {{total}} gemeten"
+    }
+  },
+  "start": {
+    "button": "Training starten",
+    "title": "Training starten",
+    "today": "Vandaag",
+    "missed": "Gemist",
+    "upcoming": "Komende twee weken",
+    "allDone": "Geen open training in het plan — alles gedaan.",
+    "countsHint": "Je kunt elke training ook op een andere dag doen. Hij wordt dan afgevinkt voor de geplande datum.",
+    "none": "Je hebt geen lopend plan. Trainen kan toch — kies hieronder een manier.",
+    "free": "Zonder plan",
+    "log": "Iets invoeren",
+    "logSub": "Een training direct in het trainingslog zetten",
+    "catalog": "Uit de catalogus",
+    "catalogSub": "Een training uit een kant-en-klaar plan, zonder het plan over te nemen",
+    "build": "Zelf samenstellen",
+    "buildSub": "Oefeningen kiezen, sets vastleggen, beginnen",
+    "countsFor": "Gepland voor {{date}} – telt voor die datum.",
+    "doNow": "Nu doen"
+  },
+  "free": {
+    "eyebrow": "Vrije training",
+    "catalogTitle": "Training uit de catalogus",
+    "catalogIntro": "Kies een plan en daaruit een training. Het plan zelf wordt niet overgenomen.",
+    "pickSession": "Kies een training",
+    "week": "Week",
+    "items": "Onderdelen: {{n}}",
+    "otherPlan": "Ander plan kiezen",
+    "buildTitle": "Eigen training",
+    "buildIntro": "Voor vandaag, zonder plan. Hij wordt opgeslagen in het trainingslog.",
+    "name": "Naam van de training",
+    "search": "Oefening zoeken",
+    "exercises": "Oefeningen",
+    "empty": "Nog geen oefening. Zoek hierboven en tik er een aan.",
+    "sets": "Sets",
+    "setsN": "{{n}} ×",
+    "fewer": "Eén set minder",
+    "more": "Eén set meer",
+    "reps": "Herh./tijd",
+    "remove": "Oefening verwijderen",
+    "start": "Training starten",
+    "lost": "Hier is geen training gekozen. Kies er een onder ‘Training starten’.",
+    "noSlot": "Vrije training: telt als training, maar vinkt geen datum in het plan af.",
+    "save": "Opslaan in het trainingslog"
   }
 }

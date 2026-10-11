@@ -521,7 +521,7 @@
       "thin_data": "Thin data",
       "no_assessment": "No measurement yet"
     },
-    "method": "The trend is a majority decision across the tests for which one can be computed at all — deliberately not a mean of slopes, because percent per 30 days cannot be meaningfully averaged across different tests. “Needs attention” is not a judgement of the person but a pointer to one of the stated reasons.",
+    "method": "The trend is a majority decision across the tests for which one can be computed at all — deliberately not a mean of slopes, because percent per 30 days cannot be meaningfully averaged across different tests. “Needs attention” is not a judgement of the person but a pointer to one of the stated reasons. A test only counts if its change exceeds the athlete’s own measurement error.",
     "emptyTitle": "No athletes yet",
     "emptyBody": "Add the first person under “Athletes you coach” in your profile.",
     "soloTitle": "Coach mode is off",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} days",
     "trendLabel": {
       "improving": "Improving",
-      "stable": "Stable",
+      "stable": "No clear change",
       "declining": "Declining",
+      "unclear": "Unclear",
       "insufficient_one": "{{count}} measurement",
       "insufficient_other": "{{count}} measurements"
     },
     "trendInsufficientHint": "A regression line is computed from three measurements onwards. Two points always make a perfect line — that is not a trend.",
+    "trendUnclearHint": "The measurement error for this test is not known yet — it can be estimated from four measurements. Until then KYDON says neither “improving” nor “declining”.",
     "trendBasis": "{{points}} measurements, {{days}} days, R² {{r2}}",
     "compareAssessments": "Compare two sessions",
     "compareHint": "Completed sessions only. Tests present in just one of the two are marked rather than dropped.",
@@ -3022,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolated"
     },
     "review": {
-      "unreviewed": "Unreviewed",
+      "unreviewed": "Not yet expert-reviewed",
       "reviewed": "Reviewed by {{name}} on {{date}}"
     },
     "limits": "Limits of the evidence",
@@ -3243,7 +3245,7 @@
       "event": "Competition"
     },
     "none": "No template matches this selection.",
-    "unreviewed": "Unreviewed",
+    "unreviewed": "Not yet expert-reviewed",
     "weeksTotal": "{{n}} weeks",
     "family": {
       "combat_grappling": "Combat sport grappling",
@@ -3974,5 +3976,70 @@
     "supports": "Supports {{sport}}",
     "other": "Different focus",
     "filter": "For {{sport}}"
+  },
+  "look": {
+    "info": "More info",
+    "today": {
+      "label": "Today in your plan",
+      "go": "Let’s go",
+      "toPlan": "Open plan",
+      "missed": "missed · make it up?",
+      "percentile": "Percentile {{score}}"
+    },
+    "hub": {
+      "catchUp": "make up",
+      "exercises": "Exercises",
+      "own": "Own plan"
+    },
+    "player": {
+      "close": "Close session"
+    },
+    "tests": {
+      "measured": "{{measured}} of {{total}} measured"
+    }
+  },
+  "start": {
+    "button": "Start training",
+    "title": "Start training",
+    "today": "Today",
+    "missed": "Missed",
+    "upcoming": "Next two weeks",
+    "allDone": "No open session in the plan — all done.",
+    "countsHint": "You can do any session on a different day too. It is then ticked off for its planned date.",
+    "none": "You have no active plan. You can still train — pick a way below.",
+    "free": "Without a plan",
+    "log": "Log something",
+    "logSub": "Write a workout straight into the training log",
+    "catalog": "From the catalogue",
+    "catalogSub": "A session from a ready-made plan, without adopting the plan",
+    "build": "Build your own",
+    "buildSub": "Pick exercises, set the sets, go",
+    "countsFor": "Planned for {{date}} – counts for that date.",
+    "doNow": "Do it now"
+  },
+  "free": {
+    "eyebrow": "Free training",
+    "catalogTitle": "Session from the catalogue",
+    "catalogIntro": "Pick a plan and a session from it. The plan itself is not adopted.",
+    "pickSession": "Pick a session",
+    "week": "Week",
+    "items": "Parts: {{n}}",
+    "otherPlan": "Choose another plan",
+    "buildTitle": "Your own session",
+    "buildIntro": "For today, without a plan. It is saved in the training log.",
+    "name": "Session name",
+    "search": "Search exercise",
+    "exercises": "Exercises",
+    "empty": "No exercise yet. Search above and tap one.",
+    "sets": "Sets",
+    "setsN": "{{n}} ×",
+    "fewer": "One set fewer",
+    "more": "One set more",
+    "reps": "Reps/time",
+    "remove": "Remove exercise",
+    "start": "Start session",
+    "lost": "No session is selected here. Pick one under “Start training”.",
+    "noSlot": "Free training: counts as training but does not tick off a plan date.",
+    "save": "Save to training log"
   }
 }

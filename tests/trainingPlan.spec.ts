@@ -158,7 +158,7 @@ test.describe('Bildschirm Plan (Vorschau)', () => {
     // Jede gezeigte Einheit kennzeichnet die Regel als ungeprüft.
     const sessions = page.locator('[data-testid^="plan-session-"]')
     const n = await sessions.count()
-    for (let i = 0; i < n; i++) await expect(sessions.nth(i)).toContainText('Ungeprüft')
+    for (let i = 0; i < n; i++) await expect(sessions.nth(i)).toContainText('Fachlich noch nicht geprüft')
     // Beleg aufklappen zeigt Grenzen und Quellen.
     if (n > 0) {
       await sessions.first().getByTestId('plan-evidence-open').click()

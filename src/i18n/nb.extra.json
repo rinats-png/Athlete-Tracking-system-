@@ -521,7 +521,7 @@
       "thin_data": "Tynt datagrunnlag",
       "no_assessment": "Ingen måling ennå"
     },
-    "method": "Trenden er en flertallsavgjørelse over testene der en i det hele tatt kan beregnes — bevisst ikke et snitt av stigningstall, fordi prosent per 30 dager ikke kan snittes meningsfullt på tvers av ulike tester. «Trenger oppmerksomhet» er ingen dom over personen, men en peker til én av de oppgitte grunnene.",
+    "method": "Trenden er en flertallsavgjørelse over testene der en i det hele tatt kan beregnes — bevisst ikke et snitt av stigningstall, fordi prosent per 30 dager ikke kan snittes meningsfullt på tvers av ulike tester. «Trenger oppmerksomhet» er ingen dom over personen, men en peker til én av de oppgitte grunnene. En test teller bare hvis endringen er større enn den egne målefeilen.",
     "emptyTitle": "Ingen utøvere ennå",
     "emptyBody": "Legg til den første personen under «Utøvere du trener» i profilen din.",
     "soloTitle": "Trenermodus er av",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} dager",
     "trendLabel": {
       "improving": "I framgang",
-      "stable": "Stabil",
+      "stable": "Ingen klar endring",
       "declining": "Fallende",
+      "unclear": "Uklart",
       "insufficient_one": "{{count}} måling",
       "insufficient_other": "{{count}} målinger"
     },
     "trendInsufficientHint": "En regresjonslinje beregnes fra tre målinger. To punkter gir alltid en perfekt linje — det er ingen trend.",
+    "trendUnclearHint": "Målefeilen for denne testen er ikke kjent ennå — den kan anslås fra fire målinger. Inntil da sier KYDON verken «i framgang» eller «fallende».",
     "trendBasis": "{{points}} målinger, {{days}} dager, R² {{r2}}",
     "compareAssessments": "Sammenlign to økter",
     "compareHint": "Bare fullførte økter. Tester som finnes i bare én av de to, markeres i stedet for å utelates.",
@@ -3022,7 +3024,7 @@
       "EXTRAPOLATED": "ekstrapolert"
     },
     "review": {
-      "unreviewed": "Ukontrollert",
+      "unreviewed": "Ikke faglig kontrollert ennå",
       "reviewed": "Kontrollert av {{name}} den {{date}}"
     },
     "limits": "Beleggets grenser",
@@ -3243,7 +3245,7 @@
       "event": "Konkurranse"
     },
     "none": "Det finnes ingen mal for dette utvalget.",
-    "unreviewed": "Ugjennomgått",
+    "unreviewed": "Ikke faglig kontrollert ennå",
     "weeksTotal": "{{n}} uker",
     "family": {
       "combat_grappling": "Kampsport grappling",
@@ -3974,5 +3976,70 @@
     "supports": "Støtter {{sport}}",
     "other": "Annet fokus",
     "filter": "For {{sport}}"
+  },
+  "look": {
+    "info": "Mer info",
+    "today": {
+      "label": "I dag i planen",
+      "go": "Kjør",
+      "toPlan": "Til planen",
+      "missed": "gått glipp av · ta igjen?",
+      "percentile": "Persentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "ta igjen",
+      "exercises": "Øvelser",
+      "own": "Egen plan"
+    },
+    "player": {
+      "close": "Lukk økten"
+    },
+    "tests": {
+      "measured": "{{measured}} av {{total}} målt"
+    }
+  },
+  "start": {
+    "button": "Start trening",
+    "title": "Start trening",
+    "today": "I dag",
+    "missed": "Gått glipp av",
+    "upcoming": "Neste to uker",
+    "allDone": "Ingen åpne økter i planen – alt er gjort.",
+    "countsHint": "Du kan også gjøre hver økt en annen dag. Den krysses da av for den planlagte datoen.",
+    "none": "Du har ingen aktiv plan. Du kan trene likevel – velg en måte nedenfor.",
+    "free": "Uten plan",
+    "log": "Før inn noe",
+    "logSub": "Skriv en økt rett inn i treningsloggen",
+    "catalog": "Fra katalogen",
+    "catalogSub": "En økt fra en ferdig plan, uten å ta i bruk planen",
+    "build": "Sett sammen selv",
+    "buildSub": "Velg øvelser, bestem sett, sett i gang",
+    "countsFor": "Planlagt til {{date}} – teller for den datoen.",
+    "doNow": "Gjør nå"
+  },
+  "free": {
+    "eyebrow": "Fri trening",
+    "catalogTitle": "Økt fra katalogen",
+    "catalogIntro": "Velg en plan og en økt fra den. Selve planen tas ikke i bruk.",
+    "pickSession": "Velg en økt",
+    "week": "Uke",
+    "items": "Deler: {{n}}",
+    "otherPlan": "Velg en annen plan",
+    "buildTitle": "Egen økt",
+    "buildIntro": "For i dag, uten plan. Den lagres i treningsloggen.",
+    "name": "Navn på økten",
+    "search": "Søk øvelse",
+    "exercises": "Øvelser",
+    "empty": "Ingen øvelse ennå. Søk ovenfor og trykk på en.",
+    "sets": "Sett",
+    "setsN": "{{n}} ×",
+    "fewer": "Ett sett mindre",
+    "more": "Ett sett til",
+    "reps": "Rep./tid",
+    "remove": "Fjern øvelse",
+    "start": "Start økt",
+    "lost": "Ingen økt er valgt her. Velg en under «Start trening».",
+    "noSlot": "Fri trening: teller som trening, men krysser ikke av noen dato i planen.",
+    "save": "Lagre i treningsloggen"
   }
 }

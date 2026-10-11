@@ -107,6 +107,7 @@ export function SyncPanel() {
             </p>
 
             {report?.reason === 'offline' && <p className="text-ink-secondary">{t('sync.offline')}</p>}
+            {report?.reason === 'newer_version' && <p className="text-ink-secondary">{t('storage.newerTitle')}</p>}
             {report && report.reason == null && (
               <p className="text-ink-secondary">
                 {t('sync.result', { pushed: report.pushed, pulled: report.pulled, series: report.seriesPushed + report.seriesPulled })}

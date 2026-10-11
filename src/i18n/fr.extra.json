@@ -521,7 +521,7 @@
       "thin_data": "Données minces",
       "no_assessment": "Pas encore de mesure"
     },
-    "method": "La tendance est une décision majoritaire sur les tests pour lesquels on peut en calculer une — volontairement pas une moyenne de pentes, car des pourcents par 30 jours ne se moyennent pas de façon sensée entre tests différents. « Demande de l'attention » n'est pas un jugement sur la personne mais un renvoi à l'une des raisons indiquées.",
+    "method": "La tendance est une décision majoritaire sur les tests pour lesquels on peut en calculer une — volontairement pas une moyenne de pentes, car des pourcents par 30 jours ne se moyennent pas de façon sensée entre tests différents. « Demande de l'attention » n'est pas un jugement sur la personne mais un renvoi à l'une des raisons indiquées. Un test ne compte que si son changement dépasse la propre erreur de mesure.",
     "emptyTitle": "Pas encore d'athlètes",
     "emptyBody": "Ajoute la première personne sous « Athlètes que tu entraînes » dans ton profil.",
     "soloTitle": "Le mode entraîneur est désactivé",
@@ -933,12 +933,14 @@
     "overDays_other": "sur {{count}} jours",
     "trendLabel": {
       "improving": "En progression",
-      "stable": "Stable",
+      "stable": "Pas de changement net",
       "declining": "En recul",
+      "unclear": "Incertain",
       "insufficient_one": "{{count}} mesure",
       "insufficient_other": "{{count}} mesures"
     },
     "trendInsufficientHint": "Une droite de régression est calculée à partir de trois mesures. Deux points font toujours une droite parfaite — ce n'est pas une tendance.",
+    "trendUnclearHint": "L'erreur de mesure de ce test n'est pas encore connue — elle peut être estimée à partir de quatre mesures. D'ici là, KYDON ne dit ni « en progression » ni « en recul ».",
     "trendBasis": "{{points}} mesures, {{days}} jours, R² {{r2}}",
     "compareAssessments": "Comparer deux sessions",
     "compareHint": "Sessions closes seulement. Les tests présents dans une seule des deux sont signalés, pas écartés.",
@@ -3022,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolée"
     },
     "review": {
-      "unreviewed": "Non vérifié",
+      "unreviewed": "Pas encore validé par un expert",
       "reviewed": "Vérifié par {{name}} le {{date}}"
     },
     "limits": "Limites des preuves",
@@ -3243,7 +3245,7 @@
       "event": "Compétition"
     },
     "none": "Aucun modèle ne correspond à cette sélection.",
-    "unreviewed": "Non vérifié",
+    "unreviewed": "Pas encore validé par un expert",
     "weeksTotal": "{{n}} semaines",
     "family": {
       "combat_grappling": "Sport de combat, lutte au sol",
@@ -3974,5 +3976,70 @@
     "supports": "Soutient : {{sport}}",
     "other": "Autre objectif",
     "filter": "Pour {{sport}}"
+  },
+  "look": {
+    "info": "En savoir plus",
+    "today": {
+      "label": "Aujourd’hui au programme",
+      "go": "C’est parti",
+      "toPlan": "Voir le plan",
+      "missed": "manquée · la rattraper ?",
+      "percentile": "Percentile {{score}}"
+    },
+    "hub": {
+      "catchUp": "rattraper",
+      "exercises": "Exercices",
+      "own": "Mon plan"
+    },
+    "player": {
+      "close": "Fermer la séance"
+    },
+    "tests": {
+      "measured": "{{measured}} sur {{total}} mesurés"
+    }
+  },
+  "start": {
+    "button": "Commencer l’entraînement",
+    "title": "Commencer l’entraînement",
+    "today": "Aujourd’hui",
+    "missed": "Manquées",
+    "upcoming": "Deux prochaines semaines",
+    "allDone": "Aucune séance ouverte dans le plan — tout est fait.",
+    "countsHint": "Tu peux aussi faire chaque séance un autre jour. Elle est alors cochée pour sa date prévue.",
+    "none": "Tu n’as pas de plan en cours. Tu peux quand même t’entraîner — choisis une option ci-dessous.",
+    "free": "Sans plan",
+    "log": "Saisir un entraînement",
+    "logSub": "Écrire une séance directement dans le journal",
+    "catalog": "Depuis le catalogue",
+    "catalogSub": "Une séance d’un plan prêt à l’emploi, sans adopter le plan",
+    "build": "Composer soi-même",
+    "buildSub": "Choisir des exercices, fixer les séries, c’est parti",
+    "countsFor": "Prévue le {{date}} – compte pour cette date.",
+    "doNow": "Faire maintenant"
+  },
+  "free": {
+    "eyebrow": "Entraînement libre",
+    "catalogTitle": "Séance du catalogue",
+    "catalogIntro": "Choisis un plan puis une séance. Le plan lui-même n’est pas adopté.",
+    "pickSession": "Choisis une séance",
+    "week": "Semaine",
+    "items": "Éléments : {{n}}",
+    "otherPlan": "Choisir un autre plan",
+    "buildTitle": "Ta propre séance",
+    "buildIntro": "Pour aujourd’hui, sans plan. Elle est enregistrée dans le journal.",
+    "name": "Nom de la séance",
+    "search": "Chercher un exercice",
+    "exercises": "Exercices",
+    "empty": "Aucun exercice pour l’instant. Cherche ci-dessus et touches-en un.",
+    "sets": "Séries",
+    "setsN": "{{n}} ×",
+    "fewer": "Une série de moins",
+    "more": "Une série de plus",
+    "reps": "Rép./durée",
+    "remove": "Retirer l’exercice",
+    "start": "Lancer la séance",
+    "lost": "Aucune séance n’est choisie ici. Choisis-en une dans « Commencer l’entraînement ».",
+    "noSlot": "Entraînement libre : compte comme entraînement, mais ne coche aucune date du plan.",
+    "save": "Enregistrer dans le journal"
   }
 }

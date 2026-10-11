@@ -1,6 +1,6 @@
 import { getSupabase } from './client'
 import { CURRENT_SCHEMA_VERSION, parseAthlete } from '@/lib/store/schema'
-import type { StoredAthlete, StoredData } from '@/lib/store/localStore'
+import { isWriteLocked, type StoredAthlete, type StoredData } from '@/lib/store/localStore'
 import { carriesSeries, mergeSeries, planSeriesPush, stripSeries, type SeriesRow } from './series'
 import { clearCarryChoice, readCarryChoice } from '@/lib/coachStatus'
 import { isBlankPlaceholder } from '@/lib/store/placeholder'
@@ -128,7 +128,7 @@ export interface SyncReport {
   seriesPulled: number
   /** Athleten, bei denen der Serverstand des Dokuments fremd ist. */
   conflicts: string[]
-  reason: null | 'offline' | 'not_signed_in' | 'unknown'
+  reason: null | 'offline' | 'not_signed_in' | 'newer_version' | 'unknown'
   /** Der Bestand hat gewechselt (Team beigetreten oder verlassen). */
   poolSwitched?: boolean
 }
@@ -157,6 +157,10 @@ export async function syncOnce(
   onSeries: (rows: SeriesRow[]) => number = () => 0,
   onPoolSwitch: () => StoredData = () => initialStore,
 ): Promise<SyncReport> {
+  // Liegt auf dem Gerät ein Bestand aus einer neueren Fassung, ist der
+  // Bestand dieser Sitzung ein leerer Platzhalter: ihn hochzuladen hiesse,
+  // einen Leerathleten auf den Server zu schreiben.
+  if (isWriteLocked()) return fail('newer_version')
   const supabase = await getSupabase()
   if (!supabase) return fail('offline')
 

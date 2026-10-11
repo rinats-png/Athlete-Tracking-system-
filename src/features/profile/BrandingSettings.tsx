@@ -44,7 +44,7 @@ export function BrandingSettings() {
 
   return (
     <Panel>
-      <PanelHeader title={t('report.branding')} subtitle={t('report.brandingHint')} />
+      <PanelHeader title={t('report.branding')} note={t('report.brandingHint')} />
       <div className="space-y-4 px-4 py-4">
         <label className="block">
           <span className="label-tag">{t('report.organisation')}</span>

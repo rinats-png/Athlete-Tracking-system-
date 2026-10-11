@@ -2050,6 +2050,19 @@ export interface LoadReport {
   fromNewerVersion: boolean
   /** Abgewiesene Datensätze mit Begründung. */
   rejected: { kind: string; id: string; reason: string }[]
+  /**
+   * Dieselben Datensätze mit ihrem Rohwert. Der Ladeweg legt sie auf dem
+   * Gerät ab (`localStore.ts`), damit ein Fehler im Schema keine Daten
+   * kostet: nach einer Korrektur lassen sie sich wieder einlesen.
+   */
+  quarantine: QuarantineEntry[]
+}
+
+export interface QuarantineEntry {
+  kind: string
+  id: string
+  reason: string
+  raw: unknown
 }
 
 export interface ParseOutcome {
@@ -2057,7 +2070,7 @@ export interface ParseOutcome {
   report: LoadReport
 }
 
-const emptyReport = (): LoadReport => ({ migratedFrom: null, fromNewerVersion: false, rejected: [] })
+const emptyReport = (): LoadReport => ({ migratedFrom: null, fromNewerVersion: false, rejected: [], quarantine: [] })
 
 /**
  * Einen einzelnen Athleten aus fremder Quelle pruefen — etwa ein Dokument vom
@@ -2150,58 +2163,41 @@ export function parseStoredData(raw: unknown): ParseOutcome {
   const whole = storedDataSchema.safeParse(working)
   if (whole.success) return { data: whole.data, report }
 
-  const branding = brandingSchema.safeParse(working.branding ?? {})
-
-  const collect = <T>(
-    kind: 'biometric' | 'assessment' | 'result',
-    list: unknown,
-    schema: z.ZodType<T>,
-    athleteId: string,
-  ): T[] => {
-    const target: T[] = []
-    if (!Array.isArray(list)) return target
-    for (const entry of list) {
-      const parsed = schema.safeParse(entry)
-      if (parsed.success) target.push(parsed.data)
-      else
-        report.rejected.push({
-          kind,
-          id: `${athleteId}/${String((entry as any)?.id ?? '?')}`,
-          reason: firstIssue(parsed.error),
-        })
-    }
-    return target
-  }
+  // Ab hier: Bereich für Bereich retten. Jedes Feld des Bestands und jedes
+  // Feld eines Athleten wird einzeln geprüft, Listen Eintrag für Eintrag.
+  // Was nicht passt, landet mit Rohwert im Bericht (`quarantine`) — der
+  // Ladeweg legt es auf dem Gerät ab, statt es beim nächsten Speichern zu
+  // verlieren. Ein kaputter Eintrag im Tagebuch kostet so genau diesen
+  // Eintrag, nicht den Trainingsplan daneben.
+  const source: Record<string, unknown> = isPlainObject(working) ? working : {}
 
   // Athletenweise retten. Ein beschädigter Datensatz bei einem Kunden darf
   // weder dessen übrige Historie noch die der anderen Kunden kosten.
-  const rawAthletes: unknown[] = Array.isArray(working.athletes) ? working.athletes : []
+  const rawAthletes: unknown[] = Array.isArray(source.athletes) ? source.athletes : []
   const athletes: ValidatedAthlete[] = []
 
   for (const [index, raw] of rawAthletes.entries()) {
-    const entry = (raw ?? {}) as any
+    const entry: Record<string, unknown> = isPlainObject(raw) ? raw : {}
     const id = typeof entry.id === 'string' && entry.id ? entry.id : `athlete-${index + 1}`
-    const profile = profileSchema.safeParse(entry.profile ?? {})
-    if (!profile.success) {
-      report.rejected.push({ kind: 'profile', id, reason: firstIssue(profile.error) })
+    const fields: Record<string, unknown> = { id }
+    for (const [key, field] of Object.entries(athleteSchema.shape) as [string, z.ZodTypeAny][]) {
+      if (key === 'id' || !(key in entry)) continue
+      // Ein zu langer Name wird gekürzt statt verworfen: ihn zu verlieren
+      // hiesse, den Athleten nicht wiederzuerkennen.
+      const value = key === 'name' && typeof entry.name === 'string' ? entry.name.slice(0, 120) : entry[key]
+      const part = salvage(field, value, key, id, report)
+      if (part.ok) fields[key] = part.value
     }
+    if (!('profile' in fields)) fields.profile = profileSchema.parse({})
+    if (typeof fields.createdAt !== 'string') fields.createdAt = new Date().toISOString()
     // Über das Schema geparst statt zusammengesetzt: nur so greifen die
     // Vorgabewerte der einzelnen Felder, und der Typ ist wirklich erfüllt.
-    athletes.push(
-      athleteSchema.parse({
-        id,
-        name: typeof entry.name === 'string' ? entry.name.slice(0, 120) : '',
-        profile: profile.success ? profile.data : profileSchema.parse({}),
-        biometrics: collect('biometric', entry.biometrics, biometricSchema, id),
-        assessments: collect('assessment', entry.assessments, assessmentSchema, id),
-        results: collect('result', entry.results, resultSchema, id),
-        archived: entry.archived === true,
-        createdAt:
-          typeof entry.createdAt === 'string' && !Number.isNaN(Date.parse(entry.createdAt))
-            ? entry.createdAt
-            : new Date().toISOString(),
-      }),
-    )
+    const athlete = athleteSchema.safeParse(fields)
+    if (athlete.success) athletes.push(athlete.data)
+    else {
+      reject(report, 'athlete', id, firstIssue(athlete.error), raw)
+      athletes.push({ ...emptyAthlete(id), name: typeof fields.name === 'string' ? fields.name : '' })
+    }
   }
 
   // Ein Bestand ohne Athleten wäre nicht darstellbar — lieber ein leerer
@@ -2209,25 +2205,114 @@ export function parseStoredData(raw: unknown): ParseOutcome {
   if (athletes.length === 0) athletes.push(emptyAthlete())
 
   const activeId =
-    typeof working.activeAthleteId === 'string' &&
-    athletes.some((a) => a.id === working.activeAthleteId)
-      ? working.activeAthleteId
+    typeof source.activeAthleteId === 'string' && athletes.some((a) => a.id === source.activeAthleteId)
+      ? source.activeAthleteId
       : athletes[0].id
 
-  const salvaged: ValidatedData = {
-    version: CURRENT_SCHEMA_VERSION,
-    testDays: [],
-    branding: branding.success ? branding.data : brandingSchema.parse({}),
-    lastExportAt:
-      typeof working.lastExportAt === 'string' && !Number.isNaN(Date.parse(working.lastExportAt))
-        ? working.lastExportAt
-        : null,
-    role: working.role === 'coach' ? 'coach' : 'solo',
-    athletes,
-    activeAthleteId: activeId,
+  // Die übrigen Felder des Bestands (Testtage, Branding, Rolle, Exportdatum)
+  // auf dieselbe Weise; fällt eines ganz aus, gilt seine Vorgabe.
+  const top: Record<string, unknown> = {}
+  for (const [key, field] of Object.entries(storedDataSchema.shape) as [string, z.ZodTypeAny][]) {
+    if (key === 'version' || key === 'athletes' || key === 'activeAthleteId' || !(key in source)) continue
+    const part = salvage(field, source[key], key, '-', report)
+    if (part.ok) top[key] = part.value
   }
 
-  return { data: salvaged, report }
+  const salvaged = storedDataSchema.safeParse({
+    ...top,
+    version: CURRENT_SCHEMA_VERSION,
+    athletes,
+    activeAthleteId: activeId,
+  })
+  if (salvaged.success) return { data: salvaged.data, report }
+
+  // Bleibt der Bestand trotz allem ungültig (eine Regel über mehrere Felder),
+  // dann nur mit den Athleten — die Felder oben sind im Bericht benannt.
+  reject(report, 'store', '-', firstIssue(salvaged.error), top)
+  return { data: { ...emptyData(), athletes, activeAthleteId: activeId }, report }
+}
+
+/** Die Form hinter `.default()`, `.optional()` und `.nullable()`. */
+function core(schema: z.ZodTypeAny): z.ZodTypeAny {
+  let s = schema
+  while (s instanceof z.ZodDefault || s instanceof z.ZodOptional || s instanceof z.ZodNullable) {
+    s = s._def.innerType
+  }
+  return s
+}
+
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return value != null && typeof value === 'object' && !Array.isArray(value)
+}
+
+function entryId(entry: unknown, index: number): string {
+  const id = isPlainObject(entry) ? entry.id : undefined
+  return typeof id === 'string' && id ? id : `#${index + 1}`
+}
+
+function reject(report: LoadReport, kind: string, id: string, reason: string, raw: unknown) {
+  report.rejected.push({ kind, id, reason })
+  report.quarantine.push({ kind, id, reason, raw })
+}
+
+/**
+ * Einen Wert so weit retten, wie er sich retten lässt.
+ *
+ * Listen werden Eintrag für Eintrag geprüft, Objekte Feld für Feld (eine
+ * Ebene je Aufruf, rekursiv). Ein Listeneintrag wird dagegen nur ganz oder
+ * gar nicht übernommen: ein halbes Ergebnis — Wert da, Einheit weg — wäre
+ * schlimmer als ein fehlendes, weil es aussieht wie ein gültiges.
+ *
+ * `ok: false` heisst: nichts Brauchbares, der Aufrufer nimmt die Vorgabe.
+ * Alles Verworfene steht mit Rohwert im Bericht.
+ */
+function salvage(
+  schema: z.ZodTypeAny,
+  value: unknown,
+  kind: string,
+  owner: string,
+  report: LoadReport,
+): { ok: true; value: unknown } | { ok: false } {
+  const whole = schema.safeParse(value)
+  if (whole.success) return { ok: true, value: whole.data }
+
+  const shape = core(schema)
+  if (shape instanceof z.ZodArray && Array.isArray(value)) {
+    const element = shape.element as z.ZodTypeAny
+    const kept: unknown[] = []
+    value.forEach((entry, index) => {
+      const parsed = element.safeParse(entry)
+      if (parsed.success) kept.push(parsed.data)
+      else reject(report, kind, `${owner}/${entryId(entry, index)}`, firstIssue(parsed.error), entry)
+    })
+    const max: number | undefined = shape._def.maxLength?.value
+    if (max != null && kept.length > max) {
+      for (const [index, entry] of kept.slice(max).entries()) {
+        reject(report, kind, `${owner}/${entryId(entry, max + index)}`, `mehr als ${max} Einträge`, entry)
+      }
+      kept.length = max
+    }
+    const again = schema.safeParse(kept)
+    if (again.success) return { ok: true, value: again.data }
+    reject(report, kind, owner, firstIssue(again.error), kept)
+    return { ok: false }
+  }
+
+  if (shape instanceof z.ZodObject && isPlainObject(value)) {
+    const out: Record<string, unknown> = {}
+    for (const [key, field] of Object.entries(shape.shape as Record<string, z.ZodTypeAny>)) {
+      if (!(key in value)) continue
+      const part = salvage(field, value[key], `${kind}.${key}`, owner, report)
+      if (part.ok) out[key] = part.value
+    }
+    const again = schema.safeParse(out)
+    if (again.success) return { ok: true, value: again.data }
+    reject(report, kind, owner, firstIssue(again.error), out)
+    return { ok: false }
+  }
+
+  reject(report, kind, owner, firstIssue(whole.error), value)
+  return { ok: false }
 }
 
 function firstIssue(error: z.ZodError): string {

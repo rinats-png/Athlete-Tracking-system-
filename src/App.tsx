@@ -160,6 +160,10 @@ const router = createBrowserRouter([
       { path: 'plan/neu', element: screen(() => import('@/features/plan/PlanPreviewScreen'), 'PlanPreviewScreen') },
       { path: 'plan/block', element: screen(() => import('@/features/plan/BlockScreen'), 'BlockScreen') },
       { path: 'plan/heute', element: screen(() => import('@/features/plan/SessionPlayerScreen'), 'SessionPlayerScreen') },
+      { path: 'plan/start', element: screen(() => import('@/features/plan/TrainingStartScreen'), 'TrainingStartScreen') },
+      { path: 'plan/frei', element: screen(() => import('@/features/plan/FreeTraining'), 'FreePlayerScreen') },
+      { path: 'plan/frei/katalog', element: screen(() => import('@/features/plan/FreeTraining'), 'FreeCatalogScreen') },
+      { path: 'plan/frei/neu', element: screen(() => import('@/features/plan/FreeTraining'), 'FreeBuildScreen') },
       { path: 'woche', element: screen(() => import('@/features/week/WeekReviewScreen'), 'WeekReviewScreen') },
       { path: 'checkin', element: screen(() => import('@/features/today/CheckInScreen'), 'CheckInScreen') },
       { path: 'performance', element: screen(() => import('@/features/performance/PerformanceScreen'), 'PerformanceScreen') },
@@ -314,14 +318,17 @@ function RoleFromAccount({ role }: { role: Account['role'] }) {
  * und «alles löschen» führt ehrlich wieder durch den Einstieg.
  */
 function OnboardingGate() {
-  const { data } = useAppData()
+  const { data, loadReport } = useAppData()
   const [target, setTarget] = useState<string | null>(null)
 
   // Die Rolle wird IM Einstieg gewählt — er läuft deshalb für beide. Ein
   // Athlet, den ein Trainer anlegt, gilt als eingerichtet und kommt hier gar
   // nicht an: ein Einstieg je Kunde wäre ein Fragebogen an die falsche
   // Person.
-  if (data.profile.onboardingCompletedAt == null) {
+  // Liegt ein Bestand aus einer neueren Fassung auf dem Gerät, ist der leere
+  // Bestand dieser Sitzung nur ein Platzhalter: kein Einstieg, sondern die
+  // App mit der Meldung, dass sie zu alt ist (DataLoadNotice).
+  if (data.profile.onboardingCompletedAt == null && !loadReport.fromNewerVersion) {
     return (
       <Suspense fallback={null}>
         <OnboardingFlow onDone={setTarget} />

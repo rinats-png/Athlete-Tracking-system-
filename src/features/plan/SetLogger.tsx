@@ -70,13 +70,15 @@ const LIMITS: Record<SetField, { min: number; max: number; step: number }> = {
   distanceM: { min: 0, max: 100000, step: 1 },
 }
 
-export function SetLogger({ session, exercises, planSubs, blocks, onChange }: {
+export function SetLogger({ session, exercises, planSubs, blocks, onChange, canKeep = true }: {
   session: StoredPlannedSession
   /** Übungsdatenbank; `null`, solange sie lädt (dann gelten Standardfelder, Ersatz wartet). */
   exercises: LibraryExercise[] | null
   planSubs: Record<string, string[]>
   blocks: StoredTrainingBlock[]
   onChange: (state: { sets: SetLogEntry[]; swaps: Swap[] }) => void
+  /** «Auch künftig tauschen» anbieten — nicht bei freiem Training, dort gibt es keinen Plan. */
+  canKeep?: boolean
 }) {
   const { t } = useTranslation()
   const [swaps, setSwaps] = useState<Swap[]>([])
@@ -226,7 +228,7 @@ export function SetLogger({ session, exercises, planSubs, blocks, onChange }: {
                   {sw && <button type="button" onClick={() => target && pick(i, p, target)} className="mt-1 min-h-11 px-1 text-[13px] text-accent-text underline underline-offset-2" data-testid={`setlog-unswap-${i}`}>{t('setlog.unswap')}</button>}
                 </div>
               )}
-              {sw && (
+              {sw && canKeep && (
                 <label className="mt-2 flex min-h-11 items-center gap-3 text-[13px]">
                   <input type="checkbox" checked={sw.keep} onChange={(e) => setSwaps((s) => s.map((x) => (x.part === i ? { ...x, keep: e.target.checked } : x)))} data-testid={`setlog-keep-${i}`} className="size-5" />
                   {t('setlog.keep')}

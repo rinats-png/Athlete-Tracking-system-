@@ -27,6 +27,8 @@ import { hasErrors, issuesFor, validateTestInput } from '@/domain/validation'
 import type { AttemptSelection, ProtocolInfo, ValidatedContext } from '@/lib/store/schema'
 import { pick } from '@/i18n/pick'
 import { useLocale } from '@/features/shared/useLocale'
+import { testImageUrl } from '@/data/testImages'
+import { ScreenHeader } from '@/features/shared/ScreenHeader'
 
 /**
  * Geführte Testdurchführung.
@@ -228,15 +230,7 @@ export function TestRunScreen() {
         </p>
       )}
 
-      <header className="mb-4">
-        <span className="label-tag">{t(`dimensions.${test.dimension}`)}</span>
-        <h1 className="mt-1 font-display text-[28px] leading-tight font-bold sm:text-[34px]">
-          {pick(test.name, locale)}
-        </h1>
-        <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed text-ink-secondary">
-          {pick(test.summary, locale)}
-        </p>
-      </header>
+      <ScreenHeader eyebrow={t(`dimensions.${test.dimension}`)} title={pick(test.name, locale) ?? test.slug} intro={pick(test.summary, locale)} image={testImageUrl(test.slug)} />
 
       <div className="grid gap-4 lg:grid-cols-5">
         <Panel className="lg:col-span-3">
