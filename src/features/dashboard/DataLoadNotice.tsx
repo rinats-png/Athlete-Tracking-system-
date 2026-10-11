@@ -5,7 +5,7 @@ import { useLocale } from '@/features/shared/useLocale'
 import { downloadFile } from '@/lib/export/csv'
 import { formatDate } from '@/lib/format'
 import { readBackup } from '@/lib/store/backup'
-import { exportQuarantine } from '@/lib/store/localStore'
+import { exportQuarantine } from '@/lib/store/quarantine'
 import { useAppData } from '@/lib/store/AppDataProvider'
 
 /** So viele abgewiesene Einträge werden einzeln genannt, der Rest gezählt. */

@@ -52,7 +52,6 @@ import { workoutFromSets } from '@/domain/setLog'
 import { applySubstitution } from '@/domain/adaptation'
 import { REGISTRY_TO_LEGACY } from '@/data/library/legacyExerciseMap'
 import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
-import { markAthleteDeleted } from '@/lib/supabase/syncState'
 import { isBlankPlaceholder } from './placeholder'
 import { isEmptyEntry } from '@/domain/diary'
 import type { KioskResult } from '@/domain/kiosk'
@@ -976,7 +975,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         const rest = store.athletes.filter((a) => a.id !== id)
         if (rest.length === 0) return
         // Für den Abgleich vormerken — sonst holt er den Athleten vom Server zurück.
-        markAthleteDeleted(id)
+        void import('@/lib/supabase/syncState').then((m) => m.markAthleteDeleted(id))
         commitStore({
           ...store,
           athletes: rest,

@@ -1,5 +1,4 @@
-import { useMemo } from 'react'
-import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
+import { lazy, Suspense, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowDown, ArrowUp, ChevronRight, Flag, ShieldCheck } from 'lucide-react'
@@ -23,6 +22,10 @@ import { testImageUrl } from '@/data/testImages'
 import { formatDate, formatNumber } from '@/lib/format'
 import { pick } from '@/i18n/pick'
 import { cn } from '@/lib/utils'
+
+// Das Kennzeichen «fachlich noch nicht geprüft» samt Regelregister wird
+// nachgeladen — «Heute» liegt im Startpaket (Grenze 1100 KB).
+const ReviewChip = lazy(() => import('@/features/plan/ReviewMark').then((m) => ({ default: m.ReviewChip })))
 
 /**
  * Heute — die Startseite des Athleten (Produktdoktrin §7).
@@ -68,7 +71,6 @@ function TodayWithData() {
     const upcoming = occurrences(block).find((o) => !o.done && o.date > day) ?? null
     return { open, missed, upcoming }
   }, [block, day])
-  const sessionReview = useReviewState(block, plan?.open?.session ?? null)
   const shortDay = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString(locale, { weekday: 'short', day: 'numeric', timeZone: 'UTC' })
   const row = 'flex min-h-13 items-center gap-3 py-2'
 
@@ -97,7 +99,11 @@ function TodayWithData() {
               </span>
               <span className="mt-1 font-display text-[34px] leading-none font-bold">{sessionName(plan.open.session, t)}</span>
               <span className="mt-1 text-[13px] text-[#B9CCC7]">{t(`plan.intent.${plan.open.session.primaryIntent}`)}</span>
-              <span className="mt-2"><ReviewMark state={sessionReview} onImage testId="today-unreviewed" /></span>
+              <span className="mt-2">
+                <Suspense fallback={null}>
+                  <ReviewChip block={block} session={plan.open.session} onImage testId="today-unreviewed" />
+                </Suspense>
+              </span>
               <Link to="/plan/heute" data-testid="today-go" className="mt-3 flex min-h-12 items-center justify-center rounded-pill bg-[#F4FBF8] text-[15px] font-semibold text-[#101A18]">
                 {t('look.today.go')}
               </Link>

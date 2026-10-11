@@ -2899,7 +2899,8 @@
       "not_entitled": "Herformuleren hoort bij Pro. Het vaste antwoord blijft.",
       "limit_reached": "De 30 herformuleringen van deze maand zijn op. Het vaste antwoord blijft.",
       "rejected": "De tekst haalde de cijfercontrole niet en wordt niet getoond. Het vaste antwoord blijft.",
-      "failed": "Dat is niet gelukt. Het vaste antwoord blijft."
+      "failed": "Dat is niet gelukt. Het vaste antwoord blijft.",
+      "no_consent": "Zonder je toestemming wordt niets naar het taalmodel gestuurd. Het vaste antwoord blijft."
     }
   },
   "weeklyReport": {
@@ -4041,5 +4042,69 @@
     "lost": "Hier is geen training gekozen. Kies er een onder ‘Training starten’.",
     "noSlot": "Vrije training: telt als training, maar vinkt geen datum in het plan af.",
     "save": "Opslaan in het trainingslog"
+  },
+  "aiConsent": {
+    "title": "Toestemming: teksten laten formuleren door een taalmodel",
+    "point": {
+      "what": "Wat wordt verstuurd: alleen de feiten van dit antwoord – vaste trefwoorden en getallen, zoals „verandering +3,2 %, drempel 2,8 %”. Het taalmodel formuleert er een tekst van. KYDON controleert elk getal en toont anders het vaste antwoord.",
+      "notSent": "Wat niet wordt verstuurd: je naam, je e-mailadres, notities, dagboek- en andere vrije tekst, gegevens uit de gezondheidslaag en kenmerken van je account.",
+      "who": "Ontvanger: Anthropic (taalmodel Claude) als verwerker. De verwerking kan in de Verenigde Staten plaatsvinden; de doorgifte berust op standaardcontractbepalingen. De aanbieder gebruikt de gegevens niet om zijn modellen te trainen. KYDON bewaart geen feiten en geen tekst – alleen hoe vaak je de functie deze maand gebruikte, en deze toestemming.",
+      "label": "Teksten van het taalmodel zijn als zodanig gemarkeerd. Het model herformuleert alleen: het beoordeelt niets, stelt geen diagnose en neemt geen trainingsbeslissing.",
+      "voluntary": "Vrijwillig: zonder toestemming werkt KYDON volledig – de antwoorden verschijnen dan als vaste teksten. De rechtsgrond is je toestemming (art. 6, lid 1, onder a AVG)."
+    },
+    "withdraw": "Je kunt je toestemming altijd intrekken in je profiel onder „Gegevens”, met werking voor de toekomst.",
+    "more": "Meer in de privacyverklaring",
+    "age": "Ik ben minstens 16 jaar oud.",
+    "accept": "Toestemming geven en formuleren",
+    "decline": "Niet nu",
+    "failed": "De toestemming kon niet worden opgeslagen. Daarvoor zijn een verbinding en een account nodig. Er is niets verstuurd.",
+    "settingTitle": "Teksten van het taalmodel",
+    "state": {
+      "granted": "Toestemming gegeven. Op verzoek worden feiten naar Anthropic gestuurd om te formuleren.",
+      "withdrawn": "Ingetrokken. Er wordt niets meer verstuurd.",
+      "unset": "Geen toestemming. Er wordt niets verstuurd."
+    },
+    "withdrawButton": "Toestemming intrekken",
+    "grantButton": "Toestemming geven …",
+    "withdrawnLocal": "Op dit apparaat geldt de intrekking meteen. De server ontvangt haar zodra er verbinding is."
+  },
+  "storage": {
+    "newerTitle": "Nieuwere KYDON-versie gevonden",
+    "reload": "App opnieuw laden",
+    "more_one": "… en nog één.",
+    "more_other": "… en nog {{count}}.",
+    "kept": "Al het overige is volledig overgenomen.",
+    "quarantined": "De onleesbare items worden op dit apparaat bewaard en zijn niet verwijderd.",
+    "backup": "Er staat een back-up op dit apparaat (stand {{date}}).",
+    "noBackup": "Er staat geen back-up op dit apparaat. Exporteer je gegevens regelmatig.",
+    "saveQuarantine": "Onleesbare items als bestand opslaan",
+    "kind": {
+      "results": "Resultaten",
+      "assessments": "Testafspraken",
+      "biometrics": "Lichaamswaarden",
+      "observations": "Observaties",
+      "diary": "Dagboek",
+      "diaryFields": "Dagboekvelden",
+      "activities": "Activiteiten",
+      "workouts": "Trainingslog",
+      "trainingBlocks": "Trainingsblokken",
+      "planTemplates": "Plansjablonen",
+      "customExercises": "Eigen oefeningen",
+      "decisions": "Beslissingen",
+      "meals": "Maaltijden",
+      "nutrition": "Voeding",
+      "health": "Gezondheid",
+      "peakWeeks": "Peak week",
+      "notes": "Notities",
+      "consent": "Toestemming",
+      "focuses": "Aandachtspunten",
+      "audit": "Wijzigingslog",
+      "testDays": "Testdagen",
+      "branding": "Branding",
+      "name": "Naam",
+      "athlete": "Atleet",
+      "store": "Gegevens",
+      "other": "Overig"
+    }
   }
 }

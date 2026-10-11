@@ -1,10 +1,9 @@
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AlertTriangle } from 'lucide-react'
-import { TRAINING_RULES } from '@/data/trainingRules'
-import { planReviewed } from '@/domain/library'
+import type { EvidenceRule } from '@/domain/trainingTypes'
 import { blockReviewState, sessionReviewState, type ReviewState } from '@/domain/planReview'
-import { useLibrary } from '@/features/library/useLibrary'
+import type { ProgramIndex } from '@/domain/libraryTypes'
 import type { StoredPlannedSession, StoredTrainingBlock } from '@/lib/store/localStore'
 import { cn } from '@/lib/utils'
 
@@ -17,17 +16,33 @@ export function useReviewState(
   block: Pick<StoredTrainingBlock, 'sessions' | 'libraryPlanId'> | null,
   session?: Pick<StoredPlannedSession, 'kind' | 'ruleId'> | null,
 ): ReviewState | null {
-  const { index } = useLibrary(block?.libraryPlanId != null)
-  return useMemo(() => {
-    if (!block) return null
-    const libraryReviewed = (planId: string) => {
-      const plan = index?.plans.find((p) => p.plan_id === planId)
-      return plan && index ? planReviewed(plan, index.methodRules) : false
+  // Regelregister, Bibliotheksindex und -prüfung werden nachgeladen: «Heute»
+  // liegt im Startpaket, sie nicht (Grenze 1100 KB, tests/loading.spec.ts).
+  const [deps, setDeps] = useState<{ rules: readonly EvidenceRule[]; planReviewed: typeof import('@/domain/library').planReviewed; index: ProgramIndex | null } | null>(null)
+  const needsIndex = block?.libraryPlanId != null
+  useEffect(() => {
+    if (!block) return
+    let live = true
+    void Promise.all([
+      import('@/data/trainingRules'),
+      import('@/domain/library'),
+      needsIndex ? import('@/data/library').then((m) => m.loadProgramIndex()) : Promise.resolve(null),
+    ]).then(([r, l, index]) => {
+      if (live) setDeps({ rules: r.TRAINING_RULES, planReviewed: l.planReviewed, index })
+    })
+    return () => {
+      live = false
     }
-    return session
-      ? sessionReviewState(session, TRAINING_RULES, block.libraryPlanId, libraryReviewed)
-      : blockReviewState(block, TRAINING_RULES, libraryReviewed)
-  }, [block, session, index])
+  }, [block, needsIndex])
+  if (!block || !deps) return null
+  const index = deps.index
+  const libraryReviewed = (planId: string) => {
+    const plan = index?.plans.find((p) => p.plan_id === planId)
+    return plan && index ? deps.planReviewed(plan, index.methodRules) : false
+  }
+  return session
+    ? sessionReviewState(session, deps.rules, block.libraryPlanId, libraryReviewed)
+    : blockReviewState(block, deps.rules, libraryReviewed)
 }
 
 /**
@@ -51,4 +66,19 @@ export function ReviewMark({ state, onImage = false, testId = 'review-mark' }: {
       {t('plan.review.unreviewed')}
     </span>
   )
+}
+
+/** Hook und Kennzeichen in einem — für Bildschirme im Startpaket, die es nachladen (Heute). */
+export function ReviewChip({
+  block,
+  session,
+  onImage,
+  testId,
+}: {
+  block: Pick<StoredTrainingBlock, 'sessions' | 'libraryPlanId'> | null
+  session?: Pick<StoredPlannedSession, 'kind' | 'ruleId'> | null
+  onImage?: boolean
+  testId?: string
+}) {
+  return <ReviewMark state={useReviewState(block, session)} onImage={onImage} testId={testId} />
 }

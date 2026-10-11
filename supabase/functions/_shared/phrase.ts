@@ -14,6 +14,23 @@ export type PhraseKind = (typeof PHRASE_KINDS)[number]
 export const PHRASE_LOCALES = ['de', 'en', 'fr', 'es', 'nl', 'sv', 'nb', 'da'] as const
 export type PhraseLocale = (typeof PHRASE_LOCALES)[number]
 
+/**
+ * Fassung des Einwilligungstextes (docs/ki-einwilligung.md). Ändert sich der
+ * Text in einem Punkt, der für die Entscheidung zählt (Anbieter, Daten,
+ * Zweck, Ort), steigt die Fassung — und es wird neu gefragt.
+ */
+export const AI_CONSENT_VERSION = '2026-10-11'
+
+/**
+ * Arten, die nur eigene Daten betreffen. `draft` formuliert Nachrichten eines
+ * Trainers über seine Athleten: das sind Daten, die der Trainer als
+ * Verantwortlicher führt — der Anbieter des Modells wäre Unterauftrags-
+ * verarbeiter. Der Vertrag zur Auftragsverarbeitung (Abschnitt 6) verlangt
+ * dafür 30 Tage Vorankündigung. Bis der Nachtrag angekündigt und angenommen
+ * ist, bleibt `draft` gesperrt (docs/ki-einwilligung.md).
+ */
+export const PHRASE_KINDS_ENABLED: readonly PhraseKind[] = ['brief', 'answer']
+
 /** Aufrufe je Konto und Monat. Danach gilt die feste Vorlage. */
 export const MONTHLY_LIMIT = 30
 

@@ -225,10 +225,27 @@ ohne Freigabe möglich waren:
 - **Live-Audit:** siehe `docs/live-audit.md`. Sechs Migrationen und drei
   Edge Functions fehlen live, darunter `delete-account`.
 
+- **KI-Einwilligung:**
+  - Einwilligung je Konto, nachweisbar auf dem Server (Migration
+    `20261011120000_ai_consents.sql`); die Edge Function `phrase` prüft sie
+    vor jedem Aufruf.
+  - Widerruf im Profil, Datenschutzerklärung (DE/EN) ergänzt, Anthropic
+    in der Empfängerliste.
+  - Trainermodus und `draft` bleiben gesperrt, bis der Nachtrag zum
+    AV-Vertrag mit 30 Tagen Vorlauf angekündigt ist.
+  - Text, Begründung und offene Rechtsprüfung: `docs/ki-einwilligung.md`.
+- **Regelprüfung:** Profil der prüfenden Personen, Ablauf, Reihenfolge
+  (4 Pläne, 21 Regeln, rund 30 Stunden) und Prüfbogen:
+  `docs/regelpruefung.md` und `docs/regelpruefung-pruefbogen.md`. Geprüft
+  ist damit noch keine Regel; das macht ein Mensch.
+- **Startpaket:** Die Wettkampfkarte, die Lademeldung und das Kennzeichen
+  unter Heute werden nachgeladen. Das Paket liegt wieder unter 1100 KB.
+
 Offen und nur mit Freigabe:
 - Einspielen in die Produktion (Migrationen, Edge Functions);
-- KI-Einwilligung je Nutzer (Rechtstext);
-- wer die Regeln fachlich prüft.
+- Prüfung der Punkte in `docs/ki-einwilligung.md` §5 (Vertrag mit
+  Anthropic, Übermittlungsgrundlage, Speicherdauer);
+- prüfende Personen beauftragen.
 
 Ebenfalls offen ist der Modus `live` (`VITE_TRAINING_PLAN=on`). Dort
 liessen sich ungeprüfte Bibliothekspläne weiter übernehmen: `planReviewed`

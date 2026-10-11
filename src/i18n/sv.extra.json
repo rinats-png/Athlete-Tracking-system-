@@ -2899,7 +2899,8 @@
       "not_entitled": "Omformulering ingår i Pro. Det fasta svaret finns kvar.",
       "limit_reached": "Månadens 30 omformuleringar är förbrukade. Det fasta svaret finns kvar.",
       "rejected": "Texten klarade inte sifferkontrollen och visas inte. Det fasta svaret finns kvar.",
-      "failed": "Det gick inte. Det fasta svaret finns kvar."
+      "failed": "Det gick inte. Det fasta svaret finns kvar.",
+      "no_consent": "Utan ditt samtycke skickas inget till språkmodellen. Det fasta svaret står kvar."
     }
   },
   "weeklyReport": {
@@ -4041,5 +4042,69 @@
     "lost": "Inget pass är valt här. Välj ett under ”Starta träning”.",
     "noSlot": "Fri träning: räknas som träning men bockar inte av något datum i planen.",
     "save": "Spara i träningsloggen"
+  },
+  "aiConsent": {
+    "title": "Samtycke: låt en språkmodell formulera texter",
+    "point": {
+      "what": "Vad som skickas: bara fakta i detta svar – fasta nyckelord och siffror, till exempel ”förändring +3,2 %, tröskel 2,8 %”. Språkmodellen formulerar en text av dem. KYDON kontrollerar varje siffra och visar annars det fasta svaret.",
+      "notSent": "Vad som inte skickas: ditt namn, din e-postadress, anteckningar, dagbok och annan fritext, data från hälsoskiktet och identifierare för ditt konto.",
+      "who": "Mottagare: Anthropic (språkmodellen Claude) som personuppgiftsbiträde. Behandlingen kan ske i USA; överföringen grundas på standardavtalsklausuler. Leverantören använder inte uppgifterna för att träna sina modeller. KYDON sparar varken fakta eller text – bara hur ofta du använt funktionen den här månaden, och detta samtycke.",
+      "label": "Texter från språkmodellen är märkta som sådana. Modellen formulerar bara om: den bedömer ingenting, ställer ingen diagnos och fattar inget träningsbeslut.",
+      "voluntary": "Frivilligt: utan samtycke fungerar KYDON fullt ut – svaren visas då som fasta texter. Den rättsliga grunden är ditt samtycke (art. 6.1 a GDPR)."
+    },
+    "withdraw": "Du kan när som helst återkalla ditt samtycke i profilen under ”Data”, med verkan för framtiden.",
+    "more": "Mer i integritetspolicyn",
+    "age": "Jag är minst 16 år.",
+    "accept": "Samtyck och formulera",
+    "decline": "Inte nu",
+    "failed": "Samtycket kunde inte sparas. Det krävs en anslutning och ett konto. Inget skickades.",
+    "settingTitle": "Texter från språkmodellen",
+    "state": {
+      "granted": "Samtycke givet. Vid tryck skickas fakta till Anthropic för att formuleras.",
+      "withdrawn": "Återkallat. Inget skickas längre.",
+      "unset": "Inget samtycke. Inget skickas."
+    },
+    "withdrawButton": "Återkalla samtycke",
+    "grantButton": "Ge samtycke …",
+    "withdrawnLocal": "På den här enheten gäller återkallelsen direkt. Servern får den så snart det finns en anslutning."
+  },
+  "storage": {
+    "newerTitle": "Nyare KYDON-version upptäckt",
+    "reload": "Ladda om appen",
+    "more_one": "… och en till.",
+    "more_other": "… och {{count}} till.",
+    "kept": "Allt annat har förts över i sin helhet.",
+    "quarantined": "De oläsbara posterna sparas på den här enheten och har inte raderats.",
+    "backup": "Det finns en säkerhetskopia på den här enheten (från {{date}}).",
+    "noBackup": "Det finns ingen säkerhetskopia på den här enheten. Exportera dina data regelbundet.",
+    "saveQuarantine": "Spara oläsbara poster som fil",
+    "kind": {
+      "results": "Resultat",
+      "assessments": "Testtillfällen",
+      "biometrics": "Kroppsvärden",
+      "observations": "Observationer",
+      "diary": "Dagbok",
+      "diaryFields": "Dagboksfält",
+      "activities": "Aktiviteter",
+      "workouts": "Träningslogg",
+      "trainingBlocks": "Träningsblock",
+      "planTemplates": "Planmallar",
+      "customExercises": "Egna övningar",
+      "decisions": "Beslut",
+      "meals": "Måltider",
+      "nutrition": "Kost",
+      "health": "Hälsa",
+      "peakWeeks": "Peak week",
+      "notes": "Anteckningar",
+      "consent": "Samtycke",
+      "focuses": "Fokusområden",
+      "audit": "Ändringslogg",
+      "testDays": "Testdagar",
+      "branding": "Varumärke",
+      "name": "Namn",
+      "athlete": "Idrottare",
+      "store": "Data",
+      "other": "Övrigt"
+    }
   }
 }

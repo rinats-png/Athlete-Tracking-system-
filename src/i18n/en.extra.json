@@ -2899,7 +2899,8 @@
       "not_entitled": "Rephrasing is part of Pro. The fixed answer stays.",
       "limit_reached": "The 30 rephrasings of this month are used up. The fixed answer stays.",
       "rejected": "The text failed the number check and is not shown. The fixed answer stays.",
-      "failed": "That did not work. The fixed answer stays."
+      "failed": "That did not work. The fixed answer stays.",
+      "no_consent": "Without your consent nothing is sent to the language model. The fixed answer stays."
     }
   },
   "weeklyReport": {
@@ -4041,5 +4042,69 @@
     "lost": "No session is selected here. Pick one under “Start training”.",
     "noSlot": "Free training: counts as training but does not tick off a plan date.",
     "save": "Save to training log"
+  },
+  "aiConsent": {
+    "title": "Consent: have texts phrased by a language model",
+    "point": {
+      "what": "What is sent: only the facts of this answer – fixed keywords and numbers, such as “change +3.2 %, threshold 2.8 %”. The language model phrases a text from them. KYDON checks every number in it and otherwise shows the fixed answer.",
+      "notSent": "What is not sent: your name, your email address, notes, diary and other free text, data from the health layer and identifiers of your account.",
+      "who": "Recipient: Anthropic (language model Claude) as processor. Processing may take place in the United States; the transfer relies on standard contractual clauses. The provider does not use the data to train its models. KYDON stores neither facts nor text – only how often you used the feature this month, and this consent.",
+      "label": "Texts from the language model are labelled as such. The model only rephrases: it evaluates nothing, makes no diagnosis and takes no training decision.",
+      "voluntary": "Voluntary: without consent KYDON works in full – answers then appear as fixed texts. The legal basis is your consent (Art. 6(1)(a) GDPR)."
+    },
+    "withdraw": "You can withdraw your consent at any time in your profile under “Data”, with effect for the future.",
+    "more": "More in the privacy policy",
+    "age": "I am at least 16 years old.",
+    "accept": "Consent and phrase",
+    "decline": "Not now",
+    "failed": "Your consent could not be saved. This needs a connection and an account. Nothing was sent.",
+    "settingTitle": "Texts from the language model",
+    "state": {
+      "granted": "Consent given. On tap, facts are sent to Anthropic to be phrased.",
+      "withdrawn": "Withdrawn. Nothing is sent any more.",
+      "unset": "No consent. Nothing is sent."
+    },
+    "withdrawButton": "Withdraw consent",
+    "grantButton": "Give consent …",
+    "withdrawnLocal": "On this device the withdrawal applies at once. The server receives it as soon as there is a connection."
+  },
+  "storage": {
+    "newerTitle": "Newer KYDON version detected",
+    "reload": "Reload app",
+    "more_one": "… and one more.",
+    "more_other": "… and {{count}} more.",
+    "kept": "Everything else was carried over in full.",
+    "quarantined": "The unreadable entries are kept on this device and have not been deleted.",
+    "backup": "A backup exists on this device (as of {{date}}).",
+    "noBackup": "There is no backup on this device. Export your data regularly.",
+    "saveQuarantine": "Save unreadable entries as a file",
+    "kind": {
+      "results": "Results",
+      "assessments": "Assessments",
+      "biometrics": "Body values",
+      "observations": "Observations",
+      "diary": "Diary",
+      "diaryFields": "Diary fields",
+      "activities": "Activities",
+      "workouts": "Training log",
+      "trainingBlocks": "Training blocks",
+      "planTemplates": "Plan templates",
+      "customExercises": "Own exercises",
+      "decisions": "Decisions",
+      "meals": "Meals",
+      "nutrition": "Nutrition",
+      "health": "Health",
+      "peakWeeks": "Peak week",
+      "notes": "Notes",
+      "consent": "Consent",
+      "focuses": "Focus areas",
+      "audit": "Change log",
+      "testDays": "Test days",
+      "branding": "Branding",
+      "name": "Name",
+      "athlete": "Athlete",
+      "store": "Data store",
+      "other": "Other"
+    }
   }
 }

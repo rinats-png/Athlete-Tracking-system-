@@ -2899,7 +2899,8 @@
       "not_entitled": "La reformulación forma parte de Pro. La respuesta fija se mantiene.",
       "limit_reached": "Se han agotado las 30 reformulaciones de este mes. La respuesta fija se mantiene.",
       "rejected": "El texto no superó la comprobación de cifras y no se muestra. La respuesta fija se mantiene.",
-      "failed": "No ha funcionado. La respuesta fija se mantiene."
+      "failed": "No ha funcionado. La respuesta fija se mantiene.",
+      "no_consent": "Sin tu consentimiento no se envía nada al modelo de lenguaje. Se mantiene la respuesta fija."
     }
   },
   "weeklyReport": {
@@ -4041,5 +4042,69 @@
     "lost": "Aquí no hay ninguna sesión elegida. Elige una en «Empezar entrenamiento».",
     "noSlot": "Entrenamiento libre: cuenta como entrenamiento, pero no marca ninguna fecha del plan.",
     "save": "Guardar en el registro"
+  },
+  "aiConsent": {
+    "title": "Consentimiento: que un modelo de lenguaje redacte textos",
+    "point": {
+      "what": "Qué se envía: solo los hechos de esta respuesta – palabras clave fijas y cifras, por ejemplo «cambio +3,2 %, umbral 2,8 %». El modelo de lenguaje redacta un texto a partir de ellos. KYDON comprueba cada cifra y, si no coincide, muestra la respuesta fija.",
+      "notSent": "Qué no se envía: tu nombre, tu correo electrónico, notas, diario y otros textos libres, datos de la capa de salud e identificadores de tu cuenta.",
+      "who": "Destinatario: Anthropic (modelo de lenguaje Claude) como encargado del tratamiento. El tratamiento puede realizarse en Estados Unidos; la transferencia se basa en cláusulas contractuales tipo. El proveedor no usa los datos para entrenar sus modelos. KYDON no guarda ni hechos ni texto – solo cuántas veces usaste la función este mes y este consentimiento.",
+      "label": "Los textos del modelo de lenguaje se marcan como tales. El modelo solo reformula: no evalúa nada, no hace diagnósticos ni toma decisiones de entrenamiento.",
+      "voluntary": "Voluntario: sin consentimiento, KYDON funciona por completo – las respuestas aparecen entonces como textos fijos. La base jurídica es tu consentimiento (art. 6.1.a RGPD)."
+    },
+    "withdraw": "Puedes retirar tu consentimiento en cualquier momento en tu perfil, en «Datos», con efecto para el futuro.",
+    "more": "Más en la política de privacidad",
+    "age": "Tengo al menos 16 años.",
+    "accept": "Consentir y redactar",
+    "decline": "Ahora no",
+    "failed": "No se pudo guardar el consentimiento. Hace falta conexión y una cuenta. No se envió nada.",
+    "settingTitle": "Textos del modelo de lenguaje",
+    "state": {
+      "granted": "Consentimiento dado. Al pulsar, se envían hechos a Anthropic para redactarlos.",
+      "withdrawn": "Retirado. Ya no se envía nada.",
+      "unset": "Sin consentimiento. No se envía nada."
+    },
+    "withdrawButton": "Retirar consentimiento",
+    "grantButton": "Dar consentimiento …",
+    "withdrawnLocal": "En este dispositivo, la retirada se aplica al instante. El servidor la recibirá en cuanto haya conexión."
+  },
+  "storage": {
+    "newerTitle": "Versión más reciente de KYDON detectada",
+    "reload": "Recargar la app",
+    "more_one": "… y uno más.",
+    "more_other": "… y {{count}} más.",
+    "kept": "Todo lo demás se ha conservado por completo.",
+    "quarantined": "Las entradas ilegibles se guardan en este dispositivo y no se han borrado.",
+    "backup": "Hay una copia de seguridad en este dispositivo (del {{date}}).",
+    "noBackup": "No hay copia de seguridad en este dispositivo. Exporta tus datos con regularidad.",
+    "saveQuarantine": "Guardar las entradas ilegibles como archivo",
+    "kind": {
+      "results": "Resultados",
+      "assessments": "Sesiones de tests",
+      "biometrics": "Valores corporales",
+      "observations": "Observaciones",
+      "diary": "Diario",
+      "diaryFields": "Campos del diario",
+      "activities": "Actividades",
+      "workouts": "Registro de entrenamiento",
+      "trainingBlocks": "Bloques de entrenamiento",
+      "planTemplates": "Plantillas de plan",
+      "customExercises": "Ejercicios propios",
+      "decisions": "Decisiones",
+      "meals": "Comidas",
+      "nutrition": "Nutrición",
+      "health": "Salud",
+      "peakWeeks": "Peak week",
+      "notes": "Notas",
+      "consent": "Consentimiento",
+      "focuses": "Prioridades",
+      "audit": "Registro de cambios",
+      "testDays": "Días de tests",
+      "branding": "Marca",
+      "name": "Nombre",
+      "athlete": "Atleta",
+      "store": "Datos",
+      "other": "Otros"
+    }
   }
 }

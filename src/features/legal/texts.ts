@@ -36,8 +36,8 @@ export interface LegalDocument {
 const STAND_DE = 'Stand: 24. September 2026'
 const STAND_EN = 'Last updated: 24 September 2026'
 // Die Datenschutzerklärung ist neuer (Pläne vom Trainer, Testphase).
-const PRIVACY_STAND_DE = 'Stand: 5. Oktober 2026'
-const PRIVACY_STAND_EN = 'Last updated: 5 October 2026'
+const PRIVACY_STAND_DE = 'Stand: 11. Oktober 2026'
+const PRIVACY_STAND_EN = 'Last updated: 11 October 2026'
 
 // --- Datenschutz -------------------------------------------------------------
 
@@ -102,7 +102,7 @@ const privacyDe: LegalDocument = {
     {
       heading: 'Empfänger',
       body: [
-        'Wir setzen zwei Auftragsverarbeiter ein. Mit beiden bestehen Verträge zur Auftragsverarbeitung nach Art. 28 DSGVO.',
+        'Wir setzen die unten genannten Auftragsverarbeiter ein. Mit jedem besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Anthropic erhält nur dann Daten, wenn du in die Formulierung durch ein Sprachmodell eingewilligt hast (siehe dort).',
       ],
     },
     {
@@ -132,6 +132,18 @@ const privacyDe: LegalDocument = {
         'Nie gezählt werden: Messwerte, Tagebuch- und Trainingsinhalte, Ernährungsangaben, E-Mail-Adresse, Name — und nichts aus der Gesundheitsschicht, auch nicht, dass du sie öffnest. Die IP-Adresse und die Browserkennung werden nicht gespeichert; die Tabelle hat dafür keine Spalte.',
         'Die Ereignisse liegen in unserer eigenen Datenbank bei Supabase (siehe «Empfänger») — es gibt keinen weiteren Empfänger. Einsehen kann sie nur der Betreiber. Nach 90 Tagen werden sie automatisch gelöscht.',
         'Widerruf: «Nein» im Profil. Die Sitzungskennung wird sofort gelöscht, und es wird nichts mehr gezählt. Bereits erfasste Ereignisse laufen nach 90 Tagen ab; auf Wunsch löschen wir sie früher.',
+      ],
+    },
+    {
+      heading: 'Texte von einem Sprachmodell (nur mit Einwilligung)',
+      body: [
+        'Mit Konto und Stufe Pro kannst du Antworten und deinen Wochenbrief auf Tipp «Als Text formulieren» lassen. Vor dem ersten Mal fragt die App nach deiner Einwilligung; ohne sie wird nichts gesendet, und die Antworten erscheinen als feste Texte. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).',
+        'Gesendet werden nur die Fakten der jeweiligen Antwort: feste Kennwörter und Zahlen (etwa Veränderung, Schwelle, Anzahl der Messungen, Belastung der Woche). Nicht gesendet werden Name, E-Mail-Adresse, Notizen, Tagebuch- und andere Freitexte, Daten der Gesundheitsschicht und Kennungen deines Kontos. Die Anfrage läuft über unsere Serverfunktion; der Anbieter sieht weder deine IP-Adresse noch dein Konto.',
+        'Empfänger ist Anthropic (Sprachmodell Claude) als Auftragsverarbeiter. Die Verarbeitung kann in den Vereinigten Staaten stattfinden; die Übermittlung stützt sich auf Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO). Nach seinen Bedingungen für gewerbliche Kunden nutzt der Anbieter die Daten nicht zum Training seiner Modelle und speichert sie nur befristet zur Missbrauchserkennung.',
+        'KYDON speichert weder die Fakten noch den Text. Gespeichert werden nur die Zahl deiner Aufrufe im Monat (für die Obergrenze von 30) und deine Einwilligung mit Zeitpunkt, Fassung des Textes, Bestätigung des Mindestalters und gegebenenfalls Widerruf (Nachweis nach Art. 7 Abs. 1 DSGVO). Beides löschen wir mit deinem Konto.',
+        'Texte des Sprachmodells sind in der App als solche gekennzeichnet. Das Modell formuliert nur um: Es bewertet nichts, stellt keine Diagnose und trifft keine Trainingsentscheidung. Jede Zahl im Text prüft die App gegen die Fakten; besteht er nicht, siehst du die feste Antwort.',
+        'Die Einwilligung setzt ein Mindestalter von 16 Jahren voraus (Art. 8 DSGVO). Im Trainermodus — also für Daten deiner Athleten — ist die Funktion nicht verfügbar.',
+        'Widerruf: jederzeit im Profil unter «Daten», mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO). Ab dann wird nichts mehr gesendet; die Rechtmässigkeit der bis dahin erfolgten Verarbeitung bleibt unberührt.',
       ],
     },
     {
@@ -236,7 +248,19 @@ const privacyEn: LegalDocument = {
         'This feature is in its test phase. The plan is a suggestion from stored rules and templates that have not yet been reviewed by a qualified person; KYDON does not replace medical or coaching advice.',
       ],
     },
-    { heading: 'Recipients', body: ['We use two processors. Data processing agreements under Art. 28 GDPR are in place with both.'] },
+    { heading: 'Recipients', body: ['We use the processors listed below. A data processing agreement under Art. 28 GDPR is in place with each. Anthropic only receives data if you have consented to phrasing by a language model (see there).'] },
+    {
+      heading: 'Texts from a language model (only with consent)',
+      body: [
+        'With an account on the Pro tier you can have answers and your weekly brief phrased on tap («Phrase as text»). Before the first time the app asks for your consent; without it nothing is sent and answers appear as fixed texts. The legal basis is your consent (Art. 6(1)(a) GDPR).',
+        'Only the facts of the answer in question are sent: fixed keywords and numbers (such as change, threshold, number of measurements, weekly load). Not sent: name, email address, notes, diary and other free text, data from the health layer and identifiers of your account. The request runs through our server function; the provider sees neither your IP address nor your account.',
+        'The recipient is Anthropic (language model Claude) as processor. Processing may take place in the United States; the transfer relies on standard contractual clauses (Art. 46(2)(c) GDPR). Under its terms for commercial customers the provider does not use the data to train its models and keeps it only for a limited time for abuse detection.',
+        'KYDON stores neither the facts nor the text. It stores only the number of your calls per month (for the limit of 30) and your consent with time, version of the text, confirmation of minimum age and any withdrawal (proof under Art. 7(1) GDPR). Both are deleted with your account.',
+        'Texts from the language model are labelled as such in the app. The model only rephrases: it evaluates nothing, makes no diagnosis and takes no training decision. The app checks every number in the text against the facts; if it fails, you see the fixed answer.',
+        'Consent requires a minimum age of 16 (Art. 8 GDPR). In coach mode — that is, for your athletes’ data — the feature is not available.',
+        'Withdrawal: at any time in your profile under «Data», with effect for the future (Art. 7(3) GDPR). From then on nothing is sent; the lawfulness of processing up to that point is unaffected.',
+      ],
+    },
     {
       heading: 'Retention',
       body: [

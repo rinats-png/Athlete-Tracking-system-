@@ -2899,7 +2899,8 @@
       "not_entitled": "Omformulering hører til Pro. Det faste svar bliver stående.",
       "limit_reached": "De 30 omformuleringer denne måned er brugt. Det faste svar bliver stående.",
       "rejected": "Teksten bestod ikke talkontrollen og vises ikke. Det faste svar bliver stående.",
-      "failed": "Det lykkedes ikke. Det faste svar bliver stående."
+      "failed": "Det lykkedes ikke. Det faste svar bliver stående.",
+      "no_consent": "Uden dit samtykke sendes intet til sprogmodellen. Det faste svar bliver stående."
     }
   },
   "weeklyReport": {
@@ -4041,5 +4042,69 @@
     "lost": "Der er ikke valgt nogen træning her. Vælg en under »Start træning«.",
     "noSlot": "Fri træning: tæller som træning, men krydser ikke en dato af i planen.",
     "save": "Gem i træningsloggen"
+  },
+  "aiConsent": {
+    "title": "Samtykke: lad en sprogmodel formulere tekster",
+    "point": {
+      "what": "Hvad der sendes: kun fakta fra dette svar – faste nøgleord og tal, fx „ændring +3,2 %, tærskel 2,8 %“. Sprogmodellen formulerer en tekst ud fra dem. KYDON kontrollerer hvert tal og viser ellers det faste svar.",
+      "notSent": "Hvad der ikke sendes: dit navn, din e-mailadresse, noter, dagbog og anden fritekst, data fra sundhedslaget og id’er for din konto.",
+      "who": "Modtager: Anthropic (sprogmodellen Claude) som databehandler. Behandlingen kan finde sted i USA; overførslen bygger på standardkontraktbestemmelser. Udbyderen bruger ikke dataene til at træne sine modeller. KYDON gemmer hverken fakta eller tekst – kun hvor ofte du har brugt funktionen i måneden, og dette samtykke.",
+      "label": "Tekster fra sprogmodellen er markeret som sådan. Modellen omformulerer kun: den vurderer intet, stiller ingen diagnose og træffer ingen træningsbeslutning.",
+      "voluntary": "Frivilligt: uden samtykke fungerer KYDON fuldt ud – svarene vises da som faste tekster. Retsgrundlaget er dit samtykke (art. 6, stk. 1, litra a, GDPR)."
+    },
+    "withdraw": "Du kan til enhver tid trække dit samtykke tilbage i din profil under „Data“ med virkning for fremtiden.",
+    "more": "Mere i privatlivspolitikken",
+    "age": "Jeg er mindst 16 år.",
+    "accept": "Giv samtykke og formulér",
+    "decline": "Ikke nu",
+    "failed": "Samtykket kunne ikke gemmes. Det kræver forbindelse og en konto. Intet blev sendt.",
+    "settingTitle": "Tekster fra sprogmodellen",
+    "state": {
+      "granted": "Samtykke givet. Ved tryk sendes fakta til Anthropic for at blive formuleret.",
+      "withdrawn": "Trukket tilbage. Der sendes intet længere.",
+      "unset": "Intet samtykke. Der sendes intet."
+    },
+    "withdrawButton": "Træk samtykke tilbage",
+    "grantButton": "Giv samtykke …",
+    "withdrawnLocal": "På denne enhed gælder tilbagetrækningen straks. Serveren modtager den, så snart der er forbindelse."
+  },
+  "storage": {
+    "newerTitle": "Nyere KYDON-version fundet",
+    "reload": "Genindlæs appen",
+    "more_one": "… og én mere.",
+    "more_other": "… og {{count}} mere.",
+    "kept": "Alt andet er overført fuldt ud.",
+    "quarantined": "De ulæselige poster opbevares på denne enhed og er ikke slettet.",
+    "backup": "Der findes en sikkerhedskopi på denne enhed (fra {{date}}).",
+    "noBackup": "Der findes ingen sikkerhedskopi på denne enhed. Eksportér dine data regelmæssigt.",
+    "saveQuarantine": "Gem ulæselige poster som fil",
+    "kind": {
+      "results": "Resultater",
+      "assessments": "Testaftaler",
+      "biometrics": "Kropsværdier",
+      "observations": "Observationer",
+      "diary": "Dagbog",
+      "diaryFields": "Dagbogsfelter",
+      "activities": "Aktiviteter",
+      "workouts": "Træningslog",
+      "trainingBlocks": "Træningsblokke",
+      "planTemplates": "Planskabeloner",
+      "customExercises": "Egne øvelser",
+      "decisions": "Beslutninger",
+      "meals": "Måltider",
+      "nutrition": "Ernæring",
+      "health": "Sundhed",
+      "peakWeeks": "Peak week",
+      "notes": "Noter",
+      "consent": "Samtykke",
+      "focuses": "Fokusområder",
+      "audit": "Ændringslog",
+      "testDays": "Testdage",
+      "branding": "Branding",
+      "name": "Navn",
+      "athlete": "Atlet",
+      "store": "Data",
+      "other": "Andet"
+    }
   }
 }

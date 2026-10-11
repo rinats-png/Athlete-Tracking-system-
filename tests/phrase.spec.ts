@@ -57,13 +57,75 @@ test.describe('Zahlenwächter an einem Modelltext', () => {
 })
 
 test.describe('Bildschirm', () => {
-  test('ohne Konto bleibt die feste Antwort und ein Satz sagt warum', async ({ page }) => {
+  test('ohne Einwilligung wird gefragt — und ohne Ja geht nichts raus', async ({ page }) => {
+    const calls: string[] = []
+    await page.route('**/functions/v1/phrase', (route) => {
+      calls.push(route.request().url())
+      return route.abort()
+    })
     await openDemo(page)
     await page.goto('/fragen')
     await page.getByTestId('ask-q-confidence').click()
     await page.getByTestId('phrase-run').click()
-    await expect(page.getByTestId('phrase-fallback')).toBeVisible()
+    const consent = page.getByTestId('ai-consent')
+    await expect(consent).toBeVisible()
+    await expect(consent).toContainText('Was nicht gesendet wird')
+    await expect(consent).toContainText('Anthropic')
+    // Nichts vorausgewählt: ohne Altersbestätigung kein Einwilligen.
+    await expect(page.getByTestId('ai-consent-accept')).toBeDisabled()
+    await page.getByTestId('ai-consent-decline').click()
+    await expect(consent).toHaveCount(0)
     await expect(page.getByTestId('ask-answer')).toContainText(/\d/)
-    expect(await page.getByTestId('phrase').innerText()).not.toMatch(/phrase\.reason/)
+    expect(calls, 'ohne Einwilligung kein Aufruf').toEqual([])
+  })
+
+  test('ohne Konto lässt sich die Einwilligung nicht speichern — gesendet wird nichts', async ({ page }) => {
+    const calls: string[] = []
+    await page.route('**/functions/v1/phrase', (route) => {
+      calls.push(route.request().url())
+      return route.abort()
+    })
+    await openDemo(page)
+    await page.goto('/fragen')
+    await page.getByTestId('ask-q-confidence').click()
+    await page.getByTestId('phrase-run').click()
+    await page.getByTestId('ai-consent-age').check()
+    await page.getByTestId('ai-consent-accept').click()
+    await expect(page.getByTestId('ai-consent-failed')).toBeVisible()
+    expect(calls).toEqual([])
+    expect(await page.evaluate(() => localStorage.getItem('kydon.ai.consent.v1'))).toBeNull()
+  })
+
+  test('im Profil steht der Stand der Einwilligung', async ({ page }) => {
+    await openDemo(page)
+    await page.goto('/profil')
+    await expect(page.getByTestId('ai-setting-state')).toContainText('Nicht eingewilligt')
+  })
+
+  test('ein widerrufener Stand sendet nichts, auch nicht nach Neuladen', async ({ page }) => {
+    await openDemo(page)
+    await page.evaluate(() => localStorage.setItem('kydon.ai.consent.v1', JSON.stringify({ state: 'withdrawn', version: '2026-10-11', at: '2026-10-11T10:00:00.000Z', serverPending: false })))
+    await page.goto('/profil')
+    await expect(page.getByTestId('ai-setting-state')).toContainText('Widerrufen')
+  })
+})
+
+test.describe('Sperren', () => {
+  test('Trainerentwürfe über Athleten bleiben bis zum Nachtrag des AV-Vertrags gesperrt', async () => {
+    const { PHRASE_KINDS_ENABLED, AI_CONSENT_VERSION } = await import('../supabase/functions/_shared/phrase')
+    expect(PHRASE_KINDS_ENABLED).not.toContain('draft')
+    expect(AI_CONSENT_VERSION).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+
+  test('die Edge Function prüft Einwilligung und Art, bevor sie den Anbieter ruft', async () => {
+    const { readFileSync } = await import('node:fs')
+    const src = readFileSync(new URL('../supabase/functions/phrase/index.ts', import.meta.url), 'utf8')
+    const consent = src.indexOf("from('ai_consents')")
+    const kind = src.indexOf('PHRASE_KINDS_ENABLED.includes')
+    const upstream = src.indexOf('/v1/messages')
+    expect(consent).toBeGreaterThan(0)
+    expect(kind).toBeGreaterThan(0)
+    expect(consent, 'Einwilligung vor dem Aufruf').toBeLessThan(upstream)
+    expect(kind, 'Art vor dem Aufruf').toBeLessThan(upstream)
   })
 })

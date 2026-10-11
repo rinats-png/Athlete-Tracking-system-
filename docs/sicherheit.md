@@ -444,12 +444,33 @@ richtig (§32) und auf einem geteilten falsch. Jetzt gibt es **beide Wege**,
 mit Rückfrage vor dem endgültigen. Offline umgeht nichts: ohne Verbindung
 gibt es keinen Serverzugriff, den man umgehen könnte.
 
-### 20 Falls die App selbst KI verwendet — *nicht zutreffend*
-KYDON ruft **kein** Sprachmodell auf, weder im Browser noch serverseitig.
-Es gibt keine Prompts, keine Werkzeugaufrufe, keine Handlungsvollmacht.
-Das ist eine bewusste Produktentscheidung und keine Auslassung: die App gibt
-diagnostische Aussagen aus Messwerten und Referenzen, und dafür wäre ein
-Sprachmodell die falsche Quelle.
+### 20 Falls die App selbst KI verwendet — ✓ (Stand 11.10.2026)
+Bis Etappe 7c stand hier «nicht zutreffend». Das stimmt nicht mehr: Die
+Edge Function `phrase` ruft ein Sprachmodell (Anthropic, Claude) auf. Das
+Modell **formuliert** nur Fakten um; Ergebnisse, Urteile und Zahlen kommen
+weiter aus der Fachlogik. Die Vorkehrungen:
+
+- **Eingang:** Nur bereinigte Fakten gehen hinaus.
+  - `sanitizeFacts` in `_shared/phrase.ts` lässt nur Schlüssel, Zahlen und
+    Zeichenketten fester Form durch.
+  - Kein Name, kein Freitext, keine Kontokennung. Die IP-Adresse sieht der
+    Anbieter nicht, weil der Aufruf vom Server kommt.
+- **Ausgang:** Der Zahlenwächter (`domain/answerGuard.ts`) prüft jede Zahl
+  im Text. Besteht der Text nicht, gilt die feste Vorlage.
+- **Keine Werkzeuge und keine Handlungsvollmacht:** Das Modell bekommt einen
+  einzigen Aufruf ohne Werkzeuge, mit höchstens 300 Tokens Ausgabe.
+- **Einwilligung** (Migration `20261011120000_ai_consents.sql`):
+  - Der Server prüft eine gültige Einwilligung für die aktuelle Fassung,
+    bevor er etwas sendet.
+  - Widerruf ist jederzeit möglich. Nachweis nach Art. 7 Abs. 1 DSGVO.
+  - Siehe `docs/ki-einwilligung.md`.
+- **Nur eigene Daten:** Trainerentwürfe über Athleten (`draft`) und der
+  Trainermodus sind gesperrt, bis der Nachtrag zum AV-Vertrag angekündigt
+  und angenommen ist.
+- **Kennzeichnung:** Text des Modells trägt «Von einem Sprachmodell
+  formuliert» (Art. 50 KI-Verordnung).
+- **Geheimnis:** `ANTHROPIC_API_KEY` liegt nur in der Umgebung der Edge
+  Function.
 
 ### 21 Vibe-Coding-Regeln — ✓
 Als Arbeitsregeln in `CLAUDE.md` und in dieser Datei verankert. Der

@@ -1,7 +1,8 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AppHeader } from '@/features/dashboard/AppHeader'
 import { BottomNav, dockItemsFor, navItemsFor, navKeyForPath, pathForNavKey } from '@/features/dashboard/BottomNav'
-import { DataLoadNotice } from '@/features/dashboard/DataLoadNotice'
+import { lazy, Suspense } from 'react'
+import { loadExtra } from '@/i18n'
 import { ActionOrb } from '@/components/signature/ActionOrb'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useTranslation } from 'react-i18next'
@@ -11,6 +12,12 @@ import { AnalyticsConsentStrip } from '@/features/shared/AnalyticsConsent'
 import { AdminBar } from '@/features/admin/AdminLink'
 import { usePushDueSync } from '@/features/push/usePushDueSync'
 import { WhatsNewDialog } from '@/features/whatsNew/WhatsNewDialog'
+
+// Nur nachgeladen, wenn beim Laden etwas zu melden war — das Startpaket
+// bleibt so unter seiner Grenze (tests/loading.spec.ts).
+const DataLoadNotice = lazy(() =>
+  Promise.all([import('@/features/dashboard/DataLoadNotice'), loadExtra()]).then(([m]) => ({ default: m.DataLoadNotice })),
+)
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -28,7 +35,7 @@ export function AppShell() {
   useOverdueNotice()
   usePushDueSync()
   usePageTracking(pathname)
-  const { mode, storageBlocked, role } = useAppData()
+  const { mode, storageBlocked, role, loadReport } = useAppData()
   const items = navItemsFor(role)
   const active = navKeyForPath(pathname, role)
   const dock = dockItemsFor(role)
@@ -79,7 +86,11 @@ export function AppShell() {
             {t('storage.blocked')}
           </p>
         )}
-        <DataLoadNotice />
+        {(loadReport.migratedFrom != null || loadReport.fromNewerVersion || loadReport.rejected.length > 0) && (
+          <Suspense fallback={null}>
+            <DataLoadNotice />
+          </Suspense>
+        )}
         <AdminBar />
         <AnalyticsConsentStrip />
         <Outlet />

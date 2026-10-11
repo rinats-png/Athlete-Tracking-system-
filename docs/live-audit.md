@@ -110,7 +110,8 @@ der richtige Moment, sie zu schließen.
    `supabase/einspielen/offene_migrationen.sql` im SQL-Editor, oder
    `supabase db push`.
 3. **`phrase` und `billing-portal` ausrollen.** Für `phrase` gilt: erst
-   nach der KI-Einwilligung (docs/ki-einwilligung.md).
+   nach Migration `20261011120000_ai_consents.sql` und der Rechtsprüfung in
+   `docs/ki-einwilligung.md` §5.
 4. **Schutz vor bekannten Passwörtern** im Dashboard einschalten.
 5. **Cron für `purge_expired()`** einrichten. Das steckt in der Migration
    `20261011100000_document_tombstones.sql`.
