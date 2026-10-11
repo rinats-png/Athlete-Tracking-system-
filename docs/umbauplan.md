@@ -150,3 +150,55 @@ Die Regel:
     Aussage», «eine Festlegung dieser App», «keine Freigabe, keine Sperre».
 
 Neue Karten folgen derselben Regel.
+
+## Sprint 0 nach der Marktanalyse (Entscheidung vom 11. Oktober 2026)
+
+Grundlage: die Marktanalyse mit Umbauplan und die aktualisierte Einordnung
+vom selben Tag. Zuerst kommen Datenintegrität und eine einzige
+Veränderungslogik, dann neue Funktionen. Umgesetzt sind die vier Punkte, die
+ohne Freigabe möglich waren:
+
+1. **Rettung je Bereich mit Quarantäne.**
+   - Scheitert die Prüfung des Gesamtbestands, rettet `parseStoredData`
+     jetzt jedes Feld einzeln. Das gilt für jeden Athleten und für den
+     Bestand, Listen Eintrag für Eintrag und Objekte Feld für Feld.
+   - Vorher kamen nur Profil, Körperwerte, Testtermine und Ergebnisse
+     zurück. Tagebuch, Trainingsblöcke, Gesundheit, Notizen und Testtage
+     fielen still weg.
+   - Verworfene Einträge stehen mit Rohwert im Bericht (`quarantine`).
+     `localStore.ts` legt sie unter `kydon.quarantine.v1` ab (ohne Doppelte,
+     höchstens 1,5 Mio. Zeichen). Ein unlesbarer Speicher (kein JSON) wird
+     als Rohtext aufbewahrt.
+   - Die Meldung nennt den Bereich, sagt «aufbewahrt, nicht gelöscht» und
+     zeigt, ob eine Sicherung auf dem Gerät liegt. Ein Knopf sichert die
+     Quarantäne als Datei.
+2. **Eine Veränderungslogik.**
+   - `testTrend` urteilt nicht mehr mit festen 0,5 % je 30 Tage. Geprüft
+     wird die Veränderung entlang der Geraden über den ganzen Zeitraum, mit
+     `judgeChange` aus `change.ts`.
+   - Unter vier Messungen heisst das «unklar», nicht «stabil».
+   - «Stabil» heisst in der Oberfläche jetzt «keine klare Veränderung».
+   - Auch der Trainernachweis nutzt `judgeChange`, statt die Schwelle
+     nachzurechnen.
+3. **Kennzeichnung ungeprüfter Regeln:** siehe unten.
+4. **Bestand aus einer neueren Fassung.**
+   - Der Schutz vor dem Lesen bestand schon. Gespeichert wurde trotzdem: der
+     Bestand galt als «leer», die ältere Zweitschrift sprang ein, und das
+     erste Speichern überschrieb die neueren Daten.
+   - Jetzt gilt eine Schreibsperre: nicht speichern, keine Zweitschrift,
+     kein Import, kein Abgleich. Gelöst wird sie nur durch ausdrückliches
+     Löschen.
+   - Der Einstieg wird übersprungen. Die Meldung sagt, dass Änderungen nicht
+     gespeichert werden, und bietet «App neu laden» an.
+
+Offen und nur mit Freigabe:
+- Löschweg für ganze Athleten-Dokumente (Migration + RLS);
+- KI-Einwilligung je Nutzer (Rechtstext);
+- Live-Audit von Supabase;
+- wer die Regeln fachlich prüft.
+
+Ebenfalls offen ist der Blockvergleich im Trainingslog (`training.ts`,
+`blockCompare`). Er urteilt mit einer festen Schwelle von 1 % über den
+e1RM. Das ist eine Trainingsmessung, kein Test, braucht aber dieselbe
+Entscheidung.
+

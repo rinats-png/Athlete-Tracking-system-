@@ -11,6 +11,7 @@ import { ageFromBirthDate } from '@/lib/format'
 import {
   bodyWeightAt,
   clearData,
+  isWriteLocked,
   emptyData,
   exportData,
   importData,
@@ -426,7 +427,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
 
   useEffect(() => {
     if (mode === 'demo' && countResults(initial.data) === 0 && countResults(store) > 0) {
-      if (!saveData(store)) setStorageBlocked(true)
+      if (!saveData(store) && !isWriteLocked()) setStorageBlocked(true)
     }
     // Nur beim Moduswechsel, nicht bei jeder Änderung.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -436,6 +437,10 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
     (next: StoredData) => {
       storeRef.current = next
       setStore(next)
+      // Bei einem Bestand aus einer neueren Fassung wird bewusst nicht
+      // gespeichert (localStore.ts) — das ist kein voller Speicher, und die
+      // Zweitschrift darf ihn ebenso wenig ersetzen.
+      if (isWriteLocked()) return
       if (!saveData(next)) setStorageBlocked(true)
       // Die Zweitschrift läuft nebenher: sie darf die Eingabe nicht bremsen,
       // und ihr Scheitern ist kein Fehler der Sitzung.

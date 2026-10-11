@@ -67,6 +67,32 @@ export interface ChangeReport {
   previous: StoredResult | null
 }
 
+/** Das Urteil über eine Veränderung, ohne «erste Messung». */
+export type ChangeJudgement = Exclude<ChangeVerdict, 'first'>
+
+/**
+ * DAS EINE URTEIL über eine Veränderung — besser, schlechter, im Rauschen
+ * oder unklar. Jede Stelle der App, die «besser» oder «schlechter» sagt,
+ * kommt hierher: der einzelne Vergleich (`changeReport`), der Verlauf über
+ * mehrere Messungen (`testTrend` in analytics.ts) und der Trainernachweis
+ * (`coachProof.ts`). Eine zweite Schwelle irgendwo anders hiesse, dass
+ * derselbe Wert an zwei Stellen verschieden beurteilt wird.
+ *
+ * Ohne bekannte Streuung gibt es kein Urteil (`unknown_error`) — auch keine
+ * feste Ersatzschwelle: ein erfundenes Band wäre genau die Behauptung, die
+ * diese Datei verhindern soll.
+ */
+export function judgeChange(
+  changePercent: number,
+  typicalError: number | null,
+): { verdict: ChangeJudgement; detectablePercent: number | null } {
+  if (typicalError == null) return { verdict: 'unknown_error', detectablePercent: null }
+  const threshold = typicalError * DETECTION_FACTOR
+  const verdict: ChangeJudgement =
+    Math.abs(changePercent) <= threshold ? 'within_noise' : changePercent > 0 ? 'better' : 'worse'
+  return { verdict, detectablePercent: Math.round(threshold * 10) / 10 }
+}
+
 const empty = (verdict: ChangeVerdict, points: number): ChangeReport => ({
   verdict,
   changePercent: null,
@@ -137,27 +163,13 @@ export function changeReport(results: StoredResult[], result: StoredResult): Cha
   )
 
   const typical = typicalErrorPercent(results, result.testSlug)
-  if (typical == null) {
-    return {
-      verdict: 'unknown_error',
-      changePercent,
-      typicalErrorPercent: null,
-      detectablePercent: null,
-      points: series.length,
-      daysSincePrevious,
-      previous,
-    }
-  }
-
-  const threshold = typical * DETECTION_FACTOR
-  const verdict: ChangeVerdict =
-    Math.abs(changePercent) <= threshold ? 'within_noise' : changePercent > 0 ? 'better' : 'worse'
+  const { verdict, detectablePercent } = judgeChange(changePercent, typical)
 
   return {
     verdict,
     changePercent,
     typicalErrorPercent: typical,
-    detectablePercent: Math.round(threshold * 10) / 10,
+    detectablePercent,
     points: series.length,
     daysSincePrevious,
     previous,

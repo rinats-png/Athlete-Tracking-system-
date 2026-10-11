@@ -28,8 +28,8 @@ export interface AthleteRow {
   overall: number | null
   /** Belastbarkeit des Profils in Prozent. */
   confidence: number
-  /** Richtung über alle Tests mit ausreichender Historie. */
-  trend: 'improving' | 'stable' | 'declining' | 'insufficient'
+  /** Richtung über alle Tests mit ausreichender Historie (Urteil aus change.ts). */
+  trend: 'improving' | 'stable' | 'declining' | 'unclear' | 'insufficient'
   primaryLimiter: PerformanceDimension | null
   lastAssessmentOn: string | null
   nextAssessmentOn: string | null
@@ -84,6 +84,9 @@ export function overallTrend(data: AthleteData): AthleteRow['trend'] {
     .filter((l) => l !== 'insufficient')
 
   if (labels.length === 0) return 'insufficient'
+  // Zählen dürfen nur Tests mit bekanntem Messfehler. Sind es keine, gibt es
+  // kein Urteil — auch keins aus einer Mehrheit unbeurteilter Geraden.
+  if (labels.every((l) => l === 'unclear')) return 'unclear'
 
   const count = (label: string) => labels.filter((l) => l === label).length
   const improving = count('improving')

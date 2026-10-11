@@ -521,7 +521,7 @@
       "thin_data": "Thin data",
       "no_assessment": "No measurement yet"
     },
-    "method": "The trend is a majority decision across the tests for which one can be computed at all — deliberately not a mean of slopes, because percent per 30 days cannot be meaningfully averaged across different tests. “Needs attention” is not a judgement of the person but a pointer to one of the stated reasons.",
+    "method": "The trend is a majority decision across the tests for which one can be computed at all — deliberately not a mean of slopes, because percent per 30 days cannot be meaningfully averaged across different tests. “Needs attention” is not a judgement of the person but a pointer to one of the stated reasons. A test only counts if its change exceeds the athlete’s own measurement error.",
     "emptyTitle": "No athletes yet",
     "emptyBody": "Add the first person under “Athletes you coach” in your profile.",
     "soloTitle": "Coach mode is off",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} days",
     "trendLabel": {
       "improving": "Improving",
-      "stable": "Stable",
+      "stable": "No clear change",
       "declining": "Declining",
+      "unclear": "Unclear",
       "insufficient_one": "{{count}} measurement",
       "insufficient_other": "{{count}} measurements"
     },
     "trendInsufficientHint": "A regression line is computed from three measurements onwards. Two points always make a perfect line — that is not a trend.",
+    "trendUnclearHint": "The measurement error for this test is not known yet — it can be estimated from four measurements. Until then KYDON says neither “improving” nor “declining”.",
     "trendBasis": "{{points}} measurements, {{days}} days, R² {{r2}}",
     "compareAssessments": "Compare two sessions",
     "compareHint": "Completed sessions only. Tests present in just one of the two are marked rather than dropped.",

@@ -521,7 +521,7 @@
       "thin_data": "Données minces",
       "no_assessment": "Pas encore de mesure"
     },
-    "method": "La tendance est une décision majoritaire sur les tests pour lesquels on peut en calculer une — volontairement pas une moyenne de pentes, car des pourcents par 30 jours ne se moyennent pas de façon sensée entre tests différents. « Demande de l'attention » n'est pas un jugement sur la personne mais un renvoi à l'une des raisons indiquées.",
+    "method": "La tendance est une décision majoritaire sur les tests pour lesquels on peut en calculer une — volontairement pas une moyenne de pentes, car des pourcents par 30 jours ne se moyennent pas de façon sensée entre tests différents. « Demande de l'attention » n'est pas un jugement sur la personne mais un renvoi à l'une des raisons indiquées. Un test ne compte que si son changement dépasse la propre erreur de mesure.",
     "emptyTitle": "Pas encore d'athlètes",
     "emptyBody": "Ajoute la première personne sous « Athlètes que tu entraînes » dans ton profil.",
     "soloTitle": "Le mode entraîneur est désactivé",
@@ -933,12 +933,14 @@
     "overDays_other": "sur {{count}} jours",
     "trendLabel": {
       "improving": "En progression",
-      "stable": "Stable",
+      "stable": "Pas de changement net",
       "declining": "En recul",
+      "unclear": "Incertain",
       "insufficient_one": "{{count}} mesure",
       "insufficient_other": "{{count}} mesures"
     },
     "trendInsufficientHint": "Une droite de régression est calculée à partir de trois mesures. Deux points font toujours une droite parfaite — ce n'est pas une tendance.",
+    "trendUnclearHint": "L'erreur de mesure de ce test n'est pas encore connue — elle peut être estimée à partir de quatre mesures. D'ici là, KYDON ne dit ni « en progression » ni « en recul ».",
     "trendBasis": "{{points}} mesures, {{days}} jours, R² {{r2}}",
     "compareAssessments": "Comparer deux sessions",
     "compareHint": "Sessions closes seulement. Les tests présents dans une seule des deux sont signalés, pas écartés.",

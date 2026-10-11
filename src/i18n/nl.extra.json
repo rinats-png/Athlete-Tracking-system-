@@ -521,7 +521,7 @@
       "thin_data": "Weinig data",
       "no_assessment": "Nog geen meting"
     },
-    "method": "De trend is een meerderheidsbeslissing over de tests waarvoor er überhaupt een te berekenen is — bewust geen gemiddelde van hellingen, omdat procent per 30 dagen over verschillende tests niet zinvol te middelen is. “Aandacht nodig” is geen oordeel over de persoon, maar een verwijzing naar een van de genoemde redenen.",
+    "method": "De trend is een meerderheidsbeslissing over de tests waarvoor er überhaupt een te berekenen is — bewust geen gemiddelde van hellingen, omdat procent per 30 dagen over verschillende tests niet zinvol te middelen is. “Aandacht nodig” is geen oordeel over de persoon, maar een verwijzing naar een van de genoemde redenen. Een test telt alleen mee als de verandering groter is dan de eigen meetfout.",
     "emptyTitle": "Nog geen atleten",
     "emptyBody": "Voeg de eerste persoon toe onder “Atleten die je traint” in je profiel.",
     "soloTitle": "Trainersmodus staat uit",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} dagen",
     "trendLabel": {
       "improving": "Verbetert",
-      "stable": "Stabiel",
+      "stable": "Geen duidelijke verandering",
       "declining": "Daalt",
+      "unclear": "Onduidelijk",
       "insufficient_one": "{{count}} meting",
       "insufficient_other": "{{count}} metingen"
     },
     "trendInsufficientHint": "Een regressielijn wordt vanaf drie metingen berekend. Twee punten vormen altijd een perfecte lijn — dat is geen trend.",
+    "trendUnclearHint": "De meetfout voor deze test is nog niet bekend — vanaf vier metingen is die te schatten. Tot dan zegt KYDON niet „verbetert” of „daalt”.",
     "trendBasis": "{{points}} metingen, {{days}} dagen, R² {{r2}}",
     "compareAssessments": "Twee sessies vergelijken",
     "compareHint": "Alleen afgeronde sessies. Tests die in slechts één van de twee voorkomen, worden gemarkeerd in plaats van weggelaten.",

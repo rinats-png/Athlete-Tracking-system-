@@ -521,7 +521,7 @@
       "thin_data": "Datenlage dünn",
       "no_assessment": "Noch keine Messung"
     },
-    "method": "Der Trend ist ein Mehrheitsentscheid über die Tests, für die sich überhaupt einer rechnen lässt — bewusst kein Mittelwert der Steigungen, weil sich Prozent je 30 Tage über verschiedene Tests nicht sinnvoll mitteln lassen. «Braucht Aufmerksamkeit» ist keine Bewertung der Person, sondern ein Hinweis auf einen der genannten Gründe.",
+    "method": "Der Trend ist ein Mehrheitsentscheid über die Tests, für die sich überhaupt einer rechnen lässt — bewusst kein Mittelwert der Steigungen, weil sich Prozent je 30 Tage über verschiedene Tests nicht sinnvoll mitteln lassen. «Braucht Aufmerksamkeit» ist keine Bewertung der Person, sondern ein Hinweis auf einen der genannten Gründe. Ein Test zählt nur, wenn seine Veränderung über dem eigenen Messfehler liegt.",
     "emptyTitle": "Noch keine Athleten",
     "emptyBody": "Leg im Profil unter «Betreute Athleten» die erste Person an.",
     "soloTitle": "Trainermodus nicht aktiv",
@@ -933,12 +933,14 @@
     "overDays_other": "über {{count}} Tage",
     "trendLabel": {
       "improving": "Steigend",
-      "stable": "Stabil",
+      "stable": "Keine klare Veränderung",
       "declining": "Fallend",
+      "unclear": "Unklar",
       "insufficient_one": "{{count}} Messung",
       "insufficient_other": "{{count}} Messungen"
     },
     "trendInsufficientHint": "Ab drei Messungen wird eine Ausgleichsgerade gerechnet. Zwei Punkte ergeben immer eine perfekte Gerade — ein Trend ist das nicht.",
+    "trendUnclearHint": "Der Messfehler für diesen Test ist noch nicht bekannt — ab vier Messungen lässt er sich schätzen. Bis dahin sagt KYDON weder «steigend» noch «fallend».",
     "trendBasis": "{{points}} Messungen, {{days}} Tage, R² {{r2}}",
     "compareAssessments": "Zwei Termine vergleichen",
     "compareHint": "Nur abgeschlossene Termine. Tests, die nur in einem der beiden vorkommen, werden gekennzeichnet statt weggelassen.",

@@ -521,7 +521,7 @@
       "thin_data": "Datos escasos",
       "no_assessment": "Aún sin medición"
     },
-    "method": "La tendencia es una decisión por mayoría entre los tests para los que puede calcularse — deliberadamente no una media de pendientes, porque el porcentaje por 30 días no se puede promediar con sentido entre tests distintos. «Necesita atención» no es un juicio sobre la persona sino una indicación de uno de los motivos citados.",
+    "method": "La tendencia es una decisión por mayoría entre los tests para los que puede calcularse — deliberadamente no una media de pendientes, porque el porcentaje por 30 días no se puede promediar con sentido entre tests distintos. «Necesita atención» no es un juicio sobre la persona sino una indicación de uno de los motivos citados. Un test solo cuenta si su cambio supera el propio error de medición.",
     "emptyTitle": "Aún sin atletas",
     "emptyBody": "Añade a la primera persona en «Atletas que entrenas» en tu perfil.",
     "soloTitle": "El modo entrenador está desactivado",
@@ -933,12 +933,14 @@
     "overDays_other": "en {{count}} días",
     "trendLabel": {
       "improving": "Mejorando",
-      "stable": "Estable",
+      "stable": "Sin cambio claro",
       "declining": "Empeorando",
+      "unclear": "Incierto",
       "insufficient_one": "{{count}} medición",
       "insufficient_other": "{{count}} mediciones"
     },
     "trendInsufficientHint": "Una recta de regresión se calcula a partir de tres mediciones. Dos puntos siempre forman una recta perfecta — eso no es una tendencia.",
+    "trendUnclearHint": "El error de medición de este test aún no se conoce: se puede estimar a partir de cuatro mediciones. Hasta entonces KYDON no dice ni «mejorando» ni «empeorando».",
     "trendBasis": "{{points}} mediciones, {{days}} días, R² {{r2}}",
     "compareAssessments": "Comparar dos sesiones",
     "compareHint": "Solo sesiones completadas. Los tests presentes en solo una de las dos se marcan en lugar de omitirse.",

@@ -371,7 +371,7 @@ function TrendBadge({
   }
 
   return (
-    <span className="text-[12px]">
+    <span className="text-[12px]" title={trend.label === 'unclear' ? t('analysis.trendUnclearHint') : undefined}>
       {t(`analysis.trendLabel.${trend.label}`)}
       <span className="block text-ink-muted">
         {t('analysis.trendBasis', {

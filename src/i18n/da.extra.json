@@ -521,7 +521,7 @@
       "thin_data": "Tynde data",
       "no_assessment": "Ingen måling endnu"
     },
-    "method": "Tendensen er en flertalsafgørelse på tværs af de tests, hvor en overhovedet kan beregnes — bevidst ikke et gennemsnit af hældninger, fordi procent pr. 30 dage ikke meningsfuldt kan midles på tværs af forskellige tests. “Kræver opmærksomhed” er ikke en bedømmelse af personen, men en henvisning til en af de nævnte årsager.",
+    "method": "Tendensen er en flertalsafgørelse på tværs af de tests, hvor en overhovedet kan beregnes — bevidst ikke et gennemsnit af hældninger, fordi procent pr. 30 dage ikke meningsfuldt kan midles på tværs af forskellige tests. “Kræver opmærksomhed” er ikke en bedømmelse af personen, men en henvisning til en af de nævnte årsager. En test tæller kun, hvis ændringen er større end den egen målefejl.",
     "emptyTitle": "Ingen atleter endnu",
     "emptyBody": "Tilføj den første person under “Atleter, du træner” i din profil.",
     "soloTitle": "Trænertilstand er slået fra",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} dage",
     "trendLabel": {
       "improving": "I fremgang",
-      "stable": "Stabil",
+      "stable": "Ingen klar ændring",
       "declining": "Faldende",
+      "unclear": "Uklart",
       "insufficient_one": "{{count}} måling",
       "insufficient_other": "{{count}} målinger"
     },
     "trendInsufficientHint": "En regressionslinje beregnes fra tre målinger. To punkter giver altid en perfekt linje — det er ikke en tendens.",
+    "trendUnclearHint": "Målefejlen for denne test kendes endnu ikke — den kan estimeres fra fire målinger. Indtil da siger KYDON hverken „i fremgang“ eller „faldende“.",
     "trendBasis": "{{points}} målinger, {{days}} dage, R² {{r2}}",
     "compareAssessments": "Sammenlign to sessioner",
     "compareHint": "Kun afsluttede sessioner. Tests, der kun findes i den ene af de to, markeres frem for at udelades.",

@@ -521,7 +521,7 @@
       "thin_data": "Tunna data",
       "no_assessment": "Ingen mätning ännu"
     },
-    "method": "Trenden är ett majoritetsbeslut över de tester för vilka en över huvud taget kan beräknas — medvetet inget medelvärde av lutningar, eftersom procent per 30 dagar inte kan medelvärdesbildas meningsfullt över olika tester. ”Behöver uppmärksamhet” är ingen bedömning av personen utan en hänvisning till ett av de angivna skälen.",
+    "method": "Trenden är ett majoritetsbeslut över de tester för vilka en över huvud taget kan beräknas — medvetet inget medelvärde av lutningar, eftersom procent per 30 dagar inte kan medelvärdesbildas meningsfullt över olika tester. ”Behöver uppmärksamhet” är ingen bedömning av personen utan en hänvisning till ett av de angivna skälen. Ett test räknas bara om förändringen är större än det egna mätfelet.",
     "emptyTitle": "Inga atleter ännu",
     "emptyBody": "Lägg till den första personen under ”Atleter du tränar” i din profil.",
     "soloTitle": "Tränarläget är av",
@@ -933,12 +933,14 @@
     "overDays_other": "över {{count}} dagar",
     "trendLabel": {
       "improving": "Förbättras",
-      "stable": "Stabil",
+      "stable": "Ingen tydlig förändring",
       "declining": "Försämras",
+      "unclear": "Oklart",
       "insufficient_one": "{{count}} mätning",
       "insufficient_other": "{{count}} mätningar"
     },
     "trendInsufficientHint": "En regressionslinje beräknas från tre mätningar. Två punkter ger alltid en perfekt linje — det är ingen trend.",
+    "trendUnclearHint": "Mätfelet för det här testet är ännu inte känt — det kan uppskattas från fyra mätningar. Till dess säger KYDON varken ”förbättras” eller ”försämras”.",
     "trendBasis": "{{points}} mätningar, {{days}} dagar, R² {{r2}}",
     "compareAssessments": "Jämför två tillfällen",
     "compareHint": "Endast slutförda tillfällen. Tester som finns i bara ett av de två markeras i stället för att utelämnas.",
