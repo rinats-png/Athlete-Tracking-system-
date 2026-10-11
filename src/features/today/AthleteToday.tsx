@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowDown, ArrowUp, ChevronRight, Flag, ShieldCheck } from 'lucide-react'
@@ -67,6 +68,7 @@ function TodayWithData() {
     const upcoming = occurrences(block).find((o) => !o.done && o.date > day) ?? null
     return { open, missed, upcoming }
   }, [block, day])
+  const sessionReview = useReviewState(block, plan?.open?.session ?? null)
   const shortDay = (iso: string) => new Date(`${iso}T12:00:00Z`).toLocaleDateString(locale, { weekday: 'short', day: 'numeric', timeZone: 'UTC' })
   const row = 'flex min-h-13 items-center gap-3 py-2'
 
@@ -95,6 +97,7 @@ function TodayWithData() {
               </span>
               <span className="mt-1 font-display text-[34px] leading-none font-bold">{sessionName(plan.open.session, t)}</span>
               <span className="mt-1 text-[13px] text-[#B9CCC7]">{t(`plan.intent.${plan.open.session.primaryIntent}`)}</span>
+              <span className="mt-2"><ReviewMark state={sessionReview} onImage testId="today-unreviewed" /></span>
               <Link to="/plan/heute" data-testid="today-go" className="mt-3 flex min-h-12 items-center justify-center rounded-pill bg-[#F4FBF8] text-[15px] font-semibold text-[#101A18]">
                 {t('look.today.go')}
               </Link>

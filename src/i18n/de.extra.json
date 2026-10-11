@@ -3024,7 +3024,7 @@
       "EXTRAPOLATED": "übertragen"
     },
     "review": {
-      "unreviewed": "Ungeprüft",
+      "unreviewed": "Fachlich noch nicht geprüft",
       "reviewed": "Geprüft von {{name}} am {{date}}"
     },
     "limits": "Grenzen der Evidenz",
@@ -3245,7 +3245,7 @@
       "event": "Wettkampf"
     },
     "none": "Für diese Auswahl gibt es keine Vorlage.",
-    "unreviewed": "Ungeprüft",
+    "unreviewed": "Fachlich noch nicht geprüft",
     "weeksTotal": "{{n}} Wochen",
     "family": {
       "combat_grappling": "Kampfsport Grappling",

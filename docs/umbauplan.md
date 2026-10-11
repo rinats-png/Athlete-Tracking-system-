@@ -180,7 +180,26 @@ ohne Freigabe möglich waren:
    - «Stabil» heisst in der Oberfläche jetzt «keine klare Veränderung».
    - Auch der Trainernachweis nutzt `judgeChange`, statt die Schwelle
      nachzurechnen.
-3. **Kennzeichnung ungeprüfter Regeln:** siehe unten.
+3. **Kennzeichnung ungeprüfter Regeln.**
+   - Die Bibliothek trug den Hinweis schon. Wer einen Plan nur über Heute,
+     Player oder Kalender benutzte, sah ihn nie.
+   - `domain/planReview.ts` bestimmt den Prüfstand von Block und Einheit:
+     - ungeprüft, sobald eine Einheit aus einer ungeprüften Regel, einer
+       Vorlage ohne belegte Dosis oder einem nicht ausdrücklich geprüften
+       Bibliotheksplan stammt;
+     - «eigen» bei rein selbst zusammengestellten Einheiten. Dort steht kein
+       Hinweis, weil keine Regel von KYDON dahintersteht.
+   - `features/plan/ReviewMark.tsx` zeigt «Fachlich noch nicht geprüft» an
+     diesen Stellen:
+     - in der Startkarte unter Heute, im Hub, im Kalender, in der
+       Startauswahl und im Player;
+     - in der Zuweisung (Trainer) und im Planangebot (Athlet, vor der
+       Annahme).
+   - Der Kurztext «Ungeprüft» heisst überall jetzt «Fachlich noch nicht
+     geprüft», in 8 Sprachen.
+   - Die Vorschau bleibt eingeschaltet. Das ist Variante A der Einordnung;
+     Variante B, die fachliche Prüfung der wichtigsten Pläne, braucht eine
+     prüfende Person.
 4. **Bestand aus einer neueren Fassung.**
    - Der Schutz vor dem Lesen bestand schon. Gespeichert wurde trotzdem: der
      Bestand galt als «leer», die ältere Zweitschrift sprang ein, und das
@@ -196,6 +215,12 @@ Offen und nur mit Freigabe:
 - KI-Einwilligung je Nutzer (Rechtstext);
 - Live-Audit von Supabase;
 - wer die Regeln fachlich prüft.
+
+Ebenfalls offen ist der Modus `live` (`VITE_TRAINING_PLAN=on`). Dort
+liessen sich ungeprüfte Bibliothekspläne weiter übernehmen: `planReviewed`
+(library.ts) wird heute nirgends als Sperre genutzt. In der Produktion läuft
+`preview`, also greift das derzeit nicht. Vor dem Umschalten auf `live` muss
+das geschlossen werden.
 
 Ebenfalls offen ist der Blockvergleich im Trainingslog (`training.ts`,
 `blockCompare`). Er urteilt mit einer festen Schwelle von 1 % über den

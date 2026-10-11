@@ -3024,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolée"
     },
     "review": {
-      "unreviewed": "Non vérifié",
+      "unreviewed": "Pas encore validé par un expert",
       "reviewed": "Vérifié par {{name}} le {{date}}"
     },
     "limits": "Limites des preuves",
@@ -3245,7 +3245,7 @@
       "event": "Compétition"
     },
     "none": "Aucun modèle ne correspond à cette sélection.",
-    "unreviewed": "Non vérifié",
+    "unreviewed": "Pas encore validé par un expert",
     "weeksTotal": "{{n}} semaines",
     "family": {
       "combat_grappling": "Sport de combat, lutte au sol",

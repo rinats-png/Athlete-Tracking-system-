@@ -151,7 +151,7 @@ test.describe('Vorlagen: Bildschirme', () => {
     await expect(page.getByTestId('tpl-card-hyrox_prep')).toBeVisible()
     await expect(page.locator('[data-testid^="tpl-card-"]').first()).toHaveAttribute('data-testid', /grappling/)
     await expect(page.getByTestId('tpl-fit-grappling_gpp')).toHaveAttribute('data-fit', 'match')
-    await expect(page.getByTestId('tpl-card-grappling_gpp')).toContainText('Ungeprüft')
+    await expect(page.getByTestId('tpl-card-grappling_gpp')).toContainText('Fachlich noch nicht geprüft')
     await page.getByTestId('tpl-goal-power').click()
     await expect(page.getByTestId('tpl-card-grappling_build')).toBeVisible()
     await expect(page.getByTestId('tpl-card-grappling_gpp')).toHaveCount(0)

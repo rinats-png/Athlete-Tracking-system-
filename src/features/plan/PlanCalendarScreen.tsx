@@ -5,6 +5,7 @@ import { AlertTriangle, CalendarArrowDown, Check, ChevronLeft, ChevronRight, Mov
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { planMode } from '@/domain/planMode'
 import { addDays, blockEndDay, blockWeek, calendarDays, calendarWeek, missedOccurrences, mondayOf, moveOccurrence, moveWarnings, occurrences, overrideSession, weekdayOf, type CalendarDay, type Occurrence } from '@/domain/trainingBlock'
@@ -66,6 +67,7 @@ export function PlanCalendarScreen() {
   const { t } = useTranslation()
   const { trainingBlocks, saveTrainingBlock } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
+  const review = useReviewState(block)
   const today = todayStr()
   const [view, setView] = useState<View>('week')
   const [anchor, setAnchor] = useState<string | null>(null)
@@ -192,6 +194,7 @@ export function PlanCalendarScreen() {
   return (
     <div data-testid="plan-calendar">
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('cal.title')} intro={t('cal.intro')} />
+      <div className="mb-3"><ReviewMark state={review} testId="cal-unreviewed" /></div>
       <div className="mb-3 flex flex-wrap items-center gap-2" role="group" aria-label={t('cal.view')}>
         {VIEWS.map((v) => (
           <button key={v} type="button" aria-pressed={view === v} data-testid={`cal-view-${v}`} onClick={() => setView(v)} className={cn('min-h-11 rounded-pill border px-4 text-[13px]', view === v ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line')}>

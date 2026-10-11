@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { CalendarRange, Check, ClipboardList, Flag, Library, MessageSquareText, Play, Timer } from 'lucide-react'
 import { Panel } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -15,7 +16,6 @@ import { PhotoCard, Segments } from '@/components/ui/PhotoCard'
 import { HUB_IMAGES, intentImage, sessionImage } from '@/data/visuals'
 import { sessionName } from '@/features/plan/planText'
 import { daysTo } from '@/domain/weeklyPlan'
-import { TRAINING_RULES } from '@/data/trainingRules'
 import { getTest } from '@/data/testCatalog'
 import { pick } from '@/i18n/pick'
 import { cn } from '@/lib/utils'
@@ -36,6 +36,7 @@ export function PlanHubScreen() {
   const mode = planMode(import.meta.env?.VITE_TRAINING_PLAN)
   const today = new Date().toISOString().slice(0, 10)
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
+  const review = useReviewState(block)
 
   const view = useMemo(() => {
     if (!block) return null
@@ -45,13 +46,12 @@ export function PlanHubScreen() {
     const open = openSessionsOn(block, today)
     const intents = [...new Set(block.sessions.filter((s) => !s.removed).map((s) => s.primaryIntent))]
     const strengths = [...new Set(block.sessions.filter((s) => !s.removed).map((s) => s.evidenceStrength).filter((x): x is NonNullable<typeof x> => x != null))]
-    const unreviewed = block.sessions.some((s) => s.kind === 'open' || TRAINING_RULES.find((r) => r.id === s.ruleId)?.review.state !== 'reviewed')
     const monday = mondayOf(today)
     const sunday = addDays(monday, 6)
     const week7 = occurrences(block).filter((o) => o.date >= monday && o.date <= sunday).sort((a, b) => a.date.localeCompare(b.date))
     const first = block.sessions.find((s) => !s.removed)
     const image = first ? sessionImage(first) : intentImage(null)
-    return { week, current, open, intents, strengths, unreviewed, week7, image, endsIn: daysTo(blockEndDay(block), new Date()) }
+    return { week, current, open, intents, strengths, week7, image, endsIn: daysTo(blockEndDay(block), new Date()) }
   }, [block, today])
 
   if (mode === 'off') return <EmptyState title={t('plan.title')} body={t('plan.off')} />
@@ -107,6 +107,7 @@ export function PlanHubScreen() {
                   <Flag size={12} aria-hidden /> {t('planHub.competitionIn', { count: toGo })}
                 </span>
               )}
+              <ReviewMark state={review} onImage testId="hub-unreviewed" />
             </span>
           </PhotoCard>
 
@@ -156,7 +157,7 @@ export function PlanHubScreen() {
                     {t('plan.evidence.strength', { level: t(`plan.strength.${s}`) })}
                   </span>
                 ))}
-                {view.unreviewed && <span className={cn(chip, 'border-dashed text-ink-muted')}>{t('plan.review.unreviewed')}</span>}
+                <ReviewMark state={review} />
               </span>
             </summary>
             <div className="space-y-2 px-4 pb-3">

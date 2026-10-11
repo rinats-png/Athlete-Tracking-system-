@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { ChevronRight, Library, PenLine, Wrench } from 'lucide-react'
 import { Panel } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
@@ -31,6 +32,7 @@ export function TrainingStartScreen() {
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
   const today = new Date().toISOString().slice(0, 10)
   const todo = useMemo(() => (block ? openToDo(block, today) : null), [block, today])
+  const review = useReviewState(block)
 
   if (planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off') return <EmptyState title={t('plan.title')} body={t('plan.off')} />
 
@@ -79,6 +81,7 @@ export function TrainingStartScreen() {
       <Panel className="mb-4" data-testid="start-plan">
         {block && todo ? (
           <>
+            {review === 'unreviewed' && <div className="px-4 pt-3"><ReviewMark state={review} testId="start-unreviewed" /></div>}
             {group('today', todo.today)}
             {group('missed', todo.missed)}
             {group('upcoming', todo.upcoming)}

@@ -3024,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolated"
     },
     "review": {
-      "unreviewed": "Unreviewed",
+      "unreviewed": "Not yet expert-reviewed",
       "reviewed": "Reviewed by {{name}} on {{date}}"
     },
     "limits": "Limits of the evidence",
@@ -3245,7 +3245,7 @@
       "event": "Competition"
     },
     "none": "No template matches this selection.",
-    "unreviewed": "Unreviewed",
+    "unreviewed": "Not yet expert-reviewed",
     "weeksTotal": "{{n}} weeks",
     "family": {
       "combat_grappling": "Combat sport grappling",

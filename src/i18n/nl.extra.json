@@ -3024,7 +3024,7 @@
       "EXTRAPOLATED": "geëxtrapoleerd"
     },
     "review": {
-      "unreviewed": "Ongecontroleerd",
+      "unreviewed": "Nog niet vakinhoudelijk gecontroleerd",
       "reviewed": "Gecontroleerd door {{name}} op {{date}}"
     },
     "limits": "Grenzen van het bewijs",
@@ -3245,7 +3245,7 @@
       "event": "Wedstrijd"
     },
     "none": "Voor deze selectie is er geen sjabloon.",
-    "unreviewed": "Niet beoordeeld",
+    "unreviewed": "Nog niet vakinhoudelijk gecontroleerd",
     "weeksTotal": "{{n}} weken",
     "family": {
       "combat_grappling": "Vechtsport grappling",

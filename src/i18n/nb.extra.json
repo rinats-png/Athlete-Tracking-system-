@@ -3024,7 +3024,7 @@
       "EXTRAPOLATED": "ekstrapolert"
     },
     "review": {
-      "unreviewed": "Ukontrollert",
+      "unreviewed": "Ikke faglig kontrollert ennå",
       "reviewed": "Kontrollert av {{name}} den {{date}}"
     },
     "limits": "Beleggets grenser",
@@ -3245,7 +3245,7 @@
       "event": "Konkurranse"
     },
     "none": "Det finnes ingen mal for dette utvalget.",
-    "unreviewed": "Ugjennomgått",
+    "unreviewed": "Ikke faglig kontrollert ennå",
     "weeksTotal": "{{n}} uker",
     "family": {
       "combat_grappling": "Kampsport grappling",

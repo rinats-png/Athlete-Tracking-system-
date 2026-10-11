@@ -3024,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolada"
     },
     "review": {
-      "unreviewed": "Sin revisar",
+      "unreviewed": "Aún sin revisión experta",
       "reviewed": "Revisado por {{name}} el {{date}}"
     },
     "limits": "Límites de la evidencia",
@@ -3245,7 +3245,7 @@
       "event": "Competición"
     },
     "none": "No hay plantilla para esta selección.",
-    "unreviewed": "Sin revisar",
+    "unreviewed": "Aún sin revisión experta",
     "weeksTotal": "{{n}} semanas",
     "family": {
       "combat_grappling": "Deporte de combate, agarre",

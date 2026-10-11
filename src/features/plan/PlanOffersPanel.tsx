@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ReviewMark } from '@/features/plan/ReviewMark'
+import { blockReviewState, type ReviewState } from '@/domain/planReview'
+import { TRAINING_RULES } from '@/data/trainingRules'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { newId } from '@/lib/store/localStore'
@@ -37,6 +40,12 @@ export function PlanOffersPanel() {
   }, [])
 
   if (!planAssignEnabled() || offers.length === 0) return null
+
+  /** Prüfstand des angebotenen Plans — vor der Annahme sichtbar (Regel 11). */
+  const reviewOf = (a: Assignment): ReviewState | null => {
+    const r = importPlan(JSON.stringify(a.payload ?? null), { newId, now: new Date().toISOString(), startDay: new Date().toISOString().slice(0, 10), disciplineId: data.profile.disciplineId, family: familyOfDiscipline(data.profile.disciplineId), trainingAgeYears: data.profile.trainingAgeYears, mode: planMode(import.meta.env?.VITE_TRAINING_PLAN), assignmentId: a.id })
+    return r.ok ? blockReviewState(r.block, TRAINING_RULES) : null
+  }
 
   const decide = async (a: Assignment, accept: boolean) => {
     setMessage(null)
@@ -85,6 +94,7 @@ export function PlanOffersPanel() {
                 ))}
                 {minor && <p className="text-[12px] text-accent-text" data-testid="offer-minor">{t('offers.minor')}</p>}
                 <p className="text-[12px] text-ink-muted">{t('offers.revocable')}</p>
+                <ReviewMark state={reviewOf(a)} testId="offer-unreviewed" />
                 {hasActive && <p className="text-[12px] text-accent-text" data-testid="offer-blocked">{t('offers.activeBlock')}</p>}
                 <div className="flex flex-wrap gap-2">
                   <button type="button" data-testid={`offer-accept-${a.id}`} disabled={hasActive} onClick={() => void decide(a, true)} className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink disabled:opacity-45">{t('offers.accept')}</button>

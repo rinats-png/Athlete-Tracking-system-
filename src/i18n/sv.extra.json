@@ -3024,7 +3024,7 @@
       "EXTRAPOLATED": "extrapolerad"
     },
     "review": {
-      "unreviewed": "Ogranskad",
+      "unreviewed": "Ännu inte fackgranskat",
       "reviewed": "Granskad av {{name}} den {{date}}"
     },
     "limits": "Beläggens gränser",
@@ -3245,7 +3245,7 @@
       "event": "Tävling"
     },
     "none": "Det finns ingen mall för det här urvalet.",
-    "unreviewed": "Ogranskad",
+    "unreviewed": "Ännu inte fackgranskat",
     "weeksTotal": "{{n}} veckor",
     "family": {
       "combat_grappling": "Kampsport grappling",

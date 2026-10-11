@@ -12,6 +12,7 @@ import { syncAssignedCompletions } from '@/lib/assignSync'
 import { LiveHr } from '@/features/plan/LiveHr'
 import type { HrSummary } from '@/domain/liveHr'
 import { SessionWhy } from '@/features/plan/SessionWhy'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/plan/planText'
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { cn } from '@/lib/utils'
@@ -71,6 +72,7 @@ export function SessionPlayerScreen() {
   const [pickedKey, setPickedKey] = useState<string | null>(wanted ? keyOf(wanted) : null)
   const occurrence = open.find((o) => keyOf(o) === pickedKey) ?? open[0] ?? null
   const session = occurrence?.session ?? null
+  const review = useReviewState(block, session)
   const hasLibrary = session?.blocks.some((b) => b.type === 'library_exercise') ?? false
   const { exercises, index } = useLibrary(hasLibrary)
   const planSubs = index?.plans.find((p) => p.plan_id === block?.libraryPlanId)?.substitutions ?? {}
@@ -180,6 +182,7 @@ export function SessionPlayerScreen() {
       <header className="relative -mt-16 mb-4">
         <span className="label-tag">{t('player.eyebrow')} · {sessionSource(session, t)}</span>
         <h1 className="mt-1 font-display text-[36px] leading-none font-bold">{sessionName(session, t)}</h1>
+        <span className="mt-2 block"><ReviewMark state={review} testId="player-unreviewed" /></span>
         <InfoNote text={t('player.intro')} />
       </header>
       {open.length > 1 && (
