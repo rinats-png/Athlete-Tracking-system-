@@ -114,6 +114,7 @@ test.describe('Quarantäne auf dem Gerät', () => {
     // Zweiter Start ohne Speichern: derselbe Eintrag scheitert wieder, wird aber nicht doppelt abgelegt.
     await page.reload({ waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('rejected-notice')).toBeVisible()
+    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('kydon.quarantine.v1') ?? '[]').length)).toBeGreaterThan(0)
     const q = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.quarantine.v1') ?? '[]'))
     expect(q).toHaveLength(1)
     expect(q[0].kind).toBe('diary')
@@ -131,8 +132,9 @@ test.describe('Quarantäne auf dem Gerät', () => {
       localStorage.setItem('kydon.data.v1', '{"version": 42, kaputt')
     })
     await page.reload({ waitUntil: 'domcontentloaded' })
+    // Die Quarantäne wird nachgeladen (Startpaket) — kurz warten, bis sie steht.
+    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem('kydon.quarantine.v1') ?? '[]').length)).toBe(1)
     const q = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.quarantine.v1') ?? '[]'))
-    expect(q).toHaveLength(1)
     expect(q[0].kind).toBe('file')
     expect(q[0].raw).toBe('{"version": 42, kaputt')
   })
