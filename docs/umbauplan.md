@@ -210,10 +210,24 @@ ohne Freigabe möglich waren:
    - Der Einstieg wird übersprungen. Die Meldung sagt, dass Änderungen nicht
      gespeichert werden, und bietet «App neu laden» an.
 
+**Nachtrag 11.10.2026 (freigegeben):**
+- **Löschweg ganzer Athleten.**
+  - Bis dahin holte der Abgleich einen lokal gelöschten Athleten vom Server
+    zurück.
+  - Jetzt gibt es Grabsteine auf `athlete_documents` (Migration
+    `20261011100000_document_tombstones.sql`). Der Server leert dabei den
+    Inhalt und setzt alle Zeitreihen des Athleten mit auf Grabstein.
+  - `purge_expired()` entfernt Grabsteine nach 90 Tagen und läuft jetzt
+    täglich per Cron. Live war die Funktion nie eingeplant.
+  - Im Client merkt `syncState.ts` Löschungen vor, und
+    `lib/supabase/deletions.ts` entscheidet, was gelöscht oder übernommen
+    wird. Der Grabstein gewinnt.
+- **Live-Audit:** siehe `docs/live-audit.md`. Sechs Migrationen und drei
+  Edge Functions fehlen live, darunter `delete-account`.
+
 Offen und nur mit Freigabe:
-- Löschweg für ganze Athleten-Dokumente (Migration + RLS);
+- Einspielen in die Produktion (Migrationen, Edge Functions);
 - KI-Einwilligung je Nutzer (Rechtstext);
-- Live-Audit von Supabase;
 - wer die Regeln fachlich prüft.
 
 Ebenfalls offen ist der Modus `live` (`VITE_TRAINING_PLAN=on`). Dort

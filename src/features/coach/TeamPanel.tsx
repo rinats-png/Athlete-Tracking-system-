@@ -59,7 +59,7 @@ export function TeamPanel() {
 
 function useAfterTeamChange() {
   const billing = useBilling()
-  const { store, mergeAthletes, mergeSeriesRows, replacePool } = useAppData()
+  const { store, mergeAthletes, mergeSeriesRows, replacePool, dropAthletes } = useAppData()
   return async () => {
     // Ein Team gibt es nur auf dem Server — der Abgleich ist damit
     // eingeschaltet. Der Beitrittstext sagt das vorher (team.joinPrivacy).
@@ -71,7 +71,7 @@ function useAfterTeamChange() {
     await billing.refresh()
     // Gleich abgleichen, damit dieses Gerät im richtigen Bestand steht — und
     // nicht erst beim nächsten Tipp auf «Abgleichen».
-    await syncOnce(store, mergeAthletes, mergeSeriesRows, replacePool)
+    await syncOnce(store, mergeAthletes, mergeSeriesRows, replacePool, dropAthletes)
   }
 }
 

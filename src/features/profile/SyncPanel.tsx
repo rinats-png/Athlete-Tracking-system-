@@ -37,7 +37,7 @@ function readEnabled(): boolean {
 export function SyncPanel() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { store, mergeAthletes, mergeSeriesRows, replacePool, athletes } = useAppData()
+  const { store, mergeAthletes, mergeSeriesRows, replacePool, dropAthletes, athletes } = useAppData()
   const billing = useBilling()
   const [enabled, setEnabled] = useState(readEnabled)
   const [signedIn, setSignedIn] = useState<boolean | null>(null)
@@ -61,7 +61,7 @@ export function SyncPanel() {
 
   const run = async () => {
     setBusy(true)
-    const outcome = await syncOnce(store, mergeAthletes, mergeSeriesRows, replacePool)
+    const outcome = await syncOnce(store, mergeAthletes, mergeSeriesRows, replacePool, dropAthletes)
     setBusy(false)
     setReport(outcome)
     setState(readSyncState())

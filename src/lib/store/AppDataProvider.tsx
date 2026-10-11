@@ -52,6 +52,7 @@ import { workoutFromSets } from '@/domain/setLog'
 import { applySubstitution } from '@/domain/adaptation'
 import { REGISTRY_TO_LEGACY } from '@/data/library/legacyExerciseMap'
 import { AUDIT_LIMIT, emptyAthlete, type DiaryOptionalField } from './schema'
+import { markAthleteDeleted } from '@/lib/supabase/syncState'
 import { isBlankPlaceholder } from './placeholder'
 import { isEmptyEntry } from '@/domain/diary'
 import type { KioskResult } from '@/domain/kiosk'
@@ -249,6 +250,8 @@ export interface AppDataValue {
    * Nutzer im Profil.
    */
   mergeAthletes: (incoming: StoredAthlete[]) => void
+  /** Athleten entfernen, die ein anderes Gerät gelöscht hat (Grabstein vom Server). */
+  dropAthletes: (ids: string[]) => void
   /** Den Bestand auf diesem Gerät durch einen leeren ersetzen (Teamwechsel). */
   replacePool: () => StoredData
   /**
@@ -972,6 +975,8 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         // Athleten ist nicht darstellbar. Zum Leeren gibt es "alles löschen".
         const rest = store.athletes.filter((a) => a.id !== id)
         if (rest.length === 0) return
+        // Für den Abgleich vormerken — sonst holt er den Athleten vom Server zurück.
+        markAthleteDeleted(id)
         commitStore({
           ...store,
           athletes: rest,
@@ -1232,6 +1237,16 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         // Athleten kommen — sonst stünde neben dem Teambestand ein namenloser.
         const kept = current.athletes.filter((a) => !isBlankPlaceholder(a))
         const athletes = [...kept, ...fresh]
+        const activeAthleteId = athletes.some((a) => a.id === current.activeAthleteId) ? current.activeAthleteId : athletes[0].id
+        commitStore({ ...current, athletes, activeAthleteId })
+      },
+      dropAthletes: (ids) => {
+        const current = storeRef.current
+        const gone = new Set(ids)
+        const rest = current.athletes.filter((a) => !gone.has(a.id))
+        if (rest.length === current.athletes.length) return
+        // Ein Bestand ohne Athleten ist nicht darstellbar: dann ein leerer.
+        const athletes = rest.length > 0 ? rest : [emptyAthlete()]
         const activeAthleteId = athletes.some((a) => a.id === current.activeAthleteId) ? current.activeAthleteId : athletes[0].id
         commitStore({ ...current, athletes, activeAthleteId })
       },

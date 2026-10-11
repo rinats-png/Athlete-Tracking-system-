@@ -13,11 +13,15 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 
 export const OPEN_MIGRATIONS = [
+  // Live-Audit 11.10.2026: auch diese fehlt live, und push_weekly baut darauf auf.
+  '20260930100000_push_topics_activity.sql',
   '20261004100000_shared_checkins.sql',
   '20261004110000_ai_usage.sql',
   '20261004120000_push_weekly.sql',
   '20261005100000_plan_assignments.sql',
   '20261005110000_push_plan_offer.sql',
+  '20261011100000_document_tombstones.sql',
+  '20261011110000_revoke_anon_rpc.sql',
 ]
 
 export function buildBundle(read = (f) => readFileSync(`supabase/migrations/${f}`, 'utf8')) {

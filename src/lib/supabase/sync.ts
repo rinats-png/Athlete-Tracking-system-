@@ -4,6 +4,7 @@ import { isWriteLocked, type StoredAthlete, type StoredData } from '@/lib/store/
 import { carriesSeries, mergeSeries, planSeriesPush, stripSeries, type SeriesRow } from './series'
 import { clearCarryChoice, readCarryChoice } from '@/lib/coachStatus'
 import { isBlankPlaceholder } from '@/lib/store/placeholder'
+import { planDeletions, type RemoteDocHead } from './deletions'
 
 /**
  * Synchronisierung: der Bestand als Zweitschrift auf dem Server.
@@ -52,54 +53,11 @@ import { isBlankPlaceholder } from '@/lib/store/placeholder'
  * tests/sync-series.spec.ts.
  */
 
-const STATE_KEY = 'kydon.sync.v1'
-
-export interface SyncState {
-  /** Zeitstempel des Servers je Athlet (Dokument), wie zuletzt gesehen. */
-  seen: Record<string, string>
-  lastSyncedAt: string | null
-  /** Bis wann Zeitreihen-Zeilen zuletzt geholt UND geschrieben wurden (Serverzeit). */
-  seriesSyncedAt: string | null
-  /** Athleten, deren Serverstand fremd ist. Solange gesetzt: Dokument nicht schreiben. */
-  conflicts: string[]
-  /** Gegen welchen Bestand zuletzt abgeglichen wurde (owner_id). null = noch nie. */
-  pool: string | null
-}
-
-const EMPTY: SyncState = { seen: {}, lastSyncedAt: null, seriesSyncedAt: null, conflicts: [], pool: null }
-
-export function readSyncState(): SyncState {
-  try {
-    const raw = localStorage.getItem(STATE_KEY)
-    if (!raw) return EMPTY
-    const parsed = JSON.parse(raw) as Partial<SyncState>
-    return {
-      seen: typeof parsed.seen === 'object' && parsed.seen ? (parsed.seen as Record<string, string>) : {},
-      lastSyncedAt: typeof parsed.lastSyncedAt === 'string' ? parsed.lastSyncedAt : null,
-      seriesSyncedAt: typeof parsed.seriesSyncedAt === 'string' ? parsed.seriesSyncedAt : null,
-      conflicts: Array.isArray(parsed.conflicts) ? parsed.conflicts.filter((c) => typeof c === 'string') : [],
-      pool: typeof parsed.pool === 'string' ? parsed.pool : null,
-    }
-  } catch {
-    return EMPTY
-  }
-}
-
-function writeSyncState(state: SyncState): void {
-  try {
-    localStorage.setItem(STATE_KEY, JSON.stringify(state))
-  } catch {
-    /* Ohne Speicher gilt der Stand für diese Sitzung. */
-  }
-}
-
-export function clearSyncState(): void {
-  try {
-    localStorage.removeItem(STATE_KEY)
-  } catch {
-    /* Nichts zu räumen. */
-  }
-}
+// Der Abgleichsstand liegt in einer eigenen kleinen Datei: der Bestand
+// braucht `markAthleteDeleted` schon im Startpaket, der Abgleich selbst wird
+// erst nachgeladen.
+import { readSyncState, writeSyncState, EMPTY } from './syncState'
+export { readSyncState, clearSyncState, markAthleteDeleted, type SyncState } from './syncState'
 
 /**
  * Kennung dieses Geräts. Nur für die Konfliktmeldung — «auf einem anderen
@@ -156,6 +114,8 @@ export async function syncOnce(
   onPull: (athletes: StoredAthlete[]) => void,
   onSeries: (rows: SeriesRow[]) => number = () => 0,
   onPoolSwitch: () => StoredData = () => initialStore,
+  /** Athleten, die ein anderes Gerät gelöscht hat: lokal entfernen. */
+  onRemoteDelete: (athleteIds: string[]) => void = () => {},
 ): Promise<SyncReport> {
   // Liegt auf dem Gerät ein Bestand aus einer neueren Fassung, ist der
   // Bestand dieser Sitzung ein leerer Platzhalter: ihn hochzuladen hiesse,
@@ -197,11 +157,33 @@ export async function syncOnce(
   // --- 1. Dokumente holen -----------------------------------------------------
   const { data: rows, error: readError } = await supabase
     .from('athlete_documents')
-    .select('athlete_id, schema_version, document, updated_at, device_id')
+    .select('athlete_id, schema_version, document, updated_at, device_id, deleted_at')
     .eq('owner_id', uid)
   if (readError) return fail('unknown')
 
-  const remote = new Map<string, RemoteRow>((rows ?? []).map((r) => [r.athlete_id, r as RemoteRow]))
+  // --- 1a. Löschungen: Grabsteine anderer Geräte übernehmen, eigene schreiben ---
+  const deletions = planDeletions((rows ?? []) as RemoteDocHead[], store.athletes.map((a) => a.id), state.deleted)
+  const pendingDeleted = { ...state.deleted }
+  for (const id of deletions.clearPending) delete pendingDeleted[id]
+  for (const t of deletions.pushTombstones) {
+    const { error } = await supabase
+      .from('athlete_documents')
+      .update({ deleted_at: t.at, device_id: device })
+      .eq('owner_id', uid)
+      .eq('athlete_id', t.id)
+    if (error) return fail('unknown')
+    delete pendingDeleted[t.id]
+    pushed += 1
+  }
+  if (deletions.dropLocally.length > 0) {
+    onRemoteDelete(deletions.dropLocally)
+    store = { ...store, athletes: store.athletes.filter((a) => !deletions.dropLocally.includes(a.id)) }
+  }
+  for (const id of deletions.skipPull) delete seen[id]
+
+  const remote = new Map<string, RemoteRow>(
+    (rows ?? []).filter((r) => !deletions.skipPull.has(r.athlete_id)).map((r) => [r.athlete_id, r as RemoteRow]),
+  )
   const local = new Map(store.athletes.map((a) => [a.id, a]))
 
   const incoming: StoredAthlete[] = []
@@ -356,7 +338,7 @@ export async function syncOnce(
     .maybeSingle()
   const seriesSyncedAt = newest?.updated_at ?? newestServerTime ?? state.seriesSyncedAt
 
-  writeSyncState({ seen, lastSyncedAt: new Date().toISOString(), seriesSyncedAt, conflicts, pool: uid })
+  writeSyncState({ seen, lastSyncedAt: new Date().toISOString(), seriesSyncedAt, conflicts, pool: uid, deleted: pendingDeleted })
   return { ok: conflicts.length === 0, pushed, pulled, seriesPushed, seriesPulled, conflicts, reason: null, poolSwitched }
 }
 
