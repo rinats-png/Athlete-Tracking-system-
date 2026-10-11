@@ -119,3 +119,25 @@ der richtige Moment, sie zu schließen.
 
 Die Schritte 1–3 ändern die Produktion. Sie laufen nur mit ausdrücklicher
 Freigabe des Betreibers.
+
+## Nachtrag 11.10.2026: was ausgerollt ist
+
+| Schritt | Stand |
+|---|---|
+| `delete-account` | **live**, Version 1, `verify_jwt` an. Die Kontolöschung funktioniert wieder. |
+| `billing-portal` | **live**, Version 1, `verify_jwt` an |
+| Offene Migrationen | **nicht eingespielt.** Das Schreiben in die Produktionsdatenbank wurde in dieser Sitzung zweimal abgebrochen. Der Betreiber führt `supabase/einspielen/offene_migrationen.sql` im SQL-Editor aus. |
+| `push` (neue Fassung) | **bewusst nicht ausgerollt.** Sie braucht die Tabellen aus den Migrationen (`push_agenda`, `push_events`, `push_prefs`, Spalte `topics`). Ohne sie bräche auch der Erinnerungs-Push. Reihenfolge: erst Migrationen, dann `push`. |
+| `phrase` | wartet auf die Rechtsprüfung (`docs/ki-einwilligung.md` §5) |
+
+Geheimnisse: `billing-portal` braucht `STRIPE_SECRET_KEY` und `APP_ORIGIN`.
+Beide nutzt auch `create-checkout`, sie sollten also gesetzt sein. Prüfen im
+Dashboard: Edge Functions → Secrets.
+
+**Nach dem Einspielen** lesend gegenprüfen:
+- die Tabellen `ai_consents`, `plan_assignments`, `shared_checkins`,
+  `ai_usage` und `push_events` existieren;
+- `athlete_documents` hat die Spalte `deleted_at`;
+- in `cron.job` steht `purge-expired-daily`;
+- der Advisor meldet `anon` nicht mehr für `envelope_public_of`,
+  `is_analytics_admin` und `my_coaches`.
