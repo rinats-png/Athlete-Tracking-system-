@@ -7,6 +7,7 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { Thumb } from '@/components/ui/PhotoCard'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
 import { useAppData } from '@/lib/store/AppDataProvider'
+import { readActiveWorkout } from '@/lib/activeWorkout'
 import { planMode } from '@/domain/planMode'
 import { librarySession } from '@/domain/library'
 import { canStartCustom, customSession, MAX_FREE_EXERCISES, type FreePick } from '@/domain/freeSession'
@@ -15,7 +16,14 @@ import type { StoredPlannedSession } from '@/lib/store/localStore'
 import { AREA_IMAGES, goalImage, libraryExerciseImage, sessionImage } from '@/data/visuals'
 import { useLibrary, usePlanWeeks } from '@/features/library/useLibrary'
 import { GermanOnlyNote, UnreviewedBanner } from '@/features/library/bits'
-import { SetLogger, type Swap } from '@/features/plan/SetLogger'
+import { SetLogger, type SetLoggerState, type Swap } from '@/features/plan/SetLogger'
+import { useWorkoutSession } from '@/features/workout/useWorkoutSession'
+import { WorkoutConflict } from '@/features/workout/WorkoutConflict'
+import type { SummaryState } from '@/features/workout/WorkoutSummaryScreen'
+import { measuredMinutes } from '@/domain/activeWorkout'
+import { formatClock } from '@/domain/workoutClock'
+import { summarizeSession } from '@/domain/workoutSummary'
+import { REGISTRY_TO_LEGACY } from '@/data/library/legacyExerciseMap'
 import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/plan/planText'
 import { cn } from '@/lib/utils'
 
@@ -27,9 +35,13 @@ import { cn } from '@/lib/utils'
  *   Player    führt die Einheit mit Satz-Log; Speichern legt ein Training
  *             und eine Einheit im Tagebuch an — kein Termin wird abgehakt.
  *
- * Die Einheit reist im Zustand der Navigation zum Player (übersteht Neuladen).
- * Fehlt er, weil die Adresse direkt aufgerufen wurde, sagt der Player das und
- * führt zurück zur Auswahl.
+ * Die Einheit reist im Zustand der Navigation zum Player und wird als
+ * laufende Einheit gesichert (übersteht Neuladen und den Weg über die Leiste
+ * «Training läuft»). Fehlt beides, sagt der Player das und führt zurück.
+ *
+ * Gespeichert wird in jeder Stufe, auch ohne Plus (Entscheidung 13.10.2026):
+ * Tagebuch und Trainingslog bekommen die Einheit; nur die Auswertung im
+ * Trainingslog bleibt eine Frage der Stufe. Danach die Zusammenfassung.
  */
 const field = 'mt-1.5 block min-h-11 w-full rounded-md border border-line bg-surface px-3 text-[16px]'
 const freeId = () => `free-${Date.now().toString(36)}`
@@ -108,7 +120,8 @@ export function FreeBuildScreen() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { exercises } = useLibrary()
-  const [title, setTitle] = useState('')
+  // Vorbelegt, damit «Kraft frei» ohne Tippen startet: Übung wählen, los.
+  const [title, setTitle] = useState(() => t('free.defaultTitle'))
   const [query, setQuery] = useState('')
   const [picks, setPicks] = useState<FreePick[]>([])
 
@@ -189,12 +202,20 @@ export function FreePlayerScreen() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
-  const { trainingBlocks, logFreeSession } = useAppData()
-  const session = (location.state as { session?: StoredPlannedSession } | null)?.session ?? null
+  const { trainingBlocks, logFreeSession, workouts } = useAppData()
+  const navState = location.state as { session?: StoredPlannedSession; camera?: boolean } | null
+  const fromNav = navState?.session ?? null
+  const [resumed] = useState(() => {
+    const raw = readActiveWorkout()
+    const d = raw?.kind === 'free' ? (raw.data as { session?: StoredPlannedSession; logger?: SetLoggerState } | null) : null
+    return d?.session && Array.isArray(d.session.blocks) && (!fromNav || fromNav.id === d.session.id) ? d : null
+  })
+  const session = fromNav ?? resumed?.session ?? null
   const { exercises } = useLibrary(session != null)
   const [log, setLog] = useState<{ sets: SetLogEntry[]; swaps: Swap[] }>({ sets: [], swaps: [] })
-  const [minutes, setMinutes] = useState<number | null>(session?.plannedDurationMin ?? null)
+  const [minutes, setMinutes] = useState<number | null>(null)
   const [rpe, setRpe] = useState<number | null>(null)
+  const run = useWorkoutSession({ kind: 'free', title: session ? sessionName(session, t) : '', path: session ? '/plan/frei' : null, data: session ? { session } : undefined })
 
   if (off()) return <EmptyState title={t('plan.title')} body={t('plan.off')} />
   if (!session) return <EmptyState title={t('free.eyebrow')} body={t('free.lost')} action={<Link to="/plan/start" className="inline-flex min-h-11 items-center text-accent-text underline">{t('start.title')}</Link>} />
@@ -202,8 +223,12 @@ export function FreePlayerScreen() {
   const save = () => {
     if (rpe == null) return
     const today = new Date().toISOString().slice(0, 10)
-    logFreeSession({ day: today, title: sessionName(session, t), durationMin: Math.min(600, Math.max(1, minutes ?? 30)), rpe, kind: diaryKindOf(session.primaryIntent), sets: log.sets })
-    navigate('/training')
+    const durationMin = Math.min(600, Math.max(1, minutes ?? (run.workout ? measuredMinutes(run.workout, Date.now()) : 30)))
+    const summary = summarizeSession(log.sets, workouts, (id) => REGISTRY_TO_LEGACY[id])
+    logFreeSession({ day: today, title: sessionName(session, t), durationMin, rpe, kind: diaryKindOf(session.primaryIntent), sets: log.sets })
+    run.clear()
+    const state: SummaryState = { title: sessionName(session, t), kind: 'strength', durationMin, rpe, hr: null, summary, distanceM: null, rounds: null, back: '/plan' }
+    navigate('/plan/fertig', { state })
   }
 
   return (
@@ -216,14 +241,28 @@ export function FreePlayerScreen() {
         </Link>
       </div>
       <header className="relative -mt-16 mb-4">
+        {run.workout && <p className="label-tag mb-1 !text-accent-text" data-testid="player-elapsed">{t('workout.running', { time: formatClock(run.elapsedS) })}</p>}
         <span className="label-tag">{t('free.eyebrow')} · {sessionSource(session, t)}</span>
         <h1 className="mt-1 font-display text-[36px] leading-none font-bold">{sessionName(session, t)}</h1>
         <p className="mt-2 text-[12px] text-ink-secondary">{t('free.noSlot')}</p>
       </header>
+      {run.conflict && <WorkoutConflict other={run.conflict} onReplace={() => run.replace({ session })} />}
       <Panel className="mb-4">
         <div className="px-4 py-4">
           {session.blocks.map((b, i) => (b.type === 'library_exercise' || b.type === 'strength' || b.type === 'exercise' ? null : <p key={i} className="text-[14px]">{blockText(b, t)}</p>))}
-          <SetLogger session={session} exercises={exercises} planSubs={{}} blocks={trainingBlocks} onChange={setLog} canKeep={false} />
+          <SetLogger
+            session={session}
+            exercises={exercises}
+            planSubs={{}}
+            blocks={trainingBlocks}
+            canKeep={false}
+            initial={resumed?.logger ?? null}
+            autoCamera={navState?.camera === true && !resumed}
+            onChange={(next) => {
+              setLog(next)
+              if (run.workout) run.setData({ session, logger: next.logger })
+            }}
+          />
         </div>
       </Panel>
       <Panel data-testid="free-finish">
@@ -231,7 +270,7 @@ export function FreePlayerScreen() {
         <div className="space-y-3 px-4 pb-4">
           <label className="block text-[13px]">
             <span className="label-tag">{t('player.minutes')}</span>
-            <input type="number" inputMode="numeric" min={1} max={600} value={minutes ?? ''} onChange={(e) => setMinutes(e.target.value === '' ? null : Number(e.target.value))} data-testid="free-minutes" className="mt-1.5 min-h-11 w-28 rounded-md border border-line bg-surface px-3 text-[16px]" />
+            <input type="number" inputMode="numeric" min={1} max={600} value={minutes ?? ''} placeholder={run.workout ? String(measuredMinutes(run.workout, run.now)) : undefined} onChange={(e) => setMinutes(e.target.value === '' ? null : Number(e.target.value))} data-testid="free-minutes" className="mt-1.5 min-h-11 w-28 rounded-md border border-line bg-surface px-3 text-[16px]" />
           </label>
           <div role="radiogroup" aria-label={t('player.rpe')}>
             <span className="label-tag">{t('player.rpe')}</span>

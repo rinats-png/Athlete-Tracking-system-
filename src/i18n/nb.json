@@ -26,8 +26,8 @@
       "athletePerformance": "Prestasjon",
       "athleteTest": "Test",
       "athleteMore": "Mer",
-      "athletePlan": "Plan",
-      "coachPlan": "Plan",
+      "athletePlan": "Trening",
+      "coachPlan": "Trening",
       "dockDiary": "Dagbok",
       "dockLoad": "Belastning",
       "dockHealth": "Helse",
@@ -53,8 +53,8 @@
     "athletePerformance": "Prestasjon",
     "athleteTest": "Test",
     "athleteMore": "Mer",
-    "athletePlan": "Plan",
-    "coachPlan": "Plan"
+    "athletePlan": "Trening",
+    "coachPlan": "Trening"
   },
   "actions": {
     "startTest": "Start test",
@@ -2048,5 +2048,17 @@
     "conflict": "En utøver er endret annerledes på en annen enhet. KYDON har ikke overskrevet noe — bestem i profilen.",
     "signIn": "Logg inn igjen",
     "open": "Til synkronisering"
+  },
+  "quickStart": {
+    "title": "Kom i gang nå — uten plan",
+    "strength": "Fri styrke",
+    "run": "Løp",
+    "clock": "Runder",
+    "camera": "Kamera",
+    "start": "Start trening",
+    "freeTitle": "Fri trening",
+    "freeSub": "Uten plan, lagres — også uten Plus.",
+    "freeLabel": "Uten plan",
+    "otherDays": "Andre dager og flere veier"
   }
 }

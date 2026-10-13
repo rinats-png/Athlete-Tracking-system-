@@ -26,8 +26,8 @@
       "athletePerformance": "Performance",
       "athleteTest": "Test",
       "athleteMore": "More",
-      "athletePlan": "Plan",
-      "coachPlan": "Plan",
+      "athletePlan": "Training",
+      "coachPlan": "Training",
       "dockDiary": "Diary",
       "dockLoad": "Load",
       "dockHealth": "Health",
@@ -53,8 +53,8 @@
     "athletePerformance": "Performance",
     "athleteTest": "Test",
     "athleteMore": "More",
-    "athletePlan": "Plan",
-    "coachPlan": "Plan"
+    "athletePlan": "Training",
+    "coachPlan": "Training"
   },
   "actions": {
     "startTest": "Start test",
@@ -2048,5 +2048,17 @@
     "conflict": "An athlete was changed differently on another device. KYDON overwrote nothing — decide in your profile.",
     "signIn": "Sign in again",
     "open": "Open sync"
+  },
+  "quickStart": {
+    "title": "Go now — no plan needed",
+    "strength": "Free strength",
+    "run": "Run",
+    "clock": "Rounds",
+    "camera": "Camera",
+    "start": "Start training",
+    "freeTitle": "Free training",
+    "freeSub": "No plan, still saved — even without Plus.",
+    "freeLabel": "No plan",
+    "otherDays": "Other days and more options"
   }
 }

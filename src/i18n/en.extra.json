@@ -3170,8 +3170,8 @@
     "save": "Log session"
   },
   "planHub": {
-    "eyebrow": "Training",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Training",
     "competition": "Goal: {{name}}",
     "competitionUnnamed": "your competition",
     "empty": {
@@ -4043,7 +4043,8 @@
     "start": "Start session",
     "lost": "No session is selected here. Pick one under “Start training”.",
     "noSlot": "Free training: counts as training but does not tick off a plan date.",
-    "save": "Save to training log"
+    "save": "Save to training log",
+    "defaultTitle": "Free strength training"
   },
   "aiConsent": {
     "title": "Consent: have texts phrased by a language model",
@@ -4173,5 +4174,196 @@
     "grantCoach": "Confirm and sync",
     "withdrawButton": "Withdraw consent",
     "cancel": "Cancel"
+  },
+  "workout": {
+    "running": "Running · {{time}}",
+    "start": "Start",
+    "pause": "Pause",
+    "paused": "Paused",
+    "resume": "Resume",
+    "finish": "Finish",
+    "save": "Save",
+    "continue": "Keep training",
+    "discard": "Discard",
+    "discardConfirm": "Really discard",
+    "close": "Close",
+    "minimize": "Leave, training keeps running",
+    "voice": "Spoken cues",
+    "bar": {
+      "running": "Training running · {{time}}",
+      "paused": "Training paused · {{time}}",
+      "rest": "Rest {{time}}",
+      "back": "Back"
+    },
+    "conflict": {
+      "title": "Already running: {{title}}",
+      "body": "Carry on there — or discard it and start fresh here.",
+      "continue": "Carry on there",
+      "replace": "Discard and start here"
+    },
+    "focus": {
+      "exercise": "Exercise {{n}} of {{of}}",
+      "set": "Set {{n}} of {{of}}",
+      "target": "Target {{target}}",
+      "last": "Last time: {{value}}",
+      "less": "Less {{field}}",
+      "more": "More {{field}}",
+      "done": "Set done",
+      "allDone": "All sets logged. Finish below."
+    },
+    "rest": {
+      "title": "Rest",
+      "of": "of {{total}}",
+      "next": "Up next",
+      "sound": "Sound at 3-2-1 and at the end · works offline too",
+      "skip": "Skip rest"
+    },
+    "camera": {
+      "chip": "Camera counts",
+      "title": "Camera counts along",
+      "close": "Close camera",
+      "onDevice": "On this device only",
+      "loading": "Loading camera and detection …",
+      "denied": "No access to the camera.",
+      "unsupported": "Detection does not run on this device.",
+      "fallback": "Count yourself as usual and enter the reps.",
+      "back": "Back to the set",
+      "setupTitle": "Set up camera",
+      "hint": {
+        "squat": "{{name}}: place it to the side, whole body in frame.",
+        "hinge": "{{name}}: place it to the side, whole body in frame.",
+        "push": "{{name}}: place it to the side, shoulder, elbow and hand in frame.",
+        "pull": "{{name}}: from the front or side, shoulder, elbow and hand in frame."
+      },
+      "check": {
+        "body": "Body visible",
+        "light": "Enough light",
+        "still": "Phone is still"
+      },
+      "ok": "met",
+      "waiting": "not yet",
+      "privacy": "Detection runs only on your device. No image and no video leaves the phone or is stored — only the numbers are saved.",
+      "ofTarget": "of {{target}} reps",
+      "tempo": "Tempo per rep · relative",
+      "estimate": "Estimate",
+      "loss": "Tempo loss in this set so far −{{percent}} %. A comparison with other days only comes once your measurement error is known.",
+      "lossNone": "Tempo appears from the second rep.",
+      "startTitle": "Camera counts",
+      "startIntro": "Pick an exercise. Phone on the floor, do your set — the camera counts the reps.",
+      "pattern": {
+        "squat": "Squat pattern",
+        "hinge": "Hip hinge",
+        "push": "Push",
+        "pull": "Pull"
+      }
+    },
+    "clock": {
+      "title": "Rounds and intervals",
+      "intro": "A clock for combat-sport rounds, Tabata, EMOM, AMRAP and intervals. Sound, vibration and voice — the screen stays on.",
+      "presets": "Presets",
+      "preset": {
+        "boxing": "Boxing 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervals"
+      },
+      "work": "Work (sec)",
+      "total": "Total time (sec)",
+      "rest": "Rest (sec)",
+      "rounds": "Rounds",
+      "warn": "Warning (sec)",
+      "totalTime": "Total duration: {{time}}",
+      "prep": "Get ready",
+      "round": "Round {{n}}",
+      "restPhase": "Rest",
+      "amrapLabel": "As many rounds as possible",
+      "amrapTap": "Round done · {{n}}",
+      "done": "Done",
+      "lastSeconds": "Last {{count}} seconds",
+      "elapsed": "Total {{time}}",
+      "skip": "Next",
+      "say": {
+        "round": "Round {{n}}",
+        "go": "Go",
+        "rest": "Rest",
+        "warn": "Last {{count}} seconds",
+        "done": "Done"
+      }
+    },
+    "punch": {
+      "enable": "Count punches (microphone, preview)",
+      "title": "Punches (microphone)",
+      "calibrate": "Trial: punch ten times — {{n}} of 10",
+      "denied": "No access to the microphone.",
+      "estimate": "Estimate · preview, not validated"
+    },
+    "run": {
+      "title": "Run",
+      "intro": "Time, distance, pace and heart rate. Free or as intervals by distance.",
+      "mode": "Type of run",
+      "mode_free": "Free",
+      "mode_intervals": "Intervals",
+      "reps": "Repetitions",
+      "workM": "Distance (m)",
+      "restS": "Jog recovery (sec)",
+      "privacy": "Location is only used while the app is open, and only on the device. Distance, time and laps are saved — no track and no place.",
+      "freeTitle": "Run",
+      "intervalsTitle": "Intervals {{reps}} × {{m}} m",
+      "gps_wait": "Location …",
+      "gps_ok": "Location good",
+      "gps_weak": "Location imprecise",
+      "gps_off": "No location",
+      "freeLabel": "Running time",
+      "workLabel": "Interval {{n}} of {{of}}",
+      "restLabel": "Jog recovery after {{n}}",
+      "doneLabel": "All intervals done",
+      "left": "{{m}} m to go",
+      "pace": "Pace",
+      "distance": "Distance",
+      "total": "Total",
+      "splitsN": "Laps",
+      "lap": "Lap",
+      "finishHint": "Pause first to finish.",
+      "say": {
+        "work": "Interval {{n}}",
+        "rest": "Jog recovery",
+        "last100": "One hundred metres to go",
+        "done": "All intervals done"
+      }
+    },
+    "summary": {
+      "title": "Summary",
+      "lost": "There is no session here. You will find saved ones in the diary.",
+      "toTraining": "To training",
+      "saved": "Saved · {{date}}",
+      "duration": "Duration measured",
+      "sets": "Sets",
+      "distance": "Distance",
+      "pace": "Pace",
+      "rounds": "Rounds",
+      "hr": "HR avg / max",
+      "compare": "Compared with last time",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} reps",
+      "first": "The first time with this exercise — from now on there is a comparison.",
+      "unknown_one": "Last time {{previous}}. Measurement error not yet known: {{count}} more session until a verdict.",
+      "unknown_other": "Last time {{previous}}. Measurement error not yet known: {{count}} more sessions until a verdict.",
+      "v": {
+        "better": "Beyond your measurement error (from {{detectable}} %), better.",
+        "worse": "Beyond your measurement error (from {{detectable}} %), worse.",
+        "within_noise": "Within the noise, no proven difference (threshold {{detectable}} %)."
+      },
+      "estimate": "e1RM is an estimate.",
+      "note": "The comparison is with the last session of the same exercise. “Better” only once the change exceeds your own variation — that takes at least four sessions.",
+      "splits": "Splits",
+      "retest": "Next retest:",
+      "retestIn_one": "in {{count}} day",
+      "retestIn_other": "in {{count}} days",
+      "view": "View",
+      "done": "Done"
+    }
   }
 }

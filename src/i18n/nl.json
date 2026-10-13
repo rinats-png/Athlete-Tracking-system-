@@ -26,8 +26,8 @@
       "athletePerformance": "Prestatie",
       "athleteTest": "Test",
       "athleteMore": "Meer",
-      "athletePlan": "Plan",
-      "coachPlan": "Plan",
+      "athletePlan": "Training",
+      "coachPlan": "Training",
       "dockDiary": "Dagboek",
       "dockLoad": "Belasting",
       "dockHealth": "Gezondheid",
@@ -53,8 +53,8 @@
     "athletePerformance": "Prestatie",
     "athleteTest": "Test",
     "athleteMore": "Meer",
-    "athletePlan": "Plan",
-    "coachPlan": "Plan"
+    "athletePlan": "Training",
+    "coachPlan": "Training"
   },
   "actions": {
     "startTest": "Test starten",
@@ -2048,5 +2048,17 @@
     "conflict": "Een atleet is op een ander apparaat anders gewijzigd. KYDON heeft niets overschreven — beslis in je profiel.",
     "signIn": "Opnieuw inloggen",
     "open": "Naar synchronisatie"
+  },
+  "quickStart": {
+    "title": "Meteen beginnen — zonder plan",
+    "strength": "Vrije kracht",
+    "run": "Hardlopen",
+    "clock": "Rondes",
+    "camera": "Camera",
+    "start": "Training starten",
+    "freeTitle": "Vrije training",
+    "freeSub": "Zonder plan, wordt opgeslagen — ook zonder Plus.",
+    "freeLabel": "Zonder plan",
+    "otherDays": "Andere dagen en meer mogelijkheden"
   }
 }

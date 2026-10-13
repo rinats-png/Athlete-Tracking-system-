@@ -105,7 +105,9 @@ test.describe('Auslieferung', () => {
     // Ein Platzhalter in connect-src würde jedes fremde Supabase-Projekt
     // erlauben — dann schützt die Regel nichts mehr.
     expect(csp).not.toContain('*.supabase.co')
-    expect(csp, 'unsafe-eval hebelt die Skriptregel aus').not.toContain('unsafe-eval')
+    // 'wasm-unsafe-eval' erlaubt nur das Übersetzen von WebAssembly (Kamera-
+    // erkennung, MediaPipe von der eigenen Herkunft), kein eval() von Skripten.
+    expect(csp, 'unsafe-eval hebelt die Skriptregel aus').not.toContain("'unsafe-eval'")
     // 'unsafe-inline' ist NUR bei style-src erlaubt (Diagramme setzen Stile
     // inline). Bei script-src wäre es die Lücke, die die Regel verhindern soll.
     const scriptSrc = csp.match(/script-src ([^;]+)/)?.[1] ?? ''

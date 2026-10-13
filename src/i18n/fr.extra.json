@@ -3170,8 +3170,8 @@
     "save": "Enregistrer la séance"
   },
   "planHub": {
-    "eyebrow": "Entraînement",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Entraînement",
     "competition": "Objectif : {{name}}",
     "competitionUnnamed": "ta compétition",
     "empty": {
@@ -4043,7 +4043,8 @@
     "start": "Lancer la séance",
     "lost": "Aucune séance n’est choisie ici. Choisis-en une dans « Commencer l’entraînement ».",
     "noSlot": "Entraînement libre : compte comme entraînement, mais ne coche aucune date du plan.",
-    "save": "Enregistrer dans le journal"
+    "save": "Enregistrer dans le journal",
+    "defaultTitle": "Musculation libre"
   },
   "aiConsent": {
     "title": "Consentement : faire formuler des textes par un modèle de langage",
@@ -4173,5 +4174,196 @@
     "grantCoach": "Confirmer et synchroniser",
     "withdrawButton": "Retirer le consentement",
     "cancel": "Annuler"
+  },
+  "workout": {
+    "running": "En cours · {{time}}",
+    "start": "Démarrer",
+    "pause": "Pause",
+    "paused": "En pause",
+    "resume": "Reprendre",
+    "finish": "Terminer",
+    "save": "Enregistrer",
+    "continue": "Continuer l’entraînement",
+    "discard": "Abandonner",
+    "discardConfirm": "Vraiment abandonner",
+    "close": "Fermer",
+    "minimize": "Quitter, l’entraînement continue",
+    "voice": "Annonces vocales",
+    "bar": {
+      "running": "Entraînement en cours · {{time}}",
+      "paused": "Entraînement en pause · {{time}}",
+      "rest": "Récup {{time}}",
+      "back": "Retour"
+    },
+    "conflict": {
+      "title": "Déjà en cours : {{title}}",
+      "body": "Continue là-bas — ou abandonne-le et recommence ici.",
+      "continue": "Continuer là-bas",
+      "replace": "Abandonner et démarrer ici"
+    },
+    "focus": {
+      "exercise": "Exercice {{n}} sur {{of}}",
+      "set": "Série {{n}} sur {{of}}",
+      "target": "Objectif {{target}}",
+      "last": "La dernière fois : {{value}}",
+      "less": "{{field}} en moins",
+      "more": "{{field}} en plus",
+      "done": "Série terminée",
+      "allDone": "Toutes les séries sont saisies. Termine en bas."
+    },
+    "rest": {
+      "title": "Récupération",
+      "of": "sur {{total}}",
+      "next": "Ensuite",
+      "sound": "Son à 3-2-1 et à la fin · même hors ligne",
+      "skip": "Passer la récupération"
+    },
+    "camera": {
+      "chip": "La caméra compte",
+      "title": "La caméra compte avec toi",
+      "close": "Fermer la caméra",
+      "onDevice": "Uniquement sur l’appareil",
+      "loading": "Chargement de la caméra et de la détection …",
+      "denied": "Pas d’accès à la caméra.",
+      "unsupported": "La détection ne fonctionne pas sur cet appareil.",
+      "fallback": "Compte toi-même comme d’habitude et saisis les répétitions.",
+      "back": "Retour à la série",
+      "setupTitle": "Installer la caméra",
+      "hint": {
+        "squat": "{{name}} : pose-le de côté, corps entier dans l’image.",
+        "hinge": "{{name}} : pose-le de côté, corps entier dans l’image.",
+        "push": "{{name}} : pose-le de côté, épaule, coude et main dans l’image.",
+        "pull": "{{name}} : de face ou de côté, épaule, coude et main dans l’image."
+      },
+      "check": {
+        "body": "Corps visible",
+        "light": "Lumière suffisante",
+        "still": "Téléphone immobile"
+      },
+      "ok": "OK",
+      "waiting": "pas encore",
+      "privacy": "La détection fonctionne uniquement sur ton appareil. Aucune image ni vidéo ne quitte le téléphone ni n’est enregistrée — seuls les chiffres sont enregistrés.",
+      "ofTarget": "sur {{target}} rép.",
+      "tempo": "Vitesse par répétition · relative",
+      "estimate": "Estimation",
+      "loss": "Perte de vitesse dans la série jusqu’ici −{{percent}} %. Une comparaison avec d’autres jours ne viendra qu’une fois ton erreur de mesure connue.",
+      "lossNone": "La vitesse apparaît à partir de la deuxième répétition.",
+      "startTitle": "La caméra compte",
+      "startIntro": "Choisis un exercice. Téléphone au sol, fais ta série — la caméra compte les répétitions.",
+      "pattern": {
+        "squat": "Schéma squat",
+        "hinge": "Flexion de hanche",
+        "push": "Pousser",
+        "pull": "Tirer"
+      }
+    },
+    "clock": {
+      "title": "Rounds et intervalles",
+      "intro": "Un chrono pour les rounds de sports de combat, Tabata, EMOM, AMRAP et intervalles. Son, vibration et annonce — l’écran reste allumé.",
+      "presets": "Modèles",
+      "preset": {
+        "boxing": "Boxe 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervalles"
+      },
+      "work": "Effort (s)",
+      "total": "Durée totale (s)",
+      "rest": "Récup (s)",
+      "rounds": "Rounds",
+      "warn": "Avertissement (s)",
+      "totalTime": "Durée totale : {{time}}",
+      "prep": "Ça commence",
+      "round": "Round {{n}}",
+      "restPhase": "Récup",
+      "amrapLabel": "Autant de tours que possible",
+      "amrapTap": "Tour terminé · {{n}}",
+      "done": "Terminé",
+      "lastSeconds": "Dernières {{count}} secondes",
+      "elapsed": "Total {{time}}",
+      "skip": "Suivant",
+      "say": {
+        "round": "Round {{n}}",
+        "go": "Go",
+        "rest": "Récup",
+        "warn": "Dernières {{count}} secondes",
+        "done": "Terminé"
+      }
+    },
+    "punch": {
+      "enable": "Compter les coups (micro, aperçu)",
+      "title": "Coups (micro)",
+      "calibrate": "Essai : frappe dix fois — {{n}} sur 10",
+      "denied": "Pas d’accès au micro.",
+      "estimate": "Estimation · aperçu, non validé"
+    },
+    "run": {
+      "title": "Course",
+      "intro": "Temps, distance, allure et pouls. Libre ou en intervalles par distance.",
+      "mode": "Type de course",
+      "mode_free": "Libre",
+      "mode_intervals": "Intervalles",
+      "reps": "Répétitions",
+      "workM": "Distance (m)",
+      "restS": "Récup trottinée (s)",
+      "privacy": "La position n’est utilisée que tant que l’app est ouverte, et uniquement sur l’appareil. Sont enregistrés distance, temps et tours — aucun tracé et aucun lieu.",
+      "freeTitle": "Course",
+      "intervalsTitle": "Intervalles {{reps}} × {{m}} m",
+      "gps_wait": "Position …",
+      "gps_ok": "Position bonne",
+      "gps_weak": "Position imprécise",
+      "gps_off": "Pas de position",
+      "freeLabel": "Temps de course",
+      "workLabel": "Intervalle {{n}} sur {{of}}",
+      "restLabel": "Récup trottinée après {{n}}",
+      "doneLabel": "Tous les intervalles terminés",
+      "left": "encore {{m}} m",
+      "pace": "Allure",
+      "distance": "Distance",
+      "total": "Total",
+      "splitsN": "Tours",
+      "lap": "Tour",
+      "finishHint": "Mets d’abord en pause pour terminer.",
+      "say": {
+        "work": "Intervalle {{n}}",
+        "rest": "Récup trottinée",
+        "last100": "Encore cent mètres",
+        "done": "Tous les intervalles terminés"
+      }
+    },
+    "summary": {
+      "title": "Résumé",
+      "lost": "Il n’y a pas de séance ici. Tu trouves les séances enregistrées dans le journal.",
+      "toTraining": "Vers l’entraînement",
+      "saved": "Enregistré · {{date}}",
+      "duration": "Durée mesurée",
+      "sets": "Séries",
+      "distance": "Distance",
+      "pace": "Allure",
+      "rounds": "Rounds",
+      "hr": "Pouls moy. / max",
+      "compare": "Par rapport à la dernière fois",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} rép.",
+      "first": "La première fois avec cet exercice — désormais il y aura une comparaison.",
+      "unknown_one": "La dernière fois {{previous}}. Erreur de mesure encore inconnue : encore {{count}} séance avant un verdict.",
+      "unknown_other": "La dernière fois {{previous}}. Erreur de mesure encore inconnue : encore {{count}} séances avant un verdict.",
+      "v": {
+        "better": "Au-delà de ton erreur de mesure (à partir de {{detectable}} %), mieux.",
+        "worse": "Au-delà de ton erreur de mesure (à partir de {{detectable}} %), moins bien.",
+        "within_noise": "Dans le bruit, pas de différence établie (seuil {{detectable}} %)."
+      },
+      "estimate": "Le e1RM est une estimation.",
+      "note": "La comparaison se fait avec la dernière séance du même exercice. « Mieux » seulement quand le changement dépasse ta propre variation — il faut pour cela au moins quatre séances.",
+      "splits": "Segments",
+      "retest": "Prochain retest :",
+      "retestIn_one": "dans {{count}} jour",
+      "retestIn_other": "dans {{count}} jours",
+      "view": "Voir",
+      "done": "Terminé"
+    }
   }
 }

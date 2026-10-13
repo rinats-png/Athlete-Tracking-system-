@@ -3170,8 +3170,8 @@
     "save": "Einheit eintragen"
   },
   "planHub": {
-    "eyebrow": "Training",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Training",
     "competition": "Ziel: {{name}}",
     "competitionUnnamed": "dein Wettkampf",
     "empty": {
@@ -4043,7 +4043,8 @@
     "start": "Einheit starten",
     "lost": "Hier ist keine Einheit gewählt. Wähle sie unter «Training starten» aus.",
     "noSlot": "Freies Training: zählt als Training, hakt aber keinen Termin im Plan ab.",
-    "save": "Speichern und ins Trainingslog"
+    "save": "Speichern und ins Trainingslog",
+    "defaultTitle": "Freies Krafttraining"
   },
   "aiConsent": {
     "title": "Einwilligung: Texte von einem Sprachmodell formulieren lassen",
@@ -4173,5 +4174,196 @@
     "grantCoach": "Bestätigen und abgleichen",
     "withdrawButton": "Einwilligung widerrufen",
     "cancel": "Abbrechen"
+  },
+  "workout": {
+    "running": "Läuft · {{time}}",
+    "start": "Starten",
+    "pause": "Pause",
+    "paused": "Pausiert",
+    "resume": "Weiter",
+    "finish": "Beenden",
+    "save": "Speichern",
+    "continue": "Weitertrainieren",
+    "discard": "Verwerfen",
+    "discardConfirm": "Wirklich verwerfen",
+    "close": "Schließen",
+    "minimize": "Verlassen, Training läuft weiter",
+    "voice": "Ansagen (Sprache)",
+    "bar": {
+      "running": "Training läuft · {{time}}",
+      "paused": "Training pausiert · {{time}}",
+      "rest": "Pause {{time}}",
+      "back": "Zurück"
+    },
+    "conflict": {
+      "title": "Es läuft schon: {{title}}",
+      "body": "Mach dort weiter — oder verwirf es und starte hier neu.",
+      "continue": "Dort weitermachen",
+      "replace": "Verwerfen und hier starten"
+    },
+    "focus": {
+      "exercise": "Übung {{n}} von {{of}}",
+      "set": "Satz {{n}} von {{of}}",
+      "target": "Ziel {{target}}",
+      "last": "Letztes Mal: {{value}}",
+      "less": "{{field}} weniger",
+      "more": "{{field}} mehr",
+      "done": "Satz fertig",
+      "allDone": "Alle Sätze erfasst. Unten abschließen."
+    },
+    "rest": {
+      "title": "Pause",
+      "of": "von {{total}}",
+      "next": "Als Nächstes",
+      "sound": "Ton bei 3-2-1 und am Ende · auch ohne Netz",
+      "skip": "Pause überspringen"
+    },
+    "camera": {
+      "chip": "Kamera zählt",
+      "title": "Kamera zählt mit",
+      "close": "Kamera schließen",
+      "onDevice": "Nur auf dem Gerät",
+      "loading": "Kamera und Erkennung werden geladen …",
+      "denied": "Kein Zugriff auf die Kamera.",
+      "unsupported": "Die Erkennung läuft auf diesem Gerät nicht.",
+      "fallback": "Zähl wie gewohnt selbst und trag die Wiederholungen ein.",
+      "back": "Zurück zum Satz",
+      "setupTitle": "Kamera einrichten",
+      "hint": {
+        "squat": "{{name}}: seitlich aufstellen, ganzer Körper im Bild.",
+        "hinge": "{{name}}: seitlich aufstellen, ganzer Körper im Bild.",
+        "push": "{{name}}: seitlich aufstellen, Schulter, Ellbogen und Hand im Bild.",
+        "pull": "{{name}}: von vorn oder seitlich, Schulter, Ellbogen und Hand im Bild."
+      },
+      "check": {
+        "body": "Körper sichtbar",
+        "light": "Licht ausreichend",
+        "still": "Telefon steht still"
+      },
+      "ok": "erfüllt",
+      "waiting": "noch nicht",
+      "privacy": "Die Erkennung läuft nur auf deinem Gerät. Kein Bild und kein Video verlässt das Telefon oder wird gespeichert — gespeichert werden nur die Zahlen.",
+      "ofTarget": "von {{target}} Wdh",
+      "tempo": "Tempo je Wiederholung · relativ",
+      "estimate": "Schätzung",
+      "loss": "Tempoverlust im Satz bisher −{{percent}} %. Ein Vergleich mit anderen Tagen kommt erst, wenn dein Messfehler bekannt ist.",
+      "lossNone": "Das Tempo erscheint ab der zweiten Wiederholung.",
+      "startTitle": "Kamera zählt",
+      "startIntro": "Wähle eine Übung. Telefon auf den Boden, Satz machen — die Kamera zählt die Wiederholungen.",
+      "pattern": {
+        "squat": "Kniebeuge-Muster",
+        "hinge": "Hüftbeugen",
+        "push": "Drücken",
+        "pull": "Ziehen"
+      }
+    },
+    "clock": {
+      "title": "Runden und Intervalle",
+      "intro": "Eine Uhr für Kampfsport-Runden, Tabata, EMOM, AMRAP und Intervalle. Ton, Vibration und Ansage — der Bildschirm bleibt an.",
+      "presets": "Vorlagen",
+      "preset": {
+        "boxing": "Boxen 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervalle"
+      },
+      "work": "Arbeit (Sek.)",
+      "total": "Gesamtzeit (Sek.)",
+      "rest": "Pause (Sek.)",
+      "rounds": "Runden",
+      "warn": "Vorwarnung (Sek.)",
+      "totalTime": "Dauer insgesamt: {{time}}",
+      "prep": "Gleich geht's los",
+      "round": "Runde {{n}}",
+      "restPhase": "Pause",
+      "amrapLabel": "So viele Runden wie möglich",
+      "amrapTap": "Runde geschafft · {{n}}",
+      "done": "Geschafft",
+      "lastSeconds": "Letzte {{count}} Sekunden",
+      "elapsed": "Gesamt {{time}}",
+      "skip": "Weiter",
+      "say": {
+        "round": "Runde {{n}}",
+        "go": "Los",
+        "rest": "Pause",
+        "warn": "Letzte {{count}} Sekunden",
+        "done": "Geschafft"
+      }
+    },
+    "punch": {
+      "enable": "Schläge zählen (Mikrofon, Vorschau)",
+      "title": "Schläge (Mikrofon)",
+      "calibrate": "Probe: schlag zehnmal — {{n}} von 10",
+      "denied": "Kein Zugriff auf das Mikrofon.",
+      "estimate": "Schätzung · Vorschau, nicht geprüft"
+    },
+    "run": {
+      "title": "Lauf",
+      "intro": "Zeit, Strecke, Tempo und Puls. Frei oder als Intervalle nach Strecke.",
+      "mode": "Art des Laufs",
+      "mode_free": "Frei",
+      "mode_intervals": "Intervalle",
+      "reps": "Wiederholungen",
+      "workM": "Strecke (m)",
+      "restS": "Trabpause (Sek.)",
+      "privacy": "Der Standort wird nur genutzt, solange die App offen ist, und nur auf dem Gerät. Gespeichert werden Strecke, Zeit und Runden — keine Spur und kein Ort.",
+      "freeTitle": "Lauf",
+      "intervalsTitle": "Intervalle {{reps}} × {{m}} m",
+      "gps_wait": "Standort …",
+      "gps_ok": "Standort gut",
+      "gps_weak": "Standort ungenau",
+      "gps_off": "Kein Standort",
+      "freeLabel": "Laufzeit",
+      "workLabel": "Intervall {{n}} von {{of}}",
+      "restLabel": "Trabpause nach {{n}}",
+      "doneLabel": "Alle Intervalle geschafft",
+      "left": "noch {{m}} m",
+      "pace": "Tempo",
+      "distance": "Strecke",
+      "total": "Gesamt",
+      "splitsN": "Runden",
+      "lap": "Runde",
+      "finishHint": "Zum Beenden erst pausieren.",
+      "say": {
+        "work": "Intervall {{n}}",
+        "rest": "Trabpause",
+        "last100": "Noch hundert Meter",
+        "done": "Alle Intervalle geschafft"
+      }
+    },
+    "summary": {
+      "title": "Zusammenfassung",
+      "lost": "Hier ist keine Einheit. Gespeichertes findest du im Tagebuch.",
+      "toTraining": "Zum Training",
+      "saved": "Gespeichert · {{date}}",
+      "duration": "Dauer gemessen",
+      "sets": "Sätze",
+      "distance": "Strecke",
+      "pace": "Tempo",
+      "rounds": "Runden",
+      "hr": "Puls Ø / max",
+      "compare": "Gegenüber dem letzten Mal",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} Wdh",
+      "first": "Das erste Mal mit dieser Übung — ab jetzt gibt es einen Vergleich.",
+      "unknown_one": "Letztes Mal {{previous}}. Messfehler noch unbekannt: noch {{count}} Einheit bis zum Urteil.",
+      "unknown_other": "Letztes Mal {{previous}}. Messfehler noch unbekannt: noch {{count}} Einheiten bis zum Urteil.",
+      "v": {
+        "better": "Über deinem Messfehler (ab {{detectable}} %), besser.",
+        "worse": "Über deinem Messfehler (ab {{detectable}} %), schlechter.",
+        "within_noise": "Im Rauschen, kein belegter Unterschied (Schwelle {{detectable}} %)."
+      },
+      "estimate": "e1RM ist eine Schätzung.",
+      "note": "Verglichen wird mit der letzten Einheit derselben Übung. «Besser» erst, wenn die Änderung über deiner eigenen Schwankung liegt — dafür braucht es mindestens vier Einheiten.",
+      "splits": "Abschnitte",
+      "retest": "Nächster Retest:",
+      "retestIn_one": "in {{count}} Tag",
+      "retestIn_other": "in {{count}} Tagen",
+      "view": "Ansehen",
+      "done": "Fertig"
+    }
   }
 }

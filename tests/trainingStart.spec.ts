@@ -109,7 +109,7 @@ test.describe('Bildschirme', () => {
     await expect(page.getByTestId('player-other-day')).toBeVisible()
     await page.getByTestId('player-rpe-6').click()
     await page.getByTestId('player-done').click()
-    await expect(page).toHaveURL(/\/plan\/block/)
+    await expect(page).toHaveURL(/\/plan\/fertig/)
     const c = (await athlete(page)).trainingBlocks[0].completions
     expect(c).toEqual([expect.objectContaining({ sessionId: next.session.id, day: today(), planDay: next.planned })])
     await page.goto('/plan/start', { waitUntil: 'domcontentloaded' })
@@ -153,7 +153,7 @@ test.describe('Bildschirme', () => {
     await page.getByTestId('free-minutes').fill('40')
     await page.getByTestId('free-rpe-7').click()
     await page.getByTestId('free-save').click()
-    await expect(page).toHaveURL(/\/training$/)
+    await expect(page).toHaveURL(/\/plan\/fertig/)
     const a = await athlete(page)
     expect(a.trainingBlocks[0].completions).toEqual([])
     const w = a.workouts.find((x: { title: string }) => x.title === 'Beine frei')
@@ -170,8 +170,10 @@ test.describe('Bildschirme', () => {
     const first = weeksOf('PLN_STR_BASE_8W')[0].sessions[0].name
     await page.getByTestId('free-session-0').click()
     await expect(page.getByTestId('free-player')).toContainText(first.slice(0, 20))
-    // Direkt aufgerufen (ohne gewählte Einheit im Navigationszustand).
+    // Direkt aufgerufen (ohne gewählte Einheit im Navigationszustand) und ohne
+    // laufende Einheit auf dem Gerät — mit ihr ginge es dort weiter (workout.spec.ts).
     await page.goto('/plan', { waitUntil: 'domcontentloaded' })
+    await page.evaluate(() => localStorage.removeItem('kydon.workout.active.v1'))
     await page.goto('/plan/frei', { waitUntil: 'domcontentloaded' })
     await expect(page.getByTestId('free-player')).toHaveCount(0)
     await expect(page.getByRole('link', { name: /Training starten/ })).toBeVisible()

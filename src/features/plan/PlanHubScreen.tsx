@@ -19,12 +19,16 @@ import { daysTo } from '@/domain/weeklyPlan'
 import { getTest } from '@/data/testCatalog'
 import { pick } from '@/i18n/pick'
 import { cn } from '@/lib/utils'
+import { QuickStarts } from '@/features/today/QuickStarts'
 
 /**
- * Training-Hub (Tab «Plan»): in drei Sekunden erkennen, was heute dran ist,
- * wo man im Block steht und worauf er zielt. Der Plan als Bildkarte, die
- * Woche als Liste mit Bildern, die Begründung aufklappbar, vier Wege als
- * Bildkacheln.
+ * Training-Hub (Tab «Training», bis 13.10.2026 «Plan»): in drei Sekunden
+ * erkennen, was heute dran ist, wo man im Block steht und worauf er zielt.
+ *
+ * Ganz oben der Start (Mockup Variante C): die Einheit von heute mit einem
+ * grossen Knopf — ohne Plan das freie Training —, darunter die vier
+ * Schnellstarts. Dann der Plan als Bildkarte, die Woche als Liste mit
+ * Startknöpfen, die Begründung aufklappbar, vier Wege als Bildkacheln.
  */
 const chipDark = 'inline-flex min-h-6 items-center gap-1 rounded-pill bg-white/12 px-2.5 py-0.5 text-[11px] text-[#DCE7E4]'
 const chip = 'inline-flex min-h-6 items-center gap-1 rounded-pill border border-line px-2.5 py-0.5 text-[11px] text-ink-secondary'
@@ -69,10 +73,23 @@ export function PlanHubScreen() {
 
       <PlanOffersPanel />
 
-      {/* Immer da: Training starten — aus dem Plan (auch an einem anderen Tag) oder frei. */}
-      <Link to="/plan/start" data-testid="hub-start-training" className="mb-4 flex min-h-12 items-center justify-center gap-2 rounded-pill bg-accent px-5 text-[15px] font-semibold text-accent-ink">
-        <Play size={16} aria-hidden /> {t('start.button')}
-      </Link>
+      {/* Immer zuerst: Training starten — die Einheit von heute oder frei, ein Tipp. */}
+      {(() => {
+        const todays = view?.open[0] ?? null
+        return (
+          <div className="mb-3 rounded-[20px] bg-[#101A18] p-4 text-[#E9EFEB]" data-testid="hub-start-card">
+            <p className="label-tag !text-[#7FE5B5]">{todays ? `${t('planHub.today')}${typeof view?.week === 'number' && block ? ` · ${t('planHub.weekOf', { week: view.week, weeks: block.weeks, phase: t(`plan.phase.${block.phase}`) })}` : ''}` : t('quickStart.freeLabel')}</p>
+            <p className="mt-1 font-display text-[28px] leading-none font-bold">{todays ? sessionName(todays, t) : t('quickStart.freeTitle')}</p>
+            <Link to={todays ? '/plan/heute' : '/plan/frei/neu'} data-testid="hub-go" className="mt-3 flex min-h-14 items-center justify-center gap-2 rounded-pill bg-[#7FE5B5] text-[17px] font-semibold text-[#08231A]">
+              <Play size={18} aria-hidden fill="currentColor" /> {t('quickStart.start')}
+            </Link>
+            <Link to="/plan/start" data-testid="hub-start-training" className="mt-1 flex min-h-11 items-center justify-center text-[13px] text-[#A9B7B0] underline underline-offset-2">
+              {t('quickStart.otherDays')}
+            </Link>
+          </div>
+        )
+      })()}
+      <QuickStarts className="mb-4" />
 
       {!block || !view ? (
         <Panel className="mb-4" data-testid="hub-empty">
@@ -140,8 +157,10 @@ export function PlanHubScreen() {
                     ) : isToday ? (
                       <Link to="/plan/heute" data-testid={firstToday ? 'hub-start' : undefined} className="inline-flex min-h-11 items-center rounded-pill bg-accent px-4 text-[13px] font-semibold text-accent-ink">{t('player.start')}</Link>
                     ) : missed ? (
-                      <Link to="/plan/kalender" className="inline-flex min-h-11 items-center text-[12px] text-warning">{t('look.hub.catchUp')}</Link>
-                    ) : null}
+                      <Link to={`/plan/heute?s=${encodeURIComponent(o.session.id)}&d=${o.planned}`} className="inline-flex min-h-11 items-center rounded-pill border border-warning px-3 text-[12px] font-semibold text-warning">{t('look.hub.catchUp')}</Link>
+                    ) : (
+                      <Link to={`/plan/heute?s=${encodeURIComponent(o.session.id)}&d=${o.planned}`} className="inline-flex min-h-11 items-center rounded-pill border border-accent px-3 text-[12px] font-semibold text-accent-text">{t('player.start')}</Link>
+                    )}
                   </li>
                 )
               })}

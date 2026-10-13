@@ -14,6 +14,9 @@ import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
 import { CheckInPanel } from './CheckInPanel'
+import { QuickStarts } from './QuickStarts'
+import { AREA_IMAGES } from '@/data/visuals'
+import { Play } from 'lucide-react'
 import { athleteToday, type ConfidenceLevel } from '@/domain/performanceView'
 import { axisLabel } from '@/data/profileAxes'
 import { disciplineById } from '@/data/sportProfiles'
@@ -38,10 +41,21 @@ const ReviewChip = lazy(() => import('@/features/plan/ReviewMark').then((m) => (
  * (verpasst, als Nächstes, Wettkampf); Erklärungen liegen hinter einem ⓘ.
  * Ohne Messung zeigt die Seite den Einstieg der
  * bisherigen Übersicht, der Schritt für Schritt zur ersten Messung führt.
+ *
+ * TRAINING STARTEN ist immer die erste Fläche (Entscheidung 13.10.2026,
+ * Mockup Variante A): mit offener Planeinheit deren Fotokarte mit
+ * «Training starten», sonst «Freies Training starten»; darunter die vier
+ * Schnellstarts. Ein Tipp vom Öffnen der App bis zur laufenden Uhr.
  */
 export function AthleteToday() {
   const { data } = useAppData()
-  if (!data.results.some((r) => r.score != null)) return <OverviewScreen />
+  if (!data.results.some((r) => r.score != null))
+    return (
+      <>
+        <QuickStarts className="mb-5" />
+        <OverviewScreen />
+      </>
+    )
   return <TodayWithData />
 }
 
@@ -104,8 +118,9 @@ function TodayWithData() {
                   <ReviewChip block={block} session={plan.open.session} onImage testId="today-unreviewed" />
                 </Suspense>
               </span>
-              <Link to="/plan/heute" data-testid="today-go" className="mt-3 flex min-h-12 items-center justify-center rounded-pill bg-[#F4FBF8] text-[15px] font-semibold text-[#101A18]">
-                {t('look.today.go')}
+              <Link to="/plan/heute" data-testid="today-go" className="mt-3 flex min-h-14 items-center justify-center gap-2 rounded-pill bg-[#7FE5B5] text-[17px] font-semibold text-[#08231A]">
+                <Play size={18} aria-hidden fill="currentColor" />
+                {t('quickStart.start')}
               </Link>
             </PhotoCard>
           ) : today.workoutToday ? (
@@ -118,18 +133,17 @@ function TodayWithData() {
               </Link>
             </PhotoCard>
           ) : (
-            <Panel>
-              <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3">
-                <div>
-                  <p className="label-tag">{t('athleteToday.session.title')}</p>
-                  <p className="mt-0.5 text-[14px] text-ink-secondary">{t('athleteToday.session.none')}</p>
-                </div>
-                <Link to={planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off' ? '/training' : '/plan/start'} data-testid="today-start-training" className="inline-flex min-h-11 items-center gap-1 text-[13px] text-accent-text">
-                  {planMode(import.meta.env?.VITE_TRAINING_PLAN) === 'off' ? t('athleteToday.session.add') : t('start.button')} <ChevronRight size={15} aria-hidden />
-                </Link>
-              </div>
-            </Panel>
+            <PhotoCard image={AREA_IMAGES.training} className="min-h-[200px] p-4" data-testid="today-free">
+              <span className="label-tag">{t('athleteToday.session.title')}</span>
+              <span className="mt-1 font-display text-[30px] leading-none font-bold">{t('quickStart.freeTitle')}</span>
+              <span className="mt-1 text-[13px] text-[#B9CCC7]">{t('quickStart.freeSub')}</span>
+              <Link to="/plan/frei/neu" data-testid="today-start-training" className="mt-3 flex min-h-14 items-center justify-center gap-2 rounded-pill bg-[#7FE5B5] text-[17px] font-semibold text-[#08231A]">
+                <Play size={18} aria-hidden fill="currentColor" />
+                {t('quickStart.start')}
+              </Link>
+            </PhotoCard>
           )}
+          <QuickStarts className="mt-4" />
         </div>
 
         {/* Zeitleiste: verpasst, als Nächstes, Wettkampf. */}

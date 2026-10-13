@@ -14,12 +14,16 @@ import { usePushDueSync } from '@/features/push/usePushDueSync'
 import { WhatsNewDialog } from '@/features/whatsNew/WhatsNewDialog'
 import { useAutoSync } from '@/features/shared/useAutoSync'
 import { SyncAttentionNotice } from '@/features/shared/SyncAttentionNotice'
+import { useActiveWorkout } from '@/lib/activeWorkout'
 
 // Nur nachgeladen, wenn beim Laden etwas zu melden war — das Startpaket
 // bleibt so unter seiner Grenze (tests/loading.spec.ts).
 const DataLoadNotice = lazy(() =>
   Promise.all([import('@/features/dashboard/DataLoadNotice'), loadExtra()]).then(([m]) => ({ default: m.DataLoadNotice })),
 )
+
+// «Training läuft»: nur nachgeladen, wenn eine Einheit läuft.
+const ActiveWorkoutBar = lazy(() => Promise.all([import('@/features/workout/ActiveWorkoutBar'), loadExtra()]).then(([m]) => m))
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -39,6 +43,9 @@ export function AppShell() {
   const syncAttention = useAutoSync()
   usePageTracking(pathname)
   const { mode, storageBlocked, role, loadReport } = useAppData()
+  const workout = useActiveWorkout()
+  // Auf dem eigenen Bildschirm der Einheit (und in der Zusammenfassung) braucht es die Leiste nicht.
+  const showWorkout = workout != null && !pathname.startsWith(workout.path.split('?')[0]) && pathname !== '/plan/fertig'
   const items = navItemsFor(role)
   const active = navKeyForPath(pathname, role)
   const dock = dockItemsFor(role)
@@ -98,6 +105,11 @@ export function AppShell() {
         <AdminBar />
         <AnalyticsConsentStrip />
         <Outlet />
+        {showWorkout && (
+          <Suspense fallback={null}>
+            <ActiveWorkoutBar workout={workout} />
+          </Suspense>
+        )}
       </main>
 
       <WhatsNewDialog />

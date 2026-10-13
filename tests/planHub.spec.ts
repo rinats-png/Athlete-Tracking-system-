@@ -34,12 +34,12 @@ const seed = (page: import('@playwright/test').Page, withSession: boolean) =>
   }, withSession)
 
 test.describe('Bildschirm', () => {
-  test('Plan steht als dritter Bereich in der Leiste, Antippen öffnet den Hub', async ({ page }) => {
+  test('Training (bis 13.10.2026 «Plan») steht als dritter Bereich in der Leiste, Antippen öffnet den Hub', async ({ page }) => {
     await openDemo(page)
     const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
     const buttons = nav.getByRole('button')
     await expect(buttons).toHaveCount(12)
-    await expect(buttons.nth(2)).toHaveAccessibleName('Plan')
+    await expect(buttons.nth(2)).toHaveAccessibleName('Training')
     await buttons.nth(2).click()
     await expect(page).toHaveURL(/\/plan$/)
     await expect(page.getByTestId('plan-hub')).toBeVisible()

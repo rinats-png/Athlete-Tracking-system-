@@ -168,6 +168,12 @@ const router = createBrowserRouter([
       { path: 'plan/frei', element: screen(() => import('@/features/plan/FreeTraining'), 'FreePlayerScreen') },
       { path: 'plan/frei/katalog', element: screen(() => import('@/features/plan/FreeTraining'), 'FreeCatalogScreen') },
       { path: 'plan/frei/neu', element: screen(() => import('@/features/plan/FreeTraining'), 'FreeBuildScreen') },
+      // Zähler (Training starten): Rundenuhr, Lauf, Kamera, Zusammenfassung. Ohne
+      // Bezahlschranke und ohne Bau-Schalter — keiner davon enthält eine Trainingsregel.
+      { path: 'plan/uhr', element: screen(() => import('@/features/workout/ClockScreen'), 'ClockScreen') },
+      { path: 'plan/lauf', element: screen(() => import('@/features/workout/RunScreen'), 'RunScreen') },
+      { path: 'plan/kamera', element: screen(() => import('@/features/workout/CameraStartScreen'), 'CameraStartScreen') },
+      { path: 'plan/fertig', element: screen(() => import('@/features/workout/WorkoutSummaryScreen'), 'WorkoutSummaryScreen') },
       { path: 'woche', element: screen(() => import('@/features/week/WeekReviewScreen'), 'WeekReviewScreen') },
       { path: 'checkin', element: screen(() => import('@/features/today/CheckInScreen'), 'CheckInScreen') },
       { path: 'performance', element: screen(() => import('@/features/performance/PerformanceScreen'), 'PerformanceScreen') },

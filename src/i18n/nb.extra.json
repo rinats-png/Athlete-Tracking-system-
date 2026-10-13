@@ -3170,8 +3170,8 @@
     "save": "Registrer økt"
   },
   "planHub": {
-    "eyebrow": "Trening",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Trening",
     "competition": "Mål: {{name}}",
     "competitionUnnamed": "konkurransen din",
     "empty": {
@@ -4043,7 +4043,8 @@
     "start": "Start økt",
     "lost": "Ingen økt er valgt her. Velg en under «Start trening».",
     "noSlot": "Fri trening: teller som trening, men krysser ikke av noen dato i planen.",
-    "save": "Lagre i treningsloggen"
+    "save": "Lagre i treningsloggen",
+    "defaultTitle": "Fri styrketrening"
   },
   "aiConsent": {
     "title": "Samtykke: la en språkmodell formulere tekster",
@@ -4173,5 +4174,196 @@
     "grantCoach": "Bekreft og synkroniser",
     "withdrawButton": "Trekk tilbake samtykke",
     "cancel": "Avbryt"
+  },
+  "workout": {
+    "running": "Pågår · {{time}}",
+    "start": "Start",
+    "pause": "Pause",
+    "paused": "Satt på pause",
+    "resume": "Fortsett",
+    "finish": "Avslutt",
+    "save": "Lagre",
+    "continue": "Tren videre",
+    "discard": "Forkast",
+    "discardConfirm": "Forkast likevel",
+    "close": "Lukk",
+    "minimize": "Gå ut, treningen fortsetter",
+    "voice": "Taleannonsering",
+    "bar": {
+      "running": "Trening pågår · {{time}}",
+      "paused": "Trening på pause · {{time}}",
+      "rest": "Pause {{time}}",
+      "back": "Tilbake"
+    },
+    "conflict": {
+      "title": "Pågår allerede: {{title}}",
+      "body": "Fortsett der — eller forkast den og start på nytt her.",
+      "continue": "Fortsett der",
+      "replace": "Forkast og start her"
+    },
+    "focus": {
+      "exercise": "Øvelse {{n}} av {{of}}",
+      "set": "Sett {{n}} av {{of}}",
+      "target": "Mål {{target}}",
+      "last": "Forrige gang: {{value}}",
+      "less": "Mindre {{field}}",
+      "more": "Mer {{field}}",
+      "done": "Sett ferdig",
+      "allDone": "Alle sett er registrert. Avslutt nedenfor."
+    },
+    "rest": {
+      "title": "Pause",
+      "of": "av {{total}}",
+      "next": "Neste",
+      "sound": "Lyd ved 3-2-1 og på slutten · også uten nett",
+      "skip": "Hopp over pausen"
+    },
+    "camera": {
+      "chip": "Kameraet teller",
+      "title": "Kameraet teller med",
+      "close": "Lukk kameraet",
+      "onDevice": "Bare på enheten",
+      "loading": "Kamera og gjenkjenning lastes inn …",
+      "denied": "Ingen tilgang til kameraet.",
+      "unsupported": "Gjenkjenningen fungerer ikke på denne enheten.",
+      "fallback": "Tell selv som vanlig og før inn repetisjonene.",
+      "back": "Tilbake til settet",
+      "setupTitle": "Sett opp kameraet",
+      "hint": {
+        "squat": "{{name}}: still det fra siden, hele kroppen i bildet.",
+        "hinge": "{{name}}: still det fra siden, hele kroppen i bildet.",
+        "push": "{{name}}: still det fra siden, skulder, albue og hånd i bildet.",
+        "pull": "{{name}}: forfra eller fra siden, skulder, albue og hånd i bildet."
+      },
+      "check": {
+        "body": "Kroppen synlig",
+        "light": "Nok lys",
+        "still": "Telefonen står stille"
+      },
+      "ok": "oppfylt",
+      "waiting": "ikke ennå",
+      "privacy": "Gjenkjenningen kjører bare på enheten din. Ingen bilder og ingen video forlater telefonen eller lagres — bare tallene lagres.",
+      "ofTarget": "av {{target}} rep.",
+      "tempo": "Tempo per repetisjon · relativt",
+      "estimate": "Anslag",
+      "loss": "Tempotap i settet så langt −{{percent}} %. En sammenligning med andre dager kommer først når målefeilen din er kjent.",
+      "lossNone": "Tempoet vises fra andre repetisjon.",
+      "startTitle": "Kameraet teller",
+      "startIntro": "Velg en øvelse. Telefonen på gulvet, gjør settet — kameraet teller repetisjonene.",
+      "pattern": {
+        "squat": "Knebøymønster",
+        "hinge": "Hoftebøy",
+        "push": "Press",
+        "pull": "Trekk"
+      }
+    },
+    "clock": {
+      "title": "Runder og intervaller",
+      "intro": "En klokke for kampsportrunder, Tabata, EMOM, AMRAP og intervaller. Lyd, vibrasjon og tale — skjermen forblir på.",
+      "presets": "Maler",
+      "preset": {
+        "boxing": "Boksing 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervaller"
+      },
+      "work": "Arbeid (sek)",
+      "total": "Total tid (sek)",
+      "rest": "Pause (sek)",
+      "rounds": "Runder",
+      "warn": "Forvarsel (sek)",
+      "totalTime": "Samlet varighet: {{time}}",
+      "prep": "Snart i gang",
+      "round": "Runde {{n}}",
+      "restPhase": "Pause",
+      "amrapLabel": "Så mange runder som mulig",
+      "amrapTap": "Runde fullført · {{n}}",
+      "done": "Fullført",
+      "lastSeconds": "Siste {{count}} sekunder",
+      "elapsed": "Totalt {{time}}",
+      "skip": "Neste",
+      "say": {
+        "round": "Runde {{n}}",
+        "go": "Kjør",
+        "rest": "Pause",
+        "warn": "Siste {{count}} sekunder",
+        "done": "Fullført"
+      }
+    },
+    "punch": {
+      "enable": "Tell slag (mikrofon, forhåndsvisning)",
+      "title": "Slag (mikrofon)",
+      "calibrate": "Prøve: slå ti ganger — {{n}} av 10",
+      "denied": "Ingen tilgang til mikrofonen.",
+      "estimate": "Anslag · forhåndsvisning, ikke validert"
+    },
+    "run": {
+      "title": "Løp",
+      "intro": "Tid, distanse, tempo og puls. Fritt eller som intervaller etter distanse.",
+      "mode": "Type løp",
+      "mode_free": "Fritt",
+      "mode_intervals": "Intervaller",
+      "reps": "Repetisjoner",
+      "workM": "Distanse (m)",
+      "restS": "Joggepause (sek)",
+      "privacy": "Posisjonen brukes bare mens appen er åpen, og bare på enheten. Distanse, tid og runder lagres — ikke noe spor og ikke noe sted.",
+      "freeTitle": "Løp",
+      "intervalsTitle": "Intervaller {{reps}} × {{m}} m",
+      "gps_wait": "Posisjon …",
+      "gps_ok": "Posisjon god",
+      "gps_weak": "Posisjon unøyaktig",
+      "gps_off": "Ingen posisjon",
+      "freeLabel": "Løpetid",
+      "workLabel": "Intervall {{n}} av {{of}}",
+      "restLabel": "Joggepause etter {{n}}",
+      "doneLabel": "Alle intervaller fullført",
+      "left": "{{m}} m igjen",
+      "pace": "Tempo",
+      "distance": "Distanse",
+      "total": "Totalt",
+      "splitsN": "Runder",
+      "lap": "Runde",
+      "finishHint": "Sett på pause først for å avslutte.",
+      "say": {
+        "work": "Intervall {{n}}",
+        "rest": "Joggepause",
+        "last100": "Hundre meter igjen",
+        "done": "Alle intervaller fullført"
+      }
+    },
+    "summary": {
+      "title": "Oppsummering",
+      "lost": "Her er det ingen økt. Lagrede økter finner du i dagboken.",
+      "toTraining": "Til treningen",
+      "saved": "Lagret · {{date}}",
+      "duration": "Målt varighet",
+      "sets": "Sett",
+      "distance": "Distanse",
+      "pace": "Tempo",
+      "rounds": "Runder",
+      "hr": "Puls snitt / maks",
+      "compare": "Sammenlignet med forrige gang",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} rep.",
+      "first": "Første gang med denne øvelsen — fra nå av finnes en sammenligning.",
+      "unknown_one": "Forrige gang {{previous}}. Målefeil ennå ukjent: {{count}} økt til før en vurdering.",
+      "unknown_other": "Forrige gang {{previous}}. Målefeil ennå ukjent: {{count}} økter til før en vurdering.",
+      "v": {
+        "better": "Over målefeilen din (fra {{detectable}} %), bedre.",
+        "worse": "Over målefeilen din (fra {{detectable}} %), dårligere.",
+        "within_noise": "Innenfor støyen, ingen påvist forskjell (terskel {{detectable}} %)."
+      },
+      "estimate": "e1RM er et anslag.",
+      "note": "Det sammenlignes med siste økt med samme øvelse. «Bedre» først når endringen ligger over din egen variasjon — det krever minst fire økter.",
+      "splits": "Deletapper",
+      "retest": "Neste retest:",
+      "retestIn_one": "om {{count}} dag",
+      "retestIn_other": "om {{count}} dager",
+      "view": "Vis",
+      "done": "Ferdig"
+    }
   }
 }

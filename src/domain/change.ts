@@ -119,12 +119,22 @@ export function typicalErrorPercent(results: StoredResult[], testSlug: string): 
   const series = results
     .filter((r) => r.testSlug === testSlug && r.score != null && r.score !== 0)
     .sort((a, b) => a.performedAt.localeCompare(b.performedAt))
+  return typicalErrorOfSeries(series.map((r) => r.score as number))
+}
+
+/**
+ * Dieselbe Rechnung für eine beliebige Messreihe in zeitlicher Folge (z. B.
+ * der beste geschätzte 1RM je Einheit im Training). Unter
+ * {@link MIN_POINTS_FOR_ERROR} Werten: null.
+ */
+export function typicalErrorOfSeries(values: number[]): number | null {
+  const series = values.filter((v) => Number.isFinite(v) && v !== 0)
   if (series.length < MIN_POINTS_FOR_ERROR) return null
 
   const diffs: number[] = []
   for (let i = 1; i < series.length; i++) {
-    const from = series[i - 1].score as number
-    const to = series[i].score as number
+    const from = series[i - 1]
+    const to = series[i]
     diffs.push(((to - from) / Math.abs(from)) * 100)
   }
   const mean = diffs.reduce((sum, d) => sum + d, 0) / diffs.length

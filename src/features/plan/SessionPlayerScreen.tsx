@@ -17,7 +17,15 @@ import { blockText, diaryKindOf, sessionName, sessionSource } from '@/features/p
 import { trainingPlanMode } from '@/features/plan/PlanPreviewScreen'
 import { cn } from '@/lib/utils'
 import type { StoredPlannedSession } from '@/lib/store/localStore'
-import { SetLogger, type Swap } from '@/features/plan/SetLogger'
+import { SetLogger, type SetLoggerState, type Swap } from '@/features/plan/SetLogger'
+import { useWorkoutSession } from '@/features/workout/useWorkoutSession'
+import { WorkoutConflict } from '@/features/workout/WorkoutConflict'
+import { measuredMinutes } from '@/domain/activeWorkout'
+import { formatClock } from '@/domain/workoutClock'
+import { summarizeSession } from '@/domain/workoutSummary'
+import { REGISTRY_TO_LEGACY } from '@/data/library/legacyExerciseMap'
+import { cueDone, cueRest, cueWork, unlockCues } from '@/lib/workoutCues'
+import type { SummaryState } from '@/features/workout/WorkoutSummaryScreen'
 import { useLibrary } from '@/features/library/useLibrary'
 import type { SetLogEntry } from '@/domain/setLog'
 
@@ -28,6 +36,11 @@ import type { SetLogEntry } from '@/domain/setLog'
  *
  * Übungen haben ein Satz-Log (was je Satz war) und lassen sich ersetzen
  * (`SetLogger`). Der Player zeigt die Termine des Tages — auch verschobene.
+ *
+ * Öffnen startet die Einheit (`useWorkoutSession`): die Laufzeit steht oben,
+ * der Bildschirm bleibt wach, und der Stand übersteht Neuladen. Die Dauer
+ * beim Abschluss ist die gemessene, nicht die geplante. Nach dem Speichern
+ * kommt die Zusammenfassung (`/plan/fertig`).
  */
 
 interface Step {
@@ -60,7 +73,7 @@ const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.max(0, Math.cei
 export function SessionPlayerScreen() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { data, trainingBlocks, completePlannedSession } = useAppData()
+  const { data, trainingBlocks, completePlannedSession, workouts } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
   const today = new Date().toISOString().slice(0, 10)
   // Gewählt über die Startauswahl oder den Kalender: auch eine Einheit eines anderen Tages.
@@ -77,6 +90,10 @@ export function SessionPlayerScreen() {
   const { exercises, index } = useLibrary(hasLibrary)
   const planSubs = index?.plans.find((p) => p.plan_id === block?.libraryPlanId)?.substitutions ?? {}
   const [log, setLog] = useState<{ sets: SetLogEntry[]; swaps: Swap[] }>({ sets: [], swaps: [] })
+  const path = session && occurrence ? `/plan/heute?s=${encodeURIComponent(session.id)}&d=${occurrence.planned}` : null
+  const run = useWorkoutSession({ kind: 'plan', title: session ? sessionName(session, t) : '', path })
+  const saved = run.workout?.data as { logger?: SetLoggerState } | null
+  const [initial] = useState<SetLoggerState | null>(() => saved?.logger ?? null)
 
   const steps = useMemo(() => (session ? stepsOf(session) : []), [session])
   const [step, setStep] = useState(0)
@@ -95,7 +112,8 @@ export function SessionPlayerScreen() {
     setRunning(false)
     setRemaining(steps[0]?.seconds ?? 0)
     startedAt.current = null
-    setMinutes(session?.plannedDurationMin ?? null)
+    // Leer = die gemessene Dauer (steht als Platzhalter im Feld).
+    setMinutes(null)
     setHr(null)
   }, [session?.id, steps])
 
@@ -107,19 +125,17 @@ export function SessionPlayerScreen() {
         setRemaining(left)
         return
       }
-      // Nächster Schritt; ein kurzes Vibrieren gibt den Wechsel an, wo das Gerät es kann.
-      try {
-        navigator.vibrate?.(200)
-      } catch {
-        // kein Vibrieren: der Wechsel bleibt sichtbar
-      }
+      // Nächster Schritt: Ton und Vibration (iOS kennt nur den Ton).
       setStep((i) => {
         const next = i + 1
         if (next >= steps.length) {
           setRunning(false)
           setRemaining(0)
+          cueDone()
           return i
         }
+        if (steps[next].kind === 'work') cueWork()
+        else cueRest()
         endAt.current = Date.now() + steps[next].seconds * 1000
         setRemaining(steps[next].seconds)
         return next
@@ -134,6 +150,7 @@ export function SessionPlayerScreen() {
   const toggle = () => {
     if (steps.length === 0) return
     if (!running) {
+      unlockCues()
       if (startedAt.current == null) startedAt.current = Date.now()
       endAt.current = Date.now() + remaining * 1000
     }
@@ -145,7 +162,8 @@ export function SessionPlayerScreen() {
 
   const done = () => {
     if (rpe == null) return
-    const durationMin = Math.min(600, Math.max(1, minutes ?? elapsedMin ?? 30))
+    const durationMin = Math.min(600, Math.max(1, minutes ?? (run.workout ? measuredMinutes(run.workout, Date.now()) : null) ?? elapsedMin ?? 30))
+    const summary = summarizeSession(log.sets, workouts, (id) => REGISTRY_TO_LEGACY[id])
     const planDay = occurrence.planned === today ? null : occurrence.planned
     const swaps = log.swaps.map(({ part, from, to, toName }) => ({ part, from, to, toName }))
     completePlannedSession({
@@ -166,7 +184,9 @@ export function SessionPlayerScreen() {
     })
     // Zugewiesener Block: Fortschritt nachmelden (best effort, ohne Netz geht es später).
     if (block.assignmentId) void syncAssignedCompletions({ ...block, completions: [...block.completions, { sessionId: session.id, day: today, durationMin, rpe, diarySessionId: null, avgHr: hr?.avg ?? null, maxHr: hr?.max ?? null, feedback, pain, planDay, sets: log.sets, swaps }] })
-    navigate('/plan/block')
+    run.clear()
+    const state: SummaryState = { title: sessionName(session, t), kind: 'strength', durationMin, rpe, hr: hr ? { avg: hr.avg, max: hr.max } : null, summary, distanceM: null, rounds: null, back: '/plan/block' }
+    navigate('/plan/fertig', { state })
   }
 
   return (
@@ -180,11 +200,13 @@ export function SessionPlayerScreen() {
         </Link>
       </div>
       <header className="relative -mt-16 mb-4">
+        {run.workout && <p className="label-tag mb-1 !text-accent-text" data-testid="player-elapsed">{t('workout.running', { time: formatClock(run.elapsedS) })}</p>}
         <span className="label-tag">{t('player.eyebrow')} · {sessionSource(session, t)}</span>
         <h1 className="mt-1 font-display text-[36px] leading-none font-bold">{sessionName(session, t)}</h1>
         <span className="mt-2 block"><ReviewMark state={review} testId="player-unreviewed" /></span>
         <InfoNote text={t('player.intro')} />
       </header>
+      {run.conflict && <WorkoutConflict other={run.conflict} onReplace={() => run.replace()} />}
       {open.length > 1 && (
         <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label={t('player.pick')}>
           {open.map((o) => (
@@ -199,7 +221,17 @@ export function SessionPlayerScreen() {
           {occurrence.date !== today && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-other-day">{t('start.countsFor', { date: `${occurrence.date.slice(8, 10)}.${occurrence.date.slice(5, 7)}.` })}</p>}
           {occurrence.moved && <p className="mb-2 text-[12px] text-ink-secondary" data-testid="player-moved">{t('cal.movedFrom', { date: `${occurrence.planned.slice(8, 10)}.${occurrence.planned.slice(5, 7)}.` })}</p>}
           {session.blocks.map((b, i) => (b.type === 'library_exercise' || b.type === 'strength' || b.type === 'exercise' ? null : <p key={i} className="text-[14px]">{blockText(b, t)}</p>))}
-          <SetLogger session={session} exercises={exercises} planSubs={planSubs} blocks={trainingBlocks} onChange={setLog} />
+          <SetLogger
+            session={session}
+            exercises={exercises}
+            planSubs={planSubs}
+            blocks={trainingBlocks}
+            initial={initial}
+            onChange={(next) => {
+              setLog(next)
+              if (run.workout) run.setData({ logger: next.logger })
+            }}
+          />
           <SessionWhy session={session} block={block} />
           {steps.length > 0 && (
             <div className="mt-4 text-center" data-testid="player-timer">
@@ -226,7 +258,7 @@ export function SessionPlayerScreen() {
         <div className="space-y-3 px-4 pb-4">
           <label className="block text-[13px]">
             <span className="label-tag">{t('player.minutes')}</span>
-            <input type="number" inputMode="numeric" min={1} max={600} value={minutes ?? ''} onChange={(e) => setMinutes(e.target.value === '' ? null : Number(e.target.value))} data-testid="player-minutes" className="mt-1.5 min-h-11 w-28 rounded-md border border-line bg-surface px-3 text-[16px]" />
+            <input type="number" inputMode="numeric" min={1} max={600} value={minutes ?? ''} placeholder={run.workout ? String(measuredMinutes(run.workout, run.now)) : undefined} onChange={(e) => setMinutes(e.target.value === '' ? null : Number(e.target.value))} data-testid="player-minutes" className="mt-1.5 min-h-11 w-28 rounded-md border border-line bg-surface px-3 text-[16px]" />
           </label>
           <div role="radiogroup" aria-label={t('player.rpe')}>
             <span className="label-tag">{t('player.rpe')}</span>

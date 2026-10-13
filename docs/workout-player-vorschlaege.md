@@ -295,3 +295,28 @@ Vom Auftraggeber freigegeben:
 3. **Kameraerkennung (MediaPipe Pose) darf integriert werden.** Bedingungen bleiben: läuft nur auf dem Gerät, Modell wird mit der App ausgeliefert, kein Bild oder Video wird gespeichert, Geschwindigkeit nur relativ und gegen den eigenen Messfehler.
 
 Vor dem Bau: Mockups (Einstieg in drei Varianten; Zähler für Kraft, Pause, Laufen, Runden, Kamera; Zusammenfassung) zur Auswahl vorgelegt.
+
+## Umsetzung (13.10.2026)
+
+Gebaut nach Mockup-Auswahl **A + C**, Zähler wie in den Mockups.
+
+| Teil | Wo |
+|---|---|
+| Startkarte «Training starten» und vier Schnellstarts (Kraft frei, Lauf, Runden, Kamera) auf «Heute», auch ohne Messung | `src/features/today/AthleteToday.tsx`, `QuickStarts.tsx` |
+| Bereich «Training» (bisher «Plan»): Startkarte oben, Schnellstarts, Start je Einheit der Woche | `src/features/plan/PlanHubScreen.tsx`, Texte `nav.*`, `planHub.title` |
+| Leiste «Training läuft» auf jedem Bildschirm, Fortsetzen nach Neuladen | `src/features/workout/ActiveWorkoutBar.tsx`, `src/lib/activeWorkout.ts`, `src/domain/activeWorkout.ts` |
+| Kraft: Fokus mit grossen ±-Feldern, «Satz fertig», Pausenring ±15 s mit Ton 3-2-1, Bildschirm bleibt wach, gemessene Dauer | `src/features/plan/SetLogger.tsx`, `src/features/workout/RestRing.tsx`, `useWorkoutSession.ts` |
+| Runden, Tabata, EMOM, AMRAP, Intervalle mit Farbe je Phase, Ton, Vibration, Ansage | `src/domain/workoutClock.ts`, `src/features/workout/ClockScreen.tsx`, `src/lib/workoutCues.ts` |
+| Lauf mit Standort, Intervalle nach Strecke, Runden, Puls | `src/domain/runTrack.ts`, `src/features/workout/RunScreen.tsx` |
+| Kamera zählt Wiederholungen | `src/domain/repCounter.ts`, `src/lib/pose.ts`, `src/features/workout/CameraCounter.tsx`, `docs/kamera-zaehler.md` |
+| Schlagzähler per Mikrofon (nur Vorschaubau) | `src/domain/punchCounter.ts`, `src/features/workout/PunchCounter.tsx` |
+| Zusammenfassung gegen den Messfehler | `src/domain/workoutSummary.ts` (`typicalErrorOfSeries` in `change.ts`), `WorkoutSummaryScreen.tsx` |
+| Freies Training speichert ohne Plus und endet in der Zusammenfassung | `src/features/plan/FreeTraining.tsx` |
+
+Die laufende Einheit liegt unter `kydon.workout.active.v1` auf dem Gerät,
+ausserhalb des Bestands (kein Schema, kein Abgleich); erst «Speichern»
+schreibt Tagebuch, Plan, Trainingslog und — beim Lauf — einen Eintrag unter
+«Läufe» (Quelle «other»).
+
+Nicht umgesetzt (bewusst): Testtag-Live (V5, bräuchte Tabellen mit RLS),
+Sperrbildschirm-Steuerung und Uhr (nur nativ).

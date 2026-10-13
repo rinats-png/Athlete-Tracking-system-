@@ -3170,8 +3170,8 @@
     "save": "Registrer session"
   },
   "planHub": {
-    "eyebrow": "Træning",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Træning",
     "competition": "Mål: {{name}}",
     "competitionUnnamed": "din konkurrence",
     "empty": {
@@ -4043,7 +4043,8 @@
     "start": "Start træning",
     "lost": "Der er ikke valgt nogen træning her. Vælg en under »Start træning«.",
     "noSlot": "Fri træning: tæller som træning, men krydser ikke en dato af i planen.",
-    "save": "Gem i træningsloggen"
+    "save": "Gem i træningsloggen",
+    "defaultTitle": "Fri styrketræning"
   },
   "aiConsent": {
     "title": "Samtykke: lad en sprogmodel formulere tekster",
@@ -4173,5 +4174,196 @@
     "grantCoach": "Bekræft og synkronisér",
     "withdrawButton": "Træk samtykke tilbage",
     "cancel": "Annuller"
+  },
+  "workout": {
+    "running": "I gang · {{time}}",
+    "start": "Start",
+    "pause": "Pause",
+    "paused": "Sat på pause",
+    "resume": "Fortsæt",
+    "finish": "Afslut",
+    "save": "Gem",
+    "continue": "Træn videre",
+    "discard": "Kassér",
+    "discardConfirm": "Kassér helt",
+    "close": "Luk",
+    "minimize": "Forlad, træningen fortsætter",
+    "voice": "Talte meddelelser",
+    "bar": {
+      "running": "Træning i gang · {{time}}",
+      "paused": "Træning på pause · {{time}}",
+      "rest": "Pause {{time}}",
+      "back": "Tilbage"
+    },
+    "conflict": {
+      "title": "Er allerede i gang: {{title}}",
+      "body": "Fortsæt dér — eller kassér det og start forfra her.",
+      "continue": "Fortsæt dér",
+      "replace": "Kassér og start her"
+    },
+    "focus": {
+      "exercise": "Øvelse {{n}} af {{of}}",
+      "set": "Sæt {{n}} af {{of}}",
+      "target": "Mål {{target}}",
+      "last": "Sidste gang: {{value}}",
+      "less": "Mindre {{field}}",
+      "more": "Mere {{field}}",
+      "done": "Sæt færdigt",
+      "allDone": "Alle sæt er registreret. Afslut nedenfor."
+    },
+    "rest": {
+      "title": "Pause",
+      "of": "af {{total}}",
+      "next": "Næste",
+      "sound": "Lyd ved 3-2-1 og til sidst · også uden net",
+      "skip": "Spring pausen over"
+    },
+    "camera": {
+      "chip": "Kameraet tæller",
+      "title": "Kameraet tæller med",
+      "close": "Luk kameraet",
+      "onDevice": "Kun på enheden",
+      "loading": "Kamera og genkendelse indlæses …",
+      "denied": "Ingen adgang til kameraet.",
+      "unsupported": "Genkendelsen virker ikke på denne enhed.",
+      "fallback": "Tæl selv som vanligt, og skriv gentagelserne ind.",
+      "back": "Tilbage til sættet",
+      "setupTitle": "Opsæt kameraet",
+      "hint": {
+        "squat": "{{name}}: stil det fra siden, hele kroppen i billedet.",
+        "hinge": "{{name}}: stil det fra siden, hele kroppen i billedet.",
+        "push": "{{name}}: stil det fra siden, skulder, albue og hånd i billedet.",
+        "pull": "{{name}}: forfra eller fra siden, skulder, albue og hånd i billedet."
+      },
+      "check": {
+        "body": "Kroppen er synlig",
+        "light": "Nok lys",
+        "still": "Telefonen står stille"
+      },
+      "ok": "opfyldt",
+      "waiting": "ikke endnu",
+      "privacy": "Genkendelsen kører kun på din enhed. Intet billede og ingen video forlader telefonen eller gemmes — kun tallene gemmes.",
+      "ofTarget": "af {{target}} gent.",
+      "tempo": "Tempo pr. gentagelse · relativt",
+      "estimate": "Skøn",
+      "loss": "Tempotab i sættet indtil nu −{{percent}} %. En sammenligning med andre dage kommer først, når din målefejl er kendt.",
+      "lossNone": "Tempoet vises fra anden gentagelse.",
+      "startTitle": "Kameraet tæller",
+      "startIntro": "Vælg en øvelse. Telefonen på gulvet, lav sættet — kameraet tæller gentagelserne.",
+      "pattern": {
+        "squat": "Squatmønster",
+        "hinge": "Hoftebøj",
+        "push": "Pres",
+        "pull": "Træk"
+      }
+    },
+    "clock": {
+      "title": "Runder og intervaller",
+      "intro": "Et ur til kampsportsrunder, Tabata, EMOM, AMRAP og intervaller. Lyd, vibration og stemme — skærmen forbliver tændt.",
+      "presets": "Skabeloner",
+      "preset": {
+        "boxing": "Boksning 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervaller"
+      },
+      "work": "Arbejde (sek)",
+      "total": "Samlet tid (sek)",
+      "rest": "Pause (sek)",
+      "rounds": "Runder",
+      "warn": "Forvarsel (sek)",
+      "totalTime": "Samlet varighed: {{time}}",
+      "prep": "Snart går det løs",
+      "round": "Runde {{n}}",
+      "restPhase": "Pause",
+      "amrapLabel": "Så mange runder som muligt",
+      "amrapTap": "Runde klaret · {{n}}",
+      "done": "Klaret",
+      "lastSeconds": "Sidste {{count}} sekunder",
+      "elapsed": "I alt {{time}}",
+      "skip": "Næste",
+      "say": {
+        "round": "Runde {{n}}",
+        "go": "Nu",
+        "rest": "Pause",
+        "warn": "Sidste {{count}} sekunder",
+        "done": "Klaret"
+      }
+    },
+    "punch": {
+      "enable": "Tæl slag (mikrofon, forhåndsvisning)",
+      "title": "Slag (mikrofon)",
+      "calibrate": "Prøve: slå ti gange — {{n}} af 10",
+      "denied": "Ingen adgang til mikrofonen.",
+      "estimate": "Skøn · forhåndsvisning, ikke valideret"
+    },
+    "run": {
+      "title": "Løb",
+      "intro": "Tid, distance, tempo og puls. Frit eller som intervaller efter distance.",
+      "mode": "Type løb",
+      "mode_free": "Frit",
+      "mode_intervals": "Intervaller",
+      "reps": "Gentagelser",
+      "workM": "Distance (m)",
+      "restS": "Joggepause (sek)",
+      "privacy": "Placeringen bruges kun, mens appen er åben, og kun på enheden. Distance, tid og omgange gemmes — intet spor og intet sted.",
+      "freeTitle": "Løb",
+      "intervalsTitle": "Intervaller {{reps}} × {{m}} m",
+      "gps_wait": "Placering …",
+      "gps_ok": "Placering god",
+      "gps_weak": "Placering upræcis",
+      "gps_off": "Ingen placering",
+      "freeLabel": "Løbetid",
+      "workLabel": "Interval {{n}} af {{of}}",
+      "restLabel": "Joggepause efter {{n}}",
+      "doneLabel": "Alle intervaller klaret",
+      "left": "{{m}} m tilbage",
+      "pace": "Tempo",
+      "distance": "Distance",
+      "total": "I alt",
+      "splitsN": "Omgange",
+      "lap": "Omgang",
+      "finishHint": "Sæt på pause først for at afslutte.",
+      "say": {
+        "work": "Interval {{n}}",
+        "rest": "Joggepause",
+        "last100": "Hundrede meter tilbage",
+        "done": "Alle intervaller klaret"
+      }
+    },
+    "summary": {
+      "title": "Opsummering",
+      "lost": "Her er ingen træning. Gemte træninger finder du i dagbogen.",
+      "toTraining": "Til træningen",
+      "saved": "Gemt · {{date}}",
+      "duration": "Målt varighed",
+      "sets": "Sæt",
+      "distance": "Distance",
+      "pace": "Tempo",
+      "rounds": "Runder",
+      "hr": "Puls gns. / maks.",
+      "compare": "Sammenlignet med sidste gang",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} gent.",
+      "first": "Første gang med denne øvelse — fra nu af er der en sammenligning.",
+      "unknown_one": "Sidste gang {{previous}}. Målefejl endnu ukendt: {{count}} pas mere til en vurdering.",
+      "unknown_other": "Sidste gang {{previous}}. Målefejl endnu ukendt: {{count}} pas mere til en vurdering.",
+      "v": {
+        "better": "Over din målefejl (fra {{detectable}} %), bedre.",
+        "worse": "Over din målefejl (fra {{detectable}} %), dårligere.",
+        "within_noise": "Inden for støjen, ingen påvist forskel (tærskel {{detectable}} %)."
+      },
+      "estimate": "e1RM er et skøn.",
+      "note": "Der sammenlignes med det seneste pas med samme øvelse. »Bedre« først, når ændringen ligger over dit eget udsving — det kræver mindst fire pas.",
+      "splits": "Delstrækninger",
+      "retest": "Næste retest:",
+      "retestIn_one": "om {{count}} dag",
+      "retestIn_other": "om {{count}} dage",
+      "view": "Se",
+      "done": "Færdig"
+    }
   }
 }

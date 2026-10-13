@@ -3170,8 +3170,8 @@
     "save": "Registrera pass"
   },
   "planHub": {
-    "eyebrow": "Träning",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Träning",
     "competition": "Mål: {{name}}",
     "competitionUnnamed": "din tävling",
     "empty": {
@@ -4043,7 +4043,8 @@
     "start": "Starta pass",
     "lost": "Inget pass är valt här. Välj ett under ”Starta träning”.",
     "noSlot": "Fri träning: räknas som träning men bockar inte av något datum i planen.",
-    "save": "Spara i träningsloggen"
+    "save": "Spara i träningsloggen",
+    "defaultTitle": "Fri styrketräning"
   },
   "aiConsent": {
     "title": "Samtycke: låt en språkmodell formulera texter",
@@ -4173,5 +4174,196 @@
     "grantCoach": "Bekräfta och synka",
     "withdrawButton": "Återkalla samtycke",
     "cancel": "Avbryt"
+  },
+  "workout": {
+    "running": "Pågår · {{time}}",
+    "start": "Starta",
+    "pause": "Pausa",
+    "paused": "Pausad",
+    "resume": "Fortsätt",
+    "finish": "Avsluta",
+    "save": "Spara",
+    "continue": "Träna vidare",
+    "discard": "Släng",
+    "discardConfirm": "Släng på riktigt",
+    "close": "Stäng",
+    "minimize": "Lämna, träningen fortsätter",
+    "voice": "Röstutrop",
+    "bar": {
+      "running": "Träning pågår · {{time}}",
+      "paused": "Träning pausad · {{time}}",
+      "rest": "Vila {{time}}",
+      "back": "Tillbaka"
+    },
+    "conflict": {
+      "title": "Pågår redan: {{title}}",
+      "body": "Fortsätt där — eller släng det och börja om här.",
+      "continue": "Fortsätt där",
+      "replace": "Släng och starta här"
+    },
+    "focus": {
+      "exercise": "Övning {{n}} av {{of}}",
+      "set": "Set {{n}} av {{of}}",
+      "target": "Mål {{target}}",
+      "last": "Förra gången: {{value}}",
+      "less": "Mindre {{field}}",
+      "more": "Mer {{field}}",
+      "done": "Set klart",
+      "allDone": "Alla set loggade. Avsluta nedan."
+    },
+    "rest": {
+      "title": "Vila",
+      "of": "av {{total}}",
+      "next": "Härnäst",
+      "sound": "Ljud vid 3-2-1 och i slutet · även utan nät",
+      "skip": "Hoppa över vilan"
+    },
+    "camera": {
+      "chip": "Kameran räknar",
+      "title": "Kameran räknar med",
+      "close": "Stäng kameran",
+      "onDevice": "Bara på enheten",
+      "loading": "Kamera och igenkänning laddas …",
+      "denied": "Ingen åtkomst till kameran.",
+      "unsupported": "Igenkänningen fungerar inte på den här enheten.",
+      "fallback": "Räkna själv som vanligt och fyll i repetitionerna.",
+      "back": "Tillbaka till setet",
+      "setupTitle": "Ställ in kameran",
+      "hint": {
+        "squat": "{{name}}: ställ den från sidan, hela kroppen i bild.",
+        "hinge": "{{name}}: ställ den från sidan, hela kroppen i bild.",
+        "push": "{{name}}: ställ den från sidan, axel, armbåge och hand i bild.",
+        "pull": "{{name}}: framifrån eller från sidan, axel, armbåge och hand i bild."
+      },
+      "check": {
+        "body": "Kroppen syns",
+        "light": "Tillräckligt ljus",
+        "still": "Telefonen står still"
+      },
+      "ok": "uppfyllt",
+      "waiting": "inte än",
+      "privacy": "Igenkänningen körs bara på din enhet. Ingen bild och ingen video lämnar telefonen eller sparas — bara siffrorna sparas.",
+      "ofTarget": "av {{target}} rep.",
+      "tempo": "Tempo per repetition · relativt",
+      "estimate": "Uppskattning",
+      "loss": "Tempoförlust i setet hittills −{{percent}} %. En jämförelse med andra dagar kommer först när ditt mätfel är känt.",
+      "lossNone": "Tempot visas från andra repetitionen.",
+      "startTitle": "Kameran räknar",
+      "startIntro": "Välj en övning. Telefonen på golvet, gör setet — kameran räknar repetitionerna.",
+      "pattern": {
+        "squat": "Knäböjsmönster",
+        "hinge": "Höftfällning",
+        "push": "Press",
+        "pull": "Drag"
+      }
+    },
+    "clock": {
+      "title": "Ronder och intervaller",
+      "intro": "En klocka för kampsportsronder, Tabata, EMOM, AMRAP och intervaller. Ljud, vibration och röst — skärmen förblir på.",
+      "presets": "Mallar",
+      "preset": {
+        "boxing": "Boxning 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervaller"
+      },
+      "work": "Arbete (sek)",
+      "total": "Total tid (sek)",
+      "rest": "Vila (sek)",
+      "rounds": "Ronder",
+      "warn": "Förvarning (sek)",
+      "totalTime": "Total längd: {{time}}",
+      "prep": "Snart kör vi",
+      "round": "Rond {{n}}",
+      "restPhase": "Vila",
+      "amrapLabel": "Så många varv som möjligt",
+      "amrapTap": "Varv klart · {{n}}",
+      "done": "Klart",
+      "lastSeconds": "Sista {{count}} sekunderna",
+      "elapsed": "Totalt {{time}}",
+      "skip": "Nästa",
+      "say": {
+        "round": "Rond {{n}}",
+        "go": "Kör",
+        "rest": "Vila",
+        "warn": "Sista {{count}} sekunderna",
+        "done": "Klart"
+      }
+    },
+    "punch": {
+      "enable": "Räkna slag (mikrofon, förhandsvisning)",
+      "title": "Slag (mikrofon)",
+      "calibrate": "Prov: slå tio gånger — {{n}} av 10",
+      "denied": "Ingen åtkomst till mikrofonen.",
+      "estimate": "Uppskattning · förhandsvisning, inte validerad"
+    },
+    "run": {
+      "title": "Löpning",
+      "intro": "Tid, sträcka, tempo och puls. Fritt eller som intervaller efter sträcka.",
+      "mode": "Typ av löpning",
+      "mode_free": "Fritt",
+      "mode_intervals": "Intervaller",
+      "reps": "Repetitioner",
+      "workM": "Sträcka (m)",
+      "restS": "Joggvila (sek)",
+      "privacy": "Platsen används bara medan appen är öppen, och bara på enheten. Sträcka, tid och varv sparas — inget spår och ingen plats.",
+      "freeTitle": "Löpning",
+      "intervalsTitle": "Intervaller {{reps}} × {{m}} m",
+      "gps_wait": "Plats …",
+      "gps_ok": "Plats bra",
+      "gps_weak": "Plats osäker",
+      "gps_off": "Ingen plats",
+      "freeLabel": "Löptid",
+      "workLabel": "Intervall {{n}} av {{of}}",
+      "restLabel": "Joggvila efter {{n}}",
+      "doneLabel": "Alla intervaller klara",
+      "left": "{{m}} m kvar",
+      "pace": "Tempo",
+      "distance": "Sträcka",
+      "total": "Totalt",
+      "splitsN": "Varv",
+      "lap": "Varv",
+      "finishHint": "Pausa först för att avsluta.",
+      "say": {
+        "work": "Intervall {{n}}",
+        "rest": "Joggvila",
+        "last100": "Hundra meter kvar",
+        "done": "Alla intervaller klara"
+      }
+    },
+    "summary": {
+      "title": "Sammanfattning",
+      "lost": "Här finns inget pass. Sparade pass hittar du i dagboken.",
+      "toTraining": "Till träningen",
+      "saved": "Sparat · {{date}}",
+      "duration": "Uppmätt tid",
+      "sets": "Set",
+      "distance": "Sträcka",
+      "pace": "Tempo",
+      "rounds": "Ronder",
+      "hr": "Puls snitt / max",
+      "compare": "Jämfört med förra gången",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} rep.",
+      "first": "Första gången med den här övningen — från och med nu finns en jämförelse.",
+      "unknown_one": "Förra gången {{previous}}. Mätfelet ännu okänt: {{count}} pass kvar till en bedömning.",
+      "unknown_other": "Förra gången {{previous}}. Mätfelet ännu okänt: {{count}} pass kvar till en bedömning.",
+      "v": {
+        "better": "Över ditt mätfel (från {{detectable}} %), bättre.",
+        "worse": "Över ditt mätfel (från {{detectable}} %), sämre.",
+        "within_noise": "Inom bruset, ingen belagd skillnad (tröskel {{detectable}} %)."
+      },
+      "estimate": "e1RM är en uppskattning.",
+      "note": "Jämförelsen görs med senaste passet med samma övning. ”Bättre” först när förändringen överstiger din egen variation — det kräver minst fyra pass.",
+      "splits": "Delsträckor",
+      "retest": "Nästa retest:",
+      "retestIn_one": "om {{count}} dag",
+      "retestIn_other": "om {{count}} dagar",
+      "view": "Visa",
+      "done": "Klar"
+    }
   }
 }

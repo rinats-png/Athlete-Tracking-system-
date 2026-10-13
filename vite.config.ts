@@ -3,6 +3,27 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import path from 'node:path'
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
+
+/**
+ * Die Laufzeit der Kameraerkennung (MediaPipe, WebAssembly) liegt im Paket
+ * und wird beim Start von Entwicklung und Bau nach public/mediapipe kopiert
+ * (nicht im Repo, siehe .gitignore). So kommt sie von der eigenen Herkunft —
+ * kein Laden von fremden Servern, auch nicht beim ersten Mal. Nur die
+ * SIMD-Fassung: jeder Browser mit Wake Lock und Kamera im Web kann SIMD.
+ */
+function copyMediapipe() {
+  return {
+    name: 'kydon-copy-mediapipe',
+    buildStart() {
+      const from = path.resolve(__dirname, 'node_modules/@mediapipe/tasks-vision/wasm')
+      const to = path.resolve(__dirname, 'public/mediapipe')
+      if (!existsSync(from)) return
+      mkdirSync(to, { recursive: true })
+      for (const f of ['vision_wasm_internal.js', 'vision_wasm_internal.wasm']) copyFileSync(path.join(from, f), path.join(to, f))
+    },
+  }
+}
 
 /**
  * Die App-Version landet als Konstante im Bundle. Exportdateien tragen sie
@@ -26,6 +47,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    copyMediapipe(),
     react(),
     tailwindcss(),
     VitePWA({
@@ -61,8 +83,18 @@ export default defineConfig({
         // Die Testbilder (rund 9 MB) gehören nicht in den Vorab-Zwischenspeicher:
         // sie sind Beiwerk, die Vorschrift steht auch ohne sie. Sie werden beim
         // ersten Ansehen gespeichert und danach offline gezeigt.
-        globIgnores: ['testbilder/**'],
+        // Kameraerkennung (rund 19 MB) ebenso: erst beim ersten Öffnen laden,
+        // danach offline. Wer die Kamera nie nutzt, lädt sie nie.
+        globIgnores: ['testbilder/**', 'mediapipe/**', 'models/**'],
         runtimeCaching: [
+          {
+            urlPattern: ({ url }: { url: URL }) => url.pathname.startsWith('/mediapipe/') || url.pathname.startsWith('/models/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'pose',
+              expiration: { maxEntries: 8, maxAgeSeconds: 60 * 60 * 24 * 365 },
+            },
+          },
           {
             urlPattern: ({ url }: { url: URL }) => url.pathname.startsWith('/testbilder/'),
             handler: 'CacheFirst',

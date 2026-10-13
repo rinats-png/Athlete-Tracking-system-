@@ -191,7 +191,7 @@ test.describe('Bildschirme', () => {
     await expect(page.getByTestId('setlog-count')).toContainText('1')
     await page.getByTestId('player-rpe-6').click()
     await page.getByTestId('player-done').click()
-    await expect(page).toHaveURL(/\/plan\/block/)
+    await expect(page).toHaveURL(/\/plan\/fertig/)
     const a = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0])
     const b = a.trainingBlocks[0]
     const c = b.completions[0]

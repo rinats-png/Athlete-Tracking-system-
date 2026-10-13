@@ -3170,8 +3170,8 @@
     "save": "Training vastleggen"
   },
   "planHub": {
-    "eyebrow": "Training",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Training",
     "competition": "Doel: {{name}}",
     "competitionUnnamed": "je wedstrijd",
     "empty": {
@@ -4043,7 +4043,8 @@
     "start": "Training starten",
     "lost": "Hier is geen training gekozen. Kies er een onder ‘Training starten’.",
     "noSlot": "Vrije training: telt als training, maar vinkt geen datum in het plan af.",
-    "save": "Opslaan in het trainingslog"
+    "save": "Opslaan in het trainingslog",
+    "defaultTitle": "Vrije krachttraining"
   },
   "aiConsent": {
     "title": "Toestemming: teksten laten formuleren door een taalmodel",
@@ -4173,5 +4174,196 @@
     "grantCoach": "Bevestigen en synchroniseren",
     "withdrawButton": "Toestemming intrekken",
     "cancel": "Annuleren"
+  },
+  "workout": {
+    "running": "Loopt · {{time}}",
+    "start": "Starten",
+    "pause": "Pauze",
+    "paused": "Gepauzeerd",
+    "resume": "Verder",
+    "finish": "Beëindigen",
+    "save": "Opslaan",
+    "continue": "Verder trainen",
+    "discard": "Weggooien",
+    "discardConfirm": "Echt weggooien",
+    "close": "Sluiten",
+    "minimize": "Verlaten, training loopt door",
+    "voice": "Gesproken aanwijzingen",
+    "bar": {
+      "running": "Training loopt · {{time}}",
+      "paused": "Training gepauzeerd · {{time}}",
+      "rest": "Rust {{time}}",
+      "back": "Terug"
+    },
+    "conflict": {
+      "title": "Loopt al: {{title}}",
+      "body": "Ga daar verder — of gooi het weg en begin hier opnieuw.",
+      "continue": "Daar verdergaan",
+      "replace": "Weggooien en hier starten"
+    },
+    "focus": {
+      "exercise": "Oefening {{n}} van {{of}}",
+      "set": "Set {{n}} van {{of}}",
+      "target": "Doel {{target}}",
+      "last": "Vorige keer: {{value}}",
+      "less": "Minder {{field}}",
+      "more": "Meer {{field}}",
+      "done": "Set klaar",
+      "allDone": "Alle sets vastgelegd. Rond hieronder af."
+    },
+    "rest": {
+      "title": "Rust",
+      "of": "van {{total}}",
+      "next": "Hierna",
+      "sound": "Geluid bij 3-2-1 en aan het eind · ook zonder netwerk",
+      "skip": "Rust overslaan"
+    },
+    "camera": {
+      "chip": "Camera telt",
+      "title": "Camera telt mee",
+      "close": "Camera sluiten",
+      "onDevice": "Alleen op het apparaat",
+      "loading": "Camera en herkenning worden geladen …",
+      "denied": "Geen toegang tot de camera.",
+      "unsupported": "De herkenning werkt niet op dit apparaat.",
+      "fallback": "Tel zelf zoals altijd en vul de herhalingen in.",
+      "back": "Terug naar de set",
+      "setupTitle": "Camera instellen",
+      "hint": {
+        "squat": "{{name}}: zijdelings neerzetten, hele lichaam in beeld.",
+        "hinge": "{{name}}: zijdelings neerzetten, hele lichaam in beeld.",
+        "push": "{{name}}: zijdelings neerzetten, schouder, elleboog en hand in beeld.",
+        "pull": "{{name}}: van voren of opzij, schouder, elleboog en hand in beeld."
+      },
+      "check": {
+        "body": "Lichaam zichtbaar",
+        "light": "Genoeg licht",
+        "still": "Telefoon staat stil"
+      },
+      "ok": "in orde",
+      "waiting": "nog niet",
+      "privacy": "De herkenning draait alleen op je apparaat. Geen beeld en geen video verlaat de telefoon of wordt opgeslagen — alleen de getallen worden opgeslagen.",
+      "ofTarget": "van {{target}} herh.",
+      "tempo": "Tempo per herhaling · relatief",
+      "estimate": "Schatting",
+      "loss": "Tempoverlies in de set tot nu toe −{{percent}} %. Een vergelijking met andere dagen komt pas als je meetfout bekend is.",
+      "lossNone": "Het tempo verschijnt vanaf de tweede herhaling.",
+      "startTitle": "Camera telt",
+      "startIntro": "Kies een oefening. Telefoon op de grond, doe je set — de camera telt de herhalingen.",
+      "pattern": {
+        "squat": "Squatpatroon",
+        "hinge": "Heupscharnier",
+        "push": "Duwen",
+        "pull": "Trekken"
+      }
+    },
+    "clock": {
+      "title": "Rondes en intervallen",
+      "intro": "Een klok voor vechtsportrondes, Tabata, EMOM, AMRAP en intervallen. Geluid, trilling en stem — het scherm blijft aan.",
+      "presets": "Sjablonen",
+      "preset": {
+        "boxing": "Boksen 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervallen"
+      },
+      "work": "Werk (sec)",
+      "total": "Totale tijd (sec)",
+      "rest": "Rust (sec)",
+      "rounds": "Rondes",
+      "warn": "Vooraankondiging (sec)",
+      "totalTime": "Totale duur: {{time}}",
+      "prep": "Zo gaan we beginnen",
+      "round": "Ronde {{n}}",
+      "restPhase": "Rust",
+      "amrapLabel": "Zoveel mogelijk rondes",
+      "amrapTap": "Ronde gehaald · {{n}}",
+      "done": "Gehaald",
+      "lastSeconds": "Laatste {{count}} seconden",
+      "elapsed": "Totaal {{time}}",
+      "skip": "Verder",
+      "say": {
+        "round": "Ronde {{n}}",
+        "go": "Start",
+        "rest": "Rust",
+        "warn": "Laatste {{count}} seconden",
+        "done": "Gehaald"
+      }
+    },
+    "punch": {
+      "enable": "Stoten tellen (microfoon, preview)",
+      "title": "Stoten (microfoon)",
+      "calibrate": "Proef: sla tien keer — {{n}} van 10",
+      "denied": "Geen toegang tot de microfoon.",
+      "estimate": "Schatting · preview, niet gevalideerd"
+    },
+    "run": {
+      "title": "Hardlopen",
+      "intro": "Tijd, afstand, tempo en hartslag. Vrij of als intervallen op afstand.",
+      "mode": "Soort loop",
+      "mode_free": "Vrij",
+      "mode_intervals": "Intervallen",
+      "reps": "Herhalingen",
+      "workM": "Afstand (m)",
+      "restS": "Dribbelpauze (sec)",
+      "privacy": "De locatie wordt alleen gebruikt zolang de app open is, en alleen op het apparaat. Opgeslagen worden afstand, tijd en rondes — geen route en geen plaats.",
+      "freeTitle": "Hardlopen",
+      "intervalsTitle": "Intervallen {{reps}} × {{m}} m",
+      "gps_wait": "Locatie …",
+      "gps_ok": "Locatie goed",
+      "gps_weak": "Locatie onnauwkeurig",
+      "gps_off": "Geen locatie",
+      "freeLabel": "Looptijd",
+      "workLabel": "Interval {{n}} van {{of}}",
+      "restLabel": "Dribbelpauze na {{n}}",
+      "doneLabel": "Alle intervallen gehaald",
+      "left": "nog {{m}} m",
+      "pace": "Tempo",
+      "distance": "Afstand",
+      "total": "Totaal",
+      "splitsN": "Rondes",
+      "lap": "Ronde",
+      "finishHint": "Eerst pauzeren om te beëindigen.",
+      "say": {
+        "work": "Interval {{n}}",
+        "rest": "Dribbelpauze",
+        "last100": "Nog honderd meter",
+        "done": "Alle intervallen gehaald"
+      }
+    },
+    "summary": {
+      "title": "Samenvatting",
+      "lost": "Hier is geen training. Opgeslagen trainingen vind je in het dagboek.",
+      "toTraining": "Naar training",
+      "saved": "Opgeslagen · {{date}}",
+      "duration": "Gemeten duur",
+      "sets": "Sets",
+      "distance": "Afstand",
+      "pace": "Tempo",
+      "rounds": "Rondes",
+      "hr": "Hartslag gem. / max",
+      "compare": "Ten opzichte van vorige keer",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} herh.",
+      "first": "De eerste keer met deze oefening — vanaf nu is er een vergelijking.",
+      "unknown_one": "Vorige keer {{previous}}. Meetfout nog onbekend: nog {{count}} sessie tot een oordeel.",
+      "unknown_other": "Vorige keer {{previous}}. Meetfout nog onbekend: nog {{count}} sessies tot een oordeel.",
+      "v": {
+        "better": "Boven je meetfout (vanaf {{detectable}} %), beter.",
+        "worse": "Boven je meetfout (vanaf {{detectable}} %), slechter.",
+        "within_noise": "Binnen de ruis, geen aangetoond verschil (drempel {{detectable}} %)."
+      },
+      "estimate": "e1RM is een schatting.",
+      "note": "Vergeleken wordt met de laatste sessie van dezelfde oefening. ‘Beter’ pas als de verandering boven je eigen schommeling ligt — daarvoor zijn minstens vier sessies nodig.",
+      "splits": "Tussentijden",
+      "retest": "Volgende retest:",
+      "retestIn_one": "over {{count}} dag",
+      "retestIn_other": "over {{count}} dagen",
+      "view": "Bekijken",
+      "done": "Klaar"
+    }
   }
 }
