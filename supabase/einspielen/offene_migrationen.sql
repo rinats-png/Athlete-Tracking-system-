@@ -6,7 +6,7 @@
 -- Nicht von Hand ändern: die Einzeldateien sind die Quelle.
 --
 -- Enthalten:
---   20261013100000_sensitive_consents.sql
+--   20261013110000_revoke_truncate_delete.sql
 --
 -- EINMAL ausführen. Alles läuft in EINER Transaktion: schlägt ein Schritt
 -- fehl, wird nichts übernommen — dann die Fehlermeldung weitergeben, nicht
@@ -16,67 +16,70 @@
 
 begin;
 
--- ########## 20261013100000_sensitive_consents.sql ##########
+-- ########## 20261013110000_revoke_truncate_delete.sql ##########
 
 -- =============================================================================
--- Einwilligung in den Abgleich gesundheitsnaher Angaben (Art. 9 DSGVO)
+-- Unnötige Tabellenrechte entziehen: TRUNCATE überall, DELETE ohne Löschregel
 --
--- WARUM: Seit das Konto Pflicht ist und der Abgleich von selbst läuft
--- (13.10.2026), ist «Abgleich einschalten» keine Einwilligung mehr. Schlaf,
--- Stress, Herzfrequenz, Körperzusammensetzung und Beschwerden können
--- Gesundheitsdaten sein; sie gehen nur mit ausdrücklicher Einwilligung in den
--- Abgleich (src/domain/sensitiveData.ts). Ohne Eintrag hier filtert die App
--- sie heraus, bevor sie schreibt.
+-- WARUM: Supabase gibt `anon` und `authenticated` auf jeder neuen Tabelle im
+-- Schema public standardmässig ALLE Rechte. Die Zeilenregeln (RLS) halten
+-- Lesen, Schreiben und Löschen trotzdem dicht — TRUNCATE aber umgeht RLS
+-- vollständig. Über die App-Schnittstelle (PostgREST) ist TRUNCATE nicht
+-- erreichbar; ein Recht, das niemand braucht, gehört trotzdem nicht vergeben
+-- (Live-Audit 13.10.2026, alle 37 Tabellen betroffen).
 --
--- WARUM AUF DEM SERVER: Art. 7 Abs. 1 DSGVO verlangt den NACHWEIS. Ein Haken
--- im Browser genügt dafür nicht. Gespeichert wird nur, DASS und WANN, welche
--- Fassung des Textes galt, ob die Person ihr Mindestalter (16) bestätigt hat
--- und in welcher Rolle (`self` = eigene Daten, `coach` = Trainer bestätigt,
--- dass die Einwilligungen seiner Athleten vorliegen).
+-- WAS GENAU:
+--   1. TRUNCATE: entzogen für anon und authenticated, auf allen Tabellen.
+--   2. DELETE für anon: entzogen, auf allen Tabellen. Jede Löschregel im
+--      Projekt gilt nur für `authenticated` (geprüft am 13.10.2026).
+--   3. DELETE für authenticated: entzogen auf den Tabellen OHNE Löschregel.
+--      Dort hat RLS jedes Löschen ohnehin auf null Zeilen gesetzt; jetzt
+--      sagt die Datenbank es ausdrücklich. Die App löscht in keiner dieser
+--      Tabellen (Suche im Code); die Funktionen, die dort löschen
+--      (leave_team, purge_expired, delete_account_data …), laufen als
+--      Eigentümer (security definer) und behalten ihr Recht. service_role
+--      (Edge Functions) ist nicht betroffen.
+--   4. Standardrechte für künftige Tabellen: kein TRUNCATE für anon und
+--      authenticated, kein DELETE für anon. Wer eine Tabelle mit Löschregel
+--      anlegt, braucht nichts zu tun — DELETE für authenticated bleibt Vorgabe.
 --
--- WIDERRUF: setzt `withdrawn_at`. Die Zeile bleibt — ein Widerruf ist Teil des
--- Nachweises. Mit dem Konto verschwindet sie (on delete cascade).
+-- Mehrfach ausführbar: REVOKE auf ein nicht vergebenes Recht ist kein Fehler.
 -- =============================================================================
 
-create table if not exists public.sensitive_consents (
-  user_id uuid primary key references auth.users (id) on delete cascade,
-  version text not null,
-  kind text not null default 'self',
-  granted_at timestamptz not null default now(),
-  withdrawn_at timestamptz,
-  age_confirmed boolean not null default false,
-  updated_at timestamptz not null default now(),
-  constraint sensitive_consents_version_len check (char_length(version) between 1 and 20),
-  constraint sensitive_consents_kind check (kind in ('self', 'coach'))
-);
+do $$
+declare
+  t record;
+begin
+  for t in
+    select c.relname
+    from pg_class c
+    join pg_namespace n on n.oid = c.relnamespace
+    where n.nspname = 'public' and c.relkind in ('r', 'p')
+  loop
+    execute format('revoke truncate on table public.%I from anon, authenticated', t.relname);
+    execute format('revoke delete on table public.%I from anon', t.relname);
+  end loop;
+end
+$$;
 
-comment on table public.sensitive_consents is
-  'Nachweis der Einwilligung in den Abgleich gesundheitsnaher Angaben (Art. 9 Abs. 2 lit. a, Art. 7 Abs. 1 DSGVO): Fassung, Rolle, Zeitpunkt, Widerruf, Altersbestätigung.';
+-- Tabellen ohne Löschregel: angemeldete Nutzer löschen hier nichts.
+revoke delete on table
+  public.ai_consents,
+  public.coach_usage,
+  public.entitlements,
+  public.performance_norms,
+  public.plan_assignment_results,
+  public.plan_assignments,
+  public.profiles,
+  public.security_events,
+  public.sensitive_consents,
+  public.team_invites,
+  public.team_members,
+  public.teams
+from authenticated;
 
-alter table public.sensitive_consents enable row level security;
-
-drop policy if exists sensitive_consents_select_own on public.sensitive_consents;
-create policy sensitive_consents_select_own on public.sensitive_consents
-  for select to authenticated using ((select auth.uid()) = user_id);
-
-drop policy if exists sensitive_consents_insert_own on public.sensitive_consents;
-create policy sensitive_consents_insert_own on public.sensitive_consents
-  for insert to authenticated with check ((select auth.uid()) = user_id);
-
-drop policy if exists sensitive_consents_update_own on public.sensitive_consents;
-create policy sensitive_consents_update_own on public.sensitive_consents
-  for update to authenticated
-  using ((select auth.uid()) = user_id)
-  with check ((select auth.uid()) = user_id);
-
--- Kein DELETE für Clients: der Nachweis soll nicht verschwinden, solange das
--- Konto besteht. Widerrufen geht über `withdrawn_at`.
-
-revoke all on public.sensitive_consents from anon;
-grant select, insert, update on public.sensitive_consents to authenticated;
-
-drop trigger if exists sensitive_consents_touch on public.sensitive_consents;
-create trigger sensitive_consents_touch before update on public.sensitive_consents
-  for each row execute function public.touch_updated_at();
+-- Künftige Tabellen (angelegt von postgres, wie alle Migrationen hier).
+alter default privileges for role postgres in schema public revoke truncate on tables from anon, authenticated;
+alter default privileges for role postgres in schema public revoke delete on tables from anon;
 
 commit;

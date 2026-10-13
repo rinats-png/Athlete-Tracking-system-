@@ -13,9 +13,9 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 
 export const OPEN_MIGRATIONS = [
-  // Live-Audit 13.10.2026 (nur lesend): alle älteren Migrationen sind live —
-  // Tabellen, Trigger, Zeitpläne und Rechte geprüft. Offen ist nur diese.
-  '20261013100000_sensitive_consents.sql',
+  // Live-Audit 13.10.2026: alle älteren Migrationen sind live, auch
+  // sensitive_consents (am 13.10. eingespielt und geprüft).
+  '20261013110000_revoke_truncate_delete.sql',
 ]
 
 export function buildBundle(read = (f) => readFileSync(`supabase/migrations/${f}`, 'utf8')) {
