@@ -14,7 +14,6 @@ import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { OverviewScreen } from '@/features/overview/OverviewScreen'
 import { CheckInPanel } from './CheckInPanel'
-import { QuickStarts } from './QuickStarts'
 import { AREA_IMAGES } from '@/data/visuals'
 import { Play } from 'lucide-react'
 import { athleteToday, type ConfidenceLevel } from '@/domain/performanceView'
@@ -29,6 +28,9 @@ import { cn } from '@/lib/utils'
 // Das Kennzeichen «fachlich noch nicht geprüft» samt Regelregister wird
 // nachgeladen — «Heute» liegt im Startpaket (Grenze 1100 KB).
 const ReviewChip = lazy(() => import('@/features/plan/ReviewMark').then((m) => ({ default: m.ReviewChip })))
+// Die vier Schnellstarts ebenso; der Platzhalter hält ihre Höhe, damit nichts springt.
+const QuickStarts = lazy(() => import('./QuickStarts'))
+const quickFallback = (className: string) => <div className={`${className} h-[106px]`} aria-hidden />
 
 /**
  * Heute — die Startseite des Athleten (Produktdoktrin §7).
@@ -52,7 +54,9 @@ export function AthleteToday() {
   if (!data.results.some((r) => r.score != null))
     return (
       <>
-        <QuickStarts className="mb-5" />
+        <Suspense fallback={quickFallback('mb-5')}>
+          <QuickStarts className="mb-5" />
+        </Suspense>
         <OverviewScreen />
       </>
     )
@@ -143,7 +147,9 @@ function TodayWithData() {
               </Link>
             </PhotoCard>
           )}
-          <QuickStarts className="mt-4" />
+          <Suspense fallback={quickFallback('mt-4')}>
+            <QuickStarts className="mt-4" />
+          </Suspense>
         </div>
 
         {/* Zeitleiste: verpasst, als Nächstes, Wettkampf. */}

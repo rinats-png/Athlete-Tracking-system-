@@ -75,7 +75,7 @@ test.describe('Live-Puls: Bildschirm', () => {
     await expect(page.getByTestId('hr-error')).toContainText('30 bis 230')
     await page.getByTestId('player-rpe-8').click()
     await page.getByTestId('player-done').click()
-    await expect(page).toHaveURL(/\/plan\/block/)
+    await expect(page).toHaveURL(/\/plan\/fertig/)
     const c = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks[0].completions[0])
     expect(c).toMatchObject({ avgHr: 164, maxHr: 175 })
   })

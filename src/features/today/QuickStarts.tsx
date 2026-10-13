@@ -5,7 +5,8 @@ import { Camera, Dumbbell, Footprints, Timer } from 'lucide-react'
 /**
  * Sofort los — ohne Plan (Mockup Variante A): Kraft frei, Lauf, Runden,
  * Kamera. Ein Tipp öffnet den jeweiligen Zähler. Liegt auf «Heute» und im
- * Bereich Training. Klein gehalten: «Heute» liegt im Startpaket.
+ * Bereich Training. Ein Abschnitt, keine Navigation: die Hauptnavigation ist
+ * die Leiste. Auf «Heute» nachgeladen (Startpaket, Grenze 1100 KB).
  */
 const ITEMS = [
   { key: 'strength', to: '/plan/frei/neu', icon: Dumbbell },
@@ -14,10 +15,12 @@ const ITEMS = [
   { key: 'camera', to: '/plan/kamera', icon: Camera },
 ] as const
 
+export default QuickStarts
+
 export function QuickStarts({ className = '' }: { className?: string }) {
   const { t } = useTranslation()
   return (
-    <nav aria-label={t('quickStart.title')} className={className} data-testid="quick-starts">
+    <section aria-label={t('quickStart.title')} className={className} data-testid="quick-starts">
       <p className="label-tag mb-2">{t('quickStart.title')}</p>
       <ul className="grid grid-cols-4 gap-2">
         {ITEMS.map(({ key, to, icon: Icon }) => (
@@ -29,6 +32,6 @@ export function QuickStarts({ className = '' }: { className?: string }) {
           </li>
         ))}
       </ul>
-    </nav>
+    </section>
   )
 }
