@@ -288,8 +288,20 @@ export function PlanCalendarScreen() {
         </Panel>
       )}
 
+      {/*
+        Das Verschiebe-Feld klebt knapp über der Navigationsleiste (am Desktop,
+        ohne Leiste, knapp über dem Rand). Der Abstand ist kleiner als der
+        Leerraum, den die Hülle unter dem Inhalt freihält — ganz unten liegt das
+        Feld deshalb unter dem Kalender, nicht darauf. Auf niedrigen Bildschirmen
+        (Telefon quer) klebt es gar nicht: Leiste und Feld liessen dort kaum
+        Platz für den Kalender. Das Kleben macht
+        der Rahmen, nicht das Panel: `float` setzt `position: relative`, und
+        zusammen mit `bottom-24` schob das das Feld fest um 96 px nach oben —
+        über die letzte Monatszeile, genau die Tage, die man antippen will.
+      */}
       {(picked || error) && (
-        <Panel float className="sticky bottom-24 mt-4 border-accent" data-testid="cal-move">
+        <div className="sticky bottom-[calc(var(--bottom-nav-h)+env(safe-area-inset-bottom)+0.5rem)] z-10 mt-4 lg:bottom-4 [@media(max-height:560px)]:static" data-testid="cal-move-frame">
+        <Panel float className="border-accent" data-testid="cal-move">
           <div className="space-y-2 px-4 py-4">
             {picked && (
               <p className="text-[14px]">
@@ -327,6 +339,7 @@ export function PlanCalendarScreen() {
             <p className="text-[11px] text-ink-muted">{series ? t('cal.seriesNote') : t('cal.singleNote')}</p>
           </div>
         </Panel>
+        </div>
       )}
     </div>
   )
