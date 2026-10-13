@@ -5,6 +5,9 @@ import { carriesSeries, mergeSeries, planSeriesPush, stripSeries, type SeriesRow
 import { clearCarryChoice, readCarryChoice } from '@/lib/coachStatus'
 import { isBlankPlaceholder } from '@/lib/store/placeholder'
 import { planDeletions, type RemoteDocHead } from './deletions'
+import { resolveSensitiveConsent } from './sensitiveConsent'
+import { readSensitiveMode, writeSensitiveMode } from '@/lib/sensitiveConsent'
+import { athleteWithoutSensitive } from '@/domain/sensitiveData'
 
 /**
  * Synchronisierung: der Bestand als Zweitschrift auf dem Server.
@@ -34,6 +37,10 @@ import { planDeletions, type RemoteDocHead } from './deletions'
  * Der Abgleich läuft mit dem Konto von selbst (`features/shared/useAutoSync`);
  * im Profil lässt er sich ausschalten. Gesundheitsdaten gehen hier nie mit —
  * sie haben ihren eigenen, verschlüsselten Weg mit Einwilligung je Kategorie.
+ * GESUNDHEITSNAHE Angaben (Schlaf, Stress, Herzfrequenz, Körperfett,
+ * Beschwerden — domain/sensitiveData.ts) gehen nur mit, wenn der Server eine
+ * ausdrückliche Einwilligung kennt (Art. 9 Abs. 2 lit. a); sonst filtert der
+ * Abgleich sie heraus, bevor er schreibt.
  *
  * DER BESTAND IST NICHT IMMER DER EIGENE. Wer als Trainer in einem Team
  * arbeitet, gleicht gegen den Bestand des Teaminhabers ab (`my_pool_owner`,
@@ -140,6 +147,15 @@ export async function syncOnce(
   const owner = readSyncOwner()
   if (owner && owner !== me) return fail('other_account')
   if (!owner) writeSyncOwner(me)
+
+  // Dürfen gesundheitsnahe Angaben in diesem Lauf mit? Nur mit Einwilligung
+  // auf dem Server. Wechselt die Antwort gegenüber dem letzten Lauf, gehen
+  // alle Zeitreihen neu hoch: nach einem Widerruf ohne die Angaben, nach
+  // einer Einwilligung mit ihnen.
+  const withSensitive = await resolveSensitiveConsent(supabase, me, auth.user?.email ?? null)
+  const sensitiveMode = withSensitive ? 'with' : 'without'
+  const rewriteSeries = readSensitiveMode() !== sensitiveMode
+  const shape = (athlete: StoredAthlete): StoredAthlete => (withSensitive ? athlete : athleteWithoutSensitive(athlete))
 
   // In welchem Bestand arbeite ich? Ohne Antwort (alte Datenbank, Fehler):
   // im eigenen — das ist der Stand vor den Teams und nie ein fremder.
@@ -263,7 +279,7 @@ export async function syncOnce(
       owner_id: uid,
       athlete_id: athlete.id,
       schema_version: CURRENT_SCHEMA_VERSION,
-      document: stripSeries(athlete),
+      document: stripSeries(shape(athlete)),
       device_id: device,
     }
 
@@ -318,7 +334,7 @@ export async function syncOnce(
     // Der Bestand nach dem Einarbeiten der fremden Zeilen — sonst würden
     // eben geholte Einträge gleich wieder hochgeschrieben.
     const merged = mergeSeries(athlete, foreign).athlete
-    const plan = planSeriesPush(merged, remoteSeries, state.seriesSyncedAt, device)
+    const plan = planSeriesPush(shape(merged), remoteSeries, rewriteSeries ? null : state.seriesSyncedAt, device)
     for (let i = 0; i < plan.upserts.length; i += 200) {
       const batch = plan.upserts.slice(i, i + 200).map((r) => ({ owner_id: uid, ...r, deleted_at: null }))
       const { error } = await supabase.from('athlete_series').upsert(batch, { onConflict: 'owner_id,athlete_id,kind,entry_id' })
@@ -352,6 +368,7 @@ export async function syncOnce(
   const seriesSyncedAt = newest?.updated_at ?? newestServerTime ?? state.seriesSyncedAt
 
   writeSyncState({ seen, lastSyncedAt: new Date().toISOString(), seriesSyncedAt, conflicts, pool: uid, deleted: pendingDeleted })
+  writeSensitiveMode(sensitiveMode)
   return { ok: conflicts.length === 0, pushed, pulled, seriesPushed, seriesPulled, conflicts, reason: null, poolSwitched }
 }
 

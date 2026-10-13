@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Check } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -12,6 +12,17 @@ import {
   type AuthOutcome,
 } from '@/lib/supabase/auth'
 import { plansForRole, writeAccount, type Account, type AccountRole } from './account'
+import { loadExtra } from '@/i18n'
+
+/*
+ * Die Einwilligung in den Abgleich gesundheitsnaher Angaben (Art. 9) wird
+ * nachgeladen — samt ihrer Texte aus dem Zusatzwörterbuch. Sie erscheint erst
+ * im letzten Registrierungsschritt, und das Startpaket bleibt unter seiner
+ * Grenze (tests/loading.spec.ts).
+ */
+const SensitiveConsentField = lazy(() =>
+  Promise.all([import('@/features/shared/SensitiveConsent'), loadExtra()]).then(([m]) => ({ default: m.SensitiveConsentField })),
+)
 
 /**
  * Das Tor.
@@ -377,6 +388,7 @@ function RegisterDetails({
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [confirmFor, setConfirmFor] = useState<string | null>(null)
+  const [sensitive, setSensitive] = useState({ granted: false, ageConfirmed: false })
 
   if (confirmFor) {
     return (
@@ -408,6 +420,18 @@ function RegisterDetails({
     if (!isSupabaseConfigured()) {
       setError(message('not_configured'))
       return
+    }
+
+    // Die Wahl gilt für genau dieses Konto. Sie steht zuerst auf dem Gerät und
+    // geht mit dem ersten Abgleich auf den Server — oft gibt es jetzt noch
+    // keine Sitzung, weil erst die E-Mail bestätigt werden muss. Ohne Haken
+    // gilt «nicht eingewilligt»; eine alte Wahl eines anderen Kontos fällt weg.
+    // (Nachgeladen wie das Feld selbst — das Startpaket trägt es nicht.)
+    const consent = await import('@/lib/sensitiveConsent')
+    if (sensitive.granted && sensitive.ageConfirmed) {
+      consent.chooseSensitiveConsent({ granted: true, kind: role === 'coach' ? 'coach' : 'self', ageConfirmed: true, email })
+    } else if (consent.readSensitiveConsent().state !== 'unset') {
+      consent.writeSensitiveConsent({ ...consent.readSensitiveConsent(), state: 'unset', pending: false })
     }
 
     setBusy(true)
@@ -470,6 +494,10 @@ function RegisterDetails({
         </span>
       </label>
 
+      <Suspense fallback={null}>
+        <SensitiveConsentField role={role} value={sensitive} onChange={setSensitive} />
+      </Suspense>
+
       {error && (
         <p role="alert" className="border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-relaxed">
           {error}
@@ -477,7 +505,7 @@ function RegisterDetails({
       )}
 
       <div className="flex gap-2">
-        <Button type="submit" size="lg" variant="primary" className="justify-center" disabled={busy}>
+        <Button type="submit" size="lg" variant="primary" className="justify-center" disabled={busy || (sensitive.granted && !sensitive.ageConfirmed)}>
           {busy ? t('auth.working') : t('auth.createAccount')}
           {!busy && <ArrowRight size={15} aria-hidden />}
         </Button>

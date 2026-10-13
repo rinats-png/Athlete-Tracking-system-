@@ -2242,6 +2242,7 @@
     "title": "Novedades en KYDON:",
     "close": "Entendido",
     "items": {
+      "sensitive": "Los datos relacionados con la salud (sueño, estrés, pulso, grasa corporal, molestias) ahora solo se sincronizan con tu consentimiento explícito. Sin él se quedan en el dispositivo. Puedes decidirlo en el perfil, en «Datos».",
       "account": "Cuenta y sincronización: KYDON ahora se sincroniza solo con tu cuenta. Tus datos están guardados en servidores de la UE y al día en todos tus dispositivos. Puedes desactivarlo en el perfil; antes verás lo que deja de funcionar.",
       "design": "Nuevo diseño: tarjetas de cristal esmerilado con niveles, cifras mono para los valores medidos y transiciones más calmadas — claro y oscuro.",
       "tests": "Biblioteca de pruebas según el protocolo 1.0: 126 pruebas en 29 áreas, cada una con objetivo, montaje, pasos y valoración.",
@@ -4124,7 +4125,7 @@
     "conflictBody": "Este atleta se modificó en otro dispositivo. KYDON no ha sobrescrito nada — ambos estados están intactos. Guarda primero tu exportación y luego decide.",
     "conflictKeepLocal": "Subir este registro",
     "conflictExplain": "El estado del servidor se sustituye. La otra dirección — descargar el estado del servidor — pasa por exportar, «borrar todo» y una sincronización nueva.",
-    "whatLeaves": "Se sincronizan: mediciones, datos de perfil, notas, prioridades de entrenamiento, planes, además de diario, sesiones, decisiones y comidas. No se incluyen: tu contraseña, las actividades importadas ni los datos de salud, que tienen su propio canal cifrado.",
+    "whatLeaves": "Se sincronizan: mediciones, datos de perfil, notas, prioridades de entrenamiento, planes, además de diario, sesiones, decisiones y comidas. No se incluyen: tu contraseña, las actividades importadas ni los datos de salud, que tienen su propio canal cifrado. Los datos relacionados con la salud (sueño, estrés, pulso, grasa corporal, molestias), solo con tu consentimiento explícito.",
     "auto": "KYDON sincroniza solo: al arrancar, tras cada cambio y en cuanto vuelve la conexión.",
     "paused": "La sincronización está desactivada desde el {{date}}.",
     "frozen": "La copia de tu cuenta corresponde al {{date}}; lo añadido después solo está en este dispositivo y en la exportación.",
@@ -4141,5 +4142,36 @@
       "confirm": "Desactivar de todos modos",
       "keep": "Mantener la sincronización"
     }
+  },
+  "sensitiveConsent": {
+    "title": "Sincronizar datos relacionados con la salud",
+    "intro": "Opcional. Algunos datos pueden ser datos de salud. Solo se sincronizan con tu consentimiento explícito:",
+    "introCoach": "Opcional. Algunos datos de tus atletas pueden ser datos de salud. Solo se sincronizan si confirmas que los atletas han dado su consentimiento explícito:",
+    "cat": {
+      "wellbeing": "Sueño, energía, estrés y agujetas (diario, sesión de tests)",
+      "heart": "Variabilidad de la frecuencia cardiaca, pulso en reposo y pulso de las sesiones",
+      "body": "Grasa corporal, masa magra y metabolismo basal",
+      "complaints": "Molestias digestivas, la marca de dolor de una sesión y el valor de CK"
+    },
+    "without": "Sin consentimiento, exactamente estos datos se quedan en este dispositivo; todo lo demás se sincroniza. Un entrenador no los verá y faltarán en un dispositivo nuevo.",
+    "healthLayer": "Los análisis, síntomas, ciclo y medicación no forman parte de esto: la capa de salud tiene su propio consentimiento y está cifrada de extremo a extremo.",
+    "checkbox": {
+      "self": "Sí, consiento expresamente que estos datos se guarden y sincronicen con mi cuenta en servidores de la UE (art. 9.2.a RGPD).",
+      "coach": "Sí, estos datos de mis atletas deben sincronizarse. Confirmo que dispongo del consentimiento explícito de los atletas y, en el caso de menores, del de sus tutores legales."
+    },
+    "age": "Tengo al menos 16 años.",
+    "ageNeeded": "Confirma tu edad o vuelve a desmarcar la casilla.",
+    "withdraw": "Puedes retirar el consentimiento en cualquier momento en el perfil, en «Datos»; la siguiente sincronización elimina entonces estos datos del servidor.",
+    "state": {
+      "granted": "Consentido: estos datos se sincronizan.",
+      "withdrawn": "Retirado: estos datos se quedan en este dispositivo.",
+      "unset": "Sin consentimiento: estos datos se quedan en este dispositivo."
+    },
+    "pending": "Aún no ha llegado al servidor; la próxima sincronización lo recupera.",
+    "ask": "Dar consentimiento",
+    "grant": "Consentir expresamente",
+    "grantCoach": "Confirmar y sincronizar",
+    "withdrawButton": "Retirar el consentimiento",
+    "cancel": "Cancelar"
   }
 }

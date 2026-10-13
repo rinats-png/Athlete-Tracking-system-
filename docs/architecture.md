@@ -374,6 +374,8 @@ useAutoSync (AppShell): Start +2 s, Änderung +12 s, Netz zurück, Rückkehr nac
 SyncPanel „Jetzt abgleichen“ (von Hand, derselbe Weg)
   →  syncOnce()
   →  Besitzermarke kydon.sync.user: fremdes Konto auf dem Gerät? dann nichts schreiben
+  →  sensitive_consents: gesundheitsnahe Angaben nur mit Einwilligung, sonst
+     athleteWithoutSensitive (docs/datenschutz-art9-abgleich.md)
   →  rpc('my_pool_owner')  (Pool wechseln? dann lokalen Bestand ersetzen)
   →  Dokumente: lesen, vergleichen, schreiben mit .eq('updated_at', erwartet)
        ↳ abgelehnt → Konflikt, beide Stände bleiben

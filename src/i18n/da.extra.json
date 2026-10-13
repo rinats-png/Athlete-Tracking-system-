@@ -2242,6 +2242,7 @@
     "title": "Nyt i KYDON:",
     "close": "Forstået",
     "items": {
+      "sensitive": "Helbredsrelaterede oplysninger — søvn, stress, puls, kropsfedt, gener — synkroniserer KYDON nu kun med dit udtrykkelige samtykke. Uden bliver de på enheden. Du beslutter det i profilen under »Data«.",
       "account": "Konto og synkronisering: KYDON synkroniserer nu af sig selv med din konto. Dine data er sikret på servere i EU og opdateret på alle dine enheder. Du kan slå det fra i profilen — først ser du, hvad der så ikke længere virker.",
       "design": "Nyt design: kort af matteret glas med niveauer, monotal til måleværdier og roligere overgange — lyst og mørkt.",
       "tests": "Testbibliotek efter protokol 1.0: 126 tests i 29 områder, hver med mål, opstilling, trin og vurdering.",
@@ -4124,7 +4125,7 @@
     "conflictBody": "Denne atlet blev ændret på en anden enhed. KYDON har intet overskrevet — begge tilstande er intakte. Gem først din eksport, og beslut derefter.",
     "conflictKeepLocal": "Send denne journal",
     "conflictExplain": "Serverens tilstand erstattes. Den anden vej — at hente serverens tilstand — går via eksport, “slet alt” og en ny synkronisering.",
-    "whatLeaves": "Synkroniseres: målinger, profiloplysninger, noter, træningsprioriteter, planer samt dagbog, træningspas, beslutninger og måltider. Ikke med: din adgangskode, importerede løbeture og helbredsdata — de har deres egen krypterede vej.",
+    "whatLeaves": "Synkroniseres: målinger, profiloplysninger, noter, træningsprioriteter, planer samt dagbog, træningspas, beslutninger og måltider. Ikke med: din adgangskode, importerede løbeture og helbredsdata — de har deres egen krypterede vej. Helbredsrelaterede oplysninger (søvn, stress, puls, kropsfedt, gener) kun med dit udtrykkelige samtykke.",
     "auto": "KYDON synkroniserer af sig selv: efter start, efter hver ændring og så snart nettet er tilbage.",
     "paused": "Synkroniseringen har været slået fra siden {{date}}.",
     "frozen": "Kopien på din konto er fra {{date}}; det, der er kommet til siden, findes kun på denne enhed og i eksporten.",
@@ -4141,5 +4142,36 @@
       "confirm": "Slå fra alligevel",
       "keep": "Behold synkronisering"
     }
+  },
+  "sensitiveConsent": {
+    "title": "Synkronisér helbredsrelaterede oplysninger",
+    "intro": "Frivilligt. Nogle oplysninger kan være helbredsoplysninger. De synkroniseres kun med dit udtrykkelige samtykke:",
+    "introCoach": "Frivilligt. Nogle oplysninger om dine atleter kan være helbredsoplysninger. De synkroniseres kun, hvis du bekræfter, at atleterne har givet udtrykkeligt samtykke:",
+    "cat": {
+      "wellbeing": "Søvn, energi, stress og ømhed (dagbog, testdag)",
+      "heart": "Pulsvariabilitet, hvilepuls og puls under træningspas",
+      "body": "Kropsfedt, fedtfri masse og hvilestofskifte",
+      "complaints": "Mave-tarm-gener, smertemarkeringen for et træningspas og CK-værdien"
+    },
+    "without": "Uden samtykke bliver netop disse oplysninger på denne enhed — alt andet synkroniseres. En træner ser dem så ikke, og på en ny enhed mangler de.",
+    "healthLayer": "Laboratorieværdier, symptomer, cyklus og medicin hører ikke med: Helbredslaget har sit eget samtykke og er end-to-end-krypteret.",
+    "checkbox": {
+      "self": "Ja, jeg giver udtrykkeligt samtykke til, at disse oplysninger sikkerhedskopieres og synkroniseres med min konto på servere i EU (art. 9, stk. 2, litra a, GDPR).",
+      "coach": "Ja, disse oplysninger om mine atleter skal synkroniseres. Jeg bekræfter, at jeg har atleternes udtrykkelige samtykke — for mindreårige forældremyndighedens."
+    },
+    "age": "Jeg er mindst 16 år.",
+    "ageNeeded": "Bekræft din alder, eller fjern fluebenet igen.",
+    "withdraw": "Du kan til enhver tid trække samtykket tilbage i profilen under »Data«; næste synkronisering fjerner så oplysningerne fra serveren.",
+    "state": {
+      "granted": "Samtykke givet — disse oplysninger synkroniseres.",
+      "withdrawn": "Trukket tilbage — disse oplysninger bliver på denne enhed.",
+      "unset": "Intet samtykke — disse oplysninger bliver på denne enhed."
+    },
+    "pending": "Endnu ikke nået frem til serveren; næste synkronisering indhenter det.",
+    "ask": "Giv samtykke",
+    "grant": "Giv udtrykkeligt samtykke",
+    "grantCoach": "Bekræft og synkronisér",
+    "withdrawButton": "Træk samtykke tilbage",
+    "cancel": "Annuller"
   }
 }

@@ -23,6 +23,7 @@ export const OPEN_MIGRATIONS = [
   '20261011100000_document_tombstones.sql',
   '20261011110000_revoke_anon_rpc.sql',
   '20261011120000_ai_consents.sql',
+  '20261013100000_sensitive_consents.sql',
 ]
 
 export function buildBundle(read = (f) => readFileSync(`supabase/migrations/${f}`, 'utf8')) {

@@ -2242,6 +2242,7 @@
     "title": "Nytt i KYDON:",
     "close": "Uppfattat",
     "items": {
+      "sensitive": "Hälsorelaterade uppgifter — sömn, stress, puls, kroppsfett, besvär — synkar KYDON nu bara med ditt uttryckliga samtycke. Utan det stannar de på enheten. Du bestämmer i profilen under ”Data”.",
       "account": "Konto och synkning: KYDON synkar nu av sig själv med ditt konto. Dina data är säkrade på servrar i EU och aktuella på alla dina enheter. Du kan stänga av det i profilen — först ser du vad som då slutar fungera.",
       "design": "Ny design: kort av frostat glas med nivåer, monosiffror för mätvärden och lugnare övergångar — ljust och mörkt.",
       "tests": "Testbibliotek enligt protokoll 1.0: 126 tester i 29 områden, vart och ett med mål, uppställning, steg och bedömning.",
@@ -4124,7 +4125,7 @@
     "conflictBody": "Den här atleten ändrades på en annan enhet. KYDON skrev inte över något — båda tillstånden är intakta. Spara din export först, bestäm sedan.",
     "conflictKeepLocal": "Ladda upp den här posten",
     "conflictExplain": "Servertillståndet ersätts. Andra riktningen — att hämta servertillståndet — går via export, ”radera allt” och en ny synkronisering.",
-    "whatLeaves": "Synkas: mätningar, profiluppgifter, anteckningar, träningsprioriteringar, planer samt dagbok, pass, beslut och måltider. Inte med: ditt lösenord, importerade löprundor och hälsodata — de har en egen krypterad väg.",
+    "whatLeaves": "Synkas: mätningar, profiluppgifter, anteckningar, träningsprioriteringar, planer samt dagbok, pass, beslut och måltider. Inte med: ditt lösenord, importerade löprundor och hälsodata — de har en egen krypterad väg. Hälsorelaterade uppgifter (sömn, stress, puls, kroppsfett, besvär) bara med ditt uttryckliga samtycke.",
     "auto": "KYDON synkar av sig själv: efter start, efter varje ändring och så snart nätet är tillbaka.",
     "paused": "Synkningen har varit avstängd sedan {{date}}.",
     "frozen": "Kopian i ditt konto är från {{date}}; det som tillkommit sedan finns bara på den här enheten och i exporten.",
@@ -4141,5 +4142,36 @@
       "confirm": "Stäng av ändå",
       "keep": "Behåll synkningen"
     }
+  },
+  "sensitiveConsent": {
+    "title": "Synka hälsorelaterade uppgifter",
+    "intro": "Frivilligt. Vissa uppgifter kan vara hälsouppgifter. De synkas bara med ditt uttryckliga samtycke:",
+    "introCoach": "Frivilligt. Vissa uppgifter om dina idrottare kan vara hälsouppgifter. De synkas bara om du bekräftar att idrottarna har gett uttryckligt samtycke:",
+    "cat": {
+      "wellbeing": "Sömn, energi, stress och träningsvärk (dagbok, testtillfälle)",
+      "heart": "Hjärtfrekvensvariabilitet, vilopuls och puls under pass",
+      "body": "Kroppsfett, fettfri massa och vilometabolism",
+      "complaints": "Mag-tarmbesvär, smärtmarkeringen för ett pass och CK-värdet"
+    },
+    "without": "Utan samtycke stannar just dessa uppgifter på den här enheten — allt annat synkas. En tränare ser dem då inte, och på en ny enhet saknas de.",
+    "healthLayer": "Labbvärden, symtom, cykel och medicinering ingår inte: hälsolagret har ett eget samtycke och är end-to-end-krypterat.",
+    "checkbox": {
+      "self": "Ja, jag samtycker uttryckligen till att dessa uppgifter säkerhetskopieras och synkas med mitt konto på servrar i EU (art. 9.2 a GDPR).",
+      "coach": "Ja, dessa uppgifter om mina idrottare ska synkas. Jag bekräftar att jag har idrottarnas uttryckliga samtycke — för minderåriga vårdnadshavarnas."
+    },
+    "age": "Jag är minst 16 år.",
+    "ageNeeded": "Bekräfta din ålder eller ta bort bocken igen.",
+    "withdraw": "Du kan när som helst återkalla samtycket i profilen under ”Data”; nästa synkning tar då bort uppgifterna från servern.",
+    "state": {
+      "granted": "Samtycke givet — dessa uppgifter synkas.",
+      "withdrawn": "Återkallat — dessa uppgifter stannar på den här enheten.",
+      "unset": "Inget samtycke — dessa uppgifter stannar på den här enheten."
+    },
+    "pending": "Har ännu inte nått servern; nästa synkning tar igen det.",
+    "ask": "Ge samtycke",
+    "grant": "Samtyck uttryckligen",
+    "grantCoach": "Bekräfta och synka",
+    "withdrawButton": "Återkalla samtycke",
+    "cancel": "Avbryt"
   }
 }

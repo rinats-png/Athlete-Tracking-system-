@@ -2242,6 +2242,7 @@
     "title": "Nieuw bij KYDON:",
     "close": "Begrepen",
     "items": {
+      "sensitive": "Gezondheidsgerelateerde gegevens — slaap, stress, hartslag, vetpercentage, klachten — synchroniseert KYDON alleen nog met je uitdrukkelijke toestemming. Zonder blijven ze op het apparaat. Je beslist in je profiel onder ‘Gegevens’.",
       "account": "Account en synchronisatie: KYDON synchroniseert nu vanzelf met je account. Je gegevens zijn geback-upt op servers in de EU en actueel op al je apparaten. Uitschakelen kan in je profiel — je ziet eerst wat dan niet meer werkt.",
       "design": "Nieuw ontwerp: matglazen kaarten met lagen, monocijfers voor meetwaarden en rustigere overgangen — licht en donker.",
       "tests": "Testbibliotheek volgens protocol 1.0: 126 tests in 29 gebieden, elk met doel, opstelling, stappen en beoordeling.",
@@ -4124,7 +4125,7 @@
     "conflictBody": "Deze atleet is op een ander apparaat gewijzigd. KYDON heeft niets overschreven — beide toestanden zijn intact. Sla eerst je export op, beslis dan.",
     "conflictKeepLocal": "Dit dossier uploaden",
     "conflictExplain": "De servertoestand wordt vervangen. De andere richting — de servertoestand ophalen — loopt via export, “alles verwijderen” en een nieuwe synchronisatie.",
-    "whatLeaves": "Gesynchroniseerd worden metingen, profielgegevens, notities, trainingsprioriteiten, plannen en daarnaast dagboek, trainingen, beslissingen en maaltijden. Niet inbegrepen: je wachtwoord, geïmporteerde activiteiten en gezondheidsgegevens — die hebben hun eigen versleutelde route.",
+    "whatLeaves": "Gesynchroniseerd worden metingen, profielgegevens, notities, trainingsprioriteiten, plannen en daarnaast dagboek, trainingen, beslissingen en maaltijden. Niet inbegrepen: je wachtwoord, geïmporteerde activiteiten en gezondheidsgegevens — die hebben hun eigen versleutelde route. Gezondheidsgerelateerde gegevens (slaap, stress, hartslag, vetpercentage, klachten) alleen met je uitdrukkelijke toestemming.",
     "auto": "KYDON synchroniseert vanzelf: na het starten, na elke wijziging en zodra er weer netwerk is.",
     "paused": "De synchronisatie staat sinds {{date}} uit.",
     "frozen": "De kopie in je account heeft de stand van {{date}}; wat daarna is toegevoegd, staat alleen op dit apparaat en in de export.",
@@ -4141,5 +4142,36 @@
       "confirm": "Toch uitschakelen",
       "keep": "Synchronisatie aanhouden"
     }
+  },
+  "sensitiveConsent": {
+    "title": "Gezondheidsgerelateerde gegevens synchroniseren",
+    "intro": "Vrijwillig. Sommige gegevens kunnen gezondheidsgegevens zijn. Ze worden alleen met je uitdrukkelijke toestemming gesynchroniseerd:",
+    "introCoach": "Vrijwillig. Sommige gegevens van je atleten kunnen gezondheidsgegevens zijn. Ze worden alleen gesynchroniseerd als je bevestigt dat de atleten uitdrukkelijk toestemming hebben gegeven:",
+    "cat": {
+      "wellbeing": "Slaap, energie, stress en spierpijn (dagboek, testmoment)",
+      "heart": "Hartslagvariabiliteit, rusthartslag en de hartslag van trainingen",
+      "body": "Vetpercentage, vetvrije massa en ruststofwisseling",
+      "complaints": "Maag-darmklachten, de pijnmarkering van een training en de CK-waarde"
+    },
+    "without": "Zonder toestemming blijven precies deze gegevens op dit apparaat — al het andere wordt gesynchroniseerd. Een trainer ziet ze dan niet, en op een nieuw apparaat ontbreken ze.",
+    "healthLayer": "Labwaarden, symptomen, cyclus en medicatie horen hier niet bij: de gezondheidslaag heeft een eigen toestemming en is end-to-end versleuteld.",
+    "checkbox": {
+      "self": "Ja, ik geef uitdrukkelijk toestemming dat deze gegevens met mijn account op servers in de EU worden geback-upt en gesynchroniseerd (art. 9 lid 2 sub a AVG).",
+      "coach": "Ja, deze gegevens van mijn atleten moeten worden gesynchroniseerd. Ik bevestig dat ik de uitdrukkelijke toestemming van de atleten heb — bij minderjarigen die van de wettelijke vertegenwoordigers."
+    },
+    "age": "Ik ben minstens 16 jaar oud.",
+    "ageNeeded": "Bevestig je leeftijd of haal het vinkje weer weg.",
+    "withdraw": "Je kunt de toestemming altijd intrekken in je profiel onder ‘Gegevens’; de volgende synchronisatie verwijdert deze gegevens dan van de server.",
+    "state": {
+      "granted": "Toestemming gegeven — deze gegevens worden gesynchroniseerd.",
+      "withdrawn": "Ingetrokken — deze gegevens blijven op dit apparaat.",
+      "unset": "Geen toestemming — deze gegevens blijven op dit apparaat."
+    },
+    "pending": "Nog niet op de server aangekomen; de volgende synchronisatie haalt het in.",
+    "ask": "Toestemming geven",
+    "grant": "Uitdrukkelijk toestemming geven",
+    "grantCoach": "Bevestigen en synchroniseren",
+    "withdrawButton": "Toestemming intrekken",
+    "cancel": "Annuleren"
   }
 }

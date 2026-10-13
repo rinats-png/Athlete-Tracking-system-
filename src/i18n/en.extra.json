@@ -2242,6 +2242,7 @@
     "title": "New in KYDON:",
     "close": "Got it",
     "items": {
+      "sensitive": "Health-related details — sleep, stress, heart rate, body fat, complaints — are now synced only with your explicit consent. Without it they stay on the device. You can decide in your profile under “Data”.",
       "account": "Account and sync: KYDON now syncs with your account on its own. Your data is backed up on servers in the EU and up to date on all your devices. You can turn this off in your profile — you will see first what stops working.",
       "design": "New design: frosted-glass cards with layers, mono digits for measured values and calmer transitions — light and dark.",
       "tests": "Test library to protocol 1.0: 126 tests in 29 areas, each with goal, setup, steps and scoring.",
@@ -4124,7 +4125,7 @@
     "conflictBody": "This athlete was changed on another device. KYDON overwrote nothing — both states are intact. Save your export first, then decide.",
     "conflictKeepLocal": "Upload this record",
     "conflictExplain": "The server state is replaced. The other direction — fetching the server state — goes through export, “delete everything” and a fresh sync.",
-    "whatLeaves": "Synced: measurements, profile details, notes, training focus, plans, plus diary, workouts, decisions and meals. Not included: your password, imported runs and health data — those have their own encrypted route.",
+    "whatLeaves": "Synced: measurements, profile details, notes, training focus, plans, plus diary, workouts, decisions and meals. Not included: your password, imported runs and health data — those have their own encrypted route. Health-related details (sleep, stress, heart rate, body fat, complaints) only with your explicit consent.",
     "auto": "KYDON syncs on its own: after start-up, after every change and as soon as the network is back.",
     "paused": "Sync has been off since {{date}}.",
     "frozen": "The copy in your account reflects {{date}}; anything added since then exists only on this device and in your export.",
@@ -4141,5 +4142,36 @@
       "confirm": "Turn off anyway",
       "keep": "Keep sync on"
     }
+  },
+  "sensitiveConsent": {
+    "title": "Sync health-related details",
+    "intro": "Optional. Some details can be health data. They are only synced with your explicit consent:",
+    "introCoach": "Optional. Some details about your athletes can be health data. They are only synced if you confirm that the athletes have given explicit consent:",
+    "cat": {
+      "wellbeing": "Sleep, energy, stress and soreness (diary, test session)",
+      "heart": "Heart rate variability, resting heart rate and session heart rate",
+      "body": "Body fat, lean mass and resting metabolic rate",
+      "complaints": "Gut complaints, the pain flag of a session and the CK value"
+    },
+    "without": "Without consent, exactly these details stay on this device — everything else is synced. A coach will not see them, and they will be missing on a new device.",
+    "healthLayer": "Lab values, symptoms, cycle and medication are not part of this: the health layer has its own consent and is end-to-end encrypted.",
+    "checkbox": {
+      "self": "Yes, I explicitly consent to these details being backed up and synced with my account on servers in the EU (Art. 9(2)(a) GDPR).",
+      "coach": "Yes, these details of my athletes should be synced. I confirm that I hold the athletes’ explicit consent — for minors, that of their legal guardians."
+    },
+    "age": "I am at least 16 years old.",
+    "ageNeeded": "Confirm your age, or untick the box again.",
+    "withdraw": "You can withdraw consent at any time in your profile under “Data”; the next sync then removes these details from the server.",
+    "state": {
+      "granted": "Consented — these details are synced.",
+      "withdrawn": "Withdrawn — these details stay on this device.",
+      "unset": "No consent — these details stay on this device."
+    },
+    "pending": "Not yet on the server; the next sync will catch up.",
+    "ask": "Give consent",
+    "grant": "Explicitly consent",
+    "grantCoach": "Confirm and sync",
+    "withdrawButton": "Withdraw consent",
+    "cancel": "Cancel"
   }
 }

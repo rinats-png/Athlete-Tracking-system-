@@ -27,10 +27,11 @@ test.describe('Auslieferung', () => {
     expect(diagramm, 'die Diagramme kommen ohne Bibliothek aus').toEqual([])
 
     // Und kein ausgelieferter Baustein hat die Grössenordnung einer solchen
-    // Bibliothek. Die Sprachdateien und das Hauptpaket sind die Ausnahmen.
+    // Bibliothek. Die Sprachdateien (Kern und Zusatzteil) und das Hauptpaket
+    // sind die Ausnahmen.
     const dir = new URL('../dist/assets/', import.meta.url)
     const gross = readdirSync(dir)
-      .filter((f) => f.endsWith('.js') && !/^(index|en|da|es|fr|nb|nl|sv)-/.test(f))
+      .filter((f) => f.endsWith('.js') && !/^(index|de|en|da|es|fr|nb|nl|sv)(\.extra)?-/.test(f))
       .filter((f) => statSync(new URL(f, dir)).size > 200 * 1024)
     expect(gross, 'kein Baustein in der Grössenordnung einer Diagrammbibliothek').toEqual([])
   })

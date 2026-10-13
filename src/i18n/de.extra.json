@@ -2242,6 +2242,7 @@
     "title": "Neu bei KYDON:",
     "close": "Verstanden",
     "items": {
+      "sensitive": "Gesundheitsnahe Angaben — Schlaf, Stress, Puls, Körperfett, Beschwerden — gleicht KYDON nur noch mit deiner ausdrücklichen Einwilligung ab. Ohne sie bleiben sie auf dem Gerät. Entscheiden kannst du im Profil unter «Daten».",
       "account": "Konto und Abgleich: KYDON gleicht jetzt mit deinem Konto von selbst ab. Deine Daten sind auf Servern in der EU gesichert und auf jedem deiner Geräte aktuell. Ausschalten kannst du das im Profil — vorher siehst du, was dann nicht mehr geht.",
       "design": "Neues Design: Milchglas-Karten mit Ebenen, Mono-Ziffern für Messwerte und ruhigere Übergänge — hell und dunkel.",
       "tests": "Testbibliothek nach Protokoll 1.0: 126 Tests in 29 Bereichen, jeder mit Ziel, Aufbau, Schritten und Bewertung.",
@@ -4124,7 +4125,7 @@
     "conflictBody": "Dieser Athlet wurde auf einem anderen Gerät geändert. KYDON hat nichts überschrieben — beide Stände sind unversehrt. Sichere zuerst deinen Export, dann entscheide.",
     "conflictKeepLocal": "Diesen Bestand hochladen",
     "conflictExplain": "Der Serverstand wird dabei ersetzt. Der andere Weg — den Serverstand holen — führt über Export, «alles löschen» und einen neuen Abgleich.",
-    "whatLeaves": "Abgeglichen werden Messwerte, Profilangaben, Notizen, Trainingsschwerpunkte, Pläne sowie Tagebuch, Einheiten, Entscheidungen und Mahlzeiten. Nicht dabei: dein Passwort, importierte Läufe und Gesundheitsangaben — die haben ihren eigenen, verschlüsselten Weg.",
+    "whatLeaves": "Abgeglichen werden Messwerte, Profilangaben, Notizen, Trainingsschwerpunkte, Pläne sowie Tagebuch, Einheiten, Entscheidungen und Mahlzeiten. Nicht dabei: dein Passwort, importierte Läufe und Gesundheitsangaben — die haben ihren eigenen, verschlüsselten Weg. Gesundheitsnahe Angaben (Schlaf, Stress, Puls, Körperfett, Beschwerden) nur mit deiner ausdrücklichen Einwilligung.",
     "auto": "KYDON gleicht von selbst ab: nach dem Start, nach jeder Änderung und sobald wieder Netz da ist.",
     "paused": "Der Abgleich ist seit {{date}} ausgeschaltet.",
     "frozen": "Die Kopie in deinem Konto steht auf dem Stand vom {{date}}; was danach dazukam, liegt nur auf diesem Gerät und im Export.",
@@ -4141,5 +4142,36 @@
       "confirm": "Trotzdem ausschalten",
       "keep": "Abgleich anlassen"
     }
+  },
+  "sensitiveConsent": {
+    "title": "Gesundheitsnahe Angaben abgleichen",
+    "intro": "Freiwillig. Einige Angaben können Gesundheitsdaten sein. Sie gehen nur mit deiner ausdrücklichen Einwilligung in den Abgleich:",
+    "introCoach": "Freiwillig. Einige Angaben deiner Athleten können Gesundheitsdaten sein. Sie gehen nur in den Abgleich, wenn du bestätigst, dass die Athleten ausdrücklich eingewilligt haben:",
+    "cat": {
+      "wellbeing": "Schlaf, Energie, Stress und Muskelkater (Tagebuch, Testtermin)",
+      "heart": "Herzfrequenzvariabilität, Ruhepuls und der Puls von Einheiten",
+      "body": "Körperfett, Magermasse und Grundumsatz",
+      "complaints": "Magen-Darm-Angaben, die Schmerzmarke einer Einheit und der CK-Wert"
+    },
+    "without": "Ohne Einwilligung bleiben genau diese Angaben auf diesem Gerät — alles andere wird abgeglichen. Ein Trainer sieht sie dann nicht, und auf einem neuen Gerät fehlen sie.",
+    "healthLayer": "Labor, Symptome, Zyklus und Medikation gehören nicht dazu: Die Gesundheitsschicht hat eine eigene Einwilligung und ist Ende-zu-Ende verschlüsselt.",
+    "checkbox": {
+      "self": "Ja, ich willige ausdrücklich ein, dass diese Angaben mit meinem Konto auf Servern in der EU gesichert und abgeglichen werden (Art. 9 Abs. 2 lit. a DSGVO).",
+      "coach": "Ja, diese Angaben meiner Athleten sollen abgeglichen werden. Ich bestätige, dass mir die ausdrückliche Einwilligung der Athleten vorliegt — bei Minderjährigen die der Erziehungsberechtigten."
+    },
+    "age": "Ich bin mindestens 16 Jahre alt.",
+    "ageNeeded": "Bestätige dein Alter, oder nimm den Haken wieder heraus.",
+    "withdraw": "Du kannst die Einwilligung jederzeit im Profil unter «Daten» widerrufen; der nächste Abgleich entfernt die Angaben dann vom Server.",
+    "state": {
+      "granted": "Eingewilligt — diese Angaben werden abgeglichen.",
+      "withdrawn": "Widerrufen — diese Angaben bleiben auf diesem Gerät.",
+      "unset": "Nicht eingewilligt — diese Angaben bleiben auf diesem Gerät."
+    },
+    "pending": "Noch nicht beim Server angekommen; der nächste Abgleich holt es nach.",
+    "ask": "Einwilligung erteilen",
+    "grant": "Ausdrücklich einwilligen",
+    "grantCoach": "Bestätigen und abgleichen",
+    "withdrawButton": "Einwilligung widerrufen",
+    "cancel": "Abbrechen"
   }
 }

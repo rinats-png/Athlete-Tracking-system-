@@ -2242,6 +2242,7 @@
     "title": "Nytt i KYDON:",
     "close": "Forstått",
     "items": {
+      "sensitive": "Helserelaterte opplysninger — søvn, stress, puls, kroppsfett, plager — synkroniserer KYDON nå bare med ditt uttrykkelige samtykke. Uten blir de på enheten. Du bestemmer i profilen under «Data».",
       "account": "Konto og synkronisering: KYDON synkroniserer nå av seg selv med kontoen din. Dataene dine er sikret på servere i EU og oppdatert på alle enhetene dine. Du kan slå det av i profilen — først ser du hva som da ikke lenger virker.",
       "design": "Nytt design: kort av frostet glass med nivåer, monotall for måleverdier og roligere overganger — lyst og mørkt.",
       "tests": "Testbibliotek etter protokoll 1.0: 126 tester i 29 områder, hver med mål, oppsett, trinn og vurdering.",
@@ -4124,7 +4125,7 @@
     "conflictBody": "Denne utøveren ble endret på en annen enhet. KYDON overskrev ingenting — begge tilstander er intakte. Lagre eksporten din først, og bestem deretter.",
     "conflictKeepLocal": "Last opp denne journalen",
     "conflictExplain": "Servertilstanden erstattes. Den andre veien — å hente servertilstanden — går via eksport, «slett alt» og en ny synkronisering.",
-    "whatLeaves": "Synkroniseres: målinger, profilopplysninger, notater, treningsprioriteringer, planer samt dagbok, økter, beslutninger og måltider. Ikke med: passordet ditt, importerte løpeturer og helsedata — de har sin egen krypterte vei.",
+    "whatLeaves": "Synkroniseres: målinger, profilopplysninger, notater, treningsprioriteringer, planer samt dagbok, økter, beslutninger og måltider. Ikke med: passordet ditt, importerte løpeturer og helsedata — de har sin egen krypterte vei. Helserelaterte opplysninger (søvn, stress, puls, kroppsfett, plager) bare med ditt uttrykkelige samtykke.",
     "auto": "KYDON synkroniserer av seg selv: etter oppstart, etter hver endring og så snart nettet er tilbake.",
     "paused": "Synkroniseringen har vært slått av siden {{date}}.",
     "frozen": "Kopien på kontoen din er fra {{date}}; det som er lagt til siden, finnes bare på denne enheten og i eksporten.",
@@ -4141,5 +4142,36 @@
       "confirm": "Slå av likevel",
       "keep": "Behold synkronisering"
     }
+  },
+  "sensitiveConsent": {
+    "title": "Synkroniser helserelaterte opplysninger",
+    "intro": "Frivillig. Noen opplysninger kan være helseopplysninger. De synkroniseres bare med ditt uttrykkelige samtykke:",
+    "introCoach": "Frivillig. Noen opplysninger om utøverne dine kan være helseopplysninger. De synkroniseres bare hvis du bekrefter at utøverne har gitt uttrykkelig samtykke:",
+    "cat": {
+      "wellbeing": "Søvn, energi, stress og stølhet (dagbok, testdag)",
+      "heart": "Pulsvariabilitet, hvilepuls og puls under økter",
+      "body": "Kroppsfett, fettfri masse og hvilestoffskifte",
+      "complaints": "Mage-tarm-plager, smertemarkeringen for en økt og CK-verdien"
+    },
+    "without": "Uten samtykke blir nettopp disse opplysningene på denne enheten — alt annet synkroniseres. En trener ser dem da ikke, og på en ny enhet mangler de.",
+    "healthLayer": "Laboratorieverdier, symptomer, syklus og medisiner hører ikke med: Helselaget har sitt eget samtykke og er ende-til-ende-kryptert.",
+    "checkbox": {
+      "self": "Ja, jeg samtykker uttrykkelig til at disse opplysningene sikkerhetskopieres og synkroniseres med kontoen min på servere i EU (art. 9 nr. 2 bokstav a GDPR).",
+      "coach": "Ja, disse opplysningene om utøverne mine skal synkroniseres. Jeg bekrefter at jeg har utøvernes uttrykkelige samtykke — for mindreårige foresattes."
+    },
+    "age": "Jeg er minst 16 år.",
+    "ageNeeded": "Bekreft alderen din, eller fjern haken igjen.",
+    "withdraw": "Du kan når som helst trekke samtykket tilbake i profilen under «Data»; neste synkronisering fjerner da opplysningene fra serveren.",
+    "state": {
+      "granted": "Samtykke gitt — disse opplysningene synkroniseres.",
+      "withdrawn": "Trukket tilbake — disse opplysningene blir på denne enheten.",
+      "unset": "Ikke samtykket — disse opplysningene blir på denne enheten."
+    },
+    "pending": "Ennå ikke kommet fram til serveren; neste synkronisering henter det inn.",
+    "ask": "Gi samtykke",
+    "grant": "Gi uttrykkelig samtykke",
+    "grantCoach": "Bekreft og synkroniser",
+    "withdrawButton": "Trekk tilbake samtykke",
+    "cancel": "Avbryt"
   }
 }

@@ -23,6 +23,7 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { AnalyticsConsentSetting } from '@/features/shared/AnalyticsConsent'
 import { AiConsentSetting } from '@/features/shared/AiConsent'
+import { SensitiveConsentSetting } from '@/features/shared/SensitiveConsent'
 import { AdminLink } from '@/features/admin/AdminLink'
 import { CoachPushPanel } from '@/features/push/CoachPushPanel'
 import { provisionalFormulas } from '@/domain/formulaRegistry'
@@ -310,6 +311,7 @@ export function ProfileScreen() {
             <div className="space-y-3 px-4 py-4">
               <AnalyticsConsentSetting />
               <AiConsentSetting />
+              <SensitiveConsentSetting />
               <p className="flex gap-2 text-[13px] leading-relaxed text-ink-secondary">
                 <ShieldCheck size={16} className="mt-px shrink-0 text-accent-text" aria-hidden />
                 <span>{t('profile.privacy')}</span>
