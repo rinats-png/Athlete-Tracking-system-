@@ -284,3 +284,14 @@ Weitere Einstiege zum Player:
 - Neue Tabellen für Live und Testtag (RLS, Nutzerdaten).
 - Kamera- und Mikrofon-Einwilligungstexte.
 - Keine neuen Bibliotheken ohne Rückfrage; MediaPipe wäre eine.
+---
+
+## Entscheidungen (13.10.2026)
+
+Vom Auftraggeber freigegeben:
+
+1. **Freies Training wird auch ohne Plus gespeichert.** Die Auswertung im Trainingslog bleibt eine Frage der Stufe; das Speichern nicht.
+2. **«Plan» heisst künftig «Training».** Betrifft Leiste, Überschriften und Texte in allen 8 Sprachen.
+3. **Kameraerkennung (MediaPipe Pose) darf integriert werden.** Bedingungen bleiben: läuft nur auf dem Gerät, Modell wird mit der App ausgeliefert, kein Bild oder Video wird gespeichert, Geschwindigkeit nur relativ und gegen den eigenen Messfehler.
+
+Vor dem Bau: Mockups (Einstieg in drei Varianten; Zähler für Kraft, Pause, Laufen, Runden, Kamera; Zusammenfassung) zur Auswahl vorgelegt.
