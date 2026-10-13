@@ -19,6 +19,7 @@ test('die Sammeldatei ist aktuell und folgt der Reihenfolge der Migrationen', ()
 })
 test('die Sammeldatei enthält kein Geheimnis', () => {
   const file = readFileSync('supabase/einspielen/offene_migrationen.sql', 'utf8')
-  expect(file).toMatch(/vault\.decrypted_secrets/)
+  // Ruft ein Zeitplan die Push-Funktion auf, holt er das Geheimnis aus dem Vault.
+  if (file.includes('x-cron-secret')) expect(file).toMatch(/vault\.decrypted_secrets/)
   expect(file).not.toMatch(/x-cron-secret['"]\s*,\s*'[A-Za-z0-9]{16,}/)
 })
