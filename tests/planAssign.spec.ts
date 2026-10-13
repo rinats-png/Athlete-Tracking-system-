@@ -294,7 +294,8 @@ test.describe('Zuweisung: Minderjährige und Vertrag', () => {
   })
   test('der AVV enthält den Zusatz zur freigabebasierten Verarbeitung (de, en), die Fassung ist angehoben, die Annahme steht danach', async () => {
     const { dpaDocument, DPA_VERSION } = await import('../src/features/legal/texts')
-    expect(DPA_VERSION).toBe('2026-10-05')
+    // 2026-10-13: Abgleich automatisch (Konto Pflicht) — neue Fassung, neue Annahme.
+    expect(DPA_VERSION).toBe('2026-10-13')
     for (const [locale, key, last] of [['de', 'Freigabebasierte Datenverarbeitung', '13. Annahme'], ['en', 'Release-based processing', '13. Acceptance']] as const) {
       const doc = dpaDocument(locale)
       const idx = doc.sections.findIndex((s) => s.heading.includes(key))

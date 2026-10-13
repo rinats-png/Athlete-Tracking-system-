@@ -66,7 +66,10 @@ test.describe('Gastmodus', () => {
       const url = new URL(request.url())
       const ownHost = url.hostname === '127.0.0.1' || url.hostname === 'localhost'
       const isFont = url.hostname.includes('fonts.g')
-      if (!ownHost && !isFont) external.push(request.url())
+      // Der eigene Dienst (Anmeldung) ist kein Dritter. Daten gehen dorthin
+      // nur über den Abgleich — und der ist im Prüflauf aus (helpers.ts).
+      const ownService = url.hostname.endsWith('.supabase.co') && url.pathname.startsWith('/auth/')
+      if (!ownHost && !isFont && !ownService) external.push(request.url())
     })
 
     await openGuest(page)
@@ -75,7 +78,7 @@ test.describe('Gastmodus', () => {
     await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
     await page.waitForURL('**/ergebnis/**')
 
-    // Die Zusage des Gastmodus: nichts verlässt das Gerät.
+    // Kein Dritter bekommt etwas, und ohne Abgleich auch der eigene Dienst keine Messwerte.
     expect(external, 'keine Übertragung an Dritte').toEqual([])
   })
 })

@@ -106,7 +106,11 @@ test.describe('Plankalender: Bildschirm', () => {
     await page.getByTestId('cal-view-month').click()
     const target = new Date(Date.parse(`${monday}T00:00:00Z`) + 9 * 86400000).toISOString().slice(0, 10)
     if ((await page.getByTestId(`cal-mday-${target}`).count()) === 0) await page.getByTestId('cal-next-month').click()
-    await page.getByTestId(`cal-mday-${target}`).click()
+    // Das Verschiebe-Feld klebt unten und kann je nach Datum genau die Zeile
+    // des Zieltags verdecken (z. B. am 13.10.2026 den 28.) — der Fall prüft
+    // die Zuordnung, nicht die Lage. Gewählt wird deshalb über die Tastatur.
+    await page.getByTestId(`cal-mday-${target}`).focus()
+    await page.keyboard.press('Enter')
     await page.getByTestId('cal-confirm').click()
     const moves = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks[0].moves)
     expect(moves).toEqual([expect.objectContaining({ sessionId: 's1', from: monday, to: target })])

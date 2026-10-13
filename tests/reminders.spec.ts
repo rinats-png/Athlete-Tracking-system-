@@ -89,14 +89,14 @@ test.describe('Kalender', () => {
 
 /**
  * Eine Erinnerung, die nicht kommt, ist ein gebrochenes Versprechen. Bei
- * geschlossener App erinnert nur Push — und Push braucht ein Konto. Der
+ * geschlossener App erinnert nur Push — und Push braucht den Server. Der
  * Text muss beides sagen, bevor jemand sich darauf verlässt.
  */
 test.describe('Was die Erinnerung leisten kann', () => {
   test('der Bildschirm sagt, was bei geschlossener App kommt und was es dafür braucht', async ({ page }) => {
     await openGuest(page)
     await page.goto('/verlauf/erinnerungen', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByText(/Mit Konto kannst du zusätzlich Push einschalten/)).toBeVisible()
+    await expect(page.getByText(/Zusätzlich kannst du Push einschalten/)).toBeVisible()
     // Die Push-Einstellung steht daneben; was der Server erfährt, steht dabei.
     const panel = page.getByTestId('push-panel')
     await expect(panel).toBeVisible()
@@ -126,6 +126,8 @@ test.describe('Was die Erinnerung leisten kann', () => {
 
     // Und die Grenze muss ausdrücklich dastehen, nicht bloss nicht bestritten.
     expect(de.reminders.notifyLimit).toMatch(/geöffnet/)
-    expect(de.reminders.noPush).toMatch(/Konto/)
+    // Push braucht den Server; der Text sagt, was er dafür erfährt.
+    expect(de.reminders.noPush).toMatch(/Push/)
+    expect(de.reminders.noPush).toMatch(/Server erfährt dafür nur/)
   })
 })
