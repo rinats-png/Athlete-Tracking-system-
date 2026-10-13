@@ -6,30 +6,32 @@
     <title>KYDON — Performance Diagnostics</title>
     <meta
       name="description"
-      content="KYDON turns training into measurement: sourced tests, benchmarks against real reference data, change checked against measurement error and training plans that end with a re-test. For athletes and coaches in 50+ disciplines."
+      content="KYDON turns training into measurement: field tests with protocol, references with a source, change checked against measurement error and plans from sourced rules that end with a re-test. For athletes and coaches in 50+ disciplines."
     />
     <meta name="theme-color" content="#EAF1F0" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0B1014" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0B100E" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href="foto/hero-1024.webp" imagesrcset="foto/hero-640.webp 640w, foto/hero-1024.webp 1024w" imagesizes="(max-width: 860px) 100vw, 60vw" fetchpriority="high" />
+    <link rel="preload" as="image" href="foto/hero-1024.webp" imagesrcset="foto/hero-640.webp 640w, foto/hero-1024.webp 1024w" imagesizes="(max-width: 860px) 100vw, 40vw" fetchpriority="high" />
     <script src="theme-init.js"></script>
   </head>
   <body>
     <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
     <header class="site-header">
-      <div class="site-header__shell">
+      <div class="wrap site-header__bar">
         <a class="brand" href="#top" aria-label="KYDON home" data-i18n-aria="nav.home">
           <span class="brand__mark" aria-hidden="true">
-            <svg viewBox="0 0 32 32"><path d="M5 21h4l4-11 4 16 4-13 2 8h4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter" /></svg>
+            <svg viewBox="0 0 24 24"><path d="M4 18h16M7 18V9M12 18V5M17 18v-6" /></svg>
           </span>
           <span class="brand__name">KYDON</span>
         </a>
         <nav class="site-nav" aria-label="Main" data-i18n-aria="nav.main">
-          <a href="#features" data-i18n="nav.features">Features</a>
+          <a href="#messen" data-i18n="nav.measure">Measure</a>
           <a href="#training" data-i18n="nav.training">Training</a>
-          <a href="#sports" data-i18n="nav.sports">Sports</a>
-          <a href="#coaches" data-i18n="nav.coaches">Coaches</a>
+          <a href="#trainer" data-i18n="nav.coaches">Coaches</a>
+          <a href="#sport" data-i18n="nav.sports">Sports</a>
+          <a href="#daten" data-i18n="nav.data">Your data</a>
+          <a href="#kosten" data-i18n="nav.cost">Cost</a>
         </nav>
         <div class="site-header__actions">
           <label class="lang-select">
@@ -46,170 +48,159 @@
               <option value="nl">NL</option>
             </select>
           </label>
-          <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme" data-i18n-aria="nav.theme">
+          <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch colour scheme" data-i18n-aria="nav.theme">
             <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" /></svg>
           </button>
-          <a class="btn btn--primary btn--small" data-app-link href="https://kydon.app" data-i18n="cta.app">Get the App</a>
+          <a class="site-header__login" data-app-link href="https://kydon.app" data-i18n="nav.login">Sign in</a>
+          <a class="btn btn--primary btn--small" data-app-link href="https://kydon.app"><span class="only-wide" data-i18n="cta.start">Start free</span><span class="only-narrow" data-i18n="cta.startShort">Start</span></a>
         </div>
       </div>
     </header>
 
     <main id="main">
-      <!-- HERO: Fotokarte wie die Startkarte der App, daneben der echte Heute-Bildschirm. -->
-      <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="photo-card hero__card reveal">
-          <img class="photo-card__img" src="foto/hero-1024.webp" srcset="foto/hero-640.webp 640w, foto/hero-1024.webp 1024w" sizes="(max-width: 860px) 100vw, 60vw" alt="" width="1024" height="620" fetchpriority="high" decoding="async" />
-          <p class="label-tag" data-i18n="hero.eyebrow">Performance Diagnostics</p>
-          <h1 id="hero-title" class="hero__title" data-i18n="hero.claim">Measure. Benchmark. Develop.</h1>
-          <p class="hero__lead" data-i18n="hero.lead">Field tests with sourced protocols, real reference data, progress checked against measurement error — and training that ends with a re-test.</p>
+      <!-- HERO: Anspruch links, rechts Foto und gezeichnetes «Heute» der App. -->
+      <section class="wrap hero" id="top" aria-labelledby="hero-title">
+        <div class="hero__copy reveal">
+          <p class="eyebrow eyebrow--accent" data-i18n="hero.eyebrow">Performance diagnostics for athletes and coaches</p>
+          <h1 id="hero-title" class="hero__title" data-i18n-html="hero.claim">Measure.<br />Benchmark.<br /><span class="accent">Develop.</span></h1>
+          <p class="hero__lead" data-i18n="hero.lead">Field tests with protocol, references with a source, change checked against measurement error — and plans from sourced rules that end with a re-test.</p>
           <div class="hero__actions">
-            <a class="btn btn--light" data-app-link href="https://kydon.app" data-i18n="hero.cta">Start measuring</a>
-            <a class="text-link text-link--light" href="#features" data-i18n="hero.more">See what's inside</a>
+            <a class="btn btn--primary" data-app-link href="https://kydon.app"><span data-i18n="cta.start">Start free</span><svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+            <a class="btn btn--outline" href="#kreis" data-i18n="hero.more">How it works</a>
           </div>
-          <span class="segments" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-now"></i><i></i><i></i><i></i><i></i><i></i></span>
+          <p class="hero__note" data-i18n="hero.note">Account in a minute · in the browser, no download · export always complete and free</p>
         </div>
-        <figure class="phone hero__phone reveal">
-          <img data-shot="heute" src="app/en/heute-light.webp" alt="KYDON Today: the session of the day as a start card, timeline and changes" data-i18n-alt="shot.heute" width="309" height="686" fetchpriority="high" decoding="async" />
-        </figure>
-        <ul class="chips hero__chips reveal" aria-label="At a glance" data-i18n-aria="hero.glance">
-          <li><span class="num">50+</span> <span data-i18n="hero.chip1">disciplines</span></li>
-          <li><span class="num">130+</span> <span data-i18n="hero.chip2">tests with protocol</span></li>
-          <li><span class="num">16</span> <span data-i18n="hero.chip3">ready-made plans</span></li>
-          <li><span class="num">128</span> <span data-i18n="hero.chip4">exercises with images</span></li>
-          <li data-i18n="hero.chip5">Works offline</li>
-          <li><span class="num">8</span> <span data-i18n="hero.chip6">languages</span></li>
+        <div class="hero__visual reveal">
+          <figure class="hero__photo">
+            <img src="foto/hero-1024.webp" srcset="foto/hero-640.webp 640w, foto/hero-1024.webp 1024w" sizes="(max-width: 860px) 100vw, 40vw" alt="" width="1024" height="620" fetchpriority="high" decoding="async" />
+            <figcaption class="hero__caption" data-i18n="hero.caption">Judo · U18 squad · test day 24 Oct</figcaption>
+          </figure>
+          <!-- Gezeichnete App-Ansicht: Text ist Teil der Seite, für Screenreader ausgeblendet. -->
+          <div class="device" aria-hidden="true">
+            <div class="device__screen">
+              <div class="device__head">
+                <img class="shot--light" src="sport/judo-hell.webp" alt="" width="400" height="400" loading="lazy" decoding="async" />
+                <img class="shot--dark" src="sport/judo-dunkel.webp" alt="" width="400" height="400" loading="lazy" decoding="async" />
+                <div class="device__hello">
+                  <p class="mono" data-i18n="ui.date">Judo · Mon 12 Oct</p>
+                  <p class="device__greet" data-i18n="ui.hello">Good morning, Lena</p>
+                </div>
+              </div>
+              <div class="device__body">
+                <div class="start-card">
+                  <div class="start-card__top"><span class="mono" data-i18n="ui.session">Today’s session · W5/8</span><span class="badge-unchecked" data-i18n="ui.unchecked">Not yet professionally reviewed</span></div>
+                  <p class="start-card__title" data-i18n="ui.sessionName">Strength A · lower body</p>
+                  <span class="start-card__btn" data-i18n="ui.open">Open session</span>
+                </div>
+                <div class="mini-card">
+                  <p class="mini-card__title" data-i18n="ui.changes">Changes</p>
+                  <div class="band-row band-row--dense" data-kind="better" style="--x: 66%; --b: 10%">
+                    <div class="band-row__head"><span data-i18n="rb.cmj">CMJ · 38.4 cm</span><span class="band-row__delta" data-i18n="rb.d1">+5.2 %</span></div>
+                    <div class="band-row__track"><span class="band-row__band"></span><span class="band-row__dot"></span></div>
+                    <p class="band-row__verdict" data-i18n="ui.better">Above the measurement error, better.</p>
+                  </div>
+                  <div class="band-row band-row--dense" data-kind="noise" style="--x: 54%; --b: 12%">
+                    <div class="band-row__head"><span data-i18n="rb.grip">Grip strength · 41 kg</span><span class="band-row__delta" data-i18n="rb.d2">+1.2 %</span></div>
+                    <div class="band-row__track"><span class="band-row__band"></span><span class="band-row__dot"></span></div>
+                    <p class="band-row__verdict" data-i18n="ui.noise">Within the noise, no proven difference.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="stats reveal" aria-label="At a glance" data-i18n-aria="hero.glance">
+          <li><span class="stats__num">50+</span><span data-i18n="hero.stat1">disciplines</span></li>
+          <li><span class="stats__num">130+</span><span data-i18n="hero.stat2">tests with protocol</span></li>
+          <li><span class="stats__num">16</span><span data-i18n="hero.stat3">plans from sourced rules</span></li>
+          <li><span class="stats__num">128</span><span data-i18n="hero.stat4">exercises with images</span></li>
+          <li><span class="stats__num">8</span><span data-i18n="hero.stat5">languages</span></li>
+          <li><span class="stats__num" data-i18n="hero.stat6num">Offline</span><span data-i18n="hero.stat6">measuring without a connection</span></li>
         </ul>
       </section>
 
-      <!-- ZWEI WEGE -------------------------------------------------------- -->
-      <section class="doors" id="enter" aria-labelledby="doors-title">
-        <div class="section-head reveal">
-          <p class="label-tag" data-i18n="doors.eyebrow">The new era of sport</p>
-          <h2 id="doors-title" class="section-title" data-i18n="doors.title">Two ways in.</h2>
+      <!-- KREIS: Messen, Einordnen, Prüfen, Trainieren. -->
+      <section class="wrap section" id="kreis" aria-labelledby="kreis-title">
+        <div class="section-head section-head--split reveal">
+          <div>
+            <p class="eyebrow" data-i18n="loop.eyebrow">How it works</p>
+            <h2 id="kreis-title" class="section-title" data-i18n-html="loop.title">One loop.<br /><span class="muted">From test to plan — and back.</span></h2>
+          </div>
+          <p class="section-aside" data-i18n="loop.aside">Every step says what it rests on — and where there is no basis.</p>
         </div>
-        <div class="doors__grid">
-          <a class="door door--app reveal" data-app-link href="https://kydon.app">
-            <span class="label-tag door__label" data-i18n="doors.app.label">For athletes &amp; coaches</span>
-            <span class="door__title" data-i18n="cta.app">Get the App</span>
-            <span class="door__text" data-i18n="doors.app.text">Start measuring today — free, in the browser, on any phone. No download needed.</span>
-            <span class="door__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" /></svg></span>
-          </a>
-          <a class="door door--merch photo-card reveal" data-merch-link href="#merch">
-            <img class="photo-card__img" src="foto/merch-640.webp" srcset="foto/merch-640.webp 640w, foto/merch-1024.webp 1024w" sizes="(max-width: 860px) 100vw, 50vw" alt="" width="640" height="388" loading="lazy" decoding="async" />
-            <span class="label-tag door__label" data-i18n="doors.merch.label">KYDON Merch</span>
-            <span class="door__title" data-i18n="doors.merch.title">Wear the New Era</span>
-            <span class="door__text" data-i18n="doors.merch.text">For those who already measure. Show where you stand.</span>
-            <span class="door__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" /></svg></span>
-          </a>
-        </div>
-      </section>
-
-      <!-- WARUM: die vier Sätze der Doktrin, Erklärung hinter ⓘ wie in der App. -->
-      <section class="why" id="why" aria-labelledby="why-title">
-        <div class="section-head reveal">
-          <p class="label-tag" data-i18n="why.eyebrow">Why KYDON</p>
-          <h2 id="why-title" class="section-title" data-i18n-html="why.title">We say what can be proven.<br /><span class="muted">And stay silent where it can't.</span></h2>
-        </div>
-        <ol class="why__grid">
-          <li class="card why-card reveal">
-            <span class="why-card__num num" aria-hidden="true">01</span>
-            <h3 data-i18n="why.1.title">No claim without a source</h3>
-            <p data-i18n="why.1.short">Every test has its protocol, every reference its source.</p>
-            <details class="info"><summary><span class="info__i" aria-hidden="true">i</span><span data-i18n="info.more">More</span></summary><p data-i18n="why.1.text"></p></details>
+        <ol class="loop">
+          <li class="card loop__card reveal">
+            <img src="bild/cmj.webp" alt="Countermovement jump on a contact mat" data-i18n-alt="loop.1.alt" width="640" height="388" loading="lazy" decoding="async" />
+            <div class="loop__body"><p class="loop__num">01</p><h3 data-i18n="loop.1.title">Measure</h3><p data-i18n="loop.1.text">Tests with protocol, timer and counter. A whole test day from one phone or as a kiosk on a tablet — even without a connection.</p></div>
           </li>
-          <li class="card why-card reveal">
-            <span class="why-card__num num" aria-hidden="true">02</span>
-            <h3 data-i18n="why.2.title">No change without measurement error</h3>
-            <p data-i18n="why.2.short">Better only counts above your own threshold.</p>
-            <details class="info"><summary><span class="info__i" aria-hidden="true">i</span><span data-i18n="info.more">More</span></summary><p data-i18n="why.2.text"></p></details>
+          <li class="card loop__card reveal">
+            <img src="bild/griffkraft.webp" alt="Grip strength measured with a hand dynamometer" data-i18n-alt="loop.2.alt" width="640" height="388" loading="lazy" decoding="async" />
+            <div class="loop__body"><p class="loop__num">02</p><h3 data-i18n="loop.2.title">Place</h3><p data-i18n="loop.2.text">Percentile in a named reference group, with source, sample and quality. Without a reference, KYDON says so.</p></div>
           </li>
-          <li class="card why-card reveal">
-            <span class="why-card__num num" aria-hidden="true">03</span>
-            <h3 data-i18n="why.3.title">No cause from correlation</h3>
-            <p data-i18n="why.3.short">KYDON describes what happened together — and stops there.</p>
-            <details class="info"><summary><span class="info__i" aria-hidden="true">i</span><span data-i18n="info.more">More</span></summary><p data-i18n="why.3.text"></p></details>
+          <li class="card loop__card reveal">
+            <img src="bild/sprint.webp" alt="10-metre sprint through timing gates" data-i18n-alt="loop.3.alt" width="640" height="388" loading="lazy" decoding="async" />
+            <div class="loop__body"><p class="loop__num">03</p><h3 data-i18n="loop.3.title">Check</h3><p data-i18n="loop.3.text">Better only above your own measurement error. Below it: day-to-day form. The noise band shows it at a glance.</p></div>
           </li>
-          <li class="card why-card reveal">
-            <span class="why-card__num num" aria-hidden="true">04</span>
-            <h3 data-i18n="why.4.title">Yours, and private</h3>
-            <p data-i18n="why.4.short">Works offline, stores on your device first.</p>
-            <details class="info"><summary><span class="info__i" aria-hidden="true">i</span><span data-i18n="info.more">More</span></summary><p data-i18n="why.4.text"></p></details>
+          <li class="card loop__card reveal">
+            <img src="bild/kniebeuge.webp" alt="Barbell back squat" data-i18n-alt="loop.4.alt" width="640" height="426" loading="lazy" decoding="async" />
+            <div class="loop__body"><p class="loop__num">04</p><h3 data-i18n="loop.4.title">Train</h3><p data-i18n="loop.4.text">A plan from sourced rules, with source and review status. Every block ends with a re-test. You or your coach decides.</p></div>
           </li>
         </ol>
       </section>
 
-      <!-- FUNKTIONEN: die Bereiche der neuen App, je mit echtem Bildschirm. -->
-      <section class="features" id="features" aria-labelledby="features-title">
-        <div class="section-head reveal">
-          <p class="label-tag" data-i18n="features.eyebrow">Inside the app</p>
-          <h2 id="features-title" class="section-title" data-i18n-html="features.title">Less text, more picture.<br /><span class="muted">Every answer one tap deep.</span></h2>
+      <!-- VERÄNDERUNG: das Rauschband. -->
+      <section class="wrap section split" id="messen" aria-labelledby="change-title">
+        <div class="split__copy reveal">
+          <p class="eyebrow" data-i18n="change.eyebrow">Change</p>
+          <h2 id="change-title" class="section-title" data-i18n-html="change.title">Better —<br /><span class="muted">or measurement noise?</span></h2>
+          <p class="section-lead" data-i18n="change.lead">KYDON works out how much your values scatter from one measurement to the next. It only says “better” when a change lies above that.</p>
+          <ul class="ticks">
+            <li data-i18n="change.t1">Threshold from your own measurements</li>
+            <li data-i18n="change.t2">Measuring the same way lowers the threshold</li>
+            <li data-i18n="change.t3">Proven changes go into the report</li>
+          </ul>
         </div>
-
-        <article class="feature card reveal">
-          <div class="feature__copy">
-            <p class="label-tag" data-i18n="f1.eyebrow">Today</p>
-            <h3 data-i18n="f1.title">What counts this week.</h3>
-            <p data-i18n="f1.text">The session of the day as a start card, what you missed and what comes next on a timeline — then your changes, your biggest gap and the next sensible test.</p>
-            <ul class="ticks">
-              <li data-i18n="f1.1">Start card: one tap into the session</li>
-              <li data-i18n="f1.2">Short check-in in the morning</li>
-              <li data-i18n="f1.3">A brief every Monday</li>
-            </ul>
+        <div class="card panel reveal" aria-labelledby="rb-title">
+          <div class="panel__head"><h3 id="rb-title" data-i18n="rb.title">Changes since the last test day</h3><span class="mono" data-i18n="rb.who">Lena K. · Judo U18</span></div>
+          <p class="panel__sub" data-i18n="rb.sub">Against the previous measurement, checked against the measurement error.</p>
+          <div class="band-row" data-kind="better" style="--x: 66%; --b: 11%">
+            <div class="band-row__head"><span data-i18n="rb.cmj">CMJ · 38.4 cm</span><span class="band-row__delta" data-i18n="rb.d1">+5.2 %</span></div>
+            <div class="band-row__track" aria-hidden="true"><span class="band-row__band"></span><span class="band-row__dot"></span></div>
+            <p class="band-row__verdict" data-i18n="rb.v1">Above the measurement error (3.5 %), better.</p>
           </div>
-          <figure class="phone"><img data-shot="heute" src="app/en/heute-light.webp" alt="" data-i18n-alt="shot.heute" width="309" height="686" loading="lazy" decoding="async" /></figure>
-        </article>
-
-        <article class="feature feature--flip card reveal">
-          <div class="feature__copy">
-            <p class="label-tag" data-i18n="f2.eyebrow">Testing</p>
-            <h3 data-i18n="f2.title">The right tests for your sport.</h3>
-            <p data-i18n="f2.text">Test batteries per discipline with picture, protocol, timer and counter. A whole test day runs from one phone — or as a kiosk on a tablet at the station.</p>
-            <ul class="ticks">
-              <li data-i18n="f2.1">130+ tests, each with its protocol</li>
-              <li data-i18n="f2.2">Kiosk mode and test-day planner</li>
-              <li data-i18n="f2.3">Measuring works without a connection</li>
-            </ul>
+          <div class="band-row" data-kind="noise" style="--x: 54%; --b: 13%">
+            <div class="band-row__head"><span data-i18n="rb.grip">Grip strength · 41 kg</span><span class="band-row__delta" data-i18n="rb.d2">+1.2 %</span></div>
+            <div class="band-row__track" aria-hidden="true"><span class="band-row__band"></span><span class="band-row__dot"></span></div>
+            <p class="band-row__verdict" data-i18n="rb.v2">Within the noise, no proven difference (TE 4.0 %).</p>
           </div>
-          <figure class="phone"><img data-shot="testen" src="app/en/testen-light.webp" alt="" data-i18n-alt="shot.testen" width="309" height="686" loading="lazy" decoding="async" /></figure>
-        </article>
-
-        <article class="feature card reveal">
-          <div class="feature__copy">
-            <p class="label-tag" data-i18n="f3.eyebrow">Performance profile</p>
-            <h3 data-i18n="f3.title">Where you stand — and how solid that is.</h3>
-            <p data-i18n="f3.text">Your profile as a percentile of a named reference group. Next to it: how many core tests are covered, how old the oldest one is and what is still missing. No overall score that hides gaps.</p>
-            <ul class="ticks">
-              <li data-i18n="f3.1">References with the source named</li>
-              <li data-i18n="f3.2">Coverage and data confidence on view</li>
-              <li data-i18n="f3.3">Hatched means: not covered</li>
-            </ul>
+          <div class="band-row" data-kind="worse" style="--x: 38%; --b: 8%">
+            <div class="band-row__head"><span data-i18n="rb.sprint">10 m sprint · 1.91 s</span><span class="band-row__delta" data-i18n="rb.d3">−3.4 %</span></div>
+            <div class="band-row__track" aria-hidden="true"><span class="band-row__band"></span><span class="band-row__dot"></span></div>
+            <p class="band-row__verdict" data-i18n="rb.v3">Above the measurement error (2.1 %), worse.</p>
           </div>
-          <figure class="phone"><img data-shot="profil" src="app/en/profil-light.webp" alt="" data-i18n-alt="shot.profil" width="309" height="686" loading="lazy" decoding="async" /></figure>
-        </article>
-
-        <article class="feature feature--flip card reveal">
-          <div class="feature__copy">
-            <p class="label-tag" data-i18n="f4.eyebrow">Change</p>
-            <h3 data-i18n="f4.title">Better — or measurement noise?</h3>
-            <p data-i18n="f4.text">Every change is checked against how much your own values scatter. Only above your threshold does KYDON say "better" — below it, it says: too little to tell apart from your variation.</p>
-            <ul class="ticks">
-              <li data-i18n="f4.1">Threshold from your own measurements, from four values</li>
-              <li data-i18n="f4.2">Measure the same way and the threshold drops</li>
-              <li data-i18n="f4.3">Proven changes go into the report</li>
-            </ul>
+          <div class="band-row" data-kind="unknown" style="--x: 70%; --b: 0%">
+            <div class="band-row__head"><span data-i18n="rb.pullup">Pull-ups · 9 reps</span><span class="band-row__delta" data-i18n="rb.d4">+12.5 %</span></div>
+            <div class="band-row__track" aria-hidden="true"><span class="band-row__dot"></span></div>
+            <p class="band-row__verdict" data-i18n="rb.v4">Measurement error not yet known: reliable from the fourth measurement.</p>
           </div>
-          <figure class="phone"><img data-shot="veraenderung" src="app/en/veraenderung-light.webp" alt="" data-i18n-alt="shot.veraenderung" width="309" height="686" loading="lazy" decoding="async" /></figure>
-        </article>
+          <ul class="legend">
+            <li><span class="legend__band"></span><span data-i18n="rb.l.band">Measurement error</span></li>
+            <li><span class="legend__dot" data-kind="better"></span><span data-i18n="rb.l.better">better</span></li>
+            <li><span class="legend__dot" data-kind="noise"></span><span data-i18n="rb.l.noise">within the noise</span></li>
+            <li><span class="legend__dot" data-kind="worse"></span><span data-i18n="rb.l.worse">worse</span></li>
+            <li><span class="legend__dot" data-kind="unknown"></span><span data-i18n="rb.l.unknown">not yet known</span></li>
+          </ul>
+        </div>
       </section>
 
       <!-- ERKLÄRFILM (nur Deutsch; Untertitel als Spur) ------------------------- -->
-      <section class="film" id="film" aria-labelledby="film-title" data-only-locale="de" hidden>
+      <section class="wrap section film" id="film" aria-labelledby="film-title" data-only-locale="de" hidden>
         <div class="section-head reveal">
-          <p class="label-tag">Erklärt in 60 Sekunden</p>
-          <h2 id="film-title" class="section-title">Besser – oder Messschwankung?</h2>
+          <p class="eyebrow">Erklärt in 60 Sekunden</p>
+          <h2 id="film-title" class="section-title">Besser — oder Messschwankung?</h2>
         </div>
-        <div class="film__frame card reveal">
+        <div class="film__frame reveal">
           <video data-film controls preload="none" playsinline width="1920" height="1080" poster="film/messschwankung-poster.webp" aria-describedby="film-desc">
             <source data-film-src src="film/messschwankung.mp4" type="video/mp4" />
             <track kind="captions" srclang="de" label="Deutsch (zusätzlich zu den eingebrannten Untertiteln)" src="film/messschwankung.de.vtt" />
@@ -218,138 +209,271 @@
         <p id="film-desc" class="film__note">Wann ein höherer Messwert wirklich Fortschritt ist. Untertitel sind eingebrannt; bei reduzierter Bewegung läuft eine ruhige Fassung.</p>
       </section>
 
+      <!-- LEISTUNGSPROFIL: Lücken bleiben sichtbar. -->
+      <section class="wrap section split split--flip" aria-labelledby="profile-title">
+        <div class="card panel reveal">
+          <div class="panel__head"><h3 data-i18n="pf.title">Performance profile · reference group judo U18 female</h3><span class="mono" data-i18n="pf.count">4 of 6 areas</span></div>
+          <p class="panel__sub" data-i18n="pf.sub">Percentile per area. Hatched: no sourced reference — no number invented.</p>
+          <ul class="axes">
+            <li><span data-i18n="pf.a1">Maximal strength</span><span class="axes__bar" style="--v: 74%"></span><span class="axes__val">P74</span></li>
+            <li><span data-i18n="pf.a2">Power</span><span class="axes__bar" style="--v: 62%"></span><span class="axes__val">P62</span></li>
+            <li class="is-gap"><span data-i18n="pf.a3">Strength endurance</span><span class="axes__bar"></span><span class="axes__val" data-i18n="pf.noref">no ref.</span></li>
+            <li><span data-i18n="pf.a4">Endurance</span><span class="axes__bar" style="--v: 58%"></span><span class="axes__val">P58</span></li>
+            <li class="is-gap"><span data-i18n="pf.a5">Agility</span><span class="axes__bar"></span><span class="axes__val" data-i18n="pf.noref">no ref.</span></li>
+            <li><span data-i18n="pf.a6">Relative strength</span><span class="axes__bar" style="--v: 69%"></span><span class="axes__val">P69</span></li>
+          </ul>
+          <ul class="tags">
+            <li data-i18n="pf.c1">Source, n and quality per value</li>
+            <li data-i18n="pf.c2">Oldest test: 41 days</li>
+            <li data-i18n="pf.c3">No overall score</li>
+          </ul>
+        </div>
+        <div class="split__copy reveal">
+          <p class="eyebrow" data-i18n="profile.eyebrow">Performance profile</p>
+          <h2 id="profile-title" class="section-title" data-i18n-html="profile.title">Where you stand —<br /><span class="muted">and how solid that is.</span></h2>
+          <p class="section-lead" data-i18n="profile.lead">Every comparison names its group and its source. Where there is none, the gap stays visible — instead of being covered by an overall score.</p>
+          <ul class="test-thumbs">
+            <li><img src="bild/sjft.webp" alt="Special Judo Fitness Test" data-i18n-alt="profile.alt1" width="240" height="145" loading="lazy" decoding="async" /></li>
+            <li><img src="bild/yoyo.webp" alt="Yo-Yo Intermittent Recovery Test" data-i18n-alt="profile.alt2" width="240" height="145" loading="lazy" decoding="async" /></li>
+            <li><img src="bild/standweitsprung.webp" alt="Standing broad jump" data-i18n-alt="profile.alt3" width="240" height="145" loading="lazy" decoding="async" /></li>
+          </ul>
+          <p class="small-note" data-i18n="profile.note">The tests of your discipline, with image and protocol.</p>
+        </div>
+      </section>
+
       <!-- TRAINING: immer dunkel wie der Session Player der App. -------------------- -->
       <section class="training scope-dark" id="training" aria-labelledby="training-title">
-        <div class="training__inner">
-          <div class="training__head reveal">
-            <p class="label-tag" data-i18n="training.eyebrow">Training</p>
-            <h2 id="training-title" class="section-title" data-i18n-html="training.title">Training from measurement.<br /><span class="muted">Every block ends with a re-test.</span></h2>
-            <p class="section-lead" data-i18n="training.lead">Pick a ready-made plan or build your own. KYDON lays it into your calendar, takes you through each session with a set log — and measures again at the end of the block.</p>
+        <div class="wrap">
+          <div class="section-head section-head--split reveal">
+            <div>
+              <p class="eyebrow" data-i18n="training.eyebrow">Training</p>
+              <h2 id="training-title" class="section-title" data-i18n-html="training.title">Training from measurement.<br /><span class="muted">Every block ends with a re-test.</span></h2>
+            </div>
+            <p class="section-aside" data-i18n="training.aside">Every rule carries its source, strength of evidence and review status. What has not yet been professionally reviewed says so. You or your coach decides.</p>
           </div>
           <div class="training__grid">
-            <div class="photo-card training__card reveal">
-              <img class="photo-card__img" src="foto/training-640.webp" srcset="foto/training-640.webp 640w, foto/training-1024.webp 1024w" sizes="(max-width: 860px) 100vw, 40vw" alt="" width="640" height="388" loading="lazy" decoding="async" />
-              <p class="label-tag" data-i18n="training.card.eyebrow">Week 2 of 8 · General preparation</p>
-              <p class="training__card-title" data-i18n="training.card.title">Strength base</p>
-              <span class="segments" aria-hidden="true"><i class="is-done"></i><i class="is-now"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-              <span class="chips chips--dark"><span data-i18n="training.card.chip">Re-test in 44 days</span></span>
+            <div class="card block-card reveal">
+              <div class="block-card__head">
+                <img src="sport/ringen-dunkel.webp" alt="" width="400" height="400" loading="lazy" decoding="async" />
+                <div class="block-card__title">
+                  <p class="mono" data-i18n="training.card.eyebrow">Week 2 of 8 · General preparation</p>
+                  <p class="block-card__name" data-i18n="training.card.title">Strength base</p>
+                </div>
+              </div>
+              <div class="block-card__body">
+                <ul class="tags tags--dark">
+                  <li class="is-accent" data-i18n="training.card.chip">Re-test in 44 days</li>
+                  <li class="is-warn" data-i18n="ui.unchecked">Not yet professionally reviewed</li>
+                  <li data-i18n="training.card.evidence">Evidence: moderate</li>
+                </ul>
+                <p class="block-card__today" data-i18n="training.card.today">Strength A · lower body · today</p>
+                <ul class="exercises">
+                  <li><img src="bild/kniebeuge.webp" alt="" width="56" height="56" loading="lazy" decoding="async" /><span><strong data-i18n="training.ex1">Back squat</strong><span class="mono">4 × 5 · 80 kg</span></span><span class="tag-source" data-i18n="training.source">Source</span></li>
+                  <li><img src="bild/bulgarisch.webp" alt="" width="56" height="56" loading="lazy" decoding="async" /><span><strong data-i18n="training.ex2">Bulgarian split squat</strong><span class="mono" data-i18n="training.ex2s">3 × 8 per side</span></span><span class="tag-source" data-i18n="training.source">Source</span></li>
+                  <li><img src="bild/klimmzug.webp" alt="" width="56" height="56" loading="lazy" decoding="async" /><span><strong data-i18n="training.ex3">Pull-up</strong><span class="mono">4 × 6</span></span><span class="tag-source" data-i18n="training.source">Source</span></li>
+                  <li><img src="bild/unterarmstuetz.webp" alt="" width="56" height="56" loading="lazy" decoding="async" /><span><strong data-i18n="training.ex4">Forearm plank</strong><span class="mono">3 × 45 s</span></span><span class="tag-source" data-i18n="training.source">Source</span></li>
+                </ul>
+                <span class="block-card__btn" data-i18n="training.card.open">Open session · set log, rest timer, heart rate</span>
+              </div>
             </div>
-            <ul class="tiles reveal" aria-label="Ways into a plan" data-i18n-aria="training.ways">
-              <li class="tile"><img class="thumb" src="foto/thumb/programs.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="training.w1.title">16 ready-made plans</strong><span data-i18n="training.w1.text">Strength, power, endurance, hybrid — free to choose, with fit to your sport.</span></span></li>
-              <li class="tile"><img class="thumb" src="foto/thumb/exercises.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="training.w2.title">128 exercises with images</strong><span data-i18n="training.w2.text">Load notes, variants and substitutes for the same movement pattern.</span></span></li>
-              <li class="tile"><img class="thumb" src="foto/thumb/own.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="training.w3.title">Your own plan</strong><span data-i18n="training.w3.text">Build it from the exercise database, copy weeks, keep it as a template.</span></span></li>
-              <li class="tile"><img class="thumb" src="foto/thumb/calendar.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="training.w4.title">Calendar</strong><span data-i18n="training.w4.text">Move sessions freely, catch up missed ones, export to your device calendar.</span></span></li>
-            </ul>
-          </div>
-          <div class="training__phones">
-            <figure class="phone reveal"><img data-shot="plan" src="app/en/plan-dark.webp" data-shot-theme="dark" alt="" data-i18n-alt="shot.plan" width="309" height="686" loading="lazy" decoding="async" /></figure>
-            <figure class="phone reveal"><img data-shot="player" src="app/en/player-dark.webp" data-shot-theme="dark" alt="" data-i18n-alt="shot.player" width="309" height="686" loading="lazy" decoding="async" /></figure>
-            <ul class="ticks ticks--dark reveal">
-              <li data-i18n="training.t1">Session player with set log, rest timer and heart rate from your chest strap</li>
-              <li data-i18n="training.t2">Start training any day — the session counts for its planned date</li>
-              <li data-i18n="training.t3">No plan? Log something, pick a session from the catalogue or build one for today</li>
-              <li data-i18n="training.t4">Every rule carries its source and evidence level</li>
-              <li data-i18n="training.t5">Coaches can change any plan — with a reason the athlete sees</li>
-            </ul>
+            <div class="training__side">
+              <ul class="ways">
+                <li class="card reveal"><h3 data-i18n="training.w1.title">16 ready-made plans</h3><p data-i18n="training.w1.text">Strength, power, endurance, hybrid — with a note on how well it fits your sport.</p></li>
+                <li class="card reveal"><h3 data-i18n="training.w2.title">128 exercises with images</h3><p data-i18n="training.w2.text">Load notes, variants and substitutes with the same movement pattern.</p></li>
+                <li class="card reveal"><h3 data-i18n="training.w3.title">Your own plan</h3><p data-i18n="training.w3.text">Build it from the exercise database, copy weeks, keep it as a template.</p></li>
+                <li class="card reveal"><h3 data-i18n="training.w4.title">Calendar</h3><p data-i18n="training.w4.text">Move sessions, catch up missed ones, export to your device calendar.</p></li>
+              </ul>
+              <div class="card why-box reveal">
+                <p class="mono" data-i18n="training.why.eyebrow">Why this session</p>
+                <p class="why-box__text" data-i18n="training.why.text">Focus maximal strength: profile P74, target P80 by the test day. Rule “strength block with 3–5 reps” — source and evidence one tap deeper.</p>
+                <p class="why-box__note" data-i18n="training.why.note">Coaches can change any plan — with a reason the athlete sees.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- WEITERE BEREICHE: Liste mit Vorschaubildern wie in der App. ---------------- -->
-      <section class="more" aria-labelledby="more-title">
-        <div class="section-head reveal">
-          <p class="label-tag" data-i18n="more.eyebrow">And everything around it</p>
-          <h2 id="more-title" class="section-title" data-i18n="more.title">One app for the whole week.</h2>
+      <!-- TRAINER: gezeichneter Leitstand. -------------------------------------------- -->
+      <section class="wrap section split split--wide" id="trainer" aria-labelledby="coaches-title">
+        <div class="split__copy reveal">
+          <p class="eyebrow" data-i18n="coaches.eyebrow">For coaches and clubs</p>
+          <h2 id="coaches-title" class="section-title" data-i18n-html="coaches.title">Your whole squad.<br /><span class="muted">One look in the morning.</span></h2>
+          <p class="section-lead" data-i18n="coaches.lead">Who is up to date, whose data should be checked, which tests are overdue — and which changes really lie above the measurement error.</p>
+          <ul class="ticks">
+            <li data-i18n="coaches.1">Team status and patterns in the team on one screen</li>
+            <li data-i18n="coaches.2">Group test, kiosk mode and test-day planner</li>
+            <li data-i18n="coaches.3">Heatmap, comparison and proof of training effect per athlete</li>
+            <li data-i18n="coaches.4">Assign plans; athletes share what you see</li>
+            <li data-i18n="coaches.5">Shared teams for several coaches</li>
+          </ul>
+          <div class="cta-row"><a class="btn btn--primary" data-app-link href="https://kydon.app"><span data-i18n="coaches.cta">Start as a coach</span><svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></div>
+          <p class="small-note" data-i18n="coaches.dpa">Coach accounts come with a data processing agreement — accept it in the app.</p>
         </div>
-        <ul class="tiles tiles--grid">
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/fuel.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.1.title">Fuel</strong><span data-i18n="more.1.text">What a specific session needs — before, during, after.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/health.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.2.title">Health &amp; HRV</strong><span data-i18n="more.2.text">Resting pulse and HRV against your own baseline. No diagnosis.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/log.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.3.title">Training log</strong><span data-i18n="more.3.text">Sets, estimated 1RM and sets per muscle group.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/runs.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.4.title">Runs</strong><span data-i18n="more.4.text">Import from Strava or Garmin: volume, consistency, pace at equal heart rate.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/competition.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.5.title">Competition</strong><span data-i18n="more.5.text">Competition dates, countdown and your profile for the event.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/ask.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.6.title">Ask KYDON</strong><span data-i18n="more.6.text">Fixed questions about your data, answered only from your own numbers.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/brief.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.7.title">Monday brief</strong><span data-i18n="more.7.text">What changed provably last week and what is due.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/card.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.8.title">Reports &amp; card</strong><span data-i18n="more.8.text">One-pager per athlete, year in review, a card to share.</span></span></li>
-          <li class="tile card reveal"><img class="thumb" src="foto/thumb/csv.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.9.title">CSV import</strong><span data-i18n="more.9.text">Bring your old spreadsheets with you.</span></span></li>
-        </ul>
+        <div class="dash scope-dark reveal" aria-hidden="true">
+          <div class="dash__bar"><i></i><i></i><i></i><span class="mono" data-i18n="dash.bar">KYDON · Coach · control room</span></div>
+          <div class="dash__body">
+            <div class="dash__head"><p class="dash__team" data-i18n="dash.team">Judo squad U18</p><span class="mono" data-i18n="dash.meta">Mon 12 Oct · 18 athletes</span></div>
+            <div class="dash__tiles">
+              <div><span class="dash__num">13</span><span data-i18n="dash.t1">up to date</span></div>
+              <div><span class="dash__num is-warn">3</span><span data-i18n="dash.t2">check data</span></div>
+              <div><span class="dash__num is-worse">2</span><span data-i18n="dash.t3">tests overdue</span></div>
+              <div><span class="dash__num">78 %</span><span data-i18n="dash.t4">check-in rate</span></div>
+            </div>
+            <div class="dash__grid">
+              <table class="dash__table">
+                <thead><tr><th data-i18n="dash.h1">Athlete</th><th data-i18n="dash.h2">Last test</th><th data-i18n="dash.h3">Change</th><th data-i18n="dash.h4">Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Lena Krüger</td><td class="mono" data-i18n="dash.r1">CMJ · 2 d ago</td><td><span class="legend__dot" data-kind="better"></span></td><td data-i18n="dash.s1">up to date</td></tr>
+                  <tr><td>Mia Schulz</td><td class="mono" data-i18n="dash.r2">Grip · 9 d ago</td><td><span class="legend__dot" data-kind="noise"></span></td><td data-i18n="dash.s1">up to date</td></tr>
+                  <tr><td>Jonas Weber</td><td class="mono" data-i18n="dash.r3">Sprint · 3 d ago</td><td><span class="legend__dot" data-kind="worse"></span></td><td class="is-warn" data-i18n="dash.s2">check</td></tr>
+                  <tr><td>Emir Kaya</td><td class="mono" data-i18n="dash.r4">Yo-Yo · 64 d ago</td><td><span class="legend__dot" data-kind="unknown"></span></td><td class="is-worse" data-i18n="dash.s3">overdue</td></tr>
+                  <tr><td>Sara Nowak</td><td class="mono" data-i18n="dash.r5">SJFT · 12 d ago</td><td><span class="legend__dot" data-kind="better"></span></td><td data-i18n="dash.s1">up to date</td></tr>
+                </tbody>
+              </table>
+              <div class="dash__side">
+                <div><p class="mono" data-i18n="dash.next">Next test day</p><p class="dash__strong" data-i18n="dash.nextText">Sat 24 Oct · 4 stations</p><p class="dash__muted" data-i18n="dash.kiosk">Kiosk on the tablet ready</p></div>
+                <div><p class="mono" data-i18n="dash.week">Week in brief</p><p data-i18n="dash.weekText">3 message drafts ready — you send, not KYDON.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- SPORTARTEN ------------------------------------------------------------------- -->
-      <section class="sports" id="sports" aria-labelledby="sports-title">
-        <div class="section-head reveal">
-          <p class="label-tag" data-i18n="sports.eyebrow">Sports</p>
-          <h2 id="sports-title" class="section-title" data-i18n-html="sports.title">One method. <span class="muted">50+ disciplines.</span></h2>
-          <p class="section-lead" data-i18n="sports.lead">From the mat to the pool, from the track to the service: each discipline gets its own profile of what matters — and the tests to measure it.</p>
+      <section class="wrap section" id="sport" aria-labelledby="sports-title">
+        <div class="section-head section-head--split reveal">
+          <div>
+            <p class="eyebrow" data-i18n="sports.eyebrow">Sports</p>
+            <h2 id="sports-title" class="section-title" data-i18n-html="sports.title">One method.<br /><span class="muted">50+ disciplines.</span></h2>
+          </div>
+          <p class="section-aside" data-i18n="sports.lead">Every discipline gets its profile of what matters — and the tests to measure it.</p>
         </div>
         <ul class="sports__grid" data-sports></ul>
-      </section>
-
-      <!-- TRAINER ---------------------------------------------------------------------- -->
-      <section class="coaches" id="coaches" aria-labelledby="coaches-title">
-        <div class="coaches__copy reveal">
-          <p class="label-tag" data-i18n="coaches.eyebrow">For coaches &amp; clubs</p>
-          <h2 id="coaches-title" class="section-title" data-i18n-html="coaches.title">Your whole squad.<br /><span class="muted">One look in the morning.</span></h2>
-          <p class="section-lead" data-i18n="coaches.lead">Team status on one screen: who is up to date, whose data should be checked, which tests are overdue. Below it a short weekly summary with editable message drafts.</p>
-          <ul class="ticks">
-            <li data-i18n="coaches.1">Team overview with status and patterns in the team</li>
-            <li data-i18n="coaches.2">Group test, kiosk mode and test-day planner</li>
-            <li data-i18n="coaches.3">Heatmap, comparison and proof of training effect per athlete</li>
-            <li data-i18n="coaches.4">Assign plans and see check-in rates</li>
-            <li data-i18n="coaches.5">Shared teams for up to five coaches — from Coach Team upward</li>
-          </ul>
-          <a class="btn btn--primary" data-app-link href="https://kydon.app" data-i18n="coaches.cta">Start as a coach</a>
-        </div>
-        <figure class="phone reveal"><img data-shot="trainer" src="app/en/trainer-light.webp" alt="" data-i18n-alt="shot.trainer" width="309" height="686" loading="lazy" decoding="async" /></figure>
-      </section>
-
-      <!-- BRUSTGURT / HRV -------------------------------------------------------------- -->
-      <section class="straps" id="hrv" aria-labelledby="straps-title">
-        <div class="section-head reveal">
-          <p class="label-tag" data-i18n="straps.eyebrow">Heart rate &amp; HRV</p>
-          <h2 id="straps-title" class="section-title" data-i18n-html="straps.title">Connect your chest strap.<br /><span class="muted">HRV in two minutes.</span></h2>
-          <p class="section-lead" data-i18n="straps.lead"></p>
-        </div>
-        <ul class="straps__list">
-          <li class="card strap reveal"><span class="strap__name">Polar H10 <span class="strap__rec" data-i18n="straps.recommended">Recommended</span></span><span class="strap__note" data-i18n="straps.note.dual"></span><span class="pill pill--accent" data-i18n="straps.hrv">HRV + heart rate</span></li>
-          <li class="card strap reveal"><span class="strap__name">Polar H9</span><span class="strap__note" data-i18n="straps.note.single"></span><span class="pill pill--accent" data-i18n="straps.hrv">HRV + heart rate</span></li>
-          <li class="card strap reveal"><span class="strap__name">Garmin HRM-Pro · HRM-Pro Plus · HRM 600</span><span class="strap__note" data-i18n="straps.note.ant"></span><span class="pill pill--accent" data-i18n="straps.hrv">HRV + heart rate</span></li>
-          <li class="card strap reveal"><span class="strap__name">Garmin HRM-Dual</span><span class="strap__note" data-i18n="straps.note.ant"></span><span class="pill pill--accent" data-i18n="straps.hrv">HRV + heart rate</span></li>
-          <li class="card strap reveal"><span class="strap__name">Wahoo TICKR · TICKR X</span><span class="strap__note" data-i18n="straps.note.single"></span><span class="pill pill--accent" data-i18n="straps.hrv">HRV + heart rate</span></li>
-          <li class="card strap reveal"><span class="strap__name">Coospo H6 · H808S · Magene H64</span><span class="strap__note" data-i18n="straps.note.budget"></span><span class="pill pill--accent" data-i18n="straps.hrv">HRV + heart rate</span></li>
-          <li class="card strap reveal"><span class="strap__name">Polar Verity Sense · Wahoo TICKR FIT · Scosche Rhythm</span><span class="strap__note" data-i18n="straps.note.optical"></span><span class="pill" data-i18n="straps.hrOnly">Heart rate only</span></li>
+        <ul class="tags tags--more reveal">
+          <li data-i18n="sports.more1">Muay Thai</li>
+          <li data-i18n="sports.more4">… and more</li>
         </ul>
-        <p class="straps__foot reveal" data-i18n="straps.browsers"></p>
       </section>
 
-      <!-- BALD IM APP STORE ------------------------------------------------------------ -->
-      <section class="soon" id="soon" aria-labelledby="soon-title">
-        <div class="card soon__card reveal">
-          <p class="label-tag" data-i18n="soon.eyebrow">Coming soon</p>
-          <h2 id="soon-title" class="section-title" data-i18n-html="soon.title">KYDON as an app.<br /><span class="muted">For iPhone and Android.</span></h2>
-          <p class="section-lead" data-i18n="soon.lead"></p>
-          <ul class="soon__stores" aria-label="Stores" data-i18n-aria="soon.storesLabel">
-            <li class="store-pill"><span class="store-pill__kicker" data-i18n="soon.kickerApple">Soon on the</span><span class="store-pill__name">App Store</span></li>
-            <li class="store-pill"><span class="store-pill__kicker" data-i18n="soon.kickerGoogle">Soon on</span><span class="store-pill__name">Google Play</span></li>
+      <!-- DEINE DATEN ------------------------------------------------------------------ -->
+      <section class="wrap section" id="daten" aria-labelledby="data-title">
+        <div class="section-head section-head--split reveal">
+          <div>
+            <p class="eyebrow" data-i18n="data.eyebrow">Your data</p>
+            <h2 id="data-title" class="section-title" data-i18n-html="data.title">Your data belongs to you.<br /><span class="muted">Built for the GDPR from the start.</span></h2>
+          </div>
+          <a class="text-link" data-app-path="/datenschutz" href="https://kydon.app/datenschutz" data-i18n="footer.privacy">Privacy</a>
+        </div>
+        <ul class="data-grid">
+          <li class="card reveal"><span class="data-grid__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2" /><path d="M11 18h2" /></svg></span><h3 data-i18n="data.1.title">On your device first</h3><p data-i18n="data.1.text">Measuring works without a connection, in the gym as in the forest.</p></li>
+          <li class="card reveal"><span class="data-grid__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.5A3.5 3.5 0 0 0 7 18z" /></svg></span><h3 data-i18n="data.2.title">Backed up automatically in the EU</h3><p data-i18n="data.2.text">With your account on servers in the EU. You can switch it off in your profile — the app shows beforehand what then no longer works.</p></li>
+          <li class="card reveal"><span class="data-grid__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></svg></span><h3 data-i18n="data.3.title">Your coach sees only what you share</h3><p data-i18n="data.3.text">Every share on its own, each one withdrawable at any time.</p></li>
+          <li class="card reveal"><span class="data-grid__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z" /></svg></span><h3 data-i18n="data.4.title">Health-related data only with consent</h3><p data-i18n="data.4.text">Sleep, stress, heart rate, body fat: synced only with your explicit consent. The health layer (lab values, cycle) is end-to-end encrypted.</p></li>
+          <li class="card reveal"><span class="data-grid__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg></span><h3 data-i18n="data.5.title">Export always complete</h3><p data-i18n="data.5.text">Free, in every tier, machine-readable. Never behind a paywall.</p></li>
+        </ul>
+        <p class="small-note reveal" data-i18n="data.note">No advertising, no third-party analytics, no cookies. Usage statistics only with your yes.</p>
+      </section>
+
+      <!-- KOSTEN: nur Inhalte, Preise stehen in der App. ------------------------------- -->
+      <section class="wrap section cost" id="kosten" aria-labelledby="cost-title">
+        <div class="cost__free scope-dark reveal">
+          <p class="eyebrow eyebrow--accent" data-i18n="cost.free.eyebrow">Free · permanently</p>
+          <h2 id="cost-title" class="cost__title" data-i18n="cost.free.title">The core costs nothing.</h2>
+          <p class="cost__lead" data-i18n="cost.free.lead">A tier holds back features, never your data.</p>
+          <ul class="ticks ticks--rows">
+            <li data-i18n="cost.free.1">Measuring, all tests with protocol</li>
+            <li data-i18n="cost.free.2">History and measurement-error band</li>
+            <li data-i18n="cost.free.3">Your own profile against your best</li>
+            <li data-i18n="cost.free.4">Reminders and calendar file</li>
+            <li data-i18n="cost.free.5">Diary light</li>
+            <li data-i18n="cost.free.6">Automatic sync: backup and all your devices</li>
+            <li data-i18n="cost.free.7">Complete export</li>
           </ul>
-          <p class="soon__note" data-i18n="soon.note"></p>
+          <div class="cta-row"><a class="btn btn--primary" data-app-link href="https://kydon.app"><span data-i18n="cta.start">Start free</span><svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a></div>
+        </div>
+        <div class="card cost__tiers reveal">
+          <p class="eyebrow" data-i18n="cost.tiers.eyebrow">If you want more</p>
+          <h2 class="cost__title" data-i18n="cost.tiers.title">Tiers for more depth.</h2>
+          <ul class="tiers">
+            <li><p class="tiers__name">Plus</p><p data-i18n="cost.plus">Forecast, season plan, requirement gap, percentile where a reference exists, training log, load</p></li>
+            <li><p class="tiers__name">Pro</p><p data-i18n="cost.pro">Nutrition, runs from Strava or Garmin, decision log, cockpit</p></li>
+            <li><p class="tiers__name">Elite</p><p data-i18n="cost.elite">Health layer, peak week, sport module</p></li>
+            <li><p class="tiers__name" data-i18n="cost.termName">Selection test</p><p data-i18n="cost.term">Target standards of your entrance test and a print-ready report — paid once</p></li>
+            <li><p class="tiers__name" data-i18n="cost.coachName">Coach</p><p data-i18n="cost.coach">Free: group test, CSV import, proof of effect, reports. Paid tiers by measured athletes: heatmap, Plus for your athletes, own logo, several coaches</p></li>
+          </ul>
+          <p class="small-note" data-i18n="cost.note">Prices and comparison in the app under “Prices”.</p>
+        </div>
+      </section>
+
+      <!-- WEITERE BEREICHE ------------------------------------------------------------- -->
+      <section class="wrap section" aria-labelledby="more-title">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="more.eyebrow">And everything around it</p>
+          <h2 id="more-title" class="section-title" data-i18n="more.title">One app for the whole week.</h2>
+        </div>
+        <ul class="modules reveal">
+          <li><img class="thumb" src="foto/thumb/fuel.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.1.title">Fuel</strong><span data-i18n="more.1.text">What a specific session needs — before, during, after.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/health.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.2.title">Health &amp; HRV</strong><span data-i18n="more.2.text">Resting pulse and HRV against your own baseline. No diagnosis.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/log.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.3.title">Training log</strong><span data-i18n="more.3.text">Sets, estimated 1RM and sets per muscle group.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/runs.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.4.title">Runs</strong><span data-i18n="more.4.text">Import from Strava or Garmin: volume, consistency, pace at equal heart rate.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/competition.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.5.title">Competition</strong><span data-i18n="more.5.text">Competition dates, countdown and your profile for the event.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/ask.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.6.title">Ask KYDON</strong><span data-i18n="more.6.text">Fixed questions about your data, answered only from your own numbers.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/brief.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.7.title">Monday brief</strong><span data-i18n="more.7.text">What changed provably last week and what is due.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/card.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.8.title">Reports &amp; card</strong><span data-i18n="more.8.text">One-pager per athlete, year in review, a card to share.</span></span></li>
+          <li><img class="thumb" src="foto/thumb/csv.webp" alt="" width="48" height="48" loading="lazy" /><span><strong data-i18n="more.9.title">CSV import</strong><span data-i18n="more.9.text">Bring your old spreadsheets with you.</span></span></li>
+        </ul>
+      </section>
+
+      <!-- BRUSTGURT + BALD ALS APP + MERCH ----------------------------------------------- -->
+      <section class="wrap section pair" id="hrv" aria-labelledby="straps-title">
+        <div class="card pair__card reveal">
+          <p class="eyebrow" data-i18n="straps.eyebrow">Heart rate &amp; HRV</p>
+          <h2 id="straps-title" class="pair__title" data-i18n="straps.title2">Connect your chest strap. HRV in two minutes.</h2>
+          <p class="pair__lead" data-i18n="straps.lead"></p>
+          <ul class="straps">
+            <li><span class="straps__name">Polar H10 <span class="straps__rec" data-i18n="straps.recommended">Recommended</span></span><span class="pill" data-i18n="straps.hrv">HRV + heart rate</span></li>
+            <li><span class="straps__name">Polar H9</span><span class="pill" data-i18n="straps.hrv">HRV + heart rate</span></li>
+            <li><span class="straps__name">Garmin HRM-Pro · HRM-Pro Plus · HRM 600 · HRM-Dual</span><span class="pill" data-i18n="straps.hrv">HRV + heart rate</span></li>
+            <li><span class="straps__name">Wahoo TICKR · TICKR X</span><span class="pill" data-i18n="straps.hrv">HRV + heart rate</span></li>
+            <li><span class="straps__name">Coospo H6 · H808S · Magene H64</span><span class="pill" data-i18n="straps.hrv">HRV + heart rate</span></li>
+            <li><span class="straps__name">Polar Verity Sense · Wahoo TICKR FIT · Scosche Rhythm</span><span class="pill pill--quiet" data-i18n="straps.hrOnly">Heart rate only</span></li>
+          </ul>
+          <p class="small-note" data-i18n="straps.browsers"></p>
+        </div>
+        <div class="card pair__card pair__card--soon reveal" id="soon">
+          <p class="eyebrow" data-i18n="soon.eyebrow">Coming soon</p>
+          <h2 class="pair__title" data-i18n="soon.title2">KYDON as an app for iPhone and Android.</h2>
+          <p class="pair__lead" data-i18n="soon.lead"></p>
+          <ul class="stores" aria-label="Stores" data-i18n-aria="soon.storesLabel">
+            <li><span class="stores__kicker" data-i18n="soon.kickerApple">Soon on the</span><span class="stores__name">App Store</span></li>
+            <li><span class="stores__kicker" data-i18n="soon.kickerGoogle">Soon on</span><span class="stores__name">Google Play</span></li>
+          </ul>
+          <p class="small-note" data-i18n="soon.note"></p>
+          <a class="merch" data-merch-link href="#merch">
+            <img src="foto/merch-640.webp" alt="" width="640" height="388" loading="lazy" decoding="async" />
+            <span><span class="mono" data-i18n="merch.kicker">KYDON Merch · coming soon</span><span class="merch__title" data-i18n="doors.merch.title">Wear the New Era</span><span class="merch__text" data-i18n="doors.merch.text">For those who already measure. Show where you stand.</span></span>
+          </a>
         </div>
       </section>
 
       <!-- ABSCHLUSS -------------------------------------------------------------------- -->
-      <section class="closing photo-card" aria-labelledby="closing-title">
-        <img class="photo-card__img" src="foto/coaches-640.webp" srcset="foto/coaches-640.webp 640w, foto/coaches-1024.webp 1024w" sizes="100vw" alt="" width="640" height="388" loading="lazy" decoding="async" />
-        <p class="label-tag reveal" data-i18n="closing.eyebrow">Measure. Benchmark. Develop.</p>
-        <h2 id="closing-title" class="closing__title reveal" data-i18n-html="closing.title">The future of sport<br />is measured.</h2>
-        <div class="closing__actions reveal">
-          <a class="btn btn--light" data-app-link href="https://kydon.app" data-i18n="cta.app">Get the App</a>
-          <a class="btn btn--ghost-light" data-merch-link href="#merch" data-i18n="doors.merch.title">Wear the New Era</a>
+      <section class="wrap section" aria-labelledby="closing-title">
+        <div class="closing scope-dark reveal">
+          <img class="closing__img" src="foto/coaches-1024.webp" srcset="foto/coaches-640.webp 640w, foto/coaches-1024.webp 1024w" sizes="(max-width: 860px) 100vw, 55vw" alt="" width="1024" height="620" loading="lazy" decoding="async" />
+          <div class="closing__copy">
+            <p class="eyebrow eyebrow--accent" data-i18n="closing.eyebrow">Measure · Benchmark · Develop</p>
+            <h2 id="closing-title" class="closing__title" data-i18n-html="closing.title">The future of sport<br />is measured.</h2>
+            <div class="cta-row">
+              <a class="btn btn--primary" data-app-link href="https://kydon.app"><span data-i18n="cta.start">Start free</span><svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+              <a class="btn btn--outline" data-app-link href="https://kydon.app" data-i18n="coaches.cta">Start as a coach</a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <span class="brand__name">KYDON</span>
-      <span class="site-footer__claim" data-i18n="footer.claim">Performance Diagnostics</span>
+    <footer class="wrap site-footer">
+      <span class="site-footer__brand"><span class="brand__name">KYDON</span><span class="mono" data-i18n="footer.claim">Performance diagnostics</span></span>
       <nav aria-label="Legal" data-i18n-aria="footer.legal">
         <a data-app-path="/impressum" href="https://kydon.app/impressum" data-i18n="footer.imprint">Imprint</a>
         <a data-app-path="/datenschutz" href="https://kydon.app/datenschutz" data-i18n="footer.privacy">Privacy</a>

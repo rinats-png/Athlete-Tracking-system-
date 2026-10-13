@@ -11,7 +11,7 @@ import type { Dict } from './i18n/en'
 
 type Theme = 'light' | 'dark'
 
-/** Wohin die beiden Türen führen. Über Umgebungsvariablen beim Bauen änderbar. */
+/** Wohin App- und Merch-Links führen. Über Umgebungsvariablen beim Bauen änderbar. */
 const APP_URL = import.meta.env.VITE_APP_URL || 'https://kydon.app'
 const MERCH_URL = import.meta.env.VITE_MERCH_URL || ''
 
@@ -39,33 +39,16 @@ for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-merch-link]'
     })
 }
 
-// --- App-Aufnahmen ------------------------------------------------------------
-/**
- * Echte Bildschirme der App: deutsch auf der deutschen Seite, sonst englisch;
- * hell oder dunkel nach dem Erscheinungsbild. Bilder im immer dunklen
- * Trainingsbereich (`data-shot-theme="dark"`) bleiben dunkel.
- */
-function renderShots(locale: Locale) {
-  const lang = locale === 'de' ? 'de' : 'en'
-  const theme = currentTheme()
-  for (const img of document.querySelectorAll<HTMLImageElement>('img[data-shot]')) {
-    const t = img.dataset.shotTheme ?? theme
-    const src = `app/${lang}/${img.dataset.shot}-${t}.webp`
-    if (img.getAttribute('src') !== src) img.setAttribute('src', src)
-  }
-}
-
 // --- Sportarten -----------------------------------------------------------------
 const grid = document.querySelector<HTMLUListElement>('[data-sports]')
 function renderSports(t: Dict) {
   if (!grid) return
   const shown = grid.children.length > 0
   grid.innerHTML = SPORTS.map(
-    (s) => `<li class="sport photo-card reveal${shown ? ' is-in' : ''}">
-      <img class="photo-card__img shot--light" src="sport/${s.motif}-hell.webp" alt="" loading="lazy" decoding="async" width="400" height="400" />
-      <img class="photo-card__img shot--dark" src="sport/${s.motif}-dunkel.webp" alt="" loading="lazy" decoding="async" width="400" height="400" />
-      <span class="label-tag">${t[s.covers]}</span>
-      <span class="sport__name">${t[s.name]}</span>
+    (s) => `<li class="sport reveal${shown ? ' is-in' : ''}">
+      <img class="shot--light" src="sport/${s.motif}-hell.webp" alt="" loading="lazy" decoding="async" width="400" height="400" />
+      <img class="shot--dark" src="sport/${s.motif}-dunkel.webp" alt="" loading="lazy" decoding="async" width="400" height="400" />
+      <span class="sport__text"><span class="sport__cat">${t[s.covers]}</span><span class="sport__name">${t[s.name]}</span></span>
     </li>`,
   ).join('')
   if (!shown) grid.querySelectorAll('.reveal').forEach((el) => io.observe(el))
@@ -111,7 +94,6 @@ const io = new IntersectionObserver(
 let locale: Locale = initialLocale()
 let dict: Dict = applyLocale(locale)
 renderSports(dict)
-renderShots(locale)
 applyLocaleOnly(locale)
 const langSelect = document.querySelector<HTMLSelectElement>('[data-lang-select]')
 if (langSelect) {
@@ -121,7 +103,6 @@ if (langSelect) {
     storeLocale(locale)
     dict = applyLocale(locale)
     renderSports(dict)
-    renderShots(locale)
     applyLocaleOnly(locale)
     for (const a of document.querySelectorAll('.is-soon')) a.setAttribute('data-soon', dict['doors.merch.soon'])
   })
@@ -148,7 +129,6 @@ function applyTheme(theme: Theme, store: boolean) {
       /* privat: gilt nur für diese Sitzung */
     }
   }
-  renderShots(locale)
 }
 document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
   applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true)
@@ -160,8 +140,5 @@ systemDark.addEventListener('change', () => {
   } catch {
     /* */
   }
-  if (!stored) {
-    root.removeAttribute('data-theme')
-    renderShots(locale)
-  }
+  if (!stored) root.removeAttribute('data-theme')
 })
