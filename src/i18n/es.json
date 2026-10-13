@@ -180,9 +180,9 @@
   "badges": {
     "personalBest": "Mejor marca",
     "demo": "Demo",
-    "guest": "Local",
-    "demoHint": "Datos de ejemplo. Los cambios se quedan en este dispositivo.",
-    "guestHint": "Tus datos se quedan solo en este dispositivo."
+    "demoHint": "Datos de ejemplo. Se quedan en este dispositivo y nunca pasan a tu cuenta.",
+    "own": "Cuenta",
+    "ownHint": "Tus propios datos, vinculados a tu cuenta."
   },
   "units": {
     "percentile": "percentil",
@@ -191,14 +191,13 @@
   "welcome": {
     "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Descubre dónde estás de verdad.",
-    "body": "Tests específicos por deporte, valores de referencia científicos, un perfil de rendimiento y el siguiente test razonable — sin diario de entrenamiento, sin contador de calorías.",
+    "body": "Tests específicos de tu deporte, valores de referencia con fuente, un perfil de rendimiento y el siguiente test con sentido. De ahí puede surgir un plan de entrenamiento, solo a partir de reglas fundamentadas.",
     "continueEmail": "Continuar con correo",
     "haveAccount": "Ya tengo cuenta",
     "viewDemo": "Ver demo",
     "legal": "Al continuar aceptas las condiciones de uso y confirmas que has leído la política de privacidad.",
-    "startLocal": "Empezar con un registro vacío",
-    "privacy": "La medición y el análisis ocurren en tu dispositivo. Iniciar sesión requiere tu correo; tus mediciones solo se transmiten cuando activas la sincronización — y se pueden exportar completas en cualquier momento.",
-    "accountLater": "Cuentas y sincronización llegarán más adelante",
+    "startOwn": "Crear tus propios datos",
+    "privacy": "Se mide primero en tu dispositivo, también sin conexión. Con tu cuenta, tus datos se guardan automáticamente en servidores de la UE; un entrenador solo ve lo que tú compartes. La exportación es siempre completa y gratuita.",
     "points": [
       "Diagnóstico específico por deporte",
       "Valores de referencia con fuente",
@@ -218,10 +217,10 @@
         "dónde estás",
         "de verdad."
       ],
-      "since": "sin cuenta",
+      "since": "guardado en la UE",
       "aboutLabel": "sobre kydon",
       "aboutHeadline": "Kydon mide, lo pone en contexto y muestra qué cambió de verdad — y qué fue solo un buen día.",
-      "aboutBody": "Protocolos de test específicos por deporte, valores de referencia con fuente, un perfil de rendimiento en seis ejes y el siguiente test razonable. Sin diario de entrenamiento, sin contador de calorías, sin afirmaciones médicas.",
+      "aboutBody": "Protocolos de test específicos de cada deporte, valores de referencia con fuente, un perfil de rendimiento en seis ejes y el siguiente test con sentido. Sin normas inventadas, sin afirmaciones médicas.",
       "cards": {
         "protocol": {
           "title": "Protocolos de test",
@@ -741,7 +740,7 @@
   "gate": {
     "step": "Paso 1 de 1",
     "title": "¿Qué deporte?",
-    "body": "KYDON sugiere entonces exactamente los tests que se miden en esa disciplina — con protocolo y justificación. La entrada se queda en este dispositivo y puede cambiarse en cualquier momento.",
+    "body": "Después, KYDON te propone exactamente los tests que se miden para esa disciplina, con protocolo y justificación. Puedes cambiarlo en cualquier momento.",
     "noMatch": "No se encontró ningún deporte para «{{query}}». Elige «Evaluación general» abajo — el deporte puede añadirse después.",
     "general": "Evaluación general",
     "generalHint": "Sin deporte: una batería que cubre los seis ejes. Modificable en cualquier momento en el área de tests."
@@ -756,7 +755,7 @@
     "allTests": "Ver todos los tests",
     "profile": {
       "title": "Tu perfil",
-      "body": "Edad, sexo y datos corporales deciden con qué grupos de referencia se comparan tus valores. Todo se queda en este dispositivo.",
+      "body": "La edad, el sexo y los datos corporales determinan con qué grupos de referencia se comparan tus valores. Los datos son tuyos y puedes cambiarlos en cualquier momento.",
       "required": "Obligatorio",
       "optional": "Opcional",
       "weight": "Peso corporal",
@@ -833,9 +832,9 @@
       "points": {
         "measures": "Mide tu rendimiento con tests que siguen un protocolo fijo — para que el mismo test signifique lo mismo dentro de un año.",
         "compares": "Sitúa tus valores en grupos de referencia con nombre, con fuente y calidad de datos en cada comparación. Donde no existe referencia con fuente, lo dice en lugar de inventar un número.",
-        "notPlan": "No es un plan de entrenamiento ni un registro de entrenamientos. Te dice dónde estás — no qué entrenar.",
+        "plan": "KYDON mide dónde estás. De ahí puede surgir un plan de entrenamiento, pero solo a partir de reglas fundamentadas, con fuente y estado de revisión. Cada bloque termina con una nueva medición. Decides tú o tu entrenador.",
         "notMedical": "No es diagnóstico médico. Sin diagnósticos, sin recomendaciones terapéuticas, sin valoración de enfermedades.",
-        "onDevice": "Todo se queda en este dispositivo. Sin cuenta, sin transferencia, y la exportación de tus datos es siempre completa y gratuita."
+        "data": "Tus datos son tuyos. Están primero en tu dispositivo y medir funciona sin conexión. Con tu cuenta, además se guardan automáticamente en servidores de la UE. Un entrenador solo ve lo que tú compartes, y puedes retirar cualquier permiso. La exportación es siempre completa y gratuita."
       }
     },
     "role": {
@@ -1082,7 +1081,7 @@
     "title": "Comparación anonimizada",
     "body": "Aquí se dirá cuántos atletas realizaron un test y en qué percentil se sitúa tu resultado — anonimizado y solo con tu consentimiento expreso.",
     "status": "Aún sin datos de comparación",
-    "statusBody": "La app guarda todo localmente y no transmite nada. Una comparación comunitaria necesita un servidor que aún no existe. Hasta entonces esto dice con honestidad: sin datos — en lugar de un número inventado.",
+    "statusBody": "Una comparación con la comunidad necesita suficientes mediciones compartidas expresamente para ello, y todavía no las hay. Hasta entonces aquí dice con honestidad: sin datos, en lugar de un número inventado.",
     "example": "Cómo se verá",
     "exampleLine": "«1.284 atletas realizaron este test. Tu resultado: percentil 72.»",
     "principles": "Principios",
@@ -1332,7 +1331,7 @@
   "auth": {
     "eyebrow": "Iniciar sesión",
     "claim": "Measure. Benchmark. Develop.",
-    "noBackend": "No hay ningún proyecto configurado para este dispositivo: tu entrada no se verifica y no se transmite nada. Este inicio de sesión ordena la entrada, aún no protege nada.",
+    "noBackend": "Esta versión no tiene ningún servicio configurado. KYDON necesita una cuenta, así que aquí no es posible iniciar sesión.",
     "signIn": "Iniciar sesión",
     "register": "Crear cuenta",
     "email": "Correo",
@@ -1358,7 +1357,7 @@
     "signOut": "Cerrar sesión",
     "signOutAndWipe": "Cerrar sesión y borrar el dispositivo",
     "wipeConfirmTitle": "¿Borrar todos los datos de este dispositivo?",
-    "wipeConfirmBody": "Las mediciones, los perfiles y los ajustes de esta aplicación se eliminarán de este dispositivo, de forma definitiva. La copia sincronizada en el servidor se conserva. Sin sincronización, una exportación anterior es la única copia.",
+    "wipeConfirmBody": "Las mediciones, perfiles y ajustes de esta app se eliminan de este dispositivo de forma definitiva. Lo sincronizado con tu cuenta sigue en el servidor y vuelve al iniciar sesión de nuevo. Lo añadido desde la última sincronización solo existirá en la exportación.",
     "wipeConfirm": "Borrar definitivamente",
     "wipeCancel": "Cancelar",
     "deleteAccount": "Eliminar la cuenta definitivamente",
@@ -1367,7 +1366,7 @@
     "deleteConfirmBody": "Se eliminarán la cuenta, la copia del servidor y todas las mediciones. Los clientes que gestionas sin cuenta propia también se eliminan; los que tienen cuenta propia conservan sus datos. Este paso no se puede deshacer.",
     "deleteConfirm": "Eliminar definitivamente",
     "deleteFailed": {
-      "not_configured": "Sin cuenta no hay nada que eliminar en un servidor.",
+      "not_configured": "Esta versión no tiene ningún servicio configurado; no hay nada que borrar en un servidor.",
       "offline": "Sin conexión. Inténtalo de nuevo más tarde.",
       "unauthorized": "La sesión ha caducado. Inicia sesión de nuevo e inténtalo otra vez.",
       "failed": "La eliminación ha fallado. No se ha eliminado nada."
@@ -1375,8 +1374,8 @@
     "signedInAs": "Sesión iniciada como {{name}}",
     "planChosen": "Nivel elegido: {{plan}}",
     "planNone": "Aún no se ha elegido nivel.",
-    "signOutKeepsData": "Cerrar sesión solo elimina la cuenta de este dispositivo. Tus mediciones se quedan aquí — son tuyas, no del acceso.",
-    "backendNote": "Tu inicio de sesión pasa por nuestro proveedor de servicios. La medición y el análisis se quedan en este dispositivo; los datos se transmiten solo cuando activas la sincronización.",
+    "signOutKeepsData": "Cerrar sesión termina la sesión en este dispositivo. Tus mediciones se quedan aquí y guardadas en tu cuenta: al volver a iniciar sesión sigues donde lo dejaste.",
+    "backendNote": "KYDON necesita una cuenta. Se mide primero en tu dispositivo, también sin conexión; al iniciar sesión, tus datos se guardan automáticamente en servidores de la UE. Lo que ya está en este dispositivo se conserva.",
     "passwordRule": "Al menos {{count}} caracteres.",
     "confirmTitle": "Confirma tu correo",
     "confirmBody": "Hemos enviado un mensaje a {{email}}. Abre el enlace que contiene y podrás iniciar sesión.",
@@ -1390,29 +1389,10 @@
       "weak_password": "La contraseña es demasiado corta.",
       "needs_confirmation": "Este correo aún no está confirmado. El enlace está en tu bandeja de entrada.",
       "too_many_attempts": "Demasiados intentos fallidos. Espera un momento y vuelve a intentarlo.",
-      "offline": "Sin conexión. Puedes seguir midiendo en este dispositivo — iniciar sesión puede esperar.",
+      "offline": "Sin conexión. KYDON necesita red una vez para iniciar sesión; después también mides sin conexión.",
       "not_configured": "No hay ningún proyecto configurado para este dispositivo.",
       "unknown": "No ha funcionado. Inténtalo de nuevo más tarde."
     }
-  },
-  "sync": {
-    "title": "Sincronización",
-    "hint": "Tus mediciones como segunda copia en el servidor — para que sobrevivan a un dispositivo perdido y aparezcan en un segundo.",
-    "offNotice": "Desactivada. Todo se queda en este dispositivo. La exportación es entonces tu única copia de seguridad.",
-    "signedOut": "Para esto necesitas haber iniciado sesión.",
-    "enable": "Activar sincronización",
-    "disable": "Desactivar",
-    "now": "Sincronizar ahora",
-    "working": "Sincronizando …",
-    "last": "Última sincronización: {{date}}",
-    "never": "Nunca sincronizado.",
-    "result": "{{pushed}} subidos, {{pulled}} descargados, {{series}} entradas sincronizadas.",
-    "offline": "Sin conexión. La sincronización se pondrá al día cuando vuelvas a estar en línea.",
-    "conflictTitle": "Estado divergente",
-    "conflictBody": "Este atleta se modificó en otro dispositivo. KYDON no ha sobrescrito nada — ambos estados están intactos. Guarda primero tu exportación y luego decide.",
-    "conflictKeepLocal": "Subir este registro",
-    "conflictExplain": "El estado del servidor se sustituye. La otra dirección — descargar el estado del servidor — pasa por exportar, «borrar todo» y una sincronización nueva.",
-    "whatLeaves": "Se transfieren mediciones, datos de perfil, notas, enfoques de entrenamiento, además de diario, sesiones, decisiones y comidas — estas últimas como entradas individuales, no como un documento completo. Tu contraseña nunca se transfiere."
   },
   "editResult": {
     "open": "Corregir valor",
@@ -2061,5 +2041,12 @@
         "failed": "No se pudo compartir. Tu check-in está guardado."
       }
     }
+  },
+  "syncAttention": {
+    "signedOut": "Tu sesión ha caducado. Sigues midiendo en este dispositivo; la sincronización se reanuda al iniciar sesión de nuevo.",
+    "otherAccount": "Los datos de este dispositivo pertenecen a otra cuenta y por eso no se sincronizan. Inicia sesión con esa cuenta o vacía el dispositivo en el perfil.",
+    "conflict": "Un atleta se modificó de otra forma en otro dispositivo. KYDON no sobrescribió nada: decide en el perfil.",
+    "signIn": "Iniciar sesión de nuevo",
+    "open": "Ir a la sincronización"
   }
 }

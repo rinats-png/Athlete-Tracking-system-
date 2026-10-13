@@ -30,8 +30,10 @@ import { planDeletions, type RemoteDocHead } from './deletions'
  *      Ergänzungen.
  *
  * WAS ÜBERTRAGEN WIRD: der geprüfte Bestand je Athlet, so wie er lokal liegt.
- * Also personenbezogene Daten. Die Datenschutzerklärung beschreibt genau das;
- * ohne Anmeldung passiert es nicht.
+ * Also personenbezogene Daten. Die Datenschutzerklärung beschreibt genau das.
+ * Der Abgleich läuft mit dem Konto von selbst (`features/shared/useAutoSync`);
+ * im Profil lässt er sich ausschalten. Gesundheitsdaten gehen hier nie mit —
+ * sie haben ihren eigenen, verschlüsselten Weg mit Einwilligung je Kategorie.
  *
  * DER BESTAND IST NICHT IMMER DER EIGENE. Wer als Trainer in einem Team
  * arbeitet, gleicht gegen den Bestand des Teaminhabers ab (`my_pool_owner`,
@@ -56,7 +58,7 @@ import { planDeletions, type RemoteDocHead } from './deletions'
 // Der Abgleichsstand liegt in einer eigenen kleinen Datei: der Bestand
 // braucht `markAthleteDeleted` schon im Startpaket, der Abgleich selbst wird
 // erst nachgeladen.
-import { readSyncState, writeSyncState, EMPTY } from './syncState'
+import { readSyncState, writeSyncState, readSyncOwner, writeSyncOwner, EMPTY } from './syncState'
 export { readSyncState, clearSyncState, markAthleteDeleted, type SyncState } from './syncState'
 
 /**
@@ -86,7 +88,12 @@ export interface SyncReport {
   seriesPulled: number
   /** Athleten, bei denen der Serverstand des Dokuments fremd ist. */
   conflicts: string[]
-  reason: null | 'offline' | 'not_signed_in' | 'newer_version' | 'unknown'
+  /**
+   * `other_account`: der Bestand auf diesem Gerät gehört zu einem anderen
+   * Konto (abgemeldet, ohne zu räumen, dann ein anderes Konto angemeldet).
+   * Dann wird nichts geschrieben und nichts geholt.
+   */
+  reason: null | 'offline' | 'not_signed_in' | 'newer_version' | 'other_account' | 'unknown'
   /** Der Bestand hat gewechselt (Team beigetreten oder verlassen). */
   poolSwitched?: boolean
 }
@@ -127,6 +134,12 @@ export async function syncOnce(
   const { data: auth } = await supabase.auth.getUser()
   const me = auth.user?.id
   if (!me) return fail('not_signed_in')
+
+  // Wem gehört der Bestand auf diesem Gerät? Beim ersten Abgleich dem, der
+  // angemeldet ist; danach nur noch ihm.
+  const owner = readSyncOwner()
+  if (owner && owner !== me) return fail('other_account')
+  if (!owner) writeSyncOwner(me)
 
   // In welchem Bestand arbeite ich? Ohne Antwort (alte Datenbank, Fehler):
   // im eigenen — das ist der Stand vor den Teams und nie ein fremder.

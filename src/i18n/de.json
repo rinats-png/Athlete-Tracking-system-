@@ -180,9 +180,9 @@
   "badges": {
     "personalBest": "Bestleistung",
     "demo": "Demo",
-    "guest": "Lokal",
-    "demoHint": "Beispieldaten. Änderungen bleiben auf diesem Gerät.",
-    "guestHint": "Deine Daten liegen ausschliesslich auf diesem Gerät."
+    "demoHint": "Beispieldaten. Sie bleiben auf diesem Gerät und gehen nie in dein Konto.",
+    "own": "Konto",
+    "ownHint": "Dein eigener Bestand, verbunden mit deinem Konto."
   },
   "units": {
     "percentile": "Perzentil",
@@ -191,14 +191,13 @@
   "welcome": {
     "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Finde heraus, wo du wirklich stehst.",
-    "body": "Sportartspezifische Tests, wissenschaftliche Referenzwerte, ein Leistungsprofil und der nächste sinnvolle Test — kein Trainingstagebuch, kein Kalorienzähler.",
+    "body": "Sportartspezifische Tests, Referenzwerte mit Quelle, ein Leistungsprofil und der nächste sinnvolle Test. Daraus kann ein Trainingsplan entstehen — nur aus belegten Regeln.",
     "continueEmail": "Mit E-Mail starten",
     "haveAccount": "Ich habe ein Konto",
     "viewDemo": "Demo ansehen",
     "legal": "Mit dem Fortfahren stimmst du den Nutzungsbedingungen zu und bestätigst, die Datenschutzerklärung gelesen zu haben.",
-    "startLocal": "Mit leerem Bestand starten",
-    "privacy": "Gemessen und ausgewertet wird auf deinem Gerät. Für die Anmeldung brauchen wir deine E-Mail-Adresse; deine Messwerte werden erst übertragen, wenn du die Synchronisierung einschaltest — und lassen sich jederzeit vollständig exportieren.",
-    "accountLater": "Konto und Synchronisierung folgen später",
+    "startOwn": "Eigenen Bestand anlegen",
+    "privacy": "Gemessen wird zuerst auf deinem Gerät, auch ohne Netz. Mit deinem Konto werden deine Daten automatisch auf Servern in der EU gesichert; ein Trainer sieht nur, was du ihm freigibst. Der Export ist immer vollständig und kostenlos.",
     "points": [
       "Sportartspezifische Diagnostik",
       "Referenzwerte mit Quelle",
@@ -218,10 +217,10 @@
         "wo du wirklich",
         "stehst."
       ],
-      "since": "ohne Konto",
+      "since": "gesichert in der EU",
       "aboutLabel": "über kydon",
       "aboutHeadline": "Kydon misst, ordnet ein und zeigt, was sich verändert hat — und was nur Tagesform war.",
-      "aboutBody": "Sportartspezifische Testprotokolle, Referenzwerte mit Quelle, ein Leistungsprofil über sechs Achsen und der nächste sinnvolle Test. Kein Trainingstagebuch, kein Kalorienzähler, keine medizinische Aussage.",
+      "aboutBody": "Sportartspezifische Testprotokolle, Referenzwerte mit Quelle, ein Leistungsprofil über sechs Achsen und der nächste sinnvolle Test. Keine erfundenen Normen, keine medizinische Aussage.",
       "cards": {
         "protocol": {
           "title": "Testprotokolle",
@@ -741,7 +740,7 @@
   "gate": {
     "step": "Schritt 1 von 1",
     "title": "Welche Sportart?",
-    "body": "KYDON schlägt danach genau die Tests vor, die für diese Disziplin gemessen werden — mit Protokoll und Begründung. Die Angabe bleibt auf diesem Gerät und lässt sich jederzeit ändern.",
+    "body": "KYDON schlägt danach genau die Tests vor, die für diese Disziplin gemessen werden — mit Protokoll und Begründung. Die Angabe lässt sich jederzeit ändern.",
     "noMatch": "Keine Sportart gefunden für «{{query}}». Wähle unten «Allgemeine Diagnostik» — die Sportart lässt sich später nachtragen.",
     "general": "Allgemeine Diagnostik",
     "generalHint": "Ohne Sportart: eine Batterie über alle sechs Achsen. Jederzeit im Testbereich änderbar."
@@ -756,7 +755,7 @@
     "allTests": "Alle Tests ansehen",
     "profile": {
       "title": "Dein Profil",
-      "body": "Alter, Geschlecht und Körperdaten bestimmen, mit welchen Referenzgruppen deine Werte verglichen werden. Alles bleibt auf diesem Gerät.",
+      "body": "Alter, Geschlecht und Körperdaten bestimmen, mit welchen Referenzgruppen deine Werte verglichen werden. Die Angaben gehören dir und lassen sich jederzeit ändern.",
       "required": "Pflichtangaben",
       "optional": "Freiwillig",
       "weight": "Körpergewicht",
@@ -833,9 +832,9 @@
       "points": {
         "measures": "Sie misst deine Leistungsfähigkeit mit Tests, die ein festes Protokoll haben — damit derselbe Test in einem Jahr denselben Wert bedeutet.",
         "compares": "Sie ordnet deine Werte in benannte Referenzgruppen ein, mit Quelle und Datenqualität an jedem Vergleich. Wo es keine belegte Referenz gibt, sagt sie das, statt eine Zahl zu erfinden.",
-        "notPlan": "Sie ist kein Trainingsplan und kein Workout-Tracker. Sie sagt dir, wo du stehst — nicht, was du trainieren sollst.",
+        "plan": "KYDON misst, wo du stehst. Daraus kann ein Trainingsplan entstehen, aber nur aus belegten Regeln, mit Quelle und Prüfstatus. Jeder Block endet mit einer erneuten Messung. Du oder dein Trainer entscheidet.",
         "notMedical": "Sie ist keine medizinische Diagnostik. Keine Diagnosen, keine Therapieempfehlungen, keine Bewertung von Krankheiten.",
-        "onDevice": "Alles bleibt auf diesem Gerät. Kein Konto, keine Übertragung, und der Export deiner Daten ist immer vollständig und kostenlos."
+        "data": "Deine Daten gehören dir. Sie liegen zuerst auf deinem Gerät, Messen geht auch ohne Netz. Mit deinem Konto werden sie automatisch zusätzlich auf Servern in der EU gesichert. Ein Trainer sieht nur, was du ihm freigibst, und du kannst jede Freigabe zurückziehen. Der Export ist immer vollständig und kostenlos."
       }
     },
     "role": {
@@ -1082,7 +1081,7 @@
     "title": "Anonymisiertes Benchmarking",
     "body": "Hier wird einmal stehen, wie viele Sportler einen Test durchgeführt haben und in welchem Perzentil dein Ergebnis liegt — anonymisiert und nur mit deiner ausdrücklichen Freigabe.",
     "status": "Noch keine Vergleichsdaten",
-    "statusBody": "Die App speichert alles lokal und überträgt nichts. Ein Community-Vergleich braucht einen Server, den es noch nicht gibt. Bis dahin steht hier ehrlich: keine Daten — statt einer erfundenen Zahl.",
+    "statusBody": "Ein Community-Vergleich braucht genug Messungen, die ausdrücklich dafür freigegeben wurden — die gibt es noch nicht. Bis dahin steht hier ehrlich: keine Daten — statt einer erfundenen Zahl.",
     "example": "So wird es aussehen",
     "exampleLine": "«1.284 Sportler haben diesen Test durchgeführt. Dein Ergebnis: 72. Perzentil.»",
     "principles": "Grundsätze",
@@ -1332,7 +1331,7 @@
   "auth": {
     "eyebrow": "Anmeldung",
     "claim": "Measure. Benchmark. Develop.",
-    "noBackend": "Für dieses Gerät ist noch kein Projekt hinterlegt: die Eingabe wird nicht geprüft und nichts übertragen. Diese Anmeldung ordnet den Einstieg, sie schützt noch nichts.",
+    "noBackend": "Für diese Ausgabe ist kein Dienst hinterlegt. KYDON braucht ein Konto — hier ist deshalb keine Anmeldung möglich.",
     "signIn": "Anmelden",
     "register": "Konto anlegen",
     "email": "E-Mail",
@@ -1358,7 +1357,7 @@
     "signOut": "Abmelden",
     "signOutAndWipe": "Abmelden und Gerät leeren",
     "wipeConfirmTitle": "Alle Daten auf diesem Gerät löschen?",
-    "wipeConfirmBody": "Messwerte, Profile und Einstellungen dieser App werden von diesem Gerät entfernt — endgültig. Ein Serverstand aus der Synchronisierung bleibt bestehen. Ohne Synchronisierung ist ein vorheriger Export die einzige Kopie.",
+    "wipeConfirmBody": "Messwerte, Profile und Einstellungen dieser App werden von diesem Gerät entfernt — endgültig. Was mit deinem Konto abgeglichen ist, bleibt auf dem Server und kommt mit der nächsten Anmeldung zurück. Was seit dem letzten Abgleich dazukam, gibt es dann nur noch im Export.",
     "wipeConfirm": "Endgültig löschen",
     "wipeCancel": "Abbrechen",
     "deleteAccount": "Konto endgültig löschen",
@@ -1367,7 +1366,7 @@
     "deleteConfirmBody": "Das Konto, der Serverstand und alle Messwerte werden entfernt. Von Ihnen betreute Klienten ohne eigenes Konto werden mitgelöscht; Klienten mit eigenem Konto behalten ihre Daten. Dieser Schritt lässt sich nicht rückgängig machen.",
     "deleteConfirm": "Konto endgültig löschen",
     "deleteFailed": {
-      "not_configured": "Ohne Konto gibt es nichts auf einem Server zu löschen.",
+      "not_configured": "Für diese Ausgabe ist kein Dienst hinterlegt; auf einem Server gibt es nichts zu löschen.",
       "offline": "Keine Verbindung. Bitte später erneut versuchen.",
       "unauthorized": "Die Sitzung ist abgelaufen. Bitte neu anmelden und erneut versuchen.",
       "failed": "Das Löschen ist fehlgeschlagen. Es wurde nichts entfernt."
@@ -1375,8 +1374,8 @@
     "signedInAs": "Angemeldet als {{name}}",
     "planChosen": "Gewählte Stufe: {{plan}}",
     "planNone": "Noch keine Stufe gewählt.",
-    "signOutKeepsData": "Abmelden räumt nur das Konto. Deine Messwerte bleiben auf diesem Gerät — sie gehören dir, nicht der Anmeldung.",
-    "backendNote": "Deine Anmeldung läuft über unseren Dienstleister. Gemessen und ausgewertet wird weiter auf diesem Gerät; übertragen wird erst, wenn du die Synchronisierung einschaltest.",
+    "signOutKeepsData": "Abmelden beendet die Anmeldung auf diesem Gerät. Deine Messwerte bleiben hier liegen und in deinem Konto gesichert — nach der nächsten Anmeldung geht es weiter, wo du warst.",
+    "backendNote": "KYDON braucht ein Konto. Gemessen wird zuerst auf deinem Gerät, auch ohne Netz; mit der Anmeldung werden deine Daten automatisch auf Servern in der EU gesichert. Was schon auf diesem Gerät liegt, bleibt erhalten.",
     "passwordRule": "Mindestens {{count}} Zeichen.",
     "confirmTitle": "Bestätige deine E-Mail",
     "confirmBody": "Wir haben eine Nachricht an {{email}} geschickt. Öffne den Link darin, dann kannst du dich anmelden.",
@@ -1390,29 +1389,10 @@
       "weak_password": "Das Passwort ist zu kurz.",
       "needs_confirmation": "Diese E-Mail ist noch nicht bestätigt. Der Link steht in deinem Postfach.",
       "too_many_attempts": "Zu viele Fehlversuche. Bitte einen Moment warten und es dann erneut versuchen.",
-      "offline": "Keine Verbindung. Du kannst weiter auf diesem Gerät messen — die Anmeldung geht später.",
+      "offline": "Keine Verbindung. Für die Anmeldung braucht KYDON einmal Netz — danach misst du auch offline.",
       "not_configured": "Für dieses Gerät ist kein Projekt hinterlegt.",
       "unknown": "Das hat nicht geklappt. Versuch es später noch einmal."
     }
-  },
-  "sync": {
-    "title": "Synchronisierung",
-    "hint": "Deine Messwerte als Zweitschrift auf dem Server — damit sie einen Geräteverlust überleben und auf einem zweiten Gerät erscheinen.",
-    "offNotice": "Aus. Alles bleibt auf diesem Gerät. Der Export ist dann deine einzige Sicherung.",
-    "signedOut": "Dafür musst du angemeldet sein.",
-    "enable": "Synchronisierung einschalten",
-    "disable": "Ausschalten",
-    "now": "Jetzt abgleichen",
-    "working": "Gleicht ab …",
-    "last": "Zuletzt abgeglichen: {{date}}",
-    "never": "Noch nie abgeglichen.",
-    "result": "{{pushed}} hochgeladen, {{pulled}} geholt, {{series}} Einträge abgeglichen.",
-    "offline": "Keine Verbindung. Der Abgleich holt es nach, sobald du wieder online bist.",
-    "conflictTitle": "Abweichender Stand",
-    "conflictBody": "Dieser Athlet wurde auf einem anderen Gerät geändert. KYDON hat nichts überschrieben — beide Stände sind unversehrt. Sichere zuerst deinen Export, dann entscheide.",
-    "conflictKeepLocal": "Diesen Bestand hochladen",
-    "conflictExplain": "Der Serverstand wird dabei ersetzt. Der andere Weg — den Serverstand holen — führt über Export, «alles löschen» und einen neuen Abgleich.",
-    "whatLeaves": "Übertragen werden Messwerte, Profilangaben, Notizen, Trainingsschwerpunkte sowie Tagebuch, Einheiten, Entscheidungen und Mahlzeiten — Letztere als einzelne Einträge, nicht als ganzes Dokument. Nicht übertragen wird dein Passwort."
   },
   "editResult": {
     "open": "Wert korrigieren",
@@ -2061,5 +2041,12 @@
         "failed": "Das Teilen hat nicht geklappt. Dein Check-in ist gespeichert."
       }
     }
+  },
+  "syncAttention": {
+    "signedOut": "Deine Anmeldung ist abgelaufen. Gemessen wird weiter auf diesem Gerät, abgeglichen erst nach einer neuen Anmeldung.",
+    "otherAccount": "Der Bestand auf diesem Gerät gehört zu einem anderen Konto und wird deshalb nicht abgeglichen. Melde dich mit jenem Konto an oder leere das Gerät im Profil.",
+    "conflict": "Ein Athlet wurde auf einem anderen Gerät anders geändert. KYDON hat nichts überschrieben — entscheide im Profil.",
+    "signIn": "Neu anmelden",
+    "open": "Zum Abgleich"
   }
 }

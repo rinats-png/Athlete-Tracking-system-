@@ -12,6 +12,8 @@ import { AnalyticsConsentStrip } from '@/features/shared/AnalyticsConsent'
 import { AdminBar } from '@/features/admin/AdminLink'
 import { usePushDueSync } from '@/features/push/usePushDueSync'
 import { WhatsNewDialog } from '@/features/whatsNew/WhatsNewDialog'
+import { useAutoSync } from '@/features/shared/useAutoSync'
+import { SyncAttentionNotice } from '@/features/shared/SyncAttentionNotice'
 
 // Nur nachgeladen, wenn beim Laden etwas zu melden war — das Startpaket
 // bleibt so unter seiner Grenze (tests/loading.spec.ts).
@@ -34,6 +36,7 @@ export function AppShell() {
   const { pathname } = useLocation()
   useOverdueNotice()
   usePushDueSync()
+  const syncAttention = useAutoSync()
   usePageTracking(pathname)
   const { mode, storageBlocked, role, loadReport } = useAppData()
   const items = navItemsFor(role)
@@ -91,6 +94,7 @@ export function AppShell() {
             <DataLoadNotice />
           </Suspense>
         )}
+        <SyncAttentionNotice attention={syncAttention} />
         <AdminBar />
         <AnalyticsConsentStrip />
         <Outlet />

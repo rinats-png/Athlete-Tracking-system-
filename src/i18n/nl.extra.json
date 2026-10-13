@@ -393,7 +393,7 @@
       "reportPdf": "Drukklaar rapport",
       "requirementGap": "Welke as voor jouw discipline het meest oplevert",
       "seasonPlan": "Controlepunten tot aan de wedstrijd",
-      "sync": "Synchronisatie tussen apparaten",
+      "sync": "Automatische synchronisatie: back-up en al je apparaten",
       "targetStandards": "Streefwaarden van de concrete toelatingstest",
       "unlimitedReports": "Rapporten zonder limiet",
       "whiteLabel": "Eigen logo op het rapport",
@@ -604,7 +604,7 @@
     "deleteHint_other": "“{{name}}” wordt definitief verwijderd samen met {{count}} metingen. Dit kan niet ongedaan worden gemaakt. Om iemand te verbergen zonder gegevens te verliezen, gebruik je het archief.",
     "deleteConfirm": "Definitief verwijderen",
     "meta": "{{results}} metingen · {{assessments}} testsessies · sinds {{since}}",
-    "privacyNote": "KYDON slaat alleen op wat jij over een getrainde atleet invoert. Geen account, e-mailadres of uitnodiging nodig. Alles blijft op dit apparaat.",
+    "privacyNote": "KYDON slaat over een begeleide atleet alleen op wat jij invoert. De atleet heeft geen account, e-mailadres of uitnodiging nodig. Met je account wordt het automatisch geback-upt op servers in de EU; daarvoor geldt de verwerkersovereenkomst.",
     "handover": "Overdracht",
     "handoverHint": "Een atleet wisselt van club of trainer: de historie is van hem of haar, niet van dit apparaat. Het bestand bevat alleen deze ene atleet — zonder jouw huisstijl en zonder de anderen.",
     "handoverExport": "Atleet exporteren",
@@ -637,11 +637,11 @@
     "data": "Je gegevens",
     "recovered": "Deze gegevens komen terug uit de tweede kopie op het apparaat, opgeslagen op {{date}}. De browser had de hoofdopslag gewist.",
     "backupDue": {
-      "never_exported": "Je hebt {{count}} metingen en nog nooit geëxporteerd. De gegevens staan alleen op dit apparaat — een export maakt ze van jou, ook zonder dit apparaat.",
+      "never_exported": "Je hebt {{count}} metingen en nog nooit geëxporteerd. De synchronisatie bewaart ze in je account; een export is je eigen kopie, los van apparaat en account.",
       "many_new_results": "Sinds de laatste export zijn {{count}} metingen toegevoegd. Een nieuwe export kost één klik.",
       "long_ago": "De laatste export was {{days}} dagen geleden, en sindsdien zijn {{count}} metingen toegevoegd."
     },
-    "privacy": "Je metingen staan in deze browser. Ze worden alleen verzonden als je synchronisatie inschakelt. Browsergegevens wissen verwijdert het lokale dossier — de export of synchronisatie beschermt daartegen.",
+    "privacy": "Je metingen staan eerst op dit apparaat en worden met je account automatisch geback-upt op servers in de EU. Schakel je de synchronisatie uit, dan is de export je enige back-up.",
     "export": "Exporteren",
     "import": "Importeren",
     "importFailed": "Het bestand kon niet worden gelezen.",
@@ -997,7 +997,7 @@
     "photoRemove": "Bewijs verwijderen",
     "photoAlt": "Bewijs van de meting",
     "photoAdded": "toegevoegd op {{date}}",
-    "photoHint": "Eén afbeelding per resultaat — het timerdisplay, de weergave van de weegschaal. Ze wordt verkleind en blijft op dit apparaat; ze wordt niet verzonden en niet geanalyseerd.",
+    "photoHint": "Eén afbeelding per resultaat — het display van de tijdmeting, de aflezing van de weegschaal. Ze wordt verkleind, met de meting opgeslagen en ermee gesynchroniseerd. Ze wordt niet geanalyseerd.",
     "photoError": {
       "not_an_image": "Dat is geen afbeeldingsbestand.",
       "unreadable": "De afbeelding kon niet worden gelezen.",
@@ -1015,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Historie",
     "title": "Herinneringen",
-    "intro": "De app weet wanneer je het laatst hebt gemeten en berekent op je apparaat wat er gepland staat. Herinneringen staan uit tot je ze inschakelt — met een account ook via push.",
-    "noPush": "De herinnering verschijnt in de app wanneer je die opent. Met een account kun je ook push inschakelen: dan meldt KYDON zich ook als de app gesloten is. De server kent daarvoor alleen de datum van de volgende hermeting. Zonder account blijft het agendabestand de betrouwbare weg.",
+    "intro": "De app weet wanneer je voor het laatst hebt gemeten en berekent op je apparaat wanneer het weer zover is. Herinneringen staan uit tot je ze inschakelt — desgewenst ook via push.",
+    "noPush": "De herinnering verschijnt in de app wanneer je die opent. Je kunt ook push inschakelen: dan meldt KYDON zich ook als de app gesloten is. De server krijgt daarvoor alleen de datum van de volgende hertest. Het agendabestand blijft de betrouwbaarste weg.",
     "enable": "Herinneringen inschakelen",
     "enabled": "Herinneringen staan aan",
     "disabled": "Herinneringen staan uit",
@@ -1032,7 +1032,7 @@
     "dueOn": "verschuldigd op {{date}}",
     "default": "Standaard",
     "calendar": "Kalenderbestand downloaden",
-    "calendarHint": "Eén hele-dag-afspraak per verschuldigde hertest, met een alarm drie dagen vooraf. Werkt in elke kalender, offline en zonder account — dit is de betrouwbare weg.",
+    "calendarHint": "Eén afspraak voor de hele dag per verlopen hertest, met een melding drie dagen vooraf. Werkt in elke agenda en offline — dit is de betrouwbare weg.",
     "calendarEmpty": "Er is nog geen hertest verschuldigd. Zodra een test moet worden herhaald, staat het bestand hier klaar.",
     "notify": "Systeemmeldingen toestaan",
     "notifyOn": "Systeemmeldingen zijn toegestaan",
@@ -1518,7 +1518,7 @@
     "carryQuestion": "Op dit apparaat staan {{count}} atleten. Wat moet er met ze gebeuren?",
     "carryYes": "Naar het team overzetten — ze horen dan bij het team en tellen mee voor zijn niveau.",
     "carryNo": "In mijn eigen account laten — ze verdwijnen van dit apparaat en komen terug als ik het team verlaat.",
-    "joinPrivacy": "Als je lid wordt, wordt synchronisatie ingeschakeld: de atleten van het team staan op de server, en alle trainers van het team kunnen ze zien. Verlaat je het team, dan blijven de atleten bij het team.",
+    "joinPrivacy": "Een team werkt alleen met synchronisatie: staat die uit, dan zet toetreden haar weer aan. De atleten van het team staan op de server en alle trainers van het team zien ze. Verlaat je het team, dan blijven de atleten bij het team.",
     "joinButton": "Lid worden",
     "joined": "Je zit nu in het team ‘{{name}}’.",
     "unnamed": "zonder naam",
@@ -2163,7 +2163,7 @@
     "consent": {
       "title": "Toestemming voor hartgegevens",
       "agree": "Akkoord",
-      "storage": "De slagenreeks blijft op het apparaat en wordt na de meting verwijderd. Alleen de twee resultaten worden opgeslagen. Met een account en synchronisatie staan ze ook in je account. Je kunt ze op elk moment verwijderen.",
+      "storage": "De slagenreeks blijft op het apparaat en wordt na de meting verwijderd. Alleen de twee resultaten worden opgeslagen; met synchronisatie staan ze ook in je account. Je kunt ze altijd verwijderen.",
       "body": "Hartslag en hartslagvariabiliteit zijn gezondheidsgegevens (art. 9 AVG). KYDON meet ze alleen als je hier toestemming geeft, en gebruikt ze alleen om ze je in het verloop en in de dagcontext te tonen."
     },
     "beats_other": "{{count}} slagen",
@@ -2242,6 +2242,7 @@
     "title": "Nieuw bij KYDON:",
     "close": "Begrepen",
     "items": {
+      "account": "Account en synchronisatie: KYDON synchroniseert nu vanzelf met je account. Je gegevens zijn geback-upt op servers in de EU en actueel op al je apparaten. Uitschakelen kan in je profiel — je ziet eerst wat dan niet meer werkt.",
       "design": "Nieuw ontwerp: matglazen kaarten met lagen, monocijfers voor meetwaarden en rustigere overgangen — licht en donker.",
       "tests": "Testbibliotheek volgens protocol 1.0: 126 tests in 29 gebieden, elk met doel, opstelling, stappen en beoordeling.",
       "images": "Foto’s van de testopstellingen in de beschrijvingen in plaats van schetsen.",
@@ -2792,7 +2793,7 @@
     "saveNext": "Opslaan, volgende atleet",
     "backToList": "Terug naar lijst",
     "rule": "De beste geldige poging telt. Ongeldige pogingen blijven bewaard maar worden niet gescoord.",
-    "offline": "Werkt zonder netwerk. Alles blijft op dit apparaat."
+    "offline": "Werkt zonder netwerk. Er wordt eerst op dit apparaat opgeslagen en gesynchroniseerd zodra er weer netwerk is."
   },
   "ask": {
     "eyebrow": "Vragen",
@@ -4105,6 +4106,40 @@
       "athlete": "Atleet",
       "store": "Gegevens",
       "other": "Overig"
+    }
+  },
+  "sync": {
+    "title": "Synchronisatie met je account",
+    "hint": "Loopt vanzelf: je gegevens als back-up op servers in de EU en op elk apparaat waarop je bent ingelogd. Gezondheidsgegevens gaan nooit mee.",
+    "signedOut": "Je aanmelding is verlopen. Log opnieuw in, dan synchroniseert KYDON verder.",
+    "enable": "Synchronisatie weer inschakelen",
+    "disable": "Synchronisatie uitschakelen",
+    "now": "Nu synchroniseren",
+    "working": "Synchroniseren …",
+    "last": "Laatst gesynchroniseerd: {{date}}",
+    "never": "Nooit gesynchroniseerd.",
+    "result": "{{pushed}} geüpload, {{pulled}} opgehaald, {{series}} items gesynchroniseerd.",
+    "offline": "Geen verbinding. De synchronisatie haalt het in zodra je weer online bent.",
+    "conflictTitle": "Afwijkende toestand",
+    "conflictBody": "Deze atleet is op een ander apparaat gewijzigd. KYDON heeft niets overschreven — beide toestanden zijn intact. Sla eerst je export op, beslis dan.",
+    "conflictKeepLocal": "Dit dossier uploaden",
+    "conflictExplain": "De servertoestand wordt vervangen. De andere richting — de servertoestand ophalen — loopt via export, “alles verwijderen” en een nieuwe synchronisatie.",
+    "whatLeaves": "Gesynchroniseerd worden metingen, profielgegevens, notities, trainingsprioriteiten, plannen en daarnaast dagboek, trainingen, beslissingen en maaltijden. Niet inbegrepen: je wachtwoord, geïmporteerde activiteiten en gezondheidsgegevens — die hebben hun eigen versleutelde route.",
+    "auto": "KYDON synchroniseert vanzelf: na het starten, na elke wijziging en zodra er weer netwerk is.",
+    "paused": "De synchronisatie staat sinds {{date}} uit.",
+    "frozen": "De kopie in je account heeft de stand van {{date}}; wat daarna is toegevoegd, staat alleen op dit apparaat en in de export.",
+    "frozenNever": "In je account staat nog geen kopie; alles staat alleen op dit apparaat en in de export.",
+    "offDialog": {
+      "eyebrow": "Synchronisatie uitschakelen",
+      "title": "Wat dan niet meer werkt",
+      "backup": "Geen back-up meer. Raakt dit apparaat kwijt of wordt de browser gewist, dan is alles weg wat sinds het uitschakelen is toegevoegd — tenzij je het hebt geëxporteerd.",
+      "devices": "Je andere apparaten krijgen geen nieuwe waarden meer, en wijzigingen van daar komen hier niet aan.",
+      "coach": "Je trainer ziet alleen nog de laatst gesynchroniseerde stand. Nieuwe metingen, check-ins en trainingen bereiken hem niet.",
+      "plans": "Plannen en aanpassingen van je trainer komen niet meer op dit apparaat aan.",
+      "server": "De kopie in je account blijft zoals ze is — ze wordt niet verwijderd. Volledig verwijderen kan met ‘Account definitief verwijderen’.",
+      "local": "Meten werkt zoals altijd, ook zonder netwerk. Je kunt de synchronisatie op elk moment weer inschakelen; dan wordt ingehaald wat ontbreekt.",
+      "confirm": "Toch uitschakelen",
+      "keep": "Synchronisatie aanhouden"
     }
   }
 }

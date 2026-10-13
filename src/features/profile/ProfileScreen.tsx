@@ -413,7 +413,7 @@ export function ProfileScreen() {
                   </span>
                 </label>
 
-                {mode === 'guest' && data.results.length === 0 && (
+                {mode === 'own' && data.results.length === 0 && (
                   <Button variant="ghost" size="sm" onClick={loadDemo}>
                     {t('profile.loadDemo')}
                   </Button>

@@ -32,7 +32,7 @@ import { pick } from '@/i18n/pick'
  *    sie eine Behauptung über Partner (§81). Vorbei laufen deshalb die
  *    Sportarten, für die tatsächlich ein Testprofil hinterlegt ist.
  */
-export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') => void }) {
+export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'own' | 'demo') => void }) {
   const { t } = useTranslation()
   const locale = useLocale()
   const page = useReveal<HTMLDivElement>()
@@ -117,8 +117,8 @@ export function WelcomeScreen({ onEnter }: { onEnter: (mode: 'guest' | 'demo') =
               {t('welcome.body')}
             </p>
             <div data-reveal className="flex flex-wrap items-center gap-4">
-              <BracketButton onClick={() => onEnter('guest')}>
-                {t('welcome.startLocal')}
+              <BracketButton onClick={() => onEnter('own')}>
+                {t('welcome.startOwn')}
               </BracketButton>
               <button
                 type="button"

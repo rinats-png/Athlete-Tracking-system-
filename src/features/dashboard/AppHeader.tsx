@@ -20,8 +20,8 @@ export function AppHeader({
   onNavigate,
   items = NAV_ITEMS,
 }: {
-  /** 'guest' = lokale Daten ohne Konto, 'demo' = mitgelieferter Beispielsatz. */
-  mode: 'guest' | 'demo'
+  /** 'own' = eigener Bestand, mit dem Konto abgeglichen; 'demo' = mitgelieferter Beispielsatz. */
+  mode: 'own' | 'demo'
   active?: NavKey
   onNavigate?: (key: NavKey) => void
   items?: readonly NavItem[]
@@ -69,9 +69,9 @@ export function AppHeader({
           <AthleteSwitcher />
           <span
             className="hidden border border-line px-2 py-1 font-display text-[10px] font-semibold tracking-[0.14em] uppercase text-ink-muted sm:inline-block"
-            title={t(mode === 'demo' ? 'badges.demoHint' : 'badges.guestHint')}
+            title={t(mode === 'demo' ? 'badges.demoHint' : 'badges.ownHint')}
           >
-            {t(mode === 'demo' ? 'badges.demo' : 'badges.guest')}
+            {t(mode === 'demo' ? 'badges.demo' : 'badges.own')}
           </span>
         </div>
       </div>

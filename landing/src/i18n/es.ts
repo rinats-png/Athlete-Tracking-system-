@@ -53,7 +53,7 @@ export const es: Dict = {
   "why.3.text": "Si el sueño, la carga y un resultado cambian la misma semana, los ves uno junto a otro. KYDON no afirma que uno haya causado el otro. Sin diagnósticos ni predicciones de lesiones.",
   "why.4.title": "Tuyo y privado",
   "why.4.short": "Funciona sin conexión y guarda primero en tu dispositivo.",
-  "why.4.text": "Medir funciona sin conexión en el pabellón. Tus datos están primero en tu dispositivo y solo se sincronizan si quieres: pensado para el RGPD desde el primer día.",
+  "why.4.text": "Medir funciona sin conexión en el pabellón. Tus datos están primero en tu dispositivo y se guardan automáticamente en servidores de la UE con tu cuenta: pensado para el RGPD desde el primer día.",
   "features.eyebrow": "Dentro de la app",
   "features.title": "Menos texto, más imagen.<br /><span class=\"muted\">Cada respuesta a un toque.</span>",
   "f1.eyebrow": "Hoy",

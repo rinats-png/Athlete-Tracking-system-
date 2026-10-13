@@ -393,7 +393,7 @@
       "reportPdf": "Utskriftsfärdig rapport",
       "requirementGap": "Vilken axel som ger din gren mest",
       "seasonPlan": "Kontrollpunkter fram till tävlingen",
-      "sync": "Synkronisering mellan enheter",
+      "sync": "Automatisk synkning: säkerhetskopia och alla dina enheter",
       "targetStandards": "Målvärden för det aktuella antagningstestet",
       "unlimitedReports": "Rapporter utan tak",
       "whiteLabel": "Egen logotyp i rapporten",
@@ -604,7 +604,7 @@
     "deleteHint_other": "”{{name}}” raderas permanent tillsammans med {{count}} mätningar. Det kan inte ångras. För att dölja någon utan att förlora data, använd arkivet.",
     "deleteConfirm": "Radera permanent",
     "meta": "{{results}} mätningar · {{assessments}} testtillfällen · sedan {{since}}",
-    "privacyNote": "KYDON lagrar bara det du anger om en tränad atlet. Inget konto, ingen e-postadress eller inbjudan krävs. Allt stannar på den här enheten.",
+    "privacyNote": "KYDON sparar bara det om en coachad idrottare som du själv matar in. Idrottaren behöver varken konto, e-postadress eller inbjudan. Med ditt konto säkerhetskopieras det automatiskt på servrar i EU; personuppgiftsbiträdesavtalet gäller.",
     "handover": "Överlämning",
     "handoverHint": "En atlet byter klubb eller tränare: historiken tillhör hen, inte den här enheten. Filen innehåller bara den atleten — utan din profilering och utan de andra.",
     "handoverExport": "Exportera atlet",
@@ -637,11 +637,11 @@
     "data": "Dina data",
     "recovered": "Dessa data kom tillbaka från enhetens andra kopia, sparad {{date}}. Webbläsaren hade rensat huvudlagringen.",
     "backupDue": {
-      "never_exported": "Du har {{count}} mätningar och har aldrig exporterat. Data finns bara på den här enheten — en export gör dem dina även utan den.",
+      "never_exported": "Du har {{count}} mätningar och har aldrig exporterat. Synkningen säkrar dem i ditt konto; en export är din egen kopia, oberoende av enhet och konto.",
       "many_new_results": "{{count}} mätningar har tillkommit sedan senaste exporten. En ny export tar ett klick.",
       "long_ago": "Senaste exporten gjordes för {{days}} dagar sedan, och {{count}} mätningar har tillkommit sedan dess."
     },
-    "privacy": "Dina mätningar finns i den här webbläsaren. De överförs bara om du slår på synkronisering. Att rensa webbläsardata tar bort det lokala registret — exporten eller synkroniseringen skyddar mot det.",
+    "privacy": "Dina mätningar ligger först på den här enheten och säkerhetskopieras automatiskt på servrar i EU med ditt konto. Stänger du av synkningen är exporten din enda säkerhetskopia.",
     "export": "Exportera",
     "import": "Importera",
     "importFailed": "Filen kunde inte läsas.",
@@ -997,7 +997,7 @@
     "photoRemove": "Ta bort underlag",
     "photoAlt": "Underlag för mätningen",
     "photoAdded": "tillagt {{date}}",
-    "photoHint": "En bild per resultat — timerdisplayen, vågens avläsning. Den förminskas och stannar på den här enheten; den överförs inte och analyseras inte.",
+    "photoHint": "En bild per resultat — tidtagningens display, vågens visning. Den förminskas, sparas med mätningen och synkas med den. Den analyseras inte.",
     "photoError": {
       "not_an_image": "Det är ingen bildfil.",
       "unreadable": "Bilden kunde inte läsas.",
@@ -1015,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Historik",
     "title": "Påminnelser",
-    "intro": "Appen vet när du senast mätte och räknar ut på din enhet vad som är dags. Påminnelser är av tills du slår på dem – med konto även via push.",
-    "noPush": "Påminnelsen visas i appen när du öppnar den. Med ett konto kan du också slå på push: då hör KYDON av sig även när appen är stängd. Servern får då bara veta datumet för nästa mätning. Utan konto är kalenderfilen fortfarande det pålitliga sättet.",
+    "intro": "Appen vet när du senast mätte och räknar ut när det är dags på din enhet. Påminnelser är avstängda tills du slår på dem — även som push om du vill.",
+    "noPush": "Påminnelsen visas i appen när du öppnar den. Du kan också slå på push: då hör KYDON av sig även när appen är stängd. Servern får bara veta datumet för nästa mätning. Kalenderfilen är fortfarande det mest pålitliga sättet.",
     "enable": "Aktivera påminnelser",
     "enabled": "Påminnelser är på",
     "disabled": "Påminnelser är av",
@@ -1032,7 +1032,7 @@
     "dueOn": "aktuellt {{date}}",
     "default": "Standard",
     "calendar": "Ladda ner kalenderfil",
-    "calendarHint": "En heldagshändelse per aktuellt omtest, med larm tre dagar i förväg. Fungerar i alla kalendrar, offline och utan konto — det är den tillförlitliga vägen.",
+    "calendarHint": "En heldagshändelse per förfallen ommätning, med påminnelse tre dagar innan. Fungerar i alla kalendrar och offline — det är den pålitliga vägen.",
     "calendarEmpty": "Inget omtest är aktuellt ännu. Så snart ett test ska upprepas finns filen klar här.",
     "notify": "Tillåt systemnotiser",
     "notifyOn": "Systemnotiser är tillåtna",
@@ -1518,7 +1518,7 @@
     "carryQuestion": "Det finns {{count}} idrottare på den här enheten. Vad ska hända med dem?",
     "carryYes": "Ta med dem in i teamet — då tillhör de teamet och räknas mot dess nivå.",
     "carryNo": "Behåll dem i mitt eget konto — de lämnar den här enheten och kommer tillbaka när jag lämnar teamet.",
-    "joinPrivacy": "När du går med slås synkroniseringen på: teamets idrottare lagras på servern, och alla tränare i teamet kan se dem. Lämnar du teamet stannar idrottarna kvar i teamet.",
+    "joinPrivacy": "Ett team fungerar bara med synkning: är den avstängd slår anslutningen på den igen. Teamets idrottare ligger på servern och alla tränare i teamet ser dem. Lämnar du teamet stannar idrottarna i teamet.",
     "joinButton": "Gå med",
     "joined": "Du är nu med i teamet ”{{name}}”.",
     "unnamed": "namnlöst",
@@ -2163,7 +2163,7 @@
     "consent": {
       "title": "Samtycke för hjärtdata",
       "agree": "Jag samtycker",
-      "storage": "Slagföljden stannar på enheten och kasseras efter mätningen. Bara de två resultaten sparas. Med konto och synkronisering finns de även i ditt konto. Du kan radera dem när som helst.",
+      "storage": "Slagsekvensen stannar på enheten och kasseras efter mätningen. Bara de två resultaten sparas; med synkning finns de även i ditt konto. Du kan radera dem när som helst.",
       "body": "Puls och hjärtfrekvensvariabilitet är hälsodata (art. 9 GDPR). KYDON mäter dem bara om du samtycker här, och använder dem bara för att visa dem för dig i historiken och i dagens sammanhang."
     },
     "beats_other": "{{count}} slag",
@@ -2242,6 +2242,7 @@
     "title": "Nytt i KYDON:",
     "close": "Uppfattat",
     "items": {
+      "account": "Konto och synkning: KYDON synkar nu av sig själv med ditt konto. Dina data är säkrade på servrar i EU och aktuella på alla dina enheter. Du kan stänga av det i profilen — först ser du vad som då slutar fungera.",
       "design": "Ny design: kort av frostat glas med nivåer, monosiffror för mätvärden och lugnare övergångar — ljust och mörkt.",
       "tests": "Testbibliotek enligt protokoll 1.0: 126 tester i 29 områden, vart och ett med mål, uppställning, steg och bedömning.",
       "images": "Foton av testuppställningarna i beskrivningarna i stället för skisser.",
@@ -2792,7 +2793,7 @@
     "saveNext": "Spara, nästa atlet",
     "backToList": "Tillbaka till listan",
     "rule": "Det bästa giltiga försöket räknas. Ogiltiga försök sparas men poängsätts inte.",
-    "offline": "Fungerar utan nät. Allt stannar på den här enheten."
+    "offline": "Fungerar utan nät. Sparas först på den här enheten och synkas så snart nätet är tillbaka."
   },
   "ask": {
     "eyebrow": "Frågor",
@@ -4105,6 +4106,40 @@
       "athlete": "Idrottare",
       "store": "Data",
       "other": "Övrigt"
+    }
+  },
+  "sync": {
+    "title": "Synkning med kontot",
+    "hint": "Sker av sig själv: dina data som säkerhetskopia på servrar i EU och på varje enhet där du är inloggad. Hälsodata följer aldrig med.",
+    "signedOut": "Din inloggning har gått ut. Logga in igen, så fortsätter KYDON synka.",
+    "enable": "Slå på synkningen igen",
+    "disable": "Stäng av synkningen",
+    "now": "Synkronisera nu",
+    "working": "Synkroniserar …",
+    "last": "Senast synkroniserat: {{date}}",
+    "never": "Aldrig synkroniserat.",
+    "result": "{{pushed}} uppladdade, {{pulled}} hämtade, {{series}} poster synkade.",
+    "offline": "Ingen anslutning. Synkroniseringen kommer ikapp när du är online igen.",
+    "conflictTitle": "Avvikande tillstånd",
+    "conflictBody": "Den här atleten ändrades på en annan enhet. KYDON skrev inte över något — båda tillstånden är intakta. Spara din export först, bestäm sedan.",
+    "conflictKeepLocal": "Ladda upp den här posten",
+    "conflictExplain": "Servertillståndet ersätts. Andra riktningen — att hämta servertillståndet — går via export, ”radera allt” och en ny synkronisering.",
+    "whatLeaves": "Synkas: mätningar, profiluppgifter, anteckningar, träningsprioriteringar, planer samt dagbok, pass, beslut och måltider. Inte med: ditt lösenord, importerade löprundor och hälsodata — de har en egen krypterad väg.",
+    "auto": "KYDON synkar av sig själv: efter start, efter varje ändring och så snart nätet är tillbaka.",
+    "paused": "Synkningen har varit avstängd sedan {{date}}.",
+    "frozen": "Kopian i ditt konto är från {{date}}; det som tillkommit sedan finns bara på den här enheten och i exporten.",
+    "frozenNever": "Det finns ännu ingen kopia i ditt konto; allt finns bara på den här enheten och i exporten.",
+    "offDialog": {
+      "eyebrow": "Stäng av synkningen",
+      "title": "Det här slutar fungera",
+      "backup": "Ingen säkerhetskopia längre. Försvinner enheten eller töms webbläsaren är allt borta som tillkommit sedan du stängde av — om du inte har exporterat det.",
+      "devices": "Dina andra enheter får inga nya värden, och ändringar där kommer inte fram hit.",
+      "coach": "Din tränare ser bara det senast synkade läget. Nya mätningar, incheckningar och pass når inte fram.",
+      "plans": "Planer och justeringar från din tränare kommer inte längre fram till den här enheten.",
+      "server": "Kopian i ditt konto förblir som den är — den raderas inte. Du kan ta bort den helt med ”Radera kontot permanent”.",
+      "local": "Mätningen fungerar som förut, även utan nät. Du kan slå på synkningen igen när som helst; då hämtas det som saknas in.",
+      "confirm": "Stäng av ändå",
+      "keep": "Behåll synkningen"
     }
   }
 }

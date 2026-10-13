@@ -815,7 +815,9 @@ Zweck: Kontextdaten, nicht eine zweite Wearable-App.
 - Assessment Coverage
 - Data Confidence
 - Reports
-- Sync
+- ~~Sync~~ — seit 13.10.2026 im kostenlosen Kern: Das Konto ist Pflicht, der
+  Abgleich läuft automatisch und ist abschaltbar (Entscheidung des
+  Auftraggebers).
 
 ### Pro
 - Fuel

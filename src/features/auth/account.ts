@@ -1,21 +1,16 @@
 import { ATHLETE_PLANS, COACH_TIERS } from '@/data/pricing'
 
 /**
- * Das Konto dieses Geräts.
+ * Das Konto auf diesem Gerät.
  *
- * WAS DAS IST — UND WAS ES AUSDRÜCKLICH NICHT IST
+ * WAS DAS IST: die Gerätekopie des Kontos — Name, Rolle, Stufe, AV-Vertrag —,
+ * damit «Heute» auch ohne Netz richtig startet. Die Wahrheit liegt auf dem
+ * Server (Supabase Auth und `accounts`); angemeldet ist, wer dort eine
+ * Sitzung hat (`lib/supabase/session`). OHNE KONTO KEIN ZUGANG: die App lässt
+ * erst herein, wenn beides da ist, diese Kopie und eine Sitzung (App.tsx).
  *
- * KYDON hat keinen Server. `src/lib/supabase/client.ts` liegt bereit, wird
- * aber nirgends aufgerufen, und die CSP steht auf `connect-src 'self'` — es
- * gibt nichts, wogegen geprüft werden könnte. Diese Anmeldung ist deshalb ein
- * GESTALTETES TOR, keine Sicherung: sie ordnet den Einstieg, sie schützt
- * nichts. Der Anmeldebildschirm sagt das, bevor jemand ein Passwort eintippt,
- * das er anderswo auch benutzt.
- *
- * DESHALB WIRD KEIN PASSWORT GESPEICHERT. Ein Passwort im Gerät, das nichts
- * prüft, wäre das Schlechteste aus beiden Welten: ein Geheimnis im Speicher,
- * das keinen Zugang bewacht. Das Feld nimmt die Eingabe entgegen und
- * vergisst sie mit dem Absenden.
+ * KEIN PASSWORT IM GERÄT. Das Passwort geht an Supabase und wird dort als
+ * Hash abgelegt; hier landet es nie.
  *
  * Das Konto liegt neben dem Bestand und nicht darin: es ist eine Eigenschaft
  * dieses Geräts, keine Messung. Wer seinen Bestand exportiert, exportiert
@@ -28,15 +23,15 @@ export interface Account {
   /** Anzeigename. Alles, was KYDON über die Person festhält. */
   name: string
   /**
-   * E-Mail, nur als Kennung der Anmeldung. Sie wird nirgendwohin geschickt —
-   * es gibt keinen Empfänger.
+   * E-Mail der Anmeldung, wie sie das Konto auf dem Server trägt. Hier nur
+   * zur Anzeige; geschickt wird sie von hier aus nirgendwohin.
    */
   email: string
   role: AccountRole
   /**
    * Gewählte Stufe: eine Kennung aus `data/pricing.ts`, oder null, wenn
-   * niemand eine gewählt hat. Abgerechnet wird nichts; die Wahl prägt nur,
-   * was die App anbietet.
+   * niemand eine gewählt hat. Freigeschaltet wird nur über den Server
+   * (Regel 5); die Wahl hier prägt, was die App anbietet.
    */
   planId: string | null
   createdAt: string
@@ -58,7 +53,7 @@ const KEY = 'kydon.account.v1'
  * Die kostenlose Stufe steht mit dabei und zuerst — nicht als Restposten
  * hinter den bezahlten. Wer sich anmeldet, soll sehen dürfen, dass er nichts
  * zahlen muss, statt es erst nach dem Scrollen zu finden. Abgerechnet wird
- * ohnehin nichts; die Wahl prägt nur, was die App anbietet.
+ * erst über den Bezahlweg; die Wahl hier prägt nur, was die App anbietet.
  */
 export function plansForRole(role: AccountRole): { id: string; label: string; price: string }[] {
   if (role === 'coach') {

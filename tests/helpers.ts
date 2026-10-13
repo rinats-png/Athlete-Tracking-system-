@@ -21,6 +21,7 @@ export async function blockFonts(page: Page) {
  */
 async function resetState(page: Page) {
   await blockFonts(page)
+  await offlineServer(page)
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   // Ein eingerichteter, aber leerer Bestand: der Einstieg (Konzept §3) gilt
   // als durchlaufen, damit nicht jeder Fall zuerst sechs Schritte
@@ -28,7 +29,7 @@ async function resetState(page: Page) {
   // `openFirstRun`.
   const seeded = emptyData()
   seeded.athletes[0].profile.onboardingCompletedAt = '2026-01-01T00:00:00.000Z'
-  await page.evaluate(({ store, account }) => {
+  await page.evaluate(({ store, account, session }) => {
     localStorage.clear()
     localStorage.setItem('kydon.theme', 'dark')
     localStorage.setItem('kydon.locale', 'de')
@@ -40,17 +41,48 @@ async function resetState(page: Page) {
     // Öffnen durch einen Menschen. Beantwortet mit «Nein» — so schickt auch
     // kein Prüflauf je ein Ereignis ab. Der eigene Fall prüft die Frage.
     localStorage.setItem('kydon.analytics.consent.v1', JSON.stringify({ state: 'denied', at: '2026-01-01T00:00:00.000Z' }))
-    // Angemeldet: die Anmeldung ist ein gestaltetes Tor ohne Pruefung, und
-    // sie durch jeden der ~2400 Faelle zu klicken wuerde nur Zeit kosten,
-    // ohne etwas zu belegen. Der eigene Fall dafuer geht durch das Tor.
+    // Angemeldet: Konto UND Sitzung, denn ohne beides lässt das Tor niemanden
+    // herein. Die Anmeldung durch jeden der ~2400 Fälle zu klicken würde nur
+    // Zeit kosten, ohne etwas zu belegen. Der eigene Fall geht durch das Tor.
     localStorage.setItem('kydon.account.v1', JSON.stringify(account))
+    localStorage.setItem('kydon.auth', JSON.stringify(session))
+    // Der Abgleich läuft mit dem Konto von selbst. In einem Prüflauf bleibt
+    // er aus: kein Fall soll nebenher einen Server ansprechen. Die Fälle zum
+    // Abgleich (autoSync.spec.ts, sync.spec.ts) schalten ihn ein.
+    localStorage.setItem('kydon.sync.enabled', 'off')
     // «Neu bei KYDON» ist ein Hinweis für Menschen nach einem Update; ein
     // Prüflauf mit vorbelegtem Bestand sähe es sonst in jedem Fall. Der eigene
     // Fall (whatsNew.spec.ts) setzt die Marke zurück und prüft das Fenster.
     localStorage.setItem('kydon.whatsnew.seen', '9999-12-31')
     localStorage.setItem('kydon.data.v1', JSON.stringify(store))
-  }, { store: seeded, account: SEEDED_ACCOUNT })
+  }, { store: seeded, account: SEEDED_ACCOUNT, session: stubSession() })
   await page.reload({ waitUntil: 'domcontentloaded' })
+}
+
+/**
+ * Eine gespeicherte Anmeldung, wie supabase-js sie unter `kydon.auth` ablegt.
+ * Das Tor prüft nur, OB sie da ist (lib/supabase/session.ts).
+ */
+export function stubSession(email = 'pruef@baseline.test') {
+  const user = { id: '00000000-0000-4000-8000-000000000001', email }
+  return {
+    access_token: 'stub',
+    refresh_token: 'stub',
+    token_type: 'bearer',
+    expires_in: 3600,
+    expires_at: Math.floor(Date.now() / 1000) + 3600,
+    user,
+  }
+}
+
+/**
+ * Kein Fall spricht den echten Dienst an. Die Route liegt am KONTEXT: Routen
+ * einer Seite (stubAuth, eigene Abfangregeln eines Falls) gehen ihr vor, egal
+ * in welcher Reihenfolge sie angelegt wurden. Was keiner beschreibt, wird
+ * abgewiesen — für die App ist das «kein Netz».
+ */
+export async function offlineServer(page: Page) {
+  await page.context().route('**/*.supabase.co/**', (route) => route.abort())
 }
 
 /** Das Konto, mit dem die Faelle das Tor passieren. */
@@ -71,6 +103,7 @@ const SEEDED_ACCOUNT = {
  */
 export async function openColdStart(page: Page) {
   await blockFonts(page)
+  await offlineServer(page)
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   await page.evaluate(() => {
     localStorage.clear()
@@ -85,10 +118,10 @@ export async function openColdStart(page: Page) {
   await page.reload({ waitUntil: 'domcontentloaded' })
 }
 
-/** Startet die App im Gastmodus mit leerem Bestand. */
+/** Startet die App mit dem eigenen, leeren Bestand. */
 export async function openGuest(page: Page) {
   await resetState(page)
-  await page.getByRole('button', { name: /Mit leerem Bestand starten/ }).click()
+  await page.getByRole('button', { name: /Eigenen Bestand anlegen/ }).click()
   await page.getByRole('heading', { level: 1 }).first().waitFor()
 }
 
@@ -98,8 +131,9 @@ export async function openGuest(page: Page) {
  */
 export async function openFirstRun(page: Page) {
   await blockFonts(page)
+  await offlineServer(page)
   await page.goto('/', { waitUntil: 'domcontentloaded' })
-  await page.evaluate(() => {
+  await page.evaluate((session) => {
     localStorage.clear()
     localStorage.setItem('kydon.theme', 'dark')
     localStorage.setItem('kydon.locale', 'de')
@@ -119,13 +153,15 @@ export async function openFirstRun(page: Page) {
         role: 'athlete',
         planId: null,
         createdAt: '2026-01-01T00:00:00.000Z',
-  dpaAcceptedAt: null,
-  dpaVersion: null,
+        dpaAcceptedAt: null,
+        dpaVersion: null,
       }),
     )
-  })
+    localStorage.setItem('kydon.auth', JSON.stringify(session))
+    localStorage.setItem('kydon.sync.enabled', 'off')
+  }, stubSession())
   await page.reload({ waitUntil: 'domcontentloaded' })
-  await page.getByRole('button', { name: /Mit leerem Bestand starten/ }).click()
+  await page.getByRole('button', { name: /Eigenen Bestand anlegen/ }).click()
   await page.getByRole('heading', { level: 1 }).first().waitFor()
 }
 

@@ -33,11 +33,10 @@ export interface LegalDocument {
   sections: LegalSection[]
 }
 
-const STAND_DE = 'Stand: 24. September 2026'
-const STAND_EN = 'Last updated: 24 September 2026'
-// Die Datenschutzerklärung ist neuer (Pläne vom Trainer, Testphase).
-const PRIVACY_STAND_DE = 'Stand: 11. Oktober 2026'
-const PRIVACY_STAND_EN = 'Last updated: 11 October 2026'
+// Datenschutz und Nutzungsbedingungen: Konto ist Pflicht, der Abgleich läuft
+// automatisch (13.10.2026). Beide tragen denselben Stand.
+const PRIVACY_STAND_DE = 'Stand: 13. Oktober 2026'
+const PRIVACY_STAND_EN = 'Last updated: 13 October 2026'
 
 // --- Datenschutz -------------------------------------------------------------
 
@@ -50,8 +49,9 @@ const privacyDe: LegalDocument = {
     {
       heading: 'Das Wichtigste zuerst',
       body: [
-        'Messen und Auswerten passiert vollständig in deinem Browser. Solange du die Synchronisierung nicht einschaltest, verlässt kein Messwert dein Gerät.',
-        'Ein Konto brauchst du, um die App zu benutzen. Dafür verarbeiten wir deine E-Mail-Adresse und dein Passwort — mehr nicht.',
+        'Gemessen und ausgewertet wird zuerst in deinem Browser, auch ohne Netz. Mit deinem Konto gleicht die App deine Daten automatisch mit unseren Servern in der EU ab — als Sicherung und damit sie auf deinen weiteren Geräten erscheinen. Den Abgleich kannst du im Profil ausschalten.',
+        'Ein Konto brauchst du, um die App zu benutzen. Für die Anmeldung verarbeiten wir deine E-Mail-Adresse und dein Passwort; was beim Abgleich übertragen wird, steht im Abschnitt «Abgleich mit deinem Konto».',
+        'Ein Trainer sieht nur, was du ihm freigibst, und du kannst jede Freigabe zurückziehen. Gesundheitsangaben der Gesundheitsschicht gehen nie mit dem Abgleich, sondern nur Ende-zu-Ende-verschlüsselt mit deiner Einwilligung je Kategorie.',
         'Es gibt keine Werbung, keine Analysedienste Dritter, keine Weitergabe an Dritte zu Werbezwecken und keine externen Schriften oder Skripte. Der einzige externe Dienst, den die App aufruft, ist die Lebensmittelsuche bei Open Food Facts — und nur, wenn du sie antippst (siehe unten).',
         'Eine eigene Nutzungsstatistik gibt es — aber nur, wenn du ausdrücklich «Ja» sagst. Ohne dein Ja wird nichts gezählt und nichts gespeichert. Einzelheiten im Abschnitt «Nutzungsstatistik».',
       ],
@@ -59,8 +59,8 @@ const privacyDe: LegalDocument = {
     {
       heading: 'Was auf deinem Gerät liegt',
       body: [
-        'Deine Messwerte, dein Profil, Notizen, Trainingsschwerpunkte und Belegbilder speichert die App im lokalen Speicher deines Browsers (localStorage und IndexedDB). Diese Daten gehören dir und werden von uns nicht eingesehen.',
-        'Löschst du die Browserdaten, sind sie weg. Deshalb erinnert die App an den Export — er ist deine einzige Sicherung, solange du die Synchronisierung nicht nutzt.',
+        'Deine Messwerte, dein Profil, Notizen, Trainingsschwerpunkte und Belegbilder speichert die App zuerst im lokalen Speicher deines Browsers (localStorage und IndexedDB). So funktioniert das Messen auch ohne Netz. Diese Daten gehören dir.',
+        'Löschst du die Browserdaten, holt die App beim nächsten Anmelden zurück, was mit deinem Konto abgeglichen war. Hast du den Abgleich ausgeschaltet, ist der Export deine einzige Sicherung; deshalb erinnert die App daran.',
       ],
     },
     {
@@ -72,12 +72,14 @@ const privacyDe: LegalDocument = {
       ],
     },
     {
-      heading: 'Synchronisierung (freiwillig)',
+      heading: 'Abgleich mit deinem Konto (automatisch, abschaltbar)',
       body: [
-        'Die Synchronisierung ist ausgeschaltet, bis du sie im Profil einschaltest. Schaltest du sie ein, übertragen wir je Athlet den vollständigen Datensatz als verschlüsselte Verbindung an unseren Dienstleister: Messwerte, Profilangaben, Körperwerte, Notizen, Trainingsschwerpunkte und gegebenenfalls Belegbilder.',
-        'Zweck ist ausschliesslich, dass diese Daten einen Geräteverlust überstehen und auf einem zweiten Gerät erscheinen. Sie werden nicht ausgewertet, nicht aggregiert und nicht mit Daten anderer Nutzer zusammengeführt.',
-        'Der Zugriff ist auf dein Konto beschränkt; das setzen Zugriffsregeln in der Datenbank durch (Row Level Security), nicht nur die App.',
-        'Rechtsgrundlage ist Art. 6 Abs. 1 lit. a DSGVO — deine Einwilligung, die du jederzeit widerrufen kannst, indem du die Synchronisierung wieder ausschaltest.',
+        'Mit deinem Konto gleicht die App deine Daten von selbst ab: kurz nach dem Start, nach Änderungen und sobald wieder Netz da ist. Übertragen wird je Athlet der Datensatz über eine verschlüsselte Verbindung an unseren Auftragsverarbeiter Supabase (Rechenzentrum in Frankfurt am Main): Messwerte, Profilangaben, Körperwerte, Notizen, Trainingsschwerpunkte, Pläne und Belegbilder sowie als einzelne Einträge Tagebuch, Einheiten, Entscheidungen und Mahlzeiten.',
+        'Nicht übertragen werden dein Passwort im Klartext, importierte Läufe und die Gesundheitsschicht (Laborwerte, Symptome, Zyklus, Medikation und Ähnliches); für sie gilt ein eigener, Ende-zu-Ende-verschlüsselter Weg mit Einwilligung je Kategorie. Die Demo mit Beispieldaten wird nie abgeglichen.',
+        'Zweck ist, dass deine Daten einen Geräteverlust überstehen und auf deinen weiteren Geräten erscheinen; arbeitest du als Trainer in einem Team, ist es der gemeinsame Bestand des Teams. Die Daten werden nicht für andere Zwecke ausgewertet, nicht aggregiert und nicht mit Daten anderer Nutzer zusammengeführt.',
+        'Der Zugriff ist auf dein Konto beschränkt — in einem Team auf die Trainer dieses Teams; das setzen Zugriffsregeln in der Datenbank durch (Row Level Security), nicht nur die App. Ein Trainer, mit dem du verbunden bist, sieht nur, was du ihm ausdrücklich freigibst (siehe «Pläne vom Trainer»).',
+        'Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO — der Abgleich ist Teil des Dienstes, den du mit deinem Konto nutzt.',
+        'Du kannst den Abgleich im Profil jederzeit ausschalten; vorher zeigt die App, was dann nicht mehr geht. Ausgeschaltet überträgt die App nichts mehr. Die Kopie in deinem Konto bleibt auf dem letzten Stand, bis du den Abgleich wieder einschaltest, dein Konto löschst oder uns um Löschung bittest.',
       ],
     },
     {
@@ -109,7 +111,7 @@ const privacyDe: LegalDocument = {
       heading: 'Aufbewahrung',
       body: [
         'Daten auf deinem Gerät bleiben, bis du sie löschst.',
-        'Kontodaten bleiben, bis du das Konto löschen lässt. Synchronisierte Datensätze werden mit dem Konto gelöscht.',
+        'Kontodaten und abgeglichene Datensätze bleiben, bis du das Konto löschst; dann werden sie entfernt. Schaltest du nur den Abgleich aus, bleibt die Kopie auf dem letzten Stand bestehen.',
         'Ereignisse der Nutzungsstatistik: 90 Tage, danach automatisch gelöscht. Mit deinem Konto werden auch die ihm zugeordneten Ereignisse gelöscht.',
         'Push-Abonnements und das nächste Fälligkeitsdatum: bis du Push ausschaltest oder dein Konto löschst; nicht mehr erreichbare Geräte entfernen wir automatisch. Das Versandprotokoll (wer wann wem eine Nachricht geschickt hat, ohne Inhalt): 90 Tage.',
         'Serverseitige Zugriffsprotokolle unseres Hosters werden nach dessen Vorgaben kurzfristig gelöscht.',
@@ -137,7 +139,7 @@ const privacyDe: LegalDocument = {
     {
       heading: 'Texte von einem Sprachmodell (nur mit Einwilligung)',
       body: [
-        'Mit Konto und Stufe Pro kannst du Antworten und deinen Wochenbrief auf Tipp «Als Text formulieren» lassen. Vor dem ersten Mal fragt die App nach deiner Einwilligung; ohne sie wird nichts gesendet, und die Antworten erscheinen als feste Texte. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).',
+        'Mit der Stufe Pro kannst du Antworten und deinen Wochenbrief auf Tipp «Als Text formulieren» lassen. Vor dem ersten Mal fragt die App nach deiner Einwilligung; ohne sie wird nichts gesendet, und die Antworten erscheinen als feste Texte. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).',
         'Gesendet werden nur die Fakten der jeweiligen Antwort: feste Kennwörter und Zahlen (etwa Veränderung, Schwelle, Anzahl der Messungen, Belastung der Woche). Nicht gesendet werden Name, E-Mail-Adresse, Notizen, Tagebuch- und andere Freitexte, Daten der Gesundheitsschicht und Kennungen deines Kontos. Die Anfrage läuft über unsere Serverfunktion; der Anbieter sieht weder deine IP-Adresse noch dein Konto.',
         'Empfänger ist Anthropic (Sprachmodell Claude) als Auftragsverarbeiter. Die Verarbeitung kann in den Vereinigten Staaten stattfinden; die Übermittlung stützt sich auf Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO). Nach seinen Bedingungen für gewerbliche Kunden nutzt der Anbieter die Daten nicht zum Training seiner Modelle und speichert sie nur befristet zur Missbrauchserkennung.',
         'KYDON speichert weder die Fakten noch den Text. Gespeichert werden nur die Zahl deiner Aufrufe im Monat (für die Obergrenze von 30) und deine Einwilligung mit Zeitpunkt, Fassung des Textes, Bestätigung des Mindestalters und gegebenenfalls Widerruf (Nachweis nach Art. 7 Abs. 1 DSGVO). Beides löschen wir mit deinem Konto.',
@@ -149,8 +151,8 @@ const privacyDe: LegalDocument = {
     {
       heading: 'Push-Benachrichtigungen (nur wenn du sie einschaltest)',
       body: [
-        'Mit Konto kannst du unter «Erinnerungen» Push einschalten. Dein Browser fragt dann um Erlaubnis. Ohne dein Einschalten wird nichts gespeichert und nichts verschickt. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG).',
-        'Gespeichert werden die Push-Adresse deines Geräts mit den zugehörigen Schlüsseln, deine Sprache und — für Erinnerungen an Nachmessungen — nur das Datum der nächsten Fälligkeit. Welcher Test fällig ist und alle Messwerte bleiben auf deinem Gerät.',
+        'Unter «Erinnerungen» kannst du Push einschalten. Dein Browser fragt dann um Erlaubnis. Ohne dein Einschalten wird nichts gespeichert und nichts verschickt. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG).',
+        'Gespeichert werden die Push-Adresse deines Geräts mit den zugehörigen Schlüsseln, deine Sprache und — für Erinnerungen an Nachmessungen — nur das Datum der nächsten Fälligkeit. Welcher Test fällig ist und Messwerte gehören nicht dazu.',
         'Nachrichten gibt es aus drei Anlässen: eine fällige Nachmessung, eine Mitteilung des Betreibers an alle mit eingeschaltetem Push, und eine Nachricht eines Trainers, mit dem du aktiv verbunden bist (höchstens drei pro Tag).',
         'Zugestellt wird über den Push-Dienst deines Browsers (bei Chrome Google, bei Safari Apple, bei Firefox Mozilla). Der Inhalt ist auf dem Weg dorthin Ende-zu-Ende verschlüsselt; der Dienst sieht Zeitpunkt und Grösse, nicht den Text.',
         'Ausschalten: unter «Erinnerungen» oder in den Browser-Einstellungen. Beim Ausschalten in der App löschen wir Adresse und Fälligkeitsdatum sofort.',
@@ -183,7 +185,7 @@ const privacyDe: LegalDocument = {
       heading: 'Keine medizinische Datenverarbeitung',
       body: [
         'KYDON ist kein Medizinprodukt. Die App stellt keine Diagnosen, bewertet keine Krankheiten und leitet aus keinem Wert eine gesundheitliche Aussage ab. Die erfassten Werte sind sportliche Leistungsdaten und werden zu keinem medizinischen Zweck verarbeitet.',
-        'Einzelne Angaben können dennoch Gesundheitsdaten im Sinne von Art. 9 DSGVO sein oder werden — etwa die Herzratenvariabilität, die Körperzusammensetzung oder ein Verlauf von Schlaf, Stress und Muskelkater über längere Zeit. Solche Angaben trägst du freiwillig ein; sie bleiben auf deinem Gerät und verlassen es nur, wenn du die Synchronisierung einschaltest. Diese Verarbeitung beruht auf deiner Einwilligung (Art. 6 Abs. 1 lit. a und Art. 9 Abs. 2 lit. a DSGVO), die du jederzeit widerrufst, indem du die Angaben löschst oder die Synchronisierung ausschaltest.',
+        'Einzelne Angaben können dennoch Gesundheitsdaten im Sinne von Art. 9 DSGVO sein oder werden — etwa die Herzratenvariabilität, die Körperzusammensetzung oder ein Verlauf von Schlaf, Stress und Muskelkater über längere Zeit. Solche Angaben trägst du freiwillig ein; es sind Felder, die du leer lassen kannst, und die Herzratenvariabilität misst die App erst nach einer eigenen Einwilligung. Sie gehören zu deinem Verlauf und gehen deshalb mit dem Abgleich mit, solange er eingeschaltet ist. Diese Verarbeitung beruht auf deiner ausdrücklichen Einwilligung (Art. 9 Abs. 2 lit. a DSGVO), die du jederzeit widerrufst, indem du die Angaben löschst oder den Abgleich ausschaltest.',
         'Laborwerte nimmt die App derzeit nicht entgegen. Die Erfassung der Kreatinkinase ist ausgesetzt, bis eine ausdrückliche Einwilligung je Datenkategorie eingeführt ist; bereits eingetragene Werte bleiben für dich sichtbar und im Export enthalten. Die Selbsteinschätzung vor einem Testtermin und die Hinweise im Cockpit sind Statistik über deine eigenen Trainingsdaten, keine Aussage über deinen Gesundheitszustand.',
       ],
     },
@@ -199,17 +201,18 @@ const privacyEn: LegalDocument = {
     {
       heading: 'The essentials first',
       body: [
-        'Measuring and analysis happen entirely in your browser. As long as you do not turn on sync, no measurement leaves your device.',
-        'You need an account to use the app. For that we process your email address and your password — nothing else.',
+        'Measuring and analysis happen in your browser first, even offline. With your account the app syncs your data automatically with our servers in the EU — as a backup and so it appears on your other devices. You can turn sync off in your profile.',
+        'You need an account to use the app. For sign-in we process your email address and your password; what sync transmits is described under «Sync with your account».',
+        'A coach sees only what you share, and you can withdraw any share. Data in the health layer never goes with sync; it travels only end-to-end encrypted, with your consent per category.',
         'There is no advertising, no third-party analytics, no sharing with third parties for advertising, and no external fonts or scripts. The only external service the app calls is the food search at Open Food Facts — and only when you tap it (see below).',
         'There is an in-house usage statistic — but only if you explicitly say yes. Without your yes nothing is counted and nothing is stored. Details under «Usage statistics».',
       ],
     },
     {
-      heading: 'What stays on your device',
+      heading: 'What lives on your device',
       body: [
-        'Your measurements, profile, notes, training focuses and evidence photos are stored in your browser (localStorage and IndexedDB). This data is yours and is not read by us.',
-        'If you clear your browser data, it is gone. That is why the app reminds you to export — it is your only backup as long as you do not use sync.',
+        'Your measurements, profile, notes, training focuses and evidence photos are stored first in your browser (localStorage and IndexedDB). That is why measuring works offline. This data is yours.',
+        'If you clear your browser data, the app restores at your next sign-in whatever was synced with your account. If you have turned sync off, the export is your only backup; that is why the app reminds you of it.',
       ],
     },
     {
@@ -221,12 +224,14 @@ const privacyEn: LegalDocument = {
       ],
     },
     {
-      heading: 'Sync (optional)',
+      heading: 'Sync with your account (automatic, can be turned off)',
       body: [
-        'Sync is off until you turn it on in your profile. If you do, we transmit the complete record per athlete over an encrypted connection to our processor: measurements, profile details, body values, notes, training focuses and any evidence photos.',
-        'The sole purpose is that this data survives a lost device and appears on a second one. It is not analysed, not aggregated and not combined with other users’ data.',
-        'Access is limited to your account, enforced by database access rules (row level security), not only by the app.',
-        'The legal basis is Art. 6(1)(a) GDPR — your consent, which you can withdraw at any time by turning sync off again.',
+        'With your account the app syncs your data on its own: shortly after start-up, after changes and as soon as the network is back. Per athlete the record is transmitted over an encrypted connection to our processor Supabase (data centre in Frankfurt am Main): measurements, profile details, body values, notes, training focuses, plans and evidence photos, plus diary, sessions, decisions and meals as individual entries.',
+        'Not transmitted: your plaintext password, imported runs and the health layer (lab values, symptoms, cycle, medication and similar); these have their own end-to-end encrypted route with consent per category. The demo with sample data is never synced.',
+        'The purpose is that your data survives a lost device and appears on your other devices; if you work as a coach in a team, it is the team’s shared records. The data is not analysed for other purposes, not aggregated and not combined with other users’ data.',
+        'Access is limited to your account — in a team, to that team’s coaches; this is enforced by database access rules (row level security), not only by the app. A coach you are connected with sees only what you explicitly share (see «Plans from your coach»).',
+        'The legal basis is Art. 6(1)(b) GDPR — sync is part of the service you use with your account.',
+        'You can turn sync off in your profile at any time; the app first shows what will stop working. Once off, the app transmits nothing. The copy in your account stays at its last state until you turn sync back on, delete your account or ask us to delete it.',
       ],
     },
     {
@@ -252,7 +257,7 @@ const privacyEn: LegalDocument = {
     {
       heading: 'Texts from a language model (only with consent)',
       body: [
-        'With an account on the Pro tier you can have answers and your weekly brief phrased on tap («Phrase as text»). Before the first time the app asks for your consent; without it nothing is sent and answers appear as fixed texts. The legal basis is your consent (Art. 6(1)(a) GDPR).',
+        'On the Pro tier you can have answers and your weekly brief phrased on tap («Phrase as text»). Before the first time the app asks for your consent; without it nothing is sent and answers appear as fixed texts. The legal basis is your consent (Art. 6(1)(a) GDPR).',
         'Only the facts of the answer in question are sent: fixed keywords and numbers (such as change, threshold, number of measurements, weekly load). Not sent: name, email address, notes, diary and other free text, data from the health layer and identifiers of your account. The request runs through our server function; the provider sees neither your IP address nor your account.',
         'The recipient is Anthropic (language model Claude) as processor. Processing may take place in the United States; the transfer relies on standard contractual clauses (Art. 46(2)(c) GDPR). Under its terms for commercial customers the provider does not use the data to train its models and keeps it only for a limited time for abuse detection.',
         'KYDON stores neither the facts nor the text. It stores only the number of your calls per month (for the limit of 30) and your consent with time, version of the text, confirmation of minimum age and any withdrawal (proof under Art. 7(1) GDPR). Both are deleted with your account.',
@@ -265,7 +270,7 @@ const privacyEn: LegalDocument = {
       heading: 'Retention',
       body: [
         'Data on your device stays until you delete it.',
-        'Account data stays until you have the account deleted. Synced records are deleted with the account.',
+        'Account data and synced records stay until you delete the account; then they are removed. If you only turn sync off, the copy remains at its last state.',
         'Usage statistics events: 90 days, then deleted automatically. Events linked to your account are deleted together with the account.',
         'Push subscriptions and the next due date: until you turn push off or delete your account; unreachable devices are removed automatically. The send log (who sent a message to whom and when, without content): 90 days.',
         'Server-side access logs of our host are deleted shortly, per their policy.',
@@ -282,8 +287,8 @@ const privacyEn: LegalDocument = {
     {
       heading: 'Push notifications (only if you turn them on)',
       body: [
-        'With an account you can turn on push under «Reminders». Your browser then asks for permission. Unless you turn it on, nothing is stored and nothing is sent. The legal basis is your consent (Art. 6(1)(a) GDPR, § 25(1) TDDDG).',
-        'We store your device’s push address with its keys, your language and — for retest reminders — only the date of the next retest. Which test is due and all measurements stay on your device.',
+        'You can turn on push under «Reminders». Your browser then asks for permission. Unless you turn it on, nothing is stored and nothing is sent. The legal basis is your consent (Art. 6(1)(a) GDPR, § 25(1) TDDDG).',
+        'We store your device’s push address with its keys, your language and — for retest reminders — only the date of the next retest. Which test is due and measurements are not part of it.',
         'Messages come from three sources: a due retest, an announcement by the operator to everyone with push on, and a message from a coach you are actively linked with (at most three per day).',
         'Delivery runs through your browser’s push service (Google for Chrome, Apple for Safari, Mozilla for Firefox). The content is end-to-end encrypted on the way; the service sees time and size, not the text.',
         'Turning it off: under «Reminders» or in your browser settings. When you turn it off in the app, we delete the address and due date immediately.',
@@ -327,7 +332,7 @@ const privacyEn: LegalDocument = {
       heading: 'No medical data processing',
       body: [
         'KYDON is not a medical device. The app makes no diagnoses, assesses no illnesses and derives no health statement from any value. The values recorded are sports performance data and are not processed for any medical purpose.',
-        'Some entries can nevertheless be, or become, health data within the meaning of Art. 9 GDPR — for example heart rate variability, body composition, or a long-term record of sleep, stress and soreness. You enter such details voluntarily; they stay on your device and only leave it if you switch on synchronisation. This processing is based on your consent (Art. 6(1)(a) and Art. 9(2)(a) GDPR), which you withdraw at any time by deleting the entries or switching synchronisation off.',
+        'Some entries can nevertheless be, or become, health data within the meaning of Art. 9 GDPR — for example heart rate variability, body composition, or a long-term record of sleep, stress and soreness. You enter such details voluntarily; they are fields you can leave empty, and the app measures heart rate variability only after a separate consent. They are part of your history and therefore go with sync while it is on. This processing is based on your explicit consent (Art. 9(2)(a) GDPR), which you withdraw at any time by deleting the entries or turning sync off.',
         'The app currently does not accept laboratory values. Entry of creatine kinase is suspended until explicit consent per data category has been introduced; values already entered remain visible to you and included in your export. The pre-test self-assessment and the cockpit signals are statistics about your own training data, not statements about your health.',
       ],
     },
@@ -339,19 +344,26 @@ const privacyEn: LegalDocument = {
 const termsDe: LegalDocument = {
   title: 'Nutzungsbedingungen',
   intro: 'Was du von KYDON erwarten kannst und was KYDON von dir erwartet.',
-  updated: STAND_DE,
+  updated: PRIVACY_STAND_DE,
   sections: [
     {
       heading: 'Was KYDON ist',
       body: [
-        'KYDON ist ein Werkzeug zur sportlichen Leistungsdiagnostik. Es erfasst Messwerte, ordnet sie — soweit belegte Referenzwerte vorliegen — in Vergleichsgruppen ein und stellt ihre Entwicklung dar.',
+        'KYDON ist ein Werkzeug zur sportlichen Leistungsdiagnostik. Es erfasst Messwerte, ordnet sie — soweit belegte Referenzwerte vorliegen — in Vergleichsgruppen ein und stellt ihre Entwicklung dar. Daraus kann ein Trainingsplan entstehen, aber nur aus hinterlegten Regeln mit Quelle und Prüfstatus; jeder Block endet mit einer erneuten Messung.',
+      ],
+    },
+    {
+      heading: 'Konto und Abgleich',
+      body: [
+        'Für die Nutzung brauchst du ein Konto. Mit dem Konto gleicht die App deine Daten automatisch mit unseren Servern ab; das gehört zum Dienst. Du kannst den Abgleich im Profil ausschalten — dann gibt es keine Sicherung mehr, deine anderen Geräte und ein verbundener Trainer bekommen keine neuen Stände, und der Export ist deine einzige Kopie.',
+        'Die Demo mit Beispieldaten bleibt auf dem Gerät und wird nie abgeglichen.',
       ],
     },
     {
       heading: 'Was KYDON ausdrücklich nicht ist',
       body: [
         'Keine medizinische Diagnostik. KYDON stellt keine Diagnosen, gibt keine Therapieempfehlungen und bewertet keine Krankheiten.',
-        'Keine trainingsplanerische Beratung. Die App erzeugt keine Trainingspläne, Übungen oder Belastungsvorgaben.',
+        'Kein Ersatz für Trainer, Ärztin oder Arzt. Trainingspläne in KYDON sind Vorschläge aus hinterlegten Regeln; Regeln, die noch nicht fachlich geprüft sind, sind als solche gekennzeichnet. Ob ein Plan umgesetzt wird, entscheidest du oder dein Trainer.',
         'Bei Beschwerden, Schmerzen oder gesundheitlichen Fragen wende dich an eine Ärztin oder einen Arzt.',
       ],
     },
@@ -378,7 +390,7 @@ const termsDe: LegalDocument = {
     {
       heading: 'Verfügbarkeit und Bezahlung',
       body: [
-        'Die App funktioniert offline auf deinem Gerät. Für die Synchronisierung braucht es eine Verbindung; eine ununterbrochene Verfügbarkeit des Dienstes wird nicht zugesichert.',
+        'Messen funktioniert auch offline auf deinem Gerät. Für die Anmeldung und den Abgleich braucht es eine Verbindung; eine ununterbrochene Verfügbarkeit des Dienstes wird nicht zugesichert.',
         'Zurzeit ist keine Zahlungsabwicklung eingerichtet. Preise sind als Auskunft angegeben und stellen kein Angebot dar.',
       ],
     },
@@ -391,7 +403,7 @@ const termsDe: LegalDocument = {
     {
       heading: 'Bezahlte Stufen',
       body: [
-        'Die kostenlose Version umfasst Messen, Verlauf, Messfehlerband, das eigene Profil, den vollständigen Export und Erinnerungen — dauerhaft. Bezahlte Stufen schalten zusätzliche Merkmale frei; die Preisseite nennt sie. Eine Stufe hält Merkmale zurück, nie Daten: Was du eingetragen hast, bleibt in deinem Bestand und im Export, auch nach Ablauf.',
+        'Die kostenlose Version umfasst Messen, Verlauf, Messfehlerband, das eigene Profil, den vollständigen Export, Erinnerungen und den automatischen Abgleich mit deinem Konto — dauerhaft. Bezahlte Stufen schalten zusätzliche Merkmale frei; die Preisseite nennt sie. Eine Stufe hält Merkmale zurück, nie Daten: Was du eingetragen hast, bleibt in deinem Bestand und im Export, auch nach Ablauf.',
         'Abos laufen ein Jahr oder einen Monat und verlängern sich um denselben Zeitraum, wenn sie nicht vor Ablauf gekündigt werden. Kündigen kannst du jederzeit im Kundenportal (Profil → Abo verwalten); die Stufe bleibt bis zum Ende des bezahlten Zeitraums. Der Termin-Pass ist ein Einmalkauf ohne Verlängerung.',
         'Verbraucher haben ein vierzehntägiges Widerrufsrecht. Verlangst du, dass die Stufe sofort freigeschaltet wird, und nutzt sie, schuldest du bei Widerruf den Wert der bis dahin erbrachten Leistung. Preise verstehen sich inklusive der gesetzlichen Umsatzsteuer.',
       ],
@@ -408,19 +420,26 @@ const termsDe: LegalDocument = {
 const termsEn: LegalDocument = {
   title: 'Terms of use',
   intro: 'What you can expect from KYDON, and what KYDON expects from you.',
-  updated: STAND_EN,
+  updated: PRIVACY_STAND_EN,
   sections: [
     {
       heading: 'What KYDON is',
       body: [
-        'KYDON is a tool for sports performance diagnostics. It records measurements, classifies them against comparison groups where documented reference values exist, and shows their development.',
+        'KYDON is a tool for sports performance diagnostics. It records measurements, classifies them against comparison groups where documented reference values exist, and shows their development. A training plan can follow from that, but only from stored rules with source and review status; every block ends with a new measurement.',
+      ],
+    },
+    {
+      heading: 'Account and sync',
+      body: [
+        'You need an account to use the app. With the account the app syncs your data automatically with our servers; this is part of the service. You can turn sync off in your profile — then there is no backup, your other devices and a connected coach receive no new states, and the export is your only copy.',
+        'The demo with sample data stays on the device and is never synced.',
       ],
     },
     {
       heading: 'What KYDON explicitly is not',
       body: [
         'Not medical diagnostics. KYDON makes no diagnoses, gives no therapy recommendations and assesses no illnesses.',
-        'Not training advice. The app produces no training plans, exercises or load prescriptions.',
+        'Not a substitute for a coach or a doctor. Training plans in KYDON are suggestions from stored rules; rules that have not yet been reviewed by an expert are labelled as such. You or your coach decide whether a plan is carried out.',
         'If you have complaints, pain or health questions, consult a doctor.',
       ],
     },
@@ -447,7 +466,7 @@ const termsEn: LegalDocument = {
     {
       heading: 'Availability and payment',
       body: [
-        'The app works offline on your device. Sync needs a connection; uninterrupted availability of the service is not guaranteed.',
+        'Measuring works offline on your device. Sign-in and sync need a connection; uninterrupted availability of the service is not guaranteed.',
         'No payment processing is set up at present. Prices are stated for information and do not constitute an offer.',
       ],
     },
@@ -460,7 +479,7 @@ const termsEn: LegalDocument = {
     {
       heading: 'Paid plans',
       body: [
-        'The free version includes measuring, history, the error band, your own profile, the complete export and reminders — permanently. Paid plans unlock additional features, listed on the pricing page. A plan holds back features, never data: whatever you have entered stays in your data and in your export, also after a plan ends.',
+        'The free version includes measuring, history, the error band, your own profile, the complete export, reminders and automatic sync with your account — permanently. Paid plans unlock additional features, listed on the pricing page. A plan holds back features, never data: whatever you have entered stays in your data and in your export, also after a plan ends.',
         'Subscriptions run for one year or one month and renew for the same period unless cancelled before the end. You can cancel any time in the customer portal (Profile → Manage subscription); the plan remains until the end of the paid period. The Date pass is a one-off purchase without renewal.',
         'Consumers have a fourteen-day right of withdrawal. If you ask for the plan to be unlocked immediately and use it, you owe the value of the service provided up to the withdrawal. Prices include statutory VAT.',
       ],
@@ -503,14 +522,14 @@ const dpaDe: LegalDocument = {
     {
       heading: '1. Gegenstand und Dauer',
       body: [
-        'Der Auftragsverarbeiter (Betreiber von KYDON, siehe Impressum) verarbeitet personenbezogene Daten von Athleten im Auftrag des Verantwortlichen (Inhaber des Trainerkontos), soweit der Verantwortliche diese Daten in KYDON einträgt und die Synchronisierung einschaltet oder Athleten mit seinem Konto verknüpft.',
+        'Der Auftragsverarbeiter (Betreiber von KYDON, siehe Impressum) verarbeitet personenbezogene Daten von Athleten im Auftrag des Verantwortlichen (Inhaber des Trainerkontos), soweit der Verantwortliche diese Daten mit seinem Konto in KYDON führt — der Abgleich mit dem Konto läuft dabei automatisch, solange der Verantwortliche ihn nicht ausschaltet — oder Athleten mit seinem Konto verknüpft.',
         'Dieser Vertrag gilt, solange das Trainerkonto besteht. Er endet mit der Löschung des Kontos; die Löschung der Daten regelt Abschnitt 9.',
       ],
     },
     {
       heading: '2. Art und Zweck der Verarbeitung, Datenkategorien, betroffene Personen',
       body: [
-        'Zweck: Speicherung einer Zweitschrift der Daten (Synchronisierung), Bereitstellung über mehrere Geräte, Verknüpfung von Athletenkonten mit dem Trainerkonto, Erzeugung von Reports im Auftrag des Verantwortlichen.',
+        'Zweck: Speicherung einer Zweitschrift der Daten (automatischer Abgleich mit dem Konto), Bereitstellung über mehrere Geräte und im Team, Verknüpfung von Athletenkonten mit dem Trainerkonto, Erzeugung von Reports im Auftrag des Verantwortlichen.',
         'Art der Verarbeitung: Speichern, Abrufen, Übermitteln an das Gerät des Verantwortlichen oder des Athleten, Löschen. Der Auftragsverarbeiter wertet die Daten nicht aus; jede Berechnung erfolgt auf dem Gerät des Nutzers.',
       ],
       list: [
@@ -522,7 +541,7 @@ const dpaDe: LegalDocument = {
     {
       heading: '3. Weisungen',
       body: [
-        'Der Auftragsverarbeiter verarbeitet die Daten nur auf dokumentierte Weisung des Verantwortlichen. Weisungen sind die Funktionen von KYDON, die der Verantwortliche auslöst: Eintragen, Synchronisieren, Verknüpfen, Freigeben, Exportieren, Löschen. Weitergehende Weisungen erteilt der Verantwortliche in Textform an die im Impressum genannte Adresse.',
+        'Der Auftragsverarbeiter verarbeitet die Daten nur auf dokumentierte Weisung des Verantwortlichen. Weisungen sind die Funktionen von KYDON, die der Verantwortliche nutzt: Eintragen, Abgleichen (automatisch mit dem Konto, im Profil abschaltbar), Verknüpfen, Freigeben, Exportieren, Löschen. Weitergehende Weisungen erteilt der Verantwortliche in Textform an die im Impressum genannte Adresse.',
         'Hält der Auftragsverarbeiter eine Weisung für rechtswidrig, teilt er dies dem Verantwortlichen unverzüglich mit.',
       ],
     },
@@ -646,14 +665,14 @@ const dpaEn: LegalDocument = {
     {
       heading: '1. Subject matter and duration',
       body: [
-        'The processor (operator of KYDON, see imprint) processes personal data of athletes on behalf of the controller (holder of the coach account) insofar as the controller enters this data in KYDON and switches on synchronisation or links athletes to their account.',
+        'The processor (operator of KYDON, see imprint) processes personal data of athletes on behalf of the controller (holder of the coach account) insofar as the controller keeps this data in KYDON with their account — sync with the account runs automatically unless the controller turns it off — or links athletes to their account.',
         'This agreement applies for as long as the coach account exists. It ends with the deletion of the account; deletion of data is governed by section 9.',
       ],
     },
     {
       heading: '2. Nature and purpose of processing, data categories, data subjects',
       body: [
-        'Purpose: storing a second copy of the data (synchronisation), making it available across devices, linking athlete accounts to the coach account, generating reports on behalf of the controller.',
+        'Purpose: storing a second copy of the data (automatic sync with the account), making it available across devices and within a team, linking athlete accounts to the coach account, generating reports on behalf of the controller.',
         'Nature: storing, retrieving, transmitting to the device of the controller or the athlete, deleting. The processor does not evaluate the data; every calculation runs on the user’s device.',
       ],
       list: [
@@ -665,7 +684,7 @@ const dpaEn: LegalDocument = {
     {
       heading: '3. Instructions',
       body: [
-        'The processor processes the data only on documented instructions from the controller. Instructions are the functions of KYDON the controller triggers: entering, synchronising, linking, sharing, exporting, deleting. Further instructions are given in text form to the address in the imprint.',
+        'The processor processes the data only on documented instructions from the controller. Instructions are the functions of KYDON the controller uses: entering, syncing (automatic with the account, can be turned off in the profile), linking, sharing, exporting, deleting. Further instructions are given in text form to the address in the imprint.',
         'If the processor considers an instruction unlawful, it informs the controller without delay.',
       ],
     },

@@ -586,12 +586,12 @@ export function OnboardingFlow({ onDone }: { onDone: (path: string) => void }) {
   )
 }
 
-/** Was die App ist — und was sie ausdrücklich nicht ist (§81, §82). */
+/** Was die App ist, was sie nicht ist (§81, §82), und wo die Daten liegen. */
 function IntroStep() {
   const { t } = useTranslation()
   return (
     <ul className="space-y-3">
-      {(['measures', 'compares', 'notPlan', 'notMedical', 'onDevice'] as const).map((key) => (
+      {(['measures', 'compares', 'plan', 'notMedical', 'data'] as const).map((key) => (
         <li key={key} className="flex gap-3 border-l-2 border-accent bg-accent-quiet px-4 py-3">
           <span className="text-[14px] leading-relaxed">{t(`onboarding.intro.points.${key}`)}</span>
         </li>

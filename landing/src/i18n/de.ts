@@ -63,7 +63,7 @@ export const de: Dict = {
   'why.4.title': 'Deins, und privat',
   'why.4.short': 'Funktioniert offline, speichert zuerst auf deinem Gerät.',
   'why.4.text':
-    'Messen funktioniert offline in der Halle. Deine Daten liegen zuerst auf deinem Gerät und werden nur synchronisiert, wenn du willst — von Anfang an für die DSGVO gebaut.',
+    'Messen funktioniert offline in der Halle. Deine Daten liegen zuerst auf deinem Gerät und werden mit deinem Konto automatisch auf Servern in der EU gesichert — von Anfang an für die DSGVO gebaut.',
 
   'features.eyebrow': 'In der App',
   'features.title': 'Weniger Text, mehr Bild.<br /><span class="muted">Jede Antwort einen Tipp tiefer.</span>',

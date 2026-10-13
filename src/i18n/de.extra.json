@@ -393,7 +393,7 @@
       "reportPdf": "Druckfertiger Report",
       "requirementGap": "Welche Achse für deine Disziplin am meisten bringt",
       "seasonPlan": "Kontrollpunkte bis zum Wettkampf",
-      "sync": "Abgleich über mehrere Geräte",
+      "sync": "Automatischer Abgleich: Sicherung und alle deine Geräte",
       "targetStandards": "Zielwerte des konkreten Einstellungstests",
       "unlimitedReports": "Reports ohne Deckel",
       "whiteLabel": "Eigenes Logo im Report",
@@ -604,7 +604,7 @@
     "deleteHint_other": "„{{name}}“ wird mit {{count}} Messungen endgültig gelöscht. Das lässt sich nicht rückgängig machen. Zum Ausblenden ohne Datenverlust gibt es das Archiv.",
     "deleteConfirm": "Endgültig löschen",
     "meta": "{{results}} Messungen · {{assessments}} Diagnostiken · seit {{since}}",
-    "privacyNote": "KYDON speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind dafür nicht nötig. Alles bleibt auf diesem Gerät.",
+    "privacyNote": "KYDON speichert zu einem betreuten Athleten nur, was du einträgst. Ein Konto, eine E-Mail-Adresse oder eine Einladung sind für den Athleten nicht nötig. Mit deinem Konto wird es automatisch auf Servern in der EU gesichert; dafür gilt der Vertrag zur Auftragsverarbeitung.",
     "handover": "Übergabe",
     "handoverHint": "Ein Athlet wechselt Verein oder Trainer: seine Historie gehört ihm und nicht diesem Gerät. Die Datei enthält nur diesen einen Athleten — ohne deine Marke und ohne die übrigen.",
     "handoverExport": "Athlet ausgeben",
@@ -637,11 +637,11 @@
     "data": "Deine Daten",
     "recovered": "Dieser Bestand kam aus der Zweitschrift auf dem Gerät zurück, gesichert am {{date}}. Der Browser hatte den Hauptspeicher geräumt.",
     "backupDue": {
-      "never_exported": "Du hast {{count}} Messungen und noch nie exportiert. Die Daten liegen nur auf diesem Gerät — mit einem Export gehören sie dir auch ohne es.",
+      "never_exported": "Du hast {{count}} Messungen und noch nie exportiert. Der Abgleich sichert sie in deinem Konto; ein Export ist deine eigene Kopie, unabhängig von Gerät und Konto.",
       "many_new_results": "Seit dem letzten Export sind {{count}} Messungen dazugekommen. Ein neuer Export dauert einen Klick.",
       "long_ago": "Der letzte Export ist {{days}} Tage her, seitdem sind {{count}} Messungen dazugekommen."
     },
-    "privacy": "Deine Messwerte liegen in diesem Browser. Übertragen werden sie nur, wenn du die Synchronisierung einschaltest. Beim Löschen der Browserdaten ist der lokale Bestand weg — dagegen hilft der Export oder die Synchronisierung.",
+    "privacy": "Deine Messwerte liegen zuerst auf diesem Gerät und werden mit deinem Konto automatisch auf Servern in der EU gesichert. Schaltest du den Abgleich aus, ist der Export deine einzige Sicherung.",
     "export": "Exportieren",
     "import": "Importieren",
     "importFailed": "Die Datei liess sich nicht lesen.",
@@ -997,7 +997,7 @@
     "photoRemove": "Beleg entfernen",
     "photoAlt": "Beleg zur Messung",
     "photoAdded": "hinzugefügt am {{date}}",
-    "photoHint": "Ein Bild je Ergebnis — das Display der Zeitmessung, die Anzeige der Waage. Es wird verkleinert und bleibt auf diesem Gerät; es wird nicht übertragen und nicht ausgewertet.",
+    "photoHint": "Ein Bild je Ergebnis — das Display der Zeitmessung, die Anzeige der Waage. Es wird verkleinert, mit der Messung gespeichert und mit ihr abgeglichen. Ausgewertet wird es nicht.",
     "photoError": {
       "not_an_image": "Das ist keine Bilddatei.",
       "unreadable": "Das Bild liess sich nicht lesen.",
@@ -1015,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Verlauf",
     "title": "Erinnerungen",
-    "intro": "Die App weiss, wann zuletzt gemessen wurde, und rechnet die Fälligkeit auf deinem Gerät aus. Erinnerungen sind aus, bis du sie einschaltest — mit Konto auch per Push.",
-    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest. Mit Konto kannst du zusätzlich Push einschalten: dann meldet sich KYDON auch, wenn die App geschlossen ist. Der Server erfährt dafür nur das Datum der nächsten Fälligkeit. Ohne Konto bleibt die Kalenderdatei der verlässliche Weg.",
+    "intro": "Die App weiss, wann zuletzt gemessen wurde, und rechnet die Fälligkeit auf deinem Gerät aus. Erinnerungen sind aus, bis du sie einschaltest — auf Wunsch auch per Push.",
+    "noPush": "Die Erinnerung erscheint in der App, wenn du sie öffnest. Zusätzlich kannst du Push einschalten: dann meldet sich KYDON auch, wenn die App geschlossen ist. Der Server erfährt dafür nur das Datum der nächsten Fälligkeit. Die Kalenderdatei bleibt der verlässlichste Weg.",
     "enable": "Erinnerungen aktivieren",
     "enabled": "Erinnerungen sind aktiv",
     "disabled": "Erinnerungen sind aus",
@@ -1032,7 +1032,7 @@
     "dueOn": "fällig am {{date}}",
     "default": "Vorgabe",
     "calendar": "Kalenderdatei laden",
-    "calendarHint": "Ein ganztägiger Termin je fälliger Nachmessung, mit Voralarm drei Tage vorher. Funktioniert in jedem Kalender, offline und ohne Konto — das ist der zuverlässige Weg.",
+    "calendarHint": "Ein ganztägiger Termin je fälliger Nachmessung, mit Voralarm drei Tage vorher. Funktioniert in jedem Kalender und offline — das ist der zuverlässige Weg.",
     "calendarEmpty": "Es ist noch keine Nachmessung fällig. Sobald ein Test wiederholt werden soll, steht die Datei hier bereit.",
     "notify": "Systembenachrichtigung erlauben",
     "notifyOn": "Systembenachrichtigung ist erlaubt",
@@ -1518,7 +1518,7 @@
     "carryQuestion": "Auf diesem Gerät liegen {{count}} Athleten. Was soll mit ihnen passieren?",
     "carryYes": "Ins Team übernehmen — sie gehören dann dem Team und zählen für seine Stufe.",
     "carryNo": "In meinem eigenen Konto lassen — sie verlassen dieses Gerät und kommen zurück, wenn ich das Team verlasse.",
-    "joinPrivacy": "Mit dem Beitritt wird der Abgleich eingeschaltet: Die Athleten des Teams liegen auf dem Server, und alle Trainer des Teams sehen sie. Verlässt du das Team, bleiben die Athleten beim Team.",
+    "joinPrivacy": "Ein Team gibt es nur mit Abgleich: Ist er ausgeschaltet, schaltet der Beitritt ihn wieder ein. Die Athleten des Teams liegen auf dem Server, und alle Trainer des Teams sehen sie. Verlässt du das Team, bleiben die Athleten beim Team.",
     "joinButton": "Beitreten",
     "joined": "Du bist jetzt im Team „{{name}}“.",
     "unnamed": "ohne Namen",
@@ -2174,7 +2174,7 @@
     "consent": {
       "title": "Einwilligung für Herzdaten",
       "body": "Puls und Herzratenvariabilität sind Gesundheitsdaten (Art. 9 DSGVO). KYDON misst sie nur, wenn du hier zustimmst, und nutzt sie nur, um sie dir im Verlauf und im Tageskontext zu zeigen.",
-      "storage": "Die Schlagfolge bleibt auf dem Gerät und wird nach der Messung verworfen. Gespeichert werden nur die beiden Ergebnisse. Mit Konto und Abgleich liegen sie auch in deinem Konto. Du kannst sie jederzeit löschen.",
+      "storage": "Die Schlagfolge bleibt auf dem Gerät und wird nach der Messung verworfen. Gespeichert werden nur die beiden Ergebnisse; mit dem Abgleich liegen sie auch in deinem Konto. Du kannst sie jederzeit löschen.",
       "agree": "Einverstanden"
     },
     "protocol": {
@@ -2242,6 +2242,7 @@
     "title": "Neu bei KYDON:",
     "close": "Verstanden",
     "items": {
+      "account": "Konto und Abgleich: KYDON gleicht jetzt mit deinem Konto von selbst ab. Deine Daten sind auf Servern in der EU gesichert und auf jedem deiner Geräte aktuell. Ausschalten kannst du das im Profil — vorher siehst du, was dann nicht mehr geht.",
       "design": "Neues Design: Milchglas-Karten mit Ebenen, Mono-Ziffern für Messwerte und ruhigere Übergänge — hell und dunkel.",
       "tests": "Testbibliothek nach Protokoll 1.0: 126 Tests in 29 Bereichen, jeder mit Ziel, Aufbau, Schritten und Bewertung.",
       "images": "Fotos der Testaufbauten in den Beschreibungen statt Skizzen.",
@@ -2792,7 +2793,7 @@
     "saveNext": "Speichern, nächster Athlet",
     "backToList": "Zur Liste",
     "rule": "Der beste gültige Versuch zählt. Ungültige Versuche bleiben gespeichert, werden aber nicht gewertet.",
-    "offline": "Läuft ohne Netz. Alles bleibt auf diesem Gerät."
+    "offline": "Läuft ohne Netz. Gespeichert wird zuerst auf diesem Gerät, abgeglichen, sobald wieder Netz da ist."
   },
   "ask": {
     "eyebrow": "Fragen",
@@ -4105,6 +4106,40 @@
       "athlete": "Athlet",
       "store": "Bestand",
       "other": "Sonstiges"
+    }
+  },
+  "sync": {
+    "title": "Abgleich mit dem Konto",
+    "hint": "Läuft von selbst: deine Daten als Sicherung auf Servern in der EU und auf jedem Gerät, auf dem du angemeldet bist. Gesundheitsangaben gehen nie mit.",
+    "signedOut": "Deine Anmeldung ist abgelaufen. Melde dich neu an, dann gleicht KYDON weiter ab.",
+    "enable": "Abgleich wieder einschalten",
+    "disable": "Abgleich ausschalten",
+    "now": "Jetzt abgleichen",
+    "working": "Gleicht ab …",
+    "last": "Zuletzt abgeglichen: {{date}}",
+    "never": "Noch nie abgeglichen.",
+    "result": "{{pushed}} hochgeladen, {{pulled}} geholt, {{series}} Einträge abgeglichen.",
+    "offline": "Keine Verbindung. Der Abgleich holt es nach, sobald du wieder online bist.",
+    "conflictTitle": "Abweichender Stand",
+    "conflictBody": "Dieser Athlet wurde auf einem anderen Gerät geändert. KYDON hat nichts überschrieben — beide Stände sind unversehrt. Sichere zuerst deinen Export, dann entscheide.",
+    "conflictKeepLocal": "Diesen Bestand hochladen",
+    "conflictExplain": "Der Serverstand wird dabei ersetzt. Der andere Weg — den Serverstand holen — führt über Export, «alles löschen» und einen neuen Abgleich.",
+    "whatLeaves": "Abgeglichen werden Messwerte, Profilangaben, Notizen, Trainingsschwerpunkte, Pläne sowie Tagebuch, Einheiten, Entscheidungen und Mahlzeiten. Nicht dabei: dein Passwort, importierte Läufe und Gesundheitsangaben — die haben ihren eigenen, verschlüsselten Weg.",
+    "auto": "KYDON gleicht von selbst ab: nach dem Start, nach jeder Änderung und sobald wieder Netz da ist.",
+    "paused": "Der Abgleich ist seit {{date}} ausgeschaltet.",
+    "frozen": "Die Kopie in deinem Konto steht auf dem Stand vom {{date}}; was danach dazukam, liegt nur auf diesem Gerät und im Export.",
+    "frozenNever": "In deinem Konto liegt noch keine Kopie; alles liegt nur auf diesem Gerät und im Export.",
+    "offDialog": {
+      "eyebrow": "Abgleich ausschalten",
+      "title": "Was dann nicht mehr geht",
+      "backup": "Keine Sicherung mehr. Geht dieses Gerät verloren oder wird der Browser geleert, ist alles weg, was seit dem Ausschalten dazukam — außer du hast es exportiert.",
+      "devices": "Deine anderen Geräte bekommen keine neuen Werte mehr, und Änderungen von dort kommen hier nicht an.",
+      "coach": "Dein Trainer sieht nur noch den zuletzt abgeglichenen Stand. Neue Messungen, Check-ins und Einheiten erreichen ihn nicht.",
+      "plans": "Pläne und Anpassungen von deinem Trainer kommen auf diesem Gerät nicht mehr an.",
+      "server": "Die Kopie in deinem Konto bleibt, wie sie ist — sie wird nicht gelöscht. Ganz entfernen lässt sie sich mit «Konto endgültig löschen».",
+      "local": "Messen geht weiter wie bisher, auch ohne Netz. Du kannst den Abgleich jederzeit wieder einschalten; dann wird nachgeholt, was fehlt.",
+      "confirm": "Trotzdem ausschalten",
+      "keep": "Abgleich anlassen"
     }
   }
 }

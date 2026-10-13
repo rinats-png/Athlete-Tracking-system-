@@ -90,11 +90,11 @@ const EMPTY_PROTOCOL: ProtocolInfo = {
  * Zentraler Datenzugriff der App.
  *
  * Alle Screens lesen und schreiben hierüber, nie direkt am Speicher. Dadurch
- * ist der Wechsel vom Gastmodus (lokal) auf ein Konto (Cloud) ein Austausch
- * dieser einen Schicht und nicht ein Umbau jedes Screens.
+ * bleibt der Abgleich mit dem Konto (`useAutoSync`) eine Sache dieser einen
+ * Schicht und nicht jedes Screens.
  */
 
-export type AppMode = 'guest' | 'demo'
+export type AppMode = 'own' | 'demo'
 
 export interface RecordResultInput {
   testSlug: string
@@ -355,7 +355,9 @@ const MODE_KEY = 'kydon.mode'
 export function readMode(): AppMode | null {
   try {
     const value = localStorage.getItem(MODE_KEY)
-    return value === 'guest' || value === 'demo' ? value : null
+    // «guest» ist der frühere Name des eigenen Bestands.
+    if (value === 'own' || value === 'guest') return 'own'
+    return value === 'demo' ? 'demo' : null
   } catch {
     return null
   }

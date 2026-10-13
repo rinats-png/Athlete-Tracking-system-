@@ -81,7 +81,8 @@ ihm nie erscheint. Das wäre kein Umsatz gewesen, sondern eine Rückerstattung m
 Verzögerung.
 
 Deshalb trägt Plus auf Merkmalen, die bei **jedem** Test wirken: Prognose,
-Saisonplan, Anforderungslücke, Abgleich, Karte. Das Perzentil ist ein Merkmal
+Saisonplan, Anforderungslücke, Trainingslog, Karte. (Der Abgleich stand hier
+bis 13.10.2026; seit das Konto Pflicht ist, gehört er zum kostenlosen Kern.) Das Perzentil ist ein Merkmal
 unter mehreren — und der stärkste Grund, die Referenzbibliothek auszubauen.
 
 ---
@@ -114,9 +115,9 @@ Athleten ist es der wertvollste Satz überhaupt, und er braucht die Gewichtungs-
 und Referenzdaten.
 
 **3. Die Zeit arbeitet für den Kauf.** Nach vier Messungen ist die Reihe ein
-Besitz. Abgleich ist dann keine Bequemlichkeit mehr, sondern Versicherung. Weil
-der Export immer frei bleibt, ist das ein echtes Angebot und kein Druckmittel —
-es überzeugt später, aber es überzeugt sauber.
+Besitz — und Prognose, Saisonplan und Anforderungslücke werden erst mit einer
+Reihe aussagekräftig. Die Sicherung selbst ist kein Kaufgrund: Abgleich und
+Export sind kostenlos, damit niemand seinen Verlauf als Druckmittel erlebt.
 
 **4. Das Perzentil, wo es belegt ist.** Heute vier Tests. Für wen sie passen,
 ist es das stärkste Einzelargument; als Überschrift trägt es noch nicht.

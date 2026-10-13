@@ -33,7 +33,7 @@ test.describe('Was der Bildschirm über sich sagt', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('KYDON')
     // Seit es einen Server gibt, sagt der Bildschirm etwas anderes — aber
     // dieselbe Sache: was mit den Eingaben passiert und was nicht.
-    await expect(page.getByText(/Deine Anmeldung läuft über unseren Dienstleister/)).toBeVisible()
+    await expect(page.getByText(/KYDON braucht ein Konto/)).toBeVisible()
     await expect(page.getByText(/nicht auf diesem Gerät gespeichert/).first()).toBeVisible()
   })
 
@@ -66,7 +66,7 @@ test.describe('Ohne Konto kommt niemand weiter', () => {
     await formed(page)
     await expect(page.getByRole('tab', { name: 'Anmelden' })).toBeVisible()
     // Die App liegt dahinter — kein Weg daran vorbei.
-    await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toHaveCount(0)
+    await expect(page.getByRole('button', { name: /Eigenen Bestand anlegen/ })).toHaveCount(0)
   })
 
   test('ein direkter Aufruf einer Route führt trotzdem zum Tor', async ({ page }) => {
@@ -150,7 +150,7 @@ test.describe('Der Übergang', () => {
       timeout: 6000,
     })
     await page.getByRole('button', { name: 'Überspringen' }).click()
-    await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toBeVisible()
+    await expect(page.getByRole('button', { name: /Eigenen Bestand anlegen/ })).toBeVisible()
   })
 })
 
@@ -181,7 +181,7 @@ test.describe('Abmelden', () => {
     await openGuest(page)
     await page.goto('/profil', { waitUntil: 'domcontentloaded' })
     await expect(page.getByText('Angemeldet als Prueflauf')).toBeVisible()
-    await expect(page.getByText(/Deine Messwerte bleiben auf diesem Gerät/)).toBeVisible()
+    await expect(page.getByText(/Deine Messwerte bleiben hier liegen/)).toBeVisible()
   })
 })
 
@@ -201,8 +201,13 @@ test.describe('Die Rolle aus der Registrierung', () => {
         }),
       ),
     )
+    // Konto allein reicht nicht mehr: das Tor will auch eine Anmeldung.
+    await page.evaluate(() => {
+      localStorage.setItem('kydon.auth', JSON.stringify({ access_token: 'stub', refresh_token: 'stub', token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + 3600, user: { id: '00000000-0000-4000-8000-000000000001', email: 'pruef@baseline.test' } }))
+      localStorage.setItem('kydon.sync.enabled', 'off')
+    })
     await page.reload({ waitUntil: 'domcontentloaded' })
-    await page.getByRole('button', { name: /Mit leerem Bestand starten/ }).click()
+    await page.getByRole('button', { name: /Eigenen Bestand anlegen/ }).click()
     await page.waitForTimeout(600)
     const bestand = await page.evaluate(() => localStorage.getItem('kydon.data.v1'))
     expect(bestand).toContain('"role":"coach"')

@@ -53,7 +53,7 @@ export const nl: Dict = {
   "why.3.text": "Als slaap, belasting en een testresultaat in dezelfde week veranderen, zie je ze naast elkaar. KYDON beweert niet dat het een het ander veroorzaakte. Geen diagnoses, geen blessurevoorspellingen.",
   "why.4.title": "Van jou, en privé",
   "why.4.short": "Werkt offline en slaat eerst op je apparaat op.",
-  "why.4.text": "Meten werkt offline in de zaal. Je gegevens staan eerst op je apparaat en synchroniseren alleen als je dat wilt — vanaf dag één gebouwd voor de AVG.",
+  "why.4.text": "Meten werkt offline in de zaal. Je gegevens staan eerst op je apparaat en worden met je account automatisch geback-upt op servers in de EU — vanaf dag één gebouwd voor de AVG.",
   "features.eyebrow": "In de app",
   "features.title": "Minder tekst, meer beeld.<br /><span class=\"muted\">Elk antwoord één tik verder.</span>",
   "f1.eyebrow": "Vandaag",

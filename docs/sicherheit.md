@@ -20,11 +20,13 @@ dieser Datei.
 
 Zwei Sätze, aus denen sich fast alles andere ergibt:
 
-1. **KYDON läuft ohne Konto vollständig.** Der Normalfall ist eine App,
-   die alle Daten auf dem Gerät hält und mit niemandem spricht. Ein Konto ist
-   ein Zusatz für Abgleich und Trainerbetrieb. Das verkleinert die
-   Angriffsfläche drastisch — es gibt für die meisten Nutzer keinen Server,
-   den man angreifen könnte.
+1. **Konto Pflicht, Gerät zuerst** (seit 13.10.2026; vorher lief KYDON ohne
+   Konto). Gemessen wird auf dem Gerät, auch ohne Netz; mit dem Konto gleicht
+   die App automatisch ab. Damit liegen die Daten fast aller Nutzer auch auf
+   dem Server — die Zugriffsregeln (RLS) und die Besitzermarke des Geräts
+   (`kydon.sync.user`, kein fremder Bestand in ein anderes Konto) tragen die
+   Last, die früher die Abwesenheit eines Servers trug. Die
+   Gesundheitsschicht bleibt Ende-zu-Ende verschlüsselt.
 2. **Wo es doch einen Server gibt, ist er Supabase (PostgreSQL + PostgREST).**
    Es gibt keine eigene API-Schicht. Damit ist die **Row Level Security die
    Autorisierung** — nicht ein Teil davon, sondern die ganze. Jede Lücke dort

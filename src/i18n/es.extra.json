@@ -393,7 +393,7 @@
       "reportPdf": "Informe listo para imprimir",
       "requirementGap": "Qué eje aporta más a tu disciplina",
       "seasonPlan": "Puntos de control hasta la competición",
-      "sync": "Sincronización entre dispositivos",
+      "sync": "Sincronización automática: copia de seguridad y todos tus dispositivos",
       "targetStandards": "Valores objetivo de la prueba de acceso concreta",
       "unlimitedReports": "Informes sin límite",
       "whiteLabel": "Tu propio logotipo en el informe",
@@ -604,7 +604,7 @@
     "deleteHint_other": "«{{name}}» se borrará definitivamente junto con {{count}} mediciones. No se puede deshacer. Para ocultar a alguien sin perder datos, usa el archivo.",
     "deleteConfirm": "Borrar definitivamente",
     "meta": "{{results}} mediciones · {{assessments}} evaluaciones · desde {{since}}",
-    "privacyNote": "KYDON guarda solo lo que introduces sobre un atleta entrenado. No hace falta cuenta, correo ni invitación. Todo se queda en este dispositivo.",
+    "privacyNote": "KYDON solo guarda de un atleta supervisado lo que tú introduces. El atleta no necesita cuenta, correo ni invitación. Con tu cuenta se guarda automáticamente en servidores de la UE; se aplica el contrato de encargo del tratamiento.",
     "handover": "Traspaso",
     "handoverHint": "Un atleta cambia de club o de entrenador: su historial le pertenece a él, no a este dispositivo. El archivo contiene solo a este atleta — sin tu marca y sin los demás.",
     "handoverExport": "Exportar atleta",
@@ -637,11 +637,11 @@
     "data": "Tus datos",
     "recovered": "Estos datos se recuperaron de la segunda copia del dispositivo, guardada el {{date}}. El navegador había borrado el almacenamiento principal.",
     "backupDue": {
-      "never_exported": "Tienes {{count}} mediciones y nunca has exportado. Los datos viven solo en este dispositivo — una exportación los hace tuyos sin él.",
+      "never_exported": "Tienes {{count}} mediciones y nunca has exportado. La sincronización las guarda en tu cuenta; una exportación es tu propia copia, independiente del dispositivo y de la cuenta.",
       "many_new_results": "Se han añadido {{count}} mediciones desde la última exportación. Una nueva exportación es un clic.",
       "long_ago": "La última exportación fue hace {{days}} días, y desde entonces se han añadido {{count}} mediciones."
     },
-    "privacy": "Tus mediciones viven en este navegador. Solo se transmiten si activas la sincronización. Borrar los datos del navegador elimina el registro local — la exportación o la sincronización protegen de eso.",
+    "privacy": "Tus mediciones están primero en este dispositivo y se guardan automáticamente en servidores de la UE con tu cuenta. Si desactivas la sincronización, la exportación es tu única copia de seguridad.",
     "export": "Exportar",
     "import": "Importar",
     "importFailed": "El archivo no pudo leerse.",
@@ -997,7 +997,7 @@
     "photoRemove": "Quitar comprobante",
     "photoAlt": "Comprobante de la medición",
     "photoAdded": "añadido el {{date}}",
-    "photoHint": "Una imagen por resultado — la pantalla del cronómetro, la lectura de la báscula. Se reduce y se queda en este dispositivo; no se transmite ni se analiza.",
+    "photoHint": "Una imagen por resultado: la pantalla del cronómetro, la lectura de la báscula. Se reduce, se guarda con la medición y se sincroniza con ella. No se analiza.",
     "photoError": {
       "not_an_image": "Eso no es un archivo de imagen.",
       "unreadable": "La imagen no pudo leerse.",
@@ -1015,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Historial",
     "title": "Recordatorios",
-    "intro": "La app sabe cuándo mediste por última vez y calcula el vencimiento en tu dispositivo. Los recordatorios están desactivados hasta que los actives; con una cuenta, también por push.",
-    "noPush": "El recordatorio aparece en la app cuando la abres. Con una cuenta también puedes activar el push: KYDON te avisa aunque la app esté cerrada. Para ello el servidor solo conoce la fecha del próximo vencimiento. Sin cuenta, el archivo de calendario sigue siendo la vía fiable.",
+    "intro": "La app sabe cuándo mediste por última vez y calcula el vencimiento en tu dispositivo. Los recordatorios están desactivados hasta que los actives, también por push si quieres.",
+    "noPush": "El recordatorio aparece en la app cuando la abres. También puedes activar el push: KYDON te avisa aunque la app esté cerrada. Para ello el servidor solo conoce la fecha del próximo vencimiento. El archivo de calendario sigue siendo la vía más fiable.",
     "enable": "Activar recordatorios",
     "enabled": "Recordatorios activados",
     "disabled": "Recordatorios desactivados",
@@ -1032,7 +1032,7 @@
     "dueOn": "pendiente el {{date}}",
     "default": "Predeterminado",
     "calendar": "Descargar archivo de calendario",
-    "calendarHint": "Un evento de día completo por retest pendiente, con alarma tres días antes. Funciona en cualquier calendario, sin conexión y sin cuenta — esta es la vía fiable.",
+    "calendarHint": "Un evento de día completo por cada retest pendiente, con aviso tres días antes. Funciona en cualquier calendario y sin conexión: es la vía fiable.",
     "calendarEmpty": "Aún no hay retest pendiente. En cuanto un test deba repetirse, el archivo estará listo aquí.",
     "notify": "Permitir notificaciones del sistema",
     "notifyOn": "Notificaciones del sistema permitidas",
@@ -1518,7 +1518,7 @@
     "carryQuestion": "En este dispositivo hay {{count}} atletas. ¿Qué hacemos con ellos?",
     "carryYes": "Pasarlos al equipo: entonces pertenecen al equipo y cuentan para su nivel.",
     "carryNo": "Dejarlos en mi propia cuenta: salen de este dispositivo y vuelven cuando yo deje el equipo.",
-    "joinPrivacy": "Al unirte se activa la sincronización: los atletas del equipo se guardan en el servidor y todos los entrenadores del equipo pueden verlos. Si dejas el equipo, los atletas se quedan en el equipo.",
+    "joinPrivacy": "Un equipo solo funciona con sincronización: si está desactivada, al unirte se vuelve a activar. Los atletas del equipo están en el servidor y todos los entrenadores del equipo los ven. Si dejas el equipo, los atletas se quedan en el equipo.",
     "joinButton": "Unirse",
     "joined": "Ahora estás en el equipo «{{name}}».",
     "unnamed": "sin nombre",
@@ -2163,7 +2163,7 @@
     "consent": {
       "title": "Consentimiento para datos cardíacos",
       "agree": "Acepto",
-      "storage": "La secuencia de latidos se queda en el dispositivo y se descarta tras la medición. Solo se guardan los dos resultados. Con cuenta y sincronización, también quedan en tu cuenta. Puedes borrarlos en cualquier momento.",
+      "storage": "La secuencia de latidos se queda en el dispositivo y se descarta tras la medición. Solo se guardan los dos resultados; con la sincronización también están en tu cuenta. Puedes borrarlos en cualquier momento.",
       "body": "El pulso y la variabilidad de la frecuencia cardíaca son datos de salud (art. 9 RGPD). KYDON solo los mide si das tu consentimiento aquí, y solo los usa para mostrártelos en el historial y en el contexto del día."
     },
     "beats_other": "{{count}} latidos",
@@ -2242,6 +2242,7 @@
     "title": "Novedades en KYDON:",
     "close": "Entendido",
     "items": {
+      "account": "Cuenta y sincronización: KYDON ahora se sincroniza solo con tu cuenta. Tus datos están guardados en servidores de la UE y al día en todos tus dispositivos. Puedes desactivarlo en el perfil; antes verás lo que deja de funcionar.",
       "design": "Nuevo diseño: tarjetas de cristal esmerilado con niveles, cifras mono para los valores medidos y transiciones más calmadas — claro y oscuro.",
       "tests": "Biblioteca de pruebas según el protocolo 1.0: 126 pruebas en 29 áreas, cada una con objetivo, montaje, pasos y valoración.",
       "images": "Fotos de los montajes de las pruebas en las descripciones en lugar de bocetos.",
@@ -2792,7 +2793,7 @@
     "saveNext": "Guardar, siguiente atleta",
     "backToList": "Volver a la lista",
     "rule": "Cuenta el mejor intento válido. Los intentos no válidos quedan guardados pero no se puntúan.",
-    "offline": "Funciona sin red. Todo queda en este dispositivo."
+    "offline": "Funciona sin conexión. Se guarda primero en este dispositivo y se sincroniza en cuanto vuelve la red."
   },
   "ask": {
     "eyebrow": "Preguntas",
@@ -4105,6 +4106,40 @@
       "athlete": "Atleta",
       "store": "Datos",
       "other": "Otros"
+    }
+  },
+  "sync": {
+    "title": "Sincronización con la cuenta",
+    "hint": "Funciona sola: tus datos guardados en servidores de la UE y en cada dispositivo donde hayas iniciado sesión. Los datos de salud nunca se incluyen.",
+    "signedOut": "Tu sesión ha caducado. Vuelve a iniciar sesión y KYDON seguirá sincronizando.",
+    "enable": "Volver a activar la sincronización",
+    "disable": "Desactivar la sincronización",
+    "now": "Sincronizar ahora",
+    "working": "Sincronizando …",
+    "last": "Última sincronización: {{date}}",
+    "never": "Nunca sincronizado.",
+    "result": "{{pushed}} subidos, {{pulled}} descargados, {{series}} entradas sincronizadas.",
+    "offline": "Sin conexión. La sincronización se pondrá al día cuando vuelvas a estar en línea.",
+    "conflictTitle": "Estado divergente",
+    "conflictBody": "Este atleta se modificó en otro dispositivo. KYDON no ha sobrescrito nada — ambos estados están intactos. Guarda primero tu exportación y luego decide.",
+    "conflictKeepLocal": "Subir este registro",
+    "conflictExplain": "El estado del servidor se sustituye. La otra dirección — descargar el estado del servidor — pasa por exportar, «borrar todo» y una sincronización nueva.",
+    "whatLeaves": "Se sincronizan: mediciones, datos de perfil, notas, prioridades de entrenamiento, planes, además de diario, sesiones, decisiones y comidas. No se incluyen: tu contraseña, las actividades importadas ni los datos de salud, que tienen su propio canal cifrado.",
+    "auto": "KYDON sincroniza solo: al arrancar, tras cada cambio y en cuanto vuelve la conexión.",
+    "paused": "La sincronización está desactivada desde el {{date}}.",
+    "frozen": "La copia de tu cuenta corresponde al {{date}}; lo añadido después solo está en este dispositivo y en la exportación.",
+    "frozenNever": "Tu cuenta todavía no tiene ninguna copia; todo está solo en este dispositivo y en la exportación.",
+    "offDialog": {
+      "eyebrow": "Desactivar la sincronización",
+      "title": "Lo que deja de funcionar",
+      "backup": "Ya no hay copia de seguridad. Si pierdes este dispositivo o se borra el navegador, se pierde todo lo añadido desde la desactivación, salvo que lo hayas exportado.",
+      "devices": "Tus otros dispositivos ya no reciben valores nuevos, y sus cambios no llegan aquí.",
+      "coach": "Tu entrenador solo ve el último estado sincronizado. Las nuevas mediciones, check-ins y sesiones no le llegan.",
+      "plans": "Los planes y ajustes de tu entrenador ya no llegan a este dispositivo.",
+      "server": "La copia de tu cuenta se queda como está: no se borra. Puedes eliminarla por completo con «Eliminar la cuenta definitivamente».",
+      "local": "Medir funciona igual que antes, también sin conexión. Puedes volver a activar la sincronización cuando quieras; entonces se recupera lo que falta.",
+      "confirm": "Desactivar de todos modos",
+      "keep": "Mantener la sincronización"
     }
   }
 }

@@ -53,7 +53,7 @@ export const fr: Dict = {
   "why.3.text": "Quand le sommeil, la charge et un résultat de test changent la même semaine, tu les vois côte à côte. KYDON n’affirme pas que l’un a causé l’autre. Pas de diagnostic, pas de prévision de blessure.",
   "why.4.title": "À vous, et privé",
   "why.4.short": "Fonctionne hors ligne, enregistre d’abord sur ton appareil.",
-  "why.4.text": "La mesure fonctionne hors ligne dans la salle. Tes données restent d’abord sur ton appareil et ne se synchronisent que si tu le veux — conçu pour le RGPD dès le premier jour.",
+  "why.4.text": "La mesure fonctionne hors ligne dans la salle. Tes données sont d’abord sur ton appareil et sont sauvegardées automatiquement sur des serveurs dans l’UE avec ton compte — conçu pour le RGPD dès le premier jour.",
   "features.eyebrow": "Dans l’app",
   "features.title": "Moins de texte, plus d’images.<br /><span class=\"muted\">Chaque réponse à un geste.</span>",
   "f1.eyebrow": "Aujourd’hui",

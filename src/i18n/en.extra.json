@@ -393,7 +393,7 @@
       "reportPdf": "Print-ready report",
       "requirementGap": "Which axis gives your discipline the most",
       "seasonPlan": "Checkpoints up to the competition",
-      "sync": "Sync across devices",
+      "sync": "Automatic sync: backup and all your devices",
       "targetStandards": "Target values of the specific entrance test",
       "unlimitedReports": "Reports without a cap",
       "whiteLabel": "Your own logo on the report",
@@ -604,7 +604,7 @@
     "deleteHint_other": "“{{name}}” will be permanently deleted along with {{count}} measurements. This cannot be undone. To hide someone without losing data, use the archive.",
     "deleteConfirm": "Delete permanently",
     "meta": "{{results}} measurements · {{assessments}} assessments · since {{since}}",
-    "privacyNote": "KYDON stores only what you enter about a coached athlete. No account, email address or invitation is needed. Everything stays on this device.",
+    "privacyNote": "KYDON stores only what you enter about a coached athlete. The athlete needs no account, email address or invitation. With your account it is backed up automatically on servers in the EU; the data processing agreement applies.",
     "handover": "Handover",
     "handoverHint": "An athlete moves club or coach: their history belongs to them, not to this device. The file contains only this one athlete — without your branding and without the others.",
     "handoverExport": "Export athlete",
@@ -637,11 +637,11 @@
     "data": "Your data",
     "recovered": "This data came back from the device's second copy, saved on {{date}}. The browser had cleared the main storage.",
     "backupDue": {
-      "never_exported": "You have {{count}} measurements and have never exported. The data lives on this device only — an export makes it yours without it.",
+      "never_exported": "You have {{count}} measurements and have never exported. Sync backs them up in your account; an export is your own copy, independent of device and account.",
       "many_new_results": "{{count}} measurements have been added since the last export. A new export takes one click.",
       "long_ago": "The last export was {{days}} days ago, and {{count}} measurements have been added since."
     },
-    "privacy": "Your measurements live in this browser. They are transmitted only if you turn on sync. Clearing browser data removes the local record — the export or sync protects against that.",
+    "privacy": "Your measurements live on this device first and are backed up automatically on servers in the EU with your account. If you turn sync off, the export is your only backup.",
     "export": "Export",
     "import": "Import",
     "importFailed": "The file could not be read.",
@@ -997,7 +997,7 @@
     "photoRemove": "Remove record",
     "photoAlt": "Record of the measurement",
     "photoAdded": "added on {{date}}",
-    "photoHint": "One image per result — the timer display, the scale readout. It is downsized and stays on this device; it is not transmitted and not analysed.",
+    "photoHint": "One image per result — the timer display, the scale readout. It is downsized, stored with the measurement and synced with it. It is not analysed.",
     "photoError": {
       "not_an_image": "That is not an image file.",
       "unreadable": "The image could not be read.",
@@ -1015,8 +1015,8 @@
   "reminders": {
     "eyebrow": "History",
     "title": "Reminders",
-    "intro": "The app knows when you last measured and works out what is due on your device. Reminders are off until you switch them on — with an account, also by push.",
-    "noPush": "The reminder appears in the app when you open it. With an account you can also turn on push: KYDON then notifies you even when the app is closed. For this the server only learns the date of the next retest. Without an account, the calendar file remains the reliable way.",
+    "intro": "The app knows when you last measured and works out what is due on your device. Reminders are off until you switch them on — by push too, if you like.",
+    "noPush": "The reminder appears in the app when you open it. You can also turn on push: KYDON then notifies you even when the app is closed. For this the server only learns the date of the next retest. The calendar file remains the most reliable way.",
     "enable": "Enable reminders",
     "enabled": "Reminders are on",
     "disabled": "Reminders are off",
@@ -1032,7 +1032,7 @@
     "dueOn": "due on {{date}}",
     "default": "Default",
     "calendar": "Download calendar file",
-    "calendarHint": "One all-day event per due re-test, with an alarm three days ahead. Works in any calendar, offline and without an account — this is the reliable route.",
+    "calendarHint": "One all-day event per due re-test, with an alarm three days ahead. Works in any calendar and offline — this is the reliable route.",
     "calendarEmpty": "No re-test is due yet. As soon as a test should be repeated, the file will be ready here.",
     "notify": "Allow system notifications",
     "notifyOn": "System notifications are allowed",
@@ -1518,7 +1518,7 @@
     "carryQuestion": "There are {{count}} athletes on this device. What should happen to them?",
     "carryYes": "Bring them into the team — they then belong to the team and count towards its tier.",
     "carryNo": "Keep them in my own account — they leave this device and come back when I leave the team.",
-    "joinPrivacy": "Joining switches on sync: the team’s athletes are stored on the server, and all coaches of the team can see them. If you leave the team, the athletes stay with the team.",
+    "joinPrivacy": "A team only works with sync: if it is off, joining turns it back on. The team’s athletes are stored on the server, and all coaches of the team can see them. If you leave the team, the athletes stay with the team.",
     "joinButton": "Join",
     "joined": "You are now in the team “{{name}}”.",
     "unnamed": "unnamed",
@@ -2163,7 +2163,7 @@
     "consent": {
       "title": "Consent for heart data",
       "agree": "I agree",
-      "storage": "The beat sequence stays on the device and is discarded after the measurement. Only the two results are stored. With an account and sync, they are also kept in your account. You can delete them at any time.",
+      "storage": "The beat sequence stays on the device and is discarded after the measurement. Only the two results are stored; with sync they are also kept in your account. You can delete them at any time.",
       "body": "Heart rate and heart rate variability are health data (Art. 9 GDPR). KYDON only measures them if you agree here, and uses them only to show them to you over time and in the daily context."
     },
     "beats_other": "{{count}} beats",
@@ -2242,6 +2242,7 @@
     "title": "New in KYDON:",
     "close": "Got it",
     "items": {
+      "account": "Account and sync: KYDON now syncs with your account on its own. Your data is backed up on servers in the EU and up to date on all your devices. You can turn this off in your profile — you will see first what stops working.",
       "design": "New design: frosted-glass cards with layers, mono digits for measured values and calmer transitions — light and dark.",
       "tests": "Test library to protocol 1.0: 126 tests in 29 areas, each with goal, setup, steps and scoring.",
       "images": "Photos of the test setups in the descriptions instead of sketches.",
@@ -2792,7 +2793,7 @@
     "saveNext": "Save, next athlete",
     "backToList": "Back to list",
     "rule": "The best valid attempt counts. Invalid attempts stay saved but are not scored.",
-    "offline": "Works offline. Everything stays on this device."
+    "offline": "Works offline. Results are saved on this device first and synced once the network is back."
   },
   "ask": {
     "eyebrow": "Questions",
@@ -4105,6 +4106,40 @@
       "athlete": "Athlete",
       "store": "Data store",
       "other": "Other"
+    }
+  },
+  "sync": {
+    "title": "Sync with your account",
+    "hint": "Runs on its own: your data backed up on servers in the EU and on every device where you are signed in. Health data never goes with it.",
+    "signedOut": "Your sign-in has expired. Sign in again and KYDON will keep syncing.",
+    "enable": "Turn sync back on",
+    "disable": "Turn off sync",
+    "now": "Sync now",
+    "working": "Syncing …",
+    "last": "Last synced: {{date}}",
+    "never": "Never synced.",
+    "result": "{{pushed}} uploaded, {{pulled}} fetched, {{series}} entries synced.",
+    "offline": "No connection. The sync will catch up once you are online again.",
+    "conflictTitle": "Diverging state",
+    "conflictBody": "This athlete was changed on another device. KYDON overwrote nothing — both states are intact. Save your export first, then decide.",
+    "conflictKeepLocal": "Upload this record",
+    "conflictExplain": "The server state is replaced. The other direction — fetching the server state — goes through export, “delete everything” and a fresh sync.",
+    "whatLeaves": "Synced: measurements, profile details, notes, training focus, plans, plus diary, workouts, decisions and meals. Not included: your password, imported runs and health data — those have their own encrypted route.",
+    "auto": "KYDON syncs on its own: after start-up, after every change and as soon as the network is back.",
+    "paused": "Sync has been off since {{date}}.",
+    "frozen": "The copy in your account reflects {{date}}; anything added since then exists only on this device and in your export.",
+    "frozenNever": "There is no copy in your account yet; everything exists only on this device and in your export.",
+    "offDialog": {
+      "eyebrow": "Turn off sync",
+      "title": "What stops working",
+      "backup": "No more backup. If this device is lost or the browser is cleared, everything added since you turned sync off is gone — unless you exported it.",
+      "devices": "Your other devices get no new values, and changes made there do not arrive here.",
+      "coach": "Your coach sees only the last synced state. New measurements, check-ins and sessions do not reach them.",
+      "plans": "Plans and adjustments from your coach no longer arrive on this device.",
+      "server": "The copy in your account stays as it is — it is not deleted. You can remove it completely with “Delete account permanently”.",
+      "local": "Measuring works as before, even offline. You can turn sync back on at any time; it then catches up on what is missing.",
+      "confirm": "Turn off anyway",
+      "keep": "Keep sync on"
     }
   }
 }

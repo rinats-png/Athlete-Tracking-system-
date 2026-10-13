@@ -22,13 +22,12 @@ import { plansForRole, writeAccount, type Account, type AccountRole } from './ac
  *   Anmeldung steht  →  nach dem Absenden zerfällt der Umriss wieder in
  *   Partikel  →  danach übernimmt die Sequenz.
  *
- * WAS DIESER BILDSCHIRM NICHT LEISTET, UND WARUM ER ES SAGT: es gibt keinen
- * Server. Die Eingabe wird nicht geprüft, das Passwort nicht gespeichert und
- * nichts übertragen. Das steht als Hinweis auf der Fläche — wie beim
- * Preisbildschirm, der sagt, dass noch nichts gekauft werden kann. Eine
- * Anmeldemaske, die Schutz vortäuscht, wäre die eine Sache, die man an einem
- * Anmeldebildschirm nicht tun darf: sie verleitet dazu, ein Passwort
- * einzutippen, das anderswo etwas bewacht.
+ * OHNE KONTO KEIN ZUGANG. Die Anmeldung läuft gegen den Dienst; ein Konto
+ * nur auf dem Gerät gibt es nicht mehr. Ist kein Dienst hinterlegt (ein Bau
+ * ohne `VITE_SUPABASE_*`), sagt die Fläche das und lässt niemanden durch —
+ * eine Anmeldung, die nichts prüft, wäre eine Sperre ohne Zweck und
+ * zugleich eine Einladung, ein Passwort einzutippen, das anderswo etwas
+ * bewacht.
  *
  * Die Partikel zeichnen nur den Rahmen. Das Formular darüber ist gewöhnliches
  * DOM mit Beschriftungen und Tastaturbedienung — Eingabefelder aus Partikeln
@@ -173,21 +172,8 @@ function SignInPane({ onDone }: { onDone: (account: Account) => void }) {
     setError(null)
     setNotice(null)
 
-    /*
-     * Ohne hinterlegtes Projekt bleibt es beim gestalteten Tor: die App läuft
-     * dann vollständig auf dem Gerät weiter. Ein Anmeldebildschirm, der ohne
-     * Server gar nicht mehr weiterlässt, wäre eine Sperre ohne Zweck.
-     */
     if (!isSupabaseConfigured()) {
-      onDone({
-        name: email.split('@')[0] || t('auth.defaultName'),
-        email,
-        role: 'athlete',
-        planId: null,
-        createdAt: new Date().toISOString(),
-        dpaAcceptedAt: null,
-        dpaVersion: null,
-      })
+      setError(message('not_configured'))
       return
     }
 
@@ -420,7 +406,7 @@ function RegisterDetails({
     }
 
     if (!isSupabaseConfigured()) {
-      onDone(account)
+      setError(message('not_configured'))
       return
     }
 

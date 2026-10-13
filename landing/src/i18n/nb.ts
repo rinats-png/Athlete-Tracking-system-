@@ -53,7 +53,7 @@ export const nb: Dict = {
   "why.3.text": "Når søvn, belastning og et testresultat endrer seg samme uke, ser du dem side om side. KYDON påstår ikke at det ene forårsaket det andre. Ingen diagnoser, ingen skadeprognoser.",
   "why.4.title": "Ditt, og privat",
   "why.4.short": "Fungerer offline og lagrer først på enheten din.",
-  "why.4.text": "Måling fungerer offline i hallen. Dataene dine ligger først på enheten din og synkroniseres bare hvis du vil — bygget for GDPR fra første dag.",
+  "why.4.text": "Måling fungerer offline i hallen. Dataene dine ligger først på enheten din og sikkerhetskopieres automatisk på servere i EU med kontoen din — bygget for GDPR fra første dag.",
   "features.eyebrow": "Inne i appen",
   "features.title": "Mindre tekst, mer bilde.<br /><span class=\"muted\">Hvert svar ett trykk unna.</span>",
   "f1.eyebrow": "I dag",

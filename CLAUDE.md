@@ -1,7 +1,8 @@
 # CLAUDE.md
 
 KYDON — Leistungsdiagnostik als PWA für Athleten und Trainer.
-Local-first (React 19, Vite, Tailwind 4, localStorage) mit Supabase-Backend.
+Gerät zuerst (React 19, Vite, Tailwind 4, localStorage), Konto Pflicht,
+automatischer Abgleich mit Supabase (im Profil abschaltbar).
 
 Antworte dem Nutzer auf **Deutsch**. Code-Kommentare und Doku sind ebenfalls
 Deutsch, im Stil der umgebenden Dateien.

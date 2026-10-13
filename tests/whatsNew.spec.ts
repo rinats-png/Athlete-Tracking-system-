@@ -75,7 +75,8 @@ test.describe('Im Bildschirm', () => {
     const dlg = page.getByTestId('whats-new')
     await expect(dlg).toBeVisible()
     await expect(dlg).toContainText('Neu bei KYDON:')
-    await expect(page.getByTestId('whats-new-list').locator('li')).toHaveCount(WHATS_NEW[0].items.length)
+    // Ohne Marke ist jeder Stand neu: alle Einträge, nicht nur der jüngste.
+    await expect(page.getByTestId('whats-new-list').locator('li')).toHaveCount(WHATS_NEW.flatMap((r) => r.items).length)
     await dlg.getByRole('button', { name: 'Verstanden' }).click()
     await expect(dlg).toHaveCount(0)
     expect(await page.evaluate(() => localStorage.getItem('kydon.whatsnew.seen'))).toBe(WHATS_NEW[0].id)

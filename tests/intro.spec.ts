@@ -110,7 +110,7 @@ test.describe('Ablauf beim Öffnen', () => {
     await page.getByRole('button', { name: 'Überspringen' }).click()
     await expect(dialog).toHaveCount(0)
     // Danach steht die App — nicht eine leere Seite.
-    await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toBeVisible()
+    await expect(page.getByRole('button', { name: /Eigenen Bestand anlegen/ })).toBeVisible()
   })
 
   test('ein Neuladen führt nicht wieder durch sie hindurch', async ({ page }) => {
@@ -142,7 +142,7 @@ test.describe('Ablauf beim Öffnen', () => {
     await openWithIntro(page)
     // Der Leitsatz steht sofort, ohne Szenenfolge davor.
     await expect(page.getByText(/Messen · Einordnen/)).toBeVisible()
-    await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toBeVisible({
+    await expect(page.getByRole('button', { name: /Eigenen Bestand anlegen/ })).toBeVisible({
       timeout: 4000,
     })
     await ctx.close()

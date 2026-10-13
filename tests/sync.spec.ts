@@ -3,41 +3,43 @@ import { readFileSync } from 'node:fs'
 import { openDemo, openGuest, stubAuth } from './helpers'
 
 /**
- * Die Synchronisierung.
+ * Der Abgleich mit dem Konto.
  *
  * DER TEUERSTE FEHLER wäre hier nicht ein fehlgeschlagener Abgleich, sondern
  * ein stiller Datenverlust: ein Stand, den ein zweites Gerät geschrieben hat,
  * überschrieben von einem Gerät, das ihn nie gesehen hat. Die ersten Fälle
  * halten fest, dass das nicht passieren kann.
  *
- * Der zweite teure Fehler wäre eine Übertragung, die niemand eingeschaltet
- * hat. Auch dafür steht ein Fall.
+ * Der zweite teure Fehler wäre eine Übertragung von Daten, die in kein Konto
+ * gehören (die Demo). Auch dafür steht ein Fall. Der automatische Ablauf
+ * selbst steht in autoSync.spec.ts.
  */
 
-test.describe('Nichts verlässt das Gerät von allein', () => {
-  test('ohne Einschalten wird nicht abgeglichen', async ({ page }) => {
-    const calls: string[] = []
-    page.on('request', (r) => {
-      if (r.url().includes('supabase.co') && r.url().includes('/rest/')) calls.push(r.url())
-    })
+test.describe('Das Profil zeigt den Abgleich', () => {
+  test('mit Titel, Stand und was übertragen wird', async ({ page }) => {
     await stubAuth(page)
     await openGuest(page)
-    await page.goto('/tests/cooper_12min', { waitUntil: 'domcontentloaded' })
-    await page.getByLabel(/^Distanz/).fill('3200')
-    await page.getByRole('button', { name: 'Ergebnis speichern' }).click()
-    await page.waitForURL('**/ergebnis/**')
-    await page.waitForTimeout(600)
-
-    expect(calls, 'Messen allein überträgt nichts').toEqual([])
+    await page.evaluate(() => localStorage.removeItem('kydon.sync.enabled'))
+    await page.goto('/profil', { waitUntil: 'domcontentloaded' })
+    await expect(page.getByRole('heading', { name: 'Abgleich mit dem Konto' })).toBeVisible()
+    await expect(page.getByText(/KYDON gleicht von selbst ab/)).toBeVisible()
+    await expect(page.getByText(/Nicht dabei: dein Passwort, importierte Läufe und Gesundheitsangaben/)).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Abgleich ausschalten' })).toBeVisible()
   })
 
-  test('das Profil zeigt den Schalter und sagt, was übertragen würde', async ({ page }) => {
+  test('die Demo gleicht nie ab und zeigt keinen Abgleich', async ({ page }) => {
+    const calls: string[] = []
+    page.on('request', (r) => {
+      // Nur die Daten selbst: Abfragen wie «bin ich Admin?» tragen keinen Bestand.
+      if (r.url().includes('supabase.co') && /\/rest\/v1\/(athlete_|rpc\/my_pool_owner)/.test(r.url())) calls.push(r.url())
+    })
     await stubAuth(page)
     await openDemo(page)
+    await page.evaluate(() => localStorage.removeItem('kydon.sync.enabled'))
     await page.goto('/profil', { waitUntil: 'domcontentloaded' })
-    await expect(page.getByRole('heading', { name: 'Synchronisierung' })).toBeVisible()
-    await expect(page.getByText(/Alles bleibt auf diesem Gerät/)).toBeVisible()
-    await expect(page.getByText(/Nicht übertragen wird dein Passwort/)).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Abgleich mit dem Konto' })).toHaveCount(0)
+    await page.waitForTimeout(3000)
+    expect(calls, 'Beispieldaten gehören in kein Konto').toEqual([])
   })
 })
 

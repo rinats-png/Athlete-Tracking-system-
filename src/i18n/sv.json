@@ -180,9 +180,9 @@
   "badges": {
     "personalBest": "Personbästa",
     "demo": "Demo",
-    "guest": "Lokalt",
-    "demoHint": "Exempeldata. Ändringar stannar på den här enheten.",
-    "guestHint": "Dina data stannar enbart på den här enheten."
+    "demoHint": "Exempeldata. De stannar på den här enheten och hamnar aldrig i ditt konto.",
+    "own": "Konto",
+    "ownHint": "Dina egna data, kopplade till ditt konto."
   },
   "units": {
     "percentile": "percentil",
@@ -191,14 +191,13 @@
   "welcome": {
     "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Ta reda på var du faktiskt står.",
-    "body": "Sportspecifika tester, vetenskapliga referensvärden, en prestationsprofil och nästa rimliga test — ingen träningsdagbok, ingen kaloriräknare.",
+    "body": "Idrottsspecifika tester, referensvärden med källa, en prestationsprofil och nästa rimliga test. Därifrån kan en träningsplan växa fram — bara ur belagda regler.",
     "continueEmail": "Fortsätt med e-post",
     "haveAccount": "Jag har ett konto",
     "viewDemo": "Visa demo",
     "legal": "Genom att fortsätta godkänner du användarvillkoren och bekräftar att du har läst integritetspolicyn.",
-    "startLocal": "Börja med ett tomt register",
-    "privacy": "Mätning och analys sker på din enhet. Inloggning kräver din e-postadress; dina mätningar överförs först när du slår på synkronisering — och kan när som helst exporteras i sin helhet.",
-    "accountLater": "Konton och synkronisering kommer senare",
+    "startOwn": "Skapa dina egna data",
+    "privacy": "Mätningen sker först på din enhet, även utan nät. Med ditt konto säkerhetskopieras dina data automatiskt på servrar i EU; en tränare ser bara det du delar. Exporten är alltid fullständig och gratis.",
     "points": [
       "Sportspecifik diagnostik",
       "Referensvärden med källor",
@@ -218,10 +217,10 @@
         "var du faktiskt",
         "står."
       ],
-      "since": "inget konto",
+      "since": "säkrat i EU",
       "aboutLabel": "om kydon",
       "aboutHeadline": "Kydon mäter, sätter i sammanhang och visar vad som faktiskt förändrades — och vad som bara var en bra dag.",
-      "aboutBody": "Sportspecifika testprotokoll, referensvärden med källor, en prestationsprofil över sex axlar och nästa rimliga test. Ingen träningsdagbok, ingen kaloriräknare, inget medicinskt utlåtande.",
+      "aboutBody": "Idrottsspecifika testprotokoll, referensvärden med källa, en prestationsprofil över sex axlar och nästa rimliga test. Inga påhittade normer, inga medicinska påståenden.",
       "cards": {
         "protocol": {
           "title": "Testprotokoll",
@@ -741,7 +740,7 @@
   "gate": {
     "step": "Steg 1 av 1",
     "title": "Vilken idrott?",
-    "body": "KYDON föreslår då exakt de tester som mäts för disciplinen — med protokoll och motivering. Uppgiften stannar på den här enheten och kan ändras när som helst.",
+    "body": "KYDON föreslår sedan exakt de tester som mäts för den här grenen — med protokoll och motivering. Du kan ändra det när som helst.",
     "noMatch": "Ingen idrott hittades för ”{{query}}”. Välj ”Allmän bedömning” nedan — idrotten kan läggas till senare.",
     "general": "Allmän bedömning",
     "generalHint": "Utan idrott: ett batteri över alla sex axlar. Kan ändras när som helst i testområdet."
@@ -756,7 +755,7 @@
     "allTests": "Visa alla tester",
     "profile": {
       "title": "Din profil",
-      "body": "Ålder, kön och kroppsdata avgör vilka referensgrupper dina värden jämförs med. Allt stannar på den här enheten.",
+      "body": "Ålder, kön och kroppsdata avgör vilka referensgrupper dina värden jämförs med. Uppgifterna tillhör dig och kan ändras när som helst.",
       "required": "Obligatoriskt",
       "optional": "Valfritt",
       "weight": "Kroppsvikt",
@@ -833,9 +832,9 @@
       "points": {
         "measures": "Den mäter din prestation med tester som följer ett fast protokoll — så att samma test betyder samma sak om ett år.",
         "compares": "Den placerar dina värden i namngivna referensgrupper, med källa och datakvalitet vid varje jämförelse. Där ingen källbelagd referens finns säger den det i stället för att hitta på en siffra.",
-        "notPlan": "Den är inget träningsprogram och ingen träningslogg. Den säger var du står — inte vad du ska träna.",
+        "plan": "KYDON mäter var du står. Därifrån kan en träningsplan växa fram, men bara ur belagda regler med källa och granskningsstatus. Varje block avslutas med en ny mätning. Du eller din tränare bestämmer.",
         "notMedical": "Den är ingen medicinsk diagnostik. Inga diagnoser, inga behandlingsrekommendationer, ingen bedömning av sjukdom.",
-        "onDevice": "Allt stannar på den här enheten. Inget konto, ingen överföring, och exporten av dina data är alltid fullständig och gratis."
+        "data": "Dina data tillhör dig. De ligger först på din enhet, och mätning fungerar även utan nät. Med ditt konto säkerhetskopieras de dessutom automatiskt på servrar i EU. En tränare ser bara det du delar, och du kan dra tillbaka varje delning. Exporten är alltid fullständig och gratis."
       }
     },
     "role": {
@@ -1082,7 +1081,7 @@
     "title": "Anonymiserad jämförelse",
     "body": "Här kommer det att stå hur många atleter som genomfört ett test och i vilken percentil ditt resultat ligger — anonymiserat och bara med ditt uttryckliga samtycke.",
     "status": "Inga jämförelsedata ännu",
-    "statusBody": "Appen lagrar allt lokalt och överför inget. En community-jämförelse kräver en server som inte finns ännu. Tills dess står här ärligt: inga data — i stället för en påhittad siffra.",
+    "statusBody": "En jämförelse med andra kräver tillräckligt många mätningar som uttryckligen delats för ändamålet — sådana finns inte än. Tills dess står det ärligt här: inga data — i stället för ett påhittat tal.",
     "example": "Så här kommer det att se ut",
     "exampleLine": "\"1 284 atleter genomförde det här testet. Ditt resultat: 72:a percentilen.\"",
     "principles": "Principer",
@@ -1332,7 +1331,7 @@
   "auth": {
     "eyebrow": "Logga in",
     "claim": "Measure. Benchmark. Develop.",
-    "noBackend": "Inget projekt är konfigurerat för den här enheten: din inmatning verifieras inte och inget överförs. Inloggningen ordnar ingången, den skyddar inget ännu.",
+    "noBackend": "Ingen tjänst är konfigurerad för den här versionen. KYDON kräver ett konto, så inloggning är inte möjlig här.",
     "signIn": "Logga in",
     "register": "Skapa konto",
     "email": "E-post",
@@ -1358,7 +1357,7 @@
     "signOut": "Logga ut",
     "signOutAndWipe": "Logga ut och rensa enheten",
     "wipeConfirmTitle": "Radera alla data på den här enheten?",
-    "wipeConfirmBody": "Mätvärden, profiler och inställningar i den här appen tas bort från enheten — permanent. En synkroniserad kopia på servern finns kvar. Utan synkronisering är en tidigare export den enda kopian.",
+    "wipeConfirmBody": "Mätningar, profiler och inställningar för den här appen tas bort från enheten — permanent. Det som synkats med ditt konto finns kvar på servern och kommer tillbaka vid nästa inloggning. Det som tillkommit sedan senaste synkningen finns då bara i exporten.",
     "wipeConfirm": "Radera permanent",
     "wipeCancel": "Avbryt",
     "deleteAccount": "Radera kontot permanent",
@@ -1367,7 +1366,7 @@
     "deleteConfirmBody": "Kontot, serverkopian och alla mätvärden tas bort. Adepter du hanterar utan eget konto raderas också; de med eget konto behåller sina data. Steget går inte att ångra.",
     "deleteConfirm": "Radera permanent",
     "deleteFailed": {
-      "not_configured": "Utan konto finns det inget att radera på en server.",
+      "not_configured": "Ingen tjänst är konfigurerad för den här versionen; det finns inget att radera på en server.",
       "offline": "Ingen anslutning. Försök igen senare.",
       "unauthorized": "Sessionen har gått ut. Logga in igen och försök på nytt.",
       "failed": "Raderingen misslyckades. Inget togs bort."
@@ -1375,8 +1374,8 @@
     "signedInAs": "Inloggad som {{name}}",
     "planChosen": "Vald nivå: {{plan}}",
     "planNone": "Ingen nivå vald ännu.",
-    "signOutKeepsData": "Utloggning rensar bara kontot. Dina mätningar stannar på den här enheten — de är dina, inte inloggningens.",
-    "backendNote": "Din inloggning går via vår tjänsteleverantör. Mätning och analys stannar på den här enheten; data överförs först när du slår på synkronisering.",
+    "signOutKeepsData": "Logga ut avslutar inloggningen på den här enheten. Dina mätningar ligger kvar här och säkrade i ditt konto — efter nästa inloggning fortsätter du där du var.",
+    "backendNote": "KYDON kräver ett konto. Mätningen sker först på din enhet, även utan nät; när du loggar in säkerhetskopieras dina data automatiskt på servrar i EU. Det som redan finns på enheten behålls.",
     "passwordRule": "Minst {{count}} tecken.",
     "confirmTitle": "Bekräfta din e-post",
     "confirmBody": "Vi har skickat ett meddelande till {{email}}. Öppna länken i det, sedan kan du logga in.",
@@ -1390,29 +1389,10 @@
       "weak_password": "Lösenordet är för kort.",
       "needs_confirmation": "E-posten är inte bekräftad ännu. Länken finns i din inkorg.",
       "too_many_attempts": "För många misslyckade försök. Vänta en stund och försök igen.",
-      "offline": "Ingen anslutning. Du kan fortsätta mäta på enheten — inloggningen kan vänta.",
+      "offline": "Ingen anslutning. KYDON behöver nät en gång för att logga in — sedan kan du mäta även offline.",
       "not_configured": "Inget projekt är konfigurerat för den här enheten.",
       "unknown": "Det gick inte. Försök igen senare."
     }
-  },
-  "sync": {
-    "title": "Synkronisering",
-    "hint": "Dina mätningar som en andra kopia på servern — så att de överlever en förlorad enhet och dyker upp på en andra.",
-    "offNotice": "Av. Allt stannar på den här enheten. Exporten är då din enda säkerhetskopia.",
-    "signedOut": "Du behöver vara inloggad för detta.",
-    "enable": "Slå på synkronisering",
-    "disable": "Stäng av",
-    "now": "Synkronisera nu",
-    "working": "Synkroniserar …",
-    "last": "Senast synkroniserat: {{date}}",
-    "never": "Aldrig synkroniserat.",
-    "result": "{{pushed}} uppladdade, {{pulled}} hämtade, {{series}} poster synkade.",
-    "offline": "Ingen anslutning. Synkroniseringen kommer ikapp när du är online igen.",
-    "conflictTitle": "Avvikande tillstånd",
-    "conflictBody": "Den här atleten ändrades på en annan enhet. KYDON skrev inte över något — båda tillstånden är intakta. Spara din export först, bestäm sedan.",
-    "conflictKeepLocal": "Ladda upp den här posten",
-    "conflictExplain": "Servertillståndet ersätts. Andra riktningen — att hämta servertillståndet — går via export, ”radera allt” och en ny synkronisering.",
-    "whatLeaves": "Överförs: mätvärden, profiluppgifter, anteckningar, träningsfokus samt dagbok, pass, beslut och måltider — de senare som enskilda poster, inte som ett helt dokument. Ditt lösenord överförs aldrig."
   },
   "editResult": {
     "open": "Rätta värde",
@@ -2061,5 +2041,12 @@
         "failed": "Delningen lyckades inte. Din incheckning är sparad."
       }
     }
+  },
+  "syncAttention": {
+    "signedOut": "Din inloggning har gått ut. Du kan fortsätta mäta på den här enheten; synkningen sker först efter en ny inloggning.",
+    "otherAccount": "Datan på den här enheten hör till ett annat konto och synkas därför inte. Logga in med det kontot eller töm enheten i profilen.",
+    "conflict": "En idrottare har ändrats på ett annat sätt på en annan enhet. KYDON har inte skrivit över något — bestäm i profilen.",
+    "signIn": "Logga in igen",
+    "open": "Till synkningen"
   }
 }

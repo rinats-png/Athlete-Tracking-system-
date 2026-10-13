@@ -64,6 +64,32 @@ export function markAthleteDeleted(athleteId: string, at = new Date().toISOStrin
   writeSyncState({ ...state, deleted: { ...state.deleted, [athleteId]: at } })
 }
 
+/**
+ * Zu welchem Konto der Bestand auf diesem Gerät gehört.
+ *
+ * Der Abgleich läuft von selbst. Meldet sich auf demselben Gerät ein anderes
+ * Konto an, ohne den Bestand vorher zu räumen, darf der fremde Bestand nicht
+ * in dieses Konto wandern. Die Marke überlebt das Abmelden (der Bestand bleibt
+ * ja liegen) und geht erst mit dem Räumen des Geräts (`wipeDevice`).
+ */
+const OWNER_KEY = 'kydon.sync.user'
+
+export function readSyncOwner(): string | null {
+  try {
+    return localStorage.getItem(OWNER_KEY)
+  } catch {
+    return null
+  }
+}
+
+export function writeSyncOwner(userId: string): void {
+  try {
+    localStorage.setItem(OWNER_KEY, userId)
+  } catch {
+    /* Ohne Speicher gilt die Marke für diese Sitzung. */
+  }
+}
+
 export function clearSyncState(): void {
   try {
     localStorage.removeItem(STATE_KEY)

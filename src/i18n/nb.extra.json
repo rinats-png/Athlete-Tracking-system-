@@ -393,7 +393,7 @@
       "reportPdf": "Utskriftsklar rapport",
       "requirementGap": "Hvilken akse som gir din øvelse mest",
       "seasonPlan": "Kontrollpunkter fram til konkurransen",
-      "sync": "Synkronisering på tvers av enheter",
+      "sync": "Automatisk synkronisering: sikkerhetskopi og alle enhetene dine",
       "targetStandards": "Målverdier for det aktuelle opptakstesten",
       "unlimitedReports": "Rapporter uten tak",
       "whiteLabel": "Egen logo i rapporten",
@@ -604,7 +604,7 @@
     "deleteHint_other": "«{{name}}» slettes permanent sammen med {{count}} målinger. Dette kan ikke angres. For å skjule noen uten å miste data, bruk arkivet.",
     "deleteConfirm": "Slett permanent",
     "meta": "{{results}} målinger · {{assessments}} testøkter · siden {{since}}",
-    "privacyNote": "KYDON lagrer bare det du legger inn om en utøver du trener. Ingen konto, e-postadresse eller invitasjon trengs. Alt blir på denne enheten.",
+    "privacyNote": "KYDON lagrer bare det om en utøver du følger opp, som du selv skriver inn. Utøveren trenger verken konto, e-postadresse eller invitasjon. Med kontoen din sikkerhetskopieres det automatisk på servere i EU; databehandleravtalen gjelder.",
     "handover": "Overlevering",
     "handoverHint": "En utøver bytter klubb eller trener: historikken tilhører dem, ikke denne enheten. Filen inneholder bare denne ene utøveren — uten din profilering og uten de andre.",
     "handoverExport": "Eksporter utøver",
@@ -637,11 +637,11 @@
     "data": "Dine data",
     "recovered": "Disse dataene kom tilbake fra enhetens andre kopi, lagret {{date}}. Nettleseren hadde tømt hovedlageret.",
     "backupDue": {
-      "never_exported": "Du har {{count}} målinger og har aldri eksportert. Dataene ligger bare på denne enheten — en eksport gjør dem dine uavhengig av den.",
+      "never_exported": "Du har {{count}} målinger og har aldri eksportert. Synkroniseringen sikrer dem på kontoen din; en eksport er din egen kopi, uavhengig av enhet og konto.",
       "many_new_results": "{{count}} målinger er lagt til siden siste eksport. En ny eksport tar ett klikk.",
       "long_ago": "Siste eksport var for {{days}} dager siden, og {{count}} målinger er lagt til siden."
     },
-    "privacy": "Målingene dine ligger i denne nettleseren. De overføres bare hvis du slår på synkronisering. Sletting av nettleserdata fjerner den lokale journalen — eksporten eller synkroniseringen beskytter mot det.",
+    "privacy": "Målingene dine ligger først på denne enheten og sikkerhetskopieres automatisk på servere i EU med kontoen din. Slår du av synkroniseringen, er eksporten din eneste sikkerhetskopi.",
     "export": "Eksporter",
     "import": "Importer",
     "importFailed": "Filen kunne ikke leses.",
@@ -997,7 +997,7 @@
     "photoRemove": "Fjern dokumentasjon",
     "photoAlt": "Dokumentasjon av målingen",
     "photoAdded": "lagt til {{date}}",
-    "photoHint": "Ett bilde per resultat — tidtakerdisplayet, vektavlesningen. Det forminskes og blir på denne enheten; det overføres ikke og analyseres ikke.",
+    "photoHint": "Ett bilde per resultat — tidtakingens display, vektens visning. Det forminskes, lagres med målingen og synkroniseres med den. Det analyseres ikke.",
     "photoError": {
       "not_an_image": "Det er ikke en bildefil.",
       "unreadable": "Bildet kunne ikke leses.",
@@ -1015,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Historikk",
     "title": "Påminnelser",
-    "intro": "Appen vet når du sist målte, og regner ut på enheten din hva som er tid for. Påminnelser er av til du slår dem på – med konto også via push.",
-    "noPush": "Påminnelsen vises i appen når du åpner den. Med en konto kan du også slå på push: da gir KYDON beskjed selv når appen er lukket. Serveren får bare vite datoen for neste måling. Uten konto er kalenderfilen fortsatt den pålitelige veien.",
+    "intro": "Appen vet når du sist målte, og regner ut forfallet på enheten din. Påminnelser er av til du slår dem på — også som push om du vil.",
+    "noPush": "Påminnelsen vises i appen når du åpner den. Du kan også slå på push: da melder KYDON seg selv når appen er lukket. Serveren får bare vite datoen for neste forfall. Kalenderfilen er fortsatt den mest pålitelige veien.",
     "enable": "Slå på påminnelser",
     "enabled": "Påminnelser er på",
     "disabled": "Påminnelser er av",
@@ -1032,7 +1032,7 @@
     "dueOn": "forfaller {{date}}",
     "default": "Standard",
     "calendar": "Last ned kalenderfil",
-    "calendarHint": "Én heldagshendelse per forfalt retest, med alarm tre dager før. Fungerer i alle kalendere, offline og uten konto — dette er den pålitelige veien.",
+    "calendarHint": "Én heldagsavtale per forfalt ny måling, med varsel tre dager før. Fungerer i alle kalendere og uten nett — det er den pålitelige veien.",
     "calendarEmpty": "Ingen retest er forfalt ennå. Så snart en test bør gjentas, ligger filen klar her.",
     "notify": "Tillat systemvarsler",
     "notifyOn": "Systemvarsler er tillatt",
@@ -1518,7 +1518,7 @@
     "carryQuestion": "Det ligger {{count}} utøvere på denne enheten. Hva skal skje med dem?",
     "carryYes": "Ta dem med inn i teamet — da tilhører de teamet og teller for teamets nivå.",
     "carryNo": "Behold dem på min egen konto — de forlater denne enheten og kommer tilbake når jeg forlater teamet.",
-    "joinPrivacy": "Når du blir med, slås synkroniseringen på: Teamets utøvere lagres på serveren, og alle trenerne i teamet kan se dem. Forlater du teamet, blir utøverne værende i teamet.",
+    "joinPrivacy": "Et team fungerer bare med synkronisering: er den slått av, slår innmeldingen den på igjen. Teamets utøvere ligger på serveren, og alle trenerne i teamet ser dem. Forlater du teamet, blir utøverne i teamet.",
     "joinButton": "Bli med",
     "joined": "Du er nå med i teamet «{{name}}».",
     "unnamed": "uten navn",
@@ -2163,7 +2163,7 @@
     "consent": {
       "title": "Samtykke for hjertedata",
       "agree": "Jeg samtykker",
-      "storage": "Slagrekken blir på enheten og forkastes etter målingen. Bare de to resultatene lagres. Med konto og synkronisering ligger de også i kontoen din. Du kan slette dem når som helst.",
+      "storage": "Slagsekvensen blir på enheten og forkastes etter målingen. Bare de to resultatene lagres; med synkronisering ligger de også på kontoen din. Du kan slette dem når som helst.",
       "body": "Puls og hjertefrekvensvariabilitet er helseopplysninger (art. 9 GDPR). KYDON måler dem bare hvis du samtykker her, og bruker dem bare til å vise dem for deg i historikken og i dagskonteksten."
     },
     "beats_other": "{{count}} slag",
@@ -2242,6 +2242,7 @@
     "title": "Nytt i KYDON:",
     "close": "Forstått",
     "items": {
+      "account": "Konto og synkronisering: KYDON synkroniserer nå av seg selv med kontoen din. Dataene dine er sikret på servere i EU og oppdatert på alle enhetene dine. Du kan slå det av i profilen — først ser du hva som da ikke lenger virker.",
       "design": "Nytt design: kort av frostet glass med nivåer, monotall for måleverdier og roligere overganger — lyst og mørkt.",
       "tests": "Testbibliotek etter protokoll 1.0: 126 tester i 29 områder, hver med mål, oppsett, trinn og vurdering.",
       "images": "Bilder av testoppsettene i beskrivelsene i stedet for skisser.",
@@ -2792,7 +2793,7 @@
     "saveNext": "Lagre, neste utøver",
     "backToList": "Tilbake til listen",
     "rule": "Det beste gyldige forsøket teller. Ugyldige forsøk blir lagret, men ikke vurdert.",
-    "offline": "Fungerer uten nett. Alt blir på denne enheten."
+    "offline": "Fungerer uten nett. Lagres først på denne enheten og synkroniseres så snart nettet er tilbake."
   },
   "ask": {
     "eyebrow": "Spørsmål",
@@ -4105,6 +4106,40 @@
       "athlete": "Utøver",
       "store": "Data",
       "other": "Annet"
+    }
+  },
+  "sync": {
+    "title": "Synkronisering med kontoen",
+    "hint": "Går av seg selv: dataene dine som sikkerhetskopi på servere i EU og på hver enhet der du er logget inn. Helsedata blir aldri med.",
+    "signedOut": "Innloggingen din er utløpt. Logg inn igjen, så synkroniserer KYDON videre.",
+    "enable": "Slå på synkronisering igjen",
+    "disable": "Slå av synkronisering",
+    "now": "Synkroniser nå",
+    "working": "Synkroniserer …",
+    "last": "Sist synkronisert: {{date}}",
+    "never": "Aldri synkronisert.",
+    "result": "{{pushed}} lastet opp, {{pulled}} hentet, {{series}} oppføringer synkronisert.",
+    "offline": "Ingen tilkobling. Synkroniseringen tar igjen når du er på nett igjen.",
+    "conflictTitle": "Avvikende tilstand",
+    "conflictBody": "Denne utøveren ble endret på en annen enhet. KYDON overskrev ingenting — begge tilstander er intakte. Lagre eksporten din først, og bestem deretter.",
+    "conflictKeepLocal": "Last opp denne journalen",
+    "conflictExplain": "Servertilstanden erstattes. Den andre veien — å hente servertilstanden — går via eksport, «slett alt» og en ny synkronisering.",
+    "whatLeaves": "Synkroniseres: målinger, profilopplysninger, notater, treningsprioriteringer, planer samt dagbok, økter, beslutninger og måltider. Ikke med: passordet ditt, importerte løpeturer og helsedata — de har sin egen krypterte vei.",
+    "auto": "KYDON synkroniserer av seg selv: etter oppstart, etter hver endring og så snart nettet er tilbake.",
+    "paused": "Synkroniseringen har vært slått av siden {{date}}.",
+    "frozen": "Kopien på kontoen din er fra {{date}}; det som er lagt til siden, finnes bare på denne enheten og i eksporten.",
+    "frozenNever": "Det ligger ennå ingen kopi på kontoen din; alt finnes bare på denne enheten og i eksporten.",
+    "offDialog": {
+      "eyebrow": "Slå av synkronisering",
+      "title": "Hva som da ikke lenger virker",
+      "backup": "Ingen sikkerhetskopi lenger. Mister du enheten eller tømmes nettleseren, er alt borte som er lagt til siden du slo den av — med mindre du har eksportert det.",
+      "devices": "De andre enhetene dine får ingen nye verdier, og endringer derfra kommer ikke fram hit.",
+      "coach": "Treneren din ser bare den sist synkroniserte tilstanden. Nye målinger, innsjekkinger og økter når ikke fram.",
+      "plans": "Planer og justeringer fra treneren din kommer ikke lenger fram til denne enheten.",
+      "server": "Kopien på kontoen din blir som den er — den slettes ikke. Du kan fjerne den helt med «Slett konto for godt».",
+      "local": "Måling fungerer som før, også uten nett. Du kan når som helst slå synkroniseringen på igjen; da hentes det inn som mangler.",
+      "confirm": "Slå av likevel",
+      "keep": "Behold synkronisering"
     }
   }
 }

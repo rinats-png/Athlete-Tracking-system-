@@ -107,7 +107,7 @@ Auswertung von Läufen und Einheiten aus **Strava- oder Garmin-Listen** (Datei-I
 
 ### 4.7 Konto und Sicherheit
 
-Gast- und Demomodus ohne Konto, Konto per E-Mail, Synchronisierung mit Konfliktbehandlung (beide Stände bleiben), serverseitige Kontolöschung, Zugriffsregeln (RLS) auf allen Tabellen, strikte Inhaltsrichtlinie, «Was ist neu»-Hinweis bei einer neuen App-Fassung.
+Konto Pflicht (Demo mit Beispieldaten, nie abgeglichen), Konto per E-Mail, automatischer Abgleich mit Konfliktbehandlung (beide Stände bleiben), im Profil abschaltbar mit Folgen-Fenster, serverseitige Kontolöschung, Zugriffsregeln (RLS) auf allen Tabellen, strikte Inhaltsrichtlinie, «Was ist neu»-Hinweis bei einer neuen App-Fassung.
 
 ## 5. Pakete und Preise
 
@@ -118,7 +118,7 @@ Quelle der Wahrheit: `src/data/pricing.ts`. Der Bezahlweg über Stripe ist gebau
 | Paket | Preis | Kern |
 |---|---|---|
 | Kydon (frei) | 0 € | Messen, Verlauf, Fehlerband, eigenes Profil, Export, Erinnerungen, Tagebuch leicht |
-| Plus | 49 €/Jahr · 4,90 €/Monat | Prognose, Saisonplan, Anforderungslücke, Perzentil, Sync, Card, Jahresrückblick, Trainingslog, Belastung, Ermüdungsresistenz, Sportanalyse |
+| Plus | 49 €/Jahr · 4,90 €/Monat | Prognose, Saisonplan, Anforderungslücke, Perzentil, Card, Jahresrückblick, Trainingslog, Belastung, Ermüdungsresistenz, Sportanalyse |
 | Pro | 99 €/Jahr · 9,90 €/Monat | zusätzlich Ernährung und Fuel, Läufe-Auswertung, Entscheidungslog, Cockpit |
 | Elite | 199 €/Jahr · 19,90 €/Monat | zusätzlich Gesundheit, Peak Week, Sportmodul |
 | Kydon Date | 69 € einmalig | Plus-Funktionen, Zielstandards, PDF-Bericht |

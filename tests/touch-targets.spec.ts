@@ -19,7 +19,7 @@ for (const route of ROUTES) {
       // Bestand geladen ist. Eine feste Wartezeit hat ihn gelegentlich noch
       // erwischt und dann seine Knöpfe mitten in der Einblendung gemessen —
       // gemessen wurde also die Animation, nicht die Fläche.
-      await expect(page.getByRole('button', { name: /Mit leerem Bestand starten/ })).toHaveCount(0)
+      await expect(page.getByRole('button', { name: /Eigenen Bestand anlegen/ })).toHaveCount(0)
       await page.getByRole('heading', { level: 1 }).first().waitFor()
     }
     // Eine laufende Einblendung skaliert ihr Element; erst danach ist die

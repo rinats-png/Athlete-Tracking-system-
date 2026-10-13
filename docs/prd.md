@@ -73,8 +73,9 @@ Norwegisch (Bokmål), Niederländisch. Primärmarkt DACH, dann Nord- und Westeur
    Qualitätsstufe (A–D). Fehlt eine Referenz, bleibt die Achse leer statt null.
 3. **Rauschen benennen.** Jede Veränderung bekommt ein Urteil: besser,
    schlechter, im Rauschen, Fehler unbekannt, Erstmessung.
-4. **Lokal zuerst.** Das Gerät ist die Quelle; die Cloud ist Sicherung und
-   Zusammenarbeit, keine Voraussetzung.
+4. **Gerät zuerst, Konto Pflicht.** Gemessen wird auf dem Gerät, auch ohne
+   Netz; mit dem Konto gleicht die App automatisch ab (Sicherung, zweites
+   Gerät, Trainer). Abschaltbar im Profil, mit den Folgen vor Augen.
 5. **Ehrlich verkaufen.** Keine Sperre mitten am Testtag; Grenzen werden
    angekündigt, mit Frist.
 
@@ -175,9 +176,9 @@ Status: ✅ gebaut · 🟡 teilweise / hinter Schalter · ⬜ offen.
 ### 7.6 Konto, Sync, Abrechnung
 | ID | Anforderung | Status |
 |---|---|---|
-| K-1 | Gast- und Demomodus ohne Konto | ✅ |
+| K-1 | Konto Pflicht; Demo mit Beispieldaten, nie abgeglichen | ✅ |
 | K-2 | Konto per E-Mail und Passwort; Kontolöschung serverseitig | ✅ |
-| K-3 | Synchronisierung mit Konfliktbehandlung (beide Stände bleiben) | ✅ |
+| K-3 | Automatischer Abgleich mit Konfliktbehandlung (beide Stände bleiben), abschaltbar mit Folgen-Fenster | ✅ |
 | K-4 | Abonnements über Stripe: Kasse, Kundenportal, Stufenwechsel | 🟡 live nur mit `VITE_BILLING=on` |
 | K-5 | Hochstufen anteilig und sofort, Herabstufen zur Verlängerung | ✅ |
 | K-6 | Überschreitung der Athletengrenze: 14 Tage Frist, danach nur bereits gezählte Athleten messbar | ✅ |
@@ -193,7 +194,7 @@ Quelle der Wahrheit: `src/data/pricing.ts`. Begründung: [preise.md](preise.md).
 | Paket | Preis | Athleten | Kern |
 |---|---|---|---|
 | Kydon (frei) | 0 € | 1 | Messen, Verlauf, Fehlerband, eigenes Profil, Export, Erinnerungen, Tagebuch leicht |
-| Plus | 49 €/Jahr · 4,90 €/Monat | 3 | Prognose, Saisonplan, Anforderungslücke, Perzentil, Sync, Card, Jahresrückblick, Trainingslog, Belastung, Ermüdungsresistenz, Sportanalyse |
+| Plus | 49 €/Jahr · 4,90 €/Monat | 3 | Prognose, Saisonplan, Anforderungslücke, Perzentil, Card, Jahresrückblick, Trainingslog, Belastung, Ermüdungsresistenz, Sportanalyse |
 | Pro | 99 €/Jahr · 9,90 €/Monat | 3 | + Ernährung, Entscheidungslog, Cockpit |
 | Elite | 199 €/Jahr · 19,90 €/Monat | 3 | + Gesundheit, Peak Week, Sportmodul |
 | Kydon Date | 69 € einmalig | 3 | Plus-Funktionen, Zielstandards, PDF-Bericht |
@@ -216,7 +217,7 @@ gesperrt. Auto-Hochstufung nur mit Zustimmung des Inhabers.
 | Bereich | Anforderung |
 |---|---|
 | **Offline** | Alle Kernfunktionen (Messen, Verlauf, Auswertung) ohne Netz. PWA mit Precache. |
-| **Datenschutz** | DSGVO: Daten lokal zuerst, Sync nur mit Konto und Zustimmung; Gesundheitsdaten Ende-zu-Ende verschlüsselt; Analytics nur mit Einwilligung, ohne IP und User-Agent; Auftragsverarbeitung für Trainer. |
+| **Datenschutz** | DSGVO: Daten zuerst auf dem Gerät, automatischer Abgleich mit dem Konto auf Servern in der EU (Art. 6 Abs. 1 lit. b), abschaltbar; Gesundheitsdaten Ende-zu-Ende verschlüsselt; Analytics nur mit Einwilligung, ohne IP und User-Agent; Auftragsverarbeitung für Trainer. |
 | **Sicherheit** | RLS auf allen Tabellen, statisch geprüft; strikte CSP; Geheimnisse nur in Umgebung/Vault; Security-Gate in CI ([sicherheit.md](sicherheit.md)). |
 | **Sprachen** | 8 Sprachen vollständig; Rechtstexte nur DE/EN, in den übrigen Sprachen ausdrücklich so benannt. |
 | **Geräte** | Telefon hoch und quer, Tablet, Desktop. Getestet in fünf Playwright-Profilen. |

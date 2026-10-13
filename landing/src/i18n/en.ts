@@ -69,7 +69,7 @@ export const en = {
   'why.4.title': 'Yours, and private',
   'why.4.short': 'Works offline, stores on your device first.',
   'why.4.text':
-    'Measuring works offline in the hall. Your data lives on your device first and syncs only if you want — designed for GDPR from day one.',
+    'Measuring works offline in the hall. Your data lives on your device first and is backed up automatically on servers in the EU with your account — designed for GDPR from day one.',
 
   'features.eyebrow': 'Inside the app',
   'features.title': 'Less text, more picture.<br /><span class="muted">Every answer one tap deep.</span>',

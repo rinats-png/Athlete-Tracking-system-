@@ -64,11 +64,18 @@ test.describe('Die Datenschutzerklärung beschreibt, was der Code tut', () => {
     await expect(page.getByText(/eu-central-1/)).toBeVisible()
   })
 
-  test('sie sagt, dass ohne Einschalten nichts übertragen wird', () => {
+  test('sie sagt, dass der Abgleich automatisch läuft und abschaltbar ist', () => {
     const text = privacyDocument('de')
       .sections.flatMap((s) => s.body)
       .join(' ')
-    expect(text).toContain('verlässt kein Messwert dein Gerät')
+    // Seit 13.10.2026: Konto Pflicht, Abgleich von selbst. Die alte Zusage
+    // («nichts verlässt das Gerät, bis du einschaltest») darf nicht mehr stehen.
+    expect(text).not.toContain('verlässt kein Messwert dein Gerät')
+    expect(text).toContain('gleicht die App deine Daten von selbst ab')
+    expect(text).toContain('Den Abgleich kannst du im Profil ausschalten')
+    expect(text).toContain('Art. 6 Abs. 1 lit. b DSGVO — der Abgleich ist Teil des Dienstes')
+    expect(text).toContain('Die Demo mit Beispieldaten wird nie abgeglichen')
+    expect(privacyDocument('en').sections.flatMap((s) => s.body).join(' ')).toContain('You can turn sync off in your profile')
     // Und dass der Export nie hinter einer Bezahlschranke steht (§32).
     expect(text).toContain('nie hinter einer Bezahlschranke')
   })
@@ -102,7 +109,10 @@ test.describe('Die Nutzungsbedingungen halten die Grenzen ein', () => {
       .sections.flatMap((s) => [s.heading, ...s.body])
       .join(' ')
     expect(text).toContain('Keine medizinische Diagnostik')
-    expect(text).toContain('keine Trainingspläne')
+    // Pläne gibt es, aber nur aus Regeln — und die Entscheidung bleibt beim Menschen.
+    expect(text).toContain('Kein Ersatz für Trainer, Ärztin oder Arzt')
+    expect(text).toContain('entscheidest du oder dein Trainer')
+    expect(text).toContain('Für die Nutzung brauchst du ein Konto')
   })
 
   test('sie versprechen keine Genauigkeit, die es nicht gibt (§81)', () => {
@@ -116,6 +126,8 @@ test.describe('Die Nutzungsbedingungen halten die Grenzen ein', () => {
 
 test.describe('Die Landeseite verweist auf die Dokumente', () => {
   test('die Zustimmung führt dorthin, wo steht, wozu man zustimmt', async ({ page }) => {
+    // Kein Fall spricht den echten Dienst an (siehe helpers.ts, offlineServer).
+    await page.context().route('**/*.supabase.co/**', (route) => route.abort())
     await page.goto('/', { waitUntil: 'domcontentloaded' })
     await page.evaluate(() => {
       localStorage.clear()
@@ -125,6 +137,8 @@ test.describe('Die Landeseite verweist auf die Dokumente', () => {
         'kydon.account.v1',
         JSON.stringify({ name: 'P', email: 'p@x.de', role: 'athlete', planId: null, createdAt: '2026-01-01T00:00:00.000Z' }),
       )
+      localStorage.setItem('kydon.auth', JSON.stringify({ access_token: 'stub', refresh_token: 'stub', token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + 3600, user: { id: '00000000-0000-4000-8000-000000000001', email: 'pruef@baseline.test' } }))
+      localStorage.setItem('kydon.sync.enabled', 'off')
     })
     await page.reload({ waitUntil: 'domcontentloaded' })
     await expect(page.getByRole('link', { name: 'Nutzungsbedingungen' })).toBeVisible()
