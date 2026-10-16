@@ -1,4 +1,5 @@
 import { ADDITIONAL_CATEGORIES, TABLE_DISCIPLINES } from './sportProfilesAdditions'
+import { masterV2Tests } from './sportProfilesMasterV2'
 import type { PerformanceDimension } from '@/types/domain'
 
 /**
@@ -1188,7 +1189,10 @@ export const DISCIPLINES: Discipline[] = [
   // stammen als die ursprünglichen vierzig.
   ...TABLE_DISCIPLINES,
   ...TEAM_FOOTBALL,
-]
+  // Zusatztests aus der Mastertabelle v2 (sportProfilesMasterV2.ts) werden
+  // angehängt, nicht eingeschoben: die bisherigen Zuordnungen bleiben, wie
+  // sie sind.
+].map((d) => ({ ...d, tests: [...d.tests, ...masterV2Tests(d.id, d.tests)] }))
 
 export const DISCIPLINE_BY_ID = new Map(DISCIPLINES.map((d) => [d.id, d]))
 export const CATEGORY_BY_ID = new Map(SPORT_CATEGORIES.map((c) => [c.id, c]))
