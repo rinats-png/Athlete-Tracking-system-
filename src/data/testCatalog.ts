@@ -30,6 +30,7 @@ import { DOCUMENT_TESTS } from './testCatalogDocument'
 import { EXTENDED_TESTS } from './testCatalogExtended'
 import { LIBRARY_TESTS } from './testCatalogLibrary'
 import { PROGRAM_TESTS } from './testCatalogProgram'
+import { FIELD_V2_TESTS } from './testCatalogFieldV2'
 import { vo2maxFromBeepTest, vo2maxFromCooper } from '@/lib/metrics'
 import { deriveRowing } from './testDeriveShared'
 
@@ -449,6 +450,8 @@ const TEST_BLUEPRINTS: TestBlueprint[] = [
   // Testbibliothek, Protokoll 1.0: Tests, die die App vorher nicht hatte.
   ...LIBRARY_TESTS,
   ...PROGRAM_TESTS,
+  // Feldtests aus der Mastertabelle v2; Formeln in domain/fieldPhysiology.ts.
+  ...FIELD_V2_TESTS,
 ]
 
 /**

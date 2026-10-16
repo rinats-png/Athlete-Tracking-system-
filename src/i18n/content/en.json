@@ -8326,5 +8326,513 @@
   "Heart rate strap; bike ergometer, rowing ergometer or treadmill": {
     "en": "Heart rate strap; bike ergometer, rowing ergometer or treadmill",
     "de": "Pulsgurt; Fahrradergometer, Ruderergometer oder Laufband"
+  },
+  "Only with your consent: phrasing of answers and the weekly brief by the language model Claude. Only keywords and numbers are sent, no name, no free text.": {
+    "en": "Only with your consent: phrasing of answers and the weekly brief by the language model Claude. Only keywords and numbers are sent, no name, no free text.",
+    "de": "Nur mit deiner Einwilligung: Formulierung von Antworten und Wochenbrief durch das Sprachmodell Claude. Es gehen nur Kennwörter und Zahlen raus, kein Name, kein Freitext."
+  },
+  "Critical speed test (2–3 runs)": {
+    "en": "Critical speed test (2–3 runs)",
+    "de": "Critical-Speed-Test (2–3 Läufe)"
+  },
+  "Critical speed": {
+    "en": "Critical speed",
+    "de": "Critical Speed"
+  },
+  "Critical speed from two or three maximal runs of 2 to 15 minutes each. The speed that can be sustained for a long time, and the reserve above it.": {
+    "en": "Critical speed from two or three maximal runs of 2 to 15 minutes each. The speed that can be sustained for a long time, and the reserve above it.",
+    "de": "Kritische Geschwindigkeit aus zwei oder drei maximalen Läufen von je 2 bis 15 Minuten. Die Geschwindigkeit, die sich lange halten lässt, und die Reserve darüber."
+  },
+  "Two or three maximal runs of different length on the track, e.g. 1200, 2400 and 3600 m, with at least 30 minutes of rest in between. Each run must last between 2 and 15 minutes; shorter or longer runs do not count. Enter distance and time for each run.": {
+    "en": "Two or three maximal runs of different length on the track, e.g. 1200, 2400 and 3600 m, with at least 30 minutes of rest in between. Each run must last between 2 and 15 minutes; shorter or longer runs do not count. Enter distance and time for each run.",
+    "de": "Zwei oder drei maximale Läufe verschiedener Länge auf der Bahn, z. B. 1200, 2400 und 3600 m, mit mindestens 30 Minuten Pause dazwischen. Jeder Lauf muss zwischen 2 und 15 Minuten dauern; kürzere oder längere Läufe zählen nicht. Strecke und Zeit je Lauf eintragen."
+  },
+  "3-minute all-out run": {
+    "en": "3-minute all-out run",
+    "de": "3-Minuten-All-Out-Lauf"
+  },
+  "3MT": {
+    "en": "3MT",
+    "de": "3MT"
+  },
+  "Three minutes flat out with no pacing. The speed over the last 30 seconds estimates critical speed.": {
+    "en": "Three minutes flat out with no pacing. The speed over the last 30 seconds estimates critical speed.",
+    "de": "Drei Minuten maximal ohne Einteilung. Die Geschwindigkeit der letzten 30 Sekunden schätzt die kritische Geschwindigkeit."
+  },
+  "Warm up thoroughly. Then run as fast as possible from the start and do not pace until the end. Record the distance at 2:30 min and at 3:00 min, ideally with a GPS watch or markers every 10 m.": {
+    "en": "Warm up thoroughly. Then run as fast as possible from the start and do not pace until the end. Record the distance at 2:30 min and at 3:00 min, ideally with a GPS watch or markers every 10 m.",
+    "de": "Gründlich aufwärmen. Dann vom Start weg so schnell wie möglich laufen und bis zum Ende nicht einteilen. Strecke nach 2:30 min und nach 3:00 min erfassen, am besten per GPS-Uhr oder Markierungen alle 10 m."
+  },
+  "Running track, GPS watch or markers, stopwatch": {
+    "en": "Running track, GPS watch or markers, stopwatch",
+    "de": "Laufbahn, GPS-Uhr oder Markierungen, Stoppuhr"
+  },
+  "5-minute run (MAS)": {
+    "en": "5-minute run (MAS)",
+    "de": "5-Minuten-Lauf (MAS)"
+  },
+  "MAS 5 min": {
+    "en": "MAS 5 min",
+    "de": "MAS 5 min"
+  },
+  "Maximum distance in five minutes. The average speed estimates maximal aerobic speed (MAS).": {
+    "en": "Maximum distance in five minutes. The average speed estimates maximal aerobic speed (MAS).",
+    "de": "Maximale Strecke in fünf Minuten. Die mittlere Geschwindigkeit schätzt die maximale aerobe Geschwindigkeit (MAS)."
+  },
+  "After warming up, run as far as possible in five minutes, evenly paced. Record the distance to the nearest 5 m.": {
+    "en": "After warming up, run as far as possible in five minutes, evenly paced. Record the distance to the nearest 5 m.",
+    "de": "Nach dem Aufwärmen fünf Minuten so weit wie möglich laufen, gleichmässig eingeteilt. Strecke auf 5 m genau erfassen."
+  },
+  "Bronco test (1200 m shuttle)": {
+    "en": "Bronco test (1200 m shuttle)",
+    "de": "Bronco-Test (1200 m Pendel)"
+  },
+  "Bronco": {
+    "en": "Bronco",
+    "de": "Bronco"
+  },
+  "Five sets of 20-40-60 m shuttles without rest, 1200 m in total. A team-sport test of aerobic capacity.": {
+    "en": "Five sets of 20-40-60 m shuttles without rest, 1200 m in total. A team-sport test of aerobic capacity.",
+    "de": "Fünf Durchgänge 20-40-60 m Pendellauf ohne Pause, 1200 m insgesamt. Mannschaftssporttest für die aerobe Leistungsfähigkeit."
+  },
+  "Markers at 0, 20, 40 and 60 m. One set: 20 m out and back, 40 m out and back, 60 m out and back. Five sets without rest, against the clock.": {
+    "en": "Markers at 0, 20, 40 and 60 m. One set: 20 m out and back, 40 m out and back, 60 m out and back. Five sets without rest, against the clock.",
+    "de": "Markierungen bei 0, 20, 40 und 60 m. Ein Durchgang: 20 m hin und zurück, 40 m hin und zurück, 60 m hin und zurück. Fünf Durchgänge ohne Pause auf Zeit."
+  },
+  "4 markers, tape measure, stopwatch": {
+    "en": "4 markers, tape measure, stopwatch",
+    "de": "4 Markierungen, Massband, Stoppuhr"
+  },
+  "30-15 Intermittent Fitness Test": {
+    "en": "30-15 Intermittent Fitness Test",
+    "de": "30-15 Intermittent Fitness Test"
+  },
+  "30-15 IFT": {
+    "en": "30-15 IFT",
+    "de": "30-15 IFT"
+  },
+  "30 seconds of shuttle running, 15 seconds of rest, at increasing speed. The result is the final speed; an estimated VO2max follows from it (error about ±5 ml/kg/min).": {
+    "en": "30 seconds of shuttle running, 15 seconds of rest, at increasing speed. The result is the final speed; an estimated VO2max follows from it (error about ±5 ml/kg/min).",
+    "de": "30 Sekunden Pendellauf, 15 Sekunden Pause, mit steigendem Tempo. Ergebnis ist die Endgeschwindigkeit; daraus eine geschätzte VO2max (Fehler etwa ±5 ml/kg/min)."
+  },
+  "Shuttle run over 40 m to an audio signal: 30 s running, 15 s walking. Start at 8 km/h, each stage 0.5 km/h faster. The result is the speed of the last completed stage.": {
+    "en": "Shuttle run over 40 m to an audio signal: 30 s running, 15 s walking. Start at 8 km/h, each stage 0.5 km/h faster. The result is the speed of the last completed stage.",
+    "de": "Pendellauf über 40 m nach Tonsignal: 30 s laufen, 15 s gehen. Start bei 8 km/h, jede Stufe 0,5 km/h schneller. Ergebnis ist die Geschwindigkeit der letzten vollständig gelaufenen Stufe."
+  },
+  "40 m marked course, audio protocol": {
+    "en": "40 m marked course, audio protocol",
+    "de": "40 m markierte Strecke, Audio-Protokoll"
+  },
+  "Talk test (first threshold)": {
+    "en": "Talk test (first threshold)",
+    "de": "Talk-Test (erste Schwelle)"
+  },
+  "Talk test": {
+    "en": "Talk test",
+    "de": "Talk-Test"
+  },
+  "A stage test while reading aloud. The stage at which speaking first becomes difficult lies close to the first ventilatory threshold.": {
+    "en": "A stage test while reading aloud. The stage at which speaking first becomes difficult lies close to the first ventilatory threshold.",
+    "de": "Stufentest mit lautem Vorlesen. Die Stufe, ab der Sprechen erstmals schwerfällt, liegt nahe der ersten ventilatorischen Schwelle."
+  },
+  "Treadmill or track, stages of 2–3 minutes with increasing speed. At the end of each stage read a fixed text of about 30 words aloud. Enter the speed of the first stage at which speaking is no longer fully comfortable.": {
+    "en": "Treadmill or track, stages of 2–3 minutes with increasing speed. At the end of each stage read a fixed text of about 30 words aloud. Enter the speed of the first stage at which speaking is no longer fully comfortable.",
+    "de": "Laufband oder Bahn, Stufen von 2–3 Minuten mit steigendem Tempo. Am Ende jeder Stufe einen festen Text von etwa 30 Wörtern laut lesen. Eingetragen wird das Tempo der ersten Stufe, auf der Sprechen nicht mehr ganz mühelos ist."
+  },
+  "Treadmill or track, heart rate monitor, reading text": {
+    "en": "Treadmill or track, heart rate monitor, reading text",
+    "de": "Laufband oder Bahn, Pulsmesser, Lesetext"
+  },
+  "Ruffier-Dickson test": {
+    "en": "Ruffier-Dickson test",
+    "de": "Ruffier-Dickson-Test"
+  },
+  "Ruffier": {
+    "en": "Ruffier",
+    "de": "Ruffier"
+  },
+  "30 squats in 45 seconds, pulse before, after and one minute later. An index of the heart-rate response — not a measure of endurance performance.": {
+    "en": "30 squats in 45 seconds, pulse before, after and one minute later. An index of the heart-rate response — not a measure of endurance performance.",
+    "de": "30 Kniebeugen in 45 Sekunden, Puls davor, danach und nach einer Minute. Ein Index der Pulsreaktion — kein Mass für die Ausdauerleistung."
+  },
+  "Lie still for five minutes, measure the resting pulse. Then 30 deep squats in 45 seconds. Measure the pulse immediately afterwards standing and after one minute of rest lying down.": {
+    "en": "Lie still for five minutes, measure the resting pulse. Then 30 deep squats in 45 seconds. Measure the pulse immediately afterwards standing and after one minute of rest lying down.",
+    "de": "Fünf Minuten ruhig liegen, Ruhepuls messen. Dann 30 tiefe Kniebeugen in 45 Sekunden. Puls sofort danach im Stehen und nach einer Minute Ruhe im Liegen messen."
+  },
+  "Heart rate monitor or stopwatch": {
+    "en": "Heart rate monitor or stopwatch",
+    "de": "Pulsmesser oder Stoppuhr"
+  },
+  "Margaria-Kalamen stair sprint": {
+    "en": "Margaria-Kalamen stair sprint",
+    "de": "Margaria-Kalamen-Treppensprint"
+  },
+  "Margaria": {
+    "en": "Margaria",
+    "de": "Margaria"
+  },
+  "Stair sprint with a run-up, three steps per stride. Power in watts follows from body mass, height and the time between step 3 and step 9.": {
+    "en": "Stair sprint with a run-up, three steps per stride. Power in watts follows from body mass, height and the time between step 3 and step 9.",
+    "de": "Treppensprint mit Anlauf, je drei Stufen pro Schritt. Aus Körpermasse, Höhe und Zeit zwischen Stufe 3 und 9 entsteht die Leistung in Watt."
+  },
+  "Six metres run-up, then up the stairs three steps at a time (step 3, 6, 9). Time is measured from contact on step 3 to step 9, ideally with contact mats. Measure the height difference between step 3 and step 9 once.": {
+    "en": "Six metres run-up, then up the stairs three steps at a time (step 3, 6, 9). Time is measured from contact on step 3 to step 9, ideally with contact mats. Measure the height difference between step 3 and step 9 once.",
+    "de": "Sechs Meter Anlauf, dann die Treppe im Dreierschritt hinauf (Stufe 3, 6, 9). Gemessen wird die Zeit vom Aufsetzen auf Stufe 3 bis Stufe 9, am besten mit Kontaktmatten. Den Höhenunterschied zwischen Stufe 3 und 9 einmal ausmessen."
+  },
+  "Stairs (at least 9 steps), timing, tape measure": {
+    "en": "Stairs (at least 9 steps), timing, tape measure",
+    "de": "Treppe (mind. 9 Stufen), Zeitmessung, Massband"
+  },
+  "Flying 20 m sprint": {
+    "en": "Flying 20 m sprint",
+    "de": "Fliegender 20-m-Sprint"
+  },
+  "20 m flying": {
+    "en": "20 m flying",
+    "de": "20 m fliegend"
+  },
+  "20 m timed zone after a run-up. The speed through it is the maximal sprint speed (MSS).": {
+    "en": "20 m timed zone after a run-up. The speed through it is the maximal sprint speed (MSS).",
+    "de": "20 m Messstrecke nach Anlauf. Die Geschwindigkeit darauf ist die maximale Sprintgeschwindigkeit (MSS)."
+  },
+  "About 20–30 m run-up, then through the 20 m timed zone at full speed. Time with timing gates at the start and end of the zone. Three attempts, full rest.": {
+    "en": "About 20–30 m run-up, then through the 20 m timed zone at full speed. Time with timing gates at the start and end of the zone. Three attempts, full rest.",
+    "de": "Etwa 20–30 m Anlauf, dann mit voller Geschwindigkeit durch die 20-m-Messstrecke. Zeit mit Lichtschranken am Anfang und Ende der Messstrecke. Drei Versuche, volle Pausen."
+  },
+  "Timing gates, tape measure, markers": {
+    "en": "Timing gates, tape measure, markers",
+    "de": "Lichtschranken, Massband, Markierungen"
+  },
+  "Drop jump (reactive strength index)": {
+    "en": "Drop jump (reactive strength index)",
+    "de": "Drop Jump (Reaktivkraftindex)"
+  },
+  "Drop jump": {
+    "en": "Drop jump",
+    "de": "Drop Jump"
+  },
+  "Drop from a box with an immediate rebound. Jump height divided by ground contact time gives the reactive strength index (RSI).": {
+    "en": "Drop from a box with an immediate rebound. Jump height divided by ground contact time gives the reactive strength index (RSI).",
+    "de": "Tiefsprung von einer Box mit sofortigem Absprung. Sprunghöhe geteilt durch Bodenkontaktzeit ergibt den Reaktivkraftindex (RSI)."
+  },
+  "Step forward off a box (standard 30 cm, enter the height), land on both feet and jump as quickly and as high as possible. Hands on hips. Take contact time and flight time or jump height from the jump mat. Three attempts.": {
+    "en": "Step forward off a box (standard 30 cm, enter the height), land on both feet and jump as quickly and as high as possible. Hands on hips. Take contact time and flight time or jump height from the jump mat. Three attempts.",
+    "de": "Von einer Box (Standard 30 cm, Höhe eintragen) einen Schritt nach vorn fallen lassen, beidbeinig landen und so kurz wie möglich und so hoch wie möglich abspringen. Hände in den Hüften. Kontaktzeit und Flugzeit oder Sprunghöhe von der Sprungmatte übernehmen. Drei Versuche."
+  },
+  "Jump mat or force plate, stable box": {
+    "en": "Jump mat or force plate, stable box",
+    "de": "Sprungmatte oder Kraftmessplatte, stabile Box"
+  },
+  "Five-bound test": {
+    "en": "Five-bound test",
+    "de": "Fünfersprung (5-Bound-Test)"
+  },
+  "5-bound": {
+    "en": "5-bound",
+    "de": "5-Bound"
+  },
+  "Five alternating bounds from a standing start, for distance. Measures horizontal reactive jumping power.": {
+    "en": "Five alternating bounds from a standing start, for distance. Measures horizontal reactive jumping power.",
+    "de": "Fünf Wechselsprünge aus dem Stand auf Weite. Misst horizontale, reaktive Sprungkraft."
+  },
+  "From a closed stance, five alternating bounds (left, right, left, right, left), landing on both feet. Measured from the start line to the rearmost landing mark. Three attempts.": {
+    "en": "From a closed stance, five alternating bounds (left, right, left, right, left), landing on both feet. Measured from the start line to the rearmost landing mark. Three attempts.",
+    "de": "Aus geschlossenem Stand fünf Wechselsprünge (links, rechts, links, rechts, links), Landung beidbeinig. Gemessen wird von der Startlinie bis zur hintersten Landespur. Drei Versuche."
+  },
+  "Tape measure, level surface": {
+    "en": "Tape measure, level surface",
+    "de": "Massband, ebene Fläche"
+  },
+  "Bosco jump test (60 s)": {
+    "en": "Bosco jump test (60 s)",
+    "de": "Bosco-Sprungtest (60 s)"
+  },
+  "Bosco 60 s": {
+    "en": "Bosco 60 s",
+    "de": "Bosco 60 s"
+  },
+  "60 seconds of continuous maximal jumping. Average power in W/kg follows from flight time and the number of jumps.": {
+    "en": "60 seconds of continuous maximal jumping. Average power in W/kg follows from flight time and the number of jumps.",
+    "de": "60 Sekunden durchgehend maximal springen. Aus Flugzeit und Zahl der Sprünge entsteht die mittlere Leistung in W/kg."
+  },
+  "Jump maximally on the jump mat for 60 seconds without pausing, hands on hips, knees bent to about 90° on landing. Take the number of jumps and the total flight time from the mat.": {
+    "en": "Jump maximally on the jump mat for 60 seconds without pausing, hands on hips, knees bent to about 90° on landing. Take the number of jumps and the total flight time from the mat.",
+    "de": "Auf der Sprungmatte 60 Sekunden ohne Pause maximal springen, Hände in den Hüften, Knie bei der Landung etwa 90° gebeugt. Zahl der Sprünge und Summe der Flugzeiten von der Matte übernehmen."
+  },
+  "Jump mat with flight-time measurement": {
+    "en": "Jump mat with flight-time measurement",
+    "de": "Sprungmatte mit Flugzeitmessung"
+  },
+  "Seated medicine ball throw": {
+    "en": "Seated medicine ball throw",
+    "de": "Medizinballstoss im Sitzen"
+  },
+  "Seated med ball": {
+    "en": "Seated med ball",
+    "de": "Medball sitzend"
+  },
+  "Two-handed chest pass while seated, back against the wall. Measures upper-body power without leg drive.": {
+    "en": "Two-handed chest pass while seated, back against the wall. Measures upper-body power without leg drive.",
+    "de": "Beidarmiger Brustwurf im Sitzen, Rücken an der Wand. Misst die Schnellkraft des Oberkörpers ohne Beinarbeit."
+  },
+  "Sit with legs straight, back against the wall. Hold the ball at the chest and push it as far forward as possible; the back stays on the wall. Measured to the first impact. Enter the ball mass and keep it the same when retesting.": {
+    "en": "Sit with legs straight, back against the wall. Hold the ball at the chest and push it as far forward as possible; the back stays on the wall. Measured to the first impact. Enter the ball mass and keep it the same when retesting.",
+    "de": "Mit gestreckten Beinen sitzen, Rücken an der Wand. Ball vor der Brust halten und so weit wie möglich nach vorn stossen, der Rücken bleibt an der Wand. Gemessen bis zum ersten Aufprall. Ballgewicht eintragen und bei Wiederholung gleich lassen."
+  },
+  "Medicine ball, wall, tape measure": {
+    "en": "Medicine ball, wall, tape measure",
+    "de": "Medizinball, Wand, Massband"
+  },
+  "Plyometric push-ups (10 s)": {
+    "en": "Plyometric push-ups (10 s)",
+    "de": "Explosive Liegestütze (10 s)"
+  },
+  "Plyo push-up": {
+    "en": "Plyo push-up",
+    "de": "Plyo-Liegestütz"
+  },
+  "As many push-ups with the hands leaving the floor as possible in 10 seconds. Upper-body power with no equipment.": {
+    "en": "As many push-ups with the hands leaving the floor as possible in 10 seconds. Upper-body power with no equipment.",
+    "de": "So viele Liegestütze mit Abheben der Hände wie möglich in 10 Sekunden. Schnellkraft des Oberkörpers ohne Gerät."
+  },
+  "Push-up position. Each repetition explosive enough that both hands leave the floor. Only complete repetitions count: chest to one fist above the floor, arms extended at the top.": {
+    "en": "Push-up position. Each repetition explosive enough that both hands leave the floor. Only complete repetitions count: chest to one fist above the floor, arms extended at the top.",
+    "de": "Liegestützposition. Jede Wiederholung so explosiv, dass beide Hände vom Boden abheben. Gezählt wird nur, was vollständig ist: Brust bis eine Faust über dem Boden, Arme oben gestreckt."
+  },
+  "Wall sit (90°)": {
+    "en": "Wall sit (90°)",
+    "de": "Wandsitz (90°)"
+  },
+  "Wall sit": {
+    "en": "Wall sit",
+    "de": "Wandsitz"
+  },
+  "Isometric hold with the back against the wall and knees at a right angle. Strength endurance of the knee extensors.": {
+    "en": "Isometric hold with the back against the wall and knees at a right angle. Strength endurance of the knee extensors.",
+    "de": "Isometrisches Halten mit Rücken an der Wand und Knien im rechten Winkel. Kraftausdauer der Beinstrecker."
+  },
+  "Slide down the wall until thighs and shins form a right angle. Arms crossed over the chest. Time until failure or until the angle clearly gives way.": {
+    "en": "Slide down the wall until thighs and shins form a right angle. Arms crossed over the chest. Time until failure or until the angle clearly gives way.",
+    "de": "Rücken an der Wand hinabgleiten, bis Ober- und Unterschenkel einen rechten Winkel bilden. Arme vor der Brust gekreuzt. Zeit bis zum Abbruch oder bis der Winkel deutlich nachgibt."
+  },
+  "Wall, stopwatch": {
+    "en": "Wall, stopwatch",
+    "de": "Wand, Stoppuhr"
+  },
+  "Single-leg squat (pistol)": {
+    "en": "Single-leg squat (pistol)",
+    "de": "Einbeinige Kniebeuge (Pistol)"
+  },
+  "Pistol": {
+    "en": "Pistol",
+    "de": "Pistol"
+  },
+  "Maximum clean repetitions per leg. The weaker side is the result; the side-to-side difference is shown alongside.": {
+    "en": "Maximum clean repetitions per leg. The weaker side is the result; the side-to-side difference is shown alongside.",
+    "de": "Maximale saubere Wiederholungen je Bein. Die schwächere Seite ist das Ergebnis, der Seitenunterschied steht daneben."
+  },
+  "Standing on one leg, lower until touching a box (knee height) and stand up without momentum, free leg in front. Each leg to failure; only clean repetitions count.": {
+    "en": "Standing on one leg, lower until touching a box (knee height) and stand up without momentum, free leg in front. Each leg to failure; only clean repetitions count.",
+    "de": "Auf einem Bein stehend bis zum Kontakt mit einer Box (Kniehöhe) absenken und ohne Schwung aufstehen, das freie Bein vorn. Je Bein bis zum Abbruch; gezählt werden nur saubere Wiederholungen."
+  },
+  "Box or bench at knee height": {
+    "en": "Box or bench at knee height",
+    "de": "Box oder Bank in Kniehöhe"
+  },
+  "Dips (max reps)": {
+    "en": "Dips (max reps)",
+    "de": "Dips (maximal)"
+  },
+  "Dips": {
+    "en": "Dips",
+    "de": "Dips"
+  },
+  "Maximum repetitions on parallel bars. Upper-body pressing strength endurance.": {
+    "en": "Maximum repetitions on parallel bars. Upper-body pressing strength endurance.",
+    "de": "Maximale Wiederholungen am Barren. Drückkraftausdauer des Oberkörpers."
+  },
+  "Support on parallel bars with straight arms. Lower until the upper arms are horizontal, then press up fully. Without pausing until failure.": {
+    "en": "Support on parallel bars with straight arms. Lower until the upper arms are horizontal, then press up fully. Without pausing until failure.",
+    "de": "Stütz am Barren mit gestreckten Armen. Absenken, bis die Oberarme waagerecht sind, dann vollständig hochdrücken. Ohne Pause bis zum Abbruch."
+  },
+  "Parallel bars or dip station": {
+    "en": "Parallel bars or dip station",
+    "de": "Barren oder Dip-Station"
+  },
+  "Inverted row (max reps)": {
+    "en": "Inverted row (max reps)",
+    "de": "Körperrudern (maximal)"
+  },
+  "Inverted row": {
+    "en": "Inverted row",
+    "de": "Körperrudern"
+  },
+  "Maximum repetitions at a hip-height bar. Horizontal pulling strength endurance.": {
+    "en": "Maximum repetitions at a hip-height bar. Horizontal pulling strength endurance.",
+    "de": "Maximale Wiederholungen an einer hüfthohen Stange. Horizontale Zugkraftausdauer."
+  },
+  "Hang under a hip-height bar, body straight, heels on the floor. Pull the chest to the bar and lower fully. Note the bar height and keep it the same when retesting.": {
+    "en": "Hang under a hip-height bar, body straight, heels on the floor. Pull the chest to the bar and lower fully. Note the bar height and keep it the same when retesting.",
+    "de": "Unter einer hüfthohen Stange hängen, Körper gestreckt, Fersen am Boden. Brust zur Stange ziehen und vollständig ablassen. Stangenhöhe notieren und bei Wiederholung gleich lassen."
+  },
+  "Bar in a rack or rings": {
+    "en": "Bar in a rack or rings",
+    "de": "Stange im Rack oder Ringe"
+  },
+  "Copenhagen adductor hold": {
+    "en": "Copenhagen adductor hold",
+    "de": "Copenhagen-Adduktorenhalten"
+  },
+  "Copenhagen": {
+    "en": "Copenhagen",
+    "de": "Copenhagen"
+  },
+  "Side plank with the top leg on a bench. Hold time per side for the adductors; the weaker side is the result.": {
+    "en": "Side plank with the top leg on a bench. Hold time per side for the adductors; the weaker side is the result.",
+    "de": "Seitstütz mit dem oberen Bein auf einer Bank. Haltezeit je Seite für die Adduktoren; die schwächere Seite ist das Ergebnis."
+  },
+  "Side plank on the forearm, the top leg resting with the inside of the knee (easier) or ankle (harder) on a bench, the bottom leg free. Keep the body straight. Note the variant and keep it the same when retesting.": {
+    "en": "Side plank on the forearm, the top leg resting with the inside of the knee (easier) or ankle (harder) on a bench, the bottom leg free. Keep the body straight. Note the variant and keep it the same when retesting.",
+    "de": "Seitstütz auf dem Unterarm, das obere Bein mit der Innenseite des Knies (leichter) oder des Knöchels (schwerer) auf einer Bank, das untere Bein frei. Körper gestreckt halten. Variante festhalten und bei Wiederholung gleich lassen."
+  },
+  "Bench, stopwatch": {
+    "en": "Bench, stopwatch",
+    "de": "Bank, Stoppuhr"
+  },
+  "Single-leg hamstring bridge": {
+    "en": "Single-leg hamstring bridge",
+    "de": "Einbeinige Hamstring-Brücke"
+  },
+  "SLHB": {
+    "en": "SLHB",
+    "de": "SLHB"
+  },
+  "Single-leg hip bridges with the heel on a 60 cm box, to exhaustion. Hamstring strength endurance per side (Freckleton et al. 2014).": {
+    "en": "Single-leg hip bridges with the heel on a 60 cm box, to exhaustion. Hamstring strength endurance per side (Freckleton et al. 2014).",
+    "de": "Einbeinige Hüftbrücken mit der Ferse auf einer 60-cm-Box, bis zur Erschöpfung. Kraftausdauer der hinteren Oberschenkel je Seite (Freckleton et al. 2014)."
+  },
+  "Lie on your back, heel on a 60 cm box, knee slightly bent, other leg vertical. Extend the hips fully and lower without resting. Each leg until failure or until form breaks down.": {
+    "en": "Lie on your back, heel on a 60 cm box, knee slightly bent, other leg vertical. Extend the hips fully and lower without resting. Each leg until failure or until form breaks down.",
+    "de": "Rückenlage, Ferse auf einer 60 cm hohen Box, Knie leicht gebeugt, anderes Bein senkrecht. Hüfte vollständig strecken und absenken, ohne abzulegen. Je Bein bis zum Abbruch oder bis die Ausführung nachlässt."
+  },
+  "60 cm box, mat": {
+    "en": "60 cm box, mat",
+    "de": "Box 60 cm, Matte"
+  },
+  "Force-velocity profile (squat jump)": {
+    "en": "Force-velocity profile (squat jump)",
+    "de": "Kraft-Geschwindigkeits-Profil (Squat Jump)"
+  },
+  "FV profile jump": {
+    "en": "FV profile jump",
+    "de": "FV-Profil Sprung"
+  },
+  "Squat jumps without and with added load. From them, after Samozino, theoretical maximal force (F0), maximal velocity (v0) and power (Pmax). The measurement error is large — for tracking, not as a diagnosis.": {
+    "en": "Squat jumps without and with added load. From them, after Samozino, theoretical maximal force (F0), maximal velocity (v0) and power (Pmax). The measurement error is large — for tracking, not as a diagnosis.",
+    "de": "Squat Jumps ohne und mit Zusatzlast. Daraus nach Samozino die theoretische Maximalkraft (F0), Maximalgeschwindigkeit (v0) und Leistung (Pmax). Der Messfehler ist gross — für den Verlauf, nicht als Diagnose."
+  },
+  "Measure the push-off distance once: extended leg length (hip to toe) minus hip-to-floor distance in the 90° squat. Then squat jumps from 90° without a countermovement: unloaded and with one or two added loads (e.g. 25 % and 50 % of body mass). Enter the best of two jumps per load.": {
+    "en": "Measure the push-off distance once: extended leg length (hip to toe) minus hip-to-floor distance in the 90° squat. Then squat jumps from 90° without a countermovement: unloaded and with one or two added loads (e.g. 25 % and 50 % of body mass). Enter the best of two jumps per load.",
+    "de": "Abdruckweg einmal messen: Beinlänge gestreckt (Hüfte bis Fussspitze) minus Abstand Hüfte–Boden in der 90°-Hocke. Dann Squat Jumps aus 90° ohne Ausholen: ohne Last und mit ein bis zwei Zusatzlasten (z. B. 25 % und 50 % der Körpermasse). Je Last den besten von zwei Sprüngen eintragen."
+  },
+  "Jump mat, barbell or added load, tape measure": {
+    "en": "Jump mat, barbell or added load, tape measure",
+    "de": "Sprungmatte, Langhantel oder Zusatzlast, Massband"
+  },
+  "Sandbag lunges 100 m": {
+    "en": "Sandbag lunges 100 m",
+    "de": "Sandbag Lunges 100 m"
+  },
+  "Sandbag lunges": {
+    "en": "Sandbag lunges",
+    "de": "Sandbag Lunges"
+  },
+  "100 m of walking lunges with a sandbag on the shoulders, against the clock. The HYROX station as a standalone test.": {
+    "en": "100 m of walking lunges with a sandbag on the shoulders, against the clock. The HYROX station as a standalone test.",
+    "de": "100 m Ausfallschritte mit Sandsack auf den Schultern, auf Zeit. Die HYROX-Station als Einzeltest."
+  },
+  "Sandbag on the shoulders or neck, enter the load (competition: 10, 20 or 30 kg). Alternating lunges, the back knee touches the floor, extend the hips at the top. 100 m against the clock.": {
+    "en": "Sandbag on the shoulders or neck, enter the load (competition: 10, 20 or 30 kg). Alternating lunges, the back knee touches the floor, extend the hips at the top. 100 m against the clock.",
+    "de": "Sandsack auf Schultern oder Nacken, Last eintragen (Wettkampf: 10, 20 oder 30 kg). Ausfallschritte im Wechsel, das hintere Knie berührt den Boden, im Stand die Hüfte strecken. 100 m auf Zeit."
+  },
+  "Sandbag, 100 m course, stopwatch": {
+    "en": "Sandbag, 100 m course, stopwatch",
+    "de": "Sandsack, 100 m Strecke, Stoppuhr"
+  },
+  "3-minute burpee test": {
+    "en": "3-minute burpee test",
+    "de": "3-Minuten-Burpee-Test"
+  },
+  "Burpees 3 min": {
+    "en": "Burpees 3 min",
+    "de": "Burpees 3 min"
+  },
+  "As many complete burpees as possible in three minutes. Highly reproducible (CV below 3 %).": {
+    "en": "As many complete burpees as possible in three minutes. Highly reproducible (CV below 3 %).",
+    "de": "So viele vollständige Burpees wie möglich in drei Minuten. Gut reproduzierbar (CV unter 3 %)."
+  },
+  "From standing into a squat, jump the feet back into a plank, jump the feet forward again, stand up and extend. Every complete repetition counts.": {
+    "en": "From standing into a squat, jump the feet back into a plank, jump the feet forward again, stand up and extend. Every complete repetition counts.",
+    "de": "Aus dem Stand in die Hocke, Füsse in den Liegestütz zurückspringen, Füsse wieder nach vorn, aufrichten und strecken. Gezählt wird jede vollständige Wiederholung."
+  },
+  "Stopwatch, counter": {
+    "en": "Stopwatch, counter",
+    "de": "Stoppuhr, Zähler"
+  },
+  "Sprawl test (60 s)": {
+    "en": "Sprawl test (60 s)",
+    "de": "Sprawl-Test (60 s)"
+  },
+  "Sprawls 60 s": {
+    "en": "Sprawls 60 s",
+    "de": "Sprawls 60 s"
+  },
+  "As many sprawls as possible in 60 seconds — the defence against a takedown, without a partner.": {
+    "en": "As many sprawls as possible in 60 seconds — the defence against a takedown, without a partner.",
+    "de": "So viele Sprawls wie möglich in 60 Sekunden — die Abwehrbewegung gegen den Takedown, ohne Partner."
+  },
+  "From the fighting stance throw hips and legs back, hips to the floor, then straight back into the fighting stance. Every return to the stance counts.": {
+    "en": "From the fighting stance throw hips and legs back, hips to the floor, then straight back into the fighting stance. Every return to the stance counts.",
+    "de": "Aus der Kampfstellung Hüfte und Beine nach hinten werfen, Hüfte am Boden, sofort zurück in die Kampfstellung. Gezählt wird jede Rückkehr in die Kampfstellung."
+  },
+  "Casualty drag (20 m)": {
+    "en": "Casualty drag (20 m)",
+    "de": "Personenrettung ziehen (20 m)"
+  },
+  "Casualty drag": {
+    "en": "Casualty drag",
+    "de": "Casualty Drag"
+  },
+  "Drag a dummy or partner 20 m backwards in a rescue grip. A job-related task for fire, police, military and emergency services.": {
+    "en": "Drag a dummy or partner 20 m backwards in a rescue grip. A job-related task for fire, police, military and emergency services.",
+    "de": "Eine Puppe oder einen Partner im Rettungsgriff 20 m rückwärts ziehen. Einsatznahe Aufgabe für Feuerwehr, Polizei, Militär und Rettungsdienst."
+  },
+  "Grip the dummy or partner from behind under the arms and drag 20 m backwards. Enter the dummy mass and keep it the same when retesting — it drives the result more than anything else.": {
+    "en": "Grip the dummy or partner from behind under the arms and drag 20 m backwards. Enter the dummy mass and keep it the same when retesting — it drives the result more than anything else.",
+    "de": "Puppe oder Partner von hinten unter den Achseln greifen und 20 m rückwärts ziehen. Masse der Puppe eintragen und bei Wiederholung gleich lassen — sie bestimmt das Ergebnis mehr als alles andere."
+  },
+  "Rescue dummy or partner, 20 m course, stopwatch": {
+    "en": "Rescue dummy or partner, 20 m course, stopwatch",
+    "de": "Rettungspuppe oder Partner, 20 m Strecke, Stoppuhr"
+  },
+  "4 × 10 m shuttle run": {
+    "en": "4 × 10 m shuttle run",
+    "de": "4 × 10 m Pendellauf"
+  },
+  "4×10 m": {
+    "en": "4×10 m",
+    "de": "4×10 m"
+  },
+  "Shuttle run four times over 10 m with three changes of direction. Acceleration and agility in a small space (HELENA battery).": {
+    "en": "Shuttle run four times over 10 m with three changes of direction. Acceleration and agility in a small space (HELENA battery).",
+    "de": "Pendellauf viermal über 10 m mit drei Richtungswechseln. Antritt und Wendigkeit auf kleinem Raum (HELENA-Batterie)."
+  },
+  "Two lines 10 m apart. On the signal sprint to the other line, step behind it with one foot, and back — four times 10 m in total. Time until crossing the finish line. Two attempts.": {
+    "en": "Two lines 10 m apart. On the signal sprint to the other line, step behind it with one foot, and back — four times 10 m in total. Time until crossing the finish line. Two attempts.",
+    "de": "Zwei Linien im Abstand von 10 m. Auf Signal zur anderen Linie sprinten, mit einem Fuss hinter die Linie treten, zurück — insgesamt viermal 10 m. Zeit bis zum Überqueren der Ziellinie. Zwei Versuche."
+  },
+  "Markers, tape measure, stopwatch or timing gates": {
+    "en": "Markers, tape measure, stopwatch or timing gates",
+    "de": "Markierungen, Massband, Stoppuhr oder Lichtschranke"
   }
 }
