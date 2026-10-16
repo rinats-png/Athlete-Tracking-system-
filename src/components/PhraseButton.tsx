@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Fact } from '@/domain/askKydon'
 import { phraseEnabled, phraseFacts, type PhraseOutcome } from '@/lib/supabase/phrase'
-import type { PhraseKind } from '../../supabase/functions/_shared/phrase'
+import { PHRASE_KINDS_ENABLED, type PhraseKind } from '../../supabase/functions/_shared/phrase'
+import { aiConsentState, retryPendingWithdrawal } from '@/lib/aiConsent'
+import { AiConsentPanel } from '@/features/shared/AiConsent'
+import { useAppData } from '@/lib/store/AppDataProvider'
+import { useEffect } from 'react'
 
 /**
  * «Als Text formulieren»: optionale Umformulierung der Fakten durch ein
@@ -25,8 +29,18 @@ export function PhraseButton({
   const { t, i18n } = useTranslation()
   const [busy, setBusy] = useState(false)
   const [outcome, setOutcome] = useState<PhraseOutcome | null>(null)
-  if (!phraseEnabled()) return null
+  const [asking, setAsking] = useState(false)
+  const { role } = useAppData()
+  useEffect(() => void retryPendingWithdrawal(), [])
+  // Nur eigene Daten: im Trainermodus sind es Daten der Athleten, für die der
+  // Anbieter Unterauftragsverarbeiter wäre — gesperrt bis zum Nachtrag des
+  // AV-Vertrags (docs/ki-einwilligung.md). Ebenso die Art `draft`.
+  if (!phraseEnabled() || role === 'coach' || !PHRASE_KINDS_ENABLED.includes(kind)) return null
   const run = async () => {
+    if (aiConsentState() !== 'granted') {
+      setAsking(true)
+      return
+    }
     setBusy(true)
     const result = await phraseFacts(kind, (i18n.resolvedLanguage ?? i18n.language ?? 'de').slice(0, 2), facts, { name })
     setBusy(false)
@@ -38,6 +52,14 @@ export function PhraseButton({
       <button type="button" disabled={busy} onClick={() => void run()} data-testid="phrase-run" className="min-h-11 rounded-pill border border-line px-4 text-[13px] hover:bg-surface-sunken disabled:opacity-50">
         {t('phrase.button')}
       </button>
+      {asking && (
+        <AiConsentPanel
+          onDone={(granted) => {
+            setAsking(false)
+            if (granted) void run()
+          }}
+        />
+      )}
       {outcome?.source === 'model' && !onText && (
         <div className="mt-2 rounded-md border border-line p-3 text-[14px] leading-relaxed" data-testid="phrase-text">
           <p>{outcome.text}</p>

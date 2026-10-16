@@ -369,6 +369,82 @@ const FAMILY_OF_GOAL: Record<string, StoredTrainingBlock['family']> = {
   HYROX: 'hybrid',
 }
 
+/** Lookups für die Abbildung einer Seed-Einheit (einmal je Plan bauen). */
+function sessionLookups(index: ProgramIndex, exercises: LibraryExercise[]) {
+  return {
+    names: new Map(exercises.map((e) => [e.id, e.name])),
+    templates: new Map(index.sessionTemplates.map((t) => [t.session_template_id, t])),
+    rules: new Map(index.methodRules.map((r) => [r.rule_id, r])),
+  }
+}
+
+/** Eine Einheit des Seeds als geplante Einheit (gleiche Abbildung wie beim Übernehmen eines Plans). */
+function toPlanned(plan: PlanHead, w: PlanWeek, i: number, s: PlanWeek['sessions'][number], L: ReturnType<typeof sessionLookups>): StoredPlannedSession {
+  const { names, templates, rules } = L
+  const tpl = templates.get(s.session_template_id)
+  const rule = tpl ? rules.get(tpl.dose_bounds_rule_id) : undefined
+  const durations = s.items.flatMap((it) => (it.kind === 'conditioning' && it.duration_min != null ? [it.duration_min] : []))
+  return {
+    id: librarySessionId(plan.plan_id, w.week, i),
+    day: DAY[s.day] ?? 1,
+    weekFrom: w.week,
+    weekTo: w.week,
+    kind: 'library',
+    title: s.name.slice(0, 60),
+    note: w.reduced ? 'reduced' : '',
+    ruleId: tpl?.dose_bounds_rule_id ?? null,
+    ruleVersion: plan.version,
+    primaryIntent: INTENT_OF_TEMPLATE[s.session_template_id] ?? 'GPP',
+    evidenceStrength: null,
+    evidenceSpecificity: rule?.evidence_default ?? null,
+    plannedDurationMin: durations.length ? Math.min(600, Math.round(durations.reduce((a, b) => a + b, 0))) : null,
+    highIntensity: HIGH_INTENSITY_TEMPLATES.has(s.session_template_id) && !w.reduced,
+    blocks: s.items.slice(0, 12).map((it) =>
+      it.kind === 'exercise'
+        ? {
+            type: 'library_exercise' as const,
+            exerciseId: it.exercise_id,
+            name: (names.get(it.exercise_id) ?? it.exercise_id).slice(0, 120),
+            sets: it.sets,
+            reps: it.reps != null ? String(it.reps).slice(0, 40) : null,
+            rpe: it.rpe,
+            restS: it.rest_s,
+            intensity: it.intensity ? String(it.intensity).slice(0, 40) : null,
+            intent: it.exercise_intent,
+            role: it.role,
+            ruleId: ruleIdForItem(it, tpl),
+            note: (it.notes ?? '').slice(0, 200),
+          }
+        : {
+            type: 'library_conditioning' as const,
+            modality: it.modality.slice(0, 40),
+            description: it.description.slice(0, 200),
+            durationMin: it.duration_min,
+            distance: it.distance,
+            zone: it.zone ? it.zone.slice(0, 80) : null,
+            note: (it.notes ?? '').slice(0, 200),
+          },
+    ),
+    retestMetric: '',
+    coachModified: false,
+    coachModificationReason: null,
+    removed: false,
+  }
+}
+
+/**
+ * Eine einzelne Einheit aus der Programmbibliothek, ohne den Plan zu
+ * übernehmen — für ein freies Training aus dem Katalog. Inhalt und Dosis
+ * sind dieselben wie im Plan; `id` ist eigen, damit kein Termin berührt wird.
+ */
+export function librarySession(plan: PlanHead, weeks: PlanWeek[], week: number, index: number, programIndex: ProgramIndex, exercises: LibraryExercise[], id: string): StoredPlannedSession | null {
+  const w = weeks.find((x) => x.week === week)
+  const s = w?.sessions[index]
+  if (!w || !s) return null
+  return { ...toPlanned(plan, w, index, s, sessionLookups(programIndex, exercises)), id: id.slice(0, 80), weekFrom: 1, weekTo: null }
+}
+
+
 /**
  * Macht aus einem Bibliotheksplan einen Block: jede Einheit jeder Woche wird
  * eine Einheit mit `weekFrom = weekTo = Woche`; die Dosis ist Momentaufnahme
@@ -381,63 +457,9 @@ export function materializePlan(
   exercises: LibraryExercise[],
   ctx: { id: string; startDay: string; now: string; disciplineId: string | null },
 ): StoredTrainingBlock {
-  const names = new Map(exercises.map((e) => [e.id, e.name]))
-  const templates = new Map(index.sessionTemplates.map((t) => [t.session_template_id, t]))
-  const rules = new Map(index.methodRules.map((r) => [r.rule_id, r]))
+  const L = sessionLookups(index, exercises)
   const sessions: StoredPlannedSession[] = []
-  for (const w of weeks) {
-    w.sessions.forEach((s, i) => {
-      const tpl = templates.get(s.session_template_id)
-      const rule = tpl ? rules.get(tpl.dose_bounds_rule_id) : undefined
-      const durations = s.items.flatMap((it) => (it.kind === 'conditioning' && it.duration_min != null ? [it.duration_min] : []))
-      sessions.push({
-        id: librarySessionId(plan.plan_id, w.week, i),
-        day: DAY[s.day] ?? 1,
-        weekFrom: w.week,
-        weekTo: w.week,
-        kind: 'library',
-        title: s.name.slice(0, 60),
-        note: w.reduced ? 'reduced' : '',
-        ruleId: tpl?.dose_bounds_rule_id ?? null,
-        ruleVersion: plan.version,
-        primaryIntent: INTENT_OF_TEMPLATE[s.session_template_id] ?? 'GPP',
-        evidenceStrength: null,
-        evidenceSpecificity: rule?.evidence_default ?? null,
-        plannedDurationMin: durations.length ? Math.min(600, Math.round(durations.reduce((a, b) => a + b, 0))) : null,
-        highIntensity: HIGH_INTENSITY_TEMPLATES.has(s.session_template_id) && !w.reduced,
-        blocks: s.items.slice(0, 12).map((it) =>
-          it.kind === 'exercise'
-            ? {
-                type: 'library_exercise' as const,
-                exerciseId: it.exercise_id,
-                name: (names.get(it.exercise_id) ?? it.exercise_id).slice(0, 120),
-                sets: it.sets,
-                reps: it.reps != null ? String(it.reps).slice(0, 40) : null,
-                rpe: it.rpe,
-                restS: it.rest_s,
-                intensity: it.intensity ? String(it.intensity).slice(0, 40) : null,
-                intent: it.exercise_intent,
-                role: it.role,
-                ruleId: ruleIdForItem(it, tpl),
-                note: (it.notes ?? '').slice(0, 200),
-              }
-            : {
-                type: 'library_conditioning' as const,
-                modality: it.modality.slice(0, 40),
-                description: it.description.slice(0, 200),
-                durationMin: it.duration_min,
-                distance: it.distance,
-                zone: it.zone ? it.zone.slice(0, 80) : null,
-                note: (it.notes ?? '').slice(0, 200),
-              },
-        ),
-        retestMetric: '',
-        coachModified: false,
-        coachModificationReason: null,
-        removed: false,
-      })
-    })
-  }
+  for (const w of weeks) w.sessions.forEach((s, i) => sessions.push(toPlanned(plan, w, i, s, L)))
   return {
     moves: [],
     id: ctx.id,

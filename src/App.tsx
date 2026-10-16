@@ -48,6 +48,7 @@ import { IntroSequence } from '@/features/intro/IntroSequence'
 import { introEnabled, markIntroSeen } from '@/features/intro/introPreference'
 import { AuthScreen } from '@/features/auth/AuthScreen'
 import { readAccount, type Account } from '@/features/auth/account'
+import { hasStoredSession } from '@/lib/supabase/session'
 import { BillingProvider } from '@/features/billing/BillingProvider'
 import { Gate } from '@/features/billing/Gate'
 
@@ -63,14 +64,17 @@ import { Gate } from '@/features/billing/Gate'
  *   3. Einstieg — die neun Schritte, solange der Bestand sie nicht kennt.
  *   4. Die App.
  *
- * Die Anmeldung prüft nichts (siehe `features/auth/account.ts`): es gibt
- * keinen Server. Sie ordnet den Einstieg und sagt das auch. Der Bestand
- * bleibt davon unberührt lokal — angemeldet oder nicht, gemessen wird auf
- * diesem Gerät.
+ * Ohne Konto kein Zugang. Das Tor lässt nur durch, wer eine gespeicherte
+ * Anmeldung hat (`lib/supabase/session.ts`) — geprüft ohne Netz, damit die
+ * App in der Halle auch ohne Empfang startet. Ob die Anmeldung noch gilt,
+ * merkt der automatische Abgleich und bittet dann um eine neue.
+ *
+ * Mit dem Konto gleicht das Gerät von selbst ab (`useAutoSync`); gemessen
+ * wird trotzdem zuerst auf dem Gerät.
  *
  * Zwei Bestandsarten hinter der Anmeldung:
- *   'guest' — leerer Bestand, alles bleibt auf dem Gerät
- *   'demo'  — mitgelieferter Beispielsatz, ebenfalls lokal und bearbeitbar
+ *   'own'  — der eigene Bestand, mit dem Konto abgeglichen
+ *   'demo' — mitgelieferter Beispielsatz, nur auf diesem Gerät, nie abgeglichen
  */
 
 
@@ -160,6 +164,16 @@ const router = createBrowserRouter([
       { path: 'plan/neu', element: screen(() => import('@/features/plan/PlanPreviewScreen'), 'PlanPreviewScreen') },
       { path: 'plan/block', element: screen(() => import('@/features/plan/BlockScreen'), 'BlockScreen') },
       { path: 'plan/heute', element: screen(() => import('@/features/plan/SessionPlayerScreen'), 'SessionPlayerScreen') },
+      { path: 'plan/start', element: screen(() => import('@/features/plan/TrainingStartScreen'), 'TrainingStartScreen') },
+      { path: 'plan/frei', element: screen(() => import('@/features/plan/FreeTraining'), 'FreePlayerScreen') },
+      { path: 'plan/frei/katalog', element: screen(() => import('@/features/plan/FreeTraining'), 'FreeCatalogScreen') },
+      { path: 'plan/frei/neu', element: screen(() => import('@/features/plan/FreeTraining'), 'FreeBuildScreen') },
+      // Zähler (Training starten): Rundenuhr, Lauf, Kamera, Zusammenfassung. Ohne
+      // Bezahlschranke und ohne Bau-Schalter — keiner davon enthält eine Trainingsregel.
+      { path: 'plan/uhr', element: screen(() => import('@/features/workout/ClockScreen'), 'ClockScreen') },
+      { path: 'plan/lauf', element: screen(() => import('@/features/workout/RunScreen'), 'RunScreen') },
+      { path: 'plan/kamera', element: screen(() => import('@/features/workout/CameraStartScreen'), 'CameraStartScreen') },
+      { path: 'plan/fertig', element: screen(() => import('@/features/workout/WorkoutSummaryScreen'), 'WorkoutSummaryScreen') },
       { path: 'woche', element: screen(() => import('@/features/week/WeekReviewScreen'), 'WeekReviewScreen') },
       { path: 'checkin', element: screen(() => import('@/features/today/CheckInScreen'), 'CheckInScreen') },
       { path: 'performance', element: screen(() => import('@/features/performance/PerformanceScreen'), 'PerformanceScreen') },
@@ -248,8 +262,9 @@ export default function App() {
     )
   }
 
-  // 1. Das Tor. Ohne Konto kommt niemand weiter.
-  if (!account) {
+  // 1. Das Tor. Ohne Konto kommt niemand weiter — auch kein Gerätekonto
+  // ohne Anmeldung beim Dienst.
+  if (!account || !hasStoredSession()) {
     return <AuthScreen onSignedIn={signedIn} />
   }
 
@@ -314,14 +329,17 @@ function RoleFromAccount({ role }: { role: Account['role'] }) {
  * und «alles löschen» führt ehrlich wieder durch den Einstieg.
  */
 function OnboardingGate() {
-  const { data } = useAppData()
+  const { data, loadReport } = useAppData()
   const [target, setTarget] = useState<string | null>(null)
 
   // Die Rolle wird IM Einstieg gewählt — er läuft deshalb für beide. Ein
   // Athlet, den ein Trainer anlegt, gilt als eingerichtet und kommt hier gar
   // nicht an: ein Einstieg je Kunde wäre ein Fragebogen an die falsche
   // Person.
-  if (data.profile.onboardingCompletedAt == null) {
+  // Liegt ein Bestand aus einer neueren Fassung auf dem Gerät, ist der leere
+  // Bestand dieser Sitzung nur ein Platzhalter: kein Einstieg, sondern die
+  // App mit der Meldung, dass sie zu alt ist (DataLoadNotice).
+  if (data.profile.onboardingCompletedAt == null && !loadReport.fromNewerVersion) {
     return (
       <Suspense fallback={null}>
         <OnboardingFlow onDone={setTarget} />

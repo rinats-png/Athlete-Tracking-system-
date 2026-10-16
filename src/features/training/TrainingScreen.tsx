@@ -1,11 +1,14 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Pencil, Plus, Trash2 } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { StatTile } from '@/components/ui/StatTile'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
+import { Thumb } from '@/components/ui/PhotoCard'
+import { exerciseImageUrl } from '@/data/exerciseImages'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { exerciseByKey } from '@/data/exercises'
@@ -44,12 +47,17 @@ function blank(day: string): StoredWorkout {
  * Nichts hier empfiehlt. Der e1RM ist eine Schätzung und heisst so; der
  * Blockvergleich sagt «unverändert», nicht «Plateau brechen» (§81).
  */
+/** Bild einer Einheit: die erste Übung mit Bild, sonst das Bereichsbild. */
+const workoutImage = (w: StoredWorkout) => w.exercises.map((x) => exerciseImageUrl(x.exerciseKey)).find(Boolean) ?? AREA_IMAGES.training
+
 export function TrainingScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
   const { workouts, saveWorkout, deleteWorkout, role } = useAppData()
   const today = toDay(new Date())
-  const [editing, setEditing] = useState<StoredWorkout | null>(null)
+  // `?neu=1` (aus «Training starten → Etwas eintragen») öffnet gleich den Editor.
+  const [params] = useSearchParams()
+  const [editing, setEditing] = useState<StoredWorkout | null>(() => (params.get('neu') === '1' ? blank(today) : null))
 
   const sorted = useMemo(() => [...workouts].sort((a, b) => b.day.localeCompare(a.day) || b.createdAt.localeCompare(a.createdAt)), [workouts])
   const summary = useMemo(() => exerciseSummary(workouts), [workouts])
@@ -77,6 +85,7 @@ export function TrainingScreen() {
         eyebrow={t('training.eyebrow')}
         title={t('training.title')}
         intro={role === 'coach' ? t('training.introCoach') : t('training.intro')}
+        image={AREA_IMAGES.training}
         action={
           !editing && (
             <Button variant="primary" size="md" onClick={() => setEditing(blank(today))}>
@@ -103,13 +112,14 @@ export function TrainingScreen() {
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
         <div className="space-y-4">
           <Panel>
-            <PanelHeader title={t('training.list.title')} subtitle={t('training.list.why')} />
+            <PanelHeader title={t('training.list.title')} note={t('training.list.why')} />
             {sorted.length === 0 ? (
               <p className="px-4 py-4 text-[13px] text-ink-secondary">{t('training.list.empty')}</p>
             ) : (
               <ul className="divide-y divide-line">
                 {sorted.map((w) => (
                   <li key={w.id} className="flex items-center justify-between gap-3 px-4 py-3">
+                    <Thumb src={workoutImage(w)} />
                     <button type="button" className="min-w-0 flex-1 text-left" onClick={() => setEditing(w)} aria-label={`${t('training.list.edit')}: ${nameOf(w)}`}>
                       <p className="truncate font-display text-[15px] font-bold uppercase tracking-[0.04em]">{nameOf(w)}</p>
                       <p className="text-[12px] text-ink-muted">
@@ -145,7 +155,9 @@ export function TrainingScreen() {
                   const block = def ? blockCompare(workouts, s.exerciseKey, today) : null
                   return (
                     <li key={`${s.exerciseKey}:${s.customName}`} className="grid gap-2 px-4 py-3 sm:grid-cols-[1fr_10rem]">
-                      <div className="min-w-0">
+                      <div className="flex min-w-0 items-center gap-3">
+                        <Thumb src={exerciseImageUrl(s.exerciseKey) ?? AREA_IMAGES.training} />
+                        <div className="min-w-0">
                         <p className="truncate text-[14px]">{name}</p>
                         <p className="text-[12px] text-ink-secondary">
                           <span className="readout">{formatNumber(s.best, locale, 1)}</span> kg e1RM · {t('training.best.sessions', { count: s.sessions })}
@@ -155,6 +167,7 @@ export function TrainingScreen() {
                             {t(`training.best.block.${block.verdict}`, { delta: formatNumber(Math.abs(block.deltaPercent ?? 0), locale, 1) })}
                           </p>
                         )}
+                        </div>
                       </div>
                       {history.length > 0 && <E1rmTrend points={history} label={`${name}: ${t('training.best.trend')}`} />}
                     </li>
@@ -167,7 +180,7 @@ export function TrainingScreen() {
 
         <div className="space-y-4">
           <Panel>
-            <PanelHeader title={t('training.week.title')} subtitle={t('training.week.why')} />
+            <PanelHeader title={t('training.week.title')} note={t('training.week.why')} />
             <div className="grid grid-cols-2 divide-x divide-line">
               <StatTile label={t('training.week.sets')} value={String(weekSets)} />
               <StatTile label={t('training.week.volume')} value={formatNumber(weekVolume, locale, 0)} unit="kg·Wdh" />

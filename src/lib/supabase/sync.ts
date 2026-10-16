@@ -1,9 +1,13 @@
 import { getSupabase } from './client'
 import { CURRENT_SCHEMA_VERSION, parseAthlete } from '@/lib/store/schema'
-import type { StoredAthlete, StoredData } from '@/lib/store/localStore'
+import { isWriteLocked, type StoredAthlete, type StoredData } from '@/lib/store/localStore'
 import { carriesSeries, mergeSeries, planSeriesPush, stripSeries, type SeriesRow } from './series'
 import { clearCarryChoice, readCarryChoice } from '@/lib/coachStatus'
 import { isBlankPlaceholder } from '@/lib/store/placeholder'
+import { planDeletions, type RemoteDocHead } from './deletions'
+import { resolveSensitiveConsent } from './sensitiveConsent'
+import { readSensitiveMode, writeSensitiveMode } from '@/lib/sensitiveConsent'
+import { athleteWithoutSensitive } from '@/domain/sensitiveData'
 
 /**
  * Synchronisierung: der Bestand als Zweitschrift auf dem Server.
@@ -29,8 +33,14 @@ import { isBlankPlaceholder } from '@/lib/store/placeholder'
  *      Ergänzungen.
  *
  * WAS ÜBERTRAGEN WIRD: der geprüfte Bestand je Athlet, so wie er lokal liegt.
- * Also personenbezogene Daten. Die Datenschutzerklärung beschreibt genau das;
- * ohne Anmeldung passiert es nicht.
+ * Also personenbezogene Daten. Die Datenschutzerklärung beschreibt genau das.
+ * Der Abgleich läuft mit dem Konto von selbst (`features/shared/useAutoSync`);
+ * im Profil lässt er sich ausschalten. Gesundheitsdaten gehen hier nie mit —
+ * sie haben ihren eigenen, verschlüsselten Weg mit Einwilligung je Kategorie.
+ * GESUNDHEITSNAHE Angaben (Schlaf, Stress, Herzfrequenz, Körperfett,
+ * Beschwerden — domain/sensitiveData.ts) gehen nur mit, wenn der Server eine
+ * ausdrückliche Einwilligung kennt (Art. 9 Abs. 2 lit. a); sonst filtert der
+ * Abgleich sie heraus, bevor er schreibt.
  *
  * DER BESTAND IST NICHT IMMER DER EIGENE. Wer als Trainer in einem Team
  * arbeitet, gleicht gegen den Bestand des Teaminhabers ab (`my_pool_owner`,
@@ -52,54 +62,11 @@ import { isBlankPlaceholder } from '@/lib/store/placeholder'
  * tests/sync-series.spec.ts.
  */
 
-const STATE_KEY = 'kydon.sync.v1'
-
-export interface SyncState {
-  /** Zeitstempel des Servers je Athlet (Dokument), wie zuletzt gesehen. */
-  seen: Record<string, string>
-  lastSyncedAt: string | null
-  /** Bis wann Zeitreihen-Zeilen zuletzt geholt UND geschrieben wurden (Serverzeit). */
-  seriesSyncedAt: string | null
-  /** Athleten, deren Serverstand fremd ist. Solange gesetzt: Dokument nicht schreiben. */
-  conflicts: string[]
-  /** Gegen welchen Bestand zuletzt abgeglichen wurde (owner_id). null = noch nie. */
-  pool: string | null
-}
-
-const EMPTY: SyncState = { seen: {}, lastSyncedAt: null, seriesSyncedAt: null, conflicts: [], pool: null }
-
-export function readSyncState(): SyncState {
-  try {
-    const raw = localStorage.getItem(STATE_KEY)
-    if (!raw) return EMPTY
-    const parsed = JSON.parse(raw) as Partial<SyncState>
-    return {
-      seen: typeof parsed.seen === 'object' && parsed.seen ? (parsed.seen as Record<string, string>) : {},
-      lastSyncedAt: typeof parsed.lastSyncedAt === 'string' ? parsed.lastSyncedAt : null,
-      seriesSyncedAt: typeof parsed.seriesSyncedAt === 'string' ? parsed.seriesSyncedAt : null,
-      conflicts: Array.isArray(parsed.conflicts) ? parsed.conflicts.filter((c) => typeof c === 'string') : [],
-      pool: typeof parsed.pool === 'string' ? parsed.pool : null,
-    }
-  } catch {
-    return EMPTY
-  }
-}
-
-function writeSyncState(state: SyncState): void {
-  try {
-    localStorage.setItem(STATE_KEY, JSON.stringify(state))
-  } catch {
-    /* Ohne Speicher gilt der Stand für diese Sitzung. */
-  }
-}
-
-export function clearSyncState(): void {
-  try {
-    localStorage.removeItem(STATE_KEY)
-  } catch {
-    /* Nichts zu räumen. */
-  }
-}
+// Der Abgleichsstand liegt in einer eigenen kleinen Datei: der Bestand
+// braucht `markAthleteDeleted` schon im Startpaket, der Abgleich selbst wird
+// erst nachgeladen.
+import { readSyncState, writeSyncState, readSyncOwner, writeSyncOwner, EMPTY } from './syncState'
+export { readSyncState, clearSyncState, markAthleteDeleted, type SyncState } from './syncState'
 
 /**
  * Kennung dieses Geräts. Nur für die Konfliktmeldung — «auf einem anderen
@@ -128,7 +95,12 @@ export interface SyncReport {
   seriesPulled: number
   /** Athleten, bei denen der Serverstand des Dokuments fremd ist. */
   conflicts: string[]
-  reason: null | 'offline' | 'not_signed_in' | 'unknown'
+  /**
+   * `other_account`: der Bestand auf diesem Gerät gehört zu einem anderen
+   * Konto (abgemeldet, ohne zu räumen, dann ein anderes Konto angemeldet).
+   * Dann wird nichts geschrieben und nichts geholt.
+   */
+  reason: null | 'offline' | 'not_signed_in' | 'newer_version' | 'other_account' | 'unknown'
   /** Der Bestand hat gewechselt (Team beigetreten oder verlassen). */
   poolSwitched?: boolean
 }
@@ -156,13 +128,34 @@ export async function syncOnce(
   onPull: (athletes: StoredAthlete[]) => void,
   onSeries: (rows: SeriesRow[]) => number = () => 0,
   onPoolSwitch: () => StoredData = () => initialStore,
+  /** Athleten, die ein anderes Gerät gelöscht hat: lokal entfernen. */
+  onRemoteDelete: (athleteIds: string[]) => void = () => {},
 ): Promise<SyncReport> {
+  // Liegt auf dem Gerät ein Bestand aus einer neueren Fassung, ist der
+  // Bestand dieser Sitzung ein leerer Platzhalter: ihn hochzuladen hiesse,
+  // einen Leerathleten auf den Server zu schreiben.
+  if (isWriteLocked()) return fail('newer_version')
   const supabase = await getSupabase()
   if (!supabase) return fail('offline')
 
   const { data: auth } = await supabase.auth.getUser()
   const me = auth.user?.id
   if (!me) return fail('not_signed_in')
+
+  // Wem gehört der Bestand auf diesem Gerät? Beim ersten Abgleich dem, der
+  // angemeldet ist; danach nur noch ihm.
+  const owner = readSyncOwner()
+  if (owner && owner !== me) return fail('other_account')
+  if (!owner) writeSyncOwner(me)
+
+  // Dürfen gesundheitsnahe Angaben in diesem Lauf mit? Nur mit Einwilligung
+  // auf dem Server. Wechselt die Antwort gegenüber dem letzten Lauf, gehen
+  // alle Zeitreihen neu hoch: nach einem Widerruf ohne die Angaben, nach
+  // einer Einwilligung mit ihnen.
+  const withSensitive = await resolveSensitiveConsent(supabase, me, auth.user?.email ?? null)
+  const sensitiveMode = withSensitive ? 'with' : 'without'
+  const rewriteSeries = readSensitiveMode() !== sensitiveMode
+  const shape = (athlete: StoredAthlete): StoredAthlete => (withSensitive ? athlete : athleteWithoutSensitive(athlete))
 
   // In welchem Bestand arbeite ich? Ohne Antwort (alte Datenbank, Fehler):
   // im eigenen — das ist der Stand vor den Teams und nie ein fremder.
@@ -193,11 +186,33 @@ export async function syncOnce(
   // --- 1. Dokumente holen -----------------------------------------------------
   const { data: rows, error: readError } = await supabase
     .from('athlete_documents')
-    .select('athlete_id, schema_version, document, updated_at, device_id')
+    .select('athlete_id, schema_version, document, updated_at, device_id, deleted_at')
     .eq('owner_id', uid)
   if (readError) return fail('unknown')
 
-  const remote = new Map<string, RemoteRow>((rows ?? []).map((r) => [r.athlete_id, r as RemoteRow]))
+  // --- 1a. Löschungen: Grabsteine anderer Geräte übernehmen, eigene schreiben ---
+  const deletions = planDeletions((rows ?? []) as RemoteDocHead[], store.athletes.map((a) => a.id), state.deleted)
+  const pendingDeleted = { ...state.deleted }
+  for (const id of deletions.clearPending) delete pendingDeleted[id]
+  for (const t of deletions.pushTombstones) {
+    const { error } = await supabase
+      .from('athlete_documents')
+      .update({ deleted_at: t.at, device_id: device })
+      .eq('owner_id', uid)
+      .eq('athlete_id', t.id)
+    if (error) return fail('unknown')
+    delete pendingDeleted[t.id]
+    pushed += 1
+  }
+  if (deletions.dropLocally.length > 0) {
+    onRemoteDelete(deletions.dropLocally)
+    store = { ...store, athletes: store.athletes.filter((a) => !deletions.dropLocally.includes(a.id)) }
+  }
+  for (const id of deletions.skipPull) delete seen[id]
+
+  const remote = new Map<string, RemoteRow>(
+    (rows ?? []).filter((r) => !deletions.skipPull.has(r.athlete_id)).map((r) => [r.athlete_id, r as RemoteRow]),
+  )
   const local = new Map(store.athletes.map((a) => [a.id, a]))
 
   const incoming: StoredAthlete[] = []
@@ -264,7 +279,7 @@ export async function syncOnce(
       owner_id: uid,
       athlete_id: athlete.id,
       schema_version: CURRENT_SCHEMA_VERSION,
-      document: stripSeries(athlete),
+      document: stripSeries(shape(athlete)),
       device_id: device,
     }
 
@@ -319,7 +334,7 @@ export async function syncOnce(
     // Der Bestand nach dem Einarbeiten der fremden Zeilen — sonst würden
     // eben geholte Einträge gleich wieder hochgeschrieben.
     const merged = mergeSeries(athlete, foreign).athlete
-    const plan = planSeriesPush(merged, remoteSeries, state.seriesSyncedAt, device)
+    const plan = planSeriesPush(shape(merged), remoteSeries, rewriteSeries ? null : state.seriesSyncedAt, device)
     for (let i = 0; i < plan.upserts.length; i += 200) {
       const batch = plan.upserts.slice(i, i + 200).map((r) => ({ owner_id: uid, ...r, deleted_at: null }))
       const { error } = await supabase.from('athlete_series').upsert(batch, { onConflict: 'owner_id,athlete_id,kind,entry_id' })
@@ -352,7 +367,8 @@ export async function syncOnce(
     .maybeSingle()
   const seriesSyncedAt = newest?.updated_at ?? newestServerTime ?? state.seriesSyncedAt
 
-  writeSyncState({ seen, lastSyncedAt: new Date().toISOString(), seriesSyncedAt, conflicts, pool: uid })
+  writeSyncState({ seen, lastSyncedAt: new Date().toISOString(), seriesSyncedAt, conflicts, pool: uid, deleted: pendingDeleted })
+  writeSensitiveMode(sensitiveMode)
   return { ok: conflicts.length === 0, pushed, pulled, seriesPushed, seriesPulled, conflicts, reason: null, poolSwitched }
 }
 

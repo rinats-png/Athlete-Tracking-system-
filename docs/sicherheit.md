@@ -20,11 +20,13 @@ dieser Datei.
 
 Zwei Sätze, aus denen sich fast alles andere ergibt:
 
-1. **KYDON läuft ohne Konto vollständig.** Der Normalfall ist eine App,
-   die alle Daten auf dem Gerät hält und mit niemandem spricht. Ein Konto ist
-   ein Zusatz für Abgleich und Trainerbetrieb. Das verkleinert die
-   Angriffsfläche drastisch — es gibt für die meisten Nutzer keinen Server,
-   den man angreifen könnte.
+1. **Konto Pflicht, Gerät zuerst** (seit 13.10.2026; vorher lief KYDON ohne
+   Konto). Gemessen wird auf dem Gerät, auch ohne Netz; mit dem Konto gleicht
+   die App automatisch ab. Damit liegen die Daten fast aller Nutzer auch auf
+   dem Server — die Zugriffsregeln (RLS) und die Besitzermarke des Geräts
+   (`kydon.sync.user`, kein fremder Bestand in ein anderes Konto) tragen die
+   Last, die früher die Abwesenheit eines Servers trug. Die
+   Gesundheitsschicht bleibt Ende-zu-Ende verschlüsselt.
 2. **Wo es doch einen Server gibt, ist er Supabase (PostgreSQL + PostgREST).**
    Es gibt keine eigene API-Schicht. Damit ist die **Row Level Security die
    Autorisierung** — nicht ein Teil davon, sondern die ganze. Jede Lücke dort
@@ -444,12 +446,33 @@ richtig (§32) und auf einem geteilten falsch. Jetzt gibt es **beide Wege**,
 mit Rückfrage vor dem endgültigen. Offline umgeht nichts: ohne Verbindung
 gibt es keinen Serverzugriff, den man umgehen könnte.
 
-### 20 Falls die App selbst KI verwendet — *nicht zutreffend*
-KYDON ruft **kein** Sprachmodell auf, weder im Browser noch serverseitig.
-Es gibt keine Prompts, keine Werkzeugaufrufe, keine Handlungsvollmacht.
-Das ist eine bewusste Produktentscheidung und keine Auslassung: die App gibt
-diagnostische Aussagen aus Messwerten und Referenzen, und dafür wäre ein
-Sprachmodell die falsche Quelle.
+### 20 Falls die App selbst KI verwendet — ✓ (Stand 11.10.2026)
+Bis Etappe 7c stand hier «nicht zutreffend». Das stimmt nicht mehr: Die
+Edge Function `phrase` ruft ein Sprachmodell (Anthropic, Claude) auf. Das
+Modell **formuliert** nur Fakten um; Ergebnisse, Urteile und Zahlen kommen
+weiter aus der Fachlogik. Die Vorkehrungen:
+
+- **Eingang:** Nur bereinigte Fakten gehen hinaus.
+  - `sanitizeFacts` in `_shared/phrase.ts` lässt nur Schlüssel, Zahlen und
+    Zeichenketten fester Form durch.
+  - Kein Name, kein Freitext, keine Kontokennung. Die IP-Adresse sieht der
+    Anbieter nicht, weil der Aufruf vom Server kommt.
+- **Ausgang:** Der Zahlenwächter (`domain/answerGuard.ts`) prüft jede Zahl
+  im Text. Besteht der Text nicht, gilt die feste Vorlage.
+- **Keine Werkzeuge und keine Handlungsvollmacht:** Das Modell bekommt einen
+  einzigen Aufruf ohne Werkzeuge, mit höchstens 300 Tokens Ausgabe.
+- **Einwilligung** (Migration `20261011120000_ai_consents.sql`):
+  - Der Server prüft eine gültige Einwilligung für die aktuelle Fassung,
+    bevor er etwas sendet.
+  - Widerruf ist jederzeit möglich. Nachweis nach Art. 7 Abs. 1 DSGVO.
+  - Siehe `docs/ki-einwilligung.md`.
+- **Nur eigene Daten:** Trainerentwürfe über Athleten (`draft`) und der
+  Trainermodus sind gesperrt, bis der Nachtrag zum AV-Vertrag angekündigt
+  und angenommen ist.
+- **Kennzeichnung:** Text des Modells trägt «Von einem Sprachmodell
+  formuliert» (Art. 50 KI-Verordnung).
+- **Geheimnis:** `ANTHROPIC_API_KEY` liegt nur in der Umgebung der Edge
+  Function.
 
 ### 21 Vibe-Coding-Regeln — ✓
 Als Arbeitsregeln in `CLAUDE.md` und in dieser Datei verankert. Der

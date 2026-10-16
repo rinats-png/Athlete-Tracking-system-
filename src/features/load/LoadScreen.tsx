@@ -5,6 +5,7 @@ import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { StatTile } from '@/components/ui/StatTile'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 import { MetricMeta } from '@/features/shared/MetricMeta'
 import { useLocale } from '@/features/shared/useLocale'
 import { Gate } from '@/features/billing/Gate'
@@ -36,7 +37,7 @@ export function LoadScreen() {
 
   return (
     <>
-      <ScreenHeader eyebrow={t('load.eyebrow')} title={t('load.title')} intro={t('load.intro')} />
+      <ScreenHeader eyebrow={t('load.eyebrow')} title={t('load.title')} intro={t('load.intro')} image={AREA_IMAGES.load} />
 
       {!hasLoad ? (
         <EmptyState
@@ -123,7 +124,7 @@ function LoadPanels({ summary }: { summary: LoadSummary }) {
       </Panel>
 
       <Panel className="mb-4" data-testid="load-week-detail">
-        <PanelHeader title={t('load.detail.title')} subtitle={t('load.detail.why')} />
+        <PanelHeader title={t('load.detail.title')} note={t('load.detail.why')} />
         <div className="grid grid-cols-1 divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <StatTile
             label={t('load.detail.change')}

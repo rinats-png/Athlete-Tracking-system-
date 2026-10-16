@@ -393,7 +393,7 @@
       "reportPdf": "Informe listo para imprimir",
       "requirementGap": "Qué eje aporta más a tu disciplina",
       "seasonPlan": "Puntos de control hasta la competición",
-      "sync": "Sincronización entre dispositivos",
+      "sync": "Sincronización automática: copia de seguridad y todos tus dispositivos",
       "targetStandards": "Valores objetivo de la prueba de acceso concreta",
       "unlimitedReports": "Informes sin límite",
       "whiteLabel": "Tu propio logotipo en el informe",
@@ -521,7 +521,7 @@
       "thin_data": "Datos escasos",
       "no_assessment": "Aún sin medición"
     },
-    "method": "La tendencia es una decisión por mayoría entre los tests para los que puede calcularse — deliberadamente no una media de pendientes, porque el porcentaje por 30 días no se puede promediar con sentido entre tests distintos. «Necesita atención» no es un juicio sobre la persona sino una indicación de uno de los motivos citados.",
+    "method": "La tendencia es una decisión por mayoría entre los tests para los que puede calcularse — deliberadamente no una media de pendientes, porque el porcentaje por 30 días no se puede promediar con sentido entre tests distintos. «Necesita atención» no es un juicio sobre la persona sino una indicación de uno de los motivos citados. Un test solo cuenta si su cambio supera el propio error de medición.",
     "emptyTitle": "Aún sin atletas",
     "emptyBody": "Añade a la primera persona en «Atletas que entrenas» en tu perfil.",
     "soloTitle": "El modo entrenador está desactivado",
@@ -604,7 +604,7 @@
     "deleteHint_other": "«{{name}}» se borrará definitivamente junto con {{count}} mediciones. No se puede deshacer. Para ocultar a alguien sin perder datos, usa el archivo.",
     "deleteConfirm": "Borrar definitivamente",
     "meta": "{{results}} mediciones · {{assessments}} evaluaciones · desde {{since}}",
-    "privacyNote": "KYDON guarda solo lo que introduces sobre un atleta entrenado. No hace falta cuenta, correo ni invitación. Todo se queda en este dispositivo.",
+    "privacyNote": "KYDON solo guarda de un atleta supervisado lo que tú introduces. El atleta no necesita cuenta, correo ni invitación. Con tu cuenta se guarda automáticamente en servidores de la UE; se aplica el contrato de encargo del tratamiento.",
     "handover": "Traspaso",
     "handoverHint": "Un atleta cambia de club o de entrenador: su historial le pertenece a él, no a este dispositivo. El archivo contiene solo a este atleta — sin tu marca y sin los demás.",
     "handoverExport": "Exportar atleta",
@@ -637,11 +637,11 @@
     "data": "Tus datos",
     "recovered": "Estos datos se recuperaron de la segunda copia del dispositivo, guardada el {{date}}. El navegador había borrado el almacenamiento principal.",
     "backupDue": {
-      "never_exported": "Tienes {{count}} mediciones y nunca has exportado. Los datos viven solo en este dispositivo — una exportación los hace tuyos sin él.",
+      "never_exported": "Tienes {{count}} mediciones y nunca has exportado. La sincronización las guarda en tu cuenta; una exportación es tu propia copia, independiente del dispositivo y de la cuenta.",
       "many_new_results": "Se han añadido {{count}} mediciones desde la última exportación. Una nueva exportación es un clic.",
       "long_ago": "La última exportación fue hace {{days}} días, y desde entonces se han añadido {{count}} mediciones."
     },
-    "privacy": "Tus mediciones viven en este navegador. Solo se transmiten si activas la sincronización. Borrar los datos del navegador elimina el registro local — la exportación o la sincronización protegen de eso.",
+    "privacy": "Tus mediciones están primero en este dispositivo y se guardan automáticamente en servidores de la UE con tu cuenta. Si desactivas la sincronización, la exportación es tu única copia de seguridad.",
     "export": "Exportar",
     "import": "Importar",
     "importFailed": "El archivo no pudo leerse.",
@@ -933,12 +933,14 @@
     "overDays_other": "en {{count}} días",
     "trendLabel": {
       "improving": "Mejorando",
-      "stable": "Estable",
+      "stable": "Sin cambio claro",
       "declining": "Empeorando",
+      "unclear": "Incierto",
       "insufficient_one": "{{count}} medición",
       "insufficient_other": "{{count}} mediciones"
     },
     "trendInsufficientHint": "Una recta de regresión se calcula a partir de tres mediciones. Dos puntos siempre forman una recta perfecta — eso no es una tendencia.",
+    "trendUnclearHint": "El error de medición de este test aún no se conoce: se puede estimar a partir de cuatro mediciones. Hasta entonces KYDON no dice ni «mejorando» ni «empeorando».",
     "trendBasis": "{{points}} mediciones, {{days}} días, R² {{r2}}",
     "compareAssessments": "Comparar dos sesiones",
     "compareHint": "Solo sesiones completadas. Los tests presentes en solo una de las dos se marcan en lugar de omitirse.",
@@ -995,7 +997,7 @@
     "photoRemove": "Quitar comprobante",
     "photoAlt": "Comprobante de la medición",
     "photoAdded": "añadido el {{date}}",
-    "photoHint": "Una imagen por resultado — la pantalla del cronómetro, la lectura de la báscula. Se reduce y se queda en este dispositivo; no se transmite ni se analiza.",
+    "photoHint": "Una imagen por resultado: la pantalla del cronómetro, la lectura de la báscula. Se reduce, se guarda con la medición y se sincroniza con ella. No se analiza.",
     "photoError": {
       "not_an_image": "Eso no es un archivo de imagen.",
       "unreadable": "La imagen no pudo leerse.",
@@ -1013,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Historial",
     "title": "Recordatorios",
-    "intro": "La app sabe cuándo mediste por última vez y calcula el vencimiento en tu dispositivo. Los recordatorios están desactivados hasta que los actives; con una cuenta, también por push.",
-    "noPush": "El recordatorio aparece en la app cuando la abres. Con una cuenta también puedes activar el push: KYDON te avisa aunque la app esté cerrada. Para ello el servidor solo conoce la fecha del próximo vencimiento. Sin cuenta, el archivo de calendario sigue siendo la vía fiable.",
+    "intro": "La app sabe cuándo mediste por última vez y calcula el vencimiento en tu dispositivo. Los recordatorios están desactivados hasta que los actives, también por push si quieres.",
+    "noPush": "El recordatorio aparece en la app cuando la abres. También puedes activar el push: KYDON te avisa aunque la app esté cerrada. Para ello el servidor solo conoce la fecha del próximo vencimiento. El archivo de calendario sigue siendo la vía más fiable.",
     "enable": "Activar recordatorios",
     "enabled": "Recordatorios activados",
     "disabled": "Recordatorios desactivados",
@@ -1030,7 +1032,7 @@
     "dueOn": "pendiente el {{date}}",
     "default": "Predeterminado",
     "calendar": "Descargar archivo de calendario",
-    "calendarHint": "Un evento de día completo por retest pendiente, con alarma tres días antes. Funciona en cualquier calendario, sin conexión y sin cuenta — esta es la vía fiable.",
+    "calendarHint": "Un evento de día completo por cada retest pendiente, con aviso tres días antes. Funciona en cualquier calendario y sin conexión: es la vía fiable.",
     "calendarEmpty": "Aún no hay retest pendiente. En cuanto un test deba repetirse, el archivo estará listo aquí.",
     "notify": "Permitir notificaciones del sistema",
     "notifyOn": "Notificaciones del sistema permitidas",
@@ -1516,7 +1518,7 @@
     "carryQuestion": "En este dispositivo hay {{count}} atletas. ¿Qué hacemos con ellos?",
     "carryYes": "Pasarlos al equipo: entonces pertenecen al equipo y cuentan para su nivel.",
     "carryNo": "Dejarlos en mi propia cuenta: salen de este dispositivo y vuelven cuando yo deje el equipo.",
-    "joinPrivacy": "Al unirte se activa la sincronización: los atletas del equipo se guardan en el servidor y todos los entrenadores del equipo pueden verlos. Si dejas el equipo, los atletas se quedan en el equipo.",
+    "joinPrivacy": "Un equipo solo funciona con sincronización: si está desactivada, al unirte se vuelve a activar. Los atletas del equipo están en el servidor y todos los entrenadores del equipo los ven. Si dejas el equipo, los atletas se quedan en el equipo.",
     "joinButton": "Unirse",
     "joined": "Ahora estás en el equipo «{{name}}».",
     "unnamed": "sin nombre",
@@ -2161,7 +2163,7 @@
     "consent": {
       "title": "Consentimiento para datos cardíacos",
       "agree": "Acepto",
-      "storage": "La secuencia de latidos se queda en el dispositivo y se descarta tras la medición. Solo se guardan los dos resultados. Con cuenta y sincronización, también quedan en tu cuenta. Puedes borrarlos en cualquier momento.",
+      "storage": "La secuencia de latidos se queda en el dispositivo y se descarta tras la medición. Solo se guardan los dos resultados; con la sincronización también están en tu cuenta. Puedes borrarlos en cualquier momento.",
       "body": "El pulso y la variabilidad de la frecuencia cardíaca son datos de salud (art. 9 RGPD). KYDON solo los mide si das tu consentimiento aquí, y solo los usa para mostrártelos en el historial y en el contexto del día."
     },
     "beats_other": "{{count}} latidos",
@@ -2240,6 +2242,8 @@
     "title": "Novedades en KYDON:",
     "close": "Entendido",
     "items": {
+      "sensitive": "Los datos relacionados con la salud (sueño, estrés, pulso, grasa corporal, molestias) ahora solo se sincronizan con tu consentimiento explícito. Sin él se quedan en el dispositivo. Puedes decidirlo en el perfil, en «Datos».",
+      "account": "Cuenta y sincronización: KYDON ahora se sincroniza solo con tu cuenta. Tus datos están guardados en servidores de la UE y al día en todos tus dispositivos. Puedes desactivarlo en el perfil; antes verás lo que deja de funcionar.",
       "design": "Nuevo diseño: tarjetas de cristal esmerilado con niveles, cifras mono para los valores medidos y transiciones más calmadas — claro y oscuro.",
       "tests": "Biblioteca de pruebas según el protocolo 1.0: 126 pruebas en 29 áreas, cada una con objetivo, montaje, pasos y valoración.",
       "images": "Fotos de los montajes de las pruebas en las descripciones en lugar de bocetos.",
@@ -2790,7 +2794,7 @@
     "saveNext": "Guardar, siguiente atleta",
     "backToList": "Volver a la lista",
     "rule": "Cuenta el mejor intento válido. Los intentos no válidos quedan guardados pero no se puntúan.",
-    "offline": "Funciona sin red. Todo queda en este dispositivo."
+    "offline": "Funciona sin conexión. Se guarda primero en este dispositivo y se sincroniza en cuanto vuelve la red."
   },
   "ask": {
     "eyebrow": "Preguntas",
@@ -2897,7 +2901,8 @@
       "not_entitled": "La reformulación forma parte de Pro. La respuesta fija se mantiene.",
       "limit_reached": "Se han agotado las 30 reformulaciones de este mes. La respuesta fija se mantiene.",
       "rejected": "El texto no superó la comprobación de cifras y no se muestra. La respuesta fija se mantiene.",
-      "failed": "No ha funcionado. La respuesta fija se mantiene."
+      "failed": "No ha funcionado. La respuesta fija se mantiene.",
+      "no_consent": "Sin tu consentimiento no se envía nada al modelo de lenguaje. Se mantiene la respuesta fija."
     }
   },
   "weeklyReport": {
@@ -3022,7 +3027,7 @@
       "EXTRAPOLATED": "extrapolada"
     },
     "review": {
-      "unreviewed": "Sin revisar",
+      "unreviewed": "Aún sin revisión experta",
       "reviewed": "Revisado por {{name}} el {{date}}"
     },
     "limits": "Límites de la evidencia",
@@ -3165,8 +3170,8 @@
     "save": "Registrar sesión"
   },
   "planHub": {
-    "eyebrow": "Entrenamiento",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Entrenamiento",
     "competition": "Objetivo: {{name}}",
     "competitionUnnamed": "tu competición",
     "empty": {
@@ -3243,7 +3248,7 @@
       "event": "Competición"
     },
     "none": "No hay plantilla para esta selección.",
-    "unreviewed": "Sin revisar",
+    "unreviewed": "Aún sin revisión experta",
     "weeksTotal": "{{n}} semanas",
     "family": {
       "combat_grappling": "Deporte de combate, agarre",
@@ -3974,5 +3979,391 @@
     "supports": "Apoya {{sport}}",
     "other": "Otro enfoque",
     "filter": "Para {{sport}}"
+  },
+  "look": {
+    "info": "Más información",
+    "today": {
+      "label": "Hoy en tu plan",
+      "go": "Empezar",
+      "toPlan": "Ver el plan",
+      "missed": "perdida · ¿recuperarla?",
+      "percentile": "Percentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "recuperar",
+      "exercises": "Ejercicios",
+      "own": "Plan propio"
+    },
+    "player": {
+      "close": "Cerrar la sesión"
+    },
+    "tests": {
+      "measured": "{{measured}} de {{total}} medidos"
+    }
+  },
+  "start": {
+    "button": "Empezar entrenamiento",
+    "title": "Empezar entrenamiento",
+    "today": "Hoy",
+    "missed": "Perdidas",
+    "upcoming": "Próximas dos semanas",
+    "allDone": "No hay sesiones pendientes en el plan: todo hecho.",
+    "countsHint": "Puedes hacer cualquier sesión otro día. Se marcará como hecha en su fecha prevista.",
+    "none": "No tienes un plan activo. Aun así puedes entrenar: elige una opción abajo.",
+    "free": "Sin plan",
+    "log": "Registrar algo",
+    "logSub": "Anotar un entrenamiento directamente en el registro",
+    "catalog": "Del catálogo",
+    "catalogSub": "Una sesión de un plan listo, sin adoptar el plan",
+    "build": "Crear la tuya",
+    "buildSub": "Elige ejercicios, fija las series y empieza",
+    "countsFor": "Prevista para el {{date}}: cuenta para esa fecha.",
+    "doNow": "Hacer ahora"
+  },
+  "free": {
+    "eyebrow": "Entrenamiento libre",
+    "catalogTitle": "Sesión del catálogo",
+    "catalogIntro": "Elige un plan y una sesión de él. El plan no se adopta.",
+    "pickSession": "Elige una sesión",
+    "week": "Semana",
+    "items": "Partes: {{n}}",
+    "otherPlan": "Elegir otro plan",
+    "buildTitle": "Tu propia sesión",
+    "buildIntro": "Para hoy, sin plan. Se guarda en el registro de entrenamiento.",
+    "name": "Nombre de la sesión",
+    "search": "Buscar ejercicio",
+    "exercises": "Ejercicios",
+    "empty": "Aún no hay ejercicios. Busca arriba y toca uno.",
+    "sets": "Series",
+    "setsN": "{{n}} ×",
+    "fewer": "Una serie menos",
+    "more": "Una serie más",
+    "reps": "Rep./tiempo",
+    "remove": "Quitar ejercicio",
+    "start": "Empezar sesión",
+    "lost": "Aquí no hay ninguna sesión elegida. Elige una en «Empezar entrenamiento».",
+    "noSlot": "Entrenamiento libre: cuenta como entrenamiento, pero no marca ninguna fecha del plan.",
+    "save": "Guardar en el registro",
+    "defaultTitle": "Entrenamiento de fuerza libre"
+  },
+  "aiConsent": {
+    "title": "Consentimiento: que un modelo de lenguaje redacte textos",
+    "point": {
+      "what": "Qué se envía: solo los hechos de esta respuesta – palabras clave fijas y cifras, por ejemplo «cambio +3,2 %, umbral 2,8 %». El modelo de lenguaje redacta un texto a partir de ellos. KYDON comprueba cada cifra y, si no coincide, muestra la respuesta fija.",
+      "notSent": "Qué no se envía: tu nombre, tu correo electrónico, notas, diario y otros textos libres, datos de la capa de salud e identificadores de tu cuenta.",
+      "who": "Destinatario: Anthropic (modelo de lenguaje Claude) como encargado del tratamiento. El tratamiento puede realizarse en Estados Unidos; la transferencia se basa en cláusulas contractuales tipo. El proveedor no usa los datos para entrenar sus modelos. KYDON no guarda ni hechos ni texto – solo cuántas veces usaste la función este mes y este consentimiento.",
+      "label": "Los textos del modelo de lenguaje se marcan como tales. El modelo solo reformula: no evalúa nada, no hace diagnósticos ni toma decisiones de entrenamiento.",
+      "voluntary": "Voluntario: sin consentimiento, KYDON funciona por completo – las respuestas aparecen entonces como textos fijos. La base jurídica es tu consentimiento (art. 6.1.a RGPD)."
+    },
+    "withdraw": "Puedes retirar tu consentimiento en cualquier momento en tu perfil, en «Datos», con efecto para el futuro.",
+    "more": "Más en la política de privacidad",
+    "age": "Tengo al menos 16 años.",
+    "accept": "Consentir y redactar",
+    "decline": "Ahora no",
+    "failed": "No se pudo guardar el consentimiento. Hace falta conexión y una cuenta. No se envió nada.",
+    "settingTitle": "Textos del modelo de lenguaje",
+    "state": {
+      "granted": "Consentimiento dado. Al pulsar, se envían hechos a Anthropic para redactarlos.",
+      "withdrawn": "Retirado. Ya no se envía nada.",
+      "unset": "Sin consentimiento. No se envía nada."
+    },
+    "withdrawButton": "Retirar consentimiento",
+    "grantButton": "Dar consentimiento …",
+    "withdrawnLocal": "En este dispositivo, la retirada se aplica al instante. El servidor la recibirá en cuanto haya conexión."
+  },
+  "storage": {
+    "newerTitle": "Versión más reciente de KYDON detectada",
+    "reload": "Recargar la app",
+    "more_one": "… y uno más.",
+    "more_other": "… y {{count}} más.",
+    "kept": "Todo lo demás se ha conservado por completo.",
+    "quarantined": "Las entradas ilegibles se guardan en este dispositivo y no se han borrado.",
+    "backup": "Hay una copia de seguridad en este dispositivo (del {{date}}).",
+    "noBackup": "No hay copia de seguridad en este dispositivo. Exporta tus datos con regularidad.",
+    "saveQuarantine": "Guardar las entradas ilegibles como archivo",
+    "kind": {
+      "results": "Resultados",
+      "assessments": "Sesiones de tests",
+      "biometrics": "Valores corporales",
+      "observations": "Observaciones",
+      "diary": "Diario",
+      "diaryFields": "Campos del diario",
+      "activities": "Actividades",
+      "workouts": "Registro de entrenamiento",
+      "trainingBlocks": "Bloques de entrenamiento",
+      "planTemplates": "Plantillas de plan",
+      "customExercises": "Ejercicios propios",
+      "decisions": "Decisiones",
+      "meals": "Comidas",
+      "nutrition": "Nutrición",
+      "health": "Salud",
+      "peakWeeks": "Peak week",
+      "notes": "Notas",
+      "consent": "Consentimiento",
+      "focuses": "Prioridades",
+      "audit": "Registro de cambios",
+      "testDays": "Días de tests",
+      "branding": "Marca",
+      "name": "Nombre",
+      "athlete": "Atleta",
+      "store": "Datos",
+      "other": "Otros"
+    }
+  },
+  "sync": {
+    "title": "Sincronización con la cuenta",
+    "hint": "Funciona sola: tus datos guardados en servidores de la UE y en cada dispositivo donde hayas iniciado sesión. Los datos de salud nunca se incluyen.",
+    "signedOut": "Tu sesión ha caducado. Vuelve a iniciar sesión y KYDON seguirá sincronizando.",
+    "enable": "Volver a activar la sincronización",
+    "disable": "Desactivar la sincronización",
+    "now": "Sincronizar ahora",
+    "working": "Sincronizando …",
+    "last": "Última sincronización: {{date}}",
+    "never": "Nunca sincronizado.",
+    "result": "{{pushed}} subidos, {{pulled}} descargados, {{series}} entradas sincronizadas.",
+    "offline": "Sin conexión. La sincronización se pondrá al día cuando vuelvas a estar en línea.",
+    "conflictTitle": "Estado divergente",
+    "conflictBody": "Este atleta se modificó en otro dispositivo. KYDON no ha sobrescrito nada — ambos estados están intactos. Guarda primero tu exportación y luego decide.",
+    "conflictKeepLocal": "Subir este registro",
+    "conflictExplain": "El estado del servidor se sustituye. La otra dirección — descargar el estado del servidor — pasa por exportar, «borrar todo» y una sincronización nueva.",
+    "whatLeaves": "Se sincronizan: mediciones, datos de perfil, notas, prioridades de entrenamiento, planes, además de diario, sesiones, decisiones y comidas. No se incluyen: tu contraseña, las actividades importadas ni los datos de salud, que tienen su propio canal cifrado. Los datos relacionados con la salud (sueño, estrés, pulso, grasa corporal, molestias), solo con tu consentimiento explícito.",
+    "auto": "KYDON sincroniza solo: al arrancar, tras cada cambio y en cuanto vuelve la conexión.",
+    "paused": "La sincronización está desactivada desde el {{date}}.",
+    "frozen": "La copia de tu cuenta corresponde al {{date}}; lo añadido después solo está en este dispositivo y en la exportación.",
+    "frozenNever": "Tu cuenta todavía no tiene ninguna copia; todo está solo en este dispositivo y en la exportación.",
+    "offDialog": {
+      "eyebrow": "Desactivar la sincronización",
+      "title": "Lo que deja de funcionar",
+      "backup": "Ya no hay copia de seguridad. Si pierdes este dispositivo o se borra el navegador, se pierde todo lo añadido desde la desactivación, salvo que lo hayas exportado.",
+      "devices": "Tus otros dispositivos ya no reciben valores nuevos, y sus cambios no llegan aquí.",
+      "coach": "Tu entrenador solo ve el último estado sincronizado. Las nuevas mediciones, check-ins y sesiones no le llegan.",
+      "plans": "Los planes y ajustes de tu entrenador ya no llegan a este dispositivo.",
+      "server": "La copia de tu cuenta se queda como está: no se borra. Puedes eliminarla por completo con «Eliminar la cuenta definitivamente».",
+      "local": "Medir funciona igual que antes, también sin conexión. Puedes volver a activar la sincronización cuando quieras; entonces se recupera lo que falta.",
+      "confirm": "Desactivar de todos modos",
+      "keep": "Mantener la sincronización"
+    }
+  },
+  "sensitiveConsent": {
+    "title": "Sincronizar datos relacionados con la salud",
+    "intro": "Opcional. Algunos datos pueden ser datos de salud. Solo se sincronizan con tu consentimiento explícito:",
+    "introCoach": "Opcional. Algunos datos de tus atletas pueden ser datos de salud. Solo se sincronizan si confirmas que los atletas han dado su consentimiento explícito:",
+    "cat": {
+      "wellbeing": "Sueño, energía, estrés y agujetas (diario, sesión de tests)",
+      "heart": "Variabilidad de la frecuencia cardiaca, pulso en reposo y pulso de las sesiones",
+      "body": "Grasa corporal, masa magra y metabolismo basal",
+      "complaints": "Molestias digestivas, la marca de dolor de una sesión y el valor de CK"
+    },
+    "without": "Sin consentimiento, exactamente estos datos se quedan en este dispositivo; todo lo demás se sincroniza. Un entrenador no los verá y faltarán en un dispositivo nuevo.",
+    "healthLayer": "Los análisis, síntomas, ciclo y medicación no forman parte de esto: la capa de salud tiene su propio consentimiento y está cifrada de extremo a extremo.",
+    "checkbox": {
+      "self": "Sí, consiento expresamente que estos datos se guarden y sincronicen con mi cuenta en servidores de la UE (art. 9.2.a RGPD).",
+      "coach": "Sí, estos datos de mis atletas deben sincronizarse. Confirmo que dispongo del consentimiento explícito de los atletas y, en el caso de menores, del de sus tutores legales."
+    },
+    "age": "Tengo al menos 16 años.",
+    "ageNeeded": "Confirma tu edad o vuelve a desmarcar la casilla.",
+    "withdraw": "Puedes retirar el consentimiento en cualquier momento en el perfil, en «Datos»; la siguiente sincronización elimina entonces estos datos del servidor.",
+    "state": {
+      "granted": "Consentido: estos datos se sincronizan.",
+      "withdrawn": "Retirado: estos datos se quedan en este dispositivo.",
+      "unset": "Sin consentimiento: estos datos se quedan en este dispositivo."
+    },
+    "pending": "Aún no ha llegado al servidor; la próxima sincronización lo recupera.",
+    "ask": "Dar consentimiento",
+    "grant": "Consentir expresamente",
+    "grantCoach": "Confirmar y sincronizar",
+    "withdrawButton": "Retirar el consentimiento",
+    "cancel": "Cancelar"
+  },
+  "workout": {
+    "running": "En curso · {{time}}",
+    "start": "Empezar",
+    "pause": "Pausa",
+    "paused": "En pausa",
+    "resume": "Seguir",
+    "finish": "Terminar",
+    "save": "Guardar",
+    "continue": "Seguir entrenando",
+    "discard": "Descartar",
+    "discardConfirm": "Descartar de verdad",
+    "close": "Cerrar",
+    "minimize": "Salir, el entrenamiento sigue",
+    "voice": "Avisos por voz",
+    "bar": {
+      "running": "Entrenamiento en curso · {{time}}",
+      "paused": "Entrenamiento en pausa · {{time}}",
+      "rest": "Descanso {{time}}",
+      "back": "Volver"
+    },
+    "conflict": {
+      "title": "Ya está en curso: {{title}}",
+      "body": "Sigue allí — o descártalo y empieza de nuevo aquí.",
+      "continue": "Seguir allí",
+      "replace": "Descartar y empezar aquí"
+    },
+    "focus": {
+      "exercise": "Ejercicio {{n}} de {{of}}",
+      "set": "Serie {{n}} de {{of}}",
+      "target": "Objetivo {{target}}",
+      "last": "La última vez: {{value}}",
+      "less": "Menos {{field}}",
+      "more": "Más {{field}}",
+      "done": "Serie hecha",
+      "allDone": "Todas las series registradas. Termina abajo."
+    },
+    "rest": {
+      "title": "Descanso",
+      "of": "de {{total}}",
+      "next": "A continuación",
+      "sound": "Sonido en 3-2-1 y al final · también sin conexión",
+      "skip": "Saltar descanso"
+    },
+    "camera": {
+      "chip": "La cámara cuenta",
+      "title": "La cámara cuenta contigo",
+      "close": "Cerrar cámara",
+      "onDevice": "Solo en el dispositivo",
+      "loading": "Cargando cámara y detección …",
+      "denied": "Sin acceso a la cámara.",
+      "unsupported": "La detección no funciona en este dispositivo.",
+      "fallback": "Cuenta tú mismo como siempre y anota las repeticiones.",
+      "back": "Volver a la serie",
+      "setupTitle": "Colocar la cámara",
+      "hint": {
+        "squat": "{{name}}: colócalo de lado, cuerpo entero en la imagen.",
+        "hinge": "{{name}}: colócalo de lado, cuerpo entero en la imagen.",
+        "push": "{{name}}: colócalo de lado, hombro, codo y mano en la imagen.",
+        "pull": "{{name}}: de frente o de lado, hombro, codo y mano en la imagen."
+      },
+      "check": {
+        "body": "Cuerpo visible",
+        "light": "Luz suficiente",
+        "still": "Teléfono quieto"
+      },
+      "ok": "cumplido",
+      "waiting": "todavía no",
+      "privacy": "La detección funciona solo en tu dispositivo. Ninguna imagen ni vídeo sale del teléfono ni se guarda — solo se guardan los números.",
+      "ofTarget": "de {{target}} rep.",
+      "tempo": "Velocidad por repetición · relativa",
+      "estimate": "Estimación",
+      "loss": "Pérdida de velocidad en la serie hasta ahora −{{percent}} %. La comparación con otros días llega cuando se conozca tu error de medición.",
+      "lossNone": "La velocidad aparece a partir de la segunda repetición.",
+      "startTitle": "La cámara cuenta",
+      "startIntro": "Elige un ejercicio. Teléfono en el suelo, haz la serie — la cámara cuenta las repeticiones.",
+      "pattern": {
+        "squat": "Patrón de sentadilla",
+        "hinge": "Bisagra de cadera",
+        "push": "Empuje",
+        "pull": "Tracción"
+      }
+    },
+    "clock": {
+      "title": "Rounds e intervalos",
+      "intro": "Un reloj para rounds de deportes de combate, Tabata, EMOM, AMRAP e intervalos. Sonido, vibración y voz — la pantalla sigue encendida.",
+      "presets": "Plantillas",
+      "preset": {
+        "boxing": "Boxeo 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervalos"
+      },
+      "work": "Trabajo (s)",
+      "total": "Tiempo total (s)",
+      "rest": "Descanso (s)",
+      "rounds": "Rounds",
+      "warn": "Aviso previo (s)",
+      "totalTime": "Duración total: {{time}}",
+      "prep": "Prepárate",
+      "round": "Round {{n}}",
+      "restPhase": "Descanso",
+      "amrapLabel": "Tantas rondas como puedas",
+      "amrapTap": "Ronda hecha · {{n}}",
+      "done": "Hecho",
+      "lastSeconds": "Últimos {{count}} segundos",
+      "elapsed": "Total {{time}}",
+      "skip": "Siguiente",
+      "say": {
+        "round": "Round {{n}}",
+        "go": "Ya",
+        "rest": "Descanso",
+        "warn": "Últimos {{count}} segundos",
+        "done": "Hecho"
+      }
+    },
+    "punch": {
+      "enable": "Contar golpes (micrófono, vista previa)",
+      "title": "Golpes (micrófono)",
+      "calibrate": "Prueba: golpea diez veces — {{n}} de 10",
+      "denied": "Sin acceso al micrófono.",
+      "estimate": "Estimación · vista previa, no validada"
+    },
+    "run": {
+      "title": "Carrera",
+      "intro": "Tiempo, distancia, ritmo y pulso. Libre o en intervalos por distancia.",
+      "mode": "Tipo de carrera",
+      "mode_free": "Libre",
+      "mode_intervals": "Intervalos",
+      "reps": "Repeticiones",
+      "workM": "Distancia (m)",
+      "restS": "Pausa trotando (s)",
+      "privacy": "La ubicación solo se usa mientras la app está abierta, y solo en el dispositivo. Se guardan distancia, tiempo y vueltas — ningún recorrido y ningún lugar.",
+      "freeTitle": "Carrera",
+      "intervalsTitle": "Intervalos {{reps}} × {{m}} m",
+      "gps_wait": "Ubicación …",
+      "gps_ok": "Ubicación buena",
+      "gps_weak": "Ubicación imprecisa",
+      "gps_off": "Sin ubicación",
+      "freeLabel": "Tiempo de carrera",
+      "workLabel": "Intervalo {{n}} de {{of}}",
+      "restLabel": "Pausa trotando tras {{n}}",
+      "doneLabel": "Todos los intervalos hechos",
+      "left": "quedan {{m}} m",
+      "pace": "Ritmo",
+      "distance": "Distancia",
+      "total": "Total",
+      "splitsN": "Vueltas",
+      "lap": "Vuelta",
+      "finishHint": "Para terminar, pausa primero.",
+      "say": {
+        "work": "Intervalo {{n}}",
+        "rest": "Pausa trotando",
+        "last100": "Quedan cien metros",
+        "done": "Todos los intervalos hechos"
+      }
+    },
+    "summary": {
+      "title": "Resumen",
+      "lost": "Aquí no hay ninguna sesión. Las guardadas están en el diario.",
+      "toTraining": "Al entrenamiento",
+      "saved": "Guardado · {{date}}",
+      "duration": "Duración medida",
+      "sets": "Series",
+      "distance": "Distancia",
+      "pace": "Ritmo",
+      "rounds": "Rounds",
+      "hr": "Pulso medio / máx.",
+      "compare": "Respecto a la última vez",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} rep.",
+      "first": "La primera vez con este ejercicio — a partir de ahora hay comparación.",
+      "unknown_one": "La última vez {{previous}}. Error de medición aún desconocido: falta {{count}} sesión para un veredicto.",
+      "unknown_other": "La última vez {{previous}}. Error de medición aún desconocido: faltan {{count}} sesiones para un veredicto.",
+      "v": {
+        "better": "Por encima de tu error de medición (desde {{detectable}} %), mejor.",
+        "worse": "Por encima de tu error de medición (desde {{detectable}} %), peor.",
+        "within_noise": "Dentro del ruido, sin diferencia demostrada (umbral {{detectable}} %)."
+      },
+      "estimate": "El e1RM es una estimación.",
+      "note": "Se compara con la última sesión del mismo ejercicio. «Mejor» solo cuando el cambio supera tu propia variación — para eso hacen falta al menos cuatro sesiones.",
+      "splits": "Parciales",
+      "retest": "Próximo retest:",
+      "retestIn_one": "en {{count}} día",
+      "retestIn_other": "en {{count}} días",
+      "view": "Ver",
+      "done": "Listo"
+    }
   }
 }

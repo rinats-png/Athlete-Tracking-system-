@@ -55,7 +55,7 @@ export function CoachSignals() {
       </Panel>
 
       <Panel data-testid="newcomer-panel">
-        <PanelHeader title={t('coachDash.signals.newcomers')} subtitle={t('coachDash.signals.newcomersIntro')} />
+        <PanelHeader title={t('coachDash.signals.newcomers')} note={t('coachDash.signals.newcomersIntro')} />
         {newcomers.length === 0 ? (
           <p className="px-4 py-3 text-[13px] leading-relaxed text-ink-secondary">
             {t('coachDash.signals.noNewcomers', { days: NEWCOMER_DAYS })}

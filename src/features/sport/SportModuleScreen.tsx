@@ -11,6 +11,9 @@ import { formatDate, formatNumber } from '@/lib/format'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { CRITICAL_SPEED_FORMULA, CRITICAL_SPEED_SOURCE, criticalSpeed, moduleReadout, type MetricReadout } from '@/domain/sportModule'
 import type { SportCategoryId } from '@/data/sportProfiles'
+import { eurReadout, speedReserveReadout } from '@/domain/combinedMetrics'
+import { csIntensityDomains } from '@/domain/fieldPhysiology'
+import { formulaFor } from '@/domain/formulaRegistry'
 
 /**
  * Das Sportmodul: die Kennzahlen der eigenen Sportart an einer Stelle.
@@ -39,6 +42,9 @@ export function SportModuleScreen() {
     () => (category === 'running' || category === 'triathlon' ? criticalSpeed(data.results) : null),
     [data.results, category],
   )
+  const reserve = useMemo(() => speedReserveReadout(data.results), [data.results])
+  const eur = useMemo(() => eurReadout(data.results), [data.results])
+  const domains = cs ? csIntensityDomains(cs.speed) : null
 
   if (!readout) {
     return (
@@ -83,7 +89,7 @@ export function SportModuleScreen() {
 
       {cs && (
         <Panel className="mt-4" data-testid="critical-speed">
-          <PanelHeader title={t('sportModule.criticalSpeed')} subtitle={t('sportModule.criticalSpeedSub')} />
+          <PanelHeader title={t('sportModule.criticalSpeed')} note={t('sportModule.criticalSpeedSub')} />
           <div className="px-4 py-3 text-[13px] leading-relaxed">
             <p className="readout text-[24px] tabular-nums">
               {formatNumber(cs.speed, locale, 2)} <span className="text-[13px] text-ink-muted">m/s</span>
@@ -98,10 +104,64 @@ export function SportModuleScreen() {
                 second: t(`tests.${cs.from[1].testSlug}.name`, { defaultValue: cs.from[1].testSlug }),
               })}
             </p>
+            {domains && (
+              <p className="mt-2 text-ink-secondary" data-testid="cs-domains">
+                {t('sportModule.domains', {
+                  moderate: formatPace(1000 / domains.moderateUpper),
+                  heavy: formatPace(1000 / domains.heavyUpper),
+                })}
+              </p>
+            )}
             <p className="mt-2 max-w-[62ch] text-[12px] leading-relaxed text-ink-muted">
               {CRITICAL_SPEED_FORMULA} — {CRITICAL_SPEED_SOURCE}
+              {domains && <> · {formulaFor('cs_intensity_domains')?.reference}</>}
             </p>
           </div>
+        </Panel>
+      )}
+
+      {(reserve || eur) && (
+        <Panel className="mt-4" data-testid="combined-metrics">
+          <PanelHeader title={t('sportModule.combined')} note={t('sportModule.combinedSub')} />
+          <ul className="divide-y divide-line px-4 text-[13px] leading-relaxed">
+            {reserve && (
+              <li className="py-3" data-testid="speed-reserve">
+                <p className="readout text-[20px] tabular-nums">
+                  SRR {formatNumber(reserve.srr, locale, 2)}
+                  <span className="ml-3 text-[13px] text-ink-muted">
+                    ASR {formatNumber(reserve.asr * 3.6, locale, 1)} km/h
+                  </span>
+                </p>
+                <p className="mt-1 text-ink-secondary">
+                  {t('sportModule.speedReserve', {
+                    mss: formatNumber(reserve.mss * 3.6, locale, 1),
+                    mas: formatNumber(reserve.mas * 3.6, locale, 1),
+                  })}
+                </p>
+                <p className="mt-1 max-w-[62ch] text-[12px] text-ink-muted">
+                  {formulaFor('speed_reserve_ratio')?.formula} — {formulaFor('speed_reserve_ratio')?.reference}
+                </p>
+              </li>
+            )}
+            {eur && (
+              <li className="py-3" data-testid="eur">
+                <p className="readout text-[20px] tabular-nums">
+                  {t('sportModule.eur')} {formatNumber(eur.ratio, locale, 2)}
+                </p>
+                <p className="mt-1 text-ink-secondary">
+                  {t('sportModule.eurFrom', {
+                    cmj: formatNumber(eur.cmjCm, locale, 1),
+                    sj: formatNumber(eur.sjCm, locale, 1),
+                    date: formatDate(eur.performedAt, locale),
+                  })}
+                </p>
+                <p className="mt-1 max-w-[62ch] text-[12px] text-ink-muted">
+                  {formulaFor('eccentric_utilization_ratio')?.formula} — {formulaFor('eccentric_utilization_ratio')?.reference}
+                </p>
+              </li>
+            )}
+          </ul>
+          <p className="border-t border-line px-4 py-3 text-[12px] leading-relaxed text-ink-muted">{t('sportModule.combinedNote')}</p>
         </Panel>
       )}
 

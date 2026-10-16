@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
@@ -21,6 +22,7 @@ export function AssignScreen() {
   const { t } = useTranslation()
   const { trainingBlocks } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
+  const review = useReviewState(block)
   const [athletes, setAthletes] = useState<LinkedAthlete[] | null>(null)
   const [assignments, setAssignments] = useState<Assignment[]>([])
   const [target, setTarget] = useState<string | null>(null)
@@ -60,6 +62,7 @@ export function AssignScreen() {
                 <p className="text-[14px]" data-testid="assign-noblock">{t('assign.noBlock')} <Link to="/plan/waehlen" className="text-accent-text underline">{t('planHub.empty.cta')}</Link></p>
               ) : (
                 <>
+                  <ReviewMark state={review} testId="assign-unreviewed" />
                   <label className="block text-[13px]"><span className="label-tag">{t('own.name')}</span><input value={name} maxLength={60} onChange={(e) => setName(e.target.value)} data-testid="assign-name" className="mt-1.5 block min-h-11 w-full rounded-md border border-line bg-surface px-3 text-[16px]" /></label>
                   <div role="radiogroup" aria-label={t('assign.athlete')} data-testid="assign-athletes">
                     <span className="label-tag">{t('assign.athlete')}</span>

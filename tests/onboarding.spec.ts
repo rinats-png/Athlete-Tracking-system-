@@ -34,11 +34,17 @@ const store = (page: Page) =>
   page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') ?? '{}'))
 
 test.describe('Einstieg', () => {
-  test('der erste Schritt sagt, was die App nicht ist', async ({ page }) => {
+  test('der erste Schritt sagt, was die App ist, was nicht, und wo die Daten liegen', async ({ page }) => {
     await openFirstRun(page)
     await expect(page.getByText('Schritt 1 von 9')).toBeVisible()
     await expect(page.getByText(/keine medizinische Diagnostik/i)).toBeVisible()
-    await expect(page.getByText(/kein Trainingsplan/i)).toBeVisible()
+    // Pläne gibt es — aber nur aus belegten Regeln, und der Mensch entscheidet.
+    await expect(page.getByText(/nur aus belegten Regeln, mit Quelle und Prüfstatus/)).toBeVisible()
+    await expect(page.getByText(/Du oder dein Trainer entscheidet/)).toBeVisible()
+    // Daten: zuerst auf dem Gerät, mit dem Konto automatisch gesichert.
+    await expect(page.getByText(/automatisch zusätzlich auf Servern in der EU gesichert/)).toBeVisible()
+    await expect(page.getByText(/Alles bleibt auf diesem Gerät/)).toHaveCount(0)
+    await expect(page.getByText(/kein Trainingsplan/i)).toHaveCount(0)
   })
 
   test('ohne Pflichtangaben geht es nicht weiter — und es steht, was fehlt', async ({ page }) => {

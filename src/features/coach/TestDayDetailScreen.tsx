@@ -72,7 +72,7 @@ export function TestDayDetailScreen() {
 
       {/* --- Laufplan ------------------------------------------------- */}
       <Panel className="mb-4">
-        <PanelHeader title={t('testDay.plan')} subtitle={t('testDay.planHint')} />
+        <PanelHeader title={t('testDay.plan')} note={t('testDay.planHint')} />
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] border-collapse text-[13px]">
             <thead>
@@ -120,7 +120,7 @@ export function TestDayDetailScreen() {
 
       {/* --- Bedingungen des Tages ------------------------------------- */}
       <Panel className="mb-4 no-print">
-        <PanelHeader title={t('testDay.conditions')} subtitle={t('testDay.conditionsHint')} />
+        <PanelHeader title={t('testDay.conditions')} note={t('testDay.conditionsHint')} />
         <div className="grid gap-3 px-4 py-3 sm:grid-cols-3">
           <label className="text-[13px]">
             <span className="label-tag">{t('testDay.surface')}</span>
@@ -173,7 +173,7 @@ export function TestDayDetailScreen() {
 
       {/* --- Stationen mit Fortschritt --------------------------------- */}
       <Panel className="mb-4 no-print">
-        <PanelHeader title={t('testDay.stations')} subtitle={t('testDay.sheetsHint')} />
+        <PanelHeader title={t('testDay.stations')} note={t('testDay.sheetsHint')} />
         <ul className="divide-y divide-line">
           {plan.stations.map((station) => {
             const state = progress.find((p) => p.slug === station.slug)

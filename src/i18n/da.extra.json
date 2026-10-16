@@ -393,7 +393,7 @@
       "reportPdf": "Printklar rapport",
       "requirementGap": "Hvilken akse der giver din disciplin mest",
       "seasonPlan": "Kontrolpunkter frem til konkurrencen",
-      "sync": "Synkronisering på tværs af enheder",
+      "sync": "Automatisk synkronisering: sikkerhedskopi og alle dine enheder",
       "targetStandards": "Målværdier for den konkrete optagelsesprøve",
       "unlimitedReports": "Rapporter uden loft",
       "whiteLabel": "Eget logo i rapporten",
@@ -521,7 +521,7 @@
       "thin_data": "Tynde data",
       "no_assessment": "Ingen måling endnu"
     },
-    "method": "Tendensen er en flertalsafgørelse på tværs af de tests, hvor en overhovedet kan beregnes — bevidst ikke et gennemsnit af hældninger, fordi procent pr. 30 dage ikke meningsfuldt kan midles på tværs af forskellige tests. “Kræver opmærksomhed” er ikke en bedømmelse af personen, men en henvisning til en af de nævnte årsager.",
+    "method": "Tendensen er en flertalsafgørelse på tværs af de tests, hvor en overhovedet kan beregnes — bevidst ikke et gennemsnit af hældninger, fordi procent pr. 30 dage ikke meningsfuldt kan midles på tværs af forskellige tests. “Kræver opmærksomhed” er ikke en bedømmelse af personen, men en henvisning til en af de nævnte årsager. En test tæller kun, hvis ændringen er større end den egen målefejl.",
     "emptyTitle": "Ingen atleter endnu",
     "emptyBody": "Tilføj den første person under “Atleter, du træner” i din profil.",
     "soloTitle": "Trænertilstand er slået fra",
@@ -604,7 +604,7 @@
     "deleteHint_other": "“{{name}}” slettes permanent sammen med {{count}} målinger. Det kan ikke fortrydes. Brug arkivet for at skjule nogen uden at miste data.",
     "deleteConfirm": "Slet permanent",
     "meta": "{{results}} målinger · {{assessments}} testrunder · siden {{since}}",
-    "privacyNote": "KYDON gemmer kun det, du indtaster om en trænet atlet. Ingen konto, e-mailadresse eller invitation er nødvendig. Alt bliver på denne enhed.",
+    "privacyNote": "KYDON gemmer kun det om en tilknyttet atlet, som du selv indtaster. Atleten behøver hverken konto, e-mailadresse eller invitation. Med din konto sikkerhedskopieres det automatisk på servere i EU; databehandleraftalen gælder.",
     "handover": "Overdragelse",
     "handoverHint": "En atlet skifter klub eller træner: historikken tilhører atleten, ikke denne enhed. Filen indeholder kun denne ene atlet — uden din branding og uden de andre.",
     "handoverExport": "Eksportér atlet",
@@ -637,11 +637,11 @@
     "data": "Dine data",
     "recovered": "Disse data kom tilbage fra enhedens anden kopi, gemt den {{date}}. Browseren havde ryddet hovedlageret.",
     "backupDue": {
-      "never_exported": "Du har {{count}} målinger og har aldrig eksporteret. Dataene ligger kun på denne enhed — en eksport gør dem til dine uden den.",
+      "never_exported": "Du har {{count}} målinger og har aldrig eksporteret. Synkroniseringen sikrer dem på din konto; en eksport er din egen kopi, uafhængig af enhed og konto.",
       "many_new_results": "{{count}} målinger er kommet til siden seneste eksport. En ny eksport kræver ét klik.",
       "long_ago": "Seneste eksport var for {{days}} dage siden, og {{count}} målinger er kommet til siden."
     },
-    "privacy": "Dine målinger ligger i denne browser. De sendes kun, hvis du slår synkronisering til. Rydning af browserdata fjerner den lokale journal — eksporten eller synkroniseringen beskytter mod det.",
+    "privacy": "Dine målinger ligger først på denne enhed og sikkerhedskopieres automatisk på servere i EU med din konto. Slår du synkroniseringen fra, er eksporten din eneste sikkerhedskopi.",
     "export": "Eksportér",
     "import": "Importér",
     "importFailed": "Filen kunne ikke læses.",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} dage",
     "trendLabel": {
       "improving": "I fremgang",
-      "stable": "Stabil",
+      "stable": "Ingen klar ændring",
       "declining": "Faldende",
+      "unclear": "Uklart",
       "insufficient_one": "{{count}} måling",
       "insufficient_other": "{{count}} målinger"
     },
     "trendInsufficientHint": "En regressionslinje beregnes fra tre målinger. To punkter giver altid en perfekt linje — det er ikke en tendens.",
+    "trendUnclearHint": "Målefejlen for denne test kendes endnu ikke — den kan estimeres fra fire målinger. Indtil da siger KYDON hverken „i fremgang“ eller „faldende“.",
     "trendBasis": "{{points}} målinger, {{days}} dage, R² {{r2}}",
     "compareAssessments": "Sammenlign to sessioner",
     "compareHint": "Kun afsluttede sessioner. Tests, der kun findes i den ene af de to, markeres frem for at udelades.",
@@ -995,7 +997,7 @@
     "photoRemove": "Fjern dokumentation",
     "photoAlt": "Dokumentation af målingen",
     "photoAdded": "tilføjet den {{date}}",
-    "photoHint": "Ét billede pr. resultat — timerdisplayet, vægtens aflæsning. Det formindskes og bliver på denne enhed; det sendes ikke og analyseres ikke.",
+    "photoHint": "Ét billede pr. resultat — tidtagningens display, vægtens visning. Det formindskes, gemmes med målingen og synkroniseres med den. Det analyseres ikke.",
     "photoError": {
       "not_an_image": "Det er ikke en billedfil.",
       "unreadable": "Billedet kunne ikke læses.",
@@ -1013,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Historik",
     "title": "Påmindelser",
-    "intro": "Appen ved, hvornår du sidst målte, og beregner på din enhed, hvad der er tid til. Påmindelser er slået fra, indtil du slår dem til – med en konto også via push.",
-    "noPush": "Påmindelsen vises i appen, når du åbner den. Med en konto kan du også slå push til: så giver KYDON besked, selv når appen er lukket. Serveren får kun datoen for den næste måling at vide. Uden konto er kalenderfilen stadig den pålidelige vej.",
+    "intro": "Appen ved, hvornår du sidst målte, og beregner forfaldet på din enhed. Påmindelser er slået fra, indtil du slår dem til — også som push, hvis du vil.",
+    "noPush": "Påmindelsen vises i appen, når du åbner den. Du kan også slå push til: så melder KYDON sig, selv når appen er lukket. Serveren får kun datoen for næste forfald at vide. Kalenderfilen er stadig den mest pålidelige vej.",
     "enable": "Slå påmindelser til",
     "enabled": "Påmindelser er slået til",
     "disabled": "Påmindelser er slået fra",
@@ -1030,7 +1032,7 @@
     "dueOn": "forfalder den {{date}}",
     "default": "Standard",
     "calendar": "Download kalenderfil",
-    "calendarHint": "Én heldagsbegivenhed pr. forfalden gentest, med alarm tre dage før. Virker i enhver kalender, offline og uden konto — det er den pålidelige vej.",
+    "calendarHint": "Én heldagsbegivenhed pr. forfalden genmåling med alarm tre dage før. Virker i enhver kalender og offline — det er den pålidelige vej.",
     "calendarEmpty": "Ingen gentest forfalder endnu. Så snart en test bør gentages, ligger filen klar her.",
     "notify": "Tillad systemnotifikationer",
     "notifyOn": "Systemnotifikationer er tilladt",
@@ -1516,7 +1518,7 @@
     "carryQuestion": "Der ligger {{count}} atleter på denne enhed. Hvad skal der ske med dem?",
     "carryYes": "Overfør dem til teamet — så tilhører de teamet og tæller med i dets niveau.",
     "carryNo": "Behold dem på min egen konto — de forlader denne enhed og kommer tilbage, når jeg forlader teamet.",
-    "joinPrivacy": "Når du bliver medlem, slås synkronisering til: Teamets atleter ligger på serveren, og alle teamets trænere kan se dem. Forlader du teamet, bliver atleterne i teamet.",
+    "joinPrivacy": "Et team virker kun med synkronisering: er den slået fra, slår tilmeldingen den til igen. Teamets atleter ligger på serveren, og alle teamets trænere kan se dem. Forlader du teamet, bliver atleterne i teamet.",
     "joinButton": "Bliv medlem",
     "joined": "Du er nu med i teamet »{{name}}«.",
     "unnamed": "uden navn",
@@ -2161,7 +2163,7 @@
     "consent": {
       "title": "Samtykke til hjertedata",
       "agree": "Accepter",
-      "storage": "Slagrækken bliver på enheden og kasseres efter målingen. Kun de to resultater gemmes. Med konto og synkronisering ligger de også på din konto. Du kan altid slette dem.",
+      "storage": "Slagsekvensen bliver på enheden og kasseres efter målingen. Kun de to resultater gemmes; med synkronisering ligger de også på din konto. Du kan altid slette dem.",
       "body": "Puls og pulsvariabilitet er helbredsoplysninger (art. 9 GDPR). KYDON måler dem kun, hvis du giver samtykke her, og bruger dem kun til at vise dem for dig i historikken og i dagens kontekst."
     },
     "beats_other": "{{count}} slag",
@@ -2240,6 +2242,8 @@
     "title": "Nyt i KYDON:",
     "close": "Forstået",
     "items": {
+      "sensitive": "Helbredsrelaterede oplysninger — søvn, stress, puls, kropsfedt, gener — synkroniserer KYDON nu kun med dit udtrykkelige samtykke. Uden bliver de på enheden. Du beslutter det i profilen under »Data«.",
+      "account": "Konto og synkronisering: KYDON synkroniserer nu af sig selv med din konto. Dine data er sikret på servere i EU og opdateret på alle dine enheder. Du kan slå det fra i profilen — først ser du, hvad der så ikke længere virker.",
       "design": "Nyt design: kort af matteret glas med niveauer, monotal til måleværdier og roligere overgange — lyst og mørkt.",
       "tests": "Testbibliotek efter protokol 1.0: 126 tests i 29 områder, hver med mål, opstilling, trin og vurdering.",
       "images": "Fotos af testopstillingerne i beskrivelserne i stedet for skitser.",
@@ -2790,7 +2794,7 @@
     "saveNext": "Gem, næste atlet",
     "backToList": "Tilbage til listen",
     "rule": "Det bedste gyldige forsøg tæller. Ugyldige forsøg bliver gemt, men ikke vurderet.",
-    "offline": "Fungerer uden net. Alt bliver på denne enhed."
+    "offline": "Virker uden net. Der gemmes først på denne enhed og synkroniseres, så snart nettet er tilbage."
   },
   "ask": {
     "eyebrow": "Spørgsmål",
@@ -2897,7 +2901,8 @@
       "not_entitled": "Omformulering hører til Pro. Det faste svar bliver stående.",
       "limit_reached": "De 30 omformuleringer denne måned er brugt. Det faste svar bliver stående.",
       "rejected": "Teksten bestod ikke talkontrollen og vises ikke. Det faste svar bliver stående.",
-      "failed": "Det lykkedes ikke. Det faste svar bliver stående."
+      "failed": "Det lykkedes ikke. Det faste svar bliver stående.",
+      "no_consent": "Uden dit samtykke sendes intet til sprogmodellen. Det faste svar bliver stående."
     }
   },
   "weeklyReport": {
@@ -3022,7 +3027,7 @@
       "EXTRAPOLATED": "ekstrapoleret"
     },
     "review": {
-      "unreviewed": "Ukontrolleret",
+      "unreviewed": "Endnu ikke fagligt gennemgået",
       "reviewed": "Kontrolleret af {{name}} den {{date}}"
     },
     "limits": "Belægets grænser",
@@ -3165,8 +3170,8 @@
     "save": "Registrer session"
   },
   "planHub": {
-    "eyebrow": "Træning",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Træning",
     "competition": "Mål: {{name}}",
     "competitionUnnamed": "din konkurrence",
     "empty": {
@@ -3243,7 +3248,7 @@
       "event": "Konkurrence"
     },
     "none": "Der er ingen skabelon til dette udvalg.",
-    "unreviewed": "Ugennemgået",
+    "unreviewed": "Endnu ikke fagligt gennemgået",
     "weeksTotal": "{{n}} uger",
     "family": {
       "combat_grappling": "Kampsport grappling",
@@ -3974,5 +3979,391 @@
     "supports": "Støtter {{sport}}",
     "other": "Andet fokus",
     "filter": "Til {{sport}}"
+  },
+  "look": {
+    "info": "Mere info",
+    "today": {
+      "label": "I dag i planen",
+      "go": "Kom i gang",
+      "toPlan": "Til planen",
+      "missed": "misset · indhente?",
+      "percentile": "Percentil {{score}}"
+    },
+    "hub": {
+      "catchUp": "indhent",
+      "exercises": "Øvelser",
+      "own": "Egen plan"
+    },
+    "player": {
+      "close": "Luk træningen"
+    },
+    "tests": {
+      "measured": "{{measured}} af {{total}} målt"
+    }
+  },
+  "start": {
+    "button": "Start træning",
+    "title": "Start træning",
+    "today": "I dag",
+    "missed": "Misset",
+    "upcoming": "De næste to uger",
+    "allDone": "Ingen åbne træninger i planen – alt er klaret.",
+    "countsHint": "Du kan også lave hver træning på en anden dag. Den bliver så krydset af for sin planlagte dato.",
+    "none": "Du har ingen aktiv plan. Du kan stadig træne – vælg en måde nedenfor.",
+    "free": "Uden plan",
+    "log": "Registrér noget",
+    "logSub": "Skriv en træning direkte i træningsloggen",
+    "catalog": "Fra kataloget",
+    "catalogSub": "En træning fra en færdig plan, uden at tage planen i brug",
+    "build": "Sæt selv sammen",
+    "buildSub": "Vælg øvelser, fastlæg sæt, gå i gang",
+    "countsFor": "Planlagt til {{date}} – tæller for den dato.",
+    "doNow": "Gør det nu"
+  },
+  "free": {
+    "eyebrow": "Fri træning",
+    "catalogTitle": "Træning fra kataloget",
+    "catalogIntro": "Vælg en plan og en træning fra den. Selve planen tages ikke i brug.",
+    "pickSession": "Vælg en træning",
+    "week": "Uge",
+    "items": "Dele: {{n}}",
+    "otherPlan": "Vælg en anden plan",
+    "buildTitle": "Egen træning",
+    "buildIntro": "Til i dag, uden plan. Den gemmes i træningsloggen.",
+    "name": "Træningens navn",
+    "search": "Søg øvelse",
+    "exercises": "Øvelser",
+    "empty": "Ingen øvelse endnu. Søg ovenfor og tryk på en.",
+    "sets": "Sæt",
+    "setsN": "{{n}} ×",
+    "fewer": "Et sæt mindre",
+    "more": "Et sæt mere",
+    "reps": "Gent./tid",
+    "remove": "Fjern øvelse",
+    "start": "Start træning",
+    "lost": "Der er ikke valgt nogen træning her. Vælg en under »Start træning«.",
+    "noSlot": "Fri træning: tæller som træning, men krydser ikke en dato af i planen.",
+    "save": "Gem i træningsloggen",
+    "defaultTitle": "Fri styrketræning"
+  },
+  "aiConsent": {
+    "title": "Samtykke: lad en sprogmodel formulere tekster",
+    "point": {
+      "what": "Hvad der sendes: kun fakta fra dette svar – faste nøgleord og tal, fx „ændring +3,2 %, tærskel 2,8 %“. Sprogmodellen formulerer en tekst ud fra dem. KYDON kontrollerer hvert tal og viser ellers det faste svar.",
+      "notSent": "Hvad der ikke sendes: dit navn, din e-mailadresse, noter, dagbog og anden fritekst, data fra sundhedslaget og id’er for din konto.",
+      "who": "Modtager: Anthropic (sprogmodellen Claude) som databehandler. Behandlingen kan finde sted i USA; overførslen bygger på standardkontraktbestemmelser. Udbyderen bruger ikke dataene til at træne sine modeller. KYDON gemmer hverken fakta eller tekst – kun hvor ofte du har brugt funktionen i måneden, og dette samtykke.",
+      "label": "Tekster fra sprogmodellen er markeret som sådan. Modellen omformulerer kun: den vurderer intet, stiller ingen diagnose og træffer ingen træningsbeslutning.",
+      "voluntary": "Frivilligt: uden samtykke fungerer KYDON fuldt ud – svarene vises da som faste tekster. Retsgrundlaget er dit samtykke (art. 6, stk. 1, litra a, GDPR)."
+    },
+    "withdraw": "Du kan til enhver tid trække dit samtykke tilbage i din profil under „Data“ med virkning for fremtiden.",
+    "more": "Mere i privatlivspolitikken",
+    "age": "Jeg er mindst 16 år.",
+    "accept": "Giv samtykke og formulér",
+    "decline": "Ikke nu",
+    "failed": "Samtykket kunne ikke gemmes. Det kræver forbindelse og en konto. Intet blev sendt.",
+    "settingTitle": "Tekster fra sprogmodellen",
+    "state": {
+      "granted": "Samtykke givet. Ved tryk sendes fakta til Anthropic for at blive formuleret.",
+      "withdrawn": "Trukket tilbage. Der sendes intet længere.",
+      "unset": "Intet samtykke. Der sendes intet."
+    },
+    "withdrawButton": "Træk samtykke tilbage",
+    "grantButton": "Giv samtykke …",
+    "withdrawnLocal": "På denne enhed gælder tilbagetrækningen straks. Serveren modtager den, så snart der er forbindelse."
+  },
+  "storage": {
+    "newerTitle": "Nyere KYDON-version fundet",
+    "reload": "Genindlæs appen",
+    "more_one": "… og én mere.",
+    "more_other": "… og {{count}} mere.",
+    "kept": "Alt andet er overført fuldt ud.",
+    "quarantined": "De ulæselige poster opbevares på denne enhed og er ikke slettet.",
+    "backup": "Der findes en sikkerhedskopi på denne enhed (fra {{date}}).",
+    "noBackup": "Der findes ingen sikkerhedskopi på denne enhed. Eksportér dine data regelmæssigt.",
+    "saveQuarantine": "Gem ulæselige poster som fil",
+    "kind": {
+      "results": "Resultater",
+      "assessments": "Testaftaler",
+      "biometrics": "Kropsværdier",
+      "observations": "Observationer",
+      "diary": "Dagbog",
+      "diaryFields": "Dagbogsfelter",
+      "activities": "Aktiviteter",
+      "workouts": "Træningslog",
+      "trainingBlocks": "Træningsblokke",
+      "planTemplates": "Planskabeloner",
+      "customExercises": "Egne øvelser",
+      "decisions": "Beslutninger",
+      "meals": "Måltider",
+      "nutrition": "Ernæring",
+      "health": "Sundhed",
+      "peakWeeks": "Peak week",
+      "notes": "Noter",
+      "consent": "Samtykke",
+      "focuses": "Fokusområder",
+      "audit": "Ændringslog",
+      "testDays": "Testdage",
+      "branding": "Branding",
+      "name": "Navn",
+      "athlete": "Atlet",
+      "store": "Data",
+      "other": "Andet"
+    }
+  },
+  "sync": {
+    "title": "Synkronisering med kontoen",
+    "hint": "Kører af sig selv: dine data som sikkerhedskopi på servere i EU og på hver enhed, hvor du er logget ind. Helbredsdata kommer aldrig med.",
+    "signedOut": "Dit login er udløbet. Log ind igen, så synkroniserer KYDON videre.",
+    "enable": "Slå synkronisering til igen",
+    "disable": "Slå synkronisering fra",
+    "now": "Synkronisér nu",
+    "working": "Synkroniserer …",
+    "last": "Senest synkroniseret: {{date}}",
+    "never": "Aldrig synkroniseret.",
+    "result": "{{pushed}} sendt, {{pulled}} hentet, {{series}} poster synkroniseret.",
+    "offline": "Ingen forbindelse. Synkroniseringen indhenter det, når du er online igen.",
+    "conflictTitle": "Afvigende tilstand",
+    "conflictBody": "Denne atlet blev ændret på en anden enhed. KYDON har intet overskrevet — begge tilstande er intakte. Gem først din eksport, og beslut derefter.",
+    "conflictKeepLocal": "Send denne journal",
+    "conflictExplain": "Serverens tilstand erstattes. Den anden vej — at hente serverens tilstand — går via eksport, “slet alt” og en ny synkronisering.",
+    "whatLeaves": "Synkroniseres: målinger, profiloplysninger, noter, træningsprioriteter, planer samt dagbog, træningspas, beslutninger og måltider. Ikke med: din adgangskode, importerede løbeture og helbredsdata — de har deres egen krypterede vej. Helbredsrelaterede oplysninger (søvn, stress, puls, kropsfedt, gener) kun med dit udtrykkelige samtykke.",
+    "auto": "KYDON synkroniserer af sig selv: efter start, efter hver ændring og så snart nettet er tilbage.",
+    "paused": "Synkroniseringen har været slået fra siden {{date}}.",
+    "frozen": "Kopien på din konto er fra {{date}}; det, der er kommet til siden, findes kun på denne enhed og i eksporten.",
+    "frozenNever": "Der ligger endnu ingen kopi på din konto; alt findes kun på denne enhed og i eksporten.",
+    "offDialog": {
+      "eyebrow": "Slå synkronisering fra",
+      "title": "Hvad der så ikke længere virker",
+      "backup": "Ingen sikkerhedskopi længere. Hvis enheden mistes, eller browseren ryddes, er alt væk, der er kommet til siden, du slog det fra — medmindre du har eksporteret det.",
+      "devices": "Dine andre enheder får ingen nye værdier, og ændringer derfra kommer ikke frem hertil.",
+      "coach": "Din træner ser kun den senest synkroniserede tilstand. Nye målinger, check-ins og træningspas når ikke frem.",
+      "plans": "Planer og justeringer fra din træner kommer ikke længere frem til denne enhed.",
+      "server": "Kopien på din konto forbliver, som den er — den slettes ikke. Du kan fjerne den helt med »Slet konto permanent«.",
+      "local": "Måling fungerer som før, også uden net. Du kan altid slå synkroniseringen til igen; så indhentes det, der mangler.",
+      "confirm": "Slå fra alligevel",
+      "keep": "Behold synkronisering"
+    }
+  },
+  "sensitiveConsent": {
+    "title": "Synkronisér helbredsrelaterede oplysninger",
+    "intro": "Frivilligt. Nogle oplysninger kan være helbredsoplysninger. De synkroniseres kun med dit udtrykkelige samtykke:",
+    "introCoach": "Frivilligt. Nogle oplysninger om dine atleter kan være helbredsoplysninger. De synkroniseres kun, hvis du bekræfter, at atleterne har givet udtrykkeligt samtykke:",
+    "cat": {
+      "wellbeing": "Søvn, energi, stress og ømhed (dagbog, testdag)",
+      "heart": "Pulsvariabilitet, hvilepuls og puls under træningspas",
+      "body": "Kropsfedt, fedtfri masse og hvilestofskifte",
+      "complaints": "Mave-tarm-gener, smertemarkeringen for et træningspas og CK-værdien"
+    },
+    "without": "Uden samtykke bliver netop disse oplysninger på denne enhed — alt andet synkroniseres. En træner ser dem så ikke, og på en ny enhed mangler de.",
+    "healthLayer": "Laboratorieværdier, symptomer, cyklus og medicin hører ikke med: Helbredslaget har sit eget samtykke og er end-to-end-krypteret.",
+    "checkbox": {
+      "self": "Ja, jeg giver udtrykkeligt samtykke til, at disse oplysninger sikkerhedskopieres og synkroniseres med min konto på servere i EU (art. 9, stk. 2, litra a, GDPR).",
+      "coach": "Ja, disse oplysninger om mine atleter skal synkroniseres. Jeg bekræfter, at jeg har atleternes udtrykkelige samtykke — for mindreårige forældremyndighedens."
+    },
+    "age": "Jeg er mindst 16 år.",
+    "ageNeeded": "Bekræft din alder, eller fjern fluebenet igen.",
+    "withdraw": "Du kan til enhver tid trække samtykket tilbage i profilen under »Data«; næste synkronisering fjerner så oplysningerne fra serveren.",
+    "state": {
+      "granted": "Samtykke givet — disse oplysninger synkroniseres.",
+      "withdrawn": "Trukket tilbage — disse oplysninger bliver på denne enhed.",
+      "unset": "Intet samtykke — disse oplysninger bliver på denne enhed."
+    },
+    "pending": "Endnu ikke nået frem til serveren; næste synkronisering indhenter det.",
+    "ask": "Giv samtykke",
+    "grant": "Giv udtrykkeligt samtykke",
+    "grantCoach": "Bekræft og synkronisér",
+    "withdrawButton": "Træk samtykke tilbage",
+    "cancel": "Annuller"
+  },
+  "workout": {
+    "running": "I gang · {{time}}",
+    "start": "Start",
+    "pause": "Pause",
+    "paused": "Sat på pause",
+    "resume": "Fortsæt",
+    "finish": "Afslut",
+    "save": "Gem",
+    "continue": "Træn videre",
+    "discard": "Kassér",
+    "discardConfirm": "Kassér helt",
+    "close": "Luk",
+    "minimize": "Forlad, træningen fortsætter",
+    "voice": "Talte meddelelser",
+    "bar": {
+      "running": "Træning i gang · {{time}}",
+      "paused": "Træning på pause · {{time}}",
+      "rest": "Pause {{time}}",
+      "back": "Tilbage"
+    },
+    "conflict": {
+      "title": "Er allerede i gang: {{title}}",
+      "body": "Fortsæt dér — eller kassér det og start forfra her.",
+      "continue": "Fortsæt dér",
+      "replace": "Kassér og start her"
+    },
+    "focus": {
+      "exercise": "Øvelse {{n}} af {{of}}",
+      "set": "Sæt {{n}} af {{of}}",
+      "target": "Mål {{target}}",
+      "last": "Sidste gang: {{value}}",
+      "less": "Mindre {{field}}",
+      "more": "Mere {{field}}",
+      "done": "Sæt færdigt",
+      "allDone": "Alle sæt er registreret. Afslut nedenfor."
+    },
+    "rest": {
+      "title": "Pause",
+      "of": "af {{total}}",
+      "next": "Næste",
+      "sound": "Lyd ved 3-2-1 og til sidst · også uden net",
+      "skip": "Spring pausen over"
+    },
+    "camera": {
+      "chip": "Kameraet tæller",
+      "title": "Kameraet tæller med",
+      "close": "Luk kameraet",
+      "onDevice": "Kun på enheden",
+      "loading": "Kamera og genkendelse indlæses …",
+      "denied": "Ingen adgang til kameraet.",
+      "unsupported": "Genkendelsen virker ikke på denne enhed.",
+      "fallback": "Tæl selv som vanligt, og skriv gentagelserne ind.",
+      "back": "Tilbage til sættet",
+      "setupTitle": "Opsæt kameraet",
+      "hint": {
+        "squat": "{{name}}: stil det fra siden, hele kroppen i billedet.",
+        "hinge": "{{name}}: stil det fra siden, hele kroppen i billedet.",
+        "push": "{{name}}: stil det fra siden, skulder, albue og hånd i billedet.",
+        "pull": "{{name}}: forfra eller fra siden, skulder, albue og hånd i billedet."
+      },
+      "check": {
+        "body": "Kroppen er synlig",
+        "light": "Nok lys",
+        "still": "Telefonen står stille"
+      },
+      "ok": "opfyldt",
+      "waiting": "ikke endnu",
+      "privacy": "Genkendelsen kører kun på din enhed. Intet billede og ingen video forlader telefonen eller gemmes — kun tallene gemmes.",
+      "ofTarget": "af {{target}} gent.",
+      "tempo": "Tempo pr. gentagelse · relativt",
+      "estimate": "Skøn",
+      "loss": "Tempotab i sættet indtil nu −{{percent}} %. En sammenligning med andre dage kommer først, når din målefejl er kendt.",
+      "lossNone": "Tempoet vises fra anden gentagelse.",
+      "startTitle": "Kameraet tæller",
+      "startIntro": "Vælg en øvelse. Telefonen på gulvet, lav sættet — kameraet tæller gentagelserne.",
+      "pattern": {
+        "squat": "Squatmønster",
+        "hinge": "Hoftebøj",
+        "push": "Pres",
+        "pull": "Træk"
+      }
+    },
+    "clock": {
+      "title": "Runder og intervaller",
+      "intro": "Et ur til kampsportsrunder, Tabata, EMOM, AMRAP og intervaller. Lyd, vibration og stemme — skærmen forbliver tændt.",
+      "presets": "Skabeloner",
+      "preset": {
+        "boxing": "Boksning 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervaller"
+      },
+      "work": "Arbejde (sek)",
+      "total": "Samlet tid (sek)",
+      "rest": "Pause (sek)",
+      "rounds": "Runder",
+      "warn": "Forvarsel (sek)",
+      "totalTime": "Samlet varighed: {{time}}",
+      "prep": "Snart går det løs",
+      "round": "Runde {{n}}",
+      "restPhase": "Pause",
+      "amrapLabel": "Så mange runder som muligt",
+      "amrapTap": "Runde klaret · {{n}}",
+      "done": "Klaret",
+      "lastSeconds": "Sidste {{count}} sekunder",
+      "elapsed": "I alt {{time}}",
+      "skip": "Næste",
+      "say": {
+        "round": "Runde {{n}}",
+        "go": "Nu",
+        "rest": "Pause",
+        "warn": "Sidste {{count}} sekunder",
+        "done": "Klaret"
+      }
+    },
+    "punch": {
+      "enable": "Tæl slag (mikrofon, forhåndsvisning)",
+      "title": "Slag (mikrofon)",
+      "calibrate": "Prøve: slå ti gange — {{n}} af 10",
+      "denied": "Ingen adgang til mikrofonen.",
+      "estimate": "Skøn · forhåndsvisning, ikke valideret"
+    },
+    "run": {
+      "title": "Løb",
+      "intro": "Tid, distance, tempo og puls. Frit eller som intervaller efter distance.",
+      "mode": "Type løb",
+      "mode_free": "Frit",
+      "mode_intervals": "Intervaller",
+      "reps": "Gentagelser",
+      "workM": "Distance (m)",
+      "restS": "Joggepause (sek)",
+      "privacy": "Placeringen bruges kun, mens appen er åben, og kun på enheden. Distance, tid og omgange gemmes — intet spor og intet sted.",
+      "freeTitle": "Løb",
+      "intervalsTitle": "Intervaller {{reps}} × {{m}} m",
+      "gps_wait": "Placering …",
+      "gps_ok": "Placering god",
+      "gps_weak": "Placering upræcis",
+      "gps_off": "Ingen placering",
+      "freeLabel": "Løbetid",
+      "workLabel": "Interval {{n}} af {{of}}",
+      "restLabel": "Joggepause efter {{n}}",
+      "doneLabel": "Alle intervaller klaret",
+      "left": "{{m}} m tilbage",
+      "pace": "Tempo",
+      "distance": "Distance",
+      "total": "I alt",
+      "splitsN": "Omgange",
+      "lap": "Omgang",
+      "finishHint": "Sæt på pause først for at afslutte.",
+      "say": {
+        "work": "Interval {{n}}",
+        "rest": "Joggepause",
+        "last100": "Hundrede meter tilbage",
+        "done": "Alle intervaller klaret"
+      }
+    },
+    "summary": {
+      "title": "Opsummering",
+      "lost": "Her er ingen træning. Gemte træninger finder du i dagbogen.",
+      "toTraining": "Til træningen",
+      "saved": "Gemt · {{date}}",
+      "duration": "Målt varighed",
+      "sets": "Sæt",
+      "distance": "Distance",
+      "pace": "Tempo",
+      "rounds": "Runder",
+      "hr": "Puls gns. / maks.",
+      "compare": "Sammenlignet med sidste gang",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} gent.",
+      "first": "Første gang med denne øvelse — fra nu af er der en sammenligning.",
+      "unknown_one": "Sidste gang {{previous}}. Målefejl endnu ukendt: {{count}} pas mere til en vurdering.",
+      "unknown_other": "Sidste gang {{previous}}. Målefejl endnu ukendt: {{count}} pas mere til en vurdering.",
+      "v": {
+        "better": "Over din målefejl (fra {{detectable}} %), bedre.",
+        "worse": "Over din målefejl (fra {{detectable}} %), dårligere.",
+        "within_noise": "Inden for støjen, ingen påvist forskel (tærskel {{detectable}} %)."
+      },
+      "estimate": "e1RM er et skøn.",
+      "note": "Der sammenlignes med det seneste pas med samme øvelse. »Bedre« først, når ændringen ligger over dit eget udsving — det kræver mindst fire pas.",
+      "splits": "Delstrækninger",
+      "retest": "Næste retest:",
+      "retestIn_one": "om {{count}} dag",
+      "retestIn_other": "om {{count}} dage",
+      "view": "Se",
+      "done": "Færdig"
+    }
   }
 }

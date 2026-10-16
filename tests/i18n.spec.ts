@@ -76,6 +76,8 @@ test.describe('Inhalte', () => {
 /** Ein eingerichteter, leerer Bestand in einer bestimmten Sprache. */
 async function openIn(page: import('@playwright/test').Page, lang: string) {
   await blockFonts(page)
+  // Kein Fall spricht den echten Dienst an (siehe helpers.ts, offlineServer).
+  await page.context().route('**/*.supabase.co/**', (route) => route.abort())
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   const seeded = emptyData()
   seeded.athletes[0].profile.onboardingCompletedAt = '2026-01-01T00:00:00.000Z'
@@ -91,6 +93,8 @@ async function openIn(page: import('@playwright/test').Page, lang: string) {
       )
       localStorage.setItem('kydon.data.v1', JSON.stringify(store))
       localStorage.setItem('kydon.mode', 'guest')
+      localStorage.setItem('kydon.auth', JSON.stringify({ access_token: 'stub', refresh_token: 'stub', token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + 3600, user: { id: '00000000-0000-4000-8000-000000000001', email: 'pruef@baseline.test' } }))
+      localStorage.setItem('kydon.sync.enabled', 'off')
     },
     { store: seeded, lang },
   )

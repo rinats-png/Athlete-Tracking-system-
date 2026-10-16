@@ -5,6 +5,7 @@ import { AlertTriangle, CalendarArrowDown, Check, ChevronLeft, ChevronRight, Mov
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { ReviewMark, useReviewState } from '@/features/plan/ReviewMark'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { planMode } from '@/domain/planMode'
 import { addDays, blockEndDay, blockWeek, calendarDays, calendarWeek, missedOccurrences, mondayOf, moveOccurrence, moveWarnings, occurrences, overrideSession, weekdayOf, type CalendarDay, type Occurrence } from '@/domain/trainingBlock'
@@ -66,6 +67,7 @@ export function PlanCalendarScreen() {
   const { t } = useTranslation()
   const { trainingBlocks, saveTrainingBlock } = useAppData()
   const block = trainingBlocks.find((b) => b.status === 'active') ?? null
+  const review = useReviewState(block)
   const today = todayStr()
   const [view, setView] = useState<View>('week')
   const [anchor, setAnchor] = useState<string | null>(null)
@@ -192,6 +194,7 @@ export function PlanCalendarScreen() {
   return (
     <div data-testid="plan-calendar">
       <ScreenHeader eyebrow={t('planHub.eyebrow')} title={t('cal.title')} intro={t('cal.intro')} />
+      <div className="mb-3"><ReviewMark state={review} testId="cal-unreviewed" /></div>
       <div className="mb-3 flex flex-wrap items-center gap-2" role="group" aria-label={t('cal.view')}>
         {VIEWS.map((v) => (
           <button key={v} type="button" aria-pressed={view === v} data-testid={`cal-view-${v}`} onClick={() => setView(v)} className={cn('min-h-11 rounded-pill border px-4 text-[13px]', view === v ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line')}>
@@ -204,7 +207,7 @@ export function PlanCalendarScreen() {
 
       {missed.length > 0 && (
         <Panel className="mb-3 border-warning" data-testid="cal-missed">
-          <PanelHeader title={t('cal.missedTitle', { n: missed.length })} subtitle={t('cal.missedNote')} />
+          <PanelHeader title={t('cal.missedTitle', { n: missed.length })} note={t('cal.missedNote')} />
           <ul className="px-4 pb-3">
             {missed.slice(0, 6).map((o) => (
               <li key={keyOf(o)} className="flex flex-wrap items-center justify-between gap-2 border-t border-line py-2 first:border-t-0">
@@ -285,8 +288,20 @@ export function PlanCalendarScreen() {
         </Panel>
       )}
 
+      {/*
+        Das Verschiebe-Feld klebt knapp über der Navigationsleiste (am Desktop,
+        ohne Leiste, knapp über dem Rand). Der Abstand ist kleiner als der
+        Leerraum, den die Hülle unter dem Inhalt freihält — ganz unten liegt das
+        Feld deshalb unter dem Kalender, nicht darauf. Auf niedrigen Bildschirmen
+        (Telefon quer) klebt es gar nicht: Leiste und Feld liessen dort kaum
+        Platz für den Kalender. Das Kleben macht
+        der Rahmen, nicht das Panel: `float` setzt `position: relative`, und
+        zusammen mit `bottom-24` schob das das Feld fest um 96 px nach oben —
+        über die letzte Monatszeile, genau die Tage, die man antippen will.
+      */}
       {(picked || error) && (
-        <Panel float className="sticky bottom-24 mt-4 border-accent" data-testid="cal-move">
+        <div className="sticky bottom-[calc(var(--bottom-nav-h)+env(safe-area-inset-bottom)+0.5rem)] z-10 mt-4 lg:bottom-4 [@media(max-height:560px)]:static" data-testid="cal-move-frame">
+        <Panel float className="border-accent" data-testid="cal-move">
           <div className="space-y-2 px-4 py-4">
             {picked && (
               <p className="text-[14px]">
@@ -316,6 +331,7 @@ export function PlanCalendarScreen() {
             )}
             <div className="flex flex-wrap gap-2">
               {picked && target != null && <button type="button" data-testid="cal-confirm" onClick={confirm} className="min-h-11 rounded-pill bg-accent px-5 text-[13px] font-semibold text-accent-ink">{t('cal.confirm')}</button>}
+              {picked && !picked.done && <Link to={`/plan/heute?s=${encodeURIComponent(picked.session.id)}&d=${picked.planned}`} data-testid="cal-do-now" className="inline-flex min-h-11 items-center rounded-pill border border-accent px-4 text-[13px] font-semibold text-accent-text">{t('start.doNow')}</Link>}
               {picked?.moved && !series && <button type="button" data-testid="cal-unmove" onClick={unmove} className="min-h-11 rounded-pill border border-line px-4 text-[13px]">{t('cal.unmove', { date: dm(picked.planned) })}</button>}
               <button type="button" onClick={reset} data-testid="cal-cancel" className="min-h-11 px-3 text-[13px] text-ink-secondary underline underline-offset-2">{t('cal.cancel')}</button>
             </div>
@@ -323,6 +339,7 @@ export function PlanCalendarScreen() {
             <p className="text-[11px] text-ink-muted">{series ? t('cal.seriesNote') : t('cal.singleNote')}</p>
           </div>
         </Panel>
+        </div>
       )}
     </div>
   )

@@ -11,6 +11,7 @@ import { ageFromBirthDate } from '@/lib/format'
 import {
   bodyWeightAt,
   clearData,
+  isWriteLocked,
   emptyData,
   exportData,
   importData,
@@ -89,11 +90,11 @@ const EMPTY_PROTOCOL: ProtocolInfo = {
  * Zentraler Datenzugriff der App.
  *
  * Alle Screens lesen und schreiben hierüber, nie direkt am Speicher. Dadurch
- * ist der Wechsel vom Gastmodus (lokal) auf ein Konto (Cloud) ein Austausch
- * dieser einen Schicht und nicht ein Umbau jedes Screens.
+ * bleibt der Abgleich mit dem Konto (`useAutoSync`) eine Sache dieser einen
+ * Schicht und nicht jedes Screens.
  */
 
-export type AppMode = 'guest' | 'demo'
+export type AppMode = 'own' | 'demo'
 
 export interface RecordResultInput {
   testSlug: string
@@ -172,6 +173,8 @@ export interface AppDataValue {
   deleteTrainingBlock: (id: string) => void
   /** Eine geplante Einheit als erledigt eintragen: Block und Tagebuch (Last) in einem Schritt. */
   completePlannedSession: (input: { blockId: string; sessionId: string; day: string; durationMin: number; rpe: number; kind: 'strength' | 'endurance'; hr?: { avg: number; max: number } | null; feedback?: number | null; pain?: boolean; planDay?: string | null; sets?: StoredPlanCompletion['sets']; swaps?: StoredPlanCompletion['swaps']; title?: string; substitutions?: { from: string; fromName: string; to: string; toName: string }[] }) => void
+  /** Freies Training (ohne Termin im Plan): Einheit ins Tagebuch, Sätze ins Trainingslog. Hakt keinen Termin ab. */
+  logFreeSession: (input: { day: string; title: string; durationMin: number; rpe: number; kind: 'strength' | 'endurance'; sets?: StoredPlanCompletion['sets'] }) => void
   /** Aktivitäten aus einem Import übernehmen; schon vorhandene (gleiche Kennung) bleiben, wie sie sind. Gibt die Zahl neuer zurück. */
   importActivities: (list: StoredActivity[]) => number
   /** Alle importierten Aktivitäten des aktiven Athleten löschen. */
@@ -246,6 +249,8 @@ export interface AppDataValue {
    * Nutzer im Profil.
    */
   mergeAthletes: (incoming: StoredAthlete[]) => void
+  /** Athleten entfernen, die ein anderes Gerät gelöscht hat (Grabstein vom Server). */
+  dropAthletes: (ids: string[]) => void
   /** Den Bestand auf diesem Gerät durch einen leeren ersetzen (Teamwechsel). */
   replacePool: () => StoredData
   /**
@@ -350,7 +355,9 @@ const MODE_KEY = 'kydon.mode'
 export function readMode(): AppMode | null {
   try {
     const value = localStorage.getItem(MODE_KEY)
-    return value === 'guest' || value === 'demo' ? value : null
+    // «guest» ist der frühere Name des eigenen Bestands.
+    if (value === 'own' || value === 'guest') return 'own'
+    return value === 'demo' ? 'demo' : null
   } catch {
     return null
   }
@@ -424,7 +431,7 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
 
   useEffect(() => {
     if (mode === 'demo' && countResults(initial.data) === 0 && countResults(store) > 0) {
-      if (!saveData(store)) setStorageBlocked(true)
+      if (!saveData(store) && !isWriteLocked()) setStorageBlocked(true)
     }
     // Nur beim Moduswechsel, nicht bei jeder Änderung.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -434,6 +441,10 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
     (next: StoredData) => {
       storeRef.current = next
       setStore(next)
+      // Bei einem Bestand aus einer neueren Fassung wird bewusst nicht
+      // gespeichert (localStore.ts) — das ist kein voller Speicher, und die
+      // Zweitschrift darf ihn ebenso wenig ersetzen.
+      if (isWriteLocked()) return
       if (!saveData(next)) setStorageBlocked(true)
       // Die Zweitschrift läuft nebenher: sie darf die Eingabe nicht bremsen,
       // und ihr Scheitern ist kein Fehler der Sitzung.
@@ -802,6 +813,24 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
           }),
         })
       },
+      logFreeSession: ({ day, title, durationMin, rpe, kind, sets }) => {
+        const current = storeRef.current
+        const now = new Date().toISOString()
+        commitStore({
+          ...current,
+          athletes: current.athletes.map((a) => {
+            if (a.id !== current.activeAthleteId) return a
+            const diarySessionId = newId()
+            const session = { id: diarySessionId, kind, durationMin, rpe, note: `frei:${title}`.slice(0, 200) }
+            const existing = a.diary.find((e) => e.day === day)
+            const diary = existing
+              ? a.diary.map((e) => (e.day === day ? { ...e, sessions: [...e.sessions, session], updatedAt: now } : e))
+              : [...a.diary, { id: newId(), day, weightKg: null, sleepHours: null, sleepQuality: null, energy: null, stress: null, soreness: null, steps: null, adherence: null, sessions: [session], note: '', createdAt: now, updatedAt: now }]
+            const workout = workoutFromSets((sets ?? []).slice(0, 160), { id: newId(), day, title, diarySessionId, now, newId, legacyOf: (id) => REGISTRY_TO_LEGACY[id] })
+            return { ...a, diary, workouts: workout ? [...a.workouts, workout] : a.workouts }
+          }),
+        })
+      },
       decisions: store.athletes.find((a) => a.id === store.activeAthleteId)?.decisions ?? [],
       saveDecision: (decision) => {
         const current = storeRef.current
@@ -947,6 +976,8 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         // Athleten ist nicht darstellbar. Zum Leeren gibt es "alles löschen".
         const rest = store.athletes.filter((a) => a.id !== id)
         if (rest.length === 0) return
+        // Für den Abgleich vormerken — sonst holt er den Athleten vom Server zurück.
+        void import('@/lib/supabase/syncState').then((m) => m.markAthleteDeleted(id))
         commitStore({
           ...store,
           athletes: rest,
@@ -1207,6 +1238,16 @@ export function AppDataProvider({ mode, children }: { mode: AppMode; children: R
         // Athleten kommen — sonst stünde neben dem Teambestand ein namenloser.
         const kept = current.athletes.filter((a) => !isBlankPlaceholder(a))
         const athletes = [...kept, ...fresh]
+        const activeAthleteId = athletes.some((a) => a.id === current.activeAthleteId) ? current.activeAthleteId : athletes[0].id
+        commitStore({ ...current, athletes, activeAthleteId })
+      },
+      dropAthletes: (ids) => {
+        const current = storeRef.current
+        const gone = new Set(ids)
+        const rest = current.athletes.filter((a) => !gone.has(a.id))
+        if (rest.length === current.athletes.length) return
+        // Ein Bestand ohne Athleten ist nicht darstellbar: dann ein leerer.
+        const athletes = rest.length > 0 ? rest : [emptyAthlete()]
         const activeAthleteId = athletes.some((a) => a.id === current.activeAthleteId) ? current.activeAthleteId : athletes[0].id
         commitStore({ ...current, athletes, activeAthleteId })
       },

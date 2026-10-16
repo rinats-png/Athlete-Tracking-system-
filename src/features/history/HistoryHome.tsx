@@ -7,6 +7,8 @@ import { SegmentedControl } from '@/components/ui/SegmentedControl'
 import { TrendChart } from '@/components/charts/TrendChart'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { Thumb } from '@/components/ui/PhotoCard'
+import { testImageUrl } from '@/data/testImages'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { getTest } from '@/data/testCatalog'
@@ -85,9 +87,27 @@ export function HistoryHome() {
           passiert», die Kurve darunter «wie genau». */}
       {nodes.length >= 2 && (
         <Panel float className="rise mb-4">
-          <PanelHeader title={t('journey.title')} subtitle={t('journey.hint')} />
+          <PanelHeader title={t('journey.title')} note={t('journey.hint')} />
           <PerformanceJourney nodes={nodes} className="px-4 pt-4 pb-5" />
         </Panel>
+      )}
+
+      {/* Die gemessenen Tests als Bildreihe: antippen wählt die Kurve. */}
+      {measured.length > 1 && (
+        <div className="-mx-4 mb-3 flex gap-2 overflow-x-auto px-4 pb-1" role="group" aria-label={t('historyHome.chooseTest')} data-testid="history-thumbs">
+          {measured.slice(0, 12).map((m) => (
+            <button
+              key={m.slug}
+              type="button"
+              aria-pressed={m.slug === activeSlug}
+              onClick={() => setSelected(m.slug)}
+              className={cn('flex w-20 shrink-0 flex-col items-center gap-1 rounded-lg border p-1.5 text-center text-[11px] leading-tight', m.slug === activeSlug ? 'border-accent bg-accent-quiet text-accent-text' : 'border-line text-ink-secondary')}
+            >
+              <Thumb src={testImageUrl(m.slug)} className="size-14" />
+              <span className="line-clamp-2">{pick(m.name, locale)}</span>
+            </button>
+          ))}
+        </div>
       )}
 
       <Panel ticked>

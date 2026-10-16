@@ -33,7 +33,7 @@ export function MyTemplates() {
 
   return (
     <Panel className="mb-4" data-testid="my-templates">
-      <PanelHeader title={t('lib.mine')} subtitle={t('lib.mineSub')} />
+      <PanelHeader title={t('lib.mine')} note={t('lib.mineSub')} />
       <ul>
         {planTemplates.map((tpl) => {
           const current = picked[tpl.id] ?? latestVersion(tpl).version

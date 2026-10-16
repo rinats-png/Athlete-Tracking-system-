@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { InfoNote } from '@/components/ui/InfoNote'
+import { ImageCard } from '@/components/ui/ImageCard'
+import { Thumb } from '@/components/ui/PhotoCard'
+import { AREA_IMAGES } from '@/data/visuals'
+import { testImageUrl } from '@/data/testImages'
 import { useLocale } from '@/features/shared/useLocale'
 import { reminderSettingsOf } from '@/features/shared/profileContext'
 import { useAppData } from '@/lib/store/AppDataProvider'
@@ -29,7 +34,7 @@ export function WeekReviewScreen() {
 
   return (
     <div data-testid="week-review">
-      <ScreenHeader eyebrow={t('week.eyebrow')} title={t('week.title')} intro={t('week.range', { from: d(review.from), to: d(review.to) })} />
+      <ScreenHeader eyebrow={t('week.range', { from: d(review.from), to: d(review.to) })} title={t('week.title')} image={AREA_IMAGES.week} />
       <div className="grid gap-4 lg:grid-cols-2">
         <Panel float data-testid="week-load">
           <PanelHeader title={t('week.load.title')} />
@@ -42,7 +47,7 @@ export function WeekReviewScreen() {
                 ? t('week.load.compare', { mean: formatNumber(review.load.previousWeeklyMean, locale, 0) })
                 : t('week.load.noBaseline')}
             </p>
-            <p className="mt-2 text-[11px] text-ink-muted">{t('week.load.note')}</p>
+            <InfoNote text={t('week.load.note')} />
           </div>
         </Panel>
 
@@ -60,7 +65,7 @@ export function WeekReviewScreen() {
           </dl>
         </Panel>
 
-        <Panel data-testid="week-win">
+        <ImageCard image={win ? testImageUrl(win.slug) : null} data-testid="week-win">
           <PanelHeader title={t('week.win.title')} />
           <div className="px-4 pb-4">
             {win ? (
@@ -69,13 +74,13 @@ export function WeekReviewScreen() {
                 <p className="mt-1 text-[14px]">
                   +{formatNumber(win.report.changePercent ?? 0, locale, 1)} % · {t('week.win.beyond', { detectable: formatNumber(win.report.detectablePercent ?? 0, locale, 1) })}
                 </p>
-                <p className="mt-1 text-[11px] text-ink-muted">{t('week.win.note')}</p>
+                <InfoNote text={t('week.win.note')} />
               </>
             ) : (
               <p className="text-[14px] text-ink-secondary">{t('week.win.none')}</p>
             )}
           </div>
-        </Panel>
+        </ImageCard>
 
         <Panel data-testid="week-review-due">
           <PanelHeader title={t('week.due.title')} />
@@ -86,8 +91,9 @@ export function WeekReviewScreen() {
               <ul>
                 {review.overdue.slice(0, 3).map((o) => (
                   <li key={o.slug} className="border-t border-line py-2 first:border-t-0">
-                    <Link to={`/tests/${o.slug}`} className="flex min-h-11 items-center justify-between gap-3 text-[14px]">
-                      <span>{name(o.slug)}</span>
+                    <Link to={`/tests/${o.slug}`} className="flex min-h-14 items-center gap-3 text-[14px]">
+                      <Thumb src={testImageUrl(o.slug)} />
+                      <span className="min-w-0 flex-1">{name(o.slug)}</span>
                       <span className="text-[12px] text-ink-muted">{t('week.due.days', { count: Math.max(0, o.overdueDays) })}</span>
                     </Link>
                   </li>

@@ -28,6 +28,12 @@ const allMetrics = (testDef: TestDefinition): Record<string, number> => {
   if (values.durationSeconds != null && values.bikeMinutes != null) {
     values.bikeMinutes = Math.max(1, Math.round((values.durationSeconds * 0.6) / 60))
   }
+  // Critical Speed braucht verschieden lange Läufe von 2–15 min.
+  if (values.run1DistanceM != null && values.run2DistanceM != null) {
+    Object.assign(values, { run1DistanceM: 1200, run1Seconds: 240, run2DistanceM: 3600, run2Seconds: 800 })
+    delete values.run3DistanceM
+    delete values.run3Seconds
+  }
   return deriveMetrics(testDef, values, { bodyWeightKg: 78, ageYears: 28, sex: 'male' })
 }
 

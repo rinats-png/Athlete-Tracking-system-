@@ -40,7 +40,7 @@ export function ExerciseDetailScreen() {
 
   return (
     <div data-testid="exercise-detail">
-      <ScreenHeader eyebrow={t(`lib.cat.${e.category}`)} title={e.name} intro={e.section} />
+      <ScreenHeader eyebrow={t(`lib.cat.${e.category}`)} title={e.name} intro={e.section} image={img} />
       <GermanOnlyNote />
       <div className="mb-4 flex flex-wrap items-center gap-2 text-[12px]">
         <span className="inline-flex items-center gap-1.5 rounded-pill border border-line px-3 py-1"><ComplexityDot level={e.complexity} />{t(`lib.complexity.${e.complexity}`)}</span>
@@ -60,7 +60,6 @@ export function ExerciseDetailScreen() {
         <Panel data-testid="ex-steps">
           <PanelHeader title={t('lib.execution')} />
           <div className="px-4 pb-4">
-            {img && <img src={img} alt="" width={320} height={200} loading="lazy" className="mb-3 h-40 w-full rounded object-cover" />}
             <ol className="space-y-2 text-[14px]">
               {x.steps.map((s, i) => (
                 <li key={i} className="flex gap-3"><span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent-quiet text-[12px] text-accent-text">{i + 1}</span><span>{s}</span></li>

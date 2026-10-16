@@ -32,9 +32,14 @@ die Regeln. Wer eine davon brechen müsste, hält an und fragt (Abschnitt 21).
 
 Drei Grundentscheidungen tragen alles Weitere:
 
-1. **Lokal zuerst.** Die App ist ohne Konto und ohne Netz vollständig
-   benutzbar. Das Gerät hält den maßgeblichen Stand; der Server ist Sicherung,
-   Abgleich zwischen Geräten und Zusammenarbeit im Team.
+1. **Konto Pflicht, Gerät zuerst.** Ohne Konto kommt niemand in die App
+   (seit 13.10.2026). Gemessen und gespeichert wird trotzdem zuerst auf dem
+   Gerät — ist die Anmeldung einmal da, startet die App auch ohne Netz. Mit
+   dem Konto gleicht das Gerät automatisch ab (`useAutoSync`); der Server ist
+   Sicherung, Abgleich zwischen Geräten und Zusammenarbeit im Team. Im Profil
+   lässt sich der Abgleich ausschalten, mit einem Fenster, das die Folgen
+   nennt. Die Demo gleicht nie ab, die Gesundheitsschicht hat ihren eigenen,
+   verschlüsselten Weg.
 2. **Fachlogik ist rein.** Alles, was rechnet (Einordnung, Messfehler, Score,
    Berechtigungen), liegt in `src/domain` als Funktion ohne React und ohne I/O —
    deshalb in Playwright ohne Browser prüfbar.
@@ -202,7 +207,7 @@ Gemeinsamer Code: `_shared/stripe.ts` (ohne SDK, rein und prüfbar),
 | Referenzen | `data/referenceModel.ts`, `references*.ts` | Methode (mean_sd, Perzentile, Bänder …), Qualität A–D, Quelle {Studie, n}, Lückenliste |
 | Radar | `lib/scoring.ts` | Bestleistung oder Perzentil, Fenster 18 Monate |
 | Score | `domain/performanceScore.ts` | erst ab 3 Achsen mit Referenz |
-| Messfehler | `domain/change.ts` | typischer Fehler je Athlet und Test ab 4 Messungen; Schwelle 1,96·√2; Urteile besser / schlechter / Rauschen / unbekannt / erste |
+| Messfehler | `domain/change.ts` | typischer Fehler je Athlet und Test ab 4 Messungen; Schwelle 1,96·√2; Urteile besser / schlechter / Rauschen / unbekannt / erste. `judgeChange` ist das einzige Urteil: auch der Trend (`analytics.ts`, Veränderung entlang der Geraden über den Zeitraum) und der Trainernachweis (`coachProof.ts`) urteilen darüber; unbekannter Messfehler = «unklar», keine Ersatzschwelle |
 
 ## 9. Internationalisierung
 
@@ -259,7 +264,7 @@ Gemeinsamer Code: `_shared/stripe.ts` (ohne SDK, rein und prüfbar),
 | Eigene SVG-Diagramme | volle Kontrolle über Darstellung und Barrierefreiheit | mehr eigener Code |
 | Fachlogik ohne React | prüfbar ohne Browser, wiederverwendbar im Server | Disziplin beim Import |
 | Freischaltung nur per Webhook | kein Client kann sich selbst freischalten | kurze Verzögerung nach dem Kauf |
-| Sync nur auf Knopfdruck | der Nutzer sieht, wann Daten das Gerät verlassen; kein stiller Upload in der Halle | Abgleich kann vergessen werden |
+| Abgleich automatisch, abschaltbar (seit 13.10.2026; vorher nur auf Knopfdruck) | Trainer, zweites Gerät und Pläne brauchen einen aktuellen Stand; ein vergessener Abgleich war ein verlorener Verlauf | Daten verlassen das Gerät ohne eigenen Handgriff — die Datenschutzerklärung sagt es, das Profil zeigt beim Ausschalten die Folgen |
 | Löschen im Team nur durch den Inhaber | ein Trainer kann nicht versehentlich den Bestand des Vereins leeren | lokales Löschen eines Mitglieds wirkt nicht auf dem Server |
 | Nie mitten am Testtag sperren (14 Tage Frist) | eine Sperre in der Halle kostet Vertrauen mehr als ein nachgezahltes Abo | Grenze wird zeitweise überschritten |
 | Zählen im Server, nicht im Client | eine Zahl, die Geld auslöst, darf nicht manipulierbar sein | Zählstand braucht Netz; offline gilt der letzte bekannte |
@@ -362,9 +367,15 @@ TestRunScreen  →  useAppData().recordResult(input)
 Kein Netz beteiligt. Fehlt Speicherplatz, meldet `saveData()` `false` und
 die Oberfläche sagt es.
 
-### Abgleich (nur mit Konto, auf Knopfdruck)
+### Abgleich (mit dem Konto, automatisch)
 ```
-SyncPanel „Jetzt abgleichen“  →  syncOnce()
+useAutoSync (AppShell): Start +2 s, Änderung +12 s, Netz zurück, Rückkehr nach 5 min
+  — aus bei Demo, ohne Anmeldung oder wenn kydon.sync.enabled = 'off'
+SyncPanel „Jetzt abgleichen“ (von Hand, derselbe Weg)
+  →  syncOnce()
+  →  Besitzermarke kydon.sync.user: fremdes Konto auf dem Gerät? dann nichts schreiben
+  →  sensitive_consents: gesundheitsnahe Angaben nur mit Einwilligung, sonst
+     athleteWithoutSensitive (docs/datenschutz-art9-abgleich.md)
   →  rpc('my_pool_owner')  (Pool wechseln? dann lokalen Bestand ersetzen)
   →  Dokumente: lesen, vergleichen, schreiben mit .eq('updated_at', erwartet)
        ↳ abgelehnt → Konflikt, beide Stände bleiben

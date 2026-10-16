@@ -393,7 +393,7 @@
       "reportPdf": "Drukklaar rapport",
       "requirementGap": "Welke as voor jouw discipline het meest oplevert",
       "seasonPlan": "Controlepunten tot aan de wedstrijd",
-      "sync": "Synchronisatie tussen apparaten",
+      "sync": "Automatische synchronisatie: back-up en al je apparaten",
       "targetStandards": "Streefwaarden van de concrete toelatingstest",
       "unlimitedReports": "Rapporten zonder limiet",
       "whiteLabel": "Eigen logo op het rapport",
@@ -521,7 +521,7 @@
       "thin_data": "Weinig data",
       "no_assessment": "Nog geen meting"
     },
-    "method": "De trend is een meerderheidsbeslissing over de tests waarvoor er überhaupt een te berekenen is — bewust geen gemiddelde van hellingen, omdat procent per 30 dagen over verschillende tests niet zinvol te middelen is. “Aandacht nodig” is geen oordeel over de persoon, maar een verwijzing naar een van de genoemde redenen.",
+    "method": "De trend is een meerderheidsbeslissing over de tests waarvoor er überhaupt een te berekenen is — bewust geen gemiddelde van hellingen, omdat procent per 30 dagen over verschillende tests niet zinvol te middelen is. “Aandacht nodig” is geen oordeel over de persoon, maar een verwijzing naar een van de genoemde redenen. Een test telt alleen mee als de verandering groter is dan de eigen meetfout.",
     "emptyTitle": "Nog geen atleten",
     "emptyBody": "Voeg de eerste persoon toe onder “Atleten die je traint” in je profiel.",
     "soloTitle": "Trainersmodus staat uit",
@@ -604,7 +604,7 @@
     "deleteHint_other": "“{{name}}” wordt definitief verwijderd samen met {{count}} metingen. Dit kan niet ongedaan worden gemaakt. Om iemand te verbergen zonder gegevens te verliezen, gebruik je het archief.",
     "deleteConfirm": "Definitief verwijderen",
     "meta": "{{results}} metingen · {{assessments}} testsessies · sinds {{since}}",
-    "privacyNote": "KYDON slaat alleen op wat jij over een getrainde atleet invoert. Geen account, e-mailadres of uitnodiging nodig. Alles blijft op dit apparaat.",
+    "privacyNote": "KYDON slaat over een begeleide atleet alleen op wat jij invoert. De atleet heeft geen account, e-mailadres of uitnodiging nodig. Met je account wordt het automatisch geback-upt op servers in de EU; daarvoor geldt de verwerkersovereenkomst.",
     "handover": "Overdracht",
     "handoverHint": "Een atleet wisselt van club of trainer: de historie is van hem of haar, niet van dit apparaat. Het bestand bevat alleen deze ene atleet — zonder jouw huisstijl en zonder de anderen.",
     "handoverExport": "Atleet exporteren",
@@ -637,11 +637,11 @@
     "data": "Je gegevens",
     "recovered": "Deze gegevens komen terug uit de tweede kopie op het apparaat, opgeslagen op {{date}}. De browser had de hoofdopslag gewist.",
     "backupDue": {
-      "never_exported": "Je hebt {{count}} metingen en nog nooit geëxporteerd. De gegevens staan alleen op dit apparaat — een export maakt ze van jou, ook zonder dit apparaat.",
+      "never_exported": "Je hebt {{count}} metingen en nog nooit geëxporteerd. De synchronisatie bewaart ze in je account; een export is je eigen kopie, los van apparaat en account.",
       "many_new_results": "Sinds de laatste export zijn {{count}} metingen toegevoegd. Een nieuwe export kost één klik.",
       "long_ago": "De laatste export was {{days}} dagen geleden, en sindsdien zijn {{count}} metingen toegevoegd."
     },
-    "privacy": "Je metingen staan in deze browser. Ze worden alleen verzonden als je synchronisatie inschakelt. Browsergegevens wissen verwijdert het lokale dossier — de export of synchronisatie beschermt daartegen.",
+    "privacy": "Je metingen staan eerst op dit apparaat en worden met je account automatisch geback-upt op servers in de EU. Schakel je de synchronisatie uit, dan is de export je enige back-up.",
     "export": "Exporteren",
     "import": "Importeren",
     "importFailed": "Het bestand kon niet worden gelezen.",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} dagen",
     "trendLabel": {
       "improving": "Verbetert",
-      "stable": "Stabiel",
+      "stable": "Geen duidelijke verandering",
       "declining": "Daalt",
+      "unclear": "Onduidelijk",
       "insufficient_one": "{{count}} meting",
       "insufficient_other": "{{count}} metingen"
     },
     "trendInsufficientHint": "Een regressielijn wordt vanaf drie metingen berekend. Twee punten vormen altijd een perfecte lijn — dat is geen trend.",
+    "trendUnclearHint": "De meetfout voor deze test is nog niet bekend — vanaf vier metingen is die te schatten. Tot dan zegt KYDON niet „verbetert” of „daalt”.",
     "trendBasis": "{{points}} metingen, {{days}} dagen, R² {{r2}}",
     "compareAssessments": "Twee sessies vergelijken",
     "compareHint": "Alleen afgeronde sessies. Tests die in slechts één van de twee voorkomen, worden gemarkeerd in plaats van weggelaten.",
@@ -995,7 +997,7 @@
     "photoRemove": "Bewijs verwijderen",
     "photoAlt": "Bewijs van de meting",
     "photoAdded": "toegevoegd op {{date}}",
-    "photoHint": "Eén afbeelding per resultaat — het timerdisplay, de weergave van de weegschaal. Ze wordt verkleind en blijft op dit apparaat; ze wordt niet verzonden en niet geanalyseerd.",
+    "photoHint": "Eén afbeelding per resultaat — het display van de tijdmeting, de aflezing van de weegschaal. Ze wordt verkleind, met de meting opgeslagen en ermee gesynchroniseerd. Ze wordt niet geanalyseerd.",
     "photoError": {
       "not_an_image": "Dat is geen afbeeldingsbestand.",
       "unreadable": "De afbeelding kon niet worden gelezen.",
@@ -1013,8 +1015,8 @@
   "reminders": {
     "eyebrow": "Historie",
     "title": "Herinneringen",
-    "intro": "De app weet wanneer je het laatst hebt gemeten en berekent op je apparaat wat er gepland staat. Herinneringen staan uit tot je ze inschakelt — met een account ook via push.",
-    "noPush": "De herinnering verschijnt in de app wanneer je die opent. Met een account kun je ook push inschakelen: dan meldt KYDON zich ook als de app gesloten is. De server kent daarvoor alleen de datum van de volgende hermeting. Zonder account blijft het agendabestand de betrouwbare weg.",
+    "intro": "De app weet wanneer je voor het laatst hebt gemeten en berekent op je apparaat wanneer het weer zover is. Herinneringen staan uit tot je ze inschakelt — desgewenst ook via push.",
+    "noPush": "De herinnering verschijnt in de app wanneer je die opent. Je kunt ook push inschakelen: dan meldt KYDON zich ook als de app gesloten is. De server krijgt daarvoor alleen de datum van de volgende hertest. Het agendabestand blijft de betrouwbaarste weg.",
     "enable": "Herinneringen inschakelen",
     "enabled": "Herinneringen staan aan",
     "disabled": "Herinneringen staan uit",
@@ -1030,7 +1032,7 @@
     "dueOn": "verschuldigd op {{date}}",
     "default": "Standaard",
     "calendar": "Kalenderbestand downloaden",
-    "calendarHint": "Eén hele-dag-afspraak per verschuldigde hertest, met een alarm drie dagen vooraf. Werkt in elke kalender, offline en zonder account — dit is de betrouwbare weg.",
+    "calendarHint": "Eén afspraak voor de hele dag per verlopen hertest, met een melding drie dagen vooraf. Werkt in elke agenda en offline — dit is de betrouwbare weg.",
     "calendarEmpty": "Er is nog geen hertest verschuldigd. Zodra een test moet worden herhaald, staat het bestand hier klaar.",
     "notify": "Systeemmeldingen toestaan",
     "notifyOn": "Systeemmeldingen zijn toegestaan",
@@ -1516,7 +1518,7 @@
     "carryQuestion": "Op dit apparaat staan {{count}} atleten. Wat moet er met ze gebeuren?",
     "carryYes": "Naar het team overzetten — ze horen dan bij het team en tellen mee voor zijn niveau.",
     "carryNo": "In mijn eigen account laten — ze verdwijnen van dit apparaat en komen terug als ik het team verlaat.",
-    "joinPrivacy": "Als je lid wordt, wordt synchronisatie ingeschakeld: de atleten van het team staan op de server, en alle trainers van het team kunnen ze zien. Verlaat je het team, dan blijven de atleten bij het team.",
+    "joinPrivacy": "Een team werkt alleen met synchronisatie: staat die uit, dan zet toetreden haar weer aan. De atleten van het team staan op de server en alle trainers van het team zien ze. Verlaat je het team, dan blijven de atleten bij het team.",
     "joinButton": "Lid worden",
     "joined": "Je zit nu in het team ‘{{name}}’.",
     "unnamed": "zonder naam",
@@ -2161,7 +2163,7 @@
     "consent": {
       "title": "Toestemming voor hartgegevens",
       "agree": "Akkoord",
-      "storage": "De slagenreeks blijft op het apparaat en wordt na de meting verwijderd. Alleen de twee resultaten worden opgeslagen. Met een account en synchronisatie staan ze ook in je account. Je kunt ze op elk moment verwijderen.",
+      "storage": "De slagenreeks blijft op het apparaat en wordt na de meting verwijderd. Alleen de twee resultaten worden opgeslagen; met synchronisatie staan ze ook in je account. Je kunt ze altijd verwijderen.",
       "body": "Hartslag en hartslagvariabiliteit zijn gezondheidsgegevens (art. 9 AVG). KYDON meet ze alleen als je hier toestemming geeft, en gebruikt ze alleen om ze je in het verloop en in de dagcontext te tonen."
     },
     "beats_other": "{{count}} slagen",
@@ -2240,6 +2242,8 @@
     "title": "Nieuw bij KYDON:",
     "close": "Begrepen",
     "items": {
+      "sensitive": "Gezondheidsgerelateerde gegevens — slaap, stress, hartslag, vetpercentage, klachten — synchroniseert KYDON alleen nog met je uitdrukkelijke toestemming. Zonder blijven ze op het apparaat. Je beslist in je profiel onder ‘Gegevens’.",
+      "account": "Account en synchronisatie: KYDON synchroniseert nu vanzelf met je account. Je gegevens zijn geback-upt op servers in de EU en actueel op al je apparaten. Uitschakelen kan in je profiel — je ziet eerst wat dan niet meer werkt.",
       "design": "Nieuw ontwerp: matglazen kaarten met lagen, monocijfers voor meetwaarden en rustigere overgangen — licht en donker.",
       "tests": "Testbibliotheek volgens protocol 1.0: 126 tests in 29 gebieden, elk met doel, opstelling, stappen en beoordeling.",
       "images": "Foto’s van de testopstellingen in de beschrijvingen in plaats van schetsen.",
@@ -2790,7 +2794,7 @@
     "saveNext": "Opslaan, volgende atleet",
     "backToList": "Terug naar lijst",
     "rule": "De beste geldige poging telt. Ongeldige pogingen blijven bewaard maar worden niet gescoord.",
-    "offline": "Werkt zonder netwerk. Alles blijft op dit apparaat."
+    "offline": "Werkt zonder netwerk. Er wordt eerst op dit apparaat opgeslagen en gesynchroniseerd zodra er weer netwerk is."
   },
   "ask": {
     "eyebrow": "Vragen",
@@ -2897,7 +2901,8 @@
       "not_entitled": "Herformuleren hoort bij Pro. Het vaste antwoord blijft.",
       "limit_reached": "De 30 herformuleringen van deze maand zijn op. Het vaste antwoord blijft.",
       "rejected": "De tekst haalde de cijfercontrole niet en wordt niet getoond. Het vaste antwoord blijft.",
-      "failed": "Dat is niet gelukt. Het vaste antwoord blijft."
+      "failed": "Dat is niet gelukt. Het vaste antwoord blijft.",
+      "no_consent": "Zonder je toestemming wordt niets naar het taalmodel gestuurd. Het vaste antwoord blijft."
     }
   },
   "weeklyReport": {
@@ -3022,7 +3027,7 @@
       "EXTRAPOLATED": "geëxtrapoleerd"
     },
     "review": {
-      "unreviewed": "Ongecontroleerd",
+      "unreviewed": "Nog niet vakinhoudelijk gecontroleerd",
       "reviewed": "Gecontroleerd door {{name}} op {{date}}"
     },
     "limits": "Grenzen van het bewijs",
@@ -3165,8 +3170,8 @@
     "save": "Training vastleggen"
   },
   "planHub": {
-    "eyebrow": "Training",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Training",
     "competition": "Doel: {{name}}",
     "competitionUnnamed": "je wedstrijd",
     "empty": {
@@ -3243,7 +3248,7 @@
       "event": "Wedstrijd"
     },
     "none": "Voor deze selectie is er geen sjabloon.",
-    "unreviewed": "Niet beoordeeld",
+    "unreviewed": "Nog niet vakinhoudelijk gecontroleerd",
     "weeksTotal": "{{n}} weken",
     "family": {
       "combat_grappling": "Vechtsport grappling",
@@ -3974,5 +3979,391 @@
     "supports": "Ondersteunt {{sport}}",
     "other": "Ander accent",
     "filter": "Voor {{sport}}"
+  },
+  "look": {
+    "info": "Meer info",
+    "today": {
+      "label": "Vandaag in je plan",
+      "go": "Aan de slag",
+      "toPlan": "Naar het plan",
+      "missed": "gemist · inhalen?",
+      "percentile": "Percentiel {{score}}"
+    },
+    "hub": {
+      "catchUp": "inhalen",
+      "exercises": "Oefeningen",
+      "own": "Eigen plan"
+    },
+    "player": {
+      "close": "Training sluiten"
+    },
+    "tests": {
+      "measured": "{{measured}} van {{total}} gemeten"
+    }
+  },
+  "start": {
+    "button": "Training starten",
+    "title": "Training starten",
+    "today": "Vandaag",
+    "missed": "Gemist",
+    "upcoming": "Komende twee weken",
+    "allDone": "Geen open training in het plan — alles gedaan.",
+    "countsHint": "Je kunt elke training ook op een andere dag doen. Hij wordt dan afgevinkt voor de geplande datum.",
+    "none": "Je hebt geen lopend plan. Trainen kan toch — kies hieronder een manier.",
+    "free": "Zonder plan",
+    "log": "Iets invoeren",
+    "logSub": "Een training direct in het trainingslog zetten",
+    "catalog": "Uit de catalogus",
+    "catalogSub": "Een training uit een kant-en-klaar plan, zonder het plan over te nemen",
+    "build": "Zelf samenstellen",
+    "buildSub": "Oefeningen kiezen, sets vastleggen, beginnen",
+    "countsFor": "Gepland voor {{date}} – telt voor die datum.",
+    "doNow": "Nu doen"
+  },
+  "free": {
+    "eyebrow": "Vrije training",
+    "catalogTitle": "Training uit de catalogus",
+    "catalogIntro": "Kies een plan en daaruit een training. Het plan zelf wordt niet overgenomen.",
+    "pickSession": "Kies een training",
+    "week": "Week",
+    "items": "Onderdelen: {{n}}",
+    "otherPlan": "Ander plan kiezen",
+    "buildTitle": "Eigen training",
+    "buildIntro": "Voor vandaag, zonder plan. Hij wordt opgeslagen in het trainingslog.",
+    "name": "Naam van de training",
+    "search": "Oefening zoeken",
+    "exercises": "Oefeningen",
+    "empty": "Nog geen oefening. Zoek hierboven en tik er een aan.",
+    "sets": "Sets",
+    "setsN": "{{n}} ×",
+    "fewer": "Eén set minder",
+    "more": "Eén set meer",
+    "reps": "Herh./tijd",
+    "remove": "Oefening verwijderen",
+    "start": "Training starten",
+    "lost": "Hier is geen training gekozen. Kies er een onder ‘Training starten’.",
+    "noSlot": "Vrije training: telt als training, maar vinkt geen datum in het plan af.",
+    "save": "Opslaan in het trainingslog",
+    "defaultTitle": "Vrije krachttraining"
+  },
+  "aiConsent": {
+    "title": "Toestemming: teksten laten formuleren door een taalmodel",
+    "point": {
+      "what": "Wat wordt verstuurd: alleen de feiten van dit antwoord – vaste trefwoorden en getallen, zoals „verandering +3,2 %, drempel 2,8 %”. Het taalmodel formuleert er een tekst van. KYDON controleert elk getal en toont anders het vaste antwoord.",
+      "notSent": "Wat niet wordt verstuurd: je naam, je e-mailadres, notities, dagboek- en andere vrije tekst, gegevens uit de gezondheidslaag en kenmerken van je account.",
+      "who": "Ontvanger: Anthropic (taalmodel Claude) als verwerker. De verwerking kan in de Verenigde Staten plaatsvinden; de doorgifte berust op standaardcontractbepalingen. De aanbieder gebruikt de gegevens niet om zijn modellen te trainen. KYDON bewaart geen feiten en geen tekst – alleen hoe vaak je de functie deze maand gebruikte, en deze toestemming.",
+      "label": "Teksten van het taalmodel zijn als zodanig gemarkeerd. Het model herformuleert alleen: het beoordeelt niets, stelt geen diagnose en neemt geen trainingsbeslissing.",
+      "voluntary": "Vrijwillig: zonder toestemming werkt KYDON volledig – de antwoorden verschijnen dan als vaste teksten. De rechtsgrond is je toestemming (art. 6, lid 1, onder a AVG)."
+    },
+    "withdraw": "Je kunt je toestemming altijd intrekken in je profiel onder „Gegevens”, met werking voor de toekomst.",
+    "more": "Meer in de privacyverklaring",
+    "age": "Ik ben minstens 16 jaar oud.",
+    "accept": "Toestemming geven en formuleren",
+    "decline": "Niet nu",
+    "failed": "De toestemming kon niet worden opgeslagen. Daarvoor zijn een verbinding en een account nodig. Er is niets verstuurd.",
+    "settingTitle": "Teksten van het taalmodel",
+    "state": {
+      "granted": "Toestemming gegeven. Op verzoek worden feiten naar Anthropic gestuurd om te formuleren.",
+      "withdrawn": "Ingetrokken. Er wordt niets meer verstuurd.",
+      "unset": "Geen toestemming. Er wordt niets verstuurd."
+    },
+    "withdrawButton": "Toestemming intrekken",
+    "grantButton": "Toestemming geven …",
+    "withdrawnLocal": "Op dit apparaat geldt de intrekking meteen. De server ontvangt haar zodra er verbinding is."
+  },
+  "storage": {
+    "newerTitle": "Nieuwere KYDON-versie gevonden",
+    "reload": "App opnieuw laden",
+    "more_one": "… en nog één.",
+    "more_other": "… en nog {{count}}.",
+    "kept": "Al het overige is volledig overgenomen.",
+    "quarantined": "De onleesbare items worden op dit apparaat bewaard en zijn niet verwijderd.",
+    "backup": "Er staat een back-up op dit apparaat (stand {{date}}).",
+    "noBackup": "Er staat geen back-up op dit apparaat. Exporteer je gegevens regelmatig.",
+    "saveQuarantine": "Onleesbare items als bestand opslaan",
+    "kind": {
+      "results": "Resultaten",
+      "assessments": "Testafspraken",
+      "biometrics": "Lichaamswaarden",
+      "observations": "Observaties",
+      "diary": "Dagboek",
+      "diaryFields": "Dagboekvelden",
+      "activities": "Activiteiten",
+      "workouts": "Trainingslog",
+      "trainingBlocks": "Trainingsblokken",
+      "planTemplates": "Plansjablonen",
+      "customExercises": "Eigen oefeningen",
+      "decisions": "Beslissingen",
+      "meals": "Maaltijden",
+      "nutrition": "Voeding",
+      "health": "Gezondheid",
+      "peakWeeks": "Peak week",
+      "notes": "Notities",
+      "consent": "Toestemming",
+      "focuses": "Aandachtspunten",
+      "audit": "Wijzigingslog",
+      "testDays": "Testdagen",
+      "branding": "Branding",
+      "name": "Naam",
+      "athlete": "Atleet",
+      "store": "Gegevens",
+      "other": "Overig"
+    }
+  },
+  "sync": {
+    "title": "Synchronisatie met je account",
+    "hint": "Loopt vanzelf: je gegevens als back-up op servers in de EU en op elk apparaat waarop je bent ingelogd. Gezondheidsgegevens gaan nooit mee.",
+    "signedOut": "Je aanmelding is verlopen. Log opnieuw in, dan synchroniseert KYDON verder.",
+    "enable": "Synchronisatie weer inschakelen",
+    "disable": "Synchronisatie uitschakelen",
+    "now": "Nu synchroniseren",
+    "working": "Synchroniseren …",
+    "last": "Laatst gesynchroniseerd: {{date}}",
+    "never": "Nooit gesynchroniseerd.",
+    "result": "{{pushed}} geüpload, {{pulled}} opgehaald, {{series}} items gesynchroniseerd.",
+    "offline": "Geen verbinding. De synchronisatie haalt het in zodra je weer online bent.",
+    "conflictTitle": "Afwijkende toestand",
+    "conflictBody": "Deze atleet is op een ander apparaat gewijzigd. KYDON heeft niets overschreven — beide toestanden zijn intact. Sla eerst je export op, beslis dan.",
+    "conflictKeepLocal": "Dit dossier uploaden",
+    "conflictExplain": "De servertoestand wordt vervangen. De andere richting — de servertoestand ophalen — loopt via export, “alles verwijderen” en een nieuwe synchronisatie.",
+    "whatLeaves": "Gesynchroniseerd worden metingen, profielgegevens, notities, trainingsprioriteiten, plannen en daarnaast dagboek, trainingen, beslissingen en maaltijden. Niet inbegrepen: je wachtwoord, geïmporteerde activiteiten en gezondheidsgegevens — die hebben hun eigen versleutelde route. Gezondheidsgerelateerde gegevens (slaap, stress, hartslag, vetpercentage, klachten) alleen met je uitdrukkelijke toestemming.",
+    "auto": "KYDON synchroniseert vanzelf: na het starten, na elke wijziging en zodra er weer netwerk is.",
+    "paused": "De synchronisatie staat sinds {{date}} uit.",
+    "frozen": "De kopie in je account heeft de stand van {{date}}; wat daarna is toegevoegd, staat alleen op dit apparaat en in de export.",
+    "frozenNever": "In je account staat nog geen kopie; alles staat alleen op dit apparaat en in de export.",
+    "offDialog": {
+      "eyebrow": "Synchronisatie uitschakelen",
+      "title": "Wat dan niet meer werkt",
+      "backup": "Geen back-up meer. Raakt dit apparaat kwijt of wordt de browser gewist, dan is alles weg wat sinds het uitschakelen is toegevoegd — tenzij je het hebt geëxporteerd.",
+      "devices": "Je andere apparaten krijgen geen nieuwe waarden meer, en wijzigingen van daar komen hier niet aan.",
+      "coach": "Je trainer ziet alleen nog de laatst gesynchroniseerde stand. Nieuwe metingen, check-ins en trainingen bereiken hem niet.",
+      "plans": "Plannen en aanpassingen van je trainer komen niet meer op dit apparaat aan.",
+      "server": "De kopie in je account blijft zoals ze is — ze wordt niet verwijderd. Volledig verwijderen kan met ‘Account definitief verwijderen’.",
+      "local": "Meten werkt zoals altijd, ook zonder netwerk. Je kunt de synchronisatie op elk moment weer inschakelen; dan wordt ingehaald wat ontbreekt.",
+      "confirm": "Toch uitschakelen",
+      "keep": "Synchronisatie aanhouden"
+    }
+  },
+  "sensitiveConsent": {
+    "title": "Gezondheidsgerelateerde gegevens synchroniseren",
+    "intro": "Vrijwillig. Sommige gegevens kunnen gezondheidsgegevens zijn. Ze worden alleen met je uitdrukkelijke toestemming gesynchroniseerd:",
+    "introCoach": "Vrijwillig. Sommige gegevens van je atleten kunnen gezondheidsgegevens zijn. Ze worden alleen gesynchroniseerd als je bevestigt dat de atleten uitdrukkelijk toestemming hebben gegeven:",
+    "cat": {
+      "wellbeing": "Slaap, energie, stress en spierpijn (dagboek, testmoment)",
+      "heart": "Hartslagvariabiliteit, rusthartslag en de hartslag van trainingen",
+      "body": "Vetpercentage, vetvrije massa en ruststofwisseling",
+      "complaints": "Maag-darmklachten, de pijnmarkering van een training en de CK-waarde"
+    },
+    "without": "Zonder toestemming blijven precies deze gegevens op dit apparaat — al het andere wordt gesynchroniseerd. Een trainer ziet ze dan niet, en op een nieuw apparaat ontbreken ze.",
+    "healthLayer": "Labwaarden, symptomen, cyclus en medicatie horen hier niet bij: de gezondheidslaag heeft een eigen toestemming en is end-to-end versleuteld.",
+    "checkbox": {
+      "self": "Ja, ik geef uitdrukkelijk toestemming dat deze gegevens met mijn account op servers in de EU worden geback-upt en gesynchroniseerd (art. 9 lid 2 sub a AVG).",
+      "coach": "Ja, deze gegevens van mijn atleten moeten worden gesynchroniseerd. Ik bevestig dat ik de uitdrukkelijke toestemming van de atleten heb — bij minderjarigen die van de wettelijke vertegenwoordigers."
+    },
+    "age": "Ik ben minstens 16 jaar oud.",
+    "ageNeeded": "Bevestig je leeftijd of haal het vinkje weer weg.",
+    "withdraw": "Je kunt de toestemming altijd intrekken in je profiel onder ‘Gegevens’; de volgende synchronisatie verwijdert deze gegevens dan van de server.",
+    "state": {
+      "granted": "Toestemming gegeven — deze gegevens worden gesynchroniseerd.",
+      "withdrawn": "Ingetrokken — deze gegevens blijven op dit apparaat.",
+      "unset": "Geen toestemming — deze gegevens blijven op dit apparaat."
+    },
+    "pending": "Nog niet op de server aangekomen; de volgende synchronisatie haalt het in.",
+    "ask": "Toestemming geven",
+    "grant": "Uitdrukkelijk toestemming geven",
+    "grantCoach": "Bevestigen en synchroniseren",
+    "withdrawButton": "Toestemming intrekken",
+    "cancel": "Annuleren"
+  },
+  "workout": {
+    "running": "Loopt · {{time}}",
+    "start": "Starten",
+    "pause": "Pauze",
+    "paused": "Gepauzeerd",
+    "resume": "Verder",
+    "finish": "Beëindigen",
+    "save": "Opslaan",
+    "continue": "Verder trainen",
+    "discard": "Weggooien",
+    "discardConfirm": "Echt weggooien",
+    "close": "Sluiten",
+    "minimize": "Verlaten, training loopt door",
+    "voice": "Gesproken aanwijzingen",
+    "bar": {
+      "running": "Training loopt · {{time}}",
+      "paused": "Training gepauzeerd · {{time}}",
+      "rest": "Rust {{time}}",
+      "back": "Terug"
+    },
+    "conflict": {
+      "title": "Loopt al: {{title}}",
+      "body": "Ga daar verder — of gooi het weg en begin hier opnieuw.",
+      "continue": "Daar verdergaan",
+      "replace": "Weggooien en hier starten"
+    },
+    "focus": {
+      "exercise": "Oefening {{n}} van {{of}}",
+      "set": "Set {{n}} van {{of}}",
+      "target": "Doel {{target}}",
+      "last": "Vorige keer: {{value}}",
+      "less": "Minder {{field}}",
+      "more": "Meer {{field}}",
+      "done": "Set klaar",
+      "allDone": "Alle sets vastgelegd. Rond hieronder af."
+    },
+    "rest": {
+      "title": "Rust",
+      "of": "van {{total}}",
+      "next": "Hierna",
+      "sound": "Geluid bij 3-2-1 en aan het eind · ook zonder netwerk",
+      "skip": "Rust overslaan"
+    },
+    "camera": {
+      "chip": "Camera telt",
+      "title": "Camera telt mee",
+      "close": "Camera sluiten",
+      "onDevice": "Alleen op het apparaat",
+      "loading": "Camera en herkenning worden geladen …",
+      "denied": "Geen toegang tot de camera.",
+      "unsupported": "De herkenning werkt niet op dit apparaat.",
+      "fallback": "Tel zelf zoals altijd en vul de herhalingen in.",
+      "back": "Terug naar de set",
+      "setupTitle": "Camera instellen",
+      "hint": {
+        "squat": "{{name}}: zijdelings neerzetten, hele lichaam in beeld.",
+        "hinge": "{{name}}: zijdelings neerzetten, hele lichaam in beeld.",
+        "push": "{{name}}: zijdelings neerzetten, schouder, elleboog en hand in beeld.",
+        "pull": "{{name}}: van voren of opzij, schouder, elleboog en hand in beeld."
+      },
+      "check": {
+        "body": "Lichaam zichtbaar",
+        "light": "Genoeg licht",
+        "still": "Telefoon staat stil"
+      },
+      "ok": "in orde",
+      "waiting": "nog niet",
+      "privacy": "De herkenning draait alleen op je apparaat. Geen beeld en geen video verlaat de telefoon of wordt opgeslagen — alleen de getallen worden opgeslagen.",
+      "ofTarget": "van {{target}} herh.",
+      "tempo": "Tempo per herhaling · relatief",
+      "estimate": "Schatting",
+      "loss": "Tempoverlies in de set tot nu toe −{{percent}} %. Een vergelijking met andere dagen komt pas als je meetfout bekend is.",
+      "lossNone": "Het tempo verschijnt vanaf de tweede herhaling.",
+      "startTitle": "Camera telt",
+      "startIntro": "Kies een oefening. Telefoon op de grond, doe je set — de camera telt de herhalingen.",
+      "pattern": {
+        "squat": "Squatpatroon",
+        "hinge": "Heupscharnier",
+        "push": "Duwen",
+        "pull": "Trekken"
+      }
+    },
+    "clock": {
+      "title": "Rondes en intervallen",
+      "intro": "Een klok voor vechtsportrondes, Tabata, EMOM, AMRAP en intervallen. Geluid, trilling en stem — het scherm blijft aan.",
+      "presets": "Sjablonen",
+      "preset": {
+        "boxing": "Boksen 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervallen"
+      },
+      "work": "Werk (sec)",
+      "total": "Totale tijd (sec)",
+      "rest": "Rust (sec)",
+      "rounds": "Rondes",
+      "warn": "Vooraankondiging (sec)",
+      "totalTime": "Totale duur: {{time}}",
+      "prep": "Zo gaan we beginnen",
+      "round": "Ronde {{n}}",
+      "restPhase": "Rust",
+      "amrapLabel": "Zoveel mogelijk rondes",
+      "amrapTap": "Ronde gehaald · {{n}}",
+      "done": "Gehaald",
+      "lastSeconds": "Laatste {{count}} seconden",
+      "elapsed": "Totaal {{time}}",
+      "skip": "Verder",
+      "say": {
+        "round": "Ronde {{n}}",
+        "go": "Start",
+        "rest": "Rust",
+        "warn": "Laatste {{count}} seconden",
+        "done": "Gehaald"
+      }
+    },
+    "punch": {
+      "enable": "Stoten tellen (microfoon, preview)",
+      "title": "Stoten (microfoon)",
+      "calibrate": "Proef: sla tien keer — {{n}} van 10",
+      "denied": "Geen toegang tot de microfoon.",
+      "estimate": "Schatting · preview, niet gevalideerd"
+    },
+    "run": {
+      "title": "Hardlopen",
+      "intro": "Tijd, afstand, tempo en hartslag. Vrij of als intervallen op afstand.",
+      "mode": "Soort loop",
+      "mode_free": "Vrij",
+      "mode_intervals": "Intervallen",
+      "reps": "Herhalingen",
+      "workM": "Afstand (m)",
+      "restS": "Dribbelpauze (sec)",
+      "privacy": "De locatie wordt alleen gebruikt zolang de app open is, en alleen op het apparaat. Opgeslagen worden afstand, tijd en rondes — geen route en geen plaats.",
+      "freeTitle": "Hardlopen",
+      "intervalsTitle": "Intervallen {{reps}} × {{m}} m",
+      "gps_wait": "Locatie …",
+      "gps_ok": "Locatie goed",
+      "gps_weak": "Locatie onnauwkeurig",
+      "gps_off": "Geen locatie",
+      "freeLabel": "Looptijd",
+      "workLabel": "Interval {{n}} van {{of}}",
+      "restLabel": "Dribbelpauze na {{n}}",
+      "doneLabel": "Alle intervallen gehaald",
+      "left": "nog {{m}} m",
+      "pace": "Tempo",
+      "distance": "Afstand",
+      "total": "Totaal",
+      "splitsN": "Rondes",
+      "lap": "Ronde",
+      "finishHint": "Eerst pauzeren om te beëindigen.",
+      "say": {
+        "work": "Interval {{n}}",
+        "rest": "Dribbelpauze",
+        "last100": "Nog honderd meter",
+        "done": "Alle intervallen gehaald"
+      }
+    },
+    "summary": {
+      "title": "Samenvatting",
+      "lost": "Hier is geen training. Opgeslagen trainingen vind je in het dagboek.",
+      "toTraining": "Naar training",
+      "saved": "Opgeslagen · {{date}}",
+      "duration": "Gemeten duur",
+      "sets": "Sets",
+      "distance": "Afstand",
+      "pace": "Tempo",
+      "rounds": "Rondes",
+      "hr": "Hartslag gem. / max",
+      "compare": "Ten opzichte van vorige keer",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} herh.",
+      "first": "De eerste keer met deze oefening — vanaf nu is er een vergelijking.",
+      "unknown_one": "Vorige keer {{previous}}. Meetfout nog onbekend: nog {{count}} sessie tot een oordeel.",
+      "unknown_other": "Vorige keer {{previous}}. Meetfout nog onbekend: nog {{count}} sessies tot een oordeel.",
+      "v": {
+        "better": "Boven je meetfout (vanaf {{detectable}} %), beter.",
+        "worse": "Boven je meetfout (vanaf {{detectable}} %), slechter.",
+        "within_noise": "Binnen de ruis, geen aangetoond verschil (drempel {{detectable}} %)."
+      },
+      "estimate": "e1RM is een schatting.",
+      "note": "Vergeleken wordt met de laatste sessie van dezelfde oefening. ‘Beter’ pas als de verandering boven je eigen schommeling ligt — daarvoor zijn minstens vier sessies nodig.",
+      "splits": "Tussentijden",
+      "retest": "Volgende retest:",
+      "retestIn_one": "over {{count}} dag",
+      "retestIn_other": "over {{count}} dagen",
+      "view": "Bekijken",
+      "done": "Klaar"
+    }
   }
 }

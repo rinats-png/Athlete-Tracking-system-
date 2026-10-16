@@ -18,7 +18,7 @@
 // @ts-expect-error — Deno-Modulauflösung; diese Datei läuft nicht im Browser-Bau.
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { allowedOrigins, corsFor } from '../_shared/stripe.ts'
-import { buildPrompt, isKind, isLocale, MONTHLY_LIMIT, monthKey, PHRASE_PRODUCTS, sanitizeFacts } from '../_shared/phrase.ts'
+import { AI_CONSENT_VERSION, buildPrompt, isKind, isLocale, MONTHLY_LIMIT, monthKey, PHRASE_KINDS_ENABLED, PHRASE_PRODUCTS, sanitizeFacts } from '../_shared/phrase.ts'
 
 // @ts-expect-error — Deno steht nur zur Laufzeit der Edge Function bereit.
 const env = (key: string): string => Deno.env.get(key) ?? ''
@@ -65,6 +65,21 @@ Deno.serve(async (req: Request) => {
   const { data: rows, error: readError } = await admin.from('entitlements').select('product').eq('user_id', userId).in('status', ['active', 'trialing'])
   if (readError) return json(req, { error: 'read_failed' }, 500)
   if (!((rows ?? []) as { product: string }[]).some((r) => PHRASE_PRODUCTS.includes(r.product))) return json(req, { error: 'not_entitled' }, 403)
+
+  // Trainerentwürfe über Athleten: gesperrt bis zum Nachtrag des AV-Vertrags.
+  if (!PHRASE_KINDS_ENABLED.includes(body.kind)) return json(req, { error: 'kind_disabled' }, 403)
+
+  // Einwilligung (Art. 6 Abs. 1 lit. a, Art. 7 DSGVO): gültig für DIESE Fassung
+  // und nicht widerrufen — sonst geht nichts an den Anbieter.
+  const { data: consent, error: consentError } = await admin
+    .from('ai_consents')
+    .select('version, withdrawn_at, age_confirmed')
+    .eq('user_id', userId)
+    .maybeSingle()
+  if (consentError) return json(req, { error: 'read_failed' }, 500)
+  if (!consent || consent.version !== AI_CONSENT_VERSION || consent.withdrawn_at != null || consent.age_confirmed !== true) {
+    return json(req, { error: 'no_consent', version: AI_CONSENT_VERSION }, 403)
+  }
 
   // Monatsgrenze: erst zählen, dann fragen. Ein Fehler beim Anbieter kostet einen Aufruf, nie mehr.
   const { data: calls, error: bumpError } = await admin.rpc('ai_usage_bump', { p_user: userId, p_month: monthKey(new Date()), p_limit: MONTHLY_LIMIT })

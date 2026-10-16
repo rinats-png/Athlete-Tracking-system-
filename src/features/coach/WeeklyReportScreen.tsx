@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { useLocale } from '@/features/shared/useLocale'
 import { reminderSettingsOf } from '@/features/shared/profileContext'
@@ -90,7 +91,7 @@ export function WeeklyReportScreen() {
 
   return (
     <div data-testid="weekly-report">
-      <ScreenHeader eyebrow={t('weeklyReport.eyebrow')} title={t('weeklyReport.title')} intro={t('weeklyReport.intro')} />
+      <ScreenHeader eyebrow={t('weeklyReport.eyebrow')} title={t('weeklyReport.title')} intro={t('weeklyReport.intro')} image={AREA_IMAGES.testDay} />
       <div className="mb-4 flex flex-wrap items-end gap-3 print:hidden">
         <label className="text-[13px]">
           <span className="label-tag">{t('weeklyReport.athlete')}</span>

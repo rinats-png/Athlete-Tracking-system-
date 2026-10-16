@@ -1,5 +1,5 @@
 import { getTest } from '@/data/testCatalog'
-import { DETECTION_FACTOR, typicalErrorPercent } from '@/domain/change'
+import { judgeChange, typicalErrorPercent } from '@/domain/change'
 import type { StoredAthlete, StoredResult } from '@/lib/store/localStore'
 
 /**
@@ -113,10 +113,8 @@ function changesFor(results: StoredResult[], from: number, to: number): ProofCha
     // Die Streuung aus der GESAMTEN Historie, nicht nur dem Fenster: mehr
     // Messungen, bessere Schätzung — und derselbe Wert wie am Ergebnis.
     const typical = typicalErrorPercent(results, slug)
-    let verdict: ProofVerdict
-    if (typical == null) verdict = 'unknown_error'
-    else if (Math.abs(changePercent) <= typical * DETECTION_FACTOR) verdict = 'within_noise'
-    else verdict = changePercent > 0 ? 'gain' : 'drop'
+    const judged = judgeChange(changePercent, typical).verdict
+    const verdict: ProofVerdict = judged === 'better' ? 'gain' : judged === 'worse' ? 'drop' : judged
     out.push({
       testSlug: slug,
       first,

@@ -95,7 +95,7 @@ test('Bildschirm: Trainer sieht Heute mit Teamstatus, Priorität und sechs Berei
   await asCoach(page)
   const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
   await expect(nav.getByRole('button')).toHaveCount(10)
-  for (const label of ['Heute', 'Athleten', 'Plan', 'Test', 'Team', 'Wochenbericht', 'Fragen', 'Analyse', 'Profil', 'Einstellungen']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
+  for (const label of ['Heute', 'Athleten', 'Training', 'Test', 'Team', 'Wochenbericht', 'Fragen', 'Analyse', 'Profil', 'Einstellungen']) await expect(nav.getByRole('button', { name: label })).toBeVisible()
   const nums = await Promise.all(['current', 'review', 'overdue'].map(async (k) => Number(await page.getByTestId(`status-${k}`).locator('.readout').innerText())))
   expect(nums.reduce((a, b) => a + b, 0)).toBe(5)
   await expect(page.getByTestId('today-priority')).toBeVisible()

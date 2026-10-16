@@ -129,7 +129,7 @@ export function AssessmentDetailScreen() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         <Panel className="md:col-span-2 lg:col-span-3">
-          <PanelHeader title={t('assessments.plan')} subtitle={t('assessments.planHint')} />
+          <PanelHeader title={t('assessments.plan')} note={t('assessments.planHint')} />
           <ul>
             {rows.map((slug) => {
               const test = getTest(slug)

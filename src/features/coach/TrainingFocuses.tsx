@@ -74,7 +74,7 @@ export function TrainingFocuses({ locale }: { locale: AppLocale }) {
 
   return (
     <Panel>
-      <PanelHeader title={t('focus.title')} subtitle={t('focus.hint')} />
+      <PanelHeader title={t('focus.title')} note={t('focus.hint')} />
       <div className="px-4 py-4">
         {open.length === 0 && !adding && (
           <p className="text-[13px] leading-relaxed text-ink-muted">{t('focus.empty')}</p>

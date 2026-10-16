@@ -37,27 +37,35 @@ const BEEP_HZ = 880
 const BEEP_SECONDS = 0.18
 const BEEP_GAIN = 0.15
 
-export function playEndSignal(): void {
-  try {
-    navigator.vibrate?.([120, 80, 120])
-  } catch {
-    // Vibration ist nicht überall erlaubt; der Ton bleibt.
-  }
-
+/** Ein gerechneter Ton; ohne freigeschalteten Audiokontext still. */
+export function playTone(hz = BEEP_HZ, seconds = BEEP_SECONDS, gainValue = BEEP_GAIN): void {
   if (!context) return
   try {
     const now = context.currentTime
     const osc = context.createOscillator()
     const gain = context.createGain()
-    osc.frequency.value = BEEP_HZ
+    osc.frequency.value = hz
     // Sanftes Ein- und Ausblenden: ein hart geschalteter Sinus knackt.
     gain.gain.setValueAtTime(0, now)
-    gain.gain.linearRampToValueAtTime(BEEP_GAIN, now + 0.01)
-    gain.gain.linearRampToValueAtTime(0, now + BEEP_SECONDS)
+    gain.gain.linearRampToValueAtTime(gainValue, now + 0.01)
+    gain.gain.linearRampToValueAtTime(0, now + seconds)
     osc.connect(gain).connect(context.destination)
     osc.start(now)
-    osc.stop(now + BEEP_SECONDS + 0.02)
+    osc.stop(now + seconds + 0.02)
   } catch {
     // Kein Ton möglich — die Anzeige wechselt trotzdem sichtbar.
   }
+}
+
+export function vibrate(pattern: number | number[]): void {
+  try {
+    navigator.vibrate?.(pattern)
+  } catch {
+    // Vibration ist nicht überall erlaubt (iOS gar nicht); Ton und Bild bleiben.
+  }
+}
+
+export function playEndSignal(): void {
+  vibrate([120, 80, 120])
+  playTone()
 }

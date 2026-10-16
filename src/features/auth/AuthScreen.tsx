@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight, Check } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -12,6 +12,17 @@ import {
   type AuthOutcome,
 } from '@/lib/supabase/auth'
 import { plansForRole, writeAccount, type Account, type AccountRole } from './account'
+import { loadExtra } from '@/i18n'
+
+/*
+ * Die Einwilligung in den Abgleich gesundheitsnaher Angaben (Art. 9) wird
+ * nachgeladen — samt ihrer Texte aus dem Zusatzwörterbuch. Sie erscheint erst
+ * im letzten Registrierungsschritt, und das Startpaket bleibt unter seiner
+ * Grenze (tests/loading.spec.ts).
+ */
+const SensitiveConsentField = lazy(() =>
+  Promise.all([import('@/features/shared/SensitiveConsent'), loadExtra()]).then(([m]) => ({ default: m.SensitiveConsentField })),
+)
 
 /**
  * Das Tor.
@@ -22,13 +33,12 @@ import { plansForRole, writeAccount, type Account, type AccountRole } from './ac
  *   Anmeldung steht  →  nach dem Absenden zerfällt der Umriss wieder in
  *   Partikel  →  danach übernimmt die Sequenz.
  *
- * WAS DIESER BILDSCHIRM NICHT LEISTET, UND WARUM ER ES SAGT: es gibt keinen
- * Server. Die Eingabe wird nicht geprüft, das Passwort nicht gespeichert und
- * nichts übertragen. Das steht als Hinweis auf der Fläche — wie beim
- * Preisbildschirm, der sagt, dass noch nichts gekauft werden kann. Eine
- * Anmeldemaske, die Schutz vortäuscht, wäre die eine Sache, die man an einem
- * Anmeldebildschirm nicht tun darf: sie verleitet dazu, ein Passwort
- * einzutippen, das anderswo etwas bewacht.
+ * OHNE KONTO KEIN ZUGANG. Die Anmeldung läuft gegen den Dienst; ein Konto
+ * nur auf dem Gerät gibt es nicht mehr. Ist kein Dienst hinterlegt (ein Bau
+ * ohne `VITE_SUPABASE_*`), sagt die Fläche das und lässt niemanden durch —
+ * eine Anmeldung, die nichts prüft, wäre eine Sperre ohne Zweck und
+ * zugleich eine Einladung, ein Passwort einzutippen, das anderswo etwas
+ * bewacht.
  *
  * Die Partikel zeichnen nur den Rahmen. Das Formular darüber ist gewöhnliches
  * DOM mit Beschriftungen und Tastaturbedienung — Eingabefelder aus Partikeln
@@ -173,21 +183,8 @@ function SignInPane({ onDone }: { onDone: (account: Account) => void }) {
     setError(null)
     setNotice(null)
 
-    /*
-     * Ohne hinterlegtes Projekt bleibt es beim gestalteten Tor: die App läuft
-     * dann vollständig auf dem Gerät weiter. Ein Anmeldebildschirm, der ohne
-     * Server gar nicht mehr weiterlässt, wäre eine Sperre ohne Zweck.
-     */
     if (!isSupabaseConfigured()) {
-      onDone({
-        name: email.split('@')[0] || t('auth.defaultName'),
-        email,
-        role: 'athlete',
-        planId: null,
-        createdAt: new Date().toISOString(),
-        dpaAcceptedAt: null,
-        dpaVersion: null,
-      })
+      setError(message('not_configured'))
       return
     }
 
@@ -391,6 +388,7 @@ function RegisterDetails({
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [confirmFor, setConfirmFor] = useState<string | null>(null)
+  const [sensitive, setSensitive] = useState({ granted: false, ageConfirmed: false })
 
   if (confirmFor) {
     return (
@@ -420,8 +418,20 @@ function RegisterDetails({
     }
 
     if (!isSupabaseConfigured()) {
-      onDone(account)
+      setError(message('not_configured'))
       return
+    }
+
+    // Die Wahl gilt für genau dieses Konto. Sie steht zuerst auf dem Gerät und
+    // geht mit dem ersten Abgleich auf den Server — oft gibt es jetzt noch
+    // keine Sitzung, weil erst die E-Mail bestätigt werden muss. Ohne Haken
+    // gilt «nicht eingewilligt»; eine alte Wahl eines anderen Kontos fällt weg.
+    // (Nachgeladen wie das Feld selbst — das Startpaket trägt es nicht.)
+    const consent = await import('@/lib/sensitiveConsent')
+    if (sensitive.granted && sensitive.ageConfirmed) {
+      consent.chooseSensitiveConsent({ granted: true, kind: role === 'coach' ? 'coach' : 'self', ageConfirmed: true, email })
+    } else if (consent.readSensitiveConsent().state !== 'unset') {
+      consent.writeSensitiveConsent({ ...consent.readSensitiveConsent(), state: 'unset', pending: false })
     }
 
     setBusy(true)
@@ -484,6 +494,10 @@ function RegisterDetails({
         </span>
       </label>
 
+      <Suspense fallback={null}>
+        <SensitiveConsentField role={role} value={sensitive} onChange={setSensitive} />
+      </Suspense>
+
       {error && (
         <p role="alert" className="border-l-2 border-warning bg-warning/10 px-3 py-2 text-[12px] leading-relaxed">
           {error}
@@ -491,7 +505,7 @@ function RegisterDetails({
       )}
 
       <div className="flex gap-2">
-        <Button type="submit" size="lg" variant="primary" className="justify-center" disabled={busy}>
+        <Button type="submit" size="lg" variant="primary" className="justify-center" disabled={busy || (sensitive.granted && !sensitive.ageConfirmed)}>
           {busy ? t('auth.working') : t('auth.createAccount')}
           {!busy && <ArrowRight size={15} aria-hidden />}
         </Button>

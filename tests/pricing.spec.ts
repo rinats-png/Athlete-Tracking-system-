@@ -100,9 +100,17 @@ test.describe('Einzelnutzung', () => {
     // die meisten und sähen nichts. Die tragenden Merkmale müssen bei JEDEM
     // Test wirken.
     const plus = extraFeatures(athletePlan('plus'))
-    for (const ohneKohorte of ['forecast', 'seasonPlan', 'sync', 'card'] as PlanFeature[]) {
+    for (const ohneKohorte of ['forecast', 'seasonPlan', 'trainingLog', 'card'] as PlanFeature[]) {
       expect(plus, `${ohneKohorte} fehlt`).toContain(ohneKohorte)
     }
+  })
+
+  test('der Abgleich gehört zum kostenlosen Kern', () => {
+    // Das Konto ist Pflicht und der Abgleich läuft von selbst. Wer ihn
+    // bezahlen müsste, hätte ohne Abo keine Sicherung und keinen Trainer.
+    expect(FREE_CORE).toContain('sync')
+    for (const plan of ATHLETE_PLANS) expect(plan.features).toContain('sync')
+    expect(extraFeatures(athletePlan('plus'))).not.toContain('sync')
   })
 
   test('die Karten zeigen nur den Zuwachs, nicht die ganze Liste', () => {

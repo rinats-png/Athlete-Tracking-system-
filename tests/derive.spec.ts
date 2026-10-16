@@ -41,6 +41,20 @@ function fullInput(testDef: TestDefinition): Record<string, number> {
   if (values.peakPowerW != null && values.lastSprintPowerW != null) {
     values.lastSprintPowerW = Math.round(values.peakPowerW * 0.8)
   }
+  // Critical Speed: drei verschieden lange Läufe im Gültigkeitsbereich
+  // (2–15 min). Die Mitte aller Bereiche wären drei gleiche Läufe — daraus
+  // entsteht zu Recht keine Gerade.
+  if (values.run1DistanceM != null && values.run3DistanceM != null) {
+    Object.assign(values, {
+      run1DistanceM: 1200, run1Seconds: 240,
+      run2DistanceM: 2400, run2Seconds: 510,
+      run3DistanceM: 3600, run3Seconds: 800,
+    })
+  }
+  // Kraft-Geschwindigkeits-Profil: mit mehr Last springt man niedriger.
+  if (values.sjHeight0Cm != null && values.sjHeight2Cm != null) {
+    Object.assign(values, { pushOffCm: 40, sjHeight0Cm: 35, load1Kg: 20, sjHeight1Cm: 27, load2Kg: 40, sjHeight2Cm: 20 })
+  }
   return values
 }
 

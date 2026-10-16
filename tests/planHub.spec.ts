@@ -34,12 +34,12 @@ const seed = (page: import('@playwright/test').Page, withSession: boolean) =>
   }, withSession)
 
 test.describe('Bildschirm', () => {
-  test('Plan steht als dritter Bereich in der Leiste, Antippen öffnet den Hub', async ({ page }) => {
+  test('Training (bis 13.10.2026 «Plan») steht als dritter Bereich in der Leiste, Antippen öffnet den Hub', async ({ page }) => {
     await openDemo(page)
     const nav = page.getByRole('navigation', { name: 'Hauptnavigation' })
     const buttons = nav.getByRole('button')
     await expect(buttons).toHaveCount(12)
-    await expect(buttons.nth(2)).toHaveAccessibleName('Plan')
+    await expect(buttons.nth(2)).toHaveAccessibleName('Training')
     await buttons.nth(2).click()
     await expect(page).toHaveURL(/\/plan$/)
     await expect(page.getByTestId('plan-hub')).toBeVisible()
@@ -70,7 +70,7 @@ test.describe('Bildschirm', () => {
     await expect(page.getByTestId('hub-block')).toBeVisible()
     await expect(page.getByTestId('hub-week')).toContainText('Woche 3 von 6')
     for (const id of ['hub-today', 'hub-weekcount', 'hub-goal', 'hub-retest', 'hub-why']) await expect(page.getByTestId(id)).toBeVisible()
-    await expect(page.getByTestId('hub-why')).toContainText('Ungeprüft')
+    await expect(page.getByTestId('hub-why')).toContainText('Fachlich noch nicht geprüft')
     await expect(page.getByTestId('hub-block')).toContainText('Wettkampf in 47 Tagen')
     const text = await page.getByTestId('plan-hub').innerText()
     expect(text).not.toMatch(/planHub\.|plan\.[a-z]+\.|\{\{/)

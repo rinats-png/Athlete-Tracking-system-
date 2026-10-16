@@ -55,7 +55,7 @@ test.describe('Trend', () => {
     expect(MIN_TREND_POINTS).toBe(3)
   })
 
-  test('eine steigende Serie ergibt einen steigenden Trend', () => {
+  test('drei Messungen ergeben eine Gerade, aber kein Urteil — der Messfehler ist noch unbekannt', () => {
     const trend = testTrend(
       [
         result('back_squat_1rm', '2026-01-01', 150),
@@ -64,11 +64,28 @@ test.describe('Trend', () => {
       ],
       'back_squat_1rm',
     )
-    expect(trend.label).toBe('improving')
+    expect(trend.label, 'ohne Messfehler weder steigend noch fallend').toBe('unclear')
     expect(trend.percentPer30Days).toBeGreaterThan(4)
     // Nahezu perfekt linear — das muss auch so ausgewiesen werden.
     expect(trend.rSquared).toBeGreaterThan(0.99)
+    expect(trend.typicalErrorPercent).toBeNull()
     expect(trend.points).toBe(3)
+  })
+
+  test('eine steigende Serie über dem eigenen Messfehler ergibt einen steigenden Trend', () => {
+    const trend = testTrend(
+      [
+        result('back_squat_1rm', '2026-01-01', 150),
+        result('back_squat_1rm', '2026-02-01', 158),
+        result('back_squat_1rm', '2026-03-01', 165),
+        result('back_squat_1rm', '2026-04-01', 174),
+        result('back_squat_1rm', '2026-05-01', 181),
+      ],
+      'back_squat_1rm',
+    )
+    expect(trend.label).toBe('improving')
+    expect(trend.typicalErrorPercent).not.toBeNull()
+    expect(trend.changeOverSpanPercent!).toBeGreaterThan(trend.detectablePercent!)
   })
 
   test('bei Zeitmessungen bedeutet schneller besser', () => {
@@ -77,7 +94,8 @@ test.describe('Trend', () => {
       [
         result('illinois_agility', '2026-01-01', 17.4),
         result('illinois_agility', '2026-02-01', 17.0),
-        result('illinois_agility', '2026-03-01', 16.6),
+        result('illinois_agility', '2026-03-01', 16.7),
+        result('illinois_agility', '2026-04-01', 16.3),
       ],
       'illinois_agility',
     )
@@ -85,9 +103,10 @@ test.describe('Trend', () => {
     expect(trend.percentPer30Days).toBeGreaterThan(0)
   })
 
-  test('ein einzelner schlechter Tag kippt einen Aufwärtstrend nicht', () => {
+  test('ein einzelner schlechter Tag kippt einen Aufwärtstrend nicht in einen Abwärtstrend', () => {
     // Der letzte Wert liegt unter dem vorletzten. „Letzter gegen vorletzter“
-    // ergäbe hier fallend — die Regression sieht die Serie.
+    // ergäbe hier fallend — die Regression sieht die Serie. Der schlechte Tag
+    // erhöht aber die Streuung, und damit die Schwelle.
     const trend = testTrend(
       [
         result('back_squat_1rm', '2026-01-01', 150),
@@ -97,21 +116,38 @@ test.describe('Trend', () => {
       ],
       'back_squat_1rm',
     )
-    expect(trend.label).toBe('improving')
+    expect(trend.label).not.toBe('declining')
+    expect(trend.percentPer30Days).toBeGreaterThan(0)
     // Die Streuung ist sichtbar geringer als bei der sauberen Serie.
     expect(trend.rSquared).toBeLessThan(0.95)
   })
 
-  test('gleichbleibende Leistung ist stabil, nicht steigend', () => {
+  test('kleine Schwankung ist «keine klare Veränderung», nicht steigend', () => {
     const trend = testTrend(
       [
         result('back_squat_1rm', '2026-01-01', 160),
         result('back_squat_1rm', '2026-02-01', 160.5),
         result('back_squat_1rm', '2026-03-01', 159.8),
+        result('back_squat_1rm', '2026-04-01', 160.4),
+        result('back_squat_1rm', '2026-05-01', 159.9),
       ],
       'back_squat_1rm',
     )
     expect(trend.label).toBe('stable')
+  })
+
+  test('keine feste Schwelle mehr: das Urteil ist das von change.ts', async () => {
+    const { judgeChange } = await import('../src/domain/change')
+    // Eine stetige Steigerung von etwa 0,3 % je Monat: unter dem alten festen
+    // Band von 0,5 % je 30 Tage hiess das «stabil». Bei sehr geringer eigener
+    // Streuung ist das über acht Monate aber eine belegte Veränderung.
+    const values = [100, 100.3, 100.6, 100.9, 101.2, 101.5, 101.8, 102.1, 102.4]
+    const series = values.map((v, i) => result('back_squat_1rm', `2026-${String(i + 1).padStart(2, '0')}-01`, v))
+    const trend = testTrend(series, 'back_squat_1rm')
+    expect(Math.abs(trend.percentPer30Days!)).toBeLessThan(0.5)
+    const expected = judgeChange(trend.changeOverSpanPercent!, trend.typicalErrorPercent).verdict
+    expect(expected).toBe('better')
+    expect(trend.label).toBe('improving')
   })
 
   test('drei Messungen am selben Tag ergeben keinen Zeitverlauf', () => {

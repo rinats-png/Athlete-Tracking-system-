@@ -92,7 +92,7 @@ export function AssessmentSummaryScreen() {
       )}
 
       <Panel>
-        <PanelHeader title={t('assessments.results')} subtitle={t('assessments.resultsHint')} />
+        <PanelHeader title={t('assessments.results')} note={t('assessments.resultsHint')} />
         {results.length === 0 ? (
           <p className="px-4 py-6 text-[14px] text-ink-secondary">{t('assessments.noResults')}</p>
         ) : (

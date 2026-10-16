@@ -205,6 +205,9 @@ test.describe('Block: Bildschirme', () => {
     await page.getByTestId('player-toggle').click()
     await page.getByTestId('player-rpe-8').click()
     await page.getByTestId('player-done').click()
+    // Erst die Zusammenfassung, «Fertig» führt zum Block.
+    await expect(page.getByTestId('workout-summary')).toBeVisible()
+    await page.getByTestId('summary-done').click()
     await expect(page.getByTestId('plan-block')).toBeVisible()
     await expect(page.getByTestId('block-check-1')).toContainText('1 von 1')
     const diary = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].diary)

@@ -1,7 +1,8 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { AppHeader } from '@/features/dashboard/AppHeader'
 import { BottomNav, dockItemsFor, navItemsFor, navKeyForPath, pathForNavKey } from '@/features/dashboard/BottomNav'
-import { DataLoadNotice } from '@/features/dashboard/DataLoadNotice'
+import { lazy, Suspense } from 'react'
+import { loadExtra } from '@/i18n'
 import { ActionOrb } from '@/components/signature/ActionOrb'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { useTranslation } from 'react-i18next'
@@ -11,6 +12,18 @@ import { AnalyticsConsentStrip } from '@/features/shared/AnalyticsConsent'
 import { AdminBar } from '@/features/admin/AdminLink'
 import { usePushDueSync } from '@/features/push/usePushDueSync'
 import { WhatsNewDialog } from '@/features/whatsNew/WhatsNewDialog'
+import { useAutoSync } from '@/features/shared/useAutoSync'
+import { SyncAttentionNotice } from '@/features/shared/SyncAttentionNotice'
+import { useActiveWorkout } from '@/lib/activeWorkout'
+
+// Nur nachgeladen, wenn beim Laden etwas zu melden war — das Startpaket
+// bleibt so unter seiner Grenze (tests/loading.spec.ts).
+const DataLoadNotice = lazy(() =>
+  Promise.all([import('@/features/dashboard/DataLoadNotice'), loadExtra()]).then(([m]) => ({ default: m.DataLoadNotice })),
+)
+
+// «Training läuft»: nur nachgeladen, wenn eine Einheit läuft.
+const ActiveWorkoutBar = lazy(() => Promise.all([import('@/features/workout/ActiveWorkoutBar'), loadExtra()]).then(([m]) => m))
 
 /**
  * App-Hülle: Kopfzeile, Inhalt, Navigationsleiste.
@@ -27,8 +40,12 @@ export function AppShell() {
   const { pathname } = useLocation()
   useOverdueNotice()
   usePushDueSync()
+  const syncAttention = useAutoSync()
   usePageTracking(pathname)
-  const { mode, storageBlocked, role } = useAppData()
+  const { mode, storageBlocked, role, loadReport } = useAppData()
+  const workout = useActiveWorkout()
+  // Auf dem eigenen Bildschirm der Einheit (und in der Zusammenfassung) braucht es die Leiste nicht.
+  const showWorkout = workout != null && !pathname.startsWith(workout.path.split('?')[0]) && pathname !== '/plan/fertig'
   const items = navItemsFor(role)
   const active = navKeyForPath(pathname, role)
   const dock = dockItemsFor(role)
@@ -79,10 +96,20 @@ export function AppShell() {
             {t('storage.blocked')}
           </p>
         )}
-        <DataLoadNotice />
+        {(loadReport.migratedFrom != null || loadReport.fromNewerVersion || loadReport.rejected.length > 0) && (
+          <Suspense fallback={null}>
+            <DataLoadNotice />
+          </Suspense>
+        )}
+        <SyncAttentionNotice attention={syncAttention} />
         <AdminBar />
         <AnalyticsConsentStrip />
         <Outlet />
+        {showWorkout && (
+          <Suspense fallback={null}>
+            <ActiveWorkoutBar workout={workout} />
+          </Suspense>
+        )}
       </main>
 
       <WhatsNewDialog />

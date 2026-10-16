@@ -105,10 +105,12 @@ test.describe('Belegbild', () => {
     expect(await storedPhoto(page)).toBeNull()
   })
 
-  test('der Hinweis sagt, dass das Bild das Gerät nicht verlässt', async ({ page }) => {
+  test('der Hinweis sagt, wohin das Bild geht und dass es nicht ausgewertet wird', async ({ page }) => {
     await openGuest(page)
     await seedResult(page)
-    await expect(page.getByText(/bleibt auf diesem Gerät/)).toBeVisible()
+    // Seit 13.10.2026 geht es mit der Messung in den Abgleich — der Text muss das sagen.
+    await expect(page.getByText(/mit der Messung gespeichert und mit ihr abgeglichen/)).toBeVisible()
+    await expect(page.getByText(/Ausgewertet wird es nicht/)).toBeVisible()
   })
 
   test('das Schema nimmt kein Bild über der Grenze an', () => {

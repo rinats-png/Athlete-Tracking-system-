@@ -393,7 +393,7 @@
       "reportPdf": "Print-ready report",
       "requirementGap": "Which axis gives your discipline the most",
       "seasonPlan": "Checkpoints up to the competition",
-      "sync": "Sync across devices",
+      "sync": "Automatic sync: backup and all your devices",
       "targetStandards": "Target values of the specific entrance test",
       "unlimitedReports": "Reports without a cap",
       "whiteLabel": "Your own logo on the report",
@@ -521,7 +521,7 @@
       "thin_data": "Thin data",
       "no_assessment": "No measurement yet"
     },
-    "method": "The trend is a majority decision across the tests for which one can be computed at all — deliberately not a mean of slopes, because percent per 30 days cannot be meaningfully averaged across different tests. “Needs attention” is not a judgement of the person but a pointer to one of the stated reasons.",
+    "method": "The trend is a majority decision across the tests for which one can be computed at all — deliberately not a mean of slopes, because percent per 30 days cannot be meaningfully averaged across different tests. “Needs attention” is not a judgement of the person but a pointer to one of the stated reasons. A test only counts if its change exceeds the athlete’s own measurement error.",
     "emptyTitle": "No athletes yet",
     "emptyBody": "Add the first person under “Athletes you coach” in your profile.",
     "soloTitle": "Coach mode is off",
@@ -604,7 +604,7 @@
     "deleteHint_other": "“{{name}}” will be permanently deleted along with {{count}} measurements. This cannot be undone. To hide someone without losing data, use the archive.",
     "deleteConfirm": "Delete permanently",
     "meta": "{{results}} measurements · {{assessments}} assessments · since {{since}}",
-    "privacyNote": "KYDON stores only what you enter about a coached athlete. No account, email address or invitation is needed. Everything stays on this device.",
+    "privacyNote": "KYDON stores only what you enter about a coached athlete. The athlete needs no account, email address or invitation. With your account it is backed up automatically on servers in the EU; the data processing agreement applies.",
     "handover": "Handover",
     "handoverHint": "An athlete moves club or coach: their history belongs to them, not to this device. The file contains only this one athlete — without your branding and without the others.",
     "handoverExport": "Export athlete",
@@ -637,11 +637,11 @@
     "data": "Your data",
     "recovered": "This data came back from the device's second copy, saved on {{date}}. The browser had cleared the main storage.",
     "backupDue": {
-      "never_exported": "You have {{count}} measurements and have never exported. The data lives on this device only — an export makes it yours without it.",
+      "never_exported": "You have {{count}} measurements and have never exported. Sync backs them up in your account; an export is your own copy, independent of device and account.",
       "many_new_results": "{{count}} measurements have been added since the last export. A new export takes one click.",
       "long_ago": "The last export was {{days}} days ago, and {{count}} measurements have been added since."
     },
-    "privacy": "Your measurements live in this browser. They are transmitted only if you turn on sync. Clearing browser data removes the local record — the export or sync protects against that.",
+    "privacy": "Your measurements live on this device first and are backed up automatically on servers in the EU with your account. If you turn sync off, the export is your only backup.",
     "export": "Export",
     "import": "Import",
     "importFailed": "The file could not be read.",
@@ -933,12 +933,14 @@
     "overDays_other": "over {{count}} days",
     "trendLabel": {
       "improving": "Improving",
-      "stable": "Stable",
+      "stable": "No clear change",
       "declining": "Declining",
+      "unclear": "Unclear",
       "insufficient_one": "{{count}} measurement",
       "insufficient_other": "{{count}} measurements"
     },
     "trendInsufficientHint": "A regression line is computed from three measurements onwards. Two points always make a perfect line — that is not a trend.",
+    "trendUnclearHint": "The measurement error for this test is not known yet — it can be estimated from four measurements. Until then KYDON says neither “improving” nor “declining”.",
     "trendBasis": "{{points}} measurements, {{days}} days, R² {{r2}}",
     "compareAssessments": "Compare two sessions",
     "compareHint": "Completed sessions only. Tests present in just one of the two are marked rather than dropped.",
@@ -995,7 +997,7 @@
     "photoRemove": "Remove record",
     "photoAlt": "Record of the measurement",
     "photoAdded": "added on {{date}}",
-    "photoHint": "One image per result — the timer display, the scale readout. It is downsized and stays on this device; it is not transmitted and not analysed.",
+    "photoHint": "One image per result — the timer display, the scale readout. It is downsized, stored with the measurement and synced with it. It is not analysed.",
     "photoError": {
       "not_an_image": "That is not an image file.",
       "unreadable": "The image could not be read.",
@@ -1013,8 +1015,8 @@
   "reminders": {
     "eyebrow": "History",
     "title": "Reminders",
-    "intro": "The app knows when you last measured and works out what is due on your device. Reminders are off until you switch them on — with an account, also by push.",
-    "noPush": "The reminder appears in the app when you open it. With an account you can also turn on push: KYDON then notifies you even when the app is closed. For this the server only learns the date of the next retest. Without an account, the calendar file remains the reliable way.",
+    "intro": "The app knows when you last measured and works out what is due on your device. Reminders are off until you switch them on — by push too, if you like.",
+    "noPush": "The reminder appears in the app when you open it. You can also turn on push: KYDON then notifies you even when the app is closed. For this the server only learns the date of the next retest. The calendar file remains the most reliable way.",
     "enable": "Enable reminders",
     "enabled": "Reminders are on",
     "disabled": "Reminders are off",
@@ -1030,7 +1032,7 @@
     "dueOn": "due on {{date}}",
     "default": "Default",
     "calendar": "Download calendar file",
-    "calendarHint": "One all-day event per due re-test, with an alarm three days ahead. Works in any calendar, offline and without an account — this is the reliable route.",
+    "calendarHint": "One all-day event per due re-test, with an alarm three days ahead. Works in any calendar and offline — this is the reliable route.",
     "calendarEmpty": "No re-test is due yet. As soon as a test should be repeated, the file will be ready here.",
     "notify": "Allow system notifications",
     "notifyOn": "System notifications are allowed",
@@ -1516,7 +1518,7 @@
     "carryQuestion": "There are {{count}} athletes on this device. What should happen to them?",
     "carryYes": "Bring them into the team — they then belong to the team and count towards its tier.",
     "carryNo": "Keep them in my own account — they leave this device and come back when I leave the team.",
-    "joinPrivacy": "Joining switches on sync: the team’s athletes are stored on the server, and all coaches of the team can see them. If you leave the team, the athletes stay with the team.",
+    "joinPrivacy": "A team only works with sync: if it is off, joining turns it back on. The team’s athletes are stored on the server, and all coaches of the team can see them. If you leave the team, the athletes stay with the team.",
     "joinButton": "Join",
     "joined": "You are now in the team “{{name}}”.",
     "unnamed": "unnamed",
@@ -2161,7 +2163,7 @@
     "consent": {
       "title": "Consent for heart data",
       "agree": "I agree",
-      "storage": "The beat sequence stays on the device and is discarded after the measurement. Only the two results are stored. With an account and sync, they are also kept in your account. You can delete them at any time.",
+      "storage": "The beat sequence stays on the device and is discarded after the measurement. Only the two results are stored; with sync they are also kept in your account. You can delete them at any time.",
       "body": "Heart rate and heart rate variability are health data (Art. 9 GDPR). KYDON only measures them if you agree here, and uses them only to show them to you over time and in the daily context."
     },
     "beats_other": "{{count}} beats",
@@ -2240,6 +2242,8 @@
     "title": "New in KYDON:",
     "close": "Got it",
     "items": {
+      "sensitive": "Health-related details — sleep, stress, heart rate, body fat, complaints — are now synced only with your explicit consent. Without it they stay on the device. You can decide in your profile under “Data”.",
+      "account": "Account and sync: KYDON now syncs with your account on its own. Your data is backed up on servers in the EU and up to date on all your devices. You can turn this off in your profile — you will see first what stops working.",
       "design": "New design: frosted-glass cards with layers, mono digits for measured values and calmer transitions — light and dark.",
       "tests": "Test library to protocol 1.0: 126 tests in 29 areas, each with goal, setup, steps and scoring.",
       "images": "Photos of the test setups in the descriptions instead of sketches.",
@@ -2790,7 +2794,7 @@
     "saveNext": "Save, next athlete",
     "backToList": "Back to list",
     "rule": "The best valid attempt counts. Invalid attempts stay saved but are not scored.",
-    "offline": "Works offline. Everything stays on this device."
+    "offline": "Works offline. Results are saved on this device first and synced once the network is back."
   },
   "ask": {
     "eyebrow": "Questions",
@@ -2897,7 +2901,8 @@
       "not_entitled": "Rephrasing is part of Pro. The fixed answer stays.",
       "limit_reached": "The 30 rephrasings of this month are used up. The fixed answer stays.",
       "rejected": "The text failed the number check and is not shown. The fixed answer stays.",
-      "failed": "That did not work. The fixed answer stays."
+      "failed": "That did not work. The fixed answer stays.",
+      "no_consent": "Without your consent nothing is sent to the language model. The fixed answer stays."
     }
   },
   "weeklyReport": {
@@ -3022,7 +3027,7 @@
       "EXTRAPOLATED": "extrapolated"
     },
     "review": {
-      "unreviewed": "Unreviewed",
+      "unreviewed": "Not yet expert-reviewed",
       "reviewed": "Reviewed by {{name}} on {{date}}"
     },
     "limits": "Limits of the evidence",
@@ -3165,8 +3170,8 @@
     "save": "Log session"
   },
   "planHub": {
-    "eyebrow": "Training",
-    "title": "Plan",
+    "eyebrow": "Plan",
+    "title": "Training",
     "competition": "Goal: {{name}}",
     "competitionUnnamed": "your competition",
     "empty": {
@@ -3243,7 +3248,7 @@
       "event": "Competition"
     },
     "none": "No template matches this selection.",
-    "unreviewed": "Unreviewed",
+    "unreviewed": "Not yet expert-reviewed",
     "weeksTotal": "{{n}} weeks",
     "family": {
       "combat_grappling": "Combat sport grappling",
@@ -3974,5 +3979,391 @@
     "supports": "Supports {{sport}}",
     "other": "Different focus",
     "filter": "For {{sport}}"
+  },
+  "look": {
+    "info": "More info",
+    "today": {
+      "label": "Today in your plan",
+      "go": "Let’s go",
+      "toPlan": "Open plan",
+      "missed": "missed · make it up?",
+      "percentile": "Percentile {{score}}"
+    },
+    "hub": {
+      "catchUp": "make up",
+      "exercises": "Exercises",
+      "own": "Own plan"
+    },
+    "player": {
+      "close": "Close session"
+    },
+    "tests": {
+      "measured": "{{measured}} of {{total}} measured"
+    }
+  },
+  "start": {
+    "button": "Start training",
+    "title": "Start training",
+    "today": "Today",
+    "missed": "Missed",
+    "upcoming": "Next two weeks",
+    "allDone": "No open session in the plan — all done.",
+    "countsHint": "You can do any session on a different day too. It is then ticked off for its planned date.",
+    "none": "You have no active plan. You can still train — pick a way below.",
+    "free": "Without a plan",
+    "log": "Log something",
+    "logSub": "Write a workout straight into the training log",
+    "catalog": "From the catalogue",
+    "catalogSub": "A session from a ready-made plan, without adopting the plan",
+    "build": "Build your own",
+    "buildSub": "Pick exercises, set the sets, go",
+    "countsFor": "Planned for {{date}} – counts for that date.",
+    "doNow": "Do it now"
+  },
+  "free": {
+    "eyebrow": "Free training",
+    "catalogTitle": "Session from the catalogue",
+    "catalogIntro": "Pick a plan and a session from it. The plan itself is not adopted.",
+    "pickSession": "Pick a session",
+    "week": "Week",
+    "items": "Parts: {{n}}",
+    "otherPlan": "Choose another plan",
+    "buildTitle": "Your own session",
+    "buildIntro": "For today, without a plan. It is saved in the training log.",
+    "name": "Session name",
+    "search": "Search exercise",
+    "exercises": "Exercises",
+    "empty": "No exercise yet. Search above and tap one.",
+    "sets": "Sets",
+    "setsN": "{{n}} ×",
+    "fewer": "One set fewer",
+    "more": "One set more",
+    "reps": "Reps/time",
+    "remove": "Remove exercise",
+    "start": "Start session",
+    "lost": "No session is selected here. Pick one under “Start training”.",
+    "noSlot": "Free training: counts as training but does not tick off a plan date.",
+    "save": "Save to training log",
+    "defaultTitle": "Free strength training"
+  },
+  "aiConsent": {
+    "title": "Consent: have texts phrased by a language model",
+    "point": {
+      "what": "What is sent: only the facts of this answer – fixed keywords and numbers, such as “change +3.2 %, threshold 2.8 %”. The language model phrases a text from them. KYDON checks every number in it and otherwise shows the fixed answer.",
+      "notSent": "What is not sent: your name, your email address, notes, diary and other free text, data from the health layer and identifiers of your account.",
+      "who": "Recipient: Anthropic (language model Claude) as processor. Processing may take place in the United States; the transfer relies on standard contractual clauses. The provider does not use the data to train its models. KYDON stores neither facts nor text – only how often you used the feature this month, and this consent.",
+      "label": "Texts from the language model are labelled as such. The model only rephrases: it evaluates nothing, makes no diagnosis and takes no training decision.",
+      "voluntary": "Voluntary: without consent KYDON works in full – answers then appear as fixed texts. The legal basis is your consent (Art. 6(1)(a) GDPR)."
+    },
+    "withdraw": "You can withdraw your consent at any time in your profile under “Data”, with effect for the future.",
+    "more": "More in the privacy policy",
+    "age": "I am at least 16 years old.",
+    "accept": "Consent and phrase",
+    "decline": "Not now",
+    "failed": "Your consent could not be saved. This needs a connection and an account. Nothing was sent.",
+    "settingTitle": "Texts from the language model",
+    "state": {
+      "granted": "Consent given. On tap, facts are sent to Anthropic to be phrased.",
+      "withdrawn": "Withdrawn. Nothing is sent any more.",
+      "unset": "No consent. Nothing is sent."
+    },
+    "withdrawButton": "Withdraw consent",
+    "grantButton": "Give consent …",
+    "withdrawnLocal": "On this device the withdrawal applies at once. The server receives it as soon as there is a connection."
+  },
+  "storage": {
+    "newerTitle": "Newer KYDON version detected",
+    "reload": "Reload app",
+    "more_one": "… and one more.",
+    "more_other": "… and {{count}} more.",
+    "kept": "Everything else was carried over in full.",
+    "quarantined": "The unreadable entries are kept on this device and have not been deleted.",
+    "backup": "A backup exists on this device (as of {{date}}).",
+    "noBackup": "There is no backup on this device. Export your data regularly.",
+    "saveQuarantine": "Save unreadable entries as a file",
+    "kind": {
+      "results": "Results",
+      "assessments": "Assessments",
+      "biometrics": "Body values",
+      "observations": "Observations",
+      "diary": "Diary",
+      "diaryFields": "Diary fields",
+      "activities": "Activities",
+      "workouts": "Training log",
+      "trainingBlocks": "Training blocks",
+      "planTemplates": "Plan templates",
+      "customExercises": "Own exercises",
+      "decisions": "Decisions",
+      "meals": "Meals",
+      "nutrition": "Nutrition",
+      "health": "Health",
+      "peakWeeks": "Peak week",
+      "notes": "Notes",
+      "consent": "Consent",
+      "focuses": "Focus areas",
+      "audit": "Change log",
+      "testDays": "Test days",
+      "branding": "Branding",
+      "name": "Name",
+      "athlete": "Athlete",
+      "store": "Data store",
+      "other": "Other"
+    }
+  },
+  "sync": {
+    "title": "Sync with your account",
+    "hint": "Runs on its own: your data backed up on servers in the EU and on every device where you are signed in. Health data never goes with it.",
+    "signedOut": "Your sign-in has expired. Sign in again and KYDON will keep syncing.",
+    "enable": "Turn sync back on",
+    "disable": "Turn off sync",
+    "now": "Sync now",
+    "working": "Syncing …",
+    "last": "Last synced: {{date}}",
+    "never": "Never synced.",
+    "result": "{{pushed}} uploaded, {{pulled}} fetched, {{series}} entries synced.",
+    "offline": "No connection. The sync will catch up once you are online again.",
+    "conflictTitle": "Diverging state",
+    "conflictBody": "This athlete was changed on another device. KYDON overwrote nothing — both states are intact. Save your export first, then decide.",
+    "conflictKeepLocal": "Upload this record",
+    "conflictExplain": "The server state is replaced. The other direction — fetching the server state — goes through export, “delete everything” and a fresh sync.",
+    "whatLeaves": "Synced: measurements, profile details, notes, training focus, plans, plus diary, workouts, decisions and meals. Not included: your password, imported runs and health data — those have their own encrypted route. Health-related details (sleep, stress, heart rate, body fat, complaints) only with your explicit consent.",
+    "auto": "KYDON syncs on its own: after start-up, after every change and as soon as the network is back.",
+    "paused": "Sync has been off since {{date}}.",
+    "frozen": "The copy in your account reflects {{date}}; anything added since then exists only on this device and in your export.",
+    "frozenNever": "There is no copy in your account yet; everything exists only on this device and in your export.",
+    "offDialog": {
+      "eyebrow": "Turn off sync",
+      "title": "What stops working",
+      "backup": "No more backup. If this device is lost or the browser is cleared, everything added since you turned sync off is gone — unless you exported it.",
+      "devices": "Your other devices get no new values, and changes made there do not arrive here.",
+      "coach": "Your coach sees only the last synced state. New measurements, check-ins and sessions do not reach them.",
+      "plans": "Plans and adjustments from your coach no longer arrive on this device.",
+      "server": "The copy in your account stays as it is — it is not deleted. You can remove it completely with “Delete account permanently”.",
+      "local": "Measuring works as before, even offline. You can turn sync back on at any time; it then catches up on what is missing.",
+      "confirm": "Turn off anyway",
+      "keep": "Keep sync on"
+    }
+  },
+  "sensitiveConsent": {
+    "title": "Sync health-related details",
+    "intro": "Optional. Some details can be health data. They are only synced with your explicit consent:",
+    "introCoach": "Optional. Some details about your athletes can be health data. They are only synced if you confirm that the athletes have given explicit consent:",
+    "cat": {
+      "wellbeing": "Sleep, energy, stress and soreness (diary, test session)",
+      "heart": "Heart rate variability, resting heart rate and session heart rate",
+      "body": "Body fat, lean mass and resting metabolic rate",
+      "complaints": "Gut complaints, the pain flag of a session and the CK value"
+    },
+    "without": "Without consent, exactly these details stay on this device — everything else is synced. A coach will not see them, and they will be missing on a new device.",
+    "healthLayer": "Lab values, symptoms, cycle and medication are not part of this: the health layer has its own consent and is end-to-end encrypted.",
+    "checkbox": {
+      "self": "Yes, I explicitly consent to these details being backed up and synced with my account on servers in the EU (Art. 9(2)(a) GDPR).",
+      "coach": "Yes, these details of my athletes should be synced. I confirm that I hold the athletes’ explicit consent — for minors, that of their legal guardians."
+    },
+    "age": "I am at least 16 years old.",
+    "ageNeeded": "Confirm your age, or untick the box again.",
+    "withdraw": "You can withdraw consent at any time in your profile under “Data”; the next sync then removes these details from the server.",
+    "state": {
+      "granted": "Consented — these details are synced.",
+      "withdrawn": "Withdrawn — these details stay on this device.",
+      "unset": "No consent — these details stay on this device."
+    },
+    "pending": "Not yet on the server; the next sync will catch up.",
+    "ask": "Give consent",
+    "grant": "Explicitly consent",
+    "grantCoach": "Confirm and sync",
+    "withdrawButton": "Withdraw consent",
+    "cancel": "Cancel"
+  },
+  "workout": {
+    "running": "Running · {{time}}",
+    "start": "Start",
+    "pause": "Pause",
+    "paused": "Paused",
+    "resume": "Resume",
+    "finish": "Finish",
+    "save": "Save",
+    "continue": "Keep training",
+    "discard": "Discard",
+    "discardConfirm": "Really discard",
+    "close": "Close",
+    "minimize": "Leave, training keeps running",
+    "voice": "Spoken cues",
+    "bar": {
+      "running": "Training running · {{time}}",
+      "paused": "Training paused · {{time}}",
+      "rest": "Rest {{time}}",
+      "back": "Back"
+    },
+    "conflict": {
+      "title": "Already running: {{title}}",
+      "body": "Carry on there — or discard it and start fresh here.",
+      "continue": "Carry on there",
+      "replace": "Discard and start here"
+    },
+    "focus": {
+      "exercise": "Exercise {{n}} of {{of}}",
+      "set": "Set {{n}} of {{of}}",
+      "target": "Target {{target}}",
+      "last": "Last time: {{value}}",
+      "less": "Less {{field}}",
+      "more": "More {{field}}",
+      "done": "Set done",
+      "allDone": "All sets logged. Finish below."
+    },
+    "rest": {
+      "title": "Rest",
+      "of": "of {{total}}",
+      "next": "Up next",
+      "sound": "Sound at 3-2-1 and at the end · works offline too",
+      "skip": "Skip rest"
+    },
+    "camera": {
+      "chip": "Camera counts",
+      "title": "Camera counts along",
+      "close": "Close camera",
+      "onDevice": "On this device only",
+      "loading": "Loading camera and detection …",
+      "denied": "No access to the camera.",
+      "unsupported": "Detection does not run on this device.",
+      "fallback": "Count yourself as usual and enter the reps.",
+      "back": "Back to the set",
+      "setupTitle": "Set up camera",
+      "hint": {
+        "squat": "{{name}}: place it to the side, whole body in frame.",
+        "hinge": "{{name}}: place it to the side, whole body in frame.",
+        "push": "{{name}}: place it to the side, shoulder, elbow and hand in frame.",
+        "pull": "{{name}}: from the front or side, shoulder, elbow and hand in frame."
+      },
+      "check": {
+        "body": "Body visible",
+        "light": "Enough light",
+        "still": "Phone is still"
+      },
+      "ok": "met",
+      "waiting": "not yet",
+      "privacy": "Detection runs only on your device. No image and no video leaves the phone or is stored — only the numbers are saved.",
+      "ofTarget": "of {{target}} reps",
+      "tempo": "Tempo per rep · relative",
+      "estimate": "Estimate",
+      "loss": "Tempo loss in this set so far −{{percent}} %. A comparison with other days only comes once your measurement error is known.",
+      "lossNone": "Tempo appears from the second rep.",
+      "startTitle": "Camera counts",
+      "startIntro": "Pick an exercise. Phone on the floor, do your set — the camera counts the reps.",
+      "pattern": {
+        "squat": "Squat pattern",
+        "hinge": "Hip hinge",
+        "push": "Push",
+        "pull": "Pull"
+      }
+    },
+    "clock": {
+      "title": "Rounds and intervals",
+      "intro": "A clock for combat-sport rounds, Tabata, EMOM, AMRAP and intervals. Sound, vibration and voice — the screen stays on.",
+      "presets": "Presets",
+      "preset": {
+        "boxing": "Boxing 12 × 3:00",
+        "mma": "MMA 3 × 5:00",
+        "grappling": "Grappling 5 × 6:00",
+        "tabata": "Tabata",
+        "emom": "EMOM",
+        "amrap": "AMRAP",
+        "intervals": "Intervals"
+      },
+      "work": "Work (sec)",
+      "total": "Total time (sec)",
+      "rest": "Rest (sec)",
+      "rounds": "Rounds",
+      "warn": "Warning (sec)",
+      "totalTime": "Total duration: {{time}}",
+      "prep": "Get ready",
+      "round": "Round {{n}}",
+      "restPhase": "Rest",
+      "amrapLabel": "As many rounds as possible",
+      "amrapTap": "Round done · {{n}}",
+      "done": "Done",
+      "lastSeconds": "Last {{count}} seconds",
+      "elapsed": "Total {{time}}",
+      "skip": "Next",
+      "say": {
+        "round": "Round {{n}}",
+        "go": "Go",
+        "rest": "Rest",
+        "warn": "Last {{count}} seconds",
+        "done": "Done"
+      }
+    },
+    "punch": {
+      "enable": "Count punches (microphone, preview)",
+      "title": "Punches (microphone)",
+      "calibrate": "Trial: punch ten times — {{n}} of 10",
+      "denied": "No access to the microphone.",
+      "estimate": "Estimate · preview, not validated"
+    },
+    "run": {
+      "title": "Run",
+      "intro": "Time, distance, pace and heart rate. Free or as intervals by distance.",
+      "mode": "Type of run",
+      "mode_free": "Free",
+      "mode_intervals": "Intervals",
+      "reps": "Repetitions",
+      "workM": "Distance (m)",
+      "restS": "Jog recovery (sec)",
+      "privacy": "Location is only used while the app is open, and only on the device. Distance, time and laps are saved — no track and no place.",
+      "freeTitle": "Run",
+      "intervalsTitle": "Intervals {{reps}} × {{m}} m",
+      "gps_wait": "Location …",
+      "gps_ok": "Location good",
+      "gps_weak": "Location imprecise",
+      "gps_off": "No location",
+      "freeLabel": "Running time",
+      "workLabel": "Interval {{n}} of {{of}}",
+      "restLabel": "Jog recovery after {{n}}",
+      "doneLabel": "All intervals done",
+      "left": "{{m}} m to go",
+      "pace": "Pace",
+      "distance": "Distance",
+      "total": "Total",
+      "splitsN": "Laps",
+      "lap": "Lap",
+      "finishHint": "Pause first to finish.",
+      "say": {
+        "work": "Interval {{n}}",
+        "rest": "Jog recovery",
+        "last100": "One hundred metres to go",
+        "done": "All intervals done"
+      }
+    },
+    "summary": {
+      "title": "Summary",
+      "lost": "There is no session here. You will find saved ones in the diary.",
+      "toTraining": "To training",
+      "saved": "Saved · {{date}}",
+      "duration": "Duration measured",
+      "sets": "Sets",
+      "distance": "Distance",
+      "pace": "Pace",
+      "rounds": "Rounds",
+      "hr": "HR avg / max",
+      "compare": "Compared with last time",
+      "e1rm": "{{name}} · e1RM {{value}} kg",
+      "reps": "{{name}} · {{value}} reps",
+      "first": "The first time with this exercise — from now on there is a comparison.",
+      "unknown_one": "Last time {{previous}}. Measurement error not yet known: {{count}} more session until a verdict.",
+      "unknown_other": "Last time {{previous}}. Measurement error not yet known: {{count}} more sessions until a verdict.",
+      "v": {
+        "better": "Beyond your measurement error (from {{detectable}} %), better.",
+        "worse": "Beyond your measurement error (from {{detectable}} %), worse.",
+        "within_noise": "Within the noise, no proven difference (threshold {{detectable}} %)."
+      },
+      "estimate": "e1RM is an estimate.",
+      "note": "The comparison is with the last session of the same exercise. “Better” only once the change exceeds your own variation — that takes at least four sessions.",
+      "splits": "Splits",
+      "retest": "Next retest:",
+      "retestIn_one": "in {{count}} day",
+      "retestIn_other": "in {{count}} days",
+      "view": "View",
+      "done": "Done"
+    }
   }
 }

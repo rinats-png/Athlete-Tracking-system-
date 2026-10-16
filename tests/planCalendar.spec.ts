@@ -106,10 +106,30 @@ test.describe('Plankalender: Bildschirm', () => {
     await page.getByTestId('cal-view-month').click()
     const target = new Date(Date.parse(`${monday}T00:00:00Z`) + 9 * 86400000).toISOString().slice(0, 10)
     if ((await page.getByTestId(`cal-mday-${target}`).count()) === 0) await page.getByTestId('cal-next-month').click()
+    // Angetippt wie von einem Menschen: das Verschiebe-Feld darf keinen Tag
+    // verdecken (am 13.10.2026 lag der 28. darunter).
     await page.getByTestId(`cal-mday-${target}`).click()
     await page.getByTestId('cal-confirm').click()
     const moves = await page.evaluate(() => JSON.parse(localStorage.getItem('kydon.data.v1') as string).athletes[0].trainingBlocks[0].moves)
     expect(moves).toEqual([expect.objectContaining({ sessionId: 's1', from: monday, to: target })])
+  })
+
+  test('Monat: das Verschiebe-Feld verdeckt am Seitenende keinen Tag', async ({ page }) => {
+    await prepare(page)
+    await page.goto('/plan/kalender', { waitUntil: 'domcontentloaded' })
+    await page.getByTestId('cal-session-s1').click()
+    await page.getByTestId('cal-view-month').click()
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+    await page.waitForTimeout(200)
+    const panel = await page.getByTestId('cal-move').boundingBox()
+    const days = page.locator('[data-testid^="cal-mday-"]')
+    const last = await days.nth((await days.count()) - 1).boundingBox()
+    expect(panel && last, 'Feld und Kalender sichtbar').toBeTruthy()
+    expect(last!.y + last!.height, 'die letzte Monatszeile endet über dem Feld').toBeLessThanOrEqual(panel!.y + 1)
+    // Und das Feld klebt wirklich (früher hob `float` das Kleben auf) — ausser
+    // auf niedrigen Bildschirmen (Telefon quer), dort steht es im Fluss.
+    const tall = (page.viewportSize()?.height ?? 0) > 560
+    expect(await page.getByTestId('cal-move-frame').evaluate((e) => getComputedStyle(e).position)).toBe(tall ? 'sticky' : 'static')
   })
 
   test('ohne Block ein ruhiger Hinweis', async ({ page }) => {

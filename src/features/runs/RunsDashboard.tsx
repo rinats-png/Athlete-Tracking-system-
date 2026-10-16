@@ -120,7 +120,7 @@ function FormPanel({ m }: { m: RunMetrics }) {
   const sign = (n: number) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${formatNumber(Math.abs(Math.round(n)), locale, 0)}`
   return (
     <Panel className="mb-4" data-testid="runs-form">
-      <PanelHeader title={t('runs.dash.form.title')} subtitle={t('runs.dash.form.sub')} />
+      <PanelHeader title={t('runs.dash.form.title')} note={t('runs.dash.form.sub')} />
       <div className="px-4 py-3">
         <div className="flex items-center justify-between gap-3">
           <p className="readout text-[44px] font-light leading-none">{sign(m.form.value)}</p>

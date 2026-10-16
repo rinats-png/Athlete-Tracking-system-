@@ -28,7 +28,7 @@ export function InsightsPanel({
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <Panel>
-        <PanelHeader title={t('insights.findings')} subtitle={t('insights.findingsHint')} />
+        <PanelHeader title={t('insights.findings')} note={t('insights.findingsHint')} />
         <div className="px-4 py-4">
           {report.limiters.length === 0 && report.strengths.length === 0 ? (
             <p className="text-[13px] leading-relaxed text-ink-secondary">
@@ -83,7 +83,7 @@ export function InsightsPanel({
         </Panel>
 
         <Panel>
-          <PanelHeader title={t('insights.recommendations')} subtitle={t('insights.recommendationsHint')} />
+          <PanelHeader title={t('insights.recommendations')} note={t('insights.recommendationsHint')} />
           {report.recommendations.length === 0 ? (
             <p className="px-4 py-4 text-[13px] text-ink-secondary">{t('insights.noRecommendations')}</p>
           ) : (

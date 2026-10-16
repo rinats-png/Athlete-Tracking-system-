@@ -58,7 +58,7 @@ export function CoachDashboard({ locale }: { locale: AppLocale }) {
       <Panel>
         <PanelHeader
           title={t('coachDash.roster')}
-          subtitle={t('coachDash.sortedBy')}
+          note={t('coachDash.sortedBy')}
           action={
             <Button
               variant={onlyAttention ? 'primary' : 'ghost'}

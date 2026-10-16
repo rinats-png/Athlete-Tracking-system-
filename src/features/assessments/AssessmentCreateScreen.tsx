@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils'
 import type { PerformanceDimension, TestCategory } from '@/types/domain'
 import { pick } from '@/i18n/pick'
 import { useLocale } from '@/features/shared/useLocale'
+import { ScreenHeader } from '@/features/shared/ScreenHeader'
 
 type Filter = TestCategory | 'all'
 
@@ -229,14 +230,7 @@ export function AssessmentCreateScreen() {
         </Link>
       </Button>
 
-      <header className="mb-4">
-        <h1 className="font-display text-[28px] leading-tight font-bold sm:text-[34px]">
-          {t('assessments.newTitle')}
-        </h1>
-        <p className="mt-1.5 max-w-[62ch] text-[14px] leading-relaxed text-ink-secondary">
-          {t('assessments.newIntro')}
-        </p>
-      </header>
+      <ScreenHeader eyebrow={t('diag.eyebrow')} title={t('assessments.newTitle')} intro={t('assessments.newIntro')} />
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
         <div className="min-w-0 space-y-4 md:col-span-2 lg:col-span-3">
@@ -254,7 +248,7 @@ export function AssessmentCreateScreen() {
                 <Panel>
                   <PanelHeader
                     title={t('assessments.moreForSport', { sport: pick(discipline.name, locale) })}
-                    subtitle={t('assessments.moreForSportHint')}
+                    note={t('assessments.moreForSportHint')}
                   />
                   <ul>{optionalTests.map((test) => testRow(test, false))}</ul>
                 </Panel>
@@ -264,7 +258,7 @@ export function AssessmentCreateScreen() {
             <Panel>
               <PanelHeader
                 title={t('assessments.noSportTitle')}
-                subtitle={t('assessments.noSportHint')}
+                note={t('assessments.noSportHint')}
               />
               <div className="px-4 py-3">
                 <Button asChild variant="outline" size="sm">
@@ -283,7 +277,7 @@ export function AssessmentCreateScreen() {
             <Panel>
               <PanelHeader
                 title={t('assessments.alsoIncluded')}
-                subtitle={t('assessments.alsoIncludedHint')}
+                note={t('assessments.alsoIncludedHint')}
               />
               <ul>{extraSelected.map((test) => testRow(test, false))}</ul>
             </Panel>
@@ -294,7 +288,7 @@ export function AssessmentCreateScreen() {
           <Panel>
             <PanelHeader
               title={t('assessments.otherTests')}
-              subtitle={t('assessments.otherTestsHint')}
+              note={t('assessments.otherTestsHint')}
               action={
                 <Button variant="ghost" size="sm" onClick={() => setShowOther((v) => !v)}>
                   {showOther ? t('actions.close') : t('assessments.showOther')}
@@ -332,7 +326,7 @@ export function AssessmentCreateScreen() {
           <Panel>
             <PanelHeader
               title={t('assessments.generalBatteries')}
-              subtitle={t('assessments.generalBatteriesHint')}
+              note={t('assessments.generalBatteriesHint')}
             />
             <ul className="grid gap-px bg-line sm:grid-cols-2">
               {batteries.map((battery) => (

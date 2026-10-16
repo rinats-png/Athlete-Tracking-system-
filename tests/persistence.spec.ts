@@ -171,7 +171,7 @@ test.describe("Rettung beschädigter Bestände", () => {
       "auchGut",
     ]);
     expect(report.rejected).toHaveLength(1);
-    expect(report.rejected[0].kind).toBe("result");
+    expect(report.rejected[0].kind).toBe("results");
     // Die Kennung nennt den Athleten mit, sonst ist bei mehreren Kunden nicht
     // erkennbar, wessen Datensatz fehlt.
     expect(report.rejected[0].id).toContain("kaputt");

@@ -3,6 +3,7 @@ import { lookupPercentile } from '@/domain/benchmark'
 import { PERFORMANCE_DIMENSIONS } from '@/types/domain'
 import { assessQuality } from '@/domain/dataQuality'
 import { coveredDimensions } from '@/domain/assessment'
+import { judgeChange, typicalErrorPercent } from '@/domain/change'
 import type { PerformanceDimension } from '@/types/domain'
 import type { StoredAssessment, AthleteData, StoredResult } from '@/lib/store/localStore'
 
@@ -18,7 +19,15 @@ import type { StoredAssessment, AthleteData, StoredResult } from '@/lib/store/lo
 
 // --- Trend -------------------------------------------------------------------
 
-export type TrendLabel = 'improving' | 'stable' | 'declining' | 'insufficient'
+/**
+ * - `improving` / `declining`: die Veränderung über den Zeitraum liegt über
+ *   dem eigenen Messfehler (change.ts).
+ * - `stable`: sie liegt innerhalb — «keine klare Veränderung», nicht «gleich
+ *   geblieben».
+ * - `unclear`: der Messfehler ist noch unbekannt; ohne ihn gibt es kein Urteil.
+ * - `insufficient`: zu wenige Messungen für eine Gerade.
+ */
+export type TrendLabel = 'improving' | 'stable' | 'declining' | 'unclear' | 'insufficient'
 
 export interface Trend {
   label: TrendLabel
@@ -26,6 +35,12 @@ export interface Trend {
   percentPer30Days: number | null
   /** Bestimmtheitsmass der Regression, 0–1. Niedrig = stark streuend. */
   rSquared: number | null
+  /** Veränderung entlang der Geraden über den ganzen Zeitraum, richtungsbereinigt. */
+  changeOverSpanPercent: number | null
+  /** Typische Abweichung dieses Athleten in diesem Test (change.ts). */
+  typicalErrorPercent: number | null
+  /** Ab dieser Veränderung gilt sie als nachweisbar. */
+  detectablePercent: number | null
   points: number
   spanDays: number
   firstPerformedAt: string | null
@@ -34,13 +49,14 @@ export interface Trend {
 
 /** Ab wie vielen Messungen eine Regression überhaupt etwas aussagt. */
 export const MIN_TREND_POINTS = 3
-/** Unterhalb dieser Änderung je 30 Tage gilt die Leistung als stabil. */
-export const TREND_STABLE_BAND_PERCENT = 0.5
 
 const emptyTrend = (points: number): Trend => ({
   label: 'insufficient',
   percentPer30Days: null,
   rSquared: null,
+  changeOverSpanPercent: null,
+  typicalErrorPercent: null,
+  detectablePercent: null,
   points,
   spanDays: 0,
   firstPerformedAt: null,
@@ -54,6 +70,14 @@ const emptyTrend = (points: number): Trend => ({
  * ein einzelner schlechter Tag würde sonst einen Aufwärtstrend in einen
  * Abwärtstrend verwandeln. Das Bestimmtheitsmass wird mitgeliefert, damit
  * sichtbar bleibt, wie gut die Gerade die Punkte überhaupt beschreibt.
+ *
+ * DAS URTEIL kommt aus change.ts, nicht aus einer eigenen Schwelle: die
+ * Veränderung entlang der Geraden über den ganzen Zeitraum wird gegen den
+ * eigenen Messfehler geprüft — dieselbe Schwelle wie beim einzelnen
+ * Vergleich. Das ist eher streng (eine Gerade durch viele Punkte ist genauer
+ * als die Differenz zweier Messungen), und so herum ist es richtig. Bis
+ * dahin galt ein festes Band von 0,5 % je 30 Tage — für einen Sprint eine
+ * Welt, für einen Ausdauertest nichts.
  */
 export function testTrend(results: StoredResult[], testSlug: string): Trend {
   const test = getTest(testSlug)
@@ -85,20 +109,28 @@ export function testTrend(results: StoredResult[], testSlug: string): Trend {
   // Steigung als Prozent des Mittelwerts, damit Sekunden und Kilogramm
   // vergleichbar werden. Bei „niedriger ist besser“ dreht das Vorzeichen.
   const rawPercent = ((slopePerDay * 30) / Math.abs(meanY)) * 100
-  const percentPer30Days =
-    Math.round((test.direction === 'lower_is_better' ? -rawPercent : rawPercent) * 100) / 100
+  const directed = test.direction === 'lower_is_better' ? -rawPercent : rawPercent
+  const percentPer30Days = Math.round(directed * 100) / 100
+  const changeOverSpanPercent = Math.round(((directed * spanDays) / 30) * 10) / 10
 
+  const typical = typicalErrorPercent(results, testSlug)
+  const { verdict, detectablePercent } = judgeChange(changeOverSpanPercent, typical)
   const label: TrendLabel =
-    Math.abs(percentPer30Days) < TREND_STABLE_BAND_PERCENT
-      ? 'stable'
-      : percentPer30Days > 0
-        ? 'improving'
-        : 'declining'
+    verdict === 'better'
+      ? 'improving'
+      : verdict === 'worse'
+        ? 'declining'
+        : verdict === 'within_noise'
+          ? 'stable'
+          : 'unclear'
 
   return {
     label,
     percentPer30Days,
     rSquared: Math.round(rSquared * 1000) / 1000,
+    changeOverSpanPercent,
+    typicalErrorPercent: typical,
+    detectablePercent,
     points: n,
     spanDays: Math.round(spanDays),
     firstPerformedAt: series[0].performedAt,

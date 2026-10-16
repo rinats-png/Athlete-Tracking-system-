@@ -196,7 +196,7 @@ export function ResultScreen() {
         </Panel>
 
         <Panel className="lg:col-span-2">
-          <PanelHeader title={t('result.benchmark')} subtitle={t('result.benchmarkHint')} />
+          <PanelHeader title={t('result.benchmark')} note={t('result.benchmarkHint')} />
           {all.length === 0 ? (
             <p className="px-4 py-3 text-[13px] text-ink-secondary">{t('result.noSociety')}</p>
           ) : (

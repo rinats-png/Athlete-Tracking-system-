@@ -26,8 +26,8 @@
       "athletePerformance": "Performance",
       "athleteTest": "Test",
       "athleteMore": "More",
-      "athletePlan": "Plan",
-      "coachPlan": "Plan",
+      "athletePlan": "Training",
+      "coachPlan": "Training",
       "dockDiary": "Diary",
       "dockLoad": "Load",
       "dockHealth": "Health",
@@ -53,8 +53,8 @@
     "athletePerformance": "Performance",
     "athleteTest": "Test",
     "athleteMore": "More",
-    "athletePlan": "Plan",
-    "coachPlan": "Plan"
+    "athletePlan": "Training",
+    "coachPlan": "Training"
   },
   "actions": {
     "startTest": "Start test",
@@ -180,9 +180,9 @@
   "badges": {
     "personalBest": "Personal best",
     "demo": "Demo",
-    "guest": "Local",
-    "demoHint": "Sample data. Changes stay on this device.",
-    "guestHint": "Your data stays on this device only."
+    "demoHint": "Sample data. It stays on this device and never goes into your account.",
+    "own": "Account",
+    "ownHint": "Your own records, linked to your account."
   },
   "units": {
     "percentile": "percentile",
@@ -191,14 +191,13 @@
   "welcome": {
     "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Find out where you really stand.",
-    "body": "Sport-specific tests, scientific reference values, a performance profile and the next sensible test — no training log, no calorie counter.",
+    "body": "Sport-specific tests, reference values with sources, a performance profile and the next sensible test. A training plan can follow from that — built only from evidence-based rules.",
     "continueEmail": "Continue with email",
     "haveAccount": "I have an account",
     "viewDemo": "View demo",
     "legal": "By continuing you agree to the terms of use and confirm that you have read the privacy policy.",
-    "startLocal": "Start with an empty record",
-    "privacy": "Measuring and analysis happen on your device. Signing in needs your email address; your measurements are transmitted only once you turn on sync — and can be exported in full at any time.",
-    "accountLater": "Accounts and sync are coming later",
+    "startOwn": "Create your own records",
+    "privacy": "Measuring happens on your device first, even offline. With your account your data is backed up automatically on servers in the EU; a coach sees only what you share. The export is always complete and free.",
     "points": [
       "Sport-specific diagnostics",
       "Reference values with sources",
@@ -218,10 +217,10 @@
         "where you really",
         "stand."
       ],
-      "since": "no account",
+      "since": "backed up in the EU",
       "aboutLabel": "about kydon",
       "aboutHeadline": "Kydon measures, puts it in context and shows what actually changed — and what was just a good day.",
-      "aboutBody": "Sport-specific test protocols, reference values with sources, a performance profile across six axes and the next sensible test. No training log, no calorie counter, no medical statement.",
+      "aboutBody": "Sport-specific test protocols, reference values with sources, a performance profile across six axes and the next sensible test. No invented norms, no medical statement.",
       "cards": {
         "protocol": {
           "title": "Test protocols",
@@ -257,7 +256,7 @@
   "storage": {
     "blocked": "Device storage is unavailable (private mode or full). Entries apply to this session only.",
     "migrated": "Your data comes from an older version (version {{from}}) and has been carried over. Nothing was lost.",
-    "newerVersion": "This data was saved by a newer version of KYDON. It is left untouched until this app is updated — until then it is neither shown nor overwritten.",
+    "newerVersion": "This data was saved by a newer version of KYDON. This app is older and leaves it untouched: it is not shown, and changes made in this session are not saved. Please update the app before you continue.",
     "rejected_one": "One record could not be read and is missing from the analysis:",
     "rejected_other": "{{count}} records could not be read and are missing from the analysis:",
     "kind": {
@@ -435,7 +434,30 @@
     "round4Actions": "Round 4",
     "round5Actions": "Round 5",
     "roundSeconds": "Round length",
-    "restSeconds": "Rest between rounds"
+    "restSeconds": "Rest between rounds",
+    "run1DistanceM": "Distance run 1",
+    "run2DistanceM": "Distance run 2",
+    "run3DistanceM": "Distance run 3",
+    "distanceAt150sM": "Distance at 2:30 min",
+    "vIftKmh": "Final speed V_IFT",
+    "hrRest": "Resting pulse",
+    "stairHeightM": "Height step 3 to 9",
+    "contactTimeMs": "Ground contact time",
+    "flightTimeMs": "Flight time",
+    "reboundHeightCm": "Jump height",
+    "dropHeightCm": "Drop height (box)",
+    "totalFlightTimeS": "Total flight time",
+    "ballKg": "Ball mass",
+    "repsLeft": "Reps left",
+    "repsRight": "Reps right",
+    "durationLeftS": "Time left",
+    "durationRightS": "Time right",
+    "pushOffCm": "Push-off distance",
+    "sjHeight0Cm": "Squat jump unloaded",
+    "load1Kg": "Added load 1",
+    "sjHeight1Cm": "Squat jump with load 1",
+    "load2Kg": "Added load 2",
+    "sjHeight2Cm": "Squat jump with load 2"
   },
   "metrics": {
     "vo2max_ml_kg_min": "VO2max",
@@ -491,7 +513,22 @@
     "intra_carbs_g_per_h": "Carbohydrate per hour during the session",
     "sweat_rate_l_per_h": "Sweat rate",
     "hrv_artifact_rule": "HRV measurement artefact rule",
-    "hrv_rmssd_ms": "Heart rate variability (RMSSD)"
+    "hrv_rmssd_ms": "Heart rate variability (RMSSD)",
+    "critical_speed_m_s": "Critical speed",
+    "d_prime_m": "D′ (distance reserve)",
+    "cs_see_m": "CS line estimate error",
+    "mas_kmh": "Maximal aerobic speed",
+    "vo2max_ift_ml_kg_min": "VO2max (estimated, 30-15 IFT)",
+    "ruffier_index": "Ruffier index",
+    "dickson_index": "Ruffier-Dickson index",
+    "stair_power_w": "Stair power",
+    "stair_power_w_per_kg": "Stair power per kg",
+    "rsi_m_s": "Reactive strength index (RSI)",
+    "bosco_power_w_per_kg": "Mean jump power (Bosco)",
+    "f0_n_per_kg": "Maximal force F0",
+    "v0_m_s": "Maximal velocity v0",
+    "pmax_w_per_kg_fv": "Maximal power Pmax (FV profile)",
+    "asymmetryPercent": "Side-to-side difference"
   },
   "categoriesShort": {
     "endurance": "Endurance",
@@ -741,7 +778,7 @@
   "gate": {
     "step": "Step 1 of 1",
     "title": "Which sport?",
-    "body": "KYDON then suggests exactly the tests measured for that discipline — with protocol and reasoning. The entry stays on this device and can be changed at any time.",
+    "body": "KYDON then suggests exactly the tests measured for that discipline — with protocol and reasoning. You can change it at any time.",
     "noMatch": "No sport found for “{{query}}”. Choose “General assessment” below — the sport can be added later.",
     "general": "General assessment",
     "generalHint": "Without a sport: one battery across all six axes. Changeable at any time in the test area."
@@ -756,7 +793,7 @@
     "allTests": "See all tests",
     "profile": {
       "title": "Your profile",
-      "body": "Age, sex and body data decide which reference groups your values are compared with. Everything stays on this device.",
+      "body": "Age, sex and body data decide which reference groups your values are compared with. The details belong to you and can be changed at any time.",
       "required": "Required",
       "optional": "Optional",
       "weight": "Body weight",
@@ -833,9 +870,9 @@
       "points": {
         "measures": "It measures your performance with tests that follow a fixed protocol — so the same test means the same thing a year from now.",
         "compares": "It places your values in named reference groups, with source and data quality on every comparison. Where no sourced reference exists, it says so instead of inventing a number.",
-        "notPlan": "It is not a training plan and not a workout tracker. It tells you where you stand — not what to train.",
+        "plan": "KYDON measures where you stand. A training plan can follow from that, but only from evidence-based rules, with source and review status. Every block ends with a new measurement. You or your coach decides.",
         "notMedical": "It is not medical diagnostics. No diagnoses, no therapy recommendations, no assessment of illness.",
-        "onDevice": "Everything stays on this device. No account, no transfer, and the export of your data is always complete and free."
+        "data": "Your data belongs to you. It lives on your device first, and measuring works offline. With your account it is also backed up automatically on servers in the EU. A coach sees only what you share, and you can withdraw any share. The export is always complete and free."
       }
     },
     "role": {
@@ -1082,7 +1119,7 @@
     "title": "Anonymised benchmarking",
     "body": "This is where it will say how many athletes performed a test and which percentile your result sits in — anonymised and only with your explicit consent.",
     "status": "No comparison data yet",
-    "statusBody": "The app stores everything locally and transmits nothing. A community comparison needs a server that does not exist yet. Until then this says honestly: no data — instead of an invented number.",
+    "statusBody": "A community comparison needs enough measurements that were explicitly shared for it — there are none yet. Until then this says honestly: no data — instead of an invented number.",
     "example": "What it will look like",
     "exampleLine": "\"1,284 athletes performed this test. Your result: 72nd percentile.\"",
     "principles": "Principles",
@@ -1332,7 +1369,7 @@
   "auth": {
     "eyebrow": "Sign in",
     "claim": "Measure. Benchmark. Develop.",
-    "noBackend": "No project is configured for this device: your input is not verified and nothing is transmitted. This sign-in orders the entry, it does not yet protect anything.",
+    "noBackend": "No service is configured for this build. KYDON needs an account, so signing in is not possible here.",
     "signIn": "Sign in",
     "register": "Create account",
     "email": "Email",
@@ -1358,7 +1395,7 @@
     "signOut": "Sign out",
     "signOutAndWipe": "Sign out and wipe device",
     "wipeConfirmTitle": "Delete all data on this device?",
-    "wipeConfirmBody": "Measurements, profiles and settings of this app will be removed from this device — permanently. A synced copy on the server remains. Without sync, an earlier export is the only copy.",
+    "wipeConfirmBody": "Measurements, profiles and settings of this app are removed from this device — permanently. Whatever was synced with your account stays on the server and returns with your next sign-in. Anything added since the last sync then exists only in your export.",
     "wipeConfirm": "Delete permanently",
     "wipeCancel": "Cancel",
     "deleteAccount": "Delete account permanently",
@@ -1367,7 +1404,7 @@
     "deleteConfirmBody": "The account, the server copy and all measurements will be removed. Clients you manage without their own account are deleted too; clients with their own account keep their data. This step cannot be undone.",
     "deleteConfirm": "Delete permanently",
     "deleteFailed": {
-      "not_configured": "Without an account there is nothing on a server to delete.",
+      "not_configured": "No service is configured for this build; there is nothing on a server to delete.",
       "offline": "No connection. Please try again later.",
       "unauthorized": "The session has expired. Please sign in again and retry.",
       "failed": "Deletion failed. Nothing was removed."
@@ -1375,8 +1412,8 @@
     "signedInAs": "Signed in as {{name}}",
     "planChosen": "Chosen tier: {{plan}}",
     "planNone": "No tier chosen yet.",
-    "signOutKeepsData": "Signing out only clears the account. Your measurements stay on this device — they are yours, not the sign-in’s.",
-    "backendNote": "Your sign-in runs through our service provider. Measuring and analysis stay on this device; data is transmitted only once you turn on sync.",
+    "signOutKeepsData": "Signing out ends the sign-in on this device. Your measurements stay here and backed up in your account — after your next sign-in you carry on where you left off.",
+    "backendNote": "KYDON needs an account. Measuring happens on your device first, even offline; once you sign in, your data is backed up automatically on servers in the EU. Anything already on this device is kept.",
     "passwordRule": "At least {{count}} characters.",
     "confirmTitle": "Confirm your email",
     "confirmBody": "We sent a message to {{email}}. Open the link in it, then you can sign in.",
@@ -1390,29 +1427,10 @@
       "weak_password": "The password is too short.",
       "needs_confirmation": "This email is not confirmed yet. The link is in your inbox.",
       "too_many_attempts": "Too many failed attempts. Please wait a moment and try again.",
-      "offline": "No connection. You can keep measuring on this device — signing in can wait.",
+      "offline": "No connection. KYDON needs the network once to sign in — after that you can measure offline.",
       "not_configured": "No project is configured for this device.",
       "unknown": "That did not work. Please try again later."
     }
-  },
-  "sync": {
-    "title": "Sync",
-    "hint": "Your measurements as a second copy on the server — so they survive a lost device and appear on a second one.",
-    "offNotice": "Off. Everything stays on this device. The export is then your only backup.",
-    "signedOut": "You need to be signed in for this.",
-    "enable": "Turn on sync",
-    "disable": "Turn off",
-    "now": "Sync now",
-    "working": "Syncing …",
-    "last": "Last synced: {{date}}",
-    "never": "Never synced.",
-    "result": "{{pushed}} uploaded, {{pulled}} fetched, {{series}} entries synced.",
-    "offline": "No connection. The sync will catch up once you are online again.",
-    "conflictTitle": "Diverging state",
-    "conflictBody": "This athlete was changed on another device. KYDON overwrote nothing — both states are intact. Save your export first, then decide.",
-    "conflictKeepLocal": "Upload this record",
-    "conflictExplain": "The server state is replaced. The other direction — fetching the server state — goes through export, “delete everything” and a fresh sync.",
-    "whatLeaves": "Transferred: measurements, profile details, notes, training focus, plus diary, workouts, decisions and meals — the latter as individual entries, not one whole document. Your password is never transferred."
   },
   "editResult": {
     "open": "Correct value",
@@ -1885,7 +1903,14 @@
     "criticalSpeedPace": "{{pace}} per km",
     "reserve": "Distance reserve {{meters}} m",
     "fromTwoRuns": "From {{first}} and {{second}}.",
-    "toHistory": "Whether a change exceeds the measurement error is shown in each individual test’s history."
+    "toHistory": "Whether a change exceeds the measurement error is shown in each individual test’s history.",
+    "domains": "Moderate up to {{moderate}} per km, heavy up to {{heavy}} per km, faster is severe.",
+    "combined": "From two tests",
+    "combinedSub": "Figures that combine two measurements.",
+    "speedReserve": "Sprint {{mss}} km/h (flying 20 m), aerobic {{mas}} km/h (5-minute run).",
+    "eur": "CMJ/SJ",
+    "eurFrom": "CMJ {{cmj}} cm, squat jump {{sj}} cm, on {{date}}.",
+    "combinedNote": "Only the numbers and their formula. Published profile cut-offs exist only for single groups — so the app does not classify anything here."
   },
   "analytics": {
     "consent": {
@@ -2061,5 +2086,24 @@
         "failed": "Sharing did not work. Your check-in is saved."
       }
     }
+  },
+  "syncAttention": {
+    "signedOut": "Your sign-in has expired. Measuring continues on this device; syncing resumes after you sign in again.",
+    "otherAccount": "The records on this device belong to another account, so they are not synced. Sign in with that account or clear the device in your profile.",
+    "conflict": "An athlete was changed differently on another device. KYDON overwrote nothing — decide in your profile.",
+    "signIn": "Sign in again",
+    "open": "Open sync"
+  },
+  "quickStart": {
+    "title": "Go now — no plan needed",
+    "strength": "Free strength",
+    "run": "Run",
+    "clock": "Rounds",
+    "camera": "Camera",
+    "start": "Start training",
+    "freeTitle": "Free training",
+    "freeSub": "No plan, still saved — even without Plus.",
+    "freeLabel": "No plan",
+    "otherDays": "Other days and more options"
   }
 }

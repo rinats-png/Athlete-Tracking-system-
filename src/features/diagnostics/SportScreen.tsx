@@ -162,7 +162,7 @@ export function SportScreen() {
         </Panel>
 
         <Panel>
-          <PanelHeader title={t('sport.profileTitle', { sport: pick(sport.name, locale) })} subtitle={t('overview.profileHint')} />
+          <PanelHeader title={t('sport.profileTitle', { sport: pick(sport.name, locale) })} note={t('overview.profileHint')} />
           <RadarProfile axes={axes} mode="population" locale={locale} disciplineWeights={sport.dimensionWeights} disciplineLabel={pick(sport.name, locale)} />
         </Panel>
       </div>

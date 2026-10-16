@@ -58,7 +58,7 @@ export function CoachPushPanel() {
 
   return (
     <Panel data-testid="coach-push">
-      <PanelHeader title={t('push.coach.title')} subtitle={t('push.coach.hint')} />
+      <PanelHeader title={t('push.coach.title')} note={t('push.coach.hint')} />
       <ul className="divide-y divide-line">
         {athletes.map((a) => (
           <li key={a.athlete_id}>

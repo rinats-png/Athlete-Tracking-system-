@@ -11,9 +11,11 @@
   # Beim Verlassen der Seite nur die Herkunft senden, nie den vollen Pfad —
   # der könnte Athletenkennungen enthalten.
   Referrer-Policy: strict-origin-when-cross-origin
-  # Die App braucht weder Kamera noch Mikrofon noch Standort. Bluetooth nur
-  # für die eigene Seite — die HRV-Messung mit dem Brustgurt (/hrv-messung).
-  Permissions-Policy: accelerometer=(), bluetooth=(self), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()
+  # Gerätezugriffe nur für die eigene Seite und nur auf Tipp des Nutzers:
+  # Bluetooth (Brustgurt), Kamera (Wiederholungen zählen, nur auf dem Gerät),
+  # Mikrofon (Schlagzähler, Vorschau) und Standort (Lauf). Keine fremde Seite
+  # bekommt sie, eingebettet wird ohnehin nicht.
+  Permissions-Policy: accelerometer=(), bluetooth=(self), camera=(self), geolocation=(self), gyroscope=(), microphone=(self), payment=(), usb=()
   # HTTPS erzwingen, inklusive Subdomains.
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   # Ein von hier geoeffnetes Fenster bekommt keinen Griff auf dieses zurueck.
@@ -33,8 +35,10 @@
   # Die wss-Zeile ist für die Echtzeitverbindung des Dienstes; ohne sie
   # bräche sie still ab.
   # 'unsafe-inline' bei style-src ist nötig, weil die Diagramme Stile inline
-  # setzen; Skripte laufen ohne diese Ausnahme.
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://bsbionvnsvqghaqijmpl.supabase.co wss://bsbionvnsvqghaqijmpl.supabase.co https://world.openfoodfacts.org https://geocoding-api.open-meteo.com https://api.open-meteo.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  # setzen; Skripte laufen ohne diese Ausnahme. 'wasm-unsafe-eval' erlaubt
+  # nur, WebAssembly zu übersetzen (Kameraerkennung, von der eigenen
+  # Herkunft) — kein eval() für Skripte.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://bsbionvnsvqghaqijmpl.supabase.co wss://bsbionvnsvqghaqijmpl.supabase.co https://world.openfoodfacts.org https://geocoding-api.open-meteo.com https://api.open-meteo.com; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate

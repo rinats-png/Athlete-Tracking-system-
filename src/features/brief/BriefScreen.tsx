@@ -20,7 +20,7 @@ import { phraseEnabled } from '@/lib/supabase/phrase'
 export function BriefScreen() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { data, diary, workouts } = useAppData()
+  const { data, diary, workouts, role } = useAppData()
   const brief = useMemo(
     () => mondayBrief({ athlete: { profile: data.profile, results: data.results, workouts, diary }, reminders: reminderSettingsOf(data.profile) }),
     [data.profile, data.results, workouts, diary],
@@ -93,7 +93,7 @@ export function BriefScreen() {
           </div>
         </Panel>
       </div>
-      {phraseEnabled() && (
+      {phraseEnabled() && role !== 'coach' && (
         <Panel className="mt-4" data-testid="brief-phrase">
           <PhraseButton kind="brief" facts={brief.facts} />
         </Panel>

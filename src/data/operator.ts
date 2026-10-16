@@ -92,4 +92,13 @@ export const PROCESSORS: Processor[] = [
     location: { de: 'Vereinigte Staaten, mit Standardvertragsklauseln', en: 'United States, under standard contractual clauses' },
     privacyUrl: 'https://www.netlify.com/privacy/',
   },
+  {
+    name: 'Anthropic',
+    purpose: {
+      de: 'Nur mit deiner Einwilligung: Formulierung von Antworten und Wochenbrief durch das Sprachmodell Claude. Es gehen nur Kennwörter und Zahlen raus, kein Name, kein Freitext.',
+      en: 'Only with your consent: phrasing of answers and the weekly brief by the language model Claude. Only keywords and numbers are sent, no name, no free text.',
+    },
+    location: { de: 'Vereinigte Staaten, mit Standardvertragsklauseln', en: 'United States, under standard contractual clauses' },
+    privacyUrl: 'https://www.anthropic.com/legal/privacy',
+  },
 ]

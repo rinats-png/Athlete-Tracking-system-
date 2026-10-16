@@ -18,6 +18,12 @@ export interface WhatsNewRelease {
 
 export const WHATS_NEW: WhatsNewRelease[] = [
   {
+    // Konto ist Pflicht, der Abgleich läuft von selbst. Wer die App schon
+    // kennt, erfährt es hier — nicht erst aus der Datenschutzerklärung.
+    id: '2026-10-13',
+    items: ['account', 'sensitive'],
+  },
+  {
     id: '2026-09-30',
     items: ['design', 'tests', 'images', 'fuel', 'tournament', 'supplements', 'energy', 'protein', 'pro'],
   },

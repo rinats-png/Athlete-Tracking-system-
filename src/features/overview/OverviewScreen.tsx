@@ -30,7 +30,6 @@ import { NextTestCard } from '@/components/signature/NextTestCard'
 import { performanceScore } from '@/domain/performanceScore'
 import { requirementGap } from '@/domain/requirementGap'
 import { LeverPanel } from './LeverPanel'
-import { CompetitionPanel } from './CompetitionPanel'
 import { BetweenTestsPanel } from './BetweenTestsPanel'
 import { DiaryTodayCard } from './DiaryTodayCard'
 // Hinweise und Tageskontext werden nachgeladen: Regelwerk und Rechnungen
@@ -39,6 +38,10 @@ import { DiaryTodayCard } from './DiaryTodayCard'
 const InsightsSummary = lazy(() => import('@/features/insights/InsightsSummary').then((m) => ({ default: m.InsightsSummary })))
 const ReadinessContextPanel = lazy(() => import('@/features/readiness/ReadinessContextPanel').then((m) => ({ default: m.ReadinessContextPanel })))
 import { pick } from '@/i18n/pick'
+
+// Die Wettkampfkarte steht weit unten und erscheint verzögert (rise 600 ms) —
+// sie wird nachgeladen, damit das Startpaket unter 1100 KB bleibt.
+const CompetitionPanel = lazy(() => import('./CompetitionPanel').then((m) => ({ default: m.CompetitionPanel })))
 
 /**
  * Die Übersicht (Konzept §6): nur das Wichtigste.
@@ -219,7 +222,9 @@ export function OverviewScreen() {
        */}
       <div className="mb-4 grid gap-4 md:grid-cols-2 md:items-start">
         <LeverPanel gap={gap} compact className="rise" style={{ ['--rise-delay' as string]: '520ms' }} />
-        <CompetitionPanel data={data} className="rise" style={{ ['--rise-delay' as string]: '600ms' }} />
+        <Suspense fallback={null}>
+          <CompetitionPanel data={data} className="rise" style={{ ['--rise-delay' as string]: '600ms' }} />
+        </Suspense>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

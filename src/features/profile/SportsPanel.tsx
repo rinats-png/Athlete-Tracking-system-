@@ -41,7 +41,7 @@ export function SportsPanel() {
 
   return (
     <Panel>
-      <PanelHeader title={t('profile.sports')} subtitle={t('profile.sportsHint')} />
+      <PanelHeader title={t('profile.sports')} note={t('profile.sportsHint')} />
       <div className="space-y-4 px-4 py-4">
         <div>
           <span className="label-tag">{t('profile.mainSport')}</span>

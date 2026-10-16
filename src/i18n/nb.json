@@ -26,8 +26,8 @@
       "athletePerformance": "Prestasjon",
       "athleteTest": "Test",
       "athleteMore": "Mer",
-      "athletePlan": "Plan",
-      "coachPlan": "Plan",
+      "athletePlan": "Trening",
+      "coachPlan": "Trening",
       "dockDiary": "Dagbok",
       "dockLoad": "Belastning",
       "dockHealth": "Helse",
@@ -53,8 +53,8 @@
     "athletePerformance": "Prestasjon",
     "athleteTest": "Test",
     "athleteMore": "Mer",
-    "athletePlan": "Plan",
-    "coachPlan": "Plan"
+    "athletePlan": "Trening",
+    "coachPlan": "Trening"
   },
   "actions": {
     "startTest": "Start test",
@@ -180,9 +180,9 @@
   "badges": {
     "personalBest": "Personlig rekord",
     "demo": "Demo",
-    "guest": "Lokal",
-    "demoHint": "Eksempeldata. Endringer blir på denne enheten.",
-    "guestHint": "Dataene dine ligger kun på denne enheten."
+    "demoHint": "Eksempeldata. De blir på denne enheten og havner aldri på kontoen din.",
+    "own": "Konto",
+    "ownHint": "Dine egne data, knyttet til kontoen din."
   },
   "units": {
     "percentile": "persentil",
@@ -191,14 +191,13 @@
   "welcome": {
     "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Finn ut hvor du faktisk står.",
-    "body": "Idrettsspesifikke tester, vitenskapelige referanseverdier, en prestasjonsprofil og den neste fornuftige testen — ingen treningsdagbok, ingen kaloriteller.",
+    "body": "Idrettsspesifikke tester, referanseverdier med kilde, en prestasjonsprofil og den neste fornuftige testen. Derfra kan det komme en treningsplan — bare ut fra dokumenterte regler.",
     "continueEmail": "Fortsett med e-post",
     "haveAccount": "Jeg har en konto",
     "viewDemo": "Se demo",
     "legal": "Ved å fortsette godtar du bruksvilkårene og bekrefter at du har lest personvernerklæringen.",
-    "startLocal": "Start med en tom journal",
-    "privacy": "Måling og analyse skjer på enheten din. Innlogging krever e-postadressen din; målingene overføres først når du slår på synkronisering — og kan eksporteres fullstendig når som helst.",
-    "accountLater": "Kontoer og synkronisering kommer senere",
+    "startOwn": "Opprett dine egne data",
+    "privacy": "Det måles først på enheten din, også uten nett. Med kontoen din sikkerhetskopieres dataene automatisk på servere i EU; en trener ser bare det du deler. Eksporten er alltid komplett og gratis.",
     "points": [
       "Idrettsspesifikk diagnostikk",
       "Referanseverdier med kilder",
@@ -218,10 +217,10 @@
         "hvor du faktisk",
         "står."
       ],
-      "since": "ingen konto",
+      "since": "sikret i EU",
       "aboutLabel": "om kydon",
       "aboutHeadline": "Kydon måler, setter det i kontekst og viser hva som faktisk endret seg — og hva som bare var en god dag.",
-      "aboutBody": "Idrettsspesifikke testprotokoller, referanseverdier med kilder, en prestasjonsprofil over seks akser og den neste fornuftige testen. Ingen treningsdagbok, ingen kaloriteller, ingen medisinsk uttalelse.",
+      "aboutBody": "Idrettsspesifikke testprotokoller, referanseverdier med kilde, en prestasjonsprofil over seks akser og den neste fornuftige testen. Ingen oppdiktede normer, ingen medisinske utsagn.",
       "cards": {
         "protocol": {
           "title": "Testprotokoller",
@@ -257,7 +256,7 @@
   "storage": {
     "blocked": "Lagring på enheten er utilgjengelig (privat modus eller full). Oppføringer gjelder kun denne økten.",
     "migrated": "Dataene dine kommer fra en eldre versjon (versjon {{from}}) og er overført. Ingenting gikk tapt.",
-    "newerVersion": "Disse dataene ble lagret av en nyere versjon av KYDON. De røres ikke før denne appen er oppdatert — inntil da vises de verken eller overskrives.",
+    "newerVersion": "Disse dataene ble lagret av en nyere versjon av KYDON. Denne appen er eldre og lar dem være i fred: de vises ikke, og endringer i denne økten lagres ikke. Oppdater appen før du fortsetter.",
     "rejected_one": "Én post kunne ikke leses og mangler i analysen:",
     "rejected_other": "{{count}} poster kunne ikke leses og mangler i analysen:",
     "kind": {
@@ -435,7 +434,30 @@
     "round4Actions": "Runde 4",
     "round5Actions": "Runde 5",
     "roundSeconds": "Rundelengde",
-    "restSeconds": "Pause mellom rundene"
+    "restSeconds": "Pause mellom rundene",
+    "run1DistanceM": "Distanse løp 1",
+    "run2DistanceM": "Distanse løp 2",
+    "run3DistanceM": "Distanse løp 3",
+    "distanceAt150sM": "Distanse ved 2:30 min",
+    "vIftKmh": "Slutthastighet V_IFT",
+    "hrRest": "Hvilepuls",
+    "stairHeightM": "Høyde trinn 3 til 9",
+    "contactTimeMs": "Bakkekontakttid",
+    "flightTimeMs": "Flytid",
+    "reboundHeightCm": "Hopphøyde",
+    "dropHeightCm": "Fallhøyde (kasse)",
+    "totalFlightTimeS": "Samlet flytid",
+    "ballKg": "Ballvekt",
+    "repsLeft": "Repetisjoner venstre",
+    "repsRight": "Repetisjoner høyre",
+    "durationLeftS": "Tid venstre",
+    "durationRightS": "Tid høyre",
+    "pushOffCm": "Fraskyvsvei",
+    "sjHeight0Cm": "Squat jump uten last",
+    "load1Kg": "Tilleggslast 1",
+    "sjHeight1Cm": "Squat jump med last 1",
+    "load2Kg": "Tilleggslast 2",
+    "sjHeight2Cm": "Squat jump med last 2"
   },
   "metrics": {
     "vo2max_ml_kg_min": "VO2max",
@@ -491,7 +513,22 @@
     "intra_carbs_g_per_h": "Karbohydrater per time i økten",
     "sweat_rate_l_per_h": "Svetterate",
     "hrv_artifact_rule": "Artefaktregel for HRV-målingen",
-    "hrv_rmssd_ms": "Hjertefrekvensvariabilitet (RMSSD)"
+    "hrv_rmssd_ms": "Hjertefrekvensvariabilitet (RMSSD)",
+    "critical_speed_m_s": "Kritisk hastighet",
+    "d_prime_m": "D′ (distansereserve)",
+    "cs_see_m": "Estimeringsfeil CS-linje",
+    "mas_kmh": "Maksimal aerob hastighet",
+    "vo2max_ift_ml_kg_min": "VO2max (estimert, 30-15 IFT)",
+    "ruffier_index": "Ruffier-indeks",
+    "dickson_index": "Ruffier-Dickson-indeks",
+    "stair_power_w": "Trappeeffekt",
+    "stair_power_w_per_kg": "Trappeeffekt per kg",
+    "rsi_m_s": "Reaktiv styrkeindeks (RSI)",
+    "bosco_power_w_per_kg": "Gjennomsnittlig hoppeffekt (Bosco)",
+    "f0_n_per_kg": "Maksimal kraft F0",
+    "v0_m_s": "Maksimal hastighet v0",
+    "pmax_w_per_kg_fv": "Maksimal effekt Pmax (FV-profil)",
+    "asymmetryPercent": "Sideforskjell"
   },
   "categoriesShort": {
     "endurance": "Utholdenhet",
@@ -741,7 +778,7 @@
   "gate": {
     "step": "Steg 1 av 1",
     "title": "Hvilken idrett?",
-    "body": "KYDON foreslår da nøyaktig de testene som måles for den disiplinen — med protokoll og begrunnelse. Valget blir på denne enheten og kan endres når som helst.",
+    "body": "KYDON foreslår deretter nøyaktig de testene som måles for denne disiplinen — med protokoll og begrunnelse. Du kan endre det når som helst.",
     "noMatch": "Ingen idrett funnet for «{{query}}». Velg «Generell testøkt» nedenfor — idretten kan legges til senere.",
     "general": "Generell testøkt",
     "generalHint": "Uten idrett: ett batteri over alle seks akser. Kan endres når som helst i testområdet."
@@ -756,7 +793,7 @@
     "allTests": "Se alle tester",
     "profile": {
       "title": "Din profil",
-      "body": "Alder, kjønn og kroppsdata avgjør hvilke referansegrupper verdiene dine sammenlignes med. Alt blir på denne enheten.",
+      "body": "Alder, kjønn og kroppsdata avgjør hvilke referansegrupper verdiene dine sammenlignes med. Opplysningene tilhører deg og kan endres når som helst.",
       "required": "Påkrevd",
       "optional": "Valgfritt",
       "weight": "Kroppsvekt",
@@ -833,9 +870,9 @@
       "points": {
         "measures": "Den måler prestasjonen din med tester som følger en fast protokoll — slik at samme test betyr det samme om ett år.",
         "compares": "Den plasserer verdiene dine i navngitte referansegrupper, med kilde og datakvalitet på hver sammenligning. Der ingen kildebelagt referanse finnes, sier den det i stedet for å finne opp et tall.",
-        "notPlan": "Den er ingen treningsplan og ingen treningslogg. Den sier hvor du står — ikke hva du skal trene.",
+        "plan": "KYDON måler hvor du står. Derfra kan det komme en treningsplan, men bare ut fra dokumenterte regler med kilde og kontrollstatus. Hver blokk slutter med en ny måling. Du eller treneren din bestemmer.",
         "notMedical": "Den er ingen medisinsk diagnostikk. Ingen diagnoser, ingen behandlingsanbefalinger, ingen vurdering av sykdom.",
-        "onDevice": "Alt blir på denne enheten. Ingen konto, ingen overføring, og eksporten av dataene dine er alltid fullstendig og gratis."
+        "data": "Dataene dine tilhører deg. De ligger først på enheten din, og måling fungerer også uten nett. Med kontoen din sikkerhetskopieres de i tillegg automatisk på servere i EU. En trener ser bare det du deler, og du kan trekke tilbake enhver deling. Eksporten er alltid komplett og gratis."
       }
     },
     "role": {
@@ -1082,7 +1119,7 @@
     "title": "Anonymisert sammenligning",
     "body": "Her vil det stå hvor mange utøvere som har gjennomført en test og hvilken persentil resultatet ditt ligger i — anonymisert og bare med ditt uttrykkelige samtykke.",
     "status": "Ingen sammenligningsdata ennå",
-    "statusBody": "Appen lagrer alt lokalt og overfører ingenting. En fellesskapssammenligning krever en server som ikke finnes ennå. Inntil da sier den ærlig: ingen data — i stedet for et oppdiktet tall.",
+    "statusBody": "En fellesskapssammenligning trenger nok målinger som er uttrykkelig delt til formålet — det finnes ikke ennå. Inntil da står det ærlig her: ingen data — i stedet for et oppdiktet tall.",
     "example": "Slik vil det se ut",
     "exampleLine": "«1 284 utøvere gjennomførte denne testen. Ditt resultat: 72. persentil.»",
     "principles": "Prinsipper",
@@ -1332,7 +1369,7 @@
   "auth": {
     "eyebrow": "Logg inn",
     "claim": "Measure. Benchmark. Develop.",
-    "noBackend": "Ingen prosjekt er konfigurert for denne enheten: det du skriver inn, kontrolleres ikke, og ingenting overføres. Denne innloggingen ordner inngangen, den beskytter ennå ingenting.",
+    "noBackend": "Ingen tjeneste er satt opp for denne versjonen. KYDON krever en konto, så innlogging er ikke mulig her.",
     "signIn": "Logg inn",
     "register": "Opprett konto",
     "email": "E-post",
@@ -1358,7 +1395,7 @@
     "signOut": "Logg ut",
     "signOutAndWipe": "Logg ut og tøm enheten",
     "wipeConfirmTitle": "Slette alle data på denne enheten?",
-    "wipeConfirmBody": "Måleverdier, profiler og innstillinger i denne appen fjernes fra enheten — permanent. En synkronisert kopi på serveren beholdes. Uten synkronisering er en tidligere eksport den eneste kopien.",
+    "wipeConfirmBody": "Målinger, profiler og innstillinger for denne appen fjernes fra enheten — for godt. Det som er synkronisert med kontoen din, blir på serveren og kommer tilbake ved neste innlogging. Det som er lagt til siden siste synkronisering, finnes da bare i eksporten.",
     "wipeConfirm": "Slett permanent",
     "wipeCancel": "Avbryt",
     "deleteAccount": "Slett kontoen permanent",
@@ -1367,7 +1404,7 @@
     "deleteConfirmBody": "Kontoen, serverkopien og alle måleverdier fjernes. Utøvere du følger opp uten egen konto slettes også; de med egen konto beholder dataene sine. Dette trinnet kan ikke angres.",
     "deleteConfirm": "Slett permanent",
     "deleteFailed": {
-      "not_configured": "Uten konto finnes det ingenting å slette på en server.",
+      "not_configured": "Ingen tjeneste er satt opp for denne versjonen; det er ingenting å slette på en server.",
       "offline": "Ingen forbindelse. Prøv igjen senere.",
       "unauthorized": "Økten er utløpt. Logg inn på nytt og prøv igjen.",
       "failed": "Slettingen mislyktes. Ingenting ble fjernet."
@@ -1375,8 +1412,8 @@
     "signedInAs": "Logget inn som {{name}}",
     "planChosen": "Valgt nivå: {{plan}}",
     "planNone": "Ikke noe nivå valgt ennå.",
-    "signOutKeepsData": "Utlogging fjerner bare kontoen. Målingene dine blir på denne enheten — de er dine, ikke innloggingens.",
-    "backendNote": "Innloggingen går gjennom tjenesteleverandøren vår. Måling og analyse blir på denne enheten; data overføres først når du slår på synkronisering.",
+    "signOutKeepsData": "Logg ut avslutter innloggingen på denne enheten. Målingene dine blir liggende her og sikret på kontoen din — etter neste innlogging fortsetter du der du slapp.",
+    "backendNote": "KYDON krever en konto. Det måles først på enheten din, også uten nett; når du logger inn, sikkerhetskopieres dataene automatisk på servere i EU. Det som allerede ligger på enheten, beholdes.",
     "passwordRule": "Minst {{count}} tegn.",
     "confirmTitle": "Bekreft e-posten din",
     "confirmBody": "Vi sendte en melding til {{email}}. Åpne lenken i den, så kan du logge inn.",
@@ -1390,29 +1427,10 @@
       "weak_password": "Passordet er for kort.",
       "needs_confirmation": "Denne e-posten er ikke bekreftet ennå. Lenken ligger i innboksen din.",
       "too_many_attempts": "For mange mislykkede forsøk. Vent et øyeblikk, og prøv igjen.",
-      "offline": "Ingen tilkobling. Du kan fortsette å måle på denne enheten — innloggingen kan vente.",
+      "offline": "Ingen forbindelse. KYDON trenger nett én gang for å logge inn — etterpå kan du også måle uten nett.",
       "not_configured": "Ingen prosjekt er konfigurert for denne enheten.",
       "unknown": "Det gikk ikke. Prøv igjen senere."
     }
-  },
-  "sync": {
-    "title": "Synkronisering",
-    "hint": "Målingene dine som en andre kopi på serveren — slik at de overlever en mistet enhet og dukker opp på en ny.",
-    "offNotice": "Av. Alt blir på denne enheten. Eksporten er da din eneste sikkerhetskopi.",
-    "signedOut": "Du må være logget inn for dette.",
-    "enable": "Slå på synkronisering",
-    "disable": "Slå av",
-    "now": "Synkroniser nå",
-    "working": "Synkroniserer …",
-    "last": "Sist synkronisert: {{date}}",
-    "never": "Aldri synkronisert.",
-    "result": "{{pushed}} lastet opp, {{pulled}} hentet, {{series}} oppføringer synkronisert.",
-    "offline": "Ingen tilkobling. Synkroniseringen tar igjen når du er på nett igjen.",
-    "conflictTitle": "Avvikende tilstand",
-    "conflictBody": "Denne utøveren ble endret på en annen enhet. KYDON overskrev ingenting — begge tilstander er intakte. Lagre eksporten din først, og bestem deretter.",
-    "conflictKeepLocal": "Last opp denne journalen",
-    "conflictExplain": "Servertilstanden erstattes. Den andre veien — å hente servertilstanden — går via eksport, «slett alt» og en ny synkronisering.",
-    "whatLeaves": "Overføres: målinger, profilopplysninger, notater, treningsfokus samt dagbok, økter, beslutninger og måltider — de siste som enkeltoppføringer, ikke som ett helt dokument. Passordet ditt overføres aldri."
   },
   "editResult": {
     "open": "Korriger verdi",
@@ -1885,7 +1903,14 @@
     "criticalSpeedPace": "{{pace}} per km",
     "reserve": "Distansereserve {{meters}} m",
     "fromTwoRuns": "Fra {{first}} og {{second}}.",
-    "toHistory": "Om en endring overstiger måleusikkerheten, vises i den enkelte testens forløp."
+    "toHistory": "Om en endring overstiger måleusikkerheten, vises i den enkelte testens forløp.",
+    "domains": "Moderat opp til {{moderate}} per km, hard opp til {{heavy}} per km, raskere er svært hard.",
+    "combined": "Fra to tester",
+    "combinedSub": "Nøkkeltall som forbinder to målinger.",
+    "speedReserve": "Sprint {{mss}} km/t (flygende 20 m), aerob {{mas}} km/t (5-minuttersløp).",
+    "eur": "CMJ/SJ",
+    "eurFrom": "CMJ {{cmj}} cm, squat jump {{sj}} cm, {{date}}.",
+    "combinedNote": "Bare tallene og formelen deres. Publiserte grenser finnes bare for enkelte grupper — derfor klassifiserer appen ingenting her."
   },
   "analytics": {
     "consent": {
@@ -2061,5 +2086,24 @@
         "failed": "Delingen lyktes ikke. Innsjekken din er lagret."
       }
     }
+  },
+  "syncAttention": {
+    "signedOut": "Innloggingen din er utløpt. Du kan fortsatt måle på denne enheten; synkronisering skjer først etter ny innlogging.",
+    "otherAccount": "Dataene på denne enheten tilhører en annen konto og synkroniseres derfor ikke. Logg inn med den kontoen, eller tøm enheten i profilen.",
+    "conflict": "En utøver er endret annerledes på en annen enhet. KYDON har ikke overskrevet noe — bestem i profilen.",
+    "signIn": "Logg inn igjen",
+    "open": "Til synkronisering"
+  },
+  "quickStart": {
+    "title": "Kom i gang nå — uten plan",
+    "strength": "Fri styrke",
+    "run": "Løp",
+    "clock": "Runder",
+    "camera": "Kamera",
+    "start": "Start trening",
+    "freeTitle": "Fri trening",
+    "freeSub": "Uten plan, lagres — også uten Plus.",
+    "freeLabel": "Uten plan",
+    "otherDays": "Andre dager og flere veier"
   }
 }

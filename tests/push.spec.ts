@@ -72,8 +72,18 @@ async function signedIn(page: Page, rpc: Record<string, unknown>, onPush?: (body
 }
 
 test.describe('Push — Oberfläche', () => {
-  test('ohne Konto sagt die Einstellung, was fehlt', async ({ page }) => {
+  test('ohne Anmeldung beim Dienst sagt die Einstellung, was fehlt', async ({ page }) => {
+    // Konto ist Pflicht; ohne gültige Anmeldung beim Dienst (abgelaufen,
+    // abgewiesen) gibt es trotzdem kein Push — und das steht da.
     await openGuest(page)
+    // Der Dienst weist die Erneuerung ab: die Sitzung ist nicht mehr gültig.
+    await page.route('**/auth/v1/token**', (route) =>
+      route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({ error: 'invalid_grant', error_description: 'Invalid Refresh Token' }) }),
+    )
+    await page.evaluate(() => {
+      const s = JSON.parse(localStorage.getItem('kydon.auth') as string)
+      localStorage.setItem('kydon.auth', JSON.stringify({ ...s, expires_at: 1 }))
+    })
     await page.goto('/verlauf/erinnerungen', { waitUntil: 'domcontentloaded' })
     const panel = page.getByTestId('push-panel')
     await expect(panel).toBeVisible()

@@ -12,7 +12,7 @@ export function GoalPanel() {
   const goal = data.profile.goalKey
   return (
     <Panel>
-      <PanelHeader title={t('profile.goalTitle')} subtitle={t('profile.goalHint')} />
+      <PanelHeader title={t('profile.goalTitle')} note={t('profile.goalHint')} />
       <ul className="grid gap-1.5 px-4 py-3 sm:grid-cols-2">
         {GOAL_KEYS.map((key) => {
           const active = goal === key

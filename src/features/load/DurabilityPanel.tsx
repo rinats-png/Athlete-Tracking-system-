@@ -27,7 +27,7 @@ export function DurabilityPanel({ className }: { className?: string }) {
 
   return (
     <Panel className={className} data-testid="durability">
-      <PanelHeader title={t('durability.title')} subtitle={t('durability.why')} />
+      <PanelHeader title={t('durability.title')} note={t('durability.why')} />
       {series.length === 0 ? (
         <div className="px-4 py-4 text-[13px] leading-relaxed text-ink-secondary">
           <p>{t('durability.empty')}</p>

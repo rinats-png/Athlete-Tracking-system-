@@ -188,7 +188,7 @@ export function NutritionScreen() {
 
       {/* --- Referenz, kein Ziel ------------------------------------------ */}
       <Panel className="mb-4" data-testid="nutrition-reference">
-        <PanelHeader title={t('nutrition.reference.title')} subtitle={t('nutrition.reference.why')} />
+        <PanelHeader title={t('nutrition.reference.title')} note={t('nutrition.reference.why')} />
         <div className="grid grid-cols-1 divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           <StatTile
             label={t('nutrition.reference.observed')}

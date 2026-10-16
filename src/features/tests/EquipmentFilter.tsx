@@ -65,7 +65,7 @@ export function EquipmentFilter({ owned, onChange, locale }: EquipmentFilterProp
     <Panel className="mb-4">
       <PanelHeader
         title={t('tests.equipmentFilter')}
-        subtitle={t('tests.equipmentFilterHint')}
+        note={t('tests.equipmentFilterHint')}
         action={
           <Button variant="ghost" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
             {open ? t('tests.equipmentHide') : t('tests.equipmentShow')}

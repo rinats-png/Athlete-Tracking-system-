@@ -15,7 +15,7 @@ export function ConfidencePanel({ confidence }: { confidence: ConfidenceScore })
 
   return (
     <Panel>
-      <PanelHeader title={t('analysis.confidence')} subtitle={t('analysis.confidenceHint')} />
+      <PanelHeader title={t('analysis.confidence')} note={t('analysis.confidenceHint')} />
       <div className="px-4 py-4">
         <div className="flex items-baseline gap-2">
           <span className="readout font-display text-[40px] leading-none font-bold tabular-nums">

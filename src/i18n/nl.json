@@ -26,8 +26,8 @@
       "athletePerformance": "Prestatie",
       "athleteTest": "Test",
       "athleteMore": "Meer",
-      "athletePlan": "Plan",
-      "coachPlan": "Plan",
+      "athletePlan": "Training",
+      "coachPlan": "Training",
       "dockDiary": "Dagboek",
       "dockLoad": "Belasting",
       "dockHealth": "Gezondheid",
@@ -53,8 +53,8 @@
     "athletePerformance": "Prestatie",
     "athleteTest": "Test",
     "athleteMore": "Meer",
-    "athletePlan": "Plan",
-    "coachPlan": "Plan"
+    "athletePlan": "Training",
+    "coachPlan": "Training"
   },
   "actions": {
     "startTest": "Test starten",
@@ -180,9 +180,9 @@
   "badges": {
     "personalBest": "Persoonlijk record",
     "demo": "Demo",
-    "guest": "Lokaal",
-    "demoHint": "Voorbeelddata. Wijzigingen blijven op dit apparaat.",
-    "guestHint": "Je gegevens blijven alleen op dit apparaat."
+    "demoHint": "Voorbeeldgegevens. Ze blijven op dit apparaat en gaan nooit naar je account.",
+    "own": "Account",
+    "ownHint": "Je eigen gegevens, gekoppeld aan je account."
   },
   "units": {
     "percentile": "percentiel",
@@ -191,14 +191,13 @@
   "welcome": {
     "eyebrow": "KYDON – Performance Diagnostics",
     "headline": "Ontdek waar je werkelijk staat.",
-    "body": "Sportspecifieke tests, wetenschappelijke referentiewaarden, een prestatieprofiel en de volgende zinvolle test — geen trainingslogboek, geen calorieteller.",
+    "body": "Sportspecifieke tests, referentiewaarden met bron, een prestatieprofiel en de volgende zinvolle test. Daaruit kan een trainingsplan ontstaan — alleen op basis van onderbouwde regels.",
     "continueEmail": "Doorgaan met e-mail",
     "haveAccount": "Ik heb een account",
     "viewDemo": "Demo bekijken",
     "legal": "Door verder te gaan ga je akkoord met de gebruiksvoorwaarden en bevestig je dat je het privacybeleid hebt gelezen.",
-    "startLocal": "Beginnen met een leeg dossier",
-    "privacy": "Meten en analyseren gebeurt op je apparaat. Aanmelden vereist je e-mailadres; je metingen worden pas verzonden zodra je synchronisatie inschakelt — en zijn altijd volledig te exporteren.",
-    "accountLater": "Accounts en synchronisatie volgen later",
+    "startOwn": "Eigen gegevens aanmaken",
+    "privacy": "Er wordt eerst op je apparaat gemeten, ook zonder netwerk. Met je account worden je gegevens automatisch geback-upt op servers in de EU; een trainer ziet alleen wat jij deelt. De export is altijd volledig en gratis.",
     "points": [
       "Sportspecifieke diagnostiek",
       "Referentiewaarden met bronnen",
@@ -218,10 +217,10 @@
         "waar je werkelijk",
         "staat."
       ],
-      "since": "geen account",
+      "since": "geback-upt in de EU",
       "aboutLabel": "over kydon",
       "aboutHeadline": "Kydon meet, plaatst het in context en toont wat werkelijk veranderd is — en wat gewoon een goede dag was.",
-      "aboutBody": "Sportspecifieke testprotocollen, referentiewaarden met bronnen, een prestatieprofiel over zes assen en de volgende zinvolle test. Geen trainingslogboek, geen calorieteller, geen medische uitspraak.",
+      "aboutBody": "Sportspecifieke testprotocollen, referentiewaarden met bron, een prestatieprofiel over zes assen en de volgende zinvolle test. Geen verzonnen normen, geen medische uitspraak.",
       "cards": {
         "protocol": {
           "title": "Testprotocollen",
@@ -257,7 +256,7 @@
   "storage": {
     "blocked": "Apparaatopslag is niet beschikbaar (privémodus of vol). Invoer geldt alleen voor deze sessie.",
     "migrated": "Je gegevens komen uit een oudere versie (versie {{from}}) en zijn overgenomen. Er is niets verloren gegaan.",
-    "newerVersion": "Deze gegevens zijn opgeslagen door een nieuwere versie van KYDON. Ze blijven onaangeroerd tot deze app is bijgewerkt — tot dan worden ze getoond noch overschreven.",
+    "newerVersion": "Deze gegevens zijn opgeslagen door een nieuwere versie van KYDON. Deze app is ouder en laat ze ongemoeid: ze worden niet getoond en wijzigingen in deze sessie worden niet opgeslagen. Werk de app bij voordat je verdergaat.",
     "rejected_one": "Eén record kon niet worden gelezen en ontbreekt in de analyse:",
     "rejected_other": "{{count}} records konden niet worden gelezen en ontbreken in de analyse:",
     "kind": {
@@ -435,7 +434,30 @@
     "round4Actions": "Ronde 4",
     "round5Actions": "Ronde 5",
     "roundSeconds": "Rondeduur",
-    "restSeconds": "Pauze tussen de rondes"
+    "restSeconds": "Pauze tussen de rondes",
+    "run1DistanceM": "Afstand loop 1",
+    "run2DistanceM": "Afstand loop 2",
+    "run3DistanceM": "Afstand loop 3",
+    "distanceAt150sM": "Afstand na 2:30 min",
+    "vIftKmh": "Eindsnelheid V_IFT",
+    "hrRest": "Rustpols",
+    "stairHeightM": "Hoogte trede 3 tot 9",
+    "contactTimeMs": "Grondcontacttijd",
+    "flightTimeMs": "Vluchttijd",
+    "reboundHeightCm": "Spronghoogte",
+    "dropHeightCm": "Valhoogte (box)",
+    "totalFlightTimeS": "Totale vluchttijd",
+    "ballKg": "Balgewicht",
+    "repsLeft": "Herhalingen links",
+    "repsRight": "Herhalingen rechts",
+    "durationLeftS": "Tijd links",
+    "durationRightS": "Tijd rechts",
+    "pushOffCm": "Afzetweg",
+    "sjHeight0Cm": "Squat jump zonder last",
+    "load1Kg": "Extra last 1",
+    "sjHeight1Cm": "Squat jump met last 1",
+    "load2Kg": "Extra last 2",
+    "sjHeight2Cm": "Squat jump met last 2"
   },
   "metrics": {
     "vo2max_ml_kg_min": "VO2max",
@@ -491,7 +513,22 @@
     "intra_carbs_g_per_h": "Koolhydraten per uur tijdens de sessie",
     "sweat_rate_l_per_h": "Zweetsnelheid",
     "hrv_artifact_rule": "Artefactregel van de HRV-meting",
-    "hrv_rmssd_ms": "Hartslagvariabiliteit (RMSSD)"
+    "hrv_rmssd_ms": "Hartslagvariabiliteit (RMSSD)",
+    "critical_speed_m_s": "Kritische snelheid",
+    "d_prime_m": "D′ (afstandsreserve)",
+    "cs_see_m": "Schattingsfout CS-lijn",
+    "mas_kmh": "Maximale aerobe snelheid",
+    "vo2max_ift_ml_kg_min": "VO2max (geschat, 30-15 IFT)",
+    "ruffier_index": "Ruffier-index",
+    "dickson_index": "Ruffier-Dickson-index",
+    "stair_power_w": "Trapvermogen",
+    "stair_power_w_per_kg": "Trapvermogen per kg",
+    "rsi_m_s": "Reactieve-krachtindex (RSI)",
+    "bosco_power_w_per_kg": "Gemiddeld sprongvermogen (Bosco)",
+    "f0_n_per_kg": "Maximale kracht F0",
+    "v0_m_s": "Maximale snelheid v0",
+    "pmax_w_per_kg_fv": "Maximaal vermogen Pmax (FV-profiel)",
+    "asymmetryPercent": "Verschil links-rechts"
   },
   "categoriesShort": {
     "endurance": "Uithouding",
@@ -741,7 +778,7 @@
   "gate": {
     "step": "Stap 1 van 1",
     "title": "Welke sport?",
-    "body": "KYDON stelt dan precies de tests voor die voor die discipline gemeten worden — met protocol en onderbouwing. De invoer blijft op dit apparaat en is altijd te wijzigen.",
+    "body": "KYDON stelt daarna precies de tests voor die voor deze discipline worden gemeten — met protocol en onderbouwing. Je kunt het altijd wijzigen.",
     "noMatch": "Geen sport gevonden voor “{{query}}”. Kies hieronder “Algemene diagnostiek” — de sport kan later worden toegevoegd.",
     "general": "Algemene diagnostiek",
     "generalHint": "Zonder sport: één batterij over alle zes assen. Altijd te wijzigen in het testgedeelte."
@@ -756,7 +793,7 @@
     "allTests": "Alle tests bekijken",
     "profile": {
       "title": "Je profiel",
-      "body": "Leeftijd, geslacht en lichaamsgegevens bepalen met welke referentiegroepen je waarden worden vergeleken. Alles blijft op dit apparaat.",
+      "body": "Leeftijd, geslacht en lichaamsgegevens bepalen met welke referentiegroepen je waarden worden vergeleken. De gegevens zijn van jou en zijn altijd te wijzigen.",
       "required": "Verplicht",
       "optional": "Optioneel",
       "weight": "Lichaamsgewicht",
@@ -833,9 +870,9 @@
       "points": {
         "measures": "Ze meet je prestatie met tests die een vast protocol volgen — zodat dezelfde test over een jaar hetzelfde betekent.",
         "compares": "Ze plaatst je waarden in benoemde referentiegroepen, met bron en datakwaliteit bij elke vergelijking. Waar geen gedocumenteerde referentie bestaat, zegt ze dat in plaats van een getal te verzinnen.",
-        "notPlan": "Ze is geen trainingsschema en geen workouttracker. Ze zegt waar je staat — niet wat je moet trainen.",
+        "plan": "KYDON meet waar je staat. Daaruit kan een trainingsplan ontstaan, maar alleen op basis van onderbouwde regels, met bron en controlestatus. Elk blok eindigt met een nieuwe meting. Jij of je trainer beslist.",
         "notMedical": "Ze is geen medische diagnostiek. Geen diagnoses, geen therapieadviezen, geen beoordeling van ziekte.",
-        "onDevice": "Alles blijft op dit apparaat. Geen account, geen overdracht, en de export van je gegevens is altijd volledig en gratis."
+        "data": "Je gegevens zijn van jou. Ze staan eerst op je apparaat, en meten werkt ook zonder netwerk. Met je account worden ze daarnaast automatisch geback-upt op servers in de EU. Een trainer ziet alleen wat jij deelt, en je kunt elke deling intrekken. De export is altijd volledig en gratis."
       }
     },
     "role": {
@@ -1082,7 +1119,7 @@
     "title": "Geanonimiseerde benchmarking",
     "body": "Hier komt te staan hoeveel atleten een test hebben uitgevoerd en in welk percentiel jouw resultaat ligt — geanonimiseerd en alleen met je uitdrukkelijke toestemming.",
     "status": "Nog geen vergelijkingsdata",
-    "statusBody": "De app slaat alles lokaal op en verzendt niets. Een communityvergelijking vereist een server die er nog niet is. Tot dan staat hier eerlijk: geen data — in plaats van een verzonnen getal.",
+    "statusBody": "Een communityvergelijking heeft genoeg metingen nodig die daar uitdrukkelijk voor zijn gedeeld — die zijn er nog niet. Tot die tijd staat hier eerlijk: geen gegevens — in plaats van een verzonnen getal.",
     "example": "Hoe het eruit gaat zien",
     "exampleLine": "\"1.284 atleten hebben deze test uitgevoerd. Jouw resultaat: 72e percentiel.\"",
     "principles": "Principes",
@@ -1332,7 +1369,7 @@
   "auth": {
     "eyebrow": "Aanmelden",
     "claim": "Measure. Benchmark. Develop.",
-    "noBackend": "Voor dit apparaat is geen project geconfigureerd: je invoer wordt niet geverifieerd en niets wordt verzonden. Deze aanmelding ordent de toegang, ze beschermt nog niets.",
+    "noBackend": "Voor deze versie is geen dienst ingesteld. KYDON heeft een account nodig, dus inloggen is hier niet mogelijk.",
     "signIn": "Aanmelden",
     "register": "Account aanmaken",
     "email": "E-mail",
@@ -1358,7 +1395,7 @@
     "signOut": "Afmelden",
     "signOutAndWipe": "Uitloggen en apparaat wissen",
     "wipeConfirmTitle": "Alle gegevens op dit apparaat verwijderen?",
-    "wipeConfirmBody": "Metingen, profielen en instellingen van deze app worden van dit apparaat verwijderd — definitief. Een gesynchroniseerde kopie op de server blijft bestaan. Zonder synchronisatie is een eerdere export de enige kopie.",
+    "wipeConfirmBody": "Metingen, profielen en instellingen van deze app worden van dit apparaat verwijderd — definitief. Wat met je account is gesynchroniseerd, blijft op de server en komt bij de volgende keer inloggen terug. Wat sinds de laatste synchronisatie is toegevoegd, bestaat dan alleen nog in de export.",
     "wipeConfirm": "Definitief verwijderen",
     "wipeCancel": "Annuleren",
     "deleteAccount": "Account definitief verwijderen",
@@ -1367,7 +1404,7 @@
     "deleteConfirmBody": "Het account, de serverkopie en alle metingen worden verwijderd. Cliënten die u begeleidt zonder eigen account worden ook verwijderd; cliënten met een eigen account behouden hun gegevens. Deze stap kan niet ongedaan worden gemaakt.",
     "deleteConfirm": "Definitief verwijderen",
     "deleteFailed": {
-      "not_configured": "Zonder account valt er op een server niets te verwijderen.",
+      "not_configured": "Voor deze versie is geen dienst ingesteld; er is niets op een server te verwijderen.",
       "offline": "Geen verbinding. Probeer het later opnieuw.",
       "unauthorized": "De sessie is verlopen. Meld u opnieuw aan en probeer het nogmaals.",
       "failed": "Verwijderen is mislukt. Er is niets verwijderd."
@@ -1375,8 +1412,8 @@
     "signedInAs": "Aangemeld als {{name}}",
     "planChosen": "Gekozen niveau: {{plan}}",
     "planNone": "Nog geen niveau gekozen.",
-    "signOutKeepsData": "Afmelden wist alleen het account. Je metingen blijven op dit apparaat — ze zijn van jou, niet van de aanmelding.",
-    "backendNote": "Je aanmelding loopt via onze dienstverlener. Meten en analyseren blijven op dit apparaat; gegevens worden pas verzonden zodra je synchronisatie inschakelt.",
+    "signOutKeepsData": "Uitloggen beëindigt de aanmelding op dit apparaat. Je metingen blijven hier staan en geback-upt in je account — na de volgende keer inloggen ga je verder waar je was.",
+    "backendNote": "KYDON heeft een account nodig. Er wordt eerst op je apparaat gemeten, ook zonder netwerk; na het inloggen worden je gegevens automatisch geback-upt op servers in de EU. Wat al op dit apparaat staat, blijft bewaard.",
     "passwordRule": "Minstens {{count}} tekens.",
     "confirmTitle": "Bevestig je e-mail",
     "confirmBody": "We hebben een bericht gestuurd naar {{email}}. Open de link erin, daarna kun je je aanmelden.",
@@ -1390,29 +1427,10 @@
       "weak_password": "Het wachtwoord is te kort.",
       "needs_confirmation": "Dit e-mailadres is nog niet bevestigd. De link staat in je inbox.",
       "too_many_attempts": "Te veel mislukte pogingen. Wacht even en probeer het opnieuw.",
-      "offline": "Geen verbinding. Je kunt op dit apparaat blijven meten — aanmelden kan wachten.",
+      "offline": "Geen verbinding. KYDON heeft één keer netwerk nodig om in te loggen — daarna meet je ook offline.",
       "not_configured": "Voor dit apparaat is geen project geconfigureerd.",
       "unknown": "Dat is niet gelukt. Probeer het later opnieuw."
     }
-  },
-  "sync": {
-    "title": "Synchronisatie",
-    "hint": "Je metingen als tweede kopie op de server — zodat ze een verloren apparaat overleven en op een tweede verschijnen.",
-    "offNotice": "Uit. Alles blijft op dit apparaat. De export is dan je enige back-up.",
-    "signedOut": "Hiervoor moet je aangemeld zijn.",
-    "enable": "Synchronisatie inschakelen",
-    "disable": "Uitschakelen",
-    "now": "Nu synchroniseren",
-    "working": "Synchroniseren …",
-    "last": "Laatst gesynchroniseerd: {{date}}",
-    "never": "Nooit gesynchroniseerd.",
-    "result": "{{pushed}} geüpload, {{pulled}} opgehaald, {{series}} items gesynchroniseerd.",
-    "offline": "Geen verbinding. De synchronisatie haalt het in zodra je weer online bent.",
-    "conflictTitle": "Afwijkende toestand",
-    "conflictBody": "Deze atleet is op een ander apparaat gewijzigd. KYDON heeft niets overschreven — beide toestanden zijn intact. Sla eerst je export op, beslis dan.",
-    "conflictKeepLocal": "Dit dossier uploaden",
-    "conflictExplain": "De servertoestand wordt vervangen. De andere richting — de servertoestand ophalen — loopt via export, “alles verwijderen” en een nieuwe synchronisatie.",
-    "whatLeaves": "Overgedragen worden meetwaarden, profielgegevens, notities, trainingsaccenten plus dagboek, sessies, beslissingen en maaltijden — die laatste als losse items, niet als één heel document. Je wachtwoord wordt nooit overgedragen."
   },
   "editResult": {
     "open": "Waarde corrigeren",
@@ -1885,7 +1903,14 @@
     "criticalSpeedPace": "{{pace}} per km",
     "reserve": "Afstandsreserve {{meters}} m",
     "fromTwoRuns": "Uit {{first}} en {{second}}.",
-    "toHistory": "Of een verandering boven de meetfout uitkomt, zie je in het verloop van de losse test."
+    "toHistory": "Of een verandering boven de meetfout uitkomt, zie je in het verloop van de losse test.",
+    "domains": "Matig tot {{moderate}} per km, zwaar tot {{heavy}} per km, sneller is zeer zwaar.",
+    "combined": "Uit twee tests",
+    "combinedSub": "Kengetallen die twee metingen combineren.",
+    "speedReserve": "Sprint {{mss}} km/u (vliegende 20 m), aeroob {{mas}} km/u (5-minutenloop).",
+    "eur": "CMJ/SJ",
+    "eurFrom": "CMJ {{cmj}} cm, squat jump {{sj}} cm, op {{date}}.",
+    "combinedNote": "Alleen de getallen en hun formule. Gepubliceerde grenzen bestaan alleen voor afzonderlijke groepen — daarom deelt de app hier niets in."
   },
   "analytics": {
     "consent": {
@@ -2061,5 +2086,24 @@
         "failed": "Delen is niet gelukt. Je check-in is opgeslagen."
       }
     }
+  },
+  "syncAttention": {
+    "signedOut": "Je aanmelding is verlopen. Meten gaat door op dit apparaat; synchroniseren pas na opnieuw inloggen.",
+    "otherAccount": "De gegevens op dit apparaat horen bij een ander account en worden daarom niet gesynchroniseerd. Log in met dat account of leeg het apparaat in je profiel.",
+    "conflict": "Een atleet is op een ander apparaat anders gewijzigd. KYDON heeft niets overschreven — beslis in je profiel.",
+    "signIn": "Opnieuw inloggen",
+    "open": "Naar synchronisatie"
+  },
+  "quickStart": {
+    "title": "Meteen beginnen — zonder plan",
+    "strength": "Vrije kracht",
+    "run": "Hardlopen",
+    "clock": "Rondes",
+    "camera": "Camera",
+    "start": "Training starten",
+    "freeTitle": "Vrije training",
+    "freeSub": "Zonder plan, wordt opgeslagen — ook zonder Plus.",
+    "freeLabel": "Zonder plan",
+    "otherDays": "Andere dagen en meer mogelijkheden"
   }
 }

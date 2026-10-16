@@ -67,6 +67,32 @@ export interface ChangeReport {
   previous: StoredResult | null
 }
 
+/** Das Urteil über eine Veränderung, ohne «erste Messung». */
+export type ChangeJudgement = Exclude<ChangeVerdict, 'first'>
+
+/**
+ * DAS EINE URTEIL über eine Veränderung — besser, schlechter, im Rauschen
+ * oder unklar. Jede Stelle der App, die «besser» oder «schlechter» sagt,
+ * kommt hierher: der einzelne Vergleich (`changeReport`), der Verlauf über
+ * mehrere Messungen (`testTrend` in analytics.ts) und der Trainernachweis
+ * (`coachProof.ts`). Eine zweite Schwelle irgendwo anders hiesse, dass
+ * derselbe Wert an zwei Stellen verschieden beurteilt wird.
+ *
+ * Ohne bekannte Streuung gibt es kein Urteil (`unknown_error`) — auch keine
+ * feste Ersatzschwelle: ein erfundenes Band wäre genau die Behauptung, die
+ * diese Datei verhindern soll.
+ */
+export function judgeChange(
+  changePercent: number,
+  typicalError: number | null,
+): { verdict: ChangeJudgement; detectablePercent: number | null } {
+  if (typicalError == null) return { verdict: 'unknown_error', detectablePercent: null }
+  const threshold = typicalError * DETECTION_FACTOR
+  const verdict: ChangeJudgement =
+    Math.abs(changePercent) <= threshold ? 'within_noise' : changePercent > 0 ? 'better' : 'worse'
+  return { verdict, detectablePercent: Math.round(threshold * 10) / 10 }
+}
+
 const empty = (verdict: ChangeVerdict, points: number): ChangeReport => ({
   verdict,
   changePercent: null,
@@ -93,12 +119,22 @@ export function typicalErrorPercent(results: StoredResult[], testSlug: string): 
   const series = results
     .filter((r) => r.testSlug === testSlug && r.score != null && r.score !== 0)
     .sort((a, b) => a.performedAt.localeCompare(b.performedAt))
+  return typicalErrorOfSeries(series.map((r) => r.score as number))
+}
+
+/**
+ * Dieselbe Rechnung für eine beliebige Messreihe in zeitlicher Folge (z. B.
+ * der beste geschätzte 1RM je Einheit im Training). Unter
+ * {@link MIN_POINTS_FOR_ERROR} Werten: null.
+ */
+export function typicalErrorOfSeries(values: number[]): number | null {
+  const series = values.filter((v) => Number.isFinite(v) && v !== 0)
   if (series.length < MIN_POINTS_FOR_ERROR) return null
 
   const diffs: number[] = []
   for (let i = 1; i < series.length; i++) {
-    const from = series[i - 1].score as number
-    const to = series[i].score as number
+    const from = series[i - 1]
+    const to = series[i]
     diffs.push(((to - from) / Math.abs(from)) * 100)
   }
   const mean = diffs.reduce((sum, d) => sum + d, 0) / diffs.length
@@ -137,27 +173,13 @@ export function changeReport(results: StoredResult[], result: StoredResult): Cha
   )
 
   const typical = typicalErrorPercent(results, result.testSlug)
-  if (typical == null) {
-    return {
-      verdict: 'unknown_error',
-      changePercent,
-      typicalErrorPercent: null,
-      detectablePercent: null,
-      points: series.length,
-      daysSincePrevious,
-      previous,
-    }
-  }
-
-  const threshold = typical * DETECTION_FACTOR
-  const verdict: ChangeVerdict =
-    Math.abs(changePercent) <= threshold ? 'within_noise' : changePercent > 0 ? 'better' : 'worse'
+  const { verdict, detectablePercent } = judgeChange(changePercent, typical)
 
   return {
     verdict,
     changePercent,
     typicalErrorPercent: typical,
-    detectablePercent: Math.round(threshold * 10) / 10,
+    detectablePercent,
     points: series.length,
     daysSincePrevious,
     previous,

@@ -4,6 +4,7 @@ import { Upload } from 'lucide-react'
 import { Panel, PanelHeader } from '@/components/ui/Panel'
 import { Button } from '@/components/ui/Button'
 import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { AREA_IMAGES } from '@/data/visuals'
 import { useLocale } from '@/features/shared/useLocale'
 import { useAppData } from '@/lib/store/AppDataProvider'
 import { deviceTimeZone, parseActivityExport, type ActivitySport, type ImportReport } from '@/domain/activityImport'
@@ -57,7 +58,7 @@ export function RunsScreen() {
 
   return (
     <>
-      <ScreenHeader eyebrow={t('runs.eyebrow')} title={t('runs.title')} intro={t('runs.intro')} />
+      <ScreenHeader eyebrow={t('runs.eyebrow')} title={t('runs.title')} intro={t('runs.intro')} image={AREA_IMAGES.runs} />
       <AnalysisTabs active="runs" />
 
       <RunsDashboard activities={activities} />

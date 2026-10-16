@@ -8,6 +8,10 @@ import { useAppData } from '@/lib/store/AppDataProvider'
 import { assessmentProgress, resultsForAssessment } from '@/domain/assessment'
 import { formatDate } from '@/lib/format'
 import { useLocale } from '@/features/shared/useLocale'
+import { ScreenHeader } from '@/features/shared/ScreenHeader'
+import { Thumb } from '@/components/ui/PhotoCard'
+import { AREA_IMAGES } from '@/data/visuals'
+import { testImageUrl } from '@/data/testImages'
 
 /**
  * Übersicht aller Diagnostiken.
@@ -27,22 +31,20 @@ export function AssessmentListScreen() {
 
   return (
     <>
-      <header className="mb-4 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="font-display text-[28px] leading-tight font-bold sm:text-[34px]">
-            {t('assessments.title')}
-          </h1>
-          <p className="mt-1.5 max-w-[62ch] text-[14px] leading-relaxed text-ink-secondary">
-            {t('assessments.intro')}
-          </p>
-        </div>
-        <Button asChild variant="primary" size="md">
-          <Link to="/diagnostik/neu">
-            <CalendarPlus size={15} aria-hidden />
-            {t('assessments.new')}
-          </Link>
-        </Button>
-      </header>
+      <ScreenHeader
+        eyebrow={t('assessments.count', { count: assessments.length })}
+        title={t('assessments.title')}
+        intro={t('assessments.intro')}
+        image={AREA_IMAGES.testDay}
+        action={
+          <Button asChild variant="primary" size="md">
+            <Link to="/diagnostik/neu">
+              <CalendarPlus size={15} aria-hidden />
+              {t('assessments.new')}
+            </Link>
+          </Button>
+        }
+      />
 
       {assessments.length === 0 ? (
         <EmptyState
@@ -67,6 +69,7 @@ export function AssessmentListScreen() {
                     to={`/diagnostik/${assessment.id}`}
                     className="flex min-h-16 items-center gap-3 px-4 py-3 transition-colors hover:bg-surface-sunken"
                   >
+                    <Thumb src={testImageUrl(assessment.plannedTestSlugs[0] ?? results[0]?.testSlug ?? '') ?? AREA_IMAGES.testDay} />
                     <StatusIcon status={assessment.status} />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-[15px] font-medium">

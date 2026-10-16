@@ -5,16 +5,15 @@ import { trackEvent } from '@/lib/analytics'
 /**
  * Anmeldung gegen das Projekt.
  *
- * WAS SICH DAMIT ÄNDERT: bis hierher war die Anmeldung ein gestaltetes Tor
- * ohne Prüfung — es gab keinen Server. Jetzt gibt es einen, und damit wird aus
- * dem Tor eine Anmeldung. Das ist kein kosmetischer Unterschied: ab jetzt
- * verlassen Daten das Gerät, sobald jemand die Synchronisierung einschaltet,
- * und die Datenschutzerklärung muss das beschreiben.
+ * OHNE KONTO KEIN ZUGANG. Die App lässt erst herein, wenn eine Anmeldung
+ * besteht; mit ihr gleicht das Gerät von selbst mit dem Konto ab
+ * (`features/shared/useAutoSync`), bis jemand das im Profil ausschaltet.
+ * Die Datenschutzerklärung beschreibt genau das.
  *
- * WAS SICH NICHT ÄNDERT: die App bleibt offline-first. Ohne hinterlegtes
- * Projekt (`isSupabaseConfigured() === false`) läuft alles wie zuvor auf dem
- * Gerät — eine fehlende Verbindung ist kein Fehlerzustand, sondern der
- * Normalfall in einer Halle ohne Empfang.
+ * WAS SICH NICHT ÄNDERT: gemessen wird zuerst auf dem Gerät. Ist die
+ * Anmeldung einmal da, startet die App auch ohne Netz — eine fehlende
+ * Verbindung ist kein Fehlerzustand, sondern der Normalfall in einer Halle
+ * ohne Empfang. Abgeglichen wird, sobald das Netz zurück ist.
  *
  * DAS PASSWORT wird an Supabase übergeben und dort als Hash abgelegt. Es
  * landet weder im lokalen Speicher noch im Bestand; die einzige Kopie in

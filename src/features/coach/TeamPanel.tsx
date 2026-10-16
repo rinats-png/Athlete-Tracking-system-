@@ -23,6 +23,7 @@ import {
   type TeamInvite,
 } from '@/lib/coachStatus'
 import { syncOnce } from '@/lib/supabase/sync'
+import { setSyncEnabled } from '@/lib/supabase/syncPreference'
 import { isBlankPlaceholder } from '@/lib/store/placeholder'
 
 /**
@@ -49,7 +50,7 @@ export function TeamPanel() {
 
   return (
     <Panel data-testid="team-panel">
-      <PanelHeader title={t('team.title')} subtitle={t('team.subtitle')} />
+      <PanelHeader title={t('team.title')} note={t('team.subtitle')} />
       <div className="space-y-4 px-4 py-4 text-[13px] leading-relaxed">
         {coach.team ? coach.team.role === 'owner' ? <OwnerView /> : <MemberView /> : <NoTeamView />}
       </div>
@@ -59,19 +60,15 @@ export function TeamPanel() {
 
 function useAfterTeamChange() {
   const billing = useBilling()
-  const { store, mergeAthletes, mergeSeriesRows, replacePool } = useAppData()
+  const { store, mergeAthletes, mergeSeriesRows, replacePool, dropAthletes } = useAppData()
   return async () => {
-    // Ein Team gibt es nur auf dem Server — der Abgleich ist damit
-    // eingeschaltet. Der Beitrittstext sagt das vorher (team.joinPrivacy).
-    try {
-      localStorage.setItem('kydon.sync.enabled', 'on')
-    } catch {
-      /* ohne Speicher gilt es für diese Sitzung */
-    }
+    // Ein Team gibt es nur auf dem Server — war der Abgleich ausgeschaltet,
+    // ist er damit wieder an. Der Beitrittstext sagt das vorher (team.joinPrivacy).
+    setSyncEnabled(true)
     await billing.refresh()
     // Gleich abgleichen, damit dieses Gerät im richtigen Bestand steht — und
     // nicht erst beim nächsten Tipp auf «Abgleichen».
-    await syncOnce(store, mergeAthletes, mergeSeriesRows, replacePool)
+    await syncOnce(store, mergeAthletes, mergeSeriesRows, replacePool, dropAthletes)
   }
 }
 

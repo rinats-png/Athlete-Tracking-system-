@@ -153,7 +153,7 @@ export function YearReviewScreen() {
         </Panel>
 
         <Panel>
-          <PanelHeader title={t('year.development')} subtitle={t('year.developmentHint')} />
+          <PanelHeader title={t('year.development')} note={t('year.developmentHint')} />
           <div className="px-4 py-4 text-[14px] leading-relaxed">
             {review.biggestGain ? (
               <p className="text-good">

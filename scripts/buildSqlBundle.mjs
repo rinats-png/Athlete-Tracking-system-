@@ -13,11 +13,9 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 
 export const OPEN_MIGRATIONS = [
-  '20261004100000_shared_checkins.sql',
-  '20261004110000_ai_usage.sql',
-  '20261004120000_push_weekly.sql',
-  '20261005100000_plan_assignments.sql',
-  '20261005110000_push_plan_offer.sql',
+  // Live-Audit 13.10.2026: alle älteren Migrationen sind live, auch
+  // sensitive_consents (am 13.10. eingespielt und geprüft).
+  '20261013110000_revoke_truncate_delete.sql',
 ]
 
 export function buildBundle(read = (f) => readFileSync(`supabase/migrations/${f}`, 'utf8')) {
@@ -31,12 +29,16 @@ export function buildBundle(read = (f) => readFileSync(`supabase/migrations/${f}
 -- Enthalten:
 ${OPEN_MIGRATIONS.map((f) => `--   ${f}`).join('\n')}
 --
--- Mehrfaches Ausführen ist unschädlich. Voraussetzung: pg_cron, pg_net und der
--- Vault-Eintrag push_cron_secret sind eingerichtet (siehe docs/push.md).
+-- EINMAL ausführen. Alles läuft in EINER Transaktion: schlägt ein Schritt
+-- fehl, wird nichts übernommen — dann die Fehlermeldung weitergeben, nicht
+-- erneut starten. Voraussetzung: pg_cron, pg_net und der Vault-Eintrag
+-- push_cron_secret sind eingerichtet (siehe docs/push.md).
 -- =============================================================================
+
+begin;
 `
   const parts = OPEN_MIGRATIONS.map((f) => `\n-- ########## ${f} ##########\n\n${read(f).replace(/\s+$/, '')}\n`)
-  return head + parts.join('')
+  return head + parts.join('') + '\ncommit;\n'
 }
 
 if (process.argv[1] && process.argv[1].endsWith('buildSqlBundle.mjs')) {

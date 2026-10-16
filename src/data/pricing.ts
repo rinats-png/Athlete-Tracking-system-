@@ -132,12 +132,12 @@ export type PlanFeature =
   | 'export' // Vollständiger Export, immer (§32)
   | 'reminders' // Wiederholungstermine und Kalenderdatei
   | 'diaryLight' // Tagebuch light: Gewicht, Schlaf, Energie, Einheiten
+  | 'sync' // Automatischer Abgleich mit dem Konto: Sicherung, zweites Gerät, Trainer
   // --- Plus ------------------------------------------------------------------
   | 'forecast' // Formprognose auf ein Datum, mit Unsicherheitsband
   | 'seasonPlan' // Kontrollpunkte bis zum Wettkampf
   | 'requirementGap' // Welche Achse für die eigene Disziplin am meisten bringt
   | 'percentile' // Perzentil, wo eine belegte Referenz vorliegt
-  | 'sync' // Abgleich über mehrere Geräte
   | 'card' // Performance Card zum Teilen
   | 'yearReview' // Jahresrückblick
   | 'multiAthlete' // Mehrere Athleten in einem Konto
@@ -177,6 +177,10 @@ export const FREE_CORE: readonly PlanFeature[] = [
   'export',
   'reminders',
   'diaryLight',
+  // Seit das Konto Pflicht ist, ist der Abgleich Teil des Dienstes und keine
+  // bezahlte Zusatzleistung: ohne ihn sähe der Trainer nichts und ein
+  // verlorenes Telefon wäre ein verlorener Verlauf.
+  'sync',
 ]
 
 /**
@@ -242,7 +246,6 @@ const PLUS_FEATURES: readonly PlanFeature[] = [
   'seasonPlan',
   'requirementGap',
   'percentile',
-  'sync',
   'card',
   'yearReview',
   'multiAthlete',
@@ -368,13 +371,7 @@ export interface CoachTier {
 }
 
 const COACH_BASE: readonly PlanFeature[] = [
-  'measure',
-  'history',
-  'errorBand',
-  'ownProfile',
-  'export',
-  'reminders',
-  'diaryLight',
+  ...FREE_CORE,
   'groupTest',
   'csvImport',
   'coachProof',
